@@ -1,0 +1,1 @@
+export type Single<T extends unknown[]> = T[number]; 
