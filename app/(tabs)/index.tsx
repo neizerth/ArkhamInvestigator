@@ -7,7 +7,7 @@ import { ThemedView } from '@/components/ThemedView';
 
 export default function HomeScreen() {
 
-  const vibrate = () => Vibration.vibrate()
+  const vibrate = () => Vibration.vibrate(50)
   return (
     <ParallaxScrollView
       headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
