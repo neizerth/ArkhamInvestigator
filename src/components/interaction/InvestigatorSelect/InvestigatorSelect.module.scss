@@ -1,0 +1,23 @@
+.label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.labelMain {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.icon {
+  display: flex;
+  width: 1.1em;
+  justify-content: center;
+}
+
+.story {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}

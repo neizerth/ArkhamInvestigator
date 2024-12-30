@@ -1,19 +1,16 @@
-import { PayloadAction } from "@reduxjs/toolkit";
+import { CaseReducer, Draft, PayloadAction } from "@reduxjs/toolkit";
 
 export const createSliceSetter = <State, K extends keyof State>(
     name: K, 
-    onSet?: (state: State, action: PayloadAction<State[K]>) => Partial<State[K]> | undefined
-) => 
-    (state: State, action: PayloadAction<State[K]>) => {
+    onSet?: CaseReducer<State, PayloadAction<State[K]>>
+): CaseReducer<State, PayloadAction<State[K]>> => 
+    (state: Draft<State>, action: PayloadAction<State[K]>) => {
         const { payload } = action;
-        state[name] = payload;
         if (!onSet) {
-            return;
+            return {
+                ...state,
+                [name]: payload,
+            };
         }
-        const update = onSet(state, action) || {};
-
-        return {
-            ...state,
-           ...update
-        }
+        return onSet(state, action);
     };

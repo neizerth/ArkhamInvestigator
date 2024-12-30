@@ -1,16 +1,19 @@
-import { Route, Switch, Router } from "wouter";
-import { useHashLocation } from "wouter/use-hash-location";
+import { HomePage } from "@/pages/HomePage/HomePage";
+import { InvestigatorPage } from "@/pages/InvestigatorPage/InvestigatorPage";
+import { HashRouter, Route, Routes } from "react-router-dom";
 
 export const AppRouter = () => {
   return (
-    <Router hook={useHashLocation}>
-      <Switch>
-        <Route path="/:language" nest>
-          <Route path="/"/>
-          <Route path="/investigator/:id" component={InvestigatorPage}/>
+    <HashRouter>
+      <Routes>
+        <Route path="/">
+          <Route path=":language">
+            <Route index Component={HomePage}/>
+            <Route path="investigator/:id" Component={InvestigatorPage}/>
+          </Route>
+          <Route path="investigator/:id" Component={InvestigatorPage}/>
         </Route>
-        <Route path="/" component={HomePage}/>
-      </Switch>
-    </Router>
+      </Routes>
+    </HashRouter>
   );
 }

@@ -1,9 +1,10 @@
-import { DEFAULT_LANGUAGE } from '@/constants/i18n';
+import { DEFAULT_LANGUAGE } from '@/config/i18n';
 import { AppThunk } from '@/store';
-import { createSliceSelector, createSliceSetter } from '@/util/slice';
+import { createSliceSelector } from '@/features/slice/createSliceSelector';
 import { ActionCreator, createSlice } from '@reduxjs/toolkit';
 import { loadAppTranslations } from '../app/app';
-import { Mapping } from '@/types/util';
+import { Mapping } from '@/types/common';
+import { createSliceSetter } from '@/features/slice/createSliceSetter';
 
 export type ILanguageState = {
   language: string;
