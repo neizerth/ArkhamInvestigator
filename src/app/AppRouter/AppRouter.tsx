@@ -12,6 +12,7 @@ export const AppRouter = () => {
             <Route path="investigator/:id" Component={InvestigatorPage}/>
           </Route>
           <Route path="investigator/:id" Component={InvestigatorPage}/>
+          <Route index Component={HomePage}/>
         </Route>
       </Routes>
     </HashRouter>

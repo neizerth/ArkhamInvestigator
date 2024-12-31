@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import './App.global.scss'
+
 import { AppIcons } from './AppIcons/AppIcons'
 import { AppRouter } from './AppRouter/AppRouter';
 import { loadAppData } from '@/store/features/app/app';

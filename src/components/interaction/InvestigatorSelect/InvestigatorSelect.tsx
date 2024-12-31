@@ -6,9 +6,10 @@ import { Block, Icon } from '@/components';
 import { ascend } from 'ramda';
 import { useAppSelector } from '@/hooks/useAppSelector';
 import { selectStories } from '@/store/features/stories/stories';
-import { isMainCampaign } from '@/store/features/stories/criteria';
 import { getStoryDuplicates } from '@/features/investigator/duplicates';
 import { getCardIndex } from '@/features/investigator/card';
+import supportedInvestigators from '@/data/supportedInvestigators.json';
+import { propIn } from '@/features/criteria/common';
 
 export type InvestigatorSelectProps = {
   story?: IStory
@@ -67,10 +68,12 @@ export const InvestigatorSelect = ({
 
   const data = source
     .map(story => {
-      return story.investigators.map(investigator => ({
-        story,
-        investigator
-      }))
+      return story.investigators
+        .filter(propIn('code', supportedInvestigators))
+        .map(investigator => ({
+          story,
+          investigator
+        }))
     })
     .flat()
     .sort(

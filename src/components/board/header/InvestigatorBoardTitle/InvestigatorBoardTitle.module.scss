@@ -1,0 +1,59 @@
+.container {
+  font-family: 'Teutonic';
+  --unit: 1.15vw;
+  @media (min-width: 596px) {
+    --unit: 6.78px;
+  }
+}
+
+.ru {
+  font-family: 'Conkordia', 'Arkhamic';
+}
+
+.background {
+  filter: drop-shadow(0 0 4px rgba(0, 0, 0, 0));
+  width: 100%;
+}
+
+.nameWrapper {
+  position: absolute;
+  top: calc(var(--unit) * 0.8);
+  width: 100%;
+  font-size: calc(var(--unit) * 7.5);
+  text-align: center;
+  padding-left: calc(var(--unit) * 17);
+  padding-right: calc(var(--unit) * 10);
+  box-sizing: border-box;
+  padding-top: calc(var(--unit) * 0.5);
+}
+
+.ru .nameWrapper {
+  padding-top: 0;
+}
+
+.name {
+  position: relative;
+  display: inline-block;
+}
+
+.unique {
+  position: absolute;
+  left: calc(var(--unit) * -6);
+  font-size: calc(var(--unit) * 4);
+  top: calc(50% - var(--unit) * 0.3);
+  transform: translateY(-50%);
+}
+
+.subname {
+  font-family: 'Arno Pro', sans-serif;
+  font-weight: bold;
+  position: absolute;
+  top: 3.7em;
+  width: 100%;
+  font-size: calc(var(--unit) * 3);
+  text-align: center;
+
+  padding-left: calc(var(--unit) * 23);
+  padding-right: calc(var(--unit) * 16);
+  box-sizing: border-box;
+}

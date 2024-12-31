@@ -13,3 +13,6 @@ export { Button } from '@/components/ui/Button/Button';
 export { Icon } from '@/components/ui/icons/Icon/Icon';
 export { CustomIcon } from '@/components/ui/icons/CustomIcon/CustomIcon';
 export { FontIcon } from '@/components/ui/icons/FontIcon/FontIcon';
+
+
+export { InvestigatorBoard } from '@/components/board/InvestigatorBoard/InvestigatorBoard';

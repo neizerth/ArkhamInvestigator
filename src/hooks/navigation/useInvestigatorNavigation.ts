@@ -2,14 +2,12 @@ import { changeLanguage } from "@/store/features/language/language";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useAppDispatch } from "../useAppDispatch";
-import { useTranslation } from "react-i18next";
 import { useAppSelector } from "../useAppSelector";
-import { selectLoading } from "@/store/features/app/app";
 import { selectStories } from "@/store/features/stories/stories";
 import { prop, propEq } from "ramda";
 import { setInvesigator } from "@/store/features/investigator/investigator";
 
-export const useLanguageNavigation = () => {
+export const useInvestigatorNavigation = () => {
   const dispatch = useAppDispatch();
   const stories = useAppSelector(selectStories);
   const params = useParams();
