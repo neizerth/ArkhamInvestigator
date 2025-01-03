@@ -2,14 +2,14 @@ import S from './InvestigatorBoardHeader.module.scss';
 import { IInvestigator } from '@/types/api';
 import { Block } from '@/components';
 import { InvestigatorBoardTitle } from '../InvestigatorBoardTitle/InvestigatorBoardTitle';
-import { InvestigatorBoardStats } from '../InvestigatorBoardStats/InvestigatorBoardStats';
+import { InvestigatorBoardSkills } from '../skills/InvestigatorBoardSkills/InvestigatorBoardSkills';
 
 export type InvestigatorBoardHeaderProps = {
   investigator: IInvestigator
 }
 
-export const InvestigatorBoardHeader = ({
-  investigator,
+export const InvestigatorBoardHeader = ({ 
+  investigator
 }: InvestigatorBoardHeaderProps) => {
   return (
     <Block 
@@ -18,9 +18,11 @@ export const InvestigatorBoardHeader = ({
       <InvestigatorBoardTitle
         investigator={investigator}
       />
-      <InvestigatorBoardStats
-        investigator={investigator}
-      />
+      <div className={S.stats}>
+        <InvestigatorBoardSkills
+          investigator={investigator}
+        />
+      </div>
     </Block>
   );
 }

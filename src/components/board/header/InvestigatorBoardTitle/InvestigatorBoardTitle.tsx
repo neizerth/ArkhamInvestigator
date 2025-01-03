@@ -1,12 +1,12 @@
 import { IInvestigator } from '@/types/api';
-import S from './InvestigatorBoardTitle.module.scss';
-import { Block } from '@/components/ui/Block/Block';
 import { useTranslation } from 'react-i18next';
 import { getBackground } from './images';
-import classNames from 'classnames';
 import { useAppSelector } from '@/hooks/useAppSelector';
 import { selectLanguage } from '@/store/features/language/language';
-import { Icon } from '@/components/ui/Icon/Icon';
+import { Background, Container, Name, Subname, Unique } from './components';
+import { CSSProperties, useRef } from 'react';
+import { useResizedRect } from '@/hooks/useBoundingRect';
+import { Icon } from '@/components';
 
 export type InvestigatorBoardTitleProps = {
   investigator: IInvestigator
@@ -17,32 +17,42 @@ export const InvestigatorBoardTitle = ({
 }: InvestigatorBoardTitleProps) => {
   const { t } = useTranslation();
   const language = useAppSelector(selectLanguage);
+  const {
+    name,
+    subname,
+    faction_code
+  } = investigator;
   const background = getBackground();
 
+  const ref = useRef(null);
+  const [rect, updateRect] = useResizedRect(ref);
+
+  const containerStyle = {
+    '--unit': `${rect?.width || 0}px`
+  } as CSSProperties
+
   return (
-    <Block 
-      className={classNames(
-        S.container,
-        S[language]
-      )}
+    <Container 
+      $language={language}
+      $faction={faction_code}
+      style={containerStyle}
     >
-      <img
-        className={S.background}
+      <Background
         src={background}
+        onLoad={updateRect}
+        ref={ref}
       />
-      <Block className={S.nameWrapper}>
-        <Block className={S.name}>
-          <Block className={S.unique}>
-            <Icon icon='unique'/>
-          </Block>
-          {t(investigator.name)}
-        </Block>
-      </Block>
-      {investigator.subname && (
-        <Block className={S.subname}>
-          {t(investigator.subname)}
-        </Block>
+      <Name>
+        <Unique>
+          <Icon icon='unique'/>
+        </Unique>
+        {t(name)}
+      </Name>
+      {subname && (
+        <Subname>
+          {t(subname)}
+        </Subname>
       )}
-    </Block>
+    </Container>
   );
 }

@@ -2,12 +2,17 @@
   position: relative;
 }
 
-.title {
-  position: absolute;
-  top: 10px;
-  left: 120px;
-  font-size: 40px;
+@media (min-width: 596px) {
+  .container {
+    display: flex;
+  }
+  .stats {
+    margin-left: -30px;
+    position: relative;
+    z-index: 2;
+  }
 }
+
 
 .background {
   max-width: 100%;

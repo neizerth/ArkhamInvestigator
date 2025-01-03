@@ -1,0 +1,39 @@
+.picker {
+  width: 100%;
+  @media (min-width: 768px) {
+    &:hover .value_inactive{
+      display: block;
+      color: #2e262292;
+    }
+  }
+}
+
+.active {
+  .value_inactive{
+    color: #2e262292;
+  }
+}
+
+.column {
+  width: 100%;
+}
+
+.value {
+  text-align: center;
+  box-sizing: border-box;
+  width: 100%;
+  padding-left: 0.13em;
+  &_2digits {
+    font-size: 60%;
+  }
+  &_3digits {
+    font-size: 50%;
+  }
+  &_selected {
+    color: #2e2622;
+    user-select: none;
+  }
+  &_inactive {
+    color: #2e262232;
+  }
+}

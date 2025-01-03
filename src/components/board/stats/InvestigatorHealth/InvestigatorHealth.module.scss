@@ -1,0 +1,35 @@
+@import "../../../../scss/mixins.scss";
+
+.container {
+  position: relative;
+  font-size: 40px;
+  // font-size: minmax(20vw, 100px);
+} 
+
+.background {
+  color: #c8141c;
+  transform: scale(1.1);
+}
+
+.icon {
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  color: white;
+}
+
+.picker {
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  left: 50%;
+  transform: translateY(-50%) translateX(-50%);
+  font-size: 0.7em;
+  color: #c8141c;
+}
+
+.value {
+  color: white;
+  @include textStroke(#c8141c, 1);
+}

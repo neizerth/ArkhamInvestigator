@@ -1,0 +1,16 @@
+@use 'sass:math';
+
+@mixin textStroke($color, $size: 1, $unit: 1px) {
+  $value: ();
+  $angle: 0;
+  $step: calc(1 / $size);
+  // $step: 1 / ($size * 2);
+  @while $angle < 2 * math.$pi {
+    $x: math.cos($angle) * $size;
+    $y: math.sin($angle) * $size;
+    
+    $value: append($value, $x*$unit $y*$unit $color, comma);
+    $angle: $angle + $step;
+  }
+  text-shadow: $value;
+}

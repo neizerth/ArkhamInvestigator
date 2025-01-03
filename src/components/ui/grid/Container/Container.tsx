@@ -1,6 +1,6 @@
 import { Block } from '@/components';
 import S from './Container.module.scss';
-import { BlockProps } from '../Block/Block';
+import { BlockProps } from '../../common/Block/Block';
 
 export type ContainerProps = BlockProps;
 
