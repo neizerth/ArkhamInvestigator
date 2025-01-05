@@ -4,6 +4,7 @@ import { PropsWithChildren, useState } from 'react';
 import { InvestigatorStatPicker } from '../InvestigatorStatPicker/InvestigatorStatPicker';
 import classNames from 'classnames';
 import { ValuePickerProps } from '@/components/interaction/picker/ValuePicker/ValuePicker';
+import { ValuePickerFixedValue } from '@/components/interaction/picker/ValuePickerValue/ValuePickerValue';
 
 export type InvestigatorStatProps = ValuePickerProps & PropsWithChildren & {
   containerClassName?: string
@@ -40,11 +41,15 @@ export const InvestigatorStat = ({
         <InvestigatorStatPicker
           itemHeight={50}
           onAction={decValue}
+          components={{
+            Value: ValuePickerFixedValue,
+          }}
           {...props}
           activeClassName={classNames(
             S.active,
             props.activeClassName
           )}
+          valueClassName={S.value}
         />
       </Block>
     

@@ -25,3 +25,21 @@ export const ValuePickerValue = ({
     />
   )
 }
+
+export const ValuePickerFixedValue = ({
+  selected = false,
+  value,
+  className
+}: ValuePickerValueProps) => {
+
+  return (
+    <FontNumber
+      className={classNames(
+        S.value,
+        selected ? S.selected : S.inactive,
+        className
+      )}
+      value={value}
+    />
+  )
+}

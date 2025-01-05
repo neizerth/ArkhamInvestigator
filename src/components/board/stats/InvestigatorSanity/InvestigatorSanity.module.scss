@@ -9,14 +9,7 @@
 
 
 .picker {
-  position: absolute;
-  z-index: 2;
-  top: calc(50% - 5px);
-  left: 50%;
-  transform: translateY(-50%) translateX(-50%);
-  @media (min-width: 768px) {
-    cursor: pointer;
-  }
+  margin-top: -5px;
 }
 
 .value {

@@ -1,62 +1,35 @@
-import { BlockProps } from '@/components/ui/common/Block/Block';
 import S from './InvestigatorClues.module.scss';
 import { Image, Block } from '@/components';
 import { useState } from 'react';
-import { InvestigatorStatPicker } from '../common/InvestigatorStatPicker/InvestigatorStatPicker';
 import { range } from 'ramda';
-import { ValuePickerValue } from '@/components/interaction/picker/ValuePickerValue/ValuePickerValue';
-import { withActiveClassName } from '@/components/hoc/withActiveClassName';
 import background from './images/clue.svg';
+import { InvestigatorStat } from '../common/InvestigatorStat/InvestigatorStat';
 
-export type InvestigatorCluesProps = BlockProps & {
+export type InvestigatorCluesProps = {
   value: number;
 }
 
 export const InvestigatorClues = ({
-  value,
-  ...props
+  value
 }: InvestigatorCluesProps) => {
   const [clues, setClues] = useState(value);
 
-  const decClues = () => {
-    if (clues === 0) {
-      return;
-    }
-
-    setClues(clues - 1);
-  }
-
   return (
-    <Block {...props}>
-      <Block className={S.container}>
-        <Image
-          className={S.background}
-          src={background}
-        />
-
-        <Block className={S.picker}>
-          <InvestigatorStatPicker
-            value={clues}
-            values={range(0, 100)}
-            onChange={setClues}
-            onAction={decClues}
-            selectedValueClassName={S.selectedValue}
-            inactiveValueClassName={S.inactiveValue}
-            itemHeight={50}
-            components={{
-              Value: CluesValue
-            }}
-          />
-        </Block>
-      
-      </Block>
-    </Block>
+    <InvestigatorStat
+      className={S.picker}
+      containerClassName={S.container}
+      activeClassName={S.active}
+      valueClassName={S.value}
+      selectedValueClassName={S.value_selected}
+      inactiveValueClassName={S.value_inactive}
+      value={clues}
+      values={range(0, 100)}
+      onChange={setClues}
+    >
+      <Image
+        className={S.background}
+        src={background}
+      />
+    </InvestigatorStat>
   );
 }
-
-const CluesValue = withActiveClassName({
-  Component: ValuePickerValue,
-  prop: 'selected',
-  activeClassName: S.value_selected,
-  inactiveClassName: S.value_inactive,
-});

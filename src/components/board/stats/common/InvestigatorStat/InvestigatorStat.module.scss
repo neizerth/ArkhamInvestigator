@@ -2,6 +2,10 @@
 
 .container {
   position: relative;
+  overflow: hidden;
+  &:has(.active) {
+    overflow: unset;
+  }
 }
 
 .picker {
@@ -16,15 +20,5 @@
 }
 
 .value {
-  color: white;
-  &_selected {
-    @include mixins.textStroke(#2e2622, 2);
-  }
-  &_inactive {
-    @include mixins.textStroke(#2e2622, 1);
-    opacity: 0.5;
-    &:hover {
-      opacity: 0.8;
-    }
-  }
+  padding: 2px;
 }

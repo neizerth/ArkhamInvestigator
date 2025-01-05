@@ -21,7 +21,7 @@ export const FontNumber = forwardRef<BlockElement, FontNumberProps>(({
       return 'plus';
     }
     if (char === '-') {
-      return'minus';
+      return 'minus';
     }
     return stroke ? `num${char}-fill` : `num${char}`;
   }
@@ -41,7 +41,7 @@ export const FontNumber = forwardRef<BlockElement, FontNumberProps>(({
         <Inline 
           key={index}
           className={classNames(
-            S[icon],
+            S[icon]
           )}
         >
           <FontCharacter 

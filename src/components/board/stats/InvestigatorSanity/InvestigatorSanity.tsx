@@ -1,62 +1,37 @@
-import { BlockProps } from '@/components/ui/common/Block/Block';
 import S from './InvestigatorSanity.module.scss';
-import { InvestigatorStatPicker } from '../common/InvestigatorStatPicker/InvestigatorStatPicker';
 import background from './images/sanity.png';
-import { Image, Block } from '@/components';
+import { Image } from '@/components';
 import { range } from 'ramda';
 import { ValuePickerValue } from '@/components/interaction/picker/ValuePickerValue/ValuePickerValue';
 import { useState } from 'react';
 import { withActiveClassName } from '@/components/hoc/withActiveClassName';
+import { InvestigatorStat } from '../common/InvestigatorStat/InvestigatorStat';
 
-export type InvestigatorSanityProps = BlockProps & {
+export type InvestigatorSanityProps = {
   value: number;
 }
 
 export const InvestigatorSanity = ({
-  value,
-  ...props
+  value
 }: InvestigatorSanityProps) => {
   const [sanity, setSanity] = useState(value);
 
-  const decSanity = () => {
-    if (sanity === 0) {
-      return;
-    }
-
-    setSanity(sanity - 1);
-  }
 
   return (
-    <Block {...props}>
-      <Block className={S.container}>
-        <Image
-          className={S.background}
-          src={background}
-        />
-
-        <Block className={S.picker}>
-          <InvestigatorStatPicker
-            value={sanity}
-            values={range(0, value + 1)}
-            onChange={setSanity}
-            onAction={decSanity}
-            selectedValueClassName={S.selectedValue}
-            inactiveValueClassName={S.inactiveValue}
-            itemHeight={50}
-            components={{
-              Value: SanityValue
-            }}
-          />
-        </Block>
-      
-      </Block>
-    </Block>
+    <InvestigatorStat
+      containerClassName={S.container}
+      className={S.picker}
+      valueClassName={S.value}
+      selectedValueClassName={S.value_selected}
+      inactiveValueClassName={S.value_inactive}
+      value={sanity}
+      values={range(0, value + 1)}
+      onChange={setSanity}
+      >
+      <Image
+        className={S.background}
+        src={background}
+      />
+    </InvestigatorStat>
   );
 }
-
-const SanityValue = withActiveClassName({
-  Component: ValuePickerValue,
-  prop: 'selected',
-  activeClassName: S.value_selected,
-  inactiveClassName: S.value_inactive,
-});
