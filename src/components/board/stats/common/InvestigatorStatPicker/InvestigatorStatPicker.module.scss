@@ -1,0 +1,26 @@
+.picker {
+  &.active {
+    overflow: auto;
+    .value {
+      &_inactive {
+        display: block;
+      }
+    }
+  }
+  @media (min-width: 768px) {
+    &:hover {
+      .value {
+        &_inactive {
+          display: block;
+        }
+      }
+    }
+  }
+}
+
+.value {
+  color: white;
+  &_inactive {
+    display: none;
+  }
+}

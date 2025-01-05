@@ -1,7 +1,7 @@
 export { LanguageSelect } from '@/components/interaction/LanguageSelect/LanguageSelect';
 export { StorySelect } from '@/components/interaction/stories/StorySelect/StorySelect';
 export { InvestigatorSelect } from '@/components/interaction/InvestigatorSelect/InvestigatorSelect';
-export { ValuePicker } from '@/components/interaction/ValuePicker/ValuePicker';
+export { ValuePicker } from '@/components/interaction/picker/ValuePicker/ValuePicker';
 
 export { Block } from '@/components/ui/common/Block/Block';
 export { Image } from '@/components/ui/common/Image/Image';

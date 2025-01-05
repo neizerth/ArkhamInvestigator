@@ -1,0 +1,11 @@
+.picker {
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+
+  & > div > div {
+    background-color: transparent !important;
+  }
+  &:focus {
+    outline: none !important;
+  }
+}

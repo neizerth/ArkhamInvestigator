@@ -1,29 +1,29 @@
 import { BlockProps } from '@/components/ui/common/Block/Block';
-import S from './InvestigatorSanity.module.scss';
-import { InvestigatorStatPicker } from '../common/InvestigatorStatPicker/InvestigatorStatPicker';
-import background from './images/sanity.png';
+import S from './InvestigatorClues.module.scss';
 import { Image, Block } from '@/components';
+import { useState } from 'react';
+import { InvestigatorStatPicker } from '../common/InvestigatorStatPicker/InvestigatorStatPicker';
 import { range } from 'ramda';
 import { ValuePickerValue } from '@/components/interaction/picker/ValuePickerValue/ValuePickerValue';
-import { useState } from 'react';
 import { withActiveClassName } from '@/components/hoc/withActiveClassName';
+import background from './images/clue.svg';
 
-export type InvestigatorSanityProps = BlockProps & {
+export type InvestigatorCluesProps = BlockProps & {
   value: number;
 }
 
-export const InvestigatorSanity = ({
+export const InvestigatorClues = ({
   value,
   ...props
-}: InvestigatorSanityProps) => {
-  const [sanity, setSanity] = useState(value);
+}: InvestigatorCluesProps) => {
+  const [clues, setClues] = useState(value);
 
-  const decSanity = () => {
-    if (sanity === 0) {
+  const decClues = () => {
+    if (clues === 0) {
       return;
     }
 
-    setSanity(sanity - 1);
+    setClues(clues - 1);
   }
 
   return (
@@ -36,15 +36,15 @@ export const InvestigatorSanity = ({
 
         <Block className={S.picker}>
           <InvestigatorStatPicker
-            value={sanity}
-            values={range(0, value + 1)}
-            onChange={setSanity}
-            onAction={decSanity}
+            value={clues}
+            values={range(0, 100)}
+            onChange={setClues}
+            onAction={decClues}
             selectedValueClassName={S.selectedValue}
             inactiveValueClassName={S.inactiveValue}
             itemHeight={50}
             components={{
-              Value: SanityValue
+              Value: CluesValue
             }}
           />
         </Block>
@@ -54,7 +54,7 @@ export const InvestigatorSanity = ({
   );
 }
 
-const SanityValue = withActiveClassName({
+const CluesValue = withActiveClassName({
   Component: ValuePickerValue,
   prop: 'selected',
   activeClassName: S.value_selected,

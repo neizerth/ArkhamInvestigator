@@ -1,0 +1,25 @@
+@use "../../../../scss/mixins.scss";
+
+.container {
+  font-size: 36px;
+}
+
+.background {
+  color: #2e2622;
+  font-size: 80px;
+  @include mixins.textStroke(white, 2);
+}
+
+.value {
+  color: white;
+  &_selected {
+    @include mixins.textStroke(#2e2622, 2);
+  }
+  &_inactive {
+    @include mixins.textStroke(#2e2622, 1);
+    opacity: 0.5;
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+}

@@ -1,4 +1,5 @@
 @use 'sass:math';
+@use 'sass:list';
 
 @mixin textStroke($color, $size: 1, $unit: 1px) {
   $value: ();
@@ -9,7 +10,7 @@
     $x: math.cos($angle) * $size;
     $y: math.sin($angle) * $size;
     
-    $value: append($value, $x*$unit $y*$unit $color, comma);
+    $value: list.append($value, $x*$unit $y*$unit $color, comma);
     $angle: $angle + $step;
   }
   text-shadow: $value;

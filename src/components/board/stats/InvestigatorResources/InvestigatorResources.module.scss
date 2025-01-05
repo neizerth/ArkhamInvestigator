@@ -3,15 +3,19 @@
 .container {
   position: relative;
   font-size: 36px;
-  padding-top: 5px;
-  box-sizing: border-box;
-} 
+}
 
+.background {
+  color: #2e2622;
+  font-size: 80px;
+  width: 76px;
+  @include mixins.textStroke(white, 2);
+}
 
 .picker {
   position: absolute;
   z-index: 2;
-  top: calc(50% - 5px);
+  top: calc(50%);
   left: 50%;
   transform: translateY(-50%) translateX(-50%);
   @media (min-width: 768px) {
@@ -20,11 +24,12 @@
 }
 
 .value {
+  color: white;
   &_selected {
-    @include mixins.textStroke(#1c3e6a, 2);
+    @include mixins.textStroke(#2e2622, 2);
   }
   &_inactive {
-    @include mixins.textStroke(#1c3e6a, 1);
+    @include mixins.textStroke(#2e2622, 1);
     opacity: 0.5;
     &:hover {
       opacity: 0.8;

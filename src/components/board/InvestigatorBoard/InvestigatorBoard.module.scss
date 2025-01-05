@@ -23,9 +23,36 @@
   filter: drop-shadow(0 0 20px rgba(0, 0, 0, 0.1));
 }
 
-.health {
+
+.footer {
   position: absolute;
   z-index: 2;
   bottom: 20px;
   left: 10px;
+  right: 10px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.return {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 36px;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.mainStats {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.sidebar {
+  position: absolute;
+  z-index: 2;
+  right: 10px;
+  bottom: 110px;
+  display: flex;
+  flex-direction: column;
 }

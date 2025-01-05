@@ -1,73 +1,35 @@
 import { FontNumber } from '@/components/ui/icons/FontNumber/FontNumber';
 import { range } from 'ramda';
 import S from './SkillValuePicker.module.scss';
-import Picker, { PickerProps } from 'react-mobile-picker'
 import classNames from 'classnames';
-import { useEffect, useState } from 'react';
+import { ValuePicker, ValuePickerProps, ValueProps } from '@/components/interaction/picker/ValuePicker/ValuePicker';
 
-type SkillPickerValue = Record<string, number>
-
-export type SkillValuePickerProps = Omit<PickerProps<SkillPickerValue>, 'value' | 'onChange'> & {
-  value: number;
-  onChange: (value: number) => void;
-}
+export type SkillValuePickerProps = ValuePickerProps;
 
 const values = range(-30, 31);
 
-export const SkillValuePicker = ({
-  value,
-  onChange,
-  ...props
-}: SkillValuePickerProps) => {
-  const [isActive, setIsActive] = useState(false);
-  const activate = () => setIsActive(true);
-  const deactivate = () => setIsActive(false);
-
-   useEffect(() => {
-    document.addEventListener('touchend', deactivate)
-
-    return () => {
-      document.removeEventListener('touchend', deactivate)
-    }
-  });
-
+export const SkillValuePicker = (props: SkillValuePickerProps) => {
   return (
-    <Picker
+    <ValuePicker
       {...props}
-      value={{ value }}
-      onChange={({ value }) => onChange(value)}
-      wheelMode="natural"
+      values={values}
+      activeClassName={S.active}
+      columnClassName={S.column}
       className={classNames(
         S.picker,
-        isActive && S.active,
         props.className
       )}
-      onTouchStart={activate}
-    >
-      <Picker.Column name="value" className={S.column}>
-        {values.map(num => (
-          <Picker.Item 
-            key={num} 
-            value={num}
-          >
-            <SkillValue 
-              value={num} 
-              selected={num === value}
-            />
-          </Picker.Item>
-        ))}
-      </Picker.Column>
-    </Picker>
+      components={{
+        Value: SkillValue
+      }}
+    />
   );
 }
 
 export const SkillValue = ({ 
   value,
   selected
-}: {
-  value: number
-  selected: boolean
-}) => {
+}: ValueProps) => {
 
   return (
     <FontNumber
