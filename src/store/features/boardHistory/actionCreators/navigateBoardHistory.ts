@@ -13,11 +13,11 @@ export const navigateBoardHistory: ActionCreator<AppThunk> = (index: number) => 
 
   const history = selectBoardHistory(state);
 
-  const items = history.slice(0, index + 1);
+  const items = index === 0 ? [] : history.slice(0, index);
   const patches = items.map(mapHistoryItem);
 
   const value: IBoard = Object.assign({}, baseValue, ...patches);
-
+  
   dispatch(setBoardValue(value));
   dispatch(setBoardHistoryIndex(index));
 }

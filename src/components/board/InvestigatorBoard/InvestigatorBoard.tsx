@@ -39,9 +39,7 @@ export const InvestigatorBoard = ({
         <Sidebar/>
       </Block>
       <Block className={S.footer}>
-        <Footer
-          investigator={investigator}
-        />
+        <Footer/>
       </Block>
       <Block 
         className={classNames(

@@ -59,8 +59,6 @@ export const clearBoardHistory: ActionCreator<AppThunk> = () =>
     dispatch(setBoardHistoryIndex(0));
   };
 
-
-
 export const {
   setBoardBaseValue,
   setBoardValue,

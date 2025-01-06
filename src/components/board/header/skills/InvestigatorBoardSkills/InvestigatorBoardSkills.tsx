@@ -1,23 +1,13 @@
-import { IInvestigator } from '@/types/api';
 import { getBackground } from './images';
-import { CSSProperties, useRef } from 'react';
+import { useRef } from 'react';
+import type { CSSProperties } from 'react';
 import { useResizedRect } from '@/hooks/useBoundingRect';
 import { Agility, Background, Combat, Container, Intellect, Willpower } from './components';
 import { BACKGROUND_WIDTH } from './constants';
 
-export type InvestigatorBoardSkillsProps = {
-  investigator: IInvestigator
-}
 
-export const InvestigatorBoardSkills = ({
-  investigator
-}: InvestigatorBoardSkillsProps) => {
-  const { 
-    skill_agility,
-    skill_combat,
-    skill_intellect,
-    skill_willpower
-  } = investigator;
+export const InvestigatorBoardSkills = () => {
+
   const background = getBackground();
   const ref = useRef(null);
   const [rect, updateRect] = useResizedRect(ref);

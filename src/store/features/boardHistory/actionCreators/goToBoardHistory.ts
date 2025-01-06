@@ -10,7 +10,7 @@ export const goToBoardHistory: ActionCreator<AppThunk> = (step: number) => (disp
   const index = currentIndex + step;
   const size = history.length;
 
-  if (index < 0 || index >= size) {
+  if (index < 0 || index > size) {
     return;
   }
 

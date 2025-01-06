@@ -19,9 +19,7 @@ export const InvestigatorBoardHeader = ({
         investigator={investigator}
       />
       <div className={S.stats}>
-        <InvestigatorBoardSkills
-          investigator={investigator}
-        />
+        <InvestigatorBoardSkills/>
       </div>
     </Block>
   );

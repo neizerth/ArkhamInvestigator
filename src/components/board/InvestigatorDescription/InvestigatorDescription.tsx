@@ -1,9 +1,8 @@
 import { Block, TextWithIcons } from '@/components';
 import S from './InvestigatorDescription.module.scss';
 import classNames from 'classnames';
-import { IInvestigator } from '@/types/api';
+import type { IInvestigator } from '@/types/api';
 import { useTranslation } from 'react-i18next';
-import { Fragment } from 'react';
 
 export type InvestigatorDescriptionProps = {
   investigator: IInvestigator
