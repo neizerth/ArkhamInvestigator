@@ -1,0 +1,17 @@
+.container {
+  background-size: contain;
+  background-repeat: no-repeat;
+  // width: 100vmin;
+  aspect-ratio: 494 / 610;
+  max-width: 494px;
+  width: 100%;
+
+  padding: 50px 40px 20px 30px;
+  box-sizing: border-box;
+  font-family: 'Arno Pro', sans-serif;
+  font-size: 24px;
+}
+
+.guardian {
+  background-image: url(./images/guardian.png);
+}

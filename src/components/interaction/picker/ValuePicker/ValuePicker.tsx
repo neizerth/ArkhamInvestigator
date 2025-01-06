@@ -22,6 +22,7 @@ export type ValuePickerProps = Omit<PickerProps<PickerValue>, 'value' | 'onChang
   values: number[]
   onChange: (value: number) => void
   onAction?: () => void
+  onSpecialAction?: () => void
   components?: {
     Value: FC<ValueProps>
   }
@@ -37,6 +38,7 @@ export const ValuePicker = ({
   values,
   components,
   onAction,
+  onSpecialAction,
   onChange,
   ...props
 }: ValuePickerProps) => {
@@ -86,6 +88,15 @@ export const ValuePicker = ({
     changeTrigger.current = true;
   }
   
+  const onContextMenu = (e: MouseEvent) => {
+    e.preventDefault();
+    actionTrigger.current = false;
+    if (!onSpecialAction) {
+      return;
+    }
+    onSpecialAction();
+    deactivate();
+  }
 
   useEffect(() => {
     document.addEventListener('touchend', deactivate)
@@ -108,6 +119,7 @@ export const ValuePicker = ({
       )}
       onTouchStart={activate}
       onTouchMove={cancelAction}
+      onContextMenu={onContextMenu}
     >
       <Picker.Column name="value" className={classNames(
         S.column,

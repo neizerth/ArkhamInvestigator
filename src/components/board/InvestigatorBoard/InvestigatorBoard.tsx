@@ -8,6 +8,9 @@ import { InvestigatorSanity } from '../stats/InvestigatorSanity/InvestigatorSani
 import { InvestigatorActions } from '../stats/InvestigatorActions/InvestigatorActions';
 import { InvestigatorResources } from '../stats/InvestigatorResources/InvestigatorResources';
 import { InvestigatorClues } from '../stats/InvestigatorClues/InvestigatorClues';
+import { InvestigatorDescription } from '../InvestigatorDescription/InvestigatorDescription';
+import classNames from 'classnames';
+import { useState } from 'react';
 
 export type InvestigatorBoardProps = {
   investigator: IInvestigator
@@ -16,6 +19,9 @@ export type InvestigatorBoardProps = {
 export const InvestigatorBoard = ({
   investigator
 }: InvestigatorBoardProps) => {
+
+  const [showDescription, setShowDescription] = useState(false);
+  const toggleDescription = () => setShowDescription(!showDescription);
   return (
     <Block className={S.container}>
       <Block className={S.header}>
@@ -38,7 +44,6 @@ export const InvestigatorBoard = ({
         />
       </Block>
       <Block className={S.footer}>
-
         <Block className={S.return}>
           <Icon icon="left-arrow"/>
         </Block>
@@ -53,6 +58,17 @@ export const InvestigatorBoard = ({
             value={3}
           />
         </Block>
+      </Block>
+      <Block 
+        className={classNames(
+          S.description,
+          showDescription && S.description_active
+        )}
+        onClick={toggleDescription}
+      >
+        <InvestigatorDescription
+          investigator={investigator}
+        />
       </Block>
     </Block>
   );

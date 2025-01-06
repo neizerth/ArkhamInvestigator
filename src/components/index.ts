@@ -18,5 +18,6 @@ export { CustomIcon } from '@/components/ui/icons/CustomIcon/CustomIcon';
 export { FontIcon } from '@/components/ui/icons/FontIcon/FontIcon';
 export { FontCharacter } from '@/components/ui/icons/FontCharacter/FontCharacter';
 export { FontNumber } from '@/components/ui/icons/FontNumber/FontNumber';
+export { TextWithIcons } from '@/components/ui/icons/TextWithIcons/TextWithIcons';
 
 export { InvestigatorBoard } from '@/components/board/InvestigatorBoard/InvestigatorBoard';

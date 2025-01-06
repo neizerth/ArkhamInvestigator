@@ -2,9 +2,7 @@ import S from './InvestigatorSanity.module.scss';
 import background from './images/sanity.png';
 import { Image } from '@/components';
 import { range } from 'ramda';
-import { ValuePickerValue } from '@/components/interaction/picker/ValuePickerValue/ValuePickerValue';
 import { useState } from 'react';
-import { withActiveClassName } from '@/components/hoc/withActiveClassName';
 import { InvestigatorStat } from '../common/InvestigatorStat/InvestigatorStat';
 
 export type InvestigatorSanityProps = {

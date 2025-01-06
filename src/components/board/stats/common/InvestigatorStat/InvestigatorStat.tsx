@@ -5,6 +5,7 @@ import { InvestigatorStatPicker } from '../InvestigatorStatPicker/InvestigatorSt
 import classNames from 'classnames';
 import { ValuePickerProps } from '@/components/interaction/picker/ValuePicker/ValuePicker';
 import { ValuePickerFixedValue } from '@/components/interaction/picker/ValuePickerValue/ValuePickerValue';
+import { last } from 'ramda';
 
 export type InvestigatorStatProps = ValuePickerProps & PropsWithChildren & {
   containerClassName?: string
@@ -17,6 +18,7 @@ export const InvestigatorStat = ({
 }: InvestigatorStatProps) => {
   const {
     value,
+    values,
     onChange,
   } = props;
 
@@ -26,6 +28,17 @@ export const InvestigatorStat = ({
     }
 
     onChange(value - 1);
+  }
+
+  const incValue = () => {
+    const max = last(values);
+    if (!max) {
+      return;
+    }
+    if (value === max) {
+      return;
+    }
+    onChange(value + 1);
   }
 
   return (
@@ -41,6 +54,7 @@ export const InvestigatorStat = ({
         <InvestigatorStatPicker
           itemHeight={50}
           onAction={decValue}
+          onSpecialAction={incValue}
           components={{
             Value: ValuePickerFixedValue,
           }}

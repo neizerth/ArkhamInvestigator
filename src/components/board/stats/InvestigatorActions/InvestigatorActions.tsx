@@ -1,10 +1,7 @@
 import { useState } from 'react';
 import S from './InvestigatorActions.module.scss';
 import { Block, Icon } from '@/components';
-import { InvestigatorStatPicker } from '../common/InvestigatorStatPicker/InvestigatorStatPicker';
 import { range } from 'ramda';
-import { ValuePickerValue } from '@/components/interaction/picker/ValuePickerValue/ValuePickerValue';
-import { withActiveClassName } from '@/components/hoc/withActiveClassName';
 import { BlockProps } from '@/components/ui/common/Block/Block';
 import { InvestigatorStat } from '../common/InvestigatorStat/InvestigatorStat';
 

@@ -6,8 +6,12 @@
 
 .background {
   color: #2e2622;
+
+  display: flex;
+  align-items: center;
   font-size: 80px;
   padding: 2px;
+  height: 80px;
   @include mixins.textStroke(white, 2);
 }
 
