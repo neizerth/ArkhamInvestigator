@@ -15,3 +15,5 @@ export type AppThunk<ReturnType = void> = ThunkAction<
   unknown,
   Action
 >;
+
+export type AppSelector = (state: RootState) => unknown; 

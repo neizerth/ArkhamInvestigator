@@ -3,7 +3,7 @@ import { Container, CheckPopupActivation, Value } from './components';
 import { SkillValuePicker } from '../SkillValuePicker/SkillValuePicker';
 import { BACKGROUND_WIDTH } from '../InvestigatorBoardSkills/constants';
 import type { IBoard } from '@/types/board';
-import { useBoardValueSetter } from '@/hooks/useBoardValue';
+import { useBoardValue } from '@/hooks/useBoardValue';
 import { range } from 'ramda';
 
 export type InvestigatorSkillProps = BlockProps & {
@@ -17,7 +17,7 @@ export const InvestigatorSkill = ({
   ...props
 }: InvestigatorSkillProps) => {
   
-  const [value, setValue] = useBoardValueSetter(type);
+  const [value, setValue] = useBoardValue(type);
   const itemHeight = containerWidth * 44 / BACKGROUND_WIDTH;
   const values = range(-30, 31);
 

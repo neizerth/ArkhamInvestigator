@@ -3,10 +3,10 @@ import { Image } from '@/components';
 import { range } from 'ramda';
 import background from './images/health.png';
 import { InvestigatorStat } from '../common/InvestigatorStat/InvestigatorStat';
-import { useBoardValueSetter } from '@/hooks/useBoardValue';
+import { useBoardValue } from '@/hooks/useBoardValue';
 
 export const InvestigatorHealth = () => {
-  const [health, setHealth, maxHealth] = useBoardValueSetter('health');
+  const [health, setHealth, maxHealth] = useBoardValue('health');
   const values = range(0, maxHealth + 1);
 
   return (

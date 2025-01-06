@@ -2,7 +2,7 @@ import { createSliceSelector } from '@/features/slice/createSliceSelector';
 import { createSliceSetter } from '@/features/slice/createSliceSetter';
 import type { AppThunk } from '@/store';
 import type { IBoard, IBoardHistoryItem } from '@/types/board';
-import { createSlice } from '@reduxjs/toolkit';
+import { createSelector, createSlice } from '@reduxjs/toolkit';
 import type { ActionCreator } from "@reduxjs/toolkit";
 import { onInvestigatorSet } from './extraReducers/onInvestigatorSet';
 import { DEFAULT_ACTIONS_COUNT, DEFAULT_RESOURCES_COUNT } from '@/config/app';
@@ -59,6 +59,8 @@ export const clearBoardHistory: ActionCreator<AppThunk> = () =>
     dispatch(setBoardHistoryIndex(0));
   };
 
+
+
 export const {
   setBoardBaseValue,
   setBoardValue,
@@ -74,4 +76,5 @@ export const {
 } = boardHistory.selectors;
 
 export * from './actionCreators';
+export * from './selectors';
 export default boardHistory.reducer;

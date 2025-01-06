@@ -24,7 +24,7 @@ export const pushBoardHistory: ActionCreator<AppThunk> = (type: keyof IBoard, va
 
   dispatch(setBoardValue(currentBoardValue));
   dispatch(setBoardHistoryIndex(
-    history.length - 1
+    history.length
   ));
   dispatch(setBoardHistory(currentHistory));
 }

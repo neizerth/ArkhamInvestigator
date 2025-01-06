@@ -3,10 +3,10 @@ import { Image } from '@/components';
 import background from './images/resource.png';
 import { range } from 'ramda';
 import { InvestigatorStat } from '../common/InvestigatorStat/InvestigatorStat';
-import { useBoardValueSetter } from '@/hooks/useBoardValue';
+import { useBoardValue } from '@/hooks/useBoardValue';
 
 export const InvestigatorResources = () => {
-  const [resources, setResources] = useBoardValueSetter('resources');
+  const [resources, setResources] = useBoardValue('resources');
 
   return (
     <InvestigatorStat

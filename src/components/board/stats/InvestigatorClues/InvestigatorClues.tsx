@@ -3,10 +3,12 @@ import { Image } from '@/components';
 import { range } from 'ramda';
 import background from './images/clue.svg';
 import { InvestigatorStat } from '../common/InvestigatorStat/InvestigatorStat';
-import { useBoardValueSetter } from '@/hooks/useBoardValue';
+import { useBoardValue } from '@/hooks/useBoardValue';
+
+const CLUE_VALUES = range(0, 100);
 
 export const InvestigatorClues = () => {
-  const [clues, setClues] = useBoardValueSetter('clues');
+  const [clues, setClues] = useBoardValue('clues');
 
   return (
     <InvestigatorStat
@@ -17,7 +19,7 @@ export const InvestigatorClues = () => {
       selectedValueClassName={S.value_selected}
       inactiveValueClassName={S.value_inactive}
       value={clues}
-      values={range(0, 100)}
+      values={CLUE_VALUES}
       onChange={setClues}
     >
       <Image
