@@ -1,21 +1,14 @@
-import { useState } from 'react';
 import S from './InvestigatorActions.module.scss';
 import { Block, Icon } from '@/components';
 import { range } from 'ramda';
-import { BlockProps } from '@/components/ui/common/Block/Block';
 import { InvestigatorStat } from '../common/InvestigatorStat/InvestigatorStat';
+import { useBoardValueSetter } from '@/hooks/useBoardValue';
 
-export type InvestigatorActionsProps = BlockProps & {
-  value: number
-}
-
-export const InvestigatorActions = ({
-  value
-}: InvestigatorActionsProps) => {
-  const [actions, setActions] = useState(value);
+export const InvestigatorActions = () => {
+  const [actions, setActions, defaultActions] = useBoardValueSetter('actions');
 
   const makeAction = () => {
-    const nextValue = actions === 0 ? value : actions - 1;
+    const nextValue = actions === 0 ? defaultActions : actions - 1;
 
     setActions(nextValue);
   }

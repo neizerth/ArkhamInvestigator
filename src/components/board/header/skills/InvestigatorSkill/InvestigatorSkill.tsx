@@ -1,21 +1,25 @@
-import { BlockProps } from '@/components/ui/common/Block/Block';
+import type { BlockProps } from '@/components/ui/common/Block/Block';
 import { Container, CheckPopupActivation, Value } from './components';
 import { SkillValuePicker } from '../SkillValuePicker/SkillValuePicker';
-import { useState } from 'react';
 import { BACKGROUND_WIDTH } from '../InvestigatorBoardSkills/constants';
+import type { IBoard } from '@/types/board';
+import { useBoardValueSetter } from '@/hooks/useBoardValue';
+import { range } from 'ramda';
 
 export type InvestigatorSkillProps = BlockProps & {
-  value: number;
+  type: keyof IBoard
   containerWidth: number;
 }
 
 export const InvestigatorSkill = ({
-  value,
+  type,
   containerWidth,
   ...props
 }: InvestigatorSkillProps) => {
-  const [currentvalue, setValue] = useState(value);
+  
+  const [value, setValue] = useBoardValueSetter(type);
   const itemHeight = containerWidth * 44 / BACKGROUND_WIDTH;
+  const values = range(-30, 31);
 
   return (
     <Container 
@@ -23,7 +27,8 @@ export const InvestigatorSkill = ({
     >
       <Value>
         <SkillValuePicker
-          value={currentvalue}
+          value={value}
+          values={values}
           onChange={setValue}
           itemHeight={itemHeight}
         />

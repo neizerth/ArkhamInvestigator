@@ -37,20 +37,20 @@ export const InvestigatorBoardSkills = ({
         onLoad={updateRect}
         ref={ref}
       />
-      <Willpower 
-        value={skill_willpower} 
+      <Willpower
+        type='willpower'
         containerWidth={width}
       />
-      <Intellect 
-        value={skill_intellect}
+      <Intellect
+        type='intellect'
         containerWidth={width}
       />
-      <Combat 
-        value={skill_combat}
+      <Combat
+        type='combat'
         containerWidth={width}
       />
-      <Agility 
-        value={skill_agility}
+      <Agility
+        type='agility'
         containerWidth={width}
       />
     </Container>

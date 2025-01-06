@@ -1,20 +1,12 @@
-import { BlockProps } from '@/components/ui/common/Block/Block';
 import S from './InvestigatorResources.module.scss';
 import { Image } from '@/components';
 import background from './images/resource.png';
-import { useState } from 'react';
 import { range } from 'ramda';
 import { InvestigatorStat } from '../common/InvestigatorStat/InvestigatorStat';
+import { useBoardValueSetter } from '@/hooks/useBoardValue';
 
-export type InvestigatorResourcesProps = BlockProps & {
-  value: number;
-}
-
-export const InvestigatorResources = ({
-  value
-}: InvestigatorResourcesProps) => {
-
-  const [resources, setResources] = useState(value);
+export const InvestigatorResources = () => {
+  const [resources, setResources] = useBoardValueSetter('resources');
 
   return (
     <InvestigatorStat

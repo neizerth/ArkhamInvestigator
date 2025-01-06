@@ -1,18 +1,12 @@
 import S from './InvestigatorClues.module.scss';
-import { Image, Block } from '@/components';
-import { useState } from 'react';
+import { Image } from '@/components';
 import { range } from 'ramda';
 import background from './images/clue.svg';
 import { InvestigatorStat } from '../common/InvestigatorStat/InvestigatorStat';
+import { useBoardValueSetter } from '@/hooks/useBoardValue';
 
-export type InvestigatorCluesProps = {
-  value: number;
-}
-
-export const InvestigatorClues = ({
-  value
-}: InvestigatorCluesProps) => {
-  const [clues, setClues] = useState(value);
+export const InvestigatorClues = () => {
+  const [clues, setClues] = useBoardValueSetter('clues');
 
   return (
     <InvestigatorStat

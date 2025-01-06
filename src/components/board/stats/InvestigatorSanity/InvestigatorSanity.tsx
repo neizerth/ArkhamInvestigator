@@ -2,18 +2,12 @@ import S from './InvestigatorSanity.module.scss';
 import background from './images/sanity.png';
 import { Image } from '@/components';
 import { range } from 'ramda';
-import { useState } from 'react';
 import { InvestigatorStat } from '../common/InvestigatorStat/InvestigatorStat';
+import { useBoardValueSetter } from '@/hooks/useBoardValue';
 
-export type InvestigatorSanityProps = {
-  value: number;
-}
-
-export const InvestigatorSanity = ({
-  value
-}: InvestigatorSanityProps) => {
-  const [sanity, setSanity] = useState(value);
-
+export const InvestigatorSanity = () => {
+  const [sanity, setSanity, maxSanity] = useBoardValueSetter('sanity');
+  const values = range(0, maxSanity + 1);
 
   return (
     <InvestigatorStat
@@ -23,7 +17,7 @@ export const InvestigatorSanity = ({
       selectedValueClassName={S.value_selected}
       inactiveValueClassName={S.value_inactive}
       value={sanity}
-      values={range(0, value + 1)}
+      values={values}
       onChange={setSanity}
       >
       <Image
