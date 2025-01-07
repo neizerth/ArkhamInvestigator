@@ -19,5 +19,9 @@ export { FontIcon } from '@/components/ui/icons/FontIcon/FontIcon';
 export { FontCharacter } from '@/components/ui/icons/FontCharacter/FontCharacter';
 export { FontNumber } from '@/components/ui/icons/FontNumber/FontNumber';
 export { TextWithIcons } from '@/components/ui/icons/TextWithIcons/TextWithIcons';
+export { Popup } from '@/components/interaction/Popup/Popup';
 
 export { InvestigatorBoard } from '@/components/board/InvestigatorBoard/InvestigatorBoard';
+export { InvestigatorContent } from '@/components/containers/InvestigatorContent/InvestigatorContent';
+
+export { LogPopup } from './popups/LogPopup/LogPopup';

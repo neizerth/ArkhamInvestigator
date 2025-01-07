@@ -9,9 +9,13 @@ export const pushBoardHistory: ActionCreator<AppThunk> = (type: keyof IBoard, va
   const index = selectBoardHistoryIndex(state);
   const history = selectBoardHistory(state);
   const boardValue = selectBoardValue(state);
+  const oldValue = boardValue[type];
+
   const item: IBoardHistoryItem = {
     type,
-    value
+    value,
+    oldValue,
+    date: (new Date).toString()
   }
   
   const currentHistory = [

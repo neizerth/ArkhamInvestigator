@@ -1,4 +1,4 @@
-import { InvestigatorBoard, Page } from '@/components';
+import { InvestigatorBoard, LogPopup, Page } from '@/components';
 import S from './InvestigatorPage.module.scss';
 import { useAppSelector } from '@/hooks/useAppSelector';
 import { selectInvesigator } from '@/store/features/investigator/investigator';
@@ -17,6 +17,7 @@ export const InvestigatorPage = ({}: InvestigatorPageProps) => {
       {investigator && (
         <InvestigatorBoard investigator={investigator}/>
       )}
+      <LogPopup/>
     </Page>
   );
 }

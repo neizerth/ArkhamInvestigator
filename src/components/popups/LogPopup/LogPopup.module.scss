@@ -1,0 +1,49 @@
+.table {
+  width: 100%;
+  vertical-align: middle;
+  border-collapse: collapse;
+  td {
+    padding: 5px 10px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-width: 0 1px;
+  }
+}
+
+.old {
+  position: relative;
+  display: inline-block;
+}
+
+.cross {
+  color: rgba(255, 0, 0, 0.3);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.valueInfo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.type {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 5px;
+}
+
+.content {
+  overflow-y: auto;
+  font-size: 20px;
+  height: 100%;
+}
+
+.icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+}

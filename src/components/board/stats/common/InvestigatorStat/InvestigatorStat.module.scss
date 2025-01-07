@@ -6,6 +6,11 @@
   &:has(.active) {
     overflow: unset;
   }
+  @media not all and (hover: none) {
+    &:hover {
+      overflow: unset;
+    }
+  }
 }
 
 .picker {

@@ -15,4 +15,6 @@ export type IBoard = {
 export type IBoardHistoryItem = {
   type: keyof IBoard
   value: number
+  oldValue: number
+  date: string
 }
