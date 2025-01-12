@@ -1,5 +1,5 @@
 import { DEFAULT_NAMESPACE, i18n } from "@/config/i18n";
-import { Mapping } from "classnames";
+import type { Mapping } from "@/types/common";
 
 export const hasResourceBundle = (language: string, ns = DEFAULT_NAMESPACE) => 
   i18n.hasResourceBundle(language, ns);

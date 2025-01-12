@@ -4,18 +4,12 @@ import { useAppSelector } from '@/hooks/useAppSelector';
 import { selectInvesigator } from '@/store/features/investigator/investigator';
 import { selectBoardHistory } from '@/store/features/boardHistory/boardHistory';
 import { useTranslation } from 'react-i18next';
-import { selectLanguage } from '@/store/features/language/language';
 import { mapHistoryItem } from './features/mapHistoryItem';
 import { Inline } from '@/components/ui/common/Inline/Inline';
 import { hhmm } from '@/features/data/date';
 
-export type LogPopupProps = {
-
-}
-
-export const LogPopup = ({}: LogPopupProps) => {
+export const LogPopup = () => {
   const { t } = useTranslation();
-  const language = useAppSelector(selectLanguage);
   const investigator = useAppSelector(selectInvesigator);
   const items = useAppSelector(selectBoardHistory);
   const logItems = items.map(mapHistoryItem);
