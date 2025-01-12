@@ -1,13 +1,12 @@
-import { Button, LanguageSelect, Row } from '@/components';
+import { Button, LanguageSelect } from '@/components';
 import S from './HomePage.module.scss';
 import { Col, Block, StorySelect, Container, InvestigatorSelect, Page } from '@/components';
-import { IInvestigator, IStory } from '@/types/api';
+import type { IInvestigator, IStory } from '@/types/api';
 import { useState } from 'react';
 import { useAppSelector } from '@/hooks/useAppSelector';
 import { selectStories } from '@/store/features/stories/stories';
 import { useTranslation } from 'react-i18next';
-import { Nullable } from '@/types/common';
-import { ascend, prop } from 'ramda';
+import type { Nullable } from '@/types/common';
 import { useNavigate } from 'react-router-dom';
 import { getInvestigatorRoute } from '@/features/routes/routes';
 import { selectLanguage } from '@/store/features/language/language';

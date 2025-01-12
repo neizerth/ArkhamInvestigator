@@ -11,12 +11,13 @@
 }
 
 .story {
-  min-width: 600px;
+  // min-width: 600px;
 }
 
 .start {
   font-family: 'Teutonic';
   padding: 10px 5px;
+  box-sizing: border-box;
   font-size: 30px;
   color: white;
   box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.1);
