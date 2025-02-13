@@ -3,12 +3,19 @@
   "compilerOptions": {
     "strict": true,
     "paths": {
-      "@/*": [
-        "./*"
-      ]
+      "@app/*": ["./slices/app/*"],
+      "@shared/*": ["./slices/shared/*"],
+      "@entities/*": ["./slices/entities/*"],
+      "@pages": [
+        "./slices/pages"
+      ],
+      "@widgets": ["./slices/widgets"],
+      "@features": ["./slices/features"],
+      "@/*": ["./*"]
     }
   },
   "include": [
+    "./slices",
     "**/*.ts",
     "**/*.tsx",
     ".expo/types/**/*.ts",

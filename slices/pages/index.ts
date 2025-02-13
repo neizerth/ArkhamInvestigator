@@ -1,0 +1,5 @@
+export * from './home'
+export * from './board'
+export * from './select-investigators'
+export * from './settings'
+export * from './about'

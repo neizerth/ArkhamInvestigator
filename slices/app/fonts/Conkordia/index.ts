@@ -1,0 +1,1 @@
+export const Conkordia = require('./Conkordia.ttf');

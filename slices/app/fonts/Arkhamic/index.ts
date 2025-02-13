@@ -1,0 +1,1 @@
+export const Arkhamic = require('./Arkhamic.ttf');

@@ -1,0 +1,1 @@
+export const Teutonic = require('./Teutonic.ttf');
