@@ -6,11 +6,9 @@
       "@app/*": ["./slices/app/*"],
       "@shared/*": ["./slices/shared/*"],
       "@entities/*": ["./slices/entities/*"],
-      "@pages": [
-        "./slices/pages"
-      ],
-      "@widgets": ["./slices/widgets"],
-      "@features": ["./slices/features"],
+      "@pages/*": ["./slices/pages/*"],
+      "@widgets/*": ["./slices/widgets/*"],
+      "@features/*": ["./slices/features/*"],
       "@/*": ["./*"]
     }
   },

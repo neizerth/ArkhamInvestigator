@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { loadAppData } from './app.thunks';
+import { loadInvestigatorsData } from './app.thunks';
 
 export type IAppState = {
 

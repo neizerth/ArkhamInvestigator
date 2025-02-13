@@ -1,1 +1,2 @@
-export * from './loadInvestigatorsData'
+export * from './loadInvestigatorsMediaData'
+export * from './gameData'

@@ -1,7 +1,8 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { loadInvestigatorsData } from "@shared/api";
+import * as API from "@shared/api";
 
-export const loadAppData = createAsyncThunk(
+export const loadInvestigatorsMediaData = createAsyncThunk(
   'app/loadData',
-  loadInvestigatorsData
+  API.loadInvestigatorsMediaData
 )
+

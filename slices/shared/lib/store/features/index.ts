@@ -1,5 +1,5 @@
 export { default as app } from './app/app'
-export { default as investigators } from './investigators/investigators'
+export { default as investigatorsMedia } from './investigatorsMedia/investigatorsMedia'
 export { default as board } from './board/board'
 export { default as game } from './game/game'
 export { default as settings } from './settings/settings'
