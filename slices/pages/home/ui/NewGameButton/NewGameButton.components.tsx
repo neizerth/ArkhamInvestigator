@@ -5,7 +5,7 @@ import styled from "styled-components/native";
 const background = require('./images/start.svg');
 
 export const Container: typeof ReactNative.TouchableOpacity = styled.TouchableOpacity`
-  height: 60px;
+  height: 80px;
   justify-content: center;
   align-items: center;
 `

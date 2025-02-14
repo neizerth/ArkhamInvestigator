@@ -1,9 +1,9 @@
 import { COLOR } from '@shared/config';
-import { styled } from '@shared/lib';
 import { View } from 'react-native';
+import styled from 'styled-components/native';
 
-export const Container = styled(View)`
-  background-color: ${COLOR.DARK30};
+export const Container: typeof View = styled(View)`
+  background-color: ${COLOR.BLACK};
   flex: 1;
   align-items: center;
   justify-content: center;

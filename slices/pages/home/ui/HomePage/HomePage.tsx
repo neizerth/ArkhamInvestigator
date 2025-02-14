@@ -1,8 +1,9 @@
-import { View, Text } from "react-native";
+import { NewGameButton } from "../NewGameButton";
 import { Container } from "./HomePage.components";
-import { NewGameButton } from "@pages/home";
+import { useAppData } from "@shared/lib/hooks";
 
 export const HomePage = () => {
+  useAppData();
   return (
     <Container>
       <NewGameButton/>

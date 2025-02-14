@@ -1,4 +1,5 @@
 export enum COLOR {
+  BLACK = '#000',
   LIGHT10 = '#D7D3C6',
   LIGHT15 = '#E6E1D3',
   LIGHT20 = '#F5F0E1',

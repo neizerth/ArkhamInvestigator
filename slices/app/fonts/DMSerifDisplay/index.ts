@@ -1,0 +1,1 @@
+export const DMSerifDisplayRegular = require('./DMSerifDisplay-Regular.ttf');

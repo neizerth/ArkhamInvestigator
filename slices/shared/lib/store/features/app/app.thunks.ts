@@ -2,7 +2,17 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import * as API from "@shared/api";
 
 export const loadInvestigatorsMediaData = createAsyncThunk(
-  'app/loadData',
+  'app/loadInvestigatorsMediaData',
   API.loadInvestigatorsMediaData
+)
+
+export const loadCoreData = createAsyncThunk(
+  'app/loadCoreData',
+  API.loadGameCoreData
+)
+
+export const loadTranslationsData = createAsyncThunk(
+  'app/loadTranslationsData',
+  API.loadGameTranslationData
 )
 

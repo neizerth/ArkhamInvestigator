@@ -3,7 +3,7 @@ import {
 	type ThunkAction,
 	configureStore,
 } from "@reduxjs/toolkit";
-import * as reducer from "./features";
+import * as reducer from "./features/reducer";
 
 export type AppThunk<ReturnType = void> = ThunkAction<
 	ReturnType,
@@ -27,3 +27,5 @@ export type AppStore = ReturnType<typeof makeStore>;
 // Infer the `RootState` and `AppDispatch` types from the store itself
 export type RootState = ReturnType<AppStore["getState"]>;
 export type AppDispatch = AppStore["dispatch"];
+
+export * from './features'

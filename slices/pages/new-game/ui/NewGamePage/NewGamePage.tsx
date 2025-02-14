@@ -1,9 +1,11 @@
-import { View } from "react-native";
+import { InvestigatorList } from "@widgets/investigator-list";
+import { Container, Title } from "./NewGamePage.components";
 
 export const NewGamePage = () => {
   return (
-    <View>
-      
-    </View>
+    <Container>
+      <Title>Select Investigator</Title>
+      <InvestigatorList/>
+    </Container>
   );
 }
