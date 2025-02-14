@@ -1,3 +1,3 @@
-import { RootLayout } from "@shared/ui";
+import { RootLayout } from "@app/layouts";
 
 export default RootLayout;

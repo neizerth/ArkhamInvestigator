@@ -1,2 +1,2 @@
-export * from '../../app/layouts'
 export * from './behavior'
+export * from './game'

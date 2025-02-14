@@ -1,6 +1,8 @@
-import { GAP, IMAGE_RATIO, IMAGE_SIZE } from "@widgets/investigator-list/config/styles";
+import { Icon } from "@shared/ui";
+import { IMAGE_RATIO, IMAGE_SIZE } from "@widgets/investigator-list/config";
+import { FactionIcon as BaseFactionIcon } from "@shared/ui";
+
 import { 
-  Dimensions, 
   Image as NativeImage,
   View 
 } from "react-native";
@@ -15,7 +17,34 @@ export const Image: typeof NativeImage = styled(NativeImage)
     height: ${IMAGE_SIZE / IMAGE_RATIO}px;
   ` 
 
+export const FactionIcon: typeof BaseFactionIcon = styled(BaseFactionIcon)`
+  width: 30px;
+  height: 30px;
+`
+
 export const Container: typeof View = styled(View)`
+  position: relative;
   height: ${IMAGE_SIZE}px;
   overflow: hidden;
+`
+export const Info: typeof View = styled(View)`
+  position: absolute;
+  flex-direction: row;
+  z-index: 1;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 35px;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 2px 5px 0 2px;
+`
+
+
+export const CycleIcon: typeof Icon = styled(Icon)`
+  font-size: 16px;
+  width: auto;
+  flex-shrink: 0;
+  color: white;
 `

@@ -23,11 +23,7 @@ export const icons = createSlice({
 });
 
 export const {
-
-} = icons.actions;
-
-export const {
-
+  selectIcons
 } = icons.selectors;
 
 export default icons.reducer;
