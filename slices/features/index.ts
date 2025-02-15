@@ -1,1 +1,1 @@
-export * from './haptic'
+export * from './haptic';

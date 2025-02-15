@@ -1,15 +1,15 @@
 import { router } from 'expo-router';
 
 import { Text, Container, Background } from './NewGameButton.components';
-import { impactAsync } from '@features/haptic';
 import { useCallback, useState } from 'react';
 import { Visible } from '@shared/ui';
+import { tick } from '@features/haptic';
 
 export const NewGameButton = () => {
   const [loaded, setLoaded] = useState(false);
 
   const startNewGame = useCallback(() => {
-    impactAsync();
+    tick();
     router.push('/new-game');
   }, []);
 

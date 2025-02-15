@@ -19,8 +19,8 @@ export const InvestigatorList = ({}: InvestigatorListProps) => {
 
   const data = sortWith(
     [
-      ascend(prop('faction_code')),
-      ascend(prop('code')),
+      ascend(({ investigator }) => investigator.faction_code),
+      ascend(({ investigator }) => investigator.code),
     ],
     investigators
   )
@@ -46,12 +46,14 @@ export const InvestigatorList = ({}: InvestigatorListProps) => {
       numColumns={numColumns}
       renderItem={({ item }) => (
         <InvestigatorListItem
-          onPress={toggleSelected(item.code)}
-          selected={isSelected(item.code)}
-          investigator={item}
+          onPress={toggleSelected(item.investigator.code)}
+          selected={isSelected(item.investigator.code)}
+          investigator={item.investigator}
+          media={item.media}
+          story={item.story}
         />
       )}
-      keyExtractor={prop('code')}
+      keyExtractor={({ investigator }) => investigator.code}
     />
   );
 }

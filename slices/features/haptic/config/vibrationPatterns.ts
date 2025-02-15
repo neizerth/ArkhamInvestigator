@@ -1,0 +1,1 @@
+export const TICK_PATTERN = [5, 5];

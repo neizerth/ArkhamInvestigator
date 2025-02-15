@@ -1,2 +1,2 @@
-export * from './fallbackVibrationDuration'
 export * from './impactAsync'
+export * from './hapticPatterns'
