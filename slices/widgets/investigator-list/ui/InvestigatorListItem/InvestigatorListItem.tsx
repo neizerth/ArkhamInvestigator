@@ -2,7 +2,7 @@ import {
   getInvestigatorImageUrl as getImageUrl 
 } from "@shared/api/getInvestigatorImageUrl"
 import type { InvestigatorSource, Story } from "@shared/model"
-import { Container, CycleIcon, FactionIcon, Image, Info } from "./InvestigatorListItem.components"
+import { Container, NeutralIcon, FactionIcon, Image, Info } from "./InvestigatorListItem.components"
 import type { Investigator as InvestigatorMedia } from "arkham-investigator-data"
 
 export type InvestigatorListItemProps = {
@@ -12,22 +12,20 @@ export type InvestigatorListItemProps = {
 }
 export const InvestigatorListItem = ({
   investigator,
-  story,
   media
 }: InvestigatorListItemProps) => {
-  const { code } = investigator;
+  const { code, faction_code } = investigator;
   const id = media?.image?.id || code;
-  const url = getImageUrl(id, 'mini')
+  const url = getImageUrl(id, 'square')
   const source = { uri: url }
   return (
     <Container>
       <Image source={source} />
-
-      
       <Info>
-        <FactionIcon faction={investigator.faction_code}/>
-        {story.icon && (
-          <CycleIcon icon={story.icon}/>
+        {faction_code === 'neutral' ? (
+          <NeutralIcon/>
+        ) : (
+          <FactionIcon faction={faction_code}/>
         )}
       </Info>
     </Container>

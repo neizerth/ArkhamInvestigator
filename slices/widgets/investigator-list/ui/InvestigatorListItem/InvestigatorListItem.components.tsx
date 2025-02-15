@@ -1,5 +1,5 @@
 import { Icon } from "@shared/ui";
-import { IMAGE_RATIO, IMAGE_SIZE } from "@widgets/investigator-list/config";
+import { IMAGE_SIZE } from "@widgets/investigator-list/config";
 import { FactionIcon as BaseFactionIcon } from "@shared/ui";
 
 import { 
@@ -14,7 +14,7 @@ export const Image: typeof NativeImage = styled(NativeImage)
     resizeMethod: 'resize'
   })`
     width: ${IMAGE_SIZE}px;
-    height: ${IMAGE_SIZE / IMAGE_RATIO}px;
+    height: ${IMAGE_SIZE}px;
   ` 
 
 export const FactionIcon: typeof BaseFactionIcon = styled(BaseFactionIcon)`
@@ -34,17 +34,21 @@ export const Info: typeof View = styled(View)`
   bottom: 0;
   left: 0;
   right: 0;
+  width: 35px;
   height: 35px;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 0 10px 0 0;
   padding: 2px 5px 0 2px;
 `
 
 
-export const CycleIcon: typeof Icon = styled(Icon)`
-  font-size: 16px;
-  width: auto;
+export const NeutralIcon = styled(Icon)
+  .attrs({
+    icon: 'neutral'
+  })`
+  font-size: 22px;
   flex-shrink: 0;
   color: white;
 `

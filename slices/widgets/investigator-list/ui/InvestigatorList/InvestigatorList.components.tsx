@@ -1,9 +1,9 @@
 import { GAP } from "../../config";
-import { FlatList } from "react-native";
+import { FlatList, type FlatListProps } from "react-native";
 import styled from "styled-components/native";
 
 export const Container: typeof FlatList = styled(FlatList)
-  .attrs(({ numColumns }) => ({
+  .attrs(({ numColumns = 1 }: FlatListProps<unknown>) => ({
     columnWrapperStyle: numColumns > 1 ? {
       justifyContent: 'center',
       gap: `${GAP}px`
