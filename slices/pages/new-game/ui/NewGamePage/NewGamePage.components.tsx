@@ -1,5 +1,6 @@
 import { COLOR } from "@shared/config";
-import { View, Text } from "react-native";
+import { Icon, Title } from "@shared/ui";
+import { TouchableOpacity, View } from "react-native";
 import styled from "styled-components/native";
 
 export const Container: typeof View = styled(View)`
@@ -7,10 +8,20 @@ export const Container: typeof View = styled(View)`
   flex: 1;
 `
 
-export const Title: typeof Text = styled(Text)`
-  font-family: 'DMSerifDisplayRegular';
-  font-size: 32px;
-  color: ${COLOR.LIGHT10};
-  text-align: center;
-  padding: 20px 0 10px;
+export const BackIcon = styled(Icon)
+  .attrs({
+    icon: "arrow_back"
+  })`
+    font-size: 14px;
+    width: 20px;
+    color: white;
+  `
+
+export const BackButton: typeof TouchableOpacity = styled(TouchableOpacity)`
+  /* padding: 0 10px; */
+`
+
+export const Header: typeof Title = styled(Title)`
+  flex: 1;
+  padding-right: 20px;
 `

@@ -1,2 +1,5 @@
 export * from './behavior'
 export * from './game'
+export * from './layout'
+export * from './typography'
+export * from './control'

@@ -40,7 +40,7 @@ export const Info: typeof View = styled(View)`
   align-items: center;
   background-color: rgba(0, 0, 0, 0.5);
   border-radius: 0 10px 0 0;
-  padding: 2px 5px 0 2px;
+  padding: 2px 5px 2px 2px;
 `
 
 
