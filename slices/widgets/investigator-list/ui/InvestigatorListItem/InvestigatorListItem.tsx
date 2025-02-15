@@ -1,26 +1,27 @@
 import { 
   getInvestigatorImageUrl as getImageUrl 
 } from "@shared/api/getInvestigatorImageUrl"
-import type { InvestigatorSource, Story } from "@shared/model"
-import { Container, NeutralIcon, FactionIcon, Image, Info } from "./InvestigatorListItem.components"
-import type { Investigator as InvestigatorMedia } from "arkham-investigator-data"
+import type { Faction, InvestigatorSource } from "@shared/model"
+import { Container, NeutralIcon, FactionIcon, Image, Info, Selection } from "./InvestigatorListItem.components"
+import type { TouchableOpacityProps } from "react-native"
 
-export type InvestigatorListItemProps = {
+export type InvestigatorListItemProps = TouchableOpacityProps & {
   investigator: InvestigatorSource
-  story: Story
-  media?: InvestigatorMedia
+  selected: boolean
 }
 export const InvestigatorListItem = ({
   investigator,
-  media
+  selected,
+  ...props
 }: InvestigatorListItemProps) => {
   const { code, faction_code } = investigator;
-  const id = media?.image?.id || code;
-  const url = getImageUrl(id, 'square')
+  const url = getImageUrl(code, 'square')
   const source = { uri: url }
   return (
-    <Container>
-      <Image source={source} />
+    <Container {...props}>
+      <Image 
+        source={source}
+      />
       <Info>
         {faction_code === 'neutral' ? (
           <NeutralIcon/>
@@ -28,6 +29,11 @@ export const InvestigatorListItem = ({
           <FactionIcon faction={faction_code}/>
         )}
       </Info>
+      {selected && (
+        <Selection 
+          faction={faction_code as Faction}
+        />
+      )}
     </Container>
   )
 }

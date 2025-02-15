@@ -1,0 +1,1 @@
+export type Faction = 'neutral' | 'mystic' | 'rogue' | 'survivor' | 'seeker' | 'guardian';

@@ -14,4 +14,5 @@ export const Container: typeof FlatList = styled(FlatList)
   }))`
     flex: 1;
     gap: 10px;
+    padding: 0 10px;
   `

@@ -1,4 +1,4 @@
-import { COLOR } from "@shared/config";
+import { color } from "@shared/config";
 import * as ReactNative from "react-native";
 import styled from "styled-components/native";
 
@@ -26,5 +26,5 @@ export const Background: typeof ReactNative.ImageBackground = styled(ReactNative
 export const Text: typeof ReactNative.Text = styled.Text`
   font-family: Teutonic;
   font-size: 32px;
-  color: ${COLOR.LIGHT10};
+  color: ${color.light10};
 `
