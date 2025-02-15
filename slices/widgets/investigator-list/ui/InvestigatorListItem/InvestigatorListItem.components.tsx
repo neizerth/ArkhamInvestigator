@@ -1,25 +1,22 @@
 import { Icon } from "@shared/ui";
-import { IMAGE_SIZE } from "@widgets/investigator-list/config";
 import { FactionIcon as BaseFactionIcon } from "@shared/ui";
 import { 
   Image as NativeImage,
   TouchableOpacity,
   View 
 } from "react-native";
-import type { ViewProps } from 'react-native'
+import type { ImageProps, ViewProps } from 'react-native'
 import styled, { css } from "styled-components/native";
 import type { Faction } from "@shared/model";
 import type { FC } from "react";
 
 import { factionColor } from "@shared/config";
 
-type SelectionElement = FC<ViewProps & FactionProps>;
-
 type FactionProps = {
   faction: Faction
 }
 
-export const Selection: SelectionElement = styled(View)`
+export const Selection: FC<ViewProps & FactionProps> = styled(View)`
   position: absolute;
   z-index: 2;
   top: 0;
@@ -31,13 +28,19 @@ export const Selection: SelectionElement = styled(View)`
   `}
 `
 
-export const Image: typeof NativeImage = styled(NativeImage)
+type SizeProps = {
+  size: number
+}
+
+export const Image: FC<ImageProps & SizeProps> = styled(NativeImage)
   .attrs({
     resizeMode: 'cover',
     resizeMethod: 'resize'
   })`
-    width: ${IMAGE_SIZE}px;
-    height: ${IMAGE_SIZE}px;
+    ${({ size }: SizeProps) => css`
+      aspect-ratio: 1;
+      width: ${size}px;
+    `}
   ` 
 
 export const FactionIcon: typeof BaseFactionIcon = styled(BaseFactionIcon)`
@@ -47,8 +50,6 @@ export const FactionIcon: typeof BaseFactionIcon = styled(BaseFactionIcon)`
 
 export const Container: typeof TouchableOpacity = styled(TouchableOpacity)`
   position: relative;
-  height: ${IMAGE_SIZE}px;
-  overflow: hidden;
 `
 
 export const Info: typeof View = styled(View)`
