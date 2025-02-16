@@ -1,6 +1,6 @@
 import { useWindowDimensions } from "react-native";
 import { useColumnsCount } from "./useColumnsCount";
-import { GAP } from "../config";
+import { GAP } from "../../config";
 
 export const useImageSize = () => {
 

@@ -1,1 +1,1 @@
-export * from './investigator-list'
+export * from './investigator'

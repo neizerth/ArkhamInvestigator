@@ -1,4 +1,4 @@
-import { InvestigatorList } from "@widgets/investigator-list";
+import { InvestigatorSelect } from "@widgets/investigator/investigator-select";
 import { BackIcon, Container, BackButton, Header } from "./NewGamePage.components";
 import { TopBar } from "@shared/ui";
 import { impactAsync } from "@features/haptic";
@@ -18,7 +18,8 @@ export const NewGamePage = () => {
         </BackButton>
         <Header>Select Investigator</Header>
       </TopBar>
-      <InvestigatorList/>
+      <InvestigatorSelect
+      />
     </Container>
   );
 }

@@ -3,7 +3,8 @@ import {
 	type ThunkAction,
 	configureStore,
 } from "@reduxjs/toolkit";
-import * as reducer from "./features/reducer";
+
+import reducer from './reducer';
 
 export type AppThunk<ReturnType = void> = ThunkAction<
 	ReturnType,

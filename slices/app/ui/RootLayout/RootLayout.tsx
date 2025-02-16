@@ -3,8 +3,11 @@ import { StatusBar } from 'expo-status-bar';
 import 'react-native-reanimated';
 import { useAppLoader } from '@shared/lib/hooks';
 import { AppProvider } from '@app/providers/AppProvider';
+import type { PropsWithChildren } from 'react';
 
-export const RootLayout = () => {
+export const RootLayout = ({
+  children
+}: PropsWithChildren) => {
   const [loaded] = useAppLoader();
 
   if (!loaded) {
@@ -13,8 +16,16 @@ export const RootLayout = () => {
 
   return (
     <AppProvider>
-      <Stack screenOptions={{ headerShown: false }} />
+      <Stack screenOptions={{ headerShown: false }}>
+        <Stack.Screen
+          name="investigator-details"
+          options={{
+            presentation: 'modal'
+          }}
+        />
+      </Stack>
       <StatusBar/>
+      {children}
     </AppProvider>
   );
 }

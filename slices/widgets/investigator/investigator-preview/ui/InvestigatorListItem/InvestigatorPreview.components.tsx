@@ -17,9 +17,11 @@ type FactionProps = {
   faction: Faction
 }
 
-const getSelectionColor = (faction: Faction) => Color(factionColor[faction].darkColor)
-  .alpha(0.3)
-  .string()
+const getSelectionColor = (faction: Faction) => {
+  const color = factionColor[faction].darkColor;
+
+  return Color(color).alpha(0.3).string()
+}
 
 export const Selection: FC<ViewProps & FactionProps> = styled(View)`
   position: absolute;
@@ -69,7 +71,7 @@ export const Info: typeof View = styled(View)`
   height: 40px;
   justify-content: center;
   align-items: center;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.3);
   border-radius: 0 10px 0 0;
   padding: 2px 8px;
   padding-top: 2px;
