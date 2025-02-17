@@ -1,9 +1,7 @@
 import { InvestigatorDetailSelect } from "@widgets/investigator";
-import { View } from "react-native";
 
-export default function Page() {
+export default function Modal() {
   return (
-    <View>
-    </View>
+    <InvestigatorDetailSelect/>
   )
 }

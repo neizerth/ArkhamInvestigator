@@ -22,7 +22,6 @@
     "@reduxjs/toolkit": "^2.5.1",
     "arkham-divider-data": "^1.1.14",
     "arkham-investigator-data": "^1.0.0",
-    "color": "^5.0.0",
     "expo": "~52.0.23",
     "expo-blur": "~14.0.1",
     "expo-constants": "~17.0.3",

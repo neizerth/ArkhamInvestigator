@@ -1,6 +1,6 @@
 import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
 import { ascend, propEq, reject, sortWith } from 'ramda';
-import { InvestigatorPreview } from '../../../investigator-preview/ui/InvestigatorListItem/InvestigatorPreview';
+import { InvestigatorPreview } from '../../../investigator-preview/ui/InvestigatorPreview/InvestigatorPreview';
 import { Container } from './InvestigatorSelect.components';
 import { useColumnsCount } from '../../lib/hooks/useColumnsCount';
 import { useCallback } from 'react';
@@ -20,15 +20,7 @@ export const InvestigatorSelect = ({
   const dispatch = useAppDispatch();
   const numColumns = useColumnsCount();
   const selected = useAppSelector(selectSelectedInvestigators);
-  const investigators = useAppSelector(selectAvailableInvestigators);
-
-  const data = sortWith(
-    [
-      ascend(({ investigator }) => investigator.faction_code),
-      ascend(({ investigator }) => investigator.code),
-    ],
-    investigators
-  )
+  const data = useAppSelector(selectAvailableInvestigators);
 
   const toggleSelected = useCallback(
     ({ investigator, media }: AvailableInvestigator) => () => {

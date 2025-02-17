@@ -4,7 +4,6 @@ import { Provider } from "react-redux";
 
 const store = makeStore();
 
-debugger;
 export const StoreProvider = ({ children }: PropsWithChildren) => {
 	return (
 		<Provider store={store}>

@@ -1,6 +1,6 @@
 import { InvestigatorSelect } from "@widgets/investigator/investigator-select";
-import { BackIcon, Container, BackButton, Header } from "./NewGamePage.components";
-import { TopBar } from "@shared/ui";
+import { Container } from "./NewGamePage.components";
+import { TopBar } from "@widgets/top-bar";
 import { impactAsync } from "@features/haptic";
 import { router } from "expo-router";
 
@@ -12,12 +12,10 @@ export const NewGamePage = () => {
   }
   return (
     <Container>
-      <TopBar>
-        <BackButton onPress={goHome}>
-          <BackIcon/>
-        </BackButton>
-        <Header>Select Investigator</Header>
-      </TopBar>
+      <TopBar
+        onBack={goHome}
+        title="Select Investigator"
+      />
       <InvestigatorSelect
       />
     </Container>

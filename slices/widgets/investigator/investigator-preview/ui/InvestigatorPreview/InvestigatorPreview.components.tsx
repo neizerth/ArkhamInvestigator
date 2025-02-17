@@ -1,5 +1,3 @@
-import { Icon } from "@shared/ui";
-import { FactionIcon as BaseFactionIcon } from "@shared/ui";
 import { 
   Image as NativeImage,
   TouchableOpacity,
@@ -51,10 +49,6 @@ export const Image: FC<ImageProps & SizeProps> = styled(NativeImage)
     `}
   ` 
 
-export const FactionIcon: typeof BaseFactionIcon = styled(BaseFactionIcon)`
-  width: 30px;
-  height: 30px;
-`
 
 export const Container: typeof TouchableOpacity = styled(TouchableOpacity)`
   position: relative;
@@ -75,14 +69,4 @@ export const Info: typeof View = styled(View)`
   border-radius: 0 10px 0 0;
   padding: 2px 8px;
   padding-top: 2px;
-`
-
-
-export const NeutralIcon = styled(Icon)
-  .attrs({
-    icon: 'neutral'
-  })`
-  font-size: 24px;
-  flex-shrink: 0;
-  color: white;
 `
