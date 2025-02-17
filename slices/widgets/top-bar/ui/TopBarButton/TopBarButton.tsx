@@ -1,5 +1,5 @@
-import { TouchableOpacity, type TouchableOpacityProps } from 'react-native';
-import { Icon } from './TopBarButton.components';
+import type { TouchableOpacityProps } from 'react-native';
+import { Container, Icon } from './TopBarButton.components';
 
 export type TopBarButtonProps = TouchableOpacityProps & {
   icon?: string
@@ -11,9 +11,9 @@ export const TopBarButton = ({
  ...props
 }: TopBarButtonProps) => {
   return (
-    <TouchableOpacity {...props}>
+    <Container {...props}>
       {icon && <Icon icon={icon}/>}
       {children}
-    </TouchableOpacity>
+    </Container>
   );
 }

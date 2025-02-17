@@ -1,19 +1,16 @@
 import type { Faction } from '@shared/model';
-import { Container, NeutralIcon, FactionIcon } from './InvestigatorPreviewFactionIcon.components';
-
-export type InvestigatorPreviewFactionIconProps = {
-  faction: Faction
-}
+import { Container, NeutralIcon, FactionImage } from './InvestigatorPreviewFactionIcon.components';
+import type { PropsWithFaction } from '@shared/model/ui';
 
 export const InvestigatorPreviewFactionIcon = ({
   faction
-}: InvestigatorPreviewFactionIconProps) => {
+}: PropsWithFaction) => {
   return (
     <Container>
       {faction === 'neutral' ? (
         <NeutralIcon/>
       ) : (
-        <FactionIcon faction={faction}/>
+        <FactionImage faction={faction}/>
       )}
     </Container>
   );

@@ -1,2 +1,2 @@
 export * from './Icon'
-export * from './FactionIcon'
+export * from './FactionIconImage'

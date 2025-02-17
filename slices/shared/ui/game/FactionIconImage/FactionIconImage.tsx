@@ -1,26 +1,25 @@
 import type { ImageProps } from 'react-native';
+import type { PropsWithFaction } from '@shared/model/ui';
 import { Image } from 'react-native';
 import { factionImages } from './images';
 
-export type FactionIconProps = ImageProps & {
-  faction: string
-}
+type OmitedImageProps = 'resizeMode' | 'resizeMethod' | 'source';
 
-export const FactionIcon = ({
+export type FactionIconImageProps = Omit<ImageProps, OmitedImageProps> & PropsWithFaction;
+export const FactionIconImage = ({
   faction,
   ...props
-}: FactionIconProps) => {
+}: FactionIconImageProps) => {
   const source = factionImages[faction];
-
   if (!source) {
     return null;
   }
-  
+
   return (
-    <Image 
+    <Image
+      {...props}
       resizeMode="contain"
       resizeMethod="resize"
-      {...props} 
       source={source}
     />
   );

@@ -1,7 +1,6 @@
 import { createSelector } from "@reduxjs/toolkit";
 import { selectInvestigatorMedia, selectStories } from "@shared/lib";
-import type { Story } from "@shared/model";
-import type { AvailableInvestigator } from "@widgets/investigator/investigator-select/model";
+import type { InvestigatorDetails, Story } from "@shared/model";
 import type { Investigator as InvestigatorMedia } from "arkham-investigator-data";
 import { ascend, prop, propEq, sortWith } from "ramda";
 
@@ -10,7 +9,7 @@ export const selectAvailableInvestigators = createSelector(
     selectStories,
     selectInvestigatorMedia
   ],
-  (stories: Story[], media: InvestigatorMedia[]): AvailableInvestigator[] => {
+  (stories: Story[], media: InvestigatorMedia[]): InvestigatorDetails[] => {
     const codes = media.map(prop('code'));
 
     const mapStory = (story: Story) => 

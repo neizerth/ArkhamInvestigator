@@ -10,10 +10,8 @@ import type { FC } from "react";
 
 import { factionColor } from "@shared/config";
 import Color from "color";
+import type { PropsWithFaction } from "@shared/model/ui";
 
-type FactionProps = {
-  faction: Faction
-}
 
 const getSelectionColor = (faction: Faction) => {
   const color = factionColor[faction].darkColor;
@@ -21,14 +19,14 @@ const getSelectionColor = (faction: Faction) => {
   return Color(color).alpha(0.3).string()
 }
 
-export const Selection: FC<ViewProps & FactionProps> = styled(View)`
+export const Selection: FC<ViewProps & PropsWithFaction> = styled(View)`
   position: absolute;
   z-index: 2;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  ${({ faction }: FactionProps) => css`
+  ${({ faction }: PropsWithFaction) => css`
     border: 5px solid ${factionColor[faction].border};
     background-color: ${getSelectionColor(faction)};
   `}

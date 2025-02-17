@@ -1,8 +1,8 @@
 import styled from "styled-components/native";
-import { FactionIcon as BaseFactionIcon, Icon } from "@shared/ui";
+import { FactionIconImage as BaseFactionImage, Icon } from "@shared/ui";
 
 export { View as Container } from 'react-native';
-export const FactionIcon: typeof BaseFactionIcon = styled(BaseFactionIcon)`
+export const FactionImage: typeof BaseFactionImage = styled(BaseFactionImage)`
   width: 30px;
   height: 30px;
 `

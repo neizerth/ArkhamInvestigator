@@ -1,5 +1,4 @@
-import { View, ViewProps } from 'react-native';
-import styled from 'styled-components/native';
+import type { ViewProps } from 'react-native';
 import { Container } from './TopBar.components';
 import { TopBarButton } from '../TopBarButton';
 import { TopBarTitle } from '../TopBarTitle';

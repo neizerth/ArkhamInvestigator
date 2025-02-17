@@ -20,7 +20,7 @@ export const RootLayout = ({
         <Stack.Screen
           name="investigator-details"
           options={{
-            presentation: 'modal'
+            presentation: 'transparentModal'
           }}
         />
       </Stack>
