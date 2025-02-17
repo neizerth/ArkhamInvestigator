@@ -1,10 +1,9 @@
 import { selectCurrentInvestigatorDetails, useAppDispatch, useAppSelector } from "@shared/lib";
 import { View } from "react-native";
-import { Container, Content } from "./InvestigatorDetailSelect.components";
+import { Container, Content, Card } from "./InvestigatorDetailSelect.components";
 import { TopBar, TopBarButton, TopBarPlaceholder } from "@widgets/top-bar";
 import { router } from "expo-router";
 import { getInvestigatorImageUrl as getImageUrl } from "@shared/api/getInvestigatorImageUrl";
-import { InvestigatorDetailSelectCard as Card } from "../FactionCard";
 import type { Faction } from "@shared/model";
 
 export const InvestigatorDetailSelect = () => {
@@ -36,7 +35,11 @@ export const InvestigatorDetailSelect = () => {
             onPress={goBack}
           />
         </TopBar>
-        <Card faction={faction}>
+        <Card 
+          faction={faction}
+          title={investigator.name}
+          subtitle={investigator.subname}
+        >
 
         </Card>
       </Content>

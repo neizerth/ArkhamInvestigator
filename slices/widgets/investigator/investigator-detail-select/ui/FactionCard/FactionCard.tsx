@@ -1,24 +1,40 @@
-import { 
-  Background, 
-  Body, 
-  Container,
-  Header 
-} from './FactionCard.components';
+import type { PropsWithFaction } from '@shared/model/ui';
+import * as C from './FactionCard.components';
+import type { ViewProps } from 'react-native';
 
-import type { ContainerElement } from './FactionCard.components';
+export type InvestigatorDetailSelectCardProps = ViewProps & PropsWithFaction & {
+  title?: string
+  subtitle?: string
+}
 
-export const InvestigatorDetailSelectCard: ContainerElement = ({
+export const InvestigatorDetailSelectCard = ({
   faction,
-  children
-}) => {
+  title,
+  subtitle,
+  children,
+  ...props
+}: InvestigatorDetailSelectCardProps) => {
   return (
-    <Container faction={faction}>
-      <Header>
-        <Background faction={faction}/>
-      </Header>
-      <Body>
-        {children}
-      </Body>
-    </Container>
+    <C.Container {...props}>
+      <C.Header faction={faction}>
+        <C.Background faction={faction}/>
+        <C.HeaderContent>
+          <C.HeaderTextContent>
+            <C.Title faction={faction}>
+              {title}
+            </C.Title>
+            <C.Subtitle faction={faction}>
+              {subtitle}
+            </C.Subtitle>
+          </C.HeaderTextContent>
+          <C.Icon faction={faction}/>
+        </C.HeaderContent>
+      </C.Header>
+      <C.Body faction={faction}>
+        <C.Content>
+          {children}
+        </C.Content>
+      </C.Body>
+    </C.Container>
   );
 }
