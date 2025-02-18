@@ -73,5 +73,5 @@ export const Info: typeof View = styled(View)`
 export const ExtraIcon: typeof Icon = styled(Icon)`
   font-size: 22px;
   text-align: center;
-  color: ${color.light10}
+  color: ${color.white}
 `

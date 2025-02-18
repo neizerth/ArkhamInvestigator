@@ -23,12 +23,12 @@ export const Icon = ({
   const contents = String.fromCharCode(item.code);
   const { fontSize } = StyleSheet.flatten(style);
 
-  const scale = ratio > 1 ? 1 / ratio : ratio;
+  const scale = ratio > 1 ? 1 / ratio : 1;
 
   const scaledFontSize = fontSize && fontSize * scale;
 
   const fontSizeStyles = {
-    fontSize: fontSize,
+    fontSize: scaledFontSize,
   }
   
   return (

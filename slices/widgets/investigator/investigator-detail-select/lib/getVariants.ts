@@ -16,11 +16,11 @@ export const getVariants = (details: InvestigatorDetails) => {
   const mainVariant: InvestigatorDetailItem = {
     id: code,
     imageId: code,
-    name: details.investigator.name,
+    name: details.story.name,
     type: 'default',
     icon: details.story.icon,
     value: null,
-    investigator: details.investigator
+    details: details
   };
 
   const variants = media.variants.map((variant): InvestigatorDetailItem => {
@@ -46,7 +46,7 @@ export const getVariants = (details: InvestigatorDetails) => {
       name,
       type,
       icon,
-      investigator
+      details
     }
   });
 

@@ -3,25 +3,26 @@ import type { InvestigatorDetailItem as Item} from '../../model';
 import { UnselectedDetail } from '../UnselectedDetail';
 import { Container, List } from './DetailSelect.components';
 import { CARD_SIZE } from '../../config';
-import { useCallback } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 export type DetailSelectProps = {
   data: Item[]
   selected: Item | null
-  onChange: (id: Item | null) => void
+  onChange: (item: Item | null) => void
   showNone?: boolean
   showIcon?: boolean
 }
 
 export const DetailSelect = ({
   data,
-  selected,
   onChange,
+  selected,
   showNone,
   showIcon = true
 }: DetailSelectProps) => {
+
   const setValue = useCallback(
-    (id: Item | null) => () => onChange(id),
+    (item: Item | null) => () => onChange(item),
     [onChange]
   )
   const isItemSelected = useCallback(
@@ -44,7 +45,7 @@ export const DetailSelect = ({
           <InvestigatorPreview
             key={item.id}
             imageId={item.imageId}
-            investigator={item.investigator}
+            investigator={item.details.investigator}
             selected={isItemSelected(item)}
             onPress={setValue(item)}
             icon={item.icon}

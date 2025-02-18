@@ -13,11 +13,11 @@ export const Content: typeof View = styled(View)`
   flex: 1;
   width: 100%;
   max-width: 500px;
-  padding: 0 10px 10px;
+  padding: 10px;
 `
 
 export const Sections: typeof View = styled(View)`
-  flex: 1;
+  flex-grow: 1;
   gap: 10px;
 `
 

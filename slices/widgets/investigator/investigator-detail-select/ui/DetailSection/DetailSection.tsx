@@ -1,7 +1,7 @@
-import type { ViewProps } from 'react-native';
+import type { PropsWithChildren } from 'react';
 import { Container, Title, Header, Value } from './DetailSection.components';
 
-export type DetailSectionProps = ViewProps & {
+export type DetailSectionProps = PropsWithChildren & {
   title: string
   value?: string
 }

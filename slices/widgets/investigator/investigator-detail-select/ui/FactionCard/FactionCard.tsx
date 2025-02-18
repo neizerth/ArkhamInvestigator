@@ -5,6 +5,7 @@ import type { ViewProps } from 'react-native';
 export type InvestigatorDetailSelectCardProps = ViewProps & PropsWithFaction & {
   title?: string
   subtitle?: string
+  onClose?: () => void
 }
 
 export const InvestigatorDetailSelectCard = ({
@@ -12,6 +13,7 @@ export const InvestigatorDetailSelectCard = ({
   title,
   subtitle,
   children,
+  onClose,
   ...props
 }: InvestigatorDetailSelectCardProps) => {
   return (
@@ -19,6 +21,7 @@ export const InvestigatorDetailSelectCard = ({
       <C.Header faction={faction}>
         <C.Background faction={faction}/>
         <C.HeaderContent>
+          <C.Icon faction={faction}/>
           <C.HeaderTextContent>
             <C.Title>
               {title}
@@ -27,7 +30,9 @@ export const InvestigatorDetailSelectCard = ({
               {subtitle}
             </C.Subtitle>
           </C.HeaderTextContent>
-          <C.Icon faction={faction}/>
+          {onClose && (
+            <C.CloseIcon onPress={onClose}/>
+          )}
         </C.HeaderContent>
       </C.Header>
       <C.Body faction={faction}>

@@ -7,7 +7,7 @@ import styled, { css } from "styled-components/native";
 import type { PropsWithFaction } from "@shared/model/ui";
 import { FactionBackground } from "../FactionBackground";
 import type { Faction } from "@shared/model";
-import { FactionFontIcon } from "@shared/ui";
+import { FactionFontIcon, Icon as BaseIcon, IconProps } from "@shared/ui";
 
 export type ElementWithFaction<T> = FC<T & PropsWithFaction>
 export type ViewWithFaction = ElementWithFaction<ViewProps>
@@ -67,6 +67,16 @@ export const Icon: typeof FactionFontIcon = styled(FactionFontIcon)`
   color: ${textColor};
 `
 
+export type CloseIconProps = Omit<IconProps, 'icon'>
+
+export const CloseIcon: FC<CloseIconProps> = styled(BaseIcon)
+  .attrs({
+    icon: 'close'
+  })`
+  font-size: 20px;
+  color: ${textColor};
+`
+
 export const HeaderContent: typeof View = styled(View)`
   flex: 1;
   align-items: center;
@@ -74,6 +84,7 @@ export const HeaderContent: typeof View = styled(View)`
   position: relative;
   z-index: 2;
   padding: 5px 10px;
+  gap: 10px;
 `
 
 export const HeaderTextContent: typeof View = styled(View)`

@@ -14,11 +14,11 @@ export type ContainerElement = FC<TouchableOpacityProps & WithSelected>;
 export const Container: ContainerElement = styled(TouchableOpacity)`
   width: 75px;
   aspect-ratio: 1;
-  border-radius: 6px;
   justify-content: center;
   align-items: center;
-  ${({ selected }: WithSelected) => css`
-    border: 1px solid ${selected ? color.light10 : color.dark20}
+  border: 1px solid ${color.dark15};
+  ${({ selected }: WithSelected) => selected && css`
+    border-width: 5px;
   `}
   
 `

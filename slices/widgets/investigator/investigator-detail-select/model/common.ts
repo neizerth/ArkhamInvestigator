@@ -1,4 +1,4 @@
-import type { InvestigatorSource } from "@shared/model"
+import type { InvestigatorDetails } from "@shared/model"
 
 export type InvestigatorDetailItem = {
   id: string
@@ -7,5 +7,5 @@ export type InvestigatorDetailItem = {
   icon?: string
   name: string
   value: string | null
-  investigator: InvestigatorSource
+  details: InvestigatorDetails
 }
