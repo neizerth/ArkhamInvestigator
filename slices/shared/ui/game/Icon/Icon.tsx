@@ -28,7 +28,7 @@ export const Icon = ({
   const scaledFontSize = fontSize && fontSize * scale;
 
   const fontSizeStyles = {
-    fontSize: scaledFontSize,
+    fontSize: fontSize,
   }
   
   return (

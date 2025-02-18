@@ -52,7 +52,6 @@ export const InvestigatorList = ({
           selected={isSelected(item)}
           investigator={item.investigator}
           media={item.media}
-          iconType="faction"
         />
       )}
       keyExtractor={({ investigator }) => investigator.code}

@@ -15,8 +15,10 @@ export type InvestigatorPreviewProps = TouchableOpacityProps & {
   imageId?: string
   icon?: string
   size?: number
+  showIcon?: boolean
 }
 export const InvestigatorPreview = ({
+  showIcon = true,
   investigator,
   selected,
   icon,
@@ -35,13 +37,15 @@ export const InvestigatorPreview = ({
         source={source}
         size={size}
       />
-      <Info>
-        {icon ? (
-          <ExtraIcon icon={icon}/>
-          ) : (
-          <FactionIcon faction={faction}/>
-        )}
-      </Info>
+      {showIcon && (
+        <Info>
+          {icon ? (
+            <ExtraIcon icon={icon}/>
+            ) : (
+            <FactionIcon faction={faction}/>
+          )}
+        </Info>
+      )}
       {selected && (
         <Selection faction={faction}/>
       )}
