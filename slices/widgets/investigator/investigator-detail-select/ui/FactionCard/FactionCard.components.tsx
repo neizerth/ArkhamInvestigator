@@ -55,11 +55,17 @@ export const Body: ViewWithFaction = styled(View)`
   flex: 1;
 `
 
-export const Content: typeof ScrollView = styled(ScrollView)`
+export const Content: typeof View = styled(View)`
   border-radius: 6px;
   background-color: ${color.dark30};
   flex: 1;
-  padding: 10px;
+  padding: 10px 0;
+`
+
+
+export const ScrollContainer: typeof ScrollView = styled(ScrollView)`
+  flex: 1;
+  padding: 0 10px;
 `
 
 export const Icon: typeof FactionFontIcon = styled(FactionFontIcon)`

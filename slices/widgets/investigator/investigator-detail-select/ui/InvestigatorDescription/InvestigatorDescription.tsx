@@ -1,8 +1,9 @@
 import type { InvestigatorDetails } from '@shared/model';
 import type { InvestigatorDetailItem } from '../../model/common';
-import { Container } from './InvestigatorDescription.components';
+import { Container, Image, InvestigatorText, MainInfo } from './InvestigatorDescription.components';
 import { Column, Row } from '@shared/ui';
 import { Text } from 'react-native';
+import { getInvestigatorImageUrl as getImageUrl } from '@shared/api/getInvestigatorImageUrl';
 
 export type InvestigatorDescriptionProps = {
   data: InvestigatorDetails
@@ -16,12 +17,30 @@ export const InvestigatorDescription = ({
   variant
 }: InvestigatorDescriptionProps) => {
   
-  const { investigator, story } = variant?.details || data;
+  const { investigator } = variant?.details || data;
+  const { code } = investigator;
+  const imageId = skin?.imageId || variant?.imageId || code;
+  const uri = getImageUrl(imageId, 'square');
+  const source = { uri }
+
+  console.log({ variant });
   // const 
 
   return (
     <Container>
-      <Text>{investigator.text}</Text>
+      <MainInfo>
+        <Column>
+          
+        </Column>
+        <Column>
+          <Image
+            source={source}
+          />
+        </Column>
+      </MainInfo>
+      <InvestigatorText>
+        {investigator.text}
+      </InvestigatorText>
     </Container>
   );
 }

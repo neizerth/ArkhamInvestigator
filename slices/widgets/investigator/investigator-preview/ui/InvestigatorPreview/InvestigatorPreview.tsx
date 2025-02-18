@@ -29,8 +29,8 @@ export const InvestigatorPreview = ({
 
   const imageId = props.imageId || investigator.code;
   const faction = investigator.faction_code as Faction;
-  const url = getImageUrl(imageId, 'square')
-  const source = { uri: url }
+  const uri = getImageUrl(imageId, 'square')
+  const source = { uri }
   return (
     <Container {...props}>
       <Image 

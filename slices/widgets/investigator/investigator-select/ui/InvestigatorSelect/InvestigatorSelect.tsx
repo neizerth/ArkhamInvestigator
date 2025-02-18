@@ -34,6 +34,7 @@ export const InvestigatorSelect = () => {
       }
 
       const selectedItem = { code }
+      dispatch(addSelectedInvestigator(selectedItem))
 
       if (media?.skins || media?.variants) {
         dispatch(setCurrentInvestigatorDetails(item));
@@ -42,7 +43,6 @@ export const InvestigatorSelect = () => {
       }
 
 
-      dispatch(addSelectedInvestigator(selectedItem))
     }, [selected, dispatch]);
 
   const official = data.filter(propEq(true, 'is_official'));

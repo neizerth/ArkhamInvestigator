@@ -1,4 +1,4 @@
-import { Pressable, Text, View } from "react-native";
+import { Pressable, ScrollView, Text, View } from "react-native";
 import styled from "styled-components/native";
 import { InvestigatorDetailSelectCard } from "../FactionCard";
 import { color } from "@shared/config";
@@ -16,10 +16,15 @@ export const Content: typeof View = styled(View)`
   padding: 10px;
 `
 
-export const Sections: typeof View = styled(View)`
-  flex-grow: 1;
-  gap: 10px;
-`
+export const Sections: typeof View = styled(View)
+  .attrs({
+    contentContainerStyle: {
+      gap: '10px'
+    }
+  })`
+    flex-grow: 1;
+    gap: 10px;
+  `
 
 export const Card: typeof InvestigatorDetailSelectCard = styled(InvestigatorDetailSelectCard)`
   flex: 1

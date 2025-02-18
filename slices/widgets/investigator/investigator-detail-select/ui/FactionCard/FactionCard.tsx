@@ -37,7 +37,9 @@ export const InvestigatorDetailSelectCard = ({
       </C.Header>
       <C.Body faction={faction}>
         <C.Content>
-          {children}
+          <C.ScrollContainer>
+            {children}
+          </C.ScrollContainer>
         </C.Content>
       </C.Body>
     </C.Container>

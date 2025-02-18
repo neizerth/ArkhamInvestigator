@@ -16,13 +16,17 @@ export const DataSection = ({
   data,
   title,
   defaultValue = data[0],
+  onChange,
   ...props
 }: DataSectionProps) => {
   const [selected, setSelected] = useState<Item>(defaultValue);
 
-  const onChange = useCallback(
-    (item: Item) => setSelected(item), 
-    []
+  const onChangeValue = useCallback(
+    (item: Item) => {
+      setSelected(item);
+      onChange(item);
+    }, 
+    [onChange]
   );
 
   const { length } = data;
@@ -41,7 +45,7 @@ export const DataSection = ({
       <Select 
         {...props}
         selected={selected}
-        onChange={onChange}
+        onChange={onChangeValue}
         data={data}
       />
     </Section>

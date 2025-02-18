@@ -23,21 +23,20 @@ export const getVariants = (details: InvestigatorDetails) => {
     details: details
   };
 
+  console.log({ alternate });
+
   const variants = media.variants.map((variant): InvestigatorDetailItem => {
     const { type, name } = variant;
     const id = 'code' in variant ? variant.code : code;
-    const isMain = id === code;
 
-    const variantDetails = isMain ? 
-      details : 
-      alternate.find(
+    const variantDetails = alternate.find(
         ({ investigator }) => investigator.code === id
       ) || details;
 
-    const { investigator, story } = variantDetails; 
+    const { story } = variantDetails; 
     const { icon } = story;
 
-    const imageId = 'image' in variant ? id : code; 
+    const imageId = 'image' in variant ? id : code;
     
     return {
       id,
@@ -46,7 +45,7 @@ export const getVariants = (details: InvestigatorDetails) => {
       name,
       type,
       icon,
-      details
+      details: variantDetails
     }
   });
 
