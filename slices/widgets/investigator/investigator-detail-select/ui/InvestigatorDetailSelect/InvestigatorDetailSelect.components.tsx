@@ -1,5 +1,4 @@
-import { color } from "@shared/config";
-import { View } from "react-native";
+import { Pressable, View } from "react-native";
 import styled from "styled-components/native";
 import { InvestigatorDetailSelectCard } from "../FactionCard";
 

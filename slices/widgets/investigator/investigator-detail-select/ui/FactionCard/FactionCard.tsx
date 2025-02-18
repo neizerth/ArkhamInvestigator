@@ -20,10 +20,10 @@ export const InvestigatorDetailSelectCard = ({
         <C.Background faction={faction}/>
         <C.HeaderContent>
           <C.HeaderTextContent>
-            <C.Title faction={faction}>
+            <C.Title>
               {title}
             </C.Title>
-            <C.Subtitle faction={faction}>
+            <C.Subtitle>
               {subtitle}
             </C.Subtitle>
           </C.HeaderTextContent>

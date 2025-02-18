@@ -11,7 +11,7 @@ export const NeutralIcon = styled(Icon)
   .attrs({
     icon: 'neutral'
   })`
-  font-size: 24px;
+  font-size: 26px;
   flex-shrink: 0;
   color: white;
 `

@@ -1,30 +1,25 @@
 import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
-import { ascend, propEq, reject, sortWith } from 'ramda';
-import { InvestigatorPreview } from '../../../investigator-preview/ui/InvestigatorPreview/InvestigatorPreview';
-import { Container } from './InvestigatorSelect.components';
-import { useColumnsCount } from '../../lib/hooks/useColumnsCount';
+import { propEq } from 'ramda';
+import { Container, Separator } from './InvestigatorSelect.components';
+import { selectAvailableInvestigators } from '../../lib/store';
+import { InvestigatorList as List } from '../InvestigatorList';
+import { addSelectedInvestigator, includesBy, removeSelectedInvestigator, selectSelectedInvestigators, setCurrentInvestigatorDetails } from '@shared/lib';
+import type { InvestigatorDetails } from '@shared/model';
 import { useCallback } from 'react';
 import { MAX_PLAYERS } from '@shared/config';
-import { selectAvailableInvestigators } from '../../lib/store';
-import { addSelectedInvestigator, includesBy, removeSelectedInvestigator, selectSelectedInvestigators, setCurrentInvestigatorDetails } from '@shared/lib';
 import { router } from 'expo-router';
-import type { InvestigatorDetails } from '@shared/model';
 
 export type InvestigatorSelectProps = {
-  onChange?: (code: string) => void
 }
 
-export const InvestigatorSelect = ({
-  onChange
-}: InvestigatorSelectProps) => {
-  const dispatch = useAppDispatch();
-  const numColumns = useColumnsCount();
-  const selected = useAppSelector(selectSelectedInvestigators);
+export const InvestigatorSelect = () => {
   const data = useAppSelector(selectAvailableInvestigators);
+  const selected = useAppSelector(selectSelectedInvestigators);
 
-  const toggleSelected = useCallback(
-    (item: InvestigatorDetails) => () => {
+  const dispatch = useAppDispatch();
 
+  const onChange = useCallback(
+    (item: InvestigatorDetails) => {
       const { investigator, media } = item
       const { code } = investigator;
       const withCode = propEq(code, 'code');
@@ -50,29 +45,22 @@ export const InvestigatorSelect = ({
       dispatch(addSelectedInvestigator(selectedItem))
     }, [selected, dispatch]);
 
-  const isSelected = useCallback(
-    ({ investigator }: InvestigatorDetails) => includesBy(
-      propEq(investigator.code, 'code'), 
-      selected
-    ), 
-    [selected]
-  );
+  const official = data.filter(propEq(true, 'is_official'));
+  const fanMade = data.filter(propEq(false, 'is_official'));
 
   return (
-    <Container
-      data={data}
-      key={numColumns}
-      numColumns={numColumns}
-      renderItem={({ item }) => (
-        <InvestigatorPreview
-          onPress={toggleSelected(item)}
-          selected={isSelected(item)}
-          investigator={item.investigator}
-          media={item.media}
-          story={item.story}
-        />
-      )}
-      keyExtractor={({ investigator }) => investigator.code}
-    />
+    <Container>
+      <List 
+        data={official} 
+        onChange={onChange}
+        selected={selected}
+      />
+      <Separator>— Fan-made Investigators —</Separator>
+      <List 
+        data={fanMade} 
+        onChange={onChange}
+        selected={selected}
+      />
+    </Container>
   );
 }

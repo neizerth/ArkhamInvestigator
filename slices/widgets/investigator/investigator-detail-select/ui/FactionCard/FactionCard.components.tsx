@@ -30,7 +30,7 @@ export const Background: typeof FactionBackground = styled(FactionBackground)`
 
 export const Container: typeof View = styled(View)`
   overflow: hidden;
-  border-radius: 6px 6px 0px 0px;
+  border-radius: 6px;
 `
 
 
@@ -56,6 +56,7 @@ export const Body: ViewWithFaction = styled(View)`
 `
 
 export const Content: typeof View = styled(View)`
+  border-radius: 6px;
   background-color: ${color.dark30};
   flex: 1;
 `
@@ -84,10 +85,10 @@ const HeaderText: typeof Text = styled(Text)`
   color: ${textColor};
 `
 
-export const Title: TextWithFaction = styled(HeaderText)`
+export const Title: typeof Text = styled(HeaderText)`
   font-family: AlegreyaBold;
 `
 
-export const Subtitle: TextWithFaction = styled(HeaderText)`
+export const Subtitle: typeof Text = styled(HeaderText)`
   font-family: AlegreyaItalic;
 `

@@ -1,18 +1,15 @@
-import { GAP } from "../../config";
-import { FlatList, type FlatListProps } from "react-native";
+import { ScrollView, Text } from "react-native";
 import styled from "styled-components/native";
+import { color } from "@shared/config";
 
-export const Container: typeof FlatList = styled(FlatList)
-  .attrs(({ numColumns = 1 }: FlatListProps<unknown>) => ({
-    columnWrapperStyle: numColumns > 1 ? {
-      justifyContent: 'center',
-      gap: `${GAP}px`
-    } : null,
-    contentContainerStyle: {
-      gap: `${GAP}px`
-    }
-  }))`
-    flex: 1;
-    gap: 10px;
-    padding: 0 10px;
-  `
+export const Container: typeof ScrollView = styled(ScrollView)`
+  flex: 1;
+`
+
+export const Separator: typeof Text = styled(Text)`
+  font-family: AlegreyaMedium;
+  text-align: center;
+  font-size: 18px;
+  color: ${color.light10};
+  margin: 20px 0;
+`

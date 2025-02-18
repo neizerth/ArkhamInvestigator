@@ -13,6 +13,7 @@ export type InvestigatorPreviewProps = TouchableOpacityProps & {
   story: Story
   media?: InvestigatorMedia
   selected: boolean
+  iconType: 'faction' | 'pack'
 }
 export const InvestigatorPreview = ({
   investigator,
