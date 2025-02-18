@@ -2,9 +2,8 @@ import type { PropsWithFaction } from '@shared/model/ui';
 import { Image } from 'react-native';
 import type { ImageProps } from 'react-native';
 import { factionPatterns } from './images';
-import { Background } from './FactionBackground.components';
 
-export type FactionBackgroundProps = Omit<ImageProps, 'resizeMode' | 'source'> & PropsWithFaction;
+export type FactionBackgroundProps = Omit<ImageProps, 'resizeMode' | 'source' | 'tintColor'> & PropsWithFaction;
 
 export const FactionBackground = ({
   faction,
@@ -20,8 +19,9 @@ export const FactionBackground = ({
   const resizeMode = faction === 'guardian' ? 'stretch' : 'repeat';
 
   return (
-    <Background
+    <Image
       {...props}
+      tintColor="white"
       resizeMode={resizeMode}
       source={source}
     />

@@ -8,5 +8,9 @@ export const color = {
   dark10: '#656C6F',
   dark15: '#4F5A60',
   dark20: '#475259',
-  dark30: '#24303C'
+  dark30: '#24303C',
+
+  fight: '#EE4A53',
+  evade: '#48B14F',
+  taboo: '#9869f5'
 }

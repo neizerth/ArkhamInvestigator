@@ -23,11 +23,7 @@ export const encounterSets = createSlice({
 });
 
 export const {
-
-} = encounterSets.actions;
-
-export const {
-
+  selectEncounterSets
 } = encounterSets.selectors;
 
 export default encounterSets.reducer;

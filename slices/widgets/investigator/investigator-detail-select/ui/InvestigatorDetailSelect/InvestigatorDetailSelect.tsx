@@ -6,7 +6,8 @@ import { router } from "expo-router";
 import { getInvestigatorImageUrl as getImageUrl } from "@shared/api/getInvestigatorImageUrl";
 import type { Faction } from "@shared/model";
 import { useState } from "react";
-import { VariantSelect } from "../VariantSelect";
+import { getSkins, getVariants } from "../../lib";
+import { DetailSelect } from "../DetailSelect";
 
 export const InvestigatorDetailSelect = () => {
   const dispatch = useAppDispatch();
@@ -20,7 +21,8 @@ export const InvestigatorDetailSelect = () => {
   }
 
   const { investigator, media } = details
-  const { variants, skins } = media;
+  const variants = getVariants(details);
+  const skins = getSkins(details);
   const { code } = investigator;
   const faction = investigator.faction_code as Faction;
 
@@ -46,8 +48,8 @@ export const InvestigatorDetailSelect = () => {
           title={investigator.name}
           subtitle={investigator.subname}
         >
-          {variants && (
-            <VariantSelect
+          {variants.length && (
+            <DetailSelect
               data={variants}
               selected={variant}
               onChange={setVariant}

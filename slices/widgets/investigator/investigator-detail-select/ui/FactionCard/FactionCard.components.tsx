@@ -1,6 +1,6 @@
 import { color, factionColor } from "@shared/config";
 import type { FC } from "react";
-import { Text, View } from "react-native";
+import { ScrollView, Text, View } from "react-native";
 import type { TextProps, ViewProps } from "react-native";
 
 import styled, { css } from "styled-components/native";
@@ -55,10 +55,11 @@ export const Body: ViewWithFaction = styled(View)`
   flex: 1;
 `
 
-export const Content: typeof View = styled(View)`
+export const Content: typeof ScrollView = styled(ScrollView)`
   border-radius: 6px;
   background-color: ${color.dark30};
   flex: 1;
+  padding: 6px;
 `
 
 export const Icon: typeof FactionFontIcon = styled(FactionFontIcon)`

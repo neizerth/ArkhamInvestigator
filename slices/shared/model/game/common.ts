@@ -10,9 +10,9 @@ export type SelectedInvestigator = {
   skinId: Nullable<string>
 }
 
-
 export type InvestigatorDetails = {
   investigator: InvestigatorSource
+  alternate: InvestigatorDetails[]
   story: Story
   media?: InvestigatorMedia
   is_official: boolean

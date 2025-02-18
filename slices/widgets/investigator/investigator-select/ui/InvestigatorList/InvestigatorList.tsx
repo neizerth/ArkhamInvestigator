@@ -52,7 +52,6 @@ export const InvestigatorList = ({
           selected={isSelected(item)}
           investigator={item.investigator}
           media={item.media}
-          story={item.story}
           iconType="faction"
         />
       )}

@@ -8,9 +8,10 @@ import styled, { css } from "styled-components/native";
 import type { Faction } from "@shared/model";
 import type { FC } from "react";
 
-import { factionColor } from "@shared/config";
+import { color, factionColor } from "@shared/config";
 import Color from "color";
 import type { PropsWithFaction } from "@shared/model/ui";
+import { Icon } from "@shared/ui";
 
 
 const getSelectionColor = (faction: Faction) => {
@@ -63,8 +64,13 @@ export const Info: typeof View = styled(View)`
   height: 40px;
   justify-content: center;
   align-items: center;
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.4);
   border-radius: 0 10px 0 0;
   padding: 2px 8px;
   padding-top: 2px;
+`
+
+export const ExtraIcon: typeof Icon = styled(Icon)`
+  font-size: 26px;
+  color: ${color.light10}
 `
