@@ -14,7 +14,6 @@ export const getSkins = ({ media, story, investigator }: InvestigatorDetails) =>
     
     return {
       id,
-      code,
       name,
       type: 'skin',
       icon,

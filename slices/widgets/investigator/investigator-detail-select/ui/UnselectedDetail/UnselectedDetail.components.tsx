@@ -18,7 +18,7 @@ export const Container: ContainerElement = styled(TouchableOpacity)`
   justify-content: center;
   align-items: center;
   ${({ selected }: WithSelected) => css`
-    border: 1px solid ${selected ? color.dark10 : color.dark10}
+    border: 1px solid ${selected ? color.light10 : color.dark20}
   `}
   
 `
@@ -30,5 +30,5 @@ export const Text: typeof BaseText = styled(BaseText)`
 
 export const Icon: typeof BaseIcon = styled(BaseIcon)`
   font-size: 32px;
-  color: ${color.dark10};
+  color: ${color.dark20};
 `

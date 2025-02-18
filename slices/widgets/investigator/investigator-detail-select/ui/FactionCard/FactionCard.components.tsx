@@ -59,7 +59,7 @@ export const Content: typeof ScrollView = styled(ScrollView)`
   border-radius: 6px;
   background-color: ${color.dark30};
   flex: 1;
-  padding: 6px;
+  padding: 10px;
 `
 
 export const Icon: typeof FactionFontIcon = styled(FactionFontIcon)`
