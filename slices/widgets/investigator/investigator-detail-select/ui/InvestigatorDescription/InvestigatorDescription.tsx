@@ -23,20 +23,15 @@ export const InvestigatorDescription = ({
   const uri = getImageUrl(imageId, 'square');
   const source = { uri }
 
-  console.log({ variant });
-  // const 
-
   return (
     <C.Container>
       <C.MainInfo>
-        <Column>
-          
-        </Column>
-        <Column>
-          <C.Image
-            source={source}
-          />
-        </Column>
+        <C.Details>
+          <C.Traits>{investigator.traits}</C.Traits>
+        </C.Details>
+        <C.ImageContainer>
+          <C.Image source={source}/>
+        </C.ImageContainer>
       </C.MainInfo>
       <C.InvestigatorTextContainer>
         <C.InvestigatorText value={investigator.text}/>

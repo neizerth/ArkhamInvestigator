@@ -2,7 +2,7 @@ import {
   getInvestigatorImageUrl as getImageUrl 
 } from "@shared/api/getInvestigatorImageUrl"
 import type { Faction, InvestigatorSource } from "@shared/model"
-import { Container, Image, Info, Selection, ExtraIcon } from "./InvestigatorPreview.components"
+import { Container, Image, Info, Selection, ExtraIcon, OptionsInfo } from "./InvestigatorPreview.components"
 import type { TouchableOpacityProps } from "react-native"
 import { useImageSize } from "@widgets/investigator/investigator-select/lib/hooks"
 import type { Investigator as InvestigatorMedia } from "arkham-investigator-data"
@@ -16,12 +16,15 @@ export type InvestigatorPreviewProps = TouchableOpacityProps & {
   icon?: string
   size?: number
   showIcon?: boolean
+  showOptionsInfo?: boolean
 }
 export const InvestigatorPreview = ({
   showIcon = true,
+  showOptionsInfo = true,
   investigator,
   selected,
   icon,
+  media,
   ...props
 }: InvestigatorPreviewProps) => {
   const defaultSize = useImageSize();
@@ -31,8 +34,14 @@ export const InvestigatorPreview = ({
   const faction = investigator.faction_code as Faction;
   const uri = getImageUrl(imageId, 'square')
   const source = { uri }
+
+  const showOptions = showOptionsInfo && (media?.variants || media?.skins);
+  
   return (
     <Container {...props}>
+      {showOptions && (
+        <OptionsInfo faction={faction}/>
+      )}
       <Image 
         source={source}
         size={size}

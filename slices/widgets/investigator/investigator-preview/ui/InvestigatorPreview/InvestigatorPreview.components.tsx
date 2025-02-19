@@ -51,6 +51,7 @@ export const Image: FC<ImageProps & SizeProps> = styled(NativeImage)
 
 export const Container: typeof TouchableOpacity = styled(TouchableOpacity)`
   position: relative;
+  overflow: hidden;
 `
 
 export const Info: typeof View = styled(View)`
@@ -74,4 +75,20 @@ export const ExtraIcon: typeof Icon = styled(Icon)`
   font-size: 22px;
   text-align: center;
   color: ${color.white}
+`
+
+
+
+export const OptionsInfo: FC<ViewProps & PropsWithFaction> = styled(View)`
+  position: absolute;
+  z-index: 1;
+  right: -15px;
+  top: -15px;
+  width: 30px;
+  aspect-ratio: 1;
+  ${({ faction }: PropsWithFaction) => css`
+    background: ${factionColor[faction].border};
+  `}
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+  transform: rotate(45deg);
 `
