@@ -35,7 +35,7 @@ export const DataSection = ({
   }
 
   const sectionTitle = `${title} (${length})`;
-  const selectedValue = selected?.name;
+  const selectedValue = selected?.name || 'Default';
 
   return (
     <Section

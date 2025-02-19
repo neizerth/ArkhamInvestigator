@@ -1,15 +1,20 @@
 import { selectIcons, useAppSelector } from '@shared/lib';
-import { Text } from './Icon.components';
 import { propEq } from 'ramda';
 import { StyleSheet, type TextProps } from 'react-native';
+import { getIconScale } from './getIconScale';
+import { Text } from 'react-native';
+
+export type IconScaleType = 'fixedHeight' | 'maxHeight' | 'circle' | 'auto';
 
 export type IconProps = TextProps & {
   icon: string
+  scaleType?: IconScaleType
 }
 
 export const Icon = ({
   icon,
   style,
+  scaleType,
   ...props
 }: IconProps) => {
   const icons = useAppSelector(selectIcons);
@@ -19,22 +24,22 @@ export const Icon = ({
     return null;
   }
 
-  const ratio = item.ratio || 1;
   const contents = String.fromCharCode(item.code);
   const { fontSize } = StyleSheet.flatten(style);
 
-  const scale = ratio > 1 ? 1 / ratio : 1;
+  const scale = getIconScale(item, scaleType);
 
   const scaledFontSize = fontSize && fontSize * scale;
 
   const fontSizeStyles = {
+    fontFamily: 'ArkhamIcons',
     fontSize: scaledFontSize,
   }
   
   return (
-    <Text 
-      style={[style, fontSizeStyles]}
+    <Text
       {...props}
+      style={[style, fontSizeStyles]}
     >
       {contents}
     </Text>

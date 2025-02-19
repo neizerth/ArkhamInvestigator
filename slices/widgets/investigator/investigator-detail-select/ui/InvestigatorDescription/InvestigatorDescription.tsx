@@ -1,6 +1,6 @@
 import type { InvestigatorDetails } from '@shared/model';
 import type { InvestigatorDetailItem } from '../../model/common';
-import { Container, Image, InvestigatorText, MainInfo } from './InvestigatorDescription.components';
+import * as C from './InvestigatorDescription.components';
 import { Column, Row } from '@shared/ui';
 import { Text } from 'react-native';
 import { getInvestigatorImageUrl as getImageUrl } from '@shared/api/getInvestigatorImageUrl';
@@ -27,20 +27,20 @@ export const InvestigatorDescription = ({
   // const 
 
   return (
-    <Container>
-      <MainInfo>
+    <C.Container>
+      <C.MainInfo>
         <Column>
           
         </Column>
         <Column>
-          <Image
+          <C.Image
             source={source}
           />
         </Column>
-      </MainInfo>
-      <InvestigatorText>
-        {investigator.text}
-      </InvestigatorText>
-    </Container>
+      </C.MainInfo>
+      <C.InvestigatorTextContainer>
+        <C.InvestigatorText value={investigator.text}/>
+      </C.InvestigatorTextContainer>
+    </C.Container>
   );
 }
