@@ -1,7 +1,7 @@
-import { Pressable, ScrollView, Text, View } from "react-native";
+import { View } from "react-native";
 import styled from "styled-components/native";
 import { InvestigatorDetailSelectCard } from "../FactionCard";
-import { color, size } from "@shared/config";
+import { size } from "@shared/config";
 
 export const Container: typeof View = styled(View)`
   flex: 1;
@@ -11,6 +11,7 @@ export const Container: typeof View = styled(View)`
 `
 
 export const Content: typeof View = styled(View)`
+  max-height: 100vh;
   width: 100%;
   max-width: 500px;
   padding: ${size.gap.default}px;

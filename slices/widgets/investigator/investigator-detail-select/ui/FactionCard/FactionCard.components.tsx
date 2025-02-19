@@ -45,7 +45,7 @@ export const Header: ViewWithFaction = styled(View)`
   overflow: hidden;
   flex-direction: row;
   align-items: center;
-  gap: ${size.gap.default}px;
+  gap: ${size.gap.medium}px;
   height: 55px;
 `
 
@@ -59,12 +59,13 @@ export const Body: ViewWithFaction = styled(View)`
 export const Content: typeof View = styled(View)`
   border-radius: ${borderRadius}px;
   background-color: ${color.dark30};
-  padding: ${size.gap.default}px 0;
+  padding: ${size.gap.medium}px 0;
 `
 
 
 export const ScrollContainer: typeof ScrollView = styled(ScrollView)`
-  padding: 0 ${size.gap.default}px;
+  max-height: calc(100vh - 110px);
+  padding: 0 ${size.gap.medium}px;
 `
 
 export const Icon: typeof FactionFontIcon = styled(FactionFontIcon)`
@@ -88,8 +89,8 @@ export const HeaderContent: typeof View = styled(View)`
   flex-direction: row;
   position: relative;
   z-index: 2;
-  padding: ${size.gap.small}px ${size.gap.default}px;
-  gap: ${size.gap.default}px;
+  padding: ${size.gap.small}px ${size.gap.medium}px;
+  gap: ${size.gap.medium}px;
 `
 
 export const HeaderTextContent: typeof View = styled(View)`

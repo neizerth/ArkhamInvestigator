@@ -1,3 +1,13 @@
+import type { SkillType } from "@shared/model"
+
+export const skillColors: Record<SkillType, string> = {
+  willpower: '#165385',
+  intellect: '#7A2D6C',
+  combat: '#8D181E',
+  agility: '#0D6813',
+  wild: '#635120'
+}
+
 export const color = {
   black: '#000',
   white: '#fff',
@@ -14,5 +24,6 @@ export const color = {
 
   fight: '#EE4A53',
   evade: '#48B14F',
-  taboo: '#9869f5'
+  taboo: '#9869f5',
+  skill: skillColors
 }

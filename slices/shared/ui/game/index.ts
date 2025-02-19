@@ -1,5 +1,3 @@
-export * from './Icon'
+export * from './icons'
 export * from './FactionIconImage'
-export * from './FactionFontIcon'
 export * from './GameText'
-export * from './IconNumber'

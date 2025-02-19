@@ -35,7 +35,6 @@ export const Icon = ({
     fontFamily: 'ArkhamIcons',
     fontSize: scaledFontSize,
   }
-  
   return (
     <Text
       {...props}

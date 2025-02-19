@@ -47,6 +47,7 @@
     "react-native-web": "~0.19.13",
     "react-native-webview": "13.12.5",
     "react-redux": "^9.2.0",
+    "react-responsive": "^10.0.0",
     "redux-toolkit-helpers": "^1.0.3",
     "styled-components": "^6.1.15",
     "uuid": "^11.0.5"

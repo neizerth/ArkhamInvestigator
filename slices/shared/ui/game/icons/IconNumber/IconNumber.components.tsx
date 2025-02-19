@@ -17,7 +17,7 @@ export type PredefinedIcon = Omit<IconProps, 'icon'>;
 export const Sign: typeof Char = styled(Char)`
   position: relative;
   ${({ size }: PropsWithSize) => css`
-    font-size: ${size * 0.1}px;
+    font-size: ${size * 0.4}px;
     top: -${size * 0.4}px;
   `}
 `

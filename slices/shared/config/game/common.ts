@@ -1,4 +1,4 @@
-import type { Faction } from "@shared/model";
+import type { Faction } from "../../model";
 
 export const MAX_PLAYERS = 4;
 
