@@ -3,9 +3,10 @@ import C, { Icon } from './GameText.components';
 import { parseText } from './parseText';
 import type { PropsWithChildren } from 'react';
 
+type Style = TextProps['style'];
 export type GameTextProps = TextProps & {
   value: string
-  textStyle?: TextProps['style']
+  textStyle?: Style
   iconStyle?: TextProps['style']
 }
 

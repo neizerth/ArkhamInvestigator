@@ -1,35 +1,37 @@
-import { color } from "@shared/config";
+import { color, font, size } from "@shared/config";
 import { Column, GameText, Row } from "@shared/ui";
 import { Text } from "react-native";
 import { Image as BaseImage } from "react-native";
 import { View } from "react-native";
 import styled from "styled-components/native";
+import { InvestigatorSkills } from "../InvestigatorSkills";
 
 export const Container: typeof View = styled(View)`
   flex-grow: 1;
-  gap: 10px;
+  gap: ${size.gap.default}px;
 `
 
 export const Details: typeof Column = styled(Column)`
-  gap: 10px;
+  gap: ${size.gap.default}px;
 `
 
 export const Traits: typeof Text = styled(Text)`
-  font-size: 14px;
+  font-size: ${font.size.default};
   font-family: AlegreyaBold;
   color: ${color.light10};
 `
 
 export { Column as ImageContainer }
+export { InvestigatorSkills as Skills }
 
 export const Image: typeof BaseImage = styled(BaseImage)`
   width: 100px;
-  border-radius: 6px;
+  border-radius: ${size.borderRadius.default}px;
   aspect-ratio: 1;
 `
 
 export const InvestigatorText: typeof GameText = styled(GameText)`
-  font-size: 14px;
+  font-size: ${font.size.default};
   font-family: AlegreyaMedium;
   color: ${color.light10};
 `

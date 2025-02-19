@@ -1,4 +1,4 @@
-import { color } from "@shared/config"
+import { color, font, size } from "@shared/config"
 import { View, Text } from "react-native"
 import styled from "styled-components/native"
 
@@ -13,18 +13,18 @@ export const Header: typeof View = styled(View)`
   border: 1px solid transparent;
   border-bottom-color: ${color.dark10};
 
-  margin-bottom: 10px;
+  margin-bottom: ${size.gap.default}px;
 `
 
 export const Title: typeof Text = styled(Text)`
   font-family: AlegreyaMedium;
-  font-size: 14px;
+  font-size: ${font.size.default};
   color: ${color.light10};
 
 `
 
 export const Value: typeof Text = styled(Text)`
   font-family: AlegreyaItalic;
-  font-size: 14px;
+  font-size: ${font.size.default};
   color: ${color.light10};
 `

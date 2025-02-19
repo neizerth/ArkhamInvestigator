@@ -1,11 +1,19 @@
-import C from './Skill.components.tsx';
+import { type IconNumberProps } from "@shared/ui";
+import { Container, Value } from "./Skill.components";
 
-export type SkillProps = {
-
+export type SkillProps = IconNumberProps & {
+  value: number
+  icon: string
 }
 
-export const Skill = ({}: SkillProps) => {
+export const Skill = ({
+  value
+}: SkillProps) => {
   return (
-    <></>
+    <Container>
+      <Value
+        value={value}
+      />
+    </Container>
   );
 }

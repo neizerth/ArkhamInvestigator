@@ -1,4 +1,4 @@
-import { color, factionColor } from "@shared/config";
+import { color, factionColor, font, size } from "@shared/config";
 import type { FC } from "react";
 import { ScrollView, Text, View } from "react-native";
 import type { TextProps, ViewProps } from "react-native";
@@ -7,7 +7,8 @@ import styled, { css } from "styled-components/native";
 import type { PropsWithFaction } from "@shared/model/ui";
 import { FactionBackground } from "../FactionBackground";
 import type { Faction } from "@shared/model";
-import { FactionFontIcon, Icon as BaseIcon, IconProps } from "@shared/ui";
+import { FactionFontIcon, Icon as BaseIcon } from "@shared/ui";
+import type { IconProps } from "@shared/ui";
 
 export type ElementWithFaction<T> = FC<T & PropsWithFaction>
 export type ViewWithFaction = ElementWithFaction<ViewProps>
@@ -16,6 +17,7 @@ export type TextWithFaction = ElementWithFaction<TextProps>
 const getBackgroundColor = (faction: Faction) => factionColor[faction].darkBackground;
 
 const textColor = color.light15;
+const borderRadius = size.borderRadius.default;
 
 export const Background: typeof FactionBackground = styled(FactionBackground)`
   position: absolute;
@@ -30,7 +32,7 @@ export const Background: typeof FactionBackground = styled(FactionBackground)`
 
 export const Container: typeof View = styled(View)`
   overflow: hidden;
-  border-radius: 6px;
+  border-radius: ${borderRadius}px;
 `
 
 
@@ -38,12 +40,12 @@ export const Header: ViewWithFaction = styled(View)`
   ${({ faction }: PropsWithFaction) => css`
     background-color: ${getBackgroundColor(faction)};
   `}
-  border-radius: 6px 6px 0px 0px;
+  border-radius: ${borderRadius}px ${borderRadius}px 0px 0px;
   position: relative;
   overflow: hidden;
   flex-direction: row;
   align-items: center;
-  gap: 10px;
+  gap: ${size.gap.default}px;
   height: 55px;
 `
 
@@ -55,14 +57,14 @@ export const Body: ViewWithFaction = styled(View)`
 `
 
 export const Content: typeof View = styled(View)`
-  border-radius: 6px;
+  border-radius: ${borderRadius}px;
   background-color: ${color.dark30};
-  padding: 10px 0;
+  padding: ${size.gap.default}px 0;
 `
 
 
 export const ScrollContainer: typeof ScrollView = styled(ScrollView)`
-  padding: 0 10px;
+  padding: 0 ${size.gap.default}px;
 `
 
 export const Icon: typeof FactionFontIcon = styled(FactionFontIcon)`
@@ -86,8 +88,8 @@ export const HeaderContent: typeof View = styled(View)`
   flex-direction: row;
   position: relative;
   z-index: 2;
-  padding: 5px 10px;
-  gap: 10px;
+  padding: ${size.gap.small}px ${size.gap.default}px;
+  gap: ${size.gap.default}px;
 `
 
 export const HeaderTextContent: typeof View = styled(View)`
@@ -96,7 +98,7 @@ export const HeaderTextContent: typeof View = styled(View)`
 `
 
 const HeaderText: typeof Text = styled(Text)`
-  font-size: 16px;
+  font-size: ${font.size.m}px;
   color: ${textColor};
 `
 

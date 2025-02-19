@@ -1,8 +1,6 @@
 import type { InvestigatorDetails } from '@shared/model';
 import type { InvestigatorDetailItem } from '../../model/common';
 import * as C from './InvestigatorDescription.components';
-import { Column, Row } from '@shared/ui';
-import { Text } from 'react-native';
 import { getInvestigatorImageUrl as getImageUrl } from '@shared/api/getInvestigatorImageUrl';
 
 export type InvestigatorDescriptionProps = {
@@ -28,6 +26,7 @@ export const InvestigatorDescription = ({
       <C.MainInfo>
         <C.Details>
           <C.Traits>{investigator.traits}</C.Traits>
+          <C.Skills investigator={investigator}/>
         </C.Details>
         <C.ImageContainer>
           <C.Image source={source}/>
