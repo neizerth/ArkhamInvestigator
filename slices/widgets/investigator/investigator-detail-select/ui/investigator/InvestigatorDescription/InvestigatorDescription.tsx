@@ -1,5 +1,5 @@
 import type { InvestigatorDetails } from '@shared/model';
-import type { InvestigatorDetailItem } from '../../model/common';
+import type { InvestigatorDetailItem } from '../../../model/common';
 import * as C from './InvestigatorDescription.components';
 import { getInvestigatorImageUrl as getImageUrl } from '@shared/api/getInvestigatorImageUrl';
 

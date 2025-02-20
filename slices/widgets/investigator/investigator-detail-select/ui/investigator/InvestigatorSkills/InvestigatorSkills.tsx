@@ -20,7 +20,7 @@ export const InvestigatorSkills = ({
       <Willpower value={skill_willpower}/>
       <Intellect value={skill_intellect}/>
       <Combat value={skill_combat}/>
-      <Agility value={skill_willpower}/>
+      <Agility value={skill_agility}/>
     </Container>
   );
 }

@@ -1,14 +1,13 @@
 import { selectCurrentInvestigatorDetails, useAppDispatch, useAppSelector } from "@shared/lib";
 import { Container, Content, Card, Sections } from "./InvestigatorDetailSelect.components";
-import { TopBar, TopBarButton, TopBarPlaceholder } from "@widgets/top-bar";
 import { router } from "expo-router";
 import type { Faction } from "@shared/model";
 import { useState } from "react";
-import { getSkins, getVariants } from "../../lib";
-import type { InvestigatorDetailItem } from "../../model";
-import { DataSection } from "../DataSection";
+import { getSkins, getVariants } from "../../../lib";
+import type { InvestigatorDetailItem } from "../../../model";
 import { Outside } from "@shared/ui";
 import { InvestigatorDescription } from "../InvestigatorDescription";
+import { DataSection } from "../../data";
 
 type DetailItem = InvestigatorDetailItem | null;
 export const InvestigatorDetailSelect = () => {

@@ -1,8 +1,8 @@
 import { InvestigatorPreview } from '@widgets/investigator/investigator-preview';
-import type { InvestigatorDetailItem as Item} from '../../model';
+import type { InvestigatorDetailItem as Item} from '../../../model';
 import { UnselectedDetail } from '../UnselectedDetail';
 import { Container, List } from './DetailSelect.components';
-import { CARD_SIZE } from '../../config';
+import { CARD_SIZE } from '../../../config';
 import { useCallback, useEffect, useState } from 'react';
 
 export type DetailSelectProps = {

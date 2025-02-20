@@ -1,5 +1,5 @@
 import { Row } from "@shared/ui"
-import { Skill, type SkillProps } from "../Skill"
+import { Skill, type SkillProps } from "../../Skill"
 import styled from "styled-components/native"
 import type { FC } from "react"
 import { size } from "@shared/config"
@@ -9,7 +9,7 @@ export const Container: typeof Row = styled(Row)`
   gap: ${size.gap.small}px;
 `
 
-type SkillWithIconProps = Omit<SkillProps, 'type' | 'icon'>;
+type SkillWithIconProps = Omit<SkillProps, 'type' | 'icon' | 'skillType'>;
 
 export const createSkill = (skillType: SkillType): FC<SkillWithIconProps> => 
   styled(Skill)

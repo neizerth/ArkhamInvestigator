@@ -1,6 +1,6 @@
 import { View } from "react-native";
 import styled from "styled-components/native";
-import { InvestigatorDetailSelectCard } from "../FactionCard";
+import { InvestigatorDetailSelectCard } from "../../FactionCard";
 import { size } from "@shared/config";
 
 export const Container: typeof View = styled(View)`
@@ -12,6 +12,7 @@ export const Container: typeof View = styled(View)`
 
 export const Content: typeof View = styled(View)`
   flex: 1;
+  justify-content: center;
   width: 100%;
   max-width: 500px;
   padding: ${size.gap.default}px;

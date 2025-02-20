@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react';
-import { DetailSection as Section, type DetailSectionProps } from '../DetailSection';
+import { DetailSection as Section, type DetailSectionProps } from '../../DetailSection';
 import { DetailSelect as Select, type DetailSelectProps } from '../DetailSelect';
-import type { InvestigatorDetailItem } from '../../model';
+import type { InvestigatorDetailItem } from '../../../model';
 
 
 type Item = DetailSelectProps['selected'];
