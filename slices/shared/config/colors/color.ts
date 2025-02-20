@@ -1,11 +1,30 @@
 import type { SkillType } from "@shared/model"
 
-export const skillColors: Record<SkillType, string> = {
-  willpower: '#165385',
-  intellect: '#7A2D6C',
-  combat: '#8D181E',
-  agility: '#0D6813',
-  wild: '#635120'
+type SkillColors = {
+  dark: string;
+  light: string;
+}
+export const skillColors: Record<SkillType, SkillColors> = {
+  willpower: {
+    dark: '#217CC8',
+    light: '#165385'
+  },
+  intellect: {
+    dark: '#B743A2',
+    light: '#7A2D6C'
+  },
+  combat: {
+    dark: '#D3242D',
+    light: '#8D181E'
+  },
+  agility: {
+    dark: '#139C1D',
+    light: '#0D6813'
+  },
+  wild: {
+    dark: '#217CC8',
+    light: '#635120'
+  }
 }
 
 export const color = {

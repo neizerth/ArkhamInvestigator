@@ -1,11 +1,12 @@
 import type { PropsWithSkill } from "@shared/model/ui";
-import { Background, Container, Foreground } from "./SkillIcon.components";
+import { Background, Container, Foreground, PropsWithTheme } from "./SkillIcon.components";
 import type { IconProps } from "../Icon";
 
-export type SkillIconProps = Omit<IconProps, 'icon'> & PropsWithSkill;
+export type SkillIconProps = Omit<IconProps, 'icon'> & PropsWithSkill & PropsWithTheme;
 
 export const SkillIcon = ({
   skillType,
+  dark,
   ...props
 }: SkillIconProps) => {
   const foreground = `skill_${skillType}_inverted`;
@@ -16,6 +17,7 @@ export const SkillIcon = ({
         {...props}
         skillType={skillType}
         icon={background}
+        dark={dark}
       />
       <Foreground
         {...props}

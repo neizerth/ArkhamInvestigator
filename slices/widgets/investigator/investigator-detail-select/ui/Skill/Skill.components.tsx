@@ -45,7 +45,12 @@ export const Value: FC<IconNumberProps & PropsWithBreakpoint> = styled(IconNumbe
   `}
 `
 
-export const Icon: FC<SkillIconProps & PropsWithBreakpoint> = styled(SkillIcon)`
+type IconProps = Omit<SkillIconProps, 'dark'> & PropsWithBreakpoint
+
+export const Icon: FC<IconProps> = styled(SkillIcon)
+  .attrs({
+    dark: true
+  })`
   ${({ breakpoint }: PropsWithBreakpoint) => css`
     font-size: ${getFontSize(breakpoint).icon}px;
   `}
