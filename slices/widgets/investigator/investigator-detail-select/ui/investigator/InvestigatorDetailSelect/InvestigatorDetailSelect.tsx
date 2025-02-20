@@ -2,12 +2,13 @@ import { selectCurrentInvestigatorDetails, useAppDispatch, useAppSelector } from
 import { Container, Content, Card, Sections } from "./InvestigatorDetailSelect.components";
 import { router } from "expo-router";
 import type { Faction } from "@shared/model";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { getSkins, getVariants } from "../../../lib";
 import type { InvestigatorDetailItem } from "../../../model";
 import { Outside } from "@shared/ui";
 import { InvestigatorDescription } from "../InvestigatorDescription";
 import { DataSection } from "../../data";
+import { setInvestigatorSkin, setInvestigatorVariant } from "@shared/lib/store";
 
 type DetailItem = InvestigatorDetailItem | null;
 export const InvestigatorDetailSelect = () => {
@@ -26,9 +27,25 @@ export const InvestigatorDetailSelect = () => {
   const skins = getSkins(details);
   const faction = investigator.faction_code as Faction;
 
-  const goBack = () => {
+  const goBack = useCallback(() => {
     router.back();
-  }
+  }, [])
+
+  const changeSkin = useCallback((item: DetailItem) => {
+    dispatch(setInvestigatorSkin({
+      code: investigator.code,
+      skinId: item?.value || null
+    }))
+    setSkin(item);
+  }, [])
+
+  const changeVariant = useCallback((item: DetailItem) => {
+    dispatch(setInvestigatorVariant({
+      code: investigator.code,
+      variantId: item?.value || null
+    }))
+    setVariant(item);
+  }, [])
 
   return (
     <Container>
@@ -54,7 +71,7 @@ export const InvestigatorDetailSelect = () => {
             <DataSection
               title="Skins"
               data={skins}
-              onChange={setSkin}
+              onChange={changeSkin}
               defaultValue={null}
               showIcon={false}
               showNone

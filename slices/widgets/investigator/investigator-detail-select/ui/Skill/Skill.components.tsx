@@ -31,6 +31,7 @@ const getFontSize = getMaxBreakpoint(fontSize);
 
 export const Container: typeof Row = styled(Row)`
   justify-content: center;
+  min-width: 30px;
   gap: ${size.gap.small}px;
   background-color: ${color.dark20};
   padding: ${size.gap.small}px;

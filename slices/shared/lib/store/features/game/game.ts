@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { InvestigatorDetails, Nullable, SelectedInvestigator } from '@shared/model';
 import { createSliceState } from 'redux-toolkit-helpers';
+import reducers from './game.reducers'
 
 export type IGameState = {
   selectedInvestigators: SelectedInvestigator[]
@@ -12,14 +13,22 @@ const initialState: IGameState = {
   currentInvestigatorDetails: null
 }
 
+const state = createSliceState(initialState);
+
 export const game = createSlice({
   name: 'game',
-  ...createSliceState(initialState)
+  ...state,
+  reducers: {
+    ...reducers,
+    ...state.reducers
+  }
 });
 
 export const {
   setSelectedInvestigators,
-  setCurrentInvestigatorDetails
+  setCurrentInvestigatorDetails,
+  setInvestigatorSkin,
+  setInvestigatorVariant
 } = game.actions;
 
 export const {

@@ -29,13 +29,13 @@ export const removeSelectedInvestigator: ActionCreator<AppThunk> = (code: string
     dispatch(setSelectedInvestigators(selectedInvestigators));
   }
 
-  export const addSelectedInvestigator: ActionCreator<AppThunk> = (investigator: SelectedInvestigator) => 
-    (dispatch, getState) => {
-      const state = getState();
-      const selected = selectSelectedInvestigators(state);
-  
-      dispatch(setSelectedInvestigators([
-        ...selected,
-        investigator
-      ]));
-    }
+export const addSelectedInvestigator: ActionCreator<AppThunk> = (investigator: SelectedInvestigator) => 
+  (dispatch, getState) => {
+    const state = getState();
+    const selected = selectSelectedInvestigators(state);
+
+    dispatch(setSelectedInvestigators([
+      ...selected,
+      investigator
+    ]));
+  }

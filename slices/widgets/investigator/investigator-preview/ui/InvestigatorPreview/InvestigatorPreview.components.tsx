@@ -52,6 +52,7 @@ export const Image: FC<ImageProps & SizeProps> = styled(NativeImage)
 export const Container: typeof TouchableOpacity = styled(TouchableOpacity)`
   position: relative;
   overflow: hidden;
+  background-color: rgba(0, 0, 0, 0.2);
 `
 
 export const Info: typeof View = styled(View)`
