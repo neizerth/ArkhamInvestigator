@@ -1,7 +1,7 @@
 export const size = {
   borderRadius: {
     default: 5,
-    l: 10
+    large: 10
   },
   gap: {
     small: 5,

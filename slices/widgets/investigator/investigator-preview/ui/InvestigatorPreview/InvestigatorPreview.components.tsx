@@ -67,7 +67,7 @@ export const Info: typeof View = styled(View)`
   justify-content: center;
   align-items: center;
   background-color: rgba(0, 0, 0, 0.4);
-  border-radius: 0 ${size.borderRadius.l}px 0 0;
+  border-radius: 0 ${size.borderRadius.large}px 0 0;
   padding: 2px 8px;
   padding-top: 2px;
 `

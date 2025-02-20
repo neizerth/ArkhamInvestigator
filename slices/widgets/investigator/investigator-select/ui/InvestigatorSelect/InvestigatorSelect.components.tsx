@@ -1,9 +1,14 @@
-import { ScrollView, Text } from "react-native";
+import { ScrollView, Text, View } from "react-native";
 import styled from "styled-components/native";
 import { color, font } from "@shared/config";
 import { Alegreya } from "@shared/fonts/Alegreya";
+import { InvestigatorSelectFooter } from "../InvestigatorSelectFooter";
 
-export const Container: typeof ScrollView = styled(ScrollView)`
+export const Container: typeof View = styled(View)`
+  flex: 1;
+`
+
+export const Content: typeof ScrollView = styled(ScrollView)`
   flex: 1;
 `
 
@@ -13,4 +18,13 @@ export const Separator: typeof Text = styled(Text)`
   font-size: ${font.size.large}px;
   color: ${color.light10};
   margin: 20px 0;
+`
+
+export const Footer: typeof InvestigatorSelectFooter = styled(InvestigatorSelectFooter)`
+  position: fixed;
+  z-index: 1;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  right: 0;
 `

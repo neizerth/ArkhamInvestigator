@@ -1,6 +1,6 @@
 import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
 import { propEq } from 'ramda';
-import { Container, Separator } from './InvestigatorSelect.components';
+import { Container, Content, Footer, Separator } from './InvestigatorSelect.components';
 import { selectAvailableInvestigators } from '../../lib/store';
 import { InvestigatorList as List } from '../InvestigatorList';
 import { addSelectedInvestigator, includesBy, removeSelectedInvestigator, selectSelectedInvestigators, setCurrentInvestigatorDetails } from '@shared/lib';
@@ -8,9 +8,6 @@ import type { InvestigatorDetails } from '@shared/model';
 import { useCallback } from 'react';
 import { MAX_PLAYERS } from '@shared/config';
 import { router } from 'expo-router';
-
-export type InvestigatorSelectProps = {
-}
 
 export const InvestigatorSelect = () => {
   const data = useAppSelector(selectAvailableInvestigators);
@@ -50,17 +47,20 @@ export const InvestigatorSelect = () => {
 
   return (
     <Container>
-      <List 
-        data={official} 
-        onChange={onChange}
-        selected={selected}
-      />
-      <Separator>— Fan-made Investigators —</Separator>
-      <List 
-        data={fanMade} 
-        onChange={onChange}
-        selected={selected}
-      />
+      <Content>
+        <List 
+          data={official} 
+          onChange={onChange}
+          selected={selected}
+        />
+        <Separator>— Fan-made Investigators —</Separator>
+        <List 
+          data={fanMade} 
+          onChange={onChange}
+          selected={selected}
+        />
+      </Content>
+      <Footer/>
     </Container>
   );
 }

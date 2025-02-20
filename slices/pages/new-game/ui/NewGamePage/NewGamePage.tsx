@@ -16,8 +16,7 @@ export const NewGamePage = () => {
         onBack={goHome}
         title="Select Investigator"
       />
-      <InvestigatorSelect
-      />
+      <InvestigatorSelect/>
     </Container>
   );
 }

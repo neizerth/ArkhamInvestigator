@@ -39,3 +39,6 @@ export const addSelectedInvestigator: ActionCreator<AppThunk> = (investigator: S
       investigator
     ]));
   }
+
+  export const clearSelectedInvestigators: ActionCreator<AppThunk> = () => 
+    (dispatch) => dispatch(setSelectedInvestigators([]));
