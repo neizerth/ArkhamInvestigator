@@ -18,13 +18,13 @@ export const Header: typeof View = styled(View)`
 
 export const Title: typeof Text = styled(Text)`
   font-family: AlegreyaMedium;
-  font-size: ${font.size.default};
+  font-size: ${font.size.default}px;
   color: ${color.light10};
 
 `
 
 export const Value: typeof Text = styled(Text)`
   font-family: AlegreyaItalic;
-  font-size: ${font.size.default};
+  font-size: ${font.size.default}px;
   color: ${color.light10};
 `

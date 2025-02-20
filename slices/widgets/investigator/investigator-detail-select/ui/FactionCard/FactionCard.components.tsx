@@ -31,7 +31,6 @@ export const Background: typeof FactionBackground = styled(FactionBackground)`
 ` 
 
 export const Container: typeof View = styled(View)`
-  overflow: hidden;
   border-radius: ${borderRadius}px;
 `
 
@@ -50,6 +49,9 @@ export const Header: ViewWithFaction = styled(View)`
 `
 
 export const Body: ViewWithFaction = styled(View)`
+  flex: 1;
+  
+  border-radius: 0px 0px ${borderRadius}px ${borderRadius}px;
   ${({ faction }: PropsWithFaction) => css`
     background-color: ${getBackgroundColor(faction)};
   `}
@@ -57,6 +59,8 @@ export const Body: ViewWithFaction = styled(View)`
 `
 
 export const Content: typeof View = styled(View)`
+  flex: 1;
+  
   border-radius: ${borderRadius}px;
   background-color: ${color.dark30};
   padding: ${size.gap.medium}px 0;
@@ -64,7 +68,7 @@ export const Content: typeof View = styled(View)`
 
 
 export const ScrollContainer: typeof ScrollView = styled(ScrollView)`
-  max-height: calc(100vh - 110px);
+  flex: 1;
   padding: 0 ${size.gap.medium}px;
 `
 
@@ -92,6 +96,8 @@ export const HeaderContent: typeof View = styled(View)`
   padding: ${size.gap.small}px ${size.gap.medium}px;
   gap: ${size.gap.medium}px;
 `
+
+export { View as ScrollContent }
 
 export const HeaderTextContent: typeof View = styled(View)`
   flex: 1;

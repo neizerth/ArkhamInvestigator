@@ -1,12 +1,15 @@
 import type { PropsWithFaction } from '@shared/model/ui';
 import * as C from './FactionCard.components';
-import type { ViewProps } from 'react-native';
+import type { LayoutChangeEvent, ViewProps } from 'react-native';
+import { useCallback, useState } from 'react';
 
 export type InvestigatorDetailSelectCardProps = ViewProps & PropsWithFaction & {
   title?: string
   subtitle?: string
   onClose?: () => void
 }
+
+const MAX_HEIGHT_AREA = 87;
 
 export const InvestigatorDetailSelectCard = ({
   faction,
@@ -16,8 +19,19 @@ export const InvestigatorDetailSelectCard = ({
   onClose,
   ...props
 }: InvestigatorDetailSelectCardProps) => {
+  const [maxHeight, setMaxHeight] = useState<number>(0);
+
+  const onLayout = useCallback((e: LayoutChangeEvent) => {
+    const { height } = e.nativeEvent.layout;
+    setMaxHeight(height + MAX_HEIGHT_AREA);
+  }, []);
+
+  const style = {
+    maxHeight
+  }
+  
   return (
-    <C.Container {...props}>
+    <C.Container {...props} style={[style, props.style]}>
       <C.Header faction={faction}>
         <C.Background faction={faction}/>
         <C.HeaderContent>
@@ -38,7 +52,9 @@ export const InvestigatorDetailSelectCard = ({
       <C.Body faction={faction}>
         <C.Content>
           <C.ScrollContainer>
-            {children}
+            <C.ScrollContent onLayout={onLayout}>
+              {children}
+            </C.ScrollContent>
           </C.ScrollContainer>
         </C.Content>
       </C.Body>

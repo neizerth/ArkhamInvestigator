@@ -14,8 +14,8 @@ type FontSizeRecord = Partial<Record<
 
 const fontSize: FontSizeRecord = {
   defaultSmall: {
-    value: 10,
-    icon: 13
+    value: 11,
+    icon: 12
   },
   mobileMedium: {
     value: 13,
@@ -23,7 +23,7 @@ const fontSize: FontSizeRecord = {
   },
   mobileLarge: {
     value: 16,
-    icon: 18
+    icon: 16
   }
 }
 
@@ -41,13 +41,12 @@ export const Container: typeof Row = styled(Row)`
 export const Value: FC<IconNumberProps & PropsWithBreakpoint> = styled(IconNumber)`
   color: white;
   ${({ breakpoint }: PropsWithBreakpoint) => css`
-    font-size: ${getFontSize(breakpoint).value};
+    font-size: ${getFontSize(breakpoint).value}px;
   `}
 `
 
 export const Icon: FC<SkillIconProps & PropsWithBreakpoint> = styled(SkillIcon)`
-  font-size: 13px;
   ${({ breakpoint }: PropsWithBreakpoint) => css`
-    font-size: ${getFontSize(breakpoint).icon};
+    font-size: ${getFontSize(breakpoint).icon}px;
   `}
 `

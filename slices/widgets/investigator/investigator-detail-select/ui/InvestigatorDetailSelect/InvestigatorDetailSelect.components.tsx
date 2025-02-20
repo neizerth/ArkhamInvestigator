@@ -11,7 +11,7 @@ export const Container: typeof View = styled(View)`
 `
 
 export const Content: typeof View = styled(View)`
-  max-height: 100vh;
+  flex: 1;
   width: 100%;
   max-width: 500px;
   padding: ${size.gap.default}px;
@@ -27,5 +27,5 @@ export const Sections: typeof View = styled(View)
   `
 
 export const Card: typeof InvestigatorDetailSelectCard = styled(InvestigatorDetailSelectCard)`
-
+  flex: 1;
 `

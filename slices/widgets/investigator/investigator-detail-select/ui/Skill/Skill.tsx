@@ -12,7 +12,6 @@ export const Skill = ({
   skillType
 }: SkillProps) => {
   const { breakpoint } = useBreakpoint();
-  console.log({ breakpoint });
   return (
     <Container>
       <Value value={value} breakpoint={breakpoint}/>

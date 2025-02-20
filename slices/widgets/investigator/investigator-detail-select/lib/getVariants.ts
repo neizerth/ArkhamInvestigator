@@ -23,8 +23,6 @@ export const getVariants = (details: InvestigatorDetails) => {
     details: details
   };
 
-  console.log({ alternate });
-
   const variants = media.variants.map((variant): InvestigatorDetailItem => {
     const { type, name } = variant;
     const id = 'code' in variant ? variant.code : code;
