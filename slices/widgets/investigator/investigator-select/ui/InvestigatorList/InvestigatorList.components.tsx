@@ -8,10 +8,10 @@ export const Container: typeof FlatList = styled(FlatList)
   .attrs(({ numColumns = 1 }: FlatListProps<unknown>) => ({
     columnWrapperStyle: numColumns > 1 ? {
       justifyContent: 'center',
-      gap: `${GAP}px`
+      gap: GAP
     } : null,
     contentContainerStyle: {
-      gap: `${GAP}px`
+      gap: GAP
     }
   }))`
     gap: ${size.gap.default}px;

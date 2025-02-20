@@ -3,7 +3,7 @@ import { Teutonic } from "@shared/fonts/Teutonic";
 import * as ReactNative from "react-native";
 import styled from "styled-components/native";
 
-const background = require('./images/start.svg');
+const background = require('./images/start.png');
 
 export const Container: typeof ReactNative.TouchableOpacity = styled.TouchableOpacity`
   height: 80px;
@@ -18,7 +18,6 @@ export const Background: typeof ReactNative.ImageBackground = styled(ReactNative
     resizeMethod: 'resize'
   })`
     width: 250px;
-    height: 100%;
     flex: 1;
     justify-content: center;
     align-items: center;
