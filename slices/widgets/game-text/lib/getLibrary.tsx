@@ -45,7 +45,7 @@ export const getLibrary = ({
 
     if (type === 'icon') {
       if (!elementProps || !('icon' in elementProps) || typeof elementProps.icon !== 'string') {
-        return <Text key={key}/>
+        return <Text key={v4()}/>
       }
       const { icon } = elementProps;
       const value = iconMapping[icon] || icon;

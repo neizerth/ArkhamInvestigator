@@ -9,6 +9,7 @@ import { FactionBackground } from "../FactionBackground";
 import type { Faction } from "@shared/model";
 import { FactionFontIcon, Icon as BaseIcon } from "@shared/ui";
 import type { IconProps } from "@shared/ui";
+import { Alegreya } from "@shared/fonts/Alegreya";
 
 export type ElementWithFaction<T> = FC<T & PropsWithFaction>
 export type ViewWithFaction = ElementWithFaction<ViewProps>
@@ -110,9 +111,9 @@ const HeaderText: typeof Text = styled(Text)`
 `
 
 export const Title: typeof Text = styled(HeaderText)`
-  font-family: AlegreyaBold;
+  font-family: ${Alegreya.bold};
 `
 
 export const Subtitle: typeof Text = styled(HeaderText)`
-  font-family: AlegreyaItalic;
+  font-family: ${Alegreya.italic};
 `

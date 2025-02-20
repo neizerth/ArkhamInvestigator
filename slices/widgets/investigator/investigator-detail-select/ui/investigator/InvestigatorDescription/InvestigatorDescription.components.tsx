@@ -6,6 +6,7 @@ import { View } from "react-native";
 import styled from "styled-components/native";
 import { InvestigatorSkills } from "../InvestigatorSkills";
 import { GameText } from "@widgets/game-text";
+import { Alegreya } from "@shared/fonts/Alegreya";
 
 export const Container: typeof View = styled(View)`
   flex-grow: 1;
@@ -18,7 +19,7 @@ export const Details: typeof Column = styled(Column)`
 
 export const Traits: typeof Text = styled(Text)`
   font-size: ${font.size.default}px;
-  font-family: AlegreyaBold;
+  font-family: ${Alegreya.bold};
   color: ${color.light10};
 `
 
@@ -33,7 +34,7 @@ export const Image: typeof BaseImage = styled(BaseImage)`
 
 export const InvestigatorText: typeof GameText = styled(GameText)`
   font-size: ${font.size.default}px;
-  font-family: AlegreyaMedium;
+  font-family: ${Alegreya.medium};
   color: ${color.light10};
 `
 

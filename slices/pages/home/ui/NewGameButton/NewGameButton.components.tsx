@@ -1,4 +1,5 @@
 import { color } from "@shared/config";
+import { Teutonic } from "@shared/fonts/Teutonic";
 import * as ReactNative from "react-native";
 import styled from "styled-components/native";
 
@@ -24,7 +25,7 @@ export const Background: typeof ReactNative.ImageBackground = styled(ReactNative
   `
 
 export const Text: typeof ReactNative.Text = styled.Text`
-  font-family: Teutonic;
+  font-family: ${Teutonic.regular};
   font-size: 32px;
   color: ${color.light10};
 `

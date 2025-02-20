@@ -3,6 +3,7 @@ import { propEq } from 'ramda';
 import { StyleSheet, type TextProps } from 'react-native';
 import { getIconScale } from './getIconScale';
 import { Text } from 'react-native';
+import { ArkhamIcons } from '@shared/fonts/ArkhamIcons';
 
 export type IconScaleType = 'fixedHeight' | 'maxHeight' | 'circle' | 'auto';
 
@@ -32,7 +33,7 @@ export const Icon = ({
   const scaledFontSize = fontSize && fontSize * scale;
 
   const fontSizeStyles = {
-    fontFamily: 'ArkhamIcons',
+    fontFamily: ArkhamIcons.default,
     fontSize: scaledFontSize,
   }
   return (
