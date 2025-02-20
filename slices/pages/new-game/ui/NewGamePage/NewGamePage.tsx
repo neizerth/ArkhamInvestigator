@@ -7,8 +7,8 @@ import { router } from "expo-router";
 export const NewGamePage = () => {
 
   const goHome = () => {
-    impactAsync();
     router.push('/');
+    impactAsync();
   }
   return (
     <Container>

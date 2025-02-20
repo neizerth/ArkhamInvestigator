@@ -7,6 +7,7 @@ import type { TouchableOpacityProps } from "react-native"
 import { useImageSize } from "@widgets/investigator/investigator-select/lib/hooks"
 import type { Investigator as InvestigatorMedia } from "arkham-investigator-data"
 import { InvestigatorPreviewFactionIcon as FactionIcon } from "../InvestigatorPreviewFactionIcon"
+import { memo } from "react"
 
 export type InvestigatorPreviewProps = TouchableOpacityProps & {
   investigator: InvestigatorSource
@@ -27,6 +28,7 @@ export const InvestigatorPreview = ({
   media,
   ...props
 }: InvestigatorPreviewProps) => {
+  console.log('render', investigator.code)
   const defaultSize = useImageSize();
   const size = props.size || defaultSize;
 
@@ -61,3 +63,5 @@ export const InvestigatorPreview = ({
     </Container>
   )
 }
+
+export const InvestigatorPreviewMemo = memo(InvestigatorPreview); 

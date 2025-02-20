@@ -10,7 +10,7 @@ export const Container: typeof View = styled(View)`
 export const List: typeof ScrollView = styled(ScrollView)
   .attrs({
     contentContainerStyle: {
-      gap: `${size.gap.default}px`
+      gap: size.gap.default
     }
   })`
     flex-direction: row;

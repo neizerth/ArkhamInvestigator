@@ -2,7 +2,8 @@ import { capitalize } from "../lib/util/string";
 import type { BreakpointSize, DeviceBreakpoints, DeviceBreakpointType, DeviceType } from "../model";
 import { Platform } from "react-native";
 
-export const HAVE_AVIF_SUPPORT = Platform.OS !== 'android' || (Platform.OS === 'android' && Platform.Version >= 12)
+// export const HAVE_AVIF_SUPPORT = Platform.OS !== 'android' || (Platform.OS === 'android' && Platform.Version >= 12)
+export const HAVE_AVIF_SUPPORT = false;
 
 export const breakpoints: DeviceBreakpoints = {
   default: {

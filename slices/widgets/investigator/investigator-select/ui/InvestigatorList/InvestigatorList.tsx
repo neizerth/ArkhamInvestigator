@@ -1,9 +1,8 @@
 import type { InvestigatorDetails, SelectedInvestigator } from '@shared/model';
-import { InvestigatorPreview } from '@widgets/investigator/investigator-preview';
+import { InvestigatorPreviewMemo as InvestigatorPreview } from '@widgets/investigator/investigator-preview';
 import { 
   includesBy, 
 } from '@shared/lib';
-import { useColumnsCount } from '../../lib';
 import { useCallback } from 'react';
 import { propEq } from 'ramda';
 import { Container } from './InvestigatorList.components';
@@ -24,37 +23,28 @@ export const InvestigatorList = ({
   onChange,
   ...props
 }: InvestigatorListProps) => {
-
-  const numColumns = useColumnsCount();
-
   const toggleSelected = useCallback(
     (item: InvestigatorDetails) => () => onChange(item), 
     [onChange]
   )
 
-  const isSelected = useCallback(
-    ({ investigator }: InvestigatorDetails) => includesBy(
-      propEq(investigator.code, 'code'), 
-      selected
-    ), 
-    [selected]
-  );
+  const isSelected = ({ investigator }: InvestigatorDetails) => includesBy(
+    propEq(investigator.code, 'code'), 
+    selected
+  )
 
   return (
-    <Container
-      {...props}
-      data={data}
-      key={numColumns}
-      numColumns={numColumns}
-      renderItem={({ item }) => (
+    <Container {...props}>
+      {data.map(item => (
         <InvestigatorPreview
+          delayPressIn={0}
+          key={item.investigator.code}
           onPress={toggleSelected(item)}
           selected={isSelected(item)}
           investigator={item.investigator}
           media={item.media}
         />
-      )}
-      keyExtractor={({ investigator }) => investigator.code}
-    />
-  );
+      ))}
+    </Container>
+  )
 }

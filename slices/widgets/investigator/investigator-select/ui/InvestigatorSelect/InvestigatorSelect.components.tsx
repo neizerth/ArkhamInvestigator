@@ -21,7 +21,7 @@ export const Separator: typeof Text = styled(Text)`
 `
 
 export const Footer: typeof InvestigatorSelectFooter = styled(InvestigatorSelectFooter)`
-  position: fixed;
+  position: absolute;
   z-index: 1;
   width: 100%;
   bottom: 0;

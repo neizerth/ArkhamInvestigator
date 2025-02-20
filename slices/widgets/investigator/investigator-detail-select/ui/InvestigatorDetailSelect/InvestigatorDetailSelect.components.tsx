@@ -1,6 +1,6 @@
 import { View } from "react-native";
 import styled from "styled-components/native";
-import { InvestigatorDetailSelectCard } from "../../FactionCard";
+import { InvestigatorDetailSelectCard } from "../FactionCard";
 import { size } from "@shared/config";
 
 export const Container: typeof View = styled(View)`

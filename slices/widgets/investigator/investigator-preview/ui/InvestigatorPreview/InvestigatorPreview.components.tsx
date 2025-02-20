@@ -45,6 +45,7 @@ export const Image: FC<ImageProps & SizeProps> = styled(NativeImage)
     ${({ size }: SizeProps) => css`
       aspect-ratio: 1;
       width: ${size}px;
+      height: ${size}px;
     `}
   ` 
 

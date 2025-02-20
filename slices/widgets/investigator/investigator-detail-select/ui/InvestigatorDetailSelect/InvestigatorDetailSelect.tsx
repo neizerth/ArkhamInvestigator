@@ -3,11 +3,11 @@ import { Container, Content, Card, Sections } from "./InvestigatorDetailSelect.c
 import { router } from "expo-router";
 import type { Faction } from "@shared/model";
 import { useCallback, useState } from "react";
-import { getSkins, getVariants } from "../../../lib";
-import type { InvestigatorDetailItem } from "../../../model";
+import { getSkins, getVariants } from "../../lib";
+import type { InvestigatorDetailItem } from "../../model";
 import { Outside } from "@shared/ui";
-import { InvestigatorDescription } from "../InvestigatorDescription";
-import { DataSection } from "../../data";
+import { InvestigatorDescription } from "../investigator/InvestigatorDescription";
+import { DataSection } from "../data";
 import { setInvestigatorSkin, setInvestigatorVariant } from "@shared/lib/store";
 
 type DetailItem = InvestigatorDetailItem | null;
@@ -23,6 +23,7 @@ export const InvestigatorDetailSelect = () => {
   }
 
   const { investigator } = details
+  const { code } = investigator
   const variants = getVariants(details);
   const skins = getSkins(details);
   const faction = investigator.faction_code as Faction;
@@ -33,19 +34,19 @@ export const InvestigatorDetailSelect = () => {
 
   const changeSkin = useCallback((item: DetailItem) => {
     dispatch(setInvestigatorSkin({
-      code: investigator.code,
+      code,
       skinId: item?.value || null
     }))
     setSkin(item);
-  }, [])
+  }, [dispatch, code])
 
   const changeVariant = useCallback((item: DetailItem) => {
     dispatch(setInvestigatorVariant({
-      code: investigator.code,
+      code,
       variantId: item?.value || null
     }))
     setVariant(item);
-  }, [])
+  }, [dispatch, code])
 
   return (
     <Container>
@@ -66,7 +67,7 @@ export const InvestigatorDetailSelect = () => {
             <DataSection
               title="Variants"
               data={variants}
-              onChange={setVariant}
+              onChange={changeVariant}
             />
             <DataSection
               title="Skins"

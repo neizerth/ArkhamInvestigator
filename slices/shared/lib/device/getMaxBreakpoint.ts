@@ -8,13 +8,12 @@ export const getMaxBreakpoint = <T>(
   >
 ) => (deviceType: DeviceBreakpointType) => {
     const availableDeviceTypes = Object.keys(queries) as DeviceBreakpointType[];
-
     const currentIndex = breakpointsOrder.indexOf(deviceType);
     const availableIndexes = availableDeviceTypes
       .map(
         breakpoint => breakpointsOrder.indexOf(breakpoint)
       )
-      .toSorted(ascend(identity))
+      .sort(ascend(identity))
       .filter(index => index <= currentIndex);
 
     const lastIndex = last(availableIndexes);
