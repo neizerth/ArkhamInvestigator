@@ -1,7 +1,7 @@
 export const prepareText = (text: string) => {
   return `<content>${text}</content>`
     // markdown bold
-    .replace(/\[\[(.+)\]\]/g, '<keyword>$1</keyword>')
+    .replace(/\[\[([^\]]+)\]\]/g, '<keyword>$1</keyword>')
     // icons
-    .replace(/\[(.+)\]/g, '<icon icon="$1" />')
+    .replace(/\[([^\]]+)\]/g, '<icon icon="$1" />')
 }

@@ -12,6 +12,7 @@ export const defaultComponentStyles: ComponentStyleMap = {
     fontFamily: Alegreya.boldItalic
   },
   icon: {
+    top: 1,
     marginRight: 2
   }
 }

@@ -1,8 +1,8 @@
 export const font = {
   size: {
-    s: 12,
+    small: 12,
     default: 14,
-    m: 16,
-    l: 18
+    medium: 16,
+    large: 18
   }
 }

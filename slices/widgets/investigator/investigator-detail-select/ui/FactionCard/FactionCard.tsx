@@ -19,7 +19,7 @@ export const InvestigatorDetailSelectCard = ({
   onClose,
   ...props
 }: InvestigatorDetailSelectCardProps) => {
-  const [maxHeight, setMaxHeight] = useState<number>(0);
+  const [maxHeight, setMaxHeight] = useState<number | undefined>();
 
   const onLayout = useCallback((e: LayoutChangeEvent) => {
     const { height } = e.nativeEvent.layout;
@@ -29,9 +29,11 @@ export const InvestigatorDetailSelectCard = ({
   const style = {
     maxHeight
   }
-  
+  const containerStyle = {
+    opacity: maxHeight ? 1 : 0
+  }
   return (
-    <C.Container {...props} style={[style, props.style]}>
+    <C.Container {...props} style={[style, props.style, containerStyle]}>
       <C.Header faction={faction}>
         <C.Background faction={faction}/>
         <C.HeaderContent>

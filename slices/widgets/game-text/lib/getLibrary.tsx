@@ -1,10 +1,11 @@
-import { Text, TextProps } from "react-native"
+import { TextProps } from "react-native"
 import { ComponentStyleMap } from "../model"
 import { HTMLReactParserOptions } from "html-react-parser"
 import { v4 } from "uuid"
 import { Key } from "react"
 import { Icon } from "@shared/ui"
 import { iconMapping } from "../config"
+import { Line, Text } from "../ui/GameText/GameText.components"
 
 type GetLibraryOptions = {
   componentStyles?: ComponentStyleMap
@@ -15,9 +16,7 @@ export const getLibrary = ({
   props
 }: GetLibraryOptions): HTMLReactParserOptions['library'] => ({
   cloneElement(...args) {
-
-    console.log(...args)
-    return <Text/>
+    return <Text key={v4()}/>
   },
   createElement(type, elementProps, ...children) {
     const componentStyle = componentStyles && componentStyles[type];
@@ -32,6 +31,37 @@ export const getLibrary = ({
       componentStyle
     ]
 
+    if (type === 'icon') {
+      if (!elementProps || !('icon' in elementProps) || typeof elementProps.icon !== 'string') {
+        return <Text key={v4()}/>
+      }
+      const { icon } = elementProps;
+      const value = iconMapping[icon] || icon;
+
+      const content = children
+        .map(child => (
+          <Text 
+            {...mergedProps}
+            style={props.style}
+            key={v4()}
+          >
+            {child}
+          </Text>
+        ))
+
+      return (
+        <Line key={v4()}>
+          <Icon
+            {...mergedProps}
+            key={v4()}
+            icon={value}
+            style={mergedStyles}
+          />
+          {content}
+        </Line>
+      );
+    }
+
     const content = children
       .map(child => (
         <Text 
@@ -42,26 +72,6 @@ export const getLibrary = ({
           {child}
         </Text>
       ))
-
-    if (type === 'icon') {
-      if (!elementProps || !('icon' in elementProps) || typeof elementProps.icon !== 'string') {
-        return <Text key={v4()}/>
-      }
-      const { icon } = elementProps;
-      const value = iconMapping[icon] || icon;
-
-      return (
-        <Text key={v4()}>
-          <Icon
-            {...mergedProps}
-            key={v4()}
-            icon={value}
-            style={mergedStyles}
-          />
-          {content}
-        </Text>
-      );
-    }
 
     return (
       <Text

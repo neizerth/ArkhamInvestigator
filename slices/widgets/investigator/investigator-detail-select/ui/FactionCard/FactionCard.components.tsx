@@ -106,7 +106,7 @@ export const HeaderTextContent: typeof View = styled(View)`
 `
 
 const HeaderText: typeof Text = styled(Text)`
-  font-size: ${font.size.m}px;
+  font-size: ${font.size.medium}px;
   color: ${textColor};
 `
 

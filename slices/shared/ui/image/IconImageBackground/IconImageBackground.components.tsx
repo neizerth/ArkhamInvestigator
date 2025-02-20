@@ -1,13 +1,11 @@
-import styled from "styled-components/native";
 import { View } from "react-native";
-
+import styled from "styled-components/native";
 
 export const Container: typeof View = styled(View)`
   position: relative;
 `
 
-export const Background: typeof View = styled(View)`
-  z-index: 1;
+export const Content: typeof View = styled(View)`
   position: absolute;
   top: 0;
   bottom: 0;
@@ -15,9 +13,4 @@ export const Background: typeof View = styled(View)`
   right: 0;
   justify-content: center;
   align-items: center;
-`
-
-export const Value: typeof View = styled(View)`
-  position: relative;
-  z-index: 2;
 `

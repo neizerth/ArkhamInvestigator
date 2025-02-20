@@ -12,4 +12,3 @@ export type PropsWithSkill = {
 export type PropsWithBreakpoint = {
   breakpoint: DeviceBreakpointType
 }
-

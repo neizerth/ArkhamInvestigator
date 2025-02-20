@@ -44,5 +44,7 @@ export const color = {
   fight: '#EE4A53',
   evade: '#48B14F',
   taboo: '#9869f5',
+  health: '#c71f23',
+  sanity: '#1c3e6a',
   skill: skillColors
 }

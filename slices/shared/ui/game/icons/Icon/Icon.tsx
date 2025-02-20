@@ -1,4 +1,4 @@
-import { selectIcons, useAppSelector } from '@shared/lib';
+import { scaleFontFromStyle, selectIcons, useAppSelector } from '@shared/lib';
 import { propEq } from 'ramda';
 import { StyleSheet, type TextProps } from 'react-native';
 import { getIconScale } from './getIconScale';
@@ -26,15 +26,14 @@ export const Icon = ({
   }
 
   const contents = String.fromCharCode(item.code);
-  const { fontSize } = StyleSheet.flatten(style);
 
   const scale = getIconScale(item, scaleType);
 
-  const scaledFontSize = fontSize && fontSize * scale;
+  const { fontSize, scaledFontSize } = scaleFontFromStyle(scale, style);
 
   const fontSizeStyles = {
     fontFamily: ArkhamIcons.default,
-    fontSize: scaledFontSize,
+    fontSize: scaledFontSize
   }
   return (
     <Text

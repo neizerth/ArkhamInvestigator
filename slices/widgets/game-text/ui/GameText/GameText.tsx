@@ -16,8 +16,12 @@ export const GameText = ({
   ...props
 }: GameTextProps) => {
   const text = prepareText(value)
+  
   const library = getLibrary({
-    componentStyles,
+    componentStyles: {
+      ...defaultComponentStyles,
+      ...componentStyles
+    },
     props
   });
   return parse(text, {

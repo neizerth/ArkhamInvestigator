@@ -10,7 +10,7 @@ export const Container: typeof ScrollView = styled(ScrollView)`
 export const Separator: typeof Text = styled(Text)`
   font-family: ${Alegreya.medium};
   text-align: center;
-  font-size: ${font.size.l}px;
+  font-size: ${font.size.large}px;
   color: ${color.light10};
   margin: 20px 0;
 `

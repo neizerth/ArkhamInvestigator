@@ -27,6 +27,7 @@ export const InvestigatorDescription = ({
         <C.Details>
           <C.Traits>{investigator.traits}</C.Traits>
           <C.Skills investigator={investigator}/>
+          <C.Stats investigator={investigator}/>
         </C.Details>
         <C.ImageContainer>
           <C.Image source={source}/>

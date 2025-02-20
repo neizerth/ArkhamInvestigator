@@ -15,7 +15,7 @@ export const Container: typeof View = styled(View)`
   position: relative;
 `
 
-export const Background: FC<IconProps & PropsWithSkill> = styled(Icon)`
+export const Background: FC<IconProps & PropsWithSkill & PropsWithTheme> = styled(Icon)`
   position: absolute;
   left: 0;
   top: 0;

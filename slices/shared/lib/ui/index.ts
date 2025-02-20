@@ -1,1 +1,1 @@
-export * from './getFontFamily'
+export * from './scaleFontFromStyle'

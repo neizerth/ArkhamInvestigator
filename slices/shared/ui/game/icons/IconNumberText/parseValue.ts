@@ -1,5 +1,5 @@
 import { v4 } from "uuid"
-import { Char, Sign } from "./IconNumber.components";
+import { Char, Sign } from "./IconNumberText.components";
 
 export const parseValue = (value: number | string, stroke = false) => 
   [...value.toString()].map(

@@ -1,34 +1,47 @@
 import { Text, type TextProps } from 'react-native';
-import { parseValue } from './parseValue';
-import { StyleSheet } from 'react-native';
-import { font } from '@shared/config';
+import { Background, Container, Value } from './IconNumber.components';
+import { IconNumberText, IconNumberTextProps } from '../IconNumberText';
+import { scaleFontFromStyle } from '@shared/lib';
 
-export type IconNumberProps = TextProps & {
+export type IconNumberProps = IconNumberTextProps & {
   value: number | string
+  backgroundStyle?: TextProps['style'],
   stroke?: boolean
 }
 
 export const IconNumber = ({
-  value,
-  stroke,
+  backgroundStyle,
   ...props
 }: IconNumberProps) => {
-  const icons = parseValue(value);
-
   const { 
-    fontSize = font.size.default 
-  } = StyleSheet.flatten(props.style);
+    stroke, 
+    ...valueProps 
+  } = props;
+
+  if (!stroke) {
+    return <IconNumberText {...props}/>;
+  }
+
+  const { scaledFontSize } = scaleFontFromStyle(1.2, props.style);
   
+  const style = [
+    props.style, 
+    { fontSize: scaledFontSize }, 
+    backgroundStyle
+  ]
+
   return (
-    <Text {...props}>
-      {icons.map((item) => (
-        <item.Component 
+    <Container>
+      <Value>
+        <IconNumberText {...valueProps}/>
+      </Value>
+      <Background>
+        <IconNumberText
           {...props}
-          key={item.id}
-          icon={item.icon}
-          size={fontSize}
+          style={style}
         />
-      ))}
-    </Text>
-  );
+      </Background>
+    </Container>
+  )
 }
+

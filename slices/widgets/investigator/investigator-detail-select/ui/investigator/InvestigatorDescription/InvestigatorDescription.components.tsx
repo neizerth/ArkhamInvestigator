@@ -7,6 +7,7 @@ import styled from "styled-components/native";
 import { InvestigatorSkills } from "../InvestigatorSkills";
 import { GameText } from "@widgets/game-text";
 import { Alegreya } from "@shared/fonts/Alegreya";
+import { InvestigatorStats } from "../InvestigatorStats";
 
 export const Container: typeof View = styled(View)`
   flex-grow: 1;
@@ -33,10 +34,10 @@ export const Image: typeof BaseImage = styled(BaseImage)`
 `
 
 export const InvestigatorText: typeof GameText = styled(GameText)`
-  font-size: ${font.size.default}px;
-  font-family: ${Alegreya.medium};
-  color: ${color.light10};
-`
+    font-size: ${font.size.default}px;
+    font-family: ${Alegreya.medium};
+    color: ${color.light10};
+  `
 
 export const InvestigatorTextContainer: typeof View = styled(View)`
   padding: 2px 0px 2px 6px;
@@ -46,4 +47,8 @@ export const InvestigatorTextContainer: typeof View = styled(View)`
 
 export const MainInfo: typeof Row = styled(Row)`
   justify-content: space-between;
+`
+
+export const Stats: typeof InvestigatorStats = styled(InvestigatorStats)`
+  
 `
