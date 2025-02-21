@@ -1,9 +1,10 @@
-import { InvestigatorPreview } from '@widgets/investigator/investigator-preview';
+import { InvestigatorPreviewMemo as InvestigatorPreview, InvestigatorPreviewProps } from '@widgets/investigator/investigator-preview';
 import type { InvestigatorDetailItem as Item} from '../../../model';
 import { UnselectedDetail } from '../UnselectedDetail';
 import { Container, List } from './DetailSelect.components';
 import { CARD_SIZE } from '../../../config';
-import { useCallback } from 'react';
+import { memo, useCallback } from 'react';
+import { prop } from 'ramda';
 
 export type DetailSelectProps = {
   data: Item[]
@@ -25,11 +26,9 @@ export const DetailSelect = ({
     (item: Item | null) => () => onChange(item),
     [onChange]
   )
-  const isItemSelected = useCallback(
-    (item: Item) => item.id === selected?.id || 
-      (item.value === null && selected === null),
-    [selected]
-  )
+  const isItemSelected = (item: Item) => 
+    item.id === selected?.id || 
+    (item.value === null && selected === null)
   
   return (
     <Container>
@@ -57,3 +56,5 @@ export const DetailSelect = ({
     </Container>
   );
 }
+
+export const DetailSelectMemo = memo(DetailSelect);

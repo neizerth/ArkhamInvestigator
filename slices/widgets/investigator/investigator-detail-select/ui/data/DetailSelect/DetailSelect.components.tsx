@@ -15,5 +15,4 @@ export const List: typeof ScrollView = styled(ScrollView)
   })`
     flex-direction: row;
     flex-wrap: wrap;
-    gap: ${size.gap.default}px;
   `

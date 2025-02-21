@@ -13,7 +13,7 @@ export const Container: typeof TouchableOpacity = styled(TouchableOpacity)`
 export const Content: typeof Row = styled(Row)`
   justify-content: space-between;
   align-items: center;
-  gap: ${size.gap.medium}px;
+  gap: ${size.gap.default}px;
 `
 
 export const InvestigatorImage: typeof Image = styled(Image)`
@@ -38,5 +38,5 @@ export const Icon: typeof BaseIcon = styled(BaseIcon)
   .attrs({
     icon: 'right-arrow'
   })`
-    font-size: 18px
+    font-size: 16px
   `

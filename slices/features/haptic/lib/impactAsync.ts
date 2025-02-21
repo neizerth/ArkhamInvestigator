@@ -12,4 +12,4 @@ export const impactAsync = (style = Haptics.ImpactFeedbackStyle.Light) => {
     const duration = fallbackVibrationDuration[style];
     navigator.vibrate(duration);
   }
-} 
+}

@@ -1,7 +1,7 @@
 import type { PropsWithFaction } from '@shared/model/ui';
 import * as C from './FactionCard.components';
 import type { LayoutChangeEvent, ViewProps } from 'react-native';
-import { useCallback, useState } from 'react';
+import { memo, useCallback, useState } from 'react';
 
 export type InvestigatorDetailSelectCardProps = ViewProps & PropsWithFaction & {
   title?: string
@@ -63,3 +63,5 @@ export const InvestigatorDetailSelectCard = ({
     </C.Container>
   );
 }
+
+export const InvestigatorDetailSelectCardMemo = memo(InvestigatorDetailSelectCard);

@@ -2,30 +2,38 @@ import { selectCurrentInvestigatorDetails, useAppDispatch, useAppSelector } from
 import { Container, Content, Card, Sections } from "./InvestigatorDetailSelect.components";
 import { router } from "expo-router";
 import type { Faction } from "@shared/model";
-import { useCallback, useState } from "react";
-import { getSkins, getVariants } from "../../lib";
+import { useCallback, useMemo, useRef, useState } from "react";
+import { getSkins, getVariants, selectInvestigatorMedia } from "../../lib";
 import type { InvestigatorDetailItem } from "../../model";
 import { Outside } from "@shared/ui";
 import { InvestigatorDescription } from "../investigator/InvestigatorDescription";
-import { DataSection } from "../data";
-import { setCurrentInvestigatorDetails, setInvestigatorSkin, setInvestigatorVariant } from "@shared/lib/store";
+import { DataSectionMemo as DataSection } from "../data";
+import { selectSelectedInvestigators, setCurrentInvestigatorDetails, setInvestigatorSkin, setInvestigatorVariant } from "@shared/lib/store";
+import { propEq } from "ramda";
 
 type DetailItem = InvestigatorDetailItem | null;
 export const InvestigatorDetailSelect = () => {
   const dispatch = useAppDispatch();
   const details = useAppSelector(selectCurrentInvestigatorDetails);
+  const { skins, variants } = useAppSelector(selectInvestigatorMedia);
+  const investigators = useAppSelector(selectSelectedInvestigators);
 
-  const [variant, setVariant] = useState<DetailItem>(null);
-  const [skin, setSkin] = useState<DetailItem>(null); 
-
-  if (!details || !details.media) {
+  if (!details) {
     return null;
   }
 
   const { investigator } = details
   const { code } = investigator
-  const variants = getVariants(details);
-  const skins = getSkins(details);
+  const selection = investigators.find(propEq(code, 'code'))
+
+  if (!selection) {
+    return null;
+  }
+
+  const { skinId, variantId } = selection;
+  const skin = skins.find(propEq(skinId, 'value')) || null;
+  const variant = variants.find(propEq(variantId, 'value')) || variants[0];
+
   const faction = investigator.faction_code as Faction;
 
   const goBack = useCallback(() => {
@@ -38,7 +46,6 @@ export const InvestigatorDetailSelect = () => {
       code,
       skinId: item?.value || null
     }))
-    setSkin(item);
   }, [dispatch, code])
 
   const changeVariant = useCallback((item: DetailItem) => {
@@ -46,7 +53,6 @@ export const InvestigatorDetailSelect = () => {
       code,
       variantId: item?.value || null
     }))
-    setVariant(item);
   }, [dispatch, code])
 
   return (
@@ -68,13 +74,14 @@ export const InvestigatorDetailSelect = () => {
             <DataSection
               title="Variants"
               data={variants}
+              selected={variant}
               onChange={changeVariant}
             />
             <DataSection
               title="Skins"
               data={skins}
               onChange={changeSkin}
-              defaultValue={null}
+              selected={skin}
               showIcon={false}
               showNone
             />

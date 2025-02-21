@@ -64,7 +64,7 @@ export const Content: typeof View = styled(View)`
   
   border-radius: ${borderRadius}px;
   background-color: ${color.dark30};
-  padding: ${size.gap.medium}px 0;
+  padding: ${size.gap.medium}px 0px;
 `
 
 

@@ -1,6 +1,6 @@
 import { View } from "react-native";
 import styled from "styled-components/native";
-import { InvestigatorDetailSelectCard } from "../FactionCard";
+import { InvestigatorDetailSelectCardMemo as CardMemo } from "../FactionCard";
 import { size } from "@shared/config";
 
 export const Container: typeof View = styled(View)`
@@ -27,6 +27,6 @@ export const Sections: typeof View = styled(View)
     gap: ${size.gap.default}px;
   `
 
-export const Card: typeof InvestigatorDetailSelectCard = styled(InvestigatorDetailSelectCard)`
+export const Card: typeof CardMemo = styled(CardMemo)`
   flex: 1;
 `

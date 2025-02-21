@@ -7,5 +7,5 @@ export const Container: typeof View = styled(Row)`
   align-items: center;
   justify-content: space-between;
   padding: ${size.gap.default}px;
-  gap: ${size.gap.medium};
+  gap: ${size.gap.medium}px;
 `

@@ -1,6 +1,6 @@
 import { ScrollView, Text, View } from "react-native";
 import styled from "styled-components/native";
-import { color, font } from "@shared/config";
+import { color, font, size } from "@shared/config";
 import { Alegreya } from "@shared/fonts/Alegreya";
 import { InvestigatorSelectFooter } from "../InvestigatorSelectFooter";
 
@@ -10,6 +10,7 @@ export const Container: typeof View = styled(View)`
 
 export const Content: typeof ScrollView = styled(ScrollView)`
   flex: 1;
+  padding-bottom: ${size.gap.default}px;
 `
 
 export const Separator: typeof Text = styled(Text)`
