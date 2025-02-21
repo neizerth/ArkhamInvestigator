@@ -8,7 +8,7 @@ import type { InvestigatorDetailItem } from "../../model";
 import { Outside } from "@shared/ui";
 import { InvestigatorDescription } from "../investigator/InvestigatorDescription";
 import { DataSection } from "../data";
-import { setInvestigatorSkin, setInvestigatorVariant } from "@shared/lib/store";
+import { setCurrentInvestigatorDetails, setInvestigatorSkin, setInvestigatorVariant } from "@shared/lib/store";
 
 type DetailItem = InvestigatorDetailItem | null;
 export const InvestigatorDetailSelect = () => {
@@ -29,8 +29,9 @@ export const InvestigatorDetailSelect = () => {
   const faction = investigator.faction_code as Faction;
 
   const goBack = useCallback(() => {
+    dispatch(setCurrentInvestigatorDetails(null));
     router.back();
-  }, [])
+  }, [dispatch]);
 
   const changeSkin = useCallback((item: DetailItem) => {
     dispatch(setInvestigatorSkin({

@@ -37,7 +37,6 @@ export const InvestigatorList = ({
     <Container {...props}>
       {data.map(item => (
         <InvestigatorPreview
-          delayPressIn={0}
           key={item.investigator.code}
           onPress={toggleSelected(item)}
           selected={isSelected(item)}

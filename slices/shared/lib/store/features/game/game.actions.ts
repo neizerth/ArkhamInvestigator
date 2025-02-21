@@ -1,22 +1,38 @@
 import type { ActionCreator } from "@reduxjs/toolkit"
-import { selectSelectedInvestigators, setSelectedInvestigators } from "../game/game"
-import type { SelectedInvestigator } from "@shared/model"
-import { toggleBy } from "@shared/lib/util";
+import { selectSelectedInvestigators, setCurrentInvestigatorDetails, setSelectedInvestigators } from "../game/game"
+import type { InvestigatorDetails, SelectedInvestigator } from "@shared/model"
+import { includesBy, toggleBy } from "@shared/lib/util";
 import { propEq, reject } from "ramda";
 import type { AppThunk } from "../..";
+import { MAX_PLAYERS } from "@shared/config";
+import { router } from "expo-router";
 
-export const changeSelectedInvestigators: ActionCreator<AppThunk> = (investigator: SelectedInvestigator) => 
+export const changeSelectedInvestigator: ActionCreator<AppThunk> = (item: InvestigatorDetails) => 
   (dispatch, getState) => {
     const state = getState();
     const selected = selectSelectedInvestigators(state);
 
-    const selectedInvestigators = toggleBy(
-      propEq(investigator.code, 'code'),
-      investigator,
-      selected
-    );
+    const { investigator, media } = item
+    const { code } = investigator;
+    const withCode = propEq(code, 'code');
+    const hasCode = includesBy(withCode, selected);
 
-    dispatch(setSelectedInvestigators(selectedInvestigators));
+    if (hasCode) {
+      return dispatch(removeSelectedInvestigator(code))
+    }
+
+    if (selected.length === MAX_PLAYERS) {
+      return;
+    }
+
+    const selectedItem = { code }
+    dispatch(addSelectedInvestigator(selectedItem))
+
+    if (media?.skins || media?.variants) {
+      router.push('/investigator-details');
+      dispatch(setCurrentInvestigatorDetails(item));
+      return;
+    }
   }
 
 export const removeSelectedInvestigator: ActionCreator<AppThunk> = (code: string) => 

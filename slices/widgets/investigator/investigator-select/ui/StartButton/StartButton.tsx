@@ -18,7 +18,6 @@ const getImageSource = ({
 
 export const StartButton = ({}: StartButtonProps) => {
   const investigators = useAppSelector(selectSelectedInvestigators);
-  console.log({ investigators })
 
   return (
     <C.Container>
@@ -26,6 +25,7 @@ export const StartButton = ({}: StartButtonProps) => {
         <C.Investigators>
           {investigators.map(item => (
             <C.InvestigatorImage
+              key={item.code}
               source={getImageSource(item)}
             />
           ))}
