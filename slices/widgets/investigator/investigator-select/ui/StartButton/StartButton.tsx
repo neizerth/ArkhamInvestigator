@@ -1,8 +1,7 @@
 import { selectSelectedInvestigators, useAppSelector } from '@shared/lib';
 import * as C from './StartButton.components';
 import { getInvestigatorImageUrl } from '@shared/api/getInvestigatorImageUrl';
-import { SelectedInvestigator } from '@shared/model';
-import { Icon } from '@shared/ui';
+import type { SelectedInvestigator } from '@shared/model';
 
 export type StartButtonProps = {
 

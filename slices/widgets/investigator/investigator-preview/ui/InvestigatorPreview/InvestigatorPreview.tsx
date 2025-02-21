@@ -12,7 +12,7 @@ import { memo } from "react"
 export type InvestigatorPreviewProps = TouchableOpacityProps & {
   investigator: InvestigatorSource
   media?: InvestigatorMedia
-  selected: boolean
+  selected?: boolean
   imageId?: string
   icon?: string
   size?: number
@@ -28,7 +28,6 @@ export const InvestigatorPreview = ({
   media,
   ...props
 }: InvestigatorPreviewProps) => {
-  console.log('render', investigator.code)
   const defaultSize = useImageSize();
   const size = props.size || defaultSize;
 

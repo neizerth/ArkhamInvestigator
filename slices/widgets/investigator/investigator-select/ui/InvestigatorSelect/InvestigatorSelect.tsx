@@ -9,8 +9,6 @@ import { useCallback } from 'react';
 
 export const InvestigatorSelect = () => {
   const data = useAppSelector(selectAvailableInvestigators);
-  const selected = useAppSelector(selectSelectedInvestigators);
-
   const dispatch = useAppDispatch();
 
   const onChange = useCallback(
@@ -27,13 +25,11 @@ export const InvestigatorSelect = () => {
         <List 
           data={official} 
           onChange={onChange}
-          selected={selected}
         />
         <Separator>— Fan-made Investigators —</Separator>
         <List 
           data={fanMade} 
           onChange={onChange}
-          selected={selected}
         />
       </Content>
       <Footer/>

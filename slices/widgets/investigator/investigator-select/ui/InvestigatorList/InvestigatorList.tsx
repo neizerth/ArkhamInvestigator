@@ -1,7 +1,9 @@
-import type { InvestigatorDetails, SelectedInvestigator } from '@shared/model';
-import { InvestigatorPreviewMemo as InvestigatorPreview } from '@widgets/investigator/investigator-preview';
+import type { InvestigatorDetails } from '@shared/model';
+import { InvestigatorPreviewMemo as InvestigatorPreview, type InvestigatorPreviewProps } from '@widgets/investigator/investigator-preview';
 import { 
-  includesBy, 
+  includesBy,
+  selectSelectedInvestigators,
+  useAppSelector, 
 } from '@shared/lib';
 import { useCallback } from 'react';
 import { propEq } from 'ramda';
@@ -13,13 +15,11 @@ type OmitProps = 'data' | 'key' | 'numColumns' | 'renderItem' | 'keyExtractor';
 export type InvestigatorListProps = 
   Omit<FlatListProps<InvestigatorDetails>, OmitProps> & {
     data: InvestigatorDetails[]
-    selected: SelectedInvestigator[]
     onChange: (item: InvestigatorDetails) => void
   }
 
 export const InvestigatorList = ({
   data,
-  selected,
   onChange,
   ...props
 }: InvestigatorListProps) => {
@@ -28,22 +28,33 @@ export const InvestigatorList = ({
     [onChange]
   )
 
-  const isSelected = ({ investigator }: InvestigatorDetails) => includesBy(
-    propEq(investigator.code, 'code'), 
-    selected
-  )
-
   return (
     <Container {...props}>
       {data.map(item => (
-        <InvestigatorPreview
+        <InvestigatorListItem
           key={item.investigator.code}
           onPress={toggleSelected(item)}
-          selected={isSelected(item)}
           investigator={item.investigator}
           media={item.media}
         />
       ))}
     </Container>
+  )
+}
+
+export const InvestigatorListItem = (props: InvestigatorPreviewProps) => {
+
+  const selectedInvestigators = useAppSelector(selectSelectedInvestigators);
+
+  const { investigator } = props;
+  const selected = includesBy(
+    propEq(investigator.code, 'code'), 
+    selectedInvestigators
+  )
+  return (
+    <InvestigatorPreview 
+      {...props}
+      selected={selected}
+    />
   )
 }
