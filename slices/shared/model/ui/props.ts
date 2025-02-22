@@ -1,6 +1,6 @@
 import type { DeviceBreakpointType } from "../device"
 import type { Faction, SkillType } from "../game"
-import type { Box } from "./size"
+import type { Box, BoxLayout } from "./size"
 
 export type PropsWithFaction = {
   faction: Faction
@@ -16,4 +16,8 @@ export type PropsWithBreakpoint = {
 
 export type PropsWithBox = {
   box: Box
+}
+
+export type PropsWithBoxLayout = {
+  box: BoxLayout
 }

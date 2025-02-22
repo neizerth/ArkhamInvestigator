@@ -41,6 +41,7 @@ export const getSelectedInvestigatorVariant = (
   }
   return {
     picture: variantPicture,
-    additionalAction: variant.additionalAction || additionalAction
+    additionalAction: variant.additionalAction || additionalAction,
+    isParallel: variant.type === 'parallel'
   }
 }

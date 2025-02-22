@@ -14,6 +14,7 @@ export type InvestigatorBoard = {
     id: string
     image: InvestigatorImage
   }
+  isParallel?: boolean
   baseValue: InvestigatorBoardValues
   value: InvestigatorBoardValues
 }

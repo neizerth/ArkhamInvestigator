@@ -5,17 +5,13 @@ import { selectBoard } from '@pages/board/lib';
 import { getInvestigatorImageUrl } from '@shared/api';
 import { useState } from 'react';
 import type { Box } from '@shared/model/ui';
+import { getImageLayout } from '@pages/board/lib/image/getImageLayout';
 
 export type InvestigatorImageProps = ViewProps
 
 export const InvestigatorImage = (props: InvestigatorImageProps) => {
   const board = useAppSelector(selectBoard);
   const [box, setBox] = useState<Box>();
-
-  const uri = getInvestigatorImageUrl(board.investigator.code, 'full');
-  const source = { uri };
-
-  console.log(uri, box);
 
   const onLayout = (e: LayoutChangeEvent) => {
     const { width, height } = e.nativeEvent.layout;
@@ -25,17 +21,24 @@ export const InvestigatorImage = (props: InvestigatorImageProps) => {
       height
     })
   }
-  
+  const { id, image } = board.picture
+  const uri = getInvestigatorImageUrl(id, 'full');
+  const source = { uri };
+
+  const imageLayout = box && getImageLayout({
+    box,
+    image
+  });
 
   return (
     <C.Container 
       {...props}
       onLayout={onLayout}
     >
-      {box && (
+      {imageLayout && (
         <C.Background 
           source={source}
-          box={box}
+          box={imageLayout}
         />
       )}
     </C.Container>
