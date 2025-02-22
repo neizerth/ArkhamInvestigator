@@ -1,7 +1,9 @@
-import { View } from "react-native";
+import * as C from './BoardPage.components';
 
 export const BoardPage = () => {
   return (
-    <View></View>
+    <C.Container>
+      <C.Background/>
+    </C.Container>
   );
 }

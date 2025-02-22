@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import type { InvestigatorSource } from '@shared/model';
 import { createSliceState } from 'redux-toolkit-helpers';
 import { loadCoreData } from '../../app/app.thunks';

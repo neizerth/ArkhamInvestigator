@@ -4,7 +4,9 @@ import type { Nullable } from "../util";
 
 export type Faction = 'neutral' | 'mystic' | 'rogue' | 'survivor' | 'seeker' | 'guardian'
 
-export type SkillType = 'willpower' | 'intellect' | 'combat' | 'agility' | 'wild'
+export type InvestigatorSkillType = 'willpower' | 'intellect' | 'combat' | 'agility'
+
+export type SkillType = InvestigatorSkillType | 'wild'
 
 export type SelectedInvestigator = {
   code: string
@@ -17,5 +19,5 @@ export type InvestigatorDetails = {
   alternate: InvestigatorDetails[]
   story: Story
   media?: InvestigatorMedia
-  is_official: boolean
+  isOfficial: boolean
 }

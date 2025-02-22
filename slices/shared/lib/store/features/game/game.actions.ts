@@ -1,4 +1,4 @@
-import type { ActionCreator } from "@reduxjs/toolkit"
+import { createAction, type ActionCreator } from "@reduxjs/toolkit"
 import { selectSelectedInvestigators, setCurrentInvestigatorDetails, setSelectedInvestigators } from "../game/game"
 import type { InvestigatorDetails, SelectedInvestigator } from "@shared/model"
 import { includesBy, toggleBy } from "@shared/lib/util";
@@ -6,7 +6,7 @@ import { propEq, reject } from "ramda";
 import type { AppThunk } from "../..";
 import { MAX_PLAYERS } from "@shared/config";
 import { router } from "expo-router";
-import { navigateTo } from "@shared/lib/actions";
+import { redirectTo, replaceTo } from "@shared/lib/effects";
 
 export const changeSelectedInvestigator: ActionCreator<AppThunk> = (item: InvestigatorDetails) => 
   (dispatch, getState) => {
@@ -30,7 +30,7 @@ export const changeSelectedInvestigator: ActionCreator<AppThunk> = (item: Invest
     dispatch(addSelectedInvestigator(selectedItem))
 
     if (media?.skins || media?.variants) {
-      dispatch(navigateTo('/investigator-details'))
+      dispatch(redirectTo('/investigator-details'))
       dispatch(setCurrentInvestigatorDetails(item));
       return;
     }

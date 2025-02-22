@@ -20,7 +20,7 @@ export const selectAvailableInvestigators = createSelector(
           propEq(investigator.code, 'code')
         ),
         story,
-        is_official: Boolean(story.is_canonical || story.is_official),
+        isOfficial: Boolean(story.is_canonical || story.is_official),
         alternate: [] as InvestigatorDetails[]
       })
     )

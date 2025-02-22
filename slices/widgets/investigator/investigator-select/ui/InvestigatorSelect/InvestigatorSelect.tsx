@@ -16,8 +16,8 @@ export const InvestigatorSelect = () => {
     [dispatch]
   );
 
-  const official = data.filter(propEq(true, 'is_official'));
-  const fanMade = data.filter(propEq(false, 'is_official'));
+  const official = data.filter(propEq(true, 'isOfficial'));
+  const fanMade = data.filter(propEq(false, 'isOfficial'));
 
   return (
     <Container>

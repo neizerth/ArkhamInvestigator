@@ -28,12 +28,12 @@ export const {
   setSelectedInvestigators,
   setCurrentInvestigatorDetails,
   setInvestigatorSkin,
-  setInvestigatorVariant
+  setInvestigatorVariant,
 } = game.actions;
 
 export const {
   selectSelectedInvestigators,
-  selectCurrentInvestigatorDetails
+  selectCurrentInvestigatorDetails,
 } = game.selectors;
 
 export default game.reducer;

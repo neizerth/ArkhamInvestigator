@@ -1,11 +1,9 @@
-import { selectSelectedInvestigators, useAppSelector } from '@shared/lib';
+import { selectSelectedInvestigators, useAppDispatch, useAppSelector } from '@shared/lib';
 import * as C from './StartButton.components';
 import { getInvestigatorImageUrl } from '@shared/api/getInvestigatorImageUrl';
 import type { SelectedInvestigator } from '@shared/model';
-
-export type StartButtonProps = {
-
-}
+import { useCallback } from 'react';
+import { startGame } from '../../lib';
 
 const getImageSource = ({
   code,
@@ -15,11 +13,16 @@ const getImageSource = ({
   uri: getInvestigatorImageUrl(skinId || variantId || code, 'square')
 });
 
-export const StartButton = ({}: StartButtonProps) => {
+export const StartButton = () => {
+  const dispatch = useAppDispatch();
   const investigators = useAppSelector(selectSelectedInvestigators);
 
+  const start = useCallback(() => {
+    dispatch(startGame());
+  }, [dispatch])
+
   return (
-    <C.Container>
+    <C.Container onPress={start}>
       <C.Content>
         <C.Investigators>
           {investigators.map(item => (

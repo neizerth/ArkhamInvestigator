@@ -1,6 +1,6 @@
 import type { InvestigatorDetails } from "@shared/model";
 import type { InvestigatorDetailItem } from "../model";
-import type { InvestigatorVariant } from "arkham-investigator-data";
+import { getMediaVariantId } from "@shared/lib";
 
 export const getVariants = (details: InvestigatorDetails) => {
   const { 
@@ -16,7 +16,7 @@ export const getVariants = (details: InvestigatorDetails) => {
   const mainVariant: InvestigatorDetailItem = {
     id: code,
     imageId: code,
-    name: details.story.name,
+    name: media.variantName || details.story.name,
     type: 'default',
     icon: details.story.icon,
     value: null,
@@ -25,7 +25,7 @@ export const getVariants = (details: InvestigatorDetails) => {
 
   const variants = media.variants.map((variant): InvestigatorDetailItem => {
     const { type, name } = variant;
-    const id = 'code' in variant ? variant.code : code;
+    const id = getMediaVariantId(variant);
 
     const variantDetails = alternate.find(
         ({ investigator }) => investigator.code === id
