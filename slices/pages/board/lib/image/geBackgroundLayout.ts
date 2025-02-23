@@ -7,7 +7,7 @@ type GetImageLayout = {
   image: InvestigatorImage
 }
 
-export const getImageLayout = ({
+export const getBackgroundLayout = ({
   box,
   image
 }: GetImageLayout): BoxLayout => {

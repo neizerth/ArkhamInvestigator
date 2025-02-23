@@ -1,7 +1,7 @@
 import { View } from 'react-native';
 import { InvestigatorImage } from '../InvestigatorImage';
 import styled from 'styled-components/native';
-import { InvestigatorTitle } from '../InvestigatorTitle';
+import { BoardHeader } from '../header';
 
 export const Container: typeof View = styled(View)`
   overflow: hidden;
@@ -16,7 +16,7 @@ export const Background: typeof InvestigatorImage = styled(InvestigatorImage)`
   bottom: 0;
 ` 
 
-export const Title: typeof InvestigatorTitle = styled(InvestigatorTitle)`
+export const Header: typeof BoardHeader = styled(BoardHeader)`
   position: fixed;
   z-index: 2;
   left: 0;

@@ -1,5 +1,4 @@
-import type { Faction } from "@shared/model";
-import type { ImageRequireSource } from "react-native";
+import type { FactionImages } from "@shared/model";
 
 export const guardian = require('./guardian.png');
 export const mystic = require('./mystic.png');
@@ -15,9 +14,7 @@ export const seekerParallel = require('./seeker_parallel.png');
 export const survivorParallel = require('./survivor_parallel.png');
 export const neutralParallel = require('./neutral_parallel.png');
 
-type Images = Record<Faction, ImageRequireSource>
-
-export const regularImages: Images = {
+const defaultImages: FactionImages = {
   guardian,
   mystic,
   rogue,
@@ -26,11 +23,16 @@ export const regularImages: Images = {
   neutral
 }
 
-export const parallelImages: Images = {
+const parallelImages: FactionImages = {
   guardian: guardianParallel,
   mystic: mysticParallel,
   rogue: rogueParallel,
   seeker: seekerParallel,
   survivor: survivorParallel,
   neutral: neutralParallel
+}
+
+export const images = {
+  default: defaultImages,
+  parallel: parallelImages
 }

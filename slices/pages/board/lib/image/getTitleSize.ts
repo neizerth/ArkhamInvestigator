@@ -1,29 +1,54 @@
-import { titleSize } from "@pages/board/config";
-import type { Box } from "@shared/model/ui";
+import { HEADER_GAP, HEADER_HEIGHT, titleStyle } from "@pages/board/config";
+import type { HeaderLayout } from "@pages/board/model";
 
-const titleRatio = titleSize.width / titleSize.height;
+const titleRatio = titleStyle.width / HEADER_HEIGHT;
 
-export const getTitleSize = (window: Box) => {
-  const scale = window.width / titleSize.width;
-  const gap = titleSize.gap * scale;
-  const imageWidth = Math.min(window.width + gap, titleSize.width);
-  const imageHeight = imageWidth / titleRatio;
+export const getTitleSize = (layout: HeaderLayout) => {
+  if (layout.type === 'column') {
+    const scale = layout.width / titleStyle.width;
+    const gap = HEADER_GAP * scale;
+    const width = layout.width + gap;
+    const height = width / titleRatio;
 
-  const maxHeight = window.height * titleSize.maxHeightPercentage / 100;
-
-  if (imageHeight < maxHeight) {
     return {
-      width: imageWidth,
-      height: imageHeight
-    };
+      width,
+      height,
+      scale
+    }
   }
-
-  const height = maxHeight;
-  const width = height * titleRatio;
+  const { scale } = layout;
+  const width = titleStyle.width * scale;
+  const height = HEADER_HEIGHT * scale;
 
   return {
-    scale,
     width,
-    height
-  };
+    height,
+    scale
+  }
 }
+
+// export const getTitleSize = (window: Box) => {
+//   const scale = window.width / titleStyle.width;
+//   const gap = titleStyle.gap * scale;
+//   const imageWidth = Math.min(window.width + gap, titleStyle.width);
+//   const imageHeight = imageWidth / titleRatio;
+
+//   const maxHeight = window.height * titleStyle.maxHeight / 100;
+
+//   if (imageHeight < maxHeight) {
+//     return {
+//       width: imageWidth,
+//       height: imageHeight,
+//       scale
+//     };
+//   }
+
+//   const height = maxHeight;
+//   const width = height * titleRatio;
+
+//   return {
+//     scale: maxHeight / titleStyle.height,
+//     width,
+//     height
+//   };
+// }
