@@ -10,6 +10,9 @@ export const skillsStyle = {
 
 export const HEADER_HEIGHT = 107;
 
-export const HEADER_GAP = 20;
+export const headerGap = {
+  vertical: 20,
+  horizontal: 30
+};
 
 export const MAX_IMAGE_HEIGHT = 15; // 15vh

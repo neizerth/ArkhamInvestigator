@@ -1,5 +1,4 @@
 export * from './getTitleSize'
 export * from './getHeaderLayout'
-export * from './getHeaderHeight'
 export * from './geBackgroundLayout'
 export * from './getSkillsSize'

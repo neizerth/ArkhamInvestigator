@@ -1,20 +1,24 @@
 import { useWindowDimensions, type ViewProps } from 'react-native';
 import * as C from './BoardHeader.components';
 import { getHeaderLayout } from '@pages/board/lib';
+import type { PropsWithLayout } from '@pages/board/model';
 
-export type BoardHeaderProps = ViewProps
+export type BoardHeaderProps = ViewProps & PropsWithLayout
 
 export const BoardHeader = (props: BoardHeaderProps) => {
   const window = useWindowDimensions();
   const layout = getHeaderLayout(window);
 
+  const gap = layout.type === 'column' ? layout.gap : 0;
+  const marginLeft = layout.type === 'row' ? -layout.gap : 0;
+
   const style = {
     flexDirection: layout.type,
-    gap: layout.type === 'column' ? layout.gap : 0
+    gap
   }
 
   const skillsStyle = {
-    marginLeft: layout.type === 'row' ? -layout.gap : 0
+    marginLeft
   }
 
   return (

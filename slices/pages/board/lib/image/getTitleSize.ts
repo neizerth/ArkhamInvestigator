@@ -1,4 +1,4 @@
-import { HEADER_GAP, HEADER_HEIGHT, titleStyle } from "@pages/board/config";
+import { HEADER_HEIGHT, headerGap, titleStyle } from "@pages/board/config";
 import type { HeaderLayout } from "@pages/board/model";
 
 const titleRatio = titleStyle.width / HEADER_HEIGHT;
@@ -6,7 +6,7 @@ const titleRatio = titleStyle.width / HEADER_HEIGHT;
 export const getTitleSize = (layout: HeaderLayout) => {
   if (layout.type === 'column') {
     const scale = layout.width / titleStyle.width;
-    const gap = HEADER_GAP * scale;
+    const gap = headerGap.horizontal * scale;
     const width = layout.width + gap;
     const height = width / titleRatio;
 

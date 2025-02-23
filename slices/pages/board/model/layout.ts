@@ -12,3 +12,7 @@ export type HeaderTypedLayout = {
 } | {
   type: 'column'
 }
+
+export type PropsWithLayout = {
+  layout: HeaderLayout
+}

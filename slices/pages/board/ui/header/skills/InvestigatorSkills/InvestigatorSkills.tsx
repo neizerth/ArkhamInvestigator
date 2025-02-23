@@ -2,11 +2,9 @@ import { getSkillsSize, useFactionImage } from '@pages/board/lib';
 import * as C from './InvestigatorSkills.components';
 import { images } from './images';
 import type { ViewProps } from 'react-native';
-import type { HeaderLayout } from '@pages/board/model';
+import type { PropsWithLayout } from '@pages/board/model';
 
-export type InvestigatorSkillsProps = ViewProps & {
-  layout: HeaderLayout
-}
+export type InvestigatorSkillsProps = ViewProps & PropsWithLayout
 
 export const InvestigatorSkills = ({
   layout,

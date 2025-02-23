@@ -6,10 +6,14 @@ import { getInvestigatorImageUrl } from '@shared/api';
 import { useState } from 'react';
 import type { Box } from '@shared/model/ui';
 import { getBackgroundLayout } from '@pages/board/lib/image/geBackgroundLayout';
+import type { PropsWithLayout } from '@pages/board/model';
 
-export type InvestigatorImageProps = ViewProps
+export type InvestigatorImageProps = ViewProps & PropsWithLayout
 
-export const InvestigatorImage = (props: InvestigatorImageProps) => {
+export const InvestigatorImage = ({
+  layout,
+ ...props
+}: InvestigatorImageProps) => {
   const board = useAppSelector(selectBoard);
   const [box, setBox] = useState<Box>();
 
@@ -26,6 +30,7 @@ export const InvestigatorImage = (props: InvestigatorImageProps) => {
   const source = { uri };
 
   const imageLayout = box && getBackgroundLayout({
+    layout,
     box,
     image
   });
