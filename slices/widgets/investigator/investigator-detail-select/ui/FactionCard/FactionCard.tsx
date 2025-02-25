@@ -2,6 +2,7 @@ import type { PropsWithFaction } from '@shared/model/ui';
 import * as C from './FactionCard.components';
 import type { LayoutChangeEvent, ViewProps } from 'react-native';
 import { memo, useCallback, useState } from 'react';
+import { Outside } from '@shared/ui';
 
 export type InvestigatorDetailSelectCardProps = ViewProps & PropsWithFaction & {
   title?: string

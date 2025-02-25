@@ -4,7 +4,6 @@ import { getOrientation } from "@shared/lib/util/size/common";
 import type { Box } from "@shared/model";
 import type { InvestigatorImage } from "arkham-investigator-data";
 import { getAvailableScale } from "./getAvailableScale";
-import { HEADER_HEIGHT } from "@pages/board/config";
 
 export const coverMediaBox = (options: {
   view: Box,
@@ -25,7 +24,6 @@ export const coverMediaBox = (options: {
 
   const available = {
     width: image.width,
-    // height: image.height,
     height: image.height - paddingTop,
     scale: getMinScale({
       box: view,
@@ -33,13 +31,11 @@ export const coverMediaBox = (options: {
     })
   }
 
-  const defaultScale = getAvailableScale({
+  const scale = getAvailableScale({
     view,
     box: media,
     available,
   });
-
-  const scale = Math.max(defaultScale, available.scale)
 
   // const minScale = paddingTop / media.top;
 
@@ -58,24 +54,32 @@ export const coverMediaBox = (options: {
     0
   );
   // const top = Math.max(scaledMedia.top - dY - paddingTop, paddingTop);
-  const layoutPadding = layout.type === 'row' ? 0 : layout.height - HEADER_HEIGHT * layout.scale / 2;
-  const top = -layoutPadding + scaledMedia.top;
 
-  console.log({
-    scaledView,
-    scaledImage
-  })
+  const minTop = Math.min(
+    paddingTop - scaledMedia.top, 
+    paddingTop
+  );
+
+  const top = Math.max(
+    Math.min(
+      view.height - scaledImage.height,
+      0
+    ),
+    minTop
+  );
   
-  // console.log({ 
-  //   media,
-  //   scaledMedia, 
-  //   scaledImage,
-  //   left,
-  //   top,
-  //   paddingTop,
-  //   dX, dY,
-  //   scale 
-  // });
+  console.log({ 
+    // available, 
+    media,
+    scaledMedia, 
+    scaledImage,
+    // scaledAvailable,
+    left,
+    top,
+    paddingTop,
+    dX, dY,
+    scale 
+  });
 
   // console.log(scaledImage)
 

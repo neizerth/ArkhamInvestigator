@@ -2,6 +2,11 @@ import { View } from "react-native";
 import styled from "styled-components/native";
 import { InvestigatorDetailSelectCardMemo as CardMemo } from "../FactionCard";
 import { size } from "@shared/config";
+import { Outside as BaseOutside } from "@shared/ui";
+
+export const Outside = styled(BaseOutside)`
+  z-index: 1;
+`
 
 export const Container: typeof View = styled(View)`
   flex: 1;
@@ -29,4 +34,6 @@ export const Sections: typeof View = styled(View)
 
 export const Card: typeof CardMemo = styled(CardMemo)`
   flex: 1;
+  position: relative;
+  z-index: 2;
 `

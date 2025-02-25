@@ -20,10 +20,13 @@ export const scaleBoxWidth = (options: {
   box: Box
 }): ScaledBox => {
   const { view, box } = options;
+  const { width } = view;
   const scale = view.width / box.width;
+  const height = box.height * scale;
 
   return {
-    ...scaleBox(box, scale),
+    width,
+    height,
     scale
   }
 }
@@ -33,15 +36,18 @@ export const scaleBoxHeight = (options: {
   box: Box
 }): ScaledBox => {
   const { view, box } = options;
+  const { height } = view;
   const scale = view.height / box.height;
+  const width = box.height * scale;
 
   return {
-    ...scaleBox(box, scale),
+    width,
+    height,
     scale
   }
 }
 
-export const coverBox = (options: {
+export const scaleCoverBox = (options: {
   view: Box,
   box: Box
 }): ScaledBox => {

@@ -7,6 +7,7 @@ import { useState } from 'react';
 import type { Box } from '@shared/model/ui';
 import { getBackgroundLayout } from '@pages/board/lib/image/background/getBackgroundLayout';
 import type { PropsWithLayout } from '@pages/board/model';
+import { Faction } from '@shared/model';
 
 export type InvestigatorImageProps = ViewProps & PropsWithLayout
 
@@ -25,7 +26,9 @@ export const InvestigatorImage = ({
       height
     })
   }
-  const { picture } = board;
+  const { picture, investigator } = board;
+  const faction = investigator.faction_code as Faction;
+
   const { id } = board.picture
   const uri = getInvestigatorImageUrl(id, 'full');
   const source = { uri };
@@ -35,17 +38,22 @@ export const InvestigatorImage = ({
     box,
     picture
   });
-
+  
   return (
     <C.Container 
       {...props}
       onLayout={onLayout}
     >
       {imageLayout && (
-        <C.Background 
-          source={source}
-          layout={imageLayout}
-        />
+        <C.Content>
+          <C.FactionBackground
+            faction={faction}
+          />
+          <C.Background 
+            source={source}
+            layout={imageLayout}
+          />
+        </C.Content>
       )}
     </C.Container>
   );

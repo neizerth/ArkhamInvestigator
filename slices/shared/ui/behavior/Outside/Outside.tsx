@@ -1,10 +1,10 @@
-import { Pressable, StyleSheet, type PressableProps } from 'react-native';
+import { Pressable, StyleSheet } from 'react-native';
+import styled from 'styled-components/native';
 
-export const Outside = (props: PressableProps) => {
-  return (
-    <Pressable
-      style={StyleSheet.absoluteFill}
-      {...props}  
-    />
-  );
-}
+export const Outside: typeof Pressable = styled(Pressable)`
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+`

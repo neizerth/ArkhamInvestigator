@@ -1,5 +1,5 @@
 import { selectCurrentInvestigatorDetails, useAppDispatch, useAppSelector } from "@shared/lib";
-import { Container, Content, Card, Sections } from "./InvestigatorDetailSelect.components";
+import * as C from "./InvestigatorDetailSelect.components";
 import { router } from "expo-router";
 import type { Faction } from "@shared/model";
 import { useCallback, useMemo, useRef, useState } from "react";
@@ -56,16 +56,16 @@ export const InvestigatorDetailSelect = () => {
   }, [dispatch, code])
 
   return (
-    <Container>
-      <Outside onPress={goBack}/>
-      <Content>
-        <Card 
+    <C.Container>
+      <C.Content>
+        <C.Outside onPress={goBack}/>
+        <C.Card 
           faction={faction}
           title={investigator.name}
           subtitle={investigator.subname}
           onClose={goBack}
         >
-          <Sections>
+          <C.Sections>
             <InvestigatorDescription
               data={details}
               variant={variant}
@@ -85,9 +85,9 @@ export const InvestigatorDetailSelect = () => {
               showIcon={false}
               showNone
             />
-          </Sections>
-        </Card>
-      </Content>
-    </Container>
+          </C.Sections>
+        </C.Card>
+      </C.Content>
+    </C.Container>
   );
 }

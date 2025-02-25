@@ -15,7 +15,6 @@ export const getScaledMedia = ({
   picture,
   layout
 }: GetBackgroundMediaOptions) => {
-  const paddingTop = layout.height;
   const { image } = picture;
 
   const { media } = getMediaData(picture);
@@ -26,7 +25,7 @@ export const getScaledMedia = ({
       view: box,
       media,
       image,
-      paddingTop
+      layout
     })
   );
 }

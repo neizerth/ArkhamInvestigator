@@ -1,5 +1,5 @@
 import { View } from 'react-native';
-import { InvestigatorImage } from '../InvestigatorImage';
+import { InvestigatorImage } from '../background/InvestigatorImage';
 import styled from 'styled-components/native';
 import { BoardHeader } from '../header';
 

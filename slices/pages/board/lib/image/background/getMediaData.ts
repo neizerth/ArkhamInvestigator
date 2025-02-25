@@ -63,7 +63,7 @@ export const getMediaSources = ({ id, image }: InvestigatorPicture): ImageMedia[
       );
 
       const primary = media.primary || 
-        sources.length === 1;
+        sources.length === 1 || sources[0] === media;
 
       return {
         ...media,

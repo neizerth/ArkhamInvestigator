@@ -38,8 +38,10 @@ export const getHeaderLayout = (window: Box): HeaderLayout => {
 
   if (type === 'column') {
     const { width } = window;
-    const scale = width / headerRowWidth;
-    const height = (C.HEADER_HEIGHT * 2 + C.headerGap.horizontal) * scale;
+    // const 
+    const scale = width / C.skillsStyle.width;
+    const height = (C.HEADER_HEIGHT * 2) * scale;
+
     const gap = C.headerGap.horizontal * scale;
 
     return resize({
