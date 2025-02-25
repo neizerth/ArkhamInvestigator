@@ -12,10 +12,6 @@ export const startGame: ActionCreator<AppThunk> = () => (dispatch, getState) =>{
   
   const investigatorBoards = selectGameInvestigatorBoards(state);
 
-  console.log({
-    investigatorBoards
-  })
-
   dispatch(setInvestigatorBoards(investigatorBoards));
   dispatch(setCurrentInvestigatorIndex(0));
 

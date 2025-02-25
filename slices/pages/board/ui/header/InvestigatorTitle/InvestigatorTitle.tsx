@@ -15,14 +15,6 @@ export const InvestigatorTitle = ({
   const source = useFactionImage(images)
   const box = getTitleSize(layout);
 
-  console.log({
-    layoutHeight: layout.height,
-    scale: layout.scale,
-    height: box.height
-    // layout,
-    // box
-  })
-  
   return (
     <C.Container
       {...props}

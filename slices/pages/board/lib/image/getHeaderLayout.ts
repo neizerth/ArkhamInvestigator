@@ -5,7 +5,7 @@ import type { HeaderLayout, HeaderLayoutType } from "@pages/board/model";
 const headerRowWidth = C.titleStyle.width + C.skillsStyle.width - C.headerGap.horizontal;
 
 export const getHeaderLayoutType = ({ width, height }: Box): HeaderLayoutType => {
-  const orientation = width > height ? 'landscape' : 'portrait';
+  // const orientation = width > height ? 'landscape' : 'portrait';
   return width > C.MAX_COLUMN_WIDTH ? 'row' : 'column'
 };
 
@@ -13,7 +13,7 @@ export const resizeHeaderLayout = (window: Box) =>
   (layout: HeaderLayout): HeaderLayout => {
     const maxHeight = window.height * C.MAX_IMAGE_HEIGHT / 100;
 
-    if (layout.type === 'row' || layout.height <= maxHeight) {
+    if (layout.type === 'column' || layout.height <= maxHeight) {
       return layout;
     }
 
@@ -23,7 +23,7 @@ export const resizeHeaderLayout = (window: Box) =>
     const gap = C.headerGap.horizontal * scale;
 
     return {
-      type: 'row',
+      type: layout.type,
       width,
       height,
       scale,
@@ -39,7 +39,7 @@ export const getHeaderLayout = (window: Box): HeaderLayout => {
   if (type === 'column') {
     const { width } = window;
     const scale = width / headerRowWidth;
-    const height = C.HEADER_HEIGHT * scale;
+    const height = (C.HEADER_HEIGHT * 2 + C.headerGap.horizontal) * scale;
     const gap = C.headerGap.horizontal * scale;
 
     return resize({

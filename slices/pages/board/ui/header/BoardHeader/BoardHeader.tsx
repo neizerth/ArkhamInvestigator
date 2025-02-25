@@ -11,7 +11,7 @@ export const BoardHeader = (props: BoardHeaderProps) => {
 
   const gap = layout.type === 'column' ? layout.gap : 0;
   const marginLeft = layout.type === 'row' ? -layout.gap : 0;
-
+  
   const style = {
     flexDirection: layout.type,
     gap

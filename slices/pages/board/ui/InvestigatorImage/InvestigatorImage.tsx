@@ -5,7 +5,7 @@ import { selectBoard } from '@pages/board/lib';
 import { getInvestigatorImageUrl } from '@shared/api';
 import { useState } from 'react';
 import type { Box } from '@shared/model/ui';
-import { getBackgroundLayout } from '@pages/board/lib/image/geBackgroundLayout';
+import { getBackgroundLayout } from '@pages/board/lib/image/background/getBackgroundLayout';
 import type { PropsWithLayout } from '@pages/board/model';
 
 export type InvestigatorImageProps = ViewProps & PropsWithLayout
@@ -25,14 +25,15 @@ export const InvestigatorImage = ({
       height
     })
   }
-  const { id, image } = board.picture
+  const { picture } = board;
+  const { id } = board.picture
   const uri = getInvestigatorImageUrl(id, 'full');
   const source = { uri };
 
   const imageLayout = box && getBackgroundLayout({
     layout,
     box,
-    image
+    picture
   });
 
   return (
@@ -43,7 +44,7 @@ export const InvestigatorImage = ({
       {imageLayout && (
         <C.Background 
           source={source}
-          box={imageLayout}
+          layout={imageLayout}
         />
       )}
     </C.Container>
