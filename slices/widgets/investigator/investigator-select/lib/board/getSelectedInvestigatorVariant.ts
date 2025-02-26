@@ -24,9 +24,11 @@ export const getSelectedInvestigatorVariant = (
       )
     )
 
+  const skinImage = skin && 'image' in skin ? skin.image : null;
+
   const picture = {
     id: skinId || code,
-    image: skin?.image || image
+    image: skinImage || image
   }
 
   const defaultData = {
@@ -47,8 +49,8 @@ export const getSelectedInvestigatorVariant = (
 
   const id = getMediaVariantId(variant)
   const variantPicture = {
-    id: skinId || id,
-    image: skin?.image || variant.image || image
+    id: skinId || variant.image ? id : code,
+    image: skinImage || variant.image || image
   }
   return {
     picture: variantPicture,

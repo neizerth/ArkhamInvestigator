@@ -1,5 +1,5 @@
-import { InvestigatorPreviewMemo as InvestigatorPreview, InvestigatorPreviewProps } from '@widgets/investigator/investigator-preview';
-import type { InvestigatorDetailItem as Item} from '../../../model';
+import { InvestigatorPreviewMemo as InvestigatorPreview } from '@widgets/investigator/investigator-preview';
+import type { InvestigatorDetailItem as Item } from '@shared/model';
 import { UnselectedDetail } from '../UnselectedDetail';
 import { Container, List } from './DetailSelect.components';
 import { CARD_SIZE } from '../../../config';

@@ -8,6 +8,7 @@ import type { Box } from '@shared/model/ui';
 import { getBackgroundLayout } from '@pages/board/lib/image/background/getBackgroundLayout';
 import type { PropsWithLayout } from '@pages/board/model';
 import { Faction } from '@shared/model';
+import { images } from './images';
 
 export type InvestigatorImageProps = ViewProps & PropsWithLayout
 
@@ -39,6 +40,8 @@ export const InvestigatorImage = ({
     picture
   });
 
+  const background = images[faction]
+
   return (
     <C.Container 
       {...props}
@@ -47,12 +50,14 @@ export const InvestigatorImage = ({
       {imageLayout && (
         <C.Content>
           <C.FactionBackground
-            faction={faction}
+            source={background}
           />
-          <C.Background 
-            source={source}
-            layout={imageLayout}
-          />
+          <C.BackgroundContainer layout={layout}>
+            <C.Background 
+              source={source}
+              layout={imageLayout}
+            />
+          </C.BackgroundContainer>
         </C.Content>
       )}
     </C.Container>

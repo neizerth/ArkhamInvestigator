@@ -2,10 +2,9 @@ import { selectCurrentInvestigatorDetails, useAppDispatch, useAppSelector } from
 import * as C from "./InvestigatorDetailSelect.components";
 import { router } from "expo-router";
 import type { Faction } from "@shared/model";
-import { useCallback, useMemo, useRef, useState } from "react";
-import { getSkins, getVariants, selectInvestigatorMedia } from "../../lib";
-import type { InvestigatorDetailItem } from "../../model";
-import { Outside } from "@shared/ui";
+import { useCallback } from "react";
+import { selectInvestigatorMedia } from "../../lib";
+import type { InvestigatorDetailItem } from "@shared/model";
 import { InvestigatorDescription } from "../investigator/InvestigatorDescription";
 import { DataSectionMemo as DataSection } from "../data";
 import { selectSelectedInvestigators, setCurrentInvestigatorDetails, setInvestigatorSkin, setInvestigatorVariant } from "@shared/lib/store";

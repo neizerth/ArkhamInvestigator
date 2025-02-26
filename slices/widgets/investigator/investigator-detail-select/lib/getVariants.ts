@@ -1,5 +1,4 @@
-import type { InvestigatorDetails } from "@shared/model";
-import type { InvestigatorDetailItem } from "../model";
+import type { InvestigatorDetails, InvestigatorDetailItem } from "@shared/model";
 import { getMediaVariantId } from "@shared/lib";
 
 export const getVariants = (details: InvestigatorDetails) => {

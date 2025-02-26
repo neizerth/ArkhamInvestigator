@@ -3,8 +3,8 @@ import type { InvestigatorImage } from "arkham-investigator-data";
 import type { HeaderLayout } from "@pages/board/model";
 import { getScaledMedia } from "./getScaledMedia";
 import type { InvestigatorPicture } from "@shared/model";
-import { ascend, head, prop, sortWith } from "ramda";
-import { MAX_PORTRAIT_FACE_SIZE } from "@pages/board/config";
+import { ascend, head, lt, prop, sortWith } from "ramda";
+import { faceSize, MAX_PORTRAIT_FACE_SIZE } from "@pages/board/config";
 import { getCoverScale, getCoverScaleAt, scaleBox, scaleBoxLayout, scaleBoxPosition } from "@shared/lib";
 import { getBoxCenter, getBoxLayoutCenter } from "@shared/lib/util/size/box";
 
@@ -28,8 +28,10 @@ export const getBackgroundLayout = ({
   }
   
   const vh = view.height / 100
-  const faceHeight = MAX_PORTRAIT_FACE_SIZE * vh;
-  const faceScale = faceHeight / face.height;
+  const faceScale = {
+    min: faceSize.min * vh / face.height,
+    max: faceSize.max * vh / face.height,
+  }
   
   const imageCenter = getBoxCenter(image);
   const faceCenter = getBoxLayoutCenter(face);
@@ -44,13 +46,18 @@ export const getBackgroundLayout = ({
     height: image.height + offset.top
   }
 
+  const imageView = {
+    ...view,
+    height: view.height - layout.height
+  }
+
   const minScale = getCoverScaleAt({
     position: faceCenter,
-    view,
+    view: imageView,
     box: faceImage
   })
 
-  const scale = Math.max(minScale, faceScale);
+  const scale = Math.max(minScale, faceScale.min);
 
   const scaledImage = scaleBox(image, scale)
 
@@ -61,15 +68,27 @@ export const getBackgroundLayout = ({
 
 
   const center = {
-    top: scaledImageCenter.top - viewCenter.top + scaledOffset.top,
+    top: scaledImageCenter.top - viewCenter.top + scaledOffset.top + layout.height,
     left: scaledImageCenter.left - viewCenter.left + scaledOffset.left
   }
+
+  console.log({
+    center,
+    scale,
+    image,
+    face,
+    faceCenter,
+    offset,
+    scaledOffset
+  })
+  // const top = scaledImage.height < view.height ? scaledImage.height - view.height : center.top;
 
   return {
     width: scaledImage.width,
     height: scaledImage.height,
     left: center.left,
     top: center.top
+    // top: scaledImage.height - view.height
+    // top: center.top
   };
 }
-

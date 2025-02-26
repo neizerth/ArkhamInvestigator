@@ -6,11 +6,9 @@ import { useCallback } from 'react';
 import { startGame } from '../../lib';
 
 const getImageSource = ({
-  code,
-  skinId,
-  variantId
+  code
 }: SelectedInvestigator) => ({
-  uri: getInvestigatorImageUrl(skinId || variantId || code, 'square')
+  uri: getInvestigatorImageUrl(code, 'square')
 });
 
 export const StartButton = () => {

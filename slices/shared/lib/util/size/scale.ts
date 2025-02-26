@@ -102,7 +102,6 @@ export const getCoverScaleAt = (options: {
   position: BoxPosition
 }) => {
   const { position, view } = options;
-  const coverScale = getContainScale(options);
   const containScale = getContainScale(options);
   const box = scaleBox(options.box, containScale);
 
