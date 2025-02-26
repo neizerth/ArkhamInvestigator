@@ -17,6 +17,8 @@ export const Container: typeof View = styled(View)`
 
 export const Content: typeof View = styled(View)`
   flex: 1;
+  position: relative;
+  z-index: 2;
   justify-content: center;
   width: 100%;
   max-width: 500px;

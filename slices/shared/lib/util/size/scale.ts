@@ -1,4 +1,6 @@
-import type { Box, BoxLayout, BoxPosition, ScaledBox } from "@shared/model";
+import type { Box, BoxLayout, BoxPosition, BoxRect, ScaledBox } from "@shared/model";
+import { getBoxCenter, getRect, translateBoxLayout } from "./box";
+import { ascend, descend, identity } from "ramda";
 
 export const scaleBox = (box: Box, scale: number): Box => ({
   width: box.width * scale,
@@ -47,10 +49,10 @@ export const scaleBoxHeight = (options: {
   }
 }
 
-export const scaleCoverBox = (options: {
+export const getCoverScale = (options: {
   view: Box,
   box: Box
-}): ScaledBox => {
+}): number => {
   const {
     view,
     box,
@@ -62,15 +64,28 @@ export const scaleCoverBox = (options: {
     scale = view.height / box.height;
   }
 
-  const scaledBox = scaleBox(box, scale)
-
-  return {
-    ...scaledBox,
-    scale
-  }
+  return scale
 }
 
-export const getMinScale = (options:{
+export const getContainScale = (options: {
+  view: Box,
+  box: Box
+}): number => {
+  const {
+    view,
+    box,
+  } = options;
+
+  let scale = view.width / box.width;
+
+  if (box.height * scale > view.height) {
+    scale = view.height / box.height;
+  }
+
+  return scale
+}
+
+export const getMinScale = (options: {
   box: Box,
   view: Box
 }) => {
@@ -79,4 +94,47 @@ export const getMinScale = (options:{
   const heightScale = box.height / view.height;
 
   return Math.max(widthScale, heightScale)
+}
+
+export const getCoverScaleAt = (options: {
+  box: Box,
+  view: Box,
+  position: BoxPosition
+}) => {
+  const { position, view } = options;
+  const coverScale = getContainScale(options);
+  const containScale = getContainScale(options);
+  const box = scaleBox(options.box, containScale);
+
+  const rect = getRect({
+    view,
+    box
+  });
+
+  const boxCenter = getBoxCenter(box);
+  const dY = boxCenter.top - position.top;
+  const dX = boxCenter.left - position.left;
+
+  const diff = {
+    top: -dY,
+    bottom: dY,
+    left: -dX,
+    right: dX,
+  }
+
+  const layout = translateBoxLayout({
+    box: rect,
+    position: diff
+  })
+
+  const viewCenter = getBoxCenter(view);
+
+  const scales = [
+      viewCenter.top / (viewCenter.top - Math.min(layout.top, layout.bottom)),
+      viewCenter.left / (viewCenter.top - Math.min(layout.left, layout.right)),
+    ]
+    .filter(scale => scale > 0)
+    .sort(descend(identity))
+
+  return scales[0] || Number.NEGATIVE_INFINITY;
 }

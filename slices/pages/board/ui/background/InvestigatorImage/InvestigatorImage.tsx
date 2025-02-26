@@ -16,12 +16,12 @@ export const InvestigatorImage = ({
  ...props
 }: InvestigatorImageProps) => {
   const board = useAppSelector(selectBoard);
-  const [box, setBox] = useState<Box>();
+  const [view, setView] = useState<Box>();
 
   const onLayout = (e: LayoutChangeEvent) => {
     const { width, height } = e.nativeEvent.layout;
 
-    setBox({
+    setView({
       width,
       height
     })
@@ -33,12 +33,12 @@ export const InvestigatorImage = ({
   const uri = getInvestigatorImageUrl(id, 'full');
   const source = { uri };
 
-  const imageLayout = box && getBackgroundLayout({
+  const imageLayout = view && getBackgroundLayout({
     layout,
-    box,
+    view,
     picture
   });
-  
+
   return (
     <C.Container 
       {...props}

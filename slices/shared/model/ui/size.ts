@@ -3,6 +3,13 @@ export type Box = {
   height: number
 }
 
+export type RectPosition = BoxPosition & {
+  right: number
+  bottom: number
+}
+
+export type BoxRect = Box & RectPosition;
+
 export type ScaledBox = Box & {
   scale: number
 }

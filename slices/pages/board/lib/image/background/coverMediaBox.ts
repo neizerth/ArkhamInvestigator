@@ -1,6 +1,6 @@
 import type { HeaderLayout, ImageMedia } from "@pages/board/model";
 import { coverBox, getMinScale, scaleBox, scaleBoxLayout, scaleBoxPosition, scaleBoxWidth } from "@shared/lib";
-import { getOrientation } from "@shared/lib/util/size/common";
+import { getOrientation } from "@shared/lib/util/size/box";
 import type { Box } from "@shared/model";
 import type { InvestigatorImage } from "arkham-investigator-data";
 import { getAvailableScale } from "./getAvailableScale";

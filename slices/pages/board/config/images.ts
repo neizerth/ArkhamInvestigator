@@ -16,3 +16,5 @@ export const headerGap = {
 };
 
 export const MAX_IMAGE_HEIGHT = 15; // 15vh
+
+export const MAX_PORTRAIT_FACE_SIZE = 20; // 10vw

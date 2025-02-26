@@ -3,7 +3,6 @@ import { scaleBox, scaleBoxPosition } from "@shared/lib"
 import type { Box, InvestigatorPicture } from "@shared/model"
 import { getMediaData } from "./getMediaData"
 import { coverMediaBox } from "./coverMediaBox"
-import { MAX_PORTRAIT_FACE_SIZE } from "@pages/board/config"
 
 export type GetBackgroundMediaOptions = {
   layout: HeaderLayout
@@ -12,19 +11,21 @@ export type GetBackgroundMediaOptions = {
 }
 
 export const getScaledMedia = ({
-  view,
+  box,
   picture,
   layout
 }: GetBackgroundMediaOptions) => {
   const { image } = picture;
-  const { face } = image;
 
-  if (!face) {
-    return null;
-  }
+  const { media } = getMediaData(picture);
 
-  // const widthScale = 
-  const scale = MAX_PORTRAIT_FACE_SIZE * layout.height / 100;
-
-  
+  return media.map(
+    media => coverMediaBox({
+      container: image,
+      view: box,
+      media,
+      image,
+      layout
+    })
+  );
 }

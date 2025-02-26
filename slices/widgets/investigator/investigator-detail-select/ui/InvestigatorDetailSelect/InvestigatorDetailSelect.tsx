@@ -57,6 +57,7 @@ export const InvestigatorDetailSelect = () => {
 
   return (
     <C.Container>
+      <C.Outside onPress={goBack}/>
       <C.Content>
         <C.Outside onPress={goBack}/>
         <C.Card 
