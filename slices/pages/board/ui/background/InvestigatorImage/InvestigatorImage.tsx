@@ -5,9 +5,8 @@ import { selectBoard } from '@pages/board/lib';
 import { getInvestigatorImageUrl } from '@shared/api';
 import { useState } from 'react';
 import type { Box } from '@shared/model/ui';
-import { getBackgroundLayout } from '@pages/board/lib/image/background/getBackgroundLayout';
 import type { PropsWithLayout } from '@pages/board/model';
-import { Faction } from '@shared/model';
+import type { Faction } from '@shared/model';
 import { images } from './images';
 
 export type InvestigatorImageProps = ViewProps & PropsWithLayout
@@ -27,18 +26,8 @@ export const InvestigatorImage = ({
       height
     })
   }
-  const { picture, investigator } = board;
+  const { investigator } = board;
   const faction = investigator.faction_code as Faction;
-
-  const { id } = board.picture
-  const uri = getInvestigatorImageUrl(id, 'full');
-  const source = { uri };
-
-  const imageLayout = view && getBackgroundLayout({
-    layout,
-    view,
-    picture
-  });
 
   const background = images[faction]
 
@@ -47,19 +36,25 @@ export const InvestigatorImage = ({
       {...props}
       onLayout={onLayout}
     >
-      {imageLayout && (
-        <C.Content>
-          <C.FactionBackground
-            source={background}
+      <C.Content>
+        <C.FactionBackground
+          source={background}
+          width={view?.width}
+          height={view?.height}
+        />
+        {view && layout.type === 'column' && (
+          <C.PortraitBackground
+            view={view}
+            layout={layout}
           />
-          <C.BackgroundContainer layout={layout}>
-            <C.Background 
-              source={source}
-              layout={imageLayout}
-            />
-          </C.BackgroundContainer>
-        </C.Content>
-      )}
+        )}
+        {view && layout.type === 'row' && (
+          <C.LandscapeBackground
+            layout={layout}
+            view={view}
+          />
+        )}
+      </C.Content>
     </C.Container>
   );
 }

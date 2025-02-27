@@ -14,7 +14,7 @@ type GetImageLayout = {
   picture: InvestigatorPicture
 }
 
-export const getBackgroundLayout = ({
+export const getPortraitLayout = ({
   picture,
   layout,
   view
@@ -46,14 +46,9 @@ export const getBackgroundLayout = ({
     height: image.height + offset.top
   }
 
-  const imageView = {
-    ...view,
-    height: view.height - layout.height
-  }
-
   const minScale = getCoverScaleAt({
     position: faceCenter,
-    view: imageView,
+    view,
     box: faceImage
   })
 
@@ -66,29 +61,27 @@ export const getBackgroundLayout = ({
   const viewCenter = getBoxCenter(view);
   const scaledOffset = scaleBoxPosition(offset, scale);
 
-
+  const top = scaledImageCenter.top - viewCenter.top + scaledOffset.top
+  const left = scaledImageCenter.left - viewCenter.left + scaledOffset.left;
   const center = {
-    top: scaledImageCenter.top - viewCenter.top + scaledOffset.top + layout.height,
-    left: scaledImageCenter.left - viewCenter.left + scaledOffset.left
+    top,
+    left: Math.max(left, 0)
   }
 
-  console.log({
-    center,
-    scale,
-    image,
-    face,
-    faceCenter,
-    offset,
-    scaledOffset
-  })
-  // const top = scaledImage.height < view.height ? scaledImage.height - view.height : center.top;
+  let result = {
+    ...scaledImage,
+    ...center
+  }
+  
+  if (result.width - result.left < view.width) {
+    const scale = view.width / (result.width - result.left);
+    result = scaleBoxLayout(result, scale)
+  }
 
-  return {
-    width: scaledImage.width,
-    height: scaledImage.height,
-    left: center.left,
-    top: center.top
-    // top: scaledImage.height - view.height
-    // top: center.top
-  };
+  if (result.height - result.top < view.height) {
+    const scale = view.height / (result.height - result.top)
+    result = scaleBoxLayout(result, scale)
+  }
+
+  return result;
 }

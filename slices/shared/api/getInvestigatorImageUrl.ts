@@ -1,10 +1,11 @@
 import { INVESTIGATORS_API_URL } from "@shared/config";
 import { HAVE_AVIF_SUPPORT } from "@shared/config";
+import { ImageSizeType } from "@shared/model";
 
 export const getInvestigatorImageUrl = (
   code: string,
-  type: 'full' | 'mini' | 'square'
+  type: ImageSizeType
 ) => {
-  const format = HAVE_AVIF_SUPPORT ? 'avif' : 'jpg';
+  const format = 'jpg';
   return `${INVESTIGATORS_API_URL}/images/${format}/${type}/${code}.${format}`;
 }

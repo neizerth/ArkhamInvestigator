@@ -16,7 +16,7 @@ export const getInvestigatorBoards = ({
   mediaItems
 }: GetBoardInvestigators) => selectedInvestigators
   .map((item): InvestigatorBoard | null => {
-    const { code, skinId, variantId } = item;
+    const { code } = item;
     const investigator = investigators.find(propEq(code, 'code'));
     const media = mediaItems.find(propEq(code, 'code')); 
 
@@ -26,19 +26,21 @@ export const getInvestigatorBoards = ({
 
     const {
       picture,
-      additionalAction
+      additionalAction,
+      isParallel
     } = getSelectedInvestigatorVariant(item, media);
 
     const value = {
       ...getInvestigatorBoardStats(investigator),
       additionalAction
     }
-
+    
     return {
       investigator,
       picture,
       baseValue: { ...value },
-      value
+      value,
+      isParallel
     }
   })
   .filter(isNotNil)

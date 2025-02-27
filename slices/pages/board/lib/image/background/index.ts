@@ -1,1 +1,1 @@
-export * from './getBackgroundLayout'
+export * from './getPortraitLayout'

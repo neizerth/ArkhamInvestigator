@@ -33,7 +33,8 @@ export const getSelectedInvestigatorVariant = (
 
   const defaultData = {
     picture,
-    additionalAction
+    additionalAction,
+    isParallel: false
   }
   if (!variantId) {
     return defaultData;
@@ -52,6 +53,7 @@ export const getSelectedInvestigatorVariant = (
     id: skinId || variant.image ? id : code,
     image: skinImage || variant.image || image
   }
+
   return {
     picture: variantPicture,
     additionalAction: variant.additionalAction || additionalAction,

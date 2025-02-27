@@ -1,8 +1,11 @@
-import type { BackgroundLayout, HeaderLayout } from "@pages/board/model";
-import type { BoxLayout, PropsWithBox, PropsWithFaction, ScaledBoxLayout } from "@shared/model/ui";
+import type { HeaderLayout } from "@pages/board/model";
+import type { Box } from "@shared/model";
 import type { FC } from "react";
-import { View, Image, type ImageProps, ViewProps } from "react-native";
+import { View, Image, type ImageProps, type ViewProps } from "react-native";
 import styled, { css } from "styled-components/native";
+import { PortraitImage } from "../PortraitImage";
+import { LandscapeImage, LandscapeImageProps } from "../LandscapeImage";
+import { SERVICE_PADDING } from "@pages/board/config";
 
 export const Container: typeof View = styled(View)`
 `
@@ -12,41 +15,37 @@ export const Content: typeof View = styled(View)`
   flex: 1;
 `
 
-
-
 export const FactionBackground: typeof Image = styled(Image)`
+  flex: 1;
   position: absolute;
   left: 0;
   top: 0;
   right: 0;
   bottom: 0;
+  ${({ width = 0, height = 0}: ImageProps) => css`
+    width: ${width}px;
+    height: ${height}px;
+  `}
 `
 
-type BackgroundProps = ImageProps & {
-  layout: BoxLayout
-}
-
-export const Background: FC<BackgroundProps> = styled(Image)`
+export const PortraitBackground: typeof PortraitImage = styled(PortraitImage)`
   position: absolute;
-  ${({ layout }: BackgroundProps) => css`
-    left: ${-layout.left}px;
-    top: ${-layout.top}px;
-    width: ${layout.width}px;
-    height: ${layout.height}px;
- `}
-`
+  z-index: 2;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+` 
 
-type BackgroundContainerProps = ViewProps & {
+type LandscapeBackgroundProps = LandscapeImageProps & {
   layout: HeaderLayout
 }
 
-export const BackgroundContainer: FC<BackgroundContainerProps> = styled(View)`
+export const LandscapeBackground: FC<LandscapeBackgroundProps> = styled(LandscapeImage)`
   position: absolute;
-  overflow: hidden;
-  ${({ layout }: BackgroundContainerProps) => css`
-    top: ${layout.height}px;
-    bottom: 0px;
-    left: 0px;
-    right: 0px;
- `}
+  z-index: 2;
+  ${({ layout }: LandscapeBackgroundProps) => css`
+    top: ${layout.height + layout.gap}px;
+    left: ${SERVICE_PADDING}px;
+  `}
 `
