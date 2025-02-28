@@ -5,6 +5,7 @@ import { BoardHeader, type BoardHeaderProps } from '../header';
 import { servicePadding } from '@pages/board/config';
 import type { FC } from 'react';
 import { BoardFooter } from '../footer';
+import { PropsWithLayout } from '@pages/board/model';
 
 export const Container: typeof View = styled(View)`
   flex: 1;
@@ -21,13 +22,13 @@ export const Background: typeof InvestigatorImage = styled(InvestigatorImage)`
   bottom: 0;
 ` 
 
-export const Header: FC<BoardHeaderProps> = styled(BoardHeader)`
+export const Header: FC<BoardHeaderProps & PropsWithLayout> = styled(BoardHeader)`
   position: absolute;
   z-index: 2;
   left: 0;
   right: 0;
   bottom: 0;
-  ${({ layout }: BoardHeaderProps) => css`
+  ${({ layout }: PropsWithLayout) => css`
     top: ${servicePadding[layout.type].top}px;
   `}
 ` 

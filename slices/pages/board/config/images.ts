@@ -20,4 +20,10 @@ export const MAX_IMAGE_HEIGHT = 25; // 15vh
 export const faceSize = {
   min: 15,
   max: 50
-};
+}
+
+export const descriptionSize = {
+  width: 523,
+  height: 591,
+  ratio: 523 / 591
+}

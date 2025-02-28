@@ -1,13 +1,12 @@
-import { useWindowDimensions, type ViewProps } from 'react-native';
+import type { ViewProps } from 'react-native';
 import * as C from './BoardHeader.components';
-import { getHeaderLayout } from '@pages/board/lib';
-import type { PropsWithLayout } from '@pages/board/model';
+import { useContext } from 'react';
+import { LayoutContext } from '@pages/board/config';
 
-export type BoardHeaderProps = ViewProps & PropsWithLayout
+export type BoardHeaderProps = ViewProps;
 
 export const BoardHeader = (props: BoardHeaderProps) => {
-  const window = useWindowDimensions();
-  const layout = getHeaderLayout(window);
+  const { layout } = useContext(LayoutContext);
 
   const gap = layout.type === 'column' ? layout.gap : 0;
   const marginLeft = layout.type === 'row' ? -layout.gap : 0;
@@ -26,11 +25,8 @@ export const BoardHeader = (props: BoardHeaderProps) => {
       {...props}
       style={[props.style, style]}
     >
-      <C.Title layout={layout}/>
-      <C.Skills 
-        layout={layout}
-        style={skillsStyle}
-      />
+      <C.Title/>
+      <C.Skills style={skillsStyle}/>
     </C.Container>
   );
 }

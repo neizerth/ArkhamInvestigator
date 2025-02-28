@@ -5,6 +5,7 @@ import { type LayoutChangeEvent, useWindowDimensions } from 'react-native';
 import { Visible } from '@shared/ui';
 import { useState } from 'react';
 import type { Box } from '@shared/model';
+import { LayoutContext } from '@pages/board/config/context';
 
 export const BoardPage = () => {
   const board = useAppSelector(selectBoard);
@@ -21,18 +22,21 @@ export const BoardPage = () => {
   }
 
   const layout = getHeaderLayout(view);
+
+  const contextValue = {
+    view,
+    layout
+  }
   
   return (
-    <C.Container onLayout={onLayout}>
-      <Visible show={Boolean(board)}>
-        <C.Header layout={layout}/>
-        <C.Background 
-          layout={layout}
-          view={view}
-        />
-        
-        <C.Footer/>
-      </Visible>
-    </C.Container>
+    <LayoutContext.Provider value={contextValue}>
+      <C.Container onLayout={onLayout}>
+        <Visible show={Boolean(board)}>
+          <C.Header layout={layout}/>
+          <C.Background/>
+          <C.Footer/>
+        </Visible>
+      </C.Container>
+    </LayoutContext.Provider>
   );
 }

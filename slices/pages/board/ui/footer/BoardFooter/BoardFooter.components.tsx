@@ -3,16 +3,20 @@ import { Row as BaseRow, Icon as BaseIcon } from "@shared/ui"
 import { color, size } from "@shared/config"
 import { View } from "react-native"
 import { FC } from "react"
+import { FooterDescription } from "../FooterDescription"
 
 export const Container: typeof View = styled(View)`
-  gap: 10px;
-  padding: 10px;
+
 `
 
 export const Row: typeof BaseRow = styled(BaseRow)`
-  gap: 20px;
   justify-content: space-between;
   align-items: center;
+`
+
+export const Stats: typeof Row = styled(Row)`
+  padding: 10px;
+  gap: 20px;
 `
 
 type IconProps = Omit<typeof BaseIcon, 'icon'>
@@ -45,5 +49,6 @@ export const Menu: FC<IconProps> = styled(Icon)
   })`
   `
 
-
-
+export const Description = styled(FooterDescription)`
+  height: 60px;
+`

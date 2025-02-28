@@ -1,3 +1,5 @@
+import type { Box } from "@shared/model";
+
 export type HeaderLayoutType = 'row' | 'column';
 
 export type HeaderLayout = {
@@ -15,4 +17,8 @@ export type HeaderTypedLayout = {
 
 export type PropsWithLayout = {
   layout: HeaderLayout
+}
+
+export type PropsWithView = {
+  view: Box
 }
