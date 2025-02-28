@@ -1,4 +1,4 @@
-import { InvestigatorSource } from '@shared/model/index.js';
+import type { InvestigatorSource } from '@shared/model/index.js';
 import * as C from './InvestigatorStats.components';
 import { IconNumber } from '@shared/ui';
 

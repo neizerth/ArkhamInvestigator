@@ -1,5 +1,5 @@
 import { font } from "@shared/config";
-import { StyleSheet, Text, TextProps } from "react-native";
+import { StyleSheet, Text, type TextProps } from "react-native";
 import { parseValue } from "./parseValue";
 
 export type IconNumberTextProps = TextProps & {

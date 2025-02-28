@@ -1,5 +1,5 @@
 import type { PropsWithSkill } from "@shared/model/ui";
-import { Background, Container, Foreground, PropsWithTheme } from "./SkillIcon.components";
+import { Background, Container, Foreground, type PropsWithTheme } from "./SkillIcon.components";
 import type { IconProps } from "../Icon";
 
 export type SkillIconProps = Omit<IconProps, 'icon'> & PropsWithSkill & PropsWithTheme;

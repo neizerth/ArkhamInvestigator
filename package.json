@@ -9,7 +9,11 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "test": "jest --watchAll",
-    "lint": "expo lint"
+    "lint": "expo lint",
+    "knip": "npx knip",
+    "check": "biome check",
+    "format": "biome check --write ./slices",
+    "biome:fix": "biome lint --write ./slices"
   },
   "jest": {
     "preset": "jest-expo"
@@ -57,6 +61,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
+    "@biomejs/biome": "^1.9.4",
     "@types/color": "^4.2.0",
     "@types/jest": "^29.5.12",
     "@types/ramda": "^0.30.2",

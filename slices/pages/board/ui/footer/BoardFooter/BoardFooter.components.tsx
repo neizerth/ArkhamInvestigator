@@ -2,7 +2,7 @@ import styled from "styled-components/native"
 import { Row as BaseRow, Icon as BaseIcon } from "@shared/ui"
 import { color, size } from "@shared/config"
 import { View } from "react-native"
-import { FC } from "react"
+import type { FC } from "react"
 import { FooterDescription } from "../FooterDescription"
 
 export const Container: typeof View = styled(View)`

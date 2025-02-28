@@ -1,6 +1,6 @@
 import { Text, type TextProps } from 'react-native';
 import { Background, Container, Value } from './IconNumber.components';
-import { IconNumberText, IconNumberTextProps } from '../IconNumberText';
+import { IconNumberText, type IconNumberTextProps } from '../IconNumberText';
 import { scaleFontFromStyle } from '@shared/lib';
 
 export type IconNumberProps = IconNumberTextProps & {

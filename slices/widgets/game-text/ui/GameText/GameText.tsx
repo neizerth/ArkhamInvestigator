@@ -1,4 +1,4 @@
-import { type TextProps } from 'react-native';
+import type { TextProps } from 'react-native';
 import { prepareText } from '../../lib/prepareText';
 import parse from 'html-react-parser';
 import { getLibrary } from '../../lib';

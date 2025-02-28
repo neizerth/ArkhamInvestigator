@@ -1,5 +1,5 @@
 import { useAppData } from "@shared/lib";
-import { PropsWithChildren } from "react";
+import type { PropsWithChildren } from "react";
 
 export const DataProvider = ({ children }: PropsWithChildren) => {
   useAppData();

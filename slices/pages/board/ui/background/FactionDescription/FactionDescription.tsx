@@ -1,7 +1,7 @@
 import { useAppSelector } from '@shared/lib';
 import * as C from './FactionDescription.components';
 import { selectBoard } from '@pages/board/lib';
-import { Faction } from '@shared/model';
+import type { Faction } from '@shared/model';
 import { images } from './images';
 import { Image, type ImageProps } from 'react-native';
 

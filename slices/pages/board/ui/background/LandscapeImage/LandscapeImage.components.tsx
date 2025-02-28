@@ -1,5 +1,5 @@
 import { size } from "@shared/config";
-import { Image, ImageProps } from "react-native";
+import { Image, type ImageProps } from "react-native";
 import styled, { css } from "styled-components/native";
 
 export const Background: typeof Image = styled(Image)`

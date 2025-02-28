@@ -4,7 +4,7 @@ import { selectBoard } from '@pages/board/lib';
 import type { Box, Faction } from '@shared/model';
 import { images } from './images';
 import type { ImageProps } from 'react-native';
-import { PropsWithLayout } from '@pages/board/model';
+import type { PropsWithLayout } from '@pages/board/model';
 
 export type FactionBackgroundProps = ImageProps & PropsWithLayout & {
   view: Box

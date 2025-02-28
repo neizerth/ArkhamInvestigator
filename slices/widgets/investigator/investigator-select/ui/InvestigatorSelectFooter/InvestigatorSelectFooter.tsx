@@ -1,4 +1,4 @@
-import { ViewProps } from 'react-native';
+import type { ViewProps } from 'react-native';
 import { Container } from './InvestigatorSelectFooter.components';
 import { selectSelectedInvestigators, useAppSelector } from '@shared/lib';
 import { StartButton } from '../StartButton';

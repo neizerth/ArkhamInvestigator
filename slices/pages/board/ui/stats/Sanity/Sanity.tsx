@@ -1,6 +1,6 @@
 import { View } from 'react-native-reanimated/lib/typescript/Animated';
 import * as C from './Sanity.components';
-import { ViewProps } from 'react-native';
+import type { ViewProps } from 'react-native';
 
 export type SanityProps = ViewProps
 

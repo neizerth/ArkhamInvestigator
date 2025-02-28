@@ -1,8 +1,8 @@
-import { Animated, View, ViewProps } from "react-native";
+import { Animated, View, type ViewProps } from "react-native";
 import styled, { css } from "styled-components/native";
-import { FactionDescription, FactionDescriptionProps } from "../../background";
-import { FC } from "react";
-import { PropsWithView } from "@pages/board/model";
+import { FactionDescription, type FactionDescriptionProps } from "../../background";
+import type { FC } from "react";
+import type { PropsWithView } from "@pages/board/model";
 import { descriptionSize } from "@pages/board/config";
 import { TouchableOpacity } from "@shared/ui";
 

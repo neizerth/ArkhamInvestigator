@@ -5,7 +5,7 @@ import { BoardHeader, type BoardHeaderProps } from '../header';
 import { servicePadding } from '@pages/board/config';
 import type { FC } from 'react';
 import { BoardFooter } from '../footer';
-import { PropsWithLayout } from '@pages/board/model';
+import type { PropsWithLayout } from '@pages/board/model';
 
 export const Container: typeof View = styled(View)`
   flex: 1;
