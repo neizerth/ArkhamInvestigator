@@ -2,7 +2,6 @@ import { router } from 'expo-router';
 
 import { Text, Container, Background } from './NewGameButton.components';
 import { useCallback, useState } from 'react';
-import { Visible } from '@shared/ui';
 import { CLICK_PATTERN } from '@features/haptic';
 
 export const NewGameButton = () => {

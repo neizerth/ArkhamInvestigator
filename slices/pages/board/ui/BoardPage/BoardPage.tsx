@@ -1,8 +1,8 @@
+import React from 'react';
 import { useAppSelector, useLayoutSize } from '@shared/lib';
 import * as C from './BoardPage.components';
 import { getHeaderLayout, selectBoard, useStatusBar } from '@pages/board/lib';
 import { useWindowDimensions } from 'react-native';
-import { Visible } from '@shared/ui';
 import { LayoutContext } from '@pages/board/config/context';
 
 export const BoardPage = () => {
@@ -22,11 +22,14 @@ export const BoardPage = () => {
   return (
     <LayoutContext.Provider value={contextValue}>
       <C.Container onLayout={onLayout}>
-        <Visible show={Boolean(board)}>
-          <C.Header layout={layout}/>
-          <C.Background/>
-          <C.Footer/>
-        </Visible>
+        {board && (
+          <>
+            <C.Header layout={layout}/>
+            <C.Background/>
+            <C.Footer/>
+          </>
+        )}
+          
       </C.Container>
     </LayoutContext.Provider>
   );
