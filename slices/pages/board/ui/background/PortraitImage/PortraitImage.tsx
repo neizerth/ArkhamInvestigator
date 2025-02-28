@@ -21,6 +21,7 @@ export const PortraitImage = ({
   
   const { id } = picture
   const uri = getInvestigatorImageUrl(id, 'full');
+
   const source = { uri };
   
   const imageLayout = getPortraitLayout({

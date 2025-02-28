@@ -4,7 +4,7 @@ export const titleStyle = {
 }
 
 export const skillsStyle = {
-  width: 504,
+  width: 510,
   marginLeft: -14
 }
 
@@ -15,7 +15,7 @@ export const headerGap = {
   horizontal: 20
 };
 
-export const MAX_IMAGE_HEIGHT = 15; // 15vh
+export const MAX_IMAGE_HEIGHT = 25; // 15vh
 
 export const faceSize = {
   min: 15,

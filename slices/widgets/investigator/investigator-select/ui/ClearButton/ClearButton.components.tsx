@@ -10,9 +10,9 @@ export const Container: typeof TouchableOpacity = styled(TouchableOpacity)`
   background-color: ${color.light10};
   justify-content: center;
   align-items: center;
-  
 `
 
 export const Icon: typeof BaseIcon = styled(BaseIcon)`
-  
+  font-size: 20px;
+  color: ${color.dark10};
 `

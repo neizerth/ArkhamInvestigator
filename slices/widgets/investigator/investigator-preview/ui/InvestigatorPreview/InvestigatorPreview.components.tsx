@@ -1,6 +1,5 @@
 import { 
   Image as NativeImage,
-  TouchableOpacity,
   View 
 } from "react-native";
 import type { ImageProps, ViewProps } from 'react-native'
@@ -11,7 +10,7 @@ import type { FC } from "react";
 import { color, factionColor, size } from "@shared/config";
 import Color from "color";
 import type { PropsWithFaction } from "@shared/model/ui";
-import { Icon } from "@shared/ui";
+import { Icon, TouchableOpacity } from "@shared/ui";
 
 
 const getSelectionColor = (faction: Faction) => {

@@ -2,6 +2,10 @@ import { View } from "react-native";
 import styled from "styled-components/native";
 
 export const Container: typeof View = styled(View)`
+
+`
+
+export const Group: typeof View = styled(View)`
   position: relative;
 `
 

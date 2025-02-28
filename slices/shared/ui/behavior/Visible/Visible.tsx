@@ -10,7 +10,7 @@ export const Visible = ({
   children
 }: VisibleProps) => {
   return (
-    <View>
+    <View style={{ flex: 1 }}>
       {show && children}
     </View>
   )

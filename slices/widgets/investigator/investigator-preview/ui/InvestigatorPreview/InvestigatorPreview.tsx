@@ -8,6 +8,7 @@ import { useImageSize } from "@widgets/investigator/investigator-select/lib/hook
 import type { Investigator as InvestigatorMedia } from "arkham-investigator-data"
 import { InvestigatorPreviewFactionIcon as FactionIcon } from "../InvestigatorPreviewFactionIcon"
 import { memo } from "react"
+import { TICK_PATTERN } from "@features/haptic"
 
 export type InvestigatorPreviewProps = TouchableOpacityProps & {
   investigator: InvestigatorSource
@@ -39,7 +40,10 @@ export const InvestigatorPreview = ({
   const showOptions = showOptionsInfo && (media?.variants || media?.skins);
   
   return (
-    <Container {...props}>
+    <Container 
+      {...props}
+      pressHapticPattern={TICK_PATTERN}
+    >
       {showOptions && (
         <OptionsInfo faction={faction}/>
       )}

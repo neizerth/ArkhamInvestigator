@@ -79,7 +79,7 @@ export const getPortraitLayout = ({
   }
 
   if (result.height - result.top < view.height) {
-    const scale = view.height / (result.height - result.top)
+    const scale = view.height / (result.height - result.top);
     result = scaleBoxLayout(result, scale)
   }
 

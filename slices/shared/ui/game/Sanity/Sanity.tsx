@@ -1,11 +1,12 @@
-import { IconImageBackground, IconImageBackgroundProps } from '@shared/ui/image';
+import type { IconImageBackgroundProps } from '@shared/ui/image';
 import { sanity } from './images';
+import { Background } from './Sanity.components';
 
 export type SanityProps = Omit<IconImageBackgroundProps, 'source'>;
 
 export const Sanity = (props: SanityProps) => {
   return (
-    <IconImageBackground
+    <Background
       {...props}
       source={sanity}
     />

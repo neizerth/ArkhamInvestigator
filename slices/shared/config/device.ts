@@ -1,6 +1,6 @@
 import { capitalize } from "../lib/util/string";
 import type { BreakpointSize, DeviceBreakpoints, DeviceBreakpointType, DeviceType } from "../model";
-import { Platform } from "react-native";
+import * as ScreenOrientation from 'expo-screen-orientation';
 
 // export const HAVE_AVIF_SUPPORT = Platform.OS !== 'android' || (Platform.OS === 'android' && Platform.Version >= 12)
 export const HAVE_AVIF_SUPPORT = false;
@@ -36,3 +36,14 @@ export const breakpointsOrder: DeviceBreakpointType[] = deviceTypes.flatMap(
     size => `${deviceType}${capitalize(size)}` as DeviceBreakpointType
   )
 )
+
+export const orientations = {
+  landscape: [
+    ScreenOrientation.Orientation.LANDSCAPE_LEFT,
+    ScreenOrientation.Orientation.LANDSCAPE_RIGHT
+  ],
+  portrait: [
+    ScreenOrientation.Orientation.PORTRAIT_DOWN,
+    ScreenOrientation.Orientation.PORTRAIT_UP
+  ]
+}

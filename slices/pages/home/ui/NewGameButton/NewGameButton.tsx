@@ -3,7 +3,7 @@ import { router } from 'expo-router';
 import { Text, Container, Background } from './NewGameButton.components';
 import { useCallback, useState } from 'react';
 import { Visible } from '@shared/ui';
-import { TICK_PATTERN } from '@features/haptic';
+import { CLICK_PATTERN } from '@features/haptic';
 
 export const NewGameButton = () => {
   const [loaded, setLoaded] = useState(false);
@@ -17,12 +17,12 @@ export const NewGameButton = () => {
   return (
     <Container 
       onPress={startNewGame}
-      pressHapticPattern={TICK_PATTERN}
+      pressHapticPattern={CLICK_PATTERN}
     >
       <Background onLoad={onLoad}>
-        <Visible show={loaded}>
+        {loaded && (
           <Text>New Game</Text>
-        </Visible>
+        )}
       </Background>
     </Container>
   );

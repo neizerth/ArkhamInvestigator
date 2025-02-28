@@ -10,18 +10,12 @@ import {
 } from 'react-native';
 
 import { handlePress } from "./handlePress";
-import { type AudioSource, useAudioPlayer } from 'expo-audio';
 
 export type TouchableOpacityProps = BaseTouchableOpacityProps & {
   pressHapticPattern?: HapticPattern
   pressInHapticPattern?: HapticPattern
   pressOutHapticPattern?: HapticPattern
   longPressHapticPattern?: HapticPattern
-
-  pressSound?: AudioSource
-  pressInSound?: AudioSource
-  pressOutSound?: AudioSource
-  longPressSound?: AudioSource
 }
 
 export const TouchableOpacity = ({
@@ -29,26 +23,16 @@ export const TouchableOpacity = ({
   pressInHapticPattern,
   pressOutHapticPattern,
   longPressHapticPattern,
-
-  pressSound,
-  pressInSound,
-  pressOutSound,
-  longPressSound,
   ...props
 }: TouchableOpacityProps) => {
-  const pressSFX = useAudioPlayer(pressSound);
-  const pressInSFX = useAudioPlayer(pressInSound);
-  const pressOutSFX = useAudioPlayer(pressOutSound);
-  const longPressSFX = useAudioPlayer(longPressSound);
 
   const onPress = useCallback(
     (event: GestureResponderEvent) => handlePress({
       event,
       eventHandler: props.onPress, 
       pattern: pressHapticPattern,
-      sound: pressSFX
     }), 
-    [props.onPress, pressHapticPattern, pressSFX]
+    [props.onPress, pressHapticPattern]
   );
 
   const onPressIn = useCallback(
@@ -56,9 +40,8 @@ export const TouchableOpacity = ({
       event,
       eventHandler: props.onPressIn, 
       pattern: pressInHapticPattern,
-      sound: pressInSFX
     }), 
-    [props.onPressIn, pressInHapticPattern, pressInSFX]
+    [props.onPressIn, pressInHapticPattern]
   );
 
   const onPressOut = useCallback(
@@ -66,9 +49,8 @@ export const TouchableOpacity = ({
       event,
       eventHandler: props.onPressOut, 
       pattern: pressOutHapticPattern,
-      sound: pressOutSFX
     }), 
-    [props.onPressOut, pressOutHapticPattern, pressOutSFX]
+    [props.onPressOut, pressOutHapticPattern]
   );
 
   const onLongPress = useCallback(
@@ -76,9 +58,8 @@ export const TouchableOpacity = ({
       event,
       eventHandler: props.onLongPress, 
       pattern: longPressHapticPattern,
-      sound: longPressSFX
     }), 
-    [props.onLongPress, longPressHapticPattern, longPressSFX]
+    [props.onLongPress, longPressHapticPattern]
   );
 
   return (

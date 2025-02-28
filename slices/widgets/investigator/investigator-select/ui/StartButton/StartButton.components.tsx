@@ -1,7 +1,7 @@
 import { color, size } from "@shared/config";
 import { Alegreya } from "@shared/fonts/Alegreya";
-import { Icon as BaseIcon, Row } from "@shared/ui";
-import { TouchableOpacity, Text as BaseText, Image } from "react-native";
+import { Icon as BaseIcon, Row, TouchableOpacity } from "@shared/ui";
+import { Text as BaseText, Image } from "react-native";
 import styled from "styled-components/native";
 
 export const Container: typeof TouchableOpacity = styled(TouchableOpacity)`

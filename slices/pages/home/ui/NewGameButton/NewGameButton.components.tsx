@@ -19,7 +19,7 @@ export const Background: typeof ReactNative.ImageBackground = styled(ReactNative
     resizeMethod: 'resize'
   })`
     width: 250px;
-    height: auto;
+    height: 80px;
     flex: 1;
     justify-content: center;
     align-items: center;

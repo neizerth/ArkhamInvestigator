@@ -1,11 +1,12 @@
-import { IconImageBackground, IconImageBackgroundProps } from '@shared/ui/image';
+import type { IconImageBackgroundProps } from '@shared/ui/image';
 import { health } from './images';
+import { Background } from './Health.components';
 
 export type HealthProps = Omit<IconImageBackgroundProps, 'source'>;
 
 export const Health = (props: HealthProps) => {
   return (
-    <IconImageBackground
+    <Background
       {...props}
       source={health}
     />

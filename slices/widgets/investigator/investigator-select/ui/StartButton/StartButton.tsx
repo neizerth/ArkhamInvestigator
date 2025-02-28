@@ -4,6 +4,7 @@ import { getInvestigatorImageUrl } from '@shared/api/getInvestigatorImageUrl';
 import type { SelectedInvestigator } from '@shared/model';
 import { useCallback } from 'react';
 import { startGame } from '../../lib';
+import { TICK_PATTERN } from '@features/haptic';
 
 const getImageSource = ({
   code
@@ -20,7 +21,10 @@ export const StartButton = () => {
   }, [dispatch])
 
   return (
-    <C.Container onPress={start}>
+    <C.Container 
+      onPress={start} 
+      pressHapticPattern={TICK_PATTERN}
+    >
       <C.Content>
         <C.Investigators>
           {investigators.map(item => (

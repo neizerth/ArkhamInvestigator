@@ -29,6 +29,7 @@
     "expo-haptics": "~14.0.0",
     "expo-linking": "~7.0.3",
     "expo-router": "~4.0.15",
+    "expo-screen-orientation": "~8.0.4",
     "expo-splash-screen": "~0.29.18",
     "expo-status-bar": "~2.0.0",
     "expo-symbols": "~0.2.0",
@@ -52,8 +53,7 @@
     "react-responsive": "^10.0.0",
     "redux-toolkit-helpers": "^1.0.3",
     "styled-components": "^6.1.15",
-    "uuid": "^11.0.5",
-    "expo-audio": "~0.3.5"
+    "uuid": "^11.0.5"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
