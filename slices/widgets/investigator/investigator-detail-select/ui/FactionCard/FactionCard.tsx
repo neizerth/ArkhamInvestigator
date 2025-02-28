@@ -1,8 +1,9 @@
 import type { PropsWithFaction } from '@shared/model/ui';
 import * as C from './FactionCard.components';
-import type { LayoutChangeEvent, ViewProps } from 'react-native';
+import { useWindowDimensions, type LayoutChangeEvent, type ViewProps } from 'react-native';
 import { memo, useCallback, useState } from 'react';
 import { Outside } from '@shared/ui';
+import { useLayoutSize } from '@shared/lib';
 
 export type InvestigatorDetailSelectCardProps = ViewProps & PropsWithFaction & {
   title?: string
@@ -20,19 +21,17 @@ export const InvestigatorDetailSelectCard = ({
   onClose,
   ...props
 }: InvestigatorDetailSelectCardProps) => {
-  const [maxHeight, setMaxHeight] = useState<number | undefined>();
+  const window = useWindowDimensions();
+  const [size, onLayout] = useLayoutSize();
 
-  const onLayout = useCallback((e: LayoutChangeEvent) => {
-    const { height } = e.nativeEvent.layout;
-    setMaxHeight(height + MAX_HEIGHT_AREA);
-  }, []);
+  const style = size ? {
+    maxHeight: size.height + MAX_HEIGHT_AREA 
+  } : {};
 
-  const style = {
-    maxHeight
-  }
   const containerStyle = {
-    opacity: maxHeight ? 1 : 0
+    opacity: size ? 1 : 0
   }
+  
   return (
     <C.Container {...props} style={[style, props.style, containerStyle]}>
       <C.Header faction={faction}>
