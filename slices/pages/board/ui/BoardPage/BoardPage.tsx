@@ -21,16 +21,13 @@ export const BoardPage = () => {
   
   return (
     <LayoutContext.Provider value={contextValue}>
-      <C.Container onLayout={onLayout}>
-        {board && (
-          <>
-            <C.Header layout={layout}/>
-            <C.Background/>
-            <C.Footer/>
-          </>
-        )}
-          
-      </C.Container>
+      {board && (
+        <C.Container onLayout={onLayout}>
+          <C.Header layout={layout}/>
+          <C.Background/>
+          <C.Footer/>
+        </C.Container>
+      )}
     </LayoutContext.Provider>
   );
 }

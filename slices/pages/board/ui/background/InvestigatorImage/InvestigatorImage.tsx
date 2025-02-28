@@ -21,15 +21,11 @@ export const InvestigatorImage = ({
           layout={layout}
         />
         {layout.type === 'column' && (
-          <C.PortraitBackground
-            view={view}
-            layout={layout}
-          />
+          <C.PortraitBackground/>
         )}
         {layout.type === 'row' && (
           <C.LandscapeBackground
             layout={layout}
-            view={view}
           />
         )}
       </C.Content>

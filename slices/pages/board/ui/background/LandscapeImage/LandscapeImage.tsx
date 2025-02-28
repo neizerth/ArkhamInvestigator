@@ -7,17 +7,15 @@ import type { HeaderLayout } from '@pages/board/model';
 import type { miniImageSize } from '@shared/config';
 import type { Box } from '@shared/model';
 import { getLandscapeLayout } from '@pages/board/lib/image/background/getLandscapeLayout';
+import { useContext } from 'react';
+import { LayoutContext } from '@pages/board/config';
 
-export type LandscapeImageProps = ImageProps & {
-  layout: HeaderLayout
-  view: Box
-}
+export type LandscapeImageProps = ImageProps;
 
 export const LandscapeImage = ({
-  view,
-  layout,
   ...props
 }: LandscapeImageProps) => {
+  const { view, layout } = useContext(LayoutContext);
   const { picture } = useAppSelector(selectBoard);
   const { id } = picture;
   const uri = getInvestigatorImageUrl(id, 'mini');
