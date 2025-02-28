@@ -26,7 +26,7 @@ export const Icon: FC<IconProps> = styled(BaseIcon)`
   font-size: 30px;
   text-shadow: 2px 2px 5px ${color.dark10};
 
-  padding: 10px 15px;
+  padding: ${size.gap.default}px ${size.gap.medium}px;
 `
 
 export const Undo: FC<IconProps> = styled(Icon)

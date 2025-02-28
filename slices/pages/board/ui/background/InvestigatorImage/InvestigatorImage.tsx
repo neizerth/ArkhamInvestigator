@@ -1,7 +1,7 @@
 import type { ViewProps } from 'react-native';
 import * as C from './InvestigatorImage.components';
 import { useContext } from 'react';
-import { LayoutContext } from '@pages/board';
+import { LayoutContext } from '@pages/board/config';
 
 export type InvestigatorImageProps = ViewProps;
 

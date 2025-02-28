@@ -1,4 +1,4 @@
-import { ViewProps } from 'react-native';
+import type { ViewProps } from 'react-native';
 import * as C from './FooterDescription.components';
 import { useContext } from 'react';
 import { LayoutContext } from '@pages/board/config';
