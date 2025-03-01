@@ -1,8 +1,11 @@
+import { color } from "@shared/config";
 import { IconNumber } from "@shared/ui";
 import styled from "styled-components/native";
 
-export const Container = styled(IconNumber)
+export const Container: typeof IconNumber = styled(IconNumber)
   .attrs({
-    size: 30
+    stroke: true,
   })`
+    color: white;
+    font-size: 60px;
   `

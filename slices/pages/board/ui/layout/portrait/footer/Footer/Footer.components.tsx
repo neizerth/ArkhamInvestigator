@@ -24,38 +24,10 @@ export const Stats: typeof Row = styled(Row)`
 `
 
 export const MainStats: typeof Row = styled(Row)`
+  position: relative;
+  top: -5px;
   gap: ${size.gap.medium}px;
 `
-
-type IconProps = Omit<typeof BaseIcon, 'icon'>
-
-export const Icon: FC<IconProps> = styled(BaseIcon)`
-  color: ${color.light10};
-  font-size: 30px;
-  text-shadow: 2px 2px 5px ${color.dark10};
-
-  padding: ${size.gap.default}px ${size.gap.medium}px;
-`
-
-export const Undo: FC<IconProps> = styled(Icon)
-  .attrs({
-    icon: 'undo'
-  })`
-    
-  `
-
-export const Redo: FC<IconProps> = styled(Icon)
-  .attrs({
-    icon: 'redo'
-  })`
-    font-size: 24px;
-  `
-
-export const Menu: FC<IconProps> = styled(Icon)
-  .attrs({
-    icon: 'menu'
-  })`
-  `
 
 export const Description = styled(FooterDescription)`
   height: ${PORTRAIT_DESCRIPTION_HEIGHT}px;

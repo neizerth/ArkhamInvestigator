@@ -9,5 +9,5 @@ export const Container = withStat(UI.Health, {
 })
 
 export const Value: typeof BaseValue = styled(BaseValue)`
-  color: ${color.black}
+  color: ${color.health}
 `

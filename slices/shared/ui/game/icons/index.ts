@@ -1,5 +1,4 @@
 export * from './FactionFontIcon'
 export * from './Icon'
 export * from './IconNumber'
-export * from './IconNumberText'
 export * from './SkillIcon'

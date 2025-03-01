@@ -4,6 +4,7 @@ import { color, gameAssets } from "@shared/config";
 import { Action, Icon } from "@shared/ui";
 import { View } from "react-native";
 import styled from "styled-components/native";
+import { Value as BaseValue } from '../Value';
 
 const Background = withStat(Action, {
   height: assetsSize.action,
@@ -21,11 +22,15 @@ export const Content: typeof View = styled(View)`
 
 export const AdditionalAction: typeof View = styled(View)`
   position: absolute;
-  top: -20px;
-  right: -5px;
+  top: -30px;
+  right: -15px;
 `
 
 export const ActionIcon: typeof Icon = styled(Icon)`
-  font-size: 20px;
+  font-size: 30px;
   color: ${color.white};
+`
+
+export const Value: typeof BaseValue = styled(BaseValue)`
+  color: ${color.action}
 `

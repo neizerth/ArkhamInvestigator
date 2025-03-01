@@ -1,8 +1,8 @@
 import type { InvestigatorImage } from "arkham-investigator-data";
 import type { InvestigatorSource } from "../api";
-import type { InvestigatorSkillType } from "./common";
+import type { InvestigatorGameStatType, InvestigatorMainStatType, InvestigatorSkillType } from "./common";
 
-type InvestigatorBoardStats = 'health' | 'sanity' | InvestigatorSkillType;
+type InvestigatorBoardStats = InvestigatorMainStatType | InvestigatorSkillType | InvestigatorGameStatType;
 
 export type InvestigatorPicture = {
   id: string

@@ -18,24 +18,30 @@ export const Sanity: typeof BaseSanity = styled(BaseSanity)`
 
 export const Value: typeof IconNumber = styled(IconNumber)
   .attrs({
-    stroke: true
+    stroke: true,
+    containerStyle: {
+      flex: 0
+    }
   })`
-    font-size: 18px;
+    font-size: 24px;
     color: white;
   `
 
 export const HealthValue: typeof Value = styled(Value)
   .attrs({
-    backgroundStyle: {
+    strokeStyle: {
       color: color.health
     }
+    // backgroundStyle: {
+    //   color: color.health
+    // }
   })`
-
+  
   `
 
   export const SanityValue: typeof Value = styled(Value)
   .attrs({
-    backgroundStyle: {
+    strokeStyle: {
       color: color.sanity
     }
   })`

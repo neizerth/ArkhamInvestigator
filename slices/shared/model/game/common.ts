@@ -9,6 +9,10 @@ export type FactionImages = Record<Faction, ImageRequireSource>
 
 export type InvestigatorSkillType = 'willpower' | 'intellect' | 'combat' | 'agility'
 
+export type InvestigatorMainStatType = 'health' | 'sanity';
+
+export type InvestigatorGameStatType = 'actions' | 'resources' | 'clues';
+
 export type SkillType = InvestigatorSkillType | 'wild'
 
 export type SelectedInvestigator = {

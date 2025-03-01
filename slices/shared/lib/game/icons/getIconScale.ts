@@ -1,5 +1,4 @@
-import type { ArkhamIcon } from "@shared/model";
-import type { IconScaleType } from "./Icon";
+import type { ArkhamIcon, IconScaleType } from "@shared/model";
 
 export const getIconScale = (
   icon: ArkhamIcon, 

@@ -1,13 +1,12 @@
-import { scaleFontFromStyle, selectIcons, useAppSelector } from '@shared/lib';
+import { getIconScale, scaleFontFromStyle, selectIcons, useAppSelector } from '@shared/lib';
 import { propEq } from 'ramda';
 import { StyleSheet, type TextProps } from 'react-native';
-import { getIconScale } from './getIconScale';
 import { Text } from 'react-native';
 import { ArkhamIcons } from '@shared/fonts/ArkhamIcons';
+// import { StrokeText } from "@charmy.tech/react-native-stroke-text";
+import type { IconScaleType, PropsWithStroke } from '@shared/model';
 
-export type IconScaleType = 'fixedHeight' | 'maxHeight' | 'circle' | 'auto';
-
-export type IconProps = TextProps & {
+export type IconProps = TextProps & PropsWithStroke & {
   icon: string
   scaleType?: IconScaleType
 }
@@ -31,12 +30,14 @@ export const Icon = ({
 
   const scale = getIconScale(item, scaleType);
 
-  const { fontSize, scaledFontSize } = scaleFontFromStyle(scale, style);
+  const { scaledFontSize } = scaleFontFromStyle(scale, style);
+  const { color } = StyleSheet.flatten(style);
 
   const fontSizeStyles = {
     fontFamily: ArkhamIcons.default,
     fontSize: scaledFontSize
   }
+
   return (
     <Text
       {...props}
@@ -45,4 +46,25 @@ export const Icon = ({
       {contents}
     </Text>
   );
+
+  // if (!stroke) {
+  //   return (
+  //     <Text
+  //       {...props}
+  //       style={[style, fontSizeStyles]}
+  //     >
+  //       {contents}
+  //     </Text>
+  //   );
+  // }
+
+  // return (
+  //   <StrokeText
+  //     {...fontSizeStyles}
+  //     text={contents}
+  //     strokeColor={strokeColor}
+  //     strokeWidth={strokeWidth}
+  //     color={color?.toString()}
+  //   />
+  // )
 }

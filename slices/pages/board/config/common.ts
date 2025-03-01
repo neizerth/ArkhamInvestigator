@@ -20,6 +20,6 @@ export const servicePadding: Record<HeaderLayoutType, RectPosition> = {
   }
 }
 
-export const PORTRAIT_DESCRIPTION_HEIGHT = 40;
+export const PORTRAIT_DESCRIPTION_HEIGHT = 60;
 
-export const SIDEBAR_BOTTOM = 180;
+export const SIDEBAR_BOTTOM = 200;

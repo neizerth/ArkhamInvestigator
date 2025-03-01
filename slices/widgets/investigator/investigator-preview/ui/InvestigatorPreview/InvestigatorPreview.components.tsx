@@ -88,6 +88,5 @@ export const OptionsInfo: FC<ViewProps & PropsWithFaction> = styled(View)`
   ${({ faction }: PropsWithFaction) => css`
     background: ${factionColor[faction].border};
   `}
-  filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.4));
   transform: rotate(45deg);
 `

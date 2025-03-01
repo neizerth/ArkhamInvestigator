@@ -10,7 +10,7 @@ type ContainerProps = ViewProps & {
 export const Container: FC<ContainerProps> = styled(View)`
   gap: 35px;
   align-items: center;
-  justify-content: end;
+  justify-content: flex-end;
   ${({ single } : ContainerProps) => single && css`
     padding-bottom: 50px;
   `}

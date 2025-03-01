@@ -6,6 +6,7 @@ import type { PropsWithView } from "@pages/board/model";
 import { descriptionSize, PORTRAIT_DESCRIPTION_HEIGHT } from "@pages/board/config";
 import { TouchableOpacity } from "@shared/ui";
 import Animated from "react-native-reanimated";
+import { TICK_PATTERN } from "@features/haptic";
 
 type PropsWithDisplay = {
   display: boolean;
@@ -39,6 +40,10 @@ export const Expand: typeof Animated.View = styled(Animated.View)`
   top: 0px;
 ` 
 
-export const Button: typeof TouchableOpacity = styled(TouchableOpacity)`
+export const Button: typeof TouchableOpacity = styled(TouchableOpacity)
+  .attrs({
+    activeOpacity: 1,
+    pressHapticPattern: TICK_PATTERN
+  })`
   flex: 1;
 `

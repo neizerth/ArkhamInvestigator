@@ -25,3 +25,9 @@ export type PropsWithScaledBox = {
 export type PropsWithBoxLayout = {
   box: BoxLayout
 }
+
+export type PropsWithStroke = {
+  stroke?: boolean
+  strokeColor?: string
+  strokeWidth?: number
+}
