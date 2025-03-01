@@ -1,11 +1,9 @@
-import * as C from './Clues.components';
+import type { ClueProps } from '@shared/ui'
+import * as C from './Clues.components'
 
-export type CluesProps = {
-
-}
-
-export const Clues = ({}: CluesProps) => {
+export const Clues = (props: ClueProps) => {
   return (
-    <></>
-  );
+    <C.Container {...props}>
+    </C.Container>
+  )
 }

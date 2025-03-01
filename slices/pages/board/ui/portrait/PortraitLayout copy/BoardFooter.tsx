@@ -1,20 +1,20 @@
 import type { RowProps } from '@shared/ui';
 import * as C from './BoardFooter.components';
-import { Actions, Health, Sanity } from '../../stats';
+import { Actions, Health, Sanity } from '../../../stats';
 
-export type BoardFooterProps = RowProps;
+export type PortraitLayoutProps = RowProps;
 
-export const BoardFooter = ({
+export const PortraitLayout = ({
   ...props
-}: BoardFooterProps) => {
+}: PortraitLayoutProps) => {
   return (
     <C.Container {...props}>
       <C.Stats>
         <Actions/>
-        <C.Row>
+        <C.MainStats>
           <Health />
           <Sanity />
-        </C.Row>
+        </C.MainStats>
       </C.Stats>
       <C.Description/>
     </C.Container>

@@ -1,14 +1,7 @@
-import type { IconImageBackgroundProps } from '@shared/ui/image';
-import { action } from './images';
-import { Background } from './Action.components';
+import { type WithBackgroundComponentProps, withImageBackground } from '@shared/lib/hoc';
 
-export type ActionProps = Omit<IconImageBackgroundProps, 'source'>;
+const source = require('./images/action.png');
 
-export const Action = (props: ActionProps) => {
-  return (
-    <Background
-      {...props}
-      source={action}
-    />
-  );
-}
+export type ActionProps = WithBackgroundComponentProps
+
+export const Action = withImageBackground({ source });

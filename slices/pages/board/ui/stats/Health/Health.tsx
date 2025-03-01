@@ -1,16 +1,9 @@
-import * as C from './Health.components';
-import type { ViewProps } from 'react-native';
+import type { HealthProps } from '@shared/ui'
+import * as C from './Health.components'
 
-export type HealthProps = ViewProps
-
-export const Health = ({
-  ...props
-}: HealthProps) => {
+export const Health = (props: HealthProps) => {
   return (
     <C.Container {...props}>
-      <C.Background>
-
-      </C.Background>
     </C.Container>
-  );
+  )
 }

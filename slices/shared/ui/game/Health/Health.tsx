@@ -1,14 +1,6 @@
-import type { IconImageBackgroundProps } from '@shared/ui/image';
-import { health } from './images';
-import { Background } from './Health.components';
+import { type WithBackgroundComponentProps, withImageBackground } from '@shared/lib/hoc';
+const source = require('./images/health.png');
 
-export type HealthProps = Omit<IconImageBackgroundProps, 'source'>;
+export type HealthProps = WithBackgroundComponentProps;
 
-export const Health = (props: HealthProps) => {
-  return (
-    <Background
-      {...props}
-      source={health}
-    />
-  );
-}
+export const Health = withImageBackground({ source });

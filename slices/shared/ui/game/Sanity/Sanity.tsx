@@ -1,14 +1,7 @@
-import type { IconImageBackgroundProps } from '@shared/ui/image';
-import { sanity } from './images';
-import { Background } from './Sanity.components';
+import { withImageBackground } from '@shared/lib/hoc';
+import type { ImageBackgroundProps } from 'react-native';
 
-export type SanityProps = Omit<IconImageBackgroundProps, 'source'>;
+const source = require('./images/sanity.png');
 
-export const Sanity = (props: SanityProps) => {
-  return (
-    <Background
-      {...props}
-      source={sanity}
-    />
-  );
-}
+export type SanityProps = ImageBackgroundProps;
+export const Sanity = withImageBackground({ source });

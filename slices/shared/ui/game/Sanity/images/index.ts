@@ -1,1 +1,0 @@
-export const sanity = require('./sanity.png');

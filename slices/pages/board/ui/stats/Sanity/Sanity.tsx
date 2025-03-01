@@ -9,9 +9,6 @@ export const Sanity = ({
 }: SanityProps) => {
   return (
     <C.Container {...props}>
-      <C.Background>
-
-      </C.Background>
     </C.Container>
   );
 }

@@ -4,7 +4,7 @@ import { getPortraitLayout, selectBoard } from '@pages/board/lib';
 import { getInvestigatorImageUrl } from '@shared/api';
 import type { ViewProps } from 'react-native';
 import { useContext } from 'react';
-import { LayoutContext } from '@pages/board';
+import { LayoutContext } from '@pages/board/config';
 
 export type PortraitImageProps = ViewProps;
 

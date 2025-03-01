@@ -1,10 +1,11 @@
-import { Animated, View, type ViewProps } from "react-native";
+import { View, type ViewProps } from "react-native";
 import styled, { css } from "styled-components/native";
-import { FactionDescription, type FactionDescriptionProps } from "../../background";
+import { FactionDescription, type FactionDescriptionProps } from "../../../../background";
 import type { FC } from "react";
 import type { PropsWithView } from "@pages/board/model";
-import { descriptionSize } from "@pages/board/config";
+import { descriptionSize, PORTRAIT_DESCRIPTION_HEIGHT } from "@pages/board/config";
 import { TouchableOpacity } from "@shared/ui";
+import Animated from "react-native-reanimated";
 
 type PropsWithDisplay = {
   display: boolean;
@@ -24,18 +25,18 @@ export const Background: FC<BackgroundProps> = styled(FactionDescription)`
   `}
 `
 
-
-type ContentProps = ViewProps & PropsWithView & PropsWithDisplay;
-
-export const Content: FC<ContentProps> = styled(Animated.View)`
+export const Content: typeof View = styled(View)`
   position: absolute;
-  left: 0px;
+  left: 0;
   right: 0;
-  top: 0;
-  bottom: 0;
-  ${({ display, view }: ContentProps) => display && css`
-    top: ${60 - view.width / descriptionSize.ratio}px;
-  `}
+  top: 0px;
+` 
+
+export const Expand: typeof Animated.View = styled(Animated.View)`
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0px;
 ` 
 
 export const Button: typeof TouchableOpacity = styled(TouchableOpacity)`

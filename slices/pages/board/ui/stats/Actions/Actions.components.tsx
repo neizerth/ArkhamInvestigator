@@ -1,12 +1,31 @@
-import { Action } from "@shared/ui";
+import { assetsSize } from "@pages/board/config";
+import { withStat } from "@pages/board/lib/hoc/withStat";
+import { color, gameAssets } from "@shared/config";
+import { Action, Icon } from "@shared/ui";
 import { View } from "react-native";
 import styled from "styled-components/native";
 
-export const Container: typeof View = styled(View)`
+const Background = withStat(Action, {
+  height: assetsSize.action,
+  ratio: gameAssets.action.ratio
+});
 
+export const Container: typeof Background = styled(Background)`
+  align-items: stretch;
 `
 
-export const Background: typeof Action = styled(Action)`
-  width: 70px;
-  height: 60px;
+export const Content: typeof View = styled(View)`
+  flex-grow: 1;
+  position: relative;
+`
+
+export const AdditionalAction: typeof View = styled(View)`
+  position: absolute;
+  top: -20px;
+  right: -5px;
+`
+
+export const ActionIcon: typeof Icon = styled(Icon)`
+  font-size: 20px;
+  color: ${color.white};
 `

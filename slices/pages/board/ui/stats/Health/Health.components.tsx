@@ -1,11 +1,7 @@
-import { Health } from "@shared/ui";
-import { View } from "react-native";
-import styled from "styled-components/native";
+import { withStat } from '@pages/board/lib/hoc/withStat';
+import * as UI from "@shared/ui";
+import { gameAssets } from '@shared/config';
 
-export const Container: typeof View = styled(View)`
-
-`
-
-export const Background: typeof Health = styled(Health)`
-  height: 80px;
-`
+export const Container = withStat(UI.Health, {
+  ratio: gameAssets.health.ratio
+})

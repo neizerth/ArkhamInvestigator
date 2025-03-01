@@ -1,5 +1,5 @@
 import React from 'react';
-import { useAppSelector, useLayoutSize } from '@shared/lib';
+import { useAppSelector, useLayoutSize, useScreenOrientation } from '@shared/lib';
 import * as C from './BoardPage.components';
 import { getHeaderLayout, selectBoard, useStatusBar } from '@pages/board/lib';
 import { useWindowDimensions } from 'react-native';
@@ -8,6 +8,7 @@ import { LayoutContext } from '@pages/board/config/context';
 export const BoardPage = () => {
   const board = useAppSelector(selectBoard);
   const window = useWindowDimensions();
+  const orientation = useScreenOrientation();
   useStatusBar();
 
   const [view, onLayout] = useLayoutSize(window);
@@ -25,7 +26,9 @@ export const BoardPage = () => {
         <C.Container onLayout={onLayout}>
           <C.Header layout={layout}/>
           <C.Background/>
-          <C.Footer/>
+          {orientation.type === 'portrait' && (
+            <C.PortraitLayout layout={layout}/>
+          )}
         </C.Container>
       )}
     </LayoutContext.Provider>

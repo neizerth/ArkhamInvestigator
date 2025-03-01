@@ -40,7 +40,7 @@ export const getHeaderLayout = (window: Box): HeaderLayout => {
     const { width } = window;
     // const 
     const scale = width / C.skillsStyle.width;
-    const height = (C.HEADER_HEIGHT * 1.5) * scale;
+    const height = (C.HEADER_HEIGHT * 2) * scale;
 
     const gap = C.headerGap.horizontal * scale;
 

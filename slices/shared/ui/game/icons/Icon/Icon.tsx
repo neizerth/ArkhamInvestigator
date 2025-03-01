@@ -12,6 +12,8 @@ export type IconProps = TextProps & {
   scaleType?: IconScaleType
 }
 
+export type DefinedIconProps = Omit<IconProps, 'icon'>
+
 export const Icon = ({
   icon,
   style,

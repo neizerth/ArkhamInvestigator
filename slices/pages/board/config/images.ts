@@ -27,3 +27,9 @@ export const descriptionSize = {
   height: 591,
   ratio: 523 / 591
 }
+
+export const assetsSize = {
+  main: 70,
+  action: 50,
+  resource: 73
+}

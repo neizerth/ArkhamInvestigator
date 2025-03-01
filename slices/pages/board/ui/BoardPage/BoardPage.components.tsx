@@ -4,8 +4,9 @@ import styled, { css } from 'styled-components/native';
 import { BoardHeader, type BoardHeaderProps } from '../header';
 import { servicePadding } from '@pages/board/config';
 import type { FC } from 'react';
-import { BoardFooter } from '../footer';
+import { PortraitLayout as BasePortraitLayout, type PortraitLayoutProps as BasePortraitLayoutProps } from '../layout/portrait';
 import type { PropsWithLayout } from '@pages/board/model';
+import { size } from '@shared/config';
 
 export const Container: typeof View = styled(View)`
   flex: 1;
@@ -33,10 +34,15 @@ export const Header: FC<BoardHeaderProps & PropsWithLayout> = styled(BoardHeader
   `}
 ` 
 
-export const Footer: typeof BoardFooter = styled(BoardFooter)`
+type PortraitLayoutProps = BasePortraitLayoutProps & PropsWithLayout;
+
+export const PortraitLayout: FC<PortraitLayoutProps> = styled(BasePortraitLayout)`
   position: absolute;
   z-index: 2;
   left: 0;
   right: 0;
-  bottom: 0px;
+  bottom: 0;
+  ${({ layout }: PropsWithLayout) => css`
+    top: ${layout.height + servicePadding[layout.type].top + size.gap.large}px;
+  `}
 `

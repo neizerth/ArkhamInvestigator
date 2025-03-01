@@ -19,3 +19,7 @@ export const servicePadding: Record<HeaderLayoutType, RectPosition> = {
     left: 0,
   }
 }
+
+export const PORTRAIT_DESCRIPTION_HEIGHT = 40;
+
+export const SIDEBAR_BOTTOM = 180;
