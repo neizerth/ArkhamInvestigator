@@ -3,8 +3,8 @@ import type { FC } from "react";
 import type { ImageProps } from "react-native";
 import { Image, View } from "react-native";
 import styled, { css } from "styled-components/native";
-import { Skill, type SkillProps } from "../Skill";
 import { Row } from "@shared/ui";
+import { withSkillType } from "./withSkillType";
 
 export const Container: typeof View = styled(View)`
   position: relative;
@@ -25,17 +25,7 @@ export const Content: typeof Row = styled(Row)`
   bottom: 0;
 `
 
-type DefinedSkillProps = Omit<SkillProps, 'skill'> 
-
-const createSkill = (skill: InvestigatorSkillType): FC<DefinedSkillProps> => 
-  styled(Skill)
-  .attrs({
-    skill
-  })`
-    flex: 1;
-  `
-
-export const Agility = createSkill('agility');
-export const Combat = createSkill('combat');
-export const Intellect = createSkill('intellect');
-export const Willpower = createSkill('willpower');
+export const Agility = withSkillType('agility');
+export const Combat = withSkillType('combat');
+export const Intellect = withSkillType('intellect');
+export const Willpower = withSkillType('willpower');

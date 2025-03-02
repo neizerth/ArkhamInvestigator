@@ -8,17 +8,17 @@ import { SkillsContext } from '@pages/board/config';
 import { getSkillStyle } from './getSkillStyle';
 
 export type SkillProps = ViewProps & {
-  skill: InvestigatorSkillType
+  type: InvestigatorSkillType
 }
 
 export const Skill = ({
-  skill,
+  type,
   ...props
 }: SkillProps) => {
   const size = useContext(SkillsContext);
   const { value } = useAppSelector(selectBoard);
   const style = getSkillStyle(size);
-  const skillValue = value[skill];
+  const skillValue = value[type];
 
   return (
     <C.Container {...props}>

@@ -2,7 +2,7 @@ import type { Box } from "@shared/model";
 import { createContext } from "react";
 import type { PropsWithLayout, PropsWithView } from "../model";
 
-type LayoutContenxt = PropsWithLayout & PropsWithView;
+type LayoutContenxt = PropsWithLayout & PropsWithView
 
 export const LayoutContext = createContext<LayoutContenxt>({
   layout: {
@@ -20,5 +20,9 @@ export const LayoutContext = createContext<LayoutContenxt>({
 
 export const SkillsContext = createContext<Box>({
   width: 0,
+  height: 0
+})
+
+export const PortraitLayoutContext = createContext({
   height: 0
 })

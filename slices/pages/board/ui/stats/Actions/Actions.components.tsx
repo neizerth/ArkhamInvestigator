@@ -22,7 +22,7 @@ export const Content: typeof View = styled(View)`
 
 export const AdditionalAction: typeof View = styled(View)`
   position: absolute;
-  top: -30px;
+  top: -25px;
   right: -15px;
 `
 

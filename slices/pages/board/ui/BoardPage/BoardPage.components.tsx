@@ -7,6 +7,7 @@ import type { FC } from 'react';
 import { PortraitLayout as BasePortraitLayout, type PortraitLayoutProps as BasePortraitLayoutProps } from '../layout/portrait';
 import type { PropsWithLayout } from '@pages/board/model';
 import { size } from '@shared/config';
+import { PropsWithUnit } from '@shared/model';
 
 export const Container: typeof View = styled(View)`
   flex: 1;
@@ -34,15 +35,13 @@ export const Header: FC<BoardHeaderProps & PropsWithLayout> = styled(BoardHeader
   `}
 ` 
 
-type PortraitLayoutProps = BasePortraitLayoutProps & PropsWithLayout;
-
-export const PortraitLayout: FC<PortraitLayoutProps> = styled(BasePortraitLayout)`
+export const PortraitLayout: FC<BasePortraitLayoutProps> = styled(BasePortraitLayout)`
   position: absolute;
   z-index: 2;
   left: 0;
   right: 0;
   bottom: 0;
-  ${({ layout }: PropsWithLayout) => css`
-    top: ${layout.height + servicePadding[layout.type].top + size.gap.large}px;
+  ${({ top }: BasePortraitLayoutProps) => css`
+    top: ${top}px;
   `}
 `

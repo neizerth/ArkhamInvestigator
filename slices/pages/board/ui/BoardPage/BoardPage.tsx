@@ -4,6 +4,8 @@ import * as C from './BoardPage.components';
 import { getHeaderLayout, selectBoard, useStatusBar } from '@pages/board/lib';
 import { useWindowDimensions } from 'react-native';
 import { LayoutContext } from '@pages/board/config/context';
+import { servicePadding } from '@pages/board/config';
+import { size } from '@shared/config';
 
 export const BoardPage = () => {
   const board = useAppSelector(selectBoard);
@@ -14,6 +16,8 @@ export const BoardPage = () => {
   const [view, onLayout] = useLayoutSize(window);
 
   const layout = getHeaderLayout(view);
+
+  const areaTop = layout.height + servicePadding[layout.type].top + size.gap.large;
 
   const contextValue = {
     view,
@@ -27,7 +31,7 @@ export const BoardPage = () => {
           <C.Header layout={layout}/>
           <C.Background/>
           {orientation.type === 'portrait' && (
-            <C.PortraitLayout layout={layout}/>
+            <C.PortraitLayout top={areaTop}/>
           )}
         </C.Container>
       )}
