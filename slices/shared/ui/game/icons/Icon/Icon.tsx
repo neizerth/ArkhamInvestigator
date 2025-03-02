@@ -31,7 +31,6 @@ export const Icon = ({
   const scale = getIconScale(item, scaleType);
 
   const { scaledFontSize } = scaleFontFromStyle(scale, style);
-  const { color } = StyleSheet.flatten(style);
 
   const fontSizeStyles = {
     fontFamily: ArkhamIcons.default,
@@ -46,25 +45,4 @@ export const Icon = ({
       {contents}
     </Text>
   );
-
-  // if (!stroke) {
-  //   return (
-  //     <Text
-  //       {...props}
-  //       style={[style, fontSizeStyles]}
-  //     >
-  //       {contents}
-  //     </Text>
-  //   );
-  // }
-
-  // return (
-  //   <StrokeText
-  //     {...fontSizeStyles}
-  //     text={contents}
-  //     strokeColor={strokeColor}
-  //     strokeWidth={strokeWidth}
-  //     color={color?.toString()}
-  //   />
-  // )
 }

@@ -1,8 +1,6 @@
-import type { FontFamily } from "@shared/model/ui";
-
 export const ConkordiaRegular = require('./Conkordia.ttf');
 
-export const Conkordia: FontFamily = {
+export const Conkordia = {
   regular: 'ConkordiaRegular'
 };
 
