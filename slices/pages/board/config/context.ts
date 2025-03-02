@@ -17,3 +17,8 @@ export const LayoutContext = createContext<LayoutContenxt>({
     height: 0
   }
 });
+
+export const SkillsContext = createContext<Box>({
+  width: 0,
+  height: 0
+})

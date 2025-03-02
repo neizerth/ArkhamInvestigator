@@ -26,6 +26,10 @@ export type PropsWithBoxLayout = {
   box: BoxLayout
 }
 
+export type PropsWithUnit = {
+  unit: number
+}
+
 export type PropsWithStroke = {
   stroke?: boolean
   strokeColor?: string

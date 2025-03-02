@@ -5,7 +5,11 @@ export const titleStyle = {
 
 export const skillsStyle = {
   width: 510,
-  marginLeft: -14
+  marginLeft: -14,
+  padding: {
+    horizontal: 12 / 510,
+    vertical: 26 / 510
+  }
 }
 
 export const HEADER_HEIGHT = 107;

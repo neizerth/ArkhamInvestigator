@@ -49,5 +49,6 @@ export const color = {
   resouce: '#452e26',
   clue: '#486527',
   action: '#24303C',
+  text: '#2e2622',
   skill: skillColors
 }
