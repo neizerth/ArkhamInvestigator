@@ -46,7 +46,7 @@ export const color = {
   taboo: '#9869f5',
   health: '#c71f23',
   sanity: '#1c3e6a',
-  resouce: '#452e26',
+  resource: '#452e26',
   clue: '#486527',
   action: '#24303C',
   text: '#2e2622',

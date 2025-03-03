@@ -1,10 +1,9 @@
 import { useAppSelector } from '@shared/lib';
 import * as C from './Actions.components';
 import { selectBoard } from '@pages/board/lib';
+import { ViewProps } from 'react-native';
 
-export type ActionsProps = {
-
-}
+export type ActionsProps = ViewProps
 
 export const Actions = ({
   ...props
@@ -16,7 +15,10 @@ export const Actions = ({
   return (
     <C.Container {...props}>
       <C.Content>
-        <C.Value value={value.actions}/>
+        
+        <C.Value>
+          <C.ValueText value={value.actions}/>
+        </C.Value>
         {additionalAction && (
           <C.AdditionalAction>
             <C.ActionIcon icon={actionIcon}/>

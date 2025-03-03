@@ -7,7 +7,7 @@ import type { Single } from "@shared/model";
 
 export const StrokedIconNumber = ({
   value,
-  containerStyle,
+  containerProps,
   ...props
 }: IconNumberComponentProps) => {
   const icons = parseValue(value);
@@ -39,32 +39,38 @@ export const StrokedIconNumber = ({
       marginRight: right * fontSize
     }
   }
+
+  const correctionStyle = {
+    top: -fontSize * 0.1
+  };
   
   return (
-    <C.Container style={containerStyle}>
+    <C.Container {...containerProps}>
       {icons.map((item) => (
         <C.CharContainer 
           key={item.id} 
           style={getContainerStyle(item)}
         >
-          <C.CharNumber>
+          <C.CharFill>
             <item.Component 
               {...props}
               style={[
                 props.style,
-                getCharStyle(item)
+                getCharStyle(item),
+                correctionStyle
               ]}
               icon={item.fill}
               size={fontSize}
             />
-          </C.CharNumber>
+          </C.CharFill>
           <C.Outline>
             <item.Component 
               {...props}
               style={[
                 props.style,
                 props.strokeStyle,
-                getCharStyle(item)
+                getCharStyle(item),
+                correctionStyle
               ]}
               icon={item.outline}
               size={fontSize}

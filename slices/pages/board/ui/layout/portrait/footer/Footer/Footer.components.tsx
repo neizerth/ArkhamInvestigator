@@ -25,10 +25,11 @@ export const Stats: typeof Row = styled(Row)`
 
 export const MainStats: typeof Row = styled(Row)`
   position: relative;
-  top: -5px;
+  top: 2px;
   gap: ${size.gap.medium}px;
 `
 
 export const Description = styled(FooterDescription)`
+  z-index: 4;
   height: ${PORTRAIT_DESCRIPTION_HEIGHT}px;
 `

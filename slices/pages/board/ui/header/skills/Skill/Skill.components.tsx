@@ -9,7 +9,6 @@ export const Container: typeof View = styled(View)`
 export const ValueContainer: typeof View = styled(View)`
   flex: 1;
   justify-content: center;
-  align-items: center;
 `
 
 export const Value: typeof IconNumber = styled(IconNumber)`

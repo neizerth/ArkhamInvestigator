@@ -13,6 +13,7 @@ export const Container: typeof View = styled(View)`
 
 export const Footer: typeof F.Footer = styled(F.Footer)`
   position: absolute;
+  z-index: 2;
   left: 0;
   right: 0;
   bottom: 0;
@@ -22,6 +23,7 @@ type Sidebar<T> = FC<T & PropsWithView>;
 
 const sidebarStyle = css<PropsWithView>`
   position: absolute;
+  z-index: 1;
   top: 0;
   ${({ view }: PropsWithView) => {
     const { height } = view;

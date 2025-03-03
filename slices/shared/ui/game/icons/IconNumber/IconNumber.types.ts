@@ -4,7 +4,7 @@ import type { IconProps } from "../Icon/Icon";
 export type IconNumberComponentProps = TextProps & {
   value: number
   strokeStyle?: TextProps['style'] 
-  containerStyle?: ViewProps['style']
+  containerProps?: ViewProps
 }
 
 export type IconNumberProps = IconNumberComponentProps & {

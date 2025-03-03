@@ -7,7 +7,9 @@ export const Clues = (props: ClueProps) => {
   const { value } = useAppSelector(selectBoard);
   return (
     <C.Container {...props}>
-      <C.Value value={value.clues}/>
+      <C.Value>
+        <C.ValueText value={value.clues}/>
+      </C.Value>
     </C.Container>
   )
 }

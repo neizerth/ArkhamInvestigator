@@ -6,30 +6,27 @@ import { Row } from "@shared/ui/grid";
 import type { CharProps, PropsWithSize } from "./IconNumber.types";
 
 
-export const Container: typeof Row = styled(Row)`
-  align-items: center;
+export const Container: typeof View = styled(View)`
+  position: relative;
 `
 
-type Value = {
-
-}
 export const CharContainer: typeof View = styled(View)`
   position: relative;
+  flex: 1;
 `
 
 export const Outline: typeof View = styled(View)`
-  position: relative;
-  z-index: 1;
-`
-
-export const CharNumber: typeof View = styled(View)`
   position: absolute;
-  flex: 1;
-  z-index: 2;
+  z-index: 3;
   left: 0;
   top: 0;
-  justify-content: center;
-  align-items: center;
+`
+
+export const CharFill: typeof View = styled(View)`
+  position: absolute;
+  z-index: 3;
+  left: 0;
+  top: 0;
 `
 
 export const Char: FC<CharProps> = styled(Icon)

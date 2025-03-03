@@ -13,6 +13,7 @@ const Background = withStat(Action, {
 
 export const Container: typeof Background = styled(Background)`
   align-items: stretch;
+  position: relative;
 `
 
 export const Content: typeof View = styled(View)`
@@ -31,6 +32,12 @@ export const ActionIcon: typeof Icon = styled(Icon)`
   color: ${color.white};
 `
 
-export const Value: typeof BaseValue = styled(BaseValue)`
-  color: ${color.action}
+export const ValueText: typeof BaseValue = styled(BaseValue)`
+  color: ${color.action};
 `
+
+export const Value: typeof View = styled(View)`
+  position: absolute;
+  top: -15px;
+  left: 5px;
+` 

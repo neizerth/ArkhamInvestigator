@@ -6,7 +6,7 @@ import type { IconNumberComponentProps } from "./IconNumber.types";
 
 export const UnstrokedIconNumber = ({
   value,
-  containerStyle,
+  containerProps,
   ...props
 }: IconNumberComponentProps) => {
   const icons = parseValue(value);
@@ -16,7 +16,7 @@ export const UnstrokedIconNumber = ({
   } = StyleSheet.flatten(props.style);
   
   return (
-    <C.Container style={containerStyle}>
+    <C.Container {...containerProps}>
       <Text {...props}>
         {icons.map((item) => (
           <item.Component 

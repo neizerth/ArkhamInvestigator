@@ -12,7 +12,7 @@ export const Image: FC<ImageProps & PropsWithFaction> = styled(BaseImage)`
   border: 2px solid black;
   width: 60px;
   height: 60px;
-  border-radius: 50%;
+  border-radius: 60px;
   ${({ faction }: PropsWithFaction ) => css`
     border-color: ${factionColor[faction].border};
   `}

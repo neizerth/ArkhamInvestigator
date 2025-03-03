@@ -11,10 +11,18 @@ export const withStat = <T>(Component: FC<T>, options: WithStatOptions) => {
     height = assetsSize.main, 
     ratio 
   } = options;
-  const ExtendedComponent: typeof Component = styled(Component)`
-    height: ${height}px;
-    width: ${height * ratio}px;
-  `
+  const width = height * ratio;
+  const ExtendedComponent: typeof Component = styled(Component)
+    .attrs({
+      imageStyle: {
+        width,
+        height
+      }
+    })`
+      width: ${width}px;
+      height: ${height}px;
+      align-items: center;
+    `
 
   const displayName = ExtendedComponent.displayName || ExtendedComponent.name;
   ExtendedComponent.displayName = `WithStat(${displayName})`

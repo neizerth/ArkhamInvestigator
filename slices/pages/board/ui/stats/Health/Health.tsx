@@ -8,9 +8,9 @@ export const Health = (props: HealthProps) => {
   
   return (
     <C.Container {...props}>
-      <C.Value
-        value={value.health}
-      />
+      <C.Value>
+        <C.ValueText value={value.health}/>
+      </C.Value>
     </C.Container>
   )
 }

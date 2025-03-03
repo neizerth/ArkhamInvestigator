@@ -16,7 +16,7 @@ export const getFactionStyle = (faction: Faction) => {
     `,
     rogue: css`
       padding-left: 10%;
-      padding-right: 10%;
+      padding-right: 18%;
       padding-bottom: 21%;
     `,
     survivor: css`

@@ -27,4 +27,5 @@ const getLayoutStyle = ({ unit }: PropsWithUnit) => {
 
 export const Container: FC<ViewProps & PropsWithUnit> = styled(View)`
   ${getLayoutStyle}
+  align-items: center;
 `
