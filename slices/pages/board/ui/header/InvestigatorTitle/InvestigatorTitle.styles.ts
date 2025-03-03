@@ -2,19 +2,29 @@ import { PropsWithView } from "@pages/board/model";
 import { getKeyConfig } from "@shared/lib";
 import type { Box, PropsWithFaction } from "@shared/model";
 import { mergeDeepRight } from "ramda";
-import type { DimensionValue, TextStyle, ViewStyle } from "react-native";
+import type { TextStyle, ViewStyle } from "react-native";
 
 type GetTitleStyleOptions = PropsWithView & PropsWithFaction & {
   language?: string
 }
+
+type ReturnStyle = {
+  container: ViewStyle
+  title: ViewStyle
+  titleText: TextStyle
+  subtitle: ViewStyle
+  subtitleText: TextStyle
+  unique: TextStyle
+}
+
 export const getTitleStyle = (options: GetTitleStyleOptions) => {
   const { view, language, faction } = options;
   const vh = view.height / 100;
 
-  const getLocaleStyle = getKeyConfig({
+  const getLocaleStyle = getKeyConfig<Partial<ReturnStyle>>({
     default: {
       title: {
-        paddingTop: '1.5%' as DimensionValue
+        paddingTop: '1.5%'
       },
       titleText: {
         fontSize: 48 * vh,
@@ -64,8 +74,9 @@ export const getTitleStyle = (options: GetTitleStyleOptions) => {
     subtitleText,
     unique
   }
+  
   return mergeDeepRight(
     mergeDeepRight(base, localeStyle),
     factionStyle
-  );
+  ) as ReturnStyle;
 }
