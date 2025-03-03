@@ -23,4 +23,10 @@ export type BoxLayout = Box & BoxPosition;
 
 export type ScaledBoxLayout = ScaledBox & BoxPosition;
 
-export type Orientation = 'landscape' | 'portrait';
+export type PartialBox = {
+  width: number
+  height?: number
+} | {
+  width?: number
+  height: number
+}

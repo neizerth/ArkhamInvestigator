@@ -5,8 +5,9 @@ import { images } from './images';
 import type { HeaderLayout } from '@pages/board/model';
 import { useContext } from 'react';
 import { LayoutContext } from '@pages/board/config';
-import { getTitleStyle } from './getTitleStyles';
+import { getTitleStyle } from './InvestigatorTitle.styles';
 import { useAppSelector } from '@shared/lib';
+import type { Faction } from '@shared/model';
 
 export type InvestigatorTitleProps = Omit<ImageBackgroundProps, 'source'>
 
@@ -15,6 +16,7 @@ export const InvestigatorTitle = ({
 }: InvestigatorTitleProps) => {
   const { layout, view } = useContext(LayoutContext);
   const { investigator } = useAppSelector(selectBoard);
+  const faction = investigator.faction_code as Faction;
 
   const { name, subname = '' } = investigator;
 
@@ -22,7 +24,8 @@ export const InvestigatorTitle = ({
   const source = useFactionImage(images)
   
   const style = getTitleStyle({
-    view: box
+    view: box,
+    faction
   });
 
   return (

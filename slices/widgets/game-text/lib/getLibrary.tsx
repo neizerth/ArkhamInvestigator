@@ -19,7 +19,7 @@ export const getLibrary = ({
     return <Text key={v4()}/>
   },
   createElement(type, elementProps, ...children) {
-    const componentStyle = componentStyles && componentStyles[type];
+    const componentStyle = componentStyles?.[type];
 
     const mergedProps = {
       ...props,
@@ -56,6 +56,7 @@ export const getLibrary = ({
             key={v4()}
             icon={value}
             style={mergedStyles}
+            scaleType={false}
           />
           {content}
         </Line>

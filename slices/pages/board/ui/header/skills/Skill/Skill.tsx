@@ -5,7 +5,7 @@ import { useAppSelector } from '@shared/lib';
 import { selectBoard } from '@pages/board/lib';
 import { useContext } from 'react';
 import { SkillsContext } from '@pages/board/config';
-import { getSkillStyle } from './getSkillStyle';
+import { getSkillStyle } from './Skill.styles';
 
 export type SkillProps = ViewProps & {
   type: InvestigatorSkillType

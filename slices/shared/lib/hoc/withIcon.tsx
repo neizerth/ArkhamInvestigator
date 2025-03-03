@@ -1,4 +1,4 @@
-import { Icon, type DefinedIconProps } from "@shared/ui/game"
+import { Icon, type DefinedIconProps } from "../../ui/game/icons"
 import type { FC } from "react";
 
 export const withIcon = (icon: string) => {

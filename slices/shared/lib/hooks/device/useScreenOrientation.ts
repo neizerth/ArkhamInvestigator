@@ -1,6 +1,5 @@
 
 import { getOrientationType } from '@shared/lib/device';
-import type { Orientation } from '@shared/model';
 import * as ScreenOrientation from 'expo-screen-orientation';
 import { useEffect, useState } from 'react';
 

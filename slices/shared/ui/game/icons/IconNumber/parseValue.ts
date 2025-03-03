@@ -16,7 +16,9 @@ const toIcon = (char: CharType) => {
     const item = {
       id,
       char,
-      ...config
+      ...config,
+      fill: `${config.icon}-fill`,
+      outline: `${config.icon}-outline`,
     }
 
     switch (char) {
@@ -27,6 +29,13 @@ const toIcon = (char: CharType) => {
           Component: Sign,
           sign: true
         };
+      case '0':
+        return {
+          ...item,
+          outline: 'num0-outline_alt',
+          Component: Char,
+          sign: false
+        }
       default:
         return {
           ...item,

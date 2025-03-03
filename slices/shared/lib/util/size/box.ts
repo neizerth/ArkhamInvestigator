@@ -1,9 +1,29 @@
-import type { Box, BoxLayout, BoxPosition, BoxRect, Orientation, RectPosition } from "@shared/model";
+import type { Box, BoxLayout, BoxRect, DeviceOrientation, PartialBox, RectPosition } from "@shared/model";
 
 export const getOrientation = ({ 
   width, 
   height 
-}: Box): Orientation => width > height ? 'landscape' : 'portrait';
+}: Box): DeviceOrientation => width > height ? 'landscape' : 'portrait';
+
+export const getBoxByRatio = (options: {
+  ratio: number
+  box: Partial<Box>
+}): Box | undefined => {
+  const { ratio, box } = options;
+
+  if (typeof box.width === 'number') {
+    return {
+      width: box.width,
+      height: box.width / ratio
+    }
+  }
+  if (typeof box.height === 'number') {
+    return {
+      height: box.height,
+      width: box.height * ratio
+    }
+  }
+}
 
 export const getBoxLayoutCenter = ({
   width,

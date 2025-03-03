@@ -13,7 +13,8 @@ export const defaultComponentStyles: ComponentStyleMap = {
   },
   icon: {
     top: 1,
-    marginRight: 2
+    marginRight: 2,
+    fontSize: 14
   }
 }
 

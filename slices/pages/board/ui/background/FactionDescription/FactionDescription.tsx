@@ -1,11 +1,12 @@
 import { useAppSelector } from '@shared/lib';
-import * as C from './FactionDescription.components';
 import { selectBoard } from '@pages/board/lib';
-import type { Faction } from '@shared/model';
+import type { Faction, PropsWithFaction } from '@shared/model';
 import { images } from './images';
-import { Image, type ImageProps } from 'react-native';
+import * as C from './FactionDescription.components'
+import { ImageBackgroundProps } from 'react-native';
 
-export type FactionDescriptionProps = Omit<ImageProps, 'source'>;
+export type FactionDescriptionProps = Omit<ImageBackgroundProps, 'source'> & PropsWithFaction;
+
 export const FactionDescription = ({
   ...props
 }: FactionDescriptionProps) => {
@@ -14,7 +15,7 @@ export const FactionDescription = ({
   const source = images[faction];
 
   return (
-    <Image
+    <C.Background
       {...props}
       source={source}
     />

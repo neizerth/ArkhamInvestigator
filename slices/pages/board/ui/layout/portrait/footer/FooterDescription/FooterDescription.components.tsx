@@ -1,12 +1,10 @@
 import { View, type ViewProps } from "react-native";
 import styled, { css } from "styled-components/native";
-import { FactionDescription, type FactionDescriptionProps } from "../../../../background";
-import type { FC } from "react";
-import type { PropsWithView } from "@pages/board/model";
-import { descriptionSize, PORTRAIT_DESCRIPTION_HEIGHT } from "@pages/board/config";
+import { FactionDescription } from "../../../../background";
 import { TouchableOpacity } from "@shared/ui";
 import Animated from "react-native-reanimated";
 import { TICK_PATTERN } from "@features/haptic";
+import { InvestigatorTraits, InvestigatorText } from "@pages/board/ui/text";
 
 type PropsWithDisplay = {
   display: boolean;
@@ -17,13 +15,8 @@ export const Container: typeof View = styled(View)`
  
 `
 
-type BackgroundProps = FactionDescriptionProps & PropsWithView;
+export const Background: typeof FactionDescription = styled(FactionDescription)`
 
-export const Background: FC<BackgroundProps> = styled(FactionDescription)`
-  ${({ view }: PropsWithView) => css`
-    width: ${view.width}px;
-    height: ${view.width / descriptionSize.ratio}px;
-  `}
 `
 
 export const Content: typeof View = styled(View)`
@@ -46,4 +39,12 @@ export const Button: typeof TouchableOpacity = styled(TouchableOpacity)
     pressHapticPattern: TICK_PATTERN
   })`
   flex: 1;
+`
+
+export const Traits: typeof InvestigatorTraits = styled(InvestigatorTraits)`
+  text-align: center;
+`
+
+export const Text: typeof InvestigatorText = styled(InvestigatorText)`
+
 `

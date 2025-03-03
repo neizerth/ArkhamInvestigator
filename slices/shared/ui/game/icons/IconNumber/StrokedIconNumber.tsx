@@ -54,7 +54,7 @@ export const StrokedIconNumber = ({
                 props.style,
                 getCharStyle(item)
               ]}
-              icon={`${item.icon}-fill`}
+              icon={item.fill}
               size={fontSize}
             />
           </C.CharNumber>
@@ -66,7 +66,7 @@ export const StrokedIconNumber = ({
                 props.strokeStyle,
                 getCharStyle(item)
               ]}
-              icon={`${item.icon}-outline`}
+              icon={item.outline}
               size={fontSize}
             />
           </C.Outline>
