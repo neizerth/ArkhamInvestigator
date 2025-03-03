@@ -24,44 +24,44 @@ export const charConfig: Record<CharType, CharConfig> = {
     icon: 'minus',
     fontSize: 0.15,
     margin: {
+      top: 0.7,
       left: 0,
-      right: -0.3
+      right: -0.2
     }
   },
   '0': {
     icon: 'num0',
     margin: {
-      top: -0.05,
       left: 0,
-      right: 0
+      right: -0.3
     }
   },
   '1': {
     icon: 'num1',
     margin: {
-      left: 0,
-      right: -0.45
+      left: -0.14,
+      right: -0.4
     }
   },
   '2': {
     icon: 'num2',
     margin: {
       left: 0,
-      right: -0.3
+      right: -0.27
     }
   },
   '3': {
     icon: 'num3',
     margin: {
       left: 0,
-      right: -0.34
+      right: -0.3
     }
   },
   '4': {
     icon: 'num4',
     margin: {
       left: 0,
-      right: -0.3
+      right: -0.26
     }
   },
   '5': {
@@ -82,7 +82,7 @@ export const charConfig: Record<CharType, CharConfig> = {
     icon: 'num7',
     margin: {
       left: 0,
-      right: -0.4
+      right: -0.35
     }
   },
   '8': {
@@ -95,7 +95,6 @@ export const charConfig: Record<CharType, CharConfig> = {
   '9': {
     icon: 'num9',
     margin: {
-      top: -0.05,
       left: 0,
       right: -0.3
     }

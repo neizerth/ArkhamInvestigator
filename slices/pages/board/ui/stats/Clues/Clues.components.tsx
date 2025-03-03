@@ -10,16 +10,9 @@ export const BaseContainer = withStat(UI.Clue, {
 })
 
 export const Container: typeof BaseContainer = styled(BaseContainer)`
-  align-items: center;
-  justify-content: center;
+  
 `
 
-export const ValueText: typeof BaseValue = styled(BaseValue)`
+export const Value: typeof BaseValue = styled(BaseValue)`
   color: ${color.clue};
 `
-
-export const Value: typeof View = styled(View)`
-  position: absolute;
-  top: -3px;
-  left: 8px;
-` 

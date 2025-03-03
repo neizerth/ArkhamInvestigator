@@ -14,12 +14,6 @@ export const Container: typeof BaseContainer = styled(BaseContainer)`
 `
 
 
-export const ValueText: typeof BaseValue = styled(BaseValue)`
+export const Value: typeof BaseValue = styled(BaseValue)`
   color: ${color.sanity};
 `
-
-export const Value: typeof View = styled(View)`
-  position: absolute;
-  top: -10px;
-  left: 20px;
-` 

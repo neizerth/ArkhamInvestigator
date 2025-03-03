@@ -11,12 +11,6 @@ export const Container = withStat(UI.Resource, {
   ratio: gameAssets.resource.ratio
 })
 
-export const ValueText: typeof BaseValue = styled(BaseValue)`
+export const Value: typeof BaseValue = styled(BaseValue)`
   color: ${color.resource};
 `
-
-export const Value: typeof View = styled(View)`
-  position: absolute;
-  top: 0px;
-  left: 10px;
-` 

@@ -4,6 +4,7 @@ import { font } from "@shared/config";
 import * as C from './IconNumber.components'
 import type { CharType, IconNumberComponentProps } from "./IconNumber.types";
 import type { Single } from "@shared/model";
+import { fillStyle, outlineStyle } from "./IconNumber.styles";
 
 export const StrokedIconNumber = ({
   value,
@@ -51,31 +52,27 @@ export const StrokedIconNumber = ({
           key={item.id} 
           style={getContainerStyle(item)}
         >
-          <C.CharFill>
-            <item.Component 
-              {...props}
-              style={[
-                props.style,
-                getCharStyle(item),
-                correctionStyle
-              ]}
-              icon={item.fill}
-              size={fontSize}
-            />
-          </C.CharFill>
-          <C.Outline>
-            <item.Component 
-              {...props}
-              style={[
-                props.style,
-                props.strokeStyle,
-                getCharStyle(item),
-                correctionStyle
-              ]}
-              icon={item.outline}
-              size={fontSize}
-            />
-          </C.Outline>
+          <item.Component 
+            {...props}
+            style={[
+              props.style,
+              getCharStyle(item),
+              fillStyle
+            ]}
+            icon={item.fill}
+            size={fontSize}
+          />
+          <item.Component 
+            {...props}
+            style={[
+              props.style,
+              props.strokeStyle,
+              getCharStyle(item),
+              outlineStyle
+            ]}
+            icon={item.outline}
+            size={fontSize}
+          />
         </C.CharContainer>
       ))}
     </C.Container>

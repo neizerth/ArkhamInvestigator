@@ -11,9 +11,7 @@ export const Resources = ({
   const { value } = useAppSelector(selectBoard);
   return (
     <C.Container {...props}>
-      <C.Value>
-        <C.ValueText value={value.resources}/>
-      </C.Value>
+      <C.Value value={value.resources}/>
     </C.Container>
   );
 }

@@ -22,6 +22,7 @@ export const withStat = <T>(Component: FC<T>, options: WithStatOptions) => {
       width: ${width}px;
       height: ${height}px;
       align-items: center;
+      justify-content: center;
     `
 
   const displayName = ExtendedComponent.displayName || ExtendedComponent.name;

@@ -13,9 +13,7 @@ export const Sanity = ({
 
   return (
     <C.Container {...props}>
-      <C.Value>
-        <C.ValueText value={value.sanity}/>
-      </C.Value>
+      <C.Value value={value.sanity}/>
     </C.Container>
   );
 }
