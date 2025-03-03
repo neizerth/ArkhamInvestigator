@@ -16,13 +16,6 @@ export const UnstrokedIconNumber = ({
     fontSize = font.size.default 
   } = StyleSheet.flatten(props.style);
 
-  const getCharStyle = (item: Single<typeof icons>) => {
-    const k = item.fontSize || 1;
-
-    return {
-      fontSize: k * fontSize
-    }
-  }
   
   return (
     <C.Container {...containerProps}>
@@ -34,7 +27,6 @@ export const UnstrokedIconNumber = ({
           size={fontSize}
           style={[
             props.style,
-            getCharStyle(item)
           ]}
         />
       ))}

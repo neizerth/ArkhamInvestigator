@@ -1,4 +1,4 @@
-import { color, size } from "@shared/config";
+import { color, font, size } from "@shared/config";
 import { Alegreya } from "@shared/fonts/Alegreya";
 import { Icon as BaseIcon, Row, TouchableOpacity } from "@shared/ui";
 import { Text as BaseText, Image } from "react-native";
@@ -38,5 +38,5 @@ export const Icon: typeof BaseIcon = styled(BaseIcon)
   .attrs({
     icon: 'right-arrow'
   })`
-    font-size: 16px
+    font-size: ${font.size.medium}px
   `

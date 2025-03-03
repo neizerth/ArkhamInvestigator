@@ -4,7 +4,8 @@ import { FactionDescription } from "../../../../background";
 import { TouchableOpacity } from "@shared/ui";
 import Animated from "react-native-reanimated";
 import { TICK_PATTERN } from "@features/haptic";
-import { InvestigatorTraits, InvestigatorText } from "@pages/board/ui/text";
+import { InvestigatorTraits, InvestigatorText, InvestigatorTextProps, InvestigatorFlavor } from "@pages/board/ui/text";
+import { boardText } from "@pages/board/config";
 
 type PropsWithDisplay = {
   display: boolean;
@@ -42,9 +43,13 @@ export const Button: typeof TouchableOpacity = styled(TouchableOpacity)
 `
 
 export const Traits: typeof InvestigatorTraits = styled(InvestigatorTraits)`
-  text-align: center;
+  
+`
+
+export const Flavor: typeof InvestigatorFlavor = styled(InvestigatorFlavor)`
+  
 `
 
 export const Text: typeof InvestigatorText = styled(InvestigatorText)`
-
+  
 `

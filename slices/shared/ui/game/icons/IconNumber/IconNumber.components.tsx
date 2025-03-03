@@ -7,11 +7,11 @@ import type { CharProps, PropsWithSize } from "./IconNumber.types";
 
 
 export const Container: typeof View = styled(Row)`
-  position: relative;
+  
 `
 
 export const CharContainer: typeof View = styled(View)`
-  
+  position: relative;
 `
 
 export const Outline: typeof View = styled(View)`

@@ -25,7 +25,6 @@ export const Stats: typeof Row = styled(Row)`
 
 export const MainStats: typeof Row = styled(Row)`
   position: relative;
-  top: 2px;
   gap: ${size.gap.medium}px;
 `
 

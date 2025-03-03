@@ -16,6 +16,7 @@ export const ArnoPro = {
 export const ArnoProFonts = {
   ArnoProBold,
   ArnoProBoldItalic,
+  ArnoProItalic,
   ArnoProCaption,
   ArnoProRegular
 }

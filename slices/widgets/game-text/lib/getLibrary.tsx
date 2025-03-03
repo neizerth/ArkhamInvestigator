@@ -20,6 +20,7 @@ export const getLibrary = ({
   },
   createElement(type, elementProps, ...children) {
     const componentStyle = componentStyles?.[type];
+    const textComponentStyle = componentStyles?.text;
 
     const mergedProps = {
       ...props,
@@ -29,6 +30,11 @@ export const getLibrary = ({
     const mergedStyles = [
       props.style,
       componentStyle
+    ]
+
+    const textStyle = [
+      props.style,
+      textComponentStyle
     ]
 
     if (type === 'icon') {
@@ -41,8 +47,8 @@ export const getLibrary = ({
       const content = children
         .map(child => (
           <Text 
-            {...mergedProps}
-            style={props.style}
+            {...props}
+            style={textStyle}
             key={v4()}
           >
             {child}
@@ -67,7 +73,7 @@ export const getLibrary = ({
       .map(child => (
         <Text 
           {...mergedProps}
-          style={mergedStyles}
+          style={textStyle}
           key={v4()}
         >
           {child}
@@ -78,7 +84,7 @@ export const getLibrary = ({
       <Text
         {...mergedProps}
         key={v4()}
-        style={mergedStyles}
+        style={textStyle}
       >
         {content}
       </Text>

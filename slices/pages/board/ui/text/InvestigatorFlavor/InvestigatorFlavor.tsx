@@ -7,20 +7,20 @@ import { FC } from "react"
 import { TextProps } from "react-native"
 import styled, { css } from "styled-components/native"
 
-const BaseTraits = withLocaleFont({
+const Flavor = withLocaleFont({
   style: {
     default: {
-      fontFamily: ArnoPro.bold
+      fontFamily: ArnoPro.italic
     }
   }
 })
 
-export type InvestigatorTraitsProps = TextProps & Partial<PropsWithUnit>;
+export type InvestigatorFlavorProps = TextProps & Partial<PropsWithUnit>;
 
-export const InvestigatorTraits: FC<InvestigatorTraitsProps> = styled(BaseTraits)`
+export const InvestigatorFlavor: FC<InvestigatorFlavorProps> = styled(Flavor)`
   text-align: center;
-  ${({ unit }: InvestigatorTraitsProps) => unit && css`
+  ${({ unit }: InvestigatorFlavorProps) => unit && css`
     margin-top: ${unit * 0.8}px; 
-    font-size: ${unit * boardText.ratio.traits}px;
+    font-size: ${unit * boardText.ratio.flavor}px;
   `}
 `

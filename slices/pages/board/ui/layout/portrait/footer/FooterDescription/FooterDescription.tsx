@@ -41,6 +41,8 @@ export const FooterDescription = ({
     };
   });
 
+  const vw = view.width * 6 / 100;
+
   return (
     <C.Container {...props}>
       <C.Content>
@@ -50,9 +52,19 @@ export const FooterDescription = ({
               faction={faction}
               width={view.width}
             >
-              <C.Traits>{investigator.traits}</C.Traits>
+              <C.Traits unit={vw}>
+                {investigator.traits}
+              </C.Traits>
               {display && (
-                <C.Text value={investigator.text}/>
+                <>
+                  <C.Text 
+                    value={investigator.text}
+                    unit={vw}
+                  />
+                  <C.Flavor unit={vw}>
+                    {investigator.flavor}
+                  </C.Flavor>
+                </>
               )}
             </C.Background>
           </C.Button>

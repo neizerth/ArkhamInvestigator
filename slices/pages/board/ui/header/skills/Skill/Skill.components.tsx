@@ -11,6 +11,13 @@ export const ValueContainer: typeof View = styled(View)`
   justify-content: center;
 `
 
-export const Value: typeof IconNumber = styled(IconNumber)`
-  color: ${color.text};
-`
+export const Value: typeof IconNumber = styled(IconNumber)
+  .attrs({
+    containerProps: {
+      style: {
+        justifyContent: 'flex-end'
+      }
+    }
+  })`
+    color: ${color.text};
+  `

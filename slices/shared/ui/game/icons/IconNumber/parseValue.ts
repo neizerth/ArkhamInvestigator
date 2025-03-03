@@ -9,16 +9,21 @@ export const parseValue = (value: number) =>
     char => toIcon(char as CharType)
   )
 
+const charIcons: Record<string, string> = {
+  '+': 'plus',
+  '-': 'minus'
+}
+
 const toIcon = (char: CharType) => {
     const id = v4();
-    const config = charConfig[char];
+    const icon = char in charIcons ? charIcons[char] : `num${char}`;
 
     const item = {
       id,
       char,
-      ...config,
-      fill: `${config.icon}-fill`,
-      outline: `${config.icon}-outline`,
+      icon,
+      fill: `${icon}-fill-min`,
+      outline: `${icon}-outline-min`,
     }
 
     switch (char) {
@@ -26,13 +31,14 @@ const toIcon = (char: CharType) => {
       case '-':
         return {
           ...item,
+          icon: charIcons[char],
           Component: Sign,
           sign: true
         };
       case '0':
         return {
           ...item,
-          outline: 'num0-outline_alt',
+          outline: 'num0-outline_alt-min',
           Component: Char,
           sign: false
         }

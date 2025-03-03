@@ -7,7 +7,8 @@ export const getSkillStyle = ({ width }: Box) => {
 
   const valueContainer: ViewStyle = {
     paddingTop: 1 * vw,
-    paddingLeft: 2 * vw
+    paddingLeft: 1 * vw,
+    width: 9 * vw
   }
   const value: TextStyle = {
     fontSize: 10 * vw
