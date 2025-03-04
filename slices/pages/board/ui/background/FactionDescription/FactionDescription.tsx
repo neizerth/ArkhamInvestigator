@@ -8,6 +8,7 @@ import { ImageBackgroundProps } from 'react-native';
 export type FactionDescriptionProps = Omit<ImageBackgroundProps, 'source'> & PropsWithFaction;
 
 export const FactionDescription = ({
+  children,
   ...props
 }: FactionDescriptionProps) => {
   const { investigator } = useAppSelector(selectBoard);
@@ -18,7 +19,11 @@ export const FactionDescription = ({
     <C.Background
       {...props}
       source={source}
-    />
+    >
+      <C.Content>
+        {children}
+      </C.Content>
+    </C.Background>
   );
 }
 

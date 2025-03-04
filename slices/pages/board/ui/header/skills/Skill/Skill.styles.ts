@@ -1,5 +1,6 @@
+import { IS_WEB } from "@shared/config";
 import type { Box } from "@shared/model";
-import type { TextStyle, ViewStyle } from "react-native";
+import { type TextStyle, type ViewStyle } from "react-native";
 
 
 export const getSkillStyle = ({ width }: Box) => {
@@ -11,7 +12,7 @@ export const getSkillStyle = ({ width }: Box) => {
     width: 9 * vw
   }
   const value: TextStyle = {
-    fontSize: 10 * vw
+    fontSize: 8 * vw
   }
   return {
     valueContainer,

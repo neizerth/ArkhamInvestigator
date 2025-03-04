@@ -18,11 +18,11 @@ const fontSize: FontSizeRecord = {
     icon: 12
   },
   mobileMedium: {
-    value: 13,
+    value: 10,
     icon: 13
   },
   mobileLarge: {
-    value: 16,
+    value: 13,
     icon: 16
   }
 }
@@ -31,11 +31,12 @@ const getFontSize = getMaxBreakpoint(fontSize);
 
 export const Container: typeof Row = styled(Row)`
   justify-content: center;
+  align-items: center;
   min-width: 30px;
+  min-height: 30px;
   gap: ${size.gap.small}px;
   background-color: ${color.dark20};
-  padding: ${size.gap.small}px;
-  padding-top: 8px;
+  padding: 3px ${size.gap.small}px;
   border-radius: ${size.borderRadius.default}px;
 `
 

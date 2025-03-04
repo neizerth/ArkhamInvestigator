@@ -6,19 +6,21 @@ import { View } from "react-native";
 import styled from "styled-components/native";
 import { Value as BaseValue } from '../Value';
 
-const Background = withStat(Action, {
+const BaseBackground = withStat(Action, {
   height: assetsSize.action,
   ratio: gameAssets.action.ratio
 });
 
-export const Container: typeof Background = styled(Background)`
+export const Container: typeof BaseBackground = styled(BaseBackground)`
   align-items: stretch;
   position: relative;
 `
 
 export const Content: typeof View = styled(View)`
-  flex-grow: 1;
   position: relative;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
 `
 
 export const AdditionalAction: typeof View = styled(View)`
@@ -31,8 +33,6 @@ export const ActionIcon: typeof Icon = styled(Icon)`
   font-size: 30px;
   color: ${color.white};
 `
-
-
 
 export const Value: typeof BaseValue = styled(BaseValue)`
   color: ${color.action};

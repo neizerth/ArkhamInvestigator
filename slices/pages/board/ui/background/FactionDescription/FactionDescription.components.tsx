@@ -1,7 +1,7 @@
 import { descriptionSize } from "@pages/board/config";
 import type { PropsWithFaction } from "@shared/model";
 import type { FC } from "react";
-import { ImageBackground, type ImageBackgroundProps } from "react-native";
+import { ImageBackground, ScrollView, type ImageBackgroundProps } from "react-native";
 import styled, { css } from "styled-components/native";
 import { getFactionStyle } from "./FactionDescription.styles";
 import { getBoxByRatio } from "@shared/lib/util/size/box";
@@ -34,4 +34,8 @@ export const Background: FC<BackgroundProps> = styled(ImageBackground)`
       ${getFactionStyle(faction)}
     `
   }}
+`
+
+export const Content: typeof ScrollView = styled(ScrollView)`
+  
 `

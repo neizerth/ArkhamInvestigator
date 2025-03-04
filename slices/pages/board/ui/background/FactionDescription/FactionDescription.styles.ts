@@ -5,7 +5,6 @@ import { css } from "styled-components/native";
 export const getFactionStyle = (faction: Faction) => {
   const ruleSet: Record<Faction, RuleSet> = {
     neutral: css`
-      padding-top: 3%;
       padding-left: 10%;
       padding-right: 12%;
       padding-bottom: 15%;
@@ -21,13 +20,11 @@ export const getFactionStyle = (faction: Faction) => {
       padding-bottom: 21%;
     `,
     survivor: css`
-      padding-top: 3%;
       padding-left: 7%;
       padding-right: 7%;
       padding-bottom: 5%;
     `,
     seeker: css`
-      padding-top: 10%;
       padding-left: 12%;
       padding-right: 15%;
       padding-bottom: 5%;

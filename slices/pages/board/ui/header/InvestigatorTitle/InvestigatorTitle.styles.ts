@@ -1,4 +1,5 @@
 import { PropsWithView } from "@pages/board/model";
+import { font } from "@shared/config";
 import { getKeyConfig } from "@shared/lib";
 import type { Box, PropsWithFaction } from "@shared/model";
 import { mergeDeepRight } from "ramda";
@@ -24,10 +25,10 @@ export const getTitleStyle = (options: GetTitleStyleOptions) => {
   const getLocaleStyle = getKeyConfig<Partial<ReturnStyle>>({
     default: {
       title: {
-        paddingTop: '1.5%'
+        paddingTop: '1%'
       },
       titleText: {
-        fontSize: 48 * vh,
+        fontSize: 45 * vh * font.scale,
       }
     }
   })
@@ -36,7 +37,7 @@ export const getTitleStyle = (options: GetTitleStyleOptions) => {
     default: {},
     neutral: {
       subtitle: {
-        paddingTop: 0
+        paddingTop: 1
       }
     }
   })
@@ -52,7 +53,7 @@ export const getTitleStyle = (options: GetTitleStyleOptions) => {
     height: '61%'
   }
   const subtitle: ViewStyle = {
-    height: '28%',
+    height: '25%',
     paddingTop: '0%'
   }
   const titleText: TextStyle = {

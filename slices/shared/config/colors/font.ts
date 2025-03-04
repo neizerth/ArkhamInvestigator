@@ -1,8 +1,14 @@
+import { PixelRatio } from "react-native";
+
+const scale = PixelRatio.get() / 2;
+
 export const font = {
   size: {
-    small: 12,
-    default: 14,
-    medium: 16,
-    large: 18
-  }
+    small: 12 * scale,
+    default: 14 * scale,
+    medium: 16 * scale,
+    large: 18 * scale
+  },
+  scale
 }
+

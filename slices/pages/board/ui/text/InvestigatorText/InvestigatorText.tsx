@@ -26,8 +26,14 @@ export const InvestigatorText: FC<InvestigatorTextProps> = styled(GameText)
     }
   }))`
     font-family: ${ArnoPro.regular};
-    ${({ unit }: InvestigatorTextProps) => unit && css`
-      font-size: ${unit * boardText.ratio.text}px;
-      line-height: ${unit * boardText.ratio.text * 1.15}px;
-    `}
+    ${({ unit }: InvestigatorTextProps) => {
+      if (!unit) {
+        return;
+      }
+      const fontSize = unit * boardText.ratio.text;
+      return css`
+        font-size: ${fontSize}px;
+        line-height: ${fontSize * 1.15}px;
+      `}
+    }
   `

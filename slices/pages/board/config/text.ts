@@ -1,6 +1,10 @@
-import { font } from "@shared/config"
+import { font, IS_WEB } from "@shared/config"
+import { PixelRatio } from "react-native";
 
-const textSize = font.size.medium;
+const ratio = PixelRatio.get();
+const scale = 2.5 / ratio;
+
+const textSize = font.size.medium * scale;
 
 export const boardText = {
   ratio: {
@@ -8,5 +12,6 @@ export const boardText = {
     text: 16 / textSize,
     icon: 14 / textSize,
     flavor: 14 / textSize,
-  }
+  },
+  scale
 }

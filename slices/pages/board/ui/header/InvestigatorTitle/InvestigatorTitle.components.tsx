@@ -1,3 +1,4 @@
+import { Arkhamic } from "@shared/fonts/Arkhamic";
 import { ArnoPro } from "@shared/fonts/ArnoPro";
 import { Conkordia } from "@shared/fonts/Conkordia";
 import { Teutonic } from "@shared/fonts/Teutonic";
@@ -35,7 +36,6 @@ export const Unique = withIcon('unique');
 
 export const Subtitle: typeof View = styled(View)`
   align-items: center;
-  justify-content: center;
 `
 
 export const SubtitleText = withLocaleFont({

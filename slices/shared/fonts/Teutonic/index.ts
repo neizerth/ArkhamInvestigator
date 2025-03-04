@@ -1,9 +1,12 @@
 export const TeutonicRegular = require('./Teutonic.ttf');
+export const TeutonicRU = require('./TeutonicRU.ttf');
 
 export const Teutonic = {
-  regular: 'TeutonicRegular'
+  regular: 'TeutonicRegular',
+  ru: 'TeutonicRU'
 }
 
 export const TeutonicFonts = {
-  TeutonicRegular
+  TeutonicRegular,
+  TeutonicRU
 };

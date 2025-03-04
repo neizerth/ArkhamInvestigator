@@ -1,6 +1,9 @@
+import { Platform } from "react-native";
 import { capitalize } from "../lib/util/string";
 import type { BreakpointSize, DeviceBreakpoints, DeviceBreakpointType, DeviceType } from "../model";
 import * as ScreenOrientation from 'expo-screen-orientation';
+
+export const IS_WEB = Platform.OS === 'web';
 
 // export const HAVE_AVIF_SUPPORT = Platform.OS !== 'android' || (Platform.OS === 'android' && Platform.Version >= 12)
 export const HAVE_AVIF_SUPPORT = false;

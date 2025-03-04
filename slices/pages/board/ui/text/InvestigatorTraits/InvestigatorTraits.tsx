@@ -4,7 +4,7 @@ import { ArnoPro } from "@shared/fonts/ArnoPro"
 import { withLocaleFont } from "@shared/lib/hoc"
 import { PropsWithUnit } from "@shared/model"
 import { FC } from "react"
-import { TextProps } from "react-native"
+import { PixelRatio, TextProps } from "react-native"
 import styled, { css } from "styled-components/native"
 
 const BaseTraits = withLocaleFont({
@@ -17,10 +17,13 @@ const BaseTraits = withLocaleFont({
 
 export type InvestigatorTraitsProps = TextProps & Partial<PropsWithUnit>;
 
+console.log({
+  dpr: PixelRatio.get()
+})
+
 export const InvestigatorTraits: FC<InvestigatorTraitsProps> = styled(BaseTraits)`
   text-align: center;
   ${({ unit }: InvestigatorTraitsProps) => unit && css`
-    margin-top: ${unit * 0.8}px; 
     font-size: ${unit * boardText.ratio.traits}px;
   `}
 `

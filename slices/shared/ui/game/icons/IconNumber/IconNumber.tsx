@@ -14,19 +14,21 @@ export const IconNumber = (props: IconNumberProps) => {
     StrokedIconNumber : 
     UnstrokedIconNumber;
 
-  const { 
-    fontSize = font.size.default 
-  } = StyleSheet.flatten(props.style);
+  const style = StyleSheet.flatten(props.style);
+  const defaultFontSize = style.fontSize || font.size.default;
+
+  const fontSize = defaultFontSize * font.scale;
 
   const containerStyle = {
-    marginBlock: -fontSize * 0.3
+    marginBlock: -fontSize * 0.4
   }
 
   return (
     <Component {...props}
       style={[
         props.style,
-        containerStyle
+        containerStyle,
+        { fontSize }
       ]}
     />
   )
