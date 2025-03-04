@@ -1,12 +1,14 @@
 import { Pressable, ScrollView, View, type ViewProps } from "react-native";
 import styled, { css } from "styled-components/native";
 import { FactionDescription } from "../../../../background";
-import { TouchableOpacity } from "@shared/ui";
+import { DefinedIconButtonProps, IconButton, TouchableOpacity } from "@shared/ui";
 import Animated from "react-native-reanimated";
 import { TICK_PATTERN } from "@features/haptic";
 import { InvestigatorTraits, InvestigatorText, InvestigatorTextProps, InvestigatorFlavor } from "@pages/board/ui/text";
 import { boardText } from "@pages/board/config";
 import { DescriptionMenu } from "../DescriptionMenu";
+import { FC } from "react";
+import { color, size } from "@shared/config";
 
 type PropsWithDisplay = {
   display: boolean;
@@ -18,7 +20,7 @@ export const Container: typeof View = styled(View)`
 `
 
 export const Background: typeof FactionDescription = styled(FactionDescription)`
-  flex: 1;
+
 `
 
 export const Content: typeof View = styled(View)`
@@ -26,6 +28,7 @@ export const Content: typeof View = styled(View)`
   left: 0;
   right: 0;
   top: 0px;
+  bottom: 0;
 ` 
 
 export const Expand: typeof Animated.View = styled(Animated.View)`
@@ -33,19 +36,46 @@ export const Expand: typeof Animated.View = styled(Animated.View)`
   left: 0;
   right: 0;
   top: 0px;
+  bottom: 0;
 ` 
 
-export const Button: typeof TouchableOpacity = styled(TouchableOpacity)
+export const ExpandArea: typeof Pressable = styled(Pressable)
   .attrs({
     activeOpacity: 1
   })`
-  flex: 1;
-`
+    z-index: 10;
+  `
 
 export const TextCollapse: typeof Pressable = styled(Pressable)`
   flex: 1;
 `
 
+export const Exit: FC<DefinedIconButtonProps> = styled(IconButton)
+  .attrs({
+    icon: 'resign',
+    pressHapticPattern: TICK_PATTERN,
+    iconStyle: {
+      color: color.light10,
+      fontSize: 36
+    }
+  })`
+    position: absolute;
+    left: 0px;
+    top: -60px;
+  `
+
+export const Clear: FC<DefinedIconButtonProps> = styled(IconButton)
+  .attrs({
+    icon: 'repeat',
+    iconStyle: {
+      color: color.light10,
+      fontSize: 36
+    }
+  })`
+    position: absolute;
+    right: 5px;
+    top: -60px;
+  `
 
 export const TextContent: typeof ScrollView = styled(ScrollView)`
 `
@@ -57,7 +87,7 @@ export const DescriptionContent: typeof View = styled(View)`
 
 
 export const Menu: typeof DescriptionMenu = styled(DescriptionMenu)`
-  
+
 `
 
 export const Traits: typeof InvestigatorTraits = styled(InvestigatorTraits)`

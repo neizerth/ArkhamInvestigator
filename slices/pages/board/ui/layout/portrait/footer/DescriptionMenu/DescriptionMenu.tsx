@@ -14,11 +14,8 @@ export const DescriptionMenu = (props: DescriptionMenuProps) => {
 
   return (
     <C.Container {...props}>
-      <C.Left>
-        <C.Button icon='typejournal'/>
-        <C.Button icon='change-investigator'/>
-        <C.Clear/>
-      </C.Left>
+      <C.Button icon='typejournal'/>
+      <C.Button icon='change-investigator'/>
       <C.Hide onPress={hide}/>
     </C.Container>
   );

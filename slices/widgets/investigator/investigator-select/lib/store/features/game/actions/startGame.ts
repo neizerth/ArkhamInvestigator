@@ -1,6 +1,6 @@
 import type { ActionCreator } from "@reduxjs/toolkit";
 import { 
-  redirectTo,
+  navigateTo,
   setCurrentInvestigatorIndex, 
   setInvestigatorBoards, 
   type AppThunk 
@@ -15,5 +15,5 @@ export const startGame: ActionCreator<AppThunk> = () => (dispatch, getState) =>{
   dispatch(setInvestigatorBoards(investigatorBoards));
   dispatch(setCurrentInvestigatorIndex(0));
 
-  dispatch(redirectTo('/board'));
+  dispatch(navigateTo('/board'));
 }

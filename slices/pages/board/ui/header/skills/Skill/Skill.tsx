@@ -15,9 +15,12 @@ export const Skill = ({
   type,
   ...props
 }: SkillProps) => {
-  const size = useContext(SkillsContext);
-  const { value } = useAppSelector(selectBoard);
-  const style = getSkillStyle(size);
+  const box = useContext(SkillsContext);
+  const { value, isParallel } = useAppSelector(selectBoard);
+  const style = getSkillStyle({
+    box,
+    isParallel
+  });
   const skillValue = value[type];
 
   return (

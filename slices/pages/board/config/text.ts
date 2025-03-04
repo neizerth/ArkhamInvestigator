@@ -1,6 +1,6 @@
 import { font, DPR } from "@shared/config"
 
-const scale = 2.5 / DPR;
+const scale = 2.1 / DPR;
 
 const textSize = font.size.medium * scale;
 

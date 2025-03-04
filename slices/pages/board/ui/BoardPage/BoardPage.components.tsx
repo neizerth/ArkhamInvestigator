@@ -26,10 +26,9 @@ export const Background: typeof InvestigatorImage = styled(InvestigatorImage)`
 
 export const Header: FC<BoardHeaderProps & PropsWithLayout> = styled(BoardHeader)`
   position: absolute;
-  z-index: 2;
+  z-index: 3;
   left: 0;
   right: 0;
-  bottom: 0;
   ${({ layout }: PropsWithLayout) => css`
     top: ${servicePadding[layout.type].top}px;
   `}

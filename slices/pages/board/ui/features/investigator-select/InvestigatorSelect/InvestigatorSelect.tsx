@@ -15,8 +15,6 @@ export const InvestigatorSelect = ({}: InvestigatorSelectProps) => {
   const uri = getInvestigatorImageUrl(picture.id, 'square');
   const source = { uri };
 
-  console.log(uri);
-
   return (
     <C.Container>
       <C.Image 

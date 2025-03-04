@@ -6,7 +6,7 @@ import { propEq, reject } from "ramda";
 import type { AppThunk } from "../..";
 import { MAX_PLAYERS } from "@shared/config";
 import { router } from "expo-router";
-import { redirectTo, replaceTo } from "@shared/lib/effects";
+import { navigateTo, replaceTo } from "@shared/lib/effects";
 
 export const changeSelectedInvestigator: ActionCreator<AppThunk> = (item: InvestigatorDetails) => 
   (dispatch, getState) => {
@@ -30,7 +30,7 @@ export const changeSelectedInvestigator: ActionCreator<AppThunk> = (item: Invest
     dispatch(addSelectedInvestigator(selectedItem))
 
     if (media?.skins || media?.variants) {
-      dispatch(redirectTo('/investigator-details'))
+      dispatch(navigateTo('/investigator-details'))
       dispatch(setCurrentInvestigatorDetails(item));
       return;
     }

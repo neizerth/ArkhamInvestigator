@@ -8,6 +8,8 @@ export type IconButtonProps = TouchableOpacityProps & {
   iconStyle?: IconProps['style']
 }
 
+export type DefinedIconButtonProps = Omit<IconButtonProps, 'icon'>;
+
 export const IconButton = ({
   icon,
   scaleType,

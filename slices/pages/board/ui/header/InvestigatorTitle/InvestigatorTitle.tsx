@@ -15,7 +15,7 @@ export const InvestigatorTitle = ({
   ...props
 }: InvestigatorTitleProps) => {
   const { layout, view } = useContext(LayoutContext);
-  const { investigator } = useAppSelector(selectBoard);
+  const { investigator, isParallel } = useAppSelector(selectBoard);
   const faction = investigator.faction_code as Faction;
 
   const { name, subname = '' } = investigator;
@@ -25,7 +25,8 @@ export const InvestigatorTitle = ({
   
   const style = getTitleStyle({
     view: box,
-    faction
+    faction,
+    isParallel
   });
 
   return (

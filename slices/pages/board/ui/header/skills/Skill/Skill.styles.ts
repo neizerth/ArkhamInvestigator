@@ -1,10 +1,14 @@
-import { IS_WEB } from "@shared/config";
-import type { Box } from "@shared/model";
+import { color, IS_WEB } from "@shared/config";
+import type { Box, PropsWithBox } from "@shared/model";
 import { type TextStyle, type ViewStyle } from "react-native";
 
-
-export const getSkillStyle = ({ width }: Box) => {
+type GetSkillStyleOptions = PropsWithBox & {
+  isParallel?: boolean
+}
+export const getSkillStyle = ({ box, isParallel }: GetSkillStyleOptions) => {
+  const { width } = box;
   const vw = width / 100;
+  const textColor = isParallel ? color.white : color.text;
 
   const valueContainer: ViewStyle = {
     paddingTop: 1 * vw,
@@ -12,7 +16,8 @@ export const getSkillStyle = ({ width }: Box) => {
     width: 9 * vw
   }
   const value: TextStyle = {
-    fontSize: 8 * vw
+    fontSize: 8 * vw,
+    color: textColor
   }
   return {
     valueContainer,

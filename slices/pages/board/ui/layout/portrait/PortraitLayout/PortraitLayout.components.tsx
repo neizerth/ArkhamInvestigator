@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components/native"
-import { View } from "react-native"
+import { Pressable, View } from "react-native"
 import * as F from '../footer' 
 import * as S from '../sidebar' 
 import { size } from "@shared/config"
@@ -15,11 +15,16 @@ export const Container: typeof View = styled(View)`
 
 export const Overlay: typeof Animated.View = styled(Animated.View)`
   position: absolute;
+  z-index: 1;
   left: 0;
   top: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.7);
+`
+
+export const OverlayArea: typeof Pressable = styled(Pressable)`
+  
 `
 
 export const Footer: typeof F.Footer = styled(F.Footer)`
