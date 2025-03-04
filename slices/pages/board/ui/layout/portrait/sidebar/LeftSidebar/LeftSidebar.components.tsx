@@ -7,16 +7,23 @@ import { FC } from "react";
 import { View, ViewProps } from "react-native";
 import styled, { css } from "styled-components/native";
 
-type ContainerProps = ViewProps & {
+type ContainerProps = ViewProps & PropsWithUnit & {
   single: boolean
 }
+
+const isHistoryInColumn = (unit: number) => unit > 340;
 
 export const Container: FC<ContainerProps> = styled(View)`
   gap: 35px;
   justify-content: flex-end;
   align-items: center;
   min-width: ${assetsSize.main}px;
+  ${({ unit } : ContainerProps) => !isHistoryInColumn(unit) && css`
+    align-items: flex-start;
+    padding-bottom: 50px;
+  `}
   ${({ single } : ContainerProps) => single && css`
+    align-items: center;
     padding-bottom: 50px;
   `}
 `
@@ -30,13 +37,12 @@ export const History: FC<HistoryProps> = styled(View)`
   justify-content: flex-end;
   ${({ single, unit }: HistoryProps) => {
 
-    if (single || unit > 340) {
+    if (single || isHistoryInColumn(unit)) {
       return;
     }
 
     return css`
       flex-direction: row;
-      padding-left: ${size.gap.medium};
     `
   }}
 `

@@ -17,7 +17,11 @@ export const LeftSidebar = ({
   const single = boards.length === 1; 
 
   return (
-    <C.Container {...props} single={single}>
+    <C.Container 
+      {...props} 
+      single={single}
+      unit={height}
+    >
       <C.History 
         single={single}
         unit={height}

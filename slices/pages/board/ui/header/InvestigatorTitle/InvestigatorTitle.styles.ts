@@ -49,7 +49,7 @@ export const getTitleStyle = (options: GetTitleStyleOptions) => {
     gap: '8%'
   }
   const title: ViewStyle = {
-    gap: '0.5%',
+    gap: 2 * vh * font.scale,
     height: '61%'
   }
   const subtitle: ViewStyle = {
@@ -60,11 +60,11 @@ export const getTitleStyle = (options: GetTitleStyleOptions) => {
     
   }
   const subtitleText: TextStyle = {
-    fontSize: 25 * vh
+    fontSize: 19 * vh * font.scale
   }
 
   const unique: TextStyle = {
-    fontSize: 25 * vh
+    fontSize: 25 * vh * font.scale
   }
 
   const base = {

@@ -7,8 +7,19 @@ import { assetsSize, SIDEBAR_BOTTOM } from "@pages/board/config"
 import { PropsWithView } from "@pages/board/model"
 import { RuleSet } from "styled-components"
 import { FC } from "react"
-export const Container: typeof View = styled(View)`
+import Animated from "react-native-reanimated"
 
+export const Container: typeof View = styled(View)`
+  position: relative;
+`
+
+export const Overlay: typeof Animated.View = styled(Animated.View)`
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.4);
 `
 
 export const Footer: typeof F.Footer = styled(F.Footer)`

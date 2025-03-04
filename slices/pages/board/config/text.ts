@@ -1,8 +1,6 @@
-import { font, IS_WEB } from "@shared/config"
-import { PixelRatio } from "react-native";
+import { font, DPR } from "@shared/config"
 
-const ratio = PixelRatio.get();
-const scale = 2.5 / ratio;
+const scale = 2.5 / DPR;
 
 const textSize = font.size.medium * scale;
 

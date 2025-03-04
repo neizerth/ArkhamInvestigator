@@ -2,6 +2,7 @@ import type { RowProps } from '@shared/ui';
 import * as C from './Footer.components';
 import { Actions, Health, Sanity } from '../../../../stats';
 import { InvestigatorSelect } from '@pages/board/ui/features';
+import { useState } from 'react';
 
 export type FooterProps = RowProps;
 

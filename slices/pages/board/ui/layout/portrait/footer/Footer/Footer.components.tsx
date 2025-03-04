@@ -28,7 +28,7 @@ export const MainStats: typeof Row = styled(Row)`
   gap: ${size.gap.medium}px;
 `
 
-export const Description = styled(FooterDescription)`
+export const Description: typeof FooterDescription = styled(FooterDescription)`
   z-index: 4;
   height: ${PORTRAIT_DESCRIPTION_HEIGHT}px;
 `

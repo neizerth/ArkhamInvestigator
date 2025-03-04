@@ -1,4 +1,4 @@
-import { font } from "@shared/config"
+import { color, font } from "@shared/config"
 import { ArnoPro } from "@shared/fonts/ArnoPro"
 import { PropsWithUnit } from "@shared/model"
 import { GameText, GameTextProps } from "@widgets/game-text"
@@ -26,6 +26,7 @@ export const InvestigatorText: FC<InvestigatorTextProps> = styled(GameText)
     }
   }))`
     font-family: ${ArnoPro.regular};
+    color: ${color.text};
     ${({ unit }: InvestigatorTextProps) => {
       if (!unit) {
         return;

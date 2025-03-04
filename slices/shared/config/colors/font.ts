@@ -1,6 +1,6 @@
-import { PixelRatio } from "react-native";
+import { DPR } from "../device";
 
-const scale = PixelRatio.get() / 2;
+const scale = DPR / 2;
 
 export const font = {
   size: {

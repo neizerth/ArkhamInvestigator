@@ -23,6 +23,13 @@ export const SkillsContext = createContext<Box>({
   height: 0
 })
 
-export const PortraitLayoutContext = createContext({
-  height: 0
+type PortraitLayoutContextData = {
+  height: number
+  showDescription: boolean
+  setShowDescription: (value: boolean) => void
+}
+export const PortraitLayoutContext = createContext<PortraitLayoutContextData>({
+  height: 0,
+  showDescription: false,
+  setShowDescription: () => {}
 })

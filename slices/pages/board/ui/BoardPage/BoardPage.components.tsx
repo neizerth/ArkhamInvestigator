@@ -41,7 +41,5 @@ export const PortraitLayout: FC<BasePortraitLayoutProps> = styled(BasePortraitLa
   left: 0;
   right: 0;
   bottom: 0;
-  ${({ top }: BasePortraitLayoutProps) => css`
-    top: ${top}px;
-  `}
+  top: 0;
 `

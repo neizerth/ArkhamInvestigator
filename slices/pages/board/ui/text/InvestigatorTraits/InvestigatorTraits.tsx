@@ -1,5 +1,5 @@
 import { boardText } from "@pages/board/config"
-import { font } from "@shared/config"
+import { color, font } from "@shared/config"
 import { ArnoPro } from "@shared/fonts/ArnoPro"
 import { withLocaleFont } from "@shared/lib/hoc"
 import { PropsWithUnit } from "@shared/model"
@@ -17,12 +17,9 @@ const BaseTraits = withLocaleFont({
 
 export type InvestigatorTraitsProps = TextProps & Partial<PropsWithUnit>;
 
-console.log({
-  dpr: PixelRatio.get()
-})
-
 export const InvestigatorTraits: FC<InvestigatorTraitsProps> = styled(BaseTraits)`
   text-align: center;
+  color: ${color.text};
   ${({ unit }: InvestigatorTraitsProps) => unit && css`
     font-size: ${unit * boardText.ratio.traits}px;
   `}

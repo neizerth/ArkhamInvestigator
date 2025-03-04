@@ -1,4 +1,4 @@
-import { Platform } from "react-native";
+import { PixelRatio, Platform } from "react-native";
 import { capitalize } from "../lib/util/string";
 import type { BreakpointSize, DeviceBreakpoints, DeviceBreakpointType, DeviceType } from "../model";
 import * as ScreenOrientation from 'expo-screen-orientation';
@@ -50,3 +50,6 @@ export const orientations = {
     ScreenOrientation.Orientation.PORTRAIT_UP
   ]
 }
+
+export const DPR = PixelRatio.get(); 
+
