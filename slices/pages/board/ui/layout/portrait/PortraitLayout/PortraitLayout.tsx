@@ -5,6 +5,7 @@ import { useCallback, useContext, useEffect, useState } from 'react';
 import { LayoutContext, PortraitLayoutContext } from '@pages/board/config';
 import { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 import { StyleSheet } from 'react-native';
+import { selectShowDescription, setShowDescription, useAppDispatch, useAppSelector } from '@shared/lib';
 
 export type PortraitLayoutProps = RowProps & {
   top: number
@@ -15,15 +16,14 @@ export const PortraitLayout = ({
   ...props
 }: PortraitLayoutProps) => {
   const { view } = useContext(LayoutContext);
-  const [showDescription, setShowDescription] = useState(false);
+  const dispatch = useAppDispatch();
+  const showDescription = useAppSelector(selectShowDescription);
   const opacity = useSharedValue(0);
 
   const height = view.height - top;
 
   const contextValue = {
-    height,
-    showDescription,
-    setShowDescription
+    height
   }
 
   const offset = { top }
@@ -41,8 +41,8 @@ export const PortraitLayout = ({
   });
 
   const hideDescription = useCallback(() => {
-    setShowDescription(false);
-  }, []);
+    dispatch(setShowDescription(false));
+  }, [dispatch]);
   return (
     <PortraitLayoutContext.Provider value={contextValue}>
       <C.Container {...props}>

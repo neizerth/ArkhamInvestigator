@@ -47,14 +47,14 @@ export const InvestigatorListItem = (props: InvestigatorPreviewProps) => {
   const selectedInvestigators = useAppSelector(selectSelectedInvestigators);
 
   const { investigator } = props;
-  const selected = includesBy(
-    propEq(investigator.code, 'code'), 
-    selectedInvestigators
-  )
+  const selected = selectedInvestigators.filter(
+    propEq(investigator.code, 'code')
+  );
   return (
     <InvestigatorPreview 
       {...props}
-      selected={selected}
+      selected={selected.length > 0}
+      selectedCount={selected.length}
     />
   )
 }

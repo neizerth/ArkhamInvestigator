@@ -7,6 +7,7 @@ import type { AppThunk } from "../..";
 import { MAX_PLAYERS } from "@shared/config";
 import { router } from "expo-router";
 import { navigateTo, replaceTo } from "@shared/lib/effects";
+import { v4 } from "uuid";
 
 export const changeSelectedInvestigator: ActionCreator<AppThunk> = (item: InvestigatorDetails) => 
   (dispatch, getState) => {
@@ -18,15 +19,21 @@ export const changeSelectedInvestigator: ActionCreator<AppThunk> = (item: Invest
     const withCode = propEq(code, 'code');
     const hasCode = includesBy(withCode, selected);
 
-    if (hasCode) {
+    const isMaxPlayers = selected.length === MAX_PLAYERS;
+    const isMultiselect = media?.multiselect;
+
+    if (hasCode && (!isMultiselect || isMaxPlayers)) {
       return dispatch(removeSelectedInvestigator(code))
     }
 
-    if (selected.length === MAX_PLAYERS) {
+    if (isMaxPlayers) {
       return;
     }
 
-    const selectedItem = { code }
+    const selectedItem = {
+      id: v4(),
+      code
+    }
     dispatch(addSelectedInvestigator(selectedItem))
 
     if (media?.skins || media?.variants) {

@@ -2,7 +2,7 @@ import {
   getInvestigatorImageUrl as getImageUrl 
 } from "@shared/api/getInvestigatorImageUrl"
 import type { Faction, InvestigatorSource } from "@shared/model"
-import { Container, Image, Info, Selection, ExtraIcon, OptionsInfo } from "./InvestigatorPreview.components"
+import * as C from "./InvestigatorPreview.components"
 import type { TouchableOpacityProps } from "react-native"
 import { useImageSize } from "@widgets/investigator/investigator-select/lib/hooks"
 import type { Investigator as InvestigatorMedia } from "arkham-investigator-data"
@@ -14,6 +14,7 @@ export type InvestigatorPreviewProps = TouchableOpacityProps & {
   investigator: InvestigatorSource
   media?: InvestigatorMedia
   selected?: boolean
+  selectedCount?: number
   imageId?: string
   icon?: string
   size?: number
@@ -25,6 +26,7 @@ export const InvestigatorPreview = ({
   showOptionsInfo = true,
   investigator,
   selected,
+  selectedCount = 0,
   icon,
   media,
   ...props
@@ -40,30 +42,35 @@ export const InvestigatorPreview = ({
   const showOptions = showOptionsInfo && (media?.variants || media?.skins);
   
   return (
-    <Container 
+    <C.Container 
       {...props}
       pressHapticPattern={TICK_PATTERN}
     >
       {showOptions && (
-        <OptionsInfo faction={faction}/>
+        <C.OptionsInfo faction={faction}/>
       )}
-      <Image 
+      <C.Image 
         source={source}
         size={size}
       />
       {showIcon && (
-        <Info>
+        <C.Info>
           {icon ? (
-            <ExtraIcon icon={icon}/>
+            <C.ExtraIcon icon={icon}/>
             ) : (
             <FactionIcon faction={faction}/>
           )}
-        </Info>
+        </C.Info>
       )}
       {selected && (
-        <Selection faction={faction}/>
+        <C.Selection faction={faction}/>
       )}
-    </Container>
+      {selectedCount > 1 && (
+        <C.SelectedCount>
+          <C.Count>{selectedCount}</C.Count>
+        </C.SelectedCount>
+      )}
+    </C.Container>
   )
 }
 

@@ -31,6 +31,8 @@ export const getInvestigatorBoards = ({
       isParallel
     } = getSelectedInvestigatorVariant(item, media);
 
+    const unique = Boolean(!media.multiselect);
+
     const value = {
       ...getInvestigatorBoardStats(investigator),
       additionalAction,
@@ -44,7 +46,8 @@ export const getInvestigatorBoards = ({
       picture,
       baseValue: { ...value },
       value,
-      isParallel
+      isParallel,
+      unique
     }
   })
   .filter(isNotNil)

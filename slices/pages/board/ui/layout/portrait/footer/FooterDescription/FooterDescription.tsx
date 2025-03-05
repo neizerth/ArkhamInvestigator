@@ -3,7 +3,7 @@ import * as C from './FooterDescription.components';
 import { useCallback, useContext, useEffect, useState } from 'react';
 import { descriptionSize, LayoutContext, PORTRAIT_DESCRIPTION_HEIGHT, PortraitLayoutContext } from '@pages/board/config';
 import { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
-import { navigateTo, useAppDispatch, useAppSelector } from '@shared/lib';
+import { navigateTo, selectShowDescription, setShowDescription, useAppDispatch, useAppSelector } from '@shared/lib';
 import { selectBoard } from '@pages/board/lib';
 import { Faction } from '@shared/model';
 import { tick, TICK_PATTERN } from '@features/haptic';
@@ -13,10 +13,10 @@ export type FooterDescriptionProps = ViewProps;
 export const FooterDescription = ({
   ...props
 }: FooterDescriptionProps) => {
-  const { showDescription, setShowDescription } = useContext(PortraitLayoutContext);
+  const dispatch = useAppDispatch();
+  const showDescription = useAppSelector(selectShowDescription);
 
   const { view } = useContext(LayoutContext);
-  const dispatch = useAppDispatch();
   const { investigator } = useAppSelector(selectBoard);
   const faction = investigator.faction_code as Faction;
   const top = useSharedValue(0);
@@ -28,17 +28,17 @@ export const FooterDescription = ({
   
   const onShow = useCallback(() => {
     if (!showDescription) {
-      setShowDescription(true)
+      dispatch(setShowDescription(true))
       tick();
     }
-  }, [showDescription, setShowDescription]);
+  }, [showDescription, dispatch]);
 
   const onHide = useCallback(() => {
     if (showDescription) {
-      setShowDescription(false)
+      dispatch(setShowDescription(false))
       tick();
     }
-  }, [showDescription, setShowDescription]);
+  }, [showDescription, dispatch]);
 
   const contentStyle = useAnimatedStyle(() => {
     return {

@@ -1,16 +1,17 @@
 import { IconProps, Row } from '@shared/ui';
 import * as C from './DescriptionMenu.components';
-import { ViewProps } from 'react-native-svg/lib/typescript/fabric/utils';
+import type { ViewProps } from 'react-native-svg/lib/typescript/fabric/utils';
 import { useCallback, useContext } from 'react';
 import { PortraitLayoutContext } from '@pages/board/config';
+import { setShowDescription, useAppDispatch } from '@shared/lib';
 
 export type DescriptionMenuProps = ViewProps
 
 export const DescriptionMenu = (props: DescriptionMenuProps) => {
-  const { setShowDescription } = useContext(PortraitLayoutContext);
+  const dispatch = useAppDispatch();
   const hide = useCallback(() => {
-    setShowDescription(false)
-  }, [setShowDescription]);
+    dispatch(setShowDescription(false))
+  }, [dispatch]);
 
   return (
     <C.Container {...props}>

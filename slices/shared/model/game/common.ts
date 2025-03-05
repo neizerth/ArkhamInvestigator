@@ -16,6 +16,7 @@ export type InvestigatorGameStatType = 'actions' | 'resources' | 'clues';
 export type SkillType = InvestigatorSkillType | 'wild'
 
 export type SelectedInvestigator = {
+  id: string
   code: string
   variantId: Nullable<string>
   skinId: Nullable<string>

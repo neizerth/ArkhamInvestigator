@@ -29,7 +29,7 @@ export const StartButton = () => {
         <C.Investigators>
           {investigators.map(item => (
             <C.InvestigatorImage
-              key={item.code}
+              key={item.id}
               source={getImageSource(item)}
             />
           ))}

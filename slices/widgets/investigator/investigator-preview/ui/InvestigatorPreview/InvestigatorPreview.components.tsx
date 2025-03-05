@@ -7,10 +7,13 @@ import styled, { css } from "styled-components/native";
 import type { Faction } from "@shared/model";
 import type { FC } from "react";
 
-import { color, factionColor, size } from "@shared/config";
+import { color, factionColor, font, size } from "@shared/config";
 import Color from "color";
 import type { PropsWithFaction } from "@shared/model/ui";
 import { Icon, TouchableOpacity } from "@shared/ui";
+import { Alegreya } from "@shared/fonts/Alegreya";
+import { Text } from "react-native";
+import { ArkhamDigits } from "@shared/fonts/ArkhamDigits";
 
 
 const getSelectionColor = (faction: Faction) => {
@@ -70,6 +73,26 @@ export const Info: typeof View = styled(View)`
   border-radius: 0 ${size.borderRadius.large}px 0 0;
   padding: 2px 8px;
   padding-top: 2px;
+`
+
+export const SelectedCount: typeof View = styled(View)`
+  position: absolute;
+  flex-direction: row;
+  z-index: 1;
+  bottom: 10px;
+  right: 8px;
+  width: 20px;
+  height: 20px;
+  justify-content: center;
+  align-items: center;
+  background-color: ${color.light10};
+  border-radius: ${size.borderRadius.large}px;
+  padding: 4px;
+`
+
+export const Count: typeof Text = styled(Text)`
+  font-family: ${ArkhamDigits.fill};
+  font-size: ${font.size.small}px;
 `
 
 export const ExtraIcon: typeof Icon = styled(Icon)`

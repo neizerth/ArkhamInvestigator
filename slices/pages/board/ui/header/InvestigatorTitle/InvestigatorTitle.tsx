@@ -14,8 +14,8 @@ export type InvestigatorTitleProps = Omit<ImageBackgroundProps, 'source'>
 export const InvestigatorTitle = ({
   ...props
 }: InvestigatorTitleProps) => {
-  const { layout, view } = useContext(LayoutContext);
-  const { investigator, isParallel } = useAppSelector(selectBoard);
+  const { layout } = useContext(LayoutContext);
+  const { investigator, isParallel, unique } = useAppSelector(selectBoard);
   const faction = investigator.faction_code as Faction;
 
   const { name, subname = '' } = investigator;
@@ -40,7 +40,9 @@ export const InvestigatorTitle = ({
       ]}
     >
       <C.Title style={style.title}>
-        <C.Unique style={style.unique}/>
+        {unique && (
+          <C.Unique style={style.unique}/>
+        )}
         <C.TitleText style={style.titleText}>
           {name}
         </C.TitleText>

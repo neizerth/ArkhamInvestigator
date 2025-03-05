@@ -19,4 +19,5 @@ export type InvestigatorBoard = {
   isParallel?: boolean
   baseValue: InvestigatorBoardValues
   value: InvestigatorBoardValues
+  unique: boolean
 }
