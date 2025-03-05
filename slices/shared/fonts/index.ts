@@ -1,4 +1,5 @@
 import { AlegreyaFonts } from "./Alegreya";
+import { ArkhamDigitsFonts } from "./ArkhamDigits";
 import { ArkhamicFonts } from "./Arkhamic";
 import { ArkhamIconsFonts } from "./ArkhamIcons";
 import { ArnoProFonts } from "./ArnoPro";
@@ -12,5 +13,6 @@ export default {
   ...TeutonicFonts,
   ...ArkhamIconsFonts,
   ...AlegreyaFonts,
-  ...ArnoProFonts
+  ...ArnoProFonts,
+  ...ArkhamDigitsFonts
 }

@@ -17,11 +17,13 @@ export const Skill = ({
 }: SkillProps) => {
   const box = useContext(SkillsContext);
   const { value, isParallel } = useAppSelector(selectBoard);
+  const skillValue = value[type];
+
   const style = getSkillStyle({
     box,
-    isParallel
+    isParallel,
+    value: skillValue
   });
-  const skillValue = value[type];
 
   return (
     <C.Container {...props}>

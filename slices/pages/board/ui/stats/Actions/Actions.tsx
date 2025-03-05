@@ -16,7 +16,7 @@ export const Actions = ({
     <C.Container {...props}>
       <C.Content>
         
-        <C.Value value={value.actions}/>
+        <C.Value value={-3}/>
         {additionalAction && (
           <C.AdditionalAction>
             <C.ActionIcon icon={actionIcon}/>
