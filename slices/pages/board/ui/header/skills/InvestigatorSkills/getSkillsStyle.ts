@@ -1,7 +1,7 @@
 import type { Box } from "@shared/model";
 import { ViewStyle } from "react-native";
 
-export const getSkillsStyle = ({ width, height }: Box): ViewStyle => {
+export const getSkillsStyle = ({ width }: Box): ViewStyle => {
   const vw = width / 100;
   return {
     paddingLeft: vw * 5,

@@ -4,7 +4,7 @@ import type { SkillProps } from "../Skill";
 import type { FC } from "react";
 import styled from "styled-components/native";
 
-type DefinedSkillProps = Omit<SkillProps, 'skill'> 
+type DefinedSkillProps = Omit<SkillProps, 'type'> 
 
 export const withSkillType = (type: InvestigatorSkillType): FC<DefinedSkillProps> => 
   styled(Skill)

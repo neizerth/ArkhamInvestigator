@@ -28,8 +28,17 @@ export const getSkillStyle = ({ box, isParallel, value }: GetSkillStyleOptions) 
     fontSize: valueSize[digitsCount],
     color: textColor
   }
+  const background: ViewStyle = {
+    borderRadius: 7 * vw
+  }
+
+  const check: ViewStyle = {
+    // left: -1.5 * vw
+  }
   return {
     valueContainer,
-    value: valueText
+    value: valueText,
+    check,
+    background
   }
 }

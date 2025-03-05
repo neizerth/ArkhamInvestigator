@@ -3,9 +3,10 @@ import * as C from './Skill.components';
 import { ViewProps } from 'react-native';
 import { useAppSelector } from '@shared/lib';
 import { selectBoard } from '@pages/board/lib';
-import { useContext } from 'react';
+import { useCallback, useContext, useState } from 'react';
 import { SkillsContext } from '@pages/board/config';
 import { getSkillStyle } from './Skill.styles';
+import { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 
 export type SkillProps = ViewProps & {
   type: InvestigatorSkillType
@@ -17,6 +18,7 @@ export const Skill = ({
 }: SkillProps) => {
   const box = useContext(SkillsContext);
   const { value, isParallel } = useAppSelector(selectBoard);
+  const [pressing, setPressing] = useState(false);
   const skillValue = value[type];
 
   const style = getSkillStyle({
@@ -25,14 +27,33 @@ export const Skill = ({
     value: skillValue
   });
 
+  const onPressIn = useCallback(() => {
+    setPressing(true)
+  }, [])
+
+  const onPressOut = useCallback(() => {
+    setPressing(false)
+  }, [])
+
   return (
     <C.Container {...props}>
-      <C.ValueContainer style={style.valueContainer}>
-        <C.Value 
-          value={skillValue}
-          style={style.value}
+      <C.Row>
+        <C.ValueContainer style={style.valueContainer}>
+          <C.Value 
+            value={skillValue}
+            style={style.value}
+          />
+        </C.ValueContainer>
+        <C.Check 
+          style={style.check}
+          onPressIn={onPressIn}
+          onPressOut={onPressOut}
         />
-      </C.ValueContainer>
+      </C.Row>
+      {pressing && (
+        <C.Background style={style.background}/>
+      )}
+      
     </C.Container>
   );
 }

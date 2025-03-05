@@ -1,25 +1,14 @@
 import { Row } from "@shared/ui"
-import { Skill, type SkillProps } from "../../Skill"
 import styled from "styled-components/native"
-import type { FC } from "react"
 import { size } from "@shared/config"
-import type { SkillType } from "@shared/model"
+import { withSkillType } from "./withSkillType"
 
 export const Container: typeof Row = styled(Row)`
   gap: ${size.gap.small}px;
 `
 
-type SkillWithIconProps = Omit<SkillProps, 'type' | 'icon' | 'skillType'>;
 
-export const createSkill = (skillType: SkillType): FC<SkillWithIconProps> => 
-  styled(Skill)
-  .attrs({
-    skillType
-  })`
-    
-  `
-
-export const Agility = createSkill('agility');
-export const Combat = createSkill('combat');
-export const Intellect = createSkill('intellect');
-export const Willpower = createSkill('willpower');
+export const Agility = withSkillType('agility');
+export const Combat = withSkillType('combat');
+export const Intellect = withSkillType('intellect');
+export const Willpower = withSkillType('willpower');

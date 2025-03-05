@@ -14,11 +14,11 @@ export const handlePress = ({
   eventHandler, 
   pattern
 }: HandlePressOptions) => {
-  if (!eventHandler) {
-    return;
-  }
   if (pattern) {
     Vibration.vibrate(pattern);
+  }
+  if (!eventHandler) {
+    return;
   }
   eventHandler(event);
 }
