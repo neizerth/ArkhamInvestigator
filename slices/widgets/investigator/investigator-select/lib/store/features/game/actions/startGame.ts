@@ -3,6 +3,7 @@ import {
   navigateTo,
   setCurrentInvestigatorIndex, 
   setInvestigatorBoards, 
+  setShowDescription, 
   type AppThunk 
 } from "@shared/lib";
 import { selectGameInvestigatorBoards } from "../selectors";
@@ -14,6 +15,7 @@ export const startGame: ActionCreator<AppThunk> = () => (dispatch, getState) =>{
 
   dispatch(setInvestigatorBoards(investigatorBoards));
   dispatch(setCurrentInvestigatorIndex(0));
+  dispatch(setShowDescription(false));
 
   dispatch(navigateTo('/board'));
 }

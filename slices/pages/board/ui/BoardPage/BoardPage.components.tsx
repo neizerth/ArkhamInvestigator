@@ -1,10 +1,10 @@
 import { View } from 'react-native';
-import { InvestigatorImage } from '../background';
+import { InvestigatorImage } from '../shared/background';
 import styled, { css } from 'styled-components/native';
-import { BoardHeader, type BoardHeaderProps } from '../header';
+import { BoardHeader, type BoardHeaderProps } from '../layout';
 import { servicePadding } from '@pages/board/config';
 import type { FC } from 'react';
-import { PortraitLayout as BasePortraitLayout, type PortraitLayoutProps as BasePortraitLayoutProps } from '../layout/portrait';
+import { PortraitLayout as BasePortraitLayout, type PortraitLayoutProps as BasePortraitLayoutProps } from '../layout';
 import type { PropsWithLayout } from '@pages/board/model';
 import { size } from '@shared/config';
 import { PropsWithUnit } from '@shared/model';
