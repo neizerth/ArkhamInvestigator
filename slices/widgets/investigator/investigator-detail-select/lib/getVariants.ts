@@ -31,7 +31,7 @@ export const getVariants = (details: InvestigatorDetails) => {
       ) || details;
 
     const { story } = variantDetails; 
-    const { icon } = story;
+    const icon = story.icon === 'parallel' ? 'cardicons-parallel' : story.icon;
 
     const imageId = 'image' in variant ? id : code;
     
