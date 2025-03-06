@@ -1,13 +1,11 @@
 import { View } from 'react-native';
-import { InvestigatorImage } from '../shared/background';
+import { InvestigatorImage } from '../layout/InvestigatorImage';
 import styled, { css } from 'styled-components/native';
 import { BoardHeader, type BoardHeaderProps } from '../layout';
 import { servicePadding } from '@pages/board/config';
 import type { FC } from 'react';
 import { PortraitLayout as BasePortraitLayout, type PortraitLayoutProps as BasePortraitLayoutProps } from '../layout';
 import type { PropsWithLayout } from '@pages/board/model';
-import { size } from '@shared/config';
-import { PropsWithUnit } from '@shared/model';
 
 export const Container: typeof View = styled(View)`
   flex: 1;
@@ -24,12 +22,19 @@ export const Background: typeof InvestigatorImage = styled(InvestigatorImage)`
   bottom: 0;
 ` 
 
-export const Header: FC<BoardHeaderProps & PropsWithLayout> = styled(BoardHeader)`
+type HeaderProps = BoardHeaderProps & PropsWithLayout & {
+  descriptionShown: boolean
+};
+
+export const Header: FC<HeaderProps> = styled(BoardHeader)`
   position: absolute;
   z-index: 3;
   left: 0;
   right: 0;
-  ${({ layout }: PropsWithLayout) => css`
+  ${({ descriptionShown }: HeaderProps) => css`
+    z-index: ${descriptionShown ? 2 : 3};
+  `}
+  ${({ layout }: HeaderProps) => css`
     top: ${servicePadding[layout.type].top}px;
   `}
 ` 

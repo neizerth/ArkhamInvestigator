@@ -25,6 +25,12 @@ export const RootLayout = ({
             presentation: 'transparentModal'
           }}
         />
+        <Stack.Screen
+          name="skill-check"
+          options={{
+            presentation: 'modal'
+          }}
+        />
       </Stack>
       <StatusBar/>
       {children}

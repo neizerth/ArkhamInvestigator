@@ -26,9 +26,9 @@ export const Check: typeof Pressable = styled(Pressable)`
   justify-content: stretch;
 `
 
-export const Background: typeof Animated.View = styled(Animated.View)`
+export const Background: typeof View = styled(View)`
   position: absolute;
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: rgba(0, 0, 0, 0.2);
   top: 0;
   left: 0;
   bottom: 0;

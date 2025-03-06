@@ -90,14 +90,8 @@ export const Menu: typeof DescriptionMenu = styled(DescriptionMenu)`
 
 `
 
-export const Traits: typeof InvestigatorTraits = styled(InvestigatorTraits)`
-  
-`
+export { InvestigatorTraits as Traits }
 
-export const Flavor: typeof InvestigatorFlavor = styled(InvestigatorFlavor)`
-  
-`
+export { InvestigatorFlavor as Flavor }
 
-export const Text: typeof InvestigatorText = styled(InvestigatorText)`
-  
-`
+export { InvestigatorText as Text }

@@ -1,12 +1,12 @@
-import { InvestigatorSkillType } from '@shared/model';
+import type { InvestigatorSkillType } from '@shared/model';
 import * as C from './Skill.components';
-import { ViewProps } from 'react-native';
-import { useAppSelector } from '@shared/lib';
+import type { ViewProps } from 'react-native';
+import { navigateTo, useAppDispatch, useAppSelector } from '@shared/lib';
 import { selectBoard } from '@pages/board/lib';
 import { useCallback, useContext, useState } from 'react';
 import { SkillsContext } from '@pages/board/config';
 import { getSkillStyle } from './Skill.styles';
-import { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
+import { tick } from '@features/haptic';
 
 export type SkillProps = ViewProps & {
   type: InvestigatorSkillType
@@ -17,6 +17,7 @@ export const Skill = ({
   ...props
 }: SkillProps) => {
   const box = useContext(SkillsContext);
+  const dispatch = useAppDispatch();
   const { value, isParallel } = useAppSelector(selectBoard);
   const [pressing, setPressing] = useState(false);
   const skillValue = value[type];
@@ -35,6 +36,11 @@ export const Skill = ({
     setPressing(false)
   }, [])
 
+  const openModal = useCallback(() => {
+    tick();
+    dispatch(navigateTo('/skill-check'));
+  }, [dispatch])
+
   return (
     <C.Container {...props}>
       <C.Row>
@@ -48,6 +54,7 @@ export const Skill = ({
           style={style.check}
           onPressIn={onPressIn}
           onPressOut={onPressOut}
+          onPress={openModal}
         />
       </C.Row>
       {pressing && (

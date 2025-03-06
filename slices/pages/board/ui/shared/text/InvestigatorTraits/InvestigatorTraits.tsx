@@ -20,7 +20,7 @@ export type InvestigatorTraitsProps = TextProps & Partial<PropsWithUnit>;
 export const InvestigatorTraits: FC<InvestigatorTraitsProps> = styled(BaseTraits)`
   text-align: center;
   color: ${color.text};
-  ${({ unit }: InvestigatorTraitsProps) => unit && css`
+  ${({ unit }: InvestigatorTraitsProps) => css`
     font-size: ${unit * boardText.ratio.traits}px;
   `}
 `

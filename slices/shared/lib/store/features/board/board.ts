@@ -1,15 +1,17 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import type { InvestigatorBoard } from '@shared/model';
+import { createSlice } from '@reduxjs/toolkit';
+import type { InvestigatorBoard, SkillCheckInfo } from '@shared/model';
 import { createSliceState } from 'redux-toolkit-helpers';
 
 export type IBoardState = {
   currentInvestigatorIndex: number | null
   investigatorBoards: InvestigatorBoard[]
+  currentCheck: SkillCheckInfo | null
 }
 
 const initialState: IBoardState = {
   currentInvestigatorIndex: null,
-  investigatorBoards: []
+  investigatorBoards: [],
+  currentCheck: null
 };
 
 const state = createSliceState(initialState);
@@ -21,12 +23,14 @@ export const board = createSlice({
 
 export const {
   setCurrentInvestigatorIndex,
-  setInvestigatorBoards
+  setInvestigatorBoards,
+  setCurrentCheck
 } = board.actions;
 
 export const {
   selectCurrentInvestigatorIndex,
-  selectInvestigatorBoards
+  selectInvestigatorBoards,
+  selectCurrentCheck
 } = board.selectors;
 
 export default board.reducer;

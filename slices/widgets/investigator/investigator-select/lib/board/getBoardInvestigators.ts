@@ -47,7 +47,8 @@ export const getInvestigatorBoards = ({
       baseValue: { ...value },
       value,
       isParallel,
-      unique
+      unique,
+      checkHistory: []
     }
   })
   .filter(isNotNil)

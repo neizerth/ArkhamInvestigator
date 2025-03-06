@@ -54,6 +54,10 @@ export const FooterDescription = ({
 
   const vw = view.width * 6 / 100;
 
+  if (!vw) {
+    return null;
+  }
+
   return (
     <C.Container {...props}>
       <C.Content>
@@ -74,9 +78,7 @@ export const FooterDescription = ({
             <C.DescriptionContent>
               <C.TextCollapse onPress={onHide}>
                 <C.TextContent>
-                  <C.Traits unit={vw}>
-                    {investigator.traits}
-                  </C.Traits>
+                  <C.Traits unit={vw}>{investigator.traits}</C.Traits>
                   {showDescription && (
                     <>
                       <C.Text 

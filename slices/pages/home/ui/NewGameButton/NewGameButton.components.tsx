@@ -1,32 +1,10 @@
-import { color } from "@shared/config";
+import { color, font } from "@shared/config";
 import { Teutonic } from "@shared/fonts/Teutonic";
-import { TouchableOpacity } from "@shared/ui";
-import * as ReactNative from "react-native";
+import { Text as BaseText } from "react-native";
 import styled from "styled-components/native";
 
-const background = require('./images/start.png');
-
-export const Container: typeof TouchableOpacity = styled(TouchableOpacity)`
-  height: 80px;
-  justify-content: center;
-  align-items: center;
-`
-
-export const Background: typeof ReactNative.ImageBackground = styled(ReactNative.ImageBackground)
-  .attrs({
-    source: background,
-    resizeMode: 'contain',
-    resizeMethod: 'resize'
-  })`
-    width: 250px;
-    height: 80px;
-    flex: 1;
-    justify-content: center;
-    align-items: center;
-  `
-
-export const Text: typeof ReactNative.Text = styled.Text`
+export const Text: typeof BaseText = styled(BaseText)`
   font-family: ${Teutonic.regular};
-  font-size: 32px;
+  font-size: ${font.size.lead}px;
   color: ${color.light10};
 `

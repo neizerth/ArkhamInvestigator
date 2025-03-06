@@ -4,6 +4,7 @@ import { ArkhamicFonts } from "./Arkhamic";
 import { ArkhamIconsFonts } from "./ArkhamIcons";
 import { ArnoProFonts } from "./ArnoPro";
 import { ConkordiaFonts } from "./Conkordia";
+import { CopaseticFonts } from "./Copasetic";
 import { TeutonicFonts } from "./Teutonic";
 
 
@@ -14,5 +15,6 @@ export default {
   ...ArkhamIconsFonts,
   ...AlegreyaFonts,
   ...ArnoProFonts,
-  ...ArkhamDigitsFonts
+  ...ArkhamDigitsFonts,
+  ...CopaseticFonts
 }

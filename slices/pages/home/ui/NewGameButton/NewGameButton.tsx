@@ -1,28 +1,19 @@
-import { router } from 'expo-router';
-
-import { Text, Container, Background } from './NewGameButton.components';
-import { useCallback, useState } from 'react';
-import { CLICK_PATTERN } from '@features/haptic';
+import { PrimaryButton } from '@shared/ui';
+import * as C from './NewGameButton.components';
+import { useCallback } from 'react';
+import { navigateTo, useAppDispatch } from '@shared/lib';
 
 export const NewGameButton = () => {
-  const [loaded, setLoaded] = useState(false);
-
+  const dispatch = useAppDispatch();
   const startNewGame = useCallback(() => {
-    router.push('/new-game');
-  }, []);
-
-  const onLoad = useCallback(() => setLoaded(true), []);
+    dispatch(navigateTo('/new-game'));
+  }, [dispatch]);
 
   return (
-    <Container 
-      onPress={startNewGame}
-      pressHapticPattern={CLICK_PATTERN}
-    >
-      <Background onLoad={onLoad}>
-        {loaded && (
-          <Text>New Game</Text>
-        )}
-      </Background>
-    </Container>
+    <PrimaryButton onPress={startNewGame}>
+      <C.Text>
+        New Game
+      </C.Text>
+    </PrimaryButton>
   );
 }

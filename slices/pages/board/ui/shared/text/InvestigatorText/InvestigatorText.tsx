@@ -29,7 +29,7 @@ export const InvestigatorText: FC<InvestigatorTextProps> = styled(GameText)
     color: ${color.text};
     ${({ unit }: InvestigatorTextProps) => {
       if (!unit) {
-        return;
+        return '';
       }
       const fontSize = unit * boardText.ratio.text;
       return css`

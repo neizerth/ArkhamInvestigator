@@ -7,7 +7,8 @@ export const font = {
     small: 12 * scale,
     default: 14 * scale,
     medium: 16 * scale,
-    large: 18 * scale
+    large: 18 * scale,
+    lead: 32 * scale
   },
   scale
 }

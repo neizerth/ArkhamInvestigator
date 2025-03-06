@@ -1,11 +1,10 @@
 import * as C from './SkillCheckPage.components';
 
-export type SkillCheckPageProps = {
-
-}
-
-export const SkillCheckPage = ({}: SkillCheckPageProps) => {
+export const SkillCheckPage = () => {
   return (
-    <></>
+    <C.Container>
+      <C.Display/>
+      <C.Keyboard/>
+    </C.Container>
   );
 }

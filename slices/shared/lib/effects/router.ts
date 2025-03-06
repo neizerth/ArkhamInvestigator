@@ -7,3 +7,7 @@ export const navigateTo = (href: Href) => () => {
 export const replaceTo = (href: Href) => () => {
   router.replace(href);
 }
+
+export const goBack = () => () => {
+  router.back();
+}
