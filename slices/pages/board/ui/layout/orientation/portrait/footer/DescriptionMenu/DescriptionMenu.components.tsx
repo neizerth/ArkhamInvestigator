@@ -1,4 +1,4 @@
-import { TICK_PATTERN } from "@features/haptic";
+
 import { color, size } from "@shared/config";
 import { DefinedIconButtonProps, IconButton, IconButtonProps, Row } from "@shared/ui";
 import Color from "color";
@@ -13,7 +13,6 @@ export const Container: typeof Row = styled(Row)`
 
 export const Button: typeof IconButton = styled(IconButton)
   .attrs({
-    pressHapticPattern: TICK_PATTERN,
     iconStyle: {
       color: color.dark10,
       fontSize: 42

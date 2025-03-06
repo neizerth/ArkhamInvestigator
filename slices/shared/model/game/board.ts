@@ -3,14 +3,14 @@ import type { InvestigatorSource } from "../api";
 import type { InvestigatorGameStatType, InvestigatorMainStatType, InvestigatorSkillType } from "./common";
 import { SkillCheckInfo } from "./skillCheck";
 
-export type InvestigatorBoardStats = InvestigatorMainStatType | InvestigatorSkillType | InvestigatorGameStatType;
+export type InvestigatorBoardStat = InvestigatorMainStatType | InvestigatorSkillType | InvestigatorGameStatType;
 
 export type InvestigatorPicture = {
   id: string
   image: InvestigatorImage
 }
 
-export type InvestigatorBoardValues = Record<InvestigatorBoardStats, number> & {
+export type InvestigatorBoardValues = Record<InvestigatorBoardStat, number> & {
   additionalAction: boolean
 }
 

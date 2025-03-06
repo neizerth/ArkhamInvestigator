@@ -1,3 +1,4 @@
+import { TICK_PATTERN } from "@features/haptic";
 import type { HapticPattern } from "@shared/model";
 import { type GestureResponderEvent, Vibration } from "react-native";
 
@@ -12,13 +13,12 @@ type HandlePressOptions = {
 export const handlePress = ({
   event,
   eventHandler, 
-  pattern
+  pattern = TICK_PATTERN
 }: HandlePressOptions) => {
-  if (pattern) {
-    Vibration.vibrate(pattern);
-  }
   if (!eventHandler) {
     return;
   }
+
+  Vibration.vibrate(pattern);
   eventHandler(event);
 }

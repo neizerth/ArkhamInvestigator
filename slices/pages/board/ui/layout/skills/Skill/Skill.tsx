@@ -1,8 +1,7 @@
 import type { InvestigatorSkillType } from '@shared/model';
 import * as C from './Skill.components';
 import type { ViewProps } from 'react-native';
-import { navigateTo, useAppDispatch, useAppSelector } from '@shared/lib';
-import { selectBoard } from '@pages/board/lib';
+import { navigateTo, selectCurrentBoard, startSkillCheck, useAppDispatch, useAppSelector } from '@shared/lib';
 import { useCallback, useContext, useState } from 'react';
 import { SkillsContext } from '@pages/board/config';
 import { getSkillStyle } from './Skill.styles';
@@ -18,7 +17,7 @@ export const Skill = ({
 }: SkillProps) => {
   const box = useContext(SkillsContext);
   const dispatch = useAppDispatch();
-  const { value, isParallel } = useAppSelector(selectBoard);
+  const { value, isParallel } = useAppSelector(selectCurrentBoard);
   const [pressing, setPressing] = useState(false);
   const skillValue = value[type];
 
@@ -38,8 +37,8 @@ export const Skill = ({
 
   const openModal = useCallback(() => {
     tick();
-    dispatch(navigateTo('/skill-check'));
-  }, [dispatch])
+    dispatch(startSkillCheck(type));
+  }, [dispatch, type])
 
   return (
     <C.Container {...props}>

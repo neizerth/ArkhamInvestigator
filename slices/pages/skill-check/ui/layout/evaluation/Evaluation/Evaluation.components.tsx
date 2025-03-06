@@ -4,7 +4,7 @@ import styled from "styled-components/native";
 
 export const Container: typeof View = styled(View)`
   padding: ${size.gap.default}px;
-  padding-bottom: ${size.gap.large};
+  padding-bottom: ${size.gap.large}px;
   justify-content: flex-end;
-  gap: ${size.gap.default}
+  gap: ${size.gap.default}px;
 `

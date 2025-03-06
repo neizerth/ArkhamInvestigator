@@ -1,10 +1,9 @@
 import type { HealthProps } from '@shared/ui'
 import * as C from './Health.components'
-import { useAppSelector } from '@shared/lib'
-import { selectBoard } from '@pages/board/lib';
+import { selectCurrentBoard, useAppSelector } from '@shared/lib'
 
 export const Health = (props: HealthProps) => {
-  const { value } = useAppSelector(selectBoard);
+  const { value } = useAppSelector(selectCurrentBoard);
   
   return (
     <C.Container {...props}>

@@ -1,6 +1,5 @@
-import { useAppSelector } from '@shared/lib';
+import { selectCurrentBoard, useAppSelector } from '@shared/lib';
 import * as C from './LandscapeImage.components';
-import { selectBoard } from '@pages/board/lib';
 import { getInvestigatorImageUrl } from '@shared/api';
 import type { ImageProps } from 'react-native';
 import type { HeaderLayout } from '@pages/board/model';
@@ -16,7 +15,7 @@ export const LandscapeImage = ({
   ...props
 }: LandscapeImageProps) => {
   const { view, layout } = useContext(LayoutContext);
-  const { picture } = useAppSelector(selectBoard);
+  const { picture } = useAppSelector(selectCurrentBoard);
   const { id } = picture;
   const uri = getInvestigatorImageUrl(id, 'mini');
   const source = { uri };

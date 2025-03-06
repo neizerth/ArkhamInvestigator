@@ -1,0 +1,20 @@
+import type * as Types from "@shared/model";
+import { v4 } from "uuid";
+
+export const createDigitItem = (value: number): Types.NumberSkillCheckItem => ({
+  id: v4(),
+  type: 'number',
+  value
+})
+
+export const createOperatorItem = (operator: Types.SkillCheckOperator): Types.OperatorSkillCheckItem => ({
+  id: v4(),
+  type: 'operator',
+  operator
+});
+
+export const createStatItem = (statType: Types.InvestigatorBoardStat): Types.StatSkillCheckItem => ({
+  id: v4(),
+  type: 'stat',
+  statType
+});

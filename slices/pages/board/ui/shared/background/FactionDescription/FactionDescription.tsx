@@ -1,5 +1,4 @@
-import { useAppSelector } from '@shared/lib';
-import { selectBoard } from '@pages/board/lib';
+import { selectCurrentBoard, useAppSelector } from '@shared/lib';
 import type { Faction, PropsWithFaction } from '@shared/model';
 import { images } from './images';
 import * as C from './FactionDescription.components'
@@ -29,7 +28,7 @@ export const FactionDescription = ({
     return null;
   }
 
-  const { investigator } = useAppSelector(selectBoard);
+  const { investigator } = useAppSelector(selectCurrentBoard);
   const faction = investigator.faction_code as Faction;
   const source = images[faction];
 

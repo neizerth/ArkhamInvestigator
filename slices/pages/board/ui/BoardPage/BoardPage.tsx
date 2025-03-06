@@ -1,14 +1,14 @@
 import React from 'react';
-import { selectShowDescription, useAppSelector, useLayoutSize, useScreenOrientation } from '@shared/lib';
+import { selectShowDescription, useAppSelector, useLayoutSize, useScreenOrientation, selectCurrentBoard } from '@shared/lib';
 import * as C from './BoardPage.components';
-import { getHeaderLayout, selectBoard, useStatusBar } from '@pages/board/lib';
+import { getHeaderLayout, useStatusBar } from '@pages/board/lib';
 import { useWindowDimensions } from 'react-native';
 import { LayoutContext } from '@pages/board/config/context';
 import { servicePadding } from '@pages/board/config';
 import { size } from '@shared/config';
 
 export const BoardPage = () => {
-  const board = useAppSelector(selectBoard);
+  const board = useAppSelector(selectCurrentBoard);
   const window = useWindowDimensions();
   const orientation = useScreenOrientation();
   const showDescription = useAppSelector(selectShowDescription);

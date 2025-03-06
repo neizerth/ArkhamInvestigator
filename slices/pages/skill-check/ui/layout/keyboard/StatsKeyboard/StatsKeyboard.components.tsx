@@ -14,7 +14,6 @@ export const Content: typeof Row = styled(Row)`
   align-items: center;
 `
 
-
 type ButtonProps = Omit<Buttons.IconButtonProps, 'size'>;
 
 export const Button: FC<ButtonProps> = styled(Buttons.IconButton)

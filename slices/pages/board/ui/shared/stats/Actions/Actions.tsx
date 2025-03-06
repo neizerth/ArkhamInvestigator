@@ -1,6 +1,5 @@
-import { useAppSelector } from '@shared/lib';
+import { selectCurrentBoard, useAppSelector } from '@shared/lib';
 import * as C from './Actions.components';
-import { selectBoard } from '@pages/board/lib';
 import { ViewProps } from 'react-native';
 
 export type ActionsProps = ViewProps
@@ -8,7 +7,7 @@ export type ActionsProps = ViewProps
 export const Actions = ({
   ...props
 }: ActionsProps) => {
-  const { value } = useAppSelector(selectBoard);
+  const { value } = useAppSelector(selectCurrentBoard);
   const { additionalAction } = value;
 
   const actionIcon = 'investigator';

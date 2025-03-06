@@ -37,12 +37,12 @@ const textStyle: Record<KeyboardButtonType, RuleSet> = {
     color: ${color.light10}
   `,
   secondary: css`
-    
+    color: ${color.dark15};
   `
 }
 
 export const Text: FC<ButtonTextProps> = styled(BaseText)`
-  color: ${color.dark15};
+ 
   font-size: 50px;
   font-family: ${Copasetic.regular};
   ${

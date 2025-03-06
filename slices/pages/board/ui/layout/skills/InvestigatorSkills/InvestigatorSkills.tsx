@@ -1,4 +1,4 @@
-import { getSkillsLayout, getSkillsSize, selectBoard, useFactionImage } from '@pages/board/lib';
+import { getSkillsSize, useFactionImage } from '@pages/board/lib';
 import * as C from './InvestigatorSkills.components';
 import { images } from './images';
 import type { ViewProps, ViewStyle } from 'react-native';

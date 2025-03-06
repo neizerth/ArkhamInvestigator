@@ -1,10 +1,9 @@
 import type { ClueProps } from '@shared/ui'
 import * as C from './Clues.components'
-import { useAppSelector } from '@shared/lib'
-import { selectBoard } from '@pages/board/lib'
+import { selectCurrentBoard, useAppSelector } from '@shared/lib'
 
 export const Clues = (props: ClueProps) => {
-  const { value } = useAppSelector(selectBoard);
+  const { value } = useAppSelector(selectCurrentBoard);
   return (
     <C.Container {...props}>
       <C.Value value={value.clues}/>

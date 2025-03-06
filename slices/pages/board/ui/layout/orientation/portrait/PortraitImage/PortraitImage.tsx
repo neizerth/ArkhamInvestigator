@@ -1,6 +1,6 @@
-import { useAppSelector } from '@shared/lib';
+import { selectCurrentBoard, useAppSelector } from '@shared/lib';
 import * as C from './PortraitImage.components';
-import { getPortraitLayout, selectBoard } from '@pages/board/lib';
+import { getPortraitLayout } from '@pages/board/lib';
 import { getInvestigatorImageUrl } from '@shared/api';
 import type { ViewProps } from 'react-native';
 import { useContext } from 'react';
@@ -13,7 +13,7 @@ export const PortraitImage = ({
 }: PortraitImageProps) => {
   const { view, layout } = useContext(LayoutContext);
 
-  const { picture } = useAppSelector(selectBoard);
+  const { picture } = useAppSelector(selectCurrentBoard);
   
   const { id } = picture
   const uri = getInvestigatorImageUrl(id, 'full');

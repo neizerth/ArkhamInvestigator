@@ -1,7 +1,7 @@
 import { createSelector } from "@reduxjs/toolkit";
-import { selectCurrentInvestigatorIndex, selectInvestigatorBoards } from "@shared/lib";
+import { selectCurrentInvestigatorIndex, selectInvestigatorBoards } from "../board";
 
-export const selectBoard = createSelector(
+export const selectCurrentBoard = createSelector(
   [
     selectCurrentInvestigatorIndex,
     selectInvestigatorBoards

@@ -1,15 +1,14 @@
 import { View } from 'react-native-reanimated/lib/typescript/Animated';
 import * as C from './Sanity.components';
 import type { ViewProps } from 'react-native';
-import { useAppSelector } from '@shared/lib';
-import { selectBoard } from '@pages/board/lib';
+import { selectCurrentBoard, useAppSelector } from '@shared/lib';
 
 export type SanityProps = ViewProps
 
 export const Sanity = ({
   ...props
 }: SanityProps) => {
-  const { value } = useAppSelector(selectBoard);
+  const { value } = useAppSelector(selectCurrentBoard);
 
   return (
     <C.Container {...props}>

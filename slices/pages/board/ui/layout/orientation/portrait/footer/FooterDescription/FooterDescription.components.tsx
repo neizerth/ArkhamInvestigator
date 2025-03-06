@@ -1,9 +1,8 @@
 import { Pressable, ScrollView, View, type ViewProps } from "react-native";
 import styled, { css } from "styled-components/native";
 import { FactionDescription } from "../../../../../shared/background";
-import { DefinedIconButtonProps, IconButton, TouchableOpacity } from "@shared/ui";
+import { DefinedIconButtonProps, IconButton } from "@shared/ui";
 import Animated from "react-native-reanimated";
-import { TICK_PATTERN } from "@features/haptic";
 import { InvestigatorTraits, InvestigatorText, InvestigatorTextProps, InvestigatorFlavor } from "@pages/board/ui/shared/text";
 import { boardText } from "@pages/board/config";
 import { DescriptionMenu } from "../DescriptionMenu";
@@ -53,7 +52,6 @@ export const TextCollapse: typeof Pressable = styled(Pressable)`
 export const Exit: FC<DefinedIconButtonProps> = styled(IconButton)
   .attrs({
     icon: 'resign',
-    pressHapticPattern: TICK_PATTERN,
     iconStyle: {
       color: color.light10,
       fontSize: 36

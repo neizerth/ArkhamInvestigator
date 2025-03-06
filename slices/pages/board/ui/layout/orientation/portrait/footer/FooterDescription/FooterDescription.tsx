@@ -3,10 +3,9 @@ import * as C from './FooterDescription.components';
 import { useCallback, useContext, useEffect, useState } from 'react';
 import { descriptionSize, LayoutContext, PORTRAIT_DESCRIPTION_HEIGHT, PortraitLayoutContext } from '@pages/board/config';
 import { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
-import { navigateTo, selectShowDescription, setShowDescription, useAppDispatch, useAppSelector } from '@shared/lib';
-import { selectBoard } from '@pages/board/lib';
+import { navigateTo, selectCurrentBoard, selectShowDescription, setShowDescription, useAppDispatch, useAppSelector } from '@shared/lib';
 import { Faction } from '@shared/model';
-import { tick, TICK_PATTERN } from '@features/haptic';
+import { tick } from '@features/haptic';
 
 export type FooterDescriptionProps = ViewProps;
 
@@ -17,7 +16,7 @@ export const FooterDescription = ({
   const showDescription = useAppSelector(selectShowDescription);
 
   const { view } = useContext(LayoutContext);
-  const { investigator } = useAppSelector(selectBoard);
+  const { investigator } = useAppSelector(selectCurrentBoard);
   const faction = investigator.faction_code as Faction;
   const top = useSharedValue(0);
 

@@ -20,12 +20,13 @@ export const TextButton = ({
   textStyle,
   ...props
 }: TextButtonProps) => {
-  const { size } = props;
+  const { size, buttonType } = props;
   return (
     <C.Button {...props}>
        <C.Text 
           style={textStyle}
           size={size}
+          buttonType={buttonType}
         >
           {children}
         </C.Text>
