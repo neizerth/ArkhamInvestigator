@@ -1,32 +1,42 @@
-import type { PropsWithChildren } from 'react';
 import * as C from './KeyboardButton.components';
-import type { TouchableOpacityProps } from '@shared/ui';
-import type { KeyboardButtonProps } from './KeyboardButton.types';
+import type { IconButtonProps } from '@shared/ui';
+import type { CustomButtonProps, KeyboardButtonProps, TextButtonProps } from './KeyboardButton.types';
 
-export const KeyboardButton = ({
+export type { KeyboardButtonProps, CustomButtonProps, IconButtonProps, TextButtonProps };
+
+export const IconButton = ({
+  icon,
+  ...props
+}: IconButtonProps) => {
+  return (
+    <C.Button {...props}>
+      <C.Icon icon={icon}/>
+    </C.Button>
+  )
+}
+
+export const TextButton = ({
   children,
   textStyle,
   ...props
-}: KeyboardButtonProps) => {
+}: TextButtonProps) => {
   const { size } = props;
   return (
     <C.Button {...props}>
-      {(props.type === 'value' || !props.type) && (
-        <C.Num 
+       <C.Text 
           style={textStyle}
-          char={typeof props.value === 'number'}
           size={size}
         >
-          {props.value}
-        </C.Num>
-      )}
-      {props.type === 'icon' && (
-        <C.Icon icon={props.icon}/>
-      )}
-      {props.type === 'text' && (
-        <C.Text style={textStyle}>{children}</C.Text>
-      )}
-      {props.type === 'custom' && children}
+          {children}
+        </C.Text>
     </C.Button>
-  );
+  )
+}
+
+export const CustomButton = ({
+  ...props
+}: CustomButtonProps) => {
+  return (
+    <C.Button {...props}/>
+  )
 }

@@ -1,6 +1,7 @@
 import type { InvestigatorImage } from "arkham-investigator-data";
 import type { InvestigatorSource } from "../api";
 import type { InvestigatorGameStatType, InvestigatorMainStatType, InvestigatorSkillType } from "./common";
+import { SkillCheckInfo } from "./skillCheck";
 
 export type InvestigatorBoardStats = InvestigatorMainStatType | InvestigatorSkillType | InvestigatorGameStatType;
 
@@ -13,11 +14,6 @@ export type InvestigatorBoardValues = Record<InvestigatorBoardStats, number> & {
   additionalAction: boolean
 }
 
-export type SkillCheckInfo = {
-  type: InvestigatorBoardStats
-  expression: string
-  value: number
-}
 
 export type InvestigatorBoard = {
   investigator: InvestigatorSource

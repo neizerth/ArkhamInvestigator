@@ -1,24 +1,23 @@
+import { SkillCheckOperator } from "@shared/model"
 import type { TouchableOpacityProps } from "@shared/ui"
 import { TextProps, TextStyle } from "react-native"
 
-export type KeyboardButtonValue = {
-  type?: 'value'
-} | {
-  type: 'icon'
-  icon: string
-} | {
-  type: 'text'
-} | {
-  type: 'custom'
-}
-
-export type KeyboardButtonProps = TouchableOpacityProps & 
-  KeyboardButtonValue & 
+export type KeyboardButtonProps = TouchableOpacityProps &  
   PropsWithSize & 
   PropsWithType & {
-    textStyle?: TextStyle
-    value?: string | number
+    value?: number | string
+    operator?: SkillCheckOperator
   }
+
+export type IconButtonProps = KeyboardButtonProps & {
+  icon: string
+}
+
+export type TextButtonProps = KeyboardButtonProps & {
+  textStyle?: TextStyle
+}
+
+export type CustomButtonProps = KeyboardButtonProps;
 
 export type KeyboardButtonSize = 'small' | 'medium' | 'large'
 
@@ -33,6 +32,4 @@ export type PropsWithType = {
 }
 
 
-export type NumProps = TextProps & PropsWithSize & {
-  char: boolean
-}
+export type ButtonTextProps = TextProps & PropsWithSize & PropsWithType;

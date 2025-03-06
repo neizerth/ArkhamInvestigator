@@ -2,15 +2,15 @@ import BackspaceImage from './images/backspace.svg';
 import RuleImage from './images/rule.svg'
 
 import { Row as BaseRow, TouchableOpacity } from "@shared/ui";
-import { View, ScrollView, Text } from "react-native";
+import { View, Text } from "react-native";
 import styled, { css } from "styled-components/native";
-import { KeyboardButton } from "../KeyboardButton";
+import * as Buttons from "../KeyboardButton";
 import { color, font, size } from '@shared/config';
-import { KeyboardButtonProps } from '../KeyboardButton/KeyboardButton.types';
-import { FC } from 'react';
+import type { FC } from 'react';
 import { Copasetic } from '@shared/fonts/Copasetic';
-import { SvgProps } from 'react-native-svg';
-import { PropsWithBox } from '@shared/model';
+import type { SvgProps } from 'react-native-svg';
+import type { PropsWithBox } from '@shared/model';
+import { StatsKeyboard } from '../StatsKeyboard';
 
 export const Container: typeof View = styled(View)`
   
@@ -31,17 +31,27 @@ export const Col: typeof View = styled(View)`
   flex: 1;
 `
 
-export const Button: typeof KeyboardButton = styled(KeyboardButton)`
+const buttonStyle = css`
   flex: 1;
 `
 
-export const Stats: typeof ScrollView = styled(ScrollView)`
-  flex: 2;
+export const Button: typeof Buttons.TextButton = styled(Buttons.TextButton)`
+  ${buttonStyle}
 `
 
-export const StatsRow: typeof Row = styled(Row)`
-  justify-content: center;
-  align-items: center;
+export const CustomButton: typeof Buttons.CustomButton = styled(Buttons.CustomButton)`
+  ${buttonStyle}
+`
+
+export const Operator: typeof Button = styled(Button)
+  .attrs({
+    buttonType: 'primary'
+  })`
+    ${buttonStyle}
+  `
+
+export const Stats: typeof StatsKeyboard = styled(StatsKeyboard)`
+  flex: 2;
 `
 
 export const Backspace: typeof BackspaceImage = styled(BackspaceImage)
@@ -56,25 +66,6 @@ export const Backspace: typeof BackspaceImage = styled(BackspaceImage)
 
 export const Placeholder: typeof View = styled(View)`
   flex: 1;
-`
-
-type StatProps = Omit<KeyboardButtonProps, 'size' | 'type'> & {
-  icon: string
-}
-
-export const Stat: FC<StatProps> = styled(KeyboardButton)
-  .attrs({
-    size: 'small',
-    type: 'icon'
-  })`
-  `
-
-export const StatRule: typeof View = styled(View)`
-  flex: 1;
-  width: 1px;
-  height: 20px;
-  background-color: ${color.dark20};
-  margin: 0 ${size.gap.small}px;
 `
 
 export const EqualsText: typeof Text = styled(Text)`
