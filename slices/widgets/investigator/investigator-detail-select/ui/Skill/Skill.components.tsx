@@ -1,6 +1,6 @@
 import { color, font, size } from "@shared/config";
 import { getMaxBreakpoint } from "@shared/lib";
-import type { DeviceBreakpointType } from "@shared/model/device";
+import type { DeviceBreakpointType } from "@shared/model/features/device";
 import type { PropsWithBreakpoint } from "@shared/model/ui";
 import { IconNumber, Row, SkillIcon } from "@shared/ui";
 import type { IconNumberProps, SkillIconProps } from "@shared/ui";

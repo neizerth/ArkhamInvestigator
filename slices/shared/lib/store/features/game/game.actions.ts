@@ -6,7 +6,7 @@ import { propEq, reject } from "ramda";
 import type { AppThunk } from "../..";
 import { MAX_PLAYERS } from "@shared/config";
 import { router } from "expo-router";
-import { navigateTo, replaceTo } from "@shared/lib/effects";
+import { navigateTo, replaceTo } from "@shared/lib/store/effects";
 import { v4 } from "uuid";
 
 export const changeSelectedInvestigator: ActionCreator<AppThunk> = (item: InvestigatorDetails) => 

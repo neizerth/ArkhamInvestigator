@@ -1,4 +1,4 @@
-import type { HapticPattern } from "@shared/model/device/haptic";
+import type { HapticPattern } from "@shared/model/features/device/haptic";
 import { useCallback } from "react";
 import type { 
   GestureResponderEvent, 

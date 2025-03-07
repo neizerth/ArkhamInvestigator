@@ -1,5 +1,5 @@
 import type { ActionCreator } from "@reduxjs/toolkit"
-import { navigateTo } from "@shared/lib/effects";
+import { navigateTo } from "@shared/lib/store/effects";
 import type { AppThunk } from "@shared/lib/store"
 import { setSkillCheckData, setSkillCheckType } from "../skillCheck"
 import type { InvestigatorBoardStat } from "@shared/model"

@@ -1,6 +1,6 @@
 import { Vibration } from "react-native";
 import { TICK_PATTERN } from "../config";
-import type { HapticPattern } from "@shared/model/device/haptic";
+import type { HapticPattern } from "@shared/model/features/device/haptic";
 
 export const withVibrationPattern = (
   pattern: HapticPattern, 

@@ -1,4 +1,4 @@
-import type { DeviceBreakpointType } from "../device"
+import type { DeviceBreakpointType } from "../features/device"
 import type { Faction, SkillType } from "../game"
 import type { Box, BoxLayout, ScaledBox } from "./size"
 

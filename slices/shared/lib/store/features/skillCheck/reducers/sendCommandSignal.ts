@@ -5,6 +5,11 @@ import { createStatItem } from "../lib";
 export const sendCommandSignal: SkillCheckReducer<SkillCheckCommand> = (state, { payload }) => {
   const { type } = state;
   switch (payload) {
+    case 'equals':
+      return {
+        ...state,
+        data: []
+      }
     case 'clear':
     case 'all-clear':
       if (!type) {
@@ -13,7 +18,6 @@ export const sendCommandSignal: SkillCheckReducer<SkillCheckCommand> = (state, {
           data: []
         }
       }
-      // const type = state.
       return {
         ...state,
         data: [

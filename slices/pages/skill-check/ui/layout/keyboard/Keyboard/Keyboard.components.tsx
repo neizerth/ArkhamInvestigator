@@ -50,18 +50,8 @@ export const Operator: typeof Button = styled(Button)
     ${buttonStyle}
   `
 
-export const Clear: typeof Button = styled(Button)
-  .attrs({
-    buttonType: 'primary',
-    textStyle: {
-      fontSize: 40
-    }
-  })`
-    ${buttonStyle}
-  `
-
 export const Stats: typeof StatsKeyboard = styled(StatsKeyboard)`
-  flex: 2;
+  flex: 3;
 `
 
 export const Backspace: typeof BackspaceImage = styled(BackspaceImage)

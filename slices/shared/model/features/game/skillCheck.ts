@@ -41,4 +41,4 @@ export type CommandSkillCheckItem = {
 
 export type SkillCheckItem = OperatorSkillCheckItem | NumberSkillCheckItem | StatSkillCheckItem;
 
-export type SkillCheckCommand = 'clear' | 'all-clear' | 'clear-last'
+export type SkillCheckCommand = 'clear' | 'all-clear' | 'clear-last' | 'equals'

@@ -49,8 +49,10 @@ export const Keyboard = ({}: KeyboardProps) => {
         </C.Back>
       </C.Row>
       <C.Row>
-        <C.Clear onPress={sendCommand('clear')}>C</C.Clear>
-        <C.CustomButton onPress={sendCommand('clear-last')}>
+        <C.CustomButton 
+          onPress={sendCommand('clear-last')}
+          onLongPress={sendCommand('clear')}
+        >
           <C.Backspace />
         </C.CustomButton>
         <C.Stats/>
@@ -79,7 +81,7 @@ export const Keyboard = ({}: KeyboardProps) => {
         <C.Placeholder/>
         <C.Operator {...withOperatorProps('add')}/>
       </C.Row>
-      <PrimaryButton styleType='transparent'>
+      <PrimaryButton styleType='transparent' onPress={sendCommand('equals')}>
         <C.EqualsText>Equals</C.EqualsText>
       </PrimaryButton>
     </C.Container>
