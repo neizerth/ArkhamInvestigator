@@ -12,7 +12,14 @@ export const Container: typeof TouchableOpacity = styled(TouchableOpacity)`
 
 const backgrounds: Record<PrimaryButtonStyle, ReactNative.ImageRequireSource> = {
   default: require('./images/default.png'),
-  transparent: require('./images/transparent.png')
+  transparent: require('./images/transparent.png'),
+  square: require('./images/square.png'),
+}
+
+const buttonWidth: Record<PrimaryButtonStyle, number> = {
+  default: 250,
+  transparent: 250,
+  square: 180,
 }
 
 type BackgroundProps = ReactNative.ImageBackgroundProps & PropsWithStyleType;
@@ -26,7 +33,7 @@ export const Background: FC<BackgroundProps> = styled(ReactNative.ImageBackgroun
       resizeMethod: 'resize'
     })
   )`
-    width: 250px;
+    width: ${({ styleType = 'default' }: BackgroundProps) => buttonWidth[styleType]}px;
     height: 80px;
     flex: 1;
     justify-content: center;

@@ -4,6 +4,7 @@ import { ExpressionDisplay } from '../ExpressionDisplay';
 import { ExpressionValue } from '../ExpressionValue';
 import { ExpressionHistory } from '../ExpressionHistory';
 import { selectHistoryShown, selectSkillCheckData, useAppSelector } from '@shared/lib';
+import { useSkillCheckLayoutType } from '@pages/skill-check/lib';
 
 export type EvaluationProps = ViewProps
 
@@ -12,6 +13,8 @@ export const Evaluation = ({
 }: EvaluationProps) => {
   const data = useAppSelector(selectSkillCheckData);
   const historyShown = useAppSelector(selectHistoryShown);
+  const layoutType = useSkillCheckLayoutType();
+  const isLargeLayout = layoutType ==='medium';
 
   const expressionData = data;
 
@@ -19,7 +22,9 @@ export const Evaluation = ({
   return (
     <C.Container {...props}>
       <C.Content>
-        <ExpressionHistory size={historySize}/>
+        {isLargeLayout && (
+          <ExpressionHistory size={historySize}/>
+        )}
         <C.Current>
           <ExpressionDisplay 
             data={expressionData}

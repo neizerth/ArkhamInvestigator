@@ -1,17 +1,25 @@
-import { Image, View } from "react-native";
-import styled from "styled-components/native";
+import { Image, View, ViewProps } from "react-native";
+import styled, { css } from "styled-components/native";
 import { rule } from './images';
 import { Icon, IconButton, Row as BaseRow } from "@shared/ui";
 import { skillCheckColor } from "@pages/skill-check/config";
 import { color, font, size } from "@shared/config";
+import { FC } from "react";
 
 export const Container: typeof View = styled(View)`;
   padding: 40px ${size.gap.default}px 0;
 `
 
-export const Content: typeof View = styled(View)`
+type ContentProps = ViewProps & {
+  border?: boolean;
+}
+export const Content: FC<ContentProps> = styled(View)`
   align-items: center;
   position: relative;
+  ${({ border }: ContentProps) => border && css`
+    border-bottom-width: 1px;
+    border-bottom-color: ${skillCheckColor.border};
+  `}
 `
 
 export const Controls: typeof View = styled(View)`
@@ -42,10 +50,10 @@ export const Rule: typeof Image = styled(Image)
     height: 40px;
   `
 
-  export const Stat: typeof Icon = styled(Icon)`
-    font-size: 30px;
-    color: rgb(213 177 87);
-  `
+export const Stat: typeof Icon = styled(Icon)`
+  font-size: 30px;
+  color: ${skillCheckColor.checkIcon};
+`
 
 export const Row: typeof BaseRow = styled(BaseRow)`
   width: 100%;
@@ -62,7 +70,7 @@ export const Button: typeof IconButton = styled(IconButton)
   .attrs({
     iconStyle: {
       color: color.light15,
-      fontSize: 20
+      fontSize: 24
     }
   })`
     

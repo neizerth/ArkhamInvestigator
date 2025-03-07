@@ -2,6 +2,7 @@ import { clearSkillCheckHistory, goBack, selectHistoryShown, selectSkillCheckTyp
 import * as C from './SkillCheckHeader.components';
 import { ViewProps } from 'react-native';
 import { useCallback } from 'react';
+import { useSkillCheckLayoutType } from '@pages/skill-check/lib';
 
 type SkillCheckHeaderProps = ViewProps;
 export const SkillCheckHeader = ({
@@ -11,6 +12,8 @@ export const SkillCheckHeader = ({
   const icon = useAppSelector(selectSkillCheckType);
 
   const historyShown = useAppSelector(selectHistoryShown);
+  const layoutType = useSkillCheckLayoutType();
+  const isLargeLayout = layoutType === 'medium';
 
   const toggleHistory = useCallback(() => {
     dispatch(setHistoryShown(!historyShown));
@@ -26,7 +29,7 @@ export const SkillCheckHeader = ({
 
   return (
     <C.Container {...props}>
-      <C.Content>
+      <C.Content border={!isLargeLayout}>
         {icon && (
           <C.CheckIcon>
             <C.Stat icon={icon}/>
@@ -50,7 +53,9 @@ export const SkillCheckHeader = ({
             </C.HistoryActions>
           </C.Row>
         </C.Controls>
-        <C.Rule/>
+        {isLargeLayout && (
+          <C.Rule/>
+        )}
       </C.Content>
     </C.Container>
   );

@@ -1,7 +1,7 @@
 import { BackspaceImage, rule } from "./images/images";
 
 import { Row as BaseRow, TouchableOpacity } from "@shared/ui";
-import { View, Text, ImageProps, Image } from "react-native";
+import { View, Text, ImageProps, Image, ViewProps } from "react-native";
 import styled, { css } from "styled-components/native";
 import * as Buttons from "../KeyboardButton";
 import { color, font, size } from '@shared/config';
@@ -10,15 +10,25 @@ import { Copasetic } from '@shared/fonts/Copasetic';
 import type { SvgProps } from 'react-native-svg';
 import type { PropsWithBox } from '@shared/model';
 import { StatsKeyboard } from '../StatsKeyboard';
-import { LayoutContainer } from "../../LayoutContainer";
+import { LayoutContainer, LayoutContainerProps } from "../../LayoutContainer";
+import { skillCheckColor } from "@pages/skill-check/config";
+
 
 export const Container: typeof View = styled(View)`
-  align-items: center;
-  padding-bottom: ${size.gap.large}px;
+  padding: 0 ${size.gap.default}px;
+  padding-bottom: ${size.gap.large}px;  
 `
 
-export const Content: typeof LayoutContainer = styled(LayoutContainer)`
+type ContentProps = ViewProps & {
+  border?: boolean;
+}
 
+export const Content: FC<ContentProps> = styled(View)`
+  align-items: center;
+  ${({ border }: ContentProps) => border && css`
+    border-top-width: 1px;
+    border-top-color: ${skillCheckColor.border};
+  `}
 `
 
 export const Row: typeof BaseRow = styled(BaseRow)`
@@ -43,7 +53,6 @@ const buttonStyle = css`
 export const Button: typeof Buttons.TextButton = styled(Buttons.TextButton)`
   ${buttonStyle}
 `
-
 export const CustomButton: typeof Buttons.CustomButton = styled(Buttons.CustomButton)`
   ${buttonStyle}
 `
