@@ -1,10 +1,11 @@
 import type * as Types from "@shared/model";
 import { v4 } from "uuid";
 
-export const createNumberItem = (value: number): Types.NumberSkillCheckItem => ({
+export const createNumberItem = (value: number, removable?: boolean): Types.NumberSkillCheckItem => ({
   id: v4(),
   type: 'number',
-  value
+  value,
+  removable
 })
 
 export const createOperatorItem = (operator: Types.SkillCheckOperator): Types.OperatorSkillCheckItem => ({

@@ -91,7 +91,6 @@ export const Rule: FC<RuleProps> = styled(Image)
   ${({ historyShown }: RuleProps) => historyShown && css`
     transform: rotate(180deg);
   `}
-  width: 270px;
   height: 40px;
   margin-bottom: -5px;
   opacity: 0.8;

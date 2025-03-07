@@ -51,8 +51,8 @@ export const ExpressionHistory = ({
           <ExpressionDisplay
             data={item.expression}
             type="secondary"
+            value={item.value}
           />
-          <C.Value>={item.value}</C.Value>
         </C.Item>
         
       ))}

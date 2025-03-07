@@ -8,6 +8,7 @@ import { FC } from "react";
 import { statFontSize, typeFontSize } from "./ExpressionDisplay.styles";
 
 export const Container: typeof View = styled(View)`
+
 `
 
 type ExpressionProps = TextProps & PropsWithType;

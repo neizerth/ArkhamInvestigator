@@ -25,13 +25,13 @@ export const ExpressionValue = ({}: ExpressionValueProps) => {
     value: board.value
   })
 
-  const displayValue = validData.length > 0 && 
+  const showValue = validData.length > 0 && 
     !(validData.length === 1 && validData[0].type === 'number')
 
   return (
     <C.Container>
       <C.Value>
-        {displayValue && `=${value}`}
+        {showValue && `=${value}`}
       </C.Value>
     </C.Container>
   );

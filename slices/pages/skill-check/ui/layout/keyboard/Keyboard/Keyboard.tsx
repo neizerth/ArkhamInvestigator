@@ -1,12 +1,10 @@
 import { PrimaryButton } from '@shared/ui';
 import * as C from './Keyboard.components';
-import { useWindowDimensions } from 'react-native';
-import { characters } from '@pages/skill-check/config';
-import { goBack, useAppDispatch, sendNumberSignal, sendOperatorSignal, sendCommandSignal, setHistoryShown, selectHistoryShown, useAppSelector } from '@shared/lib';
+import { useAppDispatch, sendNumberSignal, sendOperatorSignal, sendCommandSignal, setHistoryShown, selectHistoryShown, useAppSelector } from '@shared/lib';
 import { useCallback } from 'react';
-import { SkillCheckCommand, SkillCheckOperator } from '@shared/model';
+import type { SkillCheckCommandType, SkillCheckOperator } from '@shared/model';
 import { operatorMapping } from './mapping';
-import { addCurrentSkillCheckToHistory } from '@shared/lib/store/features/board/actions/skillCheckHistory';
+import { addCurrentSkillCheckToHistory } from '@shared/lib/store/features/board/actions/addCurrentSkillCheckToHistory';
 import { LayoutContainer } from '../../LayoutContainer';
 
 export type KeyboardProps = {
@@ -29,7 +27,7 @@ export const Keyboard = ({}: KeyboardProps) => {
     dispatch(sendOperatorSignal(value));
   }, [dispatch]);
 
-  const sendCommand = useCallback((value: SkillCheckCommand) => () => {
+  const sendCommand = useCallback((value: SkillCheckCommandType) => () => {
     dispatch(sendCommandSignal(value));
   }, [dispatch]);
 

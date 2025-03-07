@@ -33,13 +33,14 @@ export const addCurrentSkillCheckToHistory: ActionCreator<AppThunk> = () => (dis
     item
   ]
 
-  console.log(checkHistory);
-
   dispatch(setCurrentBoard({
     ...board,
     checkHistory
   }))
 
   dispatch(sendCommandSignal('clear'));
-  dispatch(sendNumberSignal(value))
+  dispatch(sendNumberSignal({
+    value,
+    removable: true
+  }));
 }

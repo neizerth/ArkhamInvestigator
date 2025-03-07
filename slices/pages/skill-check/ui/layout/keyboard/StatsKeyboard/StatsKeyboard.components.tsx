@@ -6,7 +6,6 @@ import { FC } from "react"
 import { color, size } from "@shared/config"
 
 export const Container: typeof ScrollView = styled(ScrollView)`
-  flex: 2;
 `
 
 export const Content: typeof Row = styled(Row)`
@@ -21,6 +20,7 @@ export const Button: FC<ButtonProps> = styled(Buttons.IconButton)
     size: 'small',
     type: 'icon'
   })`
+    align-items: center;
   `
 
 export const Rule: typeof View = styled(View)`

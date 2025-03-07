@@ -1,4 +1,4 @@
 export * from './sendCommandSignal'
-export * from './sendDigitSignal'
+export * from './sendNumberSignal'
 export * from './sendOperatorSignal'
 export * from './sendStatSignal'

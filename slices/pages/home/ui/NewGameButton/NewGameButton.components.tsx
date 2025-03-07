@@ -5,6 +5,6 @@ import styled from "styled-components/native";
 
 export const Text: typeof BaseText = styled(BaseText)`
   font-family: ${Teutonic.regular};
-  font-size: ${font.size.lead}px;
+  font-size: ${font.size.xl}px;
   color: ${color.light10};
 `

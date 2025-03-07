@@ -11,7 +11,7 @@ import type { RuleSet } from "styled-components"
 type SizeRecord = Record<KeyboardButtonSize, number>;
 
 const buttonSize: SizeRecord = {
-  small: 30,
+  small: 38,
   medium: 65,
   large: 100,
 } 
@@ -28,7 +28,7 @@ export const Button: FC<KeyboardButtonProps> = styled(TouchableOpacity)`
 `
 const textSize: SizeRecord = {
   small: 40,
-  medium: 50,
+  medium: 48,
   large: 80,
 }
 

@@ -25,7 +25,8 @@ export type OperatorSkillCheckItem = {
 export type NumberSkillCheckItem = {
   id: string
   type: 'number'
-  value: number
+  value: number,
+  removable?: boolean
 }
 
 export type StatSkillCheckItem = {
@@ -34,12 +35,6 @@ export type StatSkillCheckItem = {
   statType: InvestigatorBoardStat
 }
 
-export type CommandSkillCheckItem = {
-  id: string
-  type: 'command',
-  command: SkillCheckCommand
-}
-
 export type SkillCheckItem = OperatorSkillCheckItem | NumberSkillCheckItem | StatSkillCheckItem;
 
-export type SkillCheckCommand = 'clear' | 'all-clear' | 'clear-last'
+export type SkillCheckCommandType = 'clear' | 'clear-last' | 'empty'

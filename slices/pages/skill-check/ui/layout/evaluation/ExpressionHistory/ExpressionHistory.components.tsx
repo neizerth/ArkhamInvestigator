@@ -10,15 +10,10 @@ export const Container: typeof ScrollView = styled(ScrollView)
       gap: size.gap.small
     }
   })`
+    
   `
 
 export const Item: typeof Row = styled(Row)`
   justify-content: flex-end;
-`
-
-export const Value: typeof Text = styled(Text)`
-  font-family: ${Copasetic.regular};
-  justify-content: flex-end;
-  font-size: 24px;
-  color: ${color.dark10};
+  align-items: stretch;
 `

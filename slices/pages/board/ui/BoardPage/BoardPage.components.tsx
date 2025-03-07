@@ -6,10 +6,12 @@ import { servicePadding } from '@pages/board/config';
 import type { FC } from 'react';
 import { PortraitLayout as BasePortraitLayout, type PortraitLayoutProps as BasePortraitLayoutProps } from '../layout';
 import type { PropsWithLayout } from '@pages/board/model';
+import { color } from '@shared/config';
 
 export const Container: typeof View = styled(View)`
   flex: 1;
   position: relative;
+  background-color: ${color.dark30};
 `
 
 export const Background: typeof InvestigatorImage = styled(InvestigatorImage)`

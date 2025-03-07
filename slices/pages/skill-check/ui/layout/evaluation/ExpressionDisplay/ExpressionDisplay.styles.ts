@@ -1,9 +1,9 @@
 export const typeFontSize = {
   primary: 40,
-  secondary: 24
+  secondary: 30
 }
 
 export const statFontSize = {
   primary: 30,
-  secondary: 20
+  secondary: 25
 }

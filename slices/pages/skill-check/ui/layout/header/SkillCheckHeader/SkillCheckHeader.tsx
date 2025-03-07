@@ -1,4 +1,4 @@
-import { goBack, selectHistoryShown, selectSkillCheckType, setHistoryShown, useAppDispatch, useAppSelector } from '@shared/lib';
+import { clearSkillCheckHistory, goBack, selectHistoryShown, selectSkillCheckType, sendCommandSignal, setHistoryShown, useAppDispatch, useAppSelector } from '@shared/lib';
 import * as C from './SkillCheckHeader.components';
 import { ViewProps } from 'react-native';
 import { useCallback } from 'react';
@@ -16,26 +16,42 @@ export const SkillCheckHeader = ({
     dispatch(setHistoryShown(!historyShown));
   }, [dispatch, historyShown])
 
+  const clearHistory = useCallback(() => {
+    dispatch(clearSkillCheckHistory());
+  }, [dispatch])
+
   const back = useCallback(() => {
     dispatch(goBack())
   }, [dispatch]);
 
   return (
     <C.Container {...props}>
-      <C.Row>
-        <C.Button 
-          icon='arrow_back' 
-          onPress={back}
-        />
+      <C.Content>
         {icon && (
-          <C.Stat icon={icon}/>
+          <C.CheckIcon>
+            <C.Stat icon={icon}/>
+          </C.CheckIcon>
         )}
-        <C.Button 
-          icon='history' 
-          onPress={toggleHistory}
-        />
-      </C.Row>
-      <C.Rule/>
+        <C.Controls>
+          <C.Row>
+            <C.Button 
+              icon='arrow_back' 
+              onPress={back}
+            />
+            <C.HistoryActions>
+              <C.Button 
+                icon='trash' 
+                onPress={clearHistory}
+              />
+              <C.Button 
+                icon={historyShown ? 'calculator' : 'history'}
+                onPress={toggleHistory}
+              />
+            </C.HistoryActions>
+          </C.Row>
+        </C.Controls>
+        <C.Rule/>
+      </C.Content>
     </C.Container>
   );
 }
