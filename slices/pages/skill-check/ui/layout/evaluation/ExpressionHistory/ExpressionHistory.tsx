@@ -1,14 +1,61 @@
-import { ViewProps } from 'react-native';
+import type { ScrollView, ViewProps } from 'react-native';
 import * as C from './ExpressionHistory.components';
+import { getSkillCheckValue, selectCurrentBoard, selectSkillCheckHistory, useAppSelector } from '@shared/lib';
+import { ExpressionDisplay } from '../ExpressionDisplay';
+import { useCallback, useRef } from 'react';
 
-export type ExpressionHistoryProps = ViewProps;
+export type ExpressionHistoryProps = ViewProps & {
+  size?: number;
+}
 
 export const ExpressionHistory = ({
+  size = 1,
   ...props
 }: ExpressionHistoryProps) => {
-  return (
-    <C.Container {...props}>
+  const history = useAppSelector(selectSkillCheckHistory)
+  const board = useAppSelector(selectCurrentBoard);
 
+  if (!board) {
+    return null;
+  }
+  
+  const { value } = board;
+  
+  const data = history
+    .slice(0, size)
+    .map(item => ({
+      ...item,
+      currentValue: getSkillCheckValue({
+        data: item.expression,
+        value
+      })
+    }))
+
+  const ref = useRef<ScrollView>(null);
+
+  const onContentSizeChange = useCallback(() => {
+    if (!ref.current) {
+      return;
+    }
+    ref.current.scrollToEnd();
+  }, [])
+
+  return (
+    <C.Container 
+      {...props}
+      ref={ref}
+      onContentSizeChange={onContentSizeChange}
+    >
+      {data.map(item => (
+        <C.Item key={item.id}>
+          <ExpressionDisplay
+            data={item.expression}
+            type="secondary"
+          />
+          <C.Value>={item.value}</C.Value>
+        </C.Item>
+        
+      ))}
     </C.Container>
   );
 }

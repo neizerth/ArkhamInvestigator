@@ -1,25 +1,28 @@
-import { characters } from '@pages/skill-check/config';
 import * as C from './ExpressionDisplay.components';
-import { ViewProps } from 'react-native';
-import { selectSkillCheckData, useAppSelector } from '@shared/lib';
 import { Fragment } from 'react';
-import { operatorMapping } from './mapping';
-import { iconMapping } from '@widgets/game-text';
+import { iconMapping, operatorMapping } from './mapping';
+import type { ExpressionDisplayProps } from './ExpressionDisplay.types';
 
-export type ExpressionDisplayProps = ViewProps
+export type { ExpressionDisplayProps };
+
 export const ExpressionDisplay = ({
+  data,
   ...props
 }: ExpressionDisplayProps) => {
-  const data = useAppSelector(selectSkillCheckData);
+  const { type } = props;
+  console.log({ data })
   return (
     <C.Container {...props}>
-      <C.Expression>
+      <C.Expression type={type}>
         {data.map(item => (
           <Fragment key={item.id}>
             {item.type === 'number' && item.value}
             {item.type === 'operator' && operatorMapping[item.operator]}
             {item.type === 'stat' && (
-              <C.Stat icon={iconMapping[item.statType] || item.statType}/>
+              <C.Stat 
+                icon={iconMapping[item.statType] || item.statType}
+                type={type}
+              />
             )}
           </Fragment>
         ))}

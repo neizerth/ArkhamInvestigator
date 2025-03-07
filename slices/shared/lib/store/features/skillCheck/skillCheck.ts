@@ -5,12 +5,14 @@ import * as reducers from './reducers';
 
 export type ISkillCheckState = {
   type: InvestigatorBoardStat | null
-  data: SkillCheckItem[]
+  data: SkillCheckItem[],
+  historyShown: boolean
 }
 
 const initialState: ISkillCheckState = {
   type: null,
-  data: []
+  data: [],
+  historyShown: false
 };
 
 const state = createSliceState(initialState);
@@ -28,14 +30,16 @@ export const {
   setData: setSkillCheckData,
   setType: setSkillCheckType,
   sendCommandSignal,
-  sendDigitSignal,
+  sendNumberSignal,
   sendOperatorSignal,
-  sendStatSignal
+  sendStatSignal,
+  setHistoryShown
 } = skillCheck.actions;
 
 export const {
   selectData: selectSkillCheckData,
-  selectType: selectSkillCheckType
+  selectType: selectSkillCheckType,
+  selectHistoryShown
 } = skillCheck.selectors;
 
 export default skillCheck.reducer;

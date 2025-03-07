@@ -1,6 +1,5 @@
-import { selectCurrentBoard, selectSkillCheckData, useAppSelector } from '@shared/lib';
+import { getSkillCheckValue, selectCurrentBoard, selectSkillCheckData, useAppSelector } from '@shared/lib';
 import * as C from './ExpressionValue.components';
-import { getValue } from './getValue';
 import { last } from 'ramda';
 
 export type ExpressionValueProps = {
@@ -21,15 +20,18 @@ export const ExpressionValue = ({}: ExpressionValueProps) => {
     data.slice(0, -1) : 
     data;
 
-  const value = getValue({
+  const value = getSkillCheckValue({
     data: validData,
     value: board.value
   })
 
+  const displayValue = validData.length > 0 && 
+    !(validData.length === 1 && validData[0].type === 'number')
+
   return (
     <C.Container>
       <C.Value>
-        {validData.length > 0 && `=${value}`}
+        {displayValue && `=${value}`}
       </C.Value>
     </C.Container>
   );

@@ -11,8 +11,8 @@ import type { RuleSet } from "styled-components"
 type SizeRecord = Record<KeyboardButtonSize, number>;
 
 const buttonSize: SizeRecord = {
-  small: 40,
-  medium: 70,
+  small: 30,
+  medium: 65,
   large: 100,
 } 
 
@@ -27,8 +27,8 @@ export const Button: FC<KeyboardButtonProps> = styled(TouchableOpacity)`
   `}
 `
 const textSize: SizeRecord = {
-  small: 50,
-  medium: 60,
+  small: 40,
+  medium: 50,
   large: 80,
 }
 
@@ -57,6 +57,6 @@ export const Text: FC<ButtonTextProps> = styled(BaseText)`
 `
 
 export const Icon: typeof BaseIcon = styled(BaseIcon)`
-  font-size: 30px;
+  font-size: 25px;
   color: ${color.light10};
 `

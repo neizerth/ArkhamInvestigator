@@ -1,8 +1,8 @@
 import { last } from "ramda";
-import { createDigitItem } from "../lib";
+import { createNumberItem } from "../lib";
 import type { SkillCheckReducer } from "../skillCheck.types";
 
-export const sendDigitSignal: SkillCheckReducer<number> = (state, { payload }) => {
+export const sendNumberSignal: SkillCheckReducer<number> = (state, { payload }) => {
   const { data } = state
   const lastItem = last(data);
 
@@ -11,7 +11,7 @@ export const sendDigitSignal: SkillCheckReducer<number> = (state, { payload }) =
       ...state,
       data: [
         ...data.slice(0, -1),
-        createDigitItem(lastItem.value * 10 + payload)
+        createNumberItem(lastItem.value * 10 + payload)
       ]
     }
   }
@@ -20,7 +20,7 @@ export const sendDigitSignal: SkillCheckReducer<number> = (state, { payload }) =
       ...state,
       data: [
         ...data.slice(0, -1),
-        createDigitItem(payload)
+        createNumberItem(payload)
       ]
     }
   }
@@ -29,7 +29,7 @@ export const sendDigitSignal: SkillCheckReducer<number> = (state, { payload }) =
     ...state,
     data: [
       ...data,
-      createDigitItem(payload)
+      createNumberItem(payload)
     ]
   }
 }

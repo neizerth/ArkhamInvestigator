@@ -29,8 +29,8 @@ export const InvestigatorSkills = ({
         <C.Content style={skillsStyle}>
           <C.Willpower/>
           <C.Intellect/>
-          <C.Willpower/>
-          <C.Willpower/>
+          <C.Combat/>
+          <C.Agility/>
         </C.Content>
       </C.Container>
     </SkillsContext.Provider>

@@ -1,19 +1,24 @@
-import { InvestigatorBoard, InvestigatorBoardValues, SkillCheckItem } from "@shared/model";
-import { operatorMapping } from "./mapping";
+import type { InvestigatorBoardValues, SkillCheckItem, SkillCheckOperator } from '@shared/model';
 import { evaluate } from 'mathjs'; 
 import { last } from "ramda";
+
+const operatorMapping: Record<SkillCheckOperator, string> = {
+  add: '+',
+  subtract: '-',
+  multiply: '*',
+  divide: '/'
+}
 
 
 export type GetValueOptions = {
   data: SkillCheckItem[]
   value: InvestigatorBoardValues
 }
-export const getValue = ({
+export const getSkillCheckValue = ({
   data,
   value
 }: GetValueOptions) => {
   const expression = getExpression(data);
-  console.log(expression)
   try {
     return evaluate(expression, value);
   }

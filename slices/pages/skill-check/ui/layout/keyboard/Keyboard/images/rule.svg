@@ -1,9 +1,9 @@
 <svg width="214.15" height="29.01" viewBox="0 0 56.66 7.68" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <clipPath clipPathUnits="userSpaceOnUse" id="a">
+    <clipPath clipPathUnits="userSpaceOnUse" id="rule-a">
       <path d="m2488.34 2085.36-87.36 87.36h-714.32v22.01h723.44l78.24-78.26 78.24 78.26h723.44v-22.01H2575.7Z"/>
     </clipPath>
-    <linearGradient x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(1603.36 0 0 -1603.36 1686.66 2140.04)" spreadMethod="pad" id="b">
+    <linearGradient x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(1603.36 0 0 -1603.36 1686.66 2140.04)" spreadMethod="pad" id="rule-b">
       <stop offset="0" stop-color="#885d2b"/>
       <stop offset=".23" stop-color="#eeddb7"/>
       <stop offset=".52" stop-color="#dcb864"/>
@@ -14,7 +14,7 @@
     <clipPath clipPathUnits="userSpaceOnUse" id="c">
       <path d="m2654.04 2239.26 48.48 48.47-8.48 8.48-56.95-56.95h-117.71v-11.99h773.42v11.99z"/>
     </clipPath>
-    <linearGradient x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(773.418 0 0 -773.418 2519.38 2261.73)" spreadMethod="pad" id="d">
+    <linearGradient x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(773.418 0 0 -773.418 2519.38 2261.73)" spreadMethod="pad" id="rule-d">
       <stop offset="0" stop-color="#885d2b"/>
       <stop offset=".23" stop-color="#eeddb7"/>
       <stop offset=".52" stop-color="#dcb864"/>
@@ -22,10 +22,10 @@
       <stop offset=".83" stop-color="#dcb864"/>
       <stop offset="1" stop-color="#885d2b"/>
     </linearGradient>
-    <clipPath clipPathUnits="userSpaceOnUse" id="e">
+    <clipPath clipPathUnits="userSpaceOnUse" id="rule-e">
       <path d="m2282.64 2296.21-8.48-8.48 48.48-48.47h-635.98v-11.99h764.39v11.99h-111.46z"/>
     </clipPath>
-    <linearGradient x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(764.395 0 0 -764.395 1686.66 2261.73)" spreadMethod="pad" id="f">
+    <linearGradient x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(764.395 0 0 -764.395 1686.66 2261.73)" spreadMethod="pad" id="rule-f">
       <stop offset="0" stop-color="#885d2b"/>
       <stop offset=".23" stop-color="#eeddb7"/>
       <stop offset=".52" stop-color="#dcb864"/>
@@ -33,10 +33,10 @@
       <stop offset=".83" stop-color="#dcb864"/>
       <stop offset="1" stop-color="#885d2b"/>
     </linearGradient>
-    <clipPath clipPathUnits="userSpaceOnUse" id="g">
+    <clipPath clipPathUnits="userSpaceOnUse" id="rule-g">
       <path d="m2488.34 2185.18-95.79 95.79h-527.54v21.99h536.66l86.67-86.68 86.67 86.68h536.66v-21.99h-527.54z"/>
     </clipPath>
-    <linearGradient x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="scale(759.1 -759.1) rotate(7.57 24.6 20.18)" spreadMethod="pad" id="h">
+    <linearGradient x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="scale(759.1 -759.1) rotate(7.57 24.6 20.18)" spreadMethod="pad" id="rule-h">
       <stop offset="0" stop-color="#dcb864"/>
       <stop offset=".23" stop-color="#eeddb7"/>
       <stop offset=".52" stop-color="#dcb864"/>
@@ -45,16 +45,16 @@
       <stop offset="1" stop-color="#dcb864"/>
     </linearGradient>
   </defs>
-  <g clip-path="url(#a)" transform="matrix(.03528 0 0 -.03528 -59.5 81.24)">
-    <path d="m2488.34 2085.36-87.36 87.36h-714.32v22.01h723.44l78.24-78.26 78.24 78.26h723.44v-22.01H2575.7l-87.36-87.36" fill="url(#b)"/>
+  <g clip-path="url(#rule-a)" transform="matrix(.03528 0 0 -.03528 -59.5 81.24)">
+    <path d="m2488.34 2085.36-87.36 87.36h-714.32v22.01h723.44l78.24-78.26 78.24 78.26h723.44v-22.01H2575.7l-87.36-87.36" fill="url(#rule-b)"/>
   </g>
-  <g clip-path="url(#c)" transform="matrix(.03528 0 0 -.03528 -59.5 81.24)">
-    <path d="m2654.04 2239.26 48.48 48.47-8.48 8.48-56.95-56.95h-117.71v-11.99h773.42v11.99h-638.76" fill="url(#d)"/>
+  <g clip-path="url(#rule-c)" transform="matrix(.03528 0 0 -.03528 -59.5 81.24)">
+    <path d="m2654.04 2239.26 48.48 48.47-8.48 8.48-56.95-56.95h-117.71v-11.99h773.42v11.99h-638.76" fill="url(#rule-d)"/>
   </g>
-  <g clip-path="url(#e)" transform="matrix(.03528 0 0 -.03528 -59.5 81.24)">
-    <path d="m2282.64 2296.21-8.48-8.48 48.48-48.47h-635.98v-11.99h764.39v11.99h-111.46l-56.95 56.95" fill="url(#f)"/>
+  <g clip-path="url(#rule-e)" transform="matrix(.03528 0 0 -.03528 -59.5 81.24)">
+    <path d="m2282.64 2296.21-8.48-8.48 48.48-48.47h-635.98v-11.99h764.39v11.99h-111.46l-56.95 56.95" fill="url(#rule-f)"/>
   </g>
-  <g clip-path="url(#g)" transform="matrix(.03528 0 0 -.03528 -59.5 81.24)">
-    <path d="m2488.34 2185.18-95.79 95.79h-527.54v21.99h536.66l86.67-86.68 86.67 86.68h536.66v-21.99h-527.54l-95.79-95.79" fill="url(#h)"/>
+  <g clip-path="url(#rule-g)" transform="matrix(.03528 0 0 -.03528 -59.5 81.24)">
+    <path d="m2488.34 2185.18-95.79 95.79h-527.54v21.99h536.66l86.67-86.68 86.67 86.68h536.66v-21.99h-527.54l-95.79-95.79" fill="url(#rule-h)"/>
   </g>
 </svg>

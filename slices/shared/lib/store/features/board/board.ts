@@ -1,7 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
-import type { InvestigatorBoard, SkillCheck } from '@shared/model';
+import type { InvestigatorBoard } from '@shared/model';
 import { createSliceState } from 'redux-toolkit-helpers';
-import { sendDigitSignal } from './actions/signals';
 
 export type IBoardState = {
   currentInvestigatorIndex: number | null

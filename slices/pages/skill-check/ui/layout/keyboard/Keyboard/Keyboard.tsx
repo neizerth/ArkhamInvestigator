@@ -2,25 +2,27 @@ import { PrimaryButton } from '@shared/ui';
 import * as C from './Keyboard.components';
 import { useWindowDimensions } from 'react-native';
 import { characters } from '@pages/skill-check/config';
-import { goBack, useAppDispatch, sendDigitSignal, sendOperatorSignal, sendCommandSignal } from '@shared/lib';
+import { goBack, useAppDispatch, sendNumberSignal, sendOperatorSignal, sendCommandSignal, setHistoryShown, selectHistoryShown, useAppSelector } from '@shared/lib';
 import { useCallback } from 'react';
 import { SkillCheckCommand, SkillCheckOperator } from '@shared/model';
 import { operatorMapping } from './mapping';
+import { addCurrentSkillCheckToHistory } from '@shared/lib/store/features/board/actions/skillCheckHistory';
+import { LayoutContainer } from '../../LayoutContainer';
 
 export type KeyboardProps = {
 
 }
 
 export const Keyboard = ({}: KeyboardProps) => {
-  const window = useWindowDimensions();
   const dispatch = useAppDispatch();
+  const historyShown = useAppSelector(selectHistoryShown);
 
-  const back = () => {
-    dispatch(goBack());
-  }
+  const toggleHistory = useCallback(() => {
+    dispatch(setHistoryShown(!historyShown));
+  }, [dispatch, historyShown])
 
   const sendDigit = useCallback((value: number) => () => {
-    dispatch(sendDigitSignal(value));
+    dispatch(sendNumberSignal(value));
   }, [dispatch]);
 
   const sendOperator = useCallback((value: SkillCheckOperator) => () => {
@@ -29,6 +31,10 @@ export const Keyboard = ({}: KeyboardProps) => {
 
   const sendCommand = useCallback((value: SkillCheckCommand) => () => {
     dispatch(sendCommandSignal(value));
+  }, [dispatch]);
+
+  const equals = useCallback(() => {
+    dispatch(addCurrentSkillCheckToHistory());
   }, [dispatch]);
 
   const withDigitProps = (value: number) => ({
@@ -43,47 +49,56 @@ export const Keyboard = ({}: KeyboardProps) => {
 
   return (
     <C.Container>
-      <C.Row>
-        <C.Back onPress={back}>
-          <C.Rule box={window}/>
-        </C.Back>
-      </C.Row>
-      <C.Row>
-        <C.CustomButton 
-          onPress={sendCommand('clear-last')}
-          onLongPress={sendCommand('clear')}
-        >
-          <C.Backspace />
-        </C.CustomButton>
-        <C.Stats/>
-      </C.Row>
-      <C.Row>
-        <C.Button {...withDigitProps(7)}/>
-        <C.Button {...withDigitProps(8)}/>
-        <C.Button {...withDigitProps(9)}/>
-        <C.Operator {...withOperatorProps('divide')}/>
-      </C.Row>
-      <C.Row>
-        <C.Button {...withDigitProps(4)}/>
-        <C.Button {...withDigitProps(5)}/>
-        <C.Button {...withDigitProps(6)}/>
-        <C.Operator {...withOperatorProps('multiply')}/>
-      </C.Row>
-      <C.Row>
-        <C.Button {...withDigitProps(1)}/>
-        <C.Button {...withDigitProps(2)}/>
-        <C.Button {...withDigitProps(3)}/>
-        <C.Operator {...withOperatorProps('subtract')}/>
-      </C.Row>
-      <C.Row>
-        <C.Placeholder/>
-        <C.Button {...withDigitProps(0)}/>
-        <C.Placeholder/>
-        <C.Operator {...withOperatorProps('add')}/>
-      </C.Row>
-      <PrimaryButton styleType='transparent' onPress={sendCommand('equals')}>
-        <C.EqualsText>Equals</C.EqualsText>
-      </PrimaryButton>
+      <LayoutContainer>
+        <C.Row>
+          <C.Back onPress={toggleHistory}>
+            <C.Rule historyShown={historyShown}/>
+          </C.Back>
+        </C.Row>
+        {!historyShown && (
+          <>
+            <C.Row>
+              <C.CustomButton 
+                onPress={sendCommand('clear-last')}
+                onLongPress={sendCommand('clear')}
+              >
+                <C.Backspace />
+              </C.CustomButton>
+              <C.Stats/>
+            </C.Row>
+            <C.Row>
+              <C.Button {...withDigitProps(7)}/>
+              <C.Button {...withDigitProps(8)}/>
+              <C.Button {...withDigitProps(9)}/>
+              <C.Operator {...withOperatorProps('divide')}/>
+            </C.Row>
+            <C.Row>
+              <C.Button {...withDigitProps(4)}/>
+              <C.Button {...withDigitProps(5)}/>
+              <C.Button {...withDigitProps(6)}/>
+              <C.Operator {...withOperatorProps('multiply')}/>
+            </C.Row>
+            <C.Row>
+              <C.Button {...withDigitProps(1)}/>
+              <C.Button {...withDigitProps(2)}/>
+              <C.Button {...withDigitProps(3)}/>
+              <C.Operator {...withOperatorProps('subtract')}/>
+            </C.Row>
+            <C.Row>
+              <C.Placeholder/>
+              <C.Button {...withDigitProps(0)}/>
+              <C.Placeholder/>
+              <C.Operator {...withOperatorProps('add')}/>
+            </C.Row>
+            <PrimaryButton 
+              styleType='transparent' 
+              onPress={equals}
+            >
+              <C.EqualsText>Equals</C.EqualsText>
+            </PrimaryButton>
+          </>
+        )}
+      </LayoutContainer>
     </C.Container>
   );
 }

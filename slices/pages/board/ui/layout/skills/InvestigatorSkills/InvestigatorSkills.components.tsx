@@ -5,6 +5,7 @@ import { Image, View } from "react-native";
 import styled, { css } from "styled-components/native";
 import { Row } from "@shared/ui";
 import { withSkillType } from "./withSkillType";
+import { Skill as BaseSkill } from "../Skill";
 
 export const Container: typeof View = styled(View)`
   position: relative;

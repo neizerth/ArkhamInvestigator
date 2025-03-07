@@ -1,21 +1,38 @@
-import { color, size } from "@shared/config";
-import { ArkhamDigits } from "@shared/fonts/ArkhamDigits";
+import { color } from "@shared/config";
 import { Copasetic } from "@shared/fonts/Copasetic";
-import { Icon } from "@shared/ui";
-import { Text, View } from "react-native";
-import styled from "styled-components/native";
+import { Icon, IconProps } from "@shared/ui";
+import { Text, TextProps, View } from "react-native";
+import styled, { css } from "styled-components/native";
+import { PropsWithType } from "./ExpressionDisplay.types";
+import { FC } from "react";
+import { statFontSize, typeFontSize } from "./ExpressionDisplay.styles";
 
 export const Container: typeof View = styled(View)`
 `
 
-export const Expression: typeof Text = styled(Text)`
+type ExpressionProps = TextProps & PropsWithType;
+
+const typeStyle = {
+  primary: css`
+    font-size: ${typeFontSize.primary}px;
+    color: ${color.light10};
+  `,
+  secondary: css`
+    font-size: ${typeFontSize.secondary}px;
+    color: ${color.dark10};
+  `
+} 
+
+export const Expression: FC<ExpressionProps> = styled(Text)`
   font-family: ${Copasetic.regular};
-  font-size: 40px;
-  color: ${color.light10};
   text-align: right;
   letter-spacing: 2px;
+  ${({ type = 'secondary'}: ExpressionProps) => typeStyle[type]}
 `
 
-export const Stat: typeof Icon = styled(Icon)`
-  font-size: 30px;
+type StatProps = IconProps & PropsWithType;
+export const Stat: FC<StatProps> = styled(Icon)`
+  ${({ type = 'secondary'}: StatProps) => css`
+    font-size: ${statFontSize[type]}px;
+  `}
 `

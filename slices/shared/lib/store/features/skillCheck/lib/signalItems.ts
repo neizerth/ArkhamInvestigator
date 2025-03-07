@@ -1,7 +1,7 @@
 import type * as Types from "@shared/model";
 import { v4 } from "uuid";
 
-export const createDigitItem = (value: number): Types.NumberSkillCheckItem => ({
+export const createNumberItem = (value: number): Types.NumberSkillCheckItem => ({
   id: v4(),
   type: 'number',
   value

@@ -1,8 +1,7 @@
-import BackspaceImage from './images/backspace.svg';
-import RuleImage from './images/rule.svg'
+import { BackspaceImage, rule } from "./images/images";
 
 import { Row as BaseRow, TouchableOpacity } from "@shared/ui";
-import { View, Text } from "react-native";
+import { View, Text, ImageProps, Image } from "react-native";
 import styled, { css } from "styled-components/native";
 import * as Buttons from "../KeyboardButton";
 import { color, font, size } from '@shared/config';
@@ -11,9 +10,15 @@ import { Copasetic } from '@shared/fonts/Copasetic';
 import type { SvgProps } from 'react-native-svg';
 import type { PropsWithBox } from '@shared/model';
 import { StatsKeyboard } from '../StatsKeyboard';
+import { LayoutContainer } from "../../LayoutContainer";
 
 export const Container: typeof View = styled(View)`
-  
+  align-items: center;
+  padding-bottom: ${size.gap.large}px;
+`
+
+export const Content: typeof LayoutContainer = styled(LayoutContainer)`
+
 `
 
 export const Row: typeof BaseRow = styled(BaseRow)`
@@ -56,8 +61,8 @@ export const Stats: typeof StatsKeyboard = styled(StatsKeyboard)`
 
 export const Backspace: typeof BackspaceImage = styled(BackspaceImage)
   .attrs({
-    width: 37,
-    height: 37,
+    width: 32,
+    height: 32,
     fill: color.light10,
   })`
     position: relative;
@@ -74,15 +79,20 @@ export const EqualsText: typeof Text = styled(Text)`
   font-size: ${font.size.lead}px;
 `
 
-type RuleProps = SvgProps & PropsWithBox
+type RuleProps = ImageProps & {
+  historyShown: boolean
+}
 
-export const Rule: FC<RuleProps> = styled(RuleImage)
+export const Rule: FC<RuleProps> = styled(Image)
   .attrs({
-    fill: 'white'
+    source: rule,
+    resizeMode: 'contain'
   })`
-  ${({ box }: RuleProps) => css`
-    width: ${Math.min(box.width, 250)}px;
-    height: 40px;
-    opacity: 0.8;
+  ${({ historyShown }: RuleProps) => historyShown && css`
+    transform: rotate(180deg);
   `}
+  width: 270px;
+  height: 40px;
+  margin-bottom: -5px;
+  opacity: 0.8;
 `

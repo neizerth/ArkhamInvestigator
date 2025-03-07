@@ -1,8 +1,9 @@
 import type { InvestigatorBoardStat } from "./board"
 
-export type SkillCheckInfo = {
+export type SkillCheckHistoryItem = {
+  id: string
   type: InvestigatorBoardStat
-  expression: string
+  expression: SkillCheckItem[]
   value: number
 }
 
@@ -41,4 +42,4 @@ export type CommandSkillCheckItem = {
 
 export type SkillCheckItem = OperatorSkillCheckItem | NumberSkillCheckItem | StatSkillCheckItem;
 
-export type SkillCheckCommand = 'clear' | 'all-clear' | 'clear-last' | 'equals'
+export type SkillCheckCommand = 'clear' | 'all-clear' | 'clear-last'
