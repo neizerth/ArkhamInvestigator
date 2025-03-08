@@ -5,7 +5,7 @@ import { navigateTo, selectCurrentBoard, startSkillCheck, useAppDispatch, useApp
 import { useCallback, useContext, useState } from 'react';
 import { SkillsContext } from '@pages/board/config';
 import { getSkillStyle } from './Skill.styles';
-import { tick } from '@features/haptic';
+import { impactHapticFeedback } from '@features/haptic';
 
 export type SkillProps = ViewProps & {
   type: InvestigatorSkillType
@@ -36,7 +36,7 @@ export const Skill = ({
   }, [])
 
   const openModal = useCallback(() => {
-    tick();
+    impactHapticFeedback('clockTick');
     dispatch(startSkillCheck(type));
   }, [dispatch, type])
 

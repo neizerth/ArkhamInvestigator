@@ -1,5 +1,5 @@
-import { TICK_PATTERN } from "@features/haptic";
-import type { HapticPattern } from "@shared/model";
+import { impactHapticFeedback } from "@features/haptic";
+import type { HapticPatternType, VibrationPattern } from "@shared/model";
 import { type GestureResponderEvent, Vibration } from "react-native";
 
 type PressEventHandler = (e: GestureResponderEvent) => void
@@ -7,18 +7,17 @@ type PressEventHandler = (e: GestureResponderEvent) => void
 type HandlePressOptions = {
   event: GestureResponderEvent
   eventHandler?: PressEventHandler
-  pattern?: HapticPattern
+  pattern?: HapticPatternType
 }
 
 export const handlePress = ({
   event,
   eventHandler, 
-  pattern = TICK_PATTERN
+  pattern = 'clockTick'
 }: HandlePressOptions) => {
   if (!eventHandler) {
     return;
   }
-
-  Vibration.vibrate(pattern);
+  impactHapticFeedback(pattern);
   eventHandler(event);
 }

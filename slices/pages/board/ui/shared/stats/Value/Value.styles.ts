@@ -9,3 +9,20 @@ export const numberSize: Record<number, number> = {
   2: 40,
   3: 30
 }
+
+type GetValueStyleOptions = {
+  defaultFontSize?: number
+  value: number | string
+}
+export const getFontStyle = ({
+  defaultFontSize,
+  value
+}: GetValueStyleOptions) => {
+  const digitsCount = value.toString().length;
+
+  const fontSize = numberSize[digitsCount] || defaultFontSize;
+
+  return {
+    fontSize
+  }
+}

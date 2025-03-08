@@ -1,21 +1,23 @@
 {
   "expo": {
-    "name": "my-app",
-    "slug": "my-app",
+    "name": "arkham-investigator",
+    "slug": "arkham-investigator",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "myapp",
+    "scheme": "arkham-investigator",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.arkhaminvestigator"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.arkhaminvestigator"
     },
     "web": {
       "bundler": "metro",

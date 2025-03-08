@@ -5,7 +5,7 @@ import { descriptionSize, LayoutContext, PORTRAIT_DESCRIPTION_HEIGHT, PortraitLa
 import { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 import { navigateTo, selectCurrentBoard, selectShowDescription, setShowDescription, useAppDispatch, useAppSelector } from '@shared/lib';
 import { Faction } from '@shared/model';
-import { tick } from '@features/haptic';
+import { impactHapticFeedback } from '@features/haptic';
 
 export type FooterDescriptionProps = ViewProps;
 
@@ -28,14 +28,14 @@ export const FooterDescription = ({
   const onShow = useCallback(() => {
     if (!showDescription) {
       dispatch(setShowDescription(true))
-      tick();
+      impactHapticFeedback('clockTick');
     }
   }, [showDescription, dispatch]);
 
   const onHide = useCallback(() => {
     if (showDescription) {
       dispatch(setShowDescription(false))
-      tick();
+      impactHapticFeedback('clockTick');
     }
   }, [showDescription, dispatch]);
 

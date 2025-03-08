@@ -1,9 +1,12 @@
 import { IS_WEB } from "@shared/config";
 import { IconNumber } from "@shared/ui";
-import { Platform } from "react-native";
+import { Platform, View } from "react-native";
 import styled from "styled-components/native";
 
-export const Container: typeof IconNumber = styled(IconNumber)
+export const Container: typeof View = styled(View)`
+`
+
+export const Value: typeof IconNumber = styled(IconNumber)
   .attrs({
     stroke: true,
   })`

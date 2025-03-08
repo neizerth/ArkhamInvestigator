@@ -1,4 +1,4 @@
-import type { HapticPattern } from "@shared/model/features/device/haptic";
+import type { VibrationPattern } from "@shared/model/features/device/haptic";
 import { useCallback } from "react";
 import type { 
   GestureResponderEvent, 
@@ -12,10 +12,10 @@ import {
 import { handlePress } from "./handlePress";
 
 export type TouchableOpacityProps = BaseTouchableOpacityProps & {
-  pressHapticPattern?: HapticPattern
-  pressInHapticPattern?: HapticPattern
-  pressOutHapticPattern?: HapticPattern
-  longPressHapticPattern?: HapticPattern
+  pressHapticPattern?: VibrationPattern
+  pressInHapticPattern?: VibrationPattern
+  pressOutHapticPattern?: VibrationPattern
+  longPressHapticPattern?: VibrationPattern
 }
 
 export const TouchableOpacity = ({

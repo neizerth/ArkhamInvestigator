@@ -1,10 +1,11 @@
 import type { ActionCreator } from "@reduxjs/toolkit";
 import { getSkillCheckValue } from "@shared/lib/features";
 import type { AppThunk } from "@shared/lib/store";
-import { selectCurrentBoard, selectSkillCheckData, selectSkillCheckType, sendCommandSignal, sendNumberSignal } from "@shared/lib/store";
 import type { SkillCheckHistoryItem } from "@shared/model";
 import { setCurrentBoard } from "./setCurrentBoard";
 import { v4 } from "uuid";
+import { selectSkillCheckData, selectSkillCheckType, sendCommandSignal, sendNumberSignal } from '../../skillCheck/skillCheck'
+import { selectCurrentBoard } from '../selectors'
 
 export const addCurrentSkillCheckToHistory: ActionCreator<AppThunk> = () => (dispatch, getState) => {
   const state = getState();

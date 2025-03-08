@@ -1,2 +1,1 @@
-export * from './impactAsync'
-export * from './hapticPatterns'
+export * from './impactHapticFeedback'

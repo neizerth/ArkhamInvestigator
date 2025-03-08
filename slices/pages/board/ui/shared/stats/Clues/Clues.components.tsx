@@ -4,6 +4,7 @@ import { color, gameAssets } from '@shared/config';
 import { Value as BaseValue } from '../Value';
 import styled from 'styled-components/native';
 import { View } from 'react-native';
+import { Picker } from '../../features';
 
 export const BaseContainer = withStat(UI.Clue, {
   ratio: gameAssets.clue.ratio
@@ -16,3 +17,7 @@ export const Container: typeof BaseContainer = styled(BaseContainer)`
 export const Value: typeof BaseValue = styled(BaseValue)`
   color: ${color.clue};
 `
+
+export const ValuePicker: typeof Picker = styled(Picker)`
+  
+` 
