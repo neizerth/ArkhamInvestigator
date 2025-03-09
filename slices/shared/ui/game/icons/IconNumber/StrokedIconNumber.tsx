@@ -4,7 +4,7 @@ import * as C from './IconNumber.components'
 import type { IconNumberComponentProps } from "./IconNumber.types";
 export const StrokedIconNumber = ({
   value,
-  containerProps,
+  containerStyle,
   ...props
 }: IconNumberComponentProps) => {
 
@@ -19,7 +19,7 @@ export const StrokedIconNumber = ({
   ]
 
   return (
-    <C.Container {...containerProps}>
+    <C.Container style={containerStyle}>
       <C.StrokeContainer>
         <C.Fill {...props}>{value}</C.Fill>
         <C.Outline 

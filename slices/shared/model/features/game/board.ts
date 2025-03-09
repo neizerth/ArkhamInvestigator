@@ -22,5 +22,12 @@ export type InvestigatorBoard = {
   baseValue: InvestigatorBoardValues
   value: InvestigatorBoardValues
   unique: boolean
+  history: HistoryItem[]
   checkHistory: SkillCheckHistoryItem[]
+}
+
+export type HistoryItem = {
+  id: string
+  type: InvestigatorBoardStat
+  value: number
 }

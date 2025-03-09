@@ -2,12 +2,11 @@ import type { HapticPatternType } from "@shared/model";
 
 import { vibrate } from "./vibrate";
 import Haptics from './Haptics';
-// import type { HapticOptions } from "react-native-haptic-feedback";
 
 
 const defaultHapticOptions = {
   enableVibrateFallback: true,
-  ignoreAndroidSystemSettings: false,
+  ignoreAndroidSystemSettings: true,
 }
 
 export const impactHapticFeedback = (value: HapticPatternType, hapticOptions = defaultHapticOptions) => {

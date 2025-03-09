@@ -48,6 +48,7 @@ export const getInvestigatorBoards = ({
       value,
       isParallel,
       unique,
+      history: [],
       checkHistory: []
     }
   })

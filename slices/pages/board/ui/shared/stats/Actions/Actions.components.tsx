@@ -5,6 +5,7 @@ import { Action, Icon } from "@shared/ui";
 import { View } from "react-native";
 import styled from "styled-components/native";
 import { Value as BaseValue } from '../Value';
+import { StatPicker } from "../StatPicker";
 
 const BaseBackground = withStat(Action, {
   height: assetsSize.action,
@@ -34,6 +35,11 @@ export const ActionIcon: typeof Icon = styled(Icon)`
   color: ${color.white};
 `
 
-export const Value: typeof BaseValue = styled(BaseValue)`
-  color: ${color.action};
-`
+export const Picker: typeof StatPicker = styled(StatPicker)
+  .attrs({
+    valueStyle: {
+      color: color.action
+    },
+    itemHeight: assetsSize.action + 5
+  })`
+  ` 

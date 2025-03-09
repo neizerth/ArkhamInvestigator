@@ -1,9 +1,12 @@
 import * as C from './Value.components';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, ViewProps } from 'react-native';
 import { getFontStyle, numberSize, valueStyle } from './Value.styles';
 import type { IconNumberProps } from '@shared/ui';
+import { memo } from 'react';
 
-export type ValueProps = IconNumberProps;
+export type ValueProps = IconNumberProps & {
+  containerStyle?: ViewProps['style']
+}
 
 export const Value = ({
   ...props
@@ -38,3 +41,5 @@ export const Value = ({
     </C.Container>
   );
 }
+
+export const ValueMemo = memo(Value);

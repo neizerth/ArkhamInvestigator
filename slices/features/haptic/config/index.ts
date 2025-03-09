@@ -1,2 +1,2 @@
 export * from './vibrationPatterns'
-export * from './fallbackVibration'
+export * from './fallback'

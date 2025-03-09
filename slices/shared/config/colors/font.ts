@@ -9,6 +9,7 @@ export const font = {
     medium: 16 * scale,
     large: 18 * scale,
     xl: 24 * scale,
+    xxl: 28 * scale,
     lead: 32 * scale
   },
   scale
