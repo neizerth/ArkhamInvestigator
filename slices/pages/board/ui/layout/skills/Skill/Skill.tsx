@@ -6,10 +6,14 @@ import { useCallback, useContext, useState } from 'react';
 import { SkillsContext } from '@pages/board/config';
 import { getSkillStyle } from './Skill.styles';
 import { impactHapticFeedback } from '@features/haptic';
+import { PickerItemInfo } from '@widgets/picker';
+import { range } from 'ramda';
 
 export type SkillProps = ViewProps & {
   type: InvestigatorSkillType
 }
+
+const SKILL_RANGE = range(-12, 20);
 
 export const Skill = ({
   type,
@@ -40,13 +44,35 @@ export const Skill = ({
     dispatch(startSkillCheck(type));
   }, [dispatch, type])
 
+  const renderItem = useCallback((props: PickerItemInfo) => {
+    const { item } = props;
+
+    const style = getSkillStyle({
+      box,
+      isParallel,
+      value: item
+    });
+
+    return (
+      <C.Value
+        {...props}
+        value={item}
+        style={style.value}
+      />
+    )
+  }, [box, isParallel]);
+
+  const itemHeight = box.height * 0.9;
+
   return (
     <C.Container {...props}>
       <C.Row>
         <C.ValueContainer style={style.valueContainer}>
-          <C.Value 
+          <C.Picker 
+            renderItem={renderItem}
+            itemHeight={itemHeight}
+            data={SKILL_RANGE}
             value={skillValue}
-            style={style.value}
           />
         </C.ValueContainer>
         <C.Check 

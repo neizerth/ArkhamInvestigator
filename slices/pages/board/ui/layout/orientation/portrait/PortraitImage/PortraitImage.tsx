@@ -5,6 +5,7 @@ import { getInvestigatorImageUrl } from '@shared/api';
 import type { ViewProps } from 'react-native';
 import { useContext } from 'react';
 import { LayoutContext } from '@pages/board/config';
+import { useActiveStyle } from './useActiveStyle';
 
 export type PortraitImageProps = ViewProps;
 
@@ -14,6 +15,8 @@ export const PortraitImage = ({
   const { view, layout } = useContext(LayoutContext);
 
   const { picture } = useAppSelector(selectCurrentBoard);
+
+  const activeStyle = useActiveStyle();
   
   const { id } = picture
   const uri = getInvestigatorImageUrl(id, 'full');
@@ -26,16 +29,20 @@ export const PortraitImage = ({
     picture
   });
 
-  if (!imageLayout) {
-    return null;
-  }
 
   return (
-    <C.Container {...props} layout={layout}>
-      <C.Background 
-        source={source}
-        layout={imageLayout}
-      />
+    <C.Container 
+      {...props} 
+      layout={layout}
+    >
+      <C.Content style={activeStyle}>
+        {imageLayout && (
+          <C.Background 
+            source={source}
+            layout={imageLayout}
+          />
+        )}
+      </C.Content>
     </C.Container>
   );
 }

@@ -5,7 +5,8 @@ import { useAnimatedStyle, useSharedValue, withTiming } from "react-native-reani
 
 export const useActiveStyle = () => {
   const board = useAppSelector(selectCurrentBoard);
-  const { actions } = board.value;
+ 
+  const actions = board?.value.actions || 0;
 
   useEffect(() => {
     grayscale.value = actions > 0 ? 0 : 1;
@@ -13,7 +14,7 @@ export const useActiveStyle = () => {
 
   const grayscale = useSharedValue(0);
 
-  const style = useAnimatedStyle((): ViewStyle => {
+  return useAnimatedStyle((): ViewStyle => {
     return {
       filter: [
         {
@@ -24,6 +25,4 @@ export const useActiveStyle = () => {
       ]
     };
   });
-
-  return style;
 }

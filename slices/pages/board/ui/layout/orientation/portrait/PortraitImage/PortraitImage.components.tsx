@@ -25,6 +25,10 @@ type BackgroundContainerProps = ViewProps & {
   layout: HeaderLayout
 }
 
-export const Container: FC<BackgroundContainerProps> = styled(Animated.View)`
+export const Container: FC<BackgroundContainerProps> = styled(View)`
   overflow: hidden;
+`
+
+export const Content: FC<ViewProps> = styled(Animated.View)`
+  flex: 1;
 `

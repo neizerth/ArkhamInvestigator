@@ -1,5 +1,6 @@
 import { color } from "@shared/config";
-import { IconNumber, Row as BaseRow, TouchableOpacity } from "@shared/ui";
+import { IconNumber, Row as BaseRow } from "@shared/ui";
+import { Picker as BasePicker } from "@widgets/picker";
 import { Pressable, View } from "react-native";
 import Animated from "react-native-reanimated";
 import styled from "styled-components/native";
@@ -38,8 +39,18 @@ export const Background: typeof View = styled(View)`
 export const Value: typeof IconNumber = styled(IconNumber)
   .attrs({
     contentContainerStyle: {
-      justifyContent: 'flex-end'
+      alignItems: 'center',
+      justifyContent: 'center'
     }
   })`
     color: ${color.text};
+  `
+
+export const Picker: typeof BasePicker = styled(BasePicker)
+  .attrs({
+    contentContainerStyle: {
+      justifyContent: 'center'
+    }
+  })`
+  
   `

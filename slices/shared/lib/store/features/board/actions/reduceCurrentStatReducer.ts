@@ -1,5 +1,6 @@
 import type  { ActionCreator } from "@reduxjs/toolkit";
-import { selectCurrentBoard, setCurrentBoard } from "../";
+import { setCurrentBoard } from "./setCurrentBoard";
+import { selectCurrentBoard } from "../selectors/selectCurrentBoard";
 import type { AppThunk } from "@shared/lib/store";
 import type  { InvestigatorBoardValues } from "@shared/model";
 import { v4 } from "uuid";

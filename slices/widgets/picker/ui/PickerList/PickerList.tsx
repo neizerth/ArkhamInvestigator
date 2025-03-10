@@ -32,7 +32,6 @@ export const PickerList = ({
   const [canPress, setCanPressed] = useBooleanRef(false);
 
   const index = useRef(0);
-  const listRef = useRef<FlatList>(null);
 
   const itemHeight = props.itemHeight + gap;
 
@@ -58,18 +57,6 @@ export const PickerList = ({
   );
 
   const defaultOffset = defaultIndex * itemHeight;
-
-  useEffect(() => {
-    if (!listRef.current) {
-      return;
-    }
-    
-    listRef.current.scrollToOffset({
-      offset: defaultOffset,
-      animated: true
-    });
-    
-  }, [defaultOffset]);
 
   const snapToOffsets = useMemo(
     () => data.map((_, i) => i * itemHeight),
@@ -154,6 +141,12 @@ export const PickerList = ({
     clearTimeout(longPressTimeout.current);
   }, [canPress, setCanPressed, onPress, setActivity]);
 
+  const getItemLayout = useCallback((_, index: number) => ({
+    length: itemHeight,
+    offset: itemHeight * index,
+    index: index,
+  }), [itemHeight])
+
   const style = {
     height: itemHeight,
   }
@@ -161,7 +154,6 @@ export const PickerList = ({
   return (
     <C.List
       data={data}
-      ref={listRef}
       renderItem={renderListItem}
       style={[
         props.style,
@@ -170,6 +162,8 @@ export const PickerList = ({
       contentContainerStyle={[
         props.contentContainerStyle,
       ]}
+      getItemLayout={getItemLayout}
+      initialScrollIndex={defaultIndex}
       onTouchStart={onTouchStart}
       onTouchEnd={onTouchEnd}
       onMomentumScrollEnd={onScrollEnd}

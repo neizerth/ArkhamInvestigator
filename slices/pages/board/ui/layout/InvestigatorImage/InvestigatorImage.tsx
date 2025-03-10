@@ -3,7 +3,7 @@ import * as C from './InvestigatorImage.components';
 import { useContext } from 'react';
 import { LayoutContext } from '@pages/board/config';
 import { selectCurrentBoard, useAppSelector } from '@shared/lib';
-import { useActiveStyle } from './useActiveStyle';
+// import { useActiveStyle } from './useActiveStyle';
 
 export type InvestigatorImageProps = ViewProps;
 
@@ -11,7 +11,6 @@ export const InvestigatorImage = ({
  ...props
 }: InvestigatorImageProps) => {
   const { view, layout } = useContext(LayoutContext);
-  const activeStyle = useActiveStyle();
 
   return (
     <C.Container 
@@ -24,7 +23,7 @@ export const InvestigatorImage = ({
           layout={layout}
         />
         {layout.type === 'column' && (
-          <C.PortraitBackground style={activeStyle}/>
+          <C.PortraitBackground/>
         )}
         {layout.type === 'row' && (
           <C.LandscapeBackground
