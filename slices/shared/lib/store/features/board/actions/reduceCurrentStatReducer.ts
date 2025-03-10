@@ -17,9 +17,11 @@ export const reduceCurrentStat: ActionCreator<AppThunk> = <T extends keyof Inves
       return;
     }
     
+    const boardValue = reducer(board.value[type]);
+
     const value = {
       ...board.value, 
-      [type]: reducer(board.value[type]) 
+      [type]: boardValue 
     }
 
     const history = [
