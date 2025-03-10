@@ -4,6 +4,7 @@ import type { FC } from "react"
 import { View } from "react-native"
 import { Image, type ImageProps } from "react-native"
 import type { ViewProps } from "react-native"
+import Animated from "react-native-reanimated"
 import styled, { css } from "styled-components/native"
 
 type BackgroundProps = ImageProps & {
@@ -24,6 +25,6 @@ type BackgroundContainerProps = ViewProps & {
   layout: HeaderLayout
 }
 
-export const Container: FC<BackgroundContainerProps> = styled(View)`
+export const Container: FC<BackgroundContainerProps> = styled(Animated.View)`
   overflow: hidden;
 `
