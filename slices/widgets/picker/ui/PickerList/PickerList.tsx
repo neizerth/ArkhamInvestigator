@@ -1,7 +1,7 @@
 import type { FlatList, ListRenderItemInfo, NativeScrollEvent, NativeSyntheticEvent, ScrollView } from 'react-native';
 import * as C from './PickerList.components';
-import { RefObject, useCallback, useEffect, useMemo, useRef } from 'react';
-import { useBoolean } from '@shared/lib/hooks';
+import { useCallback, useEffect, useMemo, useRef } from 'react';
+import { useBooleanRef } from '@shared/lib/hooks';
 import type { PickerListProps } from '@widgets/picker/model';
 import { defaultRenderItemContainer } from './defaultRenderItemContainer';
 import { safeIndexOf } from '@shared/lib';
@@ -23,11 +23,14 @@ export const PickerList = ({
   onChange,
   delayLongPress = 500,
   onLongPress,
-  gap = MIN_FINGER_SIZE,
+  onPress,
+  gap = 0,
   ...props
 }: PickerListProps) => {
-  const [activated, setActivity] = useBoolean(false);
+  const [activated, setActivity] = useBooleanRef(false)
   const longPressTimeout = useRef<NodeJS.Timeout>();
+  const [canPress, setCanPressed] = useBooleanRef(false);
+
   const index = useRef(0);
   const listRef = useRef<FlatList>(null);
 
@@ -66,22 +69,32 @@ export const PickerList = ({
     [data, itemHeight],
   );
 
-
   const onScrollEnd = useCallback(() => {
 
+    if (!activated) {
+      return;
+    }
+    
     const nextValue = data[index.current];
 
     if (value === nextValue) {
       return;
     }
-
+    
     onChange?.({
       value: nextValue,
       index: index.current
     })
-  }, [data, onChange, value])
+
+    setActivity.off();
+  }, [data, onChange, value, setActivity, activated])
 
   const onScroll = useCallback((e: ListScrollEvent) => {
+    setCanPressed.off();
+
+    if (longPressTimeout.current) {
+      clearTimeout(longPressTimeout.current);
+    }
     const offset = e.nativeEvent.contentOffset.y;
     const scrollIndex = Math.round(offset / itemHeight);
 
@@ -94,26 +107,45 @@ export const PickerList = ({
     }
     
     times(tick, n);
-  }, [itemHeight, activated]);
+  }, [itemHeight, activated, setCanPressed]);
 
   const onTouchStart = useCallback(() => {
     setActivity.on();
+    setCanPressed.on();
 
     if (!onLongPress) {
       return;
     }
     longPressTimeout.current = setTimeout(() => {
+      if (!canPress.current) {
+        return;
+      }
+      setCanPressed.off()
+      setActivity.off();
+
       tick();
       onLongPress();
     }, delayLongPress);
-  }, [setActivity, onLongPress, delayLongPress]);
+    
+  }, [setActivity, onLongPress, delayLongPress, setCanPressed, canPress]);
 
   const onTouchEnd = useCallback(() => {
+    if (canPress.current && onPress) {
+      clearTimeout(longPressTimeout.current);
+
+      setCanPressed.off()
+      setActivity.off();
+      tick();
+      onPress()
+
+      return;
+    }
+
     if (!longPressTimeout.current) {
       return;
     }
     clearTimeout(longPressTimeout.current);
-  }, []);
+  }, [canPress, setCanPressed, onPress, setActivity]);
 
   const style = {
     height: itemHeight,

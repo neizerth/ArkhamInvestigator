@@ -14,7 +14,9 @@ export const Picker = ({
   visibleItemsCount,
   listStyle,
   onLongPress,
+  onPress,
   delayLongPress,
+  gap,
   ...restProps
 }: PickerProps) => {
   return (
@@ -30,7 +32,9 @@ export const Picker = ({
         visibleItemsCount={visibleItemsCount}
         style={listStyle}
         onLongPress={onLongPress}
+        onPress={onPress}
         delayLongPress={delayLongPress}
+        gap={gap}
       />  
     </C.Container>
   );

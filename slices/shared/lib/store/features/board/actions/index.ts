@@ -1,2 +1,5 @@
 export * from './addCurrentSkillCheckToHistory'
 export * from './setCurrentBoard'
+export * from './decreaseCurrentStat'
+export * from './setCurrentStat'
+export * from './increaseCurrentStat'

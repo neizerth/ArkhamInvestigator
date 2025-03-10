@@ -1,11 +1,10 @@
 import type  { ActionCreator } from "@reduxjs/toolkit";
 import { type  AppThunk, selectCurrentBoard, setCurrentBoard } from "@shared/lib/store";
 import type  { InvestigatorBoardStat, InvestigatorBoardValues } from "@shared/model";
-import { v4 } from "uuid";
 import { reduceCurrentStat } from "./reduceCurrentStatReducer";
-import { always } from "ramda";
+import { inc } from "ramda";
 
-export const setCurrentStat: ActionCreator<AppThunk> = <T extends keyof InvestigatorBoardValues>(
-  type: T, 
-  statValue: InvestigatorBoardValues[T]
-) => dispatch => dispatch(reduceCurrentStat(type, always(statValue)));
+export const increaseCurrentStat: ActionCreator<AppThunk> = (type: InvestigatorBoardStat) => 
+  (dispatch) => {
+    dispatch(reduceCurrentStat(type, inc));
+  }

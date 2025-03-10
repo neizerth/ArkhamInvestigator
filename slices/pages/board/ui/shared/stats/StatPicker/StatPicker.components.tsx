@@ -12,7 +12,8 @@ export const Picker: typeof BasePicker = styled(BasePicker)
     },
     listStyle: {
       borderRadius: 80
-    }
+    },
+    gap: 48
   })`
   
   `
