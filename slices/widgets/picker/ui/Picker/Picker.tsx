@@ -1,9 +1,7 @@
-import { ReactElement, useRef } from 'react';
+import { useRef } from 'react';
 import * as C from './Picker.components';
-import { PickerList } from './PickerList';
-import type { PickerProps } from './Picker.types';
-
-export * from './Picker.types'
+import { PickerList } from '../PickerList';
+import type { PickerProps } from '@widgets/picker/model';
 
 export const Picker = ({
   value,
@@ -11,15 +9,17 @@ export const Picker = ({
   onValueChanged,
   renderItem,
   renderItemContainer,
-  itemHeight,
+  itemHeight = 24,
   itemContainerStyle,
+  visibleItemsCount,
+  listStyle,
+  onLongPress,
+  delayLongPress,
   ...restProps
 }: PickerProps) => {
-  const listRef = useRef(null);
   return (
     <C.Container {...restProps}>
       <PickerList
-        listRef={listRef}
         value={value}
         data={data}
         onChange={onValueChanged}
@@ -27,6 +27,10 @@ export const Picker = ({
         renderItemContainer={renderItemContainer}
         itemHeight={itemHeight}
         itemContainerStyle={itemContainerStyle}
+        visibleItemsCount={visibleItemsCount}
+        style={listStyle}
+        onLongPress={onLongPress}
+        delayLongPress={delayLongPress}
       />  
     </C.Container>
   );

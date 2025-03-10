@@ -4,7 +4,7 @@ import { selectCurrentBoard, useAppDispatch, useAppSelector } from '@shared/lib'
 import { range } from 'ramda';
 import { setCurrentStat } from '@shared/lib/store/features/board/actions/setCurrentStat';
 import { useCallback } from 'react';
-import type { PickerValueChangedEvent } from '../../features';
+import type { PickerChangeEvent } from '../../features';
 
 export type ResourcesProps = ViewProps
 
@@ -13,12 +13,7 @@ export const Resources = ({
 }: ResourcesProps) => {
   const dispatch = useAppDispatch()
   const { value } = useAppSelector(selectCurrentBoard);
-  const onChange = useCallback(({ item }: PickerValueChangedEvent) => {
-    if (!item) {
-      return;
-    }
-    const { value } = item;
-
+  const onChange = useCallback(({ value }: PickerChangeEvent) => {
     dispatch(setCurrentStat('resources', value))
   }, [dispatch]);
 

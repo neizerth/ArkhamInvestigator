@@ -37,7 +37,7 @@ export const Background: typeof View = styled(View)`
 
 export const Value: typeof IconNumber = styled(IconNumber)
   .attrs({
-    containerStyle: {
+    contentContainerStyle: {
       justifyContent: 'flex-end'
     }
   })`

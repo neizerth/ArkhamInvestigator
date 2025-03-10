@@ -1,9 +1,9 @@
 import type  { ActionCreator } from "@reduxjs/toolkit";
 import { type  AppThunk, selectCurrentBoard, setCurrentBoard } from "@shared/lib/store";
-import type  { InvestigatorBoardStat } from "@shared/model";
+import type  { InvestigatorBoardStat, InvestigatorBoardValues } from "@shared/model";
 import { v4 } from "uuid";
 
-export const setCurrentStat: ActionCreator<AppThunk> = (type: InvestigatorBoardStat, statValue: number) => 
+export const setCurrentStat: ActionCreator<AppThunk> = <T extends InvestigatorBoardStat>(type: T, statValue: InvestigatorBoardValues[T]) => 
   (dispatch, getState) => {
     const state = getState();
 

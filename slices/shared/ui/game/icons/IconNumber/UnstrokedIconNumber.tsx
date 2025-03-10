@@ -3,12 +3,12 @@ import type { IconNumberComponentProps } from "./IconNumber.types";
 
 export const UnstrokedIconNumber = ({
   value,
-  containerStyle,
+  contentContainerStyle,
   ...props
 }: IconNumberComponentProps) => {
   
   return (
-    <C.Container style={containerStyle}>
+    <C.Container style={contentContainerStyle}>
       <C.UnstrokedText {...props}>{value}</C.UnstrokedText>
     </C.Container>
   );

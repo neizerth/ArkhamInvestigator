@@ -2,18 +2,14 @@ import type { HealthProps } from '@shared/ui'
 import * as C from './Health.components'
 import { selectCurrentBoard, useAppDispatch, useAppSelector } from '@shared/lib'
 import { useCallback } from 'react'
-import { PickerValueChangedEvent } from '../../features'
+import { PickerChangeEvent } from '../../features'
 import { setCurrentStat } from '@shared/lib/store/features/board/actions/setCurrentStat'
 import { range } from 'ramda'
 
 export const Health = (props: HealthProps) => {
   const dispatch = useAppDispatch()
   const { value, baseValue } = useAppSelector(selectCurrentBoard);
-  const onChange = useCallback(({ item }: PickerValueChangedEvent) => {
-    if (!item) {
-      return;
-    }
-    const { value } = item;
+  const onChange = useCallback(({ value }: PickerChangeEvent) => {
 
     dispatch(setCurrentStat('health', value))
   }, [dispatch]);

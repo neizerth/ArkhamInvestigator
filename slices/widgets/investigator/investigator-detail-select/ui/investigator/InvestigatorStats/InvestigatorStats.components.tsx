@@ -19,7 +19,7 @@ export const Sanity: typeof BaseSanity = styled(BaseSanity)`
 export const Value: typeof IconNumber = styled(IconNumber)
   .attrs({
     stroke: true,
-    containerStyle: {
+    contentContainerStyle: {
       flex: 0
     }
   })`

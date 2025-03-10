@@ -3,7 +3,7 @@ import * as C from './Sanity.components';
 import type { ViewProps } from 'react-native';
 import { selectCurrentBoard, useAppDispatch, useAppSelector } from '@shared/lib';
 import { useCallback } from 'react';
-import { PickerValueChangedEvent } from '../../features';
+import { PickerChangeEvent } from '../../features';
 import { setCurrentStat } from '@shared/lib/store/features/board/actions/setCurrentStat';
 import { range } from 'ramda';
 
@@ -14,11 +14,7 @@ export const Sanity = ({
 }: SanityProps) => {
   const dispatch = useAppDispatch()
   const { value, baseValue } = useAppSelector(selectCurrentBoard);
-  const onChange = useCallback(({ item }: PickerValueChangedEvent) => {
-    if (!item) {
-      return;
-    }
-    const { value } = item;
+  const onChange = useCallback(({ value }: PickerChangeEvent) => {
 
     dispatch(setCurrentStat('sanity', value))
   }, [dispatch]);
@@ -26,7 +22,7 @@ export const Sanity = ({
   return (
     <C.Container {...props}>
       <C.Picker
-        value={value.health}
+        value={value.sanity}
         data={range(0, baseValue.sanity + 1)}
         onValueChanged={onChange}
       />

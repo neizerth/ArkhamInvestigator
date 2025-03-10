@@ -1,17 +1,17 @@
 import styled from 'styled-components/native';
-import { Picker as BasePicker } from '../../features';
+import { Picker as BasePicker } from '@widgets/picker';
 import { ValueMemo as BaseValue, type ValueProps as BaseValueProps } from '../Value';
-import { FC } from 'react';
+import type { FC } from 'react';
 import { View } from 'react-native';
 
 
 export const Picker: typeof BasePicker = styled(BasePicker)
   .attrs({
-    overlayItemStyle: {
-      justifyContent: 'center'
-    },
     contentContainerStyle: {
       justifyContent: 'center'
+    },
+    listStyle: {
+      borderRadius: 80
     }
   })`
   
@@ -24,6 +24,13 @@ export const Item: typeof View = styled(View)`
 ` 
 
 
-export const Value: FC<BaseValueProps> = styled(BaseValue)`
-    
+export const Value: FC<BaseValueProps> = styled(BaseValue)
+  .attrs({
+    contentContainerStyle: {
+      alignItems: 'center',
+      justifyContent: 'center'
+    }
+  })`
+  justify-content: center;
+  align-items: center;
 `

@@ -4,17 +4,13 @@ import { selectCurrentBoard, useAppDispatch, useAppSelector } from '@shared/lib'
 import { range } from 'ramda';
 import { useCallback } from 'react';
 import { setCurrentStat } from '@shared/lib/store/features/board/actions/setCurrentStat';
-import { PickerValueChangedEvent } from '../../features';
+import { Item } from '@pages/skill-check/ui/layout/evaluation/ExpressionHistory/ExpressionHistory.components';
+import { PickerChangeEvent } from '../../features';
 
 export const Clues = (props: ClueProps) => {
   const dispatch = useAppDispatch()
   const { value } = useAppSelector(selectCurrentBoard);
-  const onChange = useCallback(({ item }: PickerValueChangedEvent) => {
-    if (!item) {
-      return;
-    }
-    const { value } = item;
-
+  const onChange = useCallback(({ value }: PickerChangeEvent) => {
     dispatch(setCurrentStat('clues', value))
   }, [dispatch]);
 
