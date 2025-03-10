@@ -1,6 +1,7 @@
 import type  { ActionCreator } from "@reduxjs/toolkit";
-import { type  AppThunk, selectCurrentBoard, setCurrentBoard } from "@shared/lib/store";
-import type  { InvestigatorBoardStat, InvestigatorBoardValues } from "@shared/model";
+import { selectCurrentBoard, setCurrentBoard } from "../";
+import type { AppThunk } from "@shared/lib/store";
+import type  { InvestigatorBoardValues } from "@shared/model";
 import { v4 } from "uuid";
 
 export const reduceCurrentStat: ActionCreator<AppThunk> = <T extends keyof InvestigatorBoardValues>(

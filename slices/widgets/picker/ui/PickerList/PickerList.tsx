@@ -36,6 +36,13 @@ export const PickerList = ({
 
   const itemHeight = props.itemHeight + gap;
 
+  useEffect(() => {
+    setActivity.off()
+    return () => {
+      setActivity.off()
+    }
+  }, [setActivity])
+
   const renderListItem = useCallback((info: ListRenderItemInfo<number>) => {
     return renderItemContainer({
       ...info,
@@ -71,7 +78,7 @@ export const PickerList = ({
 
   const onScrollEnd = useCallback(() => {
 
-    if (!activated) {
+    if (!activated.current) {
       return;
     }
     
@@ -102,7 +109,7 @@ export const PickerList = ({
 
     index.current = scrollIndex;
 
-    if (!activated) {
+    if (!activated.current) {
       return;
     }
     

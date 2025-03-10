@@ -1,4 +1,4 @@
-import { selectCurrentBoard, useAppDispatch, useAppSelector } from '@shared/lib';
+import { decreaseCurrentStat, increaseCurrentStat, selectCurrentBoard, useAppDispatch, useAppSelector } from '@shared/lib';
 import * as C from './Actions.components';
 import { ViewProps } from 'react-native';
 import { useCallback } from 'react';
@@ -13,7 +13,7 @@ export const Actions = ({
 }: ActionsProps) => {
   const dispatch = useAppDispatch()
   const { value, baseValue } = useAppSelector(selectCurrentBoard);
-  const { additionalAction } = value;
+  const { additionalAction, actions } = value;
 
   const onChange = useCallback(({ value }: PickerChangeEvent) => {
 
@@ -24,6 +24,16 @@ export const Actions = ({
     dispatch(setCurrentStat('additionalAction', !additionalAction))
   }, [dispatch, additionalAction]);
 
+  const onLongPress = useCallback(() => {
+    dispatch(increaseCurrentStat('actions'))
+  }, [dispatch]);
+
+  const onPress = useCallback(() => {
+    const value = actions === 0 ? baseValue.actions : actions - 1;
+    dispatch(decreaseCurrentStat('actions', value))
+
+  }, [dispatch, actions, baseValue.actions]);
+
   return (
     <C.Container {...props}>
       <C.Content>
@@ -31,6 +41,8 @@ export const Actions = ({
           value={value.actions}
           data={range(0, 101)}
           onValueChanged={onChange}
+          onPress={onPress}
+          onLongPress={onLongPress}
         />
 
         {baseValue.additionalAction && (

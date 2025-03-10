@@ -4,7 +4,15 @@ import type  { InvestigatorBoardStat, InvestigatorBoardValues } from "@shared/mo
 import { reduceCurrentStat } from "./reduceCurrentStatReducer";
 import { inc } from "ramda";
 
-export const increaseCurrentStat: ActionCreator<AppThunk> = (type: InvestigatorBoardStat) => 
+export const increaseCurrentStat: ActionCreator<AppThunk> = (
+  type: InvestigatorBoardStat,
+  maxValue = Number.POSITIVE_INFINITY
+) => 
   (dispatch) => {
-    dispatch(reduceCurrentStat(type, inc));
+    dispatch(
+      reduceCurrentStat(
+        type, 
+        (value: number) => Math.min(value + 1, maxValue)
+      )
+    );
   }

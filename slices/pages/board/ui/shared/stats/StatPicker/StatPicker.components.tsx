@@ -24,7 +24,6 @@ export const Item: typeof View = styled(View)`
   align-items: center;
 ` 
 
-
 export const Value: FC<BaseValueProps> = styled(BaseValue)
   .attrs({
     contentContainerStyle: {

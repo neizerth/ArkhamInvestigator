@@ -1,6 +1,6 @@
 import * as C from './Resources.components';
 import type { ViewProps } from 'react-native';
-import { selectCurrentBoard, useAppDispatch, useAppSelector } from '@shared/lib';
+import { decreaseCurrentStat, increaseCurrentStat, selectCurrentBoard, useAppDispatch, useAppSelector } from '@shared/lib';
 import { range } from 'ramda';
 import { setCurrentStat } from '@shared/lib/store/features/board/actions/setCurrentStat';
 import { useCallback } from 'react';
@@ -17,12 +17,22 @@ export const Resources = ({
     dispatch(setCurrentStat('resources', value))
   }, [dispatch]);
 
+  const onLongPress = useCallback(() => {
+    dispatch(increaseCurrentStat('resources'))
+  }, [dispatch]);
+
+  const onPress = useCallback(() => {
+    dispatch(decreaseCurrentStat('resources', 0))
+  }, [dispatch]);
+
   return (
     <C.Container {...props}>
       <C.Picker
         value={value.resources}
         data={range(0, 101)}
         onValueChanged={onChange}
+        onLongPress={onLongPress}
+        onPress={onPress}
       />
     </C.Container>
   );

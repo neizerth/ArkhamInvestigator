@@ -18,7 +18,7 @@ export const Clues = (props: ClueProps) => {
   }, [dispatch]);
 
   const onPress = useCallback(() => {
-    dispatch(decreaseCurrentStat('clues'))
+    dispatch(decreaseCurrentStat('clues', 0))
   }, [dispatch]);
 
   return (
