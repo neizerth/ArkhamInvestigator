@@ -36,14 +36,12 @@ export const PortraitLayout = ({
         <C.RightSidebar view={view} style={offset}/>
         <C.LeftSidebar view={view} style={offset}/>
         <C.Footer/>
-        {showDescription && (
-          <C.Overlay style={overlayStyle}>
-            <C.OverlayArea 
-              style={StyleSheet.absoluteFill} 
-              onPress={hideDescription}
-            />
-          </C.Overlay>
-        )}
+        <C.Overlay style={overlayStyle}>
+          <C.OverlayArea 
+            style={StyleSheet.absoluteFill} 
+            onPress={hideDescription}
+          />
+        </C.Overlay>
       </C.Container>
     </PortraitLayoutContext.Provider>
   );

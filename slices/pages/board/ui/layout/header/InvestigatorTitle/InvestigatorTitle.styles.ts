@@ -17,6 +17,7 @@ type ReturnStyle = {
   subtitle: ViewStyle
   subtitleText: TextStyle
   unique: TextStyle
+  id: TextStyle
 }
 
 export const getTitleStyle = (options: GetTitleStyleOptions) => {
@@ -35,6 +36,9 @@ export const getTitleStyle = (options: GetTitleStyleOptions) => {
       },
       titleText: {
         fontSize: 45 * vh * font.scale,
+      },
+      id: {
+        fontSize: 30 * vh * font.scale,
       }
     }
   })
@@ -82,13 +86,18 @@ export const getTitleStyle = (options: GetTitleStyleOptions) => {
     color: textColor
   }
 
+  const id: TextStyle = {
+    color: color.dark10
+  }
+
   const base = {
     container,
     title,
     titleText,
     subtitle,
     subtitleText,
-    unique
+    unique,
+    id
   }
   
   return mergeDeepRight(

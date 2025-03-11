@@ -1,6 +1,6 @@
 import type { FlatList, ListRenderItemInfo, NativeScrollEvent, NativeSyntheticEvent, ScrollView } from 'react-native';
 import * as C from './PickerList.components';
-import { useCallback, useEffect, useMemo, useRef } from 'react';
+import { memo, useCallback, useEffect, useMemo, useRef } from 'react';
 import { useBooleanRef } from '@shared/lib/hooks';
 import type { PickerListProps } from '@widgets/picker/model';
 import { defaultRenderItemContainer } from './defaultRenderItemContainer';
@@ -30,6 +30,7 @@ export const PickerList = ({
   const activated = useRef(false);
   const canPress = useRef(false);
   const uiSync = useRef(false);
+  
   const longPressTimeout = useRef<NodeJS.Timeout>();
 
   const index = useRef(0);
@@ -59,6 +60,9 @@ export const PickerList = ({
 
   useEffect(() => {
     if (!listRef.current) {
+      return;
+    }
+    if (index.current === defaultIndex) {
       return;
     }
     uiSync.current = true;
@@ -119,6 +123,7 @@ export const PickerList = ({
   const onTouchStart = useCallback(() => {
     activated.current = true;
     canPress.current = true;
+    uiSync.current = false;
 
     if (!onLongPress) {
       return;
@@ -189,3 +194,5 @@ export const PickerList = ({
     />
   )
 }
+
+export const PickerListMemo = memo(PickerList);

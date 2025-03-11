@@ -1,5 +1,5 @@
 import styled from 'styled-components/native';
-import { Picker as BasePicker } from '@widgets/picker';
+import { PickerMemo as BasePicker } from '@widgets/picker';
 import { ValueMemo as BaseValue, type ValueProps as BaseValueProps } from '../Value';
 import type { FC } from 'react';
 import { View } from 'react-native';

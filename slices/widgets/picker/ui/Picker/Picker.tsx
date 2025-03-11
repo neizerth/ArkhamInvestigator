@@ -1,6 +1,6 @@
-import { useRef } from 'react';
+import { memo, useRef } from 'react';
 import * as C from './Picker.components';
-import { PickerList } from '../PickerList';
+import { PickerListMemo as PickerList } from '../PickerList';
 import type { PickerProps } from '@widgets/picker/model';
 
 export const Picker = ({
@@ -39,3 +39,5 @@ export const Picker = ({
     </C.Container>
   );
 }
+
+export const PickerMemo = memo(Picker);

@@ -3,9 +3,10 @@ import { ArnoPro } from "@shared/fonts/ArnoPro";
 import { Conkordia } from "@shared/fonts/Conkordia";
 import { Teutonic } from "@shared/fonts/Teutonic";
 import { withIcon, withLocaleFont } from "@shared/lib/hoc";
-import { DefinedIconProps, Icon, Row } from "@shared/ui";
+import { DefinedIconProps, Icon, IconNumber, Row } from "@shared/ui";
 import type { FC } from "react";
 import type { ImageBackgroundProps, ImageProps } from "react-native";
+import { Text } from "react-native";
 import { ImageBackground, View } from "react-native";
 import styled, { css } from "styled-components/native";
 
@@ -19,6 +20,10 @@ export const Container: FC<ImageBackgroundProps> = styled(ImageBackground)`
 export const Title: typeof Row = styled(Row)`
   align-items: center;
   justify-content: center;
+` 
+
+export const Id: typeof Text = styled(Text)`
+  font-family: ${Teutonic.regular};
 ` 
 
 export const TitleText = withLocaleFont({

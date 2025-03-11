@@ -15,7 +15,7 @@ export const InvestigatorTitle = ({
   ...props
 }: InvestigatorTitleProps) => {
   const { layout } = useContext(LayoutContext);
-  const { investigator, isParallel, unique } = useAppSelector(selectCurrentBoard);
+  const { investigator, isParallel, unique, id } = useAppSelector(selectCurrentBoard);
   const faction = investigator.faction_code as Faction;
 
   const { name, subname = '' } = investigator;
@@ -45,7 +45,11 @@ export const InvestigatorTitle = ({
         )}
         <C.TitleText style={style.titleText}>
           {name}
+          
         </C.TitleText>
+        {!unique && (
+          <C.Id style={style.id}> ({id})</C.Id>
+        )}
       </C.Title>
       <C.Subtitle style={style.subtitle}>
         <C.SubtitleText style={style.subtitleText}>

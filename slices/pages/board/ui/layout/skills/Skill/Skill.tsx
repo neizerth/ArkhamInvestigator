@@ -4,7 +4,7 @@ import type { ViewProps } from 'react-native';
 import { navigateTo, selectCurrentBoard, setCurrentStat, startSkillCheck, useAppDispatch, useAppSelector } from '@shared/lib';
 import { useCallback, useContext, useState } from 'react';
 import { SkillsContext } from '@pages/board/config';
-import { getSkillStyle } from './Skill.styles';
+import { getSkillStyle, getSkillValueStyle } from './Skill.styles';
 import { impactHapticFeedback } from '@features/haptic';
 import { PickerChangeEvent, PickerItemInfo } from '@widgets/picker';
 import { range } from 'ramda';
@@ -13,7 +13,7 @@ export type SkillProps = ViewProps & {
   type: InvestigatorSkillType
 }
 
-const SKILL_RANGE = range(-12, 20);
+const SKILL_RANGE = range(0, 21);
 
 export const Skill = ({
   type,
@@ -21,15 +21,12 @@ export const Skill = ({
 }: SkillProps) => {
   const box = useContext(SkillsContext);
   const dispatch = useAppDispatch();
-  const { value, isParallel } = useAppSelector(selectCurrentBoard);
+  const { value, baseValue, isParallel } = useAppSelector(selectCurrentBoard);
   const [pressing, setPressing] = useState(false);
   const skillValue = value[type];
+  const baseSkillValue = baseValue[type];
 
-  const style = getSkillStyle({
-    box,
-    isParallel,
-    value: skillValue
-  });
+  const style = getSkillStyle({box});
 
   const onPressIn = useCallback(() => {
     setPressing(true)
@@ -51,20 +48,21 @@ export const Skill = ({
   const renderItem = useCallback((props: PickerItemInfo) => {
     const { item } = props;
 
-    const style = getSkillStyle({
+    const style = getSkillValueStyle({
       box,
       isParallel,
-      value: item
+      value: item,
+      baseValue: baseSkillValue
     });
 
     return (
       <C.Value
         {...props}
         value={item}
-        style={style.value}
+        style={style}
       />
     )
-  }, [box, isParallel]);
+  }, [box, baseSkillValue, isParallel]);
 
   const itemHeight = box.height * 0.8;
 

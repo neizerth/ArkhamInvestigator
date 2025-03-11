@@ -16,7 +16,7 @@ export const getInvestigatorBoards = ({
   selectedInvestigators,
   mediaItems
 }: GetBoardInvestigators) => selectedInvestigators
-  .map((item): InvestigatorBoard | null => {
+  .map((item, index): InvestigatorBoard | null => {
     const { code } = item;
     const investigator = investigators.find(propEq(code, 'code'));
     const media = mediaItems.find(propEq(code, 'code')); 
@@ -40,8 +40,10 @@ export const getInvestigatorBoards = ({
       actions: NEW_TURN_ACTIONS_COUNT,
       clues: 0
     }
+    const id = index + 1;
     
     return {
+      id,
       investigator,
       picture,
       baseValue: { ...value },

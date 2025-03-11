@@ -16,6 +16,7 @@ export type InvestigatorBoardValues = Record<InvestigatorBoardStat, number> & {
 
 
 export type InvestigatorBoard = {
+  id: number
   investigator: InvestigatorSource
   picture: InvestigatorPicture
   isParallel: boolean
