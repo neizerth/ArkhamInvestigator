@@ -50,5 +50,24 @@ export const color = {
   clue: '#486527',
   action: '#24303C',
   text: '#2e2622',
-  skill: skillColors
+
+  status: {
+    success: '#314629',
+    error: '#552D2D',
+    warn: '#C50707',
+    warnText: '#FB4135',
+  },
+  token: {
+    skull: '#915c5c',
+    cultist: '#669154',
+    tablet: '#548994',
+    elder_thing: '#a661ab',
+    auto_fail: '#bf2128',
+    elder_sign: '#5496cc',
+    bless: '#ebaa42',
+    curse: '#b069c9',
+    frost: '#6559f7',
+  },
+
+  skill: skillColors,
 }

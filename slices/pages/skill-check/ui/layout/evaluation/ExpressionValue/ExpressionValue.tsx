@@ -1,4 +1,4 @@
-import { getSkillCheckValue, selectCurrentBoard, selectSkillCheckData, useAppSelector } from '@shared/lib';
+import { getSkillCheckValue, sanitizeSkillCheckExpression, selectCurrentBoard, selectSkillCheckData, useAppSelector } from '@shared/lib';
 import * as C from './ExpressionValue.components';
 import { last } from 'ramda';
 
@@ -15,10 +15,7 @@ export const ExpressionValue = ({}: ExpressionValueProps) => {
     return null;
   }
 
-  const lastItem = last(data);
-  const validData = lastItem?.type === 'operator' ? 
-    data.slice(0, -1) : 
-    data;
+  const validData = sanitizeSkillCheckExpression(data);
 
   const value = getSkillCheckValue({
     data: validData,

@@ -1,8 +1,8 @@
 import * as C from './ExpressionDisplay.components';
-import { Fragment } from 'react';
+import { Fragment, useCallback } from 'react';
 import { iconMapping, operatorMapping } from './mapping';
 import type { ExpressionDisplayProps } from './ExpressionDisplay.types';
-import { selectSkillCheckHistory, useAppSelector } from '@shared/lib';
+import { getSkillCheckValue, sanitizeSkillCheckExpression, selectCurrentBoard, selectSkillCheckHistory, setSkillCheckData, useAppDispatch, useAppSelector } from '@shared/lib';
 import { last } from 'ramda';
 
 export type { ExpressionDisplayProps };
@@ -13,9 +13,19 @@ export const ExpressionDisplay = ({
   ...props
 }: ExpressionDisplayProps) => {
   const history = useAppSelector(selectSkillCheckHistory)
+  const board = useAppSelector(selectCurrentBoard);
+
   const { type } = props;
 
   const lastValue = last(history)?.value;
+
+  const validData = sanitizeSkillCheckExpression(data);
+  const currentValue = getSkillCheckValue({
+    data: validData,
+    value: board?.value
+  });
+
+
   return (
     <C.Container {...props}>
       <C.Expression type={type}>
@@ -32,7 +42,29 @@ export const ExpressionDisplay = ({
             )}
           </Fragment>
         ))}
-        {value !== undefined && `=${value}`}
+        {value !== undefined && (
+          value !== currentValue ? 
+          (
+            <>
+              <C.Value>=</C.Value>
+              <C.OldValue>
+                {value}
+              </C.OldValue>
+              {currentValue > value ? (
+                <C.Greater>↗</C.Greater>
+              ) : (
+                <C.Lower>↘</C.Lower>
+              )}
+              <C.Value>
+                {currentValue}
+              </C.Value>
+            </>
+          ) : (
+            <C.Value>
+              ={value}
+            </C.Value>
+          )
+        )}
       </C.Expression>
     </C.Container>
   );

@@ -1,8 +1,9 @@
 import type { ScrollView, ViewProps } from 'react-native';
 import * as C from './ExpressionHistory.components';
-import { getSkillCheckValue, selectCurrentBoard, selectSkillCheckHistory, useAppSelector } from '@shared/lib';
+import { getSkillCheckValue, selectCurrentBoard, selectSkillCheckHistory, setSkillCheckData, useAppDispatch, useAppSelector } from '@shared/lib';
 import { ExpressionDisplay } from '../ExpressionDisplay';
 import { useCallback, useRef } from 'react';
+import { SkillCheckItem } from '@shared/model';
 
 export type ExpressionHistoryProps = ViewProps & {
   size?: number;
@@ -12,6 +13,7 @@ export const ExpressionHistory = ({
   size = 1,
   ...props
 }: ExpressionHistoryProps) => {
+  const dispatch = useAppDispatch();
   const history = useAppSelector(selectSkillCheckHistory)
   const board = useAppSelector(selectCurrentBoard);
 
@@ -40,6 +42,11 @@ export const ExpressionHistory = ({
     ref.current.scrollToEnd();
   }, [])
 
+
+  const setCurrentValue = useCallback((data: SkillCheckItem[]) => () => {
+    dispatch(setSkillCheckData(data));
+  }, [dispatch])
+
   return (
     <C.Container 
       {...props}
@@ -52,6 +59,7 @@ export const ExpressionHistory = ({
             data={item.expression}
             type="secondary"
             value={item.value}
+            onPress={setCurrentValue(item.expression)}
           />
         </C.Item>
         

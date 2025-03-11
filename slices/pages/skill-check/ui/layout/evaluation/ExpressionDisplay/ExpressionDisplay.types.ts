@@ -1,7 +1,7 @@
 import type { SkillCheckItem } from "@shared/model"
-import type { ViewProps } from "react-native"
+import { TouchableOpacityProps } from "@shared/ui"
 
-export type ExpressionDisplayProps = ViewProps & PropsWithType & {
+export type ExpressionDisplayProps = TouchableOpacityProps & PropsWithType & {
   data: SkillCheckItem[]
   value?: number
 }

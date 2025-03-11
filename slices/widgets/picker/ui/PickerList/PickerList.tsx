@@ -27,9 +27,10 @@ export const PickerList = ({
   gap = 0,
   ...props
 }: PickerListProps) => {
-  const [activated, setActivity] = useBooleanRef(false)
+  const activated = useRef(false);
+  const canPress = useRef(false);
+  const uiSync = useRef(false);
   const longPressTimeout = useRef<NodeJS.Timeout>();
-  const [canPress, setCanPressed] = useBooleanRef(false);
 
   const index = useRef(0);
   const listRef = useRef<FlatList>(null);
@@ -37,11 +38,10 @@ export const PickerList = ({
   const itemHeight = props.itemHeight + gap;
 
   useEffect(() => {
-    setActivity.off()
-    return () => {
-      setActivity.off()
-    }
-  }, [setActivity])
+    activated.current = false;
+    canPress.current = false;
+    uiSync.current = false;
+  }, [])
 
   const renderListItem = useCallback((info: ListRenderItemInfo<number>) => {
     return renderItemContainer({
@@ -57,14 +57,12 @@ export const PickerList = ({
     0
   );
 
-  const defaultOffset = defaultIndex * itemHeight;
-
-
   useEffect(() => {
     if (!listRef.current) {
       return;
     }
-    
+    uiSync.current = true;
+
     listRef.current?.scrollToIndex({
       index: defaultIndex,
       animated: true
@@ -77,28 +75,30 @@ export const PickerList = ({
   );
 
   const onScrollEnd = useCallback(() => {
-
-    if (!activated.current) {
-      return;
-    }
     
     const nextValue = data[index.current];
+
+    activated.current = false;
+    
+    if (uiSync.current) {
+      uiSync.current = false;
+      return;
+    }
 
     if (value === nextValue) {
       return;
     }
-    
+
     onChange?.({
       value: nextValue,
       index: index.current
     })
 
-    setActivity.off();
-  }, [data, onChange, value, setActivity, activated])
+    
+  }, [data, onChange, value])
 
   const onScroll = useCallback((e: ListScrollEvent) => {
-    setCanPressed.off();
-
+    canPress.current = false;
     if (longPressTimeout.current) {
       clearTimeout(longPressTimeout.current);
     }
@@ -114,11 +114,11 @@ export const PickerList = ({
     }
     
     times(tick, n);
-  }, [itemHeight, activated, setCanPressed]);
+  }, [itemHeight]);
 
   const onTouchStart = useCallback(() => {
-    setActivity.on();
-    setCanPressed.on();
+    activated.current = true;
+    canPress.current = true;
 
     if (!onLongPress) {
       return;
@@ -127,23 +127,25 @@ export const PickerList = ({
       if (!canPress.current) {
         return;
       }
-      setCanPressed.off()
-      setActivity.off();
-
+      activated.current = false
+      canPress.current = false;
       tick();
       onLongPress();
     }, delayLongPress);
     
-  }, [setActivity, onLongPress, delayLongPress, setCanPressed, canPress]);
+  }, [onLongPress, delayLongPress]);
 
   const onTouchEnd = useCallback(() => {
+
+    activated.current = false;
     if (canPress.current && onPress) {
       clearTimeout(longPressTimeout.current);
 
-      setCanPressed.off()
-      setActivity.off();
       tick();
       onPress()
+
+      activated.current = false;
+      canPress.current = false;
 
       return;
     }
@@ -152,7 +154,7 @@ export const PickerList = ({
       return;
     }
     clearTimeout(longPressTimeout.current);
-  }, [canPress, setCanPressed, onPress, setActivity]);
+  }, [onPress]);
 
   const getItemLayout = useCallback((_, index: number) => ({
     length: itemHeight,

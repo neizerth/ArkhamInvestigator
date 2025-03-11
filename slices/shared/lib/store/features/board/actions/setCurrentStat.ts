@@ -7,5 +7,5 @@ import { always } from "ramda";
 
 export const setCurrentStat: ActionCreator<AppThunk> = <T extends keyof InvestigatorBoardValues>(
   type: T, 
-  statValue: InvestigatorBoardValues[T]
-) => dispatch => dispatch(reduceCurrentStat(type, always(statValue)));
+  value: InvestigatorBoardValues[T]
+) => dispatch => dispatch(reduceCurrentStat(type, always(value)));

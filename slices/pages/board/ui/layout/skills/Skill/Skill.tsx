@@ -1,12 +1,12 @@
 import type { InvestigatorSkillType } from '@shared/model';
 import * as C from './Skill.components';
 import type { ViewProps } from 'react-native';
-import { navigateTo, selectCurrentBoard, startSkillCheck, useAppDispatch, useAppSelector } from '@shared/lib';
+import { navigateTo, selectCurrentBoard, setCurrentStat, startSkillCheck, useAppDispatch, useAppSelector } from '@shared/lib';
 import { useCallback, useContext, useState } from 'react';
 import { SkillsContext } from '@pages/board/config';
 import { getSkillStyle } from './Skill.styles';
 import { impactHapticFeedback } from '@features/haptic';
-import { PickerItemInfo } from '@widgets/picker';
+import { PickerChangeEvent, PickerItemInfo } from '@widgets/picker';
 import { range } from 'ramda';
 
 export type SkillProps = ViewProps & {
@@ -44,6 +44,10 @@ export const Skill = ({
     dispatch(startSkillCheck(type));
   }, [dispatch, type])
 
+  const onChange = useCallback(({ value }: PickerChangeEvent) => {
+    dispatch(setCurrentStat(type, value))
+  }, [dispatch, type])
+
   const renderItem = useCallback((props: PickerItemInfo) => {
     const { item } = props;
 
@@ -62,7 +66,7 @@ export const Skill = ({
     )
   }, [box, isParallel]);
 
-  const itemHeight = box.height * 0.9;
+  const itemHeight = box.height * 0.8;
 
   return (
     <C.Container {...props}>
@@ -73,6 +77,7 @@ export const Skill = ({
             itemHeight={itemHeight}
             data={SKILL_RANGE}
             value={skillValue}
+            onValueChanged={onChange}
           />
         </C.ValueContainer>
         <C.Check 

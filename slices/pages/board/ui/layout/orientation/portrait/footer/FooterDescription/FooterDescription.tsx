@@ -6,6 +6,7 @@ import { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reani
 import { navigateTo, selectCurrentBoard, selectShowDescription, setShowDescription, useAppDispatch, useAppSelector } from '@shared/lib';
 import { Faction } from '@shared/model';
 import { impactHapticFeedback } from '@features/haptic';
+import { useShowDescription } from './useShowdescription';
 
 export type FooterDescriptionProps = ViewProps;
 
@@ -18,12 +19,6 @@ export const FooterDescription = ({
   const { view } = useContext(LayoutContext);
   const { investigator } = useAppSelector(selectCurrentBoard);
   const faction = investigator.faction_code as Faction;
-  const top = useSharedValue(0);
-
-  useEffect(() => {
-    top.value = showDescription ? PORTRAIT_DESCRIPTION_HEIGHT - view.width / descriptionSize.ratio : 
-      0
-  }, [showDescription, view, top]);
   
   const onShow = useCallback(() => {
     if (!showDescription) {
@@ -39,13 +34,7 @@ export const FooterDescription = ({
     }
   }, [showDescription, dispatch]);
 
-  const contentStyle = useAnimatedStyle(() => {
-    return {
-      top: withTiming(top.value, {
-        duration: 300
-      })
-    };
-  });
+  const contentStyle = useShowDescription()
 
   const goHome = useCallback(() => {
     dispatch(navigateTo('/'));
