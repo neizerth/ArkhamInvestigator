@@ -1,6 +1,6 @@
 import type { InvestigatorImage } from "arkham-investigator-data";
 import type { InvestigatorSource } from "../api";
-import type { InvestigatorDetails, InvestigatorGameStatType, InvestigatorMainStatType, InvestigatorSkillType } from "./common";
+import type { InvestigatorDetails, InvestigatorGameStatType, InvestigatorMainStatType, InvestigatorSkillType, SelectedInvestigator } from "./common";
 import { SkillCheckHistoryItem } from "./skillCheck";
 
 export type InvestigatorBoardStat = InvestigatorMainStatType | InvestigatorSkillType | InvestigatorGameStatType;
@@ -26,6 +26,7 @@ export type InvestigatorBoard = {
   history: HistoryItem[]
   checkHistory: SkillCheckHistoryItem[]
   details: InvestigatorDetails
+  selection: SelectedInvestigator
 }
 
 export type HistoryItem = {

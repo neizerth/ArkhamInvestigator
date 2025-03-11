@@ -3,7 +3,7 @@ import * as C from './Actions.components';
 import { ViewProps } from 'react-native';
 import { useCallback } from 'react';
 import { PickerChangeEvent } from '../../features';
-import { setCurrentStat } from '@shared/lib/store/features/board/actions/setCurrentStat';
+import { setCurrentStat } from '@shared/lib/store/features/board/actions/stats/setCurrentStat';
 import { range } from 'ramda';
 
 export type ActionsProps = ViewProps

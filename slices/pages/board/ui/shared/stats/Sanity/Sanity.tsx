@@ -4,7 +4,7 @@ import type { ViewProps } from 'react-native';
 import { decreaseCurrentStat, increaseCurrentStat, selectCurrentBoard, useAppDispatch, useAppSelector } from '@shared/lib';
 import { useCallback } from 'react';
 import { PickerChangeEvent } from '../../features';
-import { setCurrentStat } from '@shared/lib/store/features/board/actions/setCurrentStat';
+import { setCurrentStat } from '@shared/lib/store/features/board/actions/stats/setCurrentStat';
 import { range } from 'ramda';
 
 export type SanityProps = ViewProps

@@ -28,7 +28,9 @@ export const setInvestigatorVariant = (state: IGameState, action: PayloadAction<
 
   const selectedInvestigators = state.selectedInvestigators.map(
     investigator =>
-      investigator.code === code ? { ...investigator, variantId } : investigator
+      investigator.code === code ? 
+        { ...investigator, variantId } : 
+        investigator
   )
 
   return {

@@ -7,7 +7,7 @@ import { selectInvestigatorMedia } from "../../lib";
 import type { InvestigatorDetailItem } from "@shared/model";
 import { InvestigatorDescription } from "../investigator/InvestigatorDescription";
 import { DataSectionMemo as DataSection } from "../data";
-import { selectSelectedInvestigators, setCurrentInvestigatorDetails, setInvestigatorSkin, setInvestigatorVariant } from "@shared/lib/store";
+import { selectCurrentBoard, selectSelectedInvestigators, setBoardDetails, setCurrentInvestigatorDetails, setInvestigatorSkin, setInvestigatorVariant } from "@shared/lib/store";
 import { propEq } from "ramda";
 
 type DetailItem = InvestigatorDetailItem | null;
@@ -16,6 +16,7 @@ export const InvestigatorDetailSelect = () => {
   const details = useAppSelector(selectCurrentInvestigatorDetails);
   const { skins, variants } = useAppSelector(selectInvestigatorMedia);
   const investigators = useAppSelector(selectSelectedInvestigators);
+  const board = useAppSelector(selectCurrentBoard);
 
   if (!details) {
     return null;
@@ -41,18 +42,28 @@ export const InvestigatorDetailSelect = () => {
   }, [dispatch]);
 
   const changeSkin = useCallback((item: DetailItem) => {
+    if (board) {
+      dispatch(setBoardDetails({
+        skinId: item?.value
+      }));
+    }
     dispatch(setInvestigatorSkin({
       code,
       skinId: item?.value || null
     }))
-  }, [dispatch, code])
+  }, [dispatch, code, board])
 
   const changeVariant = useCallback((item: DetailItem) => {
+    if (board) {
+      dispatch(setBoardDetails({
+        variantId: item?.value
+      }));
+    }
     dispatch(setInvestigatorVariant({
       code,
       variantId: item?.value || null
     }))
-  }, [dispatch, code])
+  }, [dispatch, code, board])
 
   return (
     <C.Container>
