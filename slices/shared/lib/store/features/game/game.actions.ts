@@ -9,12 +9,12 @@ import { router } from "expo-router";
 import { navigateTo, replaceTo } from "@shared/lib/store/effects";
 import { v4 } from "uuid";
 
-export const changeSelectedInvestigator: ActionCreator<AppThunk> = (item: InvestigatorDetails) => 
+export const changeSelectedInvestigator: ActionCreator<AppThunk> = (details: InvestigatorDetails) => 
   (dispatch, getState) => {
     const state = getState();
     const selected = selectSelectedInvestigators(state);
 
-    const { investigator, media } = item
+    const { investigator, media } = details
     const { code } = investigator;
     const withCode = propEq(code, 'code');
     const hasCode = includesBy(withCode, selected);
@@ -32,13 +32,14 @@ export const changeSelectedInvestigator: ActionCreator<AppThunk> = (item: Invest
 
     const selectedItem = {
       id: v4(),
-      code
+      code,
+      details
     }
     dispatch(addSelectedInvestigator(selectedItem))
 
     if (media?.skins || media?.variants) {
       dispatch(navigateTo('/investigator-details'))
-      dispatch(setCurrentInvestigatorDetails(item));
+      dispatch(setCurrentInvestigatorDetails(details));
       return;
     }
   }

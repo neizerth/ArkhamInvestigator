@@ -17,7 +17,7 @@ export const getInvestigatorBoards = ({
   mediaItems
 }: GetBoardInvestigators) => selectedInvestigators
   .map((item, index): InvestigatorBoard | null => {
-    const { code } = item;
+    const { code, details } = item;
     const investigator = investigators.find(propEq(code, 'code'));
     const media = mediaItems.find(propEq(code, 'code')); 
 
@@ -51,7 +51,8 @@ export const getInvestigatorBoards = ({
       isParallel,
       unique,
       history: [],
-      checkHistory: []
+      checkHistory: [],
+      details
     }
   })
   .filter(isNotNil)

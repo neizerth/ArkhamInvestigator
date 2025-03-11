@@ -20,6 +20,7 @@ export type SelectedInvestigator = {
   code: string
   variantId: Nullable<string>
   skinId: Nullable<string>
+  details: InvestigatorDetails
 }
 
 export type InvestigatorDetails = {
