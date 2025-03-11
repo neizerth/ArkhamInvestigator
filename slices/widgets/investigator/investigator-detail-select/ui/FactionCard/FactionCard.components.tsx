@@ -30,7 +30,7 @@ export const Background: FC<BackgroundProps> = styled(FactionBackground)`
   right: 0;
   top: 0;
   bottom: 0;
-` 
+`
 
 export const Container: typeof View = styled(View)`
   border-radius: ${borderRadius}px;

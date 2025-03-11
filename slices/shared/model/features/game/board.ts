@@ -1,5 +1,5 @@
 import type { InvestigatorImage } from "arkham-investigator-data";
-import type { InvestigatorSource } from "../api";
+import type { InvestigatorSource } from "../../api";
 import type { InvestigatorDetails, InvestigatorGameStatType, InvestigatorMainStatType, InvestigatorSkillType, SelectedInvestigator } from "./common";
 import { SkillCheckHistoryItem } from "./skillCheck";
 

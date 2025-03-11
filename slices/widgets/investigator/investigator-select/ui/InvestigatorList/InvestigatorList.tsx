@@ -2,6 +2,10 @@ import type { InvestigatorDetails } from '@shared/model';
 import { InvestigatorPreviewMemo as InvestigatorPreview, type InvestigatorPreviewProps } from '@widgets/investigator/investigator-preview';
 import { 
   includesBy,
+  selectCurrentBoard,
+  selectFocusedInvestigators,
+  selectReplaceCode,
+  selectReplaceInvestigator,
   selectSelectedInvestigators,
   useAppSelector, 
 } from '@shared/lib';
@@ -44,12 +48,14 @@ export const InvestigatorList = ({
 
 export const InvestigatorListItem = (props: InvestigatorPreviewProps) => {
 
-  const selectedInvestigators = useAppSelector(selectSelectedInvestigators);
+  const data = useAppSelector(selectFocusedInvestigators);
 
   const { investigator } = props;
-  const selected = selectedInvestigators.filter(
+  
+  const selected = data.filter(
     propEq(investigator.code, 'code')
   );
+
   return (
     <InvestigatorPreview 
       {...props}

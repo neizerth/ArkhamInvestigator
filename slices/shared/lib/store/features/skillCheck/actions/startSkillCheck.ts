@@ -1,5 +1,5 @@
 import type { ActionCreator } from "@reduxjs/toolkit"
-import { navigateTo } from "@shared/lib/store/effects";
+import { goToPage } from "@shared/lib/store/effects";
 import type { AppThunk } from "@shared/lib/store"
 import { setSkillCheckData, setSkillCheckType } from "../skillCheck"
 import type { InvestigatorBoardStat } from "@shared/model"
@@ -10,5 +10,5 @@ export const startSkillCheck: ActionCreator<AppThunk> = (statType: InvestigatorB
   dispatch(setSkillCheckData([
     createStatItem(statType)
   ]))
-  dispatch(navigateTo('/skill-check'));
+  dispatch(goToPage('/skill-check'));
 }

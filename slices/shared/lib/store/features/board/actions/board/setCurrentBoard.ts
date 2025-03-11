@@ -1,6 +1,6 @@
 import type { ActionCreator } from "@reduxjs/toolkit";
 import type { AppThunk } from "@shared/lib/store";
-import { selectCurrentInvestigatorIndex, selectInvestigatorBoards, setInvestigatorBoards } from "../board";
+import { selectCurrentInvestigatorIndex, selectInvestigatorBoards, setInvestigatorBoards } from "../../board";
 import type { InvestigatorBoard } from "@shared/model";
 
 export const setCurrentBoard: ActionCreator<AppThunk> = (board: InvestigatorBoard) => (dispatch, getState) => {

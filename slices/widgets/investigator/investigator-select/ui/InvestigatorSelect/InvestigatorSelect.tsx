@@ -1,14 +1,15 @@
 import { useAppDispatch, useAppSelector } from '@shared/lib/hooks';
 import { propEq } from 'ramda';
-import { Container, Content, Footer, Separator } from './InvestigatorSelect.components';
+import * as C from './InvestigatorSelect.components';
 import { selectAvailableInvestigators } from '../../lib/store';
 import { InvestigatorList as List } from '../InvestigatorList';
-import { changeSelectedInvestigator, selectSelectedInvestigators } from '@shared/lib';
+import { changeSelectedInvestigator, selectCurrentBoard } from '@shared/lib';
 import type { InvestigatorDetails } from '@shared/model';
 import { useCallback } from 'react';
 
 export const InvestigatorSelect = () => {
   const data = useAppSelector(selectAvailableInvestigators);
+  const board = useAppSelector(selectCurrentBoard);
   const dispatch = useAppDispatch();
 
   const onChange = useCallback(
@@ -20,19 +21,19 @@ export const InvestigatorSelect = () => {
   const fanMade = data.filter(propEq(false, 'isOfficial'));
 
   return (
-    <Container>
-      <Content>
+    <C.Container>
+      <C.Content>
         <List 
           data={official} 
           onChange={onChange}
         />
-        <Separator>— Fan-made Investigators —</Separator>
+        <C.Separator>— Fan-made Investigators —</C.Separator>
         <List 
           data={fanMade} 
           onChange={onChange}
         />
-      </Content>
-      <Footer/>
-    </Container>
+      </C.Content>
+      <C.Footer/>
+    </C.Container>
   );
 }

@@ -1,6 +1,7 @@
 import type { ActionCreator } from "@reduxjs/toolkit";
 import { 
-  navigateTo,
+  goToPage,
+  replacePageTo,
   setCurrentInvestigatorIndex, 
   setInvestigatorBoards, 
   setShowDescription, 
@@ -17,5 +18,5 @@ export const startGame: ActionCreator<AppThunk> = () => (dispatch, getState) =>{
   dispatch(setCurrentInvestigatorIndex(0));
   dispatch(setShowDescription(false));
 
-  dispatch(navigateTo('/board'));
+  dispatch(replacePageTo('/board'));
 }

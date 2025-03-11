@@ -2,7 +2,7 @@ import type { ActionCreator } from "@reduxjs/toolkit";
 import { getSkillCheckValue } from "@shared/lib/features";
 import type { AppThunk } from "@shared/lib/store";
 import type { SkillCheckHistoryItem } from "@shared/model";
-import { setCurrentBoard } from "./setCurrentBoard";
+import { setCurrentBoard } from "./board/setCurrentBoard";
 import { v4 } from "uuid";
 import { selectSkillCheckData, selectSkillCheckType, sendCommandSignal, sendNumberSignal } from '../../skillCheck/skillCheck'
 import { selectCurrentBoard } from '../selectors'

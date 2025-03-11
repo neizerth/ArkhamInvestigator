@@ -1,2 +1,3 @@
 export * from './game'
-export * from './game.actions'
+export * from './actions'
+export * from './selectors'

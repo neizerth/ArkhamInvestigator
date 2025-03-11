@@ -1,5 +1,5 @@
 import type { PayloadAction } from "@reduxjs/toolkit"
-import type { IGameState } from "./game"
+import type { IGameState } from "../game"
 
 type SetSkinPayload = {
   code: string
@@ -37,9 +37,4 @@ export const setInvestigatorVariant = (state: IGameState, action: PayloadAction<
     ...state,
     selectedInvestigators
   }
-}
-
-export default {
-  setInvestigatorSkin,
-  setInvestigatorVariant
 }

@@ -1,18 +1,20 @@
-import { createAction, type ActionCreator } from "@reduxjs/toolkit"
-import { selectSelectedInvestigators, setCurrentInvestigatorDetails, setSelectedInvestigators } from "../game/game"
+import type { ActionCreator } from "@reduxjs/toolkit"
+import { selectSelectedInvestigators, setCurrentInvestigatorDetails, setSelectedInvestigators } from "../game"
 import type { InvestigatorDetails, SelectedInvestigator } from "@shared/model"
-import { includesBy, toggleBy } from "@shared/lib/util";
+import { includesBy } from "@shared/lib/util";
 import { propEq, reject } from "ramda";
-import type { AppThunk } from "../..";
 import { MAX_PLAYERS } from "@shared/config";
 import { router } from "expo-router";
-import { navigateTo, replaceTo } from "@shared/lib/store/effects";
+import { goToPage, replacePageTo } from "@shared/lib/store/effects";
 import { v4 } from "uuid";
+import type { AppThunk } from "../../../";
+import { selectReplaceCode } from '../selectors/selectReplaceCode'
 
 export const changeSelectedInvestigator: ActionCreator<AppThunk> = (details: InvestigatorDetails) => 
   (dispatch, getState) => {
     const state = getState();
     const selected = selectSelectedInvestigators(state);
+    const replaceCode = selectReplaceCode(state);
 
     const { investigator, media } = details
     const { code } = investigator;
@@ -22,23 +24,34 @@ export const changeSelectedInvestigator: ActionCreator<AppThunk> = (details: Inv
     const isMaxPlayers = selected.length === MAX_PLAYERS;
     const isMultiselect = media?.multiselect;
 
-    if (hasCode && (!isMultiselect || isMaxPlayers)) {
-      return dispatch(removeSelectedInvestigator(code))
+    if (replaceCode === code) {
+      return;
+    }
+
+    if ((hasCode && (!isMultiselect || isMaxPlayers))) {
+      dispatch(removeSelectedInvestigator(code))
     }
 
     if (isMaxPlayers) {
       return;
     }
 
-    const selectedItem = {
+    const selectedItem: SelectedInvestigator = {
       id: v4(),
       code,
-      details
+      details,
+      variantId: null,
+      skinId: null,
     }
-    dispatch(addSelectedInvestigator(selectedItem))
+    if (replaceCode) {
+      dispatch(setSelectedInvestigators([selectedItem]))
+    }
+    else {
+      dispatch(addSelectedInvestigator(selectedItem))
+    }
 
     if (media?.skins || media?.variants) {
-      dispatch(navigateTo('/investigator-details'))
+      dispatch(goToPage('/investigator-details'))
       dispatch(setCurrentInvestigatorDetails(details));
       return;
     }

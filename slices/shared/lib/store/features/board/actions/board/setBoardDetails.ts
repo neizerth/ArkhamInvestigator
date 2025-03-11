@@ -1,9 +1,9 @@
 import type { SelectedInvestigator } from "@shared/model";
 import { selectCurrentBoard } from "../../selectors";
 import { getInvestigatorBoardStats, getSelectedInvestigatorVariant } from "@shared/lib/features";
-import { setCurrentBoard } from "../setCurrentBoard";
+import { setCurrentBoard } from "./setCurrentBoard";
 import type { ActionCreator } from "@reduxjs/toolkit";
-import { type AppThunk } from "@shared/lib/store";
+import type { AppThunk } from "@shared/lib/store";
 import { selectInvestigatorSources } from '../../../investigators/investigatorSources/investigatorSources';
 import { propEq } from "ramda";
 

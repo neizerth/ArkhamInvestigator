@@ -1,10 +1,11 @@
 import { type Href, router } from "expo-router";
 
-export const navigateTo = (href: Href) => () => {
+export const goToPage = (href: Href) => () => {
   router.push(href);
+  console.log('goto', href);
 }
 
-export const replaceTo = (href: Href) => () => {
+export const replacePageTo = (href: Href) => () => {
   router.replace(href);
 }
 

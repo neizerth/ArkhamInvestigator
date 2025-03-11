@@ -1,9 +1,9 @@
-import { selectSelectedInvestigators, useAppDispatch, useAppSelector } from '@shared/lib';
+import { selectFocusedInvestigators, selectReplaceCode, selectReplaceInvestigator, selectSelectedInvestigators, useAppDispatch, useAppSelector } from '@shared/lib';
 import * as C from './StartButton.components';
 import { getInvestigatorImageUrl } from '@shared/api/getInvestigatorImageUrl';
 import type { SelectedInvestigator } from '@shared/model';
 import { useCallback } from 'react';
-import { startGame } from '../../lib';
+import { replaceInvestigator, startGame } from '../../lib';
 
 const getImageSource = ({
   code
@@ -13,11 +13,18 @@ const getImageSource = ({
 
 export const StartButton = () => {
   const dispatch = useAppDispatch();
-  const investigators = useAppSelector(selectSelectedInvestigators);
+  const investigators = useAppSelector(selectFocusedInvestigators);
+  const code = useAppSelector(selectReplaceCode)
 
   const start = useCallback(() => {
-    dispatch(startGame());
-  }, [dispatch])
+    if (!code) {
+      dispatch(startGame());
+      return;
+    }
+    dispatch(replaceInvestigator());
+  }, [dispatch, code])
+
+  const title = code ? 'Replace' : 'Start';
 
   return (
     <C.Container 
@@ -32,7 +39,7 @@ export const StartButton = () => {
             />
           ))}
         </C.Investigators>
-        <C.Text>Start</C.Text>
+        <C.Text>{title}</C.Text>
         <C.Icon icon="right-arrow"/>
       </C.Content>
     </C.Container>

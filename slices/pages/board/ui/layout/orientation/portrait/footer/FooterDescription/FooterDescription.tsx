@@ -1,10 +1,9 @@
-import { Animated, StyleSheet, type ViewProps } from 'react-native';
+import { StyleSheet, type ViewProps } from 'react-native';
 import * as C from './FooterDescription.components';
-import { useCallback, useContext, useEffect, useState } from 'react';
-import { descriptionSize, LayoutContext, PORTRAIT_DESCRIPTION_HEIGHT, PortraitLayoutContext } from '@pages/board/config';
-import { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
-import { navigateTo, selectCurrentBoard, selectShowDescription, setShowDescription, useAppDispatch, useAppSelector } from '@shared/lib';
-import { Faction } from '@shared/model';
+import { useCallback, useContext } from 'react';
+import { LayoutContext } from '@pages/board/config';
+import { goToPage, resetBoard, selectCurrentBoard, selectShowDescription, setShowDescription, useAppDispatch, useAppSelector } from '@shared/lib';
+import type { Faction } from '@shared/model';
 import { impactHapticFeedback } from '@features/haptic';
 import { useShowDescription } from './useShowdescription';
 
@@ -37,7 +36,11 @@ export const FooterDescription = ({
   const contentStyle = useShowDescription()
 
   const goHome = useCallback(() => {
-    dispatch(navigateTo('/'));
+    dispatch(goToPage('/'));
+  }, [dispatch]);
+
+  const clear = useCallback(() => {
+    dispatch(resetBoard());
   }, [dispatch]);
 
   const vw = view.width * 6 / 100;
@@ -53,7 +56,7 @@ export const FooterDescription = ({
           {showDescription ? (
             <>
               <C.Exit onPress={goHome}/>
-              <C.Clear/>
+              <C.Clear onPress={clear}/>
             </>
           ) : (
             <C.ExpandArea onPress={onShow} style={StyleSheet.absoluteFill}/>

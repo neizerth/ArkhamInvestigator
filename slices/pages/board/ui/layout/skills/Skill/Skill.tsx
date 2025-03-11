@@ -1,7 +1,7 @@
 import type { InvestigatorSkillType } from '@shared/model';
 import * as C from './Skill.components';
 import type { ViewProps } from 'react-native';
-import { navigateTo, selectCurrentBoard, setCurrentStat, startSkillCheck, useAppDispatch, useAppSelector } from '@shared/lib';
+import { goToPage, selectCurrentBoard, setCurrentStat, startSkillCheck, useAppDispatch, useAppSelector } from '@shared/lib';
 import { useCallback, useContext, useState } from 'react';
 import { SkillsContext } from '@pages/board/config';
 import { getSkillStyle, getSkillValueStyle } from './Skill.styles';
