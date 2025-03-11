@@ -22,10 +22,11 @@ export const InvestigatorDetailSelectCard = ({
   ...props
 }: InvestigatorDetailSelectCardProps) => {
   const window = useWindowDimensions();
-  const [size, onLayout] = useLayoutSize();
+  const [size, onLayout] = useLayoutSize(window);
+  const [containerSize, onContainerLayout] = useLayoutSize();
 
   const style = size ? {
-    maxHeight: size.height + MAX_HEIGHT_AREA 
+    maxHeight: Math.round(size.height + MAX_HEIGHT_AREA) 
   } : {};
 
   const containerStyle = {
@@ -33,9 +34,23 @@ export const InvestigatorDetailSelectCard = ({
   }
   
   return (
-    <C.Container {...props} style={[style, props.style, containerStyle]}>
+    <C.Container 
+      {...props} 
+      style={[
+        style, 
+        props.style, 
+        containerStyle
+      ]}
+      onLayout={onContainerLayout}
+    >
       <C.Header faction={faction}>
-        <C.Background faction={faction}/>
+        {containerSize && (
+          <C.Background 
+            faction={faction}
+            width={containerSize.width}
+            height={55}
+          />
+        )}
         <C.HeaderContent>
           <C.Icon faction={faction}/>
           <C.HeaderTextContent>

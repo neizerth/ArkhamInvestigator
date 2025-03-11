@@ -1,14 +1,18 @@
 import type { Faction } from "@shared/model";
 import type { ImageRequireSource } from "react-native";
 
-export const guardian = require('./guardian.svg');
-export const mystic = require('./mystic.svg');
-export const rogue = require('./rogue.svg');
-export const seeker = require('./seeker.svg');
-export const survivor = require('./survivor.svg');
-export const neutral = require('./neutral.svg');
 
-export const factionPatterns: Record<Faction, ImageRequireSource> = {
+import { FC } from "react";
+import { SvgProps } from "react-native-svg";
+
+import guardian from './guardian.svg'
+import mystic from './mystic.svg'
+import rogue from './rogue.svg'
+import seeker from './seeker.svg'
+import survivor from './survivor.svg'
+import neutral from './neutral.svg'
+
+export const factionPatterns: Record<Faction, FC<SvgProps>> = {
   guardian,
   mystic,
   rogue,
@@ -16,3 +20,15 @@ export const factionPatterns: Record<Faction, ImageRequireSource> = {
   survivor,
   neutral
 }
+
+export const factionPatternWidth: Record<Faction, number> = {
+  guardian: 344,
+  mystic: 360,
+  rogue: 360,
+  seeker: 344,
+  survivor: 360,
+  neutral: 360
+}
+
+
+export const patternHeight = 48;

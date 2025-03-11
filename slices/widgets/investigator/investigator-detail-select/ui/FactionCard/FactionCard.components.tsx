@@ -5,7 +5,7 @@ import type { TextProps, ViewProps } from "react-native";
 
 import styled, { css } from "styled-components/native";
 import type { PropsWithFaction } from "@shared/model/ui";
-import { FactionBackground } from "../FactionBackground";
+import { FactionBackground, FactionBackgroundProps } from "../FactionBackground";
 import type { Faction } from "@shared/model";
 import { FactionFontIcon, Icon as BaseIcon } from "@shared/ui";
 import type { IconProps } from "@shared/ui";
@@ -20,7 +20,9 @@ const getBackgroundColor = (faction: Faction) => factionColor[faction].darkBackg
 const textColor = color.light15;
 const borderRadius = size.borderRadius.default;
 
-export const Background: typeof FactionBackground = styled(FactionBackground)`
+type BackgroundProps = Omit<FactionBackgroundProps, ''>
+
+export const Background: FC<BackgroundProps> = styled(FactionBackground)`
   position: absolute;
   z-index: 1;
   width: 100%;
@@ -28,7 +30,6 @@ export const Background: typeof FactionBackground = styled(FactionBackground)`
   right: 0;
   top: 0;
   bottom: 0;
-  opacity: 0.15;
 ` 
 
 export const Container: typeof View = styled(View)`

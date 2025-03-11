@@ -1,29 +1,43 @@
 import type { PropsWithFaction } from '@shared/model/ui';
 import { Image } from 'react-native';
-import type { ImageProps } from 'react-native';
-import { factionPatterns } from './images';
+import * as C from './FactionBacground.components'
+import type { ImageProps, ViewProps } from 'react-native';
+import { factionPatterns, patternHeight, factionPatternWidth } from './images';
+import { color } from '@shared/config';
 
-export type FactionBackgroundProps = Omit<ImageProps, 'resizeMode' | 'source' | 'tintColor'> & PropsWithFaction;
+export type FactionBackgroundProps = ViewProps & PropsWithFaction & {
+  width: number
+  height: number
+}
 
-export const FactionBackground = ({
-  faction,
-  ...props
-}: FactionBackgroundProps) => {
-  const source = factionPatterns[faction];
+export const FactionBackground = (props: FactionBackgroundProps) => {
+  const {
+    faction,
+    width,
+    height,
+  } = props;
 
-  // return null;
-  if (!source) {
+  const Pattern = factionPatterns[faction];
+
+  if (!Pattern) {
     return null;
   }
 
   const resizeMode = faction === 'guardian' ? 'stretch' : 'repeat';
+  const patternWidth = factionPatternWidth[faction];
 
   return (
-    <Image
-      {...props}
-      tintColor="white"
-      resizeMode={resizeMode}
-      source={source}
-    />
+    <C.Container {...props}>
+      <C.Background
+        patternId={`FactionBackground(${faction})`}
+        width={width}
+        height={height}
+        patternWidth={patternWidth}
+        patternHeight={patternHeight}
+        resizeMode={resizeMode}
+      >
+        <Pattern color={color.white}/>
+      </C.Background>
+    </C.Container>
   );
 }

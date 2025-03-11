@@ -1,4 +1,5 @@
 export * from './props'
 export * from './typography'
-export * from './size'
+export * from './box'
 export * from './icons'
+export * from './size'
