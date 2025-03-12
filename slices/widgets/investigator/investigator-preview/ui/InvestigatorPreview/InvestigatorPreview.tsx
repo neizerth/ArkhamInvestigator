@@ -3,11 +3,11 @@ import {
 } from "@shared/api/getInvestigatorImageUrl"
 import type { Faction, InvestigatorSource } from "@shared/model"
 import * as C from "./InvestigatorPreview.components"
-import type { TouchableOpacityProps } from "react-native"
+import type { GestureResponderEvent, TouchableOpacityProps } from "react-native"
 import { useImageSize } from "@widgets/investigator/investigator-select/lib/hooks"
 import type { Investigator as InvestigatorMedia } from "arkham-investigator-data"
 import { InvestigatorPreviewFactionIcon as FactionIcon } from "../InvestigatorPreviewFactionIcon"
-import { memo } from "react"
+import { memo, useCallback } from "react"
 
 export type InvestigatorPreviewProps = TouchableOpacityProps & {
   investigator: InvestigatorSource
@@ -20,6 +20,7 @@ export type InvestigatorPreviewProps = TouchableOpacityProps & {
   showIcon?: boolean
   showOptionsInfo?: boolean
 }
+
 export const InvestigatorPreview = ({
   showIcon = true,
   showOptionsInfo = true,
@@ -28,6 +29,7 @@ export const InvestigatorPreview = ({
   selectedCount = 0,
   icon,
   media,
+  disabled,
   ...props
 }: InvestigatorPreviewProps) => {
   const defaultSize = useImageSize();
@@ -39,9 +41,19 @@ export const InvestigatorPreview = ({
   const source = { uri }
 
   const showOptions = showOptionsInfo && (media?.variants || media?.skins);
+
+  const onPress = useCallback((event: GestureResponderEvent) => {
+    if (disabled) {
+      return;
+    }
+    props.onPress?.(event);
+  }, [props.onPress, disabled])
   
   return (
-    <C.Container {...props}>
+    <C.Container 
+      {...props} 
+      onPress={onPress}
+    >
       {showOptions && (
         <C.OptionsInfo faction={faction}/>
       )}
@@ -57,6 +69,9 @@ export const InvestigatorPreview = ({
             <FactionIcon faction={faction}/>
           )}
         </C.Info>
+      )}
+      {disabled && (
+        <C.DisabledOverlay/>
       )}
       {selected && (
         <C.Selection faction={faction}/>

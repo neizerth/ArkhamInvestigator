@@ -13,7 +13,7 @@ const getImageSource = ({
 
 export const StartButton = () => {
   const dispatch = useAppDispatch();
-  const investigators = useAppSelector(selectFocusedInvestigators);
+  const investigators = useAppSelector(selectSelectedInvestigators);
   const code = useAppSelector(selectReplaceCode)
 
   const start = useCallback(() => {

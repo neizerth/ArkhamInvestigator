@@ -32,10 +32,14 @@ export const DescriptionMenu = (props: DescriptionMenuProps) => {
   }, [dispatch, details, selection]);
 
   const changeInvestigator = useCallback(() => {
+    if (!selection) {
+      return;
+    }
     dispatch(setShowDescription(false));
     dispatch(setReplaceInvestigator(true));
+    dispatch(setSelectedInvestigators([selection]))
     dispatch(goToPage('/select-investigators'));
-  }, [dispatch]);
+  }, [dispatch, selection]);
 
   return (
     <C.Container {...props}>

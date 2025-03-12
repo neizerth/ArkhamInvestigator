@@ -3,6 +3,7 @@ import { InvestigatorPreviewMemo as InvestigatorPreview, type InvestigatorPrevie
 import { 
   includesBy,
   selectCurrentBoard,
+  selectDisabledInvestigators,
   selectFocusedInvestigators,
   selectReplaceCode,
   selectReplaceInvestigator,
@@ -48,18 +49,26 @@ export const InvestigatorList = ({
 
 export const InvestigatorListItem = (props: InvestigatorPreviewProps) => {
 
-  const data = useAppSelector(selectFocusedInvestigators);
+  const selectedInvestigators = useAppSelector(selectSelectedInvestigators);
+  const disabledInvestigators = useAppSelector(selectDisabledInvestigators);
 
   const { investigator } = props;
   
-  const selected = data.filter(
+  const selected = selectedInvestigators.filter(
+    propEq(investigator.code, 'code')
+  );
+
+  const isSelected = selected.length > 0;
+
+  const disabled = !isSelected && disabledInvestigators.some(
     propEq(investigator.code, 'code')
   );
 
   return (
     <InvestigatorPreview 
       {...props}
-      selected={selected.length > 0}
+      selected={isSelected}
+      disabled={disabled}
       selectedCount={selected.length}
     />
   )

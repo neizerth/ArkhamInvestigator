@@ -35,6 +35,16 @@ export const Selection: FC<ViewProps & PropsWithFaction> = styled(View)`
   `}
 `
 
+export const DisabledOverlay: typeof View = styled(View)`
+  position: absolute;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.3);
+`
+
 type SizeProps = {
   size: number
 }
