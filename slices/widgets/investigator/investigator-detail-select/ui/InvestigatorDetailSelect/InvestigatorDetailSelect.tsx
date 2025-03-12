@@ -3,11 +3,11 @@ import * as C from "./InvestigatorDetailSelect.components";
 import { router } from "expo-router";
 import type { Faction } from "@shared/model";
 import { useCallback } from "react";
-import { selectInvestigatorMedia } from "../../lib";
+import { selectCurrentDetails, selectInvestigatorMedia } from "../../lib";
 import type { InvestigatorDetailItem } from "@shared/model";
 import { InvestigatorDescription } from "../investigator/InvestigatorDescription";
 import { DataSectionMemo as DataSection } from "../data";
-import { selectSelectedInvestigators, setCurrentInvestigatorDetails } from "@shared/lib/store";
+import { setCurrentInvestigatorDetails } from "@shared/lib/store";
 import { propEq } from "ramda";
 import { changeSkin, changeVariant } from "../../lib/actions";
 
@@ -15,23 +15,14 @@ type DetailItem = InvestigatorDetailItem | null;
 export const InvestigatorDetailSelect = () => {
   const dispatch = useAppDispatch();
   const details = useAppSelector(selectCurrentInvestigatorDetails);
-  const { skins, variants } = useAppSelector(selectInvestigatorMedia);
-  const investigators = useAppSelector(selectSelectedInvestigators);
-
-  const investigator = details?.investigator
+  const { 
+    skin,
+    skins,
+    variant,
+    variants, 
+    investigator 
+  } = useAppSelector(selectCurrentDetails);
   
-  const selection = investigators.find(
-    propEq(investigator?.code, 'code')
-  )
-
-  const skin = skins.find(
-    propEq(selection?.skinId, 'value')
-  ) || null;
-
-  const variant = variants.find(
-    propEq(selection?.variantId, 'value')
-  ) || variants[0];
-
   const goBack = useCallback(() => {
     dispatch(setCurrentInvestigatorDetails(null));
     router.back();
@@ -49,7 +40,7 @@ export const InvestigatorDetailSelect = () => {
     }));
   }, [dispatch])
 
-  if (!investigator) {
+  if (!investigator || !details) {
     return null;
   }
 
