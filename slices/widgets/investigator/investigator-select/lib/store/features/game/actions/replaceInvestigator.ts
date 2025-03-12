@@ -1,5 +1,5 @@
-import { ActionCreator } from "@reduxjs/toolkit";
-import { AppThunk, goBack, setCurrentBoard, setReplaceInvestigator } from "@shared/lib";
+import type { ActionCreator } from "@reduxjs/toolkit";
+import { type AppThunk, goBack, replaceCurrentBoard, setReplaceInvestigator } from "@shared/lib";
 import { selectGameInvestigatorBoards } from "../selectors";
 
 export const replaceInvestigator: ActionCreator<AppThunk> = () => 
@@ -7,7 +7,7 @@ export const replaceInvestigator: ActionCreator<AppThunk> = () =>
     const state = getState();
     const [board] = selectGameInvestigatorBoards(state);
 
+    dispatch(replaceCurrentBoard(board));
     dispatch(setReplaceInvestigator(false));
-    dispatch(setCurrentBoard(board));
     dispatch(goBack());
   }

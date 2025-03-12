@@ -5,7 +5,6 @@ import { createSliceState } from 'redux-toolkit-helpers';
 export type IBoardState = {
   currentInvestigatorIndex: number | null
   investigatorBoards: InvestigatorBoard[]
-  
 }
 
 const initialState: IBoardState = {

@@ -1,8 +1,8 @@
 import type { ActionCreator } from "@reduxjs/toolkit";
 import { NEW_TURN_ACTIONS_COUNT, START_GAME_RESOURCES_COUNT } from "../../../../../../config";
 import type { AppThunk } from "@shared/lib/store";
-import { selectCurrentBoard } from "../../selectors";
-import { setCurrentBoard } from "../board";
+import { selectCurrentBoard } from "../../selectors/selectCurrentBoard";
+import { setCurrentBoard } from "./setCurrentBoard";
 import { setShowDescription } from "../../../game/game";
 
 import type { InvestigatorBoard } from "@shared/model";

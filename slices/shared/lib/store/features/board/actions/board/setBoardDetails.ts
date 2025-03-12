@@ -1,11 +1,12 @@
 import type { SelectedInvestigator } from "@shared/model";
 import { selectCurrentBoard } from "../../selectors";
-import { getInvestigatorBoardStats, getSelectedInvestigatorVariant } from "@shared/lib/features";
+import { getSelectedInvestigatorVariant, mergeBoardStats } from "@shared/lib/features";
 import { setCurrentBoard } from "./setCurrentBoard";
 import type { ActionCreator } from "@reduxjs/toolkit";
 import type { AppThunk } from "@shared/lib/store";
 import { selectInvestigatorSources } from '../../../investigators/investigatorSources/investigatorSources';
 import { propEq } from "ramda";
+import { getBoardStats } from "@shared/lib/features/game/board/getBoardStats";
 
 type SetBoardDetailsOptions = {
   variantId?: string | null
@@ -60,7 +61,7 @@ export const setBoardDetails: ActionCreator<AppThunk> = ({
       isParallel
     } = getSelectedInvestigatorVariant(item, details.media);
 
-    const stats = getInvestigatorBoardStats(investigator);
+    const stats = getBoardStats(investigator);
 
     const baseValue = {
       ...board.baseValue,
@@ -68,10 +69,7 @@ export const setBoardDetails: ActionCreator<AppThunk> = ({
       additionalAction
     }
 
-    const value = {
-      ...board.value,
-      ...baseValue
-    }
+    const value = mergeBoardStats(board, baseValue);
 
     const data = {
       ...board,
@@ -79,7 +77,8 @@ export const setBoardDetails: ActionCreator<AppThunk> = ({
       baseValue,
       value,
       isParallel,
-      picture
+      picture,
+      selection: item
     }
 
     dispatch(setCurrentBoard(data));

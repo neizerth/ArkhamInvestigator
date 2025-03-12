@@ -4,7 +4,7 @@ import { useAppDispatch, sendNumberSignal, sendOperatorSignal, sendCommandSignal
 import { useCallback } from 'react';
 import type { SkillCheckCommandType, SkillCheckOperator } from '@shared/model';
 import { operatorMapping } from './mapping';
-import { addCurrentSkillCheckToHistory } from '@shared/lib/store/features/board/actions/addCurrentSkillCheckToHistory';
+import { addCurrentSkillCheckToHistory } from '@shared/lib/store/features/board/actions/history/addCurrentSkillCheckToHistory';
 import { LayoutContainer } from '../../LayoutContainer';
 import { characters } from '@pages/skill-check/config';
 import { useSkillCheckLayoutType } from '@pages/skill-check/lib';

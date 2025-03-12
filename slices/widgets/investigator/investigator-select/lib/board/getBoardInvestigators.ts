@@ -2,7 +2,8 @@ import type { InvestigatorBoard, InvestigatorSource, SelectedInvestigator } from
 import { isNotNil, propEq } from "ramda";
 import type { Investigator as InvestigatorMedia } from "arkham-investigator-data";
 import { NEW_TURN_ACTIONS_COUNT, START_GAME_RESOURCES_COUNT } from "@shared/config";
-import { getInvestigatorBoardStats, getSelectedInvestigatorVariant } from "@shared/lib";
+import { getSelectedInvestigatorVariant } from "@shared/lib";
+import { getBoardStats } from "@shared/lib/features/game/board/getBoardStats";
 
 type GetBoardInvestigators = {
   selectedInvestigators: SelectedInvestigator[]
@@ -33,7 +34,7 @@ export const getInvestigatorBoards = ({
     const unique = Boolean(!media.multiselect);
 
     const value = {
-      ...getInvestigatorBoardStats(investigator),
+      ...getBoardStats(investigator),
       additionalAction,
       resources: START_GAME_RESOURCES_COUNT,
       actions: NEW_TURN_ACTIONS_COUNT,
@@ -51,6 +52,7 @@ export const getInvestigatorBoards = ({
       unique,
       history: [],
       checkHistory: [],
+      historyIndex: 0,
       details,
       selection: item
     }

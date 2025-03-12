@@ -4,6 +4,7 @@ import {
   replacePageTo,
   setCurrentInvestigatorIndex, 
   setInvestigatorBoards, 
+  setSelectedInvestigators, 
   setShowDescription, 
   type AppThunk 
 } from "@shared/lib";
@@ -16,6 +17,7 @@ export const startGame: ActionCreator<AppThunk> = () => (dispatch, getState) =>{
 
   dispatch(setInvestigatorBoards(investigatorBoards));
   dispatch(setCurrentInvestigatorIndex(0));
+  dispatch(setSelectedInvestigators([]));
   dispatch(setShowDescription(false));
 
   dispatch(replacePageTo('/board'));

@@ -23,6 +23,6 @@ export const selectFocusedInvestigators = createSelector(
     return reject(
       propIncludes('code', disabled), 
       selected
-    );
+    ).slice(0, 1);
   }
 )

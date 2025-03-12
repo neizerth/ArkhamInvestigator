@@ -1,6 +1,6 @@
 import type { InvestigatorSource } from "@shared/model";
 
-export const getInvestigatorBoardStats = ({
+export const getBoardStats = ({
   health,
   sanity,
   skill_agility,

@@ -24,6 +24,7 @@ export type InvestigatorBoard = {
   value: InvestigatorBoardValues
   unique: boolean
   history: HistoryItem[]
+  historyIndex: number
   checkHistory: SkillCheckHistoryItem[]
   details: InvestigatorDetails
   selection: SelectedInvestigator
