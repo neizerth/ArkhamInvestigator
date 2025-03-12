@@ -83,5 +83,4 @@ export const setBoardDetails: ActionCreator<AppThunk> = ({
     }
 
     dispatch(setCurrentBoard(data));
-    dispatch(setSelectedInvestigators([]));
   }

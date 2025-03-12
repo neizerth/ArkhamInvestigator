@@ -36,7 +36,6 @@ export const InvestigatorSelect = ({
   }, [dispatch]);
 
   const next = useCallback(() => {
-    console.log({ nextIndex });
     dispatch(setCurrentInvestigatorIndex(nextIndex));
   }, [dispatch, nextIndex]);
 

@@ -1,6 +1,6 @@
-import type { InvestigatorSource, Story } from "../api"
+import type { InvestigatorSource, Story } from "@shared/model/api";
+import type { Nullable } from "@shared/model/util";
 import type { Investigator as InvestigatorMedia } from "arkham-investigator-data"
-import type { Nullable } from "../util";
 import type { ImageRequireSource } from "react-native";
 
 export type Faction = 'neutral' | 'mystic' | 'rogue' | 'survivor' | 'seeker' | 'guardian'
