@@ -2,7 +2,7 @@ import { DEFAULT_LANGUAGE } from '@features/i18n/config';
 import { createSlice } from '@reduxjs/toolkit';
 import { loadCoreData } from '@shared/lib/store';
 import { createSliceState } from 'redux-toolkit-helpers';
-import { loadTranslationsThunk } from './actions';
+import { loadTranslations } from './actions';
 import { pick } from 'ramda';
 import { setAvailableLanguages, setTranslationsData } from './reducers';
 
@@ -26,7 +26,7 @@ export const i18n = createSlice({
   extraReducers(builder) {
     builder
       .addCase(loadCoreData.fulfilled, setAvailableLanguages)
-      .addCase(loadTranslationsThunk.fulfilled, setTranslationsData)
+      .addCase(loadTranslations.fulfilled, setTranslationsData)
   }
 });
 

@@ -34,6 +34,7 @@ export const setTranslationsData: I18NReducer<ArkhamDivider.Translation> = (stat
 
   return {
     ...state,
+    language: loadingLanguage,
     loadingLanguage: null,
     loadedLanguages: [
       ...loadedLanguages,
