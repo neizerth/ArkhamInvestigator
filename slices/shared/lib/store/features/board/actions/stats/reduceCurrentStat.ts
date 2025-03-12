@@ -17,25 +17,33 @@ export const reduceCurrentStat: ActionCreator<AppThunk> = <T extends keyof Inves
       return;
     }
     
-    const boardValue = reducer(board.value[type]);
+    const statValue = reducer(board.value[type]);
 
     const value = {
       ...board.value, 
-      [type]: boardValue 
+      [type]: statValue 
+    }
+
+    const historyIndex = board.historyIndex + 1;
+
+    const currentHistory = board.history
+      .slice(0, historyIndex);
+
+    const historyItem = {
+      id: v4(),
+      type,
+      value: statValue
     }
 
     const history = [
-      ...board.history,
-      {
-        id: v4(),
-        type,
-        value
-      }
+      ...currentHistory,
+      historyItem
     ]
 
     dispatch(setCurrentBoard({
       ...board,
       value,
-      history
+      history,
+      historyIndex
     }))
   }

@@ -1,20 +1,18 @@
 import { PrimaryButton } from '@shared/ui';
 import * as C from './Keyboard.components';
-import { useAppDispatch, sendNumberSignal, sendOperatorSignal, sendCommandSignal, setHistoryShown, selectHistoryShown, useAppSelector } from '@shared/lib';
+import { useAppDispatch, sendNumberSignal, sendOperatorSignal, sendCommandSignal, setHistoryShown, selectHistoryShown, useAppSelector, addCurrentSkillCheckToHistory } from '@shared/lib';
 import { useCallback } from 'react';
 import type { SkillCheckCommandType, SkillCheckOperator } from '@shared/model';
 import { operatorMapping } from './mapping';
-import { addCurrentSkillCheckToHistory } from '@shared/lib/store/features/board/actions/history/addCurrentSkillCheckToHistory';
 import { LayoutContainer } from '../../LayoutContainer';
 import { characters } from '@pages/skill-check/config';
-import { useSkillCheckLayoutType } from '@pages/skill-check/lib';
-import { useWindowDimensions } from 'react-native';
+import { useWindowDimensions, ViewProps } from 'react-native';
 
-export type KeyboardProps = {
+export type KeyboardProps = ViewProps
 
-}
-
-export const Keyboard = ({}: KeyboardProps) => {
+export const Keyboard = ({
+  ...props
+}: KeyboardProps) => {
   const dispatch = useAppDispatch();
   const historyShown = useAppSelector(selectHistoryShown);
   const window = useWindowDimensions();
@@ -52,7 +50,7 @@ export const Keyboard = ({}: KeyboardProps) => {
   })
 
   return (
-    <C.Container>
+    <C.Container {...props}>
       <C.Content border={!showRule}>
         <LayoutContainer>
           {showRule && (

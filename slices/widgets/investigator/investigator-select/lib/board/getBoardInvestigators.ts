@@ -52,7 +52,7 @@ export const getInvestigatorBoards = ({
       unique,
       history: [],
       checkHistory: [],
-      historyIndex: 0,
+      historyIndex: -1,
       details,
       selection: item
     }

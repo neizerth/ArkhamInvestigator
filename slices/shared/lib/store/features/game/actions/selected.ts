@@ -30,6 +30,7 @@ export const changeSelectedInvestigator: ActionCreator<AppThunk> = (details: Inv
 
     if ((hasCode && (!isMultiselect || isMaxPlayers))) {
       dispatch(removeSelectedInvestigator(code))
+      return;
     }
 
     if (isMaxPlayers) {
@@ -43,6 +44,7 @@ export const changeSelectedInvestigator: ActionCreator<AppThunk> = (details: Inv
       variantId: null,
       skinId: null,
     }
+    
     if (replaceCode) {
       dispatch(setSelectedInvestigators([selectedItem]))
     }

@@ -1,5 +1,6 @@
 import {
 	type Action,
+	type ActionCreator,
 	type ThunkAction,
 	configureStore,
 } from "@reduxjs/toolkit";
@@ -28,6 +29,7 @@ export type AppStore = ReturnType<typeof makeStore>;
 // Infer the `RootState` and `AppDispatch` types from the store itself
 export type RootState = ReturnType<AppStore["getState"]>;
 export type AppDispatch = AppStore["dispatch"];
+export type AppThunkCreator = ActionCreator<AppThunk>
 
 export * from './features'
 export * from './effects'

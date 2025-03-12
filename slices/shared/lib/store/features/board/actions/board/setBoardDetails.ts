@@ -7,6 +7,7 @@ import type { AppThunk } from "@shared/lib/store";
 import { selectInvestigatorSources } from '../../../investigators/investigatorSources/investigatorSources';
 import { propEq } from "ramda";
 import { getBoardStats } from "@shared/lib/features/game/board/getBoardStats";
+import { setSelectedInvestigators } from '../../../game/game'
 
 type SetBoardDetailsOptions = {
   variantId?: string | null
@@ -82,4 +83,5 @@ export const setBoardDetails: ActionCreator<AppThunk> = ({
     }
 
     dispatch(setCurrentBoard(data));
+    dispatch(setSelectedInvestigators([]));
   }

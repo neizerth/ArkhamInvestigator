@@ -2,7 +2,7 @@ import { assetsSize } from "@pages/board/config";
 import { PropsWithView } from "@pages/board/model";
 import { size } from "@shared/config";
 import { PropsWithUnit } from "@shared/model";
-import { DefinedIconProps, Icon } from "@shared/ui";
+import { DefinedIconProps, Icon, TouchableOpacity } from "@shared/ui";
 import { FC } from "react";
 import { View, ViewProps } from "react-native";
 import styled, { css } from "styled-components/native";
@@ -45,6 +45,18 @@ export const History: FC<HistoryProps> = styled(View)`
       flex-direction: row;
     `
   }}
+`
+
+export const HistoryIcon: typeof Icon = styled(Icon)`
+  font-size: 30px;
+  color: white;
+`
+
+export const HistoryButton: typeof TouchableOpacity = styled(TouchableOpacity)`
+  width: 48px;
+  height: 48px;
+  justify-content: center;
+  align-items: center;
 `
 
 export const Undo: FC<DefinedIconProps> = styled(Icon)

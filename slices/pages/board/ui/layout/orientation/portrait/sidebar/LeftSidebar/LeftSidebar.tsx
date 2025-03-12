@@ -1,8 +1,8 @@
 import { InvestigatorSelect } from '@pages/board/ui/shared/features';
 import * as C from './LeftSidebar.components';
 import { ViewProps } from 'react-native';
-import { selectInvestigatorBoards, useAppSelector } from '@shared/lib';
-import { useContext } from 'react';
+import { redo, selectInvestigatorBoards, undo, useAppDispatch, useAppSelector } from '@shared/lib';
+import { useCallback, useContext } from 'react';
 import { LayoutContext, PortraitLayoutContext } from '@pages/board/config';
 
 export type LeftSidebarProps = ViewProps;
@@ -10,9 +10,16 @@ export type LeftSidebarProps = ViewProps;
 export const LeftSidebar = ({
   ...props
 }: LeftSidebarProps) => {
+  const dispatch = useAppDispatch();
   const boards = useAppSelector(selectInvestigatorBoards);
-  const { view } = useContext(LayoutContext);
   const { height } = useContext(PortraitLayoutContext);
+  const onUndo = useCallback(() => {
+    dispatch(undo())
+  }, [dispatch]);
+
+  const onRedo = useCallback(() => {
+    dispatch(redo())
+  }, [dispatch]);
 
   const single = boards.length === 1; 
 
@@ -26,8 +33,12 @@ export const LeftSidebar = ({
         single={single}
         unit={height}
       >
-        <C.Redo />
-        <C.Undo />
+        <C.HistoryButton onPress={onRedo}>
+          <C.HistoryIcon icon="redo"/>
+        </C.HistoryButton>
+        <C.HistoryButton onPress={onUndo}>
+          <C.HistoryIcon icon="undo"/>
+        </C.HistoryButton>
       </C.History>
       {!single && (
         <InvestigatorSelect/>

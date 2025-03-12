@@ -13,15 +13,18 @@ export const Sanity = ({
   ...props
 }: SanityProps) => {
   const dispatch = useAppDispatch()
-  const { value, baseValue } = useAppSelector(selectCurrentBoard);
+  const board = useAppSelector(selectCurrentBoard);
+  const value = board?.value
+  const baseValue = board?.baseValue.sanity || 0
+
   const onChange = useCallback(({ value }: PickerChangeEvent) => {
 
     dispatch(setCurrentStat('sanity', value))
   }, [dispatch]);
 
   const onLongPress = useCallback(() => {
-    dispatch(increaseCurrentStat('sanity', baseValue.sanity))
-  }, [dispatch, baseValue.sanity]);
+    dispatch(increaseCurrentStat('sanity', baseValue))
+  }, [dispatch, baseValue]);
 
   const onPress = useCallback(() => {
     dispatch(decreaseCurrentStat('sanity', 0))
@@ -30,8 +33,8 @@ export const Sanity = ({
   return (
     <C.Container {...props}>
       <C.Picker
-        value={value.sanity}
-        data={range(0, baseValue.sanity + 1)}
+        value={value?.sanity}
+        data={range(0, baseValue + 1)}
         onValueChanged={onChange}
         onLongPress={onLongPress}
         onPress={onPress}

@@ -8,7 +8,7 @@ import type { PickerChangeEvent } from '@widgets/picker';
 
 export const Clues = (props: ClueProps) => {
   const dispatch = useAppDispatch()
-  const { value } = useAppSelector(selectCurrentBoard);
+  const board = useAppSelector(selectCurrentBoard);
   const onChange = useCallback(({ value }: PickerChangeEvent) => {
     dispatch(setCurrentStat('clues', value))
   }, [dispatch]);
@@ -24,7 +24,7 @@ export const Clues = (props: ClueProps) => {
   return (
     <C.Container {...props}>
       <C.Picker
-        value={value.clues}
+        value={board?.value.clues}
         data={range(0, 101)}
         onValueChanged={onChange}
         onLongPress={onLongPress}

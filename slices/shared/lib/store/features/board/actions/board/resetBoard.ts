@@ -4,6 +4,7 @@ import type { AppThunk } from "@shared/lib/store";
 import { selectCurrentBoard } from "../../selectors/selectCurrentBoard";
 import { setCurrentBoard } from "./setCurrentBoard";
 import { setShowDescription } from "../../../game/game";
+import { clearHistory } from "../history/clearHistory";
 
 import type { InvestigatorBoard } from "@shared/model";
 
@@ -27,6 +28,8 @@ export const resetBoard: ActionCreator<AppThunk> = () =>
       }
     }
 
+    // dispatch()
     dispatch(setCurrentBoard(data));
+    dispatch(clearHistory());
     dispatch(setShowDescription(false));
   }

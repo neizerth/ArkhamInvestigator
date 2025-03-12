@@ -21,7 +21,7 @@ export const board = createSlice({
 
 export const {
   setCurrentInvestigatorIndex,
-  setInvestigatorBoards,
+  setInvestigatorBoards
 } = board.actions;
 
 export const {

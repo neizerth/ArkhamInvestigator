@@ -12,7 +12,8 @@ export const Resources = ({
   ...props
 }: ResourcesProps) => {
   const dispatch = useAppDispatch()
-  const { value } = useAppSelector(selectCurrentBoard);
+  const board = useAppSelector(selectCurrentBoard);
+  const value = board?.value
   const onChange = useCallback(({ value }: PickerChangeEvent) => {
     dispatch(setCurrentStat('resources', value))
   }, [dispatch]);
@@ -28,7 +29,7 @@ export const Resources = ({
   return (
     <C.Container {...props}>
       <C.Picker
-        value={value.resources}
+        value={value?.resources}
         data={range(0, 101)}
         onValueChanged={onChange}
         onLongPress={onLongPress}
