@@ -1,7 +1,7 @@
+import { withLocaleFont } from "@features/i18n"
 import { boardText } from "@pages/board/config"
 import { color, font } from "@shared/config"
 import { ArnoPro } from "@shared/fonts/ArnoPro"
-import { withLocaleFont } from "@shared/lib/hoc"
 import { PropsWithUnit } from "@shared/model"
 import { FC } from "react"
 import { TextProps } from "react-native"

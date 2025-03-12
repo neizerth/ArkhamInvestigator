@@ -10,9 +10,3 @@ export const loadCoreData = createAsyncThunk(
   'app/loadCoreData',
   API.loadGameCoreData
 )
-
-export const loadTranslationsData = createAsyncThunk(
-  'app/loadTranslationsData',
-  API.loadGameTranslationData
-)
-

@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import type { Story } from '@shared/model';
 import { createSliceState } from 'redux-toolkit-helpers';
-import { loadCoreData } from '../app/app.thunks';
+import { loadCoreData } from '../app/actions/api';
 
 export type IStoriesState = {
   stories: Story[]

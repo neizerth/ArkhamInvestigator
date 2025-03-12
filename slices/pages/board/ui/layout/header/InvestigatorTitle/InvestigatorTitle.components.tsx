@@ -1,9 +1,9 @@
-import { Arkhamic } from "@shared/fonts/Arkhamic";
+import { withLocaleFont } from "@features/i18n";
 import { ArnoPro } from "@shared/fonts/ArnoPro";
 import { Conkordia } from "@shared/fonts/Conkordia";
 import { Teutonic } from "@shared/fonts/Teutonic";
-import { withIcon, withLocaleFont } from "@shared/lib/hoc";
-import { DefinedIconProps, Icon, IconNumber, Row } from "@shared/ui";
+import { withIcon } from "@shared/lib/hoc";
+import { Row } from "@shared/ui";
 import type { FC } from "react";
 import type { ImageBackgroundProps, ImageProps } from "react-native";
 import { Text } from "react-native";

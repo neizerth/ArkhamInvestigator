@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import type { Investigator } from 'arkham-investigator-data';
 
 import { createSliceReducer, createSliceState } from 'redux-toolkit-helpers'; 
-import { loadInvestigatorsMediaData } from '../../app/app.thunks';
+import { loadInvestigatorsMediaData } from '../../app/actions/api';
 export type IInvestigatorsState = {
   investigatorMedia: Investigator[]
 }

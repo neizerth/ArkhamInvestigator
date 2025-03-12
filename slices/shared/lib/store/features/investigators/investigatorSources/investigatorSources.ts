@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import type { InvestigatorSource } from '@shared/model';
 import { createSliceState } from 'redux-toolkit-helpers';
-import { loadCoreData } from '../../app/app.thunks';
+import { loadCoreData } from '../../app/actions/api';
 import { prop } from 'ramda';
 
 export type IInvestigatorSourcesState = {

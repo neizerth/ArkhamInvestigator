@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import type { EncounterSet } from '@shared/model';
 import { createSliceReducer, createSliceState } from 'redux-toolkit-helpers';
-import { loadCoreData } from '../app/app.thunks';
+import { loadCoreData } from '../app/actions/api';
 
 export type IEncounterSetsState = {
   encounterSets: EncounterSet[]

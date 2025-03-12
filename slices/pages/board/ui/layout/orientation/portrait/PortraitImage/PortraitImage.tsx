@@ -14,7 +14,13 @@ export const PortraitImage = ({
 }: PortraitImageProps) => {
   const { view, layout } = useContext(LayoutContext);
 
-  const { picture } = useAppSelector(selectCurrentBoard);
+  const board = useAppSelector(selectCurrentBoard);
+
+  if (!board) {
+    return null;
+  }
+  
+  const { picture } = board
 
   const activeStyle = useActiveStyle();
   

@@ -1,6 +1,6 @@
+import { getKeyConfig } from "@shared/lib"
 import type { ComponentType, FC } from "react"
-import { Text, type TextProps, type TextStyle } from "react-native"
-import { getKeyConfig } from "../util/record"
+import { Text, type TextProps } from "react-native"
 
 export type WithLocaleFontOptions<Props extends TextProps> = {
   Component?: ComponentType<Props>

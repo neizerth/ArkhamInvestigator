@@ -1,11 +1,11 @@
 import { PrimaryButton } from "../../../../shared/ui/control/PrimaryButton";
 import { NewGameButton } from "../NewGameButton";
-import { Container } from "./HomePage.components";
+import * as C from "./HomePage.components";
 
 export const HomePage = () => {
   return (
-    <Container>
+    <C.Container>
       <NewGameButton/>
-    </Container>
+    </C.Container>
   );
 }
