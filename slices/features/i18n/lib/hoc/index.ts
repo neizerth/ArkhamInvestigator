@@ -1,1 +1,1 @@
-export * from './withLocaleFont'
+export * from './withLocale'

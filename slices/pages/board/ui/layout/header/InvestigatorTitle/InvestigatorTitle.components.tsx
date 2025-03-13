@@ -1,7 +1,8 @@
-import { withLocaleFont } from "@features/i18n";
+import { withLocale } from "@features/i18n";
+import { Arkhamic } from "@shared/fonts/Arkhamic";
 import { ArnoPro } from "@shared/fonts/ArnoPro";
 import { Conkordia } from "@shared/fonts/Conkordia";
-import { Teutonic } from "@shared/fonts/Teutonic";
+import { SanCn } from "@shared/fonts/SanCn";
 import { withIcon } from "@shared/lib/hoc";
 import { Row } from "@shared/ui";
 import type { FC } from "react";
@@ -23,16 +24,19 @@ export const Title: typeof Row = styled(Row)`
 ` 
 
 export const Id: typeof Text = styled(Text)`
-  font-family: ${Teutonic.regular};
+  font-family: ${Arkhamic.regular};
 ` 
 
-export const TitleText = withLocaleFont({
+export const TitleText = withLocale({
   style: {
     default: {
-      fontFamily: Teutonic.regular,
+      fontFamily: Arkhamic.regular,
     },
     ru: {
       fontFamily: Conkordia.regular
+    },
+    ko: {
+      fontFamily: SanCn.bold
     }
   }
 });
@@ -43,10 +47,13 @@ export const Subtitle: typeof View = styled(View)`
   align-items: center;
 `
 
-export const SubtitleText = withLocaleFont({
+export const SubtitleText = withLocale({
   style: {
     default: {
       fontFamily: ArnoPro.bold
+    },
+    ko: {
+      fontFamily: SanCn.bold
     }
   }
 });

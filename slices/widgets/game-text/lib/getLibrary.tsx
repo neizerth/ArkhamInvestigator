@@ -2,10 +2,10 @@ import type { TextProps } from "react-native"
 import type { ComponentStyleMap } from "../model"
 import type { HTMLReactParserOptions } from "html-react-parser"
 import { v4 } from "uuid"
-import { Key } from "react"
+import { Fragment, Key } from "react"
 import { Icon } from "@shared/ui"
 import { iconMapping } from "../config"
-import { Line, Text } from "../ui/GameText/GameText.components"
+import * as C from "../ui/GameText/GameText.components"
 
 type GetLibraryOptions = {
   componentStyles?: ComponentStyleMap
@@ -16,11 +16,10 @@ export const getLibrary = ({
   props
 }: GetLibraryOptions): HTMLReactParserOptions['library'] => ({
   cloneElement(...args) {
-    return <Text key={v4()}/>
+    return <C.Text key={v4()}/>
   },
   createElement(type, elementProps, ...children) {
     const componentStyle = componentStyles?.[type];
-    const textComponentStyle = componentStyles?.text;
 
     const mergedProps = {
       ...props,
@@ -34,29 +33,62 @@ export const getLibrary = ({
 
     const textStyle = [
       props.style,
-      textComponentStyle
+      componentStyles?.text
     ]
+
+    if (type === 'content') {
+      return (
+        <Fragment key={v4()}>
+          {children}
+        </Fragment>
+      );
+    }
+
+    if (type === 'p') {
+      const content = children
+        .map(child => (
+          <C.Text 
+            {...props}
+            style={textStyle}
+            key={v4()}
+          >
+            {child}
+          </C.Text>
+        ))
+
+      return (
+        <C.Paragraph
+          {...elementProps}
+          key={v4()}
+          style={[
+            componentStyles?.paragraph
+          ]}
+        >
+          {content}
+        </C.Paragraph>
+      )
+    }
 
     if (type === 'icon') {
       if (!elementProps || !('icon' in elementProps) || typeof elementProps.icon !== 'string') {
-        return <Text key={v4()}/>
+        return <C.Text key={v4()}/>
       }
       const { icon } = elementProps;
       const value = iconMapping[icon] || icon;
 
       const content = children
         .map(child => (
-          <Text 
+          <C.Text 
             {...props}
             style={textStyle}
             key={v4()}
           >
             {child}
-          </Text>
+          </C.Text>
         ))
 
       return (
-        <Line key={v4()}>
+        <C.Line key={v4()}>
           <Icon
             {...mergedProps}
             key={v4()}
@@ -65,29 +97,29 @@ export const getLibrary = ({
             scaleType={false}
           />
           {content}
-        </Line>
+        </C.Line>
       );
     }
 
     const content = children
       .map(child => (
-        <Text 
+        <C.Text 
           {...mergedProps}
           style={textStyle}
           key={v4()}
         >
           {child}
-        </Text>
+        </C.Text>
       ))
 
     return (
-      <Text
+      <C.Text
         {...mergedProps}
         key={v4()}
         style={textStyle}
       >
         {content}
-      </Text>
+      </C.Text>
     )
   },
   isValidElement: () => true

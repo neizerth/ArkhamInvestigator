@@ -1,8 +1,10 @@
-import { goToPage, useAppDispatch } from "@shared/lib";
-import { PrimaryButton } from "../../../../shared/ui/control/PrimaryButton";
+import { goToPage, useAppDispatch, usePageLoader } from "@shared/lib";
 import { NewGameButton } from "../NewGameButton";
 import * as C from "./HomePage.components";
-import { useCallback } from "react";
+import { useCallback, useEffect, useRef } from "react";
+import { startNewGame } from "@pages/home/lib";
+import { Loader } from "@shared/ui";
+import { useFocusEffect, usePathname } from "expo-router";
 
 export const HomePage = () => {
   const dispatch = useAppDispatch();
@@ -11,12 +13,18 @@ export const HomePage = () => {
     dispatch(goToPage('/settings'))
   }, [dispatch]);
 
+  const start = useCallback(() => {
+    dispatch(startNewGame());
+  }, [dispatch]);
+
+  const onStart = usePageLoader(start);
+
   return (
     <C.Container>
       <C.SettingsButton onPress={goToSettings}>
         <C.SettingsIcon/>
       </C.SettingsButton>
-      <NewGameButton/>
+      <NewGameButton onPress={onStart}/>
     </C.Container>
   );
 }

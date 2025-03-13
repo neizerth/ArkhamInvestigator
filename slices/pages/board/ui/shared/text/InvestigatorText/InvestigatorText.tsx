@@ -1,40 +1,35 @@
-import { color, font } from "@shared/config"
-import { ArnoPro } from "@shared/fonts/ArnoPro"
-import { PropsWithUnit } from "@shared/model"
-import { GameText, GameTextProps } from "@widgets/game-text"
-import { FC } from "react"
-import styled, { css } from "styled-components/native"
-import { boardText } from '../../../../config/text'
+import { useAppSelector } from '@shared/lib';
+import * as C from './InvestigatorText.components';
+import type { InvestigatorTextProps } from './InvestigatorText.types';
+import { getInvestigatorTextStyle } from './InvestigatorText.styles';
+import { selectLanguage } from '@features/i18n';
+import { mergeDeepRight } from 'ramda';
+import type { ComponentStyleMap } from '@widgets/game-text';
 
-export type InvestigatorTextProps = GameTextProps & Partial<PropsWithUnit>
+// export { Text as InvestigatorText } from './InvestigatorText.components';
 
-export const InvestigatorText: FC<InvestigatorTextProps> = styled(GameText)
-  .attrs(({ unit }: InvestigatorTextProps) => ({
-    componentStyles: {
-      i: {
-        fontFamily: ArnoPro.italic
-      },
-      b: {
-        fontFamily: ArnoPro.bold
-      },
-      keyword: {
-        fontFamily: ArnoPro.boldItalic
-      },
-      icon: {
-        fontSize: unit && unit * boardText.ratio.icon
-      }
-    }
-  }))`
-    font-family: ${ArnoPro.regular};
-    color: ${color.text};
-    ${({ unit }: InvestigatorTextProps) => {
-      if (!unit) {
-        return '';
-      }
-      const fontSize = unit * boardText.ratio.text;
-      return css`
-        font-size: ${fontSize}px;
-        line-height: ${fontSize * 1.15}px;
-      `}
-    }
-  `
+export const InvestigatorText = (props: InvestigatorTextProps) => {
+  const language = useAppSelector(selectLanguage);
+  const { unit = 0 } = props;
+
+  const styleSheet = getInvestigatorTextStyle({
+    language,
+    unit
+  });
+
+  const componentStyles = mergeDeepRight(
+    props.componentStyles || {},
+    styleSheet.componentStyles
+  ) as ComponentStyleMap;
+
+  return (
+    <C.Text
+      {...props}
+      componentStyles={componentStyles}
+      style={[
+        props.style,
+        styleSheet.style
+      ]}
+    />
+  )
+}

@@ -37,6 +37,9 @@ export const getTitleStyle = (options: GetTitleStyleOptions) => {
       titleText: {
         fontSize: 45 * vh * font.scale,
       },
+      subtitleText: {
+        fontSize: 22 * vh * font.scale,
+      },
       id: {
         fontSize: 30 * vh * font.scale,
       },
@@ -56,6 +59,23 @@ export const getTitleStyle = (options: GetTitleStyleOptions) => {
       },
       unique: {
         fontSize: 23 * vh * font.scale,
+      }
+    },
+    ko: {
+      container: {
+        gap: '12%'
+      },
+      title: {
+        paddingTop: '2%',
+      },
+      titleText: {
+        fontSize: 38 * vh * font.scale,
+      },
+      subtitleText: {
+        fontSize: 18 * vh * font.scale,
+      },
+      unique: {
+        marginTop: 0,
       }
     }
   })
@@ -93,7 +113,6 @@ export const getTitleStyle = (options: GetTitleStyleOptions) => {
     color: textColor
   }
   const subtitleText: TextStyle = {
-    fontSize: 22 * vh * font.scale,
     color: textColor
   }
 

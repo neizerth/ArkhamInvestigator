@@ -1,4 +1,4 @@
-import { selectFocusedInvestigators, selectReplaceCode, selectReplaceInvestigator, selectSelectedInvestigators, useAppDispatch, useAppSelector } from '@shared/lib';
+import { selectFocusedInvestigators, selectReplaceCode, selectReplaceInvestigator, selectSelectedInvestigators, useAppDispatch, useAppSelector, usePageLoader } from '@shared/lib';
 import * as C from './StartButton.components';
 import { getInvestigatorImageUrl } from '@shared/api/getInvestigatorImageUrl';
 import type { SelectedInvestigator } from '@shared/model';
@@ -26,11 +26,13 @@ export const StartButton = () => {
     dispatch(replaceInvestigator());
   }, [dispatch, code])
 
-  const title = t(code ? 'Okay' : 'Start');
+  const onStart = usePageLoader(start);
+
+  const title = t(code ? 'Continue' : 'Start');
 
   return (
     <C.Container 
-      onPress={start} 
+      onPress={onStart} 
     >
       <C.Content>
         <C.Investigators>

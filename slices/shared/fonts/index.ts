@@ -5,7 +5,10 @@ import { ArkhamIconsFonts } from "./ArkhamIcons";
 import { ArnoProFonts } from "./ArnoPro";
 import { ConkordiaFonts } from "./Conkordia";
 import { CopaseticFonts } from "./Copasetic";
+import { DXPnFonts } from "./DXPn";
+import { SanCnFonts } from "./SanCn";
 import { TeutonicFonts } from "./Teutonic";
+import { YoonFonts } from "./Yoon";
 
 
 export default {
@@ -16,5 +19,8 @@ export default {
   ...AlegreyaFonts,
   ...ArnoProFonts,
   ...ArkhamDigitsFonts,
-  ...CopaseticFonts
+  ...CopaseticFonts,
+  ...SanCnFonts,
+  ...YoonFonts,
+  ...DXPnFonts
 }

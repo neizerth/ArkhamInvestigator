@@ -183,6 +183,7 @@ export const PickerList = ({
       contentContainerStyle={[
         props.contentContainerStyle,
       ]}
+      keyExtractor={(item) => item.toString()}
       getItemLayout={getItemLayout}
       initialScrollIndex={defaultIndex}
       onTouchStart={onTouchStart}
@@ -191,6 +192,7 @@ export const PickerList = ({
       onScroll={onScroll}
       snapToOffsets={snapToOffsets}
       showsVerticalScrollIndicator={false}
+      removeClippedSubviews
     />
   )
 }

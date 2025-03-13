@@ -4,6 +4,8 @@ import * as C from './PrimaryButton.components';
 import { useCallback, useState } from 'react';
 import { PrimaryButtonProps } from './PrimaryButton.types';
 
+export { PrimaryButtonProps };
+
 export const PrimaryButton = ({
   children,
   styleType,

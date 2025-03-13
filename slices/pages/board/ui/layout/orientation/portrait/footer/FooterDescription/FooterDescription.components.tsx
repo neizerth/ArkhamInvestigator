@@ -45,10 +45,6 @@ export const ExpandArea: typeof Pressable = styled(Pressable)
     z-index: 10;
   `
 
-export const TextCollapse: typeof Pressable = styled(Pressable)`
-  flex: 1;
-`
-
 export const Exit: FC<DefinedIconButtonProps> = styled(IconButton)
   .attrs({
     icon: 'resign',
@@ -76,6 +72,8 @@ export const Clear: FC<DefinedIconButtonProps> = styled(IconButton)
   `
 
 export const TextContent: typeof ScrollView = styled(ScrollView)`
+  flex: 1;
+  height: 200px;
 `
 
 export const DescriptionContent: typeof View = styled(View)`
@@ -90,6 +88,8 @@ export const Menu: typeof DescriptionMenu = styled(DescriptionMenu)`
 
 export { InvestigatorTraits as Traits }
 
-export { InvestigatorFlavor as Flavor }
+export const Flavor: typeof InvestigatorFlavor = styled(InvestigatorFlavor)`
+  margin-top: 25px;
+`
 
 export { InvestigatorText as Text }

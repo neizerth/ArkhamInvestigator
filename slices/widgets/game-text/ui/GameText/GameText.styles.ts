@@ -1,5 +1,6 @@
 import { Alegreya } from "@shared/fonts/Alegreya";
 import type { ComponentStyleMap } from "@widgets/game-text/model";
+import { Paragraph } from "./GameText.components";
 
 export const defaultComponentStyles: ComponentStyleMap = {
   i: {
@@ -15,6 +16,15 @@ export const defaultComponentStyles: ComponentStyleMap = {
     top: 1,
     marginRight: 2,
     fontSize: 14
+  },
+  paragraph: {
+
+  },
+  break: {
+    height: 32,
+  },
+  text: {
+
   }
 }
 

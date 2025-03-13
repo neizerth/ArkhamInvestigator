@@ -74,22 +74,22 @@ export const FooterDescription = ({
             width={view.width}
           >
             <C.DescriptionContent>
-              <C.TextCollapse onPress={onHide}>
-                <C.TextContent>
-                  <C.Traits unit={vw}>{traits}</C.Traits>
-                  {showDescription && (
-                    <>
-                      <C.Text 
-                        value={text}
-                        unit={vw}
-                      />
+              <C.TextContent>
+                <C.Traits unit={vw}>{traits}</C.Traits>
+                {showDescription && (
+                  <>
+                    <C.Text 
+                      value={text}
+                      unit={vw}
+                    />
+                    {flavor && (
                       <C.Flavor unit={vw}>
                         {flavor}
                       </C.Flavor>
-                    </>
-                  )}
-                </C.TextContent>
-              </C.TextCollapse>
+                    )}
+                  </>
+                )}
+              </C.TextContent>
               <C.Menu/>
             </C.DescriptionContent>
           </C.Background>

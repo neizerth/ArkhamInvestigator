@@ -1,6 +1,6 @@
 import * as C from './Value.components';
-import { StyleSheet, ViewProps } from 'react-native';
-import { getFontStyle, numberSize, valueStyle } from './Value.styles';
+import { StyleSheet, type ViewProps } from 'react-native';
+import { getFontStyle, valueStyle } from './Value.styles';
 import type { IconNumberProps } from '@shared/ui';
 import { memo } from 'react';
 
