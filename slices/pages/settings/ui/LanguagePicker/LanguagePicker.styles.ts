@@ -1,0 +1,1 @@
+export const FLAG_SIZE = 48;

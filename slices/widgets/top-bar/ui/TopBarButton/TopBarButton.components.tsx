@@ -8,5 +8,7 @@ export const Icon: typeof BaseIcon = styled(BaseIcon)`
 `
 
 export const Container: typeof TouchableOpacity = styled(TouchableOpacity)`
-  
+  width: 48px;
+  justify-content: center;
+  align-items: flex-start;
 `

@@ -4,7 +4,7 @@ import { Text as BaseText } from "react-native";
 import styled from "styled-components/native";
 
 export const Text: typeof BaseText = styled(BaseText)`
-  font-family: ${Teutonic.regular};
+  font-family: ${Teutonic.ru};
   font-size: ${font.size.xxl}px;
   color: ${color.light10};
 `

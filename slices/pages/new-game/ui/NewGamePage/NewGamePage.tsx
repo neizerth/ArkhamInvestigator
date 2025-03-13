@@ -2,8 +2,10 @@ import { InvestigatorSelect } from "@widgets/investigator/investigator-select";
 import { Container } from "./NewGamePage.components";
 import { TopBar } from "@widgets/top-bar";
 import { router } from "expo-router";
+import { useAppTranslation } from "@features/i18n";
 
 export const NewGamePage = () => {
+  const { t } = useAppTranslation();
 
   const goHome = () => {
     router.push('/');
@@ -12,7 +14,7 @@ export const NewGamePage = () => {
     <Container>
       <TopBar
         onBack={goHome}
-        title="Select Investigator"
+        title={t`Choose an Investigator`}
       />
       <InvestigatorSelect/>
     </Container>

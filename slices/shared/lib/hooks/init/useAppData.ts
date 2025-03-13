@@ -1,6 +1,8 @@
 import { useEffect } from "react"
 import { useAppDispatch } from "../store/useAppDispatch";
-import { loadCoreData, loadInvestigatorsMediaData } from "@shared/lib/store";
+import { loadCoreData, loadInvestigatorsMediaData } from "../../../lib/store/features/app/actions";
+
+// import { loadCoreData, loadInvestigatorsMediaData } from "@shared/lib/store";
 
 export const useAppData = () => {
   const dispatch = useAppDispatch();

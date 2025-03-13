@@ -1,2 +1,3 @@
 export * from './IconImageBackground'
-export * from './svg'
+export * from './SvgPatternImage'
+export * from './Flag'

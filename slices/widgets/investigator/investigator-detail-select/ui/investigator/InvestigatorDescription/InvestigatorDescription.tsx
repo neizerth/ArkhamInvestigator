@@ -1,6 +1,7 @@
 import type { InvestigatorDetails, InvestigatorDetailItem } from '@shared/model';
 import * as C from './InvestigatorDescription.components';
 import { getInvestigatorImageUrl as getImageUrl } from '@shared/api/getInvestigatorImageUrl';
+import { useAppTranslation } from '@features/i18n';
 
 export type InvestigatorDescriptionProps = {
   data: InvestigatorDetails
@@ -13,12 +14,15 @@ export const InvestigatorDescription = ({
   skin,
   variant
 }: InvestigatorDescriptionProps) => {
-  
+  const { t } = useAppTranslation();
+
   const { investigator } = variant?.details || data;
   const { code } = investigator;
   const imageId = skin?.imageId || variant?.imageId || code;
   const uri = getImageUrl(imageId, 'square');
   const source = { uri }
+  
+  const text = t(investigator.text);
 
   return (
     <C.Container>
@@ -33,7 +37,7 @@ export const InvestigatorDescription = ({
         </C.ImageContainer>
       </C.MainInfo>
       <C.InvestigatorTextContainer>
-        <C.InvestigatorText value={investigator.text}/>
+        <C.InvestigatorText value={text}/>
       </C.InvestigatorTextContainer>
     </C.Container>
   );

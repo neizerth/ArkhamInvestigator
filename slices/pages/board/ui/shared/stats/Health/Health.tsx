@@ -9,16 +9,15 @@ import { range } from 'ramda'
 export const Health = (props: HealthProps) => {
   const dispatch = useAppDispatch()
   const board = useAppSelector(selectCurrentBoard);
-  const baseValue = board?.baseValue
+  const baseValue = board?.baseValue.health || 0;
   const value = board?.value
   const onChange = useCallback(({ value }: PickerChangeEvent) => {
-
     dispatch(setCurrentStat('health', value))
   }, [dispatch]);
 
   const onLongPress = useCallback(() => {
-    dispatch(increaseCurrentStat('health', baseValue?.health))
-  }, [dispatch, baseValue?.health]);
+    dispatch(increaseCurrentStat('health', baseValue))
+  }, [dispatch, baseValue]);
 
   const onPress = useCallback(() => {
     dispatch(decreaseCurrentStat('health', 0))
@@ -28,7 +27,7 @@ export const Health = (props: HealthProps) => {
     <C.Container {...props}>
       <C.Picker
         value={value?.health}
-        data={range(0, baseValue?.health + 1)}
+        data={range(0, baseValue + 1)}
         onValueChanged={onChange}
         onLongPress={onLongPress}
         onPress={onPress}

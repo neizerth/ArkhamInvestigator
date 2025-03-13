@@ -10,10 +10,12 @@ import { DataSectionMemo as DataSection } from "../data";
 import { setCurrentInvestigatorDetails } from "@shared/lib/store";
 import { propEq } from "ramda";
 import { changeSkin, changeVariant } from "../../lib/actions";
+import { useAppTranslation } from "@features/i18n";
 
 type DetailItem = InvestigatorDetailItem | null;
 export const InvestigatorDetailSelect = () => {
   const dispatch = useAppDispatch();
+  const { t } = useAppTranslation();
   const details = useAppSelector(selectCurrentInvestigatorDetails);
   const { 
     skin,
@@ -45,6 +47,8 @@ export const InvestigatorDetailSelect = () => {
   }
 
   const faction = investigator.faction_code as Faction;
+  const name = t(investigator.name);
+  const subname = t(investigator.subname || '')
 
   return (
     <C.Container>
@@ -53,8 +57,8 @@ export const InvestigatorDetailSelect = () => {
         <C.Outside onPress={goBack}/>
         <C.Card 
           faction={faction}
-          title={investigator.name}
-          subtitle={investigator.subname}
+          title={name}
+          subtitle={subname}
           onClose={goBack}
         >
           <C.Sections>
@@ -64,13 +68,13 @@ export const InvestigatorDetailSelect = () => {
               skin={skin}
             />
             <DataSection
-              title="Variants"
+              title={t`Versions`}
               data={variants}
               selected={variant}
               onChange={onChangeVariant}
             />
             <DataSection
-              title="Skins"
+              title={t`Skins`}
               data={skins}
               onChange={onChangeSkin}
               selected={skin}

@@ -1,10 +1,10 @@
 import type { ArkhamDivider } from "arkham-divider-data";
 import type { I18NReducer } from "../i18n.types";
 import { pick } from "ramda";
-import { i18n, I18N_NAMESAPCE } from "@features/i18n/config";
+import { i18next, I18N_NAMESAPCE, translations, DEFAULT_LANGUAGE } from "@features/i18n/config";
 
 export const setTranslationsData: I18NReducer<ArkhamDivider.Translation> = (state, { payload }) => {
-  const { loadingLanguage, loadedLanguages } = state;
+  const { loadingLanguage, language } = state;
 
   if (!loadingLanguage) {
     return state;
@@ -19,26 +19,29 @@ export const setTranslationsData: I18NReducer<ArkhamDivider.Translation> = (stat
     'investigators'
   ], payload);
 
-  const bundle = Object.assign({}, Object.values(data));
+  const translation = translations[loadingLanguage] || {};
 
-  const deep = true;
-  const overwrite = true;
+  const bundle = Object.assign(
+    {}, 
+    ...Object.values(data),
+    translation
+  )
   
-  i18n.addResourceBundle(
+  i18next.addResourceBundle(
     loadingLanguage, 
     I18N_NAMESAPCE, 
-    bundle, 
-    deep, 
-    overwrite
+    bundle
   );
+
+  i18next.changeLanguage(loadingLanguage);
+
+  if (language !== DEFAULT_LANGUAGE) {
+    i18next.removeResourceBundle(language, I18N_NAMESAPCE);
+  }
 
   return {
     ...state,
     language: loadingLanguage,
-    loadingLanguage: null,
-    loadedLanguages: [
-      ...loadedLanguages,
-      loadingLanguage
-    ]
+    loadingLanguage: null
   };
 }

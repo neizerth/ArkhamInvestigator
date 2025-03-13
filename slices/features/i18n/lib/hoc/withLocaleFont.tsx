@@ -1,4 +1,4 @@
-import { getKeyConfig } from "@shared/lib"
+import { getKeyConfig } from "../../../../shared/lib/util/record"
 import type { ComponentType, FC } from "react"
 import { Text, type TextProps } from "react-native"
 
