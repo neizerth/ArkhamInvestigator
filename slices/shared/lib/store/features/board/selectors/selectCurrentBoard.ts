@@ -7,7 +7,7 @@ export const selectCurrentBoard = createSelector(
     selectCurrentInvestigatorIndex,
     selectInvestigatorBoards
   ],
-  (index, boards): InvestigatorBoard | undefined => {
+  (index, boards): InvestigatorBoard => {
     return boards[index || 0];
   }
 )

@@ -23,12 +23,13 @@ export const InvestigatorDescription = ({
   const source = { uri }
   
   const text = t(investigator.text);
+  const traits = t(investigator.traits || '');
 
   return (
     <C.Container>
       <C.MainInfo>
         <C.Details>
-          <C.Traits>{investigator.traits}</C.Traits>
+          <C.Traits>{traits}</C.Traits>
           <C.Skills investigator={investigator}/>
           <C.Stats investigator={investigator}/>
         </C.Details>

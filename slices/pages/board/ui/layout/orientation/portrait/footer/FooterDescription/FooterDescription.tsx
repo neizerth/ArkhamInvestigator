@@ -6,6 +6,7 @@ import { goToPage, resetBoard, selectCurrentBoard, selectShowDescription, setSho
 import type { Faction } from '@shared/model';
 import { impactHapticFeedback } from '@features/haptic';
 import { useShowDescription } from './useShowdescription';
+import { useAppTranslation } from '@features/i18n';
 
 export type FooterDescriptionProps = ViewProps;
 
@@ -13,11 +14,13 @@ export const FooterDescription = ({
   ...props
 }: FooterDescriptionProps) => {
   const dispatch = useAppDispatch();
+  const { t } = useAppTranslation();
   const showDescription = useAppSelector(selectShowDescription);
 
   const { view } = useContext(LayoutContext);
-  const { investigator } = useAppSelector(selectCurrentBoard);
-  const faction = investigator.faction_code as Faction;
+  const board = useAppSelector(selectCurrentBoard);
+  const investigator = board?.investigator;
+  const faction = investigator?.faction_code as Faction;
   
   const onShow = useCallback(() => {
     if (!showDescription) {
@@ -45,9 +48,13 @@ export const FooterDescription = ({
 
   const vw = view.width * 6 / 100;
 
-  if (!vw) {
+  if (!vw || !investigator) {
     return null;
   }
+
+  const text = t(investigator.text);
+  const traits = t(investigator.traits || '');
+  const flavor = t(investigator.flavor || '');
 
   return (
     <C.Container {...props}>
@@ -69,15 +76,15 @@ export const FooterDescription = ({
             <C.DescriptionContent>
               <C.TextCollapse onPress={onHide}>
                 <C.TextContent>
-                  <C.Traits unit={vw}>{investigator.traits}</C.Traits>
+                  <C.Traits unit={vw}>{traits}</C.Traits>
                   {showDescription && (
                     <>
                       <C.Text 
-                        value={investigator.text}
+                        value={text}
                         unit={vw}
                       />
                       <C.Flavor unit={vw}>
-                        {investigator.flavor}
+                        {flavor}
                       </C.Flavor>
                     </>
                   )}

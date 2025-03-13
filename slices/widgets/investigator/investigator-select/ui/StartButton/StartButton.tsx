@@ -4,6 +4,7 @@ import { getInvestigatorImageUrl } from '@shared/api/getInvestigatorImageUrl';
 import type { SelectedInvestigator } from '@shared/model';
 import { useCallback } from 'react';
 import { replaceInvestigator, startGame } from '../../lib';
+import { useAppTranslation } from '@features/i18n';
 
 const getImageSource = ({
   code
@@ -13,6 +14,7 @@ const getImageSource = ({
 
 export const StartButton = () => {
   const dispatch = useAppDispatch();
+  const { t } = useAppTranslation();
   const investigators = useAppSelector(selectSelectedInvestigators);
   const code = useAppSelector(selectReplaceCode)
 
@@ -24,7 +26,7 @@ export const StartButton = () => {
     dispatch(replaceInvestigator());
   }, [dispatch, code])
 
-  const title = code ? 'Replace' : 'Start';
+  const title = t(code ? 'Okay' : 'Start');
 
   return (
     <C.Container 

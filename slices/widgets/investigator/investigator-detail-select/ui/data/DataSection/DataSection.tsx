@@ -1,6 +1,7 @@
 import { memo, useCallback, useState } from 'react';
 import { DetailSection as Section, type DetailSectionProps } from '../../DetailSection';
 import { DetailSelectMemo as Select, type DetailSelectProps } from '../DetailSelect';
+import { useAppTranslation } from '@features/i18n';
 
 type Item = DetailSelectProps['selected'];
 
@@ -14,13 +15,14 @@ export const DataSection = ({
   onChange,
   ...props
 }: DataSectionProps) => {
+  const { t } = useAppTranslation();
   const { length } = data;
   if (length < 2) {
     return null;
   }
 
   const sectionTitle = `${title} (${length})`;
-  const selectedValue = selected?.name || 'Default';
+  const selectedValue = selected && t(selected.name) || t(`Default`);
 
   return (
     <Section

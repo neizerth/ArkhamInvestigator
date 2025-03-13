@@ -1,12 +1,15 @@
+import { useAppSelector } from "../../../../shared/lib/hooks/store/useAppSelector"
 import { getKeyConfig } from "../../../../shared/lib/util/record"
 import type { ComponentType, FC } from "react"
-import { Text, type TextProps } from "react-native"
+import { StyleSheet, Text, type TextProps } from "react-native"
+import { selectLanguage } from "../store/features/i18n/i18n"
 
 export type WithLocaleFontOptions<Props extends TextProps> = {
   Component?: ComponentType<Props>
   style: Record<string, Props['style']> & {
     default: Props['style']
   }
+  fontScale?: Record<string, number>
 }
 
 export const withLocaleFont = <Props extends TextProps>(
@@ -14,18 +17,25 @@ export const withLocaleFont = <Props extends TextProps>(
 ) => {
   const { Component = Text } = options;
 
-  const getStyle = getKeyConfig(options.style); 
+  const getStyle = getKeyConfig(options.style);
 
   const LocaleText: FC<Props> = props => {
-    const language = 'default';
+    const language = useAppSelector(selectLanguage);
     const style = getStyle(language)
+
+    const styleSheet = StyleSheet.flatten(props.style);
+
+    const scaleStyle = styleSheet.fontSize && options.fontScale?.[language] && {
+      fontSize: styleSheet.fontSize * options.fontScale[language]
+    }
 
     return (
       <Component 
         {...props}
         style={[
           props.style,
-          style
+          style,
+          scaleStyle
         ]}
       />
     )

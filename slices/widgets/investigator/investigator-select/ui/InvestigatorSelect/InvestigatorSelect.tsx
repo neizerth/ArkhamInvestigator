@@ -6,10 +6,11 @@ import { InvestigatorList as List } from '../InvestigatorList';
 import { changeSelectedInvestigator, selectCurrentBoard } from '@shared/lib';
 import type { InvestigatorDetails } from '@shared/model';
 import { useCallback } from 'react';
+import { useAppTranslation } from '@features/i18n';
 
 export const InvestigatorSelect = () => {
   const data = useAppSelector(selectAvailableInvestigators);
-  const board = useAppSelector(selectCurrentBoard);
+  const { t } = useAppTranslation()
   const dispatch = useAppDispatch();
 
   const onChange = useCallback(
@@ -20,6 +21,8 @@ export const InvestigatorSelect = () => {
   const official = data.filter(propEq(true, 'isOfficial'));
   const fanMade = data.filter(propEq(false, 'isOfficial'));
 
+  const title = t`Fan-made Investigators`;
+
   return (
     <C.Container>
       <C.Content>
@@ -27,7 +30,7 @@ export const InvestigatorSelect = () => {
           data={official} 
           onChange={onChange}
         />
-        <C.Separator>— Fan-made Investigators —</C.Separator>
+        <C.Separator>— {title} —</C.Separator>
         <List 
           data={fanMade} 
           onChange={onChange}

@@ -1,7 +1,7 @@
 import { useAppDispatch, useAppSelector } from '@shared/lib';
 import * as C from './LanguagePicker.components';
 import { changeLanguage, CHINESE_LANGUAGES, selectAvailableLanguages, selectLanguage } from '@features/i18n';
-import { useCallback } from 'react';
+import { useCallback, useState } from 'react';
 import type { PickerChangeEvent, PickerItemInfo } from '@widgets/picker';
 import { languageMapping } from './languageMapping';
 import { Flag } from '@shared/ui';
@@ -24,7 +24,8 @@ export const LanguagePicker = ({}: LanguagePickerProps) => {
   }, [languages])
 
   const onChange = useCallback(({ value = 0 }: PickerChangeEvent) => {
-    dispatch(changeLanguage(languages[value]));
+    const language = languages[value];
+    dispatch(changeLanguage(language));
   }, [dispatch, languages]);
 
   const index = languages.indexOf(language) || 0;

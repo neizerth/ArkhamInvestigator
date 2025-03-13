@@ -8,6 +8,7 @@ import { LayoutContext } from '@pages/board/config';
 import { getTitleStyle } from './InvestigatorTitle.styles';
 import { selectCurrentBoard, useAppSelector } from '@shared/lib';
 import type { Faction } from '@shared/model';
+import { selectLanguage, useAppTranslation } from '@features/i18n';
 
 export type InvestigatorTitleProps = Omit<ImageBackgroundProps, 'source'>
 
@@ -15,10 +16,13 @@ export const InvestigatorTitle = ({
   ...props
 }: InvestigatorTitleProps) => {
   const { layout } = useContext(LayoutContext);
+  const { t } = useAppTranslation();
+  const language = useAppSelector(selectLanguage);
   const { investigator, isParallel, unique, id } = useAppSelector(selectCurrentBoard);
   const faction = investigator.faction_code as Faction;
 
-  const { name, subname = '' } = investigator;
+  const name = t(investigator.name);
+  const subname = t(investigator.subname || '');
 
   const box = getTitleSize(layout);
   const source = useFactionImage(images)
@@ -26,7 +30,8 @@ export const InvestigatorTitle = ({
   const style = getTitleStyle({
     view: box,
     faction,
-    isParallel
+    isParallel,
+    language
   });
 
   return (
