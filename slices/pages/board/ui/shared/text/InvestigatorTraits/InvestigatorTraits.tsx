@@ -1,31 +1,30 @@
-import { withLocale } from "@features/i18n"
-import { boardText } from "@pages/board/config"
-import { color, font } from "@shared/config"
-import { ArnoPro } from "@shared/fonts/ArnoPro"
-import { SanCn } from "@shared/fonts/SanCn"
-import { PropsWithUnit } from "@shared/model"
-import { FC } from "react"
-import { PixelRatio, TextProps } from "react-native"
-import styled, { css } from "styled-components/native"
+import { useAppTranslation } from '@features/i18n';
+import * as C from './InvestigatorTraits.components'
+import type { InvestigatorTraitsProps } from "./InvestigatorTraits.types";
+import { getInvestigatorTraitsStyle } from './InvestigatorTaits.styles';
 
-const BaseTraits = withLocale({
-  style: {
-    default: {
-      fontFamily: ArnoPro.bold
-    },
-    ko: {
-      marginBottom: 5,
-      fontFamily: SanCn.bold
-    }
-  }
-})
+export const InvestigatorTraits = ({
+  value,
+  unit = 0,
+  ...props
+}: InvestigatorTraitsProps) => {
+  const { translate } = useAppTranslation();
+  const [traits, language] = translate(value);
 
-export type InvestigatorTraitsProps = TextProps & Partial<PropsWithUnit>;
+  const style = getInvestigatorTraitsStyle({
+    unit,
+    language
+  });
 
-export const InvestigatorTraits: FC<InvestigatorTraitsProps> = styled(BaseTraits)`
-  text-align: center;
-  color: ${color.text};
-  ${({ unit = 0 }: InvestigatorTraitsProps) => css`
-    font-size: ${unit * boardText.ratio.traits}px;
-  `}
-`
+  return (
+    <C.Traits 
+      {...props}
+      style={[
+        props.style,
+        style
+      ]}
+    >
+      {traits}
+    </C.Traits>
+  )
+}

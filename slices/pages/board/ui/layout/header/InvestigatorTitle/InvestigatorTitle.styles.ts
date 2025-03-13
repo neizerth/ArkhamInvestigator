@@ -1,5 +1,9 @@
 import { PropsWithView } from "@pages/board/model";
 import { color, font } from "@shared/config";
+import { Arkhamic } from "@shared/fonts/Arkhamic";
+import { ArnoPro } from "@shared/fonts/ArnoPro";
+import { Conkordia } from "@shared/fonts/Conkordia";
+import { SanCn } from "@shared/fonts/SanCn";
 import { getKeyConfig } from "@shared/lib";
 import type { Box, PropsWithFaction } from "@shared/model";
 import { mergeDeepRight } from "ramda";
@@ -35,9 +39,11 @@ export const getTitleStyle = (options: GetTitleStyleOptions) => {
       title: {
       },
       titleText: {
+        fontFamily: Arkhamic.regular,
         fontSize: 45 * vh * font.scale,
       },
       subtitleText: {
+        fontFamily: ArnoPro.bold,
         fontSize: 22 * vh * font.scale,
       },
       id: {
@@ -55,6 +61,7 @@ export const getTitleStyle = (options: GetTitleStyleOptions) => {
         paddingTop: '1%',
       },
       titleText: {
+        fontFamily: Conkordia.regular,
         fontSize: 40 * vh * font.scale,
       },
       unique: {
@@ -69,9 +76,11 @@ export const getTitleStyle = (options: GetTitleStyleOptions) => {
         paddingTop: '2%',
       },
       titleText: {
+        fontFamily: SanCn.bold,
         fontSize: 38 * vh * font.scale,
       },
       subtitleText: {
+        fontFamily: SanCn.bold,
         fontSize: 18 * vh * font.scale,
       },
       unique: {

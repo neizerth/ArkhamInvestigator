@@ -1,11 +1,11 @@
-import { StyleSheet, type ViewProps } from 'react-native';
+import { PanResponder, StyleSheet, type ViewProps } from 'react-native';
 import * as C from './FooterDescription.components';
-import { useCallback, useContext } from 'react';
+import { useCallback, useContext, useRef } from 'react';
 import { LayoutContext } from '@pages/board/config';
 import { goToPage, resetBoard, selectCurrentBoard, selectShowDescription, setShowDescription, useAppDispatch, useAppSelector } from '@shared/lib';
 import type { Faction } from '@shared/model';
 import { impactHapticFeedback } from '@features/haptic';
-import { useShowDescription } from './useShowdescription';
+import { useAnimation } from './useAnimation';
 import { useAppTranslation } from '@features/i18n';
 
 export type FooterDescriptionProps = ViewProps;
@@ -14,14 +14,13 @@ export const FooterDescription = ({
   ...props
 }: FooterDescriptionProps) => {
   const dispatch = useAppDispatch();
-  const { t } = useAppTranslation();
   const showDescription = useAppSelector(selectShowDescription);
 
   const { view } = useContext(LayoutContext);
   const board = useAppSelector(selectCurrentBoard);
   const investigator = board?.investigator;
   const faction = investigator?.faction_code as Faction;
-  
+
   const onShow = useCallback(() => {
     if (!showDescription) {
       dispatch(setShowDescription(true))
@@ -36,7 +35,7 @@ export const FooterDescription = ({
     }
   }, [showDescription, dispatch]);
 
-  const contentStyle = useShowDescription()
+  const contentStyle = useAnimation()
 
   const goHome = useCallback(() => {
     dispatch(goToPage('/'));
@@ -52,14 +51,14 @@ export const FooterDescription = ({
     return null;
   }
 
-  const text = t(investigator.text);
-  const traits = t(investigator.traits || '');
-  const flavor = t(investigator.flavor || '');
+  const { traits, flavor, text } = investigator;
 
   return (
     <C.Container {...props}>
       <C.Content>
-        <C.Expand style={contentStyle}>
+        <C.Expand 
+          style={contentStyle}
+        >
           {showDescription ? (
             <>
               <C.Exit onPress={goHome}/>
@@ -75,7 +74,7 @@ export const FooterDescription = ({
           >
             <C.DescriptionContent>
               <C.TextContent>
-                <C.Traits unit={vw}>{traits}</C.Traits>
+                <C.Traits unit={vw} value={traits}/>
                 {showDescription && (
                   <>
                     <C.Text 
@@ -83,9 +82,10 @@ export const FooterDescription = ({
                       unit={vw}
                     />
                     {flavor && (
-                      <C.Flavor unit={vw}>
-                        {flavor}
-                      </C.Flavor>
+                      <C.Flavor 
+                        unit={vw} 
+                        value={flavor}
+                      />
                     )}
                   </>
                 )}

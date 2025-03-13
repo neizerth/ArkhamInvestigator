@@ -52,14 +52,16 @@ export const getInvestigatorTextStyle = ({
   const fontSize = unit * boardText.ratio.text;
   const getComponents = getKeyConfig({
     default: {
+      ...localeComponentStyles.default,
       icon: {
-        fontSize: iconFontSize
+        fontSize: iconFontSize,
       },
       break: {
         height: fontSize * 2.7
       }
     },
     ko: {
+      ...localeComponentStyles.ko,
       icon: {
         fontSize: iconFontSize * 0.85
       }
@@ -71,7 +73,7 @@ export const getInvestigatorTextStyle = ({
   const getStyle = getKeyConfig<TextStyle>({
     default: {
       fontSize,
-      lineHeight: fontSize * 4 
+      lineHeight: fontSize * 1.15 
     },
     ko: {
       fontSize: fontSize * 0.95

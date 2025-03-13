@@ -16,7 +16,6 @@ export const PortraitLayout = ({
 }: PortraitLayoutProps) => {
   const { view } = useContext(LayoutContext);
   const dispatch = useAppDispatch();
-  const showDescription = useAppSelector(selectShowDescription);
   const height = view.height - top;
 
   const contextValue = {
@@ -38,7 +37,7 @@ export const PortraitLayout = ({
         <C.Footer/>
         <C.Overlay style={overlayStyle}>
           <C.OverlayArea 
-            style={StyleSheet.absoluteFill} 
+            style={StyleSheet.absoluteFill}
             onPress={hideDescription}
           />
         </C.Overlay>

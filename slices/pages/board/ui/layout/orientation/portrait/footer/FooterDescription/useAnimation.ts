@@ -3,7 +3,7 @@ import { selectShowDescription, useAppSelector } from "@shared/lib";
 import { useContext, useEffect } from "react";
 import { useAnimatedStyle, useSharedValue, withTiming } from "react-native-reanimated";
 
-export const useShowDescription = () => {
+export const useAnimation = () => {
   const top = useSharedValue(0);
 
   const showDescription = useAppSelector(selectShowDescription);

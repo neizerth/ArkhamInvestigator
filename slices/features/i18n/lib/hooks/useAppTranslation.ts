@@ -1,19 +1,26 @@
+import { useAppSelector } from "../../../../shared/lib/hooks/store/useAppSelector";
 import { useTranslation } from "react-i18next"
+import { selectLanguage } from "../store/features/i18n/i18n";
+import { useCallback } from "react";
+import { DEFAULT_LANGUAGE } from "../../config/i18n";
 
-export const useAppTranslation: typeof useTranslation = (ns, options) => {
-  type Args = Parameters<typeof translate>;
-  const response = useTranslation(ns, options);
+type Args = Parameters<typeof useTranslation>;
+export const useAppTranslation = (...args: Args) => {
+  type TArgs = Parameters<typeof response.t>;
+  const response = useTranslation(...args);
+  const language = useAppSelector(selectLanguage);
 
-  const translate = response.t;
+  const translate = useCallback((...args: TArgs) => {
+    const translation = response.t(...args)
+    const key = args[0];
+    const translated = key !== translation;
+    const translationLanguage = translated ? language : DEFAULT_LANGUAGE
 
-  const translatable = (...args: Args) => {
-    const translation = translate(...args)
-
-    return args[0] === translation;
-  }
+    return [translation, translationLanguage] as [string, string];
+  }, [language, response.t])
 
   return {
     ...response,
-    translatable
+    translate
   }
 }

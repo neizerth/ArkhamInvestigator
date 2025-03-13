@@ -6,7 +6,11 @@ import { selectLanguage } from "../store/features/i18n/i18n"
 import type { PropsWithStyle } from "@shared/model"
 import { mergeDeepRight } from "ramda"
 
-export type WithLocaleFontOptions<Props extends PropsWithStyle> = {
+type WithLocaleProps = PropsWithStyle & {
+  language?: string
+}
+
+export type WithLocaleFontOptions<Props extends WithLocaleProps> = {
   Component?: ComponentType<Props>
   style?: KeyConfig<Props['style']>
   props?: Record<string, Partial<Props>> & {
@@ -14,14 +18,15 @@ export type WithLocaleFontOptions<Props extends PropsWithStyle> = {
   }
 }
 
-export function withLocale<Props extends PropsWithStyle = TextProps> (
+export function withLocale<Props extends WithLocaleProps = TextProps> (
   options: WithLocaleFontOptions<Props>
 ) {
   const { Component = Text } = options;
 
 
   const WithLocale: FC<Props> = props => {
-    const language = useAppSelector(selectLanguage);
+    const defaultLanguage = useAppSelector(selectLanguage);
+    const language = props.language || defaultLanguage;
     
     const defaultPropsConfig = mergeDeepRight(
       props,

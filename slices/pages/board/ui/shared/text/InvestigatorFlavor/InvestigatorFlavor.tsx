@@ -5,15 +5,19 @@ import { TextProps, Text } from "react-native"
 import styled, { css } from "styled-components/native"
 import { getInvestigatorFlavorStyles } from "./InvestigatorFlavor.styles"
 import { useAppSelector } from "@shared/lib"
-import { selectLanguage } from "@features/i18n"
+import { selectLanguage, useAppTranslation } from "@features/i18n"
 
-export type InvestigatorFlavorProps = TextProps & Partial<PropsWithUnit>;
+export type InvestigatorFlavorProps = TextProps & Partial<PropsWithUnit> & {
+  value: string
+}
 
 export const InvestigatorFlavor = ({
   unit = 0,
+  value,
   ...props
 }: InvestigatorFlavorProps) => {
-  const language = useAppSelector(selectLanguage);
+  const { translate } = useAppTranslation();
+  const [text, language] = translate(value || '');
   
   const style = getInvestigatorFlavorStyles({
     language,
@@ -27,6 +31,8 @@ export const InvestigatorFlavor = ({
         props.style,
         style
       ]}
-    />
+    >
+      {text}
+    </Text>
   )
 } 

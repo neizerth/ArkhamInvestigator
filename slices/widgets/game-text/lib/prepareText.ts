@@ -1,9 +1,11 @@
 const nbsp = '\xa0';
+const wordJoiner = '\u2060';
 export const prepareText = (text: string) => {
   const content = text
     .replace(/(\d+) /g, `$1${nbsp}`)
     .replace(/ (\d+)/g, `${nbsp}$1`)
     .replace(/\] /g, `]${nbsp}`)
+    .replace(/\](\S)/g, `]${wordJoiner}$1`)
     // markdown bold
     .replace(/\[\[([^\]]+)\]\]/g, '<keyword>$1</keyword>')
     // icons

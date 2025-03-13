@@ -1,4 +1,4 @@
-import { Pressable, ScrollView, View, type ViewProps } from "react-native";
+import { Pressable, View, type ViewProps } from "react-native";
 import styled, { css } from "styled-components/native";
 import { FactionDescription } from "../../../../../shared/background";
 import { DefinedIconButtonProps, IconButton } from "@shared/ui";
@@ -8,10 +8,8 @@ import { boardText } from "@pages/board/config";
 import { DescriptionMenu } from "../DescriptionMenu";
 import { FC } from "react";
 import { color, size } from "@shared/config";
+import { ScrollView } from 'react-native-gesture-handler'
 
-type PropsWithDisplay = {
-  display: boolean;
-}
 
 export const Container: typeof View = styled(View)`
   position: relative;
@@ -73,7 +71,6 @@ export const Clear: FC<DefinedIconButtonProps> = styled(IconButton)
 
 export const TextContent: typeof ScrollView = styled(ScrollView)`
   flex: 1;
-  height: 200px;
 `
 
 export const DescriptionContent: typeof View = styled(View)`

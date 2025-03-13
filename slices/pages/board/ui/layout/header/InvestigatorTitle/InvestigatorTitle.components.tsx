@@ -27,19 +27,10 @@ export const Id: typeof Text = styled(Text)`
   font-family: ${Arkhamic.regular};
 ` 
 
-export const TitleText = withLocale({
-  style: {
-    default: {
-      fontFamily: Arkhamic.regular,
-    },
-    ru: {
-      fontFamily: Conkordia.regular
-    },
-    ko: {
-      fontFamily: SanCn.bold
-    }
-  }
-});
+export const TitleText: typeof Text = styled(Text)`
+  
+` 
+
 
 export const Unique = withIcon('unique');
 
@@ -47,13 +38,6 @@ export const Subtitle: typeof View = styled(View)`
   align-items: center;
 `
 
-export const SubtitleText = withLocale({
-  style: {
-    default: {
-      fontFamily: ArnoPro.bold
-    },
-    ko: {
-      fontFamily: SanCn.bold
-    }
-  }
-});
+export const SubtitleText: typeof Text = styled(Text)`
+  
+` 
