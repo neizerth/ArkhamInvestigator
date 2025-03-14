@@ -28,6 +28,7 @@ export const LanguagePicker = ({}: LanguagePickerProps) => {
   const language = useAppSelector(selectLanguage);
 
   const onChange = useCallback(({ value }: PickerItem) => {
+    selectFeedback();
     dispatch(changeLanguage(value));
   }, [dispatch]);
 

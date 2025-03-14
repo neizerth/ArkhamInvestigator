@@ -7,7 +7,6 @@ export const useAppFonts = () => {
 
   const appFonts = Object.assign(
     {},
-    fonts.common,
     fonts[language]
   )
   return useFonts(appFonts);
