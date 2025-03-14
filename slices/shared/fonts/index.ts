@@ -10,14 +10,17 @@ export * from './ru'
 export * from './zh'
 export * from './vi'
 
+type FontsMapping = Record<string, string>;
+type Fonts = Record<string, FontsMapping>;
+
 export default {
-  ...common,
+  common,
   // Russian
-  ...ru,
+  ru,
   // Korean
-  ...ko,
+  ko,
   // Chinese
-  ...zh,
+  zh,
   // Vietnamese
-  ...vi
-}
+  vi
+} as Fonts;

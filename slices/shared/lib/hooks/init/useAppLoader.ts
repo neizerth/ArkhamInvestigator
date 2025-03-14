@@ -1,13 +1,13 @@
-import fonts from "@shared/fonts"
-import { useFonts } from "expo-font";
 import { useEffect } from "react";
+import fonts from "@shared/fonts"
 
 import * as SplashScreen from 'expo-splash-screen';
 import * as ScreenOrientation from 'expo-screen-orientation'
 import { Platform } from "react-native";
+import { useFonts } from "expo-font";
 
 export const useAppLoader = () => {
-  const response = useFonts(fonts);
+  const response = useFonts(fonts.common);
   const [loaded] = response;
 
   useEffect(() => {
