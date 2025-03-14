@@ -10,7 +10,9 @@ export const setInvestigatorSkin = (state: IGameState, action: PayloadAction<Set
 
   const selectedInvestigators = state.selectedInvestigators.map(
     investigator =>
-      investigator.code === code ? { ...investigator, skinId } : investigator
+      investigator.code === code ? 
+        { ...investigator, skinId } : 
+        investigator
   )
 
   return {

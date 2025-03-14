@@ -22,7 +22,7 @@ export const InvestigatorDetailSelect = () => {
     skins,
     variant,
     variants, 
-    investigator 
+    investigator
   } = useAppSelector(selectCurrentDetails);
   
   const goBack = useCallback(() => {

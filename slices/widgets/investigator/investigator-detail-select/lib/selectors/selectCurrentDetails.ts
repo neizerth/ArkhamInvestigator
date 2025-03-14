@@ -31,7 +31,7 @@ export const selectCurrentDetails = createSelector(
       skins,
 
       variant,
-      variants
+      variants,
     }
   }
 )

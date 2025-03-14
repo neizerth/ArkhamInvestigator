@@ -8,6 +8,7 @@ export const getInvestigatorImageUrl = (
   type: ImageSizeType
 ) => {
   const format = 'jpg';
-  const cache = `?v=${APP_VERSION}`
-  return `${INVESTIGATORS_API_URL}/images/${format}/${type}/${code}.${format}?${cache}`;
+  const cache = `v=${APP_VERSION}`
+  const url = `${INVESTIGATORS_API_URL}/images/${format}/${type}/${code}.${format}?${cache}`
+  return url;
 }

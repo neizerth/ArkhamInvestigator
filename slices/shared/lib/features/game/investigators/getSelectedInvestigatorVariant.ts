@@ -4,11 +4,7 @@ import type { Investigator as InvestigatorMedia } from "arkham-investigator-data
 import { propEq } from "ramda";
 
 export const getSelectedInvestigatorVariant = (
-  { 
-    code, 
-    variantId, 
-    skinId 
-  }: SelectedInvestigator,
+  selection: SelectedInvestigator,
   { 
     image, 
     variants = [],
@@ -16,6 +12,12 @@ export const getSelectedInvestigatorVariant = (
     additionalAction = false 
   }: InvestigatorMedia
 ) => {
+  const { 
+    code, 
+    variantId, 
+    skinId 
+  } = selection;
+
   const skin = skinId && 
     (
       skins.find(propEq(skinId, 'id')) || 
@@ -24,7 +26,9 @@ export const getSelectedInvestigatorVariant = (
       )
     )
 
-  const skinImage = skin && 'image' in skin ? skin.image : null;
+  const skinImage = skin && 'image' in skin ? 
+    skin.image : 
+    null;
 
   const picture = {
     id: skinId || code,
@@ -50,10 +54,10 @@ export const getSelectedInvestigatorVariant = (
 
   const id = getMediaVariantId(variant)
   const variantPicture = {
-    id: skinId || variant.image ? id : code,
+    id: skinId || (variant.image ? id : code),
     image: skinImage || variant.image || image
   }
-
+  
   return {
     picture: variantPicture,
     additionalAction: variant.additionalAction || additionalAction,
