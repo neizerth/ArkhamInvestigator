@@ -7,7 +7,7 @@ export type LoaderProps = ImageProps & {
 }
 
 export const Loader = ({
-  size = 100,
+  size = 200,
   ...props
 }: LoaderProps) => {
   const style = useLoaderStyle(size);

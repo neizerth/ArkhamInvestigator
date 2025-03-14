@@ -16,7 +16,7 @@ export const RootLayout = ({
   children
 }: PropsWithChildren) => {
   const [loaded] = useAppLoader();
-  SystemUI.setBackgroundColorAsync(color.dark30);
+  SystemUI.setBackgroundColorAsync(color.black);
 
   if (!loaded) {
     return (

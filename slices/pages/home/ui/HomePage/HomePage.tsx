@@ -36,7 +36,7 @@ export const HomePage = () => {
       </Button>
       {board && (
         <C.ResumeButton onPress={onResume}>
-          {t`Restore game`}
+          {t`Continue`}
         </C.ResumeButton>
       )}
     </C.Container>

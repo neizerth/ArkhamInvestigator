@@ -6,7 +6,7 @@ import { LanguagePicker } from "../LanguagePicker";
 import { Alegreya } from "@shared/fonts"
 
 export const Container: typeof View = styled(View)`
-  background-color: ${color.dark30};
+  background-color: ${color.dark40};
   flex: 1;
   align-items: center;
 `

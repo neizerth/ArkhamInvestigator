@@ -14,8 +14,8 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/logo-light.png",
-        "backgroundColor": "#24303C"
+        "foregroundImage": "./assets/images/launcher-icon.png",
+        "backgroundColor": "#000"
       },
       "package": "com.arkhaminvestigator"
     },
@@ -29,10 +29,10 @@
       [
         "expo-splash-screen",
         {
-          "image": "./assets/images/logo-light.png",
+          "image": "./assets/images/logo-dark.png",
           "imageWidth": 200,
           "resizeMode": "contain",
-          "backgroundColor": "#24303C"
+          "backgroundColor": "#000"
         }
       ]
     ],

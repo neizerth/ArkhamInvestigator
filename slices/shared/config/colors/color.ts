@@ -40,6 +40,7 @@ export const color = {
   dark15: '#4F5A60',
   dark20: '#475259',
   dark30: '#24303C',
+  dark40: '#171e26',
 
   fight: '#EE4A53',
   evade: '#48B14F',

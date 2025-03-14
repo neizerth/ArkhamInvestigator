@@ -9,7 +9,7 @@ export const styles = StyleSheet.create({
     fontSize: font.size.default,
   },
   dropdown: {
-    backgroundColor: color.dark20,
+    backgroundColor: color.dark30,
     paddingHorizontal: size.gap.small,
     paddingVertical: size.gap.default,
     borderRadius: size.borderRadius.default

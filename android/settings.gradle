@@ -21,7 +21,7 @@ extensions.configure(com.facebook.react.ReactSettingsExtension) { ex ->
   }
 }
 
-rootProject.name = 'arkham-investigator'
+rootProject.name = 'Arkham Investigator'
 
 dependencyResolutionManagement {
   versionCatalogs {
