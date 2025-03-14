@@ -1,11 +1,10 @@
 import { color } from "@shared/config"
-import { AtlanticCruise } from "@shared/fonts/AtlanticCruise"
 import { TouchableOpacity, Icon as BaseIcon } from "@shared/ui"
 import type { FC } from "react"
 import { Text as BaseText } from "react-native"
 import styled, { css } from "styled-components/native"
 import type { KeyboardButtonProps, KeyboardButtonType, ButtonTextProps } from "./KeyboardButton.types"
-import { Copasetic } from "@shared/fonts/Copasetic"
+import { Copasetic } from "@shared/fonts"
 import type { RuleSet } from "styled-components"
 
 

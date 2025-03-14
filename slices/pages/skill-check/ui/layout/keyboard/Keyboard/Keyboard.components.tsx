@@ -6,7 +6,7 @@ import styled, { css } from "styled-components/native";
 import * as Buttons from "../KeyboardButton";
 import { color, font, size } from '@shared/config';
 import type { FC } from 'react';
-import { Copasetic } from '@shared/fonts/Copasetic';
+import { Copasetic } from "@shared/fonts"
 import type { SvgProps } from 'react-native-svg';
 import type { PropsWithBox } from '@shared/model';
 import { StatsKeyboard } from '../StatsKeyboard';

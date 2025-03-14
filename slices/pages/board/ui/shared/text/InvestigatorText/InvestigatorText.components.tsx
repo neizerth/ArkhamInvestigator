@@ -1,5 +1,5 @@
 import { color, font } from "@shared/config"
-import { ArnoPro } from "@shared/fonts/ArnoPro"
+import { ArnoPro } from "@shared/fonts"
 import { GameText } from "@widgets/game-text"
 import { FC } from "react"
 import styled, { css } from "styled-components/native"

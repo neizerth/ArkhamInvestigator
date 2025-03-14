@@ -1,5 +1,5 @@
 import { color, font, size } from "@shared/config";
-import { Alegreya } from "@shared/fonts/Alegreya";
+import { Alegreya } from "@shared/fonts"
 import { Icon as BaseIcon, Row, TouchableOpacity } from "@shared/ui";
 import { Text as BaseText, Image } from "react-native";
 import styled from "styled-components/native";

@@ -1,7 +1,7 @@
 import { boardText } from "@pages/board/config";
-import { ArnoPro } from "@shared/fonts/ArnoPro";
-import { SanCn } from "@shared/fonts/SanCn";
-import { Yoon } from "@shared/fonts/Yoon";
+import { ArnoPro } from "@shared/fonts"
+import { SanCn } from "@shared/fonts"
+import { Yoon } from "@shared/fonts"
 import { getKeyConfig, type KeyConfig } from "@shared/lib";
 import type { ComponentStyleMap, GameTextProps } from "@widgets/game-text";
 import { TextStyle } from "react-native";

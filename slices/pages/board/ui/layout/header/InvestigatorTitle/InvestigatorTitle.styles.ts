@@ -1,9 +1,10 @@
 import { PropsWithView } from "@pages/board/model";
 import { color, font } from "@shared/config";
-import { Arkhamic } from "@shared/fonts/Arkhamic";
-import { ArnoPro } from "@shared/fonts/ArnoPro";
-import { Conkordia } from "@shared/fonts/Conkordia";
-import { SanCn } from "@shared/fonts/SanCn";
+import { Arkhamic } from "@shared/fonts"
+import { ArnoPro } from "@shared/fonts"
+import { Conkordia } from "@shared/fonts"
+import { SanCn } from "@shared/fonts"
+import { STXingkai } from "@shared/fonts"
 import { getKeyConfig } from "@shared/lib";
 import type { Box, PropsWithFaction } from "@shared/model";
 import { mergeDeepRight } from "ramda";
@@ -33,6 +34,17 @@ export const getTitleStyle = (options: GetTitleStyleOptions) => {
   } = options;
   const vh = view.height / 100;
   const textColor = isParallel ? color.white : color.text
+
+  const zhConfig = {
+    titleText: {
+      fontFamily: STXingkai.regular,
+      fontSize: 38 * vh * font.scale,
+    },
+    subtitleText: {
+      fontFamily: STXingkai.regular,
+      fontSize: 18 * vh * font.scale,
+    },
+  }
   
   const getLocaleStyle = getKeyConfig<Partial<ReturnStyle>>({
     default: {
@@ -86,7 +98,9 @@ export const getTitleStyle = (options: GetTitleStyleOptions) => {
       unique: {
         marginTop: 0,
       }
-    }
+    },
+    zh: zhConfig,
+    "zh-cn": zhConfig
   })
 
   const getFactiionStyle = getKeyConfig({

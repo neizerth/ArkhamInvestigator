@@ -1,4 +1,4 @@
-import { Alegreya } from "@shared/fonts/Alegreya";
+import { Alegreya } from "@shared/fonts"
 import type { ComponentStyleMap } from "@widgets/game-text/model";
 import { Paragraph } from "./GameText.components";
 

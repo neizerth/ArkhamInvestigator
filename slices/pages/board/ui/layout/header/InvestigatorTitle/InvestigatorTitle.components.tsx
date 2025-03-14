@@ -1,8 +1,8 @@
 import { withLocale } from "@features/i18n";
-import { Arkhamic } from "@shared/fonts/Arkhamic";
-import { ArnoPro } from "@shared/fonts/ArnoPro";
-import { Conkordia } from "@shared/fonts/Conkordia";
-import { SanCn } from "@shared/fonts/SanCn";
+import { Arkhamic } from "@shared/fonts"
+import { ArnoPro } from "@shared/fonts"
+import { Conkordia } from "@shared/fonts"
+import { SanCn } from "@shared/fonts"
 import { withIcon } from "@shared/lib/hoc";
 import { Row } from "@shared/ui";
 import type { FC } from "react";

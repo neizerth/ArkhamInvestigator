@@ -9,7 +9,7 @@ import { FactionBackground, FactionBackgroundProps } from "../FactionBackground"
 import type { Faction } from "@shared/model";
 import { FactionFontIcon, Icon as BaseIcon } from "@shared/ui";
 import type { IconProps } from "@shared/ui";
-import { Alegreya } from "@shared/fonts/Alegreya";
+import { Alegreya } from "@shared/fonts"
 
 export type ElementWithFaction<T> = FC<T & PropsWithFaction>
 export type ViewWithFaction = ElementWithFaction<ViewProps>

@@ -3,7 +3,7 @@ import { Row as BaseRow } from "@shared/ui";
 import { Text, View } from "react-native";
 import styled from "styled-components/native";
 import { LanguagePicker } from "../LanguagePicker";
-import { Alegreya } from "@shared/fonts/Alegreya";
+import { Alegreya } from "@shared/fonts"
 
 export const Container: typeof View = styled(View)`
   background-color: ${color.dark30};

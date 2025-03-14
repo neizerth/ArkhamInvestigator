@@ -1,7 +1,7 @@
 import { boardText } from "@pages/board/config"
 import { color } from "@shared/config"
-import { ArnoPro } from "@shared/fonts/ArnoPro"
-import { DXPn } from "@shared/fonts/DXPn"
+import { ArnoPro } from "@shared/fonts"
+import { DXPn } from "@shared/fonts"
 import { getKeyConfig } from "@shared/lib"
 import type { TextStyle } from "react-native"
 

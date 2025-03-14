@@ -11,9 +11,9 @@ import { color, factionColor, font, size } from "@shared/config";
 import Color from "color";
 import type { PropsWithFaction } from "@shared/model/ui";
 import { Icon, TouchableOpacity } from "@shared/ui";
-import { Alegreya } from "@shared/fonts/Alegreya";
+import { Alegreya } from "@shared/fonts"
 import { Text } from "react-native";
-import { ArkhamDigits } from "@shared/fonts/ArkhamDigits";
+import { ArkhamDigits } from "@shared/fonts"
 
 
 const getSelectionColor = (faction: Faction) => {

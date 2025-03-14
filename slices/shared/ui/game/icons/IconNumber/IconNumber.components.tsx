@@ -4,7 +4,7 @@ import type { FC } from "react";
 import { Text, View } from "react-native";
 import { Row } from "@shared/ui/grid";
 import type { CharProps, PropsWithSize } from "./IconNumber.types";
-import { ArkhamDigits } from "@shared/fonts/ArkhamDigits";
+import { ArkhamDigits } from "@shared/fonts"
 
 
 export const Container: typeof View = styled(Row)`

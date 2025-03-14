@@ -1,6 +1,6 @@
 import { boardText } from "@pages/board/config"
-import { ArnoPro } from "@shared/fonts/ArnoPro"
-import { SanCn } from "@shared/fonts/SanCn"
+import { ArnoPro } from "@shared/fonts"
+import { SanCn } from "@shared/fonts"
 import { getKeyConfig } from "@shared/lib"
 import { TextStyle } from "react-native"
 

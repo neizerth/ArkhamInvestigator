@@ -6,7 +6,7 @@ import { View } from "react-native";
 import styled from "styled-components/native";
 import { InvestigatorSkills } from "../InvestigatorSkills";
 import { GameText } from "@widgets/game-text";
-import { Alegreya } from "@shared/fonts/Alegreya";
+import { Alegreya } from "@shared/fonts"
 import { InvestigatorStats } from "../InvestigatorStats";
 
 export const Container: typeof View = styled(View)`

@@ -2,8 +2,7 @@ import { getIconScale, scaleFontFromStyle, selectIcons, useAppSelector } from '@
 import { propEq } from 'ramda';
 import { StyleSheet, type TextProps } from 'react-native';
 import { Text } from 'react-native';
-import { ArkhamIcons } from '@shared/fonts/ArkhamIcons';
-// import { StrokeText } from "@charmy.tech/react-native-stroke-text";
+import { ArkhamIcons } from "@shared/fonts"
 import type { IconScaleType, PropsWithStroke } from '@shared/model';
 
 export type IconProps = TextProps & PropsWithStroke & {
