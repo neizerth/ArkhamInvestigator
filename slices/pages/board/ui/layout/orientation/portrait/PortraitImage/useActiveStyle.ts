@@ -7,10 +7,11 @@ export const useActiveStyle = () => {
   const board = useAppSelector(selectCurrentBoard);
  
   const actions = board?.value.actions || 0;
+  const additionalAction = board?.value.additionalAction;
 
   useEffect(() => {
-    grayscale.value = actions > 0 ? 0 : 1;
-  }, [actions])
+    grayscale.value = actions > 0 || additionalAction ? 0 : 1;
+  }, [actions, additionalAction])
 
   const grayscale = useSharedValue(0);
 

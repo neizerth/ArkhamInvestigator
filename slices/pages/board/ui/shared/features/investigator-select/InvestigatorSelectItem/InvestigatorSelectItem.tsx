@@ -18,18 +18,21 @@ export const InvestigatorSelectItem = ({
     return null;
   }
 
-  const { picture, investigator, unique } = board;
+  const { picture, investigator, unique, value } = board;
   const uri = getInvestigatorImageUrl(picture.id, 'square');
   const faction = investigator.faction_code as Faction;
   const showId = !unique;
 
   const source = { uri };
+
+  const active = value.actions > 0 || value.additionalAction;
+
   return (
     <C.Container 
       {...props}
       faction={faction}
     >
-      <C.Image source={source}/>
+      <C.Image source={source} active={active}/>
       {showId && (
         <C.Overlay>
           <C.Id value={boardId}/>

@@ -3,7 +3,7 @@ import { PropsWithFaction } from "@shared/model";
 import { IconNumber } from "@shared/ui";
 import { PickerMemo as BasePicker } from "@widgets/picker";
 import { FC } from "react";
-import { Image as BaseImage, ImageProps, View, ViewProps } from "react-native";
+import { Image as BaseImage, ImageProps as BaseImageProps, View, ViewProps } from "react-native";
 import styled, { css } from "styled-components/native";
 
 const size = 60;
@@ -43,12 +43,19 @@ export const Id: typeof IconNumber = styled(IconNumber)`
   font-size: ${font.size.large}px;
 `
 
-export const Image: typeof BaseImage = styled(BaseImage)`
+type ImageProps = BaseImageProps & {
+  active?: boolean
+}
+
+export const Image: FC<ImageProps> = styled(BaseImage)`
   position: absolute;
   top: 0;
   left: 0;
   border-radius: ${imageSize}px;
   width: ${imageSize}px;
   height: ${imageSize}px;
+  ${({ active }: ImageProps) => !active && css`
+    filter: grayscale(1);
+  `}
 `
 
