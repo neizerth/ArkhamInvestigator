@@ -3,7 +3,7 @@ import { ArnoPro, STKaiti, STXinwei } from "@shared/fonts"
 import { SanCn } from "@shared/fonts"
 import { Yoon } from "@shared/fonts"
 import { getKeyConfig, type KeyConfig } from "@shared/lib";
-import type { ComponentStyleMap, GameTextProps } from "@widgets/game-text";
+import type { ComponentStyleMap } from "@widgets/game-text";
 import { TextStyle } from "react-native";
 
 const zhComponentStyles: ComponentStyleMap = {
@@ -38,18 +38,16 @@ export const localeComponentStyles: KeyConfig<ComponentStyleMap> = {
   },
   ko: {
     i: {
-      fontFamily: SanCn.medium,
-      fontStyle: 'italic'
+      fontFamily: Yoon.D330.italic
     },
     b: {
       fontFamily: SanCn.bold
     },
     keyword: {
-      fontFamily: SanCn.bold,
-      fontStyle: 'italic'
+      fontFamily: SanCn.boldItalic
     },
     text: {
-      fontFamily: Yoon.D330
+      fontFamily: Yoon.D330.regular
     }
   },
   zh: zhComponentStyles,

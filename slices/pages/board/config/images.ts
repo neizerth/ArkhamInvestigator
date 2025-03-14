@@ -34,6 +34,6 @@ export const descriptionSize = {
 
 export const assetsSize = {
   main: 70,
-  action: 55,
+  action: 65,
   resource: 73
 }

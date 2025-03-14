@@ -1,7 +1,6 @@
 import { boardText } from "@pages/board/config"
 import { color } from "@shared/config"
-import { ArnoPro, STKaiti } from "@shared/fonts"
-import { DXPn } from "@shared/fonts"
+import { ArnoPro, STKaiti, Yoon } from "@shared/fonts"
 import { getKeyConfig } from "@shared/lib"
 import type { TextStyle } from "react-native"
 
@@ -25,7 +24,7 @@ export const getInvestigatorFlavorStyles = ({
       color: color.text
     },
     ko: {
-      fontFamily: DXPn.medium,
+      fontFamily: Yoon.D330.italic,
       fontSize: fontSize * 0.9,
     },
     zh: {

@@ -1,9 +1,15 @@
-export const YD330 = require('./YD330.ttf');
+export const YD330Regular = require('./YD330-Regular.ttf');
+export const YD330Italic = require('./YD330-Italic.ttf');
+
 
 export const Yoon = {
-  D330: 'YD330'
+  D330: {
+    regular: 'YD330Regular',
+    italic: 'YD330Italic'
+  }
 }
 
 export const YoonFonts = {
-  YD330
+  YD330Regular,
+  YD330Italic
 }
