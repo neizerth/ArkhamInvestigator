@@ -72,7 +72,7 @@ export const getInvestigatorTextStyle = ({
     ...localeComponentStyles.zh,
     icon: {
       letterSpacing: 2,
-      fontSize: iconFontSize * 0.85,
+      fontSize: iconFontSize * 0.84,
     }
   }
   const getComponents = getKeyConfig({
