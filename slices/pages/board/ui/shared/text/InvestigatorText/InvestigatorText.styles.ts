@@ -1,10 +1,25 @@
 import { boardText } from "@pages/board/config";
-import { ArnoPro } from "@shared/fonts"
+import { ArnoPro, STKaiti, STXinwei } from "@shared/fonts"
 import { SanCn } from "@shared/fonts"
 import { Yoon } from "@shared/fonts"
 import { getKeyConfig, type KeyConfig } from "@shared/lib";
 import type { ComponentStyleMap, GameTextProps } from "@widgets/game-text";
 import { TextStyle } from "react-native";
+
+const zhComponentStyles: ComponentStyleMap = {
+  i: {
+    fontFamily: SanCn.medium,
+  },
+  b: {
+    fontFamily: STXinwei.regular
+  },
+  keyword: {
+    fontFamily: STXinwei.regular
+  },
+  text: {
+    fontFamily: STKaiti.regular
+  }
+}
 
 export const localeComponentStyles: KeyConfig<ComponentStyleMap> = {
   default: {
@@ -36,7 +51,9 @@ export const localeComponentStyles: KeyConfig<ComponentStyleMap> = {
     text: {
       fontFamily: Yoon.D330
     }
-  }
+  },
+  zh: zhComponentStyles,
+  "zh-cn": zhComponentStyles
 }
 
 type GetComponentStylesOptions = {
@@ -50,6 +67,14 @@ export const getInvestigatorTextStyle = ({
 }: GetComponentStylesOptions) => {
   const iconFontSize = unit * boardText.ratio.icon;
   const fontSize = unit * boardText.ratio.text;
+
+  const zhComponentStyles = {
+    ...localeComponentStyles.zh,
+    icon: {
+      letterSpacing: 2,
+      fontSize: iconFontSize * 0.85,
+    }
+  }
   const getComponents = getKeyConfig({
     default: {
       ...localeComponentStyles.default,
@@ -63,9 +88,12 @@ export const getInvestigatorTextStyle = ({
     ko: {
       ...localeComponentStyles.ko,
       icon: {
-        fontSize: iconFontSize * 0.85
+        fontSize: iconFontSize * 0.85,
+        letterSpacing: 2
       }
-    }
+    },
+    zh: zhComponentStyles,
+    "zh-cn": zhComponentStyles
   })
 
   const componentStyles = getComponents(language) as ComponentStyleMap;

@@ -1,6 +1,6 @@
 import { PropsWithView } from "@pages/board/model";
 import { color, font } from "@shared/config";
-import { Arkhamic } from "@shared/fonts"
+import { Arkhamic, STXinwei } from "@shared/fonts"
 import { ArnoPro } from "@shared/fonts"
 import { Conkordia } from "@shared/fonts"
 import { SanCn } from "@shared/fonts"
@@ -37,19 +37,17 @@ export const getTitleStyle = (options: GetTitleStyleOptions) => {
 
   const zhConfig = {
     titleText: {
-      fontFamily: STXingkai.regular,
+      fontFamily: STXinwei.regular,
       fontSize: 38 * vh * font.scale,
     },
     subtitleText: {
       fontFamily: STXingkai.regular,
       fontSize: 18 * vh * font.scale,
-    },
+    }
   }
   
   const getLocaleStyle = getKeyConfig<Partial<ReturnStyle>>({
     default: {
-      title: {
-      },
       titleText: {
         fontFamily: Arkhamic.regular,
         fontSize: 45 * vh * font.scale,

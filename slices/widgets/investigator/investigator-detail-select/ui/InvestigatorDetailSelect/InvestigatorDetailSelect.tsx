@@ -1,4 +1,4 @@
-import { selectCurrentInvestigatorDetails, useAppDispatch, useAppSelector } from "@shared/lib";
+import { formatGameText, selectCurrentInvestigatorDetails, useAppDispatch, useAppSelector } from "@shared/lib";
 import * as C from "./InvestigatorDetailSelect.components";
 import { router } from "expo-router";
 import type { Faction } from "@shared/model";
@@ -50,6 +50,9 @@ export const InvestigatorDetailSelect = () => {
   const name = t(investigator.name);
   const subname = t(investigator.subname || '')
 
+  const formattedName = formatGameText(name);
+  const formattedSubname = formatGameText(subname);
+
   return (
     <C.Container>
       <C.Outside onPress={goBack}/>
@@ -57,8 +60,8 @@ export const InvestigatorDetailSelect = () => {
         <C.Outside onPress={goBack}/>
         <C.Card 
           faction={faction}
-          title={name}
-          subtitle={subname}
+          title={formattedName}
+          subtitle={formattedSubname}
           onClose={goBack}
         >
           <C.Sections>

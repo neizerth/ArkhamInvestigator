@@ -6,7 +6,7 @@ import type { HeaderLayout } from '@pages/board/model';
 import { useContext } from 'react';
 import { LayoutContext } from '@pages/board/config';
 import { getTitleStyle } from './InvestigatorTitle.styles';
-import { selectCurrentBoard, useAppSelector } from '@shared/lib';
+import { formatGameText, selectCurrentBoard, useAppSelector } from '@shared/lib';
 import type { Faction } from '@shared/model';
 import { selectLanguage, TranslatableProps, useAppTranslation } from '@features/i18n';
 
@@ -17,12 +17,13 @@ export const InvestigatorTitle = ({
 }: InvestigatorTitleProps) => {
   const { layout } = useContext(LayoutContext);
   const { translate } = useAppTranslation();
-  const language = useAppSelector(selectLanguage);
   const { investigator, isParallel, unique, id } = useAppSelector(selectCurrentBoard);
   const faction = investigator.faction_code as Faction;
 
   const [name, nameLanguage] = translate(investigator.name);
   const [subname] = translate(investigator.subname || '');
+  const formattedName = formatGameText(name);
+  const formattedSubname = formatGameText(subname);
 
   const box = getTitleSize(layout);
   const source = useFactionImage(images)
@@ -49,8 +50,7 @@ export const InvestigatorTitle = ({
           <C.Unique style={style.unique}/>
         )}
         <C.TitleText style={style.titleText}>
-          {name}
-          
+          {formattedName}
         </C.TitleText>
         {!unique && (
           <C.Id style={style.id}> ({id})</C.Id>
@@ -58,7 +58,7 @@ export const InvestigatorTitle = ({
       </C.Title>
       <C.Subtitle style={style.subtitle}>
         <C.SubtitleText style={style.subtitleText}>
-          {subname}
+          {formattedSubname}
         </C.SubtitleText>
       </C.Subtitle>
     </C.Container>

@@ -6,19 +6,9 @@ import { SanCn } from "@shared/fonts"
 import type { FC } from "react"
 import styled, { css } from "styled-components/native"
 import type { InvestigatorTraitsProps } from "./InvestigatorTraits.types"
+import { Text } from "react-native"
 
-const LocaleTraits = withLocale({
-  style: {
-    default: {
-      
-    },
-    ko: {
-      
-    }
-  }
-})
-
-export const Traits: typeof LocaleTraits = styled(LocaleTraits)`
+export const Traits: typeof Text = styled(Text)`
   text-align: center;
   color: ${color.text}
 `

@@ -1,7 +1,7 @@
 import { useAppTranslation } from '@features/i18n';
 import * as C from './InvestigatorTraits.components'
 import type { InvestigatorTraitsProps } from "./InvestigatorTraits.types";
-import { getInvestigatorTraitsStyle } from './InvestigatorTaits.styles';
+import { getInvestigatorTraitsStyle } from './InvestigatorTraits.styles';
 
 export const InvestigatorTraits = ({
   value,
