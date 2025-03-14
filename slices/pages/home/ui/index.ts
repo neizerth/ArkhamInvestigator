@@ -1,2 +1,2 @@
 export * from './HomePage'
-export * from './NewGameButton'
+export * from './Button'

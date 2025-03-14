@@ -1,6 +1,6 @@
 import type { AppThunkCreator } from "@shared/lib";
 import { setLanguage, setLoadingLanguage } from "../i18n";
-import { loadTranslations } from "./loadTranslations";
+import { loadTranslationData } from "./loadTranslation";
 import { DEFAULT_LANGUAGE, i18next } from "@features/i18n/config";
 
 
@@ -12,5 +12,5 @@ export const changeLanguage: AppThunkCreator = (language: string) =>
       return;
     }
     dispatch(setLoadingLanguage(language));
-    dispatch(loadTranslations(language));
+    dispatch(loadTranslationData(language));
   }

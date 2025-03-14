@@ -1,11 +1,27 @@
 import { TouchableOpacity } from "@shared/ui/behavior/TouchableOpacity";
 import * as ReactNative from "react-native";
-import styled from "styled-components/native";
-import { PrimaryButtonStyle, PropsWithStyleType } from "./PrimaryButton.types";
+import styled, { css } from "styled-components/native";
+import { PrimaryButtonSize, PrimaryButtonStyle, PropsWithStyleType } from "./PrimaryButton.types";
 import { FC } from "react";
 
+const buttonWidth: Record<PrimaryButtonStyle, number> = {
+  default: 250,
+  transparent: 250,
+  square: 180,
+}
+
+const buttonHeight = 80;
+
+const sizeScale: Record<PrimaryButtonSize, number> = {
+  default: 1,
+  small: 0.6,
+} 
+
+
 export const Container: typeof TouchableOpacity = styled(TouchableOpacity)`
-  height: 80px;
+  ${({ size = 'default' }: BackgroundProps) => css`
+    height: ${buttonHeight * sizeScale[size]}px;
+  `}
   justify-content: center;
   align-items: center;
 `
@@ -16,11 +32,6 @@ const backgrounds: Record<PrimaryButtonStyle, ReactNative.ImageRequireSource> = 
   square: require('./images/square.png'),
 }
 
-const buttonWidth: Record<PrimaryButtonStyle, number> = {
-  default: 250,
-  transparent: 250,
-  square: 180,
-}
 
 type BackgroundProps = ReactNative.ImageBackgroundProps & PropsWithStyleType;
 
@@ -33,8 +44,14 @@ export const Background: FC<BackgroundProps> = styled(ReactNative.ImageBackgroun
       resizeMethod: 'resize'
     })
   )`
-    width: ${({ styleType = 'default' }: BackgroundProps) => buttonWidth[styleType]}px;
-    height: 80px;
+    ${({ styleType = 'default', size = 'default' }: BackgroundProps) => {
+      const scale = sizeScale[size];
+
+      return css`
+        width: ${buttonWidth[styleType] * scale}px;
+        height: ${buttonHeight * scale}px;
+      `
+    }}
     flex: 1;
     justify-content: center;
     align-items: center;

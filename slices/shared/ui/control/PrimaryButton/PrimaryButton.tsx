@@ -2,15 +2,16 @@ import { router } from 'expo-router';
 
 import * as C from './PrimaryButton.components';
 import { useCallback, useState } from 'react';
-import { PrimaryButtonProps } from './PrimaryButton.types';
+import { PrimaryButtonProps, PrimaryButtonSize, PrimaryButtonStyle } from './PrimaryButton.types';
 
-export { PrimaryButtonProps };
+export { PrimaryButtonProps, PrimaryButtonSize, PrimaryButtonStyle };
 
 export const PrimaryButton = ({
   children,
   styleType,
   ...props
 }: PrimaryButtonProps) => {
+  const { size } = props;
   const [loaded, setLoaded] = useState(false);
 
   const onLoad = useCallback(() => setLoaded(true), []);
@@ -20,6 +21,7 @@ export const PrimaryButton = ({
       <C.Background 
         onLoad={onLoad} 
         styleType={styleType}
+        size={size}
       >
         {loaded && children}
       </C.Background>

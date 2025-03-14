@@ -1,7 +1,7 @@
 import Storage from 'react-native-storage';
 import storageBackend from './storageBackend';
 
-const storage = new Storage({
+export const storage = new Storage({
   storageBackend,
   enableCache: false,
 
@@ -12,5 +12,3 @@ const storage = new Storage({
     // we'll talk about the details later.
   }
 });
-
-export default storage;

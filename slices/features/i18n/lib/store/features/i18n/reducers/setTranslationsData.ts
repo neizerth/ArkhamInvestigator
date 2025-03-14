@@ -2,6 +2,8 @@ import type { ArkhamDivider } from "arkham-divider-data";
 import type { I18NReducer } from "../i18n.types";
 import { pick } from "ramda";
 import { i18next, I18N_NAMESAPCE, translations, DEFAULT_LANGUAGE } from "@features/i18n/config";
+import { storage } from "@features/storage";
+import { saveTranslation } from "@features/i18n/lib/storage";
 
 export const setTranslationsData: I18NReducer<ArkhamDivider.Translation> = (state, { payload }) => {
   const { loadingLanguage, language } = state;
@@ -19,12 +21,12 @@ export const setTranslationsData: I18NReducer<ArkhamDivider.Translation> = (stat
     'investigators'
   ], payload);
 
-  const translation = translations[loadingLanguage] || {};
+  const appTranslation = translations[loadingLanguage] || {};
 
   const bundle = Object.assign(
     {}, 
     ...Object.values(data),
-    translation
+    appTranslation
   )
   
   i18next.addResourceBundle(
@@ -32,8 +34,9 @@ export const setTranslationsData: I18NReducer<ArkhamDivider.Translation> = (stat
     I18N_NAMESAPCE, 
     bundle
   );
-
   i18next.changeLanguage(loadingLanguage);
+  
+  saveTranslation(bundle);
 
   if (language !== DEFAULT_LANGUAGE) {
     i18next.removeResourceBundle(language, I18N_NAMESAPCE);

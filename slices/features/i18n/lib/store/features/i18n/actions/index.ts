@@ -1,2 +1,3 @@
 export * from './changeLanguage'
-export * from './loadTranslations'
+export * from './loadTranslation'
+export * from './restoreTranslation'

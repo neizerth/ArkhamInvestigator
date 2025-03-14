@@ -3,6 +3,7 @@ import { DefinedIconProps, Icon, TouchableOpacity } from '@shared/ui';
 import { FC } from 'react';
 import { View } from 'react-native';
 import styled from 'styled-components/native';
+import { Button } from '../Button';
 
 export const Container: typeof View = styled(View)`
   background-color: ${color.black};
@@ -12,6 +13,13 @@ export const Container: typeof View = styled(View)`
   position: relative;
 `
 
+export const ResumeButton: typeof Button = styled(Button)
+  .attrs({
+    size: 'small',
+    styleType: 'transparent'
+  })`
+    
+  `
 
 export const SettingsButton: typeof TouchableOpacity = styled(TouchableOpacity)`
   position: absolute;
