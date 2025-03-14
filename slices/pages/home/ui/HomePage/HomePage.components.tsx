@@ -1,9 +1,10 @@
 import { color, size } from '@shared/config';
 import { DefinedIconProps, Icon, TouchableOpacity } from '@shared/ui';
 import { FC } from 'react';
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
 import styled from 'styled-components/native';
 import { Button } from '../Button';
+import { Alegreya } from '@shared/fonts';
 
 export const Container: typeof View = styled(View)`
   background-color: ${color.black};
@@ -37,3 +38,15 @@ export const SettingsIcon: FC<DefinedIconProps> = styled(Icon)
     font-size: 30px;
     color: ${color.light10}
   `
+
+export const Disclaimer: typeof View = styled(View)`
+  position: absolute;
+  bottom: ${size.gap.large};
+  left: ${size.gap.large};
+  right: ${size.gap.large};
+`
+
+export const DisclaimerText: typeof Text = styled(Text)`
+  color: ${color.light10};
+  font-family: ${Alegreya.regular};
+`

@@ -39,6 +39,12 @@ export const HomePage = () => {
           {t`Continue`}
         </C.ResumeButton>
       )}
+      <C.Disclaimer>
+        <C.DisclaimerText>
+          Arkham Horror: The Card Game™ and all related content © Fantasy Flight Games (FFG). 
+          This app is not produced, endorsed by or affiliated with FFG.
+        </C.DisclaimerText>
+      </C.Disclaimer>
     </C.Container>
   );
 }
