@@ -9,6 +9,8 @@ import type { PropsWithChildren } from 'react';
 import { screenOptions } from './RootLayout.config';
 import * as SystemUI from 'expo-system-ui';
 import { color } from '@shared/config';
+import { Loader } from '@shared/ui';
+import * as C from './RootLayout.components' 
 
 export const RootLayout = ({
   children
@@ -17,7 +19,11 @@ export const RootLayout = ({
   SystemUI.setBackgroundColorAsync(color.dark30);
 
   if (!loaded) {
-    return null;
+    return (
+      <C.LoadingPage>
+        <Loader/>
+      </C.LoadingPage>
+    );
   }
 
   return (

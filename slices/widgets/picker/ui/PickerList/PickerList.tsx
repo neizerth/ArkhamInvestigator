@@ -5,13 +5,11 @@ import { useBooleanRef } from '@shared/lib/hooks';
 import type { PickerListProps } from '@widgets/picker/model';
 import { defaultRenderItemContainer } from './defaultRenderItemContainer';
 import { safeIndexOf } from '@shared/lib';
-import { impactHapticFeedback } from '@features/haptic';
+import { impactHapticFeedback, tickFeedback } from '@features/haptic';
 import { times } from 'ramda';
 import { MIN_FINGER_SIZE } from '@widgets/picker/config';
 
 type ListScrollEvent = NativeSyntheticEvent<NativeScrollEvent>;
-
-const tick = () => impactHapticFeedback('effectTick');
 
 export const PickerList = ({
   itemContainerStyle,
@@ -117,7 +115,7 @@ export const PickerList = ({
       return;
     }
     
-    times(tick, n);
+    times(tickFeedback, n);
   }, [itemHeight]);
 
   const onTouchStart = useCallback(() => {
@@ -134,7 +132,7 @@ export const PickerList = ({
       }
       activated.current = false
       canPress.current = false;
-      tick();
+      tickFeedback();
       onLongPress();
     }, delayLongPress);
     
@@ -146,7 +144,7 @@ export const PickerList = ({
     if (canPress.current && onPress) {
       clearTimeout(longPressTimeout.current);
 
-      tick();
+      tickFeedback();
       onPress()
 
       activated.current = false;

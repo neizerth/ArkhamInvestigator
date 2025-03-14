@@ -1,64 +1,59 @@
 import { useAppDispatch, useAppSelector } from '@shared/lib';
 import * as C from './LanguagePicker.components';
 import { changeLanguage, CHINESE_LANGUAGES, selectAvailableLanguages, selectLanguage } from '@features/i18n';
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import type { PickerChangeEvent, PickerItemInfo } from '@widgets/picker';
-import { languageMapping } from './languageMapping';
-import { Flag } from '@shared/ui';
+
+import { languageLabels } from './labels';
+import { styles } from './LanguagePicker.style';
+
+import { Dropdown } from 'react-native-element-dropdown';
+import { propEq } from 'ramda';
+import { color } from '@shared/config';
+import { selectFeedback } from '@features/haptic';
 
 export type LanguagePickerProps = {
 
 }
+
+type PickerItem = {
+  label: string;
+  value: string;
+}
+
 
 export const LanguagePicker = ({}: LanguagePickerProps) => {
   const dispatch = useAppDispatch();
   const languages = useAppSelector(selectAvailableLanguages);
   const language = useAppSelector(selectLanguage);
 
-  const renderItem = useCallback(({ item }: PickerItemInfo) => {
-    const language = languages[item];
-    
-    return (
-      <Flag language={language}/>
-    )
-  }, [languages])
+  const onChange = useCallback(({ value }: PickerItem) => {
+    dispatch(changeLanguage(value));
+  }, [dispatch]);
 
-  const onChange = useCallback(({ value = 0 }: PickerChangeEvent) => {
-    const language = languages[value];
-    dispatch(changeLanguage(language));
-  }, [dispatch, languages]);
+  const items = languages.map((language) => ({
+    label: languageLabels[language],
+    value: language
+  }));
 
-  const index = languages.indexOf(language) || 0;
-  const nextIndex = (index + 1) % languages.length;
-  const prevIndex = index === 0 ? languages.length - 1 : index - 1;
-
-  const nextLanguage = languages[nextIndex];
-  const prevLanguage = languages[prevIndex];
-
-  const next = useCallback(() => {
-    dispatch(changeLanguage(nextLanguage))
-  }, [dispatch, nextLanguage]);
-
-  const prev = useCallback(() => {
-    dispatch(changeLanguage(prevLanguage))
-  }, [dispatch, prevLanguage]);
-
-  const data = [...languages.keys()]
-
+  const value = items.find(propEq(language, 'value'));
+  
   return (
     <C.Container>
-      <C.Control onPress={prev}>
-        <C.ArrowTop/>
-      </C.Control>
-      <C.Picker
-        renderItem={renderItem}
-        data={data}
-        value={index}
-        onValueChanged={onChange}
+      <Dropdown
+        style={styles.dropdown}
+        containerStyle={styles.container}
+        selectedTextStyle={styles.selectedTextStyle}
+        itemTextStyle={styles.itemTextStyle}
+        activeColor={color.dark15}
+        data={items}
+        maxHeight={300}
+        labelField="label"
+        valueField="value"
+        value={value}
+        onChange={onChange}
+        onFocus={selectFeedback}
       />
-       <C.Control onPress={next}>
-        <C.ArrowBottom/>
-      </C.Control>
     </C.Container>
   );
 }

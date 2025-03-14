@@ -1,0 +1,15 @@
+export const languageLabels: Record<string, string> = {
+  en: 'English',
+  es: 'Español',
+  de: 'Deutsch',
+  it: 'Italiano',
+  fr: 'Français',
+  ko: '한국어',
+  uk: 'Українська',
+  pl: 'Polski',
+  pt: 'Português',
+  ru: 'Русский',
+  vi: 'Tiếng Việt',
+  zh: '中文',
+  'zh-cn': '中文'
+}

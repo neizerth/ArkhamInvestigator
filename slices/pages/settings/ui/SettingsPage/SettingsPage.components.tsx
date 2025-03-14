@@ -14,14 +14,15 @@ export const Container: typeof View = styled(View)`
 export const Content: typeof View = styled(View)`
   flex: 1;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
 `
 
 export const Row: typeof BaseRow = styled(BaseRow)`
   flex-direction: row;
   align-items: center;
-  margin-bottom: 10px;
-  gap: ${size.gap.medium}px;
+  padding: ${size.gap.default}px;
+  margin-bottom: ${size.gap.default}px;
+  gap: ${size.gap.default}px;
 `
 
 export const Label: typeof Text = styled(Text)`
