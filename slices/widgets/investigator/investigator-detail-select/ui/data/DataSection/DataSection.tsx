@@ -22,7 +22,7 @@ export const DataSection = ({
   }
 
   const sectionTitle = `${title} (${length})`;
-  const selectedValue = selected && t(selected.name) || t(`Default`);
+  const selectedValue = selected && t(selected.name) || t`Default`;
 
   return (
     <Section

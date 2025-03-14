@@ -31,15 +31,11 @@ export const InvestigatorDetailSelect = () => {
   }, [dispatch]);
 
   const onChangeSkin = useCallback((item: DetailItem) => {
-    dispatch(changeSkin({
-      skinId: item?.value
-    }));
+    dispatch(changeSkin(item));
   }, [dispatch])
 
   const onChangeVariant = useCallback((item: DetailItem) => {
-    dispatch(changeVariant({
-      skinId: item?.value
-    }));
+    dispatch(changeVariant(item));
   }, [dispatch])
 
   if (!investigator || !details) {

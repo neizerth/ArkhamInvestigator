@@ -17,6 +17,7 @@ export const changeVariant: AppThunkCreator = (item: InvestigatorDetailItem | nu
         variantId: item?.value || code
       }));
     }
+
     dispatch(setInvestigatorVariant({
       code,
       variantId: item?.value || null
