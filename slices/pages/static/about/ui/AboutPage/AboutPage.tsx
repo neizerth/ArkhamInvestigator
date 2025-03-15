@@ -2,6 +2,7 @@ import { useAppTranslation } from '@features/i18n';
 import { nbsp, space, wordJoiner } from '@shared/config';
 import { APP_VERSION } from '@shared/config/app';
 import { ContentPage, Title, Text, List, Paragraph, A, Bold } from '@shared/ui';
+import * as Application from 'expo-application';
 
 export type AboutPageProps = {
 
@@ -68,7 +69,14 @@ export const AboutPage = ({}: AboutPageProps) => {
         </List.Item>
       </List>
       <Title>Application Info</Title>
-      <Paragraph>Current Version: {APP_VERSION}</Paragraph>
+      <List>
+        <List.Item>
+          Build Version: {Application.nativeBuildVersion}
+        </List.Item>
+        <List.Item>
+          Codebase Version: {APP_VERSION}
+        </List.Item>
+      </List>
     </ContentPage>
   );
 }
