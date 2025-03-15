@@ -20,15 +20,17 @@ export const ContentPage = ({
     dispatch(goBack())
   }, [dispatch])
 
+  const Content = full ? C.FullContent : C.Content;
+
   return (
     <Page {...props}>
       <TopBar 
         title={title} 
         onBack={back}
       />
-      <C.Content full={full}>
+      <Content>
         {children}
-      </C.Content>
+      </Content>
     </Page>
   );
 }

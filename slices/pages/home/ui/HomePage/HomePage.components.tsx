@@ -67,6 +67,6 @@ export const Disclaimer: typeof View = styled(View)`
 `
 
 export const DisclaimerText: typeof Text = styled(Text)`
-  color: ${color.light10};
+  color: ${color.dark10};
   font-family: ${Alegreya.regular};
 `
