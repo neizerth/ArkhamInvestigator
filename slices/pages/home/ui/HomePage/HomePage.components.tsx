@@ -22,22 +22,27 @@ export const ResumeButton: typeof Button = styled(Button)
     
   `
 
-export const SettingsButton: typeof TouchableOpacity = styled(TouchableOpacity)`
+export const SpecialButton: typeof TouchableOpacity = styled(TouchableOpacity)`
   position: absolute;
   top: 40px;
-  right: ${size.gap.default}px;
   width: 48px;
   height: 48px;
   justify-content: center;
   align-items: center;
 `
-export const SettingsIcon: FC<DefinedIconProps> = styled(Icon)
-  .attrs({
-    icon: 'wrench'
-  })`
-    font-size: 30px;
-    color: ${color.light10}
-  `
+
+export const SettingsButton: typeof SpecialButton = styled(SpecialButton)`
+  right: ${size.gap.default}px;
+`
+
+export const AboutButton: typeof SpecialButton = styled(SpecialButton)`
+  left: ${size.gap.default}px;
+`
+
+export const ButtonIcon: typeof Icon = styled(Icon)`
+  font-size: 30px;
+  color: ${color.light10}
+`
 
 export const Disclaimer: typeof View = styled(View)`
   position: absolute;

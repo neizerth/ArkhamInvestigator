@@ -9,8 +9,7 @@
       "@entities/*": ["./slices/entities/*"],
       "@pages/*": ["./slices/pages/*"],
       "@widgets/*": ["./slices/widgets/*"],
-      "@features/*": ["./slices/features/*"],
-      "@/*": ["./*"]
+      "@features/*": ["./slices/features/*"]
     }
   },
   "include": [
