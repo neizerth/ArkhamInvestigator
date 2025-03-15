@@ -71,7 +71,10 @@ export const AboutPage = ({}: AboutPageProps) => {
       <Title>Application Info</Title>
       <List>
         <List.Item>
-          <Bold>Build Version</Bold>: {Application.nativeBuildVersion}
+          <Bold>Build Version</Bold>: {Application.nativeApplicationVersion}
+        </List.Item>
+        <List.Item>
+          <Bold>Build Id</Bold>: {Application.nativeBuildVersion}
         </List.Item>
         <List.Item>
           <Bold>Codebase Version</Bold>: {APP_VERSION}

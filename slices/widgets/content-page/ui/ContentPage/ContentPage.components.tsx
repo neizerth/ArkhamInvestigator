@@ -11,4 +11,5 @@ export const Content: typeof ScrollView = styled(ScrollView)`
   flex: 1;
   padding: ${size.gap.medium}px;
   padding-top: 0;
+  margin-bottom: ${size.gap.default}px;
 `
