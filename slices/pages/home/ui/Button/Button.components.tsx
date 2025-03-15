@@ -2,9 +2,9 @@ import { withLocale } from "@features/i18n";
 import { color, font } from "@shared/config";
 import { SanCn, TeutonicRU, ViaodaLibre } from "@shared/fonts"
 import { STXingkai, Arkhamic } from "@shared/fonts"
-import { PrimaryButtonProps, PrimaryButtonSize } from "@shared/ui";
-import { FC } from "react";
-import { TextProps as BaseTextProps } from "react-native";
+import type { PrimaryButtonProps, PrimaryButtonSize } from "@shared/ui";
+import type { FC } from "react";
+import type { TextProps as BaseTextProps } from "react-native";
 import styled, { css } from "styled-components/native";
 
 const zhText = {

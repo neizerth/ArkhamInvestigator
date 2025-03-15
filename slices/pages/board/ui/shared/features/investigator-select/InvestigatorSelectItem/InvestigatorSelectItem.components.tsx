@@ -1,9 +1,9 @@
 import { color, factionColor, font } from "@shared/config";
-import { PropsWithFaction } from "@shared/model";
+import type { PropsWithFaction } from "@shared/model";
 import { IconNumber } from "@shared/ui";
 import { PickerMemo as BasePicker } from "@widgets/picker";
-import { FC } from "react";
-import { Image as BaseImage, ImageProps as BaseImageProps, View, ViewProps } from "react-native";
+import type { FC } from "react";
+import { Image as BaseImage, type ImageProps as BaseImageProps, View, type ViewProps } from "react-native";
 import styled, { css } from "styled-components/native";
 
 const size = 60;

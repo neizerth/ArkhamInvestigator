@@ -1,10 +1,10 @@
-import { Image, View, ViewProps } from "react-native";
+import { Image, View, type ViewProps } from "react-native";
 import styled, { css } from "styled-components/native";
 import { rule } from './images';
 import { Icon, IconButton, Row as BaseRow } from "@shared/ui";
 import { skillCheckColor } from "@pages/skill-check/config";
 import { color, font, size } from "@shared/config";
-import { FC } from "react";
+import type { FC } from "react";
 
 export const Container: typeof View = styled(View)`;
   padding: 40px ${size.gap.default}px 0;

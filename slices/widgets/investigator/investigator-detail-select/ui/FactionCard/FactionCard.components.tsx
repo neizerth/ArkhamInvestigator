@@ -5,7 +5,7 @@ import type { TextProps, ViewProps } from "react-native";
 
 import styled, { css } from "styled-components/native";
 import type { PropsWithFaction } from "@shared/model/ui";
-import { FactionBackground, FactionBackgroundProps } from "../FactionBackground";
+import { FactionBackground, type FactionBackgroundProps } from "../FactionBackground";
 import type { Faction } from "@shared/model";
 import { FactionFontIcon, Icon as BaseIcon } from "@shared/ui";
 import type { IconProps } from "@shared/ui";

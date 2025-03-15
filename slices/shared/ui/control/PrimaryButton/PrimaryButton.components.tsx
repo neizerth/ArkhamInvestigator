@@ -1,8 +1,8 @@
 import { TouchableOpacity } from "@shared/ui/behavior/TouchableOpacity";
 import * as ReactNative from "react-native";
 import styled, { css } from "styled-components/native";
-import { PrimaryButtonSize, PrimaryButtonStyle, PropsWithStyleType } from "./PrimaryButton.types";
-import { FC } from "react";
+import type { PrimaryButtonSize, PrimaryButtonStyle, PropsWithStyleType } from "./PrimaryButton.types";
+import type { FC } from "react";
 
 const buttonWidth: Record<PrimaryButtonStyle, number> = {
   default: 250,

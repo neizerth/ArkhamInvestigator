@@ -1,5 +1,5 @@
-import { PropsWithUnit } from "@shared/model";
-import { TextProps } from "react-native";
+import type { PropsWithUnit } from "@shared/model";
+import type { TextProps } from "react-native";
 
 export type InvestigatorTraitsProps = TextProps & Partial<PropsWithUnit> & {
   value: string;

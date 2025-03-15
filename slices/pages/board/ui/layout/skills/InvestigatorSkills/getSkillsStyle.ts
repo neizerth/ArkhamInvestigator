@@ -1,5 +1,5 @@
 import type { Box } from "@shared/model";
-import { ViewStyle } from "react-native";
+import type { ViewStyle } from "react-native";
 
 export const getSkillsStyle = ({ width }: Box): ViewStyle => {
   const vw = width / 100;

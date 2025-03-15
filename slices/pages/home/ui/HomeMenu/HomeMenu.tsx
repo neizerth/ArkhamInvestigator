@@ -1,8 +1,8 @@
 import { goToPage, useAppDispatch } from '@shared/lib';
 import * as C from './HomeMenu.components';
-import { Href } from 'expo-router';
+import type { Href } from 'expo-router';
 import { useCallback } from 'react';
-import { Linking, ViewProps } from 'react-native';
+import { Linking, type ViewProps } from 'react-native';
 import { DONATE_LINK } from '@shared/config';
 
 export type HomeMenuProps = ViewProps;

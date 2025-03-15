@@ -1,8 +1,8 @@
 
 import { color, size } from "@shared/config";
-import { DefinedIconButtonProps, IconButton, IconButtonProps, Row } from "@shared/ui";
+import { type DefinedIconButtonProps, IconButton, IconButtonProps, Row } from "@shared/ui";
 import Color from "color";
-import { FC } from "react";
+import type { FC } from "react";
 import { View } from "react-native";
 import styled from "styled-components/native";
 

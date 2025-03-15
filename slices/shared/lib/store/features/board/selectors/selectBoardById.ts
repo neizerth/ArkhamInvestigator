@@ -1,7 +1,7 @@
 import { selectInvestigatorBoards } from "../board";
 import { propEq } from "ramda";
-import { AppSelector } from "@shared/lib/store";
-import { InvestigatorBoard } from "@shared/model";
+import type { AppSelector } from "@shared/lib/store";
+import type { InvestigatorBoard } from "@shared/model";
 
 export const selectBoardById = (id: number): AppSelector<InvestigatorBoard | undefined> => 
   state => {

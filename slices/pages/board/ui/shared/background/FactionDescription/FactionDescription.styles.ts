@@ -1,5 +1,5 @@
 import type { Faction } from "@shared/model";
-import { RuleSet } from "styled-components";
+import type { RuleSet } from "styled-components";
 import { css } from "styled-components/native";
 
 export const getFactionStyle = (faction: Faction) => {

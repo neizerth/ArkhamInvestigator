@@ -1,12 +1,12 @@
-import { View, ViewProps } from "react-native";
+import { View, type ViewProps } from "react-native";
 import styled from "styled-components/native";
 import { Text } from "../../typography";
-import { FC } from "react";
+import type { FC } from "react";
 import { color, font, size } from "@shared/config";
 import { ListMarker } from "../ListMarker";
 import { Row } from "@shared/ui/grid";
 import { Alegreya } from "@shared/fonts";
-import { DefinedIconProps, Icon } from "@shared/ui/game";
+import { type DefinedIconProps, Icon } from "@shared/ui/game";
 
 type ContainerElement = FC<ViewProps> & {
   Item: typeof Text

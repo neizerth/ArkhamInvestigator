@@ -1,8 +1,8 @@
 import { assetsSize } from "@pages/board/config";
 import { PropsWithView } from "@pages/board/model";
-import { PropsWithUnit } from "@shared/model";
-import { FC } from "react";
-import { View, ViewProps } from "react-native";
+import type { PropsWithUnit } from "@shared/model";
+import type { FC } from "react";
+import { View, type ViewProps } from "react-native";
 import styled, { css } from "styled-components/native";
 
 const getLayoutStyle = ({ unit }: PropsWithUnit) => {

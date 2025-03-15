@@ -2,7 +2,7 @@ import { selectCurrentBoard, useAppSelector } from '@shared/lib';
 import type { Faction, PropsWithFaction } from '@shared/model';
 import { images } from './images';
 import * as C from './FactionDescription.components'
-import { ImageBackgroundProps } from 'react-native';
+import type { ImageBackgroundProps } from 'react-native';
 import { descriptionSize } from '@pages/board/config';
 import { getBoxByRatio } from '@shared/lib/util/size/box';
 

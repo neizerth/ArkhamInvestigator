@@ -1,7 +1,7 @@
 import { color, IS_WEB } from "@shared/config";
 import { sign } from "@shared/lib";
 import type { Box, PropsWithBox } from "@shared/model";
-import { type TextStyle, type ViewStyle } from "react-native";
+import type { TextStyle, ViewStyle } from "react-native";
 
 type GetSkillStyleOptions = PropsWithBox;
 

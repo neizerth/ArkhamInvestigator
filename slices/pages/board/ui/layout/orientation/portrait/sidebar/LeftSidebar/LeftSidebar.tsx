@@ -1,6 +1,6 @@
 import { InvestigatorSelect } from '@pages/board/ui/shared/features';
 import * as C from './LeftSidebar.components';
-import { ViewProps } from 'react-native';
+import type { ViewProps } from 'react-native';
 import { redo, selectInvestigatorBoards, undo, useAppDispatch, useAppSelector } from '@shared/lib';
 import { useCallback, useContext } from 'react';
 import { LayoutContext, PortraitLayoutContext } from '@pages/board/config';

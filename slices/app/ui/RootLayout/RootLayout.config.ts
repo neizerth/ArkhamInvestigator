@@ -1,6 +1,6 @@
 import { color } from "@shared/config";
-import { Stack } from "expo-router"
-import { FC } from "react"
+import type { Stack } from "expo-router"
+import type { FC } from "react"
 
  type StackProps = typeof Stack extends FC<infer Props> ? Props: never;
  

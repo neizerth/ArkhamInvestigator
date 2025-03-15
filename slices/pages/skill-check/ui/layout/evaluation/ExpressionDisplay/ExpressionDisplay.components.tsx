@@ -1,10 +1,10 @@
 import { color } from "@shared/config";
 import { Copasetic } from "@shared/fonts"
-import { Icon, IconProps, TouchableOpacity } from "@shared/ui";
-import { Text, TextProps, View } from "react-native";
+import { Icon, type IconProps, TouchableOpacity } from "@shared/ui";
+import { Text, type TextProps, View } from "react-native";
 import styled, { css } from "styled-components/native";
-import { PropsWithType } from "./ExpressionDisplay.types";
-import { FC } from "react";
+import type { PropsWithType } from "./ExpressionDisplay.types";
+import type { FC } from "react";
 import { statFontSize, typeFontSize } from "./ExpressionDisplay.styles";
 import { Pressable } from "react-native";
 

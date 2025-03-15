@@ -1,6 +1,6 @@
 import { clearSkillCheckHistory, goBack, selectHistoryShown, selectSkillCheckType, sendCommandSignal, setHistoryShown, useAppDispatch, useAppSelector } from '@shared/lib';
 import * as C from './SkillCheckHeader.components';
-import { ViewProps } from 'react-native';
+import type { ViewProps } from 'react-native';
 import { useCallback } from 'react';
 import { useSkillCheckLayoutType } from '@pages/skill-check/lib';
 

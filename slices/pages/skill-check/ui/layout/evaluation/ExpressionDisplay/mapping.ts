@@ -1,5 +1,5 @@
 import { characters } from "@pages/skill-check/config";
-import { InvestigatorBoardStat, SkillCheckOperator } from "@shared/model";
+import type { InvestigatorBoardStat, SkillCheckOperator } from "@shared/model";
 
 export const operatorMapping: Record<SkillCheckOperator, string> = {
   add: '+',

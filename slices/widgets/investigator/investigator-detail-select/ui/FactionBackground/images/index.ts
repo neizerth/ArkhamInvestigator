@@ -2,8 +2,8 @@ import type { Faction } from "@shared/model";
 import type { ImageRequireSource } from "react-native";
 
 
-import { FC } from "react";
-import { SvgProps } from "react-native-svg";
+import type { FC } from "react";
+import type { SvgProps } from "react-native-svg";
 
 import guardian from './guardian.svg'
 import mystic from './mystic.svg'

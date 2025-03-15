@@ -2,9 +2,9 @@ import { selectCurrentBoard, selectCurrentInvestigatorIndex, selectInvestigatorB
 import * as C from './InvestigatorSelect.components';
 import { getInvestigatorImageUrl } from '@shared/api';
 import { Faction } from '@shared/model';
-import { PickerChangeEvent, PickerItemInfo } from '@widgets/picker';
+import type { PickerChangeEvent, PickerItemInfo } from '@widgets/picker';
 import { useCallback, useMemo } from 'react';
-import { ViewProps } from 'react-native';
+import type { ViewProps } from 'react-native';
 import { prop } from 'ramda';
 
 export type InvestigatorSelectProps = ViewProps

@@ -4,7 +4,7 @@ import { SanCn } from "@shared/fonts"
 import { Yoon } from "@shared/fonts"
 import { getKeyConfig, type KeyConfig } from "@shared/lib";
 import type { ComponentStyleMap } from "@widgets/game-text";
-import { TextStyle } from "react-native";
+import type { TextStyle } from "react-native";
 
 const zhComponentStyles: ComponentStyleMap = {
   i: {

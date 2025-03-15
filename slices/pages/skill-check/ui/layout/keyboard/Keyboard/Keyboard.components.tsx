@@ -1,7 +1,7 @@
 import { BackspaceImage, rule } from "./images/images";
 
 import { Row as BaseRow, TouchableOpacity } from "@shared/ui";
-import { View, Text, ImageProps, Image, ViewProps } from "react-native";
+import { View, Text, type ImageProps, Image, type ViewProps } from "react-native";
 import styled, { css } from "styled-components/native";
 import * as Buttons from "../KeyboardButton";
 import { color, font, size } from '@shared/config';

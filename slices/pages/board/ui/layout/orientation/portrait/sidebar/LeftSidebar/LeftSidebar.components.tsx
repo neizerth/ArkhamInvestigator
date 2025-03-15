@@ -1,10 +1,10 @@
 import { assetsSize } from "@pages/board/config";
 import { PropsWithView } from "@pages/board/model";
 import { size } from "@shared/config";
-import { PropsWithUnit } from "@shared/model";
-import { DefinedIconProps, Icon, TouchableOpacity } from "@shared/ui";
-import { FC } from "react";
-import { View, ViewProps } from "react-native";
+import type { PropsWithUnit } from "@shared/model";
+import { type DefinedIconProps, Icon, TouchableOpacity } from "@shared/ui";
+import type { FC } from "react";
+import { View, type ViewProps } from "react-native";
 import styled, { css } from "styled-components/native";
 
 type ContainerProps = ViewProps & PropsWithUnit & {

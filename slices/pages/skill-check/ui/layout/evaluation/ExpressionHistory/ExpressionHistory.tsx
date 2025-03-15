@@ -3,7 +3,7 @@ import * as C from './ExpressionHistory.components';
 import { getSkillCheckValue, selectCurrentBoard, selectSkillCheckHistory, setSkillCheckData, useAppDispatch, useAppSelector } from '@shared/lib';
 import { ExpressionDisplay } from '../ExpressionDisplay';
 import { useCallback, useRef } from 'react';
-import { SkillCheckItem } from '@shared/model';
+import type { SkillCheckItem } from '@shared/model';
 
 export type ExpressionHistoryProps = ViewProps & {
   size?: number;

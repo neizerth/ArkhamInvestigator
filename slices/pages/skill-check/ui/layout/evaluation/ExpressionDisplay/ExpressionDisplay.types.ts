@@ -1,5 +1,5 @@
 import type { SkillCheckItem } from "@shared/model"
-import { TouchableOpacityProps } from "@shared/ui"
+import type { TouchableOpacityProps } from "@shared/ui"
 
 export type ExpressionDisplayProps = TouchableOpacityProps & PropsWithType & {
   data: SkillCheckItem[]

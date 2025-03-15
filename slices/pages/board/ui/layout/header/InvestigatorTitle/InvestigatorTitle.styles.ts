@@ -1,4 +1,4 @@
-import { PropsWithView } from "@pages/board/model";
+import type { PropsWithView } from "@pages/board/model";
 import { color, font } from "@shared/config";
 import { Arkhamic, STXinwei } from "@shared/fonts"
 import { ArnoPro } from "@shared/fonts"

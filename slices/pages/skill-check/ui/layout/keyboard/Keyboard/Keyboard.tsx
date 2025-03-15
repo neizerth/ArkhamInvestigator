@@ -6,7 +6,7 @@ import type { SkillCheckCommandType, SkillCheckOperator } from '@shared/model';
 import { operatorMapping } from './mapping';
 import { LayoutContainer } from '../../LayoutContainer';
 import { characters } from '@pages/skill-check/config';
-import { useWindowDimensions, ViewProps } from 'react-native';
+import { useWindowDimensions, type ViewProps } from 'react-native';
 
 export type KeyboardProps = ViewProps
 

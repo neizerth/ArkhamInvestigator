@@ -5,7 +5,7 @@ import { ImageBackground, ScrollView, View, type ImageBackgroundProps } from "re
 import styled, { css } from "styled-components/native";
 import { getFactionStyle } from "./FactionDescription.styles";
 import { getBoxByRatio } from "@shared/lib/util/size/box";
-import { ViewProps } from "react-native";
+import type { ViewProps } from "react-native";
 
 export type BackgroundProps = ImageBackgroundProps & PropsWithBox;
 

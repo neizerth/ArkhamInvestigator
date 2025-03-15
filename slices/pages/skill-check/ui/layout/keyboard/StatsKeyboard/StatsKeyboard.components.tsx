@@ -2,7 +2,7 @@ import { Row } from "@shared/ui"
 import { ScrollView, View } from "react-native"
 import styled from "styled-components/native"
 import * as Buttons from "../KeyboardButton"
-import { FC } from "react"
+import type { FC } from "react"
 import { color, size } from "@shared/config"
 
 export const Container: typeof ScrollView = styled(ScrollView)`

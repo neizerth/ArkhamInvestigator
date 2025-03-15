@@ -2,7 +2,7 @@ import { boardText } from "@pages/board/config"
 import { ArnoPro, STKaiti, STXingkai, STXinwei } from "@shared/fonts"
 import { SanCn } from "@shared/fonts"
 import { getKeyConfig } from "@shared/lib"
-import { TextStyle } from "react-native"
+import type { TextStyle } from "react-native"
 
 type GetInvestigatorTraitsStyleOptions = {
   language: string

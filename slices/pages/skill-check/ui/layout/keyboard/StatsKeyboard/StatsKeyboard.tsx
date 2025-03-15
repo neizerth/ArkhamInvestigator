@@ -1,7 +1,7 @@
-import { ScrollViewProps } from 'react-native';
+import type { ScrollViewProps } from 'react-native';
 import * as C from './StatsKeyboard.components';
 import { sendStatSignal, useAppDispatch } from '@shared/lib';
-import { InvestigatorBoardStat } from '@shared/model';
+import type { InvestigatorBoardStat } from '@shared/model';
 import { useCallback } from 'react';
 
 export type StatsKeyboardProps = ScrollViewProps;

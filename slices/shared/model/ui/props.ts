@@ -1,5 +1,5 @@
-import { StyleProp } from "react-native"
-import { Faction, SkillType } from "../features"
+import type { StyleProp } from "react-native"
+import type { Faction, SkillType } from "../features"
 import type { DeviceBreakpointType } from "../features/device"
 import type { Box, BoxLayout, ScaledBox } from "./box"
 

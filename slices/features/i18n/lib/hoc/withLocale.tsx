@@ -1,5 +1,5 @@
 import { useAppSelector } from "../../../../shared/lib/hooks/store/useAppSelector"
-import { getKeyConfig, KeyConfig } from "../../../../shared/lib/util/record"
+import { getKeyConfig, type KeyConfig } from "../../../../shared/lib/util/record"
 import type { ComponentType, FC } from "react"
 import { StyleSheet, Text, TextStyle, type TextProps } from "react-native"
 import { selectLanguage } from "../store/features/i18n/i18n"

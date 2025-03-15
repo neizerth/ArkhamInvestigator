@@ -4,9 +4,9 @@ import * as F from '../footer'
 import * as S from '../sidebar' 
 import { size } from "@shared/config"
 import { assetsSize, SIDEBAR_BOTTOM } from "@pages/board/config"
-import { PropsWithView } from "@pages/board/model"
+import type { PropsWithView } from "@pages/board/model"
 import { RuleSet } from "styled-components"
-import { FC } from "react"
+import type { FC } from "react"
 import Animated from "react-native-reanimated"
 
 export const Container: typeof View = styled(View)`

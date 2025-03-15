@@ -1,12 +1,12 @@
 import { Pressable, View, type ViewProps } from "react-native";
 import styled, { css } from "styled-components/native";
 import { FactionDescription } from "../../../../../shared/background";
-import { DefinedIconButtonProps, IconButton } from "@shared/ui";
+import { type DefinedIconButtonProps, IconButton } from "@shared/ui";
 import Animated from "react-native-reanimated";
 import { InvestigatorTraits, InvestigatorText, InvestigatorTextProps, InvestigatorFlavor } from "@pages/board/ui/shared/text";
 import { boardText } from "@pages/board/config";
 import { DescriptionMenu } from "../DescriptionMenu";
-import { FC } from "react";
+import type { FC } from "react";
 import { color, size } from "@shared/config";
 import { ScrollView } from 'react-native-gesture-handler'
 

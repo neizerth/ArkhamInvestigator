@@ -8,7 +8,7 @@ import { LayoutContext } from '@pages/board/config';
 import { getTitleStyle } from './InvestigatorTitle.styles';
 import { formatGameText, selectCurrentBoard, useAppSelector } from '@shared/lib';
 import type { Faction } from '@shared/model';
-import { selectLanguage, TranslatableProps, useAppTranslation } from '@features/i18n';
+import { selectLanguage, type TranslatableProps, useAppTranslation } from '@features/i18n';
 
 export type InvestigatorTitleProps = Omit<ImageBackgroundProps, 'source'> & TranslatableProps
 

@@ -6,7 +6,7 @@ import { useCallback, useContext, useState } from 'react';
 import { SkillsContext } from '@pages/board/config';
 import { getSkillStyle, getSkillValueStyle } from './Skill.styles';
 import { impactHapticFeedback } from '@features/haptic';
-import { PickerChangeEvent, PickerItemInfo } from '@widgets/picker';
+import type { PickerChangeEvent, PickerItemInfo } from '@widgets/picker';
 import { range } from 'ramda';
 
 export type SkillProps = ViewProps & {

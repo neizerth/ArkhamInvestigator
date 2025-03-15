@@ -1,6 +1,6 @@
 import { selectCurrentBoard, useAppSelector } from "@shared/lib";
 import { useEffect } from "react";
-import { ViewStyle } from "react-native";
+import type { ViewStyle } from "react-native";
 import { useAnimatedStyle, useSharedValue, withTiming } from "react-native-reanimated"
 
 export const useActiveStyle = () => {
