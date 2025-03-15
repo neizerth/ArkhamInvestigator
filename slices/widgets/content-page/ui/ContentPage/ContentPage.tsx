@@ -1,5 +1,5 @@
 import { goBack, useAppDispatch } from '@shared/lib';
-import { Page, type PageProps } from '../Page';
+import { Page } from '@shared/ui';
 import * as C from './ContentPage.components';
 import { useCallback } from 'react';
 import { TopBar } from '@widgets/top-bar';

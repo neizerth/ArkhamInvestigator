@@ -1,4 +1,4 @@
-import type { PageProps } from "../Page";
+import type { PageProps } from "@shared/ui";
 
 export type ContentPageProps = PageProps & WideProps & {
   title: string

@@ -1,2 +1,2 @@
 export * from './Page'
-export * from './ContentPage'
+export * from '../../../widgets/content-page/ui/ContentPage'
