@@ -1,12 +1,15 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { APP_VERSION } from '@shared/config/app';
 import { createSliceState } from 'redux-toolkit-helpers';
 
 export type IAppState = {
-  loading: boolean
+  loading: boolean,
+  version: string
 }
 
 const initialState: IAppState = {
   loading: true,
+  version: APP_VERSION
 };
 
 export const app = createSlice({
