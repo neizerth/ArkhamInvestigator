@@ -57,6 +57,9 @@ export const AboutPage = ({}: AboutPageProps) => {
         <List.Item>
           <Bold>Re-used ArkhamCards icons</Bold>: Eugene Sarnetsky
         </List.Item>
+        <List.Item>
+          <Bold>Button Vector Art</Bold>: vecteezy.com
+        </List.Item>
       </List>
       <Title>Special Thanks</Title>
       <List>
