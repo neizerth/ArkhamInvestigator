@@ -1,4 +1,5 @@
 import { useAppTranslation } from '@features/i18n';
+import { nbsp, space, wordJoiner } from '@shared/config';
 import { APP_VERSION } from '@shared/config/app';
 import { ContentPage, Title, Text, List, Paragraph, A, Bold } from '@shared/ui';
 
@@ -13,8 +14,8 @@ export const AboutPage = ({}: AboutPageProps) => {
     <ContentPage title={t`About`}>
       <Paragraph>
         The information presented in this app about 
-        <A href="https://www.fantasyflightgames.com/en/products/arkham-horror-the-card-game/">Arkham Horror: The Card Game™</A>, 
-        both textual and graphical, is © Fantasy Flight Games. 
+        {space}<A href="https://www.fantasyflightgames.com/en/products/arkham-horror-the-card-game/">Arkham Horror: The Card Game{wordJoiner}™</A>, 
+        both textual and graphical, is{nbsp}©{nbsp}Fantasy Flight Games. 
         This app is a fan project and is not produced, endorsed, or supported by, or affiliated with Fantasy Flight Games.
       </Paragraph>
       <Paragraph>

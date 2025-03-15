@@ -1,5 +1,5 @@
-const nbsp = '\xa0';
-const wordJoiner = '\u2060';
+import { nbsp, wordJoiner } from "@shared/config";
+
 export const prepareText = (text: string) => {
   const content = text
     // typography
