@@ -1,20 +1,14 @@
 import { goToPage, selectCurrentBoard, useAppDispatch, useAppSelector, usePageLoader } from "@shared/lib";
 import { Button } from "../Button";
 import * as C from "./HomePage.components";
-import { useCallback, useEffect, useRef } from "react";
+import { useCallback } from "react";
 import { startNewGame } from "@pages/home/lib";
 import { useAppTranslation } from "@features/i18n";
-import { Href } from "expo-router";
-
 export const HomePage = () => {
   const dispatch = useAppDispatch();
   const { t } = useAppTranslation();
 
   const board = useAppSelector(selectCurrentBoard);
-
-  const goTo = useCallback((href: Href) => () => {
-    dispatch(goToPage(href))
-  }, [dispatch]);
 
   const start = useCallback(() => {
     dispatch(startNewGame());
@@ -29,12 +23,7 @@ export const HomePage = () => {
 
   return (
     <C.Container>
-      <C.SettingsButton onPress={goTo('/settings')}>
-        <C.SettingsIcon/>
-      </C.SettingsButton>
-      <C.AboutButton onPress={goTo('/about')}>
-        <C.AboutIcon/>
-      </C.AboutButton>
+      <C.Menu/>
 
       <Button onPress={onStart}>
         {t`New Game`}

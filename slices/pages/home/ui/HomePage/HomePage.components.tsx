@@ -5,6 +5,7 @@ import { View, Text } from 'react-native';
 import styled from 'styled-components/native';
 import { Button } from '../Button';
 import { Alegreya } from '@shared/fonts';
+import { HomeMenu } from '../HomeMenu';
 
 export const Container: typeof View = styled(View)`
   background-color: ${color.black};
@@ -22,42 +23,14 @@ export const ResumeButton: typeof Button = styled(Button)
     
   `
 
-export const SpecialButton: typeof TouchableOpacity = styled(TouchableOpacity)`
+export const Menu: typeof HomeMenu = styled(HomeMenu)`
   position: absolute;
   z-index: 1;
   top: 40px;
-  width: 48px;
-  height: 48px;
-  justify-content: center;
-  align-items: center;
+  left: 0;
+  right: 0;
+  flex: 1;
 `
-
-export const SettingsButton: typeof SpecialButton = styled(SpecialButton)`
-  right: ${size.gap.default}px;
-`
-
-export const AboutButton: typeof SpecialButton = styled(SpecialButton)`
-  left: ${size.gap.default}px;
-`
-
-export const ButtonIcon: typeof Icon = styled(Icon)`
-  color: ${color.light10};
-`
-
-export const SettingsIcon: FC<DefinedIconProps> = styled(ButtonIcon)
-  .attrs({
-    icon: 'wrench'
-  })`
-    font-size: 30px;
-  `
-
-
-export const AboutIcon: FC<DefinedIconProps> = styled(ButtonIcon)
-  .attrs({
-    icon: 'info'
-  })`
-    font-size: 24px;
-  `
 
 export const Disclaimer: typeof View = styled(View)`
   position: absolute;

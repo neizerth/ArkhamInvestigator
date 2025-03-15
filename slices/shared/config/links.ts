@@ -1,0 +1,1 @@
+export const DONATE_LINK = process.env.EXPO_PUBLIC_DONATE_LINK as string;

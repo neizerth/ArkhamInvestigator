@@ -9,27 +9,30 @@ export type ListProps = ViewProps & {
 }
 
 const defaultRenderMarker = () => (
-  <C.Marker>•</C.Marker>
+  <>
+    <C.Bullet/>{' '}
+  </>
 )
 
 
 export const List = ({
   children,
   itemContainerStyle,
-  bold,
   renderMarker = defaultRenderMarker,
   ...props
 }: ListProps) => {
   return (
     <C.Container {...props}>
       {Children.map(children, (child, index) => (
-        <C.ItemContainer 
+        <C.ListItem 
           key={v4()}
           style={itemContainerStyle}
         >
-          {renderMarker(index)}
-          {child}
-        </C.ItemContainer>
+          <C.ListItemContent>
+            {renderMarker(index)}
+            {child}
+          </C.ListItemContent>
+        </C.ListItem>
       ))}
     </C.Container>
   );

@@ -1,4 +1,5 @@
 import { useAppTranslation } from '@features/i18n';
+import { APP_VERSION } from '@shared/config/app';
 import { ContentPage, Title, Text, List, Paragraph, A, Bold } from '@shared/ui';
 
 export type AboutPageProps = {
@@ -59,9 +60,11 @@ export const AboutPage = ({}: AboutPageProps) => {
       <Title>Special Thanks</Title>
       <List>
         <List.Item>
-          Thanks to my wife Elisabeth for her understanding and support. I'm the happiest man on the Earth 
+          Thanks to my wife Elisabeth for her understanding and support. I'm the happiest man on the Earth. Because of her
         </List.Item>
       </List>
+      <Title>Application Info</Title>
+      <Paragraph>Current Version: {APP_VERSION}</Paragraph>
     </ContentPage>
   );
 }
