@@ -1,7 +1,7 @@
 import { getMediaVariantId } from "../media";
-import type { SelectedInvestigator } from "@shared/model";
 import type { Investigator as InvestigatorMedia } from "arkham-investigator-data";
 import { propEq } from "ramda";
+import type { SelectedInvestigator } from "@shared/model";
 
 export const getSelectedInvestigatorVariant = (
   selection: SelectedInvestigator,

@@ -1,7 +1,6 @@
-
-import { getOrientationType } from '@shared/lib/features/device';
 import * as ScreenOrientation from 'expo-screen-orientation';
 import { useEffect, useState } from 'react';
+import { getOrientationType } from '../../features';
 
 export const useScreenOrientation = () => {
   const [orientation, setOrientation] = useState<ScreenOrientation.Orientation>();
@@ -16,7 +15,6 @@ export const useScreenOrientation = () => {
         setOrientation(orientationInfo.orientation);
       });
       
-
     return () => {
       ScreenOrientation.removeOrientationChangeListener(subscription);
     }

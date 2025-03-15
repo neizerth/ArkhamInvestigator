@@ -1,8 +1,6 @@
 import { useEffect } from "react"
-import { useAppDispatch } from "../store/useAppDispatch";
-import { loadCoreData, loadInvestigatorsMediaData } from "../../../lib/store/features/app/actions";
-import { restoreTranslation } from "@features/i18n";
-import { useAppFonts } from "./useAppFonts";
+import { restoreTranslation, useAppFonts } from "@features/i18n";
+import { loadCoreData, loadInvestigatorsMediaData, useAppDispatch } from "@shared/lib";
 
 // import { loadCoreData, loadInvestigatorsMediaData } from "@shared/lib/store";
 

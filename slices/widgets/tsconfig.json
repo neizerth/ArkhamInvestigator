@@ -1,0 +1,14 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "paths": {
+      "@shared/*": ["../shared/*"],
+      "@entities/*": ["../entities/*"],
+      "@features/*": ["../features/*"],
+      "@widgets/model": ["./model"]
+    }
+  },
+  "rootDirs": [
+    "../.."
+  ]
+}

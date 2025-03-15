@@ -1,7 +1,7 @@
 import fonts from "@shared/fonts"
 import { useFonts } from "expo-font";
-import { useAppSelector } from "../store";
-import { selectLanguage } from "@features/i18n";
+import { selectLanguage } from "../store";
+import { useAppSelector } from "@shared/lib";
 export const useAppFonts = () => {
   const language = useAppSelector(selectLanguage);
 

@@ -10,8 +10,8 @@ import devToolsEnhancer from "redux-devtools-expo-dev-plugin";
 import { persistStore, persistReducer } from 'redux-persist'
 
 import reducers from './reducer';
-import { serializableCheck } from './middleware' 
-import { persistStorageConfig } from "@features/storage";
+import { serializableCheck } from './middleware'
+import { persistStorageConfig } from "../../../features/storage/config/persistStorage";
 
 export type AppThunk<ReturnType = void> = ThunkAction<
 	ReturnType,

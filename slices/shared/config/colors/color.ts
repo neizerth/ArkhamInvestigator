@@ -1,4 +1,4 @@
-import type { SkillType } from "@shared/model"
+import type { SkillType } from "@shared/model";
 
 type SkillColors = {
   dark: string;

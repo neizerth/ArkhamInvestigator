@@ -1,8 +1,7 @@
 import { useAppDispatch, useAppSelector } from '@shared/lib';
 import * as C from './LanguagePicker.components';
-import { changeLanguage, CHINESE_LANGUAGES, selectAvailableLanguages, selectLanguage } from '@features/i18n';
-import { useCallback, useEffect, useState } from 'react';
-import type { PickerChangeEvent, PickerItemInfo } from '@widgets/picker';
+import { changeLanguage, selectAvailableLanguages, selectLanguage } from '@features/i18n';
+import { useCallback } from 'react';
 
 import { languageLabels } from './labels';
 import { styles } from './LanguagePicker.style';

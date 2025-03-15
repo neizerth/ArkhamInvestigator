@@ -1,7 +1,7 @@
 import type { ActionCreator } from "@reduxjs/toolkit";
-import type { AppThunk } from "@shared/lib/store";
 import { selectCurrentBoard } from '../../selectors/selectCurrentBoard';
 import { setValueFromHistoryIndex } from './setValueFromHistoryIndex'
+import type { AppThunk } from "../../../..";
 
 export const goToHistory: ActionCreator<AppThunk> = (delta: number) => 
   (dispatch, getState) => {

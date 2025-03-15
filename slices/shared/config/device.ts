@@ -1,6 +1,6 @@
 import { PixelRatio, Platform } from "react-native";
 import { capitalize } from "../lib/util/string";
-import type { BreakpointSize, DeviceBreakpoints, DeviceBreakpointType, DeviceType } from "../model";
+import type { BreakpointSize, DeviceBreakpoints, DeviceBreakpointType, DeviceType } from "@shared/model";
 import * as ScreenOrientation from 'expo-screen-orientation';
 
 export const IS_WEB = Platform.OS === 'web';

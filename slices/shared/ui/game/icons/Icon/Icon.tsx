@@ -1,9 +1,9 @@
-import { getIconScale, scaleFontFromStyle, selectIcons, useAppSelector } from '@shared/lib';
+import { getIconScale, scaleFontFromStyle, selectIcons, useAppSelector } from '../../../../lib';
 import { propEq } from 'ramda';
 import { StyleSheet, type TextProps } from 'react-native';
 import { Text } from 'react-native';
-import { ArkhamIcons } from "@shared/fonts"
 import type { IconScaleType, PropsWithStroke } from '@shared/model';
+import { ArkhamIcons } from '../../../../fonts';
 
 export type IconProps = TextProps & PropsWithStroke & {
   icon: string

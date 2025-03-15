@@ -1,5 +1,5 @@
-import type { InvestigatorBoardValues } from "@shared/model";
 import { pick } from "ramda";
+import type { InvestigatorBoardValues } from "@shared/model";
 
 type Stats = {
   baseValue: InvestigatorBoardValues

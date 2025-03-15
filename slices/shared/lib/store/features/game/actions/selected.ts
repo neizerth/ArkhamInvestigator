@@ -1,14 +1,13 @@
 import type { ActionCreator } from "@reduxjs/toolkit"
 import { selectSelectedInvestigators, setCurrentInvestigatorDetails, setSelectedInvestigators } from "../game"
 import type { InvestigatorDetails, SelectedInvestigator } from "@shared/model"
-import { includesBy } from "@shared/lib/util";
 import { propEq, reject } from "ramda";
-import { MAX_PLAYERS } from "@shared/config";
 import { router } from "expo-router";
-import { goToPage, replacePageTo } from "@shared/lib/store/effects";
 import { v4 } from "uuid";
-import type { AppThunk } from "../../../";
+import { goToPage, type AppThunk } from "../../../";
 import { selectReplaceCode } from '../selectors/selectReplaceCode'
+import { includesBy } from "../../../../util";
+import { MAX_PLAYERS } from "../../../../../config";
 
 export const changeSelectedInvestigator: ActionCreator<AppThunk> = (details: InvestigatorDetails) => 
   (dispatch, getState) => {

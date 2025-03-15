@@ -1,6 +1,7 @@
-import { TouchableOpacityProps } from '@shared/ui/behavior';
+
+import type { TouchableOpacityProps } from '../../behavior';
+import type { Icon, IconProps } from '../../game';
 import * as C from './IconButton.components';
-import { Icon, IconProps } from '@shared/ui/game';
 
 export type IconButtonProps = TouchableOpacityProps & {
   icon: string

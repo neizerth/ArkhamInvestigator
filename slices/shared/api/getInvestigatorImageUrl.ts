@@ -1,6 +1,5 @@
-import { INVESTIGATORS_API_URL } from "@shared/config";
-import { HAVE_AVIF_SUPPORT } from "@shared/config";
-import { APP_VERSION } from "@shared/config/app";
+import { INVESTIGATORS_API_URL } from "../config";
+import { APP_VERSION } from "../config/app";
 import type { ImageSizeType } from "@shared/model";
 
 export const getInvestigatorImageUrl = (

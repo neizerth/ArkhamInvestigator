@@ -3,7 +3,7 @@ import { StrokedIconNumber } from "./StrokedIconNumber";
 import { UnstrokedIconNumber } from "./UnstrokedIconNumber";
 import type { IconNumberProps } from "./IconNumber.types";
 import { StyleSheet, ViewStyle } from "react-native";
-import { font } from "@shared/config";
+import { font } from "../../../../config";
 
 export type { IconNumberProps };
 

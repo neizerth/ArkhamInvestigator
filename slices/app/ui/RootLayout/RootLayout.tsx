@@ -4,13 +4,13 @@ import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import 'react-native-reanimated';
 import { useAppLoader } from '@shared/lib/hooks';
-import { AppProvider } from '@app/providers/AppProvider';
 import type { PropsWithChildren } from 'react';
 import { screenOptions } from './RootLayout.config';
 import * as SystemUI from 'expo-system-ui';
 import { color } from '@shared/config';
 import { Loader } from '@shared/ui';
 import * as C from './RootLayout.components' 
+import { AppProvider } from '../../providers/AppProvider';
 
 export const RootLayout = ({
   children

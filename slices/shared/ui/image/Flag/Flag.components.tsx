@@ -1,8 +1,8 @@
 import { Text, View, Image as BaseImage } from "react-native"
 import styled from "styled-components/native"
 import { FLAG_HEIGHT, FLAG_SIZE } from "./Flag.styles"
-import { Alegreya } from "@shared/fonts"
-import { color, font } from "@shared/config"
+import { Alegreya } from "../../../fonts"
+import { color, font } from "../../../config"
 
 export const Container: typeof View = styled(View)`
   justify-content: center;

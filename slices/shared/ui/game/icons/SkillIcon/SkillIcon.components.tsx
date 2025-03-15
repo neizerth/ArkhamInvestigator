@@ -1,11 +1,9 @@
 import { View } from "react-native";
 import { Icon, type IconProps } from "../Icon";
 import type { FC } from "react";
-import type { PropsWithSkill } from "@shared/model/ui";
 import styled, { css } from "styled-components/native";
-import { color } from "@shared/config";
-import { SkillType } from "@shared/model";
-import Color from "color";
+import type { PropsWithSkill } from "@shared/model";
+import { color } from "../../../../config";
 
 export type PropsWithTheme = {
   dark?: boolean

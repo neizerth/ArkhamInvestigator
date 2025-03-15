@@ -1,4 +1,3 @@
-import { color } from "@shared/config";
 import { Stack } from "expo-router"
 import { FC } from "react"
 

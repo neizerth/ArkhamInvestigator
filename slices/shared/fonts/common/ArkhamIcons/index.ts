@@ -1,5 +1,5 @@
-import { API_URL } from "@shared/config";
-import { APP_VERSION } from "@shared/config/app";
+import { API_URL } from "../../../config";
+import { APP_VERSION } from "../../../config/app";
 
 export const ArkhamIconsDefault = `${API_URL}/fonts/icons.ttf?v=${APP_VERSION}`
 

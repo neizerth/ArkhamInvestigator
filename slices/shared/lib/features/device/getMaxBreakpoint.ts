@@ -1,5 +1,5 @@
 import { breakpointsOrder } from "../../../config";
-import type { DeviceBreakpointType } from "../../../model";
+import type { DeviceBreakpointType } from "@shared/model";
 import { ascend, identity, last } from "ramda";
 
 export const getMaxBreakpoint = <T>(

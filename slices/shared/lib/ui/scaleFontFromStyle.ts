@@ -1,5 +1,5 @@
 import { type StyleProp, StyleSheet, type TextStyle } from "react-native";
-import { font } from "@shared/config";
+import { font } from "../../config";
 
 export const scaleFontFromStyle = (scale: number, style?: StyleProp<TextStyle>) => {
 

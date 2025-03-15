@@ -2,9 +2,9 @@ import styled, { css } from "styled-components/native";
 import { Icon, type IconProps } from "../Icon/Icon";
 import type { FC } from "react";
 import { Text, View } from "react-native";
-import { Row } from "@shared/ui/grid";
 import type { CharProps, PropsWithSize } from "./IconNumber.types";
-import { ArkhamDigits } from "@shared/fonts"
+import { ArkhamDigits } from "../../../../fonts";
+import { Row } from "../../../grid";
 
 
 export const Container: typeof View = styled(Row)`
