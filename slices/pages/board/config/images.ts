@@ -22,7 +22,7 @@ export const headerGap = {
 export const MAX_IMAGE_HEIGHT = 25; // 15vh
 
 export const faceSize = {
-  min: 15,
+  min: 10,
   max: 50
 }
 
