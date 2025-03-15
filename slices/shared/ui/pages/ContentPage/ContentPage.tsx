@@ -3,13 +3,13 @@ import { Page, type PageProps } from '../Page';
 import * as C from './ContentPage.components';
 import { useCallback } from 'react';
 import { TopBar } from '@widgets/top-bar';
+import { ContentPageProps } from './ContentPage.types';
 
-export type ContentPageProps = PageProps & {
-  title: string;
-}
+export { ContentPageProps };
 
 export const ContentPage = ({
   title,
+  full,
   children,
   ...props
 }: ContentPageProps) => {
@@ -26,7 +26,7 @@ export const ContentPage = ({
         title={title} 
         onBack={back}
       />
-      <C.Content>
+      <C.Content full={full}>
         {children}
       </C.Content>
     </Page>

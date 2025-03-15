@@ -24,6 +24,7 @@ export const ResumeButton: typeof Button = styled(Button)
 
 export const SpecialButton: typeof TouchableOpacity = styled(TouchableOpacity)`
   position: absolute;
+  z-index: 1;
   top: 40px;
   width: 48px;
   height: 48px;
@@ -40,9 +41,23 @@ export const AboutButton: typeof SpecialButton = styled(SpecialButton)`
 `
 
 export const ButtonIcon: typeof Icon = styled(Icon)`
-  font-size: 30px;
-  color: ${color.light10}
+  color: ${color.light10};
 `
+
+export const SettingsIcon: FC<DefinedIconProps> = styled(ButtonIcon)
+  .attrs({
+    icon: 'wrench'
+  })`
+    font-size: 30px;
+  `
+
+
+export const AboutIcon: FC<DefinedIconProps> = styled(ButtonIcon)
+  .attrs({
+    icon: 'info'
+  })`
+    font-size: 24px;
+  `
 
 export const Disclaimer: typeof View = styled(View)`
   position: absolute;

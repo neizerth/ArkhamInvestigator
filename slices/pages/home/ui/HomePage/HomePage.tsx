@@ -30,10 +30,10 @@ export const HomePage = () => {
   return (
     <C.Container>
       <C.SettingsButton onPress={goTo('/settings')}>
-        <C.ButtonIcon icon="wrench"/>
+        <C.SettingsIcon/>
       </C.SettingsButton>
       <C.AboutButton onPress={goTo('/about')}>
-        <C.ButtonIcon icon="info"/>
+        <C.AboutIcon/>
       </C.AboutButton>
 
       <Button onPress={onStart}>
