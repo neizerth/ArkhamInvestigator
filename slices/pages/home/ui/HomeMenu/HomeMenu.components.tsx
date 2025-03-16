@@ -1,5 +1,6 @@
 import { color } from "@shared/config";
-import { Row, TouchableOpacity, Icon as BaseIcon } from "@shared/ui";
+import { Row, TouchableOpacity, Icon as BaseIcon, DefinedIconProps } from "@shared/ui";
+import { FC } from "react";
 import styled from "styled-components/native";
 
 export const Container: typeof Row = styled(Row)`
@@ -25,3 +26,17 @@ export const Icon: typeof BaseIcon = styled(BaseIcon)`
   font-size: 30px;
   color: ${color.light10};
 `
+
+export const InfoIcon: FC<DefinedIconProps> = styled(Icon)
+  .attrs({
+    icon: 'info'
+  })`
+    font-size: 26px;
+  `
+
+export const DonateIcon: FC<DefinedIconProps> = styled(Icon)
+  .attrs({
+    icon: 'kofi'
+  })`
+    font-size: 38px;
+  `

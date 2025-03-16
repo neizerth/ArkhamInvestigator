@@ -25,11 +25,11 @@ export const HomeMenu = (props: HomeMenuProps) => {
           <C.Icon icon="typejournal"/>
         </C.Button> */}
         <C.Button onPress={goTo('/about')}>
-          <C.Icon icon="info"/>
+          <C.InfoIcon/>
         </C.Button>
 
         <C.Button onPress={donate}>
-          <C.Icon icon="kofi"/>
+          <C.DonateIcon/>
         </C.Button>
       </C.Left>
       <C.Right>
