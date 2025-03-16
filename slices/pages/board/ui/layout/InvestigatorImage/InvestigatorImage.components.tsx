@@ -3,7 +3,7 @@ import type { Box } from "@shared/model";
 import type { FC } from "react";
 import { View, type ViewProps } from "react-native";
 import styled, { css } from "styled-components/native";
-import { PortraitImage, PortraitImageProps } from "../orientation/portrait/PortraitImage";
+import { PortraitImageMemo as PortraitImage } from "../orientation/portrait/PortraitImage";
 import { LandscapeImage, type  LandscapeImageProps } from "../orientation/landscape/LandscapeImage";
 import { servicePadding } from "@pages/board/config";
 import { FactionBackground as BaseFactionBackground } from "../../shared/background/FactionBackground";

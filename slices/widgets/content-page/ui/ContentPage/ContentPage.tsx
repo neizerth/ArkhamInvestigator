@@ -2,7 +2,7 @@ import { goBack, useAppDispatch } from '@shared/lib';
 import { Page } from '@shared/ui';
 import * as C from './ContentPage.components';
 import { useCallback } from 'react';
-import { TopBar } from '@widgets/top-bar';
+import { TopBar } from '../../../top-bar/ui/TopBar';
 import { ContentPageProps } from './ContentPage.types';
 
 export { ContentPageProps };

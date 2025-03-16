@@ -32,6 +32,6 @@ export const restoreTranslation: AppThunkCreator = () =>
       dispatch(loadTranslation(language));
     }
     catch (error) {
-      dispatch(changeLanguage(language));
+      dispatch(loadTranslation(language));
     }
   }

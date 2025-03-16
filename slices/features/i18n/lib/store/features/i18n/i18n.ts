@@ -2,7 +2,7 @@ import { DEFAULT_LANGUAGE } from '../../../../config';
 import { createSlice } from '@reduxjs/toolkit';
 import { loadCoreData } from '../../../../../../shared/lib/store/features/app/actions';
 import { createSliceState } from 'redux-toolkit-helpers';
-import { fetchTranslationData } from './actions/loadTranslation';
+import { fetchTranslationData } from './actions/fetchTranslationData';
 import { setAvailableLanguages } from './reducers/setAvailableLanguages';
 import { setTranslationsData } from './reducers/setTranslationsData'
 

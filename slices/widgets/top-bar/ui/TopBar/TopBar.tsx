@@ -1,7 +1,6 @@
 import type { ViewProps } from 'react-native';
 import * as C from './TopBar.components';
 import { TopBarButton } from '../TopBarButton';
-import { TopBarTitle } from '../TopBarTitle';
 
 export type TopBarProps = ViewProps & {
   onBack?: () => void

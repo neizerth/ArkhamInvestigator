@@ -34,9 +34,9 @@ export const Menu: typeof HomeMenu = styled(HomeMenu)`
 
 export const Disclaimer: typeof View = styled(View)`
   position: absolute;
-  bottom: ${size.gap.large};
-  left: ${size.gap.large};
-  right: ${size.gap.large};
+  bottom: ${size.gap.large}px;
+  left: ${size.gap.large}px;
+  right: ${size.gap.large}px;
 `
 
 export const DisclaimerText: typeof Text = styled(Text)`

@@ -3,7 +3,7 @@ import * as C from './PortraitImage.components';
 import { getPortraitLayout } from '@pages/board/lib';
 import { getInvestigatorImageUrl } from '@shared/api';
 import type { ViewProps } from 'react-native';
-import { useContext } from 'react';
+import { memo, useContext } from 'react';
 import { LayoutContext } from '@pages/board/config';
 import { useActiveStyle } from './useActiveStyle';
 
@@ -39,7 +39,6 @@ export const PortraitImage = ({
     picture
   });
 
-
   return (
     <C.Container 
       {...props} 
@@ -56,3 +55,5 @@ export const PortraitImage = ({
     </C.Container>
   );
 }
+
+export const PortraitImageMemo = memo(PortraitImage);
