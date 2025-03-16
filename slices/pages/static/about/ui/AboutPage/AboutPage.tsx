@@ -1,7 +1,8 @@
 import { useAppTranslation } from '@features/i18n';
 import { nbsp, space, wordJoiner } from '@shared/config';
-import { APP_VERSION } from '@shared/config/app';
-import { ContentPage, Title, Text, List, Paragraph, A, Bold } from '@shared/ui';
+import { APP_VERSION, BUILD_ID, BUILD_VERSION } from '@shared/config/app';
+import { Title, Text, List, Paragraph, A, Bold } from '@shared/ui';
+import { ContentPage } from '@widgets/content-page';
 import * as Application from 'expo-application';
 
 export type AboutPageProps = {
@@ -71,10 +72,10 @@ export const AboutPage = ({}: AboutPageProps) => {
       <Title>Application Info</Title>
       <List>
         <List.Item>
-          <Bold>Build Version</Bold>: {Application.nativeApplicationVersion}
+          <Bold>Build Version</Bold>: {BUILD_VERSION}
         </List.Item>
         <List.Item>
-          <Bold>Build Id</Bold>: {Application.nativeBuildVersion}
+          <Bold>Build Id</Bold>: {BUILD_ID}
         </List.Item>
         <List.Item>
           <Bold>Codebase Version</Bold>: {APP_VERSION}
