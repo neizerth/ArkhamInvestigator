@@ -1,7 +1,7 @@
 {
   "name": "my-app",
   "main": "expo-router/entry",
-  "version": "0.0.6",
+  "version": "1.0.2",
   "scripts": {
     "start": "expo start",
     "reset-project": "node ./scripts/reset-project.js",
@@ -21,7 +21,7 @@
     "prebuild": "expo prebuild",
     "prebuild:android": "npm run prebuild -- -p android",
 
-    "eas:android": "eas build -p android",
+    "eas:android": "npm run prebuild:android && eas build -p android",
     "eas:apk": "npm run eas:android -- --profile apk",
     "build:apk": "npm run eas:apk -- --local"
   },

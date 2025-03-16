@@ -7,8 +7,7 @@ import { Platform } from "react-native";
 import { useFonts } from "expo-font";
 
 export const useAppLoader = () => {
-  const response = useFonts(fonts.common);
-  const [loaded] = response;
+  const response = useFonts(fonts);
 
   useEffect(() => {
     if (Platform.OS !== "web") {
@@ -17,11 +16,8 @@ export const useAppLoader = () => {
   }, []);
 
   useEffect(() => {
-    if (loaded) {
-      SplashScreen.hideAsync();
-    }
-    
-  }, [loaded]);
+    SplashScreen.hideAsync();
+  }, []);
 
   return response;
 }

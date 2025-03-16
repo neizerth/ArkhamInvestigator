@@ -38,7 +38,7 @@ export const setTranslationsData: I18NReducer<ArkhamDivider.Translation> = (stat
   
   saveStoreTranslation(bundle);
 
-  if (language !== DEFAULT_LANGUAGE && language !== loadingLanguage) {
+  if (language !== loadingLanguage) {
     i18next.removeResourceBundle(language, I18N_NAMESAPCE);
   }
 
