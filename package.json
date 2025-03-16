@@ -5,14 +5,17 @@
   "scripts": {
     "start": "expo start",
     "reset-project": "node ./scripts/reset-project.js",
+    
     "android": "expo run:android",
     "ios": "expo run:ios",
     "web": "expo start --web",
+    
     "test": "jest --watchAll",
     "lint": "expo lint",
     "knip": "npx knip",
-    "check": "biome check",
-    "format": "biome check --write ./slices",
+
+    "biome:check": "biome check",
+    "biome:format": "biome check --write ./slices",
     "biome:fix": "biome lint --write ./slices",
     
     "prebuild": "expo prebuild",
