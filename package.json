@@ -15,6 +15,9 @@
     "format": "biome check --write ./slices",
     "biome:fix": "biome lint --write ./slices",
     
+    "prebuild": "expo prebuild",
+    "prebuild:android": "npm run prebuild -- -p android",
+
     "eas:android": "eas build -p android",
     "eas:apk": "npm run eas:android -- --profile apk",
     "build:apk": "npm run build:apk -- --local"
