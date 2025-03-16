@@ -14,8 +14,10 @@
     "check": "biome check",
     "format": "biome check --write ./slices",
     "biome:fix": "biome lint --write ./slices",
-    "build:android": "eas build --platform android",
-    "build:apk": "eas build -p android --profile apk"
+    
+    "eas:android": "eas build -p android",
+    "eas:apk": "npm run eas:android -- --profile apk",
+    "build:apk": "npm run build:apk -- --local"
   },
   "jest": {
     "preset": "jest-expo"
