@@ -15,7 +15,7 @@
     "format": "biome check --write ./slices",
     "biome:fix": "biome lint --write ./slices",
     "build:android": "eas build --platform android",
-    "build:rustore": "eas build -p android --profile rustore"
+    "build:apk": "eas build -p android --profile apk"
   },
   "jest": {
     "preset": "jest-expo"
