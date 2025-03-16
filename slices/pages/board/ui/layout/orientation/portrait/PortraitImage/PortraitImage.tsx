@@ -1,4 +1,4 @@
-import { selectCurrentBoard, useAppSelector } from '@shared/lib';
+import { selectCurrentBoard, useAppSelector, useInvestigatorImageUrl } from '@shared/lib';
 import * as C from './PortraitImage.components';
 import { getPortraitLayout } from '@pages/board/lib';
 import { getInvestigatorImageUrl } from '@shared/api';
@@ -24,8 +24,12 @@ export const PortraitImage = ({
 
   const activeStyle = useActiveStyle();
   
-  const { id } = picture
-  const uri = getInvestigatorImageUrl(id, 'full');
+  const { id } = picture;
+  
+  const uri = useInvestigatorImageUrl({
+    code: id,
+    type: 'full',
+  });
 
   const source = { uri };
   

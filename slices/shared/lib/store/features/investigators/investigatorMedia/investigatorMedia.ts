@@ -4,10 +4,12 @@ import type { Investigator } from 'arkham-investigator-data';
 import { createSliceReducer, createSliceState } from 'redux-toolkit-helpers'; 
 import { loadInvestigatorsMediaData } from '../../app/actions/api';
 export type IInvestigatorsState = {
+  mediaVersion: string | null
   investigatorMedia: Investigator[]
 }
 
 const initialState: IInvestigatorsState = {
+  mediaVersion: null,
   investigatorMedia: []
 };
 
@@ -17,13 +19,17 @@ export const investigatorMedia = createSlice({
   extraReducers: builder => {
     builder.addCase(
       loadInvestigatorsMediaData.fulfilled, 
-      createSliceReducer('investigatorMedia')
+      (state, { payload }) => {
+        state.investigatorMedia = payload.data;
+        state.mediaVersion = payload.version;
+      }
     );
   }
 });
 
 export const {
-  selectInvestigatorMedia
+  selectInvestigatorMedia,
+  selectMediaVersion
 } = investigatorMedia.selectors;
 
 export default investigatorMedia.reducer;

@@ -1,7 +1,5 @@
-import { selectCurrentBoard, selectCurrentInvestigatorIndex, selectInvestigatorBoards, setCurrentInvestigatorIndex, useAppDispatch, useAppSelector } from '@shared/lib';
+import { selectCurrentInvestigatorIndex, selectInvestigatorBoards, setCurrentInvestigatorIndex, useAppDispatch, useAppSelector } from '@shared/lib';
 import * as C from './InvestigatorSelect.components';
-import { getInvestigatorImageUrl } from '@shared/api';
-import { Faction } from '@shared/model';
 import type { PickerChangeEvent, PickerItemInfo } from '@widgets/picker';
 import { useCallback, useMemo } from 'react';
 import type { ViewProps } from 'react-native';

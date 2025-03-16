@@ -3,7 +3,7 @@ import type { I18NReducer } from "../i18n.types";
 import { pick } from "ramda";
 import { i18next, I18N_NAMESAPCE, translations, DEFAULT_LANGUAGE } from "@features/i18n/config";
 import { storage } from "@features/storage";
-import { saveTranslation } from "@features/i18n/lib/storage";
+import { saveStoreTranslation } from "@features/i18n/lib/storage";
 
 export const setTranslationsData: I18NReducer<ArkhamDivider.Translation> = (state, { payload }) => {
   const { loadingLanguage, language } = state;
@@ -36,7 +36,7 @@ export const setTranslationsData: I18NReducer<ArkhamDivider.Translation> = (stat
   );
   i18next.changeLanguage(loadingLanguage);
   
-  saveTranslation(bundle);
+  saveStoreTranslation(bundle);
 
   if (language !== DEFAULT_LANGUAGE) {
     i18next.removeResourceBundle(language, I18N_NAMESAPCE);

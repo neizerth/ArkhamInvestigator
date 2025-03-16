@@ -17,7 +17,10 @@ export const LandscapeImage = ({
   const { view, layout } = useContext(LayoutContext);
   const { picture } = useAppSelector(selectCurrentBoard);
   const { id } = picture;
-  const uri = getInvestigatorImageUrl(id, 'mini');
+  const uri = getInvestigatorImageUrl({
+    code: id,
+    type: 'mini'
+  });
   const source = { uri };
 
   const imageLayout = getLandscapeLayout({

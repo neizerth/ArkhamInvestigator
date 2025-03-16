@@ -2,7 +2,7 @@ import { DEFAULT_LANGUAGE } from '../../../../config';
 import { createSlice } from '@reduxjs/toolkit';
 import { loadCoreData } from '../../../../../../shared/lib/store/features/app/actions';
 import { createSliceState } from 'redux-toolkit-helpers';
-import { loadTranslationData } from './actions/loadTranslation';
+import { fetchTranslationData } from './actions/loadTranslation';
 import { setAvailableLanguages } from './reducers/setAvailableLanguages';
 import { setTranslationsData } from './reducers/setTranslationsData'
 
@@ -24,7 +24,7 @@ export const i18n = createSlice({
   extraReducers(builder) {
     builder
       .addCase(loadCoreData.fulfilled, setAvailableLanguages)
-      .addCase(loadTranslationData.fulfilled, setTranslationsData)
+      .addCase(fetchTranslationData.fulfilled, setTranslationsData)
   }
 });
 

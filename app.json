@@ -14,7 +14,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/launcher-icon.png",
+        "foregroundImage": "./assets/images/icon.png",
         "backgroundColor": "#000"
       },
       "package": "com.arkhaminvestigator"

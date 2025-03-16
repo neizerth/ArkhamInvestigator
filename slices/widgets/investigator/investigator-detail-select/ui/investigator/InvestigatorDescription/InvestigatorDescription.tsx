@@ -19,7 +19,10 @@ export const InvestigatorDescription = ({
   const { investigator } = variant?.details || data;
   const { code } = investigator;
   const imageId = skin?.imageId || variant?.imageId || code;
-  const uri = getImageUrl(imageId, 'square');
+  const uri = getImageUrl({
+    code: imageId, 
+    type: 'square'
+  });
   const source = { uri }
   
   const text = t(investigator.text);

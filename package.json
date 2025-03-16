@@ -1,7 +1,7 @@
 {
   "name": "my-app",
   "main": "expo-router/entry",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "scripts": {
     "start": "expo start",
     "reset-project": "node ./scripts/reset-project.js",
@@ -13,7 +13,9 @@
     "knip": "npx knip",
     "check": "biome check",
     "format": "biome check --write ./slices",
-    "biome:fix": "biome lint --write ./slices"
+    "biome:fix": "biome lint --write ./slices",
+    "build:android": "eas build --platform android",
+    "build:rustore": "eas build -p android --profile rustore"
   },
   "jest": {
     "preset": "jest-expo"
@@ -28,8 +30,9 @@
     "@react-navigation/native": "^7.0.14",
     "@reduxjs/toolkit": "^2.5.1",
     "arkham-divider-data": "^1.1.14",
-    "arkham-investigator-data": "^1.0.0",
+    "arkham-investigator-data": "^1.0.13",
     "expo": "~52.0.23",
+    "expo-application": "~6.0.2",
     "expo-blur": "~14.0.1",
     "expo-constants": "~17.0.3",
     "expo-font": "~13.0.2",
@@ -71,8 +74,7 @@
     "redux-toolkit-helpers": "^1.0.3",
     "styled-components": "^6.1.15",
     "throttle-debounce": "^5.0.2",
-    "uuid": "^11.0.5",
-    "expo-application": "~6.0.2"
+    "uuid": "^11.0.5"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",

@@ -1,0 +1,1 @@
+export type CodeVersionType = 'media' | 'build' | 'codebase'

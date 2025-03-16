@@ -37,7 +37,10 @@ export const InvestigatorPreview = ({
 
   const imageId = props.imageId || investigator.code;
   const faction = investigator.faction_code as Faction;
-  const uri = getImageUrl(imageId, 'square')
+  const uri = getImageUrl({
+    code: imageId, 
+    type: 'square'
+  })
   const source = { uri }
 
   const showOptions = showOptionsInfo && (media?.variants || media?.skins);

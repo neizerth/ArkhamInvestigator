@@ -4,8 +4,6 @@ import { loadCoreData, loadInvestigatorsMediaData } from "../../../lib/store/fea
 import { restoreTranslation } from "@features/i18n";
 import { useAppFonts } from "./useAppFonts";
 
-// import { loadCoreData, loadInvestigatorsMediaData } from "@shared/lib/store";
-
 export const useAppData = () => {
   useAppFonts();
   const dispatch = useAppDispatch();

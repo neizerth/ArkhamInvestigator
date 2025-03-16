@@ -9,7 +9,10 @@ import { useAppTranslation } from '@features/i18n';
 const getImageSource = ({
   code
 }: SelectedInvestigator) => ({
-  uri: getInvestigatorImageUrl(code, 'square')
+  uri: getInvestigatorImageUrl({
+    code,
+    type: 'square'
+  })
 });
 
 export const StartButton = () => {

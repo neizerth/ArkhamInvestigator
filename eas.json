@@ -13,6 +13,11 @@
     },
     "production": {
       "autoIncrement": true
+    },
+    "rustore": {
+      "android": {
+        "buildType": "apk"
+      }
     }
   },
   "submit": {

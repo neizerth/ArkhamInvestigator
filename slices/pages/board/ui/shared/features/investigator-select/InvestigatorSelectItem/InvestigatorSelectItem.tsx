@@ -19,7 +19,10 @@ export const InvestigatorSelectItem = ({
   }
 
   const { picture, investigator, unique, value } = board;
-  const uri = getInvestigatorImageUrl(picture.id, 'square');
+  const uri = getInvestigatorImageUrl({
+    code: picture.id,
+    type: 'square'
+  });
   const faction = investigator.faction_code as Faction;
   const showId = !unique;
 

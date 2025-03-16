@@ -1,9 +1,9 @@
 import type { AppThunkCreator } from "@shared/lib";
 import { selectLanguage, setLoadingLanguage } from "../i18n";
-import { loadTranslation } from '../../../../storage/translation';
+import { loadStoreTranslation } from '../../../../storage/translation';
 import { DEFAULT_LANGUAGE, I18N_NAMESAPCE, i18next, translations } from "@features/i18n/config";
 import { changeLanguage } from "./changeLanguage";
-import { loadTranslationData } from "./loadTranslation";
+import { fetchTranslationData, loadTranslation } from "./loadTranslation";
 
 export const restoreTranslation: AppThunkCreator = () => 
   async (dispatch, getState) => {
@@ -15,7 +15,7 @@ export const restoreTranslation: AppThunkCreator = () =>
     }
 
     try {
-      const data = await loadTranslation();
+      const data = await loadStoreTranslation();
       const appTranslation = translations[language] || {};
       const translation = {
         ...data,
@@ -29,8 +29,7 @@ export const restoreTranslation: AppThunkCreator = () =>
       )
       i18next.changeLanguage(language);
 
-      dispatch(setLoadingLanguage(language));
-      dispatch(loadTranslationData(language));
+      dispatch(loadTranslation(language));
     }
     catch (error) {
       dispatch(changeLanguage(language));
