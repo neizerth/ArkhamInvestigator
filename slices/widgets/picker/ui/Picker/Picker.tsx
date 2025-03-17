@@ -16,6 +16,8 @@ export const Picker = ({
   onLongPress,
   onPress,
   delayLongPress,
+  pressPattern,
+  longPressPattern,
   gap,
   ...restProps
 }: PickerProps) => {
@@ -35,6 +37,8 @@ export const Picker = ({
         onPress={onPress}
         delayLongPress={delayLongPress}
         gap={gap}
+        pressPattern={pressPattern}
+        longPressPattern={longPressPattern}
       />  
     </C.Container>
   );

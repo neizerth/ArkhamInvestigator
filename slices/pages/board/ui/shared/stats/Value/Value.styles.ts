@@ -6,7 +6,7 @@ export const valueStyle = {
 
 export const numberSize: Record<number, number> = {
   1: 55,
-  2: 45,
+  2: 38,
   3: 35
 }
 

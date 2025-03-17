@@ -1,3 +1,4 @@
+import { HapticPatternType } from "@shared/model"
 import type { ReactElement, RefObject } from "react"
 import type { FlatList, FlatListProps, ViewProps, ViewStyle } from "react-native"
 import type { ListRenderItemInfo } from "react-native"
@@ -27,6 +28,8 @@ type ContainerProps = {
   visibleItemsCount?: number
   onPress?: () => void
   onLongPress?: () => void
+  pressPattern?: HapticPatternType
+  longPressPattern?: HapticPatternType
   delayLongPress?: number
   gap?: number
 }

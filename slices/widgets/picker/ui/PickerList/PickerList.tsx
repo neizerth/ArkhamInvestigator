@@ -23,6 +23,8 @@ export const PickerList = ({
   onLongPress,
   onPress,
   gap = 0,
+  pressPattern = 'effectTick',
+  longPressPattern = 'effectTick',
   ...props
 }: PickerListProps) => {
   const activated = useRef(false);
@@ -115,8 +117,10 @@ export const PickerList = ({
       return;
     }
     
-    times(tickFeedback, n);
-  }, [itemHeight]);
+    times(() => {
+      impactHapticFeedback(pressPattern)
+    }, n);
+  }, [itemHeight, pressPattern]);
 
   const onTouchStart = useCallback(() => {
     activated.current = true;
@@ -132,11 +136,11 @@ export const PickerList = ({
       }
       activated.current = false
       canPress.current = false;
-      tickFeedback();
+      impactHapticFeedback(longPressPattern);
       onLongPress();
     }, delayLongPress);
     
-  }, [onLongPress, delayLongPress]);
+  }, [onLongPress, delayLongPress, longPressPattern]);
 
   const onTouchEnd = useCallback(() => {
 
@@ -144,7 +148,7 @@ export const PickerList = ({
     if (canPress.current && onPress) {
       clearTimeout(longPressTimeout.current);
 
-      tickFeedback();
+      impactHapticFeedback(pressPattern);
       onPress()
 
       activated.current = false;
@@ -157,7 +161,7 @@ export const PickerList = ({
       return;
     }
     clearTimeout(longPressTimeout.current);
-  }, [onPress]);
+  }, [onPress, pressPattern]);
 
   const getItemLayout = useCallback((_, index: number) => ({
     length: itemHeight,

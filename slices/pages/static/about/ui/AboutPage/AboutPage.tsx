@@ -66,9 +66,9 @@ export const AboutPage = ({}: AboutPageProps) => {
           <Bold>Button Vector Art</Bold>: vecteezy.com
         </List.Item>
       </List>
-      <Title>Testing</Title>
+      <Title>Testing/Ideas</Title>
       <Paragraph>
-        @User211587, @l_leona_l, @mkrsa
+        @User211587, @l_leona_l, @mkrsa, @@Aahz7, @ivanmazov82
       </Paragraph>
       <Title>Special Thanks</Title>
       <List>

@@ -11,6 +11,9 @@ export const List: typeof Animated.FlatList = styled(Animated.FlatList)`
 
 `
 
+export const LeftActions: typeof View = styled(View)`
+
+`
 
 export const ItemContainer: typeof View = styled(View)`
   justify-content: center;

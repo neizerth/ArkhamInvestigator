@@ -1,6 +1,6 @@
 import { impactHapticFeedback } from "@features/haptic";
-import type { HapticPatternType, VibrationPattern } from "@shared/model";
-import { type GestureResponderEvent, Vibration } from "react-native";
+import type { HapticPatternType } from "@shared/model";
+import { type GestureResponderEvent } from "react-native";
 
 type PressEventHandler = (e: GestureResponderEvent) => void
 

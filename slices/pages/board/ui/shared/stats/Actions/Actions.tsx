@@ -1,6 +1,6 @@
-import { decreaseCurrentStat, increaseCurrentStat, selectCurrentBoard, useAppDispatch, useAppSelector } from '@shared/lib';
+import { decreaseCurrentStat, increaseCurrentStat, selectCurrentBoard, setBaseStat, useAppDispatch, useAppSelector } from '@shared/lib';
 import * as C from './Actions.components';
-import type { ViewProps } from 'react-native';
+import { type ViewProps } from 'react-native';
 import { useCallback } from 'react';
 import type { PickerChangeEvent } from '../../features';
 import { setCurrentStat } from '@shared/lib/store/features/board/actions/stats/setCurrentStat';
@@ -25,8 +25,8 @@ export const Actions = ({
   }, [dispatch, additionalAction]);
 
   const onLongPress = useCallback(() => {
-    dispatch(increaseCurrentStat('actions'))
-  }, [dispatch]);
+    dispatch(setBaseStat('actions', actions))
+  }, [dispatch, actions]);
 
   const onPress = useCallback(() => {
     const value = actions === 0 ? baseValue.actions : actions - 1;
@@ -43,6 +43,7 @@ export const Actions = ({
           onValueChanged={onChange}
           onPress={onPress}
           onLongPress={onLongPress}
+          longPressPattern="notificationSuccess"
         />
 
         {baseValue.additionalAction && (
