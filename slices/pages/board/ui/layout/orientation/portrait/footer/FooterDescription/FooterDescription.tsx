@@ -51,7 +51,7 @@ export const FooterDescription = ({
     return null;
   }
 
-  const { traits, flavor, text } = investigator;
+  const { traits = '', flavor, text } = investigator;
 
   return (
     <C.Container {...props}>

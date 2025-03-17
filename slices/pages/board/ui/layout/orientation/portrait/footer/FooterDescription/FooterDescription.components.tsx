@@ -83,7 +83,9 @@ export const Menu: typeof DescriptionMenu = styled(DescriptionMenu)`
 
 `
 
-export { InvestigatorTraits as Traits }
+export const Traits: typeof InvestigatorTraits = styled(InvestigatorTraits)`
+  margin-bottom: ${size.gap.small}px;
+`
 
 export const Flavor: typeof InvestigatorFlavor = styled(InvestigatorFlavor)`
   margin-top: 25px;
