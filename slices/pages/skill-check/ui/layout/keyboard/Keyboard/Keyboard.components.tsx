@@ -7,6 +7,7 @@ import * as Buttons from "../KeyboardButton";
 import { color, font, size } from '@shared/config';
 import type { FC } from 'react';
 import { Copasetic } from "@shared/fonts"
+import RuleBottom from './images/rule.svg'
 import type { SvgProps } from 'react-native-svg';
 import type { PropsWithBox } from '@shared/model';
 import { StatsKeyboard } from '../StatsKeyboard';
@@ -34,6 +35,10 @@ export const Content: FC<ContentProps> = styled(View)`
 export const Row: typeof BaseRow = styled(BaseRow)`
   align-items: stretch;
   justify-content: center;
+`
+
+export const StatsRow: typeof BaseRow = styled(Row)`
+  width: 280px
 `
 
 export const Back: typeof TouchableOpacity = styled(TouchableOpacity)`
@@ -88,19 +93,18 @@ export const EqualsText: typeof Text = styled(Text)`
   font-size: ${font.size.lead}px;
 `
 
-type RuleProps = ImageProps & {
+type RuleProps = SvgProps & {
   historyShown: boolean
 }
 
-export const Rule: FC<RuleProps> = styled(Image)
+
+export const Rule: FC<RuleProps> = styled(RuleBottom)
   .attrs({
-    source: rule,
-    resizeMode: 'contain'
+    width: 300,
+    height: 40
   })`
   ${({ historyShown }: RuleProps) => historyShown && css`
     transform: rotate(180deg);
   `}
-  height: 40px;
   margin-bottom: -5px;
-  opacity: 0.8;
 `

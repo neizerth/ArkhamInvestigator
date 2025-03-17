@@ -62,7 +62,7 @@ export const Keyboard = ({
           )}
           {!historyShown && (
             <>
-              <C.Row>
+              <C.StatsRow>
                 <C.CustomButton 
                   onPress={sendCommand('clear-last')}
                   onLongPress={sendCommand('clear')}
@@ -70,7 +70,7 @@ export const Keyboard = ({
                   <C.Backspace />
                 </C.CustomButton>
                 <C.Stats/>
-              </C.Row>
+              </C.StatsRow>
               <C.Row>
                 <C.Button {...withDigitProps(7)}/>
                 <C.Button {...withDigitProps(8)}/>

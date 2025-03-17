@@ -1,7 +1,7 @@
 import type { PropsWithFaction } from '@shared/model/ui';
 import * as C from './FactionCard.components';
 import { useWindowDimensions, type LayoutChangeEvent, type ViewProps } from 'react-native';
-import { memo, useCallback, useState } from 'react';
+import { memo, useCallback, useMemo, useState } from 'react';
 import { Outside } from '@shared/ui';
 import { useLayoutSize } from '@shared/lib';
 
@@ -25,8 +25,12 @@ export const InvestigatorDetailSelectCard = ({
   const [size, onLayout] = useLayoutSize(window);
   const [containerSize, onContainerLayout] = useLayoutSize();
 
+  const maxHeight = useMemo(() => {
+    return size.height + MAX_HEIGHT_AREA
+  }, [size]);
+
   const style = size ? {
-    maxHeight: Math.round(size.height + MAX_HEIGHT_AREA) 
+    maxHeight
   } : {};
 
   const containerStyle = {

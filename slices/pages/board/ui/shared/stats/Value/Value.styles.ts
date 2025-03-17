@@ -1,4 +1,4 @@
-import { color } from "@shared/config"
+import { color, font } from "@shared/config"
 
 export const valueStyle = {
   color: color.white
@@ -20,7 +20,9 @@ export const getFontStyle = ({
 }: GetValueStyleOptions) => {
   const digitsCount = value.toString().length;
 
-  const fontSize = numberSize[digitsCount] || defaultFontSize;
+  const size = numberSize[digitsCount] || defaultFontSize || 0;
+
+  const fontSize = size;
 
   return {
     fontSize

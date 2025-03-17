@@ -4,78 +4,71 @@
       <path d="M2489.78 4101.62h-16.88l-58.28 58.27-115.65-115.65h-16.79l132.44 132.44z"/>
     </clipPath>
     <linearGradient x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(207.601 0 0 -207.601 2282.18 4110.46)" spreadMethod="pad" id="rule-top-b">
-       <stop offset="0" stop-color="#885d2b"/>
-      <stop offset=".23" stop-color="#eeddb7"/>
-      <stop offset=".52" stop-color="#dcb864"/>
-      <stop offset=".75" stop-color="#fce9a4"/>
-      <stop offset=".83" stop-color="#dcb864"/>
-      <stop offset="1" stop-color="#885d2b"/>
+       <stop offset="0" stop-color="#ce9e69"/>
+      <stop offset=".23" stop-color="#cabb93"/>
+      <stop offset=".75" stop-color="#edd6b0"/>
+      <stop offset=".83" stop-color="#cabb93"/>
+      <stop offset="1" stop-color="#ce9e69"/>
     </linearGradient>
     <clipPath clipPathUnits="userSpaceOnUse" id="rule-top-c">
       <path d="M2697.29 4044.24h-16.8l-115.65 115.65-58.27-58.27h-16.79l75.06 75.06z"/>
     </clipPath>
     <linearGradient x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(207.502 0 0 -207.502 2489.78 4110.46)" spreadMethod="pad" id="rule-top-d">
-      <stop offset="0" stop-color="#885d2b"/>
-      <stop offset=".23" stop-color="#eeddb7"/>
-      <stop offset=".52" stop-color="#dcb864"/>
-      <stop offset=".75" stop-color="#fce9a4"/>
-      <stop offset=".83" stop-color="#dcb864"/>
-      <stop offset="1" stop-color="#885d2b"/>
+      <stop offset="0" stop-color="#ce9e69"/>
+      <stop offset=".23" stop-color="#cabb93"/>
+      <stop offset=".75" stop-color="#edd6b0"/>
+      <stop offset=".83" stop-color="#cabb93"/>
+      <stop offset="1" stop-color="#ce9e69"/>
     </linearGradient>
     <clipPath clipPathUnits="userSpaceOnUse" id="rule-top-e">
       <path d="m2449.51 4188.93 39.87-39.87 40.57 40.57-39.87 39.87zm39.87-56.84-56.84 56.84 57.54 57.54 56.84-56.84z"/>
     </clipPath>
     <linearGradient x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(114.385 0 0 -114.385 2432.54 4189.28)" spreadMethod="pad" id="rule-top-f">
-       <stop offset="0" stop-color="#885d2b"/>
-      <stop offset=".23" stop-color="#eeddb7"/>
-      <stop offset=".52" stop-color="#dcb864"/>
-      <stop offset=".75" stop-color="#fce9a4"/>
-      <stop offset=".83" stop-color="#dcb864"/>
-      <stop offset="1" stop-color="#885d2b"/>
+       <stop offset="0" stop-color="#ce9e69"/>
+      <stop offset=".23" stop-color="#cabb93"/>
+      <stop offset=".75" stop-color="#edd6b0"/>
+      <stop offset=".83" stop-color="#cabb93"/>
+      <stop offset="1" stop-color="#ce9e69"/>
     </linearGradient>
     <clipPath clipPathUnits="userSpaceOnUse" id="rule-top-g">
       <path d="M2243.26 4043.34h-559.05v21.99h549.93l124.96 124.95 15.55-15.55z"/>
     </clipPath>
     <linearGradient x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(690.439 0 0 -690.439 1684.21 4116.81)" spreadMethod="pad" id="rule-top-h">
-      <stop offset="0" stop-color="#885d2b"/>
-      <stop offset=".23" stop-color="#eeddb7"/>
-      <stop offset=".52" stop-color="#dcb864"/>
-      <stop offset=".75" stop-color="#fce9a4"/>
-      <stop offset=".83" stop-color="#dcb864"/>
-      <stop offset="1" stop-color="#885d2b"/>
+      <stop offset="0" stop-color="#ce9e69"/>
+      <stop offset=".23" stop-color="#cabb93"/>
+      <stop offset=".75" stop-color="#edd6b0"/>
+      <stop offset=".83" stop-color="#cabb93"/>
+      <stop offset="1" stop-color="#ce9e69"/>
     </linearGradient>
     <clipPath clipPathUnits="userSpaceOnUse" id="rule-top-i">
       <path d="M3295.25 4043.34H2736.2l-131.39 131.39 15.55 15.55 124.96-124.95h549.93z"/>
     </clipPath>
     <linearGradient x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(690.44 0 0 -690.44 2604.81 4116.81)" spreadMethod="pad" id="rule-top-j">
-       <stop offset="0" stop-color="#885d2b"/>
-      <stop offset=".23" stop-color="#eeddb7"/>
-      <stop offset=".52" stop-color="#dcb864"/>
-      <stop offset=".75" stop-color="#fce9a4"/>
-      <stop offset=".83" stop-color="#dcb864"/>
-      <stop offset="1" stop-color="#885d2b"/>
+       <stop offset="0" stop-color="#ce9e69"/>
+      <stop offset=".23" stop-color="#cabb93"/>
+      <stop offset=".75" stop-color="#edd6b0"/>
+      <stop offset=".83" stop-color="#cabb93"/>
+      <stop offset="1" stop-color="#ce9e69"/>
     </linearGradient>
     <clipPath clipPathUnits="userSpaceOnUse" id="rule-top-k">
       <path d="M3295.25 4095.67H1684.21v11.99h1611.04z"/>
     </clipPath>
     <linearGradient x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="scale(639.1 -639.1) rotate(16.59 24.36 7.36)" spreadMethod="pad" id="rule-top-l">
-       <stop offset="0" stop-color="#dcb864"/>
-      <stop offset=".23" stop-color="#eeddb7"/>
-      <stop offset=".52" stop-color="#885d2b"/>
-      <stop offset=".75" stop-color="#fce9a4"/>
-      <stop offset=".83" stop-color="#885d2b"/>
-      <stop offset="1" stop-color="#dcb864"/>
+       <stop offset="0" stop-color="#ce9e69"/>
+      <stop offset=".23" stop-color="#cabb93"/>
+      <stop offset=".75" stop-color="#edd6b0"/>
+      <stop offset=".83" stop-color="#cabb93"/>
+      <stop offset="1" stop-color="#ce9e69"/>
     </linearGradient>
     <clipPath clipPathUnits="userSpaceOnUse" id="rule-top-m">
       <path d="M2620.46 4043.29H2359v11.99h261.46z"/>
     </clipPath>
     <linearGradient x1="0" y1="0" x2="1" y2="0" gradientUnits="userSpaceOnUse" gradientTransform="matrix(261.455 0 0 -261.455 2359 4049.28)" spreadMethod="pad" id="rule-top-n">
-       <stop offset="0" stop-color="#885d2b"/>
-      <stop offset=".23" stop-color="#eeddb7"/>
-      <stop offset=".52" stop-color="#dcb864"/>
-      <stop offset=".75" stop-color="#fce9a4"/>
-      <stop offset=".83" stop-color="#dcb864"/>
-      <stop offset="1" stop-color="#885d2b"/>
+       <stop offset="0" stop-color="#b68557"/>
+      <stop offset=".23" stop-color="#cabb93"/>
+      <stop offset=".75" stop-color="#edd6b0"/>
+      <stop offset=".83" stop-color="#cabb93"/>
+      <stop offset="1" stop-color="#b68557"/>
     </linearGradient>
   </defs>
   <g clip-path="url(#rule-top-a)" transform="matrix(.03528 0 0 -.03528 -59.42 149.8)">

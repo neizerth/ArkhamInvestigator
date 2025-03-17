@@ -4,9 +4,10 @@ import { rule } from './images';
 import { Icon, IconButton, Row as BaseRow } from "@shared/ui";
 import { skillCheckColor } from "@pages/skill-check/config";
 import { color, font, size } from "@shared/config";
+import TopRule from './images/rule-top.svg'
 import type { FC } from "react";
 
-export const Container: typeof View = styled(View)`;
+export const Container: typeof View = styled(View)`
   padding: 40px ${size.gap.default}px 0;
 `
 
@@ -41,12 +42,21 @@ export const CheckIcon: typeof View = styled(View)`
   align-items: center;
 `
 
-export const Rule: typeof Image = styled(Image)
+// export const Rule: typeof Image = styled(Image)
+//   .attrs({
+//     source: rule,
+//     resizeMode: 'contain'
+//   })`
+//     margin-top: -20px;
+//     height: 40px;
+//   `
+
+export const Rule: typeof TopRule = styled(TopRule)
   .attrs({
-    source: rule,
-    resizeMode: 'contain'
+    height: 40,
+    width: 290
   })`
-    margin-top: -15px;
+    margin-top: -20px;
     height: 40px;
   `
 

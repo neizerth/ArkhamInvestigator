@@ -10,7 +10,7 @@ import { formatGameText, selectCurrentBoard, useAppSelector } from '@shared/lib'
 import type { Faction } from '@shared/model';
 import { selectLanguage, type TranslatableProps, useAppTranslation } from '@features/i18n';
 
-export type InvestigatorTitleProps = Omit<ImageBackgroundProps, 'source'> & TranslatableProps
+export type InvestigatorTitleProps = Omit<ImageBackgroundProps, 'source'>
 
 export const InvestigatorTitle = ({
 ...props

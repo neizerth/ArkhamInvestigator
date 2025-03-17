@@ -15,10 +15,10 @@ export const Button: FC<KeyboardButtonProps> = styled(TouchableOpacity)`
 
 const textStyle: Record<KeyboardButtonType, RuleSet> = {
   primary: css`
-    color: ${color.light10}
+    color: #d3b182;
   `,
   secondary: css`
-    color: ${color.dark15};
+    color: ${color.light10};
   `
 }
 

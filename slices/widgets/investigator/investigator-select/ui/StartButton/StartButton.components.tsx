@@ -28,7 +28,7 @@ export const Investigators: typeof Row = styled(Row)`
 `
 
 export const Text: typeof BaseText = styled(BaseText)`
-  font-size: 18px;
+  font-size: ${font.size.large}px;
   color: ${color.black};
   text-align: right;
   font-family: ${Alegreya.regular};

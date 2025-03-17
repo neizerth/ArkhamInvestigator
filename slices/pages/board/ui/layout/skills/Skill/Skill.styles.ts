@@ -1,4 +1,4 @@
-import { color, IS_WEB } from "@shared/config";
+import { color, font, IS_WEB } from "@shared/config";
 import { sign } from "@shared/lib";
 import type { Box, PropsWithBox } from "@shared/model";
 import type { TextStyle, ViewStyle } from "react-native";
@@ -52,8 +52,8 @@ export const getSkillValueStyle = ({
   const textColor = isParallel ? color.white : color.text;
 
   const valueSize: Record<number, number> = {
-    1: 10 * vw,
-    2: 5.5 * vw
+    1: 21 * vw * font.scale,
+    2: 10 * vw * font.scale
   }
 
   const valueText: TextStyle = {

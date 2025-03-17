@@ -1,4 +1,4 @@
-import { color, size } from '@shared/config';
+import { color, font, size } from '@shared/config';
 import { DefinedIconProps, Icon, TouchableOpacity } from '@shared/ui';
 import { FC } from 'react';
 import { View, Text } from 'react-native';
@@ -42,4 +42,5 @@ export const Disclaimer: typeof View = styled(View)`
 export const DisclaimerText: typeof Text = styled(Text)`
   color: ${color.dark10};
   font-family: ${Alegreya.regular};
+  font-size: ${font.size.default}px;
 `

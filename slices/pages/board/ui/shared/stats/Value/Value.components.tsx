@@ -11,5 +11,4 @@ export const Value: typeof IconNumber = styled(IconNumber)
     stroke: true,
   })`
     color: white;
-    font-size: 50px;
   `

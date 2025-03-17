@@ -38,7 +38,7 @@ export const getTextSize = withSize(textSize);
 export const getButtonStyle = (options: StyleOptions) => {
   const size = getButtonSize(options);
   return {
-    width: size,
+    // width: size,
     height: size
   }
 }

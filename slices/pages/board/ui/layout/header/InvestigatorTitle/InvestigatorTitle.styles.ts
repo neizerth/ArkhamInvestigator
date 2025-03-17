@@ -50,7 +50,7 @@ export const getTitleStyle = (options: GetTitleStyleOptions) => {
     default: {
       titleText: {
         fontFamily: Arkhamic.regular,
-        fontSize: 45 * vh * font.scale,
+        fontSize: 55 * vh * font.scale,
       },
       subtitleText: {
         fontFamily: ArnoPro.bold,

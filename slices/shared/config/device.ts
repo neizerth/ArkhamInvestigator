@@ -53,3 +53,4 @@ export const orientations = {
 
 export const DPR = PixelRatio.get(); 
 
+export const DEVICE_FONT_SCALE = PixelRatio.getFontScale();

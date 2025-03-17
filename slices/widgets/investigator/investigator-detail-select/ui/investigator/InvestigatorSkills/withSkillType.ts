@@ -1,7 +1,6 @@
-import type { SkillProps } from "@pages/board";
 import type { SkillType } from "@shared/model";
 import styled from "styled-components/native";
-import { Skill } from "../../Skill";
+import { Skill, type SkillProps } from "../../Skill";
 import type { FC } from "react";
 
 type SkillWithIconProps = Omit<SkillProps, 'type' | 'icon' | 'skillType'>;

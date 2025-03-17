@@ -14,16 +14,16 @@ type FontSizeRecord = Partial<Record<
 
 const fontSize: FontSizeRecord = {
   defaultSmall: {
-    value: 11,
-    icon: 12
+    value: 12,
+    icon: 13
   },
   mobileMedium: {
-    value: 10,
+    value: 12,
     icon: 13
   },
   mobileLarge: {
-    value: 13,
-    icon: 16
+    value: 16,
+    icon: 18
   }
 }
 

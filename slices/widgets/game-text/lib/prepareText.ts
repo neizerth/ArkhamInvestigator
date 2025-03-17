@@ -6,13 +6,13 @@ export const prepareText = (text: string) => {
     .replace(/(\d+) /g, `$1${nbsp}`)
     .replace(/ (\d+)/g, `${nbsp}$1`)
     .replace(/\] /g, `]${nbsp}`)
-    .replace(/\](\S)/g, `]${wordJoiner}$1`)
     // quotes
-    .replace(/"([^"]*)"/g, '“$1”')
+    .replace(/"([^"]+)"/g, '“$1”')
     // markdown bold
     .replace(/\[\[([^\]]+)\]\]/g, '<keyword>$1</keyword>')
     // icons
-    .replace(/\[([^\]]+)\]/g, '<icon icon="$1" />')
+    .replace(/\[([^\]\[]+)\]/g, '<icon icon="$1"/>')
+    .replace(/\/>(\S)/g, `"/>${wordJoiner}$1`)
   
   const lines = content.split('\n')
   const paragraphs = lines.length > 0 ? 

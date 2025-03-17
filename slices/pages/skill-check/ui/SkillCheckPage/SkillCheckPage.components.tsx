@@ -1,13 +1,15 @@
+
 import { View } from "react-native";
 import styled from "styled-components/native";
 import { Keyboard as BaseKeyboard, SkillCheckHeader } from "../layout";
 import { skillCheckColor } from "@pages/skill-check/config";
 import { Evaluation } from "../layout/evaluation";
+import { color } from "@shared/config";
 
 export const Container: typeof View = styled(View)`
   flex: 1;
   justify-content: flex-end;
-  background-color: ${skillCheckColor.background};
+  background-color: ${color.dark40};
 `
 
 export const Keyboard: typeof BaseKeyboard = styled(BaseKeyboard)`
