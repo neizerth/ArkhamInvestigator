@@ -5,7 +5,7 @@ import { StyleSheet, Text, TextStyle, type TextProps } from "react-native"
 import { selectLanguage } from "../store/features/i18n/i18n"
 import type { PropsWithStyle } from "@shared/model"
 import { mergeDeepRight } from "ramda"
-import { AppText, AppTextProps } from "@shared/ui"
+import { AppText, type AppTextProps } from "@shared/ui"
 
 type WithLocaleProps = PropsWithStyle & {
   language?: string

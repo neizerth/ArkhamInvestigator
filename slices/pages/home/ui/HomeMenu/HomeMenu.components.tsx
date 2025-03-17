@@ -1,6 +1,6 @@
 import { color } from "@shared/config";
-import { Row, TouchableOpacity, Icon as BaseIcon, DefinedIconProps } from "@shared/ui";
-import { FC } from "react";
+import { Row, TouchableOpacity, Icon as BaseIcon, type DefinedIconProps } from "@shared/ui";
+import type { FC } from "react";
 import styled from "styled-components/native";
 
 export const Container: typeof Row = styled(Row)`

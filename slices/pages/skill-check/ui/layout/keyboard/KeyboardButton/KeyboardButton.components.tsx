@@ -5,6 +5,7 @@ import styled, { css } from "styled-components/native"
 import type { KeyboardButtonProps, KeyboardButtonType, ButtonTextProps } from "./KeyboardButton.types"
 import { Copasetic } from "@shared/fonts"
 import type { RuleSet } from "styled-components"
+import { skillCheckColor } from "@pages/skill-check/config"
 
 
 export const Button: FC<KeyboardButtonProps> = styled(TouchableOpacity)`
@@ -14,10 +15,10 @@ export const Button: FC<KeyboardButtonProps> = styled(TouchableOpacity)`
 
 const textStyle: Record<KeyboardButtonType, RuleSet> = {
   primary: css`
-    color: #d3b182;
+    color: ${skillCheckColor.button.primary};
   `,
   secondary: css`
-    color: ${color.light10};
+    color: ${skillCheckColor.button.secondary};
   `
 }
 

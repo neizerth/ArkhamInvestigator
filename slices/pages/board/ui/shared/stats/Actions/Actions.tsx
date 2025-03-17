@@ -1,6 +1,6 @@
 import { decreaseCurrentStat, increaseCurrentStat, selectCurrentBoard, setBaseStat, useAppDispatch, useAppSelector } from '@shared/lib';
 import * as C from './Actions.components';
-import { type ViewProps } from 'react-native';
+import type { ViewProps } from 'react-native';
 import { useCallback } from 'react';
 import type { PickerChangeEvent } from '../../features';
 import { setCurrentStat } from '@shared/lib/store/features/board/actions/stats/setCurrentStat';

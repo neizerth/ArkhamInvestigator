@@ -1,4 +1,4 @@
-import { HapticPatternType } from "@shared/model"
+import type { HapticPatternType } from "@shared/model"
 import type { ReactElement, RefObject } from "react"
 import type { FlatList, FlatListProps, ViewProps, ViewStyle } from "react-native"
 import type { ListRenderItemInfo } from "react-native"
