@@ -43,19 +43,21 @@ export const getLibrary = ({
         </Fragment>
       );
     }
+    
+
+    const textContent = children
+      .map(child => (
+        <C.Text 
+          {...props}
+          style={textStyle}
+          key={v4()}
+        >
+          {child}
+        </C.Text>
+      ))
 
     if (type === 'p') {
-      const content = children
-        .map(child => (
-          <C.Text 
-            {...props}
-            style={textStyle}
-            key={v4()}
-          >
-            {child}
-          </C.Text>
-        ))
-
+      
       return (
         <C.Paragraph
           {...elementProps}
@@ -64,7 +66,7 @@ export const getLibrary = ({
             componentStyles?.paragraph
           ]}
         >
-          {content}
+          {textContent}
         </C.Paragraph>
       )
     }
@@ -76,17 +78,6 @@ export const getLibrary = ({
       const { icon } = elementProps;
       const value = iconMapping[icon] || icon;
 
-      const content = children
-        .map(child => (
-          <C.Text 
-            {...props}
-            style={textStyle}
-            key={v4()}
-          >
-            {child}
-          </C.Text>
-        ))
-
       return (
         <C.Line key={v4()}>
           <Icon
@@ -96,7 +87,7 @@ export const getLibrary = ({
             style={mergedStyles}
             scaleType={false}
           />
-          {content}
+          {textContent}
         </C.Line>
       );
     }
@@ -105,7 +96,7 @@ export const getLibrary = ({
       .map(child => (
         <C.Text 
           {...mergedProps}
-          style={textStyle}
+          style={mergedStyles}
           key={v4()}
         >
           {child}
@@ -116,7 +107,7 @@ export const getLibrary = ({
       <C.Text
         {...mergedProps}
         key={v4()}
-        style={textStyle}
+        style={mergedStyles}
       >
         {content}
       </C.Text>

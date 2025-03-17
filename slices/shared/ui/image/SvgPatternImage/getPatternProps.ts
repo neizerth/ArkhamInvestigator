@@ -13,8 +13,6 @@ export const getPatternProps = ({
   const resizeMode = props.resizeMode === 'stretch' && width < patternWidth ? 
     'repeat' : props.resizeMode;
 
-  // console.log()
-
   switch (resizeMode) {
     case 'stretch': {
       const scale = width / patternWidth;
