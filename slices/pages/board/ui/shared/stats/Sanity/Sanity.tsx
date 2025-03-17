@@ -9,6 +9,8 @@ import { range } from 'ramda';
 
 export type SanityProps = ViewProps
 
+const MAX_SANITY_VALUE = 20;
+
 export const Sanity = ({
   ...props
 }: SanityProps) => {
@@ -23,8 +25,8 @@ export const Sanity = ({
   }, [dispatch]);
 
   const onLongPress = useCallback(() => {
-    dispatch(increaseCurrentStat('sanity', baseValue))
-  }, [dispatch, baseValue]);
+    dispatch(increaseCurrentStat('sanity', MAX_SANITY_VALUE))
+  }, [dispatch]);
 
   const onPress = useCallback(() => {
     dispatch(decreaseCurrentStat('sanity', 0))
@@ -34,7 +36,7 @@ export const Sanity = ({
     <C.Container {...props}>
       <C.Picker
         value={value?.sanity}
-        data={range(0, baseValue + 1)}
+        data={range(0, MAX_SANITY_VALUE + 1)}
         onValueChanged={onChange}
         onLongPress={onLongPress}
         onPress={onPress}

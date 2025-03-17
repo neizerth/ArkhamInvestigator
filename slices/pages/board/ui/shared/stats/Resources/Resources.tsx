@@ -19,7 +19,7 @@ export const Resources = ({
   }, [dispatch]);
 
   const onLongPress = useCallback(() => {
-    dispatch(increaseCurrentStat('resources'))
+    dispatch(setCurrentStat('resources', 0))
   }, [dispatch]);
 
   const onPress = useCallback(() => {

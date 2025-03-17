@@ -14,7 +14,7 @@ export const Clues = (props: ClueProps) => {
   }, [dispatch]);
 
   const onLongPress = useCallback(() => {
-    dispatch(increaseCurrentStat('clues'))
+    dispatch(setCurrentStat('clues', 0))
   }, [dispatch]);
 
   const onPress = useCallback(() => {
