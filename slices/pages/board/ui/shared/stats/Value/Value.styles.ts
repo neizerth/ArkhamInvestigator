@@ -5,9 +5,9 @@ export const valueStyle = {
 }
 
 export const numberSize: Record<number, number> = {
-  1: 50,
-  2: 40,
-  3: 30
+  1: 55,
+  2: 45,
+  3: 35
 }
 
 type GetValueStyleOptions = {

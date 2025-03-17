@@ -1,6 +1,8 @@
 import { DPR, IS_WEB } from "../device";
 
+// const scale = IS_WEB ? 1 : 1.25;
 const scale = IS_WEB ? 1 : 1.25;
+// const scale = DPR / 2;
 
 export const font = {
   size: {

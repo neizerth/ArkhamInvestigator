@@ -52,8 +52,8 @@ export const getSkillValueStyle = ({
   const textColor = isParallel ? color.white : color.text;
 
   const valueSize: Record<number, number> = {
-    1: 8 * vw,
-    2: 5.1 * vw
+    1: 10 * vw,
+    2: 5.5 * vw
   }
 
   const valueText: TextStyle = {
