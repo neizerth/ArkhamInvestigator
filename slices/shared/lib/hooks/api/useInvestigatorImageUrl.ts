@@ -1,5 +1,5 @@
 import { getInvestigatorImageUrl } from "@shared/api";
-import { selectMediaVersion } from "@shared/lib/store";
+import { selectMediaVersion } from "../../store/features/investigators/investigatorMedia/investigatorMedia";
 import type { AppVersionType, ImageSizeType } from "@shared/model";
 import { useAppSelector } from "../store";
 import { APP_VERSION, BUILD_VERSION } from "@shared/config/app";

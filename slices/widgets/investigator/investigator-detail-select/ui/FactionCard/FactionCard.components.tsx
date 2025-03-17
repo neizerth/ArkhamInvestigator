@@ -7,8 +7,8 @@ import styled, { css } from "styled-components/native";
 import type { PropsWithFaction } from "@shared/model/ui";
 import { FactionBackground, type FactionBackgroundProps } from "../FactionBackground";
 import type { Faction } from "@shared/model";
-import { FactionFontIcon, Icon as BaseIcon, AppText } from "@shared/ui";
-import type { IconProps } from "@shared/ui";
+import { FactionFontIcon, Icon as BaseIcon, AppText, Button, ButtonProps, Row } from "@shared/ui";
+import { IconProps } from "@shared/ui";
 import { Alegreya } from "@shared/fonts"
 
 export type ElementWithFaction<T> = FC<T & PropsWithFaction>
@@ -65,6 +65,7 @@ export const Content: typeof View = styled(View)`
   border-radius: ${borderRadius}px;
   background-color: ${color.dark30};
   padding: ${size.gap.medium}px 0px;
+  gap: ${size.gap.default}px;
 `
 
 
@@ -72,6 +73,27 @@ export const ScrollContainer: typeof ScrollView = styled(ScrollView)`
   flex: 1;
   padding: 0 ${size.gap.medium}px;
 `
+
+export const Actions: typeof Row = styled(Row)`
+  padding: 0 ${size.gap.medium}px;
+  gap: ${size.gap.default}px;
+`
+
+
+export const Cancel: typeof Button = styled(Button)`
+  background-color: ${color.dark10};
+  flex: 1;
+`
+
+type OKProps = ButtonProps & PropsWithFaction;
+
+export const OK: FC<OKProps> = styled(Button)`
+  flex: 1;
+  ${({ faction }: PropsWithFaction) => css`
+    background-color: ${getBackgroundColor(faction)};
+  `}
+`
+
 
 export const Icon: typeof FactionFontIcon = styled(FactionFontIcon)`
   font-size: 32px;

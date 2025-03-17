@@ -3,7 +3,8 @@ import * as C from './FactionCard.components';
 import { useWindowDimensions, type LayoutChangeEvent, type ViewProps } from 'react-native';
 import { memo, useCallback, useMemo, useState } from 'react';
 import { Outside } from '@shared/ui';
-import { useLayoutSize } from '@shared/lib';
+import { goBack, removeInvestigatorSelection, useAppDispatch, useLayoutSize } from '@shared/lib';
+import { useAppTranslation } from '@features/i18n';
 
 export type InvestigatorDetailSelectCardProps = ViewProps & PropsWithFaction & {
   title?: string
@@ -21,6 +22,17 @@ export const InvestigatorDetailSelectCard = ({
   onClose,
   ...props
 }: InvestigatorDetailSelectCardProps) => {
+  const dispatch = useAppDispatch();
+  const { t } = useAppTranslation();
+
+  const back = useCallback(() => {
+    dispatch(goBack());
+  }, [dispatch]);
+
+  const cancel = useCallback(() => {
+    dispatch(removeInvestigatorSelection());
+    dispatch(goBack());
+  }, [dispatch]);
   const window = useWindowDimensions();
   const [size, onLayout] = useLayoutSize(window, {
     once: true
@@ -36,6 +48,8 @@ export const InvestigatorDetailSelectCard = ({
   const containerStyle = {
     opacity: size ? 1 : 0
   }
+
+  const okText = t('Select {{title}}', { title: '' });
   
   return (
     <C.Container 
@@ -77,6 +91,19 @@ export const InvestigatorDetailSelectCard = ({
               {children}
             </C.ScrollContent>
           </C.ScrollContainer>
+          <C.Actions>
+            <C.Cancel 
+              text={t`Cancel`} 
+              icon="dismiss"
+              onPress={cancel}
+            />
+            <C.OK 
+              text={okText} 
+              faction={faction} 
+              icon="check"
+              onPress={back}
+            />
+          </C.Actions>
         </C.Content>
       </C.Body>
     </C.Container>

@@ -22,7 +22,7 @@ export const Content: typeof View = styled(View)`
   justify-content: center;
   width: 100%;
   max-width: 500px;
-  padding: ${size.gap.default}px;
+  padding: ${size.gap.xxl}px ${size.gap.default}px;
 `
 
 export const Sections: typeof View = styled(View)

@@ -3,7 +3,7 @@ import { propEq } from 'ramda';
 import * as C from './InvestigatorSelect.components';
 import { selectAvailableInvestigators } from '../../lib/store';
 import { InvestigatorList as List } from '../InvestigatorList';
-import { changeSelectedInvestigator, selectCurrentBoard } from '@shared/lib';
+import { changeSelectedInvestigator } from '@shared/lib';
 import type { InvestigatorDetails } from '@shared/model';
 import { useCallback } from 'react';
 import { useAppTranslation } from '@features/i18n';

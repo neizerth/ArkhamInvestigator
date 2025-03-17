@@ -7,6 +7,8 @@ export const size = {
     small: 5,
     default: 10,
     medium: 15,
-    large: 20
+    large: 20,
+    xl: 30,
+    xxl: 40
   }
 }
