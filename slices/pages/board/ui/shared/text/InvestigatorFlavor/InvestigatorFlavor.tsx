@@ -5,6 +5,7 @@ import { type TextProps, Text } from "react-native"
 import styled, { css } from "styled-components/native"
 import { getInvestigatorFlavorStyles } from "./InvestigatorFlavor.styles"
 import { useAppTranslation } from "@features/i18n"
+import { AppText } from "@shared/ui"
 
 export type InvestigatorFlavorProps = TextProps & Partial<PropsWithUnit> & {
   value: string
@@ -24,7 +25,7 @@ export const InvestigatorFlavor = ({
   });
 
   return (
-    <Text
+    <AppText
       {...props}
       style={[
         props.style,
@@ -32,6 +33,6 @@ export const InvestigatorFlavor = ({
       ]}
     >
       {text}
-    </Text>
+    </AppText>
   )
 } 

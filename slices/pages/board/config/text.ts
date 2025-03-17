@@ -1,14 +1,15 @@
-import { font, DPR, IS_WEB, DEVICE_FONT_SCALE } from "@shared/config"
+import { font } from "@shared/config"
 
-const scale = DEVICE_FONT_SCALE;
-const textSize = font.size.medium * 1.75;
+const scale = 1.1;
+
+const textSize = font.size.medium * scale;
 
 export const boardText = {
   ratio: {
-    traits: font.size.default / textSize,
-    text: font.size.medium / textSize,
-    icon: font.size.default / textSize,
-    flavor: font.size.default / textSize,
+    traits: 14 / textSize,
+    text: 16 / textSize,
+    icon: 14 / textSize,
+    flavor: 14 / textSize,
   },
   scale
 }

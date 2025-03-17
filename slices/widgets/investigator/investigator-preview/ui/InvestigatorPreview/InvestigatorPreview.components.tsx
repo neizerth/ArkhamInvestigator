@@ -10,7 +10,7 @@ import type { FC } from "react";
 import { color, factionColor, font, size } from "@shared/config";
 import Color from "color";
 import type { PropsWithFaction } from "@shared/model/ui";
-import { Icon, TouchableOpacity } from "@shared/ui";
+import { AppText, Icon, TouchableOpacity } from "@shared/ui";
 import { Alegreya } from "@shared/fonts"
 import { Text } from "react-native";
 import { ArkhamDigits } from "@shared/fonts"
@@ -100,7 +100,7 @@ export const SelectedCount: typeof View = styled(View)`
   padding: 4px;
 `
 
-export const Count: typeof Text = styled(Text)`
+export const Count: typeof AppText = styled(AppText)`
   font-family: ${ArkhamDigits.fill};
   font-size: ${font.size.small}px;
 `

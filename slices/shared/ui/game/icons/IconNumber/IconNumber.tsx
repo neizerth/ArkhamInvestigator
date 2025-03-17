@@ -17,7 +17,7 @@ export const IconNumber = (props: IconNumberProps) => {
   const style = StyleSheet.flatten(props.style);
   const defaultFontSize = style.fontSize || font.size.default;
 
-  const fontSize = defaultFontSize * font.scale;
+  const fontSize = defaultFontSize;
 
   return (
     <Component {...props}

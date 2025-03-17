@@ -7,7 +7,7 @@ export const scaleFontFromStyle = (scale: number, style?: StyleProp<TextStyle>) 
 
   const fontSize = styleSheet?.fontSize || font.size.default;
 
-  const scaledFontSize = fontSize * scale * font.scale;
+  const scaledFontSize = fontSize * scale;
   
   return {
     fontSize,

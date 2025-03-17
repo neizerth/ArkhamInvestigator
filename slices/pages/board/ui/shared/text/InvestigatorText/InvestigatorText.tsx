@@ -6,8 +6,6 @@ import { selectLanguage, useAppTranslation } from '@features/i18n';
 import { mergeDeepRight } from 'ramda';
 import type { ComponentStyleMap } from '@widgets/game-text';
 
-// export { Text as InvestigatorText } from './InvestigatorText.components';
-
 export const InvestigatorText = (props: InvestigatorTextProps) => {
   const { translate } = useAppTranslation();
   const [text, language] = translate(props.value);

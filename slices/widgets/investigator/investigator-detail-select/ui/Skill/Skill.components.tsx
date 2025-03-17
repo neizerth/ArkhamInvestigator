@@ -36,7 +36,7 @@ export const Container: typeof Row = styled(Row)`
   min-height: 30px;
   gap: ${size.gap.small}px;
   background-color: ${color.dark20};
-  padding: 3px ${size.gap.small}px;
+  padding: 0px ${size.gap.small}px;
   border-radius: ${size.borderRadius.default}px;
 `
 

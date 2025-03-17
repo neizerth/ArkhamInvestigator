@@ -1,5 +1,5 @@
 import { color, font, size } from "@shared/config";
-import { Column, Row } from "@shared/ui";
+import { AppText, Column, Row } from "@shared/ui";
 import { Text } from "react-native";
 import { Image as BaseImage } from "react-native";
 import { View } from "react-native";
@@ -18,7 +18,7 @@ export const Details: typeof Column = styled(Column)`
   gap: ${size.gap.default}px;
 `
 
-export const Traits: typeof Text = styled(Text)`
+export const Traits: typeof AppText = styled(AppText)`
   font-size: ${font.size.default}px;
   font-family: ${Alegreya.bold};
   color: ${color.light10};

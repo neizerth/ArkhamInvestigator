@@ -1,7 +1,6 @@
 import { color } from "@shared/config"
-import { TouchableOpacity, Icon as BaseIcon } from "@shared/ui"
+import { TouchableOpacity, Icon as BaseIcon, AppText } from "@shared/ui"
 import type { FC } from "react"
-import { Text as BaseText } from "react-native"
 import styled, { css } from "styled-components/native"
 import type { KeyboardButtonProps, KeyboardButtonType, ButtonTextProps } from "./KeyboardButton.types"
 import { Copasetic } from "@shared/fonts"
@@ -22,7 +21,7 @@ const textStyle: Record<KeyboardButtonType, RuleSet> = {
   `
 }
 
-export const Text: FC<ButtonTextProps> = styled(BaseText)`
+export const Text: FC<ButtonTextProps> = styled(AppText)`
  
   font-size: 50px;
   font-family: ${Copasetic.regular};

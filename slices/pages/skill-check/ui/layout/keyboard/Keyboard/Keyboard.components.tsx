@@ -1,6 +1,6 @@
 import { BackspaceImage, rule } from "./images/images";
 
-import { Row as BaseRow, TouchableOpacity } from "@shared/ui";
+import { AppText, Row as BaseRow, TouchableOpacity } from "@shared/ui";
 import { View, Text, type ImageProps, Image, type ViewProps } from "react-native";
 import styled, { css } from "styled-components/native";
 import * as Buttons from "../KeyboardButton";
@@ -87,7 +87,7 @@ export const Placeholder: typeof View = styled(View)`
   flex: 1;
 `
 
-export const EqualsText: typeof Text = styled(Text)`
+export const EqualsText: typeof AppText = styled(AppText)`
   color: ${color.light10};
   font-family: ${Copasetic.regular};
   font-size: ${font.size.lead}px;
@@ -100,7 +100,7 @@ type RuleProps = SvgProps & {
 
 export const Rule: FC<RuleProps> = styled(RuleBottom)
   .attrs({
-    width: 300,
+    width: 290,
     height: 40
   })`
   ${({ historyShown }: RuleProps) => historyShown && css`

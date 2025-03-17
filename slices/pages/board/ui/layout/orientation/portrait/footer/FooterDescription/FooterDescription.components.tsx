@@ -48,7 +48,7 @@ export const Exit: FC<DefinedIconButtonProps> = styled(IconButton)
     icon: 'resign',
     iconStyle: {
       color: color.light10,
-      fontSize: 36
+      fontSize: 30
     }
   })`
     position: absolute;
@@ -61,7 +61,7 @@ export const Clear: FC<DefinedIconButtonProps> = styled(IconButton)
     icon: 'repeat',
     iconStyle: {
       color: color.light10,
-      fontSize: 36
+      fontSize: 30
     }
   })`
     position: absolute;

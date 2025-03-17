@@ -3,6 +3,7 @@ import styled from "styled-components/native"
 import { FLAG_HEIGHT, FLAG_SIZE } from "./Flag.styles"
 import { Alegreya } from "@shared/fonts"
 import { color, font } from "@shared/config"
+import { AppText } from "../../content/AppText"
 
 export const Container: typeof View = styled(View)`
   justify-content: center;
@@ -23,7 +24,7 @@ export const Overlay: typeof View = styled(View)`
   background-color: rgba(0, 0, 0, 0.3);
 `
 
-export const Title: typeof Text = styled(Text)`
+export const Title: typeof AppText = styled(AppText)`
   font-family: ${Alegreya.regular};
   font-size: ${font.size.medium}px;
   color: ${color.light10};

@@ -1,11 +1,13 @@
-import { getIconScale, scaleFontFromStyle, selectIcons, useAppSelector } from '@shared/lib';
-import { propEq } from 'ramda';
-import { StyleSheet, type TextProps } from 'react-native';
-import { Text } from 'react-native';
+import { useAppSelector } from '../../../../lib/hooks/store/useAppSelector';
+import { scaleFontFromStyle } from '../../../../lib/ui'
+import { getIconScale } from '../../../../lib/features/game/icons'
+import { selectIcons } from '../../../../lib/store/features/icons'
 import { ArkhamIcons } from "@shared/fonts"
 import type { IconScaleType, PropsWithStroke } from '@shared/model';
+import { AppText, type AppTextProps } from '../../../content/AppText';
+import { propEq } from 'ramda';
 
-export type IconProps = TextProps & PropsWithStroke & {
+export type IconProps = AppTextProps & PropsWithStroke & {
   icon: string
   scaleType?: IconScaleType
 }
@@ -37,11 +39,11 @@ export const Icon = ({
   }
 
   return (
-    <Text
+    <AppText
       {...props}
       style={[style, fontSizeStyles]}
     >
       {contents}
-    </Text>
+    </AppText>
   );
 }

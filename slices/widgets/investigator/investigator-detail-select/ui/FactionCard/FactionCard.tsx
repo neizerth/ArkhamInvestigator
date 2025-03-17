@@ -22,12 +22,12 @@ export const InvestigatorDetailSelectCard = ({
   ...props
 }: InvestigatorDetailSelectCardProps) => {
   const window = useWindowDimensions();
-  const [size, onLayout] = useLayoutSize(window);
+  const [size, onLayout] = useLayoutSize(window, {
+    once: true
+  });
   const [containerSize, onContainerLayout] = useLayoutSize();
 
-  const maxHeight = useMemo(() => {
-    return size.height + MAX_HEIGHT_AREA
-  }, [size]);
+  const maxHeight = size.height + MAX_HEIGHT_AREA;
 
   const style = size ? {
     maxHeight

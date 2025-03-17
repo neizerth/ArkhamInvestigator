@@ -1,9 +1,9 @@
 import { color, font, size } from "@shared/config";
 import { Alegreya } from "@shared/fonts";
-import { Text as NativeText } from "react-native";
 import styled from "styled-components/native";
+import { AppText } from "../AppText";
 
-export const Text: typeof NativeText = styled(NativeText)`
+export const Text: typeof AppText = styled(AppText)`
   color: ${color.light10};
   font-family: ${Alegreya.regular};
   font-size: ${font.size.default}px;

@@ -56,7 +56,7 @@ export const Rule: typeof TopRule = styled(TopRule)
     height: 40,
     width: 290
   })`
-    margin-top: -20px;
+    margin-top: -15px;
     height: 40px;
   `
 
@@ -80,7 +80,7 @@ export const Button: typeof IconButton = styled(IconButton)
   .attrs({
     iconStyle: {
       color: color.light15,
-      fontSize: 24
+      fontSize: 20
     }
   })`
     

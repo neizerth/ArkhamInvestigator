@@ -5,6 +5,7 @@ import { Text, View } from "react-native";
 import { Row } from "@shared/ui/grid";
 import type { CharProps, PropsWithSize } from "./IconNumber.types";
 import { ArkhamDigits } from "@shared/fonts"
+import { AppText } from "../../../content/AppText";
 
 
 export const Container: typeof View = styled(Row)`
@@ -20,7 +21,7 @@ export const StrokeContainer: typeof View = styled(View)`
   position: relative;
 `
 
-export const Fill: typeof Text = styled(Text)`
+export const Fill: typeof AppText = styled(AppText)`
   font-family: ${ArkhamDigits.fill};
   position: absolute;
   z-index: 2;
@@ -28,14 +29,14 @@ export const Fill: typeof Text = styled(Text)`
   top: 0;
 `
 
-export const Outline: typeof Text = styled(Text)`
+export const Outline: typeof AppText = styled(AppText)`
   font-family: ${ArkhamDigits.outline};
   position: relative;
   z-index: 3;
 `
 
 
-export const UnstrokedText: typeof Text = styled(Text)`
+export const UnstrokedText: typeof AppText = styled(AppText)`
   font-family: ${ArkhamDigits.fill};
 `
 

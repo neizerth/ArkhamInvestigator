@@ -15,7 +15,7 @@ export const Button: typeof IconButton = styled(IconButton)
   .attrs({
     iconStyle: {
       color: color.dark10,
-      fontSize: 42
+      fontSize: 30
     }
   })`
     opacity: 0.8;

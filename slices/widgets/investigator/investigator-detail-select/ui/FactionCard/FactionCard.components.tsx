@@ -7,7 +7,7 @@ import styled, { css } from "styled-components/native";
 import type { PropsWithFaction } from "@shared/model/ui";
 import { FactionBackground, type FactionBackgroundProps } from "../FactionBackground";
 import type { Faction } from "@shared/model";
-import { FactionFontIcon, Icon as BaseIcon } from "@shared/ui";
+import { FactionFontIcon, Icon as BaseIcon, AppText } from "@shared/ui";
 import type { IconProps } from "@shared/ui";
 import { Alegreya } from "@shared/fonts"
 
@@ -35,7 +35,6 @@ export const Background: FC<BackgroundProps> = styled(FactionBackground)`
 export const Container: typeof View = styled(View)`
   border-radius: ${borderRadius}px;
 `
-
 
 export const Header: ViewWithFaction = styled(View)`
   ${({ faction }: PropsWithFaction) => css`
@@ -76,6 +75,7 @@ export const ScrollContainer: typeof ScrollView = styled(ScrollView)`
 
 export const Icon: typeof FactionFontIcon = styled(FactionFontIcon)`
   font-size: 32px;
+  line-height: 32px;
   color: ${textColor};
 `
 
@@ -106,15 +106,15 @@ export const HeaderTextContent: typeof View = styled(View)`
   width: 100%;
 `
 
-const HeaderText: typeof Text = styled(Text)`
-  font-size: ${font.size.medium}px;
+const HeaderText: typeof AppText = styled(AppText)`
+  font-size: ${font.size.default}px;
   color: ${textColor};
 `
 
-export const Title: typeof Text = styled(HeaderText)`
+export const Title: typeof AppText = styled(HeaderText)`
   font-family: ${Alegreya.bold};
 `
 
-export const Subtitle: typeof Text = styled(HeaderText)`
+export const Subtitle: typeof AppText = styled(HeaderText)`
   font-family: ${Alegreya.italic};
 `

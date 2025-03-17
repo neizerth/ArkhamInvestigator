@@ -1,6 +1,5 @@
-import { CHINESE_LANGUAGES } from '@features/i18n';
 import * as C from './Flag.components';
-import { languageMapping } from './languageMapping';
+import { languageMapping, CHINESE_LANGUAGES } from './languages';
 
 export type FlagProps = {
   language: string

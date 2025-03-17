@@ -1,7 +1,7 @@
 import { color, font, size } from "@shared/config";
 import { Alegreya } from "@shared/fonts"
-import { Icon as BaseIcon, Row, TouchableOpacity } from "@shared/ui";
-import { Text as BaseText, Image } from "react-native";
+import { AppText, Icon as BaseIcon, Row, TouchableOpacity } from "@shared/ui";
+import { Image } from "react-native";
 import styled from "styled-components/native";
 
 export const Container: typeof TouchableOpacity = styled(TouchableOpacity)`
@@ -27,8 +27,8 @@ export const Investigators: typeof Row = styled(Row)`
   gap: ${size.gap.small}px;
 `
 
-export const Text: typeof BaseText = styled(BaseText)`
-  font-size: ${font.size.large}px;
+export const Text: typeof AppText = styled(AppText)`
+  font-size: ${font.size.default}px;
   color: ${color.black};
   text-align: right;
   font-family: ${Alegreya.regular};
@@ -38,5 +38,5 @@ export const Icon: typeof BaseIcon = styled(BaseIcon)
   .attrs({
     icon: 'right-arrow'
   })`
-    font-size: ${font.size.medium}px
+    font-size: ${font.size.default}px
   `

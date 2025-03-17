@@ -1,5 +1,5 @@
 import { color, font, size } from '@shared/config';
-import { DefinedIconProps, Icon, TouchableOpacity } from '@shared/ui';
+import { AppText } from '@shared/ui';
 import { FC } from 'react';
 import { View, Text } from 'react-native';
 import styled from 'styled-components/native';
@@ -39,8 +39,8 @@ export const Disclaimer: typeof View = styled(View)`
   right: ${size.gap.large}px;
 `
 
-export const DisclaimerText: typeof Text = styled(Text)`
+export const DisclaimerText: typeof AppText = styled(AppText)`
   color: ${color.dark10};
   font-family: ${Alegreya.regular};
-  font-size: ${font.size.default}px;
+  font-size: ${font.size.small}px;
 `

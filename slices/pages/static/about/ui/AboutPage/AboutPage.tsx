@@ -1,6 +1,7 @@
 import { useAppTranslation } from '@features/i18n';
-import { nbsp, space, wordJoiner } from '@shared/config';
+import { DEVICE_FONT_SCALE, DPR, nbsp, space, wordJoiner } from '@shared/config';
 import { APP_VERSION, BUILD_ID, BUILD_VERSION } from '@shared/config/app';
+import { selectMediaVersion, useAppSelector } from '@shared/lib';
 import { Title, Text, List, Paragraph, A, Bold } from '@shared/ui';
 import { ContentPage } from '@widgets/content-page';
 import * as Application from 'expo-application';
@@ -11,9 +12,11 @@ export type AboutPageProps = {
 
 export const AboutPage = ({}: AboutPageProps) => {
   const { t } = useAppTranslation();
+  const mediaVersion = useAppSelector(selectMediaVersion);
 
   return (
     <ContentPage title={t`About`}>
+
       <Paragraph>
         The information presented in this app about 
         {space}<A href="https://www.fantasyflightgames.com/en/products/arkham-horror-the-card-game/">Arkham Horror: The Card Game{wordJoiner}™</A>, 
@@ -63,6 +66,10 @@ export const AboutPage = ({}: AboutPageProps) => {
           <Bold>Button Vector Art</Bold>: vecteezy.com
         </List.Item>
       </List>
+      <Title>Testing</Title>
+      <Paragraph>
+        @User211587, @l_leona_l, @mkrsa
+      </Paragraph>
       <Title>Special Thanks</Title>
       <List>
         <List.Item>
@@ -75,10 +82,22 @@ export const AboutPage = ({}: AboutPageProps) => {
           <Bold>Build Version</Bold>: {BUILD_VERSION}
         </List.Item>
         <List.Item>
+          <Bold>Codebase Version</Bold>: {APP_VERSION}
+        </List.Item>
+        <List.Item>
           <Bold>Build Id</Bold>: {BUILD_ID}
         </List.Item>
         <List.Item>
-          <Bold>Codebase Version</Bold>: {APP_VERSION}
+          <Bold>Media Version</Bold>: {mediaVersion}
+        </List.Item>
+      </List>
+      <Title>Device Info</Title>
+      <List>
+        <List.Item>
+          <Bold>DPR</Bold>: {DPR}
+        </List.Item>
+        <List.Item>
+          <Bold>Device Font Scale</Bold>: {DEVICE_FONT_SCALE.toFixed(2)}
         </List.Item>
       </List>
     </ContentPage>

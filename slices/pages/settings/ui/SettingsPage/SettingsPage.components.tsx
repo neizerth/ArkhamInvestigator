@@ -1,6 +1,6 @@
 import { color, font, size } from "@shared/config";
-import { Row as BaseRow } from "@shared/ui";
-import { Text, View } from "react-native";
+import { Row as BaseRow, Text } from "@shared/ui";
+import { View } from "react-native";
 import styled from "styled-components/native";
 import { LanguagePicker } from "../LanguagePicker";
 import { Alegreya } from "@shared/fonts"
@@ -27,8 +27,6 @@ export const Row: typeof BaseRow = styled(BaseRow)`
 `
 
 export const Label: typeof Text = styled(Text)`
-  font-family: ${Alegreya.regular};
-  color: ${color.light10};
   font-size: ${font.size.medium}px;
 `
 

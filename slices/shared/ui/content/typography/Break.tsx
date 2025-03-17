@@ -1,8 +1,8 @@
-import { Text, type TextProps } from 'react-native';
-export type BreakProps = TextProps
+import { AppText, AppTextProps } from '../AppText';
+export type BreakProps = AppTextProps
 
 export const Break = (props: BreakProps) => {
   return (
-    <Text {...props}>{'\n'}</Text>
+    <AppText {...props}>{'\n'}</AppText>
   );
 }

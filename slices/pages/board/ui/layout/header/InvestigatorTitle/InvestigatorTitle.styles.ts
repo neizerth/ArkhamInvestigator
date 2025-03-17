@@ -38,11 +38,11 @@ export const getTitleStyle = (options: GetTitleStyleOptions) => {
   const zhConfig = {
     titleText: {
       fontFamily: STXinwei.regular,
-      fontSize: 38 * vh * font.scale,
+      fontSize: 38 * vh,
     },
     subtitleText: {
       fontFamily: STXingkai.regular,
-      fontSize: 18 * vh * font.scale,
+      fontSize: 18 * vh,
     }
   }
   
@@ -50,17 +50,17 @@ export const getTitleStyle = (options: GetTitleStyleOptions) => {
     default: {
       titleText: {
         fontFamily: Arkhamic.regular,
-        fontSize: 55 * vh * font.scale,
+        fontSize: 45 * vh,
       },
       subtitleText: {
         fontFamily: ArnoPro.bold,
-        fontSize: 22 * vh * font.scale,
+        fontSize: 22 * vh,
       },
       id: {
-        fontSize: 30 * vh * font.scale,
+        fontSize: 30 * vh,
       },
       unique: {
-        fontSize: 25 * vh * font.scale,
+        fontSize: 25 * vh,
       }
     },
     ru: {
@@ -72,10 +72,10 @@ export const getTitleStyle = (options: GetTitleStyleOptions) => {
       },
       titleText: {
         fontFamily: Conkordia.regular,
-        fontSize: 40 * vh * font.scale,
+        fontSize: 43 * vh,
       },
       unique: {
-        fontSize: 23 * vh * font.scale,
+        fontSize: 23 * vh,
       }
     },
     ko: {
@@ -87,11 +87,11 @@ export const getTitleStyle = (options: GetTitleStyleOptions) => {
       },
       titleText: {
         fontFamily: SanCn.bold,
-        fontSize: 38 * vh * font.scale,
+        fontSize: 38 * vh,
       },
       subtitleText: {
         fontFamily: SanCn.bold,
-        fontSize: 18 * vh * font.scale,
+        fontSize: 20 * vh,
       },
       unique: {
         marginTop: 0,
