@@ -3,25 +3,25 @@ export const donateLinks = [
     id: 'patreon',
     icon: 'patreon',
     text: 'Patreon',
-    url: 'https://www.patreon.com/arkhamdivider',
+    href: 'https://www.patreon.com/arkhamdivider',
   },
   {
     id: 'paypal',
     icon: 'paypal',
     text: 'PayPal',
-    url: 'https://paypal.me/neizerth',
+    href: 'https://paypal.me/neizerth',
   },
   {
     id: 'boosty',
     icon: 'boosty',
     text: 'Boosty',
-    url: 'https://boosty.to/arkham.divider/donate',
+    href: 'https://boosty.to/arkham.divider/donate',
   },
   {
     id: 'tbank',
     icon: 't_bank',
     text: 'T-Bank',
-    url: 'https://www.tinkoff.ru/cf/1fGlAxdTumR',
+    href: 'https://www.tinkoff.ru/cf/1fGlAxdTumR',
   }
 ]
 
@@ -30,24 +30,24 @@ export const contactLinks = [
     id: 'discord',
     icon: 'discord',
     text: 'Discord',
-    url: 'https://discord.com/channels/225349059689447425/1351550310887460926',
+    href: 'https://discord.com/channels/225349059689447425/1351550310887460926',
   },
   {
     id: 'email',
     icon: 'envelop',
     text: 'E-mail',
-    url: 'neizerth@gmail.com',
+    href: 'neizerth@gmail.com',
   },
   {
     id: 'telegram',
     icon: 'telegram',
     text: 'Telegram',
-    url: 'https://t.me/neizerth',
+    href: 'https://t.me/neizerth',
   },
   {
     id: 'github',
     icon: 'github',
     text: 'Github Issues',
-    url: 'https://github.com/neizerth/ArkhamInvestigator/issues',
+    href: 'https://github.com/neizerth/ArkhamInvestigator/issues',
   },
 ]
