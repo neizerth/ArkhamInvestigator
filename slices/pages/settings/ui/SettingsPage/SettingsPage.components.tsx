@@ -27,7 +27,7 @@ export const Row: typeof BaseRow = styled(BaseRow)`
 `
 
 export const Label: typeof Text = styled(Text)`
-  font-size: ${font.size.medium}px;
+  font-size: ${font.size.default}px;
 `
 
 export const LanguageSelect: typeof LanguagePicker = styled(LanguagePicker)`
