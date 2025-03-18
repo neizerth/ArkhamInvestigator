@@ -1,12 +1,11 @@
 import { getSkillCheckValue, sanitizeSkillCheckExpression, selectCurrentBoard, selectSkillCheckData, useAppSelector } from '@shared/lib';
 import * as C from './ExpressionValue.components';
 import { last } from 'ramda';
+import type { ViewProps } from 'react-native';
 
-export type ExpressionValueProps = {
+export type ExpressionValueProps = ViewProps;
 
-}
-
-export const ExpressionValue = ({}: ExpressionValueProps) => {
+export const ExpressionValue = (props: ExpressionValueProps) => {
 
   const data = useAppSelector(selectSkillCheckData);
   const board = useAppSelector(selectCurrentBoard);
@@ -26,7 +25,7 @@ export const ExpressionValue = ({}: ExpressionValueProps) => {
     !(validData.length === 1 && validData[0].type === 'number')
 
   return (
-    <C.Container>
+    <C.Container {...props}>
       <C.Value>
         {showValue && `=${value}`}
       </C.Value>

@@ -27,6 +27,12 @@ export const donateLinks = [
 
 export const contactLinks = [
   {
+    id: 'discord',
+    icon: 'discord',
+    text: 'Discord',
+    url: 'https://discord.com/channels/225349059689447425/1351550310887460926',
+  },
+  {
     id: 'email',
     icon: 'envelop',
     text: 'E-mail',

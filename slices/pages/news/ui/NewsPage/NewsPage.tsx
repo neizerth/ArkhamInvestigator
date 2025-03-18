@@ -1,11 +1,9 @@
 import { useAppTranslation } from '@features/i18n';
 import { ContentPage } from '@widgets/content-page';
 
-export type NewsPageProps = {
+// export type NewsPageProps = {}
 
-}
-
-export const NewsPage = ({}: NewsPageProps) => {
+export const NewsPage = () => {
   const { t } = useAppTranslation();
 
   return (

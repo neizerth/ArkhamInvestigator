@@ -3,19 +3,20 @@ import { DEVICE_FONT_SCALE, DPR, nbsp, space, wordJoiner } from '@shared/config'
 import { APP_VERSION, BUILD_ID, BUILD_VERSION } from '@shared/config/app';
 import { selectMediaVersion, useAppSelector } from '@shared/lib';
 import { Title, Text, List, Paragraph, A, Bold } from '@shared/ui';
-import { ContentPage } from '@widgets/content-page';
+import { ContentPage, type ContentPageProps } from '@widgets/content-page';
 import * as Application from 'expo-application';
 
-export type AboutPageProps = {
+export type AboutPageProps = ContentPageProps
 
-}
-
-export const AboutPage = ({}: AboutPageProps) => {
+export const AboutPage = (props: AboutPageProps) => {
   const { t } = useAppTranslation();
   const mediaVersion = useAppSelector(selectMediaVersion);
 
   return (
-    <ContentPage title={t`About`}>
+    <ContentPage 
+      {...props}
+      title={t`About`}
+    >
 
       <Paragraph>
         The information presented in this app about 

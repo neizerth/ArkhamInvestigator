@@ -10,10 +10,9 @@ import { Dropdown } from 'react-native-element-dropdown';
 import { propEq } from 'ramda';
 import { color } from '@shared/config';
 import { selectFeedback } from '@features/haptic';
+import type { ViewProps } from 'react-native';
 
-export type LanguagePickerProps = {
-
-}
+export type LanguagePickerProps = ViewProps
 
 type PickerItem = {
   label: string;
@@ -21,7 +20,7 @@ type PickerItem = {
 }
 
 
-export const LanguagePicker = ({}: LanguagePickerProps) => {
+export const LanguagePicker = (props: LanguagePickerProps) => {
   const dispatch = useAppDispatch();
   const languages = useAppSelector(selectAvailableLanguages);
   const language = useAppSelector(selectLanguage);
@@ -53,7 +52,7 @@ export const LanguagePicker = ({}: LanguagePickerProps) => {
   }, []);
   
   return (
-    <C.Container>
+    <C.Container {...props}>
       <Dropdown
         style={styles.dropdown}
         containerStyle={styles.container}
