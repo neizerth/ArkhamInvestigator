@@ -40,7 +40,7 @@ export const LanguagePicker = ({}: LanguagePickerProps) => {
 
   const renderItem = useCallback((item: PickerItem) => {
     return (
-      <C.Item style={[]}>
+      <C.Item style={[styles.item]}>
         <C.ItemText
           style={[
             styles.itemTextStyle

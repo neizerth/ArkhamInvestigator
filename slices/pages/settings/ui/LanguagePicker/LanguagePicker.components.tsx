@@ -1,4 +1,5 @@
-import { UnscaledText, Row } from "@shared/ui";
+import { size } from "@shared/config";
+import { Row, UnscaledText } from "@shared/ui";
 import { View } from "react-native";
 import styled from "styled-components/native";
 
@@ -9,7 +10,7 @@ export const Container: typeof View = styled(View)`
 `
 
 export const Item: typeof Row = styled(Row)`
-  padding: 17px;
+  padding: ${size.gap.default}px;
   justify-content: space-between;
   align-items: center;
 `
