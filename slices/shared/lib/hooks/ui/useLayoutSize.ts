@@ -2,25 +2,26 @@ import type { Box } from "@shared/model";
 import { useCallback, useRef, useState } from "react"
 import type { LayoutChangeEvent } from "react-native";
 
-type UseLayoutSizeOptions = {
-  once?: boolean
-}
-
 export const useLayoutSize = <T extends Box | undefined>(
-  defaultSize?: T, 
-  options: UseLayoutSizeOptions = {}
+  defaultSize?: T
 ) => {
-  const { once = false } = options;
   const [size, setSize] = useState<Box | undefined>(defaultSize);
-  const layoutUpdated = useRef(false);
+  const threshold = 5;
 
   const onLayout = useCallback((e: LayoutChangeEvent) => {
-    if (once && layoutUpdated.current) {
+    const { layout } = e.nativeEvent;
+    if (!layout) {
       return;
     }
-    layoutUpdated.current = true;
-    setSize(e.nativeEvent.layout);
-  }, [once]);
+    const { width = 0, height = 0 } = size || {};
+    const dY = Math.abs(height - layout.height)
+    const dX = Math.abs(width - layout.width)
+
+    if (dX < threshold && dY < threshold) {
+      return;
+    }
+    setSize(layout);
+  }, [size]);
 
   return [size, onLayout] as [
     T extends undefined ? T : Box,

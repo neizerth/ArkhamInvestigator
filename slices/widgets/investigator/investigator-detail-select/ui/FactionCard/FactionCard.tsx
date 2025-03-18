@@ -10,9 +10,11 @@ export type InvestigatorDetailSelectCardProps = ViewProps & PropsWithFaction & {
   title?: string
   subtitle?: string
   onClose?: () => void
+  onOk?: () => void
+  onCancel?: () => void
 }
 
-const MAX_HEIGHT_AREA = 87;
+const MAX_HEIGHT_AREA = 146;
 
 export const InvestigatorDetailSelectCard = ({
   faction,
@@ -20,23 +22,16 @@ export const InvestigatorDetailSelectCard = ({
   subtitle,
   children,
   onClose,
+  onOk,
+  onCancel,
+  onTouchCancel,
   ...props
 }: InvestigatorDetailSelectCardProps) => {
-  const dispatch = useAppDispatch();
   const { t } = useAppTranslation();
-
-  const back = useCallback(() => {
-    dispatch(goBack());
-  }, [dispatch]);
-
-  const cancel = useCallback(() => {
-    dispatch(removeInvestigatorSelection());
-    dispatch(goBack());
-  }, [dispatch]);
+  
   const window = useWindowDimensions();
-  const [size, onLayout] = useLayoutSize(window, {
-    once: true
-  });
+  const [size, onLayout] = useLayoutSize(window);
+
   const [containerSize, onContainerLayout] = useLayoutSize();
 
   const maxHeight = size.height + MAX_HEIGHT_AREA;
@@ -95,14 +90,20 @@ export const InvestigatorDetailSelectCard = ({
             <C.Cancel 
               text={t`Cancel`} 
               icon="dismiss"
-              onPress={cancel}
+              onPress={onCancel}
             />
             <C.OK 
               text={okText} 
               faction={faction} 
               icon="check"
-              onPress={back}
-            />
+              onPress={onOk}
+            >
+              <C.OKBackground 
+                faction={faction}
+                width={containerSize?.width || 300}
+                height={55}
+              />
+            </C.OK>
           </C.Actions>
         </C.Content>
       </C.Body>

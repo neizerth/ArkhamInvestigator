@@ -81,7 +81,7 @@ export const Actions: typeof Row = styled(Row)`
 
 
 export const Cancel: typeof Button = styled(Button)`
-  background-color: ${color.dark10};
+  background-color: ${color.dark15};
   flex: 1;
 `
 
@@ -89,11 +89,16 @@ type OKProps = ButtonProps & PropsWithFaction;
 
 export const OK: FC<OKProps> = styled(Button)`
   flex: 1;
+  position: relative;
+  overflow: hidden;
   ${({ faction }: PropsWithFaction) => css`
     background-color: ${getBackgroundColor(faction)};
   `}
 `
 
+export const OKBackground: typeof Background = styled(Background)`
+  position: absolute;
+`
 
 export const Icon: typeof FactionFontIcon = styled(FactionFontIcon)`
   font-size: 32px;

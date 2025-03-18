@@ -7,7 +7,7 @@ import { selectCurrentDetails, selectInvestigatorMedia } from "../../lib";
 import type { InvestigatorDetailItem } from "@shared/model";
 import { InvestigatorDescription } from "../investigator/InvestigatorDescription";
 import { DataSectionMemo as DataSection } from "../data";
-import { setCurrentInvestigatorDetails } from "@shared/lib/store";
+import { goBack, removeInvestigatorSelection, setCurrentInvestigatorDetails } from "@shared/lib/store";
 import { propEq } from "ramda";
 import { changeSkin, changeVariant } from "../../lib/actions";
 import { useAppTranslation } from "@features/i18n";
@@ -24,11 +24,6 @@ export const InvestigatorDetailSelect = () => {
     variants, 
     investigator
   } = useAppSelector(selectCurrentDetails);
-  
-  const goBack = useCallback(() => {
-    dispatch(setCurrentInvestigatorDetails(null));
-    router.back();
-  }, [dispatch]);
 
   const onChangeSkin = useCallback((item: DetailItem) => {
     dispatch(changeSkin(item));
@@ -37,6 +32,12 @@ export const InvestigatorDetailSelect = () => {
   const onChangeVariant = useCallback((item: DetailItem) => {
     dispatch(changeVariant(item));
   }, [dispatch])
+
+  const cancel = useCallback(() => {
+    dispatch(setCurrentInvestigatorDetails(null));
+    dispatch(removeInvestigatorSelection());
+    dispatch(goBack());
+  }, [dispatch]);
 
   if (!investigator || !details) {
     return null;
@@ -51,14 +52,16 @@ export const InvestigatorDetailSelect = () => {
 
   return (
     <C.Container>
-      <C.Outside onPress={goBack}/>
+      <C.Outside onPress={cancel}/>
       <C.Content>
-        <C.Outside onPress={goBack}/>
+        <C.Outside onPress={cancel}/>
         <C.Card 
           faction={faction}
           title={formattedName}
           subtitle={formattedSubname}
-          onClose={goBack}
+          onClose={cancel}
+          onOk={goBack}
+          onCancel={cancel}
         >
           <C.Sections>
             <InvestigatorDescription

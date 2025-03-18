@@ -1,5 +1,6 @@
 import type { PropsWithChildren } from 'react';
 import { Container, Title, Header, Value } from './DetailSection.components';
+import { useAppTranslation } from '@features/i18n';
 
 export type DetailSectionProps = PropsWithChildren & {
   title: string
@@ -8,10 +9,11 @@ export type DetailSectionProps = PropsWithChildren & {
 
 export const DetailSection = ({
   title,
-  value,
   children,
   ...props
 }: DetailSectionProps) => {
+  const { t } = useAppTranslation()
+  const value = t(props.value || '');
   return (
     <Container {...props}>
       <Header>
