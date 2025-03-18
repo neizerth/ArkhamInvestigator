@@ -5,19 +5,12 @@ export const changeVariant: AppThunkCreator = (item: InvestigatorDetailItem | nu
   (dispatch, getState) => {
     const state = getState();
     const details = selectCurrentInvestigatorDetails(state);
-    const board = selectCurrentBoard(state);
     const code = details?.investigator.code;
 
     if (!code) {
       return;
     }
-    
-    if (board) {
-      dispatch(setBoardDetails({
-        variantId: item?.value || code
-      }));
-    }
-
+  
     dispatch(setInvestigatorVariant({
       code,
       variantId: item?.value || null

@@ -32,6 +32,8 @@ export const selectCurrentDetails = createSelector(
 
       variant,
       variants,
+
+      selection
     }
   }
 )

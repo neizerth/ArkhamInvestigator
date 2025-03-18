@@ -9,7 +9,7 @@ import { InvestigatorDescription } from "../investigator/InvestigatorDescription
 import { DataSectionMemo as DataSection } from "../data";
 import { goBack, removeInvestigatorSelection, setCurrentInvestigatorDetails } from "@shared/lib/store";
 import { propEq } from "ramda";
-import { changeSkin, changeVariant } from "../../lib/actions";
+import { changeSkin, changeVariant, updateBoardDetails } from "../../lib/actions";
 import { useAppTranslation } from "@features/i18n";
 
 type DetailItem = InvestigatorDetailItem | null;
@@ -34,6 +34,7 @@ export const InvestigatorDetailSelect = () => {
   }, [dispatch])
 
   const back = useCallback(() => {
+    dispatch(updateBoardDetails());
     dispatch(goBack());
   }, [dispatch]);
   

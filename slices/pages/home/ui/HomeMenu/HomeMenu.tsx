@@ -2,7 +2,7 @@ import { goToPage, useAppDispatch } from '@shared/lib';
 import * as C from './HomeMenu.components';
 import type { Href } from 'expo-router';
 import { useCallback } from 'react';
-import { type ViewProps } from 'react-native';
+import type { ViewProps } from 'react-native';
 
 export type HomeMenuProps = ViewProps;
 
