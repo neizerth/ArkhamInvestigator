@@ -1,8 +1,7 @@
 import { useAppDispatch, useAppSelector } from '@shared/lib';
 import * as C from './LanguagePicker.components';
-import { changeLanguage, CHINESE_LANGUAGES, selectAvailableLanguages, selectLanguage } from '@features/i18n';
-import { useCallback, useEffect, useState } from 'react';
-import type { PickerChangeEvent, PickerItemInfo } from '@widgets/picker';
+import { changeLanguage, selectAvailableLanguages, selectLanguage } from '@features/i18n';
+import { useCallback } from 'react';
 
 import { languageLabels } from './labels';
 import { styles } from './LanguagePicker.style';
@@ -38,6 +37,20 @@ export const LanguagePicker = ({}: LanguagePickerProps) => {
   }));
 
   const value = items.find(propEq(language, 'value'));
+
+  const renderItem = useCallback((item: PickerItem) => {
+    return (
+      <C.Item style={[]}>
+        <C.ItemText
+          style={[
+            styles.itemTextStyle
+          ]}
+        >
+          {item.label}
+        </C.ItemText>
+      </C.Item>
+    )
+  }, []);
   
   return (
     <C.Container>
@@ -47,6 +60,10 @@ export const LanguagePicker = ({}: LanguagePickerProps) => {
         selectedTextStyle={styles.selectedTextStyle}
         itemTextStyle={styles.itemTextStyle}
         activeColor={color.dark15}
+        selectedTextProps={{
+          allowFontScaling: false
+        }}
+        renderItem={renderItem}
         data={items}
         maxHeight={300}
         labelField="label"

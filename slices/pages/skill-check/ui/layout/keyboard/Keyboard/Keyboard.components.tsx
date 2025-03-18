@@ -1,6 +1,6 @@
 import { BackspaceImage, rule } from "./images/images";
 
-import { AppText, Row as BaseRow, TouchableOpacity } from "@shared/ui";
+import { UnscaledText, Row as BaseRow, TouchableOpacity } from "@shared/ui";
 import { View, Text, type ImageProps, Image, type ViewProps } from "react-native";
 import styled, { css } from "styled-components/native";
 import * as Buttons from "../KeyboardButton";
@@ -87,7 +87,7 @@ export const Placeholder: typeof View = styled(View)`
   flex: 1;
 `
 
-export const EqualsText: typeof AppText = styled(AppText)`
+export const EqualsText: typeof UnscaledText = styled(UnscaledText)`
   color: ${color.light10};
   font-family: ${Copasetic.regular};
   font-size: ${font.size.lead}px;

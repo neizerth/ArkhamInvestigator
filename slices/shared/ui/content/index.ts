@@ -1,3 +1,3 @@
 export * from './typography'
 export * from './list'
-export * from './AppText'
+export * from '../behavior/UnscaledText'

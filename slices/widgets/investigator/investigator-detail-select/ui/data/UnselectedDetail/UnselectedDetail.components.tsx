@@ -1,5 +1,5 @@
 import { color } from "@shared/config";
-import { AppText, Icon as BaseIcon } from "@shared/ui";
+import { UnscaledText, Icon as BaseIcon } from "@shared/ui";
 import type { FC } from "react";
 import { TouchableOpacity } from "react-native";
 import type { TouchableOpacityProps } from 'react-native'
@@ -23,7 +23,7 @@ export const Container: ContainerElement = styled(TouchableOpacity)`
   
 `
 
-export const Text: typeof AppText = styled(AppText)`
+export const Text: typeof UnscaledText = styled(UnscaledText)`
   font-size: 24px;
   color: ${color.dark10}
 `

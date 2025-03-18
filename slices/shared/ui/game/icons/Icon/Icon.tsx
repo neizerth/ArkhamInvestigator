@@ -4,7 +4,7 @@ import { getIconScale } from '../../../../lib/features/game/icons'
 import { selectIcons } from '../../../../lib/store/features/icons'
 import { ArkhamIcons } from "@shared/fonts"
 import type { IconScaleType, PropsWithStroke } from '@shared/model';
-import { AppText, type AppTextProps } from '../../../content/AppText';
+import { UnscaledText, type AppTextProps } from '../../../behavior/UnscaledText';
 import { propEq } from 'ramda';
 
 export type IconProps = AppTextProps & PropsWithStroke & {
@@ -39,11 +39,11 @@ export const Icon = ({
   }
 
   return (
-    <AppText
+    <UnscaledText
       {...props}
       style={[style, fontSizeStyles]}
     >
       {contents}
-    </AppText>
+    </UnscaledText>
   );
 }

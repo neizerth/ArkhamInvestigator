@@ -34,9 +34,9 @@ export const InfoIcon: FC<DefinedIconProps> = styled(Icon)
     font-size: 26px;
   `
 
-export const DonateIcon: FC<DefinedIconProps> = styled(Icon)
+export const SupportIcon: FC<DefinedIconProps> = styled(Icon)
   .attrs({
-    icon: 'kofi'
+    icon: 'heart'
   })`
-    font-size: 38px;
+    font-size: 26px;
   `

@@ -1,8 +1,8 @@
-import { AppText, type AppTextProps } from '../AppText';
+import { UnscaledText, type AppTextProps } from '../../behavior/UnscaledText';
 export type BreakProps = AppTextProps
 
 export const Break = (props: BreakProps) => {
   return (
-    <AppText {...props}>{'\n'}</AppText>
+    <UnscaledText {...props}>{'\n'}</UnscaledText>
   );
 }

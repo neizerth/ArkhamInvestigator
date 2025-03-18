@@ -5,7 +5,7 @@ import { StyleSheet, Text, TextStyle, type TextProps } from "react-native"
 import { selectLanguage } from "../store/features/i18n/i18n"
 import type { PropsWithStyle } from "@shared/model"
 import { mergeDeepRight } from "ramda"
-import { AppText, type AppTextProps } from "@shared/ui"
+import { UnscaledText, type AppTextProps } from "@shared/ui"
 
 type WithLocaleProps = PropsWithStyle & {
   language?: string
@@ -22,7 +22,7 @@ export type WithLocaleFontOptions<Props extends WithLocaleProps> = {
 export function withLocale<Props extends WithLocaleProps = AppTextProps> (
   options: WithLocaleFontOptions<Props>
 ) {
-  const { Component = AppText } = options;
+  const { Component = UnscaledText } = options;
 
   const WithLocale: FC<Props> = props => {
     const defaultLanguage = useAppSelector(selectLanguage);

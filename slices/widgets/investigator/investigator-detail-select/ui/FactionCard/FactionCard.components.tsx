@@ -7,7 +7,7 @@ import styled, { css } from "styled-components/native";
 import type { PropsWithFaction } from "@shared/model/ui";
 import { FactionBackground, type FactionBackgroundProps } from "../FactionBackground";
 import type { Faction } from "@shared/model";
-import { FactionFontIcon, Icon as BaseIcon, AppText, Button, ButtonProps, Row } from "@shared/ui";
+import { FactionFontIcon, Icon as BaseIcon, UnscaledText, Button, ButtonProps, Row } from "@shared/ui";
 import { IconProps } from "@shared/ui";
 import { Alegreya } from "@shared/fonts"
 
@@ -133,15 +133,15 @@ export const HeaderTextContent: typeof View = styled(View)`
   width: 100%;
 `
 
-const HeaderText: typeof AppText = styled(AppText)`
+const HeaderText: typeof UnscaledText = styled(UnscaledText)`
   font-size: ${font.size.default}px;
   color: ${textColor};
 `
 
-export const Title: typeof AppText = styled(HeaderText)`
+export const Title: typeof UnscaledText = styled(HeaderText)`
   font-family: ${Alegreya.bold};
 `
 
-export const Subtitle: typeof AppText = styled(HeaderText)`
+export const Subtitle: typeof UnscaledText = styled(HeaderText)`
   font-family: ${Alegreya.italic};
 `

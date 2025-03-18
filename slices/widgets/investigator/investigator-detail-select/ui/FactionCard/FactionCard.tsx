@@ -44,8 +44,6 @@ export const InvestigatorDetailSelectCard = ({
     opacity: size ? 1 : 0
   }
 
-  const okText = t('Select {{title}}', { title: '' });
-  
   return (
     <C.Container 
       {...props} 
@@ -93,7 +91,7 @@ export const InvestigatorDetailSelectCard = ({
               onPress={onCancel}
             />
             <C.OK 
-              text={okText} 
+              text={t`Okay`} 
               faction={faction} 
               icon="check"
               onPress={onOk}

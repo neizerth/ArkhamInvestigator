@@ -33,6 +33,10 @@ export const InvestigatorDetailSelect = () => {
     dispatch(changeVariant(item));
   }, [dispatch])
 
+  const back = useCallback(() => {
+    dispatch(goBack());
+  }, [dispatch]);
+  
   const cancel = useCallback(() => {
     dispatch(setCurrentInvestigatorDetails(null));
     dispatch(removeInvestigatorSelection());
@@ -60,7 +64,7 @@ export const InvestigatorDetailSelect = () => {
           title={formattedName}
           subtitle={formattedSubname}
           onClose={cancel}
-          onOk={goBack}
+          onOk={back}
           onCancel={cancel}
         >
           <C.Sections>

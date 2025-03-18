@@ -1,6 +1,6 @@
 import { color, font, size } from "@shared/config"
 import { Alegreya } from "@shared/fonts"
-import { AppText } from "@shared/ui"
+import { UnscaledText } from "@shared/ui"
 import { View, Text } from "react-native"
 import styled from "styled-components/native"
 
@@ -18,14 +18,14 @@ export const Header: typeof View = styled(View)`
   margin-bottom: ${size.gap.default}px;
 `
 
-export const Title: typeof AppText = styled(AppText)`
+export const Title: typeof UnscaledText = styled(UnscaledText)`
   font-family: ${Alegreya.medium};
   font-size: ${font.size.default}px;
   color: ${color.light10};
 
 `
 
-export const Value: typeof AppText = styled(AppText)`
+export const Value: typeof UnscaledText = styled(UnscaledText)`
   font-family: ${Alegreya.italic};
   font-size: ${font.size.default}px;
   color: ${color.light10};

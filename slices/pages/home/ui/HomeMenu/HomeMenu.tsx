@@ -2,8 +2,7 @@ import { goToPage, useAppDispatch } from '@shared/lib';
 import * as C from './HomeMenu.components';
 import type { Href } from 'expo-router';
 import { useCallback } from 'react';
-import { Linking, type ViewProps } from 'react-native';
-import { DONATE_LINK } from '@shared/config';
+import { type ViewProps } from 'react-native';
 
 export type HomeMenuProps = ViewProps;
 
@@ -13,10 +12,6 @@ export const HomeMenu = (props: HomeMenuProps) => {
   const goTo = useCallback((href: Href) => () => {
     dispatch(goToPage(href))
   }, [dispatch]);
-
-  const donate = useCallback(() => {
-    Linking.openURL(DONATE_LINK);
-  }, []);
 
   return (
     <C.Container {...props}>
@@ -28,8 +23,8 @@ export const HomeMenu = (props: HomeMenuProps) => {
           <C.InfoIcon/>
         </C.Button>
 
-        <C.Button onPress={donate}>
-          <C.DonateIcon/>
+        <C.Button onPress={goTo('/support')}>
+          <C.SupportIcon/>
         </C.Button>
       </C.Left>
       <C.Right>

@@ -1,12 +1,12 @@
-import { AppText } from "@shared/ui";
+import { UnscaledText } from "@shared/ui";
 import { View } from "react-native";
 import styled from "styled-components/native";
 
-export const Text: typeof AppText = styled(AppText)`
+export const Text: typeof UnscaledText = styled(UnscaledText)`
   
 `
 
-export const Line: typeof AppText = styled(AppText)`
+export const Line: typeof UnscaledText = styled(UnscaledText)`
   
 `
 

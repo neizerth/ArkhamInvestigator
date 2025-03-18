@@ -1,12 +1,14 @@
 import type { TouchableOpacityProps } from '@shared/ui/behavior';
 import * as C from './Button.components';
-import type { TextStyle } from 'react-native';
+import { GestureResponderEvent, Linking, type TextStyle } from 'react-native';
+import { useCallback } from 'react';
 
 export type ButtonProps = TouchableOpacityProps & {
   text?: string
   textStyle?: TextStyle
   icon?: string
   iconStyle?: TextStyle
+  href?: string
 }
 
 export const Button = ({
@@ -15,10 +17,21 @@ export const Button = ({
   children,
   icon,
   iconStyle,
+  href,
+  onPress,
   ...props
 }: ButtonProps) => {
+  const handlePress = useCallback((e: GestureResponderEvent) => {
+    onPress?.(e);
+    if (href) {
+      Linking.openURL(href);
+    }
+  }, [onPress, href]);
   return (
-    <C.Container {...props}>
+    <C.Container 
+      {...props}
+      onPress={handlePress}
+    >
       {icon && (
         <C.Icon style={iconStyle} icon={icon}/>
       )}

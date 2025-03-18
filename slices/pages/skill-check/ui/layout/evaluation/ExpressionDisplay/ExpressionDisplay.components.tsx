@@ -1,6 +1,6 @@
 import { color } from "@shared/config";
 import { Copasetic } from "@shared/fonts"
-import { AppText, Icon, type IconProps, TouchableOpacity } from "@shared/ui";
+import { UnscaledText, Icon, type IconProps, TouchableOpacity } from "@shared/ui";
 import { Text, type TextProps, View } from "react-native";
 import styled, { css } from "styled-components/native";
 import type { PropsWithType } from "./ExpressionDisplay.types";
@@ -25,25 +25,25 @@ const typeStyle = {
   `
 } 
 
-export const Expression: FC<ExpressionProps> = styled(AppText)`
+export const Expression: FC<ExpressionProps> = styled(UnscaledText)`
   font-family: ${Copasetic.regular};
   text-align: right;
   letter-spacing: 2px;
   ${({ type = 'secondary'}: ExpressionProps) => typeStyle[type]}
 `
 
-export const OldValue: typeof AppText = styled(AppText)`
+export const OldValue: typeof UnscaledText = styled(UnscaledText)`
   color: ${color.dark20};
 `
 
-export const Value: typeof AppText = styled(AppText)`
+export const Value: typeof UnscaledText = styled(UnscaledText)`
 `
 
-export const Greater: typeof AppText = styled(AppText)`
+export const Greater: typeof UnscaledText = styled(UnscaledText)`
   color: #198754;
 `
 
-export const Lower: typeof AppText = styled(AppText)`
+export const Lower: typeof UnscaledText = styled(UnscaledText)`
   color: #dc3545;
 `
 

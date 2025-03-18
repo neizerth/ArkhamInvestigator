@@ -6,9 +6,9 @@ import { SanCn } from "@shared/fonts"
 import type { FC } from "react"
 import styled, { css } from "styled-components/native"
 import type { InvestigatorTraitsProps } from "./InvestigatorTraits.types"
-import { AppText } from "@shared/ui"
+import { UnscaledText } from "@shared/ui"
 
-export const Traits: typeof AppText = styled(AppText)`
+export const Traits: typeof UnscaledText = styled(UnscaledText)`
   text-align: center;
   color: ${color.text}
 `

@@ -1,5 +1,5 @@
 import { color, font, size } from '@shared/config';
-import { AppText } from '@shared/ui';
+import { UnscaledText } from '@shared/ui';
 import { FC } from 'react';
 import { View, Text } from 'react-native';
 import styled from 'styled-components/native';
@@ -39,7 +39,7 @@ export const Disclaimer: typeof View = styled(View)`
   right: ${size.gap.large}px;
 `
 
-export const DisclaimerText: typeof AppText = styled(AppText)`
+export const DisclaimerText: typeof UnscaledText = styled(UnscaledText)`
   color: ${color.dark10};
   font-family: ${Alegreya.regular};
   font-size: ${font.size.small}px;

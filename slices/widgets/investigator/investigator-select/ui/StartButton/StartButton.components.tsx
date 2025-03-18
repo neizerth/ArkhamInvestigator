@@ -1,6 +1,6 @@
 import { color, font, size } from "@shared/config";
 import { Alegreya } from "@shared/fonts"
-import { AppText, Icon as BaseIcon, Row, TouchableOpacity } from "@shared/ui";
+import { UnscaledText, Icon as BaseIcon, Row, TouchableOpacity } from "@shared/ui";
 import { Image } from "react-native";
 import styled from "styled-components/native";
 
@@ -27,7 +27,7 @@ export const Investigators: typeof Row = styled(Row)`
   gap: ${size.gap.small}px;
 `
 
-export const Text: typeof AppText = styled(AppText)`
+export const Text: typeof UnscaledText = styled(UnscaledText)`
   font-size: ${font.size.default}px;
   color: ${color.black};
   text-align: right;
