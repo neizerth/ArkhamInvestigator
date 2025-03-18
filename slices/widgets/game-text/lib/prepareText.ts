@@ -5,7 +5,6 @@ export const prepareText = (text: string) => {
     // typography
     .replace(/(\d+) /g, `$1${nbsp}`)
     .replace(/ (\d+)/g, `${nbsp}$1`)
-    .replace(/\] /g, `]${nbsp}`)
     // quotes
     .replace(/"([^"]+)"/g, '“$1”')
     // markdown bold
@@ -13,6 +12,7 @@ export const prepareText = (text: string) => {
     // icons
     .replace(/\[([^\]\[]+)\]/g, '<icon icon="$1"/>')
     .replace(/\/>(\S)/g, `"/>${wordJoiner}$1`)
+    .replace(/\/>(\s)/g, `"/>${nbsp}$1`)
   
   const lines = content.split('\n')
   const paragraphs = lines.length > 0 ? 
