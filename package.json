@@ -23,7 +23,8 @@
 
     "eas:android": "npm run prebuild:android && eas build -p android",
     "eas:apk": "npm run eas:android -- --profile apk",
-    "build:apk": "npm run eas:apk -- --local"
+    "build:apk": "npm run eas:apk -- --local",
+    "build:android": "npm run eas:android -- --local"
   },
   "jest": {
     "preset": "jest-expo"
