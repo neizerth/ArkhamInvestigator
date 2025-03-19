@@ -6,5 +6,6 @@ export const Container: typeof Row = styled(Row)`
   align-items: center;
   justify-content: space-between;
   padding: ${size.gap.default}px;
+  padding-bottom: 0px;
   gap: ${size.gap.medium}px;
 `

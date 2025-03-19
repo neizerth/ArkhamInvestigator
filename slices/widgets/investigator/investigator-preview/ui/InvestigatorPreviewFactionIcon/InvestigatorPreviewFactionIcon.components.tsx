@@ -12,6 +12,7 @@ export const NeutralIcon = styled(Icon)
     icon: 'neutral'
   })`
   font-size: 26px;
+  line-height: 26px;
   flex-shrink: 0;
   color: white;
 `

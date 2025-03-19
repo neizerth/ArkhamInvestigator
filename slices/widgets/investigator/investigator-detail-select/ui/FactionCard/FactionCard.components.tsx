@@ -8,7 +8,7 @@ import type { PropsWithFaction } from "@shared/model/ui";
 import { FactionBackground, type FactionBackgroundProps } from "../FactionBackground";
 import type { Faction } from "@shared/model";
 import { FactionFontIcon, Icon as BaseIcon, UnscaledText, Button, type ButtonProps, Row } from "@shared/ui";
-import type { IconProps } from "@shared/ui";
+import { IconProps, TouchableOpacity } from "@shared/ui";
 import { Alegreya } from "@shared/fonts"
 
 export type ElementWithFaction<T> = FC<T & PropsWithFaction>
@@ -116,6 +116,14 @@ export const CloseIcon: FC<CloseIconProps> = styled(BaseIcon)
   color: ${textColor};
 `
 
+export const Close: typeof TouchableOpacity = styled(TouchableOpacity)`
+  width: 48px;
+  height: 48px;
+  justify-content: center;
+  align-items: center;
+`
+
+
 export const HeaderContent: typeof View = styled(View)`
   flex: 1;
   align-items: center;
@@ -123,6 +131,7 @@ export const HeaderContent: typeof View = styled(View)`
   position: relative;
   z-index: 2;
   padding: ${size.gap.small}px ${size.gap.medium}px;
+  padding-right: 0;
   gap: ${size.gap.medium}px;
 `
 

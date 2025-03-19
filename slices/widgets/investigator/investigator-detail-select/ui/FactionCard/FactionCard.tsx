@@ -73,7 +73,9 @@ export const InvestigatorDetailSelectCard = ({
             </C.Subtitle>
           </C.HeaderTextContent>
           {onClose && (
-            <C.CloseIcon onPress={onClose}/>
+            <C.Close onPress={onClose}>
+              <C.CloseIcon/>
+            </C.Close>
           )}
         </C.HeaderContent>
       </C.Header>
@@ -85,23 +87,27 @@ export const InvestigatorDetailSelectCard = ({
             </C.ScrollContent>
           </C.ScrollContainer>
           <C.Actions>
-            <C.Cancel 
-              text={t`Cancel`} 
-              icon="dismiss"
-              onPress={onCancel}
-            />
-            <C.OK 
-              text={t`Okay`} 
-              faction={faction} 
-              icon="check"
-              onPress={onOk}
-            >
-              <C.OKBackground 
-                faction={faction}
-                width={containerSize?.width || 300}
-                height={55}
+            {onCancel && (
+              <C.Cancel 
+                text={t`Cancel`} 
+                icon="dismiss"
+                onPress={onCancel}
               />
-            </C.OK>
+            )}
+            {onOk && (
+              <C.OK 
+                text={t`Okay`} 
+                faction={faction} 
+                icon="check"
+                onPress={onOk}
+              >
+                <C.OKBackground 
+                  faction={faction}
+                  width={containerSize?.width || 300}
+                  height={55}
+                />
+              </C.OK>
+            )}
           </C.Actions>
         </C.Content>
       </C.Body>

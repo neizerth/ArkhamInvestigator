@@ -10,7 +10,6 @@ export const Container: typeof View = styled(View)`
 
 export const Content: typeof ScrollView = styled(ScrollView)`
   flex: 1;
-  padding-bottom: ${size.gap.default}px;
 `
 
 export const Separator: typeof Text = styled(Text)`

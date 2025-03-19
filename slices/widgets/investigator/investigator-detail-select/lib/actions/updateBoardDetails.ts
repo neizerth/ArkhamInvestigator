@@ -15,6 +15,6 @@ export const updateBoardDetails: AppThunkCreator = () =>
 
     dispatch(setBoardDetails({
       variantId: variantId || code,
-      skinId: skinId || code,
+      skinId: skinId || variantId || code,
     }));
   }

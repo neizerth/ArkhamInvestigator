@@ -5,13 +5,15 @@ import { propEq } from "ramda";
 
 export const getSelectedInvestigatorVariant = (
   selection: SelectedInvestigator,
-  { 
+  media: InvestigatorMedia
+) => {
+  const { 
     image, 
     variants = [],
     skins = [],
     additionalAction = false 
-  }: InvestigatorMedia
-) => {
+  } = media;
+
   const { 
     code, 
     variantId, 
@@ -23,12 +25,14 @@ export const getSelectedInvestigatorVariant = (
       skins.find(propEq(skinId, 'id')) || 
       variants.find(
         variant => getMediaVariantId(variant) === skinId
-      )
+      ) || 
+      media
     )
 
-  const skinImage = skin && 'image' in skin ? 
-    skin.image : 
-    null;
+  const skinImage = skin ? 
+    'image' in skin ? 
+      skin.image : image :
+      null;
 
   const picture = {
     id: skinId || code,

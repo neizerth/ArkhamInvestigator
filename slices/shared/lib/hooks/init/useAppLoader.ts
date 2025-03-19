@@ -3,7 +3,7 @@ import fonts from "@shared/fonts"
 
 import * as SplashScreen from 'expo-splash-screen';
 import * as ScreenOrientation from 'expo-screen-orientation'
-import { Platform } from "react-native";
+import { Platform, Appearance } from "react-native";
 import { useFonts } from "expo-font";
 
 export const useAppLoader = () => {
@@ -11,6 +11,7 @@ export const useAppLoader = () => {
 
   useEffect(() => {
     if (Platform.OS !== "web") {
+      Appearance.setColorScheme('light'),
       ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT_UP)
     }
   }, []);
