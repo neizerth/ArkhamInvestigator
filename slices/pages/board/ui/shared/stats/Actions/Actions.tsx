@@ -28,11 +28,9 @@ export const Actions = ({
   }, [dispatch, additionalAction]);
 
   const onLongPress = useCallback(() => {
-    if (value === baseValue) {
-      return false;
-    }
-    dispatch(setBaseStat('actions', value))
-  }, [dispatch, value, baseValue]);
+    dispatch(increaseBaseStat('actions'));
+    dispatch(increaseCurrentStat('actions'));
+  }, [dispatch]);
 
   const onPress = useCallback(() => {
     const actions = value === 0 ? baseValue : value - 1;
