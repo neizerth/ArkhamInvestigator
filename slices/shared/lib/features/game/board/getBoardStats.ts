@@ -1,4 +1,7 @@
-import type { InvestigatorSource } from "@shared/model";
+import type { InvestigatorMainStatType, InvestigatorSkillType, InvestigatorSource } from "@shared/model";
+
+
+type Stats = Record<InvestigatorMainStatType | InvestigatorSkillType, number>;
 
 export const getBoardStats = ({
   health,
@@ -7,7 +10,7 @@ export const getBoardStats = ({
   skill_combat,
   skill_intellect,
   skill_willpower
-}: InvestigatorSource) => ({
+}: InvestigatorSource): Stats => ({
   health,
   sanity,
   agility: skill_agility,

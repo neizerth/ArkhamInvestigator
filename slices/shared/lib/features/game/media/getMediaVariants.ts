@@ -1,6 +1,6 @@
 import type { InvestigatorDetails, InvestigatorDetailItem } from "@shared/model";
 import { getMediaVariantId } from "./getMediaVariantId";
-import { InvestigatorVariant } from "arkham-investigator-data";
+import type { InvestigatorVariant } from "arkham-investigator-data";
 
 export const getMediaVariants = (details: InvestigatorDetails) => {
   const { 

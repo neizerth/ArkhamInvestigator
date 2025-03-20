@@ -14,6 +14,7 @@ export const LeftSidebar = ({
   const boards = useAppSelector(selectInvestigatorBoards);
   const currentBoard = useAppSelector(selectCurrentBoard);
   const { height } = useContext(PortraitLayoutContext);
+  const { historyIndex } = currentBoard;
   const historyLength = currentBoard.history.length;
 
   const onUndo = useCallback(() => {
@@ -34,6 +35,10 @@ export const LeftSidebar = ({
 
   const single = boards.length === 1; 
 
+  const historyEnabled = historyLength > 0;
+  const canUndo = historyEnabled && historyIndex !== -1;
+  const canRedo = historyEnabled && historyIndex < historyLength - 1;
+  
   return (
     <C.Container 
       {...props} 
@@ -47,12 +52,14 @@ export const LeftSidebar = ({
         <C.HistoryButton 
           onPress={onRedo}
           onLongPress={returnToNow}
+          disabled={!canRedo}
         >
           <C.HistoryIcon icon="redo"/>
         </C.HistoryButton>
         <C.HistoryButton 
           onPress={onUndo}
           onLongPress={beginHistory}
+          disabled={!canUndo}
         >
           <C.HistoryIcon icon="undo"/>
         </C.HistoryButton>

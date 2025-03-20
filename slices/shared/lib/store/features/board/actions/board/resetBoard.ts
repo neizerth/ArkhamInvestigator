@@ -20,8 +20,9 @@ export const resetBoard: ActionCreator<AppThunk> = () =>
 
     const data: InvestigatorBoard = {
       ...board,
+      baseValue: board.initialValue,
       value: {
-        ...board.baseValue,
+        ...board.initialValue,
         clues: 0,
         resources: START_GAME_RESOURCES_COUNT,
         actions: NEW_TURN_ACTIONS_COUNT

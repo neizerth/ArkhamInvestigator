@@ -20,6 +20,7 @@ export type InvestigatorBoard = {
   investigator: InvestigatorSource
   picture: InvestigatorPicture
   isParallel: boolean
+  initialValue: InvestigatorBoardValues
   baseValue: InvestigatorBoardValues
   value: InvestigatorBoardValues
   unique: boolean

@@ -2,7 +2,7 @@ import { assetsSize } from "@pages/board/config";
 import { PropsWithView } from "@pages/board/model";
 import { size } from "@shared/config";
 import type { PropsWithUnit } from "@shared/model";
-import { type DefinedIconProps, Icon, TouchableOpacity } from "@shared/ui";
+import { type DefinedIconProps, Icon, TouchableOpacity, type TouchableOpacityProps } from "@shared/ui";
 import type { FC } from "react";
 import { View, type ViewProps } from "react-native";
 import styled, { css } from "styled-components/native";
@@ -57,6 +57,9 @@ export const HistoryButton: typeof TouchableOpacity = styled(TouchableOpacity)`
   height: 48px;
   justify-content: center;
   align-items: center;
+  ${({ disabled }: TouchableOpacityProps) => disabled && css`
+    opacity: 0.8;
+  `}
 `
 
 export const Undo: FC<DefinedIconProps> = styled(Icon)

@@ -11,7 +11,7 @@ export const useAppLoader = () => {
 
   useEffect(() => {
     if (Platform.OS !== "web") {
-      Appearance.setColorScheme('light'),
+      Appearance.setColorScheme('light')
       ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT_UP)
     }
   }, []);

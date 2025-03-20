@@ -2,7 +2,7 @@ import * as C from './Resources.components';
 import type { ViewProps } from 'react-native';
 import { decreaseCurrentStat, increaseCurrentStat, selectCurrentBoard, useAppDispatch, useAppSelector } from '@shared/lib';
 import { range } from 'ramda';
-import { setCurrentStat } from '@shared/lib/store/features/board/actions/stats/setCurrentStat';
+import { setCurrentStat } from '@shared/lib/store/features/board/actions/stats/current/setCurrentStat';
 import { useCallback } from 'react';
 import type { PickerChangeEvent } from '../../features';
 

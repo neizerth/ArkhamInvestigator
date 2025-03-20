@@ -15,9 +15,19 @@ export const Container: typeof BaseContainer = styled(BaseContainer)`
   padding-bottom: 3px;
 `
 
-
 export const Value: typeof BaseValue = styled(BaseValue)`
   color: ${color.sanity};
+`
+
+export const InitialDiff: typeof UI.TouchableOpacity = styled(UI.TouchableOpacity)`
+  position: absolute;
+  z-index: 1;
+  right: 15px;
+  top: -30px;
+`
+
+export const DiffValue: typeof Value = styled(Value)`
+  font-size: 30px;
 `
 
 export const Picker: typeof StatPicker = styled(StatPicker)

@@ -20,7 +20,7 @@ export const getFontStyle = ({
 }: GetValueStyleOptions) => {
   const digitsCount = value.toString().length;
 
-  const fontSize = numberSize[digitsCount] || defaultFontSize || 0;
+  const fontSize = defaultFontSize || numberSize[digitsCount] || 0;
 
   return {
     fontSize

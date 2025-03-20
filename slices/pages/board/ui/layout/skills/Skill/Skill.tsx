@@ -33,11 +33,11 @@ export const Skill = ({
   }, [])
 
   const onPressOut = useCallback(() => {
+    impactHapticFeedback('clockTick');
     setPressing(false)
   }, [])
 
   const openModal = useCallback(() => {
-    impactHapticFeedback('clockTick');
     dispatch(startSkillCheck(type));
   }, [dispatch, type])
 
