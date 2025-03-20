@@ -1,4 +1,4 @@
-import { StyleSheet, ViewProps } from 'react-native';
+import { StyleSheet, type ViewProps } from 'react-native';
 import * as C from './Overlay.components';
 import { selectShowDescription, setShowAdditionalInformation, setShowDescription, useAppDispatch, useAppSelector } from '@shared/lib';
 import { useCallback } from 'react';

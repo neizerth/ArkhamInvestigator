@@ -4,7 +4,7 @@ import { decreaseBaseStat, decreaseCurrentStat, increaseBaseStat, increaseCurren
 import { useCallback } from 'react'
 import { setCurrentStat } from '@shared/lib/store/features/board/actions/stats/current/setCurrentStat'
 import { range } from 'ramda'
-import { PickerChangeEvent } from '@widgets/picker'
+import type { PickerChangeEvent } from '@widgets/picker'
 import { opacity } from 'react-native-reanimated/lib/typescript/Colors'
 
 export const Health = (props: HealthProps) => {
