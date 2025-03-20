@@ -26,9 +26,13 @@ export const Wounds: typeof Value = styled(Value)`
 
 export const InitialDiff: typeof UI.TouchableOpacity = styled(UI.TouchableOpacity)`
   position: absolute;
-  z-index: 1;
-  right: 15px;
-  top: -30px;
+  z-index: 3;
+  right: 0px;
+  top: -45px;
+  height: 48px;
+  width: 48px;
+  justify-content: center;
+  align-items: center;
 `
 
 export const DiffValue: typeof Value = styled(Value)`
@@ -43,5 +47,5 @@ export const Picker: typeof StatPicker = styled(StatPicker)
     itemHeight: assetsSize.main
   })`
     position: absolute;
-    z-index: 2;
+    z-index: 1;
   ` 

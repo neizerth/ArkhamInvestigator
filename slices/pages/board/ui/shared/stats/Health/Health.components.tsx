@@ -12,7 +12,7 @@ export const BaseContainer = withStat(UI.Health, {
 })
 
 export const Container: typeof BaseContainer = styled(BaseContainer)`
-  position: relative;
+
 `
 
 export const Value: typeof BaseValue = styled(BaseValue)`
@@ -21,9 +21,13 @@ export const Value: typeof BaseValue = styled(BaseValue)`
 
 export const InitialDiff: typeof UI.TouchableOpacity = styled(UI.TouchableOpacity)`
   position: absolute;
-  z-index: 1;
-  right: -5px;
-  top: -30px;
+  z-index: 3;
+  right: -15px;
+  top: -45px;
+  height: 48px;
+  width: 48px;
+  justify-content: center;
+  align-items: center;
 `
 
 export const DiffValue: typeof Value = styled(Value)`
@@ -43,5 +47,5 @@ export const Picker: typeof StatPicker = styled(StatPicker)
     itemHeight: assetsSize.main
   })`
     position: absolute;
-    z-index: 2;
+    z-index: 1;
   ` 
