@@ -37,8 +37,8 @@ export const InvestigatorDetailSelect = () => {
   }, [dispatch]);
   
   const cancel = useCallback(() => {
-    dispatch(setCurrentInvestigatorDetails(null));
     dispatch(removeInvestigatorSelection());
+    dispatch(setCurrentInvestigatorDetails(null));
     dispatch(goBack());
   }, [dispatch]);
 
