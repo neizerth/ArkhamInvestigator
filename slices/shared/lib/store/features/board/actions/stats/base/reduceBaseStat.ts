@@ -19,7 +19,7 @@ export const reduceBaseStat: ActionCreator<AppThunk> = <T extends keyof Investig
     const statValue = reducer(board.baseValue[type]);
 
     const baseValue = {
-      ...board.value, 
+      ...board.baseValue, 
       [type]: statValue 
     }
 
