@@ -76,6 +76,7 @@ export const Skill = ({
             data={SKILL_RANGE}
             value={skillValue}
             onValueChanged={onChange}
+            onPress={openModal}
           />
         </C.ValueContainer>
         <C.Check 
