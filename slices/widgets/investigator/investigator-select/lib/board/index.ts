@@ -1,1 +1,1 @@
-export * from './getBoardInvestigators'
+export * from './getInvestigatorBoards'

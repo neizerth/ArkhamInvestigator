@@ -1,14 +1,12 @@
 import { formatGameText, selectCurrentInvestigatorDetails, useAppDispatch, useAppSelector } from "@shared/lib";
 import * as C from "./InvestigatorDetailSelect.components";
-import { router } from "expo-router";
 import type { Faction } from "@shared/model";
 import { useCallback } from "react";
-import { selectCurrentDetails, selectInvestigatorMedia } from "../../lib";
+import { selectCurrentDetails } from "../../lib";
 import type { InvestigatorDetailItem } from "@shared/model";
 import { InvestigatorDescription } from "../investigator/InvestigatorDescription";
 import { DataSectionMemo as DataSection } from "../data";
 import { goBack, removeInvestigatorSelection, setCurrentInvestigatorDetails } from "@shared/lib/store";
-import { propEq } from "ramda";
 import { changeSkin, changeVariant, updateBoardDetails } from "../../lib/actions";
 import { useAppTranslation } from "@features/i18n";
 

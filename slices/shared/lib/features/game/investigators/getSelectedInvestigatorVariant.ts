@@ -1,16 +1,20 @@
-import { getMediaVariantId } from "../media";
-import type { SelectedInvestigator } from "@shared/model";
+import { getMediaVariantId } from "../media/getMediaVariantId";
+import type { InvestigatorDetails, SelectedInvestigator } from "@shared/model";
 import type { Investigator as InvestigatorMedia } from "arkham-investigator-data";
 import { propEq } from "ramda";
+import { getMediaSkins, getMediaVariants } from "../media";
 
-export const getSelectedInvestigatorVariant = (
-  selection: SelectedInvestigator,
+type Options = {
+  selection: SelectedInvestigator
   media: InvestigatorMedia
-) => {
+  details: InvestigatorDetails
+}
+export const getSelectedInvestigatorOptions = ({
+  selection,
+  media,
+  details
+}: Options) => {
   const { 
-    image, 
-    variants = [],
-    skins = [],
     additionalAction = false 
   } = media;
 
@@ -20,23 +24,14 @@ export const getSelectedInvestigatorVariant = (
     skinId 
   } = selection;
 
-  const skin = skinId && 
-    (
-      skins.find(propEq(skinId, 'id')) || 
-      variants.find(
-        variant => getMediaVariantId(variant) === skinId
-      ) || 
-      media
-    )
+  const skins = getMediaSkins(details);
+  const variants = getMediaVariants(details);
 
-  const skinImage = skin ? 
-    'image' in skin ? 
-      skin.image : image :
-      null;
+  const skin = skins.find(propEq(skinId, 'id'));
 
   const picture = {
-    id: skinId || code,
-    image: skinImage || image
+    id: skin?.imageId || code,
+    image: skin?.image || media.image
   }
 
   const defaultData = {
@@ -44,27 +39,25 @@ export const getSelectedInvestigatorVariant = (
     additionalAction,
     isParallel: false
   }
+
   if (!variantId) {
     return defaultData;
   }
 
-  const variant = variants.find(
-    variant => getMediaVariantId(variant) === variantId
-  )
+  
+  const variant = variants.find(propEq(variantId, 'id'));
 
-  if (!variant) {
-    return defaultData;
-  }
+  const imageId = skin?.imageId || variant?.imageId || code;
+  const image = skin?.image || variant?.image || media.image;
 
-  const id = getMediaVariantId(variant)
   const variantPicture = {
-    id: skinId || (variant.image ? id : code),
-    image: skinImage || variant.image || image
+    id: imageId,
+    image
   }
   
   return {
     picture: variantPicture,
-    additionalAction: variant.additionalAction || additionalAction,
-    isParallel: variant.type === 'parallel'
+    additionalAction: variant?.data?.additionalAction || additionalAction,
+    isParallel: variant?.type === 'parallel'
   }
 }

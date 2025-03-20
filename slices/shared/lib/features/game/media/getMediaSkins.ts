@@ -1,7 +1,7 @@
 import type { InvestigatorDetails, InvestigatorDetailItem } from "@shared/model";
 import { isNotNil } from "ramda";
 
-export const getSkins = (details: InvestigatorDetails) => {
+export const getMediaSkins = (details: InvestigatorDetails) => {
   const { media, story, investigator } = details;
 
   if (!media) {
@@ -10,13 +10,15 @@ export const getSkins = (details: InvestigatorDetails) => {
 
   const { 
     variants = [], 
-    skins = [] 
+    skins = [],
+    image
   } = media;
   const { code } = media;
 
   const defaultSkin: InvestigatorDetailItem = {
     id: investigator.code,
     imageId: investigator.code,
+    image,
     name: story.name,
     type: 'skin',
     value: code,
@@ -24,11 +26,12 @@ export const getSkins = (details: InvestigatorDetails) => {
   }
 
   const data = skins.map((skin): InvestigatorDetailItem => {
-    const { id, name } = skin;
+    const { id, name, image } = skin;
     
     return {
       id,
       imageId: id,
+      image,
       value: id,
       name,
       type: 'skin',
@@ -42,11 +45,12 @@ export const getSkins = (details: InvestigatorDetails) => {
         return null;
       }
       const id = 'code' in variant ? variant.code : code;
-      const { name } = variant;
+      const { name, image } = variant;
       
       return {
         id,
         imageId: id,
+        image: image || media.image,
         value: id,
         name,
         type: 'skin',

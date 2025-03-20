@@ -1,15 +1,15 @@
 import { createSelector } from "@reduxjs/toolkit";
-import { selectInvestigatorMedia } from "./selectInvestigatorMedia";
-import { selectCurrentInvestigatorDetails, selectSelectedInvestigators } from "@shared/lib";
+import { selectCurrentInvestigatorDetails, selectInvestigatorMediaDetails, selectSelectedInvestigators } from "@shared/lib";
 import { propEq } from "ramda";
 
 export const selectCurrentDetails = createSelector(
   [
     selectCurrentInvestigatorDetails,
-    selectInvestigatorMedia,
+    selectInvestigatorMediaDetails,
     selectSelectedInvestigators
   ],
-  (details, { skins, variants }, investigators) => {
+  (details, mediaDetails, investigators) => {
+    const { skins, variants } = mediaDetails;
     const investigator = details?.investigator
       
     const selection = investigators.find(

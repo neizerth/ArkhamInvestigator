@@ -1,6 +1,6 @@
 import type { SelectedInvestigator } from "@shared/model";
 import { selectCurrentBoard } from "../../selectors";
-import { getSelectedInvestigatorVariant, mergeBoardStats } from "@shared/lib/features";
+import { getSelectedInvestigatorOptions, mergeBoardStats } from "@shared/lib/features";
 import { setCurrentBoard } from "./setCurrentBoard";
 import type { ActionCreator } from "@reduxjs/toolkit";
 import type { AppThunk } from "@shared/lib/store";
@@ -60,7 +60,11 @@ export const setBoardDetails: ActionCreator<AppThunk> = ({
       picture,
       additionalAction,
       isParallel
-    } = getSelectedInvestigatorVariant(item, details.media);
+    } = getSelectedInvestigatorOptions({
+      selection: item,
+      media: details.media,
+      details
+    });
 
     const stats = getBoardStats(investigator);
 
