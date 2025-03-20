@@ -4,7 +4,7 @@ import { color, gameAssets } from "@shared/config";
 import { Action, Icon, IconProps, TouchableOpacity } from "@shared/ui";
 import { View } from "react-native";
 import styled, { css } from "styled-components/native";
-import { Value as BaseValue } from '../Value';
+import { Value as BaseValue, Value } from '../Value';
 import { StatPicker } from "../StatPicker";
 import { FC } from "react";
 
@@ -35,6 +35,18 @@ export const AdditionalAction: typeof TouchableOpacity = styled(TouchableOpacity
   align-items: center;
 `
 
+export const InitialDiff: typeof TouchableOpacity = styled(TouchableOpacity)`
+  position: absolute;
+  z-index: 1;
+  right: -5px;
+  top: -30px;
+`
+
+export const DiffValue: typeof Value = styled(Value)`
+  font-size: 30px;
+  color: ${color.action};
+`
+
 
 export const ActionIcon: typeof Icon = styled(Icon)`
   font-size: 30px;
@@ -55,4 +67,6 @@ export const Picker: typeof StatPicker = styled(StatPicker)
     },
     itemHeight: assetsSize.action + 5
   })`
+    position: absolute;
+    z-index: 2;
   ` 

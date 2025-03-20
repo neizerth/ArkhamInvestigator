@@ -1,4 +1,4 @@
-import { decreaseCurrentStat, increaseCurrentStat, selectCurrentBoard, setBaseStat, useAppDispatch, useAppSelector } from '@shared/lib';
+import { decreaseBaseStat, decreaseCurrentStat, increaseBaseStat, increaseCurrentStat, selectCurrentBoard, setBaseStat, signedNumber, useAppDispatch, useAppSelector } from '@shared/lib';
 import * as C from './Actions.components';
 import type { ViewProps } from 'react-native';
 import { useCallback } from 'react';
@@ -12,8 +12,11 @@ export const Actions = ({
   ...props
 }: ActionsProps) => {
   const dispatch = useAppDispatch()
-  const { value, baseValue } = useAppSelector(selectCurrentBoard);
-  const { additionalAction, actions } = value;
+  const board = useAppSelector(selectCurrentBoard);
+  const { additionalAction, actions } = board.value;
+  const baseValue = board.baseValue.actions;
+  const initialValue = board.initialValue.actions;
+  const value = board.value.actions
 
   const onChange = useCallback(({ value }: PickerChangeEvent) => {
 
@@ -25,28 +28,39 @@ export const Actions = ({
   }, [dispatch, additionalAction]);
 
   const onLongPress = useCallback(() => {
-    dispatch(setBaseStat('actions', actions))
-  }, [dispatch, actions]);
+    dispatch(setBaseStat('actions', value))
+  }, [dispatch, value]);
 
   const onPress = useCallback(() => {
-    const value = actions === 0 ? baseValue.actions : actions - 1;
-    dispatch(decreaseCurrentStat('actions', value))
+    const actions = value === 0 ? baseValue : value - 1;
+    dispatch(setCurrentStat('actions', actions))
+  }, [dispatch, value, baseValue]);
 
-  }, [dispatch, actions, baseValue.actions]);
+  const onDiffPress = useCallback(() => {
+    dispatch(decreaseBaseStat('actions'))
+  }, [dispatch]);
 
   return (
     <C.Container {...props}>
       <C.Content>
+        {baseValue !== initialValue && (
+          <C.InitialDiff
+            onPress={onDiffPress}
+          >
+            <C.DiffValue
+              value={signedNumber(baseValue - initialValue)}
+            />
+          </C.InitialDiff>
+        )}
         <C.Picker
-          value={value.actions}
+          value={value}
           data={range(0, 101)}
           onValueChanged={onChange}
           onPress={onPress}
           onLongPress={onLongPress}
-          longPressPattern="notificationSuccess"
         />
 
-        {baseValue.additionalAction && (
+        {board.baseValue.additionalAction && (
           <C.AdditionalAction onPress={toggleAdditionalAction} pressHapticPattern="effectTick">
             <C.ActionIcon icon="investigator"/>
             {!additionalAction && (
