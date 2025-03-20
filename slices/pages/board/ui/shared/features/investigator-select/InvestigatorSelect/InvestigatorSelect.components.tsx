@@ -10,21 +10,22 @@ export const Container: typeof View = styled(View)`
   width: 60px;
   height: 60px;
   position: relative;
-`
+`;
 
-export const Value: typeof InvestigatorSelectItem = styled(InvestigatorSelectItem)`
+export const Value: typeof InvestigatorSelectItem = styled(
+	InvestigatorSelectItem,
+)`
   
-`
+`;
 
-export const Picker: typeof BasePicker = styled(BasePicker)
-  .attrs({
-    contentContainerStyle: {
-      justifyContent: 'center'
-    },
-    itemHeight: 60,
-    listStyle: {
-      borderRadius: 80
-    },
-    gap: 48
-  })`
-  `
+export const Picker: typeof BasePicker = styled(BasePicker).attrs({
+	contentContainerStyle: {
+		justifyContent: "center",
+	},
+	itemHeight: 60,
+	listStyle: {
+		borderRadius: 80,
+	},
+	gap: 48,
+})`
+  `;

@@ -1,27 +1,29 @@
-import { Image, View, type ViewProps } from "react-native";
-import styled, { css } from "styled-components/native";
-import { rule } from './images';
-import { Icon, IconButton, Row as BaseRow } from "@shared/ui";
 import { skillCheckColor } from "@pages/skill-check/config";
 import { color, font, size } from "@shared/config";
-import TopRule from './images/rule-top.svg'
+import { Row as BaseRow, Icon, IconButton } from "@shared/ui";
 import type { FC } from "react";
+import { Image, View, type ViewProps } from "react-native";
+import styled, { css } from "styled-components/native";
+import { rule } from "./images";
+import TopRule from "./images/rule-top.svg";
 
 export const Container: typeof View = styled(View)`
   padding: 40px ${size.gap.default}px 0;
-`
+`;
 
 type ContentProps = ViewProps & {
-  border?: boolean;
-}
+	border?: boolean;
+};
 export const Content: FC<ContentProps> = styled(View)`
   align-items: center;
   position: relative;
-  ${({ border }: ContentProps) => border && css`
+  ${({ border }: ContentProps) =>
+		border &&
+		css`
     border-bottom-width: 1px;
     border-bottom-color: ${skillCheckColor.border};
   `}
-`
+`;
 
 export const Controls: typeof View = styled(View)`
   position: relative;
@@ -29,8 +31,7 @@ export const Controls: typeof View = styled(View)`
   align-items: center;
   justify-content: center;
   z-index: 2;
-`
-
+`;
 
 export const CheckIcon: typeof View = styled(View)`
   position: absolute;
@@ -40,7 +41,7 @@ export const CheckIcon: typeof View = styled(View)`
   bottom: 0;
   top: 5px;
   align-items: center;
-`
+`;
 
 // export const Rule: typeof Image = styled(Image)
 //   .attrs({
@@ -51,37 +52,34 @@ export const CheckIcon: typeof View = styled(View)`
 //     height: 40px;
 //   `
 
-export const Rule: typeof TopRule = styled(TopRule)
-  .attrs({
-    height: 40,
-    width: 290
-  })`
+export const Rule: typeof TopRule = styled(TopRule).attrs({
+	height: 40,
+	width: 290,
+})`
     margin-top: -15px;
     height: 40px;
-  `
+  `;
 
 export const Stat: typeof Icon = styled(Icon)`
   font-size: 30px;
   color: ${skillCheckColor.checkIcon};
-`
+`;
 
 export const Row: typeof BaseRow = styled(BaseRow)`
   width: 100%;
   justify-content: space-between;
   align-items: center;
-`
+`;
 
 export const HistoryActions: typeof BaseRow = styled(BaseRow)`
   align-items: center;
-`
+`;
 
-
-export const Button: typeof IconButton = styled(IconButton)
-  .attrs({
-    iconStyle: {
-      color: color.light15,
-      fontSize: 20
-    }
-  })`
+export const Button: typeof IconButton = styled(IconButton).attrs({
+	iconStyle: {
+		color: color.light15,
+		fontSize: 20,
+	},
+})`
     
-  `
+  `;

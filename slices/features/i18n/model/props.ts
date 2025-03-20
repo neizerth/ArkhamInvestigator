@@ -1,3 +1,3 @@
 export type TranslatableProps = {
-  translated: boolean
-}
+	translated: boolean;
+};

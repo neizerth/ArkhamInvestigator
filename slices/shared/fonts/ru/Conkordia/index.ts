@@ -1,9 +1,9 @@
-export const ConkordiaRegular = require('./Conkordia.ttf');
+export const ConkordiaRegular = require("./Conkordia.ttf");
 
 export const Conkordia = {
-  regular: 'ConkordiaRegular'
+	regular: "ConkordiaRegular",
 };
 
 export const ConkordiaFonts = {
-  ConkordiaRegular
+	ConkordiaRegular,
 };

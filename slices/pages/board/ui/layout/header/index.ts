@@ -1,2 +1,2 @@
-export * from './InvestigatorTitle'
-export * from './BoardHeader'
+export * from "./InvestigatorTitle";
+export * from "./BoardHeader";

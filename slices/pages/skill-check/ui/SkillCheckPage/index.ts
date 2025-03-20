@@ -1,1 +1,1 @@
-export * from './SkillCheckPage';
+export * from "./SkillCheckPage";

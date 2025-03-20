@@ -1,1 +1,1 @@
-export * from './FactionDescription';
+export * from "./FactionDescription";

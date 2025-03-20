@@ -1,1 +1,1 @@
-export type ImageSizeType = 'full' | 'mini' | 'square'
+export type ImageSizeType = "full" | "mini" | "square";

@@ -1,2 +1,2 @@
-export * from './InvestigatorSelect'
-export * from './InvestigatorSelectItem'
+export * from "./InvestigatorSelect";
+export * from "./InvestigatorSelectItem";

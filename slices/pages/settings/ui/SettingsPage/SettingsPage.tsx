@@ -1,21 +1,18 @@
-import { ContentPage } from '@widgets/content-page';
-import * as C from './SettingsPage.components'
-import { useAppTranslation } from '@features/i18n';
+import { useAppTranslation } from "@features/i18n";
+import { ContentPage } from "@widgets/content-page";
+import * as C from "./SettingsPage.components";
 
 export const SettingsPage = () => {
-  const { t } = useAppTranslation();
+	const { t } = useAppTranslation();
 
-
-  return (
-    <ContentPage 
-      title={t`Settings`}
-    >
-      <C.Content>
-        <C.Row>
-          <C.Label>{t`Language`}</C.Label>
-          <C.LanguageSelect/>
-        </C.Row>
-      </C.Content>
-    </ContentPage>
-  );
-}
+	return (
+		<ContentPage title={t`Settings`}>
+			<C.Content>
+				<C.Row>
+					<C.Label>{t`Language`}</C.Label>
+					<C.LanguageSelect />
+				</C.Row>
+			</C.Content>
+		</ContentPage>
+	);
+};

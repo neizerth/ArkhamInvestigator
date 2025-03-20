@@ -1,1 +1,1 @@
-export * from './LandscapeImage';
+export * from "./LandscapeImage";

@@ -1,1 +1,1 @@
-export const cthulhuImage = require('./cthulhu.png');
+export const cthulhuImage = require("./cthulhu.png");

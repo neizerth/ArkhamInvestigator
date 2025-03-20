@@ -1,17 +1,20 @@
 import { fallbackAndroidPatterns } from "@features/haptic/config";
-import HapticFeedback, { HapticFeedbackTypes, type HapticOptions } from "react-native-haptic-feedback";
-export * from "react-native-haptic-feedback"
+import HapticFeedback, {
+	HapticFeedbackTypes,
+	type HapticOptions,
+} from "react-native-haptic-feedback";
+export * from "react-native-haptic-feedback";
 
 type HapticType = keyof typeof HapticFeedbackTypes;
 
 const Haptics = {
-  trigger(
-    type: HapticType = HapticFeedbackTypes.selection,
-    options: HapticOptions = {}
-  ) {
-    const pattern = fallbackAndroidPatterns[type] || type;
-    return HapticFeedback.trigger(pattern, options)
-  }
-}
+	trigger(
+		type: HapticType = HapticFeedbackTypes.selection,
+		options: HapticOptions = {},
+	) {
+		const pattern = fallbackAndroidPatterns[type] || type;
+		return HapticFeedback.trigger(pattern, options);
+	},
+};
 
 export default Haptics;

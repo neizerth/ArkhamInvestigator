@@ -1,2 +1,2 @@
 // export * from './landscape'
-export * from './portrait'
+export * from "./portrait";

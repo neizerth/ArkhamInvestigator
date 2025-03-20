@@ -1,1 +1,1 @@
-export * from './getPortraitLayout'
+export * from "./getPortraitLayout";

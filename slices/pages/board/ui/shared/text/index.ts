@@ -1,3 +1,3 @@
-export * from './InvestigatorText'
-export * from './InvestigatorTraits'
-export * from './InvestigatorFlavor'
+export * from "./InvestigatorText";
+export * from "./InvestigatorTraits";
+export * from "./InvestigatorFlavor";

@@ -1,2 +1,2 @@
-export * from './startGame';
-export * from './replaceInvestigator';
+export * from "./startGame";
+export * from "./replaceInvestigator";

@@ -1,1 +1,1 @@
-export * from './getSelectedInvestigatorVariant'
+export * from "./getSelectedInvestigatorVariant";

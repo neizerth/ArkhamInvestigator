@@ -1,2 +1,2 @@
-export * from './prepareText'
-export * from './getLibrary'
+export * from "./prepareText";
+export * from "./getLibrary";

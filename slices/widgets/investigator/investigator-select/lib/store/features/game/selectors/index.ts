@@ -1,1 +1,1 @@
-export * from './selectGameInvestigatorBoards';
+export * from "./selectGameInvestigatorBoards";

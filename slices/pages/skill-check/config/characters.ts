@@ -1,17 +1,17 @@
-const divide = '\u{00f7}';
+const divide = "\u{00f7}";
 
-const minus = '-';
+const minus = "-";
 
-const plus = '+';
+const plus = "+";
 
-const multiply = '\u{00D7}';
+const multiply = "\u{00D7}";
 
-const equals = '=';
+const equals = "=";
 
 export const characters = {
-  plus,
-  minus,
-  multiply,
-  divide,
-  equals
-}
+	plus,
+	minus,
+	multiply,
+	divide,
+	equals,
+};

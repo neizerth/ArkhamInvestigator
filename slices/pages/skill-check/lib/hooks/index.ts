@@ -1,1 +1,1 @@
-export * from './useSkillCheckLayoutType'
+export * from "./useSkillCheckLayoutType";

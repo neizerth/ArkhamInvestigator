@@ -1,1 +1,1 @@
-export * from './selectInvestigatorMediaDetails'
+export * from "./selectInvestigatorMediaDetails";

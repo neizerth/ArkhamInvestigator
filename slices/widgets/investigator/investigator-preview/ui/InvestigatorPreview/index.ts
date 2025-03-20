@@ -1,1 +1,1 @@
-export * from './InvestigatorPreview'
+export * from "./InvestigatorPreview";

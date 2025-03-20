@@ -1,2 +1,2 @@
-export * from './FactionBackground'
-export * from './FactionDescription'
+export * from "./FactionBackground";
+export * from "./FactionDescription";

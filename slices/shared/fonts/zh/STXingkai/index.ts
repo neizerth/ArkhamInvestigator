@@ -1,9 +1,9 @@
-export const STXingkaiRegular = require('./STXingkai.ttf');
+export const STXingkaiRegular = require("./STXingkai.ttf");
 
 export const STXingkai = {
-  regular: 'STKaitiRegular'
-}
+	regular: "STKaitiRegular",
+};
 
 export const STXingkaiFonts = {
-  STXingkaiRegular
+	STXingkaiRegular,
 };

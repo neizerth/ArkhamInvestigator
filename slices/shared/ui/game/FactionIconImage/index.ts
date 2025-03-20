@@ -1,1 +1,1 @@
-export * from './FactionIconImage';
+export * from "./FactionIconImage";

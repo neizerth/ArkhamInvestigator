@@ -3,15 +3,16 @@ import { View, type ViewProps } from "react-native";
 import styled, { css } from "styled-components/native";
 
 export type PropsWithFill = {
-  fill?: boolean
-}
+	fill?: boolean;
+};
 
 export type RowProps = ViewProps & PropsWithFill;
 
-
 export const Row: FC<RowProps> = styled(View)`
   flex-direction: row;
-  ${({ fill }: PropsWithFill) => fill && css`
+  ${({ fill }: PropsWithFill) =>
+		fill &&
+		css`
     flex: 1
   `}
-` 
+`;

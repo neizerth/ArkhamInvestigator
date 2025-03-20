@@ -1,17 +1,12 @@
-import type { PropsWithFaction } from '@shared/model/ui';
-import { Icon, type IconProps } from '../Icon/Icon';
+import type { PropsWithFaction } from "@shared/model/ui";
+import { Icon, type IconProps } from "../Icon/Icon";
 
-export type FactionFontIconProps = Omit<IconProps, 'icon'> & PropsWithFaction;
+export type FactionFontIconProps = Omit<IconProps, "icon"> & PropsWithFaction;
 export const FactionFontIcon = ({
-  faction,
-  ...props
+	faction,
+	...props
 }: FactionFontIconProps) => {
-  const icon = faction === 'mystic' ? 'mystic_alt' : faction;
+	const icon = faction === "mystic" ? "mystic_alt" : faction;
 
-  return (
-    <Icon
-      {...props}
-      icon={icon}
-    />
-  );
-}
+	return <Icon {...props} icon={icon} />;
+};

@@ -1,1 +1,1 @@
-export * from './NewsPage';
+export * from "./NewsPage";

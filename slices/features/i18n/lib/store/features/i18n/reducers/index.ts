@@ -1,2 +1,2 @@
-export * from './setAvailableLanguages'
-export * from './setTranslationsData'
+export * from "./setAvailableLanguages";
+export * from "./setTranslationsData";

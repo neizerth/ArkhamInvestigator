@@ -1,1 +1,1 @@
-export * from './selectAvailableInvestigators'
+export * from "./selectAvailableInvestigators";

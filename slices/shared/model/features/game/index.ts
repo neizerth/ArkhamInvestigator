@@ -1,3 +1,3 @@
-export * from './common'
-export * from './board'
-export * from './skillCheck'
+export * from "./common";
+export * from "./board";
+export * from "./skillCheck";

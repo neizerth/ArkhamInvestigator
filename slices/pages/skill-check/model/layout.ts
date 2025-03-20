@@ -1,1 +1,1 @@
-export type SkillCheckLayoutType = 'medium' | 'small';
+export type SkillCheckLayoutType = "medium" | "small";

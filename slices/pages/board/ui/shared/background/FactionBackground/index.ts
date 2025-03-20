@@ -1,1 +1,1 @@
-export * from './FactionBackground';
+export * from "./FactionBackground";

@@ -1,29 +1,27 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import type { EncounterSet } from '@shared/model';
-import { createSliceReducer, createSliceState } from 'redux-toolkit-helpers';
-import { loadCoreData } from '../app/actions/api';
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import type { EncounterSet } from "@shared/model";
+import { createSliceReducer, createSliceState } from "redux-toolkit-helpers";
+import { loadCoreData } from "../app/actions/api";
 
 export type IEncounterSetsState = {
-  encounterSets: EncounterSet[]
-}
+	encounterSets: EncounterSet[];
+};
 
 const initialState: IEncounterSetsState = {
-  encounterSets: []
+	encounterSets: [],
 };
 
 export const encounterSets = createSlice({
-  name: 'encounterSets',
-  ...createSliceState(initialState),
-  extraReducers(builder) {
-    builder.addCase(loadCoreData.fulfilled, (state, { payload }) => {
-      const { encounterSets } = payload;
-      state.encounterSets = encounterSets;
-    })
-  }
+	name: "encounterSets",
+	...createSliceState(initialState),
+	extraReducers(builder) {
+		builder.addCase(loadCoreData.fulfilled, (state, { payload }) => {
+			const { encounterSets } = payload;
+			state.encounterSets = encounterSets;
+		});
+	},
 });
 
-export const {
-  selectEncounterSets
-} = encounterSets.selectors;
+export const { selectEncounterSets } = encounterSets.selectors;
 
 export default encounterSets.reducer;

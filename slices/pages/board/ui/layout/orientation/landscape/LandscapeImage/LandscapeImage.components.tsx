@@ -8,4 +8,4 @@ export const Background: typeof Image = styled(Image)`
     width: ${width}px;
     height: ${height}px;
   `}
-`
+`;

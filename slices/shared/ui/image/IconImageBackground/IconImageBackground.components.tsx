@@ -3,11 +3,11 @@ import styled from "styled-components/native";
 
 export const Container: typeof View = styled(View)`
 
-`
+`;
 
 export const Group: typeof View = styled(View)`
   position: relative;
-`
+`;
 
 export const Content: typeof View = styled(View)`
   position: absolute;
@@ -17,4 +17,4 @@ export const Content: typeof View = styled(View)`
   right: 0;
   justify-content: center;
   align-items: center;
-`
+`;

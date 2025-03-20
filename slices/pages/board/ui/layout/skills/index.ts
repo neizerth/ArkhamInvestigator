@@ -1,2 +1,2 @@
-export * from './InvestigatorSkills'
-export * from './Skill'
+export * from "./InvestigatorSkills";
+export * from "./Skill";

@@ -1,7 +1,7 @@
-import { ViaodaLibreFonts } from "./ViaodaLibre"
+import { ViaodaLibreFonts } from "./ViaodaLibre";
 
-export * from './ViaodaLibre';
+export * from "./ViaodaLibre";
 
 export default {
-  ...ViaodaLibreFonts
-}
+	...ViaodaLibreFonts,
+};

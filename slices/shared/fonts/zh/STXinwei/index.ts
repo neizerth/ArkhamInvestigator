@@ -1,9 +1,9 @@
-export const STXinweiRegular = require('./STXinwei.ttf');
+export const STXinweiRegular = require("./STXinwei.ttf");
 
 export const STXinwei = {
-  regular: 'STXinweiRegular'
-}
+	regular: "STXinweiRegular",
+};
 
 export const STXinweiFonts = {
-  STXinweiRegular
+	STXinweiRegular,
 };

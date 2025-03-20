@@ -1,2 +1,2 @@
-export * from './useFactionImage'
-export * from './useStatusBar'
+export * from "./useFactionImage";
+export * from "./useStatusBar";

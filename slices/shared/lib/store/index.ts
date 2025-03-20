@@ -7,11 +7,11 @@ import {
 } from "@reduxjs/toolkit";
 
 import devToolsEnhancer from "redux-devtools-expo-dev-plugin";
-import { persistStore, persistReducer } from 'redux-persist'
+import { persistReducer, persistStore } from "redux-persist";
 
-import reducers from './reducer';
-import { serializableCheck } from './middleware' 
 import { persistStorageConfig } from "@features/storage";
+import { serializableCheck } from "./middleware";
+import reducers from "./reducer";
 
 export type AppThunk<ReturnType = void> = ThunkAction<
 	ReturnType,
@@ -32,27 +32,27 @@ export const makeStore = () => {
 		reducer,
 		middleware: (getDefaultMiddleware) =>
 			getDefaultMiddleware({
-				serializableCheck
+				serializableCheck,
 			}),
 		devTools: false,
 		enhancers: (getDefaultEnhancers) =>
-			getDefaultEnhancers().concat(devToolsEnhancer()), 
+			getDefaultEnhancers().concat(devToolsEnhancer()),
 	});
 
 	const persistor = persistStore(store);
 
 	return {
 		persistor,
-		store
-	}
+		store,
+	};
 };
 
 // Infer the type of makeStore
-export type AppStore = ReturnType<typeof makeStore>['store'];
+export type AppStore = ReturnType<typeof makeStore>["store"];
 // Infer the `RootState` and `AppDispatch` types from the store itself
 export type RootState = ReturnType<AppStore["getState"]>;
 export type AppDispatch = AppStore["dispatch"];
-export type AppThunkCreator = ActionCreator<AppThunk>
+export type AppThunkCreator = ActionCreator<AppThunk>;
 
-export * from './features'
-export * from './effects'
+export * from "./features";
+export * from "./effects";

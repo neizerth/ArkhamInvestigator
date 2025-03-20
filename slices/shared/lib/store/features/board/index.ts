@@ -1,3 +1,3 @@
-export * from './board'
-export * from './selectors'
-export * from './actions'
+export * from "./board";
+export * from "./selectors";
+export * from "./actions";

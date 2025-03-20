@@ -1,204 +1,206 @@
-import type { FlatList, ListRenderItemInfo, NativeScrollEvent, NativeSyntheticEvent, ScrollView } from 'react-native';
-import * as C from './PickerList.components';
-import { memo, useCallback, useEffect, useMemo, useRef } from 'react';
-import { useBooleanRef } from '@shared/lib/hooks';
-import type { PickerListProps } from '@widgets/picker/model';
-import { defaultRenderItemContainer } from './defaultRenderItemContainer';
-import { safeIndexOf } from '@shared/lib';
-import { impactHapticFeedback, tickFeedback } from '@features/haptic';
-import { times } from 'ramda';
-import { MIN_FINGER_SIZE } from '@widgets/picker/config';
+import { impactHapticFeedback, tickFeedback } from "@features/haptic";
+import { safeIndexOf } from "@shared/lib";
+import { useBooleanRef } from "@shared/lib/hooks";
+import { MIN_FINGER_SIZE } from "@widgets/picker/config";
+import type { PickerListProps } from "@widgets/picker/model";
+import { times } from "ramda";
+import { memo, useCallback, useEffect, useMemo, useRef } from "react";
+import type {
+	FlatList,
+	ListRenderItemInfo,
+	NativeScrollEvent,
+	NativeSyntheticEvent,
+	ScrollView,
+} from "react-native";
+import * as C from "./PickerList.components";
+import { defaultRenderItemContainer } from "./defaultRenderItemContainer";
 
 type ListScrollEvent = NativeSyntheticEvent<NativeScrollEvent>;
 
 export const PickerList = ({
-  itemContainerStyle,
-  data = [],
-  value,
-  renderItem,
-  renderItemContainer = defaultRenderItemContainer,
-  visibleItemsCount = 3,
-  onChange,
-  delayLongPress = 500,
-  onLongPress,
-  onPress,
-  gap = 0,
-  pressPattern = 'effectTick',
-  longPressPattern = 'effectTick',
-  ...props
+	itemContainerStyle,
+	data = [],
+	value,
+	renderItem,
+	renderItemContainer = defaultRenderItemContainer,
+	visibleItemsCount = 3,
+	onChange,
+	delayLongPress = 500,
+	onLongPress,
+	onPress,
+	gap = 0,
+	pressPattern = "effectTick",
+	longPressPattern = "effectTick",
+	...props
 }: PickerListProps) => {
-  const activated = useRef(false);
-  const canPress = useRef(false);
-  const uiSync = useRef(false);
-  
-  const longPressTimeout = useRef<NodeJS.Timeout>();
+	const activated = useRef(false);
+	const canPress = useRef(false);
+	const uiSync = useRef(false);
 
-  const index = useRef(0);
-  const listRef = useRef<FlatList>(null);
+	const longPressTimeout = useRef<NodeJS.Timeout>();
 
-  const itemHeight = props.itemHeight + gap;
+	const index = useRef(0);
+	const listRef = useRef<FlatList>(null);
 
-  useEffect(() => {
-    activated.current = false;
-    canPress.current = false;
-    uiSync.current = false;
-  }, [])
+	const itemHeight = props.itemHeight + gap;
 
-  const renderListItem = useCallback((info: ListRenderItemInfo<number>) => {
-    return renderItemContainer({
-      ...info,
-      itemHeight,
-      renderItem,
-      currentValue: value
-    })
-  }, [itemHeight, renderItemContainer, renderItem, value]);
+	useEffect(() => {
+		activated.current = false;
+		canPress.current = false;
+		uiSync.current = false;
+	}, []);
 
-  const defaultIndex = Math.max(
-    safeIndexOf(value, data),
-    0
-  );
+	const renderListItem = useCallback(
+		(info: ListRenderItemInfo<number>) => {
+			return renderItemContainer({
+				...info,
+				itemHeight,
+				renderItem,
+				currentValue: value,
+			});
+		},
+		[itemHeight, renderItemContainer, renderItem, value],
+	);
 
-  useEffect(() => {
-    if (!listRef.current) {
-      return;
-    }
-    if (index.current === defaultIndex) {
-      return;
-    }
-    uiSync.current = true;
+	const defaultIndex = Math.max(safeIndexOf(value, data), 0);
 
-    listRef.current?.scrollToIndex({
-      index: defaultIndex,
-      animated: true
-    });
-  }, [defaultIndex]);
+	useEffect(() => {
+		if (!listRef.current) {
+			return;
+		}
+		if (index.current === defaultIndex) {
+			return;
+		}
+		uiSync.current = true;
 
-  const snapToOffsets = useMemo(
-    () => data.map((_, i) => i * itemHeight),
-    [data, itemHeight],
-  );
+		listRef.current?.scrollToIndex({
+			index: defaultIndex,
+			animated: true,
+		});
+	}, [defaultIndex]);
 
-  const onScrollEnd = useCallback(() => {
-    
-    const nextValue = data[index.current];
+	const snapToOffsets = useMemo(
+		() => data.map((_, i) => i * itemHeight),
+		[data, itemHeight],
+	);
 
-    activated.current = false;
-    
-    if (uiSync.current) {
-      uiSync.current = false;
-      return;
-    }
+	const onScrollEnd = useCallback(() => {
+		const nextValue = data[index.current];
 
-    if (value === nextValue) {
-      return;
-    }
+		activated.current = false;
 
-    onChange?.({
-      value: nextValue,
-      index: index.current
-    })
+		if (uiSync.current) {
+			uiSync.current = false;
+			return;
+		}
 
-    
-  }, [data, onChange, value])
+		if (value === nextValue) {
+			return;
+		}
 
-  const onScroll = useCallback((e: ListScrollEvent) => {
-    canPress.current = false;
-    if (longPressTimeout.current) {
-      clearTimeout(longPressTimeout.current);
-    }
-    const offset = e.nativeEvent.contentOffset.y;
-    const scrollIndex = Math.round(offset / itemHeight);
+		onChange?.({
+			value: nextValue,
+			index: index.current,
+		});
+	}, [data, onChange, value]);
 
-    const n = Math.abs(index.current - scrollIndex);
+	const onScroll = useCallback(
+		(e: ListScrollEvent) => {
+			canPress.current = false;
+			if (longPressTimeout.current) {
+				clearTimeout(longPressTimeout.current);
+			}
+			const offset = e.nativeEvent.contentOffset.y;
+			const scrollIndex = Math.round(offset / itemHeight);
 
-    index.current = scrollIndex;
+			const n = Math.abs(index.current - scrollIndex);
 
-    if (!activated.current) {
-      return;
-    }
-    
-    times(() => {
-      impactHapticFeedback(pressPattern)
-    }, n);
-  }, [itemHeight, pressPattern]);
+			index.current = scrollIndex;
 
-  const onTouchStart = useCallback(() => {
-    activated.current = true;
-    canPress.current = true;
-    uiSync.current = false;
+			if (!activated.current) {
+				return;
+			}
 
-    if (!onLongPress) {
-      return;
-    }
-    longPressTimeout.current = setTimeout(() => {
-      if (!canPress.current) {
-        return;
-      }
-      activated.current = false
-      canPress.current = false;
-      if (onLongPress() !== false) {
-        impactHapticFeedback(longPressPattern);
-      }
-    }, delayLongPress);
-    
-  }, [onLongPress, delayLongPress, longPressPattern]);
+			times(() => {
+				impactHapticFeedback(pressPattern);
+			}, n);
+		},
+		[itemHeight, pressPattern],
+	);
 
-  const onTouchEnd = useCallback(() => {
+	const onTouchStart = useCallback(() => {
+		activated.current = true;
+		canPress.current = true;
+		uiSync.current = false;
 
-    activated.current = false;
-    if (canPress.current && onPress) {
-      clearTimeout(longPressTimeout.current);
+		if (!onLongPress) {
+			return;
+		}
+		longPressTimeout.current = setTimeout(() => {
+			if (!canPress.current) {
+				return;
+			}
+			activated.current = false;
+			canPress.current = false;
+			if (onLongPress() !== false) {
+				impactHapticFeedback(longPressPattern);
+			}
+		}, delayLongPress);
+	}, [onLongPress, delayLongPress, longPressPattern]);
 
-      if (onPress() !== false) {
-        impactHapticFeedback(pressPattern);
-      }
+	const onTouchEnd = useCallback(() => {
+		activated.current = false;
+		if (canPress.current && onPress) {
+			clearTimeout(longPressTimeout.current);
 
-      activated.current = false;
-      canPress.current = false;
+			if (onPress() !== false) {
+				impactHapticFeedback(pressPattern);
+			}
 
-      return;
-    }
+			activated.current = false;
+			canPress.current = false;
 
-    if (!longPressTimeout.current) {
-      return;
-    }
-    clearTimeout(longPressTimeout.current);
-  }, [onPress, pressPattern]);
+			return;
+		}
 
-  const getItemLayout = useCallback((_, index: number) => ({
-    length: itemHeight,
-    offset: itemHeight * index,
-    index: index,
-  }), [itemHeight])
+		if (!longPressTimeout.current) {
+			return;
+		}
+		clearTimeout(longPressTimeout.current);
+	}, [onPress, pressPattern]);
 
-  const style = {
-    height: itemHeight,
-  }
+	const getItemLayout = useCallback(
+		(_, index: number) => ({
+			length: itemHeight,
+			offset: itemHeight * index,
+			index: index,
+		}),
+		[itemHeight],
+	);
 
-  return (
-    <C.List
-      data={data}
-      ref={listRef}
-      renderItem={renderListItem}
-      style={[
-        props.style,
-        style
-      ]}
-      contentContainerStyle={[
-        props.contentContainerStyle,
-      ]}
-      keyExtractor={(item) => item.toString()}
-      getItemLayout={getItemLayout}
-      initialScrollIndex={defaultIndex}
-      onTouchStart={onTouchStart}
-      onTouchEnd={onTouchEnd}
-      onMomentumScrollEnd={onScrollEnd}
-      onScroll={onScroll}
-      snapToOffsets={snapToOffsets}
-      showsVerticalScrollIndicator={false}
-      removeClippedSubviews
-    />
-  )
-}
+	const style = {
+		height: itemHeight,
+	};
+
+	return (
+		<C.List
+			data={data}
+			ref={listRef}
+			renderItem={renderListItem}
+			style={[props.style, style]}
+			contentContainerStyle={[props.contentContainerStyle]}
+			keyExtractor={(item) => item.toString()}
+			getItemLayout={getItemLayout}
+			initialScrollIndex={defaultIndex}
+			onTouchStart={onTouchStart}
+			onTouchEnd={onTouchEnd}
+			onMomentumScrollEnd={onScrollEnd}
+			onScroll={onScroll}
+			snapToOffsets={snapToOffsets}
+			showsVerticalScrollIndicator={false}
+			removeClippedSubviews
+		/>
+	);
+};
 
 export const PickerListMemo = memo(PickerList);

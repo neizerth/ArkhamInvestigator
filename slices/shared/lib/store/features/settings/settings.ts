@@ -1,21 +1,18 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 export type ISettingsState = {
-  enableHapticFeedback: boolean
-}
+	enableHapticFeedback: boolean;
+};
 
 const initialState: ISettingsState = {
-  enableHapticFeedback: true,
-}
+	enableHapticFeedback: true,
+};
 
 export const settings = createSlice({
-  name: 'settings',
-  initialState,
-  reducers: {
-  },
-  selectors: {
-
-  }
+	name: "settings",
+	initialState,
+	reducers: {},
+	selectors: {},
 });
 
 // export const {} = settings.actions;

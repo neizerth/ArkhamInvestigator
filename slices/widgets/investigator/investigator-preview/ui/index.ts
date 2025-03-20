@@ -1,2 +1,2 @@
-export * from './InvestigatorPreview'
-export * from './InvestigatorPreviewFactionIcon'
+export * from "./InvestigatorPreview";
+export * from "./InvestigatorPreviewFactionIcon";

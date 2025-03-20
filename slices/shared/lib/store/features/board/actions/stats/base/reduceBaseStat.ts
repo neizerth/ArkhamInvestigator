@@ -1,30 +1,34 @@
-import type  { ActionCreator } from "@reduxjs/toolkit";
-import { setCurrentBoard } from "../../board/setCurrentBoard";
-import { selectCurrentBoard } from "../../../selectors/selectCurrentBoard";
+import type { ActionCreator } from "@reduxjs/toolkit";
 import type { AppThunk } from "@shared/lib/store";
-import type  { InvestigatorBoardValues } from "@shared/model";
+import type { InvestigatorBoardValues } from "@shared/model";
+import { selectCurrentBoard } from "../../../selectors/selectCurrentBoard";
+import { setCurrentBoard } from "../../board/setCurrentBoard";
 
-export const reduceBaseStat: ActionCreator<AppThunk> = <T extends keyof InvestigatorBoardValues>(
-  type: T,
-  reducer: (value: InvestigatorBoardValues[T]) => InvestigatorBoardValues[T]
-) => (dispatch, getState) => {
-    const state = getState();
+export const reduceBaseStat: ActionCreator<AppThunk> =
+	<T extends keyof InvestigatorBoardValues>(
+		type: T,
+		reducer: (value: InvestigatorBoardValues[T]) => InvestigatorBoardValues[T],
+	) =>
+	(dispatch, getState) => {
+		const state = getState();
 
-    const board = selectCurrentBoard(state);
+		const board = selectCurrentBoard(state);
 
-    if (!board) {
-      return;
-    }
-    
-    const statValue = reducer(board.baseValue[type]);
+		if (!board) {
+			return;
+		}
 
-    const baseValue = {
-      ...board.baseValue, 
-      [type]: statValue 
-    }
+		const statValue = reducer(board.baseValue[type]);
 
-    dispatch(setCurrentBoard({
-      ...board,
-      baseValue
-    }))
-  }
+		const baseValue = {
+			...board.baseValue,
+			[type]: statValue,
+		};
+
+		dispatch(
+			setCurrentBoard({
+				...board,
+				baseValue,
+			}),
+		);
+	};

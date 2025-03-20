@@ -1,1 +1,1 @@
-export type Translation = Record<string, string>
+export type Translation = Record<string, string>;

@@ -1,14 +1,13 @@
 import { useWindowDimensions } from "react-native";
-import { useColumnsCount } from "./useColumnsCount";
 import { GAP } from "../../config";
+import { useColumnsCount } from "./useColumnsCount";
 
 export const useImageSize = () => {
+	const { width } = useWindowDimensions();
+	const columnsCount = useColumnsCount();
 
-  const { width } = useWindowDimensions();
-  const columnsCount = useColumnsCount();
+	const containerWidth = width - GAP * 2;
 
-  const containerWidth = width - GAP * 2;
-
-  const contentWidth = containerWidth - (columnsCount - 1) * GAP;
-  return contentWidth / columnsCount;
-}
+	const contentWidth = containerWidth - (columnsCount - 1) * GAP;
+	return contentWidth / columnsCount;
+};

@@ -1,1 +1,1 @@
-export default localStorage
+export default localStorage;

@@ -1,2 +1,2 @@
-export * from './SettingsPage'
-export * from './LanguagePicker'
+export * from "./SettingsPage";
+export * from "./LanguagePicker";

@@ -1,2 +1,2 @@
-export * from './impactHapticFeedback'
-export * from './patterns'
+export * from "./impactHapticFeedback";
+export * from "./patterns";

@@ -1,1 +1,1 @@
-export * from './StatPicker';
+export * from "./StatPicker";

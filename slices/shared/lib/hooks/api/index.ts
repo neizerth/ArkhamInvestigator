@@ -1,1 +1,1 @@
-export * from './useInvestigatorImageUrl'
+export * from "./useInvestigatorImageUrl";

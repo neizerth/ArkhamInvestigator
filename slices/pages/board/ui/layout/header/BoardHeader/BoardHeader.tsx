@@ -1,32 +1,29 @@
-import type { ViewProps } from 'react-native';
-import * as C from './BoardHeader.components';
-import { useContext } from 'react';
-import { LayoutContext } from '@pages/board/config';
+import { LayoutContext } from "@pages/board/config";
+import { useContext } from "react";
+import type { ViewProps } from "react-native";
+import * as C from "./BoardHeader.components";
 
 export type BoardHeaderProps = ViewProps;
 
 export const BoardHeader = (props: BoardHeaderProps) => {
-  const { layout } = useContext(LayoutContext);
+	const { layout } = useContext(LayoutContext);
 
-  const gap = layout.type === 'column' ? layout.gap : 0;
-  const marginLeft = layout.type === 'row' ? -layout.gap : 0;
-  
-  const style = {
-    flexDirection: layout.type,
-    gap
-  }
+	const gap = layout.type === "column" ? layout.gap : 0;
+	const marginLeft = layout.type === "row" ? -layout.gap : 0;
 
-  const skillsStyle = {
-    marginLeft
-  }
+	const style = {
+		flexDirection: layout.type,
+		gap,
+	};
 
-  return (
-    <C.Container 
-      {...props}
-      style={[props.style, style]}
-    >
-      <C.Title/>
-      <C.Skills style={skillsStyle}/>
-    </C.Container>
-  );
-}
+	const skillsStyle = {
+		marginLeft,
+	};
+
+	return (
+		<C.Container {...props} style={[props.style, style]}>
+			<C.Title />
+			<C.Skills style={skillsStyle} />
+		</C.Container>
+	);
+};

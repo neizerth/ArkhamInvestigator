@@ -1,1 +1,1 @@
-export * from './TouchableOpacity';
+export * from "./TouchableOpacity";

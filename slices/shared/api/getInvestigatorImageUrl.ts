@@ -3,18 +3,17 @@ import { HAVE_AVIF_SUPPORT } from "@shared/config";
 import { APP_VERSION } from "@shared/config/app";
 import type { ImageSizeType } from "@shared/model";
 
-
 type GetInvestigatorImageUrlOptions = {
-  code: string
-  type: ImageSizeType
-  qs?: string
-}
+	code: string;
+	type: ImageSizeType;
+	qs?: string;
+};
 export const getInvestigatorImageUrl = ({
-  code,
-  type,
-  qs = `v=${APP_VERSION}`
+	code,
+	type,
+	qs = `v=${APP_VERSION}`,
 }: GetInvestigatorImageUrlOptions) => {
-  const format = 'jpg';
-  const url = `${INVESTIGATORS_API_URL}/images/${format}/${type}/${code}.${format}?${qs}`
-  return url;
-}
+	const format = "jpg";
+	const url = `${INVESTIGATORS_API_URL}/images/${format}/${type}/${code}.${format}?${qs}`;
+	return url;
+};

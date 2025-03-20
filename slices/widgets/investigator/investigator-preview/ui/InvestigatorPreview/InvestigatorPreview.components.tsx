@@ -1,26 +1,22 @@
-import { 
-  Image as NativeImage,
-  View 
-} from "react-native";
-import type { ImageProps, ViewProps } from 'react-native'
-import styled, { css } from "styled-components/native";
 import type { Faction } from "@shared/model";
 import type { FC } from "react";
+import { Image as NativeImage, View } from "react-native";
+import type { ImageProps, ViewProps } from "react-native";
+import styled, { css } from "styled-components/native";
 
 import { color, factionColor, font, size } from "@shared/config";
-import Color from "color";
+import { Alegreya } from "@shared/fonts";
+import { ArkhamDigits } from "@shared/fonts";
 import type { PropsWithFaction } from "@shared/model/ui";
-import { UnscaledText, Icon, TouchableOpacity } from "@shared/ui";
-import { Alegreya } from "@shared/fonts"
+import { Icon, TouchableOpacity, UnscaledText } from "@shared/ui";
+import Color from "color";
 import { Text } from "react-native";
-import { ArkhamDigits } from "@shared/fonts"
-
 
 const getSelectionColor = (faction: Faction) => {
-  const color = factionColor[faction].darkColor;
+	const color = factionColor[faction].darkColor;
 
-  return Color(color).alpha(0.3).string()
-}
+	return Color(color).alpha(0.3).string();
+};
 
 export const Selection: FC<ViewProps & PropsWithFaction> = styled(View)`
   position: absolute;
@@ -33,7 +29,7 @@ export const Selection: FC<ViewProps & PropsWithFaction> = styled(View)`
     border: 5px solid ${factionColor[faction].border};
     background-color: ${getSelectionColor(faction)};
   `}
-`
+`;
 
 export const DisabledOverlay: typeof View = styled(View)`
   position: absolute;
@@ -43,30 +39,28 @@ export const DisabledOverlay: typeof View = styled(View)`
   right: 0;
   bottom: 0;
   background-color: rgba(255, 255, 255, 0.3);
-`
+`;
 
 type SizeProps = {
-  size: number
-}
+	size: number;
+};
 
-export const Image: FC<ImageProps & SizeProps> = styled(NativeImage)
-  .attrs({
-    resizeMode: 'cover',
-    resizeMethod: 'resize'
-  })`
+export const Image: FC<ImageProps & SizeProps> = styled(NativeImage).attrs({
+	resizeMode: "cover",
+	resizeMethod: "resize",
+})`
     ${({ size }: SizeProps) => css`
       aspect-ratio: 1;
       width: ${size}px;
       height: ${size}px;
     `}
-  ` 
-
+  `;
 
 export const Container: typeof TouchableOpacity = styled(TouchableOpacity)`
   position: relative;
   overflow: hidden;
   background-color: rgba(0, 0, 0, 0.2);
-`
+`;
 
 export const Info: typeof View = styled(View)`
   position: absolute;
@@ -83,7 +77,7 @@ export const Info: typeof View = styled(View)`
   border-radius: 0 ${size.borderRadius.large}px 0 0;
   padding: 2px 8px;
   padding-top: 2px;
-`
+`;
 
 export const SelectedCount: typeof View = styled(View)`
   position: absolute;
@@ -98,18 +92,18 @@ export const SelectedCount: typeof View = styled(View)`
   background-color: ${color.light10};
   border-radius: ${size.borderRadius.large}px;
   padding: 4px;
-`
+`;
 
 export const Count: typeof UnscaledText = styled(UnscaledText)`
   font-family: ${ArkhamDigits.fill};
   font-size: 12px;
-`
+`;
 
 export const ExtraIcon: typeof Icon = styled(Icon)`
   font-size: 22px;
   text-align: center;
   color: ${color.white}
-`
+`;
 
 export const OptionsInfo: FC<ViewProps & PropsWithFaction> = styled(View)`
   position: absolute;
@@ -122,4 +116,4 @@ export const OptionsInfo: FC<ViewProps & PropsWithFaction> = styled(View)`
     background: ${factionColor[faction].border};
   `}
   transform: rotate(45deg);
-`
+`;

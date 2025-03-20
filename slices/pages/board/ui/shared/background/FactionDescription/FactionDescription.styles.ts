@@ -3,38 +3,38 @@ import type { RuleSet } from "styled-components";
 import { css } from "styled-components/native";
 
 export const getFactionStyle = (faction: Faction) => {
-  const ruleSet: Record<Faction, RuleSet> = {
-    neutral: css`
+	const ruleSet: Record<Faction, RuleSet> = {
+		neutral: css`
       padding-left: 10%;
       padding-right: 12%;
       padding-bottom: 15%;
     `,
-    mystic: css`
+		mystic: css`
       padding-left: 12%;
       padding-right: 12%;
       padding-bottom: 10%;
     `,
-    rogue: css`
+		rogue: css`
       padding-left: 10%;
       padding-right: 18%;
       padding-bottom: 21%;
     `,
-    survivor: css`
+		survivor: css`
       padding-left: 7%;
       padding-right: 7%;
       padding-bottom: 5%;
     `,
-    seeker: css`
+		seeker: css`
       padding-left: 12%;
       padding-right: 15%;
       padding-bottom: 5%;
     `,
-    guardian: css`
+		guardian: css`
       padding-left: 12%;
       padding-right: 15%;
       padding-bottom: 5%;
-    `
-  }
+    `,
+	};
 
-  return ruleSet[faction];
-}
+	return ruleSet[faction];
+};

@@ -1,9 +1,9 @@
-export const ViaodaLibreRegular = require('./ViaodaLibre-Regular.ttf');
+export const ViaodaLibreRegular = require("./ViaodaLibre-Regular.ttf");
 
 export const ViaodaLibre = {
-  regular: 'ViaodaLibreRegular'
+	regular: "ViaodaLibreRegular",
 };
 
 export const ViaodaLibreFonts = {
-  ViaodaLibreRegular
+	ViaodaLibreRegular,
 };

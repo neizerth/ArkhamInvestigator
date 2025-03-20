@@ -1,1 +1,1 @@
-export * from './addCurrentSkillCheckToHistory'
+export * from "./addCurrentSkillCheckToHistory";

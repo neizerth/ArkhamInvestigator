@@ -1,1 +1,1 @@
-export type AppVersionType = 'media' | 'build' | 'codebase'
+export type AppVersionType = "media" | "build" | "codebase";

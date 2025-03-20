@@ -1,17 +1,10 @@
-import { List, type ListProps } from '../List';
-import { ListMarker } from '../ListMarker';
+import { List, type ListProps } from "../List";
+import { ListMarker } from "../ListMarker";
 
-export type UnorderedListProps = ListProps
+export type UnorderedListProps = ListProps;
 
-const renderMarker = (index: number) => (
-  <ListMarker>{index + 1}</ListMarker>
-)
+const renderMarker = (index: number) => <ListMarker>{index + 1}</ListMarker>;
 
 export const OrderedList = (props: UnorderedListProps) => {
-  return (
-    <List
-      {...props}
-      renderMarker={renderMarker}
-    />
-  );
-}
+	return <List {...props} renderMarker={renderMarker} />;
+};

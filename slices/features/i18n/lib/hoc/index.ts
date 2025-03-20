@@ -1,1 +1,1 @@
-export * from './withLocale'
+export * from "./withLocale";

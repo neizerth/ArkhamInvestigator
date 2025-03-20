@@ -1,1 +1,1 @@
-export * from './withStat'
+export * from "./withStat";

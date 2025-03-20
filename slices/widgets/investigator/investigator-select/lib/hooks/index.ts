@@ -1,2 +1,2 @@
-export * from './useColumnsCount'
-export * from './useImageSize'
+export * from "./useColumnsCount";
+export * from "./useImageSize";

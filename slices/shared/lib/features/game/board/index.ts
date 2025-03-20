@@ -1,2 +1,2 @@
-export * from './mergeBoardStats'
-export * from './getBoardStats'
+export * from "./mergeBoardStats";
+export * from "./getBoardStats";

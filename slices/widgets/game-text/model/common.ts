@@ -1,2 +1,1 @@
-
-export type ComponentStyleMap = Record<string, object | undefined>
+export type ComponentStyleMap = Record<string, object | undefined>;

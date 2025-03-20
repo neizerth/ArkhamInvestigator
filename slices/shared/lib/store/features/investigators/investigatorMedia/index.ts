@@ -1,1 +1,1 @@
-export * from './investigatorMedia'
+export * from "./investigatorMedia";

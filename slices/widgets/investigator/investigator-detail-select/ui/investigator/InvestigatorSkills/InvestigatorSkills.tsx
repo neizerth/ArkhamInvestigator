@@ -1,26 +1,27 @@
-import type { InvestigatorSource } from '@shared/model';
-import { Agility, Combat, Container, Intellect, Willpower } from './InvestigatorSkills.components';
+import type { InvestigatorSource } from "@shared/model";
+import {
+	Agility,
+	Combat,
+	Container,
+	Intellect,
+	Willpower,
+} from "./InvestigatorSkills.components";
 
 export type InvestigatorSkillsProps = {
-  investigator: InvestigatorSource
-}
+	investigator: InvestigatorSource;
+};
 
 export const InvestigatorSkills = ({
-  investigator
+	investigator,
 }: InvestigatorSkillsProps) => {
-
-  const {
-    skill_willpower,
-    skill_intellect,
-    skill_combat,
-    skill_agility
-  } = investigator
-  return (
-    <Container>
-      <Willpower value={skill_willpower}/>
-      <Intellect value={skill_intellect}/>
-      <Combat value={skill_combat}/>
-      <Agility value={skill_agility}/>
-    </Container>
-  );
-}
+	const { skill_willpower, skill_intellect, skill_combat, skill_agility } =
+		investigator;
+	return (
+		<Container>
+			<Willpower value={skill_willpower} />
+			<Intellect value={skill_intellect} />
+			<Combat value={skill_combat} />
+			<Agility value={skill_agility} />
+		</Container>
+	);
+};

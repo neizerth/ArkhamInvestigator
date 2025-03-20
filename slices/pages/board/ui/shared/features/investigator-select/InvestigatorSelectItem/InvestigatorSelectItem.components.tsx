@@ -3,7 +3,12 @@ import type { PropsWithFaction } from "@shared/model";
 import { IconNumber } from "@shared/ui";
 import { PickerMemo as BasePicker } from "@widgets/picker";
 import type { FC } from "react";
-import { Image as BaseImage, type ImageProps as BaseImageProps, View, type ViewProps } from "react-native";
+import {
+	Image as BaseImage,
+	type ImageProps as BaseImageProps,
+	View,
+	type ViewProps,
+} from "react-native";
 import styled, { css } from "styled-components/native";
 
 const size = 60;
@@ -18,10 +23,10 @@ export const Container: FC<ContainerProps> = styled(View)`
   height: ${size}px;
   border: ${borderSize}px solid black;
   border-radius: ${size}px;
-  ${({ faction }: PropsWithFaction ) => css`
+  ${({ faction }: PropsWithFaction) => css`
     border-color: ${factionColor[faction].border};
   `}
-`
+`;
 
 export const Overlay: typeof View = styled(View)`
   position: absolute;
@@ -36,16 +41,16 @@ export const Overlay: typeof View = styled(View)`
 
   border-radius: ${imageSize}px;
   background-color: rgba(0, 0, 0, 0.4);
-`
+`;
 
 export const Id: typeof IconNumber = styled(IconNumber)`
   color: ${color.light10};
   font-size: ${font.size.large}px;
-`
+`;
 
 type ImageProps = BaseImageProps & {
-  active?: boolean
-}
+	active?: boolean;
+};
 
 export const Image: FC<ImageProps> = styled(BaseImage)`
   position: absolute;
@@ -54,8 +59,9 @@ export const Image: FC<ImageProps> = styled(BaseImage)`
   border-radius: ${imageSize}px;
   width: ${imageSize}px;
   height: ${imageSize}px;
-  ${({ active }: ImageProps) => !active && css`
+  ${({ active }: ImageProps) =>
+		!active &&
+		css`
     filter: grayscale(1);
   `}
-`
-
+`;

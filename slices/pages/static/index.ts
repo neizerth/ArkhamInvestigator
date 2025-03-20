@@ -1,2 +1,2 @@
-export * from './about'
-export * from './support'
+export * from "./about";
+export * from "./support";

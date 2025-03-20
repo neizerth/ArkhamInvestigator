@@ -1,91 +1,83 @@
-import { 
-  getInvestigatorImageUrl as getImageUrl 
-} from "@shared/api/getInvestigatorImageUrl"
-import type { Faction, InvestigatorSource } from "@shared/model"
-import * as C from "./InvestigatorPreview.components"
-import type { GestureResponderEvent, TouchableOpacityProps } from "react-native"
-import { useImageSize } from "@widgets/investigator/investigator-select/lib/hooks"
-import type { Investigator as InvestigatorMedia } from "arkham-investigator-data"
-import { InvestigatorPreviewFactionIcon as FactionIcon } from "../InvestigatorPreviewFactionIcon"
-import { memo, useCallback } from "react"
+import { getInvestigatorImageUrl as getImageUrl } from "@shared/api/getInvestigatorImageUrl";
+import type { Faction, InvestigatorSource } from "@shared/model";
+import { useImageSize } from "@widgets/investigator/investigator-select/lib/hooks";
+import type { Investigator as InvestigatorMedia } from "arkham-investigator-data";
+import { memo, useCallback } from "react";
+import type {
+	GestureResponderEvent,
+	TouchableOpacityProps,
+} from "react-native";
+import { InvestigatorPreviewFactionIcon as FactionIcon } from "../InvestigatorPreviewFactionIcon";
+import * as C from "./InvestigatorPreview.components";
 
 export type InvestigatorPreviewProps = TouchableOpacityProps & {
-  investigator: InvestigatorSource
-  media?: InvestigatorMedia
-  selected?: boolean
-  selectedCount?: number
-  imageId?: string
-  icon?: string
-  size?: number
-  showIcon?: boolean
-  showOptionsInfo?: boolean
-}
+	investigator: InvestigatorSource;
+	media?: InvestigatorMedia;
+	selected?: boolean;
+	selectedCount?: number;
+	imageId?: string;
+	icon?: string;
+	size?: number;
+	showIcon?: boolean;
+	showOptionsInfo?: boolean;
+};
 
 export const InvestigatorPreview = ({
-  showIcon = true,
-  showOptionsInfo = true,
-  investigator,
-  selected,
-  selectedCount = 0,
-  icon,
-  media,
-  disabled,
-  ...props
+	showIcon = true,
+	showOptionsInfo = true,
+	investigator,
+	selected,
+	selectedCount = 0,
+	icon,
+	media,
+	disabled,
+	...props
 }: InvestigatorPreviewProps) => {
-  const defaultSize = useImageSize();
-  const size = props.size || defaultSize;
+	const defaultSize = useImageSize();
+	const size = props.size || defaultSize;
 
-  const imageId = props.imageId || investigator.code;
-  const faction = investigator.faction_code as Faction;
-  const uri = getImageUrl({
-    code: imageId, 
-    type: 'square'
-  })
-  const source = { uri }
+	const imageId = props.imageId || investigator.code;
+	const faction = investigator.faction_code as Faction;
+	const uri = getImageUrl({
+		code: imageId,
+		type: "square",
+	});
+	const source = { uri };
 
-  const showOptions = showOptionsInfo && (media?.variants || media?.skins);
+	const showOptions = showOptionsInfo && (media?.variants || media?.skins);
 
-  const onPress = useCallback((event: GestureResponderEvent) => {
-    if (disabled) {
-      return;
-    }
-    props.onPress?.(event);
-  }, [props.onPress, disabled])
-  
-  return (
-    <C.Container 
-      {...props} 
-      onPress={onPress}
-    >
-      {showOptions && (
-        <C.OptionsInfo faction={faction}/>
-      )}
-      <C.Image 
-        source={source}
-        size={size}
-      />
-      {showIcon && (
-        <C.Info>
-          {icon ? (
-            <C.ExtraIcon icon={icon}/>
-            ) : (
-            <FactionIcon faction={faction}/>
-          )}
-        </C.Info>
-      )}
-      {disabled && (
-        <C.DisabledOverlay/>
-      )}
-      {selected && (
-        <C.Selection faction={faction}/>
-      )}
-      {selectedCount > 1 && (
-        <C.SelectedCount>
-          <C.Count>{selectedCount}</C.Count>
-        </C.SelectedCount>
-      )}
-    </C.Container>
-  )
-}
+	const onPress = useCallback(
+		(event: GestureResponderEvent) => {
+			if (disabled) {
+				return;
+			}
+			props.onPress?.(event);
+		},
+		[props.onPress, disabled],
+	);
 
-export const InvestigatorPreviewMemo = memo(InvestigatorPreview); 
+	return (
+		<C.Container {...props} onPress={onPress}>
+			{showOptions && <C.OptionsInfo faction={faction} />}
+			<C.Image source={source} size={size} />
+			{showIcon && (
+				<C.Info>
+					{icon ? (
+						<C.ExtraIcon icon={icon} />
+					) : (
+						<FactionIcon faction={faction} />
+					)}
+				</C.Info>
+			)}
+			{disabled && <C.DisabledOverlay />}
+			{selected && <C.Selection faction={faction} />}
+			{selectedCount > 1 && (
+				<C.SelectedCount>
+					<C.Count>{selectedCount}</C.Count>
+				</C.SelectedCount>
+			)}
+		</C.Container>
+	);
+};
+
+export const InvestigatorPreviewMemo = memo(InvestigatorPreview);

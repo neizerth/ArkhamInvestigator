@@ -1,40 +1,43 @@
-import type { InvestigatorBoardStat } from "./board"
+import type { InvestigatorBoardStat } from "./board";
 
 export type SkillCheckHistoryItem = {
-  id: string
-  type: InvestigatorBoardStat
-  expression: SkillCheckItem[]
-  value: number
-}
+	id: string;
+	type: InvestigatorBoardStat;
+	expression: SkillCheckItem[];
+	value: number;
+};
 
-export type SkillCheckOperator = 'add' | 'subtract' | 'multiply' | 'divide';
+export type SkillCheckOperator = "add" | "subtract" | "multiply" | "divide";
 
-export type SkillCheckType = 'operator' | 'number' | 'stat' | 'command'
+export type SkillCheckType = "operator" | "number" | "stat" | "command";
 
 export type SkillCheck = {
-  type: InvestigatorBoardStat
-  data: SkillCheckItem[]
-}
+	type: InvestigatorBoardStat;
+	data: SkillCheckItem[];
+};
 
 export type OperatorSkillCheckItem = {
-  id: string
-  type: 'operator'
-  operator: SkillCheckOperator
-}
+	id: string;
+	type: "operator";
+	operator: SkillCheckOperator;
+};
 
 export type NumberSkillCheckItem = {
-  id: string
-  type: 'number'
-  value: number,
-  removable?: boolean
-}
+	id: string;
+	type: "number";
+	value: number;
+	removable?: boolean;
+};
 
 export type StatSkillCheckItem = {
-  id: string
-  type: 'stat',
-  statType: InvestigatorBoardStat
-}
+	id: string;
+	type: "stat";
+	statType: InvestigatorBoardStat;
+};
 
-export type SkillCheckItem = OperatorSkillCheckItem | NumberSkillCheckItem | StatSkillCheckItem;
+export type SkillCheckItem =
+	| OperatorSkillCheckItem
+	| NumberSkillCheckItem
+	| StatSkillCheckItem;
 
-export type SkillCheckCommandType = 'clear' | 'clear-last' | 'empty'
+export type SkillCheckCommandType = "clear" | "clear-last" | "empty";

@@ -1,3 +1,3 @@
-export const rule = require('./rule.png')
+export const rule = require("./rule.png");
 
-export { default as BackspaceImage } from './backspace.svg' 
+export { default as BackspaceImage } from "./backspace.svg";

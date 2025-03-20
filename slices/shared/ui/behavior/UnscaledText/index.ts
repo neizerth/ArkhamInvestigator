@@ -1,1 +1,1 @@
-export * from './UnscaledText';
+export * from "./UnscaledText";

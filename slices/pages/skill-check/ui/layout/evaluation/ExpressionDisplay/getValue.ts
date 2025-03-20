@@ -1,3 +1,1 @@
-export const getValue = () => {
-  
-}
+export const getValue = () => {};

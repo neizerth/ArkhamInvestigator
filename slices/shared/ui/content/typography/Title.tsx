@@ -9,4 +9,4 @@ export const Title: typeof UnscaledText = styled(UnscaledText)`
   margin: ${size.gap.default}px 0px;
   color: ${color.light10};
   text-align: center;
-`
+`;

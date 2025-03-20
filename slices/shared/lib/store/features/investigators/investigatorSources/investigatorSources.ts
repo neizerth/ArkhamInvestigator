@@ -1,31 +1,29 @@
-import { createSlice } from '@reduxjs/toolkit';
-import type { InvestigatorSource } from '@shared/model';
-import { createSliceState } from 'redux-toolkit-helpers';
-import { loadCoreData } from '../../app/actions/api';
-import { prop } from 'ramda';
+import { createSlice } from "@reduxjs/toolkit";
+import type { InvestigatorSource } from "@shared/model";
+import { prop } from "ramda";
+import { createSliceState } from "redux-toolkit-helpers";
+import { loadCoreData } from "../../app/actions/api";
 
 export type IInvestigatorSourcesState = {
-  investigatorSources: InvestigatorSource[]
-}
+	investigatorSources: InvestigatorSource[];
+};
 
 const initialState: IInvestigatorSourcesState = {
-  investigatorSources: []
+	investigatorSources: [],
 };
 
 export const investigatorSources = createSlice({
-  name: 'investigatorSources',
-  ...createSliceState(initialState),
-  extraReducers(builder) {
-    builder.addCase(loadCoreData.fulfilled, (state, { payload }) => {
-      const { stories } = payload;
+	name: "investigatorSources",
+	...createSliceState(initialState),
+	extraReducers(builder) {
+		builder.addCase(loadCoreData.fulfilled, (state, { payload }) => {
+			const { stories } = payload;
 
-      state.investigatorSources = stories.flatMap(prop('investigators'));
-    })
-  }
+			state.investigatorSources = stories.flatMap(prop("investigators"));
+		});
+	},
 });
 
-export const {
-  selectInvestigatorSources
-} = investigatorSources.selectors;
+export const { selectInvestigatorSources } = investigatorSources.selectors;
 
 export default investigatorSources.reducer;

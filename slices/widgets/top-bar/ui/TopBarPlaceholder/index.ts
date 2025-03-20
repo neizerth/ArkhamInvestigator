@@ -1,1 +1,1 @@
-export * from './TopBarPlaceholder';
+export * from "./TopBarPlaceholder";

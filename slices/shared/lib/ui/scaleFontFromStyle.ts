@@ -1,16 +1,18 @@
-import { type StyleProp, StyleSheet, type TextStyle } from "react-native";
 import { font } from "@shared/config";
+import { type StyleProp, StyleSheet, type TextStyle } from "react-native";
 
-export const scaleFontFromStyle = (scale: number, style?: StyleProp<TextStyle>) => {
+export const scaleFontFromStyle = (
+	scale: number,
+	style?: StyleProp<TextStyle>,
+) => {
+	const styleSheet = StyleSheet.flatten(style);
 
-  const styleSheet = StyleSheet.flatten(style);
+	const fontSize = styleSheet?.fontSize || font.size.default;
 
-  const fontSize = styleSheet?.fontSize || font.size.default;
+	const scaledFontSize = fontSize * scale;
 
-  const scaledFontSize = fontSize * scale;
-  
-  return {
-    fontSize,
-    scaledFontSize
-  };
-}
+	return {
+		fontSize,
+		scaledFontSize,
+	};
+};

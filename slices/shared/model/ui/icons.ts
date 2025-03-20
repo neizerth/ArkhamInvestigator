@@ -1,2 +1,6 @@
-
-export type IconScaleType = 'fixedHeight' | 'maxHeight' | 'circle' | 'auto' | false;
+export type IconScaleType =
+	| "fixedHeight"
+	| "maxHeight"
+	| "circle"
+	| "auto"
+	| false;

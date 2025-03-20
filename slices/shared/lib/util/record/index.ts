@@ -1,1 +1,1 @@
-export * from './getKeyConfig'
+export * from "./getKeyConfig";

@@ -8,4 +8,4 @@ export const Container: typeof Row = styled(Row)`
   padding: ${size.gap.default}px;
   padding-bottom: 0px;
   gap: ${size.gap.medium}px;
-`
+`;

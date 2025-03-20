@@ -1,3 +1,3 @@
-export * from './Outside'
-export * from './TouchableOpacity'
-export * from './Loader'
+export * from "./Outside";
+export * from "./TouchableOpacity";
+export * from "./Loader";

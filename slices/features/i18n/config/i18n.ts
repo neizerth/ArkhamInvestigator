@@ -3,7 +3,7 @@ import { initReactI18next } from "react-i18next";
 
 export const DEFAULT_LANGUAGE = "en";
 
-export const I18N_NAMESAPCE = 'core';
+export const I18N_NAMESAPCE = "core";
 
 export const i18next = createInstance();
 

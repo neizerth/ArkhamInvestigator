@@ -1,2 +1,2 @@
-export * from './getMaxBreakpoint'
-export * from './getOrientationType'
+export * from "./getMaxBreakpoint";
+export * from "./getOrientationType";

@@ -2,46 +2,53 @@ import type { ActionCreator } from "@reduxjs/toolkit";
 import { getSkillCheckValue } from "@shared/lib/features";
 import type { AppThunk } from "@shared/lib/store";
 import type { SkillCheckHistoryItem } from "@shared/model";
-import { setCurrentBoard } from "../board/setCurrentBoard";
 import { v4 } from "uuid";
-import { selectSkillCheckData, selectSkillCheckType, sendCommandSignal, sendNumberSignal } from '../../../skillCheck/skillCheck'
-import { selectCurrentBoard } from '../../selectors'
+import {
+	selectSkillCheckData,
+	selectSkillCheckType,
+	sendCommandSignal,
+	sendNumberSignal,
+} from "../../../skillCheck/skillCheck";
+import { selectCurrentBoard } from "../../selectors";
+import { setCurrentBoard } from "../board/setCurrentBoard";
 
-export const addCurrentSkillCheckToHistory: ActionCreator<AppThunk> = () => (dispatch, getState) => {
-  const state = getState();
-  const type = selectSkillCheckType(state);
-  const expression = selectSkillCheckData(state);
-  const board = selectCurrentBoard(state);
+export const addCurrentSkillCheckToHistory: ActionCreator<AppThunk> =
+	() => (dispatch, getState) => {
+		const state = getState();
+		const type = selectSkillCheckType(state);
+		const expression = selectSkillCheckData(state);
+		const board = selectCurrentBoard(state);
 
-  if (!type || !board) {
-    return;
-  }
+		if (!type || !board) {
+			return;
+		}
 
-  const value = getSkillCheckValue({
-    data: expression,
-    value: board.value
-  })
+		const value = getSkillCheckValue({
+			data: expression,
+			value: board.value,
+		});
 
-  const item: SkillCheckHistoryItem = {
-    id: v4(),
-    type,
-    expression,
-    value
-  }
+		const item: SkillCheckHistoryItem = {
+			id: v4(),
+			type,
+			expression,
+			value,
+		};
 
-  const checkHistory = [
-    ...board.checkHistory,
-    item
-  ]
+		const checkHistory = [...board.checkHistory, item];
 
-  dispatch(setCurrentBoard({
-    ...board,
-    checkHistory
-  }))
+		dispatch(
+			setCurrentBoard({
+				...board,
+				checkHistory,
+			}),
+		);
 
-  dispatch(sendCommandSignal('clear'));
-  dispatch(sendNumberSignal({
-    value,
-    removable: true
-  }));
-}
+		dispatch(sendCommandSignal("clear"));
+		dispatch(
+			sendNumberSignal({
+				value,
+				removable: true,
+			}),
+		);
+	};

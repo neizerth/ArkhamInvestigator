@@ -1,1 +1,1 @@
-export * from './TopBarTitle';
+export * from "./TopBarTitle";

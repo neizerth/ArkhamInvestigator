@@ -1,1 +1,1 @@
-export * from './SvgPatternImage';
+export * from "./SvgPatternImage";

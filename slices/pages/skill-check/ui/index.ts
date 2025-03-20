@@ -1,2 +1,2 @@
-export * from './SkillCheckPage'
-export * from './layout'
+export * from "./SkillCheckPage";
+export * from "./layout";

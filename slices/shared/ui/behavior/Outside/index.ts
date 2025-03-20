@@ -1,1 +1,1 @@
-export * from './Outside';
+export * from "./Outside";

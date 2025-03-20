@@ -1,1 +1,1 @@
-export * from './scaleFontFromStyle'
+export * from "./scaleFontFromStyle";

@@ -1,37 +1,37 @@
-import { boardText } from "@pages/board/config"
-import { color } from "@shared/config"
-import { ArnoPro, STKaiti, Yoon } from "@shared/fonts"
-import { getKeyConfig } from "@shared/lib"
-import type { TextStyle } from "react-native"
+import { boardText } from "@pages/board/config";
+import { color } from "@shared/config";
+import { ArnoPro, STKaiti, Yoon } from "@shared/fonts";
+import { getKeyConfig } from "@shared/lib";
+import type { TextStyle } from "react-native";
 
 export type GetStylesOptions = {
-  language: string
-  unit: number
-}
+	language: string;
+	unit: number;
+};
 
 export const getInvestigatorFlavorStyles = ({
-  language,
-  unit
+	language,
+	unit,
 }: GetStylesOptions) => {
-  const fontSize = unit * boardText.ratio.text;
+	const fontSize = unit * boardText.ratio.text;
 
-  const getStyle = getKeyConfig<Partial<TextStyle>>({
-    default: {
-      fontFamily: ArnoPro.italic,
-      fontSize,
-      lineHeight: fontSize * 1.15,
-      textAlign: 'center',
-      color: color.text
-    },
-    ko: {
-      fontFamily: Yoon.D330.italic,
-      fontSize: fontSize * 0.9,
-    },
-    zh: {
-      fontFamily: STKaiti.italic,
-      fontSize: fontSize * 0.9,
-    }
-  })
+	const getStyle = getKeyConfig<Partial<TextStyle>>({
+		default: {
+			fontFamily: ArnoPro.italic,
+			fontSize,
+			lineHeight: fontSize * 1.15,
+			textAlign: "center",
+			color: color.text,
+		},
+		ko: {
+			fontFamily: Yoon.D330.italic,
+			fontSize: fontSize * 0.9,
+		},
+		zh: {
+			fontFamily: STKaiti.italic,
+			fontSize: fontSize * 0.9,
+		},
+	});
 
-  return getStyle(language);
-}
+	return getStyle(language);
+};

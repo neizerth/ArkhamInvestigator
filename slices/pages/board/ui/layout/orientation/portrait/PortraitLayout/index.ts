@@ -1,1 +1,1 @@
-export * from './PortraitLayout';
+export * from "./PortraitLayout";

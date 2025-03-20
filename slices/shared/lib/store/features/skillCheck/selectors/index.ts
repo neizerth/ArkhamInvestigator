@@ -1,1 +1,1 @@
-export * from './selectSkillCheckHistory'
+export * from "./selectSkillCheckHistory";

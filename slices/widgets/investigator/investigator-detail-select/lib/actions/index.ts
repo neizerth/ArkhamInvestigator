@@ -1,3 +1,3 @@
-export * from './changeSkin'
-export * from './changeVariant'
-export * from './updateBoardDetails'
+export * from "./changeSkin";
+export * from "./changeVariant";
+export * from "./updateBoardDetails";

@@ -1,2 +1,2 @@
-export const formatGameText = (text: string) => 
-  text.replace(/"([^"]+)"/g, '“$1”');
+export const formatGameText = (text: string) =>
+	text.replace(/"([^"]+)"/g, "“$1”");

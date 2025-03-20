@@ -1,9 +1,9 @@
-export const CopaseticRegular = require('./Copasetic-Regular.ttf');
+export const CopaseticRegular = require("./Copasetic-Regular.ttf");
 
 export const Copasetic = {
-  regular: 'CopaseticRegular'
-}
+	regular: "CopaseticRegular",
+};
 
 export const CopaseticFonts = {
-  CopaseticRegular
-}
+	CopaseticRegular,
+};

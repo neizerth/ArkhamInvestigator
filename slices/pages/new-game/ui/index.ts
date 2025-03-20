@@ -1,1 +1,1 @@
-export * from './NewGamePage'
+export * from "./NewGamePage";

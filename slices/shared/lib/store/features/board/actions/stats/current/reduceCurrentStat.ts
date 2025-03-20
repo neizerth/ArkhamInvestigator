@@ -1,49 +1,49 @@
-import type  { ActionCreator } from "@reduxjs/toolkit";
-import { setCurrentBoard } from "../../board/setCurrentBoard";
-import { selectCurrentBoard } from "../../../selectors/selectCurrentBoard";
+import type { ActionCreator } from "@reduxjs/toolkit";
 import type { AppThunk } from "@shared/lib/store";
-import type  { InvestigatorBoardValues } from "@shared/model";
+import type { InvestigatorBoardValues } from "@shared/model";
 import { v4 } from "uuid";
+import { selectCurrentBoard } from "../../../selectors/selectCurrentBoard";
+import { setCurrentBoard } from "../../board/setCurrentBoard";
 
-export const reduceCurrentStat: ActionCreator<AppThunk> = <T extends keyof InvestigatorBoardValues>(
-  type: T,
-  reducer: (value: InvestigatorBoardValues[T]) => InvestigatorBoardValues[T]
-) => (dispatch, getState) => {
-    const state = getState();
+export const reduceCurrentStat: ActionCreator<AppThunk> =
+	<T extends keyof InvestigatorBoardValues>(
+		type: T,
+		reducer: (value: InvestigatorBoardValues[T]) => InvestigatorBoardValues[T],
+	) =>
+	(dispatch, getState) => {
+		const state = getState();
 
-    const board = selectCurrentBoard(state);
+		const board = selectCurrentBoard(state);
 
-    if (!board) {
-      return;
-    }
-    
-    const statValue = reducer(board.value[type]);
+		if (!board) {
+			return;
+		}
 
-    const value = {
-      ...board.value, 
-      [type]: statValue 
-    }
+		const statValue = reducer(board.value[type]);
 
-    const historyIndex = board.historyIndex + 1;
+		const value = {
+			...board.value,
+			[type]: statValue,
+		};
 
-    const currentHistory = board.history
-      .slice(0, historyIndex);
+		const historyIndex = board.historyIndex + 1;
 
-    const historyItem = {
-      id: v4(),
-      type,
-      value: statValue
-    }
+		const currentHistory = board.history.slice(0, historyIndex);
 
-    const history = [
-      ...currentHistory,
-      historyItem
-    ]
+		const historyItem = {
+			id: v4(),
+			type,
+			value: statValue,
+		};
 
-    dispatch(setCurrentBoard({
-      ...board,
-      value,
-      history,
-      historyIndex
-    }))
-  }
+		const history = [...currentHistory, historyItem];
+
+		dispatch(
+			setCurrentBoard({
+				...board,
+				value,
+				history,
+				historyIndex,
+			}),
+		);
+	};

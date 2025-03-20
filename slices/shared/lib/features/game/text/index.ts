@@ -1,1 +1,1 @@
-export * from './formatGameText'
+export * from "./formatGameText";

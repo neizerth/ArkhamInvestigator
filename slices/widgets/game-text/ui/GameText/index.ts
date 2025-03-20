@@ -1,1 +1,1 @@
-export * from './GameText';
+export * from "./GameText";

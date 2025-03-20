@@ -5,4 +5,4 @@ export const LoadingPage: typeof View = styled(View)`
   flex: 1;
   justify-content: center;
   align-items: center;
-`
+`;

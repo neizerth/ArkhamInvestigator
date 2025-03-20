@@ -3,24 +3,35 @@ import type { FC } from "react";
 import { ScrollView, Text, View } from "react-native";
 import type { TextProps, ViewProps } from "react-native";
 
-import styled, { css } from "styled-components/native";
-import type { PropsWithFaction } from "@shared/model/ui";
-import { FactionBackground, type FactionBackgroundProps } from "../FactionBackground";
+import { Alegreya } from "@shared/fonts";
 import type { Faction } from "@shared/model";
-import { FactionFontIcon, Icon as BaseIcon, UnscaledText, Button, type ButtonProps, Row } from "@shared/ui";
+import type { PropsWithFaction } from "@shared/model/ui";
+import {
+	Icon as BaseIcon,
+	Button,
+	type ButtonProps,
+	FactionFontIcon,
+	Row,
+	UnscaledText,
+} from "@shared/ui";
 import { type IconProps, TouchableOpacity } from "@shared/ui";
-import { Alegreya } from "@shared/fonts"
+import styled, { css } from "styled-components/native";
+import {
+	FactionBackground,
+	type FactionBackgroundProps,
+} from "../FactionBackground";
 
-export type ElementWithFaction<T> = FC<T & PropsWithFaction>
-export type ViewWithFaction = ElementWithFaction<ViewProps>
-export type TextWithFaction = ElementWithFaction<TextProps>
+export type ElementWithFaction<T> = FC<T & PropsWithFaction>;
+export type ViewWithFaction = ElementWithFaction<ViewProps>;
+export type TextWithFaction = ElementWithFaction<TextProps>;
 
-const getBackgroundColor = (faction: Faction) => factionColor[faction].darkBackground;
+const getBackgroundColor = (faction: Faction) =>
+	factionColor[faction].darkBackground;
 
 const textColor = color.light15;
 const borderRadius = size.borderRadius.default;
 
-type BackgroundProps = Omit<FactionBackgroundProps, ''>
+type BackgroundProps = Omit<FactionBackgroundProps, "">;
 
 export const Background: FC<BackgroundProps> = styled(FactionBackground)`
   position: absolute;
@@ -30,11 +41,11 @@ export const Background: FC<BackgroundProps> = styled(FactionBackground)`
   right: 0;
   top: 0;
   bottom: 0;
-`
+`;
 
 export const Container: typeof View = styled(View)`
   border-radius: ${borderRadius}px;
-`
+`;
 
 export const Header: ViewWithFaction = styled(View)`
   ${({ faction }: PropsWithFaction) => css`
@@ -47,7 +58,7 @@ export const Header: ViewWithFaction = styled(View)`
   align-items: center;
   gap: ${size.gap.medium}px;
   height: 55px;
-`
+`;
 
 export const Body: ViewWithFaction = styled(View)`
   flex: 1;
@@ -57,7 +68,7 @@ export const Body: ViewWithFaction = styled(View)`
     background-color: ${getBackgroundColor(faction)};
   `}
   padding: 0 2px 2px 2px;
-`
+`;
 
 export const Content: typeof View = styled(View)`
   flex: 1;
@@ -66,24 +77,22 @@ export const Content: typeof View = styled(View)`
   background-color: ${color.dark30};
   padding: ${size.gap.medium}px 0px;
   gap: ${size.gap.default}px;
-`
-
+`;
 
 export const ScrollContainer: typeof ScrollView = styled(ScrollView)`
   flex: 1;
   padding: 0 ${size.gap.medium}px;
-`
+`;
 
 export const Actions: typeof Row = styled(Row)`
   padding: 0 ${size.gap.medium}px;
   gap: ${size.gap.default}px;
-`
-
+`;
 
 export const Cancel: typeof Button = styled(Button)`
   background-color: ${color.dark15};
   flex: 1;
-`
+`;
 
 type OKProps = ButtonProps & PropsWithFaction;
 
@@ -94,35 +103,33 @@ export const OK: FC<OKProps> = styled(Button)`
   ${({ faction }: PropsWithFaction) => css`
     background-color: ${getBackgroundColor(faction)};
   `}
-`
+`;
 
 export const OKBackground: typeof Background = styled(Background)`
   position: absolute;
-`
+`;
 
 export const Icon: typeof FactionFontIcon = styled(FactionFontIcon)`
   font-size: 32px;
   line-height: 32px;
   color: ${textColor};
-`
+`;
 
-export type CloseIconProps = Omit<IconProps, 'icon'>
+export type CloseIconProps = Omit<IconProps, "icon">;
 
-export const CloseIcon: FC<CloseIconProps> = styled(BaseIcon)
-  .attrs({
-    icon: 'close'
-  })`
+export const CloseIcon: FC<CloseIconProps> = styled(BaseIcon).attrs({
+	icon: "close",
+})`
   font-size: 20px;
   color: ${textColor};
-`
+`;
 
 export const Close: typeof TouchableOpacity = styled(TouchableOpacity)`
   width: 48px;
   height: 48px;
   justify-content: center;
   align-items: center;
-`
-
+`;
 
 export const HeaderContent: typeof View = styled(View)`
   flex: 1;
@@ -133,24 +140,24 @@ export const HeaderContent: typeof View = styled(View)`
   padding: ${size.gap.small}px ${size.gap.medium}px;
   padding-right: 0;
   gap: ${size.gap.medium}px;
-`
+`;
 
-export { View as ScrollContent }
+export { View as ScrollContent };
 
 export const HeaderTextContent: typeof View = styled(View)`
   flex: 1;
   width: 100%;
-`
+`;
 
 const HeaderText: typeof UnscaledText = styled(UnscaledText)`
   font-size: ${font.size.default}px;
   color: ${textColor};
-`
+`;
 
 export const Title: typeof UnscaledText = styled(HeaderText)`
   font-family: ${Alegreya.bold};
-`
+`;
 
 export const Subtitle: typeof UnscaledText = styled(HeaderText)`
   font-family: ${Alegreya.italic};
-`
+`;

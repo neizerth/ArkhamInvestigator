@@ -1,1 +1,1 @@
-export * from './InvestigatorPreviewFactionIcon';
+export * from "./InvestigatorPreviewFactionIcon";

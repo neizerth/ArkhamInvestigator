@@ -1,42 +1,42 @@
-import type { StyleProp } from "react-native"
-import type { Faction, SkillType } from "../features"
-import type { DeviceBreakpointType } from "../features/device"
-import type { Box, BoxLayout, ScaledBox } from "./box"
+import type { StyleProp } from "react-native";
+import type { Faction, SkillType } from "../features";
+import type { DeviceBreakpointType } from "../features/device";
+import type { Box, BoxLayout, ScaledBox } from "./box";
 
 export type PropsWithFaction = {
-  faction: Faction
-}
+	faction: Faction;
+};
 
 export type PropsWithSkill = {
-  skillType: SkillType
-}
+	skillType: SkillType;
+};
 
 export type PropsWithBreakpoint = {
-  breakpoint: DeviceBreakpointType
-}
+	breakpoint: DeviceBreakpointType;
+};
 
 export type PropsWithBox = {
-  box: Box
-}
+	box: Box;
+};
 
 export type PropsWithScaledBox = {
-  box: ScaledBox
-}
+	box: ScaledBox;
+};
 
 export type PropsWithBoxLayout = {
-  box: BoxLayout
-}
+	box: BoxLayout;
+};
 
 export type PropsWithUnit = {
-  unit: number
-}
+	unit: number;
+};
 
 export type PropsWithStyle = {
-  style?: StyleProp<object>
-}
+	style?: StyleProp<object>;
+};
 
 export type PropsWithStroke = {
-  stroke?: boolean
-  strokeColor?: string
-  strokeWidth?: number
-}
+	stroke?: boolean;
+	strokeColor?: string;
+	strokeWidth?: number;
+};

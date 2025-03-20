@@ -1,1 +1,1 @@
-export * from './InvestigatorSelect';
+export * from "./InvestigatorSelect";

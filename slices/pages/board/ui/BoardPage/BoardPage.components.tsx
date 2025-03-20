@@ -1,18 +1,21 @@
-import { View } from 'react-native';
-import { InvestigatorImage } from '../layout/InvestigatorImage';
-import styled, { css } from 'styled-components/native';
-import { BoardHeader, type BoardHeaderProps } from '../layout';
-import { servicePadding } from '@pages/board/config';
-import type { FC } from 'react';
-import { PortraitLayout as BasePortraitLayout, type PortraitLayoutProps as BasePortraitLayoutProps } from '../layout';
-import type { PropsWithLayout } from '@pages/board/model';
-import { color } from '@shared/config';
+import { servicePadding } from "@pages/board/config";
+import type { PropsWithLayout } from "@pages/board/model";
+import { color } from "@shared/config";
+import type { FC } from "react";
+import { View } from "react-native";
+import styled, { css } from "styled-components/native";
+import { BoardHeader, type BoardHeaderProps } from "../layout";
+import {
+	PortraitLayout as BasePortraitLayout,
+	type PortraitLayoutProps as BasePortraitLayoutProps,
+} from "../layout";
+import { InvestigatorImage } from "../layout/InvestigatorImage";
 
 export const Container: typeof View = styled(View)`
   flex: 1;
   position: relative;
   background-color: ${color.dark30};
-`
+`;
 
 export const Background: typeof InvestigatorImage = styled(InvestigatorImage)`
   position: absolute;
@@ -22,11 +25,12 @@ export const Background: typeof InvestigatorImage = styled(InvestigatorImage)`
   right: 0;
   top: 0;
   bottom: 0;
-` 
+`;
 
-type HeaderProps = BoardHeaderProps & PropsWithLayout & {
-  descriptionShown: boolean
-};
+type HeaderProps = BoardHeaderProps &
+	PropsWithLayout & {
+		descriptionShown: boolean;
+	};
 
 export const Header: FC<HeaderProps> = styled(BoardHeader)`
   position: absolute;
@@ -39,13 +43,15 @@ export const Header: FC<HeaderProps> = styled(BoardHeader)`
   ${({ layout }: HeaderProps) => css`
     top: ${servicePadding[layout.type].top}px;
   `}
-` 
+`;
 
-export const PortraitLayout: FC<BasePortraitLayoutProps> = styled(BasePortraitLayout)`
+export const PortraitLayout: FC<BasePortraitLayoutProps> = styled(
+	BasePortraitLayout,
+)`
   position: absolute;
   z-index: 2;
   left: 0;
   right: 0;
   bottom: 0;
   top: 0;
-`
+`;

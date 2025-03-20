@@ -1,1 +1,1 @@
-export * from './Clue';
+export * from "./Clue";

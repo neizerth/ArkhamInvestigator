@@ -1,1 +1,1 @@
-export * from './getIconScale';
+export * from "./getIconScale";

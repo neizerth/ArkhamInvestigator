@@ -1,1 +1,1 @@
-export const rule = require('./rule-top.png');
+export const rule = require("./rule-top.png");

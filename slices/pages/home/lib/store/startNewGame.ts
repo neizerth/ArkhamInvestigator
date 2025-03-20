@@ -1,8 +1,14 @@
 import type { ActionCreator } from "@reduxjs/toolkit";
-import { goToPage, replacePageTo, setInvestigatorBoards, setSelectedInvestigators, type AppThunk } from "@shared/lib";
+import {
+	type AppThunk,
+	goToPage,
+	replacePageTo,
+	setInvestigatorBoards,
+	setSelectedInvestigators,
+} from "@shared/lib";
 
 export const startNewGame: ActionCreator<AppThunk> = () => (dispatch) => {
-  dispatch(goToPage('/select-investigators'))
-  dispatch(setSelectedInvestigators([]));
-  dispatch(setInvestigatorBoards([]));
-}
+	dispatch(goToPage("/select-investigators"));
+	dispatch(setSelectedInvestigators([]));
+	dispatch(setInvestigatorBoards([]));
+};

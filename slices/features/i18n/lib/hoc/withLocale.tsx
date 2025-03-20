@@ -1,72 +1,73 @@
-import { useAppSelector } from "../../../../shared/lib/hooks/store/useAppSelector"
-import { getKeyConfig, type KeyConfig } from "../../../../shared/lib/util/record"
-import type { ComponentType, FC } from "react"
-import { StyleSheet, Text, TextStyle, type TextProps } from "react-native"
-import { selectLanguage } from "../store/features/i18n/i18n"
-import type { PropsWithStyle } from "@shared/model"
-import { mergeDeepRight } from "ramda"
-import { UnscaledText, type AppTextProps } from "@shared/ui"
+import type { PropsWithStyle } from "@shared/model";
+import { type AppTextProps, UnscaledText } from "@shared/ui";
+import { mergeDeepRight } from "ramda";
+import type { ComponentType, FC } from "react";
+import { StyleSheet, Text, type TextProps, TextStyle } from "react-native";
+import { useAppSelector } from "../../../../shared/lib/hooks/store/useAppSelector";
+import {
+	type KeyConfig,
+	getKeyConfig,
+} from "../../../../shared/lib/util/record";
+import { selectLanguage } from "../store/features/i18n/i18n";
 
 type WithLocaleProps = PropsWithStyle & {
-  language?: string
-}
+	language?: string;
+};
 
 export type WithLocaleFontOptions<Props extends WithLocaleProps> = {
-  Component?: ComponentType<Props>
-  style?: KeyConfig<Props['style']>
-  props?: Record<string, Partial<Props>> & {
-    default?: Partial<Props>
-  }
-}
+	Component?: ComponentType<Props>;
+	style?: KeyConfig<Props["style"]>;
+	props?: Record<string, Partial<Props>> & {
+		default?: Partial<Props>;
+	};
+};
 
-export function withLocale<Props extends WithLocaleProps = AppTextProps> (
-  options: WithLocaleFontOptions<Props>
+export function withLocale<Props extends WithLocaleProps = AppTextProps>(
+	options: WithLocaleFontOptions<Props>,
 ) {
-  const { Component = UnscaledText } = options;
+	const { Component = UnscaledText } = options;
 
-  const WithLocale: FC<Props> = props => {
-    const defaultLanguage = useAppSelector(selectLanguage);
-    const language = props.language || defaultLanguage;
-    
-    const defaultPropsConfig = mergeDeepRight(
-      props,
-      options?.props?.default || {}
-    )
+	const WithLocale: FC<Props> = (props) => {
+		const defaultLanguage = useAppSelector(selectLanguage);
+		const language = props.language || defaultLanguage;
 
-    const propsConfig = mergeDeepRight(
-      {
-        default: defaultPropsConfig,
-      },
-      options.props || {},
-    ) as KeyConfig<Partial<Props>>
+		const defaultPropsConfig = mergeDeepRight(
+			props,
+			options?.props?.default || {},
+		);
 
-    const styleConfig = mergeDeepRight(
-      {
-        default: props.style || {},
-      },
-      options.style || {}
-    )
+		const propsConfig = mergeDeepRight(
+			{
+				default: defaultPropsConfig,
+			},
+			options.props || {},
+		) as KeyConfig<Partial<Props>>;
 
-    const getStyle = getKeyConfig(styleConfig);
-    const localeStyle = getStyle(language)
+		const styleConfig = mergeDeepRight(
+			{
+				default: props.style || {},
+			},
+			options.style || {},
+		);
 
-    const getLocaleProps = getKeyConfig(propsConfig);
-    const localeProps = getLocaleProps(language) as Props
+		const getStyle = getKeyConfig(styleConfig);
+		const localeStyle = getStyle(language);
 
-    return (
-      <Component 
-        {...props}
-        {...localeProps}
-        style={[
-          props.style,
-          localeStyle
-        ]}
-      />
-    )
-  }
+		const getLocaleProps = getKeyConfig(propsConfig);
+		const localeProps = getLocaleProps(language) as Props;
 
-  const displayName = 'displayName' in Component ? Component.displayName : Component.name;
-  WithLocale.displayName = `WithLocale(${displayName})`
+		return (
+			<Component
+				{...props}
+				{...localeProps}
+				style={[props.style, localeStyle]}
+			/>
+		);
+	};
 
-  return WithLocale;
+	const displayName =
+		"displayName" in Component ? Component.displayName : Component.name;
+	WithLocale.displayName = `WithLocale(${displayName})`;
+
+	return WithLocale;
 }
