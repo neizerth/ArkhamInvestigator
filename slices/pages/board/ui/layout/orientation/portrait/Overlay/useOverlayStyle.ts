@@ -15,7 +15,6 @@ export const useOverlayStyle = () => {
       opacity: withTiming(opacity.value, {
         duration: 500
       }),
-      zIndex: showDescription ? 1 : -1
     };
   });
 

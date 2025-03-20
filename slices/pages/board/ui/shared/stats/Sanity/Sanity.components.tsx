@@ -5,7 +5,7 @@ import { Value as BaseValue } from '../Value';
 import styled from 'styled-components/native';
 import { View } from 'react-native';
 import { assetsSize } from '@pages/board/config';
-import { StatPicker } from '../StatPicker';
+import { StatPickerMemo as StatPicker } from '../StatPicker';
 
 export const BaseContainer = withStat(UI.Sanity, {
   ratio: gameAssets.sanity.ratio
@@ -18,6 +18,11 @@ export const Container: typeof BaseContainer = styled(BaseContainer)`
 export const Value: typeof BaseValue = styled(BaseValue)`
   color: ${color.sanity};
 `
+
+export const Wounds: typeof Value = styled(Value)`
+  
+`
+
 
 export const InitialDiff: typeof UI.TouchableOpacity = styled(UI.TouchableOpacity)`
   position: absolute;
@@ -37,5 +42,6 @@ export const Picker: typeof StatPicker = styled(StatPicker)
     },
     itemHeight: assetsSize.main
   })`
-  
+    position: absolute;
+    z-index: 2;
   ` 

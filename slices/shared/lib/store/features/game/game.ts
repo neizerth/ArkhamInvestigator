@@ -7,6 +7,7 @@ export type IGameState = {
   selectedInvestigators: SelectedInvestigator[]
   currentInvestigatorDetails: Nullable<InvestigatorDetails>
   showDescription: boolean
+  showAdditionalInformation: boolean
   replaceInvestigator: boolean
 }
 
@@ -14,6 +15,7 @@ const initialState: IGameState = {
   selectedInvestigators: [],
   currentInvestigatorDetails: null,
   showDescription: false,
+  showAdditionalInformation: false,
   replaceInvestigator: false
 }
 
@@ -34,14 +36,16 @@ export const {
   setInvestigatorSkin,
   setInvestigatorVariant,
   setShowDescription,
-  setReplaceInvestigator
+  setReplaceInvestigator,
+  setShowAdditionalInformation
 } = game.actions;
 
 export const {
   selectSelectedInvestigators,
   selectCurrentInvestigatorDetails,
   selectShowDescription,
-  selectReplaceInvestigator
+  selectReplaceInvestigator,
+  selectShowAdditionalInformation
 } = game.selectors;
 
 export default game.reducer;

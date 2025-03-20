@@ -30,6 +30,10 @@ export const DiffValue: typeof Value = styled(Value)`
   font-size: 30px;
 `
 
+export const Wounds: typeof Value = styled(Value)`
+
+`
+
 
 export const Picker: typeof StatPicker = styled(StatPicker)
   .attrs({

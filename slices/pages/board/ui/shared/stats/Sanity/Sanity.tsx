@@ -1,7 +1,7 @@
 import { View } from 'react-native-reanimated/lib/typescript/Animated';
 import * as C from './Sanity.components';
 import type { ViewProps } from 'react-native';
-import { decreaseBaseStat, decreaseCurrentStat, increaseBaseStat, increaseCurrentStat, selectCurrentBoard, signedNumber, useAppDispatch, useAppSelector } from '@shared/lib';
+import { decreaseBaseStat, decreaseCurrentStat, increaseBaseStat, increaseCurrentStat, selectCurrentBoard, selectShowAdditionalInformation, signedNumber, useAppDispatch, useAppSelector } from '@shared/lib';
 import { useCallback } from 'react';
 import { setCurrentStat } from '@shared/lib/store/features/board/actions/stats/current/setCurrentStat';
 import { range } from 'ramda';
@@ -16,9 +16,10 @@ export const Sanity = ({
 }: SanityProps) => {
   const dispatch = useAppDispatch()
   const board = useAppSelector(selectCurrentBoard);
-  const value = board?.value
-  const initialValue = board?.initialValue.sanity || 0;
-  const baseValue = board?.baseValue.sanity || 0;
+  const showAdditionalInfo = useAppSelector(selectShowAdditionalInformation);
+  const value = board.value.sanity;
+  const initialValue = board.initialValue.sanity || 0;
+  const baseValue = board.baseValue.sanity || 0;
 
   const maxValue = baseValue + 10; 
 
@@ -41,6 +42,12 @@ export const Sanity = ({
     dispatch(decreaseCurrentStat('sanity'))
   }, [dispatch]);
 
+  const pickerStyle = {
+    opacity: showAdditionalInfo ? 0 : 1
+  }
+
+  const wounds = Math.max(baseValue - value, 0);
+
   return (
     <C.Container {...props}>
       {baseValue !== initialValue && (
@@ -52,12 +59,18 @@ export const Sanity = ({
           />
         </C.InitialDiff>
       )}
+      {showAdditionalInfo && (
+        <C.Wounds 
+          value={`-${wounds}`}
+        />
+      )}
       <C.Picker
-        value={value?.sanity}
+        value={value}
         data={range(0, maxValue + 1)}
         onValueChanged={onChange}
         onLongPress={onLongPress}
         onPress={onPress}
+        style={pickerStyle}
       />
     </C.Container>
   );

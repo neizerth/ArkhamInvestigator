@@ -5,7 +5,7 @@ import { assetsSize } from '@pages/board/config';
 import { Value as BaseValue } from '../Value';
 import styled from 'styled-components/native';
 import { View } from 'react-native';
-import { StatPicker } from '../StatPicker';
+import { StatPickerMemo as StatPicker } from '../StatPicker';
 
 export const Container = withStat(UI.Resource, {
   height: assetsSize.resource,

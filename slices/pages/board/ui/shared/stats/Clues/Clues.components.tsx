@@ -3,7 +3,7 @@ import * as UI from "@shared/ui";
 import { color, gameAssets } from '@shared/config';
 import { Value as BaseValue } from '../Value';
 import styled from 'styled-components/native';
-import { StatPicker } from '../StatPicker';
+import { StatPickerMemo as StatPicker } from '../StatPicker';
 import { assetsSize } from '@pages/board/config';
 
 export const BaseContainer = withStat(UI.Clue, {

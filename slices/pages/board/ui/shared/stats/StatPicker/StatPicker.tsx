@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { memo, useCallback } from 'react';
 import * as C from './StatPicker.components';
 import type { ValueProps } from '../Value';
 import type { PickerItemInfo, PickerProps } from '@widgets/picker';
@@ -29,3 +29,6 @@ export const StatPicker = ({
     />
   );
 }
+
+
+export const StatPickerMemo = memo(StatPicker);
