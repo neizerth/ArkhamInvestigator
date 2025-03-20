@@ -38,6 +38,7 @@ export const Actions = ({
 
   const onDiffPress = useCallback(() => {
     dispatch(decreaseBaseStat('actions'))
+    dispatch(decreaseCurrentStat('actions'))
   }, [dispatch]);
 
   return (

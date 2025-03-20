@@ -3,9 +3,9 @@ import * as C from './Sanity.components';
 import type { ViewProps } from 'react-native';
 import { decreaseBaseStat, decreaseCurrentStat, increaseBaseStat, increaseCurrentStat, selectCurrentBoard, signedNumber, useAppDispatch, useAppSelector } from '@shared/lib';
 import { useCallback } from 'react';
-import type { PickerChangeEvent } from '../../features';
 import { setCurrentStat } from '@shared/lib/store/features/board/actions/stats/current/setCurrentStat';
 import { range } from 'ramda';
+import { PickerChangeEvent } from '@widgets/picker';
 
 export type SanityProps = ViewProps
 
@@ -38,6 +38,7 @@ export const Sanity = ({
 
   const onDiffPress = useCallback(() => {
     dispatch(decreaseBaseStat('sanity'))
+    dispatch(decreaseCurrentStat('sanity'))
   }, [dispatch]);
 
   return (

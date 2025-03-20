@@ -2,16 +2,16 @@ import type { HealthProps } from '@shared/ui'
 import * as C from './Health.components'
 import { decreaseBaseStat, decreaseCurrentStat, increaseBaseStat, increaseCurrentStat, selectCurrentBoard, signedNumber, useAppDispatch, useAppSelector } from '@shared/lib'
 import { useCallback } from 'react'
-import type { PickerChangeEvent } from '../../features'
 import { setCurrentStat } from '@shared/lib/store/features/board/actions/stats/current/setCurrentStat'
 import { range } from 'ramda'
+import { PickerChangeEvent } from '@widgets/picker'
 
 export const Health = (props: HealthProps) => {
   const dispatch = useAppDispatch()
   const board = useAppSelector(selectCurrentBoard);
-  const initialValue = board?.initialValue.health || 0;
-  const baseValue = board?.baseValue.health || 0;
-  const value = board?.value
+  const initialValue = board.initialValue.health || 0;
+  const baseValue = board.baseValue.health || 0;
+  const value = board.value.health
 
   const maxValue = baseValue + 10; 
   const onChange = useCallback(({ value }: PickerChangeEvent) => {
@@ -30,6 +30,7 @@ export const Health = (props: HealthProps) => {
   
   const onDiffPress = useCallback(() => {
     dispatch(decreaseBaseStat('health'))
+    dispatch(decreaseCurrentStat('health'))
   }, [dispatch]);
 
   return (
@@ -44,7 +45,7 @@ export const Health = (props: HealthProps) => {
         </C.InitialDiff>
       )}
       <C.Picker
-        value={value?.health}
+        value={value}
         data={range(0, maxValue + 1)}
         onValueChanged={onChange}
         onLongPress={onLongPress}

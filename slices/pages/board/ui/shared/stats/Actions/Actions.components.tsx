@@ -38,8 +38,12 @@ export const AdditionalAction: typeof TouchableOpacity = styled(TouchableOpacity
 export const InitialDiff: typeof TouchableOpacity = styled(TouchableOpacity)`
   position: absolute;
   z-index: 1;
-  right: -5px;
-  top: -30px;
+  right: -40px;
+  left: 82px;
+  min-width: 48px;
+  height: 48px;
+  justify-content: center;
+  align-items: flex-start;
 `
 
 export const DiffValue: typeof Value = styled(Value)`
