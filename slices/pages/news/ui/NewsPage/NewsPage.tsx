@@ -6,5 +6,5 @@ import { ContentPage } from "@widgets/content-page";
 export const NewsPage = () => {
 	const { t } = useAppTranslation();
 
-	return <ContentPage title={t`Recent updates`}></ContentPage>;
+	return <ContentPage title={t`Recent updates`} />;
 };
