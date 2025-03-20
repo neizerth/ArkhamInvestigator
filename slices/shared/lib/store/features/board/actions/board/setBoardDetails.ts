@@ -67,7 +67,7 @@ export const setBoardDetails: ActionCreator<AppThunk> =
 		const stats = getBoardStats(investigator);
 
 		const baseValue = {
-			...board.baseValue,
+			...board.initialValue,
 			...stats,
 			additionalAction,
 		};
@@ -76,6 +76,7 @@ export const setBoardDetails: ActionCreator<AppThunk> =
 
 		const data = {
 			...board,
+			initialValue: baseValue,
 			investigator,
 			baseValue,
 			value,
