@@ -26,8 +26,8 @@ type ContainerProps = {
   itemContainerStyle?: ViewStyle
   renderItemContainer?: PickerRenderContainer
   visibleItemsCount?: number
-  onPress?: () => void
-  onLongPress?: () => void
+  onPress?: () => void | boolean
+  onLongPress?: () => void | boolean
   pressPattern?: HapticPatternType
   longPressPattern?: HapticPatternType
   delayLongPress?: number

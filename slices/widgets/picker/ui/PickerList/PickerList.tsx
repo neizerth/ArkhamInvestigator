@@ -136,8 +136,9 @@ export const PickerList = ({
       }
       activated.current = false
       canPress.current = false;
-      impactHapticFeedback(longPressPattern);
-      onLongPress();
+      if (onLongPress() !== false) {
+        impactHapticFeedback(longPressPattern);
+      }
     }, delayLongPress);
     
   }, [onLongPress, delayLongPress, longPressPattern]);
@@ -148,8 +149,9 @@ export const PickerList = ({
     if (canPress.current && onPress) {
       clearTimeout(longPressTimeout.current);
 
-      impactHapticFeedback(pressPattern);
-      onPress()
+      if (onPress() !== false) {
+        impactHapticFeedback(pressPattern);
+      }
 
       activated.current = false;
       canPress.current = false;
