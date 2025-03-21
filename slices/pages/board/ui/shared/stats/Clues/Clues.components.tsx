@@ -4,7 +4,7 @@ import { color, gameAssets } from "@shared/config";
 import * as UI from "@shared/ui";
 import styled from "styled-components/native";
 import { StatPickerMemo as StatPicker } from "../StatPicker";
-import { Value as BaseValue } from "../Value";
+import { Value as BaseValue } from "../common/Value";
 
 export const BaseContainer = withStat(UI.Clue, {
 	ratio: gameAssets.clue.ratio,

@@ -7,7 +7,7 @@ import styled from "styled-components/native";
 import { FooterDescription } from "../FooterDescription";
 
 export const Container: typeof View = styled(View)`
-
+  padding-top: 40px;
 `;
 
 export const Row: typeof BaseRow = styled(BaseRow)`

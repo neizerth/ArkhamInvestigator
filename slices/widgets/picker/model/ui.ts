@@ -27,16 +27,18 @@ export type BaseListProps = FlatListProps<number>;
 
 type ContainerProps = {
 	value?: number;
-	data?: number[];
+	data: number[];
 	itemContainerStyle?: ViewStyle;
-	renderItemContainer?: PickerRenderContainer;
-	visibleItemsCount?: number;
-	onPress?: () => void | boolean;
-	onLongPress?: () => void | boolean;
-	pressPattern?: HapticPatternType;
-	longPressPattern?: HapticPatternType;
-	delayLongPress?: number;
-	gap?: number;
+	renderItemContainer?: PickerRenderContainer
+	visibleItemsCount?: number
+	onPress?: () => void | boolean
+	onLongPress?: () => void | boolean
+	pressPattern?: HapticPatternType
+	longPressPattern?: HapticPatternType
+	delayLongPress?: number
+	gap?: number
+	onValueChanged?: (event: PickerChangeEvent) => void
+	animatedInit?: boolean
 };
 
 export type PickerChangeEvent = {
@@ -46,7 +48,6 @@ export type PickerChangeEvent = {
 
 export type PickerProps = ViewProps &
 	ContainerProps & {
-		onValueChanged?: (event: PickerChangeEvent) => void;
 		renderItem: BaseListProps["renderItem"];
 		itemHeight?: number;
 		listStyle?: BaseListProps["style"];
@@ -54,6 +55,5 @@ export type PickerProps = ViewProps &
 
 export type PickerListProps = BaseListProps &
 	ContainerProps & {
-		onChange?: PickerProps["onValueChanged"];
 		itemHeight: number;
 	};

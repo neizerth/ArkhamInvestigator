@@ -4,15 +4,17 @@ import { color, gameAssets } from "@shared/config";
 import * as UI from "@shared/ui";
 import { View } from "react-native";
 import styled from "styled-components/native";
-import { StatPickerMemo as StatPicker } from "../StatPicker";
-import { Value as BaseValue } from "../Value";
+import { StatPickerMemo as StatPicker } from "../common/StatPicker";
+import { Value as BaseValue } from "../common/Value";
+import { BaseStatPicker, DefinedBaseStatPickerProps } from "../common";
+import { FC } from "react";
 
 export const BaseContainer = withStat(UI.Sanity, {
 	ratio: gameAssets.sanity.ratio,
 });
 
 export const Container: typeof BaseContainer = styled(BaseContainer)`
-  padding-bottom: 3px;
+  position: relative;
 `;
 
 export const Value: typeof BaseValue = styled(BaseValue)`
@@ -23,22 +25,26 @@ export const Wounds: typeof Value = styled(Value)`
   
 `;
 
-export const InitialDiff: typeof UI.TouchableOpacity = styled(
-	UI.TouchableOpacity,
-)`
-  position: absolute;
-  z-index: 3;
-  right: 0px;
-  top: -45px;
-  height: 48px;
-  width: 48px;
-  justify-content: center;
-  align-items: center;
-`;
 
-export const DiffValue: typeof Value = styled(Value)`
-  font-size: 30px;
-`;
+export const BaseSanity: FC<DefinedBaseStatPickerProps> = styled(BaseStatPicker)
+  .attrs({
+    statType: 'sanity',
+    valueStyle: {
+      color: color.sanity,
+      fontSize: 30
+    },
+    itemHeight: assetsSize.main,
+    contentContainerStyle: {
+      position: 'absolute',
+      zIndex: 4,
+      right: 5,
+      top: -40
+    },
+    gap: 12
+  })`
+    
+  `;
+
 
 export const Picker: typeof StatPicker = styled(StatPicker).attrs({
 	valueStyle: {

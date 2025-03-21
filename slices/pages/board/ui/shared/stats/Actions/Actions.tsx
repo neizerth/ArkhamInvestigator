@@ -52,11 +52,20 @@ export const Actions = ({ ...props }: ActionsProps) => {
 		dispatch(decreaseCurrentStat("actions"));
 	}, [dispatch]);
 
+	const onDiffLongPress = useCallback(() => {
+		const decreasedValue = Math.max(0, value - (baseValue - initialValue));
+		dispatch(setBaseStat("actions", initialValue));
+		dispatch(setCurrentStat("actions", decreasedValue));
+	}, [dispatch, initialValue, baseValue, value]);
+
 	return (
 		<C.Container {...props}>
 			<C.Content>
 				{baseValue !== initialValue && (
-					<C.InitialDiff onPress={onDiffPress}>
+					<C.InitialDiff 
+						onPress={onDiffPress}
+						onLongPress={onDiffLongPress}
+					>
 						<C.DiffValue value={signedNumber(baseValue - initialValue)} />
 					</C.InitialDiff>
 				)}

@@ -13,8 +13,7 @@ export const Picker: typeof BasePicker = styled(BasePicker).attrs({
 	},
 	listStyle: {
 		borderRadius: 80,
-	},
-	gap: 48,
+	}
 })`
   
   `;

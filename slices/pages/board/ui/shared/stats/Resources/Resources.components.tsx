@@ -5,7 +5,7 @@ import * as UI from "@shared/ui";
 import { View } from "react-native";
 import styled from "styled-components/native";
 import { StatPickerMemo as StatPicker } from "../StatPicker";
-import { Value as BaseValue } from "../Value";
+import { Value as BaseValue } from "../common/Value";
 
 export const Container = withStat(UI.Resource, {
 	height: assetsSize.resource,

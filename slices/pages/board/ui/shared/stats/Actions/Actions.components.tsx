@@ -5,8 +5,8 @@ import { Action, Icon, IconProps, TouchableOpacity } from "@shared/ui";
 import { FC } from "react";
 import { View } from "react-native";
 import styled, { css } from "styled-components/native";
-import { StatPickerMemo as StatPicker } from "../StatPicker";
-import { Value as BaseValue, Value } from "../Value";
+import { StatPickerMemo as StatPicker } from "../common/StatPicker";
+import { Value as BaseValue, Value } from "../common/Value";
 
 const BaseBackground = withStat(Action, {
 	height: assetsSize.action,

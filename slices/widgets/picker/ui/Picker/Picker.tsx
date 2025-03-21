@@ -4,41 +4,15 @@ import { PickerListMemo as PickerList } from "../PickerList";
 import * as C from "./Picker.components";
 
 export const Picker = ({
-	value,
-	data,
-	onValueChanged,
-	renderItem,
-	renderItemContainer,
+	style,
 	itemHeight = 24,
-	itemContainerStyle,
-	visibleItemsCount,
-	listStyle,
-	onLongPress,
-	onPress,
-	delayLongPress,
-	pressPattern,
-	longPressPattern,
-	gap,
-	...restProps
+	...props
 }: PickerProps) => {
 	return (
-		<C.Container {...restProps}>
+		<C.Container style={style}>
 			<PickerList
-				value={value}
-				data={data}
-				onChange={onValueChanged}
-				renderItem={renderItem}
-				renderItemContainer={renderItemContainer}
+				{...props}
 				itemHeight={itemHeight}
-				itemContainerStyle={itemContainerStyle}
-				visibleItemsCount={visibleItemsCount}
-				style={listStyle}
-				onLongPress={onLongPress}
-				onPress={onPress}
-				delayLongPress={delayLongPress}
-				gap={gap}
-				pressPattern={pressPattern}
-				longPressPattern={longPressPattern}
 			/>
 		</C.Container>
 	);

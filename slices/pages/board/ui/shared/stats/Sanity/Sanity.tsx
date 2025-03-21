@@ -5,6 +5,7 @@ import {
 	increaseCurrentStat,
 	selectCurrentBoard,
 	selectShowAdditionalInformation,
+	setBaseStat,
 	signedNumber,
 	useAppDispatch,
 	useAppSelector,
@@ -45,12 +46,6 @@ export const Sanity = ({ ...props }: SanityProps) => {
 
 	const onPress = useCallback(() => {
 		dispatch(decreaseCurrentStat("sanity"));
-		dispatch(decreaseBaseStat("sanity"));
-	}, [dispatch]);
-
-	const onDiffPress = useCallback(() => {
-		dispatch(decreaseBaseStat("sanity"));
-		dispatch(decreaseCurrentStat("sanity"));
 	}, [dispatch]);
 
 	const pickerStyle = {
@@ -61,11 +56,7 @@ export const Sanity = ({ ...props }: SanityProps) => {
 
 	return (
 		<C.Container {...props}>
-			{baseValue !== initialValue && (
-				<C.InitialDiff onPress={onDiffPress}>
-					<C.DiffValue value={signedNumber(baseValue - initialValue)} />
-				</C.InitialDiff>
-			)}
+			{baseValue !== initialValue && <C.BaseSanity/>}
 			{showAdditionalInfo && <C.Wounds value={`-${wounds}`} />}
 			<C.Picker
 				value={value}

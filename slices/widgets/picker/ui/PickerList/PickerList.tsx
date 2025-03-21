@@ -24,16 +24,18 @@ export const PickerList = ({
 	renderItem,
 	renderItemContainer = defaultRenderItemContainer,
 	visibleItemsCount = 3,
-	onChange,
 	delayLongPress = 500,
+	onValueChanged,
 	onLongPress,
 	onPress,
 	gap = 0,
 	pressPattern = "effectTick",
 	longPressPattern = "effectTick",
+	animatedInit = true,
 	...props
 }: PickerListProps) => {
 	const activated = useRef(false);
+	const touching = useRef(false);
 	const canPress = useRef(false);
 	const uiSync = useRef(false);
 
@@ -45,6 +47,7 @@ export const PickerList = ({
 	const itemHeight = props.itemHeight + gap;
 
 	useEffect(() => {
+		touching.current = false;
 		activated.current = false;
 		canPress.current = false;
 		uiSync.current = false;
@@ -75,9 +78,9 @@ export const PickerList = ({
 
 		listRef.current?.scrollToIndex({
 			index: defaultIndex,
-			animated: true,
+			animated: animatedInit,
 		});
-	}, [defaultIndex]);
+	}, [defaultIndex, animatedInit]);
 
 	const snapToOffsets = useMemo(
 		() => data.map((_, i) => i * itemHeight),
@@ -86,8 +89,7 @@ export const PickerList = ({
 
 	const onScrollEnd = useCallback(() => {
 		const nextValue = data[index.current];
-
-		activated.current = false;
+		activated.current = touching.current;
 
 		if (uiSync.current) {
 			uiSync.current = false;
@@ -97,12 +99,11 @@ export const PickerList = ({
 		if (value === nextValue) {
 			return;
 		}
-
-		onChange?.({
+		onValueChanged?.({
 			value: nextValue,
 			index: index.current,
 		});
-	}, [data, onChange, value]);
+	}, [data, onValueChanged, value]);
 
 	const onScroll = useCallback(
 		(e: ListScrollEvent) => {
@@ -129,6 +130,7 @@ export const PickerList = ({
 	);
 
 	const onTouchStart = useCallback(() => {
+		touching.current = true;
 		activated.current = true;
 		canPress.current = true;
 		uiSync.current = false;
@@ -140,8 +142,7 @@ export const PickerList = ({
 			if (!canPress.current) {
 				return;
 			}
-			activated.current = false;
-			canPress.current = false;
+
 			if (onLongPress() !== false) {
 				impactHapticFeedback(longPressPattern);
 			}
@@ -150,8 +151,9 @@ export const PickerList = ({
 
 	const onTouchEnd = useCallback(() => {
 		activated.current = false;
+		touching.current = false;
+		clearTimeout(longPressTimeout.current);
 		if (canPress.current && onPress) {
-			clearTimeout(longPressTimeout.current);
 
 			if (onPress() !== false) {
 				impactHapticFeedback(pressPattern);
