@@ -108,9 +108,12 @@ export const PickerList = ({
 		});
 	}, [data, onValueChanged, value]);
 
+	const onTouchMove = useCallback(() => {
+		canPress.current = false;
+	}, [])
+
 	const onScroll = useCallback(
 		(e: ListScrollEvent) => {
-			canPress.current = false;
 			if (longPressTimeout.current) {
 				clearTimeout(longPressTimeout.current);
 			}
@@ -200,6 +203,7 @@ export const PickerList = ({
 			initialScrollIndex={defaultIndex}
 			onTouchStart={onTouchStart}
 			onTouchEnd={onTouchEnd}
+			onTouchMove={onTouchMove}
 			onMomentumScrollEnd={onScrollEnd}
 			onScroll={onScroll}
 			snapToOffsets={snapToOffsets}
