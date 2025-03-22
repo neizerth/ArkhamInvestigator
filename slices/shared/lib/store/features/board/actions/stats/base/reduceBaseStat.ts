@@ -1,11 +1,12 @@
 import type { ActionCreator } from "@reduxjs/toolkit";
-import { type AppThunk, addCurrentHistoryItem } from "@shared/lib/store";
+import { type AppThunk } from "@shared/lib/store";
 import type {
 	InvestigatorBoardStat,
 	InvestigatorBoardValues,
 } from "@shared/model";
 import { selectCurrentBoard } from "../../../selectors/selectCurrentBoard";
 import { setCurrentBoard } from "../../board/setCurrentBoard";
+import { addCurrentHistoryItem } from "../../history/addCurrentHistoryItem";
 
 export type ReduceBaseStatOptions = {
 	addToHistory?: boolean;

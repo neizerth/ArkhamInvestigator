@@ -2,7 +2,7 @@ import { impactHapticFeedback } from "@features/haptic";
 import type { HapticPatternType } from "@shared/model";
 import type { GestureResponderEvent } from "react-native";
 
-type PressEventHandler = (e: GestureResponderEvent) => void;
+type PressEventHandler = (e: GestureResponderEvent) => void | boolean;
 
 type HandlePressOptions = {
 	event: GestureResponderEvent;
@@ -18,6 +18,7 @@ export const handlePress = ({
 	if (!eventHandler) {
 		return;
 	}
-	impactHapticFeedback(pattern);
-	eventHandler(event);
+	if (eventHandler(event) !== false) {
+		impactHapticFeedback(pattern);
+	}
 };

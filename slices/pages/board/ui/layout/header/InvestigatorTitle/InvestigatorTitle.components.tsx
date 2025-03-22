@@ -4,14 +4,14 @@ import { ArnoPro } from "@shared/fonts";
 import { Conkordia } from "@shared/fonts";
 import { SanCn } from "@shared/fonts";
 import { withIcon } from "@shared/lib/hoc";
-import { Row, UnscaledText } from "@shared/ui";
+import { Row, TouchableOpacity, UnscaledText } from "@shared/ui";
 import type { FC } from "react";
 import type { ImageBackgroundProps, ImageProps } from "react-native";
 import { Text } from "react-native";
 import { ImageBackground, View } from "react-native";
 import styled, { css } from "styled-components/native";
 
-export const Container: FC<ImageBackgroundProps> = styled(ImageBackground)`
+export const Background: FC<ImageBackgroundProps> = styled(ImageBackground)`
   ${({ width, height }: ImageProps) => css`
     width: ${width}px;
     height: ${height}px;
@@ -39,4 +39,8 @@ export const Subtitle: typeof View = styled(View)`
 
 export const SubtitleText: typeof UnscaledText = styled(UnscaledText)`
   
+`;
+
+export const FactionSwitch: typeof TouchableOpacity = styled(TouchableOpacity)`
+  flex: 1;
 `;

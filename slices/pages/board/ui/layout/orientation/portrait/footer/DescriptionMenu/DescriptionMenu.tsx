@@ -13,6 +13,7 @@ import { IconProps, Row } from "@shared/ui";
 import { useCallback, useContext } from "react";
 import type { ViewProps } from "react-native-svg/lib/typescript/fabric/utils";
 import * as C from "./DescriptionMenu.components";
+import { routes } from "@shared/config";
 
 export type DescriptionMenuProps = ViewProps;
 
@@ -34,7 +35,7 @@ export const DescriptionMenu = (props: DescriptionMenuProps) => {
 		if (!details || !selection) {
 			return;
 		}
-		dispatch(goToPage("/investigator-details"));
+		dispatch(goToPage(routes.selectInvestigatorDetails));
 		dispatch(setCurrentInvestigatorDetails(details));
 		dispatch(setSelectedInvestigators([selection]));
 		dispatch(setShowDescription(false));
@@ -47,7 +48,7 @@ export const DescriptionMenu = (props: DescriptionMenuProps) => {
 		dispatch(setShowDescription(false));
 		dispatch(setReplaceInvestigator(true));
 		dispatch(setSelectedInvestigators([selection]));
-		dispatch(goToPage("/select-investigators"));
+		dispatch(goToPage(routes.selectInvestigators));
 	}, [dispatch, selection]);
 
 	return (

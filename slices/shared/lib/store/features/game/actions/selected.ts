@@ -1,5 +1,5 @@
 import type { ActionCreator } from "@reduxjs/toolkit";
-import { MAX_PLAYERS } from "@shared/config";
+import { MAX_PLAYERS, routes } from "@shared/config";
 import { goToPage } from "@shared/lib/store/effects";
 import { includesBy } from "@shared/lib/util";
 import type { InvestigatorDetails, SelectedInvestigator } from "@shared/model";
@@ -57,7 +57,7 @@ export const changeSelectedInvestigator: ActionCreator<AppThunk> =
 		}
 
 		if (media?.skins || media?.variants) {
-			dispatch(goToPage("/investigator-details"));
+			dispatch(goToPage(routes.selectInvestigatorDetails));
 			dispatch(setCurrentInvestigatorDetails(details));
 			return;
 		}

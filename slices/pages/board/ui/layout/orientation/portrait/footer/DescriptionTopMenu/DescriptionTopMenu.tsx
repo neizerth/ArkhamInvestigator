@@ -1,16 +1,15 @@
-import { goToPage, resetBoard, useAppDispatch } from "@shared/lib";
+import { goToPage, resetBoard, useAppDispatch, usePage } from "@shared/lib";
 import { useCallback } from "react";
 import type { ViewProps } from "react-native";
 import * as C from "./DescriptionTopMenu.components";
+import { routes } from "@shared/config";
 
 export type DescriptionTopMenuProps = ViewProps;
 
 export const DescriptionTopMenu = ({ ...props }: DescriptionTopMenuProps) => {
 	const dispatch = useAppDispatch();
 
-	const goHome = useCallback(() => {
-		dispatch(goToPage("/"));
-	}, [dispatch]);
+	const goToPage = usePage();
 
 	const clear = useCallback(() => {
 		dispatch(resetBoard());
@@ -18,8 +17,9 @@ export const DescriptionTopMenu = ({ ...props }: DescriptionTopMenuProps) => {
 
 	return (
 		<C.Container {...props}>
-			<C.Exit onPress={goHome} />
-			<C.Clear onPress={clear} />
+			<C.Button icon="resign" onPress={goToPage(routes.home)} />
+			<C.Button icon="question" onPress={goToPage(routes.boardHelp)} />
+			<C.Button icon="repeat" onPress={clear} />
 		</C.Container>
 	);
 };

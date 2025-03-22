@@ -6,8 +6,8 @@ export const getFactionStyle = (faction: Faction) => {
 	const ruleSet: Record<Faction, RuleSet> = {
 		neutral: css`
       padding-left: 10%;
-      padding-right: 12%;
-      padding-bottom: 15%;
+      padding-right: 15%;
+      padding-bottom: 0%;
     `,
 		mystic: css`
       padding-left: 12%;

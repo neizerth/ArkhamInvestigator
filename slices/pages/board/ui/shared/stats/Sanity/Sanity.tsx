@@ -1,7 +1,7 @@
 import { selectShowAdditionalInformation, useAppSelector } from "@shared/lib";
 import { range } from "ramda";
 import type { ViewProps } from "react-native";
-import { useMainStat } from "../../../../lib/hooks/useMainStat";
+import { useStat } from "../../../../lib/hooks/useStat";
 import * as C from "./Sanity.components";
 export type SanityProps = ViewProps;
 
@@ -16,7 +16,7 @@ export const Sanity = ({ ...props }: SanityProps) => {
 		baseValue,
 		value,
 		wounds,
-	} = useMainStat("sanity");
+	} = useStat("sanity");
 
 	const diffValue = baseValue - initialValue;
 

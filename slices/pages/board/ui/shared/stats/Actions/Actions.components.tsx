@@ -7,6 +7,7 @@ import { View } from "react-native";
 import styled, { css } from "styled-components/native";
 import { StatPickerMemo as StatPicker } from "../common/StatPicker";
 import { Value as BaseValue, Value } from "../common/Value";
+import { BaseStatPicker, DefinedBaseStatPickerProps } from "../common";
 
 const BaseBackground = withStat(Action, {
 	height: assetsSize.action,
@@ -46,6 +47,25 @@ export const InitialDiff: typeof TouchableOpacity = styled(TouchableOpacity)`
   height: 48px;
   justify-content: center;
   align-items: flex-start;
+`;
+
+
+export const BaseActions: FC<DefinedBaseStatPickerProps> = styled(BaseStatPicker).attrs({
+	statType: "actions",
+	valueStyle: {
+		color: color.action,
+		fontSize: 30,
+	},
+	itemHeight: assetsSize.main,
+	contentContainerStyle: {
+		position: "absolute",
+		zIndex: 1,
+    right: -40,
+		bottom: 11,
+	},
+	gap: 5,
+})`
+    
 `;
 
 export const DiffValue: typeof Value = styled(Value)`

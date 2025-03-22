@@ -1,8 +1,9 @@
 import {
-	type AppThunk,
-	selectCurrentBoard,
-	setCurrentBoard,
+	type AppThunk
 } from "@shared/lib/store";
+
+import { selectCurrentBoard } from "../../selectors/selectCurrentBoard";
+import { setCurrentBoard } from "../board/setCurrentBoard";
 import type { HistoryItem } from "@shared/model";
 import { v4 } from "uuid";
 

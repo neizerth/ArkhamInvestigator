@@ -28,13 +28,13 @@ export const RootLayout = ({ children }: PropsWithChildren) => {
 		<AppProvider>
 			<Stack screenOptions={screenOptions}>
 				<Stack.Screen
-					name="investigator-details"
+					name="select-investigators/details"
 					options={{
 						presentation: "transparentModal",
 					}}
 				/>
 				<Stack.Screen
-					name="skill-check"
+					name="board/skill-check"
 					options={{
 						presentation: "modal",
 					}}

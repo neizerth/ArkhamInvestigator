@@ -2,7 +2,7 @@ import { selectShowAdditionalInformation, useAppSelector } from "@shared/lib";
 import type { HealthProps as BaseHealthProps } from "@shared/ui";
 import { range } from "ramda";
 import type { ViewStyle } from "react-native";
-import { useMainStat } from "../../../../lib/hooks/useMainStat";
+import { useStat } from "../../../../lib/hooks/useStat";
 import * as C from "./Health.components";
 
 type HealthProps = BaseHealthProps & {
@@ -21,7 +21,7 @@ export const Health = ({ contentContainerStyle, ...props }: HealthProps) => {
 		baseValue,
 		value,
 		wounds,
-	} = useMainStat("health");
+	} = useStat("health");
 
 	const maxValue = baseValue + 1;
 

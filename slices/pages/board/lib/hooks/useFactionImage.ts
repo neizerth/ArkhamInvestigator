@@ -1,5 +1,6 @@
 import { selectCurrentBoard, useAppSelector } from "@shared/lib";
-import type { Faction, FactionImages } from "@shared/model";
+import type { FactionImages } from "@shared/model";
+import { useFaction } from "./useFaction";
 
 type ImagesSource = {
 	default: FactionImages;
@@ -7,8 +8,8 @@ type ImagesSource = {
 };
 
 export const useFactionImage = (imagesSource: ImagesSource) => {
-	const { investigator, isParallel } = useAppSelector(selectCurrentBoard);
-	const faction = investigator.faction_code as Faction;
+	const { isParallel } = useAppSelector(selectCurrentBoard);
+	const { faction } = useFaction();
 
 	const images = isParallel ? imagesSource.parallel : imagesSource.default;
 	const source = images[faction];

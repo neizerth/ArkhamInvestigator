@@ -1,4 +1,4 @@
-import { DEFAULT_LANGUAGE, i18next } from "@features/i18n/config";
+import { DEFAULT_LANGUAGE, I18N_NAMESAPCE, i18next, translations } from "@features/i18n/config";
 import type { AppThunkCreator } from "@shared/lib";
 import { selectLanguage, setLanguage } from "../i18n";
 import { loadTranslation } from "./loadTranslation";
@@ -13,6 +13,7 @@ export const changeLanguage: AppThunkCreator =
 		if (language === DEFAULT_LANGUAGE) {
 			dispatch(setLanguage(language));
 			i18next.changeLanguage(language);
+			i18next.addResourceBundle(language, I18N_NAMESAPCE, translations.en);
 			return;
 		}
 		dispatch(loadTranslation(language));

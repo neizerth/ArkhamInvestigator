@@ -5,6 +5,7 @@ import type { Faction, PropsWithFaction } from "@shared/model";
 import type { ImageBackgroundProps } from "react-native";
 import * as C from "./FactionDescription.components";
 import { images } from "./images";
+import { useFaction } from "@pages/board/lib";
 
 export type FactionDescriptionProps = Omit<ImageBackgroundProps, "source"> &
 	PropsWithFaction;
@@ -30,7 +31,7 @@ export const FactionDescription = ({
 	}
 
 	const { investigator } = useAppSelector(selectCurrentBoard);
-	const faction = investigator.faction_code as Faction;
+	const { faction } = useFaction();
 	const source = images[faction];
 
 	return (

@@ -1,5 +1,6 @@
 import type { Translation } from "@features/i18n/model";
 
+import en from "./en.json";
 import de from "./de.json";
 import es from "./es.json";
 import fr from "./fr.json";
@@ -13,6 +14,7 @@ import zhCn from "./zh-cn.json";
 import zh from "./zh.json";
 
 export const translations: Record<string, Translation> = {
+	en,
 	ru,
 	ko,
 	zh,

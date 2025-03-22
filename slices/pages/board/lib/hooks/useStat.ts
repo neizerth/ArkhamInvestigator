@@ -11,12 +11,12 @@ import {
 	useAppDispatch,
 	useAppSelector,
 } from "@shared/lib";
-import type { InvestigatorMainStatType } from "@shared/model";
+import type { InvestigatorBoardStat, InvestigatorMainStatType } from "@shared/model";
 import type { PickerChangeEvent } from "@widgets/picker";
 import { number } from "mathjs";
 import { useCallback, useMemo } from "react";
 
-export const useMainStat = (statType: InvestigatorMainStatType) => {
+export const useStat = (statType: InvestigatorBoardStat) => {
 	const dispatch = useAppDispatch();
 	const selectValues = useMemo(
 		() => selectCurrentStatValues(statType),
@@ -25,7 +25,6 @@ export const useMainStat = (statType: InvestigatorMainStatType) => {
 
 	const { initialValue, baseValue, value } = useAppSelector(selectValues);
 
-	const diff = baseValue - initialValue;
 	const wounds = Math.max(baseValue - value, 0);
 
 	const onChange = useCallback(

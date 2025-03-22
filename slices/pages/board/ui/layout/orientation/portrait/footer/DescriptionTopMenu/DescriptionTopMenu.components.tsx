@@ -6,10 +6,10 @@ import styled from "styled-components/native";
 
 export const Container: typeof Row = styled(Row)`
   justify-content: space-between;
+	align-items: center;
 `;
 
-export const Exit: FC<DefinedIconButtonProps> = styled(IconButton).attrs({
-	icon: "resign",
+export const Button: typeof IconButton = styled(IconButton).attrs({
 	iconStyle: {
 		color: color.light10,
 		fontSize: 30,
@@ -17,11 +17,3 @@ export const Exit: FC<DefinedIconButtonProps> = styled(IconButton).attrs({
 })`
   `;
 
-export const Clear: FC<DefinedIconButtonProps> = styled(IconButton).attrs({
-	icon: "repeat",
-	iconStyle: {
-		color: color.light10,
-		fontSize: 30,
-	},
-})`
-  `;

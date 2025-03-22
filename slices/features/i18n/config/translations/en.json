@@ -1,6 +1,5 @@
 {
-	"New Game": "새로운 게임",
-	"board.help.scroll": "You can change any investigator value by scrolling a picker to a needed position",
+  "board.help.scroll": "You can change any investigator value by scrolling a picker to a needed position",
   
   "board.help.press.main": "Decrease value by 1",
   "board.help.press.action": "Decrease value by 1. If value is 0, resets counter to its base value",

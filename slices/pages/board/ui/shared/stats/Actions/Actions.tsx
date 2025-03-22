@@ -13,58 +13,44 @@ import { setCurrentStat } from "@shared/lib/store/features/board/actions/stats/c
 import { range } from "ramda";
 import { useCallback } from "react";
 import type { ViewProps } from "react-native";
-import type { PickerChangeEvent } from "../../features";
 import * as C from "./Actions.components";
+import { useStat } from "@pages/board/lib";
 
 export type ActionsProps = ViewProps;
 
 export const Actions = ({ ...props }: ActionsProps) => {
 	const dispatch = useAppDispatch();
 	const board = useAppSelector(selectCurrentBoard);
-	const { additionalAction, actions } = board.value;
-	const baseValue = board.baseValue.actions;
-	const initialValue = board.initialValue.actions;
-	const value = board.value.actions;
+	const { additionalAction } = board.value;
 
-	const onChange = useCallback(
-		({ value }: PickerChangeEvent) => {
-			dispatch(setCurrentStat("actions", value));
-		},
-		[dispatch],
-	);
+	const {
+		value,
+		baseValue,
+		initialValue,
+		onChange,
+		onLongPress
+	} = useStat('actions');
 
 	const toggleAdditionalAction = useCallback(() => {
 		dispatch(setCurrentStat("additionalAction", !additionalAction));
 	}, [dispatch, additionalAction]);
 
-	const onLongPress = useCallback(() => {
-		dispatch(increaseBaseStat("actions"));
-		dispatch(increaseCurrentStat("actions"));
-	}, [dispatch]);
-
 	const onPress = useCallback(() => {
-		const actions = value === 0 ? baseValue : value - 1;
-		dispatch(setCurrentStat("actions", actions));
+		if (value !== 0) {
+			dispatch(setCurrentStat("actions", value - 1));
+			dispatch(setCurrentStat("additionalAction", true));
+			return;
+		}
+		dispatch(setCurrentStat("actions", baseValue));
 	}, [dispatch, value, baseValue]);
 
-	const onDiffPress = useCallback(() => {
-		dispatch(decreaseBaseStat("actions"));
-		dispatch(decreaseCurrentStat("actions"));
-	}, [dispatch]);
-
-	const onDiffLongPress = useCallback(() => {
-		const decreasedValue = Math.max(0, value - (baseValue - initialValue));
-		dispatch(setBaseStat("actions", initialValue));
-		dispatch(setCurrentStat("actions", decreasedValue));
-	}, [dispatch, initialValue, baseValue, value]);
+	const showDiff = baseValue !== initialValue;
 
 	return (
 		<C.Container {...props}>
 			<C.Content>
-				{baseValue !== initialValue && (
-					<C.InitialDiff onPress={onDiffPress} onLongPress={onDiffLongPress}>
-						<C.DiffValue value={signedNumber(baseValue - initialValue)} />
-					</C.InitialDiff>
+				{showDiff && (
+					<C.BaseActions/>
 				)}
 				<C.Picker
 					value={value}

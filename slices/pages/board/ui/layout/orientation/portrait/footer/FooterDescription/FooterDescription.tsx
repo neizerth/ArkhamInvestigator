@@ -15,6 +15,7 @@ import { useCallback, useContext, useRef } from "react";
 import { PanResponder, StyleSheet, type ViewProps } from "react-native";
 import * as C from "./FooterDescription.components";
 import { useAnimation } from "./useAnimation";
+import { useFaction } from "@pages/board/lib";
 
 export type FooterDescriptionProps = ViewProps;
 
@@ -25,7 +26,7 @@ export const FooterDescription = ({ ...props }: FooterDescriptionProps) => {
 	const { view } = useContext(LayoutContext);
 	const board = useAppSelector(selectCurrentBoard);
 	const investigator = board?.investigator;
-	const faction = investigator?.faction_code as Faction;
+	const { faction } = useFaction();
 
 	const onShow = useCallback(() => {
 		if (!showDescription) {
@@ -34,22 +35,7 @@ export const FooterDescription = ({ ...props }: FooterDescriptionProps) => {
 		}
 	}, [showDescription, dispatch]);
 
-	const onHide = useCallback(() => {
-		if (showDescription) {
-			dispatch(setShowDescription(false));
-			impactHapticFeedback("clockTick");
-		}
-	}, [showDescription, dispatch]);
-
 	const contentStyle = useAnimation();
-
-	const goHome = useCallback(() => {
-		dispatch(goToPage("/"));
-	}, [dispatch]);
-
-	const clear = useCallback(() => {
-		dispatch(resetBoard());
-	}, [dispatch]);
 
 	const vw = (view.width * 6) / 100;
 
@@ -64,10 +50,7 @@ export const FooterDescription = ({ ...props }: FooterDescriptionProps) => {
 			<C.Content>
 				<C.Expand style={contentStyle}>
 					{showDescription ? (
-						<>
-							<C.Exit onPress={goHome} />
-							<C.Clear onPress={clear} />
-						</>
+						<C.TopMenu/>
 					) : (
 						<C.ExpandArea onPress={onShow} style={StyleSheet.absoluteFill} />
 					)}

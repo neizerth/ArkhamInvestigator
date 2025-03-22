@@ -7,9 +7,12 @@ export const Container: typeof View = styled(View)`
   position: relative;
 `;
 
-export const Title: typeof InvestigatorTitle = styled(InvestigatorTitle)`
-  position: relative;
-  z-index: 1;
+export const Title: typeof InvestigatorTitle = styled(InvestigatorTitle).attrs({
+  contentContainerStyle: {
+    position: 'relative',
+    zIndex: 1
+  }
+})`  
 `;
 
 export const Skills: typeof InvestigatorSkills = styled(InvestigatorSkills)`

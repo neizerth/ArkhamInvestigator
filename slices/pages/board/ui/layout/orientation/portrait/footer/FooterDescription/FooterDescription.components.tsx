@@ -14,6 +14,7 @@ import Animated from "react-native-reanimated";
 import styled, { css } from "styled-components/native";
 import { FactionDescription } from "../../../../../shared/background";
 import { DescriptionMenu } from "../DescriptionMenu";
+import { DescriptionTopMenu } from "../DescriptionTopMenu";
 
 export const Container: typeof View = styled(View)`
   position: relative;
@@ -46,29 +47,12 @@ export const ExpandArea: typeof Pressable = styled(Pressable).attrs({
     z-index: 10;
   `;
 
-export const Exit: FC<DefinedIconButtonProps> = styled(IconButton).attrs({
-	icon: "resign",
-	iconStyle: {
-		color: color.light10,
-		fontSize: 30,
-	},
-})`
-    position: absolute;
-    left: 0px;
-    top: -60px;
-  `;
-
-export const Clear: FC<DefinedIconButtonProps> = styled(IconButton).attrs({
-	icon: "repeat",
-	iconStyle: {
-		color: color.light10,
-		fontSize: 30,
-	},
-})`
-    position: absolute;
-    right: 5px;
-    top: -60px;
-  `;
+export const TopMenu: typeof DescriptionTopMenu = styled(DescriptionTopMenu)`
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -60px;
+`
 
 export const TextContent: typeof ScrollView = styled(ScrollView)`
   flex: 1;

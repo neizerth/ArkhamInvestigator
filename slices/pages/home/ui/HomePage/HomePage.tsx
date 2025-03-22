@@ -5,11 +5,13 @@ import {
 	selectCurrentBoard,
 	useAppDispatch,
 	useAppSelector,
+	usePage,
 	usePageLoader,
 } from "@shared/lib";
 import { useCallback } from "react";
 import { Button } from "../Button";
 import * as C from "./HomePage.components";
+import { routes } from "@shared/config";
 export const HomePage = () => {
 	const dispatch = useAppDispatch();
 	const { t } = useAppTranslation();
@@ -20,9 +22,8 @@ export const HomePage = () => {
 		dispatch(startNewGame());
 	}, [dispatch]);
 
-	const resume = useCallback(() => {
-		dispatch(goToPage("/board"));
-	}, [dispatch]);
+	const goToPage = usePage();
+	const resume = goToPage(routes.board);
 
 	const onStart = usePageLoader(start);
 	const onResume = usePageLoader(resume);
