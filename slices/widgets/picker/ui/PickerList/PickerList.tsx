@@ -150,6 +150,7 @@ export const PickerList = ({
 			}
 
 			canPress.current = false;
+			activated.current = false;
 
 			if (onLongPress() !== false) {
 				impactHapticFeedback(longPressPattern);
