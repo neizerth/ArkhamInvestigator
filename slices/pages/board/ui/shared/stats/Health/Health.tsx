@@ -4,6 +4,7 @@ import {
 	increaseBaseStat,
 	increaseCurrentStat,
 	selectCurrentBoard,
+	selectCurrentStatValues,
 	selectShowAdditionalInformation,
 	setBaseStat,
 	signedNumber,
@@ -24,17 +25,20 @@ type HealthProps = BaseHealthProps & {
 	contentContainerStyle?: BaseHealthProps['style']
 }
 
+const selectValues = selectCurrentStatValues('health');
+
 export const Health = ({
 	contentContainerStyle,
 	...props
 }: HealthProps) => {
 	const dispatch = useAppDispatch();
-	const board = useAppSelector(selectCurrentBoard);
 	const showAdditionalInfo = useAppSelector(selectShowAdditionalInformation);
 
-	const initialValue = board.initialValue.health || 0;
-	const baseValue = board.baseValue.health || 0;
-	const value = board.value.health;
+	const {
+		initialValue,
+		baseValue,
+		value
+	} = useAppSelector(selectValues);
 
 	const wounds = Math.max(baseValue - value, 0);
 
@@ -47,9 +51,13 @@ export const Health = ({
 	}, [dispatch]);
 
 	const onLongPress = useCallback(() => {
-		dispatch(increaseCurrentStat("health", maxValue));
-		dispatch(increaseBaseStat("health"));
-	}, [dispatch, maxValue]);
+		if (diffValue >= 0) {
+			dispatch(increaseBaseStat("health"));
+		}
+		else {
+			dispatch(decreaseBaseStat("health"));
+		}
+	}, [dispatch, diffValue]);
 
 	const onPress = useCallback(() => {
 		dispatch(decreaseCurrentStat("health"));
@@ -59,9 +67,11 @@ export const Health = ({
 		opacity: showAdditionalInfo ? 0 : 1,
 	}
 
+	const showBaseDiff = Boolean(diffValue);
+
 	return (
 		<C.Container {...props}>
-			{diffValue !== 0 && <C.BaseHealth/>}
+			{showBaseDiff && <C.BaseHealth/>}
 			<C.Content style={contentContainerStyle}>
 				{showAdditionalInfo && <C.Wounds value={`-${wounds}`} />}
 				<C.Picker

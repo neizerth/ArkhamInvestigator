@@ -3,10 +3,8 @@ import {
 	decreaseCurrentStat,
 	increaseBaseStat,
 	increaseCurrentStat,
-	selectCurrentBoard,
+	selectCurrentStatValues,
 	selectShowAdditionalInformation,
-	setBaseStat,
-	signedNumber,
 	useAppDispatch,
 	useAppSelector,
 } from "@shared/lib";
@@ -15,20 +13,22 @@ import type { PickerChangeEvent } from "@widgets/picker";
 import { range } from "ramda";
 import { useCallback } from "react";
 import type { ViewProps } from "react-native";
-import { View } from "react-native-reanimated/lib/typescript/Animated";
 import * as C from "./Sanity.components";
-
 export type SanityProps = ViewProps;
 
-const MAX_SANITY_VALUE = 20;
+const selectValues = selectCurrentStatValues('sanity');
 
 export const Sanity = ({ ...props }: SanityProps) => {
 	const dispatch = useAppDispatch();
-	const board = useAppSelector(selectCurrentBoard);
 	const showAdditionalInfo = useAppSelector(selectShowAdditionalInformation);
-	const value = board.value.sanity;
-	const initialValue = board.initialValue.sanity || 0;
-	const baseValue = board.baseValue.sanity || 0;
+
+	const {
+		value,
+		baseValue,
+		initialValue
+	} = useAppSelector(selectValues);
+
+	const diffValue = baseValue - initialValue;
 
 	const maxValue = baseValue + 10;
 
@@ -40,9 +40,13 @@ export const Sanity = ({ ...props }: SanityProps) => {
 	);
 
 	const onLongPress = useCallback(() => {
-		dispatch(increaseCurrentStat("sanity", maxValue));
-		dispatch(increaseBaseStat("sanity"));
-	}, [dispatch, maxValue]);
+		if (diffValue < 0) {
+			dispatch(increaseBaseStat("health"));
+		}
+		else {
+			dispatch(decreaseBaseStat("health"));
+		}
+	}, [dispatch, diffValue]);
 
 	const onPress = useCallback(() => {
 		dispatch(decreaseCurrentStat("sanity"));
@@ -53,10 +57,11 @@ export const Sanity = ({ ...props }: SanityProps) => {
 	};
 
 	const wounds = Math.max(baseValue - value, 0);
+	const showBaseDiff = Boolean(diffValue);
 
 	return (
 		<C.Container {...props}>
-			{baseValue !== initialValue && <C.BaseSanity/>}
+			{showBaseDiff && <C.BaseSanity/>}
 			{showAdditionalInfo && <C.Wounds value={`-${wounds}`} />}
 			<C.Picker
 				value={value}

@@ -15,6 +15,11 @@ export type BaseStatPickerProps = DefinedBaseStatPickerProps & {
   statType: InvestigatorBoardStat
 }
 
+const pickerData = [
+  ...range(-9, 0),
+  ...range(1, 10)
+]
+
 export const BaseStatPicker = ({
   statType,
   contentContainerStyle,
@@ -48,20 +53,20 @@ export const BaseStatPicker = ({
 
   const setDiff = useCallback((nextDiff: number) => {
     const nextBaseValue = initialValue + nextDiff;
-    const diff = baseValue - initialValue
-    const delta = nextDiff - diff
-    const nextValue = Math.max(0, delta + value);
-    
     dispatch(setBaseStat(statType, nextBaseValue));
+    const nextValue = Math.min(
+      nextBaseValue,
+      value
+    )
     dispatch(setCurrentStat(statType, nextValue));
-  }, [dispatch, statType, initialValue, value, baseValue]);
+  }, [dispatch, statType, initialValue, value]);
   
   return (
     <C.Container style={contentContainerStyle}>
       <C.Picker
         {...props}
         value={diff}
-        data={range(-9, 10)}
+        data={pickerData}
         onValueChanged={onChange}
         onPress={onPress}
         onLongPress={onLongPress}
