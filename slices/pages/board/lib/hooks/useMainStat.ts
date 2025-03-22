@@ -1,7 +1,9 @@
-import { decreaseCurrentStat, increaseBaseStat, increaseCurrentStat, selectCurrentStatValues, selectShowAdditionalInformation, setBaseStat, setCurrentStat, useAppDispatch, useAppSelector } from "@shared/lib";
+import { addCurrentHistoryItem, decreaseCurrentStat, increaseBaseStat, increaseCurrentStat, selectCurrentStatValues, selectShowAdditionalInformation, setBaseStat, setCurrentStat, setStatTransaction, useAppDispatch, useAppSelector } from "@shared/lib";
 import { InvestigatorMainStatType } from "@shared/model";
 import { PickerChangeEvent } from "@widgets/picker";
+import { number } from "mathjs";
 import { useCallback, useMemo } from "react";
+
 
 export const useMainStat = (statType: InvestigatorMainStatType) => {
   const dispatch = useAppDispatch();
@@ -24,9 +26,15 @@ export const useMainStat = (statType: InvestigatorMainStatType) => {
   }, [dispatch, statType]);
 
   const onLongPress = useCallback(() => {
+    const diff = baseValue - initialValue;
+
     if (diff === 0) {
-      dispatch(increaseBaseStat(statType));
-      dispatch(increaseCurrentStat(statType));
+      console.log({value})
+      dispatch(setStatTransaction(
+        statType,
+        value + 1, 
+        baseValue + 1,
+      ));
       return;
     }
 
@@ -34,11 +42,14 @@ export const useMainStat = (statType: InvestigatorMainStatType) => {
       initialValue,
       value - diff
     )
-    
-    dispatch(setBaseStat(statType, initialValue));
-    dispatch(setCurrentStat(statType, nextValue));
 
-  }, [dispatch, diff, initialValue, statType, value]);
+    dispatch(setStatTransaction(
+      statType,
+      nextValue, 
+      initialValue,
+    ));
+
+  }, [dispatch, baseValue, initialValue, value, statType]);
 
   const onPress = useCallback(() => {
     dispatch(decreaseCurrentStat(statType));

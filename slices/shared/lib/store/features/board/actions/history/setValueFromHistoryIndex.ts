@@ -7,6 +7,9 @@ import type {
 
 import { selectCurrentBoard } from "../../selectors/selectCurrentBoard";
 import { setCurrentBoard } from "../board/setCurrentBoard";
+import { prop, propEq } from "ramda";
+
+type Patch = Partial<InvestigatorBoardValues>;
 
 export const setValueFromHistoryIndex: AppThunkCreator =
 	(historyIndex: number) => (dispatch, getState) => {
@@ -17,26 +20,30 @@ export const setValueFromHistoryIndex: AppThunkCreator =
 			return;
 		}
 
-		const { history, baseValue } = board;
+		const { history, initialValue } = board;
 
 		const items = historyIndex === -1 ? [] : history.slice(0, historyIndex + 1);
 
-		const patches = items.map(({ type, value }) => ({
-			[type]: value,
-		}));
+		const valuePatches = items.map(prop('value'));
+		const basePatches = items.map(prop('baseValue'));
 
-		const patch: Partial<InvestigatorBoardValues> = Object.assign(
-			{},
-			...patches,
-		);
+		const valuePatch: Patch = Object.assign({}, ...valuePatches);
+		const basePatch: Patch = Object.assign({}, ...basePatches);
 
 		const value: InvestigatorBoardValues = {
-			...baseValue,
-			...patch,
-		};
+			...initialValue,
+			...valuePatch,
+		}
+
+		const baseValue: InvestigatorBoardValues = {
+			...initialValue,
+			...basePatch,
+		}
+		
 		const data: InvestigatorBoard = {
 			...board,
 			value,
+			baseValue,
 			historyIndex,
 		};
 

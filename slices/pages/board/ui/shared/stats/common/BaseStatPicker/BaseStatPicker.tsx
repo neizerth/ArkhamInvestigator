@@ -1,7 +1,7 @@
 import { range } from 'ramda';
 import * as C from './BaseStatPicker.components';
 import { useCallback, useMemo } from 'react';
-import { selectCurrentStatValues, setBaseStat, setCurrentStat, useAppDispatch, useAppSelector } from '@shared/lib';
+import { selectCurrentStatValues, setStatTransaction, useAppDispatch, useAppSelector } from '@shared/lib';
 import type { InvestigatorBoardStat } from '@shared/model';
 import type { PickerChangeEvent } from '@widgets/picker';
 import { ViewStyle } from 'react-native';
@@ -15,10 +15,9 @@ export type BaseStatPickerProps = DefinedBaseStatPickerProps & {
   statType: InvestigatorBoardStat
 }
 
-const pickerData = [
-  ...range(-9, 0),
-  ...range(1, 10)
-]
+const noHistory = {
+  addToHistory: false
+}
 
 export const BaseStatPicker = ({
   statType,
@@ -36,6 +35,11 @@ export const BaseStatPicker = ({
     value
   } = useAppSelector(selectValues);
 
+  const pickerData = [
+    ...range(-initialValue, 0),
+    ...range(1, 10)
+  ]
+
   const diff = baseValue - initialValue;
 
   const dispatch = useAppDispatch();
@@ -45,8 +49,6 @@ export const BaseStatPicker = ({
       0,
       initialValue + nextDiff
     )
-    
-    dispatch(setBaseStat(statType, nextBaseValue));
 
     const delta = nextBaseValue - baseValue;
 
@@ -57,7 +59,12 @@ export const BaseStatPicker = ({
         value + delta
       )
     )
-    dispatch(setCurrentStat(statType, nextValue));
+
+    dispatch(setStatTransaction(
+      statType,
+      nextValue,
+      nextBaseValue
+    ))
   }, [dispatch, statType, initialValue, baseValue, value]);
 
   const onChange = useCallback(({ value = 0 }: PickerChangeEvent) => {

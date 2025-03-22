@@ -7,11 +7,12 @@ import {
 } from "@reduxjs/toolkit";
 
 import devToolsEnhancer from "redux-devtools-expo-dev-plugin";
-import { persistReducer, persistStore } from "redux-persist";
+import { createMigrate, persistReducer, persistStore } from "redux-persist";
 
 import { persistStorageConfig } from "@features/storage";
 import { serializableCheck } from "./middleware";
 import reducers from "./reducer";
+import { persistConfigMigrations } from "@features/storage/migrations";
 
 export type AppThunk<ReturnType = void> = ThunkAction<
 	ReturnType,
@@ -25,7 +26,10 @@ export type AppSelector<ReturnType = unknown> = (
 ) => ReturnType;
 
 const rootReducer = combineReducers(reducers);
-const reducer = persistReducer(persistStorageConfig, rootReducer);
+const reducer = persistReducer({
+	...persistStorageConfig,
+	migrate: createMigrate(persistConfigMigrations)
+}, rootReducer);
 
 export const makeStore = () => {
 	const store = configureStore({
