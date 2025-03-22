@@ -7,16 +7,9 @@ import {
 	type ValueProps as BaseValueProps,
 } from "../Value";
 
-export const Picker: typeof BasePicker = styled(BasePicker).attrs({
-	contentContainerStyle: {
-		justifyContent: "center",
-	},
-	listStyle: {
-		borderRadius: 80,
-	}
-})`
-  
-  `;
+export const Picker: typeof BasePicker = styled(BasePicker)`
+
+`;
 
 export const Item: typeof View = styled(View)`
   flex: 1;

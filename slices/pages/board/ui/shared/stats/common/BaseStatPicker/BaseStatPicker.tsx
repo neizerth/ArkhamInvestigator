@@ -1,7 +1,7 @@
 import { range } from 'ramda';
 import * as C from './BaseStatPicker.components';
-import { useCallback } from 'react';
-import { decreaseBaseStat, increaseBaseStat, selectCurrentBoard, setBaseStat, setCurrentStat, useAppDispatch, useAppSelector } from '@shared/lib';
+import { useCallback, useMemo } from 'react';
+import { selectCurrentStatValues, setBaseStat, setCurrentStat, useAppDispatch, useAppSelector } from '@shared/lib';
 import type { InvestigatorBoardStat } from '@shared/model';
 import type { PickerChangeEvent } from '@widgets/picker';
 import { ViewStyle } from 'react-native';
@@ -25,15 +25,49 @@ export const BaseStatPicker = ({
   contentContainerStyle,
   ...props
 }: BaseStatPickerProps) => {
-  const currentBoard = useAppSelector(selectCurrentBoard);
-  const initialValue = currentBoard.initialValue[statType];
-  const baseValue = currentBoard.baseValue[statType];
-  const value = currentBoard.value[statType]
+  const selectValues = useMemo(
+    () => selectCurrentStatValues(statType), 
+    [statType]
+  )
+
+  const {
+    initialValue,
+    baseValue,
+    value
+  } = useAppSelector(selectValues);
 
   const diff = baseValue - initialValue;
 
   const dispatch = useAppDispatch();
 
+  const setDiff = useCallback((nextDiff: number) => {
+    const nextBaseValue = Math.max(
+      0,
+      initialValue + nextDiff
+    )
+    
+    dispatch(setBaseStat(statType, nextBaseValue));
+
+    const delta = nextBaseValue - baseValue;
+
+    const nextValue = Math.max(
+      0,
+      Math.min(
+        nextBaseValue,
+        value + delta
+      )
+    )
+    dispatch(setCurrentStat(statType, nextValue));
+  }, [dispatch, statType, initialValue, baseValue, value]);
+
+  const onChange = useCallback(({ value = 0 }: PickerChangeEvent) => {
+    setDiff(value)
+  }, [setDiff]);
+
+  const onLongPress = useCallback(() => {
+    setDiff(0);
+  }, [setDiff]);
+  
   const onPress = useCallback(() => {
     if (diff > 0) {
       setDiff(diff - 1)
@@ -41,26 +75,8 @@ export const BaseStatPicker = ({
     else {
       setDiff(diff + 1)
     }
-  }, [diff]);
+  }, [diff, setDiff]);
 
-  const onLongPress = useCallback(() => {
-    setDiff(0)
-  }, []);
-
-  const onChange = useCallback(({ value = 0 }: PickerChangeEvent) => {
-    setDiff(value)
-  }, []);
-
-  const setDiff = useCallback((nextDiff: number) => {
-    const nextBaseValue = initialValue + nextDiff;
-    dispatch(setBaseStat(statType, nextBaseValue));
-    const nextValue = Math.min(
-      nextBaseValue,
-      value
-    )
-    dispatch(setCurrentStat(statType, nextValue));
-  }, [dispatch, statType, initialValue, value]);
-  
   return (
     <C.Container style={contentContainerStyle}>
       <C.Picker

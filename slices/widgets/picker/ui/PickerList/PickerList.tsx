@@ -74,13 +74,16 @@ export const PickerList = ({
 		if (index.current === defaultIndex) {
 			return;
 		}
+		if (data.length === 0) {
+			return;
+		}
 		uiSync.current = true;
 
 		listRef.current?.scrollToIndex({
 			index: defaultIndex,
 			animated: animatedInit,
 		});
-	}, [defaultIndex, animatedInit]);
+	}, [defaultIndex, animatedInit, data]);
 
 	const snapToOffsets = useMemo(
 		() => data.map((_, i) => i * itemHeight),

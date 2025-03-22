@@ -14,7 +14,7 @@ export const BaseContainer = withStat(UI.Sanity, {
 });
 
 export const Container: typeof BaseContainer = styled(BaseContainer)`
-  position: relative;
+
 `;
 
 export const Value: typeof BaseValue = styled(BaseValue)`
@@ -36,13 +36,12 @@ export const BaseSanity: FC<DefinedBaseStatPickerProps> = styled(BaseStatPicker)
     itemHeight: assetsSize.main,
     contentContainerStyle: {
       position: 'absolute',
-      zIndex: 4,
+      zIndex: 5,
       right: 0,
-      top: -35
+      top: -45
     },
-    gap: 12
+    gap: 5
   })`
-    
   `;
 
 

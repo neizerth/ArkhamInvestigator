@@ -2,6 +2,7 @@ import type { PickerItemInfo, PickerProps } from "@widgets/picker";
 import { FC, memo, useCallback } from "react";
 import type { ValueProps } from "../Value";
 import * as C from "./StatPicker.components";
+import { defaultStyles } from "./StatPicker.styles";
 
 export type StatPickerProps = Omit<PickerProps, "renderItem"> & {
 	valueStyle?: ValueProps["style"]
@@ -13,7 +14,6 @@ export const StatPicker = ({
 		valueStyle,
 		Component = C.Value,
 		signed,
-		gap = 48,
 		...props 
 	}: StatPickerProps) => {
 	const renderItem = useCallback(
@@ -32,10 +32,10 @@ export const StatPicker = ({
 	);
 
 	return (
-		<C.Picker 
+		<C.Picker
+			{...defaultStyles}
 			{...props} 
 			renderItem={renderItem}
-			gap={gap}
 		/>
 	);
 };

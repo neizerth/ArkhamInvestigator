@@ -1,62 +1,34 @@
 import {
-	decreaseBaseStat,
-	decreaseCurrentStat,
-	increaseBaseStat,
-	increaseCurrentStat,
-	selectCurrentStatValues,
 	selectShowAdditionalInformation,
-	useAppDispatch,
 	useAppSelector,
 } from "@shared/lib";
-import { setCurrentStat } from "@shared/lib/store/features/board/actions/stats/current/setCurrentStat";
-import type { PickerChangeEvent } from "@widgets/picker";
 import { range } from "ramda";
-import { useCallback } from "react";
 import type { ViewProps } from "react-native";
 import * as C from "./Sanity.components";
+import { useMainStat } from "../../../../lib/hooks/useMainStat";
 export type SanityProps = ViewProps;
 
-const selectValues = selectCurrentStatValues('sanity');
-
 export const Sanity = ({ ...props }: SanityProps) => {
-	const dispatch = useAppDispatch();
 	const showAdditionalInfo = useAppSelector(selectShowAdditionalInformation);
 
 	const {
-		value,
+		onPress,
+		onLongPress,
+		onChange,
+		initialValue,
 		baseValue,
-		initialValue
-	} = useAppSelector(selectValues);
+		value,
+		wounds
+	} = useMainStat('sanity')
 
 	const diffValue = baseValue - initialValue;
 
-	const maxValue = baseValue + 10;
-
-	const onChange = useCallback(
-		({ value }: PickerChangeEvent) => {
-			dispatch(setCurrentStat("sanity", value));
-		},
-		[dispatch],
-	);
-
-	const onLongPress = useCallback(() => {
-		if (diffValue < 0) {
-			dispatch(increaseBaseStat("health"));
-		}
-		else {
-			dispatch(decreaseBaseStat("health"));
-		}
-	}, [dispatch, diffValue]);
-
-	const onPress = useCallback(() => {
-		dispatch(decreaseCurrentStat("sanity"));
-	}, [dispatch]);
+	const maxValue = baseValue + 1;
 
 	const pickerStyle = {
 		opacity: showAdditionalInfo ? 0 : 1,
 	};
 
-	const wounds = Math.max(baseValue - value, 0);
 	const showBaseDiff = Boolean(diffValue);
 
 	return (
@@ -65,7 +37,7 @@ export const Sanity = ({ ...props }: SanityProps) => {
 			{showAdditionalInfo && <C.Wounds value={`-${wounds}`} />}
 			<C.Picker
 				value={value}
-				data={range(0, maxValue + 1)}
+				data={range(0, maxValue)}
 				onValueChanged={onChange}
 				onLongPress={onLongPress}
 				onPress={onPress}
