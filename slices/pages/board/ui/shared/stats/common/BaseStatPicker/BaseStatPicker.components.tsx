@@ -7,6 +7,7 @@ export const Container: typeof View = styled(View)`
   width: 48px;
   justify-content: center;
   align-items: center;
+  border-radius: 48px;
 `
 
 export const Picker: typeof StatPicker = styled(StatPicker)`

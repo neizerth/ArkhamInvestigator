@@ -37,8 +37,8 @@ export const BaseSanity: FC<DefinedBaseStatPickerProps> = styled(BaseStatPicker)
     contentContainerStyle: {
       position: 'absolute',
       zIndex: 4,
-      right: 5,
-      top: -40
+      right: 0,
+      top: -35
     },
     gap: 12
   })`
