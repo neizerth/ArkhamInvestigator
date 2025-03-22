@@ -29,16 +29,16 @@ type ContainerProps = {
 	value?: number;
 	data: number[];
 	itemContainerStyle?: ViewStyle;
-	renderItemContainer?: PickerRenderContainer
-	visibleItemsCount?: number
-	onPress?: () => void | boolean
-	onLongPress?: () => void | boolean
-	pressPattern?: HapticPatternType
-	longPressPattern?: HapticPatternType
-	delayLongPress?: number
-	gap?: number
-	onValueChanged?: (event: PickerChangeEvent) => void
-	animatedInit?: boolean
+	renderItemContainer?: PickerRenderContainer;
+	visibleItemsCount?: number;
+	onPress?: () => void | boolean;
+	onLongPress?: () => void | boolean;
+	pressPattern?: HapticPatternType;
+	longPressPattern?: HapticPatternType;
+	delayLongPress?: number;
+	gap?: number;
+	onValueChanged?: (event: PickerChangeEvent) => void;
+	animatedInit?: boolean;
 };
 
 export type PickerChangeEvent = {

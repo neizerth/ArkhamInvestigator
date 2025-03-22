@@ -1,33 +1,27 @@
-import {
-	selectShowAdditionalInformation,
-	useAppSelector,
-} from "@shared/lib";
-import type { HealthProps as BaseHealthProps} from "@shared/ui";
+import { selectShowAdditionalInformation, useAppSelector } from "@shared/lib";
+import type { HealthProps as BaseHealthProps } from "@shared/ui";
 import { range } from "ramda";
-import * as C from "./Health.components";
 import type { ViewStyle } from "react-native";
 import { useMainStat } from "../../../../lib/hooks/useMainStat";
+import * as C from "./Health.components";
 
 type HealthProps = BaseHealthProps & {
-	style?: ViewStyle
-	contentContainerStyle?: BaseHealthProps['style']
-}
+	style?: ViewStyle;
+	contentContainerStyle?: BaseHealthProps["style"];
+};
 
-export const Health = ({
-	contentContainerStyle,
-	...props
-}: HealthProps) => {
+export const Health = ({ contentContainerStyle, ...props }: HealthProps) => {
 	const showAdditionalInfo = useAppSelector(selectShowAdditionalInformation);
-	
+
 	const {
-    onPress,
-    onLongPress,
-    onChange,
+		onPress,
+		onLongPress,
+		onChange,
 		initialValue,
-    baseValue,
-    value,
-		wounds
-  } = useMainStat('health')
+		baseValue,
+		value,
+		wounds,
+	} = useMainStat("health");
 
 	const maxValue = baseValue + 1;
 
@@ -35,13 +29,13 @@ export const Health = ({
 
 	const pickerStyle = {
 		opacity: showAdditionalInfo ? 0 : 1,
-	}
+	};
 
 	const showBaseDiff = Boolean(diffValue);
 
 	return (
 		<C.Container {...props}>
-			{showBaseDiff && <C.BaseHealth/>}
+			{showBaseDiff && <C.BaseHealth />}
 			<C.Content style={contentContainerStyle}>
 				{showAdditionalInfo && <C.Wounds value={`-${wounds}`} />}
 				<C.Picker

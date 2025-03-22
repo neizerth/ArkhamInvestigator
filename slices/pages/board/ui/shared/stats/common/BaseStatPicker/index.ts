@@ -1,1 +1,1 @@
-export * from './BaseStatPicker';
+export * from "./BaseStatPicker";

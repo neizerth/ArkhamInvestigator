@@ -41,6 +41,6 @@ export type InvestigatorBoard = {
 
 export type HistoryItem = {
 	id: string;
-	baseValue?: Partial<InvestigatorBoardValues>
-	value?: Partial<InvestigatorBoardValues>
+	baseValue?: Partial<InvestigatorBoardValues>;
+	value?: Partial<InvestigatorBoardValues>;
 };

@@ -9,13 +9,13 @@ import type {
 	InvestigatorBoardValues,
 } from "@shared/model";
 import { always } from "ramda";
-import { reduceBaseStat, ReduceBaseStatOptions } from "./reduceBaseStat";
+import { type ReduceBaseStatOptions, reduceBaseStat } from "./reduceBaseStat";
 
 export const setBaseStat: ActionCreator<AppThunk> =
 	<T extends keyof InvestigatorBoardValues>(
 		type: T,
 		value: InvestigatorBoardValues[T],
-		options?: ReduceBaseStatOptions
+		options?: ReduceBaseStatOptions,
 	) =>
 	(dispatch) =>
 		dispatch(reduceBaseStat(type, always(value), options));

@@ -11,11 +11,7 @@ export const Picker = ({
 }: PickerProps) => {
 	return (
 		<C.Container style={style}>
-			<PickerList
-				{...props}
-				style={listStyle}
-				itemHeight={itemHeight}
-			/>
+			<PickerList {...props} style={listStyle} itemHeight={itemHeight} />
 		</C.Container>
 	);
 };

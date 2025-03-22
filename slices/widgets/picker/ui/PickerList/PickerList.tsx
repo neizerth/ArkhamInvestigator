@@ -110,7 +110,7 @@ export const PickerList = ({
 
 	const onTouchMove = useCallback(() => {
 		canPress.current = false;
-	}, [])
+	}, []);
 
 	const onScroll = useCallback(
 		(e: ListScrollEvent) => {
@@ -163,11 +163,10 @@ export const PickerList = ({
 		touching.current = false;
 		clearTimeout(longPressTimeout.current);
 		if (canPress.current && onPress) {
-
 			if (onPress() !== false) {
 				impactHapticFeedback(pressPattern);
 			}
-			
+
 			canPress.current = false;
 
 			return;

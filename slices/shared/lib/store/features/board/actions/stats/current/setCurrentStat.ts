@@ -10,13 +10,16 @@ import type {
 } from "@shared/model";
 import { always } from "ramda";
 import { v4 } from "uuid";
-import { reduceCurrentStat, ReduceCurrentStatOptions } from "./reduceCurrentStat";
+import {
+	type ReduceCurrentStatOptions,
+	reduceCurrentStat,
+} from "./reduceCurrentStat";
 
 export const setCurrentStat: ActionCreator<AppThunk> =
 	<T extends keyof InvestigatorBoardValues>(
 		type: T,
 		value: InvestigatorBoardValues[T],
-		options?: ReduceCurrentStatOptions
+		options?: ReduceCurrentStatOptions,
 	) =>
 	(dispatch) =>
 		dispatch(reduceCurrentStat(type, always(value), options));

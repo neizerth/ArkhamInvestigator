@@ -10,9 +10,9 @@ import devToolsEnhancer from "redux-devtools-expo-dev-plugin";
 import { createMigrate, persistReducer, persistStore } from "redux-persist";
 
 import { persistStorageConfig } from "@features/storage";
+import { persistConfigMigrations } from "@features/storage/migrations";
 import { serializableCheck } from "./middleware";
 import reducers from "./reducer";
-import { persistConfigMigrations } from "@features/storage/migrations";
 
 export type AppThunk<ReturnType = void> = ThunkAction<
 	ReturnType,
@@ -26,10 +26,13 @@ export type AppSelector<ReturnType = unknown> = (
 ) => ReturnType;
 
 const rootReducer = combineReducers(reducers);
-const reducer = persistReducer({
-	...persistStorageConfig,
-	migrate: createMigrate(persistConfigMigrations)
-}, rootReducer);
+const reducer = persistReducer(
+	{
+		...persistStorageConfig,
+		migrate: createMigrate(persistConfigMigrations),
+	},
+	rootReducer,
+);
 
 export const makeStore = () => {
 	const store = configureStore({

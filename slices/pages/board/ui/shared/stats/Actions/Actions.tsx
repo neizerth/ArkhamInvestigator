@@ -62,10 +62,7 @@ export const Actions = ({ ...props }: ActionsProps) => {
 		<C.Container {...props}>
 			<C.Content>
 				{baseValue !== initialValue && (
-					<C.InitialDiff 
-						onPress={onDiffPress}
-						onLongPress={onDiffLongPress}
-					>
+					<C.InitialDiff onPress={onDiffPress} onLongPress={onDiffLongPress}>
 						<C.DiffValue value={signedNumber(baseValue - initialValue)} />
 					</C.InitialDiff>
 				)}
