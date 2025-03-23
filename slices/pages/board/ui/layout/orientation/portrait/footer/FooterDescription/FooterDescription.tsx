@@ -11,15 +11,18 @@ import {
 	useAppSelector,
 } from "@shared/lib";
 import type { Faction } from "@shared/model";
-import { useCallback, useContext, useRef } from "react";
-import { PanResponder, StyleSheet, type ViewProps } from "react-native";
+import { useCallback, useContext, useEffect, useRef } from "react";
+import { BackHandler, PanResponder, StyleSheet, type ViewProps } from "react-native";
 import * as C from "./FooterDescription.components";
 import { useAnimation } from "./useAnimation";
 import { useFaction } from "@pages/board/lib";
+import { useRoute } from "@react-navigation/native";
+import { routes } from "@shared/config";
 
 export type FooterDescriptionProps = ViewProps;
 
 export const FooterDescription = ({ ...props }: FooterDescriptionProps) => {
+	const route = useRoute();
 	const dispatch = useAppDispatch();
 	const showDescription = useAppSelector(selectShowDescription);
 
@@ -34,6 +37,19 @@ export const FooterDescription = ({ ...props }: FooterDescriptionProps) => {
 			impactHapticFeedback("clockTick");
 		}
 	}, [showDescription, dispatch]);
+
+	useEffect(() => {
+		const onBack = () => {
+			const isBoard = route.name === 'board/index';
+			if (showDescription && isBoard) {
+				dispatch(setShowDescription(false));
+				return true;
+			}
+			return false;
+		}
+		const backHandler = BackHandler.addEventListener('hardwareBackPress', onBack);
+		return () => backHandler.remove();
+	}, [dispatch, showDescription, route]);
 
 	const contentStyle = useAnimation();
 
