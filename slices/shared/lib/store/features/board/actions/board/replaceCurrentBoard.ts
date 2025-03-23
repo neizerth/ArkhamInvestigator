@@ -4,7 +4,7 @@ import type { InvestigatorBoard } from "@shared/model";
 
 import { NEW_TURN_ACTIONS_COUNT } from "@shared/config";
 import { mergeBoardStats } from "@shared/lib/features";
-import { selectCurrentBoard } from "../../selectors/selectCurrentBoard";
+import { selectCurrentBoard } from "../../selectors/current/selectCurrentBoard";
 import { setCurrentBoard } from "./setCurrentBoard";
 
 export const replaceCurrentBoard: ActionCreator<AppThunk> =

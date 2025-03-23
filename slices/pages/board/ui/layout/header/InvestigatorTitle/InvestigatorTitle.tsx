@@ -9,6 +9,7 @@ import type { HeaderLayout } from "@pages/board/model";
 import {
 	formatGameText,
 	selectCurrentBoard,
+	selectInvestigatorBoards,
 	useAppSelector,
 } from "@shared/lib";
 import type { Faction } from "@shared/model";
@@ -28,8 +29,8 @@ export const InvestigatorTitle = ({
 }: InvestigatorTitleProps) => {
 	const { layout } = useContext(LayoutContext);
 	const { translate } = useAppTranslation();
-	const { investigator, isParallel, unique, id } =
-		useAppSelector(selectCurrentBoard);
+	const single = useAppSelector(state => selectInvestigatorBoards(state).length === 1);
+	const { investigator, isParallel, unique, id } = useAppSelector(selectCurrentBoard);
 	const { faction, canChangeFaction, nextFaction } = useFaction();
 
 	const [name, nameLanguage] = translate(investigator.name);
@@ -48,6 +49,7 @@ export const InvestigatorTitle = ({
 	});
 
 	const activeOpacity = canChangeFaction ? 0.2 : 1;
+	const showId = !unique && !single;
 
 	return (
 
@@ -65,7 +67,7 @@ export const InvestigatorTitle = ({
 					<C.Title style={style.title}>
 						{unique && <C.Unique style={style.unique} />}
 						<C.TitleText style={style.titleText}>{formattedName}</C.TitleText>
-						{!unique && <C.Id style={style.id}> ({id})</C.Id>}
+						{showId && <C.Id style={style.id}> ({id})</C.Id>}
 					</C.Title>
 					<C.Subtitle style={style.subtitle}>
 						<C.SubtitleText style={style.subtitleText}>

@@ -3,7 +3,7 @@ import type { InvestigatorBoard } from "@shared/model";
 import {
 	selectCurrentInvestigatorIndex,
 	selectInvestigatorBoards,
-} from "../board";
+} from "../../board";
 
 export const selectCurrentBoard = createSelector(
 	[selectCurrentInvestigatorIndex, selectInvestigatorBoards],

@@ -6,7 +6,7 @@ import type {
 } from "@shared/model";
 
 import { prop, propEq } from "ramda";
-import { selectCurrentBoard } from "../../selectors/selectCurrentBoard";
+import { selectCurrentBoard } from "../../selectors/current/selectCurrentBoard";
 import { setCurrentBoard } from "../board/setCurrentBoard";
 
 type Patch = Partial<InvestigatorBoardValues>;

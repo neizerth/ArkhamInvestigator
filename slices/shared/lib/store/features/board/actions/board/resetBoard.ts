@@ -5,7 +5,7 @@ import {
 	START_GAME_RESOURCES_COUNT,
 } from "../../../../../../config";
 import { setShowDescription } from "../../../game/game";
-import { selectCurrentBoard } from "../../selectors/selectCurrentBoard";
+import { selectCurrentBoard } from "../../selectors/current/selectCurrentBoard";
 import { clearHistory } from "../history/clearHistory";
 import { setCurrentBoard } from "./setCurrentBoard";
 

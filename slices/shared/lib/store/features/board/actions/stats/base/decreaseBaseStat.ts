@@ -1,6 +1,6 @@
 import type { AppThunk } from "@shared/lib/store";
 import type { InvestigatorBoardStat } from "@shared/model";
-import { selectCurrentBoard } from "../../../selectors/selectCurrentBoard";
+import { selectCurrentBoard } from "../../../selectors/current/selectCurrentBoard";
 import { reduceBaseStat } from "./reduceBaseStat";
 
 const minValues = {

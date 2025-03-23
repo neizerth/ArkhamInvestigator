@@ -1,5 +1,5 @@
 import type { AppThunkCreator } from "@shared/lib/store";
-import { selectCurrentBoard } from "../../selectors/selectCurrentBoard";
+import { selectCurrentBoard } from "../../selectors/current/selectCurrentBoard";
 import { setCurrentBoard } from "../board/setCurrentBoard";
 
 export const clearHistory: AppThunkCreator = () => (dispatch, getState) => {

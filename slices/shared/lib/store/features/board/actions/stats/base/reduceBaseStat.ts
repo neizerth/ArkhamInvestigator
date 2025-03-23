@@ -4,7 +4,7 @@ import type {
 	InvestigatorBoardStat,
 	InvestigatorBoardValues,
 } from "@shared/model";
-import { selectCurrentBoard } from "../../../selectors/selectCurrentBoard";
+import { selectCurrentBoard } from "../../../selectors/current/selectCurrentBoard";
 import { setCurrentBoard } from "../../board/setCurrentBoard";
 import { addCurrentHistoryItem } from "../../history/addCurrentHistoryItem";
 
