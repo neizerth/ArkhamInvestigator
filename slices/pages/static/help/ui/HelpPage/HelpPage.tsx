@@ -42,6 +42,11 @@ export const HelpPage = ({}: HelpPageProps) => {
         {t`board.help.press.reset`}
       </Text>
 
+      <Title>${t`Press and hold`}</Title>
+      <Text>
+        {t`board.help.hold.freeArea`}
+      </Text>
+
       <Title>{t`Long Press`}</Title>
       <Text>
         <C.Icon icon='health'/>, <C.Icon icon='sanity'/>, <C.Icon icon='action'/>{' - '}
