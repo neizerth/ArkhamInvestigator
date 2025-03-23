@@ -30,6 +30,7 @@ export const AdditionalAction: typeof TouchableOpacity = styled(
 	TouchableOpacity,
 )`
   position: absolute;
+  z-index: 3;
   top: -30px;
   right: -20px;
   height: 48px;

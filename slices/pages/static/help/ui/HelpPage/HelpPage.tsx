@@ -42,7 +42,7 @@ export const HelpPage = ({}: HelpPageProps) => {
         {t`board.help.press.reset`}
       </Text>
 
-      <Title>${t`Press and hold`}</Title>
+      <Title>{t`Press and hold`}</Title>
       <Text>
         {t`board.help.hold.freeArea`}
       </Text>

@@ -13,7 +13,7 @@
 
   "board.help.press.reset": "Resets investigator stats to their default values",
 
-  "board.help.hold.freeArea": "Tap and hold anywhere on screen to see damages and horror",
+  "board.help.hold.freeArea": "Tap and hold anywhere on the screen to see the taken damage and horror",
 
   "board.help.longPress.main": "Shows/hides modifier counter. You can change base value (e.g. permanent +1 health, -2 sanity)",
   "board.help.longPress.secondary": "Resets value to 0",
