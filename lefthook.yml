@@ -9,8 +9,8 @@
 #       files: git diff --name-only @{push}
 #       glob: "*.{js,ts, jsx, tsx}"
 #       run: npm run ts:check
-# commit-msg:
-#   parallel: true
-#   commands:
-#     commitlint:
-#       run: npx commitlint --edit
+commit-msg:
+  parallel: true
+  commands:
+    commitlint:
+      run: npx commitlint --edit
