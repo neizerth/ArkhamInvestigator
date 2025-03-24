@@ -16,11 +16,13 @@ import { type ViewProps, useWindowDimensions } from "react-native";
 import { LayoutContainer } from "../../LayoutContainer";
 import * as C from "./Keyboard.components";
 import { operatorMapping } from "./mapping";
+import { useAppTranslation } from "@features/i18n";
 
 export type KeyboardProps = ViewProps;
 
 export const Keyboard = ({ ...props }: KeyboardProps) => {
 	const dispatch = useAppDispatch();
+	const { t } = useAppTranslation();
 	const historyShown = useAppSelector(selectHistoryShown);
 	const window = useWindowDimensions();
 	const showEquals = window.height > 590;
@@ -119,7 +121,7 @@ export const Keyboard = ({ ...props }: KeyboardProps) => {
 							</C.Row>
 							{showEquals && (
 								<PrimaryButton styleType="transparent" onPress={equals}>
-									<C.EqualsText>Equals</C.EqualsText>
+									<C.EqualsText>{t`Equals`}</C.EqualsText>
 								</PrimaryButton>
 							)}
 						</>

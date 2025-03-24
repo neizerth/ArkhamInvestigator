@@ -1,7 +1,7 @@
 import { impactHapticFeedback, tickFeedback } from "@features/haptic";
 import { safeIndexOf } from "@shared/lib";
 import { useBooleanRef } from "@shared/lib/hooks";
-import { MIN_FINGER_SIZE } from "@widgets/picker/config";
+import { MIN_FINGER_SIZE, SCROLL_TRESHOLD } from "@widgets/picker/config";
 import type {
 	PickerListItemGetItemLayout,
 	PickerListProps,
@@ -11,6 +11,7 @@ import { memo, useCallback, useEffect, useMemo, useRef } from "react";
 import type {
 	FlatList,
 	FlatListProps,
+	GestureResponderEvent,
 	ListRenderItemInfo,
 	NativeScrollEvent,
 	NativeSyntheticEvent,
@@ -42,6 +43,7 @@ export const PickerList = ({
 	const touching = useRef(false);
 	const canPress = useRef(false);
 	const uiSync = useRef(false);
+	const scrollY = useRef(0);
 
 	const longPressTimeout = useRef<NodeJS.Timeout>();
 
@@ -55,6 +57,7 @@ export const PickerList = ({
 		activated.current = false;
 		canPress.current = false;
 		uiSync.current = false;
+		scrollY.current = 0;
 	}, []);
 
 	const renderListItem = useCallback(
@@ -112,8 +115,12 @@ export const PickerList = ({
 		});
 	}, [data, onValueChanged, value]);
 
-	const onTouchMove = useCallback(() => {
-		canPress.current = false;
+	const onTouchMove = useCallback((e: GestureResponderEvent) => {
+		const { pageY } = e.nativeEvent.touches[0];
+		const dY = Math.abs(scrollY.current - pageY);
+		if (dY > SCROLL_TRESHOLD) {
+			canPress.current = false;
+		}
 	}, []);
 
 	const onScroll = useCallback(
@@ -139,11 +146,12 @@ export const PickerList = ({
 		[itemHeight, pressPattern],
 	);
 
-	const onTouchStart = useCallback(() => {
+	const onTouchStart = useCallback((e: GestureResponderEvent) => {
 		touching.current = true;
 		activated.current = true;
 		canPress.current = true;
 		uiSync.current = false;
+		scrollY.current = e.nativeEvent.touches[0].pageY;
 
 		if (!onLongPress) {
 			return;

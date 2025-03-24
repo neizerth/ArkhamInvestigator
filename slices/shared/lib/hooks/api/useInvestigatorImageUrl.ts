@@ -16,7 +16,7 @@ type UseInvestigatorImageUrlOptions = {
 export const useInvestigatorImageUrl = ({
 	code,
 	type,
-	version = "v4",
+	version = "media",
 }: UseInvestigatorImageUrlOptions) => {
 	const mediaVersion = useAppSelector(selectMediaVersion);
 

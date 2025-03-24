@@ -1,5 +1,3 @@
-import { withLocale } from "@features/i18n";
-import { boardText } from "@pages/board/config";
 import { color } from "@shared/config";
 import { ArnoPro } from "@shared/fonts";
 import { SanCn } from "@shared/fonts";
