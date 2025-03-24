@@ -1,3 +1,4 @@
+import { useStat } from "@pages/board/lib";
 import {
 	decreaseBaseStat,
 	decreaseCurrentStat,
@@ -14,7 +15,6 @@ import { range } from "ramda";
 import { useCallback } from "react";
 import type { ViewProps } from "react-native";
 import * as C from "./Actions.components";
-import { useStat } from "@pages/board/lib";
 
 export type ActionsProps = ViewProps;
 
@@ -23,13 +23,8 @@ export const Actions = ({ ...props }: ActionsProps) => {
 	const board = useAppSelector(selectCurrentBoard);
 	const { additionalAction } = board.value;
 
-	const {
-		value,
-		baseValue,
-		initialValue,
-		onChange,
-		onLongPress
-	} = useStat('actions');
+	const { value, baseValue, initialValue, onChange, onLongPress } =
+		useStat("actions");
 
 	const toggleAdditionalAction = useCallback(() => {
 		dispatch(setCurrentStat("additionalAction", !additionalAction));
@@ -49,9 +44,7 @@ export const Actions = ({ ...props }: ActionsProps) => {
 	return (
 		<C.Container {...props}>
 			<C.Content>
-				{showDiff && (
-					<C.BaseActions/>
-				)}
+				{showDiff && <C.BaseActions />}
 				<C.Picker
 					value={value}
 					data={range(0, 101)}

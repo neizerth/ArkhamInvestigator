@@ -6,11 +6,11 @@ import {
 	useAppSelector,
 } from "@shared/lib";
 import { setCurrentStat } from "@shared/lib/store/features/board/actions/stats/current/setCurrentStat";
+import type { PickerChangeEvent } from "@widgets/picker";
 import { range } from "ramda";
 import { useCallback } from "react";
 import type { ViewProps } from "react-native";
 import * as C from "./Resources.components";
-import type { PickerChangeEvent } from "@widgets/picker";
 
 export type ResourcesProps = ViewProps;
 

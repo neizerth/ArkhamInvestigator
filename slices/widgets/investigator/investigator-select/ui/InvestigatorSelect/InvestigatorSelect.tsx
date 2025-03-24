@@ -18,18 +18,19 @@ export const InvestigatorSelect = () => {
 		(item: InvestigatorDetails) => dispatch(changeSelectedInvestigator(item)),
 		[dispatch],
 	);
-	
-	const filtered = factionFilter ? 
-		data.filter(
-			({ investigator }) => investigator.faction_code === factionFilter
-		)	: data;
+
+	const filtered = factionFilter
+		? data.filter(
+				({ investigator }) => investigator.faction_code === factionFilter,
+			)
+		: data;
 
 	const official = filtered.filter(propEq(true, "isOfficial"));
 	const fanMade = filtered.filter(propEq(false, "isOfficial"));
 
 	return (
 		<C.Container>
-			<C.FactionSelect/>
+			<C.FactionSelect />
 			<C.Content>
 				<List data={official} onChange={onChange} />
 				<C.Separator>— {t`Fan-made Investigators`} —</C.Separator>

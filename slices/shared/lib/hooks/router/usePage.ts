@@ -1,12 +1,15 @@
-import { useCallback } from "react"
-import { useAppDispatch } from "../store"
-import { goToPage } from "../../store/effects/router";
 import type { Href } from "expo-router";
+import { useCallback } from "react";
+import { goToPage } from "../../store/effects/router";
+import { useAppDispatch } from "../store";
 
 export const usePage = () => {
-  const dispatch = useAppDispatch();
+	const dispatch = useAppDispatch();
 
-  return useCallback((href: Href) => () => {
-    dispatch(goToPage(href));
-  }, [dispatch])
-}
+	return useCallback(
+		(href: Href) => () => {
+			dispatch(goToPage(href));
+		},
+		[dispatch],
+	);
+};

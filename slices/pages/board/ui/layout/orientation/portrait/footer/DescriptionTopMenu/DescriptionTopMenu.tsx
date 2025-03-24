@@ -1,8 +1,8 @@
+import { routes } from "@shared/config";
 import { goToPage, resetBoard, useAppDispatch, usePage } from "@shared/lib";
 import { useCallback } from "react";
 import type { ViewProps } from "react-native";
 import * as C from "./DescriptionTopMenu.components";
-import { routes } from "@shared/config";
 
 export type DescriptionTopMenuProps = ViewProps;
 

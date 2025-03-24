@@ -1,7 +1,7 @@
 import type { Translation } from "@features/i18n/model";
 
-import en from "./en.json";
 import de from "./de.json";
+import en from "./en.json";
 import es from "./es.json";
 import fr from "./fr.json";
 import it from "./it.json";

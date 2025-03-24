@@ -1,6 +1,9 @@
 import { impactHapticFeedback } from "@features/haptic";
 import { useAppTranslation } from "@features/i18n";
 import { LayoutContext } from "@pages/board/config";
+import { useFaction } from "@pages/board/lib";
+import { useRoute } from "@react-navigation/native";
+import { routes } from "@shared/config";
 import {
 	goToPage,
 	resetBoard,
@@ -12,12 +15,14 @@ import {
 } from "@shared/lib";
 import type { Faction } from "@shared/model";
 import { useCallback, useContext, useEffect, useRef } from "react";
-import { BackHandler, PanResponder, StyleSheet, type ViewProps } from "react-native";
+import {
+	BackHandler,
+	PanResponder,
+	StyleSheet,
+	type ViewProps,
+} from "react-native";
 import * as C from "./FooterDescription.components";
 import { useAnimation } from "./useAnimation";
-import { useFaction } from "@pages/board/lib";
-import { useRoute } from "@react-navigation/native";
-import { routes } from "@shared/config";
 
 export type FooterDescriptionProps = ViewProps;
 
@@ -40,14 +45,17 @@ export const FooterDescription = ({ ...props }: FooterDescriptionProps) => {
 
 	useEffect(() => {
 		const onBack = () => {
-			const isBoard = route.name === 'board/index';
+			const isBoard = route.name === "board/index";
 			if (showDescription && isBoard) {
 				dispatch(setShowDescription(false));
 				return true;
 			}
 			return false;
-		}
-		const backHandler = BackHandler.addEventListener('hardwareBackPress', onBack);
+		};
+		const backHandler = BackHandler.addEventListener(
+			"hardwareBackPress",
+			onBack,
+		);
 		return () => backHandler.remove();
 	}, [dispatch, showDescription, route]);
 
@@ -66,7 +74,7 @@ export const FooterDescription = ({ ...props }: FooterDescriptionProps) => {
 			<C.Content>
 				<C.Expand style={contentStyle}>
 					{showDescription ? (
-						<C.TopMenu/>
+						<C.TopMenu />
 					) : (
 						<C.ExpandArea onPress={onShow} style={StyleSheet.absoluteFill} />
 					)}

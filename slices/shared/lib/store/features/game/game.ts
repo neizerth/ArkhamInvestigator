@@ -9,7 +9,7 @@ import { createSliceState } from "redux-toolkit-helpers";
 import * as reducers from "./reducers";
 
 export type IGameState = {
-	factionFilter: Faction | null
+	factionFilter: Faction | null;
 	selectedInvestigators: SelectedInvestigator[];
 	currentInvestigatorDetails: Nullable<InvestigatorDetails>;
 	showDescription: boolean;
@@ -45,7 +45,7 @@ export const {
 	setShowDescription,
 	setReplaceInvestigator,
 	setShowAdditionalInformation,
-	setFactionFilter
+	setFactionFilter,
 } = game.actions;
 
 export const {
@@ -54,7 +54,7 @@ export const {
 	selectShowDescription,
 	selectReplaceInvestigator,
 	selectShowAdditionalInformation,
-	selectFactionFilter
+	selectFactionFilter,
 } = game.selectors;
 
 export default game.reducer;

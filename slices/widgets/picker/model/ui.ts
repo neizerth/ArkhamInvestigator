@@ -58,4 +58,7 @@ export type PickerListProps = BaseListProps &
 		itemHeight: number;
 	};
 
-export type PickerListItemGetItemLayout = Exclude<PickerListProps['getItemLayout'], undefined>
+export type PickerListItemGetItemLayout = Exclude<
+	PickerListProps["getItemLayout"],
+	undefined
+>;

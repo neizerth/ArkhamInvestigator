@@ -14,23 +14,31 @@ import {
 } from "@shared/lib";
 import type { Faction } from "@shared/model";
 import { useContext } from "react";
-import type { ImageBackgroundProps, ImageProps, TouchableOpacityProps, ViewStyle } from "react-native";
+import type {
+	ImageBackgroundProps,
+	ImageProps,
+	TouchableOpacityProps,
+	ViewStyle,
+} from "react-native";
 import * as C from "./InvestigatorTitle.components";
 import { getTitleStyle } from "./InvestigatorTitle.styles";
 import { images } from "./images";
 
 export type InvestigatorTitleProps = Omit<ImageBackgroundProps, "source"> & {
-	contentContainerStyle?: ViewStyle
-}
+	contentContainerStyle?: ViewStyle;
+};
 
-export const InvestigatorTitle = ({ 
+export const InvestigatorTitle = ({
 	contentContainerStyle,
-	...props 
+	...props
 }: InvestigatorTitleProps) => {
 	const { layout } = useContext(LayoutContext);
 	const { translate } = useAppTranslation();
-	const single = useAppSelector(state => selectInvestigatorBoards(state).length === 1);
-	const { investigator, isParallel, unique, id } = useAppSelector(selectCurrentBoard);
+	const single = useAppSelector(
+		(state) => selectInvestigatorBoards(state).length === 1,
+	);
+	const { investigator, isParallel, unique, id } =
+		useAppSelector(selectCurrentBoard);
 	const { faction, canChangeFaction, nextFaction } = useFaction();
 
 	const [name, nameLanguage] = translate(investigator.name);
@@ -52,8 +60,7 @@ export const InvestigatorTitle = ({
 	const showId = !unique && !single;
 
 	return (
-
-		<C.FactionSwitch 
+		<C.FactionSwitch
 			style={contentContainerStyle}
 			activeOpacity={activeOpacity}
 			onPress={nextFaction}
@@ -64,16 +71,16 @@ export const InvestigatorTitle = ({
 				source={source}
 				style={[props.style, style.container]}
 			>
-					<C.Title style={style.title}>
-						{unique && <C.Unique style={style.unique} />}
-						<C.TitleText style={style.titleText}>{formattedName}</C.TitleText>
-						{showId && <C.Id style={style.id}> ({id})</C.Id>}
-					</C.Title>
-					<C.Subtitle style={style.subtitle}>
-						<C.SubtitleText style={style.subtitleText}>
-							{formattedSubname}
-						</C.SubtitleText>
-					</C.Subtitle>
+				<C.Title style={style.title}>
+					{unique && <C.Unique style={style.unique} />}
+					<C.TitleText style={style.titleText}>{formattedName}</C.TitleText>
+					{showId && <C.Id style={style.id}> ({id})</C.Id>}
+				</C.Title>
+				<C.Subtitle style={style.subtitle}>
+					<C.SubtitleText style={style.subtitleText}>
+						{formattedSubname}
+					</C.SubtitleText>
+				</C.Subtitle>
 			</C.Background>
 		</C.FactionSwitch>
 	);

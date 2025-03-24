@@ -51,7 +51,7 @@ export const TopMenu: typeof DescriptionTopMenu = styled(DescriptionTopMenu)`
   left: 0;
   right: 0;
   top: -60px;
-`
+`;
 
 export const TextContent: typeof ScrollView = styled(ScrollView)`
   flex: 1;

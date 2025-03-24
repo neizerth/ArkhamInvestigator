@@ -16,4 +16,3 @@ export const Button: typeof IconButton = styled(IconButton).attrs({
 	},
 })`
   `;
-

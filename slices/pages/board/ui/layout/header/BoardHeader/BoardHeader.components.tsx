@@ -8,10 +8,10 @@ export const Container: typeof View = styled(View)`
 `;
 
 export const Title: typeof InvestigatorTitle = styled(InvestigatorTitle).attrs({
-  contentContainerStyle: {
-    position: 'relative',
-    zIndex: 1
-  }
+	contentContainerStyle: {
+		position: "relative",
+		zIndex: 1,
+	},
 })`  
 `;
 

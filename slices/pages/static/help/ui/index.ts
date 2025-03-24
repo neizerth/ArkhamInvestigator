@@ -1,1 +1,1 @@
-export * from './HelpPage'
+export * from "./HelpPage";

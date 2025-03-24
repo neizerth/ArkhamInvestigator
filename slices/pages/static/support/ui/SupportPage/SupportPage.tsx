@@ -4,7 +4,7 @@ import { ContentPage, type ContentPageProps } from "@widgets/content-page";
 import * as C from "./SupportPage.components";
 import { contactLinks, donateLinks } from "./links";
 
-export type SupportPageProps = Omit<ContentPageProps, 'title'>;
+export type SupportPageProps = Omit<ContentPageProps, "title">;
 export const SupportPage = (props: SupportPageProps) => {
 	const { t } = useAppTranslation();
 

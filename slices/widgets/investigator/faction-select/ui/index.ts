@@ -1,2 +1,2 @@
-export * from './FactionSelect'
-export * from './FactionSelectButton'
+export * from "./FactionSelect";
+export * from "./FactionSelectButton";

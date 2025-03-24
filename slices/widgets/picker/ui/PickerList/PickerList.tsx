@@ -2,7 +2,10 @@ import { impactHapticFeedback, tickFeedback } from "@features/haptic";
 import { safeIndexOf } from "@shared/lib";
 import { useBooleanRef } from "@shared/lib/hooks";
 import { MIN_FINGER_SIZE } from "@widgets/picker/config";
-import type { PickerListItemGetItemLayout, PickerListProps } from "@widgets/picker/model";
+import type {
+	PickerListItemGetItemLayout,
+	PickerListProps,
+} from "@widgets/picker/model";
 import { times } from "ramda";
 import { memo, useCallback, useEffect, useMemo, useRef } from "react";
 import type {

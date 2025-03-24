@@ -1,11 +1,11 @@
 import { descriptionSize } from "@pages/board/config";
+import { useFaction } from "@pages/board/lib";
 import { selectCurrentBoard, useAppSelector } from "@shared/lib";
 import { getBoxByRatio } from "@shared/lib/util/size/box";
 import type { Faction, PropsWithFaction } from "@shared/model";
 import type { ImageBackgroundProps } from "react-native";
 import * as C from "./FactionDescription.components";
 import { images } from "./images";
-import { useFaction } from "@pages/board/lib";
 
 export type FactionDescriptionProps = Omit<ImageBackgroundProps, "source"> &
 	PropsWithFaction;

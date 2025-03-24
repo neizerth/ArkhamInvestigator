@@ -5,9 +5,9 @@ import { Action, Icon, IconProps, TouchableOpacity } from "@shared/ui";
 import type { FC } from "react";
 import { View } from "react-native";
 import styled, { css } from "styled-components/native";
+import { BaseStatPicker, type DefinedBaseStatPickerProps } from "../common";
 import { StatPickerMemo as StatPicker } from "../common/StatPicker";
 import { Value as BaseValue, Value } from "../common/Value";
-import { BaseStatPicker, type DefinedBaseStatPickerProps } from "../common";
 
 const BaseBackground = withStat(Action, {
 	height: assetsSize.action,
@@ -50,8 +50,9 @@ export const InitialDiff: typeof TouchableOpacity = styled(TouchableOpacity)`
   align-items: flex-start;
 `;
 
-
-export const BaseActions: FC<DefinedBaseStatPickerProps> = styled(BaseStatPicker).attrs({
+export const BaseActions: FC<DefinedBaseStatPickerProps> = styled(
+	BaseStatPicker,
+).attrs({
 	statType: "actions",
 	valueStyle: {
 		color: color.action,
@@ -61,7 +62,7 @@ export const BaseActions: FC<DefinedBaseStatPickerProps> = styled(BaseStatPicker
 	contentContainerStyle: {
 		position: "absolute",
 		zIndex: 1,
-    right: -40,
+		right: -40,
 		bottom: 11,
 	},
 	gap: 5,

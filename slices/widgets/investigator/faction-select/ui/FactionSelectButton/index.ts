@@ -1,1 +1,1 @@
-export * from './FactionSelectButton';
+export * from "./FactionSelectButton";

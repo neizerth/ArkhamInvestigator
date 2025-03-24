@@ -1,5 +1,6 @@
 import { useAppTranslation } from "@features/i18n";
 import { startNewGame } from "@pages/home/lib";
+import { routes } from "@shared/config";
 import {
 	goToPage,
 	selectCurrentBoard,
@@ -11,7 +12,6 @@ import {
 import { useCallback } from "react";
 import { Button } from "../Button";
 import * as C from "./HomePage.components";
-import { routes } from "@shared/config";
 export const HomePage = () => {
 	const dispatch = useAppDispatch();
 	const { t } = useAppTranslation();

@@ -11,7 +11,10 @@ import {
 	useAppDispatch,
 	useAppSelector,
 } from "@shared/lib";
-import type { InvestigatorBoardStat, InvestigatorMainStatType } from "@shared/model";
+import type {
+	InvestigatorBoardStat,
+	InvestigatorMainStatType,
+} from "@shared/model";
 import type { PickerChangeEvent } from "@widgets/picker";
 import { number } from "mathjs";
 import { useCallback, useMemo } from "react";

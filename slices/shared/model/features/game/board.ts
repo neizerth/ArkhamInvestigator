@@ -26,19 +26,19 @@ export type InvestigatorBoardValues = Record<InvestigatorBoardStat, number> & {
 
 export type InvestigatorBoard = {
 	id: number;
-	investigator: InvestigatorSource
-	picture: InvestigatorPicture
-	isParallel: boolean
-	initialValue: InvestigatorBoardValues
-	baseValue: InvestigatorBoardValues
-	value: InvestigatorBoardValues
-	unique: boolean
-	history: HistoryItem[]
-	historyIndex: number
-	checkHistory: SkillCheckHistoryItem[]
-	details: InvestigatorDetails
-	selection: SelectedInvestigator
-	currentRole?: Faction
+	investigator: InvestigatorSource;
+	picture: InvestigatorPicture;
+	isParallel: boolean;
+	initialValue: InvestigatorBoardValues;
+	baseValue: InvestigatorBoardValues;
+	value: InvestigatorBoardValues;
+	unique: boolean;
+	history: HistoryItem[];
+	historyIndex: number;
+	checkHistory: SkillCheckHistoryItem[];
+	details: InvestigatorDetails;
+	selection: SelectedInvestigator;
+	currentRole?: Faction;
 };
 
 export type HistoryItem = {

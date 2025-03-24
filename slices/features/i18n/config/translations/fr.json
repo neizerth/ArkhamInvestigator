@@ -2,28 +2,28 @@
 	"New Game": "Nouveau jeu",
 
 	"board.help.scroll": "You can change any investigator value by scrolling a picker to a needed position",
-  
-  "board.help.press.main": "Decrease value by 1",
-  "board.help.press.action": "Decrease value by 1. If value is 0, resets counter to its base value",
-  
-  "board.help.press.undo": "Undo last action",
-  "board.help.press.redo": "Redo last action",
 
-  "board.help.press.skills": "Opens skill calculator",
+	"board.help.press.main": "Decrease value by 1",
+	"board.help.press.action": "Decrease value by 1. If value is 0, resets counter to its base value",
 
-  "board.help.press.reset": "Resets investigator stats to their default values",
+	"board.help.press.undo": "Undo last action",
+	"board.help.press.redo": "Redo last action",
 
-  "board.help.hold.freeArea": "Tap and hold anywhere on the screen to see the taken damage and horror",
+	"board.help.press.skills": "Opens skill calculator",
 
-  "board.help.longPress.main": "Shows/hides modifier counter. You can change base value (e.g. permanent +1 health, -2 sanity)",
-  "board.help.longPress.secondary": "Resets value to 0",
+	"board.help.press.reset": "Resets investigator stats to their default values",
 
-  "board.help.longPress.undo": "Sets change history to the last change",
-  "board.help.longPress.redo": "Sets change history to the first change",
+	"board.help.hold.freeArea": "Tap and hold anywhere on the screen to see the taken damage and horror",
 
-  "board.help.calculator.toggleKeyboard": "Shows/hides keyboard",
-  "board.help.calculator.clearHistory": "Clears skill check history",
+	"board.help.longPress.main": "Shows/hides modifier counter. You can change base value (e.g. permanent +1 health, -2 sanity)",
+	"board.help.longPress.secondary": "Resets value to 0",
 
-  "board.help.special.additionalAction": "Some investigators have additional actions. Tap on this icon to mark action as completed",
-  "board.help.special.lola": "Tap on the name to change Lola's current role (faction)"
+	"board.help.longPress.undo": "Sets change history to the last change",
+	"board.help.longPress.redo": "Sets change history to the first change",
+
+	"board.help.calculator.toggleKeyboard": "Shows/hides keyboard",
+	"board.help.calculator.clearHistory": "Clears skill check history",
+
+	"board.help.special.additionalAction": "Some investigators have additional actions. Tap on this icon to mark action as completed",
+	"board.help.special.lola": "Tap on the name to change Lola's current role (faction)"
 }

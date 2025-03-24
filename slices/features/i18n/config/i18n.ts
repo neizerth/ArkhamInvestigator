@@ -13,11 +13,11 @@ i18next.use(initReactI18next).init({
 	defaultNS: I18N_NAMESAPCE,
 	resources: {
 		en: {
-			[I18N_NAMESAPCE]: translations.en
-		}
+			[I18N_NAMESAPCE]: translations.en,
+		},
 	},
 	react: {
 		bindI18n: "added loaded languageChanged",
 		bindI18nStore: "added",
-	}
+	},
 });
