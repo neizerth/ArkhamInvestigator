@@ -220,6 +220,8 @@ export const PickerList = ({
 			onScroll={onScroll}
 			snapToOffsets={snapToOffsets}
 			showsVerticalScrollIndicator={false}
+			snapToEnd={false}
+			snapToStart={false}
 			removeClippedSubviews
 		/>
 	);

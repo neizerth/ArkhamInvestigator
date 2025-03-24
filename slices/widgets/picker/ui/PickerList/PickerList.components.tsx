@@ -7,7 +7,7 @@ export const Container: typeof View = styled(View)`
 `;
 
 export const List: typeof Animated.FlatList = styled(Animated.FlatList)`
-  
+
 `;
 
 export const Content: typeof View = styled(View)`

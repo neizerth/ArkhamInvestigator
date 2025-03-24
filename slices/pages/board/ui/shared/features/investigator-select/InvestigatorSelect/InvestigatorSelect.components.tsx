@@ -27,7 +27,7 @@ export const Picker: typeof BasePicker = styled(BasePicker).attrs({
 	listStyle: {
 		borderRadius: 80,
 	},
-	gap: 48,
+	gap: 24,
 })`
   `;
 
@@ -41,11 +41,11 @@ export const Arrow: typeof TouchableOpacity = styled(TouchableOpacity)`
 	align-items: center;
 `
 export const Up: typeof Arrow = styled(Arrow)`
-  top: -0px;
+  top: -5px;
 `
 
 export const Down: typeof Arrow = styled(Arrow)`
-  bottom: -45px;
+  bottom: -29px;
 `
 
 export const ArrowIcon: FC<DefinedIconProps> = styled(Icon)`

@@ -2,7 +2,7 @@
   "expo": {
     "name": "Arkham Investigator",
     "slug": "arkham-investigator",
-    "version": "1.1.12",
+    "version": "1.1.13",
     "orientation": "portrait",
     "icon": "./assets/images/logo-dark.png",
     "scheme": "arkham-investigator",
@@ -18,7 +18,7 @@
         "backgroundColor": "#000"
       },
       "package": "com.arkhaminvestigator",
-      "versionCode": 136
+      "versionCode": 138
     },
     "web": {
       "bundler": "metro",
