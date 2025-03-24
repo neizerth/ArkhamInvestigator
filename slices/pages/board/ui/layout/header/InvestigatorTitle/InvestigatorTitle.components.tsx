@@ -1,4 +1,3 @@
-import { withLocale } from "@features/i18n";
 import { Arkhamic } from "@shared/fonts";
 import { ArnoPro } from "@shared/fonts";
 import { Conkordia } from "@shared/fonts";

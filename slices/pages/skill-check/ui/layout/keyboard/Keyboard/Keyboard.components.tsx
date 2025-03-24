@@ -2,7 +2,7 @@ import { BackspaceImage, rule } from "./images/images";
 
 import { skillCheckColor } from "@pages/skill-check/config";
 import { color, font, size } from "@shared/config";
-import { Copasetic } from "@shared/fonts";
+import { Copasetic, Enthalpy298, TeutonicRU } from "@shared/fonts";
 import type { PropsWithBox } from "@shared/model";
 import { Row as BaseRow, TouchableOpacity, UnscaledText } from "@shared/ui";
 import type { FC } from "react";
@@ -19,6 +19,7 @@ import { LayoutContainer, LayoutContainerProps } from "../../LayoutContainer";
 import * as Buttons from "../KeyboardButton";
 import { StatsKeyboard } from "../StatsKeyboard";
 import RuleBottom from "./images/rule.svg";
+import { withLocale } from "@features/i18n";
 
 export const Container: typeof View = styled(View)`
   padding: 0 ${size.gap.default}px;
@@ -94,11 +95,27 @@ export const Placeholder: typeof View = styled(View)`
   flex: 1;
 `;
 
-export const EqualsText: typeof UnscaledText = styled(UnscaledText)`
+export const EqualsText1: typeof UnscaledText = styled(UnscaledText)`
   color: ${color.light10};
   font-family: ${Copasetic.regular};
   font-size: ${font.size.lead}px;
 `;
+
+
+export const EqualsText = withLocale({
+  style: {
+    default: {
+      fontFamily: Copasetic.regular,
+      color: color.light10,
+      fontSize: font.size.lead
+    },
+    ru: {
+      fontFamily: Enthalpy298.regular,
+      marginTop: -1,
+      letterSpacing: 0.5
+    }
+  }
+});
 
 type RuleProps = SvgProps & {
 	historyShown: boolean;
