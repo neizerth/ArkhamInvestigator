@@ -9,8 +9,8 @@ import { setCurrentStat } from "@shared/lib/store/features/board/actions/stats/c
 import { range } from "ramda";
 import { useCallback } from "react";
 import type { ViewProps } from "react-native";
-import type { PickerChangeEvent } from "../../features";
 import * as C from "./Resources.components";
+import { PickerChangeEvent } from "@widgets/picker";
 
 export type ResourcesProps = ViewProps;
 

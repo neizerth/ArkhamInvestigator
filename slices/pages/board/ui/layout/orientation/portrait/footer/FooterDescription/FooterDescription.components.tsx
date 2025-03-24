@@ -2,7 +2,6 @@ import { boardText } from "@pages/board/config";
 import {
 	InvestigatorFlavor,
 	InvestigatorText,
-	InvestigatorTextProps,
 	InvestigatorTraits,
 } from "@pages/board/ui/shared/text";
 import { color, size } from "@shared/config";

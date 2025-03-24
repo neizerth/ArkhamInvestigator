@@ -2,11 +2,12 @@ import { impactHapticFeedback, tickFeedback } from "@features/haptic";
 import { safeIndexOf } from "@shared/lib";
 import { useBooleanRef } from "@shared/lib/hooks";
 import { MIN_FINGER_SIZE } from "@widgets/picker/config";
-import type { PickerListProps } from "@widgets/picker/model";
+import type { PickerListItemGetItemLayout, PickerListProps } from "@widgets/picker/model";
 import { times } from "ramda";
 import { memo, useCallback, useEffect, useMemo, useRef } from "react";
 import type {
 	FlatList,
+	FlatListProps,
 	ListRenderItemInfo,
 	NativeScrollEvent,
 	NativeSyntheticEvent,
@@ -178,8 +179,8 @@ export const PickerList = ({
 		clearTimeout(longPressTimeout.current);
 	}, [onPress, pressPattern]);
 
-	const getItemLayout = useCallback(
-		(_, index: number) => ({
+	const getItemLayout = useCallback<PickerListItemGetItemLayout>(
+		(_, index) => ({
 			length: itemHeight,
 			offset: itemHeight * index,
 			index: index,

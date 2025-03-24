@@ -11,6 +11,7 @@ export const usePageLoader = <T extends Function>(callback: T): T => {
 
 	// @ts-ignore
 	return useCallback(
+		// @ts-ignore
 		(...args: Parameters<T>) => {
 			if (loading.current) {
 				return;

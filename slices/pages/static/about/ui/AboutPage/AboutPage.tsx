@@ -12,7 +12,7 @@ import { A, Bold, List, Paragraph, Text, Title } from "@shared/ui";
 import { ContentPage, type ContentPageProps } from "@widgets/content-page";
 import * as Application from "expo-application";
 
-export type AboutPageProps = ContentPageProps;
+export type AboutPageProps = Omit<ContentPageProps, 'title'>;
 
 export const AboutPage = (props: AboutPageProps) => {
 	const { t } = useAppTranslation();

@@ -3,6 +3,7 @@
   "compilerOptions": {
     "strict": true,
     "esModuleInterop": true,
+    "sourceMap": true,
     "paths": {
       "@app/*": ["./slices/app/*"],
       "@shared/*": ["./slices/shared/*"],
@@ -13,7 +14,6 @@
     }
   },
   "include": [
-    "./slices",
     "**/*.ts",
     "**/*.tsx",
     ".expo/types/**/*.ts",

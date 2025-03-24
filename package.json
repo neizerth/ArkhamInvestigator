@@ -14,6 +14,8 @@
     "lint": "expo lint",
     "knip": "npx knip",
 
+    "ts:check": "tsc",
+
     "biome:check": "biome check ./slices",
     "biome:format": "biome check --write ./slices",
     "biome:fix": "biome lint --write ./slices",

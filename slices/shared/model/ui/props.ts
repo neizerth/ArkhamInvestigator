@@ -40,3 +40,7 @@ export type PropsWithStroke = {
 	strokeColor?: string;
 	strokeWidth?: number;
 };
+
+export type PropsWithFill = {
+	fill?: boolean;
+};

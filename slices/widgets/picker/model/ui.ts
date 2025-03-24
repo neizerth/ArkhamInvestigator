@@ -1,4 +1,4 @@
-import type { HapticPatternType } from "@shared/model";
+import type { Defined, HapticPatternType } from "@shared/model";
 import type { ReactElement, RefObject } from "react";
 import type {
 	FlatList,
@@ -57,3 +57,5 @@ export type PickerListProps = BaseListProps &
 	ContainerProps & {
 		itemHeight: number;
 	};
+
+export type PickerListItemGetItemLayout = Exclude<PickerListProps['getItemLayout'], undefined>

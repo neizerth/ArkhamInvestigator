@@ -1,4 +1,4 @@
-import { MAX_PORTRAIT_FACE_SIZE, faceSize } from "@pages/board/config";
+import { faceSize } from "@pages/board/config";
 import type { HeaderLayout } from "@pages/board/model";
 import {
 	getCoverScale,
@@ -12,7 +12,6 @@ import type { InvestigatorPicture } from "@shared/model";
 import type { Box, BoxLayout, BoxPosition } from "@shared/model/ui";
 import type { InvestigatorImage } from "arkham-investigator-data";
 import { ascend, head, lt, prop, sortWith } from "ramda";
-import { getScaledMedia } from "./getScaledMedia";
 
 type GetImageLayout = {
 	layout: HeaderLayout;
