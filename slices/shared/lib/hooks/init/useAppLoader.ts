@@ -13,7 +13,7 @@ export const useAppLoader = () => {
 		if (Platform.OS !== "web") {
 			Appearance.setColorScheme("light");
 			ScreenOrientation.lockAsync(
-				ScreenOrientation.OrientationLock.PORTRAIT_UP,
+				ScreenOrientation.OrientationLock.PORTRAIT_UP
 			);
 		}
 	}, []);

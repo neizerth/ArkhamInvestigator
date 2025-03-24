@@ -8,5 +8,5 @@ export const selectBoardById =
 	(state) => {
 		const boards = selectInvestigatorBoards(state);
 
-		return boards.find(propEq(id, "id"));
+		return boards.find(propEq(id, "id")) as InvestigatorBoard;
 	};

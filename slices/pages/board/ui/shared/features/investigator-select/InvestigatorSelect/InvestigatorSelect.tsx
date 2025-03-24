@@ -46,8 +46,16 @@ export const InvestigatorSelect = ({ ...props }: InvestigatorSelectProps) => {
 
 	const value = data[currentIndex];
 
+	const showDown = index !== 0;
+	const showUp = index !== boards.length - 1;
+
 	return (
 		<C.Container {...props}>
+			{showUp && (
+				<C.Up>
+					<C.UpIcon/>
+				</C.Up>
+			)}
 			<C.Picker
 				data={data}
 				value={value}
@@ -55,6 +63,11 @@ export const InvestigatorSelect = ({ ...props }: InvestigatorSelectProps) => {
 				onValueChanged={onChange}
 				onPress={next}
 			/>
+			{showDown && (
+				<C.Down>
+					<C.DownIcon/>
+				</C.Down>
+			)}
 		</C.Container>
 	);
 };

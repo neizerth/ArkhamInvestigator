@@ -80,7 +80,7 @@ export const AboutPage = (props: AboutPageProps) => {
 			</List>
 			<Title>Testing/Ideas</Title>
 			<Paragraph>
-				@User211587, @l_leona_l, @mkrsa, @@Aahz7, @ivanmazov82, @mr_zoombee
+				@User211587, @l_leona_l, @mkrsa, @Aahz7, @ivanmazov82, @mr_zoombee
 			</Paragraph>
 			<Title>Special Thanks</Title>
 			<List>
