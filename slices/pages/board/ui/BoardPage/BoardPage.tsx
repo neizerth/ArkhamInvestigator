@@ -36,7 +36,11 @@ export const BoardPage = () => {
 		<LayoutContext.Provider value={contextValue}>
 			{board && (
 				<C.Container onLayout={onLayout}>
-					<C.Header layout={layout} descriptionShown={showDescription} />
+					<C.Header 
+						layout={layout}
+						descriptionShown={showDescription}
+						board={board}
+					/>
 					<C.Background />
 					{orientation.type === "portrait" && (
 						<C.PortraitLayout top={areaTop} />

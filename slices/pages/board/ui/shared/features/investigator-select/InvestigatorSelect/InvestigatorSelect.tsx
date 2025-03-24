@@ -4,12 +4,14 @@ import {
 	setCurrentInvestigatorIndex,
 	useAppDispatch,
 	useAppSelector,
+	usePage,
 } from "@shared/lib";
 import type { PickerChangeEvent, PickerItemInfo } from "@widgets/picker";
 import { prop } from "ramda";
 import { useCallback, useMemo } from "react";
 import type { ViewProps } from "react-native";
 import * as C from "./InvestigatorSelect.components";
+import { routes } from "@shared/config";
 
 export type InvestigatorSelectProps = ViewProps;
 
@@ -42,6 +44,8 @@ export const InvestigatorSelect = ({ ...props }: InvestigatorSelectProps) => {
 		dispatch(setCurrentInvestigatorIndex(nextIndex));
 	}, [dispatch, nextIndex]);
 
+	const goToPage = usePage();
+
 	const data = useMemo(() => boards.map(prop("id")), [boards]);
 
 	const value = data[currentIndex];
@@ -54,6 +58,7 @@ export const InvestigatorSelect = ({ ...props }: InvestigatorSelectProps) => {
 				renderItem={renderItem}
 				onValueChanged={onChange}
 				onPress={next}
+				onLongPress={goToPage(routes.boardDashboard)}
 			/>
 		</C.Container>
 	);

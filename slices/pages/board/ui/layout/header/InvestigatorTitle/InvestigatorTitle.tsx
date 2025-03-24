@@ -5,14 +5,14 @@ import {
 } from "@features/i18n";
 import { LayoutContext } from "@pages/board/config";
 import { getTitleSize, useFaction, useFactionImage } from "@pages/board/lib";
-import type { HeaderLayout } from "@pages/board/model";
+import type { HeaderLayout, PropsWithBoard, PropsWithLayout } from "@pages/board/model";
 import {
 	formatGameText,
 	selectCurrentBoard,
 	selectInvestigatorBoards,
 	useAppSelector,
 } from "@shared/lib";
-import type { Faction } from "@shared/model";
+import type { Faction, InvestigatorBoard } from "@shared/model";
 import { useContext } from "react";
 import type {
 	ImageBackgroundProps,
@@ -24,22 +24,25 @@ import * as C from "./InvestigatorTitle.components";
 import { getTitleStyle } from "./InvestigatorTitle.styles";
 import { images } from "./images";
 
-export type InvestigatorTitleProps = Omit<ImageBackgroundProps, "source"> & {
-	contentContainerStyle?: ViewStyle;
+export type InvestigatorTitleProps = Omit<ImageBackgroundProps, "source"> & 
+	PropsWithLayout & 
+	PropsWithBoard & {
+	contentContainerStyle?: ViewStyle
 };
 
 export const InvestigatorTitle = ({
 	contentContainerStyle,
+	layout,
+	board,
 	...props
 }: InvestigatorTitleProps) => {
-	const { layout } = useContext(LayoutContext);
 	const { translate } = useAppTranslation();
 	const single = useAppSelector(
 		(state) => selectInvestigatorBoards(state).length === 1,
 	);
-	const { investigator, isParallel, unique, id } =
-		useAppSelector(selectCurrentBoard);
-	const { faction, canChangeFaction, nextFaction } = useFaction();
+	const { investigator, isParallel, unique, id } = board;
+
+	const { faction, canChangeFaction, nextFaction } = useFaction(board);
 
 	const [name, nameLanguage] = translate(investigator.name);
 	const [subname] = translate(investigator.subname || "");
@@ -47,7 +50,9 @@ export const InvestigatorTitle = ({
 	const formattedSubname = formatGameText(subname);
 
 	const box = getTitleSize(layout);
-	const source = useFactionImage(images);
+	const source = useFactionImage({
+		imagesSource: images
+	});
 
 	const style = getTitleStyle({
 		view: box,

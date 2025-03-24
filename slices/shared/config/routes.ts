@@ -14,6 +14,7 @@ export const routes = {
 	board: r("/board"),
 	skillCheck: r("/board/skill-check"),
 	boardHelp: r("/board/help"),
+	boardDashboard: r("/board/dashboard"),
 
 	about: r("/static/about"),
 	support: r("/static/support"),

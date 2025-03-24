@@ -17,10 +17,3 @@ export type HeaderTypedLayout =
 			type: "column";
 	  };
 
-export type PropsWithLayout = {
-	layout: HeaderLayout;
-};
-
-export type PropsWithView = {
-	view: Box;
-};

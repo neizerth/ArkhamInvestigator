@@ -15,8 +15,8 @@ export const FactionBackground = ({
 	view,
 	...props
 }: FactionBackgroundProps) => {
-	const { investigator } = useAppSelector(selectCurrentBoard);
-	const { faction } = useFaction();
+	const board = useAppSelector(selectCurrentBoard);
+	const { faction } = useFaction(board);
 
 	const background = images[faction];
 
