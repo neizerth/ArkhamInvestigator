@@ -1,9 +1,9 @@
 import { color, factionColor, size } from "@shared/config"
-import { FactionFontIcon, FactionFontIconProps, TouchableOpacity } from "@shared/ui"
+import { FactionFontIcon, type FactionFontIconProps, TouchableOpacity } from "@shared/ui"
 import styled, { css } from "styled-components/native"
 import type { FactionSelectButtonProps } from "./FactionSelectButton"
-import { FC } from "react"
-import { PropsWithFaction } from "@shared/model"
+import type { FC } from "react"
+import type { PropsWithFaction } from "@shared/model"
 
 export const Button: FC<FactionSelectButtonProps> = styled(TouchableOpacity)`
   width: 48px;

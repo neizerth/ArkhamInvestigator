@@ -1,6 +1,6 @@
 import { selectFactionFilter, setFactionFilter, useAppDispatch, useAppSelector } from "@shared/lib";
-import { Faction } from "@shared/model";
-import { FactionSelect as Select, FactionSelectProps as SelectProps } from "@widgets/investigator/faction-select"; 
+import type { Faction } from "@shared/model";
+import { FactionSelect as Select, type FactionSelectProps as SelectProps } from "@widgets/investigator/faction-select"; 
 import { useCallback } from "react";
 
 export type FactionSelectProps = Omit<SelectProps, 'value'>;
