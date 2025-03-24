@@ -10,7 +10,7 @@ import { range } from "ramda";
 import { useCallback } from "react";
 import type { ViewProps } from "react-native";
 import * as C from "./Resources.components";
-import { PickerChangeEvent } from "@widgets/picker";
+import type { PickerChangeEvent } from "@widgets/picker";
 
 export type ResourcesProps = ViewProps;
 

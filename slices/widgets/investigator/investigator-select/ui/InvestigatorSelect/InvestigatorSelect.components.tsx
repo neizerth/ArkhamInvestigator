@@ -3,6 +3,7 @@ import { Alegreya } from "@shared/fonts";
 import { ScrollView, Text, View } from "react-native";
 import styled from "styled-components/native";
 import { InvestigatorSelectFooter } from "../InvestigatorSelectFooter";
+import { FactionSelect as BaseFactionSelect } from "../FactionSelect";
 
 export const Container: typeof View = styled(View)`
   flex: 1;
@@ -10,6 +11,10 @@ export const Container: typeof View = styled(View)`
 
 export const Content: typeof ScrollView = styled(ScrollView)`
   flex: 1;
+`;
+
+export const FactionSelect: typeof BaseFactionSelect = styled(BaseFactionSelect)`
+  margin: -10px auto 10px auto;
 `;
 
 export const Separator: typeof Text = styled(Text)`

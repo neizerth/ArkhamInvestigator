@@ -1,11 +1,23 @@
-// import * as C from './FactionSelect.components';
+import { selectFactionFilter, setFactionFilter, useAppDispatch, useAppSelector } from "@shared/lib";
+import { Faction } from "@shared/model";
+import { FactionSelect as Select, FactionSelectProps as SelectProps } from "@widgets/investigator/faction-select"; 
+import { useCallback } from "react";
 
-export type FactionSelectProps = {
+export type FactionSelectProps = Omit<SelectProps, 'value'>;
 
-}
+export const FactionSelect = (props: FactionSelectProps) => {
+  const dispatch = useAppDispatch();
+  const faction = useAppSelector(selectFactionFilter);
 
-export const FactionSelect = ({}: FactionSelectProps) => {
+  const onChange = useCallback((faction: Faction | null) => {
+    dispatch(setFactionFilter(faction))
+  }, [dispatch])
+
   return (
-    <></>
+    <Select
+      {...props}
+      onChange={onChange}
+      value={faction}
+    />
   );
 }

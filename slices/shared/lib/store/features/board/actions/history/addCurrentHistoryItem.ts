@@ -1,5 +1,5 @@
-import {
-	type AppThunk
+import type {
+	AppThunk
 } from "@shared/lib/store";
 
 import { selectCurrentBoard } from "../../selectors/current/selectCurrentBoard";

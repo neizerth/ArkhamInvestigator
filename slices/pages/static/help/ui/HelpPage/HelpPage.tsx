@@ -3,11 +3,7 @@ import * as C from './HelpPage.components';
 import { useAppTranslation } from '@features/i18n';
 import { List, Paragraph, Text, Title, Bold } from '@shared/ui';
 
-export type HelpPageProps = {
-
-}
-
-export const HelpPage = ({}: HelpPageProps) => {
+export const HelpPage = () => {
   const { t } = useAppTranslation();
   return (
     <ContentPage
