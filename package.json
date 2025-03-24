@@ -1,7 +1,7 @@
 {
   "name": "arkham-investigator",
   "main": "expo-router/entry",
-  "version": "1.1.9",
+  "version": "1.1.10",
   "scripts": {
     "start": "expo start",
     "reset-project": "node ./scripts/reset-project.js",
@@ -26,11 +26,8 @@
     "preset": "jest-expo"
   },
   "dependencies": {
-    "@axenuab/react-native-haptic-wheel-picker": "^1.0.1",
     "@expo/vector-icons": "^14.0.2",
-    "@quidone/react-native-wheel-picker": "^1.4.0",
     "@react-native-async-storage/async-storage": "1.23.1",
-    "@react-native-picker/picker": "2.9.0",
     "@react-navigation/bottom-tabs": "^7.2.0",
     "@react-navigation/native": "^7.0.14",
     "@reduxjs/toolkit": "^2.5.1",
@@ -68,17 +65,14 @@
     "react-native-screens": "~4.4.0",
     "react-native-storage": "^1.0.1",
     "react-native-svg": "15.8.0",
-    "react-native-turbo-haptics": "^1.0.4",
     "react-native-web": "~0.19.13",
     "react-native-webview": "13.12.5",
-    "react-native-wheely": "^0.6.0",
     "react-redux": "^9.2.0",
     "react-responsive": "^10.0.0",
     "redux-devtools-expo-dev-plugin": "^1.0.0",
     "redux-persist": "^6.0.0",
     "redux-toolkit-helpers": "^1.0.3",
     "styled-components": "^6.1.15",
-    "throttle-debounce": "^5.0.2",
     "uuid": "^11.0.5"
   },
   "devDependencies": {
