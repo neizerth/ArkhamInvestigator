@@ -17,5 +17,5 @@ export const impactHapticFeedback = (
 		return vibrate(value);
 	}
 
-	Haptics.trigger(value, defaultHapticOptions);
+	Haptics.trigger(value, hapticOptions);
 };

@@ -56,7 +56,6 @@ export const Actions = ({ ...props }: ActionsProps) => {
 				{board.baseValue.additionalAction && (
 					<C.AdditionalAction
 						onPress={toggleAdditionalAction}
-						pressHapticPattern="effectTick"
 					>
 						<C.ActionIcon icon="investigator" />
 						{!additionalAction && <C.UsedAction icon="cross_c" />}

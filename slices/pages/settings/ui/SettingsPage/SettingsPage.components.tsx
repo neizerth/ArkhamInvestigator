@@ -15,7 +15,6 @@ export const Content: typeof View = styled(View)`
   flex: 1;
   align-items: center;
   justify-content: flex-start;
-  gap: ${size.gap.default}px;
 `;
 
 export const Row: typeof BaseRow = styled(BaseRow)`

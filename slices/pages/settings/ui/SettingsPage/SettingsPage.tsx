@@ -12,6 +12,10 @@ export const SettingsPage = () => {
 					<C.Label>{t`Language`}</C.Label>
 					<C.LanguageSelect />
 				</C.Row>
+				<C.Row>
+					<C.Label>{t`Haptics Feedback`}</C.Label>
+					<C.LanguageSelect />
+				</C.Row>
 			</C.Content>
 		</ContentPage>
 	);

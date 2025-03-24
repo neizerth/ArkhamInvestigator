@@ -1,4 +1,4 @@
-import { impactHapticFeedback, tickFeedback } from "@features/haptic";
+import { impactHapticFeedback, useHapticFeedback } from "@features/haptic";
 import { safeIndexOf } from "@shared/lib";
 import { useBooleanRef } from "@shared/lib/hooks";
 import { MIN_FINGER_SIZE, SCROLL_TRESHOLD } from "@widgets/picker/config";
@@ -34,8 +34,8 @@ export const PickerList = ({
 	onLongPress,
 	onPress,
 	gap = 0,
-	pressPattern = "effectTick",
-	longPressPattern = "effectTick",
+	pressPattern = "clockTick",
+	longPressPattern = "clockTick",
 	animatedInit = true,
 	...props
 }: PickerListProps) => {
@@ -51,6 +51,9 @@ export const PickerList = ({
 	const listRef = useRef<FlatList>(null);
 
 	const itemHeight = props.itemHeight + gap;
+
+	const pressFeedback = useHapticFeedback(pressPattern);
+	const longPressFeedback = useHapticFeedback(longPressPattern);
 
 	useEffect(() => {
 		touching.current = false;
@@ -140,10 +143,10 @@ export const PickerList = ({
 			}
 
 			times(() => {
-				impactHapticFeedback(pressPattern);
+				pressFeedback()
 			}, n);
 		},
-		[itemHeight, pressPattern],
+		[itemHeight, pressFeedback],
 	);
 
 	const onTouchStart = useCallback((e: GestureResponderEvent) => {
@@ -165,10 +168,10 @@ export const PickerList = ({
 			activated.current = false;
 
 			if (onLongPress() !== false) {
-				impactHapticFeedback(longPressPattern);
+				longPressFeedback();
 			}
 		}, delayLongPress);
-	}, [onLongPress, delayLongPress, longPressPattern]);
+	}, [onLongPress, delayLongPress, longPressFeedback]);
 
 	const onTouchEnd = useCallback(() => {
 		activated.current = false;
@@ -176,7 +179,7 @@ export const PickerList = ({
 		clearTimeout(longPressTimeout.current);
 		if (canPress.current && onPress) {
 			if (onPress() !== false) {
-				impactHapticFeedback(pressPattern);
+				pressFeedback()
 			}
 
 			canPress.current = false;
@@ -188,7 +191,7 @@ export const PickerList = ({
 			return;
 		}
 		clearTimeout(longPressTimeout.current);
-	}, [onPress, pressPattern]);
+	}, [onPress, pressFeedback]);
 
 	const getItemLayout = useCallback<PickerListItemGetItemLayout>(
 		(_, index) => ({
