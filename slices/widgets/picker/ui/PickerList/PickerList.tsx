@@ -225,6 +225,7 @@ export const PickerList = ({
 			snapToInterval={itemHeight}
 			showsVerticalScrollIndicator={false}
 			decelerationRate="fast"
+			overScrollMode={'never'}
 			removeClippedSubviews
 		/>
 	);
