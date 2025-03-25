@@ -32,8 +32,8 @@ export const PickerList = ({
 	onLongPress,
 	onPress,
 	gap = 0,
-	pressPattern = "clockTick",
-	longPressPattern = "clockTick",
+	pressPattern = "effectTick",
+	longPressPattern = "effectDoubleClick",
 	scrollPattern = "effectTick",
 	animatedInit = true,
 	...props

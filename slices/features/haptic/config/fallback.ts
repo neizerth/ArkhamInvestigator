@@ -29,6 +29,13 @@ export const fallbackIOSPatterns: FallbackPattern = {
 	effectTick: "impactMedium",
 };
 
+export const fallbackDefaultPatterns: FallbackPattern = {
+	effectClick: "contextClick",
+	effectDoubleClick: "notificationSuccess",
+	effectHeavyClick: "impactHeavy",
+	effectTick: "clockTick",
+};
+
 export const fallbackAndroidPatterns: FallbackPattern = {
 	selection: "clockTick",
 };
