@@ -95,11 +95,6 @@ export const PickerList = ({
 		});
 	}, [defaultIndex, animatedInit, data]);
 
-	const snapToOffsets = useMemo(
-		() => data.map((_, i) => i * itemHeight),
-		[data, itemHeight],
-	);
-
 	const onScrollEnd = useCallback(() => {
 		const nextValue = data[index.current];
 		activated.current = touching.current;
@@ -221,10 +216,9 @@ export const PickerList = ({
 			onTouchMove={onTouchMove}
 			onMomentumScrollEnd={onScrollEnd}
 			onScroll={onScroll}
-			snapToOffsets={snapToOffsets}
+			snapToInterval={itemHeight}
 			showsVerticalScrollIndicator={false}
-			snapToEnd={false}
-			snapToStart={false}
+			decelerationRate="fast"
 			removeClippedSubviews
 		/>
 	);
