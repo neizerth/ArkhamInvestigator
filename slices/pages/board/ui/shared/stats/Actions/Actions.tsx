@@ -33,10 +33,10 @@ export const Actions = ({ ...props }: ActionsProps) => {
 	const onPress = useCallback(() => {
 		if (value !== 0) {
 			dispatch(setCurrentStat("actions", value - 1));
-			dispatch(setCurrentStat("additionalAction", true));
 			return;
 		}
 		dispatch(setCurrentStat("actions", baseValue));
+		dispatch(setCurrentStat("additionalAction", true));
 	}, [dispatch, value, baseValue]);
 
 	const showDiff = baseValue !== initialValue;

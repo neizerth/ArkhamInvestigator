@@ -174,7 +174,6 @@ export const PickerList = ({
 	);
 
 	const onTouchEnd = useCallback(() => {
-		activated.current = false;
 		touching.current = false;
 		clearTimeout(longPressTimeout.current);
 		if (canPress.current && onPress) {
