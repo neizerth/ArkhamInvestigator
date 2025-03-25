@@ -11,17 +11,19 @@ export const useFaction = () => {
 	const dispatch = useAppDispatch();
 	const board = useAppSelector(selectCurrentBoard);
 
-	const { investigator, currentRole, details } = board;
-	const defaultFaction = investigator.faction_code as Faction;
+	const defaultFaction = board?.investigator.faction_code as Faction;
 
-	const roles = details.media?.roles || [];
+	const roles = board?.details.media?.roles || [];
 	const canChangeRoles = roles.length > 0;
 
 	const canChangeFaction = canChangeRoles;
 
-	const faction = currentRole || defaultFaction;
+	const faction = board?.currentRole || defaultFaction;
 
 	const nextRole = useCallback(() => {
+		if (!board) {
+			return;
+		}
 		const index = roles.indexOf(faction);
 		const nextIndex = (index + 1) % roles.length;
 		const currentRole = roles[nextIndex];

@@ -8,7 +8,7 @@ import type { Faction } from "@shared/model";
 import {
 	FactionSelect as Select,
 	type FactionSelectProps as SelectProps,
-} from "@widgets/investigator/faction-select";
+} from "@widgets/investigator/faction/faction-select";
 import { useCallback } from "react";
 
 export type FactionSelectProps = Omit<SelectProps, "value">;

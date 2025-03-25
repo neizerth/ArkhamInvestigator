@@ -5,6 +5,7 @@ import {
 	loadInvestigatorsMediaData,
 } from "../../../lib/store/features/app/actions";
 import { useAppDispatch } from "../store/useAppDispatch";
+import { closeModal } from "@features/modal";
 
 export const useAppData = () => {
 	const dispatch = useAppDispatch();
@@ -13,5 +14,6 @@ export const useAppData = () => {
 		dispatch(loadInvestigatorsMediaData());
 		dispatch(loadCoreData());
 		dispatch(restoreTranslation());
+		dispatch(closeModal());
 	}, [dispatch]);
 };

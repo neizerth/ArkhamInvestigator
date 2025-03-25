@@ -11,16 +11,12 @@ import {
 	Button,
 	type ButtonProps,
 	FactionFontIcon,
+	FactionSVGPattern,
 	Row,
 	UnscaledText,
 } from "@shared/ui";
 import { type IconProps, TouchableOpacity } from "@shared/ui";
 import styled, { css } from "styled-components/native";
-import {
-	FactionBackground,
-	type FactionBackgroundProps,
-} from "../FactionBackground";
-
 export type ElementWithFaction<T> = FC<T & PropsWithFaction>;
 export type ViewWithFaction = ElementWithFaction<ViewProps>;
 export type TextWithFaction = ElementWithFaction<TextProps>;
@@ -31,9 +27,7 @@ const getBackgroundColor = (faction: Faction) =>
 const textColor = color.light15;
 const borderRadius = size.borderRadius.default;
 
-type BackgroundProps = Omit<FactionBackgroundProps, "">;
-
-export const Background: FC<BackgroundProps> = styled(FactionBackground)`
+export const Background: typeof FactionSVGPattern = styled(FactionSVGPattern)`
   position: absolute;
   z-index: 1;
   width: 100%;
@@ -105,7 +99,10 @@ export const OK: FC<OKProps> = styled(Button)`
   `}
 `;
 
-export const OKBackground: typeof Background = styled(Background)`
+export const OKBackground: typeof Background = styled(Background)
+  .attrs({
+    height: 55
+  })`
   position: absolute;
 `;
 

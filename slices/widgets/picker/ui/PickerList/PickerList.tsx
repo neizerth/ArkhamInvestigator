@@ -1,5 +1,5 @@
 import { useHapticFeedback } from "@features/haptic";
-import { safeIndexOf } from "@shared/lib";
+import { minMax, safeIndexOf } from "@shared/lib";
 import { useBooleanRef } from "@shared/lib/hooks";
 import { MIN_FINGER_SIZE, SCROLL_TRESHOLD } from "@widgets/picker/config";
 import type {
@@ -42,7 +42,7 @@ export const PickerList = ({
 	const touching = useRef(false);
 	const canPress = useRef(false);
 	const uiSync = useRef(false);
-	const scrollY = useRef(0);
+	const touchStartY = useRef(0);
 
 	const longPressTimeout = useRef<NodeJS.Timeout>();
 
@@ -50,6 +50,8 @@ export const PickerList = ({
 	const listRef = useRef<FlatList>(null);
 
 	const itemHeight = props.itemHeight + gap;
+	const contentLength = data.length;
+	const maxContentHeight = (contentLength - 1) * itemHeight;
 
 	const pressFeedback = useHapticFeedback(pressPattern);
 	const longPressFeedback = useHapticFeedback(longPressPattern);
@@ -60,7 +62,7 @@ export const PickerList = ({
 		activated.current = false;
 		canPress.current = false;
 		uiSync.current = false;
-		scrollY.current = 0;
+		touchStartY.current = 0;
 	}, []);
 
 	const renderListItem = useCallback(
@@ -84,7 +86,7 @@ export const PickerList = ({
 		if (index.current === defaultIndex) {
 			return;
 		}
-		if (data.length === 0) {
+		if (contentLength === 0) {
 			return;
 		}
 		uiSync.current = true;
@@ -93,7 +95,7 @@ export const PickerList = ({
 			index: defaultIndex,
 			animated: animatedInit,
 		});
-	}, [defaultIndex, animatedInit, data]);
+	}, [defaultIndex, animatedInit, contentLength]);
 
 	const onScrollEnd = useCallback(() => {
 		const nextValue = data[index.current];
@@ -115,7 +117,7 @@ export const PickerList = ({
 
 	const onTouchMove = useCallback((e: GestureResponderEvent) => {
 		const { pageY } = e.nativeEvent.touches[0];
-		const dY = Math.abs(scrollY.current - pageY);
+		const dY = Math.abs(touchStartY.current - pageY);
 		if (dY > SCROLL_TRESHOLD) {
 			canPress.current = false;
 		}
@@ -126,7 +128,11 @@ export const PickerList = ({
 			if (longPressTimeout.current) {
 				clearTimeout(longPressTimeout.current);
 			}
-			const offset = e.nativeEvent.contentOffset.y;
+			const offset = minMax(
+				e.nativeEvent.contentOffset.y,
+				0,
+				maxContentHeight
+			)
 			const scrollIndex = Math.round(offset / itemHeight);
 
 			const n = Math.abs(index.current - scrollIndex);
@@ -141,7 +147,7 @@ export const PickerList = ({
 				scrollFeedback()
 			}, n);
 		},
-		[itemHeight, scrollFeedback],
+		[itemHeight, scrollFeedback, maxContentHeight],
 	);
 
 	const onTouchStart = useCallback((e: GestureResponderEvent) => {
@@ -149,7 +155,7 @@ export const PickerList = ({
 		activated.current = true;
 		canPress.current = true;
 		uiSync.current = false;
-		scrollY.current = e.nativeEvent.touches[0].pageY;
+		touchStartY.current = e.nativeEvent.touches[0].pageY;
 
 		if (!onLongPress) {
 			return;

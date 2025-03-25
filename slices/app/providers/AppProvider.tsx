@@ -4,6 +4,7 @@ import type { PropsWithChildren } from "react";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { DataProvider } from "./DataProvider";
 import { StoreProvider } from "./StoreProvider";
+import { ModalProvider } from "@features/modal";
 
 export const AppProvider = ({ children }: PropsWithChildren) => {
 	return (
@@ -11,7 +12,11 @@ export const AppProvider = ({ children }: PropsWithChildren) => {
 			<StoreProvider>
 				<I18NProvider>
 					<ThemeProvider value={DarkTheme}>
-						<DataProvider>{children}</DataProvider>
+						<DataProvider>
+							<ModalProvider>
+								{children}
+							</ModalProvider>
+						</DataProvider>
 					</ThemeProvider>
 				</I18NProvider>
 			</StoreProvider>

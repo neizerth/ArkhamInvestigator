@@ -10,6 +10,9 @@
 	"Long Press": "Долгое нажатие",
 	"Calculator": "Калькулятор",
 	"Equals": "Считать",
+
+	"Reset Board?": "Сбросить данные?",
+	"board.reset.text": "Действие сбросит данные на начало игры для этого сыщика",
 	"Investigator Special Actions": "Специальные действия",
 	"Press and hold": "Нажмите и удерживайте",
 

@@ -1,5 +1,6 @@
 import { size } from "@shared/config";
-import { Row, UnscaledText } from "@shared/ui";
+import { Row } from "../../grid/Row";
+import { UnscaledText } from "../../behavior/UnscaledText";
 import styled from "styled-components/native";
 
 export const Item: typeof Row = styled(Row)`

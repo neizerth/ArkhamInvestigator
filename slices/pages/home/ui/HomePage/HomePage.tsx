@@ -9,7 +9,7 @@ import {
 	usePage,
 	usePageLoader,
 } from "@shared/lib";
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 import { Button } from "../Button";
 import * as C from "./HomePage.components";
 export const HomePage = () => {
@@ -27,7 +27,7 @@ export const HomePage = () => {
 
 	const onStart = usePageLoader(start);
 	const onResume = usePageLoader(resume);
-
+	
 	return (
 		<C.Container>
 			<C.Menu />
