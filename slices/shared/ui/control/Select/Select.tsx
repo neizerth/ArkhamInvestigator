@@ -7,7 +7,7 @@ import type { ViewStyle } from "react-native";
 import { Dropdown } from "react-native-element-dropdown";
 import type { DropdownProps } from "react-native-element-dropdown/lib/typescript/components/Dropdown/model";
 
-export type SelectProps<T> = Omit<DropdownProps<SelectItem<T>>, 'labelField' | 'valueField' | 'onChange'>
+export type SelectProps<T> = Omit<DropdownProps<SelectItem<T>>, 'labelField' | 'valueField'>
 
 export type SelectItem<T> = {
 	label: string;

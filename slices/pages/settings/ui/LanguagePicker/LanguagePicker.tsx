@@ -14,7 +14,7 @@ import { propEq } from "ramda";
 import type { ViewStyle } from "react-native";
 import type { SelectItem, SelectProps } from "@shared/ui";
 
-export type LanguagePickerProps = Omit<SelectProps<string>, 'data' | 'value'> & {
+export type LanguagePickerProps = Omit<SelectProps<string>, 'data' | 'value' | 'onChange'> & {
 	contentContainerStyle?: ViewStyle
 }
 

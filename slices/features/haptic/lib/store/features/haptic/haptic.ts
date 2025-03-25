@@ -1,13 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit';
-import type { HapticFeedbackType } from '@shared/model';
+import type { HapticFeedbackType, HapticMode } from '@shared/model';
 import { createSliceState } from 'redux-toolkit-helpers';
 
 export type IHapticState = {
-  deafultType: HapticFeedbackType | false
+  hapticMode: HapticMode
 }
 
 const initialState: IHapticState = {
-  deafultType: 'clockTick'
+  hapticMode: 'default'
 };
 
 export const haptic = createSlice({
@@ -16,11 +16,11 @@ export const haptic = createSlice({
 });
 
 export const {
-  setDeafultType: setDefaultHapticType
+  setHapticMode
 } = haptic.actions;
 
 export const {
-  selectDeafultType: selectDeafultHapticType
+  selectHapticMode
 } = haptic.selectors;
 
 export default haptic.reducer;
