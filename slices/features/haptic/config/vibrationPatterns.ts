@@ -1,4 +1,4 @@
-import type { VibrationPattern } from "@shared/model/features/device/haptic";
+import type { VibrationPattern } from "../model";
 
 export const TICK_PATTERN: VibrationPattern = [0, 5];
 export const CLICK_PATTERN: VibrationPattern = [0, 10];

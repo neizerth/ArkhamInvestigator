@@ -9,7 +9,7 @@ import {
 	usePage,
 	usePageLoader,
 } from "@shared/lib";
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 import { Button } from "../Button";
 import * as C from "./HomePage.components";
 export const HomePage = () => {

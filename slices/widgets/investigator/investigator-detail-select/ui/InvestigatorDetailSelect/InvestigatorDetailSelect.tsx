@@ -79,6 +79,8 @@ export const InvestigatorDetailSelect = () => {
 					onClose={cancel}
 					onOk={back}
 					onCancel={cancel}
+					okText={t`Okay`}
+					cancelText={t`Cancel`}
 				>
 					<C.Sections>
 						<InvestigatorDescription

@@ -1,5 +1,5 @@
 import type { Box, InvestigatorBoard } from "@shared/model";
-import type  { HeaderLayout } from "./layout";
+import type { HeaderLayout } from "./layout";
 
 export type PropsWithLayout = {
 	layout: HeaderLayout;

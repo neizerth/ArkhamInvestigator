@@ -1,4 +1,4 @@
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import { APP_VERSION } from "@shared/config/app";
 import { createSliceState } from "redux-toolkit-helpers";
 

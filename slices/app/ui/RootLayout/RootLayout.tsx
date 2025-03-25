@@ -40,7 +40,7 @@ export const RootLayout = ({ children }: PropsWithChildren) => {
 					}}
 				/>
 			</Stack>
-			<StatusBar style="light"/>
+			<StatusBar style="light" />
 			{children}
 		</AppProvider>
 	);

@@ -1,11 +1,22 @@
-import { fallbackAndroidPatterns } from "@features/haptic/config";
-import HapticFeedback, {
+import {
+	DEFAULT_ANDROID_PATTERN,
+	fallbackAndroidPatterns,
+} from "@features/haptic/config";
+import { type TurboModule, TurboModuleRegistry } from "react-native";
+import {
 	HapticFeedbackTypes,
 	type HapticOptions,
 } from "react-native-haptic-feedback";
 export * from "react-native-haptic-feedback";
 
+export interface Spec extends TurboModule {
+	trigger(type: string, options?: HapticOptions): void;
+}
+
 type HapticType = keyof typeof HapticFeedbackTypes;
+
+const HapticFeedback =
+	TurboModuleRegistry.getEnforcing<Spec>("RNHapticFeedback");
 
 const Haptics = {
 	trigger(
@@ -13,7 +24,11 @@ const Haptics = {
 		options: HapticOptions = {},
 	) {
 		const pattern = fallbackAndroidPatterns[type] || type;
-		return HapticFeedback.trigger(pattern, options);
+		try {
+			return HapticFeedback.trigger(pattern, options);
+		} catch (e) {
+			HapticFeedback.trigger(DEFAULT_ANDROID_PATTERN, options);
+		}
 	},
 };
 

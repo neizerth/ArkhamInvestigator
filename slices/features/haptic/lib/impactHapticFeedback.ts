@@ -1,5 +1,4 @@
-import type { HapticPatternType } from "@shared/model";
-
+import type { HapticPatternType } from "../model";
 import Haptics from "./Haptics";
 import { vibrate } from "./vibrate";
 
@@ -17,5 +16,5 @@ export const impactHapticFeedback = (
 		return vibrate(value);
 	}
 
-	Haptics.trigger(value, defaultHapticOptions);
+	Haptics.trigger(value, hapticOptions);
 };

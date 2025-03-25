@@ -1,8 +1,8 @@
 import { size } from "@shared/config";
 import { Outside as BaseOutside } from "@shared/ui";
+import { FactionCardMemo as FactionCard } from "@widgets/investigator/faction/faction-card";
 import { View } from "react-native";
 import styled from "styled-components/native";
-import { InvestigatorDetailSelectCardMemo as CardMemo } from "../FactionCard";
 
 export const Outside = styled(BaseOutside)`
   z-index: 1;
@@ -33,7 +33,7 @@ export const Sections: typeof View = styled(View).attrs({
     gap: ${size.gap.default}px;
   `;
 
-export const Card: typeof CardMemo = styled(CardMemo)`
+export const Card: typeof FactionCard = styled(FactionCard)`
   flex: 1;
   position: relative;
   z-index: 2;

@@ -8,12 +8,10 @@ type ImagesSource = {
 };
 
 type UseFactionImageOptions = {
-	imagesSource: ImagesSource
-}
+	imagesSource: ImagesSource;
+};
 
-export const useFactionImage = ({
-	imagesSource
-}: UseFactionImageOptions) => {
+export const useFactionImage = ({ imagesSource }: UseFactionImageOptions) => {
 	const board = useAppSelector(selectCurrentBoard);
 	const { isParallel } = board;
 	const { faction } = useFaction(board);

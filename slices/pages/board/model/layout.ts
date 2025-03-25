@@ -16,4 +16,3 @@ export type HeaderTypedLayout =
 	| {
 			type: "column";
 	  };
-

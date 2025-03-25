@@ -1,32 +1,24 @@
-import { useAppTranslation } from "@features/i18n";
-import {
-	goBack,
-	removeInvestigatorSelection,
-	useAppDispatch,
-	useLayoutSize,
-} from "@shared/lib";
+import type { Nullable } from "@shared/model";
 import type { PropsWithFaction } from "@shared/model/ui";
-import { Outside } from "@shared/ui";
-import { memo, useCallback, useMemo, useState } from "react";
-import {
-	type LayoutChangeEvent,
-	type ViewProps,
-	useWindowDimensions,
-} from "react-native";
+import { memo } from "react";
+import { type ViewProps, useWindowDimensions } from "react-native";
+import { useLayoutSize } from "../../../../../../shared/lib/hooks/ui/useLayoutSize";
 import * as C from "./FactionCard.components";
 
-export type InvestigatorDetailSelectCardProps = ViewProps &
+export type FactionCardProps = ViewProps &
 	PropsWithFaction & {
 		title?: string;
 		subtitle?: string;
-		onClose?: () => void;
-		onOk?: () => void;
-		onCancel?: () => void;
+		okText?: string;
+		cancelText?: string;
+		onClose?: Nullable<() => void>;
+		onOk?: Nullable<() => void>;
+		onCancel?: Nullable<() => void>;
 	};
 
 const MAX_HEIGHT_AREA = 146;
 
-export const InvestigatorDetailSelectCard = ({
+export const FactionCard = ({
 	faction,
 	title,
 	subtitle,
@@ -35,10 +27,10 @@ export const InvestigatorDetailSelectCard = ({
 	onOk,
 	onCancel,
 	onTouchCancel,
+	okText,
+	cancelText,
 	...props
-}: InvestigatorDetailSelectCardProps) => {
-	const { t } = useAppTranslation();
-
+}: FactionCardProps) => {
 	const window = useWindowDimensions();
 	const [size, onLayout] = useLayoutSize(window);
 
@@ -53,7 +45,7 @@ export const InvestigatorDetailSelectCard = ({
 		: {};
 
 	const containerStyle = {
-		opacity: size ? 1 : 0,
+		opacity: size && containerSize ? 1 : 0,
 	};
 
 	return (
@@ -74,7 +66,7 @@ export const InvestigatorDetailSelectCard = ({
 					<C.Icon faction={faction} />
 					<C.HeaderTextContent>
 						<C.Title>{title}</C.Title>
-						<C.Subtitle>{subtitle}</C.Subtitle>
+						{subtitle && <C.Subtitle>{subtitle}</C.Subtitle>}
 					</C.HeaderTextContent>
 					{onClose && (
 						<C.Close onPress={onClose}>
@@ -90,15 +82,10 @@ export const InvestigatorDetailSelectCard = ({
 					</C.ScrollContainer>
 					<C.Actions>
 						{onCancel && (
-							<C.Cancel text={t`Cancel`} icon="dismiss" onPress={onCancel} />
+							<C.Cancel text={cancelText} icon="dismiss" onPress={onCancel} />
 						)}
 						{onOk && (
-							<C.OK
-								text={t`Okay`}
-								faction={faction}
-								icon="check"
-								onPress={onOk}
-							>
+							<C.OK text={okText} faction={faction} icon="check" onPress={onOk}>
 								<C.OKBackground
 									faction={faction}
 									width={containerSize?.width || 300}
@@ -113,6 +100,4 @@ export const InvestigatorDetailSelectCard = ({
 	);
 };
 
-export const InvestigatorDetailSelectCardMemo = memo(
-	InvestigatorDetailSelectCard,
-);
+export const FactionCardMemo = memo(FactionCard);

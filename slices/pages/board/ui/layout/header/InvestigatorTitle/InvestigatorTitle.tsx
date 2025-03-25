@@ -5,7 +5,11 @@ import {
 } from "@features/i18n";
 import { LayoutContext } from "@pages/board/config";
 import { getTitleSize, useFaction, useFactionImage } from "@pages/board/lib";
-import type { HeaderLayout, PropsWithBoard, PropsWithLayout } from "@pages/board/model";
+import type {
+	HeaderLayout,
+	PropsWithBoard,
+	PropsWithLayout,
+} from "@pages/board/model";
 import {
 	formatGameText,
 	selectCurrentBoard,
@@ -24,11 +28,11 @@ import * as C from "./InvestigatorTitle.components";
 import { getTitleStyle } from "./InvestigatorTitle.styles";
 import { images } from "./images";
 
-export type InvestigatorTitleProps = Omit<ImageBackgroundProps, "source"> & 
-	PropsWithLayout & 
+export type InvestigatorTitleProps = Omit<ImageBackgroundProps, "source"> &
+	PropsWithLayout &
 	PropsWithBoard & {
-	contentContainerStyle?: ViewStyle
-};
+		contentContainerStyle?: ViewStyle;
+	};
 
 export const InvestigatorTitle = ({
 	contentContainerStyle,
@@ -51,7 +55,7 @@ export const InvestigatorTitle = ({
 
 	const box = getTitleSize(layout);
 	const source = useFactionImage({
-		imagesSource: images
+		imagesSource: images,
 	});
 
 	const style = getTitleStyle({

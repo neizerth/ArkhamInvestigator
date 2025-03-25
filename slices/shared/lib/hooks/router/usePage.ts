@@ -1,3 +1,4 @@
+import { setShowDescription } from "@shared/lib/store";
 import type { Href } from "expo-router";
 import { useCallback } from "react";
 import { goToPage } from "../../store/effects/router";
@@ -9,6 +10,7 @@ export const usePage = () => {
 	return useCallback(
 		(href: Href) => () => {
 			dispatch(goToPage(href));
+			dispatch(setShowDescription(false));
 		},
 		[dispatch],
 	);

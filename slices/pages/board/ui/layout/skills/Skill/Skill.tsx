@@ -1,5 +1,6 @@
-import { impactHapticFeedback } from "@features/haptic";
+import { useHapticFeedback } from "@features/haptic";
 import { SkillsContext } from "@pages/board/config";
+import type { PropsWithBoard } from "@pages/board/model";
 import {
 	goToPage,
 	selectCurrentBoard,
@@ -15,25 +16,22 @@ import { useCallback, useContext, useState } from "react";
 import type { ViewProps } from "react-native";
 import * as C from "./Skill.components";
 import { getSkillStyle, getSkillValueStyle } from "./Skill.styles";
-import type { PropsWithBoard } from "@pages/board/model";
 
-export type SkillProps = ViewProps & PropsWithBoard & {
-	type: InvestigatorSkillType;
-};
+export type SkillProps = ViewProps &
+	PropsWithBoard & {
+		type: InvestigatorSkillType;
+	};
 
 const SKILL_RANGE = range(0, 21);
 
-export const Skill = ({
-	board,
-	type, 
-	...props 
-}: SkillProps) => {
+export const Skill = ({ board, type, ...props }: SkillProps) => {
 	const box = useContext(SkillsContext);
 	const dispatch = useAppDispatch();
 	const { value, baseValue, isParallel } = board;
 	const [pressing, setPressing] = useState(false);
 	const skillValue = value[type];
 	const baseSkillValue = baseValue[type];
+	const impactShowFeedback = useHapticFeedback("clockTick");
 
 	const style = getSkillStyle({ box });
 
@@ -42,9 +40,9 @@ export const Skill = ({
 	}, []);
 
 	const onPressOut = useCallback(() => {
-		impactHapticFeedback("clockTick");
+		impactShowFeedback();
 		setPressing(false);
-	}, []);
+	}, [impactShowFeedback]);
 
 	const openModal = useCallback(() => {
 		dispatch(startSkillCheck(type));

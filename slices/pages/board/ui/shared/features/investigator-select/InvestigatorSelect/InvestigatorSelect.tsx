@@ -1,3 +1,4 @@
+import { routes } from "@shared/config";
 import {
 	selectCurrentInvestigatorIndex,
 	selectInvestigatorBoards,
@@ -11,7 +12,6 @@ import { prop } from "ramda";
 import { useCallback, useMemo } from "react";
 import type { ViewProps } from "react-native";
 import * as C from "./InvestigatorSelect.components";
-import { routes } from "@shared/config";
 
 export type InvestigatorSelectProps = ViewProps;
 
@@ -57,7 +57,7 @@ export const InvestigatorSelect = ({ ...props }: InvestigatorSelectProps) => {
 		<C.Container {...props}>
 			{showUp && (
 				<C.Up>
-					<C.UpIcon/>
+					<C.UpIcon />
 				</C.Up>
 			)}
 			<C.Picker
@@ -70,7 +70,7 @@ export const InvestigatorSelect = ({ ...props }: InvestigatorSelectProps) => {
 			/>
 			{showDown && (
 				<C.Down>
-					<C.DownIcon/>
+					<C.DownIcon />
 				</C.Down>
 			)}
 		</C.Container>

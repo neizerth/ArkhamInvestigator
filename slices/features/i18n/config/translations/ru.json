@@ -10,6 +10,11 @@
 	"Long Press": "Долгое нажатие",
 	"Calculator": "Калькулятор",
 	"Equals": "Считать",
+
+	"Haptic": "Вибрация",
+	"Reset Board?": "Сбросить данные?",
+	"System (if available)": "Системная (если есть)",
+	"board.reset.text": "Действие сбросит данные на начало игры для этого сыщика",
 	"Investigator Special Actions": "Специальные действия",
 	"Press and hold": "Нажмите и удерживайте",
 
@@ -36,6 +41,6 @@
 	"board.help.calculator.toggleKeyboard": "Скрывает/показывает клавиатуру",
 	"board.help.calculator.clearHistory": "Очищает историю проверок",
 
-	"board.help.special.additionalAction": "Некоторые сыщики имеют дополнительные действия. Нажмите на эту иконку, чтобы отметить действие как выполненное",
+	"board.help.special.additionalAction": "Некоторые сыщики имеют особые дополнительные действия. Нажмите на эту иконку, чтобы отметить действие как выполненное",
 	"board.help.special.lola": "Нажмите на блок с именем, чтобы сменить текущую роль (класс)"
 }

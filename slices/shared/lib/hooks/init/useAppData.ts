@@ -1,4 +1,5 @@
 import { restoreTranslation } from "@features/i18n";
+import { closeModal } from "@features/modal";
 import { useEffect } from "react";
 import {
 	loadCoreData,
@@ -13,5 +14,6 @@ export const useAppData = () => {
 		dispatch(loadInvestigatorsMediaData());
 		dispatch(loadCoreData());
 		dispatch(restoreTranslation());
+		dispatch(closeModal());
 	}, [dispatch]);
 };
