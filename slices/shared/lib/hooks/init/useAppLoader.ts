@@ -4,14 +4,13 @@ import { useEffect } from "react";
 import { useFonts } from "expo-font";
 import * as ScreenOrientation from "expo-screen-orientation";
 import * as SplashScreen from "expo-splash-screen";
-import { Appearance, Platform } from "react-native";
+import { Platform } from "react-native";
 
 export const useAppLoader = () => {
 	const response = useFonts(fonts);
 
 	useEffect(() => {
 		if (Platform.OS !== "web") {
-			Appearance.setColorScheme("light");
 			ScreenOrientation.lockAsync(
 				ScreenOrientation.OrientationLock.PORTRAIT_UP
 			);
