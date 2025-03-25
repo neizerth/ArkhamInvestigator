@@ -1,6 +1,11 @@
 import { color, factionColor, font } from "@shared/config";
 import type { PropsWithFaction } from "@shared/model";
-import { DefinedIconProps, Icon, IconNumber, TouchableOpacity } from "@shared/ui";
+import {
+	DefinedIconProps,
+	Icon,
+	IconNumber,
+	TouchableOpacity,
+} from "@shared/ui";
 import { PickerMemo as BasePicker } from "@widgets/picker";
 import type { FC } from "react";
 import {
@@ -65,4 +70,3 @@ export const Image: FC<ImageProps> = styled(BaseImage)`
     filter: grayscale(1);
   `}
 `;
-

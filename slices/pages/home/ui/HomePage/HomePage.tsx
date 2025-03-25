@@ -27,7 +27,7 @@ export const HomePage = () => {
 
 	const onStart = usePageLoader(start);
 	const onResume = usePageLoader(resume);
-	
+
 	return (
 		<C.Container>
 			<C.Menu />

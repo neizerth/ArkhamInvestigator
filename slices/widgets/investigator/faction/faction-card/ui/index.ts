@@ -1,1 +1,1 @@
-export * from './FactionCard'
+export * from "./FactionCard";

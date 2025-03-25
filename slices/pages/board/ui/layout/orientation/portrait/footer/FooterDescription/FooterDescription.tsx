@@ -10,11 +10,7 @@ import {
 	useAppSelector,
 } from "@shared/lib";
 import { useCallback, useContext, useEffect } from "react";
-import {
-	BackHandler,
-	StyleSheet,
-	type ViewProps,
-} from "react-native";
+import { BackHandler, StyleSheet, type ViewProps } from "react-native";
 import * as C from "./FooterDescription.components";
 import { useAnimation } from "./useAnimation";
 
@@ -30,7 +26,7 @@ export const FooterDescription = ({ ...props }: FooterDescriptionProps) => {
 	const investigator = board?.investigator;
 	const { faction } = useFaction();
 
-	const impactShowFeedback = useHapticFeedback('clockTick');
+	const impactShowFeedback = useHapticFeedback("clockTick");
 
 	const onShow = useCallback(() => {
 		if (!showDescription) {

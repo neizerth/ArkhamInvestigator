@@ -55,10 +55,7 @@ export const DescriptionMenu = (props: DescriptionMenuProps) => {
 		<C.Container {...props}>
 			<C.Button icon="change-investigator" onPress={changeInvestigator} />
 			{haveDetails && (
-				<C.Button
-					icon="investigator"
-					onPress={changeInvestigatorDetails}
-				/>
+				<C.Button icon="investigator" onPress={changeInvestigatorDetails} />
 			)}
 			<C.Hide onPress={hide} />
 		</C.Container>

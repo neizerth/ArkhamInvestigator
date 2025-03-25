@@ -1,1 +1,1 @@
-export * from './useHapticFeedback'
+export * from "./useHapticFeedback";

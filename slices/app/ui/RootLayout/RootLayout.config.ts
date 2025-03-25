@@ -8,5 +8,5 @@ export const screenOptions: StackProps["screenOptions"] = {
 	headerShown: false,
 	contentStyle: {
 		backgroundColor: "transparent",
-	}
+	},
 };

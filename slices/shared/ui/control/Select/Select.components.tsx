@@ -1,7 +1,7 @@
 import { size } from "@shared/config";
-import { Row } from "../../grid/Row";
-import { UnscaledText } from "../../behavior/UnscaledText";
 import styled from "styled-components/native";
+import { UnscaledText } from "../../behavior/UnscaledText";
+import { Row } from "../../grid/Row";
 
 export const Item: typeof Row = styled(Row)`
   padding: ${size.gap.default}px;

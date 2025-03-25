@@ -1,2 +1,2 @@
-export * from './closeModal'
-export * from './openModal'
+export * from "./closeModal";
+export * from "./openModal";

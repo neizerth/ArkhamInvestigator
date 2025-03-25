@@ -1,6 +1,6 @@
 import type { ImpactFeedbackStyle } from "expo-haptics";
-import { TICK_PATTERN } from "./vibrationPatterns";
 import type { HapticFeedbackType } from "../model";
+import { TICK_PATTERN } from "./vibrationPatterns";
 
 export const fallbackVibrationDuration: Record<ImpactFeedbackStyle, number> = {
 	light: 10,
@@ -31,9 +31,9 @@ export const fallbackIOSPatterns: FallbackPattern = {
 
 export const fallbackAndroidPatterns: FallbackPattern = {
 	selection: "clockTick",
-}
+};
 
-export const DEFAULT_ANDROID_PATTERN: HapticFeedbackType = 'clockTick'; 
+export const DEFAULT_ANDROID_PATTERN: HapticFeedbackType = "clockTick";
 
 export const fallbackWebPatterns: FallbackPattern<VibratePattern> = {
 	effectTick: TICK_PATTERN,

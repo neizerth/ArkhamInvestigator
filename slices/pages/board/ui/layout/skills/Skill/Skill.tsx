@@ -29,7 +29,7 @@ export const Skill = ({ type, ...props }: SkillProps) => {
 	const [pressing, setPressing] = useState(false);
 	const skillValue = value[type];
 	const baseSkillValue = baseValue[type];
-	const impactShowFeedback = useHapticFeedback('clockTick');
+	const impactShowFeedback = useHapticFeedback("clockTick");
 
 	const style = getSkillStyle({ box });
 

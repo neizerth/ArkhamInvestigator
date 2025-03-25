@@ -7,13 +7,13 @@ type PressEventHandler = (e: GestureResponderEvent) => void | boolean;
 type HandlePressOptions = {
 	event: GestureResponderEvent;
 	eventHandler?: PressEventHandler;
-	impactFeedback: () => void
+	impactFeedback: () => void;
 };
 
 export const handlePress = ({
 	event,
 	eventHandler,
-	impactFeedback
+	impactFeedback,
 }: HandlePressOptions) => {
 	if (!eventHandler) {
 		return;

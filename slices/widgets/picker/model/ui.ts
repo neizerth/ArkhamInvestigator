@@ -29,13 +29,13 @@ type ContainerProps = {
 	value?: number;
 	data: number[];
 	itemContainerStyle?: ViewStyle;
-	renderItemContainer?: PickerRenderContainer
-	visibleItemsCount?: number
-	onPress?: () => void | boolean
-	onLongPress?: () => void | boolean
-	pressPattern?: HapticPatternType
-	longPressPattern?: HapticPatternType
-	scrollPattern?: HapticPatternType
+	renderItemContainer?: PickerRenderContainer;
+	visibleItemsCount?: number;
+	onPress?: () => void | boolean;
+	onLongPress?: () => void | boolean;
+	pressPattern?: HapticPatternType;
+	longPressPattern?: HapticPatternType;
+	scrollPattern?: HapticPatternType;
 	delayLongPress?: number;
 	gap?: number;
 	onValueChanged?: (event: PickerChangeEvent) => void;

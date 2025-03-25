@@ -1,2 +1,2 @@
-export * from './ModalProvider'
-export * from './FactionModal'
+export * from "./ModalProvider";
+export * from "./FactionModal";

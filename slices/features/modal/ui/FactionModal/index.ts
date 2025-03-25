@@ -1,1 +1,1 @@
-export * from './FactionModal';
+export * from "./FactionModal";

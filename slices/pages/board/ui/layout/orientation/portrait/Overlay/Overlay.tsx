@@ -16,7 +16,7 @@ export type OverlayProps = ViewProps;
 export const Overlay = (props: OverlayProps) => {
 	const dispatch = useAppDispatch();
 	const showDescription = useAppSelector(selectShowDescription);
-	const impactShowFeedback = useHapticFeedback('effectClick');
+	const impactShowFeedback = useHapticFeedback("effectClick");
 
 	const style = useOverlayStyle();
 
@@ -30,7 +30,7 @@ export const Overlay = (props: OverlayProps) => {
 				return;
 			}
 			if (show) {
-				impactShowFeedback()
+				impactShowFeedback();
 			}
 			dispatch(setShowAdditionalInformation(show));
 		},

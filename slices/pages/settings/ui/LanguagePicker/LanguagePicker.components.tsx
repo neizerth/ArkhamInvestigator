@@ -10,4 +10,4 @@ export const Container: typeof View = styled(View)`
 
 export const Picker: typeof Select = styled(Select)`
   
-`
+`;

@@ -10,15 +10,18 @@ import * as C from "./LanguagePicker.components";
 import { languageLabels } from "./labels";
 
 import { useHapticFeedback } from "@features/haptic";
+import type { SelectItem, SelectProps } from "@shared/ui";
 import { propEq } from "ramda";
 import type { ViewStyle } from "react-native";
-import type { SelectItem, SelectProps } from "@shared/ui";
 
-export type LanguagePickerProps = Omit<SelectProps<string>, 'data' | 'value' | 'onChange'> & {
-	contentContainerStyle?: ViewStyle
-}
+export type LanguagePickerProps = Omit<
+	SelectProps<string>,
+	"data" | "value" | "onChange"
+> & {
+	contentContainerStyle?: ViewStyle;
+};
 
-type PickerItem = SelectItem<string>
+type PickerItem = SelectItem<string>;
 
 export const LanguagePicker = ({
 	contentContainerStyle,
@@ -27,7 +30,7 @@ export const LanguagePicker = ({
 	const dispatch = useAppDispatch();
 	const languages = useAppSelector(selectAvailableLanguages);
 	const language = useAppSelector(selectLanguage);
-	const selectFeedback = useHapticFeedback('selection')
+	const selectFeedback = useHapticFeedback("selection");
 
 	const onChange = useCallback(
 		({ value }: PickerItem) => {

@@ -99,10 +99,9 @@ export const OK: FC<OKProps> = styled(Button)`
   `}
 `;
 
-export const OKBackground: typeof Background = styled(Background)
-  .attrs({
-    height: 55
-  })`
+export const OKBackground: typeof Background = styled(Background).attrs({
+	height: 55,
+})`
   position: absolute;
 `;
 

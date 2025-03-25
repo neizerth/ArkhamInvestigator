@@ -1,1 +1,1 @@
-export * from './HapticModeSelect';
+export * from "./HapticModeSelect";

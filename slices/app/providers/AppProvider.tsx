@@ -1,10 +1,10 @@
 import { I18NProvider } from "@features/i18n";
+import { ModalProvider } from "@features/modal";
 import { DarkTheme, ThemeProvider } from "@react-navigation/native";
 import type { PropsWithChildren } from "react";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { DataProvider } from "./DataProvider";
 import { StoreProvider } from "./StoreProvider";
-import { ModalProvider } from "@features/modal";
 
 export const AppProvider = ({ children }: PropsWithChildren) => {
 	return (
@@ -13,9 +13,7 @@ export const AppProvider = ({ children }: PropsWithChildren) => {
 				<I18NProvider>
 					<ThemeProvider value={DarkTheme}>
 						<DataProvider>
-							<ModalProvider>
-								{children}
-							</ModalProvider>
+							<ModalProvider>{children}</ModalProvider>
 						</DataProvider>
 					</ThemeProvider>
 				</I18NProvider>

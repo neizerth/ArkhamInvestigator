@@ -1,12 +1,9 @@
-import { useLayoutSize } from "../../../../../../shared/lib/hooks/ui/useLayoutSize";
+import type { Nullable } from "@shared/model";
 import type { PropsWithFaction } from "@shared/model/ui";
 import { memo } from "react";
-import {
-	type ViewProps,
-	useWindowDimensions,
-} from "react-native";
+import { type ViewProps, useWindowDimensions } from "react-native";
+import { useLayoutSize } from "../../../../../../shared/lib/hooks/ui/useLayoutSize";
 import * as C from "./FactionCard.components";
-import type { Nullable } from "@shared/model";
 
 export type FactionCardProps = ViewProps &
 	PropsWithFaction & {
@@ -14,9 +11,9 @@ export type FactionCardProps = ViewProps &
 		subtitle?: string;
 		okText?: string;
 		cancelText?: string;
-		onClose?: Nullable<() => void>
-		onOk?: Nullable<() => void>
-		onCancel?: Nullable<() => void>
+		onClose?: Nullable<() => void>;
+		onOk?: Nullable<() => void>;
+		onCancel?: Nullable<() => void>;
 	};
 
 const MAX_HEIGHT_AREA = 146;
@@ -34,7 +31,6 @@ export const FactionCard = ({
 	cancelText,
 	...props
 }: FactionCardProps) => {
-
 	const window = useWindowDimensions();
 	const [size, onLayout] = useLayoutSize(window);
 
@@ -70,9 +66,7 @@ export const FactionCard = ({
 					<C.Icon faction={faction} />
 					<C.HeaderTextContent>
 						<C.Title>{title}</C.Title>
-						{subtitle && (
-							<C.Subtitle>{subtitle}</C.Subtitle>
-						)}
+						{subtitle && <C.Subtitle>{subtitle}</C.Subtitle>}
 					</C.HeaderTextContent>
 					{onClose && (
 						<C.Close onPress={onClose}>
@@ -91,12 +85,7 @@ export const FactionCard = ({
 							<C.Cancel text={cancelText} icon="dismiss" onPress={onCancel} />
 						)}
 						{onOk && (
-							<C.OK
-								text={okText}
-								faction={faction}
-								icon="check"
-								onPress={onOk}
-							>
+							<C.OK text={okText} faction={faction} icon="check" onPress={onOk}>
 								<C.OKBackground
 									faction={faction}
 									width={containerSize?.width || 300}
@@ -111,6 +100,4 @@ export const FactionCard = ({
 	);
 };
 
-export const FactionCardMemo = memo(
-	FactionCard,
-);
+export const FactionCardMemo = memo(FactionCard);

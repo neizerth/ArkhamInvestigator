@@ -6,8 +6,8 @@ import type {
 
 import { TouchableOpacity as BaseTouchableOpacity } from "react-native";
 
-import { handlePress } from "./handlePress";
 import { type HapticPatternType, useHapticFeedback } from "@features/haptic";
+import { handlePress } from "./handlePress";
 
 export type TouchableOpacityProps = BaseTouchableOpacityProps & {
 	pressHapticPattern?: HapticPatternType;
@@ -17,16 +17,16 @@ export type TouchableOpacityProps = BaseTouchableOpacityProps & {
 };
 
 export const TouchableOpacity = ({
-	pressHapticPattern = 'clockTick',
-	pressInHapticPattern = 'clockTick',
-	pressOutHapticPattern = 'clockTick',
-	longPressHapticPattern = 'clockTick',
+	pressHapticPattern = "clockTick",
+	pressInHapticPattern = "clockTick",
+	pressOutHapticPattern = "clockTick",
+	longPressHapticPattern = "clockTick",
 	...props
 }: TouchableOpacityProps) => {
 	const pressFeedback = useHapticFeedback(pressHapticPattern);
 	const pressInFeedback = useHapticFeedback(pressInHapticPattern);
 	const pressOutFeedback = useHapticFeedback(pressOutHapticPattern);
-	const longPressFeedback = useHapticFeedback(longPressHapticPattern)
+	const longPressFeedback = useHapticFeedback(longPressHapticPattern);
 
 	const onPress = useCallback(
 		(event: GestureResponderEvent) =>

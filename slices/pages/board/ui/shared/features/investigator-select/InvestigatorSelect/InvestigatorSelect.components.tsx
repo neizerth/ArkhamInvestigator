@@ -1,11 +1,16 @@
 import { color, factionColor } from "@shared/config";
 import { PropsWithFaction } from "@shared/model";
+import { type DefinedIconProps, Icon } from "@shared/ui";
 import { PickerMemo as BasePicker } from "@widgets/picker";
-import { FC } from "react";
-import { Image as BaseImage, ImageProps, TouchableOpacity, View } from "react-native";
+import type { FC } from "react";
+import {
+	Image as BaseImage,
+	ImageProps,
+	TouchableOpacity,
+	View,
+} from "react-native";
 import styled, { css } from "styled-components/native";
 import { InvestigatorSelectItem } from "../InvestigatorSelectItem";
-import { DefinedIconProps, Icon } from "@shared/ui";
 
 export const Container: typeof View = styled(View)`
   width: 60px;
@@ -31,7 +36,6 @@ export const Picker: typeof BasePicker = styled(BasePicker).attrs({
 })`
   `;
 
-
 export const Arrow: typeof TouchableOpacity = styled(TouchableOpacity)`
   position: absolute;
   left: 0;
@@ -39,32 +43,30 @@ export const Arrow: typeof TouchableOpacity = styled(TouchableOpacity)`
   z-index: 0;
 	justify-content: center;
 	align-items: center;
-`
+`;
 export const Up: typeof Arrow = styled(Arrow)`
   top: -5px;
-`
+`;
 
 export const Down: typeof Arrow = styled(Arrow)`
   bottom: -29px;
-`
+`;
 
 export const ArrowIcon: FC<DefinedIconProps> = styled(Icon)`
   color: ${color.light10};
   font-size: 18px;
 	line-height: 18px;
 	position: relative;
-`
+`;
 
-export const UpIcon: typeof ArrowIcon = styled(ArrowIcon)
-  .attrs({
-    icon: 'left-arrow'
-  })`
+export const UpIcon: typeof ArrowIcon = styled(ArrowIcon).attrs({
+	icon: "left-arrow",
+})`
     transform: rotate(90deg);
-  `
+  `;
 
-export const DownIcon: typeof ArrowIcon = styled(ArrowIcon)
-  .attrs({
-    icon: 'left-arrow'
-  })`
+export const DownIcon: typeof ArrowIcon = styled(ArrowIcon).attrs({
+	icon: "left-arrow",
+})`
     transform: rotate(-90deg);
-  `
+  `;

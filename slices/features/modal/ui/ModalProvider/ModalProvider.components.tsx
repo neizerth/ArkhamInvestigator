@@ -9,9 +9,9 @@ export const Modal: typeof BaseModal = styled(BaseModal)`
   top: 0;
   bottom: 0;
   flex: 1;
-`
+`;
 
 export const Container: typeof BaseModal = styled(BaseModal)`
   z-index: 1000;
   flex: 1;
-`
+`;

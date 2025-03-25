@@ -1,2 +1,2 @@
-export * from './FactionIconImage'
-export * from './FactionSVGPattern'
+export * from "./FactionIconImage";
+export * from "./FactionSVGPattern";

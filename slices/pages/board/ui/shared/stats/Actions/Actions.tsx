@@ -54,9 +54,7 @@ export const Actions = ({ ...props }: ActionsProps) => {
 				/>
 
 				{board.baseValue.additionalAction && (
-					<C.AdditionalAction
-						onPress={toggleAdditionalAction}
-					>
+					<C.AdditionalAction onPress={toggleAdditionalAction}>
 						<C.ActionIcon icon="investigator" />
 						{!additionalAction && <C.UsedAction icon="cross_c" />}
 					</C.AdditionalAction>

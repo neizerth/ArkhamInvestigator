@@ -1,23 +1,23 @@
 import { useCallback } from "react";
 import * as C from "./Select.components";
 
-import { styles } from "./Select.style";
 import { color } from "@shared/config";
 import type { ViewStyle } from "react-native";
 import { Dropdown } from "react-native-element-dropdown";
 import type { DropdownProps } from "react-native-element-dropdown/lib/typescript/components/Dropdown/model";
+import { styles } from "./Select.style";
 
-export type SelectProps<T> = Omit<DropdownProps<SelectItem<T>>, 'labelField' | 'valueField'>
+export type SelectProps<T> = Omit<
+	DropdownProps<SelectItem<T>>,
+	"labelField" | "valueField"
+>;
 
 export type SelectItem<T> = {
 	label: string;
 	value: T;
-}
+};
 
-export function Select<T>({
-	...props
-}: SelectProps<T>){
-
+export function Select<T>({ ...props }: SelectProps<T>) {
 	const renderItem = useCallback((item: SelectItem<T>) => {
 		return (
 			<C.Item style={[styles.item]}>
@@ -25,7 +25,7 @@ export function Select<T>({
 			</C.Item>
 		);
 	}, []);
-	
+
 	return (
 		<Dropdown
 			{...props}
@@ -43,4 +43,4 @@ export function Select<T>({
 			maxHeight={300}
 		/>
 	);
-};
+}
