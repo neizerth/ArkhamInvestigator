@@ -1,23 +1,17 @@
-import { impactHapticFeedback } from "@features/haptic";
-import { useAppTranslation } from "@features/i18n";
+import { useHapticFeedback } from "@features/haptic";
 import { LayoutContext } from "@pages/board/config";
 import { useFaction } from "@pages/board/lib";
 import { useRoute } from "@react-navigation/native";
-import { routes } from "@shared/config";
 import {
-	goToPage,
-	resetBoard,
 	selectCurrentBoard,
 	selectShowDescription,
 	setShowDescription,
 	useAppDispatch,
 	useAppSelector,
 } from "@shared/lib";
-import type { Faction } from "@shared/model";
-import { useCallback, useContext, useEffect, useRef } from "react";
+import { useCallback, useContext, useEffect } from "react";
 import {
 	BackHandler,
-	PanResponder,
 	StyleSheet,
 	type ViewProps,
 } from "react-native";
@@ -36,12 +30,14 @@ export const FooterDescription = ({ ...props }: FooterDescriptionProps) => {
 	const investigator = board?.investigator;
 	const { faction } = useFaction();
 
+	const impactShowFeedback = useHapticFeedback('clockTick');
+
 	const onShow = useCallback(() => {
 		if (!showDescription) {
 			dispatch(setShowDescription(true));
-			impactHapticFeedback("clockTick");
+			impactShowFeedback();
 		}
-	}, [showDescription, dispatch]);
+	}, [showDescription, dispatch, impactShowFeedback]);
 
 	useEffect(() => {
 		const onBack = () => {

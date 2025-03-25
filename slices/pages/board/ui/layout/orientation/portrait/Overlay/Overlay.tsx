@@ -1,4 +1,4 @@
-import { impactHapticFeedback } from "@features/haptic";
+import { useHapticFeedback } from "@features/haptic";
 import {
 	selectShowDescription,
 	setShowAdditionalInformation,
@@ -16,6 +16,7 @@ export type OverlayProps = ViewProps;
 export const Overlay = (props: OverlayProps) => {
 	const dispatch = useAppDispatch();
 	const showDescription = useAppSelector(selectShowDescription);
+	const impactShowFeedback = useHapticFeedback('effectClick');
 
 	const style = useOverlayStyle();
 
@@ -29,11 +30,11 @@ export const Overlay = (props: OverlayProps) => {
 				return;
 			}
 			if (show) {
-				impactHapticFeedback("effectClick");
+				impactShowFeedback()
 			}
 			dispatch(setShowAdditionalInformation(show));
 		},
-		[dispatch, showDescription],
+		[dispatch, showDescription, impactShowFeedback],
 	);
 
 	return (

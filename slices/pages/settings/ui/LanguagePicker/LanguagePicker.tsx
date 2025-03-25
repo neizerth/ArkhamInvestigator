@@ -7,66 +7,48 @@ import { useAppDispatch, useAppSelector } from "@shared/lib";
 import { useCallback } from "react";
 import * as C from "./LanguagePicker.components";
 
-import { styles } from "./LanguagePicker.style";
 import { languageLabels } from "./labels";
 
-import { selectFeedback } from "@features/haptic";
-import { color } from "@shared/config";
+import { useHapticFeedback } from "@features/haptic";
 import { propEq } from "ramda";
-import type { ViewProps } from "react-native";
-import { Dropdown } from "react-native-element-dropdown";
+import type { ViewStyle } from "react-native";
+import type { SelectItem, SelectProps } from "@shared/ui";
 
-export type LanguagePickerProps = ViewProps;
+export type LanguagePickerProps = Omit<SelectProps<string>, 'data' | 'value'> & {
+	contentContainerStyle?: ViewStyle
+}
 
-type PickerItem = {
-	label: string;
-	value: string;
-};
+type PickerItem = SelectItem<string>
 
-export const LanguagePicker = (props: LanguagePickerProps) => {
+export const LanguagePicker = ({
+	contentContainerStyle,
+	...props
+}: LanguagePickerProps) => {
 	const dispatch = useAppDispatch();
 	const languages = useAppSelector(selectAvailableLanguages);
 	const language = useAppSelector(selectLanguage);
+	const selectFeedback = useHapticFeedback('selection')
 
 	const onChange = useCallback(
 		({ value }: PickerItem) => {
 			selectFeedback();
 			dispatch(changeLanguage(value));
 		},
-		[dispatch],
+		[dispatch, selectFeedback],
 	);
 
 	const items = languages.map((language) => ({
 		label: languageLabels[language],
 		value: language,
-	}));
+	})) as PickerItem[];
 
 	const value = items.find(propEq(language, "value"));
 
-	const renderItem = useCallback((item: PickerItem) => {
-		return (
-			<C.Item style={[styles.item]}>
-				<C.ItemText style={[styles.itemTextStyle]}>{item.label}</C.ItemText>
-			</C.Item>
-		);
-	}, []);
-
 	return (
-		<C.Container {...props}>
-			<Dropdown
-				style={styles.dropdown}
-				containerStyle={styles.container}
-				selectedTextStyle={styles.selectedTextStyle}
-				itemTextStyle={styles.itemTextStyle}
-				activeColor={color.dark15}
-				selectedTextProps={{
-					allowFontScaling: false,
-				}}
-				renderItem={renderItem}
+		<C.Container style={contentContainerStyle}>
+			<C.Picker
+				{...props}
 				data={items}
-				maxHeight={300}
-				labelField="label"
-				valueField="value"
 				value={value}
 				onChange={onChange}
 				onFocus={selectFeedback}

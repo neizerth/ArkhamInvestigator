@@ -7,18 +7,18 @@ type PressEventHandler = (e: GestureResponderEvent) => void | boolean;
 type HandlePressOptions = {
 	event: GestureResponderEvent;
 	eventHandler?: PressEventHandler;
-	pattern?: HapticPatternType;
+	impactFeedback: () => void
 };
 
 export const handlePress = ({
 	event,
 	eventHandler,
-	pattern = "clockTick",
+	impactFeedback
 }: HandlePressOptions) => {
 	if (!eventHandler) {
 		return;
 	}
 	if (eventHandler(event) !== false) {
-		impactHapticFeedback(pattern);
+		impactFeedback();
 	}
 };

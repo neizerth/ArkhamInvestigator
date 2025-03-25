@@ -1,5 +1,5 @@
-import type { Defined, HapticPatternType } from "@shared/model";
-import type { ReactElement, RefObject } from "react";
+import type { HapticPatternType } from "@features/haptic";
+import type { ReactElement } from "react";
 import type {
 	FlatList,
 	FlatListProps,
@@ -29,12 +29,13 @@ type ContainerProps = {
 	value?: number;
 	data: number[];
 	itemContainerStyle?: ViewStyle;
-	renderItemContainer?: PickerRenderContainer;
-	visibleItemsCount?: number;
-	onPress?: () => void | boolean;
-	onLongPress?: () => void | boolean;
-	pressPattern?: HapticPatternType;
-	longPressPattern?: HapticPatternType;
+	renderItemContainer?: PickerRenderContainer
+	visibleItemsCount?: number
+	onPress?: () => void | boolean
+	onLongPress?: () => void | boolean
+	pressPattern?: HapticPatternType
+	longPressPattern?: HapticPatternType
+	scrollPattern?: HapticPatternType
 	delayLongPress?: number;
 	gap?: number;
 	onValueChanged?: (event: PickerChangeEvent) => void;

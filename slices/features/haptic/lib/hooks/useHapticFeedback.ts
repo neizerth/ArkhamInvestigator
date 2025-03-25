@@ -1,18 +1,17 @@
-import { selectHapticsFeedbackType } from "../../../../shared/lib/store/features/app/app"
 import { useAppSelector } from "../../../../shared/lib/hooks/store/useAppSelector"
-import type { HapticPatternType } from "@shared/model";
 import { useCallback } from "react";
 import { impactHapticFeedback } from "../impactHapticFeedback";
+import { selectDeafultHapticType } from "../store/features/haptic/haptic";
+import type { HapticPatternType } from "../../model";
 
-export const useHapticFeedback = (hapticStyle?: HapticPatternType) => {
-  const type = useAppSelector(selectHapticsFeedbackType);
+export const useHapticFeedback = (hapticPattern?: HapticPatternType) => {
+  const defaultHapticPattern = useAppSelector(selectDeafultHapticType);
   return useCallback(() => {
-    if (!type) {
+    if (!defaultHapticPattern) {
       return;
     }
-    const feedback = hapticStyle || type;
+    const feedback = hapticPattern || defaultHapticPattern;
 
-    console.log(feedback);
     impactHapticFeedback(feedback);
-  }, [type, hapticStyle]); 
+  }, [defaultHapticPattern, hapticPattern]); 
 }

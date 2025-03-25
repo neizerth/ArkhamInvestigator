@@ -1,4 +1,4 @@
-import { impactHapticFeedback, useHapticFeedback } from "@features/haptic";
+import { useHapticFeedback } from "@features/haptic";
 import { safeIndexOf } from "@shared/lib";
 import { useBooleanRef } from "@shared/lib/hooks";
 import { MIN_FINGER_SIZE, SCROLL_TRESHOLD } from "@widgets/picker/config";
@@ -10,12 +10,10 @@ import { times } from "ramda";
 import { memo, useCallback, useEffect, useMemo, useRef } from "react";
 import type {
 	FlatList,
-	FlatListProps,
 	GestureResponderEvent,
 	ListRenderItemInfo,
 	NativeScrollEvent,
 	NativeSyntheticEvent,
-	ScrollView,
 } from "react-native";
 import * as C from "./PickerList.components";
 import { defaultRenderItemContainer } from "./defaultRenderItemContainer";
@@ -36,6 +34,7 @@ export const PickerList = ({
 	gap = 0,
 	pressPattern = "clockTick",
 	longPressPattern = "clockTick",
+	scrollPattern = 'effectTick',
 	animatedInit = true,
 	...props
 }: PickerListProps) => {
@@ -54,6 +53,7 @@ export const PickerList = ({
 
 	const pressFeedback = useHapticFeedback(pressPattern);
 	const longPressFeedback = useHapticFeedback(longPressPattern);
+	const scrollFeedback = useHapticFeedback(scrollPattern);
 
 	useEffect(() => {
 		touching.current = false;
@@ -143,10 +143,10 @@ export const PickerList = ({
 			}
 
 			times(() => {
-				pressFeedback()
+				scrollFeedback()
 			}, n);
 		},
-		[itemHeight, pressFeedback],
+		[itemHeight, scrollFeedback],
 	);
 
 	const onTouchStart = useCallback((e: GestureResponderEvent) => {
