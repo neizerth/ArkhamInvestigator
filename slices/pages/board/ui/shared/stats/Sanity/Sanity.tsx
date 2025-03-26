@@ -34,7 +34,7 @@ export const Sanity = ({ ...props }: SanityProps) => {
 			{showAdditionalInfo && <C.Wounds value={`-${wounds}`} />}
 			<C.Picker
 				value={value}
-				data={range(0, maxValue)}
+				data={range(-20, maxValue)}
 				onValueChanged={onChange}
 				onLongPress={onLongPress}
 				onPress={onPress}

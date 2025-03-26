@@ -17,11 +17,15 @@ export const HomeMenu = (props: HomeMenuProps) => {
           <C.Icon icon="typejournal"/>
         </C.Button> */}
 				<C.Button onPress={goTo(routes.about)}>
-					<C.InfoIcon />
+					<C.Icon icon="name" />
+				</C.Button>
+
+				<C.Button onPress={goTo(routes.boardHelp)}>
+					<C.Icon icon="info" />
 				</C.Button>
 
 				<C.Button onPress={goTo(routes.support)}>
-					<C.SupportIcon />
+					<C.Icon icon="heart" />
 				</C.Button>
 			</C.Left>
 			<C.Right>

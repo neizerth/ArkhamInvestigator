@@ -90,7 +90,19 @@ export const Cancel: typeof Button = styled(Button)`
 
 type OKProps = ButtonProps & PropsWithFaction;
 
-export const OK: FC<OKProps> = styled(Button)`
+export const OK: FC<OKProps> = styled(Button).attrs(({ faction }: OKProps) => {
+	if (faction !== "seeker") {
+		return;
+	}
+	return {
+		textStyle: {
+			color: color.text,
+		},
+		iconStyle: {
+			color: color.text,
+		},
+	};
+})`
   flex: 1;
   position: relative;
   overflow: hidden;
@@ -143,6 +155,7 @@ export { View as ScrollContent };
 export const HeaderTextContent: typeof View = styled(View)`
   flex: 1;
   width: 100%;
+  padding-bottom: ${size.gap.small}px;
 `;
 
 const HeaderText: typeof UnscaledText = styled(UnscaledText)`

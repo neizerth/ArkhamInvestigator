@@ -9,9 +9,10 @@ import { selectLanguage, setLanguage } from "../i18n";
 import { loadTranslation } from "./loadTranslation";
 
 export const changeLanguage: AppThunkCreator =
-	(language: string) => (dispatch, getState) => {
+	(language: string | null) => (dispatch, getState) => {
 		const state = getState();
 		const currentLanguage = selectLanguage(state);
+
 		if (language === currentLanguage) {
 			return;
 		}

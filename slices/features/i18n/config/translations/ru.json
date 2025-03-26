@@ -38,8 +38,8 @@
 	"board.help.longPress.main": "Показывает/убирает счётчик модификатора. Вы можете изменить базовое значение (например, добавить постоянно +1 к здоровью, -2 к рассудку)",
 	"board.help.longPress.secondary": "Сбрасывает значение до 0",
 
-	"board.help.longPress.undo": "Возвращает историю изменений к последней правке",
-	"board.help.longPress.redo": "Прокручивает историю изменений к начальному состоянию",
+	"board.help.longPress.redo": "Возвращает историю изменений к последней правке",
+	"board.help.longPress.undo": "Прокручивает историю изменений к начальному состоянию",
 
 	"board.help.calculator.toggleKeyboard": "Скрывает/показывает клавиатуру",
 	"board.help.calculator.clearHistory": "Очищает историю проверок",

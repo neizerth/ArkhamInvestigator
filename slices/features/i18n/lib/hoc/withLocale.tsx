@@ -2,13 +2,12 @@ import type { PropsWithStyle } from "@shared/model";
 import { type AppTextProps, UnscaledText } from "@shared/ui";
 import { mergeDeepRight } from "ramda";
 import type { ComponentType, FC } from "react";
-import { StyleSheet, Text, type TextProps, TextStyle } from "react-native";
 import { useAppSelector } from "../../../../shared/lib/hooks/store/useAppSelector";
 import {
 	type KeyConfig,
 	getKeyConfig,
 } from "../../../../shared/lib/util/record";
-import { selectLanguage } from "../store/features/i18n/i18n";
+import { selectCurrentLanguage } from "../store";
 
 type WithLocaleProps = PropsWithStyle & {
 	language?: string;
@@ -28,7 +27,7 @@ export function withLocale<Props extends WithLocaleProps = AppTextProps>(
 	const { Component = UnscaledText } = options;
 
 	const WithLocale: FC<Props> = (props) => {
-		const defaultLanguage = useAppSelector(selectLanguage);
+		const defaultLanguage = useAppSelector(selectCurrentLanguage);
 		const language = props.language || defaultLanguage;
 
 		const defaultPropsConfig = mergeDeepRight(

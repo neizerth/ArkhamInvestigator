@@ -29,4 +29,9 @@ export const styles = StyleSheet.create({
 	selectedStyle: {
 		backgroundColor: color.dark20,
 	},
+	placeholderStyle: {
+		color: color.dark10,
+		fontFamily: Alegreya.regular,
+		fontSize: font.size.default,
+	},
 });

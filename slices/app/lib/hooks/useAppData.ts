@@ -1,18 +1,15 @@
 import { restoreTranslation } from "@features/i18n";
 import { closeModal } from "@features/modal";
+import { loadInvestigatorsMediaData, useAppDispatch } from "@shared/lib";
 import { useEffect } from "react";
-import {
-	loadCoreData,
-	loadInvestigatorsMediaData,
-} from "../../../lib/store/features/app/actions";
-import { useAppDispatch } from "../store/useAppDispatch";
+import { loadAppData } from "../store/actions/loadAppData";
 
 export const useAppData = () => {
 	const dispatch = useAppDispatch();
 
 	useEffect(() => {
 		dispatch(loadInvestigatorsMediaData());
-		dispatch(loadCoreData());
+		dispatch(loadAppData());
 		dispatch(restoreTranslation());
 		dispatch(closeModal());
 	}, [dispatch]);

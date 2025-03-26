@@ -26,7 +26,7 @@ export const InvestigatorSelect = () => {
 				}
 				return investigator.faction_code === factionFilter && !media?.spoiler;
 			})
-		: data;
+		: data.filter(({ media }) => !media?.spoiler);
 
 	const official = filtered.filter(propEq(true, "isOfficial"));
 	const fanMade = filtered.filter(propEq(false, "isOfficial"));

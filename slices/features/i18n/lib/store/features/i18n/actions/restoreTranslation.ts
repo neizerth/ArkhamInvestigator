@@ -15,7 +15,7 @@ export const restoreTranslation: AppThunkCreator =
 		const state = getState();
 		const language = selectLanguage(state);
 
-		if (language === DEFAULT_LANGUAGE) {
+		if (language === DEFAULT_LANGUAGE || !language) {
 			return;
 		}
 

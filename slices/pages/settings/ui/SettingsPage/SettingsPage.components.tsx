@@ -1,6 +1,6 @@
 import { color, font, size } from "@shared/config";
 import { Alegreya } from "@shared/fonts";
-import { Row as BaseRow, Text } from "@shared/ui";
+import { Row as BaseRow, Text, TextView } from "@shared/ui";
 import { View } from "react-native";
 import styled from "styled-components/native";
 import { HapticModeSelect } from "../HapticModeSelect";
@@ -25,8 +25,13 @@ export const Row: typeof BaseRow = styled(BaseRow)`
   gap: ${size.gap.default}px;
 `;
 
-export const Label: typeof Text = styled(Text)`
+export const Label: typeof TextView = styled(TextView).attrs({
+	contentContainerStyle: {
+		width: 80,
+	},
+})`
   font-size: ${font.size.default}px;
+  text-align: right;
 `;
 
 export const LanguageSelect: typeof LanguagePicker = styled(LanguagePicker)`
