@@ -1,4 +1,5 @@
 import {
+	formatSkillCheckValue as formatValue,
 	getSkillCheckValue,
 	sanitizeSkillCheckExpression,
 	selectCurrentBoard,
@@ -36,10 +37,10 @@ export const ExpressionDisplay = ({
 	return (
 		<C.Container {...props}>
 			<C.Expression type={type}>
-				{data.length === 0 && lastValue}
+				{data.length === 0 && lastValue !== undefined && formatValue(lastValue)}
 				{data.map((item) => (
 					<Fragment key={item.id}>
-						{item.type === "number" && item.value}
+						{item.type === "number" && formatValue(item.value)}
 						{item.type === "operator" && operatorMapping[item.operator]}
 						{item.type === "stat" && (
 							<C.Stat
@@ -53,16 +54,16 @@ export const ExpressionDisplay = ({
 					(value !== currentValue ? (
 						<>
 							<C.Value>=</C.Value>
-							<C.OldValue>{value}</C.OldValue>
+							<C.OldValue>{formatValue(value)}</C.OldValue>
 							{currentValue > value ? (
 								<C.Greater>↗</C.Greater>
 							) : (
 								<C.Lower>↘</C.Lower>
 							)}
-							<C.Value>{currentValue}</C.Value>
+							<C.Value>{formatValue(currentValue)}</C.Value>
 						</>
 					) : (
-						<C.Value>={value}</C.Value>
+						<C.Value>={formatValue(value)}</C.Value>
 					))}
 			</C.Expression>
 		</C.Container>

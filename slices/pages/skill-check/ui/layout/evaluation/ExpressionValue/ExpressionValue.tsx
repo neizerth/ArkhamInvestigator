@@ -4,6 +4,7 @@ import {
 	selectCurrentBoard,
 	selectSkillCheckData,
 	useAppSelector,
+	formatSkillCheckValue as formatValue
 } from "@shared/lib";
 import { last } from "ramda";
 import type { ViewProps } from "react-native";
@@ -32,7 +33,7 @@ export const ExpressionValue = (props: ExpressionValueProps) => {
 
 	return (
 		<C.Container {...props}>
-			<C.Value>{showValue && `=${value}`}</C.Value>
+			<C.Value>{showValue && `=${formatValue(value)}`}</C.Value>
 		</C.Container>
 	);
 };

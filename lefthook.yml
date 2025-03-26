@@ -4,7 +4,7 @@ pre-commit:
     lint:
       files: git diff --name-only @{push}
       glob: "*.{js,ts,jsx,tsx}"
-      run: npm run biome:lint
+      run: npm run biome:format && npm run biome:fix && npm run biome:lint
     types:
       files: git diff --name-only @{push}
       glob: "*.{js,ts, jsx, tsx}"
