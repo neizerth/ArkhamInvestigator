@@ -40,6 +40,7 @@ export const PickerList = ({
 }: PickerListProps) => {
 	const activated = useRef(false);
 	const touching = useRef(false);
+	const scrolling = useRef(false);
 	const canPress = useRef(false);
 	const uiSync = useRef(false);
 	const touchStartY = useRef(0);
@@ -62,6 +63,7 @@ export const PickerList = ({
 		activated.current = false;
 		canPress.current = false;
 		uiSync.current = false;
+		scrolling.current = false;
 		touchStartY.current = 0;
 	}, []);
 
@@ -83,6 +85,9 @@ export const PickerList = ({
 		if (!listRef.current) {
 			return;
 		}
+		if (scrolling.current) {
+			return;
+		}
 		if (index.current === defaultIndex) {
 			return;
 		}
@@ -100,6 +105,7 @@ export const PickerList = ({
 	const onScrollEnd = useCallback(() => {
 		const nextValue = data[index.current];
 		activated.current = touching.current;
+		scrolling.current = false;
 
 		if (uiSync.current) {
 			uiSync.current = false;
@@ -109,6 +115,7 @@ export const PickerList = ({
 		if (value === nextValue) {
 			return;
 		}
+
 		onValueChanged?.({
 			value: nextValue,
 			index: index.current,
@@ -125,6 +132,7 @@ export const PickerList = ({
 
 	const onScroll = useCallback(
 		(e: ListScrollEvent) => {
+			scrolling.current = true;
 			if (longPressTimeout.current) {
 				clearTimeout(longPressTimeout.current);
 			}
@@ -222,8 +230,6 @@ export const PickerList = ({
 			onScroll={onScroll}
 			snapToInterval={itemHeight}
 			showsVerticalScrollIndicator={false}
-			decelerationRate="fast"
-			overScrollMode="never"
 			removeClippedSubviews
 		/>
 	);
