@@ -18,8 +18,8 @@
 	"board.help.longPress.main": "Shows/hides modifier counter. You can change base value (e.g. permanent +1 health, -2 sanity)",
 	"board.help.longPress.secondary": "Resets value to 0",
 
-	"board.help.longPress.undo": "Sets change history to the last change",
-	"board.help.longPress.redo": "Sets change history to the first change",
+	"board.help.longPress.redo": "Sets change history to the last change",
+	"board.help.longPress.undo": "Sets change history to the first change",
 
 	"board.help.calculator.toggleKeyboard": "Shows/hides keyboard",
 	"board.help.calculator.clearHistory": "Clears skill check history",

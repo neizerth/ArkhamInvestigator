@@ -8,14 +8,18 @@ import type { HapticPatternType } from "../../model";
 import { impactHapticFeedback } from "../impactHapticFeedback";
 import { selectHapticMode } from "../store/features/haptic/haptic";
 
-export const useHapticFeedback = (hapticPattern?: HapticPatternType) => {
+export const useHapticFeedback = (
+	hapticPattern?: HapticPatternType,
+	defaultForce = false,
+) => {
 	const mode = useAppSelector(selectHapticMode);
 	return useCallback(
-		(currentPattern?: HapticPatternType) => {
-			if (!mode) {
+		(currentPattern?: HapticPatternType, force = false) => {
+			const enabled = force || defaultForce || Boolean(mode);
+			if (!enabled) {
 				return;
 			}
-			const defaultFeedback = defaultModeFeedback[mode];
+			const defaultFeedback = mode ? defaultModeFeedback[mode] : "clockTick";
 			const feedback = currentPattern || hapticPattern || defaultFeedback;
 
 			if (typeof feedback === "string" && mode === "default") {
@@ -26,6 +30,6 @@ export const useHapticFeedback = (hapticPattern?: HapticPatternType) => {
 
 			impactHapticFeedback(feedback);
 		},
-		[mode, hapticPattern],
+		[mode, hapticPattern, defaultForce],
 	);
 };

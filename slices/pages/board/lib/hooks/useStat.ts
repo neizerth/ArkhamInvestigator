@@ -45,7 +45,7 @@ export const useStat = (statType: InvestigatorBoardStat) => {
 			return;
 		}
 
-		const nextValue = Math.min(initialValue, value - diff);
+		const nextValue = value - diff;
 
 		dispatch(setStatTransaction(statType, nextValue, initialValue));
 	}, [dispatch, baseValue, initialValue, value, statType]);

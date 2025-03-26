@@ -1,7 +1,6 @@
-import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import type { EncounterSet } from "@shared/model";
-import { createSliceReducer, createSliceState } from "redux-toolkit-helpers";
-import { loadCoreData } from "../app/actions/api";
+import { createSliceState } from "redux-toolkit-helpers";
 
 export type IEncounterSetsState = {
 	encounterSets: EncounterSet[];
@@ -14,14 +13,8 @@ const initialState: IEncounterSetsState = {
 export const encounterSets = createSlice({
 	name: "encounterSets",
 	...createSliceState(initialState),
-	extraReducers(builder) {
-		builder.addCase(loadCoreData.fulfilled, (state, { payload }) => {
-			const { encounterSets } = payload;
-			state.encounterSets = encounterSets;
-		});
-	},
 });
-
+export const { setEncounterSets } = encounterSets.actions;
 export const { selectEncounterSets } = encounterSets.selectors;
 
 export default encounterSets.reducer;

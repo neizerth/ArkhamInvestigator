@@ -20,10 +20,6 @@ export type BaseStatPickerProps = DefinedBaseStatPickerProps & {
 	statType: InvestigatorBoardStat;
 };
 
-const noHistory = {
-	addToHistory: false,
-};
-
 export const BaseStatPicker = ({
 	statType,
 	contentContainerStyle,
@@ -48,7 +44,7 @@ export const BaseStatPicker = ({
 
 			const delta = nextBaseValue - baseValue;
 
-			const nextValue = Math.max(0, Math.min(nextBaseValue, value + delta));
+			const nextValue = Math.min(nextBaseValue, value + delta);
 
 			dispatch(setStatTransaction(statType, nextValue, nextBaseValue));
 		},

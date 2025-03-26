@@ -4,8 +4,9 @@ import {
 	useAppDispatch,
 	useAppSelector,
 } from "@shared/lib";
-import type { Faction } from "@shared/model";
+import type { Faction, FactionFilterType } from "@shared/model";
 import {
+	type FactionSelectValue,
 	FactionSelect as Select,
 	type FactionSelectProps as SelectProps,
 } from "@widgets/investigator/faction/faction-select";
@@ -18,8 +19,8 @@ export const FactionSelect = (props: FactionSelectProps) => {
 	const faction = useAppSelector(selectFactionFilter);
 
 	const onChange = useCallback(
-		(faction: Faction | null) => {
-			dispatch(setFactionFilter(faction));
+		(value: FactionFilterType | null) => {
+			dispatch(setFactionFilter(value));
 		},
 		[dispatch],
 	);

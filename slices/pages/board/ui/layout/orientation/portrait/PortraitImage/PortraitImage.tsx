@@ -1,5 +1,5 @@
 import { LayoutContext } from "@pages/board/config";
-import { getPortraitLayout } from "@pages/board/lib";
+import { getPortraitLayout, useInvestigatorImageStyle } from "@pages/board/lib";
 import { getInvestigatorImageUrl } from "@shared/api";
 import {
 	selectCurrentBoard,
@@ -9,7 +9,6 @@ import {
 import { memo, useContext } from "react";
 import type { ViewProps } from "react-native";
 import * as C from "./PortraitImage.components";
-import { useActiveStyle } from "./useActiveStyle";
 
 export type PortraitImageProps = ViewProps;
 
@@ -24,7 +23,7 @@ export const PortraitImage = ({ ...props }: PortraitImageProps) => {
 
 	const { picture } = board;
 
-	const activeStyle = useActiveStyle();
+	const activeStyle = useInvestigatorImageStyle();
 
 	const { id } = picture;
 

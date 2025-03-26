@@ -89,6 +89,9 @@ export const PickerList = ({
 		if (contentLength === 0) {
 			return;
 		}
+		if (uiSync.current) {
+			return;
+		}
 		uiSync.current = true;
 
 		listRef.current?.scrollToIndex({
@@ -109,6 +112,7 @@ export const PickerList = ({
 		if (value === nextValue) {
 			return;
 		}
+
 		onValueChanged?.({
 			value: nextValue,
 			index: index.current,
@@ -174,7 +178,6 @@ export const PickerList = ({
 	);
 
 	const onTouchEnd = useCallback(() => {
-		activated.current = false;
 		touching.current = false;
 		clearTimeout(longPressTimeout.current);
 		if (canPress.current && onPress) {
@@ -206,6 +209,11 @@ export const PickerList = ({
 		height: itemHeight,
 	};
 
+	const snapToOffsets = useMemo(
+		() => data.map((_, i) => i * itemHeight),
+		[data, itemHeight],
+	);
+
 	return (
 		<C.List
 			data={data}
@@ -221,10 +229,8 @@ export const PickerList = ({
 			onTouchMove={onTouchMove}
 			onMomentumScrollEnd={onScrollEnd}
 			onScroll={onScroll}
-			snapToInterval={itemHeight}
+			snapToOffsets={snapToOffsets}
 			showsVerticalScrollIndicator={false}
-			decelerationRate="fast"
-			overScrollMode="never"
 			removeClippedSubviews
 		/>
 	);

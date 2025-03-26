@@ -1,3 +1,3 @@
 export * from "./typography";
 export * from "./list";
-export * from "../behavior/UnscaledText";
+export * from "./TextView";

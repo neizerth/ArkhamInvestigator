@@ -1,4 +1,5 @@
 import {
+	clearSkillCheckHistoryItem,
 	getSkillCheckValue,
 	selectCurrentBoard,
 	selectSkillCheckHistory,
@@ -6,7 +7,7 @@ import {
 	useAppDispatch,
 	useAppSelector,
 } from "@shared/lib";
-import type { SkillCheckItem } from "@shared/model";
+import type { SkillCheckHistoryItem, SkillCheckItem } from "@shared/model";
 import { useCallback, useRef } from "react";
 import type { ScrollView, ViewProps } from "react-native";
 import { ExpressionDisplay } from "../ExpressionDisplay";
@@ -54,6 +55,13 @@ export const ExpressionHistory = ({
 		[dispatch],
 	);
 
+	const clearValue = useCallback(
+		(item: SkillCheckHistoryItem) => () => {
+			dispatch(clearSkillCheckHistoryItem(item));
+		},
+		[dispatch],
+	);
+
 	return (
 		<C.Container {...props} ref={ref} onContentSizeChange={onContentSizeChange}>
 			{data.map((item) => (
@@ -63,6 +71,7 @@ export const ExpressionHistory = ({
 						type="secondary"
 						value={item.value}
 						onPress={setCurrentValue(item.expression)}
+						onLongPress={clearValue(item)}
 					/>
 				</C.Item>
 			))}

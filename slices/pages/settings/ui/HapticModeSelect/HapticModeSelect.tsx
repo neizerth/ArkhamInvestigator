@@ -44,7 +44,7 @@ export const HapticModeSelect = (props: HapticModeSelectProps) => {
 			dispatch(setHapticMode(value));
 			if (value) {
 				const feedback = defaultModeFeedback[value];
-				impactFeedback(feedback);
+				impactFeedback(feedback, true);
 			}
 		},
 		[dispatch, impactFeedback],

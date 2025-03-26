@@ -1,5 +1,10 @@
 import { getInvestigatorImageUrl } from "@shared/api";
-import { selectBoardById, useAppSelector } from "@shared/lib";
+import {
+	getIsTurnEnd,
+	selectBoardById,
+	selectEndTurnStrict,
+	useAppSelector,
+} from "@shared/lib";
 import type { Faction } from "@shared/model";
 import type { ViewProps } from "react-native";
 import * as C from "./InvestigatorSelectItem.components";
@@ -13,6 +18,7 @@ export const InvestigatorSelectItem = ({
 	...props
 }: InvestigatorSelectItemProps) => {
 	const board = useAppSelector(selectBoardById(boardId));
+	const strict = useAppSelector(selectEndTurnStrict);
 
 	if (!board) {
 		return null;
@@ -28,7 +34,10 @@ export const InvestigatorSelectItem = ({
 
 	const source = { uri };
 
-	const active = value.actions > 0 || value.additionalAction;
+	const active = !getIsTurnEnd({
+		board,
+		strict,
+	});
 
 	return (
 		<C.Container {...props} faction={faction}>

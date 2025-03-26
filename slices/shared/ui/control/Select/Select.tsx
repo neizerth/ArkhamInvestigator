@@ -33,6 +33,7 @@ export function Select<T>({ ...props }: SelectProps<T>) {
 			containerStyle={styles.container}
 			selectedTextStyle={styles.selectedTextStyle}
 			itemTextStyle={styles.itemTextStyle}
+			placeholderStyle={styles.placeholderStyle}
 			activeColor={color.dark15}
 			selectedTextProps={{
 				allowFontScaling: false,

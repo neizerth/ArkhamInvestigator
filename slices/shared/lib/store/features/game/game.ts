@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type {
-	Faction,
+	FactionFilterType,
 	InvestigatorDetails,
 	Nullable,
 	SelectedInvestigator,
@@ -9,7 +9,7 @@ import { createSliceState } from "redux-toolkit-helpers";
 import * as reducers from "./reducers";
 
 export type IGameState = {
-	factionFilter: Faction | null;
+	factionFilter: FactionFilterType | null;
 	selectedInvestigators: SelectedInvestigator[];
 	currentInvestigatorDetails: Nullable<InvestigatorDetails>;
 	showDescription: boolean;

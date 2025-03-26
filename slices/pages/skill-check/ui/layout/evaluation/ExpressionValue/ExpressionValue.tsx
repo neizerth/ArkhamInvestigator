@@ -1,4 +1,5 @@
 import {
+	formatSkillCheckValue as formatValue,
 	getSkillCheckValue,
 	sanitizeSkillCheckExpression,
 	selectCurrentBoard,
@@ -32,7 +33,7 @@ export const ExpressionValue = (props: ExpressionValueProps) => {
 
 	return (
 		<C.Container {...props}>
-			<C.Value>{showValue && `=${value}`}</C.Value>
+			<C.Value>{showValue && `=${formatValue(value)}`}</C.Value>
 		</C.Container>
 	);
 };

@@ -10,14 +10,15 @@ import styled from "styled-components/native";
 
 export const Container: typeof Row = styled(Row)`
   justify-content: space-between;
+  align-items: center;
 `;
 
 export const Left: typeof Row = styled(Row)`
-
+  align-items: center;
 `;
 
 export const Right: typeof Row = styled(Row)`
-
+  align-items: center;
 `;
 
 export const Button: typeof TouchableOpacity = styled(TouchableOpacity)`
@@ -28,7 +29,7 @@ export const Button: typeof TouchableOpacity = styled(TouchableOpacity)`
 `;
 
 export const Icon: typeof BaseIcon = styled(BaseIcon)`
-  font-size: 30px;
+  font-size: 26px;
   color: ${color.light10};
 `;
 
