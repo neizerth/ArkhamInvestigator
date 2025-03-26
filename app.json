@@ -18,7 +18,7 @@
         "backgroundColor": "#000"
       },
       "package": "com.arkhaminvestigator",
-      "versionCode": 149
+      "versionCode": 150
     },
     "web": {
       "bundler": "metro",

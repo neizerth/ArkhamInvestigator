@@ -10,8 +10,8 @@ export const FactionImage: typeof BaseFactionImage = styled(BaseFactionImage)`
 export const NeutralIcon = styled(Icon).attrs({
 	icon: "neutral",
 })`
-  font-size: 26px;
-  line-height: 26px;
+  font-size: 24px;
+  line-height: 24px;
   flex-shrink: 0;
   color: white;
 `;

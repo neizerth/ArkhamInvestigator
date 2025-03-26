@@ -44,6 +44,7 @@ type FactionIconProps = FactionFontIconProps & PropsWithFaction & SelectedProps;
 export const FactionIcon: FC<FactionIconProps> = styled(FactionFontIcon)`
   color: ${color.light10};
   font-size: 25px;
+  line-height: 46px;
   ${({ faction, selected }: FactionIconProps) =>
 		selected &&
 		css`
@@ -56,4 +57,5 @@ type IconProps = BaseIconProps & SelectedProps;
 export const Icon: FC<IconProps> = styled(BaseIcon)`
   color: ${color.light10};
   font-size: 25px;
+  line-height: 25px;
 `;
