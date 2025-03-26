@@ -10,4 +10,4 @@ export const toggleBy = <T>(
 		: [...data, item];
 
 export const safeIndexOf = <T>(item: T | undefined, data: T[]) =>
-	item ? data.indexOf(item) : -1;
+	item !== undefined ? data.indexOf(item) : -1;

@@ -53,7 +53,12 @@ export const HapticModeSelect = (props: HapticModeSelectProps) => {
 	const value = data.find(propEq(mode, "value"));
 	return (
 		<C.Container {...props}>
-			<C.Picker data={data} value={value} onChange={onChange} />
+			<C.Picker
+				data={data}
+				value={value}
+				onChange={onChange}
+				onFocus={impactFeedback}
+			/>
 		</C.Container>
 	);
 };

@@ -33,7 +33,7 @@ export const PickerList = ({
 	onPress,
 	gap = 0,
 	pressPattern = "effectTick",
-	longPressPattern = "effectDoubleClick",
+	longPressPattern = "effectClick",
 	scrollPattern = "effectTick",
 	animatedInit = true,
 	...props
@@ -231,6 +231,8 @@ export const PickerList = ({
 			onScroll={onScroll}
 			snapToOffsets={snapToOffsets}
 			showsVerticalScrollIndicator={false}
+			decelerationRate={0}
+			disableIntervalMomentum
 			removeClippedSubviews
 		/>
 	);

@@ -5,11 +5,16 @@ type GetTurnEndOptions = {
 	strict: boolean;
 };
 export const getIsTurnEnd = ({ board, strict }: GetTurnEndOptions) => {
-	const { actions, additionalAction } = board.value;
+	const { value, baseValue } = board;
+	const { actions, additionalAction } = value;
 
-	if (strict) {
-		return actions === 0 && additionalAction !== true;
+	if (actions > 0) {
+		return false;
 	}
 
-	return actions === 0;
+	if (!baseValue.additionalAction || !strict) {
+		return actions === 0;
+	}
+
+	return !additionalAction;
 };
