@@ -30,32 +30,26 @@ export const LanguagePicker = ({
 	const dispatch = useAppDispatch();
 	const languages = useAppSelector(selectAvailableLanguages);
 	const language = useAppSelector(selectLanguage);
-	const selectFeedback = useHapticFeedback("selection");
 
 	const onChange = useCallback(
 		({ value }: PickerItem) => {
-			selectFeedback();
 			dispatch(changeLanguage(value));
 		},
-		[dispatch, selectFeedback],
+		[dispatch],
 	);
 
-	const items = languages.map((language) => ({
-		label: languageLabels[language],
-		value: language,
-	})) as PickerItem[];
+	const items = languages
+		.filter((language) => language !== "zh-cn")
+		.map((language) => ({
+			label: languageLabels[language],
+			value: language,
+		})) as PickerItem[];
 
 	const value = items.find(propEq(language, "value"));
 
 	return (
 		<C.Container style={contentContainerStyle}>
-			<C.Picker
-				{...props}
-				data={items}
-				value={value}
-				onChange={onChange}
-				onFocus={selectFeedback}
-			/>
+			<C.Picker {...props} data={items} value={value} onChange={onChange} />
 		</C.Container>
 	);
 };

@@ -1,4 +1,8 @@
-import { selectCurrentBoard, useAppSelector } from "@shared/lib";
+import {
+	selectCurrentBoard,
+	selectCurrentTurnEnd,
+	useAppSelector,
+} from "@shared/lib";
 import { useEffect } from "react";
 import type { ViewStyle } from "react-native";
 import {
@@ -7,15 +11,12 @@ import {
 	withTiming,
 } from "react-native-reanimated";
 
-export const useActiveStyle = () => {
-	const board = useAppSelector(selectCurrentBoard);
-
-	const actions = board?.value.actions || 0;
-	const additionalAction = board?.value.additionalAction;
+export const useInvestigatorImageStyle = () => {
+	const isTurnEnd = useAppSelector(selectCurrentTurnEnd);
 
 	useEffect(() => {
-		grayscale.value = actions > 0 || additionalAction ? 0 : 1;
-	}, [actions, additionalAction]);
+		grayscale.value = isTurnEnd ? 1 : 0;
+	}, [isTurnEnd]);
 
 	const grayscale = useSharedValue(0);
 

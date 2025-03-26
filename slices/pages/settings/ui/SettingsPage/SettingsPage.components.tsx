@@ -27,7 +27,7 @@ export const Row: typeof BaseRow = styled(BaseRow)`
 
 export const Label: typeof TextView = styled(TextView).attrs({
 	contentContainerStyle: {
-		width: 80,
+		minWidth: 80,
 	},
 })`
   font-size: ${font.size.default}px;

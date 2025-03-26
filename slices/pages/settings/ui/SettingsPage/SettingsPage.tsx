@@ -1,5 +1,7 @@
 import { useAppTranslation } from "@features/i18n";
+import { Title } from "@shared/ui";
 import { ContentPage } from "@widgets/content-page";
+import { TurnEndSelect } from "../TurnEndSelect";
 import * as C from "./SettingsPage.components";
 
 export const SettingsPage = () => {
@@ -15,6 +17,11 @@ export const SettingsPage = () => {
 				<C.Row>
 					<C.Label>{t`Haptic`}</C.Label>
 					<C.HapticSelect />
+				</C.Row>
+				<Title>{t`Game settings`}</Title>
+				<C.Row>
+					<C.Label>{t`Turn end`}</C.Label>
+					<TurnEndSelect />
 				</C.Row>
 			</C.Content>
 		</ContentPage>

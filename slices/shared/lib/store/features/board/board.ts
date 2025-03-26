@@ -5,10 +5,12 @@ import { createSliceState } from "redux-toolkit-helpers";
 export type IBoardState = {
 	currentInvestigatorIndex: number | null;
 	investigatorBoards: InvestigatorBoard[];
+	endTurnStrict: boolean;
 };
 
 const initialState: IBoardState = {
 	currentInvestigatorIndex: null,
+	endTurnStrict: true,
 	investigatorBoards: [],
 };
 
@@ -19,10 +21,16 @@ export const board = createSlice({
 	...state,
 });
 
-export const { setCurrentInvestigatorIndex, setInvestigatorBoards } =
-	board.actions;
+export const {
+	setCurrentInvestigatorIndex,
+	setInvestigatorBoards,
+	setEndTurnStrict,
+} = board.actions;
 
-export const { selectCurrentInvestigatorIndex, selectInvestigatorBoards } =
-	board.selectors;
+export const {
+	selectCurrentInvestigatorIndex,
+	selectInvestigatorBoards,
+	selectEndTurnStrict,
+} = board.selectors;
 
 export default board.reducer;

@@ -19,7 +19,12 @@
 	"Press and hold": "Нажмите и удерживайте",
 
 	"Spoiler Alert": "Осторожно, спойлеры!",
+	"Game settings": "Игра",
 	"This section contains campaign spoilers. Do you want to proceed?": "Этот раздел содержит сюжетные спойлеры. Продолжить?",
+	"Turn end": "Конец хода",
+
+	"No main & additional actions": "Нет основных и доп. действий",
+	"No main actions": "Нет основных действий",
 
 	"board.help.scroll": "Прокрутите любой параметр сыщика до нужного значения",
 
