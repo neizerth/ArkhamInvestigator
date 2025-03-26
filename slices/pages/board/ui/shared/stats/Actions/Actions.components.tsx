@@ -31,23 +31,12 @@ export const AdditionalAction: typeof TouchableOpacity = styled(
 )`
   position: absolute;
   z-index: 3;
-  top: -30px;
-  right: -20px;
+  bottom: 12px;
+  right: -45px;
   height: 48px;
   width: 48px;
   justify-content: center;
   align-items: center;
-`;
-
-export const InitialDiff: typeof TouchableOpacity = styled(TouchableOpacity)`
-  position: absolute;
-  z-index: 1;
-  right: -40px;
-  left: 82px;
-  min-width: 48px;
-  height: 48px;
-  justify-content: center;
-  align-items: flex-start;
 `;
 
 export const BaseActions: FC<DefinedBaseStatPickerProps> = styled(
@@ -62,8 +51,8 @@ export const BaseActions: FC<DefinedBaseStatPickerProps> = styled(
 	contentContainerStyle: {
 		position: "absolute",
 		zIndex: 1,
-		right: -40,
-		bottom: 11,
+		right: -15,
+		top: -30,
 	},
 	gap: 5,
 })`
