@@ -14,8 +14,6 @@ import type { FactionSelectButtonProps } from "./FactionSelectButton";
 type ButtonProps = FactionSelectButtonProps;
 
 export const Button: FC<ButtonProps> = styled(TouchableOpacity)`
-  width: 48px;
-  height: 48px;
   justify-content: center;
   align-items: center;
   ${({ selected, value }: ButtonProps) =>
@@ -58,9 +56,4 @@ type IconProps = BaseIconProps & SelectedProps;
 export const Icon: FC<IconProps> = styled(BaseIcon)`
   color: ${color.light10};
   font-size: 25px;
-  ${({ selected }: IconProps) =>
-		selected &&
-		css`
-    color: ${color.dark30};
-  `}
 `;

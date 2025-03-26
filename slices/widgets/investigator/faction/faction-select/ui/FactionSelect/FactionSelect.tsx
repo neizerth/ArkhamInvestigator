@@ -54,16 +54,18 @@ export const FactionSelect = ({
 
 	return (
 		<C.Container {...props}>
-			{values.map((item, index) => (
-				<C.Button
-					key={item}
-					value={item}
-					selected={value === item}
-					onPress={onPress(item)}
-					first={index === 0}
-					last={index === item.length - 1}
-				/>
-			))}
+			<C.Content>
+				{values.map((item, index) => (
+					<C.Button
+						key={item}
+						value={item}
+						selected={value === item}
+						onPress={onPress(item)}
+						first={index === 0}
+						last={index === item.length - 1}
+					/>
+				))}
+			</C.Content>
 		</C.Container>
 	);
 };
