@@ -55,3 +55,5 @@ export type InvestigatorDetailItem<T = object> = {
 	details: InvestigatorDetails;
 	data?: T;
 };
+
+export type FactionFilterType = Faction | "spoiler";

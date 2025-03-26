@@ -20,9 +20,12 @@ export const InvestigatorSelect = () => {
 	);
 
 	const filtered = factionFilter
-		? data.filter(
-				({ investigator }) => investigator.faction_code === factionFilter,
-			)
+		? data.filter(({ investigator, media }) => {
+				if (factionFilter === "spoiler") {
+					return media?.spoiler === true;
+				}
+				return investigator.faction_code === factionFilter && !media?.spoiler;
+			})
 		: data;
 
 	const official = filtered.filter(propEq(true, "isOfficial"));
@@ -33,8 +36,12 @@ export const InvestigatorSelect = () => {
 			<C.FactionSelect />
 			<C.Content>
 				<List data={official} onChange={onChange} />
-				<C.Separator>— {t`Fan-made Investigators`} —</C.Separator>
-				<List data={fanMade} onChange={onChange} />
+				{fanMade.length > 0 && (
+					<>
+						<C.Separator>— {t`Fan-made Investigators`} —</C.Separator>
+						<List data={fanMade} onChange={onChange} />
+					</>
+				)}
 			</C.Content>
 			<C.Footer />
 		</C.Container>
