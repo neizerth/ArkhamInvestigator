@@ -1,10 +1,10 @@
 import {
+	formatSkillCheckValue as formatValue,
 	getSkillCheckValue,
 	sanitizeSkillCheckExpression,
 	selectCurrentBoard,
 	selectSkillCheckData,
 	useAppSelector,
-	formatSkillCheckValue as formatValue
 } from "@shared/lib";
 import { last } from "ramda";
 import type { ViewProps } from "react-native";
