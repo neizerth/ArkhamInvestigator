@@ -36,7 +36,7 @@ const sidebarStyle = css<PropsWithView>`
   top: 0;
   ${({ view }: PropsWithView) => {
 		const { height } = view;
-		const bottom = height < 700 ? 160 : 200;
+		const bottom = height < 700 ? 180 : 220;
 
 		return css`
       bottom: ${bottom}px;
