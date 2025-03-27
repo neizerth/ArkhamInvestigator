@@ -1,7 +1,4 @@
-import type {
-	InvestigatorBoardStat,
-	SkillCheckCommandType,
-} from "@shared/model";
+import type { SkillCheckCommandType } from "@shared/model";
 import { last } from "ramda";
 import { createNumberItem, createStatItem } from "../lib";
 import type { SkillCheckReducer } from "../skillCheck.types";

@@ -4,7 +4,6 @@ import type {
 	InvestigatorBoardStat,
 	InvestigatorBoardValues,
 } from "@shared/model";
-import { v4 } from "uuid";
 import { selectCurrentBoard } from "../../../selectors/current/selectCurrentBoard";
 import { setCurrentBoard } from "../../board/setCurrentBoard";
 

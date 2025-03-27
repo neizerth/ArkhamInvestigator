@@ -8,9 +8,8 @@ import {
 } from "@shared/config";
 import { APP_VERSION, BUILD_ID, BUILD_VERSION } from "@shared/config/app";
 import { selectMediaVersion, useAppSelector } from "@shared/lib";
-import { A, Bold, List, Paragraph, Text, Title } from "@shared/ui";
+import { A, Bold, List, Paragraph, Title } from "@shared/ui";
 import { ContentPage, type ContentPageProps } from "@widgets/content-page";
-import * as Application from "expo-application";
 
 export type AboutPageProps = Omit<ContentPageProps, "title">;
 

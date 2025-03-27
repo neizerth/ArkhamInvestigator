@@ -1,11 +1,10 @@
 import { IconButton } from "@features/haptic";
 import { skillCheckColor } from "@pages/skill-check/config";
-import { color, font, size } from "@shared/config";
+import { color, size } from "@shared/config";
 import { Row as BaseRow, Icon } from "@shared/ui";
 import type { FC } from "react";
-import { Image, View, type ViewProps } from "react-native";
+import { View, type ViewProps } from "react-native";
 import styled, { css } from "styled-components/native";
-import { rule } from "./images";
 import TopRule from "./images/rule-top.svg";
 
 export const Container: typeof View = styled(View)`

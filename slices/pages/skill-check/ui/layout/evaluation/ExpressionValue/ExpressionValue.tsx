@@ -6,7 +6,6 @@ import {
 	selectSkillCheckData,
 	useAppSelector,
 } from "@shared/lib";
-import { last } from "ramda";
 import type { ViewProps } from "react-native";
 import * as C from "./ExpressionValue.components";
 

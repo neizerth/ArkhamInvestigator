@@ -1,11 +1,5 @@
-import type {
-	Box,
-	BoxLayout,
-	BoxPosition,
-	BoxRect,
-	ScaledBox,
-} from "@shared/model";
-import { ascend, descend, identity } from "ramda";
+import type { Box, BoxLayout, BoxPosition, ScaledBox } from "@shared/model";
+import { descend, identity } from "ramda";
 import { getBoxCenter, getRect, translateBoxLayout } from "./box";
 
 export const scaleBox = (box: Box, scale: number): Box => ({

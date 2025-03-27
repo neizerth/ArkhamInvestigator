@@ -1,13 +1,6 @@
-import { descriptionSize } from "@pages/board/config";
-import { getBoxByRatio } from "@shared/lib/util/size/box";
 import type { PropsWithBox, PropsWithFaction } from "@shared/model";
 import type { FC } from "react";
-import {
-	ImageBackground,
-	type ImageBackgroundProps,
-	ScrollView,
-	View,
-} from "react-native";
+import { ImageBackground, type ImageBackgroundProps, View } from "react-native";
 import type { ViewProps } from "react-native";
 import styled, { css } from "styled-components/native";
 import { getFactionStyle } from "./FactionDescription.styles";

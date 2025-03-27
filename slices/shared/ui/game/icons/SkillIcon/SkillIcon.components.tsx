@@ -1,7 +1,5 @@
 import { color } from "@shared/config";
-import { SkillType } from "@shared/model";
 import type { PropsWithSkill } from "@shared/model/ui";
-import Color from "color";
 import type { FC } from "react";
 import { View } from "react-native";
 import styled, { css } from "styled-components/native";

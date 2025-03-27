@@ -6,8 +6,7 @@ import {
 } from "@features/i18n/config";
 import type { AppThunkCreator } from "@shared/lib";
 import { loadStoreTranslation } from "../../../../storage/translation";
-import { selectLanguage, setLoadingLanguage } from "../i18n";
-import { changeLanguage } from "./changeLanguage";
+import { selectLanguage } from "../i18n";
 import { loadTranslation } from "./loadTranslation";
 
 export const restoreTranslation: AppThunkCreator =

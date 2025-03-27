@@ -1,5 +1,5 @@
 import { useAppTranslation } from "@features/i18n";
-import { Bold, List, Paragraph, Text, Title } from "@shared/ui";
+import { Bold, List, Text, Title } from "@shared/ui";
 import { ContentPage } from "@widgets/content-page";
 import * as C from "./HelpPage.components";
 

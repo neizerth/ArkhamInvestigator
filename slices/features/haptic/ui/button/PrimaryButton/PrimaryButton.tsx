@@ -1,5 +1,3 @@
-import { router } from "expo-router";
-
 import { useCallback, useState } from "react";
 import * as C from "./PrimaryButton.components";
 import {

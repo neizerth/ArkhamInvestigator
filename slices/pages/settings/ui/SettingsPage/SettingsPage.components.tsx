@@ -1,10 +1,8 @@
 import { color, font, size } from "@shared/config";
-import { Alegreya } from "@shared/fonts";
-import { Row as BaseRow, Text, TextView } from "@shared/ui";
+import { Row as BaseRow, TextView } from "@shared/ui";
+import { StoreSelect } from "@widgets/control/store-select";
 import { View } from "react-native";
 import styled from "styled-components/native";
-import { HapticModeSelect } from "../HapticModeSelect";
-import { LanguagePicker } from "../LanguagePicker";
 
 export const Container: typeof View = styled(View)`
   background-color: ${color.dark40};
@@ -34,10 +32,6 @@ export const Label: typeof TextView = styled(TextView).attrs({
   text-align: right;
 `;
 
-export const LanguageSelect: typeof LanguagePicker = styled(LanguagePicker)`
- 
-`;
-
-export const HapticSelect: typeof HapticModeSelect = styled(HapticModeSelect)`
- 
+export const Select: typeof StoreSelect = styled(StoreSelect)`
+  flex: 1;
 `;

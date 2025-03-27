@@ -1,5 +1,5 @@
 import type { Box } from "@shared/model";
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useState } from "react";
 import type { LayoutChangeEvent } from "react-native";
 
 export const useLayoutSize = <T extends Box | undefined>(defaultSize?: T) => {

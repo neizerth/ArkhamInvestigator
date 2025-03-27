@@ -1,4 +1,4 @@
-import { color, font } from "@shared/config";
+import { color } from "@shared/config";
 
 export const valueStyle = {
 	color: color.white,

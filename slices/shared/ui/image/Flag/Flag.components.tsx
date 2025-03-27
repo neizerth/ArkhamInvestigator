@@ -1,6 +1,6 @@
 import { color, font } from "@shared/config";
 import { Alegreya } from "@shared/fonts";
-import { Image as BaseImage, Text, View } from "react-native";
+import { Image as BaseImage, View } from "react-native";
 import styled from "styled-components/native";
 import { UnscaledText } from "../../behavior/UnscaledText";
 import { FLAG_HEIGHT, FLAG_SIZE } from "./Flag.styles";

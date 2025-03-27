@@ -2,7 +2,6 @@ import type { InvestigatorDetails, SelectedInvestigator } from "@shared/model";
 import type { Investigator as InvestigatorMedia } from "arkham-investigator-data";
 import { propEq } from "ramda";
 import { getMediaSkins, getMediaVariants } from "../media";
-import { getMediaVariantId } from "../media/getMediaVariantId";
 
 type Options = {
 	selection: SelectedInvestigator;

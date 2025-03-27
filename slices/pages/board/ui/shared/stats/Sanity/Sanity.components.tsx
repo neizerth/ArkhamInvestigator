@@ -3,7 +3,6 @@ import { withStat } from "@pages/board/lib/hoc/withStat";
 import { color, gameAssets } from "@shared/config";
 import * as UI from "@shared/ui";
 import type { FC } from "react";
-import { View } from "react-native";
 import styled from "styled-components/native";
 import { BaseStatPicker, type DefinedBaseStatPickerProps } from "../common";
 import { StatPickerMemo as StatPicker } from "../common/StatPicker";

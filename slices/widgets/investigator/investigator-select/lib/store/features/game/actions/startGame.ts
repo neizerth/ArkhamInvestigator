@@ -1,7 +1,6 @@
 import type { ActionCreator } from "@reduxjs/toolkit";
 import {
 	type AppThunk,
-	goToPage,
 	replacePageTo,
 	setCurrentInvestigatorIndex,
 	setInvestigatorBoards,

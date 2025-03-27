@@ -3,7 +3,6 @@ import { routes } from "@shared/config";
 import {
 	type AppThunk,
 	goToPage,
-	replacePageTo,
 	setInvestigatorBoards,
 	setSelectedInvestigators,
 } from "@shared/lib";

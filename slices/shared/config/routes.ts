@@ -1,4 +1,3 @@
-import { settings } from "@shared/lib";
 import type { Href } from "expo-router";
 import { identity } from "ramda";
 

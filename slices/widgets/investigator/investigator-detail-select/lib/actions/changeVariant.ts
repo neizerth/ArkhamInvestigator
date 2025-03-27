@@ -1,8 +1,6 @@
 import {
 	type AppThunkCreator,
-	selectCurrentBoard,
 	selectCurrentInvestigatorDetails,
-	setBoardDetails,
 	setInvestigatorVariant,
 } from "@shared/lib";
 import type { InvestigatorDetailItem } from "@shared/model";

@@ -1,5 +1,3 @@
-import type { Point } from "@shared/model";
-import { props } from "ramda";
 import type { SvgPatternImageProps } from "./SvgPatternImage.types";
 
 export const getPatternProps = ({

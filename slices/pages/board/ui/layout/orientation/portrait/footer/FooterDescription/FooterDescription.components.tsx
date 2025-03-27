@@ -1,4 +1,3 @@
-import { boardText } from "@pages/board/config";
 import {
 	InvestigatorFlavor,
 	InvestigatorText,

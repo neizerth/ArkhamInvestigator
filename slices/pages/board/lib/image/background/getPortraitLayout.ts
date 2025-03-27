@@ -1,7 +1,6 @@
 import { faceSize } from "@pages/board/config";
 import type { HeaderLayout } from "@pages/board/model";
 import {
-	getCoverScale,
 	getCoverScaleAt,
 	scaleBox,
 	scaleBoxLayout,
@@ -9,9 +8,7 @@ import {
 } from "@shared/lib";
 import { getBoxCenter, getBoxLayoutCenter } from "@shared/lib/util/size/box";
 import type { InvestigatorPicture } from "@shared/model";
-import type { Box, BoxLayout, BoxPosition } from "@shared/model/ui";
-import type { InvestigatorImage } from "arkham-investigator-data";
-import { ascend, head, lt, prop, sortWith } from "ramda";
+import type { Box } from "@shared/model/ui";
 
 type GetImageLayout = {
 	layout: HeaderLayout;

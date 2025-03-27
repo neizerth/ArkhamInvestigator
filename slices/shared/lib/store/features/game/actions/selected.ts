@@ -3,7 +3,6 @@ import { MAX_PLAYERS, routes } from "@shared/config";
 import { goToPage } from "@shared/lib/store/effects";
 import { includesBy } from "@shared/lib/util";
 import type { InvestigatorDetails, SelectedInvestigator } from "@shared/model";
-import { router } from "expo-router";
 import { propEq, reject } from "ramda";
 import { v4 } from "uuid";
 import type { AppThunk } from "../../../";

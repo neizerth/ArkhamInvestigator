@@ -1,11 +1,5 @@
-import {
-	DEFAULT_LANGUAGE,
-	I18N_NAMESAPCE,
-	i18next,
-	translations,
-} from "@features/i18n/config";
+import { I18N_NAMESAPCE, i18next, translations } from "@features/i18n/config";
 import { saveStoreTranslation } from "@features/i18n/lib/storage";
-import { storage } from "@features/storage";
 import type { ArkhamDivider } from "arkham-divider-data";
 import { pick } from "ramda";
 import type { I18NReducer } from "../i18n.types";

@@ -1,7 +1,6 @@
 import { PORTRAIT_DESCRIPTION_HEIGHT } from "@pages/board/config";
-import { color, size } from "@shared/config";
-import { Icon as BaseIcon, Row as BaseRow } from "@shared/ui";
-import type { FC } from "react";
+import { size } from "@shared/config";
+import { Row as BaseRow } from "@shared/ui";
 import { View } from "react-native";
 import styled from "styled-components/native";
 import { FooterDescription } from "../FooterDescription";

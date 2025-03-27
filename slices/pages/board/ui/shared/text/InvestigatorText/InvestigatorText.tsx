@@ -1,5 +1,4 @@
-import { selectLanguage, useAppTranslation } from "@features/i18n";
-import { useAppSelector } from "@shared/lib";
+import { useAppTranslation } from "@features/i18n";
 import type { ComponentStyleMap } from "@widgets/game-text";
 import { mergeDeepRight } from "ramda";
 import * as C from "./InvestigatorText.components";

@@ -1,4 +1,3 @@
-import { PortraitLayoutContext } from "@pages/board/config";
 import { routes } from "@shared/config";
 import {
 	goToPage,
@@ -10,8 +9,7 @@ import {
 	useAppDispatch,
 	useAppSelector,
 } from "@shared/lib";
-import { IconProps, Row } from "@shared/ui";
-import { useCallback, useContext } from "react";
+import { useCallback } from "react";
 import type { ViewProps } from "react-native-svg/lib/typescript/fabric/utils";
 import * as C from "./DescriptionMenu.components";
 

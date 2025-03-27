@@ -1,5 +1,5 @@
 import { Children } from "react";
-import type { TextStyle, ViewProps, ViewStyle } from "react-native";
+import type { ViewProps, ViewStyle } from "react-native";
 import { v4 } from "uuid";
 import * as C from "./List.components";
 

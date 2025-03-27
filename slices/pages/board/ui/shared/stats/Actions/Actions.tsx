@@ -1,12 +1,6 @@
 import { useStat } from "@pages/board/lib";
 import {
-	decreaseBaseStat,
-	decreaseCurrentStat,
-	increaseBaseStat,
-	increaseCurrentStat,
 	selectCurrentBoard,
-	setBaseStat,
-	signedNumber,
 	useAppDispatch,
 	useAppSelector,
 } from "@shared/lib";

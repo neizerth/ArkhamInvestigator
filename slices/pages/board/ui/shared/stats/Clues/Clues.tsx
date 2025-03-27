@@ -1,6 +1,5 @@
 import {
 	decreaseCurrentStat,
-	increaseCurrentStat,
 	selectCurrentBoard,
 	useAppDispatch,
 	useAppSelector,

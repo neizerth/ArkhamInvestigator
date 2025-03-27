@@ -1,6 +1,5 @@
 import type { InvestigatorDetailItem as Item } from "@shared/model";
 import { InvestigatorPreviewMemo as InvestigatorPreview } from "@widgets/investigator/investigator-preview";
-import { prop } from "ramda";
 import { memo, useCallback } from "react";
 import { CARD_SIZE } from "../../../config";
 import { UnselectedDetail } from "../UnselectedDetail";

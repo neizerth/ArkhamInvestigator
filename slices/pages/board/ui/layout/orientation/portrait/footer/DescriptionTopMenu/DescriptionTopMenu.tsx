@@ -1,9 +1,8 @@
 import { useAppTranslation } from "@features/i18n";
-import { openModal, useModal } from "@features/modal";
+import { useModal } from "@features/modal";
 import { useFaction } from "@pages/board/lib";
 import { routes } from "@shared/config";
 import {
-	goToPage,
 	resetBoard,
 	selectCurrentBoard,
 	useAppDispatch,

@@ -9,7 +9,6 @@ import {
 	useLayoutSize,
 	useScreenOrientation,
 } from "@shared/lib";
-import React from "react";
 import { useWindowDimensions } from "react-native";
 import * as C from "./BoardPage.components";
 

@@ -22,7 +22,10 @@
 			"recommended": true,
 			"suspicious": {
 				"noConfusingVoidType": "off"
-			}
+			},
+			"correctness": {
+        "noUnusedImports": "error"
+      }
 		}
 	},
 	"javascript": {

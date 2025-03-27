@@ -1,4 +1,3 @@
-import type { Faction } from "@shared/model";
 import type { PropsWithFaction } from "@shared/model/ui";
 import {
 	Container,

@@ -1,5 +1,4 @@
 import { LayoutContext } from "@pages/board/config";
-import { selectCurrentBoard, useAppSelector } from "@shared/lib";
 import { useContext } from "react";
 import type { ViewProps } from "react-native";
 import * as C from "./InvestigatorImage.components";

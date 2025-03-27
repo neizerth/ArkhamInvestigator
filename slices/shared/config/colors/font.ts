@@ -1,5 +1,4 @@
 import { PixelRatio } from "react-native";
-import { DEVICE_FONT_SCALE, IS_WEB } from "../device";
 
 const getSize = PixelRatio.getPixelSizeForLayoutSize;
 const scale = 1.25;

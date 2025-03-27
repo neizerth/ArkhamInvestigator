@@ -2,8 +2,8 @@ import { color } from "@shared/config";
 import { type DefinedIconProps, Icon } from "@shared/ui";
 import { PickerMemo as BasePicker } from "@widgets/picker";
 import type { FC } from "react";
-import { TouchableOpacity, View } from "react-native";
-import styled, { css } from "styled-components/native";
+import { View } from "react-native";
+import styled from "styled-components/native";
 import { InvestigatorSelectItem } from "../InvestigatorSelectItem";
 
 export const Container: typeof View = styled(View)`

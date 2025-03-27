@@ -1,6 +1,6 @@
 import { Icon } from "@shared/ui";
 import type { HTMLReactParserOptions } from "html-react-parser";
-import { Fragment, Key } from "react";
+import { Fragment } from "react";
 import type { TextProps } from "react-native";
 import { v4 } from "uuid";
 import { iconMapping } from "../config";

@@ -1,5 +1,4 @@
 import type { Faction } from "@shared/model";
-import type { ImageRequireSource } from "react-native";
 
 import type { FC } from "react";
 import type { SvgProps } from "react-native-svg";

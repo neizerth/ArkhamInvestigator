@@ -1,5 +1,5 @@
 import { useAppTranslation } from "@features/i18n";
-import { memo, useCallback, useState } from "react";
+import { memo } from "react";
 import {
 	type DetailSectionProps,
 	DetailSection as Section,

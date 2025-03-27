@@ -1,11 +1,6 @@
 import type { HapticPatternType } from "@features/haptic";
 import type { ReactElement } from "react";
-import type {
-	FlatList,
-	FlatListProps,
-	ViewProps,
-	ViewStyle,
-} from "react-native";
+import type { FlatListProps, ViewProps, ViewStyle } from "react-native";
 import type { ListRenderItemInfo } from "react-native";
 
 export type PickerItemProps = {

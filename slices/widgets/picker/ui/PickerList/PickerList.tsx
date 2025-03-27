@@ -1,7 +1,6 @@
 import { useHapticFeedback } from "@features/haptic";
 import { minMax, safeIndexOf } from "@shared/lib";
-import { useBooleanRef } from "@shared/lib/hooks";
-import { MIN_FINGER_SIZE, SCROLL_TRESHOLD } from "@widgets/picker/config";
+import { SCROLL_TRESHOLD } from "@widgets/picker/config";
 import type {
 	PickerListItemGetItemLayout,
 	PickerListProps,

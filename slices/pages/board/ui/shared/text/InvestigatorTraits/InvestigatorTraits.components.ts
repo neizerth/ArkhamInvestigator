@@ -1,10 +1,6 @@
 import { color } from "@shared/config";
-import { ArnoPro } from "@shared/fonts";
-import { SanCn } from "@shared/fonts";
 import { UnscaledText } from "@shared/ui";
-import type { FC } from "react";
-import styled, { css } from "styled-components/native";
-import type { InvestigatorTraitsProps } from "./InvestigatorTraits.types";
+import styled from "styled-components/native";
 
 export const Traits: typeof UnscaledText = styled(UnscaledText)`
   text-align: center;

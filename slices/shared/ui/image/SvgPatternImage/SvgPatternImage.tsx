@@ -1,4 +1,4 @@
-import Svg, { Defs, Pattern, Rect, SvgProps } from "react-native-svg";
+import Svg, { Defs, Pattern, Rect } from "react-native-svg";
 import type { SvgPatternImageProps } from "./SvgPatternImage.types";
 import { getPatternProps } from "./getPatternProps";
 

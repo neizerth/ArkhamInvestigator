@@ -1,5 +1,4 @@
 import type { InvestigatorSource } from "@shared/model/index.js";
-import { IconNumber } from "@shared/ui";
 import * as C from "./InvestigatorStats.components";
 
 export type InvestigatorStatsProps = {

@@ -1,6 +1,6 @@
 import { View } from "react-native";
 import Animated from "react-native-reanimated";
-import styled, { css } from "styled-components/native";
+import styled from "styled-components/native";
 
 export const Container: typeof View = styled(View)`
   overflow: hidden;

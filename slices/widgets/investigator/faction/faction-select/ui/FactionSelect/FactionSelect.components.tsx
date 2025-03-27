@@ -1,6 +1,5 @@
 import { color, size } from "@shared/config";
-import { FactionFontIcon, Row } from "@shared/ui";
-import { View } from "react-native";
+import { Row } from "@shared/ui";
 import styled from "styled-components/native";
 import { FactionSelectButton } from "../FactionSelectButton";
 

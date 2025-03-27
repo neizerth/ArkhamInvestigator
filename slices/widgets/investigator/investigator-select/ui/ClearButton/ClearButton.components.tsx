@@ -1,4 +1,4 @@
-import { color, size } from "@shared/config";
+import { color } from "@shared/config";
 import { Icon as BaseIcon } from "@shared/ui";
 import { TouchableOpacity } from "react-native";
 import styled from "styled-components/native";

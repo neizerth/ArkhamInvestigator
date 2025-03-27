@@ -2,14 +2,13 @@ import { useAppTranslation } from "@features/i18n";
 import { startNewGame } from "@pages/home/lib";
 import { routes } from "@shared/config";
 import {
-	goToPage,
 	selectCurrentBoard,
 	useAppDispatch,
 	useAppSelector,
 	usePage,
 	usePageLoader,
 } from "@shared/lib";
-import { useCallback, useEffect } from "react";
+import { useCallback } from "react";
 import { Button } from "../Button";
 import * as C from "./HomePage.components";
 export const HomePage = () => {

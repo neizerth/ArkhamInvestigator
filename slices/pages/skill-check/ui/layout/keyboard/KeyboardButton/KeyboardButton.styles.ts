@@ -1,4 +1,4 @@
-import type { Box, PropsWithBox } from "@shared/model";
+import type { PropsWithBox } from "@shared/model";
 import type { KeyboardButtonSize, PropsWithSize } from "./KeyboardButton.types";
 
 type SizeRecord = Record<KeyboardButtonSize, number>;

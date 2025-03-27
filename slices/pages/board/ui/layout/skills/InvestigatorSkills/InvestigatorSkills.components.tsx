@@ -1,10 +1,8 @@
-import { InvestigatorSkillType } from "@shared/model";
 import { Row } from "@shared/ui";
 import type { FC } from "react";
 import type { ImageProps } from "react-native";
 import { Image, View } from "react-native";
 import styled, { css } from "styled-components/native";
-import { Skill as BaseSkill } from "../Skill";
 import { withSkillType } from "./withSkillType";
 
 export const Container: typeof View = styled(View)`

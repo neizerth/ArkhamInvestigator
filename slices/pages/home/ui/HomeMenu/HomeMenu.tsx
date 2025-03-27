@@ -1,7 +1,5 @@
 import { routes } from "@shared/config";
-import { goToPage, useAppDispatch, usePage } from "@shared/lib";
-import type { Href } from "expo-router";
-import { useCallback } from "react";
+import { usePage } from "@shared/lib";
 import type { ViewProps } from "react-native";
 import * as C from "./HomeMenu.components";
 

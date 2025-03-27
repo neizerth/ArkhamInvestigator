@@ -7,7 +7,6 @@ import { getBoardStats } from "@shared/lib/features/game/board/getBoardStats";
 import type { AppThunk } from "@shared/lib/store";
 import type { SelectedInvestigator } from "@shared/model";
 import { propEq } from "ramda";
-import { setSelectedInvestigators } from "../../../game/game";
 import { selectInvestigatorSources } from "../../../investigators/investigatorSources/investigatorSources";
 import { selectCurrentBoard } from "../../selectors";
 import { setCurrentBoard } from "./setCurrentBoard";

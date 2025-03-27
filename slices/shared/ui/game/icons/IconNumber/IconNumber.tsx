@@ -1,6 +1,5 @@
 import { font } from "@shared/config";
-import React from "react";
-import { StyleSheet, ViewStyle } from "react-native";
+import { StyleSheet } from "react-native";
 import type { IconNumberProps } from "./IconNumber.types";
 import { StrokedIconNumber } from "./StrokedIconNumber";
 import { UnstrokedIconNumber } from "./UnstrokedIconNumber";

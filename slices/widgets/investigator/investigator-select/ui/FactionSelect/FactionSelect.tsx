@@ -4,9 +4,8 @@ import {
 	useAppDispatch,
 	useAppSelector,
 } from "@shared/lib";
-import type { Faction, FactionFilterType } from "@shared/model";
+import type { FactionFilterType } from "@shared/model";
 import {
-	type FactionSelectValue,
 	FactionSelect as Select,
 	type FactionSelectProps as SelectProps,
 } from "@widgets/investigator/faction/faction-select";

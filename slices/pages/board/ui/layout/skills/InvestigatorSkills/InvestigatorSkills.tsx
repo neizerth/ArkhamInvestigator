@@ -1,8 +1,7 @@
 import { LayoutContext, SkillsContext } from "@pages/board/config";
 import { getSkillsSize, useFactionImage } from "@pages/board/lib";
-import { useAppSelector } from "@shared/lib";
 import { useContext } from "react";
-import type { ViewProps, ViewStyle } from "react-native";
+import type { ViewProps } from "react-native";
 import * as C from "./InvestigatorSkills.components";
 import { getSkillsStyle } from "./getSkillsStyle";
 import { images } from "./images";

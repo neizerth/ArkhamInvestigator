@@ -6,7 +6,7 @@ import { Conkordia } from "@shared/fonts";
 import { SanCn } from "@shared/fonts";
 import { STXingkai } from "@shared/fonts";
 import { getKeyConfig } from "@shared/lib";
-import type { Box, PropsWithFaction } from "@shared/model";
+import type { PropsWithFaction } from "@shared/model";
 import { mergeDeepRight } from "ramda";
 import type { TextStyle, ViewStyle } from "react-native";
 

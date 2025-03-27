@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 
 export const useBoolean = (defaultValue?: boolean) => {
 	const [value, setValue] = useState(defaultValue);

@@ -1,11 +1,7 @@
 import type { AppThunkCreator } from "@shared/lib/store";
-import type {
-	HistoryItem,
-	InvestigatorBoard,
-	InvestigatorBoardValues,
-} from "@shared/model";
+import type { InvestigatorBoard, InvestigatorBoardValues } from "@shared/model";
 
-import { prop, propEq } from "ramda";
+import { prop } from "ramda";
 import { selectCurrentBoard } from "../../selectors/current/selectCurrentBoard";
 import { setCurrentBoard } from "../board/setCurrentBoard";
 

@@ -5,13 +5,11 @@ import type { ImageProps, ViewProps } from "react-native";
 import styled, { css } from "styled-components/native";
 
 import { TouchableOpacity } from "@features/haptic";
-import { color, factionColor, font, size } from "@shared/config";
-import { Alegreya } from "@shared/fonts";
+import { color, factionColor, size } from "@shared/config";
 import { ArkhamDigits } from "@shared/fonts";
 import type { PropsWithFaction } from "@shared/model/ui";
 import { Icon, UnscaledText } from "@shared/ui";
 import Color from "color";
-import { Text } from "react-native";
 
 const getSelectionColor = (faction: Faction) => {
 	const color = factionColor[faction].darkColor;

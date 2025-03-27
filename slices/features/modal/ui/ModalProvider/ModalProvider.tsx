@@ -1,11 +1,5 @@
-import type { ModalContextType, ModalEventHandler } from "@features/modal/lib";
-import {
-	type PropsWithChildren,
-	useCallback,
-	useEffect,
-	useRef,
-	useState,
-} from "react";
+import type { ModalContextType } from "@features/modal/lib";
+import { type PropsWithChildren, useCallback, useEffect, useRef } from "react";
 import { BackHandler } from "react-native";
 import { useAppDispatch } from "../../../../shared/lib/hooks/store/useAppDispatch";
 import { useAppSelector } from "../../../../shared/lib/hooks/store/useAppSelector";

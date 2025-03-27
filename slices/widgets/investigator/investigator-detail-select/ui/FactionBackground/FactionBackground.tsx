@@ -1,7 +1,6 @@
 import { color } from "@shared/config";
 import type { PropsWithFaction } from "@shared/model/ui";
-import { Image } from "react-native";
-import type { ImageProps, ViewProps } from "react-native";
+import type { ViewProps } from "react-native";
 import * as C from "./FactionBacground.components";
 import { factionPatternWidth, factionPatterns, patternHeight } from "./images";
 

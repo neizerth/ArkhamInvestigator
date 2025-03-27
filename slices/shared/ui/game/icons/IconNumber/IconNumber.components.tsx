@@ -1,10 +1,10 @@
 import { ArkhamDigits } from "@shared/fonts";
 import { Row } from "@shared/ui/grid";
 import type { FC } from "react";
-import { Text, View } from "react-native";
+import { View } from "react-native";
 import styled, { css } from "styled-components/native";
 import { UnscaledText } from "../../../behavior/UnscaledText";
-import { Icon, type IconProps } from "../Icon/Icon";
+import { Icon } from "../Icon/Icon";
 import type { CharProps, PropsWithSize } from "./IconNumber.types";
 
 export const Container: typeof View = styled(Row)`

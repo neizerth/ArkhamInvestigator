@@ -12,12 +12,14 @@ export type StoreSelectProps<T> = Omit<
 > & {
 	selector: Selector<RootState, T>;
 	reducer: ActionCreatorWithPayload<T>;
+	translate?: boolean;
 };
 
 export function StoreSelect<T>({
 	selector,
 	reducer,
 	data,
+	translate = true,
 	...props
 }: StoreSelectProps<T>) {
 	const { t } = useAppTranslation();
@@ -26,7 +28,7 @@ export function StoreSelect<T>({
 
 	const items = data.map((item) => ({
 		...item,
-		label: t(item.label),
+		label: translate ? t(item.label) : item.label,
 	}));
 	const item = items.find(propEq(value, "value"));
 

@@ -4,7 +4,6 @@ import type {
 	SkillCheckOperator,
 } from "@shared/model";
 import { evaluate } from "mathjs";
-import { last } from "ramda";
 
 const operatorMapping: Record<SkillCheckOperator, string> = {
 	add: "+",

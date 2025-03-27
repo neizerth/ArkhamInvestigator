@@ -1,6 +1,5 @@
 import { LayoutContext } from "@pages/board/config";
 import { getPortraitLayout, useInvestigatorImageStyle } from "@pages/board/lib";
-import { getInvestigatorImageUrl } from "@shared/api";
 import {
 	selectCurrentBoard,
 	useAppSelector,

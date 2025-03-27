@@ -1,8 +1,4 @@
-import {
-	selectCurrentBoard,
-	selectCurrentTurnEnd,
-	useAppSelector,
-} from "@shared/lib";
+import { selectCurrentTurnEnd, useAppSelector } from "@shared/lib";
 import { useEffect } from "react";
 import type { ViewStyle } from "react-native";
 import {

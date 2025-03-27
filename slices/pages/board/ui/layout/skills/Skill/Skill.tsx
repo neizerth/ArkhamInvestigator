@@ -1,7 +1,6 @@
 import { useHapticFeedback } from "@features/haptic";
 import { SkillsContext } from "@pages/board/config";
 import {
-	goToPage,
 	selectCurrentBoard,
 	setCurrentStat,
 	startSkillCheck,

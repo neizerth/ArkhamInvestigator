@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { Linking, type TextProps, TouchableOpacity } from "react-native";
+import { Linking, type TextProps } from "react-native";
 import styled from "styled-components/native";
 import { Text } from "./Text";
 

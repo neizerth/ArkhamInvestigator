@@ -1,5 +1,5 @@
 import { API_URL } from "@shared/config";
-import { APP_VERSION, BUILD_VERSION } from "@shared/config/app";
+import { BUILD_VERSION } from "@shared/config/app";
 import type { GameCoreData, GameTranslationData } from "@shared/model";
 import { loadJSON } from "./loadJSON";
 

@@ -2,7 +2,6 @@ import { color } from "@shared/config";
 import { Row as BaseRow, IconNumber } from "@shared/ui";
 import { PickerMemo as BasePicker } from "@widgets/picker";
 import { Pressable, View } from "react-native";
-import Animated from "react-native-reanimated";
 import styled from "styled-components/native";
 
 export const Container: typeof View = styled(View)`

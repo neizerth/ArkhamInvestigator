@@ -1,9 +1,7 @@
 import { useAppTranslation } from "@features/i18n";
 import { getInvestigatorImageUrl } from "@shared/api/getInvestigatorImageUrl";
 import {
-	selectFocusedInvestigators,
 	selectReplaceCode,
-	selectReplaceInvestigator,
 	selectSelectedInvestigators,
 	useAppDispatch,
 	useAppSelector,

@@ -1,5 +1,4 @@
-import { color, font, size } from "@shared/config";
-import { Alegreya } from "@shared/fonts";
+import { size } from "@shared/config";
 import { type TextProps, View, type ViewStyle } from "react-native";
 import styled from "styled-components/native";
 import { Text } from "./Text";

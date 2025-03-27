@@ -4,7 +4,6 @@ import { withIcon } from "@shared/lib/hoc";
 import { Row, UnscaledText } from "@shared/ui";
 import type { FC } from "react";
 import type { ImageBackgroundProps, ImageProps } from "react-native";
-import { Text } from "react-native";
 import { ImageBackground, View } from "react-native";
 import styled, { css } from "styled-components/native";
 

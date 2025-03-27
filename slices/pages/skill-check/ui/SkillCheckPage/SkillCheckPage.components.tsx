@@ -1,4 +1,3 @@
-import { skillCheckColor } from "@pages/skill-check/config";
 import { color } from "@shared/config";
 import { View } from "react-native";
 import styled from "styled-components/native";

@@ -4,12 +4,10 @@ import {
 	sanitizeSkillCheckExpression,
 	selectCurrentBoard,
 	selectSkillCheckHistory,
-	setSkillCheckData,
-	useAppDispatch,
 	useAppSelector,
 } from "@shared/lib";
 import { last } from "ramda";
-import { Fragment, useCallback } from "react";
+import { Fragment } from "react";
 import * as C from "./ExpressionDisplay.components";
 import type { ExpressionDisplayProps } from "./ExpressionDisplay.types";
 import { iconMapping, operatorMapping } from "./mapping";

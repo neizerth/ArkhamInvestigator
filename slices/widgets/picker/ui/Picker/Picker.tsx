@@ -1,5 +1,5 @@
 import type { PickerProps } from "@widgets/picker/model";
-import { memo, useRef } from "react";
+import { memo } from "react";
 import { PickerListMemo as PickerList } from "../PickerList";
 import * as C from "./Picker.components";
 

@@ -1,5 +1,4 @@
 import { assetsSize } from "@pages/board/config";
-import { PropsWithView } from "@pages/board/model";
 import type { PropsWithUnit } from "@shared/model";
 import type { FC } from "react";
 import { View, type ViewProps } from "react-native";

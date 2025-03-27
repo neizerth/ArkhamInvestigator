@@ -1,8 +1,4 @@
-import {
-	detectDefaultLanguage,
-	setAvailableLanguages,
-	setLanguage,
-} from "@features/i18n";
+import { detectDefaultLanguage, setAvailableLanguages } from "@features/i18n";
 import { loadGameCoreData } from "@shared/api";
 import {
 	type AppThunk,

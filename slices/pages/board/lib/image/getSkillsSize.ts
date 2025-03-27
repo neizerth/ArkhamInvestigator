@@ -1,6 +1,5 @@
 import { HEADER_HEIGHT, skillsStyle } from "@pages/board/config";
 import type { HeaderLayout } from "@pages/board/model";
-import type { Box } from "@shared/model";
 
 const skillsRatio = skillsStyle.width / HEADER_HEIGHT;
 

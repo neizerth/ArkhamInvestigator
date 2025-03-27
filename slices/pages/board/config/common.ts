@@ -1,5 +1,4 @@
 import type { RectPosition } from "@shared/model";
-import { Column } from "@shared/ui";
 import type { HeaderLayoutType } from "../model";
 
 export const MAX_COLUMN_WIDTH = 600;

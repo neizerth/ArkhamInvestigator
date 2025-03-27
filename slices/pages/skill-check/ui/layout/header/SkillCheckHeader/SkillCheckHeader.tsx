@@ -4,7 +4,6 @@ import {
 	goBack,
 	selectHistoryShown,
 	selectSkillCheckType,
-	sendCommandSignal,
 	setHistoryShown,
 	useAppDispatch,
 	useAppSelector,

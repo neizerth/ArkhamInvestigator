@@ -1,13 +1,6 @@
 import type { ActionCreator } from "@reduxjs/toolkit";
-import {
-	type AppThunk,
-	selectCurrentBoard,
-	setCurrentBoard,
-} from "@shared/lib/store";
-import type {
-	InvestigatorBoardStat,
-	InvestigatorBoardValues,
-} from "@shared/model";
+import type { AppThunk } from "@shared/lib/store";
+import type { InvestigatorBoardValues } from "@shared/model";
 import { always } from "ramda";
 import { type ReduceBaseStatOptions, reduceBaseStat } from "./reduceBaseStat";
 

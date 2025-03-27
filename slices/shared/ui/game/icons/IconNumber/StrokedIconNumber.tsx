@@ -1,5 +1,5 @@
 import { font } from "@shared/config";
-import { StyleSheet, TextStyle } from "react-native";
+import { StyleSheet } from "react-native";
 import * as C from "./IconNumber.components";
 import type { IconNumberComponentProps } from "./IconNumber.types";
 export const StrokedIconNumber = ({

@@ -3,7 +3,6 @@ import type {
 	BoxLayout,
 	BoxRect,
 	DeviceOrientation,
-	PartialBox,
 	RectPosition,
 } from "@shared/model";
 

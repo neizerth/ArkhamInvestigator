@@ -1,4 +1,4 @@
-import { LayoutContext, PortraitLayoutContext } from "@pages/board/config";
+import { PortraitLayoutContext } from "@pages/board/config";
 import { InvestigatorSelect } from "@pages/board/ui/shared/features";
 import {
 	redo,

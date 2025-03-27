@@ -1,5 +1,5 @@
 import { TouchableOpacity } from "@features/haptic";
-import { color, factionColor, size } from "@shared/config";
+import { color, factionColor } from "@shared/config";
 import type { PropsWithFaction } from "@shared/model";
 import {
 	Icon as BaseIcon,
