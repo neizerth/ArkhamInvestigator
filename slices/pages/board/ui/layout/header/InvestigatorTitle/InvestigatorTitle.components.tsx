@@ -1,9 +1,7 @@
+import { TouchableOpacity } from "@features/haptic";
 import { Arkhamic } from "@shared/fonts";
-import { ArnoPro } from "@shared/fonts";
-import { Conkordia } from "@shared/fonts";
-import { SanCn } from "@shared/fonts";
 import { withIcon } from "@shared/lib/hoc";
-import { Row, TouchableOpacity, UnscaledText } from "@shared/ui";
+import { Row, UnscaledText } from "@shared/ui";
 import type { FC } from "react";
 import type { ImageBackgroundProps, ImageProps } from "react-native";
 import { Text } from "react-native";

@@ -1,13 +1,7 @@
-import { color, size } from "@shared/config";
-import {
-	type DefinedIconButtonProps,
-	IconButton,
-	IconButtonProps,
-	Row,
-} from "@shared/ui";
-import Color from "color";
+import { type DefinedIconButtonProps, IconButton } from "@features/haptic";
+import { color } from "@shared/config";
+import { Row } from "@shared/ui";
 import type { FC } from "react";
-import { View } from "react-native";
 import styled from "styled-components/native";
 
 export const Container: typeof Row = styled(Row)`

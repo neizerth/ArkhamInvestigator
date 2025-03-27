@@ -1,21 +1,20 @@
 import { color, factionColor, font, size } from "@shared/config";
 import type { FC } from "react";
-import { ScrollView, Text, View } from "react-native";
+import { ScrollView, View } from "react-native";
 import type { TextProps, ViewProps } from "react-native";
 
+import { Button, type ButtonProps, TouchableOpacity } from "@features/haptic";
 import { Alegreya } from "@shared/fonts";
 import type { Faction } from "@shared/model";
 import type { PropsWithFaction } from "@shared/model/ui";
 import {
 	Icon as BaseIcon,
-	Button,
-	type ButtonProps,
 	FactionFontIcon,
 	FactionSVGPattern,
 	Row,
 	UnscaledText,
 } from "@shared/ui";
-import { type IconProps, TouchableOpacity } from "@shared/ui";
+import type { IconProps } from "@shared/ui";
 import styled, { css } from "styled-components/native";
 export type ElementWithFaction<T> = FC<T & PropsWithFaction>;
 export type ViewWithFaction = ElementWithFaction<ViewProps>;

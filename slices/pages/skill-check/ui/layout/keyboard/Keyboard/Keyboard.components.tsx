@@ -1,11 +1,11 @@
 import { BackspaceImage, rule } from "./images/images";
 
+import { TouchableOpacity } from "@features/haptic";
 import { withLocale } from "@features/i18n";
 import { skillCheckColor } from "@pages/skill-check/config";
 import { color, font, size } from "@shared/config";
-import { Copasetic, Enthalpy298, TeutonicRU } from "@shared/fonts";
-import type { PropsWithBox } from "@shared/model";
-import { Row as BaseRow, TouchableOpacity, UnscaledText } from "@shared/ui";
+import { Copasetic, Enthalpy298 } from "@shared/fonts";
+import { Row as BaseRow, UnscaledText } from "@shared/ui";
 import type { FC } from "react";
 import {
 	Image,

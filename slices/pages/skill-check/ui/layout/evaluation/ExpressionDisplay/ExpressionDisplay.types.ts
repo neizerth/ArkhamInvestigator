@@ -1,5 +1,5 @@
+import type { TouchableOpacityProps } from "@features/haptic";
 import type { SkillCheckItem } from "@shared/model";
-import type { TouchableOpacityProps } from "@shared/ui";
 
 export type ExpressionDisplayProps = TouchableOpacityProps &
 	PropsWithType & {

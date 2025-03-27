@@ -1,7 +1,5 @@
-import type { IconButtonProps } from "@shared/ui";
-import { useWindowDimensions } from "react-native";
+import type { IconButtonProps } from "@features/haptic";
 import * as C from "./KeyboardButton.components";
-import { getButtonStyle, getTextStyle } from "./KeyboardButton.styles";
 import type {
 	CustomButtonProps,
 	KeyboardButtonProps,

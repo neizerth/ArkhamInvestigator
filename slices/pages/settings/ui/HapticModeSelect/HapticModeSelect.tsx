@@ -1,4 +1,5 @@
 import {
+	type HapticMode,
 	defaultModeFeedback,
 	selectHapticMode,
 	setHapticMode,
@@ -6,7 +7,6 @@ import {
 } from "@features/haptic";
 import { useAppTranslation } from "@features/i18n";
 import { useAppDispatch, useAppSelector } from "@shared/lib";
-import type { HapticMode } from "@shared/model";
 import { Select, type SelectItem } from "@shared/ui";
 import { propEq } from "ramda";
 import { useCallback } from "react";

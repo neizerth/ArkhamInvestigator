@@ -1,10 +1,6 @@
+import { TouchableOpacity } from "@features/haptic";
 import { color } from "@shared/config";
-import {
-	Icon as BaseIcon,
-	type DefinedIconProps,
-	Row,
-	TouchableOpacity,
-} from "@shared/ui";
+import { Icon as BaseIcon, type DefinedIconProps, Row } from "@shared/ui";
 import type { FC } from "react";
 import styled from "styled-components/native";
 

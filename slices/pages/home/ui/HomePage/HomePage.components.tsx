@@ -1,7 +1,6 @@
 import { color, font, size } from "@shared/config";
 import { Alegreya } from "@shared/fonts";
 import { UnscaledText } from "@shared/ui";
-import { FC } from "react";
 import { Text, View } from "react-native";
 import styled from "styled-components/native";
 import { Button } from "../Button";

@@ -1,7 +1,8 @@
+import { TouchableOpacity } from "@features/haptic";
 import { assetsSize } from "@pages/board/config";
 import { withStat } from "@pages/board/lib/hoc/withStat";
 import { color, gameAssets } from "@shared/config";
-import { Action, Icon, IconProps, TouchableOpacity } from "@shared/ui";
+import { Action, Icon } from "@shared/ui";
 import type { FC } from "react";
 import { View } from "react-native";
 import styled, { css } from "styled-components/native";

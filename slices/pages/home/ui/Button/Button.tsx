@@ -1,5 +1,4 @@
-import { useAppTranslation } from "@features/i18n";
-import { PrimaryButton, type PrimaryButtonProps } from "@shared/ui";
+import { PrimaryButton, type PrimaryButtonProps } from "@features/haptic";
 import * as C from "./Button.components";
 
 export const Button = ({ children, ...props }: PrimaryButtonProps) => {

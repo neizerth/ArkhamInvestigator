@@ -1,14 +1,8 @@
-import { color, factionColor } from "@shared/config";
-import { PropsWithFaction } from "@shared/model";
+import { color } from "@shared/config";
 import { type DefinedIconProps, Icon } from "@shared/ui";
 import { PickerMemo as BasePicker } from "@widgets/picker";
 import type { FC } from "react";
-import {
-	Image as BaseImage,
-	ImageProps,
-	TouchableOpacity,
-	View,
-} from "react-native";
+import { TouchableOpacity, View } from "react-native";
 import styled, { css } from "styled-components/native";
 import { InvestigatorSelectItem } from "../InvestigatorSelectItem";
 
@@ -36,7 +30,7 @@ export const Picker: typeof BasePicker = styled(BasePicker).attrs({
 })`
   `;
 
-export const Arrow: typeof TouchableOpacity = styled(TouchableOpacity)`
+export const Arrow: typeof View = styled(View)`
   position: absolute;
   left: 0;
   right: 0;

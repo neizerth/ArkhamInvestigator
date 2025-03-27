@@ -1,5 +1,5 @@
+import type { TouchableOpacityProps } from "@features/haptic";
 import type { SkillCheckOperator } from "@shared/model";
-import type { TouchableOpacityProps } from "@shared/ui";
 import type { TextProps, TextStyle } from "react-native";
 
 export type KeyboardButtonProps = TouchableOpacityProps &

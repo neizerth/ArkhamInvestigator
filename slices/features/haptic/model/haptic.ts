@@ -25,3 +25,5 @@ export type HapticFeedbackType =
 export type VibrationPattern = number | number[];
 
 export type HapticPatternType = HapticFeedbackType | VibrationPattern;
+
+export type HapticMode = "default" | "system" | false;

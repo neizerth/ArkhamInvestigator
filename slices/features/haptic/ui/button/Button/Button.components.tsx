@@ -1,9 +1,7 @@
 import { color, font, size } from "@shared/config";
+import { Icon as BaseIcon, Text as BaseText } from "@shared/ui";
 import styled from "styled-components/native";
-import { TouchableOpacity } from "../../behavior/TouchableOpacity";
-import { Text as BaseText } from "../../content/typography/Text";
-
-import { Icon as BaseIcon } from "../../game/icons/Icon";
+import { TouchableOpacity } from "../../TouchableOpacity";
 
 export const Container: typeof TouchableOpacity = styled(TouchableOpacity)`
   border-radius: ${size.borderRadius.default}px;

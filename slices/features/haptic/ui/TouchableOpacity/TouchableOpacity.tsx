@@ -6,7 +6,8 @@ import type {
 
 import { TouchableOpacity as BaseTouchableOpacity } from "react-native";
 
-import { type HapticPatternType, useHapticFeedback } from "@features/haptic";
+import type { HapticPatternType } from "@features/haptic/model";
+import { useHapticFeedback } from "../../lib/hooks/useHapticFeedback";
 import { handlePress } from "./handlePress";
 
 export type TouchableOpacityProps = BaseTouchableOpacityProps & {

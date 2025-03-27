@@ -1,7 +1,7 @@
-import { TouchableOpacity } from "@shared/ui/behavior/TouchableOpacity";
 import type { FC } from "react";
 import * as ReactNative from "react-native";
 import styled, { css } from "styled-components/native";
+import { TouchableOpacity } from "../../TouchableOpacity";
 import type {
 	PrimaryButtonSize,
 	PrimaryButtonStyle,

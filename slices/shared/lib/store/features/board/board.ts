@@ -6,12 +6,14 @@ export type IBoardState = {
 	currentInvestigatorIndex: number | null;
 	investigatorBoards: InvestigatorBoard[];
 	endTurnStrict: boolean;
+	showDamageAndHorror: boolean;
 };
 
 const initialState: IBoardState = {
 	currentInvestigatorIndex: null,
 	endTurnStrict: true,
 	investigatorBoards: [],
+	showDamageAndHorror: false,
 };
 
 const state = createSliceState(initialState);

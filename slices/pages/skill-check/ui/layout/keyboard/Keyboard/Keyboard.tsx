@@ -1,3 +1,4 @@
+import { PrimaryButton } from "@features/haptic";
 import { useAppTranslation } from "@features/i18n";
 import { characters } from "@pages/skill-check/config";
 import {
@@ -11,7 +12,6 @@ import {
 	useAppSelector,
 } from "@shared/lib";
 import type { SkillCheckCommandType, SkillCheckOperator } from "@shared/model";
-import { PrimaryButton } from "@shared/ui";
 import { useCallback } from "react";
 import { type ViewProps, useWindowDimensions } from "react-native";
 import { LayoutContainer } from "../../LayoutContainer";

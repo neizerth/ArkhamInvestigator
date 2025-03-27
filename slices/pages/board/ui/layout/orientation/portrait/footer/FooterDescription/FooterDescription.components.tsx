@@ -4,13 +4,11 @@ import {
 	InvestigatorText,
 	InvestigatorTraits,
 } from "@pages/board/ui/shared/text";
-import { color, size } from "@shared/config";
-import { type DefinedIconButtonProps, IconButton } from "@shared/ui";
-import type { FC } from "react";
-import { Pressable, View, type ViewProps } from "react-native";
+import { size } from "@shared/config";
+import { Pressable, View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import Animated from "react-native-reanimated";
-import styled, { css } from "styled-components/native";
+import styled from "styled-components/native";
 import { FactionDescription } from "../../../../../shared/background";
 import { DescriptionMenu } from "../DescriptionMenu";
 import { DescriptionTopMenu } from "../DescriptionTopMenu";

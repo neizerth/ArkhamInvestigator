@@ -1,8 +1,8 @@
+import type { PrimaryButtonProps, PrimaryButtonSize } from "@features/haptic";
 import { withLocale } from "@features/i18n";
 import { color, font } from "@shared/config";
 import { SanCn, TeutonicRU, ViaodaLibre } from "@shared/fonts";
 import { Arkhamic, STXingkai } from "@shared/fonts";
-import type { PrimaryButtonProps, PrimaryButtonSize } from "@shared/ui";
 import type { FC } from "react";
 import type { TextProps as BaseTextProps } from "react-native";
 import styled, { css } from "styled-components/native";

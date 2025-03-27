@@ -1,3 +1,4 @@
+import { TouchableOpacity } from "@features/haptic";
 import { color, factionColor, size } from "@shared/config";
 import type { PropsWithFaction } from "@shared/model";
 import {
@@ -5,7 +6,6 @@ import {
 	type IconProps as BaseIconProps,
 	FactionFontIcon,
 	type FactionFontIconProps,
-	TouchableOpacity,
 } from "@shared/ui";
 import type { FC } from "react";
 import styled, { css } from "styled-components/native";

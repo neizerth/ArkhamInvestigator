@@ -1,6 +1,7 @@
+import { IconButton } from "@features/haptic";
 import { skillCheckColor } from "@pages/skill-check/config";
 import { color, font, size } from "@shared/config";
-import { Row as BaseRow, Icon, IconButton } from "@shared/ui";
+import { Row as BaseRow, Icon } from "@shared/ui";
 import type { FC } from "react";
 import { Image, View, type ViewProps } from "react-native";
 import styled, { css } from "styled-components/native";
