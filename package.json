@@ -31,6 +31,7 @@
     "@react-navigation/bottom-tabs": "^7.2.0",
     "@react-navigation/native": "^7.0.14",
     "@reduxjs/toolkit": "^2.5.1",
+    "@uidotdev/usehooks": "^2.4.1",
     "arkham-divider-data": "^1.1.14",
     "arkham-investigator-data": "^1.0.13",
     "expo": "~52.0.38",

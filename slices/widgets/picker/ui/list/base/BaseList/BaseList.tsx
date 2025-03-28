@@ -1,12 +1,12 @@
-import { getValueIndex } from "@widgets/picker/lib";
+import { getValueIndex, getValueOffsets } from "@widgets/picker/lib";
 import { memo, useCallback, useMemo } from "react";
 import type { ListRenderItemInfo } from "react-native";
 import * as C from "./BaseList.components";
 import type { BaseListProps } from "./BaseList.types";
 import { defaultRenderItemContainer } from "./defaultRenderItemContainer";
-import { useFeatures } from "./hooks";
+import { useBaseListEffects } from "./hooks";
 export const BaseList = (baseProps: BaseListProps) => {
-	const props = useFeatures(baseProps);
+	const props = useBaseListEffects(baseProps);
 	const {
 		itemHeight,
 		data = [],
@@ -34,9 +34,11 @@ export const BaseList = (baseProps: BaseListProps) => {
 		height: itemHeight,
 	};
 
+	const size = data.length;
+
 	const snapToOffsets = useMemo(
-		() => data.map((_, i) => i * itemHeight),
-		[data, itemHeight],
+		() => getValueOffsets(size, itemHeight),
+		[size, itemHeight],
 	);
 
 	const getItemLayout = useCallback(

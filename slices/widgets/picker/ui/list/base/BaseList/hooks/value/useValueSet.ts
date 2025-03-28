@@ -1,9 +1,9 @@
 import { getValueIndex } from "@widgets/picker/lib";
 import { useCallback, useEffect, useRef } from "react";
 import type { FlatList } from "react-native";
-import type { BaseListProps } from "../BaseList.types";
+import type { BaseListProps } from "../../BaseList.types";
 
-export const useValue = (props: BaseListProps) => {
+export const useValueSet = (props: BaseListProps) => {
 	const {
 		data,
 		value,

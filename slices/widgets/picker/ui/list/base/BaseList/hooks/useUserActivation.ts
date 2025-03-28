@@ -10,9 +10,8 @@ export const useUserActivation = (props: BaseListProps) => {
 		onUserActivationChange,
 		onScroll: onScrollProp,
 		onScrollEnd: onScrollEndProp,
-		onScrollEndDrag: onScrollEndDragProp,
+		onPressOut: onPressOutProp,
 		onTouchStart: onTouchStartProp,
-		onTouchEnd: onTouchEndProp,
 	} = props;
 
 	const touching = useRef(false);
@@ -51,27 +50,11 @@ export const useUserActivation = (props: BaseListProps) => {
 		onUserDeactivated?.();
 	}, [onUserDeactivated, onUserActivationChange]);
 
-	const onScrollEndDrag = useCallback(
-		(e: PickerScrollEvent) => {
-			touching.current = false;
-			tryDeactivate();
-			if (typeof onScrollEndDragProp === "function") {
-				onScrollEndDragProp(e);
-			}
-		},
-		[onScrollEndDragProp, tryDeactivate],
-	);
-
-	const onTouchEnd = useCallback(
-		(e: GestureResponderEvent) => {
-			if (typeof onTouchEndProp === "function") {
-				onTouchEndProp(e);
-			}
-			touching.current = false;
-			tryDeactivate();
-		},
-		[onTouchEndProp, tryDeactivate],
-	);
+	const onPressOut = useCallback(() => {
+		touching.current = false;
+		tryDeactivate();
+		onPressOutProp?.();
+	}, [onPressOutProp, tryDeactivate]);
 
 	const onScrollEnd = useCallback(() => {
 		scroll.current = false;
@@ -85,8 +68,7 @@ export const useUserActivation = (props: BaseListProps) => {
 		...props,
 		onTouchStart,
 		onScroll,
-		onScrollEndDrag,
+		onPressOut,
 		onScrollEnd,
-		onTouchEnd,
 	};
 };

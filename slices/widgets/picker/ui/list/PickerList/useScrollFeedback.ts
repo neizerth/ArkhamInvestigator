@@ -1,24 +1,21 @@
 import { useHapticFeedback } from "@features/haptic";
-import type { PickerScrollEvent } from "@widgets/picker/model";
-import { times } from "ramda";
+import type { PickerChangeEvent } from "@widgets/picker/model";
 import { useCallback, useRef } from "react";
 import type { PickerListProps } from "./PickerList";
 
 export const useScrollFeedback = (props: PickerListProps) => {
 	const {
-		onScroll: onScrollProp,
+		onValueChanging: onValueChangingProp,
 		onUserActivationChange: onUserActivationChangeProp,
 		scrollHapticPattern,
-		itemHeight,
 	} = props;
-	const scrollFeedback = useHapticFeedback(scrollHapticPattern);
 
-	const index = useRef(0);
-	const active = useRef(false);
+	const impactFeedback = useHapticFeedback(scrollHapticPattern);
+	const hapticEnabled = useRef(false);
 
 	const onUserActivationChange = useCallback(
 		(activated: boolean) => {
-			active.current = activated;
+			hapticEnabled.current = activated;
 			if (typeof onUserActivationChangeProp === "function") {
 				onUserActivationChangeProp(activated);
 			}
@@ -26,31 +23,20 @@ export const useScrollFeedback = (props: PickerListProps) => {
 		[onUserActivationChangeProp],
 	);
 
-	const onScroll = useCallback(
-		(e: PickerScrollEvent) => {
-			if (typeof onScrollProp === "function") {
-				onScrollProp(e);
-			}
-			const offset = e.nativeEvent.contentOffset.y;
-
-			const scrollIndex = Math.round(offset / itemHeight);
-
-			const n = Math.abs(index.current - scrollIndex);
-
-			index.current = scrollIndex;
-
-			if (!active.current) {
+	const onValueChanging = useCallback(
+		(e: PickerChangeEvent) => {
+			onValueChangingProp?.(e);
+			if (!hapticEnabled.current) {
 				return;
 			}
-
-			times(scrollFeedback, n);
+			impactFeedback();
 		},
-		[onScrollProp, scrollFeedback, itemHeight],
+		[onValueChangingProp, impactFeedback],
 	);
 
 	return {
 		...props,
-		onScroll,
 		onUserActivationChange,
+		onValueChanging,
 	};
 };

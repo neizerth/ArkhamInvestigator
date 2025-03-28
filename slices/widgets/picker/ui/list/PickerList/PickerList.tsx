@@ -10,7 +10,6 @@ import { memo } from "react";
 import { PickerListGestures } from "../PickerListGestures";
 import * as C from "./PickerList.components";
 import { useScrollFeedback } from "./useScrollFeedback";
-import { useValueChange } from "./useValueChange";
 
 export type PickerListProps = PickerBaseListProps &
 	PickerActivationProps &
@@ -19,13 +18,15 @@ export type PickerListProps = PickerBaseListProps &
 	PickerRenderProps &
 	PickerScrollProps;
 
-export const PickerList = (props: PickerListProps) => {
-	const valueProps = useValueChange(props);
-	const feedbackProps = useScrollFeedback(valueProps);
+export const PickerList = ({
+	scrollHapticPattern,
+	...props
+}: PickerListProps) => {
+	const scrollProps = useScrollFeedback(props);
 
 	return (
-		<PickerListGestures {...feedbackProps}>
-			<C.List {...feedbackProps} />
+		<PickerListGestures {...scrollProps}>
+			<C.List {...scrollProps} />
 		</PickerListGestures>
 	);
 };

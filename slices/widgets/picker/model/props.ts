@@ -46,6 +46,7 @@ export type PickerDataProps = {
 	data: number[];
 	value?: number;
 	onValueChanged?: (event: PickerChangeEvent) => void;
+	onValueChanging?: (event: PickerChangeEvent) => void;
 };
 
 export type PickerScrollProps = {

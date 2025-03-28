@@ -1,9 +1,9 @@
 import { getValueIndex } from "@widgets/picker/lib";
 import type { PickerScrollEvent } from "@widgets/picker/model";
 import { useCallback, useRef } from "react";
-import type { PickerListProps } from "./PickerList";
+import type { BaseListProps } from "../../BaseList.types";
 
-export const useValueChange = (props: PickerListProps) => {
+export const useValueChange = (props: BaseListProps) => {
 	const {
 		onScroll: onScrollProp,
 		onScrollEnd: onScrollEndProp,
