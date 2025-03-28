@@ -6,7 +6,7 @@ import type { BaseListProps } from "../../BaseList.types";
 export const useValueChange = (props: BaseListProps) => {
 	const {
 		onScroll: onScrollProp,
-		onScrollEnd: onScrollEndProp,
+		onUserDeactivated: onUserDeactivatedProp,
 		onValueChanged,
 		data,
 		value,
@@ -16,8 +16,8 @@ export const useValueChange = (props: BaseListProps) => {
 	const offset = useRef(0);
 	const currentIndex = getValueIndex(value, data);
 
-	const onScrollEnd = useCallback(() => {
-		onScrollEndProp?.();
+	const onUserDeactivated = useCallback(() => {
+		onUserDeactivatedProp?.();
 		const index = Math.round(offset.current / itemHeight);
 
 		if (index === currentIndex) {
@@ -30,7 +30,7 @@ export const useValueChange = (props: BaseListProps) => {
 			value,
 			index,
 		});
-	}, [itemHeight, currentIndex, data, onValueChanged, onScrollEndProp]);
+	}, [itemHeight, currentIndex, data, onValueChanged, onUserDeactivatedProp]);
 
 	const onScroll = useCallback(
 		(e: PickerScrollEvent) => {
@@ -45,6 +45,6 @@ export const useValueChange = (props: BaseListProps) => {
 	return {
 		...props,
 		onScroll,
-		onScrollEnd,
+		onUserDeactivated,
 	};
 };
