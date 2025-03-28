@@ -16,13 +16,14 @@ export type OverlayProps = ViewProps;
 export const Overlay = (props: OverlayProps) => {
 	const dispatch = useAppDispatch();
 	const showDescription = useAppSelector(selectShowDescription);
-	const impactShowFeedback = useHapticFeedback("effectClick");
+	const impactShowFeedback = useHapticFeedback("clockTick");
 
 	const style = useOverlayStyle();
 
 	const hideDescription = useCallback(() => {
+		impactShowFeedback();
 		dispatch(setShowDescription(false));
-	}, [dispatch]);
+	}, [dispatch, impactShowFeedback]);
 
 	const setDisplayInfo = useCallback(
 		(show: boolean) => () => {
