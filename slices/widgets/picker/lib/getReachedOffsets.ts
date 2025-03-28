@@ -17,8 +17,8 @@ export const getReachedOffsets = ({
 		case "initial":
 			return [];
 		case "up":
-			return offsets.filter((value) => value > from && value <= to);
+			return offsets.filter((value) => from <= value && to > value);
 		case "down":
-			return offsets.filter((value) => value > to && value <= from);
+			return offsets.filter((value) => to < value && from >= value);
 	}
 };

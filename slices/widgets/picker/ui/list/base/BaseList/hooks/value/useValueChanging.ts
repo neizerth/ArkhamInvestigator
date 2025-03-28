@@ -1,4 +1,4 @@
-import { getValueOffsets } from "@widgets/picker/lib";
+import { getDataOffsets, getValueIndex } from "@widgets/picker/lib";
 import { getReachedOffsets } from "@widgets/picker/lib/getReachedOffsets";
 import type { PickerScrollEvent } from "@widgets/picker/model";
 import type { PickerScrollDirection } from "@widgets/picker/model/common";
@@ -8,7 +8,8 @@ import type { BaseListProps } from "../../BaseList.types";
 export const useValueChanging = (props: BaseListProps) => {
 	const {
 		onScroll: onScrollProp,
-		onScrollEnd: onScrollEndProp,
+		onScrollBeginDrag: onScrollBeginDragProp,
+		onScrollDeactivated: onScrollDeactivatedProp,
 		onUserActivationChange: onUserActivationChangeProp,
 		onValueChanging,
 		itemHeight,
@@ -16,14 +17,15 @@ export const useValueChanging = (props: BaseListProps) => {
 	} = props;
 
 	const size = data.length;
+	const index = getValueIndex(props);
+	const initialOffset = index * itemHeight;
 
-	const offset = useRef(0);
-	const scrollActivated = useRef(false);
+	const offset = useRef(initialOffset);
 	const touching = useRef(false);
 	const scrollDirection = useRef<PickerScrollDirection>("initial");
 
 	const offsets = useMemo(() => {
-		return getValueOffsets(size, itemHeight);
+		return getDataOffsets(size, itemHeight);
 	}, [size, itemHeight]);
 
 	const onUserActivationChange = useCallback(
@@ -35,30 +37,34 @@ export const useValueChanging = (props: BaseListProps) => {
 	);
 
 	const triggerOffsetChange = useCallback(
-		(offset: number, index: number) => {
+		(offset: number) => {
+			const index = offsets.indexOf(offset);
 			const value = data[index];
+
 			onValueChanging?.({
 				index,
 				value,
 			});
 		},
-		[data, onValueChanging],
+		[data, offsets, onValueChanging],
+	);
+
+	const onScrollBeginDrag = useCallback(
+		(e: PickerScrollEvent) => {
+			offset.current = initialOffset;
+			if (typeof onScrollBeginDragProp === "function") {
+				onScrollBeginDragProp(e);
+			}
+		},
+		[onScrollBeginDragProp, initialOffset],
 	);
 
 	const onScroll = useCallback(
 		(e: PickerScrollEvent) => {
-			const isScrollActive = scrollActivated.current;
-			scrollActivated.current = true;
-
 			if (typeof onScrollProp === "function") {
 				onScrollProp?.(e);
 			}
 			const currentOffset = e.nativeEvent.contentOffset.y;
-
-			if (!isScrollActive) {
-				offset.current = currentOffset;
-				return;
-			}
 
 			const delta = offset.current - currentOffset;
 			if (touching.current) {
@@ -67,12 +73,13 @@ export const useValueChanging = (props: BaseListProps) => {
 
 			const direction = scrollDirection.current;
 
-			const reachedOffsets = getReachedOffsets({
+			const options = {
 				offsets,
 				direction,
 				from: offset.current,
 				to: currentOffset,
-			});
+			};
+			const reachedOffsets = getReachedOffsets(options);
 
 			if (reachedOffsets.length === 0) {
 				return;
@@ -85,17 +92,20 @@ export const useValueChanging = (props: BaseListProps) => {
 		[onScrollProp, offsets, triggerOffsetChange],
 	);
 
-	const onScrollEnd = useCallback(() => {
-		scrollActivated.current = false;
-		if (typeof onScrollEndProp === "function") {
-			onScrollEndProp();
+	const onScrollDeactivated = useCallback(() => {
+		touching.current = false;
+		scrollDirection.current = "initial";
+
+		if (typeof onScrollDeactivatedProp === "function") {
+			onScrollDeactivatedProp?.();
 		}
-	}, [onScrollEndProp]);
+	}, [onScrollDeactivatedProp]);
 
 	return {
 		...props,
 		onScroll,
 		onUserActivationChange,
-		onScrollEnd,
+		onScrollDeactivated,
+		onScrollBeginDrag,
 	};
 };

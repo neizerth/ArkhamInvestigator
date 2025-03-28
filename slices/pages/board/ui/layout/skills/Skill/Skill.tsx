@@ -63,7 +63,14 @@ export const Skill = ({ type, ...props }: SkillProps) => {
 				baseValue: baseSkillValue,
 			});
 
-			return <C.Value {...props} value={item} style={style} />;
+			return (
+				<C.Value
+					{...props}
+					value={item}
+					style={style.text}
+					contentContainerStyle={style.container}
+				/>
+			);
 		},
 		[box, baseSkillValue, isParallel],
 	);
@@ -81,14 +88,10 @@ export const Skill = ({ type, ...props }: SkillProps) => {
 						value={skillValue}
 						onValueChanged={onChange}
 						onPress={openModal}
+						onPressIn={onPressIn}
+						onPressOut={onPressOut}
 					/>
 				</C.ValueContainer>
-				<C.Check
-					style={style.check}
-					onPressIn={onPressIn}
-					onPressOut={onPressOut}
-					onPress={openModal}
-				/>
 			</C.Row>
 			{pressing && <C.Background style={style.background} />}
 		</C.Container>

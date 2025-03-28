@@ -42,7 +42,6 @@ export const useStat = (statType: InvestigatorBoardStat) => {
 	}, [dispatch, baseValue, initialValue, value, statType]);
 
 	const onPress = useCallback(() => {
-		console.log("press!");
 		dispatch(decreaseCurrentStat(statType));
 	}, [dispatch, statType]);
 

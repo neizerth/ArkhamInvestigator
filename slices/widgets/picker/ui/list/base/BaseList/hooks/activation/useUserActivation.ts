@@ -1,12 +1,12 @@
 import type { PickerScrollEvent } from "@widgets/picker/model";
 import { useCallback, useRef } from "react";
 import type { GestureResponderEvent } from "react-native";
-import type { BaseListProps } from "../BaseList.types";
+import type { BaseListProps } from "../../BaseList.types";
 
 export const useUserActivation = (props: BaseListProps) => {
 	const {
-		onUserActivated,
-		onUserDeactivated,
+		onUserActivate: onUserActivateProp,
+		onUserDeactivate: onUserDeactivateProp,
 		onUserActivationChange,
 		onScroll: onScrollProp,
 		onScrollEnd: onScrollEndProp,
@@ -23,12 +23,12 @@ export const useUserActivation = (props: BaseListProps) => {
 			if (typeof onTouchStartProp === "function") {
 				onTouchStartProp(e);
 			}
+			onUserActivateProp?.(e);
 			onUserActivationChange?.(true);
-			onUserActivated?.();
 			touching.current = true;
 			active.current = true;
 		},
-		[onTouchStartProp, onUserActivated, onUserActivationChange],
+		[onTouchStartProp, onUserActivationChange, onUserActivateProp],
 	);
 
 	const onScroll = useCallback(
@@ -47,8 +47,8 @@ export const useUserActivation = (props: BaseListProps) => {
 		}
 		active.current = false;
 		onUserActivationChange?.(false);
-		onUserDeactivated?.();
-	}, [onUserDeactivated, onUserActivationChange]);
+		onUserDeactivateProp?.();
+	}, [onUserDeactivateProp, onUserActivationChange]);
 
 	const onPressOut = useCallback(() => {
 		touching.current = false;

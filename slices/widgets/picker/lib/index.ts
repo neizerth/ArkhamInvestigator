@@ -1,2 +1,3 @@
 export * from "./getValueIndex";
-export * from "./getValueOffsets";
+export * from "./getDataOffsets";
+export * from "./getValueOffset";

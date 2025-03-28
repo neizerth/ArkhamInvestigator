@@ -1,5 +1,6 @@
 import type {
 	PickerActivationProps,
+	PickerAnimationProps,
 	PickerBaseListProps,
 	PickerBasePressProps,
 	PickerRenderProps,
@@ -7,6 +8,7 @@ import type {
 import type { ViewStyle } from "react-native";
 
 export type BaseListProps = PickerBaseListProps &
+	PickerAnimationProps &
 	PickerActivationProps &
 	PickerBasePressProps &
 	PickerRenderProps & {

@@ -1,5 +1,6 @@
 import type {
 	PickerActivationProps,
+	PickerAnimationProps,
 	PickerBaseListProps,
 	PickerBasePressProps,
 	PickerPressProps,
@@ -12,20 +13,24 @@ import * as C from "./PickerList.components";
 import { useScrollFeedback } from "./useScrollFeedback";
 
 export type PickerListProps = PickerBaseListProps &
+	PickerAnimationProps &
 	PickerActivationProps &
 	PickerBasePressProps &
 	PickerPressProps &
 	PickerRenderProps &
 	PickerScrollProps;
 
-export const PickerList = ({
-	scrollHapticPattern,
-	...props
-}: PickerListProps) => {
+export const PickerList = (props: PickerListProps) => {
+	const { onPress, onDoublePress, onLongPress } = props;
 	const scrollProps = useScrollFeedback(props);
 
 	return (
-		<PickerListGestures {...scrollProps}>
+		<PickerListGestures
+			{...scrollProps}
+			pressEnabled={Boolean(onPress)}
+			doublePressEnabled={Boolean(onDoublePress)}
+			longPressEnabled={Boolean(onLongPress)}
+		>
 			<C.List {...scrollProps} />
 		</PickerListGestures>
 	);

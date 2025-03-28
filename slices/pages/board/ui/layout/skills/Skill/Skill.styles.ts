@@ -21,13 +21,9 @@ export const getSkillStyle = ({ box }: GetSkillStyleOptions) => {
 		height: box.height * 0.9,
 	};
 
-	const check: ViewStyle = {
-		// left: -1.5 * vw
-	};
 	return {
 		container,
 		valueContainer,
-		check,
 		background,
 	};
 };
@@ -40,7 +36,6 @@ type GetSkillValueStyleOptions = PropsWithBox & {
 
 export const getSkillValueStyle = ({
 	value,
-	baseValue,
 	isParallel,
 	box,
 }: GetSkillValueStyleOptions) => {
@@ -60,5 +55,12 @@ export const getSkillValueStyle = ({
 		color: textColor,
 	};
 
-	return valueText;
+	const container: ViewStyle = {
+		paddingRight: 9 * vw,
+	};
+
+	return {
+		text: valueText,
+		container,
+	};
 };

@@ -1,4 +1,4 @@
-import { getValueIndex, getValueOffsets } from "@widgets/picker/lib";
+import { getDataOffsets, getValueIndex } from "@widgets/picker/lib";
 import { memo, useCallback, useMemo } from "react";
 import type { ListRenderItemInfo } from "react-native";
 import * as C from "./BaseList.components";
@@ -15,7 +15,7 @@ export const BaseList = (baseProps: BaseListProps) => {
 		renderItemContainer = defaultRenderItemContainer,
 		itemContainerStyle,
 	} = props;
-	const index = getValueIndex(value, data);
+	const index = getValueIndex(baseProps);
 
 	const renderListItem = useCallback(
 		(info: ListRenderItemInfo<number>) => {
@@ -37,7 +37,7 @@ export const BaseList = (baseProps: BaseListProps) => {
 	const size = data.length;
 
 	const snapToOffsets = useMemo(
-		() => getValueOffsets(size, itemHeight),
+		() => getDataOffsets(size, itemHeight),
 		[size, itemHeight],
 	);
 

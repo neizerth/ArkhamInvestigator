@@ -37,8 +37,13 @@ export type PickerBasePressProps = {
 };
 
 export type PickerActivationProps = {
-	onUserActivated?: () => void;
-	onUserDeactivated?: () => void;
+	onScrollDeactivated?: () => void;
+
+	onActivated?: () => void;
+	onDeactivated?: () => void;
+
+	onUserActivate?: (e: GestureResponderEvent) => void;
+	onUserDeactivate?: () => void;
 	onUserActivationChange?: (activated: boolean) => void;
 };
 
@@ -81,7 +86,12 @@ export type PickerRenderProps = {
 	renderItem: PickerListRenderItem;
 };
 
+export type PickerAnimationProps = {
+	animatedInit?: boolean;
+};
+
 export type PickerProps = ViewProps &
+	PickerAnimationProps &
 	PickerStyleProps &
 	PickerItemStyleProps &
 	PickerBasePressProps &

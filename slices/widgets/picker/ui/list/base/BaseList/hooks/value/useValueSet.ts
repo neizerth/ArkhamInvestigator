@@ -6,29 +6,45 @@ import type { BaseListProps } from "../../BaseList.types";
 export const useValueSet = (props: BaseListProps) => {
 	const {
 		data,
-		value,
 		onUserActivationChange: onUserActivationChangeProp,
+		animatedInit,
+		onContentSizeChange: onContentSizeChangeProp,
 	} = props;
 	const ref = useRef<FlatList<number>>(null);
 	const active = useRef(false);
 
-	const index = Math.min(getValueIndex(value, data), data.length - 1);
+	const index = Math.min(getValueIndex(props), data.length - 1);
 
-	useEffect(() => {
-		if (!ref.current) {
-			return;
-		}
+	const getAnimated = useCallback(() => {
+		return animatedInit !== undefined ? animatedInit : !active.current;
+	}, [animatedInit]);
+
+	const scrollToIndex = useCallback(() => {
 		ref.current?.scrollToIndex({
 			index,
-			animated: !active.current,
+			animated: getAnimated(),
 		});
-	}, [index]);
+	}, [getAnimated, index]);
+
+	useEffect(() => {
+		scrollToIndex();
+	}, [scrollToIndex]);
+
+	const onContentSizeChange = useCallback(
+		(width: number, height: number) => {
+			scrollToIndex();
+			if (typeof onContentSizeChangeProp === "function") {
+				onContentSizeChangeProp?.(width, height);
+			}
+		},
+		[onContentSizeChangeProp, scrollToIndex],
+	);
 
 	const onUserActivationChange = useCallback(
-		(activated: boolean) => {
-			active.current = activated;
+		(Activate: boolean) => {
+			active.current = Activate;
 			if (typeof onUserActivationChangeProp === "function") {
-				onUserActivationChangeProp(activated);
+				onUserActivationChangeProp(Activate);
 			}
 		},
 		[onUserActivationChangeProp],
@@ -38,5 +54,6 @@ export const useValueSet = (props: BaseListProps) => {
 		...props,
 		ref,
 		onUserActivationChange,
+		onContentSizeChange,
 	};
 };

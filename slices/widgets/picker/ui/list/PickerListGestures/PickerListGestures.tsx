@@ -1,27 +1,34 @@
 import { useHapticFeedback } from "@features/haptic";
+import { arrayIf } from "@shared/lib";
 import type {
 	PickerPressProps,
 	PickerScrollProps,
 } from "@widgets/picker/model";
-import { isNotNil } from "ramda";
 import { type PropsWithChildren, useCallback } from "react";
 import { Gesture, GestureDetector } from "react-native-gesture-handler";
 
 export type PickerListGesturesProps = PropsWithChildren &
 	PickerPressProps &
-	PickerScrollProps;
+	PickerScrollProps & {
+		pressEnabled: boolean;
+		doublePressEnabled: boolean;
+		longPressEnabled: boolean;
+	};
 
 export const PickerListGestures = ({
 	children,
 
+	pressEnabled,
 	onPress,
 	pressMaxDuration = 250,
 	pressHapticPattern,
 
+	doublePressEnabled,
 	onDoublePress,
 	doublePressHapticPattern,
 	doublePressMaxDuration = 250,
 
+	longPressEnabled,
 	onLongPress,
 	longPressMinDuration = 500,
 	longPressHapticPattern,
@@ -46,20 +53,26 @@ export const PickerListGestures = ({
 	}, [longPressFeedback, onLongPress]);
 
 	const gestures = [
-		onPress &&
+		arrayIf(
+			pressEnabled,
 			Gesture.Tap().maxDuration(pressMaxDuration).runOnJS(true).onStart(onTap),
-		onDoublePress &&
+		),
+		arrayIf(
+			doublePressEnabled,
 			Gesture.Tap()
 				.numberOfTaps(2)
 				.maxDuration(doublePressMaxDuration)
 				.runOnJS(true)
 				.onStart(onDoubleTap),
-		onLongPress &&
+		),
+		arrayIf(
+			longPressEnabled,
 			Gesture.LongPress()
 				.minDuration(longPressMinDuration)
 				.runOnJS(true)
 				.onStart(onLongPressCallback),
-	].filter(isNotNil);
+		),
+	].flat();
 
 	const gestureConfig = Gesture.Exclusive(...gestures);
 	return <GestureDetector gesture={gestureConfig}>{children}</GestureDetector>;

@@ -28,19 +28,14 @@ export const Check: typeof Pressable = styled(Pressable)`
 
 export const Background: typeof View = styled(View)`
   position: absolute;
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(0, 0, 0, 0.1);
   top: 0;
   left: 0;
   bottom: 0;
   right: 0;
 `;
 
-export const Value: typeof IconNumber = styled(IconNumber).attrs({
-	contentContainerStyle: {
-		alignItems: "center",
-		justifyContent: "center",
-	},
-})`
+export const Value: typeof IconNumber = styled(IconNumber)`
     color: ${color.text};
   `;
 

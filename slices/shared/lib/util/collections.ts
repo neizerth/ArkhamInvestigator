@@ -11,3 +11,6 @@ export const toggleBy = <T>(
 
 export const safeIndexOf = <T>(item: T | undefined, data: T[]) =>
 	item !== undefined ? data.indexOf(item) : -1;
+
+export const arrayIf = <T>(condition: boolean, item: T) =>
+	condition ? [item] : [];

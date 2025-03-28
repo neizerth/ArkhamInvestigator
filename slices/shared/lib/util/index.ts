@@ -4,3 +4,4 @@ export * from "./string";
 export * from "./size";
 export * from "./record";
 export * from "./number";
+export * from "./promise";

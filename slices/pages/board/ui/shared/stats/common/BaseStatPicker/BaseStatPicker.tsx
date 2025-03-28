@@ -79,6 +79,7 @@ export const BaseStatPicker = ({
 				onValueChanged={onChange}
 				onPress={onPress}
 				onLongPress={onLongPress}
+				animatedInit={false}
 				signed
 			/>
 		</C.Container>
