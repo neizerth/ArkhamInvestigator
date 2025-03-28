@@ -1,17 +1,17 @@
 import type { PickerProps } from "@widgets/picker/model";
 import { memo } from "react";
-import { PickerListMemo as PickerList } from "../PickerList";
 import * as C from "./Picker.components";
 
 export const Picker = ({
 	style,
 	itemHeight = 24,
+	gap = 0,
 	listStyle,
 	...props
 }: PickerProps) => {
 	return (
 		<C.Container style={style}>
-			<PickerList {...props} style={listStyle} itemHeight={itemHeight} />
+			<C.List {...props} style={listStyle} itemHeight={itemHeight + gap} />
 		</C.Container>
 	);
 };

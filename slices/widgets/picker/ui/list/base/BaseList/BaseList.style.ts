@@ -8,7 +8,7 @@ export type GetPickerListStyleOptions = {
 
 type OptionalViewStyle = ViewStyle | boolean;
 
-export const getPickerListStyle = ({
+export const getBaseListStyle = ({
 	pickerHeight,
 	itemHeight,
 	isListActive,

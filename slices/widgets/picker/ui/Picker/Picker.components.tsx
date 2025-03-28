@@ -1,16 +1,12 @@
 import { View } from "react-native";
-import Animated from "react-native-reanimated";
 import styled from "styled-components/native";
+import { PickerList } from "../list";
 
 export const Container = styled(View)`
   width: 100%;
 `;
 
-export const List: typeof Animated.FlatList = styled(Animated.FlatList)`
-
-`;
-
-export const LeftActions: typeof View = styled(View)`
+export const List: typeof PickerList = styled(PickerList)`
 
 `;
 
