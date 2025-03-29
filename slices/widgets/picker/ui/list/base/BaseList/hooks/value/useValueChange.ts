@@ -1,48 +1,45 @@
 import { getValueIndex } from "@widgets/picker/lib";
-import type { PickerScrollEvent } from "@widgets/picker/model";
+import type { PickerChangeEvent } from "@widgets/picker/model";
 import { useCallback, useRef } from "react";
 import type { BaseListProps } from "../../BaseList.types";
 
 export const useValueChange = (props: BaseListProps) => {
 	const {
-		onScroll: onScrollProp,
 		onScrollDeactivated: onScrollDeactivatedProp,
+		onValueChanging: onValueChangingProp,
 		onValueChanged,
-		data,
-		itemHeight,
+		value,
 	} = props;
 
-	const offset = useRef(0);
-	const currentIndex = getValueIndex(props);
+	const index = getValueIndex(props);
+
+	const item = useRef<PickerChangeEvent>({
+		value,
+		index,
+	});
 
 	const onScrollDeactivated = useCallback(() => {
 		onScrollDeactivatedProp?.();
-		const index = Math.round(offset.current / itemHeight);
-		if (index === currentIndex) {
+		if (value === item.current.value) {
 			return;
 		}
+		// return;
+		// console.log(item.current)
+		onValueChanged?.(item.current);
+	}, [onValueChanged, onScrollDeactivatedProp, value]);
 
-		const value = data[index];
-
-		onValueChanged?.({
-			value,
-			index,
-		});
-	}, [itemHeight, currentIndex, data, onValueChanged, onScrollDeactivatedProp]);
-
-	const onScroll = useCallback(
-		(e: PickerScrollEvent) => {
-			if (typeof onScrollProp === "function") {
-				onScrollProp(e);
-			}
-			offset.current = e.nativeEvent.contentOffset.y;
+	const onValueChanging = useCallback(
+		(e: PickerChangeEvent) => {
+			// console.log({ e })
+			item.current = e;
+			onValueChangingProp?.(e);
 		},
-		[onScrollProp],
+		[onValueChangingProp],
 	);
 
 	return {
 		...props,
-		onScroll,
+		onValueChanging,
 		onScrollDeactivated,
 	};
 };

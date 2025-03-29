@@ -4,7 +4,6 @@ import type { BaseListProps } from "../../BaseList.types";
 
 export const useScrollActivation = (props: BaseListProps) => {
 	const {
-		onScroll: onScrollProp,
 		onScrollEnd: onScrollEndProp,
 		onScrollDeactivated: onScrollDeactivatedProp,
 		onDeactivated: onDeactivatedProp,

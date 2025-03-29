@@ -8,7 +8,7 @@ export const useScrollFeedback = (props: PickerListProps) => {
 	const {
 		onValueChanging: onValueChangingProp,
 		onTouchStart: onTouchStartProp,
-		onDeactivated: onDeactivatedProp,
+		onScrollDeactivated: onScrollDeactivatedProp,
 		onLongPress: onLongPressProp,
 		scrollHapticPattern,
 	} = props;
@@ -27,11 +27,11 @@ export const useScrollFeedback = (props: PickerListProps) => {
 		[onTouchStartProp],
 	);
 
-	const onDeactivated = useCallback(() => {
+	const onScrollDeactivated = useCallback(() => {
 		hapticEnabled.current = longPress.current;
 		longPress.current = false;
-		onDeactivatedProp?.();
-	}, [onDeactivatedProp]);
+		onScrollDeactivatedProp?.();
+	}, [onScrollDeactivatedProp]);
 
 	const onLongPress = useCallback(() => {
 		hapticEnabled.current = false;
@@ -54,7 +54,7 @@ export const useScrollFeedback = (props: PickerListProps) => {
 		...props,
 		onTouchStart,
 		onValueChanging,
-		onDeactivated,
+		onScrollDeactivated,
 		onLongPress,
 	};
 };

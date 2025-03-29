@@ -1,52 +1,35 @@
-import { getDataOffsets, getValueIndex } from "@widgets/picker/lib";
-import { getReachedOffsets } from "@widgets/picker/lib/getReachedOffsets";
+import { getValueIndex } from "@widgets/picker/lib";
 import type { PickerScrollEvent } from "@widgets/picker/model";
-import type { PickerScrollDirection } from "@widgets/picker/model/common";
-import { useCallback, useMemo, useRef } from "react";
+import { range } from "ramda";
+import { useCallback, useRef } from "react";
 import type { BaseListProps } from "../../BaseList.types";
 
 export const useValueChanging = (props: BaseListProps) => {
 	const {
 		onScroll: onScrollProp,
 		onScrollBeginDrag: onScrollBeginDragProp,
-		onScrollDeactivated: onScrollDeactivatedProp,
-		onUserActivationChange: onUserActivationChangeProp,
 		onValueChanging,
 		itemHeight,
 		data,
 	} = props;
 
-	const size = data.length;
 	const index = getValueIndex(props);
 	const initialOffset = index * itemHeight;
 
 	const offset = useRef(initialOffset);
-	const touching = useRef(false);
-	const scrollDirection = useRef<PickerScrollDirection>("initial");
-
-	const offsets = useMemo(() => {
-		return getDataOffsets(size, itemHeight);
-	}, [size, itemHeight]);
-
-	const onUserActivationChange = useCallback(
-		(value: boolean) => {
-			touching.current = value;
-			onUserActivationChangeProp?.(value);
-		},
-		[onUserActivationChangeProp],
-	);
+	const offsetIndex = useRef(index);
 
 	const triggerOffsetChange = useCallback(
-		(offset: number) => {
-			const index = offsets.indexOf(offset);
+		(index: number) => {
 			const value = data[index];
-
-			onValueChanging?.({
+			const event = {
 				index,
 				value,
-			});
+			};
+			// console.log(index, value)
+			onValueChanging?.(event);
 		},
-		[data, offsets, onValueChanging],
+		[data, onValueChanging],
 	);
 
 	const onScrollBeginDrag = useCallback(
@@ -64,48 +47,47 @@ export const useValueChanging = (props: BaseListProps) => {
 			if (typeof onScrollProp === "function") {
 				onScrollProp?.(e);
 			}
-			const currentOffset = e.nativeEvent.contentOffset.y;
+			const currentOffset = Math.round(e.nativeEvent.contentOffset.y);
 
-			const delta = offset.current - currentOffset;
-			if (touching.current) {
-				scrollDirection.current = delta > 0 ? "down" : "up";
-			}
+			const delta = currentOffset - offset.current;
 
-			const direction = scrollDirection.current;
-
-			const options = {
-				offsets,
-				direction,
-				from: offset.current,
-				to: currentOffset,
-			};
-			const reachedOffsets = getReachedOffsets(options);
-
-			if (reachedOffsets.length === 0) {
+			if (delta === 0) {
 				return;
 			}
 
+			const index = Math.ceil(currentOffset / itemHeight);
+			const prevIndex = offsetIndex.current;
+
 			offset.current = currentOffset;
+			offsetIndex.current = index;
 
-			reachedOffsets.forEach(triggerOffsetChange);
+			// console.log({
+			// 	index,
+			// 	prevIndex,
+			// })
+
+			if (index === prevIndex) {
+				return;
+			}
+
+			const changed = getIndexes(index, prevIndex);
+			// console.log({ changed })
+			changed.forEach(triggerOffsetChange);
 		},
-		[onScrollProp, offsets, triggerOffsetChange],
+		[onScrollProp, itemHeight, triggerOffsetChange],
 	);
-
-	const onScrollDeactivated = useCallback(() => {
-		touching.current = false;
-		scrollDirection.current = "initial";
-
-		if (typeof onScrollDeactivatedProp === "function") {
-			onScrollDeactivatedProp?.();
-		}
-	}, [onScrollDeactivatedProp]);
 
 	return {
 		...props,
 		onScroll,
-		onUserActivationChange,
-		onScrollDeactivated,
 		onScrollBeginDrag,
 	};
+};
+
+const getIndexes = (index: number, prevIndex: number) => {
+	if (index > prevIndex) {
+		return range(prevIndex + 1, index + 1);
+	}
+
+	return range(index, prevIndex).toReversed();
 };

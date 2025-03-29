@@ -28,6 +28,7 @@ type ListProps = Omit<FlatListPropsWithLayout<number>, "data">;
 export type PickerBaseListProps = Omit<ListProps, "renderItem"> &
 	PickerDataProps & {
 		onScrollEnd?: () => void;
+		onLastScroll?: () => void;
 		itemHeight: number;
 	};
 
