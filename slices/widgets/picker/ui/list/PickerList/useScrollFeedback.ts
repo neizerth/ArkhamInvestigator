@@ -1,13 +1,16 @@
 import { useHapticFeedback } from "@features/haptic";
-import type { PickerChangeEvent } from "@widgets/picker/model";
+import type {
+	PickerChangeEvent,
+	PickerScrollEvent,
+} from "@widgets/picker/model";
 import { useCallback, useRef } from "react";
-import type { GestureResponderEvent } from "react-native";
 import type { PickerListProps } from "./PickerList";
 
 export const useScrollFeedback = (props: PickerListProps) => {
 	const {
 		onValueChanging: onValueChangingProp,
 		onTouchStart: onTouchStartProp,
+		onScrollBeginDrag: onScrollBeginDragProp,
 		onScrollDeactivated: onScrollDeactivatedProp,
 		onLongPress: onLongPressProp,
 		scrollHapticPattern,
@@ -17,14 +20,14 @@ export const useScrollFeedback = (props: PickerListProps) => {
 	const hapticEnabled = useRef(false);
 	const longPress = useRef(false);
 
-	const onTouchStart = useCallback(
-		(e: GestureResponderEvent) => {
+	const onScrollBeginDrag = useCallback(
+		(e: PickerScrollEvent) => {
 			hapticEnabled.current = true;
-			if (typeof onTouchStartProp === "function") {
-				onTouchStartProp?.(e);
+			if (typeof onScrollBeginDragProp === "function") {
+				onScrollBeginDragProp?.(e);
 			}
 		},
-		[onTouchStartProp],
+		[onScrollBeginDragProp],
 	);
 
 	const onScrollDeactivated = useCallback(() => {
@@ -52,7 +55,7 @@ export const useScrollFeedback = (props: PickerListProps) => {
 
 	return {
 		...props,
-		onTouchStart,
+		onScrollBeginDrag,
 		onValueChanging,
 		onScrollDeactivated,
 		onLongPress,

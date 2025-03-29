@@ -1,3 +1,3 @@
-export * from "./useScrollEnd";
+export * from "./scroll/useScrollEnd";
 export * from "./useBaseListEffects";
 export * from "./value";

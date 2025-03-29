@@ -6,3 +6,11 @@ export type PickerChangeEvent = {
 	value?: number;
 	index: number;
 };
+
+export type PickerStartReachedEvent = {
+	distanceFromStart: number;
+};
+
+export type PickerEndReachedEvent = {
+	distanceFromEnd: number;
+};
