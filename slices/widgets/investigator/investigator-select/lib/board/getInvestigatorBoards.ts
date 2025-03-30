@@ -25,20 +25,26 @@ export const getInvestigatorBoards = ({
 }: GetInvestigatorBoards) =>
 	selectedInvestigators
 		.map((item, index): InvestigatorBoard | null => {
-			const { code, details } = item;
-			const investigator = investigators.find(propEq(code, "code"));
-			const media = mediaItems.find(propEq(code, "code"));
+			const { details } = item;
 
-			if (!investigator || !media) {
+			const media = mediaItems.find(propEq(item.code, "code"));
+
+			if (!media) {
 				return null;
 			}
 
-			const { picture, additionalAction, isParallel } =
+			const { picture, additionalAction, isParallel, code } =
 				getSelectedInvestigatorOptions({
 					selection: item,
 					media,
 					details,
 				});
+
+			const investigator = investigators.find(propEq(code, "code"));
+
+			if (!investigator) {
+				return null;
+			}
 
 			const unique = Boolean(!media.multiselect);
 

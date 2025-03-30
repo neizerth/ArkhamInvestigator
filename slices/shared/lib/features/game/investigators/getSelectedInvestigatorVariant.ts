@@ -31,6 +31,7 @@ export const getSelectedInvestigatorOptions = ({
 		picture,
 		additionalAction,
 		isParallel: false,
+		code,
 	};
 
 	if (!variantId) {
@@ -42,6 +43,9 @@ export const getSelectedInvestigatorOptions = ({
 	const imageId = skin?.imageId || variant?.imageId || code;
 	const image = skin?.image || variant?.image || media.image;
 
+	const selectedCode =
+		variant?.data && "code" in variant.data ? variant.data.code : code;
+
 	const variantPicture = {
 		id: imageId,
 		image,
@@ -51,5 +55,6 @@ export const getSelectedInvestigatorOptions = ({
 		picture: variantPicture,
 		additionalAction: variant?.data?.additionalAction || additionalAction,
 		isParallel: variant?.type === "parallel",
+		code: selectedCode,
 	};
 };
