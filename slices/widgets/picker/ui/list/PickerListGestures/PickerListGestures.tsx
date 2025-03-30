@@ -60,7 +60,14 @@ export const PickerListGestures = ({
 	const gestures = [
 		arrayIf(
 			pressEnabled,
-			Gesture.Tap().maxDuration(pressMaxDuration).runOnJS(true).onStart(onTap),
+			Gesture.Tap()
+				.maxDuration(pressMaxDuration)
+				.runOnJS(true)
+				.onStart(onTap)
+				.onTouchesUp(() => {
+					onUserDeactivated?.();
+					onDeactivated?.();
+				}),
 		),
 		arrayIf(
 			doublePressEnabled,

@@ -15,12 +15,16 @@ export const useValueChanging = (props: BaseListProps) => {
 
 	const index = getValueIndex(props);
 	const initialOffset = index * itemHeight;
+	const maxIndex = data.length - 1;
 
 	const offset = useRef(initialOffset);
 	const offsetIndex = useRef(index);
 
 	const triggerOffsetChange = useCallback(
 		(index: number) => {
+			if (index > maxIndex) {
+				return;
+			}
 			const value = data[index];
 			const event = {
 				index,
@@ -28,7 +32,7 @@ export const useValueChanging = (props: BaseListProps) => {
 			};
 			onValueChanging?.(event);
 		},
-		[data, onValueChanging],
+		[data, onValueChanging, maxIndex],
 	);
 
 	const onScrollBeginDrag = useCallback(

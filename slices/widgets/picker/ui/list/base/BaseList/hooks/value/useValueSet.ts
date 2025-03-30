@@ -40,7 +40,7 @@ export const useValueSet = (props: BaseListProps) => {
 	}, [getAnimated, currentIndex, controlEnabled]);
 
 	useEffect(() => {
-		if (currentIndex === index.current) {
+		if (active.current || currentIndex === index.current) {
 			return;
 		}
 		scrollToIndex();
@@ -66,7 +66,7 @@ export const useValueSet = (props: BaseListProps) => {
 		[onScrollBeginDragProp],
 	);
 
-	const onUserDeactivate = useCallback(() => {
+	const onUserDeactivated = useCallback(() => {
 		active.current = false;
 		onUserDeactivatedProp?.();
 	}, [onUserDeactivatedProp]);
@@ -85,7 +85,7 @@ export const useValueSet = (props: BaseListProps) => {
 	return {
 		...props,
 		ref,
-		onUserDeactivate,
+		onUserDeactivated,
 		onContentSizeChange,
 		onValueChanging,
 		onScrollBeginDrag,
