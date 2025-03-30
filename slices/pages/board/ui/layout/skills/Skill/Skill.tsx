@@ -1,4 +1,3 @@
-import { useHapticFeedback } from "@features/haptic";
 import { SkillsContext } from "@pages/board/config";
 import {
 	selectCurrentBoard,
@@ -28,7 +27,6 @@ export const Skill = ({ type, ...props }: SkillProps) => {
 	const [pressing, setPressing] = useState(false);
 	const skillValue = value[type];
 	const baseSkillValue = baseValue[type];
-	const impactShowFeedback = useHapticFeedback("clockTick");
 
 	const style = getSkillStyle({ box });
 
@@ -37,9 +35,8 @@ export const Skill = ({ type, ...props }: SkillProps) => {
 	}, []);
 
 	const onPressOut = useCallback(() => {
-		impactShowFeedback();
 		setPressing(false);
-	}, [impactShowFeedback]);
+	}, []);
 
 	const openModal = useCallback(() => {
 		dispatch(startSkillCheck(type));
@@ -90,6 +87,7 @@ export const Skill = ({ type, ...props }: SkillProps) => {
 						onPress={openModal}
 						onPressIn={onPressIn}
 						onPressOut={onPressOut}
+						pressHapticPattern="clockTick"
 					/>
 				</C.ValueContainer>
 			</C.Row>
