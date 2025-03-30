@@ -27,10 +27,17 @@ type ListProps = Omit<FlatListPropsWithLayout<number>, "data">;
 
 export type PickerBaseListProps = Omit<ListProps, "renderItem"> &
 	PickerDataProps & {
-		onScrollEnd?: () => void;
-		onLastScroll?: () => void;
 		itemHeight: number;
 	};
+
+export type PickerScrollProps = {
+	onScrollEnd?: () => void;
+	onLastScroll?: () => void;
+
+	overScrollTreshold?: number;
+	onOverScrollStart?: () => void;
+	onOverScrollEnd?: () => void;
+};
 
 export type PickerBasePressProps = {
 	onPressIn?: (e: GestureResponderEvent) => void;
@@ -56,7 +63,7 @@ export type PickerDataProps = {
 	onValueChanging?: (event: PickerChangeEvent) => void | boolean;
 };
 
-export type PickerScrollProps = {
+export type PickerHapticScrollProps = {
 	scrollHapticPattern?: HapticPatternType;
 };
 
@@ -100,5 +107,5 @@ export type PickerProps = ViewProps &
 	PickerActivationProps &
 	PickerRenderProps &
 	PickerPressProps &
-	PickerScrollProps &
+	PickerHapticScrollProps &
 	PickerDataProps;

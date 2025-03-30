@@ -4,12 +4,11 @@ import type {
 	PickerScrollEvent,
 } from "@widgets/picker/model";
 import { useCallback, useRef } from "react";
-import type { PickerListProps } from "../PickerList";
+import type { PickerListProps } from "../PickerList.types";
 
 export const useScrollFeedback = (props: PickerListProps) => {
 	const {
 		onValueChanging: onValueChangingProp,
-		onTouchStart: onTouchStartProp,
 		onScrollBeginDrag: onScrollBeginDragProp,
 		onScrollDeactivated: onScrollDeactivatedProp,
 		onLongPress: onLongPressProp,

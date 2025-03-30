@@ -1,24 +1,8 @@
-import type {
-	PickerActivationProps,
-	PickerAnimationProps,
-	PickerBaseListProps,
-	PickerBasePressProps,
-	PickerPressProps,
-	PickerRenderProps,
-	PickerScrollProps,
-} from "@widgets/picker/model";
 import { memo } from "react";
 import { PickerListGestures } from "../PickerListGestures";
 import * as C from "./PickerList.components";
+import type { PickerListProps } from "./PickerList.types";
 import { usePickerEffects } from "./hooks/usePickerEffects";
-
-export type PickerListProps = PickerBaseListProps &
-	PickerAnimationProps &
-	PickerActivationProps &
-	PickerBasePressProps &
-	PickerPressProps &
-	PickerRenderProps &
-	PickerScrollProps;
 
 export const PickerList = (props: PickerListProps) => {
 	const { onPress, onDoublePress, onLongPress } = props;

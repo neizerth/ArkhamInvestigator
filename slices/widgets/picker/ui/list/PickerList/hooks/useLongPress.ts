@@ -1,5 +1,5 @@
 import { useCallback, useState } from "react";
-import type { PickerListProps } from "../PickerList";
+import type { PickerListProps } from "../PickerList.types";
 
 export const useLongPress = (props: PickerListProps) => {
 	const {

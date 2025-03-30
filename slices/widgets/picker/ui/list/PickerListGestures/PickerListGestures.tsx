@@ -2,8 +2,8 @@ import { useHapticFeedback } from "@features/haptic";
 import { arrayIf } from "@shared/lib";
 import type {
 	PickerActivationProps,
+	PickerHapticScrollProps,
 	PickerPressProps,
-	PickerScrollProps,
 } from "@widgets/picker/model";
 import { type PropsWithChildren, useCallback } from "react";
 import { Gesture, GestureDetector } from "react-native-gesture-handler";
@@ -11,7 +11,7 @@ import { Gesture, GestureDetector } from "react-native-gesture-handler";
 export type PickerListGesturesProps = PropsWithChildren &
 	PickerPressProps &
 	PickerActivationProps &
-	PickerScrollProps & {
+	PickerHapticScrollProps & {
 		pressEnabled: boolean;
 		doublePressEnabled: boolean;
 		longPressEnabled: boolean;

@@ -1,5 +1,10 @@
 import { pipe } from "ramda";
-import { useScrollEdges } from "./useScrollEdges";
+import { useOverScroll } from "./useOverScroll";
+import { useScrollBack } from "./useScrollBack";
 import { useScrollEnd } from "./useScrollEnd";
 
-export const useScrollEffects = pipe(useScrollEnd, useScrollEdges);
+export const useScrollEffects = pipe(
+	useScrollEnd,
+	useScrollBack,
+	useOverScroll,
+);
