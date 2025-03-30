@@ -1,3 +1,4 @@
+import { Value as BaseValue } from "@pages/board/ui/shared";
 import { color } from "@shared/config";
 import { Row as BaseRow, IconNumber } from "@shared/ui";
 import { PickerMemo as BasePicker } from "@widgets/picker";
@@ -17,8 +18,10 @@ export const Row: typeof BaseRow = styled(BaseRow)`
 
 export const ValueContainer: typeof View = styled(View)`
   flex: 1;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
+  position: relative;
 `;
 
 export const Check: typeof Pressable = styled(Pressable)`
@@ -36,8 +39,16 @@ export const Background: typeof View = styled(View)`
 `;
 
 export const Value: typeof IconNumber = styled(IconNumber)`
-    color: ${color.text};
-  `;
+  color: ${color.text};
+`;
+
+export const ValueDiff: typeof View = styled(View)`
+  position: absolute;
+`;
+
+export const Diff: typeof BaseValue = styled(BaseValue)`
+
+`;
 
 export const Picker: typeof BasePicker = styled(BasePicker).attrs({
 	contentContainerStyle: {

@@ -2,6 +2,7 @@ import { SkillsContext } from "@pages/board/config";
 import {
 	selectCurrentBoard,
 	setCurrentStat,
+	signedNumber,
 	startSkillCheck,
 	useAppDispatch,
 	useAppSelector,
@@ -54,22 +55,37 @@ export const Skill = ({ type, ...props }: SkillProps) => {
 			const { item } = props;
 
 			const style = getSkillValueStyle({
+				type,
 				box,
 				isParallel,
 				value: item,
 				baseValue: baseSkillValue,
 			});
 
+			const diff = item - baseSkillValue;
+			const showDiff = diff !== 0 && pressing;
+
 			return (
-				<C.Value
-					{...props}
-					value={item}
-					style={style.text}
-					contentContainerStyle={style.container}
-				/>
+				<C.ValueContainer>
+					<C.Value
+						{...props}
+						value={item}
+						style={style.text}
+						contentContainerStyle={style.container}
+					/>
+					{showDiff && (
+						<C.ValueDiff style={style.diffContainer}>
+							<C.Diff
+								value={signedNumber(diff)}
+								style={style.diff}
+								contentContainerStyle={style.container}
+							/>
+						</C.ValueDiff>
+					)}
+				</C.ValueContainer>
 			);
 		},
-		[box, baseSkillValue, isParallel],
+		[box, baseSkillValue, isParallel, type, pressing],
 	);
 
 	const itemHeight = box.height * 0.8;
