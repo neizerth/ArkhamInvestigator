@@ -5,8 +5,8 @@ import type { BaseListProps } from "../../BaseList.types";
 
 export const useUserActivation = (props: BaseListProps) => {
 	const {
-		onUserActivate: onUserActivateProp,
-		onUserDeactivate: onUserDeactivateProp,
+		onUserActivated: onUserActivateProp,
+		onUserDeactivated: onUserDeactivatedProp,
 		onUserActivationChange,
 		onScroll: onScrollProp,
 		onScrollEnd: onScrollEndProp,
@@ -47,8 +47,8 @@ export const useUserActivation = (props: BaseListProps) => {
 		}
 		active.current = false;
 		onUserActivationChange?.(false);
-		onUserDeactivateProp?.();
-	}, [onUserDeactivateProp, onUserActivationChange]);
+		onUserDeactivatedProp?.();
+	}, [onUserDeactivatedProp, onUserActivationChange]);
 
 	const onPressOut = useCallback(() => {
 		touching.current = false;

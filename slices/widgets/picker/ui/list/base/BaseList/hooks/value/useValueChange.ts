@@ -23,14 +23,11 @@ export const useValueChange = (props: BaseListProps) => {
 		if (value === item.current.value) {
 			return;
 		}
-		// return;
-		// console.log(item.current)
 		onValueChanged?.(item.current);
 	}, [onValueChanged, onScrollDeactivatedProp, value]);
 
 	const onValueChanging = useCallback(
 		(e: PickerChangeEvent) => {
-			// console.log({ e })
 			item.current = e;
 			onValueChangingProp?.(e);
 		},

@@ -26,7 +26,6 @@ export const useValueChanging = (props: BaseListProps) => {
 				index,
 				value,
 			};
-			// console.log(index, value)
 			onValueChanging?.(event);
 		},
 		[data, onValueChanging],
@@ -61,17 +60,11 @@ export const useValueChanging = (props: BaseListProps) => {
 			offset.current = currentOffset;
 			offsetIndex.current = index;
 
-			// console.log({
-			// 	index,
-			// 	prevIndex,
-			// })
-
 			if (index === prevIndex) {
 				return;
 			}
 
 			const changed = getIndexes(index, prevIndex);
-			// console.log({ changed })
 			changed.forEach(triggerOffsetChange);
 		},
 		[onScrollProp, itemHeight, triggerOffsetChange],

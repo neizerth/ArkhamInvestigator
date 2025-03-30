@@ -38,13 +38,14 @@ export type PickerBasePressProps = {
 };
 
 export type PickerActivationProps = {
+	controlEnabled?: boolean;
 	onScrollDeactivated?: () => void;
 
 	onActivated?: () => void;
 	onDeactivated?: () => void;
 
-	onUserActivate?: (e: GestureResponderEvent) => void;
-	onUserDeactivate?: () => void;
+	onUserActivated?: (e: GestureResponderEvent) => void;
+	onUserDeactivated?: () => void;
 	onUserActivationChange?: (activated: boolean) => void;
 };
 
@@ -52,7 +53,7 @@ export type PickerDataProps = {
 	data: number[];
 	value?: number;
 	onValueChanged?: (event: PickerChangeEvent) => void;
-	onValueChanging?: (event: PickerChangeEvent) => void;
+	onValueChanging?: (event: PickerChangeEvent) => void | boolean;
 };
 
 export type PickerScrollProps = {
@@ -88,7 +89,7 @@ export type PickerRenderProps = {
 };
 
 export type PickerAnimationProps = {
-	animatedInit?: boolean;
+	animated?: boolean;
 };
 
 export type PickerProps = ViewProps &

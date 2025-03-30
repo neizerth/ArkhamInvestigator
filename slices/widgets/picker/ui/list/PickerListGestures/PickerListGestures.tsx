@@ -1,6 +1,7 @@
 import { useHapticFeedback } from "@features/haptic";
 import { arrayIf } from "@shared/lib";
 import type {
+	PickerActivationProps,
 	PickerPressProps,
 	PickerScrollProps,
 } from "@widgets/picker/model";
@@ -9,6 +10,7 @@ import { Gesture, GestureDetector } from "react-native-gesture-handler";
 
 export type PickerListGesturesProps = PropsWithChildren &
 	PickerPressProps &
+	PickerActivationProps &
 	PickerScrollProps & {
 		pressEnabled: boolean;
 		doublePressEnabled: boolean;
@@ -32,6 +34,9 @@ export const PickerListGestures = ({
 	onLongPress,
 	longPressMinDuration = 500,
 	longPressHapticPattern,
+
+	onUserDeactivated,
+	onDeactivated,
 }: PickerListGesturesProps) => {
 	const pressFeedback = useHapticFeedback(pressHapticPattern);
 	const doublePressFeedback = useHapticFeedback(doublePressHapticPattern);
@@ -70,7 +75,11 @@ export const PickerListGestures = ({
 			Gesture.LongPress()
 				.minDuration(longPressMinDuration)
 				.runOnJS(true)
-				.onStart(onLongPressCallback),
+				.onStart(onLongPressCallback)
+				.onTouchesUp(() => {
+					onUserDeactivated?.();
+					onDeactivated?.();
+				}),
 		),
 	].flat();
 

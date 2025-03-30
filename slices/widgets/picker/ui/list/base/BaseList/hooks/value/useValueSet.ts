@@ -12,9 +12,10 @@ export const useValueSet = (props: BaseListProps) => {
 		data,
 		onScrollBeginDrag: onScrollBeginDragProp,
 		onValueChanging: onValueChangingProp,
-		onUserDeactivate: onUserDeactivateProp,
-		animatedInit,
+		onUserDeactivated: onUserDeactivatedProp,
 		onContentSizeChange: onContentSizeChangeProp,
+		animated,
+		controlEnabled = true,
 	} = props;
 	const ref = useRef<FlatList<number>>(null);
 	const active = useRef(false);
@@ -24,31 +25,33 @@ export const useValueSet = (props: BaseListProps) => {
 	const index = useRef(currentIndex);
 
 	const getAnimated = useCallback(() => {
-		return animatedInit !== undefined ? animatedInit : active.current;
-	}, [animatedInit]);
+		return animated !== undefined ? animated : active.current;
+	}, [animated]);
 
 	const scrollToIndex = useCallback(() => {
-		if (index.current === currentIndex) {
+		if (!controlEnabled) {
 			return;
 		}
 
-		index.current = currentIndex;
 		ref.current?.scrollToIndex({
 			index: currentIndex,
 			animated: getAnimated(),
 		});
-	}, [getAnimated, currentIndex]);
+	}, [getAnimated, currentIndex, controlEnabled]);
 
 	useEffect(() => {
+		if (currentIndex === index.current) {
+			return;
+		}
 		scrollToIndex();
-	}, [scrollToIndex]);
+	}, [scrollToIndex, currentIndex]);
 
 	const onContentSizeChange = useCallback(
 		(width: number, height: number) => {
-			scrollToIndex();
 			if (typeof onContentSizeChangeProp === "function") {
 				onContentSizeChangeProp?.(width, height);
 			}
+			scrollToIndex();
 		},
 		[onContentSizeChangeProp, scrollToIndex],
 	);
@@ -65,8 +68,8 @@ export const useValueSet = (props: BaseListProps) => {
 
 	const onUserDeactivate = useCallback(() => {
 		active.current = false;
-		onUserDeactivateProp?.();
-	}, [onUserDeactivateProp]);
+		onUserDeactivatedProp?.();
+	}, [onUserDeactivatedProp]);
 
 	const onValueChanging = useCallback(
 		(e: PickerChangeEvent) => {

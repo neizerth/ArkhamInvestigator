@@ -10,7 +10,7 @@ import type {
 import { memo } from "react";
 import { PickerListGestures } from "../PickerListGestures";
 import * as C from "./PickerList.components";
-import { useScrollFeedback } from "./useScrollFeedback";
+import { usePickerEffects } from "./hooks/usePickerEffects";
 
 export type PickerListProps = PickerBaseListProps &
 	PickerAnimationProps &
@@ -22,7 +22,7 @@ export type PickerListProps = PickerBaseListProps &
 
 export const PickerList = (props: PickerListProps) => {
 	const { onPress, onDoublePress, onLongPress } = props;
-	const scrollProps = useScrollFeedback(props);
+	const scrollProps = usePickerEffects(props);
 
 	return (
 		<PickerListGestures
