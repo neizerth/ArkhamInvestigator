@@ -42,7 +42,7 @@ export const getTitleStyle = (options: GetTitleStyleOptions) => {
 		},
 	};
 
-	const getLocaleStyle = getKeyConfig<Partial<ReturnStyle>>({
+	const defaultFactionStyle = getKeyConfig<Partial<ReturnStyle>>({
 		default: {
 			titleText: {
 				fontFamily: Arkhamic.regular,
@@ -59,6 +59,20 @@ export const getTitleStyle = (options: GetTitleStyleOptions) => {
 				fontSize: 25 * vh,
 			},
 		},
+		rogue: {
+			title: {
+				paddingTop: "1%",
+			},
+		},
+		seeker: {
+			title: {
+				paddingTop: "1%",
+			},
+		},
+	});
+
+	const getLocaleStyle = getKeyConfig<Partial<ReturnStyle>>({
+		default: defaultFactionStyle(faction),
 		ru: {
 			container: {
 				gap: "7%",

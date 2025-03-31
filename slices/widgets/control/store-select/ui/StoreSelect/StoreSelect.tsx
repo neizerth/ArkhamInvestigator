@@ -1,7 +1,12 @@
 import { HapticSelect, type HapticSelectProps } from "@features/haptic";
 import { useAppTranslation } from "@features/i18n";
 import type { ActionCreatorWithPayload, Selector } from "@reduxjs/toolkit";
-import { type RootState, useAppDispatch, useAppSelector } from "@shared/lib";
+import {
+	type AppThunk,
+	type RootState,
+	useAppDispatch,
+	useAppSelector,
+} from "@shared/lib";
 import type { SelectItem } from "@shared/ui";
 import { propEq } from "ramda";
 import { useCallback } from "react";
@@ -11,7 +16,7 @@ export type StoreSelectProps<T> = Omit<
 	"onChange" | "value"
 > & {
 	selector: Selector<RootState, T>;
-	reducer: ActionCreatorWithPayload<T>;
+	reducer: ActionCreatorWithPayload<T> | ((value: T) => AppThunk);
 	translate?: boolean;
 };
 

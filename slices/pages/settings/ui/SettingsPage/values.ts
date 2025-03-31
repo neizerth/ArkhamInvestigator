@@ -34,7 +34,7 @@ const languageLabels: Record<string, string> = {
 	it: "Italiano",
 	fr: "Français",
 	ko: "한국어",
-	uk: "Українська",
+	// uk: "Українська",
 	pl: "Polski",
 	pt: "Português",
 	ru: "Русский",

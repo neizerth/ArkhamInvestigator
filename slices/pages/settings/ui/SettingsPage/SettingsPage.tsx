@@ -1,5 +1,9 @@
 import { selectHapticMode, setHapticMode } from "@features/haptic";
-import { selectLanguage, setLanguage, useAppTranslation } from "@features/i18n";
+import {
+	changeLanguage,
+	selectLanguage,
+	useAppTranslation,
+} from "@features/i18n";
 import { selectEndTurnStrict, setEndTurnStrict } from "@shared/lib";
 import { Title } from "@shared/ui";
 import { ContentPage } from "@widgets/content-page";
@@ -16,7 +20,7 @@ export const SettingsPage = () => {
 					<C.Label>{t`Language`}</C.Label>
 					<C.Select
 						selector={selectLanguage}
-						reducer={setLanguage}
+						reducer={changeLanguage}
 						data={languageValues}
 					/>
 				</C.Row>
