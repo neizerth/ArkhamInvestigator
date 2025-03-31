@@ -40,11 +40,11 @@ export const useValueSet = (props: BaseListProps) => {
 	}, [getAnimated, currentIndex, controlEnabled]);
 
 	useEffect(() => {
-		if (active.current || currentIndex === index.current) {
+		if (active.current) {
 			return;
 		}
 		scrollToIndex();
-	}, [scrollToIndex, currentIndex]);
+	}, [scrollToIndex]);
 
 	const onContentSizeChange = useCallback(
 		(width: number, height: number) => {
