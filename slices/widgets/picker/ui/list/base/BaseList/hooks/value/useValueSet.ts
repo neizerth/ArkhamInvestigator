@@ -1,18 +1,15 @@
 import { getValueIndex } from "@widgets/picker/lib";
-import type {
-	PickerChangeEvent,
-	PickerScrollEvent,
-} from "@widgets/picker/model";
+import type { PickerChangeEvent } from "@widgets/picker/model";
 import { useCallback, useEffect, useRef } from "react";
-import type { FlatList } from "react-native";
+import type { FlatList, GestureResponderEvent } from "react-native";
 import type { BaseListProps } from "../../BaseList.types";
 
 export const useValueSet = (props: BaseListProps) => {
 	const {
 		data,
-		onScrollBeginDrag: onScrollBeginDragProp,
+		onTouchStart: onTouchStartProp,
 		onValueChanging: onValueChangingProp,
-		onUserDeactivated: onUserDeactivatedProp,
+		onScrollDeactivated: onScrollDeactivatedProp,
 		onContentSizeChange: onContentSizeChangeProp,
 		animated,
 		controlEnabled = true,
@@ -25,14 +22,16 @@ export const useValueSet = (props: BaseListProps) => {
 	const index = useRef(currentIndex);
 
 	const getAnimated = useCallback(() => {
-		return animated !== undefined ? animated : active.current;
+		return animated !== undefined ? animated : false;
 	}, [animated]);
 
 	const scrollToIndex = useCallback(() => {
 		if (!controlEnabled) {
 			return;
 		}
-
+		if (index.current === currentIndex) {
+			return;
+		}
 		ref.current?.scrollToIndex({
 			index: currentIndex,
 			animated: getAnimated(),
@@ -40,9 +39,6 @@ export const useValueSet = (props: BaseListProps) => {
 	}, [getAnimated, currentIndex, controlEnabled]);
 
 	useEffect(() => {
-		if (active.current) {
-			return;
-		}
 		scrollToIndex();
 	}, [scrollToIndex]);
 
@@ -56,28 +52,28 @@ export const useValueSet = (props: BaseListProps) => {
 		[onContentSizeChangeProp, scrollToIndex],
 	);
 
-	const onScrollBeginDrag = useCallback(
-		(e: PickerScrollEvent) => {
+	const onTouchStart = useCallback(
+		(e: GestureResponderEvent) => {
 			active.current = true;
-			if (typeof onScrollBeginDragProp === "function") {
-				onScrollBeginDragProp(e);
+			if (typeof onTouchStartProp === "function") {
+				onTouchStartProp(e);
 			}
 		},
-		[onScrollBeginDragProp],
+		[onTouchStartProp],
 	);
 
-	const onUserDeactivated = useCallback(() => {
+	const onScrollDeactivated = useCallback(() => {
 		active.current = false;
-		onUserDeactivatedProp?.();
-	}, [onUserDeactivatedProp]);
+		onScrollDeactivatedProp?.();
+	}, [onScrollDeactivatedProp]);
 
 	const onValueChanging = useCallback(
 		(e: PickerChangeEvent) => {
-			onValueChangingProp?.(e);
+			index.current = e.index;
 			if (!active.current) {
 				return;
 			}
-			index.current = e.index;
+			onValueChangingProp?.(e);
 		},
 		[onValueChangingProp],
 	);
@@ -85,9 +81,9 @@ export const useValueSet = (props: BaseListProps) => {
 	return {
 		...props,
 		ref,
-		onUserDeactivated,
+		onScrollDeactivated,
 		onContentSizeChange,
 		onValueChanging,
-		onScrollBeginDrag,
+		onTouchStart,
 	};
 };

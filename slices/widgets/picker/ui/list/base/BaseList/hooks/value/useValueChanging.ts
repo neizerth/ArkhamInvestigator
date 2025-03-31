@@ -1,5 +1,6 @@
 import { getValueIndex } from "@widgets/picker/lib";
 import type { PickerScrollEvent } from "@widgets/picker/model";
+import type { PickerScrollDirection } from "@widgets/picker/model/common";
 import { range } from "ramda";
 import { useCallback, useRef } from "react";
 import type { BaseListProps } from "../../BaseList.types";
@@ -9,6 +10,7 @@ export const useValueChanging = (props: BaseListProps) => {
 		onScroll: onScrollProp,
 		onScrollBeginDrag: onScrollBeginDragProp,
 		onValueChanging,
+		onScrollEnd: onScrollEndProp,
 		itemHeight,
 		data,
 	} = props;
@@ -19,6 +21,7 @@ export const useValueChanging = (props: BaseListProps) => {
 
 	const offset = useRef(initialOffset);
 	const offsetIndex = useRef(index);
+	const scrollDirection = useRef<PickerScrollDirection>("initial");
 
 	const triggerOffsetChange = useCallback(
 		(index: number) => {
@@ -38,12 +41,18 @@ export const useValueChanging = (props: BaseListProps) => {
 	const onScrollBeginDrag = useCallback(
 		(e: PickerScrollEvent) => {
 			offset.current = initialOffset;
+			scrollDirection.current = "initial";
 			if (typeof onScrollBeginDragProp === "function") {
 				onScrollBeginDragProp(e);
 			}
 		},
 		[onScrollBeginDragProp, initialOffset],
 	);
+
+	const onScrollEnd = useCallback(() => {
+		scrollDirection.current = "initial";
+		onScrollEndProp?.();
+	}, [onScrollEndProp]);
 
 	const onScroll = useCallback(
 		(e: PickerScrollEvent) => {
@@ -53,22 +62,29 @@ export const useValueChanging = (props: BaseListProps) => {
 			const currentOffset = Math.round(e.nativeEvent.contentOffset.y);
 
 			const delta = currentOffset - offset.current;
+			if (scrollDirection.current === "initial") {
+				scrollDirection.current = delta > 0 ? "up" : "down";
+			}
 
 			if (delta === 0) {
 				return;
 			}
+			const indexValue = currentOffset / itemHeight;
+			const round = scrollDirection.current === "up" ? Math.floor : Math.ceil;
+			const index = round(indexValue);
 
-			const index = Math.ceil(currentOffset / itemHeight);
 			const prevIndex = offsetIndex.current;
 
 			offset.current = currentOffset;
-			offsetIndex.current = index;
 
 			if (index === prevIndex) {
 				return;
 			}
 
+			offsetIndex.current = index;
+
 			const changed = getIndexes(index, prevIndex);
+
 			changed.forEach(triggerOffsetChange);
 		},
 		[onScrollProp, itemHeight, triggerOffsetChange],
@@ -78,6 +94,7 @@ export const useValueChanging = (props: BaseListProps) => {
 		...props,
 		onScroll,
 		onScrollBeginDrag,
+		onScrollEnd,
 	};
 };
 

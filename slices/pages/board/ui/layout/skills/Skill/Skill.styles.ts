@@ -49,7 +49,7 @@ export const getSkillValueStyle = ({
 
 	const valueSize: Record<number, number> = {
 		1: 9 * vw,
-		2: 5.2 * vw,
+		2: 5 * vw,
 	};
 
 	const fontSize = valueSize[digitsCount];
