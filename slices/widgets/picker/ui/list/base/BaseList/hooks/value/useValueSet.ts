@@ -1,5 +1,8 @@
 import { getValueIndex } from "@widgets/picker/lib";
-import type { PickerChangeEvent } from "@widgets/picker/model";
+import type {
+	PickerChangeEvent,
+	PickerScrollEvent,
+} from "@widgets/picker/model";
 import { useCallback, useEffect, useRef } from "react";
 import type { FlatList, GestureResponderEvent } from "react-native";
 import type { BaseListProps } from "../../BaseList.types";
@@ -7,6 +10,7 @@ import type { BaseListProps } from "../../BaseList.types";
 export const useValueSet = (props: BaseListProps) => {
 	const {
 		data,
+		onScrollBeginDrag: onScrollBeginDragProp,
 		onTouchStart: onTouchStartProp,
 		onValueChanging: onValueChangingProp,
 		onScrollDeactivated: onScrollDeactivatedProp,
@@ -16,13 +20,14 @@ export const useValueSet = (props: BaseListProps) => {
 	} = props;
 	const ref = useRef<FlatList<number>>(null);
 	const active = useRef(false);
+	const scrolling = useRef(false);
 
 	const currentIndex = Math.min(getValueIndex(props), data.length - 1);
 
 	const index = useRef(currentIndex);
 
 	const getAnimated = useCallback(() => {
-		return animated !== undefined ? animated : false;
+		return animated !== undefined ? animated : !active.current;
 	}, [animated]);
 
 	const scrollToIndex = useCallback(() => {
@@ -32,9 +37,11 @@ export const useValueSet = (props: BaseListProps) => {
 		if (index.current === currentIndex) {
 			return;
 		}
+		const animated = getAnimated();
+
 		ref.current?.scrollToIndex({
 			index: currentIndex,
-			animated: getAnimated(),
+			animated,
 		});
 	}, [getAnimated, currentIndex, controlEnabled]);
 
@@ -62,8 +69,19 @@ export const useValueSet = (props: BaseListProps) => {
 		[onTouchStartProp],
 	);
 
+	const onScrollBeginDrag = useCallback(
+		(e: PickerScrollEvent) => {
+			scrolling.current = true;
+			if (typeof onScrollBeginDragProp === "function") {
+				onScrollBeginDragProp(e);
+			}
+		},
+		[onScrollBeginDragProp],
+	);
+
 	const onScrollDeactivated = useCallback(() => {
 		active.current = false;
+		scrolling.current = false;
 		onScrollDeactivatedProp?.();
 	}, [onScrollDeactivatedProp]);
 
@@ -85,5 +103,6 @@ export const useValueSet = (props: BaseListProps) => {
 		onContentSizeChange,
 		onValueChanging,
 		onTouchStart,
+		onScrollBeginDrag,
 	};
 };
