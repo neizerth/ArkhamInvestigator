@@ -1,3 +1,4 @@
+import { TouchableOpacity } from "@features/haptic";
 import { color } from "@shared/config";
 import { type DefinedIconProps, Icon } from "@shared/ui";
 import { PickerMemo as BasePicker } from "@widgets/picker";
@@ -10,12 +11,18 @@ export const Container: typeof View = styled(View)`
   width: 60px;
   height: 60px;
   position: relative;
+  z-index: 2;
 `;
 
 export const Value: typeof InvestigatorSelectItem = styled(
 	InvestigatorSelectItem,
 )`
   
+`;
+
+export const Content: typeof View = styled(View)`
+  position: relative;
+  z-index: 2;
 `;
 
 export const Picker: typeof BasePicker = styled(BasePicker).attrs({
@@ -30,20 +37,24 @@ export const Picker: typeof BasePicker = styled(BasePicker).attrs({
 })`
   `;
 
-export const Arrow: typeof View = styled(View)`
+export const Arrow: typeof TouchableOpacity = styled(TouchableOpacity)`
   position: absolute;
+  z-index: 10;
   left: 0;
   right: 0;
-  z-index: 0;
-	justify-content: center;
 	align-items: center;
+  height: 38px;
+  /* background-color: red; */
 `;
 export const Up: typeof Arrow = styled(Arrow)`
+  justify-content: flex-start;
   top: -5px;
 `;
 
 export const Down: typeof Arrow = styled(Arrow)`
   bottom: -53px;
+
+	justify-content: flex-end;
 `;
 
 export const ArrowIcon: FC<DefinedIconProps> = styled(Icon)`

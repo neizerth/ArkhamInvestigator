@@ -22,7 +22,7 @@ export const Container: typeof View = styled(View)`
 
 export const Footer: typeof F.Footer = styled(F.Footer)`
   position: absolute;
-  z-index: 2;
+  z-index: 3;
   left: 0;
   right: 0;
   bottom: 0;

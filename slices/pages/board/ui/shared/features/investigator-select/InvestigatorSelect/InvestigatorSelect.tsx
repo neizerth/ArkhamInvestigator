@@ -20,6 +20,7 @@ export const InvestigatorSelect = ({ ...props }: InvestigatorSelectProps) => {
 
 	const currentIndex = index || 0;
 	const nextIndex = (currentIndex + 1) % boards.length;
+	const prevIndex = currentIndex === 0 ? boards.length - 1 : currentIndex - 1;
 
 	const renderItem = useCallback((props: PickerItemInfo) => {
 		const { item } = props;
@@ -42,6 +43,10 @@ export const InvestigatorSelect = ({ ...props }: InvestigatorSelectProps) => {
 		dispatch(setCurrentInvestigatorIndex(nextIndex));
 	}, [dispatch, nextIndex]);
 
+	const prev = useCallback(() => {
+		dispatch(setCurrentInvestigatorIndex(prevIndex));
+	}, [dispatch, prevIndex]);
+
 	const data = useMemo(() => boards.map(prop("id")), [boards]);
 
 	const value = data[currentIndex];
@@ -52,7 +57,7 @@ export const InvestigatorSelect = ({ ...props }: InvestigatorSelectProps) => {
 	return (
 		<C.Container {...props}>
 			{showUp && (
-				<C.Up>
+				<C.Up onPress={next}>
 					<C.UpIcon />
 				</C.Up>
 			)}
@@ -64,7 +69,7 @@ export const InvestigatorSelect = ({ ...props }: InvestigatorSelectProps) => {
 				onPress={next}
 			/>
 			{showDown && (
-				<C.Down>
+				<C.Down onPress={prev}>
 					<C.DownIcon />
 				</C.Down>
 			)}
