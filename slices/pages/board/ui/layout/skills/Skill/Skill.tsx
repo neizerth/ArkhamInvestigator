@@ -1,6 +1,7 @@
 import { SkillsContext } from "@pages/board/config";
 import {
 	selectCurrentBoard,
+	selectShowAdditionalInformation,
 	setCurrentStat,
 	signedNumber,
 	startSkillCheck,
@@ -25,6 +26,7 @@ export const Skill = ({ type, ...props }: SkillProps) => {
 	const box = useContext(SkillsContext);
 	const dispatch = useAppDispatch();
 	const { value, baseValue, isParallel } = useAppSelector(selectCurrentBoard);
+	const showInfo = useAppSelector(selectShowAdditionalInformation);
 	const [pressing, setPressing] = useState(false);
 	const skillValue = value[type];
 	const baseSkillValue = baseValue[type];
@@ -54,22 +56,25 @@ export const Skill = ({ type, ...props }: SkillProps) => {
 		(props: PickerItemInfo) => {
 			const { item } = props;
 
+			const diff = item - baseSkillValue;
+			const showDiff = diff !== 0 && pressing;
+
+			const value = showInfo ? signedNumber(diff) : item;
+
 			const style = getSkillValueStyle({
 				type,
 				box,
 				isParallel,
-				value: item,
+				value,
+				signed: showInfo,
 				baseValue: baseSkillValue,
 			});
-
-			const diff = item - baseSkillValue;
-			const showDiff = diff !== 0 && pressing;
 
 			return (
 				<C.ValueContainer>
 					<C.Value
 						{...props}
-						value={item}
+						value={value}
 						style={style.text}
 						contentContainerStyle={style.container}
 					/>
@@ -85,7 +90,7 @@ export const Skill = ({ type, ...props }: SkillProps) => {
 				</C.ValueContainer>
 			);
 		},
-		[box, baseSkillValue, isParallel, type, pressing],
+		[box, baseSkillValue, isParallel, type, pressing, showInfo],
 	);
 
 	const itemHeight = box.height * 0.8;
