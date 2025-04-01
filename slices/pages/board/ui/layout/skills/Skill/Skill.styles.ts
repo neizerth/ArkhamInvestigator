@@ -31,14 +31,16 @@ export const getSkillStyle = ({ box }: GetSkillStyleOptions) => {
 type GetSkillValueStyleOptions = PropsWithBox & {
 	type: SkillType;
 	isParallel?: boolean;
-	value: number;
+	value: number | string;
 	baseValue: number;
+	signed: boolean;
 };
 
 export const getSkillValueStyle = ({
 	type,
 	value,
 	isParallel,
+	signed,
 	box,
 }: GetSkillValueStyleOptions) => {
 	const { width } = box;
@@ -47,10 +49,18 @@ export const getSkillValueStyle = ({
 
 	const textColor = isParallel ? color.white : color.text;
 
-	const valueSize: Record<number, number> = {
+	const unsignedValueSize: Record<number, number> = {
 		1: 9 * vw,
 		2: 5 * vw,
 	};
+
+	const signedValueSize: Record<number, number> = {
+		1: 9 * vw,
+		2: 6.2 * vw,
+		3: 4.2 * vw,
+	};
+
+	const valueSize = signed ? signedValueSize : unsignedValueSize;
 
 	const fontSize = valueSize[digitsCount];
 
