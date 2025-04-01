@@ -38,10 +38,10 @@ export const Actions = ({ ...props }: ActionsProps) => {
 	return (
 		<C.Container {...props}>
 			<C.Content>
-				{showDiff && <C.BaseActions />}
+				{showDiff && <C.BaseActions limitMaxValue={false} />}
 				<C.Picker
 					value={value}
-					data={range(0, 101)}
+					data={range(0, 100)}
 					onValueChanged={onChange}
 					onPress={onPress}
 					onLongPress={onLongPress}

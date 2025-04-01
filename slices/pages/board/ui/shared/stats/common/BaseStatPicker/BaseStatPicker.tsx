@@ -14,6 +14,7 @@ import * as C from "./BaseStatPicker.components";
 
 export type DefinedBaseStatPickerProps = Omit<StatPickerProps, "data"> & {
 	contentContainerStyle?: ViewStyle;
+	limitMaxValue?: boolean;
 };
 
 export type BaseStatPickerProps = DefinedBaseStatPickerProps & {
@@ -23,6 +24,7 @@ export type BaseStatPickerProps = DefinedBaseStatPickerProps & {
 export const BaseStatPicker = ({
 	statType,
 	contentContainerStyle,
+	limitMaxValue = true,
 	...props
 }: BaseStatPickerProps) => {
 	const selectValues = useMemo(
@@ -44,11 +46,13 @@ export const BaseStatPicker = ({
 
 			const delta = nextBaseValue - baseValue;
 
-			const nextValue = Math.min(nextBaseValue, value + delta);
+			const nextValue = limitMaxValue
+				? Math.min(nextBaseValue, value + delta)
+				: value + delta;
 
 			dispatch(setStatTransaction(statType, nextValue, nextBaseValue));
 		},
-		[dispatch, statType, initialValue, baseValue, value],
+		[dispatch, statType, initialValue, baseValue, value, limitMaxValue],
 	);
 
 	const onChange = useCallback(
