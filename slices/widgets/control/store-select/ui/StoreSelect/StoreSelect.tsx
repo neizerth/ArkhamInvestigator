@@ -16,13 +16,13 @@ export type StoreSelectProps<T> = Omit<
 	"onChange" | "value"
 > & {
 	selector: Selector<RootState, T>;
-	reducer: ActionCreatorWithPayload<T> | ((value: T) => AppThunk);
+	actionCreator: ActionCreatorWithPayload<T> | ((value: T) => AppThunk);
 	translate?: boolean;
 };
 
 export function StoreSelect<T>({
 	selector,
-	reducer,
+	actionCreator,
 	data,
 	translate = true,
 	...props
@@ -39,9 +39,9 @@ export function StoreSelect<T>({
 
 	const onChange = useCallback(
 		({ value }: SelectItem<T>) => {
-			dispatch(reducer(value));
+			dispatch(actionCreator(value));
 		},
-		[dispatch, reducer],
+		[dispatch, actionCreator],
 	);
 
 	return (

@@ -20,7 +20,7 @@ export const SettingsPage = () => {
 					<C.Label>{t`Language`}</C.Label>
 					<C.Select
 						selector={selectLanguage}
-						reducer={changeLanguage}
+						actionCreator={changeLanguage}
 						data={languageValues}
 					/>
 				</C.Row>
@@ -28,7 +28,7 @@ export const SettingsPage = () => {
 					<C.Label>{t`Haptic`}</C.Label>
 					<C.Select
 						selector={selectHapticMode}
-						reducer={setHapticMode}
+						actionCreator={setHapticMode}
 						data={hapticValues}
 					/>
 				</C.Row>
@@ -37,7 +37,7 @@ export const SettingsPage = () => {
 					<C.Label>{t`Turn end`}</C.Label>
 					<C.Select
 						selector={selectEndTurnStrict}
-						reducer={setEndTurnStrict}
+						actionCreator={setEndTurnStrict}
 						data={turnEndValues}
 					/>
 				</C.Row>
