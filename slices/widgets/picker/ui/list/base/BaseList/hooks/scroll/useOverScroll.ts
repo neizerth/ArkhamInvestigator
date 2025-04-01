@@ -33,6 +33,7 @@ export const useOverScroll = (props: Props) => {
 	);
 
 	const onPressOut = useCallback(() => {
+		onPressOutProp?.();
 		const delta = startOffset.current - stopOffset.current;
 		if (isFirstIndex && delta < -overScrollTreshold) {
 			onOverScrollStart?.();
@@ -40,8 +41,6 @@ export const useOverScroll = (props: Props) => {
 		if (isLastIndex && delta > overScrollTreshold) {
 			onOverScrollEnd?.();
 		}
-
-		onPressOutProp?.();
 	}, [
 		onPressOutProp,
 		isFirstIndex,

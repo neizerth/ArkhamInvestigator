@@ -11,10 +11,14 @@ export const IconNumber = (props: IconNumberProps) => {
 
 	const Component = stroke ? StrokedIconNumber : UnstrokedIconNumber;
 
-	const style = StyleSheet.flatten(props.style);
-	const defaultFontSize = style.fontSize || font.size.default;
+	const styleSheet = StyleSheet.flatten(props.style);
+	const defaultFontSize = styleSheet.fontSize || font.size.default;
 
 	const fontSize = defaultFontSize;
+	const style = {
+		fontSize,
+		lineHeight: fontSize,
+	};
 
-	return <Component {...props} style={[props.style, { fontSize }]} />;
+	return <Component {...props} style={[props.style, style]} />;
 };
