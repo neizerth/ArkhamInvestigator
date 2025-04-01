@@ -44,6 +44,7 @@ export const Value: typeof IconNumber = styled(IconNumber)`
 
 export const ValueDiff: typeof View = styled(View)`
   position: absolute;
+  z-index: 1;
 `;
 
 export const Diff: typeof BaseValue = styled(BaseValue)`

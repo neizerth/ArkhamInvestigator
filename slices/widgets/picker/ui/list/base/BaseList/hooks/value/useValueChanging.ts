@@ -70,8 +70,11 @@ export const useValueChanging = (props: BaseListProps) => {
 				return;
 			}
 			const indexValue = currentOffset / itemHeight;
-			const round = scrollDirection.current === "up" ? Math.floor : Math.ceil;
-			const index = round(indexValue);
+			const eps = 0.05;
+			const index =
+				scrollDirection.current === "up"
+					? Math.floor(indexValue + eps)
+					: Math.ceil(indexValue - eps);
 
 			const prevIndex = offsetIndex.current;
 

@@ -5,7 +5,7 @@ import type {
 } from "@widgets/picker/model";
 import type { PickerScrollDirection } from "@widgets/picker/model/common";
 import { useCallback, useRef } from "react";
-import { Platform } from "react-native";
+import { type GestureResponderEvent, Platform } from "react-native";
 import type { BaseListProps } from "../../BaseList.types";
 
 const scrollBack = Platform.OS === "android";
@@ -16,12 +16,14 @@ export const useScrollBack = (props: BaseListProps) => {
 		onEndReached: onEndReachedProp,
 		onOverScrollEnd: onOverScrollEndProp,
 		onOverScrollStart: onOverScrollStartProp,
-		onScrollDeactivated: onScrollDeactivatedProp,
+		onTouchEnd: onTouchEndProp,
 		onScrollBeginDrag: onScrollBeginDragProp,
 		onScroll: onScrollProp,
 		ref,
+		data,
 	} = props;
 
+	const lastIndex = data.length - 1;
 	const touching = useRef(false);
 	const offset = useRef(0);
 	const initialScrollDirection = useRef<PickerScrollDirection>("initial");
@@ -34,10 +36,11 @@ export const useScrollBack = (props: BaseListProps) => {
 	}, [ref?.current]);
 
 	const scrollToEnd = useCallback(() => {
-		ref?.current?.scrollToEnd({
+		ref?.current?.scrollToIndex({
+			index: lastIndex,
 			animated: false,
 		});
-	}, [ref?.current]);
+	}, [ref?.current, lastIndex]);
 
 	const onOverScrollEnd = useCallback(() => {
 		onOverScrollEndProp?.();
@@ -83,11 +86,16 @@ export const useScrollBack = (props: BaseListProps) => {
 		[onEndReachedProp, scrollToEnd],
 	);
 
-	const onScrollDeactivated = useCallback(() => {
-		initialScrollDirection.current = "initial";
-		touching.current = false;
-		onScrollDeactivatedProp?.();
-	}, [onScrollDeactivatedProp]);
+	const onTouchEnd = useCallback(
+		(e: GestureResponderEvent) => {
+			initialScrollDirection.current = "initial";
+			touching.current = false;
+			if (typeof onTouchEndProp === "function") {
+				onTouchEndProp(e);
+			}
+		},
+		[onTouchEndProp],
+	);
 
 	const onScrollBeginDrag = useCallback(
 		(e: PickerScrollEvent) => {
@@ -132,7 +140,7 @@ export const useScrollBack = (props: BaseListProps) => {
 		onStartReached,
 		onOverScrollEnd,
 		onOverScrollStart,
-		onScrollDeactivated,
+		onTouchEnd,
 		onScroll,
 		onScrollBeginDrag,
 	};

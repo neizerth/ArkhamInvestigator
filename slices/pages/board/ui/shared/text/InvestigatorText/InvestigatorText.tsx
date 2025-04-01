@@ -1,4 +1,4 @@
-import { useAppTranslation } from "@features/i18n";
+import { useInvestigatorTranslation } from "@features/i18n";
 import type { ComponentStyleMap } from "@widgets/game-text";
 import { mergeDeepRight } from "ramda";
 import * as C from "./InvestigatorText.components";
@@ -6,8 +6,8 @@ import { getInvestigatorTextStyle } from "./InvestigatorText.styles";
 import type { InvestigatorTextProps } from "./InvestigatorText.types";
 
 export const InvestigatorText = (props: InvestigatorTextProps) => {
-	const { translate } = useAppTranslation();
-	const [text, language] = translate(props.value);
+	const translate = useInvestigatorTranslation(props.investigator);
+	const [text, language] = translate("text");
 
 	const { unit = 0 } = props;
 

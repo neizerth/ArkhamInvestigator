@@ -15,14 +15,7 @@ export const setTranslationsData: I18NReducer<ArkhamDivider.Translation> = (
 	}
 
 	const data = pick(
-		[
-			"encounterSets",
-			"campaigns",
-			"scenarios",
-			"stories",
-			"common",
-			"investigators",
-		],
+		["encounterSets", "campaigns", "scenarios", "stories", "common"],
 		payload,
 	);
 

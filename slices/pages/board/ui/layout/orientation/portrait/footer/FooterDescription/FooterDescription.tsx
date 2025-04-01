@@ -74,11 +74,13 @@ export const FooterDescription = ({ ...props }: FooterDescriptionProps) => {
 					<C.Background faction={faction} width={view.width}>
 						<C.DescriptionContent>
 							<C.TextContent>
-								<C.Traits unit={vw} value={traits} />
+								<C.Traits unit={vw} investigator={investigator} />
 								{showDescription && (
 									<>
-										<C.Text value={text} unit={vw} />
-										{flavor && <C.Flavor unit={vw} value={flavor} />}
+										<C.Text investigator={investigator} unit={vw} />
+										{flavor && (
+											<C.Flavor unit={vw} investigator={investigator} />
+										)}
 									</>
 								)}
 							</C.TextContent>

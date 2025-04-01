@@ -30,7 +30,12 @@ export const reduceCurrentStat: ActionCreator<AppThunk> =
 			return;
 		}
 
-		const statValue = reducer(board.value[type]);
+		const currentValue = board.value[type];
+		const statValue = reducer(currentValue);
+
+		if (currentValue === statValue) {
+			return;
+		}
 
 		const value = {
 			...board.value,

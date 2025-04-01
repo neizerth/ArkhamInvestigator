@@ -28,6 +28,6 @@ export const MainStats: typeof Row = styled(Row)`
 `;
 
 export const Description: typeof FooterDescription = styled(FooterDescription)`
-  z-index: 4;
+  z-index: 5;
   height: ${PORTRAIT_DESCRIPTION_HEIGHT}px;
 `;

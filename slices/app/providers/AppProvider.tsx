@@ -10,13 +10,13 @@ export const AppProvider = ({ children }: PropsWithChildren) => {
 	return (
 		<GestureHandlerRootView>
 			<StoreProvider>
-				<I18NProvider>
-					<ThemeProvider value={DarkTheme}>
+				<ThemeProvider value={DarkTheme}>
+					<I18NProvider>
 						<DataProvider>
 							<ModalProvider>{children}</ModalProvider>
 						</DataProvider>
-					</ThemeProvider>
-				</I18NProvider>
+					</I18NProvider>
+				</ThemeProvider>
 			</StoreProvider>
 		</GestureHandlerRootView>
 	);

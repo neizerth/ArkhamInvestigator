@@ -1,3 +1,7 @@
+import {
+	selectInvestigatorTranslations,
+	translateInvestigator,
+} from "@features/i18n";
 import type { ActionCreator } from "@reduxjs/toolkit";
 import {
 	getSelectedInvestigatorOptions,
@@ -26,6 +30,7 @@ export const setBoardDetails: ActionCreator<AppThunk> =
 		const store = getStore();
 		const board = selectCurrentBoard(store);
 		const investigators = selectInvestigatorSources(store);
+		const translations = selectInvestigatorTranslations(store);
 
 		if (!board) {
 			return;
@@ -72,11 +77,15 @@ export const setBoardDetails: ActionCreator<AppThunk> =
 		};
 
 		const value = mergeBoardStats(board, baseValue);
+		const translatedInvestigator = translateInvestigator(
+			investigator,
+			translations,
+		);
 
 		const data = {
 			...board,
 			initialValue: baseValue,
-			investigator,
+			investigator: translatedInvestigator,
 			baseValue,
 			value,
 			isParallel,

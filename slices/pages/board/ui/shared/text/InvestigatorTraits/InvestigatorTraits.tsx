@@ -1,15 +1,15 @@
-import { useAppTranslation } from "@features/i18n";
+import { useInvestigatorTranslation } from "@features/i18n";
 import * as C from "./InvestigatorTraits.components";
 import { getInvestigatorTraitsStyle } from "./InvestigatorTraits.styles";
 import type { InvestigatorTraitsProps } from "./InvestigatorTraits.types";
 
 export const InvestigatorTraits = ({
-	value,
+	investigator,
 	unit = 0,
 	...props
 }: InvestigatorTraitsProps) => {
-	const { translate } = useAppTranslation();
-	const [traits, language] = translate(value);
+	const translate = useInvestigatorTranslation(investigator);
+	const [traits, language] = translate("traits");
 
 	const style = getInvestigatorTraitsStyle({
 		unit,

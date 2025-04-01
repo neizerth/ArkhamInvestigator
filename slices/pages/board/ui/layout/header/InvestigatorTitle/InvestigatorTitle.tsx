@@ -1,4 +1,4 @@
-import { useAppTranslation } from "@features/i18n";
+import { useInvestigatorTranslation } from "@features/i18n";
 import { LayoutContext } from "@pages/board/config";
 import { getTitleSize, useFaction, useFactionImage } from "@pages/board/lib";
 import {
@@ -22,7 +22,6 @@ export const InvestigatorTitle = ({
 	...props
 }: InvestigatorTitleProps) => {
 	const { layout } = useContext(LayoutContext);
-	const { translate } = useAppTranslation();
 	const single = useAppSelector(
 		(state) => selectInvestigatorBoards(state).length === 1,
 	);
@@ -30,8 +29,10 @@ export const InvestigatorTitle = ({
 		useAppSelector(selectCurrentBoard);
 	const { faction, canChangeFaction, nextFaction } = useFaction();
 
-	const [name, nameLanguage] = translate(investigator.name);
-	const [subname] = translate(investigator.subname || "");
+	const translate = useInvestigatorTranslation(investigator);
+
+	const [name, nameLanguage] = translate("name");
+	const { subname = "" } = investigator;
 	const formattedName = formatGameText(name);
 	const formattedSubname = formatGameText(subname);
 
