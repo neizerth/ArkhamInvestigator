@@ -7,7 +7,7 @@ import {
 import type { AppThunkCreator } from "@shared/lib";
 import { loadStoreTranslation } from "../../../../storage/translation";
 import { selectLanguage } from "../i18n";
-import { loadTranslation } from "./loadTranslation";
+import { loadTranslation } from "./translations/loadTranslation";
 
 export const restoreTranslation: AppThunkCreator =
 	() => async (dispatch, getState) => {

@@ -1,4 +1,3 @@
-import { translateInvestigator } from "@features/i18n";
 import {
 	NEW_TURN_ACTIONS_COUNT,
 	START_GAME_RESOURCES_COUNT,
@@ -7,7 +6,7 @@ import { getSelectedInvestigatorOptions } from "@shared/lib";
 import { getBoardStats } from "@shared/lib/features/game/board/getBoardStats";
 import type {
 	InvestigatorBoard,
-	InvestigatorSource,
+	InvestigatorBoardSource,
 	SelectedInvestigator,
 } from "@shared/model";
 import type { ArkhamDBInvestigatorCard } from "@shared/model/api/game/arkhamDB";
@@ -16,7 +15,7 @@ import { isNotNil, propEq } from "ramda";
 
 type GetInvestigatorBoards = {
 	selectedInvestigators: SelectedInvestigator[];
-	investigators: InvestigatorSource[];
+	investigators: InvestigatorBoardSource[];
 	mediaItems: InvestigatorMedia[];
 	investigatorTranslations?: ArkhamDBInvestigatorCard[];
 };
@@ -25,7 +24,6 @@ export const getInvestigatorBoards = ({
 	investigators,
 	selectedInvestigators,
 	mediaItems,
-	investigatorTranslations = [],
 }: GetInvestigatorBoards) =>
 	selectedInvestigators
 		.map((item, index): InvestigatorBoard | null => {
@@ -61,14 +59,9 @@ export const getInvestigatorBoards = ({
 			};
 			const id = index + 1;
 
-			const investigatorTranslation = translateInvestigator(
-				investigator,
-				investigatorTranslations,
-			);
-
 			return {
 				id,
-				investigator: investigatorTranslation,
+				investigator,
 				picture,
 				initialValue: value,
 				baseValue: value,

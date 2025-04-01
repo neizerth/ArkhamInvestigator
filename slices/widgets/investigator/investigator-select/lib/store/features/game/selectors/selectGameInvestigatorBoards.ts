@@ -1,8 +1,7 @@
-import { selectInvestigatorTranslations } from "@features/i18n";
+import { selectTranslatedInvestigators } from "@features/i18n/lib/store/features/i18n/selectors/selectTranslatedInvestigators";
 import { createSelector } from "@reduxjs/toolkit";
 import {
 	selectInvestigatorMedia,
-	selectInvestigatorSources,
 	selectSelectedInvestigators,
 } from "@shared/lib";
 import { getInvestigatorBoards } from "@widgets/investigator/investigator-select/lib/board";
@@ -11,19 +10,12 @@ export const selectGameInvestigatorBoards = createSelector(
 	[
 		selectSelectedInvestigators,
 		selectInvestigatorMedia,
-		selectInvestigatorSources,
-		selectInvestigatorTranslations,
+		selectTranslatedInvestigators,
 	],
-	(
-		selectedInvestigators,
-		mediaItems,
-		investigators,
-		investigatorTranslations,
-	) =>
+	(selectedInvestigators, mediaItems, investigators) =>
 		getInvestigatorBoards({
 			selectedInvestigators,
 			mediaItems,
 			investigators,
-			investigatorTranslations,
 		}),
 );

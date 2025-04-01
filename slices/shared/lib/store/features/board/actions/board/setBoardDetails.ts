@@ -1,7 +1,5 @@
-import {
-	selectInvestigatorTranslations,
-	translateInvestigator,
-} from "@features/i18n";
+import { selectInvestigatorTranslations } from "@features/i18n";
+import { selectTranslatedInvestigators } from "@features/i18n/lib/store/features/i18n/selectors/selectTranslatedInvestigators";
 import type { ActionCreator } from "@reduxjs/toolkit";
 import {
 	getSelectedInvestigatorOptions,
@@ -11,7 +9,6 @@ import { getBoardStats } from "@shared/lib/features/game/board/getBoardStats";
 import type { AppThunk } from "@shared/lib/store";
 import type { SelectedInvestigator } from "@shared/model";
 import { propEq } from "ramda";
-import { selectInvestigatorSources } from "../../../investigators/investigatorSources/investigatorSources";
 import { selectCurrentBoard } from "../../selectors";
 import { setCurrentBoard } from "./setCurrentBoard";
 
@@ -29,7 +26,7 @@ export const setBoardDetails: ActionCreator<AppThunk> =
 
 		const store = getStore();
 		const board = selectCurrentBoard(store);
-		const investigators = selectInvestigatorSources(store);
+		const investigators = selectTranslatedInvestigators(store);
 		const translations = selectInvestigatorTranslations(store);
 
 		if (!board) {
@@ -77,15 +74,11 @@ export const setBoardDetails: ActionCreator<AppThunk> =
 		};
 
 		const value = mergeBoardStats(board, baseValue);
-		const translatedInvestigator = translateInvestigator(
-			investigator,
-			translations,
-		);
 
 		const data = {
 			...board,
 			initialValue: baseValue,
-			investigator: translatedInvestigator,
+			investigator,
 			baseValue,
 			value,
 			isParallel,
