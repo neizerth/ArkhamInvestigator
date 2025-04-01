@@ -14,7 +14,9 @@ export const StrokedIconNumber = ({
 	return (
 		<C.Container style={contentContainerStyle}>
 			<C.StrokeContainer>
-				<C.Fill {...props}>{value}</C.Fill>
+				<C.FillContainer>
+					<C.Fill {...props}>{value}</C.Fill>
+				</C.FillContainer>
 				<C.Outline {...props} style={strokeStyle}>
 					{value}
 				</C.Outline>
