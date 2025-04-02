@@ -4,9 +4,10 @@ import type { ListRenderItemInfo } from "react-native";
 import * as C from "./BaseList.components";
 import type { BaseListProps } from "./BaseList.types";
 import { defaultRenderItemContainer } from "./defaultRenderItemContainer";
-import { useBaseListEffects } from "./hooks";
+import useBaseListHooks from "./hooks";
+
 export const BaseList = (baseProps: BaseListProps) => {
-	const props = useBaseListEffects(baseProps);
+	const props = useBaseListHooks(baseProps);
 	const {
 		itemHeight,
 		data = [],

@@ -42,6 +42,7 @@ export type PickerScrollProps = {
 export type PickerBasePressProps = {
 	onPressIn?: (e: GestureResponderEvent) => void;
 	onPressOut?: () => void;
+	onPressChange?: (value: boolean) => void;
 };
 
 export type PickerActivationProps = {

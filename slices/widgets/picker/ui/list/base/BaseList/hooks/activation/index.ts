@@ -1,3 +1,5 @@
-export * from "./useActivation";
-export * from "./useUserActivation";
-export * from "./useActivationEffects";
+import { pipe } from "ramda";
+import { useActivation } from "./useActivation";
+import { useUserActivation } from "./useUserActivation";
+
+export default pipe(useActivation, useUserActivation);

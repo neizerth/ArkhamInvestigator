@@ -1,4 +1,6 @@
-export * from "./useValueChange";
-export * from "./useValueChanging";
-export * from "./useValueEffects";
-export * from "./useValueSet";
+import { pipe } from "ramda";
+import { useValueChange } from "./useValueChange";
+import { useValueChanging } from "./useValueChanging";
+import { useValueSet } from "./useValueSet";
+
+export default pipe(useValueSet, useValueChange, useValueChanging);

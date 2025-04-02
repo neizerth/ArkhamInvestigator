@@ -10,6 +10,7 @@ export const usePressEvents = (props: BaseListProps) => {
 		onPressOut: onPressOutProp,
 		onTouchEnd: onTouchEndProp,
 		onScrollEndDrag: onScrollEndDragProp,
+		onPressChange,
 	} = props;
 
 	const touching = useRef(false);
@@ -21,8 +22,9 @@ export const usePressEvents = (props: BaseListProps) => {
 				onTouchStartProp(e);
 			}
 			onPressIn?.(e);
+			onPressChange?.(true);
 		},
-		[onTouchStartProp, onPressIn],
+		[onTouchStartProp, onPressIn, onPressChange],
 	);
 
 	const onPressOut = useCallback(() => {
@@ -31,7 +33,8 @@ export const usePressEvents = (props: BaseListProps) => {
 		}
 		touching.current = false;
 		onPressOutProp?.();
-	}, [onPressOutProp]);
+		onPressChange?.(false);
+	}, [onPressOutProp, onPressChange]);
 
 	const onScrollEndDrag = useCallback(
 		(e: PickerScrollEvent) => {
