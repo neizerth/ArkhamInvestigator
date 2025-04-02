@@ -21,17 +21,10 @@ export const StrokeContainer: typeof View = styled(View)`
 
 export const Fill: typeof UnscaledText = styled(UnscaledText)`
   font-family: ${ArkhamDigits.fill};
-`;
-
-export const FillContainer: typeof View = styled(View)`
   position: absolute;
-  z-index: 2;
   left: 0;
-  right: 0;
   top: 0;
-  bottom: 0;
-  justify-content: center;
-  align-items: center;
+  z-index: 2;
 `;
 
 export const Outline: typeof UnscaledText = styled(UnscaledText)`

@@ -17,7 +17,7 @@ export const IconNumber = (props: IconNumberProps) => {
 	const fontSize = defaultFontSize;
 	const style = {
 		fontSize,
-		lineHeight: fontSize,
+		lineHeight: fontSize * 0.99,
 	};
 
 	return <Component {...props} style={[props.style, style]} />;

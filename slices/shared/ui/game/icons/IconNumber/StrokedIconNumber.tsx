@@ -11,12 +11,14 @@ export const StrokedIconNumber = ({
 
 	const strokeStyle = [props.style, props.strokeStyle, { fontSize }];
 
+	const containerStyle = {
+		height: fontSize,
+	};
+
 	return (
 		<C.Container style={contentContainerStyle}>
-			<C.StrokeContainer>
-				<C.FillContainer>
-					<C.Fill {...props}>{value}</C.Fill>
-				</C.FillContainer>
+			<C.StrokeContainer style={containerStyle}>
+				<C.Fill {...props}>{value}</C.Fill>
 				<C.Outline {...props} style={strokeStyle}>
 					{value}
 				</C.Outline>

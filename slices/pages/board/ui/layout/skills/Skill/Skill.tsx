@@ -20,7 +20,7 @@ export type SkillProps = ViewProps & {
 	type: InvestigatorSkillType;
 };
 
-const SKILL_RANGE = range(-9, 21);
+const SKILL_RANGE = range(0, 21);
 
 export const Skill = ({ type, ...props }: SkillProps) => {
 	const box = useContext(SkillsContext);

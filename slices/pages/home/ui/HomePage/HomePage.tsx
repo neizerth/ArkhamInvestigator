@@ -30,7 +30,6 @@ export const HomePage = () => {
 	return (
 		<C.Container>
 			<C.Menu />
-
 			<Button onPress={onStart}>{t`New Game`}</Button>
 			{board && (
 				<C.ResumeButton onPress={onResume}>{t`Continue`}</C.ResumeButton>
