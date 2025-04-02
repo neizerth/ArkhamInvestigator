@@ -36,7 +36,7 @@ export const contactLinks = [
 		id: "email",
 		icon: "envelop",
 		text: "E-mail",
-		href: "neizerth@gmail.com",
+		href: "mailto:neizerth@gmail.com",
 	},
 	{
 		id: "telegram",
