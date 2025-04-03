@@ -35,9 +35,6 @@ export const HealthValue: typeof Value = styled(Value).attrs({
 	strokeStyle: {
 		color: color.health,
 	},
-	// backgroundStyle: {
-	//   color: color.health
-	// }
 })`
   
   `;
