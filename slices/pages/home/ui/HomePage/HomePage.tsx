@@ -15,7 +15,7 @@ export const HomePage = () => {
 	const dispatch = useAppDispatch();
 	const { t } = useAppTranslation();
 
-	const board = useAppSelector(selectCurrentBoard);
+	const oldGame = useAppSelector((state) => Boolean(selectCurrentBoard(state)));
 
 	const start = useCallback(() => {
 		dispatch(startNewGame());
@@ -31,7 +31,7 @@ export const HomePage = () => {
 		<C.Container>
 			<C.Menu />
 			<Button onPress={onStart}>{t`New Game`}</Button>
-			{board && (
+			{oldGame && (
 				<C.ResumeButton onPress={onResume}>{t`Continue`}</C.ResumeButton>
 			)}
 			<C.Disclaimer>

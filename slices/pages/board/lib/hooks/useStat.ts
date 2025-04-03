@@ -1,6 +1,8 @@
 import {
 	decreaseCurrentStat,
-	selectCurrentStatValues,
+	selectCurrentStatBaseValue,
+	selectCurrentStatInitialValue,
+	selectCurrentStatValue,
 	setCurrentStat,
 	setStatTransaction,
 	useAppDispatch,
@@ -8,16 +10,13 @@ import {
 } from "@shared/lib";
 import type { InvestigatorBoardStat } from "@shared/model";
 import type { PickerChangeEvent } from "@widgets/picker";
-import { useCallback, useMemo } from "react";
+import { useCallback } from "react";
 
 export const useStat = (statType: InvestigatorBoardStat) => {
 	const dispatch = useAppDispatch();
-	const selectValues = useMemo(
-		() => selectCurrentStatValues(statType),
-		[statType],
-	);
-
-	const { initialValue, baseValue, value } = useAppSelector(selectValues);
+	const value = useAppSelector(selectCurrentStatValue(statType));
+	const baseValue = useAppSelector(selectCurrentStatBaseValue(statType));
+	const initialValue = useAppSelector(selectCurrentStatInitialValue(statType));
 
 	const wounds = Math.max(baseValue - value, 0);
 

@@ -73,8 +73,8 @@ export const getSkillValueStyle = ({
 	};
 
 	const diffSize: Record<number, number> = {
-		1: 4 * vw,
-		2: 3.5 * vw,
+		1: 5.7 * vw,
+		2: 5 * vw,
 	};
 
 	const diffFontSize = diffSize[digitsCount];

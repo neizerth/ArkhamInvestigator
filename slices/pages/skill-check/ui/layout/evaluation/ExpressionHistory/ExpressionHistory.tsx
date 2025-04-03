@@ -1,7 +1,7 @@
 import {
 	clearSkillCheckHistoryItem,
 	getSkillCheckValue,
-	selectCurrentBoard,
+	selectBoardProps,
 	selectSkillCheckHistory,
 	setSkillCheckData,
 	useAppDispatch,
@@ -23,13 +23,7 @@ export const ExpressionHistory = ({
 }: ExpressionHistoryProps) => {
 	const dispatch = useAppDispatch();
 	const history = useAppSelector(selectSkillCheckHistory);
-	const board = useAppSelector(selectCurrentBoard);
-
-	if (!board) {
-		return null;
-	}
-
-	const { value } = board;
+	const { value } = useAppSelector(selectBoardProps(["value"]));
 
 	const data = history.slice(0, size).map((item) => ({
 		...item,

@@ -3,6 +3,7 @@ import type {
 	InvestigatoTitleBaseProps,
 	InvestigatorTitleProps,
 } from "@widgets/game/investigator-title";
+import { memo } from "react";
 import type { ViewProps } from "react-native";
 import {
 	getHeaderStyle,
@@ -25,6 +26,8 @@ export type InvestigatorHeaderProps = ViewProps &
 
 export const InvestigatorHeader = ({
 	style,
+	pressableTitle,
+	onTitlePress,
 	...props
 }: InvestigatorHeaderProps) => {
 	const headerStyle = getHeaderStyle(props);
@@ -35,8 +38,15 @@ export const InvestigatorHeader = ({
 
 	return (
 		<C.Container {...props} style={[style, headerStyle]}>
-			<C.Title {...props} {...titleSize} />
+			<C.Title
+				{...props}
+				{...titleSize}
+				pressable={pressableTitle}
+				onPress={onTitlePress}
+			/>
 			<C.Skills {...props} {...skillsSize} style={skillsStyle} />
 		</C.Container>
 	);
 };
+
+export const InvestigatorHeaderMemo = memo(InvestigatorHeader);

@@ -1,6 +1,6 @@
 import { createSelector } from "@reduxjs/toolkit";
 import type { InvestigatorBoardStat } from "@shared/model";
-import { selectCurrentBoard } from "./selectCurrentBoard";
+import { selectCurrentBoard } from "../selectCurrentBoard";
 
 export const selectCurrentStatValues = (stat: InvestigatorBoardStat) =>
 	createSelector([selectCurrentBoard], (board) => {

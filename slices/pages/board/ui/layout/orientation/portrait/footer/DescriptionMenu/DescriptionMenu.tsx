@@ -1,6 +1,7 @@
 import { routes } from "@shared/config";
 import {
 	goToPage,
+	selectBoardProps,
 	selectCurrentBoard,
 	setCurrentInvestigatorDetails,
 	setReplaceInvestigator,
@@ -17,12 +18,13 @@ export type DescriptionMenuProps = ViewProps;
 
 export const DescriptionMenu = (props: DescriptionMenuProps) => {
 	const dispatch = useAppDispatch();
-	const board = useAppSelector(selectCurrentBoard);
+	const { details, selection } = useAppSelector(
+		selectBoardProps(["selection"]),
+	);
 
-	const details = board?.details;
-	const selection = board?.selection;
-	const media = details?.media;
-
+	const media = useAppSelector(
+		(state) => selectCurrentBoard(state).details.media,
+	);
 	const haveDetails = media?.variants || media?.skins;
 
 	const hide = useCallback(() => {

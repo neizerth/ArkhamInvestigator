@@ -1,7 +1,7 @@
 import { LayoutContext } from "@pages/board/config";
 import { getPortraitLayout, useInvestigatorImageStyle } from "@pages/board/lib";
 import {
-	selectCurrentBoard,
+	selectBoardProp,
 	useAppSelector,
 	useInvestigatorImageUrl,
 } from "@shared/lib";
@@ -14,13 +14,7 @@ export type PortraitImageProps = ViewProps;
 export const PortraitImage = ({ ...props }: PortraitImageProps) => {
 	const { view, layout } = useContext(LayoutContext);
 
-	const board = useAppSelector(selectCurrentBoard);
-
-	if (!board) {
-		return null;
-	}
-
-	const { picture } = board;
+	const picture = useAppSelector(selectBoardProp("picture"));
 
 	const activeStyle = useInvestigatorImageStyle();
 

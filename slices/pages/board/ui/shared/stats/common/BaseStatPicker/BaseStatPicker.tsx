@@ -1,4 +1,7 @@
 import {
+	selectCurrentStatBaseValue,
+	selectCurrentStatInitialValue,
+	selectCurrentStatValue,
 	selectCurrentStatValues,
 	setStatTransaction,
 	useAppDispatch,
@@ -32,7 +35,9 @@ export const BaseStatPicker = ({
 		[statType],
 	);
 
-	const { initialValue, baseValue, value } = useAppSelector(selectValues);
+	const value = useAppSelector(selectCurrentStatValue(statType));
+	const baseValue = useAppSelector(selectCurrentStatBaseValue(statType));
+	const initialValue = useAppSelector(selectCurrentStatInitialValue(statType));
 
 	const pickerData = [...range(-initialValue, 0), ...range(1, 10)];
 

@@ -1,9 +1,9 @@
 import { useHapticFeedback } from "@features/haptic";
 import { LayoutContext } from "@pages/board/config";
-import { useFaction } from "@pages/board/lib";
 import { useRoute } from "@react-navigation/native";
 import {
-	selectCurrentBoard,
+	selectBoardProp,
+	selectCurrentFaction,
 	selectShowDescription,
 	setShowDescription,
 	useAppDispatch,
@@ -22,9 +22,8 @@ export const FooterDescription = ({ ...props }: FooterDescriptionProps) => {
 	const showDescription = useAppSelector(selectShowDescription);
 
 	const { view } = useContext(LayoutContext);
-	const board = useAppSelector(selectCurrentBoard);
-	const { investigator } = board;
-	const { faction } = useFaction(board);
+	const investigator = useAppSelector(selectBoardProp("investigator"));
+	const faction = useAppSelector(selectCurrentFaction);
 
 	const impactShowFeedback = useHapticFeedback("clockTick");
 
@@ -55,11 +54,9 @@ export const FooterDescription = ({ ...props }: FooterDescriptionProps) => {
 
 	const vw = (view.width * 6) / 100;
 
-	if (!vw || !investigator) {
+	if (!vw) {
 		return null;
 	}
-
-	const { traits = "", flavor, text } = investigator;
 
 	return (
 		<C.Container {...props}>
@@ -78,7 +75,7 @@ export const FooterDescription = ({ ...props }: FooterDescriptionProps) => {
 								{showDescription && (
 									<>
 										<C.Text investigator={investigator} unit={vw} />
-										{flavor && (
+										{investigator.flavor && (
 											<C.Flavor unit={vw} investigator={investigator} />
 										)}
 									</>

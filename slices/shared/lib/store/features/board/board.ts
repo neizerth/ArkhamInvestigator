@@ -7,6 +7,7 @@ export type IBoardState = {
 	investigatorBoards: InvestigatorBoard[];
 	endTurnStrict: boolean;
 	showDamageAndHorror: boolean;
+	showFactionSelect: boolean;
 };
 
 const initialState: IBoardState = {
@@ -14,6 +15,7 @@ const initialState: IBoardState = {
 	endTurnStrict: true,
 	investigatorBoards: [],
 	showDamageAndHorror: false,
+	showFactionSelect: false,
 };
 
 const state = createSliceState(initialState);
@@ -27,12 +29,14 @@ export const {
 	setCurrentInvestigatorIndex,
 	setInvestigatorBoards,
 	setEndTurnStrict,
+	setShowFactionSelect,
 } = board.actions;
 
 export const {
 	selectCurrentInvestigatorIndex,
 	selectInvestigatorBoards,
 	selectEndTurnStrict,
+	selectShowFactionSelect,
 } = board.selectors;
 
 export default board.reducer;

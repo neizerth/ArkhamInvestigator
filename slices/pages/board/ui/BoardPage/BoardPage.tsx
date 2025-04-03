@@ -10,6 +10,7 @@ import {
 	useScreenOrientation,
 } from "@shared/lib";
 import { useWindowDimensions } from "react-native";
+import { FactionSelect } from "../shared";
 import * as C from "./BoardPage.components";
 
 export const BoardPage = () => {
@@ -42,6 +43,7 @@ export const BoardPage = () => {
 					{orientation.type === "portrait" && (
 						<C.PortraitLayout top={areaTop} />
 					)}
+					<FactionSelect />
 				</C.Container>
 			)}
 		</LayoutContext.Provider>

@@ -1,10 +1,10 @@
 import { useAppTranslation } from "@features/i18n";
 import { useModal } from "@features/modal";
-import { useFaction } from "@pages/board/lib";
 import { routes } from "@shared/config";
 import {
 	resetBoard,
-	selectCurrentBoard,
+	selectBoardProp,
+	selectCurrentFaction,
 	useAppDispatch,
 	useAppSelector,
 	usePage,
@@ -19,9 +19,8 @@ export const DescriptionTopMenu = ({ ...props }: DescriptionTopMenuProps) => {
 	const dispatch = useAppDispatch();
 	const { t } = useAppTranslation();
 
-	const board = useAppSelector(selectCurrentBoard);
-	const { investigator } = board;
-	const { faction } = useFaction(board);
+	const investigator = useAppSelector(selectBoardProp("investigator"));
+	const faction = useAppSelector(selectCurrentFaction);
 
 	const goToPage = usePage();
 

@@ -1,6 +1,6 @@
 import {
 	decreaseCurrentStat,
-	selectCurrentBoard,
+	selectCurrentStatValue,
 	useAppDispatch,
 	useAppSelector,
 } from "@shared/lib";
@@ -13,7 +13,7 @@ import * as C from "./Clues.components";
 
 export const Clues = (props: ClueProps) => {
 	const dispatch = useAppDispatch();
-	const board = useAppSelector(selectCurrentBoard);
+	const value = useAppSelector(selectCurrentStatValue("clues"));
 	const onChange = useCallback(
 		({ value }: PickerChangeEvent) => {
 			dispatch(setCurrentStat("clues", value));
@@ -32,7 +32,7 @@ export const Clues = (props: ClueProps) => {
 	return (
 		<C.Container {...props}>
 			<C.Picker
-				value={board?.value.clues}
+				value={value}
 				data={range(0, 101)}
 				onValueChanged={onChange}
 				onLongPress={onLongPress}

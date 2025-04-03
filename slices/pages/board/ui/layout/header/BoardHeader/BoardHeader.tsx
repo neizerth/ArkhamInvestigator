@@ -1,12 +1,15 @@
 import { useInvestigatorTranslation } from "@features/i18n";
 import { LayoutContext } from "@pages/board/config";
-import { useFaction } from "@pages/board/lib";
 import {
-	selectCurrentBoard,
-	selectInvestigatorBoards,
+	selectBoardProp,
+	selectBoardsCount,
+	selectCurrentFaction,
+	toggleFactionSelect,
+	useAppDispatch,
 	useAppSelector,
 } from "@shared/lib";
-import { InvestigatorHeader } from "@widgets/game/investigator-header";
+import { selectAvailableFactions } from "@shared/lib/store/features/board/selectors/current/faction/selectAvailableFactions";
+import { InvestigatorHeaderMemo as InvestigatorHeader } from "@widgets/game/investigator-header";
 import type { RenderInvestigatorSkillItem } from "@widgets/game/investigator-skills";
 import { useCallback, useContext } from "react";
 import type { ViewProps } from "react-native";
@@ -15,15 +18,28 @@ import * as C from "./BoardHeader.components";
 export type BoardHeaderProps = ViewProps;
 
 export const BoardHeader = (props: BoardHeaderProps) => {
+	const dispatch = useAppDispatch();
 	const { layout } = useContext(LayoutContext);
-	const board = useAppSelector(selectCurrentBoard);
-	const single = useAppSelector(
-		(state) => selectInvestigatorBoards(state).length === 1,
-	);
-	const { investigator, isParallel, unique, id } = board;
-	const { faction, canChangeFaction, nextFaction } = useFaction(board);
+	const boardsCount = useAppSelector(selectBoardsCount);
+	const single = boardsCount === 1;
+
+	const investigator = useAppSelector(selectBoardProp("investigator"));
+	const isParallel = useAppSelector(selectBoardProp("isParallel"));
+	const unique = useAppSelector(selectBoardProp("unique"));
+	const id = useAppSelector(selectBoardProp("id"));
+	const faction = useAppSelector(selectCurrentFaction);
+	const availableFactions = useAppSelector(selectAvailableFactions);
+
+	const pressableTitle = availableFactions.length > 0;
 
 	const translate = useInvestigatorTranslation(investigator);
+
+	const onTitlePress = useCallback(() => {
+		if (!pressableTitle) {
+			return false;
+		}
+		dispatch(toggleFactionSelect());
+	}, [dispatch, pressableTitle]);
 
 	const [name, language] = translate("name");
 	const { subname = "" } = investigator;
@@ -35,8 +51,8 @@ export const BoardHeader = (props: BoardHeaderProps) => {
 	const titleProps = {
 		entityId: id,
 		parallel: isParallel,
-		pressableTitle: canChangeFaction,
-		onTitlePress: nextFaction,
+		pressableTitle,
+		onTitlePress,
 		name,
 		subname,
 		faction,

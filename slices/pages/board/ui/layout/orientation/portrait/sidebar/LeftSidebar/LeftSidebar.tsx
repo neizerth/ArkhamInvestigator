@@ -2,7 +2,7 @@ import { PortraitLayoutContext } from "@pages/board/config";
 import { InvestigatorSelect } from "@pages/board/ui/shared/features";
 import {
 	redo,
-	selectCurrentBoard,
+	selectBoardProps,
 	selectInvestigatorBoards,
 	setValueFromHistoryIndex,
 	undo,
@@ -18,10 +18,11 @@ export type LeftSidebarProps = ViewProps;
 export const LeftSidebar = ({ ...props }: LeftSidebarProps) => {
 	const dispatch = useAppDispatch();
 	const boards = useAppSelector(selectInvestigatorBoards);
-	const currentBoard = useAppSelector(selectCurrentBoard);
+	const { history, historyIndex } = useAppSelector(
+		selectBoardProps(["history", "historyIndex"]),
+	);
 	const { height } = useContext(PortraitLayoutContext);
-	const { historyIndex } = currentBoard;
-	const historyLength = currentBoard.history.length;
+	const historyLength = history.length;
 
 	const onUndo = useCallback(() => {
 		dispatch(undo());

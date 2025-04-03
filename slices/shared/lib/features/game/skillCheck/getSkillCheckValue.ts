@@ -14,7 +14,7 @@ const operatorMapping: Record<SkillCheckOperator, string> = {
 
 export type GetValueOptions = {
 	data: SkillCheckItem[];
-	value: InvestigatorBoardValues;
+	value?: InvestigatorBoardValues;
 };
 export const getSkillCheckValue = ({ data, value }: GetValueOptions) => {
 	const expression = getExpression(data);

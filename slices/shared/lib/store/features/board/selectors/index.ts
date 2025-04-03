@@ -1,3 +1,3 @@
 export * from "./selectBoardById";
 export * from "./current";
-export * from "./current/selectCurrentTurnEnd";
+export * from "./selectBoardsCount";

@@ -1,6 +1,6 @@
 import {
 	decreaseCurrentStat,
-	selectCurrentBoard,
+	selectBoardProps,
 	useAppDispatch,
 	useAppSelector,
 } from "@shared/lib";
@@ -15,7 +15,7 @@ export type ResourcesProps = ViewProps;
 
 export const Resources = ({ ...props }: ResourcesProps) => {
 	const dispatch = useAppDispatch();
-	const board = useAppSelector(selectCurrentBoard);
+	const board = useAppSelector(selectBoardProps(["value"]));
 	const value = board?.value;
 	const onChange = useCallback(
 		({ value }: PickerChangeEvent) => {

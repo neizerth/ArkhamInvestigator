@@ -1,6 +1,5 @@
-import { useFaction } from "@pages/board/lib";
 import type { PropsWithLayout } from "@pages/board/model";
-import { selectCurrentBoard, useAppSelector } from "@shared/lib";
+import { selectCurrentFaction, useAppSelector } from "@shared/lib";
 import type { Box } from "@shared/model";
 import type { ImageProps } from "react-native";
 import * as C from "./FactionBackground.components";
@@ -15,8 +14,7 @@ export const FactionBackground = ({
 	view,
 	...props
 }: FactionBackgroundProps) => {
-	const board = useAppSelector(selectCurrentBoard);
-	const { faction } = useFaction(board);
+	const faction = useAppSelector(selectCurrentFaction);
 
 	const background = images[faction];
 

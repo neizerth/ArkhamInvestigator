@@ -1,5 +1,7 @@
 import {
-	selectCurrentBoard,
+	selectBoardProp,
+	selectCurrentStatBaseValue,
+	selectCurrentStatValue,
 	selectShowAdditionalInformation,
 	setCurrentStat,
 	signedNumber,
@@ -24,11 +26,12 @@ const SKILL_RANGE = range(0, 21);
 
 export const Skill = ({ width, type, ...props }: SkillProps) => {
 	const dispatch = useAppDispatch();
-	const { value, baseValue, isParallel } = useAppSelector(selectCurrentBoard);
+	const value = useAppSelector(selectCurrentStatValue(type));
+	const baseValue = useAppSelector(selectCurrentStatBaseValue(type));
+	const isParallel = useAppSelector(selectBoardProp("isParallel"));
+
 	const showInfo = useAppSelector(selectShowAdditionalInformation);
 	const [touching, setTouching] = useState(false);
-	const skillValue = value[type];
-	const baseSkillValue = baseValue[type];
 
 	const style = getSkillStyle(width);
 
@@ -55,7 +58,7 @@ export const Skill = ({ width, type, ...props }: SkillProps) => {
 		(props: PickerItemInfo) => {
 			const { item } = props;
 
-			const diff = item - baseSkillValue;
+			const diff = item - baseValue;
 			const showDiff = diff !== 0 && touching;
 
 			const value = showInfo ? signedNumber(diff) : item;
@@ -66,7 +69,7 @@ export const Skill = ({ width, type, ...props }: SkillProps) => {
 				isParallel,
 				value,
 				signed: showInfo,
-				baseValue: baseSkillValue,
+				baseValue: baseValue,
 			});
 
 			return (
@@ -89,7 +92,7 @@ export const Skill = ({ width, type, ...props }: SkillProps) => {
 				</C.ValueContainer>
 			);
 		},
-		[width, baseSkillValue, isParallel, type, touching, showInfo],
+		[width, baseValue, isParallel, type, touching, showInfo],
 	);
 
 	const itemHeight = width * 1.7;
@@ -102,7 +105,7 @@ export const Skill = ({ width, type, ...props }: SkillProps) => {
 						renderItem={renderItem}
 						itemHeight={itemHeight}
 						data={SKILL_RANGE}
-						value={skillValue}
+						value={value}
 						onValueChanged={onChange}
 						onPress={openModal}
 						onPressIn={onPressIn}

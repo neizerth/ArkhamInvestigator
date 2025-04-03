@@ -1,6 +1,7 @@
 import { useStat } from "@pages/board/lib";
 import {
-	selectCurrentBoard,
+	selectCurrentStatBaseValue,
+	selectCurrentStatValue,
 	useAppDispatch,
 	useAppSelector,
 } from "@shared/lib";
@@ -14,8 +15,12 @@ export type ActionsProps = ViewProps;
 
 export const Actions = ({ ...props }: ActionsProps) => {
 	const dispatch = useAppDispatch();
-	const board = useAppSelector(selectCurrentBoard);
-	const { additionalAction } = board.value;
+	const additionalAction = useAppSelector(
+		selectCurrentStatValue("additionalAction"),
+	);
+	const haveAdditionalActions = useAppSelector(
+		selectCurrentStatBaseValue("additionalAction"),
+	);
 
 	const { value, baseValue, initialValue, onChange, onLongPress } =
 		useStat("actions");
@@ -47,7 +52,7 @@ export const Actions = ({ ...props }: ActionsProps) => {
 					onLongPress={onLongPress}
 				/>
 
-				{board.baseValue.additionalAction && (
+				{haveAdditionalActions && (
 					<C.AdditionalAction onPress={toggleAdditionalAction}>
 						<C.ActionIcon icon="investigator" />
 						{!additionalAction && <C.UsedAction icon="cross_c" />}
