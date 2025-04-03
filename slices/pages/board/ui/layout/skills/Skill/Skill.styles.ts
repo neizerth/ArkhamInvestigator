@@ -28,7 +28,8 @@ export const getSkillStyle = ({ box }: GetSkillStyleOptions) => {
 	};
 };
 
-type GetSkillValueStyleOptions = PropsWithBox & {
+type GetSkillValueStyleOptions = {
+	width: number;
 	type: SkillType;
 	isParallel?: boolean;
 	value: number | string;
@@ -41,9 +42,8 @@ export const getSkillValueStyle = ({
 	value,
 	isParallel,
 	signed,
-	box,
+	width,
 }: GetSkillValueStyleOptions) => {
-	const { width } = box;
 	const vw = width / 100;
 	const digitsCount = value.toString().length;
 

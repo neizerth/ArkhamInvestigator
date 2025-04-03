@@ -1,2 +1,1 @@
 export * from "./BoardSkills";
-export * from "./Skill";

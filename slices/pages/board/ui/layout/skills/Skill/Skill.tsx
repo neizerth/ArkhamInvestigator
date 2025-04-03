@@ -1,4 +1,3 @@
-import { SkillsContext } from "@pages/board/config";
 import {
 	selectCurrentBoard,
 	selectShowAdditionalInformation,
@@ -11,34 +10,39 @@ import {
 import type { InvestigatorSkillType } from "@shared/model";
 import type { PickerChangeEvent, PickerItemInfo } from "@widgets/picker";
 import { range } from "ramda";
-import { useCallback, useContext, useState } from "react";
+import { useCallback, useState } from "react";
 import type { ViewProps } from "react-native";
 import * as C from "./Skill.components";
 import { getSkillStyle, getSkillValueStyle } from "./Skill.styles";
 
 export type SkillProps = ViewProps & {
+	width: number;
+	height: number;
 	type: InvestigatorSkillType;
 };
 
 const SKILL_RANGE = range(0, 21);
 
-export const Skill = ({ type, ...props }: SkillProps) => {
-	const box = useContext(SkillsContext);
+export const Skill = ({ width, height, type, ...props }: SkillProps) => {
+	const box = {
+		width,
+		height,
+	};
 	const dispatch = useAppDispatch();
 	const { value, baseValue, isParallel } = useAppSelector(selectCurrentBoard);
 	const showInfo = useAppSelector(selectShowAdditionalInformation);
-	const [pressing, setPressing] = useState(false);
+	const [touching, setTouching] = useState(false);
 	const skillValue = value[type];
 	const baseSkillValue = baseValue[type];
 
 	const style = getSkillStyle({ box });
 
 	const onPressIn = useCallback(() => {
-		setPressing(true);
+		setTouching(true);
 	}, []);
 
 	const onPressOut = useCallback(() => {
-		setPressing(false);
+		setTouching(false);
 	}, []);
 
 	const openModal = useCallback(() => {
@@ -57,13 +61,13 @@ export const Skill = ({ type, ...props }: SkillProps) => {
 			const { item } = props;
 
 			const diff = item - baseSkillValue;
-			const showDiff = diff !== 0 && pressing;
+			const showDiff = diff !== 0 && touching;
 
 			const value = showInfo ? signedNumber(diff) : item;
 
 			const style = getSkillValueStyle({
 				type,
-				box,
+				width,
 				isParallel,
 				value,
 				signed: showInfo,
@@ -90,7 +94,7 @@ export const Skill = ({ type, ...props }: SkillProps) => {
 				</C.ValueContainer>
 			);
 		},
-		[box, baseSkillValue, isParallel, type, pressing, showInfo],
+		[width, baseSkillValue, isParallel, type, touching, showInfo],
 	);
 
 	const itemHeight = box.height * 0.8;
@@ -112,7 +116,7 @@ export const Skill = ({ type, ...props }: SkillProps) => {
 					/>
 				</C.ValueContainer>
 			</C.Row>
-			{pressing && <C.Background style={style.background} />}
+			{touching && <C.Background style={style.background} />}
 		</C.Container>
 	);
 };

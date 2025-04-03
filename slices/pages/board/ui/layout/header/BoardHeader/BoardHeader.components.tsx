@@ -1,6 +1,6 @@
 import { View } from "react-native";
 import styled from "styled-components/native";
-import { InvestigatorSkills } from "../../../layout/skills";
+import { BoardSkills } from "../../../layout/skills";
 import { InvestigatorTitleMemo as InvestigatorTitle } from "../BoardTitle";
 
 export const Container: typeof View = styled(View)`
@@ -15,7 +15,7 @@ export const Title: typeof InvestigatorTitle = styled(InvestigatorTitle).attrs({
 })`  
 `;
 
-export const Skills: typeof InvestigatorSkills = styled(InvestigatorSkills)`
+export const Skills: typeof BoardSkills = styled(BoardSkills)`
   position: relative;
   z-index: 2;
 `;

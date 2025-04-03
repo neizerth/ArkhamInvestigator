@@ -1,4 +1,3 @@
-import type { Box } from "@shared/model";
 import { createContext } from "react";
 import type { PropsWithLayout, PropsWithView } from "../model";
 
@@ -16,11 +15,6 @@ export const LayoutContext = createContext<LayoutContenxt>({
 		width: 0,
 		height: 0,
 	},
-});
-
-export const SkillsContext = createContext<Box>({
-	width: 0,
-	height: 0,
 });
 
 type PortraitLayoutContextData = {
