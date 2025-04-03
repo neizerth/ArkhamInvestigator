@@ -15,7 +15,7 @@ export const HEADER_HEIGHT = 107;
 
 export const headerGap = {
 	vertical: 20,
-	horizontal: 20,
+	horizontal: 15,
 };
 
 export const MAX_IMAGE_HEIGHT = 25; // 15vh

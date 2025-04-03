@@ -4,11 +4,11 @@ import {
 	InvestigatorTraits,
 } from "@pages/board/ui/shared/text";
 import { size } from "@shared/config";
+import { InvestigatorDescription } from "@widgets/game/investigator-description";
 import { Pressable, View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import Animated from "react-native-reanimated";
 import styled from "styled-components/native";
-import { FactionDescription } from "../../../../../shared/background";
 import { DescriptionMenu } from "../DescriptionMenu";
 import { DescriptionTopMenu } from "../DescriptionTopMenu";
 
@@ -17,7 +17,9 @@ export const Container: typeof View = styled(View)`
  
 `;
 
-export const Background: typeof FactionDescription = styled(FactionDescription)`
+export const Background: typeof InvestigatorDescription = styled(
+	InvestigatorDescription,
+)`
 
 `;
 

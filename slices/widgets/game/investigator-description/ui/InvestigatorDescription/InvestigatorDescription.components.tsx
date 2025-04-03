@@ -3,7 +3,7 @@ import type { FC } from "react";
 import { ImageBackground, type ImageBackgroundProps, View } from "react-native";
 import type { ViewProps } from "react-native";
 import styled, { css } from "styled-components/native";
-import { getFactionStyle } from "./FactionDescription.styles";
+import { getFactionStyle } from "./InvestigatorDescription.styles";
 
 export type BackgroundProps = ImageBackgroundProps & PropsWithBox;
 

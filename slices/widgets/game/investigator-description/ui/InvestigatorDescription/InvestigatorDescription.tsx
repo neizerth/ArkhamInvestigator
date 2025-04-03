@@ -1,19 +1,21 @@
 import { descriptionSize } from "@pages/board/config";
-import { useFaction } from "@pages/board/lib";
-import { selectCurrentBoard, useAppSelector } from "@shared/lib";
 import { getBoxByRatio } from "@shared/lib/util/size/box";
 import type { PropsWithFaction } from "@shared/model";
 import type { ImageBackgroundProps } from "react-native";
-import * as C from "./FactionDescription.components";
+import * as C from "./InvestigatorDescription.components";
 import { images } from "./images";
 
-export type FactionDescriptionProps = Omit<ImageBackgroundProps, "source"> &
+export type InvestigatorDescriptionProps = Omit<
+	ImageBackgroundProps,
+	"source"
+> &
 	PropsWithFaction;
 
-export const FactionDescription = ({
+export const InvestigatorDescription = ({
 	children,
+	faction,
 	...props
-}: FactionDescriptionProps) => {
+}: InvestigatorDescriptionProps) => {
 	const { width, height } = props;
 
 	const box = {
@@ -30,8 +32,6 @@ export const FactionDescription = ({
 		return null;
 	}
 
-	const board = useAppSelector(selectCurrentBoard);
-	const { faction } = useFaction(board);
 	const source = images[faction];
 
 	return (
