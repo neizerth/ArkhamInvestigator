@@ -7,7 +7,7 @@ import type { FC } from "react";
 import { View } from "react-native";
 import styled from "styled-components/native";
 import { BaseStatPicker, type DefinedBaseStatPickerProps } from "../common";
-import { StatPicker } from "../common/StatPicker";
+import { StatPickerMemo as StatPicker } from "../common/StatPicker";
 
 export const BaseContainer = withStat(UI.Health, {
 	ratio: gameAssets.health.ratio,
