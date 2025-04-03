@@ -1,25 +1,20 @@
 import { color } from "@shared/config";
-import type { PropsWithBox, SkillType } from "@shared/model";
+import type { SkillType } from "@shared/model";
 import type { TextStyle, ViewStyle } from "react-native";
 
-type GetSkillStyleOptions = PropsWithBox;
-
-export const getSkillStyle = ({ box }: GetSkillStyleOptions) => {
-	const { width } = box;
-	const vw = width / 100;
+export const getSkillStyle = (width: number) => {
+	const vw = width / 10;
 
 	const valueContainer: ViewStyle = {
-		paddingTop: 1 * vw,
-		paddingLeft: 1 * vw,
-		width: 10 * vw,
+		paddingTop: vw,
+		paddingLeft: vw,
+		width,
 	};
 	const background: ViewStyle = {
 		borderRadius: 7 * vw,
 	};
 
-	const container: ViewStyle = {
-		height: box.height * 0.9,
-	};
+	const container: ViewStyle = {};
 
 	return {
 		container,
@@ -44,7 +39,7 @@ export const getSkillValueStyle = ({
 	signed,
 	width,
 }: GetSkillValueStyleOptions) => {
-	const vw = width / 100;
+	const vw = width / 10;
 	const digitsCount = value.toString().length;
 
 	const textColor = isParallel ? color.white : color.text;

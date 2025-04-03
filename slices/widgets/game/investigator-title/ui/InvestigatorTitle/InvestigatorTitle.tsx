@@ -7,20 +7,23 @@ import { getTitleStyle } from "./InvestigatorTitle.styles";
 import { images } from "./images";
 
 export type InvestigatorTitleProps = Omit<ImageBackgroundProps, "source"> &
-	PropsWithFaction & {
+	InvestigatoTitleBaseProps & {
 		contentContainerStyle?: ViewStyle;
-		entityId: number;
-		single: boolean;
-		parallel: boolean;
-		unique: boolean;
-		name: string;
-		subname: string;
-		language: string;
-		width: number;
-		height: number;
 		onPress?: () => void;
 		pressable?: boolean;
+		width: number;
+		height: number;
 	};
+
+export type InvestigatoTitleBaseProps = PropsWithFaction & {
+	entityId: number;
+	single: boolean;
+	parallel: boolean;
+	unique: boolean;
+	name: string;
+	subname: string;
+	language: string;
+};
 
 export const InvestigatorTitle = (props: InvestigatorTitleProps) => {
 	const {
