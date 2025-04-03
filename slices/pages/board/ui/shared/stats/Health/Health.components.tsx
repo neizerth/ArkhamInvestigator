@@ -30,14 +30,14 @@ export const BaseHealth: FC<DefinedBaseStatPickerProps> = styled(
 	statType: "health",
 	valueStyle: {
 		color: color.health,
-		fontSize: 30,
+		fontSize: 42,
 	},
 	itemHeight: assetsSize.main,
 	contentContainerStyle: {
 		position: "absolute",
 		zIndex: 4,
-		right: -30,
-		top: -45,
+		right: -25,
+		top: -40,
 	},
 	gap: 5,
 })`

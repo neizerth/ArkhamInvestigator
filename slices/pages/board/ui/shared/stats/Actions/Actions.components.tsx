@@ -46,7 +46,7 @@ export const BaseActions: FC<DefinedBaseStatPickerProps> = styled(
 	statType: "actions",
 	valueStyle: {
 		color: color.action,
-		fontSize: 30,
+		fontSize: 42,
 	},
 	itemHeight: assetsSize.main,
 	contentContainerStyle: {

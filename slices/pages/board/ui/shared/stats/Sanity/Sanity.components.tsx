@@ -30,14 +30,14 @@ export const BaseSanity: FC<DefinedBaseStatPickerProps> = styled(
 	statType: "sanity",
 	valueStyle: {
 		color: color.sanity,
-		fontSize: 30,
+		fontSize: 42,
 	},
 	itemHeight: assetsSize.main,
 	contentContainerStyle: {
 		position: "absolute",
 		zIndex: 5,
 		right: 0,
-		top: -45,
+		top: -42,
 	},
 	gap: 5,
 })`
