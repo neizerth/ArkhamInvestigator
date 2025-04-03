@@ -89,7 +89,10 @@ export const useScrollBack = (props: BaseListProps) => {
 		if (offset.current > lastOffset) {
 			scrollToEnd();
 		}
-	}, [onPressOutProp, lastOffset, scrollToEnd]);
+		if (offset.current < 0) {
+			scrollToStart();
+		}
+	}, [onPressOutProp, lastOffset, scrollToEnd, scrollToStart]);
 
 	const onScroll = useCallback(
 		(e: PickerScrollEvent) => {

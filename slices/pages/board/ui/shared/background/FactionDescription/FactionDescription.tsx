@@ -30,8 +30,8 @@ export const FactionDescription = ({
 		return null;
 	}
 
-	const { investigator } = useAppSelector(selectCurrentBoard);
-	const { faction } = useFaction();
+	const board = useAppSelector(selectCurrentBoard);
+	const { faction } = useFaction(board);
 	const source = images[faction];
 
 	return (

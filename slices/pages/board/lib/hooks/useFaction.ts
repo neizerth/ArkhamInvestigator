@@ -1,15 +1,9 @@
-import {
-	selectCurrentBoard,
-	setCurrentBoard,
-	useAppDispatch,
-	useAppSelector,
-} from "@shared/lib";
-import type { Faction } from "@shared/model";
+import { setCurrentBoard, useAppDispatch } from "@shared/lib";
+import type { Faction, InvestigatorBoard } from "@shared/model";
 import { useCallback } from "react";
 
-export const useFaction = () => {
+export const useFaction = (board: InvestigatorBoard) => {
 	const dispatch = useAppDispatch();
-	const board = useAppSelector(selectCurrentBoard);
 
 	const defaultFaction = board?.investigator.faction_code as Faction;
 

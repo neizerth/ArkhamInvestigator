@@ -1,4 +1,3 @@
-import type { PropsWithView } from "@pages/board/model";
 import { color, font } from "@shared/config";
 import { Arkhamic, STXinwei } from "@shared/fonts";
 import { ArnoPro } from "@shared/fonts";
@@ -10,11 +9,11 @@ import type { PropsWithFaction } from "@shared/model";
 import { mergeDeepRight } from "ramda";
 import type { TextStyle, ViewStyle } from "react-native";
 
-type GetTitleStyleOptions = PropsWithView &
-	PropsWithFaction & {
-		language?: string;
-		isParallel?: boolean;
-	};
+type GetTitleStyleOptions = PropsWithFaction & {
+	height: number;
+	language?: string;
+	parallel?: boolean;
+};
 
 type ReturnStyle = {
 	container: ViewStyle;
@@ -27,9 +26,9 @@ type ReturnStyle = {
 };
 
 export const getTitleStyle = (options: GetTitleStyleOptions) => {
-	const { view, language, faction, isParallel } = options;
-	const vh = view.height / 100;
-	const textColor = isParallel ? color.white : color.text;
+	const { height, language, faction, parallel } = options;
+	const vh = height / 100;
+	const textColor = parallel ? color.white : color.text;
 
 	const zhConfig = {
 		titleText: {
@@ -170,4 +169,10 @@ export const getTitleStyle = (options: GetTitleStyleOptions) => {
 		mergeDeepRight(base, localeStyle),
 		factionStyle,
 	) as ReturnStyle;
+};
+
+export const titleStyle = {
+	width: 618,
+	height: 107,
+	ratio: 618 / 107,
 };

@@ -23,8 +23,8 @@ export const FooterDescription = ({ ...props }: FooterDescriptionProps) => {
 
 	const { view } = useContext(LayoutContext);
 	const board = useAppSelector(selectCurrentBoard);
-	const investigator = board?.investigator;
-	const { faction } = useFaction();
+	const { investigator } = board;
+	const { faction } = useFaction(board);
 
 	const impactShowFeedback = useHapticFeedback("clockTick");
 

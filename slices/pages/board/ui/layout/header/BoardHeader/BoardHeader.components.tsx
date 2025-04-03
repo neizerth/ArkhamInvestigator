@@ -1,7 +1,7 @@
 import { View } from "react-native";
 import styled from "styled-components/native";
 import { InvestigatorSkills } from "../../../layout/skills";
-import { InvestigatorTitle } from "../InvestigatorTitle";
+import { InvestigatorTitleMemo as InvestigatorTitle } from "../BoardTitle";
 
 export const Container: typeof View = styled(View)`
   position: relative;

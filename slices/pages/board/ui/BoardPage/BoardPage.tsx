@@ -13,7 +13,9 @@ import { useWindowDimensions } from "react-native";
 import * as C from "./BoardPage.components";
 
 export const BoardPage = () => {
-	const board = useAppSelector(selectCurrentBoard);
+	const isBoardExists = useAppSelector(
+		(state) => selectCurrentBoard(state) !== null,
+	);
 	const window = useWindowDimensions();
 	const orientation = useScreenOrientation();
 	const showDescription = useAppSelector(selectShowDescription);
@@ -33,7 +35,7 @@ export const BoardPage = () => {
 
 	return (
 		<LayoutContext.Provider value={contextValue}>
-			{board && (
+			{isBoardExists && (
 				<C.Container onLayout={onLayout}>
 					<C.Header layout={layout} descriptionShown={showDescription} />
 					<C.Background />

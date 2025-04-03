@@ -8,8 +8,9 @@ type ImagesSource = {
 };
 
 export const useFactionImage = (imagesSource: ImagesSource) => {
-	const { isParallel } = useAppSelector(selectCurrentBoard);
-	const { faction } = useFaction();
+	const board = useAppSelector(selectCurrentBoard);
+	const { isParallel } = board;
+	const { faction } = useFaction(board);
 
 	const images = isParallel ? imagesSource.parallel : imagesSource.default;
 	const source = images[faction];

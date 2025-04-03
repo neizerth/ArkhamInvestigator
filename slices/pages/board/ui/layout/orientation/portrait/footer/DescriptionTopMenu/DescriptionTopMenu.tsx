@@ -19,8 +19,9 @@ export const DescriptionTopMenu = ({ ...props }: DescriptionTopMenuProps) => {
 	const dispatch = useAppDispatch();
 	const { t } = useAppTranslation();
 
-	const { faction } = useFaction();
-	const { investigator } = useAppSelector(selectCurrentBoard);
+	const board = useAppSelector(selectCurrentBoard);
+	const { investigator } = board;
+	const { faction } = useFaction(board);
 
 	const goToPage = usePage();
 

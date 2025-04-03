@@ -3,7 +3,7 @@ import { ArnoPro, STKaiti, STXinwei } from "@shared/fonts";
 import { SanCn } from "@shared/fonts";
 import { Yoon } from "@shared/fonts";
 import { type KeyConfig, getKeyConfig } from "@shared/lib";
-import type { ComponentStyleMap } from "@widgets/game-text";
+import type { ComponentStyleMap } from "@widgets/game/game-text";
 import type { TextStyle } from "react-native";
 
 const zhComponentStyles: ComponentStyleMap = {
