@@ -2,12 +2,12 @@ import { assetsSize } from "@pages/board/config";
 import { withStat } from "@pages/board/lib/hoc/withStat";
 import { color, gameAssets } from "@shared/config";
 import * as UI from "@shared/ui";
+import { Value as BaseValue } from "@widgets/investigator/value";
 import type { FC } from "react";
 import { View } from "react-native";
 import styled from "styled-components/native";
 import { BaseStatPicker, type DefinedBaseStatPickerProps } from "../common";
 import { StatPicker } from "../common/StatPicker";
-import { Value as BaseValue } from "../common/Value";
 
 export const BaseContainer = withStat(UI.Health, {
 	ratio: gameAssets.health.ratio,

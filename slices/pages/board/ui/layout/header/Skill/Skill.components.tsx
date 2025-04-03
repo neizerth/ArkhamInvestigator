@@ -1,6 +1,6 @@
-import { Value as BaseValue } from "@pages/board/ui/shared";
 import { color } from "@shared/config";
 import { Row as BaseRow, IconNumber } from "@shared/ui";
+import { Value as BaseValue } from "@widgets/investigator/value";
 import { PickerMemo as BasePicker } from "@widgets/picker";
 import { Pressable, View } from "react-native";
 import styled from "styled-components/native";

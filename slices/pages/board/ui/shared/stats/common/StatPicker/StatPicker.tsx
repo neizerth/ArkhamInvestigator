@@ -1,6 +1,6 @@
+import type { ValueProps } from "@widgets/investigator/value";
 import type { PickerItemInfo, PickerProps } from "@widgets/picker";
 import { type FC, memo, useCallback } from "react";
-import type { ValueProps } from "../Value";
 import * as C from "./StatPicker.components";
 import { defaultStyles } from "./StatPicker.styles";
 

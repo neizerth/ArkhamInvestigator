@@ -5,8 +5,6 @@ import styled from "styled-components/native";
 export const Container: typeof View = styled(View)`
 `;
 
-export const Value: typeof IconNumber = styled(IconNumber).attrs({
-	stroke: true,
-})`
-    color: white;
-  `;
+export const Value: typeof IconNumber = styled(IconNumber)`
+  color: white;
+`;

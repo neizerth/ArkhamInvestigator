@@ -8,7 +8,7 @@ export type ValueProps = IconNumberProps & {
 	containerStyle?: ViewProps["style"];
 };
 
-export const Value = ({ ...props }: ValueProps) => {
+export const Value = ({ stroke = true, ...props }: ValueProps) => {
 	const { value } = props;
 	const { color, fontSize } = StyleSheet.flatten(props.style);
 
@@ -27,6 +27,7 @@ export const Value = ({ ...props }: ValueProps) => {
 				{...props}
 				style={[props.style, valueStyle, fontStyle]}
 				strokeStyle={[strokeStyle, props.strokeStyle, fontStyle]}
+				stroke={stroke}
 			/>
 		</C.Container>
 	);
