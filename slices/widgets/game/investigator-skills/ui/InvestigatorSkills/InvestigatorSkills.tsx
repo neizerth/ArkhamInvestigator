@@ -16,6 +16,7 @@ export type InvestigatorSkillsProps = ViewProps &
 export type RenderInvestigatorSkillItem = {
 	type: InvestigatorSkillType;
 	width: number;
+	height: number;
 };
 
 export type InvestigatorBaseSkillsProps = PropsWithFaction & {
@@ -44,9 +45,10 @@ export const InvestigatorSkills = ({
 			return renderSkillProp({
 				type,
 				width: width / 10,
+				height: height * 0.85,
 			});
 		},
-		[width, renderSkillProp],
+		[width, renderSkillProp, height],
 	);
 
 	return (

@@ -22,12 +22,13 @@ import { getSkillStyle, getSkillValueStyle } from "./Skill.styles";
 
 export type SkillProps = ViewProps & {
 	width: number;
+	height: number;
 	type: InvestigatorSkillType;
 };
 
 const SKILL_RANGE = range(0, 21);
 
-export const Skill = ({ width, type, ...props }: SkillProps) => {
+export const Skill = ({ width, height, type, ...props }: SkillProps) => {
 	const dispatch = useAppDispatch();
 	const value = useAppSelector(selectCurrentStatValue(type));
 	const baseValue = useAppSelector(selectCurrentStatBaseValue(type));
@@ -98,7 +99,7 @@ export const Skill = ({ width, type, ...props }: SkillProps) => {
 		[width, baseValue, isParallel, type, touching, showInfo],
 	);
 
-	const itemHeight = width * 1.65;
+	const itemHeight = height;
 
 	return (
 		<C.Container {...props}>

@@ -33,14 +33,14 @@ export const RuleContainer: typeof View = styled(View)`
   left: ${cornerOffset}px;
   right: ${cornerOffset}px;
   overflow: hidden;
-  bottom: 1.5px;
+  bottom: 1.8px;
 `;
 
 export const Rule: typeof Image = styled(Image).attrs({
 	source: rule,
 	tintColor: ruleColor,
 })`
-  height: 1.9px;
+  height: 1.5px;
 `;
 
 export const SeparatorDecoration: typeof Image = styled(Image).attrs({
