@@ -6,6 +6,7 @@ import styled from "styled-components/native";
 
 export const Container: typeof TouchableOpacity = styled(TouchableOpacity)`
   position: relative;
+  align-items: center;
 `;
 
 export const Faction: typeof FactionIconImage = styled(FactionIconImage)`
@@ -15,10 +16,11 @@ export const Faction: typeof FactionIconImage = styled(FactionIconImage)`
 export const Neutral: typeof View = styled(View)`
   justify-content: center;
   align-items: center;
+  width: 50px;
 `;
 export const NeutralIcon: typeof Icon = styled(Icon)`
   color: ${color.light10};
-  font-size: 37px;
-  line-height: 47px;
+  font-size: 42px;
+  line-height: 50px;
   text-align: center;
 `;

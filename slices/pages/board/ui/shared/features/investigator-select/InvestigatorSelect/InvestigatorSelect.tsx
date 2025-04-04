@@ -10,7 +10,7 @@ import type {
 	PickerItemInfo,
 } from "@widgets/control/picker";
 import { prop } from "ramda";
-import { useCallback, useMemo } from "react";
+import { useCallback, useMemo, useState } from "react";
 import type { ViewProps } from "react-native";
 import * as C from "./InvestigatorSelect.components";
 
@@ -24,6 +24,7 @@ export const InvestigatorSelect = ({ ...props }: InvestigatorSelectProps) => {
 	const currentIndex = index || 0;
 	const nextIndex = (currentIndex + 1) % boards.length;
 	const prevIndex = currentIndex === 0 ? boards.length - 1 : currentIndex - 1;
+	const [scrollIndex, setScrollIndex] = useState(currentIndex);
 
 	const renderItem = useCallback((props: PickerItemInfo) => {
 		const { item } = props;
@@ -50,12 +51,16 @@ export const InvestigatorSelect = ({ ...props }: InvestigatorSelectProps) => {
 		dispatch(setCurrentInvestigatorIndex(prevIndex));
 	}, [dispatch, prevIndex]);
 
+	const onValueChanging = (item: PickerChangeEvent) => {
+		setScrollIndex(item.index);
+	};
+
 	const data = useMemo(() => boards.map(prop("id")), [boards]);
 
 	const value = data[currentIndex];
 
-	const showDown = index !== 0;
-	const showUp = index !== boards.length - 1;
+	const showDown = scrollIndex !== 0;
+	const showUp = scrollIndex !== boards.length - 1;
 
 	return (
 		<C.Container {...props}>
@@ -69,6 +74,7 @@ export const InvestigatorSelect = ({ ...props }: InvestigatorSelectProps) => {
 				value={value}
 				renderItem={renderItem}
 				onValueChanged={onChange}
+				onValueChanging={onValueChanging}
 				onPress={next}
 			/>
 			{showDown && (
