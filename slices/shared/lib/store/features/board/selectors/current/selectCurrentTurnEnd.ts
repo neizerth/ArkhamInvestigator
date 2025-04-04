@@ -1,7 +1,7 @@
 import { createSelector } from "@reduxjs/toolkit";
 import { getIsTurnEnd } from "@shared/lib/features";
-import { selectCurrentBoard } from ".";
 import { selectEndTurnStrict } from "../../board";
+import { selectCurrentBoard } from "./selectCurrentBoard";
 
 export const selectCurrentTurnEnd = createSelector(
 	[selectEndTurnStrict, selectCurrentBoard],
