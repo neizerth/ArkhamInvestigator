@@ -3,7 +3,7 @@ import { InvestigatorPreviewMemo as InvestigatorPreview } from "@widgets/investi
 import { memo, useCallback } from "react";
 import { CARD_SIZE } from "../../../config";
 import { UnselectedDetail } from "../UnselectedDetail";
-import { Container, List } from "./DetailSelect.components";
+import * as C from "./DetailSelect.components";
 
 export type DetailSelectProps = {
 	data: Item[];
@@ -28,8 +28,8 @@ export const DetailSelect = ({
 		item.id === selected?.id || (item.value === null && selected === null);
 
 	return (
-		<Container>
-			<List horizontal>
+		<C.Container>
+			<C.List horizontal>
 				{showNone && (
 					<UnselectedDetail
 						selected={selected === null}
@@ -49,8 +49,8 @@ export const DetailSelect = ({
 						showIcon={showIcon}
 					/>
 				))}
-			</List>
-		</Container>
+			</C.List>
+		</C.Container>
 	);
 };
 

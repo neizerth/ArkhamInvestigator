@@ -33,7 +33,7 @@ export const StartButton = () => {
 		dispatch(replaceInvestigator());
 	}, [dispatch, code]);
 
-	const onStart = usePageLoader(start);
+	const [onStart] = usePageLoader(start);
 
 	const title = t(code ? "Continue" : "Start");
 

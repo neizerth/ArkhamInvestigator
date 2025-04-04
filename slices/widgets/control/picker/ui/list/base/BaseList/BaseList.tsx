@@ -50,7 +50,6 @@ export const BaseList = (baseProps: BaseListProps) => {
 		}),
 		[itemHeight],
 	);
-
 	return (
 		<C.List
 			{...props}

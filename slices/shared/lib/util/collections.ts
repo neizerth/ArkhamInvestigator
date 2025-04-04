@@ -14,3 +14,14 @@ export const safeIndexOf = <T>(item: T | undefined, data: T[]) =>
 
 export const arrayIf = <T>(condition: boolean, item: T) =>
 	condition ? [item] : [];
+
+export const splitIntoGroups = <T>(
+	data: readonly T[],
+	groupSize: number,
+): T[][] => {
+	const groups: T[][] = [];
+	for (let i = 0; i < data.length; i += groupSize) {
+		groups.push(data.slice(i, i + groupSize));
+	}
+	return groups;
+};

@@ -9,8 +9,8 @@ import * as C from "./FactionSelect.components";
 export type FactionSelectValue = Faction | "spoiler";
 
 export type FactionSelectProps = ViewProps & {
-	onChange?: (value: FactionFilterType | null) => void;
-	value?: FactionFilterType | null;
+	onChange?: (value: FactionFilterType) => void;
+	value?: FactionFilterType;
 };
 
 const values: FactionFilterType[] = [...FACTION_SELECT_VALUES, "spoiler"];
@@ -40,8 +40,7 @@ export const FactionSelect = ({
 				return false;
 			}
 			if (item === value) {
-				onChange(null);
-				return;
+				return false;
 			}
 			if (item === "spoiler") {
 				showSpilerAlert();

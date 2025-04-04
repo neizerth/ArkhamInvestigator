@@ -1,6 +1,6 @@
 import { View } from "react-native";
 import styled from "styled-components/native";
-import { PickerList } from "../list";
+import { PickerListMemo as PickerList } from "../list";
 
 export const Container = styled(View)`
   width: 100%;

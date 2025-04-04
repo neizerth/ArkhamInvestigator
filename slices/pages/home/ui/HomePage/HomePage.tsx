@@ -15,7 +15,9 @@ export const HomePage = () => {
 	const dispatch = useAppDispatch();
 	const { t } = useAppTranslation();
 
-	const oldGame = useAppSelector((state) => Boolean(selectCurrentBoard(state)));
+	const previousGames = useAppSelector((state) =>
+		Boolean(selectCurrentBoard(state)),
+	);
 
 	const start = useCallback(() => {
 		dispatch(startNewGame());
@@ -24,14 +26,14 @@ export const HomePage = () => {
 	const goToPage = usePage();
 	const resume = goToPage(routes.board);
 
-	const onStart = usePageLoader(start);
-	const onResume = usePageLoader(resume);
+	const [onStart] = usePageLoader(start);
+	const [onResume] = usePageLoader(resume);
 
 	return (
 		<C.Container>
 			<C.Menu />
 			<Button onPress={onStart}>{t`New Game`}</Button>
-			{oldGame && (
+			{previousGames && (
 				<C.ResumeButton onPress={onResume}>{t`Continue`}</C.ResumeButton>
 			)}
 			<C.Disclaimer>

@@ -8,7 +8,7 @@ import {
 } from "@shared/lib";
 
 export const startNewGame: ActionCreator<AppThunk> = () => (dispatch) => {
-	dispatch(goToPage(routes.selectInvestigators));
 	dispatch(setSelectedInvestigators([]));
 	dispatch(setInvestigatorBoards([]));
+	dispatch(goToPage(routes.selectInvestigators));
 };

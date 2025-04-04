@@ -1,5 +1,5 @@
-import { useFactionImage } from "@pages/board/lib";
-import type { InvestigatorSkillType } from "@shared/model";
+import { getFactionImage } from "@shared/lib";
+import type { InvestigatorSkillType, PropsWithFaction } from "@shared/model";
 import type React from "react";
 import { useCallback } from "react";
 import type { ViewProps } from "react-native";
@@ -18,17 +18,24 @@ export type RenderInvestigatorSkillItem = {
 	width: number;
 };
 
-export type InvestigatorBaseSkillsProps = {
+export type InvestigatorBaseSkillsProps = PropsWithFaction & {
+	parallel: boolean;
 	renderSkill: (item: RenderInvestigatorSkillItem) => React.ReactElement;
 };
 
 export const InvestigatorSkills = ({
 	width,
 	height,
+	parallel,
+	faction,
 	renderSkill: renderSkillProp,
 	...props
 }: InvestigatorSkillsProps) => {
-	const source = useFactionImage(images);
+	const source = getFactionImage({
+		images,
+		parallel,
+		faction,
+	});
 
 	const skillsStyle = getSkillsStyle(width);
 
