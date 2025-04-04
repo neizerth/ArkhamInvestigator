@@ -95,7 +95,7 @@ export const Skill = ({ width, type, ...props }: SkillProps) => {
 		[width, baseValue, isParallel, type, touching, showInfo],
 	);
 
-	const itemHeight = width * 1.7;
+	const itemHeight = width * 1.65;
 
 	return (
 		<C.Container {...props}>

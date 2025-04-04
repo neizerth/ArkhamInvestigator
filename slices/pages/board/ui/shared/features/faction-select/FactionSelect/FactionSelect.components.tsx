@@ -19,12 +19,13 @@ export const Container: typeof View = styled(View)`
 
 export const Content: typeof View = styled(View)`
   padding: 0px ${size.gap.large}px;
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(0, 0, 0, 0.5);
   border-radius: ${size.gap.large}px;
   flex-direction: row;
   align-items: center;
   justify-content: center;
   gap: ${size.gap.default}px;
+  max-height: 85px;
 `;
 
 export const Button: typeof FactionSelectButton = styled(FactionSelectButton)`

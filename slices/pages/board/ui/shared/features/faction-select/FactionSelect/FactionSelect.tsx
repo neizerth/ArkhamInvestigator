@@ -1,3 +1,4 @@
+import { useHapticFeedback } from "@features/haptic";
 import {
 	selectCurrentFaction,
 	selectShowFactionSelect,
@@ -20,17 +21,19 @@ export const FactionSelect = (props: FactionSelectProps) => {
 	const display = useAppSelector(selectShowFactionSelect);
 	const factions = useAppSelector(selectAvailableFactions);
 	const selected = useAppSelector(selectCurrentFaction);
+	const impactFeedback = useHapticFeedback("clockTick");
 
 	const hide = useCallback(() => {
 		dispatch(setShowFactionSelect(false));
-	}, [dispatch]);
+		impactFeedback();
+	}, [dispatch, impactFeedback]);
 
 	const onPress = useCallback(
 		(faction: Faction) => () => {
-			hide();
+			dispatch(setShowFactionSelect(false));
 			dispatch(setCurrentBoardProp("currentRole", faction));
 		},
-		[dispatch, hide],
+		[dispatch],
 	);
 
 	if (!display) {

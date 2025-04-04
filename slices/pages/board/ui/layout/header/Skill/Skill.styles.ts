@@ -84,8 +84,8 @@ export const getSkillValueStyle = ({
 		color: color.skill[type].light,
 	};
 	const diffContainer: ViewStyle = {
-		top: (4 * vw - diffFontSize) / 2,
-		right: -vw * 2.3,
+		top: (5.9 * vw - diffFontSize) / 2,
+		right: -vw * 1.5,
 	};
 
 	return {
