@@ -1,4 +1,4 @@
-import { HapticSelect, type HapticSelectProps } from "@features/haptic";
+import type { HapticSelectProps } from "@features/haptic";
 import { useAppTranslation } from "@features/i18n";
 import type { ActionCreatorWithPayload, Selector } from "@reduxjs/toolkit";
 import {
@@ -10,14 +10,18 @@ import {
 import type { SelectItem } from "@shared/ui";
 import { propEq } from "ramda";
 import { useCallback } from "react";
+import type { ViewStyle } from "react-native";
+import * as C from "./StoreSelect.components";
 
 export type StoreSelectProps<T> = Omit<
 	HapticSelectProps<T>,
 	"onChange" | "value"
 > & {
+	selectStyle?: ViewStyle;
 	selector: Selector<RootState, T>;
 	actionCreator: ActionCreatorWithPayload<T> | ((value: T) => AppThunk);
 	translate?: boolean;
+	label?: string;
 };
 
 export function StoreSelect<T>({
@@ -25,6 +29,8 @@ export function StoreSelect<T>({
 	actionCreator,
 	data,
 	translate = true,
+	selectStyle,
+	style,
 	...props
 }: StoreSelectProps<T>) {
 	const { t } = useAppTranslation();
@@ -44,7 +50,18 @@ export function StoreSelect<T>({
 		[dispatch, actionCreator],
 	);
 
+	const label = translate ? t(props.label || "") : props.label;
+
 	return (
-		<HapticSelect {...props} data={items} value={item} onChange={onChange} />
+		<C.Container style={style}>
+			<C.Label>{label}</C.Label>
+			<C.Select
+				{...props}
+				style={selectStyle}
+				data={items}
+				value={item}
+				onChange={onChange}
+			/>
+		</C.Container>
 	);
 }

@@ -9,7 +9,7 @@ import {
 	PortraitLayout as BasePortraitLayout,
 	type PortraitLayoutProps as BasePortraitLayoutProps,
 } from "../layout";
-import { InvestigatorImage } from "../layout/InvestigatorImage";
+import { InvestigatorImage } from "../layout/investigator-image/InvestigatorImage";
 
 export const Container: typeof View = styled(View)`
   flex: 1;

@@ -1,5 +1,5 @@
 import { LayoutContext } from "@pages/board/config";
-import { getPortraitLayout, useInvestigatorImageStyle } from "@pages/board/lib";
+import { getPortraitLayout } from "@pages/board/lib";
 import {
 	selectBoardProp,
 	useAppSelector,
@@ -7,11 +7,14 @@ import {
 } from "@shared/lib";
 import { memo, useContext } from "react";
 import type { ViewProps } from "react-native";
-import * as C from "./PortraitImage.components";
+import * as C from "./InvestigatorImageBackground.components";
+import { useInvestigatorImageStyle } from "./useInvestigatorImageStyle";
 
-export type PortraitImageProps = ViewProps;
+export type InvestigatorImageBackgroundProps = ViewProps;
 
-export const PortraitImage = ({ ...props }: PortraitImageProps) => {
+export const InvestigatorImageBackground = ({
+	...props
+}: InvestigatorImageBackgroundProps) => {
 	const { view, layout } = useContext(LayoutContext);
 
 	const picture = useAppSelector(selectBoardProp("picture"));
@@ -42,4 +45,6 @@ export const PortraitImage = ({ ...props }: PortraitImageProps) => {
 	);
 };
 
-export const PortraitImageMemo = memo(PortraitImage);
+export const InvestigatorImageBackgroundMemo = memo(
+	InvestigatorImageBackground,
+);

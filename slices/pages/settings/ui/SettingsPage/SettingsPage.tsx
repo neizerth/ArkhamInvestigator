@@ -4,7 +4,12 @@ import {
 	selectLanguage,
 	useAppTranslation,
 } from "@features/i18n";
-import { selectEndTurnStrict, setEndTurnStrict } from "@shared/lib";
+import {
+	selectEndTurnStrict,
+	selectShowDamageAndHorrorEffects,
+	setEndTurnStrict,
+	setShowDamageAndHorrorEffects,
+} from "@shared/lib";
 import { Title } from "@shared/ui";
 import { ContentPage } from "@widgets/content-page";
 import * as C from "./SettingsPage.components";
@@ -17,16 +22,16 @@ export const SettingsPage = () => {
 		<ContentPage title={t`Settings`}>
 			<C.Content>
 				<C.Row>
-					<C.Label>{t`Language`}</C.Label>
 					<C.Select
+						label="Language"
 						selector={selectLanguage}
 						actionCreator={changeLanguage}
 						data={languageValues}
 					/>
 				</C.Row>
 				<C.Row>
-					<C.Label>{t`Haptic`}</C.Label>
 					<C.Select
+						label="Haptic"
 						selector={selectHapticMode}
 						actionCreator={setHapticMode}
 						data={hapticValues}
@@ -34,11 +39,18 @@ export const SettingsPage = () => {
 				</C.Row>
 				<Title>{t`Game settings`}</Title>
 				<C.Row>
-					<C.Label>{t`Turn end`}</C.Label>
 					<C.Select
+						label="Turn end"
 						selector={selectEndTurnStrict}
 						actionCreator={setEndTurnStrict}
 						data={turnEndValues}
+					/>
+				</C.Row>
+				<C.Row>
+					<C.Checkbox
+						label="Damage/Horror animation"
+						selector={selectShowDamageAndHorrorEffects}
+						actionCreator={setShowDamageAndHorrorEffects}
 					/>
 				</C.Row>
 			</C.Content>
