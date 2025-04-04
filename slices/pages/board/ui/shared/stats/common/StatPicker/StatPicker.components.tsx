@@ -1,8 +1,8 @@
+import { PickerMemo as BasePicker } from "@widgets/control/picker";
 import {
 	ValueMemo as BaseValue,
 	type ValueProps as BaseValueProps,
 } from "@widgets/investigator/value";
-import { PickerMemo as BasePicker } from "@widgets/picker";
 import type { FC } from "react";
 import { View } from "react-native";
 import styled from "styled-components/native";

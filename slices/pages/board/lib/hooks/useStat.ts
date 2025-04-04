@@ -9,7 +9,7 @@ import {
 	useAppSelector,
 } from "@shared/lib";
 import type { InvestigatorBoardStat } from "@shared/model";
-import type { PickerChangeEvent } from "@widgets/picker";
+import type { PickerChangeEvent } from "@widgets/control/picker";
 import { useCallback } from "react";
 
 export const useStat = (statType: InvestigatorBoardStat) => {

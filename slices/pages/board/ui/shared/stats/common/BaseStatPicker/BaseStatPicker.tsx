@@ -8,7 +8,7 @@ import {
 	useAppSelector,
 } from "@shared/lib";
 import type { InvestigatorBoardStat } from "@shared/model";
-import type { PickerChangeEvent } from "@widgets/picker";
+import type { PickerChangeEvent } from "@widgets/control/picker";
 import { range } from "ramda";
 import { useCallback, useMemo } from "react";
 import type { ViewStyle } from "react-native";

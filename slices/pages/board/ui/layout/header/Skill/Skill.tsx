@@ -10,7 +10,10 @@ import {
 	useAppSelector,
 } from "@shared/lib";
 import type { InvestigatorSkillType } from "@shared/model";
-import type { PickerChangeEvent, PickerItemInfo } from "@widgets/picker";
+import type {
+	PickerChangeEvent,
+	PickerItemInfo,
+} from "@widgets/control/picker";
 import { range } from "ramda";
 import { useCallback, useState } from "react";
 import type { ViewProps } from "react-native";

@@ -6,7 +6,7 @@ import {
 } from "@shared/lib";
 import { setCurrentStat } from "@shared/lib";
 import type { ClueProps } from "@shared/ui";
-import type { PickerChangeEvent } from "@widgets/picker";
+import type { PickerChangeEvent } from "@widgets/control/picker";
 import { range } from "ramda";
 import { useCallback } from "react";
 import * as C from "./Clues.components";

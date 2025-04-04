@@ -1,7 +1,7 @@
 import { TouchableOpacity } from "@features/haptic";
 import { color } from "@shared/config";
 import { type DefinedIconProps, Icon } from "@shared/ui";
-import { PickerMemo as BasePicker } from "@widgets/picker";
+import { PickerMemo as BasePicker } from "@widgets/control/picker";
 import type { FC } from "react";
 import { View } from "react-native";
 import styled from "styled-components/native";

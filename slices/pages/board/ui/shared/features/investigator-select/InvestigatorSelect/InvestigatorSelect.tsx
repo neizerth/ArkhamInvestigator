@@ -5,7 +5,10 @@ import {
 	useAppDispatch,
 	useAppSelector,
 } from "@shared/lib";
-import type { PickerChangeEvent, PickerItemInfo } from "@widgets/picker";
+import type {
+	PickerChangeEvent,
+	PickerItemInfo,
+} from "@widgets/control/picker";
 import { prop } from "ramda";
 import { useCallback, useMemo } from "react";
 import type { ViewProps } from "react-native";
