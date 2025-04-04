@@ -15,7 +15,12 @@ export const InvestigatorImage = ({ ...props }: InvestigatorImageProps) => {
 			<C.Content>
 				<C.FactionBackground view={view} layout={layout} />
 				<C.Background />
-				{showEffects && <C.Damage />}
+				{showEffects && (
+					<>
+						<C.Damage />
+						<C.Horror />
+					</>
+				)}
 			</C.Content>
 		</C.Container>
 	);

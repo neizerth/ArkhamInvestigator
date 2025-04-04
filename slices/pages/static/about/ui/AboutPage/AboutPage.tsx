@@ -76,6 +76,9 @@ export const AboutPage = (props: AboutPageProps) => {
 				<List.Item>
 					<Bold>Button Vector Art</Bold>: vecteezy.com
 				</List.Item>
+				<List.Item>
+					<Bold>Some backgrounds</Bold>: pngtree.com
+				</List.Item>
 			</List>
 			<Title>Testing/Ideas</Title>
 			<Paragraph>

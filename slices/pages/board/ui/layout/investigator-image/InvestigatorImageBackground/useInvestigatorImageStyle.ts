@@ -1,6 +1,5 @@
 import {
-	selectCurrentHorror,
-	selectCurrentStatBaseValue,
+	selectCurrentStatValue,
 	selectCurrentTurnEnd,
 	useAppSelector,
 } from "@shared/lib";
@@ -13,18 +12,17 @@ import {
 } from "react-native-reanimated";
 
 export const useInvestigatorImageStyle = () => {
-	const horror = useAppSelector(selectCurrentHorror);
-	const baseSanity = useAppSelector(selectCurrentStatBaseValue("sanity"));
-	const horrorPercentage = horror / baseSanity;
+	const health = useAppSelector(selectCurrentStatValue("health"));
+	const sanity = useAppSelector(selectCurrentStatValue("sanity"));
 
 	const isTurnEnd = useAppSelector(selectCurrentTurnEnd);
+	const noMainStats = health <= 0 || sanity <= 0;
 
 	const grayscale = useSharedValue(0);
-	const saturate = useSharedValue(1);
 
 	useEffect(() => {
-		grayscale.value = isTurnEnd ? 1 : 0;
-	}, [isTurnEnd, grayscale]);
+		grayscale.value = isTurnEnd || noMainStats ? 1 : 0;
+	}, [isTurnEnd, grayscale, noMainStats]);
 
 	const animatedStyle = useAnimatedStyle((): ViewStyle => {
 		return {

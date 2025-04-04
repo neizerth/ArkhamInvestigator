@@ -4,6 +4,7 @@ import { View, type ViewProps } from "react-native";
 import styled, { css } from "styled-components/native";
 import { FactionBackground as BaseFactionBackground } from "../../../shared/background/FactionBackground";
 import { DamageOverlay } from "../DamageOverlay";
+import { HorrorOverlay } from "../HorrorOverlay";
 import { InvestigatorImageBackgroundMemo as InvestigatorBackground } from "../InvestigatorImageBackground";
 
 type PropsWithView = {
@@ -46,6 +47,15 @@ export const Background: typeof InvestigatorBackground = styled(
 `;
 
 export const Damage: typeof DamageOverlay = styled(DamageOverlay)`
+  position: absolute;
+  z-index: 4;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+`;
+
+export const Horror: typeof HorrorOverlay = styled(HorrorOverlay)`
   position: absolute;
   z-index: 3;
   left: 0;
