@@ -1,10 +1,14 @@
 import { useInvestigatorTranslation } from "@features/i18n";
 import type { InvestigatorBoardSource, PropsWithUnit } from "@shared/model";
-import { UnscaledText } from "@shared/ui";
-import type { TextProps } from "react-native";
+import {
+	type ComponentStyleMap,
+	GameText,
+	type GameTextProps,
+} from "@widgets/game/game-text";
+import { mergeDeepRight } from "ramda";
 import { getInvestigatorFlavorStyles } from "./InvestigatorFlavor.styles";
 
-export type InvestigatorFlavorProps = TextProps &
+export type InvestigatorFlavorProps = Omit<GameTextProps, "value"> &
 	Partial<PropsWithUnit> & {
 		investigator: InvestigatorBoardSource;
 	};
@@ -17,14 +21,15 @@ export const InvestigatorFlavor = ({
 	const translate = useInvestigatorTranslation(investigator);
 	const [text, language] = translate("flavor");
 
-	const style = getInvestigatorFlavorStyles({
+	const localeStyles = getInvestigatorFlavorStyles({
 		language,
 		unit,
 	});
 
-	return (
-		<UnscaledText {...props} style={[props.style, style]}>
-			{text}
-		</UnscaledText>
-	);
+	const componentStyles = mergeDeepRight(
+		props.componentStyles || {},
+		localeStyles,
+	) as ComponentStyleMap;
+
+	return <GameText {...props} componentStyles={componentStyles} value={text} />;
 };

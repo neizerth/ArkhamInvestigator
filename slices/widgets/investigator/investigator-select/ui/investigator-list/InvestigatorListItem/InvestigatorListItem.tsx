@@ -1,36 +1,29 @@
-import {
-	selectDisabledInvestigators,
-	selectSelectedInvestigators,
-	useAppSelector,
-} from "@shared/lib";
+import { useAppSelector } from "@shared/lib";
 import {
 	InvestigatorPreview,
 	type InvestigatorPreviewProps,
 } from "@widgets/investigator/investigator-preview";
-import { propEq } from "ramda";
+import {
+	selectInvestigatorSelectedCount,
+	selectIsInvestigatorDisabled,
+} from "@widgets/investigator/investigator-select/lib";
 
-export const InvestigatorListItem = (props: InvestigatorPreviewProps) => {
-	const selectedInvestigators = useAppSelector(selectSelectedInvestigators);
-	const disabledInvestigators = useAppSelector(selectDisabledInvestigators);
+export type InvestigatorListItemProps = InvestigatorPreviewProps;
 
-	const { investigator } = props;
+export const InvestigatorListItem = (props: InvestigatorListItemProps) => {
+	const { code } = props.investigator;
 
-	const selected = selectedInvestigators.filter(
-		propEq(investigator.code, "code"),
-	);
+	const count = useAppSelector(selectInvestigatorSelectedCount(code));
+	const disabled = useAppSelector(selectIsInvestigatorDisabled(code));
 
-	const isSelected = selected.length > 0;
-
-	const disabled =
-		!isSelected &&
-		disabledInvestigators.some(propEq(investigator.code, "code"));
+	const isSelected = count > 0;
 
 	return (
 		<InvestigatorPreview
 			{...props}
 			selected={isSelected}
 			disabled={disabled}
-			selectedCount={selected.length}
+			selectedCount={count}
 		/>
 	);
 };

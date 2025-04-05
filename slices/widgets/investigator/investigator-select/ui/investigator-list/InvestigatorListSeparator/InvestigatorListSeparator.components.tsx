@@ -55,10 +55,10 @@ export const SeparatorDecoration: typeof Image = styled(Image).attrs({
 `;
 
 export const SeparatorBefore: typeof Image = styled(SeparatorDecoration)`
-  right: -${cornerOffset}px;
+  right: -${cornerOffset + 1}px;
 `;
 
 export const SeparatorAfter: typeof Image = styled(SeparatorDecoration)`
   transform: scale(-1, 1);
-  left: -${cornerOffset}px;
+  left: -${cornerOffset + 1}px;
 `;

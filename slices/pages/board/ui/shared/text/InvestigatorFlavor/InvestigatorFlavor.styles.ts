@@ -1,8 +1,6 @@
 import { boardText } from "@pages/board/config";
-import { color } from "@shared/config";
 import { ArnoPro, STKaiti, Yoon } from "@shared/fonts";
 import { getKeyConfig } from "@shared/lib";
-import type { TextStyle } from "react-native";
 
 export type GetStylesOptions = {
 	language: string;
@@ -15,23 +13,34 @@ export const getInvestigatorFlavorStyles = ({
 }: GetStylesOptions) => {
 	const fontSize = unit * boardText.ratio.text;
 
-	const getStyle = getKeyConfig<Partial<TextStyle>>({
-		default: {
-			fontFamily: ArnoPro.italic,
-			fontSize,
-			lineHeight: fontSize * 1.15,
-			textAlign: "center",
-			color: color.text,
-		},
-		ko: {
-			fontFamily: Yoon.D330.italic,
-			fontSize: fontSize * 0.9,
-		},
-		zh: {
+	const zhComponentStyles = {
+		text: {
 			fontFamily: STKaiti.italic,
 			fontSize: fontSize * 0.9,
 		},
+	};
+
+	const getComponents = getKeyConfig({
+		default: {
+			text: {
+				fontFamily: ArnoPro.italic,
+				fontSize,
+				lineHeight: fontSize * 1.15,
+				textAlign: "center",
+			},
+			b: {
+				fontFamily: ArnoPro.boldItalic,
+			},
+		},
+		ko: {
+			text: {
+				fontFamily: Yoon.D330.italic,
+				fontSize: fontSize * 0.9,
+			},
+		},
+		zh: zhComponentStyles,
+		"zh-cn": zhComponentStyles,
 	});
 
-	return getStyle(language);
+	return getComponents(language);
 };

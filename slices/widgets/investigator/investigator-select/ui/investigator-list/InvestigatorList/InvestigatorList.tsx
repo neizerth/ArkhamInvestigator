@@ -1,7 +1,7 @@
 import type { Defined, InvestigatorDetails } from "@shared/model";
 import { useCallback } from "react";
 import type { ListRenderItemInfo, SectionListProps } from "react-native";
-import { useColumnsCount, useImageSize } from "../../../lib";
+import { useImageSize } from "../../../lib";
 import * as C from "./InvestigatorList.components";
 
 type OmitProps = "key" | "numColumns" | "renderItem" | "keyExtractor";
@@ -30,7 +30,6 @@ export const InvestigatorList = ({
 		[onChange],
 	);
 
-	const columns = useColumnsCount();
 	const size = useImageSize();
 
 	const renderItem = useCallback(
