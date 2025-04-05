@@ -65,7 +65,7 @@ export const BaseList = (baseProps: BaseListProps) => {
 
 	return (
 		<C.List
-			decelerationRate={disableIntervalMomentum ? 0 : decelerationRate}
+			decelerationRate={decelerationRate}
 			disableIntervalMomentum={disableIntervalMomentum}
 			{...props}
 			initialScrollIndex={index}
