@@ -3,7 +3,6 @@ import type { ReactElement } from "react";
 import type {
 	GestureResponderEvent,
 	ListRenderItem,
-	ViewProps,
 	ViewStyle,
 } from "react-native";
 import type { ListRenderItemInfo } from "react-native";
@@ -23,9 +22,14 @@ export type PickerContainerInfo = PickerItemInfo & {
 	currentValue?: number;
 };
 
-type ListProps = Omit<FlatListPropsWithLayout<number>, "data">;
+type BaseListProps = FlatListPropsWithLayout<number>;
 
-export type PickerBaseListProps = Omit<ListProps, "renderItem"> &
+type ListProps = Omit<
+	FlatListPropsWithLayout<number>,
+	"data" | "renderItem" | "contentContainerStyle"
+>;
+
+export type PickerBaseListProps = ListProps &
 	PickerDataProps & {
 		itemHeight: number;
 	};
@@ -100,7 +104,7 @@ export type PickerAnimationProps = {
 	animated?: boolean;
 };
 
-export type PickerProps = ViewProps &
+export type PickerProps = ListProps &
 	PickerAnimationProps &
 	PickerStyleProps &
 	PickerItemStyleProps &

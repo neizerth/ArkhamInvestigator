@@ -45,10 +45,12 @@ export const InvestigatorSelect = ({ ...props }: InvestigatorSelectProps) => {
 
 	const next = useCallback(() => {
 		dispatch(setCurrentInvestigatorIndex(nextIndex));
+		setScrollIndex(nextIndex);
 	}, [dispatch, nextIndex]);
 
 	const prev = useCallback(() => {
 		dispatch(setCurrentInvestigatorIndex(prevIndex));
+		setScrollIndex(prevIndex);
 	}, [dispatch, prevIndex]);
 
 	const onValueChanging = (item: PickerChangeEvent) => {
@@ -76,6 +78,8 @@ export const InvestigatorSelect = ({ ...props }: InvestigatorSelectProps) => {
 				onValueChanged={onChange}
 				onValueChanging={onValueChanging}
 				onPress={next}
+				decelerationRate={0}
+				disableIntervalMomentum
 			/>
 			{showDown && (
 				<C.Down onPress={prev}>

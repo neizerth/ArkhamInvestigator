@@ -1,10 +1,12 @@
-import { useAppTranslation } from "@features/i18n";
+import { selectInvestigatorByCode, useAppTranslation } from "@features/i18n";
+import { useAppSelector } from "@shared/lib";
 import { Bold, List, Text, Title } from "@shared/ui";
 import { ContentPage } from "@widgets/content-page";
 import * as C from "./HelpPage.components";
 
 export const HelpPage = () => {
 	const { t } = useAppTranslation();
+	const lolaHayes = useAppSelector(selectInvestigatorByCode("03006"));
 	return (
 		<ContentPage title={t`Help`}>
 			<Title>{t`Scroll`}</Title>
@@ -90,7 +92,7 @@ export const HelpPage = () => {
 			</Text>
 			<List>
 				<List.Item>
-					<Bold>{t`Lola Hayes`}</Bold>: {t`board.help.special.lola`}
+					<Bold>{lolaHayes?.name}</Bold>: {t`board.help.special.lola`}
 				</List.Item>
 			</List>
 		</ContentPage>

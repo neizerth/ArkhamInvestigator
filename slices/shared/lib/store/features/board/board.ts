@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import type { InvestigatorBoard } from "@shared/model";
+import type { InvestigatorBoard, PickerDecelerationType } from "@shared/model";
 import { createSliceState } from "redux-toolkit-helpers";
 
 export type IBoardState = {
@@ -9,6 +9,8 @@ export type IBoardState = {
 	showDamageAndHorror: boolean;
 	showDamageAndHorrorEffects: boolean;
 	showFactionSelect: boolean;
+	pickerDecelerationType: PickerDecelerationType;
+	pickerIntervalMomentum: boolean;
 };
 
 const initialState: IBoardState = {
@@ -18,6 +20,8 @@ const initialState: IBoardState = {
 	showDamageAndHorror: false,
 	showDamageAndHorrorEffects: false,
 	showFactionSelect: false,
+	pickerDecelerationType: false,
+	pickerIntervalMomentum: false,
 };
 
 const state = createSliceState(initialState);
@@ -33,6 +37,8 @@ export const {
 	setEndTurnStrict,
 	setShowFactionSelect,
 	setShowDamageAndHorrorEffects,
+	setPickerDecelerationType,
+	setPickerIntervalMomentum,
 } = board.actions;
 
 export const {
@@ -41,6 +47,8 @@ export const {
 	selectEndTurnStrict,
 	selectShowFactionSelect,
 	selectShowDamageAndHorrorEffects,
+	selectPickerDecelerationType,
+	selectPickerIntervalMomentum,
 } = board.selectors;
 
 export default board.reducer;

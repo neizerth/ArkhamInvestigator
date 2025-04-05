@@ -1,4 +1,4 @@
-import { selectTranslatedInvestigators } from "@features/i18n/lib/store/features/i18n/selectors/selectTranslatedInvestigators";
+import { selectTranslatedInvestigators } from "@features/i18n";
 import { createSelector } from "@reduxjs/toolkit";
 import {
 	selectInvestigatorMedia,

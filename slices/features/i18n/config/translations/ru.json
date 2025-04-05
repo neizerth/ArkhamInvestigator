@@ -20,13 +20,22 @@
 
 	"Spoiler Alert": "Осторожно, спойлеры!",
 	"Game settings": "Игра",
-	"This section contains campaign spoilers. Do you want to proceed?": "Этот раздел содержит сюжетные спойлеры. Продолжить?",
+	"modal.spoiler.message": "Этот раздел содержит сюжетные спойлеры. Продолжить?",
 	"Turn end": "Конец хода",
 
 	"No main & additional actions": "Нет основных и доп. действий",
 	"No main actions": "Нет основных действий",
 
 	"Damage/Horror animation": "Анимация ран/ужаса",
+
+	"Scroll Deceleration": "Замедление прокрутки",
+	"Inertial Scrolling": "Инерция при прокрутке",
+
+	"Behavior": "Поведение",
+
+	"picker.deceleration.fast": "Быстрое",
+	"picker.deceleration.normal": "Нормальное",
+	"picker.deceleration.custom": "Настроить",
 
 	"board.help.scroll": "Прокрутите любой параметр сыщика до нужного значения",
 

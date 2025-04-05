@@ -1,3 +1,8 @@
+import {
+	selectPickerDecelerationType,
+	selectPickerIntervalMomentum,
+	useAppSelector,
+} from "@shared/lib";
 import { getDataOffsets, getValueIndex } from "@widgets/control/picker/lib";
 import { memo, useCallback, useMemo } from "react";
 import type { ListRenderItemInfo } from "react-native";
@@ -50,8 +55,18 @@ export const BaseList = (baseProps: BaseListProps) => {
 		}),
 		[itemHeight],
 	);
+
+	const decelerationRate = useAppSelector(
+		(state) => selectPickerDecelerationType(state) || 0,
+	);
+	const disableIntervalMomentum = useAppSelector(
+		(state) => !selectPickerIntervalMomentum(state),
+	);
+
 	return (
 		<C.List
+			decelerationRate={disableIntervalMomentum ? 0 : decelerationRate}
+			disableIntervalMomentum={disableIntervalMomentum}
 			{...props}
 			initialScrollIndex={index}
 			getItemLayout={getItemLayout}
@@ -61,8 +76,6 @@ export const BaseList = (baseProps: BaseListProps) => {
 			keyExtractor={(item) => item.toString()}
 			snapToOffsets={snapToOffsets}
 			showsVerticalScrollIndicator={false}
-			decelerationRate={0}
-			disableIntervalMomentum
 			removeClippedSubviews
 		/>
 	);

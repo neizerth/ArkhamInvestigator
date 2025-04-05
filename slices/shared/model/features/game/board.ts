@@ -51,3 +51,5 @@ export type HistoryItem = {
 	baseValue?: Partial<InvestigatorBoardValues>;
 	value?: Partial<InvestigatorBoardValues>;
 };
+
+export type PickerDecelerationType = "fast" | "normal" | false;

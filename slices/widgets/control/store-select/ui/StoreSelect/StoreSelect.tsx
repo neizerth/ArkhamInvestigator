@@ -17,7 +17,7 @@ export type StoreSelectProps<T> = Omit<
 	HapticSelectProps<T>,
 	"onChange" | "value"
 > & {
-	selectStyle?: ViewStyle;
+	contentContainerStyle?: ViewStyle;
 	selector: Selector<RootState, T>;
 	actionCreator: ActionCreatorWithPayload<T> | ((value: T) => AppThunk);
 	translate?: boolean;
@@ -28,9 +28,9 @@ export function StoreSelect<T>({
 	selector,
 	actionCreator,
 	data,
+	label: labelProp = "",
 	translate = true,
-	selectStyle,
-	style,
+	contentContainerStyle,
 	...props
 }: StoreSelectProps<T>) {
 	const { t } = useAppTranslation();
@@ -50,18 +50,12 @@ export function StoreSelect<T>({
 		[dispatch, actionCreator],
 	);
 
-	const label = translate ? t(props.label || "") : props.label;
+	const label = translate ? t(labelProp) : labelProp;
 
 	return (
-		<C.Container style={style}>
+		<C.Container style={contentContainerStyle}>
 			<C.Label>{label}</C.Label>
-			<C.Select
-				{...props}
-				style={selectStyle}
-				data={items}
-				value={item}
-				onChange={onChange}
-			/>
+			<C.Select {...props} data={items} value={item} onChange={onChange} />
 		</C.Container>
 	);
 }

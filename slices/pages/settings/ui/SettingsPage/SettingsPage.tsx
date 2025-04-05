@@ -53,6 +53,10 @@ export const SettingsPage = () => {
 						actionCreator={setShowDamageAndHorrorEffects}
 					/>
 				</C.Row>
+				<Title>{t`Behavior`}</Title>
+				<C.Row>
+					<C.Picker />
+				</C.Row>
 			</C.Content>
 		</ContentPage>
 	);

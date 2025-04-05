@@ -3,6 +3,7 @@ import v1 from "./2024-03-25T12-00-set-haptic-mode";
 import v2 from "./2024-03-25T15-54-set-actions-strict";
 import v3 from "./2024-03-26T07-42-set-show-damage-and-horror";
 import v4 from "./2025-04-01T14-18-clear-boards";
+import v5 from "./2025-04-05T17-24-set-default-deceleration";
 
 export const persistConfigMigrations = {
 	0: v0,
@@ -10,4 +11,5 @@ export const persistConfigMigrations = {
 	2: v2,
 	3: v3,
 	4: v4,
+	5: v5,
 };

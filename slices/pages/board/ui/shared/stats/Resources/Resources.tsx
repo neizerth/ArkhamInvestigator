@@ -1,6 +1,6 @@
 import {
 	decreaseCurrentStat,
-	selectBoardProps,
+	selectCurrentStatValue,
 	useAppDispatch,
 	useAppSelector,
 } from "@shared/lib";
@@ -15,8 +15,7 @@ export type ResourcesProps = ViewProps;
 
 export const Resources = ({ ...props }: ResourcesProps) => {
 	const dispatch = useAppDispatch();
-	const board = useAppSelector(selectBoardProps(["value"]));
-	const value = board?.value;
+	const resources = useAppSelector(selectCurrentStatValue("resources"));
 	const onChange = useCallback(
 		({ value }: PickerChangeEvent) => {
 			dispatch(setCurrentStat("resources", value));
@@ -35,7 +34,7 @@ export const Resources = ({ ...props }: ResourcesProps) => {
 	return (
 		<C.Container {...props}>
 			<C.Picker
-				value={value?.resources}
+				value={resources}
 				data={range(0, 101)}
 				onValueChanged={onChange}
 				onLongPress={onLongPress}

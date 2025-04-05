@@ -4,6 +4,7 @@ import { StoreCheckbox } from "@widgets/control/store-checkbox";
 import { StoreSelect } from "@widgets/control/store-select";
 import { View } from "react-native";
 import styled from "styled-components/native";
+import { PickerSettings } from "../PickerSettings";
 
 export const Container: typeof View = styled(View)`
   background-color: ${color.dark40};
@@ -33,11 +34,18 @@ export const Label: typeof TextView = styled(TextView).attrs({
   text-align: right;
 `;
 
-export const Select: typeof StoreSelect = styled(StoreSelect)`
-  flex: 1;
+export const Select: typeof StoreSelect = styled(StoreSelect).attrs({
+	contentContainerStyle: {
+		flex: 1,
+	},
+})`
 `;
 
 export const Checkbox: typeof StoreCheckbox = styled(StoreCheckbox)`
   flex: 1;
   justify-content: flex-end;
+`;
+
+export const Picker: typeof PickerSettings = styled(PickerSettings)`
+  flex: 1;
 `;

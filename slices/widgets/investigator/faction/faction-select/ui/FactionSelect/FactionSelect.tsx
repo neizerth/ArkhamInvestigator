@@ -27,7 +27,7 @@ export const FactionSelect = ({
 			type: "faction",
 			faction: "neutral",
 			title: t`Spoiler Alert`,
-			text: t`This section contains campaign spoilers. Do you want to proceed?`,
+			text: t`modal.spoiler.message`,
 			okText: t`Yes`,
 			cancelText: t`Cancel`,
 		},

@@ -1,4 +1,9 @@
 {
+	"modal.spoiler.message": "This section contains campaign spoilers. Do you want to proceed?",
+
+	"picker.deceleration.fast": "Fast",
+	"picker.deceleration.normal": "Normal",
+
 	"board.reset.text": "This action will reset the data to the beginning of the game for this investigator",
 	"board.help.scroll": "You can change any investigator value by scrolling a picker to a needed position",
 

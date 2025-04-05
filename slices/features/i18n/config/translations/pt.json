@@ -1,5 +1,27 @@
 {
 	"New Game": "Novo jogo",
+
+	"modal.spoiler.message": "This section contains campaign spoilers. Do you want to proceed?",
+
+	"picker.deceleration.fast": "Fast",
+	"picker.deceleration.normal": "Normal",
+
+	"Investigator Special Actions": "Investigator Special Actions",
+	"Press and hold": "Press and hold",
+
+	"Spoiler Alert": "Spoiler Alert",
+	"Game settings": "Game settings",
+	"Turn end": "Turn end",
+
+	"No main & additional actions": "No main & additional actions",
+	"No main actions": "No main actions",
+
+	"Damage/Horror animation": "Damage/Horror animation",
+	"Scroll Deceleration": "Scroll Deceleration",
+	"Inertial Scrolling": "Inertial Scrolling",
+
+	"Behavior": "Behavior",
+
 	"board.help.scroll": "You can change any investigator value by scrolling a picker to a needed position",
 
 	"board.help.press.main": "Decrease value by 1",
