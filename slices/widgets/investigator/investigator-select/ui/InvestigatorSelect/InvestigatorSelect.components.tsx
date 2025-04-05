@@ -14,7 +14,7 @@ export const Content: typeof View = styled(View)`
 export const FactionSelect: typeof BaseFactionSelect = styled(
 	BaseFactionSelect,
 )`
-  margin: -10px auto 10px auto;
+  margin: -5px auto 0px auto;
 `;
 
 export const Footer: typeof InvestigatorSelectFooter = styled(

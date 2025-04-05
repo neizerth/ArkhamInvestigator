@@ -5,7 +5,8 @@ import { loadJSON } from "./loadJSON";
 export const loadArkhamDBInvestigatorTranslations = async (
 	language: string,
 ) => {
-	const apiURL = `https://${language}.arkhamdb.com`;
+	const subdomain = language === "en" ? "" : `${language}.`;
+	const apiURL = `https://${subdomain}arkhamdb.com`;
 	const qs = new URLSearchParams();
 
 	qs.append("_format", "json");

@@ -7,7 +7,6 @@ import {
 import type { AppThunkCreator } from "@shared/lib";
 import { selectLanguage, setLanguage } from "../i18n";
 import { loadTranslation } from "./translations/loadTranslation";
-import { updateBoardTranslations } from "./translations/updateBoardTranslations";
 
 export const changeLanguage: AppThunkCreator =
 	(language: string | null) => (dispatch, getState) => {
@@ -21,8 +20,6 @@ export const changeLanguage: AppThunkCreator =
 			dispatch(setLanguage(language));
 			i18next.changeLanguage(language);
 			i18next.addResourceBundle(language, I18N_NAMESAPCE, translations.en);
-			dispatch(updateBoardTranslations());
-			return;
 		}
 		dispatch(loadTranslation(language));
 	};
