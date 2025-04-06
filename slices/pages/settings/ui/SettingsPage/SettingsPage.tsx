@@ -48,7 +48,7 @@ export const SettingsPage = () => {
 				</C.Row>
 				<C.Row>
 					<C.Checkbox
-						label="Damage/Horror animation"
+						label="Damage/Horror visual effects"
 						selector={selectShowDamageAndHorrorEffects}
 						actionCreator={setShowDamageAndHorrorEffects}
 					/>
