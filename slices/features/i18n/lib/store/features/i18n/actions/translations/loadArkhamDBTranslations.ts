@@ -1,26 +1,32 @@
-import { DEFAULT_LANGUAGE } from "@features/i18n/config";
-import { loadArkhamDBInvestigatorTranslations } from "@shared/api";
 import type { AppThunk } from "@shared/lib";
 import type { ArkhamDBInvestigatorCard } from "@shared/model/api/game/arkhamDB";
-import { propEq } from "ramda";
-import { setInvestigatorTranslations } from "../../i18n";
+import { loadArkhamDBInvestigatorData } from "../../../../../../../../shared/api/arkhamDB";
+import {
+	selectArkhamDBInvestigators,
+	setInvestigatorTranslations,
+} from "../../i18n";
 import { updateBoardTranslations } from "./updateBoardTranslations";
 
 export const loadArkhamDBTranslations =
 	(language: string): AppThunk =>
-	async (dispatch) => {
-		let source: ArkhamDBInvestigatorCard[] = [];
-		if (language !== DEFAULT_LANGUAGE) {
-			source = await loadArkhamDBInvestigatorTranslations(DEFAULT_LANGUAGE);
-		}
-		const translations = await loadArkhamDBInvestigatorTranslations(language);
+	async (dispatch, getState) => {
+		const state = getState();
+		const source = selectArkhamDBInvestigators(state);
+		const translations = await loadArkhamDBInvestigatorData(language);
 
-		const merged = source.filter((item) => {
-			const translation = translations.find(propEq(item.code, "code"));
+		const translationMap = getCardMap(translations);
 
+		const data = source.map((item) => {
+			const translation = translationMap.get(item.code);
 			return translation || item;
 		});
 
-		dispatch(setInvestigatorTranslations(merged));
+		dispatch(setInvestigatorTranslations(data));
 		dispatch(updateBoardTranslations());
 	};
+
+const getCardMap = (data: ArkhamDBInvestigatorCard[]) =>
+	data.reduce((target, card) => {
+		target.set(card.code, card);
+		return target;
+	}, new Map());

@@ -1,4 +1,5 @@
 import { selectInvestigatorByCode, useAppTranslation } from "@features/i18n";
+import { InvesigatorCode } from "@shared/config";
 import { useAppSelector } from "@shared/lib";
 import { Bold, List, Text, Title } from "@shared/ui";
 import { ContentPage } from "@widgets/content-page";
@@ -6,7 +7,9 @@ import * as C from "./HelpPage.components";
 
 export const HelpPage = () => {
 	const { t } = useAppTranslation();
-	const lolaHayes = useAppSelector(selectInvestigatorByCode("03006"));
+	const lolaHayes = useAppSelector(
+		selectInvestigatorByCode(InvesigatorCode.LolaHayes),
+	);
 	return (
 		<ContentPage title={t`Help`}>
 			<Title>{t`Scroll`}</Title>

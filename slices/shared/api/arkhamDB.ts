@@ -1,10 +1,11 @@
-import type { ArkhamDBInvestigatorCard } from "@shared/model/api/game/arkhamDB";
-import { pick } from "ramda";
+import type {
+	ArkhamDBCard,
+	ArkhamDBInvestigatorCard,
+} from "@shared/model/api/game/arkhamDB";
+import { pick, propEq } from "ramda";
 import { loadJSON } from "./loadJSON";
 
-export const loadArkhamDBInvestigatorTranslations = async (
-	language: string,
-) => {
+export const loadArkhamDBInvestigatorData = async (language = "en") => {
 	const subdomain = language === "en" ? "" : `${language}.`;
 	const apiURL = `https://${subdomain}arkhamdb.com`;
 	const qs = new URLSearchParams();
@@ -12,20 +13,24 @@ export const loadArkhamDBInvestigatorTranslations = async (
 	qs.append("_format", "json");
 	qs.append("q", "t:investigator");
 
-	const response = await loadJSON<ArkhamDBInvestigatorCard[]>(
-		`${apiURL}/api/public/cards/?${qs}`,
-	);
-	type Key = keyof ArkhamDBInvestigatorCard;
+	const url = `${apiURL}/api/public/cards/?${qs}`;
+	try {
+		const response = await loadJSON<ArkhamDBCard[]>(url);
 
-	const selectProps = pick<Key[]>([
-		"code",
-		"faction_code",
-		"flavor",
-		"name",
-		"subname",
-		"text",
-		"traits",
-	]);
+		const selectProps = pick<(keyof ArkhamDBInvestigatorCard)[]>([
+			"code",
+			"faction_code",
+			"flavor",
+			"name",
+			"subname",
+			"text",
+			"traits",
+		]);
 
-	return response.map(selectProps);
+		return response
+			.filter(propEq("investigator", "type_code"))
+			.map(selectProps);
+	} catch (e) {
+		return [];
+	}
 };

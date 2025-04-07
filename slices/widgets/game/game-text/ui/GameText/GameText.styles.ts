@@ -12,8 +12,7 @@ export const defaultComponentStyles: ComponentStyleMap = {
 		fontFamily: Alegreya.boldItalic,
 	},
 	u: {
-		textDecorationLine: "underline",
-		textDecorationStyle: "solid",
+		fontFamily: Alegreya.regular,
 	},
 	icon: {
 		top: 1,

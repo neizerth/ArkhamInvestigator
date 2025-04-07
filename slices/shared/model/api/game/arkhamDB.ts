@@ -9,3 +9,7 @@ export type ArkhamDBInvestigatorCard = {
 	traits: string;
 	faction_code: Faction;
 };
+
+export type ArkhamDBCard = ArkhamDBInvestigatorCard & {
+	type_code: string;
+};

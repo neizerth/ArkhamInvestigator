@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { loadArkhamDBInvestigatorTranslations } from "../../../../../../../../shared/api/arkhamDB";
+import { loadArkhamDBInvestigatorData } from "../../../../../../../../shared/api/arkhamDB";
 import { loadGameTranslationData } from "../../../../../../../../shared/api/gameData";
 
 export const fetchTranslationData = createAsyncThunk(
@@ -9,5 +9,5 @@ export const fetchTranslationData = createAsyncThunk(
 
 export const fetchArkhamDBTranslationData = createAsyncThunk(
 	"i18n/loadArkhamDBInvestigatorTranslations",
-	loadArkhamDBInvestigatorTranslations,
+	loadArkhamDBInvestigatorData,
 );

@@ -1,32 +1,49 @@
 import { translateInvestigator } from "@features/i18n/lib/translateInvestigator";
 import type { AppThunk } from "@shared/lib";
-import { omit, propEq } from "ramda";
+import { omit } from "ramda";
 import {
 	selectInvestigatorBoards,
 	setInvestigatorBoards,
 } from "../../../../../../../../shared/lib/store/features/board/board";
 import { selectInvestigatorSources } from "../../../../../../../../shared/lib/store/features/investigators/investigatorSources/investigatorSources";
-import { selectInvestigatorTranslations } from "../../i18n";
+import { propIncludes } from "../../../../../../../../shared/lib/util/criteria";
+import {
+	selectArkhamDBInvestigators,
+	selectInvestigatorTranslations,
+} from "../../i18n";
 
 export const updateBoardTranslations = (): AppThunk => (dispatch, getState) => {
 	const state = getState();
-	const investigators = selectInvestigatorSources(state);
+
 	const boards = selectInvestigatorBoards(state);
+	const boardCodes = boards.map(({ investigator }) => investigator.code);
+
+	const arkhamSources = selectArkhamDBInvestigators(state)
+		.filter(propIncludes("code", boardCodes))
+		.reduce((target, item) => {
+			target.set(item.code, item);
+			return target;
+		}, new Map());
+
+	const sources = selectInvestigatorSources(state)
+		.filter(propIncludes("code", boardCodes))
+		.reduce((target, item) => {
+			target.set(item.code, item);
+			return target;
+		}, new Map());
+
 	const translations = selectInvestigatorTranslations(state);
 
 	const data = boards.map((item) => {
-		const investigator = investigators.find(
-			propEq(item.investigator.code, "code"),
-		);
+		const { code } = item.investigator;
+		const investigator = sources.get(code);
 
-		if (!investigator) {
-			return item;
-		}
+		const source = {
+			...investigator,
+			...(arkhamSources.get(code) || {}),
+		};
 
-		const translatedInvestigator = translateInvestigator(
-			investigator,
-			translations,
-		);
+		const translatedInvestigator = translateInvestigator(source, translations);
 
 		return {
 			...item,

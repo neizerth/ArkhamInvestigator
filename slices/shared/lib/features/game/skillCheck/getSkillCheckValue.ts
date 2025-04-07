@@ -19,7 +19,9 @@ export type GetValueOptions = {
 export const getSkillCheckValue = ({ data, value }: GetValueOptions) => {
 	const expression = getExpression(data);
 	try {
-		return evaluate(expression, value);
+		const result = evaluate(expression, value);
+
+		return Math.max(0, result);
 	} catch (error) {
 		console.error("Error evaluating expression:", error);
 		return 0;

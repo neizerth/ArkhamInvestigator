@@ -18,6 +18,9 @@ export const getInvestigatorFlavorStyles = ({
 			fontFamily: STKaiti.italic,
 			fontSize: fontSize * 0.9,
 		},
+		u: {
+			fontFamily: STKaiti.regular,
+		},
 	};
 
 	const getComponents = getKeyConfig({
@@ -31,11 +34,17 @@ export const getInvestigatorFlavorStyles = ({
 			b: {
 				fontFamily: ArnoPro.boldItalic,
 			},
+			u: {
+				fontFamily: ArnoPro.regular,
+			},
 		},
 		ko: {
 			text: {
 				fontFamily: Yoon.D330.italic,
 				fontSize: fontSize * 0.9,
+			},
+			u: {
+				fontFamily: Yoon.D330.regular,
 			},
 		},
 		zh: zhComponentStyles,
