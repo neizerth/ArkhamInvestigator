@@ -154,7 +154,7 @@ export { View as ScrollContent };
 export const HeaderTextContent: typeof View = styled(View)`
   flex: 1;
   width: 100%;
-  padding-bottom: ${size.gap.small}px;
+  padding: ${size.gap.small}px 0;
 `;
 
 const HeaderText: typeof UnscaledText = styled(UnscaledText)`
