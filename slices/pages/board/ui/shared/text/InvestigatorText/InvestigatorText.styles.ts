@@ -78,6 +78,7 @@ export const getInvestigatorTextStyle = ({
 			...localeComponentStyles.default,
 			icon: {
 				fontSize: iconFontSize,
+				lineHeight: iconFontSize * 1.2,
 			},
 			break: {
 				height: fontSize * 2.7,

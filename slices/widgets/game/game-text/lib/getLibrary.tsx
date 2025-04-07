@@ -22,6 +22,7 @@ export const getLibrary = ({
 	},
 	createElement(type, elementProps, ...children) {
 		const componentStyle = componentStyles?.[type];
+		const tokenStyle = componentStyles?.[`${type}Token`];
 
 		// @ts-ignore
 		const mergedProps = omit(["key"], {
@@ -40,6 +41,7 @@ export const getLibrary = ({
 		const textContent = getNodeContents({
 			children,
 			style: textStyle,
+			tokenStyle,
 			props,
 		});
 
@@ -52,6 +54,22 @@ export const getLibrary = ({
 				>
 					{textContent}
 				</C.Paragraph>
+			);
+		}
+
+		if (type === "nobr") {
+			const textContent = getNodeContents({
+				children,
+				style: textStyle,
+				tokenStyle,
+				props,
+				breakSentence: false,
+			});
+
+			return (
+				<C.Word key={v4()} {...elementProps} style={[componentStyles?.nobr]}>
+					{textContent}
+				</C.Word>
 			);
 		}
 
@@ -68,12 +86,14 @@ export const getLibrary = ({
 
 			return (
 				<Fragment key={v4()}>
-					<Icon
-						{...mergedProps}
-						icon={value}
-						style={mergedStyles}
-						scaleType={false}
-					/>
+					<C.Token style={tokenStyle}>
+						<Icon
+							{...mergedProps}
+							icon={value}
+							style={mergedStyles}
+							scaleType={false}
+						/>
+					</C.Token>
 					{textContent}
 				</Fragment>
 			);

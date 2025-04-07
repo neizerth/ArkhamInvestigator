@@ -24,7 +24,7 @@ export const Break: typeof View = styled(View)`
 
 export const Paragraph: typeof Row = styled(Row)`
   flex-wrap: wrap;
-  align-items: center;
+  align-items: flex-end;
 `;
 
 export const Container: typeof View = styled(View)`

@@ -15,10 +15,10 @@ export const defaultComponentStyles: ComponentStyleMap = {
 		fontFamily: Alegreya.regular,
 	},
 	icon: {
-		top: 1,
-		marginRight: 2,
 		fontSize: 14,
+		lineHeight: 16,
 	},
+	iconToken: {},
 	paragraph: {},
 	break: {
 		height: 32,
