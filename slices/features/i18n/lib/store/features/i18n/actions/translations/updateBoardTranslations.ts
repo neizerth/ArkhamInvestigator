@@ -7,23 +7,13 @@ import {
 } from "../../../../../../../../shared/lib/store/features/board/board";
 import { selectInvestigatorSources } from "../../../../../../../../shared/lib/store/features/investigators/investigatorSources/investigatorSources";
 import { propIncludes } from "../../../../../../../../shared/lib/util/criteria";
-import {
-	selectArkhamDBInvestigators,
-	selectInvestigatorTranslations,
-} from "../../i18n";
+import { selectInvestigatorTranslations } from "../../i18n";
 
 export const updateBoardTranslations = (): AppThunk => (dispatch, getState) => {
 	const state = getState();
 
 	const boards = selectInvestigatorBoards(state);
 	const boardCodes = boards.map(({ investigator }) => investigator.code);
-
-	const arkhamSources = selectArkhamDBInvestigators(state)
-		.filter(propIncludes("code", boardCodes))
-		.reduce((target, item) => {
-			target.set(item.code, item);
-			return target;
-		}, new Map());
 
 	const sources = selectInvestigatorSources(state)
 		.filter(propIncludes("code", boardCodes))
@@ -38,12 +28,10 @@ export const updateBoardTranslations = (): AppThunk => (dispatch, getState) => {
 		const { code } = item.investigator;
 		const investigator = sources.get(code);
 
-		const source = {
-			...investigator,
-			...(arkhamSources.get(code) || {}),
-		};
-
-		const translatedInvestigator = translateInvestigator(source, translations);
+		const translatedInvestigator = translateInvestigator(
+			investigator,
+			translations,
+		);
 
 		return {
 			...item,

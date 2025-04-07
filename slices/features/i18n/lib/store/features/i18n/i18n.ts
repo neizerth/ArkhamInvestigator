@@ -10,14 +10,12 @@ export type II18nState = {
 	availableLanguages: string[];
 	loadingLanguage: string | null;
 	investigatorTranslations: ArkhamDBInvestigatorCard[];
-	investigators: ArkhamDBInvestigatorCard[];
 };
 
 const initialState: II18nState = {
 	language: null,
 	availableLanguages: [DEFAULT_LANGUAGE],
 	loadingLanguage: null,
-	investigators: [],
 	investigatorTranslations: [],
 };
 
@@ -34,14 +32,12 @@ export const {
 	setLoadingLanguage,
 	setAvailableLanguages,
 	setInvestigatorTranslations,
-	setInvestigators: setArkhamDBInvestigators,
 } = i18n.actions;
 
 export const {
 	selectLanguage,
 	selectAvailableLanguages,
 	selectInvestigatorTranslations,
-	selectInvestigators: selectArkhamDBInvestigators,
 } = i18n.selectors;
 
 export default i18n.reducer;

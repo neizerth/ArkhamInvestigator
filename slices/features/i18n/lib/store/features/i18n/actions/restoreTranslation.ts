@@ -4,19 +4,15 @@ import {
 	i18next,
 	translations,
 } from "@features/i18n/config";
-import { loadArkhamDBInvestigatorData } from "@shared/api";
 import type { AppThunkCreator } from "@shared/lib";
 import { loadStoreTranslation } from "../../../../storage/translation";
-import { selectLanguage, setArkhamDBInvestigators } from "../i18n";
+import { selectLanguage } from "../i18n";
 import { loadTranslation } from "./translations/loadTranslation";
 
 export const restoreTranslation: AppThunkCreator =
 	() => async (dispatch, getState) => {
 		const state = getState();
 		const language = selectLanguage(state);
-
-		const investigators = await loadArkhamDBInvestigatorData();
-		dispatch(setArkhamDBInvestigators(investigators));
 
 		if (language === DEFAULT_LANGUAGE || !language) {
 			return;
