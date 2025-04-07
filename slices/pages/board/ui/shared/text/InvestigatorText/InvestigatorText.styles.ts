@@ -8,7 +8,7 @@ import type { TextStyle } from "react-native";
 
 const zhComponentStyles: ComponentStyleMap = {
 	i: {
-		fontFamily: SanCn.medium,
+		fontFamily: STKaiti.italic,
 	},
 	b: {
 		fontFamily: STXinwei.regular,

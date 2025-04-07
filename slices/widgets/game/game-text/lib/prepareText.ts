@@ -1,12 +1,8 @@
 import { nbsp, wordJoiner } from "@shared/config";
+import { haveChineseGlyphs, haveKoreanGlyphs } from "./glyphs";
 
 export const prepareText = (text: string) => {
-	const content = text
-		// typography
-		.replace(/(\d+) /g, `$1${nbsp}`)
-		.replace(/ (\d+)/g, `${nbsp}$1`)
-		// quotes
-		.replace(/"([^"]+)"/g, "“$1”")
+	const content = withTypography(text)
 		// markdown bold
 		.replace(/\[\[([^\]]+)\]\]/g, "<keyword>$1</keyword>")
 		// icons
@@ -16,7 +12,29 @@ export const prepareText = (text: string) => {
 
 	const lines = content.split("\n");
 	const paragraphs =
-		lines.length > 0 ? `<p>${lines.join("\n</p><p>")}</p>` : content;
+		lines.length > 0 ? `<p>${lines.join("</p><p>")}</p>` : content;
 
-	return `<content>${paragraphs}</content>`;
+	const result = `<content>${paragraphs}</content>`;
+
+	return result;
+};
+
+const withTypography = (text: string) => {
+	const base = text
+		.replace(/(?<!\])(\d+) /g, `$1${nbsp}`)
+		.replace(/ (?<!\])(\d+)/g, `${nbsp}$1`);
+
+	const haveWesternGlyphs = haveChineseGlyphs(text) || haveKoreanGlyphs(text);
+
+	if (haveWesternGlyphs) {
+		return base;
+	}
+
+	return (
+		base
+			.replace(/(?<=^|\s)[\p{L}]{1,3}(?=\s)/gu, "$&&nbsp;")
+			.replaceAll("&nbsp; ", "&nbsp;")
+			// quotes
+			.replace(/"([^"]+)"/g, "“$1”")
+	);
 };

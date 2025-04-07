@@ -1,11 +1,13 @@
 import { Icon } from "@shared/ui";
 import type { HTMLReactParserOptions } from "html-react-parser";
+import { omit } from "ramda";
 import { Fragment } from "react";
 import type { TextProps } from "react-native";
 import { v4 } from "uuid";
 import { iconMapping } from "../config";
 import type { ComponentStyleMap } from "../model";
 import * as C from "../ui/GameText/GameText.components";
+import { getNodeContents } from "./getNodeContents";
 
 type GetLibraryOptions = {
 	componentStyles?: ComponentStyleMap;
@@ -16,15 +18,16 @@ export const getLibrary = ({
 	props,
 }: GetLibraryOptions): HTMLReactParserOptions["library"] => ({
 	cloneElement(...args) {
-		return <C.Text key={v4()} />;
+		return <C.Text />;
 	},
 	createElement(type, elementProps, ...children) {
 		const componentStyle = componentStyles?.[type];
 
-		const mergedProps = {
+		// @ts-ignore
+		const mergedProps = omit(["key"], {
 			...props,
 			...elementProps,
-		};
+		});
 
 		const mergedStyles = [props.style, componentStyle];
 
@@ -34,17 +37,17 @@ export const getLibrary = ({
 			return <Fragment key={v4()}>{children}</Fragment>;
 		}
 
-		const textContent = children.map((child) => (
-			<C.Text {...props} style={textStyle} key={v4()}>
-				{child}
-			</C.Text>
-		));
+		const textContent = getNodeContents({
+			children,
+			style: textStyle,
+			props,
+		});
 
 		if (type === "p") {
 			return (
 				<C.Paragraph
-					{...elementProps}
 					key={v4()}
+					{...elementProps}
 					style={[componentStyles?.paragraph]}
 				>
 					{textContent}
@@ -64,30 +67,25 @@ export const getLibrary = ({
 			const value = iconMapping[icon] || icon;
 
 			return (
-				<C.Line key={v4()}>
+				<Fragment key={v4()}>
 					<Icon
 						{...mergedProps}
-						key={v4()}
 						icon={value}
 						style={mergedStyles}
 						scaleType={false}
 					/>
 					{textContent}
-				</C.Line>
+				</Fragment>
 			);
 		}
 
-		const content = children.map((child) => (
-			<C.Text {...mergedProps} style={mergedStyles} key={v4()}>
-				{child}
-			</C.Text>
-		));
+		const content = getNodeContents({
+			children,
+			props: mergedProps,
+			style: mergedStyles,
+		});
 
-		return (
-			<C.Text {...mergedProps} key={v4()} style={mergedStyles}>
-				{content}
-			</C.Text>
-		);
+		return <C.Word key={v4()}>{content}</C.Word>;
 	},
 	isValidElement: () => true,
 });

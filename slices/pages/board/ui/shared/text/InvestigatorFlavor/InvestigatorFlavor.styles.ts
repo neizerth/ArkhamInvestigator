@@ -25,6 +25,9 @@ export const getInvestigatorFlavorStyles = ({
 
 	const getComponents = getKeyConfig({
 		default: {
+			paragraph: {
+				justifyContent: "center",
+			},
 			text: {
 				fontFamily: ArnoPro.italic,
 				fontSize,

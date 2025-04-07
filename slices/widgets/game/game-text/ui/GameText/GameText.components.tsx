@@ -1,9 +1,17 @@
-import { UnscaledText } from "@shared/ui";
+import { Row, UnscaledText } from "@shared/ui";
 import { View } from "react-native";
 import styled from "styled-components/native";
 
 export const Text: typeof UnscaledText = styled(UnscaledText)`
-  
+  /* letter-spacing: 2; */
+`;
+
+export const Word: typeof Row = styled(Row)`
+  /* flex: 1; */
+`;
+
+export const Token: typeof View = styled(View)`
+  /* flex: 1; */
 `;
 
 export const Line: typeof UnscaledText = styled(UnscaledText)`
@@ -14,9 +22,11 @@ export const Break: typeof View = styled(View)`
   
 `;
 
-export const Paragraph: typeof View = styled(View)`
+export const Paragraph: typeof Row = styled(Row)`
+  flex-wrap: wrap;
+  align-items: center;
 `;
 
 export const Container: typeof View = styled(View)`
-  
+  gap: 5px;
 `;
