@@ -20,9 +20,7 @@ export const prepareText = (text: string) => {
 };
 
 const withTypography = (text: string) => {
-	const base = text
-		.replace(/(?<!\])(\d+) /g, `$1${nbsp}`)
-		.replace(/ (?<!\])(\d+)/g, `${nbsp}$1`);
+	const base = text.replace(/(?<!\])(\d+) /g, `$1${nbsp}`);
 
 	const haveWesternGlyphs = haveChineseGlyphs(text) || haveKoreanGlyphs(text);
 

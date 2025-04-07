@@ -4,7 +4,6 @@ import type { TextProps } from "react-native";
 
 import { v4 } from "uuid";
 import * as C from "../ui/GameText/GameText.components";
-import { haveChineseGlyphs } from "./glyphs";
 
 type Options = {
 	children: React.ReactNode[];
@@ -43,9 +42,9 @@ export function getNodeContents({ children, style, props }: Options) {
 }
 
 const getTokens = (text: string) => {
-	if (haveChineseGlyphs(text)) {
-		return [...text];
-	}
 	const breakId = "__BREAK__";
-	return text.replace(/ /g, ` ${breakId}`).split(breakId);
+	return text
+		.replace(/\u00AD/g, breakId)
+		.replace(/([ 。：，])/g, `${breakId}$1`)
+		.split(breakId);
 };
