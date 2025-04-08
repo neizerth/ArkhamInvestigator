@@ -45,7 +45,9 @@ export const StartButton = () => {
 						<C.InvestigatorImage key={item.id} source={getImageSource(item)} />
 					))}
 				</C.Investigators>
-				<C.Text>{title}</C.Text>
+				<C.TextContainer>
+					<C.Text>{title}</C.Text>
+				</C.TextContainer>
 				<C.Icon icon="right-arrow" />
 			</C.Content>
 		</C.Container>

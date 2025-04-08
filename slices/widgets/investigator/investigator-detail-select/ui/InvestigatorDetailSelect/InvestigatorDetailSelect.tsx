@@ -61,8 +61,7 @@ export const InvestigatorDetailSelect = () => {
 	}
 
 	const faction = investigator.faction_code as Faction;
-	const name = t(investigator.name);
-	const subname = t(investigator.subname || "");
+	const { name, subname = "" } = investigator;
 
 	const formattedName = formatGameText(name);
 	const formattedSubname = formatGameText(subname);

@@ -1,19 +1,32 @@
 import { translateInvestigator } from "@features/i18n/lib/translateInvestigator";
 import type { AppThunk } from "@shared/lib";
-import { omit } from "ramda";
+import type { InvestigatorSource } from "@shared/model";
+import { isNotNil, omit } from "ramda";
 import {
 	selectInvestigatorBoards,
 	setInvestigatorBoards,
 } from "../../../../../../../../shared/lib/store/features/board/board";
+import {
+	selectSelectedInvestigators,
+	setSelectedInvestigators,
+} from "../../../../../../../../shared/lib/store/features/game/game";
 import { selectInvestigatorSources } from "../../../../../../../../shared/lib/store/features/investigators/investigatorSources/investigatorSources";
 import { propIncludes } from "../../../../../../../../shared/lib/util/criteria";
 import { selectInvestigatorTranslations } from "../../i18n";
+
+const getCode = ({
+	investigator,
+}: {
+	investigator: InvestigatorSource;
+}) => investigator.code;
 
 export const updateBoardTranslations = (): AppThunk => (dispatch, getState) => {
 	const state = getState();
 
 	const boards = selectInvestigatorBoards(state);
-	const boardCodes = boards.map(({ investigator }) => investigator.code);
+	const boardCodes = boards
+		.map(getCode)
+		.concat(boards.flatMap(({ details }) => details.alternate.map(getCode)));
 
 	const sources = selectInvestigatorSources(state)
 		.filter(propIncludes("code", boardCodes))
@@ -23,25 +36,71 @@ export const updateBoardTranslations = (): AppThunk => (dispatch, getState) => {
 		}, new Map());
 
 	const translations = selectInvestigatorTranslations(state);
+	const selected = selectSelectedInvestigators(state);
 
-	const data = boards.map((item) => {
-		const { code } = item.investigator;
+	const translateByCode = (code?: string) => {
+		const empty = {
+			translated: [],
+		};
+
+		if (!code) {
+			return empty;
+		}
 		const investigator = sources.get(code);
 
-		const translatedInvestigator = translateInvestigator(
-			investigator,
-			translations,
-		);
+		if (!investigator) {
+			return empty;
+		}
+
+		return translateInvestigator(investigator, translations);
+	};
+
+	const data = boards.map((board) => {
+		const { code } = board.investigator;
+
+		const investigator = {
+			...board.investigator,
+			...translateByCode(code),
+		};
+
+		const detailsInvestigator = {
+			...board.details.investigator,
+			...translateByCode(board.details.investigator.code),
+		};
+
+		const details = {
+			...board.details,
+			investigator: omit(["translated"], detailsInvestigator),
+			alternate: board.details.alternate.map((item) => ({
+				...item,
+				investigator: {
+					...item.investigator,
+					...translateByCode(item.investigator.code),
+				},
+			})),
+		};
+
+		const selection = {
+			...board.selection,
+			details,
+		};
 
 		return {
-			...item,
-			investigator: translatedInvestigator,
-			details: {
-				...item.details,
-				investigator: omit(["translated"], translatedInvestigator),
-			},
+			...board,
+			investigator,
+			details,
+			selection,
 		};
 	});
 
+	const selectedData = selected
+		.map(
+			({ code }) =>
+				boards.find(({ investigator }) => investigator.code === code)
+					?.selection,
+		)
+		.filter(isNotNil);
+
 	dispatch(setInvestigatorBoards(data));
+	dispatch(setSelectedInvestigators(selectedData));
 };

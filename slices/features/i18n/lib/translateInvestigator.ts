@@ -1,6 +1,6 @@
 import type { InvestigatorSource } from "@shared/model";
 import type { ArkhamDBInvestigatorCard } from "@shared/model/api/game/arkhamDB";
-import { propEq } from "ramda";
+import { omit, propEq } from "ramda";
 
 export const translateInvestigator = (
 	investigator: InvestigatorSource,
@@ -20,7 +20,7 @@ export const translateInvestigator = (
 	);
 	return {
 		...investigator,
-		...translation,
+		...omit(["code", "faction_code"], translation),
 		translated,
 	};
 };

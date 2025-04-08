@@ -16,7 +16,9 @@ export const selectCurrentDetails = createSelector(
 		const { skins, variants } = mediaDetails;
 		const investigator = details?.investigator;
 
-		const selection = investigators.find(propEq(investigator?.code, "code"));
+		const code = investigator?.code;
+
+		const selection = investigators.find(propEq(code, "code"));
 
 		const skin = skins.find(propEq(selection?.skinId, "value")) || null;
 

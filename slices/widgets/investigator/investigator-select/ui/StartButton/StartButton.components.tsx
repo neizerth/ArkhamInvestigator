@@ -2,7 +2,7 @@ import { TouchableOpacity } from "@features/haptic";
 import { color, font, size } from "@shared/config";
 import { Alegreya } from "@shared/fonts";
 import { Icon as BaseIcon, Row, UnscaledText } from "@shared/ui";
-import { Image } from "react-native";
+import { Image, View } from "react-native";
 import styled from "styled-components/native";
 
 export const Container: typeof TouchableOpacity = styled(TouchableOpacity)`
@@ -26,6 +26,10 @@ export const InvestigatorImage: typeof Image = styled(Image)`
 export const Investigators: typeof Row = styled(Row)`
   justify-content: space-between;
   gap: ${size.gap.small}px;
+`;
+
+export const TextContainer: typeof View = styled(View)`
+  padding-bottom: 3px;
 `;
 
 export const Text: typeof UnscaledText = styled(UnscaledText)`

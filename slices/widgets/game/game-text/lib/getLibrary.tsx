@@ -20,15 +20,17 @@ export const getLibrary = ({
 	cloneElement(...args) {
 		return <C.Text />;
 	},
-	createElement(type, elementProps, ...children) {
+	createElement(type, createElementProps, ...children) {
 		const componentStyle = componentStyles?.[type];
 		const tokenStyle = componentStyles?.[`${type}Token`];
 
 		// @ts-ignore
-		const mergedProps = omit(["key"], {
+		const elementProps = omit(["key"], createElementProps);
+
+		const mergedProps = {
 			...props,
 			...elementProps,
-		});
+		};
 
 		const mergedStyles = [props.style, componentStyle];
 

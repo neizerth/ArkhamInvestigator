@@ -1,4 +1,3 @@
-import { useAppTranslation } from "@features/i18n";
 import { getInvestigatorImageUrl as getImageUrl } from "@shared/api/getInvestigatorImageUrl";
 import type {
 	InvestigatorDetailItem,
@@ -17,9 +16,8 @@ export const InvestigatorDescription = ({
 	skin,
 	variant,
 }: InvestigatorDescriptionProps) => {
-	const { t } = useAppTranslation();
-
 	const { investigator } = variant?.details || data;
+
 	const { code } = investigator;
 	const imageId = skin?.imageId || variant?.imageId || code;
 	const uri = getImageUrl({
@@ -28,8 +26,8 @@ export const InvestigatorDescription = ({
 	});
 	const source = { uri };
 
-	const text = t(investigator.text);
-	const traits = t(investigator.traits || "");
+	const text = investigator.text;
+	const traits = investigator.traits;
 
 	return (
 		<C.Container>
