@@ -18,7 +18,7 @@ export const getLibrary = ({
 	props,
 }: GetLibraryOptions): HTMLReactParserOptions["library"] => ({
 	cloneElement(...args) {
-		return <C.Text />;
+		return <Fragment />;
 	},
 	createElement(type, createElementProps, ...children) {
 		const componentStyle = componentStyles?.[type];

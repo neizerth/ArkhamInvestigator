@@ -2,10 +2,9 @@ import type React from "react";
 import { Fragment } from "react";
 import type { TextProps, ViewProps } from "react-native";
 
-import { identity } from "ramda";
 import { v4 } from "uuid";
 import * as C from "../ui/GameText/GameText.components";
-import { haveChineseGlyphs } from "./glyphs";
+import { getTokens } from "./getTokens";
 
 type Options = {
 	children: React.ReactNode[];
@@ -37,9 +36,10 @@ export function getNodeContents({
 			return <Fragment key={v4()}>{child}</Fragment>;
 		}
 
-		const tokens = getTokens(child, breakSentence).filter(identity);
-
-		// console.log(tokens)
+		const tokens = getTokens({
+			text: child,
+			breakSentence,
+		});
 
 		return (
 			<Fragment key={v4()}>
@@ -54,23 +54,3 @@ export function getNodeContents({
 		);
 	});
 }
-
-const getTokens = (text: string, breakSentence = true) => {
-	// console.log(text);
-	if (haveChineseGlyphs(text)) {
-		// keep last 2 symbols on line
-		return [...text.slice(0, -2), text.slice(-2)];
-	}
-
-	if (!breakSentence) {
-		return [text];
-	}
-
-	const breakId = "__BREAK__";
-	return (
-		text
-			// .replace(/\xa0/g, breakId)
-			.replace(/([ ])/g, ` ${breakId}`)
-			.split(breakId)
-	);
-};

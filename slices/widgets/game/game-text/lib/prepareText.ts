@@ -10,9 +10,6 @@ export const prepareText = (text: string) => {
 		.replace(/\[\[([^\]]+)\]\]/g, "<keyword>$1</keyword>")
 		// icons
 		.replace(/\[([^\]\[]+)\]/g, '<icon icon="$1"/>');
-	// .replace(/[ ]+/g, ' ')
-	// .replace(/\/>(\S)/g, `"/>${wordJoiner}$1`)
-	// .replace(/\/>[ \0xa]/g, `"/>${nbsp}`);
 
 	const lines = content.split("\n");
 	const paragraphs =
@@ -27,9 +24,11 @@ export const prepareText = (text: string) => {
 
 const withTypography = (text: string) => {
 	const base = text
+		// nbsp after icon or keyword
 		.replaceAll("] ", `]${nbsp}`)
-		// .replace(/(?<=\])/, nbsp)
+		// nbsp before digit
 		.replace(/(?<!\])(\d+) /g, `$1${nbsp}`)
+		// nbsp after digit
 		.replace(/(\d+) /g, `$1${nbsp}`);
 
 	const haveWesternGlyphs = haveChineseGlyphs(text) || haveKoreanGlyphs(text);
@@ -40,6 +39,7 @@ const withTypography = (text: string) => {
 
 	return (
 		base
+			// dangling preposition
 			.replace(/(?<=^|\s|\()[\p{L}]{1,3}(?=\s)/gu, `$&${nbsp}`)
 			.replaceAll(`${nbsp} `, nbsp)
 			.replaceAll(` ${nbsp}`, nbsp)
@@ -48,6 +48,7 @@ const withTypography = (text: string) => {
 	);
 };
 
+// changes nbsp to <nobr>
 const nobr = (text: string) => {
 	let result = "";
 	let token = "";
