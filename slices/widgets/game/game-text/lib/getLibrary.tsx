@@ -67,7 +67,11 @@ export const getLibrary = ({
 			});
 
 			return (
-				<C.Word key={v4()} {...elementProps} style={[componentStyles?.nobr]}>
+				<C.Word
+					key={v4()}
+					{...elementProps}
+					style={[componentStyles?.word, componentStyles?.nobr]}
+				>
 					{textContent}
 				</C.Word>
 			);
@@ -105,7 +109,11 @@ export const getLibrary = ({
 			style: mergedStyles,
 		});
 
-		return <C.Word key={v4()}>{content}</C.Word>;
+		return (
+			<C.Word key={v4()} style={componentStyles?.word}>
+				{content}
+			</C.Word>
+		);
 	},
 	isValidElement: () => true,
 });

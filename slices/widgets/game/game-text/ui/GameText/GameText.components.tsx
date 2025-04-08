@@ -8,6 +8,8 @@ export const Text: typeof UnscaledText = styled(UnscaledText)`
 
 export const Word: typeof Row = styled(Row)`
   /* flex: 1; */
+  /* align-items: center; */
+  /* align-items: flex-end; */
 `;
 
 export const Token: typeof View = styled(View)`

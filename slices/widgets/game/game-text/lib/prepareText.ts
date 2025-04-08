@@ -20,12 +20,15 @@ export const prepareText = (text: string) => {
 
 	const result = `<content>${paragraphs}</content>`;
 
+	// console.log(typo);
+
 	return result;
 };
 
 const withTypography = (text: string) => {
 	const base = text
-		.replace(/(?<=\])/, nbsp)
+		.replaceAll("] ", `]${nbsp}`)
+		// .replace(/(?<=\])/, nbsp)
 		.replace(/(?<!\])(\d+) /g, `$1${nbsp}`)
 		.replace(/(\d+) /g, `$1${nbsp}`);
 
@@ -37,8 +40,8 @@ const withTypography = (text: string) => {
 
 	return (
 		base
-			.replace(/(?<=^|\s)[\p{L}]{1,3}(?=\s)/gu, `$&${nbsp}`)
-			.replaceAll(`${nbsp} `, " ")
+			.replace(/(?<=^|\s|\()[\p{L}]{1,3}(?=\s)/gu, `$&${nbsp}`)
+			.replaceAll(`${nbsp} `, nbsp)
 			.replaceAll(` ${nbsp}`, nbsp)
 			// quotes
 			.replace(/"([^"]+)"/g, "“$1”")
@@ -61,21 +64,17 @@ const nobr = (text: string) => {
 		if (char === nbsp) {
 			if (!open) {
 				open = true;
-				token += " ";
 			}
 
+			token += " ";
 			continue;
 		}
-		if (char === nbsp || char === " ") {
+		if (char === " ") {
 			if (open) {
 				open = false;
-				result += `<nobr>${token}</nobr>`;
-				if (char === " ") {
-					result += " ";
-				}
+				result += `<nobr>${token} </nobr>`;
 				token = "";
 			}
-
 			continue;
 		}
 
@@ -83,5 +82,5 @@ const nobr = (text: string) => {
 	}
 	result += open ? `<nobr>${token}</nobr>` : token;
 
-	return result;
+	return result.replace(/(<\/nobr>) /g, " $1");
 };

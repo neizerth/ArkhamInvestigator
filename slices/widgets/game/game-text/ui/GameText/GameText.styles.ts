@@ -20,6 +20,9 @@ export const defaultComponentStyles: ComponentStyleMap = {
 	},
 	iconToken: {},
 	paragraph: {},
+	word: {
+		alignItems: "flex-end",
+	},
 	break: {
 		height: 32,
 	},

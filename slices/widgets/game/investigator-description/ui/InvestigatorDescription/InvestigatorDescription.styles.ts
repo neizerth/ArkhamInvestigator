@@ -30,8 +30,8 @@ export const getFactionStyle = (faction: Faction) => {
       padding-bottom: 5%;
     `,
 		guardian: css`
-      padding-left: 12%;
-      padding-right: 15%;
+      padding-left: 10%;
+      padding-right: 11%;
       padding-bottom: 5%;
     `,
 	};
