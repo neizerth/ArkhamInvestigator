@@ -137,7 +137,7 @@ export const getTitleStyle = (options: GetTitleStyleOptions) => {
 	};
 	const subtitle: ViewStyle = {
 		height: "25%",
-		paddingTop: "0%",
+		paddingTop: "0.3%",
 	};
 	const titleText: TextStyle = {
 		color: textColor,
