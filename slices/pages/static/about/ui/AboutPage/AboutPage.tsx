@@ -82,9 +82,11 @@ export const AboutPage = (props: AboutPageProps) => {
 			</List>
 			<Title>Testing/Ideas</Title>
 			<Paragraph>
-				@User211587, @l_leona_l, @mkrsa, @Aahz7, @ivanmazov82, @mr_zoombee,
-				@Evgesha727, @AxilFirst, @Egoorka_k, @sliapy, @vyacheslav_darmin,
-				@CrazyMind667, @LexAndrVas
+				@Egoorka_k, @AxilFirst, Evgesha727, @User211587, @l_leona_l, @mkrsa,
+				@Aahz7, @ivanmazov82, @mr_zoombee, @sliapy, @vyacheslav_darmin,
+				@CrazyMind667, @LexAndrVas, @Anton_Sabaton, @ezhikhin, @Mpmapuo,
+				@alexander_violator, @ka777ban, @Amarum, @l_leona_l, @litt_n,
+				@Vladimir_NC, @w1ne_kun
 			</Paragraph>
 			<Title>Special Thanks</Title>
 			<List>
