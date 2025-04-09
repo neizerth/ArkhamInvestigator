@@ -1,4 +1,4 @@
-import type { AppThunk } from "@shared/lib/store";
+import type { AppThunk } from "@shared/model";
 import { propEq, reject } from "ramda";
 
 import type { SkillCheckHistoryItem } from "@shared/model";

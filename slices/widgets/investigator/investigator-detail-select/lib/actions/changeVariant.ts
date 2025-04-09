@@ -1,9 +1,8 @@
 import {
-	type AppThunkCreator,
 	selectCurrentInvestigatorDetails,
 	setInvestigatorVariant,
 } from "@shared/lib";
-import type { InvestigatorDetailItem } from "@shared/model";
+import type { AppThunkCreator, InvestigatorDetailItem } from "@shared/model";
 
 export const changeVariant: AppThunkCreator =
 	(item: InvestigatorDetailItem | null) => (dispatch, getState) => {

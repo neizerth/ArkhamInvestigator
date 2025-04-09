@@ -1,4 +1,4 @@
-import type { AppSelector } from "@shared/lib/store";
+import type { AppSelector } from "@shared/model";
 import type { InvestigatorBoard } from "@shared/model";
 import { propEq } from "ramda";
 import { selectInvestigatorBoards } from "../board";

@@ -1,4 +1,4 @@
-import type { AppThunk } from "@shared/lib/store";
+import type { AppThunk } from "@shared/model";
 import type { InvestigatorBoardStat } from "@shared/model";
 import { selectCurrentBoard } from "../../../selectors/current/selectCurrentBoard";
 import { reduceBaseStat } from "./reduceBaseStat";

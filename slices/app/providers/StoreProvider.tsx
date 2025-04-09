@@ -1,4 +1,4 @@
-import { makeStore } from "@shared/lib";
+import { makeStore } from "@shared/lib/store/makeStore";
 import type { PropsWithChildren } from "react";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";

@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { APP_VERSION } from "@shared/config/app";
 import { createSliceState } from "redux-toolkit-helpers";
+import { APP_VERSION } from "../../../../config/app";
 
 export type IAppState = {
 	loading: boolean;

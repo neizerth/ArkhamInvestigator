@@ -1,5 +1,5 @@
 import type { ActionCreator } from "@reduxjs/toolkit";
-import type { AppThunk } from "@shared/lib/store";
+import type { AppThunk } from "@shared/model";
 import { propEq, reject } from "ramda";
 
 import { selectCurrentBoard, setCurrentBoard } from "../../board";

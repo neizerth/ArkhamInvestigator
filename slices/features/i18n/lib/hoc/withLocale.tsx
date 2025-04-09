@@ -1,12 +1,9 @@
+import { type KeyConfig, getKeyConfig } from "@shared/lib";
+import { useAppSelector } from "@shared/lib";
 import type { PropsWithStyle } from "@shared/model";
 import { type AppTextProps, UnscaledText } from "@shared/ui";
 import { mergeDeepRight } from "ramda";
 import type { ComponentType, FC } from "react";
-import { useAppSelector } from "../../../../shared/lib/hooks/store/useAppSelector";
-import {
-	type KeyConfig,
-	getKeyConfig,
-} from "../../../../shared/lib/util/record";
 import { selectCurrentLanguage } from "../store";
 
 type WithLocaleProps = PropsWithStyle & {

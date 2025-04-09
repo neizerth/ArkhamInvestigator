@@ -1,12 +1,12 @@
 import type { ActionCreator } from "@reduxjs/toolkit";
 import {
-	type AppThunk,
 	goBack,
 	replaceCurrentBoard,
 	selectCurrentBoard,
 	setReplaceInvestigator,
 	setSelectedInvestigators,
 } from "@shared/lib";
+import type { AppThunk } from "@shared/model";
 import { selectGameInvestigatorBoards } from "../selectors";
 
 export const replaceInvestigator: ActionCreator<AppThunk> =

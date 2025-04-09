@@ -1,6 +1,5 @@
 import { createSelector } from "@reduxjs/toolkit";
-import { getMediaVariants } from "../../../../../../lib/features/game/media/getMediaVariants";
-import { getMediaSkins } from "../../../../../features/game/media/getMediaSkins";
+import { getMediaSkins, getMediaVariants } from "../../../../../features";
 import { selectCurrentInvestigatorDetails } from "../../game";
 
 export const selectInvestigatorMediaDetails = createSelector(

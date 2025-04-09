@@ -1,12 +1,8 @@
 import type { HapticSliderProps } from "@features/haptic";
 import { useAppTranslation } from "@features/i18n";
 import type { ActionCreatorWithPayload } from "@reduxjs/toolkit";
-import {
-	type AppThunk,
-	type RootState,
-	useAppDispatch,
-	useAppSelector,
-} from "@shared/lib";
+import { useAppDispatch, useAppSelector } from "@shared/lib";
+import type { AppThunk, RootState } from "@shared/model";
 import { useCallback } from "react";
 import type { Selector } from "react-redux";
 import * as C from "./StoreSlider.components";

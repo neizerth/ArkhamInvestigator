@@ -1,7 +1,7 @@
+import { useAppSelector } from "@shared/lib";
 import type { InvestigatorBoardSource } from "@shared/model";
 import type { ArkhamDBInvestigatorCard } from "@shared/model/api/game/arkhamDB";
 import { useCallback } from "react";
-import { useAppSelector } from "../../../../shared/lib/hooks/store/useAppSelector";
 import { selectLanguage } from "../store";
 import { useAppTranslation } from "./useAppTranslation";
 

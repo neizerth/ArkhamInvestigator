@@ -1,17 +1,15 @@
 import { translateInvestigator } from "@features/i18n/lib/translateInvestigator";
-import type { AppThunk } from "@shared/lib";
+import {
+	propIncludes,
+	selectInvestigatorBoards,
+	selectInvestigatorSources,
+	selectSelectedInvestigators,
+	setInvestigatorBoards,
+	setSelectedInvestigators,
+} from "@shared/lib";
+import type { AppThunk } from "@shared/model";
 import type { InvestigatorSource } from "@shared/model";
 import { isNotNil, omit } from "ramda";
-import {
-	selectInvestigatorBoards,
-	setInvestigatorBoards,
-} from "../../../../../../../../shared/lib/store/features/board/board";
-import {
-	selectSelectedInvestigators,
-	setSelectedInvestigators,
-} from "../../../../../../../../shared/lib/store/features/game/game";
-import { selectInvestigatorSources } from "../../../../../../../../shared/lib/store/features/investigators/investigatorSources/investigatorSources";
-import { propIncludes } from "../../../../../../../../shared/lib/util/criteria";
 import { selectInvestigatorTranslations } from "../../i18n";
 
 const getCode = ({

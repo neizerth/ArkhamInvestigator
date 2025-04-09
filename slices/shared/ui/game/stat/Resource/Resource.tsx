@@ -1,7 +1,7 @@
 import {
 	type WithBackgroundComponentProps,
 	withImageBackground,
-} from "@shared/lib/hoc";
+} from "../../../../lib/hoc";
 
 const source = require("./images/resource.png");
 

@@ -1,5 +1,5 @@
-import { withImageBackground } from "@shared/lib/hoc";
 import type { ImageBackgroundProps } from "react-native";
+import { withImageBackground } from "../../../../lib/hoc";
 
 const source = require("./images/sanity.png");
 

@@ -1,7 +1,7 @@
 import type { ActionCreator } from "@reduxjs/toolkit";
-import { mergeBoardStats } from "@shared/lib/features";
-import type { AppThunk } from "@shared/lib/store";
+import type { AppThunk } from "@shared/model";
 import type { InvestigatorBoard } from "@shared/model";
+import { mergeBoardStats } from "../../../../../features";
 import { selectCurrentBoard } from "../../selectors/current/selectCurrentBoard";
 import { setCurrentBoard } from "./setCurrentBoard";
 

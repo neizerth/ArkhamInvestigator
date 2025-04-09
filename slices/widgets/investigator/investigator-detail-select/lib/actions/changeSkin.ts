@@ -1,11 +1,10 @@
+import { setBoardDetails } from "@features/board";
 import {
-	type AppThunkCreator,
 	selectCurrentBoard,
 	selectCurrentInvestigatorDetails,
-	setBoardDetails,
 	setInvestigatorSkin,
 } from "@shared/lib";
-import type { InvestigatorDetailItem } from "@shared/model";
+import type { AppThunkCreator, InvestigatorDetailItem } from "@shared/model";
 
 export const changeSkin: AppThunkCreator =
 	(item: InvestigatorDetailItem | null) => (dispatch, getState) => {

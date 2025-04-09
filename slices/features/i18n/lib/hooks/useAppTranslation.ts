@@ -1,6 +1,6 @@
+import { useAppSelector } from "@shared/lib";
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
-import { useAppSelector } from "../../../../shared/lib/hooks/store/useAppSelector";
 import { DEFAULT_LANGUAGE } from "../../config/i18n";
 import { selectLanguage } from "../store/features/i18n/i18n";
 

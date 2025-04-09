@@ -1,12 +1,8 @@
 import type { HapticSelectProps } from "@features/haptic";
 import { useAppTranslation } from "@features/i18n";
 import type { ActionCreatorWithPayload, Selector } from "@reduxjs/toolkit";
-import {
-	type AppThunk,
-	type RootState,
-	useAppDispatch,
-	useAppSelector,
-} from "@shared/lib";
+import { useAppDispatch, useAppSelector } from "@shared/lib";
+import type { AppThunk, RootState } from "@shared/model";
 import type { SelectItem } from "@shared/ui";
 import { propEq } from "ramda";
 import { useCallback } from "react";

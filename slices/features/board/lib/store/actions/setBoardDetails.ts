@@ -1,15 +1,16 @@
 import { selectTranslatedInvestigators } from "@features/i18n";
 import type { ActionCreator } from "@reduxjs/toolkit";
 import {
+	getBoardStats,
 	getSelectedInvestigatorOptions,
 	mergeBoardStats,
-} from "@shared/lib/features";
-import { getBoardStats } from "@shared/lib/features/game/board/getBoardStats";
-import type { AppThunk } from "@shared/lib/store";
+	selectCurrentBoard,
+	setCurrentBoard,
+} from "@shared/lib";
+
+import type { AppThunk } from "@shared/model";
 import type { SelectedInvestigator } from "@shared/model";
 import { propEq } from "ramda";
-import { selectCurrentBoard } from "../../selectors";
-import { setCurrentBoard } from "./setCurrentBoard";
 
 type SetBoardDetailsOptions = {
 	variantId?: string | null;

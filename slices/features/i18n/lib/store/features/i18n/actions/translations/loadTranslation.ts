@@ -1,4 +1,4 @@
-import type { AppThunkCreator } from "@shared/lib";
+import type { AppThunkCreator } from "@shared/model";
 import { setLoadingLanguage } from "../../i18n";
 import { fetchTranslationData } from "./fetchTranslationData";
 import { loadArkhamDBTranslations } from "./loadArkhamDBTranslations";

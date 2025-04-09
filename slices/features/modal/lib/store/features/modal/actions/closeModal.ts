@@ -1,4 +1,4 @@
-import type { AppThunk } from "@shared/lib";
+import type { AppThunk } from "@shared/model";
 import { setModalData, setModalId } from "../modal";
 
 export const closeModal = (): AppThunk => (dispatch) => {

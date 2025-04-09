@@ -1,10 +1,12 @@
-import type { ModalContextType } from "@features/modal/lib";
+import { closeModal } from "@features/modal/lib";
+import { useAppDispatch, useAppSelector } from "@shared/lib";
 import { type PropsWithChildren, useCallback, useEffect, useRef } from "react";
 import { BackHandler } from "react-native";
-import { useAppDispatch } from "../../../../shared/lib/hooks/store/useAppDispatch";
-import { useAppSelector } from "../../../../shared/lib/hooks/store/useAppSelector";
-import { ModalContext, type ModalEventHandlerType } from "../../lib/context";
-import { closeModal } from "../../lib/store/features/modal/actions/closeModal";
+import {
+	ModalContext,
+	type ModalContextType,
+	type ModalEventHandlerType,
+} from "../../lib/context";
 import {
 	selectModalData,
 	selectModalId,

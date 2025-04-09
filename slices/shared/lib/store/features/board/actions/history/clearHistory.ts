@@ -1,4 +1,4 @@
-import type { AppThunkCreator } from "@shared/lib/store";
+import type { AppThunkCreator } from "@shared/model";
 import { selectCurrentBoard } from "../../selectors/current/selectCurrentBoard";
 import { setCurrentBoard } from "../board/setCurrentBoard";
 

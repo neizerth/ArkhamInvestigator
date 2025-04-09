@@ -1,5 +1,5 @@
 import { createSelector } from "@reduxjs/toolkit";
-import { getIsTurnEnd } from "@shared/lib/features";
+import { getIsTurnEnd } from "../../../../../features";
 import { selectEndTurnStrict } from "../../board";
 import { selectCurrentBoard } from "./selectCurrentBoard";
 

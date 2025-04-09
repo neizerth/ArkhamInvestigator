@@ -1,8 +1,6 @@
-import {
-	type AppThunkCreator,
-	selectCurrentBoard,
-	setBoardDetails,
-} from "@shared/lib";
+import { setBoardDetails } from "@features/board";
+import { selectCurrentBoard } from "@shared/lib";
+import type { AppThunkCreator } from "@shared/model";
 import { selectCurrentDetails } from "../selectors";
 
 export const updateBoardDetails: AppThunkCreator =

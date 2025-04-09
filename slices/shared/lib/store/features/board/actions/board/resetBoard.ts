@@ -1,5 +1,5 @@
 import type { ActionCreator } from "@reduxjs/toolkit";
-import type { AppThunk } from "@shared/lib/store";
+import type { AppThunk } from "@shared/model";
 import {
 	NEW_TURN_ACTIONS_COUNT,
 	START_GAME_RESOURCES_COUNT,

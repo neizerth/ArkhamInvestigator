@@ -1,8 +1,8 @@
 import type { ActionCreator } from "@reduxjs/toolkit";
-import { getSkillCheckValue } from "@shared/lib/features";
-import type { AppThunk } from "@shared/lib/store";
+import type { AppThunk } from "@shared/model";
 import type { SkillCheckHistoryItem } from "@shared/model";
 import { v4 } from "uuid";
+import { getSkillCheckValue } from "../../../../../features";
 import {
 	selectSkillCheckData,
 	selectSkillCheckType,

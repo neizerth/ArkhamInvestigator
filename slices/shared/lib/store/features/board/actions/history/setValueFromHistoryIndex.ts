@@ -1,4 +1,4 @@
-import type { AppThunkCreator } from "@shared/lib/store";
+import type { AppThunkCreator } from "@shared/model";
 import type { InvestigatorBoard, InvestigatorBoardValues } from "@shared/model";
 
 import { prop } from "ramda";

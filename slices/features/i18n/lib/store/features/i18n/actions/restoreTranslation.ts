@@ -4,7 +4,7 @@ import {
 	i18next,
 	translations,
 } from "@features/i18n/config";
-import type { AppThunkCreator } from "@shared/lib";
+import type { AppThunkCreator } from "@shared/model";
 import { loadStoreTranslation } from "../../../../storage/translation";
 import { selectLanguage } from "../i18n";
 import { loadTranslation } from "./translations/loadTranslation";

@@ -1,11 +1,14 @@
 import type { ActionCreator } from "@reduxjs/toolkit";
-import { MAX_PLAYERS, routes } from "@shared/config";
-import { goToPage } from "@shared/lib/store/effects";
-import { includesBy } from "@shared/lib/util";
-import type { InvestigatorDetails, SelectedInvestigator } from "@shared/model";
+import type {
+	AppThunk,
+	InvestigatorDetails,
+	SelectedInvestigator,
+} from "@shared/model";
 import { propEq, reject } from "ramda";
 import { v4 } from "uuid";
-import type { AppThunk } from "../../../";
+import { MAX_PLAYERS, routes } from "../../../../../config";
+import { includesBy } from "../../../../util";
+import { goToPage } from "../../../effects";
 import {
 	selectCurrentInvestigatorDetails,
 	selectSelectedInvestigators,

@@ -1,12 +1,8 @@
 import { detectDefaultLanguage, setAvailableLanguages } from "@features/i18n";
 import { loadGameCoreData } from "@shared/api";
-import {
-	type AppThunk,
-	setIcons,
-	setInvestigatorSources,
-	setStories,
-} from "@shared/lib";
+import { setIcons, setInvestigatorSources, setStories } from "@shared/lib";
 import { setEncounterSets } from "@shared/lib/store/features/encounterSets";
+import type { AppThunk } from "@shared/model";
 import { prop } from "ramda";
 
 export const loadAppData = (): AppThunk => async (dispatch) => {

@@ -1,4 +1,4 @@
-import type { AppThunk } from "@shared/lib";
+import type { AppThunk } from "@shared/model";
 import { selectShowFactionSelect, setShowFactionSelect } from "../../board";
 
 export const toggleFactionSelect = (): AppThunk => (dispatch, getState) => {

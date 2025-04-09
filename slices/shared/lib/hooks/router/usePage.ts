@@ -1,6 +1,6 @@
-import { setShowDescription } from "@shared/lib/store";
 import type { Href } from "expo-router";
 import { useCallback } from "react";
+import { setShowDescription } from "../../store";
 import { goToPage } from "../../store/effects/router";
 import { useAppDispatch } from "../store";
 

@@ -1,4 +1,4 @@
-import type { AppThunk } from "@shared/lib/store";
+import type { AppThunk } from "@shared/model";
 import type { InvestigatorBoard } from "@shared/model";
 import {
 	selectCurrentInvestigatorIndex,

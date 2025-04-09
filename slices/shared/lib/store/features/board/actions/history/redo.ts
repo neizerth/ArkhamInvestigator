@@ -1,4 +1,4 @@
-import type { AppThunkCreator } from "@shared/lib/store";
+import type { AppThunkCreator } from "@shared/model";
 import { goToHistory } from "./goToHistory";
 
 export const redo: AppThunkCreator = () => (dispatch) =>

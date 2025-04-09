@@ -1,8 +1,8 @@
-import type { AppThunk } from "@shared/lib";
+import type { AppThunk } from "@shared/model";
 import type { ArkhamDBInvestigatorCard } from "@shared/model/api/game/arkhamDB";
-import { loadArkhamDBInvestigatorData } from "../../../../../../../../shared/api/arkhamDB";
-import { selectInvestigatorSources } from "../../../../../../../../shared/lib/store/features/investigators/investigatorSources/investigatorSources";
 
+import { loadArkhamDBInvestigatorData } from "@shared/api";
+import { selectInvestigatorSources } from "@shared/lib";
 import { setInvestigatorTranslations } from "../../i18n";
 import { updateBoardTranslations } from "./updateBoardTranslations";
 

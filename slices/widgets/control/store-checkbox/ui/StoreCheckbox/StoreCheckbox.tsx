@@ -1,12 +1,8 @@
 import { Checkbox, type CheckboxProps } from "@features/haptic";
 import { useAppTranslation } from "@features/i18n";
 import type { ActionCreatorWithPayload } from "@reduxjs/toolkit";
-import {
-	type AppThunk,
-	type RootState,
-	useAppDispatch,
-	useAppSelector,
-} from "@shared/lib";
+import { useAppDispatch, useAppSelector } from "@shared/lib";
+import type { AppThunk, RootState } from "@shared/model";
 import { useCallback } from "react";
 import type { GestureResponderEvent } from "react-native";
 import type { Selector } from "react-redux";
