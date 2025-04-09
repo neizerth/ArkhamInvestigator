@@ -6,4 +6,7 @@ export const getIconStyle = getKeyConfig<ViewStyle>({
 	reaction: {
 		paddingTop: 5,
 	},
+	investigator: {
+		paddingTop: 5,
+	},
 });
