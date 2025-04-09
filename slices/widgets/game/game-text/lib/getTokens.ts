@@ -37,9 +37,9 @@ const tokenize = ({ text, breakSentence = true }: Options) => {
 
 export const getChineseTokens = (text: string) => {
 	const tokens = text
-		.slice(0, -2)
+		.slice(0, -3)
 		// keep punctuation
-		.replace(/(?![?.,;!¡¿。、·])(.)/g, `$1${breakId}`)
+		.replace(/(?![?.,;!¡¿。、·一])(.)/g, `$1${breakId}`)
 		.split(breakId);
 	return [
 		...tokens,
