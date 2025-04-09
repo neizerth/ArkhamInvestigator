@@ -9,6 +9,9 @@ export const getAbilityLimits = ({ limitPer }: InvestigatorAbility) => {
 };
 
 export const isBoardAbility = (ability: InvestigatorAbility) => {
+	if (ability.perInvestigator) {
+		return false;
+	}
 	if (!BOARD_ABILITY_TYPES.includes(ability.type)) {
 		return false;
 	}

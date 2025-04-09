@@ -1,13 +1,31 @@
 {
-	"extends": "./tsconfig.base.json",
-	"compilerOptions": {
-		"paths": {
-			"@app/*": ["./slices/app/*"],
-			"@shared/*": ["./slices/shared/*"],
-			"@entities/*": ["./slices/entities/*"],
-			"@pages/*": ["./slices/pages/*"],
-			"@widgets/*": ["./slices/widgets/*"],
-			"@features/*": ["./slices/features/*"]
-		}
-	}
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "paths": {
+      "@app/*": [
+        "./slices/app/*"
+      ],
+      "@shared/*": [
+        "./slices/shared/*"
+      ],
+      "@entities/*": [
+        "./slices/entities/*"
+      ],
+      "@pages/*": [
+        "./slices/pages/*"
+      ],
+      "@widgets/*": [
+        "./slices/widgets/*"
+      ],
+      "@features/*": [
+        "./slices/features/*"
+      ]
+    }
+  },
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    ".expo/types/**/*.ts",
+    "expo-env.d.ts"
+  ]
 }
