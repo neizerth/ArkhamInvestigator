@@ -1,5 +1,4 @@
 import { useInvestigatorTranslation } from "@features/i18n";
-import { LayoutContext } from "@pages/board/config";
 import {
 	selectBoardProp,
 	selectBoardsCount,
@@ -13,6 +12,7 @@ import { InvestigatorHeaderMemo as InvestigatorHeader } from "@widgets/game/inve
 import type { RenderInvestigatorSkillItem } from "@widgets/game/investigator-skills";
 import { useCallback, useContext } from "react";
 import type { ViewProps } from "react-native";
+import { LayoutContext } from "../../../../config";
 import * as C from "./BoardHeader.components";
 
 export type BoardHeaderProps = ViewProps;

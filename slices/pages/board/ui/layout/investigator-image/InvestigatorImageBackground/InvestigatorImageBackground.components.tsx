@@ -1,4 +1,3 @@
-import type { HeaderLayout } from "@pages/board/model";
 import type { BoxLayout } from "@shared/model";
 import type { FC } from "react";
 import { View } from "react-native";
@@ -6,6 +5,7 @@ import { Image, type ImageProps } from "react-native";
 import type { ViewProps } from "react-native";
 import Animated from "react-native-reanimated";
 import styled, { css } from "styled-components/native";
+import type { HeaderLayout } from "../../../../model";
 
 type BackgroundProps = ImageProps & {
 	layout: BoxLayout;

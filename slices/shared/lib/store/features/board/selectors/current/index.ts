@@ -1,5 +1,5 @@
 export * from "./selectCurrentBoard";
-export * from "./selectCurrentTurnEnd";
+export * from "./turn";
 export * from "./faction";
 export * from "./props";
 export * from "./values";

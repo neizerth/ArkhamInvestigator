@@ -1,5 +1,3 @@
-import { faceSize } from "@pages/board/config";
-import type { HeaderLayout } from "@pages/board/model";
 import {
 	getCoverScaleAt,
 	scaleBox,
@@ -9,6 +7,8 @@ import {
 import { getBoxCenter, getBoxLayoutCenter } from "@shared/lib/util/size/box";
 import type { InvestigatorPicture } from "@shared/model";
 import type { Box } from "@shared/model/ui";
+import { faceSize } from "../../../config";
+import type { HeaderLayout } from "../../../model";
 
 type GetImageLayout = {
 	layout: HeaderLayout;

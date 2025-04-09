@@ -1,14 +1,14 @@
-import { TouchableOpacity } from "@features/haptic";
-import { assetsSize } from "@pages/board/config";
-import { withStat } from "@pages/board/lib/hoc/withStat";
 import { color, gameAssets } from "@shared/config";
-import { Action, Icon } from "@shared/ui";
+import { Action } from "@shared/ui";
 import { Value } from "@widgets/investigator/value";
 import type { FC } from "react";
 import { View } from "react-native";
 import styled from "styled-components/native";
-import { BaseStatPicker, type DefinedBaseStatPickerProps } from "../common";
-import { StatPickerMemo as StatPicker } from "../common/StatPicker";
+import { assetsSize } from "../../../../../config";
+import { withStat } from "../../../../../lib";
+import { BaseStatPicker, type DefinedBaseStatPickerProps } from "../../common";
+import { StatPickerMemo as StatPicker } from "../../common/StatPicker";
+import { SpecialActions } from "../SpecialActions";
 
 const BaseBackground = withStat(Action, {
 	height: assetsSize.action,
@@ -27,17 +27,11 @@ export const Content: typeof View = styled(View)`
   flex: 1;
 `;
 
-export const AdditionalAction: typeof TouchableOpacity = styled(
-	TouchableOpacity,
-)`
+export const Special: typeof SpecialActions = styled(SpecialActions)`
   position: absolute;
-  z-index: 3;
-  bottom: 12px;
-  right: -45px;
-  height: 48px;
-  width: 48px;
-  justify-content: center;
-  align-items: center;
+  z-index: -1;
+  bottom: 8px;
+  left: 45px;
 `;
 
 export const BaseActions: FC<DefinedBaseStatPickerProps> = styled(
@@ -63,17 +57,6 @@ export const BaseActions: FC<DefinedBaseStatPickerProps> = styled(
 export const DiffValue: typeof Value = styled(Value)`
   font-size: 30px;
   color: ${color.action};
-`;
-
-export const ActionIcon: typeof Icon = styled(Icon)`
-  font-size: 30px;
-  color: ${color.white};
-`;
-
-export const UsedAction: typeof Icon = styled(Icon)`
-  font-size: 35px;
-  color: ${color.health};
-  position: absolute;
 `;
 
 export const Picker: typeof StatPicker = styled(StatPicker).attrs({

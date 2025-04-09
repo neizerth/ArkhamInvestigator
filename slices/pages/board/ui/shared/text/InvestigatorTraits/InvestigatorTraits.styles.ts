@@ -1,8 +1,8 @@
-import { boardText } from "@pages/board/config";
 import { ArnoPro, STXinwei } from "@shared/fonts";
 import { SanCn } from "@shared/fonts";
 import { getKeyConfig } from "@shared/lib";
 import type { TextStyle } from "react-native";
+import { boardText } from "../../../../config";
 
 type GetInvestigatorTraitsStyleOptions = {
 	language: string;

@@ -1,5 +1,4 @@
 import { useAppTranslation } from "@features/i18n";
-import { startNewGame } from "@pages/home/lib";
 import { routes } from "@shared/config";
 import {
 	selectCurrentBoard,
@@ -9,6 +8,7 @@ import {
 	usePageLoader,
 } from "@shared/lib";
 import { useCallback } from "react";
+import { startNewGame } from "../../lib";
 import { Button } from "../Button";
 import * as C from "./HomePage.components";
 export const HomePage = () => {

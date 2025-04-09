@@ -1,11 +1,11 @@
 import { TouchableOpacity } from "@features/haptic";
-import { skillCheckColor } from "@pages/skill-check/config";
 import { color } from "@shared/config";
 import { Copasetic } from "@shared/fonts";
 import { Icon as BaseIcon, UnscaledText } from "@shared/ui";
 import type { FC } from "react";
 import type { RuleSet } from "styled-components";
 import styled, { css } from "styled-components/native";
+import { skillCheckColor } from "../../../../config";
 import type {
 	ButtonTextProps,
 	KeyboardButtonProps,

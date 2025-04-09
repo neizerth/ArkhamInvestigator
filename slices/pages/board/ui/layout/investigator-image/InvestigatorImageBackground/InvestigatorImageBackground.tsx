@@ -1,5 +1,3 @@
-import { LayoutContext } from "@pages/board/config";
-import { getPortraitLayout } from "@pages/board/lib";
 import {
 	selectBoardProp,
 	useAppSelector,
@@ -7,6 +5,8 @@ import {
 } from "@shared/lib";
 import { memo, useContext } from "react";
 import type { ViewProps } from "react-native";
+import { LayoutContext } from "../../../../config";
+import { getPortraitLayout } from "../../../../lib";
 import * as C from "./InvestigatorImageBackground.components";
 import { useInvestigatorImageStyle } from "./useInvestigatorImageStyle";
 

@@ -2,7 +2,6 @@ import { BackspaceImage } from "./images/images";
 
 import { TouchableOpacity } from "@features/haptic";
 import { withLocale } from "@features/i18n";
-import { skillCheckColor } from "@pages/skill-check/config";
 import { color, font, size } from "@shared/config";
 import { Copasetic, Enthalpy298 } from "@shared/fonts";
 import { Row as BaseRow, UnscaledText } from "@shared/ui";
@@ -10,6 +9,7 @@ import type { FC } from "react";
 import { View, type ViewProps } from "react-native";
 import type { SvgProps } from "react-native-svg";
 import styled, { css } from "styled-components/native";
+import { skillCheckColor } from "../../../../config";
 import * as Buttons from "../KeyboardButton";
 import { StatsKeyboard } from "../StatsKeyboard";
 import RuleBottom from "./images/rule.svg";

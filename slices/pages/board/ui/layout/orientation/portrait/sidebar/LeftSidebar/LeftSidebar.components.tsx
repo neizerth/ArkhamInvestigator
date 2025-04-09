@@ -1,10 +1,10 @@
 import { TouchableOpacity, type TouchableOpacityProps } from "@features/haptic";
-import { assetsSize } from "@pages/board/config";
 import type { PropsWithUnit } from "@shared/model";
 import { type DefinedIconProps, Icon } from "@shared/ui";
 import type { FC } from "react";
 import { View, type ViewProps } from "react-native";
 import styled, { css } from "styled-components/native";
+import { assetsSize } from "../../../../../../config";
 
 type ContainerProps = ViewProps &
 	PropsWithUnit & {

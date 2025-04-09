@@ -1,9 +1,9 @@
-import { servicePadding } from "@pages/board/config";
-import type { PropsWithLayout } from "@pages/board/model";
 import { color } from "@shared/config";
 import type { FC } from "react";
 import { View } from "react-native";
 import styled, { css } from "styled-components/native";
+import { servicePadding } from "../../config";
+import type { PropsWithLayout } from "../../model";
 import { BoardHeader, type BoardHeaderProps } from "../layout";
 import {
 	PortraitLayout as BasePortraitLayout,

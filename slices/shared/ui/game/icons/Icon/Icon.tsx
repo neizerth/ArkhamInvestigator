@@ -1,6 +1,6 @@
-import { ArkhamIcons } from "@shared/fonts";
 import type { IconScaleType, PropsWithStroke } from "@shared/model";
 import { propEq } from "ramda";
+import { ArkhamIcons } from "../../../../fonts";
 import { getIconScale } from "../../../../lib/features/game/icons";
 import { useAppSelector } from "../../../../lib/hooks/store/useAppSelector";
 import { selectIcons } from "../../../../lib/store/features/icons";

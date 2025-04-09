@@ -1,6 +1,6 @@
-import { skillCheckBreakpoints } from "@pages/skill-check/config";
-import type { SkillCheckLayoutType } from "@pages/skill-check/model";
 import { useWindowDimensions } from "react-native";
+import { skillCheckBreakpoints } from "../../config";
+import type { SkillCheckLayoutType } from "../../model";
 
 export const useSkillCheckLayoutType = (): SkillCheckLayoutType => {
 	const window = useWindowDimensions();

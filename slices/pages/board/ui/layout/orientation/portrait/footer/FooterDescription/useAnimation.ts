@@ -1,8 +1,3 @@
-import {
-	LayoutContext,
-	PORTRAIT_DESCRIPTION_HEIGHT,
-	descriptionSize,
-} from "@pages/board/config";
 import { selectShowDescription, useAppSelector } from "@shared/lib";
 import { useContext, useEffect } from "react";
 import {
@@ -10,6 +5,11 @@ import {
 	useSharedValue,
 	withTiming,
 } from "react-native-reanimated";
+import {
+	LayoutContext,
+	PORTRAIT_DESCRIPTION_HEIGHT,
+	descriptionSize,
+} from "../../../../../../config";
 
 export const useAnimation = () => {
 	const top = useSharedValue(0);

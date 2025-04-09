@@ -1,10 +1,10 @@
-import { useSkillCheckLayoutType } from "@pages/skill-check/lib";
 import {
 	selectHistoryShown,
 	selectSkillCheckData,
 	useAppSelector,
 } from "@shared/lib";
 import type { ViewProps } from "react-native";
+import { useSkillCheckLayoutType } from "../../../../lib";
 import { ExpressionDisplay } from "../ExpressionDisplay";
 import { ExpressionHistory } from "../ExpressionHistory";
 import { ExpressionValue } from "../ExpressionValue";

@@ -1,5 +1,5 @@
-import type { HeaderLayout } from "@pages/board/model";
 import { titleStyle } from "@widgets/game/investigator-title";
+import type { HeaderLayout } from "../../model";
 
 export const getTitleSize = (layout: HeaderLayout) => {
 	if (layout.type === "column") {

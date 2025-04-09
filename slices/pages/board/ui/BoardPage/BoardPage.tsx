@@ -1,6 +1,3 @@
-import { servicePadding } from "@pages/board/config";
-import { LayoutContext } from "@pages/board/config/context";
-import { getHeaderLayout, useStatusBar } from "@pages/board/lib";
 import { size } from "@shared/config";
 import {
 	selectCurrentBoard,
@@ -10,6 +7,8 @@ import {
 	useScreenOrientation,
 } from "@shared/lib";
 import { useWindowDimensions } from "react-native";
+import { LayoutContext, servicePadding } from "../../config";
+import { getHeaderLayout, useStatusBar } from "../../lib";
 import { FactionSelect } from "../shared";
 import * as C from "./BoardPage.components";
 

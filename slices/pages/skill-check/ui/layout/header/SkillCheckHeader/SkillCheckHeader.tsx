@@ -1,4 +1,3 @@
-import { useSkillCheckLayoutType } from "@pages/skill-check/lib";
 import {
 	clearSkillCheckHistory,
 	goBack,
@@ -10,6 +9,7 @@ import {
 } from "@shared/lib";
 import { useCallback } from "react";
 import type { ViewProps } from "react-native";
+import { useSkillCheckLayoutType } from "../../../../lib";
 import * as C from "./SkillCheckHeader.components";
 
 type SkillCheckHeaderProps = ViewProps;

@@ -1,6 +1,6 @@
-import { API_URL } from "@shared/config";
-import { BUILD_VERSION } from "@shared/config/app";
 import type { GameCoreData, GameTranslationData } from "@shared/model";
+import { API_URL } from "../config";
+import { BUILD_VERSION } from "../config/app";
 import { loadJSON } from "./loadJSON";
 
 export const loadGameCoreData = () =>

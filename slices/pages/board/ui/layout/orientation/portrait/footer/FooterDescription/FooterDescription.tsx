@@ -1,5 +1,4 @@
 import { useHapticFeedback } from "@features/haptic";
-import { LayoutContext } from "@pages/board/config";
 import { useRoute } from "@react-navigation/native";
 import {
 	selectBoardProp,
@@ -11,6 +10,7 @@ import {
 } from "@shared/lib";
 import { useCallback, useContext, useEffect } from "react";
 import { BackHandler, StyleSheet, type ViewProps } from "react-native";
+import { LayoutContext } from "../../../../../../config";
 import * as C from "./FooterDescription.components";
 import { useAnimation } from "./useAnimation";
 

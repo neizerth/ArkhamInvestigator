@@ -1,14 +1,14 @@
-import {
-	InvestigatorFlavor,
-	InvestigatorText,
-	InvestigatorTraits,
-} from "@pages/board/ui/shared/text";
 import { size } from "@shared/config";
 import { InvestigatorDescription } from "@widgets/game/investigator-description";
 import { Pressable, View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import Animated from "react-native-reanimated";
 import styled from "styled-components/native";
+import {
+	InvestigatorFlavor,
+	InvestigatorText,
+	InvestigatorTraits,
+} from "../../../../../shared";
 import { DescriptionMenu } from "../DescriptionMenu";
 import { DescriptionTopMenu } from "../DescriptionTopMenu";
 
@@ -78,4 +78,6 @@ export const Flavor: typeof InvestigatorFlavor = styled(
 })`
 `;
 
-export { InvestigatorText as Text };
+export const Text: typeof InvestigatorText = styled(InvestigatorText)`
+  position: relative;
+`;

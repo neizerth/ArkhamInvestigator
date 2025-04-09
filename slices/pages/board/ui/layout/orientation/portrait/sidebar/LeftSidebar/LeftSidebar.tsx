@@ -1,5 +1,3 @@
-import { PortraitLayoutContext } from "@pages/board/config";
-import { InvestigatorSelect } from "@pages/board/ui/shared/features";
 import {
 	redo,
 	selectBoardProp,
@@ -11,6 +9,8 @@ import {
 } from "@shared/lib";
 import { useCallback, useContext } from "react";
 import type { ViewProps } from "react-native";
+import { PortraitLayoutContext } from "../../../../../../config";
+import { InvestigatorSelect } from "../../../../../shared";
 import * as C from "./LeftSidebar.components";
 
 export type LeftSidebarProps = ViewProps;

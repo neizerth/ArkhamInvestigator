@@ -1,7 +1,7 @@
-import { servicePadding } from "@pages/board/config";
-import type { HeaderLayout } from "@pages/board/model";
 import { miniImageSize } from "@shared/config";
 import type { Box } from "@shared/model/ui";
+import { servicePadding } from "../../../config";
+import type { HeaderLayout } from "../../../model";
 
 type GetImageLayout = {
 	layout: HeaderLayout;

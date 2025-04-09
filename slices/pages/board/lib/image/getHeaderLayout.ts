@@ -1,14 +1,11 @@
-import * as C from "@pages/board/config";
-import type { HeaderLayout, HeaderLayoutType } from "@pages/board/model";
 import type { Box } from "@shared/model";
+import * as C from "../../config";
+import type { HeaderLayout, HeaderLayoutType } from "../../model";
 
 const headerRowWidth =
 	C.titleStyle.width + C.skillsStyle.width - C.headerGap.horizontal;
 
-export const getHeaderLayoutType = ({
-	width,
-	height,
-}: Box): HeaderLayoutType => {
+export const getHeaderLayoutType = ({ width }: Box): HeaderLayoutType => {
 	// const orientation = width > height ? 'landscape' : 'portrait';
 	return width > C.MAX_COLUMN_WIDTH ? "row" : "column";
 };

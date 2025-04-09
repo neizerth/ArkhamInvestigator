@@ -1,5 +1,5 @@
-import type { HeaderLayout } from "@pages/board/model";
 import { skillsStyle } from "@widgets/game/investigator-skills";
+import type { HeaderLayout } from "../../model";
 
 export const getSkillsSize = (layout: HeaderLayout) => {
 	if (layout.type === "column") {

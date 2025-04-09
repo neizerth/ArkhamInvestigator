@@ -1,6 +1,5 @@
 import { PrimaryButton } from "@features/haptic";
 import { useAppTranslation } from "@features/i18n";
-import { characters } from "@pages/skill-check/config";
 import {
 	addCurrentSkillCheckToHistory,
 	selectHistoryShown,
@@ -14,6 +13,7 @@ import {
 import type { SkillCheckCommandType, SkillCheckOperator } from "@shared/model";
 import { useCallback } from "react";
 import { type ViewProps, useWindowDimensions } from "react-native";
+import { characters } from "../../../../config";
 import { LayoutContainer } from "../../LayoutContainer";
 import * as C from "./Keyboard.components";
 import { operatorMapping } from "./mapping";

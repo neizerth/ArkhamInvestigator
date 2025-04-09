@@ -3,9 +3,9 @@ import type {
 	InvestigatorBoardStat,
 	InvestigatorBoardValues,
 } from "@shared/model";
-import { addCurrentHistoryItem } from "../history";
-import { setBaseStat } from "./base";
-import { setCurrentStat } from "./current";
+import { addCurrentHistoryItem } from "../../history";
+import { setBaseStat } from "../base";
+import { setCurrentStat } from "../current";
 
 const noHistory = {
 	addToHistory: false,

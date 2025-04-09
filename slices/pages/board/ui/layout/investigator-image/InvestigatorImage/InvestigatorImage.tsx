@@ -1,7 +1,7 @@
-import { LayoutContext } from "@pages/board/config";
 import { selectShowDamageAndHorrorEffects, useAppSelector } from "@shared/lib";
 import { useContext } from "react";
 import type { ViewProps } from "react-native";
+import { LayoutContext } from "../../../../config";
 import * as C from "./InvestigatorImage.components";
 
 export type InvestigatorImageProps = ViewProps;

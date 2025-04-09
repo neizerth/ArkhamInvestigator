@@ -1,8 +1,8 @@
-import type { PropsWithView } from "@pages/board/model";
 import { size } from "@shared/config";
 import type { FC } from "react";
 import { View } from "react-native";
 import styled, { css } from "styled-components/native";
+import type { PropsWithView } from "../../../../../model";
 import { Overlay as BaseOverlay } from "../Overlay";
 import * as F from "../footer";
 import * as S from "../sidebar";

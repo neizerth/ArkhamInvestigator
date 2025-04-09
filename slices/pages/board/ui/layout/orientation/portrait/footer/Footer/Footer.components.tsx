@@ -1,8 +1,8 @@
-import { PORTRAIT_DESCRIPTION_HEIGHT } from "@pages/board/config";
 import { size } from "@shared/config";
 import { Row as BaseRow } from "@shared/ui";
 import { View } from "react-native";
 import styled from "styled-components/native";
+import { PORTRAIT_DESCRIPTION_HEIGHT } from "../../../../../../config";
 import { FooterDescription } from "../FooterDescription";
 
 export const Container: typeof View = styled(View)`

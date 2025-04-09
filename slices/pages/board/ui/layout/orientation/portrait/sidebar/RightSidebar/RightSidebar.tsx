@@ -1,7 +1,7 @@
-import { PortraitLayoutContext } from "@pages/board/config";
-import { Clues, Resources } from "@pages/board/ui/shared/stats";
 import { useContext } from "react";
 import type { ViewProps } from "react-native";
+import { PortraitLayoutContext } from "../../../../../../config";
+import { Clues, Resources } from "../../../../../shared";
 import * as C from "./RightSidebar.components";
 
 export type RightSidebarProps = ViewProps;

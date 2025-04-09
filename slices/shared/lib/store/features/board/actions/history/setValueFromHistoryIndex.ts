@@ -19,6 +19,9 @@ export const setValueFromHistoryIndex: AppThunkCreator =
 		const { history, initialValue } = board;
 
 		const items = historyIndex === -1 ? [] : history.slice(0, historyIndex + 1);
+		const lastItem = history[historyIndex];
+
+		const usedAbilities = lastItem?.usedAbilities || [];
 
 		const valuePatches = items.map(prop("value"));
 		const basePatches = items.map(prop("baseValue"));
@@ -41,6 +44,7 @@ export const setValueFromHistoryIndex: AppThunkCreator =
 			value,
 			baseValue,
 			historyIndex,
+			usedAbilities,
 		};
 
 		dispatch(setCurrentBoard(data));

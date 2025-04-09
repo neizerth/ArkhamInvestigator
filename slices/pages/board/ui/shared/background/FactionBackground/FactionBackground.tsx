@@ -1,7 +1,7 @@
-import type { PropsWithLayout } from "@pages/board/model";
 import { selectCurrentFaction, useAppSelector } from "@shared/lib";
 import type { Box } from "@shared/model";
 import type { ImageProps } from "react-native";
+import type { PropsWithLayout } from "../../../../model";
 import * as C from "./FactionBackground.components";
 import { images } from "./images";
 

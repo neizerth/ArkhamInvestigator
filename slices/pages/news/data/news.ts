@@ -1,3 +1,3 @@
-import type { NewsItem } from "@pages/news/model";
+import type { NewsItem } from "../model";
 
 export const data: NewsItem[] = [];

@@ -1,8 +1,8 @@
-import { assetsSize } from "@pages/board/config";
 import type { PropsWithUnit } from "@shared/model";
 import type { FC } from "react";
 import { View, type ViewProps } from "react-native";
 import styled, { css } from "styled-components/native";
+import { assetsSize } from "../../../../../../config";
 
 const getLayoutStyle = ({ unit }: PropsWithUnit) => {
 	if (unit <= 350) {

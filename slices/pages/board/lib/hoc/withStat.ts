@@ -1,6 +1,6 @@
-import { assetsSize } from "@pages/board/config";
 import type { FC } from "react";
 import styled from "styled-components/native";
+import { assetsSize } from "../../config";
 
 export type WithStatOptions = {
 	height?: number;

@@ -1,7 +1,7 @@
-import { LayoutContext, PortraitLayoutContext } from "@pages/board/config";
 import { selectShowDescription, useAppSelector } from "@shared/lib";
 import type { RowProps } from "@shared/ui";
 import { useContext } from "react";
+import { LayoutContext, PortraitLayoutContext } from "../../../../../config";
 import * as C from "./PortraitLayout.components";
 
 export type PortraitLayoutProps = RowProps & {
