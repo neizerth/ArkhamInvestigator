@@ -4,9 +4,9 @@ import type { ViewStyle } from "react-native";
 export const getIconStyle = getKeyConfig<ViewStyle>({
 	default: {},
 	reaction: {
-		paddingTop: 5,
+		paddingTop: 3,
 	},
 	investigator: {
-		paddingTop: 5,
+		paddingTop: 3,
 	},
 });

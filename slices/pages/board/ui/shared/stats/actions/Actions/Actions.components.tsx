@@ -31,7 +31,7 @@ export const Special: typeof SpecialActions = styled(SpecialActions)`
   position: absolute;
   z-index: -1;
   bottom: 8px;
-  left: 45px;
+  left: 85px;
 `;
 
 export const BaseActions: FC<DefinedBaseStatPickerProps> = styled(

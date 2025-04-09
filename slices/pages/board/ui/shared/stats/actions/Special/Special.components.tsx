@@ -14,6 +14,7 @@ export const Icon: typeof BaseIcon = styled(BaseIcon)`
   font-size: 30px;
   line-height: 30px;
   color: ${color.white};
+  text-shadow: 0 0 10px ${color.black};
 `;
 
 export const Used: typeof BaseIcon = styled(BaseIcon)`
