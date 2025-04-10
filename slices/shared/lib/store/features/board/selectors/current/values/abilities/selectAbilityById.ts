@@ -3,8 +3,6 @@ import { propEq } from "ramda";
 import { selectCurrentBoardProp } from "../../props";
 
 export const selectAbilityById = (id: string) =>
-	createSelector([selectCurrentBoardProp("details")], (details) => {
-		const abilities = details.media?.abilities || [];
-
+	createSelector([selectCurrentBoardProp("abilities")], (abilities = []) => {
 		return abilities.find(propEq(id, "id"));
 	});
