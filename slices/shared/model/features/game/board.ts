@@ -1,5 +1,8 @@
 import type { ArkhamDBInvestigatorCard } from "@shared/model/api/game/arkhamDB";
-import type { InvestigatorImage } from "arkham-investigator-data";
+import type {
+	InvestigatorAbility,
+	InvestigatorImage,
+} from "arkham-investigator-data";
 import type { InvestigatorSource } from "../../api";
 import type {
 	Faction,
@@ -45,6 +48,7 @@ export type InvestigatorBoard = {
 	selection: SelectedInvestigator;
 	currentRole?: Faction;
 	usedAbilities?: UsedAbility[];
+	abilities?: InvestigatorAbility[];
 };
 
 export type UsedAbility = {

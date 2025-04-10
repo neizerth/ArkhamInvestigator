@@ -35,7 +35,7 @@ export const getInvestigatorBoards = ({
 				return null;
 			}
 
-			const { picture, additionalAction, isParallel, code } =
+			const { picture, additionalAction, isParallel, code, abilities } =
 				getSelectedInvestigatorOptions({
 					selection: item,
 					media,
@@ -73,6 +73,7 @@ export const getInvestigatorBoards = ({
 				historyIndex: -1,
 				details,
 				selection: item,
+				abilities,
 			};
 		})
 		.filter(isNotNil);

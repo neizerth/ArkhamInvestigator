@@ -13,7 +13,7 @@ export const getSelectedInvestigatorOptions = ({
 	media,
 	details,
 }: Options) => {
-	const { additionalAction = false } = media;
+	const { additionalAction = false, abilities } = media;
 
 	const { code, variantId, skinId } = selection;
 
@@ -31,6 +31,7 @@ export const getSelectedInvestigatorOptions = ({
 		picture,
 		additionalAction,
 		isParallel: false,
+		abilities,
 		code,
 	};
 
@@ -56,5 +57,6 @@ export const getSelectedInvestigatorOptions = ({
 		additionalAction: variant?.data?.additionalAction || additionalAction,
 		isParallel: variant?.type === "parallel",
 		code: selectedCode,
+		abilities: variant?.data?.abilities || abilities,
 	};
 };

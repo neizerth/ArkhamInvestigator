@@ -3,10 +3,8 @@ import { isBoardAbility } from "../../../../../../../features/game/investigators
 import { selectBoardProp } from "../../props";
 
 export const selectBoardAbilities = createSelector(
-	[selectBoardProp("details")],
-	(details) => {
-		const abilities = details.media?.abilities || [];
-
+	[selectBoardProp("abilities")],
+	(abilities = []) => {
 		return abilities.filter(isBoardAbility);
 	},
 );
