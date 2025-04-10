@@ -1,4 +1,8 @@
-import { selectSelectedInvestigators, useAppSelector } from "@shared/lib";
+import {
+	selectCurrentInvestigatorDetails,
+	selectSelectedInvestigators,
+	useAppSelector,
+} from "@shared/lib";
 import type { ViewProps } from "react-native";
 import { ClearButton } from "../ClearButton";
 import { StartButton } from "../StartButton";
@@ -10,8 +14,9 @@ export const InvestigatorSelectFooter = (
 	props: InvestigatorSelectFooterProps,
 ) => {
 	const investigators = useAppSelector(selectSelectedInvestigators);
+	const details = useAppSelector(selectCurrentInvestigatorDetails);
 
-	if (investigators.length === 0) {
+	if (investigators.length === 0 || details) {
 		return null;
 	}
 	return (

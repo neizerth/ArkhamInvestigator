@@ -3,10 +3,13 @@ import type { LimitType } from "arkham-investigator-data";
 import { prop, reject } from "ramda";
 import { getAbilityLimits } from "../../../../../../features";
 import { propIncludes } from "../../../../../../util";
-import { selectBoardAbilities, selectBoardProp } from "../../../selectors";
+import {
+	selectBoardAbilities,
+	selectCurrentBoardProp,
+} from "../../../selectors";
 import { setUsedAbilities } from "./setUsedAbilities";
 
-const selectUsedAbilities = selectBoardProp("usedAbilities");
+const selectUsedAbilities = selectCurrentBoardProp("usedAbilities");
 
 export const resetAbilityLimits =
 	(limitTypes: LimitType[]): AppThunk =>

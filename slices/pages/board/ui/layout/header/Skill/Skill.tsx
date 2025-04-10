@@ -1,5 +1,5 @@
 import {
-	selectBoardProp,
+	selectCurrentBoardProp,
 	selectCurrentStatBaseValue,
 	selectCurrentStatValue,
 	selectShowAdditionalInformation,
@@ -32,7 +32,7 @@ export const Skill = ({ width, height, type, ...props }: SkillProps) => {
 	const dispatch = useAppDispatch();
 	const value = useAppSelector(selectCurrentStatValue(type));
 	const baseValue = useAppSelector(selectCurrentStatBaseValue(type));
-	const isParallel = useAppSelector(selectBoardProp("isParallel"));
+	const isParallel = useAppSelector(selectCurrentBoardProp("isParallel"));
 
 	const showInfo = useAppSelector(selectShowAdditionalInformation);
 	const [touching, setTouching] = useState(false);

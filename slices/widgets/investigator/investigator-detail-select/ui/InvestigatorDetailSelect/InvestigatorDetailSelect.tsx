@@ -47,6 +47,7 @@ export const InvestigatorDetailSelect = () => {
 
 	const back = useCallback(() => {
 		dispatch(updateBoardDetails());
+		dispatch(setCurrentInvestigatorDetails(null));
 		dispatch(goBack());
 	}, [dispatch]);
 

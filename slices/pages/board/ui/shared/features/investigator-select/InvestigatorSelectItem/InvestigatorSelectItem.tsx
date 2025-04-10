@@ -1,8 +1,8 @@
 import { getInvestigatorImageUrl } from "@shared/api";
 import {
-	getIsTurnEnd,
-	selectBoardById,
-	selectEndTurnStrict,
+	selectBoardProp,
+	selectIsDefeated,
+	selectTurnEnd,
 	useAppSelector,
 } from "@shared/lib";
 import type { Faction } from "@shared/model";
@@ -17,14 +17,18 @@ export const InvestigatorSelectItem = ({
 	boardId,
 	...props
 }: InvestigatorSelectItemProps) => {
-	const board = useAppSelector(selectBoardById(boardId));
-	const strict = useAppSelector(selectEndTurnStrict);
+	const picture = useAppSelector(selectBoardProp(boardId, "picture"));
+	const investigator = useAppSelector(selectBoardProp(boardId, "investigator"));
+	const unique = useAppSelector(selectBoardProp(boardId, "unique", true));
+	const isTurnEnd = useAppSelector(selectTurnEnd(boardId));
+	const isDefeated = useAppSelector(selectIsDefeated(boardId));
 
-	if (!board) {
+	const active = !(isTurnEnd || isDefeated);
+
+	if (!picture || !investigator) {
 		return null;
 	}
 
-	const { picture, investigator, unique, value } = board;
 	const uri = getInvestigatorImageUrl({
 		code: picture.id,
 		type: "square",
@@ -33,11 +37,6 @@ export const InvestigatorSelectItem = ({
 	const showId = !unique;
 
 	const source = { uri };
-
-	const active = !getIsTurnEnd({
-		board,
-		strict,
-	});
 
 	return (
 		<C.Container {...props} faction={faction}>

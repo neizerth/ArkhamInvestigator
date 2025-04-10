@@ -1,7 +1,7 @@
 import type { TouchableOpacityProps } from "@features/haptic";
 import {
 	getAbilityIcon,
-	selectBoardProp,
+	selectCurrentBoardProp,
 	selectIsAbilityUsed,
 	useAppDispatch,
 	useAppSelector,
@@ -18,7 +18,7 @@ export type AbilityProps = TouchableOpacityProps & {
 export const Ability = ({ ability, ...props }: AbilityProps) => {
 	const { id } = ability;
 	const dispatch = useAppDispatch();
-	const boardId = useAppSelector(selectBoardProp("id"));
+	const boardId = useAppSelector(selectCurrentBoardProp("id"));
 	const isUsed = useAppSelector(selectIsAbilityUsed(id));
 	const icon = getAbilityIcon(ability);
 

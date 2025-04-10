@@ -1,9 +1,9 @@
 import type { AppThunk } from "@shared/model";
 import { isNotNil, propEq } from "ramda";
-import { selectAbilityById, selectBoardProp } from "../../../selectors";
+import { selectAbilityById, selectCurrentBoardProp } from "../../../selectors";
 import { setUsedAbilities } from "./setUsedAbilities";
 
-const selectUsedAbilities = selectBoardProp("usedAbilities");
+const selectUsedAbilities = selectCurrentBoardProp("usedAbilities");
 export const setAbilityUsed =
 	(id: string, boardId?: number): AppThunk =>
 	(dispatch, getState) => {

@@ -1,5 +1,5 @@
 import {
-	selectBoardProp,
+	selectCurrentBoardProp,
 	useAppSelector,
 	useInvestigatorImageUrl,
 } from "@shared/lib";
@@ -17,7 +17,7 @@ export const InvestigatorImageBackground = ({
 }: InvestigatorImageBackgroundProps) => {
 	const { view, layout } = useContext(LayoutContext);
 
-	const picture = useAppSelector(selectBoardProp("picture"));
+	const picture = useAppSelector(selectCurrentBoardProp("picture"));
 
 	const activeStyle = useInvestigatorImageStyle();
 

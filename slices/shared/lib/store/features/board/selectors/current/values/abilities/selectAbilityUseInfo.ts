@@ -1,8 +1,8 @@
 import { createSelector } from "@reduxjs/toolkit";
 import { propEq } from "ramda";
-import { selectBoardProp } from "../../props";
+import { selectCurrentBoardProp } from "../../props";
 
 export const selectAbilityUseInfo = (id: string) =>
-	createSelector([selectBoardProp("usedAbilities")], (data) =>
+	createSelector([selectCurrentBoardProp("usedAbilities")], (data) =>
 		data?.find(propEq(id, "id")),
 	);

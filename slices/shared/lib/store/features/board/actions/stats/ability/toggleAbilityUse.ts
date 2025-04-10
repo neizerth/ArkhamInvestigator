@@ -1,9 +1,12 @@
 import type { AppThunk } from "@shared/model";
-import { selectBoardProp, selectIsAbilityUsed } from "../../../selectors";
+import {
+	selectCurrentBoardProp,
+	selectIsAbilityUsed,
+} from "../../../selectors";
 import { setAbilityUsed } from "./setAbilityUsed";
 import { unsetAbilityUse } from "./unsetAbilityUse";
 
-const selectUsedAbilities = selectBoardProp("usedAbilities");
+const selectUsedAbilities = selectCurrentBoardProp("usedAbilities");
 export const toggleAbilityUse =
 	(id: string, boardId?: number): AppThunk =>
 	(dispatch, getState) => {

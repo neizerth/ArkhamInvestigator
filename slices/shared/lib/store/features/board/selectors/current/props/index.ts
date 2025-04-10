@@ -1,1 +1,1 @@
-export * from "./selectBoardProp";
+export * from "./selectCurrentBoardProp";

@@ -1,4 +1,5 @@
 import {
+	selectCurrentIsDefeated,
 	selectCurrentStatValue,
 	selectCurrentTurnEnd,
 	useAppSelector,
@@ -16,13 +17,13 @@ export const useInvestigatorImageStyle = () => {
 	const sanity = useAppSelector(selectCurrentStatValue("sanity"));
 
 	const isTurnEnd = useAppSelector(selectCurrentTurnEnd);
-	const noMainStats = health <= 0 || sanity <= 0;
+	const isDefeated = useAppSelector(selectCurrentIsDefeated);
 
 	const grayscale = useSharedValue(0);
 
 	useEffect(() => {
-		grayscale.value = isTurnEnd || noMainStats ? 1 : 0;
-	}, [isTurnEnd, grayscale, noMainStats]);
+		grayscale.value = isTurnEnd || isDefeated ? 1 : 0;
+	}, [isTurnEnd, grayscale, isDefeated]);
 
 	const animatedStyle = useAnimatedStyle((): ViewStyle => {
 		return {

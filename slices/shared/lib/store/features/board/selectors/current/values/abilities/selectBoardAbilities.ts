@@ -1,9 +1,9 @@
 import { createSelector } from "@reduxjs/toolkit";
 import { isBoardAbility } from "../../../../../../../features/game/investigators/abilities";
-import { selectBoardProp } from "../../props";
+import { selectCurrentBoardProp } from "../../props";
 
 export const selectBoardAbilities = createSelector(
-	[selectBoardProp("abilities")],
+	[selectCurrentBoardProp("abilities")],
 	(abilities = []) => {
 		return abilities.filter(isBoardAbility);
 	},

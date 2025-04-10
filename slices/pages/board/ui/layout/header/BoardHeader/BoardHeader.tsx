@@ -1,7 +1,7 @@
 import { useInvestigatorTranslation } from "@features/i18n";
 import {
-	selectBoardProp,
 	selectBoardsCount,
+	selectCurrentBoardProp,
 	selectCurrentFaction,
 	toggleFactionSelect,
 	useAppDispatch,
@@ -23,10 +23,10 @@ export const BoardHeader = (props: BoardHeaderProps) => {
 	const boardsCount = useAppSelector(selectBoardsCount);
 	const single = boardsCount === 1;
 
-	const investigator = useAppSelector(selectBoardProp("investigator"));
-	const isParallel = useAppSelector(selectBoardProp("isParallel"));
-	const unique = useAppSelector(selectBoardProp("unique"));
-	const id = useAppSelector(selectBoardProp("id"));
+	const investigator = useAppSelector(selectCurrentBoardProp("investigator"));
+	const isParallel = useAppSelector(selectCurrentBoardProp("isParallel"));
+	const unique = useAppSelector(selectCurrentBoardProp("unique"));
+	const id = useAppSelector(selectCurrentBoardProp("id"));
 	const faction = useAppSelector(selectCurrentFaction);
 	const availableFactions = useAppSelector(selectAvailableFactions);
 

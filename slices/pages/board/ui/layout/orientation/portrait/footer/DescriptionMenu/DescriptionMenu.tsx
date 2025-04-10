@@ -1,8 +1,8 @@
 import { routes } from "@shared/config";
 import {
 	goToPage,
-	selectBoardProp,
 	selectCurrentBoard,
+	selectCurrentBoardProp,
 	setCurrentInvestigatorDetails,
 	setReplaceInvestigator,
 	setSelectedInvestigators,
@@ -18,8 +18,8 @@ export type DescriptionMenuProps = ViewProps;
 
 export const DescriptionMenu = (props: DescriptionMenuProps) => {
 	const dispatch = useAppDispatch();
-	const selection = useAppSelector(selectBoardProp("selection"));
-	const details = useAppSelector(selectBoardProp("details"));
+	const selection = useAppSelector(selectCurrentBoardProp("selection"));
+	const details = useAppSelector(selectCurrentBoardProp("details"));
 
 	const media = useAppSelector(
 		(state) => selectCurrentBoard(state).details.media,

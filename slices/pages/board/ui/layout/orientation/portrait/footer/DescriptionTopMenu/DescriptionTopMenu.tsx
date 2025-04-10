@@ -3,7 +3,7 @@ import { useModal } from "@features/modal";
 import { routes } from "@shared/config";
 import {
 	resetBoard,
-	selectBoardProp,
+	selectCurrentBoardProp,
 	selectCurrentFaction,
 	useAppDispatch,
 	useAppSelector,
@@ -19,7 +19,7 @@ export const DescriptionTopMenu = ({ ...props }: DescriptionTopMenuProps) => {
 	const dispatch = useAppDispatch();
 	const { t } = useAppTranslation();
 
-	const investigator = useAppSelector(selectBoardProp("investigator"));
+	const investigator = useAppSelector(selectCurrentBoardProp("investigator"));
 	const faction = useAppSelector(selectCurrentFaction);
 
 	const goToPage = usePage();

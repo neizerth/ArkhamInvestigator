@@ -2,7 +2,7 @@ import {
 	formatSkillCheckValue as formatValue,
 	getSkillCheckValue,
 	sanitizeSkillCheckExpression,
-	selectBoardProp,
+	selectCurrentBoardProp,
 	selectSkillCheckData,
 	useAppSelector,
 } from "@shared/lib";
@@ -13,7 +13,7 @@ export type ExpressionValueProps = ViewProps;
 
 export const ExpressionValue = (props: ExpressionValueProps) => {
 	const data = useAppSelector(selectSkillCheckData);
-	const boardValue = useAppSelector(selectBoardProp("value"));
+	const boardValue = useAppSelector(selectCurrentBoardProp("value"));
 
 	if (!boardValue) {
 		return null;

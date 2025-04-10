@@ -1,6 +1,6 @@
 import {
 	redo,
-	selectBoardProp,
+	selectCurrentBoardProp,
 	selectInvestigatorBoards,
 	setValueFromHistoryIndex,
 	undo,
@@ -18,8 +18,8 @@ export type LeftSidebarProps = ViewProps;
 export const LeftSidebar = ({ ...props }: LeftSidebarProps) => {
 	const dispatch = useAppDispatch();
 	const boards = useAppSelector(selectInvestigatorBoards);
-	const history = useAppSelector(selectBoardProp("history"));
-	const historyIndex = useAppSelector(selectBoardProp("historyIndex"));
+	const history = useAppSelector(selectCurrentBoardProp("history"));
+	const historyIndex = useAppSelector(selectCurrentBoardProp("historyIndex"));
 
 	const { height } = useContext(PortraitLayoutContext);
 	const historyLength = history.length;

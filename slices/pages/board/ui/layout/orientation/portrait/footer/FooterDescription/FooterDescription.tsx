@@ -1,7 +1,7 @@
 import { useHapticFeedback } from "@features/haptic";
 import { useRoute } from "@react-navigation/native";
 import {
-	selectBoardProp,
+	selectCurrentBoardProp,
 	selectCurrentFaction,
 	selectShowDescription,
 	setShowDescription,
@@ -22,7 +22,7 @@ export const FooterDescription = ({ ...props }: FooterDescriptionProps) => {
 	const showDescription = useAppSelector(selectShowDescription);
 
 	const { view } = useContext(LayoutContext);
-	const investigator = useAppSelector(selectBoardProp("investigator"));
+	const investigator = useAppSelector(selectCurrentBoardProp("investigator"));
 	const faction = useAppSelector(selectCurrentFaction);
 
 	const impactShowFeedback = useHapticFeedback("clockTick");
