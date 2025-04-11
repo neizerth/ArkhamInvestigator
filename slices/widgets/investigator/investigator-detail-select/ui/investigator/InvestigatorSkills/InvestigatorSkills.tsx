@@ -1,4 +1,4 @@
-import type { InvestigatorSource } from "@shared/model";
+import type { InvestigatorSignature } from "arkham-investigator-data";
 import {
 	Agility,
 	Combat,
@@ -8,7 +8,7 @@ import {
 } from "./InvestigatorSkills.components";
 
 export type InvestigatorSkillsProps = {
-	investigator: InvestigatorSource;
+	investigator: InvestigatorSignature;
 };
 
 export const InvestigatorSkills = ({

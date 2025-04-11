@@ -1,10 +1,10 @@
-import { selectTranslatedInvestigators } from "@features/i18n";
 import type { ActionCreator } from "@reduxjs/toolkit";
 import {
 	getBoardStats,
 	getSelectedInvestigatorOptions,
 	mergeBoardStats,
 	selectCurrentBoard,
+	selectSignatures,
 	setCurrentBoard,
 } from "@shared/lib";
 
@@ -26,7 +26,7 @@ export const setBoardDetails: ActionCreator<AppThunk> =
 
 		const store = getStore();
 		const board = selectCurrentBoard(store);
-		const investigators = selectTranslatedInvestigators(store);
+		const investigators = selectSignatures(store);
 
 		if (!board) {
 			return;

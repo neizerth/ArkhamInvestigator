@@ -1,27 +1,32 @@
-import {
-	selectInvestigatorTranslations,
-	translateInvestigator,
-} from "@features/i18n";
 import { createSelector } from "@reduxjs/toolkit";
 import { FACTION_ORDER } from "@shared/config";
-import { selectInvestigatorMedia, selectStories } from "@shared/lib";
+import {
+	selectInvestigatorMedia,
+	selectSignatures,
+	selectStories,
+} from "@shared/lib";
 import type { Faction, InvestigatorDetails, Story } from "@shared/model";
-import type { Investigator as InvestigatorMedia } from "arkham-investigator-data";
+import type {
+	Investigator as InvestigatorMedia,
+	InvestigatorSignature,
+} from "arkham-investigator-data";
 import { ascend, isNotNil, prop, propEq, sortWith } from "ramda";
 
 export const selectAvailableInvestigators = createSelector(
-	[selectStories, selectInvestigatorMedia, selectInvestigatorTranslations],
+	[selectStories, selectInvestigatorMedia, selectSignatures],
 	(
 		stories: Story[],
 		media: InvestigatorMedia[],
-		translations,
+		signatures,
 	): InvestigatorDetails[] => {
 		const codes = media.map(prop("code"));
 
 		const mapStory = (story: Story) =>
-			story.investigators.map((investigator) => ({
-				investigator: translateInvestigator(investigator, translations),
-				media: media.find(propEq(investigator.code, "code")),
+			story.investigators.map(({ code }) => ({
+				investigator: signatures.find(
+					propEq(code, "code"),
+				) as InvestigatorSignature,
+				media: media.find(propEq(code, "code")),
 				story,
 				isOfficial: Boolean(story.is_canonical || story.is_official),
 				alternate: [] as InvestigatorDetails[],

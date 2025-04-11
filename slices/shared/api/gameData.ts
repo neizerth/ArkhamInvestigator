@@ -1,7 +1,7 @@
 import type { GameCoreData, GameTranslationData } from "@shared/model";
 import { API_URL } from "../config";
 import { BUILD_VERSION } from "../config/app";
-import { loadJSON } from "./loadJSON";
+import { loadJSON } from "../lib";
 
 export const loadGameCoreData = () =>
 	loadJSON<GameCoreData>(`${API_URL}/core.json?v=${BUILD_VERSION}`);

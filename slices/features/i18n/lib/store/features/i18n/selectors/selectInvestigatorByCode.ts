@@ -1,8 +1,8 @@
 import { createSelector } from "@reduxjs/toolkit";
+import { selectSignatures } from "@shared/lib";
 import { propEq } from "ramda";
-import { selectTranslatedInvestigators } from "./selectTranslatedInvestigators";
 
 export const selectInvestigatorByCode = (code: string) =>
-	createSelector([selectTranslatedInvestigators], (investigators) =>
+	createSelector([selectSignatures], (investigators) =>
 		investigators.find(propEq(code, "code")),
 	);

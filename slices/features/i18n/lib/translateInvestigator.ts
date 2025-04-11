@@ -1,9 +1,9 @@
-import type { InvestigatorSource } from "@shared/model";
 import type { ArkhamDBInvestigatorCard } from "@shared/model/api/game/arkhamDB";
+import type { InvestigatorSignature } from "arkham-investigator-data";
 import { omit, propEq } from "ramda";
 
 export const translateInvestigator = (
-	investigator: InvestigatorSource,
+	investigator: InvestigatorSignature,
 	translations: ArkhamDBInvestigatorCard[],
 ) => {
 	const translation = translations.find(propEq(investigator.code, "code"));

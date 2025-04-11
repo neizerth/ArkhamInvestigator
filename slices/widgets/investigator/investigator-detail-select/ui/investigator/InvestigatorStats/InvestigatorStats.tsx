@@ -1,8 +1,8 @@
-import type { InvestigatorSource } from "@shared/model/index.js";
+import type { InvestigatorSignature } from "arkham-investigator-data";
 import * as C from "./InvestigatorStats.components";
 
 export type InvestigatorStatsProps = {
-	investigator: InvestigatorSource;
+	investigator: InvestigatorSignature;
 };
 
 export const InvestigatorStats = ({ investigator }: InvestigatorStatsProps) => {

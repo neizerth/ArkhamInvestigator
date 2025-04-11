@@ -1,9 +1,8 @@
-import type { ArkhamDBInvestigatorCard } from "@shared/model/api/game/arkhamDB";
 import type {
 	InvestigatorAbility,
 	InvestigatorImage,
+	InvestigatorSignature,
 } from "arkham-investigator-data";
-import type { InvestigatorSource } from "../../api";
 import type {
 	Faction,
 	InvestigatorDetails,
@@ -28,13 +27,9 @@ export type InvestigatorBoardValues = Record<InvestigatorBoardStat, number> & {
 	additionalAction: boolean;
 };
 
-export type InvestigatorBoardSource = InvestigatorSource & {
-	translated: (keyof ArkhamDBInvestigatorCard)[];
-};
-
 export type InvestigatorBoard = {
 	id: number;
-	investigator: InvestigatorBoardSource;
+	investigator: InvestigatorSignature;
 	picture: InvestigatorPicture;
 	isParallel: boolean;
 	initialValue: InvestigatorBoardValues;

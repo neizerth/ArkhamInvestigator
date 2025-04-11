@@ -4,18 +4,17 @@ import {
 } from "@shared/config";
 import { getSelectedInvestigatorOptions } from "@shared/lib";
 import { getBoardStats } from "@shared/lib/features/game/board/getBoardStats";
-import type {
-	InvestigatorBoard,
-	InvestigatorBoardSource,
-	SelectedInvestigator,
-} from "@shared/model";
+import type { InvestigatorBoard, SelectedInvestigator } from "@shared/model";
 import type { ArkhamDBInvestigatorCard } from "@shared/model/api/game/arkhamDB";
-import type { Investigator as InvestigatorMedia } from "arkham-investigator-data";
+import type {
+	Investigator as InvestigatorMedia,
+	InvestigatorSignature,
+} from "arkham-investigator-data";
 import { isNotNil, propEq } from "ramda";
 
 type GetInvestigatorBoards = {
 	selectedInvestigators: SelectedInvestigator[];
-	investigators: InvestigatorBoardSource[];
+	investigators: InvestigatorSignature[];
 	mediaItems: InvestigatorMedia[];
 	investigatorTranslations?: ArkhamDBInvestigatorCard[];
 };

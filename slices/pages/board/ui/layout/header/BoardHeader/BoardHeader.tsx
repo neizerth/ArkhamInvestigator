@@ -1,4 +1,3 @@
-import { useInvestigatorTranslation } from "@features/i18n";
 import {
 	selectBoardsCount,
 	selectCurrentBoardProp,
@@ -32,8 +31,6 @@ export const BoardHeader = (props: BoardHeaderProps) => {
 
 	const pressableTitle = availableFactions.length > 0;
 
-	const translate = useInvestigatorTranslation(investigator);
-
 	const onTitlePress = useCallback(() => {
 		if (!pressableTitle) {
 			return false;
@@ -41,8 +38,7 @@ export const BoardHeader = (props: BoardHeaderProps) => {
 		dispatch(toggleFactionSelect());
 	}, [dispatch, pressableTitle]);
 
-	const [name, language] = translate("name");
-	const { subname = "" } = investigator;
+	const { subname, name, locale } = investigator;
 
 	const renderSkill = useCallback((props: RenderInvestigatorSkillItem) => {
 		return <C.Skill {...props} />;
@@ -56,7 +52,7 @@ export const BoardHeader = (props: BoardHeaderProps) => {
 		name,
 		subname,
 		faction,
-		language,
+		language: locale,
 		single,
 		unique,
 	};

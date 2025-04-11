@@ -1,8 +1,9 @@
-import type { InvestigatorSource, Story } from "@shared/model/api";
-import type { Nullable } from "@shared/model/util";
+import type { Story } from "@shared/model";
+import type { Nullable } from "@shared/model";
 import type {
 	InvestigatorImage,
 	Investigator as InvestigatorMedia,
+	InvestigatorSignature,
 } from "arkham-investigator-data";
 import type { ImageRequireSource } from "react-native";
 
@@ -37,7 +38,7 @@ export type SelectedInvestigator = {
 };
 
 export type InvestigatorDetails = {
-	investigator: InvestigatorSource;
+	investigator: InvestigatorSignature;
 	alternate: InvestigatorDetails[];
 	story: Story;
 	media?: InvestigatorMedia;

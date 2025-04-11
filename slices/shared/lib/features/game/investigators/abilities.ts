@@ -25,7 +25,7 @@ export const isBoardAbility = (ability: InvestigatorAbility) => {
 };
 
 export const getAbilityIcon = (ability: InvestigatorAbility) => {
-	if ("icon" in ability) {
+	if (ability.icon) {
 		return ability.icon;
 	}
 	if (ability.type === "fast") {

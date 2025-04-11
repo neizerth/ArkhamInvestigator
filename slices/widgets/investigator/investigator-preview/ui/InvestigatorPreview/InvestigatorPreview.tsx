@@ -1,6 +1,9 @@
 import { getInvestigatorImageUrl as getImageUrl } from "@shared/api/getInvestigatorImageUrl";
-import type { Faction, InvestigatorSource } from "@shared/model";
-import type { Investigator as InvestigatorMedia } from "arkham-investigator-data";
+import type { Faction } from "@shared/model";
+import type {
+	Investigator as InvestigatorMedia,
+	InvestigatorSignature,
+} from "arkham-investigator-data";
 import { memo, useCallback } from "react";
 import type {
 	GestureResponderEvent,
@@ -10,7 +13,7 @@ import { InvestigatorPreviewFactionIcon as FactionIcon } from "../InvestigatorPr
 import * as C from "./InvestigatorPreview.components";
 
 export type InvestigatorPreviewProps = TouchableOpacityProps & {
-	investigator: InvestigatorSource;
+	investigator: InvestigatorSignature;
 	media?: InvestigatorMedia;
 	selected?: boolean;
 	selectedCount?: number;

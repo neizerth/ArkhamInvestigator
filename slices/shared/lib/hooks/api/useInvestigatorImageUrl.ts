@@ -1,9 +1,9 @@
-import { getInvestigatorImageUrl } from "@shared/api";
-import { APP_VERSION, BUILD_VERSION } from "@shared/config/app";
 import type { AppVersionType, ImageSizeType } from "@shared/model";
 import { useMemo } from "react";
 import { v4 } from "uuid";
-import { selectMediaVersion } from "../../store/features/investigators/investigatorMedia/investigatorMedia";
+import { getInvestigatorImageUrl } from "../../../api";
+import { APP_VERSION, BUILD_VERSION } from "../../../config/app";
+import { selectMediaVersion } from "../../store";
 import { useAppSelector } from "../store";
 
 type Version = AppVersionType | "v4";

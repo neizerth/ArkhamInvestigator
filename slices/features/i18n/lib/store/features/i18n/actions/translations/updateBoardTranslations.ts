@@ -2,20 +2,20 @@ import { translateInvestigator } from "@features/i18n/lib/translateInvestigator"
 import {
 	propIncludes,
 	selectInvestigatorBoards,
-	selectInvestigatorSources,
 	selectSelectedInvestigators,
+	selectSignatures,
 	setInvestigatorBoards,
 	setSelectedInvestigators,
 } from "@shared/lib";
 import type { AppThunk } from "@shared/model";
-import type { InvestigatorSource } from "@shared/model";
+import type { InvestigatorSignature } from "arkham-investigator-data";
 import { isNotNil, omit } from "ramda";
 import { selectInvestigatorTranslations } from "../../i18n";
 
 const getCode = ({
 	investigator,
 }: {
-	investigator: InvestigatorSource;
+	investigator: InvestigatorSignature;
 }) => investigator.code;
 
 export const updateBoardTranslations = (): AppThunk => (dispatch, getState) => {
@@ -26,7 +26,7 @@ export const updateBoardTranslations = (): AppThunk => (dispatch, getState) => {
 		.map(getCode)
 		.concat(boards.flatMap(({ details }) => details.alternate.map(getCode)));
 
-	const sources = selectInvestigatorSources(state)
+	const sources = selectSignatures(state)
 		.filter(propIncludes("code", boardCodes))
 		.reduce((target, item) => {
 			target.set(item.code, item);

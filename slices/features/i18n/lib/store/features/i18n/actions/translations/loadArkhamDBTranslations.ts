@@ -2,7 +2,7 @@ import type { AppThunk } from "@shared/model";
 import type { ArkhamDBInvestigatorCard } from "@shared/model/api/game/arkhamDB";
 
 import { loadArkhamDBInvestigatorData } from "@shared/api";
-import { selectInvestigatorSources } from "@shared/lib";
+import { selectSignatures } from "@shared/lib";
 import { setInvestigatorTranslations } from "../../i18n";
 import { updateBoardTranslations } from "./updateBoardTranslations";
 
@@ -10,7 +10,7 @@ export const loadArkhamDBTranslations =
 	(language: string): AppThunk =>
 	async (dispatch, getState) => {
 		const state = getState();
-		const source = selectInvestigatorSources(state);
+		const source = selectSignatures(state);
 		const translations = await loadArkhamDBInvestigatorData(language);
 
 		const translationMap = getCardMap(translations);

@@ -1,16 +1,16 @@
-import { useInvestigatorTranslation } from "@features/i18n";
-import type { InvestigatorBoardSource, PropsWithUnit } from "@shared/model";
+import type { PropsWithUnit } from "@shared/model";
 import {
 	type ComponentStyleMap,
 	GameText,
 	type GameTextProps,
 } from "@widgets/game/game-text";
+import type { InvestigatorSignature } from "arkham-investigator-data";
 import { mergeDeepRight } from "ramda";
 import { getInvestigatorFlavorStyles } from "./InvestigatorFlavor.styles";
 
 export type InvestigatorFlavorProps = Omit<GameTextProps, "value"> &
 	Partial<PropsWithUnit> & {
-		investigator: InvestigatorBoardSource;
+		investigator: InvestigatorSignature;
 	};
 
 export const InvestigatorFlavor = ({
@@ -18,11 +18,10 @@ export const InvestigatorFlavor = ({
 	investigator,
 	...props
 }: InvestigatorFlavorProps) => {
-	const translate = useInvestigatorTranslation(investigator);
-	const [text, language] = translate("flavor");
+	const { flavor, locale } = investigator;
 
 	const localeStyles = getInvestigatorFlavorStyles({
-		language,
+		language: locale,
 		unit,
 	});
 
@@ -31,5 +30,7 @@ export const InvestigatorFlavor = ({
 		localeStyles,
 	) as ComponentStyleMap;
 
-	return <GameText {...props} componentStyles={componentStyles} value={text} />;
+	return (
+		<GameText {...props} componentStyles={componentStyles} value={flavor} />
+	);
 };

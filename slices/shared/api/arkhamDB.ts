@@ -1,9 +1,6 @@
-import type {
-	ArkhamDBCard,
-	ArkhamDBInvestigatorCard,
-} from "@shared/model/api/game/arkhamDB";
+import type { ArkhamDBCard, ArkhamDBInvestigatorCard } from "@shared/model";
 import { pick, propEq } from "ramda";
-import { loadJSON } from "./loadJSON";
+import { loadJSON } from "../lib";
 
 export const loadArkhamDBInvestigatorData = async (language = "en") => {
 	const subdomain = language === "en" ? "" : `${language}.`;
