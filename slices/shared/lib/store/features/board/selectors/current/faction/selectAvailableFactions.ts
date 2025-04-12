@@ -6,7 +6,7 @@ import { selectCurrentFaction } from "./selectCurrentFaction";
 export const selectAvailableFactions = createSelector(
 	[selectCurrentBoard, selectCurrentFaction],
 	(board, faction) => {
-		const roles = board.details.media?.roles || [];
+		const roles = board.investigator.roles || [];
 		return reject(equals(faction), roles);
 	},
 );

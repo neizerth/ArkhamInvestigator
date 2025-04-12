@@ -1,68 +1,66 @@
 import { useAppTranslation } from "@features/i18n";
+import { formatGameText, useAppDispatch, useAppSelector } from "@shared/lib";
 import {
-	formatGameText,
-	selectCurrentInvestigatorDetails,
-	useAppDispatch,
-	useAppSelector,
-} from "@shared/lib";
-import {
-	goBack,
-	removeInvestigatorSelection,
-	setCurrentInvestigatorDetails,
+	selectCurrentSignatureGroup,
+	selectCurrentSignatureId,
+	selectCurrentSkinId,
+	selectReplaceInvestigator,
+	setCurrentSignatureId,
+	setCurrentSkinId,
 } from "@shared/lib/store";
-import type { Faction } from "@shared/model";
 import type { InvestigatorDetailItem } from "@shared/model";
 import { useCallback } from "react";
-import { selectCurrentDetails } from "../../lib";
 import {
-	changeSkin,
-	changeVariant,
-	updateBoardDetails,
-} from "../../lib/actions";
+	cancelSelection,
+	getSignatures,
+	getSkins,
+	setSelection,
+} from "../../lib";
 import { DataSectionMemo as DataSection } from "../data";
-import { InvestigatorDescription } from "../investigator/InvestigatorDescription";
+import { InvestigatorDescription } from "../investigator";
 import * as C from "./InvestigatorDetailSelect.components";
 
 type DetailItem = InvestigatorDetailItem | null;
 export const InvestigatorDetailSelect = () => {
 	const dispatch = useAppDispatch();
 	const { t } = useAppTranslation();
-	const details = useAppSelector(selectCurrentInvestigatorDetails);
-	const { skin, skins, variant, variants, investigator } =
-		useAppSelector(selectCurrentDetails);
+	const group = useAppSelector(selectCurrentSignatureGroup);
+	const skinId = useAppSelector(selectCurrentSkinId);
+	const currentSignatureId = useAppSelector(selectCurrentSignatureId);
+	const replaceInvestigator = useAppSelector(selectReplaceInvestigator);
 
 	const onChangeSkin = useCallback(
 		(item: DetailItem) => {
-			dispatch(changeSkin(item));
+			const value = skinId === item?.value ? null : item?.value || null;
+			dispatch(setCurrentSkinId(value));
 		},
-		[dispatch],
+		[dispatch, skinId],
 	);
 
-	const onChangeVariant = useCallback(
+	const onChangeSignature = useCallback(
 		(item: DetailItem) => {
-			dispatch(changeVariant(item));
+			dispatch(setCurrentSignatureId(item?.value || null));
 		},
 		[dispatch],
 	);
 
-	const back = useCallback(() => {
-		dispatch(updateBoardDetails());
-		dispatch(setCurrentInvestigatorDetails(null));
-		dispatch(goBack());
+	const select = useCallback(() => {
+		dispatch(setSelection());
 	}, [dispatch]);
 
 	const cancel = useCallback(() => {
-		dispatch(removeInvestigatorSelection());
-		dispatch(setCurrentInvestigatorDetails(null));
-		dispatch(goBack());
+		dispatch(cancelSelection());
 	}, [dispatch]);
 
-	if (!investigator || !details) {
+	if (!group) {
 		return null;
 	}
 
-	const faction = investigator.faction_code as Faction;
-	const { name, subname = "" } = investigator;
+	const skins = getSkins(group);
+	const signatures = getSignatures(group);
+	const signatureId = currentSignatureId || signatures[0].id;
+
+	const { name, subname, faction_code } = group;
 
 	const formattedName = formatGameText(name);
 	const formattedSubname = formatGameText(subname);
@@ -73,32 +71,28 @@ export const InvestigatorDetailSelect = () => {
 			<C.Content>
 				<C.Outside onPress={cancel} />
 				<C.Card
-					faction={faction}
+					faction={faction_code}
 					title={formattedName}
 					subtitle={formattedSubname}
 					onClose={cancel}
-					onOk={back}
+					onOk={select}
 					onCancel={cancel}
-					okText={t`Okay`}
+					okText={replaceInvestigator ? t`Continue` : t`Okay`}
 					cancelText={t`Cancel`}
 				>
 					<C.Sections>
-						<InvestigatorDescription
-							data={details}
-							variant={variant}
-							skin={skin}
-						/>
+						<InvestigatorDescription />
 						<DataSection
 							title={t`Versions`}
-							data={variants}
-							selected={variant}
-							onChange={onChangeVariant}
+							data={signatures}
+							selectedId={signatureId}
+							onChange={onChangeSignature}
 						/>
 						<DataSection
 							title={t`Skins`}
 							data={skins}
 							onChange={onChangeSkin}
-							selected={skin}
+							selectedId={skinId}
 							showIcon={false}
 							showNone
 						/>

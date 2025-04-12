@@ -1,13 +1,13 @@
 import type { InvestigatorDetailItem as Item } from "@shared/model";
-import { InvestigatorPreviewMemo as InvestigatorPreview } from "@widgets/investigator/investigator-preview";
 import { memo, useCallback } from "react";
+import { InvestigatorPreviewMemo as InvestigatorPreview } from "../../../../investigator-preview";
 import { CARD_SIZE } from "../../../config";
 import { UnselectedDetail } from "../UnselectedDetail";
 import * as C from "./DetailSelect.components";
 
 export type DetailSelectProps = {
 	data: Item[];
-	selected: Item | null;
+	selectedId?: string | null;
 	onChange: (item: Item | null) => void;
 	showNone?: boolean;
 	showIcon?: boolean;
@@ -16,7 +16,7 @@ export type DetailSelectProps = {
 export const DetailSelect = ({
 	data,
 	onChange,
-	selected,
+	selectedId = null,
 	showNone,
 	showIcon = true,
 }: DetailSelectProps) => {
@@ -24,15 +24,14 @@ export const DetailSelect = ({
 		(item: Item | null) => () => onChange(item),
 		[onChange],
 	);
-	const isItemSelected = (item: Item) =>
-		item.id === selected?.id || (item.value === null && selected === null);
+	const isItemSelected = (item: Item) => item.id === selectedId;
 
 	return (
 		<C.Container>
 			<C.List horizontal>
 				{showNone && (
 					<UnselectedDetail
-						selected={selected === null}
+						selected={selectedId === null}
 						onPress={setValue(null)}
 					/>
 				)}
@@ -41,7 +40,8 @@ export const DetailSelect = ({
 					<InvestigatorPreview
 						key={item.id}
 						imageId={item.imageId}
-						investigator={item.details.investigator}
+						code={item.code}
+						faction={item.faction}
 						selected={isItemSelected(item)}
 						onPress={setValue(item)}
 						icon={item.icon}

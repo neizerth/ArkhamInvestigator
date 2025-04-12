@@ -1,41 +1,35 @@
 import type { ActionCreator } from "@reduxjs/toolkit";
-import type {
-	AppThunk,
-	InvestigatorDetails,
-	SelectedInvestigator,
-} from "@shared/model";
+import type { AppThunk, SelectedInvestigator } from "@shared/model";
+import type { InvestigatorSignatureGroup } from "arkham-investigator-data";
 import { propEq, reject } from "ramda";
 import { v4 } from "uuid";
 import { MAX_PLAYERS, routes } from "../../../../../config";
 import { includesBy } from "../../../../util";
 import { goToPage } from "../../../effects";
 import {
-	selectCurrentInvestigatorDetails,
 	selectSelectedInvestigators,
-	setCurrentInvestigatorDetails,
+	setCurrentSignatureGroup,
 	setSelectedInvestigators,
 } from "../game";
 import { selectReplaceCode } from "../selectors/selectReplaceCode";
 
 export const changeSelectedInvestigator: ActionCreator<AppThunk> =
-	(details: InvestigatorDetails) => (dispatch, getState) => {
+	(group: InvestigatorSignatureGroup) => (dispatch, getState) => {
 		const state = getState();
 		const selected = selectSelectedInvestigators(state);
 		const replaceCode = selectReplaceCode(state);
 
-		const { investigator, media } = details;
-		const { code } = investigator;
+		const { code } = group;
 		const withCode = propEq(code, "code");
 		const hasCode = includesBy(withCode, selected);
 
 		const isMaxPlayers = selected.length === MAX_PLAYERS;
-		const isMultiselect = media?.multiselect;
 
 		if (replaceCode === code) {
 			return;
 		}
 
-		if (hasCode && (!isMultiselect || isMaxPlayers)) {
+		if (hasCode && (!group.multiselect || isMaxPlayers)) {
 			dispatch(removeSelectedInvestigator(code));
 			return;
 		}
@@ -44,44 +38,19 @@ export const changeSelectedInvestigator: ActionCreator<AppThunk> =
 			return;
 		}
 
-		const selectedItem: SelectedInvestigator = {
-			id: v4(),
-			code,
-			details,
-			variantId: null,
-			skinId: null,
-		};
+		const typedItems = selected.filter(propEq(group.code, "code"));
 
-		if (replaceCode) {
-			dispatch(setSelectedInvestigators([selectedItem]));
-		} else {
-			dispatch(addSelectedInvestigator(selectedItem));
-		}
-
-		if (media?.skins || media?.variants) {
-			dispatch(goToPage(routes.selectInvestigatorDetails));
-			dispatch(setCurrentInvestigatorDetails(details));
-			return;
-		}
-	};
-
-export const removeInvestigatorSelection: ActionCreator<AppThunk> =
-	() => (dispatch, getState) => {
-		const details = selectCurrentInvestigatorDetails(getState());
-
-		if (!details) {
+		if (typedItems.length > 0 && group.multiselect) {
+			const selection = {
+				...typedItems[0],
+				id: v4(),
+			};
+			dispatch(addSelectedInvestigator(selection));
 			return;
 		}
 
-		const { investigator } = details;
-
-		if (!investigator) {
-			return;
-		}
-
-		const { code } = investigator;
-
-		dispatch(removeSelectedInvestigator(code));
+		dispatch(goToPage(routes.selectInvestigatorDetails));
+		dispatch(setCurrentSignatureGroup(group));
 	};
 
 export const removeSelectedInvestigator: ActionCreator<AppThunk> =
@@ -94,8 +63,9 @@ export const removeSelectedInvestigator: ActionCreator<AppThunk> =
 		dispatch(setSelectedInvestigators(selectedInvestigators));
 	};
 
-export const addSelectedInvestigator: ActionCreator<AppThunk> =
-	(investigator: SelectedInvestigator) => (dispatch, getState) => {
+export const addSelectedInvestigator =
+	(investigator: SelectedInvestigator): AppThunk =>
+	(dispatch, getState) => {
 		const state = getState();
 		const selected = selectSelectedInvestigators(state);
 

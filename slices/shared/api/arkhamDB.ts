@@ -1,6 +1,6 @@
 import type { ArkhamDBCard, ArkhamDBInvestigatorCard } from "@shared/model";
 import { pick, propEq } from "ramda";
-import { loadJSON } from "../lib";
+import { loadJSON } from "../lib/util/promise";
 
 export const loadArkhamDBInvestigatorData = async (language = "en") => {
 	const subdomain = language === "en" ? "" : `${language}.`;

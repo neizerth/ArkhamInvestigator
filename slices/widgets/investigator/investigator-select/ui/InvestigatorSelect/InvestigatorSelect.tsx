@@ -2,39 +2,41 @@ import { useAppTranslation } from "@features/i18n";
 import {
 	changeSelectedInvestigator,
 	selectFactionFilter,
+	selectSignatureGroups,
 	splitIntoGroups,
 } from "@shared/lib";
 import { useAppDispatch, useAppSelector } from "@shared/lib/hooks";
-import type { InvestigatorDetails } from "@shared/model";
+import type { InvestigatorSignatureGroup } from "arkham-investigator-data";
 import { propEq } from "ramda";
 import { useCallback } from "react";
-import { selectAvailableInvestigators, useColumnsCount } from "../../lib";
+import { useColumnsCount } from "../../lib";
 import { InvestigatorList as List } from "../investigator-list/InvestigatorList";
 import * as C from "./InvestigatorSelect.components";
 
 export const InvestigatorSelect = () => {
 	const dispatch = useAppDispatch();
 	const factionFilterValue = useAppSelector(selectFactionFilter);
-	const data = useAppSelector(selectAvailableInvestigators);
+	const data = useAppSelector(selectSignatureGroups);
 	const { t } = useAppTranslation();
 	const columns = useColumnsCount();
 
 	const onChange = useCallback(
-		(item: InvestigatorDetails) => dispatch(changeSelectedInvestigator(item)),
+		(item: InvestigatorSignatureGroup) =>
+			dispatch(changeSelectedInvestigator(item)),
 		[dispatch],
 	);
 
 	const factionFilter = factionFilterValue || "guardian";
 
-	const filtered = data.filter(({ investigator, media }) => {
+	const filtered = data.filter(({ spoiler, faction_code }) => {
 		if (factionFilter === "spoiler") {
-			return media?.spoiler === true;
+			return spoiler === true;
 		}
-		return investigator.faction_code === factionFilter && !media?.spoiler;
+		return faction_code === factionFilter && !spoiler;
 	});
 
-	const official = filtered.filter(propEq(true, "isOfficial"));
-	const fanMade = filtered.filter(propEq(false, "isOfficial"));
+	const official = filtered.filter(propEq(true, "official"));
+	const fanMade = filtered.filter(propEq(false, "official"));
 
 	const sections = [
 		{

@@ -1,5 +1,5 @@
 import { type DefinedIconButtonProps, IconButton } from "@features/haptic";
-import { color, size } from "@shared/config";
+import { color } from "@shared/config";
 import { Row } from "@shared/ui";
 import type { FC } from "react";
 import styled from "styled-components/native";
@@ -26,5 +26,4 @@ export const Hide: FC<DefinedIconButtonProps> = styled(Button).attrs({
 	},
 })`
     transform: rotate(90deg);
-		margin-right: ${size.gap.small}px;
   `;

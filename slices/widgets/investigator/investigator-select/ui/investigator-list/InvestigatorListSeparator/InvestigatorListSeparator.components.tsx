@@ -33,7 +33,7 @@ export const RuleContainer: typeof View = styled(View)`
   left: ${cornerOffset}px;
   right: ${cornerOffset}px;
   overflow: hidden;
-  bottom: 1.8px;
+  bottom: 1.4px;
 `;
 
 export const Rule: typeof Image = styled(Image).attrs({

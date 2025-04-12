@@ -1,7 +1,5 @@
-import type { Story } from "@shared/model";
-import type { Nullable } from "@shared/model";
+import type { InvestigatorImage, Story } from "@shared/model";
 import type {
-	InvestigatorImage,
 	Investigator as InvestigatorMedia,
 	InvestigatorSignature,
 } from "arkham-investigator-data";
@@ -29,12 +27,18 @@ export type InvestigatorGameStatType = "actions" | "resources" | "clues";
 
 export type SkillType = InvestigatorSkillType | "wild";
 
+export type InvestigatorSignatureSkin = {
+	id: string;
+	image: InvestigatorSignature["image"];
+};
+
 export type SelectedInvestigator = {
 	id: string;
 	code: string;
-	variantId: Nullable<string>;
-	skinId: Nullable<string>;
-	details: InvestigatorDetails;
+	signature: InvestigatorSignature;
+	skin: InvestigatorSignatureSkin | null;
+	image: InvestigatorImage;
+	signatureGroupId: string;
 };
 
 export type InvestigatorDetails = {
@@ -47,13 +51,14 @@ export type InvestigatorDetails = {
 
 export type InvestigatorDetailItem<T = object> = {
 	id: string;
+	code: string;
 	imageId: string;
-	image: InvestigatorImage;
+	image: InvestigatorSignature["image"];
+	faction: Faction;
 	type: "custom" | "parallel" | "book" | "skin" | "default";
 	icon?: string;
 	name: string;
 	value: string | null;
-	details: InvestigatorDetails;
 	data?: T;
 };
 

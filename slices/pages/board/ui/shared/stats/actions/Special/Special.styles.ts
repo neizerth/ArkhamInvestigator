@@ -7,6 +7,6 @@ export const getIconStyle = getKeyConfig<ViewStyle>({
 		paddingTop: 3,
 	},
 	investigator: {
-		paddingTop: 3,
+		// paddingTop: 3,
 	},
 });

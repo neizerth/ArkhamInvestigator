@@ -2,11 +2,13 @@ import {
 	selectBoardsCount,
 	selectCurrentBoardProp,
 	selectCurrentFaction,
+	selectIsParallel,
 	toggleFactionSelect,
 	useAppDispatch,
 	useAppSelector,
 } from "@shared/lib";
 import { selectAvailableFactions } from "@shared/lib/store/features/board/selectors/current/faction/selectAvailableFactions";
+import { selectIsUnique } from "@shared/lib/store/features/board/selectors/current/signature/selectIsUnique";
 import { InvestigatorHeaderMemo as InvestigatorHeader } from "@widgets/game/investigator-header";
 import type { RenderInvestigatorSkillItem } from "@widgets/game/investigator-skills";
 import { useCallback, useContext } from "react";
@@ -23,8 +25,8 @@ export const BoardHeader = (props: BoardHeaderProps) => {
 	const single = boardsCount === 1;
 
 	const investigator = useAppSelector(selectCurrentBoardProp("investigator"));
-	const isParallel = useAppSelector(selectCurrentBoardProp("isParallel"));
-	const unique = useAppSelector(selectCurrentBoardProp("unique"));
+	const isParallel = useAppSelector(selectIsParallel);
+	const unique = useAppSelector(selectIsUnique);
 	const id = useAppSelector(selectCurrentBoardProp("id"));
 	const faction = useAppSelector(selectCurrentFaction);
 	const availableFactions = useAppSelector(selectAvailableFactions);

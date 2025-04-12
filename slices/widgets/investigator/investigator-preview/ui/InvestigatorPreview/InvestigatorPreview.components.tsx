@@ -103,16 +103,3 @@ export const ExtraIcon: typeof Icon = styled(Icon)`
   text-align: center;
   color: ${color.white}
 `;
-
-export const OptionsInfo: FC<ViewProps & PropsWithFaction> = styled(View)`
-  position: absolute;
-  z-index: 1;
-  right: -18px;
-  top: -18px;
-  width: 30px;
-  aspect-ratio: 1;
-  ${({ faction }: PropsWithFaction) => css`
-    background: ${factionColor[faction].border};
-  `}
-  transform: rotate(45deg);
-`;

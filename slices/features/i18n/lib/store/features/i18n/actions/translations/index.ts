@@ -1,4 +1,4 @@
 export * from "./fetchTranslationData";
-export * from "./loadArkhamDBTranslations";
+export * from "./loadSignatureTranslations";
 export * from "./loadTranslation";
-export * from "./loadArkhamDBTranslations";
+export * from "./loadSignatureTranslations";

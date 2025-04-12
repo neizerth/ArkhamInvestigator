@@ -1,1 +1,1 @@
-export * from "./getInvestigatorBoards";
+export * from "./getInvestigatorBoard";

@@ -34,7 +34,7 @@
     "@reduxjs/toolkit": "^2.5.1",
     "@uidotdev/usehooks": "^2.4.1",
     "arkham-divider-data": "^1.1.14",
-    "arkham-investigator-data": "^1.3.0",
+    "arkham-investigator-data": "^2.0.6",
     "expo": "~52.0.38",
     "expo-application": "~6.0.2",
     "expo-blur": "~14.0.1",

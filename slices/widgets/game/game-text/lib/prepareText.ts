@@ -17,8 +17,6 @@ export const prepareText = (text: string) => {
 
 	const result = `<content>${paragraphs}</content>`;
 
-	// console.log(typo);
-
 	return result;
 };
 

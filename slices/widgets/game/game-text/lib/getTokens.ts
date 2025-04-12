@@ -17,7 +17,6 @@ export const getTokens = (options: Options) => {
 };
 
 const tokenize = ({ text, breakSentence = true }: Options) => {
-	// console.log(text);
 	if (haveChineseGlyphs(text)) {
 		// keep last 2 symbols on line
 		return getChineseTokens(text);

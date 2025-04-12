@@ -1,11 +1,8 @@
-import { routes } from "@shared/config";
 import {
-	goToPage,
-	selectCurrentBoard,
+	changeInvestigator,
+	changeInvestigatorDetails,
 	selectCurrentBoardProp,
-	setCurrentInvestigatorDetails,
-	setReplaceInvestigator,
-	setSelectedInvestigators,
+	selectHaveDetails,
 	setShowDescription,
 	useAppDispatch,
 	useAppSelector,
@@ -18,43 +15,28 @@ export type DescriptionMenuProps = ViewProps;
 
 export const DescriptionMenu = (props: DescriptionMenuProps) => {
 	const dispatch = useAppDispatch();
-	const selection = useAppSelector(selectCurrentBoardProp("selection"));
-	const details = useAppSelector(selectCurrentBoardProp("details"));
-
-	const media = useAppSelector(
-		(state) => selectCurrentBoard(state).details.media,
+	const signatureGroupId = useAppSelector(
+		selectCurrentBoardProp("signatureGroupId"),
 	);
-	const haveDetails = media?.variants || media?.skins;
+	const haveDetails = useAppSelector(selectHaveDetails(signatureGroupId));
 
 	const hide = useCallback(() => {
 		dispatch(setShowDescription(false));
 	}, [dispatch]);
 
-	const changeInvestigatorDetails = useCallback(() => {
-		if (!details || !selection) {
-			return;
-		}
-		dispatch(goToPage(routes.selectInvestigatorDetails));
-		dispatch(setCurrentInvestigatorDetails(details));
-		dispatch(setSelectedInvestigators([selection]));
-		dispatch(setShowDescription(false));
-	}, [dispatch, details, selection]);
+	const onDetailsChange = useCallback(() => {
+		dispatch(changeInvestigatorDetails());
+	}, [dispatch]);
 
-	const changeInvestigator = useCallback(() => {
-		if (!selection) {
-			return;
-		}
-		dispatch(setShowDescription(false));
-		dispatch(setReplaceInvestigator(true));
-		dispatch(setSelectedInvestigators([selection]));
-		dispatch(goToPage(routes.selectInvestigators));
-	}, [dispatch, selection]);
+	const onChangeInvestigator = useCallback(() => {
+		dispatch(changeInvestigator());
+	}, [dispatch]);
 
 	return (
 		<C.Container {...props}>
-			<C.Button icon="change-investigator" onPress={changeInvestigator} />
+			<C.Button icon="change-investigator" onPress={onChangeInvestigator} />
 			{haveDetails && (
-				<C.Button icon="investigator" onPress={changeInvestigatorDetails} />
+				<C.Button icon="investigator" onPress={onDetailsChange} />
 			)}
 			<C.Hide onPress={hide} />
 		</C.Container>

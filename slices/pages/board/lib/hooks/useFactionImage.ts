@@ -1,6 +1,6 @@
 import {
-	selectCurrentBoardProp,
 	selectCurrentFaction,
+	selectIsParallel,
 	useAppSelector,
 } from "@shared/lib";
 import type { FactionImages } from "@shared/model";
@@ -11,7 +11,7 @@ type ImagesSource = {
 };
 
 export const useFactionImage = (imagesSource: ImagesSource) => {
-	const isParallel = useAppSelector(selectCurrentBoardProp("isParallel"));
+	const isParallel = useAppSelector(selectIsParallel);
 	const faction = useAppSelector(selectCurrentFaction);
 
 	const images = isParallel ? imagesSource.parallel : imagesSource.default;

@@ -22,20 +22,20 @@ export const setInvestigatorSkin = (
 	};
 };
 
-type SetVariantPayload = {
+type SetSignaturePayload = {
 	code: string;
-	variantId: string | null;
+	signatureId: string | null;
 };
-export const setInvestigatorVariant = (
+export const setInvestigatorSignature = (
 	state: IGameState,
-	action: PayloadAction<SetVariantPayload>,
+	action: PayloadAction<SetSignaturePayload>,
 ) => {
-	const { code, variantId } = action.payload;
+	const { code, signatureId } = action.payload;
 
 	const selectedInvestigators = state.selectedInvestigators.map(
 		(investigator) =>
 			investigator.code === code
-				? { ...investigator, variantId }
+				? { ...investigator, signatureId }
 				: investigator,
 	);
 

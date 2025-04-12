@@ -17,11 +17,11 @@ export const InvestigatorImageBackground = ({
 }: InvestigatorImageBackgroundProps) => {
 	const { view, layout } = useContext(LayoutContext);
 
-	const picture = useAppSelector(selectCurrentBoardProp("picture"));
+	const image = useAppSelector(selectCurrentBoardProp("image"));
 
 	const activeStyle = useInvestigatorImageStyle();
 
-	const { id } = picture;
+	const { id } = image;
 
 	const uri = useInvestigatorImageUrl({
 		code: id,
@@ -31,9 +31,8 @@ export const InvestigatorImageBackground = ({
 	const source = { uri };
 
 	const imageLayout = getPortraitLayout({
-		layout,
 		view,
-		picture,
+		image,
 	});
 
 	return (

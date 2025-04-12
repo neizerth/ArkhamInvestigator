@@ -1,15 +1,9 @@
-import type {
-	InvestigatorAbility,
-	InvestigatorImage,
-	InvestigatorSignature,
-} from "arkham-investigator-data";
+import type { InvestigatorSignature } from "arkham-investigator-data";
 import type {
 	Faction,
-	InvestigatorDetails,
 	InvestigatorGameStatType,
 	InvestigatorMainStatType,
 	InvestigatorSkillType,
-	SelectedInvestigator,
 } from "./common";
 import type { SkillCheckHistoryItem } from "./skillCheck";
 
@@ -18,9 +12,8 @@ export type InvestigatorBoardStat =
 	| InvestigatorSkillType
 	| InvestigatorGameStatType;
 
-export type InvestigatorPicture = {
+export type InvestigatorImage = Omit<InvestigatorSignature["image"], "id"> & {
 	id: string;
-	image: InvestigatorImage;
 };
 
 export type InvestigatorBoardValues = Record<InvestigatorBoardStat, number> & {
@@ -29,21 +22,19 @@ export type InvestigatorBoardValues = Record<InvestigatorBoardStat, number> & {
 
 export type InvestigatorBoard = {
 	id: number;
+	signatureGroupId: string;
+	skinId?: string;
+
 	investigator: InvestigatorSignature;
-	picture: InvestigatorPicture;
-	isParallel: boolean;
+	image: InvestigatorImage;
 	initialValue: InvestigatorBoardValues;
 	baseValue: InvestigatorBoardValues;
 	value: InvestigatorBoardValues;
-	unique: boolean;
 	history: HistoryItem[];
 	historyIndex: number;
 	checkHistory: SkillCheckHistoryItem[];
-	details: InvestigatorDetails;
-	selection: SelectedInvestigator;
 	currentRole?: Faction;
 	usedAbilities?: UsedAbility[];
-	abilities?: InvestigatorAbility[];
 };
 
 export type UsedAbility = {

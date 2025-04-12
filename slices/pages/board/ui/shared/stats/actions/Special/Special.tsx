@@ -10,7 +10,7 @@ export type SpecialProps = TouchableOpacityProps & {
 export const Special = ({ value, icon, ...props }: SpecialProps) => {
 	const style = getIconStyle(icon);
 	return (
-		<C.Container {...props} style={style}>
+		<C.Container {...props} style={[props.style, style]}>
 			<C.Icon icon={icon} />
 			{!value && <C.Used icon="cross_c" />}
 		</C.Container>

@@ -1,26 +1,35 @@
-import { useAppSelector } from "@shared/lib";
+import {
+	selectReplaceCode,
+	selectSelectedInvestigatorByCode,
+	useAppSelector,
+} from "@shared/lib";
 import {
 	InvestigatorPreview,
 	type InvestigatorPreviewProps,
-} from "@widgets/investigator/investigator-preview";
+} from "../../../../investigator-preview";
 import {
 	selectInvestigatorSelectedCount,
 	selectIsInvestigatorDisabled,
-} from "@widgets/investigator/investigator-select/lib";
+} from "../../../lib";
 
 export type InvestigatorListItemProps = InvestigatorPreviewProps;
 
 export const InvestigatorListItem = (props: InvestigatorListItemProps) => {
-	const { code } = props.investigator;
+	const replaceCode = useAppSelector(selectReplaceCode);
+	const { code } = props;
 
 	const count = useAppSelector(selectInvestigatorSelectedCount(code));
+	const selected = useAppSelector(selectSelectedInvestigatorByCode(code));
 	const disabled = useAppSelector(selectIsInvestigatorDisabled(code));
 
-	const isSelected = count > 0;
+	const imageId = selected?.image.id || code;
+
+	const isSelected = count > 0 || replaceCode === code;
 
 	return (
 		<InvestigatorPreview
 			{...props}
+			imageId={imageId}
 			selected={isSelected}
 			disabled={disabled}
 			selectedCount={count}

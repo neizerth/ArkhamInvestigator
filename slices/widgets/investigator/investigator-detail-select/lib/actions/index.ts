@@ -1,3 +1,4 @@
-export * from "./changeSkin";
-export * from "./changeVariant";
-export * from "./updateBoardDetails";
+export * from "./changeSignature";
+export * from "./updateBoardFromSelection";
+export * from "./setSelection";
+export * from "./cancelSelection";

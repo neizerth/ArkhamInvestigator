@@ -1,5 +1,5 @@
 import { createSelector } from "@reduxjs/toolkit";
-import { selectAbilityUseInfo } from "./selectAbilityUseInfo";
+import { selectAbilityUseInfo } from "./current/selectAbilityUseInfo";
 
 export const selectIsAbilityUsed = (abilityId: string, boardId?: number) =>
 	createSelector([selectAbilityUseInfo(abilityId)], (data) => {

@@ -30,8 +30,8 @@ export const Content: typeof View = styled(View)`
 export const Special: typeof SpecialActions = styled(SpecialActions)`
   position: absolute;
   z-index: -1;
-  bottom: 8px;
-  left: 85px;
+  bottom: 10px;
+  left: 90px;
 `;
 
 export const BaseActions: FC<DefinedBaseStatPickerProps> = styled(

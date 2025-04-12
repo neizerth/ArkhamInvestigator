@@ -1,4 +1,5 @@
 import { useAppTranslation } from "@features/i18n";
+import { propEq } from "ramda";
 import { memo } from "react";
 import {
 	type DetailSectionProps,
@@ -9,15 +10,12 @@ import {
 	DetailSelectMemo as Select,
 } from "../DetailSelect";
 
-type Item = DetailSelectProps["selected"];
-
 export type DataSectionProps = Omit<DetailSectionProps, "value"> &
 	DetailSelectProps;
 
 export const DataSection = ({
 	data,
 	title,
-	selected = data[0],
 	onChange,
 	...props
 }: DataSectionProps) => {
@@ -27,12 +25,14 @@ export const DataSection = ({
 		return null;
 	}
 
+	const selected = data.find(propEq(props.selectedId, "id"));
+
 	const sectionTitle = `${title} (${length})`;
 	const selectedValue = (selected && t(selected.name)) || t`Default`;
 
 	return (
 		<Section title={sectionTitle} value={selectedValue}>
-			<Select {...props} selected={selected} onChange={onChange} data={data} />
+			<Select {...props} onChange={onChange} data={data} />
 		</Section>
 	);
 };

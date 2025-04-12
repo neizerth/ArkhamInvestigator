@@ -24,6 +24,7 @@ export const makeStore = () => {
 		reducer,
 		middleware: (getDefaultMiddleware) =>
 			getDefaultMiddleware({
+				immutableCheck: false,
 				serializableCheck,
 			}),
 		devTools: false,

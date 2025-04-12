@@ -1,4 +1,5 @@
-import type { Defined, InvestigatorDetails } from "@shared/model";
+import type { Defined } from "@shared/model";
+import type { InvestigatorSignatureGroup } from "arkham-investigator-data";
 import { useCallback } from "react";
 import type { ListRenderItemInfo, SectionListProps } from "react-native";
 import { useImageSize } from "../../../lib";
@@ -6,7 +7,7 @@ import * as C from "./InvestigatorList.components";
 
 type OmitProps = "key" | "numColumns" | "renderItem" | "keyExtractor";
 
-type Group = InvestigatorDetails[];
+type Group = InvestigatorSignatureGroup[];
 type InvestigatorListSection = {
 	title?: string;
 };
@@ -18,7 +19,7 @@ export type InvestigatorListProps = Omit<
 	SectionListProps<Group, InvestigatorListSection>,
 	OmitProps
 > & {
-	onChange: (item: InvestigatorDetails) => void;
+	onChange: (item: InvestigatorSignatureGroup) => void;
 };
 
 export const InvestigatorList = ({
@@ -26,7 +27,7 @@ export const InvestigatorList = ({
 	...props
 }: InvestigatorListProps) => {
 	const toggleSelected = useCallback(
-		(item: InvestigatorDetails) => () => onChange(item),
+		(item: InvestigatorSignatureGroup) => () => onChange(item),
 		[onChange],
 	);
 
@@ -36,12 +37,12 @@ export const InvestigatorList = ({
 		({ item }: ListRenderItemInfo<Group>) => {
 			return (
 				<C.ItemRow>
-					{item.map((item) => (
+					{item.map((group) => (
 						<C.Item
-							key={item.investigator.code}
-							onPress={toggleSelected(item)}
-							investigator={item.investigator}
-							media={item.media}
+							key={group.id}
+							onPress={toggleSelected(group)}
+							faction={group.faction_code}
+							code={group.code}
 							size={size}
 						/>
 					))}

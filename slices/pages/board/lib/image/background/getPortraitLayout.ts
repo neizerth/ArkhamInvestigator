@@ -5,23 +5,16 @@ import {
 	scaleBoxPosition,
 } from "@shared/lib";
 import { getBoxCenter, getBoxLayoutCenter } from "@shared/lib/util/size/box";
-import type { InvestigatorPicture } from "@shared/model";
+import type { InvestigatorImage } from "@shared/model";
 import type { Box } from "@shared/model/ui";
 import { faceSize } from "../../../config";
-import type { HeaderLayout } from "../../../model";
 
 type GetImageLayout = {
-	layout: HeaderLayout;
 	view: Box;
-	picture: InvestigatorPicture;
+	image: InvestigatorImage;
 };
 
-export const getPortraitLayout = ({
-	picture,
-	layout,
-	view,
-}: GetImageLayout) => {
-	const { image } = picture;
+export const getPortraitLayout = ({ image, view }: GetImageLayout) => {
 	const { face } = image;
 
 	if (!face) {

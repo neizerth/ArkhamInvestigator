@@ -1,41 +1,38 @@
 import { getInvestigatorImageUrl as getImageUrl } from "@shared/api/getInvestigatorImageUrl";
-import type {
-	InvestigatorDetailItem,
-	InvestigatorDetails,
-} from "@shared/model";
+import {
+	getSignatureImageId,
+	selectCurrentSkinId,
+	useAppSelector,
+} from "@shared/lib";
+import { selectCurrentSignature } from "../../../lib";
 import * as C from "./InvestigatorDescription.components";
 
-export type InvestigatorDescriptionProps = {
-	data: InvestigatorDetails;
-	skin: InvestigatorDetailItem | null;
-	variant: InvestigatorDetailItem | null;
-};
+export const InvestigatorDescription = () => {
+	const signature = useAppSelector(selectCurrentSignature);
+	const skinId = useAppSelector(selectCurrentSkinId);
 
-export const InvestigatorDescription = ({
-	data,
-	skin,
-	variant,
-}: InvestigatorDescriptionProps) => {
-	const { investigator } = variant?.details || data;
+	if (!signature) {
+		return;
+	}
 
-	const { code } = investigator;
-	const imageId = skin?.imageId || variant?.imageId || code;
+	const imageId = skinId || getSignatureImageId(signature);
+
 	const uri = getImageUrl({
 		code: imageId,
 		type: "square",
 	});
 	const source = { uri };
 
-	const text = investigator.text;
-	const traits = investigator.traits;
+	const text = signature.text;
+	const traits = signature.traits;
 
 	return (
 		<C.Container>
 			<C.MainInfo>
 				<C.Details>
 					<C.Traits>{traits}</C.Traits>
-					<C.Skills investigator={investigator} />
-					<C.Stats investigator={investigator} />
+					<C.Skills investigator={signature} />
+					<C.Stats investigator={signature} />
 				</C.Details>
 				<C.ImageContainer>
 					<C.Image source={source} />

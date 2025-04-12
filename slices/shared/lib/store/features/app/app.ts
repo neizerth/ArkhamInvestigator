@@ -5,11 +5,13 @@ import { APP_VERSION } from "../../../../config/app";
 export type IAppState = {
 	loading: boolean;
 	version: string;
+	outdated: boolean;
 };
 
 const initialState: IAppState = {
 	loading: true,
 	version: APP_VERSION,
+	outdated: false,
 };
 
 export const app = createSlice({
@@ -17,8 +19,9 @@ export const app = createSlice({
 	...createSliceState(initialState),
 });
 
-export const { setLoading } = app.actions;
+export const { setLoading, setOutdated: setAppOutdated } = app.actions;
 
-export const { selectLoading } = app.selectors;
+export const { selectLoading, selectOutdated: selectAppOutdated } =
+	app.selectors;
 
 export default app.reducer;

@@ -1,17 +1,20 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type {
 	FactionFilterType,
-	InvestigatorDetails,
 	Nullable,
 	SelectedInvestigator,
 } from "@shared/model";
+import type { InvestigatorSignatureGroup } from "arkham-investigator-data";
 import { createSliceState } from "redux-toolkit-helpers";
 import * as reducers from "./reducers";
 
 export type IGameState = {
 	factionFilter: FactionFilterType | null;
 	selectedInvestigators: SelectedInvestigator[];
-	currentInvestigatorDetails: Nullable<InvestigatorDetails>;
+	currentSignatureGroup: Nullable<InvestigatorSignatureGroup>;
+	currentSkinId: string | null;
+	currentSignatureId: string | null;
+
 	showDescription: boolean;
 	showAdditionalInformation: boolean;
 	replaceInvestigator: boolean;
@@ -20,10 +23,12 @@ export type IGameState = {
 const initialState: IGameState = {
 	factionFilter: null,
 	selectedInvestigators: [],
-	currentInvestigatorDetails: null,
+	currentSignatureGroup: null,
 	showDescription: false,
 	showAdditionalInformation: false,
 	replaceInvestigator: false,
+	currentSignatureId: null,
+	currentSkinId: null,
 };
 
 const state = createSliceState(initialState);
@@ -39,22 +44,26 @@ export const game = createSlice({
 
 export const {
 	setSelectedInvestigators,
-	setCurrentInvestigatorDetails,
+	setCurrentSignatureGroup,
 	setInvestigatorSkin,
-	setInvestigatorVariant,
+	setInvestigatorSignature,
 	setShowDescription,
 	setReplaceInvestigator,
 	setShowAdditionalInformation,
 	setFactionFilter,
+	setCurrentSignatureId,
+	setCurrentSkinId,
 } = game.actions;
 
 export const {
 	selectSelectedInvestigators,
-	selectCurrentInvestigatorDetails,
+	selectCurrentSignatureGroup,
 	selectShowDescription,
 	selectReplaceInvestigator,
 	selectShowAdditionalInformation,
 	selectFactionFilter,
+	selectCurrentSignatureId,
+	selectCurrentSkinId,
 } = game.selectors;
 
 export default game.reducer;

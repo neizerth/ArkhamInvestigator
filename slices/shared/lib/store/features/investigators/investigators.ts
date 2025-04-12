@@ -1,26 +1,21 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type {
-	Investigator,
 	InvestigatorSignature,
+	InvestigatorSignatureGroup,
 } from "arkham-investigator-data";
 
 import { createSliceState } from "redux-toolkit-helpers";
-import {
-	loadInvestigatorSignatures,
-	loadInvestigatorsMediaData,
-} from "../app/actions/api";
+import { loadInvestigatorSignatures } from "../app/actions/api";
 
 export type IInvestigatorsState = {
 	mediaVersion: string | null;
-	investigatorMedia: Investigator[];
-	signatures: InvestigatorSignature[];
+	signatureGroups: InvestigatorSignatureGroup[];
 	tabooSignatures: InvestigatorSignature[];
 };
 
 const initialState: IInvestigatorsState = {
 	mediaVersion: null,
-	investigatorMedia: [],
-	signatures: [],
+	signatureGroups: [],
 	tabooSignatures: [],
 };
 
@@ -28,22 +23,22 @@ export const investigators = createSlice({
 	name: "investigators",
 	...createSliceState(initialState),
 	extraReducers: (builder) => {
-		builder
-			.addCase(loadInvestigatorsMediaData.fulfilled, (state, { payload }) => {
-				state.investigatorMedia = payload.data;
-				state.mediaVersion = payload.version;
-			})
-			.addCase(loadInvestigatorSignatures.fulfilled, (state, { payload }) => {
-				state.signatures = payload.cards;
+		builder.addCase(
+			loadInvestigatorSignatures.fulfilled,
+			(state, { payload }) => {
+				state.signatureGroups = payload.groups;
 				state.tabooSignatures = payload.taboo;
-			});
+			},
+		);
 	},
 });
 
+export const { setMediaVersion, setSignatureGroups, setTabooSignatures } =
+	investigators.actions;
+
 export const {
-	selectInvestigatorMedia,
 	selectMediaVersion,
-	selectSignatures,
+	selectSignatureGroups,
 	selectTabooSignatures,
 } = investigators.selectors;
 
