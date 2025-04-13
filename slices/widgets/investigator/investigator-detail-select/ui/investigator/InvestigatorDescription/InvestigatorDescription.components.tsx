@@ -60,7 +60,7 @@ export const Trauma: typeof InvestigatorTrauma = styled(InvestigatorTrauma)`
 `;
 
 export const Settings: typeof Row = styled(Row)`
-  
+  justify-content: space-between;
 `;
 
 export const XP: typeof InvestigatorXP = styled(InvestigatorXP)`

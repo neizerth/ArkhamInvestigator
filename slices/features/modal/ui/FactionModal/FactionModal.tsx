@@ -1,8 +1,8 @@
-import { ModalContext } from "@features/modal/lib";
-import type { ModalData } from "@features/modal/model";
 import type { Faction } from "@shared/model";
 import { useContext } from "react";
 import type { ViewProps } from "react-native";
+import { ModalContext } from "../../lib";
+import type { ModalData } from "../../model";
 import * as C from "./FactionModal.components";
 
 export type FactionModalProps = ViewProps & {
@@ -15,7 +15,6 @@ export const FactionModal = ({ data, ...props }: FactionModalProps) => {
 	const onCancel = context.onCancel?.current;
 	const onClose = context.onClose?.current;
 	const { title, subtitle, text, okText, cancelText } = data;
-
 	const cardFaction: Faction = data.faction || "neutral";
 
 	return (

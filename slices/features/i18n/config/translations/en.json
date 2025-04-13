@@ -1,4 +1,8 @@
 {
+	"board.help.calculator.minValue": "The minimum calculation value can't be lower than 0",
+	"board.help.calculator.history": "Tap on the Equals button to add value to the calculation history. This value will be automatically updated if you update according params on your board.",
+	"app.outdated.title": "Version is outdated",
+	"app.outdated.text": "Update is required",
 	"modal.spoiler.message": "This section contains campaign spoilers. Do you want to proceed?",
 
 	"picker.deceleration.fast": "Fast",

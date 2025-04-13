@@ -21,7 +21,12 @@ export const setTranslationsData: I18NReducer<ArkhamDivider.Translation> = (
 
 	const appTranslation = translations[loadingLanguage] || {};
 
-	const bundle = Object.assign({}, ...Object.values(data), appTranslation);
+	const bundle = Object.assign(
+		{},
+		translations.en,
+		...Object.values(data),
+		appTranslation,
+	);
 
 	i18next.addResourceBundle(loadingLanguage, I18N_NAMESAPCE, bundle);
 	i18next.changeLanguage(loadingLanguage);

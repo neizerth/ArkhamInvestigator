@@ -33,6 +33,9 @@
 
 	"Behavior": "Поведение",
 
+	"app.outdated.title": "Приложение устарело",
+	"app.outdated.text": "Не так, как древние, но пора бы обновиться",
+
 	"picker.deceleration.fast": "Быстрое",
 	"picker.deceleration.normal": "Нормальное",
 	"picker.deceleration.custom": "Настроить",
@@ -61,5 +64,8 @@
 	"board.help.calculator.clearHistory": "Очищает историю проверок",
 
 	"board.help.special.additionalAction": "Некоторые сыщики имеют особые дополнительные действия. Нажмите на эту иконку, чтобы отметить действие как выполненное",
-	"board.help.special.lola": "Нажмите на блок с именем, чтобы сменить текущую роль (класс)"
+	"board.help.special.lola": "Нажмите на блок с именем, чтобы сменить текущую роль (класс)",
+
+	"board.help.calculator.minValue": "Минимальное значение расчётов не может быть больше 0",
+	"board.help.calculator.history": "Нажмите на «Считать» чтобы добавить расчёт в историю. Это значение будет меняться автоматически, если поменяются параметры вашего сыщика"
 }

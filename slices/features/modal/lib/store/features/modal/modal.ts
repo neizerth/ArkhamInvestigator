@@ -5,10 +5,12 @@ import { createSliceState } from "redux-toolkit-helpers";
 export type IModalState = {
 	modalId: string | null;
 	data: ModalData | null;
+	ready: boolean;
 };
 const initialState: IModalState = {
 	modalId: null,
 	data: null,
+	ready: false,
 };
 
 export const modal = createSlice({
@@ -16,8 +18,16 @@ export const modal = createSlice({
 	...createSliceState(initialState),
 });
 
-export const { setData: setModalData, setModalId } = modal.actions;
+export const {
+	setData: setModalData,
+	setModalId,
+	setReady: setModalReady,
+} = modal.actions;
 
-export const { selectData: selectModalData, selectModalId } = modal.selectors;
+export const {
+	selectData: selectModalData,
+	selectModalId,
+	selectReady: selectModalReady,
+} = modal.selectors;
 
 export default modal.reducer;

@@ -1,16 +1,19 @@
 import type { ModalData } from "@features/modal/model";
-import { useCallback, useContext } from "react";
+import { useCallback, useContext, useMemo } from "react";
 import { useAppDispatch } from "../../../../shared/lib/hooks/store/useAppDispatch";
 import { ModalContext } from "../context";
 import { closeModal, openModal } from "../store/features/modal/actions";
 
+type ModalEventhandler = (() => void) | false;
+
 type UseModalOptions = {
 	id: string;
 	data: ModalData;
-	onOk?: () => void;
-	onCancel?: () => void;
-	onClose?: () => void;
+	onOk?: ModalEventhandler;
+	onCancel?: ModalEventhandler;
+	onClose?: ModalEventhandler;
 };
+
 export const useModal = ({
 	id,
 	data,
@@ -22,34 +25,64 @@ export const useModal = ({
 
 	const context = useContext(ModalContext);
 
-	const ok = useCallback(() => {
-		dispatch(closeModal());
-		onOk?.();
-	}, [dispatch, onOk]);
+	const tryClose = useCallback(() => {
+		if (onClose === false) {
+			return;
+		}
 
-	const cancel = useCallback(() => {
 		dispatch(closeModal());
-		onCancel?.();
-	}, [dispatch, onCancel]);
-
-	const close = useCallback(() => {
-		dispatch(closeModal());
-		onClose?.();
 	}, [dispatch, onClose]);
 
+	const ok = useCallback(() => {
+		if (onOk === false) {
+			return;
+		}
+		tryClose();
+		onOk?.();
+	}, [onOk, tryClose]);
+
+	const cancel = useCallback(() => {
+		if (onCancel === false) {
+			return;
+		}
+		tryClose();
+		onCancel?.();
+	}, [onCancel, tryClose]);
+
+	const close = useCallback(() => {
+		if (onClose === false) {
+			return;
+		}
+		tryClose();
+		onClose?.();
+	}, [onClose, tryClose]);
+
 	const show = useCallback(() => {
-		if (context.onCancel) {
+		if (context.onCancel && onCancel !== false) {
 			context.onCancel.current = cancel;
 		}
-		if (context.onOk) {
+		if (context.onOk && onOk !== false) {
 			context.onOk.current = ok;
 		}
 		if (context.onClose) {
-			context.onClose.current = close;
+			context.onClose.current = onClose !== false ? close : null;
 		}
 
 		dispatch(openModal(id, data));
-	}, [dispatch, id, data, ok, cancel, close, context]);
+	}, [
+		dispatch,
+		id,
+		data,
+		ok,
+		cancel,
+		close,
+		context.onCancel,
+		context.onClose,
+		context.onOk,
+		onOk,
+		onClose,
+		onCancel,
+	]);
 
 	const hide = useCallback(() => {
 		dispatch(closeModal());
@@ -64,5 +97,7 @@ export const useModal = ({
 		}
 	}, [dispatch, context]);
 
-	return [show, hide] as [typeof show, typeof hide];
+	return useMemo(() => {
+		return [show, hide] as [typeof show, typeof hide];
+	}, [show, hide]);
 };

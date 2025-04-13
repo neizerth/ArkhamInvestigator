@@ -2,11 +2,7 @@ import { closeModal } from "@features/modal/lib";
 import { useAppDispatch, useAppSelector } from "@shared/lib";
 import { type PropsWithChildren, useCallback, useEffect, useRef } from "react";
 import { BackHandler } from "react-native";
-import {
-	ModalContext,
-	type ModalContextType,
-	type ModalEventHandlerType,
-} from "../../lib/context";
+import { ModalContext, type ModalEventHandlerType } from "../../lib/context";
 import {
 	selectModalData,
 	selectModalId,
@@ -26,7 +22,7 @@ export const ModalProvider = ({ children }: PropsWithChildren) => {
 	const onCancel = useRef<ModalEventHandlerType>(null);
 	const onClose = useRef<ModalEventHandlerType>(close);
 
-	const contextValue: ModalContextType = {
+	const contextValue = {
 		onOk,
 		onCancel,
 		onClose,
@@ -34,9 +30,9 @@ export const ModalProvider = ({ children }: PropsWithChildren) => {
 
 	useEffect(() => {
 		const onBack = () => {
-			if (modalId) {
+			if (modalId && onClose.current) {
 				close();
-				onClose.current?.();
+				onClose.current();
 				return true;
 			}
 			return false;

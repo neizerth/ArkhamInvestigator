@@ -4,6 +4,7 @@ import { DarkTheme, ThemeProvider } from "@react-navigation/native";
 import type { PropsWithChildren } from "react";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { DataProvider } from "./DataProvider";
+import { OutdatedCheckProvider } from "./OutdatedCheckProvider";
 import { StoreProvider } from "./StoreProvider";
 
 export const AppProvider = ({ children }: PropsWithChildren) => {
@@ -13,7 +14,9 @@ export const AppProvider = ({ children }: PropsWithChildren) => {
 				<ThemeProvider value={DarkTheme}>
 					<I18NProvider>
 						<DataProvider>
-							<ModalProvider>{children}</ModalProvider>
+							<ModalProvider>
+								<OutdatedCheckProvider>{children}</OutdatedCheckProvider>
+							</ModalProvider>
 						</DataProvider>
 					</I18NProvider>
 				</ThemeProvider>

@@ -1,8 +1,8 @@
 import { size } from "@shared/config";
 import { Outside as BaseOutside, Text as BaseText } from "@shared/ui";
-import { FactionCard } from "@widgets/investigator/faction/faction-card";
 import { View } from "react-native";
 import styled from "styled-components/native";
+import { FactionCardMemo as FactionCard } from "../../../../widgets/investigator/faction/faction-card";
 
 export const Text: typeof BaseText = styled(BaseText)`
 

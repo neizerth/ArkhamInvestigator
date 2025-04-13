@@ -1,7 +1,7 @@
 import { selectInvestigatorByCode, useAppTranslation } from "@features/i18n";
 import { InvesigatorCode } from "@shared/config";
 import { useAppSelector } from "@shared/lib";
-import { Bold, List, Text, Title } from "@shared/ui";
+import { Bold, List, Paragraph, Text, Title } from "@shared/ui";
 import { ContentPage } from "@widgets/content-page";
 import * as C from "./HelpPage.components";
 
@@ -86,6 +86,8 @@ export const HelpPage = () => {
 				{" - "}
 				{t`board.help.calculator.clearHistory`}
 			</Text>
+			<Paragraph>{t`board.help.calculator.minValue`}</Paragraph>
+			<Paragraph>{t`board.help.calculator.history`}</Paragraph>
 
 			<Title>{t`Investigator Special Actions`}</Title>
 			<Text>
