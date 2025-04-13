@@ -6,7 +6,6 @@ import {
 } from "@shared/lib";
 import { selectCurrentSignature } from "../../../lib";
 import * as C from "./InvestigatorDescription.components";
-
 export const InvestigatorDescription = () => {
 	const signature = useAppSelector(selectCurrentSignature);
 	const skinId = useAppSelector(selectCurrentSkinId);
@@ -41,6 +40,10 @@ export const InvestigatorDescription = () => {
 			<C.InvestigatorTextContainer>
 				<C.InvestigatorText value={text} />
 			</C.InvestigatorTextContainer>
+			<C.Settings>
+				<C.Trauma />
+				<C.XP />
+			</C.Settings>
 		</C.Container>
 	);
 };

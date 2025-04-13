@@ -4,6 +4,7 @@ import type {
 	InvestigatorSignatureGroup,
 } from "arkham-investigator-data";
 
+import type { InvestigatorSettings } from "@shared/model";
 import { createSliceState } from "redux-toolkit-helpers";
 import { loadInvestigatorSignatures } from "../app/actions/api";
 
@@ -11,12 +12,14 @@ export type IInvestigatorsState = {
 	mediaVersion: string | null;
 	signatureGroups: InvestigatorSignatureGroup[];
 	tabooSignatures: InvestigatorSignature[];
+	investigatorSettings: Record<string, InvestigatorSettings> | null;
 };
 
 const initialState: IInvestigatorsState = {
 	mediaVersion: null,
 	signatureGroups: [],
 	tabooSignatures: [],
+	investigatorSettings: null,
 };
 
 export const investigators = createSlice({
@@ -33,13 +36,18 @@ export const investigators = createSlice({
 	},
 });
 
-export const { setMediaVersion, setSignatureGroups, setTabooSignatures } =
-	investigators.actions;
+export const {
+	setMediaVersion,
+	setSignatureGroups,
+	setTabooSignatures,
+	setInvestigatorSettings,
+} = investigators.actions;
 
 export const {
 	selectMediaVersion,
 	selectSignatureGroups,
 	selectTabooSignatures,
+	selectInvestigatorSettings,
 } = investigators.selectors;
 
 export default investigators.reducer;

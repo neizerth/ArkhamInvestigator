@@ -10,3 +10,12 @@ export const round = (value: number, accuracy: number) => {
 
 	return result;
 };
+
+export const safeIncrement =
+	(maxValue = Number.POSITIVE_INFINITY) =>
+	(value = 0) =>
+		Math.min(value + 1, maxValue);
+export const safeDecrement =
+	(minValue = Number.NEGATIVE_INFINITY) =>
+	(value = 0) =>
+		Math.max(value - 1, minValue);

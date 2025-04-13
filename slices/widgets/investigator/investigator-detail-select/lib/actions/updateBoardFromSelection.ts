@@ -54,6 +54,7 @@ export const updateBoardFromSelection =
 			history: [],
 			historyIndex: -1,
 			checkHistory: [],
+			usedAbilities: [],
 		};
 
 		dispatch(setCurrentBoard(updatedBoard));

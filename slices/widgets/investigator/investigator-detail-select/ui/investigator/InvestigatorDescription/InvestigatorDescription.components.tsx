@@ -7,6 +7,8 @@ import { View } from "react-native";
 import styled from "styled-components/native";
 import { InvestigatorSkills } from "../InvestigatorSkills";
 import { InvestigatorStats } from "../InvestigatorStats";
+import { InvestigatorTrauma } from "../InvestigatorTrauma";
+import { InvestigatorXP } from "../InvestigatorXP";
 
 export const Container: typeof View = styled(View)`
   flex-grow: 1;
@@ -23,6 +25,7 @@ export const Traits: typeof UnscaledText = styled(UnscaledText)`
   color: ${color.light10};
 `;
 
+export { View as Section };
 export { Column as ImageContainer };
 export { InvestigatorSkills as Skills };
 
@@ -50,4 +53,16 @@ export const MainInfo: typeof Row = styled(Row)`
 
 export const Stats: typeof InvestigatorStats = styled(InvestigatorStats)`
   
+`;
+
+export const Trauma: typeof InvestigatorTrauma = styled(InvestigatorTrauma)`
+  flex: 2;
+`;
+
+export const Settings: typeof Row = styled(Row)`
+  
+`;
+
+export const XP: typeof InvestigatorXP = styled(InvestigatorXP)`
+  flex: 1;
 `;
