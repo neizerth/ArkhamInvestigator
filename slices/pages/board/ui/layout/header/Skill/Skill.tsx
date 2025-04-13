@@ -117,6 +117,13 @@ export const Skill = ({ width, height, type, ...props }: SkillProps) => {
 						pressHapticPattern="clockTick"
 					/>
 				</C.ValueContainer>
+				<C.IconContainer>
+					<C.Icon
+						skillType={type}
+						style={style.icon}
+						contentContainerStyle={style.iconContainer}
+					/>
+				</C.IconContainer>
 			</C.Row>
 			{touching && <C.Background style={style.background} />}
 		</C.Container>

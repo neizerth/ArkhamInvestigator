@@ -26,8 +26,9 @@ export const changeInvestigatorDetails =
 		dispatch(setCurrentSignatureGroup(group));
 		dispatch(setCurrentSignatureId(investigator.id));
 		dispatch(setCurrentSkinId(skinId || null));
-
 		dispatch(setShowDescription(false));
 
-		dispatch(goToPage(routes.selectInvestigatorDetails));
+		setTimeout(() => {
+			dispatch(goToPage(routes.selectInvestigatorDetails));
+		}, 150);
 	};

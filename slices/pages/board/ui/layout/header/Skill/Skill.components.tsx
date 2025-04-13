@@ -1,5 +1,5 @@
 import { color } from "@shared/config";
-import { Row as BaseRow, IconNumber } from "@shared/ui";
+import { Row as BaseRow, IconNumber, SkillIcon } from "@shared/ui";
 import { PickerMemo as BasePicker } from "@widgets/control/picker";
 import { Value as BaseValue } from "@widgets/investigator/value";
 import { Pressable, View } from "react-native";
@@ -11,7 +11,7 @@ export const Container: typeof View = styled(View)`
 
 export const Row: typeof BaseRow = styled(BaseRow)`
   position: relative;
-  align-items: stretch;
+  align-items: center;
   justify-content: center;
   flex: 1;
 `;
@@ -22,6 +22,7 @@ export const ValueContainer: typeof View = styled(View)`
   align-items: center;
   justify-content: center;
   position: relative;
+  z-index: 2;
 `;
 
 export const Check: typeof Pressable = styled(Pressable)`
@@ -58,3 +59,15 @@ export const Picker: typeof BasePicker = styled(BasePicker).attrs({
 })`
   
   `;
+
+export const Icon: typeof SkillIcon = styled(SkillIcon)`
+`;
+
+export const IconContainer: typeof View = styled(View)`
+  z-index: 1;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  justify-content: center;
+`;

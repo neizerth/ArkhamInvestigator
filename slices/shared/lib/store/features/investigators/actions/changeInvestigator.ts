@@ -4,7 +4,10 @@ import { goToPage } from "../../../effects";
 import { setReplaceInvestigator, setShowDescription } from "../../game";
 
 export const changeInvestigator = (): AppThunk => (dispatch) => {
-	dispatch(setShowDescription(false));
 	dispatch(setReplaceInvestigator(true));
-	dispatch(goToPage(routes.selectInvestigators));
+	dispatch(setShowDescription(false));
+
+	setTimeout(() => {
+		dispatch(goToPage(routes.selectInvestigators));
+	}, 150);
 };

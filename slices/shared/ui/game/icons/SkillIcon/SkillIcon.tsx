@@ -1,4 +1,5 @@
 import type { PropsWithSkill } from "@shared/model/ui";
+import type { ViewStyle } from "react-native";
 import type { IconProps } from "../Icon";
 import {
 	Background,
@@ -9,13 +10,20 @@ import {
 
 export type SkillIconProps = Omit<IconProps, "icon"> &
 	PropsWithSkill &
-	PropsWithTheme;
+	PropsWithTheme & {
+		contentContainerStyle?: ViewStyle;
+	};
 
-export const SkillIcon = ({ skillType, dark, ...props }: SkillIconProps) => {
+export const SkillIcon = ({
+	skillType,
+	dark,
+	contentContainerStyle,
+	...props
+}: SkillIconProps) => {
 	const foreground = `skill_${skillType}_inverted`;
 	const background = `skill_${skillType}`;
 	return (
-		<Container>
+		<Container style={contentContainerStyle}>
 			<Background
 				{...props}
 				skillType={skillType}

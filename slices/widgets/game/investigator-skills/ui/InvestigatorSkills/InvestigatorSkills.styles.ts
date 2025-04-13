@@ -13,8 +13,8 @@ export const getSkillsStyle = (width: number): ViewStyle => {
 
 export const skillsStyle = {
 	width: 510,
-	height: 107,
-	ratio: 510 / 107,
+	height: 110,
+	ratio: 510 / 110,
 	marginLeft: -20,
 	padding: {
 		horizontal: 12 / 510,

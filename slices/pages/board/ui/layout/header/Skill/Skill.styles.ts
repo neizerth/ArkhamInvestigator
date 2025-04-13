@@ -16,10 +16,23 @@ export const getSkillStyle = (width: number) => {
 
 	const container: ViewStyle = {};
 
+	const iconFontSize = vw * 10.5;
+
+	const icon: TextStyle = {
+		fontSize: iconFontSize,
+		lineHeight: iconFontSize,
+	};
+
+	const iconContainer: ViewStyle = {
+		paddingRight: vw,
+	};
+
 	return {
 		container,
 		valueContainer,
 		background,
+		icon,
+		iconContainer,
 	};
 };
 
@@ -87,7 +100,6 @@ export const getSkillValueStyle = ({
 		top: (5.7 * vw - diffFontSize) / 2,
 		right: -vw * 1.5,
 	};
-
 	return {
 		text: valueText,
 		container,

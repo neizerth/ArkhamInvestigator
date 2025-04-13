@@ -91,7 +91,8 @@ export const HelpPage = () => {
 
 			<Title>{t`Investigator Special Actions`}</Title>
 			<Text>
-				<C.Icon icon="per_investigator" />
+				<C.Icon icon="per_investigator" />, <C.Icon icon="free" />,{" "}
+				<C.Icon icon="reaction" />
 				{" - "}
 				{t`board.help.special.additionalAction`}
 			</Text>
