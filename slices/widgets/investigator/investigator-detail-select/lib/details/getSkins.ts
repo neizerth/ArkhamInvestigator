@@ -10,6 +10,9 @@ export const getSkins = (group: InvestigatorSignatureGroup) => {
 			if (item.alternate_of_code) {
 				return;
 			}
+			if (item.type === "custom" && !item.image.id) {
+				return;
+			}
 			return {
 				...pick(["id", "image", "code"], item),
 				name: item.pack.name,

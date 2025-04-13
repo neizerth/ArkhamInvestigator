@@ -1,11 +1,8 @@
 import {
 	changeInvestigator,
 	changeInvestigatorDetails,
-	selectCurrentBoardProp,
-	selectHaveDetails,
 	setShowDescription,
 	useAppDispatch,
-	useAppSelector,
 } from "@shared/lib";
 import { useCallback } from "react";
 import type { ViewProps } from "react-native-svg/lib/typescript/fabric/utils";
@@ -15,10 +12,6 @@ export type DescriptionMenuProps = ViewProps;
 
 export const DescriptionMenu = (props: DescriptionMenuProps) => {
 	const dispatch = useAppDispatch();
-	const signatureGroupId = useAppSelector(
-		selectCurrentBoardProp("signatureGroupId"),
-	);
-	const haveDetails = useAppSelector(selectHaveDetails(signatureGroupId));
 
 	const hide = useCallback(() => {
 		dispatch(setShowDescription(false));
@@ -35,9 +28,7 @@ export const DescriptionMenu = (props: DescriptionMenuProps) => {
 	return (
 		<C.Container {...props}>
 			<C.Button icon="change-investigator" onPress={onChangeInvestigator} />
-			{haveDetails && (
-				<C.Button icon="investigator" onPress={onDetailsChange} />
-			)}
+			<C.Button icon="investigator" onPress={onDetailsChange} />
 			<C.Hide onPress={hide} />
 		</C.Container>
 	);
