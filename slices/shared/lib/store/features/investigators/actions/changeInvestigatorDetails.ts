@@ -1,6 +1,7 @@
 import type { AppThunk } from "@shared/model";
 import { propEq } from "ramda";
 import { routes } from "../../../../../config";
+import { delay } from "../../../../util/promise";
 import { goToPage } from "../../../effects";
 import { selectCurrentBoard } from "../../board/selectors/current/selectCurrentBoard";
 import {
@@ -12,7 +13,7 @@ import {
 import { selectSignatureGroups } from "../investigators";
 
 export const changeInvestigatorDetails =
-	(): AppThunk => (dispatch, getState) => {
+	(): AppThunk => async (dispatch, getState) => {
 		const state = getState();
 		const { signatureGroupId, investigator, skinId } =
 			selectCurrentBoard(state);
@@ -28,7 +29,7 @@ export const changeInvestigatorDetails =
 		dispatch(setCurrentSkinId(skinId || null));
 		dispatch(setShowDescription(false));
 
-		setTimeout(() => {
-			dispatch(goToPage(routes.selectInvestigatorDetails));
-		}, 150);
+		await delay(150);
+
+		dispatch(goToPage(routes.selectInvestigatorDetails));
 	};

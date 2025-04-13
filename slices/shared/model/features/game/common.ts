@@ -55,7 +55,7 @@ export type InvestigatorDetailItem<T = object> = {
 	imageId: string;
 	image: InvestigatorSignature["image"];
 	faction: Faction;
-	type: "custom" | "parallel" | "book" | "skin" | "default";
+	type: InvestigatorSignature["type"] | "skin";
 	icon?: string;
 	name: string;
 	value: string | null;

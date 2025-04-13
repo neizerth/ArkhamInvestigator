@@ -58,11 +58,11 @@ export const useModal = ({
 	}, [onClose, tryClose]);
 
 	const show = useCallback(() => {
-		if (context.onCancel && onCancel !== false) {
-			context.onCancel.current = cancel;
+		if (context.onCancel) {
+			context.onCancel.current = onCancel !== false ? cancel : null;
 		}
-		if (context.onOk && onOk !== false) {
-			context.onOk.current = ok;
+		if (context.onOk) {
+			context.onOk.current = onOk !== false ? ok : null;
 		}
 		if (context.onClose) {
 			context.onClose.current = onClose !== false ? close : null;

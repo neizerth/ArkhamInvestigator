@@ -26,7 +26,7 @@ export const selectCurrentImage = createSelector(
 
 		if (
 			!signature ||
-			signature.type === "custom" ||
+			["custom", "taboo"].includes(signature.type) ||
 			signature.alternate_of_code
 		) {
 			return defaultImage;

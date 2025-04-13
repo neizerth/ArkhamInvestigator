@@ -7,13 +7,11 @@ export const getSignatures = (group: InvestigatorSignatureGroup) => {
 	const { code, faction_code } = group;
 	return group.signatures.map((signature): InvestigatorDetailItem => {
 		const imageId = getSignatureImageId(signature);
-		const icon = signature.pack.icon;
 
 		return {
-			...pick(["id", "image", "code", "type"], signature),
+			...pick(["id", "image", "code", "type", "icon"], signature),
 			name: signature.pack.name,
 			faction: faction_code,
-			icon,
 			code,
 			imageId,
 			value: signature.id,

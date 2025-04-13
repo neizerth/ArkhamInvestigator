@@ -1,13 +1,14 @@
 import type { AppThunk } from "@shared/model";
 import { routes } from "../../../../../config";
+import { delay } from "../../../../util/promise";
 import { goToPage } from "../../../effects";
 import { setReplaceInvestigator, setShowDescription } from "../../game";
 
-export const changeInvestigator = (): AppThunk => (dispatch) => {
+export const changeInvestigator = (): AppThunk => async (dispatch) => {
 	dispatch(setReplaceInvestigator(true));
 	dispatch(setShowDescription(false));
 
-	setTimeout(() => {
-		dispatch(goToPage(routes.selectInvestigators));
-	}, 150);
+	await delay(150);
+
+	dispatch(goToPage(routes.selectInvestigators));
 };
