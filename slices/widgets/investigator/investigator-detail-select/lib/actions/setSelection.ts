@@ -1,5 +1,6 @@
 import {
 	addSelectedInvestigator,
+	resetCurrentDetails,
 	selectCurrentBoard,
 	selectCurrentSignatureGroup,
 } from "@shared/lib";
@@ -44,4 +45,5 @@ export const setSelection = (): AppThunk => (dispatch, getState) => {
 	}
 
 	dispatch(updateBoardFromSelection(selection));
+	dispatch(resetCurrentDetails());
 };
