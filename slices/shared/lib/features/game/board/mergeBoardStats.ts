@@ -23,7 +23,7 @@ export const mergeBoardStats = (
 	return {
 		...stats,
 		...keepValues,
-		health: stats.health - injury.health,
-		sanity: stats.sanity - injury.sanity,
+		health: Math.max(0, stats.health - injury.health),
+		sanity: Math.max(0, stats.sanity - injury.sanity),
 	};
 };

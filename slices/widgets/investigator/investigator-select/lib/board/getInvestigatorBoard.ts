@@ -21,7 +21,7 @@ export const getInvestigatorBoard = ({
 	const { signature, image } = selection;
 	const { additionalAction } = signature;
 
-	const baseValue = {
+	const initialValue = {
 		...getBoardStats(signature),
 		additionalAction: Boolean(additionalAction),
 		resources: START_GAME_RESOURCES_COUNT,
@@ -29,10 +29,10 @@ export const getInvestigatorBoard = ({
 		clues: 0,
 	};
 
-	const value = {
-		...baseValue,
-		health: Math.max(0, baseValue.health - physicalTrauma),
-		sanity: Math.max(0, baseValue.sanity - mentalTrauma),
+	const baseValue = {
+		...initialValue,
+		health: Math.max(0, initialValue.health - physicalTrauma),
+		sanity: Math.max(0, initialValue.sanity - mentalTrauma),
 	};
 
 	return {
@@ -42,9 +42,9 @@ export const getInvestigatorBoard = ({
 
 		investigator: signature,
 		image: image,
-		initialValue: baseValue,
+		initialValue,
 		baseValue: baseValue,
-		value,
+		value: baseValue,
 		history: [],
 		checkHistory: [],
 		historyIndex: -1,

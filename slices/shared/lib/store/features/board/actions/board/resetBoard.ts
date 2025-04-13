@@ -10,6 +10,7 @@ import { clearHistory } from "../history/clearHistory";
 import { setCurrentBoard } from "./setCurrentBoard";
 
 import type { InvestigatorBoard } from "@shared/model";
+import { selectInvestigatorSettingsByCode } from "../../../investigators/selectors/selectInvestigatorSettingsByCode";
 
 export const resetBoard: ActionCreator<AppThunk> =
 	() => (dispatch, getState) => {
@@ -21,11 +22,22 @@ export const resetBoard: ActionCreator<AppThunk> =
 			return;
 		}
 
+		const { initialValue } = board;
+
+		const { physicalTrauma = 0, mentalTrauma = 0 } =
+			selectInvestigatorSettingsByCode(board.signatureGroupId)(state);
+
+		const baseValue = {
+			...initialValue,
+			health: Math.max(0, initialValue.health - physicalTrauma),
+			sanity: Math.max(0, initialValue.sanity - mentalTrauma),
+		};
+
 		const data: InvestigatorBoard = {
 			...board,
-			baseValue: board.initialValue,
+			baseValue,
 			value: {
-				...board.initialValue,
+				...baseValue,
 				clues: 0,
 				resources: START_GAME_RESOURCES_COUNT,
 				actions: NEW_TURN_ACTIONS_COUNT,

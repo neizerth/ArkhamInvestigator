@@ -2,7 +2,7 @@ import type { AppThunk } from "@shared/model";
 import { propEq } from "ramda";
 import { routes } from "../../../../../config";
 import { goToPage } from "../../../effects";
-import { selectCurrentBoard } from "../../board";
+import { selectCurrentBoard } from "../../board/selectors/current/selectCurrentBoard";
 import {
 	setCurrentSignatureGroup,
 	setCurrentSignatureId,

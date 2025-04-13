@@ -24,7 +24,11 @@ export const selectCurrentImage = createSelector(
 			id: defaultSignature.code,
 		};
 
-		if (!signature?.image.id || signature.alternate_of_code) {
+		if (
+			!signature ||
+			signature.type === "custom" ||
+			signature.alternate_of_code
+		) {
 			return defaultImage;
 		}
 
