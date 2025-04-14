@@ -1,2 +1,2 @@
-export const separatorAside = require("./separator-aside.png");
-export const rule = require("./rule.png");
+export { default as Aside } from "./aside.svg";
+export { default as Line } from "./line.svg";

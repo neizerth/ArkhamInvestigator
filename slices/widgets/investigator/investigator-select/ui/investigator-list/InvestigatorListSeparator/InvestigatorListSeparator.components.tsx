@@ -1,12 +1,33 @@
 import { color, font, size } from "@shared/config";
 import { Alegreya } from "@shared/fonts";
 import { Row, UnscaledText } from "@shared/ui";
-import { Image } from "react-native";
 import { View } from "react-native";
 import styled from "styled-components/native";
-import { rule, separatorAside } from "./images";
+import { Aside, Line } from "./images";
+
+const asideSize = {
+	width: 78,
+	height: 40,
+	ratio: 78 / 40,
+};
+
+const lineSize = {
+	width: 571,
+	height: 5,
+	ratio: 571 / 5,
+};
+
+const asideWidth = 60;
+const asideHeight = asideWidth / asideSize.ratio;
+
+const asideScale = asideSize.width / asideWidth;
+
+const lineScale = asideScale * 0.7;
+const lineHeight = lineSize.height * lineScale;
+const lineWidth = lineSize.width * lineScale;
 
 export const Container: typeof Row = styled(Row)`
+  position: relative;
   justify-content: center;
   align-items: center;
 `;
@@ -22,43 +43,43 @@ export const Text: typeof UnscaledText = styled(UnscaledText)`
 export const Content: typeof View = styled(View)`
   flex-shrink: 0;
   position: relative;
-  overflow: hidden;
 `;
 
-const ruleColor = color.light10;
-const cornerOffset = size.gap.medium;
+const asideOffset = {
+	x: -asideWidth * 0.6,
+	y: asideHeight * 0.1,
+};
 
 export const RuleContainer: typeof View = styled(View)`
   position: absolute;
-  left: ${cornerOffset}px;
-  right: ${cornerOffset}px;
+  left: -7px;
+  right: 0;
   overflow: hidden;
-  bottom: 1.4px;
+  bottom: ${asideOffset.y}px;
 `;
 
-export const Rule: typeof Image = styled(Image).attrs({
-	source: rule,
-	tintColor: ruleColor,
+export const Rule: typeof Line = styled(Line).attrs({
+	width: lineWidth,
+	height: lineHeight,
+	fill: color.light10,
 })`
-  height: 1.5px;
+  
 `;
 
-export const SeparatorDecoration: typeof Image = styled(Image).attrs({
-	source: separatorAside,
-	resizeMode: "contain",
-	tintColor: ruleColor,
+export const SeparatorAside: typeof Aside = styled(Aside).attrs({
+	width: asideWidth,
+	height: asideHeight,
+	fill: color.light10,
 })`
-  width: 60px;
-  height: 50px;
-  margin-top: 5px;
-  position: relative;
+  position: absolute;
+  top: ${asideOffset.y}px;
 `;
 
-export const SeparatorBefore: typeof Image = styled(SeparatorDecoration)`
-  right: -${cornerOffset + 1}px;
+export const SeparatorBefore: typeof SeparatorAside = styled(SeparatorAside)`
+  left: ${asideOffset.x}px;
 `;
 
-export const SeparatorAfter: typeof Image = styled(SeparatorDecoration)`
+export const SeparatorAfter: typeof SeparatorAside = styled(SeparatorAside)`
   transform: scale(-1, 1);
-  left: -${cornerOffset + 1}px;
+  right: ${asideOffset.x}px;
 `;

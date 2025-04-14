@@ -9,14 +9,14 @@ export const InvestigatorListSeparator = ({
 }: InvestigatorListSeparatorProps) => {
 	return (
 		<C.Container {...props}>
-			<C.SeparatorBefore />
 			<C.Content>
+				<C.SeparatorBefore />
 				<C.Text>{children}</C.Text>
 				<C.RuleContainer>
 					<C.Rule />
 				</C.RuleContainer>
+				<C.SeparatorAfter />
 			</C.Content>
-			<C.SeparatorAfter />
 		</C.Container>
 	);
 };
