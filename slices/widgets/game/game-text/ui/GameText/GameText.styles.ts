@@ -3,7 +3,7 @@ import type { ComponentStyleMap } from "@widgets/game/game-text/model";
 
 export const defaultComponentStyles: ComponentStyleMap = {
 	i: {
-		fontFamily: Alegreya.regular,
+		fontFamily: Alegreya.italic,
 	},
 	b: {
 		fontFamily: Alegreya.bold,

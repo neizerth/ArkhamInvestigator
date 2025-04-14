@@ -1,9 +1,5 @@
 import { getInvestigatorImageUrl as getImageUrl } from "@shared/api/getInvestigatorImageUrl";
-import {
-	getSignatureImageId,
-	selectCurrentSkinId,
-	useAppSelector,
-} from "@shared/lib";
+import { selectCurrentSkinId, useAppSelector } from "@shared/lib";
 import { selectCurrentSignature } from "../../../lib";
 import * as C from "./InvestigatorDescription.components";
 export const InvestigatorDescription = () => {
@@ -14,7 +10,7 @@ export const InvestigatorDescription = () => {
 		return;
 	}
 
-	const imageId = skinId || getSignatureImageId(signature);
+	const imageId = skinId || signature.image.id;
 
 	const uri = getImageUrl({
 		code: imageId,

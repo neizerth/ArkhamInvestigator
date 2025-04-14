@@ -11,18 +11,16 @@ export const selectCurrentImage = createSelector(
 		}
 
 		if (skin) {
-			return {
-				...skin.image,
-				id: skin.id,
-			};
+			return skin.image;
+		}
+
+		if (signature?.image) {
+			return signature.image;
 		}
 
 		const defaultSignature = group.signatures[0];
 
-		const defaultImage = {
-			...defaultSignature.image,
-			id: defaultSignature.code,
-		};
+		const defaultImage = defaultSignature.image;
 
 		if (
 			!signature ||

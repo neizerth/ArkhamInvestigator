@@ -2,6 +2,7 @@ import { useAppTranslation } from "@features/i18n";
 import { useModal } from "@features/modal";
 import { routes } from "@shared/config";
 import {
+	replacePageTo,
 	resetBoard,
 	selectCurrentBoardProp,
 	selectCurrentFaction,
@@ -24,6 +25,10 @@ export const DescriptionTopMenu = ({ ...props }: DescriptionTopMenuProps) => {
 
 	const goToPage = usePage();
 
+	const goHome = useCallback(() => {
+		dispatch(replacePageTo(routes.home));
+	}, [dispatch]);
+
 	const clear = useCallback(() => {
 		dispatch(resetBoard());
 	}, [dispatch]);
@@ -44,7 +49,7 @@ export const DescriptionTopMenu = ({ ...props }: DescriptionTopMenuProps) => {
 
 	return (
 		<C.Container {...props}>
-			<C.Button icon="resign" onPress={goToPage(routes.home)} />
+			<C.Button icon="resign" onPress={goHome} />
 			<C.Button icon="info" onPress={goToPage(routes.boardHelp)} />
 			<C.Button icon="wrench" onPress={goToPage(routes.settings)} />
 			<C.Button icon="repeat" onPress={showClearModal} />

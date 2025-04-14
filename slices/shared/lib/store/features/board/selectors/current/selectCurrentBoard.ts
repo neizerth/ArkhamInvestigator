@@ -8,6 +8,6 @@ import {
 export const selectCurrentBoard = createSelector(
 	[selectCurrentInvestigatorIndex, selectInvestigatorBoards],
 	(index, boards): InvestigatorBoard => {
-		return boards[index || 0];
+		return boards?.[index || 0];
 	},
 );

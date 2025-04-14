@@ -3,5 +3,5 @@ import { selectCurrentBoardProp } from "../props";
 
 export const selectIsParallel = createSelector(
 	[selectCurrentBoardProp("investigator")],
-	({ type }) => type === "parallel",
+	(investigator) => investigator?.type === "parallel",
 );

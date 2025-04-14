@@ -7,10 +7,7 @@ export const getSkins = (group: InvestigatorSignatureGroup) => {
 
 	const skins = group.signatures
 		.map((item): InvestigatorDetailItem | undefined => {
-			if (item.alternate_of_code) {
-				return;
-			}
-			if (item.type === "custom" && !item.image.id) {
+			if (!item.image.id) {
 				return;
 			}
 			return {
@@ -18,7 +15,7 @@ export const getSkins = (group: InvestigatorSignatureGroup) => {
 				name: item.pack.name,
 				faction: faction_code,
 				type: "skin",
-				imageId: item.code,
+				imageId: item.image.id,
 				value: item.id,
 			};
 		})
@@ -27,12 +24,18 @@ export const getSkins = (group: InvestigatorSignatureGroup) => {
 	const uniqueSkins = uniqBy(prop("imageId"), skins);
 
 	const additionalSkins = group.skins.map((skin): InvestigatorDetailItem => {
+		const imageId = skin.image.id || skin.id;
+		const image = {
+			...skin.image,
+			id: imageId,
+		};
 		return {
 			...skin,
 			faction: faction_code,
+			image,
 			type: "skin",
 			code,
-			imageId: skin.id,
+			imageId,
 			value: skin.id,
 		};
 	});

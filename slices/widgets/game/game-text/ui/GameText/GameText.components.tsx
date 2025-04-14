@@ -10,6 +10,7 @@ export const Word: typeof Row = styled(Row)`
   /* flex: 1; */
   /* align-items: center; */
   /* align-items: flex-end; */
+  flex-wrap: wrap;
 `;
 
 export const Token: typeof View = styled(View)`

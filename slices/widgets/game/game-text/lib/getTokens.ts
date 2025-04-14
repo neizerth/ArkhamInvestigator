@@ -29,7 +29,7 @@ const tokenize = ({ text, breakSentence = true }: Options) => {
 	return (
 		text
 			// break by space
-			.replace(/([ ])/g, ` ${breakId}`)
+			.replace(/([ ])/g, `$1${breakId}`)
 			.split(breakId)
 	);
 };
