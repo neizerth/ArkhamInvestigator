@@ -132,7 +132,7 @@ export const getTitleStyle = (options: GetTitleStyleOptions) => {
 	const localeStyle = getLocaleStyle(language);
 
 	const container: ViewStyle = {
-		gap: ios ? "4%" : "8%",
+		gap: "8%",
 	};
 	const title: ViewStyle = {
 		gap: 2 * vh * font.scale,
