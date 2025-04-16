@@ -15,7 +15,7 @@ type FallbackPattern<T = HapticFeedbackType> = Partial<
 >;
 
 export const fallbackIOSPatterns: FallbackPattern = {
-	clockTick: "impactLight",
+	clockTick: "selection",
 	contextClick: "impactMedium",
 	keyboardPress: "impactLight",
 	keyboardRelease: "impactLight",
