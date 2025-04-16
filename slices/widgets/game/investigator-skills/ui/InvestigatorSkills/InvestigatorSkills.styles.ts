@@ -7,7 +7,7 @@ export const getSkillsStyle = (width: number): ViewStyle => {
 		paddingRight: rnd(vw * 5),
 		paddingTop: rnd(vw * 2),
 		paddingBottom: rnd(vw * 2.5),
-		gap: rnd(4 * vw),
+		gap: Math.floor(4 * vw),
 	};
 };
 

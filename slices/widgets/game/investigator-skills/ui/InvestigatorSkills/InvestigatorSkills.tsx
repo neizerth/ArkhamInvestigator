@@ -7,6 +7,8 @@ import * as C from "./InvestigatorSkills.components";
 import { getSkillsStyle } from "./InvestigatorSkills.styles";
 import { images } from "./images";
 
+const { round: rnd } = Math;
+
 export type InvestigatorSkillsProps = ViewProps &
 	InvestigatorBaseSkillsProps & {
 		width: number;
@@ -44,8 +46,8 @@ export const InvestigatorSkills = ({
 		(type: InvestigatorSkillType) => {
 			return renderSkillProp({
 				type,
-				width: Math.round(width / 10),
-				height: Math.round(height * 0.85),
+				width: rnd(width / 10),
+				height: rnd(height * 0.85),
 			});
 		},
 		[width, renderSkillProp, height],
