@@ -5,7 +5,7 @@ import { Image, type ImageProps } from "react-native";
 import type { ViewProps } from "react-native";
 import styled, { css } from "styled-components/native";
 import type { HeaderLayout } from "../../../../../model";
-import { InvestigatorImageEffects } from "../InvestigatorImageEffects/InvestigatorImageEffects";
+import { InvestigatorImageEffects } from "../InvestigatorImageEffects";
 
 type BackgroundProps = ImageProps & {
 	layout: BoxLayout;
@@ -25,7 +25,7 @@ type BackgroundContainerProps = ViewProps & {
 	layout: HeaderLayout;
 };
 
-export const Container: FC<BackgroundContainerProps> = styled(View)`
+export const Container: FC<ViewProps> = styled(View)`
   overflow: hidden;
 `;
 

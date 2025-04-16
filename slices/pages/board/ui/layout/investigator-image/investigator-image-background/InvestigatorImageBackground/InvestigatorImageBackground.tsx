@@ -3,7 +3,7 @@ import {
 	useAppSelector,
 	useInvestigatorImageUrl,
 } from "@shared/lib";
-import { memo, useCallback, useContext, useEffect, useState } from "react";
+import { memo, useContext } from "react";
 import { Platform, type ViewProps } from "react-native";
 import { v4 } from "uuid";
 import { LayoutContext } from "../../../../../config";
@@ -16,18 +16,7 @@ export type InvestigatorImageBackgroundProps = ViewProps;
 export const InvestigatorImageBackground = ({
 	...props
 }: InvestigatorImageBackgroundProps) => {
-	const { view, layout } = useContext(LayoutContext);
-
-	const [loading, setLoading] = useState(true);
-
-	useEffect(() => {
-		setLoading(true);
-	}, []);
-
-	const changeLoading = useCallback(
-		(loading: boolean) => () => setLoading(loading),
-		[],
-	);
+	const { view } = useContext(LayoutContext);
 
 	const image = useAppSelector(selectCurrentBoardProp("image"));
 
@@ -48,11 +37,9 @@ export const InvestigatorImageBackground = ({
 	const key = Platform.OS === "ios" ? id : permanentKey;
 
 	return (
-		<C.Container {...props} layout={layout}>
+		<C.Container {...props}>
 			<C.Content>
-				{imageLayout && (
-					<C.Background key={key} source={source} layout={imageLayout} />
-				)}
+				{imageLayout && <C.Background source={source} layout={imageLayout} />}
 			</C.Content>
 		</C.Container>
 	);
