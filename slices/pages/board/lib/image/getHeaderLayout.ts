@@ -21,7 +21,7 @@ export const resizeHeaderLayout =
 
 		const height = maxHeight;
 		const scale = maxHeight / C.HEADER_HEIGHT;
-		const width = layout.width * scale;
+		const width = Math.round(layout.width * scale);
 		const gap = C.headerGap.horizontal * scale;
 
 		return {

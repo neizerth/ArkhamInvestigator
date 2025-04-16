@@ -7,7 +7,7 @@ import { STXingkai } from "@shared/fonts";
 import { getKeyConfig } from "@shared/lib";
 import type { PropsWithFaction } from "@shared/model";
 import { mergeDeepRight } from "ramda";
-import type { TextStyle, ViewStyle } from "react-native";
+import { Platform, type TextStyle, type ViewStyle } from "react-native";
 
 type GetTitleStyleOptions = PropsWithFaction & {
 	height: number;
@@ -24,6 +24,8 @@ type ReturnStyle = {
 	unique: TextStyle;
 	id: TextStyle;
 };
+
+const titlePaddingOffset = Platform.OS === "ios" ? 0.5 : 0;
 
 export const getTitleStyle = (options: GetTitleStyleOptions) => {
 	const { height, language, faction, parallel } = options;
@@ -60,12 +62,12 @@ export const getTitleStyle = (options: GetTitleStyleOptions) => {
 		},
 		rogue: {
 			title: {
-				paddingTop: "1%",
+				paddingTop: `${1 + titlePaddingOffset}%`,
 			},
 		},
 		seeker: {
 			title: {
-				paddingTop: "1%",
+				paddingTop: `${1 + titlePaddingOffset}%`,
 			},
 		},
 	});
@@ -77,7 +79,7 @@ export const getTitleStyle = (options: GetTitleStyleOptions) => {
 				gap: "7%",
 			},
 			title: {
-				paddingTop: "1%",
+				paddingTop: `${1 + titlePaddingOffset}%`,
 			},
 			titleText: {
 				fontFamily: Conkordia.regular,
@@ -92,7 +94,7 @@ export const getTitleStyle = (options: GetTitleStyleOptions) => {
 				gap: "12%",
 			},
 			title: {
-				paddingTop: "2%",
+				paddingTop: `${2 + titlePaddingOffset}%`,
 			},
 			titleText: {
 				fontFamily: SanCn.bold,
@@ -119,7 +121,7 @@ export const getTitleStyle = (options: GetTitleStyleOptions) => {
 		},
 		seeker: {
 			subtitle: {
-				paddingTop: "0.2%",
+				paddingTop: `${0.2 + titlePaddingOffset}%`,
 			},
 		},
 	});
@@ -137,7 +139,7 @@ export const getTitleStyle = (options: GetTitleStyleOptions) => {
 	};
 	const subtitle: ViewStyle = {
 		height: "25%",
-		paddingTop: "0.3%",
+		paddingTop: `${0.3 + titlePaddingOffset}%`,
 	};
 	const titleText: TextStyle = {
 		color: textColor,

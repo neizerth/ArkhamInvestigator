@@ -1,3 +1,5 @@
+import type { RefObject } from "react";
+import type { FlatList, ViewStyle } from "react-native";
 import type {
 	PickerActivationProps,
 	PickerAnimationProps,
@@ -5,9 +7,7 @@ import type {
 	PickerBasePressProps,
 	PickerRenderProps,
 	PickerScrollProps,
-} from "@widgets/control/picker/model";
-import type { RefObject } from "react";
-import type { FlatList, ViewStyle } from "react-native";
+} from "../../../../model";
 
 export type BaseListProps = PickerBaseListProps &
 	PickerScrollProps &

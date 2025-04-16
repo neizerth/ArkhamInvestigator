@@ -1,10 +1,10 @@
-import { getValueIndex } from "@widgets/control/picker/lib";
+import { useCallback, useEffect, useRef } from "react";
+import type { FlatList, GestureResponderEvent } from "react-native";
+import { getValueIndex } from "../../../../../../lib";
 import type {
 	PickerChangeEvent,
 	PickerScrollEvent,
-} from "@widgets/control/picker/model";
-import { useCallback, useEffect, useRef } from "react";
-import type { FlatList, GestureResponderEvent } from "react-native";
+} from "../../../../../../model";
 import type { BaseListProps } from "../../BaseList.types";
 
 export const useValueSet = (props: BaseListProps) => {

@@ -114,7 +114,6 @@ export const Skill = ({ width, height, type, ...props }: SkillProps) => {
 						onPress={openModal}
 						onPressIn={onPressIn}
 						onPressOut={onPressOut}
-						pressHapticPattern="clockTick"
 					/>
 				</C.ValueContainer>
 				<C.IconContainer>

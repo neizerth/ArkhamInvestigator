@@ -8,7 +8,7 @@ export type WithStatOptions = {
 };
 export const withStat = <T>(Component: FC<T>, options: WithStatOptions) => {
 	const { height = assetsSize.main, ratio } = options;
-	const width = height * ratio;
+	const width = Math.round(height * ratio);
 	const ExtendedComponent: typeof Component = styled(Component).attrs({
 		imageStyle: {
 			width,

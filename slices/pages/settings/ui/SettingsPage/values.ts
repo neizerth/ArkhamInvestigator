@@ -1,5 +1,6 @@
 import type { HapticMode } from "@features/haptic";
 import type { SelectItem } from "@shared/ui";
+import { Platform } from "react-native";
 
 export const turnEndValues = [
 	{
@@ -12,15 +13,22 @@ export const turnEndValues = [
 	},
 ];
 
+const systemHaptic: SelectItem<HapticMode>[] =
+	Platform.OS === "android"
+		? [
+				{
+					label: "System (if available)",
+					value: "system",
+				},
+			]
+		: [];
+
 export const hapticValues: SelectItem<HapticMode>[] = [
 	{
 		label: "Default",
 		value: "default",
 	},
-	{
-		label: "System (if available)",
-		value: "system",
-	},
+	...systemHaptic,
 	{
 		label: "No",
 		value: false,

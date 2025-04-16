@@ -4,7 +4,7 @@ import type { HeaderLayout } from "../../model";
 export const getSkillsSize = (layout: HeaderLayout) => {
 	if (layout.type === "column") {
 		const { width } = layout;
-		const height = width / skillsStyle.ratio;
+		const height = Math.round(width / skillsStyle.ratio);
 
 		return {
 			width,
@@ -12,8 +12,8 @@ export const getSkillsSize = (layout: HeaderLayout) => {
 		};
 	}
 	const { scale } = layout;
-	const width = skillsStyle.width * scale;
-	const height = skillsStyle.height * scale;
+	const width = Math.round(skillsStyle.width * scale);
+	const height = Math.round(skillsStyle.height * scale);
 
 	return {
 		width,

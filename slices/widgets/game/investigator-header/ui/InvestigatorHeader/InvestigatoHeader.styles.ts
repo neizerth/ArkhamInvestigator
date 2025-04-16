@@ -36,7 +36,12 @@ export const getScaledElement = ({
 }: SizeOptions & PropsWithBox) => {
 	const elementScale = direction === "column" ? width / box.width : scale;
 
-	return scaleBox(box, elementScale);
+	const scaled = scaleBox(box, elementScale);
+
+	return {
+		width: Math.round(scaled.width),
+		height: Math.round(scaled.height),
+	};
 };
 
 export const getSkillsSize = (options: SizeOptions) =>

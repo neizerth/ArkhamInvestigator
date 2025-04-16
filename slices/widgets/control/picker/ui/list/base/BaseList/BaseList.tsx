@@ -3,9 +3,9 @@ import {
 	selectPickerIntervalMomentum,
 	useAppSelector,
 } from "@shared/lib";
-import { getDataOffsets, getValueIndex } from "@widgets/control/picker/lib";
 import { memo, useCallback, useMemo } from "react";
 import type { ListRenderItemInfo } from "react-native";
+import { getDataOffsets, getValueIndex } from "../../../../lib";
 import * as C from "./BaseList.components";
 import type { BaseListProps } from "./BaseList.types";
 import { defaultRenderItemContainer } from "./defaultRenderItemContainer";
