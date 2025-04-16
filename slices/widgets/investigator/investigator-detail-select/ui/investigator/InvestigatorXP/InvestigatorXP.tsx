@@ -47,7 +47,7 @@ export const InvestigatorXP = ({ ...props }: InvestigatorXPProps) => {
 
 	return (
 		<C.Container {...props}>
-			<C.Title>{t`Experience points`}</C.Title>
+			<C.Title>{t`XP`}</C.Title>
 			<C.Control onIncrement={onIncrement} onDecrement={onDecrement}>
 				<C.Value>{xp}</C.Value>
 			</C.Control>
