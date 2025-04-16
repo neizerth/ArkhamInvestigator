@@ -2,21 +2,22 @@ import { color } from "@shared/config";
 import type { SkillType } from "@shared/model";
 import type { TextStyle, ViewStyle } from "react-native";
 
+const { round: rnd } = Math;
+
 export const getSkillStyle = (width: number) => {
 	const vw = width / 10;
-
 	const valueContainer: ViewStyle = {
-		paddingTop: vw,
-		paddingLeft: vw,
+		paddingTop: rnd(vw),
+		paddingLeft: rnd(vw),
 		width,
 	};
 	const background: ViewStyle = {
-		borderRadius: 7 * vw,
+		borderRadius: rnd(7 * vw),
 	};
 
 	const container: ViewStyle = {};
 
-	const iconFontSize = vw * 10.5;
+	const iconFontSize = rnd(vw * 10.5);
 
 	const icon: TextStyle = {
 		fontSize: iconFontSize,
@@ -24,7 +25,7 @@ export const getSkillStyle = (width: number) => {
 	};
 
 	const iconContainer: ViewStyle = {
-		paddingRight: vw,
+		paddingRight: rnd(vw),
 	};
 
 	return {
@@ -52,7 +53,7 @@ export const getSkillValueStyle = ({
 	signed,
 	width,
 }: GetSkillValueStyleOptions) => {
-	const vw = width / 10;
+	const vw = rnd(width / 10);
 	const digitsCount = value.toString().length;
 
 	const textColor = isParallel ? color.white : color.text;
@@ -64,8 +65,8 @@ export const getSkillValueStyle = ({
 
 	const signedValueSize: Record<number, number> = {
 		1: 9 * vw,
-		2: 6.2 * vw,
-		3: 4.2 * vw,
+		2: rnd(6.2 * vw),
+		3: rnd(4.2 * vw),
 	};
 
 	const valueSize = signed ? signedValueSize : unsignedValueSize;
@@ -78,16 +79,16 @@ export const getSkillValueStyle = ({
 	};
 
 	const container: ViewStyle = {
-		paddingRight: 11 * vw,
-		paddingBottom: 2.3 * vw,
+		paddingRight: rnd(11 * vw),
+		paddingBottom: rnd(2.3 * vw),
 		flex: 1,
 		alignItems: "flex-end",
 		justifyContent: "flex-end",
 	};
 
 	const diffSize: Record<number, number> = {
-		1: 5.7 * vw,
-		2: 5 * vw,
+		1: rnd(5.7 * vw),
+		2: rnd(5 * vw),
 	};
 
 	const diffFontSize = diffSize[digitsCount];
@@ -97,8 +98,8 @@ export const getSkillValueStyle = ({
 		color: color.skill[type].light,
 	};
 	const diffContainer: ViewStyle = {
-		top: (5.7 * vw - diffFontSize) / 2,
-		right: -vw * 1.5,
+		top: rnd((5.7 * vw - diffFontSize) / 2),
+		right: rnd(-vw * 1.5),
 	};
 	return {
 		text: valueText,

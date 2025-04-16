@@ -1,8 +1,9 @@
 import { scaleBox } from "@shared/lib";
 import type { PropsWithBox } from "@shared/model";
-import { skillsStyle } from "@widgets/game/investigator-skills";
-import { titleStyle } from "@widgets/game/investigator-title";
+import { skillsStyle } from "../../../investigator-skills";
+import { titleStyle } from "../../../investigator-title";
 import type { InvestiatorHeaderDirection } from "./InvestigatorHeader.types";
+const { round: rnd } = Math;
 
 type Options = {
 	direction: InvestiatorHeaderDirection;
@@ -39,8 +40,8 @@ export const getScaledElement = ({
 	const scaled = scaleBox(box, elementScale);
 
 	return {
-		width: Math.round(scaled.width),
-		height: Math.round(scaled.height),
+		width: rnd(scaled.width),
+		height: rnd(scaled.height),
 	};
 };
 

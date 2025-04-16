@@ -1,10 +1,10 @@
-import type { InvestigatorBaseSkillsProps } from "@widgets/game/investigator-skills";
+import { memo } from "react";
+import type { ViewProps } from "react-native";
+import type { InvestigatorBaseSkillsProps } from "../../../investigator-skills";
 import type {
 	InvestigatoTitleBaseProps,
 	InvestigatorTitleProps,
-} from "@widgets/game/investigator-title";
-import { memo } from "react";
-import type { ViewProps } from "react-native";
+} from "../../../investigator-title";
 import {
 	getHeaderStyle,
 	getSkillsSize,

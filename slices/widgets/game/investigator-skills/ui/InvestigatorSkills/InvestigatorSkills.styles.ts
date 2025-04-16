@@ -1,13 +1,13 @@
 import type { ViewStyle } from "react-native";
-
+const { round: rnd } = Math;
 export const getSkillsStyle = (width: number): ViewStyle => {
 	const vw = width / 100;
 	return {
-		paddingLeft: vw * 5,
-		paddingRight: vw * 5,
-		paddingTop: vw * 2,
-		paddingBottom: vw * 2.5,
-		gap: 4 * vw,
+		paddingLeft: rnd(vw * 5),
+		paddingRight: rnd(vw * 5),
+		paddingTop: rnd(vw * 2),
+		paddingBottom: rnd(vw * 2.5),
+		gap: rnd(4 * vw),
 	};
 };
 

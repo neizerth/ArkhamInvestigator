@@ -1,7 +1,7 @@
-import { InvestigatorSkills } from "@widgets/game/investigator-skills";
-import { InvestigatorTitle } from "@widgets/game/investigator-title";
 import { View } from "react-native";
 import styled from "styled-components/native";
+import { InvestigatorSkills } from "../../../investigator-skills";
+import { InvestigatorTitle } from "../../../investigator-title";
 
 export const Container: typeof View = styled(View)`
   position: relative;

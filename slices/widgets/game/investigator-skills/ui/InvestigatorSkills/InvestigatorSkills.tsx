@@ -44,8 +44,8 @@ export const InvestigatorSkills = ({
 		(type: InvestigatorSkillType) => {
 			return renderSkillProp({
 				type,
-				width: width / 10,
-				height: height * 0.85,
+				width: Math.round(width / 10),
+				height: Math.round(height * 0.85),
 			});
 		},
 		[width, renderSkillProp, height],
