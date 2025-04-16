@@ -5,7 +5,7 @@ import styled, { css } from "styled-components/native";
 import { FactionBackground as BaseFactionBackground } from "../../../shared/background/FactionBackground";
 import { DamageOverlay } from "../DamageOverlay";
 import { HorrorOverlay } from "../HorrorOverlay";
-import { InvestigatorImageBackgroundMemo as InvestigatorBackground } from "../InvestigatorImageBackground";
+import { InvestigatorImageBackgroundMemo as InvestigatorBackground } from "../investigator-image-background/InvestigatorImageBackground";
 
 type PropsWithView = {
 	view: Box;

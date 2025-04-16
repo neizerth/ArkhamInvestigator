@@ -1,6 +1,5 @@
 import {
 	selectCurrentIsDefeated,
-	selectCurrentStatValue,
 	selectCurrentTurnEnd,
 	useAppSelector,
 } from "@shared/lib";
@@ -13,9 +12,6 @@ import {
 } from "react-native-reanimated";
 
 export const useInvestigatorImageStyle = () => {
-	const health = useAppSelector(selectCurrentStatValue("health"));
-	const sanity = useAppSelector(selectCurrentStatValue("sanity"));
-
 	const isTurnEnd = useAppSelector(selectCurrentTurnEnd);
 	const isDefeated = useAppSelector(selectCurrentIsDefeated);
 

@@ -3,9 +3,9 @@ import type { FC } from "react";
 import { View } from "react-native";
 import { Image, type ImageProps } from "react-native";
 import type { ViewProps } from "react-native";
-import Animated from "react-native-reanimated";
 import styled, { css } from "styled-components/native";
-import type { HeaderLayout } from "../../../../model";
+import type { HeaderLayout } from "../../../../../model";
+import { InvestigatorImageEffects } from "../InvestigatorImageEffects/InvestigatorImageEffects";
 
 type BackgroundProps = ImageProps & {
 	layout: BoxLayout;
@@ -29,6 +29,6 @@ export const Container: FC<BackgroundContainerProps> = styled(View)`
   overflow: hidden;
 `;
 
-export const Content: FC<ViewProps> = styled(Animated.View)`
+export const Content: FC<ViewProps> = styled(InvestigatorImageEffects)`
   flex: 1;
 `;

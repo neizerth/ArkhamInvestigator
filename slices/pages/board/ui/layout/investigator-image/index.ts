@@ -1,2 +1,2 @@
 export * from "./InvestigatorImage";
-export * from "./InvestigatorImageBackground";
+export * from "./investigator-image-background";
