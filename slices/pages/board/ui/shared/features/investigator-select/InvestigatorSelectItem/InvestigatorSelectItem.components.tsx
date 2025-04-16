@@ -2,13 +2,12 @@ import { color, factionColor, font } from "@shared/config";
 import type { PropsWithFaction } from "@shared/model";
 import { IconNumber } from "@shared/ui";
 import type { FC } from "react";
-import {
-	Image as BaseImage,
-	type ImageProps as BaseImageProps,
-	View,
-	type ViewProps,
-} from "react-native";
+import { View, type ViewProps } from "react-native";
 import styled, { css } from "styled-components/native";
+
+import BaseImage, {
+	type FastImageProps as BaseImageProps,
+} from "react-native-fast-image";
 
 const size = 60;
 const borderSize = 2;

@@ -1,8 +1,10 @@
 import { Row } from "@shared/ui";
 import type { FC } from "react";
 import type { ImageProps } from "react-native";
-import { Image, View } from "react-native";
+import { View } from "react-native";
 import styled, { css } from "styled-components/native";
+
+import Image from "react-native-fast-image";
 
 export const Container: typeof View = styled(View)`
   position: relative;

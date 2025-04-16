@@ -1,11 +1,14 @@
 import type { BoxLayout } from "@shared/model";
 import type { FC } from "react";
 import { View } from "react-native";
-import { Image, type ImageProps } from "react-native";
 import type { ViewProps } from "react-native";
 import styled, { css } from "styled-components/native";
 import type { HeaderLayout } from "../../../../../model";
 import { InvestigatorImageEffects } from "../InvestigatorImageEffects";
+
+import Image, {
+	type FastImageProps as ImageProps,
+} from "react-native-fast-image";
 
 type BackgroundProps = ImageProps & {
 	layout: BoxLayout;

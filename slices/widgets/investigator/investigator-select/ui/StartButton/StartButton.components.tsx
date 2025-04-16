@@ -2,7 +2,8 @@ import { TouchableOpacity } from "@features/haptic";
 import { color, font, size } from "@shared/config";
 import { Alegreya } from "@shared/fonts";
 import { Icon as BaseIcon, Row, UnscaledText } from "@shared/ui";
-import { Image, View } from "react-native";
+import { View } from "react-native";
+import Image from "react-native-fast-image";
 import styled from "styled-components/native";
 
 export const Container: typeof TouchableOpacity = styled(TouchableOpacity)`
