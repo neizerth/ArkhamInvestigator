@@ -52,10 +52,10 @@ const asideOffset = {
 
 export const RuleContainer: typeof View = styled(View)`
   position: absolute;
-  left: -7px;
+  left: -10px;
   right: 0;
   overflow: hidden;
-  bottom: ${asideOffset.y}px;
+  bottom: 5px;
 `;
 
 export const Rule: typeof Line = styled(Line).attrs({
