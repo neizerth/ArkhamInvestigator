@@ -25,7 +25,9 @@ type ReturnStyle = {
 	id: TextStyle;
 };
 
-const titlePaddingOffset = Platform.OS === "ios" ? 0.5 : 0;
+const ios = Platform.OS === "ios";
+
+const titlePaddingOffset = ios ? 0.5 : 0;
 
 export const getTitleStyle = (options: GetTitleStyleOptions) => {
 	const { height, language, faction, parallel } = options;
@@ -76,7 +78,7 @@ export const getTitleStyle = (options: GetTitleStyleOptions) => {
 		default: defaultFactionStyle(faction),
 		ru: {
 			container: {
-				gap: "7%",
+				gap: ios ? "8%" : "7%",
 			},
 			title: {
 				paddingTop: `${1 + titlePaddingOffset}%`,
@@ -91,10 +93,10 @@ export const getTitleStyle = (options: GetTitleStyleOptions) => {
 		},
 		ko: {
 			container: {
-				gap: "12%",
+				gap: ios ? "8%" : "12%",
 			},
 			title: {
-				paddingTop: `${2 + titlePaddingOffset}%`,
+				paddingTop: ios ? "1%" : `${2 + titlePaddingOffset}%`,
 			},
 			titleText: {
 				fontFamily: SanCn.bold,
@@ -130,7 +132,7 @@ export const getTitleStyle = (options: GetTitleStyleOptions) => {
 	const localeStyle = getLocaleStyle(language);
 
 	const container: ViewStyle = {
-		gap: "8%",
+		gap: ios ? "4%" : "8%",
 	};
 	const title: ViewStyle = {
 		gap: 2 * vh * font.scale,
@@ -149,7 +151,7 @@ export const getTitleStyle = (options: GetTitleStyleOptions) => {
 	};
 
 	const unique: TextStyle = {
-		marginTop: "1%",
+		marginTop: ios ? "0%" : "1%",
 		color: textColor,
 	};
 
