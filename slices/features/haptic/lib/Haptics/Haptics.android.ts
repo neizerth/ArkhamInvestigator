@@ -1,12 +1,9 @@
-import {
-	DEFAULT_ANDROID_PATTERN,
-	fallbackAndroidPatterns,
-} from "@features/haptic/config";
 import { type TurboModule, TurboModuleRegistry } from "react-native";
 import {
 	HapticFeedbackTypes,
 	type HapticOptions,
 } from "react-native-haptic-feedback";
+import { DEFAULT_ANDROID_PATTERN, fallbackAndroidPatterns } from "../../config";
 export * from "react-native-haptic-feedback";
 
 export interface Spec extends TurboModule {
