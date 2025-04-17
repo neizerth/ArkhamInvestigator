@@ -1,16 +1,8 @@
 import { Image, View } from "react-native";
 import styled from "styled-components/native";
 
+import { horrorImages } from "@assets/images/game/effects/horror";
 import { color } from "@shared/config";
-import {
-	almostInsane,
-	area,
-	eye,
-	fog,
-	rr1,
-	scratches,
-	writing,
-} from "./images";
 
 export const Container: typeof View = styled(View)`
   position: relative;
@@ -23,7 +15,7 @@ export const HorrorImage: typeof Image = styled(Image).attrs({
 `;
 
 export const Writing: typeof HorrorImage = styled(HorrorImage).attrs({
-	source: writing,
+	source: horrorImages.writing,
 	resizeMode: "cover",
 })`
   width: 100%;
@@ -34,7 +26,7 @@ export const Writing: typeof HorrorImage = styled(HorrorImage).attrs({
 `;
 
 export const RR1: typeof HorrorImage = styled(HorrorImage).attrs({
-	source: rr1,
+	source: horrorImages.rorschach,
 })`
   width: 100%;
   height:100%;
@@ -45,7 +37,7 @@ export const RR1: typeof HorrorImage = styled(HorrorImage).attrs({
 `;
 
 export const Scratches: typeof HorrorImage = styled(HorrorImage).attrs({
-	source: scratches,
+	source: horrorImages.scratches,
 	resizeMode: "cover",
 	tintColor: color.sanity,
 })`
@@ -58,7 +50,7 @@ export const Scratches: typeof HorrorImage = styled(HorrorImage).attrs({
 `;
 
 export const Fog: typeof HorrorImage = styled(HorrorImage).attrs({
-	source: fog,
+	source: horrorImages.fog,
 	resizeMode: "cover",
 	tintColor: color.sanity,
 })`
@@ -71,7 +63,7 @@ export const Fog: typeof HorrorImage = styled(HorrorImage).attrs({
 `;
 
 export const AreaTop: typeof HorrorImage = styled(HorrorImage).attrs({
-	source: area,
+	source: horrorImages.area,
 })`
   left: -5%;
   top: -15%;
@@ -81,7 +73,7 @@ export const AreaTop: typeof HorrorImage = styled(HorrorImage).attrs({
 `;
 
 export const AreaBottom: typeof HorrorImage = styled(HorrorImage).attrs({
-	source: area,
+	source: horrorImages.area,
 })`
   right: -15%;
   bottom: -10%;
@@ -91,7 +83,7 @@ export const AreaBottom: typeof HorrorImage = styled(HorrorImage).attrs({
 `;
 
 export const Eye: typeof HorrorImage = styled(HorrorImage).attrs({
-	source: eye,
+	source: horrorImages.eye,
 	resizeMode: "cover",
 })`
   width: 100%;
@@ -102,7 +94,7 @@ export const Eye: typeof HorrorImage = styled(HorrorImage).attrs({
 `;
 
 export const AlmostInsane: typeof HorrorImage = styled(HorrorImage).attrs({
-	source: almostInsane,
+	source: horrorImages.almostInsane,
 	resizeMode: "cover",
 })`
   width: 100%;

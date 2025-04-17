@@ -1,3 +1,4 @@
 import buttons from "./buttons";
+import common from "./common";
 
-export default [...buttons];
+export default [...buttons, ...common];

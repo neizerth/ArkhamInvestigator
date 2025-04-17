@@ -1,14 +1,6 @@
+import { damageImages } from "@assets/images/game/effects/damage";
 import { Image, View } from "react-native";
 import styled from "styled-components/native";
-import {
-	almostDead,
-	damage30,
-	damage50,
-	damage60,
-	damage75,
-	damage75_2,
-	firstBlood,
-} from "./images";
 
 export const Container: typeof View = styled(View)`
   position: relative;
@@ -21,7 +13,7 @@ export const DamageImage: typeof Image = styled(Image).attrs({
 `;
 
 export const FirstBlood: typeof DamageImage = styled(DamageImage).attrs({
-	source: firstBlood,
+	source: damageImages.firstBlood,
 })`
   width: 80px;
   height: 100px;
@@ -31,7 +23,7 @@ export const FirstBlood: typeof DamageImage = styled(DamageImage).attrs({
 `;
 
 export const Damage30: typeof DamageImage = styled(DamageImage).attrs({
-	source: damage30,
+	source: damageImages.damage30,
 })`
   width: 120px;
   height: 120px;
@@ -42,7 +34,7 @@ export const Damage30: typeof DamageImage = styled(DamageImage).attrs({
 `;
 
 export const Damage50: typeof DamageImage = styled(DamageImage).attrs({
-	source: damage50,
+	source: damageImages.damage50,
 })`
   width: 200px;
   height: 300px;
@@ -53,7 +45,7 @@ export const Damage50: typeof DamageImage = styled(DamageImage).attrs({
 `;
 
 export const Damage60: typeof DamageImage = styled(DamageImage).attrs({
-	source: damage60,
+	source: damageImages.damage60,
 })`
   width: 100px;
   height: 100px;
@@ -64,7 +56,7 @@ export const Damage60: typeof DamageImage = styled(DamageImage).attrs({
 `;
 
 export const Damage75: typeof DamageImage = styled(DamageImage).attrs({
-	source: damage75,
+	source: damageImages.damage75,
 })`
   width: 150px;
   height: 150px;
@@ -75,7 +67,7 @@ export const Damage75: typeof DamageImage = styled(DamageImage).attrs({
 `;
 
 export const Damage75_2: typeof DamageImage = styled(DamageImage).attrs({
-	source: damage75_2,
+	source: damageImages["damage75-2"],
 })`
   width: 350px;
   height: 350px;
@@ -86,7 +78,7 @@ export const Damage75_2: typeof DamageImage = styled(DamageImage).attrs({
 `;
 
 export const AlmostDead: typeof DamageImage = styled(DamageImage).attrs({
-	source: almostDead,
+	source: damageImages.almostDead,
 })`
   width: 200px;
   height: 300px;

@@ -1,5 +1,3 @@
-import { BackspaceImage } from "./images/images";
-
 import { TouchableOpacity } from "@features/haptic";
 import { withLocale } from "@features/i18n";
 import { color, font, size } from "@shared/config";
@@ -12,6 +10,7 @@ import styled, { css } from "styled-components/native";
 import { skillCheckColor } from "../../../../config";
 import * as Buttons from "../KeyboardButton";
 import { StatsKeyboard } from "../StatsKeyboard";
+import BackspaceImage from "./images/backspace.svg";
 import RuleBottom from "./images/rule.svg";
 
 export const Container: typeof View = styled(View)`

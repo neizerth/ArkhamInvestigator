@@ -7,10 +7,12 @@ const rogue = require("./rogue.png");
 const seeker = require("./seeker.png");
 const survivor = require("./survivor.png");
 
-export const factionImages: Partial<Record<Faction, ImageRequireSource>> = {
+export const factionIconImages: Partial<Record<Faction, ImageRequireSource>> = {
 	guardian,
 	mystic,
 	rogue,
 	seeker,
 	survivor,
 };
+
+export default [guardian, mystic, rogue, seeker, survivor];
