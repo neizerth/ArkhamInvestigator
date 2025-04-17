@@ -1,10 +1,10 @@
+import { titleImages } from "@assets/images/game/title";
 import { formatGameText, getFactionImage } from "@shared/lib";
 import type { PropsWithFaction } from "@shared/model";
 import { memo } from "react";
 import type { ImageBackgroundProps, ViewStyle } from "react-native";
 import * as C from "./InvestigatorTitle.components";
 import { getTitleStyle } from "./InvestigatorTitle.styles";
-import { images } from "./images";
 
 export type InvestigatorTitleProps = Omit<ImageBackgroundProps, "source"> &
 	InvestigatoTitleBaseProps & {
@@ -41,7 +41,7 @@ export const InvestigatorTitle = (props: InvestigatorTitleProps) => {
 	const subname = formatGameText(props.subname);
 
 	const source = getFactionImage({
-		images,
+		images: titleImages,
 		parallel,
 		faction,
 	});

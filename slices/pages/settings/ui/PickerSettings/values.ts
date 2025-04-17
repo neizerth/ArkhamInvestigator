@@ -11,7 +11,7 @@ export const decelerationValues: SelectItem<PickerDecelerationType>[] = [
 		value: "fast",
 	},
 	{
-		label: "No",
+		label: "picker.deceleration.instant",
 		value: false,
 	},
 ];

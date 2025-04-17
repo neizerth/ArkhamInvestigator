@@ -39,6 +39,7 @@
 
 	"picker.deceleration.fast": "Быстрое",
 	"picker.deceleration.normal": "Нормальное",
+	"picker.deceleration.instant": "Мгновенное",
 	"picker.deceleration.custom": "Настроить",
 
 	"board.help.scroll": "Прокрутите любой параметр сыщика до нужного значения",

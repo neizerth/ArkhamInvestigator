@@ -13,7 +13,7 @@ import * as C from "./RootLayout.components";
 import { screenOptions } from "./RootLayout.config";
 
 export const RootLayout = ({ children }: PropsWithChildren) => {
-	const [loaded] = useAppLoader();
+	const loaded = useAppLoader();
 	SystemUI.setBackgroundColorAsync(color.black);
 
 	if (!loaded) {

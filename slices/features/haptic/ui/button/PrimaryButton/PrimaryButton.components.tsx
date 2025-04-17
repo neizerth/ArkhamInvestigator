@@ -1,3 +1,4 @@
+import { buttonImages } from "@assets/images/ui/buttons/primary";
 import type { FC } from "react";
 import * as ReactNative from "react-native";
 import styled, { css } from "styled-components/native";
@@ -29,19 +30,12 @@ export const Container: typeof TouchableOpacity = styled(TouchableOpacity)`
   align-items: center;
 `;
 
-const backgrounds: Record<PrimaryButtonStyle, ReactNative.ImageRequireSource> =
-	{
-		default: require("./images/default.png"),
-		transparent: require("./images/transparent.png"),
-		square: require("./images/square.png"),
-	};
-
 type BackgroundProps = ReactNative.ImageBackgroundProps & PropsWithStyleType;
 
 export const Background: FC<BackgroundProps> = styled(
 	ReactNative.ImageBackground,
 ).attrs(({ styleType = "default" }: BackgroundProps) => ({
-	source: backgrounds[styleType],
+	source: buttonImages[styleType],
 	resizeMode: "contain",
 	resizeMethod: "resize",
 }))`

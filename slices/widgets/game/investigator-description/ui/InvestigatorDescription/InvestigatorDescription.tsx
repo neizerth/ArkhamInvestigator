@@ -1,9 +1,9 @@
-import { descriptionSize } from "@pages/board/config";
+import { descriptionImages } from "@assets/images/game/description";
 import { getBoxByRatio } from "@shared/lib/util/size/box";
 import type { PropsWithFaction } from "@shared/model";
 import type { ImageBackgroundProps } from "react-native";
 import * as C from "./InvestigatorDescription.components";
-import { images } from "./images";
+import { descriptionSize } from "./InvestigatorDescription.styles";
 
 export type InvestigatorDescriptionProps = Omit<
 	ImageBackgroundProps,
@@ -32,7 +32,7 @@ export const InvestigatorDescription = ({
 		return null;
 	}
 
-	const source = images[faction];
+	const source = descriptionImages[faction];
 
 	return (
 		<C.Background {...props} source={source} box={imageBox}>

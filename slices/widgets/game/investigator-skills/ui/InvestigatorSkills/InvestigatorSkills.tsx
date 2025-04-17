@@ -1,3 +1,4 @@
+import { skillsImages } from "@assets/images/game/skills";
 import { getFactionImage } from "@shared/lib";
 import type { InvestigatorSkillType, PropsWithFaction } from "@shared/model";
 import type React from "react";
@@ -5,7 +6,6 @@ import { useCallback } from "react";
 import type { ViewProps } from "react-native";
 import * as C from "./InvestigatorSkills.components";
 import { getSkillsStyle } from "./InvestigatorSkills.styles";
-import { images } from "./images";
 
 const { round: rnd } = Math;
 
@@ -35,7 +35,7 @@ export const InvestigatorSkills = ({
 	...props
 }: InvestigatorSkillsProps) => {
 	const source = getFactionImage({
-		images,
+		images: skillsImages,
 		parallel,
 		faction,
 	});

@@ -1,10 +1,9 @@
+import { actionImage } from "@assets/images/game/stats";
 import {
 	type WithBackgroundComponentProps,
 	withImageBackground,
 } from "../../../../lib/hoc";
 
-const source = require("./images/action.png");
-
 export type ActionProps = WithBackgroundComponentProps;
 
-export const Action = withImageBackground({ source });
+export const Action = withImageBackground({ source: actionImage });

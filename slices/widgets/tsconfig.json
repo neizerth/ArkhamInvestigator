@@ -2,6 +2,7 @@
 	"extends": "../../tsconfig.base.json",
 	"compilerOptions": {
 		"paths": {
+			"@assets/*": ["../../assets/*"],
 			"@shared/*": ["../shared/*"],
 			"@entities/*": ["../entities/*"],
 			"@features/*": ["../features/*"]

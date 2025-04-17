@@ -2,6 +2,12 @@ import type { Faction } from "@shared/model";
 import type { RuleSet } from "styled-components";
 import { css } from "styled-components/native";
 
+export const descriptionSize = {
+	width: 523,
+	height: 591,
+	ratio: 523 / 591,
+};
+
 export const getFactionStyle = (faction: Faction) => {
 	const ruleSet: Record<Faction, RuleSet> = {
 		neutral: css`
