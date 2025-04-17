@@ -1,8 +1,4 @@
-import {
-	selectCurrentIsDefeated,
-	selectCurrentTurnEnd,
-	useAppSelector,
-} from "@shared/lib";
+import { selectCurrentIsInactive, useAppSelector } from "@shared/lib";
 import { useEffect } from "react";
 import type { ViewStyle } from "react-native";
 import {
@@ -11,15 +7,14 @@ import {
 	withTiming,
 } from "react-native-reanimated";
 
-export const useInvestigatorImageStyle = () => {
-	const isTurnEnd = useAppSelector(selectCurrentTurnEnd);
-	const isDefeated = useAppSelector(selectCurrentIsDefeated);
+export const useGrayscaleAnimation = () => {
+	const inactive = useAppSelector(selectCurrentIsInactive);
 
 	const grayscale = useSharedValue(0);
 
 	useEffect(() => {
-		grayscale.value = isTurnEnd || isDefeated ? 1 : 0;
-	}, [isTurnEnd, grayscale, isDefeated]);
+		grayscale.value = inactive ? 1 : 0;
+	}, [grayscale, inactive]);
 
 	const animatedStyle = useAnimatedStyle((): ViewStyle => {
 		return {

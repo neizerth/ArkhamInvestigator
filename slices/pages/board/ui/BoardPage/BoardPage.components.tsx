@@ -9,7 +9,7 @@ import {
 	PortraitLayout as BasePortraitLayout,
 	type PortraitLayoutProps as BasePortraitLayoutProps,
 } from "../layout";
-import { InvestigatorImage } from "../layout/investigator-image/InvestigatorImage";
+import { InvestigatorBackground } from "../layout/investigator-image/InvestigatorBackground";
 
 export const Container: typeof View = styled(View)`
   flex: 1;
@@ -17,7 +17,9 @@ export const Container: typeof View = styled(View)`
   background-color: ${color.dark30};
 `;
 
-export const Background: typeof InvestigatorImage = styled(InvestigatorImage)`
+export const Background: typeof InvestigatorBackground = styled(
+	InvestigatorBackground,
+)`
   position: absolute;
   flex: 1;
   z-index: 1;

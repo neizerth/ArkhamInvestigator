@@ -2,11 +2,13 @@ import { selectShowDamageAndHorrorEffects, useAppSelector } from "@shared/lib";
 import { useContext } from "react";
 import type { ViewProps } from "react-native";
 import { LayoutContext } from "../../../../config";
-import * as C from "./InvestigatorImage.components";
+import * as C from "./InvestigatorBackground.components";
 
-export type InvestigatorImageProps = ViewProps;
+export type InvestigatorBackgroundProps = ViewProps;
 
-export const InvestigatorImage = ({ ...props }: InvestigatorImageProps) => {
+export const InvestigatorBackground = ({
+	...props
+}: InvestigatorBackgroundProps) => {
 	const { view, layout } = useContext(LayoutContext);
 	const showEffects = useAppSelector(selectShowDamageAndHorrorEffects);
 

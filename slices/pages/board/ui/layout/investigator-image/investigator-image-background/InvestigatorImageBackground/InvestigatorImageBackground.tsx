@@ -4,7 +4,7 @@ import {
 	useInvestigatorImageUrl,
 } from "@shared/lib";
 import { memo, useContext } from "react";
-import { Platform, type ViewProps } from "react-native";
+import type { ViewProps } from "react-native";
 import { v4 } from "uuid";
 import { LayoutContext } from "../../../../../config";
 import { getPortraitLayout } from "../../../../../lib";
@@ -34,13 +34,9 @@ export const InvestigatorImageBackground = ({
 		image,
 	});
 
-	const key = Platform.OS === "ios" ? id : permanentKey;
-
 	return (
 		<C.Container {...props}>
-			<C.Content>
-				{imageLayout && <C.Background source={source} layout={imageLayout} />}
-			</C.Content>
+			{imageLayout && <C.Background source={source} layout={imageLayout} />}
 		</C.Container>
 	);
 };

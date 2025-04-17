@@ -5,9 +5,8 @@ import type { FC } from "react";
 import { View, type ViewProps } from "react-native";
 import styled, { css } from "styled-components/native";
 
-import BaseImage, {
-	type FastImageProps as BaseImageProps,
-} from "react-native-fast-image";
+import type { InvestigatorImageProps } from "./InvestigatorSelectItem.types";
+import { InvestigatorImage } from "./components";
 
 const size = 60;
 const borderSize = 2;
@@ -46,18 +45,14 @@ export const Id: typeof IconNumber = styled(IconNumber)`
   font-size: ${font.size.large}px;
 `;
 
-type ImageProps = BaseImageProps & {
-	active?: boolean;
-};
-
-export const Image: FC<ImageProps> = styled(BaseImage)`
+export const Image: typeof InvestigatorImage = styled(InvestigatorImage)`
   position: absolute;
   top: 0;
   left: 0;
   border-radius: ${imageSize}px;
   width: ${imageSize}px;
   height: ${imageSize}px;
-  ${({ active }: ImageProps) =>
+  ${({ active }: InvestigatorImageProps) =>
 		!active &&
 		css`
     filter: grayscale(1);

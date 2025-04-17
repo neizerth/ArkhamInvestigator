@@ -1,11 +1,10 @@
 import { getInvestigatorImageUrl } from "@shared/api";
 import {
+	selectBoardIsUnique,
 	selectBoardProp,
-	selectIsDefeated,
-	selectTurnEnd,
+	selectIsInactive,
 	useAppSelector,
 } from "@shared/lib";
-import { selectBoardIsUnique } from "@shared/lib/store/features/board/selectors/props/selectBoardIsUnique";
 import type { Faction } from "@shared/model";
 import type { ViewProps } from "react-native";
 import * as C from "./InvestigatorSelectItem.components";
@@ -21,10 +20,7 @@ export const InvestigatorSelectItem = ({
 	const image = useAppSelector(selectBoardProp(boardId, "image"));
 	const investigator = useAppSelector(selectBoardProp(boardId, "investigator"));
 	const unique = useAppSelector(selectBoardIsUnique(boardId));
-	const isTurnEnd = useAppSelector(selectTurnEnd(boardId));
-	const isDefeated = useAppSelector(selectIsDefeated(boardId));
-
-	const active = !(isTurnEnd || isDefeated);
+	const inactive = useAppSelector(selectIsInactive(boardId));
 
 	if (!image || !investigator) {
 		return null;
@@ -41,7 +37,7 @@ export const InvestigatorSelectItem = ({
 
 	return (
 		<C.Container {...props} faction={faction}>
-			<C.Image source={source} active={active} />
+			<C.Image source={source} active={!inactive} />
 			{showId && (
 				<C.Overlay>
 					<C.Id value={boardId} />

@@ -79,7 +79,8 @@
     "redux-toolkit-helpers": "^1.0.3",
     "semver": "^7.7.1",
     "styled-components": "^6.1.15",
-    "uuid": "^11.0.5"
+    "uuid": "^11.0.5",
+    "expo-asset": "~11.0.5"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
