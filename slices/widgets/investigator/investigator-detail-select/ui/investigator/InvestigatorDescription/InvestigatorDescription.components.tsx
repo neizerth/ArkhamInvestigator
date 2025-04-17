@@ -1,5 +1,5 @@
+import { Alegreya } from "@assets/fonts";
 import { color, font, size } from "@shared/config";
-import { Alegreya } from "@shared/fonts";
 import { Column, Row, UnscaledText } from "@shared/ui";
 import { GameText } from "@widgets/game/game-text";
 import { Image as BaseImage } from "react-native";

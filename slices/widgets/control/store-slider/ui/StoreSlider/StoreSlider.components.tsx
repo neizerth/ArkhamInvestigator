@@ -1,6 +1,6 @@
+import { Alegreya } from "@assets/fonts";
 import { HapticSlider } from "@features/haptic";
 import { font, size } from "@shared/config";
-import { Alegreya } from "@shared/fonts";
 import { type Row, Text } from "@shared/ui";
 import { View } from "react-native";
 import styled from "styled-components/native";

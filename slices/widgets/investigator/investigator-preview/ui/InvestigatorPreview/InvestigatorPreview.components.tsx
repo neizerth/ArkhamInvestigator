@@ -8,9 +8,9 @@ import NativeImage, {
 } from "react-native-fast-image";
 import styled, { css } from "styled-components/native";
 
+import { ArkhamDigits } from "@assets/fonts";
 import { TouchableOpacity } from "@features/haptic";
 import { color, factionColor, size } from "@shared/config";
-import { ArkhamDigits } from "@shared/fonts";
 import type { PropsWithFaction } from "@shared/model/ui";
 import { Icon, UnscaledText } from "@shared/ui";
 import Color from "color";

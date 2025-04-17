@@ -1,5 +1,5 @@
+import { Alegreya } from "@assets/fonts";
 import { size } from "@shared/config";
-import { Alegreya } from "@shared/fonts";
 import { Icon, Row, Text } from "@shared/ui";
 import { View } from "react-native";
 import styled from "styled-components/native";

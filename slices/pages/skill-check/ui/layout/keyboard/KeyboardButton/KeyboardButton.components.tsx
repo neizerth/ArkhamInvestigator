@@ -1,6 +1,6 @@
+import { Copasetic } from "@assets/fonts";
 import { TouchableOpacity } from "@features/haptic";
 import { color } from "@shared/config";
-import { Copasetic } from "@shared/fonts";
 import { Icon as BaseIcon, UnscaledText } from "@shared/ui";
 import type { FC } from "react";
 import type { RuleSet } from "styled-components";

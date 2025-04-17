@@ -1,5 +1,5 @@
+import { Copasetic } from "@assets/fonts";
 import { color } from "@shared/config";
-import { Copasetic } from "@shared/fonts";
 import { UnscaledText } from "@shared/ui";
 import { View } from "react-native";
 import styled from "styled-components/native";

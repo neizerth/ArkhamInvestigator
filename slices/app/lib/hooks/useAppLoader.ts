@@ -1,4 +1,4 @@
-import fonts from "@shared/fonts";
+import fonts from "@assets/fonts";
 import { useEffect, useState } from "react";
 
 import { Asset } from "expo-asset";

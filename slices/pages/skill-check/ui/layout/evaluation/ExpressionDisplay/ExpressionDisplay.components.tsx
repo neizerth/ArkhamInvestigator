@@ -1,6 +1,6 @@
+import { Copasetic } from "@assets/fonts";
 import { TouchableOpacity } from "@features/haptic";
 import { color } from "@shared/config";
-import { Copasetic } from "@shared/fonts";
 import { Icon, type IconProps, UnscaledText } from "@shared/ui";
 import type { FC } from "react";
 import type { TextProps } from "react-native";

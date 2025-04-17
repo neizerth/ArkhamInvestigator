@@ -1,5 +1,5 @@
+import { Alegreya } from "@assets/fonts";
 import { color, font, size } from "@shared/config";
-import { Alegreya } from "@shared/fonts";
 import styled from "styled-components/native";
 import { UnscaledText } from "../../behavior/UnscaledText";
 

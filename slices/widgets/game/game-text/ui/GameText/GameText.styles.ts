@@ -1,4 +1,4 @@
-import { Alegreya } from "@shared/fonts";
+import { Alegreya } from "@assets/fonts";
 import type { ComponentStyleMap } from "@widgets/game/game-text/model";
 
 export const defaultComponentStyles: ComponentStyleMap = {

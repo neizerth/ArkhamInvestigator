@@ -1,4 +1,4 @@
-import { ArkhamDigits } from "@shared/fonts";
+import { ArkhamDigits } from "@assets/fonts";
 import { Row } from "@shared/ui/grid";
 import type { FC } from "react";
 import { View } from "react-native";

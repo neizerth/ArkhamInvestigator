@@ -1,5 +1,5 @@
+import { Arkhamic } from "@assets/fonts";
 import { TouchableOpacity } from "@features/haptic";
-import { Arkhamic } from "@shared/fonts";
 import { withIcon } from "@shared/lib/hoc";
 import { Row, UnscaledText } from "@shared/ui";
 import type { FC } from "react";

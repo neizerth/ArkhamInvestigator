@@ -1,9 +1,9 @@
+import { Arkhamic, STXinwei } from "@assets/fonts";
+import { ArnoPro } from "@assets/fonts";
+import { Conkordia } from "@assets/fonts";
+import { SanCn } from "@assets/fonts";
+import { STXingkai } from "@assets/fonts";
 import { color, font } from "@shared/config";
-import { Arkhamic, STXinwei } from "@shared/fonts";
-import { ArnoPro } from "@shared/fonts";
-import { Conkordia } from "@shared/fonts";
-import { SanCn } from "@shared/fonts";
-import { STXingkai } from "@shared/fonts";
 import { getKeyConfig } from "@shared/lib";
 import type { PropsWithFaction } from "@shared/model";
 import { mergeDeepRight } from "ramda";

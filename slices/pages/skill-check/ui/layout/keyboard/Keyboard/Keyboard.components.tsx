@@ -1,7 +1,7 @@
+import { Copasetic, Enthalpy298 } from "@assets/fonts";
 import { TouchableOpacity } from "@features/haptic";
 import { withLocale } from "@features/i18n";
 import { color, font, size } from "@shared/config";
-import { Copasetic, Enthalpy298 } from "@shared/fonts";
 import { Row as BaseRow, UnscaledText } from "@shared/ui";
 import type { FC } from "react";
 import { View, type ViewProps } from "react-native";

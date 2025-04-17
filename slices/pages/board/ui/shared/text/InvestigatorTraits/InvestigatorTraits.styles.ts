@@ -1,5 +1,5 @@
-import { ArnoPro, STXinwei } from "@shared/fonts";
-import { SanCn } from "@shared/fonts";
+import { ArnoPro, STXinwei } from "@assets/fonts";
+import { SanCn } from "@assets/fonts";
 import { getKeyConfig } from "@shared/lib";
 import type { TextStyle } from "react-native";
 import { boardText } from "../../../../config";
