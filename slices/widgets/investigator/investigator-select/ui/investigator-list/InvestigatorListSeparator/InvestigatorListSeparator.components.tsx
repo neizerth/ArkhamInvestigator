@@ -1,9 +1,11 @@
 import { color, font, size } from "@shared/config";
 import { Alegreya } from "@shared/fonts";
 import { Row, UnscaledText } from "@shared/ui";
-import { View } from "react-native";
+import { Platform, View } from "react-native";
 import styled from "styled-components/native";
 import { Aside, Line } from "./images";
+
+const ios = Platform.OS === "ios";
 
 const asideSize = {
 	width: 78,
@@ -47,7 +49,7 @@ export const Content: typeof View = styled(View)`
 
 const asideOffset = {
 	x: -asideWidth * 0.6,
-	y: asideHeight * 0.1,
+	y: ios ? 5 : asideHeight * 0.1,
 };
 
 export const RuleContainer: typeof View = styled(View)`
@@ -55,7 +57,7 @@ export const RuleContainer: typeof View = styled(View)`
   left: -10px;
   right: 0;
   overflow: hidden;
-  bottom: 5px;
+  bottom: ${asideOffset.y}px;
 `;
 
 export const Rule: typeof Line = styled(Line).attrs({
