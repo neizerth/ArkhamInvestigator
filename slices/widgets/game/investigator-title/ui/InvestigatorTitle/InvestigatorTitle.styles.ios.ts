@@ -27,21 +27,12 @@ type ReturnStyle = {
 
 const ios = Platform.OS === "ios";
 
+const titlePaddingOffset = ios ? 0.5 : 0;
+
 export const getTitleStyle = (options: GetTitleStyleOptions) => {
 	const { height, language, faction, parallel } = options;
 	const vh = height / 100;
 	const textColor = parallel ? color.white : color.text;
-
-	const zhConfig = {
-		titleText: {
-			fontFamily: STXinwei.regular,
-			fontSize: 38 * vh,
-		},
-		subtitleText: {
-			fontFamily: STXingkai.regular,
-			fontSize: 18 * vh,
-		},
-	};
 
 	const defaultFactionStyle = getKeyConfig<Partial<ReturnStyle>>({
 		default: {
@@ -59,24 +50,24 @@ export const getTitleStyle = (options: GetTitleStyleOptions) => {
 			unique: {
 				fontSize: 25 * vh,
 			},
-		},
-		rogue: {
 			title: {
-				paddingTop: "1%",
+				paddingTop: "2.3%",
+			},
+			container: {
+				gap: "9%",
 			},
 		},
-		seeker: {
+		mystic: {
 			title: {
-				paddingTop: "1%",
+				paddingTop: "2%",
 			},
 		},
 	});
 
-	const getLocaleStyle = getKeyConfig<Partial<ReturnStyle>>({
-		default: defaultFactionStyle(faction),
-		ru: {
+	const getRUStyle = getKeyConfig<Partial<ReturnStyle>>({
+		default: {
 			container: {
-				gap: "7%",
+				gap: "9%",
 			},
 			title: {
 				paddingTop: "1%",
@@ -89,9 +80,36 @@ export const getTitleStyle = (options: GetTitleStyleOptions) => {
 				fontSize: 23 * vh,
 			},
 		},
-		ko: {
+		seeker: {
+			title: {
+				paddingTop: "1.5%",
+			},
+			unique: {
+				marginTop: "1%",
+			},
+		},
+		rogue: {
 			container: {
-				gap: "12%",
+				gap: "8%",
+			},
+			title: {
+				paddingTop: "1.5%",
+			},
+			unique: {
+				marginTop: "1%",
+			},
+		},
+		mystic: {
+			container: {
+				gap: "8%",
+			},
+		},
+	});
+
+	const getKOStyle = getKeyConfig<Partial<ReturnStyle>>({
+		default: {
+			container: {
+				gap: "8%",
 			},
 			title: {
 				paddingTop: "2%",
@@ -108,8 +126,69 @@ export const getTitleStyle = (options: GetTitleStyleOptions) => {
 				marginTop: 0,
 			},
 		},
-		zh: zhConfig,
-		"zh-cn": zhConfig,
+		neutral: {
+			container: {
+				gap: "10%",
+			},
+			title: {
+				paddingTop: "1%",
+			},
+		},
+	});
+
+	const getZHStyle = getKeyConfig<Partial<ReturnStyle>>({
+		default: {
+			container: {
+				gap: "7%",
+			},
+			title: {
+				paddingTop: "1.5%",
+			},
+			titleText: {
+				fontFamily: STXinwei.regular,
+				fontSize: 38 * vh,
+			},
+			subtitleText: {
+				fontFamily: STXingkai.regular,
+				fontSize: 18 * vh,
+			},
+			unique: {
+				marginTop: "0.5%",
+			},
+		},
+		guardian: {
+			unique: {
+				marginTop: "1.5%",
+			},
+		},
+		seeker: {
+			title: {
+				paddingTop: "2.5%",
+			},
+		},
+		rogue: {
+			container: {
+				gap: "5%",
+			},
+		},
+		neutral: {
+			title: {
+				paddingTop: "0.5%",
+			},
+			container: {
+				gap: "8.5%",
+			},
+		},
+	});
+
+	const zhStyle = getZHStyle(faction);
+
+	const getLocaleStyle = getKeyConfig<Partial<ReturnStyle>>({
+		default: defaultFactionStyle(faction),
+		ru: getRUStyle(faction),
+		ko: getKOStyle(faction),
+		zh: zhStyle,
+		"zh-cn": zhStyle,
 	});
 
 	const getFactiionStyle = getKeyConfig({
@@ -121,7 +200,7 @@ export const getTitleStyle = (options: GetTitleStyleOptions) => {
 		},
 		seeker: {
 			subtitle: {
-				paddingTop: "0.2%",
+				paddingTop: "0.7%",
 			},
 		},
 	});
@@ -139,7 +218,7 @@ export const getTitleStyle = (options: GetTitleStyleOptions) => {
 	};
 	const subtitle: ViewStyle = {
 		height: "25%",
-		paddingTop: "0.3%",
+		paddingTop: "0.8%",
 	};
 	const titleText: TextStyle = {
 		color: textColor,
@@ -149,7 +228,7 @@ export const getTitleStyle = (options: GetTitleStyleOptions) => {
 	};
 
 	const unique: TextStyle = {
-		marginTop: "1%",
+		marginTop: "0%",
 		color: textColor,
 	};
 
