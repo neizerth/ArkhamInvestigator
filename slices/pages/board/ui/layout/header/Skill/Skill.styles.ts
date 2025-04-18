@@ -60,7 +60,7 @@ export const getSkillValueStyle = ({
 
 	const unsignedValueSize: Record<number, number> = {
 		1: 9 * vw,
-		2: 5 * vw,
+		2: 4.7 * vw,
 	};
 
 	const signedValueSize: Record<number, number> = {
