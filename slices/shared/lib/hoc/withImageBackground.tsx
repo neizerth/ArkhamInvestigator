@@ -1,6 +1,9 @@
 import type { FC } from "react";
-import { ImageBackground, type ImageBackgroundProps } from "react-native";
 import styled from "styled-components/native";
+import {
+	ImageBackground,
+	type ImageBackgroundProps,
+} from "../../ui/image/ImageBackground";
 
 export type WithBackgroundComponentProps = ImageBackgroundProps;
 

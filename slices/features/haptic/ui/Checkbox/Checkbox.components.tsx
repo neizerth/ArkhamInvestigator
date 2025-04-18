@@ -8,6 +8,7 @@ export const Container: typeof TouchableOpacity = styled(TouchableOpacity)`
   flex-direction: row;
   align-items: center;
   gap: ${size.gap.default}px;
+  min-height: 48px;
 `;
 export const Label: typeof Text = styled(Text)`
   

@@ -5,13 +5,13 @@ import {
 	useAppSelector,
 } from "@shared/lib";
 import { setCurrentStat } from "@shared/lib/store/features/board/actions/stats/current/setCurrentStat";
+import type { ImageBackgroundProps } from "@shared/ui";
 import type { PickerChangeEvent } from "@widgets/control/picker";
 import { range } from "ramda";
 import { useCallback } from "react";
-import type { ViewProps } from "react-native";
 import * as C from "./Resources.components";
 
-export type ResourcesProps = ViewProps;
+export type ResourcesProps = ImageBackgroundProps;
 
 export const Resources = ({ ...props }: ResourcesProps) => {
 	const dispatch = useAppDispatch();

@@ -1,8 +1,9 @@
 import { titleImages } from "@assets/images/game/title";
 import { formatGameText, getFactionImage } from "@shared/lib";
 import type { PropsWithFaction } from "@shared/model";
+import type { ImageBackgroundProps } from "@shared/ui";
 import { memo } from "react";
-import type { ImageBackgroundProps, ViewStyle } from "react-native";
+import type { ViewStyle } from "react-native";
 import * as C from "./InvestigatorTitle.components";
 import { getTitleStyle } from "./InvestigatorTitle.styles";
 

@@ -1,6 +1,7 @@
 import type { PropsWithBox, PropsWithFaction } from "@shared/model";
+import { ImageBackground, type ImageBackgroundProps } from "@shared/ui";
 import type { FC } from "react";
-import { ImageBackground, type ImageBackgroundProps, View } from "react-native";
+import { View } from "react-native";
 import type { ViewProps } from "react-native";
 import styled, { css } from "styled-components/native";
 import { getFactionStyle } from "./InvestigatorDescription.styles";

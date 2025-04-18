@@ -1,20 +1,13 @@
 import { View } from "react-native";
+import FastImage from "react-native-fast-image";
 import styled from "styled-components/native";
 
 export const Container: typeof View = styled(View)`
-
-`;
-
-export const Group: typeof View = styled(View)`
   position: relative;
 `;
 
-export const Content: typeof View = styled(View)`
+export const Background: typeof FastImage = styled(FastImage)`
   position: absolute;
-  top: 0;
-  bottom: 0;
   left: 0;
-  right: 0;
-  justify-content: center;
-  align-items: center;
+  top: 0;
 `;

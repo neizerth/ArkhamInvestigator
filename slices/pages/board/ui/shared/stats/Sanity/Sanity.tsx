@@ -1,9 +1,9 @@
 import { selectShowAdditionalInformation, useAppSelector } from "@shared/lib";
+import type { ImageBackgroundProps } from "@shared/ui";
 import { range } from "ramda";
-import type { ViewProps } from "react-native";
 import { useStat } from "../../../../lib/hooks/useStat";
 import * as C from "./Sanity.components";
-export type SanityProps = ViewProps;
+export type SanityProps = ImageBackgroundProps;
 
 export const Sanity = ({ ...props }: SanityProps) => {
 	const showAdditionalInfo = useAppSelector(selectShowAdditionalInformation);

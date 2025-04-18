@@ -1,11 +1,10 @@
 import { factionIconImages } from "@assets/images/game/faction/icon";
 import type { PropsWithFaction } from "@shared/model";
-import type { ImageProps } from "react-native";
-import { Image } from "react-native";
+import FastImage, { type FastImageProps } from "react-native-fast-image";
 
 type OmitedImageProps = "resizeMode" | "resizeMethod" | "source";
 
-export type FactionIconImageProps = Omit<ImageProps, OmitedImageProps> &
+export type FactionIconImageProps = Omit<FastImageProps, OmitedImageProps> &
 	PropsWithFaction;
 export const FactionIconImage = ({
 	faction,
@@ -16,12 +15,5 @@ export const FactionIconImage = ({
 		return null;
 	}
 
-	return (
-		<Image
-			{...props}
-			resizeMode="contain"
-			resizeMethod="resize"
-			source={source}
-		/>
-	);
+	return <FastImage {...props} resizeMode="contain" source={source} />;
 };

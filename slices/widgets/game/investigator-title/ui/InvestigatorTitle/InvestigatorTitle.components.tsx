@@ -1,10 +1,14 @@
 import { Arkhamic } from "@assets/fonts";
 import { TouchableOpacity } from "@features/haptic";
 import { withIcon } from "@shared/lib/hoc";
-import { Row, UnscaledText } from "@shared/ui";
+import {
+	ImageBackground,
+	type ImageBackgroundProps,
+	Row,
+	UnscaledText,
+} from "@shared/ui";
 import type { FC } from "react";
-import type { ImageBackgroundProps, ImageProps } from "react-native";
-import { ImageBackground, View } from "react-native";
+import { type ImageProps, View } from "react-native";
 import styled, { css } from "styled-components/native";
 
 export const Background: FC<ImageBackgroundProps> = styled(ImageBackground)`

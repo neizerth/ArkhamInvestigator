@@ -1,6 +1,6 @@
 import { buttonImages } from "@assets/images/ui/buttons/primary";
+import { ImageBackground, type ImageBackgroundProps } from "@shared/ui";
 import type { FC } from "react";
-import * as ReactNative from "react-native";
 import styled, { css } from "styled-components/native";
 import { TouchableOpacity } from "../../TouchableOpacity";
 import type {
@@ -30,15 +30,15 @@ export const Container: typeof TouchableOpacity = styled(TouchableOpacity)`
   align-items: center;
 `;
 
-type BackgroundProps = ReactNative.ImageBackgroundProps & PropsWithStyleType;
+type BackgroundProps = ImageBackgroundProps & PropsWithStyleType;
 
-export const Background: FC<BackgroundProps> = styled(
-	ReactNative.ImageBackground,
-).attrs(({ styleType = "default" }: BackgroundProps) => ({
-	source: buttonImages[styleType],
-	resizeMode: "contain",
-	resizeMethod: "resize",
-}))`
+export const Background: FC<BackgroundProps> = styled(ImageBackground).attrs(
+	({ styleType = "default" }: BackgroundProps) => ({
+		source: buttonImages[styleType],
+		resizeMode: "contain",
+		resizeMethod: "resize",
+	}),
+)`
     ${({ styleType = "default", size = "default" }: BackgroundProps) => {
 			const scale = sizeScale[size];
 

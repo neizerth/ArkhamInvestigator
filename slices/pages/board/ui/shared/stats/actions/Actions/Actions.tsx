@@ -3,13 +3,13 @@ import { setCurrentStat } from "@shared/lib";
 import { startNewTurn } from "@shared/lib";
 import { selectHaveBoardAbilities } from "@shared/lib";
 import { resetAbilityLimits } from "@shared/lib/store/features/board/actions/stats/ability/resetAbilityLimits";
+import type { ImageBackgroundProps } from "@shared/ui";
 import { range } from "ramda";
 import { useCallback } from "react";
-import type { ViewProps } from "react-native";
 import { useStat } from "../../../../../lib";
 import * as C from "./Actions.components";
 
-export type ActionsProps = ViewProps;
+export type ActionsProps = ImageBackgroundProps;
 
 export const Actions = ({ ...props }: ActionsProps) => {
 	const dispatch = useAppDispatch();

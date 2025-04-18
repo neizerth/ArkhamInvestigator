@@ -1,7 +1,7 @@
 import { descriptionImages } from "@assets/images/game/description";
 import { getBoxByRatio } from "@shared/lib/util/size/box";
 import type { PropsWithFaction } from "@shared/model";
-import type { ImageBackgroundProps } from "react-native";
+import type { ImageBackgroundProps } from "@shared/ui";
 import * as C from "./InvestigatorDescription.components";
 import { descriptionSize } from "./InvestigatorDescription.styles";
 

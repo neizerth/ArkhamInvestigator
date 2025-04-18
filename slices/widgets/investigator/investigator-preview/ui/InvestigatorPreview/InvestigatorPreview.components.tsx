@@ -1,11 +1,8 @@
 import type { Faction } from "@shared/model";
 import type { FC } from "react";
 
-import { View } from "react-native";
-import type { ViewProps } from "react-native";
-import NativeImage, {
-	type FastImageProps as ImageProps,
-} from "react-native-fast-image";
+import { Image as NativeImage, View } from "react-native";
+import type { ImageProps, ViewProps } from "react-native";
 import styled, { css } from "styled-components/native";
 
 import { ArkhamDigits } from "@assets/fonts";
