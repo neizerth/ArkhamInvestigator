@@ -1,3 +1,4 @@
+import { pick } from "ramda";
 import {
 	FilterImage,
 	type FilterImageProps,
@@ -21,9 +22,7 @@ export const GrayscaleImage = ({ ...props }: GrayscaleImageProps) => {
 		return null;
 	}
 
-	const source = {
-		uri: asset.uri,
-	};
+	const source = pick(["uri"], asset);
 
 	return <FilterImage {...props} source={source} filters={filters} />;
 };
