@@ -12,6 +12,8 @@
 	"Equals": "Считать",
 	"XP": "Очки опыта",
 
+	"Loading fonts": "Загрузка шрифтов",
+	"Loading assets {count}/{total}": "Загрузка текстур {{count}}/{{total}}",
 	"Haptic": "Вибрация",
 	"Reset Board?": "Сбросить данные?",
 	"System (if available)": "Системная (если есть)",

@@ -49,7 +49,7 @@ export const Content: typeof View = styled(View)`
 
 const asideOffset = {
 	x: -asideWidth * 0.6,
-	y: ios ? 5 : asideHeight * 0.1,
+	y: asideHeight * 0.1,
 };
 
 export const RuleContainer: typeof View = styled(View)`
@@ -57,7 +57,7 @@ export const RuleContainer: typeof View = styled(View)`
   left: -10px;
   right: 0;
   overflow: hidden;
-  bottom: ${asideOffset.y}px;
+  bottom: ${-asideOffset.y}px;
 `;
 
 export const Rule: typeof Line = styled(Line).attrs({
@@ -74,7 +74,7 @@ export const SeparatorAside: typeof Aside = styled(Aside).attrs({
 	fill: color.light10,
 })`
   position: absolute;
-  top: ${asideOffset.y}px;
+  bottom: ${asideOffset.y}px;
 `;
 
 export const SeparatorBefore: typeof SeparatorAside = styled(SeparatorAside)`

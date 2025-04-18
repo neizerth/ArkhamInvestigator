@@ -1,8 +1,8 @@
 import type { Faction } from "@shared/model";
 import type { FC } from "react";
 
-import { Image as NativeImage, View } from "react-native";
-import type { ImageProps, ViewProps } from "react-native";
+import { View } from "react-native";
+import type { ViewProps } from "react-native";
 import styled, { css } from "styled-components/native";
 
 import { ArkhamDigits } from "@assets/fonts";
@@ -11,6 +11,7 @@ import { color, factionColor, size } from "@shared/config";
 import type { PropsWithFaction } from "@shared/model/ui";
 import { Icon, UnscaledText } from "@shared/ui";
 import Color from "color";
+import { Image, type ImageProps } from "expo-image";
 
 const getSelectionColor = (faction: Faction) => {
 	const color = factionColor[faction].darkColor;
@@ -45,9 +46,8 @@ type SizeProps = {
 	size: number;
 };
 
-export const Image: FC<ImageProps & SizeProps> = styled(NativeImage).attrs({
-	resizeMode: "cover",
-	resizeMethod: "resize",
+export const Picture: FC<ImageProps & SizeProps> = styled(Image).attrs({
+	contentFit: "cover",
 })`
     ${({ size }: SizeProps) => css`
       aspect-ratio: 1;

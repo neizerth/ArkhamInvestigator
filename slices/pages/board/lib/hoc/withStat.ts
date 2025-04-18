@@ -14,6 +14,7 @@ export const withStat = <T>(Component: FC<T>, options: WithStatOptions) => {
 			width,
 			height,
 		},
+		priority: "high",
 	})`
       width: ${width}px;
       height: ${height}px;

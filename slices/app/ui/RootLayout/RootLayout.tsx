@@ -6,22 +6,17 @@ import "react-native-reanimated";
 import { useAppLoader } from "@app/lib";
 import { AppProvider } from "@app/providers/AppProvider";
 import { color } from "@shared/config";
-import { Loader } from "@shared/ui";
 import * as SystemUI from "expo-system-ui";
 import type { PropsWithChildren } from "react";
 import * as C from "./RootLayout.components";
 import { screenOptions } from "./RootLayout.config";
 
 export const RootLayout = ({ children }: PropsWithChildren) => {
-	const loaded = useAppLoader();
+	const status = useAppLoader();
 	SystemUI.setBackgroundColorAsync(color.black);
 
-	if (!loaded) {
-		return (
-			<C.LoadingPage>
-				<Loader />
-			</C.LoadingPage>
-		);
+	if (!status.done) {
+		return <C.Loader state={status} />;
 	}
 
 	return (

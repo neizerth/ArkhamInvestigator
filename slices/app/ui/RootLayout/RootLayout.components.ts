@@ -1,8 +1,5 @@
-import { View } from "react-native";
 import styled from "styled-components/native";
+import { AppLoader } from "../AppLoader";
 
-export const LoadingPage: typeof View = styled(View)`
-  flex: 1;
-  justify-content: center;
-  align-items: center;
+export const Loader: typeof AppLoader = styled(AppLoader)`
 `;

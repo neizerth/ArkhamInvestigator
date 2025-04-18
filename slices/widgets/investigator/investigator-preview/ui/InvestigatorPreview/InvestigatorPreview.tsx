@@ -59,7 +59,7 @@ export const InvestigatorPreview = ({
 			onPress={onPress}
 			style={[props.style, containerStyle]}
 		>
-			<C.Image source={source} size={size} />
+			<C.Picture source={source} size={size} />
 			{showIcon && (
 				<C.Info>
 					{icon ? (

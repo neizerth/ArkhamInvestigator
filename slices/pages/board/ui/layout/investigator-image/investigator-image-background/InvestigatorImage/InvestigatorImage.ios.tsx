@@ -1,4 +1,5 @@
-import { useCallback, useState } from "react";
+import { useBoolean } from "@shared/lib";
+import { useEffect } from "react";
 import * as C from "./InvestigatorImage.components";
 import type { InvestigatorImageProps } from "./InvestigatorImage.types";
 import { useOpacityAnimation } from "./hooks";
@@ -13,15 +14,11 @@ export const InvestigatorImage = ({
 	const { layout, source } = props;
 	const grayscaleStyle = useOpacityAnimation();
 
-	const [loading, setLoading] = useState(false);
+	const [loading, setLoading] = useBoolean(false);
 
-	const onLoadStart = useCallback(() => {
-		setLoading(true);
-	}, []);
-
-	const onLoadEnd = useCallback(async () => {
-		setLoading(false);
-	}, []);
+	useEffect(() => {
+		setLoading.off();
+	}, [setLoading.off]);
 
 	// const loadingStyle = loading
 	// 	? {
@@ -42,8 +39,8 @@ export const InvestigatorImage = ({
 				style={[style]}
 				source={source}
 				layout={layout}
-				onLoadStart={onLoadStart}
-				onLoadEnd={onLoadEnd}
+				onLoadStart={setLoading.on}
+				onLoadEnd={setLoading.off}
 			/>
 		</C.Container>
 	);
