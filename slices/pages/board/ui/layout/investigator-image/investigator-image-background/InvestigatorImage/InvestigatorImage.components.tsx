@@ -2,7 +2,6 @@ import type { BoxLayout } from "@shared/model";
 import { GrayscaleImage, type GrayscaleImageProps } from "@shared/ui";
 import type { FC } from "react";
 import { Image, type ImageProps, View, type ViewProps } from "react-native";
-import FastImage from "react-native-fast-image";
 import Animated from "react-native-reanimated";
 import styled, { css } from "styled-components/native";
 
@@ -44,11 +43,6 @@ export const GrayscaleContainer: typeof AnimatedContainer = styled(
 `;
 
 export const Background: FC<BackgroundProps> = styled(Image)`
-  z-index: 1;
-  ${layoutStyle};
-`;
-
-export const FastBackground: FC<BackgroundProps> = styled(FastImage)`
   z-index: 1;
   ${layoutStyle};
 `;

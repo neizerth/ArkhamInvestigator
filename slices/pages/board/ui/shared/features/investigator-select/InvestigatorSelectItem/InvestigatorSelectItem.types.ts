@@ -1,5 +1,5 @@
-import type { FastImageProps } from "react-native-fast-image";
+import type { ImageProps } from "react-native";
 
-export type InvestigatorImageProps = FastImageProps & {
+export type InvestigatorImageProps = ImageProps & {
 	active?: boolean;
 };

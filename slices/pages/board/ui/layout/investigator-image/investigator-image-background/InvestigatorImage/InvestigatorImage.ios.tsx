@@ -37,7 +37,7 @@ export const InvestigatorImage = ({
 				</C.GrayscaleContainer>
 			)}
 
-			<C.FastBackground
+			<C.Background
 				{...props}
 				style={[style]}
 				source={source}

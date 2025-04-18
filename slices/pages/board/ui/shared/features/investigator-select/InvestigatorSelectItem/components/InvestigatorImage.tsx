@@ -1,9 +1,9 @@
 import type { FC } from "react";
-import FastImage from "react-native-fast-image";
+import { Image } from "react-native";
 import styled, { css } from "styled-components/native";
 import type { InvestigatorImageProps } from "../InvestigatorSelectItem.types";
 
-export const InvestigatorImage: FC<InvestigatorImageProps> = styled(FastImage)`
+export const InvestigatorImage: FC<InvestigatorImageProps> = styled(Image)`
   ${({ active }: InvestigatorImageProps) =>
 		!active &&
 		css`
