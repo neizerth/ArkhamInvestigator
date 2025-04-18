@@ -20,6 +20,8 @@ export const Container: FC<ContainerProps> = styled(View)`
   height: ${size}px;
   border: ${borderSize}px solid black;
   border-radius: ${size}px;
+
+  overflow: hidden;
   ${({ faction }: PropsWithFaction) => css`
     border-color: ${factionColor[faction].border};
   `}
