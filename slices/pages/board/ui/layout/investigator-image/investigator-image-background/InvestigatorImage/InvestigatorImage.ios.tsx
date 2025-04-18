@@ -2,19 +2,45 @@ import * as C from "./InvestigatorImage.components";
 import type { InvestigatorImageProps } from "./InvestigatorImage.types";
 import { useOpacityAnimation } from "./hooks";
 
+type LoadingState = "ready" | "complete" | "loading";
+
 export const InvestigatorImage = ({
 	contentContainerStyle,
+	style,
 	...props
 }: InvestigatorImageProps) => {
 	const { layout, source } = props;
-	const style = useOpacityAnimation();
+	const grayscaleStyle = useOpacityAnimation();
+
+	// const [loading, setLoading] = useState(false);
+
+	// const onLoadStart = useCallback(() => {
+	// 	setLoading(true);
+	// }, []);
+
+	// const onLoadEnd = useCallback(async () => {
+	// 	await delay(300);
+	// 	setLoading(false);
+	// }, []);
+
+	// const loadingStyle = loading
+	// 	? {
+	// 			opacity: 0,
+	// 		}
+	// 	: {};
 
 	return (
 		<C.Container layout={layout} style={[contentContainerStyle]}>
-			<C.GrayscaleContainer style={style}>
+			<C.GrayscaleContainer style={grayscaleStyle}>
 				<C.GrayscaleBackground source={source} layout={layout} />
 			</C.GrayscaleContainer>
-			<C.Background {...props} source={source} layout={layout} />
+
+			<C.Background
+				{...props}
+				style={[style]}
+				source={source}
+				layout={layout}
+			/>
 		</C.Container>
 	);
 };

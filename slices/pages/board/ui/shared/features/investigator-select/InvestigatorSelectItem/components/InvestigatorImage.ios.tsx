@@ -1,12 +1,16 @@
-import type { FC } from "react";
-import { Image } from "react-native";
-import styled, { css } from "styled-components/native";
+import { GrayscaleImage } from "@shared/ui";
+import type { ImageURISource } from "react-native";
+import FastImage from "react-native-fast-image";
 import type { InvestigatorImageProps } from "../InvestigatorSelectItem.types";
 
-export const InvestigatorImage: FC<InvestigatorImageProps> = styled(Image)`
-  ${({ active }: InvestigatorImageProps) =>
-		!active &&
-		css`
-    filter: grayscale(1);
-  `}
-`;
+export const InvestigatorImage = ({
+	active,
+	...props
+}: InvestigatorImageProps) => {
+	if (active) {
+		return <FastImage {...props} />;
+	}
+
+	const source = props.source as ImageURISource;
+	return <GrayscaleImage source={source} />;
+};
