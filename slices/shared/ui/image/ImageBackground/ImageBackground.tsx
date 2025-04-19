@@ -2,7 +2,6 @@ import type { ImageProps } from "expo-image";
 import { pick } from "ramda";
 import type { PropsWithChildren } from "react";
 import { StyleSheet, type ViewProps } from "react-native";
-import { useBoolean } from "../../../lib";
 import * as C from "./ImageBackground.components";
 
 export type ImageBackgroundProps = Omit<ImageProps, "style"> &
@@ -18,7 +17,6 @@ export const ImageBackground = ({
 	imageStyle,
 	...props
 }: ImageBackgroundProps) => {
-	const [loaded, setLoaded] = useBoolean(true);
 	const pickSize = pick(["width", "height"]);
 	const defaultBackgroundStyle = pickSize(StyleSheet.flatten(style));
 	const backgroundStyle = pickSize(props);
@@ -27,10 +25,8 @@ export const ImageBackground = ({
 			<C.Background
 				{...props}
 				style={[defaultBackgroundStyle, backgroundStyle, imageStyle]}
-				onLoadStart={setLoaded.off}
-				onLoadEnd={setLoaded.on}
 			/>
-			{loaded && children}
+			{children}
 		</C.Container>
 	);
 };

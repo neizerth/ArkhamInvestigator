@@ -1,4 +1,3 @@
-import { getInvestigatorImageUrl } from "@shared/api";
 import {
 	selectBoardIsUnique,
 	selectBoardProp,
@@ -26,18 +25,12 @@ export const InvestigatorSelectItem = ({
 		return null;
 	}
 
-	const uri = getInvestigatorImageUrl({
-		code: image.id,
-		type: "square",
-	});
 	const faction = investigator.faction_code as Faction;
 	const showId = !unique;
 
-	const source = { uri };
-
 	return (
 		<C.Container {...props} faction={faction}>
-			<C.Image source={source} active={!inactive} />
+			<C.Image code={image.id} active={!inactive} />
 			{showId && (
 				<C.Overlay>
 					<C.Id value={boardId} />

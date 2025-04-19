@@ -1,7 +1,7 @@
 import type { BoxLayout } from "@shared/model";
-import { GrayscaleImage, type GrayscaleImageProps } from "@shared/ui";
+import { Image, type ImageProps } from "expo-image";
 import type { FC } from "react";
-import { Image, type ImageProps, View, type ViewProps } from "react-native";
+import { View, type ViewProps } from "react-native";
 import Animated from "react-native-reanimated";
 import styled, { css } from "styled-components/native";
 
@@ -47,9 +47,5 @@ export const Background: FC<BackgroundProps> = styled(Image)`
   ${layoutStyle};
 `;
 
-type GrayscaleBackgroundProps = GrayscaleImageProps & PropsWithLayout;
-export const GrayscaleBackground: FC<GrayscaleBackgroundProps> = styled(
-	GrayscaleImage,
-)`
-  ${layoutStyle};
+export const GrayscaleBackground: typeof Background = styled(Background)`
 `;

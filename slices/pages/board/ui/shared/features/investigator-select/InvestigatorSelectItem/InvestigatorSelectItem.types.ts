@@ -1,5 +1,6 @@
-import type { ImageProps } from "react-native";
+import type { ImageProps } from "expo-image";
 
-export type InvestigatorImageProps = ImageProps & {
+export type InvestigatorImageProps = Omit<ImageProps, "source"> & {
 	active?: boolean;
+	code: string;
 };
