@@ -52,14 +52,12 @@ const asideOffset = {
 	y: asideHeight * 0.09,
 };
 
-const ruleBottom = ios ? -asideOffset.y : asideOffset.y;
-
 export const RuleContainer: typeof View = styled(View)`
   position: absolute;
   left: -10px;
   right: 0;
   overflow: hidden;
-  bottom: ${ruleBottom}px;
+  bottom: ${asideOffset.y}px;
 `;
 
 export const Rule: typeof Line = styled(Line).attrs({
