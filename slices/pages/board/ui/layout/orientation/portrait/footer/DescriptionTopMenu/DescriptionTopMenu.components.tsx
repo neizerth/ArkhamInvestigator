@@ -16,4 +16,5 @@ export const Button: typeof IconButton = styled(IconButton).attrs({
 		lineHeight: 30,
 	},
 })`
+	height: 48px;
   `;
