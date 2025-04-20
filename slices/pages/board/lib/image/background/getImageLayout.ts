@@ -14,12 +14,8 @@ type GetImageLayout = {
 	image: InvestigatorImage;
 };
 
-export const getPortraitLayout = ({ image, view }: GetImageLayout) => {
+export const getImageLayout = ({ image, view }: GetImageLayout) => {
 	const { face } = image;
-
-	if (!face) {
-		return null;
-	}
 
 	const vh = view.height / 100;
 	const faceScale = {

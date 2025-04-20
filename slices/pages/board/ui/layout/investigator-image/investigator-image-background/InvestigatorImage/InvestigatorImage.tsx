@@ -1,4 +1,5 @@
 import { getInvestigatorImageUrl } from "@shared/api";
+import { memo } from "react";
 import * as C from "./InvestigatorImage.components";
 import type { InvestigatorImageProps } from "./InvestigatorImage.types";
 import { useGrayscaleAnimation } from "./hooks/useGrayscaleAnimation";
@@ -22,3 +23,5 @@ export const InvestigatorImage = ({
 		</C.AnimatedContainer>
 	);
 };
+
+export const InvestigatorImageMemo = memo(InvestigatorImage);

@@ -47,9 +47,10 @@ export const ExpandArea: typeof Pressable = styled(Pressable).attrs({
 
 export const TopMenu: typeof DescriptionTopMenu = styled(DescriptionTopMenu)`
   position: absolute;
+  z-index: 2;
   left: 0;
   right: 0;
-  top: -60px;
+  top: -48px;
 `;
 
 export const TextContent: typeof ScrollView = styled(ScrollView)`

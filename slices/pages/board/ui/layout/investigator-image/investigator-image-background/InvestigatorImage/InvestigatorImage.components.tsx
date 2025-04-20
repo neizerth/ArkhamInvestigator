@@ -24,7 +24,7 @@ const layoutStyle = css<BackgroundProps>`
  `}
 `;
 
-type ContainerProps = ViewProps & PropsWithLayout;
+type ContainerProps = ViewProps;
 
 export const Container: FC<ContainerProps> = styled(View)`
   position: absolute;
@@ -40,6 +40,7 @@ export const GrayscaleContainer: typeof AnimatedContainer = styled(
   position: absolute;
   z-index: 2;
   flex: 1;
+  opacity: 0;
 `;
 
 export const Background: FC<BackgroundProps> = styled(Image)`

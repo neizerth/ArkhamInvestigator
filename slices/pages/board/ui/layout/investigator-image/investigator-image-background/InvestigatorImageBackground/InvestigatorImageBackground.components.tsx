@@ -3,11 +3,10 @@ import { View } from "react-native";
 import type { ViewProps } from "react-native";
 import styled from "styled-components/native";
 
-import { InvestigatorImage } from "../InvestigatorImage";
+import Animated from "react-native-reanimated";
+import { InvestigatorImageMemo as Image } from "../InvestigatorImage";
 
-export const Background: typeof InvestigatorImage = styled(
-	InvestigatorImage,
-).attrs({
+export const Background: typeof Image = styled(Image).attrs({
 	contentContainerStyle: {
 		flex: 1,
 	},
@@ -15,6 +14,15 @@ export const Background: typeof InvestigatorImage = styled(
 
 `;
 
+export const NextBackground: typeof Background = styled(Background)`
+
+`;
+
 export const Container: FC<ViewProps> = styled(View)`
   overflow: hidden;
+`;
+
+export const BackgroundContainer: FC<ViewProps> = styled(Animated.View)`
+	flex: 1;
+	position: absolute;
 `;

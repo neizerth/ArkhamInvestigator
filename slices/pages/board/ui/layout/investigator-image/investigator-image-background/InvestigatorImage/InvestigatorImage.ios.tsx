@@ -1,4 +1,6 @@
 import { getInvestigatorImageUrl } from "@shared/api";
+import { useBoolean } from "@shared/lib";
+import { memo, useCallback } from "react";
 import * as C from "./InvestigatorImage.components";
 import type { InvestigatorImageProps } from "./InvestigatorImage.types";
 import { useOpacityAnimation } from "./hooks";
@@ -7,10 +9,15 @@ export const InvestigatorImage = ({
 	contentContainerStyle,
 	style,
 	code,
+	onLoad,
+	onLoadStart: onLoadStartProp,
+	onLoadEnd: onLoadEndProp,
 	...props
 }: InvestigatorImageProps) => {
 	const { layout } = props;
-	const grayscaleStyle = useOpacityAnimation();
+	const [loading, setLoading] = useBoolean(false);
+
+	const grayscaleStyle = useOpacityAnimation(loading);
 
 	const source = {
 		uri: getInvestigatorImageUrl({
@@ -27,22 +34,39 @@ export const InvestigatorImage = ({
 		}),
 	};
 
+	const onLoadEnd = useCallback(() => {
+		setLoading.off();
+		onLoadEndProp?.();
+	}, [onLoadEndProp, setLoading.off]);
+
+	const onLoadStart = useCallback(() => {
+		setLoading.on();
+		onLoadEndProp?.();
+	}, [onLoadEndProp, setLoading.on]);
+
 	return (
-		<C.Container layout={layout} style={[contentContainerStyle]}>
-			<C.GrayscaleContainer style={grayscaleStyle}>
-				<C.GrayscaleBackground
-					{...props}
-					source={grayscaleSource}
-					layout={layout}
-				/>
-			</C.GrayscaleContainer>
+		<C.Container style={[contentContainerStyle]}>
+			{!loading && (
+				<C.GrayscaleContainer style={grayscaleStyle}>
+					<C.GrayscaleBackground
+						{...props}
+						source={grayscaleSource}
+						layout={layout}
+					/>
+				</C.GrayscaleContainer>
+			)}
 
 			<C.Background
 				{...props}
-				style={[style]}
+				style={style}
 				source={source}
 				layout={layout}
+				onLoadStart={onLoadStart}
+				onLoadEnd={onLoadEnd}
+				onLoad={onLoad}
 			/>
 		</C.Container>
 	);
 };
+
+export const InvestigatorImageMemo = memo(InvestigatorImage);
