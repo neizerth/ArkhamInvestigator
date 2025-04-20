@@ -14,7 +14,7 @@ export const InvestigatorSelectItemImage = ({
 		return {
 			uri: getInvestigatorImageUrl({
 				code,
-				type: "mini",
+				type: "square",
 			}),
 		};
 	}, [code]);
