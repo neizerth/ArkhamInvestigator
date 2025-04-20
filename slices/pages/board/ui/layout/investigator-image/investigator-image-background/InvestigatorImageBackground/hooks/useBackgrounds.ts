@@ -1,7 +1,7 @@
 import { selectBoardImages, useAppSelector } from "@shared/lib";
 import { useContext, useMemo } from "react";
 import { LayoutContext } from "../../../../../../config";
-import { getImageLayout } from "../../../../../../lib";
+import { getImageLayout } from "../../../../../../lib/image/background/getImageLayout";
 
 export const useBackgrounds = () => {
 	const { view } = useContext(LayoutContext);

@@ -11,7 +11,6 @@ export const Background: typeof Image = styled(Image).attrs({
 		flex: 1,
 	},
 })`
-
 `;
 
 export const NextBackground: typeof Background = styled(Background)`
@@ -20,9 +19,14 @@ export const NextBackground: typeof Background = styled(Background)`
 
 export const Container: FC<ViewProps> = styled(View)`
   overflow: hidden;
+	position: absolute;
+	left: 0;
+	top: 0;
 `;
 
 export const BackgroundContainer: FC<ViewProps> = styled(Animated.View)`
 	flex: 1;
 	position: absolute;
+	left: 0;
+	top: 0;
 `;

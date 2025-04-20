@@ -1,4 +1,4 @@
-import { Pressable } from "react-native-gesture-handler";
+import { Pressable } from "react-native";
 import Animated from "react-native-reanimated";
 import styled from "styled-components/native";
 
