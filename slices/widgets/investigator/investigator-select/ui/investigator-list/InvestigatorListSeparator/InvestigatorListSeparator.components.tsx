@@ -49,15 +49,17 @@ export const Content: typeof View = styled(View)`
 
 const asideOffset = {
 	x: -asideWidth * 0.6,
-	y: asideHeight * 0.1,
+	y: asideHeight * 0.09,
 };
+
+const ruleBottom = ios ? -asideOffset.y : asideOffset.y;
 
 export const RuleContainer: typeof View = styled(View)`
   position: absolute;
   left: -10px;
   right: 0;
   overflow: hidden;
-  bottom: ${-asideOffset.y}px;
+  bottom: ${ruleBottom}px;
 `;
 
 export const Rule: typeof Line = styled(Line).attrs({
