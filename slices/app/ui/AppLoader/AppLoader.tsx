@@ -10,7 +10,7 @@ export type AppLoaderProps = ViewProps & {
 export const AppLoader = ({ state, ...props }: AppLoaderProps) => {
 	const { total, loadedCount, done } = state.assets;
 
-	const progress = (loadedCount * 100) / total;
+	const progress = Math.round((loadedCount * 100) / total);
 
 	return (
 		<C.Container {...props}>
