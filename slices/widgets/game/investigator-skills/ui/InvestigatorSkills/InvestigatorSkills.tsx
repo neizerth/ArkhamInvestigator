@@ -55,13 +55,14 @@ export const InvestigatorSkills = ({
 
 	return (
 		<C.Container {...props}>
-			<C.Background width={width} height={height} source={source} />
-			<C.Content style={skillsStyle}>
-				{renderSkill("willpower")}
-				{renderSkill("intellect")}
-				{renderSkill("combat")}
-				{renderSkill("agility")}
-			</C.Content>
+			<C.Background width={width} height={height} source={source}>
+				<C.Content style={skillsStyle}>
+					{renderSkill("willpower")}
+					{renderSkill("intellect")}
+					{renderSkill("combat")}
+					{renderSkill("agility")}
+				</C.Content>
+			</C.Background>
 		</C.Container>
 	);
 };

@@ -5,12 +5,7 @@ import type { FC } from "react";
 import { View, type ViewProps } from "react-native";
 import styled, { css } from "styled-components/native";
 
-import {
-	Image as ExpoImage,
-	type ImageProps as ExpoImageProps,
-} from "expo-image";
-import type { InvestigatorImageProps } from "./InvestigatorSelectItem.types";
-import { InvestigatorImage } from "./components";
+import { InvestigatorSelectItemImage } from "../InvestigatorSelectItemImage";
 
 const size = 60;
 const borderSize = 2;
@@ -51,29 +46,10 @@ export const Id: typeof IconNumber = styled(IconNumber)`
   font-size: ${font.size.large}px;
 `;
 
-export const Image: typeof InvestigatorImage = styled(InvestigatorImage)`
+export const Image: typeof InvestigatorSelectItemImage = styled(
+	InvestigatorSelectItemImage,
+)`
   border-radius: ${imageSize}px;
   width: ${imageSize}px;
   height: ${imageSize}px;
-`;
-
-export const ImageContainer: typeof View = styled(View)`
-  position: absolute;
-  top: 0;
-  left: 0;
-  border-radius: ${imageSize}px;
-  width: ${imageSize}px;
-  height: ${imageSize}px;
-`;
-
-type FilterImageProps = ExpoImageProps & {
-	active?: boolean;
-};
-
-export const FilterImage: FC<FilterImageProps> = styled(ExpoImage)`
-  ${({ active }: InvestigatorImageProps) =>
-		!active &&
-		css`
-    filter: grayscale(1);
-  `}
 `;

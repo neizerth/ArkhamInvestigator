@@ -1,14 +1,14 @@
 import { getInvestigatorImageUrl } from "@shared/api";
 import { Image } from "expo-image";
 import { useMemo } from "react";
-import * as C from "../InvestigatorSelectItem.components";
-import type { InvestigatorImageProps } from "../InvestigatorSelectItem.types";
+import * as C from "./InvestigatorSelectItemImage.components";
+import type { InvestigatorSelectItemImageProps } from "./InvestigatorSelectItemImage.types";
 
-export const InvestigatorImage = ({
+export const InvestigatorSelectItemImage = ({
 	active,
 	code,
 	...props
-}: InvestigatorImageProps) => {
+}: InvestigatorSelectItemImageProps) => {
 	const source = useMemo(() => {
 		return {
 			uri: getInvestigatorImageUrl({

@@ -1,14 +1,13 @@
-import { Row } from "@shared/ui";
-import type { FC } from "react";
+import { ImageBackground, Row } from "@shared/ui";
 import type { ImageProps } from "react-native";
-import { Image, View } from "react-native";
+import { View } from "react-native";
 import styled, { css } from "styled-components/native";
 
 export const Container: typeof View = styled(View)`
   position: relative;
 `;
 
-export const Background: FC<ImageProps> = styled(Image)`
+export const Background: typeof ImageBackground = styled(ImageBackground)`
   ${({ width, height }: ImageProps) => css`
     width: ${width}px;
     height: ${height}px;
