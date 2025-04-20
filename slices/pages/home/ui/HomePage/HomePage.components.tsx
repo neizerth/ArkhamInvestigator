@@ -1,5 +1,5 @@
 import { Alegreya } from "@assets/fonts";
-import { color, font, size } from "@shared/config";
+import { color, font, size, statusBarHeight } from "@shared/config";
 import { UnscaledText } from "@shared/ui";
 import { View } from "react-native";
 import styled from "styled-components/native";
@@ -24,7 +24,7 @@ export const ResumeButton: typeof Button = styled(Button).attrs({
 export const Menu: typeof HomeMenu = styled(HomeMenu)`
   position: absolute;
   z-index: 1;
-  top: 40px;
+  top: ${statusBarHeight}px;
   left: 0;
   right: 0;
   flex: 1;

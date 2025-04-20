@@ -1,4 +1,4 @@
-import { size } from "@shared/config";
+import { size, statusBarHeight } from "@shared/config";
 import { View } from "react-native";
 import styled from "styled-components/native";
 import { TopBarTitle } from "../TopBarTitle";
@@ -6,7 +6,7 @@ import { TopBarTitle } from "../TopBarTitle";
 export const Container: typeof View = styled(View)`
   flex-direction: row;
   align-items: center;
-  padding: 30px ${size.gap.default}px ${size.gap.small}px;
+  padding: ${statusBarHeight}px ${size.gap.default}px ${size.gap.small}px;
   gap: ${size.gap.default}px;
 `;
 

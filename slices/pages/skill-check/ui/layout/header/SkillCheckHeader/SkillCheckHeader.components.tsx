@@ -1,5 +1,5 @@
 import { IconButton } from "@features/haptic";
-import { color, size } from "@shared/config";
+import { color, size, statusBarHeight } from "@shared/config";
 import { Row as BaseRow, Icon } from "@shared/ui";
 import type { FC } from "react";
 import { View, type ViewProps } from "react-native";
@@ -8,7 +8,7 @@ import { skillCheckColor } from "../../../../config";
 import TopRule from "./images/rule-top.svg";
 
 export const Container: typeof View = styled(View)`
-  padding: 40px ${size.gap.default}px 0;
+  padding: ${statusBarHeight + 10}px ${size.gap.default}px 0;
 `;
 
 type ContentProps = ViewProps & {
