@@ -1,4 +1,4 @@
-import { Pressable } from "react-native";
+import { Pressable } from "react-native-gesture-handler";
 import Animated from "react-native-reanimated";
 import styled from "styled-components/native";
 
@@ -7,5 +7,4 @@ export const Container: typeof Animated.View = styled(Animated.View)`
 `;
 
 export const Area: typeof Pressable = styled(Pressable)`
-  
 `;

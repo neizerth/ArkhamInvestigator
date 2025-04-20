@@ -11,7 +11,7 @@ export const useOverlayStyle = () => {
 	const opacity = useSharedValue(0);
 
 	useEffect(() => {
-		opacity.value = showDescription ? 1 : 0;
+		opacity.value = showDescription ? 1 : 0.05;
 	}, [opacity, showDescription]);
 
 	const style = useAnimatedStyle(() => {
