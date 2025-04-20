@@ -9,7 +9,7 @@ export const descriptionSize = {
 	ratio: 523 / 591,
 };
 
-const offsetY = Platform.OS === "ios" ? 3 : 0;
+const offsetY = Platform.OS === "ios" ? 4 : 0;
 
 export const getFactionStyle = (faction: Faction) => {
 	const ruleSet: Record<Faction, RuleSet> = {
@@ -21,7 +21,7 @@ export const getFactionStyle = (faction: Faction) => {
 		mystic: css`
       padding-left: 12%;
       padding-right: 12%;
-      padding-bottom: ${offsetY + 5}%;
+      padding-bottom: ${offsetY + 4}%;
     `,
 		rogue: css`
       padding-left: 6%;
