@@ -1,4 +1,4 @@
-import { size } from "@shared/config";
+import { size, statusBarHeight } from "@shared/config";
 import {
 	selectShowDescription,
 	useAppSelector,
@@ -6,7 +6,7 @@ import {
 	useScreenOrientation,
 } from "@shared/lib";
 import { useWindowDimensions } from "react-native";
-import { LayoutContext, servicePadding } from "../../config";
+import { LayoutContext } from "../../config";
 import { getHeaderLayout, useImagePrelaod, useStatusBar } from "../../lib";
 import { FactionSelect } from "../shared";
 import * as C from "./BoardPage.components";
@@ -22,8 +22,7 @@ export const BoardPage = () => {
 
 	const layout = getHeaderLayout(view);
 
-	const areaTop =
-		layout.height + servicePadding[layout.type].top + size.gap.large;
+	const areaTop = layout.height + statusBarHeight + size.gap.large;
 
 	const contextValue = {
 		view,
@@ -33,7 +32,7 @@ export const BoardPage = () => {
 	return (
 		<LayoutContext.Provider value={contextValue}>
 			<C.Container onLayout={onLayout}>
-				<C.Header layout={layout} descriptionShown={showDescription} />
+				<C.Header descriptionShown={showDescription} />
 				<C.Background />
 				{orientation.type === "portrait" && <C.PortraitLayout top={areaTop} />}
 				<FactionSelect />

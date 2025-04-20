@@ -1,9 +1,7 @@
-import { color } from "@shared/config";
+import { color, statusBarHeight } from "@shared/config";
 import type { FC } from "react";
 import { View } from "react-native";
 import styled, { css } from "styled-components/native";
-import { servicePadding } from "../../config";
-import type { PropsWithLayout } from "../../model";
 import { BoardHeader, type BoardHeaderProps } from "../layout";
 import {
 	PortraitLayout as BasePortraitLayout,
@@ -29,21 +27,18 @@ export const Background: typeof InvestigatorBackground = styled(
   bottom: 0;
 `;
 
-type HeaderProps = BoardHeaderProps &
-	PropsWithLayout & {
-		descriptionShown: boolean;
-	};
+type HeaderProps = BoardHeaderProps & {
+	descriptionShown: boolean;
+};
 
 export const Header: FC<HeaderProps> = styled(BoardHeader)`
   position: absolute;
   z-index: 3;
   left: 0;
   right: 0;
+  top: ${statusBarHeight}px;
   ${({ descriptionShown }: HeaderProps) => css`
     z-index: ${descriptionShown ? 2 : 3};
-  `}
-  ${({ layout }: HeaderProps) => css`
-    top: ${servicePadding[layout.type].top}px;
   `}
 `;
 
