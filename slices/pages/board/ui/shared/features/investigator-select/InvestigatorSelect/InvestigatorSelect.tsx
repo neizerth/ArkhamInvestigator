@@ -68,7 +68,9 @@ export const InvestigatorSelect = ({ ...props }: InvestigatorSelectProps) => {
 		<C.Container {...props}>
 			{showUp && (
 				<C.Up onPress={next}>
-					<C.UpIcon />
+					<C.IconContainer>
+						<C.UpIcon />
+					</C.IconContainer>
 				</C.Up>
 			)}
 			<C.Picker
@@ -83,7 +85,9 @@ export const InvestigatorSelect = ({ ...props }: InvestigatorSelectProps) => {
 			/>
 			{showDown && (
 				<C.Down onPress={prev}>
-					<C.DownIcon />
+					<C.IconContainer>
+						<C.DownIcon />
+					</C.IconContainer>
 				</C.Down>
 			)}
 		</C.Container>

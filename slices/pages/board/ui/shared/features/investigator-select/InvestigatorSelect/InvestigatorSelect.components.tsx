@@ -64,14 +64,17 @@ export const ArrowIcon: FC<DefinedIconProps> = styled(Icon)`
 	position: relative;
 `;
 
+export const IconContainer: typeof View = styled(View)`
+  transform: rotate(90deg);
+`;
+
 export const UpIcon: typeof ArrowIcon = styled(ArrowIcon).attrs({
 	icon: "left-arrow",
 })`
-    transform: rotate(90deg);
+    
   `;
 
 export const DownIcon: typeof ArrowIcon = styled(ArrowIcon).attrs({
-	icon: "left-arrow",
+	icon: "right-arrow",
 })`
-    transform: rotate(-90deg);
   `;

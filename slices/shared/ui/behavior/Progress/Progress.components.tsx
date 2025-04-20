@@ -15,7 +15,7 @@ type ValueProps = ViewProps & {
 
 export const Value: FC<ValueProps> = styled(View)`
   flex: 1;
-  background-color: ${color.white};
+  background-color: ${color.dark10};
 
   ${({ value }: ValueProps) => css`
     width: ${value}%;
