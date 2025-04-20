@@ -1,4 +1,4 @@
-import type { PickerRenderProp } from "@widgets/control/picker/model";
+import type { PickerRenderProp } from "../../../../model";
 import * as C from "./BaseList.components";
 
 export const defaultRenderItemContainer: PickerRenderProp = ({
