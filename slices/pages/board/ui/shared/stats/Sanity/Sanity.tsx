@@ -5,6 +5,7 @@ import {
 } from "@shared/lib";
 import type { ImageBackgroundProps } from "@shared/ui";
 import { range } from "ramda";
+import { useMemo } from "react";
 import { useStat } from "../../../../lib/hooks/useStat";
 import * as C from "./Sanity.components";
 export type SanityProps = ImageBackgroundProps;
@@ -36,7 +37,10 @@ export const Sanity = ({ ...props }: SanityProps) => {
 
 	const showBaseDiff = Boolean(diffValue);
 
-	const data = showHorror ? horrorData : range(-20, maxValue);
+	const data = useMemo(() => {
+		return showHorror ? horrorData : range(-20, maxValue);
+	}, [maxValue, showHorror]);
+
 	const currentValue = showHorror ? wounds : value;
 
 	const onValueChange = showHorror ? onWoundsChange : onChange;

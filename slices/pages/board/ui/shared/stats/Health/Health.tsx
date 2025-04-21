@@ -5,6 +5,7 @@ import {
 } from "@shared/lib";
 import type { HealthProps as BaseHealthProps } from "@shared/ui";
 import { range } from "ramda";
+import { useMemo } from "react";
 import type { ViewStyle } from "react-native";
 import { useStat } from "../../../../lib/hooks/useStat";
 import * as C from "./Health.components";
@@ -41,7 +42,10 @@ export const Health = ({ contentContainerStyle, ...props }: HealthProps) => {
 
 	const showBaseDiff = Boolean(diffValue);
 
-	const data = showDamage ? damageData : range(-20, maxValue);
+	const data = useMemo(() => {
+		return showDamage ? damageData : range(-20, maxValue);
+	}, [maxValue, showDamage]);
+
 	const currentValue = showDamage ? wounds : value;
 
 	const onValueChange = showDamage ? onWoundsChange : onChange;
