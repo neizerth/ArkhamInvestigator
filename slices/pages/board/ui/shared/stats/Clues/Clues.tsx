@@ -11,6 +11,8 @@ import { range } from "ramda";
 import { useCallback } from "react";
 import * as C from "./Clues.components";
 
+const cluesData = range(0, 101);
+
 export const Clues = (props: ClueProps) => {
 	const dispatch = useAppDispatch();
 	const value = useAppSelector(selectCurrentStatValue("clues"));
@@ -33,7 +35,7 @@ export const Clues = (props: ClueProps) => {
 		<C.Container {...props}>
 			<C.Picker
 				value={value}
-				data={range(0, 101)}
+				data={cluesData}
 				onValueChanged={onChange}
 				onLongPress={onLongPress}
 				onPress={onPress}

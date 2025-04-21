@@ -13,6 +13,8 @@ import * as C from "./Resources.components";
 
 export type ResourcesProps = ImageBackgroundProps;
 
+const resourcesData = range(0, 101);
+
 export const Resources = ({ ...props }: ResourcesProps) => {
 	const dispatch = useAppDispatch();
 	const resources = useAppSelector(selectCurrentStatValue("resources"));
@@ -35,7 +37,7 @@ export const Resources = ({ ...props }: ResourcesProps) => {
 		<C.Container {...props}>
 			<C.Picker
 				value={resources}
-				data={range(0, 101)}
+				data={resourcesData}
 				onValueChanged={onChange}
 				onLongPress={onLongPress}
 				onPress={onPress}

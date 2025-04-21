@@ -11,6 +11,8 @@ import * as C from "./Actions.components";
 
 export type ActionsProps = ImageBackgroundProps;
 
+const actionsData = range(0, 100);
+
 export const Actions = ({ ...props }: ActionsProps) => {
 	const dispatch = useAppDispatch();
 	const haveAdditionalActions = useAppSelector(selectHaveBoardAbilities);
@@ -35,7 +37,7 @@ export const Actions = ({ ...props }: ActionsProps) => {
 				{showDiff && <C.BaseActions limitMaxValue={false} />}
 				<C.Picker
 					value={value}
-					data={range(0, 100)}
+					data={actionsData}
 					onValueChanged={onChange}
 					onPress={onPress}
 					onLongPress={onLongPress}
