@@ -2,6 +2,17 @@ import type { HapticMode } from "@features/haptic";
 import type { SelectItem } from "@shared/ui";
 import { Platform } from "react-native";
 
+export const healthSanityModeValues = [
+	{
+		label: "Show health/sanity",
+		value: false,
+	},
+	{
+		label: "Show damage/horror",
+		value: true,
+	},
+];
+
 export const turnEndValues = [
 	{
 		label: "No main & additional actions",

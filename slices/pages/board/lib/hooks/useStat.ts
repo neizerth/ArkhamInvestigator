@@ -27,6 +27,14 @@ export const useStat = (statType: InvestigatorBoardStat) => {
 		[dispatch, statType],
 	);
 
+	const onWoundsChange = useCallback(
+		({ value: wounds = 0 }: PickerChangeEvent) => {
+			const value = baseValue - wounds;
+			dispatch(setCurrentStat(statType, value));
+		},
+		[dispatch, statType, baseValue],
+	);
+
 	const onLongPress = useCallback(() => {
 		const diff = baseValue - initialValue;
 
@@ -48,6 +56,7 @@ export const useStat = (statType: InvestigatorBoardStat) => {
 		onPress,
 		onLongPress,
 		onChange,
+		onWoundsChange,
 		initialValue,
 		baseValue,
 		value,

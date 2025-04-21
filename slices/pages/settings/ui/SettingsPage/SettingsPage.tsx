@@ -6,14 +6,21 @@ import {
 } from "@features/i18n";
 import {
 	selectEndTurnStrict,
+	selectShowDamageAndHorror,
 	selectShowDamageAndHorrorEffects,
 	setEndTurnStrict,
+	setShowDamageAndHorror,
 	setShowDamageAndHorrorEffects,
 } from "@shared/lib";
 import { Title } from "@shared/ui";
 import { ContentPage } from "@widgets/content-page";
 import * as C from "./SettingsPage.components";
-import { hapticValues, languageValues, turnEndValues } from "./values";
+import {
+	hapticValues,
+	healthSanityModeValues,
+	languageValues,
+	turnEndValues,
+} from "./values";
 
 export const SettingsPage = () => {
 	const { t } = useAppTranslation();
@@ -37,13 +44,21 @@ export const SettingsPage = () => {
 						data={hapticValues}
 					/>
 				</C.Row>
-				<Title>{t`Game settings`}</Title>
+				<Title> {t`Game settings`}</Title>
 				<C.Row>
 					<C.Select
 						label="Turn end"
 						selector={selectEndTurnStrict}
 						actionCreator={setEndTurnStrict}
 						data={turnEndValues}
+					/>
+				</C.Row>
+				<C.Row>
+					<C.Select
+						label="Health/Sanity"
+						selector={selectShowDamageAndHorror}
+						actionCreator={setShowDamageAndHorror}
+						data={healthSanityModeValues}
 					/>
 				</C.Row>
 				<C.Row>

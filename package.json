@@ -1,7 +1,7 @@
 {
   "name": "arkham-investigator",
   "main": "expo-router/entry",
-  "version": "1.6.0",
+  "version": "1.7.0",
   "scripts": {
     "start": "expo start",
     "reset-project": "node ./scripts/reset-project.js",
@@ -18,6 +18,7 @@
     "biome:fix": "npx @biomejs/biome lint --write ./slices",
     "prebuild": "expo prebuild",
     "prebuild:android": "npm run prebuild -- -p android",
+    "prebuild:ios": "npm run prebuild -- -p ios",
     "eas:android": "npm run prebuild:android && eas build -p android",
     "eas:apk": "npm run eas:android -- --profile apk",
     "build:apk": "npm run eas:apk -- --local",

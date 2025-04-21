@@ -39,6 +39,7 @@ export const {
 	setShowDamageAndHorrorEffects,
 	setPickerDecelerationType,
 	setPickerIntervalMomentum,
+	setShowDamageAndHorror,
 } = board.actions;
 
 export const {
@@ -49,6 +50,7 @@ export const {
 	selectShowDamageAndHorrorEffects,
 	selectPickerDecelerationType,
 	selectPickerIntervalMomentum,
+	selectShowDamageAndHorror,
 } = board.selectors;
 
 export default board.reducer;

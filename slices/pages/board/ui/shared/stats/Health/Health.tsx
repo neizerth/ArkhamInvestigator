@@ -1,4 +1,8 @@
-import { selectShowAdditionalInformation, useAppSelector } from "@shared/lib";
+import {
+	selectShowAdditionalInformation,
+	selectShowDamageAndHorror,
+	useAppSelector,
+} from "@shared/lib";
 import type { HealthProps as BaseHealthProps } from "@shared/ui";
 import { range } from "ramda";
 import type { ViewStyle } from "react-native";
@@ -10,13 +14,17 @@ type HealthProps = BaseHealthProps & {
 	contentContainerStyle?: BaseHealthProps["style"];
 };
 
+const damageData = range(0, 20);
+
 export const Health = ({ contentContainerStyle, ...props }: HealthProps) => {
 	const showAdditionalInfo = useAppSelector(selectShowAdditionalInformation);
+	const showDamage = useAppSelector(selectShowDamageAndHorror);
 
 	const {
 		onPress,
 		onLongPress,
 		onChange,
+		onWoundsChange,
 		initialValue,
 		baseValue,
 		value,
@@ -33,15 +41,22 @@ export const Health = ({ contentContainerStyle, ...props }: HealthProps) => {
 
 	const showBaseDiff = Boolean(diffValue);
 
+	const data = showDamage ? damageData : range(-20, maxValue);
+	const currentValue = showDamage ? wounds : value;
+
+	const onValueChange = showDamage ? onWoundsChange : onChange;
+
 	return (
 		<C.Container {...props}>
 			{showBaseDiff && <C.BaseHealth />}
 			<C.Content style={contentContainerStyle}>
-				{showAdditionalInfo && <C.Wounds value={`-${wounds}`} />}
+				{showAdditionalInfo && (
+					<C.Additional value={showDamage ? initialValue : `-${wounds}`} />
+				)}
 				<C.Picker
-					value={value}
-					data={range(-20, maxValue)}
-					onValueChanged={onChange}
+					value={currentValue}
+					data={data}
+					onValueChanged={onValueChange}
 					onLongPress={onLongPress}
 					onPress={onPress}
 					style={pickerStyle}

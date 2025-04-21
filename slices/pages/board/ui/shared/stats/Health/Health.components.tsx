@@ -44,7 +44,7 @@ export const BaseHealth: FC<DefinedBaseStatPickerProps> = styled(
     
   `;
 
-export const Wounds: typeof Value = styled(Value)`
+export const Additional: typeof Value = styled(Value)`
 
 `;
 

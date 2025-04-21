@@ -20,7 +20,7 @@ export const Value: typeof BaseValue = styled(BaseValue)`
   color: ${color.sanity};
 `;
 
-export const Wounds: typeof Value = styled(Value)`
+export const Additional: typeof Value = styled(Value)`
   
 `;
 
