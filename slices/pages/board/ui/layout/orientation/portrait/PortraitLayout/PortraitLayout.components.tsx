@@ -1,15 +1,16 @@
-import { size } from "@shared/config";
-import type { FC } from "react";
+import { size, statusBarHeight } from "@shared/config";
+import { Row } from "@shared/ui";
 import { View } from "react-native";
-import styled, { css } from "styled-components/native";
-import type { PropsWithView } from "../../../../../model";
+import styled from "styled-components/native";
+import { AdditionalInfoArea } from "../../../../shared";
+import { BoardHeader } from "../../../header";
 import { Overlay as BaseOverlay } from "../Overlay";
 import * as F from "../footer";
 import * as S from "../sidebar";
 
 export const Overlay: typeof BaseOverlay = styled(BaseOverlay)`
   position: absolute;
-  z-index: 1;
+  z-index: 2;
   left: 0;
   top: 0;
   right: 0;
@@ -18,40 +19,30 @@ export const Overlay: typeof BaseOverlay = styled(BaseOverlay)`
 
 export const Container: typeof View = styled(View)`
   position: relative;
+  padding-top: ${statusBarHeight}px;
+`;
+
+export const Header: typeof View = styled(BoardHeader)`
+  position: relative;
+`;
+
+export const Main: typeof Row = styled(Row)`
+  position: relative;
+  padding: 0px ${size.gap.default}px;
+  flex: 1;
+`;
+
+export const Area: typeof View = styled(AdditionalInfoArea)`
+  position: relative;
+  flex: 1;
 `;
 
 export const Footer: typeof F.Footer = styled(F.Footer)`
-  position: absolute;
-  z-index: 3;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  position: relative;
 `;
 
-type Sidebar<T> = FC<T & PropsWithView>;
-
-const sidebarStyle = css<PropsWithView>`
-  position: absolute;
-  z-index: 1;
-  top: 0;
-  ${({ view }: PropsWithView) => {
-		const { height } = view;
-		const bottom = height < 700 ? 170 : 210;
-
-		return css`
-      bottom: ${bottom}px;
-    `;
-	}}
+export const RightSidebar: typeof S.RightSidebar = styled(S.RightSidebar)`
 `;
 
-export const RightSidebar: Sidebar<S.RightSidebarProps> = styled(
-	S.RightSidebar,
-)`
-  ${sidebarStyle}
-  right: ${size.gap.default}px;
-`;
-
-export const LeftSidebar: Sidebar<S.LeftSidebarProps> = styled(S.LeftSidebar)`
-  ${sidebarStyle}
-  left: ${size.gap.default}px;
+export const LeftSidebar: typeof S.LeftSidebar = styled(S.LeftSidebar)`
 `;

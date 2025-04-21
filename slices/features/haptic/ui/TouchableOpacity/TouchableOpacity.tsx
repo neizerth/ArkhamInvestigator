@@ -1,81 +1,12 @@
-import { useCallback } from "react";
-import type {
-	TouchableOpacityProps as BaseTouchableOpacityProps,
-	GestureResponderEvent,
-} from "react-native";
+import type { TouchableOpacityProps as BaseTouchableOpacityProps } from "react-native";
 
 import { TouchableOpacity as BaseTouchableOpacity } from "react-native";
+import { usePress } from "../../lib";
+import type { PressProps } from "../../model";
 
-import { useHapticFeedback } from "../../lib/hooks/useHapticFeedback";
-import type { HapticPatternType } from "../../model";
-import { handlePress } from "./handlePress";
+export type TouchableOpacityProps = BaseTouchableOpacityProps & PressProps;
 
-export type TouchableOpacityProps = BaseTouchableOpacityProps & {
-	pressHapticPattern?: HapticPatternType;
-	pressInHapticPattern?: HapticPatternType;
-	pressOutHapticPattern?: HapticPatternType;
-	longPressHapticPattern?: HapticPatternType;
-};
-
-export const TouchableOpacity = ({
-	pressHapticPattern = "clockTick",
-	pressInHapticPattern = "clockTick",
-	pressOutHapticPattern = "clockTick",
-	longPressHapticPattern = "clockTick",
-	...props
-}: TouchableOpacityProps) => {
-	const pressFeedback = useHapticFeedback(pressHapticPattern);
-	const pressInFeedback = useHapticFeedback(pressInHapticPattern);
-	const pressOutFeedback = useHapticFeedback(pressOutHapticPattern);
-	const longPressFeedback = useHapticFeedback(longPressHapticPattern);
-
-	const onPress = useCallback(
-		(event: GestureResponderEvent) =>
-			handlePress({
-				event,
-				eventHandler: props.onPress,
-				impactFeedback: pressFeedback,
-			}),
-		[props.onPress, pressFeedback],
-	);
-
-	const onPressIn = useCallback(
-		(event: GestureResponderEvent) =>
-			handlePress({
-				event,
-				eventHandler: props.onPressIn,
-				impactFeedback: pressInFeedback,
-			}),
-		[props.onPressIn, pressInFeedback],
-	);
-
-	const onPressOut = useCallback(
-		(event: GestureResponderEvent) =>
-			handlePress({
-				event,
-				eventHandler: props.onPressOut,
-				impactFeedback: pressOutFeedback,
-			}),
-		[props.onPressOut, pressOutFeedback],
-	);
-
-	const onLongPress = useCallback(
-		(event: GestureResponderEvent) =>
-			handlePress({
-				event,
-				eventHandler: props.onLongPress,
-				impactFeedback: longPressFeedback,
-			}),
-		[props.onLongPress, longPressFeedback],
-	);
-
-	return (
-		<BaseTouchableOpacity
-			{...props}
-			onPress={onPress}
-			onPressIn={onPressIn}
-			onPressOut={onPressOut}
-			onLongPress={onLongPress}
-		/>
-	);
+export const TouchableOpacity = (props: TouchableOpacityProps) => {
+	const pressProps = usePress(props);
+	return <BaseTouchableOpacity {...props} {...pressProps} />;
 };

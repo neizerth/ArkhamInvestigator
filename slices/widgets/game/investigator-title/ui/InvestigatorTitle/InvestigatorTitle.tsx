@@ -53,15 +53,15 @@ export const InvestigatorTitle = (props: InvestigatorTitleProps) => {
 	const showId = !unique && !single;
 
 	return (
-		<C.FactionSwitch
-			style={contentContainerStyle}
+		<C.Container
+			style={[contentContainerStyle]}
 			activeOpacity={activeOpacity}
 			onPress={onPress}
 		>
 			<C.Background
 				{...props}
 				source={source}
-				style={[props.style, style.container]}
+				style={[props.style, style.background]}
 			>
 				<C.Title style={style.title}>
 					{unique && <C.Unique style={style.unique} />}
@@ -72,7 +72,7 @@ export const InvestigatorTitle = (props: InvestigatorTitleProps) => {
 					<C.SubtitleText style={style.subtitleText}>{subname}</C.SubtitleText>
 				</C.Subtitle>
 			</C.Background>
-		</C.FactionSwitch>
+		</C.Container>
 	);
 };
 

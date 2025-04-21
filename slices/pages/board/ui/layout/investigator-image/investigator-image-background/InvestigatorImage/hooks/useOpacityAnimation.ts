@@ -2,40 +2,23 @@ import {
 	selectCurrentBoardProp,
 	selectCurrentIsInactive,
 	useAppSelector,
+	useFadeAnimation,
 } from "@shared/lib";
-import { useCallback, useEffect } from "react";
-import type { ViewStyle } from "react-native";
-import {
-	useAnimatedStyle,
-	useSharedValue,
-	withTiming,
-} from "react-native-reanimated";
+import { useMemo } from "react";
 
 export const useOpacityAnimation = (code: string) => {
 	const inactive = useAppSelector(selectCurrentIsInactive);
 	const { id } = useAppSelector(selectCurrentBoardProp("image"));
 	const isActiveImage = id === code;
 
-	const opacity = useSharedValue(0);
-
-	const getOpacity = useCallback(() => {
+	const show = useMemo(() => {
 		if (!isActiveImage) {
-			return 0;
+			return false;
 		}
-		return inactive ? 1 : 0;
+		return inactive;
 	}, [inactive, isActiveImage]);
 
-	useEffect(() => {
-		opacity.value = getOpacity();
-	}, [opacity, getOpacity]);
-
-	const animatedStyle = useAnimatedStyle((): ViewStyle => {
-		return {
-			opacity: withTiming(opacity.value, {
-				duration: 500,
-			}),
-		};
+	return useFadeAnimation({
+		show,
 	});
-
-	return animatedStyle;
 };

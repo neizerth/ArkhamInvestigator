@@ -10,6 +10,7 @@ export const Container: typeof View = styled(View)`
 export const Title: typeof InvestigatorTitle = styled(InvestigatorTitle).attrs({
 	contentContainerStyle: {
 		position: "relative",
+		flex: 0,
 		zIndex: 1,
 	},
 })`  

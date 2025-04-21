@@ -1,10 +1,9 @@
 import type { GestureResponderEvent } from "react-native";
-
-type PressEventHandler = (e: GestureResponderEvent) => void | boolean;
+import type { PressHandler } from "../model";
 
 type HandlePressOptions = {
 	event: GestureResponderEvent;
-	eventHandler?: PressEventHandler;
+	eventHandler?: PressHandler;
 	impactFeedback: () => void;
 };
 

@@ -5,7 +5,7 @@ import { color } from "../../../config";
 
 export const Container: typeof View = styled(View)`
   width: 200px;
-  height: 1px;
+  height: 2px;
   background-color: ${color.dark30};
 `;
 

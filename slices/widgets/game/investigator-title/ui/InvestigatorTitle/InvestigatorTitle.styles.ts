@@ -17,6 +17,7 @@ type GetTitleStyleOptions = PropsWithFaction & {
 
 type ReturnStyle = {
 	container: ViewStyle;
+	background: ViewStyle;
 	title: ViewStyle;
 	titleText: TextStyle;
 	subtitle: ViewStyle;
@@ -75,7 +76,7 @@ export const getTitleStyle = (options: GetTitleStyleOptions) => {
 	const getLocaleStyle = getKeyConfig<Partial<ReturnStyle>>({
 		default: defaultFactionStyle(faction),
 		ru: {
-			container: {
+			background: {
 				gap: "7%",
 			},
 			title: {
@@ -90,7 +91,7 @@ export const getTitleStyle = (options: GetTitleStyleOptions) => {
 			},
 		},
 		ko: {
-			container: {
+			background: {
 				gap: "12%",
 			},
 			title: {
@@ -129,8 +130,11 @@ export const getTitleStyle = (options: GetTitleStyleOptions) => {
 
 	const localeStyle = getLocaleStyle(language);
 
-	const container: ViewStyle = {
+	const background: ViewStyle = {
 		gap: "8%",
+	};
+	const container: ViewStyle = {
+		height,
 	};
 	const title: ViewStyle = {
 		gap: 2 * vh * font.scale,
@@ -159,6 +163,7 @@ export const getTitleStyle = (options: GetTitleStyleOptions) => {
 
 	const base = {
 		container,
+		background,
 		title,
 		titleText,
 		subtitle,

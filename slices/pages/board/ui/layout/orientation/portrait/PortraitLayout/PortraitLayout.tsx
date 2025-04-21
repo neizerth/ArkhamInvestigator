@@ -1,4 +1,3 @@
-import { selectShowDescription, useAppSelector } from "@shared/lib";
 import type { RowProps } from "@shared/ui";
 import { useContext } from "react";
 import { LayoutContext, PortraitLayoutContext } from "../../../../../config";
@@ -9,7 +8,6 @@ export type PortraitLayoutProps = RowProps & {
 };
 
 export const PortraitLayout = ({ top, ...props }: PortraitLayoutProps) => {
-	const showDescription = useAppSelector(selectShowDescription);
 	const { view } = useContext(LayoutContext);
 	const height = view.height - top;
 
@@ -17,16 +15,15 @@ export const PortraitLayout = ({ top, ...props }: PortraitLayoutProps) => {
 		height,
 	};
 
-	const sidebarStyle = {
-		top,
-		zIndex: showDescription ? 1 : 4,
-	};
-
 	return (
 		<PortraitLayoutContext.Provider value={contextValue}>
 			<C.Container {...props}>
-				<C.RightSidebar view={view} style={sidebarStyle} />
-				<C.LeftSidebar view={view} style={sidebarStyle} />
+				<C.Header />
+				<C.Main>
+					<C.LeftSidebar />
+					<C.Area />
+					<C.RightSidebar />
+				</C.Main>
 				<C.Footer />
 				<C.Overlay />
 			</C.Container>

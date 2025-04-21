@@ -1,10 +1,5 @@
 import { size, statusBarHeight } from "@shared/config";
-import {
-	selectShowDescription,
-	useAppSelector,
-	useLayoutSize,
-	useScreenOrientation,
-} from "@shared/lib";
+import { useLayoutSize, useScreenOrientation } from "@shared/lib";
 import { useWindowDimensions } from "react-native";
 import { LayoutContext } from "../../config";
 import { getHeaderLayout, useImagePrelaod, useStatusBar } from "../../lib";
@@ -15,7 +10,6 @@ export const BoardPage = () => {
 	useImagePrelaod();
 	const window = useWindowDimensions();
 	const orientation = useScreenOrientation();
-	const showDescription = useAppSelector(selectShowDescription);
 	useStatusBar();
 
 	const [view, onLayout] = useLayoutSize(window);
@@ -32,7 +26,6 @@ export const BoardPage = () => {
 	return (
 		<LayoutContext.Provider value={contextValue}>
 			<C.Container onLayout={onLayout}>
-				<C.Header descriptionShown={showDescription} />
 				<C.Background />
 				{orientation.type === "portrait" && <C.PortraitLayout top={areaTop} />}
 				<FactionSelect />

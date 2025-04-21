@@ -12,7 +12,7 @@ import { useCallback, useContext, useEffect } from "react";
 import { BackHandler, StyleSheet, type ViewProps } from "react-native";
 import { LayoutContext } from "../../../../../../config";
 import * as C from "./FooterDescription.components";
-import { useAnimation } from "./useAnimation";
+import { useShowAnimation } from "./useShowAnimation";
 
 export type FooterDescriptionProps = ViewProps;
 
@@ -50,7 +50,7 @@ export const FooterDescription = ({ ...props }: FooterDescriptionProps) => {
 		return () => backHandler.remove();
 	}, [dispatch, showDescription, route]);
 
-	const contentStyle = useAnimation();
+	const contentStyle = useShowAnimation();
 
 	const vw = (view.width * 6) / 100;
 

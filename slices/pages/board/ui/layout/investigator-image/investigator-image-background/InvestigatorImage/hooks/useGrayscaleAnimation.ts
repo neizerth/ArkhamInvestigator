@@ -1,32 +1,24 @@
-import { selectCurrentIsInactive, useAppSelector } from "@shared/lib";
-import { useEffect } from "react";
-import type { ViewStyle } from "react-native";
 import {
-	useAnimatedStyle,
-	useSharedValue,
-	withTiming,
-} from "react-native-reanimated";
+	selectCurrentIsInactive,
+	useAppSelector,
+	useBooleanAnimation,
+} from "@shared/lib";
+import type { ViewStyle } from "react-native";
 
 export const useGrayscaleAnimation = () => {
 	const inactive = useAppSelector(selectCurrentIsInactive);
 
-	const grayscale = useSharedValue(0);
-
-	useEffect(() => {
-		grayscale.value = inactive ? 1 : 0;
-	}, [grayscale, inactive]);
-
-	const animatedStyle = useAnimatedStyle((): ViewStyle => {
-		return {
-			filter: [
-				{
-					grayscale: withTiming(grayscale.value, {
-						duration: 500,
-					}),
-				},
-			],
-		};
+	return useBooleanAnimation<ViewStyle>({
+		enabled: inactive,
+		styleResolver(grayscale) {
+			"worklet";
+			return {
+				filter: [
+					{
+						grayscale,
+					},
+				],
+			};
+		},
 	});
-
-	return animatedStyle;
 };

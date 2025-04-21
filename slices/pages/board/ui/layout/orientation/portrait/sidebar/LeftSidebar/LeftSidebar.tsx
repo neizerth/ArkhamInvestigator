@@ -11,6 +11,7 @@ import { useCallback, useContext } from "react";
 import type { ViewProps } from "react-native";
 import { PortraitLayoutContext } from "../../../../../../config";
 import { InvestigatorSelect } from "../../../../../shared";
+import { Sidebar } from "../Sidebar";
 import * as C from "./LeftSidebar.components";
 
 export type LeftSidebarProps = ViewProps;
@@ -47,24 +48,26 @@ export const LeftSidebar = ({ ...props }: LeftSidebarProps) => {
 	const canRedo = historyEnabled && historyIndex < historyLength - 1;
 
 	return (
-		<C.Container {...props} single={single} unit={height}>
-			<C.History single={single} unit={height}>
-				<C.HistoryButton
-					onPress={onRedo}
-					onLongPress={returnToNow}
-					disabled={!canRedo}
-				>
-					<C.HistoryIcon icon="redo" />
-				</C.HistoryButton>
-				<C.HistoryButton
-					onPress={onUndo}
-					onLongPress={beginHistory}
-					disabled={!canUndo}
-				>
-					<C.HistoryIcon icon="undo" />
-				</C.HistoryButton>
-			</C.History>
-			{!single && <InvestigatorSelect />}
-		</C.Container>
+		<Sidebar {...props}>
+			<C.Container single={single} unit={height}>
+				<C.History single={single} unit={height}>
+					<C.HistoryButton
+						onPress={onRedo}
+						onLongPress={returnToNow}
+						disabled={!canRedo}
+					>
+						<C.HistoryIcon icon="redo" />
+					</C.HistoryButton>
+					<C.HistoryButton
+						onPress={onUndo}
+						onLongPress={beginHistory}
+						disabled={!canUndo}
+					>
+						<C.HistoryIcon icon="undo" />
+					</C.HistoryButton>
+				</C.History>
+				{!single && <InvestigatorSelect />}
+			</C.Container>
+		</Sidebar>
 	);
 };

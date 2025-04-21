@@ -41,6 +41,5 @@ export const SubtitleText: typeof UnscaledText = styled(UnscaledText)`
   
 `;
 
-export const FactionSwitch: typeof TouchableOpacity = styled(TouchableOpacity)`
-  flex: 1;
+export const Container: typeof TouchableOpacity = styled(TouchableOpacity)`
 `;
