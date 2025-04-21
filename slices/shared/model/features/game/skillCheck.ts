@@ -2,6 +2,8 @@ import type { InvestigatorBoardStat } from "./board";
 
 export type SkillCheckHistoryItem = {
 	id: string;
+	pinned?: boolean;
+	title?: string;
 	type: InvestigatorBoardStat;
 	expression: SkillCheckItem[];
 	value: number;

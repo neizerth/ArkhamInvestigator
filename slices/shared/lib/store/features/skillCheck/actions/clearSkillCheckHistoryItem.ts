@@ -2,7 +2,7 @@ import type { AppThunk } from "@shared/model";
 import { propEq, reject } from "ramda";
 
 import type { SkillCheckHistoryItem } from "@shared/model";
-import { selectCurrentBoard, setCurrentBoard } from "../../board";
+import { selectCurrentBoard, setCurrentBoardProp } from "../../board";
 import { selectSkillCheckType } from "../skillCheck";
 
 export const clearSkillCheckHistoryItem =
@@ -12,16 +12,11 @@ export const clearSkillCheckHistoryItem =
 		const board = selectCurrentBoard(state);
 		const type = selectSkillCheckType(state);
 
-		if (!board || !type) {
+		if (!type) {
 			return;
 		}
 
 		const checkHistory = reject(propEq(item.id, "id"), board.checkHistory);
 
-		dispatch(
-			setCurrentBoard({
-				...board,
-				checkHistory,
-			}),
-		);
+		dispatch(setCurrentBoardProp("checkHistory", checkHistory));
 	};

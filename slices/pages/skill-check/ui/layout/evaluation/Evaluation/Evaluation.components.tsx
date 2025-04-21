@@ -2,7 +2,7 @@ import { size } from "@shared/config";
 import { View } from "react-native";
 import styled from "styled-components/native";
 import { LayoutContainer } from "../../LayoutContainer";
-import { ExpressionHistory } from "../ExpressionHistory";
+import { ExpressionHistory } from "../history/ExpressionHistory";
 
 export const Container: typeof View = styled(View)`
   padding: ${size.gap.default}px;
@@ -21,6 +21,11 @@ export const Current: typeof View = styled(View)`
   
 `;
 
-export const History: typeof ExpressionHistory = styled(ExpressionHistory)`
-  flex: 1;
+export const History: typeof ExpressionHistory = styled(
+	ExpressionHistory,
+).attrs({
+	contentContainerStyle: {
+		flex: 1,
+	},
+})`
 `;

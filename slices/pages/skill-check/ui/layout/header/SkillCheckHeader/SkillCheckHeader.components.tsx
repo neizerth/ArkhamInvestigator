@@ -8,7 +8,7 @@ import { skillCheckColor } from "../../../../config";
 import TopRule from "./images/rule-top.svg";
 
 export const Container: typeof View = styled(View)`
-  padding: ${statusBarHeight + 10}px ${size.gap.default}px 0;
+  padding: ${statusBarHeight}px ${size.gap.default}px 0;
 `;
 
 type ContentProps = ViewProps & {

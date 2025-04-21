@@ -6,7 +6,6 @@ import {
 import type { ViewProps } from "react-native";
 import { useSkillCheckLayoutType } from "../../../../lib";
 import { ExpressionDisplay } from "../ExpressionDisplay";
-import { ExpressionHistory } from "../ExpressionHistory";
 import { ExpressionValue } from "../ExpressionValue";
 import * as C from "./Evaluation.components";
 
@@ -25,7 +24,7 @@ export const Evaluation = ({ ...props }: EvaluationProps) => {
 	return (
 		<C.Container {...props}>
 			<C.Content>
-				{isLargeLayout && <ExpressionHistory size={historySize} />}
+				{isLargeLayout && <C.History size={historySize} />}
 				<C.Current>
 					<ExpressionDisplay data={expressionData} type="primary" />
 					<ExpressionValue />
