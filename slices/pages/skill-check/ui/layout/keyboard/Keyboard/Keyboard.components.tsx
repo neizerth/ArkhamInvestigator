@@ -15,7 +15,7 @@ import RuleBottom from "./images/rule.svg";
 
 export const Container: typeof View = styled(View)`
   padding: 0 ${size.gap.default}px;
-  padding-bottom: ${size.gap.large}px;  
+  padding-bottom: ${size.gap.default}px;  
 `;
 
 type ContentProps = ViewProps & {

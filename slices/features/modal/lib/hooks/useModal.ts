@@ -1,15 +1,16 @@
-import type { ModalData } from "@features/modal/model";
 import { useCallback, useContext, useMemo } from "react";
 import { useAppDispatch } from "../../../../shared/lib/hooks/store/useAppDispatch";
+import type { ModalData, ModalOkEvent } from "../../model";
 import { ModalContext } from "../context";
 import { closeModal, openModal } from "../store/features/modal/actions";
 
 type ModalEventhandler = (() => void) | false;
+type OkEventHandler = ((event: ModalOkEvent) => void) | false;
 
 type UseModalOptions = {
 	id: string;
 	data: ModalData;
-	onOk?: ModalEventhandler;
+	onOk?: OkEventHandler;
 	onCancel?: ModalEventhandler;
 	onClose?: ModalEventhandler;
 };
@@ -33,13 +34,16 @@ export const useModal = ({
 		dispatch(closeModal());
 	}, [dispatch, onClose]);
 
-	const ok = useCallback(() => {
-		if (onOk === false) {
-			return;
-		}
-		tryClose();
-		onOk?.();
-	}, [onOk, tryClose]);
+	const ok = useCallback(
+		(event: ModalOkEvent) => {
+			if (onOk === false) {
+				return;
+			}
+			tryClose();
+			onOk?.(event);
+		},
+		[onOk, tryClose],
+	);
 
 	const cancel = useCallback(() => {
 		if (onCancel === false) {

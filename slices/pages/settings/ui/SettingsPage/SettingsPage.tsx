@@ -13,7 +13,7 @@ import {
 	setShowDamageAndHorrorEffects,
 } from "@shared/lib";
 import { Title } from "@shared/ui";
-import { ContentPage } from "@widgets/content-page";
+import { ContentPage } from "@widgets/content/content-page";
 import * as C from "./SettingsPage.components";
 import {
 	hapticValues,

@@ -42,5 +42,5 @@ const getExpression = (data: SkillCheckItem[]) => {
 		.join("");
 
 	// added auto floor evaluation
-	return source.replace(/([+-]?)(([^+-]*)\/\d+)/, "$1floor($2)");
+	return source.replace(/([+-]?)(([^+-]*)\/[\d\w]+)/, "$1floor($2)");
 };

@@ -1,7 +1,5 @@
 import { createSelector } from "@reduxjs/toolkit";
 import { selectSkillCheckHistoryItem } from "./selectSkillCheckHistoryItem";
 
-export const selectIsSkillCheckHistoryItemPinned = (id: string) =>
-	createSelector([selectSkillCheckHistoryItem(id)], (item) =>
-		Boolean(item?.pinned),
-	);
+export const selectSkillCheckHistoryItemTitle = (id: string) =>
+	createSelector([selectSkillCheckHistoryItem(id)], (item) => item?.title);

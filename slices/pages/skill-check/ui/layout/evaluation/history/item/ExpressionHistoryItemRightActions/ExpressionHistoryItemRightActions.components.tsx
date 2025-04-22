@@ -1,11 +1,11 @@
 import { color, size } from "@shared/config";
 import { View } from "react-native";
-import Reanimated from "react-native-reanimated";
+import Animated from "react-native-reanimated";
 import styled from "styled-components/native";
 import { ExpressionHistoryItemAction } from "../ExpressionHistoryItemAction";
-import { PinAction } from "../actions";
+import { PinAction, RemoveAction, SetNameAction } from "../actions";
 
-export const Container: typeof Reanimated.View = styled(Reanimated.View)`
+export const Container: typeof Animated.View = styled(Animated.View)`
   flex-direction: row;
   align-items: center;
   justify-content: center;
@@ -22,10 +22,14 @@ export const Action: typeof ExpressionHistoryItemAction = styled(
 )`
 `;
 
-export const Rename: typeof Action = styled(Action)`
+export const SetName: typeof SetNameAction = styled(SetNameAction)`
   
 `;
 
 export const Pin: typeof PinAction = styled(PinAction)`
+  
+`;
+
+export const Remove: typeof RemoveAction = styled(RemoveAction)`
   
 `;

@@ -9,7 +9,10 @@ import {
 import { APP_VERSION, BUILD_ID, BUILD_VERSION } from "@shared/config/app";
 import { selectMediaVersion, useAppSelector } from "@shared/lib";
 import { A, Bold, List, Paragraph, Title } from "@shared/ui";
-import { ContentPage, type ContentPageProps } from "@widgets/content-page";
+import {
+	ContentPage,
+	type ContentPageProps,
+} from "@widgets/content/content-page";
 
 export type AboutPageProps = Omit<ContentPageProps, "title">;
 

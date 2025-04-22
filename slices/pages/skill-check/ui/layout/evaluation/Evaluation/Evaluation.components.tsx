@@ -2,7 +2,7 @@ import { size } from "@shared/config";
 import { View } from "react-native";
 import styled from "styled-components/native";
 import { LayoutContainer } from "../../LayoutContainer";
-import { ExpressionHistory } from "../history/ExpressionHistory";
+import { ExpressionHistoryMemo as ExpressionHistory } from "../history/ExpressionHistory";
 
 export const Container: typeof View = styled(View)`
   padding: ${size.gap.default}px;

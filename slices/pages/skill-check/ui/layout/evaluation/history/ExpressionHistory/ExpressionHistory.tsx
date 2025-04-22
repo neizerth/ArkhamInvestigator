@@ -8,7 +8,7 @@ import {
 	useAppSelector,
 } from "@shared/lib";
 import type { SkillCheckHistoryItem, SkillCheckItem } from "@shared/model";
-import { useCallback, useMemo, useRef } from "react";
+import { memo, useCallback, useMemo, useRef } from "react";
 import type { ScrollView, ViewProps, ViewStyle } from "react-native";
 import * as C from "./ExpressionHistory.components";
 
@@ -61,7 +61,7 @@ export const ExpressionHistory = ({
 
 	const clearValue = useCallback(
 		(item: SkillCheckHistoryItem) => () => {
-			dispatch(clearSkillCheckHistoryItem(item));
+			dispatch(clearSkillCheckHistoryItem(item.id));
 		},
 		[dispatch],
 	);
@@ -85,10 +85,12 @@ export const ExpressionHistory = ({
 
 	return (
 		<C.Container style={contentContainerStyle}>
-			<C.Pinned>{pinned.map(renderItem)}</C.Pinned>
+			{pinned.length > 0 && <C.Pinned>{pinned.map(renderItem)}</C.Pinned>}
 			<C.List {...props} ref={ref} onContentSizeChange={onContentSizeChange}>
 				{regular.map(renderItem)}
 			</C.List>
 		</C.Container>
 	);
 };
+
+export const ExpressionHistoryMemo = memo(ExpressionHistory);

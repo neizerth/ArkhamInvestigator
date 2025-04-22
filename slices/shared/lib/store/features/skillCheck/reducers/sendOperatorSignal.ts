@@ -10,6 +10,10 @@ export const sendOperatorSignal: SkillCheckReducer<SkillCheckOperator> = (
 	const { data } = state;
 	const lastItem = last(data);
 
+	if (!lastItem) {
+		return state;
+	}
+
 	if (lastItem?.type === "operator") {
 		return {
 			...state,

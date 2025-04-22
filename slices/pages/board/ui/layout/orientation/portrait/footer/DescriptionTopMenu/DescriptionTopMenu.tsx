@@ -36,6 +36,7 @@ export const DescriptionTopMenu = ({ ...props }: DescriptionTopMenuProps) => {
 	const [showClearModal] = useModal({
 		id: "clear-board",
 		data: {
+			contentType: "text",
 			type: "faction",
 			faction,
 			title: t`Reset Board?`,

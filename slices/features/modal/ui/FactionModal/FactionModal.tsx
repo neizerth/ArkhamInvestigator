@@ -1,21 +1,38 @@
-import type { Faction } from "@shared/model";
-import { useContext } from "react";
-import type { ViewProps } from "react-native";
+import type { Defined, Faction } from "@shared/model";
+import { useCallback, useContext, useRef } from "react";
+import type { TextInputProps, ViewProps } from "react-native";
 import { ModalContext } from "../../lib";
 import type { ModalData } from "../../model";
 import * as C from "./FactionModal.components";
 
+type TextChangeHandler = Defined<TextInputProps["onChange"]>;
 export type FactionModalProps = ViewProps & {
 	data: ModalData;
 };
 
 export const FactionModal = ({ data, ...props }: FactionModalProps) => {
 	const context = useContext(ModalContext);
-	const onOk = context.onOk?.current;
+
+	const ok = context.onOk?.current;
+
+	const okHandler = useCallback(() => {
+		return ok?.({
+			textValue: textValue.current,
+		});
+	}, [ok]);
+
+	const onTextValueChange = useCallback<TextChangeHandler>((event) => {
+		textValue.current = event.nativeEvent.text;
+	}, []);
+	const onOk = ok && okHandler;
 	const onCancel = context.onCancel?.current;
 	const onClose = context.onClose?.current;
-	const { title, subtitle, text, okText, cancelText } = data;
+	const { title, subtitle, text, okText, cancelText, contentType } = data;
 	const cardFaction: Faction = data.faction || "neutral";
+
+	const defaultTextValue =
+		(data.contentType === "input" && data.defaultValue) || "";
+	const textValue = useRef(defaultTextValue);
 
 	return (
 		<C.Container {...props}>
@@ -33,7 +50,14 @@ export const FactionModal = ({ data, ...props }: FactionModalProps) => {
 					cancelText={cancelText}
 				>
 					<C.CardContent>
-						<C.Text>{text}</C.Text>
+						{text && <C.Text>{text}</C.Text>}
+						{contentType === "input" && (
+							<C.Input
+								autoFocus
+								defaultValue={defaultTextValue}
+								onChange={onTextValueChange}
+							/>
+						)}
 					</C.CardContent>
 				</C.Card>
 			</C.Content>

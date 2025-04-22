@@ -1,6 +1,10 @@
 import { size } from "@shared/config";
-import { Outside as BaseOutside, Text as BaseText } from "@shared/ui";
-import { View } from "react-native";
+import {
+	Outside as BaseOutside,
+	Text as BaseText,
+	Input as TextInput,
+} from "@shared/ui";
+import { KeyboardAvoidingView, View } from "react-native";
 import styled from "styled-components/native";
 import { FactionCardMemo as FactionCard } from "../../../../widgets/investigator/faction/faction-card";
 
@@ -13,7 +17,10 @@ export const Card: typeof FactionCard = styled(FactionCard)`
   z-index: 2;
 `;
 
-export const Container: typeof View = styled(View)`
+export const Container: typeof KeyboardAvoidingView = styled(
+	KeyboardAvoidingView,
+)`
+
   justify-content: center;
   align-items: center;
   background: rgba(0, 0, 0, 0.5);
@@ -35,4 +42,8 @@ export const CardContent: typeof View = styled(View)`
 
 export const Outside = styled(BaseOutside)`
   z-index: 1;
+`;
+
+export const Input: typeof TextInput = styled(TextInput)`
+
 `;

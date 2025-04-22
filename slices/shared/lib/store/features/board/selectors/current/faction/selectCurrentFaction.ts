@@ -5,6 +5,6 @@ import { selectCurrentBoard } from "../selectCurrentBoard";
 export const selectCurrentFaction = createSelector(
 	[selectCurrentBoard],
 	(board) => {
-		return board.currentRole || (board.investigator.faction_code as Faction);
+		return board?.currentRole || (board?.investigator.faction_code as Faction);
 	},
 );

@@ -7,7 +7,7 @@ import {
 	type ExpressionHistoryItemActionProps as ActionProps,
 } from "../../ExpressionHistoryItemAction";
 
-type PinnedActionProps = ActionProps & {
+type PinnedActionProps = Omit<ActionProps, "icon"> & {
 	pinned?: boolean;
 };
 
@@ -16,6 +16,7 @@ export const Container: FC<PinnedActionProps> = styled(Action).attrs(
 		iconStyle: {
 			color: pinned ? skillCheckColor.checkIcon : color.light10,
 		},
+		icon: "pushpin",
 	}),
 )`
 `;

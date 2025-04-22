@@ -9,7 +9,8 @@ import { statFontSize, typeFontSize } from "./ExpressionDisplay.styles";
 import type { PropsWithType } from "./ExpressionDisplay.types";
 
 export const Container: typeof TouchableOpacity = styled(TouchableOpacity)`
-
+  min-height: 40px;
+  justify-content: center;
 `;
 
 type ExpressionProps = TextProps & PropsWithType;
@@ -52,5 +53,6 @@ type StatProps = IconProps & PropsWithType;
 export const Stat: FC<StatProps> = styled(Icon)`
   ${({ type = "secondary" }: StatProps) => css`
     font-size: ${statFontSize[type]}px;
+    line-height: ${statFontSize[type] * 1.2}px;
   `}
 `;

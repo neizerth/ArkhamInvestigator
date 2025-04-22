@@ -1,6 +1,9 @@
 import { useAppTranslation } from "@features/i18n";
 import { Title } from "@shared/ui";
-import { ContentPage, type ContentPageProps } from "@widgets/content-page";
+import {
+	ContentPage,
+	type ContentPageProps,
+} from "@widgets/content/content-page";
 import * as C from "./SupportPage.components";
 import { contactLinks, donateLinks } from "./links";
 

@@ -19,7 +19,7 @@ export const Evaluation = ({ ...props }: EvaluationProps) => {
 
 	const expressionData = data;
 
-	const historySize = historyShown ? Number.POSITIVE_INFINITY : 10;
+	const historySize = historyShown ? Number.POSITIVE_INFINITY : 5;
 
 	return (
 		<C.Container {...props}>

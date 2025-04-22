@@ -2,7 +2,7 @@ import type { ImageProps } from "expo-image";
 import { pick } from "ramda";
 import type { PropsWithChildren } from "react";
 import { StyleSheet, type ViewProps } from "react-native";
-import { useBoolean } from "../../../lib";
+import { useBoolean, useFadeAnimation } from "../../../lib";
 import * as C from "./ImageBackground.components";
 
 export type ImageBackgroundProps = Omit<ImageProps, "style"> &
@@ -22,8 +22,11 @@ export const ImageBackground = ({
 	const [loading, setLoading] = useBoolean(true);
 	const defaultBackgroundStyle = pickSize(StyleSheet.flatten(style));
 	const backgroundStyle = pickSize(props);
+	const fadeStyle = useFadeAnimation({
+		show: !loading,
+	});
 	return (
-		<C.Container style={style}>
+		<C.Container style={[style, fadeStyle]}>
 			<C.Background
 				{...props}
 				style={[defaultBackgroundStyle, backgroundStyle, imageStyle]}

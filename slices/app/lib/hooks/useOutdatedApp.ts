@@ -20,6 +20,7 @@ export const useOutdatedApp = () => {
 	const [show] = useModal({
 		id: "update-app",
 		data: {
+			contentType: "text",
 			type: "faction",
 			faction: "survivor",
 			title: t`app.outdated.title`,

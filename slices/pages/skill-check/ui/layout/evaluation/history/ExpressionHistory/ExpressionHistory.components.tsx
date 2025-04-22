@@ -4,6 +4,7 @@ import styled from "styled-components/native";
 import { ExpressionHistoryItem } from "../item/ExpressionHistoryItem";
 
 export const Container: typeof View = styled(View)`
+	gap: 5px;
 `;
 
 export const List: typeof ScrollView = styled(ScrollView).attrs({

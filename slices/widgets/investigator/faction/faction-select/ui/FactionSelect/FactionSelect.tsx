@@ -24,6 +24,7 @@ export const FactionSelect = ({
 	const [showSpilerAlert] = useModal({
 		id: "faction-select-spoiler-alert",
 		data: {
+			contentType: "text",
 			type: "faction",
 			faction: "neutral",
 			title: t`Spoiler Alert`,

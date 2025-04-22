@@ -1,12 +1,11 @@
 import type { AppThunk } from "@shared/model";
 import { propEq, reject } from "ramda";
 
-import type { SkillCheckHistoryItem } from "@shared/model";
 import { selectCurrentBoard, setCurrentBoardProp } from "../../board";
 import { selectSkillCheckType } from "../skillCheck";
 
 export const clearSkillCheckHistoryItem =
-	(item: SkillCheckHistoryItem): AppThunk =>
+	(id: string): AppThunk =>
 	(dispatch, getState) => {
 		const state = getState();
 		const board = selectCurrentBoard(state);
@@ -16,7 +15,7 @@ export const clearSkillCheckHistoryItem =
 			return;
 		}
 
-		const checkHistory = reject(propEq(item.id, "id"), board.checkHistory);
+		const checkHistory = reject(propEq(id, "id"), board.checkHistory);
 
 		dispatch(setCurrentBoardProp("checkHistory", checkHistory));
 	};

@@ -1,5 +1,5 @@
 import { useAppTranslation } from "@features/i18n";
-import { ContentPage } from "@widgets/content-page";
+import { ContentPage } from "@widgets/content/content-page";
 
 // export type NewsPageProps = {}
 

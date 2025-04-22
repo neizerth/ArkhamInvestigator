@@ -2,7 +2,7 @@ import { selectInvestigatorByCode, useAppTranslation } from "@features/i18n";
 import { InvesigatorCode } from "@shared/config";
 import { useAppSelector } from "@shared/lib";
 import { Bold, List, Paragraph, Text, Title } from "@shared/ui";
-import { ContentPage } from "@widgets/content-page";
+import { ContentPage } from "@widgets/content/content-page";
 import * as C from "./HelpPage.components";
 
 export const HelpPage = () => {

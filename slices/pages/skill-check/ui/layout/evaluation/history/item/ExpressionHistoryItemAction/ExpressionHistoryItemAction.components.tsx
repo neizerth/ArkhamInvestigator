@@ -6,7 +6,7 @@ import styled from "styled-components/native";
 export const Container: typeof TouchableOpacity = styled(TouchableOpacity)`
   align-items: center;
   justify-content: center;
-  padding: ${size.gap.small}px ${size.gap.default}px;
+  padding: 0px ${size.gap.default}px;
   min-width: 48px;
 `;
 
