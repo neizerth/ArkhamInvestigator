@@ -24,7 +24,7 @@ export const sendCommandSignal: SkillCheckReducer<SkillCheckCommandType> = (
 				...state,
 				data: [createStatItem(type)],
 			};
-		case "clear-last":
+		case "clear-last": {
 			if (lastItem?.type === "number" && lastItem.value > 9) {
 				const value = Math.floor(lastItem.value / 10);
 
@@ -33,9 +33,12 @@ export const sendCommandSignal: SkillCheckReducer<SkillCheckCommandType> = (
 					data: [...state.data.slice(0, -1), createNumberItem(value)],
 				};
 			}
+			// console.log("what?");
+			const nextData = state.data.slice(0, -1);
 			return {
 				...state,
-				data: state.data.slice(0, -1),
+				data: nextData.length === 0 ? [createStatItem(type)] : nextData,
 			};
+		}
 	}
 };

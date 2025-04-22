@@ -3,11 +3,12 @@ import { withLocale } from "@features/i18n";
 import { color, font, size } from "@shared/config";
 import { type DefinedIconProps, Icon, Row } from "@shared/ui";
 import type { FC } from "react";
-import { View } from "react-native";
 import styled from "styled-components/native";
 import { skillCheckColor } from "../../../../../../config";
 import { ExpressionDisplay } from "../../../ExpressionDisplay";
 import { ExpressionHistoryItemRightActionsMemo as ItemRightActions } from "../ExpressionHistoryItemRightActions";
+
+import { TouchableOpacity } from "@features/haptic";
 
 export const Container: typeof Row = styled(Row)`
   justify-content: flex-end;
@@ -16,7 +17,7 @@ export const Container: typeof Row = styled(Row)`
 `;
 
 export const Display: typeof ExpressionDisplay = styled(ExpressionDisplay)`
-  padding-top: 3px;
+  transform: translateY(3px);
 `;
 
 export const RightActions: typeof ItemRightActions = styled(ItemRightActions)`
@@ -32,15 +33,14 @@ export const Pin: FC<DefinedIconProps> = styled(Icon).attrs({
   font-size: 12px;
 `;
 
-export const Title: typeof View = styled(View)`
+export const Title: typeof TouchableOpacity = styled(TouchableOpacity)`
+  flex-direction: row;
   position: absolute;
-  align-items: center;
-  left: 2px;
-  top: 10px;
   z-index: 1;
-  padding: 2px;
-  background-color: ${color.dark20};
-  border-radius: 2px;
+  top: 2px;
+  bottom: 0;
+  left: 0;
+  align-items: center;
 `;
 
 export const TitleText = withLocale({
@@ -49,16 +49,13 @@ export const TitleText = withLocale({
 			fontFamily: Copasetic.regular,
 			color: color.light10,
 			fontSize: font.size.small,
-			maxWidth: 80,
+			backgroundColor: color.dark30,
+			paddingVertical: 2,
+			paddingHorizontal: 5,
+			borderRadius: 2,
 		},
 		ru: {
 			fontFamily: Enthalpy298.regular,
 		},
 	},
 });
-
-export const Item: typeof Row = styled(Row)`
-  justify-content: space-between;
-  align-items: center;
-  position: relative;
-`;

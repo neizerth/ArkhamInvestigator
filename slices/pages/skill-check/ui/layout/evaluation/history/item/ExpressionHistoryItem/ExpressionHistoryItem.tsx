@@ -1,12 +1,15 @@
 import { GestureHandlerRootView } from "react-native-gesture-handler";
-import ReanimatedSwipeable from "react-native-gesture-handler/ReanimatedSwipeable";
+import ReanimatedSwipeable, {
+	type SwipeableMethods,
+} from "react-native-gesture-handler/ReanimatedSwipeable";
 import type { ExpressionDisplayProps } from "../../../ExpressionDisplay";
 
 import {
+	delay,
 	selectSkillCheckHistoryItem as selectItem,
 	useAppSelector,
 } from "@shared/lib";
-import { useCallback } from "react";
+import { memo, useCallback, useRef } from "react";
 import { type SharedValue, useAnimatedStyle } from "react-native-reanimated";
 import * as C from "./ExpressionHistoryItem.components";
 
@@ -21,6 +24,13 @@ export const ExpressionHistoryItem = ({
 }: ExpressionHistoryItemProps) => {
 	const { pinned, title } = useAppSelector(selectItem(itemId));
 
+	const ref = useRef<SwipeableMethods>(null);
+
+	const close = useCallback(async () => {
+		await delay(200);
+		ref.current?.close();
+	}, []);
+
 	const renderRightActions = useCallback(
 		(_: SharedValue<number>, drag: SharedValue<number>) => {
 			const style = useAnimatedStyle(() => {
@@ -28,9 +38,11 @@ export const ExpressionHistoryItem = ({
 					transform: [{ translateX: drag.value + 165 }],
 				};
 			});
-			return <C.RightActions itemId={itemId} style={style} />;
+			return (
+				<C.RightActions itemId={itemId} style={style} onNameChange={close} />
+			);
 		},
-		[itemId],
+		[itemId, close],
 	);
 
 	return (
@@ -42,10 +54,12 @@ export const ExpressionHistoryItem = ({
 				</C.Title>
 			)}
 			<GestureHandlerRootView>
-				<ReanimatedSwipeable renderRightActions={renderRightActions}>
+				<ReanimatedSwipeable ref={ref} renderRightActions={renderRightActions}>
 					<C.Display {...props} />
 				</ReanimatedSwipeable>
 			</GestureHandlerRootView>
 		</C.Container>
 	);
 };
+
+export const ExpressionHistoryItemMemo = memo(ExpressionHistoryItem);

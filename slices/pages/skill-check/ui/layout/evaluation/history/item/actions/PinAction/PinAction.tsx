@@ -11,11 +11,13 @@ import * as C from "./PinAction.components";
 
 export type PinActionProps = Omit<ActionProps, "icon"> & {
 	itemId: string;
+	onPin?: () => void;
 };
 
 export const PinAction = ({
 	itemId,
 	onPress: onPressProp,
+	onPin,
 	...props
 }: PinActionProps) => {
 	const pinned = useAppSelector(selectIsPinned(itemId));
@@ -25,8 +27,9 @@ export const PinAction = ({
 		(event: GestureResponderEvent) => {
 			dispatch(togglePin(itemId));
 			onPressProp?.(event);
+			onPin?.();
 		},
-		[dispatch, onPressProp, itemId],
+		[dispatch, onPressProp, itemId, onPin],
 	);
 
 	return <C.Container {...props} pinned={pinned} onPress={onPress} />;

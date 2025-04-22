@@ -14,11 +14,13 @@ import type { ExpressionHistoryItemActionProps as ActionProps } from "../../Expr
 
 export type SetNameActionProps = Omit<ActionProps, "icon"> & {
 	itemId: string;
+	onChange?: () => void;
 };
 
 export const SetNameAction = ({
 	itemId,
 	onPress: onPressProp,
+	onChange,
 	...props
 }: SetNameActionProps) => {
 	const dispatch = useAppDispatch();
@@ -27,9 +29,10 @@ export const SetNameAction = ({
 
 	const setItemTitle = useCallback(
 		({ textValue }: ModalOkEvent) => {
-			dispatch(setTitle(itemId, textValue));
+			dispatch(setTitle(itemId, textValue?.trim()));
+			onChange?.();
 		},
-		[dispatch, itemId],
+		[dispatch, itemId, onChange],
 	);
 
 	const [showSetNameModal] = useModal({

@@ -14,7 +14,7 @@ export const Container: typeof View = styled(View)`
 
 export const Content: typeof LayoutContainer = styled(LayoutContainer)`
   flex: 1;
-  padding: 0 ${size.gap.large}px;
+  padding: 0px ${size.gap.default}px;
 `;
 
 export const Current: typeof View = styled(View)`
