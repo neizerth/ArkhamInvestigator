@@ -3,11 +3,11 @@ import type { ArkhamIcon } from "@shared/model";
 import { createSliceState } from "redux-toolkit-helpers";
 
 export type IIconsState = {
-	icons: ArkhamIcon[];
+	icons: Record<string, ArkhamIcon>;
 };
 
 const initialState: IIconsState = {
-	icons: [],
+	icons: {},
 };
 
 export const icons = createSlice({

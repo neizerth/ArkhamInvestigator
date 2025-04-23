@@ -10,5 +10,6 @@ export type SkillCheckExpressionDisplayProps = TouchableOpacityProps & {
 	textStyle?: TextProps["style"];
 	equalsStyle?: TextProps["style"];
 	equalsContainerStyle?: ViewProps["style"];
+	signStyle?: TextProps["style"];
 	showDiff?: boolean;
 };

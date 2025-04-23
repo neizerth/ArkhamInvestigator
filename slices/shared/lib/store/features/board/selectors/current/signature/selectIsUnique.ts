@@ -3,5 +3,5 @@ import { selectCurrentBoardProp } from "../props";
 
 export const selectIsUnique = createSelector(
 	[selectCurrentBoardProp("investigator")],
-	({ multiselect }) => !multiselect,
+	(board) => !board?.multiselect,
 );

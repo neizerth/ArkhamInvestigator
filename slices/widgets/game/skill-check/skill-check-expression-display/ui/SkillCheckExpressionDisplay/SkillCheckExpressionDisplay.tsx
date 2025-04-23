@@ -24,6 +24,7 @@ export const SkillCheckExpressionDisplay = ({
 	statStyle,
 	equalsStyle,
 	equalsContainerStyle,
+	signStyle: signStyleProp,
 	showDiff = true,
 	...props
 }: SkillCheckExpressionDisplayProps) => {
@@ -38,7 +39,8 @@ export const SkillCheckExpressionDisplay = ({
 		value: boardValue,
 	});
 
-	const signStyle = omit(["color"], StyleSheet.flatten(textStyle));
+	const charStyle = omit(["color"], StyleSheet.flatten(textStyle));
+	const signStyle = [charStyle, signStyleProp];
 
 	const T = useCallback(
 		(props: TextViewProps) => {
@@ -78,7 +80,7 @@ export const SkillCheckExpressionDisplay = ({
 							</C.Value>
 							{showDiff && (
 								<>
-									<C.OldValue style={signStyle}>
+									<C.OldValue style={charStyle}>
 										{formatValue(value)}
 									</C.OldValue>
 									{currentValue > value ? (

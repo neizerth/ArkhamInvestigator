@@ -9,7 +9,7 @@ export const useContainerAnimation = (enabled: boolean) => {
 		delayIn: 200,
 		duration: 200,
 		maxValue: 0,
-		minValue: -width + 100,
+		minValue: -width + 80,
 		styleResolver(left) {
 			"worklet";
 			return {

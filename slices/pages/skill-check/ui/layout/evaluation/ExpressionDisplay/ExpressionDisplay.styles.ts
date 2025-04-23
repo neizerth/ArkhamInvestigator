@@ -27,6 +27,7 @@ export const textStyle = {
 type ReturnStyle = {
 	statStyle: TextStyle;
 	textStyle: TextStyle;
+	signStyle: TextStyle;
 	expressionStyle: ViewStyle;
 };
 
@@ -46,6 +47,9 @@ export const getExpressionDisplayStyles = (
 		expressionStyle: {
 			justifyContent: "flex-end",
 			gap: 3,
+		},
+		signStyle: {
+			margin: -4,
 		},
 	};
 };
