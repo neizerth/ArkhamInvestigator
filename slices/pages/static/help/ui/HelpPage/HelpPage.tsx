@@ -86,8 +86,31 @@ export const HelpPage = () => {
 				{" - "}
 				{t`board.help.calculator.clearHistory`}
 			</Text>
-			<Paragraph>{t`board.help.calculator.minValue`}</Paragraph>
+			<Paragraph>{t`board.help.calculator.result`}</Paragraph>
 			<Paragraph>{t`board.help.calculator.history`}</Paragraph>
+
+			<Paragraph>{t`board.help.calculator.history.actions`}</Paragraph>
+
+			<Text>
+				<C.Icon icon="trash" />
+				{" - "}
+				{t`board.help.calculator.history.remove`}
+			</Text>
+
+			<Text>
+				<C.Icon icon="tag" />
+				{" - "}
+				{t`board.help.calculator.history.set-name`}
+			</Text>
+
+			<Text>
+				<C.Icon icon="pushpin" />
+				{" - "}
+				{t`board.help.calculator.history.pin`}
+			</Text>
+
+			<Paragraph>{t`board.help.pins.long-press`}</Paragraph>
+			<Paragraph>{t`board.help.pins.toggle`}</Paragraph>
 
 			<Title>{t`Investigator Special Actions`}</Title>
 			<Text>

@@ -1,5 +1,13 @@
 {
-	"board.help.calculator.minValue": "The minimum calculation value can't be lower than 0",
+	"board.help.pins.long-press": "Long press on a calculation on the board screen to unpin it",
+	"board.help.pins.toggle": "If you have pinned calculations, you can press on its block on the board page to show/hide it",
+
+	"board.help.calculator.history.actions": "Swipe left on calculation to see an additional menu",
+	"board.help.calculator.history.remove": "Remove a calculation",
+	"board.help.calculator.history.set-name": "Name a calculation",
+	"board.help.calculator.history.pin": "Pin a calculation on the top of the list and on the board screen",
+
+	"board.help.calculator.result": "The minimum calculation value can't be lower than 0",
 	"board.help.calculator.history": "Tap on the Equals button to add value to the calculation history. This value will be automatically updated if you update according params on your board.",
 	"app.outdated.title": "Version is outdated",
 	"app.outdated.text": "Update is required",
@@ -22,7 +30,7 @@
 
 	"board.help.press.reset": "Resets investigator stats to their default values",
 
-	"board.help.hold.freeArea": "Tap and hold anywhere on the screen to see the taken damage and horror",
+	"board.help.hold.freeArea": "Tap and hold anywhere on the screen to see the taken damage and horror. You can also view the difference between base and actiual skill values",
 
 	"board.help.longPress.main": "Shows/hides modifier counter. You can change base value (e.g. permanent +1 health, -2 sanity)",
 	"board.help.longPress.secondary": "Resets value to 0",
