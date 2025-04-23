@@ -25,10 +25,12 @@ export const Evaluation = ({ ...props }: EvaluationProps) => {
 		<C.Container {...props}>
 			<C.Content>
 				{isLargeLayout && <C.History size={historySize} />}
-				<C.Current>
-					<C.Expression data={expressionData} type="primary" />
-					<ExpressionValue />
-				</C.Current>
+				{!historyShown && (
+					<C.Current>
+						<C.Expression data={expressionData} type="primary" />
+						<ExpressionValue />
+					</C.Current>
+				)}
 			</C.Content>
 		</C.Container>
 	);
