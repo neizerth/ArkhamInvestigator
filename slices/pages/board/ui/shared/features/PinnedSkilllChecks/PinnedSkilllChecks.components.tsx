@@ -72,11 +72,10 @@ const titleTextStyle = {
 	default: {
 		color: color.text,
 		fontFamily: ArnoPro.bold,
-		fontSize: font.size.small,
+		fontSize: font.size.default,
 	},
 	ko: {
 		fontFamily: SanCn.bold,
-		fontSize: 14,
 	},
 	zh: zhTitleTextConfig,
 	"zh-cn": zhTitleTextConfig,
@@ -95,11 +94,10 @@ const textStyle = {
 	default: {
 		color: color.text,
 		fontFamily: ArnoPro.regular,
-		fontSize: font.size.small,
+		fontSize: font.size.default,
 	},
 	ko: {
 		fontFamily: Yoon.D330.regular,
-		fontSize: 14,
 	},
 	zh: zhTextConfig,
 	"zh-cn": zhTextConfig,

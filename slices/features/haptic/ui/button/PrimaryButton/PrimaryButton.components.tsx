@@ -35,7 +35,7 @@ type BackgroundProps = ImageBackgroundProps & PropsWithStyleType;
 export const Background: FC<BackgroundProps> = styled(ImageBackground).attrs(
 	({ styleType = "default" }: BackgroundProps) => ({
 		source: buttonImages[styleType],
-		resizeMode: "contain",
+		contentFit: "contain",
 		resizeMethod: "resize",
 	}),
 )`
