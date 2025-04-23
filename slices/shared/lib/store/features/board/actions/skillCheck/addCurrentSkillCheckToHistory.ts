@@ -2,7 +2,10 @@ import type { ActionCreator } from "@reduxjs/toolkit";
 import type { AppThunk } from "@shared/model";
 import type { SkillCheckHistoryItem } from "@shared/model";
 import { v4 } from "uuid";
-import { getSkillCheckValue } from "../../../../../features";
+import {
+	getSkillCheckValue,
+	sanitizeSkillCheckExpression,
+} from "../../../../../features";
 import {
 	selectSkillCheckData,
 	selectSkillCheckType,
@@ -23,8 +26,10 @@ export const addCurrentSkillCheckToHistory: ActionCreator<AppThunk> =
 			return;
 		}
 
+		const safeExpression = sanitizeSkillCheckExpression(expression);
+
 		const value = getSkillCheckValue({
-			data: expression,
+			data: safeExpression,
 			value: board.value,
 		});
 

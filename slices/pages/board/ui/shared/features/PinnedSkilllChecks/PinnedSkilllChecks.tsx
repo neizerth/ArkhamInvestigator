@@ -1,3 +1,4 @@
+import { selectCurrentLanguage } from "@features/i18n";
 import {
 	selectCurrentBoardProp,
 	selectPinnedSkillChecks,
@@ -5,24 +6,23 @@ import {
 	toggleSkillCheckHistoryItemPin as togglePin,
 	useAppDispatch,
 	useAppSelector,
-	useBooleanAnimation,
-	useFadeAnimation,
 } from "@shared/lib";
 import { memo, useCallback } from "react";
-import { type ViewProps, useWindowDimensions } from "react-native";
+import type { ViewProps } from "react-native";
 import * as C from "./PinnedSkilllChecks.components";
+import { getExpressionDisplayStyle } from "./PinnedSkilllChecks.styles";
+import { useContainerAnimation, useContentAnimation } from "./animation";
 
 export type PinnedSkilllChecksProps = ViewProps;
 
 export const PinnedSkilllChecks = (props: PinnedSkilllChecksProps) => {
 	const dispatch = useAppDispatch();
+	const language = useAppSelector(selectCurrentLanguage);
 	const items = useAppSelector(selectPinnedSkillChecks);
 	const defaultShow = useAppSelector(
 		selectCurrentBoardProp("showPinnedSkillChecks"),
 	);
 	const show = defaultShow ?? true;
-	const { width } = useWindowDimensions();
-
 	const removeItem = useCallback(
 		(id: string) => () => {
 			dispatch(togglePin(id));
@@ -34,25 +34,10 @@ export const PinnedSkilllChecks = (props: PinnedSkilllChecksProps) => {
 		dispatch(setCurrentBoardProp("showPinnedSkillChecks", !show));
 	}, [dispatch, show]);
 
-	const toggleAnimation = useBooleanAnimation({
-		enabled: show,
-		delayIn: 200,
-		duration: 200,
-		maxValue: 0,
-		minValue: -width + 100,
-		styleResolver(left) {
-			"worklet";
-			return {
-				left,
-			};
-		},
-	});
+	const toggleAnimation = useContainerAnimation(show);
+	const fadeContentAnimation = useContentAnimation(show);
 
-	const fadeContentAnimation = useFadeAnimation({
-		show,
-		delayOut: 200,
-		duration: 200,
-	});
+	const displayStyle = getExpressionDisplayStyle(language);
 
 	if (items.length === 0) {
 		return null;
@@ -69,6 +54,7 @@ export const PinnedSkilllChecks = (props: PinnedSkilllChecksProps) => {
 									<C.ItemContent>
 										{item.title && <C.Title>{item.title}:</C.Title>}
 										<C.Expression
+											{...displayStyle}
 											data={item.expression}
 											value={item.value}
 											showDiff={false}

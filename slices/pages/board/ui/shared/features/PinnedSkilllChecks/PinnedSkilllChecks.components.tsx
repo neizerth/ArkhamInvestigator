@@ -1,4 +1,4 @@
-import { ArnoPro } from "@assets/fonts";
+import { ArnoPro, STXinwei, SanCn, Yoon } from "@assets/fonts";
 import { textureImages } from "@assets/images/game/effects/textures";
 import { TouchableOpacity } from "@features/haptic";
 import { withLocale } from "@features/i18n";
@@ -64,43 +64,54 @@ export const Separator: typeof View = styled(View)`
 	height: 20px;
 `;
 
+const zhTitleTextConfig = {
+	fontFamily: STXinwei.regular,
+};
+
+const titleTextStyle = {
+	default: {
+		color: color.text,
+		fontFamily: ArnoPro.bold,
+		fontSize: font.size.small,
+	},
+	ko: {
+		fontFamily: SanCn.bold,
+		fontSize: 14,
+	},
+	zh: zhTitleTextConfig,
+	"zh-cn": zhTitleTextConfig,
+};
+
 export const Title = withLocale({
 	Component: TextView,
-	style: {
-		default: {
-			color: color.text,
-			fontFamily: ArnoPro.bold,
-			fontSize: font.size.small,
-		},
-	},
+	style: titleTextStyle,
 });
+
+const zhTextConfig = {
+	fontFamily: STXinwei.regular,
+};
+
+const textStyle = {
+	default: {
+		color: color.text,
+		fontFamily: ArnoPro.regular,
+		fontSize: font.size.small,
+	},
+	ko: {
+		fontFamily: Yoon.D330.regular,
+		fontSize: 14,
+	},
+	zh: zhTextConfig,
+	"zh-cn": zhTextConfig,
+};
 
 export const Text = withLocale({
 	Component: TextView,
-	style: {
-		default: {
-			color: color.text,
-			fontFamily: ArnoPro.regular,
-			fontSize: font.size.small,
-		},
-	},
+	style: textStyle,
 });
 
 export const Expression: typeof SkillCheckExpressionDisplay = styled(
 	SkillCheckExpressionDisplay,
-).attrs({
-	expressionStyle: {
-		gap: 2,
-	},
-	statStyle: {
-		fontSize: font.size.small,
-	},
-	textStyle: {
-		color: color.text,
-		fontFamily: ArnoPro.regular,
-		fontSize: 20,
-		lineHeight: 20,
-	},
-})`
+)`
   
 `;

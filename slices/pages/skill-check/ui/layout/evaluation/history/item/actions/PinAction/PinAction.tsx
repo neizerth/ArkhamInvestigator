@@ -7,7 +7,7 @@ import {
 	useAppDispatch,
 	useAppSelector,
 } from "@shared/lib";
-import { useCallback } from "react";
+import { memo, useCallback } from "react";
 import type { GestureResponderEvent } from "react-native";
 import type { ExpressionHistoryItemActionProps as ActionProps } from "../../ExpressionHistoryItemAction";
 import * as C from "./PinAction.components";
@@ -66,3 +66,5 @@ export const PinAction = ({
 
 	return <C.Container {...props} pinned={pinned} onPress={onPress} />;
 };
+
+export const PinActionMemo = memo(PinAction);

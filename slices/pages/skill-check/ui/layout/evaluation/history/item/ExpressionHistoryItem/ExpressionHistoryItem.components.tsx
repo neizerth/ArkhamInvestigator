@@ -8,6 +8,8 @@ import { skillCheckColor } from "../../../../../../config";
 import { ExpressionDisplay } from "../../../ExpressionDisplay";
 import { ExpressionHistoryItemRightActionsMemo as ItemRightActions } from "../ExpressionHistoryItemRightActions";
 
+import { ZhenShuai } from "@assets/fonts";
+import { LineSeedKR } from "@assets/fonts/ko/LineSeedKR";
 import { TouchableOpacity } from "@features/haptic";
 
 export const Container: typeof Row = styled(Row)`
@@ -43,10 +45,16 @@ export const Title: typeof TouchableOpacity = styled(TouchableOpacity)`
   align-items: center;
 `;
 
+const zhTextConfig = {
+	fontFamily: ZhenShuai.regular,
+	letterSpacing: 0.5,
+};
+
 export const TitleText = withLocale({
 	style: {
 		default: {
 			fontFamily: Copasetic.regular,
+			lineHeight: 20,
 			color: color.light10,
 			fontSize: font.size.small,
 			backgroundColor: color.dark30,
@@ -57,5 +65,11 @@ export const TitleText = withLocale({
 		ru: {
 			fontFamily: Enthalpy298.regular,
 		},
+		ko: {
+			fontFamily: LineSeedKR.regular,
+			letterSpacing: -0.5,
+		},
+		zh: zhTextConfig,
+		"zh-cn": zhTextConfig,
 	},
 });

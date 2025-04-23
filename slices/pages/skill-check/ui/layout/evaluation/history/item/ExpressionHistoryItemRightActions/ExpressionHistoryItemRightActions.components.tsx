@@ -3,7 +3,11 @@ import { View } from "react-native";
 import Animated from "react-native-reanimated";
 import styled from "styled-components/native";
 import { ExpressionHistoryItemAction } from "../ExpressionHistoryItemAction";
-import { PinAction, RemoveAction, SetNameAction } from "../actions";
+import {
+	PinActionMemo as PinAction,
+	RemoveActionMemo as RemoveAction,
+	SetNameActionMemo as SetNameAction,
+} from "../actions";
 
 export const Container: typeof Animated.View = styled(Animated.View)`
   flex-direction: row;

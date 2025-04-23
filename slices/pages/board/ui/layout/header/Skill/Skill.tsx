@@ -8,6 +8,7 @@ import {
 	startSkillCheck,
 	useAppDispatch,
 	useAppSelector,
+	usePageLoader,
 } from "@shared/lib";
 import type { InvestigatorSkillType } from "@shared/model";
 import type {
@@ -47,9 +48,11 @@ export const Skill = ({ width, height, type, ...props }: SkillProps) => {
 		setTouching(false);
 	}, []);
 
-	const openModal = useCallback(() => {
+	const onOpen = useCallback(() => {
 		dispatch(startSkillCheck(type));
 	}, [dispatch, type]);
+
+	const [openModal] = usePageLoader(onOpen);
 
 	const onChange = useCallback(
 		({ value }: PickerChangeEvent) => {

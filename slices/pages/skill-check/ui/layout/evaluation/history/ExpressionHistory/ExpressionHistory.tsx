@@ -1,6 +1,7 @@
 import {
 	clearSkillCheckHistoryItem,
 	getSkillCheckValue,
+	sanitizeSkillCheckExpression,
 	selectCurrentBoardProp,
 	selectSkillCheckHistory,
 	setSkillCheckData,
@@ -31,17 +32,24 @@ export const ExpressionHistory = ({
 	const value = useAppSelector(selectCurrentBoardProp("value"));
 
 	const data = useMemo(() => {
-		return history.slice(0, size).map((item) => ({
+		return history.map((item) => ({
 			...item,
 			currentValue: getSkillCheckValue({
-				data: item.expression,
+				data: sanitizeSkillCheckExpression(item.expression),
 				value,
 			}),
 		}));
-	}, [history, size, value]);
+	}, [history, value]);
 
-	const regular = data.filter(({ pinned }) => !pinned);
-	const pinned = data.filter(({ pinned }) => pinned);
+	const pinned = useMemo(() => {
+		return data.filter(({ pinned }) => pinned).slice(0, size);
+	}, [size, data]);
+
+	const regularSize = useMemo(() => {
+		return Math.max(0, size - pinned.length);
+	}, [size, pinned.length]);
+
+	const regular = data.filter(({ pinned }) => !pinned).slice(-regularSize);
 
 	const ref = useRef<ScrollView>(null);
 
@@ -65,7 +73,6 @@ export const ExpressionHistory = ({
 		},
 		[dispatch],
 	);
-
 	const renderItem = useCallback(
 		(item: ListItem) => {
 			return (

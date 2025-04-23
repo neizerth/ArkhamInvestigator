@@ -1,5 +1,6 @@
 import { size } from "@shared/config";
-import { ScrollView, View } from "react-native";
+import { View } from "react-native";
+import { ScrollView } from "react-native-gesture-handler";
 import styled from "styled-components/native";
 import { ExpressionHistoryItemMemo as HistoryItem } from "../item/ExpressionHistoryItem";
 

@@ -8,7 +8,7 @@ import {
 	useAppDispatch,
 	useAppSelector,
 } from "@shared/lib";
-import { useCallback } from "react";
+import { memo, useCallback } from "react";
 import type { GestureResponderEvent } from "react-native";
 import type { ExpressionHistoryItemActionProps as ActionProps } from "../../ExpressionHistoryItemAction";
 
@@ -59,3 +59,5 @@ export const SetNameAction = ({
 
 	return <C.Container {...props} onPress={onPress} />;
 };
+
+export const SetNameActionMemo = memo(SetNameAction);
