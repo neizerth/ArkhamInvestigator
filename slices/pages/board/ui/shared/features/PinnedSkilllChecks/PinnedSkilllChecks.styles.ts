@@ -13,7 +13,7 @@ export const getExpressionDisplayStyle = (
 	const getTextStyle = getKeyConfig({
 		default: {
 			color: color.text,
-			fontSize: 20,
+			fontSize: font.size.default,
 			lineHeight: 20,
 			fontFamily: ArnoPro.regular,
 		},

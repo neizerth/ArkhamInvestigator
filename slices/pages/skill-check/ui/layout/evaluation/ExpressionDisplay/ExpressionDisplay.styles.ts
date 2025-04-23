@@ -43,13 +43,16 @@ export const getExpressionDisplayStyles = (
 		textStyle: {
 			...textStyle[type],
 			fontFamily: Copasetic.regular,
+			lineHeight: textStyle[type].fontSize * 1.1,
 		},
 		expressionStyle: {
 			justifyContent: "flex-end",
+			alignItems: "center",
 			gap: 3,
 		},
 		signStyle: {
-			margin: -4,
+			marginLeft: -4,
+			marginRight: -4,
 		},
 	};
 };

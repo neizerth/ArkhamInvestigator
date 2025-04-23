@@ -19,17 +19,17 @@ export const addCurrentSkillCheckToHistory: ActionCreator<AppThunk> =
 	() => (dispatch, getState) => {
 		const state = getState();
 		const type = selectSkillCheckType(state);
-		const expression = selectSkillCheckData(state);
+		const unsafeExpression = selectSkillCheckData(state);
 		const board = selectCurrentBoard(state);
 
 		if (!type || !board) {
 			return;
 		}
 
-		const safeExpression = sanitizeSkillCheckExpression(expression);
+		const expression = sanitizeSkillCheckExpression(unsafeExpression);
 
 		const value = getSkillCheckValue({
-			data: safeExpression,
+			data: expression,
 			value: board.value,
 		});
 
