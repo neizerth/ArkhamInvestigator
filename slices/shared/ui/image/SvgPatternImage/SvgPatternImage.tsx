@@ -1,4 +1,5 @@
 import Svg, { Defs, Pattern, Rect } from "react-native-svg";
+import { v4 } from "uuid";
 import type { SvgPatternImageProps } from "./SvgPatternImage.types";
 import { getPatternProps } from "./getPatternProps";
 
@@ -8,7 +9,7 @@ const defaultOffset = {
 };
 export const SvgPatternImage = (props: SvgPatternImageProps) => {
 	const {
-		patternId,
+		patternId = v4(),
 		patternWidth,
 		patternHeight,
 		children,

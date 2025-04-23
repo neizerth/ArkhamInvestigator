@@ -1,5 +1,8 @@
+import { useAppTranslation } from "@features/i18n";
+import { type ModalOkEvent, useModal } from "@features/modal";
 import {
-	selectIsSkillCheckHistoryItemPinned as selectIsPinned,
+	selectSkillCheckHistoryItem,
+	setSkillCheckHistoryItemTitle as setTitle,
 	toggleSkillCheckHistoryItemPin as togglePin,
 	useAppDispatch,
 	useAppSelector,
@@ -20,16 +23,45 @@ export const PinAction = ({
 	onPin,
 	...props
 }: PinActionProps) => {
-	const pinned = useAppSelector(selectIsPinned(itemId));
 	const dispatch = useAppDispatch();
+	const { t } = useAppTranslation();
+	const { title, pinned } = useAppSelector(selectSkillCheckHistoryItem(itemId));
+
+	const setItemTitle = useCallback(
+		({ textValue }: ModalOkEvent) => {
+			dispatch(setTitle(itemId, textValue?.trim()));
+
+			dispatch(togglePin(itemId));
+			onPin?.();
+		},
+		[dispatch, itemId, onPin],
+	);
+
+	const [showSetNameModal] = useModal({
+		id: "rename-history-item",
+		data: {
+			contentType: "input",
+			type: "faction",
+			faction: "neutral",
+			title: t`New Name`,
+			okText: t`Okay`,
+			cancelText: t`Cancel`,
+			defaultValue: title,
+		},
+		onOk: setItemTitle,
+	});
 
 	const onPress = useCallback(
 		(event: GestureResponderEvent) => {
-			dispatch(togglePin(itemId));
+			if (pinned || title) {
+				dispatch(togglePin(itemId));
+			} else {
+				showSetNameModal();
+			}
+
 			onPressProp?.(event);
-			onPin?.();
 		},
-		[dispatch, onPressProp, itemId, onPin],
+		[dispatch, onPressProp, showSetNameModal, pinned, title, itemId],
 	);
 
 	return <C.Container {...props} pinned={pinned} onPress={onPress} />;

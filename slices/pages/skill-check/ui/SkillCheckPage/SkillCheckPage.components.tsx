@@ -2,7 +2,7 @@ import { color } from "@shared/config";
 import { ScreenView } from "@shared/ui";
 import styled from "styled-components/native";
 import { Keyboard as BaseKeyboard, SkillCheckHeader } from "../layout";
-import { Evaluation } from "../layout/evaluation";
+import { EvaluationMemo as Evaluation } from "../layout/evaluation";
 
 export const Container: typeof ScreenView = styled(ScreenView)`
 	background-color: ${color.dark40};

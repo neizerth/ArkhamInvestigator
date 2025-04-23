@@ -35,6 +35,7 @@ export type InvestigatorBoard = {
 	checkHistory: SkillCheckHistoryItem[];
 	currentRole?: Faction;
 	usedAbilities?: UsedAbility[];
+	showPinnedSkillChecks?: boolean;
 };
 
 export type UsedAbility = {

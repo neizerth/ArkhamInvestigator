@@ -1,14 +1,20 @@
-import { useBooleanAnimation } from "./useBooleanAnimation";
+import type { DefaultStyle } from "../../../model/styles";
+import {
+	type UseBooleanAnimationOptions,
+	useBooleanAnimation,
+} from "./useBooleanAnimation";
 
-type Options = {
+type Options = Omit<
+	UseBooleanAnimationOptions<DefaultStyle>,
+	"styleResolver" | "enabled"
+> & {
 	show: boolean;
-	duration?: number;
 };
 
-export const useFadeAnimation = ({ show, duration }: Options) => {
+export const useFadeAnimation = ({ show, ...options }: Options) => {
 	return useBooleanAnimation({
+		...options,
 		enabled: show,
-		duration,
 		styleResolver(opacity) {
 			"worklet";
 			return {

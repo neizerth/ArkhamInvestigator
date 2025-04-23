@@ -2,6 +2,7 @@ import { size } from "@shared/config";
 import { View } from "react-native";
 import styled from "styled-components/native";
 import { LayoutContainer } from "../../LayoutContainer";
+import { ExpressionDisplay } from "../ExpressionDisplay";
 import { ExpressionHistoryMemo as ExpressionHistory } from "../history/ExpressionHistory";
 
 export const Container: typeof View = styled(View)`
@@ -18,7 +19,7 @@ export const Content: typeof LayoutContainer = styled(LayoutContainer)`
 `;
 
 export const Current: typeof View = styled(View)`
-  
+  gap: ${size.gap.default}px;
 `;
 
 export const History: typeof ExpressionHistory = styled(
@@ -28,4 +29,14 @@ export const History: typeof ExpressionHistory = styled(
 		flex: 1,
 	},
 })`
+`;
+
+export const Expression: typeof ExpressionDisplay = styled(
+	ExpressionDisplay,
+).attrs({
+	expressionStyle: {
+		justifyContent: "flex-end",
+	},
+})`
+  justify-content: flex-end;
 `;

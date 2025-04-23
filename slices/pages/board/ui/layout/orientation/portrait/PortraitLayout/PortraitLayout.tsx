@@ -19,6 +19,7 @@ export const PortraitLayout = ({ top, ...props }: PortraitLayoutProps) => {
 		<PortraitLayoutContext.Provider value={contextValue}>
 			<C.Container {...props}>
 				<C.Header />
+				<C.SkillChecks />
 				<C.Main>
 					<C.LeftSidebar />
 					<C.Area />

@@ -1,8 +1,8 @@
-import { type TextProps, View, type ViewStyle } from "react-native";
+import { type TextProps, View, type ViewProps } from "react-native";
 import { Text } from "../typography";
 
 export type TextViewProps = TextProps & {
-	contentContainerStyle?: ViewStyle;
+	contentContainerStyle?: ViewProps["style"];
 };
 
 export const TextView = ({

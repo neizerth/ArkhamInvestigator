@@ -2,7 +2,10 @@ import { size, statusBarHeight } from "@shared/config";
 import { Row } from "@shared/ui";
 import { View } from "react-native";
 import styled from "styled-components/native";
-import { AdditionalInfoArea } from "../../../../shared";
+import {
+	AdditionalInfoArea,
+	PinnedSkilllChecksMemo as PinnedSkilllChecks,
+} from "../../../../shared";
 import { BoardHeader } from "../../../header";
 import { Overlay as BaseOverlay } from "../Overlay";
 import * as F from "../footer";
@@ -45,4 +48,9 @@ export const RightSidebar: typeof S.RightSidebar = styled(S.RightSidebar)`
 `;
 
 export const LeftSidebar: typeof S.LeftSidebar = styled(S.LeftSidebar)`
+`;
+
+export const SkillChecks: typeof PinnedSkilllChecks = styled(
+	PinnedSkilllChecks,
+)`
 `;

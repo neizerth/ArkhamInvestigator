@@ -24,6 +24,7 @@ export const ImageBackground = ({
 	const backgroundStyle = pickSize(props);
 	const fadeStyle = useFadeAnimation({
 		show: !loading,
+		duration: 300,
 	});
 	return (
 		<C.Container style={[style, fadeStyle]}>
@@ -32,7 +33,7 @@ export const ImageBackground = ({
 				style={[defaultBackgroundStyle, backgroundStyle, imageStyle]}
 				onLoadEnd={setLoading.off}
 			/>
-			{!loading && children}
+			{children}
 		</C.Container>
 	);
 };

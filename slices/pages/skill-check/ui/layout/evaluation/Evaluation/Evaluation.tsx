@@ -3,9 +3,9 @@ import {
 	selectSkillCheckData,
 	useAppSelector,
 } from "@shared/lib";
+import { memo } from "react";
 import type { ViewProps } from "react-native";
 import { useSkillCheckLayoutType } from "../../../../lib";
-import { ExpressionDisplay } from "../ExpressionDisplay";
 import { ExpressionValue } from "../ExpressionValue";
 import * as C from "./Evaluation.components";
 
@@ -26,10 +26,12 @@ export const Evaluation = ({ ...props }: EvaluationProps) => {
 			<C.Content>
 				{isLargeLayout && <C.History size={historySize} />}
 				<C.Current>
-					<ExpressionDisplay data={expressionData} type="primary" />
+					<C.Expression data={expressionData} type="primary" />
 					<ExpressionValue />
 				</C.Current>
 			</C.Content>
 		</C.Container>
 	);
 };
+
+export const EvaluationMemo = memo(Evaluation);
