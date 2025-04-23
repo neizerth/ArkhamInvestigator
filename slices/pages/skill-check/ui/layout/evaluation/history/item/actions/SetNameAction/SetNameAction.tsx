@@ -3,6 +3,7 @@ import * as C from "./SetNameAction.components";
 import { useAppTranslation } from "@features/i18n";
 import { type ModalOkEvent, useModal } from "@features/modal";
 import {
+	selectCurrentFaction,
 	selectSkillCheckHistoryItemTitle as selectTitle,
 	setSkillCheckHistoryItemTitle as setTitle,
 	useAppDispatch,
@@ -26,6 +27,7 @@ export const SetNameAction = ({
 	const dispatch = useAppDispatch();
 	const { t } = useAppTranslation();
 	const title = useAppSelector(selectTitle(itemId));
+	const faction = useAppSelector(selectCurrentFaction);
 
 	const setItemTitle = useCallback(
 		({ textValue }: ModalOkEvent) => {
@@ -40,7 +42,7 @@ export const SetNameAction = ({
 		data: {
 			contentType: "input",
 			type: "faction",
-			faction: "neutral",
+			faction,
 			title: t`New Name`,
 			okText: t`Okay`,
 			cancelText: t`Cancel`,

@@ -1,6 +1,7 @@
 import { useAppTranslation } from "@features/i18n";
 import { type ModalOkEvent, useModal } from "@features/modal";
 import {
+	selectCurrentFaction,
 	selectSkillCheckHistoryItem,
 	setSkillCheckHistoryItemTitle as setTitle,
 	toggleSkillCheckHistoryItemPin as togglePin,
@@ -26,6 +27,7 @@ export const PinAction = ({
 	const dispatch = useAppDispatch();
 	const { t } = useAppTranslation();
 	const { title, pinned } = useAppSelector(selectSkillCheckHistoryItem(itemId));
+	const faction = useAppSelector(selectCurrentFaction);
 
 	const setItemTitle = useCallback(
 		({ textValue }: ModalOkEvent) => {
@@ -42,7 +44,7 @@ export const PinAction = ({
 		data: {
 			contentType: "input",
 			type: "faction",
-			faction: "neutral",
+			faction,
 			title: t`New Name`,
 			okText: t`Okay`,
 			cancelText: t`Cancel`,
