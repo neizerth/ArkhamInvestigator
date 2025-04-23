@@ -1,4 +1,4 @@
-import { ArnoPro, STKaiti, Yoon } from "@assets/fonts";
+import { ArnoPro, STKaiti, STXinwei, SanCn, Yoon } from "@assets/fonts";
 import { color, font } from "@shared/config";
 import { getKeyConfig } from "@shared/lib";
 import type { ExpressionDisplayProps } from "@widgets/game/skill-check";
@@ -25,7 +25,23 @@ export const getExpressionDisplayStyle = (
 		"zh-cn": zhConfig,
 	});
 
+	const zhValueConfig = {
+		fontFamily: STXinwei.regular,
+	};
+
+	const getValueStyle = getKeyConfig({
+		default: {
+			fontFamily: ArnoPro.bold,
+		},
+		ko: {
+			fontFamily: SanCn.bold,
+		},
+		zh: zhValueConfig,
+		"zh-cn": zhValueConfig,
+	});
+
 	const textStyle = getTextStyle(language);
+	const valueStyle = getValueStyle(language);
 	return {
 		expressionStyle: {
 			gap: 2,
@@ -34,5 +50,6 @@ export const getExpressionDisplayStyle = (
 			fontSize: font.size.small,
 		},
 		textStyle,
+		valueStyle,
 	};
 };

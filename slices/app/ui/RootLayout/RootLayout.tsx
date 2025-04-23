@@ -28,12 +28,6 @@ export const RootLayout = ({ children }: PropsWithChildren) => {
 						presentation: "transparentModal",
 					}}
 				/>
-				<Stack.Screen
-					name="board/skill-check"
-					options={{
-						presentation: "transparentModal",
-					}}
-				/>
 			</Stack>
 			<StatusBar style="light" />
 			{children}

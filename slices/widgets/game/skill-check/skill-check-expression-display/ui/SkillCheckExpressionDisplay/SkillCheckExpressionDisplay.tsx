@@ -24,6 +24,7 @@ export const SkillCheckExpressionDisplay = ({
 	statStyle,
 	equalsStyle,
 	equalsContainerStyle,
+	valueStyle,
 	signStyle: signStyleProp,
 	showDiff = true,
 	...props
@@ -90,7 +91,9 @@ export const SkillCheckExpressionDisplay = ({
 									)}
 								</>
 							)}
-							<C.Value style={textStyle}>{formatValue(currentValue)}</C.Value>
+							<C.Value style={[textStyle, valueStyle]}>
+								{formatValue(currentValue)}
+							</C.Value>
 						</>
 					) : (
 						<>
@@ -100,7 +103,9 @@ export const SkillCheckExpressionDisplay = ({
 							>
 								=
 							</C.Value>
-							<C.Value style={textStyle}>{formatValue(value)}</C.Value>
+							<C.Value style={[textStyle, valueStyle]}>
+								{formatValue(value)}
+							</C.Value>
 						</>
 					))}
 			</C.Expression>
