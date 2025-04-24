@@ -32,11 +32,8 @@ export const useValueSet = (props: BaseListProps) => {
 	const index = useRef(currentIndex);
 
 	const getAnimated = useCallback(() => {
-		if (!controlEnabled) {
-			return true;
-		}
 		return animated !== undefined ? animated : !active.current;
-	}, [animated, controlEnabled]);
+	}, [animated]);
 
 	const scrollToIndex = useCallback(() => {
 		if (!controlEnabled) {
