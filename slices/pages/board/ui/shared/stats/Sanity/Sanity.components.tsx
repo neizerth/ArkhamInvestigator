@@ -1,7 +1,8 @@
-import { color, gameAssets } from "@shared/config";
+import { color, gameAssets, size } from "@shared/config";
 import * as UI from "@shared/ui";
 import { Value as BaseValue } from "@widgets/investigator/value";
 import type { FC } from "react";
+import { View } from "react-native";
 import styled from "styled-components/native";
 import { assetsSize } from "../../../../config";
 import { withStat } from "../../../../lib";
@@ -12,8 +13,13 @@ export const BaseContainer = withStat(UI.Sanity, {
 	ratio: gameAssets.sanity.ratio,
 });
 
-export const Container: typeof BaseContainer = styled(BaseContainer)`
+export const Background: typeof BaseContainer = styled(BaseContainer)`
 
+`;
+
+export const Container: typeof View = styled(View)`
+	padding-top: ${size.gap.xxl}px;
+	position: relative;
 `;
 
 export const Value: typeof BaseValue = styled(BaseValue)`
@@ -35,9 +41,9 @@ export const BaseSanity: FC<DefinedBaseStatPickerProps> = styled(
 	itemHeight: assetsSize.main,
 	contentContainerStyle: {
 		position: "absolute",
-		zIndex: 5,
+		zIndex: 6,
 		right: 0,
-		top: -42,
+		top: 0,
 	},
 	gap: 5,
 })`

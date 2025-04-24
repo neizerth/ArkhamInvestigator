@@ -6,7 +6,7 @@ import { PORTRAIT_DESCRIPTION_HEIGHT } from "../../../../../../config";
 import { FooterDescription } from "../FooterDescription";
 
 export const Container: typeof View = styled(View)`
-  padding-top: 40px;
+  padding-top: 0px;
 `;
 
 export const Row: typeof BaseRow = styled(BaseRow)`
@@ -23,7 +23,6 @@ export const Stats: typeof Row = styled(Row)`
 `;
 
 export const MainStats: typeof Row = styled(Row)`
-  position: relative;
   gap: ${size.gap.medium}px;
 `;
 

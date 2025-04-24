@@ -1,4 +1,4 @@
-import { color, gameAssets } from "@shared/config";
+import { color, gameAssets, size } from "@shared/config";
 import * as UI from "@shared/ui";
 import { Value as BaseValue } from "@widgets/investigator/value";
 import type { FC } from "react";
@@ -18,6 +18,7 @@ export const Content: typeof BaseContainer = styled(BaseContainer)`
 
 export const Container: typeof View = styled(View)`
   position: relative;
+	padding-top: ${size.gap.xxl}px;
 `;
 
 export const Value: typeof BaseValue = styled(BaseValue)`
@@ -37,7 +38,7 @@ export const BaseHealth: FC<DefinedBaseStatPickerProps> = styled(
 		position: "absolute",
 		zIndex: 4,
 		right: -25,
-		top: -40,
+		top: 0,
 	},
 	gap: 5,
 })`

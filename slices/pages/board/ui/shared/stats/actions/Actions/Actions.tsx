@@ -33,18 +33,20 @@ export const Actions = ({ ...props }: ActionsProps) => {
 
 	return (
 		<C.Container {...props}>
-			<C.Content>
-				{showDiff && <C.BaseActions limitMaxValue={false} />}
-				<C.Picker
-					value={value}
-					data={actionsData}
-					onValueChanged={onChange}
-					onPress={onPress}
-					onLongPress={onLongPress}
-				/>
+			{showDiff && <C.BaseActions limitMaxValue={false} />}
+			<C.Background>
+				<C.Content>
+					<C.Picker
+						value={value}
+						data={actionsData}
+						onValueChanged={onChange}
+						onPress={onPress}
+						onLongPress={onLongPress}
+					/>
 
-				{haveAdditionalActions && <C.Special />}
-			</C.Content>
+					{haveAdditionalActions && <C.Special />}
+				</C.Content>
+			</C.Background>
 		</C.Container>
 	);
 };

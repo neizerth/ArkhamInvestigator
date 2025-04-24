@@ -3,12 +3,12 @@ import {
 	selectShowDamageAndHorror,
 	useAppSelector,
 } from "@shared/lib";
-import type { ImageBackgroundProps } from "@shared/ui";
 import { range } from "ramda";
 import { useMemo } from "react";
+import type { ViewProps } from "react-native";
 import { useStat } from "../../../../lib/hooks/useStat";
 import * as C from "./Sanity.components";
-export type SanityProps = ImageBackgroundProps;
+export type SanityProps = ViewProps;
 
 const horrorData = range(0, 20);
 
@@ -48,17 +48,20 @@ export const Sanity = ({ ...props }: SanityProps) => {
 	return (
 		<C.Container {...props}>
 			{showBaseDiff && <C.BaseSanity />}
-			{showAdditionalInfo && (
-				<C.Additional value={showHorror ? initialValue : `-${wounds}`} />
-			)}
-			<C.Picker
-				value={currentValue}
-				data={data}
-				onValueChanged={onValueChange}
-				onLongPress={onLongPress}
-				onPress={onPress}
-				style={pickerStyle}
-			/>
+
+			<C.Background>
+				{showAdditionalInfo && (
+					<C.Additional value={showHorror ? initialValue : `-${wounds}`} />
+				)}
+				<C.Picker
+					value={currentValue}
+					data={data}
+					onValueChanged={onValueChange}
+					onLongPress={onLongPress}
+					onPress={onPress}
+					style={pickerStyle}
+				/>
+			</C.Background>
 		</C.Container>
 	);
 };

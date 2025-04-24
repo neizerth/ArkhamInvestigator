@@ -1,4 +1,4 @@
-import { color, gameAssets } from "@shared/config";
+import { color, gameAssets, size } from "@shared/config";
 import { Action } from "@shared/ui";
 import { Value } from "@widgets/investigator/value";
 import type { FC } from "react";
@@ -15,9 +15,13 @@ const BaseBackground = withStat(Action, {
 	ratio: gameAssets.action.ratio,
 });
 
-export const Container: typeof BaseBackground = styled(BaseBackground)`
+export const Background: typeof BaseBackground = styled(BaseBackground)`
   align-items: stretch;
   position: relative;
+`;
+
+export const Container: typeof View = styled(View)`
+  padding-top: ${size.gap.xxl}px;
 `;
 
 export const Content: typeof View = styled(View)`
@@ -46,7 +50,7 @@ export const BaseActions: FC<DefinedBaseStatPickerProps> = styled(
 		position: "absolute",
 		zIndex: 1,
 		right: -15,
-		top: -30,
+		top: 0,
 	},
 	gap: 5,
 })`
