@@ -1,4 +1,4 @@
-import { delay } from "@shared/lib";
+import { runLater } from "@shared/lib";
 import { useCallback, useEffect, useRef } from "react";
 import type { FlatList, GestureResponderEvent } from "react-native";
 import { getValueIndex } from "../../../../../../lib";
@@ -19,7 +19,6 @@ export const useValueSet = (props: BaseListProps) => {
 		onTouchEnd: onTouchEndProp,
 		animated,
 		controlEnabled = true,
-		value,
 	} = props;
 	const ref = useRef<FlatList<number>>(null);
 	const active = useRef(false);
@@ -31,7 +30,7 @@ export const useValueSet = (props: BaseListProps) => {
 
 	const getAnimated = useCallback(() => {
 		if (!controlEnabled) {
-			return false;
+			return true;
 		}
 		return animated !== undefined ? animated : !active.current;
 	}, [animated, controlEnabled]);
@@ -52,10 +51,6 @@ export const useValueSet = (props: BaseListProps) => {
 	}, [getAnimated, currentIndex, controlEnabled]);
 
 	useEffect(() => {
-		active.current = false;
-	}, []);
-
-	useEffect(() => {
 		scrollToIndex();
 	}, [scrollToIndex]);
 
@@ -64,7 +59,7 @@ export const useValueSet = (props: BaseListProps) => {
 			if (typeof onContentSizeChangeProp === "function") {
 				onContentSizeChangeProp?.(width, height);
 			}
-			scrollToIndex();
+			runLater(scrollToIndex);
 		},
 		[onContentSizeChangeProp, scrollToIndex],
 	);
@@ -81,9 +76,7 @@ export const useValueSet = (props: BaseListProps) => {
 
 	const onTouchEnd = useCallback(
 		(e: GestureResponderEvent) => {
-			delay(10).then(() => {
-				active.current = false;
-			});
+			active.current = false;
 			if (typeof onTouchEndProp === "function") {
 				onTouchEndProp(e);
 			}
