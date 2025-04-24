@@ -1,4 +1,6 @@
+import { delay } from "@shared/lib";
 import { useCallback, useContext, useMemo } from "react";
+import { Keyboard } from "react-native";
 import { useAppDispatch } from "../../../../shared/lib/hooks/store/useAppDispatch";
 import type { ModalData, ModalOkEvent } from "../../model";
 import { ModalContext } from "../context";
@@ -26,11 +28,12 @@ export const useModal = ({
 
 	const context = useContext(ModalContext);
 
-	const tryClose = useCallback(() => {
+	const tryClose = useCallback(async () => {
 		if (onClose === false) {
 			return;
 		}
-
+		await delay(100);
+		Keyboard.dismiss();
 		dispatch(closeModal());
 	}, [dispatch, onClose]);
 

@@ -16,7 +16,6 @@ export const FactionModal = ({ data, ...props }: FactionModalProps) => {
 	const ok = context.onOk?.current;
 
 	const okHandler = useCallback(() => {
-		// Keyboard.dismiss();
 		return ok?.({
 			textValue: textValue.current,
 		});
