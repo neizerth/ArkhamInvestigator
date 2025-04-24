@@ -1,5 +1,6 @@
 import { useHapticFeedback } from "@features/haptic";
 import {
+	selectAvailableFactions,
 	selectCurrentFaction,
 	selectShowFactionSelect,
 	setCurrentBoardProp,
@@ -7,7 +8,6 @@ import {
 	useAppDispatch,
 	useAppSelector,
 } from "@shared/lib";
-import { selectAvailableFactions } from "@shared/lib/store/features/board/selectors/current/faction/selectAvailableFactions";
 import type { Faction } from "@shared/model";
 import { Outside } from "@shared/ui";
 import { useCallback } from "react";

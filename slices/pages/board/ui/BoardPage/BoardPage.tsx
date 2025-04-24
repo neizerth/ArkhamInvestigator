@@ -3,7 +3,6 @@ import { useLayoutSize, useScreenOrientation } from "@shared/lib";
 import { useWindowDimensions } from "react-native";
 import { LayoutContext } from "../../config";
 import { getHeaderLayout, useImagePrelaod, useStatusBar } from "../../lib";
-import { FactionSelect } from "../shared";
 import * as C from "./BoardPage.components";
 
 export const BoardPage = () => {
@@ -28,7 +27,7 @@ export const BoardPage = () => {
 			<C.Container onLayout={onLayout}>
 				<C.Background />
 				{orientation.type === "portrait" && <C.PortraitLayout top={areaTop} />}
-				<FactionSelect />
+				<C.FactionModal />
 			</C.Container>
 		</LayoutContext.Provider>
 	);

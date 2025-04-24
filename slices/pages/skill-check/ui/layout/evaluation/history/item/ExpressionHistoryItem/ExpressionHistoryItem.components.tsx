@@ -39,7 +39,7 @@ export const Title: typeof TouchableOpacity = styled(TouchableOpacity)`
   flex-direction: row;
   position: absolute;
   z-index: 1;
-  top: -2px;
+  top: 2px;
   bottom: 0;
   left: 0;
   align-items: center;
@@ -54,7 +54,7 @@ export const TitleText = withLocale({
 	style: {
 		default: {
 			fontFamily: Copasetic.regular,
-			lineHeight: 20,
+			lineHeight: 25,
 			color: color.light10,
 			fontSize: font.size.small,
 			backgroundColor: color.dark30,
