@@ -1,4 +1,5 @@
 import { runLater } from "@shared/lib";
+import { always } from "ramda";
 import { useCallback, useEffect, useRef } from "react";
 import type { FlatList, GestureResponderEvent } from "react-native";
 import { getValueIndex } from "../../../../../../lib";
@@ -7,6 +8,8 @@ import type {
 	PickerScrollEvent,
 } from "../../../../../../model";
 import type { BaseListProps } from "../../BaseList.types";
+
+const getInactiveState = always(false);
 
 export const useValueSet = (props: BaseListProps) => {
 	const {
@@ -49,6 +52,10 @@ export const useValueSet = (props: BaseListProps) => {
 			animated,
 		});
 	}, [getAnimated, currentIndex, controlEnabled]);
+
+	useEffect(() => {
+		active.current = getInactiveState(controlEnabled);
+	}, [controlEnabled]);
 
 	useEffect(() => {
 		scrollToIndex();
