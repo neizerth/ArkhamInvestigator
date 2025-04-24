@@ -78,13 +78,16 @@ export const ExpressionHistory = ({
 			return (
 				<C.Item
 					key={item.id}
-					itemId={item.id}
-					data={item.expression}
-					type="secondary"
-					value={item.value}
 					onPress={setCurrentValue(item.expression)}
 					onLongPress={clearValue(item)}
-				/>
+				>
+					<C.ItemContent
+						itemId={item.id}
+						data={item.expression}
+						type="secondary"
+						value={item.value}
+					/>
+				</C.Item>
 			);
 		},
 		[clearValue, setCurrentValue],

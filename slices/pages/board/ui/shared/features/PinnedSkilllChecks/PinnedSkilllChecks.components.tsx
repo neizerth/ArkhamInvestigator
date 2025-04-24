@@ -49,8 +49,9 @@ export const List: typeof Row = styled(Row)`
 	flex-wrap: wrap;
 `;
 
-export const Item: typeof Row = styled(Row)`
+export const Item: typeof TouchableOpacity = styled(TouchableOpacity)`
   align-items: center;
+	flex-direction: row;
 `;
 
 export const ItemContent: typeof Row = styled(Row)`

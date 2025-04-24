@@ -1,9 +1,9 @@
-import { TouchableOpacity } from "@features/haptic";
 import { color } from "@shared/config";
 import { IconView, Row, TextView } from "@shared/ui";
+import { View } from "react-native";
 import styled from "styled-components/native";
 
-export const Container: typeof TouchableOpacity = styled(TouchableOpacity)`
+export const Container: typeof View = styled(View)`
   justify-content: center;
 `;
 

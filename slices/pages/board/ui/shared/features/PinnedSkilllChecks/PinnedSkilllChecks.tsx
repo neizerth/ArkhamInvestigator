@@ -50,7 +50,7 @@ export const PinnedSkilllChecks = (props: PinnedSkilllChecksProps) => {
 					<C.Content style={fadeContentAnimation}>
 						<C.List>
 							{items.map((item, index, { length }) => (
-								<C.Item key={item.id}>
+								<C.Item key={item.id} onLongPress={removeItem(item.id)}>
 									<C.ItemContent>
 										{item.title && <C.Title>{item.title}:</C.Title>}
 										<C.Expression
@@ -58,7 +58,6 @@ export const PinnedSkilllChecks = (props: PinnedSkilllChecksProps) => {
 											data={item.expression}
 											value={item.value}
 											showDiff={false}
-											onLongPress={removeItem(item.id)}
 										/>
 									</C.ItemContent>
 									{index !== length - 1 && <C.Text>,</C.Text>}

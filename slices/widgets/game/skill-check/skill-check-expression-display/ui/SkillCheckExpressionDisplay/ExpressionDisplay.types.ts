@@ -1,8 +1,7 @@
-import type { TouchableOpacityProps } from "@features/haptic";
 import type { SkillCheckItem } from "@shared/model";
 import type { TextProps, ViewProps } from "react-native";
 
-export type SkillCheckExpressionDisplayProps = TouchableOpacityProps & {
+export type SkillCheckExpressionDisplayProps = ViewProps & {
 	data: SkillCheckItem[];
 	value?: number;
 	expressionStyle?: ViewProps["style"];
