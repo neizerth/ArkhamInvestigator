@@ -14,7 +14,7 @@ type ContainerProps = ViewProps &
 const isHistoryInColumn = (unit: number) => unit > 340;
 
 export const Container: FC<ContainerProps> = styled(View)`
-  gap: 35px;
+  gap: 15px;
   justify-content: flex-end;
   align-items: center;
   min-width: ${assetsSize.main}px;

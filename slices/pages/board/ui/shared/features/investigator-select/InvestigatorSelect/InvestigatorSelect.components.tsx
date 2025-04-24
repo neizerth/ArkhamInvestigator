@@ -9,7 +9,7 @@ import { InvestigatorSelectItem } from "../InvestigatorSelectItem";
 
 export const Container: typeof View = styled(View)`
   width: 60px;
-  height: 60px;
+  height: 80px;
   position: relative;
   z-index: 2;
 `;
@@ -52,7 +52,7 @@ export const Up: typeof Arrow = styled(Arrow)`
 `;
 
 export const Down: typeof Arrow = styled(Arrow)`
-  bottom: -53px;
+  bottom: -33px;
 
 	justify-content: flex-end;
 `;

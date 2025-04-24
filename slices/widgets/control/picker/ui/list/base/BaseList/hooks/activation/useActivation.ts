@@ -29,6 +29,7 @@ export const useActivation = (props: BaseListProps) => {
 			return;
 		}
 		active.current = false;
+		scroll.current = false;
 		onDeactivatedProp?.();
 	}, [onDeactivatedProp]);
 

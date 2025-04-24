@@ -49,7 +49,7 @@ export const useStat = (statType: InvestigatorBoardStat) => {
 	}, [dispatch, baseValue, initialValue, value, statType]);
 
 	const onPress = useCallback(() => {
-		dispatch(decreaseCurrentStat(statType));
+		dispatch(decreaseCurrentStat(statType, Number.NEGATIVE_INFINITY));
 	}, [dispatch, statType]);
 
 	return {
