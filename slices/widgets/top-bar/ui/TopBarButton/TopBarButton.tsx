@@ -1,19 +1,18 @@
+import { IconButton } from "@features/haptic";
+import { color } from "@shared/config";
 import type { TouchableOpacityProps } from "react-native";
-import { Container, Icon } from "./TopBarButton.components";
+import styled from "styled-components/native";
 
 export type TopBarButtonProps = TouchableOpacityProps & {
 	icon?: string;
 };
 
-export const TopBarButton = ({
-	icon,
-	children,
-	...props
-}: TopBarButtonProps) => {
-	return (
-		<Container {...props}>
-			{icon && <Icon icon={icon} />}
-			{children}
-		</Container>
-	);
-};
+export const TopBarButton = styled(IconButton).attrs({
+	iconStyle: {
+		fontSize: 20,
+		color: color.light10,
+	},
+})`
+	width: 48px;
+  height: 48px;
+`;

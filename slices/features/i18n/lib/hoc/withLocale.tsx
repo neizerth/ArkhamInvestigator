@@ -1,7 +1,7 @@
 import { type KeyConfig, getKeyConfig } from "@shared/lib";
 import { useAppSelector } from "@shared/lib";
 import type { PropsWithStyle } from "@shared/model";
-import { type AppTextProps, UnscaledText } from "@shared/ui";
+import { UnscaledText, type UnscaledTextProps } from "@shared/ui";
 import { mergeDeepRight } from "ramda";
 import type { ComponentType, FC } from "react";
 import { selectCurrentLanguage } from "../store";
@@ -18,7 +18,7 @@ export type WithLocaleFontOptions<Props extends WithLocaleProps> = {
 	};
 };
 
-export function withLocale<Props extends WithLocaleProps = AppTextProps>(
+export function withLocale<Props extends WithLocaleProps = UnscaledTextProps>(
 	options: WithLocaleFontOptions<Props>,
 ) {
 	const { Component = UnscaledText } = options;

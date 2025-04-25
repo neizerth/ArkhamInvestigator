@@ -1,5 +1,4 @@
 import type { ViewProps } from "react-native";
-import { TopBarButton } from "../TopBarButton";
 import * as C from "./TopBar.components";
 
 export type TopBarProps = ViewProps & {
@@ -10,9 +9,13 @@ export type TopBarProps = ViewProps & {
 export const TopBar = ({ onBack, title, children, ...props }: TopBarProps) => {
 	return (
 		<C.Container {...props}>
-			{onBack && <TopBarButton icon="arrow_back" onPress={onBack} />}
+			{onBack ? (
+				<C.Back icon="arrow_back" onPress={onBack} />
+			) : (
+				<C.Placeholder />
+			)}
 			{title && <C.Title>{title}</C.Title>}
-			{children}
+			{children ? children : <C.Placeholder />}
 		</C.Container>
 	);
 };

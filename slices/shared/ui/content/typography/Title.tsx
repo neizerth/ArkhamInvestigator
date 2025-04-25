@@ -1,7 +1,12 @@
 import { Alegreya } from "@assets/fonts";
 import { color, font, size } from "@shared/config";
 import styled from "styled-components/native";
-import { UnscaledText } from "../../behavior/UnscaledText";
+import {
+	UnscaledText,
+	type UnscaledTextProps,
+} from "../../behavior/UnscaledText";
+
+export type TitleProps = UnscaledTextProps;
 
 export const Title: typeof UnscaledText = styled(UnscaledText)`
   font-family: ${Alegreya.medium};

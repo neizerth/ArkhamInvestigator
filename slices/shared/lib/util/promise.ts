@@ -9,3 +9,6 @@ export const loadJSON = async <T>(url: string) => {
 	const json: T = await response.json();
 	return json;
 };
+
+export const delayValue = <T>(ms: number, value: T) =>
+	delay(ms).then(() => value);

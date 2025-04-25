@@ -5,11 +5,11 @@ import { useAppSelector } from "../../../../lib/hooks/store/useAppSelector";
 import { selectIcon } from "../../../../lib/store/features/icons";
 import { scaleFontFromStyle } from "../../../../lib/ui";
 import {
-	type AppTextProps,
 	UnscaledText,
+	type UnscaledTextProps,
 } from "../../../behavior/UnscaledText";
 
-export type IconProps = AppTextProps &
+export type IconProps = UnscaledTextProps &
 	PropsWithStroke & {
 		icon: string;
 		scaleType?: IconScaleType;

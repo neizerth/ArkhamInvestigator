@@ -1,5 +1,6 @@
 import { Delay } from "@shared/ui";
 import * as C from "./SkillCheckPage.components";
+
 export const SkillCheckPage = () => {
 	return (
 		<C.Container>
