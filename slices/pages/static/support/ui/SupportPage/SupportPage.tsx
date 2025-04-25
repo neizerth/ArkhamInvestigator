@@ -12,7 +12,7 @@ export const SupportPage = (props: SupportPageProps) => {
 	const { t } = useAppTranslation();
 
 	return (
-		<ContentPage {...props} title={t`Support`}>
+		<ContentPage {...props} title="Support">
 			<Title>{t`Contact us`}</Title>
 			<C.List>
 				{contactLinks.map((item) => (

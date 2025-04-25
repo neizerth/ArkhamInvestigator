@@ -10,5 +10,5 @@ export const changeInvestigator = (): AppThunk => async (dispatch) => {
 
 	await delay(150);
 
-	dispatch(goToPage(routes.selectInvestigators));
+	dispatch(goToPage(routes.replaceInvestigator));
 };

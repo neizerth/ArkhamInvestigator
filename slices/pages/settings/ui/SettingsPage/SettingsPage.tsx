@@ -26,7 +26,7 @@ export const SettingsPage = () => {
 	const { t } = useAppTranslation();
 
 	return (
-		<ContentPage title={t`Settings`}>
+		<ContentPage title="Settings">
 			<C.Content>
 				<C.Row>
 					<C.Select

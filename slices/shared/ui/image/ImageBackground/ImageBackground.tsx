@@ -2,7 +2,7 @@ import type { ImageProps } from "expo-image";
 import { pick } from "ramda";
 import type { PropsWithChildren } from "react";
 import { StyleSheet, type ViewProps } from "react-native";
-import { useBoolean } from "../../../lib";
+import { useBoolean } from "../../../lib/hooks/common/useBoolean";
 import * as C from "./ImageBackground.components";
 
 export type ImageBackgroundProps = Omit<ImageProps, "style"> &

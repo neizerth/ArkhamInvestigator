@@ -1,3 +1,4 @@
+import { useAppTranslation } from "@features/i18n";
 import { goBack, useAppDispatch } from "@shared/lib";
 import { Page } from "@shared/ui";
 import { useCallback } from "react";
@@ -14,6 +15,7 @@ export const ContentPage = ({
 	...props
 }: ContentPageProps) => {
 	const dispatch = useAppDispatch();
+	const { t } = useAppTranslation();
 
 	const back = useCallback(() => {
 		dispatch(goBack());
@@ -23,7 +25,7 @@ export const ContentPage = ({
 
 	return (
 		<Page {...props}>
-			<TopBar title={title} onBack={back} />
+			<TopBar title={t(title)} onBack={back} />
 			<Content>{children}</Content>
 		</Page>
 	);

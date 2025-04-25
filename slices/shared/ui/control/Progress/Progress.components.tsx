@@ -1,23 +1,13 @@
-import type { FC } from "react";
-import { View, type ViewProps } from "react-native";
-import styled, { css } from "styled-components/native";
+import { View } from "react-native";
+import styled from "styled-components/native";
 import { color } from "../../../config";
-
 export const Container: typeof View = styled(View)`
   width: 200px;
-  height: 2px;
+  height: 1px;
   background-color: ${color.dark30};
 `;
 
-type ValueProps = ViewProps & {
-	value: number;
-};
-
-export const Value: FC<ValueProps> = styled(View)`
+export const Value: typeof View = styled(View)`
   flex: 1;
   background-color: ${color.dark10};
-
-  ${({ value }: ValueProps) => css`
-    width: ${value}%;
-  `}
 `;

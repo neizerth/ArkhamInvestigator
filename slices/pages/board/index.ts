@@ -1,4 +1,2 @@
-export * from "./ui";
-export * from "./lib";
-export * from "./config";
-export * from "./model";
+export * from "./board";
+export * from "./replace-investigator";

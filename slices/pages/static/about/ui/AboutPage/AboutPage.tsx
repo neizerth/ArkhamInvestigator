@@ -1,4 +1,3 @@
-import { useAppTranslation } from "@features/i18n";
 import {
 	DEVICE_FONT_SCALE,
 	DPR,
@@ -17,11 +16,10 @@ import {
 export type AboutPageProps = Omit<ContentPageProps, "title">;
 
 export const AboutPage = (props: AboutPageProps) => {
-	const { t } = useAppTranslation();
 	const mediaVersion = useAppSelector(selectMediaVersion);
 
 	return (
-		<ContentPage {...props} title={t`About`}>
+		<ContentPage {...props} title="About">
 			<Paragraph>
 				The information presented in this app about
 				{space}

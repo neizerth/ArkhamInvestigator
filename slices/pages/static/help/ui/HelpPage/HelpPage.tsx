@@ -11,7 +11,7 @@ export const HelpPage = () => {
 		selectInvestigatorByCode(InvesigatorCode.LolaHayes),
 	);
 	return (
-		<ContentPage title={t`Help`}>
+		<ContentPage title="Help">
 			<Title>{t`Scroll`}</Title>
 			<Text>{t`board.help.scroll`}</Text>
 

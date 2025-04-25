@@ -21,5 +21,6 @@ export const Title: typeof TopBarTitle = styled(TopBarTitle)`
 `;
 
 export const Back: typeof TopBarButton = styled(TopBarButton)`
-  justify-content: flex-start;
+  align-items: flex-start;
+  justify-content: center;
 `;

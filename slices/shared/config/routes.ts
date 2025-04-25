@@ -13,6 +13,9 @@ export const routes = {
 	board: r("/board"),
 	skillCheck: r("/board/skill-check"),
 	boardHelp: r("/board/help"),
+	replaceInvestigator: r("/board/replace-investigator"),
+
+	chaosBag: r("/chaos-bag"),
 
 	about: r("/static/about"),
 	support: r("/static/support"),

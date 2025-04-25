@@ -10,9 +10,11 @@ export type TopBarButtonProps = TouchableOpacityProps & {
 export const TopBarButton = styled(IconButton).attrs({
 	iconStyle: {
 		fontSize: 20,
+		lineHeight: 20,
 		color: color.light10,
 	},
 })`
 	width: 48px;
   height: 48px;
+	justify-content: center;
 `;
