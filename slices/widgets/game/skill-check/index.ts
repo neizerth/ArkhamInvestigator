@@ -1,1 +1,1 @@
-export * from "./skill-check-expression-display";
+export * from "./expression-display";
