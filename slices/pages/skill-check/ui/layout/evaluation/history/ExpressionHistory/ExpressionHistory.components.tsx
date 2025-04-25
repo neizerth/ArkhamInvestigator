@@ -1,7 +1,7 @@
 import { TouchableOpacity } from "@features/haptic";
 import { size } from "@shared/config";
 import { View } from "react-native";
-import { ScrollView } from "react-native-gesture-handler";
+import { FlatList } from "react-native-gesture-handler";
 import styled from "styled-components/native";
 import { ExpressionHistoryItemMemo as HistoryItem } from "../item/ExpressionHistoryItem";
 
@@ -9,7 +9,7 @@ export const Container: typeof View = styled(View)`
 	gap: 5px;
 `;
 
-export const List: typeof ScrollView = styled(ScrollView).attrs({
+export const List: typeof FlatList = styled(FlatList).attrs({
 	contentContainerStyle: {
 		gap: size.gap.small,
 	},

@@ -10,7 +10,8 @@ import {
 } from "@shared/lib";
 import type { SkillCheckHistoryItem, SkillCheckItem } from "@shared/model";
 import { memo, useCallback, useMemo, useRef } from "react";
-import type { ScrollView, ViewProps, ViewStyle } from "react-native";
+import type { ListRenderItemInfo, ViewProps, ViewStyle } from "react-native";
+import type { FlatList } from "react-native-gesture-handler";
 import * as C from "./ExpressionHistory.components";
 
 export type ExpressionHistoryProps = ViewProps & {
@@ -51,7 +52,7 @@ export const ExpressionHistory = ({
 
 	const regular = data.filter(({ pinned }) => !pinned).slice(-regularSize);
 
-	const ref = useRef<ScrollView>(null);
+	const ref = useRef<FlatList>(null);
 
 	const onContentSizeChange = useCallback(() => {
 		if (!ref.current) {
@@ -73,6 +74,7 @@ export const ExpressionHistory = ({
 		},
 		[dispatch],
 	);
+
 	const renderItem = useCallback(
 		(item: ListItem) => {
 			return (
@@ -93,12 +95,25 @@ export const ExpressionHistory = ({
 		[clearValue, setCurrentValue],
 	);
 
+	const renderListItem = useCallback(
+		(listItem: ListRenderItemInfo<ListItem>) => {
+			const { item } = listItem;
+
+			return renderItem(item);
+		},
+		[renderItem],
+	);
+
 	return (
 		<C.Container style={contentContainerStyle}>
 			{pinned.length > 0 && <C.Pinned>{pinned.map(renderItem)}</C.Pinned>}
-			<C.List {...props} ref={ref} onContentSizeChange={onContentSizeChange}>
-				{regular.map(renderItem)}
-			</C.List>
+			<C.List
+				{...props}
+				ref={ref}
+				onContentSizeChange={onContentSizeChange}
+				data={regular}
+				renderItem={renderListItem}
+			/>
 		</C.Container>
 	);
 };

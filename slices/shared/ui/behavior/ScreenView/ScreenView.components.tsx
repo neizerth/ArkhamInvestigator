@@ -1,10 +1,10 @@
 "use client";
 
-import { ScrollView } from "react-native-gesture-handler";
+import { View } from "react-native";
 import styled from "styled-components/native";
 import { FullHeightView } from "../FullHeightView";
 
-export const Container: typeof ScrollView = styled(ScrollView)`
+export const Container: typeof View = styled(View)`
 `;
 
 export const Content: typeof FullHeightView = styled(FullHeightView)`
