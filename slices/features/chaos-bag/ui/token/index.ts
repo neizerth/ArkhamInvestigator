@@ -1,4 +1,4 @@
 export * from "./ChaosTokenDetails";
 export * from "./ChaosTokenInput";
 export * from "./ChaosTokenList";
-export * from "./ChaosToken";
+export * from "./single";

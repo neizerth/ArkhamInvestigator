@@ -11,13 +11,21 @@ export const numericChaosTokenTypes = [
 	"-8",
 ] as const;
 
-export const symbolicChaosTokenTypes = [
+export const baseSymbolicChaosTokenTypes = [
 	"skull",
 	"cultist",
 	"tablet",
 	"elderThing",
-	"autoFail",
+] as const;
+
+export const specialSymbolicChaosTokenTypes = [
 	"elderSign",
+	"autoFail",
+] as const;
+
+export const symbolicChaosTokenTypes = [
+	...baseSymbolicChaosTokenTypes,
+	...specialSymbolicChaosTokenTypes,
 ] as const;
 
 export const specialChaosTokenTypes = ["frost", "bless", "curse"] as const;
@@ -38,14 +46,24 @@ export const curseChaosTokenType = "curse" as const;
 
 export const frostChaosTokenType = "frost" as const;
 
+export const regulatChaosTokenTypes = [
+	...baseChaosTokenTypes,
+	frostChaosTokenType,
+];
+
 export const chaosTokenTypes = {
 	bless: blessChaosTokenType,
 	curse: curseChaosTokenType,
 	frost: frostChaosTokenType,
 
 	numeric: numericChaosTokenTypes,
-	symbolic: symbolicChaosTokenTypes,
+	symbolic: {
+		base: baseSymbolicChaosTokenTypes,
+		special: specialSymbolicChaosTokenTypes,
+		all: symbolicChaosTokenTypes,
+	},
 	special: specialChaosTokenTypes,
 	base: baseChaosTokenTypes,
+	regular: regulatChaosTokenTypes,
 	all: allChaosTokenTypes,
 };

@@ -64,6 +64,7 @@
     "react-native-element-dropdown": "^2.12.4",
     "react-native-gesture-handler": "~2.20.2",
     "react-native-get-random-values": "^1.11.0",
+    "react-native-gradients": "^2.1.1",
     "react-native-haptic-feedback": "^2.3.3",
     "react-native-localize": "^3.4.1",
     "react-native-picker-select": "^9.3.1",
