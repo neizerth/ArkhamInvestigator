@@ -1,5 +1,5 @@
-import type { Translation } from "@features/i18n/model";
-import { storage } from "@features/storage";
+import { storage } from "../../../storage";
+import type { Translation } from "../../model";
 
 const key = "118n.translations";
 
