@@ -1,4 +1,4 @@
-import { skillsStyle } from "@widgets/game/investigator-skills";
+import { skillsStyle } from "@widgets/game/investigator";
 import type { HeaderLayout } from "../../model";
 
 export const getSkillsSize = (layout: HeaderLayout) => {

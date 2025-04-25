@@ -1,4 +1,4 @@
-import { titleStyle } from "@widgets/game/investigator-title";
+import { titleStyle } from "@widgets/game/investigator";
 import type { HeaderLayout } from "../../model";
 
 export const getTitleSize = (layout: HeaderLayout) => {

@@ -9,8 +9,8 @@ import {
 } from "@shared/lib";
 import { selectAvailableFactions } from "@shared/lib/store/features/board/selectors/current/faction/selectAvailableFactions";
 import { selectIsUnique } from "@shared/lib/store/features/board/selectors/current/signature/selectIsUnique";
-import { InvestigatorHeaderMemo as InvestigatorHeader } from "@widgets/game/investigator-header";
-import type { RenderInvestigatorSkillItem } from "@widgets/game/investigator-skills";
+import { InvestigatorHeaderMemo as InvestigatorHeader } from "@widgets/game/investigator";
+import type { RenderInvestigatorSkillItem } from "@widgets/game/investigator";
 import { useCallback, useContext } from "react";
 import type { ViewProps } from "react-native";
 import { LayoutContext } from "../../../../config";

@@ -1,5 +1,5 @@
 import { size } from "@shared/config";
-import { InvestigatorDescription } from "@widgets/game/investigator-description";
+import { InvestigatorDescription } from "@widgets/game/investigator";
 import { Pressable, View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import Animated from "react-native-reanimated";
