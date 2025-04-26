@@ -1,15 +1,18 @@
 import type { AppThunk } from "@shared/model";
 import type { ChaosTokenType } from "../../../../../model";
-import { selectChaosBagTokenCount, setChaosBagTokenCount } from "../chaosBag";
+import {
+	selectChaosBagSealedTokens,
+	setChaosBagSealedTokens,
+} from "../chaosBag";
 
-export const setChaosTokenCount =
+export const setSealedChaosTokenCount =
 	(type: ChaosTokenType, count: number): AppThunk =>
 	(dispatch, getState) => {
 		const state = getState();
-		const contents = selectChaosBagTokenCount(state);
+		const contents = selectChaosBagSealedTokens(state);
 
 		dispatch(
-			setChaosBagTokenCount({
+			setChaosBagSealedTokens({
 				...contents,
 				[type]: count,
 			}),

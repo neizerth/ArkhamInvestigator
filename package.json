@@ -52,6 +52,7 @@
     "expo-symbols": "~0.2.0",
     "expo-system-ui": "~4.0.9",
     "expo-web-browser": "~14.0.1",
+    "fast-shuffle": "^6.1.1",
     "html-react-parser": "^5.2.2",
     "i18next": "^24.2.2",
     "mathjs": "^14.3.0",

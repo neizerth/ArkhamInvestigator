@@ -13,12 +13,18 @@ export const ChaosTokenInput = ({
 	showValue,
 	...props
 }: ChaosTokenInputProps) => {
-	const { value } = props;
+	const { value, onIncrement, onDecrement } = props;
 	return (
 		<C.Control {...props}>
 			<C.Content>
 				{showValue && <C.Value>{`${characters.multiply}${value}`}</C.Value>}
-				<C.Token type={type} />
+				<C.TokenButton
+					onPress={onIncrement}
+					onLongPress={onDecrement}
+					activeOpacity={0.8}
+				>
+					<C.Token type={type} />
+				</C.TokenButton>
 			</C.Content>
 		</C.Control>
 	);

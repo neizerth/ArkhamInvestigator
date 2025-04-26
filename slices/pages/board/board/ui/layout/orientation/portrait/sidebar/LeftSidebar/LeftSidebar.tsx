@@ -1,3 +1,4 @@
+import { routes } from "@shared/config";
 import {
 	redo,
 	selectCurrentBoardProp,
@@ -6,6 +7,7 @@ import {
 	undo,
 	useAppDispatch,
 	useAppSelector,
+	usePage,
 } from "@shared/lib";
 import { useCallback, useContext } from "react";
 import type { ViewProps } from "react-native";
@@ -21,6 +23,8 @@ export const LeftSidebar = ({ ...props }: LeftSidebarProps) => {
 	const boards = useAppSelector(selectInvestigatorBoards);
 	const history = useAppSelector(selectCurrentBoardProp("history"));
 	const historyIndex = useAppSelector(selectCurrentBoardProp("historyIndex"));
+
+	const goToPage = usePage();
 
 	const { height } = useContext(PortraitLayoutContext);
 	const historyLength = history.length;
@@ -50,22 +54,24 @@ export const LeftSidebar = ({ ...props }: LeftSidebarProps) => {
 	return (
 		<Sidebar {...props}>
 			<C.Container single={single} unit={height}>
-				<C.History single={single} unit={height}>
-					<C.HistoryButton
+				<C.Buttons single={single} unit={height}>
+					<C.Button
 						onPress={onRedo}
 						onLongPress={returnToNow}
 						disabled={!canRedo}
-					>
-						<C.HistoryIcon icon="redo" />
-					</C.HistoryButton>
-					<C.HistoryButton
+						icon="redo"
+					/>
+					<C.Button
 						onPress={onUndo}
 						onLongPress={beginHistory}
 						disabled={!canUndo}
-					>
-						<C.HistoryIcon icon="undo" />
-					</C.HistoryButton>
-				</C.History>
+						icon="undo"
+					/>
+					<C.Button
+						icon="chaos-bag-thin"
+						onPress={goToPage(routes.chaosBagPreview)}
+					/>
+				</C.Buttons>
 				{!single && <InvestigatorSelect />}
 			</C.Container>
 		</Sidebar>

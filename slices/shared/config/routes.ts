@@ -16,6 +16,7 @@ export const routes = {
 	replaceInvestigator: r("/board/replace-investigator"),
 
 	chaosBag: r("/chaos-bag"),
+	chaosBagPreview: r("/chaos-bag/preview"),
 
 	about: r("/static/about"),
 	support: r("/static/support"),

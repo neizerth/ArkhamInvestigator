@@ -19,7 +19,9 @@ export const BlessCurse: typeof Row = styled(Row)`
 export const Token: typeof ChaosTokenDetails = styled(ChaosTokenDetails).attrs({
 	inputStyle: {
 		alignItems: "center",
+		justifyContent: "center",
 	},
 })`
-  justify-content: center;
+  flex: 1;
+  align-items: center;
 `;

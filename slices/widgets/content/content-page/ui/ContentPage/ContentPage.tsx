@@ -12,6 +12,7 @@ export const ContentPage = ({
 	title,
 	full,
 	children,
+	onBack,
 	...props
 }: ContentPageProps) => {
 	const dispatch = useAppDispatch();
@@ -19,7 +20,8 @@ export const ContentPage = ({
 
 	const back = useCallback(() => {
 		dispatch(goBack());
-	}, [dispatch]);
+		onBack?.();
+	}, [dispatch, onBack]);
 
 	const Content = full ? C.FullContent : C.Content;
 

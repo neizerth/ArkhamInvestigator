@@ -1,6 +1,6 @@
-import { TouchableOpacity, type TouchableOpacityProps } from "@features/haptic";
+import { IconButton, type TouchableOpacityProps } from "@features/haptic";
+import { color, size } from "@shared/config";
 import type { PropsWithUnit } from "@shared/model";
-import { type DefinedIconProps, Icon } from "@shared/ui";
 import type { FC } from "react";
 import { View, type ViewProps } from "react-native";
 import styled, { css } from "styled-components/native";
@@ -28,14 +28,14 @@ export const Container: FC<ContainerProps> = styled(View)`
 		single &&
 		css`
     align-items: center;
-    padding-bottom: 50px;
+    padding-bottom: 5px;
   `}
 `;
 
 type HistoryProps = ContainerProps & PropsWithUnit;
 
-export const History: FC<HistoryProps> = styled(View)`
-  gap: 35px;
+export const Buttons: FC<HistoryProps> = styled(View)`
+  gap: 25px;
   flex: 1;
   align-items: center;
   justify-content: flex-end;
@@ -50,12 +50,18 @@ export const History: FC<HistoryProps> = styled(View)`
 	}}
 `;
 
-export const HistoryIcon: typeof Icon = styled(Icon)`
-  font-size: 30px;
-  color: white;
-`;
-
-export const HistoryButton: typeof TouchableOpacity = styled(TouchableOpacity)`
+export const Button: typeof IconButton = styled(IconButton).attrs({
+	iconStyle: {
+		fontSize: 28,
+		lineHeight: 30,
+		color: color.white,
+		filter: [
+			{
+				dropShadow: `0px 0px ${size.gap.small}px rgba(0, 0, 0, 0.5)`,
+			},
+		],
+	},
+})`
   width: 48px;
   height: 48px;
   justify-content: center;
@@ -63,20 +69,6 @@ export const HistoryButton: typeof TouchableOpacity = styled(TouchableOpacity)`
   ${({ disabled }: TouchableOpacityProps) =>
 		disabled &&
 		css`
-    opacity: 0.8;
+    opacity: 0.5;
   `}
 `;
-
-export const Undo: FC<DefinedIconProps> = styled(Icon).attrs({
-	icon: "undo",
-})`
-    font-size: 30px;
-    color: white;
-  `;
-
-export const Redo: FC<DefinedIconProps> = styled(Icon).attrs({
-	icon: "redo",
-})`
-    font-size: 30px;
-    color: white;
-  `;

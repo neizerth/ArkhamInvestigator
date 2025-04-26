@@ -1,6 +1,6 @@
 import { createSelector } from "@reduxjs/toolkit";
 import type { ChaosTokenType } from "../../../../../model";
-import { selectChaosBagContents } from "../chaosBag";
+import { selectChaosBagTokenCount } from "../chaosBag";
 
 export const selectChaosTokenCount = (type: ChaosTokenType) =>
-	createSelector([selectChaosBagContents], (contents) => contents[type] || 0);
+	createSelector([selectChaosBagTokenCount], (contents) => contents[type] || 0);

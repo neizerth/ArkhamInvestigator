@@ -5,7 +5,7 @@ export const SkillCheckPage = () => {
 	return (
 		<C.Container>
 			<C.Header />
-			<Delay delayMs={200} fallback={<C.Loader />}>
+			<Delay delayMs={200}>
 				<C.Display />
 			</Delay>
 			<C.Keyboard />

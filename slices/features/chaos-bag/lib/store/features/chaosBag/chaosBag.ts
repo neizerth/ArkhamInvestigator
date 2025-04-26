@@ -1,13 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { createSliceState } from "redux-toolkit-helpers";
-import type { ChaosTokensCount } from "../../../../model";
+import type { ChaosTokenType, ChaosTokensCount } from "../../../../model";
 
 export type IChaosBagState = {
-	contents: ChaosTokensCount | null;
+	tokenCount: ChaosTokensCount;
+	sealedTokens: ChaosTokensCount;
+	contents: ChaosTokenType[];
 };
 
 const initialState: IChaosBagState = {
-	contents: null,
+	tokenCount: {},
+	sealedTokens: {},
+	contents: [],
 };
 
 const state = createSliceState(initialState);
@@ -15,14 +19,18 @@ const state = createSliceState(initialState);
 export const chaosBag = createSlice({
 	name: "chaosBag",
 	...state,
-	selectors: {
-		...state.selectors,
-		selectChaosBagContents: (state) => state.contents || {},
-	},
 });
 
-export const { setContents: setChaosBagContents } = chaosBag.actions;
+export const {
+	setTokenCount: setChaosBagTokenCount,
+	setContents: setChaosBagContents,
+	setSealedTokens: setChaosBagSealedTokens,
+} = chaosBag.actions;
 
-export const { selectChaosBagContents } = chaosBag.selectors;
+export const {
+	selectTokenCount: selectChaosBagTokenCount,
+	selectSealedTokens: selectChaosBagSealedTokens,
+	selectContents: selectChaosBagContents,
+} = chaosBag.selectors;
 
 export default chaosBag.reducer;
