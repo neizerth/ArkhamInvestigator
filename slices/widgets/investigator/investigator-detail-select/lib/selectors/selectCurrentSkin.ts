@@ -1,6 +1,9 @@
 import { createSelector } from "@reduxjs/toolkit";
-import { selectCurrentSignatureGroup, selectCurrentSkinId } from "@shared/lib";
-import { propEq } from "ramda";
+import {
+	selectCurrentSignatureGroup,
+	selectCurrentSkinId,
+	whereId,
+} from "@shared/lib";
 import { getSkins } from "../details";
 
 export const selectCurrentSkin = createSelector(
@@ -12,6 +15,6 @@ export const selectCurrentSkin = createSelector(
 
 		const skins = getSkins(group);
 
-		return skins.find(propEq(skinId, "id")) || null;
+		return skins.find(whereId(skinId)) || null;
 	},
 );

@@ -1,15 +1,13 @@
-import { color, font, size } from "@shared/config";
+import { font, size } from "@shared/config";
 import { Row, TextView } from "@shared/ui";
 import { View } from "react-native";
 import styled from "styled-components/native";
 import { TouchableOpacity } from "../../../../haptic";
 import { ChaosTokenInput } from "../ChaosTokenInput";
-import { ChaosToken } from "../single";
+import { ChaosTokenMemo as ChaosToken } from "../single";
 
 export const Container: typeof View = styled(View)`
   padding: ${size.gap.small}px 0px;
-  border-top-width: 1px;
-  border-top-color: ${color.dark20};
 `;
 
 export const Content: typeof Row = styled(Row)`

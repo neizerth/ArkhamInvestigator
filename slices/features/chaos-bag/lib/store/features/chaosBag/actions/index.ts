@@ -1,2 +1,2 @@
-export * from "./setChaosTokenCount";
+export * from "./token";
 export * from "./createChaosBag";

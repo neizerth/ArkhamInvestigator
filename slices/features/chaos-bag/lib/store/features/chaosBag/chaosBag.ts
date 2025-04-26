@@ -1,16 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { createSliceState } from "redux-toolkit-helpers";
-import type { ChaosTokenType, ChaosTokensCount } from "../../../../model";
+import type { ChaosBagToken, ChaosTokensCount } from "../../../../model";
 
 export type IChaosBagState = {
 	tokenCount: ChaosTokensCount;
-	sealedTokens: ChaosTokensCount;
-	contents: ChaosTokenType[];
+	sealedTokens: ChaosBagToken[];
+	contents: ChaosBagToken[];
 };
 
 const initialState: IChaosBagState = {
 	tokenCount: {},
-	sealedTokens: {},
+	sealedTokens: [],
 	contents: [],
 };
 

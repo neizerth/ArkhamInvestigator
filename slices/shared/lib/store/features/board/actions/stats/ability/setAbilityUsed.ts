@@ -1,5 +1,6 @@
 import type { AppThunk } from "@shared/model";
-import { isNotNil, propEq } from "ramda";
+import { isNotNil } from "ramda";
+import { whereId } from "../../../../../../util";
 import { selectAbilityById, selectCurrentBoardProp } from "../../../selectors";
 import { setUsedAbilities } from "./setUsedAbilities";
 
@@ -21,7 +22,7 @@ export const setAbilityUsed =
 		}
 
 		const usedAbilities = selectUsedAbilities(state) || [];
-		const usedData = usedAbilities.find(propEq(id, "id"));
+		const usedData = usedAbilities.find(whereId(id));
 
 		const boardIds = usedData?.boardIds || [];
 

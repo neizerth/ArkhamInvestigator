@@ -1,5 +1,6 @@
 import type { AppThunk } from "@shared/model";
-import { equals, propEq, reject } from "ramda";
+import { equals, reject } from "ramda";
+import { whereId } from "../../../../../../util";
 import { selectAbilityById, selectCurrentBoardProp } from "../../../selectors";
 import { setUsedAbilities } from "./setUsedAbilities";
 
@@ -22,13 +23,13 @@ export const unsetAbilityUse =
 		}
 
 		const usedAbilities = selectUsedAbilities(state) || [];
-		const usedData = usedAbilities.find(propEq(id, "id"));
+		const usedData = usedAbilities.find(whereId(id));
 
 		if (!usedData) {
 			return;
 		}
 
-		const data = reject(propEq(id, "id"), usedAbilities);
+		const data = reject(whereId(id), usedAbilities);
 
 		if (!ability.perInvestigator) {
 			dispatch(setUsedAbilities(data));

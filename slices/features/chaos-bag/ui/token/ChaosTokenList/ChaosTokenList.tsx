@@ -15,12 +15,7 @@ export const ChaosTokenList = ({ ...props }: ChaosTokenListProps) => {
 			const { type } = item;
 
 			if (type === "blessCurse") {
-				return (
-					<C.BlessCurse>
-						<C.Token type="bless" />
-						<C.Token type="curse" />
-					</C.BlessCurse>
-				);
+				return <C.BlessCurse />;
 			}
 
 			return <C.Item type={item.value} preview />;

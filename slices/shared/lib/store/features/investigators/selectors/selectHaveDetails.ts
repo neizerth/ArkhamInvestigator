@@ -1,10 +1,10 @@
 import { createSelector } from "@reduxjs/toolkit";
-import { propEq } from "ramda";
+import { whereId } from "../../../../util";
 import { selectSignatureGroups } from "../investigators";
 
 export const selectHaveDetails = (id: string) =>
 	createSelector([selectSignatureGroups], (groups) => {
-		const group = groups.find(propEq(id, "id"));
+		const group = groups.find(whereId(id));
 
 		if (!group) {
 			return false;

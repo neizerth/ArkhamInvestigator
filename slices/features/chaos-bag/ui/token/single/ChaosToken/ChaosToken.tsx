@@ -1,3 +1,4 @@
+import { memo } from "react";
 import * as C from "./ChaosToken.components";
 import { getChaosTokenParts } from "./ChaosToken.styles";
 import type { ChaosTokenProps } from "./ChaosToken.types";
@@ -13,3 +14,5 @@ export const ChaosToken = ({ size = 48, type, ...props }: ChaosTokenProps) => {
 		</C.Container>
 	);
 };
+
+export const ChaosTokenMemo = memo(ChaosToken);

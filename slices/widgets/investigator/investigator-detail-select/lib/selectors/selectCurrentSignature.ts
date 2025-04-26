@@ -2,8 +2,8 @@ import { createSelector } from "@reduxjs/toolkit";
 import {
 	selectCurrentSignatureGroup,
 	selectCurrentSignatureId,
+	whereId,
 } from "@shared/lib";
-import { propEq } from "ramda";
 
 export const selectCurrentSignature = createSelector(
 	[selectCurrentSignatureGroup, selectCurrentSignatureId],
@@ -12,7 +12,7 @@ export const selectCurrentSignature = createSelector(
 			return;
 		}
 		if (signatureId) {
-			return group.signatures.find(propEq(signatureId, "id"));
+			return group.signatures.find(whereId(signatureId));
 		}
 		return group.signatures[0];
 	},

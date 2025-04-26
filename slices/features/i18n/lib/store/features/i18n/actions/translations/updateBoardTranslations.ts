@@ -2,10 +2,10 @@ import {
 	selectInvestigatorBoards,
 	selectSignatureGroups,
 	setInvestigatorBoards,
+	whereId,
 } from "@shared/lib";
 import type { AppThunk } from "@shared/model";
 import type { InvestigatorSignature } from "arkham-investigator-data";
-import { propEq } from "ramda";
 
 const getCode = ({
 	investigator,
@@ -21,10 +21,8 @@ export const updateBoardTranslations = (): AppThunk => (dispatch, getState) => {
 	const groups = selectSignatureGroups(state);
 
 	const data = boards.map((board) => {
-		const group = groups.find(propEq(board.signatureGroupId, "id"));
-		const signature = group?.signatures.find(
-			propEq(board.investigator.id, "id"),
-		);
+		const group = groups.find(whereId(board.signatureGroupId));
+		const signature = group?.signatures.find(whereId(board.investigator.id));
 
 		if (!signature) {
 			return board;

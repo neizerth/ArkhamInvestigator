@@ -9,7 +9,7 @@ import {
 import type { AppThunk } from "@shared/model";
 
 export const startNewGame: ActionCreator<AppThunk> = () => (dispatch) => {
-	dispatch(setChaosBagSealedTokens({}));
+	dispatch(setChaosBagSealedTokens([]));
 	dispatch(setSelectedInvestigators([]));
 	dispatch(setInvestigatorBoards([]));
 	dispatch(goToPage(routes.selectInvestigators));

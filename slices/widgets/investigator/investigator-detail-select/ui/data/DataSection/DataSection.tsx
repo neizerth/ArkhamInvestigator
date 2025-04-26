@@ -1,5 +1,5 @@
 import { useAppTranslation } from "@features/i18n";
-import { propEq } from "ramda";
+import { whereId } from "@shared/lib";
 import { memo } from "react";
 import {
 	type DetailSectionProps,
@@ -25,7 +25,7 @@ export const DataSection = ({
 		return null;
 	}
 
-	const selected = data.find(propEq(props.selectedId, "id"));
+	const selected = data.find(whereId(props.selectedId));
 
 	const sectionTitle = `${title} (${length})`;
 	const selectedValue = (selected && t(selected.name)) || t`Default`;

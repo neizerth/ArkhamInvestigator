@@ -36,3 +36,9 @@ export type BlessCurseChaosTokenType =
 	| typeof curseChaosTokenType;
 
 export type ChaosTokensCount = Partial<Record<ChaosTokenType, number>>;
+
+export type ChaosBagToken = {
+	id: string;
+	type: ChaosTokenType;
+	sealed?: boolean;
+};

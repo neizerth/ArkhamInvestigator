@@ -1,6 +1,6 @@
 import type { AppThunk } from "@shared/model";
-import { propEq } from "ramda";
 import { routes } from "../../../../../config";
+import { whereId } from "../../../../util";
 import { delay } from "../../../../util/promise";
 import { goToPage } from "../../../effects";
 import { selectCurrentBoard } from "../../board/selectors/current/selectCurrentBoard";
@@ -18,7 +18,7 @@ export const changeInvestigatorDetails =
 		const { signatureGroupId, investigator, skinId } =
 			selectCurrentBoard(state);
 		const groups = selectSignatureGroups(state);
-		const group = groups.find(propEq(signatureGroupId, "id"));
+		const group = groups.find(whereId(signatureGroupId));
 
 		if (!group) {
 			return;
