@@ -29,6 +29,13 @@ export const resetBoard: ActionCreator<AppThunk> =
 
 		const baseValue = {
 			...initialValue,
+		};
+
+		const value = {
+			...baseValue,
+			clues: 0,
+			resources: START_GAME_RESOURCES_COUNT,
+			actions: NEW_TURN_ACTIONS_COUNT,
 			health: Math.max(0, initialValue.health - physicalTrauma),
 			sanity: Math.max(0, initialValue.sanity - mentalTrauma),
 		};
@@ -36,12 +43,7 @@ export const resetBoard: ActionCreator<AppThunk> =
 		const data: InvestigatorBoard = {
 			...board,
 			baseValue,
-			value: {
-				...baseValue,
-				clues: 0,
-				resources: START_GAME_RESOURCES_COUNT,
-				actions: NEW_TURN_ACTIONS_COUNT,
-			},
+			value,
 		};
 
 		// dispatch()

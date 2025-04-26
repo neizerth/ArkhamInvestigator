@@ -43,13 +43,13 @@ export const updateBoardFromSelection =
 
 		const baseValue = {
 			...initialValue,
-			health: Math.max(0, stats.health - physicalTrauma),
-			sanity: Math.max(0, stats.sanity - mentalTrauma),
 		};
 
 		const value = {
 			...mergeBoardStats(board, baseValue),
 			additionalAction,
+			health: Math.max(0, stats.health - physicalTrauma),
+			sanity: Math.max(0, stats.sanity - mentalTrauma),
 		};
 
 		const updatedBoard: InvestigatorBoard = {
