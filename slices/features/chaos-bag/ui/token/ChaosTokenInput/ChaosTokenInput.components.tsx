@@ -1,0 +1,41 @@
+import { color, font, size } from "@shared/config";
+import { Row, TextView } from "@shared/ui";
+import styled from "styled-components/native";
+import { NumericControl } from "../../../../haptic";
+import { ChaosToken } from "../single";
+
+export const Token: typeof ChaosToken = styled(ChaosToken)`
+  
+`;
+
+export const Content: typeof Row = styled(Row)`
+`;
+
+export const Value: typeof TextView = styled(TextView).attrs({
+	contentContainerStyle: {
+		alignItems: "center",
+		justifyContent: "center",
+		width: 36,
+		height: 44,
+		paddingRight: size.gap.small,
+	},
+})`
+	font-size: ${font.size.medium}px;
+	text-align: right;
+`;
+
+export const Control: typeof NumericControl = styled(NumericControl).attrs({
+	buttonStyle: {
+		// backgroundColor: "#D6CFB9",
+		backgroundColor: color.dark30,
+		width: 40,
+		height: 48,
+	},
+	textStyle: {
+		// color: color.text,
+		color: color.light10,
+		paddingTop: 6,
+	},
+})`
+	gap: 0px;
+`;

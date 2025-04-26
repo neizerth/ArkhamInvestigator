@@ -1,9 +1,9 @@
 import { Alegreya } from "@assets/fonts";
+import { NumericControl } from "@features/haptic/ui/control";
 import { size } from "@shared/config";
 import { Icon, Row, Text } from "@shared/ui";
 import { View } from "react-native";
 import styled from "styled-components/native";
-import { InvestigatorSettingsControl } from "../settings/InvestigatorSettingsControl";
 
 export const Container: typeof View = styled(View)`
 `;
@@ -28,9 +28,7 @@ export const ControlIcon: typeof Icon = styled(Icon)`
   font-size: 30px;
 `;
 
-export const Control: typeof InvestigatorSettingsControl = styled(
-	InvestigatorSettingsControl,
-)`
+export const Control: typeof NumericControl = styled(NumericControl)`
   flex: 1;
   justify-content: center;
 `;

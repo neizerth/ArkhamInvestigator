@@ -1,32 +1,34 @@
 import { useCallback } from "react";
 import type { ListRenderItemInfo } from "react-native";
-import type { FlatListProps } from "react-native";
-import { chaosToken } from "../../../config";
-import type { ChaosTokenType, ChaosTokensCount } from "../../../model";
 import * as C from "./ChaosTokenList.components";
-
-export type ChaosTokenListProps = Omit<
-	FlatListProps<ChaosTokenType>,
-	"data" | "renderItem"
-> & {
-	data?: ChaosTokensCount;
-};
+import type {
+	ChaosTokenListItem,
+	ChaosTokenListProps,
+} from "./ChaosTokenList.types";
+import { chaosTokenListData } from "./data";
 
 export const ChaosTokenList = ({ data, ...props }: ChaosTokenListProps) => {
 	const renderItem = useCallback(
-		(info: ListRenderItemInfo<ChaosTokenType>) => {
-			const type = info.item;
-			const count = data?.[type];
-			return <C.Item type={type} count={count} />;
+		({ item }: ListRenderItemInfo<ChaosTokenListItem>) => {
+			const { type } = item;
+
+			if (type === "blessCurse") {
+				return (
+					<C.BlessCurse>
+						<C.Token type="bless" count={data?.bless} />
+						<C.Token type="curse" count={data?.curse} />
+					</C.BlessCurse>
+				);
+			}
+
+			const count = data?.[item.value];
+
+			return <C.Item type={item.value} count={count} preview />;
 		},
 		[data],
 	);
 
 	return (
-		<C.Container
-			{...props}
-			data={chaosToken.types.regular}
-			renderItem={renderItem}
-		/>
+		<C.Container {...props} data={chaosTokenListData} renderItem={renderItem} />
 	);
 };

@@ -1,4 +1,5 @@
 import type {
+	allChaosTokenTypes,
 	baseSymbolicChaosTokenTypes,
 	blessChaosTokenType,
 	curseChaosTokenType,
@@ -9,9 +10,12 @@ import type {
 	symbolicChaosTokenTypes,
 } from "../config/token/types";
 
-export type ChaosTokenType = BaseChaosTokenType | SpecialChaosTokenType;
+export type ChaosTokenType =
+	| BaseChaosTokenType
+	| SpecialChaosTokenType
+	| SpecialChaosTokenType;
 
-export type BaseChaosTokenType = NumericChaosTokenType | SymbolicChaosTokenType;
+export type BaseChaosTokenType = (typeof allChaosTokenTypes)[number];
 
 export type NumericChaosTokenType = (typeof numericChaosTokenTypes)[number];
 

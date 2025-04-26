@@ -49,7 +49,7 @@ export const frostChaosTokenType = "frost" as const;
 export const regulatChaosTokenTypes = [
 	...baseChaosTokenTypes,
 	frostChaosTokenType,
-];
+] as const;
 
 export const chaosTokenTypes = {
 	bless: blessChaosTokenType,

@@ -1,9 +1,9 @@
 import { Alegreya } from "@assets/fonts";
+import { NumericControl } from "@features/haptic/ui/control";
 import { color, size } from "@shared/config";
 import { Row, Text } from "@shared/ui";
 import { View } from "react-native";
 import styled from "styled-components/native";
-import { InvestigatorSettingsControl } from "../settings/InvestigatorSettingsControl";
 
 export const Container: typeof View = styled(View)`
   /* padding: ; */
@@ -17,9 +17,7 @@ export const Controls: typeof Row = styled(Row)`
   padding-top: ${size.gap.default}px;
 `;
 
-export const Control: typeof InvestigatorSettingsControl = styled(
-	InvestigatorSettingsControl,
-)`
+export const Control: typeof NumericControl = styled(NumericControl)`
   flex: 1;
   justify-content: center;
 `;

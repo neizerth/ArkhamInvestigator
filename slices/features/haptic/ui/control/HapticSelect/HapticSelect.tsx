@@ -1,6 +1,6 @@
 import { Select, type SelectItem, type SelectProps } from "@shared/ui";
 import { useCallback } from "react";
-import { useHapticFeedback } from "../../../haptic/lib/hooks/useHapticFeedback";
+import { useHapticFeedback } from "../../../../haptic/lib/hooks/useHapticFeedback";
 
 export type HapticSelectProps<T> = SelectProps<T>;
 

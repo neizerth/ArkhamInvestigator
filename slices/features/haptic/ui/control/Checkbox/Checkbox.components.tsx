@@ -1,8 +1,7 @@
 import { color, size } from "@shared/config";
-import { Text } from "@shared/ui";
+import { Icon, Text } from "@shared/ui";
 import styled from "styled-components";
-import { Icon } from "../../../../shared/ui/game/icons/Icon";
-import { TouchableOpacity } from "../TouchableOpacity";
+import { TouchableOpacity } from "../../TouchableOpacity";
 
 export const Container: typeof TouchableOpacity = styled(TouchableOpacity)`
   flex-direction: row;

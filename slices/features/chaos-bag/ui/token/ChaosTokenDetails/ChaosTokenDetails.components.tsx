@@ -1,7 +1,7 @@
 import { color, size } from "@shared/config";
 import { View } from "react-native";
 import styled from "styled-components/native";
-import { ChaosToken } from "../single/ChaosToken/ChaosToken";
+import { ChaosTokenInput } from "../ChaosTokenInput";
 
 export const Container: typeof View = styled(View)`
   padding: ${size.gap.small}px 0px;
@@ -10,9 +10,9 @@ export const Container: typeof View = styled(View)`
 `;
 
 export const Content: typeof View = styled(View)`
-  padding: 0px ${size.gap.default}px;
+  padding: 0px ${size.gap.small}px;
 `;
 
-export const Item: typeof ChaosToken = styled(ChaosToken)`
+export const Input: typeof ChaosTokenInput = styled(ChaosTokenInput)`
   
 `;
