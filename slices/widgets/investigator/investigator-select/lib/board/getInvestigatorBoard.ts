@@ -31,6 +31,10 @@ export const getInvestigatorBoard = ({
 
 	const baseValue = {
 		...initialValue,
+	};
+
+	const value = {
+		...baseValue,
 		health: Math.max(0, initialValue.health - physicalTrauma),
 		sanity: Math.max(0, initialValue.sanity - mentalTrauma),
 	};
@@ -44,7 +48,7 @@ export const getInvestigatorBoard = ({
 		image: image,
 		initialValue,
 		baseValue: baseValue,
-		value: baseValue,
+		value,
 		history: [],
 		checkHistory: [],
 		historyIndex: -1,
