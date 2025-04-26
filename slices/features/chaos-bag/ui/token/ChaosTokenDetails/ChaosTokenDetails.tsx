@@ -1,27 +1,56 @@
-import { useCallback } from "react";
+import { characters } from "@shared/config";
+import { useAppDispatch, useAppSelector } from "@shared/lib";
+import { range } from "ramda";
+import { memo, useCallback, useMemo } from "react";
 import type { ViewProps } from "react-native";
 import { chaosToken } from "../../../config";
+import { selectChaosTokenCount, setChaosTokenCount } from "../../../lib";
 import type { ChaosTokenType } from "../../../model";
 import * as C from "./ChaosTokenDetails.components";
 
 export type ChaosTokenDetailsProps = ViewProps & {
 	type: ChaosTokenType;
-	count?: number;
 	preview?: boolean;
 	inputStyle?: ViewProps["style"];
 };
 
+const MAX_PREVIEW_COUNT = 4;
+
 export const ChaosTokenDetails = ({
 	type,
-	count = 0,
 	inputStyle,
 	preview,
 	...props
 }: ChaosTokenDetailsProps) => {
+	const dispatch = useAppDispatch();
+	const count = useAppSelector(selectChaosTokenCount(type));
 	const max = chaosToken.count[type];
 
-	const onDecrement = useCallback(() => {}, []);
-	const onIncrement = useCallback(() => {}, []);
+	const onDecrement = useCallback(() => {
+		if (count <= 0) {
+			return false;
+		}
+		dispatch(setChaosTokenCount(type, count - 1));
+	}, [dispatch, count, type]);
+	const onIncrement = useCallback(() => {
+		if (count >= max) {
+			return false;
+		}
+
+		dispatch(setChaosTokenCount(type, count + 1));
+	}, [dispatch, max, count, type]);
+
+	const previewTokens = count > MAX_PREVIEW_COUNT;
+
+	const previewTokenList = useMemo(() => {
+		const maxPreviewCount = count > MAX_PREVIEW_COUNT ? 1 : count;
+		return range(0, maxPreviewCount).map((key) => (
+			<C.Token key={key} onPress={onDecrement} activeOpacity={1}>
+				<C.TokenIcon type={type} />
+			</C.Token>
+		));
+	}, [count, type, onDecrement]);
+
 	return (
 		<C.Container {...props}>
 			<C.Content>
@@ -35,7 +64,21 @@ export const ChaosTokenDetails = ({
 					onIncrement={onIncrement}
 					showValue={!preview}
 				/>
+				{preview && count > 0 && (
+					<C.Preview>
+						{previewTokens && (
+							<C.Count>
+								{characters.multiply}
+								{count}
+							</C.Count>
+						)}
+
+						{previewTokenList}
+					</C.Preview>
+				)}
 			</C.Content>
 		</C.Container>
 	);
 };
+
+export const ChaosTokenDetailsMemo = memo(ChaosTokenDetails);

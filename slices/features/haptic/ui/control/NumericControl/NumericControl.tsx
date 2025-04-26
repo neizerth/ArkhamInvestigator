@@ -52,6 +52,7 @@ export const NumericControl = ({
 				textStyle={[
 					defaultButtonTextStyle,
 					textStyle,
+					incrementTextStyle,
 					showMinStyle && minTextStyle,
 				]}
 			/>

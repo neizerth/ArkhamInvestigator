@@ -27,10 +27,11 @@ export const Button = ({
 }: ButtonProps) => {
 	const handlePress = useCallback(
 		(e: GestureResponderEvent) => {
-			onPress?.(e);
+			const response = onPress?.(e);
 			if (href) {
 				Linking.openURL(href);
 			}
+			return response;
 		},
 		[onPress, href],
 	);

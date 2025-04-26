@@ -1,5 +1,6 @@
-import { useCallback } from "react";
+import { useCallback, useRef } from "react";
 import type { ListRenderItemInfo } from "react-native";
+import type { FlatList } from "react-native-gesture-handler";
 import * as C from "./ChaosTokenList.components";
 import type {
 	ChaosTokenListItem,
@@ -7,7 +8,8 @@ import type {
 } from "./ChaosTokenList.types";
 import { chaosTokenListData } from "./data";
 
-export const ChaosTokenList = ({ data, ...props }: ChaosTokenListProps) => {
+export const ChaosTokenList = ({ ...props }: ChaosTokenListProps) => {
+	const ref = useRef<FlatList>(null);
 	const renderItem = useCallback(
 		({ item }: ListRenderItemInfo<ChaosTokenListItem>) => {
 			const { type } = item;
@@ -15,20 +17,30 @@ export const ChaosTokenList = ({ data, ...props }: ChaosTokenListProps) => {
 			if (type === "blessCurse") {
 				return (
 					<C.BlessCurse>
-						<C.Token type="bless" count={data?.bless} />
-						<C.Token type="curse" count={data?.curse} />
+						<C.Token type="bless" />
+						<C.Token type="curse" />
 					</C.BlessCurse>
 				);
 			}
 
-			const count = data?.[item.value];
-
-			return <C.Item type={item.value} count={count} preview />;
+			return <C.Item type={item.value} preview />;
 		},
-		[data],
+		[],
 	);
 
+	const scrollToTop = useCallback(() => {
+		ref.current?.scrollToIndex({
+			index: 0,
+		});
+	}, []);
+
 	return (
-		<C.Container {...props} data={chaosTokenListData} renderItem={renderItem} />
+		<C.Container
+			{...props}
+			ref={ref}
+			data={chaosTokenListData}
+			renderItem={renderItem}
+			onStartReached={scrollToTop}
+		/>
 	);
 };

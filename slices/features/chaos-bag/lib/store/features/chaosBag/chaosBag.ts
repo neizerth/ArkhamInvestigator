@@ -3,20 +3,26 @@ import { createSliceState } from "redux-toolkit-helpers";
 import type { ChaosTokensCount } from "../../../../model";
 
 export type IChaosBagState = {
-	contents: ChaosTokensCount;
+	contents: ChaosTokensCount | null;
 };
 
 const initialState: IChaosBagState = {
-	contents: {},
+	contents: null,
 };
+
+const state = createSliceState(initialState);
 
 export const chaosBag = createSlice({
 	name: "chaosBag",
-	...createSliceState(initialState),
+	...state,
+	selectors: {
+		...state.selectors,
+		selectChaosBagContents: (state) => state.contents || {},
+	},
 });
 
 export const { setContents: setChaosBagContents } = chaosBag.actions;
 
-export const { selectContents: selectChaosBagContents } = chaosBag.selectors;
+export const { selectChaosBagContents } = chaosBag.selectors;
 
 export default chaosBag.reducer;
