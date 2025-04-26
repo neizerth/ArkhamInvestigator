@@ -1,4 +1,3 @@
-import { runLater } from "@shared/lib";
 import { always } from "ramda";
 import { useCallback, useEffect, useRef } from "react";
 import type { FlatList, GestureResponderEvent } from "react-native";
@@ -63,7 +62,7 @@ export const useValueSet = (props: BaseListProps) => {
 			if (typeof onContentSizeChangeProp === "function") {
 				onContentSizeChangeProp?.(width, height);
 			}
-			runLater(scrollToIndex);
+			scrollToIndex();
 		},
 		[onContentSizeChangeProp, scrollToIndex],
 	);

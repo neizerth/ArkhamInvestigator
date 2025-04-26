@@ -11,6 +11,8 @@ export type IBoardState = {
 	showFactionSelect: boolean;
 	pickerDecelerationType: PickerDecelerationType;
 	pickerIntervalMomentum: boolean;
+	trackXP: boolean;
+	saveTrauma: boolean;
 };
 
 const initialState: IBoardState = {
@@ -22,6 +24,8 @@ const initialState: IBoardState = {
 	showFactionSelect: false,
 	pickerDecelerationType: false,
 	pickerIntervalMomentum: false,
+	trackXP: true,
+	saveTrauma: true,
 };
 
 const state = createSliceState(initialState);
@@ -40,6 +44,8 @@ export const {
 	setPickerDecelerationType,
 	setPickerIntervalMomentum,
 	setShowDamageAndHorror,
+	setSaveTrauma,
+	setTrackXP,
 } = board.actions;
 
 export const {
@@ -51,6 +57,8 @@ export const {
 	selectPickerDecelerationType,
 	selectPickerIntervalMomentum,
 	selectShowDamageAndHorror,
+	selectSaveTrauma,
+	selectTrackXP,
 } = board.selectors;
 
 export default board.reducer;
