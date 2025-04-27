@@ -1,3 +1,5 @@
+import type { ChaosTokenType } from "../../model";
+
 export const numericChaosTokenTypes = [
 	"+1",
 	"0",
@@ -51,6 +53,14 @@ export const regulatChaosTokenTypes = [
 	frostChaosTokenType,
 ] as const;
 
+export const chaosTokenOrder = allChaosTokenTypes.reduce(
+	(target, type, index) => {
+		target[type] = index;
+		return target;
+	},
+	{} as Record<ChaosTokenType, number>,
+);
+
 export const chaosTokenTypes = {
 	bless: blessChaosTokenType,
 	curse: curseChaosTokenType,
@@ -66,4 +76,5 @@ export const chaosTokenTypes = {
 	base: baseChaosTokenTypes,
 	regular: regulatChaosTokenTypes,
 	all: allChaosTokenTypes,
+	order: chaosTokenOrder,
 };

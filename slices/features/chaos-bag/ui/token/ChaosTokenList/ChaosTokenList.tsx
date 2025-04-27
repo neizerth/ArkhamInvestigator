@@ -8,6 +8,8 @@ import type {
 } from "./ChaosTokenList.types";
 import { chaosTokenListData } from "./data";
 
+const ITEM_HEIGHT = 58;
+
 export const ChaosTokenList = ({ ...props }: ChaosTokenListProps) => {
 	const ref = useRef<FlatList>(null);
 	const renderItem = useCallback(
@@ -29,6 +31,14 @@ export const ChaosTokenList = ({ ...props }: ChaosTokenListProps) => {
 		});
 	}, []);
 
+	const getItemLayout = useCallback((_: unknown, index: number) => {
+		return {
+			length: ITEM_HEIGHT,
+			offset: ITEM_HEIGHT * index,
+			index: index,
+		};
+	}, []);
+
 	return (
 		<C.Container
 			{...props}
@@ -36,6 +46,7 @@ export const ChaosTokenList = ({ ...props }: ChaosTokenListProps) => {
 			data={chaosTokenListData}
 			renderItem={renderItem}
 			onStartReached={scrollToTop}
+			getItemLayout={getItemLayout}
 		/>
 	);
 };

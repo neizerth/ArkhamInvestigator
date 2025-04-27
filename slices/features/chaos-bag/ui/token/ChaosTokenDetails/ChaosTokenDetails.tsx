@@ -4,7 +4,11 @@ import { range } from "ramda";
 import { memo, useCallback, useMemo } from "react";
 import type { ViewProps } from "react-native";
 import { chaosToken } from "../../../config";
-import { selectChaosTokenCount, setChaosTokenCount } from "../../../lib";
+import {
+	addChaosToken,
+	removeChaosTokenByType,
+	selectChaosTokenCount,
+} from "../../../lib";
 import type { ChaosTokenType } from "../../../model";
 import * as C from "./ChaosTokenDetails.components";
 
@@ -30,14 +34,14 @@ export const ChaosTokenDetails = ({
 		if (count <= 0) {
 			return false;
 		}
-		dispatch(setChaosTokenCount(type, count - 1));
+		dispatch(removeChaosTokenByType(type));
 	}, [dispatch, count, type]);
 	const onIncrement = useCallback(() => {
 		if (count >= max) {
 			return false;
 		}
 
-		dispatch(setChaosTokenCount(type, count + 1));
+		dispatch(addChaosToken(type));
 	}, [dispatch, max, count, type]);
 
 	const previewTokens = count > MAX_PREVIEW_COUNT;

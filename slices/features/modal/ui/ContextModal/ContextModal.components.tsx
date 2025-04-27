@@ -2,7 +2,7 @@ import { Alegreya } from "@assets/fonts";
 import { color, size } from "@shared/config";
 import { Icon, Text } from "@shared/ui";
 import { View } from "react-native";
-import styled from "styled-components/native";
+import styled, { css } from "styled-components/native";
 import { TouchableOpacity } from "../../../haptic";
 
 export const Container: typeof View = styled(View)`
@@ -26,20 +26,31 @@ export const Title: typeof Text = styled(Text)`
 `;
 
 export const Body: typeof View = styled(View)`
-  height: 300px;
-  background-color: ${color.dark30};
+  background-color: ${color.dark20};
   border-radius: 0 0 ${radius}px ${radius}px;
   padding: ${size.gap.default}px;
 `;
 
-export const Close: typeof TouchableOpacity = styled(TouchableOpacity)`
+const buttonStyle = css`
   position: absolute;
   top: 0;
   bottom: 0;
-  right: 0;
   padding: 0px ${size.gap.default}px;
+  justify-content: center;
+  align-items: center;
 `;
 
-export const CloseIcon: typeof Icon = styled(Icon)`
+export const Close: typeof TouchableOpacity = styled(TouchableOpacity)`
+  ${buttonStyle};
+  right: 0;
+`;
+
+export const Action: typeof TouchableOpacity = styled(TouchableOpacity)`
+  ${buttonStyle};
+  left: 0;
+`;
+
+export const ActionIcon: typeof Icon = styled(Icon)`
   color: ${color.dark10};
+  font-size: 16px;
 `;

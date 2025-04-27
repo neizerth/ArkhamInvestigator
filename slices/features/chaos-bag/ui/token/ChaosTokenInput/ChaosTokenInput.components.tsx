@@ -31,7 +31,7 @@ export const Value: typeof TextView = styled(TextView).attrs({
 export const Control: typeof NumericControl = styled(NumericControl).attrs({
 	buttonStyle: {
 		// backgroundColor: "#D6CFB9",
-		backgroundColor: color.dark30,
+		backgroundColor: "transparent",
 		width: 40,
 		height: 48,
 	},

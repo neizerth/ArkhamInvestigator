@@ -1,2 +1,2 @@
 export * from "./selectChaosTokenCount";
-export * from "./selectChaosBagTokens";
+export * from "./selectOrderedChaosBagContents";

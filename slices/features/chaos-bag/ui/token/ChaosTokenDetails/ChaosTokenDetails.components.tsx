@@ -31,7 +31,6 @@ export const TokenIcon: typeof ChaosToken = styled(ChaosToken)`
 
 export const Count: typeof TextView = styled(TextView).attrs({
 	contentContainerStyle: {
-		// backgroundColor: color.dark40,
 		width: 30,
 		justifyContent: "center",
 		alignItems: "center",
