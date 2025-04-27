@@ -6,11 +6,15 @@ import {
 } from "@features/i18n";
 import {
 	selectEndTurnStrict,
+	selectSaveTrauma,
 	selectShowDamageAndHorror,
 	selectShowDamageAndHorrorEffects,
+	selectTrackXP,
 	setEndTurnStrict,
+	setSaveTrauma,
 	setShowDamageAndHorror,
 	setShowDamageAndHorrorEffects,
+	setTrackXP,
 } from "@shared/lib";
 import { Title } from "@shared/ui";
 import { ContentPage } from "@widgets/content/content-page";
@@ -42,6 +46,20 @@ export const SettingsPage = () => {
 						selector={selectHapticMode}
 						actionCreator={setHapticMode}
 						data={hapticValues}
+					/>
+				</C.Row>
+				<C.Row>
+					<C.Checkbox
+						label="Track experience points"
+						selector={selectTrackXP}
+						actionCreator={setTrackXP}
+					/>
+				</C.Row>
+				<C.Row>
+					<C.Checkbox
+						label="Save trauma"
+						selector={selectSaveTrauma}
+						actionCreator={setSaveTrauma}
 					/>
 				</C.Row>
 				<Title> {t`Game settings`}</Title>

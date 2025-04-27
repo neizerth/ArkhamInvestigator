@@ -11,6 +11,8 @@
 	"Calculator": "Калькулятор",
 	"Equals": "Считать",
 	"XP": "Очки опыта",
+	"Track experience points": "Отслеживать очки опыта",
+	"Save trauma": "Сохранять травмы",
 
 	"Loading fonts": "Загрузка шрифтов",
 	"Loading assets {{count}}/{{total}}": "Загрузка текстур {{count}}/{{total}}",
