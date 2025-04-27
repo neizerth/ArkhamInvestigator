@@ -1,9 +1,8 @@
 import { getInvestigatorImageUrl } from "@shared/api";
 import { selectBoardImages, useAppSelector } from "@shared/lib";
-import { Image } from "expo-image";
 import { prop } from "ramda";
 import { useEffect } from "react";
-import { Platform } from "react-native";
+import { Image, Platform } from "react-native";
 
 const includeGrayscale = Platform.OS === "ios";
 
@@ -28,12 +27,18 @@ const getUrls = (data: string[]) =>
 		];
 	});
 
+const prefetch = async (data: string[]) => {
+	for (const url of data) {
+		await Image.prefetch(url);
+	}
+};
+
 export const useImagePrelaod = () => {
 	const images = useAppSelector(selectBoardImages);
 	const imageIds = images.map(prop("id"));
 
 	useEffect(() => {
 		const urls = getUrls(imageIds);
-		Image.prefetch(urls);
+		prefetch(urls);
 	}, [imageIds]);
 };
