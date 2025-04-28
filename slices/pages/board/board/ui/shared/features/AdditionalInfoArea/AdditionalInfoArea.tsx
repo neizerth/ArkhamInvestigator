@@ -1,6 +1,10 @@
 import { setShowRevealChaosTokenModal } from "@features/chaos-bag";
 import type { PressableProps } from "@features/haptic";
-import { setShowAdditionalInformation, useAppDispatch } from "@shared/lib";
+import {
+	delay,
+	setShowAdditionalInformation,
+	useAppDispatch,
+} from "@shared/lib";
 import { useCallback } from "react";
 import * as C from "./AdditionalInfoArea.components";
 
@@ -17,11 +21,19 @@ export const AdditionalInfoArea = (props: AdditionalInfoAreaProps) => {
 		},
 		[dispatch],
 	);
-	return (
-		<C.Container
-			{...props}
-			onPressIn={showInfo(true)}
-			onPressOut={showInfo(false)}
-		/>
-	);
+
+	const onShow = useCallback(() => {
+		dispatch(setShowRevealChaosTokenModal(true));
+		dispatch(setShowAdditionalInformation(true));
+
+		delay(1500).then(() => {
+			dispatch(setShowAdditionalInformation(false));
+		});
+	}, [dispatch]);
+
+	const onHide = useCallback(() => {
+		dispatch(setShowRevealChaosTokenModal(false));
+		dispatch(setShowAdditionalInformation(false));
+	}, [dispatch]);
+	return <C.Container {...props} onPressIn={onShow} onPressOut={onHide} />;
 };

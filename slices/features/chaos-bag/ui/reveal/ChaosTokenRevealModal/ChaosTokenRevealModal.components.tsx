@@ -10,6 +10,7 @@ import { ChaosTokenRevealLoader } from "../ChaosTokenRevealLoader";
 export const Container: typeof View = styled(View)`
   justify-content: center;
   align-items: center;
+  background-color: rgba(0, 0, 0, 0.3);
 `;
 
 export const Loader: typeof ChaosTokenRevealLoader = styled(
@@ -37,7 +38,7 @@ export const Content: typeof View = styled(View)`
 `;
 
 export const TopView: typeof View = styled(View)`
-  bottom: 160px; 
+  bottom: 165px; 
   position: absolute;
   left: -90px;
   right: -90px;
@@ -140,6 +141,7 @@ export const BlessCurse: typeof BlessCurseControl = styled(BlessCurseControl)`
   background-color: rgba(0, 0, 0, 0.2);
   border-radius: ${size.borderRadius.default}px;
   padding: 2px 0;
+  border-radius: 32px;
 `;
 
 export const History: typeof ChaosTokenRevealHistory = styled(

@@ -8,9 +8,9 @@ import {
 	returnChaosToken,
 	returnChaosTokens,
 	revealChaosToken,
-	selectCurrentChaosBagContents,
 	selectRevealedTokens,
 	selectShowRevealChaosTokenModal,
+	selectUnrevealedChaosTokensCount,
 	setRevealedTokenIds,
 	setShowRevealChaosTokenModal,
 	toggleChaosTokenSeal,
@@ -26,7 +26,9 @@ export const ChaosTokenRevealModal = (props: ChaosTokenRevealModalProps) => {
 	const [oneMoreLoading, setOneMoreLoading] = useBoolean();
 	const show = useAppSelector(selectShowRevealChaosTokenModal);
 	const tokens = useAppSelector(selectRevealedTokens);
-	const unsealed = useAppSelector(selectCurrentChaosBagContents);
+	const unrevealedCount = useAppSelector(selectUnrevealedChaosTokensCount);
+
+	const showModal = tokens.length > 0 || unrevealedCount > 0 || show;
 
 	const onLoad = useCallback(() => {
 		setOneMoreLoading.off();
@@ -65,7 +67,7 @@ export const ChaosTokenRevealModal = (props: ChaosTokenRevealModalProps) => {
 		return init(tokens);
 	}, [tokens]);
 
-	if ((!show && tokens.length === 0) || unsealed.length === 0) {
+	if (!showModal) {
 		return null;
 	}
 
@@ -77,7 +79,7 @@ export const ChaosTokenRevealModal = (props: ChaosTokenRevealModalProps) => {
 
 	return (
 		<C.Container {...props}>
-			<Outside onPress={closeModal} />
+			<Outside onPress={returnTokens} />
 			<C.Content>
 				<C.TopView>
 					<C.History tokens={history} />
@@ -97,12 +99,14 @@ export const ChaosTokenRevealModal = (props: ChaosTokenRevealModalProps) => {
 							<C.ReturnFillIcon icon="token_symbol_fill" />
 							<C.ReturnIcon icon="token_dismiss_highlight" />
 						</C.Return>
-						<C.RevealMore
-							onPressIn={setOneMoreLoading.on}
-							onPressOut={setOneMoreLoading.off}
-						>
-							<C.RevealMoreIcon icon="token_plus_highlight" />
-						</C.RevealMore>
+						{unrevealedCount > 0 && (
+							<C.RevealMore
+								onPressIn={setOneMoreLoading.on}
+								onPressOut={setOneMoreLoading.off}
+							>
+								<C.RevealMoreIcon icon="token_plus_highlight" />
+							</C.RevealMore>
+						)}
 					</C.Actions>
 				</C.BottomView>
 
