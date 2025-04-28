@@ -2,10 +2,7 @@ import { always } from "ramda";
 import { useCallback, useEffect, useRef } from "react";
 import type { FlatList, GestureResponderEvent } from "react-native";
 import { getValueIndex } from "../../../../../../lib";
-import type {
-	PickerChangeEvent,
-	PickerScrollEvent,
-} from "../../../../../../model";
+import type { PickerScrollEvent } from "../../../../../../model";
 import type { BaseListProps } from "../../BaseList.types";
 
 const getInactiveState = always(false);
@@ -15,11 +12,9 @@ export const useValueSet = (props: BaseListProps) => {
 		data,
 		onScrollBeginDrag: onScrollBeginDragProp,
 		onTouchStart: onTouchStartProp,
-		onValueChanging: onValueChangingProp,
 		onScrollDeactivated: onScrollDeactivatedProp,
 		onContentSizeChange: onContentSizeChangeProp,
 		onTouchEnd: onTouchEndProp,
-		animated,
 		controlEnabled = true,
 	} = props;
 	const ref = useRef<FlatList<number>>(null);
@@ -28,26 +23,16 @@ export const useValueSet = (props: BaseListProps) => {
 
 	const currentIndex = Math.min(getValueIndex(props), data.length - 1);
 
-	const index = useRef(currentIndex);
-
-	const getAnimated = useCallback(() => {
-		return animated !== undefined ? animated : !active.current;
-	}, [animated]);
-
 	const scrollToIndex = useCallback(() => {
 		if (!controlEnabled) {
 			return;
 		}
-		if (index.current === currentIndex) {
-			return;
-		}
-		const animated = getAnimated();
 
 		ref.current?.scrollToIndex({
 			index: currentIndex,
-			animated,
+			animated: false,
 		});
-	}, [getAnimated, currentIndex, controlEnabled]);
+	}, [currentIndex, controlEnabled]);
 
 	useEffect(() => {
 		active.current = getInactiveState(controlEnabled);
@@ -103,23 +88,11 @@ export const useValueSet = (props: BaseListProps) => {
 		onScrollDeactivatedProp?.();
 	}, [onScrollDeactivatedProp]);
 
-	const onValueChanging = useCallback(
-		(e: PickerChangeEvent) => {
-			index.current = e.index;
-			if (!active.current) {
-				return;
-			}
-			onValueChangingProp?.(e);
-		},
-		[onValueChangingProp],
-	);
-
 	return {
 		...props,
 		ref,
 		onScrollDeactivated,
 		onContentSizeChange,
-		onValueChanging,
 		onTouchStart,
 		onTouchEnd,
 		onScrollBeginDrag,
