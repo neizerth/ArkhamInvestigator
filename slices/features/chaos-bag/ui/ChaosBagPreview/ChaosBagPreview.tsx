@@ -47,24 +47,26 @@ export const ChaosBagPreview = (props: ChaosBagPreviewProps) => {
 			onAction={onEdit}
 		>
 			<C.BlessCurse />
-			{data.sealed.length > 0 && (
+			{data.sealed.length > 0 ? (
 				<C.Sealed>
 					<C.Title>{t`Sealed Tokens`}</C.Title>
 					<C.List>
 						{data.sealed.map((token) => (
-							<C.Token
-								key={token.id}
-								{...token}
-								onPress={toggleSeal(token.id)}
-							/>
+							<C.TokenButton key={token.id} onPress={toggleSeal(token.id)}>
+								<C.Token {...token} />
+							</C.TokenButton>
 						))}
 					</C.List>
 				</C.Sealed>
+			) : (
+				<C.Hint>{t`Tap to seal`}</C.Hint>
 			)}
 
 			<C.List>
 				{data.regular.map((token) => (
-					<C.Token key={token.id} {...token} onPress={toggleSeal(token.id)} />
+					<C.TokenButton key={token.id} onPress={toggleSeal(token.id)}>
+						<C.Token {...token} />
+					</C.TokenButton>
 				))}
 			</C.List>
 		</C.Container>

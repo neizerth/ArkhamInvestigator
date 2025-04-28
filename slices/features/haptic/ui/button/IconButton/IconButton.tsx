@@ -14,11 +14,13 @@ export const IconButton = ({
 	icon,
 	scaleType,
 	iconStyle,
+	children,
 	...props
 }: IconButtonProps) => {
 	return (
 		<C.Container {...props}>
 			<Icon icon={icon} scaleType={scaleType} style={iconStyle} />
+			{children}
 		</C.Container>
 	);
 };

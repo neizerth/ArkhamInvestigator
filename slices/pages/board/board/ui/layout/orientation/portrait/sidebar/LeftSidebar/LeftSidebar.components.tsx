@@ -35,7 +35,7 @@ export const Container: FC<ContainerProps> = styled(View)`
 type HistoryProps = ContainerProps & PropsWithUnit;
 
 export const Buttons: FC<HistoryProps> = styled(View)`
-  gap: 25px;
+  gap: 15px;
   flex: 1;
   align-items: center;
   justify-content: flex-end;

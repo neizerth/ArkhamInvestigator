@@ -1,0 +1,29 @@
+import { propIncludes } from "@shared/lib";
+import type { AppThunk } from "@shared/model";
+import { shuffle } from "fast-shuffle";
+import { prop, reject } from "ramda";
+import {
+	selectChaosBagContents,
+	selectRevealedTokenIds,
+	setRevealedTokenIds,
+} from "../../../chaosBag";
+
+export const revealChaosToken =
+	(count: number): AppThunk =>
+	(dispatch, getState) => {
+		const state = getState();
+		const revealed = selectRevealedTokenIds(state);
+		const contents = selectChaosBagContents(state);
+
+		if (contents.length === 0) {
+			return;
+		}
+		const rest = reject(propIncludes("id", revealed), contents).filter(
+			({ sealed }) => !sealed,
+		);
+		const tokens = shuffle(rest).slice(0, count);
+		const tokenIds = tokens.map(prop("id"));
+
+		const data = [...revealed, ...tokenIds];
+		dispatch(setRevealedTokenIds(data));
+	};

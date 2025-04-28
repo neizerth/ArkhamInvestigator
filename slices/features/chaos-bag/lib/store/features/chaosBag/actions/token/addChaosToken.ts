@@ -1,5 +1,6 @@
 import type { AppThunk } from "@shared/model";
 import { v4 } from "uuid";
+import { chaosToken } from "../../../../../../config";
 import type { ChaosBagToken, ChaosTokenType } from "../../../../../../model";
 import { selectChaosBagContents, setChaosBagContents } from "../../chaosBag";
 import { selectChaosTokenCount } from "../../selectors";
@@ -15,6 +16,7 @@ export const addChaosToken =
 		const item: ChaosBagToken = {
 			id: v4(),
 			type,
+			removable: chaosToken.types.removable.includes(type),
 		};
 		dispatch(setChaosBagContents([...contents, item]));
 		dispatch(setChaosTokenCount(type, count + 1));

@@ -1,20 +1,29 @@
 import { memo } from "react";
-import type { TouchableOpacityProps } from "../../../../../haptic";
+import type { ViewProps } from "react-native";
 import type { ChaosTokenConfig } from "../ChaosToken";
 import * as C from "./ChaosTokenPreview.components";
 import { getChaosTokentPreviewStyles } from "./ChaosTokenPreview.styles";
 
-export type ChaosTokenPreviewProps = TouchableOpacityProps &
+export type ChaosTokenPreviewProps = ViewProps &
 	ChaosTokenConfig & {
 		sealed?: boolean;
+		sealOffset?: number;
+		tokenPadding?: number;
 	};
 
 export const ChaosTokenPreview = ({
 	type,
 	sealed,
+	sealOffset,
+	tokenPadding,
 	...props
 }: ChaosTokenPreviewProps) => {
-	const style = getChaosTokentPreviewStyles(sealed);
+	const style = getChaosTokentPreviewStyles({
+		sealed,
+		offset: sealOffset,
+		defaultSize: props.size,
+		padding: tokenPadding,
+	});
 	return (
 		<C.Container {...props} style={style.container}>
 			{sealed && (

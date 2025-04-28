@@ -16,6 +16,7 @@ export const createChaosBag = (): AppThunk => (dispatch, getState) => {
 		.map((type) => ({
 			id: v4(),
 			type,
+			removable: chaosToken.types.removable.includes(type),
 		}));
 
 	dispatch(setChaosBagContents(contents));

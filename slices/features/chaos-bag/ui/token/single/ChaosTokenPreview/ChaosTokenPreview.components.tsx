@@ -1,10 +1,9 @@
 import { View } from "react-native";
 import styled from "styled-components/native";
-import { TouchableOpacity } from "../../../../../haptic";
 import { ChaosTokenMemo as ChaosToken } from "../ChaosToken/ChaosToken";
 import { SealedImage } from "./images";
 
-export const Container: typeof TouchableOpacity = styled(TouchableOpacity)`
+export const Container: typeof View = styled(View)`
   position: relative;
 
   align-items: center;

@@ -53,6 +53,11 @@ export const regulatChaosTokenTypes = [
 	frostChaosTokenType,
 ] as const;
 
+export const removableChaosTokenTypes: ChaosTokenType[] = [
+	blessChaosTokenType,
+	curseChaosTokenType,
+];
+
 export const chaosTokenOrder = allChaosTokenTypes.reduce(
 	(target, type, index) => {
 		target[type] = index;
@@ -77,4 +82,5 @@ export const chaosTokenTypes = {
 	regular: regulatChaosTokenTypes,
 	all: allChaosTokenTypes,
 	order: chaosTokenOrder,
+	removable: removableChaosTokenTypes,
 };

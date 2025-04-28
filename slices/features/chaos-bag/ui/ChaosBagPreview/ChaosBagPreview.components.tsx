@@ -1,7 +1,8 @@
 import { color, size } from "@shared/config";
-import { Row, Text } from "@shared/ui";
+import { Row, Text, TextView } from "@shared/ui";
 import { View } from "react-native";
 import styled from "styled-components/native";
+import { TouchableOpacity } from "../../../haptic";
 import { ContextModal } from "../../../modal";
 import {
 	BlessCurseControl,
@@ -10,7 +11,7 @@ import {
 
 export const Container: typeof ContextModal = styled(ContextModal).attrs({
 	contentStyle: {
-		backgroundColor: color.dark40,
+		backgroundColor: color.dark30,
 	},
 })`
   background-color: rgba(0, 0, 0, 0.3);
@@ -34,6 +35,18 @@ export const Token: typeof ChaosTokenPreview = styled(ChaosTokenPreview)`
   
 `;
 
+export const TokenButton: typeof TouchableOpacity = styled(TouchableOpacity)`
+  
+`;
+
 export const Title: typeof Text = styled(Text)`
+  text-align: center;
+`;
+
+export const Hint: typeof TextView = styled(TextView).attrs({
+	contentContainerStyle: {
+		paddingBottom: size.gap.small,
+	},
+})`
   text-align: center;
 `;
