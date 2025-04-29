@@ -48,6 +48,11 @@ export const HelpPage = () => {
 				{" - "}
 				{t`board.help.press.reset`}
 			</Text>
+			<Text>
+				<C.Icon icon="chaos-bag-thin" />
+				{" - "}
+				{t`board.help.press.chaosBag`}
+			</Text>
 
 			<Title>{t`Press and hold`}</Title>
 			<Text>{t`board.help.hold.freeArea`}</Text>
@@ -73,6 +78,11 @@ export const HelpPage = () => {
 				<C.Icon icon="redo" />
 				{" - "}
 				{t`board.help.longPress.redo`}
+			</Text>
+			<Text>
+				<C.Icon icon="chaos-bag-thin" />
+				{" - "}
+				{t`board.help.longPress.chaosBag`}
 			</Text>
 
 			<Title>{t`Chaos Bag`}</Title>

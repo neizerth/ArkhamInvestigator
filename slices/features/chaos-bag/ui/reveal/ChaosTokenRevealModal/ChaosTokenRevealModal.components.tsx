@@ -48,10 +48,10 @@ export const TopView: typeof View = styled(View)`
 `;
 
 export const BottomView: typeof View = styled(View)`
-  top: 160px; 
+  top: 170px; 
   position: absolute;
-  left: 0;
-  right: 0;
+  left: -20px;
+  right: -20px;
 `;
 
 export const LeftView: typeof View = styled(View)`

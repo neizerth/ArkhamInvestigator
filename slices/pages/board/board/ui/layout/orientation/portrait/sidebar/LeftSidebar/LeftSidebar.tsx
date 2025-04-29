@@ -1,3 +1,4 @@
+import { setShowRevealChaosTokenModal } from "@features/chaos-bag";
 import { routes } from "@shared/config";
 import {
 	redo,
@@ -45,6 +46,10 @@ export const LeftSidebar = ({ ...props }: LeftSidebarProps) => {
 		dispatch(setValueFromHistoryIndex(historyLength - 1));
 	}, [dispatch, historyLength]);
 
+	const revealToken = useCallback(() => {
+		dispatch(setShowRevealChaosTokenModal(true));
+	}, [dispatch]);
+
 	const single = boards.length === 1;
 
 	const historyEnabled = historyLength > 0;
@@ -70,6 +75,7 @@ export const LeftSidebar = ({ ...props }: LeftSidebarProps) => {
 					<C.Button
 						icon="chaos-bag-thin"
 						onPress={goToPage(routes.chaosBagPreview)}
+						onLongPress={revealToken}
 					/>
 				</C.Buttons>
 				{!single && <InvestigatorSelect />}

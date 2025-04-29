@@ -105,23 +105,27 @@ export const ChaosTokenRevealModal = (props: ChaosTokenRevealModalProps) => {
 								</C.SkillType>
 							)}
 						</C.SkillValue>
-						<C.Return onPress={closeModal}>
-							<C.ReturnAllIcon icon="reply" />
-						</C.Return>
 					</C.LeftActions>
 				</C.LeftView>
 
 				<C.BottomView>
 					<C.Actions>
+						<C.Return onPress={closeModal}>
+							<C.ReturnAllIcon icon="reply" />
+						</C.Return>
+
+						{unrevealedCount > 0 && (
+							<C.RevealMore
+								onPress={setOneMoreLoading.on}
+								onLongPress={setOneMoreLoading.on}
+							>
+								<C.RevealMoreIcon icon="token_plus_highlight" />
+							</C.RevealMore>
+						)}
 						<C.Return onPress={returnTokens}>
 							<C.ReturnFillIcon icon="token_symbol_fill" />
 							<C.ReturnIcon icon="token_dismiss_highlight" />
 						</C.Return>
-						{unrevealedCount > 0 && (
-							<C.RevealMore onPress={setOneMoreLoading.on}>
-								<C.RevealMoreIcon icon="token_plus_highlight" />
-							</C.RevealMore>
-						)}
 					</C.Actions>
 				</C.BottomView>
 
