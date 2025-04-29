@@ -2,7 +2,7 @@ import { statusBarHeight } from "@shared/config";
 import { goBack, useAppDispatch } from "@shared/lib";
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
-import { Dimensions, type ViewProps } from "react-native";
+import { type ViewProps, useWindowDimensions } from "react-native";
 import * as C from "./ContextModal.components";
 
 export type ContextModalProps = ViewProps & {
@@ -11,14 +11,6 @@ export type ContextModalProps = ViewProps & {
 	onAction?: () => void;
 	actionIcon?: string;
 	contentStyle?: ViewProps["style"];
-};
-
-const screen = Dimensions.get("screen");
-
-const maxHeight = screen.height - statusBarHeight - 110;
-
-const maxHeightStyle = {
-	maxHeight,
 };
 
 export const ContextModal = ({
@@ -31,6 +23,12 @@ export const ContextModal = ({
 	...props
 }: ContextModalProps) => {
 	const dispatch = useAppDispatch();
+	const { height } = useWindowDimensions();
+	const maxHeight = height - statusBarHeight - 60;
+
+	const maxHeightStyle = {
+		maxHeight,
+	};
 
 	const { t } = useTranslation();
 
