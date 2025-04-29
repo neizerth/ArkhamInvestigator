@@ -1,56 +1,56 @@
 {
-  "board.help.pins.press": "Press on a calculation on the board screen to unpin it",
+	"board.help.pins.press": "Press on a calculation on the board screen to unpin it",
 
-  "board.help.pins.longPress": "Long press on a calculation on the board screen to reveal chaos token for this calculation",
-  "board.help.pins.toggle": "If you have pinned calculations, you can press on its block on the board page to show/hide it",
+	"board.help.pins.longPress": "Long press on a calculation on the board screen to reveal chaos token for this calculation",
+	"board.help.pins.toggle": "If you have pinned calculations, you can press on its block on the board page to show/hide it",
 
-  "board.help.calculator.history.actions": "Swipe left on a calculation to see an additional menu",
-  "board.help.calculator.history.remove": "Remove a calculation",
-  "board.help.calculator.history.set-name": "Name a calculation",
-  "board.help.calculator.history.pin": "Pin a calculation on the top of the list and on the board screen",
+	"board.help.calculator.history.actions": "Swipe left on a calculation to see an additional menu",
+	"board.help.calculator.history.remove": "Remove a calculation",
+	"board.help.calculator.history.set-name": "Name a calculation",
+	"board.help.calculator.history.pin": "Pin a calculation on the top of the list and on the board screen",
 
-  "board.help.calculator.result": "The minimum calculation value can't be lower than 0",
-  "board.help.calculator.history": "Tap on the Equals button to add value to the calculation history. This value will be automatically updated if you update according params on your board.",
-  "app.outdated.title": "Version is outdated",
-  "app.outdated.text": "Update is required",
-  "modal.spoiler.message": "This section contains campaign spoilers. Do you want to proceed?",
+	"board.help.calculator.result": "The minimum calculation value can't be lower than 0",
+	"board.help.calculator.history": "Tap on the Equals button to add value to the calculation history. This value will be automatically updated if you update according params on your board.",
+	"app.outdated.title": "Version is outdated",
+	"app.outdated.text": "Update is required",
+	"modal.spoiler.message": "This section contains campaign spoilers. Do you want to proceed?",
 
-  "picker.deceleration.fast": "Fast",
-  "picker.deceleration.normal": "Normal",
-  "picker.deceleration.instant": "Instant",
+	"picker.deceleration.fast": "Fast",
+	"picker.deceleration.normal": "Normal",
+	"picker.deceleration.instant": "Instant",
 
-  "board.reset.text": "This action will reset the data to the beginning of the game for this investigator",
-  "board.help.scroll": "You can change any investigator value by scrolling a picker to a needed position",
+	"board.reset.text": "This action will reset the data to the beginning of the game for this investigator",
+	"board.help.scroll": "You can change any investigator value by scrolling a picker to a needed position",
 
-  "board.help.press.main": "Decrease value by 1",
-  "board.help.press.action": "Decrease value by 1. If value is 0, resets counter to its base value",
+	"board.help.press.main": "Decrease value by 1",
+	"board.help.press.action": "Decrease value by 1. If value is 0, resets counter to its base value",
 
-  "board.help.press.undo": "Undo last action",
-  "board.help.press.redo": "Redo last action",
+	"board.help.press.undo": "Undo last action",
+	"board.help.press.redo": "Redo last action",
 
-  "board.help.press.skills": "Opens skill calculator",
+	"board.help.press.skills": "Opens skill calculator",
 
-  "board.help.press.reset": "Resets investigator stats to their default values",
+	"board.help.press.reset": "Resets investigator stats to their default values",
 
-  "board.help.hold.freeArea": "Tap and hold anywhere on the screen to see the taken damage and horror. You can also view the difference between base and actiual skill values. By holding more, you will reveal a token from the chaos bag",
+	"board.help.hold.freeArea": "Tap and hold anywhere on the screen to see the taken damage and horror. You can also view the difference between base and actiual skill values. By holding more, you will reveal a token from the chaos bag",
 
-  "board.help.longPress.main": "Shows/hides modifier counter. You can change base value (e.g. permanent +1 health, -2 sanity)",
-  "board.help.longPress.secondary": "Resets value to 0",
+	"board.help.longPress.main": "Shows/hides modifier counter. You can change base value (e.g. permanent +1 health, -2 sanity)",
+	"board.help.longPress.secondary": "Resets value to 0",
 
-  "board.help.longPress.redo": "Sets change history to the last change",
-  "board.help.longPress.undo": "Sets change history to the first change",
+	"board.help.longPress.redo": "Sets change history to the last change",
+	"board.help.longPress.undo": "Sets change history to the first change",
 
-  "board.help.calculator.toggleKeyboard": "Shows/hides keyboard",
-  "board.help.calculator.clearHistory": "Clears skill check history",
+	"board.help.calculator.toggleKeyboard": "Shows/hides keyboard",
+	"board.help.calculator.clearHistory": "Clears skill check history",
 
-  "board.help.special.additionalAction": "Some investigators have additional actions. Tap on this icon to mark action as completed",
-  "board.help.special.lola": "Tap on the name to change Lola's current role (faction)",
+	"board.help.special.additionalAction": "Some investigators have additional actions. Tap on this icon to mark action as completed",
+	"board.help.special.lola": "Tap on the name to change Lola's current role (faction)",
 
-  "board.help.chaosBag": "Tap and hold anywhere on the screen or on a skill value",
-  "board.help.chaosBag.returnAll": "Return all revealed tokens to the chaos bag",
-  "board.help.chaosBag.return": "[token_symbol_fill] - Return all revealed tokens to the chaos bag (exceping [bless] and [curse])",
-  "board.help.chaosBag.token.press": "Tap on a revealed token to return it to the chaos bag (or remove if it is [bless] or [curse])",
-  "board.help.chaosBag.token.longPress": "Long press on a revealed token to seal it",
-  "board.help.chaosBag.oneMore": "Tap to reveal one more token",
-  "board.help.calculator.chaosToken": "Tap to reveal a chaos token for the last calculation"
+	"board.help.chaosBag": "Tap and hold anywhere on the screen or on a skill value",
+	"board.help.chaosBag.returnAll": "Return all revealed tokens to the chaos bag",
+	"board.help.chaosBag.return": "[token_symbol_fill] - Return all revealed tokens to the chaos bag (exceping [bless] and [curse])",
+	"board.help.chaosBag.token.press": "Tap on a revealed token to return it to the chaos bag (or remove if it is [bless] or [curse])",
+	"board.help.chaosBag.token.longPress": "Long press on a revealed token to seal it",
+	"board.help.chaosBag.oneMore": "Tap to reveal one more token",
+	"board.help.calculator.chaosToken": "Tap to reveal a chaos token for the last calculation"
 }
