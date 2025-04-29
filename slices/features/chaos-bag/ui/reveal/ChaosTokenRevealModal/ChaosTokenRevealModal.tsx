@@ -30,8 +30,6 @@ export const ChaosTokenRevealModal = (props: ChaosTokenRevealModalProps) => {
 	const skillValue = useAppSelector(selectChaosBagSkillValue);
 	const skillType = useAppSelector(selectChaosBagSkillCheckType);
 
-	const showSkillValue = skillValue !== null;
-
 	const showModal = tokens.length > 0 || unrevealedCount > 0 || show;
 
 	const onLoad = useCallback(() => {
@@ -125,7 +123,7 @@ export const ChaosTokenRevealModal = (props: ChaosTokenRevealModalProps) => {
 					onPress={onTokenPress(lastToken)}
 					onLongPress={toggleSeal(lastToken)}
 				>
-					<C.LastToken {...lastToken} tokenPadding={5} sealOffset={5} />
+					<C.LastToken {...lastToken} />
 				</C.TokenButton>
 				{oneMoreLoading && (
 					<>

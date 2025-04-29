@@ -24,6 +24,8 @@ export const LastToken: typeof ChaosTokenPreview = styled(
 	ChaosTokenPreview,
 ).attrs({
 	size: 150,
+	tokenPadding: 5,
+	sealOffset: 5,
 })`
   
 `;
@@ -168,7 +170,7 @@ export const History: typeof ChaosTokenRevealHistory = styled(
 `;
 
 export const SkillValue: typeof Row = styled(Row)`
-  padding-top: ${size.gap.default}px;
+  padding-top: ${size.gap.medium}px;
   justify-content: center;
   align-items: center;
   position: relative;
@@ -193,5 +195,5 @@ export const SkillTypeIcon: typeof StatIcon = styled(StatIcon)`
 export const SkillType: typeof View = styled(View)`
   position: absolute;
   top: -8px;
-  left: 33px;
+  left: 30px;
 `;
