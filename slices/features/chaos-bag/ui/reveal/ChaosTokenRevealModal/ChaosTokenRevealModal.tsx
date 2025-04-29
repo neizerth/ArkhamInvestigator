@@ -75,7 +75,7 @@ export const ChaosTokenRevealModal = (props: ChaosTokenRevealModalProps) => {
 	}
 
 	if (tokens.length === 0) {
-		return <C.Loader {...props} duration={3000} onLoad={onLoad} show={show} />;
+		return <C.Loader {...props} onLoad={onLoad} show={show} />;
 	}
 
 	const lastToken = last(tokens) as ChaosBagToken;
@@ -129,7 +129,7 @@ export const ChaosTokenRevealModal = (props: ChaosTokenRevealModalProps) => {
 				</C.TokenButton>
 				{oneMoreLoading && (
 					<>
-						<C.OneMoreLoader duration={2000} onLoad={onLoad} show />
+						<C.OneMoreLoader onLoad={onLoad} show />
 						<C.OneMoreHint>{t`Hold`}</C.OneMoreHint>
 					</>
 				)}

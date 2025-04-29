@@ -35,10 +35,15 @@ export const Container: FC<ContainerProps> = styled(View)`
 type HistoryProps = ContainerProps & PropsWithUnit;
 
 export const Buttons: FC<HistoryProps> = styled(View)`
-  gap: 15px;
+  gap: 10px;
   flex: 1;
   align-items: center;
   justify-content: flex-end;
+  ${({ single }: HistoryProps) =>
+		single &&
+		css`
+      gap: 25px;
+    `}
   ${({ single, unit }: HistoryProps) => {
 		if (single || isHistoryInColumn(unit)) {
 			return;

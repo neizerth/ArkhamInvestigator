@@ -1,3 +1,4 @@
+import { ChaosBagProvider } from "@features/chaos-bag";
 import { I18NProvider } from "@features/i18n";
 import { ModalProvider } from "@features/modal";
 import { DarkTheme, ThemeProvider } from "@react-navigation/native";
@@ -15,7 +16,9 @@ export const AppProvider = ({ children }: PropsWithChildren) => {
 					<I18NProvider>
 						<DataProvider>
 							<ModalProvider>
-								<OutdatedCheckProvider>{children}</OutdatedCheckProvider>
+								<OutdatedCheckProvider>
+									<ChaosBagProvider>{children}</ChaosBagProvider>
+								</OutdatedCheckProvider>
 							</ModalProvider>
 						</DataProvider>
 					</I18NProvider>

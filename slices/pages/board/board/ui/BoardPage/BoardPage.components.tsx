@@ -1,4 +1,3 @@
-import { ChaosTokenRevealModal } from "@features/chaos-bag";
 import { color, statusBarHeight } from "@shared/config";
 import type { FC } from "react";
 import { View } from "react-native";
@@ -62,15 +61,4 @@ export const FactionModal: typeof FactionSelect = styled(FactionSelect)`
   right: 0;
   top: 0;
   bottom: 0;
-`;
-
-export const ChaosBagModal: typeof ChaosTokenRevealModal = styled(
-	ChaosTokenRevealModal,
-)`
-  position: absolute;
-  z-index: 3;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
 `;

@@ -123,3 +123,9 @@ export const Rule: FC<RuleProps> = styled(RuleBottom).attrs({
   `}
   margin-bottom: -5px;
 `;
+
+export const RevealButton: typeof Buttons.IconButton = styled(
+	Buttons.IconButton,
+)`
+  flex: 1;
+`;

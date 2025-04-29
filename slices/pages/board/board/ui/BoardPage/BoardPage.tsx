@@ -28,7 +28,6 @@ export const BoardPage = () => {
 				<C.Background />
 				{orientation.type === "portrait" && <C.PortraitLayout top={areaTop} />}
 				<C.FactionModal />
-				<C.ChaosBagModal />
 			</C.Container>
 		</LayoutContext.Provider>
 	);

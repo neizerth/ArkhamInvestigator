@@ -1,15 +1,13 @@
-const MIN_FRAME_TIME = 30;
+const MIN_FRAME_DURATION = 60;
 
 export const getRevealAnimation = (duration: number) => {
-	const rate = duration / 100;
-	const frameDuration = Math.max(duration, MIN_FRAME_TIME);
+	const calculatedFrameDuration = duration / 100;
+	const frameDuration = Math.max(MIN_FRAME_DURATION, calculatedFrameDuration);
 
-	const fps = duration / frameDuration;
-
-	const valuePerFrame = (fps * 100) / rate;
+	const valuePerFrame = frameDuration / calculatedFrameDuration;
 
 	return {
-		fps,
+		frameDuration,
 		valuePerFrame,
 	};
 };

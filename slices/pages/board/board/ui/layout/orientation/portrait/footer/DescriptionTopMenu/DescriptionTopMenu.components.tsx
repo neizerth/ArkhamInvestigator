@@ -12,9 +12,9 @@ export const Container: typeof Row = styled(Row)`
 export const Button: typeof IconButton = styled(IconButton).attrs({
 	iconStyle: {
 		color: color.light10,
-		fontSize: 30,
+		fontSize: 28,
 		lineHeight: 30,
 	},
 })`
 	height: 48px;
-  `;
+`;

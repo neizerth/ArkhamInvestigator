@@ -1,5 +1,6 @@
+import { setShowRevealChaosTokenModal } from "@features/chaos-bag";
+import { useSkillItemChaosTokenRevealModal } from "@features/skill-check";
 import {
-	clearSkillCheckHistoryItem,
 	getSkillCheckValue,
 	sanitizeSkillCheckExpression,
 	selectCurrentBoardProp,
@@ -31,6 +32,12 @@ export const ExpressionHistory = ({
 	const dispatch = useAppDispatch();
 	const history = useAppSelector(selectSkillCheckHistory);
 	const value = useAppSelector(selectCurrentBoardProp("value"));
+
+	const showReveal = useSkillItemChaosTokenRevealModal();
+
+	const hideReveal = useCallback(() => {
+		dispatch(setShowRevealChaosTokenModal(false));
+	}, [dispatch]);
 
 	const data = useMemo(() => {
 		return history.map((item) => ({
@@ -68,20 +75,14 @@ export const ExpressionHistory = ({
 		[dispatch],
 	);
 
-	const clearValue = useCallback(
-		(item: SkillCheckHistoryItem) => () => {
-			dispatch(clearSkillCheckHistoryItem(item.id));
-		},
-		[dispatch],
-	);
-
 	const renderItem = useCallback(
 		(item: ListItem) => {
 			return (
 				<C.Item
 					key={item.id}
 					onPress={setCurrentValue(item.expression)}
-					onLongPress={clearValue(item)}
+					onPressIn={showReveal(item)}
+					onPressOut={hideReveal}
 				>
 					<C.ItemContent
 						itemId={item.id}
@@ -92,7 +93,7 @@ export const ExpressionHistory = ({
 				</C.Item>
 			);
 		},
-		[clearValue, setCurrentValue],
+		[setCurrentValue, hideReveal, showReveal],
 	);
 
 	const renderListItem = useCallback(

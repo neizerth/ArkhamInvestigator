@@ -1,5 +1,5 @@
 import { useFadeAnimation } from "@shared/lib";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import type { ViewProps } from "react-native";
 import * as C from "./ChaosTokenRevealLoader.components";
 import { getRevealAnimation } from "./getRevealAnimation";
@@ -12,18 +12,26 @@ export type ChaosTokenRevealLoaderProps = ViewProps & {
 };
 
 export const ChaosTokenRevealLoader = ({
-	duration = 3000,
+	duration = 2000,
 	size = 150,
 	onLoad,
 	show = false,
 	...props
 }: ChaosTokenRevealLoaderProps) => {
-	const { fps, valuePerFrame } = getRevealAnimation(duration);
+	const { frameDuration, valuePerFrame } = getRevealAnimation(duration);
 	const [progress, setProgress] = useState(0);
+
+	const interval = useRef<NodeJS.Timeout>();
 
 	const progressStep = useCallback(() => {
 		setProgress((value) => Math.min(Math.round(value + valuePerFrame), 100));
 	}, [valuePerFrame]);
+
+	useEffect(() => {
+		return () => {
+			clearInterval(interval.current);
+		};
+	}, []);
 
 	useEffect(() => {
 		if (!show) {
@@ -33,14 +41,15 @@ export const ChaosTokenRevealLoader = ({
 			return;
 		}
 		if (progress === 100) {
+			clearInterval(interval.current);
 			onLoad?.();
 			return;
 		}
 		if (progress === 0) {
+			interval.current = setInterval(progressStep, frameDuration);
 			progressStep();
 		}
-		setTimeout(progressStep, fps);
-	}, [show, progressStep, progress, fps, onLoad]);
+	}, [show, progressStep, progress, frameDuration, onLoad]);
 
 	const style = useFadeAnimation({
 		show,

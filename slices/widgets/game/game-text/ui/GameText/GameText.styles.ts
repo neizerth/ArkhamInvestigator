@@ -26,5 +26,7 @@ export const defaultComponentStyles: ComponentStyleMap = {
 	break: {
 		height: 32,
 	},
-	text: {},
+	text: {
+		fontFamily: Alegreya.regular,
+	},
 };

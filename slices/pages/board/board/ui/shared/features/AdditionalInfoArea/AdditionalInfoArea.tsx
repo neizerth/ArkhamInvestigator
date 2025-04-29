@@ -18,7 +18,7 @@ export const AdditionalInfoArea = (props: AdditionalInfoAreaProps) => {
 
 		timeout.current = setTimeout(() => {
 			dispatch(setShowAdditionalInformation(false));
-		}, 1500);
+		}, 1000);
 	}, [dispatch]);
 
 	const onHide = useCallback(() => {

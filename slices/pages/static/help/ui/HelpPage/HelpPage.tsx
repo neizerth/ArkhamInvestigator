@@ -75,6 +75,28 @@ export const HelpPage = () => {
 				{t`board.help.longPress.redo`}
 			</Text>
 
+			<Title>{t`Chaos Bag`}</Title>
+
+			<Paragraph>{t`board.help.chaosBag`}</Paragraph>
+
+			<Text>
+				<C.Icon icon="reply" />
+				{" - "}
+				{t`board.help.chaosBag.returnAll`}
+			</Text>
+
+			<C.IconText value={t`board.help.chaosBag.return`} />
+			<Text>
+				<C.Icon icon="plus-thin" />
+				{" - "}
+				{t`board.help.chaosBag.oneMore`}
+			</Text>
+			<Paragraph>
+				<C.IconText value={t`board.help.chaosBag.token.press`} />
+			</Paragraph>
+
+			<Paragraph>{t`board.help.chaosBag.token.longPress`}</Paragraph>
+
 			<Title>{t`Calculator`}</Title>
 			<Text>
 				<C.Icon icon="history" /> / <C.Icon icon="calculator" />
@@ -85,6 +107,11 @@ export const HelpPage = () => {
 				<C.Icon icon="trash" />
 				{" - "}
 				{t`board.help.calculator.clearHistory`}
+			</Text>
+			<Text>
+				<C.Icon icon="token_sealed_outline" />
+				{" - "}
+				{t`board.help.calculator.chaosToken`}
 			</Text>
 			<Paragraph>{t`board.help.calculator.result`}</Paragraph>
 			<Paragraph>{t`board.help.calculator.history`}</Paragraph>
@@ -109,7 +136,8 @@ export const HelpPage = () => {
 				{t`board.help.calculator.history.pin`}
 			</Text>
 
-			<Paragraph>{t`board.help.pins.long-press`}</Paragraph>
+			<Paragraph>{t`board.help.pins.press`}</Paragraph>
+			<Paragraph>{t`board.help.pins.longPress`}</Paragraph>
 			<Paragraph>{t`board.help.pins.toggle`}</Paragraph>
 
 			<Title>{t`Investigator Special Actions`}</Title>

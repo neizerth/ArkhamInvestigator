@@ -1,5 +1,6 @@
 import { setShowRevealChaosTokenModal } from "@features/chaos-bag";
 import { selectCurrentLanguage } from "@features/i18n";
+import { useSkillItemChaosTokenRevealModal } from "@features/skill-check";
 import {
 	selectCurrentBoardProp,
 	selectPinnedSkillChecks,
@@ -13,7 +14,6 @@ import type { ViewProps } from "react-native";
 import * as C from "./PinnedSkilllChecks.components";
 import { getExpressionDisplayStyle } from "./PinnedSkilllChecks.styles";
 import { useContainerAnimation, useContentAnimation } from "./animation";
-import { useSkillItemChaosTokenRevealModal } from "./useSkillItemChaosTokenRevealModal";
 
 export type PinnedSkilllChecksProps = ViewProps;
 
