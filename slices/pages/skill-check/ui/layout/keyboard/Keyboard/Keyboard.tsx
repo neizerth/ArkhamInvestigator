@@ -1,4 +1,7 @@
-import { setShowRevealChaosTokenModal } from "@features/chaos-bag";
+import {
+	selectUnrevealedChaosTokensCount,
+	setShowRevealChaosTokenModal,
+} from "@features/chaos-bag";
 import { PrimaryButton } from "@features/haptic";
 import { useAppTranslation } from "@features/i18n";
 import {
@@ -26,10 +29,12 @@ export const Keyboard = ({ ...props }: KeyboardProps) => {
 	const dispatch = useAppDispatch();
 	const { t } = useAppTranslation();
 	const historyShown = useAppSelector(selectHistoryShown);
+	const unrevealedCount = useAppSelector(selectUnrevealedChaosTokensCount);
 	const window = useWindowDimensions();
 	const showEquals = window.height > 590;
 	const showRule = window.height > 670;
 
+	const showRevealButton = unrevealedCount > 0;
 	const showReveal = useOpenChaosBagModal();
 
 	const hideReveal = useCallback(() => {
@@ -122,10 +127,14 @@ export const Keyboard = ({ ...props }: KeyboardProps) => {
 								<C.Operator {...withOperatorProps("subtract")} />
 							</C.Row>
 							<C.Row>
-								<C.RevealButton
-									icon="token_sealed_outline"
-									onPress={showReveal}
-								/>
+								{showRevealButton ? (
+									<C.RevealButton
+										icon="token_sealed_outline"
+										onPress={showReveal}
+									/>
+								) : (
+									<C.Placeholder />
+								)}
 								<C.Button {...withDigitProps(0)} />
 								{showEquals ? (
 									<C.Placeholder />
