@@ -33,7 +33,9 @@ export const ChaosTokenRevealHistory = ({
 			return (
 				<C.Button onPress={onTokenPress(item)} onLongPress={toggleSeal(item)}>
 					<C.Position>
-						<C.PositionText>{index + 1}</C.PositionText>
+						<C.PositionText size={index.toString().length}>
+							{index + 1}
+						</C.PositionText>
 					</C.Position>
 					<C.Token {...item} />
 				</C.Button>
