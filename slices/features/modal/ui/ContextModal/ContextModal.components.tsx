@@ -1,12 +1,13 @@
 import { Alegreya } from "@assets/fonts";
-import { color, size } from "@shared/config";
+import { color, size, statusBarHeight } from "@shared/config";
 import { Icon, Text } from "@shared/ui";
 import { View } from "react-native";
+import { ScrollView } from "react-native-gesture-handler";
 import styled, { css } from "styled-components/native";
 import { TouchableOpacity } from "../../../haptic";
 
 export const Container: typeof View = styled(View)`
-  padding: ${size.gap.default}px;
+  padding: ${statusBarHeight + size.gap.default}px ${size.gap.default}px ${size.gap.small}px;
   justify-content: flex-end;
   filter: drop-shadow(0 0 5px rgb(0, 0, 0, 1));
 `;
@@ -23,6 +24,13 @@ export const Header: typeof View = styled(View)`
 export const Title: typeof Text = styled(Text)`
   font-family: ${Alegreya.medium};
   color: ${color.text};
+`;
+
+export const Content: typeof ScrollView = styled(ScrollView).attrs({
+	contentContainerStyle: {
+		minHeight: 100,
+	},
+})`
 `;
 
 export const Body: typeof View = styled(View)`

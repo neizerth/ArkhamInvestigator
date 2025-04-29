@@ -1,8 +1,8 @@
-import { color, size } from "@shared/config";
+import { color, font, size } from "@shared/config";
 import { Row, Text, TextView } from "@shared/ui";
 import { View } from "react-native";
 import styled from "styled-components/native";
-import { TouchableOpacity } from "../../../haptic";
+import { Button, TouchableOpacity } from "../../../haptic";
 import { ContextModal } from "../../../modal";
 import {
 	BlessCurseControl,
@@ -49,4 +49,14 @@ export const Hint: typeof TextView = styled(TextView).attrs({
 	},
 })`
   text-align: center;
+`;
+
+export const RevealButton: typeof Button = styled(Button).attrs({
+	textStyle: {
+		fontSize: font.size.small,
+	},
+})`
+  margin: 0px auto ${size.gap.default}px;
+  border: 0px solid ${color.dark10};
+  border-bottom-width: 1px;
 `;

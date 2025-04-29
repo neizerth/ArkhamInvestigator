@@ -51,6 +51,6 @@
 	"board.help.chaosBag.return": "[token_symbol_fill] - Return all revealed tokens to the chaos bag (exceping [bless] and [curse])",
 	"board.help.chaosBag.token.press": "Tap on a revealed token to return it to the chaos bag (or remove if it is [bless] or [curse])",
 	"board.help.chaosBag.token.longPress": "Long press on a revealed token to seal it",
-	"board.help.chaosBag.oneMore": "Long press to reveal one more token",
+	"board.help.chaosBag.oneMore": "Press to reveal one more token",
 	"board.help.calculator.chaosToken": "Long press to reveal a chaos token for the last calculation"
 }

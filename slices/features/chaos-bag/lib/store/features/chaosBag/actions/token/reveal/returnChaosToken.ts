@@ -28,7 +28,7 @@ export const returnChaosToken =
 
 		dispatch(setRevealedTokenIds(revealedData));
 
-		if (!token.removable) {
+		if (!token.removable || token.sealed) {
 			return;
 		}
 

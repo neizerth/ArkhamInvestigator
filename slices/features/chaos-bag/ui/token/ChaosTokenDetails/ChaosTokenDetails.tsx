@@ -6,6 +6,7 @@ import type { ViewProps } from "react-native";
 import { chaosToken } from "../../../config";
 import {
 	addChaosToken,
+	removeAllChaosTokensByType,
 	removeChaosTokenByType,
 	selectChaosTokenCount,
 } from "../../../lib";
@@ -29,6 +30,10 @@ export const ChaosTokenDetails = ({
 	const dispatch = useAppDispatch();
 	const count = useAppSelector(selectChaosTokenCount(type));
 	const max = chaosToken.count[type];
+
+	const clear = useCallback(() => {
+		dispatch(removeAllChaosTokensByType(type));
+	}, [dispatch, type]);
 
 	const onDecrement = useCallback(() => {
 		if (count <= 0) {
@@ -66,6 +71,7 @@ export const ChaosTokenDetails = ({
 					max={max}
 					onDecrement={onDecrement}
 					onIncrement={onIncrement}
+					onLongPress={clear}
 					showValue={!preview}
 				/>
 				{preview && count > 0 && (

@@ -6,10 +6,15 @@ import {
 	useAppDispatch,
 	useAppSelector,
 } from "@shared/lib";
+import { Delay } from "@shared/ui";
 import { useCallback, useMemo } from "react";
 import type { ViewProps } from "react-native";
 import { useAppTranslation } from "../../../i18n";
-import { selectOrderedChaosBagContents, toggleChaosTokenSeal } from "../../lib";
+import {
+	selectOrderedChaosBagContents,
+	setShowRevealChaosTokenModal,
+	toggleChaosTokenSeal,
+} from "../../lib";
 import * as C from "./ChaosBagPreview.components";
 
 export type ChaosBagPreviewProps = ViewProps;
@@ -39,6 +44,12 @@ export const ChaosBagPreview = (props: ChaosBagPreviewProps) => {
 		[dispatch],
 	);
 
+	const reveal = useCallback(() => {
+		dispatch(goBack());
+
+		dispatch(setShowRevealChaosTokenModal(true));
+	}, [dispatch]);
+
 	return (
 		<C.Container
 			{...props}
@@ -46,6 +57,11 @@ export const ChaosBagPreview = (props: ChaosBagPreviewProps) => {
 			actionIcon="edit"
 			onAction={onEdit}
 		>
+			<C.RevealButton
+				onPress={reveal}
+				icon="token_sealed_outline"
+				text={t`Draw chaos tokens`}
+			/>
 			<C.BlessCurse />
 			{data.sealed.length > 0 ? (
 				<C.Sealed>
@@ -66,17 +82,19 @@ export const ChaosBagPreview = (props: ChaosBagPreviewProps) => {
 				<C.Hint>{t`Hold to seal`}</C.Hint>
 			)}
 
-			<C.List>
-				{data.regular.map((token) => (
-					<C.TokenButton
-						key={token.id}
-						onLongPress={toggleSeal(token.id)}
-						activeOpacity={1}
-					>
-						<C.Token {...token} />
-					</C.TokenButton>
-				))}
-			</C.List>
+			<Delay>
+				<C.List>
+					{data.regular.map((token) => (
+						<C.TokenButton
+							key={token.id}
+							onLongPress={toggleSeal(token.id)}
+							activeOpacity={1}
+						>
+							<C.Token {...token} />
+						</C.TokenButton>
+					))}
+				</C.List>
+			</Delay>
 		</C.Container>
 	);
 };

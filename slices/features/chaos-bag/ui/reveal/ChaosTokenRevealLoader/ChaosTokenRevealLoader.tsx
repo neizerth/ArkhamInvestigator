@@ -12,7 +12,7 @@ export type ChaosTokenRevealLoaderProps = ViewProps & {
 };
 
 export const ChaosTokenRevealLoader = ({
-	duration = 2000,
+	duration = 1000,
 	size = 150,
 	onLoad,
 	show = false,
@@ -28,6 +28,7 @@ export const ChaosTokenRevealLoader = ({
 	}, [valuePerFrame]);
 
 	useEffect(() => {
+		clearInterval(interval.current);
 		return () => {
 			clearInterval(interval.current);
 		};
@@ -45,9 +46,8 @@ export const ChaosTokenRevealLoader = ({
 			onLoad?.();
 			return;
 		}
-		if (progress === 0) {
+		if (progress === 0 && !interval.current) {
 			interval.current = setInterval(progressStep, frameDuration);
-			progressStep();
 		}
 	}, [show, progressStep, progress, frameDuration, onLoad]);
 

@@ -1,4 +1,4 @@
-import { color, font, size } from "@shared/config";
+import { color, size } from "@shared/config";
 import { Icon, IconNumber, Row, StatIcon, TextView } from "@shared/ui";
 import { View } from "react-native";
 import styled from "styled-components/native";
@@ -130,25 +130,13 @@ export const ActionTitle: typeof TextView = styled(TextView)`
   
 `;
 
-export const OneMoreHint: typeof TextView = styled(TextView).attrs({
-	contentContainerStyle: {
-		justifyContent: "center",
-		alignItems: "center",
-		position: "absolute",
-		left: 0,
-		top: 0,
-		right: 0,
-		bottom: 0,
-	},
-})`
-  color: ${color.white};
-  font-size: ${font.size.xs}px;
-  background: #394852;
-  border-radius: ${size.borderRadius.default}px;
-  padding: 2px;
+export const OneMoreLoader: typeof Loader = styled(Loader)`
+  flex: 1;
 `;
 
-export const OneMoreLoader: typeof Loader = styled(Loader)`
+export const OneMoreLoaderCancel: typeof TouchableOpacity = styled(
+	TouchableOpacity,
+)`
   position: absolute;
   z-index: 5;
   top: 0;

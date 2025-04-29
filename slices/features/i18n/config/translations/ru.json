@@ -94,6 +94,6 @@
 	"board.help.chaosBag.return": "[token_symbol_fill] - Вернуть все вытянутые жетоны в мешок хаоса (кроме [bless] и [curse])",
 	"board.help.chaosBag.token.press": "Нажатие на жетон вернёт его в мешок или удалит, если это [bless] или [curse]",
 	"board.help.chaosBag.token.longPress": "Удерживайте нажатие на вытянутом жетоне, чтобы его запечатать",
-	"board.help.chaosBag.oneMore": "Удерживайте нажатие, чтобы вытянуть ещё один жетон",
+	"board.help.chaosBag.oneMore": "Нажмите, чтобы вытянуть ещё один жетон",
 	"board.help.calculator.chaosToken": "Удерживайте нажатие, чтобы вытянуть жетон хаоса для проверки навыка по последнему расчёту"
 }

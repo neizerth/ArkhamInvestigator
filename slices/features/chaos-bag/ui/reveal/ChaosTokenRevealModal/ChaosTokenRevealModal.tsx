@@ -30,9 +30,11 @@ export const ChaosTokenRevealModal = (props: ChaosTokenRevealModalProps) => {
 	const skillValue = useAppSelector(selectChaosBagSkillValue);
 	const skillType = useAppSelector(selectChaosBagSkillCheckType);
 
+	const isEmpty = tokens.length === 0 && unrevealedCount === 0;
+
 	const showModal = tokens.length > 0 || unrevealedCount > 0 || show;
 
-	const onLoad = useCallback(() => {
+	const reveal = useCallback(() => {
 		setOneMoreLoading.off();
 		dispatch(revealChaosToken(1));
 	}, [dispatch, setOneMoreLoading.off]);
@@ -68,12 +70,12 @@ export const ChaosTokenRevealModal = (props: ChaosTokenRevealModalProps) => {
 		return init(tokens);
 	}, [tokens]);
 
-	if (!showModal) {
+	if (!showModal || isEmpty) {
 		return null;
 	}
 
 	if (tokens.length === 0) {
-		return <C.Loader {...props} onLoad={onLoad} show={show} />;
+		return <C.Loader {...props} onLoad={reveal} show={show} />;
 	}
 
 	const lastToken = last(tokens) as ChaosBagToken;
@@ -108,10 +110,7 @@ export const ChaosTokenRevealModal = (props: ChaosTokenRevealModalProps) => {
 							<C.ReturnIcon icon="token_dismiss_highlight" />
 						</C.Return>
 						{unrevealedCount > 0 && (
-							<C.RevealMore
-								onPressIn={setOneMoreLoading.on}
-								onPressOut={setOneMoreLoading.off}
-							>
+							<C.RevealMore onPress={setOneMoreLoading.on}>
 								<C.RevealMoreIcon icon="token_plus_highlight" />
 							</C.RevealMore>
 						)}
@@ -126,10 +125,12 @@ export const ChaosTokenRevealModal = (props: ChaosTokenRevealModalProps) => {
 					<C.LastToken {...lastToken} />
 				</C.TokenButton>
 				{oneMoreLoading && (
-					<>
-						<C.OneMoreLoader onLoad={onLoad} show />
-						<C.OneMoreHint>{t`Hold`}</C.OneMoreHint>
-					</>
+					<C.OneMoreLoaderCancel
+						onPress={setOneMoreLoading.off}
+						activeOpacity={1}
+					>
+						<C.OneMoreLoader onLoad={reveal} duration={500} show />
+					</C.OneMoreLoaderCancel>
 				)}
 			</C.Content>
 		</C.Container>
