@@ -1,4 +1,9 @@
-import Svg, { type SvgProps, Path, type PathProps } from "react-native-svg";
+import { memo } from "react";
+import Svg, {
+	type SvgProps,
+	Path as BasePath,
+	type PathProps as BasePathProps,
+} from "react-native-svg";
 
 export type ChaosTokenRevealProgressProps = Omit<
 	SvgProps,
@@ -7,6 +12,20 @@ export type ChaosTokenRevealProgressProps = Omit<
 	size?: number;
 	value?: number;
 };
+
+type PathProps = BasePathProps & {
+	visible?: boolean;
+};
+
+const Segment = ({ visible = true, ...props }: PathProps) => {
+	if (!visible) {
+		return;
+	}
+
+	return <BasePath {...props} />;
+};
+
+const Path = memo(Segment);
 
 export const ChaosTokenRevealProgress = ({
 	size = 1024,
@@ -17,7 +36,7 @@ export const ChaosTokenRevealProgress = ({
 	const segmentIndex = Math.round((value * segmentsCount) / 100) + 1;
 
 	const initPath = (index: number): PathProps => ({
-		opacity: segmentIndex >= index ? 1 : 0,
+		visible: segmentIndex >= index,
 	});
 
 	return (
