@@ -1,6 +1,6 @@
 import { useAppDispatch, useAppSelector, useBoolean } from "@shared/lib";
 import { init, last } from "ramda";
-import { useCallback, useMemo } from "react";
+import { useCallback, useEffect, useMemo } from "react";
 import type { ViewProps } from "react-native";
 import { useAppTranslation } from "../../../../i18n";
 import {
@@ -70,7 +70,15 @@ export const ChaosTokenRevealModal = (props: ChaosTokenRevealModalProps) => {
 		return init(tokens);
 	}, [tokens]);
 
-	if (!showModal || isEmpty) {
+	const hideModal = !showModal || isEmpty;
+
+	useEffect(() => {
+		if (show && hideModal) {
+			closeModal();
+		}
+	}, [hideModal, show, closeModal]);
+
+	if (hideModal) {
 		return null;
 	}
 
@@ -88,7 +96,7 @@ export const ChaosTokenRevealModal = (props: ChaosTokenRevealModalProps) => {
 					<C.BlessCurse />
 				</C.TopView>
 				<C.LeftView>
-					<C.SideActions>
+					<C.LeftActions>
 						<C.SkillValue>
 							{skillValue && <C.SkillValueText value={skillValue} />}
 							{skillType && (
@@ -100,7 +108,7 @@ export const ChaosTokenRevealModal = (props: ChaosTokenRevealModalProps) => {
 						<C.Return onPress={closeModal}>
 							<C.ReturnAllIcon icon="reply" />
 						</C.Return>
-					</C.SideActions>
+					</C.LeftActions>
 				</C.LeftView>
 
 				<C.BottomView>

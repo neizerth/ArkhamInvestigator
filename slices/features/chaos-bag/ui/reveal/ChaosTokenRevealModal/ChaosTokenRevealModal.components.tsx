@@ -73,6 +73,10 @@ export const SideActions: typeof View = styled(View)`
   height: 150px;
 `;
 
+export const LeftActions: typeof SideActions = styled(SideActions)`
+  align-items: flex-end;
+`;
+
 export const Action: typeof TouchableOpacity = styled(TouchableOpacity)`
   width: 40px;
   height: 40px;
@@ -183,5 +187,5 @@ export const SkillTypeIcon: typeof StatIcon = styled(StatIcon)`
 export const SkillType: typeof View = styled(View)`
   position: absolute;
   top: -8px;
-  left: 30px;
+  right: -30px;
 `;

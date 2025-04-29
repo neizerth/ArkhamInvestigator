@@ -12,7 +12,7 @@ import {
 	useAppSelector,
 } from "@shared/lib";
 import type { SkillCheckCommandType, SkillCheckOperator } from "@shared/model";
-import { useCallback } from "react";
+import { useCallback, useEffect } from "react";
 import { type ViewProps, useWindowDimensions } from "react-native";
 import { characters } from "../../../../config";
 import { LayoutContainer } from "../../LayoutContainer";
@@ -35,6 +35,12 @@ export const Keyboard = ({ ...props }: KeyboardProps) => {
 	const hideReveal = useCallback(() => {
 		dispatch(setShowRevealChaosTokenModal(false));
 	}, [dispatch]);
+
+	useEffect(() => {
+		return () => {
+			hideReveal();
+		};
+	}, [hideReveal]);
 
 	const toggleHistory = useCallback(() => {
 		dispatch(setHistoryShown(!historyShown));
@@ -118,8 +124,7 @@ export const Keyboard = ({ ...props }: KeyboardProps) => {
 							<C.Row>
 								<C.RevealButton
 									icon="token_sealed_outline"
-									onPressIn={showReveal}
-									onPressOut={hideReveal}
+									onPress={showReveal}
 								/>
 								<C.Button {...withDigitProps(0)} />
 								{showEquals ? (
