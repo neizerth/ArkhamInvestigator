@@ -1,4 +1,9 @@
-import { useAppDispatch, useAppSelector, useBoolean } from "@shared/lib";
+import {
+	useAppDispatch,
+	useAppSelector,
+	useBackButton,
+	useBoolean,
+} from "@shared/lib";
 import { init, last } from "ramda";
 import { useCallback, useEffect, useMemo } from "react";
 import type { ViewProps } from "react-native";
@@ -58,6 +63,16 @@ export const ChaosTokenRevealModal = (props: ChaosTokenRevealModalProps) => {
 		dispatch(returnChaosTokens());
 		closeModal();
 	}, [dispatch, closeModal]);
+
+	const onBack = useCallback(() => {
+		if (show) {
+			returnTokens();
+			return true;
+		}
+		return false;
+	}, [show, returnTokens]);
+
+	useBackButton(onBack);
 
 	const toggleSeal = useCallback(
 		(token: ChaosBagToken) => () => {

@@ -1,7 +1,6 @@
 import { closeModal } from "@features/modal/lib";
-import { useAppDispatch, useAppSelector } from "@shared/lib";
-import { type PropsWithChildren, useCallback, useEffect, useRef } from "react";
-import { BackHandler } from "react-native";
+import { useAppDispatch, useAppSelector, useBackButton } from "@shared/lib";
+import { type PropsWithChildren, useCallback, useRef } from "react";
 import { ModalContext, type ModalEventHandlerType } from "../../lib/context";
 import {
 	selectModalData,
@@ -28,21 +27,16 @@ export const ModalProvider = ({ children }: PropsWithChildren) => {
 		onClose,
 	};
 
-	useEffect(() => {
-		const onBack = () => {
-			if (modalId && onClose.current) {
-				close();
-				onClose.current();
-				return true;
-			}
-			return false;
-		};
-		const backHandler = BackHandler.addEventListener(
-			"hardwareBackPress",
-			onBack,
-		);
-		return () => backHandler.remove();
-	}, [modalId, close]);
+	const onBack = useCallback(() => {
+		if (modalId && onClose.current) {
+			close();
+			onClose.current();
+			return true;
+		}
+		return false;
+	}, [close, modalId]);
+
+	useBackButton(onBack);
 
 	return (
 		<ModalContext.Provider value={contextValue}>

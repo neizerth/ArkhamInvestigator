@@ -1,2 +1,2 @@
-export * from "./useAppData";
+export * from "./useAppInit";
 export * from "./useAppLoader";

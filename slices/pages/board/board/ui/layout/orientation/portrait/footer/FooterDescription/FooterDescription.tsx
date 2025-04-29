@@ -7,9 +7,10 @@ import {
 	setShowDescription,
 	useAppDispatch,
 	useAppSelector,
+	useBackButton,
 } from "@shared/lib";
-import { useCallback, useContext, useEffect } from "react";
-import { BackHandler, StyleSheet, type ViewProps } from "react-native";
+import { useCallback, useContext } from "react";
+import { StyleSheet, type ViewProps } from "react-native";
 import { LayoutContext } from "../../../../../../config";
 import * as C from "./FooterDescription.components";
 import { useShowAnimation } from "./useShowAnimation";
@@ -34,21 +35,16 @@ export const FooterDescription = ({ ...props }: FooterDescriptionProps) => {
 		}
 	}, [showDescription, dispatch, impactShowFeedback]);
 
-	useEffect(() => {
-		const onBack = () => {
-			const isBoard = route.name === "board/index";
-			if (showDescription && isBoard) {
-				dispatch(setShowDescription(false));
-				return true;
-			}
-			return false;
-		};
-		const backHandler = BackHandler.addEventListener(
-			"hardwareBackPress",
-			onBack,
-		);
-		return () => backHandler.remove();
+	const onBack = useCallback(() => {
+		const isBoard = route.name === "board/index";
+		if (showDescription && isBoard) {
+			dispatch(setShowDescription(false));
+			return true;
+		}
+		return false;
 	}, [dispatch, showDescription, route]);
+
+	useBackButton(onBack);
 
 	const contentStyle = useShowAnimation();
 
