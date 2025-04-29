@@ -16,7 +16,7 @@ export const chaosTokenCount: Record<ChaosTokenType, number> = {
 	cultist: 4,
 	tablet: 4,
 	elderThing: 4,
-	// auto-fail ultimatum
+	// Ultimatum of Failure: +1 auto-fail
 	autoFail: 2,
 	elderSign: 1,
 	bless: 10,

@@ -93,14 +93,6 @@ export const ChaosBagPreview = (props: ChaosBagPreviewProps) => {
 			actionIcon="edit"
 			onAction={onEdit}
 		>
-			{tokens.length > 0 && (
-				<C.RevealButton
-					onPress={reveal}
-					icon="token_sealed_outline"
-					text={t`Draw chaos tokens`}
-				/>
-			)}
-
 			<C.BlessCurse />
 			<Delay>
 				{data.sealed.length > 0 && (
@@ -116,6 +108,13 @@ export const ChaosBagPreview = (props: ChaosBagPreviewProps) => {
 
 				<C.List data={data.regular} renderItem={renderTokenRow} />
 			</Delay>
+			{tokens.length > 0 && (
+				<C.RevealButton
+					onPress={reveal}
+					icon="token_sealed_outline"
+					text={t`Draw chaos tokens`}
+				/>
+			)}
 		</C.Container>
 	);
 };

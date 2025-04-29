@@ -1,5 +1,6 @@
 import { color, font } from "@shared/config";
 import { Text } from "@shared/ui";
+import type { FC } from "react";
 import { View } from "react-native";
 import type { TextProps } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
@@ -42,10 +43,6 @@ export const Position: typeof View = styled(View)`
 	align-items: center;
 `;
 
-type PositionTextProps = TextProps & {
-	size: number;
-};
-
 const positionFontSize: Record<number, number> = {
 	1: font.size.small,
 	2: font.size.xs * 0.9,
@@ -56,7 +53,11 @@ const positionLineHeight: Record<number, number> = {
 	2: font.size.xs * 1.05,
 };
 
-export const PositionText: typeof Text = styled(Text)`
+type PositionTextProps = TextProps & {
+	size: number;
+};
+
+export const PositionText: FC<PositionTextProps> = styled(Text)`
 	${({ size }: PositionTextProps) => css`
 		font-size: ${positionFontSize[size]}px;
 		line-height: ${positionLineHeight[size]}px;

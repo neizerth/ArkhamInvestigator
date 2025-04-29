@@ -61,7 +61,7 @@ export const RevealButton: typeof Button = styled(Button).attrs({
 		fontSize: font.size.small,
 	},
 })`
-  margin: 0px auto ${size.gap.default}px;
+  margin: ${size.gap.default}px auto 0px;
   border: 0px solid ${color.dark10};
-  border-bottom-width: 1px;
+  border-top-width: 1px;
 `;
