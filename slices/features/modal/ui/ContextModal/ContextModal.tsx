@@ -15,7 +15,7 @@ export type ContextModalProps = ViewProps & {
 
 const screen = Dimensions.get("screen");
 
-const maxHeight = screen.height - statusBarHeight - 50;
+const maxHeight = screen.height - statusBarHeight - 110;
 
 const maxHeightStyle = {
 	maxHeight,
