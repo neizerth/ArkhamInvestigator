@@ -21,7 +21,7 @@ module.exports = {
 		userInterfaceStyle: "dark",
 		newArchEnabled: true,
 		ios: {
-			supportsTablet: true,
+			supportsTablet: false,
 			bundleIdentifier: packageId,
 		},
 		android: {
@@ -30,7 +30,7 @@ module.exports = {
 				backgroundColor: "#000",
 			},
 			package: packageId,
-			versionCode: 237,
+			versionCode: 238,
 		},
 		web: {
 			bundler: "metro",
