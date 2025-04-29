@@ -1,4 +1,3 @@
-import { setShowRevealChaosTokenModal } from "@features/chaos-bag";
 import type { PressableProps } from "@features/haptic";
 import { setShowAdditionalInformation, useAppDispatch } from "@shared/lib";
 import { useCallback } from "react";
@@ -11,7 +10,6 @@ export const AdditionalInfoArea = (props: AdditionalInfoAreaProps) => {
 
 	const handlePress = useCallback(
 		(value: boolean) => () => {
-			dispatch(setShowRevealChaosTokenModal(value));
 			dispatch(setShowAdditionalInformation(value));
 		},
 		[dispatch],
