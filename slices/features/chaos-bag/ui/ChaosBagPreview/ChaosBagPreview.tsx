@@ -3,21 +3,31 @@ import {
 	delay,
 	goBack,
 	goToPage,
+	splitIntoGroups,
 	useAppDispatch,
 	useAppSelector,
 } from "@shared/lib";
 import { Delay } from "@shared/ui";
 import { useCallback, useMemo } from "react";
-import type { ViewProps } from "react-native";
+import {
+	Dimensions,
+	type ListRenderItemInfo,
+	type ViewProps,
+} from "react-native";
 import { useAppTranslation } from "../../../i18n";
 import {
 	selectOrderedChaosBagContents,
 	setShowRevealChaosTokenModal,
 	toggleChaosTokenSeal,
 } from "../../lib";
+import type { ChaosBagToken } from "../../model";
 import * as C from "./ChaosBagPreview.components";
 
 export type ChaosBagPreviewProps = ViewProps;
+
+const screenWidth = Dimensions.get("screen").width;
+const tokenSize = 64;
+const columns = Math.round(screenWidth / tokenSize);
 
 export const ChaosBagPreview = (props: ChaosBagPreviewProps) => {
 	const dispatch = useAppDispatch();
@@ -26,8 +36,14 @@ export const ChaosBagPreview = (props: ChaosBagPreviewProps) => {
 
 	const data = useMemo(() => {
 		return {
-			regular: tokens.filter((item) => !item.sealed),
-			sealed: tokens.filter((item) => item.sealed),
+			regular: splitIntoGroups(
+				tokens.filter((item) => !item.sealed),
+				columns,
+			),
+			sealed: splitIntoGroups(
+				tokens.filter((item) => item.sealed),
+				columns,
+			),
 		};
 	}, [tokens]);
 
@@ -50,6 +66,26 @@ export const ChaosBagPreview = (props: ChaosBagPreviewProps) => {
 		dispatch(setShowRevealChaosTokenModal(true));
 	}, [dispatch]);
 
+	const renderTokenRow = useCallback(
+		(info: ListRenderItemInfo<ChaosBagToken[]>) => {
+			const tokens = info.item;
+			return (
+				<C.TokenRow>
+					{tokens.map((token) => (
+						<C.TokenButton
+							key={token.id}
+							onLongPress={toggleSeal(token.id)}
+							activeOpacity={1}
+						>
+							<C.Token {...token} />
+						</C.TokenButton>
+					))}
+				</C.TokenRow>
+			);
+		},
+		[toggleSeal],
+	);
+
 	return (
 		<C.Container
 			{...props}
@@ -63,37 +99,17 @@ export const ChaosBagPreview = (props: ChaosBagPreviewProps) => {
 				text={t`Draw chaos tokens`}
 			/>
 			<C.BlessCurse />
-			{data.sealed.length > 0 ? (
-				<C.Sealed>
-					<C.Title>{t`Sealed Tokens`}</C.Title>
-					<C.List>
-						{data.sealed.map((token) => (
-							<C.TokenButton
-								key={token.id}
-								onLongPress={toggleSeal(token.id)}
-								activeOpacity={1}
-							>
-								<C.Token {...token} />
-							</C.TokenButton>
-						))}
-					</C.List>
-				</C.Sealed>
-			) : (
-				<C.Hint>{t`Hold to seal`}</C.Hint>
-			)}
-
 			<Delay>
-				<C.List>
-					{data.regular.map((token) => (
-						<C.TokenButton
-							key={token.id}
-							onLongPress={toggleSeal(token.id)}
-							activeOpacity={1}
-						>
-							<C.Token {...token} />
-						</C.TokenButton>
-					))}
-				</C.List>
+				{data.sealed.length > 0 ? (
+					<C.Sealed>
+						<C.Title>{t`Sealed Tokens`}</C.Title>
+						<C.List data={data.sealed} renderItem={renderTokenRow} />
+					</C.Sealed>
+				) : (
+					<C.Hint>{t`Hold to seal`}</C.Hint>
+				)}
+
+				<C.List data={data.regular} renderItem={renderTokenRow} />
 			</Delay>
 		</C.Container>
 	);

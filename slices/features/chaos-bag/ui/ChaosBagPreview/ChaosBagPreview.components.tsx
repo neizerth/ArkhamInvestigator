@@ -1,6 +1,7 @@
 import { color, font, size } from "@shared/config";
 import { Row, Text, TextView } from "@shared/ui";
 import { View } from "react-native";
+import { FlatList } from "react-native-gesture-handler";
 import styled from "styled-components/native";
 import { Button, TouchableOpacity } from "../../../haptic";
 import { ContextModal } from "../../../modal";
@@ -26,9 +27,13 @@ export const Sealed: typeof View = styled(View)`
   border-bottom-color: ${color.dark20};
 `;
 
-export const List: typeof Row = styled(Row)`
-  flex-wrap: wrap;
+export const List: typeof FlatList = styled(FlatList)`
   padding: ${size.gap.small}px 0px;
+`;
+
+export const TokenRow: typeof Row = styled(Row)`
+  justify-items: center;
+	flex: 1;
 `;
 
 export const Token: typeof ChaosTokenPreview = styled(ChaosTokenPreview)`

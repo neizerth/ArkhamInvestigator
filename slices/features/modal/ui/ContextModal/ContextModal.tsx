@@ -52,9 +52,7 @@ export const ContextModal = ({
 					<C.ActionIcon icon="close" />
 				</C.Close>
 			</C.Header>
-			<C.Body style={[contentStyle, maxHeightStyle]}>
-				<C.Content>{children}</C.Content>
-			</C.Body>
+			<C.Body style={[contentStyle, maxHeightStyle]}>{children}</C.Body>
 		</C.Container>
 	);
 };
