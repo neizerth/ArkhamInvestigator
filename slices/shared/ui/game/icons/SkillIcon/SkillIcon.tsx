@@ -1,4 +1,4 @@
-import type { PropsWithSkill } from "@shared/model/ui";
+import type { PropsWithSkill } from "@shared/model";
 import type { ViewStyle } from "react-native";
 import type { IconProps } from "../Icon";
 import {

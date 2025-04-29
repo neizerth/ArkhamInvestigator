@@ -30,6 +30,7 @@ export const Content: typeof Animated.View = styled(Animated.View)`
 	border-radius: ${size.borderRadius.default}px;
 	position: relative;
 	z-index: 1;
+	min-height: 50px;
 `;
 
 export const Background: typeof Image = styled(Image).attrs({
@@ -45,13 +46,13 @@ export const Background: typeof Image = styled(Image).attrs({
 
 export const List: typeof Row = styled(Row)`
 	align-items: center;
-	gap: ${size.gap.default}px;
 	flex-wrap: wrap;
 `;
 
 export const Item: typeof TouchableOpacity = styled(TouchableOpacity)`
   align-items: center;
 	flex-direction: row;
+	padding: ${size.gap.small}px 0;
 `;
 
 export const ItemContent: typeof Row = styled(Row)`

@@ -1,5 +1,5 @@
-import { color, size } from "@shared/config";
-import { Icon, Row, TextView } from "@shared/ui";
+import { color, font, size } from "@shared/config";
+import { Icon, IconNumber, Row, StatIcon, TextView } from "@shared/ui";
 import { View } from "react-native";
 import styled from "styled-components/native";
 import { TouchableOpacity } from "../../../../haptic";
@@ -10,7 +10,7 @@ import { ChaosTokenRevealLoader } from "../ChaosTokenRevealLoader";
 export const Container: typeof View = styled(View)`
   justify-content: center;
   align-items: center;
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.5);
 `;
 
 export const Loader: typeof ChaosTokenRevealLoader = styled(
@@ -66,8 +66,8 @@ export const Actions: typeof Row = styled(Row)`
 
 export const SideActions: typeof View = styled(View)`
   padding: ${size.gap.small}px 0;
-  /* justify-content: space-between; */
-  justify-content: flex-end;
+  justify-content: space-between;
+  /* justify-content: flex-end; */
   height: 150px;
 `;
 
@@ -128,6 +128,24 @@ export const ActionTitle: typeof TextView = styled(TextView)`
   
 `;
 
+export const OneMoreHint: typeof TextView = styled(TextView).attrs({
+	contentContainerStyle: {
+		justifyContent: "center",
+		alignItems: "center",
+		position: "absolute",
+		left: 0,
+		top: 0,
+		right: 0,
+		bottom: 0,
+	},
+})`
+  color: ${color.white};
+  font-size: ${font.size.xs}px;
+  background: #394852;
+  border-radius: ${size.borderRadius.default}px;
+  padding: 2px;
+`;
+
 export const OneMoreLoader: typeof Loader = styled(Loader)`
   position: absolute;
   z-index: 5;
@@ -147,4 +165,33 @@ export const BlessCurse: typeof BlessCurseControl = styled(BlessCurseControl)`
 export const History: typeof ChaosTokenRevealHistory = styled(
 	ChaosTokenRevealHistory,
 )`
+`;
+
+export const SkillValue: typeof Row = styled(Row)`
+  padding-top: ${size.gap.default}px;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+`;
+
+export const SkillValueText: typeof IconNumber = styled(IconNumber).attrs({
+	stroke: true,
+	strokeStyle: {
+		color: color.text,
+	},
+})`
+  color: ${color.white};
+  font-size: 50px;
+`;
+
+export const SkillTypeIcon: typeof StatIcon = styled(StatIcon)`
+  font-size: 35px;
+  line-height: 40px;
+  color: white;
+`;
+
+export const SkillType: typeof View = styled(View)`
+  position: absolute;
+  top: -8px;
+  left: 30px;
 `;

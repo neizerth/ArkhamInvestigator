@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import type { InvestigatorBoardStat } from "@shared/model";
 import { createSliceState } from "redux-toolkit-helpers";
 import type { ChaosBagToken, ChaosTokensCount } from "../../../../model";
 
@@ -8,6 +9,8 @@ export type IChaosBagState = {
 	contents: ChaosBagToken[];
 	showRevealModal: boolean;
 	revealedTokenIds: string[];
+	skillCheckType: InvestigatorBoardStat | null;
+	skillValue: number | null;
 };
 
 const initialState: IChaosBagState = {
@@ -16,6 +19,8 @@ const initialState: IChaosBagState = {
 	contents: [],
 	showRevealModal: false,
 	revealedTokenIds: [],
+	skillCheckType: null,
+	skillValue: null,
 };
 
 const state = createSliceState(initialState);
@@ -30,6 +35,8 @@ export const {
 	setContents: setChaosBagContents,
 	setSealedTokens: setChaosBagSealedTokens,
 	setShowRevealModal: setShowRevealChaosTokenModal,
+	setSkillCheckType: setChaosBagSkillCheckType,
+	setSkillValue: setChaosBagSkillValue,
 	setRevealedTokenIds,
 } = chaosBag.actions;
 
@@ -38,6 +45,8 @@ export const {
 	selectSealedTokens: selectChaosBagSealedTokens,
 	selectContents: selectChaosBagContents,
 	selectShowRevealModal: selectShowRevealChaosTokenModal,
+	selectSkillCheckType: selectChaosBagSkillCheckType,
+	selectSkillValue: selectChaosBagSkillValue,
 	selectRevealedTokenIds,
 } = chaosBag.selectors;
 

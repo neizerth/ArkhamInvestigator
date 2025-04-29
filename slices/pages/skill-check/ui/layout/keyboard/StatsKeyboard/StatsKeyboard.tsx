@@ -1,3 +1,4 @@
+import { iconMapping } from "@shared/config";
 import { sendStatSignal, useAppDispatch } from "@shared/lib";
 import type { InvestigatorBoardStat } from "@shared/model";
 import { useCallback } from "react";
@@ -18,7 +19,7 @@ export const StatsKeyboard = ({ ...props }: StatsKeyboardProps) => {
 
 	const withProps = (value: InvestigatorBoardStat) => {
 		return {
-			icon: value,
+			icon: iconMapping.stat.simple[value],
 			onPress: sendStat(value),
 		};
 	};
@@ -39,7 +40,7 @@ export const StatsKeyboard = ({ ...props }: StatsKeyboardProps) => {
 				<C.Rule />
 				<C.Button {...withProps("sanity")} />
 				<C.Rule />
-				<C.Button icon="resource" onPress={sendStat("resources")} />
+				<C.Button {...withProps("resources")} />
 			</C.Content>
 		</C.Container>
 	);

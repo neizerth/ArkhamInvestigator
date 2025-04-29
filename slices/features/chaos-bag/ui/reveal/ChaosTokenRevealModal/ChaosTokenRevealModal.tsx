@@ -1,18 +1,18 @@
 import { useAppDispatch, useAppSelector, useBoolean } from "@shared/lib";
-import { Outside } from "@shared/ui";
 import { init, last } from "ramda";
 import { useCallback, useMemo } from "react";
 import type { ViewProps } from "react-native";
 import { useAppTranslation } from "../../../../i18n";
 import {
+	closeRevealChaosTokenModal,
 	returnChaosToken,
 	returnChaosTokens,
 	revealChaosToken,
+	selectChaosBagSkillCheckType,
+	selectChaosBagSkillValue,
 	selectRevealedTokens,
 	selectShowRevealChaosTokenModal,
 	selectUnrevealedChaosTokensCount,
-	setRevealedTokenIds,
-	setShowRevealChaosTokenModal,
 	toggleChaosTokenSeal,
 } from "../../../lib";
 import type { ChaosBagToken } from "../../../model";
@@ -27,6 +27,10 @@ export const ChaosTokenRevealModal = (props: ChaosTokenRevealModalProps) => {
 	const show = useAppSelector(selectShowRevealChaosTokenModal);
 	const tokens = useAppSelector(selectRevealedTokens);
 	const unrevealedCount = useAppSelector(selectUnrevealedChaosTokensCount);
+	const skillValue = useAppSelector(selectChaosBagSkillValue);
+	const skillType = useAppSelector(selectChaosBagSkillCheckType);
+
+	const showSkillValue = skillValue !== null;
 
 	const showModal = tokens.length > 0 || unrevealedCount > 0 || show;
 
@@ -36,8 +40,7 @@ export const ChaosTokenRevealModal = (props: ChaosTokenRevealModalProps) => {
 	}, [dispatch, setOneMoreLoading.off]);
 
 	const closeModal = useCallback(() => {
-		dispatch(setRevealedTokenIds([]));
-		dispatch(setShowRevealChaosTokenModal(false));
+		dispatch(closeRevealChaosTokenModal());
 	}, [dispatch]);
 
 	const onTokenPress = useCallback(
@@ -79,7 +82,6 @@ export const ChaosTokenRevealModal = (props: ChaosTokenRevealModalProps) => {
 
 	return (
 		<C.Container {...props}>
-			<Outside onPress={returnTokens} />
 			<C.Content>
 				<C.TopView>
 					<C.History tokens={history} />
@@ -87,6 +89,14 @@ export const ChaosTokenRevealModal = (props: ChaosTokenRevealModalProps) => {
 				</C.TopView>
 				<C.LeftView>
 					<C.SideActions>
+						<C.SkillValue>
+							{skillValue && <C.SkillValueText value={skillValue} />}
+							{skillType && (
+								<C.SkillType>
+									<C.SkillTypeIcon statType={skillType} />
+								</C.SkillType>
+							)}
+						</C.SkillValue>
 						<C.Return onPress={closeModal}>
 							<C.ReturnAllIcon icon="reply" />
 						</C.Return>
@@ -118,7 +128,10 @@ export const ChaosTokenRevealModal = (props: ChaosTokenRevealModalProps) => {
 					<C.LastToken {...lastToken} tokenPadding={5} sealOffset={5} />
 				</C.TokenButton>
 				{oneMoreLoading && (
-					<C.OneMoreLoader duration={2000} onLoad={onLoad} show />
+					<>
+						<C.OneMoreLoader duration={2000} onLoad={onLoad} show />
+						<C.OneMoreHint>{t`Hold`}</C.OneMoreHint>
+					</>
 				)}
 			</C.Content>
 		</C.Container>

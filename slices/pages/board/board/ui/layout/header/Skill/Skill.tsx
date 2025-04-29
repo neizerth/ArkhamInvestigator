@@ -1,4 +1,8 @@
 import {
+	openSkillCheckChaosBagModal,
+	setShowRevealChaosTokenModal,
+} from "@features/chaos-bag";
+import {
 	selectCurrentStatBaseValue,
 	selectCurrentStatValue,
 	selectIsParallel,
@@ -42,11 +46,18 @@ export const Skill = ({ width, height, type, ...props }: SkillProps) => {
 
 	const onPressIn = useCallback(() => {
 		setTouching(true);
-	}, []);
+		dispatch(
+			openSkillCheckChaosBagModal({
+				type,
+				value,
+			}),
+		);
+	}, [dispatch, type, value]);
 
 	const onPressOut = useCallback(() => {
 		setTouching(false);
-	}, []);
+		dispatch(setShowRevealChaosTokenModal(false));
+	}, [dispatch]);
 
 	const onOpen = useCallback(() => {
 		dispatch(startSkillCheck(type));

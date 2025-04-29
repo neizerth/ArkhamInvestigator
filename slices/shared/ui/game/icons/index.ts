@@ -3,3 +3,4 @@ export * from "./Icon";
 export * from "./IconNumber";
 export * from "./SkillIcon";
 export * from "./IconView";
+export * from "./StatIcon";

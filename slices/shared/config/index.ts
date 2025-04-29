@@ -5,3 +5,4 @@ export * from "./game";
 export * from "./typography";
 export * from "./routes";
 export * from "./animation";
+export * from "./icons";

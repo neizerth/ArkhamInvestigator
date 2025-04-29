@@ -1,3 +1,4 @@
+import { setShowRevealChaosTokenModal } from "@features/chaos-bag";
 import { selectCurrentLanguage } from "@features/i18n";
 import {
 	selectCurrentBoardProp,
@@ -12,6 +13,7 @@ import type { ViewProps } from "react-native";
 import * as C from "./PinnedSkilllChecks.components";
 import { getExpressionDisplayStyle } from "./PinnedSkilllChecks.styles";
 import { useContainerAnimation, useContentAnimation } from "./animation";
+import { useSkillItemChaosTokenRevealModal } from "./useSkillItemChaosTokenRevealModal";
 
 export type PinnedSkilllChecksProps = ViewProps;
 
@@ -22,6 +24,7 @@ export const PinnedSkilllChecks = (props: PinnedSkilllChecksProps) => {
 	const defaultShow = useAppSelector(
 		selectCurrentBoardProp("showPinnedSkillChecks"),
 	);
+
 	const show = defaultShow ?? true;
 	const removeItem = useCallback(
 		(id: string) => () => {
@@ -33,6 +36,12 @@ export const PinnedSkilllChecks = (props: PinnedSkilllChecksProps) => {
 	const toggleShow = useCallback(() => {
 		dispatch(setCurrentBoardProp("showPinnedSkillChecks", !show));
 	}, [dispatch, show]);
+
+	const setupReveal = useSkillItemChaosTokenRevealModal();
+
+	const closeReveal = useCallback(() => {
+		dispatch(setShowRevealChaosTokenModal(false));
+	}, [dispatch]);
 
 	const toggleAnimation = useContainerAnimation(show);
 	const fadeContentAnimation = useContentAnimation(show);
@@ -48,22 +57,29 @@ export const PinnedSkilllChecks = (props: PinnedSkilllChecksProps) => {
 			<C.Area style={toggleAnimation}>
 				<C.Pressable onPress={toggleShow}>
 					<C.Content style={fadeContentAnimation}>
-						<C.List>
-							{items.map((item, index, { length }) => (
-								<C.Item key={item.id} onLongPress={removeItem(item.id)}>
-									<C.ItemContent>
-										{item.title && <C.Title>{item.title}:</C.Title>}
-										<C.Expression
-											{...displayStyle}
-											data={item.expression}
-											value={item.value}
-											showDiff={false}
-										/>
-									</C.ItemContent>
-									{index !== length - 1 && <C.Text>,</C.Text>}
-								</C.Item>
-							))}
-						</C.List>
+						{show && (
+							<C.List>
+								{items.map((item, index, { length }) => (
+									<C.Item
+										key={item.id}
+										onPress={removeItem(item.id)}
+										onPressIn={setupReveal(item)}
+										onPressOut={closeReveal}
+									>
+										<C.ItemContent>
+											{item.title && <C.Title>{item.title}:</C.Title>}
+											<C.Expression
+												{...displayStyle}
+												data={item.expression}
+												value={item.value}
+												showDiff={false}
+											/>
+										</C.ItemContent>
+										{index !== length - 1 && <C.Text>,</C.Text>}
+									</C.Item>
+								))}
+							</C.List>
+						)}
 					</C.Content>
 
 					<C.Background />
