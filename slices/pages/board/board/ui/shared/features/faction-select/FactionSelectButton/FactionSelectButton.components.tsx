@@ -21,7 +21,8 @@ export const Neutral: typeof View = styled(View)`
 `;
 export const NeutralIcon: typeof Icon = styled(Icon)`
   color: ${color.light10};
-  font-size: 42px;
-  line-height: 50px;
+  padding-bottom: 5px;
+  font-size: 40px;
+  line-height: 40px;
   text-align: center;
 `;

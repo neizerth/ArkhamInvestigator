@@ -1,10 +1,12 @@
 import { IconButton, type TouchableOpacityProps } from "@features/haptic";
-import { color, size } from "@shared/config";
+import { color } from "@shared/config";
 import type { PropsWithUnit } from "@shared/model";
 import type { FC } from "react";
-import { View, type ViewProps } from "react-native";
+import { Platform, View, type ViewProps } from "react-native";
 import styled, { css } from "styled-components/native";
 import { assetsSize } from "../../../../../../config";
+
+const ios = Platform.OS === "ios";
 
 type ContainerProps = ViewProps &
 	PropsWithUnit & {
@@ -58,13 +60,8 @@ export const Buttons: FC<HistoryProps> = styled(View)`
 export const Button: typeof IconButton = styled(IconButton).attrs({
 	iconStyle: {
 		fontSize: 28,
-		lineHeight: 30,
+		lineHeight: ios ? 28 : 30,
 		color: color.white,
-		filter: [
-			{
-				dropShadow: `0px 0px ${size.gap.small}px rgba(0, 0, 0, 0.5)`,
-			},
-		],
 	},
 })`
   width: 48px;

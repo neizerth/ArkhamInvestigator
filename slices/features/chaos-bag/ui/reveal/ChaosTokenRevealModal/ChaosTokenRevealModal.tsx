@@ -144,7 +144,7 @@ export const ChaosTokenRevealModal = (props: ChaosTokenRevealModalProps) => {
 						</C.Return>
 
 						{unrevealedCount > 0 && (
-							<C.RevealMore onPress={loadMore} onLongPress={loadMore}>
+							<C.RevealMore onPressOut={loadMore}>
 								<C.RevealMoreIcon icon="token_plus_highlight" />
 							</C.RevealMore>
 						)}
