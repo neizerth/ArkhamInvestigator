@@ -12,7 +12,7 @@ const androdIcon = dev
 
 module.exports = {
 	expo: {
-		name: "Arkham Investigator",
+		name: "Investigator",
 		slug: "arkham-investigator",
 		version: pkg.version,
 		orientation: "portrait",
