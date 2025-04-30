@@ -52,20 +52,6 @@ export const SettingsPage = () => {
 						data={hapticValues}
 					/>
 				</C.Row>
-				<C.Row>
-					<C.Checkbox
-						label="Track experience points"
-						selector={selectTrackXP}
-						actionCreator={setTrackXP}
-					/>
-				</C.Row>
-				<C.Row>
-					<C.Checkbox
-						label="Save trauma"
-						selector={selectSaveTrauma}
-						actionCreator={setSaveTrauma}
-					/>
-				</C.Row>
 				<Title> {t`Game settings`}</Title>
 				<C.Row>
 					<C.Select
@@ -88,6 +74,20 @@ export const SettingsPage = () => {
 						label="Damage/Horror visual effects"
 						selector={selectShowDamageAndHorrorEffects}
 						actionCreator={setShowDamageAndHorrorEffects}
+					/>
+				</C.Row>
+				<C.Row>
+					<C.Checkbox
+						label="Track experience points"
+						selector={selectTrackXP}
+						actionCreator={setTrackXP}
+					/>
+				</C.Row>
+				<C.Row>
+					<C.Checkbox
+						label="Save trauma"
+						selector={selectSaveTrauma}
+						actionCreator={setSaveTrauma}
 					/>
 				</C.Row>
 				<Title>{t`Behavior`}</Title>
