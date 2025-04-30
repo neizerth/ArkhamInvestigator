@@ -5,7 +5,7 @@ import {
 	useBoolean,
 } from "@shared/lib";
 import { init, last } from "ramda";
-import { useCallback, useEffect, useMemo } from "react";
+import { useCallback, useEffect, useMemo, useRef } from "react";
 import type { ViewProps } from "react-native";
 import { useAppTranslation } from "../../../../i18n";
 import {
@@ -13,6 +13,7 @@ import {
 	returnChaosToken,
 	returnChaosTokens,
 	revealChaosToken,
+	selectChaosBagLoadingAnimation,
 	selectChaosBagSkillCheckType,
 	selectChaosBagSkillValue,
 	selectRevealedTokens,
@@ -34,6 +35,9 @@ export const ChaosTokenRevealModal = (props: ChaosTokenRevealModalProps) => {
 	const unrevealedCount = useAppSelector(selectUnrevealedChaosTokensCount);
 	const skillValue = useAppSelector(selectChaosBagSkillValue);
 	const skillType = useAppSelector(selectChaosBagSkillCheckType);
+	const animate = useAppSelector(selectChaosBagLoadingAnimation);
+
+	const revealedFirst = useRef(false);
 
 	const isEmpty = tokens.length === 0 && unrevealedCount === 0;
 
@@ -46,6 +50,7 @@ export const ChaosTokenRevealModal = (props: ChaosTokenRevealModalProps) => {
 
 	const closeModal = useCallback(() => {
 		dispatch(closeRevealChaosTokenModal());
+		revealedFirst.current = false;
 	}, [dispatch]);
 
 	const onTokenPress = useCallback(
@@ -93,13 +98,22 @@ export const ChaosTokenRevealModal = (props: ChaosTokenRevealModalProps) => {
 		}
 	}, [hideModal, show, closeModal]);
 
+	useEffect(() => {
+		if (show && !animate && !revealedFirst.current) {
+			revealedFirst.current = true;
+			reveal();
+		}
+	}, [animate, show, reveal]);
+
 	if (hideModal) {
 		return null;
 	}
 
 	if (tokens.length === 0) {
-		return <C.Loader {...props} onLoad={reveal} show={show} />;
+		return animate ? <C.Loader {...props} onLoad={reveal} show={show} /> : null;
 	}
+
+	const loadMore = animate ? setOneMoreLoading.on : reveal;
 
 	const lastToken = last(tokens) as ChaosBagToken;
 
@@ -130,10 +144,7 @@ export const ChaosTokenRevealModal = (props: ChaosTokenRevealModalProps) => {
 						</C.Return>
 
 						{unrevealedCount > 0 && (
-							<C.RevealMore
-								onPress={setOneMoreLoading.on}
-								onLongPress={setOneMoreLoading.on}
-							>
+							<C.RevealMore onPress={loadMore} onLongPress={loadMore}>
 								<C.RevealMoreIcon icon="token_plus_highlight" />
 							</C.RevealMore>
 						)}

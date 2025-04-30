@@ -11,6 +11,7 @@ export type IChaosBagState = {
 	revealedTokenIds: string[];
 	skillCheckType: InvestigatorBoardStat | null;
 	skillValue: number | null;
+	loadingAnimation: boolean;
 };
 
 const initialState: IChaosBagState = {
@@ -21,6 +22,7 @@ const initialState: IChaosBagState = {
 	revealedTokenIds: [],
 	skillCheckType: null,
 	skillValue: null,
+	loadingAnimation: true,
 };
 
 const state = createSliceState(initialState);
@@ -37,6 +39,7 @@ export const {
 	setShowRevealModal: setShowRevealChaosTokenModal,
 	setSkillCheckType: setChaosBagSkillCheckType,
 	setSkillValue: setChaosBagSkillValue,
+	setLoadingAnimation: setChaosBagLoadingAnimation,
 	setRevealedTokenIds,
 } = chaosBag.actions;
 
@@ -47,6 +50,7 @@ export const {
 	selectShowRevealModal: selectShowRevealChaosTokenModal,
 	selectSkillCheckType: selectChaosBagSkillCheckType,
 	selectSkillValue: selectChaosBagSkillValue,
+	selectLoadingAnimation: selectChaosBagLoadingAnimation,
 	selectRevealedTokenIds,
 } = chaosBag.selectors;
 

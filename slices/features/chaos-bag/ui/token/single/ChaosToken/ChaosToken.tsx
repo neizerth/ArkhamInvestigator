@@ -4,7 +4,7 @@ import { getChaosTokenParts } from "./ChaosToken.styles";
 import type { ChaosTokenProps } from "./ChaosToken.types";
 
 export const ChaosToken = ({ size = 48, type, ...props }: ChaosTokenProps) => {
-	const parts = getChaosTokenParts(type);
+	const parts = getChaosTokenParts(type) || [];
 	return (
 		<C.Container {...props} size={size}>
 			{parts.map((part) => (

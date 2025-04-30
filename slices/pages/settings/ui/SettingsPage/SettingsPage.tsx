@@ -1,3 +1,7 @@
+import {
+	selectChaosBagLoadingAnimation,
+	setChaosBagLoadingAnimation,
+} from "@features/chaos-bag";
 import { selectHapticMode, setHapticMode } from "@features/haptic";
 import {
 	changeLanguage,
@@ -89,6 +93,13 @@ export const SettingsPage = () => {
 				<Title>{t`Behavior`}</Title>
 				<C.Row>
 					<C.Picker />
+				</C.Row>
+				<C.Row>
+					<C.Checkbox
+						label="Chaos bag loading animation"
+						selector={selectChaosBagLoadingAnimation}
+						actionCreator={setChaosBagLoadingAnimation}
+					/>
 				</C.Row>
 			</C.Content>
 		</ContentPage>

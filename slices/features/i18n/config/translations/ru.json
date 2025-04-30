@@ -98,5 +98,6 @@
 	"board.help.calculator.chaosToken": "Нажмите, чтобы вытянуть жетон хаоса для проверки навыка по последнему расчёту",
 
 	"board.help.press.chaosBag": "Показывает содержимое мешка хаоса",
-	"board.help.longPress.chaosBag": "Вытягивает жетон хаоса"
+	"board.help.longPress.chaosBag": "Вытягивает жетон хаоса",
+	"Chaos bag loading animation": "Анимация мешка хаоса"
 }
