@@ -55,6 +55,7 @@ export const Skill = ({ width, height, type, ...props }: SkillProps) => {
 				value,
 			}),
 		);
+		setTouching(false);
 	}, [dispatch, type, value]);
 
 	const onPressOut = useCallback(() => {
