@@ -46,6 +46,9 @@ export const Skill = ({ width, height, type, ...props }: SkillProps) => {
 
 	const onPressIn = useCallback(() => {
 		setTouching(true);
+	}, []);
+
+	const onLongPress = useCallback(() => {
 		dispatch(
 			openSkillCheckChaosBagModal({
 				type,
@@ -128,6 +131,7 @@ export const Skill = ({ width, height, type, ...props }: SkillProps) => {
 						onPress={openModal}
 						onPressIn={onPressIn}
 						onPressOut={onPressOut}
+						onLongPress={onLongPress}
 					/>
 				</C.ValueContainer>
 				<C.IconContainer>
