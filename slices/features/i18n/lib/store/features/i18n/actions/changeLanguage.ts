@@ -1,10 +1,10 @@
+import type { AppThunkCreator } from "@shared/model";
 import {
 	DEFAULT_LANGUAGE,
 	I18N_NAMESAPCE,
 	i18next,
 	translations,
-} from "@features/i18n/config";
-import type { AppThunkCreator } from "@shared/model";
+} from "../../../../../config";
 import { selectLanguage, setLanguage } from "../i18n";
 import { loadTranslation } from "./translations/loadTranslation";
 
