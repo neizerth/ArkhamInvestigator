@@ -10,10 +10,9 @@ import {
 	useAppSelector,
 } from "@shared/lib";
 import { memo, useCallback } from "react";
-import type { ViewProps } from "react-native";
+import { type ViewProps, useWindowDimensions } from "react-native";
 import * as C from "./PinnedSkilllChecks.components";
 import { getExpressionDisplayStyle } from "./PinnedSkilllChecks.styles";
-import { useContainerAnimation, useContentAnimation } from "./animation";
 
 export type PinnedSkilllChecksProps = ViewProps;
 
@@ -43,19 +42,22 @@ export const PinnedSkilllChecks = (props: PinnedSkilllChecksProps) => {
 		dispatch(setShowRevealChaosTokenModal(false));
 	}, [dispatch]);
 
-	const toggleAnimation = useContainerAnimation(show);
-	const fadeContentAnimation = useContentAnimation(show);
-
 	const displayStyle = getExpressionDisplayStyle(language);
+
+	const { width } = useWindowDimensions();
 
 	if (items.length === 0) {
 		return null;
 	}
 
+	const areaStyle = {
+		left: show ? 0 : -width + 80,
+	};
+
 	return (
 		<C.Container {...props}>
-			<C.Area style={toggleAnimation}>
-				<C.Content style={fadeContentAnimation}>
+			<C.Area style={areaStyle}>
+				<C.Content>
 					{show && (
 						<C.List>
 							{items.map((item, index, { length }) => (
@@ -82,7 +84,7 @@ export const PinnedSkilllChecks = (props: PinnedSkilllChecksProps) => {
 				</C.Content>
 
 				<C.Toggle onPress={toggleShow}>
-					<C.ToggleIcon show={defaultShow} />
+					<C.ToggleIcon show={show} />
 				</C.Toggle>
 				<C.Background />
 			</C.Area>

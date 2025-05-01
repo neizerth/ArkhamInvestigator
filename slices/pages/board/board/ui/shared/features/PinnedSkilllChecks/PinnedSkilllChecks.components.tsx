@@ -8,14 +8,13 @@ import { SkillCheckExpressionDisplay } from "@widgets/game/skill-check";
 import { Image } from "expo-image";
 import type { FC } from "react";
 import { View } from "react-native";
-import Animated from "react-native-reanimated";
 import styled from "styled-components/native";
 
 export const Container: typeof View = styled(View)`
 	position: relative;
 `;
 
-export const Area: typeof Animated.View = styled(Animated.View)`
+export const Area: typeof View = styled(View)`
 	position: absolute;
 	padding: ${size.gap.default}px;
 	z-index: 1;
@@ -27,7 +26,7 @@ export const Pressable: typeof TouchableOpacity = styled(TouchableOpacity)`
 	padding: ${size.gap.default}px;
 `;
 
-export const Content: typeof Animated.View = styled(Animated.View)`
+export const Content: typeof View = styled(View)`
 	padding: 3% 7% 4%;
 	border-radius: ${size.borderRadius.default}px;
 	position: relative;
