@@ -56,7 +56,7 @@ export const PinnedSkilllChecks = (props: PinnedSkilllChecksProps) => {
 
 	return (
 		<C.Container {...props}>
-			<C.Area style={areaStyle}>
+			<C.Area>
 				<C.Content>
 					{show && (
 						<C.List>
