@@ -58,10 +58,11 @@ export const Down: typeof Arrow = styled(Arrow)`
 `;
 
 export const ArrowIcon: FC<DefinedIconProps> = styled(Icon)`
-  color: ${color.light10};
+  color: ${color.white};
   font-size: 18px;
 	line-height: 18px;
 	position: relative;
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 `;
 
 export const IconContainer: typeof View = styled(View)`

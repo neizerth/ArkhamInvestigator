@@ -37,6 +37,7 @@ export const ExpressionHistory = ({
 
 	const hideReveal = useCallback(() => {
 		dispatch(setShowRevealChaosTokenModal(false));
+		return false;
 	}, [dispatch]);
 
 	const data = useMemo(() => {
@@ -71,6 +72,8 @@ export const ExpressionHistory = ({
 	const setCurrentValue = useCallback(
 		(data: SkillCheckItem[]) => () => {
 			dispatch(setSkillCheckData(data));
+
+			return false;
 		},
 		[dispatch],
 	);
@@ -80,17 +83,14 @@ export const ExpressionHistory = ({
 			return (
 				<C.Item
 					key={item.id}
+					itemId={item.id}
+					data={item.expression}
+					type="secondary"
+					value={item.value}
 					onPress={setCurrentValue(item.expression)}
 					onPressIn={showReveal(item)}
 					onPressOut={hideReveal}
-				>
-					<C.ItemContent
-						itemId={item.id}
-						data={item.expression}
-						type="secondary"
-						value={item.value}
-					/>
-				</C.Item>
+				/>
 			);
 		},
 		[setCurrentValue, hideReveal, showReveal],

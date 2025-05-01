@@ -62,6 +62,9 @@ export const Button: typeof IconButton = styled(IconButton).attrs({
 		fontSize: 28,
 		lineHeight: ios ? 28 : 30,
 		color: color.white,
+		textShadowColor: "rgba(0, 0, 0, 0.3)",
+		textShadowOffset: { width: 0, height: 0 },
+		textShadowRadius: 5,
 	},
 })`
   width: 48px;

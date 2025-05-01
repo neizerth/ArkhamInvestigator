@@ -55,35 +55,36 @@ export const PinnedSkilllChecks = (props: PinnedSkilllChecksProps) => {
 	return (
 		<C.Container {...props}>
 			<C.Area style={toggleAnimation}>
-				<C.Pressable onPress={toggleShow}>
-					<C.Content style={fadeContentAnimation}>
-						{show && (
-							<C.List>
-								{items.map((item, index, { length }) => (
-									<C.Item
-										key={item.id}
-										onPress={removeItem(item.id)}
-										onPressIn={setupReveal(item)}
-										onPressOut={closeReveal}
-									>
-										<C.ItemContent>
-											{item.title && <C.Title>{item.title}:</C.Title>}
-											<C.Expression
-												{...displayStyle}
-												data={item.expression}
-												value={item.value}
-												showDiff={false}
-											/>
-										</C.ItemContent>
-										{index !== length - 1 && <C.Text>,</C.Text>}
-									</C.Item>
-								))}
-							</C.List>
-						)}
-					</C.Content>
+				<C.Content style={fadeContentAnimation}>
+					{show && (
+						<C.List>
+							{items.map((item, index, { length }) => (
+								<C.Item
+									key={item.id}
+									onPress={removeItem(item.id)}
+									onPressIn={setupReveal(item)}
+									onPressOut={closeReveal}
+								>
+									<C.ItemContent>
+										{item.title && <C.Title>{item.title}:</C.Title>}
+										<C.Expression
+											{...displayStyle}
+											data={item.expression}
+											value={item.value}
+											showDiff={false}
+										/>
+									</C.ItemContent>
+									{index !== length - 1 && <C.Text>,</C.Text>}
+								</C.Item>
+							))}
+						</C.List>
+					)}
+				</C.Content>
 
-					<C.Background />
-				</C.Pressable>
+				<C.Toggle onPress={toggleShow}>
+					<C.ToggleIcon show={defaultShow} />
+				</C.Toggle>
+				<C.Background />
 			</C.Area>
 		</C.Container>
 	);

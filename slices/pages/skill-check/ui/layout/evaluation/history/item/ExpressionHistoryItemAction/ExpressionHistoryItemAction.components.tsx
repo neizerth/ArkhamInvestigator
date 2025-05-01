@@ -8,6 +8,7 @@ export const Container: typeof TouchableOpacity = styled(TouchableOpacity)`
   justify-content: center;
   padding: 0px ${size.gap.default}px;
   min-width: 48px;
+  height: 48px;
 `;
 
 export const Icon: typeof BaseIcon = styled(BaseIcon)`

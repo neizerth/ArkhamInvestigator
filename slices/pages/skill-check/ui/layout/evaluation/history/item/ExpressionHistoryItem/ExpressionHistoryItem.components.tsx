@@ -18,6 +18,9 @@ export const Container: typeof Row = styled(Row)`
   position: relative;
 `;
 
+export const Item: typeof TouchableOpacity = styled(TouchableOpacity)`
+`;
+
 export const Display: typeof ExpressionDisplay = styled(ExpressionDisplay)`
   transform: translateY(3px);
 `;

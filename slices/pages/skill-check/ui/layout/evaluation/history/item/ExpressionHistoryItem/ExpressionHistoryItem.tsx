@@ -16,10 +16,18 @@ import * as C from "./ExpressionHistoryItem.components";
 export type ExpressionHistoryItemProps = ExpressionDisplayProps & {
 	itemId: string;
 	title?: string;
+	onPress?: () => void;
+	onPressIn?: () => void;
+	onPressOut?: () => void;
+	onLongPress?: () => void;
 };
 
 export const ExpressionHistoryItem = ({
 	itemId,
+	onPress,
+	onPressIn,
+	onPressOut,
+	onLongPress,
 	...props
 }: ExpressionHistoryItemProps) => {
 	const { pinned, title } = useAppSelector(selectItem(itemId));
@@ -34,8 +42,9 @@ export const ExpressionHistoryItem = ({
 	const renderRightActions = useCallback(
 		(_: SharedValue<number>, drag: SharedValue<number>) => {
 			const style = useAnimatedStyle(() => {
+				const value = Math.round(Math.max(0, drag.value + 165));
 				return {
-					transform: [{ translateX: drag.value + 165 }],
+					transform: [{ translateX: value }],
 				};
 			});
 			return (
@@ -54,8 +63,19 @@ export const ExpressionHistoryItem = ({
 				</C.Title>
 			)}
 			<GestureHandlerRootView>
-				<ReanimatedSwipeable ref={ref} renderRightActions={renderRightActions}>
-					<C.Display {...props} />
+				<ReanimatedSwipeable
+					ref={ref}
+					renderRightActions={renderRightActions}
+					overshootRight={false}
+				>
+					<C.Item
+						onPress={onPress}
+						onPressIn={onPressIn}
+						onPressOut={onPressOut}
+						onLongPress={onLongPress}
+					>
+						<C.Display {...props} />
+					</C.Item>
 				</ReanimatedSwipeable>
 			</GestureHandlerRootView>
 		</C.Container>
