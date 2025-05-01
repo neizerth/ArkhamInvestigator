@@ -44,7 +44,7 @@ export const ExpressionHistoryItem = ({
 	const renderRightActions = useCallback(
 		(_: SharedValue<number>, drag: SharedValue<number>) => {
 			const style = useAnimatedStyle(() => {
-				const value = rnd(max(0, drag.value + 165));
+				const value = Math.round(Math.max(drag.value + 165, 0));
 				return {
 					transform: [{ translateX: value }],
 				};
