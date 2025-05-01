@@ -13,6 +13,8 @@ import { memo, useCallback, useRef } from "react";
 import { type SharedValue, useAnimatedStyle } from "react-native-reanimated";
 import * as C from "./ExpressionHistoryItem.components";
 
+const { round: rnd, max } = Math;
+
 export type ExpressionHistoryItemProps = ExpressionDisplayProps & {
 	itemId: string;
 	title?: string;
@@ -42,7 +44,7 @@ export const ExpressionHistoryItem = ({
 	const renderRightActions = useCallback(
 		(_: SharedValue<number>, drag: SharedValue<number>) => {
 			const style = useAnimatedStyle(() => {
-				const value = Math.round(Math.max(0, drag.value + 165));
+				const value = rnd(max(0, drag.value + 165));
 				return {
 					transform: [{ translateX: value }],
 				};
