@@ -142,4 +142,5 @@ export const ToggleIcon: FC<ToggleIconProps> = styled(Icon).attrs(
 	}),
 )`
 	color: ${color.dark10};
+	opacity: 0.5;
 `;

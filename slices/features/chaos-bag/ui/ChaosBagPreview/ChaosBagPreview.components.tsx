@@ -13,6 +13,7 @@ import {
 export const Container: typeof ContextModal = styled(ContextModal).attrs({
 	contentStyle: {
 		backgroundColor: color.dark30,
+		gap: size.gap.small,
 	},
 })`
   background-color: rgba(0, 0, 0, 0.3);
@@ -23,8 +24,9 @@ export const BlessCurse: typeof BlessCurseControl = styled(BlessCurseControl)`
 `;
 
 export const Sealed: typeof View = styled(View)`
-  border-bottom-width: 1px;
-  border-bottom-color: ${color.dark20};
+  border-top-width: 1px;
+  border-top-color: ${color.dark20};
+	padding-top: ${size.gap.small}px;
 `;
 
 export const List: typeof FlatList = styled(FlatList)`
@@ -48,11 +50,7 @@ export const Title: typeof Text = styled(Text)`
   text-align: center;
 `;
 
-export const Hint: typeof TextView = styled(TextView).attrs({
-	contentContainerStyle: {
-		paddingBottom: size.gap.small,
-	},
-})`
+export const Hint: typeof TextView = styled(TextView)`
   text-align: center;
 `;
 

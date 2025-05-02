@@ -93,8 +93,13 @@ export const ChaosBagPreview = (props: ChaosBagPreviewProps) => {
 			actionIcon="edit"
 			onAction={onEdit}
 		>
-			<C.BlessCurse />
 			<Delay>
+				{tokens.length > 0 && data.sealed.length === 0 && (
+					<C.Hint>{t`Hold to seal`}</C.Hint>
+				)}
+
+				<C.List data={data.regular} renderItem={renderTokenRow} />
+
 				{data.sealed.length > 0 && (
 					<C.Sealed>
 						<C.Title>{t`Sealed Tokens`}</C.Title>
@@ -102,11 +107,7 @@ export const ChaosBagPreview = (props: ChaosBagPreviewProps) => {
 					</C.Sealed>
 				)}
 
-				{tokens.length > 0 && data.sealed.length === 0 && (
-					<C.Hint>{t`Hold to seal`}</C.Hint>
-				)}
-
-				<C.List data={data.regular} renderItem={renderTokenRow} />
+				<C.BlessCurse />
 			</Delay>
 			{tokens.length > 0 && (
 				<C.RevealButton
