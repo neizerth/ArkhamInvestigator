@@ -85,7 +85,7 @@ export const FactionCard = ({
 							<C.Cancel text={cancelText} icon="dismiss" onPress={onCancel} />
 						)}
 						{onOk && (
-							<C.OK text={okText} faction={faction} icon="check" onPress={onOk}>
+							<C.OK text={okText} icon="check" onPress={onOk}>
 								<C.OKBackground
 									faction={faction}
 									width={containerSize?.width || 300}

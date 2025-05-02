@@ -4,7 +4,7 @@ import { ScrollView, View } from "react-native";
 import type { TextProps, ViewProps } from "react-native";
 
 import { Alegreya } from "@assets/fonts";
-import { Button, type ButtonProps, TouchableOpacity } from "@features/haptic";
+import { Button, TouchableOpacity } from "@features/haptic";
 import type { Faction } from "@shared/model";
 import type { PropsWithFaction } from "@shared/model/ui";
 import {
@@ -87,21 +87,7 @@ export const Cancel: typeof Button = styled(Button)`
   flex: 1;
 `;
 
-type OKProps = ButtonProps & PropsWithFaction;
-
-export const OK: FC<OKProps> = styled(Button).attrs(({ faction }: OKProps) => {
-	if (faction !== "seeker") {
-		return;
-	}
-	return {
-		textStyle: {
-			color: color.text,
-		},
-		iconStyle: {
-			color: color.text,
-		},
-	};
-})`
+export const OK: typeof Button = styled(Button)`
   flex: 1;
   position: relative;
   overflow: hidden;
