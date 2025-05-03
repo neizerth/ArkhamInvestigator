@@ -5,7 +5,7 @@ import {
 	selectCurrentBoard,
 	selectInvestigatorSettingsByCode,
 	selectReplaceInvestigator,
-	setCurrentBoard,
+	setBoard,
 	setReplaceInvestigator,
 } from "@shared/lib";
 import type {
@@ -69,7 +69,7 @@ export const updateBoardFromSelection =
 			usedAbilities: [],
 		};
 
-		dispatch(setCurrentBoard(updatedBoard));
+		dispatch(setBoard(updatedBoard));
 
 		if (!replace) {
 			return;

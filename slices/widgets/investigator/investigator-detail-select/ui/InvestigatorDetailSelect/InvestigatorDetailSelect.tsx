@@ -10,13 +10,15 @@ import {
 } from "@shared/lib/store";
 import type { InvestigatorDetailItem } from "@shared/model";
 import { useCallback } from "react";
+import { InvestigatorSelectSectionMemo as DataSection } from "../../../investigator-select-section";
+import { CARD_SIZE } from "../../config";
 import {
 	cancelSelection,
 	getSignatures,
 	getSkins,
 	setSelection,
 } from "../../lib";
-import { DataSectionMemo as DataSection } from "../data";
+// import { DataSectionMemo as DataSection } from "../data";
 import { InvestigatorDescription } from "../investigator";
 import * as C from "./InvestigatorDetailSelect.components";
 
@@ -87,6 +89,7 @@ export const InvestigatorDetailSelect = () => {
 							data={signatures}
 							selectedId={signatureId}
 							onChange={onChangeSignature}
+							size={CARD_SIZE}
 						/>
 						<DataSection
 							title={t`Skins`}
@@ -94,6 +97,7 @@ export const InvestigatorDetailSelect = () => {
 							onChange={onChangeSkin}
 							selectedId={skinId}
 							showIcon={false}
+							size={CARD_SIZE}
 							showNone
 						/>
 					</C.Sections>

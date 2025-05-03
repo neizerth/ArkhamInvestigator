@@ -1,8 +1,8 @@
 import type { Defined, Faction } from "@shared/model";
-import { useCallback, useContext, useRef } from "react";
+import { useCallback, useContext, useRef, useState } from "react";
 import type { TextInputProps, ViewProps } from "react-native";
-import { ModalContext } from "../../lib";
-import type { ModalData } from "../../model";
+import { ModalContext } from "../../../lib";
+import type { ModalData } from "../../../model";
 import * as C from "./FactionModal.components";
 
 type TextChangeHandler = Defined<TextInputProps["onChange"]>;
@@ -14,12 +14,18 @@ export const FactionModal = ({ data, ...props }: FactionModalProps) => {
 	const context = useContext(ModalContext);
 
 	const ok = context.onOk?.current;
+	const [boardIndex, setBoardIndex] = useState<number | null>(null);
 
 	const okHandler = useCallback(() => {
 		return ok?.({
 			textValue: textValue.current,
+			boardIndex: boardIndex,
 		});
-	}, [ok]);
+	}, [ok, boardIndex]);
+
+	const onBoardSelect = useCallback((index: number) => {
+		setBoardIndex(index);
+	}, []);
 
 	const onTextValueChange = useCallback<TextChangeHandler>((event) => {
 		textValue.current = event.nativeEvent.text;
@@ -32,6 +38,7 @@ export const FactionModal = ({ data, ...props }: FactionModalProps) => {
 
 	const defaultTextValue =
 		(data.contentType === "input" && data.defaultValue) || "";
+
 	const textValue = useRef(defaultTextValue);
 
 	return (
@@ -56,6 +63,13 @@ export const FactionModal = ({ data, ...props }: FactionModalProps) => {
 								autoFocus
 								defaultValue={defaultTextValue}
 								onChange={onTextValueChange}
+							/>
+						)}
+						{data.contentType === "board" && (
+							<C.BoardSelect
+								onChange={onBoardSelect}
+								data={data.value}
+								selectedIndex={boardIndex}
 							/>
 						)}
 					</C.CardContent>

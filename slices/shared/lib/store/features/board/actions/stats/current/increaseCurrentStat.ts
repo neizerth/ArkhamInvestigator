@@ -1,12 +1,22 @@
-import type { ActionCreator } from "@reduxjs/toolkit";
 import type { AppThunk } from "@shared/model";
 import type { InvestigatorBoardStat } from "@shared/model";
-import { reduceCurrentStat } from "./reduceCurrentStat";
+import {
+	type ReduceCurrentStatOptions,
+	reduceCurrentStat,
+} from "./reduceCurrentStat";
 
-export const increaseCurrentStat: ActionCreator<AppThunk> =
-	(type: InvestigatorBoardStat, maxValue = Number.POSITIVE_INFINITY) =>
+export const increaseCurrentStat =
+	(
+		type: InvestigatorBoardStat,
+		maxValue = Number.POSITIVE_INFINITY,
+		options?: ReduceCurrentStatOptions,
+	): AppThunk =>
 	(dispatch) => {
 		dispatch(
-			reduceCurrentStat(type, (value: number) => Math.min(value + 1, maxValue)),
+			reduceCurrentStat(
+				type,
+				(value: number) => Math.min(value + 1, maxValue),
+				options,
+			),
 		);
 	};

@@ -1,11 +1,7 @@
-import type { ActionCreator } from "@reduxjs/toolkit";
 import type { AppThunk } from "@shared/model";
-import type {
-	InvestigatorBoardStat,
-	InvestigatorBoardValues,
-} from "@shared/model";
+import type { InvestigatorBoardValues } from "@shared/model";
 import { selectCurrentBoard } from "../../../selectors/current/selectCurrentBoard";
-import { setCurrentBoard } from "../../board/setCurrentBoard";
+import { setBoard } from "../../board/setBoard";
 
 import { addCurrentHistoryItem } from "../../history/addCurrentHistoryItem";
 
@@ -13,14 +9,14 @@ export type ReduceCurrentStatOptions = {
 	addToHistory?: boolean;
 };
 
-export const reduceCurrentStat: ActionCreator<AppThunk> =
-	<T extends InvestigatorBoardStat>(
+export const reduceCurrentStat =
+	<T extends keyof InvestigatorBoardValues>(
 		type: T,
 		reducer: (value: InvestigatorBoardValues[T]) => InvestigatorBoardValues[T],
 		options: ReduceCurrentStatOptions = {
 			addToHistory: true,
 		},
-	) =>
+	): AppThunk =>
 	(dispatch, getState) => {
 		const state = getState();
 
@@ -43,7 +39,7 @@ export const reduceCurrentStat: ActionCreator<AppThunk> =
 		};
 
 		dispatch(
-			setCurrentBoard({
+			setBoard({
 				...board,
 				value,
 			}),

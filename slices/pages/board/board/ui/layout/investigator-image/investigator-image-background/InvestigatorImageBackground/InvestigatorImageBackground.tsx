@@ -11,7 +11,7 @@ export const InvestigatorImageBackground = ({
 
 	return (
 		<C.Container {...props}>
-			<C.Background {...background} />
+			{background && <C.Background {...background} />}
 		</C.Container>
 	);
 };

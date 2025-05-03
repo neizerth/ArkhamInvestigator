@@ -1,5 +1,5 @@
 export * from "./resetBoard";
-export * from "./setCurrentBoard";
+export * from "./setBoard";
 export * from "./replaceCurrentBoard";
 export * from "./toggleFactionSelect";
-export * from "./setCurrentBoardProp";
+export * from "./setBoardProp";

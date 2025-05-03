@@ -7,7 +7,7 @@ import {
 import { setShowDescription } from "../../../game/game";
 import { selectCurrentBoard } from "../../selectors/current/selectCurrentBoard";
 import { clearHistory } from "../history/clearHistory";
-import { setCurrentBoard } from "./setCurrentBoard";
+import { setBoard } from "./setBoard";
 
 import type { InvestigatorBoard } from "@shared/model";
 import { selectInvestigatorSettingsByCode } from "../../../investigators/selectors/selectInvestigatorSettingsByCode";
@@ -47,7 +47,7 @@ export const resetBoard: ActionCreator<AppThunk> =
 		};
 
 		// dispatch()
-		dispatch(setCurrentBoard(data));
+		dispatch(setBoard(data));
 		dispatch(clearHistory());
 		dispatch(setShowDescription(false));
 	};

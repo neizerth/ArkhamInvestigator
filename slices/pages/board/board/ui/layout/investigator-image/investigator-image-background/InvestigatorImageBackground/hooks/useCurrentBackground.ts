@@ -8,6 +8,9 @@ export const useCurrentBackground = () => {
 	const image = useAppSelector(selectCurrentBoardProp("image"));
 
 	return useMemo(() => {
+		if (!image) {
+			return;
+		}
 		return {
 			code: image.id,
 			layout: getImageLayout({

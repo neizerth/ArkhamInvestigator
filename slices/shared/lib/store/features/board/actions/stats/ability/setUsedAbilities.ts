@@ -1,11 +1,11 @@
 import type { AppThunk, UsedAbility } from "@shared/model";
-import { setCurrentBoardProp } from "../../board";
+import { setBoardProp } from "../../board";
 import { addCurrentHistoryItem } from "../../history";
 
 export const setUsedAbilities =
 	(usedAbilities: UsedAbility[]): AppThunk =>
 	(dispatch) => {
-		dispatch(setCurrentBoardProp("usedAbilities", usedAbilities));
+		dispatch(setBoardProp("usedAbilities", usedAbilities));
 		dispatch(
 			addCurrentHistoryItem({
 				usedAbilities,

@@ -13,7 +13,7 @@ import {
 	sendNumberSignal,
 } from "../../../skillCheck/skillCheck";
 import { selectCurrentBoard } from "../../selectors";
-import { setCurrentBoard } from "../board/setCurrentBoard";
+import { setBoard } from "../board/setBoard";
 
 export const addCurrentSkillCheckToHistory: ActionCreator<AppThunk> =
 	() => (dispatch, getState) => {
@@ -43,7 +43,7 @@ export const addCurrentSkillCheckToHistory: ActionCreator<AppThunk> =
 		const checkHistory = [...board.checkHistory, item];
 
 		dispatch(
-			setCurrentBoard({
+			setBoard({
 				...board,
 				checkHistory,
 			}),

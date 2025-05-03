@@ -3,7 +3,7 @@ import type { AppThunk } from "@shared/model";
 import type { InvestigatorBoard } from "@shared/model";
 import { mergeBoardStats } from "../../../../../features";
 import { selectCurrentBoard } from "../../selectors/current/selectCurrentBoard";
-import { setCurrentBoard } from "./setCurrentBoard";
+import { setBoard } from "./setBoard";
 
 export const replaceCurrentBoard: ActionCreator<AppThunk> =
 	(board: InvestigatorBoard) => (dispatch, getState) => {
@@ -21,5 +21,5 @@ export const replaceCurrentBoard: ActionCreator<AppThunk> =
 			value,
 		};
 
-		dispatch(setCurrentBoard(data));
+		dispatch(setBoard(data));
 	};

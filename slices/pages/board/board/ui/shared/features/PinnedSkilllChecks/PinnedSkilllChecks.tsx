@@ -4,7 +4,7 @@ import { useSkillItemChaosTokenRevealModal } from "@features/skill-check";
 import {
 	selectCurrentBoardProp,
 	selectPinnedSkillChecks,
-	setCurrentBoardProp,
+	setBoardProp,
 	toggleSkillCheckHistoryItemPin as togglePin,
 	useAppDispatch,
 	useAppSelector,
@@ -33,7 +33,7 @@ export const PinnedSkilllChecks = (props: PinnedSkilllChecksProps) => {
 	);
 
 	const toggleShow = useCallback(() => {
-		dispatch(setCurrentBoardProp("showPinnedSkillChecks", !show));
+		dispatch(setBoardProp("showPinnedSkillChecks", !show));
 	}, [dispatch, show]);
 
 	const setupReveal = useSkillItemChaosTokenRevealModal();

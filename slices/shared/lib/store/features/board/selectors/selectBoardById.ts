@@ -1,13 +1,17 @@
-import type { AppSelector } from "@shared/model";
+import { createSelector } from "@reduxjs/toolkit";
+import type { AppSelector, BoardId } from "@shared/model";
 import type { InvestigatorBoard } from "@shared/model";
 import { whereId } from "../../../../util";
-import { selectInvestigatorBoards } from "../board";
+import {
+	selectCurrentInvestigatorIndex,
+	selectInvestigatorBoards,
+} from "../board";
 
-export const selectBoardById =
-	(id: number): AppSelector<InvestigatorBoard | undefined> =>
-	(state) => {
-		const boards = selectInvestigatorBoards(state);
-		const board = boards.find(whereId(id)) as InvestigatorBoard;
-
-		return board;
-	};
+export const selectBoardById = (
+	id: BoardId,
+): AppSelector<InvestigatorBoard | undefined> =>
+	createSelector(
+		[selectInvestigatorBoards, selectCurrentInvestigatorIndex],
+		(boards, currentIndex) =>
+			id === "current" ? boards[currentIndex || 0] : boards.find(whereId(id)),
+	);

@@ -1,3 +1,3 @@
 export * from "./selectIsDefeated";
-export * from "./selectTurnEnd";
+export * from "./turn";
 export * from "./selectIsInactive";

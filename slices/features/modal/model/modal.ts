@@ -1,7 +1,11 @@
-import type { Faction } from "@shared/model";
+import type { Faction, InvestigatorDetailItem } from "@shared/model";
 import type { InputModeOptions, KeyboardType } from "react-native";
 
 export type ModalType = "faction";
+
+type WithId = {
+	id: number;
+};
 
 export type ModalData = {
 	title: string;
@@ -23,8 +27,14 @@ export type ModalData = {
 				keyboardType?: KeyboardType;
 				text?: string;
 		  }
+		| {
+				contentType: "board";
+				value: InvestigatorDetailItem<WithId>[];
+				text?: string;
+		  }
 	);
 
 export type ModalOkEvent = {
-	textValue?: string;
+	textValue: string | null;
+	boardIndex: number | null;
 };

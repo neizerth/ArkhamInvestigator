@@ -3,7 +3,7 @@ import type { InvestigatorBoard, InvestigatorBoardValues } from "@shared/model";
 
 import { prop } from "ramda";
 import { selectCurrentBoard } from "../../selectors/current/selectCurrentBoard";
-import { setCurrentBoard } from "../board/setCurrentBoard";
+import { setBoard } from "../board/setBoard";
 
 type Patch = Partial<InvestigatorBoardValues>;
 
@@ -47,5 +47,5 @@ export const setValueFromHistoryIndex: AppThunkCreator =
 			usedAbilities,
 		};
 
-		dispatch(setCurrentBoard(data));
+		dispatch(setBoard(data));
 	};

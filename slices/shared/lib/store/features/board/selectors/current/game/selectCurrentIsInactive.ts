@@ -1,8 +1,8 @@
 import { createSelector } from "@reduxjs/toolkit";
-import { selectCurrentTurnEnd } from "../turn";
+import { selectTurnEnd } from "../../game";
 import { selectCurrentIsDefeated } from "./selectCurrentIsDefeated";
 
 export const selectCurrentIsInactive = createSelector(
-	[selectCurrentTurnEnd, selectCurrentIsDefeated],
+	[selectTurnEnd("current"), selectCurrentIsDefeated],
 	(turnEnd, defeated) => turnEnd || defeated,
 );

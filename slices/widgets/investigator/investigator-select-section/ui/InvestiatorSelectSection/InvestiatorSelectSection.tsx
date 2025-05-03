@@ -4,21 +4,26 @@ import { memo } from "react";
 import {
 	type DetailSectionProps,
 	DetailSection as Section,
-} from "../../DetailSection";
+} from "../DetailSection";
 import {
 	type DetailSelectProps,
 	DetailSelectMemo as Select,
 } from "../DetailSelect";
 
-export type DataSectionProps = Omit<DetailSectionProps, "value"> &
-	DetailSelectProps;
+export type InvestigatorSelectSectionProps = Omit<DetailSectionProps, "value"> &
+	DetailSelectProps & {
+		disabled?: string[];
+		defaultLabel?: string;
+	};
 
-export const DataSection = ({
+export const InvestigatorSelectSection = ({
 	data,
 	title,
 	onChange,
+	disabled,
+	defaultLabel: defaultLabelProp,
 	...props
-}: DataSectionProps) => {
+}: InvestigatorSelectSectionProps) => {
 	const { t } = useAppTranslation();
 	const { length } = data;
 	if (length < 2) {
@@ -27,14 +32,15 @@ export const DataSection = ({
 
 	const selected = data.find(whereId(props.selectedId));
 
+	const defaultLabel = defaultLabelProp || t`Default`;
 	const sectionTitle = `${title} (${length})`;
-	const selectedValue = (selected && t(selected.name)) || t`Default`;
+	const selectedValue = (selected && t(selected.name)) || defaultLabel;
 
 	return (
 		<Section title={sectionTitle} value={selectedValue}>
-			<Select {...props} onChange={onChange} data={data} />
+			<Select {...props} onChange={onChange} data={data} disabled={disabled} />
 		</Section>
 	);
 };
 
-export const DataSectionMemo = memo(DataSection);
+export const InvestigatorSelectSectionMemo = memo(InvestigatorSelectSection);

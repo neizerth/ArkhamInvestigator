@@ -6,4 +6,7 @@ export const getIconStyle = getKeyConfig<ViewStyle>({
 	reaction: {
 		paddingTop: 3,
 	},
+	seal: {
+		paddingBottom: 6,
+	},
 });

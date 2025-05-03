@@ -2,7 +2,7 @@ import type { InvestigatorAbility } from "arkham-investigator-data";
 import {
 	BOARD_ABILITY_LIMITS,
 	BOARD_ABILITY_TYPES,
-	SPECIAL_ACTIONS,
+	SPECIAL_ABILITIES,
 } from "../../../../config";
 
 export const getAbilityLimits = ({ limitPer }: InvestigatorAbility) => {
@@ -13,7 +13,7 @@ export const getAbilityLimits = ({ limitPer }: InvestigatorAbility) => {
 };
 
 export const isBoardAbility = (ability: InvestigatorAbility) => {
-	if (SPECIAL_ACTIONS.includes(ability.id)) {
+	if (SPECIAL_ABILITIES.includes(ability.id)) {
 		return true;
 	}
 	if (ability.perInvestigator) {

@@ -2,7 +2,7 @@ import type { ActionCreator } from "@reduxjs/toolkit";
 import type { AppThunk } from "@shared/model";
 import { propEq, reject } from "ramda";
 
-import { selectCurrentBoard, setCurrentBoardProp } from "../../board";
+import { selectCurrentBoard, setBoardProp } from "../../board";
 import { selectSkillCheckType, sendCommandSignal } from "../skillCheck";
 
 export const clearSkillCheckHistory: ActionCreator<AppThunk> =
@@ -17,6 +17,6 @@ export const clearSkillCheckHistory: ActionCreator<AppThunk> =
 
 		const checkHistory = reject(propEq(type, "type"), board.checkHistory);
 
-		dispatch(setCurrentBoardProp("checkHistory", checkHistory));
+		dispatch(setBoardProp("checkHistory", checkHistory));
 		dispatch(sendCommandSignal("clear"));
 	};

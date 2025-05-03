@@ -6,7 +6,8 @@ import {
 } from "@shared/ui";
 import { KeyboardAvoidingView, View } from "react-native";
 import styled from "styled-components/native";
-import { FactionCardMemo as FactionCard } from "../../../../widgets/investigator/faction/faction-card";
+import { FactionCardMemo as FactionCard } from "../../../../../widgets/investigator/faction/faction-card";
+import { FactionModalBoardSelect } from "../FactionModalBoardSelect";
 
 export const Text: typeof BaseText = styled(BaseText)`
 
@@ -45,5 +46,11 @@ export const Outside = styled(BaseOutside)`
 `;
 
 export const Input: typeof TextInput = styled(TextInput)`
+
+`;
+
+export const BoardSelect: typeof FactionModalBoardSelect = styled(
+	FactionModalBoardSelect,
+)`
 
 `;

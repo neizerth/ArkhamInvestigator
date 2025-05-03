@@ -1,30 +1,34 @@
 import type { InvestigatorDetailItem as Item } from "@shared/model";
 import { memo, useCallback } from "react";
-import { InvestigatorPreviewMemo as InvestigatorPreview } from "../../../../investigator-preview";
-import { CARD_SIZE } from "../../../config";
+import { InvestigatorPreviewMemo as InvestigatorPreview } from "../../../investigator-preview";
 import { UnselectedDetail } from "../UnselectedDetail";
 import * as C from "./DetailSelect.components";
 
 export type DetailSelectProps = {
 	data: Item[];
+	disabled?: string[];
+	size: number;
 	selectedId?: string | null;
-	onChange: (item: Item | null) => void;
+	onChange: (item: Item | null, index?: number) => void;
 	showNone?: boolean;
 	showIcon?: boolean;
 };
 
 export const DetailSelect = ({
 	data,
+	disabled = [],
 	onChange,
+	size,
 	selectedId = null,
 	showNone,
 	showIcon = true,
 }: DetailSelectProps) => {
 	const setValue = useCallback(
-		(item: Item | null) => () => onChange(item),
+		(item: Item | null, index?: number) => () => onChange(item, index),
 		[onChange],
 	);
 	const isItemSelected = (item: Item) => item.id === selectedId;
+	const isDisabled = (item: Item) => disabled.includes(item.id);
 
 	return (
 		<C.Container>
@@ -36,16 +40,17 @@ export const DetailSelect = ({
 					/>
 				)}
 
-				{data.map((item) => (
+				{data.map((item, index) => (
 					<InvestigatorPreview
 						key={item.id}
 						imageId={item.imageId}
 						code={item.code}
 						faction={item.faction}
 						selected={isItemSelected(item)}
-						onPress={setValue(item)}
+						disabled={isDisabled(item)}
+						onPress={setValue(item, index)}
 						icon={item.icon}
-						size={CARD_SIZE}
+						size={size}
 						showIcon={showIcon}
 					/>
 				))}

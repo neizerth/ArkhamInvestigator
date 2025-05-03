@@ -7,6 +7,8 @@ import type {
 } from "./common";
 import type { SkillCheckHistoryItem } from "./skillCheck";
 
+export type BoardId = number | "current";
+
 export type InvestigatorBoardStat =
 	| InvestigatorMainStatType
 	| InvestigatorSkillType

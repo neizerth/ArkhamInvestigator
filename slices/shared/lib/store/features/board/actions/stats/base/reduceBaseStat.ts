@@ -5,7 +5,7 @@ import type {
 	InvestigatorBoardValues,
 } from "@shared/model";
 import { selectCurrentBoard } from "../../../selectors/current/selectCurrentBoard";
-import { setCurrentBoard } from "../../board/setCurrentBoard";
+import { setBoard } from "../../board/setBoard";
 import { addCurrentHistoryItem } from "../../history/addCurrentHistoryItem";
 
 export type ReduceBaseStatOptions = {
@@ -42,7 +42,7 @@ export const reduceBaseStat: ActionCreator<AppThunk> =
 		};
 
 		dispatch(
-			setCurrentBoard({
+			setBoard({
 				...board,
 				baseValue,
 			}),

@@ -1,6 +1,6 @@
 import type { AppThunk, InvestigatorBoardValues } from "@shared/model";
 import { selectCurrentBoard } from "../../../selectors";
-import { setCurrentBoard } from "../../board";
+import { setBoard } from "../../board";
 import { addCurrentHistoryItem } from "../../history";
 
 export const setValueTransaction =
@@ -10,7 +10,7 @@ export const setValueTransaction =
 		const board = selectCurrentBoard(state);
 
 		dispatch(
-			setCurrentBoard({
+			setBoard({
 				...board,
 				value: {
 					...board.value,

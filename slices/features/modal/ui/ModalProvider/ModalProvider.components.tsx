@@ -1,5 +1,5 @@
 import styled from "styled-components/native";
-import { FactionModal as BaseModal } from "../FactionModal/FactionModal";
+import { FactionModal as BaseModal } from "../faction/FactionModal/FactionModal";
 
 export const Modal: typeof BaseModal = styled(BaseModal)`
   z-index: 1000;

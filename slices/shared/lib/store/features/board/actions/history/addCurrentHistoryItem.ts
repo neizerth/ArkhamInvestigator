@@ -3,7 +3,7 @@ import type { AppThunk } from "@shared/model";
 import type { HistoryItem } from "@shared/model";
 import { v4 } from "uuid";
 import { selectCurrentBoard } from "../../selectors/current/selectCurrentBoard";
-import { setCurrentBoard } from "../board/setCurrentBoard";
+import { setBoard } from "../board/setBoard";
 
 type Options = Omit<HistoryItem, "id">;
 export const addCurrentHistoryItem =
@@ -24,7 +24,7 @@ export const addCurrentHistoryItem =
 		const history = [...currentHistory, historyItem];
 
 		dispatch(
-			setCurrentBoard({
+			setBoard({
 				...board,
 				history,
 				historyIndex,

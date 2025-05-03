@@ -1,5 +1,5 @@
 import type { AppThunk } from "@shared/model";
-import { selectCurrentBoard, setCurrentBoardProp } from "../../board";
+import { selectCurrentBoard, setBoardProp } from "../../board";
 
 export const setSkillCheckHistoryItemTitle =
 	(id: string, title?: string): AppThunk =>
@@ -18,5 +18,5 @@ export const setSkillCheckHistoryItemTitle =
 			return item;
 		});
 
-		dispatch(setCurrentBoardProp("checkHistory", history));
+		dispatch(setBoardProp("checkHistory", history));
 	};

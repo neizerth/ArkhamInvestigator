@@ -3,7 +3,7 @@ import {
 	selectAvailableFactions,
 	selectCurrentFaction,
 	selectShowFactionSelect,
-	setCurrentBoardProp,
+	setBoardProp,
 	setShowFactionSelect,
 	useAppDispatch,
 	useAppSelector,
@@ -29,7 +29,7 @@ export const FactionSelect = (props: FactionSelectProps) => {
 	const onPress = useCallback(
 		(faction: Faction) => () => {
 			dispatch(setShowFactionSelect(false));
-			dispatch(setCurrentBoardProp("currentRole", faction));
+			dispatch(setBoardProp("currentRole", faction));
 		},
 		[dispatch],
 	);

@@ -1,21 +1,25 @@
-import type { AppThunk } from "@shared/model";
+import type { AppThunk, BoardId } from "@shared/model";
 import type { InvestigatorBoard } from "@shared/model";
 import { selectCurrentBoard } from "../../selectors/current/selectCurrentBoard";
-import { setCurrentBoard } from "./setCurrentBoard";
+import { setBoard } from "./setBoard";
 
-export const setCurrentBoardProp =
+export const setBoardProp =
 	<T extends keyof InvestigatorBoard>(
 		prop: T,
 		value: InvestigatorBoard[T],
+		boardId: BoardId = "current",
 	): AppThunk =>
 	(dispatch, getState) => {
 		const state = getState();
 		const board = selectCurrentBoard(state);
 
 		dispatch(
-			setCurrentBoard({
-				...board,
-				[prop]: value,
-			}),
+			setBoard(
+				{
+					...board,
+					[prop]: value,
+				},
+				boardId,
+			),
 		);
 	};
