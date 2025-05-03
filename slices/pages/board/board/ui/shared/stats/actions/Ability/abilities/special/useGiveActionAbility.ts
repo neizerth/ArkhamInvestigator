@@ -11,6 +11,7 @@ import { inc } from "ramda";
 import { useCallback } from "react";
 import { usePerInvestigatorAbility } from "./usePerInvestigatorAbility";
 
+// Carson Sinclair personal ability
 export const useGiveActionAbility = (ability: InvestigatorAbility) => {
 	const dispatch = useAppDispatch();
 	const { t } = useAppTranslation();
