@@ -33,7 +33,7 @@ export const Content: typeof View = styled(View)`
 
 export const Special: typeof SpecialActions = styled(SpecialActions)`
   position: absolute;
-  bottom: 13px;
+  bottom: 10px;
   left: 90px;
 `;
 
