@@ -1,9 +1,7 @@
-import { SimpleModal } from "@features/modal";
 import { size } from "@shared/config";
 import { Row } from "@shared/ui";
 import { View } from "react-native";
 import styled from "styled-components/native";
-import { FactionSelectButton } from "../FactionSelectButton";
 
 export const Container: typeof View = styled(View)`
   background-color: rgba(0, 0, 0, 0.3);
@@ -21,12 +19,4 @@ export const Content: typeof Row = styled(Row)`
   align-items: center;
   gap: ${size.gap.medium}px;
   max-height: 85px;
-`;
-
-export const Modal: typeof SimpleModal = styled(SimpleModal)`
-
-`;
-
-export const Button: typeof FactionSelectButton = styled(FactionSelectButton)`
-  flex: 1;
 `;

@@ -20,6 +20,11 @@ export const BOARD_ABILITY_TYPES: AbilityType[] = [
 	"fast",
 	"reaction",
 	"action",
+	"special-action",
+];
+
+export const SPECIAL_ACTIONS: string[] = [
+	// "give-action"
 ];
 
 export const TURN_ABILITY_LIMITS: LimitType[] = ["phase", "round", "turn"];
