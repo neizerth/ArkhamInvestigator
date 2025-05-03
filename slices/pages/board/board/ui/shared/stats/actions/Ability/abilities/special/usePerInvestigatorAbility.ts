@@ -8,13 +8,14 @@ import {
 	selectCurrentFaction,
 	selectCurrentInvestigatorIndex,
 	selectInvestigatorBoards,
+	selectIsAbilityUsed,
 	useAppDispatch,
 	useAppSelector,
 	whereId,
 } from "@shared/lib";
 import { setAbilityUsed } from "@shared/lib/store/features/board/actions/stats/ability/setAbilityUsed";
 import type { InvestigatorAbility } from "arkham-investigator-data";
-import { prop, reject } from "ramda";
+import { always, prop, reject } from "ramda";
 import { useCallback, useMemo } from "react";
 
 type Options = {
@@ -43,6 +44,8 @@ export const usePerInvestigatorAbility = ({
 	const faction = useAppSelector(selectCurrentFaction);
 	const data = useAppSelector(selectBoardDetailItems);
 	const useInfo = useAppSelector(selectAbilityUseInfo(ability.id));
+
+	const used = useAppSelector(selectIsAbilityUsed(ability.id));
 	const boardIds = useInfo?.boardIds || [];
 
 	const value = useMemo(() => {
@@ -104,5 +107,9 @@ export const usePerInvestigatorAbility = ({
 		handleBoardId(nextBoardId);
 	}, [handleBoardId, nextBoardId]);
 
-	return boardsCount > 2 ? showModal : handlerNextBoard;
+	if (boardsCount < 3) {
+		return used ? always(false) : handlerNextBoard;
+	}
+
+	return showModal;
 };

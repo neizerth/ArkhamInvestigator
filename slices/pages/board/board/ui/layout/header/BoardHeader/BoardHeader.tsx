@@ -40,11 +40,15 @@ export const BoardHeader = (props: BoardHeaderProps) => {
 		dispatch(toggleFactionSelect());
 	}, [dispatch, pressableTitle]);
 
-	const { subname, name, locale } = investigator;
-
 	const renderSkill = useCallback((props: RenderInvestigatorSkillItem) => {
 		return <C.Skill {...props} />;
 	}, []);
+
+	if (!investigator) {
+		return null;
+	}
+
+	const { subname, name, locale } = investigator;
 
 	const titleProps = {
 		entityId: id,

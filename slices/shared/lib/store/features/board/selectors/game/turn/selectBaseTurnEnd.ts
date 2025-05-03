@@ -6,7 +6,7 @@ import { selectBoardById } from "../../selectBoardById";
 export const selectBaseTurnEnd = (boardId: BoardId) => {
 	return createSelector(
 		[selectBoardById(boardId), selectEndTurnStrict],
-		(board, strict) => {
+		(board) => {
 			if (!board) {
 				return false;
 			}
@@ -18,11 +18,7 @@ export const selectBaseTurnEnd = (boardId: BoardId) => {
 				return false;
 			}
 
-			if (actions === 0 && !strict) {
-				return true;
-			}
-
-			return false;
+			return true;
 		},
 	);
 };

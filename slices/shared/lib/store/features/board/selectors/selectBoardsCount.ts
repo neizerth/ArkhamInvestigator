@@ -3,5 +3,5 @@ import { selectInvestigatorBoards } from "../board";
 
 export const selectBoardsCount = createSelector(
 	[selectInvestigatorBoards],
-	({ length }) => length,
+	(boards = []) => boards.length,
 );
