@@ -13,10 +13,10 @@ export const increaseCurrentStat =
 	): AppThunk =>
 	(dispatch) => {
 		dispatch(
-			reduceCurrentStat(
+			reduceCurrentStat({
 				type,
-				(value: number) => Math.min(value + 1, maxValue),
+				reducer: (value: number) => Math.min(value + 1, maxValue),
 				options,
-			),
+			}),
 		);
 	};

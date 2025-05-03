@@ -1,26 +1,34 @@
-import type { AppThunk } from "@shared/model";
+import type { AppThunk, BoardId } from "@shared/model";
 import type { InvestigatorBoardValues } from "@shared/model";
-import { selectCurrentBoard } from "../../../selectors/current/selectCurrentBoard";
 import { setBoard } from "../../board/setBoard";
 
+import { selectBoardById } from "../../../selectors";
 import { addCurrentHistoryItem } from "../../history/addCurrentHistoryItem";
 
 export type ReduceCurrentStatOptions = {
 	addToHistory?: boolean;
 };
 
+type Options<T extends keyof InvestigatorBoardValues> = {
+	type: T;
+	reducer: (value: InvestigatorBoardValues[T]) => InvestigatorBoardValues[T];
+	options?: ReduceCurrentStatOptions;
+	boardId?: BoardId;
+};
+
 export const reduceCurrentStat =
-	<T extends keyof InvestigatorBoardValues>(
-		type: T,
-		reducer: (value: InvestigatorBoardValues[T]) => InvestigatorBoardValues[T],
-		options: ReduceCurrentStatOptions = {
+	<T extends keyof InvestigatorBoardValues>({
+		type,
+		reducer,
+		options = {
 			addToHistory: true,
 		},
-	): AppThunk =>
+		boardId,
+	}: Options<T>): AppThunk =>
 	(dispatch, getState) => {
 		const state = getState();
 
-		const board = selectCurrentBoard(state);
+		const board = selectBoardById(boardId)(state);
 
 		if (!board) {
 			return;
@@ -39,10 +47,13 @@ export const reduceCurrentStat =
 		};
 
 		dispatch(
-			setBoard({
-				...board,
-				value,
-			}),
+			setBoard(
+				{
+					...board,
+					value,
+				},
+				boardId,
+			),
 		);
 
 		if (!options.addToHistory) {

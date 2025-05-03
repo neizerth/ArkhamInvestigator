@@ -30,6 +30,7 @@ export type ModalData = {
 		| {
 				contentType: "board";
 				value: InvestigatorDetailItem<WithId>[];
+				disabled?: string[];
 				text?: string;
 		  }
 	);

@@ -8,7 +8,7 @@ import {
 } from "../board";
 
 export const selectBoardById = (
-	id: BoardId,
+	id: BoardId = "current",
 ): AppSelector<InvestigatorBoard | undefined> =>
 	createSelector(
 		[selectInvestigatorBoards, selectCurrentInvestigatorIndex],

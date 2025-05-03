@@ -1,67 +1,49 @@
 import { useAppTranslation } from "@features/i18n";
-import { type ModalOkEvent, useModal } from "@features/modal";
 import {
-	reduceBoardCurrentStat,
-	selectBoardDetailItems,
-	selectCurrentBoardProp,
-	selectCurrentFaction,
+	decreaseCurrentStat,
+	reduceCurrentStat,
+	selectAbilityUseInfo,
 	useAppDispatch,
 	useAppSelector,
-	whereId,
 } from "@shared/lib";
-import { inc, reject } from "ramda";
-import { useCallback, useMemo } from "react";
+import type { InvestigatorAbility } from "arkham-investigator-data";
+import { inc } from "ramda";
+import { useCallback } from "react";
+import { usePerInvestigatorAbility } from "./usePerInvestigatorAbility";
 
-export const useGiveActionAbility = () => {
+export const useGiveActionAbility = (ability: InvestigatorAbility) => {
 	const dispatch = useAppDispatch();
 	const { t } = useAppTranslation();
-	const signatureGroupId = useAppSelector(
-		selectCurrentBoardProp("signatureGroupId"),
-	);
-	const faction = useAppSelector(selectCurrentFaction);
-	const data = useAppSelector(selectBoardDetailItems);
+	const useInfo = useAppSelector(selectAbilityUseInfo(ability.id));
+	const boardIds = useInfo?.boardIds || [];
 
-	const value = useMemo(() => {
-		return reject(whereId(signatureGroupId), data);
-	}, [data, signatureGroupId]);
-
-	const onUpdate = useCallback(
-		({ boardIndex }: ModalOkEvent) => {
-			if (boardIndex === null) {
-				return;
-			}
-
-			const boardData = data[boardIndex].data;
-
-			if (!boardData) {
-				return;
-			}
-
+	const onChange = useCallback(
+		(boardId: number) => {
 			dispatch(
-				reduceBoardCurrentStat({
-					boardId: boardData.id,
+				reduceCurrentStat({
+					boardId,
 					type: "actions",
 					reducer: inc,
+					options: {
+						addToHistory: false,
+					},
 				}),
 			);
+
+			const minDecreaseCount = ability.additionalAction ? 1 : 0;
+
+			if (boardIds.length < minDecreaseCount) {
+				return;
+			}
+
+			dispatch(decreaseCurrentStat("actions"));
 		},
-		[data, dispatch],
+		[dispatch, boardIds, ability],
 	);
 
-	const [showModal] = useModal({
-		id: "give-action",
-		data: {
-			type: "faction",
-			faction,
-			contentType: "board",
-			title: t`Give action`,
-			subtitle: t`Choose an Investigator`,
-			okText: t`Okay`,
-			cancelText: t`Cancel`,
-			value,
-		},
-		onOk: onUpdate,
+	return usePerInvestigatorAbility({
+		ability,
+		title: t`Give action`,
+		onChange,
 	});
-
-	return showModal;
 };

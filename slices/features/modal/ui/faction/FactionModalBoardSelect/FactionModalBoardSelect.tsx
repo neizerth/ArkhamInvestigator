@@ -7,6 +7,7 @@ import * as C from "./FactionModalBoardSelect.components";
 export type FactionModalBoardSelectProps = ViewProps & {
 	onChange: (id: number) => void;
 	data: InvestigatorDetailItem[];
+	disabled?: string[];
 	selectedIndex: number | null;
 };
 

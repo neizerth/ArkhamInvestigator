@@ -69,6 +69,7 @@ export const FactionModal = ({ data, ...props }: FactionModalProps) => {
 							<C.BoardSelect
 								onChange={onBoardSelect}
 								data={data.value}
+								disabled={data.disabled}
 								selectedIndex={boardIndex}
 							/>
 						)}

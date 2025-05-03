@@ -7,6 +7,9 @@ export const decreaseCurrentStat: ActionCreator<AppThunk> =
 	(type: InvestigatorBoardStat, minValue = 0) =>
 	(dispatch) => {
 		dispatch(
-			reduceCurrentStat(type, (value: number) => Math.max(value - 1, minValue)),
+			reduceCurrentStat({
+				type,
+				reducer: (value: number) => Math.max(value - 1, minValue),
+			}),
 		);
 	};

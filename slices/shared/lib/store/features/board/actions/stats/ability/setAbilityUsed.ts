@@ -17,12 +17,13 @@ export const setAbilityUsed =
 			return;
 		}
 
-		if (ability.perInvestigator && !boardId) {
+		if (ability.perInvestigator && boardId === undefined) {
 			return;
 		}
 
 		const usedAbilities = selectUsedAbilities(state) || [];
-		const usedData = usedAbilities.find(whereId(id));
+		const index = usedAbilities.findIndex(whereId(id));
+		const usedData = usedAbilities[index];
 
 		const boardIds = usedData?.boardIds || [];
 
@@ -33,7 +34,10 @@ export const setAbilityUsed =
 				}
 			: { id };
 
-		const data = [...usedAbilities, item];
+		const data =
+			ability.perInvestigator && index >= 0
+				? usedAbilities.with(index, item)
+				: [...usedAbilities, item];
 
 		dispatch(setUsedAbilities(data));
 	};

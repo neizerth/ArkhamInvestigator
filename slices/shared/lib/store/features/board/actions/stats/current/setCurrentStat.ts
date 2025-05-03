@@ -14,4 +14,10 @@ export const setCurrentStat: ActionCreator<AppThunk> =
 		options?: ReduceCurrentStatOptions,
 	) =>
 	(dispatch) =>
-		dispatch(reduceCurrentStat(type, always(value), options));
+		dispatch(
+			reduceCurrentStat({
+				type,
+				reducer: always(value),
+				options,
+			}),
+		);

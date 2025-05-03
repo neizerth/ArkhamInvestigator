@@ -1,15 +1,33 @@
 import { createSelector } from "@reduxjs/toolkit";
+import { selectBoardsCount } from "../../../selectBoardsCount";
 import { selectAbilityUseInfo } from "./current/selectAbilityUseInfo";
+import { selectAbilityById } from "./selectAbilityById";
 
 export const selectIsAbilityUsed = (abilityId: string, boardId?: number) =>
-	createSelector([selectAbilityUseInfo(abilityId)], (data) => {
-		if (!data) {
-			return false;
-		}
+	createSelector(
+		[
+			selectAbilityById(abilityId),
+			selectAbilityUseInfo(abilityId),
+			selectBoardsCount,
+		],
+		(ability, data, boardsCount) => {
+			if (!data) {
+				return false;
+			}
 
-		if (!data.boardIds || !boardId) {
-			return true;
-		}
+			if (!ability?.perInvestigator || !data.boardIds) {
+				return true;
+			}
 
-		return data.boardIds.includes(boardId);
-	});
+			if (boardId !== undefined) {
+				return data.boardIds.includes(boardId);
+			}
+
+			const { personalUse } = ability;
+
+			const maxUses = personalUse ? boardsCount : boardsCount - 1;
+			const usesCount = data.boardIds.length;
+
+			return usesCount >= maxUses;
+		},
+	);

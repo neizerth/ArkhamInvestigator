@@ -5,7 +5,7 @@ import { useGiveActionAbility } from "./special";
 
 export const useSpecialAbility = (ability: InvestigatorAbility) => {
 	if (ability.id === GIVE_ACTION_ABILITY) {
-		return useGiveActionAbility();
+		return useGiveActionAbility(ability);
 	}
 	return always(identity);
 };
