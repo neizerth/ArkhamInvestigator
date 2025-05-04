@@ -4,3 +4,4 @@ export * from "./selectBoardsCount";
 export * from "./game";
 export * from "./props";
 export * from "./transform";
+export * from "./selectNextBoardId";

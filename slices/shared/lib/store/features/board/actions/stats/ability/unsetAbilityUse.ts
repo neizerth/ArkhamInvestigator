@@ -18,10 +18,6 @@ export const unsetAbilityUse =
 			return;
 		}
 
-		if (ability.perInvestigator && !boardId) {
-			return;
-		}
-
 		const usedAbilities = selectUsedAbilities(state) || [];
 		const usedData = usedAbilities.find(whereId(id));
 
@@ -31,7 +27,7 @@ export const unsetAbilityUse =
 
 		const data = reject(whereId(id), usedAbilities);
 
-		if (!ability.perInvestigator) {
+		if (!ability.perInvestigator || !boardId) {
 			dispatch(setUsedAbilities(data));
 
 			return;

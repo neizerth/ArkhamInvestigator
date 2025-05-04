@@ -6,16 +6,16 @@ import {
 	selectBoardsCount,
 	selectCurrentBoardProp,
 	selectCurrentFaction,
-	selectCurrentInvestigatorIndex,
-	selectInvestigatorBoards,
 	selectIsAbilityUsed,
+	selectNextBoardId,
 	useAppDispatch,
 	useAppSelector,
 	whereId,
 } from "@shared/lib";
 import { setAbilityUsed } from "@shared/lib/store/features/board/actions/stats/ability/setAbilityUsed";
+import { unsetAbilityUse } from "@shared/lib/store/features/board/actions/stats/ability/unsetAbilityUse";
 import type { InvestigatorAbility } from "arkham-investigator-data";
-import { always, prop, reject } from "ramda";
+import { prop, reject } from "ramda";
 import { useCallback, useMemo } from "react";
 
 type Options = {
@@ -35,11 +35,7 @@ export const usePerInvestigatorAbility = ({
 		selectCurrentBoardProp("signatureGroupId"),
 	);
 	const boardsCount = useAppSelector(selectBoardsCount);
-	const currentIndex = useAppSelector(selectCurrentInvestigatorIndex) ?? 0;
-	const nextBoardId = useAppSelector(
-		(state) =>
-			selectInvestigatorBoards(state)[(currentIndex + 1) % boardsCount].id,
-	);
+	const nextBoardId = useAppSelector(selectNextBoardId);
 
 	const faction = useAppSelector(selectCurrentFaction);
 	const data = useAppSelector(selectBoardDetailItems);
@@ -111,10 +107,14 @@ export const usePerInvestigatorAbility = ({
 		handleBoardId(nextBoardId);
 	}, [handleBoardId, nextBoardId]);
 
+	const removeUses = useCallback(() => {
+		dispatch(unsetAbilityUse(ability.id, nextBoardId));
+	}, [dispatch, nextBoardId, ability.id]);
+
 	const modalBoardsCount = ability.personalUse ? 2 : 3;
 
 	if (boardsCount < modalBoardsCount) {
-		return used ? always(false) : handleNextBoard;
+		return used ? removeUses : handleNextBoard;
 	}
 
 	return showModal;
