@@ -71,6 +71,38 @@ export const getTitleStyle = (options: GetTitleStyleOptions) => {
 				paddingTop: "1%",
 			},
 		},
+		mystic: {
+			background: {
+				gap: "6%",
+			},
+		},
+	});
+
+	const getKOStyle = getKeyConfig<Partial<ReturnStyle>>({
+		default: {
+			background: {
+				gap: "11%",
+			},
+			title: {
+				paddingTop: "2%",
+			},
+			titleText: {
+				fontFamily: SanCn.bold,
+				fontSize: 38 * vh,
+			},
+			subtitleText: {
+				fontFamily: SanCn.bold,
+				fontSize: 20 * vh,
+			},
+			unique: {
+				marginTop: 0,
+			},
+		},
+		mystic: {
+			background: {
+				gap: "10%",
+			},
+		},
 	});
 
 	const getLocaleStyle = getKeyConfig<Partial<ReturnStyle>>({
@@ -90,25 +122,7 @@ export const getTitleStyle = (options: GetTitleStyleOptions) => {
 				fontSize: 23 * vh,
 			},
 		},
-		ko: {
-			background: {
-				gap: "12%",
-			},
-			title: {
-				paddingTop: "2%",
-			},
-			titleText: {
-				fontFamily: SanCn.bold,
-				fontSize: 38 * vh,
-			},
-			subtitleText: {
-				fontFamily: SanCn.bold,
-				fontSize: 20 * vh,
-			},
-			unique: {
-				marginTop: 0,
-			},
-		},
+		ko: getKOStyle(faction),
 		zh: zhConfig,
 		"zh-cn": zhConfig,
 	});
