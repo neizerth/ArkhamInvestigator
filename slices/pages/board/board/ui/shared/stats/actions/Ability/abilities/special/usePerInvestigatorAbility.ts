@@ -20,7 +20,7 @@ import { useCallback, useMemo } from "react";
 
 type Options = {
 	ability: InvestigatorAbility;
-	title: string;
+	title?: string;
 	onChange?: (boardId: number) => void;
 };
 
@@ -87,14 +87,18 @@ export const usePerInvestigatorAbility = ({
 		[value, handleBoardId],
 	);
 
+	const defaultTitle = t`Choose an Investigator`;
+
+	const subtitle = title && defaultTitle;
+
 	const [showModal] = useModal({
 		id: `ability_${ability.id}`,
 		data: {
 			type: "faction",
 			faction,
 			contentType: "board",
-			title,
-			subtitle: t`Choose an Investigator`,
+			title: title || defaultTitle,
+			subtitle,
 			okText: t`Okay`,
 			cancelText: t`Cancel`,
 			value,

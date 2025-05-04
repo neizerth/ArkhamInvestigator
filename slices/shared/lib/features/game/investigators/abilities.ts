@@ -16,9 +16,6 @@ export const isBoardAbility = (ability: InvestigatorAbility) => {
 	if (SPECIAL_ABILITIES.includes(ability.id)) {
 		return true;
 	}
-	if (ability.perInvestigator) {
-		return false;
-	}
 	if (!BOARD_ABILITY_TYPES.includes(ability.type)) {
 		return false;
 	}
@@ -28,6 +25,7 @@ export const isBoardAbility = (ability: InvestigatorAbility) => {
 	if (!limits) {
 		return false;
 	}
+
 	return limits.every((limit) => BOARD_ABILITY_LIMITS.includes(limit));
 };
 
