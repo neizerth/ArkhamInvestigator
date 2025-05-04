@@ -61,6 +61,11 @@ export const getTitleStyle = (options: GetTitleStyleOptions) => {
 				fontSize: 25 * vh,
 			},
 		},
+		guardian: {
+			background: {
+				gap: parallel ? "10%" : "8%",
+			},
+		},
 		rogue: {
 			title: {
 				paddingTop: "1%",
