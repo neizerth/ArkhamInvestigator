@@ -6,3 +6,6 @@ export const signedNumber = (value: number) =>
 
 export const snakeCase = (text: string) =>
 	text.replace(/[A-Z]/g, (letter) => `_${letter.toLowerCase()}`);
+
+export const hyphens2camelCase = (text: string) =>
+	text.replace(/-([a-z])/g, (g) => g[1].toUpperCase());

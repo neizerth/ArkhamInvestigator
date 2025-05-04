@@ -1,4 +1,4 @@
-import type { Translation } from "@features/i18n/model";
+import type { Translation } from "../../model";
 
 import de from "./de.json";
 import en from "./en.json";
