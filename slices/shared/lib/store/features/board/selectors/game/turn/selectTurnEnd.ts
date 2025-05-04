@@ -12,9 +12,6 @@ export const selectTurnEnd = (boardId: BoardId) => {
 			selectEndTurnStrict,
 		],
 		(baseTurnEnd, abilitiesTurnEnd, strict) => {
-			console.log({
-				baseTurnEnd,
-			});
 			if (!baseTurnEnd) {
 				return false;
 			}
