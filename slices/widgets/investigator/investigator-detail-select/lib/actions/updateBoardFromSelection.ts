@@ -45,11 +45,19 @@ export const updateBoardFromSelection =
 			...initialValue,
 		};
 
+		const merged = mergeBoardStats(board, baseValue);
+
+		const initStats = replace
+			? {}
+			: {
+					health: Math.max(0, stats.health - physicalTrauma),
+					sanity: Math.max(0, stats.sanity - mentalTrauma),
+				};
+
 		const value = {
-			...mergeBoardStats(board, baseValue),
+			...merged,
+			...initStats,
 			additionalAction,
-			health: Math.max(0, stats.health - physicalTrauma),
-			sanity: Math.max(0, stats.sanity - mentalTrauma),
 		};
 
 		const updatedBoard: InvestigatorBoard = {
