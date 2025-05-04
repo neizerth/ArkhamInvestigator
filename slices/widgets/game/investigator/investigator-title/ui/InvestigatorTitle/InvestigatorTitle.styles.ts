@@ -110,9 +110,8 @@ export const getTitleStyle = (options: GetTitleStyleOptions) => {
 		},
 	});
 
-	const getLocaleStyle = getKeyConfig<Partial<ReturnStyle>>({
-		default: defaultFactionStyle(faction),
-		ru: {
+	const getRUStyle = getKeyConfig<Partial<ReturnStyle>>({
+		default: {
 			background: {
 				gap: "7%",
 			},
@@ -127,6 +126,16 @@ export const getTitleStyle = (options: GetTitleStyleOptions) => {
 				fontSize: 23 * vh,
 			},
 		},
+		guardian: {
+			background: {
+				gap: parallel ? "9%" : "7%",
+			},
+		},
+	});
+
+	const getLocaleStyle = getKeyConfig<Partial<ReturnStyle>>({
+		default: defaultFactionStyle(faction),
+		ru: getRUStyle(faction),
 		ko: getKOStyle(faction),
 		zh: zhConfig,
 		"zh-cn": zhConfig,
