@@ -103,12 +103,14 @@ export const usePerInvestigatorAbility = ({
 		onOk: onOk,
 	});
 
-	const handlerNextBoard = useCallback(() => {
+	const handleNextBoard = useCallback(() => {
 		handleBoardId(nextBoardId);
 	}, [handleBoardId, nextBoardId]);
 
-	if (boardsCount < 3) {
-		return used ? always(false) : handlerNextBoard;
+	const modalBoardsCount = ability.personalUse ? 2 : 3;
+
+	if (boardsCount < modalBoardsCount) {
+		return used ? always(false) : handleNextBoard;
 	}
 
 	return showModal;
