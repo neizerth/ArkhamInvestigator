@@ -26,13 +26,18 @@ export const Traits: typeof UnscaledText = styled(UnscaledText)`
 `;
 
 export { View as Section };
-export { Column as ImageContainer };
 export { InvestigatorSkills as Skills };
 
 export const Image: typeof BaseImage = styled(BaseImage)`
-  width: 100px;
+  max-width: 110px;
+  height: 110px;
+  flex: 1;
   border-radius: ${size.borderRadius.default}px;
-  aspect-ratio: 1;
+`;
+
+export const ImageContainer: typeof Row = styled(Row)`
+  justify-content: flex-end;
+  flex: 1;
 `;
 
 export const InvestigatorText: typeof GameText = styled(GameText)`
@@ -49,6 +54,7 @@ export const InvestigatorTextContainer: typeof View = styled(View)`
 
 export const MainInfo: typeof Row = styled(Row)`
   justify-content: space-between;
+  gap: ${size.gap.default}px;
 `;
 
 export const Stats: typeof InvestigatorStats = styled(InvestigatorStats)`
