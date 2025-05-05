@@ -1,6 +1,7 @@
 import { getInvestigatorImageUrl as getImageUrl } from "@shared/api/getInvestigatorImageUrl";
 import {
 	selectCurrentSkinId,
+	selectReplaceInvestigator,
 	selectTrackXP,
 	useAppSelector,
 } from "@shared/lib";
@@ -10,6 +11,7 @@ export const InvestigatorDescription = () => {
 	const signature = useAppSelector(selectCurrentSignature);
 	const skinId = useAppSelector(selectCurrentSkinId);
 	const trackXP = useAppSelector(selectTrackXP);
+	const replaceInvestigator = useAppSelector(selectReplaceInvestigator);
 
 	if (!signature) {
 		return;
@@ -41,10 +43,12 @@ export const InvestigatorDescription = () => {
 			<C.InvestigatorTextContainer>
 				<C.InvestigatorText value={text} />
 			</C.InvestigatorTextContainer>
-			<C.Settings>
-				<C.Trauma />
-				{trackXP && <C.XP />}
-			</C.Settings>
+			{!replaceInvestigator && (
+				<C.Settings>
+					<C.Trauma />
+					{trackXP && <C.XP />}
+				</C.Settings>
+			)}
 		</C.Container>
 	);
 };
