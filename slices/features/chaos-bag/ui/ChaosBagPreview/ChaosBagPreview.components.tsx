@@ -21,16 +21,17 @@ export const Container: typeof ContextModal = styled(ContextModal).attrs({
 `;
 
 export const BlessCurse: typeof BlessCurseControl = styled(BlessCurseControl)`
+  padding-top: ${size.gap.small}px;
 `;
 
 export const Sealed: typeof View = styled(View)`
-  border-top-width: 1px;
-  border-top-color: ${color.dark20};
 	padding-top: ${size.gap.small}px;
 `;
 
 export const List: typeof FlatList = styled(FlatList)`
-  padding: ${size.gap.small}px 0px;
+  padding-bottom: ${size.gap.default}px;
+  border-bottom-width: 1px;
+  border-bottom-color: ${color.dark20};
 `;
 
 export const TokenRow: typeof Row = styled(Row)`
