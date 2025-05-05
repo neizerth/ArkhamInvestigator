@@ -5,7 +5,7 @@ import {
 	space,
 	wordJoiner,
 } from "@shared/config";
-import { APP_VERSION, BUILD_ID, BUILD_VERSION } from "@shared/config/app";
+import { BUILD_ID, BUILD_VERSION } from "@shared/config/app";
 import { selectMediaVersion, useAppSelector } from "@shared/lib";
 import { A, Bold, List, Paragraph, Title } from "@shared/ui";
 import {
@@ -36,8 +36,15 @@ export const AboutPage = (props: AboutPageProps) => {
 				contributors to support the Arkham Horror: The Card Game community. The
 				source code of this project is available at{" "}
 				<A href="https://github.com/neizerth/ArkhamInvestigator">Github</A>.
-				Feedback and bug reports are welcome via Github issues or the dedicated
-				channel on the Mythos Busters discord server.
+				Feedback and bug reports are welcome via{" "}
+				<A href="https://github.com/neizerth/ArkhamInvestigator/issues">
+					Github issues
+				</A>{" "}
+				or{" "}
+				<A href="https://discord.com/channels/225349059689447425/1351550310887460926">
+					the dedicated channel
+				</A>{" "}
+				on the Mythos Busters Discord server.
 			</Paragraph>
 			<Paragraph>
 				All artwork and illustrations are the intellectual property of their
@@ -83,7 +90,7 @@ export const AboutPage = (props: AboutPageProps) => {
 			</List>
 			<Title>Testing/Ideas</Title>
 			<Paragraph>
-				@Egoorka_k, @AxilFirst, Evgesha727, @User211587, @l_leona_l, @mkrsa,
+				@Egoorka_k, @AxilFirst, @Evgesha727, @User211587, @l_leona_l, @mkrsa,
 				@Aahz7, @ivanmazov82, @mr_zoombee, @sliapy, @vyacheslav_darmin,
 				@CrazyMind667, @LexAndrVas, @Anton_Sabaton, @ezhikhin, @Mpmapuo,
 				@alexander_violator, @ka777ban, @Amarum, @l_leona_l, @litt_n,
@@ -100,9 +107,6 @@ export const AboutPage = (props: AboutPageProps) => {
 			<List>
 				<List.Item>
 					<Bold>Build Version</Bold>: {BUILD_VERSION}
-				</List.Item>
-				<List.Item>
-					<Bold>Codebase Version</Bold>: {APP_VERSION}
 				</List.Item>
 				<List.Item>
 					<Bold>Build Id</Bold>: {BUILD_ID}
