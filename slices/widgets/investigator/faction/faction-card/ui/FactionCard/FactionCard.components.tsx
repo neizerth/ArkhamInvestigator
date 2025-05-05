@@ -74,11 +74,11 @@ export const Content: typeof View = styled(View)`
 
 export const ScrollContainer: typeof ScrollView = styled(ScrollView)`
   flex: 1;
-  padding: 0 ${size.gap.medium}px;
+  padding: 0 ${size.gap.default}px;
 `;
 
 export const Actions: typeof Row = styled(Row)`
-  padding: 0 ${size.gap.medium}px;
+  padding: 0 ${size.gap.default}px;
   gap: ${size.gap.default}px;
 `;
 
