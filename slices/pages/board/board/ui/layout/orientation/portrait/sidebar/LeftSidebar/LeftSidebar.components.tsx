@@ -44,7 +44,7 @@ export const Buttons: FC<HistoryProps> = styled(View)`
   ${({ single }: HistoryProps) =>
 		single &&
 		css`
-      gap: 25px;
+      gap: 20px;
     `}
   ${({ single, unit }: HistoryProps) => {
 		if (single || isHistoryInColumn(unit)) {

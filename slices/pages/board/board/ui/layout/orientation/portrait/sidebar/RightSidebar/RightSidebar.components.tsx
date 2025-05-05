@@ -4,7 +4,11 @@ import { View, type ViewProps } from "react-native";
 import styled, { css } from "styled-components/native";
 import { assetsSize } from "../../../../../../config";
 
-const getLayoutStyle = ({ unit }: PropsWithUnit) => {
+type GetLayoutStyleOptions = PropsWithUnit & {
+	showDoom?: boolean;
+};
+
+const getLayoutStyle = ({ unit, showDoom = false }: GetLayoutStyleOptions) => {
 	if (unit <= 350) {
 		return css`
       flex-direction: row;
@@ -14,7 +18,7 @@ const getLayoutStyle = ({ unit }: PropsWithUnit) => {
     `;
 	}
 
-	const gap = unit < 500 ? 20 : 70;
+	const gap = unit < 500 ? 20 : showDoom ? 40 : 50;
 
 	return css`
     gap: ${gap}px;
@@ -24,7 +28,7 @@ const getLayoutStyle = ({ unit }: PropsWithUnit) => {
   `;
 };
 
-export const Container: FC<ViewProps & PropsWithUnit> = styled(View)`
+export const Container: FC<ViewProps & GetLayoutStyleOptions> = styled(View)`
   ${getLayoutStyle}
   align-items: center;
 `;

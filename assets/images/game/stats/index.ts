@@ -3,6 +3,7 @@ export const healthImage = require("./health.png");
 export const sanityImage = require("./sanity.png");
 export const clueImage = require("./clue.png");
 export const resourceImage = require("./resource.png");
+export const doomImage = require("./doom.png");
 
 export default [
 	actionImage,
@@ -10,4 +11,5 @@ export default [
 	sanityImage,
 	clueImage,
 	resourceImage,
+	doomImage,
 ];

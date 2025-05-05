@@ -7,12 +7,14 @@ import { defaultStyles } from "./StatPicker.styles";
 
 export type StatPickerProps = Omit<PickerProps, "renderItem"> & {
 	valueStyle?: ValueProps["style"];
+	textStyle?: ValueProps["textStyle"];
 	Component?: FC<ValueProps>;
 	signed?: boolean;
 };
 
 export const StatPicker = ({
 	valueStyle,
+	textStyle,
 	Component = C.Value,
 	signed,
 	...props
@@ -21,9 +23,16 @@ export const StatPicker = ({
 		(props: PickerItemInfo) => {
 			const { item } = props;
 			const value = signed && item > 0 ? signedNumber(item) : item;
-			return <Component {...props} value={value} style={valueStyle} />;
+			return (
+				<Component
+					{...props}
+					value={value}
+					style={valueStyle}
+					textStyle={textStyle}
+				/>
+			);
 		},
-		[valueStyle, Component, signed],
+		[valueStyle, textStyle, Component, signed],
 	);
 
 	return <C.Picker {...defaultStyles} {...props} renderItem={renderItem} />;

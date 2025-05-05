@@ -1,5 +1,5 @@
 export const defaultStyles = {
-	gap: 48,
+	gap: 40,
 	contentContainerStyle: {
 		justifyContent: "center",
 	},

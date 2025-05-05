@@ -11,6 +11,9 @@ export const gameAssets = {
 	clue: {
 		ratio: 1,
 	},
+	doom: {
+		ratio: 1,
+	},
 	resource: {
 		ratio: 1,
 	},
