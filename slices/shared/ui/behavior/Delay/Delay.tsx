@@ -9,7 +9,7 @@ export type DelayProps = PropsWithChildren & {
 
 export const Delay = ({
 	children,
-	delayMs = 0,
+	delayMs = 150,
 	fallback = <C.Loader />,
 }: DelayProps) => {
 	const [show, setShow] = useBoolean(false);
