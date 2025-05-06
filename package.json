@@ -1,7 +1,7 @@
 {
   "name": "arkham-investigator",
   "main": "expo-router/entry",
-  "version": "1.12.0",
+  "version": "1.13.0",
   "scripts": {
     "start": "expo start",
     "reset-project": "node ./scripts/reset-project.js",
@@ -84,7 +84,8 @@
     "rn-statusbar-height": "^2.1.1",
     "semver": "^7.7.1",
     "styled-components": "^6.1.15",
-    "uuid": "^11.0.5"
+    "uuid": "^11.0.5",
+    "expo-keep-awake": "~14.0.3"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",

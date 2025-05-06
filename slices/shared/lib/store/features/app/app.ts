@@ -6,12 +6,14 @@ export type IAppState = {
 	loading: boolean;
 	version: string;
 	outdated: boolean;
+	keepAwake: boolean;
 };
 
 const initialState: IAppState = {
 	loading: true,
 	version: APP_VERSION,
 	outdated: false,
+	keepAwake: false,
 };
 
 export const app = createSlice({
@@ -19,9 +21,16 @@ export const app = createSlice({
 	...createSliceState(initialState),
 });
 
-export const { setLoading, setOutdated: setAppOutdated } = app.actions;
+export const {
+	setLoading,
+	setOutdated: setAppOutdated,
+	setKeepAwake,
+} = app.actions;
 
-export const { selectLoading, selectOutdated: selectAppOutdated } =
-	app.selectors;
+export const {
+	selectLoading,
+	selectOutdated: selectAppOutdated,
+	selectKeepAwake,
+} = app.selectors;
 
 export default app.reducer;

@@ -1,6 +1,6 @@
 import * as ScreenOrientation from "expo-screen-orientation";
 import { useEffect, useState } from "react";
-import { getOrientationType } from "../../features";
+import { getOrientationType } from "../../../features";
 
 export const useScreenOrientation = () => {
 	const [orientation, setOrientation] =

@@ -1,10 +1,6 @@
 import fonts from "@assets/fonts";
+import { useSplashScreen } from "@shared/lib";
 import { useFonts } from "expo-font";
-import * as ScreenOrientation from "expo-screen-orientation";
-import { useEffect } from "react";
-import { Platform } from "react-native";
-
-import * as SplashScreen from "expo-splash-screen";
 import { useAppAssets } from "./useAppAssets";
 
 export const useAppLoader = () => {
@@ -13,20 +9,7 @@ export const useAppLoader = () => {
 
 	const done = fontsLoaded && assetsStatus.done;
 
-	useEffect(() => {
-		if (Platform.OS !== "web") {
-			ScreenOrientation.lockAsync(
-				ScreenOrientation.OrientationLock.PORTRAIT_UP,
-			);
-		}
-	}, []);
-
-	useEffect(() => {
-		if (!done) {
-			return;
-		}
-		SplashScreen.hideAsync();
-	}, [done]);
+	useSplashScreen(done);
 
 	return {
 		assets: assetsStatus,

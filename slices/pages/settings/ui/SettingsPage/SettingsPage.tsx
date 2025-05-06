@@ -10,12 +10,14 @@ import {
 } from "@features/i18n";
 import {
 	selectEndTurnStrict,
+	selectKeepAwake,
 	selectSaveTrauma,
 	selectShowDamageAndHorror,
 	selectShowDamageAndHorrorEffects,
 	selectShowDoom,
 	selectTrackXP,
 	setEndTurnStrict,
+	setKeepAwake,
 	setSaveTrauma,
 	setShowDamageAndHorror,
 	setShowDamageAndHorrorEffects,
@@ -52,6 +54,13 @@ export const SettingsPage = () => {
 						selector={selectHapticMode}
 						actionCreator={setHapticMode}
 						data={hapticValues}
+					/>
+				</C.Row>
+				<C.Row>
+					<C.Checkbox
+						label="Keep awake"
+						selector={selectKeepAwake}
+						actionCreator={setKeepAwake}
 					/>
 				</C.Row>
 				<Title> {t`Game settings`}</Title>
