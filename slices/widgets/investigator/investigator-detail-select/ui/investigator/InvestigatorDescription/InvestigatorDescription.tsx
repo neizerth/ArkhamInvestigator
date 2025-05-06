@@ -1,5 +1,6 @@
 import { getInvestigatorImageUrl as getImageUrl } from "@shared/api/getInvestigatorImageUrl";
 import {
+	getBoardStats,
 	selectCurrentSkinId,
 	selectReplaceInvestigator,
 	selectTrackXP,
@@ -28,13 +29,15 @@ export const InvestigatorDescription = () => {
 	const text = signature.text;
 	const traits = signature.traits;
 
+	const stats = getBoardStats(signature);
+
 	return (
 		<C.Container>
 			<C.MainInfo>
 				<C.Details>
 					<C.Traits>{traits}</C.Traits>
-					<C.Skills investigator={signature} />
-					<C.Stats investigator={signature} />
+					<C.Skills {...stats} />
+					<C.Stats {...stats} />
 				</C.Details>
 				<C.ImageContainer>
 					<C.Image source={source} />

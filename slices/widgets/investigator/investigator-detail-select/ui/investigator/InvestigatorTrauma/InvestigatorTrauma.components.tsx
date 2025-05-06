@@ -4,6 +4,8 @@ import { color, size } from "@shared/config";
 import { Row, Text } from "@shared/ui";
 import { View } from "react-native";
 import styled from "styled-components/native";
+import { HealthValue } from "../../../../value/health";
+import { SanityValue } from "../../../../value/sanity";
 
 export const Container: typeof View = styled(View)`
   /* padding: ; */
@@ -30,4 +32,12 @@ export const SanityControl: typeof Control = styled(Control).attrs({
 export const HealthControl: typeof Control = styled(Control).attrs({
 	color: color.health,
 })`
+`;
+
+export const Health: typeof HealthValue = styled(HealthValue)`
+  
+`;
+
+export const Sanity: typeof SanityValue = styled(SanityValue)`
+  
 `;

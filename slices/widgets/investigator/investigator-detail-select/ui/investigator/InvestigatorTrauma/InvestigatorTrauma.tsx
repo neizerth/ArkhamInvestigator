@@ -11,9 +11,7 @@ import {
 import type { InvestigatorSignatureGroup } from "arkham-investigator-data";
 import { useCallback } from "react";
 import type { ViewProps } from "react-native";
-import { Health, Sanity } from "../stats";
 import * as C from "./InvestigatorTrauma.components";
-// import { useCallback } from "react";
 
 export type InvestigatorTraumaProps = ViewProps;
 
@@ -69,13 +67,13 @@ export const InvestigatorTrauma = (props: InvestigatorTraumaProps) => {
 					onIncrement={onIncrement("physicalTrauma")}
 					onDecrement={onDecrement("physicalTrauma")}
 				>
-					<Health value={physical} />
+					<C.Health value={physical} />
 				</C.Control>
 				<C.Control
 					onIncrement={onIncrement("mentalTrauma")}
 					onDecrement={onDecrement("mentalTrauma")}
 				>
-					<Sanity value={mental} />
+					<C.Sanity value={mental} />
 				</C.Control>
 			</C.Controls>
 		</C.Container>

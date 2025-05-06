@@ -10,6 +10,7 @@ export const Container: typeof View = styled(View)`
   padding: ${statusBarHeight + size.gap.default}px ${size.gap.default}px ${size.gap.small}px;
   justify-content: flex-end;
   filter: drop-shadow(0 0 5px rgb(0, 0, 0, 1));
+  background-color: rgba(0, 0, 0, 0.3);
 `;
 
 const radius = size.borderRadius.default;

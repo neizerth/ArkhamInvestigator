@@ -1,9 +1,11 @@
+import { routes } from "@shared/config";
 import {
 	selectCurrentInvestigatorIndex,
 	selectInvestigatorBoards,
 	setCurrentInvestigatorIndex,
 	useAppDispatch,
 	useAppSelector,
+	usePage,
 } from "@shared/lib";
 import type {
 	PickerChangeEvent,
@@ -20,6 +22,7 @@ export const InvestigatorSelect = ({ ...props }: InvestigatorSelectProps) => {
 	const index = useAppSelector(selectCurrentInvestigatorIndex);
 	const boards = useAppSelector(selectInvestigatorBoards);
 	const dispatch = useAppDispatch();
+	const goToPage = usePage();
 
 	const currentIndex = index || 0;
 	const nextIndex = (currentIndex + 1) % boards.length;
@@ -80,6 +83,7 @@ export const InvestigatorSelect = ({ ...props }: InvestigatorSelectProps) => {
 				onValueChanged={onChange}
 				onValueChanging={onValueChanging}
 				onPress={next}
+				onLongPress={goToPage(routes.overview)}
 				decelerationRate={0}
 				disableIntervalMomentum
 			/>

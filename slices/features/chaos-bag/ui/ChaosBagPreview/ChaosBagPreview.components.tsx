@@ -16,8 +16,11 @@ export const Container: typeof ContextModal = styled(ContextModal).attrs({
 		gap: size.gap.small,
 	},
 })`
-  background-color: rgba(0, 0, 0, 0.3);
   flex: 1;
+`;
+
+export const Content: typeof View = styled(View)`
+  min-height: 62px;
 `;
 
 export const BlessCurse: typeof BlessCurseControl = styled(BlessCurseControl)`

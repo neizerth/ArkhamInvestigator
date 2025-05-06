@@ -1,11 +1,11 @@
 import { Alegreya } from "@assets/fonts";
 import { color, font, size } from "@shared/config";
 import { Column, Row, UnscaledText } from "@shared/ui";
-import { GameText } from "@widgets/game/game-text";
 import { Image as BaseImage } from "react-native";
 import { View } from "react-native";
 import styled from "styled-components/native";
-import { InvestigatorSkills } from "../InvestigatorSkills";
+import { GameText } from "../../../../../game/game-text";
+import { InvestigatorSkillsPreview } from "../../../../investigator-skills-preview";
 import { InvestigatorStats } from "../InvestigatorStats";
 import { InvestigatorTrauma } from "../InvestigatorTrauma";
 import { InvestigatorXP } from "../InvestigatorXP";
@@ -25,8 +25,13 @@ export const Traits: typeof UnscaledText = styled(UnscaledText)`
   color: ${color.light10};
 `;
 
+export const Skills: typeof InvestigatorSkillsPreview = styled(
+	InvestigatorSkillsPreview,
+)`
+  
+`;
+
 export { View as Section };
-export { InvestigatorSkills as Skills };
 
 export const Image: typeof BaseImage = styled(BaseImage)`
   max-width: 110px;

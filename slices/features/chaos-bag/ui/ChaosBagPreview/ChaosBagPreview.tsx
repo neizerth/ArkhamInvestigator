@@ -93,30 +93,32 @@ export const ChaosBagPreview = (props: ChaosBagPreviewProps) => {
 			actionIcon="edit"
 			onAction={onEdit}
 		>
-			<Delay>
-				{tokens.length > 0 && data.sealed.length === 0 && (
-					<C.Hint>{t`Hold to seal`}</C.Hint>
-				)}
-				{data.regular.length > 0 && (
-					<C.List data={data.regular} renderItem={renderTokenRow} />
-				)}
+			<C.Content>
+				<Delay>
+					{tokens.length > 0 && data.sealed.length === 0 && (
+						<C.Hint>{t`Hold to seal`}</C.Hint>
+					)}
+					{data.regular.length > 0 && (
+						<C.List data={data.regular} renderItem={renderTokenRow} />
+					)}
 
-				{data.sealed.length > 0 && (
-					<C.Sealed>
-						<C.Title>{t`Sealed Tokens`}</C.Title>
-						<C.List data={data.sealed} renderItem={renderTokenRow} />
-					</C.Sealed>
-				)}
+					{data.sealed.length > 0 && (
+						<C.Sealed>
+							<C.Title>{t`Sealed Tokens`}</C.Title>
+							<C.List data={data.sealed} renderItem={renderTokenRow} />
+						</C.Sealed>
+					)}
 
-				<C.BlessCurse />
-			</Delay>
-			{tokens.length > 0 && (
-				<C.RevealButton
-					onPress={reveal}
-					icon="token_sealed_outline"
-					text={t`Draw chaos tokens`}
-				/>
-			)}
+					<C.BlessCurse />
+				</Delay>
+				{tokens.length > 0 && (
+					<C.RevealButton
+						onPress={reveal}
+						icon="token_sealed_outline"
+						text={t`Draw chaos tokens`}
+					/>
+				)}
+			</C.Content>
 		</C.Container>
 	);
 };
