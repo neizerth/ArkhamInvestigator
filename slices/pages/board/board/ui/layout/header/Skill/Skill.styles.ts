@@ -9,6 +9,7 @@ export const getSkillStyle = (width: number) => {
 	const valueContainer: ViewStyle = {
 		paddingTop: rnd(vw),
 		paddingLeft: rnd(vw),
+		borderRadius: rnd(7 * vw),
 		width,
 	};
 	const background: ViewStyle = {

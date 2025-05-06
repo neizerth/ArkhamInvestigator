@@ -22,6 +22,7 @@ export const ValueContainer: typeof View = styled(View)`
   align-items: center;
   justify-content: center;
   position: relative;
+  overflow: hidden;
   z-index: 2;
 `;
 
