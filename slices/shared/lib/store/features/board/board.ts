@@ -14,9 +14,11 @@ export type IBoardState = {
 	pickerIntervalMomentum: boolean;
 	trackXP: boolean;
 	saveTrauma: boolean;
+	trackHandSize: boolean;
 
 	doom: number;
 	clues: number;
+	resources: number;
 };
 
 const initialState: IBoardState = {
@@ -30,8 +32,10 @@ const initialState: IBoardState = {
 	pickerIntervalMomentum: false,
 	trackXP: true,
 	saveTrauma: true,
+	trackHandSize: false,
 	doom: 0,
 	clues: 0,
+	resources: 0,
 };
 
 const state = createSliceState(initialState);
@@ -54,6 +58,8 @@ export const {
 	setTrackXP,
 	setDoom,
 	setClues,
+	setResources,
+	setTrackHandSize,
 } = board.actions;
 
 export const {
@@ -69,6 +75,8 @@ export const {
 	selectTrackXP,
 	selectDoom,
 	selectClues,
+	selectResources,
+	selectTrackHandSize,
 } = board.selectors;
 
 export default board.reducer;

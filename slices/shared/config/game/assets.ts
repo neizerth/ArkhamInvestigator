@@ -11,6 +11,9 @@ export const gameAssets = {
 	clue: {
 		ratio: 1,
 	},
+	handSize: {
+		ratio: 267 / 375,
+	},
 	doom: {
 		ratio: 1,
 	},

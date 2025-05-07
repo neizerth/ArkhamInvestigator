@@ -49,6 +49,7 @@ export const color = {
 	sanity: "#1c3e6a",
 	resource: "#452e26",
 	clue: "#486527",
+	handSize: "#6c8083",
 	doom: {
 		light: "#ff0a1a",
 		dark: "#c50814",

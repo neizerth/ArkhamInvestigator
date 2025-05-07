@@ -8,8 +8,10 @@ import {
 	clearTraumaSettings,
 	goToPage,
 	selectSaveTrauma,
+	setClues,
 	setDoom,
 	setInvestigatorBoards,
+	setResources,
 	setSelectedInvestigators,
 } from "@shared/lib";
 import type { AppThunk } from "@shared/model";
@@ -23,6 +25,8 @@ export const startNewGame: ActionCreator<AppThunk> =
 		}
 
 		dispatch(setDoom(0));
+		dispatch(setClues(0));
+		dispatch(setResources(0));
 		dispatch(setRevealedTokenIds([]));
 		dispatch(setChaosBagSealedTokens([]));
 		dispatch(setSelectedInvestigators([]));

@@ -3,7 +3,7 @@ export * from "./common";
 
 export * from "./Health";
 export * from "./Sanity";
-export * from "./Resources";
+export * from "./resources";
 export * from "./Doom";
 
 export * from "./clues";

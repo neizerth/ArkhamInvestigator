@@ -15,7 +15,7 @@ export const Container: typeof BaseContainer = styled(BaseContainer)`
 
 export const Picker: typeof StatPicker = styled(StatPicker).attrs({
 	valueStyle: {
-		color: color.doom.dark,
+		color: color.doom.light,
 	},
 	textStyle: {
 		color: color.black,

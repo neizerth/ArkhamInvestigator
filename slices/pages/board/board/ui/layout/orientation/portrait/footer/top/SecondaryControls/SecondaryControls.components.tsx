@@ -8,5 +8,5 @@ export const Container: typeof View = styled(View)`
 
 export const Content: typeof Row = styled(Row)`
   justify-content: center;
-  gap: 80px;
+  gap: 40px;
 `;

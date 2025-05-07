@@ -1,6 +1,7 @@
 import type { ActionCreator } from "@reduxjs/toolkit";
 import type { AppThunk } from "@shared/model";
 import {
+	DEFAULT_HAND_SIZE,
 	NEW_TURN_ACTIONS_COUNT,
 	START_GAME_RESOURCES_COUNT,
 } from "../../../../../../config";
@@ -36,6 +37,7 @@ export const resetBoard: ActionCreator<AppThunk> =
 			clues: 0,
 			resources: START_GAME_RESOURCES_COUNT,
 			actions: NEW_TURN_ACTIONS_COUNT,
+			handSize: DEFAULT_HAND_SIZE,
 			health: Math.max(0, initialValue.health - physicalTrauma),
 			sanity: Math.max(0, initialValue.sanity - mentalTrauma),
 		};

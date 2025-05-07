@@ -1,4 +1,5 @@
 import {
+	DEFAULT_HAND_SIZE,
 	NEW_TURN_ACTIONS_COUNT,
 	START_GAME_RESOURCES_COUNT,
 } from "@shared/config";
@@ -26,6 +27,7 @@ export const getInvestigatorBoard = ({
 		additionalAction: Boolean(additionalAction),
 		resources: START_GAME_RESOURCES_COUNT,
 		actions: NEW_TURN_ACTIONS_COUNT,
+		handSize: DEFAULT_HAND_SIZE,
 		clues: 0,
 	};
 

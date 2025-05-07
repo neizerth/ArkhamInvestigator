@@ -5,7 +5,7 @@ import { DescriptionTopMenu } from "../../DescriptionTopMenu";
 import { SecondaryControls } from "../SecondaryControls";
 
 export const Container: typeof Animated.View = styled(Animated.View)`
-  gap: 40px;
+  gap: 60px;
 `;
 
 export const TopMenu: typeof DescriptionTopMenu = styled(DescriptionTopMenu)`

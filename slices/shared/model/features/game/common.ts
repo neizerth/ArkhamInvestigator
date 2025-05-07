@@ -23,7 +23,11 @@ export type InvestigatorSkillType =
 
 export type InvestigatorMainStatType = "health" | "sanity";
 
-export type InvestigatorGameStatType = "actions" | "resources" | "clues";
+export type InvestigatorGameStatType =
+	| "actions"
+	| "resources"
+	| "clues"
+	| "handSize";
 
 export type SkillType = InvestigatorSkillType | "wild";
 

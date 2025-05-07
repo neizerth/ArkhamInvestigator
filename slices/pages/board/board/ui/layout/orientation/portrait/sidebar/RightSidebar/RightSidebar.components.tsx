@@ -3,6 +3,10 @@ import type { FC } from "react";
 import { View, type ViewProps } from "react-native";
 import styled, { css } from "styled-components/native";
 import { assetsSize } from "../../../../../../config";
+import {
+	InvestigatorClues,
+	InvestigatorResources,
+} from "../../../../../shared";
 
 type GetLayoutStyleOptions = PropsWithUnit & {
 	compact?: boolean;
@@ -31,4 +35,14 @@ const getLayoutStyle = ({ unit, compact = false }: GetLayoutStyleOptions) => {
 export const Container: FC<ViewProps & GetLayoutStyleOptions> = styled(View)`
   ${getLayoutStyle}
   align-items: center;
+`;
+
+export const Clues: typeof InvestigatorClues = styled(InvestigatorClues)`
+  
+`;
+
+export const Resources: typeof InvestigatorResources = styled(
+	InvestigatorResources,
+)`
+  
 `;
