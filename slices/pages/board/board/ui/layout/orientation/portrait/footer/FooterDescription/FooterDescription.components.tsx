@@ -1,6 +1,7 @@
 import { size } from "@shared/config";
+import { StorePressable } from "@widgets/control/store-pressable";
 import { InvestigatorDescription } from "@widgets/game/investigator";
-import { Pressable, View } from "react-native";
+import { View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import Animated from "react-native-reanimated";
 import styled from "styled-components/native";
@@ -10,7 +11,7 @@ import {
 	InvestigatorTraits,
 } from "../../../../../shared";
 import { DescriptionMenu } from "../DescriptionMenu";
-import { DescriptionTopMenu } from "../DescriptionTopMenu";
+import { FooterTopContent } from "../top";
 
 export const Container: typeof Animated.View = styled(Animated.View)`
   position: relative;
@@ -24,21 +25,20 @@ export const Background: typeof InvestigatorDescription = styled(
 `;
 
 export const Content: typeof View = styled(View)`
-
 `;
 
-export const ExpandArea: typeof Pressable = styled(Pressable).attrs({
+export const ExpandArea: typeof StorePressable = styled(StorePressable).attrs({
 	activeOpacity: 1,
 })`
-    z-index: 10;
-  `;
+  z-index: 10;
+`;
 
-export const TopMenu: typeof DescriptionTopMenu = styled(DescriptionTopMenu)`
+export const TopContent: typeof FooterTopContent = styled(FooterTopContent)`
   position: absolute;
-  z-index: 2;
+  z-index: 10;
   left: 0;
   right: 0;
-  top: -48px;
+  bottom: 100%;
 `;
 
 export const TextContent: typeof ScrollView = styled(ScrollView)`

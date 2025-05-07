@@ -1,4 +1,3 @@
-import { useHapticFeedback } from "@features/haptic";
 import { useRoute } from "@react-navigation/native";
 import {
 	selectCurrentBoardProp,
@@ -26,15 +25,6 @@ export const FooterDescription = ({ ...props }: FooterDescriptionProps) => {
 	const investigator = useAppSelector(selectCurrentBoardProp("investigator"));
 	const faction = useAppSelector(selectCurrentFaction);
 
-	const impactShowFeedback = useHapticFeedback("clockTick");
-
-	const onShow = useCallback(() => {
-		if (!showDescription) {
-			dispatch(setShowDescription(true));
-			impactShowFeedback();
-		}
-	}, [showDescription, dispatch, impactShowFeedback]);
-
 	const onBack = useCallback(() => {
 		const isBoard = route.name === "board/index";
 		if (showDescription && isBoard) {
@@ -46,7 +36,6 @@ export const FooterDescription = ({ ...props }: FooterDescriptionProps) => {
 
 	useBackButton(onBack);
 
-	// const contentStyle = useShowAnimation();
 	const containerStyle = useContainerAnimation();
 
 	const vw = (view.width * 6) / 100;
@@ -59,11 +48,13 @@ export const FooterDescription = ({ ...props }: FooterDescriptionProps) => {
 		<C.Container {...props} style={[props.style, containerStyle]}>
 			<C.Content>
 				{showDescription ? (
-					<C.TopMenu />
+					<C.TopContent />
 				) : (
-					<C.ExpandArea onPress={onShow} style={StyleSheet.absoluteFill} />
+					<C.ExpandArea
+						actionCreator={setShowDescription}
+						style={StyleSheet.absoluteFill}
+					/>
 				)}
-
 				<C.Background faction={faction} width={view.width}>
 					<C.DescriptionContent>
 						<C.TextContent>
