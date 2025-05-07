@@ -17,23 +17,36 @@ export const useValueSet = (props: BaseListProps) => {
 		onContentSizeChange: onContentSizeChangeProp,
 		onTouchEnd: onTouchEndProp,
 		controlEnabled = true,
+		onScroll: onScrollProp,
+		itemHeight,
 	} = props;
 	const ref = useRef<FlatList<number>>(null);
 	const active = useRef(false);
 	const scrolling = useRef(false);
+	const offset = useRef(0);
 
 	const currentIndex = Math.min(getValueIndex(props), data.length - 1);
 
 	const scrollToIndex = useCallback(() => {
-		if (!controlEnabled) {
+		if (!controlEnabled || !ref.current) {
 			return;
 		}
 
-		ref.current?.scrollToIndex({
+		const indexOffset = itemHeight * currentIndex;
+
+		const delta = Math.abs(offset.current - indexOffset);
+
+		const minDelta = 2;
+
+		if (delta < minDelta) {
+			return;
+		}
+
+		ref.current.scrollToIndex({
 			index: currentIndex,
 			animated: false,
 		});
-	}, [currentIndex, controlEnabled]);
+	}, [currentIndex, controlEnabled, itemHeight]);
 
 	useEffect(() => {
 		active.current = getInactiveState(controlEnabled);
@@ -76,6 +89,7 @@ export const useValueSet = (props: BaseListProps) => {
 	const onScrollBeginDrag = useCallback(
 		(e: PickerScrollEvent) => {
 			scrolling.current = true;
+			offset.current = e.nativeEvent.contentOffset.y;
 			if (typeof onScrollBeginDragProp === "function") {
 				onScrollBeginDragProp(e);
 			}
@@ -89,9 +103,20 @@ export const useValueSet = (props: BaseListProps) => {
 		onScrollDeactivatedProp?.();
 	}, [onScrollDeactivatedProp]);
 
+	const onScroll = useCallback(
+		(e: PickerScrollEvent) => {
+			offset.current = e.nativeEvent.contentOffset.y;
+			if (typeof onScrollProp === "function") {
+				onScrollProp?.(e);
+			}
+		},
+		[onScrollProp],
+	);
+
 	return {
 		...props,
 		ref,
+		onScroll,
 		onScrollDeactivated,
 		onContentSizeChange,
 		onTouchStart,
