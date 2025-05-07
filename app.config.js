@@ -23,6 +23,9 @@ module.exports = {
 		ios: {
 			supportsTablet: false,
 			bundleIdentifier: packageId,
+			infoPlist: {
+				UIBackgroundModes: ["audio"],
+			},
 		},
 		android: {
 			adaptiveIcon: {
@@ -44,7 +47,7 @@ module.exports = {
 				"expo-splash-screen",
 				{
 					image: "./assets/images/logo-dark.png",
-					imageWidth: 200,
+					imageWidth: 201,
 					resizeMode: "contain",
 					backgroundColor: "#000",
 				},
