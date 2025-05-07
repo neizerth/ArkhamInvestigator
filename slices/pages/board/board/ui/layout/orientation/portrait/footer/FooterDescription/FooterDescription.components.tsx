@@ -12,7 +12,7 @@ import {
 import { DescriptionMenu } from "../DescriptionMenu";
 import { DescriptionTopMenu } from "../DescriptionTopMenu";
 
-export const Container: typeof View = styled(View)`
+export const Container: typeof Animated.View = styled(Animated.View)`
   position: relative;
  
 `;
@@ -24,19 +24,7 @@ export const Background: typeof InvestigatorDescription = styled(
 `;
 
 export const Content: typeof View = styled(View)`
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0px;
-  bottom: 0;
-`;
 
-export const Expand: typeof Animated.View = styled(Animated.View)`
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0px;
-  bottom: 0;
 `;
 
 export const ExpandArea: typeof Pressable = styled(Pressable).attrs({

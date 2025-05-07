@@ -16,7 +16,6 @@ export const Footer = ({ ...props }: FooterProps) => {
 					<Sanity />
 				</C.MainStats>
 			</C.Stats>
-			<C.Description />
 		</C.Container>
 	);
 };

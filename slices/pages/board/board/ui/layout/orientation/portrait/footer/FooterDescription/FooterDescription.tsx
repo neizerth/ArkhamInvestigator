@@ -13,7 +13,7 @@ import { useCallback, useContext } from "react";
 import { StyleSheet, type ViewProps } from "react-native";
 import { LayoutContext } from "../../../../../../config";
 import * as C from "./FooterDescription.components";
-import { useShowAnimation } from "./useShowAnimation";
+import { useContainerAnimation } from "./useContainerAnimation";
 
 export type FooterDescriptionProps = ViewProps;
 
@@ -46,7 +46,8 @@ export const FooterDescription = ({ ...props }: FooterDescriptionProps) => {
 
 	useBackButton(onBack);
 
-	const contentStyle = useShowAnimation();
+	// const contentStyle = useShowAnimation();
+	const containerStyle = useContainerAnimation();
 
 	const vw = (view.width * 6) / 100;
 
@@ -55,32 +56,30 @@ export const FooterDescription = ({ ...props }: FooterDescriptionProps) => {
 	}
 
 	return (
-		<C.Container {...props}>
+		<C.Container {...props} style={[props.style, containerStyle]}>
 			<C.Content>
-				<C.Expand style={contentStyle}>
-					{showDescription ? (
-						<C.TopMenu />
-					) : (
-						<C.ExpandArea onPress={onShow} style={StyleSheet.absoluteFill} />
-					)}
+				{showDescription ? (
+					<C.TopMenu />
+				) : (
+					<C.ExpandArea onPress={onShow} style={StyleSheet.absoluteFill} />
+				)}
 
-					<C.Background faction={faction} width={view.width}>
-						<C.DescriptionContent>
-							<C.TextContent>
-								<C.Traits unit={vw} investigator={investigator} />
-								{showDescription && (
-									<>
-										<C.Text investigator={investigator} unit={vw} />
-										{investigator.flavor && (
-											<C.Flavor unit={vw} investigator={investigator} />
-										)}
-									</>
-								)}
-							</C.TextContent>
-							<C.Menu />
-						</C.DescriptionContent>
-					</C.Background>
-				</C.Expand>
+				<C.Background faction={faction} width={view.width}>
+					<C.DescriptionContent>
+						<C.TextContent>
+							<C.Traits unit={vw} investigator={investigator} />
+							{showDescription && (
+								<>
+									<C.Text investigator={investigator} unit={vw} />
+									{investigator.flavor && (
+										<C.Flavor unit={vw} investigator={investigator} />
+									)}
+								</>
+							)}
+						</C.TextContent>
+						<C.Menu />
+					</C.DescriptionContent>
+				</C.Background>
 			</C.Content>
 		</C.Container>
 	);

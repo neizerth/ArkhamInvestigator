@@ -3,10 +3,10 @@ import { Row as BaseRow } from "@shared/ui";
 import { View } from "react-native";
 import styled from "styled-components/native";
 import { PORTRAIT_DESCRIPTION_HEIGHT } from "../../../../../../config";
-import { FooterDescription } from "../FooterDescription";
 
 export const Container: typeof View = styled(View)`
   padding-top: 0px;
+  padding-bottom: ${PORTRAIT_DESCRIPTION_HEIGHT}px;
 `;
 
 export const Row: typeof BaseRow = styled(BaseRow)`
@@ -24,9 +24,4 @@ export const Stats: typeof Row = styled(Row)`
 
 export const MainStats: typeof Row = styled(Row)`
   gap: ${size.gap.medium}px;
-`;
-
-export const Description: typeof FooterDescription = styled(FooterDescription)`
-  z-index: 5;
-  height: ${PORTRAIT_DESCRIPTION_HEIGHT}px;
 `;

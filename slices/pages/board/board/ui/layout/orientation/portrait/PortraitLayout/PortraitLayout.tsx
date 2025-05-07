@@ -25,6 +25,7 @@ export const PortraitLayout = ({ top, ...props }: PortraitLayoutProps) => {
 					<C.Area />
 					<C.RightSidebar />
 				</C.Main>
+				<C.Description />
 				<C.Footer />
 				<C.Overlay />
 			</C.Container>
