@@ -11,6 +11,7 @@ export { ContentPageProps };
 export const ContentPage = ({
 	title,
 	full,
+	contentStyle,
 	children,
 	onBack,
 	...props
@@ -28,7 +29,7 @@ export const ContentPage = ({
 	return (
 		<Page {...props}>
 			<TopBar title={t(title)} onBack={back} />
-			<Content>{children}</Content>
+			<Content style={contentStyle}>{children}</Content>
 		</Page>
 	);
 };

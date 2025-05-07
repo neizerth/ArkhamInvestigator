@@ -15,6 +15,9 @@ export type IBoardState = {
 	trackXP: boolean;
 	saveTrauma: boolean;
 	trackHandSize: boolean;
+	showDoom: boolean;
+	showScenarioClues: boolean;
+	showScenarioResources: boolean;
 
 	doom: number;
 	clues: number;
@@ -33,6 +36,9 @@ const initialState: IBoardState = {
 	trackXP: true,
 	saveTrauma: true,
 	trackHandSize: false,
+	showDoom: true,
+	showScenarioClues: true,
+	showScenarioResources: false,
 	doom: 0,
 	clues: 0,
 	resources: 0,
@@ -60,6 +66,9 @@ export const {
 	setClues,
 	setResources,
 	setTrackHandSize,
+	setShowDoom,
+	setShowScenarioClues,
+	setShowScenarioResources,
 } = board.actions;
 
 export const {
@@ -77,6 +86,9 @@ export const {
 	selectClues,
 	selectResources,
 	selectTrackHandSize,
+	selectShowDoom,
+	selectShowScenarioClues,
+	selectShowScenarioResources,
 } = board.selectors;
 
 export default board.reducer;

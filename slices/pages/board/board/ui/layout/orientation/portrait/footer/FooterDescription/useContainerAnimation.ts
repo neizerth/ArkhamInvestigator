@@ -50,7 +50,6 @@ export const useContainerAnimation = ({ offsetTop = 0 }: Options) => {
 		duration: 100,
 		minValue,
 		maxValue,
-		delayIn: 100,
 		delayOut: DELAY_OUT,
 		styleResolver(top) {
 			"worklet";

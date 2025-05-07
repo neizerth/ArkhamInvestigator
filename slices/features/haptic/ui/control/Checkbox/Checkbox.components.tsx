@@ -7,7 +7,7 @@ export const Container: typeof TouchableOpacity = styled(TouchableOpacity)`
   flex-direction: row;
   align-items: center;
   gap: ${size.gap.default}px;
-  min-height: 48px;
+  padding: ${size.gap.small}px 2px;
 `;
 export const Label: typeof Text = styled(Text)`
   
@@ -16,4 +16,5 @@ export const Label: typeof Text = styled(Text)`
 export const Control: typeof Icon = styled(Icon)`
   color: ${color.dark10};
   font-size: 24px;
+  line-height: 24px;
 `;

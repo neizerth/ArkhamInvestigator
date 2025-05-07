@@ -1,10 +1,26 @@
 import { color, font, size } from "@shared/config";
-import { Row as BaseRow, TextView } from "@shared/ui";
+import { Row as BaseRow, Section as BaseSection, TextView } from "@shared/ui";
+import { ContentPage } from "@widgets/content";
 import { StoreCheckbox } from "@widgets/control/store-checkbox";
 import { StoreSelect } from "@widgets/control/store-select";
 import { View } from "react-native";
 import styled from "styled-components/native";
 import { PickerSettings } from "../PickerSettings";
+
+export const Page: typeof ContentPage = styled(ContentPage).attrs({
+	contentStyle: {
+		paddingLeft: size.gap.default,
+		paddingRight: size.gap.default,
+	},
+})`
+`;
+
+export const Section: typeof BaseSection = styled(BaseSection).attrs({
+	bodyStyle: {
+		gap: size.gap.default,
+	},
+})`
+`;
 
 export const Container: typeof View = styled(View)`
   background-color: ${color.dark40};
@@ -13,16 +29,12 @@ export const Container: typeof View = styled(View)`
 `;
 
 export const Content: typeof View = styled(View)`
-  flex: 1;
-  align-items: center;
-  justify-content: flex-start;
+  gap: ${size.gap.large}px;
 `;
 
 export const Row: typeof BaseRow = styled(BaseRow)`
   flex-direction: row;
   align-items: center;
-  margin-bottom: ${size.gap.default}px;
-  gap: ${size.gap.default}px;
 `;
 
 export const Label: typeof TextView = styled(TextView).attrs({

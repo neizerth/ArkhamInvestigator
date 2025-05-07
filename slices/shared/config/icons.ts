@@ -10,6 +10,7 @@ const baseIcons = {
 
 export const classicStatIcons: Record<InvestigatorBoardStat, string> = {
 	...baseIcons,
+	handSize: "card-outline",
 	willpower: "skill_willpower",
 	agility: "skill_agility",
 	combat: "skill_combat",
@@ -18,6 +19,7 @@ export const classicStatIcons: Record<InvestigatorBoardStat, string> = {
 
 export const simpleStatIcons: Record<InvestigatorBoardStat, string> = {
 	...baseIcons,
+	handSize: "card-outline",
 	willpower: "willpower",
 	agility: "agility",
 	combat: "combat",

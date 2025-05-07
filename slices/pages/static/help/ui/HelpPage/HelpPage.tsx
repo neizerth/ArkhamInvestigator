@@ -18,7 +18,8 @@ export const HelpPage = () => {
 			<Title>{t`Short Press`}</Title>
 			<Text>
 				<C.Icon icon="health" />, <C.Icon icon="sanity" />,{" "}
-				<C.Icon icon="resource" />, <C.Icon icon="clue" />
+				<C.Icon icon="resource" />, <C.Icon icon="clue" />,{" "}
+				<C.Icon icon="card-outline" />
 				{" - "}
 				{t`board.help.press.main`}
 			</Text>
@@ -60,7 +61,7 @@ export const HelpPage = () => {
 			<Title>{t`Long Press`}</Title>
 			<Text>
 				<C.Icon icon="health" />, <C.Icon icon="sanity" />,{" "}
-				<C.Icon icon="action" />
+				<C.Icon icon="action" />, <C.Icon icon="card-outline" />
 				{" - "}
 				{t`board.help.longPress.main`}
 			</Text>
