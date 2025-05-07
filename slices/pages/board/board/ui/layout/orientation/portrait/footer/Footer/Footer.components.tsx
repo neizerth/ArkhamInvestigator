@@ -6,7 +6,7 @@ import { PORTRAIT_DESCRIPTION_HEIGHT } from "../../../../../../config";
 
 export const Container: typeof View = styled(View)`
   padding-top: 0px;
-  padding-bottom: ${PORTRAIT_DESCRIPTION_HEIGHT}px;
+  padding-bottom: ${PORTRAIT_DESCRIPTION_HEIGHT + 5}px;
 `;
 
 export const Row: typeof BaseRow = styled(BaseRow)`

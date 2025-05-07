@@ -5,10 +5,10 @@ import styled, { css } from "styled-components/native";
 import { assetsSize } from "../../../../../../config";
 
 type GetLayoutStyleOptions = PropsWithUnit & {
-	showDoom?: boolean;
+	compact?: boolean;
 };
 
-const getLayoutStyle = ({ unit, showDoom = false }: GetLayoutStyleOptions) => {
+const getLayoutStyle = ({ unit, compact = false }: GetLayoutStyleOptions) => {
 	if (unit <= 350) {
 		return css`
       flex-direction: row;
@@ -18,7 +18,7 @@ const getLayoutStyle = ({ unit, showDoom = false }: GetLayoutStyleOptions) => {
     `;
 	}
 
-	const gap = unit < 500 ? 20 : showDoom ? 40 : 50;
+	const gap = unit < 500 ? 20 : compact ? 40 : 50;
 
 	return css`
     gap: ${gap}px;

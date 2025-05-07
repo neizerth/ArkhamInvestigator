@@ -58,7 +58,6 @@ export const SkillChecks: typeof PinnedSkilllChecks = styled(
 export const Description: typeof F.FooterDescription = styled(
 	F.FooterDescription,
 )`
-  z-index: 5;
   position: absolute;
   left: 0;
   right: 0;

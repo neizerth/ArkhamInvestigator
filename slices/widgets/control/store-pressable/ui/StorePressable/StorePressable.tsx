@@ -8,17 +8,19 @@ export type StorePressableProps = Omit<PressableProps, "onPress"> & {
 	actionCreator:
 		| ActionCreatorWithPayload<boolean>
 		| ((value: boolean) => AppThunk);
+	value?: boolean;
 };
 
 export const StorePressable = ({
 	actionCreator,
+	value = true,
 	...props
 }: StorePressableProps) => {
 	const dispatch = useAppDispatch();
 
 	const onPress = useCallback(() => {
-		dispatch(actionCreator(true));
-	}, [dispatch, actionCreator]);
+		dispatch(actionCreator(value));
+	}, [dispatch, actionCreator, value]);
 
 	return <Pressable {...props} onPress={onPress} />;
 };
