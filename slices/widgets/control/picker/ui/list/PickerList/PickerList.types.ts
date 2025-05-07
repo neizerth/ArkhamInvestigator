@@ -7,7 +7,7 @@ import type {
 	PickerPressProps,
 	PickerRenderProps,
 	PickerScrollProps,
-} from "@widgets/control/picker/model";
+} from "../../../model";
 
 export type PickerListProps = PickerBaseListProps &
 	PickerScrollProps &

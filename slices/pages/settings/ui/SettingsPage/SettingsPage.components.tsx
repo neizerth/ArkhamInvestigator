@@ -6,6 +6,7 @@ import { StoreSelect } from "@widgets/control/store-select";
 import { View } from "react-native";
 import styled from "styled-components/native";
 import { PickerSettings } from "../PickerSettings";
+import { SoundSettings } from "../SoundSettings";
 
 export const Page: typeof ContentPage = styled(ContentPage).attrs({
 	contentStyle: {
@@ -59,5 +60,9 @@ export const Checkbox: typeof StoreCheckbox = styled(StoreCheckbox)`
 `;
 
 export const Picker: typeof PickerSettings = styled(PickerSettings)`
+  flex: 1;
+`;
+
+export const Sound: typeof SoundSettings = styled(SoundSettings)`
   flex: 1;
 `;

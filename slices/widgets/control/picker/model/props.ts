@@ -83,6 +83,8 @@ export type PickerPressProps = {
 	pressHapticPattern?: HapticPatternType;
 	doublePressHapticPattern?: HapticPatternType;
 	longPressHapticPattern?: HapticPatternType;
+
+	sound?: boolean;
 };
 
 export type PickerStyleProps = {

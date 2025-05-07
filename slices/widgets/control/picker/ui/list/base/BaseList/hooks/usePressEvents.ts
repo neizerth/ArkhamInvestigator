@@ -1,6 +1,6 @@
-import type { PickerScrollEvent } from "@widgets/control/picker/model";
 import { useCallback, useRef } from "react";
 import type { GestureResponderEvent } from "react-native";
+import type { PickerScrollEvent } from "../../../../../model";
 import type { BaseListProps } from "../BaseList.types";
 
 export const usePressEvents = (props: BaseListProps) => {
