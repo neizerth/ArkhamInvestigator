@@ -1,10 +1,10 @@
 import { Pressable } from "@features/haptic";
-import { View } from "react-native";
+import Animated from "react-native-reanimated";
 import styled from "styled-components/native";
 import { DescriptionTopMenu } from "../../DescriptionTopMenu";
 import { SecondaryControls } from "../SecondaryControls";
 
-export const Container: typeof View = styled(View)`
+export const Container: typeof Animated.View = styled(Animated.View)`
   gap: 40px;
 `;
 

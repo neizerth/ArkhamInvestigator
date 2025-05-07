@@ -68,7 +68,7 @@ export const FooterDescription = ({ ...props }: FooterDescriptionProps) => {
 						style={expandStyle}
 					/>
 				)}
-				<C.TopContent show={showDescription} onLayout={onTopContentLayout} />
+				<C.TopContent onLayout={onTopContentLayout} />
 				<C.Background faction={faction} width={view.width}>
 					<C.DescriptionContent>
 						<C.TextContent>

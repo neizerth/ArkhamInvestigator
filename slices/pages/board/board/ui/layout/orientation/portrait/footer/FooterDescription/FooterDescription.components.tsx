@@ -1,18 +1,17 @@
 import { size } from "@shared/config";
 import { StorePressable } from "@widgets/control/store-pressable";
 import { InvestigatorDescription } from "@widgets/game/investigator";
-import type { FC } from "react";
 import { View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import Animated from "react-native-reanimated";
-import styled, { css } from "styled-components/native";
+import styled from "styled-components/native";
 import {
 	InvestigatorFlavor,
 	InvestigatorText,
 	InvestigatorTraits,
 } from "../../../../../shared";
 import { DescriptionMenu } from "../DescriptionMenu";
-import { FooterTopContent, type FooterTopContentProps } from "../top";
+import { FooterTopContent } from "../top";
 
 export const Container: typeof Animated.View = styled(Animated.View)`
   position: relative;
@@ -39,17 +38,8 @@ export const ExpandArea: typeof StorePressable = styled(StorePressable).attrs({
   z-index: 10;
 `;
 
-type TopContentProps = FooterTopContentProps & {
-	show: boolean;
-};
+export const TopContent: typeof FooterTopContent = styled(FooterTopContent)`
 
-export const TopContent: FC<TopContentProps> = styled(FooterTopContent)`
-  opacity: 0;
-  ${({ show }: TopContentProps) =>
-		show &&
-		css`
-    opacity: 1;
-  `}
 `;
 
 export const TextContent: typeof ScrollView = styled(ScrollView)`

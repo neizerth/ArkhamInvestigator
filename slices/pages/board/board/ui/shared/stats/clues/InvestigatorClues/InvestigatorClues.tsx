@@ -1,23 +1,21 @@
 import {
 	decreaseCurrentStat,
 	selectCurrentStatValue,
+	setCurrentStat,
 	useAppDispatch,
 	useAppSelector,
 } from "@shared/lib";
-import { setCurrentStat } from "@shared/lib";
-import type { ClueProps } from "@shared/ui";
-import type { PickerChangeEvent } from "@widgets/control/picker";
-import { range } from "ramda";
 import { useCallback } from "react";
-import * as C from "./Clues.components";
+import type { ViewProps } from "react-native";
+import { Clues } from "../Clues";
 
-const cluesData = range(0, 101);
+export type InvestigatorCluesProps = ViewProps;
 
-export const Clues = (props: ClueProps) => {
+export const InvestigatorClues = (props: InvestigatorCluesProps) => {
 	const dispatch = useAppDispatch();
 	const value = useAppSelector(selectCurrentStatValue("clues"));
 	const onChange = useCallback(
-		({ value }: PickerChangeEvent) => {
+		(value?: number) => {
 			dispatch(setCurrentStat("clues", value));
 		},
 		[dispatch],
@@ -32,14 +30,12 @@ export const Clues = (props: ClueProps) => {
 	}, [dispatch]);
 
 	return (
-		<C.Container {...props}>
-			<C.Picker
-				value={value}
-				data={cluesData}
-				onValueChanged={onChange}
-				onLongPress={onLongPress}
-				onPress={onPress}
-			/>
-		</C.Container>
+		<Clues
+			{...props}
+			onChange={onChange}
+			onLongPress={onLongPress}
+			onPress={onPress}
+			value={value}
+		/>
 	);
 };

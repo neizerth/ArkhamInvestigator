@@ -1,9 +1,10 @@
 import {
+	delay,
 	selectShowDescription,
 	useAppSelector,
 	useBooleanAnimation,
 } from "@shared/lib";
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Dimensions } from "react-native";
 import {
 	PORTRAIT_DESCRIPTION_HEIGHT,
@@ -16,6 +17,8 @@ type Options = {
 	offsetTop?: number;
 };
 
+const DELAY_OUT = 300;
+
 export const useContainerAnimation = ({ offsetTop = 0 }: Options) => {
 	const showDescription = useAppSelector(selectShowDescription);
 
@@ -24,23 +27,38 @@ export const useContainerAnimation = ({ offsetTop = 0 }: Options) => {
 		return screen.height - height - offsetTop;
 	}, [offsetTop]);
 
+	const [zIndex, setZIndex] = useState(-1);
+
+	useEffect(() => {
+		if (!showDescription) {
+			delay(DELAY_OUT).then(() => {
+				setZIndex(-1);
+			});
+			return;
+		}
+		setZIndex(5);
+	}, [showDescription]);
+
+	const positionStyle = {
+		zIndex,
+	};
+
 	const minValue = screen.height - PORTRAIT_DESCRIPTION_HEIGHT - offsetTop;
 
-	return useBooleanAnimation({
+	const animatedStyle = useBooleanAnimation({
 		enabled: showDescription,
 		duration: 100,
 		minValue,
 		maxValue,
+		delayIn: 100,
+		delayOut: DELAY_OUT,
 		styleResolver(top) {
 			"worklet";
-			// @ts-ignore: take animation value from object
-			const { current } = top;
-			const hide = Math.abs(current - minValue) < 5;
-
 			return {
 				top,
-				zIndex: hide ? -1 : 5,
 			};
 		},
 	});
+
+	return [animatedStyle, positionStyle];
 };

@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo } from "react";
 import {
+	type AnimationCallback,
 	useAnimatedStyle,
 	useSharedValue,
 	withTiming,
@@ -16,6 +17,7 @@ export type UseBooleanAnimationOptions<T extends DefaultStyle> = {
 	delayIn?: number;
 	delayOut?: number;
 	styleResolver: (value: number) => T;
+	onComplete?: AnimationCallback;
 };
 
 export const useBooleanAnimation = <T extends DefaultStyle = DefaultStyle>({
@@ -27,11 +29,12 @@ export const useBooleanAnimation = <T extends DefaultStyle = DefaultStyle>({
 	delay: delayProp,
 	delayIn,
 	delayOut,
+	onComplete,
 }: UseBooleanAnimationOptions<T>) => {
-	const sharedValue = useSharedValue(0);
+	const sharedValue = useSharedValue(minValue);
 
 	const delayMs = useMemo(() => {
-		return (enabled ? delayOut : delayIn) || delayProp || 0;
+		return (enabled ? delayIn : delayOut) || delayProp || 0;
 	}, [enabled, delayProp, delayIn, delayOut]);
 
 	const trigger = useCallback(
@@ -49,9 +52,13 @@ export const useBooleanAnimation = <T extends DefaultStyle = DefaultStyle>({
 	}, [enabled, maxValue, minValue, delayMs, trigger]);
 
 	return useAnimatedStyle(() => {
-		const value = withTiming(sharedValue.value, {
-			duration,
-		});
+		const value = withTiming(
+			sharedValue.value,
+			{
+				duration,
+			},
+			onComplete,
+		);
 
 		return styleResolver(value);
 	}, [duration, styleResolver]);

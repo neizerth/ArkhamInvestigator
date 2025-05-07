@@ -14,14 +14,12 @@ import {
 	selectSaveTrauma,
 	selectShowDamageAndHorror,
 	selectShowDamageAndHorrorEffects,
-	selectShowDoom,
 	selectTrackXP,
 	setEndTurnStrict,
 	setKeepAwake,
 	setSaveTrauma,
 	setShowDamageAndHorror,
 	setShowDamageAndHorrorEffects,
-	setShowDoom,
 	setTrackXP,
 } from "@shared/lib";
 import { Title } from "@shared/ui";
@@ -99,13 +97,6 @@ export const SettingsPage = () => {
 						label="Save trauma"
 						selector={selectSaveTrauma}
 						actionCreator={setSaveTrauma}
-					/>
-				</C.Row>
-				<C.Row>
-					<C.Checkbox
-						label="Track Doom"
-						selector={selectShowDoom}
-						actionCreator={setShowDoom}
 					/>
 				</C.Row>
 				<Title>{t`Behavior`}</Title>
