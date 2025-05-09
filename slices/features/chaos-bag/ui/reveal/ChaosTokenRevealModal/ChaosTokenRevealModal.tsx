@@ -43,6 +43,8 @@ export const ChaosTokenRevealModal = (props: ChaosTokenRevealModalProps) => {
 
 	const showModal = tokens.length > 0 || unrevealedCount > 0 || show;
 
+	const hideModal = !showModal || isEmpty;
+
 	const reveal = useCallback(() => {
 		setOneMoreLoading.off();
 		dispatch(revealChaosToken(1));
@@ -69,13 +71,15 @@ export const ChaosTokenRevealModal = (props: ChaosTokenRevealModalProps) => {
 		closeModal();
 	}, [dispatch, closeModal]);
 
+	const handleBack = tokens.length > 0;
+
 	const onBack = useCallback(() => {
-		if (show) {
+		if (handleBack) {
 			returnTokens();
 			return true;
 		}
 		return false;
-	}, [show, returnTokens]);
+	}, [handleBack, returnTokens]);
 
 	useBackButton(onBack);
 
@@ -89,8 +93,6 @@ export const ChaosTokenRevealModal = (props: ChaosTokenRevealModalProps) => {
 	const history = useMemo(() => {
 		return init(tokens);
 	}, [tokens]);
-
-	const hideModal = !showModal || isEmpty;
 
 	useEffect(() => {
 		if (show && hideModal) {
