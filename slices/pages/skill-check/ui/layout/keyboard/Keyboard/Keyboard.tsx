@@ -130,7 +130,8 @@ export const Keyboard = ({ ...props }: KeyboardProps) => {
 								{showRevealButton ? (
 									<C.RevealButton
 										icon="token_sealed_outline"
-										onPress={showReveal}
+										onPressIn={showReveal}
+										onPressOut={hideReveal}
 									/>
 								) : (
 									<C.Placeholder />

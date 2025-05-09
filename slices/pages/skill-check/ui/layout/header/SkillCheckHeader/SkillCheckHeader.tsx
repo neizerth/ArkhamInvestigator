@@ -1,6 +1,11 @@
 import {
+	openSkillCheckChaosBagModal,
+	setShowRevealChaosTokenModal,
+} from "@features/chaos-bag";
+import {
 	clearSkillCheckHistory,
 	goBack,
+	selectCurrentBoardProp,
 	selectHistoryShown,
 	selectSkillCheckType,
 	setHistoryShown,
@@ -15,7 +20,9 @@ import * as C from "./SkillCheckHeader.components";
 type SkillCheckHeaderProps = ViewProps;
 export const SkillCheckHeader = ({ ...props }: SkillCheckHeaderProps) => {
 	const dispatch = useAppDispatch();
-	const icon = useAppSelector(selectSkillCheckType);
+	const type = useAppSelector(selectSkillCheckType);
+	const stats = useAppSelector(selectCurrentBoardProp("value"));
+	const value = type && stats[type];
 
 	const historyShown = useAppSelector(selectHistoryShown);
 	const layoutType = useSkillCheckLayoutType();
@@ -33,12 +40,29 @@ export const SkillCheckHeader = ({ ...props }: SkillCheckHeaderProps) => {
 		dispatch(goBack());
 	}, [dispatch]);
 
+	const hideReveal = useCallback(() => {
+		dispatch(setShowRevealChaosTokenModal(false));
+	}, [dispatch]);
+
+	const showReveal = useCallback(() => {
+		if (!type || !value) {
+			return;
+		}
+
+		dispatch(
+			openSkillCheckChaosBagModal({
+				type,
+				value,
+			}),
+		);
+	}, [dispatch, type, value]);
+
 	return (
 		<C.Container {...props}>
 			<C.Content border={!isLargeLayout}>
-				{icon && (
-					<C.CheckIcon>
-						<C.Stat icon={icon} />
+				{type && (
+					<C.CheckIcon onPressIn={showReveal} onPressOut={hideReveal}>
+						<C.Stat icon={type} />
 					</C.CheckIcon>
 				)}
 				<C.Controls>

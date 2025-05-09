@@ -1,4 +1,4 @@
-import { IconButton } from "@features/haptic";
+import { IconButton, TouchableOpacity } from "@features/haptic";
 import { color, size, statusBarHeight } from "@shared/config";
 import { Row as BaseRow, Icon } from "@shared/ui";
 import type { FC } from "react";
@@ -33,7 +33,7 @@ export const Controls: typeof View = styled(View)`
   z-index: 2;
 `;
 
-export const CheckIcon: typeof View = styled(View)`
+export const CheckIcon: typeof TouchableOpacity = styled(TouchableOpacity)`
   position: absolute;
   z-index: 1;
   left: 0;
