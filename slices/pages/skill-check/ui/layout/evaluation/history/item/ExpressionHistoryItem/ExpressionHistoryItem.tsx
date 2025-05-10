@@ -13,8 +13,6 @@ import { memo, useCallback, useRef } from "react";
 import { type SharedValue, useAnimatedStyle } from "react-native-reanimated";
 import * as C from "./ExpressionHistoryItem.components";
 
-const { round: rnd, max } = Math;
-
 export type ExpressionHistoryItemProps = ExpressionDisplayProps & {
 	itemId: string;
 	title?: string;
