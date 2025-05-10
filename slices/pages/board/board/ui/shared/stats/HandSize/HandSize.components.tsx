@@ -40,8 +40,8 @@ export const BaseHealth: FC<DefinedBaseStatPickerProps> = styled(
 	contentContainerStyle: {
 		position: "absolute",
 		zIndex: 4,
-		right: -20,
-		top: -7,
+		right: -15,
+		top: -10,
 	},
 	gap: 5,
 })`
