@@ -3,4 +3,5 @@ import { Image as ExpoImage } from "expo-image";
 
 export const clearImageCache = (): AppThunk => () => {
 	ExpoImage.clearDiskCache();
+	ExpoImage.clearMemoryCache();
 };

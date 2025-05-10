@@ -8,11 +8,11 @@ import type { DoomProps } from "@shared/ui";
 import type { PickerChangeEvent } from "@widgets/control/picker";
 import { range } from "ramda";
 import { useCallback } from "react";
-import * as C from "./Doom.components";
+import * as C from "./ScenarioDoom.components";
 
 const doomData = range(0, 101);
 
-export const Doom = (props: DoomProps) => {
+export const ScenarioDoom = (props: DoomProps) => {
 	const dispatch = useAppDispatch();
 	const value = useAppSelector(selectDoom);
 	const onChange = useCallback(

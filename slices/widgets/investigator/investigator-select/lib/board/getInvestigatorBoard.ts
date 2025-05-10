@@ -29,6 +29,7 @@ export const getInvestigatorBoard = ({
 		actions: NEW_TURN_ACTIONS_COUNT,
 		handSize: DEFAULT_HAND_SIZE,
 		clues: 0,
+		doom: 0,
 	};
 
 	const baseValue = {

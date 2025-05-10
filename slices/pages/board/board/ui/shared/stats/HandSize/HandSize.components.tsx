@@ -10,6 +10,7 @@ import { BaseStatPicker, type DefinedBaseStatPickerProps } from "../common";
 import { StatPickerMemo as StatPicker } from "../common/StatPicker";
 
 export const BaseContainer = withStat(UI.HandSize, {
+	height: assetsSize.main,
 	ratio: gameAssets.handSize.ratio,
 });
 
@@ -19,6 +20,8 @@ export const Content: typeof BaseContainer = styled(BaseContainer)`
 export const Container: typeof View = styled(View)`
   position: relative;
 	padding-top: ${size.gap.xxl}px;
+	min-width: ${assetsSize.main}px;
+	align-items: center;
 `;
 
 export const Value: typeof BaseValue = styled(BaseValue)`

@@ -8,11 +8,28 @@ import {
 	InvestigatorResources,
 } from "../../../../../shared";
 
-type GetLayoutStyleOptions = PropsWithUnit & {
+type PropsWithCompact = {
 	compact?: boolean;
+	inline?: boolean;
 };
 
-const getLayoutStyle = ({ unit, compact = false }: GetLayoutStyleOptions) => {
+type GetLayoutStyleOptions = PropsWithUnit & PropsWithCompact;
+
+const getRowGap = ({
+	unit,
+	compact = false,
+	inline = false,
+}: GetLayoutStyleOptions) => {
+	if (inline) {
+		return 15;
+	}
+
+	return unit < 500 ? 20 : compact ? 30 : 50;
+};
+
+const getLayoutStyle = (options: GetLayoutStyleOptions) => {
+	const { unit } = options;
+
 	if (unit <= 350) {
 		return css`
       flex-direction: row;
@@ -22,7 +39,7 @@ const getLayoutStyle = ({ unit, compact = false }: GetLayoutStyleOptions) => {
     `;
 	}
 
-	const gap = unit < 500 ? 20 : compact ? 40 : 50;
+	const gap = getRowGap(options);
 
 	return css`
     gap: ${gap}px;
@@ -34,7 +51,17 @@ const getLayoutStyle = ({ unit, compact = false }: GetLayoutStyleOptions) => {
 
 export const Container: FC<ViewProps & GetLayoutStyleOptions> = styled(View)`
   ${getLayoutStyle}
-  align-items: center;
+  align-items: flex-end;
+`;
+
+type SideStatGroup = ViewProps & GetLayoutStyleOptions;
+
+export const SideStatGroup: FC<SideStatGroup> = styled(View)`
+  ${(options: SideStatGroup) => css`
+    gap: ${getRowGap(options)}px;
+    flex-direction: ${options.inline ? "row" : "column"};
+    align-items: center;
+  `}
 `;
 
 export const Clues: typeof InvestigatorClues = styled(InvestigatorClues)`

@@ -6,8 +6,8 @@ import {
 } from "@shared/lib";
 import type { ViewProps } from "react-native";
 import {
-	Doom,
 	ScenarioClues,
+	ScenarioDoom,
 	ScenarioResources,
 } from "../../../../../../shared";
 import * as C from "./SecondaryControls.components";
@@ -22,7 +22,7 @@ export const SecondaryControls = (props: SecondaryControlsProps) => {
 	return (
 		<C.Container {...props}>
 			<C.Content>
-				{showDoom && <Doom />}
+				{showDoom && <ScenarioDoom />}
 				{showResources && <ScenarioResources />}
 				{showClues && <ScenarioClues />}
 			</C.Content>

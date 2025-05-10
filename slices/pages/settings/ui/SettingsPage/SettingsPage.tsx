@@ -66,7 +66,7 @@ export const SettingsPage = () => {
 						<C.Sound />
 					</C.Row>
 				</C.Section>
-				<C.Section title={t`Game settings`}>
+				<C.Section title={t`Investigator`}>
 					<C.Row>
 						<C.Select
 							label="Turn end"
@@ -102,6 +102,13 @@ export const SettingsPage = () => {
 							label="Track Hand Size"
 							selector={S.selectTrackHandSize}
 							actionCreator={S.setTrackHandSize}
+						/>
+					</C.Row>
+					<C.Row>
+						<C.Checkbox
+							label="Doom"
+							selector={S.selectShowInvestigatorDoom}
+							actionCreator={S.setShowInvestigatorDoom}
 						/>
 					</C.Row>
 				</C.Section>
