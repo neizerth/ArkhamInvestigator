@@ -13,7 +13,6 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps> {
 		error: null,
 	};
 	static getDerivedStateFromError(error: Error) {
-		console.log("boundary catch", { error });
 		return { error };
 	}
 	render() {
