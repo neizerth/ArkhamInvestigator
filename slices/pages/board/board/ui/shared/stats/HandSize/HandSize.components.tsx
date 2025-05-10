@@ -20,6 +20,7 @@ export const Content: typeof BaseContainer = styled(BaseContainer)`
 export const Container: typeof View = styled(View)`
   position: relative;
 	padding-top: ${size.gap.xxl}px;
+	padding-bottom: ${size.gap.default}px;
 	min-width: ${assetsSize.main}px;
 	align-items: center;
 `;
