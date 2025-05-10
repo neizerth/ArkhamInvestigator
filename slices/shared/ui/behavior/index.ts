@@ -5,3 +5,4 @@ export * from "./FullHeightView";
 export * from "./ScreenView";
 export * from "./Delay";
 export * from "./StoreDisplay";
+export * from "./ErrorBoundary";

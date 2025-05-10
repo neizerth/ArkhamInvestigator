@@ -66,12 +66,18 @@ export const InvestigatorTrauma = (props: InvestigatorTraumaProps) => {
 				<C.Control
 					onIncrement={onIncrement("physicalTrauma")}
 					onDecrement={onDecrement("physicalTrauma")}
+					min={0}
+					max={20}
+					value={physical}
 				>
 					<C.Health value={physical} />
 				</C.Control>
 				<C.Control
 					onIncrement={onIncrement("mentalTrauma")}
 					onDecrement={onDecrement("mentalTrauma")}
+					min={0}
+					max={20}
+					value={mental}
 				>
 					<C.Sanity value={mental} />
 				</C.Control>

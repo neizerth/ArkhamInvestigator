@@ -1,3 +1,4 @@
+import { Button as BaseButton } from "@features/haptic";
 import { color, font, size } from "@shared/config";
 import { Row as BaseRow, Section as BaseSection, TextView } from "@shared/ui";
 import { ContentPage } from "@widgets/content";
@@ -21,6 +22,14 @@ export const Section: typeof BaseSection = styled(BaseSection).attrs({
 		gap: size.gap.default,
 	},
 })`
+`;
+
+export const Button: typeof BaseButton = styled(BaseButton).attrs({
+	textStyle: {
+		fontSize: font.size.default,
+	},
+})`
+	flex: 1;
 `;
 
 export const Container: typeof View = styled(View)`

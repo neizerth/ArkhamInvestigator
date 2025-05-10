@@ -4,3 +4,4 @@ export * from "./storage";
 export * from "./chaos-bag";
 export * from "./sound";
 export * from "./modal";
+export * from "./notifications";

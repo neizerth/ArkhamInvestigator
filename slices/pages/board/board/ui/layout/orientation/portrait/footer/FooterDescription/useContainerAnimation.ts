@@ -1,3 +1,4 @@
+import { statusBarHeight } from "@shared/config";
 import {
 	delay,
 	selectShowDescription,
@@ -5,7 +6,7 @@ import {
 	useBooleanAnimation,
 } from "@shared/lib";
 import { useEffect, useMemo, useState } from "react";
-import { Dimensions } from "react-native";
+import { Dimensions, useWindowDimensions } from "react-native";
 import {
 	PORTRAIT_DESCRIPTION_HEIGHT,
 	descriptionSize,
@@ -21,11 +22,14 @@ const DELAY_OUT = 300;
 
 export const useContainerAnimation = ({ offsetTop = 0 }: Options) => {
 	const showDescription = useAppSelector(selectShowDescription);
+	const window = useWindowDimensions();
+
+	const systemHeight = screen.height - window.height - statusBarHeight;
 
 	const maxValue = useMemo(() => {
 		const height = screen.width / descriptionSize.ratio;
-		return screen.height - height - offsetTop;
-	}, [offsetTop]);
+		return window.height - height - offsetTop + statusBarHeight;
+	}, [offsetTop, window.height]);
 
 	const [zIndex, setZIndex] = useState(-1);
 
@@ -43,7 +47,8 @@ export const useContainerAnimation = ({ offsetTop = 0 }: Options) => {
 		zIndex,
 	};
 
-	const minValue = screen.height - PORTRAIT_DESCRIPTION_HEIGHT - offsetTop;
+	const minValue =
+		screen.height - PORTRAIT_DESCRIPTION_HEIGHT - offsetTop - systemHeight;
 
 	const animatedStyle = useBooleanAnimation({
 		enabled: showDescription,

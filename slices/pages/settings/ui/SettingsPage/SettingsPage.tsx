@@ -9,6 +9,7 @@ import {
 	useAppTranslation,
 } from "@features/i18n";
 import * as S from "@shared/lib";
+import { useCallback } from "react";
 import * as C from "./SettingsPage.components";
 import {
 	hapticValues,
@@ -19,6 +20,20 @@ import {
 
 export const SettingsPage = () => {
 	const { t } = useAppTranslation();
+	const dispatch = S.useAppDispatch();
+
+	const clearImageCache = useCallback(() => {
+		dispatch(S.clearImageCache());
+		dispatch(
+			S.sendNotification({
+				content: {
+					title: t`Image cache cleared`,
+					autoDismiss: true,
+				},
+				trigger: null,
+			}),
+		);
+	}, [dispatch, t]);
 
 	return (
 		<C.Page title="Settings">
@@ -129,6 +144,16 @@ export const SettingsPage = () => {
 							label="Chaos bag loading animation"
 							selector={selectChaosBagLoadingAnimation}
 							actionCreator={setChaosBagLoadingAnimation}
+						/>
+					</C.Row>
+				</C.Section>
+
+				<C.Section title={t`Diagnostics`}>
+					<C.Row>
+						<C.Button
+							text={t`Clear image cache`}
+							icon="image"
+							onPress={clearImageCache}
 						/>
 					</C.Row>
 				</C.Section>

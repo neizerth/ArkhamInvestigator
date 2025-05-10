@@ -39,11 +39,13 @@
     "expo": "~52.0.38",
     "expo-application": "~6.0.2",
     "expo-asset": "~11.0.5",
+    "expo-audio": "~0.3.5",
     "expo-blur": "~14.0.1",
     "expo-constants": "~17.0.3",
     "expo-font": "~13.0.2",
     "expo-haptics": "~14.0.0",
     "expo-image": "~2.0.7",
+    "expo-keep-awake": "~14.0.3",
     "expo-linking": "~7.0.3",
     "expo-router": "~4.0.20",
     "expo-screen-orientation": "~8.0.4",
@@ -63,6 +65,7 @@
     "react-native": "0.76.9",
     "react-native-color-matrix-image-filters": "^7.0.2",
     "react-native-element-dropdown": "^2.12.4",
+    "react-native-error-boundary": "^2.0.0",
     "react-native-gesture-handler": "~2.20.2",
     "react-native-get-random-values": "^1.11.0",
     "react-native-gradients": "^2.1.1",
@@ -85,8 +88,7 @@
     "semver": "^7.7.1",
     "styled-components": "^6.1.15",
     "uuid": "^11.0.5",
-    "expo-keep-awake": "~14.0.3",
-    "expo-audio": "~0.3.5"
+    "expo-notifications": "~0.29.14"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",

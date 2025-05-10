@@ -21,4 +21,6 @@ export const servicePadding: Record<HeaderLayoutType, RectPosition> = {
 
 export const PORTRAIT_DESCRIPTION_HEIGHT = 70;
 
+export const PORTRAIT_DESCRIPTION_OFFSET = 40;
+
 export const SIDEBAR_BOTTOM = 200;

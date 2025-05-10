@@ -24,4 +24,5 @@ export const Icon: typeof BaseIcon = styled(BaseIcon)`
   font-size: ${font.size.small}px;
   color: ${color.light10};
   line-height: ${font.size.small}px;
+  min-width: 15px;
 `;

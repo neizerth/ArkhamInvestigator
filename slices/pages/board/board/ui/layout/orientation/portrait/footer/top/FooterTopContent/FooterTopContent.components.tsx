@@ -1,11 +1,14 @@
 import { Pressable } from "@features/haptic";
-import Animated from "react-native-reanimated";
+import { View } from "react-native";
 import styled from "styled-components/native";
 import { DescriptionTopMenu } from "../../DescriptionTopMenu";
 import { SecondaryControls } from "../SecondaryControls";
 
-export const Container: typeof Animated.View = styled(Animated.View)`
+export const TOP_CONTENT_OFFSET = 178;
+
+export const Container: typeof View = styled(View)`
   gap: 60px;
+  min-height: ${TOP_CONTENT_OFFSET}px;
 `;
 
 export const TopMenu: typeof DescriptionTopMenu = styled(DescriptionTopMenu)`

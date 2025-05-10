@@ -44,6 +44,15 @@ module.exports = {
 			"expo-audio",
 			"expo-router",
 			[
+				"expo-notifications",
+				{
+					icon: "./assets/notification_icon.png",
+					color: "#000",
+					defaultChannel: "default",
+					enableBackgroundRemoteNotifications: false,
+				},
+			],
+			[
 				"expo-splash-screen",
 				{
 					image: "./assets/images/logo-dark.png",

@@ -35,7 +35,6 @@ export const HealthControl: typeof Control = styled(Control).attrs({
 `;
 
 export const Health: typeof HealthValue = styled(HealthValue)`
-  
 `;
 
 export const Sanity: typeof SanityValue = styled(SanityValue)`

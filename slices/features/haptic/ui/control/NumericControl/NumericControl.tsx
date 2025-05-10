@@ -1,3 +1,4 @@
+import { always } from "ramda";
 import type { TextProps, ViewProps } from "react-native";
 import * as C from "./NumericControl.components";
 import { defaultButtonTextStyle } from "./NumericControl.styles";
@@ -22,6 +23,8 @@ export type NumericControlProps = ViewProps & {
 	max?: number;
 };
 
+const disabledCallback = always(false);
+
 export const NumericControl = ({
 	onDecrement,
 	onIncrement,
@@ -41,31 +44,32 @@ export const NumericControl = ({
 	value,
 	...props
 }: NumericControlProps) => {
-	const showMinStyle = typeof value === "number" && value <= min;
-	const showMaxStyle = typeof value === "number" && value >= max;
+	const disableDecrement = typeof value === "number" && value <= min;
+	const disableIncrement = typeof value === "number" && value >= max;
+
 	return (
 		<C.Container {...props}>
 			<C.Button
-				onPress={onDecrement}
+				onPress={disableDecrement ? disabledCallback : onDecrement}
 				text="–"
-				style={[buttonStyle, decrementStyle, showMinStyle && minStyle]}
+				style={[buttonStyle, decrementStyle, disableDecrement && minStyle]}
 				textStyle={[
 					defaultButtonTextStyle,
 					textStyle,
 					incrementTextStyle,
-					showMinStyle && minTextStyle,
+					disableDecrement && minTextStyle,
 				]}
 			/>
 			{children}
 			<C.Button
-				onPress={onIncrement}
+				onPress={disableIncrement ? disabledCallback : onIncrement}
 				text="+"
-				style={[buttonStyle, incrementStyle, showMaxStyle && maxStyle]}
+				style={[buttonStyle, incrementStyle, disableIncrement && maxStyle]}
 				textStyle={[
 					defaultButtonTextStyle,
 					textStyle,
 					decrementTextStyle,
-					showMaxStyle && maxTextStyle,
+					disableIncrement && maxTextStyle,
 				]}
 			/>
 		</C.Container>

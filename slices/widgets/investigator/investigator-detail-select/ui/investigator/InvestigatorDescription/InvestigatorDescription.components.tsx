@@ -23,12 +23,13 @@ export const Traits: typeof UnscaledText = styled(UnscaledText)`
   font-size: ${font.size.default}px;
   font-family: ${Alegreya.bold};
   color: ${color.light10};
+
+  max-width: 220px;
 `;
 
 export const Skills: typeof InvestigatorSkillsPreview = styled(
 	InvestigatorSkillsPreview,
 )`
-  
 `;
 
 export { View as Section };

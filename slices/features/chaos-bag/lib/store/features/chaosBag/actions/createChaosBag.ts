@@ -10,7 +10,7 @@ export const createChaosBag = (): AppThunk => (dispatch, getState) => {
 
 	const contents = chaosToken.types.all
 		.flatMap((type) => {
-			const count = tokensCount[type] || 0;
+			const count = tokensCount?.[type] || 0;
 			return repeat(type, count);
 		})
 		.map((type) => ({

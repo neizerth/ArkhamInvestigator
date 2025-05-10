@@ -1,3 +1,4 @@
 export * from "./useAppDispatch";
 export * from "./useAppSelector";
 export * from "./useBooleanDispatch";
+export * from "./useDispatchAction";

@@ -8,16 +8,15 @@ import {
 	useAppSelector,
 	useBackButton,
 	useFadeAnimation,
-	useLayoutSize,
 } from "@shared/lib";
 import { useCallback, useContext } from "react";
 import type { ViewProps } from "react-native";
 import { LayoutContext } from "../../../../../../config";
+import { TOP_CONTENT_OFFSET } from "../top";
 import * as C from "./FooterDescription.components";
 import { useContainerAnimation } from "./useContainerAnimation";
 
 export type FooterDescriptionProps = ViewProps;
-
 export const FooterDescription = ({ ...props }: FooterDescriptionProps) => {
 	const route = useRoute();
 	const dispatch = useAppDispatch();
@@ -26,7 +25,6 @@ export const FooterDescription = ({ ...props }: FooterDescriptionProps) => {
 	const { view } = useContext(LayoutContext);
 	const investigator = useAppSelector(selectCurrentBoardProp("investigator"));
 	const faction = useAppSelector(selectCurrentFaction);
-	const [topContentSize, onTopContentLayout] = useLayoutSize();
 
 	const onBack = useCallback(() => {
 		const isBoard = route.name === "board/index";
@@ -39,18 +37,16 @@ export const FooterDescription = ({ ...props }: FooterDescriptionProps) => {
 
 	useBackButton(onBack);
 
-	const offsetTop = topContentSize?.height || 0;
-
 	const descriptionStyle = useFadeAnimation({
 		show: showDescription,
 	});
 
 	const containerStyle = useContainerAnimation({
-		offsetTop,
+		offsetTop: TOP_CONTENT_OFFSET,
 	});
 
 	const expandStyle = {
-		top: offsetTop,
+		top: 0,
 	};
 
 	const vw = (view.width * 6) / 100;
@@ -68,7 +64,7 @@ export const FooterDescription = ({ ...props }: FooterDescriptionProps) => {
 						style={expandStyle}
 					/>
 				)}
-				<C.TopContent onLayout={onTopContentLayout} />
+				<C.TopContent />
 				<C.Background faction={faction} width={view.width}>
 					<C.DescriptionContent>
 						<C.TextContent>

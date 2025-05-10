@@ -1,10 +1,9 @@
 import "react-native-get-random-values";
 
-import { Stack } from "expo-router";
-import { StatusBar } from "expo-status-bar";
-import "react-native-reanimated";
 import { useAppLoader, useDeviceInit } from "@app/lib";
 import { AppProvider } from "@app/providers/AppProvider";
+import { Stack } from "expo-router";
+import { StatusBar } from "expo-status-bar";
 import type { PropsWithChildren } from "react";
 import * as C from "./RootLayout.components";
 import { screenOptions } from "./RootLayout.config";
