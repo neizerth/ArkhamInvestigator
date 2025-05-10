@@ -11,6 +11,7 @@ import {
 	setClues,
 	setDoom,
 	setInvestigatorBoards,
+	setReplaceInvestigator,
 	setResources,
 	setSelectedInvestigators,
 } from "@shared/lib";
@@ -27,6 +28,7 @@ export const startNewGame: ActionCreator<AppThunk> =
 		dispatch(setDoom(0));
 		dispatch(setClues(0));
 		dispatch(setResources(0));
+		dispatch(setReplaceInvestigator(false));
 		dispatch(setRevealedTokenIds([]));
 		dispatch(setChaosBagSealedTokens([]));
 		dispatch(setSelectedInvestigators([]));
