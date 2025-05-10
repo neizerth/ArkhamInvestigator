@@ -35,9 +35,10 @@ export const Controls: typeof View = styled(View)`
 
 export const CheckIcon: typeof TouchableOpacity = styled(TouchableOpacity)`
   position: absolute;
-  z-index: 1;
-  left: 0;
-  right: 0;
+  z-index: 10;
+  left: 50%;
+  width: 40px;
+  margin-left: -20px;
   bottom: 0;
   top: 5px;
   align-items: center;
