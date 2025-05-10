@@ -1,14 +1,12 @@
 import type { InvestigatorDetailItem } from "@shared/model";
-import type {
-	InvestigatorSignature,
-	InvestigatorSignatureGroup,
-} from "arkham-investigator-data";
+import type { InvestigatorSignatureGroup } from "arkham-investigator-data";
 import { pick } from "ramda";
+import { getOptionName } from "./getOptionName";
 
 export const getSignatures = (group: InvestigatorSignatureGroup) => {
 	const { code, faction_code } = group;
 	return group.signatures.map((signature): InvestigatorDetailItem => {
-		const name = getSignatureName(signature);
+		const name = getOptionName(signature);
 
 		return {
 			...pick(["id", "image", "code", "type", "icon"], signature),
@@ -19,14 +17,4 @@ export const getSignatures = (group: InvestigatorSignatureGroup) => {
 			value: signature.id,
 		};
 	});
-};
-
-const getSignatureName = (signature: InvestigatorSignature) => {
-	if (signature.taboo && signature.taboo_set) {
-		return "Taboo Set";
-	}
-	if (!signature.official) {
-		return signature.pack.name;
-	}
-	return signature.cycle.name;
 };

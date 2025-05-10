@@ -1,6 +1,7 @@
 import type { InvestigatorDetailItem } from "@shared/model";
 import type { InvestigatorSignatureGroup } from "arkham-investigator-data";
 import { isNotNil, pick, prop, uniqBy } from "ramda";
+import { getOptionName } from "./getOptionName";
 
 export const getSkins = (group: InvestigatorSignatureGroup) => {
 	const { code, faction_code } = group;
@@ -12,7 +13,7 @@ export const getSkins = (group: InvestigatorSignatureGroup) => {
 			}
 			return {
 				...pick(["id", "image", "code"], item),
-				name: item.pack.name,
+				name: getOptionName(item),
 				faction: faction_code,
 				type: "skin",
 				imageId: item.image.id,
