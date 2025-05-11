@@ -16,7 +16,7 @@ export const SoundSettings = (props: SoundSettingsProps) => {
 		<C.Container {...props}>
 			<C.Row>
 				<C.Checkbox
-					label="Sound Effects"
+					label="settings.sound"
 					selector={selectSoundEnabled}
 					actionCreator={setSoundEnabled}
 				/>

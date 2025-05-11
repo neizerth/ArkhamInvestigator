@@ -55,6 +55,8 @@
 	"board.help.press.chaosBag": "Показывает содержимое мешка хаоса",
 	"board.help.longPress.chaosBag": "Вытягивает жетон хаоса",
 
+	"settings.sound": "Звук (Beta)",
+
 	"Chaos bag loading animation": "Анимация мешка хаоса",
 
 	"Give action": "Дать действие",
@@ -64,7 +66,6 @@
 	"Track Hand Size": "Размер руки",
 	"Doom": "Безысходность",
 	"General": "Основное",
-	"Sound Effects": "Звуковые эффекты",
 	"Volume": "Громкость",
 
 	"New Game": "Новая игра",
