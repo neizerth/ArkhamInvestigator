@@ -8,6 +8,7 @@ import {
 	selectLanguage,
 	useAppTranslation,
 } from "@features/i18n";
+import { sendNotification } from "@features/notifications";
 import * as S from "@shared/lib";
 import { useCallback } from "react";
 import * as C from "./SettingsPage.components";
@@ -25,7 +26,7 @@ export const SettingsPage = () => {
 	const clearImageCache = useCallback(() => {
 		dispatch(S.clearImageCache());
 		dispatch(
-			S.sendNotification({
+			sendNotification({
 				content: {
 					title: t`Image cache cleared`,
 					autoDismiss: true,

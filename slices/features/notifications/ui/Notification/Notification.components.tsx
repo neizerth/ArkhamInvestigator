@@ -3,7 +3,7 @@ import { Icon, Row, Text } from "@shared/ui";
 import styled from "styled-components/native";
 
 export const Container: typeof Row = styled(Row)`
-  background-color: ${color.dark30};
+  background-color: ${color.light10};
   padding: ${size.gap.default}px;
   border-radius: ${size.borderRadius.default}px;
   align-items: center;
@@ -11,11 +11,11 @@ export const Container: typeof Row = styled(Row)`
 `;
 
 export const Title: typeof Text = styled(Text)`
-  
+  color: ${color.text};
 `;
 
 export const Close: typeof Icon = styled(Icon)`
-  color: ${color.light10};
+  color: ${color.text};
   font-size: 18px;
   line-height: 18px;
 `;

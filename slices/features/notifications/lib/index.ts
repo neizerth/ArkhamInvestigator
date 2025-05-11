@@ -1,1 +1,2 @@
-export * from "./initNotifications";
+export * from "./useNotifications";
+export * from "./store";
