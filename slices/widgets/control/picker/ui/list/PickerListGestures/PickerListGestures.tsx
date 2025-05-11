@@ -1,5 +1,4 @@
 import { useHapticFeedback } from "@features/haptic";
-import { useSound } from "@features/sound";
 import { arrayIf } from "@shared/lib";
 import { type PropsWithChildren, useCallback } from "react";
 import { Gesture, GestureDetector } from "react-native-gesture-handler";
@@ -38,30 +37,25 @@ export const PickerListGestures = ({
 
 	onUserDeactivated,
 	onDeactivated,
-	sound,
 }: PickerListGesturesProps) => {
 	const pressFeedback = useHapticFeedback(pressHapticPattern);
 	const doublePressFeedback = useHapticFeedback(doublePressHapticPattern);
 	const longPressFeedback = useHapticFeedback(longPressHapticPattern);
-	const playSound = useSound();
 
 	const onTap = useCallback(() => {
 		pressFeedback();
-		playSound(sound);
 		onPress?.();
-	}, [pressFeedback, onPress, playSound, sound]);
+	}, [pressFeedback, onPress]);
 
 	const onDoubleTap = useCallback(() => {
 		doublePressFeedback();
-		playSound(sound);
 		onDoublePress?.();
-	}, [doublePressFeedback, onDoublePress, playSound, sound]);
+	}, [doublePressFeedback, onDoublePress]);
 
 	const onLongPressCallback = useCallback(() => {
 		longPressFeedback();
-		playSound(sound);
 		onLongPress?.();
-	}, [longPressFeedback, onLongPress, playSound, sound]);
+	}, [longPressFeedback, onLongPress]);
 
 	const gestures = [
 		arrayIf(

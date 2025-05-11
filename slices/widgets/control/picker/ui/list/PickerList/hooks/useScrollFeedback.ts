@@ -13,6 +13,7 @@ export const useScrollFeedback = (props: PickerListProps) => {
 		onScrollBeginDrag: onScrollBeginDragProp,
 		onScrollDeactivated: onScrollDeactivatedProp,
 		onLongPress: onLongPressProp,
+		onValueChanged: onValueChangedProp,
 		scrollHapticPattern,
 		sound = true,
 	} = props;
@@ -50,10 +51,18 @@ export const useScrollFeedback = (props: PickerListProps) => {
 			if (!hapticEnabled.current) {
 				return;
 			}
-			playSound(sound);
 			impactFeedback();
 		},
-		[onValueChangingProp, impactFeedback, playSound, sound],
+		[onValueChangingProp, impactFeedback],
+	);
+
+	const onValueChanged = useCallback(
+		(e: PickerChangeEvent) => {
+			onValueChangedProp?.(e);
+
+			playSound(sound);
+		},
+		[onValueChangedProp, playSound, sound],
 	);
 
 	return {
@@ -62,5 +71,6 @@ export const useScrollFeedback = (props: PickerListProps) => {
 		onValueChanging,
 		onScrollDeactivated,
 		onLongPress,
+		onValueChanged,
 	};
 };
