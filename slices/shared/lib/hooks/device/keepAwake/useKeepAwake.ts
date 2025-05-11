@@ -1,12 +1,22 @@
-import { activateKeepAwakeAsync, deactivateKeepAwake } from "expo-keep-awake";
-import { useEffect } from "react";
+import * as KeepAwake from "expo-keep-awake";
+import { useEffect, useRef } from "react";
 
 export const useKeepAwake = (enabled: boolean) => {
+	const available = KeepAwake.isAvailableAsync();
+	const active = useRef(false);
+
 	useEffect(() => {
-		if (enabled) {
-			activateKeepAwakeAsync();
+		if (!available) {
 			return;
 		}
-		deactivateKeepAwake();
-	}, [enabled]);
+		if (enabled === active.current) {
+			return;
+		}
+		active.current = enabled;
+		if (enabled) {
+			KeepAwake.activateKeepAwakeAsync();
+			return;
+		}
+		KeepAwake.deactivateKeepAwake();
+	}, [enabled, available]);
 };

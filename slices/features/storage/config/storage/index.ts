@@ -1,3 +1,4 @@
+import "regenerator-runtime/runtime";
 import Storage from "react-native-storage";
 import storageBackend from "./storageBackend";
 
