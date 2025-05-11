@@ -46,7 +46,7 @@ export const FooterDescription = ({ ...props }: FooterDescriptionProps) => {
 	});
 
 	const expandStyle = {
-		top: 0,
+		top: TOP_CONTENT_OFFSET,
 	};
 
 	const vw = (view.width * 6) / 100;
