@@ -1,11 +1,11 @@
-import { useWindowDimensions } from "react-native";
+import { Dimensions } from "react-native";
 import { skillCheckBreakpoints } from "../../config";
 import type { SkillCheckLayoutType } from "../../model";
 
-export const useSkillCheckLayoutType = (): SkillCheckLayoutType => {
-	const window = useWindowDimensions();
+const screen = Dimensions.get("screen");
 
-	return window.height > skillCheckBreakpoints.medium.height
+export const useSkillCheckLayoutType = (): SkillCheckLayoutType => {
+	return screen.height > skillCheckBreakpoints.medium.height
 		? "medium"
 		: "small";
 };

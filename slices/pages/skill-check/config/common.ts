@@ -3,6 +3,6 @@ export const skillCheckBreakpoints = {
 		height: 500,
 	},
 	medium: {
-		height: 650,
+		height: 640,
 	},
 };
