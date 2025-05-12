@@ -2,6 +2,7 @@ import { soundAssets } from "@assets/sounds";
 import { delay, useAppSelector } from "@shared/lib";
 import { useAudioPlayer } from "expo-audio";
 import { useEffect, useMemo } from "react";
+import { SOUND_ENABLED } from "../../config";
 import type { SoundId } from "../../model";
 import { selectSoundVolume } from "../store";
 
@@ -14,6 +15,9 @@ export const useSoundPlayer = (id: SoundId = "switchTap") => {
 
 	// preload sound
 	useEffect(() => {
+		if (!SOUND_ENABLED) {
+			return;
+		}
 		player.volume = 0;
 		player.play();
 
