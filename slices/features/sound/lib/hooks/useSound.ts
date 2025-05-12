@@ -1,4 +1,4 @@
-import { runLater, useAppSelector } from "@shared/lib";
+import { useAppSelector } from "@shared/lib";
 import { useCallback } from "react";
 import type { SoundId } from "../../model";
 import { selectSoundEnabled } from "../store";
@@ -16,10 +16,8 @@ export const useSound = (id?: SoundId) => {
 			if (!soundEnabled || !enabled || SOUND_DISABLED) {
 				return;
 			}
-			if (player.currentTime !== 0) {
-				player.seekTo(0);
-			}
-			runLater(() => player.play());
+			player.seekTo(0);
+			player.play();
 		},
 		[player, soundEnabled],
 	);
