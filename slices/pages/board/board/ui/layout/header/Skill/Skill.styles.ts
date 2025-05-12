@@ -59,12 +59,12 @@ export const getSkillValueStyle = ({
 	const textColor = isParallel ? color.white : color.text;
 
 	const unsignedValueSize: Record<number, number> = {
-		1: 9 * vw,
-		2: 4.7 * vw,
+		1: rnd(9 * vw),
+		2: rnd(4.7 * vw),
 	};
 
 	const signedValueSize: Record<number, number> = {
-		1: 9 * vw,
+		1: rnd(9 * vw),
 		2: rnd(6.2 * vw),
 		3: rnd(4.2 * vw),
 	};
@@ -79,7 +79,7 @@ export const getSkillValueStyle = ({
 	};
 
 	const container: ViewStyle = {
-		paddingRight: rnd(10 * vw),
+		paddingRight: rnd(1.1 * width),
 		paddingBottom: rnd(2.3 * vw),
 		flex: 1,
 		alignItems: "flex-end",
