@@ -1,1 +1,1 @@
-export const SOUND_ENABLED = true;
+export const SOUND_ENABLED = false;
