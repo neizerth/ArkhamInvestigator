@@ -11,17 +11,22 @@ export type ImageBackgroundProps = Omit<ImageProps, "style"> &
 		imageStyle?: ImageProps["style"];
 		width?: number;
 		height?: number;
+		visible?: boolean;
 	};
 export const ImageBackground = ({
 	children,
 	style,
 	imageStyle,
+	visible = false,
 	...props
 }: ImageBackgroundProps) => {
 	const pickSize = pick(["width", "height"]);
 	const [loading, setLoading] = useBoolean(true);
 	const defaultBackgroundStyle = pickSize(StyleSheet.flatten(style));
 	const backgroundStyle = pickSize(props);
+
+	const show = !loading || visible;
+
 	return (
 		<C.Container style={[style]}>
 			<C.Background
@@ -29,7 +34,7 @@ export const ImageBackground = ({
 				style={[defaultBackgroundStyle, backgroundStyle, imageStyle]}
 				onLoadEnd={setLoading.off}
 			/>
-			{!loading && children}
+			{show && children}
 		</C.Container>
 	);
 };

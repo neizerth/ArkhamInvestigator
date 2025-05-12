@@ -5,10 +5,9 @@ import {
 	useAppSelector,
 } from "@shared/lib";
 import { useCallback } from "react";
-import type { ViewProps } from "react-native";
-import { Resources } from "../Resources";
+import { Resources, type ResourcesProps } from "../Resources";
 
-export type ScenarioResourcesProps = ViewProps;
+export type ScenarioResourcesProps = ResourcesProps;
 
 export const ScenarioResources = (props: ScenarioResourcesProps) => {
 	const dispatch = useAppDispatch();

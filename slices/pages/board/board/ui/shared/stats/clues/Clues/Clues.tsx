@@ -1,3 +1,4 @@
+import type { ImageBackgroundProps } from "@shared/ui";
 import type { PickerChangeEvent } from "@widgets/control/picker";
 import { range } from "ramda";
 import { useCallback } from "react";
@@ -5,7 +6,7 @@ import * as C from "./Clues.components";
 
 const cluesData = range(0, 101);
 
-type ClueProps = {
+export type CluesProps = ImageBackgroundProps & {
 	value?: number;
 	onChange?: (value?: number) => void;
 	onLongPress?: () => void;
@@ -18,7 +19,7 @@ export const Clues = ({
 	onPress,
 	value,
 	...props
-}: ClueProps) => {
+}: CluesProps) => {
 	const onChange = useCallback(
 		({ value }: PickerChangeEvent) => {
 			onChangeProp?.(value);

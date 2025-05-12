@@ -22,9 +22,9 @@ export const SecondaryControls = (props: SecondaryControlsProps) => {
 	return (
 		<C.Container {...props}>
 			<C.Content>
-				{showDoom && <ScenarioDoom />}
-				{showResources && <ScenarioResources />}
-				{showClues && <ScenarioClues />}
+				{showDoom && <ScenarioDoom visible />}
+				{showResources && <ScenarioResources visible />}
+				{showClues && <ScenarioClues visible />}
 			</C.Content>
 		</C.Container>
 	);

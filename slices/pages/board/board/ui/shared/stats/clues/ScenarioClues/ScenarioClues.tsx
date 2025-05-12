@@ -7,10 +7,9 @@ import {
 	useAppSelector,
 } from "@shared/lib";
 import { useCallback } from "react";
-import type { ViewProps } from "react-native";
-import { Clues } from "../Clues";
+import { Clues, type CluesProps } from "../Clues";
 
-export type ScenarioCluesProps = ViewProps;
+export type ScenarioCluesProps = CluesProps;
 
 export const ScenarioClues = (props: ScenarioCluesProps) => {
 	const dispatch = useAppDispatch();
