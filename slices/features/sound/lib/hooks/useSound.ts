@@ -16,8 +16,9 @@ export const useSound = (id?: SoundId) => {
 			if (!soundEnabled || !enabled || SOUND_DISABLED) {
 				return;
 			}
-			player.seekTo(0);
-			player.play();
+			player.seekTo(0).then(() => {
+				player.play();
+			});
 		},
 		[player, soundEnabled],
 	);
