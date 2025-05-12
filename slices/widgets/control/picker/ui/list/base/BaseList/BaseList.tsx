@@ -76,7 +76,7 @@ export const BaseList = (baseProps: BaseListProps) => {
 			keyExtractor={(item) => item.toString()}
 			snapToOffsets={snapToOffsets}
 			showsVerticalScrollIndicator={false}
-			removeClippedSubviews
+			removeClippedSubviews={false}
 		/>
 	);
 };

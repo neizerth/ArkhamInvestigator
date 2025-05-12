@@ -7,8 +7,9 @@ import { SecondaryControls } from "../SecondaryControls";
 export const TOP_CONTENT_OFFSET = 178;
 
 export const Container: typeof View = styled(View)`
-  gap: 60px;
+  gap: 40px;
   min-height: ${TOP_CONTENT_OFFSET}px;
+  justify-content: flex-end;
 `;
 
 export const TopMenu: typeof DescriptionTopMenu = styled(DescriptionTopMenu)`

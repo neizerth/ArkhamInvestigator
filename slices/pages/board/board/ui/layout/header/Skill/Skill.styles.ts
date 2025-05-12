@@ -79,7 +79,7 @@ export const getSkillValueStyle = ({
 	};
 
 	const container: ViewStyle = {
-		paddingRight: rnd(11 * vw),
+		paddingRight: rnd(10 * vw),
 		paddingBottom: rnd(2.3 * vw),
 		flex: 1,
 		alignItems: "flex-end",

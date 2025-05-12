@@ -114,6 +114,7 @@ export const ExpressionHistory = ({
 				onContentSizeChange={onContentSizeChange}
 				data={regular}
 				renderItem={renderListItem}
+				removeClippedSubviews={false}
 			/>
 		</C.Container>
 	);

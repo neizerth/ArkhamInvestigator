@@ -99,13 +99,21 @@ export const ChaosBagPreview = (props: ChaosBagPreviewProps) => {
 						<C.Hint>{t`Hold to seal`}</C.Hint>
 					)}
 					{data.regular.length > 0 && (
-						<C.List data={data.regular} renderItem={renderTokenRow} />
+						<C.List
+							data={data.regular}
+							renderItem={renderTokenRow}
+							removeClippedSubviews={false}
+						/>
 					)}
 
 					{data.sealed.length > 0 && (
 						<C.Sealed>
 							<C.Title>{t`Sealed Tokens`}</C.Title>
-							<C.List data={data.sealed} renderItem={renderTokenRow} />
+							<C.List
+								data={data.sealed}
+								renderItem={renderTokenRow}
+								removeClippedSubviews={false}
+							/>
 						</C.Sealed>
 					)}
 

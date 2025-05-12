@@ -9,5 +9,7 @@ export const replacePageTo = (href: Href) => () => {
 };
 
 export const goBack = () => () => {
-	router.back();
+	if (router.canGoBack()) {
+		router.back();
+	}
 };

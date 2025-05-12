@@ -47,6 +47,7 @@ export const ChaosTokenList = ({ ...props }: ChaosTokenListProps) => {
 			renderItem={renderItem}
 			onStartReached={scrollToTop}
 			getItemLayout={getItemLayout}
+			removeClippedSubviews={false}
 		/>
 	);
 };

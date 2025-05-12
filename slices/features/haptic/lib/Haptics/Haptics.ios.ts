@@ -1,8 +1,8 @@
-import { fallbackIOSPatterns } from "@features/haptic/config";
 import HapticFeedback, {
 	HapticFeedbackTypes,
 	type HapticOptions,
 } from "react-native-haptic-feedback";
+import { fallbackIOSPatterns } from "../../config";
 export * from "react-native-haptic-feedback";
 
 type HapticType = keyof typeof HapticFeedbackTypes;

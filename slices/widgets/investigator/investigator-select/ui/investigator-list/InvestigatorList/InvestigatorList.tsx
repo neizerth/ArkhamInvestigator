@@ -80,6 +80,7 @@ export const InvestigatorList = ({
 			renderItem={renderItem}
 			getItemLayout={getItemLayout}
 			renderSectionHeader={renderSectionHeader}
+			removeClippedSubviews={false}
 		/>
 	);
 };
