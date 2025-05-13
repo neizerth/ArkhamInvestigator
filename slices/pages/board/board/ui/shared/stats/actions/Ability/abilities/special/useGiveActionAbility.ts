@@ -44,7 +44,7 @@ export const useGiveActionAbility = (ability: InvestigatorAbility) => {
 
 	return usePerInvestigatorAbility({
 		ability,
-		title: t`Give action`,
+		title: t`Give an action`,
 		onChange,
 	});
 };
