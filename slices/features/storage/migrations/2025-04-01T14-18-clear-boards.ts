@@ -1,19 +1,3 @@
-import type { IBoardState } from "@shared/lib";
-import type { PersistedState } from "redux-persist";
+import { clearInvestigatorBoards as v4 } from "./actions";
 
-type State = PersistedState & {
-	board?: IBoardState;
-};
-
-export default function v4(state?: State) {
-	if (!state?.board) {
-		return;
-	}
-	return {
-		...state,
-		board: {
-			...state.board,
-			investigatorBoards: [],
-		},
-	};
-}
+export default v4;

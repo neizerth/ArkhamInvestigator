@@ -42,6 +42,10 @@ export const useValueSet = (props: BaseListProps) => {
 			return;
 		}
 
+		if (currentIndex < 0) {
+			return;
+		}
+
 		ref.current.scrollToIndex({
 			index: currentIndex,
 			animated: false,

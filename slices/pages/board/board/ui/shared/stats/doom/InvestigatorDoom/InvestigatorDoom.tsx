@@ -1,6 +1,6 @@
 import {
 	increaseCurrentStat,
-	selectDoom,
+	selectCurrentStatValue,
 	setCurrentStat,
 	useAppDispatch,
 	useAppSelector,
@@ -15,7 +15,7 @@ const doomData = range(0, 101);
 
 export const InvestigatorDoom = (props: DoomProps) => {
 	const dispatch = useAppDispatch();
-	const value = useAppSelector(selectDoom);
+	const value = useAppSelector(selectCurrentStatValue("doom"));
 	const onChange = useCallback(
 		({ value = 0 }: PickerChangeEvent) => {
 			dispatch(setCurrentStat("doom", value));

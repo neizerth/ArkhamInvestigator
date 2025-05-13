@@ -33,6 +33,9 @@ export const useScrollBack = (props: BaseListProps) => {
 	}, [ref?.current]);
 
 	const scrollToEnd = useCallback(() => {
+		if (lastIndex < 0) {
+			return;
+		}
 		ref?.current?.scrollToIndex({
 			index: lastIndex,
 			animated: false,
