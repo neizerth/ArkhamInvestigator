@@ -25,6 +25,7 @@ export type InvestigatorHeaderProps = ViewProps &
 	};
 
 export const InvestigatorHeader = ({
+	onLayout,
 	style,
 	pressableTitle,
 	onTitlePress,
@@ -37,7 +38,7 @@ export const InvestigatorHeader = ({
 	const skillsSize = getSkillsSize(props);
 
 	return (
-		<C.Container {...props} style={[style, headerStyle]}>
+		<C.Container {...props} onLayout={onLayout} style={[style, headerStyle]}>
 			<C.Title
 				{...props}
 				{...titleSize}

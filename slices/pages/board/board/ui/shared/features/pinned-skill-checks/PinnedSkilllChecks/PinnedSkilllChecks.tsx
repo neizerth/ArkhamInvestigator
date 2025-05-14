@@ -34,7 +34,7 @@ export const PinnedSkilllChecks = (props: PinnedSkilllChecksProps) => {
 	}
 
 	const areaStyle = {
-		left: show ? 0 : -width + 80,
+		right: show ? 0 : -width + 80,
 	};
 
 	const onAreaPress = tapToHide ? toggleShow : always(false);
@@ -63,7 +63,7 @@ export const PinnedSkilllChecks = (props: PinnedSkilllChecksProps) => {
 				</C.Content>
 
 				{showToggle && (
-					<C.Toggle onPress={toggleShow}>
+					<C.Toggle onPress={toggleShow} show={show}>
 						<C.ToggleIcon show={show} />
 					</C.Toggle>
 				)}

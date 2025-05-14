@@ -2,6 +2,7 @@ import { setShowRevealChaosTokenModal } from "@features/chaos-bag";
 import { routes } from "@shared/config";
 import {
 	redo,
+	selectAlwaysShowGameText,
 	selectCurrentBoardProp,
 	selectInvestigatorBoards,
 	setValueFromHistoryIndex,
@@ -10,9 +11,8 @@ import {
 	useAppSelector,
 	usePage,
 } from "@shared/lib";
-import { useCallback, useContext } from "react";
+import { useCallback } from "react";
 import type { ViewProps } from "react-native";
-import { PortraitLayoutContext } from "../../../../../../config";
 import { InvestigatorSelect } from "../../../../../shared";
 import { Sidebar } from "../Sidebar";
 import * as C from "./LeftSidebar.components";
@@ -25,9 +25,10 @@ export const LeftSidebar = ({ ...props }: LeftSidebarProps) => {
 	const history = useAppSelector(selectCurrentBoardProp("history"));
 	const historyIndex = useAppSelector(selectCurrentBoardProp("historyIndex"));
 
+	const showText = useAppSelector(selectAlwaysShowGameText);
+
 	const goToPage = usePage();
 
-	const { height } = useContext(PortraitLayoutContext);
 	const historyLength = history.length;
 
 	const onUndo = useCallback(() => {
@@ -58,27 +59,36 @@ export const LeftSidebar = ({ ...props }: LeftSidebarProps) => {
 
 	return (
 		<Sidebar {...props}>
-			<C.Container single={single} unit={height}>
-				<C.Buttons single={single} unit={height}>
-					<C.Button
-						onPress={onRedo}
-						onLongPress={returnToNow}
-						disabled={!canRedo}
-						icon="redo"
-					/>
-					<C.Button
-						onPress={onUndo}
-						onLongPress={beginHistory}
-						disabled={!canUndo}
-						icon="undo"
-					/>
-					<C.Button
-						icon="chaos-bag-thin"
-						onPress={goToPage(routes.chaosBagPreview)}
-						onLongPress={revealToken}
-					/>
+			<C.Container single={single}>
+				<C.Buttons single={single}>
+					<C.HistoryGroup inline={showText}>
+						<C.Button
+							onPress={onRedo}
+							onLongPress={returnToNow}
+							disabled={!canRedo}
+							icon="redo"
+						/>
+						<C.Button
+							onPress={onUndo}
+							onLongPress={beginHistory}
+							disabled={!canUndo}
+							icon="undo"
+						/>
+					</C.HistoryGroup>
+
+					<C.Group>
+						<C.Button
+							icon="chaos-bag-thin"
+							onPress={goToPage(routes.chaosBagPreview)}
+							onLongPress={revealToken}
+						/>
+					</C.Group>
 				</C.Buttons>
-				{!single && <InvestigatorSelect />}
+				{!single && (
+					<C.Group>
+						<InvestigatorSelect />
+					</C.Group>
+				)}
 			</C.Container>
 		</Sidebar>
 	);

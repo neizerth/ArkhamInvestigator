@@ -42,6 +42,12 @@ export const Content: typeof View = styled(View)`
   gap: ${size.gap.large}px;
 `;
 
+export const Rule: typeof View = styled(View)`
+	flex: 1;
+	height: 1px;
+	background-color: ${color.dark30};
+`;
+
 export const Row: typeof BaseRow = styled(BaseRow)`
   flex-direction: row;
   align-items: center;

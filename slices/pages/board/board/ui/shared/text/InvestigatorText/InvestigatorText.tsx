@@ -24,7 +24,7 @@ export const InvestigatorText = (props: InvestigatorTextProps) => {
 			{...props}
 			value={text}
 			componentStyles={componentStyles}
-			style={[props.style, styleSheet.style]}
+			style={[styleSheet.style, props.style]}
 		/>
 	);
 };

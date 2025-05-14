@@ -9,3 +9,5 @@ export const snakeCase = (text: string) =>
 
 export const hyphens2camelCase = (text: string) =>
 	text.replace(/-([a-z])/g, (g) => g[1].toUpperCase());
+
+export const getBreaksCount = (text: string) => text.split("\n").length;

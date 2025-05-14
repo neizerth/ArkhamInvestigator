@@ -13,6 +13,8 @@ import * as C from "./InvestigatorDoom.components";
 
 const doomData = range(0, 101);
 
+export type { DoomProps as InvestigatorDoomProps };
+
 export const InvestigatorDoom = (props: DoomProps) => {
 	const dispatch = useAppDispatch();
 	const value = useAppSelector(selectCurrentStatValue("doom"));

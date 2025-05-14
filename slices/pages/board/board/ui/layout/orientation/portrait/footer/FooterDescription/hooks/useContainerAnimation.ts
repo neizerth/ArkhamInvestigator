@@ -1,16 +1,13 @@
 import { statusBarHeight } from "@shared/config";
 import {
-	delay,
 	selectShowDescription,
 	useAppSelector,
 	useBooleanAnimation,
 } from "@shared/lib";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Dimensions, useWindowDimensions } from "react-native";
-import {
-	PORTRAIT_DESCRIPTION_HEIGHT,
-	descriptionSize,
-} from "../../../../../../config";
+import { descriptionSize } from "../../../../../../../config";
+import { useDescriptionHeight } from "../../../../../../../lib";
 
 const screen = Dimensions.get("screen");
 
@@ -21,6 +18,7 @@ type Options = {
 const DELAY_OUT = 300;
 
 export const useContainerAnimation = ({ offsetTop = 0 }: Options) => {
+	const descriptionHeight = useDescriptionHeight();
 	const showDescription = useAppSelector(selectShowDescription);
 	const window = useWindowDimensions();
 
@@ -33,11 +31,14 @@ export const useContainerAnimation = ({ offsetTop = 0 }: Options) => {
 
 	const [zIndex, setZIndex] = useState(-1);
 
+	const fadeTimeout = useRef<NodeJS.Timeout>();
+
 	useEffect(() => {
+		clearTimeout(fadeTimeout.current);
 		if (!showDescription) {
-			delay(DELAY_OUT).then(() => {
+			fadeTimeout.current = setTimeout(() => {
 				setZIndex(-1);
-			});
+			}, DELAY_OUT);
 			return;
 		}
 		setZIndex(5);
@@ -47,8 +48,7 @@ export const useContainerAnimation = ({ offsetTop = 0 }: Options) => {
 		zIndex,
 	};
 
-	const minValue =
-		screen.height - PORTRAIT_DESCRIPTION_HEIGHT - offsetTop - systemHeight;
+	const minValue = screen.height - descriptionHeight - offsetTop - systemHeight;
 
 	const animatedStyle = useBooleanAnimation({
 		enabled: showDescription,

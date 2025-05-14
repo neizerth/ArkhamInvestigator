@@ -1,34 +1,21 @@
-import type { RowProps } from "@shared/ui";
-import { useContext } from "react";
-import { LayoutContext, PortraitLayoutContext } from "../../../../../config";
+import type { ViewProps } from "react-native";
 import * as C from "./PortraitLayout.components";
 
-export type PortraitLayoutProps = RowProps & {
-	top: number;
-};
+export type PortraitLayoutProps = ViewProps;
 
-export const PortraitLayout = ({ top, ...props }: PortraitLayoutProps) => {
-	const { view } = useContext(LayoutContext);
-	const height = view.height - top;
-
-	const contextValue = {
-		height,
-	};
-
+export const PortraitLayout = (props: PortraitLayoutProps) => {
 	return (
-		<PortraitLayoutContext.Provider value={contextValue}>
-			<C.Container {...props}>
-				<C.Header />
-				<C.SkillChecks />
-				<C.Main>
-					<C.LeftSidebar />
-					<C.Area />
-					<C.RightSidebar />
-				</C.Main>
-				<C.Description />
-				<C.Footer />
-				<C.Overlay />
-			</C.Container>
-		</PortraitLayoutContext.Provider>
+		<C.Container {...props}>
+			<C.Header />
+			<C.SkillChecks />
+			<C.Main>
+				<C.LeftSidebar />
+				<C.Area />
+				<C.RightSidebar />
+			</C.Main>
+			<C.Footer />
+			<C.Description />
+			<C.Overlay />
+		</C.Container>
 	);
 };

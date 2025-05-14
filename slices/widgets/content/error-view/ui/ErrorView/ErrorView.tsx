@@ -11,7 +11,7 @@ export const ErrorView = ({ error }: ErrorViewProps) => {
 	return (
 		<C.Container>
 			<Title>{t`Error`}</Title>
-			<C.Message>{error.message}</C.Message>
+			<C.Content>{error.message}</C.Content>
 		</C.Container>
 	);
 };

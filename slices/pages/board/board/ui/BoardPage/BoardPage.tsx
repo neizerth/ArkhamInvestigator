@@ -1,4 +1,3 @@
-import { size, statusBarHeight } from "@shared/config";
 import { useLayoutSize, useScreenOrientation } from "@shared/lib";
 import { useWindowDimensions } from "react-native";
 import { LayoutContext } from "../../config";
@@ -15,8 +14,6 @@ export const BoardPage = () => {
 
 	const layout = getHeaderLayout(view);
 
-	const areaTop = layout.height + statusBarHeight + size.gap.large;
-
 	const contextValue = {
 		view,
 		layout,
@@ -26,7 +23,7 @@ export const BoardPage = () => {
 		<LayoutContext.Provider value={contextValue}>
 			<C.Container onLayout={onLayout}>
 				<C.Background />
-				{orientation.type === "portrait" && <C.PortraitLayout top={areaTop} />}
+				{orientation.type === "portrait" && <C.PortraitLayout />}
 				<C.FactionModal />
 			</C.Container>
 		</LayoutContext.Provider>

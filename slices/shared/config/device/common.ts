@@ -1,12 +1,18 @@
 import * as ScreenOrientation from "expo-screen-orientation";
+
 import { PixelRatio, Platform } from "react-native";
 import { capitalize } from "../../lib/util/string";
+
+import { getNavigationBarHeight } from "react-native-android-navbar-height";
 import type {
 	BreakpointSize,
 	DeviceBreakpointType,
 	DeviceBreakpoints,
 	DeviceType,
 } from "../../model";
+
+export const navbarHeight =
+	Platform.OS === "android" ? getNavigationBarHeight() : 0;
 
 export const IS_WEB = Platform.OS === "web";
 

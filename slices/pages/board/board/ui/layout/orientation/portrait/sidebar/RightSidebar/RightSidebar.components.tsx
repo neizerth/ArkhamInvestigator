@@ -1,22 +1,24 @@
-import type { PropsWithUnit } from "@shared/model";
 import type { FC } from "react";
-import { View, type ViewProps } from "react-native";
+import { Dimensions, View, type ViewProps } from "react-native";
 import styled, { css } from "styled-components/native";
 import { assetsSize } from "../../../../../../config";
 import {
 	InvestigatorClues,
+	InvestigatorDoom,
+	type InvestigatorDoomProps,
 	InvestigatorResources,
 } from "../../../../../shared";
+
+const { height } = Dimensions.get("screen");
 
 type PropsWithCompact = {
 	compact?: boolean;
 	inline?: boolean;
 };
 
-type GetLayoutStyleOptions = PropsWithUnit & PropsWithCompact;
+type GetLayoutStyleOptions = PropsWithCompact;
 
 const getRowGap = ({
-	unit,
 	compact = false,
 	inline = false,
 }: GetLayoutStyleOptions) => {
@@ -24,21 +26,10 @@ const getRowGap = ({
 		return 15;
 	}
 
-	return unit < 500 ? 20 : compact ? 30 : 50;
+	return height < 640 ? 20 : compact ? 30 : 50;
 };
 
 const getLayoutStyle = (options: GetLayoutStyleOptions) => {
-	const { unit } = options;
-
-	if (unit <= 350) {
-		return css`
-      flex-direction: row;
-      align-items: flex-end;
-      justify-content: center;
-      gap: 20px;
-    `;
-	}
-
 	const gap = getRowGap(options);
 
 	return css`
@@ -56,12 +47,21 @@ export const Container: FC<ViewProps & GetLayoutStyleOptions> = styled(View)`
 
 type SideStatGroup = ViewProps & GetLayoutStyleOptions;
 
-export const SideStatGroup: FC<SideStatGroup> = styled(View)`
+export const Group: FC<SideStatGroup> = styled(View)`
   ${(options: SideStatGroup) => css`
     gap: ${getRowGap(options)}px;
     flex-direction: ${options.inline ? "row" : "column"};
-    align-items: center;
+    align-items: flex-end;
+		justify-content: flex-end;
   `}
+`;
+
+export const MainGroup: FC<SideStatGroup> = styled(Group)`
+  align-items: center;
+`;
+
+export const SideGroup: FC<SideStatGroup> = styled(Group)`
+  align-items: center;
 `;
 
 export const Clues: typeof InvestigatorClues = styled(InvestigatorClues)`
@@ -72,4 +72,15 @@ export const Resources: typeof InvestigatorResources = styled(
 	InvestigatorResources,
 )`
   
+`;
+
+type DoomProps = InvestigatorDoomProps & {
+	inline?: boolean;
+};
+export const Doom: FC<DoomProps> = styled(InvestigatorDoom)`
+	${({ inline }: DoomProps) =>
+		inline &&
+		css`
+		margin-top: 30px;
+	`}
 `;

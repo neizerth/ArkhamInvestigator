@@ -24,6 +24,7 @@ export const getFactionStyle = (faction: Faction) => {
       padding-bottom: ${offsetY + 4}%;
     `,
 		rogue: css`
+      padding-top: 8%;
       padding-left: 6%;
       padding-right: 6%;
       padding-bottom: ${offsetY + 2}%;
@@ -34,6 +35,7 @@ export const getFactionStyle = (faction: Faction) => {
       padding-bottom: ${offsetY + 2}%;
     `,
 		seeker: css`
+      padding-top: 8%;
       padding-left: 9%;
       padding-right: 7%;
       padding-bottom: ${offsetY + 2}%;

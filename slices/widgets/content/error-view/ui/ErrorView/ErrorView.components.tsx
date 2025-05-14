@@ -14,6 +14,6 @@ export const Name: typeof Text = styled(Text)`
   
 `;
 
-export const Message: typeof Text = styled(Text)`
+export const Content: typeof Text = styled(Text)`
   
 `;

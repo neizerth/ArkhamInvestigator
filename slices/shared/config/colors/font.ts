@@ -1,6 +1,3 @@
-import { PixelRatio } from "react-native";
-
-const getSize = PixelRatio.getPixelSizeForLayoutSize;
 const scale = 1.25;
 
 export const font = {

@@ -9,6 +9,7 @@ import {
 	useAppTranslation,
 } from "@features/i18n";
 import { sendNotification } from "@features/notifications";
+import { CAN_ALWAYS_SHOW_GAME_TEXT } from "@shared/config";
 import * as S from "@shared/lib";
 import { useCallback } from "react";
 import * as C from "./SettingsPage.components";
@@ -120,6 +121,18 @@ export const SettingsPage = () => {
 							actionCreator={S.setShowInvestigatorDoom}
 						/>
 					</C.Row>
+					{CAN_ALWAYS_SHOW_GAME_TEXT && (
+						<>
+							<C.Rule />
+							<C.Row>
+								<C.Checkbox
+									label="Show Game Text"
+									selector={S.selectAlwaysShowGameText}
+									actionCreator={S.setAlwaysShowGameText}
+								/>
+							</C.Row>
+						</>
+					)}
 				</C.Section>
 				<C.Section title={t`Scenario`}>
 					<C.Row>

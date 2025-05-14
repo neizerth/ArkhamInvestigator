@@ -14,13 +14,15 @@ import type { ViewProps } from "react-native";
 import { LayoutContext } from "../../../../../../config";
 import { TOP_CONTENT_OFFSET } from "../top";
 import * as C from "./FooterDescription.components";
-import { useContainerAnimation } from "./useContainerAnimation";
+import { useGameText } from "./hooks";
+import { useContainerAnimation } from "./hooks/useContainerAnimation";
 
 export type FooterDescriptionProps = ViewProps;
 export const FooterDescription = ({ ...props }: FooterDescriptionProps) => {
-	const route = useRoute();
 	const dispatch = useAppDispatch();
+	const route = useRoute();
 	const showDescription = useAppSelector(selectShowDescription);
+	const gameText = useGameText();
 
 	const { view } = useContext(LayoutContext);
 	const investigator = useAppSelector(selectCurrentBoardProp("investigator"));
@@ -38,7 +40,7 @@ export const FooterDescription = ({ ...props }: FooterDescriptionProps) => {
 	useBackButton(onBack);
 
 	const descriptionStyle = useFadeAnimation({
-		show: showDescription,
+		show: showDescription || gameText.show,
 	});
 
 	const containerStyle = useContainerAnimation({
@@ -55,6 +57,11 @@ export const FooterDescription = ({ ...props }: FooterDescriptionProps) => {
 		return null;
 	}
 
+	const showFlavor = investigator.flavor && (!gameText.show || showDescription);
+	const showTraits = !gameText.show || showDescription;
+
+	const textUnit = gameText.showSmallText ? vw * 0.9 : vw;
+
 	return (
 		<C.Container {...props} style={[props.style, containerStyle]}>
 			<C.Content>
@@ -68,10 +75,13 @@ export const FooterDescription = ({ ...props }: FooterDescriptionProps) => {
 				<C.Background faction={faction} width={view.width}>
 					<C.DescriptionContent>
 						<C.TextContent>
-							<C.Traits unit={vw} investigator={investigator} />
-							<C.Description style={descriptionStyle}>
-								<C.Text investigator={investigator} unit={vw} />
-								{investigator.flavor && (
+							{showTraits && <C.Traits unit={vw} investigator={investigator} />}
+							<C.Description
+								style={descriptionStyle}
+								onLayout={gameText.onLayout}
+							>
+								<C.Text investigator={investigator} unit={textUnit} />
+								{showFlavor && (
 									<C.Flavor unit={vw} investigator={investigator} />
 								)}
 							</C.Description>

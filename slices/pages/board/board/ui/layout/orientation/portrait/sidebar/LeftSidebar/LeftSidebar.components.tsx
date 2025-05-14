@@ -1,60 +1,60 @@
 import { IconButton, type TouchableOpacityProps } from "@features/haptic";
 import { color } from "@shared/config";
-import type { PropsWithUnit } from "@shared/model";
 import type { FC } from "react";
-import { Platform, View, type ViewProps } from "react-native";
+import { Dimensions, Platform, View, type ViewProps } from "react-native";
 import styled, { css } from "styled-components/native";
 import { assetsSize } from "../../../../../../config";
 
 const ios = Platform.OS === "ios";
 
-type ContainerProps = ViewProps &
-	PropsWithUnit & {
-		single: boolean;
-	};
+const screen = Dimensions.get("screen");
 
-const isHistoryInColumn = (unit: number) => unit > 340;
+type ContainerProps = ViewProps & {
+	single: boolean;
+};
 
 export const Container: FC<ContainerProps> = styled(View)`
   gap: 15px;
   justify-content: flex-end;
-  align-items: center;
+  align-items: flex-start;
   min-width: ${assetsSize.main}px;
-  ${({ unit }: ContainerProps) =>
-		!isHistoryInColumn(unit) &&
-		css`
-    align-items: flex-start;
-    padding-bottom: 50px;
-  `}
   ${({ single }: ContainerProps) =>
 		single &&
 		css`
-    align-items: center;
     padding-bottom: 5px;
   `}
 `;
 
-type HistoryProps = ContainerProps & PropsWithUnit;
+export const Group: typeof View = styled(View)`
+  gap: 15px;
+  align-items: flex-start;
+  padding-left: 10px;
+`;
 
-export const Buttons: FC<HistoryProps> = styled(View)`
+type HistoryGroupProps = ViewProps & {
+	inline?: boolean;
+};
+
+export const HistoryGroup: FC<HistoryGroupProps> = styled(Group)`
+  gap: 15px;
+  align-items: flex-start;
+  padding-left: 10px;
+  ${({ inline }: HistoryGroupProps) =>
+		screen.height < 700 &&
+		inline &&
+		css`
+    flex-direction: row;
+  `}
+`;
+
+export const Buttons: FC<ContainerProps> = styled(View)`
   gap: 10px;
-  flex: 1;
-  align-items: center;
   justify-content: flex-end;
-  ${({ single }: HistoryProps) =>
+  ${({ single }: ContainerProps) =>
 		single &&
 		css`
       gap: 20px;
     `}
-  ${({ single, unit }: HistoryProps) => {
-		if (single || isHistoryInColumn(unit)) {
-			return;
-		}
-
-		return css`
-      flex-direction: row;
-    `;
-	}}
 `;
 
 export const Button: typeof IconButton = styled(IconButton).attrs({
@@ -67,7 +67,7 @@ export const Button: typeof IconButton = styled(IconButton).attrs({
 		textShadowRadius: 5,
 	},
 })`
-  width: 48px;
+  width: 60px;
   height: 48px;
   justify-content: center;
   align-items: center;

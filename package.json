@@ -64,6 +64,7 @@
     "react-dom": "18.3.1",
     "react-i18next": "^15.4.1",
     "react-native": "0.76.9",
+    "react-native-android-navbar-height": "^0.3.3",
     "react-native-element-dropdown": "^2.12.4",
     "react-native-error-boundary": "^2.0.0",
     "react-native-gesture-handler": "~2.20.2",

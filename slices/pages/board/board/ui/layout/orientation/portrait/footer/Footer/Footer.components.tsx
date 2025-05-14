@@ -2,11 +2,11 @@ import { size } from "@shared/config";
 import { Row as BaseRow } from "@shared/ui";
 import { View } from "react-native";
 import styled from "styled-components/native";
-import { PORTRAIT_DESCRIPTION_HEIGHT } from "../../../../../../config";
+import { DEFAULT_PORTRAIT_DESCRIPTION_HEIGHT } from "../../../../../../config";
 
 export const Container: typeof View = styled(View)`
   padding-top: 0px;
-  padding-bottom: ${PORTRAIT_DESCRIPTION_HEIGHT + 5}px;
+  padding-bottom: ${DEFAULT_PORTRAIT_DESCRIPTION_HEIGHT + 5}px;
 `;
 
 export const Row: typeof BaseRow = styled(BaseRow)`

@@ -16,10 +16,3 @@ export const LayoutContext = createContext<LayoutContenxt>({
 		height: 0,
 	},
 });
-
-type PortraitLayoutContextData = {
-	height: number;
-};
-export const PortraitLayoutContext = createContext<PortraitLayoutContextData>({
-	height: 0,
-});

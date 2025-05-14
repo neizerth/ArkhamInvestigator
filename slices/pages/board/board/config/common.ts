@@ -19,8 +19,8 @@ export const servicePadding: Record<HeaderLayoutType, RectPosition> = {
 	},
 };
 
-export const PORTRAIT_DESCRIPTION_HEIGHT = 70;
+export const DEFAULT_PORTRAIT_DESCRIPTION_HEIGHT = 70;
 
 export const PORTRAIT_DESCRIPTION_OFFSET = 40;
 
-export const SIDEBAR_BOTTOM = 200;
+export const PINNED_CHECKS_MIN_HEIGHT = 60;
