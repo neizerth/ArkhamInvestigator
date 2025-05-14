@@ -11,7 +11,7 @@ import type {
 	DeviceType,
 } from "../../model";
 
-export const navbarHeight =
+export const navBarHeight =
 	Platform.OS === "android" ? getNavigationBarHeight() : 0;
 
 export const IS_WEB = Platform.OS === "web";
