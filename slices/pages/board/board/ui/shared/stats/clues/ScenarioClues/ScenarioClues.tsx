@@ -23,11 +23,7 @@ export const ScenarioClues = (props: ScenarioCluesProps) => {
 	);
 
 	const onPress = useCallback(() => {
-		if (value <= 0) {
-			return;
-		}
-
-		dispatch(setClues(value - 1));
+		dispatch(setClues(value + 1));
 	}, [dispatch, value]);
 
 	const onLongPress = useCallback(() => {

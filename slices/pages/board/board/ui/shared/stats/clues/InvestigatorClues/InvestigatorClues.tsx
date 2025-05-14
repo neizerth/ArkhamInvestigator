@@ -1,5 +1,5 @@
 import {
-	decreaseCurrentStat,
+	increaseCurrentStat,
 	selectCurrentStatValue,
 	setCurrentStat,
 	useAppDispatch,
@@ -26,7 +26,7 @@ export const InvestigatorClues = (props: InvestigatorCluesProps) => {
 	}, [dispatch]);
 
 	const onPress = useCallback(() => {
-		dispatch(decreaseCurrentStat("clues"));
+		dispatch(increaseCurrentStat("clues"));
 	}, [dispatch]);
 
 	return (
