@@ -19,6 +19,7 @@ export type IBoardState = {
 	showScenarioClues: boolean;
 	showScenarioResources: boolean;
 	showInvestigatorDoom: boolean;
+	tapToHidePins: boolean;
 
 	doom: number;
 	clues: number;
@@ -41,6 +42,7 @@ const initialState: IBoardState = {
 	showScenarioClues: true,
 	showScenarioResources: false,
 	showInvestigatorDoom: false,
+	tapToHidePins: false,
 	doom: 0,
 	clues: 0,
 	resources: 0,
@@ -72,6 +74,7 @@ export const {
 	setShowScenarioClues,
 	setShowScenarioResources,
 	setShowInvestigatorDoom,
+	setTapToHidePins,
 } = board.actions;
 
 export const {
@@ -93,6 +96,7 @@ export const {
 	selectShowScenarioClues,
 	selectShowScenarioResources,
 	selectShowInvestigatorDoom,
+	selectTapToHidePins,
 } = board.selectors;
 
 export default board.reducer;

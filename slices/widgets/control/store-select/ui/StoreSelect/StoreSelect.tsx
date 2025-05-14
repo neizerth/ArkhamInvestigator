@@ -9,10 +9,15 @@ import { useCallback } from "react";
 import type { ViewStyle } from "react-native";
 import * as C from "./StoreSelect.components";
 
+type Item<T> = SelectItem<T> & {
+	hint?: string;
+};
+
 export type StoreSelectProps<T> = Omit<
 	HapticSelectProps<T>,
-	"onChange" | "value"
+	"onChange" | "value" | "data"
 > & {
+	data: Item<T>[];
 	contentContainerStyle?: ViewStyle;
 	selector: Selector<RootState, T>;
 	actionCreator: ActionCreatorWithPayload<T> | ((value: T) => AppThunk);
@@ -47,11 +52,15 @@ export function StoreSelect<T>({
 	);
 
 	const label = translate ? t(labelProp) : labelProp;
+	const hint = item?.hint && t(item.hint);
 
 	return (
 		<C.Container style={contentContainerStyle}>
-			<C.Label>{label}</C.Label>
-			<C.Select {...props} data={items} value={item} onChange={onChange} />
+			<C.Group>
+				<C.Label>{label}</C.Label>
+				<C.Select {...props} data={items} value={item} onChange={onChange} />
+			</C.Group>
+			{hint && <C.Hint>{hint}</C.Hint>}
 		</C.Container>
 	);
 }

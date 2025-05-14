@@ -1,13 +1,17 @@
 import { Alegreya } from "@assets/fonts";
 import { HapticSelect } from "@features/haptic";
-import { font, size } from "@shared/config";
-import { Text } from "@shared/ui";
+import { color, font, size } from "@shared/config";
+import { Text, TextView } from "@shared/ui";
 import { View } from "react-native";
 import styled from "styled-components/native";
 
 export const Container: typeof View = styled(View)`
   position: relative;
   border-radius: ${size.borderRadius.default}px;
+  gap: ${size.gap.default}px;
+`;
+
+export const Group: typeof View = styled(View)`
 `;
 
 export const Select: typeof HapticSelect = styled(HapticSelect).attrs({
@@ -32,4 +36,9 @@ export const Label: typeof Text = styled(Text)`
   left: ${size.gap.small + 1}px;
   top: 8px;
   font-size: ${font.size.small}px;
+`;
+
+export const Hint: typeof TextView = styled(TextView)`
+  font-family: ${Alegreya.italic};
+  color: ${color.gray20};
 `;

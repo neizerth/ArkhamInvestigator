@@ -57,13 +57,19 @@
 
 	"settings.sound": "Звук (Beta)",
 
+	"tapOnPin.default": "Нажмите на расчёте, чтобы его убрать",
+	"tapOnPin.advanced": "Нажмите на расчёте, чтобы скрыть блок. Двойное нажатие убирает расчёт",
+
+	"Advanced": "Продвинутый режим",
+	"Pinned calculations": "Закреплённые расчёты",
+
 	"Chaos bag loading animation": "Анимация мешка хаоса",
 
 	"Give an action": "Дать действие",
 	"Not selected": "Не выбрано",
 	"Add wild": "Добавить ? значение",
 	"Keep awake": "Предотвратить спящий режим",
-	"Track Hand Size": "Размер руки",
+	"Hand Size": "Размер руки",
 	"Doom": "Безысходность",
 	"General": "Основное",
 	"Volume": "Громкость",
@@ -110,5 +116,6 @@
 	"Scroll Deceleration": "Замедление прокрутки",
 	"Inertial Scrolling": "Инерция при прокрутке",
 
-	"Behavior": "Поведение"
+	"Behavior": "Поведение",
+	"Game settings": "Игра"
 }

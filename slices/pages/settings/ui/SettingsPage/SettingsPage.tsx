@@ -16,6 +16,7 @@ import {
 	hapticValues,
 	healthSanityModeValues,
 	languageValues,
+	tapOnPinValues,
 	turnEndValues,
 } from "./values";
 
@@ -64,7 +65,7 @@ export const SettingsPage = () => {
 						/>
 					</C.Row>
 				</C.Section>
-				<C.Section title={t`Investigator`}>
+				<C.Section title={t`Game settings`}>
 					<C.Row>
 						<C.Select
 							label="Turn end"
@@ -82,10 +83,11 @@ export const SettingsPage = () => {
 						/>
 					</C.Row>
 					<C.Row>
-						<C.Checkbox
-							label="Track experience points"
-							selector={S.selectTrackXP}
-							actionCreator={S.setTrackXP}
+						<C.Select
+							label="Pinned calculations"
+							selector={S.selectTapToHidePins}
+							actionCreator={S.setTapToHidePins}
+							data={tapOnPinValues}
 						/>
 					</C.Row>
 					<C.Row>
@@ -97,7 +99,16 @@ export const SettingsPage = () => {
 					</C.Row>
 					<C.Row>
 						<C.Checkbox
-							label="Track Hand Size"
+							label="Track experience points"
+							selector={S.selectTrackXP}
+							actionCreator={S.setTrackXP}
+						/>
+					</C.Row>
+				</C.Section>
+				<C.Section title={t`Investigator`}>
+					<C.Row>
+						<C.Checkbox
+							label="Hand Size"
 							selector={S.selectTrackHandSize}
 							actionCreator={S.setTrackHandSize}
 						/>

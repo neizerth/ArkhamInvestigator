@@ -1,4 +1,4 @@
 export * from "./investigator-select";
 export * from "./faction-select";
 export * from "./AdditionalInfoArea";
-export * from "./PinnedSkilllChecks";
+export * from "./pinned-skill-checks";

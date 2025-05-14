@@ -36,6 +36,10 @@ export const color = {
 	light20: "#F5F0E1",
 	light30: "#FFFBF2",
 
+	gray10: "#B0B4B1",
+	gray20: "#9AA0A0",
+	gray30: "#7E8588",
+
 	dark10: "#656C6F",
 	dark15: "#4F5A60",
 	dark20: "#475259",

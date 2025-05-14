@@ -13,6 +13,19 @@ export const healthSanityModeValues = [
 	},
 ];
 
+export const tapOnPinValues = [
+	{
+		label: "Default",
+		value: false,
+		hint: "tapOnPin.default",
+	},
+	{
+		label: "Advanced",
+		value: true,
+		hint: "tapOnPin.advanced",
+	},
+];
+
 export const turnEndValues = [
 	{
 		label: "No main & additional actions",

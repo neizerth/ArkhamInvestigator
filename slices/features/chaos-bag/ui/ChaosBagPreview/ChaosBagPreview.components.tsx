@@ -56,6 +56,7 @@ export const Title: typeof Text = styled(Text)`
 
 export const Hint: typeof TextView = styled(TextView)`
   text-align: center;
+  margin-bottom: ${size.gap.small}px;
 `;
 
 export const RevealButton: typeof Button = styled(Button).attrs({
