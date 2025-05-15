@@ -33,7 +33,7 @@ module.exports = {
 				backgroundColor: "#000",
 			},
 			package: packageId,
-			versionCode: 268,
+			versionCode: 269,
 		},
 		web: {
 			bundler: "metro",
