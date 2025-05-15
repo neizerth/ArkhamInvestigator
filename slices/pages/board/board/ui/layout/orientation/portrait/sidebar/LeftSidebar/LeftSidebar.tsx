@@ -3,8 +3,8 @@ import { routes } from "@shared/config";
 import {
 	redo,
 	selectAlwaysShowGameText,
+	selectBoardsCount,
 	selectCurrentBoardProp,
-	selectInvestigatorBoards,
 	setValueFromHistoryIndex,
 	undo,
 	useAppDispatch,
@@ -12,7 +12,7 @@ import {
 	usePage,
 } from "@shared/lib";
 import { useCallback } from "react";
-import type { ViewProps } from "react-native";
+import { type ViewProps, useWindowDimensions } from "react-native";
 import { InvestigatorSelect } from "../../../../../shared";
 import { Sidebar } from "../Sidebar";
 import * as C from "./LeftSidebar.components";
@@ -21,7 +21,8 @@ export type LeftSidebarProps = ViewProps;
 
 export const LeftSidebar = ({ ...props }: LeftSidebarProps) => {
 	const dispatch = useAppDispatch();
-	const boards = useAppSelector(selectInvestigatorBoards);
+	const window = useWindowDimensions();
+	const count = useAppSelector(selectBoardsCount);
 	const history = useAppSelector(selectCurrentBoardProp("history"));
 	const historyIndex = useAppSelector(selectCurrentBoardProp("historyIndex"));
 
@@ -51,17 +52,19 @@ export const LeftSidebar = ({ ...props }: LeftSidebarProps) => {
 		dispatch(setShowRevealChaosTokenModal(true));
 	}, [dispatch]);
 
-	const single = boards.length === 1;
+	const single = count === 1;
 
 	const historyEnabled = historyLength > 0;
 	const canUndo = historyEnabled && historyIndex !== -1;
 	const canRedo = historyEnabled && historyIndex < historyLength - 1;
 
+	const compactHistory = showText && !single && window.height < 800;
+
 	return (
 		<Sidebar {...props}>
 			<C.Container single={single}>
 				<C.Buttons single={single}>
-					<C.HistoryGroup inline={showText}>
+					<C.HistoryGroup compact={compactHistory}>
 						<C.Button
 							onPress={onRedo}
 							onLongPress={returnToNow}

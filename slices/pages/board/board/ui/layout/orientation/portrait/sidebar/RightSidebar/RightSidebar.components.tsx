@@ -9,7 +9,7 @@ import {
 	InvestigatorResources,
 } from "../../../../../shared";
 
-const { height } = Dimensions.get("screen");
+const screen = Dimensions.get("screen");
 
 type PropsWithCompact = {
 	compact?: boolean;
@@ -26,7 +26,7 @@ const getRowGap = ({
 		return 15;
 	}
 
-	return height < 640 ? 20 : compact ? 30 : 50;
+	return screen.height < 640 ? 20 : compact ? 40 : 50;
 };
 
 const getLayoutStyle = (options: GetLayoutStyleOptions) => {

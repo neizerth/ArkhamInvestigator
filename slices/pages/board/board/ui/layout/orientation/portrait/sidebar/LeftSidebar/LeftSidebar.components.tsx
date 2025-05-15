@@ -32,16 +32,15 @@ export const Group: typeof View = styled(View)`
 `;
 
 type HistoryGroupProps = ViewProps & {
-	inline?: boolean;
+	compact?: boolean;
 };
 
 export const HistoryGroup: FC<HistoryGroupProps> = styled(Group)`
   gap: 15px;
   align-items: flex-start;
   padding-left: 10px;
-  ${({ inline }: HistoryGroupProps) =>
-		screen.height < 700 &&
-		inline &&
+  ${({ compact }: HistoryGroupProps) =>
+		compact &&
 		css`
     flex-direction: row;
   `}

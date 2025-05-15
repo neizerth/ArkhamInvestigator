@@ -1,4 +1,7 @@
-import { setShowRevealChaosTokenModal } from "@features/chaos-bag";
+import {
+	selectChaosBagLoadingAnimation,
+	setShowRevealChaosTokenModal,
+} from "@features/chaos-bag";
 import { selectCurrentLanguage } from "@features/i18n";
 import { useSkillItemChaosTokenRevealModal } from "@features/skill-check";
 import {
@@ -9,11 +12,18 @@ import {
 	useAppSelector,
 } from "@shared/lib";
 import type { SkillCheckHistoryItem } from "@shared/model";
-import { useCallback } from "react";
+import { always } from "ramda";
+import { useCallback, useMemo } from "react";
 import type { ViewProps } from "react-native";
-import { Gesture, GestureDetector } from "react-native-gesture-handler";
+import {
+	Directions,
+	Gesture,
+	GestureDetector,
+} from "react-native-gesture-handler";
 import * as C from "./PinnedSkillCheckItem.components";
 import { getExpressionDisplayStyle } from "./PinnedSkilllCheckItem.styles";
+
+const emptyCallback = always(false);
 
 export type PinnedSkillCheckItemProps = ViewProps & {
 	isLast?: boolean;
@@ -28,6 +38,7 @@ export const PinnedSkillCheckItem = ({
 	const dispatch = useAppDispatch();
 	const language = useAppSelector(selectCurrentLanguage);
 	const tapToHide = useAppSelector(selectTapToHidePins);
+	const animate = useAppSelector(selectChaosBagLoadingAnimation);
 
 	const displayStyle = getExpressionDisplayStyle(language);
 
@@ -48,26 +59,35 @@ export const PinnedSkillCheckItem = ({
 		return false;
 	}, [dispatch]);
 
-	const onDoubleTap = useCallback(() => {
+	const onAdvancedAction = useCallback(() => {
 		if (!tapToHide) {
 			return;
 		}
 		dispatch(togglePin(id));
 	}, [dispatch, tapToHide, id]);
 
-	const doubleTap = Gesture.Tap()
-		.numberOfTaps(2)
+	const swipeLeft = Gesture.Fling()
+		.direction(Directions.RIGHT)
 		.runOnJS(true)
-		.onStart(onDoubleTap);
+		.onStart(onAdvancedAction);
+
+	const reveal = useMemo(() => {
+		return setupReveal(item);
+	}, [setupReveal, item]);
+
+	const onPressIn = animate ? reveal : emptyCallback;
+	const onPressOut = animate ? closeReveal : emptyCallback;
+	const onLongPress = animate ? emptyCallback : reveal;
 
 	return (
-		<GestureDetector gesture={doubleTap}>
+		<GestureDetector gesture={swipeLeft}>
 			<C.Item
 				{...props}
 				key={item.id}
 				onPress={tapOnPin}
-				onPressIn={setupReveal(item)}
-				onPressOut={closeReveal}
+				onPressIn={onPressIn}
+				onPressOut={onPressOut}
+				onLongPress={onLongPress}
 			>
 				<C.ItemContent>
 					{item.title && <C.Title>{item.title}:</C.Title>}

@@ -8,7 +8,7 @@ import {
 } from "@shared/lib";
 import { always } from "ramda";
 import { memo, useCallback } from "react";
-import { type ViewProps, useWindowDimensions } from "react-native";
+import type { ViewProps } from "react-native";
 import * as C from "./PinnedSkilllChecks.components";
 
 export type PinnedSkilllChecksProps = ViewProps;
@@ -27,15 +27,9 @@ export const PinnedSkilllChecks = (props: PinnedSkilllChecksProps) => {
 		dispatch(setBoardProp("showPinnedSkillChecks", !show));
 	}, [dispatch, show]);
 
-	const { width } = useWindowDimensions();
-
 	if (items.length === 0) {
 		return null;
 	}
-
-	const areaStyle = {
-		left: show ? 0 : -width + 80,
-	};
 
 	const onAreaPress = tapToHide ? toggleShow : always(false);
 
@@ -43,32 +37,38 @@ export const PinnedSkilllChecks = (props: PinnedSkilllChecksProps) => {
 
 	return (
 		<C.Container {...props}>
-			<C.Area
-				style={areaStyle}
-				activeOpacity={tapToHide ? 0.2 : 1}
-				onPress={onAreaPress}
-			>
-				<C.Content>
-					{show && (
-						<C.List>
-							{items.map((item, index, { length }) => (
-								<C.Item
-									key={item.id}
-									item={item}
-									isLast={index === length - 1}
-								/>
-							))}
-						</C.List>
-					)}
-				</C.Content>
+			{show ? (
+				<C.Area activeOpacity={tapToHide ? 0.2 : 1} onPress={onAreaPress}>
+					<C.Content>
+						{show && (
+							<C.List>
+								{items.map((item, index, { length }) => (
+									<C.Item
+										key={item.id}
+										item={item}
+										isLast={index === length - 1}
+									/>
+								))}
+							</C.List>
+						)}
+					</C.Content>
 
-				{showToggle && (
-					<C.Toggle onPress={toggleShow} show={show}>
-						<C.ToggleIcon show={show} />
-					</C.Toggle>
-				)}
-				<C.Background />
-			</C.Area>
+					{showToggle && (
+						<C.Toggle onPress={toggleShow}>
+							<C.ToggleIcon />
+						</C.Toggle>
+					)}
+					<C.Background />
+				</C.Area>
+			) : (
+				<C.ShowContainer>
+					<C.ShowButton onPress={toggleShow}>
+						<C.ShowIconContainer>
+							<C.ShowIcon />
+						</C.ShowIconContainer>
+					</C.ShowButton>
+				</C.ShowContainer>
+			)}
 		</C.Container>
 	);
 };

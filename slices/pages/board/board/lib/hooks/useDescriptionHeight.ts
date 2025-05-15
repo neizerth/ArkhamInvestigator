@@ -18,7 +18,7 @@ export const useDescriptionHeight = () => {
 		return DEFAULT_PORTRAIT_DESCRIPTION_HEIGHT;
 	}
 
-	const gap = isNavbarVisible ? navBarHeight - 5 : 40 + 30;
+	const gap = isNavbarVisible ? navBarHeight - 5 : 50;
 
 	const fullHeight = gameTextHeight + gap;
 

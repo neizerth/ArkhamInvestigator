@@ -1,11 +1,11 @@
 import { textureImages } from "@assets/images/game/effects/textures";
-import { TouchableOpacity, type TouchableOpacityProps } from "@features/haptic";
+import { TouchableOpacity } from "@features/haptic";
 import { color, size } from "@shared/config";
-import { type DefinedIconProps, Icon, Row } from "@shared/ui";
+import { type DefinedIconProps, Icon, ImageBackground, Row } from "@shared/ui";
 import { Image } from "expo-image";
 import type { FC } from "react";
 import { View } from "react-native";
-import styled, { css } from "styled-components/native";
+import styled from "styled-components/native";
 import { PINNED_CHECKS_MIN_HEIGHT } from "../../../../../config";
 import { PinnedSkillCheckItem } from "../PinnedSkillCheckItem";
 
@@ -45,11 +45,7 @@ export const List: typeof Row = styled(Row)`
 	flex-wrap: wrap;
 `;
 
-type ToggleProps = TouchableOpacityProps & {
-	show?: boolean;
-};
-
-export const Toggle: FC<ToggleProps> = styled(TouchableOpacity)`
+export const Toggle: typeof TouchableOpacity = styled(TouchableOpacity)`
 	position: absolute;
 	z-index: 10;
 	right: 25px;
@@ -58,32 +54,52 @@ export const Toggle: FC<ToggleProps> = styled(TouchableOpacity)`
 	height: 48px;
 	justify-content: center;
 	align-items: center;
-
-	${({ show }: ToggleProps) =>
-		show &&
-		css`
-		left: auto;
-		right: 25px;
-	`}
 `;
 
 export const ToggleContent: typeof View = styled(View)`
 
 `;
 
-type ToggleIconProps = DefinedIconProps & {
-	show?: boolean;
-};
-
-export const ToggleIcon: FC<ToggleIconProps> = styled(Icon).attrs(
-	({ show }: ToggleIconProps) => ({
-		icon: show ? "left-arrow" : "right-arrow",
-	}),
-)`
+export const ToggleIcon: FC<DefinedIconProps> = styled(Icon).attrs({
+	icon: "dismiss",
+})`
 	color: ${color.dark10};
 	opacity: 0.5;
 `;
 
 export const Item: typeof PinnedSkillCheckItem = styled(PinnedSkillCheckItem)`
 	
+`;
+
+export const ShowContainer: typeof ImageBackground = styled(
+	ImageBackground,
+).attrs({
+	source: textureImages.paperRipTexture,
+	contentFit: "fill",
+})`
+	position: absolute;
+	z-index: 2;
+	top: -10px;
+	width: 60px;
+	height: 48px;
+	margin-left: -30px;
+	left: 50%;
+	opacity: 0.7;
+`;
+
+export const ShowButton: typeof TouchableOpacity = styled(TouchableOpacity)`
+	flex: 1;
+	align-items: center;
+	justify-content: center;
+`;
+
+export const ShowIconContainer: typeof View = styled(View)`
+	transform: rotate(90deg);
+`;
+
+export const ShowIcon: FC<DefinedIconProps> = styled(Icon).attrs({
+	icon: "right-arrow",
+})`
+	color: ${color.dark10};
+	opacity: 0.7;
 `;
