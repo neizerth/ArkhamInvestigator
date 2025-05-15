@@ -58,7 +58,13 @@ export function StoreSelect<T>({
 		<C.Container style={contentContainerStyle}>
 			<C.Group>
 				<C.Label>{label}</C.Label>
-				<C.Select {...props} data={items} value={item} onChange={onChange} />
+				<C.Select
+					placeholder={t`Select Item`}
+					{...props}
+					data={items}
+					value={item}
+					onChange={onChange}
+				/>
 			</C.Group>
 			{hint && <C.Hint>{hint}</C.Hint>}
 		</C.Container>
