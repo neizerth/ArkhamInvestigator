@@ -62,6 +62,9 @@
 	"tapOnPin.default": "Tap on a calculation to unpin it",
 	"tapOnPin.advanced": "Tap on a calculation to close the whole block. Swipe right to unpin",
 
+	"modal.skillCheck.clear": "Clear history?",
+	"modal.skillCheck.clear.text": "This action will permanently delete the history of skill checks.",
+
 	"Chaos bag loading animation": "Chaos bag loading animation",
 
 	"Give action": "Give action",
