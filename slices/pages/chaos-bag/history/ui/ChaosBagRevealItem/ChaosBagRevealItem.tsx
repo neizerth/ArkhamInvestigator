@@ -23,11 +23,7 @@ export const ChaosBagRevealItem = ({
 
 	const renderItem = useCallback(
 		({ item, index }: ListRenderItemInfo<ChaosBagToken>) => {
-			return (
-				<C.Item>
-					<C.Token token={item} position={index + 1} />
-				</C.Item>
-			);
+			return <C.Token token={item} position={index + 1} />;
 		},
 		[],
 	);
@@ -35,17 +31,35 @@ export const ChaosBagRevealItem = ({
 	if (!investigator) {
 		return null;
 	}
+
+	const { skillCheckType, skillCheckValue, title } = item;
+
 	return (
 		<C.Container {...props}>
 			<C.Position>{position}</C.Position>
-			<C.Investigator
-				faction={investigator.faction_code}
-				code={investigator.id}
-				size={48}
-				showIcon={false}
-			/>
+			<C.Investigator>
+				<C.Image
+					faction={investigator.faction_code}
+					code={investigator.id}
+					size={50}
+					showIcon={false}
+				/>
+				{skillCheckType && (
+					<C.SkillType>
+						<C.SkillTypeIcon statType={skillCheckType} />
+					</C.SkillType>
+				)}
+				{skillCheckValue && (
+					<C.SkillValue>
+						<C.SkillValueText value={skillCheckValue} />
+					</C.SkillValue>
+				)}
+			</C.Investigator>
 			<C.Separator />
-			<C.TokenList data={item.tokens} renderItem={renderItem} horizontal />
+			<C.List>
+				<C.TokenList data={item.tokens} renderItem={renderItem} horizontal />
+				{title && <C.Title>{title}</C.Title>}
+			</C.List>
 		</C.Container>
 	);
 };

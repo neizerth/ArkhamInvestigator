@@ -62,6 +62,9 @@
 
 	"modal.spoiler.message": "Этот раздел содержит сюжетные спойлеры. Продолжить?",
 
+	"modal.skillCheck.clear": "Очистить историю?",
+	"modal.skillCheck.clear.text": "Это действие безвозвратно удалит историю пройденных проверок",
+
 	"Show Game Text": "Игровой текст",
 	"Advanced": "Продвинутый режим",
 	"Pinned calculations": "Закреплённые расчёты",

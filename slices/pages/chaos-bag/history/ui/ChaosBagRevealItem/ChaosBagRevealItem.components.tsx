@@ -1,10 +1,13 @@
 import { ChaosBagRevealedToken } from "@features/chaos-bag/ui/reveal/ChaosBagRevealedToken";
-import { color, font, size } from "@shared/config";
-import { Row, Text } from "@shared/ui";
-import { InvestigatorPreview } from "@widgets/investigator";
+import { color, factionColor, font, size } from "@shared/config";
+import { IconNumber, Row, StatIcon, Text } from "@shared/ui";
+import {
+	InvestigatorPreview,
+	type InvestigatorPreviewProps,
+} from "@widgets/investigator";
 import { View } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
-import styled from "styled-components/native";
+import styled, { css } from "styled-components/native";
 
 export const Container: typeof Row = styled(Row)`
   padding: ${size.gap.small}px ${size.gap.default}px;
@@ -12,24 +15,74 @@ export const Container: typeof Row = styled(Row)`
   gap: ${size.gap.default}px;
 `;
 
-export const Investigator: typeof InvestigatorPreview = styled(
-	InvestigatorPreview,
-)`
-  border-radius: 24px;
+export const Investigator: typeof View = styled(View)`
+  position: relative;
 `;
 
-export const TokenList: typeof FlatList = styled(FlatList)`
-  
+export const SkillTypeIcon: typeof StatIcon = styled(StatIcon)`
+  font-size: 24px;
+  line-height: 40px;
+  color: white;
+`;
+
+export const SkillType: typeof View = styled(View)`
+  position: absolute;
+  bottom: -15px;
+  right: -10px;
+`;
+
+export const Image: typeof InvestigatorPreview = styled(InvestigatorPreview)`
+  border-radius: 24px;
+  border: 1px solid;
+  ${({ faction }: InvestigatorPreviewProps) => css`
+    border-color: ${factionColor[faction].border};
+  `}
+`;
+
+export const TokenList: typeof FlatList = styled(FlatList).attrs({
+	contentContainerStyle: {
+		paddingRight: 10,
+	},
+})`
+  border-radius: 32px;
+	padding: 5px 0;
+`;
+
+export const List: typeof View = styled(View)`
+  position: relative;
+  flex: 1;
+`;
+
+export const Title: typeof Text = styled(Text)`
+  font-size: ${font.size.small}px;
+  position: absolute;
+  left: 0;
+  bottom: 2px;
+  padding: 0 ${size.gap.small}px;
+  background-color: ${color.dark20};
+  border-radius: ${size.borderRadius.default}px;
+`;
+
+export const SkillValue: typeof View = styled(View)`
+  position: absolute;
+  top: -5px;
+  right: -5px;
+`;
+
+export const SkillValueText: typeof IconNumber = styled(IconNumber).attrs({
+	stroke: true,
+	strokeStyle: {
+		color: color.text,
+	},
+})`
+  color: ${color.white};
+  font-size: 20px;
 `;
 
 export const Token: typeof ChaosBagRevealedToken = styled(
 	ChaosBagRevealedToken,
 )`
   
-`;
-
-export const Item: typeof View = styled(View)`
-  padding: ${size.gap.small}px 0px;
 `;
 
 export const Separator: typeof View = styled(View)`

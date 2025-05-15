@@ -3,6 +3,7 @@ import type { AppThunk } from "@shared/model";
 import { v4 } from "uuid";
 import type { ChaosBagToken } from "../../../../../../model";
 import {
+	selectChaosBagSkillCheckTitle,
 	selectChaosBagSkillCheckType,
 	selectChaosBagSkillValue,
 	selectRevealHistoryItem,
@@ -10,13 +11,14 @@ import {
 } from "../../chaosBag";
 
 export const updateCurrentRevealHistoryItem =
-	(tokens: ChaosBagToken[]): AppThunk =>
+	(revealedTokens: ChaosBagToken[]): AppThunk =>
 	(dispatch, getState) => {
 		const state = getState();
 		const currentHistoryItem = selectRevealHistoryItem(state);
 		const boardId = selectCurrentBoardProp("id")(state);
 		const skillCheckType = selectChaosBagSkillCheckType(state);
 		const skillCheckValue = selectChaosBagSkillValue(state);
+		const title = selectChaosBagSkillCheckTitle(state);
 
 		if (!boardId) {
 			return;
@@ -29,9 +31,15 @@ export const updateCurrentRevealHistoryItem =
 			skillCheckType,
 			skillCheckValue,
 			tokens: [],
+			title,
 		};
 
-		historyItem.tokens = [...historyItem.tokens, ...tokens];
+		const tokens = [...historyItem.tokens, ...revealedTokens];
 
-		dispatch(setRevealHistoryItem(historyItem));
+		dispatch(
+			setRevealHistoryItem({
+				...historyItem,
+				tokens,
+			}),
+		);
 	};

@@ -14,7 +14,7 @@ export const useSkillItemChaosTokenRevealModal = () => {
 	const dispatch = useAppDispatch();
 
 	return useCallback(
-		({ type, expression }: SkillCheckHistoryItem) =>
+		({ type, expression, title }: SkillCheckHistoryItem) =>
 			() => {
 				const safeExpression = sanitizeSkillCheckExpression(expression);
 
@@ -25,6 +25,7 @@ export const useSkillItemChaosTokenRevealModal = () => {
 				dispatch(
 					openSkillCheckChaosBagModal({
 						type,
+						title,
 						value: expressionValue,
 					}),
 				);

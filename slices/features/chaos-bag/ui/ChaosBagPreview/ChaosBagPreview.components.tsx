@@ -31,15 +31,20 @@ export const Sealed: typeof View = styled(View)`
 	padding-top: ${size.gap.small}px;
 `;
 
-export const List: typeof FlatList = styled(FlatList)`
+export const List: typeof FlatList = styled(FlatList).attrs({
+	contentContainerStyle: {
+		alignItems: "center",
+	},
+})`
   padding-bottom: ${size.gap.default}px;
   border-bottom-width: 1px;
   border-bottom-color: ${color.dark20};
+
+  max-height: 250px;
 `;
 
 export const TokenRow: typeof Row = styled(Row)`
   justify-items: center;
-	flex: 1;
 `;
 
 export const Token: typeof ChaosTokenPreview = styled(ChaosTokenPreview)`

@@ -1,7 +1,7 @@
 import { textureImages } from "@assets/images/game/effects/textures";
 import { TouchableOpacity } from "@features/haptic";
 import { color, size } from "@shared/config";
-import { type DefinedIconProps, Icon, ImageBackground, Row } from "@shared/ui";
+import { type DefinedIconProps, Icon, Row } from "@shared/ui";
 import { Image } from "expo-image";
 import type { FC } from "react";
 import { View } from "react-native";
@@ -71,20 +71,14 @@ export const Item: typeof PinnedSkillCheckItem = styled(PinnedSkillCheckItem)`
 	
 `;
 
-export const ShowContainer: typeof ImageBackground = styled(
-	ImageBackground,
-).attrs({
-	source: textureImages.paperRipTexture,
-	contentFit: "fill",
-})`
+export const ShowContainer: typeof View = styled(View)`
 	position: absolute;
 	z-index: 2;
-	top: -10px;
-	width: 60px;
+	top: -5px;
+	width: 100px;
 	height: 48px;
-	margin-left: -30px;
+	margin-left: -50px;
 	left: 50%;
-	opacity: 0.7;
 `;
 
 export const ShowButton: typeof TouchableOpacity = styled(TouchableOpacity)`
@@ -98,8 +92,10 @@ export const ShowIconContainer: typeof View = styled(View)`
 `;
 
 export const ShowIcon: FC<DefinedIconProps> = styled(Icon).attrs({
-	icon: "right-arrow",
+	icon: "pushpin",
 })`
-	color: ${color.dark10};
-	opacity: 0.7;
+	color: ${color.white};
+	opacity: 0.6;
+	font-size: 18px;
+	text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
 `;

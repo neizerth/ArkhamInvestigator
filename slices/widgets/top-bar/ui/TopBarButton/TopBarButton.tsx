@@ -7,7 +7,7 @@ export type TopBarButtonProps = TouchableOpacityProps & {
 	icon?: string;
 };
 
-export const TopBarButton = styled(IconButton).attrs({
+export const TopBarButton: typeof IconButton = styled(IconButton).attrs({
 	iconStyle: {
 		fontSize: 20,
 		lineHeight: 20,

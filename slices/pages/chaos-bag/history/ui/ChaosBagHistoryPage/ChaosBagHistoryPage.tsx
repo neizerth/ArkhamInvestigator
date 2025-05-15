@@ -1,13 +1,40 @@
-import { selectRevealHistory } from "@features/chaos-bag";
+import { clearRevealHistory, selectRevealHistory } from "@features/chaos-bag";
 import type { ChaosBagHistoryItem } from "@features/chaos-bag/model";
-import { useAppSelector } from "@shared/lib";
+import { useAppTranslation } from "@features/i18n";
+import { useModal } from "@features/modal";
+import { goBack, useAppDispatch, useAppSelector } from "@shared/lib";
 import { Delay } from "@shared/ui";
+import { TopBar } from "@widgets/top-bar";
 import { useCallback } from "react";
 import type { ListRenderItemInfo } from "react-native";
 import * as C from "./ChaosBagHistoryPage.components";
 
 export const ChaosBagHistoryPage = () => {
+	const { t } = useAppTranslation();
+	const dispatch = useAppDispatch();
 	const data = useAppSelector(selectRevealHistory);
+
+	const back = useCallback(() => {
+		dispatch(goBack());
+	}, [dispatch]);
+
+	const clearHistory = useCallback(() => {
+		dispatch(clearRevealHistory());
+	}, [dispatch]);
+
+	const [showClearModal] = useModal({
+		id: "clear-board",
+		data: {
+			contentType: "text",
+			type: "faction",
+			faction: "neutral",
+			title: t`modal.skillCheck.clear`,
+			text: t`modal.skillCheck.clear.text`,
+			okText: t`Clear`,
+			cancelText: t`Cancel`,
+		},
+		onOk: clearHistory,
+	});
 
 	const renderItem = useCallback(
 		({ item, index }: ListRenderItemInfo<ChaosBagHistoryItem>) => {
@@ -17,7 +44,10 @@ export const ChaosBagHistoryPage = () => {
 	);
 
 	return (
-		<C.Container title="Recent token history" full>
+		<C.Container>
+			<TopBar title={t`Recent token history`} onBack={back}>
+				<C.ClearButton icon="trash" onPress={showClearModal} />
+			</TopBar>
 			<Delay>
 				<C.List
 					data={data}

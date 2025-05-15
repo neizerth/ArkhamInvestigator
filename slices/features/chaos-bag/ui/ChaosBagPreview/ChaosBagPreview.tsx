@@ -10,30 +10,29 @@ import {
 import { Delay } from "@shared/ui";
 import type { Href } from "expo-router";
 import { useCallback, useMemo } from "react";
-import {
-	Dimensions,
-	type ListRenderItemInfo,
-	type ViewProps,
-} from "react-native";
+import type { ListRenderItemInfo, ViewProps } from "react-native";
 import { useAppTranslation } from "../../../i18n";
 import {
 	selectOrderedChaosBagContents,
+	selectRevealHistory,
 	setShowRevealChaosTokenModal,
 	toggleChaosTokenSeal,
 } from "../../lib";
 import type { ChaosBagToken } from "../../model";
 import * as C from "./ChaosBagPreview.components";
+import { useListColumns } from "./useListColumns";
 
 export type ChaosBagPreviewProps = ViewProps;
-
-const screenWidth = Dimensions.get("screen").width;
-const tokenSize = 64;
-const columns = Math.round(screenWidth / tokenSize);
 
 export const ChaosBagPreview = (props: ChaosBagPreviewProps) => {
 	const dispatch = useAppDispatch();
 	const { t } = useAppTranslation();
 	const tokens = useAppSelector(selectOrderedChaosBagContents);
+	const showHistory = useAppSelector(
+		(state) => selectRevealHistory(state).length > 0,
+	);
+
+	const columns = useListColumns();
 
 	const data = useMemo(() => {
 		return {
@@ -46,7 +45,7 @@ export const ChaosBagPreview = (props: ChaosBagPreviewProps) => {
 				columns,
 			),
 		};
-	}, [tokens]);
+	}, [tokens, columns]);
 
 	const goTo = useCallback(
 		(href: Href) => async () => {
@@ -94,17 +93,21 @@ export const ChaosBagPreview = (props: ChaosBagPreviewProps) => {
 	);
 
 	const actions = useMemo(() => {
-		return [
-			{
-				icon: "edit",
-				onAction: onEdit,
-			},
-			{
-				icon: "history",
-				onAction: onHistory,
-			},
-		];
-	}, [onEdit, onHistory]);
+		const edit = {
+			icon: "edit",
+			onAction: onEdit,
+		};
+		const history = {
+			icon: "history",
+			onAction: onHistory,
+		};
+
+		if (!showHistory) {
+			return [edit];
+		}
+
+		return [edit, history];
+	}, [onEdit, onHistory, showHistory]);
 
 	return (
 		<C.Container {...props} title="Chaos Bag" actions={actions}>
@@ -131,9 +134,8 @@ export const ChaosBagPreview = (props: ChaosBagPreviewProps) => {
 							/>
 						</C.Sealed>
 					)}
-
-					<C.BlessCurse />
 				</Delay>
+				<C.BlessCurse />
 				{tokens.length > 0 && (
 					<C.RevealButton
 						onPress={reveal}

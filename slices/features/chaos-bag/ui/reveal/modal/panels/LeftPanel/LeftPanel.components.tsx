@@ -43,5 +43,5 @@ export const SkillTypeIcon: typeof StatIcon = styled(StatIcon)`
 export const SkillType: typeof View = styled(View)`
   position: absolute;
   top: -8px;
-  right: -30px;
+  right: -25px;
 `;

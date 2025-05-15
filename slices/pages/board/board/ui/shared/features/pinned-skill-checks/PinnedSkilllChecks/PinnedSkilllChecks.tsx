@@ -63,9 +63,7 @@ export const PinnedSkilllChecks = (props: PinnedSkilllChecksProps) => {
 			) : (
 				<C.ShowContainer>
 					<C.ShowButton onPress={toggleShow}>
-						<C.ShowIconContainer>
-							<C.ShowIcon />
-						</C.ShowIconContainer>
+						<C.ShowIcon />
 					</C.ShowButton>
 				</C.ShowContainer>
 			)}
