@@ -16,6 +16,7 @@ export type IChaosBagState = {
 	skillValue: number | null;
 	loadingAnimation: boolean;
 	revealHistory: ChaosBagHistoryItem[];
+	revealHistoryItem: ChaosBagHistoryItem | null;
 };
 
 const initialState: IChaosBagState = {
@@ -27,6 +28,7 @@ const initialState: IChaosBagState = {
 	skillValue: null,
 	loadingAnimation: true,
 	revealHistory: [],
+	revealHistoryItem: null,
 };
 
 const state = createSliceState(initialState);
@@ -45,6 +47,7 @@ export const {
 	setLoadingAnimation: setChaosBagLoadingAnimation,
 	setRevealedTokenIds,
 	setRevealHistory,
+	setRevealHistoryItem,
 } = chaosBag.actions;
 
 export const {
@@ -56,6 +59,7 @@ export const {
 	selectLoadingAnimation: selectChaosBagLoadingAnimation,
 	selectRevealedTokenIds,
 	selectRevealHistory,
+	selectRevealHistoryItem,
 } = chaosBag.selectors;
 
 export default chaosBag.reducer;

@@ -7,6 +7,7 @@ import {
 	selectRevealedTokenIds,
 	setRevealedTokenIds,
 } from "../../../chaosBag";
+import { updateCurrentRevealHistoryItem } from "../../history";
 
 export const revealChaosToken =
 	(count: number): AppThunk =>
@@ -26,4 +27,6 @@ export const revealChaosToken =
 
 		const data = [...revealed, ...tokenIds];
 		dispatch(setRevealedTokenIds(data));
+
+		dispatch(updateCurrentRevealHistoryItem(tokens));
 	};

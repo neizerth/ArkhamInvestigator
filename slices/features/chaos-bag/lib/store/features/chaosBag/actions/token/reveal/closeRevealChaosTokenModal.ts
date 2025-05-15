@@ -5,8 +5,10 @@ import {
 	setRevealedTokenIds,
 	setShowRevealChaosTokenModal,
 } from "../../../chaosBag";
+import { addRevealHistoryItem } from "../../history";
 
 export const closeRevealChaosTokenModal = (): AppThunk => (dispatch) => {
+	dispatch(addRevealHistoryItem());
 	dispatch(setRevealedTokenIds([]));
 	dispatch(setChaosBagSkillValue(null));
 	dispatch(setChaosBagSkillCheckType(null));

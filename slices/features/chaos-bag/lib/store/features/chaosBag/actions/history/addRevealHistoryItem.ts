@@ -1,22 +1,25 @@
 import type { AppThunk } from "@shared/model";
-import { v4 } from "uuid";
-import type { ChaosBagHistoryItem } from "../../../../../../model";
-import { selectRevealHistory, setRevealHistory } from "../../chaosBag";
+import {
+	selectRevealHistory,
+	selectRevealHistoryItem,
+	setRevealHistory,
+	setRevealHistoryItem,
+} from "../../chaosBag";
 
-type Options = Omit<ChaosBagHistoryItem, "id">;
+export const addRevealHistoryItem = (): AppThunk => (dispatch, getState) => {
+	const state = getState();
 
-export const addRevealHistoryItem =
-	(options: Options): AppThunk =>
-	(dispatch, getState) => {
-		const state = getState();
-		const id = v4();
+	const items = selectRevealHistory(state);
 
-		const items = selectRevealHistory(state);
+	const item = selectRevealHistoryItem(state);
 
-		const item = {
-			id,
-			...options,
-		};
+	if (!item) {
+		return;
+	}
 
+	if (item.tokens.length > 0) {
 		dispatch(setRevealHistory([...items, item]));
-	};
+	}
+
+	dispatch(setRevealHistoryItem(null));
+};

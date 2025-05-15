@@ -16,7 +16,7 @@ import {
 import type { ChaosBagToken } from "../../../../../model";
 import { useShowModal } from "./useShowModal";
 
-export const useRevealModal = () => {
+export const useTokenRevealModal = () => {
 	const dispatch = useAppDispatch();
 
 	const revealedCount = useAppSelector(selectRevealedTokensCount);

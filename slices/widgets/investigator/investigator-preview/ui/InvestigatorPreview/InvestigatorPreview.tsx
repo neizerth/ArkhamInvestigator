@@ -4,6 +4,7 @@ import { memo, useCallback } from "react";
 import type {
 	GestureResponderEvent,
 	TouchableOpacityProps,
+	ViewProps,
 } from "react-native";
 import { InvestigatorPreviewFactionIcon as FactionIcon } from "../InvestigatorPreviewFactionIcon";
 import * as C from "./InvestigatorPreview.components";
@@ -18,6 +19,7 @@ export type InvestigatorPreviewProps = TouchableOpacityProps &
 		size: number;
 		showIcon?: boolean;
 		showOptionsInfo?: boolean;
+		selectionStyle?: ViewProps["style"];
 	};
 
 export const InvestigatorPreview = ({
@@ -29,6 +31,7 @@ export const InvestigatorPreview = ({
 	icon,
 	disabled,
 	size,
+	selectionStyle,
 	...props
 }: InvestigatorPreviewProps) => {
 	const imageId = props.imageId || props.code;
@@ -70,7 +73,7 @@ export const InvestigatorPreview = ({
 				</C.Info>
 			)}
 			{disabled && <C.DisabledOverlay />}
-			{selected && <C.Selection faction={faction} />}
+			{selected && <C.Selection faction={faction} style={selectionStyle} />}
 			{selectedCount > 1 && (
 				<C.SelectedCount>
 					<C.Count>{selectedCount}</C.Count>

@@ -1,1 +1,1 @@
-export * from "./useRevealModal";
+export * from "./useTokenRevealModal";

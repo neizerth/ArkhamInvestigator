@@ -10,8 +10,8 @@ export const ChaosBagHistoryPage = () => {
 	const data = useAppSelector(selectRevealHistory);
 
 	const renderItem = useCallback(
-		(info: ListRenderItemInfo<ChaosBagHistoryItem>) => {
-			return null;
+		({ item, index }: ListRenderItemInfo<ChaosBagHistoryItem>) => {
+			return <C.Item item={item} position={index + 1} />;
 		},
 		[],
 	);

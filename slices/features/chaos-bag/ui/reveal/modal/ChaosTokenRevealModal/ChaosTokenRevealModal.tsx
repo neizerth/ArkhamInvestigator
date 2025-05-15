@@ -8,7 +8,7 @@ import {
 } from "../../../../lib";
 import type { ChaosBagToken } from "../../../../model";
 import * as C from "./ChaosTokenRevealModal.components";
-import { useRevealModal } from "./hooks";
+import { useTokenRevealModal } from "./hooks";
 
 export type ChaosTokenRevealModalProps = ViewProps;
 
@@ -17,7 +17,7 @@ export const ChaosTokenRevealModal = (props: ChaosTokenRevealModalProps) => {
 	const tokens = useAppSelector(selectRevealedTokens);
 	const animate = useAppSelector(selectChaosBagLoadingAnimation);
 
-	const control = useRevealModal();
+	const control = useTokenRevealModal();
 
 	const history = useMemo(() => {
 		return init(tokens);
