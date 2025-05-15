@@ -114,5 +114,9 @@
 	"Scroll Deceleration": "Scroll Deceleration",
 	"Inertial Scrolling": "Inertial Scrolling",
 
-	"Behavior": "Behavior"
+	"Behavior": "Behavior",
+	"Select Item": "Select Item",
+	"Show Game Text": "Show Game Text",
+	"Pinned calculations": "Pinned calculations",
+	"Game settings": "Game settings"
 }
