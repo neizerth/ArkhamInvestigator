@@ -1,15 +1,19 @@
+import { removeRevealHistoryItem } from "@features/chaos-bag";
 import type {
 	ChaosBagHistoryItem,
 	ChaosBagToken,
 } from "@features/chaos-bag/model";
+import { useHapticFeedback } from "@features/haptic";
 import {
 	selectBoardProp,
+	selectBoardsCount,
 	setCurrentInvestigatorIndex,
 	useAppDispatch,
 	useAppSelector,
 } from "@shared/lib";
 import { useCallback } from "react";
 import type { ListRenderItemInfo, ViewProps } from "react-native";
+import { Gesture, GestureDetector } from "react-native-gesture-handler";
 import * as C from "./ChaosBagRevealItem.components";
 
 export type ChaosBagRevealItemProps = ViewProps & {
@@ -24,22 +28,39 @@ export const ChaosBagRevealItem = ({
 }: ChaosBagRevealItemProps) => {
 	const dispatch = useAppDispatch();
 
-	const investigator = useAppSelector(
-		selectBoardProp(item.boardId, "investigator"),
-	);
+	const { boardId, tokens, id } = item;
 
-	const index = item.boardId - 1;
+	const investigator = useAppSelector(selectBoardProp(boardId, "investigator"));
+
+	const isSingle = useAppSelector(selectBoardsCount) === 1;
+
+	const index = boardId - 1;
+
+	const showPosition = tokens.length > 1;
 
 	const selectBoard = useCallback(() => {
-		dispatch(setCurrentInvestigatorIndex(index - 1));
+		dispatch(setCurrentInvestigatorIndex(index));
 	}, [dispatch, index]);
+
+	const impactFeedback = useHapticFeedback();
 
 	const renderItem = useCallback(
 		({ item, index }: ListRenderItemInfo<ChaosBagToken>) => {
-			return <C.Token token={item} position={index + 1} />;
+			return (
+				<C.Token
+					token={item}
+					position={index + 1}
+					showPosition={showPosition}
+				/>
+			);
 		},
-		[],
+		[showPosition],
 	);
+
+	const removeItem = useCallback(() => {
+		dispatch(removeRevealHistoryItem(id));
+		impactFeedback();
+	}, [dispatch, id, impactFeedback]);
 
 	if (!investigator) {
 		return null;
@@ -47,33 +68,40 @@ export const ChaosBagRevealItem = ({
 
 	const { skillCheckType, skillCheckValue, title } = item;
 
+	const longPress = Gesture.LongPress().runOnJS(true).onStart(removeItem);
+
 	return (
-		<C.Container {...props}>
-			<C.Position>{position}</C.Position>
-			<C.Investigator>
-				<C.Image
-					faction={investigator.faction_code}
-					code={investigator.id}
-					size={50}
-					showIcon={false}
-					onPress={selectBoard}
-				/>
-				{skillCheckType && (
-					<C.SkillType>
-						<C.SkillTypeIcon statType={skillCheckType} />
-					</C.SkillType>
+		<GestureDetector gesture={longPress}>
+			<C.Container {...props}>
+				<C.Position>{position}</C.Position>
+				{!isSingle && (
+					<C.Investigator>
+						<C.Image
+							faction={investigator.faction_code}
+							code={investigator.id}
+							size={50}
+							showIcon={false}
+							onPress={selectBoard}
+						/>
+						{skillCheckType && (
+							<C.SkillType>
+								<C.SkillTypeIcon statType={skillCheckType} />
+							</C.SkillType>
+						)}
+						{skillCheckValue && (
+							<C.SkillValue>
+								<C.SkillValueText value={skillCheckValue} />
+							</C.SkillValue>
+						)}
+					</C.Investigator>
 				)}
-				{skillCheckValue && (
-					<C.SkillValue>
-						<C.SkillValueText value={skillCheckValue} />
-					</C.SkillValue>
-				)}
-			</C.Investigator>
-			<C.Separator />
-			<C.List>
-				<C.TokenList data={item.tokens} renderItem={renderItem} horizontal />
-				{title && <C.Title>{title}</C.Title>}
-			</C.List>
-		</C.Container>
+
+				<C.Separator />
+				<C.List>
+					<C.TokenList data={tokens} renderItem={renderItem} horizontal />
+					{title && <C.Title>{title}</C.Title>}
+				</C.List>
+			</C.Container>
+		</GestureDetector>
 	);
 };

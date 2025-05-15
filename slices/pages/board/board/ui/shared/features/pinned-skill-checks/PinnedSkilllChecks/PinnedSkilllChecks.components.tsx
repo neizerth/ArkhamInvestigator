@@ -95,7 +95,7 @@ export const ShowIcon: FC<DefinedIconProps> = styled(Icon).attrs({
 	icon: "pushpin",
 })`
 	color: ${color.white};
-	opacity: 0.6;
+	opacity: 0.9;
 	font-size: 18px;
 	text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
 `;

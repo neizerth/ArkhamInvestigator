@@ -17,6 +17,7 @@ export const Container: typeof Row = styled(Row)`
 
 export const Investigator: typeof View = styled(View)`
   position: relative;
+  margin-right: ${size.gap.small}px;
 `;
 
 export const SkillTypeIcon: typeof StatIcon = styled(StatIcon)`

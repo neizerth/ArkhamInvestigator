@@ -28,15 +28,21 @@ export const ChaosTokenRevealHistory = ({
 		[dispatch],
 	);
 
+	const showPosition = tokens.length > 1;
+
 	const renderItem = useCallback(
 		({ item, index }: ListRenderItemInfo<ChaosBagToken>) => {
 			return (
 				<C.Button onPress={onTokenPress(item)} onLongPress={toggleSeal(item)}>
-					<C.Token token={item} position={index + 1} />
+					<C.Token
+						token={item}
+						position={index + 1}
+						showPosition={showPosition}
+					/>
 				</C.Button>
 			);
 		},
-		[onTokenPress, toggleSeal],
+		[onTokenPress, toggleSeal, showPosition],
 	);
 	return (
 		<C.Container {...props}>
