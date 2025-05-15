@@ -5,6 +5,7 @@ import type {
 } from "@features/chaos-bag/model";
 import { useHapticFeedback } from "@features/haptic";
 import {
+	goBack,
 	selectBoardProp,
 	selectBoardsCount,
 	setCurrentInvestigatorIndex,
@@ -40,6 +41,7 @@ export const ChaosBagRevealItem = ({
 
 	const selectBoard = useCallback(() => {
 		dispatch(setCurrentInvestigatorIndex(index));
+		dispatch(goBack());
 	}, [dispatch, index]);
 
 	const impactFeedback = useHapticFeedback();
