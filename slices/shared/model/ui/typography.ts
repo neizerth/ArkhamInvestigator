@@ -31,3 +31,9 @@ export type FontFaceType =
 	| FontWeightName
 	| FontStyleName
 	| `${FontWeightName}${Capitalize<FontStyleName>}`;
+
+export type FontFamilyFonts = Record<string, string>;
+
+export type FontCategoryRecord = Record<string, FontFamilyFonts> & {
+	common: FontFamilyFonts;
+};

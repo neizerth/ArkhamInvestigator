@@ -1,3 +1,4 @@
+import { FontCategoryRecord } from "@shared/model";
 import common from "./common";
 import ko from "./ko";
 import ru from "./ru";
@@ -9,6 +10,14 @@ export * from "./ko";
 export * from "./ru";
 export * from "./zh";
 export * from "./vi";
+
+export const fontCategory: FontCategoryRecord = {
+	common,
+	ru,
+	ko,
+	zh,
+	vi,
+};
 
 export default {
 	...common,

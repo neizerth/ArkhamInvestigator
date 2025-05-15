@@ -1,5 +1,5 @@
 import styled from "styled-components/native";
-import { AppLoader } from "../AppLoader";
+import { LayoutLoader } from "../LayoutLoader";
 
-export const Loader: typeof AppLoader = styled(AppLoader)`
+export const Loader: typeof LayoutLoader = styled(LayoutLoader)`
 `;
