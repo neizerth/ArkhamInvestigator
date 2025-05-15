@@ -66,11 +66,14 @@ export const useTokenRevealModal = () => {
 		[dispatch],
 	);
 
+	const revealFirstToken =
+		visible && !animate && !isEmpty && revealedCount === 0;
+
 	useEffect(() => {
-		if (visible && !animate && !isEmpty) {
+		if (revealFirstToken) {
 			reveal();
 		}
-	}, [animate, visible, reveal, isEmpty]);
+	}, [revealFirstToken, reveal]);
 
 	return {
 		visible,
