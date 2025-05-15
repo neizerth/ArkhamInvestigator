@@ -2,7 +2,12 @@ import type {
 	ChaosBagHistoryItem,
 	ChaosBagToken,
 } from "@features/chaos-bag/model";
-import { selectBoardProp, useAppSelector } from "@shared/lib";
+import {
+	selectBoardProp,
+	setCurrentInvestigatorIndex,
+	useAppDispatch,
+	useAppSelector,
+} from "@shared/lib";
 import { useCallback } from "react";
 import type { ListRenderItemInfo, ViewProps } from "react-native";
 import * as C from "./ChaosBagRevealItem.components";
@@ -17,9 +22,17 @@ export const ChaosBagRevealItem = ({
 	position,
 	...props
 }: ChaosBagRevealItemProps) => {
+	const dispatch = useAppDispatch();
+
 	const investigator = useAppSelector(
 		selectBoardProp(item.boardId, "investigator"),
 	);
+
+	const index = item.boardId - 1;
+
+	const selectBoard = useCallback(() => {
+		dispatch(setCurrentInvestigatorIndex(index - 1));
+	}, [dispatch, index]);
 
 	const renderItem = useCallback(
 		({ item, index }: ListRenderItemInfo<ChaosBagToken>) => {
@@ -43,6 +56,7 @@ export const ChaosBagRevealItem = ({
 					code={investigator.id}
 					size={50}
 					showIcon={false}
+					onPress={selectBoard}
 				/>
 				{skillCheckType && (
 					<C.SkillType>
