@@ -1,6 +1,6 @@
 import { Alegreya } from "@assets/fonts";
 import { color, size, statusBarHeight } from "@shared/config";
-import { Icon, Text } from "@shared/ui";
+import { Icon, Row, Text } from "@shared/ui";
 import { View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import styled, { css } from "styled-components/native";
@@ -55,7 +55,15 @@ export const Close: typeof TouchableOpacity = styled(TouchableOpacity)`
 `;
 
 export const Action: typeof TouchableOpacity = styled(TouchableOpacity)`
-  ${buttonStyle};
+  padding: 0px ${size.gap.default}px;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const Actions: typeof Row = styled(Row)`
+  position: absolute;
+  top: 0;
+  bottom: 0;
   left: 0;
 `;
 

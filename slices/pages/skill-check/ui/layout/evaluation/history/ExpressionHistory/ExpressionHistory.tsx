@@ -1,4 +1,7 @@
-import { setShowRevealChaosTokenModal } from "@features/chaos-bag";
+import {
+	selectChaosBagLoadingAnimation,
+	setShowRevealChaosTokenModal,
+} from "@features/chaos-bag";
 import { useSkillItemChaosTokenRevealModal } from "@features/skill-check";
 import {
 	getSkillCheckValue,
@@ -10,10 +13,13 @@ import {
 	useAppSelector,
 } from "@shared/lib";
 import type { SkillCheckHistoryItem, SkillCheckItem } from "@shared/model";
+import { always } from "ramda";
 import { memo, useCallback, useMemo, useRef } from "react";
 import type { ListRenderItemInfo, ViewProps, ViewStyle } from "react-native";
 import type { FlatList } from "react-native-gesture-handler";
 import * as C from "./ExpressionHistory.components";
+
+const emptyCallback = always(false);
 
 export type ExpressionHistoryProps = ViewProps & {
 	size?: number;
@@ -32,6 +38,7 @@ export const ExpressionHistory = ({
 	const dispatch = useAppDispatch();
 	const history = useAppSelector(selectSkillCheckHistory);
 	const value = useAppSelector(selectCurrentBoardProp("value"));
+	const revealAnimation = useAppSelector(selectChaosBagLoadingAnimation);
 
 	const showReveal = useSkillItemChaosTokenRevealModal();
 
@@ -80,6 +87,12 @@ export const ExpressionHistory = ({
 
 	const renderItem = useCallback(
 		(item: ListItem) => {
+			const reveal = showReveal(item);
+
+			const onLongPress = revealAnimation ? emptyCallback : reveal;
+			const onPressIn = revealAnimation ? reveal : emptyCallback;
+			const onPressOut = revealAnimation ? hideReveal : emptyCallback;
+
 			return (
 				<C.Item
 					key={item.id}
@@ -88,12 +101,13 @@ export const ExpressionHistory = ({
 					type="secondary"
 					value={item.value}
 					onPress={setCurrentValue(item.expression)}
-					onPressIn={showReveal(item)}
-					onPressOut={hideReveal}
+					onPressIn={onPressIn}
+					onPressOut={onPressOut}
+					onLongPress={onLongPress}
 				/>
 			);
 		},
-		[setCurrentValue, hideReveal, showReveal],
+		[setCurrentValue, hideReveal, showReveal, revealAnimation],
 	);
 
 	const renderListItem = useCallback(

@@ -34,7 +34,7 @@ export const PinnedSkilllChecks = (props: PinnedSkilllChecksProps) => {
 	}
 
 	const areaStyle = {
-		right: show ? 0 : -width + 80,
+		left: show ? 0 : -width + 80,
 	};
 
 	const onAreaPress = tapToHide ? toggleShow : always(false);

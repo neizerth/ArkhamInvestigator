@@ -6,21 +6,24 @@ import { useTranslation } from "react-i18next";
 import { type ViewProps, useWindowDimensions } from "react-native";
 import * as C from "./ContextModal.components";
 
+type ContextModalAction = {
+	icon: string;
+	onAction?: () => void;
+};
+
 export type ContextModalProps = ViewProps & {
 	title: string;
 	onBack?: () => void;
-	onAction?: () => void;
-	actionIcon?: string;
 	contentStyle?: ViewProps["style"];
+	actions?: ContextModalAction[];
 };
 
 export const ContextModal = ({
 	title,
 	children,
 	onBack,
-	actionIcon,
-	onAction,
 	contentStyle,
+	actions = [],
 	...props
 }: ContextModalProps) => {
 	const dispatch = useAppDispatch();
@@ -42,11 +45,16 @@ export const ContextModal = ({
 		<C.Container {...props}>
 			<Outside onPress={back} />
 			<C.Header>
-				{actionIcon && (
-					<C.Action onPress={onAction}>
-						<C.ActionIcon icon={actionIcon} />
-					</C.Action>
+				{actions.length > 0 && (
+					<C.Actions>
+						{actions.map((action) => (
+							<C.Action key={action.icon} onPress={action.onAction}>
+								<C.ActionIcon icon={action.icon} />
+							</C.Action>
+						))}
+					</C.Actions>
 				)}
+
 				<C.Title>{t(title)}</C.Title>
 				<C.Close onPress={back}>
 					<C.ActionIcon icon="close" />

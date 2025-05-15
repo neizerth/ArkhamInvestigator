@@ -1,3 +1,3 @@
 export * from "./ChaosTokenRevealProgress";
 export * from "./ChaosTokenRevealLoader";
-export * from "./ChaosTokenRevealModal";
+export * from "./modal/ChaosTokenRevealModal";

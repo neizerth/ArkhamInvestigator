@@ -22,7 +22,7 @@ export const Area: typeof TouchableOpacity = styled(TouchableOpacity)`
 `;
 
 export const Content: typeof View = styled(View)`
-	padding: 3% 7% 4%;
+	padding: ${size.gap.medium}px 25px ${size.gap.medium}px;
 	border-radius: ${size.borderRadius.default}px;
 	position: relative;
 	z-index: 1;
@@ -52,7 +52,7 @@ type ToggleProps = TouchableOpacityProps & {
 export const Toggle: FC<ToggleProps> = styled(TouchableOpacity)`
 	position: absolute;
 	z-index: 10;
-	left: 25px;
+	right: 25px;
 	top: 15px;
 	width: 48px;
 	height: 48px;
@@ -77,7 +77,7 @@ type ToggleIconProps = DefinedIconProps & {
 
 export const ToggleIcon: FC<ToggleIconProps> = styled(Icon).attrs(
 	({ show }: ToggleIconProps) => ({
-		icon: show ? "right-arrow" : "left-arrow",
+		icon: show ? "left-arrow" : "right-arrow",
 	}),
 )`
 	color: ${color.dark10};

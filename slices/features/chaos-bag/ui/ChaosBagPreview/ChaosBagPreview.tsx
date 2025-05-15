@@ -8,6 +8,7 @@ import {
 	useAppSelector,
 } from "@shared/lib";
 import { Delay } from "@shared/ui";
+import type { Href } from "expo-router";
 import { useCallback, useMemo } from "react";
 import {
 	Dimensions,
@@ -47,11 +48,17 @@ export const ChaosBagPreview = (props: ChaosBagPreviewProps) => {
 		};
 	}, [tokens]);
 
-	const onEdit = useCallback(async () => {
-		dispatch(goBack());
-		await delay(200);
-		dispatch(goToPage(routes.chaosBag));
-	}, [dispatch]);
+	const goTo = useCallback(
+		(href: Href) => async () => {
+			dispatch(goBack());
+			await delay(300);
+			dispatch(goToPage(href));
+		},
+		[dispatch],
+	);
+
+	const onEdit = goTo(routes.chaosBag);
+	const onHistory = goTo(routes.chaosBagHistory);
 
 	const toggleSeal = useCallback(
 		(id: string) => () => {
@@ -86,13 +93,21 @@ export const ChaosBagPreview = (props: ChaosBagPreviewProps) => {
 		[toggleSeal],
 	);
 
+	const actions = useMemo(() => {
+		return [
+			{
+				icon: "edit",
+				onAction: onEdit,
+			},
+			{
+				icon: "history",
+				onAction: onHistory,
+			},
+		];
+	}, [onEdit, onHistory]);
+
 	return (
-		<C.Container
-			{...props}
-			title="Chaos Bag"
-			actionIcon="edit"
-			onAction={onEdit}
-		>
+		<C.Container {...props} title="Chaos Bag" actions={actions}>
 			<C.Content>
 				<Delay>
 					{tokens.length > 0 && data.sealed.length === 0 && (

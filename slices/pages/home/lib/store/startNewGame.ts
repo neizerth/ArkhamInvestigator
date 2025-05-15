@@ -1,7 +1,4 @@
-import {
-	setChaosBagSealedTokens,
-	setRevealedTokenIds,
-} from "@features/chaos-bag";
+import { setRevealHistory, setRevealedTokenIds } from "@features/chaos-bag";
 import type { ActionCreator } from "@reduxjs/toolkit";
 import { routes } from "@shared/config";
 import {
@@ -28,9 +25,12 @@ export const startNewGame: ActionCreator<AppThunk> =
 		dispatch(setDoom(0));
 		dispatch(setClues(0));
 		dispatch(setResources(0));
-		dispatch(setReplaceInvestigator(false));
+
+		dispatch(setRevealHistory([]));
 		dispatch(setRevealedTokenIds([]));
-		dispatch(setChaosBagSealedTokens([]));
+
+		dispatch(setReplaceInvestigator(false));
+
 		dispatch(setSelectedInvestigators([]));
 		dispatch(setInvestigatorBoards([]));
 		dispatch(goToPage(routes.selectInvestigators));
