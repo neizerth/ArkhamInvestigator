@@ -1,4 +1,4 @@
-import { useAppSelector, useBoolean } from "@shared/lib";
+import { useAppSelector } from "@shared/lib";
 import { init, last } from "ramda";
 import { useMemo } from "react";
 import type { ViewProps } from "react-native";
@@ -13,7 +13,6 @@ import { useTokenRevealModal } from "./hooks";
 export type ChaosTokenRevealModalProps = ViewProps;
 
 export const ChaosTokenRevealModal = (props: ChaosTokenRevealModalProps) => {
-	const [oneMoreLoading, setOneMoreLoading] = useBoolean();
 	const tokens = useAppSelector(selectRevealedTokens);
 	const animate = useAppSelector(selectChaosBagLoadingAnimation);
 
@@ -33,7 +32,7 @@ export const ChaosTokenRevealModal = (props: ChaosTokenRevealModalProps) => {
 		) : null;
 	}
 
-	const loadMore = animate ? setOneMoreLoading.on : control.reveal;
+	const loadMore = animate ? control.setOneMoreLoading.on : control.reveal;
 
 	const lastToken = last(tokens) as ChaosBagToken;
 
@@ -60,9 +59,9 @@ export const ChaosTokenRevealModal = (props: ChaosTokenRevealModalProps) => {
 				>
 					<C.LastToken {...lastToken} />
 				</C.TokenButton>
-				{oneMoreLoading && (
+				{control.oneMoreLoading && (
 					<C.OneMoreLoaderCancel
-						onPress={setOneMoreLoading.off}
+						onPress={control.setOneMoreLoading.off}
 						activeOpacity={1}
 					>
 						<C.OneMoreLoader onLoad={control.reveal} duration={500} show />
