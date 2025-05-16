@@ -1,5 +1,8 @@
 import type { RectPosition } from "@shared/model";
+import { Dimensions } from "react-native";
 import type { HeaderLayoutType } from "../model";
+
+const screen = Dimensions.get("screen");
 
 export const MAX_COLUMN_WIDTH = 600;
 export const STATUS_BAR_PADDING = 0;
@@ -19,7 +22,8 @@ export const servicePadding: Record<HeaderLayoutType, RectPosition> = {
 	},
 };
 
-export const DEFAULT_PORTRAIT_DESCRIPTION_HEIGHT = 80;
+export const DEFAULT_PORTRAIT_DESCRIPTION_HEIGHT =
+	screen.height > 640 ? 70 : 80;
 
 export const PORTRAIT_DESCRIPTION_OFFSET = 40;
 
