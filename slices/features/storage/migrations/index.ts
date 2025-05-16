@@ -7,6 +7,7 @@ import v5 from "./2025-04-05T17-24-set-default-deceleration";
 import v6 from "./2025-04-13T21-24-reset-boards";
 import v7 from "./2025-05-10T23-09-clear-image-cache";
 import v8 from "./2025-05-13T13-11-clear-boards";
+import v9 from "./2025-05-16T16-16-set-default-pinned-calculations";
 
 export const persistConfigMigrations = {
 	0: v0,
@@ -18,4 +19,5 @@ export const persistConfigMigrations = {
 	6: v6,
 	7: v7,
 	8: v8,
+	9: v9,
 };
