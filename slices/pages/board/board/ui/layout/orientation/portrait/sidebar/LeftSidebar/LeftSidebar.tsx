@@ -58,7 +58,8 @@ export const LeftSidebar = ({ ...props }: LeftSidebarProps) => {
 	const canUndo = historyEnabled && historyIndex !== -1;
 	const canRedo = historyEnabled && historyIndex < historyLength - 1;
 
-	const compactHistory = showText && !single && window.height < 800;
+	const compactHistory =
+		!single && ((showText && window.height < 800) || window.height <= 640);
 
 	return (
 		<Sidebar {...props}>
