@@ -127,6 +127,10 @@ export const HelpPage = () => {
 			<Paragraph>{t`board.help.calculator.result`}</Paragraph>
 			<Paragraph>{t`board.help.calculator.history`}</Paragraph>
 
+			<Paragraph>{t`board.help.calculator.expression`}</Paragraph>
+
+			<Paragraph>{t`board.help.calculator.buttons`}</Paragraph>
+
 			<Paragraph>{t`board.help.calculator.history.actions`}</Paragraph>
 
 			<Text>
