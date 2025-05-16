@@ -73,6 +73,11 @@ export const Keyboard = ({ ...props }: KeyboardProps) => {
 		dispatch(addCurrentSkillCheckToHistory());
 	}, [dispatch]);
 
+	const calcAndCheck = useCallback(() => {
+		equals();
+		showReveal();
+	}, [equals, showReveal]);
+
 	const withDigitProps = (value: number) => {
 		const baseProps = {
 			onPress: sendDigit(value),
@@ -155,7 +160,11 @@ export const Keyboard = ({ ...props }: KeyboardProps) => {
 								<C.Operator {...withOperatorProps("add")} />
 							</C.Row>
 							{showEquals && (
-								<PrimaryButton styleType="transparent" onPress={equals}>
+								<PrimaryButton
+									styleType="transparent"
+									onPress={equals}
+									onLongPress={calcAndCheck}
+								>
 									<C.EqualsText>{t`Equals`}</C.EqualsText>
 								</PrimaryButton>
 							)}
