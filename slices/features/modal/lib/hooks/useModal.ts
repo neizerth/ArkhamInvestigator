@@ -1,7 +1,7 @@
 import { delay } from "@shared/lib";
 import { useCallback, useContext, useMemo } from "react";
 import { Keyboard } from "react-native";
-import { useAppDispatch } from "../../../../shared/lib/hooks/store/useAppDispatch";
+import { useAppDispatch } from "../../../../shared/lib/hooks/store/dispatch/useAppDispatch";
 import type { ModalData, ModalOkEvent } from "../../model";
 import { ModalContext } from "../context";
 import { closeModal, openModal } from "../store/features/modal/actions";

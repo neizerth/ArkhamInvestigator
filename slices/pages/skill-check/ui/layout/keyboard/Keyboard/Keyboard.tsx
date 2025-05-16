@@ -1,7 +1,4 @@
-import {
-	selectUnrevealedChaosTokensCount,
-	setShowRevealChaosTokenModal,
-} from "@features/chaos-bag";
+import { cancelShowRevealModal } from "@features/chaos-bag";
 import { PrimaryButton } from "@features/haptic";
 import { useAppTranslation } from "@features/i18n";
 import {
@@ -18,10 +15,11 @@ import type { SkillCheckCommandType, SkillCheckOperator } from "@shared/model";
 import { useCallback, useEffect } from "react";
 import { type ViewProps, useWindowDimensions } from "react-native";
 import { characters } from "../../../../config";
+import { useKeyCheck } from "../../../../lib";
 import { LayoutContainer } from "../../LayoutContainer";
 import * as C from "./Keyboard.components";
+import { useOpenChaosBagModal } from "./hooks";
 import { operatorMapping } from "./mapping";
-import { useOpenChaosBagModal } from "./useOpenChaosBagModal";
 
 export type KeyboardProps = ViewProps;
 
@@ -29,16 +27,15 @@ export const Keyboard = ({ ...props }: KeyboardProps) => {
 	const dispatch = useAppDispatch();
 	const { t } = useAppTranslation();
 	const historyShown = useAppSelector(selectHistoryShown);
-	const unrevealedCount = useAppSelector(selectUnrevealedChaosTokensCount);
 	const window = useWindowDimensions();
 	const showEquals = window.height > 590;
 	const showRule = window.height > 670;
 
-	const showRevealButton = unrevealedCount > 0;
 	const showReveal = useOpenChaosBagModal();
+	const showKeyReveal = useKeyCheck();
 
 	const hideReveal = useCallback(() => {
-		dispatch(setShowRevealChaosTokenModal(false));
+		dispatch(cancelShowRevealModal());
 	}, [dispatch]);
 
 	useEffect(() => {
@@ -76,10 +73,29 @@ export const Keyboard = ({ ...props }: KeyboardProps) => {
 		dispatch(addCurrentSkillCheckToHistory());
 	}, [dispatch]);
 
-	const withDigitProps = (value: number) => ({
-		onPress: sendDigit(value),
-		children: value,
-	});
+	const withDigitProps = (value: number) => {
+		const baseProps = {
+			onPress: sendDigit(value),
+			children: value,
+		};
+
+		if (value === 0) {
+			return baseProps;
+		}
+
+		return {
+			...baseProps,
+			onSwipeUp: showKeyReveal({
+				type: "number",
+				value,
+			}),
+			onSwipeDown: showKeyReveal({
+				operator: "subtract",
+				type: "number",
+				value,
+			}),
+		};
+	};
 
 	const withOperatorProps = (value: SkillCheckOperator) => ({
 		onPress: sendOperator(value),
@@ -127,16 +143,8 @@ export const Keyboard = ({ ...props }: KeyboardProps) => {
 								<C.Operator {...withOperatorProps("subtract")} />
 							</C.Row>
 							<C.Row>
-								{showRevealButton ? (
-									<C.RevealButton
-										icon="token_sealed_outline"
-										onPressIn={showReveal}
-										onPressOut={hideReveal}
-									/>
-								) : (
-									<C.Placeholder />
-								)}
-								<C.Button {...withDigitProps(0)} />
+								<C.Placeholder />
+								<C.Button {...withDigitProps(0)} onLongPress={showReveal} />
 								{showEquals ? (
 									<C.Placeholder />
 								) : (

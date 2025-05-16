@@ -1,17 +1,14 @@
 import type { HapticSliderProps } from "@features/haptic";
 import { useAppTranslation } from "@features/i18n";
-import type { ActionCreatorWithPayload } from "@reduxjs/toolkit";
 import { useAppDispatch, useAppSelector } from "@shared/lib";
-import type { AppThunk, RootState } from "@shared/model";
+import type { AppActionCreator, RootState } from "@shared/model";
 import { useCallback } from "react";
 import type { Selector } from "react-redux";
 import * as C from "./StoreSlider.components";
 
 export type StoreSliderProps = HapticSliderProps & {
 	selector: Selector<RootState, number>;
-	actionCreator:
-		| ActionCreatorWithPayload<number>
-		| ((value: number) => AppThunk);
+	actionCreator: AppActionCreator<number>;
 	translate?: boolean;
 	label?: string;
 };

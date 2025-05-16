@@ -3,12 +3,16 @@ import { TouchableOpacity } from "@features/haptic";
 import { withLocale } from "@features/i18n";
 import { color, font, size } from "@shared/config";
 import { Row as BaseRow, UnscaledText } from "@shared/ui";
+import {
+	CustomKeyboardButton,
+	IconKeyboardButton,
+	TextKeyboardButton,
+} from "@widgets/control/keyboard-button";
 import type { FC } from "react";
 import { View, type ViewProps } from "react-native";
 import type { SvgProps } from "react-native-svg";
 import styled, { css } from "styled-components/native";
 import { skillCheckColor } from "../../../../config";
-import * as Buttons from "../KeyboardButton";
 import { StatsKeyboard } from "../StatsKeyboard";
 import BackspaceImage from "./images/backspace.svg";
 import RuleBottom from "./images/rule.svg";
@@ -55,11 +59,11 @@ const buttonStyle = css`
   flex: 1;
 `;
 
-export const Button: typeof Buttons.TextButton = styled(Buttons.TextButton)`
+export const Button: typeof TextKeyboardButton = styled(TextKeyboardButton)`
   ${buttonStyle}
 `;
-export const CustomButton: typeof Buttons.CustomButton = styled(
-	Buttons.CustomButton,
+export const CustomButton: typeof CustomKeyboardButton = styled(
+	CustomKeyboardButton,
 )`
   ${buttonStyle}
 `;
@@ -124,8 +128,8 @@ export const Rule: FC<RuleProps> = styled(RuleBottom).attrs({
   margin-bottom: -5px;
 `;
 
-export const RevealButton: typeof Buttons.IconButton = styled(
-	Buttons.IconButton,
+export const RevealButton: typeof IconKeyboardButton = styled(
+	IconKeyboardButton,
 )`
   flex: 1;
 `;

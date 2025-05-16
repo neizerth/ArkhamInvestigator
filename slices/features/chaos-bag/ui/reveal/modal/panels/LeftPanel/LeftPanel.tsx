@@ -16,7 +16,7 @@ export const LeftPanel = ({ ...props }: LeftPanelProps) => {
 		<C.Container {...props}>
 			<C.Actions>
 				<C.SkillValue>
-					{skillValue && <C.SkillValueText value={skillValue} />}
+					{skillValue !== null && <C.SkillValueText value={skillValue} />}
 					{skillType && (
 						<C.SkillType>
 							<C.SkillTypeIcon statType={skillType} />

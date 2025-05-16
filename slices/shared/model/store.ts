@@ -1,4 +1,9 @@
-import type { Action, ActionCreator, ThunkAction } from "@reduxjs/toolkit";
+import type {
+	Action,
+	ActionCreator,
+	ActionCreatorWithPayload,
+	ThunkAction,
+} from "@reduxjs/toolkit";
 import type { makeStore } from "../lib/store/makeStore";
 
 export type AppThunk<ReturnType = void> = ThunkAction<
@@ -18,3 +23,6 @@ export type AppStore = ReturnType<typeof makeStore>["store"];
 export type RootState = ReturnType<AppStore["getState"]>;
 export type AppDispatch = AppStore["dispatch"];
 export type AppThunkCreator = ActionCreator<AppThunk>;
+export type AppActionCreator<T> =
+	| ActionCreatorWithPayload<T>
+	| ((value: T) => AppThunk);

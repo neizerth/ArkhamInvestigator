@@ -1,9 +1,12 @@
 import { color, size } from "@shared/config";
 import { Row } from "@shared/ui";
+import {
+	IconKeyboardButton,
+	type IconKeyboardButtonProps,
+} from "@widgets/control/keyboard-button";
 import type { FC } from "react";
 import { ScrollView, View } from "react-native";
 import styled from "styled-components/native";
-import * as Buttons from "../KeyboardButton";
 
 export const Container: typeof ScrollView = styled(ScrollView)`
 
@@ -14,9 +17,9 @@ export const Content: typeof Row = styled(Row)`
   align-items: center;
 `;
 
-type ButtonProps = Omit<Buttons.IconButtonProps, "size">;
+type ButtonProps = Omit<IconKeyboardButtonProps, "size">;
 
-export const Button: FC<ButtonProps> = styled(Buttons.IconButton).attrs({
+export const Button: FC<ButtonProps> = styled(IconKeyboardButton).attrs({
 	size: "small",
 	type: "icon",
 })`

@@ -83,6 +83,7 @@ export const useTokenRevealModal = () => {
 		close,
 		returnTokens,
 		oneMoreLoading,
-		setOneMoreLoading,
+		enableLoading: setOneMoreLoading.on,
+		disableLoading: setOneMoreLoading.off,
 	};
 };

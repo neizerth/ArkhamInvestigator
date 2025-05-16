@@ -1,8 +1,8 @@
 import type { HapticSelectProps } from "@features/haptic";
 import { useAppTranslation } from "@features/i18n";
-import type { ActionCreatorWithPayload, Selector } from "@reduxjs/toolkit";
+import type { Selector } from "@reduxjs/toolkit";
 import { useAppDispatch, useAppSelector } from "@shared/lib";
-import type { AppThunk, RootState } from "@shared/model";
+import type { AppActionCreator, RootState } from "@shared/model";
 import type { SelectItem } from "@shared/ui";
 import { propEq } from "ramda";
 import { useCallback } from "react";
@@ -20,7 +20,7 @@ export type StoreSelectProps<T> = Omit<
 	data: Item<T>[];
 	contentContainerStyle?: ViewStyle;
 	selector: Selector<RootState, T>;
-	actionCreator: ActionCreatorWithPayload<T> | ((value: T) => AppThunk);
+	actionCreator: AppActionCreator<T>;
 	translate?: boolean;
 	label?: string;
 };

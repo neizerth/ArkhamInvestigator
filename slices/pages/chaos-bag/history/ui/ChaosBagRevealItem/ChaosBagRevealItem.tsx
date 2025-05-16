@@ -90,7 +90,7 @@ export const ChaosBagRevealItem = ({
 								<C.SkillTypeIcon statType={skillCheckType} />
 							</C.SkillType>
 						)}
-						{skillCheckValue && (
+						{typeof skillCheckValue === "number" && (
 							<C.SkillValue>
 								<C.SkillValueText value={skillCheckValue} />
 							</C.SkillValue>

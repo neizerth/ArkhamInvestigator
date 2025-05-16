@@ -1,6 +1,6 @@
 import {
+	cancelShowRevealModal,
 	selectChaosBagLoadingAnimation,
-	setShowRevealChaosTokenModal,
 } from "@features/chaos-bag";
 import { useSkillItemChaosTokenRevealModal } from "@features/skill-check";
 import {
@@ -43,7 +43,7 @@ export const ExpressionHistory = ({
 	const showReveal = useSkillItemChaosTokenRevealModal();
 
 	const hideReveal = useCallback(() => {
-		dispatch(setShowRevealChaosTokenModal(false));
+		dispatch(cancelShowRevealModal());
 		return false;
 	}, [dispatch]);
 

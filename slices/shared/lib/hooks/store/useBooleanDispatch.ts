@@ -1,7 +1,7 @@
 import type { ActionCreatorWithPayload } from "@reduxjs/toolkit";
 import type { AppThunk } from "@shared/model";
 import { useMemo } from "react";
-import { useAppDispatch } from "./useAppDispatch";
+import { useAppDispatch } from "./dispatch/useAppDispatch";
 
 type ActionCreator =
 	| ActionCreatorWithPayload<boolean>

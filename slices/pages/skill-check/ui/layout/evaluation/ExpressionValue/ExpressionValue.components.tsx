@@ -1,10 +1,10 @@
 import { Copasetic } from "@assets/fonts";
+import { TouchableOpacity } from "@features/haptic";
 import { color } from "@shared/config";
 import { UnscaledText } from "@shared/ui";
-import { View } from "react-native";
 import styled from "styled-components/native";
 
-export const Container: typeof View = styled(View)`
+export const Container: typeof TouchableOpacity = styled(TouchableOpacity)`
   
 `;
 

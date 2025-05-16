@@ -1,12 +1,13 @@
 import {
+	cancelShowRevealModal,
 	selectChaosBagLoadingAnimation,
-	setShowRevealChaosTokenModal,
 } from "@features/chaos-bag";
 import { selectCurrentLanguage } from "@features/i18n";
 import { useSkillItemChaosTokenRevealModal } from "@features/skill-check";
 import {
 	selectTapToHidePins,
 	setBoardProp,
+	startSkillCheck,
 	toggleSkillCheckHistoryItemPin as togglePin,
 	useAppDispatch,
 	useAppSelector,
@@ -42,7 +43,7 @@ export const PinnedSkillCheckItem = ({
 
 	const displayStyle = getExpressionDisplayStyle(language);
 
-	const { id } = item;
+	const { id, type } = item;
 
 	const tapOnPin = useCallback(() => {
 		if (tapToHide) {
@@ -55,21 +56,30 @@ export const PinnedSkillCheckItem = ({
 	const setupReveal = useSkillItemChaosTokenRevealModal();
 
 	const closeReveal = useCallback(() => {
-		dispatch(setShowRevealChaosTokenModal(false));
+		dispatch(cancelShowRevealModal());
 		return false;
 	}, [dispatch]);
 
-	const onAdvancedAction = useCallback(() => {
+	const onSwipeRight = useCallback(() => {
 		if (!tapToHide) {
 			return;
 		}
 		dispatch(togglePin(id));
 	}, [dispatch, tapToHide, id]);
 
-	const swipeLeft = Gesture.Fling()
+	const onSwipeLeft = useCallback(() => {
+		dispatch(startSkillCheck(type));
+	}, [dispatch, type]);
+
+	const swipeRight = Gesture.Fling()
 		.direction(Directions.RIGHT)
 		.runOnJS(true)
-		.onStart(onAdvancedAction);
+		.onStart(onSwipeRight);
+
+	const swipeLeft = Gesture.Fling()
+		.direction(Directions.LEFT)
+		.runOnJS(true)
+		.onStart(onSwipeLeft);
 
 	const reveal = useMemo(() => {
 		return setupReveal(item);
@@ -79,8 +89,10 @@ export const PinnedSkillCheckItem = ({
 	const onPressOut = animate ? closeReveal : emptyCallback;
 	const onLongPress = animate ? emptyCallback : reveal;
 
+	const gestureConfig = Gesture.Exclusive(swipeLeft, swipeRight);
+
 	return (
-		<GestureDetector gesture={swipeLeft}>
+		<GestureDetector gesture={gestureConfig}>
 			<C.Item
 				{...props}
 				key={item.id}

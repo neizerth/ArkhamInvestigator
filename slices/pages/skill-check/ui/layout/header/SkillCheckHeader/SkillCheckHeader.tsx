@@ -1,7 +1,4 @@
-import {
-	openSkillCheckChaosBagModal,
-	setShowRevealChaosTokenModal,
-} from "@features/chaos-bag";
+import { openSkillCheckChaosBagModal } from "@features/chaos-bag";
 import {
 	clearSkillCheckHistory,
 	goBack,
@@ -40,10 +37,6 @@ export const SkillCheckHeader = ({ ...props }: SkillCheckHeaderProps) => {
 		dispatch(goBack());
 	}, [dispatch]);
 
-	const hideReveal = useCallback(() => {
-		dispatch(setShowRevealChaosTokenModal(false));
-	}, [dispatch]);
-
 	const showReveal = useCallback(() => {
 		if (!type || !value) {
 			return;
@@ -61,7 +54,7 @@ export const SkillCheckHeader = ({ ...props }: SkillCheckHeaderProps) => {
 		<C.Container {...props}>
 			<C.Content border={!isLargeLayout}>
 				{type && (
-					<C.CheckIcon onPressIn={showReveal} onPressOut={hideReveal}>
+					<C.CheckIcon onPress={showReveal}>
 						<C.Stat icon={type} />
 					</C.CheckIcon>
 				)}

@@ -32,7 +32,7 @@ export const ChaosTokenRevealModal = (props: ChaosTokenRevealModalProps) => {
 		) : null;
 	}
 
-	const loadMore = animate ? control.setOneMoreLoading.on : control.reveal;
+	const loadMore = animate ? control.enableLoading : control.reveal;
 
 	const lastToken = last(tokens) as ChaosBagToken;
 
@@ -61,7 +61,7 @@ export const ChaosTokenRevealModal = (props: ChaosTokenRevealModalProps) => {
 				</C.TokenButton>
 				{control.oneMoreLoading && (
 					<C.OneMoreLoaderCancel
-						onPress={control.setOneMoreLoading.off}
+						onPress={control.disableLoading}
 						activeOpacity={1}
 					>
 						<C.OneMoreLoader onLoad={control.reveal} duration={500} show />

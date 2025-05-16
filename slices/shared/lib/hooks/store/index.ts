@@ -1,4 +1,3 @@
-export * from "./useAppDispatch";
+export * from "./dispatch";
 export * from "./useAppSelector";
 export * from "./useBooleanDispatch";
-export * from "./useDispatchAction";

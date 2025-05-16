@@ -1,7 +1,4 @@
-import {
-	openSkillCheckChaosBagModal,
-	setShowRevealChaosTokenModal,
-} from "@features/chaos-bag";
+import { openSkillCheckChaosBagModal } from "@features/chaos-bag";
 import {
 	selectCurrentStatBaseValue,
 	selectCurrentStatValue,
@@ -60,8 +57,7 @@ export const Skill = ({ width, height, type, ...props }: SkillProps) => {
 
 	const onPressOut = useCallback(() => {
 		setTouching(false);
-		dispatch(setShowRevealChaosTokenModal(false));
-	}, [dispatch]);
+	}, []);
 
 	const onOpen = useCallback(() => {
 		dispatch(startSkillCheck(type));

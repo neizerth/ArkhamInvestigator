@@ -7,6 +7,7 @@ import {
 import { memo, useMemo } from "react";
 import type { ViewProps } from "react-native";
 import { useSkillCheckLayoutType } from "../../../../lib";
+import { EvaluationExpressionGestures as Gestures } from "../EvaluationExpressionGestures";
 import { ExpressionValue } from "../ExpressionValue";
 import * as C from "./Evaluation.components";
 
@@ -42,7 +43,9 @@ export const Evaluation = ({ ...props }: EvaluationProps) => {
 				{isLargeLayout && <C.History onLayout={onLayout} size={historySize} />}
 				{!historyShown && (
 					<C.Current>
-						<C.Expression data={expressionData} type="primary" />
+						<Gestures>
+							<C.Expression data={expressionData} type="primary" />
+						</Gestures>
 						<ExpressionValue />
 					</C.Current>
 				)}

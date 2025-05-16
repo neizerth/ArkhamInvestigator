@@ -5,7 +5,7 @@ import {
 	setChaosBagSkillValue,
 	setRevealedTokenIds,
 	setShowRevealChaosTokenModal,
-} from "../../../chaosBag";
+} from "../../../../chaosBag";
 
 type Options = {
 	type: InvestigatorBoardStat;

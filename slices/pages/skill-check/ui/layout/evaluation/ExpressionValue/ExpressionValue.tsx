@@ -1,23 +1,28 @@
+import { openSkillCheckChaosBagModal } from "@features/chaos-bag";
 import {
 	formatSkillCheckValue as formatValue,
 	getSkillCheckValue,
 	sanitizeSkillCheckExpression,
 	selectCurrentBoardProp,
 	selectSkillCheckData,
+	selectSkillCheckType,
+	useAppDispatch,
 	useAppSelector,
 } from "@shared/lib";
+import { empty } from "ramda";
+import { useCallback } from "react";
 import type { ViewProps } from "react-native";
 import * as C from "./ExpressionValue.components";
 
 export type ExpressionValueProps = ViewProps;
 
-export const ExpressionValue = (props: ExpressionValueProps) => {
-	const data = useAppSelector(selectSkillCheckData);
-	const boardValue = useAppSelector(selectCurrentBoardProp("value"));
+const emptyCallback = empty(false);
 
-	if (!boardValue) {
-		return null;
-	}
+export const ExpressionValue = (props: ExpressionValueProps) => {
+	const dispatch = useAppDispatch();
+	const data = useAppSelector(selectSkillCheckData);
+	const type = useAppSelector(selectSkillCheckType);
+	const boardValue = useAppSelector(selectCurrentBoardProp("value"));
 
 	const validData = sanitizeSkillCheckExpression(data);
 
@@ -30,8 +35,20 @@ export const ExpressionValue = (props: ExpressionValueProps) => {
 		validData.length > 0 &&
 		!(validData.length === 1 && validData[0].type === "number");
 
+	const onLongPress = useCallback(() => {
+		if (!type || !showValue) {
+			return false;
+		}
+		dispatch(
+			openSkillCheckChaosBagModal({
+				type,
+				value,
+			}),
+		);
+	}, [dispatch, value, type, showValue]);
+
 	return (
-		<C.Container {...props}>
+		<C.Container {...props} onLongPress={onLongPress}>
 			<C.Value>{showValue && `=${formatValue(value)}`}</C.Value>
 		</C.Container>
 	);

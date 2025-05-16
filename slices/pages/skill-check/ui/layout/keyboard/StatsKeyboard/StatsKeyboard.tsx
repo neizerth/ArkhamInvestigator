@@ -3,12 +3,14 @@ import { sendStatSignal, useAppDispatch } from "@shared/lib";
 import type { InvestigatorBoardStat } from "@shared/model";
 import { useCallback } from "react";
 import type { ScrollViewProps } from "react-native";
+import { useKeyCheck } from "../../../../lib";
 import * as C from "./StatsKeyboard.components";
 
 export type StatsKeyboardProps = ScrollViewProps;
 
 export const StatsKeyboard = ({ ...props }: StatsKeyboardProps) => {
 	const dispatch = useAppDispatch();
+	const showKeyReveal = useKeyCheck();
 
 	const sendStat = useCallback(
 		(value: InvestigatorBoardStat) => () => {
@@ -21,6 +23,16 @@ export const StatsKeyboard = ({ ...props }: StatsKeyboardProps) => {
 		return {
 			icon: iconMapping.stat.simple[value],
 			onPress: sendStat(value),
+			onSwipeUp: showKeyReveal({
+				operator: "add",
+				type: "stat",
+				statType: value,
+			}),
+			onSwipeDown: showKeyReveal({
+				operator: "subtract",
+				type: "stat",
+				statType: value,
+			}),
 		};
 	};
 
