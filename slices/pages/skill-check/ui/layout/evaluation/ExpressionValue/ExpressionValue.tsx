@@ -9,14 +9,11 @@ import {
 	useAppDispatch,
 	useAppSelector,
 } from "@shared/lib";
-import { empty } from "ramda";
 import { useCallback } from "react";
 import type { ViewProps } from "react-native";
 import * as C from "./ExpressionValue.components";
 
 export type ExpressionValueProps = ViewProps;
-
-const emptyCallback = empty(false);
 
 export const ExpressionValue = (props: ExpressionValueProps) => {
 	const dispatch = useAppDispatch();
@@ -43,9 +40,10 @@ export const ExpressionValue = (props: ExpressionValueProps) => {
 			openSkillCheckChaosBagModal({
 				type,
 				value,
+				expression: validData,
 			}),
 		);
-	}, [dispatch, value, type, showValue]);
+	}, [dispatch, value, type, showValue, validData]);
 
 	return (
 		<C.Container {...props} onLongPress={onLongPress}>

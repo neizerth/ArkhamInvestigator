@@ -31,6 +31,7 @@ export const useOpenChaosBagModal = () => {
 			openSkillCheckChaosBagModal({
 				type,
 				value: skillValue,
+				expression: safeExpression,
 			}),
 		);
 	}, [dispatch, type, value, expression]);

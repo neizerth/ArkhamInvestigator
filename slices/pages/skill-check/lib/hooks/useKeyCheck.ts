@@ -65,6 +65,7 @@ export const useKeyCheck = () => {
 					openSkillCheckChaosBagModal({
 						type,
 						value,
+						expression,
 					}),
 				);
 			},

@@ -58,6 +58,7 @@ export const ChaosTokenRevealModal = (props: ChaosTokenRevealModalProps) => {
 					onLongPress={control.toggleSeal(lastToken)}
 				>
 					<C.LastToken {...lastToken} />
+					<C.Expression />
 				</C.TokenButton>
 				{control.oneMoreLoading && (
 					<C.OneMoreLoaderCancel

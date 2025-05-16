@@ -12,7 +12,6 @@ export const ErrorView = ({ error }: ErrorViewProps) => {
 		<C.Container>
 			<Title>{t`Error`}</Title>
 			<C.Content>{error.message}</C.Content>
-			<C.Content>{error.stack}</C.Content>
 		</C.Container>
 	);
 };

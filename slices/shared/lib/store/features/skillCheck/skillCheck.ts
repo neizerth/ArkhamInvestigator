@@ -7,12 +7,14 @@ export type ISkillCheckState = {
 	type: InvestigatorBoardStat | null;
 	data: SkillCheckItem[];
 	historyShown: boolean;
+	showCalculationDiff: boolean;
 };
 
 const initialState: ISkillCheckState = {
 	type: null,
 	data: [],
 	historyShown: false,
+	showCalculationDiff: false,
 };
 
 const state = createSliceState(initialState);
@@ -34,12 +36,14 @@ export const {
 	sendOperatorSignal,
 	sendStatSignal,
 	setHistoryShown,
+	setShowCalculationDiff,
 } = skillCheck.actions;
 
 export const {
 	selectData: selectSkillCheckData,
 	selectType: selectSkillCheckType,
 	selectHistoryShown,
+	selectShowCalculationDiff,
 } = skillCheck.selectors;
 
 export default skillCheck.reducer;

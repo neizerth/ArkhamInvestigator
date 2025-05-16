@@ -30,7 +30,7 @@ export const LeftSidebar = ({ ...props }: LeftSidebarProps) => {
 
 	const goToPage = usePage();
 
-	const historyLength = history.length;
+	const historyLength = history?.length || 0;
 
 	const onUndo = useCallback(() => {
 		dispatch(undo());

@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import type { InvestigatorBoardStat } from "@shared/model";
+import type { InvestigatorBoardStat, SkillCheckItem } from "@shared/model";
 import { createSliceState } from "redux-toolkit-helpers";
 import type {
 	ChaosBagHistoryItem,
@@ -16,6 +16,7 @@ export type IChaosBagState = {
 	skillCheckType: InvestigatorBoardStat | null;
 	skillCheckTitle: string | null;
 	skillValue: number | null;
+	skillCheckExpression: SkillCheckItem[];
 
 	loadingAnimation: boolean;
 	revealHistory: ChaosBagHistoryItem[];
@@ -33,6 +34,7 @@ const initialState: IChaosBagState = {
 	loadingAnimation: true,
 	revealHistory: [],
 	revealHistoryItem: null,
+	skillCheckExpression: [],
 };
 
 const state = createSliceState(initialState);
@@ -50,6 +52,7 @@ export const {
 	setSkillValue: setChaosBagSkillValue,
 	setLoadingAnimation: setChaosBagLoadingAnimation,
 	setSkillCheckTitle: setChaosBagSkillCheckTitle,
+	setSkillCheckExpression: setChaosBagSkillCheckExpression,
 	setRevealedTokenIds,
 	setRevealHistory,
 	setRevealHistoryItem,
@@ -63,6 +66,7 @@ export const {
 	selectSkillValue: selectChaosBagSkillValue,
 	selectLoadingAnimation: selectChaosBagLoadingAnimation,
 	selectSkillCheckTitle: selectChaosBagSkillCheckTitle,
+	selectSkillCheckExpression: selectChaosBagSkillCheckExpression,
 	selectRevealedTokenIds,
 	selectRevealHistory,
 	selectRevealHistoryItem,

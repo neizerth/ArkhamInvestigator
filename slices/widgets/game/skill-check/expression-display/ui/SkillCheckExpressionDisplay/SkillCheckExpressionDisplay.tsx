@@ -3,6 +3,7 @@ import {
 	getSkillCheckValue,
 	sanitizeSkillCheckExpression,
 	selectCurrentBoardProp,
+	selectShowCalculationDiff,
 	selectSkillCheckHistory,
 	useAppSelector,
 } from "@shared/lib";
@@ -26,9 +27,18 @@ export const SkillCheckExpressionDisplay = ({
 	equalsContainerStyle,
 	valueStyle,
 	signStyle: signStyleProp,
-	showDiff = true,
+	showDiff: showDiffProp,
 	...props
 }: SkillCheckExpressionDisplayProps) => {
+	const showDefaultDiff = useAppSelector(selectShowCalculationDiff);
+
+	const showDiff =
+		showDefaultDiff === false
+			? false
+			: showDiffProp !== undefined
+				? showDiffProp
+				: showDefaultDiff;
+
 	const history = useAppSelector(selectSkillCheckHistory);
 	const boardValue = useAppSelector(selectCurrentBoardProp("value"));
 

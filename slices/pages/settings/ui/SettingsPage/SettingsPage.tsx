@@ -93,6 +93,14 @@ export const SettingsPage = () => {
 					</C.Row>
 					<C.Row>
 						<C.Checkbox
+							label="Show calculation changes"
+							selector={S.selectShowCalculationDiff}
+							actionCreator={S.setShowCalculationDiff}
+						/>
+					</C.Row>
+					<C.Rule />
+					<C.Row>
+						<C.Checkbox
 							label="Save trauma"
 							selector={S.selectSaveTrauma}
 							actionCreator={S.setSaveTrauma}

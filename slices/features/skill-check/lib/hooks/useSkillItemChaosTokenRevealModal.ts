@@ -27,6 +27,7 @@ export const useSkillItemChaosTokenRevealModal = () => {
 						type,
 						title,
 						value: expressionValue,
+						expression: safeExpression,
 					}),
 				);
 			},
