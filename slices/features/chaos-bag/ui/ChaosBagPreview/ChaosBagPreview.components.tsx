@@ -1,6 +1,6 @@
 import { color, font, size } from "@shared/config";
 import { Row, Text, TextView } from "@shared/ui";
-import { View } from "react-native";
+import { Dimensions, View } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import styled from "styled-components/native";
 import { Button, TouchableOpacity } from "../../../haptic";
@@ -9,6 +9,8 @@ import {
 	BlessCurseControl,
 	ChaosTokenPreviewMemo as ChaosTokenPreview,
 } from "../token";
+
+const screen = Dimensions.get("screen");
 
 export const Container: typeof ContextModal = styled(ContextModal).attrs({
 	contentStyle: {
@@ -31,6 +33,8 @@ export const Sealed: typeof View = styled(View)`
 	padding-top: ${size.gap.small}px;
 `;
 
+const maxHeight = Math.min(screen.height - 490, 250);
+
 export const List: typeof FlatList = styled(FlatList).attrs({
 	contentContainerStyle: {
 		alignItems: "center",
@@ -40,7 +44,7 @@ export const List: typeof FlatList = styled(FlatList).attrs({
   border-bottom-width: 1px;
   border-bottom-color: ${color.dark20};
 
-  max-height: 250px;
+  max-height: ${maxHeight}px;
 `;
 
 export const TokenRow: typeof Row = styled(Row)`

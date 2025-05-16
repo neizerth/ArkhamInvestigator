@@ -96,7 +96,12 @@ export const ChaosBagRevealItem = ({
 
 				<C.Separator />
 				<C.List>
-					<C.TokenList data={tokens} renderItem={renderItem} horizontal />
+					<C.TokenList
+						data={tokens}
+						renderItem={renderItem}
+						removeClippedSubviews={false}
+						horizontal
+					/>
 					{title && (
 						<C.Title>
 							<C.TitleText ellipsizeMode="tail" numberOfLines={1}>
