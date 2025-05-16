@@ -19,7 +19,7 @@ export const ExpressionPanel = (props: ExpressionPanelProps) => {
 		<C.Container {...props}>
 			<C.Content>
 				{title && <C.Title>{title}</C.Title>}
-				{!title && expression.length > 0 && (
+				{!title && expression.length > 1 && (
 					<C.Expression {...styles} data={expression} showDiff={false} />
 				)}
 			</C.Content>
