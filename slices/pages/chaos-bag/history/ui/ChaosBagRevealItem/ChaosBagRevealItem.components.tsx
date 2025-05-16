@@ -54,11 +54,15 @@ export const List: typeof View = styled(View)`
   flex: 1;
 `;
 
-export const Title: typeof Text = styled(Text)`
-  font-size: ${font.size.small}px;
+export const Title: typeof View = styled(View)`
   position: absolute;
   left: 0;
   bottom: 2px;
+`;
+
+export const TitleText: typeof Text = styled(Text)`
+  font-size: ${font.size.small}px;
+
   padding: 0 ${size.gap.small}px;
   background-color: ${color.dark20};
   border-radius: ${size.borderRadius.default}px;

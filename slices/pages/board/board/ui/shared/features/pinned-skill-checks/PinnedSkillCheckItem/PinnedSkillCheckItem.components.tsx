@@ -9,12 +9,13 @@ import styled from "styled-components/native";
 export const Item: typeof TouchableOpacity = styled(TouchableOpacity)`
   align-items: center;
 	flex-direction: row;
-	padding: ${size.gap.default}px;
+	padding: ${size.gap.small}px;
 `;
 
 export const ItemContent: typeof Row = styled(Row)`
   align-items: center;
 	gap: ${size.gap.small}px;
+	flex-wrap: wrap;
 `;
 
 const zhTitleTextConfig = {

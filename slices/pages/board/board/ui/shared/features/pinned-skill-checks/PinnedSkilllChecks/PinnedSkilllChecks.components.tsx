@@ -22,7 +22,7 @@ export const Area: typeof TouchableOpacity = styled(TouchableOpacity)`
 `;
 
 export const Content: typeof View = styled(View)`
-	padding: ${size.gap.medium}px 25px ${size.gap.medium}px;
+	padding: 7% 25px 9%;
 	border-radius: ${size.borderRadius.default}px;
 	position: relative;
 	z-index: 1;
@@ -34,8 +34,8 @@ export const Background: typeof Image = styled(Image).attrs({
 	contentFit: "fill",
 })`
 	position: absolute;
-	top: 0;
-	bottom: 0;
+	top: -5%;
+	bottom: -10%;
 	right: 10px;
 	left: 10px;
 `;
@@ -49,7 +49,7 @@ export const Toggle: typeof TouchableOpacity = styled(TouchableOpacity)`
 	position: absolute;
 	z-index: 10;
 	right: 25px;
-	top: 15px;
+	top: 25px;
 	width: 48px;
 	height: 48px;
 	justify-content: center;

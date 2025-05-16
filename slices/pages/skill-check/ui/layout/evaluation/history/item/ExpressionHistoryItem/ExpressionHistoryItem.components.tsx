@@ -64,6 +64,7 @@ export const TitleText = withLocale({
 			paddingVertical: 2,
 			paddingHorizontal: 5,
 			borderRadius: 2,
+			maxWidth: 250,
 		},
 		ru: {
 			fontFamily: Enthalpy298.regular,

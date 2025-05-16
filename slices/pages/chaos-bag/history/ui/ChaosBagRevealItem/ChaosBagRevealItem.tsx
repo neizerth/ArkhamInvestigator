@@ -7,7 +7,6 @@ import { useHapticFeedback } from "@features/haptic";
 import {
 	goBack,
 	selectBoardProp,
-	selectBoardsCount,
 	setCurrentInvestigatorIndex,
 	useAppDispatch,
 	useAppSelector,
@@ -32,8 +31,6 @@ export const ChaosBagRevealItem = ({
 	const { boardId, tokens, id } = item;
 
 	const investigator = useAppSelector(selectBoardProp(boardId, "investigator"));
-
-	const isSingle = useAppSelector(selectBoardsCount) === 1;
 
 	const index = boardId - 1;
 
@@ -76,32 +73,37 @@ export const ChaosBagRevealItem = ({
 		<GestureDetector gesture={longPress}>
 			<C.Container {...props}>
 				<C.Position>{position}</C.Position>
-				{!isSingle && (
-					<C.Investigator>
-						<C.Image
-							faction={investigator.faction_code}
-							code={investigator.id}
-							size={50}
-							showIcon={false}
-							onPress={selectBoard}
-						/>
-						{skillCheckType && (
-							<C.SkillType>
-								<C.SkillTypeIcon statType={skillCheckType} />
-							</C.SkillType>
-						)}
-						{typeof skillCheckValue === "number" && (
-							<C.SkillValue>
-								<C.SkillValueText value={skillCheckValue} />
-							</C.SkillValue>
-						)}
-					</C.Investigator>
-				)}
+
+				<C.Investigator>
+					<C.Image
+						faction={investigator.faction_code}
+						code={investigator.id}
+						size={50}
+						showIcon={false}
+						onPress={selectBoard}
+					/>
+					{skillCheckType && (
+						<C.SkillType>
+							<C.SkillTypeIcon statType={skillCheckType} />
+						</C.SkillType>
+					)}
+					{typeof skillCheckValue === "number" && (
+						<C.SkillValue>
+							<C.SkillValueText value={skillCheckValue} />
+						</C.SkillValue>
+					)}
+				</C.Investigator>
 
 				<C.Separator />
 				<C.List>
 					<C.TokenList data={tokens} renderItem={renderItem} horizontal />
-					{title && <C.Title>{title}</C.Title>}
+					{title && (
+						<C.Title>
+							<C.TitleText ellipsizeMode="tail" numberOfLines={1}>
+								{title}
+							</C.TitleText>
+						</C.Title>
+					)}
 				</C.List>
 			</C.Container>
 		</GestureDetector>

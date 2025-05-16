@@ -1,5 +1,5 @@
-import { size } from "@shared/config";
-import { View } from "react-native";
+import { color, size } from "@shared/config";
+import { ActivityIndicator, View } from "react-native";
 import styled from "styled-components/native";
 import { LayoutContainer } from "../../LayoutContainer";
 import { ExpressionDisplay } from "../ExpressionDisplay";
@@ -27,8 +27,22 @@ export const History: typeof ExpressionHistory = styled(
 ).attrs({
 	contentContainerStyle: {
 		flex: 1,
+		paddingBottom: 10,
 	},
 })`
+`;
+
+export const HistoryContainer: typeof View = styled(View)`
+  flex: 1;
+`;
+
+export const Loader: typeof ActivityIndicator = styled(ActivityIndicator).attrs(
+	{
+		color: color.dark10,
+	},
+)`
+  padding: ${size.gap.default}px 0;
+  flex: 1;
 `;
 
 export const Expression: typeof ExpressionDisplay = styled(

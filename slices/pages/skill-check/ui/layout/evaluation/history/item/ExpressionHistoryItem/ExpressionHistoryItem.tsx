@@ -58,8 +58,15 @@ export const ExpressionHistoryItem = ({
 		<C.Container>
 			{pinned && <C.Pin />}
 			{title && (
-				<C.Title>
-					<C.TitleText>{title}</C.TitleText>
+				<C.Title
+					onPress={onPress}
+					onPressIn={onPressIn}
+					onPressOut={onPressOut}
+					onLongPress={onLongPress}
+				>
+					<C.TitleText ellipsizeMode="tail" numberOfLines={1}>
+						{title}
+					</C.TitleText>
 				</C.Title>
 			)}
 			<GestureHandlerRootView>
