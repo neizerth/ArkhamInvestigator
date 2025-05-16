@@ -1,7 +1,7 @@
 import { color, size } from "@shared/config";
-import { IconNumber, Row, StatIcon } from "@shared/ui";
+import { IconNumber, type IconNumberProps, Row, StatIcon } from "@shared/ui";
 import { View } from "react-native";
-import styled from "styled-components/native";
+import styled, { css } from "styled-components/native";
 
 export const Container: typeof View = styled(View)`
   right: 160px;
@@ -24,6 +24,13 @@ export const SkillValue: typeof Row = styled(Row)`
   position: relative;
 `;
 
+const valueFontSize: Record<number, number> = {
+	1: 50,
+	2: 50,
+	3: 30,
+	4: 28,
+};
+
 export const SkillValueText: typeof IconNumber = styled(IconNumber).attrs({
 	stroke: true,
 	strokeStyle: {
@@ -31,7 +38,10 @@ export const SkillValueText: typeof IconNumber = styled(IconNumber).attrs({
 	},
 })`
   color: ${color.white};
-  font-size: 50px;
+  ${({ value }: IconNumberProps) => css`
+    font-size: ${valueFontSize[value.toString().length] || 25}px;
+  `}
+  
 `;
 
 export const SkillTypeIcon: typeof StatIcon = styled(StatIcon)`
