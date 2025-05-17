@@ -8,6 +8,7 @@ import { useSkillItemChaosTokenRevealModal } from "@features/skill-check";
 import {
 	selectTapToHidePins,
 	setBoardProp,
+	startSkillCheck,
 	toggleSkillCheckHistoryItemPin as togglePin,
 	useAppDispatch,
 	useAppSelector,
@@ -44,7 +45,7 @@ export const PinnedSkillCheckItem = ({
 	const displayStyle = getExpressionDisplayStyle(language);
 	const impactHapticFeedback = useHapticFeedback();
 
-	const { id } = item;
+	const { id, type } = item;
 
 	const tapOnPin = useCallback(() => {
 		if (tapToHide) {
@@ -70,10 +71,20 @@ export const PinnedSkillCheckItem = ({
 		dispatch(togglePin(id));
 	}, [dispatch, tapToHide, id, impactHapticFeedback]);
 
+	const onSwipeLeft = useCallback(() => {
+		impactHapticFeedback();
+		dispatch(startSkillCheck(type));
+	}, [dispatch, type, impactHapticFeedback]);
+
 	const swipeRight = Gesture.Fling()
 		.direction(Directions.RIGHT)
 		.runOnJS(true)
 		.onStart(onSwipeRight);
+
+	const swipeLeft = Gesture.Fling()
+		.direction(Directions.LEFT)
+		.runOnJS(true)
+		.onStart(onSwipeLeft);
 
 	const reveal = useMemo(() => {
 		return setupReveal(item);
@@ -83,7 +94,7 @@ export const PinnedSkillCheckItem = ({
 	const onPressOut = animate ? closeReveal : emptyCallback;
 	const onLongPress = animate ? emptyCallback : reveal;
 
-	const gestureConfig = Gesture.Exclusive(swipeRight);
+	const gestureConfig = Gesture.Exclusive(swipeLeft, swipeRight);
 
 	return (
 		<GestureDetector gesture={gestureConfig}>
