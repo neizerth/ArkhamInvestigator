@@ -68,6 +68,10 @@
 	"board.help.calculator.buttons": "Swiping up on numbers 1-9 starts a skill check and adds that number to the check. Swiping down subtracts a number from the check. Hold 0 or tap the yellow icon at the top to start a skill check without any modifiers.\nHold the Equals button to save the calculation and immediately run a skill check using the resulting value",
 
 	"board.help.calculator.expression": "Swiping right or left on the current formula deletes the last character in the calculation",
+
+	"newGame.start.title": "Start new game?",
+	"newGame.start.text": "This action permanently remove your last game data",
+
 	"Chaos bag loading animation": "Chaos bag loading animation",
 
 	"Show calculation changes": "Show calculation changes",

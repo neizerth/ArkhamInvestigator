@@ -1,4 +1,5 @@
 import { useAppTranslation } from "@features/i18n";
+import { useModal } from "@features/modal";
 import { routes } from "@shared/config";
 import {
 	selectCurrentBoard,
@@ -15,7 +16,7 @@ export const HomePage = () => {
 	const dispatch = useAppDispatch();
 	const { t } = useAppTranslation();
 
-	const previousGames = useAppSelector((state) =>
+	const hasPreviousGames = useAppSelector((state) =>
 		Boolean(selectCurrentBoard(state)),
 	);
 
@@ -29,11 +30,27 @@ export const HomePage = () => {
 	const [onStart] = usePageLoader(start);
 	const [onResume] = usePageLoader(resume);
 
+	const [showWarning] = useModal({
+		id: "new-game-warning",
+		data: {
+			contentType: "text",
+			type: "faction",
+			faction: "neutral",
+			title: t`newGame.start.title`,
+			text: t`newGame.start.text`,
+			okText: t`Okay`,
+			cancelText: t`Cancel`,
+		},
+		onOk: onStart,
+	});
+
+	const onMainPress = hasPreviousGames ? showWarning : onStart;
+
 	return (
 		<C.Container>
 			<C.Menu />
-			<Button onPress={onStart}>{t`New Game`}</Button>
-			{previousGames && (
+			<Button onPress={onMainPress}>{t`New Game`}</Button>
+			{hasPreviousGames && (
 				<C.ResumeButton onPress={onResume}>{t`Continue`}</C.ResumeButton>
 			)}
 			<C.Disclaimer>

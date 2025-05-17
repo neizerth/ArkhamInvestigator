@@ -69,6 +69,9 @@
 
 	"board.help.calculator.expression": "Свайп вправо или влево на текущей формуле стирает последний символ в расчёте",
 
+	"newGame.start.title": "Начать новую игру?",
+	"newGame.start.text": "Это действие удалит данные о последней игре",
+
 	"Show calculation changes": "Изменения вычислений",
 
 	"Show Game Text": "Игровой текст",
