@@ -8,6 +8,7 @@ import v6 from "./2025-04-13T21-24-reset-boards";
 import v7 from "./2025-05-10T23-09-clear-image-cache";
 import v8 from "./2025-05-13T13-11-clear-boards";
 import v9 from "./2025-05-16T16-16-set-default-pinned-calculations";
+import v10 from "./2025-05-17T11-36-set-default-chaos-bag-history";
 
 export const persistConfigMigrations = {
 	0: v0,
@@ -20,4 +21,5 @@ export const persistConfigMigrations = {
 	7: v7,
 	8: v8,
 	9: v9,
+	10: v10,
 };
