@@ -141,6 +141,13 @@ export const SettingsPage = () => {
 							</C.Row>
 						</>
 					)}
+					<C.Row>
+						<C.Checkbox
+							label="Show initial Health/Sanity"
+							selector={S.selectShowInitialHealthAndSanity}
+							actionCreator={S.setShowInitialHealthAndSanity}
+						/>
+					</C.Row>
 				</C.Section>
 				<C.Section title={t`Scenario`}>
 					<C.Row>

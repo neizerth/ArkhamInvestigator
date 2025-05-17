@@ -1,6 +1,7 @@
 import {
 	selectShowAdditionalInformation,
 	selectShowDamageAndHorror,
+	selectShowInitialHealthAndSanity,
 	useAppSelector,
 } from "@shared/lib";
 import { range } from "ramda";
@@ -15,6 +16,7 @@ const horrorData = range(0, 20);
 export const Sanity = ({ ...props }: SanityProps) => {
 	const showAdditionalInfo = useAppSelector(selectShowAdditionalInformation);
 	const showHorror = useAppSelector(selectShowDamageAndHorror);
+	const showInitialValue = useAppSelector(selectShowInitialHealthAndSanity);
 
 	const {
 		onPress,
@@ -61,6 +63,12 @@ export const Sanity = ({ ...props }: SanityProps) => {
 					onPress={onPress}
 					style={pickerStyle}
 				/>
+				{showInitialValue && (
+					<C.Initial>
+						<C.InitialSeparator />
+						<C.InitialValue value={initialValue} />
+					</C.Initial>
+				)}
 			</C.Background>
 		</C.Container>
 	);

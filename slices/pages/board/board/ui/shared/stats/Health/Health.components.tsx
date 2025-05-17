@@ -25,6 +25,28 @@ export const Value: typeof BaseValue = styled(BaseValue)`
   color: ${color.health};
 `;
 
+export const Initial: typeof View = styled(View)`
+  position: absolute;
+	right: -10px;
+	bottom: -12px;
+`;
+
+export const InitialSeparator: typeof View = styled(View)`
+  position: absolute;
+	left: -12px;
+	top: 0px;
+	width: 20px;
+	height: 3px;
+	background-color: white;
+	border: 1px solid ${color.health};
+	transform: rotate(-60deg);
+	border-radius: 3px;
+`;
+
+export const InitialValue: typeof Value = styled(Value)`
+  font-size: 24px;
+`;
+
 export const BaseHealth: FC<DefinedBaseStatPickerProps> = styled(
 	BaseStatPicker,
 ).attrs({

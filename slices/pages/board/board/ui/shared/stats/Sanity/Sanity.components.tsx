@@ -26,6 +26,28 @@ export const Value: typeof BaseValue = styled(BaseValue)`
   color: ${color.sanity};
 `;
 
+export const Initial: typeof View = styled(View)`
+  position: absolute;
+	right: 8px;
+	bottom: -12px;
+`;
+
+export const InitialSeparator: typeof View = styled(View)`
+  position: absolute;
+	left: -12px;
+	top: 0px;
+	width: 20px;
+	height: 3px;
+	background-color: white;
+	border: 1px solid ${color.sanity};
+	transform: rotate(-60deg);
+	border-radius: 3px;
+`;
+
+export const InitialValue: typeof Value = styled(Value)`
+  font-size: 24px;
+`;
+
 export const Additional: typeof Value = styled(Value)`
   
 `;
@@ -41,7 +63,7 @@ export const BaseSanity: FC<DefinedBaseStatPickerProps> = styled(
 	itemHeight: assetsSize.main,
 	contentContainerStyle: {
 		position: "absolute",
-		zIndex: 6,
+		zIndex: 4,
 		right: 0,
 		top: 0,
 	},

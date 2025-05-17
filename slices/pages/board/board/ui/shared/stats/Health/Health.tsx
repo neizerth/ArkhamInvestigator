@@ -1,6 +1,7 @@
 import {
 	selectShowAdditionalInformation,
 	selectShowDamageAndHorror,
+	selectShowInitialHealthAndSanity,
 	useAppSelector,
 } from "@shared/lib";
 import type { HealthProps as BaseHealthProps } from "@shared/ui";
@@ -20,6 +21,7 @@ const damageData = range(0, 20);
 export const Health = ({ contentContainerStyle, ...props }: HealthProps) => {
 	const showAdditionalInfo = useAppSelector(selectShowAdditionalInformation);
 	const showDamage = useAppSelector(selectShowDamageAndHorror);
+	const showInitialValue = useAppSelector(selectShowInitialHealthAndSanity);
 
 	const {
 		onPress,
@@ -65,6 +67,12 @@ export const Health = ({ contentContainerStyle, ...props }: HealthProps) => {
 					onPress={onPress}
 					style={pickerStyle}
 				/>
+				{showInitialValue && (
+					<C.Initial>
+						<C.InitialSeparator />
+						<C.InitialValue value={initialValue} />
+					</C.Initial>
+				)}
 			</C.Content>
 		</C.Container>
 	);

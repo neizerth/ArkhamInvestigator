@@ -7,5 +7,5 @@ export const selectCurrentStatValue = <K extends keyof InvestigatorBoardValues>(
 ) =>
 	createSelector(
 		[selectCurrentBoard],
-		({ value }): InvestigatorBoardValues[K] => value[stat],
+		(board): InvestigatorBoardValues[K] => board?.value[stat],
 	);
