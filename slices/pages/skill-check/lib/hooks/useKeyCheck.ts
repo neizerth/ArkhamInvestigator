@@ -41,9 +41,9 @@ export const useKeyCheck = () => {
 
 				const expression: SkillCheckItem[] = [
 					{
-						id: "base",
-						type: "number",
-						value: baseValue,
+						id: "base-stat",
+						type: "stat",
+						statType: type,
 					},
 					{
 						id: "operation",
