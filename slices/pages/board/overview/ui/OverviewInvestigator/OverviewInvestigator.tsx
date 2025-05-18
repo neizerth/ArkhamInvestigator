@@ -1,4 +1,8 @@
-import { selectBoardById, useAppSelector } from "@shared/lib";
+import {
+	selectBoardById,
+	selectShowDamageAndHorror,
+	useAppSelector,
+} from "@shared/lib";
 import type { ViewProps } from "react-native";
 import * as C from "./OverviewInvestigator.components";
 
@@ -17,12 +21,15 @@ export const OverviewInvestigator = ({
 	...props
 }: OverviewInvestigatorProps) => {
 	const board = useAppSelector(selectBoardById(boardId));
+	const showWounds = useAppSelector(selectShowDamageAndHorror);
 
 	if (!board) {
 		return;
 	}
 
-	const { investigator, value } = board;
+	const { investigator, value, baseValue } = board;
+	const damage = baseValue.health - value.health;
+	const horror = baseValue.sanity - value.sanity;
 
 	return (
 		<C.Container {...props}>
@@ -32,8 +39,8 @@ export const OverviewInvestigator = ({
 					<C.Name>{investigator.name}</C.Name>
 					<C.Skills {...value} />
 					<C.Stats>
-						<C.Health value={value.health} />
-						<C.Sanity value={value.sanity} />
+						<C.Health value={showWounds ? damage : value.health} />
+						<C.Sanity value={showWounds ? horror : value.sanity} />
 						<C.Clues value={value.clues} />
 						<C.Resources value={value.resources} />
 						<C.Actions value={value.actions} />
