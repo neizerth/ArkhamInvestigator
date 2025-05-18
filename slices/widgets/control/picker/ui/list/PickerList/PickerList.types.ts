@@ -3,6 +3,7 @@ import type {
 	PickerAnimationProps,
 	PickerBaseListProps,
 	PickerBasePressProps,
+	PickerGestureProps,
 	PickerHapticScrollProps,
 	PickerPressProps,
 	PickerRenderProps,
@@ -15,5 +16,6 @@ export type PickerListProps = PickerBaseListProps &
 	PickerActivationProps &
 	PickerBasePressProps &
 	PickerPressProps &
+	PickerGestureProps &
 	PickerRenderProps &
 	PickerHapticScrollProps;

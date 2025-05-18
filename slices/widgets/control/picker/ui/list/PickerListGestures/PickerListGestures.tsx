@@ -1,20 +1,29 @@
 import { useHapticFeedback } from "@features/haptic";
 import { arrayIf } from "@shared/lib";
 import { type PropsWithChildren, useCallback } from "react";
-import { Gesture, GestureDetector } from "react-native-gesture-handler";
+import {
+	Directions,
+	Gesture,
+	GestureDetector,
+} from "react-native-gesture-handler";
 import type {
 	PickerActivationProps,
+	PickerGestureProps,
 	PickerHapticScrollProps,
 	PickerPressProps,
 } from "../../../model";
 
 export type PickerListGesturesProps = PropsWithChildren &
 	PickerPressProps &
+	PickerGestureProps &
 	PickerActivationProps &
 	PickerHapticScrollProps & {
 		pressEnabled: boolean;
 		doublePressEnabled: boolean;
 		longPressEnabled: boolean;
+
+		swipeLeftEnabled: boolean;
+		swipeRightEnabled: boolean;
 	};
 
 export const PickerListGestures = ({
@@ -35,12 +44,22 @@ export const PickerListGestures = ({
 	longPressMinDuration = 500,
 	longPressHapticPattern,
 
+	swipeLeftEnabled,
+	onSwipeLeft,
+	swipeLeftHapticPattern,
+
+	swipeRightEnabled,
+	onSwipeRight,
+	swipeRightHapticPattern,
+
 	onUserDeactivated,
 	onDeactivated,
 }: PickerListGesturesProps) => {
 	const pressFeedback = useHapticFeedback(pressHapticPattern);
 	const doublePressFeedback = useHapticFeedback(doublePressHapticPattern);
 	const longPressFeedback = useHapticFeedback(longPressHapticPattern);
+	const swipeLeftFeedback = useHapticFeedback(swipeLeftHapticPattern);
+	const swipeRightFeedback = useHapticFeedback(swipeRightHapticPattern);
 
 	const onTap = useCallback(() => {
 		pressFeedback();
@@ -56,6 +75,16 @@ export const PickerListGestures = ({
 		longPressFeedback();
 		onLongPress?.();
 	}, [longPressFeedback, onLongPress]);
+
+	const onSwipeLeftCallback = useCallback(() => {
+		swipeLeftFeedback();
+		onSwipeLeft?.();
+	}, [swipeLeftFeedback, onSwipeLeft]);
+
+	const onSwipeRightCallback = useCallback(() => {
+		swipeRightFeedback();
+		onSwipeRight?.();
+	}, [swipeRightFeedback, onSwipeRight]);
 
 	const gestures = [
 		arrayIf(
@@ -87,6 +116,20 @@ export const PickerListGestures = ({
 					onUserDeactivated?.();
 					onDeactivated?.();
 				}),
+		),
+		arrayIf(
+			swipeLeftEnabled,
+			Gesture.Fling()
+				.direction(Directions.LEFT)
+				.runOnJS(true)
+				.onStart(onSwipeLeftCallback),
+		),
+		arrayIf(
+			swipeRightEnabled,
+			Gesture.Fling()
+				.direction(Directions.RIGHT)
+				.runOnJS(true)
+				.onStart(onSwipeRightCallback),
 		),
 	].flat();
 

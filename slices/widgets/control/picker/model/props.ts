@@ -66,6 +66,8 @@ export type PickerDataProps = {
 	value?: number;
 	onValueChanged?: (event: PickerChangeEvent) => void;
 	onValueChanging?: (event: PickerChangeEvent) => void | boolean;
+
+	sound?: boolean;
 };
 
 export type PickerHapticScrollProps = {
@@ -83,8 +85,14 @@ export type PickerPressProps = {
 	pressHapticPattern?: HapticPatternType;
 	doublePressHapticPattern?: HapticPatternType;
 	longPressHapticPattern?: HapticPatternType;
+};
 
-	sound?: boolean;
+export type PickerGestureProps = {
+	onSwipeRight?: () => void | boolean;
+	onSwipeLeft?: () => void | boolean;
+
+	swipeRightHapticPattern?: HapticPatternType;
+	swipeLeftHapticPattern?: HapticPatternType;
 };
 
 export type PickerStyleProps = {
@@ -111,6 +119,7 @@ export type PickerProps = ListProps &
 	PickerStyleProps &
 	PickerItemStyleProps &
 	PickerBasePressProps &
+	PickerGestureProps &
 	PickerActivationProps &
 	PickerRenderProps &
 	PickerPressProps &
