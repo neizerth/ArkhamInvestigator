@@ -17,7 +17,7 @@ export const useHapticSwipe = ({ onSwipe, direction, pattern }: Options) => {
 		}
 		const response = onSwipe();
 
-		if (!response) {
+		if (response === false) {
 			return;
 		}
 		impactHapticFeedback();
