@@ -1,6 +1,8 @@
 import { setShowRevealChaosTokenModal } from "@features/chaos-bag";
+import { useHapticFeedback } from "@features/haptic";
 import { routes } from "@shared/config";
 import {
+	goToPage,
 	redo,
 	selectAlwaysShowGameText,
 	selectBoardsCount,
@@ -13,6 +15,11 @@ import {
 } from "@shared/lib";
 import { useCallback } from "react";
 import { type ViewProps, useWindowDimensions } from "react-native";
+import {
+	Directions,
+	Gesture,
+	GestureDetector,
+} from "react-native-gesture-handler";
 import { InvestigatorSelect } from "../../../../../shared";
 import { Sidebar } from "../Sidebar";
 import * as C from "./LeftSidebar.components";
@@ -28,9 +35,11 @@ export const LeftSidebar = ({ ...props }: LeftSidebarProps) => {
 
 	const showText = useAppSelector(selectAlwaysShowGameText);
 
-	const goToPage = usePage();
+	const goTo = usePage();
 
 	const historyLength = history?.length || 0;
+
+	const impactHapticFeedback = useHapticFeedback();
 
 	const onUndo = useCallback(() => {
 		dispatch(undo());
@@ -51,6 +60,29 @@ export const LeftSidebar = ({ ...props }: LeftSidebarProps) => {
 	const revealToken = useCallback(() => {
 		dispatch(setShowRevealChaosTokenModal(true));
 	}, [dispatch]);
+
+	const onChaosBagSwipeRight = useCallback(() => {
+		impactHapticFeedback();
+		revealToken();
+	}, [impactHapticFeedback, revealToken]);
+
+	const onChaosBagSwipeDown = useCallback(() => {
+		impactHapticFeedback();
+		dispatch(goToPage(routes.chaosBagHistory));
+	}, [impactHapticFeedback, dispatch]);
+
+	const chaosBagGestures = [
+		Gesture.Fling()
+			.direction(Directions.RIGHT)
+			.runOnJS(true)
+			.onStart(onChaosBagSwipeRight),
+		Gesture.Fling()
+			.direction(Directions.DOWN)
+			.runOnJS(true)
+			.onStart(onChaosBagSwipeDown),
+	];
+
+	const chaosBagGestureConfig = Gesture.Exclusive(...chaosBagGestures);
 
 	const single = count === 1;
 
@@ -81,11 +113,13 @@ export const LeftSidebar = ({ ...props }: LeftSidebarProps) => {
 					</C.HistoryGroup>
 
 					<C.Group>
-						<C.Button
-							icon="chaos-bag-thin"
-							onPress={goToPage(routes.chaosBagPreview)}
-							onLongPress={revealToken}
-						/>
+						<GestureDetector gesture={chaosBagGestureConfig}>
+							<C.Button
+								icon="chaos-bag-thin"
+								onPress={goTo(routes.chaosBagPreview)}
+								onLongPress={revealToken}
+							/>
+						</GestureDetector>
 					</C.Group>
 				</C.Buttons>
 				{!single && (
