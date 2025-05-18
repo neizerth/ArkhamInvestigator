@@ -1,4 +1,6 @@
+import { routes } from "@shared/config";
 import {
+	goToPage,
 	useAppDispatch,
 	useAppSelector,
 	useBackButton,
@@ -65,6 +67,12 @@ export const useTokenRevealModal = () => {
 		},
 		[dispatch],
 	);
+
+	useEffect(() => {
+		if (visible && isEmpty) {
+			dispatch(goToPage(routes.chaosBagPreview));
+		}
+	}, [dispatch, visible, isEmpty]);
 
 	const revealFirstToken =
 		visible && !animate && !isEmpty && revealedCount === 0;
