@@ -22,7 +22,8 @@ export const Container: typeof ContextModal = styled(ContextModal).attrs({
 `;
 
 export const Content: typeof View = styled(View)`
-  min-height: 62px;
+  min-height: 90px;
+  justify-content: flex-end;
 `;
 
 export const BlessCurse: typeof BlessCurseControl = styled(BlessCurseControl)`

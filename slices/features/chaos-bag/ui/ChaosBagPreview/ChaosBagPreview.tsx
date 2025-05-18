@@ -28,6 +28,7 @@ export const ChaosBagPreview = (props: ChaosBagPreviewProps) => {
 	const dispatch = useAppDispatch();
 	const { t } = useAppTranslation();
 	const tokens = useAppSelector(selectOrderedChaosBagContents);
+	const isEmpty = tokens.length === 0;
 	const showHistory = useAppSelector(
 		(state) => selectRevealHistory(state).length > 0,
 	);
@@ -113,6 +114,7 @@ export const ChaosBagPreview = (props: ChaosBagPreviewProps) => {
 		<C.Container {...props} title="Chaos Bag" actions={actions}>
 			<C.Content>
 				<Delay>
+					{isEmpty && <C.Hint>{t`Chaos bag is empty`}</C.Hint>}
 					{tokens.length > 0 && data.sealed.length === 0 && (
 						<C.Hint>{t`Hold to seal`}</C.Hint>
 					)}
