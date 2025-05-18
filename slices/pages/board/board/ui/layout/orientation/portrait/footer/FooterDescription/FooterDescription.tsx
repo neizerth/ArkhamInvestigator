@@ -1,3 +1,4 @@
+import { useHapticSwipe } from "@features/haptic";
 import { useRoute } from "@react-navigation/native";
 import {
 	selectCurrentBoardProp,
@@ -11,6 +12,11 @@ import {
 } from "@shared/lib";
 import { useCallback, useContext } from "react";
 import type { ViewProps } from "react-native";
+import {
+	Directions,
+	Gesture,
+	GestureDetector,
+} from "react-native-gesture-handler";
 import { LayoutContext } from "../../../../../../config";
 import { TOP_CONTENT_OFFSET } from "../top";
 import * as C from "./FooterDescription.components";
@@ -53,6 +59,32 @@ export const FooterDescription = ({ ...props }: FooterDescriptionProps) => {
 
 	const vw = (view.width * 6) / 100;
 
+	const createToggleDescription = useCallback(
+		(show: boolean) => () => {
+			if (show === showDescription) {
+				return false;
+			}
+			dispatch(setShowDescription(show));
+		},
+		[dispatch, showDescription],
+	);
+
+	const onSwipeUp = createToggleDescription(true);
+
+	const onSwipeDown = createToggleDescription(false);
+
+	const swipeUp = useHapticSwipe({
+		direction: Directions.UP,
+		onSwipe: onSwipeUp,
+	});
+
+	const swipeDown = useHapticSwipe({
+		direction: Directions.DOWN,
+		onSwipe: onSwipeDown,
+	});
+
+	const gestureConfig = Gesture.Exclusive(swipeUp, swipeDown);
+
 	if (!vw) {
 		return null;
 	}
@@ -63,33 +95,37 @@ export const FooterDescription = ({ ...props }: FooterDescriptionProps) => {
 	const textUnit = gameText.showSmallText ? vw * 0.9 : vw;
 
 	return (
-		<C.Container {...props} style={[props.style, containerStyle]}>
-			<C.Content>
-				{!showDescription && (
-					<C.ExpandArea
-						actionCreator={setShowDescription}
-						style={expandStyle}
-					/>
-				)}
-				<C.TopContent />
-				<C.Background faction={faction} width={view.width}>
-					<C.DescriptionContent>
-						<C.TextContent>
-							{showTraits && <C.Traits unit={vw} investigator={investigator} />}
-							<C.Description
-								style={descriptionStyle}
-								onLayout={gameText.onLayout}
-							>
-								<C.Text investigator={investigator} unit={textUnit} />
-								{showFlavor && (
-									<C.Flavor unit={vw} investigator={investigator} />
+		<GestureDetector gesture={gestureConfig}>
+			<C.Container {...props} style={[props.style, containerStyle]}>
+				<C.Content>
+					{!showDescription && (
+						<C.ExpandArea
+							actionCreator={setShowDescription}
+							style={expandStyle}
+						/>
+					)}
+					<C.TopContent />
+					<C.Background faction={faction} width={view.width}>
+						<C.DescriptionContent>
+							<C.TextContent>
+								{showTraits && (
+									<C.Traits unit={vw} investigator={investigator} />
 								)}
-							</C.Description>
-						</C.TextContent>
-						<C.Menu />
-					</C.DescriptionContent>
-				</C.Background>
-			</C.Content>
-		</C.Container>
+								<C.Description
+									style={descriptionStyle}
+									onLayout={gameText.onLayout}
+								>
+									<C.Text investigator={investigator} unit={textUnit} />
+									{showFlavor && (
+										<C.Flavor unit={vw} investigator={investigator} />
+									)}
+								</C.Description>
+							</C.TextContent>
+							<C.Menu />
+						</C.DescriptionContent>
+					</C.Background>
+				</C.Content>
+			</C.Container>
+		</GestureDetector>
 	);
 };

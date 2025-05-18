@@ -1,4 +1,4 @@
-import { routes } from "@shared/config";
+import { REMOVE_CLIPPED_SUBVIEWS, routes } from "@shared/config";
 import {
 	delay,
 	goBack,
@@ -122,7 +122,7 @@ export const ChaosBagPreview = (props: ChaosBagPreviewProps) => {
 						<C.List
 							data={data.regular}
 							renderItem={renderTokenRow}
-							removeClippedSubviews={false}
+							removeClippedSubviews={REMOVE_CLIPPED_SUBVIEWS}
 						/>
 					)}
 
@@ -132,7 +132,7 @@ export const ChaosBagPreview = (props: ChaosBagPreviewProps) => {
 							<C.List
 								data={data.sealed}
 								renderItem={renderTokenRow}
-								removeClippedSubviews={false}
+								removeClippedSubviews={REMOVE_CLIPPED_SUBVIEWS}
 							/>
 						</C.Sealed>
 					)}

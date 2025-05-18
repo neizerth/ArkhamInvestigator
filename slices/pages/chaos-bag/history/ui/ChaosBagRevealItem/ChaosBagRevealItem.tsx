@@ -4,6 +4,7 @@ import type {
 	ChaosBagToken,
 } from "@features/chaos-bag/model";
 import { useHapticFeedback } from "@features/haptic";
+import { REMOVE_CLIPPED_SUBVIEWS } from "@shared/config";
 import {
 	goBack,
 	selectBoardProp,
@@ -99,7 +100,7 @@ export const ChaosBagRevealItem = ({
 					<C.TokenList
 						data={tokens}
 						renderItem={renderItem}
-						removeClippedSubviews={false}
+						removeClippedSubviews={REMOVE_CLIPPED_SUBVIEWS}
 						horizontal
 					/>
 					{title && (

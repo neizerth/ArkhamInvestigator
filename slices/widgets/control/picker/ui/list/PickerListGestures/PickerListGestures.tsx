@@ -1,4 +1,4 @@
-import { useHapticFeedback } from "@features/haptic";
+import { useHapticFeedback, useHapticSwipe } from "@features/haptic";
 import { arrayIf } from "@shared/lib";
 import { type PropsWithChildren, useCallback } from "react";
 import {
@@ -58,8 +58,6 @@ export const PickerListGestures = ({
 	const pressFeedback = useHapticFeedback(pressHapticPattern);
 	const doublePressFeedback = useHapticFeedback(doublePressHapticPattern);
 	const longPressFeedback = useHapticFeedback(longPressHapticPattern);
-	const swipeLeftFeedback = useHapticFeedback(swipeLeftHapticPattern);
-	const swipeRightFeedback = useHapticFeedback(swipeRightHapticPattern);
 
 	const onTap = useCallback(() => {
 		pressFeedback();
@@ -76,15 +74,17 @@ export const PickerListGestures = ({
 		onLongPress?.();
 	}, [longPressFeedback, onLongPress]);
 
-	const onSwipeLeftCallback = useCallback(() => {
-		swipeLeftFeedback();
-		onSwipeLeft?.();
-	}, [swipeLeftFeedback, onSwipeLeft]);
+	const swipeRight = useHapticSwipe({
+		direction: Directions.RIGHT,
+		onSwipe: onSwipeRight,
+		pattern: swipeRightHapticPattern,
+	});
 
-	const onSwipeRightCallback = useCallback(() => {
-		swipeRightFeedback();
-		onSwipeRight?.();
-	}, [swipeRightFeedback, onSwipeRight]);
+	const swipeLeft = useHapticSwipe({
+		direction: Directions.LEFT,
+		onSwipe: onSwipeLeft,
+		pattern: swipeLeftHapticPattern,
+	});
 
 	const gestures = [
 		arrayIf(
@@ -117,20 +117,8 @@ export const PickerListGestures = ({
 					onDeactivated?.();
 				}),
 		),
-		arrayIf(
-			swipeLeftEnabled,
-			Gesture.Fling()
-				.direction(Directions.LEFT)
-				.runOnJS(true)
-				.onStart(onSwipeLeftCallback),
-		),
-		arrayIf(
-			swipeRightEnabled,
-			Gesture.Fling()
-				.direction(Directions.RIGHT)
-				.runOnJS(true)
-				.onStart(onSwipeRightCallback),
-		),
+		arrayIf(swipeLeftEnabled, swipeLeft),
+		arrayIf(swipeRightEnabled, swipeRight),
 	].flat();
 
 	const gestureConfig = Gesture.Exclusive(...gestures);

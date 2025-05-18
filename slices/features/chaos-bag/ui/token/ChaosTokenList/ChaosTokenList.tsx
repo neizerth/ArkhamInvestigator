@@ -1,3 +1,4 @@
+import { REMOVE_CLIPPED_SUBVIEWS } from "@shared/config";
 import { useCallback, useRef } from "react";
 import type { ListRenderItemInfo } from "react-native";
 import type { FlatList } from "react-native-gesture-handler";
@@ -47,7 +48,7 @@ export const ChaosTokenList = ({ ...props }: ChaosTokenListProps) => {
 			renderItem={renderItem}
 			onStartReached={scrollToTop}
 			getItemLayout={getItemLayout}
-			removeClippedSubviews={false}
+			removeClippedSubviews={REMOVE_CLIPPED_SUBVIEWS}
 		/>
 	);
 };

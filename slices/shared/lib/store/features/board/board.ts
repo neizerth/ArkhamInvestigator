@@ -23,6 +23,7 @@ export type IBoardState = {
 	alwaysShowGameText: boolean;
 	gameTextHeight: number;
 	showInitialHealthAndSanity: boolean;
+	alwaysShowSkillModifiers: boolean;
 
 	doom: number;
 	clues: number;
@@ -48,6 +49,7 @@ const initialState: IBoardState = {
 	tapToHidePins: false,
 	alwaysShowGameText: false,
 	showInitialHealthAndSanity: false,
+	alwaysShowSkillModifiers: false,
 	doom: 0,
 	clues: 0,
 	resources: 0,
@@ -84,6 +86,7 @@ export const {
 	setAlwaysShowGameText,
 	setGameTextHeight,
 	setShowInitialHealthAndSanity,
+	setAlwaysShowSkillModifiers,
 } = board.actions;
 
 export const {
@@ -109,6 +112,7 @@ export const {
 	selectAlwaysShowGameText,
 	selectGameTextHeight,
 	selectShowInitialHealthAndSanity,
+	selectAlwaysShowSkillModifiers,
 } = board.selectors;
 
 export default board.reducer;

@@ -105,6 +105,13 @@ export const SettingsPage = () => {
 							actionCreator={S.setShowCalculationDiff}
 						/>
 					</C.Row>
+					<C.Row>
+						<C.Checkbox
+							label="Skill modfiers"
+							selector={S.selectAlwaysShowSkillModifiers}
+							actionCreator={S.setAlwaysShowSkillModifiers}
+						/>
+					</C.Row>
 					<C.Rule />
 					<C.Row>
 						<C.Checkbox

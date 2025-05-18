@@ -1,5 +1,6 @@
 import { openSkillCheckChaosBagModal } from "@features/chaos-bag";
 import {
+	selectAlwaysShowSkillModifiers,
 	selectCurrentStatBaseValue,
 	selectCurrentStatValue,
 	selectIsParallel,
@@ -37,6 +38,7 @@ export const Skill = ({ width, height, type, ...props }: SkillProps) => {
 	const isParallel = useAppSelector(selectIsParallel);
 
 	const showInfo = useAppSelector(selectShowAdditionalInformation);
+	const showModifiers = useAppSelector(selectAlwaysShowSkillModifiers);
 	const [touching, setTouching] = useState(false);
 
 	const style = getSkillStyle(width);
@@ -77,7 +79,7 @@ export const Skill = ({ width, height, type, ...props }: SkillProps) => {
 			const { item } = props;
 
 			const diff = item - baseValue;
-			const showDiff = diff !== 0 && touching;
+			const showDiff = diff !== 0 && (touching || showModifiers) && !showInfo;
 
 			const value = showInfo ? signedNumber(diff) : item;
 
@@ -110,7 +112,7 @@ export const Skill = ({ width, height, type, ...props }: SkillProps) => {
 				</C.ValueContainer>
 			);
 		},
-		[width, baseValue, isParallel, type, touching, showInfo],
+		[width, baseValue, isParallel, type, touching, showInfo, showModifiers],
 	);
 
 	const itemHeight = height;

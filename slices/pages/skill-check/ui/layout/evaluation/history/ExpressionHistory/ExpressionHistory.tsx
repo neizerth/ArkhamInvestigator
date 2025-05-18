@@ -1,8 +1,5 @@
-import {
-	cancelShowRevealModal,
-	selectChaosBagLoadingAnimation,
-} from "@features/chaos-bag";
 import { useSkillItemChaosTokenRevealModal } from "@features/skill-check";
+import { REMOVE_CLIPPED_SUBVIEWS } from "@shared/config";
 import {
 	getSkillCheckValue,
 	sanitizeSkillCheckExpression,
@@ -38,14 +35,8 @@ export const ExpressionHistory = ({
 	const dispatch = useAppDispatch();
 	const history = useAppSelector(selectSkillCheckHistory);
 	const value = useAppSelector(selectCurrentBoardProp("value"));
-	const revealAnimation = useAppSelector(selectChaosBagLoadingAnimation);
 
 	const showReveal = useSkillItemChaosTokenRevealModal();
-
-	const hideReveal = useCallback(() => {
-		dispatch(cancelShowRevealModal());
-		return false;
-	}, [dispatch]);
 
 	const data = useMemo(() => {
 		return history.map((item) => ({
@@ -89,10 +80,6 @@ export const ExpressionHistory = ({
 		(item: ListItem) => {
 			const reveal = showReveal(item);
 
-			const onLongPress = revealAnimation ? emptyCallback : reveal;
-			const onPressIn = revealAnimation ? reveal : emptyCallback;
-			const onPressOut = revealAnimation ? hideReveal : emptyCallback;
-
 			return (
 				<C.Item
 					key={item.id}
@@ -101,13 +88,11 @@ export const ExpressionHistory = ({
 					type="secondary"
 					value={item.value}
 					onPress={setCurrentValue(item.expression)}
-					onPressIn={onPressIn}
-					onPressOut={onPressOut}
-					onLongPress={onLongPress}
+					onLongPress={reveal}
 				/>
 			);
 		},
-		[setCurrentValue, hideReveal, showReveal, revealAnimation],
+		[setCurrentValue, showReveal],
 	);
 
 	const renderListItem = useCallback(
@@ -128,7 +113,7 @@ export const ExpressionHistory = ({
 				onContentSizeChange={onContentSizeChange}
 				data={regular}
 				renderItem={renderListItem}
-				removeClippedSubviews={false}
+				removeClippedSubviews={REMOVE_CLIPPED_SUBVIEWS}
 			/>
 		</C.Container>
 	);

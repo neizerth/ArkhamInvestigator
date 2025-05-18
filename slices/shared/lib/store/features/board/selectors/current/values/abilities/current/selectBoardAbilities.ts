@@ -6,6 +6,9 @@ import { selectCurrentBoardProp } from "../../../props";
 export const selectBoardAbilities = createSelector(
 	[selectCurrentBoardProp("investigator"), selectBoardsCount],
 	(investigator, count) => {
+		if (!investigator) {
+			return [];
+		}
 		const { abilities = [] } = investigator;
 		return abilities
 			.filter(isBoardAbility)

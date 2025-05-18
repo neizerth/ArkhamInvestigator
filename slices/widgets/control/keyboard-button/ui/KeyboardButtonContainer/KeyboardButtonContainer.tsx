@@ -1,8 +1,4 @@
-import {
-	type TouchableOpacityProps,
-	useHapticFeedback,
-} from "@features/haptic";
-import { useCallback } from "react";
+import { type TouchableOpacityProps, useHapticSwipe } from "@features/haptic";
 import {
 	Directions,
 	Gesture,
@@ -16,37 +12,19 @@ export type KeyboardButtonContainerProps = TouchableOpacityProps & {
 };
 
 export const KeyboardButtonContainer = ({
-	onSwipeUp: onSwipeUpProp,
-	onSwipeDown: onSwipeDownProp,
+	onSwipeUp,
+	onSwipeDown,
 	...props
 }: KeyboardButtonContainerProps) => {
-	const impactHapticFeedback = useHapticFeedback();
+	const swipeUp = useHapticSwipe({
+		direction: Directions.UP,
+		onSwipe: onSwipeUp,
+	});
 
-	const onSwipeUp = useCallback(() => {
-		if (!onSwipeUpProp) {
-			return;
-		}
-		impactHapticFeedback();
-		onSwipeUpProp();
-	}, [onSwipeUpProp, impactHapticFeedback]);
-
-	const onSwipeDown = useCallback(() => {
-		if (!onSwipeDownProp) {
-			return;
-		}
-		impactHapticFeedback();
-		onSwipeDownProp();
-	}, [onSwipeDownProp, impactHapticFeedback]);
-
-	const swipeUp = Gesture.Fling()
-		.direction(Directions.UP)
-		.runOnJS(true)
-		.onStart(onSwipeUp);
-
-	const swipeDown = Gesture.Fling()
-		.direction(Directions.DOWN)
-		.runOnJS(true)
-		.onStart(onSwipeDown);
+	const swipeDown = useHapticSwipe({
+		direction: Directions.DOWN,
+		onSwipe: onSwipeDown,
+	});
 
 	const gestureConfig = Gesture.Exclusive(swipeUp, swipeDown);
 

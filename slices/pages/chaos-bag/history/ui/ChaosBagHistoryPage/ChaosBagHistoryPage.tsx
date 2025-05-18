@@ -2,6 +2,7 @@ import { clearRevealHistory, selectRevealHistory } from "@features/chaos-bag";
 import type { ChaosBagHistoryItem } from "@features/chaos-bag/model";
 import { useAppTranslation } from "@features/i18n";
 import { useModal } from "@features/modal";
+import { REMOVE_CLIPPED_SUBVIEWS } from "@shared/config";
 import { goBack, useAppDispatch, useAppSelector } from "@shared/lib";
 import { Delay } from "@shared/ui";
 import { TopBar } from "@widgets/top-bar";
@@ -52,7 +53,7 @@ export const ChaosBagHistoryPage = () => {
 				<C.List
 					data={data}
 					renderItem={renderItem}
-					removeClippedSubviews={false}
+					removeClippedSubviews={REMOVE_CLIPPED_SUBVIEWS}
 				/>
 			</Delay>
 		</C.Container>

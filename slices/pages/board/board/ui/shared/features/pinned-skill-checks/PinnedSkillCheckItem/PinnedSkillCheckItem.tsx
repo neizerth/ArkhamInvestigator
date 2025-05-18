@@ -1,8 +1,5 @@
-import {
-	cancelShowRevealModal,
-	selectChaosBagLoadingAnimation,
-} from "@features/chaos-bag";
-import { useHapticFeedback } from "@features/haptic";
+import { selectChaosBagLoadingAnimation } from "@features/chaos-bag";
+import { useHapticSwipe } from "@features/haptic";
 import { selectCurrentLanguage } from "@features/i18n";
 import { useSkillItemChaosTokenRevealModal } from "@features/skill-check";
 import {
@@ -43,7 +40,6 @@ export const PinnedSkillCheckItem = ({
 	const animate = useAppSelector(selectChaosBagLoadingAnimation);
 
 	const displayStyle = getExpressionDisplayStyle(language);
-	const impactHapticFeedback = useHapticFeedback();
 
 	const { id, type } = item;
 
@@ -57,55 +53,36 @@ export const PinnedSkillCheckItem = ({
 
 	const setupReveal = useSkillItemChaosTokenRevealModal();
 
-	const closeReveal = useCallback(() => {
-		dispatch(cancelShowRevealModal());
-		return false;
-	}, [dispatch]);
-
 	const onSwipeRight = useCallback(() => {
 		if (!tapToHide) {
-			return;
+			return false;
 		}
-
-		impactHapticFeedback();
 		dispatch(togglePin(id));
-	}, [dispatch, tapToHide, id, impactHapticFeedback]);
+	}, [dispatch, tapToHide, id]);
 
-	const onSwipeLeft = useCallback(() => {
-		impactHapticFeedback();
+	const onSwipeDown = useCallback(() => {
 		dispatch(startSkillCheck(type));
-	}, [dispatch, type, impactHapticFeedback]);
+	}, [dispatch, type]);
 
-	const swipeRight = Gesture.Fling()
-		.direction(Directions.RIGHT)
-		.runOnJS(true)
-		.onStart(onSwipeRight);
+	const swipeRight = useHapticSwipe({
+		direction: Directions.RIGHT,
+		onSwipe: onSwipeRight,
+	});
 
-	const swipeLeft = Gesture.Fling()
-		.direction(Directions.LEFT)
-		.runOnJS(true)
-		.onStart(onSwipeLeft);
+	const swipeDown = useHapticSwipe({
+		direction: Directions.DOWN,
+		onSwipe: onSwipeDown,
+	});
 
 	const reveal = useMemo(() => {
 		return setupReveal(item);
 	}, [setupReveal, item]);
 
-	const onPressIn = animate ? reveal : emptyCallback;
-	const onPressOut = animate ? closeReveal : emptyCallback;
-	const onLongPress = animate ? emptyCallback : reveal;
-
-	const gestureConfig = Gesture.Exclusive(swipeLeft, swipeRight);
+	const gestureConfig = Gesture.Exclusive(swipeDown, swipeRight);
 
 	return (
 		<GestureDetector gesture={gestureConfig}>
-			<C.Item
-				{...props}
-				key={item.id}
-				onPress={tapOnPin}
-				onPressIn={onPressIn}
-				onPressOut={onPressOut}
-				onLongPress={onLongPress}
-			>
+			<C.Item {...props} key={item.id} onPress={tapOnPin} onLongPress={reveal}>
 				<C.ItemContent>
 					{item.title && <C.Title>{item.title}:</C.Title>}
 					<C.Expression

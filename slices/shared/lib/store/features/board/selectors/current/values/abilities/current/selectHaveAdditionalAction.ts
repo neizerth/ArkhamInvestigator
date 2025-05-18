@@ -3,5 +3,5 @@ import { selectCurrentBoardProp } from "../../../props";
 
 export const selectHaveAdditionalAction = createSelector(
 	[selectCurrentBoardProp("investigator")],
-	(investigator) => investigator.additionalAction === true,
+	(investigator) => investigator?.additionalAction === true,
 );

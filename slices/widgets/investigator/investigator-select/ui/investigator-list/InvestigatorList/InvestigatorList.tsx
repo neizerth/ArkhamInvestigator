@@ -1,3 +1,4 @@
+import { REMOVE_CLIPPED_SUBVIEWS } from "@shared/config";
 import type { Defined } from "@shared/model";
 import type { InvestigatorSignatureGroup } from "arkham-investigator-data";
 import { useCallback } from "react";
@@ -80,7 +81,7 @@ export const InvestigatorList = ({
 			renderItem={renderItem}
 			getItemLayout={getItemLayout}
 			renderSectionHeader={renderSectionHeader}
-			removeClippedSubviews={false}
+			removeClippedSubviews={REMOVE_CLIPPED_SUBVIEWS}
 		/>
 	);
 };

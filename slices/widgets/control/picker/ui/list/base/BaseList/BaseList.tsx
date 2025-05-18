@@ -5,6 +5,7 @@ import {
 } from "@shared/lib";
 import { memo, useCallback, useMemo } from "react";
 import type { ListRenderItemInfo } from "react-native";
+import { REMOVE_CLIPPED_SUBVIEWS } from "../../../../../../../shared/config/device";
 import { getDataOffsets, getValueIndex } from "../../../../lib";
 import * as C from "./BaseList.components";
 import type { BaseListProps } from "./BaseList.types";
@@ -76,7 +77,7 @@ export const BaseList = (baseProps: BaseListProps) => {
 			keyExtractor={(item) => item.toString()}
 			snapToOffsets={snapToOffsets}
 			showsVerticalScrollIndicator={false}
-			removeClippedSubviews={false}
+			removeClippedSubviews={REMOVE_CLIPPED_SUBVIEWS}
 		/>
 	);
 };

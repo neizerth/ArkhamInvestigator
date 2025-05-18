@@ -37,8 +37,6 @@ export const useKeyCheck = () => {
 					return false;
 				}
 
-				const baseValue = boardValue[type];
-
 				const expression: SkillCheckItem[] = [
 					{
 						id: "base-stat",
