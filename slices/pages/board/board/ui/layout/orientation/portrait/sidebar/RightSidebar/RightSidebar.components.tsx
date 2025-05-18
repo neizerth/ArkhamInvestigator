@@ -26,7 +26,7 @@ const getRowGap = ({
 		return 15;
 	}
 
-	return screen.height < 640 ? 20 : compact ? 40 : 50;
+	return screen.height < 640 ? 20 : compact ? 45 : 50;
 };
 
 const getLayoutStyle = (options: GetLayoutStyleOptions) => {

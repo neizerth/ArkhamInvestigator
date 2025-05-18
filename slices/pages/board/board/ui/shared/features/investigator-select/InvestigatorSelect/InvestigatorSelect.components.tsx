@@ -9,7 +9,7 @@ import { InvestigatorSelectItem } from "../InvestigatorSelectItem";
 
 export const Container: typeof View = styled(View)`
   width: 60px;
-  height: 80px;
+  height: 88px;
   position: relative;
   z-index: 2;
 `;
