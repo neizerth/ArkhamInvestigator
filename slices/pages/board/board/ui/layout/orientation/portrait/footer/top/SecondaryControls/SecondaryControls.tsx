@@ -19,6 +19,12 @@ export const SecondaryControls = (props: SecondaryControlsProps) => {
 	const showResources = useAppSelector(selectShowScenarioResources);
 	const showClues = useAppSelector(selectShowScenarioClues);
 
+	const noContent = !(showDoom || showResources || showClues);
+
+	if (noContent) {
+		return null;
+	}
+
 	return (
 		<C.Container {...props}>
 			<C.Content>
