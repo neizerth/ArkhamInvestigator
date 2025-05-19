@@ -10,7 +10,7 @@ export const selectAbilitiesTurnEnd = (boardId: BoardId) =>
 			return true;
 		}
 
-		if (board.baseValue.additionalAction && !board.value.additionalAction) {
+		if (board.baseValue.additionalAction && board.value.additionalAction) {
 			return false;
 		}
 
