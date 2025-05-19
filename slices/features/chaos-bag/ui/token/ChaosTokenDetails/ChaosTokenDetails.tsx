@@ -54,11 +54,16 @@ export const ChaosTokenDetails = ({
 	const previewTokenList = useMemo(() => {
 		const maxPreviewCount = count > MAX_PREVIEW_COUNT ? 1 : count;
 		return range(0, maxPreviewCount).map((key) => (
-			<C.Token key={key} onPress={onDecrement} activeOpacity={1}>
+			<C.Token
+				key={key}
+				onPress={onDecrement}
+				onLongPress={clear}
+				activeOpacity={1}
+			>
 				<C.TokenIcon type={type} />
 			</C.Token>
 		));
-	}, [count, type, onDecrement]);
+	}, [count, type, onDecrement, clear]);
 
 	return (
 		<C.Container {...props}>
