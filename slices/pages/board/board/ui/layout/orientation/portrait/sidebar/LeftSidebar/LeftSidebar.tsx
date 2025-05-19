@@ -1,4 +1,7 @@
-import { setShowRevealChaosTokenModal } from "@features/chaos-bag";
+import {
+	openRevealChaosTokenModal,
+	selectChaosBagEnabled,
+} from "@features/chaos-bag";
 import { useHapticFeedback } from "@features/haptic";
 import { routes } from "@shared/config";
 import {
@@ -30,6 +33,7 @@ export const LeftSidebar = ({ ...props }: LeftSidebarProps) => {
 	const dispatch = useAppDispatch();
 	const window = useWindowDimensions();
 	const count = useAppSelector(selectBoardsCount);
+	const chaosBagEnabled = useAppSelector(selectChaosBagEnabled);
 	const history = useAppSelector(selectCurrentBoardProp("history"));
 	const historyIndex = useAppSelector(selectCurrentBoardProp("historyIndex"));
 
@@ -58,7 +62,7 @@ export const LeftSidebar = ({ ...props }: LeftSidebarProps) => {
 	}, [dispatch, historyLength]);
 
 	const revealToken = useCallback(() => {
-		dispatch(setShowRevealChaosTokenModal(true));
+		dispatch(openRevealChaosTokenModal());
 	}, [dispatch]);
 
 	const onChaosBagSwipeRight = useCallback(() => {
@@ -91,7 +95,9 @@ export const LeftSidebar = ({ ...props }: LeftSidebarProps) => {
 	const canRedo = historyEnabled && historyIndex < historyLength - 1;
 
 	const compactHistory =
-		!single && ((showText && window.height < 800) || window.height <= 640);
+		!single &&
+		chaosBagEnabled &&
+		((showText && window.height < 800) || window.height <= 640);
 
 	return (
 		<Sidebar {...props}>
@@ -112,15 +118,17 @@ export const LeftSidebar = ({ ...props }: LeftSidebarProps) => {
 						/>
 					</C.HistoryGroup>
 
-					<C.Group>
-						<GestureDetector gesture={chaosBagGestureConfig}>
-							<C.Button
-								icon="chaos-bag-thin"
-								onPress={goTo(routes.chaosBagPreview)}
-								onLongPress={revealToken}
-							/>
-						</GestureDetector>
-					</C.Group>
+					{chaosBagEnabled && (
+						<C.Group>
+							<GestureDetector gesture={chaosBagGestureConfig}>
+								<C.Button
+									icon="chaos-bag-thin"
+									onPress={goTo(routes.chaosBagPreview)}
+									onLongPress={revealToken}
+								/>
+							</GestureDetector>
+						</C.Group>
+					)}
 				</C.Buttons>
 				{!single && (
 					<C.Group>

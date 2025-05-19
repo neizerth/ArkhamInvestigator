@@ -13,9 +13,9 @@ import { useCallback, useMemo } from "react";
 import type { ListRenderItemInfo, ViewProps } from "react-native";
 import { useAppTranslation } from "../../../i18n";
 import {
+	openRevealChaosTokenModal,
 	selectOrderedChaosBagContents,
 	selectRevealHistory,
-	setShowRevealChaosTokenModal,
 	toggleChaosTokenSeal,
 } from "../../lib";
 import type { ChaosBagToken } from "../../model";
@@ -70,7 +70,7 @@ export const ChaosBagPreview = (props: ChaosBagPreviewProps) => {
 	const reveal = useCallback(() => {
 		dispatch(goBack());
 
-		dispatch(setShowRevealChaosTokenModal(true));
+		dispatch(openRevealChaosTokenModal());
 	}, [dispatch]);
 
 	const renderTokenRow = useCallback(

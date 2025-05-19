@@ -9,8 +9,8 @@ import {
 	setChaosBagSkillCheckType,
 	setChaosBagSkillValue,
 	setRevealedTokenIds,
-	setShowRevealChaosTokenModal,
 } from "../../../../chaosBag";
+import { openRevealChaosTokenModal } from "./openRevealChaosTokenModal";
 
 type Options = {
 	type: InvestigatorBoardStat;
@@ -28,5 +28,5 @@ export const openSkillCheckChaosBagModal =
 		dispatch(setChaosBagSkillCheckTitle(title || null));
 		dispatch(setChaosBagSkillCheckExpression(expression));
 
-		dispatch(setShowRevealChaosTokenModal(true));
+		dispatch(openRevealChaosTokenModal());
 	};

@@ -21,9 +21,11 @@ export type IChaosBagState = {
 	loadingAnimation: boolean;
 	revealHistory: ChaosBagHistoryItem[];
 	revealHistoryItem: ChaosBagHistoryItem | null;
+	enabled: boolean;
 };
 
 const initialState: IChaosBagState = {
+	enabled: true,
 	tokenCount: {},
 	contents: [],
 	showRevealModal: false,
@@ -56,6 +58,7 @@ export const {
 	setRevealedTokenIds,
 	setRevealHistory,
 	setRevealHistoryItem,
+	setEnabled: setChaosBagEnabled,
 } = chaosBag.actions;
 
 export const {
@@ -67,6 +70,7 @@ export const {
 	selectLoadingAnimation: selectChaosBagLoadingAnimation,
 	selectSkillCheckTitle: selectChaosBagSkillCheckTitle,
 	selectSkillCheckExpression: selectChaosBagSkillCheckExpression,
+	selectEnabled: selectChaosBagEnabled,
 	selectRevealedTokenIds,
 	selectRevealHistory,
 	selectRevealHistoryItem,

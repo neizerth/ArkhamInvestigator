@@ -1,5 +1,7 @@
 import {
+	selectChaosBagEnabled,
 	selectChaosBagLoadingAnimation,
+	setChaosBagEnabled,
 	setChaosBagLoadingAnimation,
 } from "@features/chaos-bag";
 import { selectHapticMode, setHapticMode } from "@features/haptic";
@@ -110,6 +112,13 @@ export const SettingsPage = () => {
 							label="Skill modfiers"
 							selector={S.selectAlwaysShowSkillModifiers}
 							actionCreator={S.setAlwaysShowSkillModifiers}
+						/>
+					</C.Row>
+					<C.Row>
+						<C.Checkbox
+							label="Chaos bag"
+							selector={selectChaosBagEnabled}
+							actionCreator={setChaosBagEnabled}
 						/>
 					</C.Row>
 					<C.Rule />
