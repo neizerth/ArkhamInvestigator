@@ -42,17 +42,23 @@ export const DisabledOverlay: typeof View = styled(View)`
   background-color: rgba(255, 255, 255, 0.3);
 `;
 
-type SizeProps = {
+type PictureProps = ImageProps & {
 	size: number;
+	grayscale?: boolean;
 };
 
-export const Picture: FC<ImageProps & SizeProps> = styled(Image).attrs({
+export const Picture: FC<PictureProps> = styled(Image).attrs({
 	contentFit: "cover",
 })`
-    ${({ size }: SizeProps) => css`
+    ${({ size }: PictureProps) => css`
       aspect-ratio: 1;
       width: ${size}px;
       height: ${size}px;
+    `}
+    ${({ grayscale }: PictureProps) =>
+			grayscale &&
+			css`
+      filter: grayscale(1);
     `}
   `;
 

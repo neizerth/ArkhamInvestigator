@@ -1,10 +1,11 @@
-import { color } from "@shared/config";
+import { color, gameAssets } from "@shared/config";
 import { Health, IconNumber, type IconNumberProps } from "@shared/ui";
 import styled, { css } from "styled-components/native";
+import { VALUE_HEIGHT } from "../../config";
 
 export const Container: typeof Health = styled(Health)`
-  width: 24px;
-  height: 30px;
+  width: ${VALUE_HEIGHT * gameAssets.health.ratio}px;
+  height: ${VALUE_HEIGHT}px;
 `;
 
 export const Value: typeof IconNumber = styled(IconNumber).attrs({

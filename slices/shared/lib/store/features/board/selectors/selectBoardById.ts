@@ -9,9 +9,15 @@ import {
 
 export const selectBoardById = (
 	id: BoardId = "current",
-): AppSelector<InvestigatorBoard | undefined> =>
+): AppSelector<InvestigatorBoard> =>
 	createSelector(
 		[selectInvestigatorBoards, selectCurrentInvestigatorIndex],
-		(boards, currentIndex) =>
-			id === "current" ? boards[currentIndex || 0] : boards.find(whereId(id)),
+		(boards, currentIndex) => {
+			const board =
+				id === "current"
+					? (boards[currentIndex || 0] as InvestigatorBoard)
+					: boards.find(whereId(id));
+
+			return board as InvestigatorBoard;
+		},
 	);

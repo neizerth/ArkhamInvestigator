@@ -1,7 +1,6 @@
 import { ContextModal } from "@features/modal";
 import { color, size } from "@shared/config";
 import { View } from "react-native";
-import { FlatList } from "react-native-gesture-handler";
 import styled from "styled-components/native";
 import { OverviewInvestigator } from "../OverviewInvestigator";
 
@@ -21,7 +20,7 @@ export const Board: typeof OverviewInvestigator = styled(OverviewInvestigator)`
   
 `;
 
-export const List: typeof FlatList = styled(FlatList)`
+export const List: typeof View = styled(View)`
   
 `;
 

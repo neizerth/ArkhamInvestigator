@@ -1,10 +1,11 @@
 import { getInvestigatorImageUrl as getImageUrl } from "@shared/api/getInvestigatorImageUrl";
 import type { PropsWithFaction } from "@shared/model";
 import { memo, useCallback } from "react";
-import type {
-	GestureResponderEvent,
-	TouchableOpacityProps,
-	ViewProps,
+import {
+	type GestureResponderEvent,
+	Platform,
+	type TouchableOpacityProps,
+	type ViewProps,
 } from "react-native";
 import { InvestigatorPreviewFactionIcon as FactionIcon } from "../InvestigatorPreviewFactionIcon";
 import * as C from "./InvestigatorPreview.components";
@@ -20,7 +21,10 @@ export type InvestigatorPreviewProps = TouchableOpacityProps &
 		showIcon?: boolean;
 		showOptionsInfo?: boolean;
 		selectionStyle?: ViewProps["style"];
+		grayscale?: boolean;
 	};
+
+const ios = Platform.OS === "ios";
 
 export const InvestigatorPreview = ({
 	showIcon = true,
@@ -35,9 +39,12 @@ export const InvestigatorPreview = ({
 	...props
 }: InvestigatorPreviewProps) => {
 	const imageId = props.imageId || props.code;
+	const grayscaleImage = props.grayscale && ios;
+	const grayscaleFilter = props.grayscale && !ios;
 	const uri = getImageUrl({
 		code: imageId,
 		type: "square",
+		grayscale: grayscaleImage,
 	});
 	const source = { uri };
 
@@ -62,7 +69,7 @@ export const InvestigatorPreview = ({
 			onPress={onPress}
 			style={[props.style, containerStyle]}
 		>
-			<C.Picture source={source} size={size} />
+			<C.Picture source={source} size={size} grayscale={grayscaleFilter} />
 			{showIcon && (
 				<C.Info>
 					{icon ? (

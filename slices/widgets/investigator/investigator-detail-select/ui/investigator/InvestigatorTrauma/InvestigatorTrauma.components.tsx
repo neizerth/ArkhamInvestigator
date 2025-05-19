@@ -4,8 +4,7 @@ import { color, size } from "@shared/config";
 import { Row, Text } from "@shared/ui";
 import { View } from "react-native";
 import styled from "styled-components/native";
-import { HealthValue } from "../../../../value/health";
-import { SanityValue } from "../../../../value/sanity";
+import { HealthValue, SanityValue } from "../../../../value";
 
 export const Container: typeof View = styled(View)`
   /* padding: ; */

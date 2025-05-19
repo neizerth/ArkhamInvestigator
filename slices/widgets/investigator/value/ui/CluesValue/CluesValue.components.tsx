@@ -1,10 +1,11 @@
-import { color } from "@shared/config";
+import { color, gameAssets } from "@shared/config";
 import { Clue, IconNumber } from "@shared/ui";
 import styled from "styled-components/native";
+import { VALUE_HEIGHT } from "../../config";
 
 export const Container: typeof Clue = styled(Clue)`
-  width: 30px;
-  height: 30px;
+  width: ${VALUE_HEIGHT * gameAssets.clue.ratio}px;
+  height: ${VALUE_HEIGHT}px;
 `;
 
 export const Value: typeof IconNumber = styled(IconNumber).attrs({
