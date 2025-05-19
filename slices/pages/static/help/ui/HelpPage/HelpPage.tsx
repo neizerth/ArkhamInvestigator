@@ -87,6 +87,8 @@ export const HelpPage = () => {
 				{" - "}
 				{t`board.help.longPress.chaosBag`}
 			</Text>
+			<Paragraph>{t`board.help.longPress.investigatorSelect`}</Paragraph>
+
 			<Title>{t`Swipe gestures`}</Title>
 			<Text>
 				<C.Icon icon="chaos-bag-thin" />
@@ -150,7 +152,7 @@ export const HelpPage = () => {
 			<Text>
 				<C.Icon icon="tag" />
 				{" - "}
-				{t`board.help.calculator.history.set-name`}
+				{t`board.help.calculator.history.setName`}
 			</Text>
 
 			<Text>

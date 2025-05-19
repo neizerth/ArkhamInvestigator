@@ -6,7 +6,7 @@
 
 	"board.help.calculator.history.actions": "Swipe left on a calculation to see an additional menu",
 	"board.help.calculator.history.remove": "Remove a calculation",
-	"board.help.calculator.history.set-name": "Name a calculation",
+	"board.help.calculator.history.setName": "Name a calculation",
 	"board.help.calculator.history.pin": "Pin a calculation on the top of the list and on the board screen",
 
 	"board.help.calculator.result": "The minimum calculation value can't be lower than 0",
@@ -76,6 +76,7 @@
 	"board.help.press.clue": "Increase value by 1",
 
 	"board.help.pins.swipe": "Swipe down on a pinned calculation to go to a page where you've created this calculation",
+	"board.help.longPress.investigatorSelect": "If you are playing with 2+ investigators, hold down on the mini image to view all investigators' stats",
 
 	"Swipe gestures": "Свайпы",
 
