@@ -89,18 +89,18 @@ export const FooterDescription = ({ ...props }: FooterDescriptionProps) => {
 	const textUnit = gameText.showSmallText ? vw * 0.9 : vw;
 
 	return (
-		<GestureDetector gesture={swipeDown}>
-			<C.Container {...props} style={[props.style, containerStyle]}>
-				<C.Content>
-					{!showDescription && (
-						<GestureDetector gesture={swipeUp}>
-							<C.ExpandArea
-								actionCreator={setShowDescription}
-								style={expandStyle}
-							/>
-						</GestureDetector>
-					)}
-					<C.TopContent />
+		<C.Container {...props} style={[props.style, containerStyle]}>
+			<C.Content>
+				{!showDescription && (
+					<GestureDetector gesture={swipeUp}>
+						<C.ExpandArea
+							actionCreator={setShowDescription}
+							style={expandStyle}
+						/>
+					</GestureDetector>
+				)}
+				<C.TopContent />
+				<GestureDetector gesture={swipeDown}>
 					<C.Background faction={faction} width={view.width}>
 						<C.DescriptionContent>
 							<C.TextContent>
@@ -120,8 +120,8 @@ export const FooterDescription = ({ ...props }: FooterDescriptionProps) => {
 							<C.Menu />
 						</C.DescriptionContent>
 					</C.Background>
-				</C.Content>
-			</C.Container>
-		</GestureDetector>
+				</GestureDetector>
+			</C.Content>
+		</C.Container>
 	);
 };
