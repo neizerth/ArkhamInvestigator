@@ -12,11 +12,7 @@ import {
 } from "@shared/lib";
 import { useCallback, useContext } from "react";
 import type { ViewProps } from "react-native";
-import {
-	Directions,
-	Gesture,
-	GestureDetector,
-} from "react-native-gesture-handler";
+import { Directions, GestureDetector } from "react-native-gesture-handler";
 import { LayoutContext } from "../../../../../../config";
 import { TOP_CONTENT_OFFSET } from "../top";
 import * as C from "./FooterDescription.components";
@@ -83,8 +79,6 @@ export const FooterDescription = ({ ...props }: FooterDescriptionProps) => {
 		onSwipe: onSwipeDown,
 	});
 
-	const gestureConfig = Gesture.Exclusive(swipeUp, swipeDown);
-
 	if (!vw) {
 		return null;
 	}
@@ -95,14 +89,16 @@ export const FooterDescription = ({ ...props }: FooterDescriptionProps) => {
 	const textUnit = gameText.showSmallText ? vw * 0.9 : vw;
 
 	return (
-		<GestureDetector gesture={gestureConfig}>
+		<GestureDetector gesture={swipeDown}>
 			<C.Container {...props} style={[props.style, containerStyle]}>
 				<C.Content>
 					{!showDescription && (
-						<C.ExpandArea
-							actionCreator={setShowDescription}
-							style={expandStyle}
-						/>
+						<GestureDetector gesture={swipeUp}>
+							<C.ExpandArea
+								actionCreator={setShowDescription}
+								style={expandStyle}
+							/>
+						</GestureDetector>
 					)}
 					<C.TopContent />
 					<C.Background faction={faction} width={view.width}>
