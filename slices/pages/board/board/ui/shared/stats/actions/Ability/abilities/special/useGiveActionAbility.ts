@@ -22,11 +22,11 @@ export const useGiveActionAbility = (ability: InvestigatorAbility) => {
 		(boardId: number) => {
 			dispatch(
 				reduceCurrentStat({
-					boardId,
 					type: "actions",
 					reducer: inc,
 					options: {
 						addToHistory: false,
+						boardId,
 					},
 				}),
 			);

@@ -7,13 +7,13 @@ import { addCurrentHistoryItem } from "../../history/addCurrentHistoryItem";
 
 export type ReduceCurrentStatOptions = {
 	addToHistory?: boolean;
+	boardId?: BoardId;
 };
 
 type Options<T extends keyof InvestigatorBoardValues> = {
 	type: T;
 	reducer: (value: InvestigatorBoardValues[T]) => InvestigatorBoardValues[T];
 	options?: ReduceCurrentStatOptions;
-	boardId?: BoardId;
 };
 
 export const reduceCurrentStat =
@@ -23,11 +23,10 @@ export const reduceCurrentStat =
 		options = {
 			addToHistory: true,
 		},
-		boardId,
 	}: Options<T>): AppThunk =>
 	(dispatch, getState) => {
 		const state = getState();
-
+		const { boardId } = options;
 		const board = selectBoardById(boardId)(state);
 
 		if (!board) {

@@ -1,5 +1,5 @@
-import type { PickerProps } from "@widgets/control/picker/model";
 import { memo } from "react";
+import type { PickerProps } from "../../model";
 import * as C from "./Picker.components";
 
 export const Picker = ({
