@@ -15,7 +15,7 @@ export const InvestigatorClues = (props: InvestigatorCluesProps) => {
 	const dispatch = useAppDispatch();
 	const value = useAppSelector(selectCurrentStatValue("clues"));
 	const onChange = useCallback(
-		(value?: number) => {
+		(value = 0) => {
 			dispatch(setCurrentStat("clues", value));
 		},
 		[dispatch],

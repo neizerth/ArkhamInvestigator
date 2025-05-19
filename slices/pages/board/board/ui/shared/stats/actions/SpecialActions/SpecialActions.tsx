@@ -1,5 +1,5 @@
 import {
-	selectBoardAbilities,
+	selectCurrentBoardAbilities,
 	selectHaveAdditionalAction,
 	useAppSelector,
 } from "@shared/lib";
@@ -11,7 +11,7 @@ export type SpecialActionsProps = ViewProps;
 export const SpecialActions = (props: SpecialActionsProps) => {
 	const haveAdditionalAction = useAppSelector(selectHaveAdditionalAction);
 
-	const abilities = useAppSelector(selectBoardAbilities);
+	const abilities = useAppSelector(selectCurrentBoardAbilities);
 
 	return (
 		<C.Container {...props}>

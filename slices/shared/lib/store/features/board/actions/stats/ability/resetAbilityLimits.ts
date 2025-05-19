@@ -1,23 +1,18 @@
-import type { AppThunk } from "@shared/model";
+import type { AppThunk, BoardId } from "@shared/model";
 import type { LimitType } from "arkham-investigator-data";
 import { prop, reject } from "ramda";
 import { getAbilityLimits } from "../../../../../../features";
 import { propIncludes } from "../../../../../../util";
-import {
-	selectBoardAbilities,
-	selectCurrentBoardProp,
-} from "../../../selectors";
+import { selectBoardAbilities, selectBoardById } from "../../../selectors";
 import { setUsedAbilities } from "./setUsedAbilities";
 
-const selectUsedAbilities = selectCurrentBoardProp("usedAbilities");
-
 export const resetAbilityLimits =
-	(limitTypes: LimitType[]): AppThunk =>
+	(limitTypes: LimitType[], boardId: BoardId = "current"): AppThunk =>
 	(dispatch, getState) => {
 		const state = getState();
 
-		const abilities = selectBoardAbilities(state);
-		const usedAbilities = selectUsedAbilities(state) || [];
+		const { usedAbilities = [] } = selectBoardById(boardId)(state);
+		const abilities = selectBoardAbilities(boardId)(state);
 
 		const ids = abilities
 			.filter((ability) => {
@@ -33,5 +28,5 @@ export const resetAbilityLimits =
 
 		const data = reject(propIncludes("id", ids), usedAbilities);
 
-		dispatch(setUsedAbilities(data));
+		dispatch(setUsedAbilities(data, boardId));
 	};

@@ -1,8 +1,5 @@
-import { useAppDispatch, useAppSelector } from "@shared/lib";
-import { setCurrentStat } from "@shared/lib";
-import { startNewTurn } from "@shared/lib";
+import { makeAction, useAppDispatch, useAppSelector } from "@shared/lib";
 import { selectHaveBoardAbilities } from "@shared/lib";
-import { resetAbilityLimits } from "@shared/lib/store/features/board/actions/stats/ability/resetAbilityLimits";
 import type { ImageBackgroundProps } from "@shared/ui";
 import { range } from "ramda";
 import { useCallback } from "react";
@@ -21,13 +18,8 @@ export const Actions = ({ ...props }: ActionsProps) => {
 		useStat("actions");
 
 	const onPress = useCallback(() => {
-		if (value !== 0) {
-			dispatch(setCurrentStat("actions", value - 1));
-			dispatch(resetAbilityLimits(["turn"]));
-			return;
-		}
-		dispatch(startNewTurn());
-	}, [dispatch, value]);
+		dispatch(makeAction());
+	}, [dispatch]);
 
 	const showDiff = baseValue !== initialValue;
 

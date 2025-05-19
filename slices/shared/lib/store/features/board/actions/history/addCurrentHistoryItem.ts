@@ -1,16 +1,16 @@
-import type { AppThunk } from "@shared/model";
+import type { AppThunk, BoardId } from "@shared/model";
 
 import type { HistoryItem } from "@shared/model";
 import { v4 } from "uuid";
-import { selectCurrentBoard } from "../../selectors/current/selectCurrentBoard";
+import { selectBoardById } from "../../selectors";
 import { setBoard } from "../board/setBoard";
 
 type Options = Omit<HistoryItem, "id">;
 export const addCurrentHistoryItem =
-	(options: Options): AppThunk =>
+	(options: Options, boardId?: BoardId): AppThunk =>
 	(dispatch, getState) => {
 		const state = getState();
-		const board = selectCurrentBoard(state);
+		const board = selectBoardById(boardId)(state);
 
 		const historyIndex = board.historyIndex + 1;
 
@@ -24,10 +24,13 @@ export const addCurrentHistoryItem =
 		const history = [...currentHistory, historyItem];
 
 		dispatch(
-			setBoard({
-				...board,
-				history,
-				historyIndex,
-			}),
+			setBoard(
+				{
+					...board,
+					history,
+					historyIndex,
+				},
+				boardId,
+			),
 		);
 	};

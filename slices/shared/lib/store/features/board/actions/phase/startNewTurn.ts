@@ -1,29 +1,33 @@
-import type { AppThunk } from "@shared/model";
+import type { AppThunk, BoardId } from "@shared/model";
 import { TURN_ABILITY_LIMITS } from "../../../../../../config";
-import { selectCurrentStatBaseValue } from "../../selectors";
+import { selectBoardById } from "../../selectors";
 import { setCurrentStat, setValueTransaction } from "../stats";
 import { resetAbilityLimits } from "../stats/ability/resetAbilityLimits";
 
-const selectHaveAdditionalActions =
-	selectCurrentStatBaseValue("additionalAction");
-const selectBaseValue = selectCurrentStatBaseValue("actions");
+export const startNewTurn =
+	(boardId?: BoardId): AppThunk =>
+	(dispatch, getState) => {
+		const state = getState();
+		const { baseValue } = selectBoardById(boardId)(state);
 
-export const startNewTurn = (): AppThunk => (dispatch, getState) => {
-	const state = getState();
-	const baseValue = selectBaseValue(state);
-	const haveAdditionalActions = selectHaveAdditionalActions(state);
+		dispatch(resetAbilityLimits(TURN_ABILITY_LIMITS, boardId));
 
-	dispatch(resetAbilityLimits(TURN_ABILITY_LIMITS));
+		if (baseValue.additionalAction) {
+			dispatch(
+				setValueTransaction(
+					{
+						additionalAction: true,
+						actions: baseValue.actions,
+					},
+					boardId,
+				),
+			);
+			return;
+		}
 
-	if (haveAdditionalActions) {
 		dispatch(
-			setValueTransaction({
-				additionalAction: true,
-				actions: baseValue,
+			setCurrentStat("actions", baseValue.actions, {
+				boardId,
 			}),
 		);
-		return;
-	}
-
-	dispatch(setCurrentStat("actions", baseValue));
-};
+	};

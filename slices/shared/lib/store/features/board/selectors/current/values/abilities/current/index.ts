@@ -1,4 +1,4 @@
 export * from "./selectAbilityUseInfo";
-export * from "./selectBoardAbilities";
+export * from "./selectCurrentBoardAbilities";
 export * from "./selectHaveAdditionalAction";
 export * from "./selectHaveBoardAbilities";

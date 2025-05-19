@@ -1,9 +1,9 @@
 import { createSelector } from "@reduxjs/toolkit";
-import type { InvestigatorBoard } from "@shared/model";
+import type { BoardId, InvestigatorBoard } from "@shared/model";
 import { selectBoardById } from "../selectBoardById";
 
 export const selectBoardProp = <T extends keyof InvestigatorBoard>(
-	boardId: number,
+	boardId: BoardId,
 	prop: T,
 	defaultValue?: InvestigatorBoard[T],
 ) =>

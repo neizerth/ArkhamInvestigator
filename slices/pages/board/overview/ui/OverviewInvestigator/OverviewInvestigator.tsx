@@ -1,16 +1,16 @@
 import {
+	makeAction,
 	selectBoardById,
 	selectShowDamageAndHorror,
-	setCurrentStat,
 	useAppDispatch,
 	useAppSelector,
 } from "@shared/lib";
 import type { InvestigatorBoardStat } from "@shared/model";
-import type { PickerChangeEvent } from "@widgets/control/picker";
 import { range } from "ramda";
 import { useCallback, useMemo } from "react";
 import type { ViewProps } from "react-native";
 import * as C from "./OverviewInvestigator.components";
+import { useValueControl } from "./useValueControl";
 
 export type OverviewInvestigatorProps = ViewProps & {
 	boardId: number;
@@ -29,10 +29,12 @@ export const OverviewInvestigator = ({
 	...props
 }: OverviewInvestigatorProps) => {
 	const dispatch = useAppDispatch();
+	const control = useValueControl(boardId);
 	const board = useAppSelector(selectBoardById(boardId));
 	const showWounds = useAppSelector(selectShowDamageAndHorror);
 
 	const { investigator, value, baseValue } = board;
+	const boardIndex = boardId - 1;
 	const damage = baseValue.health - value.health;
 	const horror = baseValue.sanity - value.sanity;
 
@@ -43,26 +45,22 @@ export const OverviewInvestigator = ({
 		return showWounds ? woundsData : range(-20, maxHealth + 1);
 	}, [maxHealth, showWounds]);
 
+	const minHealth = healthData[0];
+
 	const sanityData = useMemo(() => {
 		return showWounds ? woundsData : range(-20, maxSanity + 1);
 	}, [maxSanity, showWounds]);
 
-	const onStatChanged = useCallback(
-		(stat: InvestigatorBoardStat) =>
-			({ value = 0 }: PickerChangeEvent) => {
-				dispatch(
-					setCurrentStat(stat, value, {
-						boardId,
-					}),
-				);
-			},
-		[dispatch, boardId],
-	);
+	const onActionsPress = useCallback(() => {
+		dispatch(makeAction(boardId));
+	}, [dispatch, boardId]);
+
+	const minSanity = sanityData[0];
 
 	const withPicker = (type: InvestigatorBoardStat) => ({
 		type: "picker" as const,
 		value: value[type],
-		onValueChanged: onStatChanged(type),
+		onValueChanged: control.onChange(type),
 	});
 
 	return (
@@ -77,15 +75,25 @@ export const OverviewInvestigator = ({
 							{...withPicker("health")}
 							value={showWounds ? damage : value.health}
 							data={healthData}
+							onPress={control.decrease("health", minHealth)}
 						/>
 						<C.Sanity
 							{...withPicker("sanity")}
 							value={showWounds ? horror : value.sanity}
 							data={sanityData}
+							onPress={control.decrease("sanity", minSanity)}
 						/>
-						<C.Clues {...withPicker("clues")} />
-						<C.Resources {...withPicker("resources")} />
-						<C.Actions {...withPicker("actions")} />
+						<C.Clues
+							{...withPicker("clues")}
+							onPress={control.increase("clues", 100)}
+							onLongPress={control.clear("clues")}
+						/>
+						<C.Resources
+							{...withPicker("resources")}
+							onPress={control.decrease("resources")}
+							onLongPress={control.clear("resources")}
+						/>
+						<C.Actions {...withPicker("actions")} onPress={onActionsPress} />
 					</C.Stats>
 				</C.Primary>
 				<C.Secondary>

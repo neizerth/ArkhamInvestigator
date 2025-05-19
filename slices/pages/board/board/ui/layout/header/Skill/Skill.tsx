@@ -68,7 +68,7 @@ export const Skill = ({ width, height, type, ...props }: SkillProps) => {
 	const [openModal] = usePageLoader(onOpen);
 
 	const onChange = useCallback(
-		({ value }: PickerChangeEvent) => {
+		({ value = 0 }: PickerChangeEvent) => {
 			dispatch(setCurrentStat(type, value));
 		},
 		[dispatch, type],

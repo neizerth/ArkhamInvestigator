@@ -1,8 +1,8 @@
 import { createSelector } from "@reduxjs/toolkit";
-import { selectBoardAbilities } from "./selectBoardAbilities";
+import { selectCurrentBoardAbilities } from "./selectCurrentBoardAbilities";
 import { selectHaveAdditionalAction } from "./selectHaveAdditionalAction";
 
 export const selectHaveBoardAbilities = createSelector(
-	[selectHaveAdditionalAction, selectBoardAbilities],
+	[selectHaveAdditionalAction, selectCurrentBoardAbilities],
 	(additionalAction, abilities) => additionalAction || abilities.length > 0,
 );
