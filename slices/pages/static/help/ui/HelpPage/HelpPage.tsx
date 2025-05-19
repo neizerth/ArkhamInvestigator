@@ -18,8 +18,7 @@ export const HelpPage = () => {
 			<Title>{t`Short Press`}</Title>
 			<Text>
 				<C.Icon icon="health" />, <C.Icon icon="sanity" />,{" "}
-				<C.Icon icon="resource" />, <C.Icon icon="clue" />,{" "}
-				<C.Icon icon="card-outline" />
+				<C.Icon icon="resource" />, <C.Icon icon="card-outline" />
 				{" - "}
 				{t`board.help.press.main`}
 			</Text>
@@ -27,6 +26,9 @@ export const HelpPage = () => {
 				<C.Icon icon="action" />
 				{" - "}
 				{t`board.help.press.action`}
+			</Text>
+			<Text>
+				<C.Icon icon="clue" /> - {t`board.help.press.clue`}
 			</Text>
 			<Text>
 				<C.Icon icon="willpower" />, <C.Icon icon="intellect" />,{" "}
@@ -84,6 +86,12 @@ export const HelpPage = () => {
 				<C.Icon icon="chaos-bag-thin" />
 				{" - "}
 				{t`board.help.longPress.chaosBag`}
+			</Text>
+			<Title>{t`Swipe gestures`}</Title>
+			<Text>
+				<C.Icon icon="chaos-bag-thin" />
+				{" - "}
+				{t`board.help.swipe.chaosBag`}
 			</Text>
 
 			<Title>{t`Chaos Bag`}</Title>
@@ -153,6 +161,7 @@ export const HelpPage = () => {
 
 			<Paragraph>{t`board.help.pins.press`}</Paragraph>
 			<Paragraph>{t`board.help.pins.longPress`}</Paragraph>
+			<Paragraph>{t`board.help.pins.swipe`}</Paragraph>
 			<Paragraph>{t`board.help.pins.toggle`}</Paragraph>
 
 			<Title>{t`Investigator Special Actions`}</Title>

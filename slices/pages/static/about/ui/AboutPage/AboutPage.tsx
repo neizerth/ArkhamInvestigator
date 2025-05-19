@@ -54,8 +54,8 @@ export const AboutPage = (props: AboutPageProps) => {
 			<Title>Hall of Fame</Title>
 			<List>
 				<List.Item>
-					<Bold>@zzorba</Bold>: Icomoon project, re-used Arkham Cards
-					translations
+					<Bold>@zzorba</Bold>: Arkham Cards API, Icomoon project, re-used
+					Arkham Cards translations
 				</List.Item>
 				<List.Item>
 					<Bold>@kamalisk & ArkhamDB crew</Bold>: Structured game data
