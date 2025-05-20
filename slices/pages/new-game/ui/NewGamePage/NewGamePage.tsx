@@ -1,6 +1,7 @@
+import { selectChaosBagEnabled } from "@features/chaos-bag";
 import { useAppTranslation } from "@features/i18n";
 import { routes } from "@shared/config";
-import { goBack, useAppDispatch, usePage } from "@shared/lib";
+import { goBack, useAppDispatch, useAppSelector, usePage } from "@shared/lib";
 import { Delay } from "@shared/ui";
 import { InvestigatorSelect } from "@widgets/investigator/investigator-select";
 import { TopBar } from "@widgets/top-bar";
@@ -10,6 +11,7 @@ import * as C from "./NewGamePage.components";
 export const NewGamePage = () => {
 	const { t } = useAppTranslation();
 	const dispatch = useAppDispatch();
+	const chaosBagEnabled = useAppSelector(selectChaosBagEnabled);
 
 	const back = useCallback(() => {
 		dispatch(goBack());
@@ -20,10 +22,12 @@ export const NewGamePage = () => {
 	return (
 		<C.Page>
 			<TopBar title={t`Choose an Investigator`} onBack={back}>
-				<C.BagButton
-					icon="chaos-bag-thin"
-					onPress={goToPage(routes.chaosBag)}
-				/>
+				{chaosBagEnabled && (
+					<C.BagButton
+						icon="chaos-bag-thin"
+						onPress={goToPage(routes.chaosBag)}
+					/>
+				)}
 			</TopBar>
 			<Delay fallback={<C.Loader />}>
 				<InvestigatorSelect />
