@@ -1,5 +1,5 @@
 import { color, size } from "@shared/config";
-import { IconNumber, type IconNumberProps, Row, StatIcon } from "@shared/ui";
+import { IconNumber, type IconNumberProps, Row, Text } from "@shared/ui";
 import { View } from "react-native";
 import styled, { css } from "styled-components/native";
 
@@ -13,7 +13,15 @@ export const Actions: typeof View = styled(View)`
   align-items: flex-end;
 `;
 
-export const SkillValue: typeof Row = styled(Row)`
+export const CompareSymbol: typeof Text = styled(Text)`
+  position: absolute;
+  top: -7px;
+  left: -12px;
+  color: ${color.white};
+  font-size: 25px;
+`;
+
+export const Difficulty: typeof Row = styled(Row)`
   padding-top: ${size.gap.medium}px;
   justify-content: center;
   align-items: center;
@@ -27,7 +35,7 @@ const valueFontSize: Record<number, number> = {
 	4: 28,
 };
 
-export const SkillValueText: typeof IconNumber = styled(IconNumber).attrs({
+export const DifficultyText: typeof IconNumber = styled(IconNumber).attrs({
 	stroke: true,
 	strokeStyle: {
 		color: color.text,
@@ -38,16 +46,4 @@ export const SkillValueText: typeof IconNumber = styled(IconNumber).attrs({
     font-size: ${valueFontSize[value.toString().length] || 25}px;
   `}
   
-`;
-
-export const SkillTypeIcon: typeof StatIcon = styled(StatIcon)`
-  font-size: 35px;
-  line-height: 40px;
-  color: white;
-`;
-
-export const SkillType: typeof View = styled(View)`
-  position: absolute;
-  top: -8px;
-  right: -25px;
 `;

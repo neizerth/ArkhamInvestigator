@@ -4,7 +4,10 @@ import type {
 	PropsWithKeyboardSize,
 } from "../../model";
 
-export type KeyboardButtonStyleOptions = PropsWithBox & PropsWithKeyboardSize;
+export type KeyboardButtonStyleOptions = PropsWithBox &
+	PropsWithKeyboardSize & {
+		selected?: boolean;
+	};
 
 const MIN_HEIGHT = 600;
 

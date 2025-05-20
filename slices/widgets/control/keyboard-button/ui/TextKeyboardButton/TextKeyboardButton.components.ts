@@ -1,4 +1,5 @@
 import { Copasetic } from "@assets/fonts";
+import { color } from "@shared/config";
 import { UnscaledText, type UnscaledTextProps } from "@shared/ui";
 import type { FC } from "react";
 import type { RuleSet } from "styled-components";
@@ -27,12 +28,19 @@ const textStyle: Record<KeyboardButtonType, RuleSet> = {
 
 export type TextProps = UnscaledTextProps &
 	PropsWithKeyboardSize &
-	PropsWithKeyboardType;
+	PropsWithKeyboardType & {
+		selected?: boolean;
+	};
 
 export const Text: FC<TextProps> = styled(UnscaledText)`
   font-size: 50px;
   font-family: ${Copasetic.regular};
   ${({ buttonType = "secondary" }: TextProps) => css`
     ${textStyle[buttonType]}
+  `}
+  ${({ selected }: TextProps) =>
+		selected &&
+		css`
+    color: ${color.dark10};
   `}
 `;

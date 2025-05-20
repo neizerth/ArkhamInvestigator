@@ -36,13 +36,16 @@ export const useKeyCheck = () => {
 				if (!type || !boardValue) {
 					return false;
 				}
-
-				const expression: SkillCheckItem[] = [
+				const baseExpression: SkillCheckItem[] = [
 					{
 						id: "base-stat",
 						type: "stat",
 						statType: type,
 					},
+				];
+
+				const fullExpression: SkillCheckItem[] = [
+					...baseExpression,
 					{
 						id: "operation",
 						type: "operator",
@@ -53,6 +56,10 @@ export const useKeyCheck = () => {
 						...item,
 					},
 				];
+
+				const showBase = item.type === "number" && item.value === 0;
+
+				const expression = showBase ? baseExpression : fullExpression;
 
 				const value = getSkillCheckValue({
 					data: expression,

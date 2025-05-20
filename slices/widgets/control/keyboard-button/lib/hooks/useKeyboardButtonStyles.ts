@@ -1,8 +1,8 @@
 import { useWindowDimensions } from "react-native";
-import type { KeyboardButtonSize } from "../../model";
+import type { KeyboardButtonProps } from "../../model";
 import { getKeyboardButtonStyle, getKeyboardButtonTextStyle } from "../styles";
 
-export const useKeyboardButtonStyles = (size?: KeyboardButtonSize) => {
+export const useKeyboardButtonStyles = ({ size }: KeyboardButtonProps) => {
 	const box = useWindowDimensions();
 	const button = getKeyboardButtonStyle({
 		box,

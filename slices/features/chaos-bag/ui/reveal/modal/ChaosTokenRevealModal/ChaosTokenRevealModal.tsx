@@ -45,6 +45,7 @@ export const ChaosTokenRevealModal = (props: ChaosTokenRevealModalProps) => {
 				</C.TopView>
 
 				<C.LeftView />
+				<C.RightView />
 
 				<C.BottomView
 					onClose={control.close}

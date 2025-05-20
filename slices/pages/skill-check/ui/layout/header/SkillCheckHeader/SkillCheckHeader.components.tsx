@@ -1,6 +1,7 @@
+import { Copasetic } from "@assets/fonts";
 import { IconButton, TouchableOpacity } from "@features/haptic";
 import { color, size, statusBarHeight } from "@shared/config";
-import { Row as BaseRow, Icon } from "@shared/ui";
+import { Row as BaseRow, Icon, UnscaledText } from "@shared/ui";
 import type { FC } from "react";
 import { View, type ViewProps } from "react-native";
 import styled, { css } from "styled-components/native";
@@ -33,7 +34,7 @@ export const Controls: typeof View = styled(View)`
   z-index: 2;
 `;
 
-export const CheckIcon: typeof TouchableOpacity = styled(TouchableOpacity)`
+export const StatType: typeof TouchableOpacity = styled(TouchableOpacity)`
   position: absolute;
   z-index: 10;
   left: 50%;
@@ -64,6 +65,16 @@ export const Rule: typeof TopRule = styled(TopRule).attrs({
 export const Stat: typeof Icon = styled(Icon)`
   font-size: 30px;
   color: ${skillCheckColor.checkIcon};
+`;
+
+export const Difficulty: typeof UnscaledText = styled(UnscaledText)`
+  position: absolute;
+  left: 43px;
+  top: 15px;
+  width: 50px;
+  font-size: 20px;
+  color: ${skillCheckColor.checkIcon};
+  font-family: ${Copasetic.regular};
 `;
 
 export const Row: typeof BaseRow = styled(BaseRow)`

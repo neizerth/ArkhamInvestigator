@@ -4,17 +4,19 @@ import { useAppTranslation } from "@features/i18n";
 import {
 	addCurrentSkillCheckToHistory,
 	selectHistoryShown,
+	selectSkillCheckDifficulty,
 	sendCommandSignal,
 	sendNumberSignal,
 	sendOperatorSignal,
 	setHistoryShown,
+	setSkillCheckDifficulty,
 	useAppDispatch,
 	useAppSelector,
 } from "@shared/lib";
 import type { SkillCheckCommandType, SkillCheckOperator } from "@shared/model";
 import { useCallback, useEffect } from "react";
 import { type ViewProps, useWindowDimensions } from "react-native";
-import { characters } from "../../../../config";
+import { characters, skillCheckColor } from "../../../../config";
 import { useKeyCheck } from "../../../../lib";
 import { LayoutContainer } from "../../LayoutContainer";
 import * as C from "./Keyboard.components";
@@ -27,9 +29,19 @@ export const Keyboard = ({ ...props }: KeyboardProps) => {
 	const dispatch = useAppDispatch();
 	const { t } = useAppTranslation();
 	const historyShown = useAppSelector(selectHistoryShown);
+	const difficulty = useAppSelector(selectSkillCheckDifficulty);
+
 	const window = useWindowDimensions();
 	const showEquals = window.height > 590;
 	const showRule = window.height > 670;
+
+	const setDifficulty = useCallback(
+		(value: number) => {
+			const nextValue = value === difficulty ? null : value;
+			dispatch(setSkillCheckDifficulty(nextValue));
+		},
+		[dispatch, difficulty],
+	);
 
 	const showReveal = useOpenChaosBagModal();
 	const showKeyReveal = useKeyCheck();
@@ -79,17 +91,9 @@ export const Keyboard = ({ ...props }: KeyboardProps) => {
 	}, [equals, showReveal]);
 
 	const withDigitProps = (value: number) => {
-		const baseProps = {
+		return {
 			onPress: sendDigit(value),
 			children: value,
-		};
-
-		if (value === 0) {
-			return baseProps;
-		}
-
-		return {
-			...baseProps,
 			onSwipeUp: showKeyReveal({
 				type: "number",
 				value,
@@ -99,6 +103,11 @@ export const Keyboard = ({ ...props }: KeyboardProps) => {
 				type: "number",
 				value,
 			}),
+			onLongPress: () => setDifficulty(value),
+			selected: value === difficulty,
+			selectedTextStyle: {
+				color: skillCheckColor.checkIcon,
+			},
 		};
 	};
 

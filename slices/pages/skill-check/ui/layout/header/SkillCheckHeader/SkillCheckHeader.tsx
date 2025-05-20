@@ -4,8 +4,10 @@ import {
 	goBack,
 	selectCurrentBoardProp,
 	selectHistoryShown,
+	selectSkillCheckDifficulty,
 	selectSkillCheckType,
 	setHistoryShown,
+	setSkillCheckDifficulty,
 	useAppDispatch,
 	useAppSelector,
 } from "@shared/lib";
@@ -19,6 +21,8 @@ export const SkillCheckHeader = ({ ...props }: SkillCheckHeaderProps) => {
 	const dispatch = useAppDispatch();
 	const type = useAppSelector(selectSkillCheckType);
 	const stats = useAppSelector(selectCurrentBoardProp("value"));
+	const difficulty = useAppSelector(selectSkillCheckDifficulty);
+
 	const value = type && stats[type];
 
 	const historyShown = useAppSelector(selectHistoryShown);
@@ -35,6 +39,10 @@ export const SkillCheckHeader = ({ ...props }: SkillCheckHeaderProps) => {
 
 	const back = useCallback(() => {
 		dispatch(goBack());
+	}, [dispatch]);
+
+	const clearDifficulty = useCallback(() => {
+		dispatch(setSkillCheckDifficulty(null));
 	}, [dispatch]);
 
 	const showReveal = useCallback(() => {
@@ -54,9 +62,12 @@ export const SkillCheckHeader = ({ ...props }: SkillCheckHeaderProps) => {
 		<C.Container {...props}>
 			<C.Content border={!isLargeLayout}>
 				{type && (
-					<C.CheckIcon onPress={showReveal}>
+					<C.StatType onLongPress={showReveal} onPress={clearDifficulty}>
 						<C.Stat icon={type} />
-					</C.CheckIcon>
+						{typeof difficulty === "number" && (
+							<C.Difficulty>⩾ {difficulty}</C.Difficulty>
+						)}
+					</C.StatType>
 				)}
 				<C.Controls>
 					<C.Row>

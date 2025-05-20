@@ -10,7 +10,7 @@ export const IconKeyboardButton = ({
 	icon,
 	...props
 }: IconKeyboardButtonProps) => {
-	const style = useKeyboardButtonStyles();
+	const style = useKeyboardButtonStyles(props);
 	return (
 		<C.Container {...props} style={[props.style, style.button]}>
 			<C.Icon icon={icon} />

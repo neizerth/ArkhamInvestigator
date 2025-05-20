@@ -6,7 +6,7 @@ import { TouchableOpacity } from "../../../../../haptic";
 import { BlessCurseControl, ChaosTokenPreview } from "../../../token";
 import { ChaosTokenRevealHistoryMemo as ChaosTokenRevealHistory } from "../../ChaosTokenRevealHistory";
 import { ChaosTokenRevealLoader } from "../../ChaosTokenRevealLoader";
-import { BottomPanel, ExpressionPanel, LeftPanel } from "../panels";
+import { BottomPanel, ExpressionPanel, LeftPanel, RightPanel } from "../panels";
 
 export const Container: typeof View = styled(View)`
   justify-content: center;
@@ -57,6 +57,13 @@ export const BottomView: typeof BottomPanel = styled(BottomPanel)`
 
 export const LeftView: typeof LeftPanel = styled(LeftPanel)`
   right: 160px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+`;
+
+export const RightView: typeof LeftPanel = styled(RightPanel)`
+  left: 160px;
   position: absolute;
   top: 0;
   bottom: 0;

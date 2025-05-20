@@ -7,6 +7,6 @@ export type CustomKeyboardButtonProps = KeyboardButtonProps;
 export const CustomKeyboardButton = ({
 	...props
 }: CustomKeyboardButtonProps) => {
-	const style = useKeyboardButtonStyles(props.size);
+	const style = useKeyboardButtonStyles(props);
 	return <C.Container {...props} style={[props.style, style.button]} />;
 };

@@ -15,4 +15,5 @@ export type KeyboardButtonProps = TouchableOpacityProps &
 	PropsWithKeyboardType & {
 		value?: number | string;
 		operator?: SkillCheckOperator;
+		selected?: boolean;
 	};

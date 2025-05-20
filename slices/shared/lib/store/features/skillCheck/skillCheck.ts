@@ -8,6 +8,7 @@ export type ISkillCheckState = {
 	data: SkillCheckItem[];
 	historyShown: boolean;
 	showCalculationDiff: boolean;
+	skillCheckDifficulty: number | null;
 };
 
 const initialState: ISkillCheckState = {
@@ -15,6 +16,7 @@ const initialState: ISkillCheckState = {
 	data: [],
 	historyShown: false,
 	showCalculationDiff: false,
+	skillCheckDifficulty: null,
 };
 
 const state = createSliceState(initialState);
@@ -37,6 +39,7 @@ export const {
 	sendStatSignal,
 	setHistoryShown,
 	setShowCalculationDiff,
+	setSkillCheckDifficulty,
 } = skillCheck.actions;
 
 export const {
@@ -44,6 +47,7 @@ export const {
 	selectType: selectSkillCheckType,
 	selectHistoryShown,
 	selectShowCalculationDiff,
+	selectSkillCheckDifficulty,
 } = skillCheck.selectors;
 
 export default skillCheck.reducer;
