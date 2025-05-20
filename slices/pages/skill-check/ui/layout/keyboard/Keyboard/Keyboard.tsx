@@ -158,7 +158,7 @@ export const Keyboard = ({ ...props }: KeyboardProps) => {
 							</C.Row>
 							<C.Row>
 								<C.Placeholder />
-								<C.Button {...withDigitProps(0)} onLongPress={showReveal} />
+								<C.Button {...withDigitProps(0)} />
 								{showEquals ? (
 									<C.Placeholder />
 								) : (
