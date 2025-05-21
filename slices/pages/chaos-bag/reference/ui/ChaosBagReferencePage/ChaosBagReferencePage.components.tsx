@@ -1,13 +1,13 @@
 import { ContextModal } from "@features/modal";
-import { color } from "@shared/config";
+import { color, size } from "@shared/config";
 import { ReferenceSelect } from "@widgets/control/reference-select";
 import styled from "styled-components/native";
 
 export const Container: typeof ContextModal = styled(ContextModal).attrs({
 	contentStyle: {
 		backgroundColor: color.dark30,
-		paddingRight: 0,
-		paddingLeft: 0,
+		paddingRight: size.gap.small,
+		paddingLeft: size.gap.small,
 	},
 })`
   flex: 1;

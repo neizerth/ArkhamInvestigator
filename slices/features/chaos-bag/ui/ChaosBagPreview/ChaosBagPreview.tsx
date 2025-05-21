@@ -57,9 +57,6 @@ export const ChaosBagPreview = (props: ChaosBagPreviewProps) => {
 		[dispatch],
 	);
 
-	const onEdit = goTo(routes.chaosBag);
-	const onHistory = goTo(routes.chaosBagHistory);
-
 	const toggleSeal = useCallback(
 		(id: string) => () => {
 			dispatch(toggleChaosTokenSeal(id));
@@ -96,19 +93,24 @@ export const ChaosBagPreview = (props: ChaosBagPreviewProps) => {
 	const actions = useMemo(() => {
 		const edit = {
 			icon: "edit",
-			onAction: onEdit,
+			onAction: goTo(routes.chaosBag),
 		};
 		const history = {
 			icon: "history",
-			onAction: onHistory,
+			onAction: goTo(routes.chaosBagHistory),
+		};
+
+		const reference = {
+			icon: "list2",
+			onAction: goTo(routes.chaosBagReference),
 		};
 
 		if (!showHistory) {
-			return [edit];
+			return [edit, reference];
 		}
 
-		return [edit, history];
-	}, [onEdit, onHistory, showHistory]);
+		return [edit, reference, history];
+	}, [goTo, showHistory]);
 
 	return (
 		<C.Container {...props} title="Chaos Bag" actions={actions}>

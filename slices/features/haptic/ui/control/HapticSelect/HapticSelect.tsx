@@ -24,17 +24,5 @@ export function HapticSelect<T>({
 		onFocus?.();
 	}, [feedback, onFocus]);
 
-	const onBlurProp = useCallback(() => {
-		feedback();
-		onBlur?.();
-	}, [feedback, onBlur]);
-
-	return (
-		<Select
-			{...props}
-			onBlur={onBlurProp}
-			onFocus={onFocusProp}
-			onChange={onChangeProp}
-		/>
-	);
+	return <Select {...props} onFocus={onFocusProp} onChange={onChangeProp} />;
 }

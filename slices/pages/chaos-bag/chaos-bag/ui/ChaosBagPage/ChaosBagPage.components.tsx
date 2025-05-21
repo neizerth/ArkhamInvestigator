@@ -10,7 +10,7 @@ export const Container: typeof ContentPage = styled(ContentPage)`
 `;
 
 export const Bag: typeof ChaosBagContents = styled(ChaosBagContents)`
-  
+	flex: 1;
 `;
 
 export const Reference: typeof Row = styled(Row)`

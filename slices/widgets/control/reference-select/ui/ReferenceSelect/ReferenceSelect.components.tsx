@@ -79,7 +79,11 @@ export const EnIcon: typeof Icon = styled(Icon)`
   text-align: center;
 `;
 
-export const ReferenceText: typeof GameText = styled(GameText)`
+export const ReferenceText: typeof GameText = styled(GameText).attrs({
+	contentContainerStyle: {
+		paddingHorizontal: 2,
+	},
+})`
   color: ${color.light10};
   font-size: ${font.size.default}px;
 `;

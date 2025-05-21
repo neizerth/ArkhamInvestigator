@@ -1,7 +1,7 @@
 import { createSelector } from "@reduxjs/toolkit";
 import { ascend, sortWith } from "ramda";
-import { chaosToken } from "../../../../../config";
-import { selectChaosBagContents } from "../chaosBag";
+import { chaosToken } from "../../../../../../config";
+import { selectChaosBagContents } from "../../chaosBag";
 
 export const selectOrderedChaosBagContents = createSelector(
 	[selectChaosBagContents],

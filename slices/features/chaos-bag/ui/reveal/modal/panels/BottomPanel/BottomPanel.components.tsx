@@ -2,6 +2,7 @@ import { color, size } from "@shared/config";
 import { Icon, Row } from "@shared/ui";
 import { View } from "react-native";
 import styled from "styled-components/native";
+import { GameText } from "../../../../../../../widgets/game/game-text";
 import { TouchableOpacity } from "../../../../../../haptic";
 
 export const Container: typeof View = styled(View)`
@@ -64,4 +65,22 @@ export const RevealMoreIcon: typeof Icon = styled(Icon)`
   font-size: 50px;
   line-height: 50px;
   color: ${color.light20};
+`;
+
+export const Description: typeof View = styled(View)`
+  margin: ${size.gap.default}px -25px 0;
+  padding: ${size.gap.default}px;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: ${size.borderRadius.default}px;
+  align-items: center;
+`;
+
+export const DescriptionText: typeof GameText = styled(GameText).attrs({
+	componentStyles: {
+		paragraph: {
+			justifyContent: "center",
+		},
+	},
+})`
+  color: ${color.light10};
 `;

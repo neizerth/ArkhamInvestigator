@@ -33,5 +33,5 @@ export const GameText = ({
 		library,
 	});
 
-	return <C.Container {...contentContainerStyle}>{children}</C.Container>;
+	return <C.Container style={contentContainerStyle}>{children}</C.Container>;
 };

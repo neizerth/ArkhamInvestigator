@@ -1,5 +1,4 @@
 import { size } from "@shared/config";
-import { TextView } from "@shared/ui";
 import { View } from "react-native";
 import styled from "styled-components/native";
 import { TouchableOpacity } from "../../../../../haptic";
@@ -74,10 +73,6 @@ export const Expression: typeof ExpressionPanel = styled(ExpressionPanel)`
   bottom: 0;
   left: 0;
   right: 0;
-`;
-
-export const ActionTitle: typeof TextView = styled(TextView)`
-  
 `;
 
 export const OneMoreLoader: typeof Loader = styled(Loader)`

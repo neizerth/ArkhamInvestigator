@@ -1,7 +1,7 @@
 import { createSelector } from "@reduxjs/toolkit";
 import { whereId } from "@shared/lib";
 import { isNotNil } from "ramda";
-import { selectChaosBagContents, selectRevealedTokenIds } from "../chaosBag";
+import { selectChaosBagContents, selectRevealedTokenIds } from "../../chaosBag";
 
 export const selectRevealedTokens = createSelector(
 	[selectRevealedTokenIds, selectChaosBagContents],
