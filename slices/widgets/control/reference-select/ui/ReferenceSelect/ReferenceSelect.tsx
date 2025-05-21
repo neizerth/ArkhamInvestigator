@@ -52,16 +52,15 @@ export const ReferenceSelect = (props: ReferenceSelectProps) => {
 				<C.StorySelect />
 				<C.CardSelect />
 				{referenceCard && (
-					<>
-						<C.StoreSelect
-							label={t`Difficulty`}
-							data={referenceTexts}
-							actionCreator={setShowReferenceBackText}
-							selector={selectShowReferenceBackText}
-						/>
-						{referenceText && <C.ReferenceText value={referenceText} />}
-					</>
+					<C.StoreSelect
+						label={t`Difficulty`}
+						data={referenceTexts}
+						actionCreator={setShowReferenceBackText}
+						selector={selectShowReferenceBackText}
+					/>
 				)}
+
+				{referenceText && <C.ReferenceText value={referenceText} />}
 			</C.Content>
 		</C.Container>
 	);
