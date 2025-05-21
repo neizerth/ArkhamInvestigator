@@ -2,7 +2,7 @@ import {
 	openRevealChaosTokenModal,
 	selectChaosBagEnabled,
 } from "@features/chaos-bag";
-import { useHapticFeedback } from "@features/haptic";
+import { useHapticFeedback, useHapticSwipe } from "@features/haptic";
 import { routes } from "@shared/config";
 import {
 	goToPage,
@@ -65,25 +65,25 @@ export const LeftSidebar = ({ ...props }: LeftSidebarProps) => {
 		dispatch(openRevealChaosTokenModal());
 	}, [dispatch]);
 
-	const onChaosBagSwipeRight = useCallback(() => {
-		impactHapticFeedback();
-		revealToken();
-	}, [impactHapticFeedback, revealToken]);
+	const chaosBagSwipeRight = useHapticSwipe({
+		direction: Directions.RIGHT,
+		onSwipe: revealToken,
+	});
 
-	const onChaosBagSwipeDown = useCallback(() => {
-		impactHapticFeedback();
-		dispatch(goToPage(routes.chaosBagHistory));
-	}, [impactHapticFeedback, dispatch]);
+	const chaosBagSwipeDown = useHapticSwipe({
+		direction: Directions.DOWN,
+		onSwipe: goToPage(routes.chaosBagHistory),
+	});
+
+	const chaosBagSwipeUp = useHapticSwipe({
+		direction: Directions.UP,
+		onSwipe: goToPage(routes.chaosBagReference),
+	});
 
 	const chaosBagGestures = [
-		Gesture.Fling()
-			.direction(Directions.RIGHT)
-			.runOnJS(true)
-			.onStart(onChaosBagSwipeRight),
-		Gesture.Fling()
-			.direction(Directions.DOWN)
-			.runOnJS(true)
-			.onStart(onChaosBagSwipeDown),
+		chaosBagSwipeRight,
+		chaosBagSwipeDown,
+		chaosBagSwipeUp,
 	];
 
 	const chaosBagGestureConfig = Gesture.Exclusive(...chaosBagGestures);

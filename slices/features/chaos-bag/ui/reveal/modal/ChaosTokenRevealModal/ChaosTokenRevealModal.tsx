@@ -1,10 +1,13 @@
-import { useAppSelector } from "@shared/lib";
+import { useAppDispatch, useAppSelector } from "@shared/lib";
 import { init, last } from "ramda";
-import { useMemo } from "react";
+import { useCallback, useMemo } from "react";
 import type { ViewProps } from "react-native";
+import { Directions, GestureDetector } from "react-native-gesture-handler";
+import { useHapticSwipe } from "../../../../../haptic";
 import {
 	selectChaosBagLoadingAnimation,
 	selectRevealedTokens,
+	setCurrentTokenType,
 } from "../../../../lib";
 import type { ChaosBagToken } from "../../../../model";
 import * as C from "./ChaosTokenRevealModal.components";
@@ -13,10 +16,22 @@ import { useTokenRevealModal } from "./hooks";
 export type ChaosTokenRevealModalProps = ViewProps;
 
 export const ChaosTokenRevealModal = (props: ChaosTokenRevealModalProps) => {
+	const dispatch = useAppDispatch();
 	const tokens = useAppSelector(selectRevealedTokens);
 	const animate = useAppSelector(selectChaosBagLoadingAnimation);
 
 	const control = useTokenRevealModal();
+
+	const lastToken = last(tokens) as ChaosBagToken;
+
+	const onSwipeDown = useCallback(() => {
+		dispatch(setCurrentTokenType(lastToken.type));
+	}, [dispatch, lastToken]);
+
+	const swipeDown = useHapticSwipe({
+		direction: Directions.DOWN,
+		onSwipe: onSwipeDown,
+	});
 
 	const history = useMemo(() => {
 		return init(tokens);
@@ -33,8 +48,6 @@ export const ChaosTokenRevealModal = (props: ChaosTokenRevealModalProps) => {
 	}
 
 	const loadMore = animate ? control.enableLoading : control.reveal;
-
-	const lastToken = last(tokens) as ChaosBagToken;
 
 	return (
 		<C.Container {...props}>
@@ -53,14 +66,16 @@ export const ChaosTokenRevealModal = (props: ChaosTokenRevealModalProps) => {
 					onReturnTokens={control.returnTokens}
 				/>
 
-				<C.TokenButton
-					activeOpacity={1}
-					onPress={control.onTokenPress(lastToken)}
-					onLongPress={control.toggleSeal(lastToken)}
-				>
-					<C.LastToken {...lastToken} />
-					<C.Expression />
-				</C.TokenButton>
+				<GestureDetector gesture={swipeDown}>
+					<C.TokenButton
+						activeOpacity={1}
+						onPress={control.onTokenPress(lastToken)}
+						onLongPress={control.toggleSeal(lastToken)}
+					>
+						<C.LastToken {...lastToken} />
+						<C.Expression />
+					</C.TokenButton>
+				</GestureDetector>
 				{control.oneMoreLoading && (
 					<C.OneMoreLoaderCancel
 						onPress={control.disableLoading}

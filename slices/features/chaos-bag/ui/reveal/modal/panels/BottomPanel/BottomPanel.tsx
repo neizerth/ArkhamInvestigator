@@ -1,8 +1,7 @@
 import { useAppSelector } from "@shared/lib";
-import { last } from "ramda";
 import type { ViewProps } from "react-native";
 import {
-	selectRevealedTokens,
+	selectCurrentTokenType,
 	selectUnrevealedChaosTokensCount,
 	useChaosBagTokenReference,
 } from "../../../../../lib";
@@ -21,11 +20,10 @@ export const BottomPanel = ({
 	...props
 }: BottomPanelProps) => {
 	const unrevealedCount = useAppSelector(selectUnrevealedChaosTokensCount);
-	const tokens = useAppSelector(selectRevealedTokens);
+	const tokenType = useAppSelector(selectCurrentTokenType);
 	const reference = useChaosBagTokenReference();
-	const lastToken = last(tokens);
 
-	const description = lastToken && reference[lastToken.type];
+	const description = tokenType && reference[tokenType];
 	return (
 		<C.Container {...props}>
 			<C.Actions>

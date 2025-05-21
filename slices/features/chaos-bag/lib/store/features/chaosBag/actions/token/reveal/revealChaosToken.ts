@@ -1,10 +1,11 @@
 import { propIncludes } from "@shared/lib";
 import type { AppThunk } from "@shared/model";
 import { shuffle } from "fast-shuffle";
-import { prop, reject } from "ramda";
+import { last, prop, reject } from "ramda";
 import {
 	selectChaosBagContents,
 	selectRevealedTokenIds,
+	setCurrentTokenType,
 	setRevealedTokenIds,
 } from "../../../chaosBag";
 import { updateCurrentRevealHistoryItem } from "../../history";
@@ -23,10 +24,14 @@ export const revealChaosToken =
 			({ sealed }) => !sealed,
 		);
 		const tokens = shuffle(rest).slice(0, count);
+		const lastToken = last(tokens);
 		const tokenIds = tokens.map(prop("id"));
 
 		const data = [...revealed, ...tokenIds];
-		dispatch(setRevealedTokenIds(data));
+		const lastTokenType = lastToken?.type || null;
 
+		dispatch(setCurrentTokenType(lastTokenType));
+
+		dispatch(setRevealedTokenIds(data));
 		dispatch(updateCurrentRevealHistoryItem(tokens));
 	};
