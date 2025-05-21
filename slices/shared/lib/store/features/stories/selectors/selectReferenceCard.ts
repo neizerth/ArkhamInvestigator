@@ -6,7 +6,6 @@ import { selectStory } from "./selectStory";
 export const selectReferenceCard = createSelector(
 	[selectStory, selectReferenceCardCode],
 	(story, code) => {
-		console.log({ code, story });
 		if (!story || !code) {
 			return;
 		}

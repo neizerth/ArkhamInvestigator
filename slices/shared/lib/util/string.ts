@@ -11,3 +11,6 @@ export const hyphens2camelCase = (text: string) =>
 	text.replace(/-([a-z])/g, (g) => g[1].toUpperCase());
 
 export const getBreaksCount = (text: string) => text.split("\n").length;
+
+export const stripTags = (html: string) =>
+	html.replace(/<\/?("[^"]*"|'[^']*'|[^>])*(>|$)/g, "");

@@ -6,6 +6,8 @@ import styled from "styled-components/native";
 export const Container: typeof ContextModal = styled(ContextModal).attrs({
 	contentStyle: {
 		backgroundColor: color.dark30,
+		paddingRight: 0,
+		paddingLeft: 0,
 	},
 })`
   flex: 1;

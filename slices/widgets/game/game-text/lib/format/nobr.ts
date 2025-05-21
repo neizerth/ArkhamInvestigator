@@ -43,7 +43,5 @@ export const nobr = (text: string) => {
 	}
 	result += open ? `<nobr>${token}</nobr>` : token;
 
-	// console.log(result);
-
 	return result.replace(/(<\/nobr>) /g, " $1");
 };

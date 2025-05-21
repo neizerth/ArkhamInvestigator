@@ -2,6 +2,7 @@ import { createChaosBag } from "@features/chaos-bag";
 import { useAppTranslation } from "@features/i18n";
 import { routes } from "@shared/config";
 import {
+	selectReferenceCard,
 	selectStory,
 	useAppDispatch,
 	useAppSelector,
@@ -14,6 +15,7 @@ import * as C from "./ChaosBagPage.components";
 export const ChaosBagPage = () => {
 	const dispatch = useAppDispatch();
 	const story = useAppSelector(selectStory);
+	const referenceCard = useAppSelector(selectReferenceCard);
 	const { t } = useAppTranslation();
 
 	const createBag = useCallback(() => {
@@ -22,7 +24,7 @@ export const ChaosBagPage = () => {
 
 	const goToPage = usePage();
 
-	const label = story?.name || t`Scenario reference`;
+	const label = referenceCard?.name || t`Scenario reference`;
 
 	return (
 		<C.Container title="Chaos bag" onBack={createBag} full>

@@ -1,3 +1,4 @@
+import { getReferenceCardText } from "@entities/reference-card";
 import {
 	DEFAULT_LANGUAGE,
 	selectCurrentLanguage,
@@ -26,8 +27,11 @@ import type { ReferenceCard } from "arkham-investigator-data";
 import { useCallback, useMemo } from "react";
 import type { ViewProps } from "react-native";
 import * as C from "./ReferenceSelect.components";
-import { useReferenceStories } from "./hooks";
-import { useReferenceCards } from "./hooks/useReferenceCards";
+import {
+	useReferenceCardData,
+	useReferenceCards,
+	useReferenceStories,
+} from "./hooks";
 
 const tabs = [
 	{
@@ -47,10 +51,13 @@ export const ReferenceSelect = (props: ReferenceSelectProps) => {
 	const story = useAppSelector(selectStory);
 	const storyType = useAppSelector(selectStoryTypeFilter);
 	const referenceCard = useAppSelector(selectReferenceCard);
-	const referenceText = useAppSelector(selectReferenceCardText);
+	const referenceCardText = useAppSelector(selectReferenceCardText);
+
+	const referenceTexts = useReferenceCardData();
 	const referenceCards = useReferenceCards();
 
-	console.log(referenceCard);
+	const referenceText =
+		referenceCardText && getReferenceCardText(referenceCardText);
 
 	const { t } = useAppTranslation();
 
@@ -66,6 +73,8 @@ export const ReferenceSelect = (props: ReferenceSelectProps) => {
 		({ value }: SelectItem<Story>) => {
 			dispatch(setStoryCode(value.code));
 			dispatch(setReferenceCardCode(null));
+
+			dispatch(setReferenceCardCode(value.referenceCards[0].code));
 		},
 		[dispatch],
 	);
@@ -98,61 +107,81 @@ export const ReferenceSelect = (props: ReferenceSelectProps) => {
 		},
 		[language],
 	);
+
+	const renderReferenceItem = useCallback(
+		({ value }: SelectItem<ReferenceCard>) => {
+			const icon = value.icon || "book";
+			const translated = language === value.locale;
+			const isDefaultLanguage = language === DEFAULT_LANGUAGE;
+			return (
+				<C.Item>
+					<C.ItemIcon icon={icon} />
+					<C.ItemText>{value.name}</C.ItemText>
+					{!isDefaultLanguage && !translated && <C.EnIcon icon="en" />}
+				</C.Item>
+			);
+		},
+		[language],
+	);
 	const label = storyType === "scenario" ? t`Scenario` : t`Campaign`;
 
 	return (
 		<C.Container {...props}>
-			{!isDefaultLanguage && (
-				<C.Checkbox
-					label={t`Translated content`}
-					actionCreator={setShowTranslatedOnlyStories}
-					selector={selectShowTranslatedOnlyStories}
-				/>
-			)}
-			<C.Checkbox
-				label={t`Fan-made Scenarios`}
-				actionCreator={setShowFanMadeStories}
-				selector={selectShowFanMadeStories}
-			/>
-			<C.SelectGroup>
-				<C.Tabs
-					selector={selectStoryTypeFilter}
-					actionCreator={setStoryTypeFilter}
-					onSelect={clearStory}
-					data={tabs}
-					defaultValue={"campaign"}
-				/>
-				<C.Select
-					data={data}
-					onChange={onStorySelect}
-					label={label}
-					placeholder={t`Choose an option`}
-					searchPlaceholder={t`Search`}
-					renderItem={renderItem}
-					value={item?.value}
-					search
-				/>
-			</C.SelectGroup>
-			{referenceCards.length > 1 && (
-				<C.Select
-					data={referenceCards}
-					onChange={onReferenceCardSelect}
-					label={t`Scenario reference`}
-					placeholder={t`Choose an option`}
-					value={referenceCard}
-				/>
-			)}
-
-			{referenceCard && (
-				<>
+			<C.Content>
+				{!isDefaultLanguage && (
 					<C.Checkbox
-						label={t`Back Text`}
-						actionCreator={setShowReferenceBackText}
-						selector={selectShowReferenceBackText}
+						label={t`Translated content`}
+						actionCreator={setShowTranslatedOnlyStories}
+						selector={selectShowTranslatedOnlyStories}
 					/>
-					{referenceText && <C.ReferenceText value={referenceText} />}
-				</>
-			)}
+				)}
+				<C.Checkbox
+					label={t`Fan-made Scenarios`}
+					actionCreator={setShowFanMadeStories}
+					selector={selectShowFanMadeStories}
+				/>
+				<C.SelectGroup>
+					<C.Tabs
+						selector={selectStoryTypeFilter}
+						actionCreator={setStoryTypeFilter}
+						onSelect={clearStory}
+						data={tabs}
+						defaultValue={"campaign"}
+					/>
+					<C.StorySelect
+						data={data}
+						onChange={onStorySelect}
+						label={label}
+						placeholder={t`Choose an option`}
+						searchPlaceholder={t`Search`}
+						renderItem={renderItem}
+						value={item?.value}
+						search
+					/>
+				</C.SelectGroup>
+				{referenceCards.length > 1 && (
+					<C.Select
+						data={referenceCards}
+						onChange={onReferenceCardSelect}
+						label={t`Scenario reference`}
+						placeholder={t`Choose an option`}
+						value={referenceCard}
+						renderItem={renderReferenceItem}
+					/>
+				)}
+
+				{referenceCard && (
+					<>
+						<C.StoreSelect
+							label={t`Difficulty`}
+							data={referenceTexts}
+							actionCreator={setShowReferenceBackText}
+							selector={selectShowReferenceBackText}
+						/>
+						{referenceText && <C.ReferenceText value={referenceText} />}
+					</>
+				)}
+			</C.Content>
 		</C.Container>
 	);
 };

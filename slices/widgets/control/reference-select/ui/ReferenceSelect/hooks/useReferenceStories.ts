@@ -43,9 +43,7 @@ export const useReferenceStories = () => {
 			if (!custom && !value.official) {
 				return false;
 			}
-			const isCampaign = ["standalone", "side_campaign", "campaign"].includes(
-				value.type,
-			);
+			const isCampaign = ["side_campaign", "campaign"].includes(value.type);
 
 			if (storyType === "campaign" && !isCampaign) {
 				return false;
