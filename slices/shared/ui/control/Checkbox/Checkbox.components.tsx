@@ -1,9 +1,10 @@
-import { color, size } from "@shared/config";
-import { Icon, Text } from "@shared/ui";
+import { View } from "react-native";
 import styled from "styled-components";
-import { TouchableOpacity } from "../../TouchableOpacity";
+import { color, size } from "../../../config";
+import { Text } from "../../content";
+import { Icon } from "../../game";
 
-export const Container: typeof TouchableOpacity = styled(TouchableOpacity)`
+export const Container: typeof View = styled(View)`
   flex-direction: row;
   align-items: center;
   gap: ${size.gap.default}px;

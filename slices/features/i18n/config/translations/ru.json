@@ -92,7 +92,8 @@
 
 	"Chaos bag loading animation": "Анимация мешка хаоса",
 
-	"Select Item": "Выберите значение",
+	"Scenario reference": "Памятка сценария",
+	"Content Type": "Контент",
 
 	"Give an action": "Дать действие",
 	"Not selected": "Не выбрано",
@@ -145,5 +146,9 @@
 	"Inertial Scrolling": "Инерция при прокрутке",
 
 	"Behavior": "Поведение",
-	"Game settings": "Игра"
+	"Game settings": "Игра",
+
+	"Select a campaign": "Выберите кампанию",
+
+	"Translated content": "На русском"
 }

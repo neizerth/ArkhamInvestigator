@@ -89,16 +89,15 @@ export const HelpPage = () => {
 			</Text>
 			<Paragraph>{t`board.help.longPress.investigatorSelect`}</Paragraph>
 
-			<Title>{t`Swipe gestures`}</Title>
-			<Text>
-				<C.Icon icon="chaos-bag-thin" />
-				{" - "}
-				{t`board.help.swipe.chaosBag`}
-			</Text>
-
 			<Title>{t`Chaos Bag`}</Title>
 
 			<Paragraph>{t`board.help.chaosBag`}</Paragraph>
+
+			<Text>
+				<C.Icon icon="chaos-bag-thin" />
+				{" - "}
+				{t`board.help.chaosBag.swipe`}
+			</Text>
 
 			<Text>
 				<C.Icon icon="reply" />

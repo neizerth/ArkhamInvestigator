@@ -51,6 +51,7 @@ export const Rule: typeof View = styled(View)`
 export const Row: typeof BaseRow = styled(BaseRow)`
   flex-direction: row;
   align-items: center;
+	justify-content: stretch;
 `;
 
 export const Label: typeof TextView = styled(TextView).attrs({
@@ -67,9 +68,14 @@ export const Select: typeof StoreSelect = styled(StoreSelect).attrs({
 		flex: 1,
 	},
 })`
+
 `;
 
-export const Checkbox: typeof StoreCheckbox = styled(StoreCheckbox)`
+export const Checkbox: typeof StoreCheckbox = styled(StoreCheckbox).attrs({
+	contentContainerStyle: {
+		flex: 1,
+	},
+})`
   flex: 1;
   justify-content: flex-end;
 `;

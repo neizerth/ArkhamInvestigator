@@ -6,7 +6,7 @@ export const loadInvestigatorsMediaData = createAsyncThunk(
 	API.loadInvestigatorsMediaData,
 );
 
-export const loadInvestigatorSignatures = createAsyncThunk(
-	"app/loadInvestigatorSignatures",
-	API.loadSignatures,
+export const loadLocaleData = createAsyncThunk(
+	"app/loadLocaleData",
+	API.loadLocaleData,
 );

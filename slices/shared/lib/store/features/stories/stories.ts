@@ -4,10 +4,16 @@ import { createSliceState } from "redux-toolkit-helpers";
 
 export type IStoriesState = {
 	stories: Story[];
+	storyCode: string | null;
+	showTranslatedOnlyStories: boolean;
+	showFanMadeStories: boolean;
 };
 
 const initialState: IStoriesState = {
 	stories: [],
+	storyCode: null,
+	showTranslatedOnlyStories: true,
+	showFanMadeStories: false,
 };
 
 export const stories = createSlice({
@@ -15,7 +21,17 @@ export const stories = createSlice({
 	...createSliceState(initialState),
 });
 
-export const { setStories } = stories.actions;
-export const { selectStories } = stories.selectors;
+export const {
+	setStories,
+	setStoryCode,
+	setShowFanMadeStories,
+	setShowTranslatedOnlyStories,
+} = stories.actions;
+export const {
+	selectStories,
+	selectStoryCode,
+	selectShowFanMadeStories,
+	selectShowTranslatedOnlyStories,
+} = stories.selectors;
 
 export default stories.reducer;

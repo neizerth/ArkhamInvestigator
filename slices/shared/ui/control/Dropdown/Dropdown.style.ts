@@ -1,6 +1,6 @@
 import { Alegreya } from "@assets/fonts";
-import { color, font, size } from "@shared/config";
 import { StyleSheet } from "react-native";
+import { color, font, size } from "../../../config";
 
 export const styles = StyleSheet.create({
 	selectedTextStyle: {
@@ -18,7 +18,7 @@ export const styles = StyleSheet.create({
 	container: {
 		backgroundColor: color.dark30,
 		borderRadius: size.borderRadius.default,
-		borderColor: color.light10,
+		borderColor: color.gray20,
 		overflow: "hidden",
 	},
 	itemTextStyle: {
@@ -33,5 +33,12 @@ export const styles = StyleSheet.create({
 		color: color.dark10,
 		fontFamily: Alegreya.regular,
 		fontSize: font.size.default,
+	},
+	inputSearchStyle: {
+		borderColor: color.dark10,
+		borderRadius: size.borderRadius.default,
+		fontSize: font.size.medium,
+		fontFamily: Alegreya.regular,
+		color: color.light10,
 	},
 });

@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { InvestigatorBoardStat, SkillCheckItem } from "@shared/model";
+import type { ReferenceCard } from "arkham-investigator-data";
 import { createSliceState } from "redux-toolkit-helpers";
 import type {
 	ChaosBagHistoryItem,
@@ -21,6 +22,7 @@ export type IChaosBagState = {
 	loadingAnimation: boolean;
 	revealHistory: ChaosBagHistoryItem[];
 	revealHistoryItem: ChaosBagHistoryItem | null;
+	referenceCard: ReferenceCard | null;
 	enabled: boolean;
 };
 
@@ -37,6 +39,7 @@ const initialState: IChaosBagState = {
 	revealHistory: [],
 	revealHistoryItem: null,
 	skillCheckExpression: [],
+	referenceCard: null,
 };
 
 const state = createSliceState(initialState);
@@ -59,6 +62,7 @@ export const {
 	setRevealHistory,
 	setRevealHistoryItem,
 	setEnabled: setChaosBagEnabled,
+	setReferenceCard,
 } = chaosBag.actions;
 
 export const {
@@ -74,6 +78,7 @@ export const {
 	selectRevealedTokenIds,
 	selectRevealHistory,
 	selectRevealHistoryItem,
+	selectReferenceCard,
 } = chaosBag.selectors;
 
 export default chaosBag.reducer;

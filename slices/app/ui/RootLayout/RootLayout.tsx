@@ -32,6 +32,12 @@ export const RootLayout = ({ children }: PropsWithChildren) => {
 					}}
 				/>
 				<Stack.Screen
+					name="chaos-bag/reference"
+					options={{
+						presentation: "transparentModal",
+					}}
+				/>
+				<Stack.Screen
 					name="board/overview"
 					options={{
 						presentation: "transparentModal",

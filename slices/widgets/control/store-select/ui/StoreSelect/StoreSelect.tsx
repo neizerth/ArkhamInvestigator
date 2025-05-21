@@ -4,25 +4,16 @@ import type { Selector } from "@reduxjs/toolkit";
 import { useAppDispatch, useAppSelector } from "@shared/lib";
 import type { AppActionCreator, RootState } from "@shared/model";
 import type { SelectItem } from "@shared/ui";
-import { propEq } from "ramda";
 import { useCallback } from "react";
-import type { ViewStyle } from "react-native";
 import * as C from "./StoreSelect.components";
-
-type Item<T> = SelectItem<T> & {
-	hint?: string;
-};
 
 export type StoreSelectProps<T> = Omit<
 	HapticSelectProps<T>,
-	"onChange" | "value" | "data"
+	"onChange" | "value"
 > & {
-	data: Item<T>[];
-	contentContainerStyle?: ViewStyle;
 	selector: Selector<RootState, T>;
 	actionCreator: AppActionCreator<T>;
 	translate?: boolean;
-	label?: string;
 };
 
 export function StoreSelect<T>({
@@ -31,7 +22,6 @@ export function StoreSelect<T>({
 	data,
 	label: labelProp = "",
 	translate = true,
-	contentContainerStyle,
 	...props
 }: StoreSelectProps<T>) {
 	const { t } = useAppTranslation();
@@ -41,8 +31,8 @@ export function StoreSelect<T>({
 	const items = data.map((item) => ({
 		...item,
 		label: translate ? t(item.label) : item.label,
+		hint: translate && item.hint ? t(item.hint) : item.hint,
 	}));
-	const item = items.find(propEq(value, "value"));
 
 	const onChange = useCallback(
 		({ value }: SelectItem<T>) => {
@@ -52,21 +42,15 @@ export function StoreSelect<T>({
 	);
 
 	const label = translate ? t(labelProp) : labelProp;
-	const hint = item?.hint && t(item.hint);
 
 	return (
-		<C.Container style={contentContainerStyle}>
-			<C.Group>
-				<C.Label>{label}</C.Label>
-				<C.Select
-					placeholder={t`Select Item`}
-					{...props}
-					data={items}
-					value={item}
-					onChange={onChange}
-				/>
-			</C.Group>
-			{hint && <C.Hint>{hint}</C.Hint>}
-		</C.Container>
+		<C.Select
+			placeholder={t`Choose an option`}
+			{...props}
+			data={items}
+			value={value}
+			label={label}
+			onChange={onChange}
+		/>
 	);
 }

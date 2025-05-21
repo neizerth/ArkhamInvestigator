@@ -6,7 +6,7 @@ import type {
 
 import type { InvestigatorSettings } from "@shared/model";
 import { createSliceState } from "redux-toolkit-helpers";
-import { loadInvestigatorSignatures } from "../app/actions/api";
+import { loadLocaleData } from "../app/actions/api";
 
 export type IInvestigatorsState = {
 	mediaVersion: string | null;
@@ -26,13 +26,10 @@ export const investigators = createSlice({
 	name: "investigators",
 	...createSliceState(initialState),
 	extraReducers: (builder) => {
-		builder.addCase(
-			loadInvestigatorSignatures.fulfilled,
-			(state, { payload }) => {
-				state.signatureGroups = payload.groups;
-				state.tabooSignatures = payload.taboo;
-			},
-		);
+		builder.addCase(loadLocaleData.fulfilled, (state, { payload }) => {
+			state.signatureGroups = payload.groups;
+			state.tabooSignatures = payload.taboo;
+		});
 	},
 });
 

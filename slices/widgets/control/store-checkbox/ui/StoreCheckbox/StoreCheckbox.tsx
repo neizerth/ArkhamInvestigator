@@ -1,4 +1,4 @@
-import { Checkbox, type CheckboxProps } from "@features/haptic";
+import { HapticCheckbox, type HapticCheckboxProps } from "@features/haptic";
 import { useAppTranslation } from "@features/i18n";
 import { useAppDispatch, useAppSelector } from "@shared/lib";
 import type { AppActionCreator, RootState } from "@shared/model";
@@ -6,7 +6,7 @@ import { useCallback } from "react";
 import type { GestureResponderEvent } from "react-native";
 import type { Selector } from "react-redux";
 
-export type StoreCheckboxProps = CheckboxProps & {
+export type StoreCheckboxProps = HapticCheckboxProps & {
 	selector: Selector<RootState, boolean>;
 	actionCreator: AppActionCreator<boolean>;
 	translate?: boolean;
@@ -33,6 +33,11 @@ export function StoreCheckbox<T>({
 	);
 
 	return (
-		<Checkbox {...props} label={label} checked={checked} onPress={onPress} />
+		<HapticCheckbox
+			{...props}
+			label={label}
+			checked={checked}
+			onPress={onPress}
+		/>
 	);
 }

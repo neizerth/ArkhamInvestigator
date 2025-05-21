@@ -79,6 +79,10 @@ export const color = {
 		curse: "#b069c9",
 		frost: "#6559f7",
 	},
+	ffg: {
+		light: "#6498D5",
+		dark: "#275891",
+	},
 
 	skill: skillColors,
 };
