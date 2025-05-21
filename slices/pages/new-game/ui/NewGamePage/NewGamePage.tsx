@@ -4,7 +4,7 @@ import { routes } from "@shared/config";
 import { goBack, useAppDispatch, useAppSelector, usePage } from "@shared/lib";
 import { Delay } from "@shared/ui";
 import { InvestigatorSelect } from "@widgets/investigator/investigator-select";
-import { TopBar } from "@widgets/top-bar";
+import { TopBar } from "@widgets/navigation";
 import { useCallback } from "react";
 import * as C from "./NewGamePage.components";
 

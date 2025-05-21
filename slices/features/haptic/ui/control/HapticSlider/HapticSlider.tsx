@@ -1,6 +1,6 @@
 import { Slider, type SliderProps } from "@shared/ui";
 import { useCallback } from "react";
-import { useHapticFeedback } from "../../lib";
+import { useHapticFeedback } from "../../../lib";
 
 export type HapticSliderProps = SliderProps;
 

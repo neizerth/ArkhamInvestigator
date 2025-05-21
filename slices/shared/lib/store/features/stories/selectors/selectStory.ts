@@ -8,6 +8,7 @@ export const selectStory = createSelector(
 		if (!code) {
 			return null;
 		}
+
 		return stories.find((story) => story.code === code);
 	},
 );

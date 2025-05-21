@@ -10,6 +10,7 @@ import v8 from "./2025-05-13T13-11-clear-boards";
 import v9 from "./2025-05-16T16-16-set-default-pinned-calculations";
 import v10 from "./2025-05-17T11-36-set-default-chaos-bag-history";
 import v11 from "./2025-05-19T22-22-set-default-chaos-bag-enabled";
+import v12 from "./2025-05-20T16-06-set-default-story-type-filter";
 
 export const persistConfigMigrations = {
 	0: v0,
@@ -24,4 +25,5 @@ export const persistConfigMigrations = {
 	9: v9,
 	10: v10,
 	11: v11,
+	12: v12,
 };

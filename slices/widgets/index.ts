@@ -1,3 +1,3 @@
 export * from "./investigator";
-export * from "./top-bar";
+export * from "./navigation";
 export * from "./content";

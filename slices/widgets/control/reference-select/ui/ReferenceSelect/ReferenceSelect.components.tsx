@@ -1,8 +1,10 @@
 import { HapticSelect } from "@features/haptic";
-import { color, size } from "@shared/config";
+import { color, font, size } from "@shared/config";
 import { Icon, Row, Text } from "@shared/ui";
 import { View } from "react-native";
 import styled from "styled-components/native";
+import { GameText } from "../../../../game/game-text";
+import { StoreTabs } from "../../../../navigation/store-tabs";
 import { StoreCheckbox } from "../../../store-checkbox";
 
 export const Container: typeof View = styled(View)`
@@ -13,9 +15,19 @@ export const Checkbox: typeof StoreCheckbox = styled(StoreCheckbox)`
   justify-content: flex-end;
 `;
 
+export const SelectGroup: typeof View = styled(View)`
+  
+`;
+
+export const Tabs: typeof StoreTabs = styled(StoreTabs)`
+  
+`;
+
 export const Select: typeof HapticSelect = styled(HapticSelect)`
   background-color: ${color.dark30};
   border: 1px solid ${color.dark20};
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
 `;
 
 export const Item: typeof Row = styled(Row)`
@@ -41,4 +53,9 @@ export const FFG: typeof Icon = styled(Icon)`
 export const EnIcon: typeof Icon = styled(Icon)`
   color: ${color.gray20};
   text-align: center;
+`;
+
+export const ReferenceText: typeof GameText = styled(GameText)`
+  color: ${color.light10};
+  font-size: ${font.size.default}px;
 `;

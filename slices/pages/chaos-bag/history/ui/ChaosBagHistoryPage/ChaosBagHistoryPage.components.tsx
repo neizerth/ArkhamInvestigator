@@ -1,6 +1,6 @@
 import { color } from "@shared/config";
 import { Page } from "@shared/ui";
-import { TopBarButton } from "@widgets/top-bar";
+import { TopBarButton } from "@widgets/navigation";
 import { FlatList } from "react-native-gesture-handler";
 import styled from "styled-components/native";
 import { ChaosBagRevealItem } from "../ChaosBagRevealItem";

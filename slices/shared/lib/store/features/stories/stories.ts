@@ -7,6 +7,9 @@ export type IStoriesState = {
 	storyCode: string | null;
 	showTranslatedOnlyStories: boolean;
 	showFanMadeStories: boolean;
+	storyTypeFilter: string;
+	referenceCardCode: string | null;
+	showReferenceBackText: boolean;
 };
 
 const initialState: IStoriesState = {
@@ -14,6 +17,9 @@ const initialState: IStoriesState = {
 	storyCode: null,
 	showTranslatedOnlyStories: true,
 	showFanMadeStories: false,
+	storyTypeFilter: "campaign",
+	referenceCardCode: null,
+	showReferenceBackText: false,
 };
 
 export const stories = createSlice({
@@ -26,12 +32,18 @@ export const {
 	setStoryCode,
 	setShowFanMadeStories,
 	setShowTranslatedOnlyStories,
+	setStoryTypeFilter,
+	setReferenceCardCode,
+	setShowReferenceBackText,
 } = stories.actions;
 export const {
 	selectStories,
 	selectStoryCode,
 	selectShowFanMadeStories,
 	selectShowTranslatedOnlyStories,
+	selectStoryTypeFilter,
+	selectReferenceCardCode,
+	selectShowReferenceBackText,
 } = stories.selectors;
 
 export default stories.reducer;

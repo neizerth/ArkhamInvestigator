@@ -4,6 +4,7 @@ import {
 	selectShowTranslatedOnlyStories,
 	selectStories,
 	selectStory,
+	selectStoryTypeFilter,
 	useAppSelector,
 } from "@shared/lib";
 import type { Story } from "@shared/model";
@@ -14,6 +15,8 @@ export const useReferenceStories = () => {
 	const custom = useAppSelector(selectShowFanMadeStories);
 	const stories = useAppSelector(selectStories);
 	const language = useAppSelector(selectCurrentLanguage);
+	const storyType = useAppSelector(selectStoryTypeFilter);
+
 	const story = useAppSelector(selectStory);
 
 	const mapStory = useCallback(
@@ -29,11 +32,10 @@ export const useReferenceStories = () => {
 
 	return useMemo(() => {
 		return stories.map(mapStory).filter((item) => {
-			if (item.value.code === story?.code) {
+			const { value } = item;
+			if (value.code === story?.code) {
 				return true;
 			}
-
-			const { value } = item;
 
 			if (translated && !item.translated) {
 				return false;
@@ -41,7 +43,19 @@ export const useReferenceStories = () => {
 			if (!custom && !value.official) {
 				return false;
 			}
+			const isCampaign = ["standalone", "side_campaign", "campaign"].includes(
+				value.type,
+			);
+
+			if (storyType === "campaign" && !isCampaign) {
+				return false;
+			}
+
+			if (storyType === "scenario" && isCampaign) {
+				return false;
+			}
+
 			return true;
 		});
-	}, [stories, story, mapStory, translated, custom]);
+	}, [stories, story, mapStory, storyType, translated, custom]);
 };

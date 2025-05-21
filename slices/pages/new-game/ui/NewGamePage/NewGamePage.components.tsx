@@ -1,7 +1,7 @@
 import type { IconButton } from "@features/haptic";
 import { color, size } from "@shared/config";
 import * as Shared from "@shared/ui";
-import { TopBarButton } from "@widgets/top-bar";
+import { TopBarButton } from "@widgets/navigation";
 import { ActivityIndicator } from "react-native";
 import styled from "styled-components/native";
 

@@ -5,7 +5,7 @@ import { useModal } from "@features/modal";
 import { REMOVE_CLIPPED_SUBVIEWS } from "@shared/config";
 import { goBack, useAppDispatch, useAppSelector } from "@shared/lib";
 import { Delay } from "@shared/ui";
-import { TopBar } from "@widgets/top-bar";
+import { TopBar } from "@widgets/navigation";
 import { useCallback } from "react";
 import type { ListRenderItemInfo } from "react-native";
 import * as C from "./ChaosBagHistoryPage.components";

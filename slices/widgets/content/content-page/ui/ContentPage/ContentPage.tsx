@@ -2,7 +2,7 @@ import { useAppTranslation } from "@features/i18n";
 import { goBack, useAppDispatch } from "@shared/lib";
 import { Page } from "@shared/ui";
 import { useCallback } from "react";
-import { TopBar } from "../../../../top-bar";
+import { TopBar } from "../../../../navigation/top-bar";
 import * as C from "./ContentPage.components";
 import { ContentPageProps } from "./ContentPage.types";
 

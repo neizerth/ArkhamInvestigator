@@ -1,31 +1,56 @@
-import { setReferenceCard } from "@features/chaos-bag";
 import {
 	DEFAULT_LANGUAGE,
 	selectCurrentLanguage,
 	useAppTranslation,
 } from "@features/i18n";
 import {
+	selectReferenceCard,
+	selectReferenceCardText,
 	selectShowFanMadeStories,
+	selectShowReferenceBackText,
 	selectShowTranslatedOnlyStories,
 	selectStory,
+	selectStoryTypeFilter,
+	setReferenceCardCode,
 	setShowFanMadeStories,
+	setShowReferenceBackText,
 	setShowTranslatedOnlyStories,
 	setStoryCode,
+	setStoryTypeFilter,
 	useAppDispatch,
 	useAppSelector,
 } from "@shared/lib";
 import type { Story } from "@shared/model";
 import type { SelectItem } from "@shared/ui";
+import type { ReferenceCard } from "arkham-investigator-data";
 import { useCallback, useMemo } from "react";
 import type { ViewProps } from "react-native";
 import * as C from "./ReferenceSelect.components";
 import { useReferenceStories } from "./hooks";
+import { useReferenceCards } from "./hooks/useReferenceCards";
+
+const tabs = [
+	{
+		id: "campaign",
+		title: "Campaigns",
+	},
+	{
+		id: "scenario",
+		title: "Scenarios",
+	},
+];
 
 export type ReferenceSelectProps = ViewProps;
 export const ReferenceSelect = (props: ReferenceSelectProps) => {
 	const dispatch = useAppDispatch();
 	const language = useAppSelector(selectCurrentLanguage);
 	const story = useAppSelector(selectStory);
+	const storyType = useAppSelector(selectStoryTypeFilter);
+	const referenceCard = useAppSelector(selectReferenceCard);
+	const referenceText = useAppSelector(selectReferenceCardText);
+	const referenceCards = useReferenceCards();
+
+	console.log(referenceCard);
 
 	const { t } = useAppTranslation();
 
@@ -40,10 +65,22 @@ export const ReferenceSelect = (props: ReferenceSelectProps) => {
 	const onStorySelect = useCallback(
 		({ value }: SelectItem<Story>) => {
 			dispatch(setStoryCode(value.code));
-			dispatch(setReferenceCard(null));
+			dispatch(setReferenceCardCode(null));
 		},
 		[dispatch],
 	);
+
+	const onReferenceCardSelect = useCallback(
+		({ value }: SelectItem<ReferenceCard>) => {
+			dispatch(setReferenceCardCode(value.code));
+		},
+		[dispatch],
+	);
+
+	const clearStory = useCallback(() => {
+		dispatch(setStoryCode(null));
+		dispatch(setReferenceCardCode(null));
+	}, [dispatch]);
 
 	const renderItem = useCallback(
 		({ value }: SelectItem<Story>) => {
@@ -61,7 +98,7 @@ export const ReferenceSelect = (props: ReferenceSelectProps) => {
 		},
 		[language],
 	);
-	const label = t`Campaign`;
+	const label = storyType === "scenario" ? t`Scenario` : t`Campaign`;
 
 	return (
 		<C.Container {...props}>
@@ -77,16 +114,45 @@ export const ReferenceSelect = (props: ReferenceSelectProps) => {
 				actionCreator={setShowFanMadeStories}
 				selector={selectShowFanMadeStories}
 			/>
-			<C.Select
-				data={data}
-				onChange={onStorySelect}
-				label={label}
-				placeholder={t`Choose an option`}
-				searchPlaceholder={t`Search`}
-				renderItem={renderItem}
-				value={item?.value}
-				search
-			/>
+			<C.SelectGroup>
+				<C.Tabs
+					selector={selectStoryTypeFilter}
+					actionCreator={setStoryTypeFilter}
+					onSelect={clearStory}
+					data={tabs}
+					defaultValue={"campaign"}
+				/>
+				<C.Select
+					data={data}
+					onChange={onStorySelect}
+					label={label}
+					placeholder={t`Choose an option`}
+					searchPlaceholder={t`Search`}
+					renderItem={renderItem}
+					value={item?.value}
+					search
+				/>
+			</C.SelectGroup>
+			{referenceCards.length > 1 && (
+				<C.Select
+					data={referenceCards}
+					onChange={onReferenceCardSelect}
+					label={t`Scenario reference`}
+					placeholder={t`Choose an option`}
+					value={referenceCard}
+				/>
+			)}
+
+			{referenceCard && (
+				<>
+					<C.Checkbox
+						label={t`Back Text`}
+						actionCreator={setShowReferenceBackText}
+						selector={selectShowReferenceBackText}
+					/>
+					{referenceText && <C.ReferenceText value={referenceText} />}
+				</>
+			)}
 		</C.Container>
 	);
 };
