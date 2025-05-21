@@ -8,6 +8,8 @@ import { GameText } from "../../../../game/game-text";
 import { StoreTabs } from "../../../../navigation/store-tabs";
 import { StoreCheckbox } from "../../../store-checkbox";
 import { StoreSelect as BaseStoreSelect } from "../../../store-select";
+import { ReferenceCardSelect } from "../ReferenceCardSelect";
+import { ReferenceStorySelect } from "../ReferenceStorySelect";
 
 export const Container: typeof ScrollView = styled(ScrollView)`
 
@@ -35,9 +37,14 @@ export const Select: typeof HapticSelect = styled(HapticSelect)`
   border: 1px solid ${color.dark20};
 `;
 
-export const StorySelect: typeof Select = styled(Select)`
-  border-top-left-radius: 0px;
-  border-top-right-radius: 0px;
+export const StorySelect: typeof ReferenceStorySelect = styled(
+	ReferenceStorySelect,
+)`
+`;
+
+export const CardSelect: typeof ReferenceCardSelect = styled(
+	ReferenceCardSelect,
+)`
 `;
 
 export const StoreSelect: typeof BaseStoreSelect = styled(BaseStoreSelect)`

@@ -10,7 +10,7 @@ import {
 import type { Story } from "@shared/model";
 import { useCallback, useMemo } from "react";
 
-export const useReferenceStories = () => {
+export const useStoryData = () => {
 	const translated = useAppSelector(selectShowTranslatedOnlyStories);
 	const custom = useAppSelector(selectShowFanMadeStories);
 	const stories = useAppSelector(selectStories);
@@ -30,7 +30,7 @@ export const useReferenceStories = () => {
 		[language],
 	);
 
-	return useMemo(() => {
+	const data = useMemo(() => {
 		return stories.map(mapStory).filter((item) => {
 			const { value } = item;
 			if (value.code === story?.code) {
@@ -56,4 +56,10 @@ export const useReferenceStories = () => {
 			return true;
 		});
 	}, [stories, story, mapStory, storyType, translated, custom]);
+
+	const item = useMemo(() => {
+		return data.find(({ value }) => value.code === story?.code);
+	}, [data, story]);
+
+	return [data, item] as [typeof data, typeof item];
 };
