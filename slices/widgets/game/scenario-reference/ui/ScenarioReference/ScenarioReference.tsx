@@ -1,5 +1,4 @@
 import { getReferenceCardDifficulty } from "@entities/reference-card";
-import { selectCurrentLanguage } from "@features/i18n";
 import {
 	selectReferenceCard,
 	selectReferenceCardText,
@@ -13,7 +12,6 @@ export type ScenarioReferenceProps = ViewProps;
 
 export const ScenarioReference = (props: ScenarioReferenceProps) => {
 	const card = useAppSelector(selectReferenceCard);
-	const language = useAppSelector(selectCurrentLanguage);
 
 	const text = useAppSelector(selectReferenceCardText);
 
@@ -24,7 +22,7 @@ export const ScenarioReference = (props: ScenarioReferenceProps) => {
 	const { icon = "book", name } = card;
 
 	const style = getScenarioReferenceStyle({
-		language,
+		language: card.locale,
 		name,
 	});
 	const dificulty = getReferenceCardDifficulty(text).toLocaleUpperCase();

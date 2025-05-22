@@ -95,15 +95,17 @@ export const DifficultyText = withLocale({
 
 export const ReferenceIconContainer: typeof View = styled(View)`
   position: absolute;
-	top: ${upx(17)};
+	top: ${upx(16)};
 	left: 0;
 	right: 0;
 	align-items: center;
+	justify-content: center;
+	height: ${upx(7)};
 `;
 
 export const ReferenceIcon: typeof Icon = styled(Icon)`
 	color: ${color.text};
-	font-size: ${upx(6)};
+	font-size: ${upx(7)};
 	line-height: ${upx(6)};
 `;
 
