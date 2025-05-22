@@ -20,7 +20,7 @@ export const useTokenReference = () => {
 		});
 	}, [tokenReference]);
 
-	const small = text.length > 500;
+	const small = text.length > 490;
 
 	return [reference, small] as [typeof reference, boolean];
 };
