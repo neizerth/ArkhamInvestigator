@@ -55,7 +55,7 @@ export const Close: typeof TouchableOpacity = styled(TouchableOpacity)`
 `;
 
 export const Action: typeof TouchableOpacity = styled(TouchableOpacity)`
-  padding: 0px ${size.gap.default}px;
+  padding: 0px 7px;
   justify-content: center;
   align-items: center;
 `;
@@ -64,7 +64,7 @@ export const Actions: typeof Row = styled(Row)`
   position: absolute;
   top: 0;
   bottom: 0;
-  left: 0;
+  left: 3px;
 `;
 
 export const ActionIcon: typeof Icon = styled(Icon)`

@@ -30,7 +30,8 @@ const parseLine = (line: string): ReferencePart | null => {
 		return null;
 	}
 	const id = matches[1];
-	const effect = matches[2]?.trim().replace(/^: /, "");
+	const effect = matches[2]?.trim().replace(/^(: )|(：)/, "");
+
 	if (!effect || !id) {
 		return null;
 	}

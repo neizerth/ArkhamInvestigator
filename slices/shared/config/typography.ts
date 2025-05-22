@@ -1,6 +1,7 @@
 export const nbsp = "\xa0";
 export const wordJoiner = "\u2060";
 export const space = "\u0020";
+export const shortNbsp = "\u202F";
 export const lineBreak = "\n";
 
 const divide = "\u{00f7}";

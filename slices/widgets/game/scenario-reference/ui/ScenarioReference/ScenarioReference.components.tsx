@@ -54,6 +54,7 @@ export const TitleText = withLocale({
 	style: {
 		default: {
 			fontFamily: Arkhamic.regular,
+			textAlign: "center",
 		},
 		ru: {
 			fontFamily: Conkordia.regular,
@@ -78,7 +79,7 @@ export const DifficultyText = withLocale({
 	style: {
 		default: {
 			fontFamily: ArnoPro.bold,
-			fontSize: unit(3.2),
+			fontSize: unit(3.3),
 		},
 		ko: {
 			fontFamily: SanCn.bold,
@@ -92,15 +93,21 @@ export const DifficultyText = withLocale({
 	},
 });
 
-export const ReferenceIcon: typeof Icon = styled(Icon)`
+export const ReferenceIconContainer: typeof View = styled(View)`
   position: absolute;
-	color: ${color.text};
-	left: 50%;
 	top: ${upx(11.5)};
+	left: 0;
+	right: 0;
+	align-items: center;
+`;
+
+export const ReferenceIcon: typeof Icon = styled(Icon)`
+	color: ${color.text};
 	font-size: ${upx(8)};
-	margin-left: ${upx(-3)};
-	width: ${upx(6)};;
-	text-align: center;
+`;
+
+export const Body: typeof View = styled(View)`
+	flex: 1;
 `;
 
 export const Tokens: typeof ScenarioReferenceEffects = styled(

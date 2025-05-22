@@ -6,6 +6,7 @@ import type { ChaosTokenProps } from "./ChaosToken.types";
 export const ChaosToken = ({
 	size = 48,
 	type,
+	dark = false,
 	selected = false,
 	...props
 }: ChaosTokenProps) => {
@@ -16,7 +17,7 @@ export const ChaosToken = ({
 				<C.Part {...part} key={part.icon} size={size} scaleType={false} />
 			))}
 			{selected && <C.Selection size={size} />}
-			<C.Background type={type} size={size} />
+			<C.Background type={type} size={size} dark={dark} />
 		</C.Container>
 	);
 };

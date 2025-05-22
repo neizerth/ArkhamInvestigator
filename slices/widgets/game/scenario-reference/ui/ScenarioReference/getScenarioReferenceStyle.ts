@@ -8,7 +8,12 @@ export const refPx = (value: number) => `${refUnit(value)}px`;
 
 const u = refUnit;
 
-export const getScenarioReferenceStyle = (language: string) => {
+type Options = {
+	language: string;
+	name: string;
+};
+
+export const getScenarioReferenceStyle = ({ language, name }: Options) => {
 	const underline = getKeyConfig<ViewStyle>({
 		default: {
 			bottom: 0,
@@ -21,16 +26,19 @@ export const getScenarioReferenceStyle = (language: string) => {
 			bottom: u(-1.8),
 		},
 		zh: {
-			bottom: u(-1),
+			bottom: u(-2),
 		},
 		"zh-cn": {
-			bottom: u(-1),
+			bottom: u(-2),
 		},
 	})(language);
 
+	const scale = getTitleSizeScale(name);
+	const titleFontSize = u(8) * scale;
+
 	const titleText = getKeyConfig<TextStyle>({
 		default: {
-			fontSize: u(8),
+			fontSize: titleFontSize,
 		},
 		ko: {
 			fontSize: u(6),
@@ -52,10 +60,10 @@ export const getScenarioReferenceStyle = (language: string) => {
 			gap: u(3),
 		},
 		zh: {
-			top: u(25),
+			top: u(24),
 		},
 		"zh-cn": {
-			top: u(25),
+			top: u(24),
 		},
 	})(language);
 
@@ -64,16 +72,18 @@ export const getScenarioReferenceStyle = (language: string) => {
 			gap: u(0.5),
 		},
 		ru: {
-			gap: u(1.5),
+			gap: u(1),
 		},
 		ko: {
 			gap: u(3),
 		},
 		zh: {
-			top: u(25),
+			top: 0,
+			gap: u(2),
 		},
 		"zh-cn": {
-			top: u(25),
+			top: 0,
+			gap: u(2),
 		},
 	})(language);
 
@@ -83,4 +93,18 @@ export const getScenarioReferenceStyle = (language: string) => {
 		titleText,
 		header,
 	};
+};
+
+const getTitleSizeScale = (text: string) => {
+	const { length } = text;
+
+	if (length > 30) {
+		return 0.8;
+	}
+
+	if (length > 40) {
+		return 0.7;
+	}
+
+	return 1;
 };

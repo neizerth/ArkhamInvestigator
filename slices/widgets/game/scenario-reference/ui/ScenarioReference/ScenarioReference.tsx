@@ -17,18 +17,23 @@ export const ScenarioReference = (props: ScenarioReferenceProps) => {
 
 	const text = useAppSelector(selectReferenceCardText);
 
-	const style = getScenarioReferenceStyle(language);
-
 	if (!card || !text) {
 		return;
 	}
 
 	const { icon = "book", name } = card;
+
+	const style = getScenarioReferenceStyle({
+		language,
+		name,
+	});
 	const dificulty = getReferenceCardDifficulty(text).toLocaleUpperCase();
 
 	return (
 		<C.Container {...props}>
-			<C.ReferenceIcon icon={icon} />
+			<C.ReferenceIconContainer>
+				<C.ReferenceIcon icon={icon} />
+			</C.ReferenceIconContainer>
 			<C.Content style={style.content}>
 				<C.Header style={style.header}>
 					<C.TitleGroup>
@@ -42,7 +47,9 @@ export const ScenarioReference = (props: ScenarioReferenceProps) => {
 						<C.DifficultyText>{dificulty}</C.DifficultyText>
 					</C.Difficulty>
 				</C.Header>
-				<C.Tokens />
+				<C.Body>
+					<C.Tokens />
+				</C.Body>
 			</C.Content>
 		</C.Container>
 	);

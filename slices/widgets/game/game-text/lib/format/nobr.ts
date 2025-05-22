@@ -1,4 +1,4 @@
-import { nbsp } from "@shared/config";
+import { nbsp, shortNbsp } from "@shared/config";
 
 // changes nbsp to <nobr>
 export const nobr = (text: string) => {
@@ -9,9 +9,15 @@ export const nobr = (text: string) => {
 	for (let i = 0; i < text.length; i++) {
 		const char = text[i];
 
-		if (char === " " && !open) {
-			result += `${token} `;
+		if ((char === " " || char === "-") && !open) {
+			result += `${token}${char}`;
 			token = "";
+			continue;
+		}
+		if (char === shortNbsp) {
+			if (!open) {
+				open = true;
+			}
 			continue;
 		}
 		if (char === nbsp) {
@@ -25,9 +31,15 @@ export const nobr = (text: string) => {
 		if (char === " ") {
 			if (open) {
 				open = false;
-				result += `<nobr>${token} </nobr>`;
+				result += `<nobr>${token}${char}</nobr>`;
 				token = "";
 			}
+			continue;
+		}
+		if (char === "-" && open) {
+			open = false;
+			result += `<nobr>${token}${char}</nobr>`;
+			token = "";
 			continue;
 		}
 		const nextCloseTag = text.slice(i, i + 2) === "</";

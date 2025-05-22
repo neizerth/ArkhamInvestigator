@@ -7,12 +7,11 @@ import { GameText } from "../../../game-text";
 import { refPx as upx } from "../../lib";
 
 export const Container: typeof View = styled(View)`
-  flex: 1;
-  gap: ${upx(8)}
+  gap: ${upx(5)}
 `;
 
 export const TokenGroup: typeof Row = styled(Row)`
-  gap: ${upx(2)};
+  gap: ${upx(3)};
   align-items: center;
 `;
 
@@ -25,7 +24,7 @@ export const TokenEffect: typeof GameText = styled(GameText).attrs({
 		flex: 1,
 	},
 })`
-  font-size: ${upx(4)};
-  line-height: ${upx(4.5)};
+  font-size: ${upx(4.2)};
+  line-height: ${upx(4.2)};
   color: ${color.text};
 `;

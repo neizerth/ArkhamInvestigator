@@ -6,14 +6,16 @@ import { getChaosTokenGradient } from "./ChaosTokenBackground.styles";
 
 export type ChaosTokenBackgroundProps = SvgProps & {
 	type: ChaosTokenType;
+	dark?: boolean;
 };
 
 export const ChaosTokenBackground = ({
 	type,
 	style,
+	dark = false,
 	...props
 }: ChaosTokenBackgroundProps) => {
-	const colorList = getChaosTokenGradient(type);
+	const colorList = getChaosTokenGradient(type, dark);
 	return (
 		<View style={style}>
 			<RadialGradient

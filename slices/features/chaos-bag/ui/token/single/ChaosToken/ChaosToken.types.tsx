@@ -7,4 +7,5 @@ export type ChaosTokenConfig = {
 	type: ChaosTokenType;
 	size?: number;
 	selected?: boolean;
+	dark?: boolean;
 };

@@ -24,7 +24,8 @@ export const Item: typeof Row = styled(Row)`
 `;
 
 export const ItemText: typeof Text = styled(Text)`
-  
+  flex: 1;
+  flex-wrap: wrap;
 `;
 
 export const ItemIcon: typeof Icon = styled(Icon)`

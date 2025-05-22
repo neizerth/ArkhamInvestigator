@@ -1,10 +1,11 @@
-import { nbsp } from "@shared/config";
+import { nbsp, shortNbsp } from "@shared/config";
 import { haveChineseGlyphs, haveKoreanGlyphs } from "../glyphs";
 
 export const withTypography = (text: string) => {
 	const base = text
-		// nbsp after icon or keyword
+		// nbsp after icon
 		.replaceAll("([^]]]) ", `$1${nbsp}`)
+		.replace(/\]([^\p{L}\]])/gu, `]${shortNbsp}$1`)
 		// nbsp before digit
 		.replace(/(?<!\])(\d+) /g, `$1${nbsp}`)
 		// nbsp after digit

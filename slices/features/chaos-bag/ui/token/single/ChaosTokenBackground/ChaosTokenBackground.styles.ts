@@ -7,9 +7,14 @@ type ChaosTokenGradientColorStop = {
 
 type ChaosTokenGradient = ChaosTokenGradientColorStop[];
 
-const defaultGradient: ChaosTokenGradient = [
+const defaultLightGradient: ChaosTokenGradient = [
 	{ offset: "60%", color: "#FFFBF2" },
 	{ offset: "100%", color: "#D6CFB9" },
+];
+
+const defaultDarkGradient: ChaosTokenGradient = [
+	{ offset: "60%", color: "#FFFBF2" },
+	{ offset: "100%", color: "#9c8b67" },
 ];
 
 const gradients: Partial<Record<ChaosTokenType, ChaosTokenGradient>> = {
@@ -36,7 +41,8 @@ const gradients: Partial<Record<ChaosTokenType, ChaosTokenGradient>> = {
 	],
 };
 
-export const getChaosTokenGradient = (type: ChaosTokenType) => {
+export const getChaosTokenGradient = (type: ChaosTokenType, dark = false) => {
+	const defaultGradient = dark ? defaultDarkGradient : defaultLightGradient;
 	const stops = gradients[type] || defaultGradient;
 
 	return stops.map((item) => ({
