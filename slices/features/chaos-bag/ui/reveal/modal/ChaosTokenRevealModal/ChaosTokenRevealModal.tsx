@@ -7,7 +7,7 @@ import { useHapticSwipe } from "../../../../../haptic";
 import {
 	selectChaosBagLoadingAnimation,
 	selectRevealedTokens,
-	setCurrentTokenType,
+	setCurrentTokenId,
 } from "../../../../lib";
 import type { ChaosBagToken } from "../../../../model";
 import * as C from "./ChaosTokenRevealModal.components";
@@ -25,7 +25,7 @@ export const ChaosTokenRevealModal = (props: ChaosTokenRevealModalProps) => {
 	const lastToken = last(tokens) as ChaosBagToken;
 
 	const onSwipeDown = useCallback(() => {
-		dispatch(setCurrentTokenType(lastToken.type));
+		dispatch(setCurrentTokenId(lastToken.id));
 	}, [dispatch, lastToken]);
 
 	const swipeDown = useHapticSwipe({

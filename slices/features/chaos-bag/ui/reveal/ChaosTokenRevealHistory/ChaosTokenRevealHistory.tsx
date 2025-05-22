@@ -1,4 +1,4 @@
-import { useAppDispatch } from "@shared/lib";
+import { useAppDispatch, useAppSelector } from "@shared/lib";
 import { memo, useCallback } from "react";
 import type { ListRenderItemInfo, ViewProps } from "react-native";
 import {
@@ -9,7 +9,8 @@ import {
 import { useHapticFeedback } from "../../../../haptic";
 import {
 	returnChaosToken,
-	setCurrentTokenType,
+	selectCurrentTokenId,
+	setCurrentTokenId,
 	toggleChaosTokenSeal,
 } from "../../../lib";
 import type { ChaosBagToken } from "../../../model";
@@ -24,6 +25,7 @@ export const ChaosTokenRevealHistory = ({
 	...props
 }: ChaosTokenRevealHistoryProps) => {
 	const dispatch = useAppDispatch();
+	const currentTokenId = useAppSelector(selectCurrentTokenId);
 	const onTokenPress = useCallback(
 		(token: ChaosBagToken) => () => {
 			dispatch(returnChaosToken(token));
@@ -42,7 +44,7 @@ export const ChaosTokenRevealHistory = ({
 
 	const onSwipeDown = useCallback(
 		(token: ChaosBagToken) => () => {
-			dispatch(setCurrentTokenType(token.type));
+			dispatch(setCurrentTokenId(token.id));
 			impactHapticFeedback();
 		},
 		[impactHapticFeedback, dispatch],
@@ -57,15 +59,17 @@ export const ChaosTokenRevealHistory = ({
 				.runOnJS(true)
 				.onStart(onSwipe);
 
+			const selected = currentTokenId === item.id;
+
 			return (
 				<GestureDetector gesture={swipeDown}>
 					<C.Button onPress={onTokenPress(item)} onLongPress={toggleSeal(item)}>
-						<C.Token token={item} position={index + 1} />
+						<C.Token token={item} position={index + 1} selected={selected} />
 					</C.Button>
 				</GestureDetector>
 			);
 		},
-		[onTokenPress, toggleSeal, onSwipeDown],
+		[onTokenPress, toggleSeal, onSwipeDown, currentTokenId],
 	);
 	return (
 		<C.Container {...props}>

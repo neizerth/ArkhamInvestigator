@@ -6,4 +6,5 @@ export type ChaosTokenProps = ViewProps & ChaosTokenConfig;
 export type ChaosTokenConfig = {
 	type: ChaosTokenType;
 	size?: number;
+	selected?: boolean;
 };

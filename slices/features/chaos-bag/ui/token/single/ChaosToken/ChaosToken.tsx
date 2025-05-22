@@ -3,14 +3,20 @@ import * as C from "./ChaosToken.components";
 import { getChaosTokenParts } from "./ChaosToken.styles";
 import type { ChaosTokenProps } from "./ChaosToken.types";
 
-export const ChaosToken = ({ size = 48, type, ...props }: ChaosTokenProps) => {
+export const ChaosToken = ({
+	size = 48,
+	type,
+	selected = false,
+	...props
+}: ChaosTokenProps) => {
 	const parts = getChaosTokenParts(type) || [];
 	return (
 		<C.Container {...props} size={size}>
 			{parts.map((part) => (
 				<C.Part {...part} key={part.icon} size={size} scaleType={false} />
 			))}
-			<C.Background type={type} />
+			{selected && <C.Selection size={size} />}
+			<C.Background type={type} size={size} />
 		</C.Container>
 	);
 };

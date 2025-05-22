@@ -6,23 +6,25 @@ export type ChaosBagRevealedTokenProps = ViewProps & {
 	token: ChaosBagToken;
 	position: number;
 	showPosition?: boolean;
+	selected?: boolean;
 };
 
 export const ChaosBagRevealedToken = ({
 	token,
 	position,
 	showPosition = true,
+	selected = false,
 	...props
 }: ChaosBagRevealedTokenProps) => {
 	const size = position.toString().length;
 	return (
 		<C.Container {...props}>
 			{showPosition && (
-				<C.Position>
+				<C.Position selected={selected}>
 					<C.PositionText size={size}>{position}</C.PositionText>
 				</C.Position>
 			)}
-			<C.Token {...token} />
+			<C.Token {...token} selected={selected} />
 		</C.Container>
 	);
 };

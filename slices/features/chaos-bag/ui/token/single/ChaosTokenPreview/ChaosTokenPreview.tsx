@@ -9,6 +9,7 @@ export type ChaosTokenPreviewProps = ViewProps &
 		sealed?: boolean;
 		sealOffset?: number;
 		tokenPadding?: number;
+		selected?: boolean;
 	};
 
 export const ChaosTokenPreview = ({
@@ -16,6 +17,7 @@ export const ChaosTokenPreview = ({
 	sealed,
 	sealOffset,
 	tokenPadding,
+	selected = false,
 	...props
 }: ChaosTokenPreviewProps) => {
 	const style = getChaosTokentPreviewStyles({
@@ -30,7 +32,7 @@ export const ChaosTokenPreview = ({
 				<C.Sealed width="100%" height="100%" style={style.background} />
 			)}
 			<C.Content style={style.content}>
-				<C.Token type={type} size={style.size} />
+				<C.Token type={type} size={style.size} selected={selected} />
 			</C.Content>
 		</C.Container>
 	);

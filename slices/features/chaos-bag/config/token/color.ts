@@ -7,4 +7,5 @@ export const chaosTokenColor = {
 		skull: "#661e09",
 		cultist: "#00543a",
 	},
+	selected: "#D4AF37",
 };

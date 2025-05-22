@@ -4,7 +4,6 @@ import { createSliceState } from "redux-toolkit-helpers";
 import type {
 	ChaosBagHistoryItem,
 	ChaosBagToken,
-	ChaosTokenType,
 	ChaosTokensCount,
 } from "../../../../model";
 
@@ -22,7 +21,7 @@ export type IChaosBagState = {
 	loadingAnimation: boolean;
 	revealHistory: ChaosBagHistoryItem[];
 	revealHistoryItem: ChaosBagHistoryItem | null;
-	currentTokenType: ChaosTokenType | null;
+	currentTokenId: string | null;
 	enabled: boolean;
 };
 
@@ -38,7 +37,7 @@ const initialState: IChaosBagState = {
 	loadingAnimation: true,
 	revealHistory: [],
 	revealHistoryItem: null,
-	currentTokenType: null,
+	currentTokenId: null,
 	skillCheckExpression: [],
 };
 
@@ -58,7 +57,7 @@ export const {
 	setLoadingAnimation: setChaosBagLoadingAnimation,
 	setSkillCheckTitle: setChaosBagSkillCheckTitle,
 	setSkillCheckExpression: setChaosBagSkillCheckExpression,
-	setCurrentTokenType,
+	setCurrentTokenId,
 	setRevealedTokenIds,
 	setRevealHistory,
 	setRevealHistoryItem,
@@ -75,7 +74,7 @@ export const {
 	selectSkillCheckTitle: selectChaosBagSkillCheckTitle,
 	selectSkillCheckExpression: selectChaosBagSkillCheckExpression,
 	selectEnabled: selectChaosBagEnabled,
-	selectCurrentTokenType,
+	selectCurrentTokenId,
 	selectRevealedTokenIds,
 	selectRevealHistory,
 	selectRevealHistoryItem,

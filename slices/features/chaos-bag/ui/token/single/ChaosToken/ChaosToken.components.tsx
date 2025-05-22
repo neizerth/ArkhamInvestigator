@@ -2,7 +2,11 @@ import { Icon, type IconProps } from "@shared/ui";
 import type { FC } from "react";
 import { View, type ViewProps } from "react-native";
 import styled, { css } from "styled-components/native";
-import { ChaosTokenBackground } from "../ChaosTokenBackground";
+import { chaosTokenColor } from "../../../../config/token/color";
+import {
+	ChaosTokenBackground,
+	type ChaosTokenBackgroundProps,
+} from "../ChaosTokenBackground";
 
 type PropsWithSize = {
 	size: number;
@@ -11,13 +15,12 @@ type PropsWithSize = {
 type ContainerProps = ViewProps & PropsWithSize;
 
 export const Container: FC<ContainerProps> = styled(View)`
-
   position: relative;
+
   ${({ size }: ContainerProps) => css`
     width: ${size}px;
     height: ${size}px;
     border-radius: ${size}px;
-    overflow: hidden;
   `}
 `;
 
@@ -29,11 +32,15 @@ const partStyle = css`
   right: 0;
 `;
 
-export const Background: typeof ChaosTokenBackground = styled(
-	ChaosTokenBackground,
-)`
+type BackgroundProps = ChaosTokenBackgroundProps & PropsWithSize;
+
+export const Background: FC<BackgroundProps> = styled(ChaosTokenBackground)`
   ${partStyle};
   z-index: 1;
+  overflow: hidden;
+  ${({ size }: PartProps) => css`
+    border-radius: ${size}px;
+  `}
 `;
 
 type PartProps = IconProps &
@@ -48,5 +55,18 @@ export const Part: FC<PartProps> = styled(Icon)`
     color: ${color};
     font-size: ${size}px;
     line-height: ${size}px;
+    border-radius: ${size}px;
+  `}
+`;
+
+type SelectionProps = ViewProps & PropsWithSize;
+
+export const Selection: FC<SelectionProps> = styled(View)`
+  ${partStyle};
+  z-index: 2;
+  border: 2px solid ${chaosTokenColor.selected};
+  ${({ size }: SelectionProps) => css`
+    border-radius: ${size}px;
+    filter: drop-shadow(0px 0px 5px ${chaosTokenColor.selected})
   `}
 `;

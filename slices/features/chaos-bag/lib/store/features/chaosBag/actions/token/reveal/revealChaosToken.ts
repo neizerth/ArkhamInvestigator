@@ -5,7 +5,7 @@ import { last, prop, reject } from "ramda";
 import {
 	selectChaosBagContents,
 	selectRevealedTokenIds,
-	setCurrentTokenType,
+	setCurrentTokenId,
 	setRevealedTokenIds,
 } from "../../../chaosBag";
 import { updateCurrentRevealHistoryItem } from "../../history";
@@ -28,9 +28,9 @@ export const revealChaosToken =
 		const tokenIds = tokens.map(prop("id"));
 
 		const data = [...revealed, ...tokenIds];
-		const lastTokenType = lastToken?.type || null;
+		const lastTokenId = lastToken?.id || null;
 
-		dispatch(setCurrentTokenType(lastTokenType));
+		dispatch(setCurrentTokenId(lastTokenId));
 
 		dispatch(setRevealedTokenIds(data));
 		dispatch(updateCurrentRevealHistoryItem(tokens));
