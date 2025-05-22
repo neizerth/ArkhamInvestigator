@@ -1,11 +1,12 @@
 import { whereId } from "@shared/lib";
 import type { AppThunk } from "@shared/model";
-import { equals, reject } from "ramda";
+import { equals, last, reject } from "ramda";
 import type { ChaosBagToken } from "../../../../../../../model";
 import {
 	selectChaosBagContents,
 	selectRevealedTokenIds,
 	setChaosBagContents,
+	setCurrentTokenId,
 	setRevealedTokenIds,
 } from "../../../chaosBag";
 import { selectChaosTokenCount } from "../../../selectors";
@@ -27,6 +28,10 @@ export const returnChaosToken =
 		const revealedData = reject(equals(id), revealedIds);
 
 		dispatch(setRevealedTokenIds(revealedData));
+
+		const lastId = last(revealedData) || null;
+
+		dispatch(setCurrentTokenId(lastId));
 
 		if (!token.removable || token.sealed) {
 			return;
