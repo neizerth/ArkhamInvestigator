@@ -2,7 +2,7 @@ import {
 	openRevealChaosTokenModal,
 	selectChaosBagEnabled,
 } from "@features/chaos-bag";
-import { useHapticFeedback, useHapticSwipe } from "@features/haptic";
+import { useHapticSwipe } from "@features/haptic";
 import { routes } from "@shared/config";
 import {
 	goToPage,
@@ -14,6 +14,7 @@ import {
 	undo,
 	useAppDispatch,
 	useAppSelector,
+	useDispatchAction,
 	usePage,
 } from "@shared/lib";
 import { useCallback } from "react";
@@ -43,15 +44,9 @@ export const LeftSidebar = ({ ...props }: LeftSidebarProps) => {
 
 	const historyLength = history?.length || 0;
 
-	const impactHapticFeedback = useHapticFeedback();
+	const onUndo = useDispatchAction(undo);
 
-	const onUndo = useCallback(() => {
-		dispatch(undo());
-	}, [dispatch]);
-
-	const onRedo = useCallback(() => {
-		dispatch(redo());
-	}, [dispatch]);
+	const onRedo = useDispatchAction(redo);
 
 	const beginHistory = useCallback(() => {
 		dispatch(setValueFromHistoryIndex(0));
@@ -77,7 +72,7 @@ export const LeftSidebar = ({ ...props }: LeftSidebarProps) => {
 
 	const chaosBagSwipeUp = useHapticSwipe({
 		direction: Directions.UP,
-		onSwipe: goToPage(routes.chaosBagReference),
+		onSwipe: goToPage(routes.chaosBagReferenceView),
 	});
 
 	const chaosBagGestures = [

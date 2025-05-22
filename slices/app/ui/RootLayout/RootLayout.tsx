@@ -8,6 +8,10 @@ import type { PropsWithChildren } from "react";
 import * as C from "./RootLayout.components";
 import { screenOptions } from "./RootLayout.config";
 
+const asModal = {
+	presentation: "transparentModal" as const,
+};
+
 export const RootLayout = ({ children }: PropsWithChildren) => {
 	const status = useAppLoader();
 	useDeviceInit();
@@ -19,30 +23,11 @@ export const RootLayout = ({ children }: PropsWithChildren) => {
 	return (
 		<AppProvider>
 			<Stack screenOptions={screenOptions}>
-				<Stack.Screen
-					name="select-investigators/details"
-					options={{
-						presentation: "transparentModal",
-					}}
-				/>
-				<Stack.Screen
-					name="chaos-bag/preview"
-					options={{
-						presentation: "transparentModal",
-					}}
-				/>
-				<Stack.Screen
-					name="chaos-bag/reference"
-					options={{
-						presentation: "transparentModal",
-					}}
-				/>
-				<Stack.Screen
-					name="board/overview"
-					options={{
-						presentation: "transparentModal",
-					}}
-				/>
+				<Stack.Screen name="select-investigators/details" options={asModal} />
+				<Stack.Screen name="chaos-bag/preview" options={asModal} />
+				<Stack.Screen name="chaos-bag/reference/index" options={asModal} />
+				<Stack.Screen name="chaos-bag/reference/edit" options={asModal} />
+				<Stack.Screen name="board/overview" options={asModal} />
 			</Stack>
 			<StatusBar style="light" />
 			{children}

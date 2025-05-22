@@ -1,4 +1,4 @@
-import { getReferenceCardTitle } from "@entities/reference-card";
+import { getReferenceCardDifficulty } from "@entities/reference-card";
 import { selectReferenceCard, useAppSelector } from "@shared/lib";
 import { useMemo } from "react";
 
@@ -12,11 +12,11 @@ export const useReferenceCardData = () => {
 
 		return [
 			{
-				label: getReferenceCardTitle(referenceCard.text),
+				label: getReferenceCardDifficulty(referenceCard.text),
 				value: false,
 			},
 			{
-				label: getReferenceCardTitle(referenceCard.back_text),
+				label: getReferenceCardDifficulty(referenceCard.back_text),
 				value: true,
 			},
 		];

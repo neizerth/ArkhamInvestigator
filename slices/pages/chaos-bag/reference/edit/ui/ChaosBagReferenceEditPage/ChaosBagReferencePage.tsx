@@ -3,9 +3,11 @@ import { useCallback, useMemo } from "react";
 import type { ViewProps } from "react-native";
 import * as C from "./ChaosBagReferencePage.components";
 
-export type ChaosBagReferencePageProps = ViewProps;
+export type ChaosBagReferenceEditPageProps = ViewProps;
 
-export const ChaosBagReferencePage = (props: ChaosBagReferencePageProps) => {
+export const ChaosBagReferenceEditPage = (
+	props: ChaosBagReferenceEditPageProps,
+) => {
 	const dispatch = useAppDispatch();
 
 	const removeReference = useCallback(() => {

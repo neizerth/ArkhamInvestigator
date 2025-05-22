@@ -33,7 +33,7 @@ export const ChaosBagPage = () => {
 					<C.ReferenceButton
 						text={label}
 						icon="list2"
-						onPress={goToPage(routes.chaosBagReference)}
+						onPress={goToPage(routes.chaosBagReferenceEdit)}
 					/>
 				</C.Reference>
 				<C.Bag />

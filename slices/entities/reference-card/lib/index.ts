@@ -1,2 +1,2 @@
-export * from "./getReferenceCardTitle";
+export * from "./getReferenceCardDifficulty";
 export * from "./getReferenceCardText";

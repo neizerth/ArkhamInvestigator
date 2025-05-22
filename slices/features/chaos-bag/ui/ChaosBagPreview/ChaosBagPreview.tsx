@@ -102,7 +102,7 @@ export const ChaosBagPreview = (props: ChaosBagPreviewProps) => {
 
 		const reference = {
 			icon: "list2",
-			onAction: goTo(routes.chaosBagReference),
+			onAction: goTo(routes.chaosBagReferenceEdit),
 		};
 
 		if (!showHistory) {

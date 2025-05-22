@@ -19,7 +19,8 @@ export const routes = {
 	chaosBag: r("/chaos-bag"),
 	chaosBagPreview: r("/chaos-bag/preview"),
 	chaosBagHistory: r("/chaos-bag/history"),
-	chaosBagReference: r("/chaos-bag/reference"),
+	chaosBagReferenceEdit: r("/chaos-bag/reference/edit"),
+	chaosBagReferenceView: r("/chaos-bag/reference"),
 
 	about: r("/static/about"),
 	support: r("/static/support"),

@@ -1,6 +1,6 @@
 import { stripTags } from "@shared/lib";
 
-export const getReferenceCardTitle = (text: string) => {
+export const getReferenceCardDifficulty = (text: string) => {
 	const [title] = text.split("\n");
 	return stripTags(title);
 };
