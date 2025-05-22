@@ -99,6 +99,8 @@ export const HelpPage = () => {
 				{t`board.help.chaosBag.swipe`}
 			</Text>
 
+			<Paragraph>{t`board.help.chaosBag.swipe`}</Paragraph>
+
 			<Text>
 				<C.Icon icon="reply" />
 				{" - "}
