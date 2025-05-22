@@ -1,7 +1,7 @@
 import { goBack, setReferenceCardCode, useAppDispatch } from "@shared/lib";
 import { useCallback, useMemo } from "react";
 import type { ViewProps } from "react-native";
-import * as C from "./ChaosBagReferencePage.components";
+import * as C from "./ChaosBagReferenceEditPage.components";
 
 export type ChaosBagReferenceEditPageProps = ViewProps;
 

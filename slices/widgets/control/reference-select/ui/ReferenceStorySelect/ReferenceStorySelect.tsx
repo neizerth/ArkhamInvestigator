@@ -43,8 +43,6 @@ export const ReferenceStorySelect = (props: ReferenceStorySelectProps) => {
 	const onStorySelect = useCallback(
 		({ value }: SelectItem<Story>) => {
 			dispatch(setStoryCode(value.code));
-			dispatch(setReferenceCardCode(null));
-
 			dispatch(setReferenceCardCode(value.referenceCards[0].code));
 		},
 		[dispatch],

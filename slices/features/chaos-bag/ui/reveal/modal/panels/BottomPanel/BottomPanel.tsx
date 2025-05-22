@@ -1,10 +1,6 @@
 import { useAppSelector } from "@shared/lib";
 import type { ViewProps } from "react-native";
-import {
-	selectCurrentToken,
-	selectUnrevealedChaosTokensCount,
-	useChaosBagTokenReference,
-} from "../../../../../lib";
+import { selectUnrevealedChaosTokensCount } from "../../../../../lib";
 import * as C from "./BottomPanel.components";
 
 export type BottomPanelProps = ViewProps & {
@@ -20,10 +16,7 @@ export const BottomPanel = ({
 	...props
 }: BottomPanelProps) => {
 	const unrevealedCount = useAppSelector(selectUnrevealedChaosTokensCount);
-	const currentToken = useAppSelector(selectCurrentToken);
-	const reference = useChaosBagTokenReference();
 
-	const description = currentToken && reference[currentToken.type];
 	return (
 		<C.Container {...props}>
 			<C.Actions>
@@ -41,11 +34,7 @@ export const BottomPanel = ({
 					<C.ReturnIcon icon="token_dismiss_highlight" />
 				</C.Return>
 			</C.Actions>
-			{description && (
-				<C.Description>
-					<C.DescriptionText value={description} />
-				</C.Description>
-			)}
+			<C.Description />
 		</C.Container>
 	);
 };

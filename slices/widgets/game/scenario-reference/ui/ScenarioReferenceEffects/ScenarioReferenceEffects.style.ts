@@ -1,5 +1,6 @@
 import { ArnoPro, STKaiti, STXinwei, SanCn, Yoon } from "@assets/fonts";
 import { type KeyConfig, getKeyConfig } from "@shared/lib";
+import type { TextStyle } from "react-native";
 import type { ComponentStyleMap } from "../../../game-text";
 import { refUnit as u } from "../../lib";
 
@@ -51,9 +52,15 @@ export const localeComponentStyles: KeyConfig<ComponentStyleMap> = {
 	"zh-cn": zhComponentStyles,
 };
 
-export const getScenarioEffectsStyle = (language: string) => {
+type Options = {
+	language: string;
+	small: boolean;
+};
+
+export const getScenarioEffectsStyle = ({ language, small }: Options) => {
 	const iconFontSize = u(3.8);
-	const fontSize = u(4.5);
+	const fontSize = u(small ? 4 : 4.2);
+	const lineHeight = fontSize * 1.1;
 
 	const zhComponentStyles = {
 		...localeComponentStyles.zh,
@@ -84,5 +91,13 @@ export const getScenarioEffectsStyle = (language: string) => {
 		"zh-cn": zhComponentStyles,
 	});
 
-	return getComponents(language);
+	const style: TextStyle = {
+		fontSize,
+		lineHeight,
+	};
+
+	return {
+		componentStyles: getComponents(language),
+		style,
+	};
 };

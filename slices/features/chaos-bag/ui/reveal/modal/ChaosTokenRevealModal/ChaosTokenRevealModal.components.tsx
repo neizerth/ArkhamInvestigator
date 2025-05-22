@@ -2,10 +2,10 @@ import { size } from "@shared/config";
 import { View } from "react-native";
 import styled from "styled-components/native";
 import { TouchableOpacity } from "../../../../../haptic";
-import { BlessCurseControl, ChaosTokenPreview } from "../../../token";
+import { BlessCurseControl } from "../../../token";
 import { ChaosTokenRevealHistoryMemo as ChaosTokenRevealHistory } from "../../ChaosTokenRevealHistory";
 import { ChaosTokenRevealLoader } from "../../ChaosTokenRevealLoader";
-import { BottomPanel, ExpressionPanel, LeftPanel, RightPanel } from "../panels";
+import { BottomPanel, CenterPanel, LeftPanel, RightPanel } from "../panels";
 
 export const Container: typeof View = styled(View)`
   justify-content: center;
@@ -18,20 +18,6 @@ export const Loader: typeof ChaosTokenRevealLoader = styled(
 ).attrs({
 	size: 150,
 })`
-`;
-
-export const LastToken: typeof ChaosTokenPreview = styled(
-	ChaosTokenPreview,
-).attrs({
-	size: 150,
-	tokenPadding: 5,
-	sealOffset: 5,
-})`
-  
-`;
-
-export const TokenButton: typeof TouchableOpacity = styled(TouchableOpacity)`
-  position: relative;
 `;
 
 export const Content: typeof View = styled(View)`
@@ -68,11 +54,8 @@ export const RightView: typeof LeftPanel = styled(RightPanel)`
   bottom: 0;
 `;
 
-export const Expression: typeof ExpressionPanel = styled(ExpressionPanel)`
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
+export const CenterView: typeof CenterPanel = styled(CenterPanel)`
+
 `;
 
 export const OneMoreLoader: typeof Loader = styled(Loader)`

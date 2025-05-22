@@ -32,7 +32,7 @@ export const ScenarioReference = (props: ScenarioReferenceProps) => {
 	return (
 		<C.Container {...props}>
 			<C.ReferenceIconContainer>
-				<C.ReferenceIcon icon={icon} />
+				<C.ReferenceIcon icon={icon} scaleType="circle" />
 			</C.ReferenceIconContainer>
 			<C.Content style={style.content}>
 				<C.Header style={style.header}>

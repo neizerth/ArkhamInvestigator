@@ -1,11 +1,5 @@
+import { selectChaosBagEnabled } from "@features/chaos-bag";
 import {
-	openRevealChaosTokenModal,
-	selectChaosBagEnabled,
-} from "@features/chaos-bag";
-import { useHapticSwipe } from "@features/haptic";
-import { routes } from "@shared/config";
-import {
-	goToPage,
 	redo,
 	selectAlwaysShowGameText,
 	selectBoardsCount,
@@ -15,17 +9,11 @@ import {
 	useAppDispatch,
 	useAppSelector,
 	useDispatchAction,
-	usePage,
 } from "@shared/lib";
 import { useCallback } from "react";
 import { type ViewProps, useWindowDimensions } from "react-native";
-import {
-	Directions,
-	Gesture,
-	GestureDetector,
-} from "react-native-gesture-handler";
-import { InvestigatorSelect } from "../../../../../shared";
-import { Sidebar } from "../Sidebar";
+import { InvestigatorSelect } from "../../../../../../shared";
+import { Sidebar } from "../../Sidebar";
 import * as C from "./LeftSidebar.components";
 
 export type LeftSidebarProps = ViewProps;
@@ -40,8 +28,6 @@ export const LeftSidebar = ({ ...props }: LeftSidebarProps) => {
 
 	const showText = useAppSelector(selectAlwaysShowGameText);
 
-	const goTo = usePage();
-
 	const historyLength = history?.length || 0;
 
 	const onUndo = useDispatchAction(undo);
@@ -55,33 +41,6 @@ export const LeftSidebar = ({ ...props }: LeftSidebarProps) => {
 	const returnToNow = useCallback(() => {
 		dispatch(setValueFromHistoryIndex(historyLength - 1));
 	}, [dispatch, historyLength]);
-
-	const revealToken = useCallback(() => {
-		dispatch(openRevealChaosTokenModal());
-	}, [dispatch]);
-
-	const chaosBagSwipeRight = useHapticSwipe({
-		direction: Directions.RIGHT,
-		onSwipe: revealToken,
-	});
-
-	const chaosBagSwipeDown = useHapticSwipe({
-		direction: Directions.DOWN,
-		onSwipe: goToPage(routes.chaosBagHistory),
-	});
-
-	const chaosBagSwipeUp = useHapticSwipe({
-		direction: Directions.UP,
-		onSwipe: goToPage(routes.chaosBagReferenceView),
-	});
-
-	const chaosBagGestures = [
-		chaosBagSwipeRight,
-		chaosBagSwipeDown,
-		chaosBagSwipeUp,
-	];
-
-	const chaosBagGestureConfig = Gesture.Exclusive(...chaosBagGestures);
 
 	const single = count === 1;
 
@@ -115,13 +74,7 @@ export const LeftSidebar = ({ ...props }: LeftSidebarProps) => {
 
 					{chaosBagEnabled && (
 						<C.Group>
-							<GestureDetector gesture={chaosBagGestureConfig}>
-								<C.Button
-									icon="chaos-bag-thin"
-									onPress={goTo(routes.chaosBagPreview)}
-									onLongPress={revealToken}
-								/>
-							</GestureDetector>
+							<C.ChaosBag />
 						</C.Group>
 					)}
 				</C.Buttons>

@@ -73,7 +73,7 @@
 	"newGame.start.title": "Start a new game?",
 	"newGame.start.text": "This action permanently remove your last game data",
 
-	"board.help.swipe.chaosBag": "Swipe right to reveal a chaos token. Swipe down to open see a reveal history page",
+	"board.help.swipe.chaosBag": "Swipe right to reveal a chaos token. Swipe down to open see a reveal history page. Swipe up to open a scenario reference",
 	"board.help.press.clue": "Increase value by 1",
 
 	"board.help.pins.swipe": "Swipe down on a pinned calculation to go to a page where you've created this calculation",

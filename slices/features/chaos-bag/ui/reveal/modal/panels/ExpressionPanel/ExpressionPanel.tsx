@@ -1,4 +1,5 @@
 import { useAppSelector } from "@shared/lib";
+import { useCallback, useState } from "react";
 import type { ViewProps } from "react-native";
 import {
 	selectChaosBagSkillCheckExpression,
@@ -15,11 +16,24 @@ export const ExpressionPanel = (props: ExpressionPanelProps) => {
 
 	const styles = getExpressionDisplayStyles();
 
+	const hasTitle = Boolean(title);
+
+	const activeOpacity = hasTitle ? 0.2 : 1;
+
+	const [showTitle, setShowTitle] = useState(true);
+
+	const onContentPress = useCallback(() => {
+		if (!hasTitle) {
+			return false;
+		}
+		setShowTitle((show) => !show);
+	}, [hasTitle]);
+
 	return (
 		<C.Container {...props}>
-			<C.Content>
-				{title && <C.Title>{title}</C.Title>}
-				{!title && expression.length > 1 && (
+			<C.Content onPress={onContentPress} activeOpacity={activeOpacity}>
+				{title && showTitle && <C.Title>{title}</C.Title>}
+				{(!title || !showTitle) && expression.length > 1 && (
 					<C.Expression {...styles} data={expression} showDiff={false} />
 				)}
 			</C.Content>

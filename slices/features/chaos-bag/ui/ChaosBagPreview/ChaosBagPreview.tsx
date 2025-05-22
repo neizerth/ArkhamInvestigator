@@ -1,61 +1,21 @@
-import { REMOVE_CLIPPED_SUBVIEWS, routes } from "@shared/config";
-import {
-	delay,
-	goBack,
-	goToPage,
-	splitIntoGroups,
-	useAppDispatch,
-	useAppSelector,
-} from "@shared/lib";
+import { REMOVE_CLIPPED_SUBVIEWS } from "@shared/config";
+import { goBack, useAppDispatch } from "@shared/lib";
 import { Delay } from "@shared/ui";
-import type { Href } from "expo-router";
-import { useCallback, useMemo } from "react";
+import { useCallback } from "react";
 import type { ListRenderItemInfo, ViewProps } from "react-native";
 import { useAppTranslation } from "../../../i18n";
-import {
-	openRevealChaosTokenModal,
-	selectOrderedChaosBagContents,
-	selectRevealHistory,
-	toggleChaosTokenSeal,
-} from "../../lib";
+import { openRevealChaosTokenModal, toggleChaosTokenSeal } from "../../lib";
 import type { ChaosBagToken } from "../../model";
 import * as C from "./ChaosBagPreview.components";
-import { useListColumns } from "./useListColumns";
+import { useData, useModalActions } from "./hooks";
 
 export type ChaosBagPreviewProps = ViewProps;
 
 export const ChaosBagPreview = (props: ChaosBagPreviewProps) => {
 	const dispatch = useAppDispatch();
 	const { t } = useAppTranslation();
-	const tokens = useAppSelector(selectOrderedChaosBagContents);
-	const isEmpty = tokens.length === 0;
-	const showHistory = useAppSelector(
-		(state) => selectRevealHistory(state).length > 0,
-	);
-
-	const columns = useListColumns();
-
-	const data = useMemo(() => {
-		return {
-			regular: splitIntoGroups(
-				tokens.filter((item) => !item.sealed),
-				columns,
-			),
-			sealed: splitIntoGroups(
-				tokens.filter((item) => item.sealed),
-				columns,
-			),
-		};
-	}, [tokens, columns]);
-
-	const goTo = useCallback(
-		(href: Href) => async () => {
-			dispatch(goBack());
-			await delay(300);
-			dispatch(goToPage(href));
-		},
-		[dispatch],
-	);
+	const data = useData();
+	const isEmpty = data.regular.length === 0 && data.sealed.length === 0;
 
 	const toggleSeal = useCallback(
 		(id: string) => () => {
@@ -90,34 +50,14 @@ export const ChaosBagPreview = (props: ChaosBagPreviewProps) => {
 		[toggleSeal],
 	);
 
-	const actions = useMemo(() => {
-		const edit = {
-			icon: "edit",
-			onAction: goTo(routes.chaosBag),
-		};
-		const history = {
-			icon: "history",
-			onAction: goTo(routes.chaosBagHistory),
-		};
-
-		const reference = {
-			icon: "list2",
-			onAction: goTo(routes.chaosBagReferenceView),
-		};
-
-		if (!showHistory) {
-			return [edit, reference];
-		}
-
-		return [edit, reference, history];
-	}, [goTo, showHistory]);
+	const actions = useModalActions();
 
 	return (
 		<C.Container {...props} title="Chaos Bag" actions={actions}>
 			<C.Content>
 				<Delay>
 					{isEmpty && <C.Hint>{t`Chaos bag is empty`}</C.Hint>}
-					{tokens.length > 0 && data.sealed.length === 0 && (
+					{!isEmpty && data.sealed.length === 0 && (
 						<C.Hint>{t`Hold to seal`}</C.Hint>
 					)}
 					{data.regular.length > 0 && (
@@ -140,7 +80,7 @@ export const ChaosBagPreview = (props: ChaosBagPreviewProps) => {
 					)}
 				</Delay>
 				<C.BlessCurse />
-				{tokens.length > 0 && (
+				{!isEmpty && (
 					<C.RevealButton
 						onPress={reveal}
 						icon="token_sealed_outline"

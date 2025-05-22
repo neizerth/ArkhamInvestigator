@@ -8,7 +8,7 @@ export const useTokenReference = () => {
 
 	const tokenReference = getChaosBagTokenRefence([text]);
 
-	return useMemo(() => {
+	const reference = useMemo(() => {
 		return Object.entries(tokenReference).map((entry) => {
 			const token = entry[0] as ChaosTokenType;
 			const effect = entry[1];
@@ -19,4 +19,8 @@ export const useTokenReference = () => {
 			};
 		});
 	}, [tokenReference]);
+
+	const small = text.length > 500;
+
+	return [reference, small] as [typeof reference, boolean];
 };

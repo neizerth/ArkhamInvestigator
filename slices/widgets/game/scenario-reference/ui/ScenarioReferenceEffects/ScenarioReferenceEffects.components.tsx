@@ -24,7 +24,5 @@ export const TokenEffect: typeof GameText = styled(GameText).attrs({
 		flex: 1,
 	},
 })`
-  font-size: ${upx(4.2)};
-  line-height: ${upx(4.2)};
   color: ${color.text};
 `;

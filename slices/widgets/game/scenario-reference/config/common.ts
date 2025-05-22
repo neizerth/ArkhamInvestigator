@@ -1,4 +1,3 @@
-import { size } from "@shared/config";
 import { Dimensions } from "react-native";
 
 const screen = Dimensions.get("screen");
@@ -9,9 +8,10 @@ export const scenarioReferenceSize = {
 	ratio: 733 / 1050,
 };
 
-const currentWidth = screen.width - size.gap.large * 2;
+const currentHeight = 500;
+const currentWidth = currentHeight * scenarioReferenceSize.ratio;
 
 export const currentScenarioReferenceSize = {
 	width: currentWidth,
-	height: currentWidth / scenarioReferenceSize.ratio,
+	height: currentHeight,
 };

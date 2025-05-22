@@ -22,7 +22,7 @@ export const Container: typeof ImageBackground = styled(ImageBackground).attrs({
 
 export const Content: typeof View = styled(View)`
   position: absolute;
-	padding: 0 ${upx(10)};
+	padding: 0 ${upx(9)};
 	gap: ${upx(3)};
 	left: 0;
 	right: 0;
@@ -95,7 +95,7 @@ export const DifficultyText = withLocale({
 
 export const ReferenceIconContainer: typeof View = styled(View)`
   position: absolute;
-	top: ${upx(11.5)};
+	top: ${upx(17)};
 	left: 0;
 	right: 0;
 	align-items: center;
@@ -103,7 +103,8 @@ export const ReferenceIconContainer: typeof View = styled(View)`
 
 export const ReferenceIcon: typeof Icon = styled(Icon)`
 	color: ${color.text};
-	font-size: ${upx(8)};
+	font-size: ${upx(6)};
+	line-height: ${upx(6)};
 `;
 
 export const Body: typeof View = styled(View)`

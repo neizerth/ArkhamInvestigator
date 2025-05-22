@@ -29,7 +29,7 @@ export const ReferenceCardSelect = (props: ReferenceCardSelectProps) => {
 		[dispatch],
 	);
 
-	if (referenceCards.length === 0) {
+	if (referenceCards.length < 2) {
 		return null;
 	}
 

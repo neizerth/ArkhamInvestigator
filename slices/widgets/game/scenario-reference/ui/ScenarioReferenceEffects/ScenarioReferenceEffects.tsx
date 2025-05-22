@@ -11,19 +11,19 @@ export const ScenarioReferenceEffects = (
 	props: ScenarioReferenceEffectsProps,
 ) => {
 	const language = useAppSelector(selectCurrentLanguage);
-	const reference = useTokenReference();
+	const [reference, small] = useTokenReference();
 
-	const componentStyles = getScenarioEffectsStyle(language);
+	const effectProps = getScenarioEffectsStyle({
+		language,
+		small,
+	});
 
 	return (
 		<C.Container {...props}>
 			{reference.map((item) => (
 				<C.TokenGroup key={item.token}>
 					<C.Token type={item.token} dark />
-					<C.TokenEffect
-						value={item.effect}
-						componentStyles={componentStyles}
-					/>
+					<C.TokenEffect {...effectProps} value={item.effect} />
 				</C.TokenGroup>
 			))}
 		</C.Container>

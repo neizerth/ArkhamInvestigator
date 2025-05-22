@@ -53,7 +53,7 @@ export const getScenarioReferenceStyle = ({ language, name }: Options) => {
 
 	const content = getKeyConfig<ViewStyle>({
 		default: {
-			top: u(24.2),
+			top: u(23),
 		},
 		ko: {
 			top: u(25),
@@ -72,7 +72,7 @@ export const getScenarioReferenceStyle = ({ language, name }: Options) => {
 			gap: u(0.5),
 		},
 		ru: {
-			gap: u(1),
+			gap: u(1.5),
 		},
 		ko: {
 			gap: u(3),

@@ -9,5 +9,5 @@ export const selectCurrentStatInitialValue = <
 ) =>
 	createSelector(
 		[selectCurrentBoard],
-		({ initialValue }): InvestigatorBoardValues[K] => initialValue[stat],
+		(board): InvestigatorBoardValues[K] => board?.initialValue[stat],
 	);

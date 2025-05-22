@@ -1,13 +1,9 @@
-import { IconButton, type TouchableOpacityProps } from "@features/haptic";
-import { color } from "@shared/config";
 import type { FC } from "react";
-import { Dimensions, Platform, View, type ViewProps } from "react-native";
+import { View, type ViewProps } from "react-native";
 import styled, { css } from "styled-components/native";
-import { assetsSize } from "../../../../../../config";
-
-const ios = Platform.OS === "ios";
-
-const screen = Dimensions.get("screen");
+import { assetsSize } from "../../../../../../../config";
+import { SidebarIconButton } from "../../SidebarIconButton";
+import { ChaosBagButton } from "../ChaosBagButton";
 
 type ContainerProps = ViewProps & {
 	single: boolean;
@@ -56,23 +52,9 @@ export const Buttons: FC<ContainerProps> = styled(View)`
     `}
 `;
 
-export const Button: typeof IconButton = styled(IconButton).attrs({
-	iconStyle: {
-		fontSize: 28,
-		lineHeight: ios ? 28 : 30,
-		color: color.white,
-		textShadowColor: "rgba(0, 0, 0, 0.3)",
-		textShadowOffset: { width: 0, height: 0 },
-		textShadowRadius: 5,
-	},
-})`
-  width: 60px;
-  height: 48px;
-  justify-content: center;
-  align-items: center;
-  ${({ disabled }: TouchableOpacityProps) =>
-		disabled &&
-		css`
-    opacity: 0.5;
-  `}
+export const Button: typeof SidebarIconButton = styled(SidebarIconButton)`
+`;
+
+export const ChaosBag: typeof ChaosBagButton = styled(ChaosBagButton)`
+  
 `;

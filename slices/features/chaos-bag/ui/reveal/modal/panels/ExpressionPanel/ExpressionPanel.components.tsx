@@ -3,6 +3,7 @@ import { color, font } from "@shared/config";
 import { Dimensions, View } from "react-native";
 import styled from "styled-components/native";
 import { SkillCheckExpressionDisplay } from "../../../../../../../widgets/game/skill-check";
+import { TouchableOpacity } from "../../../../../../haptic";
 import { withLocale } from "../../../../../../i18n";
 
 const { width } = Dimensions.get("screen");
@@ -16,7 +17,7 @@ const zhTextConfig = {
 	letterSpacing: 0.5,
 };
 
-export const Content: typeof View = styled(View)`
+export const Content: typeof TouchableOpacity = styled(TouchableOpacity)`
   position: absolute;
   bottom: 0;
   left: -50%;
