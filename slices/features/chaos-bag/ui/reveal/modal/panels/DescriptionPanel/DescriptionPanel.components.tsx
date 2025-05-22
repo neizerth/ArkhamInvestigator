@@ -1,15 +1,14 @@
 import { color, size } from "@shared/config";
 import type { FC } from "react";
-import { TouchableOpacity } from "react-native";
 import styled, { css } from "styled-components/native";
 import { GameText } from "../../../../../../../widgets/game/game-text";
-import type { TouchableOpacityProps } from "../../../../../../haptic";
+import { Pressable, type PressableProps } from "../../../../../../haptic";
 
-type ContainerProps = TouchableOpacityProps & {
+type ContainerProps = PressableProps & {
 	last: boolean;
 };
 
-export const Container: FC<ContainerProps> = styled(TouchableOpacity)`
+export const Container: FC<ContainerProps> = styled(Pressable)`
   margin: ${size.gap.default}px -25px 0;
   padding: ${size.gap.default}px;
   background-color: rgba(0, 0, 0, 0.5);

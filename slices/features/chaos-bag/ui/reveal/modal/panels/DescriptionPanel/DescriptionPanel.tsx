@@ -35,12 +35,7 @@ export const DescriptionPanel = (props: DescriptionPanelProps) => {
 	}
 
 	return (
-		<C.Container
-			{...props}
-			last={isLastToken}
-			activeOpacity={1}
-			onPress={onPress}
-		>
+		<C.Container {...props} last={isLastToken} onPress={onPress}>
 			<C.Description value={description} />
 		</C.Container>
 	);
