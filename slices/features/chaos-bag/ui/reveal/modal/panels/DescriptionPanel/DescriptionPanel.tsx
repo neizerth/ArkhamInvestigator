@@ -30,8 +30,6 @@ export const DescriptionPanel = (props: DescriptionPanelProps) => {
 		dispatch(setCurrentTokenId(lastId));
 	}, [dispatch, isLastToken, lastId]);
 
-	const activeOpacity = isLastToken ? 1 : 0.2;
-
 	if (!description) {
 		return null;
 	}
@@ -40,7 +38,7 @@ export const DescriptionPanel = (props: DescriptionPanelProps) => {
 		<C.Container
 			{...props}
 			last={isLastToken}
-			activeOpacity={activeOpacity}
+			activeOpacity={1}
 			onPress={onPress}
 		>
 			<C.Description value={description} />

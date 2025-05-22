@@ -1,5 +1,5 @@
 import { Alegreya } from "@assets/fonts";
-import { color, font, size } from "@shared/config";
+import { font, size } from "@shared/config";
 import { Row, TextView } from "@shared/ui";
 import { InvestigatorPreview } from "@widgets/investigator";
 import { InvestigatorSkillsPreview } from "@widgets/investigator/investigator-skills-preview";
@@ -19,13 +19,6 @@ export const Container: typeof View = styled(View)`
 
 export const Content: typeof Row = styled(Row)`
   gap: ${size.gap.default}px;
-`;
-
-export const Separator: typeof View = styled(View)`
-  border-top-width: 1px;
-  border-top-color: ${color.dark10};
-  height: 15px;
-  margin-top: -1px;
 `;
 
 export const Image: typeof InvestigatorPreview = styled(InvestigatorPreview)`

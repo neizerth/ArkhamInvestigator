@@ -1,4 +1,5 @@
 import {
+	selectAllowNegativeHealthAndSanity,
 	selectShowAdditionalInformation,
 	selectShowDamageAndHorror,
 	selectShowInitialHealthAndSanity,
@@ -22,6 +23,7 @@ export const Health = ({ contentContainerStyle, ...props }: HealthProps) => {
 	const showAdditionalInfo = useAppSelector(selectShowAdditionalInformation);
 	const showDamage = useAppSelector(selectShowDamageAndHorror);
 	const showInitialValue = useAppSelector(selectShowInitialHealthAndSanity);
+	const negative = useAppSelector(selectAllowNegativeHealthAndSanity);
 
 	const {
 		onPress,
@@ -45,8 +47,9 @@ export const Health = ({ contentContainerStyle, ...props }: HealthProps) => {
 	const showBaseDiff = Boolean(diffValue);
 
 	const data = useMemo(() => {
-		return showDamage ? damageData : range(-20, maxValue);
-	}, [maxValue, showDamage]);
+		const minValue = negative ? -20 : 0;
+		return showDamage ? damageData : range(minValue, maxValue);
+	}, [maxValue, showDamage, negative]);
 
 	const currentValue = showDamage ? wounds : value;
 

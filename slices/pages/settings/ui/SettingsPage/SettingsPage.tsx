@@ -93,6 +93,13 @@ export const SettingsPage = () => {
 						/>
 					</C.Row>
 					<C.Row>
+						<C.Checkbox
+							label="Negative health/sanity"
+							selector={S.selectAllowNegativeHealthAndSanity}
+							actionCreator={S.setAllowNegativeHealthAndSanity}
+						/>
+					</C.Row>
+					<C.Row>
 						<C.Select
 							label="Pinned calculations"
 							selector={S.selectTapToHidePins}

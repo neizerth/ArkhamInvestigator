@@ -29,13 +29,15 @@ export const OverviewBoardPage = () => {
 		<C.Container title="Investigators">
 			<C.Content>
 				{ids.map((id, index) => (
-					<C.Board
-						key={id}
-						boardId={id}
-						separator={index > 0}
-						selected={currentIndex === index}
-						onSelect={onSelect(index)}
-					/>
+					<>
+						<C.Board
+							key={id}
+							boardId={id}
+							selected={currentIndex === index}
+							onSelect={onSelect(index)}
+						/>
+						{index !== ids.length - 1 && <C.Separator />}
+					</>
 				))}
 			</C.Content>
 		</C.Container>

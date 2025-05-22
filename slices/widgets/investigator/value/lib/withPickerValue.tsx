@@ -11,12 +11,13 @@ type WithPickerValueOptions = {
 
 export type WithPickerValueProps = Omit<
 	PickerProps,
-	"renderItem" | "value" | "data"
-> & {
-	value: number;
-	type?: "value" | "picker";
-	data?: number[];
-};
+	"renderItem" | "value" | "data" | "children"
+> &
+	PropsWithChildren & {
+		value: number;
+		type?: "value" | "picker";
+		data?: number[];
+	};
 
 const styles = {
 	gap: 30,
@@ -38,6 +39,7 @@ export const withPickerValue = ({
 	};
 	const Component: FC<WithPickerValueProps> = ({
 		type = "value",
+		children,
 		...props
 	}) => {
 		const data = useMemo(() => {
@@ -50,6 +52,7 @@ export const withPickerValue = ({
 					<Picker {...styles} {...props} renderItem={renderItem} data={data} />
 				)}
 				{type === "value" && <Value value={props.value} />}
+				{children}
 			</Background>
 		);
 	};

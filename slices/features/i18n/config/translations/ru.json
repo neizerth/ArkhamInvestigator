@@ -84,9 +84,11 @@
 
 	"Skill modfiers": "Модификаторы навыков",
 
-	"Show initial Health/Sanity": "Исходные здоровье и рассудок",
+	"Show initial Health/Sanity": "Исходные здоровье/рассудок",
 
 	"Show calculation changes": "Изменения вычислений",
+
+	"Negative health/sanity": "Отрицательные здоровье/рассудок",
 
 	"Show Game Text": "Игровой текст",
 	"Advanced": "Продвинутый режим",

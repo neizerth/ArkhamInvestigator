@@ -1,5 +1,6 @@
 import { color, gameAssets } from "@shared/config";
 import { IconNumber, Sanity } from "@shared/ui";
+import { View } from "react-native";
 import styled from "styled-components/native";
 import { VALUE_HEIGHT } from "../../config";
 
@@ -20,3 +21,13 @@ export const Value: typeof IconNumber = styled(IconNumber).attrs({
     font-size: 24px;
     color: white;
   `;
+
+export const Initial: typeof View = styled(View)`
+	position: absolute;
+	right: -4px;
+	bottom: -10px;
+`;
+
+export const InitialValue: typeof Value = styled(Value)`
+	font-size: 18px;
+`;

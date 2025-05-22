@@ -1,3 +1,8 @@
+import {
+	selectCurrentBoardProp,
+	selectShowInitialHealthAndSanity,
+	useAppSelector,
+} from "@shared/lib";
 import { type WithPickerValueProps, withPickerValue } from "../../lib";
 import * as C from "./HealthValue.components";
 
@@ -9,5 +14,16 @@ const Control = withPickerValue({
 });
 
 export const HealthValue = ({ value, ...props }: HealthValueProps) => {
-	return <Control {...props} value={value} />;
+	const showInitial = useAppSelector(selectShowInitialHealthAndSanity);
+	const initialValue = useAppSelector(selectCurrentBoardProp("initialValue"));
+
+	return (
+		<Control {...props} value={value}>
+			{showInitial && initialValue && (
+				<C.Initial>
+					<C.InitialValue value={initialValue?.health} />
+				</C.Initial>
+			)}
+		</Control>
+	);
 };

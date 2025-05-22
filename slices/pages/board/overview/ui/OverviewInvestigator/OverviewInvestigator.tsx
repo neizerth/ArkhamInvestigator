@@ -14,7 +14,6 @@ import { useValueControl } from "./useValueControl";
 
 export type OverviewInvestigatorProps = ViewProps & {
 	boardId: number;
-	separator?: boolean;
 	selected?: boolean;
 	onSelect?: () => void;
 };
@@ -23,7 +22,6 @@ const woundsData = range(0, 20);
 
 export const OverviewInvestigator = ({
 	boardId,
-	separator = false,
 	selected = false,
 	onSelect,
 	...props
@@ -65,7 +63,6 @@ export const OverviewInvestigator = ({
 
 	return (
 		<C.Container {...props}>
-			{separator && <C.Separator />}
 			<C.Content>
 				<C.Primary>
 					<C.Name>{investigator.name}</C.Name>
