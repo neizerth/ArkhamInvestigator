@@ -1,10 +1,11 @@
 import { color, size } from "@shared/config";
 import type { FC } from "react";
-import { TouchableOpacity, type ViewProps } from "react-native";
+import { TouchableOpacity } from "react-native";
 import styled, { css } from "styled-components/native";
 import { GameText } from "../../../../../../../widgets/game/game-text";
+import type { TouchableOpacityProps } from "../../../../../../haptic";
 
-type ContainerProps = ViewProps & {
+type ContainerProps = TouchableOpacityProps & {
 	last: boolean;
 };
 
