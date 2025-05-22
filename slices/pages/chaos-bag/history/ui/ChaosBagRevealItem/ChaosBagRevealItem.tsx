@@ -57,6 +57,10 @@ export const ChaosBagRevealItem = ({
 		[showPosition],
 	);
 
+	const keyExtractor = useCallback((_: ChaosBagToken, index: number) => {
+		return index.toString();
+	}, []);
+
 	const removeItem = useCallback(() => {
 		dispatch(removeRevealHistoryItem(id));
 		impactFeedback();
@@ -99,6 +103,7 @@ export const ChaosBagRevealItem = ({
 				<C.List>
 					<C.TokenList
 						data={tokens}
+						keyExtractor={keyExtractor}
 						renderItem={renderItem}
 						removeClippedSubviews={REMOVE_CLIPPED_SUBVIEWS}
 						horizontal
