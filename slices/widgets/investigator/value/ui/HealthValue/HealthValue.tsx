@@ -1,21 +1,28 @@
 import {
-	selectCurrentBoardProp,
+	selectBoardProp,
 	selectShowInitialHealthAndSanity,
 	useAppSelector,
 } from "@shared/lib";
+import type { BoardId } from "@shared/model";
 import { type WithPickerValueProps, withPickerValue } from "../../lib";
 import * as C from "./HealthValue.components";
 
-export type HealthValueProps = WithPickerValueProps;
+export type HealthValueProps = WithPickerValueProps & {
+	boardId?: BoardId;
+};
 
 const Control = withPickerValue({
 	Background: C.Container,
 	Value: C.Value,
 });
 
-export const HealthValue = ({ value, ...props }: HealthValueProps) => {
+export const HealthValue = ({
+	value,
+	boardId = "current",
+	...props
+}: HealthValueProps) => {
 	const showInitial = useAppSelector(selectShowInitialHealthAndSanity);
-	const initialValue = useAppSelector(selectCurrentBoardProp("initialValue"));
+	const initialValue = useAppSelector(selectBoardProp(boardId, "initialValue"));
 
 	return (
 		<Control {...props} value={value}>
