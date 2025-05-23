@@ -24,10 +24,17 @@ export const ScenarioReferenceEffects = (
 	return (
 		<C.Container {...props}>
 			{reference.map((item) => (
-				<C.TokenGroup key={item.token}>
-					<C.Token type={item.token} dark />
+				<C.Item key={item.id}>
+					{item.type === "single" && <C.Token type={item.token} dark />}
+					{item.type === "group" && (
+						<C.TokenGroup>
+							{item.tokens.map((token) => (
+								<C.Token key={token} type={token} dark />
+							))}
+						</C.TokenGroup>
+					)}
 					<C.TokenEffect {...effectProps} value={item.effect} />
-				</C.TokenGroup>
+				</C.Item>
 			))}
 		</C.Container>
 	);

@@ -18,7 +18,7 @@ export const DescriptionPanel = (props: DescriptionPanelProps) => {
 	const tokenIds = useAppSelector(selectRevealedTokenIds);
 	const reference = useChaosBagTokenReference();
 
-	const description = currentToken && reference[currentToken.type];
+	const effect = currentToken && reference[currentToken.type];
 	const lastId = last(tokenIds);
 
 	const isLastToken = !currentToken || currentToken.id === lastId;
@@ -30,13 +30,13 @@ export const DescriptionPanel = (props: DescriptionPanelProps) => {
 		dispatch(setCurrentTokenId(lastId));
 	}, [dispatch, isLastToken, lastId]);
 
-	if (!description) {
+	if (!effect) {
 		return null;
 	}
 
 	return (
 		<C.Container {...props} last={isLastToken} onPress={onPress}>
-			<C.Description value={description} />
+			<C.Effect value={effect} />
 		</C.Container>
 	);
 };

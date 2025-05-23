@@ -21,7 +21,7 @@ export const Container: FC<ContainerProps> = styled(Pressable)`
   `}
 `;
 
-export const Description: typeof GameText = styled(GameText).attrs({
+export const Effect: typeof GameText = styled(GameText).attrs({
 	componentStyles: {
 		paragraph: {
 			justifyContent: "center",

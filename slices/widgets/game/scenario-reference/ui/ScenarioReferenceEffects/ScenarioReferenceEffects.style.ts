@@ -59,7 +59,7 @@ type Options = {
 
 export const getScenarioEffectsStyle = ({ language, small }: Options) => {
 	const iconFontSize = u(3.8);
-	const fontSize = u(small ? 4 : 4.2);
+	const fontSize = u(small ? 3.8 : 4.2);
 	const lineHeight = fontSize * 1.1;
 
 	const zhComponentStyles = {

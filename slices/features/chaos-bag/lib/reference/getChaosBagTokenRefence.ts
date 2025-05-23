@@ -1,4 +1,4 @@
-import { isNotNil } from "ramda";
+import { isNotNil, last } from "ramda";
 import { arkhamDBTokens } from "../../config";
 import { allChaosTokenTypes } from "../../config/token/types";
 import type { ChaosTokenType } from "../../model";
@@ -9,39 +9,70 @@ type Options = {
 };
 
 export const getChaosBagTokenRefence = (sources: string[]) => {
-	const parts = sources.flatMap(parseText);
-
-	const tokens: ReferencePart = Object.assign({}, ...parts);
-
-	return tokens;
+	return sources.flatMap(parseText);
 };
 
 const parseText = (text: string) =>
 	text.split("\n").map(parseLine).filter(isNotNil);
 
-type ReferencePart = Partial<Record<ChaosTokenType, string>>;
+type ReferencePart = { id: string } & (
+	| {
+			type: "single";
+			token: ChaosTokenType;
+			effect: string;
+	  }
+	| {
+			type: "group";
+			tokens: ChaosTokenType[];
+			effect: string;
+	  }
+);
 
 const parseLine = (line: string): ReferencePart | null => {
-	const tokenPattern = /^\[([^\]]+)\](.*)$/;
+	const [iconString] = line.split(/[:：]/);
 
-	const matches = line.match(tokenPattern);
-
-	if (!matches) {
+	if (!iconString) {
 		return null;
 	}
-	const id = matches[1];
-	const effect = matches[2]?.trim().replace(/^(: )|(：)/, "");
 
-	if (!effect || !id) {
+	const iconMatches = iconString.match(/\[([^\]]+)\]/g);
+
+	if (!iconMatches) {
 		return null;
 	}
-	const token = arkhamDBTokens[id] || id;
 
-	if (!allChaosTokenTypes.includes(token)) {
+	const icons = iconMatches.map((icon) => icon.replace(/[\[\]]/g, ""));
+	const tokens = icons
+		.map((icon) => arkhamDBTokens[icon] || icon)
+		.filter((token) => {
+			return allChaosTokenTypes.includes(token);
+		});
+
+	if (tokens.length === 0) {
 		return null;
+	}
+
+	const lasstIcon = `[${last(icons)}]`;
+	const index = line.indexOf(lasstIcon);
+	const effectIndex = index + lasstIcon.length;
+	const effect = line
+		.slice(effectIndex)
+		.trim()
+		.replace(/^(: )|(：)/, "");
+
+	if (tokens.length > 1) {
+		return {
+			id: tokens[0],
+			type: "group",
+			tokens,
+			effect,
+		};
 	}
 
 	return {
-		[token]: effect,
+		id: tokens.join("-"),
+		type: "single",
+		token: tokens[0],
+		effect,
 	};
 };
