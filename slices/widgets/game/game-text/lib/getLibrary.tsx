@@ -89,14 +89,16 @@ export const getLibrary = ({
 			}
 			const { icon } = elementProps;
 			const value = iconMapping[icon] || icon;
+			const iconStyle = componentStyles?.[`icon_${icon}`];
+			const iconTokenStyle = componentStyles?.[`iconToken_${icon}`];
 
 			return (
 				<Fragment key={v4()}>
-					<C.Token style={tokenStyle}>
+					<C.Token style={[tokenStyle, iconTokenStyle]}>
 						<Icon
 							{...mergedProps}
 							icon={value}
-							style={mergedStyles}
+							style={[mergedStyles, iconStyle]}
 							scaleType={false}
 						/>
 					</C.Token>

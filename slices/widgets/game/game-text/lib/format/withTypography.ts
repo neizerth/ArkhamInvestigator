@@ -3,6 +3,8 @@ import { haveChineseGlyphs, haveKoreanGlyphs } from "../glyphs";
 
 export const withTypography = (text: string) => {
 	const base = text
+		// change - mark to bullet icon
+		.replace(/(?<=^|\n)\s?[-−](?=\s)/g, "[bullet]")
 		// nbsp after icon
 		.replaceAll("([^]]]) ", `$1${nbsp}`)
 		.replace(/\]([^\p{L}\]])/gu, `]${shortNbsp}$1`)

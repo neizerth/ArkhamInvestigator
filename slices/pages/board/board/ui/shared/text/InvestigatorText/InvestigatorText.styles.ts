@@ -80,6 +80,12 @@ export const getInvestigatorTextStyle = ({
 				fontSize: iconFontSize,
 				lineHeight: iconFontSize * 1.2,
 			},
+			iconToken_bullet: {
+				height: fontSize,
+			},
+			icon_bullet: {
+				lineHeight: fontSize * 0.7,
+			},
 			break: {
 				height: fontSize * 2.7,
 			},
