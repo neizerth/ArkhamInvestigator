@@ -36,7 +36,9 @@ export const OverviewBoardPage = () => {
 							selected={currentIndex === index}
 							onSelect={onSelect(index)}
 						/>
-						{index !== ids.length - 1 && <C.Separator />}
+						{index !== ids.length - 1 && (
+							<C.Separator key={`separator-${id}`} />
+						)}
 					</>
 				))}
 			</C.Content>

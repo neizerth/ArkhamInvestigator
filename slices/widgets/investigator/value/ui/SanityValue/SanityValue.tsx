@@ -1,14 +1,9 @@
-import {
-	selectBoardProp,
-	selectShowInitialHealthAndSanity,
-	useAppSelector,
-} from "@shared/lib";
-import type { BoardId } from "@shared/model";
+import { selectShowInitialHealthAndSanity, useAppSelector } from "@shared/lib";
 import { type WithPickerValueProps, withPickerValue } from "../../lib";
 import * as C from "./SanityValue.components";
 
 export type SanityValueProps = WithPickerValueProps & {
-	boardId?: BoardId;
+	initialValue?: number;
 };
 
 const Control = withPickerValue({
@@ -18,17 +13,16 @@ const Control = withPickerValue({
 
 export const SanityValue = ({
 	value,
-	boardId = "current",
+	initialValue,
 	...props
 }: SanityValueProps) => {
 	const showInitial = useAppSelector(selectShowInitialHealthAndSanity);
-	const initialValue = useAppSelector(selectBoardProp(boardId, "initialValue"));
 
 	return (
 		<Control {...props} value={value}>
-			{showInitial && initialValue && (
+			{showInitial && typeof initialValue === "number" && (
 				<C.Initial>
-					<C.InitialValue value={initialValue?.sanity} />
+					<C.InitialValue value={initialValue} />
 				</C.Initial>
 			)}
 		</Control>

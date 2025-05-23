@@ -31,8 +31,7 @@ export const OverviewInvestigator = ({
 	const board = useAppSelector(selectBoardById(boardId));
 	const showWounds = useAppSelector(selectShowDamageAndHorror);
 
-	const { investigator, value, baseValue } = board;
-	const boardIndex = boardId - 1;
+	const { investigator, value, baseValue, initialValue } = board;
 	const damage = baseValue.health - value.health;
 	const horror = baseValue.sanity - value.sanity;
 
@@ -70,12 +69,14 @@ export const OverviewInvestigator = ({
 					<C.Stats>
 						<C.Health
 							{...withPicker("health")}
+							initialValue={initialValue.health}
 							value={showWounds ? damage : value.health}
 							data={healthData}
 							onPress={control.decrease("health", minHealth)}
 						/>
 						<C.Sanity
 							{...withPicker("sanity")}
+							initialValue={initialValue.sanity}
 							value={showWounds ? horror : value.sanity}
 							data={sanityData}
 							onPress={control.decrease("sanity", minSanity)}
