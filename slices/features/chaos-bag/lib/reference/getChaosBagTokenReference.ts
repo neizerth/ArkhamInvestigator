@@ -7,8 +7,10 @@ export const getChaosBagTokenReference = (sources: string[]) => {
 	return sources.flatMap(parseText);
 };
 
+const tokenLinePattern = /\n(?=\[)/;
+
 const parseText = (text: string) =>
-	text.split("\n").map(parseLine).filter(isNotNil);
+	text.split(tokenLinePattern).map(parseLine).filter(isNotNil);
 
 type ReferencePart = { id: string } & (
 	| {
@@ -52,6 +54,7 @@ const parseLine = (line: string): ReferencePart | null => {
 	if (!lastItem) {
 		return null;
 	}
+
 	const lasstIcon = `[${lastItem.icon}]`;
 	const index = line.indexOf(lasstIcon);
 
