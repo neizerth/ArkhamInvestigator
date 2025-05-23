@@ -60,7 +60,6 @@ type Options = {
 export const getScenarioEffectsStyle = ({ language, small }: Options) => {
 	const iconFontSize = u(3.8);
 	const fontSize = u(small ? 3.8 : 4.2);
-	const lineHeight = fontSize * 1.1;
 
 	const zhComponentStyles = {
 		...localeComponentStyles.zh,
@@ -91,10 +90,21 @@ export const getScenarioEffectsStyle = ({ language, small }: Options) => {
 		"zh-cn": zhComponentStyles,
 	});
 
-	const style: TextStyle = {
-		fontSize,
-		lineHeight,
-	};
+	const style = getKeyConfig<TextStyle>({
+		default: {
+			fontSize,
+			lineHeight: fontSize * 1.1,
+		},
+		ko: {
+			lineHeight: fontSize * 1.3,
+		},
+		zh: {
+			lineHeight: fontSize * 1.2,
+		},
+		"zh-cn": {
+			lineHeight: fontSize * 1.2,
+		},
+	})(language);
 
 	return {
 		componentStyles: getComponents(language),
