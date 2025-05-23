@@ -28,19 +28,19 @@ export const specialSymbolicChaosTokenTypes = [
 export const symbolicChaosTokenTypes = [
 	...baseSymbolicChaosTokenTypes,
 	...specialSymbolicChaosTokenTypes,
-] as const;
+];
 
 export const specialChaosTokenTypes = ["frost", "bless", "curse"] as const;
 
 export const baseChaosTokenTypes = [
 	...numericChaosTokenTypes,
 	...symbolicChaosTokenTypes,
-] as const;
+];
 
 export const allChaosTokenTypes = [
 	...baseChaosTokenTypes,
 	...specialChaosTokenTypes,
-] as const;
+];
 
 export const blessChaosTokenType = "bless" as const;
 

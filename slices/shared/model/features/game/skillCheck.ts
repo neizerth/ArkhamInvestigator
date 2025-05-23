@@ -43,3 +43,5 @@ export type SkillCheckItem =
 	| StatSkillCheckItem;
 
 export type SkillCheckCommandType = "clear" | "clear-last" | "empty";
+
+export type SkillCheckDifficultyType = "equals" | "gte";

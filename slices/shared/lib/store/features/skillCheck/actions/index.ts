@@ -1,5 +1,3 @@
 export * from "./startSkillCheck";
-export * from "./clearSkillCheckHistory";
-export * from "./clearSkillCheckHistoryItem";
-export * from "./toggleSkillCheckHistoryItemPin";
-export * from "./setSkillCheckHistoryItemTitle";
+export * from "./history";
+export * from "./toggleSkillCheckDifficultyType";

@@ -45,15 +45,6 @@ export const StatType: typeof TouchableOpacity = styled(TouchableOpacity)`
   align-items: center;
 `;
 
-// export const Rule: typeof Image = styled(Image)
-//   .attrs({
-//     source: rule,
-//     resizeMode: 'contain'
-//   })`
-//     margin-top: -20px;
-//     height: 40px;
-//   `
-
 export const Rule: typeof TopRule = styled(TopRule).attrs({
 	height: 40,
 	width: 290,

@@ -1,5 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-import type { InvestigatorBoardStat, SkillCheckItem } from "@shared/model";
+import type {
+	InvestigatorBoardStat,
+	SkillCheckDifficultyType,
+	SkillCheckItem,
+} from "@shared/model";
 import { createSliceState } from "redux-toolkit-helpers";
 import * as reducers from "./reducers";
 
@@ -9,6 +13,7 @@ export type ISkillCheckState = {
 	historyShown: boolean;
 	showCalculationDiff: boolean;
 	skillCheckDifficulty: number | null;
+	skillCheckDifficultyType: SkillCheckDifficultyType | null;
 };
 
 const initialState: ISkillCheckState = {
@@ -17,6 +22,7 @@ const initialState: ISkillCheckState = {
 	historyShown: false,
 	showCalculationDiff: false,
 	skillCheckDifficulty: null,
+	skillCheckDifficultyType: null,
 };
 
 const state = createSliceState(initialState);
@@ -40,6 +46,7 @@ export const {
 	setHistoryShown,
 	setShowCalculationDiff,
 	setSkillCheckDifficulty,
+	setSkillCheckDifficultyType,
 } = skillCheck.actions;
 
 export const {
@@ -48,6 +55,7 @@ export const {
 	selectHistoryShown,
 	selectShowCalculationDiff,
 	selectSkillCheckDifficulty,
+	selectSkillCheckDifficultyType,
 } = skillCheck.selectors;
 
 export default skillCheck.reducer;

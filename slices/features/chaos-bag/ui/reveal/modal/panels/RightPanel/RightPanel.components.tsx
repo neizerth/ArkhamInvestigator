@@ -2,6 +2,7 @@ import { color, size } from "@shared/config";
 import { IconNumber, type IconNumberProps, Row, Text } from "@shared/ui";
 import { View } from "react-native";
 import styled, { css } from "styled-components/native";
+import { TouchableOpacity } from "../../../../../../haptic";
 
 export const Container: typeof View = styled(View)`
 `;
@@ -34,6 +35,12 @@ const valueFontSize: Record<number, number> = {
 	3: 30,
 	4: 28,
 };
+
+export const DifficultyButton: typeof TouchableOpacity = styled(
+	TouchableOpacity,
+)`
+  
+`;
 
 export const DifficultyText: typeof IconNumber = styled(IconNumber).attrs({
 	stroke: true,

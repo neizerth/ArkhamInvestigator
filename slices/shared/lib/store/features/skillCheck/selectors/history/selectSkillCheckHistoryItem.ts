@@ -1,7 +1,7 @@
 import { createSelector } from "@reduxjs/toolkit";
 import type { SkillCheckHistoryItem } from "@shared/model";
-import { whereId } from "../../../../util";
-import { selectCurrentBoardProp } from "../../board";
+import { whereId } from "../../../../../util";
+import { selectCurrentBoardProp } from "../../../board";
 
 export const selectSkillCheckHistoryItem = (id: string) =>
 	createSelector(

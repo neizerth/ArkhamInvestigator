@@ -2,8 +2,8 @@ import type { ActionCreator } from "@reduxjs/toolkit";
 import type { AppThunk } from "@shared/model";
 import { propEq, reject } from "ramda";
 
-import { selectCurrentBoard, setBoardProp } from "../../board";
-import { selectSkillCheckType, sendCommandSignal } from "../skillCheck";
+import { selectCurrentBoard, setBoardProp } from "../../../board";
+import { selectSkillCheckType, sendCommandSignal } from "../../skillCheck";
 
 export const clearSkillCheckHistory: ActionCreator<AppThunk> =
 	() => (dispatch, getState) => {

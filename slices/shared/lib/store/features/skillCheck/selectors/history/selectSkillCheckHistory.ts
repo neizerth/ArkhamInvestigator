@@ -1,7 +1,7 @@
 import { createSelector } from "@reduxjs/toolkit";
 import { propEq } from "ramda";
-import { selectCurrentBoard } from "../../board";
-import { selectSkillCheckType } from "../skillCheck";
+import { selectCurrentBoard } from "../../../board";
+import { selectSkillCheckType } from "../../skillCheck";
 
 export const selectSkillCheckHistory = createSelector(
 	[selectCurrentBoard, selectSkillCheckType],

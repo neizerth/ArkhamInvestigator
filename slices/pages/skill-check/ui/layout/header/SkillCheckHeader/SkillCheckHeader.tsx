@@ -1,18 +1,22 @@
 import { openSkillCheckChaosBagModal } from "@features/chaos-bag";
+import { useHapticSwipe } from "@features/haptic";
 import {
 	clearSkillCheckHistory,
 	goBack,
 	selectCurrentBoardProp,
 	selectHistoryShown,
 	selectSkillCheckDifficulty,
+	selectSkillCheckDifficultyCharacter,
 	selectSkillCheckType,
 	setHistoryShown,
 	setSkillCheckDifficulty,
+	toggleSkillCheckDifficultyType,
 	useAppDispatch,
 	useAppSelector,
 } from "@shared/lib";
 import { useCallback } from "react";
 import type { ViewProps } from "react-native";
+import { Directions, GestureDetector } from "react-native-gesture-handler";
 import { useSkillCheckLayoutType } from "../../../../lib";
 import * as C from "./SkillCheckHeader.components";
 
@@ -22,6 +26,9 @@ export const SkillCheckHeader = ({ ...props }: SkillCheckHeaderProps) => {
 	const type = useAppSelector(selectSkillCheckType);
 	const stats = useAppSelector(selectCurrentBoardProp("value"));
 	const difficulty = useAppSelector(selectSkillCheckDifficulty);
+	const difficultyCharacter = useAppSelector(
+		selectSkillCheckDifficultyCharacter,
+	);
 
 	const value = type && stats[type];
 
@@ -58,16 +65,29 @@ export const SkillCheckHeader = ({ ...props }: SkillCheckHeaderProps) => {
 		);
 	}, [dispatch, type, value]);
 
+	const onSwipeDown = useCallback(() => {
+		dispatch(toggleSkillCheckDifficultyType());
+	}, [dispatch]);
+
+	const swipeDown = useHapticSwipe({
+		direction: Directions.DOWN,
+		onSwipe: onSwipeDown,
+	});
+
 	return (
 		<C.Container {...props}>
 			<C.Content border={!isLargeLayout}>
 				{type && (
-					<C.StatType onLongPress={showReveal} onPress={clearDifficulty}>
-						<C.Stat icon={type} />
-						{typeof difficulty === "number" && (
-							<C.Difficulty>⩾ {difficulty}</C.Difficulty>
-						)}
-					</C.StatType>
+					<GestureDetector gesture={swipeDown}>
+						<C.StatType onLongPress={showReveal} onPress={clearDifficulty}>
+							<C.Stat icon={type} />
+							{typeof difficulty === "number" && (
+								<C.Difficulty>
+									{difficultyCharacter} {difficulty}
+								</C.Difficulty>
+							)}
+						</C.StatType>
+					</GestureDetector>
 				)}
 				<C.Controls>
 					<C.Row>
