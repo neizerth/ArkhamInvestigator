@@ -19,8 +19,13 @@ import type { ViewProps } from "react-native";
 import * as C from "./ReferenceSelect.components";
 import { useReferenceCardData } from "./hooks";
 
-export type ReferenceSelectProps = ViewProps;
-export const ReferenceSelect = (props: ReferenceSelectProps) => {
+export type ReferenceSelectProps = ViewProps & {
+	onClose?: () => void;
+};
+export const ReferenceSelect = ({
+	onClose,
+	...props
+}: ReferenceSelectProps) => {
 	const language = useAppSelector(selectCurrentLanguage);
 	const referenceCard = useAppSelector(selectReferenceCard);
 	const referenceCardText = useAppSelector(selectReferenceCardText);
@@ -36,32 +41,43 @@ export const ReferenceSelect = (props: ReferenceSelectProps) => {
 
 	return (
 		<C.Container {...props}>
-			<C.Content>
-				{!isDefaultLanguage && (
+			<C.Body>
+				<C.Content>
+					{!isDefaultLanguage && (
+						<C.Checkbox
+							label={t`Translated content`}
+							actionCreator={setShowTranslatedOnlyStories}
+							selector={selectShowTranslatedOnlyStories}
+						/>
+					)}
 					<C.Checkbox
-						label={t`Translated content`}
-						actionCreator={setShowTranslatedOnlyStories}
-						selector={selectShowTranslatedOnlyStories}
+						label={t`Fan-made Scenarios`}
+						actionCreator={setShowFanMadeStories}
+						selector={selectShowFanMadeStories}
 					/>
-				)}
-				<C.Checkbox
-					label={t`Fan-made Scenarios`}
-					actionCreator={setShowFanMadeStories}
-					selector={selectShowFanMadeStories}
-				/>
-				<C.StorySelect />
-				<C.CardSelect />
-				{referenceCard && (
-					<C.StoreSelect
-						label={t`Difficulty`}
-						data={referenceTexts}
-						actionCreator={setShowReferenceBackText}
-						selector={selectShowReferenceBackText}
-					/>
-				)}
+					<C.StorySelect />
+					<C.CardSelect />
+					{referenceCard && (
+						<C.StoreSelect
+							label={t`Difficulty`}
+							data={referenceTexts}
+							actionCreator={setShowReferenceBackText}
+							selector={selectShowReferenceBackText}
+						/>
+					)}
 
-				{referenceText && <C.ReferenceText value={referenceText} />}
-			</C.Content>
+					{referenceText && (
+						<C.ReferencePreview>
+							<C.ReferenceText value={referenceText} />
+						</C.ReferencePreview>
+					)}
+				</C.Content>
+			</C.Body>
+			{onClose && (
+				<C.Actions>
+					<C.Close text={t`Continue`} icon="check" onPress={onClose} />
+				</C.Actions>
+			)}
 		</C.Container>
 	);
 };

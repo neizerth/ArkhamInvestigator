@@ -1,4 +1,4 @@
-import { HapticSelect } from "@features/haptic";
+import { Button, HapticSelect } from "@features/haptic";
 import { color, font, size } from "@shared/config";
 import { Icon, Row, Text } from "@shared/ui";
 import { View } from "react-native";
@@ -11,7 +11,11 @@ import { StoreSelect as BaseStoreSelect } from "../../../store-select";
 import { ReferenceCardSelect } from "../ReferenceCardSelect";
 import { ReferenceStorySelect } from "../ReferenceStorySelect";
 
-export const Container: typeof ScrollView = styled(ScrollView)`
+export const Container: typeof View = styled(View)`
+  gap: ${size.gap.default}px;
+`;
+
+export const Body: typeof ScrollView = styled(ScrollView)`
 
 `;
 
@@ -79,11 +83,28 @@ export const EnIcon: typeof Icon = styled(Icon)`
   text-align: center;
 `;
 
-export const ReferenceText: typeof GameText = styled(GameText).attrs({
-	contentContainerStyle: {
-		paddingHorizontal: 2,
-	},
-})`
+export const ReferenceText: typeof GameText = styled(GameText)`
   color: ${color.light10};
   font-size: ${font.size.default}px;
+`;
+
+export const ReferencePreview: typeof View = styled(View)`
+  border: 1px solid ${color.light10};
+  padding: ${size.gap.default}px;
+  border-radius: ${size.borderRadius.default}px;
+`;
+
+export const Actions: typeof View = styled(View)`
+  padding: 0 ${size.gap.small}px;
+`;
+
+export const Close: typeof Button = styled(Button).attrs({
+	textStyle: {
+		color: color.text,
+	},
+	iconStyle: {
+		color: color.text,
+	},
+})`
+  background-color: ${color.light10};
 `;
