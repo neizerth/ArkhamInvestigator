@@ -21,6 +21,7 @@ export const Item: typeof Row = styled(Row)`
   padding: ${size.gap.small}px ${size.gap.default}px;
   gap: ${size.gap.small}px;
   align-items: center;
+  min-height: 48px;
 `;
 
 export const ItemText: typeof Text = styled(Text)`

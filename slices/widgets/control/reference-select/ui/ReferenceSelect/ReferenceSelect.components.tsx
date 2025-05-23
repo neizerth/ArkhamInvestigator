@@ -1,6 +1,5 @@
 import { Button, HapticSelect } from "@features/haptic";
 import { color, font, size } from "@shared/config";
-import { Icon, Row, Text } from "@shared/ui";
 import { View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import styled from "styled-components/native";
@@ -56,31 +55,6 @@ export const StoreSelect: typeof BaseStoreSelect = styled(BaseStoreSelect)`
   border: 1px solid ${color.dark20};
   border-top-left-radius: 0px;
   border-top-right-radius: 0px;
-`;
-
-export const Item: typeof Row = styled(Row)`
-  padding: ${size.gap.small}px ${size.gap.default}px;
-  gap: ${size.gap.small}px;
-  align-items: center;
-`;
-
-export const ItemText: typeof Text = styled(Text)`
-  
-`;
-
-export const ItemIcon: typeof Icon = styled(Icon)`
-  color: ${color.light10};
-  text-align: center;
-  width: 24px;
-`;
-
-export const FFG: typeof Icon = styled(Icon)`
-  color: ${color.ffg.light};
-`;
-
-export const EnIcon: typeof Icon = styled(Icon)`
-  color: ${color.gray20};
-  text-align: center;
 `;
 
 export const ReferenceText: typeof GameText = styled(GameText)`
