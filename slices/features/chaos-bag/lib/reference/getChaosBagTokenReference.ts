@@ -1,14 +1,9 @@
-import { isNotNil, last } from "ramda";
+import { isNotNil, last, prop } from "ramda";
 import { arkhamDBTokens } from "../../config";
 import { allChaosTokenTypes } from "../../config/token/types";
 import type { ChaosTokenType } from "../../model";
 
-type Options = {
-	signatureText: string;
-	referenceText: string;
-};
-
-export const getChaosBagTokenRefence = (sources: string[]) => {
+export const getChaosBagTokenReference = (sources: string[]) => {
 	return sources.flatMap(parseText);
 };
 
@@ -42,23 +37,30 @@ const parseLine = (line: string): ReferencePart | null => {
 	}
 
 	const icons = iconMatches.map((icon) => icon.replace(/[\[\]]/g, ""));
-	const tokens = icons
-		.map((icon) => arkhamDBTokens[icon] || icon)
-		.filter((token) => {
-			return allChaosTokenTypes.includes(token);
+
+	const items = icons
+		.map((icon) => ({
+			icon,
+			token: arkhamDBTokens[icon] || icon,
+		}))
+		.filter((item) => {
+			return allChaosTokenTypes.includes(item.token);
 		});
 
-	if (tokens.length === 0) {
+	const lastItem = last(items);
+
+	if (!lastItem) {
 		return null;
 	}
-
-	const lasstIcon = `[${last(icons)}]`;
+	const lasstIcon = `[${lastItem.icon}]`;
 	const index = line.indexOf(lasstIcon);
+
 	const effectIndex = index + lasstIcon.length;
-	const effect = line
-		.slice(effectIndex)
-		.trim()
-		.replace(/^(: )|(：)/, "");
+	const nonTokenText = line.slice(effectIndex);
+
+	const effect = nonTokenText.trim().replace(/^(: )|(：)/, "");
+
+	const tokens = items.map(prop("token"));
 
 	if (tokens.length > 1) {
 		return {
