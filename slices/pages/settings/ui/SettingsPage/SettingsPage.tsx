@@ -79,28 +79,6 @@ export const SettingsPage = () => {
 					</C.Row>
 					<C.Row>
 						<C.Select
-							label="Health/Sanity"
-							selector={S.selectShowDamageAndHorror}
-							actionCreator={S.setShowDamageAndHorror}
-							data={healthSanityModeValues}
-						/>
-					</C.Row>
-					<C.Row>
-						<C.Checkbox
-							label="Show initial Health/Sanity"
-							selector={S.selectShowInitialHealthAndSanity}
-							actionCreator={S.setShowInitialHealthAndSanity}
-						/>
-					</C.Row>
-					<C.Row>
-						<C.Checkbox
-							label="Negative health/sanity"
-							selector={S.selectAllowNegativeHealthAndSanity}
-							actionCreator={S.setAllowNegativeHealthAndSanity}
-						/>
-					</C.Row>
-					<C.Row>
-						<C.Select
 							label="Pinned calculations"
 							selector={S.selectTapToHidePins}
 							actionCreator={S.setTapToHidePins}
@@ -141,6 +119,30 @@ export const SettingsPage = () => {
 							label="Track experience points"
 							selector={S.selectTrackXP}
 							actionCreator={S.setTrackXP}
+						/>
+					</C.Row>
+				</C.Section>
+				<C.Section title={`${t`Health`}/${t`Sanity`}`}>
+					<C.Row>
+						<C.Select
+							label="Health/Sanity"
+							selector={S.selectShowDamageAndHorror}
+							actionCreator={S.setShowDamageAndHorror}
+							data={healthSanityModeValues}
+						/>
+					</C.Row>
+					<C.Row>
+						<C.Checkbox
+							label="Initial values"
+							selector={S.selectShowInitialHealthAndSanity}
+							actionCreator={S.setShowInitialHealthAndSanity}
+						/>
+					</C.Row>
+					<C.Row>
+						<C.Checkbox
+							label="Negative values"
+							selector={S.selectAllowNegativeHealthAndSanity}
+							actionCreator={S.setAllowNegativeHealthAndSanity}
 						/>
 					</C.Row>
 				</C.Section>
