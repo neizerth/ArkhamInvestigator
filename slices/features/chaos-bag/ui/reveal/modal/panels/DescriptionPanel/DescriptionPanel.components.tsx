@@ -9,7 +9,7 @@ type ContainerProps = PressableProps & {
 };
 
 export const Container: FC<ContainerProps> = styled(Pressable)`
-  margin: ${size.gap.default}px -25px 0;
+  margin: ${size.gap.default}px -35px 0;
   padding: ${size.gap.default}px;
   background-color: rgba(0, 0, 0, 0.5);
   border-radius: ${size.borderRadius.default}px;
