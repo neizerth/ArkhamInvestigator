@@ -1,4 +1,4 @@
-import { color, size } from "@shared/config";
+import { color, font, size } from "@shared/config";
 import type { FC } from "react";
 import styled, { css } from "styled-components/native";
 import { GameText } from "../../../../../../../widgets/game/game-text";
@@ -28,5 +28,6 @@ export const Effect: typeof GameText = styled(GameText).attrs({
 		},
 	},
 })`
+  font-size: ${font.size.small}px;
   color: ${color.light10};
 `;
