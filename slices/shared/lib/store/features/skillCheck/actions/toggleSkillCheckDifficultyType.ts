@@ -10,8 +10,7 @@ export const toggleSkillCheckDifficultyType =
 
 		const type = selectSkillCheckDifficultyType(state);
 
-		const nextType: SkillCheckDifficultyType =
-			type === "equals" ? "gte" : "equals";
+		const nextType: SkillCheckDifficultyType = type === "gt" ? "gte" : "gt";
 
 		dispatch(setSkillCheckDifficultyType(nextType));
 	};

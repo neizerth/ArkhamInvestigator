@@ -3,7 +3,7 @@ import type { SkillCheckDifficultyType } from "@shared/model";
 import { selectSkillCheckDifficultyType } from "../skillCheck";
 
 const mapping: Record<SkillCheckDifficultyType, string> = {
-	equals: "=",
+	gt: ">",
 	gte: "⩾",
 };
 
