@@ -10,6 +10,10 @@ export const ChaosBagReferenceEditPage = (
 ) => {
 	const dispatch = useAppDispatch();
 
+	const back = useCallback(() => {
+		dispatch(goBack());
+	}, [dispatch]);
+
 	const removeReference = useCallback(() => {
 		dispatch(goBack());
 		dispatch(setReferenceCardCode(null));
@@ -25,8 +29,13 @@ export const ChaosBagReferenceEditPage = (
 	}, [removeReference]);
 
 	return (
-		<C.Container {...props} title="Scenario reference" actions={actions}>
-			<C.Select />
+		<C.Container
+			{...props}
+			title="Scenario reference"
+			actions={actions}
+			closeIcon="check"
+		>
+			<C.Select onClose={back} />
 		</C.Container>
 	);
 };

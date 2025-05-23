@@ -16,6 +16,7 @@ export type ContextModalProps = ViewProps & {
 	onBack?: () => void;
 	contentStyle?: ViewProps["style"];
 	actions?: ContextModalAction[];
+	closeIcon?: string;
 };
 
 export const ContextModal = ({
@@ -24,6 +25,7 @@ export const ContextModal = ({
 	onBack,
 	contentStyle,
 	actions = [],
+	closeIcon = "close",
 	...props
 }: ContextModalProps) => {
 	const dispatch = useAppDispatch();
@@ -57,7 +59,7 @@ export const ContextModal = ({
 
 				<C.Title>{t(title)}</C.Title>
 				<C.Close onPress={back}>
-					<C.ActionIcon icon="close" />
+					<C.ActionIcon icon={closeIcon} />
 				</C.Close>
 			</C.Header>
 			<C.Body style={[contentStyle, maxHeightStyle]}>{children}</C.Body>
