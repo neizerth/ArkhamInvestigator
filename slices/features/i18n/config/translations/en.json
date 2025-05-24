@@ -73,7 +73,7 @@
 	"board.help.calculator.expression": "Swiping right or left on the current formula deletes the last character in the calculation",
 
 	"newGame.start.title": "Start a new game?",
-	"newGame.start.text": "This action permanently remove your last game data",
+	"newGame.start.text": "This action will delete your last game",
 
 	"board.help.swipe.chaosBag": "Swipe right to reveal a chaos token. Swipe down to open see a reveal history page. Swipe up to open a scenario reference",
 	"board.help.press.clue": "Increase value by 1",
