@@ -91,8 +91,8 @@ android {
         applicationId 'com.arkhaminvestigator'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 290
-        versionName "1.26.5"
+        versionCode 291
+        versionName "1.26.6"
     }
     signingConfigs {
         debug {
