@@ -35,7 +35,7 @@ export const LeftSidebar = ({ ...props }: LeftSidebarProps) => {
 	const onRedo = useDispatchAction(redo);
 
 	const beginHistory = useCallback(() => {
-		dispatch(setValueFromHistoryIndex(0));
+		dispatch(setValueFromHistoryIndex(-1));
 	}, [dispatch]);
 
 	const returnToNow = useCallback(() => {
