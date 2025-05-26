@@ -1,8 +1,10 @@
 import {
 	selectChaosBagEnabled,
 	selectChaosBagLoadingAnimation,
+	selectUnlimitedChaosTokens,
 	setChaosBagEnabled,
 	setChaosBagLoadingAnimation,
+	setUnlimitedChaosTokens,
 } from "@features/chaos-bag";
 import { selectHapticMode, setHapticMode } from "@features/haptic";
 import {
@@ -99,13 +101,6 @@ export const SettingsPage = () => {
 							actionCreator={S.setAlwaysShowSkillModifiers}
 						/>
 					</C.Row>
-					<C.Row>
-						<C.Checkbox
-							label="Chaos bag"
-							selector={selectChaosBagEnabled}
-							actionCreator={setChaosBagEnabled}
-						/>
-					</C.Row>
 					<C.Rule />
 					<C.Row>
 						<C.Checkbox
@@ -119,6 +114,29 @@ export const SettingsPage = () => {
 							label="Track experience points"
 							selector={S.selectTrackXP}
 							actionCreator={S.setTrackXP}
+						/>
+					</C.Row>
+				</C.Section>
+				<C.Section title={t`Chaos bag`}>
+					<C.Row>
+						<C.Checkbox
+							label="Chaos bag"
+							selector={selectChaosBagEnabled}
+							actionCreator={setChaosBagEnabled}
+						/>
+					</C.Row>
+					<C.Row>
+						<C.Checkbox
+							label="Chaos bag loading animation"
+							selector={selectChaosBagLoadingAnimation}
+							actionCreator={setChaosBagLoadingAnimation}
+						/>
+					</C.Row>
+					<C.Row>
+						<C.Checkbox
+							label="Unlimited chaos tokens"
+							selector={selectUnlimitedChaosTokens}
+							actionCreator={setUnlimitedChaosTokens}
 						/>
 					</C.Row>
 				</C.Section>
@@ -206,13 +224,6 @@ export const SettingsPage = () => {
 							label="Damage/Horror visual effects"
 							selector={S.selectShowDamageAndHorrorEffects}
 							actionCreator={S.setShowDamageAndHorrorEffects}
-						/>
-					</C.Row>
-					<C.Row>
-						<C.Checkbox
-							label="Chaos bag loading animation"
-							selector={selectChaosBagLoadingAnimation}
-							actionCreator={setChaosBagLoadingAnimation}
 						/>
 					</C.Row>
 				</C.Section>

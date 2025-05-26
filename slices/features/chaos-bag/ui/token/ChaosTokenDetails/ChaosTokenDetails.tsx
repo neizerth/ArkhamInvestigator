@@ -9,6 +9,7 @@ import {
 	removeAllChaosTokensByType,
 	removeChaosTokenByType,
 	selectChaosTokenCount,
+	selectUnlimitedChaosTokens,
 } from "../../../lib";
 import type { ChaosTokenType } from "../../../model";
 import * as C from "./ChaosTokenDetails.components";
@@ -29,7 +30,8 @@ export const ChaosTokenDetails = ({
 }: ChaosTokenDetailsProps) => {
 	const dispatch = useAppDispatch();
 	const count = useAppSelector(selectChaosTokenCount(type));
-	const max = chaosToken.count[type];
+	const isUnlimited = useAppSelector(selectUnlimitedChaosTokens);
+	const max = isUnlimited ? Number.POSITIVE_INFINITY : chaosToken.count[type];
 
 	const clear = useCallback(() => {
 		dispatch(removeAllChaosTokensByType(type));

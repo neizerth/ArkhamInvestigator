@@ -13,6 +13,7 @@ import v11 from "./2025-05-19T22-22-set-default-chaos-bag-enabled";
 import v12 from "./2025-05-20T16-06-set-default-story-type-filter";
 import v13 from "./2025-05-22T13-48-set-default-reference-card-params";
 import v14 from "./2025-05-24T19-51-clear-boards";
+import v15 from "./2025-05-26T07-14-set-default-unlimited-chaos-tokens";
 
 export const persistConfigMigrations = {
 	0: v0,
@@ -30,4 +31,5 @@ export const persistConfigMigrations = {
 	12: v12,
 	13: v13,
 	14: v14,
+	15: v15,
 };
