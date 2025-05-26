@@ -31,7 +31,7 @@ export const ChaosTokenDetails = ({
 	const dispatch = useAppDispatch();
 	const count = useAppSelector(selectChaosTokenCount(type));
 	const isUnlimited = useAppSelector(selectUnlimitedChaosTokens);
-	const max = isUnlimited ? Number.POSITIVE_INFINITY : chaosToken.count[type];
+	const max = isUnlimited ? 99 : chaosToken.count[type];
 
 	const clear = useCallback(() => {
 		dispatch(removeAllChaosTokensByType(type));
