@@ -12,6 +12,7 @@ export const useCurrentBackground = () => {
 			return;
 		}
 		return {
+			version: image.version,
 			code: image.id,
 			layout: getImageLayout({
 				image,

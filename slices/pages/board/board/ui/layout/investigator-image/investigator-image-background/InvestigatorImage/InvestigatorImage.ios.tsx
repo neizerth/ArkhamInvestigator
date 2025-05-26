@@ -11,6 +11,7 @@ export const InvestigatorImage = ({
 	onLoad,
 	onLoadStart: onLoadStartProp,
 	onLoadEnd: onLoadEndProp,
+	version,
 	...props
 }: InvestigatorImageProps) => {
 	const { layout } = props;
@@ -21,6 +22,7 @@ export const InvestigatorImage = ({
 		uri: getInvestigatorImageUrl({
 			code,
 			type: "full",
+			version,
 		}),
 	};
 
@@ -29,6 +31,7 @@ export const InvestigatorImage = ({
 			code,
 			type: "full",
 			grayscale: true,
+			version,
 		}),
 	};
 

@@ -7,6 +7,7 @@ import { useGrayscaleAnimation } from "./hooks/useGrayscaleAnimation";
 export const InvestigatorImage = ({
 	contentContainerStyle,
 	code,
+	version,
 	...props
 }: InvestigatorImageProps) => {
 	const style = useGrayscaleAnimation();
@@ -14,6 +15,7 @@ export const InvestigatorImage = ({
 		uri: getInvestigatorImageUrl({
 			code,
 			type: "full",
+			version,
 		}),
 	};
 

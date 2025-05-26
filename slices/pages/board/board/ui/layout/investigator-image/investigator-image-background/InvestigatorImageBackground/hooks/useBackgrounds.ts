@@ -9,6 +9,7 @@ export const useBackgrounds = () => {
 
 	return useMemo(() => {
 		return images.map((image) => ({
+			version: image.version,
 			code: image.id,
 			layout: getImageLayout({
 				image,
