@@ -7,6 +7,7 @@ import type { InvestigatorSelectItemImageProps } from "./InvestigatorSelectItemI
 export const InvestigatorSelectItemImage = ({
 	active,
 	code,
+	version,
 	...props
 }: InvestigatorSelectItemImageProps) => {
 	const source = useMemo(() => {
@@ -15,9 +16,10 @@ export const InvestigatorSelectItemImage = ({
 				code,
 				type: "square",
 				grayscale: !active,
+				version,
 			}),
 		};
-	}, [active, code]);
+	}, [active, code, version]);
 
 	return (
 		<C.ImageContainer>

@@ -6,6 +6,7 @@ import type { InvestigatorSelectItemImageProps } from "./InvestigatorSelectItemI
 
 export const InvestigatorSelectItemImage = ({
 	code,
+	version,
 	active,
 	style,
 	...props
@@ -15,9 +16,10 @@ export const InvestigatorSelectItemImage = ({
 			uri: getInvestigatorImageUrl({
 				code,
 				type: "square",
+				version,
 			}),
 		};
-	}, [code]);
+	}, [code, version]);
 
 	const grayscaleStyle = !active && {
 		filter: "grayscale(1)",

@@ -30,7 +30,7 @@ export const InvestigatorSelectItem = ({
 
 	return (
 		<C.Container {...props} faction={faction}>
-			<C.Image code={image.id} active={!inactive} />
+			<C.Image code={image.id} version={image.version} active={!inactive} />
 			{showId && (
 				<C.Overlay>
 					<C.Id value={boardId} />

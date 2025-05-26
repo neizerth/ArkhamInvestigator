@@ -83,6 +83,7 @@ export const ChaosBagRevealItem = ({
 					<C.Image
 						faction={investigator.faction_code}
 						code={investigator.id}
+						imageId={investigator.image.id}
 						size={50}
 						showIcon={false}
 						onPress={selectBoard}

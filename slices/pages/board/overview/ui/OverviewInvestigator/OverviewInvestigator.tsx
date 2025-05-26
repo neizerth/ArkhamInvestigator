@@ -99,6 +99,7 @@ export const OverviewInvestigator = ({
 						size={110}
 						faction={investigator.faction_code}
 						code={investigator.code}
+						imageId={investigator.image.id}
 						onPress={onSelect}
 						selected={selected}
 						grayscale={value.actions === 0}

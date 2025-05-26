@@ -1,16 +1,17 @@
 import { getInvestigatorImageUrl } from "@shared/api";
 import { selectBoardImages, useAppSelector } from "@shared/lib";
-import { prop } from "ramda";
+import type { InvestigatorImage } from "@shared/model";
 import { useEffect } from "react";
 import { Image, Platform } from "react-native";
 
 const includeGrayscale = Platform.OS === "ios";
 
-const getUrls = (data: string[]) =>
-	data.flatMap((code) => {
+const getUrls = (data: InvestigatorImage[]) =>
+	data.flatMap(({ id, version }) => {
 		const url = getInvestigatorImageUrl({
-			code,
+			code: id,
 			type: "full",
+			version,
 		});
 
 		if (!includeGrayscale) {
@@ -20,9 +21,10 @@ const getUrls = (data: string[]) =>
 		return [
 			url,
 			getInvestigatorImageUrl({
-				code,
+				code: id,
 				type: "full",
 				grayscale: true,
+				version,
 			}),
 		];
 	});
@@ -35,10 +37,9 @@ const prefetch = async (data: string[]) => {
 
 export const useImagePrelaod = () => {
 	const images = useAppSelector(selectBoardImages);
-	const imageIds = images.map(prop("id"));
 
 	useEffect(() => {
-		const urls = getUrls(imageIds);
+		const urls = getUrls(images);
 		prefetch(urls);
-	}, [imageIds]);
+	}, [images]);
 };
