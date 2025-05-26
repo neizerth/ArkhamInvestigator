@@ -22,7 +22,7 @@ export const Area: typeof TouchableOpacity = styled(TouchableOpacity)`
 `;
 
 export const Content: typeof View = styled(View)`
-	padding: 7% 25px 9%;
+	padding: 7% 20px 9% 25px;
 	border-radius: ${size.borderRadius.default}px;
 	position: relative;
 	z-index: 1;
@@ -48,10 +48,11 @@ export const List: typeof Row = styled(Row)`
 export const Toggle: typeof TouchableOpacity = styled(TouchableOpacity)`
 	position: absolute;
 	z-index: 10;
-	right: 25px;
-	top: 25px;
-	width: 48px;
-	height: 48px;
+	right: 28px;
+	top: 10px;
+	width: 32px;
+	height: 32px;
+	border-radius: 32px;
 	justify-content: center;
 	align-items: center;
 `;
@@ -64,7 +65,9 @@ export const ToggleIcon: FC<DefinedIconProps> = styled(Icon).attrs({
 	icon: "dismiss",
 })`
 	color: ${color.dark10};
-	opacity: 0.5;
+	font-size: 16px;
+	line-height: 16px;
+	opacity: 0.8;
 `;
 
 export const Item: typeof PinnedSkillCheckItem = styled(PinnedSkillCheckItem)`

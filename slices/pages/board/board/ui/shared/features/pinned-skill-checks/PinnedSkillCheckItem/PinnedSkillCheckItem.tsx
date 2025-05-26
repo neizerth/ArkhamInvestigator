@@ -1,4 +1,3 @@
-import { selectChaosBagLoadingAnimation } from "@features/chaos-bag";
 import { useHapticSwipe } from "@features/haptic";
 import { selectCurrentLanguage } from "@features/i18n";
 import { useSkillItemChaosTokenRevealModal } from "@features/skill-check";
@@ -11,7 +10,6 @@ import {
 	useAppSelector,
 } from "@shared/lib";
 import type { SkillCheckHistoryItem } from "@shared/model";
-import { always } from "ramda";
 import { useCallback, useMemo } from "react";
 import type { ViewProps } from "react-native";
 import {
@@ -21,8 +19,6 @@ import {
 } from "react-native-gesture-handler";
 import * as C from "./PinnedSkillCheckItem.components";
 import { getExpressionDisplayStyle } from "./PinnedSkilllCheckItem.styles";
-
-const emptyCallback = always(false);
 
 export type PinnedSkillCheckItemProps = ViewProps & {
 	isLast?: boolean;
@@ -37,7 +33,6 @@ export const PinnedSkillCheckItem = ({
 	const dispatch = useAppDispatch();
 	const language = useAppSelector(selectCurrentLanguage);
 	const tapToHide = useAppSelector(selectTapToHidePins);
-	const animate = useAppSelector(selectChaosBagLoadingAnimation);
 
 	const displayStyle = getExpressionDisplayStyle(language);
 

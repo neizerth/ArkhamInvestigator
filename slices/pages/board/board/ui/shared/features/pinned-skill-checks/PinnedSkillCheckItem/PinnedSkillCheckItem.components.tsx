@@ -14,7 +14,7 @@ export const Item: typeof TouchableOpacity = styled(TouchableOpacity)`
 
 export const ItemContent: typeof Row = styled(Row)`
   align-items: center;
-	gap: ${size.gap.small}px;
+	gap: 2px;
 	flex-wrap: wrap;
 `;
 
