@@ -1,4 +1,4 @@
-import { Copasetic, Enthalpy298 } from "@assets/fonts";
+import { Enthalpy298 } from "@assets/fonts";
 import { withLocale } from "@features/i18n";
 import { color, font, size } from "@shared/config";
 import { type DefinedIconProps, Icon, Row } from "@shared/ui";
@@ -56,7 +56,7 @@ const zhTextConfig = {
 export const TitleText = withLocale({
 	style: {
 		default: {
-			fontFamily: Copasetic.regular,
+			fontFamily: Enthalpy298.regular,
 			lineHeight: 25,
 			color: color.light10,
 			fontSize: font.size.small,
@@ -65,9 +65,6 @@ export const TitleText = withLocale({
 			paddingHorizontal: 5,
 			borderRadius: 2,
 			maxWidth: 250,
-		},
-		ru: {
-			fontFamily: Enthalpy298.regular,
 		},
 		ko: {
 			fontFamily: LineSeedKR.regular,
