@@ -14,6 +14,7 @@ import {
 	useAppSelector,
 } from "@shared/lib";
 import type { SkillCheckCommandType, SkillCheckOperator } from "@shared/model";
+import memoize from "fast-memoize";
 import { useCallback, useEffect } from "react";
 import { type ViewProps, useWindowDimensions } from "react-native";
 import { characters, skillCheckColor } from "../../../../config";
@@ -61,24 +62,24 @@ export const Keyboard = ({ ...props }: KeyboardProps) => {
 	}, [dispatch, historyShown]);
 
 	const sendDigit = useCallback(
-		(value: number) => () => {
+		memoize((value: number) => () => {
 			dispatch(sendNumberSignal(value));
-		},
-		[dispatch],
+		}),
+		[],
 	);
 
 	const sendOperator = useCallback(
-		(value: SkillCheckOperator) => () => {
+		memoize((value: SkillCheckOperator) => () => {
 			dispatch(sendOperatorSignal(value));
-		},
-		[dispatch],
+		}),
+		[],
 	);
 
 	const sendCommand = useCallback(
-		(value: SkillCheckCommandType) => () => {
+		memoize((value: SkillCheckCommandType) => () => {
 			dispatch(sendCommandSignal(value));
-		},
-		[dispatch],
+		}),
+		[],
 	);
 
 	const equals = useCallback(() => {
@@ -90,26 +91,29 @@ export const Keyboard = ({ ...props }: KeyboardProps) => {
 		showReveal();
 	}, [equals, showReveal]);
 
-	const withDigitProps = (value: number) => {
-		return {
-			onPress: sendDigit(value),
-			children: value,
-			onSwipeUp: showKeyReveal({
-				type: "number",
-				value,
-			}),
-			onSwipeDown: showKeyReveal({
-				operator: "subtract",
-				type: "number",
-				value,
-			}),
-			onLongPress: () => setDifficulty(value),
-			selected: value === difficulty,
-			selectedTextStyle: {
-				color: skillCheckColor.checkIcon,
-			},
-		};
-	};
+	const withDigitProps = useCallback(
+		(value: number) => {
+			return {
+				onPress: sendDigit(value),
+				children: value,
+				onSwipeUp: showKeyReveal({
+					type: "number",
+					value,
+				}),
+				onSwipeDown: showKeyReveal({
+					operator: "subtract",
+					type: "number",
+					value,
+				}),
+				onLongPress: () => setDifficulty(value),
+				selected: value === difficulty,
+				selectedTextStyle: {
+					color: skillCheckColor.checkIcon,
+				},
+			};
+		},
+		[difficulty, sendDigit, showKeyReveal, setDifficulty],
+	);
 
 	const withOperatorProps = (value: SkillCheckOperator) => ({
 		onPress: sendOperator(value),
