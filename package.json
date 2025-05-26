@@ -1,7 +1,7 @@
 {
   "name": "arkham-investigator",
   "main": "expo-router/entry",
-  "version": "1.26.9",
+  "version": "1.27.1",
   "scripts": {
     "start": "expo start",
     "reset-project": "node ./scripts/reset-project.js",
@@ -55,6 +55,7 @@
     "expo-symbols": "~0.2.0",
     "expo-system-ui": "~4.0.9",
     "expo-web-browser": "~14.0.1",
+    "fast-memoize": "^2.5.2",
     "fast-shuffle": "^6.1.1",
     "html-react-parser": "^5.2.2",
     "i18next": "^24.2.2",
