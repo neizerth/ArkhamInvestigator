@@ -4,7 +4,7 @@ import {
 	useAppSelector,
 } from "@shared/lib";
 import {
-	InvestigatorPreview,
+	InvestigatorPreviewMemo as InvestigatorPreview,
 	type InvestigatorPreviewProps,
 } from "../../../../investigator-preview";
 import {

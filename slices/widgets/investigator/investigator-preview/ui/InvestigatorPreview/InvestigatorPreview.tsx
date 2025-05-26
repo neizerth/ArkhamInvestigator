@@ -13,6 +13,7 @@ import * as C from "./InvestigatorPreview.components";
 export type InvestigatorPreviewProps = TouchableOpacityProps &
 	PropsWithFaction & {
 		imageId?: string;
+		imageVersion?: number;
 		selected?: boolean;
 		selectedCount?: number;
 		code: string;
@@ -36,6 +37,7 @@ export const InvestigatorPreview = ({
 	disabled,
 	size,
 	selectionStyle,
+	imageVersion,
 	...props
 }: InvestigatorPreviewProps) => {
 	const imageId = props.imageId || props.code;
@@ -45,6 +47,7 @@ export const InvestigatorPreview = ({
 		code: imageId,
 		type: "square",
 		grayscale: grayscaleImage,
+		version: imageVersion,
 	});
 	const source = { uri };
 

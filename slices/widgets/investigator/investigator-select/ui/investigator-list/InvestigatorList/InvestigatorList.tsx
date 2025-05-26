@@ -38,15 +38,20 @@ export const InvestigatorList = ({
 		({ item }: ListRenderItemInfo<Group>) => {
 			return (
 				<C.ItemRow>
-					{item.map((group) => (
-						<C.Item
-							key={group.id}
-							onPress={toggleSelected(group)}
-							faction={group.faction_code}
-							code={group.code}
-							size={size}
-						/>
-					))}
+					{item.map((group) => {
+						const [signature] = group.signatures;
+						const { image } = signature;
+						return (
+							<C.Item
+								key={group.id}
+								onPress={toggleSelected(group)}
+								faction={signature.faction_code}
+								code={signature.code}
+								imageVersion={image.version}
+								size={size}
+							/>
+						);
+					})}
 				</C.ItemRow>
 			);
 		},

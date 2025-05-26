@@ -27,6 +27,12 @@ export const donateLinks = [
 
 export const contactLinks = [
 	{
+		id: "bgg",
+		icon: "bgg",
+		text: "BoardGameGeek",
+		href: "https://boardgamegeek.com/thread/3516636/arkham-investigator-a-digital-investigator-board",
+	},
+	{
 		id: "discord",
 		icon: "discord",
 		text: "Discord",

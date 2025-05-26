@@ -12,9 +12,14 @@ import { faceSize } from "../../../config";
 type GetImageLayout = {
 	view: Box;
 	image: InvestigatorImage;
+	offsetBottom?: number;
 };
 
-export const getImageLayout = ({ image, view }: GetImageLayout) => {
+export const getImageLayout = ({
+	image,
+	view,
+	offsetBottom = 0,
+}: GetImageLayout) => {
 	const { face } = image;
 
 	const vh = view.height / 100;
@@ -27,7 +32,7 @@ export const getImageLayout = ({ image, view }: GetImageLayout) => {
 	const faceCenter = getBoxLayoutCenter(face);
 
 	const offset = {
-		top: faceCenter.top - imageCenter.top,
+		top: faceCenter.top - imageCenter.top + offsetBottom,
 		left: faceCenter.left - imageCenter.left,
 	};
 

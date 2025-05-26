@@ -19,10 +19,12 @@ export const InvestigatorDescription = () => {
 	}
 
 	const imageId = skinId || signature.image.id;
+	const version = skinId ? 1 : signature.image.version;
 
 	const uri = getImageUrl({
 		code: imageId,
 		type: "square",
+		version,
 	});
 	const source = { uri };
 
