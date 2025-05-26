@@ -1,1 +1,5 @@
 export const SOUND_ENABLED = false;
+
+export const SOUND_VOLUME_BARS_COUNT = 20;
+
+export const SOUND_VOLUME_MODIFIER = 100 / SOUND_VOLUME_BARS_COUNT / 100;

@@ -4,6 +4,7 @@ import {
 	setSoundEnabled,
 	setSoundVolume,
 } from "@features/sound";
+import { SOUND_VOLUME_BARS_COUNT } from "@features/sound/config";
 import { useAppSelector } from "@shared/lib";
 import type { ViewProps } from "react-native";
 import * as C from "./SoundSettings.components";
@@ -26,7 +27,7 @@ export const SoundSettings = (props: SoundSettingsProps) => {
 					<C.Slider
 						label="Volume"
 						minimumValue={0}
-						maximumValue={100}
+						maximumValue={SOUND_VOLUME_BARS_COUNT}
 						step={1}
 						selector={selectSoundVolume}
 						actionCreator={setSoundVolume}
