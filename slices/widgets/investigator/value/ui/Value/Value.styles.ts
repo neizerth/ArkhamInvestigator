@@ -19,7 +19,7 @@ export const getFontStyle = ({
 	defaultFontSize = 55,
 	value,
 }: GetValueStyleOptions) => {
-	const digitsCount = value?.toString().length ?? 0;
+	const digitsCount = value.toString().length ?? 0;
 
 	const fontSize = defaultFontSize * numberSize[digitsCount];
 

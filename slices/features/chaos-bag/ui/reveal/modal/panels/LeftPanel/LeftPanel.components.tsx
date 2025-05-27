@@ -35,7 +35,7 @@ export const SkillValueText: typeof IconNumber = styled(IconNumber).attrs({
 })`
   color: ${color.white};
   ${({ value }: IconNumberProps) => css`
-    font-size: ${valueFontSize[value.toString().length] || 25}px;
+    font-size: ${valueFontSize[value?.toString().length] || 25}px;
   `}
   
 `;

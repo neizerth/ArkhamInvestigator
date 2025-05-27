@@ -21,7 +21,7 @@ export const Value: typeof IconNumber = styled(IconNumber).attrs({
 })`
 
 	font-size: 24px;
-	${({ value = "" }: IconNumberProps) =>
+	${({ value = 0 }: IconNumberProps) =>
 		value.toString().length > 1 &&
 		css`
 		font-size: 16px;

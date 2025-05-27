@@ -31,7 +31,7 @@ export const RightPanel = ({ ...props }: RightPanelProps) => {
 		<C.Container {...props}>
 			<C.Actions>
 				<C.Difficulty>
-					{difficulty !== null && (
+					{typeof difficulty === "number" && (
 						<>
 							<C.CompareSymbol>{dificultyCharacter}</C.CompareSymbol>
 							<C.DifficultyButton
