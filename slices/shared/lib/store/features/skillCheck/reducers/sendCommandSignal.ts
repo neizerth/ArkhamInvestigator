@@ -33,7 +33,6 @@ export const sendCommandSignal: SkillCheckReducer<SkillCheckCommandType> = (
 					data: [...state.data.slice(0, -1), createNumberItem(value)],
 				};
 			}
-			// console.log("what?");
 			const nextData = state.data.slice(0, -1);
 			return {
 				...state,

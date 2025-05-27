@@ -22,6 +22,8 @@ export type InvestigatorBoardValues = Record<InvestigatorBoardStat, number> & {
 	additionalAction: boolean;
 };
 
+export type InvestigatorAbilityValues = Record<string, number>;
+
 export type InvestigatorBoard = {
 	id: number;
 	signatureGroupId: string;
@@ -32,6 +34,7 @@ export type InvestigatorBoard = {
 	initialValue: InvestigatorBoardValues;
 	baseValue: InvestigatorBoardValues;
 	value: InvestigatorBoardValues;
+	abilityValues?: InvestigatorAbilityValues;
 	history: HistoryItem[];
 	historyIndex: number;
 	checkHistory: SkillCheckHistoryItem[];
@@ -51,6 +54,7 @@ export type HistoryItem = {
 	value?: Partial<InvestigatorBoardValues>;
 	usedAbilities?: UsedAbility[];
 	currentRole?: Faction;
+	abilityValues?: Record<string, number>;
 };
 
 export type PickerDecelerationType = "fast" | "normal" | false;
