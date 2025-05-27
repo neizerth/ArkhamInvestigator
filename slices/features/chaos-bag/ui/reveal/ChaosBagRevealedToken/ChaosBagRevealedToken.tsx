@@ -16,7 +16,7 @@ export const ChaosBagRevealedToken = ({
 	selected = false,
 	...props
 }: ChaosBagRevealedTokenProps) => {
-	const size = position.toString().length;
+	const size = position?.toString().length ?? 0;
 	return (
 		<C.Container {...props}>
 			{showPosition && (

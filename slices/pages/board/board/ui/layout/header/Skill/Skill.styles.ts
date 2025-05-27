@@ -54,7 +54,7 @@ export const getSkillValueStyle = ({
 	width,
 }: GetSkillValueStyleOptions) => {
 	const vw = rnd(width / 10);
-	const digitsCount = value.toString().length;
+	const digitsCount = value?.toString().length ?? 0;
 
 	const textColor = isParallel ? color.white : color.text;
 
