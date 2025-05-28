@@ -69,7 +69,6 @@ export const SettingsPage = () => {
 							actionCreator={S.setKeepAwake}
 						/>
 					</C.Row>
-					<C.Sound />
 				</C.Section>
 				<C.Section title={t`Game settings`}>
 					<C.Row>
