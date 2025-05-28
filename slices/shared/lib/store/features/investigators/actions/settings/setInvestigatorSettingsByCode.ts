@@ -2,7 +2,7 @@ import type { AppThunk, InvestigatorSettings } from "@shared/model";
 import {
 	selectInvestigatorSettings,
 	setInvestigatorSettings,
-} from "../investigators";
+} from "../../investigators";
 
 export const setInvestigatorSettingsByCode =
 	(code: string, settings: InvestigatorSettings): AppThunk =>

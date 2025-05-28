@@ -3,9 +3,11 @@ import { Value } from "@widgets/investigator/value";
 import styled from "styled-components/native";
 import { StatPicker } from "../../../common/StatPicker";
 
-export const Container: typeof ImageBackground = styled(ImageBackground)`
-  height: 48px;
-  width: 48px;
+export const Container: typeof ImageBackground = styled(ImageBackground).attrs({
+	contentFit: "contain",
+})`
+  height: 38px;
+  width: 38px;
   justify-content: center;
   align-items: center;
 `;

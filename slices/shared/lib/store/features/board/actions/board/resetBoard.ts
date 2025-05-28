@@ -11,7 +11,7 @@ import { clearHistory } from "../history/clearHistory";
 import { setBoard } from "./setBoard";
 
 import type { InvestigatorBoard } from "@shared/model";
-import { selectInvestigatorSettingsByCode } from "../../../investigators/selectors/selectInvestigatorSettingsByCode";
+import { selectInvestigatorSettingsByCode } from "../../../investigators/selectors/settings/selectInvestigatorSettingsByCode";
 
 export const resetBoard: ActionCreator<AppThunk> =
 	() => (dispatch, getState) => {

@@ -40,4 +40,6 @@ type CounterProps = AbilityCounterProps & PropsWithIndex;
 
 export const Counter: FC<CounterProps> = styled(AbilityCounter)`
   ${abilityStyle};
+  margin-left: 2px;
+  margin-bottom: 6px;
 `;

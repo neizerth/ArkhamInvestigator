@@ -1,5 +1,5 @@
 import type { AppThunk, InvestigatorSettings } from "@shared/model";
-import { selectInvestigatorSettings } from "../investigators";
+import { selectInvestigatorSettings } from "../../investigators";
 import { setInvestigatorSettingsByCode } from "./setInvestigatorSettingsByCode";
 
 type Options<T extends keyof InvestigatorSettings> = {

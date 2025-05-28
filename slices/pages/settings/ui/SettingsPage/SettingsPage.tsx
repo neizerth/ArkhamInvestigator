@@ -69,6 +69,7 @@ export const SettingsPage = () => {
 							actionCreator={S.setKeepAwake}
 						/>
 					</C.Row>
+					<C.Sound />
 				</C.Section>
 				<C.Section title={t`Game settings`}>
 					<C.Row>
@@ -163,6 +164,14 @@ export const SettingsPage = () => {
 							actionCreator={S.setAllowNegativeHealthAndSanity}
 						/>
 					</C.Row>
+					<C.Rule />
+					<C.Row>
+						<C.Checkbox
+							label="Damage/Horror visual effects"
+							selector={S.selectShowDamageAndHorrorEffects}
+							actionCreator={S.setShowDamageAndHorrorEffects}
+						/>
+					</C.Row>
 				</C.Section>
 				<C.Section title={t`Investigator`}>
 					<C.Row>
@@ -218,13 +227,6 @@ export const SettingsPage = () => {
 				<C.Section title={t`Behavior`}>
 					<C.Row>
 						<C.Picker />
-					</C.Row>
-					<C.Row>
-						<C.Checkbox
-							label="Damage/Horror visual effects"
-							selector={S.selectShowDamageAndHorrorEffects}
-							actionCreator={S.setShowDamageAndHorrorEffects}
-						/>
 					</C.Row>
 				</C.Section>
 

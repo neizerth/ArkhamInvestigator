@@ -2,6 +2,8 @@ import type { ViewProps } from "react-native";
 
 import {
 	selectAbilityCounter,
+	selectCurrentBoardProp,
+	selectInvestigatorCounterEnabled,
 	setAbilityCounter,
 	useAppDispatch,
 	useAppSelector,
@@ -30,7 +32,10 @@ export const AbilityCounter = ({
 	const dispatch = useAppDispatch();
 	const { id } = ability;
 	const source = backgrounds[id];
+	const { code } = useAppSelector(selectCurrentBoardProp("investigator"));
+
 	const value = useAppSelector(selectAbilityCounter(id));
+	const enabled = useAppSelector(selectInvestigatorCounterEnabled(code, id));
 
 	const valueStyle = getValueStyle(id);
 
@@ -56,6 +61,10 @@ export const AbilityCounter = ({
 		const value = defaultValue || 0;
 		dispatch(setAbilityCounter(id, value));
 	}, [dispatch, id, defaultValue]);
+
+	if (!enabled) {
+		return;
+	}
 
 	return (
 		<C.Container {...props} source={source}>
