@@ -44,3 +44,8 @@ export type PropsWithStroke = {
 export type PropsWithFill = {
 	fill?: boolean;
 };
+
+export type PropsWithError = {
+	error: Error;
+	onRetry?: () => void;
+};
