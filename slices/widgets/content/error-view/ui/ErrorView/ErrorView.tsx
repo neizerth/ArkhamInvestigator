@@ -5,7 +5,7 @@ import * as C from "./ErrorView.components";
 
 export type ErrorViewProps = PropsWithError;
 
-export const ErrorView = ({ error, onRetry }: ErrorViewProps) => {
+export const ErrorView = ({ error }: ErrorViewProps) => {
 	const { t } = useAppTranslation();
 
 	return (
@@ -14,7 +14,6 @@ export const ErrorView = ({ error, onRetry }: ErrorViewProps) => {
 			<C.Body>
 				<C.Content>{error.message}</C.Content>
 			</C.Body>
-			<C.Retry onPress={onRetry} text={t`Retry`} />
 		</C.Container>
 	);
 };
