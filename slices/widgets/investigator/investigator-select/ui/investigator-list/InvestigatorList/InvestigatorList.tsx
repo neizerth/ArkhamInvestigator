@@ -48,6 +48,7 @@ export const InvestigatorList = ({
 								faction={signature.faction_code}
 								code={signature.code}
 								imageVersion={image.version}
+								imageId={image.id}
 								size={size}
 							/>
 						);

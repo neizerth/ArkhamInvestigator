@@ -22,7 +22,7 @@ export const InvestigatorListItem = (props: InvestigatorListItemProps) => {
 	const selected = useAppSelector(selectSelectedInvestigatorByCode(code));
 	const disabled = useAppSelector(selectIsInvestigatorDisabled(code));
 
-	const imageId = selected?.image.id || code;
+	const imageId = selected?.image.id || props.imageId || code;
 
 	const isSelected = count > 0 || replaceCode === code;
 
