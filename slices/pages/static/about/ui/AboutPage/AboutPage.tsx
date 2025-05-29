@@ -90,7 +90,7 @@ export const AboutPage = (props: AboutPageProps) => {
 			</List>
 			<Title>Testing/Ideas</Title>
 			<Paragraph>
-				@Egoorka_k, @AxilFirst, @Evgesha727, @User211587, @l_leona_l, @mkrsa,
+				@Egoorka_k, @Evgesha727, @AxilFirst, @User211587, @l_leona_l, @mkrsa,
 				@Aahz7, @ivanmazov82, @mr_zoombee, @sliapy, @vyacheslav_darmin,
 				@CrazyMind667, @LexAndrVas, @Anton_Sabaton, @ezhikhin, @Mpmapuo,
 				@alexander_violator, @ka777ban, @Amarum, @l_leona_l, @litt_n,

@@ -50,8 +50,11 @@ export const InvestigatorDescription = () => {
 			</C.InvestigatorTextContainer>
 			{!replaceInvestigator && (
 				<C.Settings>
-					<C.Trauma />
-					{trackXP && <C.XP />}
+					<C.Counters />
+					<C.StatSettings>
+						<C.Trauma />
+						{trackXP && <C.XP />}
+					</C.StatSettings>
 				</C.Settings>
 			)}
 		</C.Container>

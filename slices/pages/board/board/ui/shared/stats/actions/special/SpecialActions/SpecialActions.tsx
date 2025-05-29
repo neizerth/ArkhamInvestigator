@@ -16,9 +16,16 @@ export const SpecialActions = (props: SpecialActionsProps) => {
 	return (
 		<C.Container {...props}>
 			{haveAdditionalAction && <C.Additional />}
-			{abilities.map((ability, index) => (
-				<C.Ability key={ability.id} ability={ability} index={index} />
-			))}
+			{abilities.map((ability, index) => {
+				const props = {
+					ability,
+					index,
+				};
+				if (ability.type === "counter") {
+					return <C.Counter key={ability.id} {...ability} {...props} />;
+				}
+				return <C.Ability key={ability.id} {...props} />;
+			})}
 		</C.Container>
 	);
 };

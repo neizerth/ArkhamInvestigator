@@ -1,3 +1,4 @@
+import { Button } from "@features/haptic";
 import { color, size, statusBarHeight } from "@shared/config";
 import { Text } from "@shared/ui";
 import { View } from "react-native";
@@ -14,6 +15,14 @@ export const Name: typeof Text = styled(Text)`
   
 `;
 
+export const Body: typeof View = styled(View)`
+  flex: 1;
+`;
+
 export const Content: typeof Text = styled(Text)`
+
+`;
+
+export const Retry: typeof Button = styled(Button)`
   
 `;

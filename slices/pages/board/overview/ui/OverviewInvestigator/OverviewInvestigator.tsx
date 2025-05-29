@@ -31,7 +31,8 @@ export const OverviewInvestigator = ({
 	const board = useAppSelector(selectBoardById(boardId));
 	const showWounds = useAppSelector(selectShowDamageAndHorror);
 
-	const { investigator, value, baseValue, initialValue } = board;
+	const { investigator, value, baseValue, initialValue, currentRole } = board;
+	const faction = currentRole || investigator.faction_code;
 	const damage = baseValue.health - value.health;
 	const horror = baseValue.sanity - value.sanity;
 
@@ -97,7 +98,7 @@ export const OverviewInvestigator = ({
 				<C.Secondary>
 					<C.Image
 						size={110}
-						faction={investigator.faction_code}
+						faction={faction}
 						code={investigator.code}
 						imageId={investigator.image.id}
 						onPress={onSelect}

@@ -19,6 +19,7 @@ export const getFactionStyle = (faction: Faction) => {
       padding-bottom: ${offsetY + 2}%;
     `,
 		mystic: css`
+      padding-top: 9%;
       padding-left: 12%;
       padding-right: 12%;
       padding-bottom: ${offsetY + 4}%;

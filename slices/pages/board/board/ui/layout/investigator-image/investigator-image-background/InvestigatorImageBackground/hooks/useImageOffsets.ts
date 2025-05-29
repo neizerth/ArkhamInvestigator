@@ -4,7 +4,8 @@ import { DEFAULT_PORTRAIT_DESCRIPTION_HEIGHT } from "../../../../../../config";
 import { useDescriptionHeight } from "../../../../../../lib";
 
 export const useImageOffsets = () => {
-	const { id } = useAppSelector(selectCurrentBoardProp("image"));
+	const image = useAppSelector(selectCurrentBoardProp("image"));
+	const id = image?.id;
 
 	const [offsets, setOffsets] = useState<Record<string, number | undefined>>(
 		{},

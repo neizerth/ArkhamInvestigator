@@ -6,6 +6,7 @@ import { View } from "react-native";
 import styled from "styled-components/native";
 import { GameText } from "../../../../../game/game-text";
 import { InvestigatorSkillsPreview } from "../../../../investigator-skills-preview";
+import { InvestigatorCounters } from "../InvestigatorCounters";
 import { InvestigatorStats } from "../InvestigatorStats";
 import { InvestigatorTrauma } from "../InvestigatorTrauma";
 import { InvestigatorXP } from "../InvestigatorXP";
@@ -71,10 +72,23 @@ export const Trauma: typeof InvestigatorTrauma = styled(InvestigatorTrauma)`
   flex: 2;
 `;
 
-export const Settings: typeof Row = styled(Row)`
+export const Settings: typeof View = styled(View)`
+  justify-content: space-between;
+  gap: ${size.gap.default}px;
+`;
+
+export const StatSettings: typeof Row = styled(Row)`
   justify-content: space-between;
 `;
 
+export { Row };
+
 export const XP: typeof InvestigatorXP = styled(InvestigatorXP)`
+  flex: 1;
+`;
+
+export const Counters: typeof InvestigatorCounters = styled(
+	InvestigatorCounters,
+)`
   flex: 1;
 `;

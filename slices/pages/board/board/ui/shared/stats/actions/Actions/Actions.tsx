@@ -12,7 +12,7 @@ const actionsData = range(0, 100);
 
 export const Actions = ({ ...props }: ActionsProps) => {
 	const dispatch = useAppDispatch();
-	const haveAdditionalActions = useAppSelector(selectHaveBoardAbilities);
+	const haveAbilities = useAppSelector(selectHaveBoardAbilities);
 
 	const { value, baseValue, initialValue, onChange, onLongPress } =
 		useStat("actions");
@@ -35,10 +35,9 @@ export const Actions = ({ ...props }: ActionsProps) => {
 						onPress={onPress}
 						onLongPress={onLongPress}
 					/>
-
-					{haveAdditionalActions && <C.Special />}
 				</C.Content>
 			</C.Background>
+			{haveAbilities && <C.Special />}
 		</C.Container>
 	);
 };

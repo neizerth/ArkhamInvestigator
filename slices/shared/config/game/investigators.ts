@@ -26,6 +26,12 @@ export const BOARD_ABILITY_TYPES: AbilityType[] = [
 	"reaction",
 	"action",
 	"special-action",
+	"permanent",
+];
+
+export const PERMANENT_BOARD_ABILITY_TYPES: AbilityType[] = [
+	"counter",
+	"permanent",
 ];
 
 export const SPECIAL_ABILITIES: string[] = [

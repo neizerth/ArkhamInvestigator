@@ -8,7 +8,7 @@ import { assetsSize } from "../../../../../config";
 import { withStat } from "../../../../../lib";
 import { BaseStatPicker, type DefinedBaseStatPickerProps } from "../../common";
 import { StatPickerMemo as StatPicker } from "../../common/StatPicker";
-import { SpecialActions } from "../SpecialActions";
+import { SpecialActions } from "../special/SpecialActions";
 
 const BaseBackground = withStat(Action, {
 	height: assetsSize.action,

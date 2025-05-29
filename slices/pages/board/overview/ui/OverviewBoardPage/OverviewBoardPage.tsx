@@ -7,7 +7,7 @@ import {
 	useAppDispatch,
 	useAppSelector,
 } from "@shared/lib";
-import { useCallback } from "react";
+import { Fragment, useCallback } from "react";
 import * as C from "./OverviewBoardPage.components";
 
 export const OverviewBoardPage = () => {
@@ -29,17 +29,14 @@ export const OverviewBoardPage = () => {
 		<C.Container title="Investigators">
 			<C.Content>
 				{ids.map((id, index) => (
-					<>
+					<Fragment key={id}>
 						<C.Board
-							key={id}
 							boardId={id}
 							selected={currentIndex === index}
 							onSelect={onSelect(index)}
 						/>
-						{index !== ids.length - 1 && (
-							<C.Separator key={`separator-${id}`} />
-						)}
-					</>
+						{index !== ids.length - 1 && <C.Separator />}
+					</Fragment>
 				))}
 			</C.Content>
 		</C.Container>
