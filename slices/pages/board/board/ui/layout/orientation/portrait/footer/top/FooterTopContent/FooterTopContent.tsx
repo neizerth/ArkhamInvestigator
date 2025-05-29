@@ -11,8 +11,6 @@ import * as C from "./FooterTopContent.components";
 
 export type FooterTopContentProps = ViewProps;
 
-export { TOP_CONTENT_OFFSET } from "./FooterTopContent.components";
-
 export const FooterTopContent = (props: FooterTopContentProps) => {
 	const dispatch = useAppDispatch();
 	const defaultShow = useAppSelector(selectShowDescription);

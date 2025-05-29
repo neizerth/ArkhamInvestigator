@@ -85,4 +85,10 @@ export const color = {
 	},
 
 	skill: skillColors,
+	modal: {
+		background: {
+			light: "rgba(0, 0, 0, 0.5)",
+			dark: "rgba(0, 0, 0, 0.8)",
+		},
+	},
 };

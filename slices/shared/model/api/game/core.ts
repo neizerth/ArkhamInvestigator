@@ -7,5 +7,6 @@ type Core = ArkhamDivider.Core;
 export type Story = Single<LocaleBuild["stories"]>;
 export type EncounterSet = Single<Core["encounterSets"]>;
 export type ArkhamIcon = Single<Core["icons"]>;
+export type RulesItem = Single<LocaleBuild["rules"]>;
 
 export type GameCoreData = Core;

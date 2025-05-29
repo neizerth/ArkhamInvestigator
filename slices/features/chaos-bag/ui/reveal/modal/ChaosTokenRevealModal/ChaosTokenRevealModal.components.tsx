@@ -1,4 +1,4 @@
-import { size } from "@shared/config";
+import { color, size } from "@shared/config";
 import { View } from "react-native";
 import styled from "styled-components/native";
 import { TouchableOpacity } from "../../../../../haptic";
@@ -10,7 +10,7 @@ import { BottomPanel, CenterPanel, LeftPanel, RightPanel } from "../panels";
 export const Container: typeof View = styled(View)`
   justify-content: center;
   align-items: center;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: ${color.modal.background.light};
 `;
 
 export const Loader: typeof ChaosTokenRevealLoader = styled(

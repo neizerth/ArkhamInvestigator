@@ -1,5 +1,6 @@
 import { loadLocaleData } from "@shared/api";
 import {
+	setRules,
 	setSignatureGroups,
 	setStories,
 	setTabooSignatures,
@@ -7,13 +8,14 @@ import {
 import type { AppThunk } from "@shared/model";
 import { updateBoardTranslations } from "./updateBoardTranslations";
 
-export const loadSignatureTranslations =
+export const loadContentTranslation =
 	(language: string): AppThunk =>
 	async (dispatch) => {
-		const { groups, taboo, stories } = await loadLocaleData(language);
+		const { groups, taboo, stories, rules } = await loadLocaleData(language);
 
 		dispatch(setTabooSignatures(taboo));
 		dispatch(setSignatureGroups(groups));
 		dispatch(setStories(stories));
+		dispatch(setRules(rules));
 		dispatch(updateBoardTranslations());
 	};

@@ -13,8 +13,7 @@ import {
 import { useCallback, useContext } from "react";
 import type { ViewProps } from "react-native";
 import { Directions, GestureDetector } from "react-native-gesture-handler";
-import { LayoutContext } from "../../../../../../config";
-import { TOP_CONTENT_OFFSET } from "../top";
+import { LayoutContext, TOP_CONTENT_OFFSET } from "../../../../../../config";
 import * as C from "./FooterDescription.components";
 import { useGameText } from "./hooks";
 import { useContainerAnimation } from "./hooks/useContainerAnimation";
@@ -49,34 +48,15 @@ export const FooterDescription = ({ ...props }: FooterDescriptionProps) => {
 		offsetTop: TOP_CONTENT_OFFSET,
 	});
 
-	const expandStyle = {
-		top: TOP_CONTENT_OFFSET,
-	};
-
 	const vw = (view.width * 6) / 100;
 
-	const createToggleDescription = useCallback(
-		(show: boolean) => () => {
-			if (show === showDescription) {
-				return false;
-			}
-			dispatch(setShowDescription(show));
-		},
-		[dispatch, showDescription],
-	);
-
-	const onSwipeUp = createToggleDescription(true);
-
-	const onSwipeDown = createToggleDescription(false);
-
-	const swipeUp = useHapticSwipe({
-		direction: Directions.UP,
-		onSwipe: onSwipeUp,
-	});
+	const hide = useCallback(() => {
+		dispatch(setShowDescription(false));
+	}, [dispatch]);
 
 	const swipeDown = useHapticSwipe({
 		direction: Directions.DOWN,
-		onSwipe: onSwipeDown,
+		onSwipe: hide,
 	});
 
 	if (!vw) {
@@ -91,14 +71,7 @@ export const FooterDescription = ({ ...props }: FooterDescriptionProps) => {
 	return (
 		<C.Container {...props} style={[props.style, containerStyle]}>
 			<C.Content>
-				{!showDescription && (
-					<GestureDetector gesture={swipeUp}>
-						<C.ExpandArea
-							actionCreator={setShowDescription}
-							style={expandStyle}
-						/>
-					</GestureDetector>
-				)}
+				{!showDescription && <C.ExpandArea />}
 				<C.TopContent />
 				<GestureDetector gesture={swipeDown}>
 					<C.Background faction={faction} width={view.width}>

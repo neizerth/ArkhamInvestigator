@@ -1,10 +1,9 @@
 import { Pressable } from "@features/haptic";
 import { View } from "react-native";
 import styled from "styled-components/native";
+import { TOP_CONTENT_OFFSET } from "../../../../../../../config";
 import { DescriptionTopMenu } from "../../DescriptionTopMenu";
 import { SecondaryControls } from "../SecondaryControls";
-
-export const TOP_CONTENT_OFFSET = 178;
 
 export const Container: typeof View = styled(View)`
   min-height: ${TOP_CONTENT_OFFSET}px;

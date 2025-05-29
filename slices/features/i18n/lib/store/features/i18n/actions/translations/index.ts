@@ -1,4 +1,4 @@
 export * from "./fetchTranslationData";
-export * from "./loadSignatureTranslations";
+export * from "./loadContentTranslation";
 export * from "./loadTranslation";
-export * from "./loadSignatureTranslations";
+export * from "./loadContentTranslation";

@@ -6,3 +6,4 @@ export { default as stories } from "./stories/stories";
 export { default as icons } from "./icons/icons";
 export { default as skillCheck } from "./skillCheck/skillCheck";
 export { default as investigators } from "./investigators/investigators";
+export { default as rules } from "./rules/rules";

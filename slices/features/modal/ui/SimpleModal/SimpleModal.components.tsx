@@ -1,10 +1,10 @@
-import { size } from "@shared/config";
+import { color, size } from "@shared/config";
 import { Row } from "@shared/ui";
 import { View } from "react-native";
 import styled from "styled-components/native";
 
 export const Container: typeof View = styled(View)`
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: ${color.modal.background.light};
 
   justify-content: center;
   align-items: center;

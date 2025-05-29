@@ -12,6 +12,7 @@ export const loadLocaleData = async (language = "en") => {
 			stories: [],
 			groups: [],
 			taboo: [],
+			rules: [],
 		};
 	}
 };

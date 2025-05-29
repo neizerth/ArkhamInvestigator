@@ -27,3 +27,5 @@ const largeScreen = screen.height > 640;
 export const DEFAULT_PORTRAIT_DESCRIPTION_HEIGHT = largeScreen ? 70 : 80;
 
 export const PINNED_CHECKS_MIN_HEIGHT = 60;
+
+export const TOP_CONTENT_OFFSET = 178;

@@ -15,6 +15,7 @@ export const routes = {
 	boardHelp: r("/board/help"),
 	replaceInvestigator: r("/board/replace-investigator"),
 	overview: r("/board/overview"),
+	roundReference: r("/board/round-reference"),
 
 	chaosBag: r("/chaos-bag"),
 	chaosBagPreview: r("/chaos-bag/preview"),
