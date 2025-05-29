@@ -1,7 +1,7 @@
 {
   "name": "arkham-investigator",
   "main": "expo-router/entry",
-  "version": "1.28.0",
+  "version": "1.28.1",
   "scripts": {
     "start": "expo start",
     "reset-project": "node ./scripts/reset-project.js",
@@ -42,6 +42,7 @@
     "expo-audio": "~0.3.5",
     "expo-blur": "~14.0.1",
     "expo-constants": "~17.0.3",
+    "expo-custom-assets": "^1.4.1",
     "expo-font": "~13.0.2",
     "expo-haptics": "~14.0.0",
     "expo-image": "~2.0.7",
