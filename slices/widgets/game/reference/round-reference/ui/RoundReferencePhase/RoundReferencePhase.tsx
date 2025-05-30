@@ -5,7 +5,6 @@ import { selectCurrentLanguage } from "@features/i18n";
 import { useAppSelector } from "@shared/lib";
 import { phaseColors } from "../../config";
 import * as C from "./RoundReferencePhase.components";
-import { getRoundReferenceTextComponents } from "./RoundReferencePhase.style";
 
 export type RoundReferencePhaseProps = ViewProps & {
 	phase: TimingPhase;
@@ -21,7 +20,6 @@ export const RoundReferencePhase = ({
 
 	const { position, steps } = phase;
 	const backgroundColor = phaseColors[position - 1];
-	const componentStyles = getRoundReferenceTextComponents(language);
 
 	return (
 		<C.Container {...props}>
@@ -33,21 +31,7 @@ export const RoundReferencePhase = ({
 					<C.Steps>
 						{steps.map((step) => (
 							<C.Step key={step.id}>
-								{step.type === "end" ? (
-									<C.StepEnd>
-										<C.StepText
-											value={step.text}
-											componentStyles={componentStyles}
-										/>
-									</C.StepEnd>
-								) : (
-									<C.StepContent>
-										<C.StepText
-											value={step.text}
-											componentStyles={componentStyles}
-										/>
-									</C.StepContent>
-								)}
+								<C.StepContent step={step} />
 								{step.color && (
 									<C.StepBackground backgroundColor={step.color} />
 								)}

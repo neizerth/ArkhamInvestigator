@@ -6,6 +6,7 @@ import type { FC } from "react";
 import { View, type ViewProps } from "react-native";
 import styled, { css } from "styled-components/native";
 import { GameText } from "../../../../game-text";
+import { RoundReferencePhaseStep } from "../RoundReferencePhaseStep";
 import {
 	RoundReferencePhaseBackground,
 	type RoundReferencePhaseBackgroundProps,
@@ -23,7 +24,7 @@ type ContentProps = ViewProps & PropsWithOpen;
 
 export const Content: FC<ContentProps> = styled(View)`
 	position: relative;
-	padding: ${size.gap.small}px ${size.gap.medium}px;
+	padding: ${size.gap.small}px 10px;
 	gap: 20px;
 	z-index: 1;
 	${({ open }: ContentProps) =>
@@ -85,12 +86,10 @@ export const Step: typeof View = styled(View)`
 	position: relative;
 `;
 
-export const StepContent: typeof View = styled(View)`
-	padding: 7px 15px;
-`;
+export const StepContent: typeof RoundReferencePhaseStep = styled(
+	RoundReferencePhaseStep,
+)`
 
-export const StepEnd: typeof View = styled(View)`
-	align-items: center;
 `;
 
 export const StepBackground: typeof Background = styled(Background).attrs({

@@ -50,6 +50,6 @@ export const localeComponentStyles: KeyConfig<ComponentStyleMap> = {
 	"zh-cn": zhComponentStyles,
 };
 
-export const getRoundReferenceTextComponents = (language: string) => {
+export const getStepTextComponents = (language: string) => {
 	return getKeyConfig(localeComponentStyles)(language);
 };
