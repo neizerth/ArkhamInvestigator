@@ -1,6 +1,6 @@
 import { Pressable } from "@features/haptic";
 import { size } from "@shared/config";
-import { ScenarioReference } from "@widgets/game/scenario-reference";
+import { ScenarioReference } from "@widgets/game/reference";
 import { View } from "react-native";
 import styled from "styled-components/native";
 import { ReferenceMenu } from "../ReferenceMenu";

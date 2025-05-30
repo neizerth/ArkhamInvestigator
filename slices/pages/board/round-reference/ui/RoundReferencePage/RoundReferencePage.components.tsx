@@ -1,5 +1,5 @@
 import { color } from "@shared/config";
-import { RoundReference } from "@widgets/game/round-reference";
+import { RoundReference } from "@widgets/game/reference";
 import { View } from "react-native";
 import styled from "styled-components/native";
 

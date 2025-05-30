@@ -91,4 +91,6 @@ export const color = {
 			dark: "rgba(0, 0, 0, 0.8)",
 		},
 	},
+	title: "#6d251f",
+	rulesText: "#2c2e35",
 };

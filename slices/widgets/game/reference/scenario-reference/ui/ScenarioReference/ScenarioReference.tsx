@@ -34,13 +34,9 @@ export const ScenarioReference = (props: ScenarioReferenceProps) => {
 			</C.ReferenceIconContainer>
 			<C.Content style={style.content}>
 				<C.Header style={style.header}>
-					<C.TitleGroup>
-						<C.TitleText style={style.titleText}>{name}</C.TitleText>
-						<C.TitleUnderlineGroup style={style.underline}>
-							<C.TitleUnderline />
-							<C.TitleUnderline />
-						</C.TitleUnderlineGroup>
-					</C.TitleGroup>
+					<C.Title style={style.titleText} underlineStyle={style.underline}>
+						{name}
+					</C.Title>
 					<C.Difficulty>
 						<C.DifficultyText>{dificulty}</C.DifficultyText>
 					</C.Difficulty>
