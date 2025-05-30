@@ -2,7 +2,7 @@ import { roundReferenceAssets } from "@assets/images/game/reference/round";
 import { color, font, size } from "@shared/config";
 import { ImageBackground } from "@shared/ui";
 import { View } from "react-native";
-import { ScrollView } from "react-native-gesture-handler";
+import { FlatList } from "react-native-gesture-handler";
 import styled from "styled-components/native";
 import { ReferenceTitle } from "../../../reference-title";
 import { currentRoundReferenceSize } from "../../config";
@@ -13,7 +13,7 @@ export const Container: typeof ImageBackground = styled(ImageBackground).attrs({
 })`
   width: ${currentRoundReferenceSize.width}px;
   height: ${currentRoundReferenceSize.height}px;
-  padding: 6% 10% 8%;
+  padding: 6% 5% 8%;
 `;
 
 export const Content: typeof View = styled(View)`
@@ -30,10 +30,7 @@ export const TitleContent: typeof ReferenceTitle = styled(ReferenceTitle)`
   color: ${color.title};
 `;
 
-export const Phases: typeof ScrollView = styled(ScrollView).attrs({
-	contentContainerStyle: {
-		gap: size.gap.default,
-	},
+export const Phases: typeof FlatList = styled(FlatList).attrs({
 	indicatorStyle: "black",
 })`
   flex: 1;

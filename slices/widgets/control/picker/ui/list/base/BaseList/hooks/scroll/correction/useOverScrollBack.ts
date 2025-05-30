@@ -1,3 +1,4 @@
+import { useScrollToIndex } from "@shared/lib";
 import type {
 	PickerEndReachedEvent,
 	PickerScrollEvent,
@@ -48,22 +49,15 @@ export const useOverScrollBack = (props: BaseListProps) => {
 		[onEndReachedProp],
 	);
 
-	const scrollToStart = useCallback(() => {
-		ref?.current?.scrollToIndex({
-			index: 0,
-			animated: false,
-		});
-	}, [ref?.current]);
+	const scrollToStart = useScrollToIndex({
+		ref,
+		index: 0,
+	});
 
-	const scrollToEnd = useCallback(() => {
-		if (lastIndex < 0) {
-			return;
-		}
-		ref?.current?.scrollToIndex({
-			index: lastIndex,
-			animated: false,
-		});
-	}, [ref?.current, lastIndex]);
+	const scrollToEnd = useScrollToIndex({
+		ref,
+		index: lastIndex,
+	});
 
 	const onScrollBeginDrag = useCallback(
 		(e: PickerScrollEvent) => {

@@ -1,5 +1,5 @@
 import { type FC, type PropsWithChildren, useMemo } from "react";
-import type { ListRenderItem } from "react-native";
+import type { ListRenderItem, ViewProps } from "react-native";
 import { Picker, type PickerProps } from "../../../control/picker";
 import type { ValueProps } from "../ui";
 
@@ -11,10 +11,11 @@ type WithPickerValueOptions = {
 
 export type WithPickerValueProps = Omit<
 	PickerProps,
-	"renderItem" | "value" | "data" | "children"
+	"renderItem" | "value" | "data" | "children" | "style"
 > &
 	PropsWithChildren & {
 		value: number;
+		style?: ViewProps["style"];
 		type?: "value" | "picker";
 		data?: number[];
 	};
@@ -51,7 +52,9 @@ export const withPickerValue = ({
 				{type === "picker" && (
 					<Picker {...styles} {...props} renderItem={renderItem} data={data} />
 				)}
-				{type === "value" && <Value value={props.value} />}
+				{type === "value" && (
+					<Value value={props.value} contentContainerStyle={props.style} />
+				)}
 				{children}
 			</Background>
 		);

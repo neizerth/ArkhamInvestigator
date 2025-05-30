@@ -15,8 +15,8 @@ const stepMapping: Record<string, TimingPhaseStepType> = {
 	grey: "end",
 };
 
-export const getRoundPhases = (item: RulesItem) => {
-	if (!item.table) {
+export const getRoundPhases = (item?: RulesItem) => {
+	if (!item?.table) {
 		return [];
 	}
 

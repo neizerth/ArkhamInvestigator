@@ -13,3 +13,5 @@ export type TimingPhaseStep = {
 	text: string;
 	color?: string;
 };
+
+export type TimingPhaseStepId = "mythos-doom" | "upkeep-resource";

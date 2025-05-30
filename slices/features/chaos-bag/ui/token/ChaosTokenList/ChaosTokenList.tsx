@@ -1,4 +1,5 @@
 import { REMOVE_CLIPPED_SUBVIEWS } from "@shared/config";
+import { useScrollToIndex } from "@shared/lib";
 import { useCallback, useRef } from "react";
 import type { ListRenderItemInfo } from "react-native";
 import type { FlatList } from "react-native-gesture-handler";
@@ -26,11 +27,10 @@ export const ChaosTokenList = ({ ...props }: ChaosTokenListProps) => {
 		[],
 	);
 
-	const scrollToTop = useCallback(() => {
-		ref.current?.scrollToIndex({
-			index: 0,
-		});
-	}, []);
+	const scrollToTop = useScrollToIndex({
+		ref,
+		index: 0,
+	});
 
 	const getItemLayout = useCallback((_: unknown, index: number) => {
 		return {
