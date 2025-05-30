@@ -1,3 +1,4 @@
+import { REMOVE_CLIPPED_SUBVIEWS } from "@shared/config";
 import { useAppSelector } from "@shared/lib";
 import { Delay } from "@shared/ui";
 import type { ViewProps } from "react-native";
@@ -25,7 +26,7 @@ export const RoundReference = (props: RoundReferenceProps) => {
 					<C.TitleContent>{title}</C.TitleContent>
 				</C.Title>
 				<Delay delayMs={0}>
-					<C.Phases>
+					<C.Phases removeClippedSubviews={REMOVE_CLIPPED_SUBVIEWS}>
 						{phases.map((phase) => (
 							<C.Phase key={phase.id} phase={phase} />
 						))}
