@@ -81,10 +81,8 @@
 	"board.help.longPress.investigatorSelect": "Если вы играете за 2+ сыщиков, удерживайте нажатие на мини-изображении, чтобы посмотреть параметры всех сыщиков",
 
 	"upkeep.investigator.actionsReset": "{{investigatorName}}: действия обновлены",
-	"upkeep.investigator.getResources_one": "{{investigatorName}} получает {{count}} ресурс",
-	"upkeep.investigator.getResources_few": "{{investigatorName}} получает {{resourceCount}} ресурса",
-	"upkeep.investigator.getResources_many": "{{investigatorName}} получает {{resourceCount}} ресурсов",
-	"upkeep.investigator.getResources_other": "{{investigatorName}} получает {{resourceCount}} ресурса",
+
+	"upkeep.investigator.getResources": "{{investigatorName}} получает ресурсы: {{count}}шт",
 
 	"mythos.doom": "Добавлена 1 Безысходность. Итого: {{doom}}",
 

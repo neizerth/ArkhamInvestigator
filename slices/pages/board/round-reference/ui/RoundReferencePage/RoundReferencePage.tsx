@@ -12,7 +12,12 @@ export const RoundReferencePage = () => {
 	return (
 		<C.Container>
 			<Outside onPress={back} />
-			<C.Reference />
+			<C.Content>
+				<C.Menu>
+					<C.Button icon="close" onPress={back} />
+				</C.Menu>
+				<C.Reference />
+			</C.Content>
 		</C.Container>
 	);
 };

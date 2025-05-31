@@ -35,7 +35,6 @@ export const giveUpkeepResourceToBoard =
 
 		const message = i18next.t("upkeep.investigator.getResources", {
 			investigatorName: name,
-			resourceCount: upkeepResourcesIncrease,
 			count: upkeepResourcesIncrease,
 		});
 		dispatch(showToast(message));
