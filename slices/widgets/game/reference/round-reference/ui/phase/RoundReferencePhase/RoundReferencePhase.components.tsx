@@ -7,6 +7,7 @@ import {
 	SanCn,
 	Yoon,
 } from "@assets/fonts";
+import { GameText } from "@entities/game-text";
 import { IconButton, TouchableOpacity } from "@features/haptic";
 import { withLocale } from "@features/i18n";
 import { color, size } from "@shared/config";
@@ -14,7 +15,6 @@ import { Icon, type IconProps, Row, type UnscaledTextProps } from "@shared/ui";
 import type { FC } from "react";
 import { View, type ViewProps } from "react-native";
 import styled, { css } from "styled-components/native";
-import { GameText } from "../../../../../game-text";
 import { phaseContentFontSize, phaseTitleFontSize } from "../../../config";
 import {
 	RoundReferenceBackground,

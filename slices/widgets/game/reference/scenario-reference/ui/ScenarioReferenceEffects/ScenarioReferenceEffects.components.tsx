@@ -1,9 +1,9 @@
+import { GameText } from "@entities/game-text";
 import { ChaosToken } from "@features/game/chaos-bag";
 import { color } from "@shared/config";
 import { Row } from "@shared/ui";
 import { View } from "react-native";
 import styled from "styled-components";
-import { GameText } from "../../../../game-text";
 import { refPx as upx } from "../../lib";
 
 export const Container: typeof View = styled(View)`

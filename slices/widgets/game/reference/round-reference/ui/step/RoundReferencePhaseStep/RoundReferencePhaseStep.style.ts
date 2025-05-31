@@ -1,7 +1,7 @@
 import { ArnoPro, STKaiti, STXinwei, SanCn, Yoon } from "@assets/fonts";
+import type { ComponentStyleMap } from "@entities/game-text";
 import type { TimingPhaseStepType } from "@features/game";
 import { getKeyConfig } from "@shared/lib";
-import type { ComponentStyleMap } from "../../../../../game-text";
 
 const zhComponentStyles: ComponentStyleMap = {
 	i: {

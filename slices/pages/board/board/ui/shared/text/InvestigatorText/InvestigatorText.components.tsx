@@ -1,6 +1,6 @@
 import { ArnoPro } from "@assets/fonts";
+import { GameText } from "@entities/game-text";
 import { color } from "@shared/config";
-import { GameText } from "@widgets/game/game-text";
 import styled from "styled-components/native";
 
 export const Text: typeof GameText = styled(GameText)`

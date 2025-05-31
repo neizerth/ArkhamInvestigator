@@ -1,9 +1,9 @@
-import type { PropsWithUnit } from "@shared/model";
 import {
 	type ComponentStyleMap,
 	GameText,
 	type GameTextProps,
-} from "@widgets/game/game-text";
+} from "@entities/game-text";
+import type { PropsWithUnit } from "@shared/model";
 import type { InvestigatorSignature } from "arkham-investigator-data";
 import { mergeDeepRight } from "ramda";
 import { getInvestigatorFlavorStyles } from "./InvestigatorFlavor.styles";

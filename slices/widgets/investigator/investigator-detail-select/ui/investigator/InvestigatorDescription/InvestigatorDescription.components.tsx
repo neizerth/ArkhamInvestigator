@@ -1,10 +1,10 @@
 import { Alegreya } from "@assets/fonts";
+import { GameText } from "@entities/game-text";
 import { color, font, size } from "@shared/config";
 import { Column, Row, UnscaledText } from "@shared/ui";
 import { Image as BaseImage } from "react-native";
 import { View } from "react-native";
 import styled from "styled-components/native";
-import { GameText } from "../../../../../game/game-text";
 import { InvestigatorSkillsPreview } from "../../../../investigator-skills-preview";
 import { InvestigatorCounters } from "../InvestigatorCounters";
 import { InvestigatorStats } from "../InvestigatorStats";

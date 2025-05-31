@@ -1,4 +1,4 @@
-import type { ComponentStyleMap } from "@widgets/game/game-text";
+import type { ComponentStyleMap } from "@entities/game-text";
 import { mergeDeepRight } from "ramda";
 import * as C from "./InvestigatorText.components";
 import { getInvestigatorTextStyle } from "./InvestigatorText.styles";

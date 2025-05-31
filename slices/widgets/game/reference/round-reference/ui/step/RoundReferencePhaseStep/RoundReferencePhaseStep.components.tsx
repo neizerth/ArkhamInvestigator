@@ -1,8 +1,8 @@
+import { GameText, type GameTextProps } from "@entities/game-text";
 import { size } from "@shared/config";
 import { Row } from "@shared/ui";
 import type { FC } from "react";
 import styled from "styled-components";
-import { GameText, type GameTextProps } from "../../../../../game-text";
 import { phaseContentFontSize } from "../../../config";
 import { StepDoom } from "../StepDoom";
 import { StepResources } from "../StepResources";

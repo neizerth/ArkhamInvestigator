@@ -1,6 +1,6 @@
+import { GameText } from "@entities/game-text";
 import { color, font, size } from "@shared/config";
 import { Icon as BaseIcon } from "@shared/ui";
-import { GameText } from "@widgets/game/game-text";
 import { View } from "react-native";
 import styled from "styled-components/native";
 
