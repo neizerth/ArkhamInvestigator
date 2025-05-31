@@ -52,7 +52,7 @@ export const Up: typeof Arrow = styled(Arrow)`
 `;
 
 export const Down: typeof Arrow = styled(Arrow)`
-  bottom: -33px;
+  bottom: -28px;
 
 	justify-content: flex-end;
 `;

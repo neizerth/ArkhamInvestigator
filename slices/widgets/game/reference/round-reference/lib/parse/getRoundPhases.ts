@@ -1,5 +1,4 @@
 import type { RulesItem } from "@shared/model";
-import { v4 } from "uuid";
 import type {
 	TimingPhase,
 	TimingPhaseStep,
@@ -8,6 +7,7 @@ import type {
 import { formatPhaseStepText } from "./formatPhaseStepText";
 import { getPhaseStepColor } from "./getPhaseStepColor";
 import { getPhaseStepId } from "./getPhaseStepId";
+import { getPhaseText } from "./getPhaseText";
 
 const stepMapping: Record<string, TimingPhaseStepType> = {
 	green: "step",
@@ -34,9 +34,12 @@ export const getRoundPhases = (item?: RulesItem) => {
 		}
 		const { color = "", text } = cell;
 		if (currentPhase === null) {
+			const { title, hint } = getPhaseText(text);
+
 			currentPhase = {
-				id: v4(),
-				title: text,
+				id: `phase-${phases.length}`,
+				title,
+				hint,
 				position: phases.length + 1,
 				steps: [],
 			};
@@ -48,6 +51,7 @@ export const getRoundPhases = (item?: RulesItem) => {
 		const id = getPhaseStepId({
 			type,
 			text,
+			position: currentPhase.steps.length,
 		});
 
 		const step: TimingPhaseStep = {

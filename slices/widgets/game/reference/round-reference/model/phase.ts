@@ -1,6 +1,7 @@
 export type TimingPhase = {
 	id: string;
 	title: string;
+	hint?: string;
 	position: number;
 	steps: TimingPhaseStep[];
 };

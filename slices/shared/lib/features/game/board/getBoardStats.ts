@@ -3,16 +3,9 @@ import type {
 	InvestigatorSkillType,
 } from "@shared/model";
 
-type Stats = Record<InvestigatorMainStatType | InvestigatorSkillType, number>;
+import type { InvestigatorSignature } from "arkham-investigator-data";
 
-type Options = {
-	health: number;
-	sanity: number;
-	skill_agility: number;
-	skill_combat: number;
-	skill_intellect: number;
-	skill_willpower: number;
-};
+type Stats = Record<InvestigatorMainStatType | InvestigatorSkillType, number>;
 
 export const getBoardStats = ({
 	health,
@@ -21,7 +14,7 @@ export const getBoardStats = ({
 	skill_combat,
 	skill_intellect,
 	skill_willpower,
-}: Options): Stats => ({
+}: InvestigatorSignature): Stats => ({
 	health,
 	sanity,
 	agility: skill_agility,

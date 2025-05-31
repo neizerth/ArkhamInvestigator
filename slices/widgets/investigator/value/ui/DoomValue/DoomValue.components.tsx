@@ -15,7 +15,7 @@ export const Value: typeof IconNumber = styled(IconNumber).attrs({
 		flex: 0,
 	},
 	strokeStyle: {
-		color: color.doom.dark,
+		color: color.black,
 	},
 })`
     font-size: 24px;

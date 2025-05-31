@@ -1,9 +1,9 @@
-import { v4 } from "uuid";
 import type { TimingPhaseStepId, TimingPhaseStepType } from "../../model";
 
 type Options = {
 	text: string;
 	type: TimingPhaseStepType;
+	position: number;
 };
 
 const idMapping: Record<string, TimingPhaseStepId> = {
@@ -11,11 +11,11 @@ const idMapping: Record<string, TimingPhaseStepId> = {
 	"4.4": "upkeep-resource",
 };
 
-export const getPhaseStepId = ({ text, type }: Options): string => {
+export const getPhaseStepId = ({ text, type, position }: Options): string => {
 	const [id] = text.split(" ");
 
 	if (type !== "step") {
-		return v4();
+		return `${type}-${position}`;
 	}
 
 	if (id in idMapping) {

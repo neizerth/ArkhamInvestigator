@@ -17,7 +17,7 @@ export const ImageBackground = ({
 	children,
 	style,
 	imageStyle,
-	visible = false,
+	visible = true,
 	...props
 }: ImageBackgroundProps) => {
 	const pickSize = pick(["width", "height"]);

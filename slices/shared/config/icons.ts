@@ -6,6 +6,7 @@ const baseIcons = {
 	clues: "clue",
 	actions: "action",
 	resources: "resource",
+	upkeepResourcesIncrease: "resource",
 } as const;
 
 export const classicStatIcons: Record<InvestigatorBoardStat, string> = {
