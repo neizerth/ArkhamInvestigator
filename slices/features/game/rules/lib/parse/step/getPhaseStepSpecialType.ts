@@ -2,6 +2,7 @@ import type { TimingPhaseStepSpecialType } from "../../../model";
 
 const idMapping: Record<string, TimingPhaseStepSpecialType> = {
 	"1.2": "mythos-doom",
+	"4.2": "reset-actions",
 	"4.4": "upkeep-resource",
 };
 

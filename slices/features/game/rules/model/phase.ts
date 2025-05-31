@@ -18,4 +18,7 @@ export type TimingPhaseStep = {
 	color?: string;
 };
 
-export type TimingPhaseStepSpecialType = "mythos-doom" | "upkeep-resource";
+export type TimingPhaseStepSpecialType =
+	| "mythos-doom"
+	| "upkeep-resource"
+	| "reset-actions";

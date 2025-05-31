@@ -8,6 +8,7 @@ import { useAppTranslation } from "../../../../i18n";
 import { useModal } from "../../../../modal";
 import {
 	goToNextTimingWizardStep as goToNextStep,
+	processCurrentTimingWizardStep as processStep,
 	selectNextTimingWizardStep,
 	selectTimingWizardActive,
 	selectTimingWizardPhase,
@@ -31,6 +32,7 @@ export const useTimingPhaseWizard = () => {
 	const title = phase?.title || "";
 
 	const next = useCallback(() => {
+		dispatch(processStep());
 		dispatch(goToNextStep());
 		return nextType === "end";
 	}, [dispatch, nextType]);

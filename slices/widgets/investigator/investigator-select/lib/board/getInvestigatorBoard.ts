@@ -1,11 +1,11 @@
 import {
 	DEFAULT_HAND_SIZE,
-	DEFAULT_UPKEEP_RESOURCES_INCREASE,
 	NEW_TURN_ACTIONS_COUNT,
 	START_GAME_RESOURCES_COUNT,
 } from "@shared/config";
 import { getBoardStats } from "@shared/lib";
 import type { InvestigatorBoard, SelectedInvestigator } from "@shared/model";
+import { getDefaultUpkeepResourceincrease } from "./getDefaultUpkeepResourceincrease";
 
 type Options = {
 	id: number;
@@ -23,13 +23,17 @@ export const getInvestigatorBoard = ({
 	const { signature, image } = selection;
 	const { additionalAction } = signature;
 
+	const upkeepResourcesIncrease = getDefaultUpkeepResourceincrease(
+		signature.code,
+	);
+
 	const initialValue = {
 		...getBoardStats(signature),
 		additionalAction: Boolean(additionalAction),
 		resources: START_GAME_RESOURCES_COUNT,
 		actions: NEW_TURN_ACTIONS_COUNT,
 		handSize: DEFAULT_HAND_SIZE,
-		upkeepResourcesIncrease: DEFAULT_UPKEEP_RESOURCES_INCREASE,
+		upkeepResourcesIncrease,
 		clues: 0,
 		doom: 0,
 	};

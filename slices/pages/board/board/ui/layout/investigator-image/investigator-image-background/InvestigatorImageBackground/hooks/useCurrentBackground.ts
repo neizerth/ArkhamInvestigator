@@ -8,7 +8,7 @@ export const useCurrentBackground = () => {
 	const { view } = useContext(LayoutContext);
 	const image = useAppSelector(selectCurrentBoardProp("image"));
 	const offsets = useImageOffsets();
-	const offsetBottom = offsets[image.id] || 0;
+	const offsetBottom = (image && offsets[image.id]) || 0;
 
 	return useMemo(() => {
 		if (!image) {

@@ -81,6 +81,12 @@
 	"board.help.pins.swipe": "Swipe down on a pinned calculation to go to a page where you've created this calculation",
 	"board.help.longPress.investigatorSelect": "If you are playing with 2+ investigators, hold down on the mini image to view all investigators' stats",
 
+	"upkeep.investigator.getResources_one": "{{investigatorName}} gets {{resourceCount}} resource",
+	"upkeep.investigator.getResources_other": "{{investigatorName}} gets {{resourceCount}} resources",
+	"upkeep.investigator.actionsReset": "{{investigatorName}}: Actions reset",
+
+	"mythos.doom": "Placed 1 doom on the current agenda. Total doom: {{doom}}",
+
 	"Show initial Health/Sanity": "Show initial Health/Sanity",
 
 	"Chaos bag loading animation": "Chaos bag loading animation",
