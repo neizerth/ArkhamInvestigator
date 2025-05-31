@@ -1,11 +1,11 @@
 import { loadLocaleData } from "@shared/api";
 import {
-	setRules,
 	setSignatureGroups,
 	setStories,
 	setTabooSignatures,
 } from "@shared/lib";
 import type { AppThunk } from "@shared/model";
+import { setRules } from "../../../../../../../game/rules/lib/store/features/rules";
 import { updateBoardTranslations } from "./updateBoardTranslations";
 
 export const loadContentTranslation =

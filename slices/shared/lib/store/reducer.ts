@@ -3,6 +3,7 @@ import {
 	hapticReducer,
 	i18nReducer,
 	modalReducer,
+	rulesReducer,
 	soundReducer,
 } from "../../../features";
 import * as reducer from "./features/reducer";
@@ -14,4 +15,5 @@ export default {
 	...modalReducer,
 	...chaosBagReducer,
 	...soundReducer,
+	...rulesReducer,
 };

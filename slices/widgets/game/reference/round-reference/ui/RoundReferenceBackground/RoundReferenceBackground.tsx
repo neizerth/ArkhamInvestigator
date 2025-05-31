@@ -5,7 +5,7 @@ import Svg, {
 	type SvgProps,
 } from "react-native-svg";
 
-export type RoundReferencePhaseBackgroundProps = SvgProps & {
+export type RoundReferenceBackgroundProps = SvgProps & {
 	backgroundColor: string;
 	offsetX?: string | number;
 	offsetY?: string | number;
@@ -13,14 +13,14 @@ export type RoundReferencePhaseBackgroundProps = SvgProps & {
 	rectHeight?: string | number;
 };
 
-export const RoundReferencePhaseBackground = ({
+export const RoundReferenceBackground = ({
 	backgroundColor,
 	offsetX = "3%",
 	offsetY = "3%",
 	rectHeight = "94%",
 	rectWidth = "94%",
 	...props
-}: RoundReferencePhaseBackgroundProps) => {
+}: RoundReferenceBackgroundProps) => {
 	return (
 		<Svg {...props} height="100%" width="100%">
 			<Filter id="blurry">

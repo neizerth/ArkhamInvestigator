@@ -1,6 +1,6 @@
+import type { TimingPhase } from "@features/game";
+import { roundPhaseColors } from "@features/game/rules/config";
 import type { ViewProps } from "react-native";
-import { phaseColors } from "../../config";
-import type { TimingPhase } from "../../model";
 import * as C from "./RoundReferencePhase.components";
 
 export type RoundReferencePhaseProps = ViewProps & {
@@ -18,7 +18,7 @@ export const RoundReferencePhase = ({
 	...props
 }: RoundReferencePhaseProps) => {
 	const { position, steps } = phase;
-	const backgroundColor = phaseColors[position - 1];
+	const backgroundColor = roundPhaseColors[position - 1];
 
 	const toggle = open ? onClose : onOpen;
 

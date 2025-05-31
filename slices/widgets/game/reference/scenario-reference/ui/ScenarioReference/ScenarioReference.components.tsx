@@ -1,11 +1,11 @@
 import { ArnoPro, STXinwei, SanCn } from "@assets/fonts";
 import { scenarioReferenceImage } from "@assets/images/game/reference";
+import { ReferenceTitle } from "@features/game/rules";
 import { withLocale } from "@features/i18n";
 import { color, size } from "@shared/config";
 import { Icon, ImageBackground } from "@shared/ui";
 import { View } from "react-native";
 import styled from "styled-components/native";
-import { ReferenceTitle } from "../../../reference-title";
 import { currentScenarioReferenceSize as refSize } from "../../config";
 import { refUnit as unit, refPx as upx } from "../../lib";
 import { ScenarioReferenceEffects } from "../ScenarioReferenceEffects";

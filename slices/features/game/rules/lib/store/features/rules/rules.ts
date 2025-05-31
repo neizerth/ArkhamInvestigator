@@ -3,11 +3,13 @@ import type { RulesItem } from "@shared/model";
 import { createSliceState } from "redux-toolkit-helpers";
 
 export type IRulesState = {
-	rules: RulesItem[];
+	rules?: RulesItem[];
+	openTimingPhases?: number[];
 };
 
 const initialState: IRulesState = {
 	rules: [],
+	openTimingPhases: [],
 };
 
 export const rules = createSlice({
@@ -15,8 +17,8 @@ export const rules = createSlice({
 	...createSliceState(initialState),
 });
 
-export const { setRules } = rules.actions;
+export const { setRules, setOpenTimingPhases } = rules.actions;
 
-export const { selectRules } = rules.selectors;
+export const { selectRules, selectOpenTimingPhases } = rules.selectors;
 
 export default rules.reducer;

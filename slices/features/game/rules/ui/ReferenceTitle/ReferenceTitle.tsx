@@ -1,8 +1,8 @@
 import { StyleSheet, type TextProps, type ViewProps } from "react-native";
 
-import { selectCurrentLanguage } from "@features/i18n";
 import { color, font } from "@shared/config";
 import { useAppSelector } from "@shared/lib";
+import { selectCurrentLanguage } from "../../../../i18n";
 import { getReferenceStyle } from "./ReferenceStyle.style";
 import * as C from "./ReferenceTitle.components";
 

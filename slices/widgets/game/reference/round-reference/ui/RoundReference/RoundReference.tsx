@@ -1,29 +1,36 @@
-import { REMOVE_CLIPPED_SUBVIEWS } from "@shared/config";
-import { useAppSelector, useScrollToIndex } from "@shared/lib";
+import {
+	type TimingPhase,
+	selectOpenTimingPhases,
+	selectRoundPhases,
+	selectTimingRules,
+	useTimingPhase,
+} from "@features/game";
+import {
+	useAppDispatch,
+	useAppSelector,
+	useScrollSpy,
+	useScrollToIndex,
+} from "@shared/lib";
 import { Delay } from "@shared/ui";
-import memoize from "fast-memoize";
-import { equals, propEq, reject } from "ramda";
-import { useCallback, useRef, useState } from "react";
-import type { FlatListProps, ListRenderItem, ViewProps } from "react-native";
+import { useCallback, useRef } from "react";
+import type { ListRenderItem, ViewProps } from "react-native";
 import type { FlatList } from "react-native-gesture-handler";
-import { selectTimingRules } from "../../lib";
-import { getRoundPhases } from "../../lib";
-import type { TimingPhase } from "../../model";
 import * as C from "./RoundReference.components";
+import { useActivePhase } from "./hooks";
 
 export type RoundReferenceProps = ViewProps;
 
 type List = FlatList<TimingPhase>;
-type ListProps = FlatListProps<TimingPhase>;
-
-type ViewableItemsCallback = Exclude<
-	ListProps["onViewableItemsChanged"],
-	undefined | null
->;
 
 export const RoundReference = (props: RoundReferenceProps) => {
+	const dispatch = useAppDispatch();
 	const item = useAppSelector(selectTimingRules);
+	const phases = useAppSelector(selectRoundPhases);
+	const openPhases = useAppSelector(selectOpenTimingPhases);
 
+	const phaseController = useTimingPhase();
+
+	const [showActivePhase, onScroll] = useActivePhase();
 	const ref = useRef<List>(null);
 
 	const scrollToTop = useScrollToIndex({
@@ -31,50 +38,31 @@ export const RoundReference = (props: RoundReferenceProps) => {
 		index: 0,
 	});
 
-	const phases = getRoundPhases(item);
+	const [activePhase, onViewableItemsChanged] = useScrollSpy<TimingPhase>();
 
-	const [openPhases, setOpenPhases] = useState<number[]>([]);
-	const [stickyPhase, setStickyPhase] = useState(phases[0]);
-
-	const onViewableItemsChanged = useCallback<ViewableItemsCallback>(
-		(info) => {
-			const [first] = info.viewableItems.filter(propEq(true, "isViewable"));
-			const { item } = first;
-			if (stickyPhase.position === item.position) {
-				return;
-			}
-			// setStickyPhase(item);
+	const isPhaseOpen = useCallback(
+		(id: number) => {
+			return openPhases?.includes(id);
 		},
-		[stickyPhase],
+		[openPhases],
 	);
 
-	const openPhase = useCallback(
-		memoize((index: number) => () => {
-			setOpenPhases((data) => [...data, index]);
-		}),
-		[],
-	);
-
-	const closePhase = useCallback(
-		memoize((index: number) => () => {
-			setOpenPhases((data) => reject(equals(index), data));
-		}),
-		[],
-	);
+	const renderActivePhase =
+		activePhase && isPhaseOpen(activePhase.position) && showActivePhase;
 
 	const renderItem: ListRenderItem<TimingPhase> = useCallback(
 		({ item }) => {
-			const open = openPhases.includes(item.position);
+			const open = isPhaseOpen(item.position);
 			return (
 				<C.Phase
 					phase={item}
 					open={open}
-					onOpen={openPhase(item.position)}
-					onClose={closePhase(item.position)}
+					onOpen={phaseController.open(item.position)}
+					onClose={phaseController.close(item.position)}
 				/>
 			);
 		},
-		[openPhases, openPhase, closePhase],
+		[isPhaseOpen, phaseController],
 	);
 
 	if (!item) {
@@ -90,15 +78,21 @@ export const RoundReference = (props: RoundReferenceProps) => {
 					<C.TitleContent>{title}</C.TitleContent>
 				</C.Title>
 				<Delay delayMs={0}>
-					<C.Phases
-						ref={ref}
-						data={phases}
-						renderItem={renderItem}
-						onStartReached={scrollToTop}
-						// onViewableItemsChanged={onViewableItemsChanged}
-						keyboardShouldPersistTaps="always"
-						removeClippedSubviews={REMOVE_CLIPPED_SUBVIEWS}
-					/>
+					<C.Body>
+						{activePhase && renderActivePhase && (
+							<C.ActivePhase phase={activePhase} />
+						)}
+						<C.Phases
+							ref={ref}
+							data={phases}
+							renderItem={renderItem}
+							onStartReached={scrollToTop}
+							onScroll={onScroll}
+							onViewableItemsChanged={onViewableItemsChanged}
+							keyboardShouldPersistTaps="always"
+							removeClippedSubviews={false}
+						/>
+					</C.Body>
 				</Delay>
 			</C.Content>
 		</C.Container>

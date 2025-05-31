@@ -6,4 +6,3 @@ export * from "./investigators";
 export * from "./stories";
 export * from "./icons";
 export * from "./skillCheck";
-export * from "./rules";

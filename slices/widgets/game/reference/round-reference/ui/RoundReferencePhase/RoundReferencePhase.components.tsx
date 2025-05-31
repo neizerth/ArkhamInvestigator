@@ -15,11 +15,11 @@ import type { FC } from "react";
 import { View, type ViewProps } from "react-native";
 import styled, { css } from "styled-components/native";
 import { GameText } from "../../../../game-text";
-import { RoundReferencePhaseStep, StepDoom, StepResources } from "../step";
 import {
-	RoundReferencePhaseBackground,
-	type RoundReferencePhaseBackgroundProps,
-} from "./RoundReferencePhaseBackground";
+	RoundReferenceBackground,
+	type RoundReferenceBackgroundProps,
+} from "../RoundReferenceBackground";
+import { RoundReferencePhaseStep, StepDoom, StepResources } from "../step";
 
 type ContainerProps = ViewProps & {
 	open?: boolean;
@@ -78,11 +78,9 @@ export const ToggleIcon: FC<ToggleIconProps> = styled(Icon)`
 	`}
 `;
 
-type BackgroundProps = RoundReferencePhaseBackgroundProps & PropsWithOpen;
+type BackgroundProps = RoundReferenceBackgroundProps & PropsWithOpen;
 
-export const Background: FC<BackgroundProps> = styled(
-	RoundReferencePhaseBackground,
-)`
+export const Background: FC<BackgroundProps> = styled(RoundReferenceBackground)`
 	top: 0;
 	bottom: -5%;
 	left: 0;
@@ -128,6 +126,7 @@ export const Hint = withLocale({
 			fontSize: 14,
 			color: color.rulesText,
 			paddingHorizontal: 13,
+			paddingBottom: 2,
 		},
 		ko: {
 			fontFamily: Yoon.D330.italic,

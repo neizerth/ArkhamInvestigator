@@ -1,7 +1,7 @@
+import type { TimingPhaseStep } from "@features/game";
 import { selectCurrentLanguage } from "@features/i18n";
 import { useAppSelector } from "@shared/lib";
 import type { ViewProps } from "react-native";
-import type { TimingPhaseStep } from "../../../model";
 import * as C from "./RoundReferencePhaseStep.components";
 import { getStepTextComponents } from "./RoundReferencePhaseStep.style";
 
