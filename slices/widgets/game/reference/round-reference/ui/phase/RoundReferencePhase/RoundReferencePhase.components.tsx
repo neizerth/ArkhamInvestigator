@@ -14,12 +14,14 @@ import { Icon, type IconProps, Row, type UnscaledTextProps } from "@shared/ui";
 import type { FC } from "react";
 import { View, type ViewProps } from "react-native";
 import styled, { css } from "styled-components/native";
-import { GameText } from "../../../../game-text";
+import { GameText } from "../../../../../game-text";
+import { phaseContentFontSize, phaseTitleFontSize } from "../../../config";
 import {
 	RoundReferenceBackground,
 	type RoundReferenceBackgroundProps,
-} from "../RoundReferenceBackground";
-import { RoundReferencePhaseStep, StepDoom, StepResources } from "../step";
+} from "../../RoundReferenceBackground";
+import { RoundReferencePhaseStep } from "../../step";
+import { RoundPhaseActions } from "../RoundPhaseActions";
 
 type ContainerProps = ViewProps & {
 	open?: boolean;
@@ -99,12 +101,11 @@ export const BaseTitle = withLocale({
 	style: {
 		default: {
 			fontFamily: Arkhamic.regular,
-			fontSize: 16,
+			fontSize: phaseTitleFontSize,
 			color: color.rulesText,
 		},
 		ru: {
 			fontFamily: Conkordia.regular,
-			fontSize: 17,
 		},
 		ko: {
 			fontFamily: SanCn.bold,
@@ -123,7 +124,7 @@ export const Hint = withLocale({
 	style: {
 		default: {
 			fontFamily: ArnoPro.italic,
-			fontSize: 14,
+			fontSize: phaseContentFontSize,
 			color: color.rulesText,
 			paddingHorizontal: 13,
 			paddingBottom: 2,
@@ -179,18 +180,10 @@ export const StepText: typeof GameText = styled(GameText)`
 	
 `;
 
-const stepControlStyle = css`
+export const Actions: typeof RoundPhaseActions = styled(RoundPhaseActions)`
 	z-index: 2;
 	position: absolute;
+	top: 0;
+	bottom: 0;
 	right: 35px;
-`;
-
-export const Doom: typeof StepDoom = styled(StepDoom)`
-	${stepControlStyle};
-	top: 6px;
-`;
-
-export const Resources: typeof StepResources = styled(StepResources)`
-	${stepControlStyle};
-	top: 4px;
 `;

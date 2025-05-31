@@ -3,16 +3,25 @@ import type {
 	TimingPhase,
 	TimingPhaseStep,
 	TimingPhaseStepType,
+	TimingPhaseType,
 } from "../../model";
 import { formatPhaseStepText } from "./formatPhaseStepText";
 import { getPhaseStepColor } from "./getPhaseStepColor";
 import { getPhaseStepId } from "./getPhaseStepId";
+import { getPhaseStepSpecialType } from "./getPhaseStepSpecialType";
 import { getPhaseText } from "./getPhaseText";
 
 const stepMapping: Record<string, TimingPhaseStepType> = {
 	green: "step",
 	red: "player-window",
 	grey: "end",
+};
+
+const typePositionMapping: Record<number, TimingPhaseType> = {
+	1: "mythos",
+	2: "investigation",
+	3: "enemy",
+	4: "upkeep",
 };
 
 export const getRoundPhases = (item?: RulesItem) => {
@@ -35,12 +44,15 @@ export const getRoundPhases = (item?: RulesItem) => {
 		const { color = "", text } = cell;
 		if (currentPhase === null) {
 			const { title, hint } = getPhaseText(text);
+			const position = phases.length + 1;
+			const type = typePositionMapping[position];
 
 			currentPhase = {
 				id: `phase-${phases.length}`,
 				title,
+				type,
 				hint,
-				position: phases.length + 1,
+				position,
 				steps: [],
 			};
 			continue;
@@ -54,9 +66,12 @@ export const getRoundPhases = (item?: RulesItem) => {
 			position: currentPhase.steps.length,
 		});
 
+		const specialType = getPhaseStepSpecialType(text);
+
 		const step: TimingPhaseStep = {
 			id,
 			type,
+			specialType,
 			text: formatPhaseStepText({ text, type }),
 			color: getPhaseStepColor(type),
 		};

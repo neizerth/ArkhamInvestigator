@@ -1,4 +1,4 @@
-import type { TimingPhaseStepId, TimingPhaseStepType } from "../../model";
+import type { TimingPhaseStepType } from "../../model";
 
 type Options = {
 	text: string;
@@ -6,21 +6,16 @@ type Options = {
 	position: number;
 };
 
-const idMapping: Record<string, TimingPhaseStepId> = {
-	"1.2": "mythos-doom",
-	"4.4": "upkeep-resource",
-};
-
 export const getPhaseStepId = ({ text, type, position }: Options): string => {
 	const [id] = text.split(" ");
 
-	if (type !== "step") {
+	if (type === "step") {
+		return id;
+	}
+
+	if (type === "player-window") {
 		return `${type}-${position}`;
 	}
 
-	if (id in idMapping) {
-		return idMapping[id];
-	}
-
-	return idMapping[id] || id;
+	return type;
 };

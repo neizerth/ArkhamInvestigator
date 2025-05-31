@@ -31,8 +31,7 @@ export const RoundReferencePhase = ({
 							<C.Title open={open}>{phase.title}</C.Title>
 							<C.ToggleIcon icon="right-arrow" open={open} />
 						</C.Toggle>
-						{!open && phase.position === 1 && <C.Doom />}
-						{!open && phase.position === 4 && <C.Resources />}
+						<C.Actions phase={phase} active={open} />
 					</C.Header>
 					{open && (
 						<C.Details>

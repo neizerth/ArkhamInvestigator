@@ -6,8 +6,7 @@ import { View } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import styled from "styled-components/native";
 import { currentRoundReferenceSize } from "../../config";
-import { RoundPhaseHeader } from "../RoundPhaseHeader";
-import { RoundReferencePhase } from "../RoundReferencePhase";
+import { RoundPhaseHeader, RoundReferencePhase } from "../phase";
 
 export const Container: typeof ImageBackground = styled(ImageBackground).attrs({
 	source: roundReferenceAssets.background,
@@ -40,7 +39,7 @@ export const ActivePhase: typeof RoundPhaseHeader = styled(RoundPhaseHeader)`
 `;
 
 export const TitleContent: typeof ReferenceTitle = styled(ReferenceTitle)`
-	font-size: ${font.size.medium}px;
+	font-size: ${font.size.large}px;
   color: ${color.title};
 `;
 

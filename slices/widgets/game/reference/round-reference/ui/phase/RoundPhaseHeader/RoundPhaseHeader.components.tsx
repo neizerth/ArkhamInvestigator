@@ -5,7 +5,8 @@ import { color } from "@shared/config";
 import { Row } from "@shared/ui";
 import { View } from "react-native";
 import styled from "styled-components/native";
-import { RoundReferenceBackground } from "../RoundReferenceBackground";
+import { phaseTitleFontSize } from "../../../config";
+import { RoundReferenceBackground } from "../../RoundReferenceBackground";
 
 export const Container: typeof TouchableOpacity = styled(TouchableOpacity)`
 `;
@@ -36,12 +37,11 @@ export const Title = withLocale({
 	style: {
 		default: {
 			fontFamily: Arkhamic.regular,
-			fontSize: 16,
+			fontSize: phaseTitleFontSize,
 			color: color.rulesText,
 		},
 		ru: {
 			fontFamily: Conkordia.regular,
-			fontSize: 17,
 		},
 		ko: {
 			fontFamily: SanCn.bold,

@@ -26,8 +26,8 @@ export const RoundReferencePhaseStep = ({
 				end={step.type === "end"}
 				componentStyles={componentStyles}
 			/>
-			{step.id === "mythos-doom" && <C.Doom />}
-			{step.id === "upkeep-resource" && <C.Resources />}
+			{step.specialType === "mythos-doom" && <C.Doom />}
+			{step.specialType === "upkeep-resource" && <C.Resources />}
 		</C.Container>
 	);
 };

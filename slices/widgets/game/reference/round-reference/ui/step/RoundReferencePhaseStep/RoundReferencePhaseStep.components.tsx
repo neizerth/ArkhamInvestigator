@@ -3,6 +3,7 @@ import { Row } from "@shared/ui";
 import type { FC } from "react";
 import styled from "styled-components";
 import { GameText, type GameTextProps } from "../../../../../game-text";
+import { phaseContentFontSize } from "../../../config";
 import { StepDoom } from "../StepDoom";
 import { StepResources } from "../StepResources";
 
@@ -25,7 +26,7 @@ export const Text: FC<TextProps> = styled(GameText).attrs(
 		},
 	}),
 )`
-
+	font-size: ${phaseContentFontSize}px;
 `;
 
 export const End: typeof Row = styled(Row)`

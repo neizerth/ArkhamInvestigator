@@ -1,27 +1,38 @@
-import { useAppDispatch } from "@shared/lib";
+import { useAppDispatch, useAppSelector } from "@shared/lib";
 import memoize from "fast-memoize";
 import { useCallback } from "react";
-import { closeTimingPhase, openTimingPhase } from "../store";
+import {
+	closeTimingPhase,
+	openTimingPhase,
+	selectOpenTimingPhases,
+} from "../store";
 
 export const useTimingPhase = () => {
 	const dispatch = useAppDispatch();
+	const openPhases = useAppSelector(selectOpenTimingPhases);
 
-	const open = useCallback(
+	const openPhase = useCallback(
 		memoize((id: number) => () => {
 			dispatch(openTimingPhase(id));
 		}),
 		[],
 	);
 
-	const close = useCallback(
+	const closePhase = useCallback(
 		memoize((id: number) => () => {
 			dispatch(closeTimingPhase(id));
 		}),
 		[],
 	);
 
+	const isPhaseOpen = useCallback(
+		(id: number) => openPhases?.includes(id),
+		[openPhases],
+	);
+
 	return {
-		open,
-		close,
+		isPhaseOpen,
+		openPhase,
+		closePhase,
 	};
 };
