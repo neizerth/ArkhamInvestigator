@@ -1,16 +1,14 @@
-import { size } from "@shared/config";
-import {
-	Outside as BaseOutside,
-	Text as BaseText,
-	Input as TextInput,
-} from "@shared/ui";
+import { GameText } from "@entities/game-text";
+import { color, font, size } from "@shared/config";
+import { Outside as BaseOutside, Input as TextInput } from "@shared/ui";
 import { KeyboardAvoidingView, View } from "react-native";
 import styled from "styled-components/native";
 import { FactionCardMemo as FactionCard } from "../../../../../widgets/investigator/faction/faction-card";
 import { FactionModalBoardSelect } from "../FactionModalBoardSelect";
 
-export const Text: typeof BaseText = styled(BaseText)`
-
+export const Text: typeof GameText = styled(GameText)`
+  color: ${color.light10};
+  font-size: ${font.size.default}px;
 `;
 
 export const Card: typeof FactionCard = styled(FactionCard)`

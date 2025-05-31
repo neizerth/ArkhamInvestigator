@@ -57,7 +57,7 @@ export const FactionModal = ({ data, ...props }: FactionModalProps) => {
 					cancelText={cancelText}
 				>
 					<C.CardContent>
-						{text && <C.Text>{text}</C.Text>}
+						{text && <C.Text value={text} />}
 						{contentType === "input" && (
 							<C.Input
 								autoFocus
