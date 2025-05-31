@@ -33,13 +33,14 @@ export const getInvestigatorBoard = ({
 		resources: START_GAME_RESOURCES_COUNT,
 		actions: NEW_TURN_ACTIONS_COUNT,
 		handSize: DEFAULT_HAND_SIZE,
-		upkeepResourcesIncrease,
+		upkeepResourcesIncrease: 0,
 		clues: 0,
 		doom: 0,
 	};
 
 	const baseValue = {
 		...initialValue,
+		upkeepResourcesIncrease,
 	};
 
 	const value = {
@@ -47,6 +48,8 @@ export const getInvestigatorBoard = ({
 		health: Math.max(0, initialValue.health - physicalTrauma),
 		sanity: Math.max(0, initialValue.sanity - mentalTrauma),
 	};
+
+	console.log({ value, initialValue });
 
 	return {
 		id,

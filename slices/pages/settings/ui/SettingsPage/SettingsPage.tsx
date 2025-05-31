@@ -187,6 +187,13 @@ export const SettingsPage = () => {
 							actionCreator={S.setShowInvestigatorDoom}
 						/>
 					</C.Row>
+					<C.Row>
+						<C.Checkbox
+							label="Upkeep resources"
+							selector={S.selectShowUpkeepResources}
+							actionCreator={S.setShowUpkeepResources}
+						/>
+					</C.Row>
 					{CAN_ALWAYS_SHOW_GAME_TEXT && (
 						<>
 							<C.Rule />

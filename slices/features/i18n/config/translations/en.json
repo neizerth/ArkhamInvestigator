@@ -151,9 +151,10 @@
 	"Game settings": "Game settings",
 
 	"Select a campaign": "Select a campaign",
-	"Back Text": "Текст на обратной стороне",
+	"Back Text": "Back Text",
 
 	"Negative health/sanity": "Negative health/sanity",
 	"Unlimited chaos tokens": "Unlimited chaos tokens",
-	"Custom Content": "Custom Content"
+	"Custom Content": "Custom Content",
+	"Upkeep resources": "Upkeep resources"
 }

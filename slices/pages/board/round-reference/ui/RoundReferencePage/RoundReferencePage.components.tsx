@@ -8,7 +8,7 @@ export const Container: typeof View = styled(View)`
   justify-content: center;
   align-items: center;
 
-  background-color: ${color.modal.background.light};
+  background-color: ${color.modal.background.dark};
 `;
 
 export const Reference: typeof RoundReference = styled(RoundReference)`

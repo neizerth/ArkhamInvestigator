@@ -29,7 +29,7 @@ export const Value: typeof BaseValue = styled(BaseValue)`
   color: ${color.handSize};
 `;
 
-export const BaseHealth: FC<DefinedBaseStatPickerProps> = styled(
+export const BaseHandSize: FC<DefinedBaseStatPickerProps> = styled(
 	BaseStatPicker,
 ).attrs({
 	statType: "handSize",

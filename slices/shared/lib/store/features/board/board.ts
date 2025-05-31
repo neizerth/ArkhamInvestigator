@@ -25,6 +25,7 @@ export type IBoardState = {
 	showInitialHealthAndSanity: boolean;
 	alwaysShowSkillModifiers: boolean;
 	allowNegativeHealthAndSanity: boolean;
+	showUpkeepResources: boolean;
 
 	doom: number;
 	clues: number;
@@ -52,6 +53,7 @@ const initialState: IBoardState = {
 	showInitialHealthAndSanity: false,
 	alwaysShowSkillModifiers: false,
 	allowNegativeHealthAndSanity: false,
+	showUpkeepResources: false,
 	doom: 0,
 	clues: 0,
 	resources: 0,
@@ -90,6 +92,7 @@ export const {
 	setShowInitialHealthAndSanity,
 	setAlwaysShowSkillModifiers,
 	setAllowNegativeHealthAndSanity,
+	setShowUpkeepResources,
 } = board.actions;
 
 export const {
@@ -117,6 +120,7 @@ export const {
 	selectShowInitialHealthAndSanity,
 	selectAlwaysShowSkillModifiers,
 	selectAllowNegativeHealthAndSanity,
+	selectShowUpkeepResources,
 } = board.selectors;
 
 export default board.reducer;

@@ -10,6 +10,7 @@ export type StatPickerProps = Omit<PickerProps, "renderItem"> & {
 	textStyle?: ValueProps["textStyle"];
 	Component?: FC<ValueProps>;
 	signed?: boolean;
+	zeroSign?: string;
 };
 
 export const StatPicker = ({
@@ -17,12 +18,19 @@ export const StatPicker = ({
 	textStyle,
 	Component = C.Value,
 	signed,
+	zeroSign = "",
 	...props
 }: StatPickerProps) => {
 	const renderItem = useCallback(
 		(props: PickerItemInfo) => {
 			const { item } = props;
-			const value = signed && item > 0 ? signedNumber(item) : item;
+
+			const value = signed
+				? item === 0
+					? `${zeroSign}0`
+					: signedNumber(item)
+				: item;
+
 			return (
 				<Component
 					{...props}
@@ -32,7 +40,7 @@ export const StatPicker = ({
 				/>
 			);
 		},
-		[valueStyle, textStyle, Component, signed],
+		[valueStyle, textStyle, Component, signed, zeroSign],
 	);
 
 	return <C.Picker {...defaultStyles} {...props} renderItem={renderItem} />;

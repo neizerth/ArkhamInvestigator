@@ -29,7 +29,7 @@ export const HandSize = ({
 
 	return (
 		<C.Container {...props}>
-			{showBaseDiff && <C.BaseHealth />}
+			{showBaseDiff && <C.BaseHandSize />}
 			<C.Content style={contentContainerStyle}>
 				<C.Picker
 					value={value}

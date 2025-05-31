@@ -1,3 +1,4 @@
+import { selectShowUpkeepResources, useAppSelector } from "@shared/lib";
 import type { ImageBackgroundProps } from "@shared/ui";
 import type { PickerChangeEvent } from "@widgets/control/picker";
 import { range } from "ramda";
@@ -12,6 +13,7 @@ export type ResourcesProps = ImageBackgroundProps & {
 };
 
 const resourcesData = range(0, 101);
+const upkeepData = range(0, 21);
 
 export const Resources = ({
 	onChange: onChangeProp,
@@ -20,6 +22,7 @@ export const Resources = ({
 	value,
 	...props
 }: ResourcesProps) => {
+	const showUpkeepResources = useAppSelector(selectShowUpkeepResources);
 	const onChange = useCallback(
 		({ value }: PickerChangeEvent) => {
 			onChangeProp?.(value);
@@ -29,13 +32,18 @@ export const Resources = ({
 
 	return (
 		<C.Container {...props}>
-			<C.Picker
-				value={value}
-				data={resourcesData}
-				onValueChanged={onChange}
-				onLongPress={onLongPress}
-				onPress={onPress}
-			/>
+			{showUpkeepResources && (
+				<C.UpkeepResources data={upkeepData} zeroSign="+" />
+			)}
+			<C.Content>
+				<C.Picker
+					value={value}
+					data={resourcesData}
+					onValueChanged={onChange}
+					onLongPress={onLongPress}
+					onPress={onPress}
+				/>
+			</C.Content>
 		</C.Container>
 	);
 };

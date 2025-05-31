@@ -2,7 +2,6 @@ import {
 	selectCurrentStatBaseValue,
 	selectCurrentStatInitialValue,
 	selectCurrentStatValue,
-	selectCurrentStatValues,
 	setStatTransaction,
 	useAppDispatch,
 	useAppSelector,
@@ -18,6 +17,7 @@ import * as C from "./BaseStatPicker.components";
 export type DefinedBaseStatPickerProps = Omit<StatPickerProps, "data"> & {
 	contentContainerStyle?: ViewStyle;
 	limitMaxValue?: boolean;
+	data?: number[];
 };
 
 export type BaseStatPickerProps = DefinedBaseStatPickerProps & {
@@ -28,18 +28,19 @@ export const BaseStatPicker = ({
 	statType,
 	contentContainerStyle,
 	limitMaxValue = true,
+	data: defaultData,
 	...props
 }: BaseStatPickerProps) => {
-	const selectValues = useMemo(
-		() => selectCurrentStatValues(statType),
-		[statType],
-	);
-
 	const value = useAppSelector(selectCurrentStatValue(statType));
 	const baseValue = useAppSelector(selectCurrentStatBaseValue(statType));
 	const initialValue = useAppSelector(selectCurrentStatInitialValue(statType));
 
-	const pickerData = [...range(-initialValue, 0), ...range(1, 10)];
+	const pickerData = useMemo(() => {
+		if (defaultData) {
+			return defaultData;
+		}
+		return [...range(-initialValue, 0), ...range(1, 10)];
+	}, [defaultData, initialValue]);
 
 	const diff = baseValue - initialValue;
 
@@ -72,6 +73,9 @@ export const BaseStatPicker = ({
 	}, [setDiff]);
 
 	const onPress = useCallback(() => {
+		if (diff === 0) {
+			return;
+		}
 		if (diff > 0) {
 			setDiff(diff - 1);
 		} else {

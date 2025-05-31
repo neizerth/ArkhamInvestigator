@@ -1,19 +1,55 @@
-import { color, gameAssets } from "@shared/config";
+import { color, gameAssets, size } from "@shared/config";
 import * as UI from "@shared/ui";
 import { Value as BaseValue } from "@widgets/investigator/value";
+import type { FC } from "react";
+import { View } from "react-native";
 import styled from "styled-components/native";
 import { assetsSize } from "../../../../../config";
 import { withStat } from "../../../../../lib";
+import { BaseStatPicker, type DefinedBaseStatPickerProps } from "../../common";
 import { StatPickerMemo as StatPicker } from "../../common/StatPicker";
 
-export const Container = withStat(UI.Resource, {
+const BaseContent = withStat(UI.Resource, {
 	height: assetsSize.resource,
 	ratio: gameAssets.resource.ratio,
 });
 
+export const Container: typeof View = styled(View)`
+	position: relative;
+	margin-top: ${-size.gap.xxl}px;
+	padding-top: ${size.gap.xxl}px;
+	padding-bottom: ${size.gap.default}px;
+	min-width: ${assetsSize.main}px;
+	align-items: center;
+`;
+
+export const Content: typeof BaseContent = styled(BaseContent)`
+	position: relative;
+`;
+
 export const Value: typeof BaseValue = styled(BaseValue)`
   color: ${color.resource};
 `;
+
+export const UpkeepResources: FC<DefinedBaseStatPickerProps> = styled(
+	BaseStatPicker,
+).attrs({
+	statType: "upkeepResourcesIncrease",
+	valueStyle: {
+		color: color.resource,
+		fontSize: 42,
+	},
+	itemHeight: assetsSize.main,
+	contentContainerStyle: {
+		position: "absolute",
+		zIndex: 4,
+		right: -10,
+		top: -10,
+	},
+	gap: 5,
+})`
+		
+	`;
 
 export const Picker: typeof StatPicker = styled(StatPicker).attrs({
 	valueStyle: {
