@@ -1,15 +1,17 @@
 import type { RulesItem } from "@shared/model";
 import type {
 	TimingPhase,
+	TimingPhaseId,
 	TimingPhaseStep,
 	TimingPhaseStepType,
-	TimingPhaseType,
 } from "../../model";
-import { formatPhaseStepText } from "./formatPhaseStepText";
-import { getPhaseStepColor } from "./getPhaseStepColor";
-import { getPhaseStepId } from "./getPhaseStepId";
-import { getPhaseStepSpecialType } from "./getPhaseStepSpecialType";
 import { getPhaseText } from "./getPhaseText";
+import {
+	formatPhaseStepText,
+	getPhaseStepColor,
+	getPhaseStepId,
+	getPhaseStepSpecialType,
+} from "./step";
 
 const stepMapping: Record<string, TimingPhaseStepType> = {
 	green: "step",
@@ -17,7 +19,7 @@ const stepMapping: Record<string, TimingPhaseStepType> = {
 	grey: "end",
 };
 
-const typePositionMapping: Record<number, TimingPhaseType> = {
+const typePositionMapping: Record<number, TimingPhaseId> = {
 	1: "mythos",
 	2: "investigation",
 	3: "enemy",
@@ -45,12 +47,11 @@ export const getRoundPhases = (item?: RulesItem) => {
 		if (currentPhase === null) {
 			const { title, hint } = getPhaseText(text);
 			const position = phases.length + 1;
-			const type = typePositionMapping[position];
+			const id = typePositionMapping[position];
 
 			currentPhase = {
-				id: `phase-${phases.length}`,
+				id,
 				title,
-				type,
 				hint,
 				position,
 				steps: [],

@@ -1,4 +1,4 @@
-import type { TimingPhaseStepType } from "../../model";
+import type { TimingPhaseStepType } from "../../../model";
 
 type Options = {
 	text: string;

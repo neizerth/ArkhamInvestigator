@@ -1,4 +1,4 @@
-import type { TimingPhaseStepSpecialType } from "../../model";
+import type { TimingPhaseStepSpecialType } from "../../../model";
 
 const idMapping: Record<string, TimingPhaseStepSpecialType> = {
 	"1.2": "mythos-doom",

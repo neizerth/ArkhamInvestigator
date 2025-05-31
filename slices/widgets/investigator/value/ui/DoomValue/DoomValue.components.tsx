@@ -1,4 +1,4 @@
-import { color, gameAssets } from "@shared/config";
+import { gameAssets } from "@shared/config";
 import { Doom, IconNumber } from "@shared/ui";
 import styled from "styled-components/native";
 import { Picker as BasePicker } from "../../../../control/picker";
@@ -15,11 +15,11 @@ export const Value: typeof IconNumber = styled(IconNumber).attrs({
 		flex: 0,
 	},
 	strokeStyle: {
-		color: color.black,
+		color: "#3a3317",
 	},
 })`
     font-size: 24px;
-    color: ${color.white};
+    color: #e3cfb4;
   `;
 
 export const Picker: typeof BasePicker = styled(BasePicker).attrs({

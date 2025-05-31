@@ -7,7 +7,7 @@ import {
 	SanCn,
 	Yoon,
 } from "@assets/fonts";
-import { TouchableOpacity } from "@features/haptic";
+import { IconButton, TouchableOpacity } from "@features/haptic";
 import { withLocale } from "@features/i18n";
 import { color, size } from "@shared/config";
 import { Icon, type IconProps, Row, type UnscaledTextProps } from "@shared/ui";
@@ -60,14 +60,32 @@ export const Content: FC<ContentProps> = styled(View)`
 
 export const Header: typeof Row = styled(Row)`
 	position: relative;
+	align-items: center;
+	padding-left: 10px;
+	gap: 10px;
 `;
 
 export const Toggle: typeof TouchableOpacity = styled(TouchableOpacity)`
-	padding: 10px 15px 15px;
+	padding: 10px 15px 15px 0px;
 	flex-direction: row;
 	justify-content: space-between;
 	align-items: center;
 	flex: 1;
+`;
+
+export const PlayIcon: typeof IconButton = styled(IconButton).attrs({
+	iconStyle: {
+		fontSize: 14,
+		lineHeight: 14,
+		color: color.title,
+	},
+})`
+	padding: 5px;
+	padding-bottom: 9px;
+`;
+
+export const NoPlay: typeof View = styled(View)`
+	width: 24px;
 `;
 
 type ToggleIconProps = IconProps & PropsWithOpen;

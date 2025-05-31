@@ -1,13 +1,12 @@
 export type TimingPhase = {
-	id: string;
+	id: TimingPhaseId;
 	title: string;
 	hint?: string;
-	type: TimingPhaseType;
 	position: number;
 	steps: TimingPhaseStep[];
 };
 
-export type TimingPhaseType = "mythos" | "investigation" | "enemy" | "upkeep";
+export type TimingPhaseId = "mythos" | "investigation" | "enemy" | "upkeep";
 
 export type TimingPhaseStepType = "step" | "player-window" | "end";
 

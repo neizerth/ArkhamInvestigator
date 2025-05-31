@@ -1,5 +1,7 @@
-import type { TimingPhase } from "@features/game";
+import { type TimingPhase, startTimingWizard } from "@features/game";
 import { roundPhaseColors } from "@features/game/rules/config";
+import { useAppDispatch } from "@shared/lib";
+import { useCallback } from "react";
 import type { ViewProps } from "react-native";
 import * as C from "./RoundReferencePhase.components";
 
@@ -17,16 +19,28 @@ export const RoundReferencePhase = ({
 	onClose,
 	...props
 }: RoundReferencePhaseProps) => {
+	const dispatch = useAppDispatch();
 	const { position, steps } = phase;
 	const backgroundColor = roundPhaseColors[position - 1];
 
 	const toggle = open ? onClose : onOpen;
+
+	const canPlay = phase.id !== "investigation";
+
+	const play = useCallback(() => {
+		dispatch(startTimingWizard(phase.id));
+	}, [dispatch, phase.id]);
 
 	return (
 		<C.Container {...props} open={open}>
 			<C.Wrapper>
 				<C.Content open={open}>
 					<C.Header>
+						{canPlay ? (
+							<C.PlayIcon icon="play2" onPress={play} />
+						) : (
+							<C.NoPlay />
+						)}
 						<C.Toggle onPress={toggle}>
 							<C.Title open={open}>{phase.title}</C.Title>
 							<C.ToggleIcon icon="right-arrow" open={open} />

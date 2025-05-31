@@ -3,6 +3,7 @@ import {
 	selectRoundPhases,
 	selectTimingRules,
 	useTimingPhase,
+	useTimingPhaseWizard,
 } from "@features/game";
 import { useAppSelector } from "@shared/lib";
 import { Delay } from "@shared/ui";
@@ -14,6 +15,8 @@ import { usePhaseList } from "./hooks";
 export type RoundReferenceProps = ViewProps;
 
 export const RoundReference = (props: RoundReferenceProps) => {
+	useTimingPhaseWizard();
+
 	const item = useAppSelector(selectTimingRules);
 	const phases = useAppSelector(selectRoundPhases);
 

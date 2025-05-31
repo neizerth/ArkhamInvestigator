@@ -7,7 +7,7 @@ import { ModalContext } from "../context";
 import { closeModal, openModal } from "../store/features/modal/actions";
 
 type ModalEventhandler = (() => void) | false;
-type OkEventHandler = ((event: ModalOkEvent) => void) | false;
+type OkEventHandler = ((event: ModalOkEvent) => void | boolean) | false;
 
 type UseModalOptions = {
 	id: string;
@@ -42,8 +42,11 @@ export const useModal = ({
 			if (onOk === false) {
 				return;
 			}
+			const response = onOk?.(event);
+			if (response === false) {
+				return;
+			}
 			tryClose();
-			onOk?.(event);
 		},
 		[onOk, tryClose],
 	);
@@ -105,6 +108,6 @@ export const useModal = ({
 	}, [dispatch, context]);
 
 	return useMemo(() => {
-		return [show, hide] as [typeof show, typeof hide];
+		return [show, hide] as [show: typeof show, hide: typeof hide];
 	}, [show, hide]);
 };

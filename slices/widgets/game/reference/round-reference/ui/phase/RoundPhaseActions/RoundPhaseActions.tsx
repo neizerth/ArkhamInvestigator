@@ -12,16 +12,16 @@ export const RoundPhaseActions = ({
 	active,
 	...props
 }: RoundPhaseActionsProps) => {
-	const { type } = phase;
+	const { id } = phase;
 
-	if (phase.type === "investigation") {
+	if (phase.id === "investigation") {
 		return null;
 	}
 
 	return (
 		<C.Container {...props}>
-			{!active && type === "mythos" && <C.Doom />}
-			{!active && type === "upkeep" && <C.Resources />}
+			{!active && id === "mythos" && <C.Doom />}
+			{!active && id === "upkeep" && <C.Resources />}
 		</C.Container>
 	);
 };
