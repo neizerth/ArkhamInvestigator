@@ -1,4 +1,4 @@
-import { useSkillItemChaosTokenRevealModal } from "@features/skill-check";
+import { useSkillItemChaosTokenRevealModal } from "@features/game/skill-check";
 import { REMOVE_CLIPPED_SUBVIEWS } from "@shared/config";
 import {
 	getSkillCheckValue,

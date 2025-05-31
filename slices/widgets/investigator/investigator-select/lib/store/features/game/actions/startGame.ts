@@ -1,4 +1,4 @@
-import { createChaosBag } from "@features/chaos-bag";
+import { createChaosBag } from "@features/game/chaos-bag";
 import type { ActionCreator } from "@reduxjs/toolkit";
 import {
 	replacePageTo,

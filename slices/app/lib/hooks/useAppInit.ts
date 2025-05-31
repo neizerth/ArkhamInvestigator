@@ -1,4 +1,4 @@
-import { initChaosBag } from "@features/chaos-bag";
+import { initChaosBag } from "@features/game/chaos-bag";
 import { restoreTranslation } from "@features/i18n";
 import { closeModal } from "@features/modal";
 import { loadInvestigatorsMediaData, useAppDispatch } from "@shared/lib";

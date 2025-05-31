@@ -1,4 +1,4 @@
-import { getChaosBagTokenReference } from "@features/chaos-bag";
+import { getChaosBagTokenReference } from "@features/game/chaos-bag";
 import { selectReferenceCardText, useAppSelector } from "@shared/lib";
 
 export const useTokenReference = () => {

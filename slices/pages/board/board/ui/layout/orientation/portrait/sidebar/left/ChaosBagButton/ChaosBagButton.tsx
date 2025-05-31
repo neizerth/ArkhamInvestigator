@@ -1,5 +1,5 @@
 import { openReferenceCard } from "@entities/reference-card";
-import { openRevealChaosTokenModal } from "@features/chaos-bag";
+import { openRevealChaosTokenModal } from "@features/game/chaos-bag";
 import { useHapticSwipe } from "@features/haptic";
 import { routes } from "@shared/config";
 import { useAppDispatch, usePage } from "@shared/lib";

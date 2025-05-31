@@ -1,4 +1,4 @@
-import { selectChaosBagEnabled } from "@features/chaos-bag";
+import { selectChaosBagEnabled } from "@features/game/chaos-bag";
 import { useAppTranslation } from "@features/i18n";
 import { routes } from "@shared/config";
 import { goBack, useAppDispatch, useAppSelector, usePage } from "@shared/lib";

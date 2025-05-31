@@ -6,7 +6,7 @@ import {
 	Gesture,
 	GestureDetector,
 } from "react-native-gesture-handler";
-import { useHapticFeedback } from "../../../../haptic";
+import { useHapticFeedback } from "../../../../../haptic";
 import {
 	returnChaosToken,
 	selectCurrentTokenId,

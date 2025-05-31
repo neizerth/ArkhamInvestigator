@@ -1,4 +1,4 @@
-import { ChaosBagProvider } from "@features/chaos-bag";
+import { ChaosBagProvider } from "@features/game/chaos-bag";
 import { I18NProvider } from "@features/i18n";
 import { ModalProvider } from "@features/modal";
 import { NotificationsProvider } from "@features/notifications";

@@ -1,4 +1,4 @@
-import { createChaosBag } from "@features/chaos-bag";
+import { createChaosBag } from "@features/game/chaos-bag";
 import { useAppTranslation } from "@features/i18n";
 import { routes } from "@shared/config";
 import {

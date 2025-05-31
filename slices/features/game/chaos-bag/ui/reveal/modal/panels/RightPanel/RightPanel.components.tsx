@@ -2,7 +2,7 @@ import { color, size } from "@shared/config";
 import { IconNumber, type IconNumberProps, Row, Text } from "@shared/ui";
 import { View } from "react-native";
 import styled, { css } from "styled-components/native";
-import { TouchableOpacity } from "../../../../../../haptic";
+import { TouchableOpacity } from "../../../../../../../haptic";
 
 export const Container: typeof View = styled(View)`
 `;

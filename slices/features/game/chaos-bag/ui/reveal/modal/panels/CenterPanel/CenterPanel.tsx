@@ -2,7 +2,7 @@ import { useAppDispatch } from "@shared/lib";
 import { useCallback } from "react";
 import type { ViewProps } from "react-native";
 import { Directions, GestureDetector } from "react-native-gesture-handler";
-import { useHapticSwipe } from "../../../../../../haptic";
+import { useHapticSwipe } from "../../../../../../../haptic";
 import { setCurrentTokenId } from "../../../../../lib";
 import type { ChaosBagToken } from "../../../../../model";
 import * as C from "./CenterPanel.components";

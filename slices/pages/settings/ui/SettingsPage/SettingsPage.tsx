@@ -5,7 +5,7 @@ import {
 	setChaosBagEnabled,
 	setChaosBagLoadingAnimation,
 	setUnlimitedChaosTokens,
-} from "@features/chaos-bag";
+} from "@features/game/chaos-bag";
 import { selectHapticMode, setHapticMode } from "@features/haptic";
 import {
 	changeLanguage,

@@ -1,4 +1,4 @@
-import { ChaosToken } from "@features/chaos-bag";
+import { ChaosToken } from "@features/game/chaos-bag";
 import { color } from "@shared/config";
 import { Row } from "@shared/ui";
 import { View } from "react-native";

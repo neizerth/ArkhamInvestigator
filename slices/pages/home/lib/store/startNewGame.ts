@@ -1,4 +1,7 @@
-import { setRevealHistory, setRevealedTokenIds } from "@features/chaos-bag";
+import {
+	setRevealHistory,
+	setRevealedTokenIds,
+} from "@features/game/chaos-bag";
 import type { ActionCreator } from "@reduxjs/toolkit";
 import { routes } from "@shared/config";
 import {

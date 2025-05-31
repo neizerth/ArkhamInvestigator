@@ -1,7 +1,7 @@
 import { color, font, size } from "@shared/config";
 import { Row, TextView } from "@shared/ui";
 import styled from "styled-components/native";
-import { NumericControl, TouchableOpacity } from "../../../../haptic";
+import { NumericControl, TouchableOpacity } from "../../../../../haptic";
 import { ChaosTokenMemo as ChaosToken } from "../single";
 
 export const Token: typeof ChaosToken = styled(ChaosToken)`

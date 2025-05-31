@@ -1,4 +1,4 @@
-import { ChaosBagContents } from "@features/chaos-bag";
+import { ChaosBagContents } from "@features/game/chaos-bag";
 import { Button } from "@features/haptic";
 import { color, font, size } from "@shared/config";
 import { Row, Text } from "@shared/ui";

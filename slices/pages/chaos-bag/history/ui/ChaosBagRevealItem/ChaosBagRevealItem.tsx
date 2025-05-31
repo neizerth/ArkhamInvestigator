@@ -1,8 +1,8 @@
-import { removeRevealHistoryItem } from "@features/chaos-bag";
+import { removeRevealHistoryItem } from "@features/game/chaos-bag";
 import type {
 	ChaosBagHistoryItem,
 	ChaosBagToken,
-} from "@features/chaos-bag/model";
+} from "@features/game/chaos-bag/model";
 import { useHapticFeedback } from "@features/haptic";
 import { REMOVE_CLIPPED_SUBVIEWS } from "@shared/config";
 import {

@@ -1,4 +1,4 @@
-import { openSkillCheckChaosBagModal } from "@features/chaos-bag";
+import { openSkillCheckChaosBagModal } from "@features/game/chaos-bag";
 import {
 	getSkillCheckValue,
 	sanitizeSkillCheckExpression,

@@ -1,4 +1,4 @@
-import { ChaosBagPreview } from "@features/chaos-bag";
+import { ChaosBagPreview } from "@features/game/chaos-bag";
 
 export default function Page() {
 	return <ChaosBagPreview />;

@@ -1,5 +1,8 @@
-import { clearRevealHistory, selectRevealHistory } from "@features/chaos-bag";
-import type { ChaosBagHistoryItem } from "@features/chaos-bag/model";
+import {
+	clearRevealHistory,
+	selectRevealHistory,
+} from "@features/game/chaos-bag";
+import type { ChaosBagHistoryItem } from "@features/game/chaos-bag/model";
 import { useAppTranslation } from "@features/i18n";
 import { useModal } from "@features/modal";
 import { REMOVE_CLIPPED_SUBVIEWS } from "@shared/config";

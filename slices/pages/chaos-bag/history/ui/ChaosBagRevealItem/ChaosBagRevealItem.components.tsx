@@ -1,4 +1,4 @@
-import { ChaosBagRevealedToken } from "@features/chaos-bag/ui/reveal/ChaosBagRevealedToken";
+import { ChaosBagRevealedToken } from "@features/game/chaos-bag/ui/reveal/ChaosBagRevealedToken";
 import { color, factionColor, font, size } from "@shared/config";
 import { IconNumber, Row, StatIcon, Text } from "@shared/ui";
 import {

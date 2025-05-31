@@ -1,5 +1,5 @@
 import { characters } from "@shared/config";
-import type { NumericControlProps } from "../../../../haptic";
+import type { NumericControlProps } from "../../../../../haptic";
 import type { ChaosTokenType } from "../../../model";
 import * as C from "./ChaosTokenInput.components";
 

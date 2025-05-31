@@ -1,4 +1,4 @@
-import { selectChaosBagEnabled } from "@features/chaos-bag";
+import { selectChaosBagEnabled } from "@features/game/chaos-bag";
 import {
 	redo,
 	selectAlwaysShowGameText,

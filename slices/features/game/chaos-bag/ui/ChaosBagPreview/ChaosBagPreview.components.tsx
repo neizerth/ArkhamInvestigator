@@ -3,8 +3,8 @@ import { Row, Text, TextView } from "@shared/ui";
 import { Dimensions, View } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import styled from "styled-components/native";
-import { Button, TouchableOpacity } from "../../../haptic";
-import { ContextModal } from "../../../modal";
+import { Button, TouchableOpacity } from "../../../../haptic";
+import { ContextModal } from "../../../../modal";
 import {
 	BlessCurseControl,
 	ChaosTokenPreviewMemo as ChaosTokenPreview,
