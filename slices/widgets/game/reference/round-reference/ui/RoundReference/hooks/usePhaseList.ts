@@ -27,6 +27,7 @@ export const usePhaseList = () => {
 		memoize((index: number) => () => {
 			ref.current?.scrollToIndex({
 				index,
+				viewOffset: 40,
 			});
 		}),
 		[],
