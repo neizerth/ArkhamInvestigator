@@ -15,7 +15,8 @@ export const useGameText = () => {
 	const showDescription = useAppSelector(selectShowDescription);
 	const boardsCount = useAppSelector(selectBoardsCount);
 	const show = alwaysShowText && CAN_ALWAYS_SHOW_GAME_TEXT;
-	const { text } = useAppSelector(selectCurrentBoardProp("investigator"));
+	const signature = useAppSelector(selectCurrentBoardProp("investigator"));
+	const text = signature?.text || "";
 	const language = useAppSelector(selectCurrentLanguage);
 	const textSize = text.length;
 
