@@ -28,6 +28,7 @@ export const RoundReferencePhaseStep = ({
 			/>
 			{step.specialType === "mythos-doom" && <C.Doom />}
 			{step.specialType === "upkeep-resource" && <C.Resources />}
+			{step.specialType === "reset-actions" && <C.Actions />}
 		</C.Container>
 	);
 };

@@ -3,7 +3,9 @@ import { size } from "@shared/config";
 import { Row } from "@shared/ui";
 import type { FC } from "react";
 import styled from "styled-components";
+import { css } from "styled-components/native";
 import { phaseContentFontSize } from "../../../config";
+import { StepActions } from "../StepActions";
 import { StepDoom } from "../StepDoom";
 import { StepResources } from "../StepResources";
 
@@ -33,10 +35,18 @@ export const End: typeof Row = styled(Row)`
 	justify-content: center;
 `;
 
+const controlStyle = css`
+	z-index: 2;
+`;
+
 export const Doom: typeof StepDoom = styled(StepDoom)`
-  z-index: 2;
+  ${controlStyle};
 `;
 
 export const Resources: typeof StepResources = styled(StepResources)`
-  z-index: 2;
+  ${controlStyle};
+`;
+
+export const Actions: typeof StepActions = styled(StepActions)`
+  ${controlStyle};
 `;

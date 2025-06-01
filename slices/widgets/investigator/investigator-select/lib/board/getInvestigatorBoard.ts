@@ -49,8 +49,6 @@ export const getInvestigatorBoard = ({
 		sanity: Math.max(0, initialValue.sanity - mentalTrauma),
 	};
 
-	console.log({ value, initialValue });
-
 	return {
 		id,
 		signatureGroupId: selection.signatureGroupId,

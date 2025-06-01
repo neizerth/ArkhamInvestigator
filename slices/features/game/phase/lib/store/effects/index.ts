@@ -1,2 +1,2 @@
-export * from "./giveUpkeepResourceToBoard";
-export * from "./giveUpkeepResourcesToAllBoards";
+export * from "./upkeep";
+export * from "./mythos";
