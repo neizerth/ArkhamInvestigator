@@ -84,7 +84,7 @@
 	"upkeep.investigator.getResources_one": "{{name}} gets {{count}} resource",
 	"upkeep.investigator.getResources_other": "{{name}} gets {{count}} resources",
 
-	"upkeep.investigator.actionsReset": "{{investigatorName}}: Actions reset",
+	"upkeep.investigator.actionsReset": "{{name}}: Actions reset",
 
 	"mythos.doom": "Placed 1 doom on the current agenda. Total doom: {{doom}}",
 
@@ -161,5 +161,6 @@
 	"Custom Content": "Custom Content",
 	"Upkeep resources": "Upkeep resources",
 
-	"Player Window": "Player Window"
+	"Player Window": "Player Window",
+	"Rules Reference": "Rules Reference"
 }

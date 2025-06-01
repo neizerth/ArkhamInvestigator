@@ -18,8 +18,8 @@ export const changeLanguage: AppThunkCreator =
 		}
 		if (language === DEFAULT_LANGUAGE) {
 			dispatch(setLanguage(language));
-			i18next.changeLanguage(language);
 			i18next.addResourceBundle(language, I18N_NAMESAPCE, translations.en);
+			i18next.changeLanguage(language);
 		}
 		dispatch(loadTranslation(language));
 	};
