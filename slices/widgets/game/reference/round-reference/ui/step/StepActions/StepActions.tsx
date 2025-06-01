@@ -15,7 +15,7 @@ export const StepActions = (props: StepActionsProps) => {
 
 	return (
 		<C.Container {...props} onPress={resetActions}>
-			<C.Icon />
+			<C.Icon icon="action" />
 		</C.Container>
 	);
 };

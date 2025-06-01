@@ -1,15 +1,16 @@
 import { TouchableOpacity } from "@features/haptic";
-import { gameAssets } from "@shared/config";
-import { Action } from "@shared/ui";
+import { size } from "@shared/config";
+import { Icon as BaseIcon } from "@shared/ui";
 import styled from "styled-components/native";
 
 export const Container: typeof TouchableOpacity = styled(TouchableOpacity)`
-  transform: translateY(-2px);
+  padding: ${size.gap.small}px;
+  transform: translateY(2px);
 `;
 
-const height = 24;
+const fontSize = 22;
 
-export const Icon: typeof Action = styled(Action)`
-  height: ${height}px;
-  width: ${gameAssets.action.ratio * height}px;
+export const Icon: typeof BaseIcon = styled(BaseIcon)`
+  font-size: ${fontSize}px;
+  line-height: ${fontSize}px;
 `;

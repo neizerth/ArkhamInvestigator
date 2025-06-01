@@ -93,6 +93,7 @@ type ToggleIconProps = IconProps & PropsWithOpen;
 export const ToggleIcon: FC<ToggleIconProps> = styled(Icon)`
 	font-size: 10px;
 	line-height: 10px;
+	color: ${color.title};
 	${({ open }: ToggleIconProps) => css`
 		transform: rotate(${open ? "90deg" : "0deg"});
 	`}
