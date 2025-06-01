@@ -4,3 +4,4 @@ export * from "./Input";
 export * from "./Progress";
 export * from "./Dropdown";
 export * from "./Checkbox";
+export * from "./list";

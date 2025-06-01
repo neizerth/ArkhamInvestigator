@@ -59,6 +59,7 @@ export const RoundReference = (props: RoundReferenceProps) => {
 							/>
 						)}
 						<C.Phases
+							showsVerticalScrollIndicator={false}
 							{...listProps}
 							data={phases}
 							renderItem={renderItem}

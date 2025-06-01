@@ -29,6 +29,7 @@
   },
   "dependencies": {
     "@expo/vector-icons": "^14.0.2",
+    "@fanchenbao/react-native-scroll-indicator": "^0.4.0",
     "@react-native-async-storage/async-storage": "1.23.1",
     "@react-native-community/slider": "4.5.5",
     "@react-navigation/bottom-tabs": "^7.2.0",

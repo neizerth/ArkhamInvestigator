@@ -73,7 +73,12 @@ export const ChaosTokenRevealHistory = ({
 	);
 	return (
 		<C.Container {...props}>
-			<C.List data={tokens} renderItem={renderItem} horizontal />
+			<C.List
+				data={tokens}
+				renderItem={renderItem}
+				showsHorizontalScrollIndicator={false}
+				horizontal
+			/>
 		</C.Container>
 	);
 };
