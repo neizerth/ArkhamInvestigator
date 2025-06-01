@@ -1,6 +1,6 @@
 import { createSelector } from "@reduxjs/toolkit";
+import { selectTimingWizardPhase } from "../selectTimingWizardPhase";
 import { selectNextTimingWizardStepIndex } from "./selectNextTimingWizardStepIndex";
-import { selectTimingWizardPhase } from "./selectTimingWizardPhase";
 
 export const selectNextTimingWizardStep = createSelector(
 	[selectTimingWizardPhase, selectNextTimingWizardStepIndex],

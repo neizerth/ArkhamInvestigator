@@ -1,19 +1,11 @@
-import { roundReferenceAssets } from "@assets/images/game/reference/round";
-import { ReferenceTitle } from "@features/game";
+import { ReferenceTitle, RulesBackground } from "@features/game";
 import { color, font, size } from "@shared/config";
-import { ImageBackground } from "@shared/ui";
 import { View } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import styled from "styled-components/native";
-import { currentRoundReferenceSize } from "../../config";
 import { RoundPhaseHeader, RoundReferencePhase } from "../phase";
 
-export const Container: typeof ImageBackground = styled(ImageBackground).attrs({
-	source: roundReferenceAssets.background,
-})`
-  width: ${currentRoundReferenceSize.width}px;
-  height: ${currentRoundReferenceSize.height}px;
-  padding: 6% 5% 8%;
+export const Container: typeof RulesBackground = styled(RulesBackground)`
 `;
 
 export const Content: typeof View = styled(View)`

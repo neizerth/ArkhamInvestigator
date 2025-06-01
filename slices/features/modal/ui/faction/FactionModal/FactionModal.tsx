@@ -33,7 +33,16 @@ export const FactionModal = ({ data, ...props }: FactionModalProps) => {
 	const onOk = ok && okHandler;
 	const onCancel = context.onCancel?.current;
 	const onClose = context.onClose?.current;
-	const { title, subtitle, text, okText, cancelText, contentType } = data;
+	const {
+		title,
+		subtitle,
+		text,
+		okText,
+		cancelText,
+		contentType,
+		okIcon,
+		cancelIcon,
+	} = data;
 	const cardFaction: Faction = data.faction || "neutral";
 
 	const defaultTextValue =
@@ -55,6 +64,8 @@ export const FactionModal = ({ data, ...props }: FactionModalProps) => {
 					onClose={onClose}
 					okText={okText}
 					cancelText={cancelText}
+					okIcon={okIcon}
+					cancelIcon={cancelIcon}
 				>
 					<C.CardContent>
 						{text && <C.Text value={text} />}

@@ -12,6 +12,8 @@ export type TimingPhaseStepType = "step" | "player-window" | "end";
 
 export type TimingPhaseStep = {
 	id: string;
+	index: number;
+	name: string;
 	type: TimingPhaseStepType;
 	specialType?: TimingPhaseStepSpecialType;
 	text: string;

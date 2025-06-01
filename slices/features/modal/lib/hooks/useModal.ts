@@ -6,7 +6,7 @@ import type { ModalData, ModalOkEvent } from "../../model";
 import { ModalContext } from "../context";
 import { closeModal, openModal } from "../store/features/modal/actions";
 
-type ModalEventhandler = (() => void) | false;
+type ModalEventhandler = (() => void | boolean) | false;
 type OkEventHandler = ((event: ModalOkEvent) => void | boolean) | false;
 
 type UseModalOptions = {
@@ -55,8 +55,11 @@ export const useModal = ({
 		if (onCancel === false) {
 			return;
 		}
+		const response = onCancel?.();
+		if (response === false) {
+			return;
+		}
 		tryClose();
-		onCancel?.();
 	}, [onCancel, tryClose]);
 
 	const close = useCallback(() => {

@@ -4,21 +4,22 @@ import {
 	useAppSelector,
 } from "@shared/lib";
 import { useCallback, useEffect } from "react";
-import { useAppTranslation } from "../../../../i18n";
-import { useModal } from "../../../../modal";
+import { useModal } from "../../../../../modal";
 import {
 	goToNextTimingWizardStep as goToNextStep,
+	goToPrevTimingWizardStep as goToPrevStep,
 	processCurrentTimingWizardStep as processStep,
 	selectNextTimingWizardStep,
 	selectTimingWizardActive,
 	selectTimingWizardPhase,
 	selectTimingWizardStep,
 	setTimingWizardActive,
-} from "../store";
+} from "../../store";
+import { usePhaseStepName } from "../usePhaseStepName";
+import { useTimingWizardButtons } from "./useTimingWizardButtons";
 
 export const useTimingPhaseWizard = () => {
 	const dispatch = useAppDispatch();
-	const { t } = useAppTranslation();
 
 	const faction = useAppSelector(selectCurrentFaction);
 	const phase = useAppSelector(selectTimingWizardPhase);
@@ -26,10 +27,16 @@ export const useTimingPhaseWizard = () => {
 	const step = useAppSelector(selectTimingWizardStep);
 	const nextStep = useAppSelector(selectNextTimingWizardStep);
 
+	const modalButtonData = useTimingWizardButtons();
+
+	const subtitle = usePhaseStepName(step);
+
 	const nextType = nextStep?.type;
 
 	const text = step?.text || "";
 	const title = phase?.title || "";
+
+	const isStart = !step?.index;
 
 	const next = useCallback(() => {
 		dispatch(processStep());
@@ -37,18 +44,27 @@ export const useTimingPhaseWizard = () => {
 		return nextType === "end";
 	}, [dispatch, nextType]);
 
+	const prev = useCallback(() => {
+		if (isStart) {
+			return;
+		}
+		dispatch(goToPrevStep());
+		return false;
+	}, [dispatch, isStart]);
+
 	const [showModal] = useModal({
 		id: "timing",
 		data: {
+			...modalButtonData,
 			title,
+			subtitle,
 			text,
+			faction,
 			type: "faction",
 			contentType: "text",
-			faction,
-			okText: t`Continue`,
-			cancelText: t`Close`,
 		},
 		onOk: next,
+		onCancel: prev,
 	});
 
 	useEffect(() => {

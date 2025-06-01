@@ -88,6 +88,8 @@
 
 	"mythos.doom": "Placed 1 doom on the current agenda. Total doom: {{doom}}",
 
+	"timing.step.name": "Step {{name}}",
+
 	"Show initial Health/Sanity": "Show initial Health/Sanity",
 
 	"Chaos bag loading animation": "Chaos bag loading animation",
@@ -157,5 +159,7 @@
 	"Negative health/sanity": "Negative health/sanity",
 	"Unlimited chaos tokens": "Unlimited chaos tokens",
 	"Custom Content": "Custom Content",
-	"Upkeep resources": "Upkeep resources"
+	"Upkeep resources": "Upkeep resources",
+
+	"Player Window": "Player Window"
 }

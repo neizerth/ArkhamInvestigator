@@ -11,6 +11,8 @@ export type ModalData = {
 	title: string;
 	subtitle?: string;
 	okText?: string;
+	okIcon?: string;
+	cancelIcon?: string;
 	cancelText?: string;
 } & {
 	type: "faction";

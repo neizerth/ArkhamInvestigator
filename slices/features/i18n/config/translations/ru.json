@@ -86,6 +86,10 @@
 	"upkeep.investigator.getResources_few": "{{name}} получает {{count}} ресурса",
 	"upkeep.investigator.getResources_many": "{{name}} получает {{count}} ресурсов",
 	"mythos.doom": "Добавлена 1 Безысходность. Итого: {{doom}}",
+	"timing.step.name": "Шаг {{name}}",
+
+	"Player Window": "Окно игрока",
+	"Phase end": "Конец фазы",
 
 	"Swipe gestures": "Свайпы",
 

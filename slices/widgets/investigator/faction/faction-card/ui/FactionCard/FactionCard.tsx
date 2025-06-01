@@ -11,6 +11,8 @@ export type FactionCardProps = ViewProps &
 		subtitle?: string;
 		okText?: string;
 		cancelText?: string;
+		cancelIcon?: string;
+		okIcon?: string;
 		onClose?: Nullable<() => void>;
 		onOk?: Nullable<() => void>;
 		onCancel?: Nullable<() => void>;
@@ -29,6 +31,8 @@ export const FactionCard = ({
 	onTouchCancel,
 	okText,
 	cancelText,
+	cancelIcon = "dismiss",
+	okIcon = "check",
 	...props
 }: FactionCardProps) => {
 	const window = useWindowDimensions();
@@ -82,10 +86,19 @@ export const FactionCard = ({
 					</C.ScrollContainer>
 					<C.Actions>
 						{onCancel && (
-							<C.Cancel text={cancelText} icon="dismiss" onPress={onCancel} />
+							<C.Cancel
+								text={cancelText}
+								icon={cancelIcon}
+								onPress={onCancel}
+							/>
 						)}
 						{onOk && (
-							<C.OK text={okText} faction={faction} icon="check" onPress={onOk}>
+							<C.OK
+								text={okText}
+								faction={faction}
+								icon={okIcon}
+								onPress={onOk}
+							>
 								<C.OKBackground
 									faction={faction}
 									width={containerSize?.width || 300}

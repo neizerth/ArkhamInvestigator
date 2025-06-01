@@ -25,8 +25,6 @@ export const RoundReferencePhase = ({
 
 	const toggle = open ? onClose : onOpen;
 
-	const canPlay = phase.id !== "investigation";
-
 	const play = useCallback(() => {
 		dispatch(startTimingWizard(phase.id));
 	}, [dispatch, phase.id]);
@@ -36,11 +34,7 @@ export const RoundReferencePhase = ({
 			<C.Wrapper>
 				<C.Content open={open}>
 					<C.Header>
-						{canPlay ? (
-							<C.PlayIcon icon="play2" onPress={play} />
-						) : (
-							<C.NoPlay />
-						)}
+						<C.PlayIcon icon="play2" onPress={play} />
 						<C.Toggle onPress={toggle}>
 							<C.Title open={open}>{phase.title}</C.Title>
 							<C.ToggleIcon icon="right-arrow" open={open} />

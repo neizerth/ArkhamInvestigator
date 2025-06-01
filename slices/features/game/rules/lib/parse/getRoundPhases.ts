@@ -10,6 +10,7 @@ import {
 	formatPhaseStepText,
 	getPhaseStepColor,
 	getPhaseStepId,
+	getPhaseStepName,
 	getPhaseStepSpecialType,
 } from "./step";
 
@@ -68,9 +69,15 @@ export const getRoundPhases = (item?: RulesItem) => {
 		});
 
 		const specialType = getPhaseStepSpecialType(text);
+		const name = getPhaseStepName({
+			text,
+			type,
+		});
 
 		const step: TimingPhaseStep = {
+			index: currentPhase.steps.length,
 			id,
+			name,
 			type,
 			specialType,
 			text: formatPhaseStepText({ text, type }),

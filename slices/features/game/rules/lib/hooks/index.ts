@@ -1,2 +1,3 @@
 export * from "./useTimingPhase";
-export * from "./useTimingPhaseWizard";
+export * from "./wizard";
+export * from "./usePhaseStepName";
