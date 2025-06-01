@@ -7,9 +7,9 @@ import {
 } from "../../rules";
 
 export const startTimingWizard =
-	(id: TimingPhaseId): AppThunk =>
+	(id: TimingPhaseId, stepIndex = 0): AppThunk =>
 	(dispatch) => {
 		dispatch(setTimingWizardPhaseId(id));
-		dispatch(setTimingWizardStepIndex(0));
+		dispatch(setTimingWizardStepIndex(stepIndex));
 		dispatch(setTimingWizardActive(true));
 	};

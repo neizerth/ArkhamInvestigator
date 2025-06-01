@@ -77,6 +77,7 @@ export const getRoundPhases = (item?: RulesItem) => {
 		const step: TimingPhaseStep = {
 			index: currentPhase.steps.length,
 			id,
+			phaseId: currentPhase.id,
 			name,
 			type,
 			specialType,

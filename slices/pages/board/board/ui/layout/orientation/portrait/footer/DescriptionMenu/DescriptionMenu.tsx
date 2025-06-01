@@ -27,7 +27,10 @@ export const DescriptionMenu = (props: DescriptionMenuProps) => {
 
 	return (
 		<C.Container {...props}>
-			<C.Button icon="change-investigator" onPress={onChangeInvestigator} />
+			<C.ChangeInvestigator
+				icon="change-investigator"
+				onPress={onChangeInvestigator}
+			/>
 			<C.Button icon="investigator" onPress={onDetailsChange} />
 			<C.Hide onPress={hide} />
 		</C.Container>

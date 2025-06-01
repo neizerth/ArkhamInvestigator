@@ -18,6 +18,10 @@ export const Button: typeof IconButton = styled(IconButton).attrs({
     opacity: 0.8;
   `;
 
+export const ChangeInvestigator: typeof Button = styled(Button)`
+	margin-left: -10px;
+`;
+
 export const Hide: FC<DefinedIconButtonProps> = styled(Button).attrs({
 	icon: "right-arrow",
 	iconStyle: {

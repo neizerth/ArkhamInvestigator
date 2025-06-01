@@ -7,7 +7,8 @@ export const placeDoomOnAgenda = (): AppThunk => (dispatch, getState) => {
 	const state = getState();
 	const currentDoom = selectDoom(state);
 	const doom = currentDoom + 1;
-	dispatch(setDoom(currentDoom));
+
+	dispatch(setDoom(doom));
 
 	const message = i18next.t("mythos.doom", {
 		doom,

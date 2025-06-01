@@ -50,7 +50,7 @@ export const DescriptionTopMenu = ({ ...props }: DescriptionTopMenuProps) => {
 
 	return (
 		<C.Container {...props}>
-			<C.Button icon="resign" onPress={goHome} />
+			<C.GoHome icon="resign" onPress={goHome} />
 			<C.Button icon="info" onPress={goToPage(routes.boardHelp)} />
 			<C.Button icon="stopwatch" onPress={goToPage(routes.roundReference)} />
 			<C.Button icon="wrench" onPress={goToPage(routes.settings)} />

@@ -1,4 +1,5 @@
 import { GameText, type GameTextProps } from "@entities/game-text";
+import { TouchableOpacity } from "@features/haptic";
 import { size } from "@shared/config";
 import { Row } from "@shared/ui";
 import type { FC } from "react";
@@ -9,11 +10,13 @@ import { StepActions } from "../StepActions";
 import { StepDoom } from "../StepDoom";
 import { StepResources } from "../StepResources";
 
-export const Container: typeof Row = styled(Row)`
+export const Container: typeof TouchableOpacity = styled(TouchableOpacity)`
+	flex-direction: row;
   justify-content: space-between;
   padding: 7px 12px;
   gap: ${size.gap.default}px;
   align-items: center;
+	z-index: 2;
 `;
 
 type TextProps = GameTextProps & {
