@@ -1,4 +1,5 @@
 import "react-native-get-random-values";
+import "intl-pluralrules";
 
 import { useAppLoader, useDeviceInit } from "@app/lib";
 import { AppProvider } from "@app/providers/AppProvider";

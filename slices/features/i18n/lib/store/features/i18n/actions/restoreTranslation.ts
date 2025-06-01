@@ -25,9 +25,8 @@ export const restoreTranslation: AppThunkCreator =
 				...data,
 				...appTranslation,
 			};
-
-			i18next.addResourceBundle(language, I18N_NAMESAPCE, translation);
 			i18next.changeLanguage(language);
+			i18next.addResourceBundle(language, I18N_NAMESAPCE, translation);
 		} catch (error) {}
 
 		dispatch(loadTranslation(language));

@@ -4,12 +4,11 @@ import { translations } from "./translations";
 
 export const DEFAULT_LANGUAGE = "en";
 
-export const I18N_NAMESAPCE = "core";
+export const I18N_NAMESAPCE = "translation";
 
 export const i18next = createInstance();
 
 i18next.use(initReactI18next).init({
-	fallbackLng: DEFAULT_LANGUAGE,
 	defaultNS: I18N_NAMESAPCE,
 	resources: {
 		en: {

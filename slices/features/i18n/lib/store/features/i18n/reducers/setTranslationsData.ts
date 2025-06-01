@@ -31,8 +31,8 @@ export const setTranslationsData: I18NReducer<ArkhamDivider.Translation> = (
 
 	const languageKey = hyphens2camelCase(loadingLanguage);
 
-	i18next.addResourceBundle(languageKey, I18N_NAMESAPCE, bundle);
 	i18next.changeLanguage(languageKey);
+	i18next.addResourceBundle(languageKey, I18N_NAMESAPCE, bundle);
 
 	saveStoreTranslation(bundle);
 

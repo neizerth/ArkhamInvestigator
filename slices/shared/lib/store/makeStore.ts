@@ -7,7 +7,6 @@ import {
 	persistConfigMigrations,
 	persistStorageConfig,
 } from "../../../features/storage";
-import { serializableCheck } from "./middleware";
 import reducers from "./reducer";
 
 const rootReducer = combineReducers(reducers);
@@ -25,7 +24,7 @@ export const makeStore = () => {
 		middleware: (getDefaultMiddleware) =>
 			getDefaultMiddleware({
 				immutableCheck: false,
-				serializableCheck,
+				serializableCheck: false,
 			}),
 		devTools: false,
 		enhancers: (getDefaultEnhancers) =>

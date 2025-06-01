@@ -41,9 +41,9 @@ export const processCurrentTimingWizardStep =
 			for (const board of boards) {
 				dispatch(startNewTurn(board.id));
 
-				const investigatorName = board.investigator.name;
+				const { name } = board.investigator;
 				const message = i18next.t("upkeep.investigator.actionsReset", {
-					investigatorName,
+					name,
 				});
 
 				dispatch(showToast(message));

@@ -2,8 +2,8 @@ import { statusBarHeight } from "@shared/config";
 import { goBack, useAppDispatch } from "@shared/lib";
 import { Outside } from "@shared/ui";
 import { useCallback } from "react";
-import { useTranslation } from "react-i18next";
 import { type ViewProps, useWindowDimensions } from "react-native";
+import { useAppTranslation } from "../../../i18n";
 import * as C from "./ContextModal.components";
 
 type ContextModalAction = {
@@ -36,7 +36,7 @@ export const ContextModal = ({
 		maxHeight,
 	};
 
-	const { t } = useTranslation();
+	const { t } = useAppTranslation();
 
 	const back = useCallback(() => {
 		dispatch(goBack());
