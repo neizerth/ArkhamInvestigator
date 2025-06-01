@@ -6,6 +6,7 @@ export type CheckboxProps = ViewProps & {
 	controlStyle?: TextStyle;
 	checked?: boolean;
 	label?: string;
+	hint?: string;
 };
 
 export const Checkbox = ({
@@ -14,15 +15,19 @@ export const Checkbox = ({
 	checked,
 	children,
 	label,
+	hint,
 	...props
 }: CheckboxProps) => {
 	const icon = checked ? "checklist" : "circle-thin";
 
 	return (
 		<C.Container {...props}>
-			<C.Label>{label}</C.Label>
-			<C.Control icon={icon} />
-			{children}
+			<C.Content>
+				<C.Label>{label}</C.Label>
+				<C.Control icon={icon} />
+				{children}
+			</C.Content>
+			{hint && <C.Hint>{hint}</C.Hint>}
 		</C.Container>
 	);
 };

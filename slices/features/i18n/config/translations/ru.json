@@ -59,6 +59,9 @@
 	"board.help.longPress.chaosBag": "Вытягивает жетон хаоса",
 
 	"settings.sound": "Звук (Beta)",
+	"settings.syncScenarioClues.hint": "Улики, добавленные на сценарий, удалятся у сыщика",
+
+	"board.help.syncScenarioClues": "Включаeт/выключаeт синхронизацию улик сценария и сыщика: улики, добавленные на сценарий, удалятся у сыщика",
 
 	"tapOnPin.default": "Нажмите на расчёте, чтобы его убрать",
 	"tapOnPin.advanced": "Нажмите на расчёте, чтобы скрыть блок. Свайп вправо убирает расчёт",
@@ -177,5 +180,6 @@
 	"Cards beneath Gloria": "Карты под сыщиком",
 	"Upkeep resources": "Ресурсы в фазе передышки",
 
-	"Rules Reference": "Справочник"
+	"Rules Reference": "Справочник",
+	"Sync with investigator clues": "Связать с уликами сыщика"
 }

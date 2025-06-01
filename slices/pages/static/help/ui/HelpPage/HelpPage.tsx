@@ -56,6 +56,11 @@ export const HelpPage = () => {
 				{" - "}
 				{t`board.help.press.chaosBag`}
 			</Text>
+			<Text>
+				<C.Icon icon="icomoonfree-lock" />, <C.Icon icon="unlocked" />
+				{" - "}
+				{t`board.help.syncScenarioClues`}
+			</Text>
 
 			<Title>{t`Press and hold`}</Title>
 			<Text>{t`board.help.hold.freeArea`}</Text>

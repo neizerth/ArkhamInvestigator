@@ -60,6 +60,9 @@
 	"board.help.longPress.chaosBag": "Reveals a chaos token",
 
 	"settings.sound": "Sound (Beta)",
+	"settings.syncScenarioClues.hint": "Clues added to the scenario will be removed from the investigator",
+
+	"board.help.syncScenarioClue": "Enable/disable clues sync: clues added to the scenario will be removed from the investigator",
 
 	"tapOnPin.default": "Tap on a calculation to unpin it",
 	"tapOnPin.advanced": "Tap on a calculation to close the whole block. Swipe right to unpin",
@@ -162,5 +165,7 @@
 	"Upkeep resources": "Upkeep resources",
 
 	"Player Window": "Player Window",
-	"Rules Reference": "Rules Reference"
+	"Rules Reference": "Rules Reference",
+
+	"Sync with investigator clues": "Sync with investigator clues"
 }

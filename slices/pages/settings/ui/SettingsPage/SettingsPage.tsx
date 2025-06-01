@@ -224,6 +224,14 @@ export const SettingsPage = () => {
 					</C.Row>
 					<C.Row>
 						<C.Checkbox
+							label="Sync with investigator clues"
+							hint="settings.syncScenarioClues.hint"
+							selector={S.selectSyncScenarioClues}
+							actionCreator={S.setSyncScenarioClues}
+						/>
+					</C.Row>
+					<C.Row>
+						<C.Checkbox
 							label="Resources"
 							selector={S.selectShowScenarioResources}
 							actionCreator={S.setShowScenarioResources}

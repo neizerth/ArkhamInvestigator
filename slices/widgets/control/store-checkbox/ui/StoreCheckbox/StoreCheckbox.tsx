@@ -16,13 +16,16 @@ export function StoreCheckbox<T>({
 	selector,
 	actionCreator,
 	translate = true,
+	hint: hintProp,
 	onPress: onPressProp,
+	label: labelProp,
 	...props
 }: StoreCheckboxProps) {
 	const { t } = useAppTranslation();
 	const dispatch = useAppDispatch();
 	const checked = useAppSelector(selector);
-	const label = translate ? t(props.label || "") : props.label;
+	const label = translate ? t(labelProp || "") : labelProp;
+	const hint = translate ? t(hintProp || "") : hintProp;
 
 	const onPress = useCallback(
 		(e: GestureResponderEvent) => {
@@ -35,6 +38,7 @@ export function StoreCheckbox<T>({
 	return (
 		<HapticCheckbox
 			{...props}
+			hint={hint}
 			label={label}
 			checked={checked}
 			onPress={onPress}

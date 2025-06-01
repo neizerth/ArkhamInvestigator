@@ -26,6 +26,7 @@ export type IBoardState = {
 	alwaysShowSkillModifiers: boolean;
 	allowNegativeHealthAndSanity: boolean;
 	showUpkeepResources: boolean;
+	syncScenarioClues: boolean;
 
 	doom: number;
 	clues: number;
@@ -54,6 +55,7 @@ const initialState: IBoardState = {
 	alwaysShowSkillModifiers: false,
 	allowNegativeHealthAndSanity: false,
 	showUpkeepResources: false,
+	syncScenarioClues: false,
 	doom: 0,
 	clues: 0,
 	resources: 0,
@@ -93,6 +95,7 @@ export const {
 	setAlwaysShowSkillModifiers,
 	setAllowNegativeHealthAndSanity,
 	setShowUpkeepResources,
+	setSyncScenarioClues,
 } = board.actions;
 
 export const {
@@ -121,6 +124,7 @@ export const {
 	selectAlwaysShowSkillModifiers,
 	selectAllowNegativeHealthAndSanity,
 	selectShowUpkeepResources,
+	selectSyncScenarioClues,
 } = board.selectors;
 
 export default board.reducer;
