@@ -116,6 +116,15 @@ export const Background: FC<BackgroundProps> = styled(RoundReferenceBackground)`
 	`}
 `;
 
+const zhTitleConfig = {
+	fontFamily: STXinwei.regular,
+	transform: [
+		{
+			translateY: -phaseTitleFontSize * 0.2,
+		},
+	],
+};
+
 export const BaseTitle = withLocale({
 	style: {
 		default: {
@@ -130,12 +139,8 @@ export const BaseTitle = withLocale({
 			fontFamily: SanCn.bold,
 			paddingTop: 3,
 		},
-		zh: {
-			fontFamily: STXinwei.regular,
-		},
-		"zh-cn": {
-			fontFamily: STXinwei.regular,
-		},
+		zh: zhTitleConfig,
+		"zh-cn": zhTitleConfig,
 	},
 });
 
