@@ -17,6 +17,7 @@ export type TimingPhaseStep = {
 	name: string;
 	type: TimingPhaseStepType;
 	specialType?: TimingPhaseStepSpecialType;
+	linkedIndex?: number;
 	text: string;
 	color?: string;
 };

@@ -1,12 +1,18 @@
-import type { TimingPhaseStepType } from "../../../model";
+import type { TimingPhaseId, TimingPhaseStepType } from "../../../model";
 
 type Options = {
 	text: string;
+	phaseId: TimingPhaseId;
 	type: TimingPhaseStepType;
 	position: number;
 };
 
-export const getPhaseStepId = ({ text, type, position }: Options): string => {
+export const getPhaseStepId = ({
+	text,
+	type,
+	phaseId,
+	position,
+}: Options): string => {
 	const [id] = text.split(" ");
 
 	if (type === "step") {
@@ -14,7 +20,7 @@ export const getPhaseStepId = ({ text, type, position }: Options): string => {
 	}
 
 	if (type === "player-window") {
-		return `${type}-${position}`;
+		return `${phaseId}-${type}-${position}`;
 	}
 
 	return type;

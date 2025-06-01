@@ -1,6 +1,5 @@
 import { Arkhamic, Conkordia, STXinwei, SanCn } from "@assets/fonts";
 import { roundReferenceAssets } from "@assets/images/game/reference/round";
-import { color } from "@shared/config";
 import { ImageBackground } from "@shared/ui";
 import { View } from "react-native";
 import styled from "styled-components/native";
@@ -34,7 +33,7 @@ export const TitleText = withLocale({
 		default: {
 			fontFamily: Arkhamic.regular,
 			fontSize: titleFontSize,
-			color: color.black,
+			color: "#221f1f",
 			paddingLeft: titleFontSize * 1.5,
 			textTransform: "uppercase",
 			textAlign: "center",

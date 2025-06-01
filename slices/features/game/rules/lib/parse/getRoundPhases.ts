@@ -13,6 +13,7 @@ import {
 	getPhaseStepName,
 	getPhaseStepSpecialType,
 } from "./step";
+import { getPhaseStepLinkedIndex } from "./step/getPhaseStepLinkedIndex";
 
 const stepMapping: Record<string, TimingPhaseStepType> = {
 	green: "step",
@@ -66,12 +67,18 @@ export const getRoundPhases = (item?: RulesItem) => {
 			type,
 			text,
 			position: currentPhase.steps.length,
+			phaseId: currentPhase.id,
 		});
 
 		const specialType = getPhaseStepSpecialType(text);
 		const name = getPhaseStepName({
 			text,
 			type,
+		});
+
+		const linkedIndex = getPhaseStepLinkedIndex({
+			id,
+			steps: currentPhase.steps,
 		});
 
 		const step: TimingPhaseStep = {
@@ -81,6 +88,7 @@ export const getRoundPhases = (item?: RulesItem) => {
 			name,
 			type,
 			specialType,
+			linkedIndex,
 			text: formatPhaseStepText({ text, type }),
 			color: getPhaseStepColor(type),
 		};
