@@ -1,6 +1,11 @@
 import type { AppThunk } from "@shared/model";
+import { i18next } from "../../../../../../../../features/i18n/config";
+import { showToast } from "../../../../../../../../features/notifications";
 import { selectClues, selectSyncScenarioClues, setClues } from "../../../board";
-import { selectCurrentStatValue } from "../../../selectors";
+import {
+	selectCurrentBoardProp,
+	selectCurrentStatValue,
+} from "../../../selectors";
 import { setCurrentStat } from "../../stats/current/setCurrentStat";
 
 export const updateScenarioClues =
@@ -27,4 +32,19 @@ export const updateScenarioClues =
 		const updatedClues = Math.max(investigatorClues - diff, 0);
 
 		dispatch(setCurrentStat("clues", updatedClues));
+
+		const { name } = selectCurrentBoardProp("investigator")(state);
+		const spent = investigatorClues - updatedClues;
+		const remains = investigatorClues - spent;
+
+		const message = i18next.t("clues.spent", {
+			name,
+			count: spent,
+		});
+
+		const remainsMessage = i18next.t("clues.remains", {
+			count: remains,
+		});
+
+		dispatch(showToast(`${message}\n${remainsMessage}`));
 	};

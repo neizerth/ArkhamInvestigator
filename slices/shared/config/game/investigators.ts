@@ -12,7 +12,10 @@ export const ADD_2WILD_ABILITY = "add-2wild" as const;
 
 export const InvesigatorCode = {
 	LolaHayes: "03006",
-	JennyBarnes: "02003",
+	JennyBarnes: {
+		base: "02003",
+		book: "98001",
+	},
 };
 
 export const BOARD_ABILITY_LIMITS: LimitType[] = [

@@ -3,8 +3,12 @@ import {
 	InvesigatorCode,
 } from "@shared/config";
 
+const JennyCodes = [
+	InvesigatorCode.JennyBarnes.base,
+	InvesigatorCode.JennyBarnes.book,
+];
 export const getDefaultUpkeepResourceincrease = (code: string) => {
-	if (code === InvesigatorCode.JennyBarnes) {
+	if (JennyCodes.includes(code)) {
 		return DEFAULT_UPKEEP_RESOURCES_INCREASE + 1;
 	}
 	return DEFAULT_UPKEEP_RESOURCES_INCREASE;

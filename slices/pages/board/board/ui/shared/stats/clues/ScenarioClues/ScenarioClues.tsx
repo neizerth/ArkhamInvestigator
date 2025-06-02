@@ -2,6 +2,7 @@
 
 import {
 	selectClues,
+	selectCurrentStatValue,
 	selectSyncScenarioClues,
 	setClues,
 	setSyncScenarioClues,
@@ -9,17 +10,31 @@ import {
 	useAppDispatch,
 	useAppSelector,
 } from "@shared/lib";
-import { useCallback } from "react";
+import { range } from "ramda";
+import { useCallback, useMemo } from "react";
 import type { CluesProps } from "../Clues";
 import * as C from "./ScenarioClues.components";
 
 export type ScenarioCluesProps = CluesProps;
 
-export const ScenarioClues = (props: ScenarioCluesProps) => {
+export const ScenarioClues = ({
+	data: dataProp,
+	...props
+}: ScenarioCluesProps) => {
 	const dispatch = useAppDispatch();
 	const syncEnabled = useAppSelector(selectSyncScenarioClues);
-
+	const investigatorClues = useAppSelector(selectCurrentStatValue("clues"));
 	const value = useAppSelector(selectClues);
+
+	const maxValue = value + investigatorClues;
+
+	const data = useMemo(() => {
+		if (!syncEnabled) {
+			return dataProp;
+		}
+		return range(0, maxValue + 1);
+	}, [dataProp, syncEnabled, maxValue]);
+
 	const onChange = useCallback(
 		(value = 0) => {
 			dispatch(updateScenarioClues(value));
@@ -46,6 +61,7 @@ export const ScenarioClues = (props: ScenarioCluesProps) => {
 			<C.Lock icon={lockIcon} enabled={syncEnabled} onPress={toggleSync} />
 			<C.Control
 				{...props}
+				data={data}
 				value={value}
 				onChange={onChange}
 				onPress={onPress}

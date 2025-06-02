@@ -11,6 +11,7 @@ export type CluesProps = ImageBackgroundProps & {
 	onChange?: (value?: number) => void;
 	onLongPress?: () => void;
 	onPress?: () => void;
+	data?: number[];
 };
 
 export const Clues = ({
@@ -18,6 +19,7 @@ export const Clues = ({
 	onLongPress,
 	onPress,
 	value,
+	data = cluesData,
 	...props
 }: CluesProps) => {
 	const onChange = useCallback(
@@ -31,7 +33,7 @@ export const Clues = ({
 		<C.Container {...props}>
 			<C.Picker
 				value={value}
-				data={cluesData}
+				data={data}
 				onValueChanged={onChange}
 				onLongPress={onLongPress}
 				onPress={onPress}
