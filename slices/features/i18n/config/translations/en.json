@@ -94,6 +94,9 @@
 	"clues.remains_one": "Remains {{count}} clue",
 	"clues.remains_other": "Reamains {{count}} clues",
 
+	"actions.give_one": "{{name}} has got {{count}} action from {{from}}",
+	"actions.give_other": "{{name}} has got {{count}} actions from {{from}}",
+
 	"upkeep.investigator.actionsReset": "{{name}}: Actions reset",
 
 	"mythos.doom": "Placed 1 doom on the current agenda. Total doom: {{doom}}",

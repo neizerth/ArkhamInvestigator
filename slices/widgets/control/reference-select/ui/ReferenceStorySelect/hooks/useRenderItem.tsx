@@ -1,6 +1,7 @@
 import { useCallback } from "react";
 
-import { DEFAULT_LANGUAGE, selectCurrentLanguage } from "@features/i18n";
+import { selectCurrentLanguage } from "@features/i18n";
+import { DEFAULT_LANGUAGE } from "@features/i18n/config";
 import { useAppSelector } from "@shared/lib";
 import type { Story } from "@shared/model";
 import type { SelectItem } from "@shared/ui";

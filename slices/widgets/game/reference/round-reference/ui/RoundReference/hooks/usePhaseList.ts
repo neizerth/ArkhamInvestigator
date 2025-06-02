@@ -1,4 +1,4 @@
-import { type TimingPhase, useTimingPhase } from "@features/game";
+import { type TimingPhase, useTimingPhase } from "@features/game/rules";
 import { useScrollSpy, useScrollToIndex } from "@shared/lib";
 import memoize from "fast-memoize";
 import { useCallback, useRef } from "react";

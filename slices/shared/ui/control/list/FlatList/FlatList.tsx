@@ -11,7 +11,7 @@ import {
 	useSharedValue,
 	withTiming,
 } from "react-native-reanimated";
-import { useLayoutSize } from "../../../../lib";
+import { useLayoutSize } from "../../../../lib/hooks/ui/useLayoutSize";
 import * as C from "./FlatList.components";
 
 export type FlatListProps<T> = BaseListProps<T> & {

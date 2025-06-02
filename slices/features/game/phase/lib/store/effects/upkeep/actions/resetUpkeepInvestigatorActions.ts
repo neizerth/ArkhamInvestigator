@@ -1,7 +1,7 @@
 import { selectBoardById, startNewTurn } from "@shared/lib";
 import type { AppThunk, BoardId } from "@shared/model";
 import { i18next } from "../../../../../../../i18n/config";
-import { showToast } from "../../../../../../../notifications";
+import { showToast } from "../../../../../../../notifications/lib";
 
 export const resetUpkeepInvestigatorActions =
 	(boardId: BoardId = "current"): AppThunk =>

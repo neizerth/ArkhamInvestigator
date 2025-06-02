@@ -1,4 +1,4 @@
-import { ReferenceTitle, RulesBackground } from "@features/game";
+import { ReferenceTitle, RulesBackground } from "@features/game/rules";
 import { color, font, size } from "@shared/config";
 import { View } from "react-native";
 import { FlatList } from "react-native-gesture-handler";

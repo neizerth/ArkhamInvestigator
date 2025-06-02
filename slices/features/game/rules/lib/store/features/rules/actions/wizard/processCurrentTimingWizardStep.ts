@@ -1,9 +1,9 @@
-import type { AppThunk } from "@shared/model";
 import {
 	giveUpkeepResourcesToAllBoards,
 	placeDoomOnAgenda,
 	resetUpkeepAllInvestigatorActions,
-} from "../../../../../../../phase";
+} from "@features/game/phase";
+import type { AppThunk } from "@shared/model";
 import { selectTimingWizardStep } from "../../selectors";
 
 export const processCurrentTimingWizardStep =

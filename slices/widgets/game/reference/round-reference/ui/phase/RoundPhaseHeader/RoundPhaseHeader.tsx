@@ -1,4 +1,4 @@
-import type { TimingPhase } from "@features/game";
+import type { TimingPhase } from "@features/game/rules";
 import type { TouchableOpacityProps } from "@features/haptic";
 import * as C from "./RoundPhaseHeader.components";
 

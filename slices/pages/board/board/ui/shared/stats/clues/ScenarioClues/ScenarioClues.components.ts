@@ -25,9 +25,11 @@ export const Lock: FC<LockProps> = styled(IconButton).attrs(
 		},
 	}),
 )`
-color:rgb(86, 122, 45);
+	color:rgb(86, 122, 45);
   position: absolute;
   z-index: 2;
-  right: -15px;
+  right: -35px;
   top: -52px;
+	width: 50px;
+	align-items: flex-start;
 `;

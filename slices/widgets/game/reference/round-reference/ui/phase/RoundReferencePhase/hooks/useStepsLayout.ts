@@ -1,4 +1,4 @@
-import type { TimingPhaseStep } from "@features/game";
+import type { TimingPhaseStep } from "@features/game/rules";
 import { useCallback, useRef, useState } from "react";
 import type { LayoutChangeEvent, LayoutRectangle } from "react-native";
 

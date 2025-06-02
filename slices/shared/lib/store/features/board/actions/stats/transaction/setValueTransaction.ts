@@ -1,5 +1,5 @@
 import type { AppThunk, BoardId, InvestigatorBoardValues } from "@shared/model";
-import { selectCurrentBoard } from "../../../selectors";
+import { selectCurrentBoard } from "../../../selectors/current/selectCurrentBoard";
 import { setBoard } from "../../board";
 import { addCurrentHistoryItem } from "../../history";
 

@@ -1,8 +1,8 @@
-import type { TimingPhase } from "@features/game";
 import {
 	giveUpkeepResourcesToAllBoards,
 	resetUpkeepAllInvestigatorActions,
-} from "@features/game";
+} from "@features/game/phase";
+import type { TimingPhase } from "@features/game/rules";
 import { useAppDispatch } from "@shared/lib";
 import { useCallback } from "react";
 import type { ViewProps } from "react-native";

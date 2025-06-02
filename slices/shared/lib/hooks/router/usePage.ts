@@ -1,8 +1,8 @@
 import type { Href } from "expo-router";
 import { useCallback } from "react";
-import { setShowDescription } from "../../store";
 import { goToPage, replacePageTo } from "../../store/effects/router";
-import { useAppDispatch } from "../store";
+import { setShowDescription } from "../../store/features/game/game";
+import { useAppDispatch } from "../store/dispatch/useAppDispatch";
 
 export const usePage = () => {
 	const dispatch = useAppDispatch();

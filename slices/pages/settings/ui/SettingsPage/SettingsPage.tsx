@@ -12,7 +12,7 @@ import {
 	selectLanguage,
 	useAppTranslation,
 } from "@features/i18n";
-import { sendNotification } from "@features/notifications";
+import { sendNotification } from "@features/notifications/lib";
 import { CAN_ALWAYS_SHOW_GAME_TEXT } from "@shared/config";
 import * as S from "@shared/lib";
 import { useCallback } from "react";

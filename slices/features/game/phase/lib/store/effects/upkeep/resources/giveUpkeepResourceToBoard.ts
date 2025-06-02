@@ -1,7 +1,7 @@
 import { selectBoardById, setBoard } from "@shared/lib";
 import type { AppThunk, BoardId } from "@shared/model";
 import { i18next } from "../../../../../../../i18n/config";
-import { showToast } from "../../../../../../../notifications";
+import { showToast } from "../../../../../../../notifications/lib";
 
 export const giveUpkeepResourceToBoard =
 	(boardId: BoardId = "current"): AppThunk =>

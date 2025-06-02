@@ -1,6 +1,6 @@
 import type { IBoardState } from "@shared/lib";
 import type { PersistedState } from "redux-persist";
-import type { IRulesState } from "../../game";
+import type { IRulesState } from "../../game/rules";
 
 type State = PersistedState & {
 	rules?: IRulesState;

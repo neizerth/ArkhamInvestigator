@@ -1,7 +1,7 @@
 import type { RootState } from "@shared/model";
 import type { PropsWithChildren } from "react";
 import type { Selector } from "react-redux";
-import { useAppSelector } from "../../../lib";
+import { useAppSelector } from "../../../lib/hooks/store";
 
 export type StoreDisplayProps = PropsWithChildren & {
 	selector: Selector<RootState, boolean>;

@@ -1,4 +1,4 @@
-import { type TimingPhase, startTimingWizard } from "@features/game";
+import { type TimingPhase, startTimingWizard } from "@features/game/rules";
 import { roundPhaseColors } from "@features/game/rules/config";
 import { useAppDispatch } from "@shared/lib";
 import { useCallback } from "react";

@@ -4,7 +4,7 @@ import {
 	selectTimingRules,
 	useTimingPhase,
 	useTimingPhaseWizard,
-} from "@features/game";
+} from "@features/game/rules";
 import { useAppSelector } from "@shared/lib";
 import { Delay } from "@shared/ui";
 import { useCallback } from "react";

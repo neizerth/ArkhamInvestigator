@@ -1,4 +1,4 @@
-import { type TimingPhaseStep, startTimingWizard } from "@features/game";
+import { type TimingPhaseStep, startTimingWizard } from "@features/game/rules";
 import { selectCurrentLanguage } from "@features/i18n";
 import { useAppDispatch, useAppSelector } from "@shared/lib";
 import { useCallback } from "react";

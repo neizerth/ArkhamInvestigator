@@ -1,5 +1,6 @@
 import { type PropsWithChildren, type ReactNode, useEffect } from "react";
-import { delay, useBoolean } from "../../../lib";
+import { useBoolean } from "../../../lib/hooks/common";
+import { delay } from "../../../lib/util/promise";
 import * as C from "./Delay.components";
 
 export type DelayProps = PropsWithChildren & {
