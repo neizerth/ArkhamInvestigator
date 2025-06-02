@@ -1,8 +1,11 @@
 import type { AppThunk, BoardId } from "@shared/model";
-import { TURN_ABILITY_LIMITS } from "../../../../../../config";
-import { selectBoardById } from "../../selectors";
-import { setCurrentStat, setValueTransaction } from "../stats";
-import { resetAbilityLimits } from "../stats/ability/resetAbilityLimits";
+import { TURN_ABILITY_LIMITS } from "../../../../../../../shared/config";
+import {
+	setCurrentStat,
+	setValueTransaction,
+} from "../../../../../../../shared/lib/store/features/board/actions/stats";
+import { resetAbilityLimits } from "../../../../../../../shared/lib/store/features/board/actions/stats/ability/resetAbilityLimits";
+import { selectBoardById } from "../../../../../../../shared/lib/store/features/board/selectors";
 
 export const startNewTurn =
 	(boardId?: BoardId): AppThunk =>

@@ -1,5 +1,5 @@
+import { makeAction } from "@features/game/phase";
 import {
-	makeAction,
 	selectBoardById,
 	selectShowDamageAndHorror,
 	useAppDispatch,

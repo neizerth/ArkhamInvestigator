@@ -1,4 +1,5 @@
-import { makeAction, useAppDispatch, useAppSelector } from "@shared/lib";
+import { makeAction } from "@features/game/phase";
+import { useAppDispatch, useAppSelector } from "@shared/lib";
 import { selectHaveBoardAbilities } from "@shared/lib";
 import type { ImageBackgroundProps } from "@shared/ui";
 import { range } from "ramda";
