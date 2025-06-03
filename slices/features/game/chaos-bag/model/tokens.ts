@@ -1,39 +1,36 @@
-import type {
-	baseChaosTokenTypes,
-	baseSymbolicChaosTokenTypes,
-	blessChaosTokenType,
-	curseChaosTokenType,
-	frostChaosTokenType,
-	numericChaosTokenTypes,
-	specialChaosTokenTypes,
-	specialSymbolicChaosTokenTypes,
-	symbolicChaosTokenTypes,
-} from "../config/token/types";
+export type ChaosTokenType = BaseChaosTokenType | SpecialChaosTokenType;
 
-export type ChaosTokenType =
-	| BaseChaosTokenType
-	| SpecialChaosTokenType
-	| SpecialChaosTokenType;
+export type BaseChaosTokenType = NumericChaosTokenType | SymbolicChaosTokenType;
 
-export type BaseChaosTokenType = (typeof baseChaosTokenTypes)[number];
+export type NumericChaosTokenType =
+	| "+1"
+	| "0"
+	| "-1"
+	| "-2"
+	| "-3"
+	| "-4"
+	| "-5"
+	| "-6"
+	| "-7"
+	| "-8";
 
-export type NumericChaosTokenType = (typeof numericChaosTokenTypes)[number];
-
-export type SymbolicChaosTokenType = (typeof symbolicChaosTokenTypes)[number];
+export type SymbolicChaosTokenType =
+	| BaseSymbolicChaosTokenType
+	| SpecialSymbolicChaosTokenType;
 
 export type BaseSymbolicChaosTokenType =
-	(typeof baseSymbolicChaosTokenTypes)[number];
+	| "skull"
+	| "cultist"
+	| "tablet"
+	| "elderThing";
 
-export type SpecialSymbolicChaosTokenType =
-	(typeof specialSymbolicChaosTokenTypes)[number];
+export type SpecialSymbolicChaosTokenType = "elderSign" | "autoFail";
 
-export type SpecialChaosTokenType = (typeof specialChaosTokenTypes)[number];
+export type SpecialChaosTokenType = BlessCurseChaosTokenType | FrostTokenType;
 
-export type FrostTokenType = typeof frostChaosTokenType;
+export type FrostTokenType = "frost";
 
-export type BlessCurseChaosTokenType =
-	| typeof blessChaosTokenType
-	| typeof curseChaosTokenType;
+export type BlessCurseChaosTokenType = "bless" | "curse";
 
 export type ChaosTokensCount = Partial<Record<ChaosTokenType, number>>;
 
@@ -43,3 +40,5 @@ export type ChaosBagToken = {
 	removable: boolean;
 	sealed?: boolean;
 };
+
+export type ScenarioChaosTokenValues = Partial<Record<ChaosTokenType, number>>;

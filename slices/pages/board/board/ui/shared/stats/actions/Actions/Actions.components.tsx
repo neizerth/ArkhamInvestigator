@@ -1,6 +1,5 @@
 import { color, gameAssets, size } from "@shared/config";
-import { Action } from "@shared/ui";
-import { Value } from "@widgets/investigator/value";
+import { Action, Value } from "@shared/ui";
 import type { FC } from "react";
 import { View } from "react-native";
 import styled from "styled-components/native";

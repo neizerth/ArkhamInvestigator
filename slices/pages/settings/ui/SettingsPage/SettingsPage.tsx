@@ -1,11 +1,4 @@
-import {
-	selectChaosBagEnabled,
-	selectChaosBagLoadingAnimation,
-	selectUnlimitedChaosTokens,
-	setChaosBagEnabled,
-	setChaosBagLoadingAnimation,
-	setUnlimitedChaosTokens,
-} from "@features/game/chaos-bag";
+import * as chaosBag from "@features/game/chaos-bag";
 import { selectHapticMode, setHapticMode } from "@features/haptic";
 import {
 	changeLanguage,
@@ -121,22 +114,37 @@ export const SettingsPage = () => {
 					<C.Row>
 						<C.Checkbox
 							label="Chaos bag"
-							selector={selectChaosBagEnabled}
-							actionCreator={setChaosBagEnabled}
+							selector={chaosBag.selectChaosBagEnabled}
+							actionCreator={chaosBag.setChaosBagEnabled}
 						/>
 					</C.Row>
 					<C.Row>
 						<C.Checkbox
 							label="Chaos bag loading animation"
-							selector={selectChaosBagLoadingAnimation}
-							actionCreator={setChaosBagLoadingAnimation}
+							selector={chaosBag.selectChaosBagLoadingAnimation}
+							actionCreator={chaosBag.setChaosBagLoadingAnimation}
 						/>
 					</C.Row>
 					<C.Row>
 						<C.Checkbox
 							label="Unlimited chaos tokens"
-							selector={selectUnlimitedChaosTokens}
-							actionCreator={setUnlimitedChaosTokens}
+							selector={chaosBag.selectUnlimitedChaosTokens}
+							actionCreator={chaosBag.setUnlimitedChaosTokens}
+						/>
+					</C.Row>
+					<C.Rule />
+					<C.Row>
+						<C.Checkbox
+							label="Show skill check result"
+							selector={chaosBag.selectShowSkillCheckResult}
+							actionCreator={chaosBag.setShowSkillCheckResult}
+						/>
+					</C.Row>
+					<C.Row>
+						<C.Checkbox
+							label="Modify scenario tokens"
+							selector={chaosBag.selectModifyScenarioChaosTokens}
+							actionCreator={chaosBag.setModifyScenarioChaosTokens}
 						/>
 					</C.Row>
 				</C.Section>

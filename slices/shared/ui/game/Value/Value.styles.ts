@@ -1,4 +1,4 @@
-import { color } from "@shared/config";
+import { color } from "../../../config";
 
 export const valueStyle = {
 	color: color.white,
@@ -7,7 +7,7 @@ export const valueStyle = {
 export const numberSize: Record<number, number> = {
 	1: 1,
 	2: 0.7,
-	3: 0.45,
+	3: 0.54,
 };
 
 type GetValueStyleOptions = {

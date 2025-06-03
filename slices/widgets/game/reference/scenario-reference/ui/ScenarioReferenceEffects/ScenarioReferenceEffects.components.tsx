@@ -1,10 +1,10 @@
 import { GameText } from "@entities/game-text";
-import { ChaosToken } from "@features/game/chaos-bag";
 import { color } from "@shared/config";
 import { Row } from "@shared/ui";
 import { View } from "react-native";
 import styled from "styled-components";
 import { refPx as upx } from "../../lib";
+import { ScenarioReferenceToken } from "../ScenarioReferenceToken";
 
 export const Container: typeof View = styled(View)`
   gap: ${upx(5)}
@@ -15,7 +15,9 @@ export const Item: typeof Row = styled(Row)`
   align-items: center;
 `;
 
-export const Token: typeof ChaosToken = styled(ChaosToken)`
+export const Token: typeof ScenarioReferenceToken = styled(
+	ScenarioReferenceToken,
+)`
   
 `;
 

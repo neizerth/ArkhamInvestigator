@@ -108,6 +108,9 @@
 	"board.help.details.settings": "App settings",
 	"board.help.details.clearBoard": "Reset investigator data to the start of the game",
 
+	"Modify scenario tokens": "Modify scenario tokens",
+	"Show skill check result": "Show skill check result",
+
 	"chaosToken.curse.effect": "–2. Reveal another token. Instead of returning this token to the chaos bag, return it to the token pool.",
 	"chaosToken.bless.effect": "+2. Reveal another token. Instead of returning this token to the chaos bag, return it to the token pool",
 	"chaosToken.frost.first.effect": "–1. Reveal another token",

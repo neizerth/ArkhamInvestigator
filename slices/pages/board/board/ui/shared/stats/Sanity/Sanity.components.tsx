@@ -1,6 +1,5 @@
 import { color, gameAssets, size } from "@shared/config";
 import * as UI from "@shared/ui";
-import { Value as BaseValue } from "@widgets/investigator/value";
 import type { FC } from "react";
 import { View } from "react-native";
 import styled from "styled-components/native";
@@ -22,7 +21,7 @@ export const Container: typeof View = styled(View)`
 	position: relative;
 `;
 
-export const Value: typeof BaseValue = styled(BaseValue)`
+export const Value: typeof UI.Value = styled(UI.Value)`
   color: ${color.sanity};
 `;
 

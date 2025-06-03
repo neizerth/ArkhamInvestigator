@@ -1,6 +1,6 @@
 import { signedNumber } from "@shared/lib";
+import type { ValueProps } from "@shared/ui";
 import type { PickerItemInfo, PickerProps } from "@widgets/control/picker";
-import type { ValueProps } from "@widgets/investigator/value";
 import { type FC, memo, useCallback } from "react";
 import * as C from "./StatPicker.components";
 import { defaultStyles } from "./StatPicker.styles";

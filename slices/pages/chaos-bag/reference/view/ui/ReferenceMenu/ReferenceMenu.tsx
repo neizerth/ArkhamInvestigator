@@ -1,5 +1,15 @@
+import {
+	selectModifyScenarioChaosTokens,
+	setModifyScenarioChaosTokens,
+} from "@features/game/chaos-bag";
 import { routes } from "@shared/config";
-import { delay, goBack, goToPage, useAppDispatch } from "@shared/lib";
+import {
+	delay,
+	goBack,
+	goToPage,
+	useAppDispatch,
+	useAppSelector,
+} from "@shared/lib";
 import { useCallback } from "react";
 import type { ViewProps } from "react-native";
 import * as C from "./ReferenceMenu.components";
@@ -8,6 +18,8 @@ export type ReferenceMenuProps = ViewProps;
 
 export const ReferenceMenu = (props: ReferenceMenuProps) => {
 	const dispatch = useAppDispatch();
+
+	const editable = useAppSelector(selectModifyScenarioChaosTokens);
 
 	const back = useCallback(() => {
 		dispatch(goBack());
@@ -19,9 +31,18 @@ export const ReferenceMenu = (props: ReferenceMenuProps) => {
 		dispatch(goToPage(routes.chaosBagReferenceEdit));
 	}, [dispatch]);
 
+	const toggleChange = useCallback(() => {
+		dispatch(setModifyScenarioChaosTokens(!editable));
+	}, [dispatch, editable]);
+
+	const editableIcon = editable ? "eye-blocked" : "eye";
+
 	return (
 		<C.Container {...props}>
-			<C.Action onPress={edit} icon="edit" />
+			<C.Group>
+				<C.Action onPress={edit} icon="edit" />
+				<C.Action onPress={toggleChange} icon={editableIcon} />
+			</C.Group>
 
 			<C.Action onPress={back} icon="close" />
 		</C.Container>

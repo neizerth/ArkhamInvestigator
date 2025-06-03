@@ -5,6 +5,7 @@ import type {
 	ChaosBagHistoryItem,
 	ChaosBagToken,
 	ChaosTokensCount,
+	ScenarioChaosTokenValues,
 } from "../../../../model";
 
 export type IChaosBagState = {
@@ -24,6 +25,9 @@ export type IChaosBagState = {
 	currentTokenId: string | null;
 	enabled: boolean;
 	unlimitedChaosTokens: boolean;
+	modifyScenarioChaosTokens: boolean;
+	showSkillCheckResult: boolean;
+	scenarioChaosTokenValue: ScenarioChaosTokenValues | null;
 };
 
 const initialState: IChaosBagState = {
@@ -41,6 +45,9 @@ const initialState: IChaosBagState = {
 	currentTokenId: null,
 	skillCheckExpression: [],
 	unlimitedChaosTokens: false,
+	modifyScenarioChaosTokens: false,
+	showSkillCheckResult: false,
+	scenarioChaosTokenValue: null,
 };
 
 const state = createSliceState(initialState);
@@ -65,6 +72,9 @@ export const {
 	setRevealHistory,
 	setRevealHistoryItem,
 	setUnlimitedChaosTokens,
+	setModifyScenarioChaosTokens,
+	setShowSkillCheckResult,
+	setScenarioChaosTokenValue,
 } = chaosBag.actions;
 
 export const {
@@ -82,6 +92,9 @@ export const {
 	selectRevealHistory,
 	selectRevealHistoryItem,
 	selectUnlimitedChaosTokens,
+	selectModifyScenarioChaosTokens,
+	selectShowSkillCheckResult,
+	selectScenarioChaosTokenValue,
 } = chaosBag.selectors;
 
 export default chaosBag.reducer;

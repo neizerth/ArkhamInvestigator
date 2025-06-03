@@ -1,7 +1,7 @@
 import { useCallback, useMemo } from "react";
 import { type Directions, Gesture } from "react-native-gesture-handler";
-import type { HapticPatternType } from "../../model";
-import { useHapticFeedback } from "./useHapticFeedback";
+import type { HapticPatternType } from "../../../model";
+import { useHapticFeedback } from "../useHapticFeedback";
 
 type Options = {
 	direction: Directions;

@@ -1,5 +1,4 @@
-import { ImageBackground } from "@shared/ui";
-import { Value } from "@widgets/investigator/value";
+import { ImageBackground, Value } from "@shared/ui";
 import styled from "styled-components/native";
 import { StatPicker } from "../../../common/StatPicker";
 

@@ -1,7 +1,7 @@
-import type { IconNumberProps } from "@shared/ui";
 import { memo } from "react";
 import { StyleSheet, type ViewProps } from "react-native";
 import type { TextProps } from "react-native";
+import type { IconNumberProps } from "../icons";
 import * as C from "./Value.components";
 import { getFontStyle, valueStyle } from "./Value.styles";
 

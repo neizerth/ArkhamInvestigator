@@ -1,6 +1,6 @@
 import type { ChaosTokenType } from "../../model";
 
-export const numericChaosTokenTypes = [
+export const numericChaosTokenTypes: ChaosTokenType[] = [
 	"+1",
 	"0",
 	"-1",
@@ -11,26 +11,30 @@ export const numericChaosTokenTypes = [
 	"-6",
 	"-7",
 	"-8",
-] as const;
+];
 
-export const baseSymbolicChaosTokenTypes = [
+export const baseSymbolicChaosTokenTypes: ChaosTokenType[] = [
 	"skull",
 	"cultist",
 	"tablet",
 	"elderThing",
-] as const;
+];
 
-export const specialSymbolicChaosTokenTypes = [
+export const specialSymbolicChaosTokenTypes: ChaosTokenType[] = [
 	"elderSign",
 	"autoFail",
-] as const;
+];
 
 export const symbolicChaosTokenTypes = [
 	...baseSymbolicChaosTokenTypes,
 	...specialSymbolicChaosTokenTypes,
 ];
 
-export const specialChaosTokenTypes = ["frost", "bless", "curse"] as const;
+export const specialChaosTokenTypes: ChaosTokenType[] = [
+	"frost",
+	"bless",
+	"curse",
+];
 
 export const baseChaosTokenTypes = [
 	...numericChaosTokenTypes,
@@ -42,16 +46,16 @@ export const allChaosTokenTypes = [
 	...specialChaosTokenTypes,
 ];
 
-export const blessChaosTokenType = "bless" as const;
+export const blessChaosTokenType: ChaosTokenType = "bless";
 
-export const curseChaosTokenType = "curse" as const;
+export const curseChaosTokenType: ChaosTokenType = "curse";
 
-export const frostChaosTokenType = "frost" as const;
+export const frostChaosTokenType: ChaosTokenType = "frost";
 
-export const regulatChaosTokenTypes = [
+export const regulatChaosTokenTypes: ChaosTokenType[] = [
 	...baseChaosTokenTypes,
 	frostChaosTokenType,
-] as const;
+];
 
 export const removableChaosTokenTypes: ChaosTokenType[] = [
 	blessChaosTokenType,

@@ -1,6 +1,6 @@
 import { color, gameAssets } from "@shared/config";
 import * as UI from "@shared/ui";
-import { Value as BaseValue } from "@widgets/investigator/value";
+import { Value as BaseValue } from "@shared/ui";
 import styled from "styled-components/native";
 import { assetsSize } from "../../../../../config";
 import { withStat } from "../../../../../lib";

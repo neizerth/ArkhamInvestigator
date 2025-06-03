@@ -11,7 +11,7 @@ export const Container: typeof View = styled(View)`
   padding: ${size.gap.small}px 2px;
 `;
 export const Label: typeof Text = styled(Text)`
-  
+  text-align: right;
 `;
 
 export const Control: typeof Icon = styled(Icon)`

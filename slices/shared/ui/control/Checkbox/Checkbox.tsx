@@ -3,6 +3,7 @@ import * as C from "./Checkbox.components";
 
 export type CheckboxProps = ViewProps & {
 	contentContainerStyle?: ViewStyle;
+	contentStyle?: ViewStyle;
 	controlStyle?: TextStyle;
 	checked?: boolean;
 	label?: string;
@@ -12,6 +13,7 @@ export type CheckboxProps = ViewProps & {
 export const Checkbox = ({
 	contentContainerStyle,
 	controlStyle,
+	contentStyle,
 	checked,
 	children,
 	label,
@@ -22,9 +24,9 @@ export const Checkbox = ({
 
 	return (
 		<C.Container {...props}>
-			<C.Content>
+			<C.Content style={contentStyle}>
 				<C.Label>{label}</C.Label>
-				<C.Control icon={icon} />
+				<C.Control icon={icon} style={controlStyle} />
 				{children}
 			</C.Content>
 			{hint && <C.Hint>{hint}</C.Hint>}

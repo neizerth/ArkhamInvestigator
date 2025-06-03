@@ -1,6 +1,6 @@
-import { IconNumber } from "@shared/ui";
 import { View } from "react-native";
 import styled from "styled-components/native";
+import { IconNumber } from "../icons/IconNumber";
 
 export const Container: typeof View = styled(View)`
 `;

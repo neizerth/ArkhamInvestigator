@@ -15,9 +15,7 @@ export const ChaosBagReferenceViewPage = () => {
 			<Outside onPress={back} />
 			<C.Content>
 				<C.Menu />
-				<C.ReferenceContainer onPress={back}>
-					<C.Reference />
-				</C.ReferenceContainer>
+				<C.Reference />
 			</C.Content>
 		</C.Container>
 	);

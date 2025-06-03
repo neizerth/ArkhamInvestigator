@@ -1,7 +1,11 @@
 import { color } from "@shared/config";
-import { Row as BaseRow, IconNumber, SkillIcon } from "@shared/ui";
+import {
+	Row as BaseRow,
+	Value as BaseValue,
+	IconNumber,
+	SkillIcon,
+} from "@shared/ui";
 import { PickerMemo as BasePicker } from "@widgets/control/picker";
-import { Value as BaseValue } from "@widgets/investigator/value";
 import { Pressable, View } from "react-native";
 import styled from "styled-components/native";
 
