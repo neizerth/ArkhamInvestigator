@@ -47,11 +47,6 @@ export const HelpPage = () => {
 				{t`board.help.press.redo`}
 			</Text>
 			<Text>
-				<C.Icon icon="repeat" />
-				{" - "}
-				{t`board.help.press.reset`}
-			</Text>
-			<Text>
 				<C.Icon icon="chaos-bag-thin" />
 				{" - "}
 				{t`board.help.press.chaosBag`}
