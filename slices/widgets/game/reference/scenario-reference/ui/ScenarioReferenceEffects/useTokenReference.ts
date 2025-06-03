@@ -6,7 +6,7 @@ export const useTokenReference = () => {
 
 	const reference = getChaosBagTokenReference([text]);
 
-	const small = text.length > 490;
+	const small = text.length > 420;
 
 	return [reference, small] as [typeof reference, boolean];
 };
