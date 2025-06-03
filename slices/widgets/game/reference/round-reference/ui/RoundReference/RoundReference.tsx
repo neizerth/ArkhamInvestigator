@@ -50,7 +50,7 @@ export const RoundReference = (props: RoundReferenceProps) => {
 				<C.Title>
 					<C.TitleContent>{title}</C.TitleContent>
 				</C.Title>
-				<Delay delayMs={0}>
+				<Delay>
 					<C.Body>
 						{showActivePhase && (
 							<C.ActivePhase

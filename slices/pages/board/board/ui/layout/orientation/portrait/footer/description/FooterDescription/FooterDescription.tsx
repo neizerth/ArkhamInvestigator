@@ -1,5 +1,6 @@
 import { useHapticSwipe } from "@features/haptic";
 import { useRoute } from "@react-navigation/native";
+import { routes } from "@shared/config";
 import {
 	selectCurrentBoardProp,
 	selectCurrentFaction,
@@ -9,11 +10,16 @@ import {
 	useAppSelector,
 	useBackButton,
 	useFadeAnimation,
+	usePage,
 } from "@shared/lib";
 import { useCallback, useContext } from "react";
 import type { ViewProps } from "react-native";
-import { Directions, GestureDetector } from "react-native-gesture-handler";
-import { LayoutContext, TOP_CONTENT_OFFSET } from "../../../../../../config";
+import {
+	Directions,
+	Gesture,
+	GestureDetector,
+} from "react-native-gesture-handler";
+import { LayoutContext, TOP_CONTENT_OFFSET } from "../../../../../../../config";
 import * as C from "./FooterDescription.components";
 import { useGameText } from "./hooks";
 import { useContainerAnimation } from "./hooks/useContainerAnimation";
@@ -54,10 +60,19 @@ export const FooterDescription = ({ ...props }: FooterDescriptionProps) => {
 		dispatch(setShowDescription(false));
 	}, [dispatch]);
 
+	const goTo = usePage();
+
 	const swipeDown = useHapticSwipe({
 		direction: Directions.DOWN,
 		onSwipe: hide,
 	});
+
+	const swipeRight = useHapticSwipe({
+		direction: Directions.RIGHT,
+		onSwipe: goTo(routes.roundReference),
+	});
+
+	const gesture = Gesture.Exclusive(swipeDown, swipeRight);
 
 	if (!vw) {
 		return null;
@@ -73,7 +88,7 @@ export const FooterDescription = ({ ...props }: FooterDescriptionProps) => {
 			<C.Content>
 				{!showDescription && <C.ExpandArea />}
 				<C.TopContent />
-				<GestureDetector gesture={swipeDown}>
+				<GestureDetector gesture={gesture}>
 					<C.Background faction={faction} width={view.width}>
 						<C.DescriptionContent>
 							<C.TextContent>

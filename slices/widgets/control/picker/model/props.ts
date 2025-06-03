@@ -75,9 +75,9 @@ export type PickerHapticScrollProps = {
 };
 
 export type PickerPressProps = {
-	onPress?: () => void | boolean;
-	onLongPress?: () => void | boolean;
-	onDoublePress?: () => void | boolean;
+	onPress?: () => void | unknown;
+	onLongPress?: () => void | unknown;
+	onDoublePress?: () => void | unknown;
 	pressMaxDuration?: number;
 	longPressMinDuration?: number;
 	doublePressMaxDuration?: number;

@@ -56,11 +56,6 @@ export const HelpPage = () => {
 				{" - "}
 				{t`board.help.press.chaosBag`}
 			</Text>
-			<Text>
-				<C.Icon icon="icomoonfree-lock" />, <C.Icon icon="unlocked" />
-				{" - "}
-				{t`board.help.syncScenarioClues`}
-			</Text>
 
 			<Title>{t`Press and hold`}</Title>
 			<Text>{t`board.help.hold.freeArea`}</Text>
@@ -93,6 +88,48 @@ export const HelpPage = () => {
 				{t`board.help.longPress.chaosBag`}
 			</Text>
 			<Paragraph>{t`board.help.longPress.investigatorSelect`}</Paragraph>
+
+			<Title>{t`board.help.details`}</Title>
+
+			<Paragraph>{t`board.help.details.toggle`}</Paragraph>
+
+			<Paragraph>{t`board.help.details.trackers`}</Paragraph>
+
+			<Text>
+				<C.Icon icon="icomoonfree-lock" />, <C.Icon icon="unlocked" />
+				{" - "}
+				{t`board.help.syncScenarioClues`}
+			</Text>
+
+			<Text>
+				<C.Icon icon="resign" />
+				{" - "}
+				{t`board.help.details.goHome`}
+			</Text>
+
+			<Text>
+				<C.Icon icon="info" />
+				{" - "}
+				{t`board.help.details.info`}
+			</Text>
+
+			<Text>
+				<C.Icon icon="stopwatch" />
+				{" - "}
+				{t`board.help.details.roundReference`}
+			</Text>
+
+			<Text>
+				<C.Icon icon="wrench" />
+				{" - "}
+				{t`board.help.details.settings`}
+			</Text>
+
+			<Text>
+				<C.Icon icon="repeat" />
+				{" - "}
+				{t`board.help.details.clearBoard`}
+			</Text>
 
 			<Title>{t`Chaos Bag`}</Title>
 
@@ -134,11 +171,6 @@ export const HelpPage = () => {
 				<C.Icon icon="trash" />
 				{" - "}
 				{t`board.help.calculator.clearHistory`}
-			</Text>
-			<Text>
-				<C.Icon icon="token_sealed_outline" />
-				{" - "}
-				{t`board.help.calculator.chaosToken`}
 			</Text>
 			<Paragraph>{t`board.help.calculator.result`}</Paragraph>
 			<Paragraph>{t`board.help.calculator.history`}</Paragraph>

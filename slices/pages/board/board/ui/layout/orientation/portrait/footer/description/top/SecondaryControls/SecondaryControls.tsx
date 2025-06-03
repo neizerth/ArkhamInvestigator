@@ -9,7 +9,7 @@ import {
 	ScenarioClues,
 	ScenarioDoom,
 	ScenarioResources,
-} from "../../../../../../shared";
+} from "../../../../../../../shared";
 import * as C from "./SecondaryControls.components";
 
 export type SecondaryControlsProps = ViewProps;

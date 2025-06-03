@@ -54,8 +54,6 @@
 	"board.help.chaosBag.oneMore": "Tap to reveal one more token",
 	"board.help.chaosBag.swipe": "Swipe down on a token to see its reference information (if its presented)",
 
-	"board.help.calculator.chaosToken": "Tap to reveal a chaos token for the last calculation",
-
 	"board.help.press.chaosBag": "Chaos bag contents",
 	"board.help.longPress.chaosBag": "Reveals a chaos token",
 
@@ -102,6 +100,17 @@
 	"mythos.doom": "Placed 1 doom on the current agenda. Total doom: {{doom}}",
 
 	"timing.step.name": "Step {{name}}",
+
+	"board.help.details": "Details",
+	"board.help.details.toggle": "Open this section by tapping the investigator text block at the bottom of the screen or by swiping up. Close it by tapping the empty space above the scenario trackers, tapping the down arrow (in the bottom right corner), or swiping down.",
+	"board.help.details.trackers": "This section contains scenario trackers: clues, doom, and resources. You can enable specific trackers in Settings.",
+	"board.help.details.goHome": "Return to the main screen",
+	"board.help.details.info": "Help section (you are currently viewing it)",
+	"board.help.details.roundReference": "Interactive round sequence reference. You can access this section by swiping right on the investigator description (bottom block on the screen).",
+	"board.help.details.settings": "App settings",
+	"board.help.details.clearBoard": "Reset investigator data to the start of the game",
+
+	"board.help.syncScenarioClues": "Enables/disables synchronization of scenario and investigator clues: clues added to the scenario will be removed from the investigator",
 
 	"Show initial Health/Sanity": "Show initial Health/Sanity",
 

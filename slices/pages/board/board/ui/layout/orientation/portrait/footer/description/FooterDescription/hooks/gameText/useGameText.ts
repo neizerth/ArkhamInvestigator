@@ -1,7 +1,6 @@
 import { selectCurrentLanguage } from "@features/i18n";
 import { CAN_ALWAYS_SHOW_GAME_TEXT } from "@shared/config";
 import {
-	getBreaksCount,
 	selectAlwaysShowGameText,
 	selectBoardsCount,
 	selectCurrentBoardProp,
@@ -20,7 +19,6 @@ export const useGameText = () => {
 	const language = useAppSelector(selectCurrentLanguage);
 	const textSize = text.length;
 
-	const lines = getBreaksCount(text);
 	const isLargeText = textSize > 350;
 
 	const showSmallText =

@@ -39,7 +39,7 @@ export const BaseStatPicker = ({
 		if (defaultData) {
 			return defaultData;
 		}
-		return [...range(-initialValue, 0), ...range(1, 10)];
+		return range(-initialValue, 10);
 	}, [defaultData, initialValue]);
 
 	const diff = baseValue - initialValue;
@@ -93,6 +93,7 @@ export const BaseStatPicker = ({
 				onPress={onPress}
 				onLongPress={onLongPress}
 				animated={false}
+				zeroSign="+"
 				signed
 			/>
 		</C.Container>

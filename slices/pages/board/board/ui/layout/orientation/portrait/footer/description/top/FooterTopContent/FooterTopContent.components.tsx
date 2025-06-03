@@ -1,8 +1,8 @@
 import { Pressable } from "@features/haptic";
 import { View } from "react-native";
 import styled from "styled-components/native";
-import { TOP_CONTENT_OFFSET } from "../../../../../../../config";
-import { DescriptionTopMenu } from "../../DescriptionTopMenu";
+import { TOP_CONTENT_OFFSET } from "../../../../../../../../config";
+import { DescriptionTopMenu } from "../DescriptionTopMenu";
 import { SecondaryControls } from "../SecondaryControls";
 
 export const Container: typeof View = styled(View)`

@@ -5,7 +5,7 @@ import { useHapticFeedback } from "./useHapticFeedback";
 
 type Options = {
 	direction: Directions;
-	onSwipe?: () => void | boolean;
+	onSwipe?: () => void | unknown;
 	pattern?: HapticPatternType;
 };
 export const useHapticSwipe = ({ onSwipe, direction, pattern }: Options) => {
