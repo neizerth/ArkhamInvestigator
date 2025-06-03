@@ -1,5 +1,5 @@
 import { color, size } from "@shared/config";
-import { IconNumber, type IconNumberProps, Row, Text } from "@shared/ui";
+import { IconNumber, type IconNumberProps, Text } from "@shared/ui";
 import { View } from "react-native";
 import styled, { css } from "styled-components/native";
 import { TouchableOpacity } from "../../../../../../../haptic";
@@ -14,7 +14,7 @@ export const Actions: typeof View = styled(View)`
   align-items: flex-end;
 `;
 
-export const CompareSymbol: typeof Text = styled(Text)`
+const ValueSymbol: typeof Text = styled(Text)`
   position: absolute;
   top: -7px;
   left: -12px;
@@ -22,7 +22,16 @@ export const CompareSymbol: typeof Text = styled(Text)`
   font-size: 25px;
 `;
 
-export const Difficulty: typeof Row = styled(Row)`
+export const CompareSymbol: typeof ValueSymbol = styled(ValueSymbol)`
+
+`;
+
+export const ResultSymbol: typeof ValueSymbol = styled(ValueSymbol)`
+  left: -12px;
+  top: 20px;
+`;
+
+export const Item: typeof View = styled(View)`
   padding-top: ${size.gap.medium}px;
   justify-content: center;
   align-items: center;
@@ -36,19 +45,18 @@ const valueFontSize: Record<number, number> = {
 	4: 28,
 };
 
-export const DifficultyButton: typeof TouchableOpacity = styled(
-	TouchableOpacity,
-)`
+export const Button: typeof TouchableOpacity = styled(TouchableOpacity)`
   
 `;
 
-export const DifficultyText: typeof IconNumber = styled(IconNumber).attrs({
+export const Value: typeof IconNumber = styled(IconNumber).attrs({
 	stroke: true,
 	strokeStyle: {
 		color: color.text,
 	},
 })`
   color: ${color.white};
+  min-width: 38px;
   ${({ value }: IconNumberProps) => css`
     font-size: ${valueFontSize[value.toString().length] || 25}px;
   `}

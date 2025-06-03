@@ -2,14 +2,14 @@ import { useAppSelector } from "@shared/lib";
 import type { ViewProps } from "react-native";
 import {
 	selectChaosBagSkillCheckType,
-	selectSkillCheckResult,
+	selectChaosBagSkillValue,
 } from "../../../../../lib";
 import * as C from "./LeftPanel.components";
 
 export type LeftPanelProps = ViewProps;
 
 export const LeftPanel = ({ ...props }: LeftPanelProps) => {
-	const skillValue = useAppSelector(selectSkillCheckResult);
+	const skillValue = useAppSelector(selectChaosBagSkillValue);
 	const skillType = useAppSelector(selectChaosBagSkillCheckType);
 
 	return (
