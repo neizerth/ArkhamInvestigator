@@ -15,7 +15,6 @@ export const Item: typeof TouchableOpacity = styled(TouchableOpacity)`
 export const ItemContent: typeof Row = styled(Row)`
   align-items: center;
 	gap: 2px;
-	flex-wrap: wrap;
 `;
 
 const zhTitleTextConfig = {

@@ -5,14 +5,14 @@ import {
 } from "@shared/lib";
 import type { BoardId } from "@shared/model";
 import { useMemo } from "react";
-import type { ChaosTokenType } from "../../model";
-import { getChaosBagTokenReference } from "../reference";
+import type { ChaosTokenType } from "../../../model";
+import { getChaosBagTokenReference } from "../../reference";
 
 type Options = {
 	boardId?: BoardId;
 };
 
-export const useChaosBagTokenReference = ({
+export const useChaosBagSpecialTokenReference = ({
 	boardId = "current",
 }: Options = {}) => {
 	const signature = useAppSelector(selectBoardProp(boardId, "investigator"));

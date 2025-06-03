@@ -136,8 +136,6 @@ export const HelpPage = () => {
 				{t`board.help.chaosBag.swipe`}
 			</Text>
 
-			<Paragraph>{t`board.help.chaosBag.swipe`}</Paragraph>
-
 			<Text>
 				<C.Icon icon="reply" />
 				{" - "}
@@ -196,10 +194,12 @@ export const HelpPage = () => {
 				{t`board.help.calculator.history.pin`}
 			</Text>
 
+			<Title>{t`Pinned calculations`}</Title>
+
+			<Paragraph>{t`board.help.pins.toggle`}</Paragraph>
 			<Paragraph>{t`board.help.pins.press`}</Paragraph>
 			<Paragraph>{t`board.help.pins.longPress`}</Paragraph>
 			<Paragraph>{t`board.help.pins.swipe`}</Paragraph>
-			<Paragraph>{t`board.help.pins.toggle`}</Paragraph>
 
 			<Title>{t`Investigator Special Actions`}</Title>
 			<Text>

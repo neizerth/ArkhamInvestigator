@@ -1,1 +1,1 @@
-export * from "./useChaosBagTokenReference";
+export * from "./token-reference";

@@ -2,7 +2,7 @@
 	"board.help.pins.press": "Press on a calculation on the board screen to unpin it",
 
 	"board.help.pins.longPress": "Long press on a calculation on the board screen to reveal chaos token for this calculation",
-	"board.help.pins.toggle": "If you have pinned calculations, you can press on its block on the board page to show/hide it",
+	"board.help.pins.toggle": "By default, if you have pinned calculations, you can press on its block on the board page to show/hide it. Also you can find Advanced mode of this feature on a Settings page",
 
 	"board.help.calculator.history.actions": "Swipe left on a calculation to see an additional menu",
 	"board.help.calculator.history.remove": "Remove a calculation",
@@ -107,6 +107,12 @@
 	"board.help.details.roundReference": "Interactive round sequence reference. You can access this section by swiping right on the investigator description (bottom block on the screen).",
 	"board.help.details.settings": "App settings",
 	"board.help.details.clearBoard": "Reset investigator data to the start of the game",
+
+	"chaosToken.curse.effect": "–2. Reveal another token. Instead of returning this token to the chaos bag, return it to the token pool.",
+	"chaosToken.bless.effect": "+2. Reveal another token. Instead of returning this token to the chaos bag, return it to the token pool",
+	"chaosToken.frost.first.effect": "–1. Reveal another token",
+	"chaosToken.frost.second.effect": "Resolve the test as an automatic failure",
+	"chaosToken.autoFail.effect": "Automatic failure",
 
 	"board.help.syncScenarioClues": "Enables/disables synchronization of scenario and investigator clues: clues added to the scenario will be removed from the investigator",
 

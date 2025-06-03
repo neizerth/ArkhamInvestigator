@@ -48,7 +48,8 @@ export const Health = ({ contentContainerStyle, ...props }: HealthProps) => {
 
 	const data = useMemo(() => {
 		const minValue = negative ? -20 : 0;
-		return showDamage ? damageData : range(minValue, maxValue);
+		const maxDamage = negative ? 20 : maxValue;
+		return showDamage ? range(0, maxDamage) : range(minValue, maxValue);
 	}, [maxValue, showDamage, negative]);
 
 	const currentValue = showDamage ? wounds : value;

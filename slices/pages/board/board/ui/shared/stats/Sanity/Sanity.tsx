@@ -44,8 +44,9 @@ export const Sanity = ({ ...props }: SanityProps) => {
 
 	const data = useMemo(() => {
 		const minValue = negative ? -20 : 0;
+		const maxHorror = negative ? 20 : maxValue;
 
-		return showHorror ? horrorData : range(minValue, maxValue);
+		return showHorror ? range(0, maxHorror) : range(minValue, maxValue);
 	}, [maxValue, showHorror, negative]);
 
 	const currentValue = showHorror ? wounds : value;
