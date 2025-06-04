@@ -26,7 +26,6 @@ export type IChaosBagState = {
 	enabled: boolean;
 	unlimitedChaosTokens: boolean;
 	modifyScenarioChaosTokens: boolean;
-	showSkillCheckResult: boolean;
 	chaosTokenValue: ScenarioChaosTokenValues | null;
 };
 
@@ -46,7 +45,6 @@ const initialState: IChaosBagState = {
 	skillCheckExpression: [],
 	unlimitedChaosTokens: false,
 	modifyScenarioChaosTokens: false,
-	showSkillCheckResult: false,
 	chaosTokenValue: null,
 };
 
@@ -73,7 +71,6 @@ export const {
 	setRevealHistoryItem,
 	setUnlimitedChaosTokens,
 	setModifyScenarioChaosTokens,
-	setShowSkillCheckResult,
 	setChaosTokenValue,
 } = chaosBag.actions;
 
@@ -93,7 +90,6 @@ export const {
 	selectRevealHistoryItem,
 	selectUnlimitedChaosTokens,
 	selectModifyScenarioChaosTokens,
-	selectShowSkillCheckResult,
 	selectChaosTokenValue,
 } = chaosBag.selectors;
 

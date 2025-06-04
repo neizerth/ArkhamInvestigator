@@ -3,6 +3,7 @@ import { useMemo } from "react";
 import type { ViewProps } from "react-native";
 import { chaosToken } from "../../../../../../config";
 import {
+	selectShowSkillCheckResult,
 	selectSkillCheckResult,
 	selectSkillCheckSucceedByResult,
 } from "../../../../../../lib";
@@ -15,6 +16,7 @@ const tokenColor = chaosToken.color.types;
 export const SkillCheckResult = (props: SkillCheckResultProps) => {
 	const result = useAppSelector(selectSkillCheckResult);
 	const succedBy = useAppSelector(selectSkillCheckSucceedByResult);
+	const show = useAppSelector(selectShowSkillCheckResult);
 
 	const fail = succedBy < 0 || result === "fail";
 
@@ -26,7 +28,7 @@ export const SkillCheckResult = (props: SkillCheckResultProps) => {
 		};
 	}, [fail]);
 
-	if (result === null) {
+	if (!show) {
 		return;
 	}
 

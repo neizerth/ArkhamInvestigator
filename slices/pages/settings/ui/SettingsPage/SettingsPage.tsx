@@ -132,14 +132,6 @@ export const SettingsPage = () => {
 							actionCreator={chaosBag.setUnlimitedChaosTokens}
 						/>
 					</C.Row>
-					<C.Rule />
-					<C.Row>
-						<C.Checkbox
-							label="Show skill check result"
-							selector={chaosBag.selectShowSkillCheckResult}
-							actionCreator={chaosBag.setShowSkillCheckResult}
-						/>
-					</C.Row>
 					<C.Row>
 						<C.Checkbox
 							label="Modify scenario tokens"
