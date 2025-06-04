@@ -4,4 +4,4 @@ export * from "./removeChaosTokenByType";
 export * from "./toggleChaosTokenSeal";
 export * from "./reveal";
 export * from "./removeAllChaosTokensByType";
-export * from "./setScenarioChaosTokenValueByType";
+export * from "./setChaosTokenValueByType";

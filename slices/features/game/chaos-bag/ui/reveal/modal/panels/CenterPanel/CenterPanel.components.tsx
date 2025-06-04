@@ -1,9 +1,8 @@
 import { size } from "@shared/config";
 import { View } from "react-native";
 import styled from "styled-components/native";
-import { Picker } from "../../../../../../../../widgets/control/picker";
 import { TouchableOpacity } from "../../../../../../../haptic";
-import { ChaosTokenPreview } from "../../../../token";
+import { ChaosTokenPreview, ChaosTokenValuePicker } from "../../../../token";
 import { ChaosTokenValue } from "../../../../token/ChaosTokenValue";
 import { ExpressionPanel } from "../ExpressionPanel";
 
@@ -47,8 +46,13 @@ export const ControlContainer: typeof View = styled(View)`
   overflow: hidden;
 `;
 
-export const Control: typeof Picker = styled(Picker).attrs({
-	gap: 150,
+export const Control: typeof ChaosTokenValuePicker = styled(
+	ChaosTokenValuePicker,
+).attrs({
+	gap: 110,
+	valueStyle: {
+		fontSize: 100,
+	},
 })`
   
 `;

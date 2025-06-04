@@ -27,7 +27,7 @@ export type IChaosBagState = {
 	unlimitedChaosTokens: boolean;
 	modifyScenarioChaosTokens: boolean;
 	showSkillCheckResult: boolean;
-	scenarioChaosTokenValue: ScenarioChaosTokenValues | null;
+	chaosTokenValue: ScenarioChaosTokenValues | null;
 };
 
 const initialState: IChaosBagState = {
@@ -47,7 +47,7 @@ const initialState: IChaosBagState = {
 	unlimitedChaosTokens: false,
 	modifyScenarioChaosTokens: false,
 	showSkillCheckResult: false,
-	scenarioChaosTokenValue: null,
+	chaosTokenValue: null,
 };
 
 const state = createSliceState(initialState);
@@ -74,7 +74,7 @@ export const {
 	setUnlimitedChaosTokens,
 	setModifyScenarioChaosTokens,
 	setShowSkillCheckResult,
-	setScenarioChaosTokenValue,
+	setChaosTokenValue,
 } = chaosBag.actions;
 
 export const {
@@ -94,7 +94,7 @@ export const {
 	selectUnlimitedChaosTokens,
 	selectModifyScenarioChaosTokens,
 	selectShowSkillCheckResult,
-	selectScenarioChaosTokenValue,
+	selectChaosTokenValue,
 } = chaosBag.selectors;
 
 export default chaosBag.reducer;

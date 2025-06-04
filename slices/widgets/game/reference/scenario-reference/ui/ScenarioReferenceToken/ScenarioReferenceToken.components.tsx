@@ -1,8 +1,7 @@
 import { ChaosToken } from "@features/game/chaos-bag";
-import { ChaosTokenValue } from "@features/game/chaos-bag/ui/token/ChaosTokenValue";
+import { ChaosTokenValuePicker } from "@features/game/chaos-bag";
 import { View } from "react-native";
 import styled from "styled-components/native";
-import { Picker } from "../../../../../control/picker";
 
 export const Container: typeof View = styled(View)`
   position: relative;
@@ -26,12 +25,13 @@ export const ControlContainer: typeof View = styled(View)`
   overflow: hidden;
 `;
 
-export const Control: typeof Picker = styled(Picker).attrs({
+export const Control: typeof ChaosTokenValuePicker = styled(
+	ChaosTokenValuePicker,
+).attrs({
 	gap: 24,
+	valueStyle: {
+		fontSize: 30,
+	},
 })`
   
-`;
-
-export const TokenValue: typeof ChaosTokenValue = styled(ChaosTokenValue)`
-  font-size: 30px;
 `;

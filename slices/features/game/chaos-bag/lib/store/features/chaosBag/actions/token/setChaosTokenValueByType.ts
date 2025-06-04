@@ -1,23 +1,20 @@
 import type { AppThunk } from "@shared/model";
 import type { ChaosTokenType } from "../../../../../../model";
-import {
-	selectScenarioChaosTokenValue,
-	setScenarioChaosTokenValue,
-} from "../../chaosBag";
+import { selectChaosTokenValue, setChaosTokenValue } from "../../chaosBag";
 
 type Options = {
 	type: ChaosTokenType;
 	value: number;
 };
-export const setScenarioChaosTokenValueByType =
+export const setChaosTokenValueByType =
 	({ type, value }: Options): AppThunk =>
 	(dispatch, getState) => {
 		const state = getState();
 
-		const data = selectScenarioChaosTokenValue(state) || {};
+		const data = selectChaosTokenValue(state) || {};
 
 		dispatch(
-			setScenarioChaosTokenValue({
+			setChaosTokenValue({
 				...data,
 				[type]: value,
 			}),
