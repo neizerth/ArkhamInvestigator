@@ -8,7 +8,6 @@ import { Icon } from "../Icon/Icon";
 import type { CharProps, PropsWithSize } from "./IconNumber.types";
 
 export const Container: typeof View = styled(Row)`
-  
 `;
 
 export const CharContainer: typeof View = styled(View)`

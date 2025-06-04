@@ -2,16 +2,19 @@ import { color, size } from "@shared/config";
 import { IconNumber, type IconNumberProps, Text } from "@shared/ui";
 import { View } from "react-native";
 import styled, { css } from "styled-components/native";
-import { TouchableOpacity } from "../../../../../../../haptic";
+import { TouchableOpacity } from "../../../../../../../../haptic";
+import { DifficultyControl } from "../DifficultyControl";
+import { SkillCheckResult } from "../SkillCheckResult";
 
 export const Container: typeof View = styled(View)`
+
 `;
 
 export const Actions: typeof View = styled(View)`
   padding: ${size.gap.small}px 0;
   flex: 1;
   justify-content: space-between;
-  align-items: flex-end;
+  align-items: flex-start;
 `;
 
 const ValueSymbol: typeof Text = styled(Text)`
@@ -60,5 +63,14 @@ export const Value: typeof IconNumber = styled(IconNumber).attrs({
   ${({ value }: IconNumberProps) => css`
     font-size: ${valueFontSize[value.toString().length] || 25}px;
   `}
-  
+`;
+
+export const DifficultyPicker: typeof DifficultyControl = styled(
+	DifficultyControl,
+)`
+  margin-top: -10px;
+`;
+
+export const Result: typeof SkillCheckResult = styled(SkillCheckResult)`
+  width: 100%;
 `;

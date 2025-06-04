@@ -1,5 +1,6 @@
 import { useHapticFeedback } from "@features/haptic";
 import {
+	minMax,
 	selectSkillCheckData,
 	selectSkillCheckDifficulty,
 	sendCommandSignal,
@@ -36,7 +37,8 @@ export const EvaluationExpressionGestures = ({
 		}
 
 		impactHapticFeedback();
-		const nextDifficulty = difficulty === first.value ? null : first.value;
+		const nextDifficulty =
+			difficulty === first.value ? null : minMax(first.value, -9, 100);
 		dispatch(setSkillCheckDifficulty(nextDifficulty));
 	}, [dispatch, impactHapticFeedback, expression, difficulty]);
 

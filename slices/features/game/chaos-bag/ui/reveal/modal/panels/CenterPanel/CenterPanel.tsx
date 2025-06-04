@@ -49,8 +49,6 @@ export const CenterPanel = ({
 		onPress,
 	});
 
-	tap.onStart(onTouchStart);
-
 	const longPress = useHapticLongPress({
 		onLongPress,
 	});
@@ -63,7 +61,7 @@ export const CenterPanel = ({
 				<C.LastToken {...lastToken} {...props} />
 				{enabled && (
 					<C.ControlContainer>
-						<C.Control type={type} />
+						<C.Control type={type} onTouchStart={onTouchStart} />
 					</C.ControlContainer>
 				)}
 

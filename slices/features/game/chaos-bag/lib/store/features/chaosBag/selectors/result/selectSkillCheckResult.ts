@@ -1,24 +1,20 @@
 import { createSelector } from "@reduxjs/toolkit";
-import { identity, propEq } from "ramda";
+import type { SkillCheckResult } from "@shared/model";
+import { propEq, sum } from "ramda";
 import { numericChaosTokenTypes } from "../../../../../../config/token/types";
 import type { ChaosTokenType } from "../../../../../../model";
 import {
-	selectChaosBagSkillCheckType,
 	selectChaosBagSkillValue,
+	selectChaosTokenValue,
 } from "../../chaosBag";
 import { selectRevealedTokens } from "../reveal";
 
-const numericTypes = numericChaosTokenTypes as unknown as ChaosTokenType[];
-
 export const selectSkillCheckResult = createSelector(
-	[
-		selectChaosBagSkillValue,
-		selectRevealedTokens,
-		selectChaosBagSkillCheckType,
-	],
-	(baseValue, tokens, skillCheckType) => {
-		if (!skillCheckType) {
-			return baseValue;
+	[selectChaosBagSkillValue, selectRevealedTokens, selectChaosTokenValue],
+	(skillValue, tokens, specialValueRecord): SkillCheckResult | null => {
+		const baseValue = skillValue || 0;
+		if (typeof skillValue !== "number") {
+			return null;
 		}
 
 		const withType = (type: ChaosTokenType) =>
@@ -30,33 +26,41 @@ export const selectSkillCheckResult = createSelector(
 		const autoFail = withType("autoFail");
 
 		if (autoFail.length > 0) {
-			return 0;
+			return "fail";
 		}
 
 		if (frostTokens.length > 1) {
-			return 0;
+			return "fail";
 		}
 
-		const numericTokens = tokens
-			.filter((token) => numericTypes.includes(token.type))
-			.map((token) => Number.parseInt(token.type))
-			.filter(identity);
+		const numericValues = tokens
+			.filter((token) => numericChaosTokenTypes.includes(token.type))
+			.map((token) => Number.parseInt(token.type) || 0);
 
-		const numericTokensValue = numericTokens.reduce(
-			(acc, value) => acc + value,
-			0,
+		const specialValues = tokens.map((token) =>
+			specialValueRecord && token.type in specialValueRecord
+				? (specialValueRecord[token.type] ?? 0)
+				: 0,
 		);
+
+		const specialTokenValue = sum(specialValues);
+
+		const numericTokensValue = sum(numericValues);
 		const frostValue = frostTokens.length > 0 ? -1 : 0;
 		const blessValue = blessTokens.length * 2;
 		const curseValue = curseTokens.length * -2;
 
-		return Math.max(
-			0,
-			(baseValue ?? 0) +
-				numericTokensValue +
-				frostValue +
-				blessValue +
-				curseValue,
-		);
+		const totalSum = sum([
+			baseValue,
+			specialTokenValue,
+			numericTokensValue,
+			frostValue,
+			blessValue,
+			curseValue,
+		]);
+
+		const total = Math.max(0, totalSum);
+
+		return total;
 	},
 );

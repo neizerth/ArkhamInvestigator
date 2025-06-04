@@ -46,4 +46,4 @@ export type SkillCheckCommandType = "clear" | "clear-last" | "empty";
 
 export type SkillCheckDifficultyType = "gt" | "gte";
 
-export type SkillCheckResult = number | "fail" | "success" | "unknown";
+export type SkillCheckResult = number | "fail" | "success";

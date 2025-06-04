@@ -8,16 +8,24 @@ import { getFontStyle, valueStyle } from "./Value.styles";
 export type ValueProps = IconNumberProps & {
 	containerStyle?: ViewProps["style"];
 	textStyle?: TextProps["style"];
+	scale?: boolean;
 };
 
-export const Value = ({ stroke = true, textStyle, ...props }: ValueProps) => {
+export const Value = ({
+	stroke = true,
+	textStyle,
+	scale = true,
+	...props
+}: ValueProps) => {
 	const { value } = props;
 	const { color, fontSize } = StyleSheet.flatten(props.style);
 
-	const fontStyle = getFontStyle({
-		defaultFontSize: fontSize,
-		value,
-	});
+	const fontStyle =
+		scale &&
+		getFontStyle({
+			defaultFontSize: fontSize,
+			value,
+		});
 
 	const strokeStyle = {
 		color,
