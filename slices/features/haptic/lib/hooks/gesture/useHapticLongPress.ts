@@ -4,17 +4,16 @@ import type { HapticPatternType } from "../../../model";
 import { useHapticCallback } from "../useHapticCallback";
 
 type Options = {
-	onPress?: () => void | unknown;
+	onLongPress?: () => void | unknown;
 	pattern?: HapticPatternType;
 };
-
-export const useHapticTap = ({ pattern, onPress }: Options) => {
+export const useHapticLongPress = ({ pattern, onLongPress }: Options) => {
 	const onStart = useHapticCallback({
-		callback: onPress,
+		callback: onLongPress,
 		pattern,
 	});
 
 	return useMemo(() => {
-		return Gesture.Tap().runOnJS(true).onStart(onStart);
+		return Gesture.LongPress().runOnJS(true).onStart(onStart);
 	}, [onStart]);
 };

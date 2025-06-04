@@ -1,7 +1,7 @@
-import { useCallback, useMemo } from "react";
+import { useMemo } from "react";
 import { type Directions, Gesture } from "react-native-gesture-handler";
 import type { HapticPatternType } from "../../../model";
-import { useHapticFeedback } from "../useHapticFeedback";
+import { useHapticCallback } from "../useHapticCallback";
 
 type Options = {
 	direction: Directions;
@@ -9,22 +9,13 @@ type Options = {
 	pattern?: HapticPatternType;
 };
 export const useHapticSwipe = ({ onSwipe, direction, pattern }: Options) => {
-	const impactHapticFeedback = useHapticFeedback(pattern);
-
-	const callback = useCallback(() => {
-		if (!onSwipe) {
-			return;
-		}
-		const response = onSwipe();
-
-		if (response === false) {
-			return;
-		}
-		impactHapticFeedback();
-	}, [impactHapticFeedback, onSwipe]);
+	const onStart = useHapticCallback({
+		callback: onSwipe,
+		pattern,
+	});
 
 	return useMemo(
-		() => Gesture.Fling().direction(direction).runOnJS(true).onStart(callback),
-		[direction, callback],
+		() => Gesture.Fling().direction(direction).runOnJS(true).onStart(onStart),
+		[direction, onStart],
 	);
 };

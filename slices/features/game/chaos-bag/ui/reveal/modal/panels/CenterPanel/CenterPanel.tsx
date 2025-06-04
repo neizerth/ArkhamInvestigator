@@ -2,6 +2,7 @@ import { useAppDispatch, useAppSelector } from "@shared/lib";
 import { useCallback } from "react";
 import type { ViewProps } from "react-native";
 import { Gesture, GestureDetector } from "react-native-gesture-handler";
+import { useHapticLongPress, useHapticTap } from "../../../../../../../haptic";
 import { chaosToken } from "../../../../../config";
 import {
 	selectChaosTokenValueByType,
@@ -44,12 +45,17 @@ export const CenterPanel = ({
 		dispatch(setCurrentTokenId(lastToken.id));
 	}, [dispatch, lastToken]);
 
-	const tap = Gesture.Tap()
-		.runOnJS(true)
-		.onBegin(onTouchStart)
-		.onStart(() => onPress?.());
+	const tap = useHapticTap({
+		onPress,
+	});
 
-	const getsture = Gesture.Exclusive(tap);
+	tap.onStart(onTouchStart);
+
+	const longPress = useHapticLongPress({
+		onLongPress,
+	});
+
+	const getsture = Gesture.Exclusive(tap, longPress);
 
 	return (
 		<GestureDetector gesture={getsture}>
