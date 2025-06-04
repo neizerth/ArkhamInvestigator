@@ -187,6 +187,11 @@ export const Step: typeof View = styled(View)`
 	position: relative;
 `;
 
+export const StepButton: typeof TouchableOpacity = styled(TouchableOpacity)`
+	position: relative;
+	z-index: 2;
+`;
+
 export const StepContent: typeof RoundReferencePhaseStep = styled(
 	RoundReferencePhaseStep,
 )`

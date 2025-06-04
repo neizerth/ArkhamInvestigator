@@ -1,7 +1,6 @@
-import { type TimingPhaseStep, startTimingWizard } from "@features/game/rules";
+import type { TimingPhaseStep } from "@features/game/rules";
 import { selectCurrentLanguage } from "@features/i18n";
-import { useAppDispatch, useAppSelector } from "@shared/lib";
-import { useCallback } from "react";
+import { useAppSelector } from "@shared/lib";
 import type { ViewProps } from "react-native";
 import * as C from "./RoundReferencePhaseStep.components";
 import { getStepTextComponents } from "./RoundReferencePhaseStep.style";
@@ -14,7 +13,6 @@ export const RoundReferencePhaseStep = ({
 	step,
 	...props
 }: RoundReferencePhaseStepProps) => {
-	const dispatch = useAppDispatch();
 	const { index, phaseId } = step;
 
 	const language = useAppSelector(selectCurrentLanguage);
@@ -23,12 +21,8 @@ export const RoundReferencePhaseStep = ({
 		type: step.type,
 	});
 
-	const play = useCallback(() => {
-		dispatch(startTimingWizard(phaseId, index));
-	}, [dispatch, index, phaseId]);
-
 	return (
-		<C.Container {...props} onPress={play}>
+		<C.Container {...props}>
 			<C.Text
 				value={step.text}
 				end={step.type === "end"}

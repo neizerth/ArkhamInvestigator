@@ -60,10 +60,13 @@ export const reduceCurrentStat =
 		}
 
 		dispatch(
-			addCurrentHistoryItem({
-				value: {
-					[type]: statValue,
+			addCurrentHistoryItem(
+				{
+					value: {
+						[type]: statValue,
+					},
 				},
-			}),
+				boardId,
+			),
 		);
 	};

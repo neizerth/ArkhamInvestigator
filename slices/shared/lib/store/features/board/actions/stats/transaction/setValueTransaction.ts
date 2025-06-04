@@ -1,5 +1,5 @@
 import type { AppThunk, BoardId, InvestigatorBoardValues } from "@shared/model";
-import { selectCurrentBoard } from "../../../selectors/current/selectCurrentBoard";
+import { selectBoardById } from "../../../selectors";
 import { setBoard } from "../../board";
 import { addCurrentHistoryItem } from "../../history";
 
@@ -7,7 +7,7 @@ export const setValueTransaction =
 	(value: Partial<InvestigatorBoardValues>, boardId?: BoardId): AppThunk =>
 	(dispatch, getState) => {
 		const state = getState();
-		const board = selectCurrentBoard(state);
+		const board = selectBoardById(boardId)(state);
 
 		dispatch(
 			setBoard(
@@ -22,5 +22,5 @@ export const setValueTransaction =
 			),
 		);
 
-		dispatch(addCurrentHistoryItem({ value }));
+		dispatch(addCurrentHistoryItem({ value }, boardId));
 	};

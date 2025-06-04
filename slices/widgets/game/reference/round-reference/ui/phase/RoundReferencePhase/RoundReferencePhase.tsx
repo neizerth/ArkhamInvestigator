@@ -29,6 +29,13 @@ export const RoundReferencePhase = ({
 		dispatch(startTimingWizard(phase.id));
 	}, [dispatch, phase.id]);
 
+	const playStep = useCallback(
+		(stepIndex: number) => () => {
+			dispatch(startTimingWizard(phase.id, stepIndex));
+		},
+		[dispatch, phase.id],
+	);
+
 	return (
 		<C.Container {...props} open={open}>
 			<C.Wrapper>
@@ -47,7 +54,13 @@ export const RoundReferencePhase = ({
 							<C.Steps>
 								{steps.map((step) => (
 									<C.Step key={step.id}>
-										<C.StepContent step={step} />
+										{step.type === "end" ? (
+											<C.StepContent step={step} />
+										) : (
+											<C.StepButton onPress={playStep(step.index)}>
+												<C.StepContent step={step} />
+											</C.StepButton>
+										)}
 										{step.color && (
 											<C.StepBackground backgroundColor={step.color} />
 										)}
