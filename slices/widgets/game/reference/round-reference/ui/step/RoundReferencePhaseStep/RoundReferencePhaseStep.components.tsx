@@ -1,8 +1,8 @@
 import { GameText, type GameTextProps } from "@entities/game-text";
-import { TouchableOpacity } from "@features/haptic";
 import { size } from "@shared/config";
 import { Row } from "@shared/ui";
 import type { FC } from "react";
+import { View } from "react-native";
 import styled from "styled-components";
 import { css } from "styled-components/native";
 import { phaseContentFontSize } from "../../../config";
@@ -10,7 +10,7 @@ import { StepActions } from "../StepActions";
 import { StepDoom } from "../StepDoom";
 import { StepResources } from "../StepResources";
 
-export const Container: typeof TouchableOpacity = styled(TouchableOpacity)`
+export const Container: typeof View = styled(View)`
 	flex-direction: row;
   justify-content: space-between;
   padding: 7px 12px;
