@@ -1,5 +1,7 @@
 import { signedNumber, useAppSelector } from "@shared/lib";
+import { useMemo } from "react";
 import type { ViewProps } from "react-native";
+import { chaosToken } from "../../../../../../config";
 import {
 	selectSkillCheckResult,
 	selectSkillCheckSucceedByResult,
@@ -8,9 +10,21 @@ import * as C from "./SkillCheckResult.components";
 
 export type SkillCheckResultProps = ViewProps;
 
+const tokenColor = chaosToken.color.types;
+
 export const SkillCheckResult = (props: SkillCheckResultProps) => {
 	const result = useAppSelector(selectSkillCheckResult);
 	const succedBy = useAppSelector(selectSkillCheckSucceedByResult);
+
+	const fail = succedBy < 0 || result === "fail";
+
+	const style = useMemo(() => {
+		const color = fail ? tokenColor.autoFail : tokenColor.elderSign;
+
+		return {
+			color,
+		};
+	}, [fail]);
 
 	if (result === null) {
 		return;
@@ -20,11 +34,13 @@ export const SkillCheckResult = (props: SkillCheckResultProps) => {
 		<C.Container {...props}>
 			<C.Content>
 				<C.CompareSymbol>=</C.CompareSymbol>
-				{typeof result === "number" && (
-					<C.Result>
-						<C.ResultValue value={signedNumber(succedBy)} scale={false} />
-					</C.Result>
-				)}
+				<C.Result>
+					<C.ResultValue
+						value={signedNumber(succedBy)}
+						style={style}
+						scale={false}
+					/>
+				</C.Result>
 			</C.Content>
 		</C.Container>
 	);

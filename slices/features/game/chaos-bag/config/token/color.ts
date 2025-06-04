@@ -7,6 +7,7 @@ const chaosTokenTypeColor: Partial<Record<ChaosTokenType, string>> = {
 	elderSign: "#4477A1",
 	skull: "#661e09",
 	cultist: "#314629",
+	autoFail: "#7D1318",
 };
 
 export const chaosTokenColor = {

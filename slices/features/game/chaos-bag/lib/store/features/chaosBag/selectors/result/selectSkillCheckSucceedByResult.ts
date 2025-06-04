@@ -12,6 +12,9 @@ export const selectSkillCheckSucceedByResult = createSelector(
 		selectSkillCheckDifficultyType,
 	],
 	(difficultyValue, resultValue, type) => {
+		if (resultValue === "fail") {
+			return 0;
+		}
 		const total = typeof resultValue === "number" ? resultValue : 0;
 		const difficulty = difficultyValue || 0;
 
