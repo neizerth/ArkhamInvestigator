@@ -2,11 +2,16 @@ import { createSelector } from "@reduxjs/toolkit";
 import {
 	selectChaosBagSkillValue,
 	selectChaosTokenValue,
+	selectModifyScenarioChaosTokens,
 } from "../../chaosBag";
 
 export const selectShowSkillCheckResult = createSelector(
-	[selectChaosTokenValue, selectChaosBagSkillValue],
-	(value, skillValue) => {
-		return typeof skillValue === "number" && value;
+	[
+		selectChaosTokenValue,
+		selectChaosBagSkillValue,
+		selectModifyScenarioChaosTokens,
+	],
+	(value, skillValue, modifyEnabled) => {
+		return modifyEnabled && typeof skillValue === "number" && value;
 	},
 );

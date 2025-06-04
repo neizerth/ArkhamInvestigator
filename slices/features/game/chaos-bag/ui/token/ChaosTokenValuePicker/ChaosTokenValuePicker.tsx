@@ -1,4 +1,8 @@
-import { useAppDispatch, useAppSelector } from "@shared/lib";
+import {
+	selectCurrentBoardProp,
+	useAppDispatch,
+	useAppSelector,
+} from "@shared/lib";
 import { range } from "ramda";
 import { useCallback } from "react";
 import type {
@@ -32,18 +36,27 @@ export const ChaosTokenValuePicker = ({
 	...props
 }: ChaosTokenValuePickerProps) => {
 	const dispatch = useAppDispatch();
-	const value = useAppSelector(selectChaosTokenValueByType(type));
+	const boardId = useAppSelector(selectCurrentBoardProp("id"));
+	const { code } = useAppSelector(selectCurrentBoardProp("investigator"));
+
+	const value = useAppSelector(
+		selectChaosTokenValueByType({
+			type,
+			code,
+		}),
+	);
 
 	const setValue = useCallback(
 		({ value = 0 }: PickerChangeEvent) => {
 			dispatch(
 				setChaosTokenValueByType({
+					boardId,
 					type,
 					value,
 				}),
 			);
 		},
-		[dispatch, type],
+		[dispatch, type, boardId],
 	);
 
 	const renderItem: PickerListRenderItem = useCallback(

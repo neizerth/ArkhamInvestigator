@@ -1,4 +1,8 @@
-import { useAppDispatch, useAppSelector } from "@shared/lib";
+import {
+	selectCurrentBoardProp,
+	useAppDispatch,
+	useAppSelector,
+} from "@shared/lib";
 import { useCallback, useMemo } from "react";
 import type { ViewProps } from "react-native";
 import {
@@ -39,10 +43,16 @@ export const CenterPanel = ({
 	...props
 }: CenterPanelProps) => {
 	const dispatch = useAppDispatch();
+	const { code } = useAppSelector(selectCurrentBoardProp("investigator"));
 	const { type } = lastToken;
+
 	const tokenValue = useAppSelector(
-		selectChaosTokenValueByType(lastToken.type),
+		selectChaosTokenValueByType({
+			type,
+			code,
+		}),
 	);
+
 	const showTokenValue = useAppSelector(selectModifyScenarioChaosTokens);
 	const showTokenType = specialTokenTypes.includes(type);
 

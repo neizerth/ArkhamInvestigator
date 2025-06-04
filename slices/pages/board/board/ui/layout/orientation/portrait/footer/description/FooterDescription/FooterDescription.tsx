@@ -74,7 +74,7 @@ export const FooterDescription = ({ ...props }: FooterDescriptionProps) => {
 
 	const gesture = Gesture.Exclusive(swipeDown, swipeRight);
 
-	if (!vw) {
+	if (!vw || !investigator) {
 		return null;
 	}
 
