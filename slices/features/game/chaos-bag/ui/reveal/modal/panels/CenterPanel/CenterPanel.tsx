@@ -1,8 +1,16 @@
 import { useAppDispatch, useAppSelector } from "@shared/lib";
-import { useCallback } from "react";
+import { useCallback, useMemo } from "react";
 import type { ViewProps } from "react-native";
-import { Gesture, GestureDetector } from "react-native-gesture-handler";
-import { useHapticLongPress, useHapticTap } from "../../../../../../../haptic";
+import {
+	Directions,
+	Gesture,
+	GestureDetector,
+} from "react-native-gesture-handler";
+import {
+	useHapticLongPress,
+	useHapticSwipe,
+	useHapticTap,
+} from "../../../../../../../haptic";
 import { chaosToken } from "../../../../../config";
 import {
 	selectChaosTokenValueByType,
@@ -41,7 +49,7 @@ export const CenterPanel = ({
 	const enabled =
 		showTokenType && showTokenValue && typeof tokenValue === "number";
 
-	const onTouchStart = useCallback(() => {
+	const setCurrentToken = useCallback(() => {
 		dispatch(setCurrentTokenId(lastToken.id));
 	}, [dispatch, lastToken]);
 
@@ -53,7 +61,20 @@ export const CenterPanel = ({
 		onLongPress,
 	});
 
-	const getsture = Gesture.Exclusive(tap, longPress);
+	const swipeDown = useHapticSwipe({
+		direction: Directions.DOWN,
+		onSwipe: setCurrentToken,
+	});
+
+	const gestures = useMemo(() => {
+		const base = [tap, longPress];
+		if (enabled) {
+			return base;
+		}
+		return [...base, swipeDown];
+	}, [enabled, tap, longPress, swipeDown]);
+
+	const getsture = Gesture.Exclusive(...gestures);
 
 	return (
 		<GestureDetector gesture={getsture}>
@@ -61,7 +82,7 @@ export const CenterPanel = ({
 				<C.LastToken {...lastToken} {...props} />
 				{enabled && (
 					<C.ControlContainer>
-						<C.Control type={type} onTouchStart={onTouchStart} />
+						<C.Control type={type} onTouchStart={setCurrentToken} />
 					</C.ControlContainer>
 				)}
 

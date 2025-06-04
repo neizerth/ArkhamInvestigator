@@ -8,6 +8,7 @@ import { getFontStyle, valueStyle } from "./Value.styles";
 export type ValueProps = IconNumberProps & {
 	containerStyle?: ViewProps["style"];
 	textStyle?: TextProps["style"];
+	sizes?: number[];
 	scale?: boolean;
 };
 
@@ -15,6 +16,7 @@ export const Value = ({
 	stroke = true,
 	textStyle,
 	scale = true,
+	sizes,
 	...props
 }: ValueProps) => {
 	const { value } = props;
@@ -24,6 +26,7 @@ export const Value = ({
 		scale &&
 		getFontStyle({
 			defaultFontSize: fontSize,
+			sizes,
 			value,
 		});
 

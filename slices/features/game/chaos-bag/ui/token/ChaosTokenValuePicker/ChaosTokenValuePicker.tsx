@@ -24,6 +24,8 @@ export type ChaosTokenValuePickerProps = Omit<
 	type: ChaosTokenType;
 };
 
+const valueSizes = [1, 1, 0.7];
+
 export const ChaosTokenValuePicker = ({
 	type,
 	valueStyle,
@@ -46,7 +48,14 @@ export const ChaosTokenValuePicker = ({
 
 	const renderItem: PickerListRenderItem = useCallback(
 		({ item }) => {
-			return <C.TokenValue value={item} type={type} style={valueStyle} />;
+			return (
+				<C.TokenValue
+					value={item}
+					type={type}
+					style={valueStyle}
+					sizes={valueSizes}
+				/>
+			);
 		},
 		[type, valueStyle],
 	);

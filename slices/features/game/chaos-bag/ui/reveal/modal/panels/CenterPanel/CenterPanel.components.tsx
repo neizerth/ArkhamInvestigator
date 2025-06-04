@@ -51,12 +51,12 @@ export const Control: typeof ChaosTokenValuePicker = styled(
 ).attrs({
 	gap: 110,
 	valueStyle: {
-		fontSize: 100,
+		fontSize: 60,
 	},
 })`
   
 `;
 
 export const TokenValue: typeof ChaosTokenValue = styled(ChaosTokenValue)`
-  font-size: 100px;
+
 `;
