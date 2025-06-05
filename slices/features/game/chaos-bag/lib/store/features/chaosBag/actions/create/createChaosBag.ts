@@ -1,8 +1,8 @@
 import type { AppThunk } from "@shared/model";
 import { repeat } from "ramda";
 import { v4 } from "uuid";
-import { chaosToken } from "../../../../../config";
-import { selectChaosBagTokenCount, setChaosBagContents } from "../chaosBag";
+import { chaosToken } from "../../../../../../config";
+import { selectChaosBagTokenCount, setChaosBagContents } from "../../chaosBag";
 
 export const createChaosBag = (): AppThunk => (dispatch, getState) => {
 	const state = getState();

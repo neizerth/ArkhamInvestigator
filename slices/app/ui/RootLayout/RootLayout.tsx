@@ -25,9 +25,12 @@ export const RootLayout = ({ children }: PropsWithChildren) => {
 		<AppProvider>
 			<Stack screenOptions={screenOptions}>
 				<Stack.Screen name="select-investigators/details" options={asModal} />
+
 				<Stack.Screen name="chaos-bag/preview" options={asModal} />
 				<Stack.Screen name="chaos-bag/reference/index" options={asModal} />
 				<Stack.Screen name="chaos-bag/reference/edit" options={asModal} />
+				<Stack.Screen name="chaos-bag/fill" options={asModal} />
+
 				<Stack.Screen name="board/overview" options={asModal} />
 				<Stack.Screen name="board/round-reference" options={asModal} />
 			</Stack>

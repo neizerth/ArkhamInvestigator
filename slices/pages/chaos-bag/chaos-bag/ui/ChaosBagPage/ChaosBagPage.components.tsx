@@ -16,20 +16,30 @@ export const Bag: typeof ChaosBagContents = styled(ChaosBagContents)`
 export const Reference: typeof Row = styled(Row)`
   padding: ${size.gap.default}px;
 	align-items: center;
-	gap: ${size.gap.default}px;
+	gap: ${size.gap.large}px;
 `;
 
 export const ReferenceText: typeof Text = styled(Text)`
   
 `;
 
-export const ReferenceButton: typeof Button = styled(Button).attrs({
+const TopButton: typeof Button = styled(Button).attrs({
 	textStyle: {
 		fontSize: font.size.small,
+		textAlign: "left",
 	},
 	iconStyle: {
 		fontSize: 14,
 	},
 })`
+`;
+
+export const ReferenceButton: typeof TopButton = styled(TopButton)`
+	flex: 1;
 	padding: 0;
+`;
+
+export const SetupButton: typeof TopButton = styled(TopButton)`
+	background-color: ${color.dark20};
+	padding: 5px 10px;
 `;

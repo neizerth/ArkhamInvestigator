@@ -1,4 +1,4 @@
 export * from "./token";
 export * from ".//history";
-export * from "./createChaosBag";
+export * from "./create";
 export * from "./initChaosBag";

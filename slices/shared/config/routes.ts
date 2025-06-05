@@ -20,6 +20,7 @@ export const routes = {
 	chaosBag: r("/chaos-bag"),
 	chaosBagPreview: r("/chaos-bag/preview"),
 	chaosBagHistory: r("/chaos-bag/history"),
+	chaosBagFill: r("/chaos-bag/fill"),
 	chaosBagReferenceEdit: r("/chaos-bag/reference/edit"),
 	chaosBagReferenceView: r("/chaos-bag/reference"),
 

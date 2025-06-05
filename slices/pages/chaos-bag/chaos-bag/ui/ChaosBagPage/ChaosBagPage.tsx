@@ -35,6 +35,13 @@ export const ChaosBagPage = () => {
 						icon="list2"
 						onPress={goToPage(routes.chaosBagReferenceEdit)}
 					/>
+					{story && (
+						<C.SetupButton
+							text={t`Fill`}
+							icon="chaos-bag-thin"
+							onPress={goToPage(routes.chaosBagFill)}
+						/>
+					)}
 				</C.Reference>
 				<C.Bag />
 			</Delay>
