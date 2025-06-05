@@ -68,8 +68,10 @@ export const ChaosBagFillPage = () => {
 		dispatch(goBack());
 	}, [dispatch, tokens]);
 
+	const title = story ? story.name : "Fill Chaos Bag";
+
 	return (
-		<C.Container title="Fill Chaos Bag">
+		<C.Container title={title}>
 			<C.Content>
 				<C.Select
 					data={data}
