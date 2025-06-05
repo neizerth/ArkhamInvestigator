@@ -17,7 +17,7 @@ import * as C from "./DifficultyControl.components";
 
 export type DifficultyControlProps = ViewProps;
 
-const data = range(-9, 101);
+const data = range(0, 101);
 
 export const DifficultyControl = (props: DifficultyControlProps) => {
 	const dispatch = useAppDispatch();
