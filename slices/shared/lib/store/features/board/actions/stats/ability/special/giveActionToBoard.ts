@@ -1,8 +1,10 @@
 import type { AppThunk } from "@shared/model";
 import type { InvestigatorAbility } from "arkham-investigator-data";
 import { inc } from "ramda";
+import type { DeclenseCase } from "../../../../../../../../../features";
 import { i18next } from "../../../../../../../../../features/i18n/config";
-import { declenseName } from "../../../../../../../../../features/i18n/lib/declenseName";
+import { declenseNoun } from "../../../../../../../../../features/i18n/lib/declense";
+import { declenseName } from "../../../../../../../../../features/i18n/lib/declense/declenseName";
 import { showToast } from "../../../../../../../../../features/notifications/lib";
 import {
 	selectAbilityUseInfo,
@@ -41,14 +43,24 @@ export const giveActionToBoard =
 			}),
 		);
 
-		const { name, gender } = board.investigator;
+		const { name, gender, locale: language, nameless } = board.investigator;
 		const from = fromInvestigator.name;
 
-		const dativeName = declenseName({
-			name,
-			gender,
-			resultCase: "dative",
-		});
+		const resultCase: DeclenseCase = "dative";
+
+		const dativeName = nameless
+			? declenseNoun({
+					text: name,
+					language,
+					resultCase,
+					gender,
+				})
+			: declenseName({
+					name,
+					gender,
+					language,
+					resultCase,
+				});
 
 		const message = i18next.t("actions.give", {
 			from,

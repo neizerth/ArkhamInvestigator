@@ -1,17 +1,16 @@
 import type { InvestigatorSignatureGender } from "arkham-investigator-data";
-import petrovich, { type PetrovichCase, type PetrovichGender } from "petrovich";
-import { DEFAULT_LANGUAGE, i18next } from "../config";
+import petrovich, { type PetrovichGender } from "petrovich";
+import type { DeclenseCase } from "../../model";
 
 type Options = {
 	name: string;
 	gender: InvestigatorSignatureGender;
-	resultCase: PetrovichCase;
+	resultCase: DeclenseCase;
+	language: string;
 };
 
 export const declenseName = (options: Options) => {
-	const language = i18next.language || DEFAULT_LANGUAGE;
-
-	if (language === "ru") {
+	if (options.language === "ru") {
 		return declenseNameRU(options);
 	}
 	return options.name;
