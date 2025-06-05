@@ -134,9 +134,9 @@ export const SettingsPage = () => {
 					</C.Row>
 					<C.Row>
 						<C.Checkbox
-							label="Modify scenario tokens"
-							selector={chaosBag.selectModifyScenarioChaosTokens}
-							actionCreator={chaosBag.setModifyScenarioChaosTokens}
+							label="Modify tokens"
+							selector={chaosBag.selectModifyChaosTokens}
+							actionCreator={chaosBag.setModifyChaosTokens}
 						/>
 					</C.Row>
 				</C.Section>

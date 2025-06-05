@@ -18,7 +18,7 @@ import {
 import { chaosToken } from "../../../../../config";
 import {
 	selectChaosTokenValueByType,
-	selectModifyScenarioChaosTokens,
+	selectModifyChaosTokens,
 	setCurrentTokenId,
 } from "../../../../../lib";
 import type { ChaosBagToken, ChaosTokenType } from "../../../../../model";
@@ -53,7 +53,7 @@ export const CenterPanel = ({
 		}),
 	);
 
-	const showTokenValue = useAppSelector(selectModifyScenarioChaosTokens);
+	const showTokenValue = useAppSelector(selectModifyChaosTokens);
 	const showTokenType = specialTokenTypes.includes(type);
 
 	const enabled =

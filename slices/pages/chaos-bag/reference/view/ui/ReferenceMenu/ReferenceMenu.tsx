@@ -1,6 +1,6 @@
 import {
-	selectModifyScenarioChaosTokens,
-	setModifyScenarioChaosTokens,
+	selectModifyChaosTokens,
+	setModifyChaosTokens,
 } from "@features/game/chaos-bag";
 import { routes } from "@shared/config";
 import {
@@ -19,7 +19,7 @@ export type ReferenceMenuProps = ViewProps;
 export const ReferenceMenu = (props: ReferenceMenuProps) => {
 	const dispatch = useAppDispatch();
 
-	const editable = useAppSelector(selectModifyScenarioChaosTokens);
+	const editable = useAppSelector(selectModifyChaosTokens);
 
 	const back = useCallback(() => {
 		dispatch(goBack());
@@ -32,7 +32,7 @@ export const ReferenceMenu = (props: ReferenceMenuProps) => {
 	}, [dispatch]);
 
 	const toggleChange = useCallback(() => {
-		dispatch(setModifyScenarioChaosTokens(!editable));
+		dispatch(setModifyChaosTokens(!editable));
 	}, [dispatch, editable]);
 
 	const editableIcon = editable ? "eye-blocked" : "eye";

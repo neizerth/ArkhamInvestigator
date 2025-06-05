@@ -1,6 +1,6 @@
 import {
 	type ChaosTokenProps,
-	selectModifyScenarioChaosTokens,
+	selectModifyChaosTokens,
 } from "@features/game/chaos-bag";
 import { useAppSelector } from "@shared/lib";
 
@@ -16,7 +16,7 @@ export const ScenarioReferenceToken = ({
 	...props
 }: ScenarioReferenceTokenProps) => {
 	const { type } = props;
-	const editable = useAppSelector(selectModifyScenarioChaosTokens);
+	const editable = useAppSelector(selectModifyChaosTokens);
 
 	return (
 		<C.Container style={contentContainerStyle}>

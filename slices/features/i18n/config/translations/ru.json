@@ -51,7 +51,7 @@
 	"board.help.chaosBag.oneMore": "Нажмите, чтобы вытянуть ещё один жетон",
 	"board.help.chaosBag.swipe": "Свайп вниз на вытянутом жетоне покажет эффект жетого жетона (если он есть и подключена памятка сценария)",
 
-	"Modify scenario tokens": "Изменять жетоны сценария",
+	"Modify tokens": "Изменять значения жетонов",
 
 	"board.help.press.chaosBag": "Показывает содержимое мешка хаоса",
 	"board.help.longPress.chaosBag": "Вытягивает жетон хаоса",

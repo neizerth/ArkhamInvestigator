@@ -25,7 +25,7 @@ export type IChaosBagState = {
 	currentTokenId: string | null;
 	enabled: boolean;
 	unlimitedChaosTokens: boolean;
-	modifyScenarioChaosTokens: boolean;
+	modifyChaosTokens: boolean;
 	chaosTokenValue: ScenarioChaosTokenValues | null;
 	investigatorChaosTokenValue: Record<
 		string,
@@ -48,7 +48,7 @@ const initialState: IChaosBagState = {
 	currentTokenId: null,
 	skillCheckExpression: [],
 	unlimitedChaosTokens: false,
-	modifyScenarioChaosTokens: false,
+	modifyChaosTokens: false,
 	chaosTokenValue: null,
 	investigatorChaosTokenValue: null,
 };
@@ -75,7 +75,7 @@ export const {
 	setRevealHistory,
 	setRevealHistoryItem,
 	setUnlimitedChaosTokens,
-	setModifyScenarioChaosTokens,
+	setModifyChaosTokens,
 	setChaosTokenValue,
 	setInvestigatorChaosTokenValue,
 } = chaosBag.actions;
@@ -95,7 +95,7 @@ export const {
 	selectRevealHistory,
 	selectRevealHistoryItem,
 	selectUnlimitedChaosTokens,
-	selectModifyScenarioChaosTokens,
+	selectModifyChaosTokens,
 	selectChaosTokenValue,
 	selectInvestigatorChaosTokenValue,
 } = chaosBag.selectors;
