@@ -3,7 +3,6 @@ import {
 	useAppDispatch,
 	useAppSelector,
 } from "@shared/lib";
-import { range } from "ramda";
 import { useCallback } from "react";
 import type {
 	PickerChangeEvent,
@@ -11,14 +10,13 @@ import type {
 	PickerProps,
 } from "../../../../../../widgets/control/picker";
 import {
+	selectChaosTokenRangeByType,
 	selectChaosTokenValueByType,
 	setChaosTokenValueByType,
 } from "../../../lib";
 import type { ChaosTokenType } from "../../../model";
 import type { ChaosTokenValueProps } from "../ChaosTokenValue";
 import * as C from "./ChaosTokenValuePicker.components";
-
-const data = range(-20, 21);
 
 export type ChaosTokenValuePickerProps = Omit<
 	PickerProps,
@@ -45,6 +43,8 @@ export const ChaosTokenValuePicker = ({
 			code,
 		}),
 	);
+
+	const data = useAppSelector(selectChaosTokenRangeByType(type));
 
 	const setValue = useCallback(
 		({ value = 0 }: PickerChangeEvent) => {

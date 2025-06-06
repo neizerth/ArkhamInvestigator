@@ -1,7 +1,10 @@
 import { createSelector } from "@reduxjs/toolkit";
 import type { ChaosTokenType } from "../../../../../../model";
 import { selectChaosTokenValue } from "../../chaosBag";
-import { selectReferenceDefaultTokenValues } from "../reference";
+import {
+	selectInvestigatorDefaultTokenValues,
+	selectReferenceDefaultTokenValues,
+} from "../reference";
 import { selectInvestigatorChaosTokenValuesByCode } from "./selectInvestigatorChaosTokenValuesByCode";
 
 type Options = {
@@ -13,12 +16,14 @@ export const selectChaosTokenValueByType = ({ type, code }: Options) =>
 	createSelector(
 		[
 			selectReferenceDefaultTokenValues,
+			selectInvestigatorDefaultTokenValues,
 			selectChaosTokenValue,
 			selectInvestigatorChaosTokenValuesByCode(code),
 		],
-		(defaultValues, values, investigatorValues) => {
+		(defaultValues, defaultInvestigatorValues, values, investigatorValues) => {
 			const data = {
 				...defaultValues,
+				...defaultInvestigatorValues,
 				...(values || {}),
 				...(investigatorValues || {}),
 			};
