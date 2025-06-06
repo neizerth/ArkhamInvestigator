@@ -1,7 +1,7 @@
 import { createSelector } from "@reduxjs/toolkit";
 import { propEq } from "ramda";
-import { selectReferenceCardCode } from "../stories";
-import { selectStory } from "./selectStory";
+import { selectReferenceCardCode } from "../../stories";
+import { selectStory } from "../selectStory";
 
 export const selectReferenceCard = createSelector(
 	[selectStory, selectReferenceCardCode],

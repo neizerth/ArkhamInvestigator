@@ -1,7 +1,8 @@
-import { getReferenceCardDifficulty } from "@entities/reference-card";
 import {
 	selectReferenceCard,
+	selectReferenceCardDifficulty,
 	selectReferenceCardText,
+	stripTags,
 	useAppSelector,
 } from "@shared/lib";
 import type { ViewProps } from "react-native";
@@ -12,6 +13,7 @@ export type ScenarioReferenceProps = ViewProps;
 
 export const ScenarioReference = (props: ScenarioReferenceProps) => {
 	const card = useAppSelector(selectReferenceCard);
+	const referenceDifficulty = useAppSelector(selectReferenceCardDifficulty);
 
 	const text = useAppSelector(selectReferenceCardText);
 
@@ -25,7 +27,7 @@ export const ScenarioReference = (props: ScenarioReferenceProps) => {
 		language: card.locale,
 		name,
 	});
-	const dificulty = getReferenceCardDifficulty(text).toLocaleUpperCase();
+	const dificulty = stripTags(referenceDifficulty).toLocaleUpperCase();
 
 	return (
 		<C.Container {...props}>

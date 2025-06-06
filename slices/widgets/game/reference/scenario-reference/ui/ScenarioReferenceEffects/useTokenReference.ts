@@ -1,10 +1,12 @@
-import { getChaosBagTokenReference } from "@features/game/chaos-bag";
-import { selectReferenceCardText, useAppSelector } from "@shared/lib";
+import {
+	selectReferenceCardText,
+	selectReferenceCardTokens,
+	useAppSelector,
+} from "@shared/lib";
 
 export const useTokenReference = () => {
 	const text = useAppSelector(selectReferenceCardText) || "";
-
-	const reference = getChaosBagTokenReference([text]);
+	const reference = useAppSelector(selectReferenceCardTokens);
 
 	const small = text.length > 420;
 

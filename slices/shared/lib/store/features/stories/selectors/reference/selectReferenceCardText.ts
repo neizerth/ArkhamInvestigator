@@ -1,5 +1,5 @@
 import { createSelector } from "@reduxjs/toolkit";
-import { selectShowReferenceBackText } from "../stories";
+import { selectShowReferenceBackText } from "../../stories";
 import { selectReferenceCard } from "./selectReferenceCard";
 
 export const selectReferenceCardText = createSelector(
