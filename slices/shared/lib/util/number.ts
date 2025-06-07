@@ -19,3 +19,11 @@ export const safeDecrement =
 	(minValue = Number.NEGATIVE_INFINITY) =>
 	(value = 0) =>
 		Math.max(value - 1, minValue);
+
+export const rangeStep = (min: number, max: number, step: number) => {
+	const data = [];
+	for (let i = min; i < max; i += step) {
+		data.push(i);
+	}
+	return data;
+};

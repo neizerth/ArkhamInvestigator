@@ -1,5 +1,5 @@
 import { createSelector } from "@reduxjs/toolkit";
-import { selectReferenceCardTokenValues } from "@shared/lib";
+import { rangeStep, selectReferenceCardTokenValues } from "@shared/lib";
 import { propEq, range } from "ramda";
 import type { ChaosTokenType } from "../../../../../../model";
 
@@ -17,9 +17,9 @@ export const selectChaosTokenRangeByType = (type: ChaosTokenType) =>
 		}
 
 		if (item.type === "counter") {
-			const { min = MIN_VALUE, max = MAX_VALUE } = item;
+			const { min = MIN_VALUE, max = MAX_VALUE, step } = item;
 
-			return range(min, max + 1);
+			return rangeStep(min, max, step);
 		}
 
 		if (item.type === "select" && item.values) {
