@@ -1,3 +1,3 @@
 export * from "./selectChaosBagTokenReference";
 export * from "./selectReferenceDefaultTokenValues";
-export * from "./selectInvestigatorDefaultTokenValues";
+export * from "./investigator";

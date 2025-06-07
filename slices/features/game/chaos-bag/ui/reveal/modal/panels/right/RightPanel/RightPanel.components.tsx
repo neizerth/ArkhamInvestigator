@@ -10,7 +10,7 @@ export const Container: typeof View = styled(View)`
 
 `;
 
-export const Actions: typeof View = styled(View)`
+export const Content: typeof View = styled(View)`
   padding: ${size.gap.small}px 0;
   flex: 1;
   justify-content: space-between;

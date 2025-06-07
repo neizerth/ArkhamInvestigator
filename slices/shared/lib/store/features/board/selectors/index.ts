@@ -6,3 +6,4 @@ export * from "./props";
 export * from "./transform";
 export * from "./selectNextBoardId";
 export * from "./selectBoardIds";
+export * from "./selectBoardByCode";

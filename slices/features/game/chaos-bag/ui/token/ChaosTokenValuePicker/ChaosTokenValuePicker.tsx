@@ -44,7 +44,12 @@ export const ChaosTokenValuePicker = ({
 		}),
 	);
 
-	const data = useAppSelector(selectChaosTokenRangeByType(type));
+	const data = useAppSelector(
+		selectChaosTokenRangeByType({
+			type,
+			code,
+		}),
+	);
 
 	const setValue = useCallback(
 		({ value = 0 }: PickerChangeEvent) => {

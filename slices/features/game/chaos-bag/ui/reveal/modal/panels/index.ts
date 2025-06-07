@@ -1,4 +1,4 @@
-export * from "./LeftPanel";
+export * from "./left/LeftPanel";
 export * from "./BottomPanel";
 export * from "./ExpressionPanel";
 export * from "./right";

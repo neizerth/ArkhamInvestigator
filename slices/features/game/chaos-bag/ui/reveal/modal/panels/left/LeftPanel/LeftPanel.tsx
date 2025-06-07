@@ -3,7 +3,7 @@ import type { ViewProps } from "react-native";
 import {
 	selectChaosBagSkillCheckType,
 	selectChaosBagSkillValue,
-} from "../../../../../lib";
+} from "../../../../../../lib";
 import * as C from "./LeftPanel.components";
 
 export type LeftPanelProps = ViewProps;
@@ -14,18 +14,14 @@ export const LeftPanel = ({ ...props }: LeftPanelProps) => {
 
 	return (
 		<C.Container {...props}>
-			<C.Actions>
-				<C.SkillValue>
-					{typeof skillValue === "number" && (
-						<C.SkillValueText value={skillValue} />
-					)}
-					{skillType && (
-						<C.SkillType>
-							<C.SkillTypeIcon statType={skillType} />
-						</C.SkillType>
-					)}
-				</C.SkillValue>
-			</C.Actions>
+			<C.Content>
+				{typeof skillValue === "number" && <C.SkillPicker />}
+				{skillType && (
+					<C.SkillType>
+						<C.SkillTypeIcon statType={skillType} />
+					</C.SkillType>
+				)}
+			</C.Content>
 		</C.Container>
 	);
 };

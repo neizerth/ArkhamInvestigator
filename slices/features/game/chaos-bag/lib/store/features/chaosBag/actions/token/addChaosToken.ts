@@ -3,7 +3,7 @@ import { v4 } from "uuid";
 import { chaosToken } from "../../../../../../config";
 import type { ChaosBagToken, ChaosTokenType } from "../../../../../../model";
 import { selectChaosBagContents, setChaosBagContents } from "../../chaosBag";
-import { selectChaosTokenCount } from "../../selectors";
+import { selectChaosTokenCount } from "../../selectors/contents/selectChaosTokenCount";
 import { setChaosTokenCount } from "./setChaosTokenCount";
 
 export const addChaosToken =

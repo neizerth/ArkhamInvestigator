@@ -1,12 +1,11 @@
 import { memo } from "react";
-import { StyleSheet, type ViewProps } from "react-native";
+import { StyleSheet } from "react-native";
 import type { TextProps } from "react-native";
 import type { IconNumberProps } from "../icons";
 import * as C from "./Value.components";
 import { getFontStyle, valueStyle } from "./Value.styles";
 
 export type ValueProps = IconNumberProps & {
-	containerStyle?: ViewProps["style"];
 	textStyle?: TextProps["style"];
 	sizes?: number[];
 	scale?: boolean;

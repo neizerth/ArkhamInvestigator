@@ -2,29 +2,41 @@ import { createSelector } from "@reduxjs/toolkit";
 import { rangeStep, selectReferenceCardTokenValues } from "@shared/lib";
 import { propEq, range } from "ramda";
 import type { ChaosTokenType } from "../../../../../../model";
+import { selectInvestigatorElderSignValue } from "../reference";
 
 const MAX_VALUE = 20;
 const MIN_VALUE = -21;
 
 const defaultData = range(MIN_VALUE, MAX_VALUE + 1);
 
-export const selectChaosTokenRangeByType = (type: ChaosTokenType) =>
-	createSelector([selectReferenceCardTokenValues], (data) => {
-		const item = data.find(propEq(type, "token"));
+type Options = {
+	type: ChaosTokenType;
+	code: string;
+};
 
-		if (!item || item.type === "value") {
+export const selectChaosTokenRangeByType = ({ type, code }: Options) =>
+	createSelector(
+		[selectReferenceCardTokenValues, selectInvestigatorElderSignValue(code)],
+		(data, elderSignValue) => {
+			if (type === "elderSign" && elderSignValue) {
+				return [elderSignValue.elderSign];
+			}
+			const item = data.find(propEq(type, "token"));
+
+			if (!item || item.type === "value") {
+				return defaultData;
+			}
+
+			if (item.type === "counter") {
+				const { min = MIN_VALUE, max = MAX_VALUE, step } = item;
+
+				return rangeStep(min, max, step);
+			}
+
+			if (item.type === "select" && item.values) {
+				return item.values;
+			}
+
 			return defaultData;
-		}
-
-		if (item.type === "counter") {
-			const { min = MIN_VALUE, max = MAX_VALUE, step } = item;
-
-			return rangeStep(min, max, step);
-		}
-
-		if (item.type === "select" && item.values) {
-			return item.values;
-		}
-
-		return defaultData;
-	});
+		},
+	);

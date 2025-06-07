@@ -16,6 +16,9 @@ export const InvesigatorCode = {
 		base: "02003",
 		book: "98001",
 	},
+	AgnesBaker: "01004",
+	IsabelleBarnes: "zjc_00027",
+	MarkHarrigan: "03001",
 };
 
 export const BOARD_ABILITY_LIMITS: LimitType[] = [
