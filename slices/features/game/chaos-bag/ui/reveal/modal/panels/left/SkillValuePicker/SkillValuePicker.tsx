@@ -34,7 +34,7 @@ export const SkillValuePicker = (props: SkillValuePickerProps) => {
 		[dispatch],
 	);
 
-	if (!skillValue) {
+	if (typeof skillValue !== "number") {
 		return;
 	}
 
