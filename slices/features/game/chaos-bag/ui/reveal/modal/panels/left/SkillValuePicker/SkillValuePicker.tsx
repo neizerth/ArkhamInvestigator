@@ -19,7 +19,7 @@ export const SkillValuePicker = (props: SkillValuePickerProps) => {
 	const skillValue = useAppSelector(selectChaosBagSkillValue);
 
 	const data = useMemo(() => {
-		const max = Math.max(skillValue || 0, 100);
+		const max = Math.max(skillValue || 0, 101);
 		return range(0, max + 1);
 	}, [skillValue]);
 
