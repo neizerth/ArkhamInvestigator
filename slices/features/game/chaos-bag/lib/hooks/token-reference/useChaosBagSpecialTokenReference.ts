@@ -1,12 +1,11 @@
 import {
-	selectBoardProp,
-	selectReferenceCardText,
+	selectBoardById,
+	selectReferenceCardTokens,
 	useAppSelector,
 } from "@shared/lib";
 import type { BoardId } from "@shared/model";
 import { useMemo } from "react";
 import type { ChaosTokenType } from "../../../model";
-import { getChaosBagTokenReference } from "../../reference";
 
 type Options = {
 	boardId?: BoardId;
@@ -15,12 +14,12 @@ type Options = {
 export const useChaosBagSpecialTokenReference = ({
 	boardId = "current",
 }: Options = {}) => {
-	const signature = useAppSelector(selectBoardProp(boardId, "investigator"));
-	const referenceText = useAppSelector(selectReferenceCardText) || "";
-	const signatureText = signature?.text || "";
+	const board = useAppSelector(selectBoardById(boardId));
+	const referenceEffects = useAppSelector(selectReferenceCardTokens);
+	const signatureEffects = board.investigator.tokens_reference;
 
 	return useMemo(() => {
-		const reference = getChaosBagTokenReference([signatureText, referenceText]);
+		const reference = [...referenceEffects, ...signatureEffects];
 
 		return reference.reduce(
 			(acc, entry) => {
@@ -35,5 +34,5 @@ export const useChaosBagSpecialTokenReference = ({
 			},
 			{} as Partial<Record<ChaosTokenType, string>>,
 		);
-	}, [signatureText, referenceText]);
+	}, [referenceEffects, signatureEffects]);
 };
