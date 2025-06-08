@@ -3,6 +3,7 @@ import type { AppThunk } from "@shared/model";
 import { v4 } from "uuid";
 import type { ChaosBagToken } from "../../../../../../model";
 import {
+	selectChaosBagSkillCheckExpression,
 	selectChaosBagSkillCheckTitle,
 	selectChaosBagSkillCheckType,
 	selectChaosBagSkillValue,
@@ -18,6 +19,7 @@ export const updateCurrentRevealHistoryItem =
 		const boardId = selectCurrentBoardProp("id")(state);
 		const skillCheckType = selectChaosBagSkillCheckType(state);
 		const skillCheckValue = selectChaosBagSkillValue(state);
+		const skillCheckExpression = selectChaosBagSkillCheckExpression(state);
 		const title = selectChaosBagSkillCheckTitle(state);
 
 		if (!boardId) {
@@ -30,6 +32,7 @@ export const updateCurrentRevealHistoryItem =
 			boardId,
 			skillCheckType,
 			skillCheckValue,
+			skillCheckExpression,
 			tokens: [],
 			title,
 		};

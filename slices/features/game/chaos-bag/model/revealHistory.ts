@@ -1,4 +1,4 @@
-import type { InvestigatorBoardStat } from "@shared/model";
+import type { InvestigatorBoardStat, SkillCheckItem } from "@shared/model";
 import type { ChaosBagToken } from "./tokens";
 
 export type ChaosBagHistoryItem = {
@@ -7,6 +7,7 @@ export type ChaosBagHistoryItem = {
 	title?: string | null;
 	skillCheckType?: InvestigatorBoardStat | null;
 	skillCheckValue?: number | null;
+	skillCheckExpression?: SkillCheckItem[];
 	tokens: ChaosBagToken[];
 	date: string;
 };

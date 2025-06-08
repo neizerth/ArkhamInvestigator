@@ -16,6 +16,7 @@ import { useCallback } from "react";
 import type { ListRenderItemInfo, ViewProps } from "react-native";
 import { Gesture, GestureDetector } from "react-native-gesture-handler";
 import * as C from "./ChaosBagRevealItem.components";
+import { getExpressionDisplayStyles } from "./ChaosBagRevealItem.styles";
 
 export type ChaosBagRevealItemProps = ViewProps & {
 	position: number;
@@ -70,9 +71,11 @@ export const ChaosBagRevealItem = ({
 		return null;
 	}
 
-	const { skillCheckType, skillCheckValue, title } = item;
+	const { skillCheckType, skillCheckValue, title, skillCheckExpression } = item;
 
 	const longPress = Gesture.LongPress().runOnJS(true).onStart(removeItem);
+
+	const expressionStyles = getExpressionDisplayStyles();
 
 	return (
 		<GestureDetector gesture={longPress}>
@@ -116,6 +119,16 @@ export const ChaosBagRevealItem = ({
 							</C.TitleText>
 						</C.Title>
 					)}
+					{!title &&
+						skillCheckExpression &&
+						skillCheckExpression.length > 0 && (
+							<C.Title>
+								<C.Expression
+									{...expressionStyles}
+									data={skillCheckExpression}
+								/>
+							</C.Title>
+						)}
 				</C.List>
 			</C.Container>
 		</GestureDetector>

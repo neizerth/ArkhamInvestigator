@@ -29,7 +29,12 @@ export const SkillValuePicker = (props: SkillValuePickerProps) => {
 
 	const onSkillValueChange = useCallback(
 		({ value = 0 }: PickerChangeEvent) => {
-			dispatch(updateChaosBagSkillValue(value));
+			dispatch(
+				updateChaosBagSkillValue({
+					boardId: "current",
+					value,
+				}),
+			);
 		},
 		[dispatch],
 	);

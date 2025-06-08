@@ -1,6 +1,7 @@
 import { ChaosBagRevealedToken } from "@features/game/chaos-bag/ui/reveal/ChaosBagRevealedToken";
 import { color, factionColor, font, size } from "@shared/config";
 import { IconNumber, Row, StatIcon, Text } from "@shared/ui";
+import { SkillCheckExpressionDisplay } from "@widgets/game/skill-check";
 import {
 	InvestigatorPreview,
 	type InvestigatorPreviewProps,
@@ -100,4 +101,13 @@ export const Position: typeof Text = styled(Text)`
   font-size: ${font.size.large}px;
   text-align: center;
   width: 36px;
+`;
+
+export const Expression: typeof SkillCheckExpressionDisplay = styled(
+	SkillCheckExpressionDisplay,
+)`
+  color: ${color.light10};
+  background-color: ${color.dark20};
+  padding: 2px 5px;
+  border-radius: 2px;
 `;
