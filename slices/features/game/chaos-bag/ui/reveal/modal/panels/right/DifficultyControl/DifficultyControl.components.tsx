@@ -26,8 +26,8 @@ export const Difficulty: typeof Value = styled(Value)`
 
 export const CompareSymbol: typeof UnscaledText = styled(UnscaledText)`
   position: absolute;
-  top: -17px;
-  left: -15px;
+  top: -19px;
+  left: -13px;
   color: ${color.white};
   font-size: 30px;
 `;

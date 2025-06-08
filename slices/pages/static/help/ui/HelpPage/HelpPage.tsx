@@ -141,13 +141,19 @@ export const HelpPage = () => {
 				{" - "}
 				{t`board.help.chaosBag.returnAll`}
 			</Text>
-
 			<C.IconText value={t`board.help.chaosBag.return`} />
 			<Text>
 				<C.Icon icon="plus-thin" />
 				{" - "}
 				{t`board.help.chaosBag.oneMore`}
 			</Text>
+
+			<Text>
+				<C.Icon icon="list2" />
+				{" - "}
+				{t`board.help.chaosBag.reference`}
+			</Text>
+
 			<Paragraph>
 				<C.IconText value={t`board.help.chaosBag.token.press`} />
 			</Paragraph>

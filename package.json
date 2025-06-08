@@ -40,7 +40,6 @@
     "expo": "~52.0.38",
     "expo-application": "~6.0.2",
     "expo-asset": "~11.0.5",
-    "expo-audio": "~0.4.6",
     "expo-blur": "~14.0.1",
     "expo-constants": "~17.0.3",
     "expo-custom-assets": "^1.4.1",
@@ -50,7 +49,7 @@
     "expo-keep-awake": "~14.0.3",
     "expo-linking": "~7.0.3",
     "expo-notifications": "~0.29.14",
-    "expo-router": "~4.0.20",
+    "expo-router": "~4.0.21",
     "expo-screen-orientation": "~8.0.4",
     "expo-splash-screen": "~0.29.24",
     "expo-status-bar": "~2.0.0",
@@ -93,7 +92,8 @@
     "rn-statusbar-height": "^2.1.1",
     "semver": "^7.7.1",
     "styled-components": "^6.1.15",
-    "uuid": "^11.0.5"
+    "uuid": "^11.0.5",
+    "expo-audio": "~0.3.5"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",

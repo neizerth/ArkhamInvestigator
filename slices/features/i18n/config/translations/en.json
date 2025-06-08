@@ -51,6 +51,7 @@
 	"board.help.chaosBag.token.longPress": "Long press on a revealed token to seal it",
 	"board.help.chaosBag.oneMore": "Tap to reveal one more token",
 	"board.help.chaosBag.swipe": "Swipe down on a token to see its reference information (if its presented)",
+	"board.help.chaosBag.reference": "Opens a chaos token reference",
 
 	"board.help.press.chaosBag": "Chaos bag contents",
 	"board.help.longPress.chaosBag": "Reveals a chaos token",

@@ -6,6 +6,7 @@ import {
 	useBackButton,
 	useBoolean,
 } from "@shared/lib";
+import { usePathname } from "expo-router";
 import { useCallback, useEffect } from "react";
 import {
 	returnChaosToken,
@@ -20,6 +21,7 @@ import { useShowModal } from "./useShowModal";
 
 export const useTokenRevealModal = () => {
 	const dispatch = useAppDispatch();
+	const pathname = usePathname();
 
 	const revealedCount = useAppSelector(selectRevealedTokensCount);
 	const animate = useAppSelector(selectChaosBagLoadingAnimation);
@@ -52,12 +54,15 @@ export const useTokenRevealModal = () => {
 	const handleBack = revealedCount > 0;
 
 	const onBack = useCallback(() => {
+		if (pathname !== "/board") {
+			return false;
+		}
 		if (handleBack) {
 			returnTokens();
 			return true;
 		}
 		return false;
-	}, [handleBack, returnTokens]);
+	}, [handleBack, returnTokens, pathname]);
 
 	useBackButton(onBack);
 

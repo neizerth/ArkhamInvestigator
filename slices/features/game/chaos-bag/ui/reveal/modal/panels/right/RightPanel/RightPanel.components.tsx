@@ -20,7 +20,7 @@ export const Content: typeof View = styled(View)`
 const ValueSymbol: typeof Text = styled(Text)`
   position: absolute;
   top: -7px;
-  left: -12px;
+  left: -10px;
   color: ${color.white};
   font-size: 25px;
 `;

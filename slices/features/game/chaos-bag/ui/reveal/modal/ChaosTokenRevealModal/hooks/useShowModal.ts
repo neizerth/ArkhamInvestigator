@@ -1,4 +1,5 @@
 import { useAppDispatch, useAppSelector } from "@shared/lib";
+import { usePathname } from "expo-router";
 import { useCallback, useEffect } from "react";
 import {
 	closeRevealChaosTokenModal,
@@ -9,10 +10,12 @@ import {
 
 export const useShowModal = () => {
 	const dispatch = useAppDispatch();
-
-	const visible = useAppSelector(selectShowRevealChaosTokenModal);
+	const pathname = usePathname();
+	const show = useAppSelector(selectShowRevealChaosTokenModal);
 	const unrevealedCount = useAppSelector(selectUnrevealedChaosTokensCount);
 	const revealedCount = useAppSelector(selectRevealedTokensCount);
+
+	const visible = show && pathname === "/board";
 
 	const isEmpty = revealedCount === 0 && unrevealedCount === 0;
 
