@@ -8,6 +8,8 @@ import {
 	selectUnrevealedChaosTokensCount,
 } from "../../../../../lib";
 
+const validPathnames = ["/board", "/board/skill-check"];
+
 export const useShowModal = () => {
 	const dispatch = useAppDispatch();
 	const pathname = usePathname();
@@ -15,7 +17,9 @@ export const useShowModal = () => {
 	const unrevealedCount = useAppSelector(selectUnrevealedChaosTokensCount);
 	const revealedCount = useAppSelector(selectRevealedTokensCount);
 
-	const visible = show && pathname === "/board";
+	const allowedPage = validPathnames.includes(pathname);
+
+	const visible = show && allowedPage;
 
 	const isEmpty = revealedCount === 0 && unrevealedCount === 0;
 
@@ -34,6 +38,7 @@ export const useShowModal = () => {
 	}, [hideModal, visible, close]);
 
 	return {
+		allowedPage,
 		visible,
 		close,
 		isEmpty,
