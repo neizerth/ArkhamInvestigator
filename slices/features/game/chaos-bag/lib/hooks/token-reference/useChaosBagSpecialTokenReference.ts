@@ -1,11 +1,8 @@
-import {
-	selectBoardById,
-	selectReferenceCardTokens,
-	useAppSelector,
-} from "@shared/lib";
+import { selectBoardById, useAppSelector } from "@shared/lib";
 import type { BoardId } from "@shared/model";
 import { useMemo } from "react";
 import type { ChaosTokenType } from "../../../model";
+import { selectChaosBagTokenReference } from "../../store";
 
 type Options = {
 	boardId?: BoardId;
@@ -15,7 +12,9 @@ export const useChaosBagSpecialTokenReference = ({
 	boardId = "current",
 }: Options = {}) => {
 	const board = useAppSelector(selectBoardById(boardId));
-	const referenceEffects = useAppSelector(selectReferenceCardTokens);
+	const referenceEffects = useAppSelector(
+		selectChaosBagTokenReference(boardId),
+	);
 	const signatureEffects = board.investigator.tokens_reference;
 
 	return useMemo(() => {

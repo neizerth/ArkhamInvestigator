@@ -30,7 +30,7 @@ export const selectChaosTokenRangeByType = ({ type, code }: Options) =>
 			if (item.type === "counter") {
 				const { min = MIN_VALUE, max = MAX_VALUE, step } = item;
 
-				return rangeStep(min, max, step);
+				return rangeStep(min, max + 1, step);
 			}
 
 			if (item.type === "select" && item.values) {

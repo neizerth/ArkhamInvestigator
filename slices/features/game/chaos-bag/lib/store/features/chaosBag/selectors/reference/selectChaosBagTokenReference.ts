@@ -1,14 +1,16 @@
 import { createSelector } from "@reduxjs/toolkit";
-import { selectCurrentBoard, selectReferenceCardTokens } from "@shared/lib";
+import { selectBoardById, selectReferenceCardTokens } from "@shared/lib";
+import type { BoardId } from "@shared/model";
 
-export const selectChaosBagTokenReference = createSelector(
-	[selectCurrentBoard, selectReferenceCardTokens],
-	(board, referenceTokens) => {
-		if (!board) {
-			return referenceTokens;
-		}
-		const { investigator } = board;
+export const selectChaosBagTokenReference = (boardId: BoardId = "current") =>
+	createSelector(
+		[selectBoardById(boardId), selectReferenceCardTokens],
+		(board, referenceTokens) => {
+			if (!board) {
+				return referenceTokens;
+			}
+			const { investigator } = board;
 
-		return [...investigator.tokens_reference, ...referenceTokens];
-	},
-);
+			return [...investigator.tokens_reference, ...referenceTokens];
+		},
+	);

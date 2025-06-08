@@ -1,17 +1,20 @@
+import { useAppSelector } from "@shared/lib";
 import type { BoardId } from "@shared/model";
 import { useMemo } from "react";
+import { selectChaosBagTokenReferenceEffects } from "../../store";
 import { useChaosBagBaseTokenReference } from "./useChaosBagBaseTokenReference";
 import { useChaosBagFrostTokenReference } from "./useChaosBagFrostTokenReference";
-import { useChaosBagSpecialTokenReference } from "./useChaosBagSpecialTokenReference";
 
 type Options = {
 	boardId?: BoardId;
 };
 
-export const useChaosBagTokenReference = (options?: Options) => {
+export const useChaosBagTokenReference = ({ boardId }: Options = {}) => {
 	const baseTokens = useChaosBagBaseTokenReference();
 	const dynamicTokens = useChaosBagFrostTokenReference();
-	const specialTokens = useChaosBagSpecialTokenReference(options);
+	const specialTokens = useAppSelector(
+		selectChaosBagTokenReferenceEffects(boardId),
+	);
 
 	return useMemo(() => {
 		return {
