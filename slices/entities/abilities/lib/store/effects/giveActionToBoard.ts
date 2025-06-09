@@ -1,15 +1,16 @@
-import type { AppThunk } from "@shared/model";
-import type { InvestigatorAbility } from "arkham-investigator-data";
-import { inc } from "ramda";
-import { i18next } from "../../../../../../../../../features/i18n/config";
-import { declenseName } from "../../../../../../../../../features/i18n/lib/declense/declenseName";
-import { showToast } from "../../../../../../../../../features/notifications/lib";
+import { declenseName } from "@features/i18n";
+import { i18next } from "@features/i18n/config";
+import { showToast } from "@features/notifications/lib";
 import {
+	decreaseCurrentStat,
+	reduceCurrentStat,
 	selectAbilityUseInfo,
 	selectBoardById,
 	selectCurrentBoardProp,
-} from "../../../../selectors";
-import { decreaseCurrentStat, reduceCurrentStat } from "../../current";
+} from "@shared/lib";
+import type { AppThunk } from "@shared/model";
+import type { InvestigatorAbility } from "arkham-investigator-data";
+import { inc } from "ramda";
 
 type Options = {
 	boardId: number;

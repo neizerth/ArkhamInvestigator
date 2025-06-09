@@ -4,13 +4,13 @@ import type { ChaosTokenType } from "../../../../../../model";
 import { selectUnlimitedChaosTokens } from "../../chaosBag";
 import { selectChaosTokenCount } from "./selectChaosTokenCount";
 
-export const selectCanAddChaosToken = (type: ChaosTokenType) =>
+export const selectCanAddChaosToken = (type: ChaosTokenType, addCount = 1) =>
 	createSelector(
 		[selectChaosTokenCount(type), selectUnlimitedChaosTokens],
 		(count, unlimited) => {
 			if (unlimited) {
 				return true;
 			}
-			return count + 1 < chaosToken.count[type];
+			return count + addCount < chaosToken.count[type];
 		},
 	);

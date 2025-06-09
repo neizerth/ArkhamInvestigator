@@ -1,13 +1,12 @@
+import { selectCurrentBoard, setShowFactionSelect } from "@shared/lib";
 import type { AppThunk, InvestigatorBoardNumericStat } from "@shared/model";
 import { prop } from "ramda";
-import { addChaosToken } from "../../../../../../../../../features/game/chaos-bag/lib/store/features/chaosBag/actions/token/addChaosToken";
-import { selectCanAddChaosToken } from "../../../../../../../../../features/game/chaos-bag/lib/store/features/chaosBag/selectors/contents/selectCanAddChaosToken";
-import { i18next } from "../../../../../../../../../features/i18n/config";
-import { showToast } from "../../../../../../../../../features/notifications/lib";
-import { whereId } from "../../../../../../../util";
-import { setShowFactionSelect } from "../../../../board";
-import { selectCurrentBoard } from "../../../../selectors";
-import { decreaseCurrentStat, increaseCurrentStat } from "../../current";
+import {
+	decreaseCurrentStat,
+	increaseCurrentStat,
+} from "../../../../../shared/lib/store/features/board/actions/stats/current";
+import { whereId } from "../../../../../shared/lib/util";
+import { addBlessTokenEffect } from "./addBlessTokenEffect";
 
 type Options = {
 	abilityId: string;
@@ -50,23 +49,9 @@ export const toggleAbilityEffect =
 			dispatch(setShowFactionSelect(true));
 			return;
 		}
-		// Sister Mary
+		// Sister Mary, parallel Zoey Samaras
 		if (!isUsed && abilityId === "add-bless") {
-			const canAddBless = selectCanAddChaosToken("bless")(state);
-
-			if (!canAddBless) {
-				const message = i18next.t("ability.addBless.full");
-
-				dispatch(showToast(message));
-				return;
-			}
-
-			const { name } = board.investigator;
-			const message = i18next.t("ability.addBless", {
-				name,
-			});
-			dispatch(showToast(message));
-			dispatch(addChaosToken("bless"));
+			dispatch(addBlessTokenEffect(1));
 		}
 		// Lily Chen
 		if (lilyIds.includes(abilityId)) {

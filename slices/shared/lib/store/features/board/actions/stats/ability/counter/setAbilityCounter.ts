@@ -1,8 +1,8 @@
 import type { AppThunk, BoardId } from "@shared/model";
+import { setAbilityCounterEffect } from "../../../../../../../../../entities/abilities/lib/store/effects";
 import { selectBoardProp } from "../../../../selectors";
 import { setBoardProp } from "../../../board";
 import { addCurrentHistoryItem } from "../../../history";
-import { setAbilityCounterEffect } from "../effects";
 
 export const setAbilityCounter =
 	(id: string, value: number, boardId: BoardId = "current"): AppThunk =>

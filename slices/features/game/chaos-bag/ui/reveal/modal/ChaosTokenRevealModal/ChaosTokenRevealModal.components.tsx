@@ -10,7 +10,7 @@ import { BottomPanel, CenterPanel, LeftPanel, RightPanel } from "../panels";
 export const Container: typeof View = styled(View)`
   justify-content: center;
   align-items: center;
-  background-color: ${color.modal.background.light};
+  background-color: ${color.modal.background.dark};
 `;
 
 export const Loader: typeof ChaosTokenRevealLoader = styled(
