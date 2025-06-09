@@ -1,9 +1,11 @@
+import {
+	addCurrentHistoryItem,
+	reduceCurrentStat,
+	selectCurrentBoard,
+	setBoardProp,
+	setStatTransaction,
+} from "@shared/lib";
 import type { AppThunk } from "@shared/model";
-import { setBoardProp } from "../../../../../shared/lib/store/features/board/actions/board";
-import { addCurrentHistoryItem } from "../../../../../shared/lib/store/features/board/actions/history";
-import { reduceCurrentStat } from "../../../../../shared/lib/store/features/board/actions/stats/current";
-import { setStatTransaction } from "../../../../../shared/lib/store/features/board/actions/stats/transaction";
-import { selectCurrentBoard } from "../../../../../shared/lib/store/features/board/selectors";
 
 type Options = {
 	abilityId: string;
