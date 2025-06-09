@@ -21,12 +21,14 @@ export const setAbilityCounterEffect =
 		// Diana Stanley
 		if (abilityId === "diana-cards") {
 			const diff = value - prevValue;
+
 			dispatch(
 				reduceCurrentStat({
 					type: "willpower",
 					reducer: (willpower) => willpower + diff,
 				}),
 			);
+
 			return;
 		}
 

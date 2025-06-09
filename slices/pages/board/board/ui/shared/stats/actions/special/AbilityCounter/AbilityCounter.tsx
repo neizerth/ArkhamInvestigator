@@ -1,5 +1,6 @@
 import type { ViewProps } from "react-native";
 
+import { setAbilityCounterEffect } from "@entities/abilities/lib";
 import {
 	selectAbilityCounter,
 	selectCurrentBoardProp,
@@ -46,31 +47,46 @@ export const AbilityCounter = ({
 		return range(min, max + 1);
 	}, [min, max]);
 
+	const setValue = useCallback(
+		(nextValue: number) => {
+			dispatch(setAbilityCounter(id, nextValue));
+
+			dispatch(
+				setAbilityCounterEffect({
+					abilityId: id,
+					value: nextValue,
+					prevValue: value,
+				}),
+			);
+		},
+		[dispatch, value, id],
+	);
+
 	const onChange = useCallback(
 		({ value = 0 }: PickerChangeEvent) => {
-			dispatch(setAbilityCounter(id, value));
+			setValue(value);
 		},
-		[dispatch, id],
+		[setValue],
 	);
 
 	const increase = useCallback(() => {
 		const nextValue = Math.min(max, value + 1);
-		dispatch(setAbilityCounter(id, nextValue));
-	}, [dispatch, id, value, max]);
+		setValue(nextValue);
+	}, [setValue, value, max]);
 
 	const decrease = useCallback(() => {
 		if (value <= min) {
 			return;
 		}
-		dispatch(setAbilityCounter(id, value - 1));
-	}, [dispatch, id, value, min]);
+		setValue(value - 1);
+	}, [value, min, setValue]);
 
 	const onPress = direction === "increase" ? increase : decrease;
 
 	const reset = useCallback(() => {
 		const value = defaultValue || 0;
-		dispatch(setAbilityCounter(id, value));
-	}, [dispatch, id, defaultValue]);
+		setValue(value);
+	}, [defaultValue, setValue]);
 
 	if (!enabled) {
 		return;
