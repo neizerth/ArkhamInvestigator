@@ -1,4 +1,5 @@
 import { createSelector } from "@reduxjs/toolkit";
+import { getInvestigatorSpecialTokenValues } from "../../../../../tokens";
 import { selectChaosTokenValue } from "../../chaosBag";
 import {
 	selectInvestigatorDefaultTokenValues,
@@ -23,12 +24,14 @@ export const selectDefaultTokenValuesByCode = (code: string) =>
 			values,
 			investigatorValues,
 		) => {
+			const specialValues = getInvestigatorSpecialTokenValues(code);
 			return {
 				...defaultValues,
 				...defaultInvestigatorValues,
 				...(elderSignValue || {}),
 				...(values || {}),
 				...(investigatorValues || {}),
+				...specialValues,
 			};
 		},
 	);

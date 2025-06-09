@@ -25,6 +25,10 @@ export const InvesigatorCode = {
 
 	CalvinWright: "04005",
 	HankSamson: "10015",
+	JimCulver: {
+		base: "02004",
+		parallel: "90049",
+	},
 };
 
 export const BOARD_ABILITY_LIMITS: LimitType[] = [

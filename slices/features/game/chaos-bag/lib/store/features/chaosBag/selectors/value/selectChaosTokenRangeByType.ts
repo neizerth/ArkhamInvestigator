@@ -2,6 +2,7 @@ import { createSelector } from "@reduxjs/toolkit";
 import { rangeStep, selectReferenceCardTokenValues } from "@shared/lib";
 import { propEq, range } from "ramda";
 import type { ChaosTokenType } from "../../../../../../model";
+import { getInvestigatorSpecialTokenValues } from "../../../../../tokens";
 import { selectInvestigatorElderSignValue } from "../reference";
 
 const MAX_VALUE = 20;
@@ -18,6 +19,12 @@ export const selectChaosTokenRangeByType = ({ type, code }: Options) =>
 	createSelector(
 		[selectReferenceCardTokenValues, selectInvestigatorElderSignValue(code)],
 		(data, elderSignValue) => {
+			const specialTokens = getInvestigatorSpecialTokenValues(code);
+			const specialValue = specialTokens[type];
+
+			if (typeof specialValue === "number") {
+				return [specialValue];
+			}
 			if (type === "elderSign" && elderSignValue) {
 				return [elderSignValue.elderSign];
 			}
