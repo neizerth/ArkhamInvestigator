@@ -8,7 +8,7 @@ const ios = Platform.OS === "ios";
 export const SidebarIconButton: typeof IconButton = styled(IconButton).attrs({
 	iconStyle: {
 		fontSize: 28,
-		lineHeight: ios ? 28 : 30,
+		lineHeight: ios ? 30 : 32,
 		color: color.white,
 		textShadowColor: "rgba(0, 0, 0, 0.3)",
 		textShadowOffset: { width: 0, height: 0 },
@@ -16,7 +16,7 @@ export const SidebarIconButton: typeof IconButton = styled(IconButton).attrs({
 	},
 })`
   width: 60px;
-  height: 48px;
+  height: 50px;
   justify-content: center;
   align-items: center;
   ${({ disabled }: TouchableOpacityProps) =>

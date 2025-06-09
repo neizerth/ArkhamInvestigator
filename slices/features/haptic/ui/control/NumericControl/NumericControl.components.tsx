@@ -12,7 +12,6 @@ export const Button: typeof BaseButton = styled(BaseButton)`
   padding: 0px;
   width: 28px;
   height: 28px;
-  padding-top: 5px;
   justify-content: center;
   align-items: center;
   background-color: ${color.dark20};
