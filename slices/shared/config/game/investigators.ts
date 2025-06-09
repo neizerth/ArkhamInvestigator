@@ -29,6 +29,7 @@ export const InvesigatorCode = {
 		base: "02004",
 		parallel: "90049",
 	},
+	LilyChen: "08010",
 };
 
 export const BOARD_ABILITY_LIMITS: LimitType[] = [

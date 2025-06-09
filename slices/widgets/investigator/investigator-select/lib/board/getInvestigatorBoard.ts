@@ -5,6 +5,7 @@ import {
 import { getBoardStats } from "@shared/lib";
 import type { InvestigatorBoard, SelectedInvestigator } from "@shared/model";
 import { getDefaultUpkeepResourceIncrease } from "./getDefaultUpkeepResourceIncrease";
+import { getDefaultUsedAbilities } from "./getDefaultUsedAbilities";
 import { getInitialHandSize } from "./getInitialHandSize";
 import { getBaseHandSize } from "./geеBaseHandSize";
 
@@ -47,6 +48,8 @@ export const getInvestigatorBoard = ({
 		sanity: Math.max(0, initialValue.sanity - mentalTrauma),
 	};
 
+	const usedAbilities = getDefaultUsedAbilities(code);
+
 	return {
 		id,
 		signatureGroupId: selection.signatureGroupId,
@@ -60,5 +63,6 @@ export const getInvestigatorBoard = ({
 		history: [],
 		checkHistory: [],
 		historyIndex: -1,
+		usedAbilities,
 	};
 };
