@@ -1,12 +1,9 @@
 import type { AppThunk } from "@shared/model";
-import {
-	selectCurrentBoardProp,
-	selectIsAbilityUsed,
-} from "../../../selectors";
+import { selectIsAbilityUsed } from "../../../selectors";
+import { toggleAbilityEffect } from "./effects";
 import { setAbilityUsed } from "./setAbilityUsed";
 import { unsetAbilityUse } from "./unsetAbilityUse";
 
-const selectUsedAbilities = selectCurrentBoardProp("usedAbilities");
 export const toggleAbilityUse =
 	(id: string, boardId?: number): AppThunk =>
 	(dispatch, getState) => {
@@ -17,7 +14,14 @@ export const toggleAbilityUse =
 
 		if (!isUsed) {
 			dispatch(setAbilityUsed(id, boardId));
-			return;
+		} else {
+			dispatch(unsetAbilityUse(id, boardId));
 		}
-		dispatch(unsetAbilityUse(id, boardId));
+
+		dispatch(
+			toggleAbilityEffect({
+				abilityId: id,
+				isUsed,
+			}),
+		);
 	};
