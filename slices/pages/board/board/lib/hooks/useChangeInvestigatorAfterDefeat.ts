@@ -22,7 +22,7 @@ export const useChangeInvestigatorAfterDefeat = (codes: string[]) => {
 
 	const defeated = health === 0 || sanity === 0;
 
-	const trackChanges = codes.includes(investigator.code);
+	const trackChanges = codes.includes(investigator?.code);
 
 	const [shown, setShown] = useState(false);
 
