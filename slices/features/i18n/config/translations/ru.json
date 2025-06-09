@@ -119,6 +119,10 @@
 	"chaosToken.frost.second.effect": "Проверка автоматически провалена",
 	"chaosToken.autoFail.effect": "Проверка автоматически провалена",
 
+	"defeat.modal.text": "Выберите другого сыщика",
+	"Defeated": "Поражение",
+	"Change": "Сменить",
+
 	"Player Window": "Окно игрока",
 	"Phase end": "Конец фазы",
 

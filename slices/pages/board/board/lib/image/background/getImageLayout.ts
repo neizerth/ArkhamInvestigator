@@ -28,12 +28,15 @@ export const getImageLayout = ({
 		max: (faceSize.max * vh) / face.height,
 	};
 
+	const ratio = image.width / image.height;
+	const offsetLeft = (ratio * offsetBottom) / 2;
+
 	const imageCenter = getBoxCenter(image);
 	const faceCenter = getBoxLayoutCenter(face);
 
 	const offset = {
 		top: faceCenter.top - imageCenter.top + offsetBottom,
-		left: faceCenter.left - imageCenter.left,
+		left: faceCenter.left - imageCenter.left + offsetLeft,
 	};
 
 	const faceImage = {

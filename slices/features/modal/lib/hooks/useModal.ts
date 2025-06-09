@@ -1,9 +1,10 @@
-import { delay } from "@shared/lib";
+import { delay, useAppSelector } from "@shared/lib";
 import { useCallback, useContext, useMemo } from "react";
 import { Keyboard } from "react-native";
 import { useAppDispatch } from "../../../../shared/lib/hooks/store/dispatch/useAppDispatch";
 import type { ModalData, ModalOkEvent } from "../../model";
 import { ModalContext } from "../context";
+import { selectModalId } from "../store";
 import { closeModal, openModal } from "../store/features/modal/actions";
 
 type ModalEventhandler = (() => void | boolean) | false;
@@ -25,6 +26,7 @@ export const useModal = ({
 	onClose,
 }: UseModalOptions) => {
 	const dispatch = useAppDispatch();
+	const activeId = useAppSelector(selectModalId);
 
 	const context = useContext(ModalContext);
 
@@ -71,6 +73,9 @@ export const useModal = ({
 	}, [onClose, tryClose]);
 
 	const show = useCallback(() => {
+		if (id === activeId) {
+			return;
+		}
 		if (context.onCancel) {
 			context.onCancel.current = onCancel !== false ? cancel : null;
 		}
@@ -85,6 +90,7 @@ export const useModal = ({
 	}, [
 		dispatch,
 		id,
+		activeId,
 		data,
 		ok,
 		cancel,
@@ -98,6 +104,9 @@ export const useModal = ({
 	]);
 
 	const hide = useCallback(() => {
+		if (id !== activeId) {
+			return;
+		}
 		dispatch(closeModal());
 		if (context.onCancel) {
 			context.onCancel.current = null;
@@ -108,7 +117,7 @@ export const useModal = ({
 		if (context.onCancel) {
 			context.onCancel.current = null;
 		}
-	}, [dispatch, context]);
+	}, [dispatch, context, activeId, id]);
 
 	return useMemo(() => {
 		return [show, hide] as [show: typeof show, hide: typeof hide];

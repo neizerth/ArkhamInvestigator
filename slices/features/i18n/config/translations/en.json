@@ -120,6 +120,10 @@
 
 	"board.help.syncScenarioClues": "Enables/disables synchronization of scenario and investigator clues: clues added to the scenario will be removed from the investigator",
 
+	"defeat.modal.text": "Choose other investigator",
+	"Defeated": "Defeated",
+	"Change": "Change",
+
 	"Show initial Health/Sanity": "Show initial Health/Sanity",
 
 	"Chaos bag loading animation": "Chaos bag loading animation",

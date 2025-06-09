@@ -1,22 +1,25 @@
 import type {
 	AppThunk,
+	BoardId,
 	InvestigatorBoardStat,
 	InvestigatorBoardValues,
 } from "@shared/model";
-import { dec, inc } from "ramda";
 import { InvesigatorCode } from "../../../../../../../config";
 import { selectBoardByCode } from "../../../selectors";
-import { reduceCurrentStat } from "../current";
+import { setCalwinWrightEffects } from "./investigator";
 
-type Options<T extends InvestigatorBoardStat> = {
+export type SetStatChangeEffectOptions<T extends InvestigatorBoardStat> = {
 	code: string;
 	type: T;
 	value: InvestigatorBoardValues[T];
 	prevValue: InvestigatorBoardValues[T];
+	boardId?: BoardId;
 };
 
 export const setStatChangeEffect =
-	<T extends InvestigatorBoardStat>(options: Options<T>): AppThunk =>
+	<T extends InvestigatorBoardStat>(
+		options: SetStatChangeEffectOptions<T>,
+	): AppThunk =>
 	(dispatch, getState) => {
 		const state = getState();
 		const board = selectBoardByCode(options.code)(state);
@@ -26,36 +29,7 @@ export const setStatChangeEffect =
 
 		// Calwin Wright
 		if (options.code === InvesigatorCode.CalvinWright) {
-			const reducer = options.value > options.prevValue ? dec : inc;
-			if (options.type === "health") {
-				dispatch(
-					reduceCurrentStat({
-						type: "combat",
-						reducer,
-					}),
-				);
-				dispatch(
-					reduceCurrentStat({
-						type: "agility",
-						reducer,
-					}),
-				);
-				return;
-			}
-			if (options.type === "sanity") {
-				dispatch(
-					reduceCurrentStat({
-						type: "willpower",
-						reducer,
-					}),
-				);
-				dispatch(
-					reduceCurrentStat({
-						type: "intellect",
-						reducer,
-					}),
-				);
-				return;
-			}
+			dispatch(setCalwinWrightEffects(options));
+			return;
 		}
 	};
