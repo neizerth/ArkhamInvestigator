@@ -1,5 +1,8 @@
 import { characters } from "@shared/config";
-import type { InvestigatorBoardStat, SkillCheckOperator } from "@shared/model";
+import type {
+	InvestigatorBoardNumericStat,
+	SkillCheckOperator,
+} from "@shared/model";
 
 export const operatorMapping: Record<SkillCheckOperator, string> = {
 	add: "+",
@@ -8,6 +11,8 @@ export const operatorMapping: Record<SkillCheckOperator, string> = {
 	divide: characters.divide,
 };
 
-export const iconMapping: Partial<Record<InvestigatorBoardStat, string>> = {
+export const iconMapping: Partial<
+	Record<InvestigatorBoardNumericStat, string>
+> = {
 	resources: "resource",
 };

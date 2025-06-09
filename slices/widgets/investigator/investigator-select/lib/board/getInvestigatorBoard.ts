@@ -1,11 +1,12 @@
 import {
-	DEFAULT_HAND_SIZE,
 	NEW_TURN_ACTIONS_COUNT,
 	START_GAME_RESOURCES_COUNT,
 } from "@shared/config";
 import { getBoardStats } from "@shared/lib";
 import type { InvestigatorBoard, SelectedInvestigator } from "@shared/model";
-import { getDefaultUpkeepResourceincrease } from "./getDefaultUpkeepResourceincrease";
+import { getDefaultUpkeepResourceIncrease } from "./getDefaultUpkeepResourceIncrease";
+import { getInitialHandSize } from "./getInitialHandSize";
+import { getBaseHandSize } from "./geеBaseHandSize";
 
 type Options = {
 	id: number;
@@ -21,18 +22,14 @@ export const getInvestigatorBoard = ({
 	mentalTrauma = 0,
 }: Options): InvestigatorBoard => {
 	const { signature, image } = selection;
-	const { additionalAction } = signature;
-
-	const upkeepResourcesIncrease = getDefaultUpkeepResourceincrease(
-		signature.code,
-	);
+	const { additionalAction, code } = signature;
 
 	const initialValue = {
 		...getBoardStats(signature),
 		additionalAction: Boolean(additionalAction),
 		resources: START_GAME_RESOURCES_COUNT,
 		actions: NEW_TURN_ACTIONS_COUNT,
-		handSize: DEFAULT_HAND_SIZE,
+		handSize: getInitialHandSize(code),
 		upkeepResourcesIncrease: 0,
 		clues: 0,
 		doom: 0,
@@ -40,7 +37,8 @@ export const getInvestigatorBoard = ({
 
 	const baseValue = {
 		...initialValue,
-		upkeepResourcesIncrease,
+		upkeepResourcesIncrease: getDefaultUpkeepResourceIncrease(code),
+		handSize: getBaseHandSize(code) || initialValue.handSize,
 	};
 
 	const value = {

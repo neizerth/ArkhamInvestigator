@@ -1,5 +1,4 @@
-import type { AppThunk } from "@shared/model";
-import type { InvestigatorBoardStat } from "@shared/model";
+import type { AppThunk, InvestigatorBoardNumericStat } from "@shared/model";
 import {
 	type ReduceCurrentStatOptions,
 	reduceCurrentStat,
@@ -7,7 +6,7 @@ import {
 
 export const increaseCurrentStat =
 	(
-		type: InvestigatorBoardStat,
+		type: InvestigatorBoardNumericStat,
 		maxValue = Number.POSITIVE_INFINITY,
 		options?: ReduceCurrentStatOptions,
 	): AppThunk =>
@@ -15,7 +14,7 @@ export const increaseCurrentStat =
 		dispatch(
 			reduceCurrentStat({
 				type,
-				reducer: (value: number) => Math.min(value + 1, maxValue),
+				reducer: (value) => Math.min(value + 1, maxValue),
 				options,
 			}),
 		);

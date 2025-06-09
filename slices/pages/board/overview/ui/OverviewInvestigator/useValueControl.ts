@@ -4,7 +4,7 @@ import {
 	setCurrentStat,
 	useAppDispatch,
 } from "@shared/lib";
-import type { InvestigatorBoardStat } from "@shared/model";
+import type { InvestigatorBoardNumericStat } from "@shared/model";
 import type { PickerChangeEvent } from "@widgets/control/picker";
 import { useCallback } from "react";
 
@@ -12,7 +12,7 @@ export const useValueControl = (boardId: number) => {
 	const dispatch = useAppDispatch();
 
 	const onChange = useCallback(
-		(stat: InvestigatorBoardStat) =>
+		(stat: InvestigatorBoardNumericStat) =>
 			({ value = 0 }: PickerChangeEvent) => {
 				dispatch(
 					setCurrentStat(stat, value, {
@@ -24,7 +24,7 @@ export const useValueControl = (boardId: number) => {
 	);
 
 	const setValue = useCallback(
-		(stat: InvestigatorBoardStat, value: number) => () => {
+		(stat: InvestigatorBoardNumericStat, value: number) => () => {
 			dispatch(
 				setCurrentStat(stat, value, {
 					boardId,
@@ -35,7 +35,7 @@ export const useValueControl = (boardId: number) => {
 	);
 
 	const clear = useCallback(
-		(stat: InvestigatorBoardStat) => () => {
+		(stat: InvestigatorBoardNumericStat) => () => {
 			dispatch(
 				setCurrentStat(stat, 0, {
 					boardId,
@@ -46,7 +46,7 @@ export const useValueControl = (boardId: number) => {
 	);
 
 	const increase = useCallback(
-		(stat: InvestigatorBoardStat, max?: number) => () => {
+		(stat: InvestigatorBoardNumericStat, max?: number) => () => {
 			dispatch(
 				increaseCurrentStat(stat, max, {
 					boardId,
@@ -57,7 +57,7 @@ export const useValueControl = (boardId: number) => {
 	);
 
 	const decrease = useCallback(
-		(stat: InvestigatorBoardStat, min?: number) => () => {
+		(stat: InvestigatorBoardNumericStat, min?: number) => () => {
 			dispatch(
 				decreaseCurrentStat(stat, min, {
 					boardId,

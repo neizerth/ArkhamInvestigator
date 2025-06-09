@@ -10,6 +10,10 @@ import type { SkillCheckHistoryItem } from "./skillCheck";
 export type BoardId = number | "current";
 
 export type InvestigatorBoardStat =
+	| InvestigatorBoardNumericStat
+	| "additionalAction";
+
+export type InvestigatorBoardNumericStat =
 	| InvestigatorMainStatType
 	| InvestigatorSkillType
 	| InvestigatorGameStatType;
@@ -18,7 +22,10 @@ export type InvestigatorImage = Omit<InvestigatorSignature["image"], "id"> & {
 	id: string;
 };
 
-export type InvestigatorBoardValues = Record<InvestigatorBoardStat, number> & {
+export type InvestigatorBoardValues = Record<
+	InvestigatorBoardNumericStat,
+	number
+> & {
 	additionalAction: boolean;
 };
 
@@ -50,6 +57,7 @@ export type UsedAbility = {
 
 export type HistoryItem = {
 	id: string;
+	initialValue?: Partial<InvestigatorBoardValues>;
 	baseValue?: Partial<InvestigatorBoardValues>;
 	value?: Partial<InvestigatorBoardValues>;
 	usedAbilities?: UsedAbility[];

@@ -7,7 +7,7 @@ import {
 	useAppSelector,
 } from "@shared/lib";
 import type {
-	InvestigatorBoardStat,
+	InvestigatorBoardNumericStat,
 	SkillCheckItem,
 	SkillCheckOperator,
 } from "@shared/model";
@@ -22,7 +22,7 @@ type Options = {
 	  }
 	| {
 			type: "stat";
-			statType: InvestigatorBoardStat;
+			statType: InvestigatorBoardNumericStat;
 	  }
 );
 export const useKeyCheck = () => {

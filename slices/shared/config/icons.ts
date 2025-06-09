@@ -1,4 +1,4 @@
-import type { InvestigatorBoardStat } from "@shared/model";
+import type { InvestigatorBoardNumericStat } from "@shared/model";
 
 const baseIcons = {
 	health: "health",
@@ -9,7 +9,7 @@ const baseIcons = {
 	upkeepResourcesIncrease: "resource",
 } as const;
 
-export const classicStatIcons: Record<InvestigatorBoardStat, string> = {
+export const classicStatIcons: Record<InvestigatorBoardNumericStat, string> = {
 	...baseIcons,
 	doom: "poi_side",
 	handSize: "card-outline",
@@ -19,7 +19,7 @@ export const classicStatIcons: Record<InvestigatorBoardStat, string> = {
 	intellect: "skill_intellect",
 };
 
-export const simpleStatIcons: Record<InvestigatorBoardStat, string> = {
+export const simpleStatIcons: Record<InvestigatorBoardNumericStat, string> = {
 	...baseIcons,
 	doom: "poi_side",
 	handSize: "card-outline",

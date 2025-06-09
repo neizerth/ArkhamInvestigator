@@ -6,7 +6,7 @@ import {
 	useAppDispatch,
 	useAppSelector,
 } from "@shared/lib";
-import type { InvestigatorBoardStat } from "@shared/model";
+import type { InvestigatorBoardNumericStat } from "@shared/model";
 import type { PickerChangeEvent } from "@widgets/control/picker";
 import { range } from "ramda";
 import { useCallback, useMemo } from "react";
@@ -21,7 +21,7 @@ export type DefinedBaseStatPickerProps = Omit<StatPickerProps, "data"> & {
 };
 
 export type BaseStatPickerProps = DefinedBaseStatPickerProps & {
-	statType: InvestigatorBoardStat;
+	statType: InvestigatorBoardNumericStat;
 };
 
 export const BaseStatPicker = ({
@@ -56,7 +56,13 @@ export const BaseStatPicker = ({
 				? Math.min(nextBaseValue, value + delta)
 				: value + delta;
 
-			dispatch(setStatTransaction(statType, nextValue, nextBaseValue));
+			dispatch(
+				setStatTransaction({
+					statType,
+					value: nextValue,
+					baseValue: nextBaseValue,
+				}),
+			);
 		},
 		[dispatch, statType, initialValue, baseValue, value, limitMaxValue],
 	);

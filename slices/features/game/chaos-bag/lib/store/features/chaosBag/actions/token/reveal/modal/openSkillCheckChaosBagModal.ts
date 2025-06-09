@@ -1,6 +1,6 @@
 import type {
 	AppThunk,
-	InvestigatorBoardStat,
+	InvestigatorBoardNumericStat,
 	SkillCheckItem,
 } from "@shared/model";
 import {
@@ -13,7 +13,7 @@ import {
 import { openRevealChaosTokenModal } from "./openRevealChaosTokenModal";
 
 type Options = {
-	type: InvestigatorBoardStat;
+	type: InvestigatorBoardNumericStat;
 	value: number;
 	title?: string | null;
 	expression?: SkillCheckItem[];

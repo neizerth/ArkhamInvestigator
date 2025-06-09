@@ -1,5 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
-import type { InvestigatorBoardStat, SkillCheckItem } from "@shared/model";
+import type {
+	InvestigatorBoardNumericStat,
+	SkillCheckItem,
+} from "@shared/model";
 import { createSliceState } from "redux-toolkit-helpers";
 import type {
 	ChaosBagHistoryItem,
@@ -14,7 +17,7 @@ export type IChaosBagState = {
 	showRevealModal: boolean;
 	revealedTokenIds: string[];
 
-	skillCheckType: InvestigatorBoardStat | null;
+	skillCheckType: InvestigatorBoardNumericStat | null;
 	skillCheckTitle: string | null;
 	skillValue: number | null;
 	skillCheckExpression: SkillCheckItem[];

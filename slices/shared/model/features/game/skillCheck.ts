@@ -1,10 +1,10 @@
-import type { InvestigatorBoardStat } from "./board";
+import type { InvestigatorBoardNumericStat } from "./board";
 
 export type SkillCheckHistoryItem = {
 	id: string;
 	pinned?: boolean;
 	title?: string;
-	type: InvestigatorBoardStat;
+	type: InvestigatorBoardNumericStat;
 	expression: SkillCheckItem[];
 	value: number;
 };
@@ -14,7 +14,7 @@ export type SkillCheckOperator = "add" | "subtract" | "multiply" | "divide";
 export type SkillCheckType = "operator" | "number" | "stat" | "command";
 
 export type SkillCheck = {
-	type: InvestigatorBoardStat;
+	type: InvestigatorBoardNumericStat;
 	data: SkillCheckItem[];
 };
 
@@ -34,7 +34,7 @@ export type NumberSkillCheckItem = {
 export type StatSkillCheckItem = {
 	id: string;
 	type: "stat";
-	statType: InvestigatorBoardStat;
+	statType: InvestigatorBoardNumericStat;
 };
 
 export type SkillCheckItem =

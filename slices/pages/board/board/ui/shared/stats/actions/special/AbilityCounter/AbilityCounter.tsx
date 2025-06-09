@@ -37,6 +37,9 @@ export const AbilityCounter = ({
 	const value = useAppSelector(selectAbilityCounter(id));
 	const enabled = useAppSelector(selectInvestigatorCounterEnabled(code, id));
 
+	const direction =
+		(ability.type === "counter" && ability.direction) || "decrease";
+
 	const valueStyle = getValueStyle(id);
 
 	const data = useMemo(() => {
@@ -50,12 +53,19 @@ export const AbilityCounter = ({
 		[dispatch, id],
 	);
 
+	const increase = useCallback(() => {
+		const nextValue = Math.min(max, value + 1);
+		dispatch(setAbilityCounter(id, nextValue));
+	}, [dispatch, id, value, max]);
+
 	const decrease = useCallback(() => {
-		if (value < 1) {
+		if (value <= min) {
 			return;
 		}
 		dispatch(setAbilityCounter(id, value - 1));
-	}, [dispatch, id, value]);
+	}, [dispatch, id, value, min]);
+
+	const onPress = direction === "increase" ? increase : decrease;
 
 	const reset = useCallback(() => {
 		const value = defaultValue || 0;
@@ -73,7 +83,7 @@ export const AbilityCounter = ({
 				value={value}
 				data={data}
 				onValueChanged={onChange}
-				onPress={decrease}
+				onPress={onPress}
 				onLongPress={reset}
 			/>
 		</C.Container>

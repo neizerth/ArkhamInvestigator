@@ -1,6 +1,6 @@
 import { iconMapping } from "@shared/config";
 import { sendStatSignal, useAppDispatch } from "@shared/lib";
-import type { InvestigatorBoardStat } from "@shared/model";
+import type { InvestigatorBoardNumericStat } from "@shared/model";
 import { useCallback } from "react";
 import type { ScrollViewProps } from "react-native";
 import { useKeyCheck } from "../../../../lib";
@@ -13,13 +13,13 @@ export const StatsKeyboard = ({ ...props }: StatsKeyboardProps) => {
 	const showKeyReveal = useKeyCheck();
 
 	const sendStat = useCallback(
-		(value: InvestigatorBoardStat) => () => {
+		(value: InvestigatorBoardNumericStat) => () => {
 			dispatch(sendStatSignal(value));
 		},
 		[dispatch],
 	);
 
-	const withProps = (value: InvestigatorBoardStat) => {
+	const withProps = (value: InvestigatorBoardNumericStat) => {
 		return {
 			icon: iconMapping.stat.simple[value],
 			onPress: sendStat(value),

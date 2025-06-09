@@ -20,7 +20,7 @@ export const createOperatorItem = (
 });
 
 export const createStatItem = (
-	statType: Types.InvestigatorBoardStat,
+	statType: Types.InvestigatorBoardNumericStat,
 ): Types.StatSkillCheckItem => ({
 	id: v4(),
 	type: "stat",

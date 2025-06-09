@@ -1,4 +1,4 @@
-import type { AppThunk, InvestigatorBoardStat } from "@shared/model";
+import type { AppThunk, InvestigatorBoardNumericStat } from "@shared/model";
 import { prop } from "ramda";
 import { whereId } from "../../../../../../../util";
 import { setShowFactionSelect } from "../../../../board";
@@ -11,7 +11,7 @@ type Options = {
 
 type LilyAbility = {
 	id: string;
-	stat: InvestigatorBoardStat;
+	stat: InvestigatorBoardNumericStat;
 };
 
 const lilyAbilities: LilyAbility[] = [

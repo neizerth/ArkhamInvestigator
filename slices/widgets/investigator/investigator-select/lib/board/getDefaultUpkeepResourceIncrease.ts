@@ -7,7 +7,7 @@ const JennyCodes = [
 	InvesigatorCode.JennyBarnes.base,
 	InvesigatorCode.JennyBarnes.book,
 ];
-export const getDefaultUpkeepResourceincrease = (code: string) => {
+export const getDefaultUpkeepResourceIncrease = (code: string) => {
 	if (JennyCodes.includes(code)) {
 		return DEFAULT_UPKEEP_RESOURCES_INCREASE + 1;
 	}

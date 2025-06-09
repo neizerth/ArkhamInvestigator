@@ -1,5 +1,5 @@
 import type {
-	InvestigatorBoardStat,
+	InvestigatorBoardNumericStat,
 	InvestigatorSkillType,
 } from "@shared/model";
 import { omit } from "ramda";
@@ -9,7 +9,7 @@ import { Icon, type IconProps } from "../Icon";
 import { SkillIcon } from "../SkillIcon";
 
 export type StatIconProps = Omit<IconProps, "icon"> & {
-	statType: InvestigatorBoardStat;
+	statType: InvestigatorBoardNumericStat;
 	dark?: boolean;
 	contentContainerStyle?: ViewStyle;
 };

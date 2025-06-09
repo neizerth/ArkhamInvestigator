@@ -8,12 +8,12 @@ import {
 	useAppDispatch,
 	useAppSelector,
 } from "@shared/lib";
-import type { InvestigatorBoardStat } from "@shared/model";
+import type { InvestigatorBoardNumericStat } from "@shared/model";
 import type { PickerChangeEvent } from "@widgets/control/picker";
 import { useCallback } from "react";
 
 type Options = {
-	statType: InvestigatorBoardStat;
+	statType: InvestigatorBoardNumericStat;
 	minValue?: number;
 };
 
@@ -47,13 +47,25 @@ export const useStat = ({
 		const diff = baseValue - initialValue;
 
 		if (diff === 0) {
-			dispatch(setStatTransaction(statType, value + 1, baseValue + 1));
+			dispatch(
+				setStatTransaction({
+					statType,
+					value: value + 1,
+					baseValue: baseValue + 1,
+				}),
+			);
 			return;
 		}
 
 		const nextValue = value - diff;
 
-		dispatch(setStatTransaction(statType, nextValue, initialValue));
+		dispatch(
+			setStatTransaction({
+				statType,
+				value: nextValue,
+				baseValue: initialValue,
+			}),
+		);
 	}, [dispatch, baseValue, initialValue, value, statType]);
 
 	const onPress = useCallback(() => {

@@ -1,5 +1,4 @@
-import type { AppThunk } from "@shared/model";
-import type { InvestigatorBoardStat } from "@shared/model";
+import type { AppThunk, InvestigatorBoardNumericStat } from "@shared/model";
 import { selectCurrentBoard } from "../../../selectors/current/selectCurrentBoard";
 import { reduceBaseStat } from "./reduceBaseStat";
 
@@ -10,7 +9,7 @@ const minValues = {
 };
 
 export const decreaseBaseStat =
-	(type: InvestigatorBoardStat): AppThunk =>
+	(type: InvestigatorBoardNumericStat): AppThunk =>
 	(dispatch, getState) => {
 		const state = getState();
 		const { initialValue } = selectCurrentBoard(state);

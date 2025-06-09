@@ -5,7 +5,7 @@ import {
 	useAppDispatch,
 	useAppSelector,
 } from "@shared/lib";
-import type { InvestigatorBoardStat } from "@shared/model";
+import type { InvestigatorBoardNumericStat } from "@shared/model";
 import { range } from "ramda";
 import { useCallback, useMemo } from "react";
 import type { ViewProps } from "react-native";
@@ -55,7 +55,7 @@ export const OverviewInvestigator = ({
 
 	const minSanity = sanityData[0];
 
-	const withPicker = (type: InvestigatorBoardStat) => ({
+	const withPicker = (type: InvestigatorBoardNumericStat) => ({
 		type: "picker" as const,
 		value: value[type],
 		onValueChanged: control.onChange(type),

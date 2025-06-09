@@ -16,7 +16,7 @@ export const setValueFromHistoryIndex: AppThunkCreator =
 			return;
 		}
 
-		const { history, initialValue } = board;
+		const { history } = board;
 
 		const items = historyIndex === -1 ? [] : history.slice(0, historyIndex + 1);
 		const lastItem = history[historyIndex];
@@ -26,9 +26,16 @@ export const setValueFromHistoryIndex: AppThunkCreator =
 
 		const valuePatches = items.map(prop("value"));
 		const basePatches = items.map(prop("baseValue"));
+		const initialPatches = items.map(prop("initialValue"));
 
 		const valuePatch: Patch = Object.assign({}, ...valuePatches);
 		const basePatch: Patch = Object.assign({}, ...basePatches);
+		const initialPatch: Patch = Object.assign({}, ...initialPatches);
+
+		const initialValue: InvestigatorBoardValues = {
+			...board.initialValue,
+			...initialPatch,
+		};
 
 		const value: InvestigatorBoardValues = {
 			...initialValue,
@@ -42,6 +49,7 @@ export const setValueFromHistoryIndex: AppThunkCreator =
 
 		const data: InvestigatorBoard = {
 			...board,
+			initialValue,
 			value,
 			baseValue,
 			historyIndex,

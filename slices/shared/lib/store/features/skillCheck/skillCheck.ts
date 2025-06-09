@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type {
-	InvestigatorBoardStat,
+	InvestigatorBoardNumericStat,
 	SkillCheckDifficultyType,
 	SkillCheckItem,
 } from "@shared/model";
@@ -8,7 +8,7 @@ import { createSliceState } from "redux-toolkit-helpers";
 import * as reducers from "./reducers";
 
 export type ISkillCheckState = {
-	type: InvestigatorBoardStat | null;
+	type: InvestigatorBoardNumericStat | null;
 	data: SkillCheckItem[];
 	historyShown: boolean;
 	showCalculationDiff: boolean;

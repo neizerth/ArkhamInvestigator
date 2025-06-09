@@ -3,6 +3,7 @@ import { selectCurrentBoard } from "../../../../selectors";
 import { setBoardProp } from "../../../board";
 import { addCurrentHistoryItem } from "../../../history";
 import { reduceCurrentStat } from "../../current";
+import { setStatTransaction } from "../../transaction";
 
 type Options = {
 	abilityId: string;
@@ -24,6 +25,22 @@ export const setAbilityCounterEffect =
 				reduceCurrentStat({
 					type: "willpower",
 					reducer: (willpower) => willpower + diff,
+				}),
+			);
+			return;
+		}
+
+		if (abilityId === "george-cards") {
+			const diff = value - prevValue;
+			const baseValue = board.baseValue.handSize + diff;
+			const handSize = boardValue.handSize + diff;
+
+			dispatch(
+				setStatTransaction({
+					statType: "handSize",
+					value: handSize,
+					baseValue,
+					initialValue: value,
 				}),
 			);
 			return;

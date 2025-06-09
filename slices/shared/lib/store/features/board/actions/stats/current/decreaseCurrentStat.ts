@@ -1,6 +1,5 @@
 import type { ActionCreator } from "@reduxjs/toolkit";
-import type { AppThunk } from "@shared/model";
-import type { InvestigatorBoardStat } from "@shared/model";
+import type { AppThunk, InvestigatorBoardNumericStat } from "@shared/model";
 import {
 	type ReduceCurrentStatOptions,
 	reduceCurrentStat,
@@ -8,7 +7,7 @@ import {
 
 export const decreaseCurrentStat: ActionCreator<AppThunk> =
 	(
-		type: InvestigatorBoardStat,
+		type: InvestigatorBoardNumericStat,
 		minValue = 0,
 		options?: ReduceCurrentStatOptions,
 	) =>

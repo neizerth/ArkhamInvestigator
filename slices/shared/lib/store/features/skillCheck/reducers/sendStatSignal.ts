@@ -1,9 +1,9 @@
-import type { InvestigatorBoardStat } from "@shared/model";
+import type { InvestigatorBoardNumericStat } from "@shared/model";
 import { last } from "ramda";
 import { createStatItem } from "../lib";
 import type { SkillCheckReducer } from "../skillCheck.types";
 
-export const sendStatSignal: SkillCheckReducer<InvestigatorBoardStat> = (
+export const sendStatSignal: SkillCheckReducer<InvestigatorBoardNumericStat> = (
 	state,
 	{ payload },
 ) => {
