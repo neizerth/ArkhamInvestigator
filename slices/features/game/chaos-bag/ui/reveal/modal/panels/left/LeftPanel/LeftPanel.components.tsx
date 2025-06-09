@@ -42,7 +42,7 @@ export const SkillType: typeof View = styled(View)`
 export const ReferenceButton: typeof TouchableOpacity = styled(
 	TouchableOpacity,
 )`
-  border: 1px solid ${color.dark20};
+  border: 1px solid ${color.dark10};
   justify-content: center;
   align-items: center;
   width: 40px;
@@ -51,6 +51,6 @@ export const ReferenceButton: typeof TouchableOpacity = styled(
 `;
 
 export const ReferenceIcon: typeof Icon = styled(Icon)`
-  color: ${color.gray30};
+  color: ${color.gray20};
   font-size: 14px;
 `;

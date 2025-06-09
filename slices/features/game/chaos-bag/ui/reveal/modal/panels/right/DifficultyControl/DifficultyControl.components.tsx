@@ -19,7 +19,11 @@ export const Control: typeof Picker = styled(Picker).attrs({
   
 `;
 
-export const Difficulty: typeof Value = styled(Value)`
+export const Difficulty: typeof Value = styled(Value).attrs({
+	strokeStyle: {
+		color: color.dark30,
+	},
+})`
   font-size: 50px;
   width: 60px;
 `;
