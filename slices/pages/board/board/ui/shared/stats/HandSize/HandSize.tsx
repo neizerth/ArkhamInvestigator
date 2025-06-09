@@ -15,7 +15,9 @@ export const HandSize = ({
 	...props
 }: HandSizeProps) => {
 	const { onPress, onLongPress, onChange, initialValue, baseValue, value } =
-		useStat("handSize");
+		useStat({
+			statType: "handSize",
+		});
 
 	const maxValue = baseValue + 1;
 

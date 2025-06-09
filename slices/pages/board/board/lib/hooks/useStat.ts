@@ -12,7 +12,15 @@ import type { InvestigatorBoardStat } from "@shared/model";
 import type { PickerChangeEvent } from "@widgets/control/picker";
 import { useCallback } from "react";
 
-export const useStat = (statType: InvestigatorBoardStat) => {
+type Options = {
+	statType: InvestigatorBoardStat;
+	minValue?: number;
+};
+
+export const useStat = ({
+	statType,
+	minValue = Number.NEGATIVE_INFINITY,
+}: Options) => {
 	const dispatch = useAppDispatch();
 	const value = useAppSelector(selectCurrentStatValue(statType));
 	const baseValue = useAppSelector(selectCurrentStatBaseValue(statType));
@@ -49,8 +57,8 @@ export const useStat = (statType: InvestigatorBoardStat) => {
 	}, [dispatch, baseValue, initialValue, value, statType]);
 
 	const onPress = useCallback(() => {
-		dispatch(decreaseCurrentStat(statType, Number.NEGATIVE_INFINITY));
-	}, [dispatch, statType]);
+		dispatch(decreaseCurrentStat(statType, minValue));
+	}, [dispatch, statType, minValue]);
 
 	return {
 		onPress,

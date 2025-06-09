@@ -30,7 +30,10 @@ export const Sanity = ({ ...props }: SanityProps) => {
 		baseValue,
 		value,
 		wounds,
-	} = useStat("sanity");
+	} = useStat({
+		statType: "sanity",
+		minValue: negative ? Number.NEGATIVE_INFINITY : 0,
+	});
 
 	const diffValue = baseValue - initialValue;
 

@@ -34,7 +34,10 @@ export const Health = ({ contentContainerStyle, ...props }: HealthProps) => {
 		baseValue,
 		value,
 		wounds,
-	} = useStat("health");
+	} = useStat({
+		statType: "health",
+		minValue: negative ? Number.NEGATIVE_INFINITY : 0,
+	});
 
 	const maxValue = baseValue + 1;
 

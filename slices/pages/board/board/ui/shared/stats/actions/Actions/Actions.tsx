@@ -15,8 +15,9 @@ export const Actions = ({ ...props }: ActionsProps) => {
 	const dispatch = useAppDispatch();
 	const haveAbilities = useAppSelector(selectHaveBoardAbilities);
 
-	const { value, baseValue, initialValue, onChange, onLongPress } =
-		useStat("actions");
+	const { value, baseValue, initialValue, onChange, onLongPress } = useStat({
+		statType: "actions",
+	});
 
 	const onPress = useCallback(() => {
 		dispatch(makeAction());
