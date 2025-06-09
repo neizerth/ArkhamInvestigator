@@ -4,6 +4,7 @@ import { setBoard } from "../../board/setBoard";
 
 import { selectBoardById } from "../../../selectors";
 import { addCurrentHistoryItem } from "../../history/addCurrentHistoryItem";
+import { setStatChangeEffect } from "../effects";
 
 export type ReduceCurrentStatOptions = {
 	addToHistory?: boolean;
@@ -20,19 +21,18 @@ export const reduceCurrentStat =
 	<T extends keyof InvestigatorBoardValues>({
 		type,
 		reducer,
-		options = {
-			addToHistory: true,
-		},
+		options = {},
 	}: Options<T>): AppThunk =>
 	(dispatch, getState) => {
 		const state = getState();
-		const { boardId } = options;
+		const { boardId, addToHistory = true } = options;
 		const board = selectBoardById(boardId)(state);
 
 		if (!board) {
 			return;
 		}
 
+		const { code } = board.investigator;
 		const currentValue = board.value[type];
 		const statValue = reducer(currentValue);
 
@@ -55,18 +55,25 @@ export const reduceCurrentStat =
 			),
 		);
 
-		if (!options.addToHistory) {
-			return;
+		if (addToHistory) {
+			dispatch(
+				addCurrentHistoryItem(
+					{
+						value: {
+							[type]: statValue,
+						},
+					},
+					boardId,
+				),
+			);
 		}
 
 		dispatch(
-			addCurrentHistoryItem(
-				{
-					value: {
-						[type]: statValue,
-					},
-				},
-				boardId,
-			),
+			setStatChangeEffect({
+				code,
+				type,
+				value: statValue,
+				prevValue: currentValue,
+			}),
 		);
 	};
