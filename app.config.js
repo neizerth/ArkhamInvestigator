@@ -43,7 +43,6 @@ module.exports = {
     plugins: [
       "expo-audio",
       "expo-router",
-      "expo-notifications",
       [
         "expo-splash-screen",
         {

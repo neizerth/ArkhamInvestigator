@@ -1,6 +1,5 @@
 import { useOrientationLock } from "@shared/lib";
 
-import { initNotifications } from "@features/notifications";
 import { color } from "@shared/config";
 import * as ScreenOrientation from "expo-screen-orientation";
 import * as SystemUI from "expo-system-ui";
@@ -13,5 +12,3 @@ export const useDeviceInit = () => {
 		SystemUI.setBackgroundColorAsync(color.black);
 	}, []);
 };
-
-initNotifications();

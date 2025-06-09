@@ -1,7 +1,6 @@
 import { ChaosBagProvider } from "@features/game/chaos-bag";
 import { I18NProvider } from "@features/i18n";
 import { ModalProvider } from "@features/modal";
-import { NotificationsProvider } from "@features/notifications";
 import { DarkTheme, ThemeProvider } from "@react-navigation/native";
 import type { PropsWithChildren } from "react";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
@@ -20,9 +19,7 @@ export const AppProvider = ({ children }: PropsWithChildren) => {
 							<InitProvider>
 								<ModalProvider>
 									<OutdatedCheckProvider>
-										<NotificationsProvider>
-											<ChaosBagProvider>{children}</ChaosBagProvider>
-										</NotificationsProvider>
+										<ChaosBagProvider>{children}</ChaosBagProvider>
 									</OutdatedCheckProvider>
 								</ModalProvider>
 							</InitProvider>

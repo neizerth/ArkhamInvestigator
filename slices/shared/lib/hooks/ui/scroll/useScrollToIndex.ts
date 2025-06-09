@@ -3,7 +3,7 @@ import type { FlatList } from "react-native";
 
 type Options = {
 	index: number;
-	ref?: React.RefObject<FlatList>;
+	ref?: React.RefObject<FlatList | null>;
 	animated?: boolean;
 };
 export const useScrollToIndex = ({ ref, index, animated = false }: Options) => {

@@ -31,10 +31,12 @@ export const useContainerAnimation = ({ offsetTop = 0 }: Options) => {
 
 	const [zIndex, setZIndex] = useState(-1);
 
-	const fadeTimeout = useRef<NodeJS.Timeout>();
+	const fadeTimeout = useRef<NodeJS.Timeout | null>(null);
 
 	useEffect(() => {
-		clearTimeout(fadeTimeout.current);
+		if (fadeTimeout.current) {
+			clearTimeout(fadeTimeout.current);
+		}
 		if (!showDescription) {
 			fadeTimeout.current = setTimeout(() => {
 				setZIndex(-1);

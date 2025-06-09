@@ -5,7 +5,7 @@ import {
 	selectLanguage,
 	useAppTranslation,
 } from "@features/i18n";
-import { sendNotification } from "@features/notifications/lib";
+import { showToast } from "@features/notifications/lib";
 import { CAN_ALWAYS_SHOW_GAME_TEXT } from "@shared/config";
 import * as S from "@shared/lib";
 import { useCallback } from "react";
@@ -24,15 +24,7 @@ export const SettingsPage = () => {
 
 	const clearImageCache = useCallback(() => {
 		dispatch(S.clearImageCache());
-		dispatch(
-			sendNotification({
-				content: {
-					title: t`Image cache cleared`,
-					autoDismiss: true,
-				},
-				trigger: null,
-			}),
-		);
+		dispatch(showToast(t`Image cache cleared`));
 	}, [dispatch, t]);
 
 	return (

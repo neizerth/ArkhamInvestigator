@@ -16,5 +16,5 @@ export type BaseListProps = PickerBaseListProps &
 	PickerBasePressProps &
 	PickerRenderProps & {
 		itemContainerStyle?: ViewStyle;
-		ref?: RefObject<FlatList<number>>;
+		ref?: RefObject<FlatList<number> | null>;
 	};

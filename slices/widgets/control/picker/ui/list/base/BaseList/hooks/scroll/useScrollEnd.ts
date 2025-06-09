@@ -11,13 +11,15 @@ export const useScrollEnd = (props: BaseListProps) => {
 		onMomentumScrollEnd: onMomentumScrollEndProp,
 		onScroll: onScrollProp,
 	} = props;
-	const scrollEndTimeout = useRef<NodeJS.Timeout>();
+	const scrollEndTimeout = useRef<NodeJS.Timeout | null>(null);
 
 	const delayScrollEnd = useCallback(() => {
 		if (!onLastScroll) {
 			return;
 		}
-		clearTimeout(scrollEndTimeout.current);
+		if (scrollEndTimeout.current) {
+			clearTimeout(scrollEndTimeout.current);
+		}
 		scrollEndTimeout.current = setTimeout(onLastScroll, END_TIMEOUT);
 	}, [onLastScroll]);
 

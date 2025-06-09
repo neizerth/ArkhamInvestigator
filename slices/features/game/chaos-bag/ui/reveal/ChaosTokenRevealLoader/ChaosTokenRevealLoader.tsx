@@ -21,16 +21,17 @@ export const ChaosTokenRevealLoader = ({
 	const { frameDuration, valuePerFrame } = getRevealAnimation(duration);
 	const [progress, setProgress] = useState(0);
 
-	const interval = useRef<NodeJS.Timeout>();
+	const interval = useRef<NodeJS.Timeout>(null);
 
 	const progressStep = useCallback(() => {
 		setProgress((value) => Math.min(Math.round(value + valuePerFrame), 100));
 	}, [valuePerFrame]);
 
 	useEffect(() => {
-		clearInterval(interval.current);
+		const clear = () => interval.current && clearInterval(interval.current);
+		clear();
 		return () => {
-			clearInterval(interval.current);
+			clear();
 		};
 	}, []);
 
@@ -42,7 +43,9 @@ export const ChaosTokenRevealLoader = ({
 			return;
 		}
 		if (progress === 100) {
-			clearInterval(interval.current);
+			if (interval.current) {
+				clearInterval(interval.current);
+			}
 			onLoad?.();
 			return;
 		}
