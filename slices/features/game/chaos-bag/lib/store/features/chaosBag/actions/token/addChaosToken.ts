@@ -10,14 +10,15 @@ export const addChaosToken =
 	(type: ChaosTokenType): AppThunk =>
 	(dispatch, getState) => {
 		const state = getState();
-		const count = selectChaosTokenCount(type)(state);
 		const contents = selectChaosBagContents(state);
+		const count = selectChaosTokenCount(type)(state);
 
 		const item: ChaosBagToken = {
 			id: v4(),
 			type,
 			removable: chaosToken.types.removable.includes(type),
 		};
+
 		dispatch(setChaosBagContents([...contents, item]));
 		dispatch(setChaosTokenCount(type, count + 1));
 	};
