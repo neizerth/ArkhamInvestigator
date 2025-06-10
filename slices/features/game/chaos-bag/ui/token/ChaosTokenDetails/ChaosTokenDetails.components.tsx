@@ -1,8 +1,8 @@
+import { TouchableOpacity } from "@modules/haptic/widgets";
 import { font, size } from "@shared/config";
 import { Row, TextView } from "@shared/ui";
 import { View } from "react-native";
 import styled from "styled-components/native";
-import { TouchableOpacity } from "../../../../../haptic";
 import { ChaosTokenInput } from "../ChaosTokenInput";
 import { ChaosTokenMemo as ChaosToken } from "../single";
 

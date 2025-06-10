@@ -1,7 +1,7 @@
+import { TouchableOpacity } from "@modules/haptic/widgets";
 import { color, size } from "@shared/config";
 import { View } from "react-native";
 import styled from "styled-components/native";
-import { TouchableOpacity } from "../../../../../../haptic";
 import { BlessCurseControl } from "../../../token";
 import { ChaosTokenRevealHistoryMemo as ChaosTokenRevealHistory } from "../../ChaosTokenRevealHistory";
 import { ChaosTokenRevealLoader } from "../../ChaosTokenRevealLoader";

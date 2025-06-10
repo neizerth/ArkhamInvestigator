@@ -1,4 +1,4 @@
-import { useHapticFeedback } from "@features/haptic";
+import { useHapticFeedback } from "@modules/haptic/shared/lib";
 import {
 	minMax,
 	selectSkillCheckData,

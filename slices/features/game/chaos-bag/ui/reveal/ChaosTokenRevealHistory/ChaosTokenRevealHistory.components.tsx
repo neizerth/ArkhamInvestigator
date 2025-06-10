@@ -1,7 +1,7 @@
+import { TouchableOpacity } from "@modules/haptic/widgets";
 import { View } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import styled from "styled-components/native";
-import { TouchableOpacity } from "../../../../../haptic";
 import { ChaosBagRevealedToken } from "../ChaosBagRevealedToken";
 export const Container: typeof View = styled(View)`
 	height: 64px;

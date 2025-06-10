@@ -1,5 +1,5 @@
-import type { HapticSliderProps } from "@features/haptic";
 import { useAppTranslation } from "@features/i18n";
+import type { HapticSliderProps } from "@modules/haptic/widgets";
 import { useAppDispatch, useAppSelector } from "@shared/lib";
 import type { AppActionCreator, RootState } from "@shared/model";
 import { useCallback } from "react";

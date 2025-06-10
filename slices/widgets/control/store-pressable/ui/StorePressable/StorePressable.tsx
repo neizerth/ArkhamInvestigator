@@ -1,4 +1,4 @@
-import { Pressable, type PressableProps } from "@features/haptic";
+import { Pressable, type PressableProps } from "@modules/haptic/widgets";
 import { useAppDispatch } from "@shared/lib";
 import type { AppActionCreator } from "@shared/model";
 import { useCallback } from "react";

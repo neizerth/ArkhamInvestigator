@@ -1,4 +1,4 @@
-import { TouchableOpacity } from "@features/haptic";
+import { TouchableOpacity } from "@modules/haptic/widgets";
 import { color, font, size } from "@shared/config";
 import { Icon as BaseIcon } from "@shared/ui";
 import styled from "styled-components/native";

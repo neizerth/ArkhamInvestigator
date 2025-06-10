@@ -1,5 +1,5 @@
 import { Alegreya } from "@assets/fonts";
-import { NumericControl } from "@features/haptic/ui/control";
+import { NumericControl } from "@modules/haptic/widgets";
 import { color, size } from "@shared/config";
 import { Row, Text } from "@shared/ui";
 import { View } from "react-native";

@@ -1,4 +1,4 @@
-import { TouchableOpacity } from "@features/haptic";
+import { TouchableOpacity } from "@modules/haptic/widgets";
 import styled from "styled-components/native";
 import { DoomValue } from "../../../../../../investigator/value";
 

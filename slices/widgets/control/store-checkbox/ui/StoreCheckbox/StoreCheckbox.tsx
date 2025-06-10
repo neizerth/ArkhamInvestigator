@@ -1,5 +1,8 @@
-import { HapticCheckbox, type HapticCheckboxProps } from "@features/haptic";
 import { useAppTranslation } from "@features/i18n";
+import {
+	HapticCheckbox,
+	type HapticCheckboxProps,
+} from "@modules/haptic/widgets";
 import { useAppDispatch, useAppSelector } from "@shared/lib";
 import type { AppActionCreator, RootState } from "@shared/model";
 import { useCallback } from "react";

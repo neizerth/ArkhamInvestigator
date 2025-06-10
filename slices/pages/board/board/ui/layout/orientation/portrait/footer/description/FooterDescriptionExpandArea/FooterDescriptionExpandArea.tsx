@@ -1,4 +1,4 @@
-import { useHapticSwipe } from "@features/haptic";
+import { useHapticSwipe } from "@modules/haptic/shared/lib";
 import { routes } from "@shared/config";
 import { goToPage, setShowDescription, useAppDispatch } from "@shared/lib";
 import { useCallback } from "react";

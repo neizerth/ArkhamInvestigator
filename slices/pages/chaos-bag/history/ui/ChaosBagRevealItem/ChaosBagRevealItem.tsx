@@ -3,7 +3,7 @@ import type {
 	ChaosBagHistoryItem,
 	ChaosBagToken,
 } from "@features/game/chaos-bag/model";
-import { useHapticFeedback } from "@features/haptic";
+import { useHapticFeedback } from "@modules/haptic/shared/lib";
 import { REMOVE_CLIPPED_SUBVIEWS } from "@shared/config";
 import {
 	goBack,

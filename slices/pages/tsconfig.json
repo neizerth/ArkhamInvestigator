@@ -6,7 +6,8 @@
 			"@shared/*": ["../shared/*"],
 			"@entities/*": ["../entities/*"],
 			"@widgets/*": ["../widgets/*"],
-			"@features/*": ["../features/*"]
+			"@features/*": ["../features/*"],
+			"@modules/*": ["../modules/*"]
 		}
 	}
 }

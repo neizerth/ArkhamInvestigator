@@ -1,4 +1,4 @@
-import type { TouchableOpacityProps } from "@features/haptic";
+import type { TouchableOpacityProps } from "@modules/haptic/widgets";
 import * as C from "./Special.components";
 import { getIconStyle } from "./Special.styles";
 

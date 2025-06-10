@@ -1,4 +1,4 @@
-import { Pressable } from "@features/haptic";
+import { Pressable } from "@modules/haptic/widgets";
 import { color } from "@shared/config";
 import Animated from "react-native-reanimated";
 import styled from "styled-components/native";

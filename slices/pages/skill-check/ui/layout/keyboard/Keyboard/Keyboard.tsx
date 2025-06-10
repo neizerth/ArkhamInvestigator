@@ -1,6 +1,6 @@
 import { cancelShowRevealModal } from "@features/game/chaos-bag";
-import { PrimaryButton } from "@features/haptic";
 import { useAppTranslation } from "@features/i18n";
+import { PrimaryButton } from "@modules/haptic/widgets";
 import {
 	addCurrentSkillCheckToHistory,
 	selectHistoryShown,

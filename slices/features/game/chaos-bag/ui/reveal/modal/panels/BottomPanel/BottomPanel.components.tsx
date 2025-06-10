@@ -1,8 +1,8 @@
+import { TouchableOpacity } from "@modules/haptic/widgets";
 import { color, size } from "@shared/config";
 import { Icon, Row } from "@shared/ui";
 import { View } from "react-native";
 import styled from "styled-components/native";
-import { TouchableOpacity } from "../../../../../../../haptic";
 import { DescriptionPanel } from "../DescriptionPanel";
 
 export const Container: typeof View = styled(View)`

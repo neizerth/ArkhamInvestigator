@@ -1,11 +1,11 @@
 import * as chaosBag from "@features/game/chaos-bag";
-import { selectHapticMode, setHapticMode } from "@features/haptic";
 import {
 	changeLanguage,
 	selectLanguage,
 	useAppTranslation,
 } from "@features/i18n";
 import { showToast } from "@features/notifications/lib";
+import { selectHapticMode, setHapticMode } from "@modules/haptic/shared/lib";
 import { CAN_ALWAYS_SHOW_GAME_TEXT } from "@shared/config";
 import * as S from "@shared/lib";
 import { useCallback } from "react";

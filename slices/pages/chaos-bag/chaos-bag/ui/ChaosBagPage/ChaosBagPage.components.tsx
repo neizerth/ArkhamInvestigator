@@ -1,5 +1,5 @@
 import { ChaosBagContents } from "@features/game/chaos-bag";
-import { Button } from "@features/haptic";
+import { Button } from "@modules/haptic/widgets";
 import { color, font, size } from "@shared/config";
 import { Row, Text } from "@shared/ui";
 import { ContentPage } from "@widgets/content";

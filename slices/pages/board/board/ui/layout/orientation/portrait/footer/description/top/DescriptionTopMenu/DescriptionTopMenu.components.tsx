@@ -1,4 +1,4 @@
-import { IconButton } from "@features/haptic";
+import { IconButton } from "@modules/haptic/widgets";
 import { color } from "@shared/config";
 import { Row } from "@shared/ui";
 import styled from "styled-components/native";
