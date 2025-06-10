@@ -1,5 +1,5 @@
 import { Arkhamic, Conkordia, STXinwei, SanCn } from "@assets/fonts";
-import { withLocale } from "@modules/i18n/shared/lib";
+import { withLocale } from "@modules/core/i18n/shared/lib";
 import { color } from "@shared/config";
 import { View } from "react-native";
 import styled from "styled-components/native";

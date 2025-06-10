@@ -1,4 +1,4 @@
-import { useAppTranslation } from "@modules/i18n/shared/lib";
+import { useAppTranslation } from "@modules/core/i18n/shared/lib";
 import { whereId } from "@shared/lib";
 import { memo } from "react";
 import {

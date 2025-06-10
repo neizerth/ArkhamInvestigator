@@ -1,7 +1,7 @@
 import {
 	selectInvestigatorByCode,
 	useAppTranslation,
-} from "@modules/i18n/shared/lib";
+} from "@modules/core/i18n/shared/lib";
 import { InvesigatorCode } from "@shared/config";
 import { useAppSelector } from "@shared/lib";
 import { Bold, List, Paragraph, Text, Title } from "@shared/ui";

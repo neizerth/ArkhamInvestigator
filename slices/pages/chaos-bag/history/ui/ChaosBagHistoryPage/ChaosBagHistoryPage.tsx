@@ -3,8 +3,8 @@ import {
 	selectRevealHistory,
 } from "@features/game/chaos-bag";
 import type { ChaosBagHistoryItem } from "@features/game/chaos-bag/model";
+import { useAppTranslation } from "@modules/core/i18n/shared/lib";
 import { useModal } from "@modules/core/modal/shared/lib";
-import { useAppTranslation } from "@modules/i18n/shared/lib";
 import { REMOVE_CLIPPED_SUBVIEWS } from "@shared/config";
 import { goBack, useAppDispatch, useAppSelector } from "@shared/lib";
 import { Delay } from "@shared/ui";

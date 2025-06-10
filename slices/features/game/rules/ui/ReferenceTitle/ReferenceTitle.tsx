@@ -1,6 +1,6 @@
 import { StyleSheet, type TextProps, type ViewProps } from "react-native";
 
-import { selectCurrentLanguage } from "@modules/i18n/shared/lib";
+import { selectCurrentLanguage } from "@modules/core/i18n/shared/lib";
 import { color, font } from "@shared/config";
 import { useAppSelector } from "@shared/lib";
 import { getReferenceStyle } from "./ReferenceStyle.style";

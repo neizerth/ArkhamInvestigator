@@ -1,6 +1,6 @@
 import { Arkhamic, Conkordia, STXinwei, SanCn } from "@assets/fonts";
 import { roundReferenceAssets } from "@assets/images/game/reference/round";
-import { withLocale } from "@modules/i18n/shared/lib";
+import { withLocale } from "@modules/core/i18n/shared/lib";
 import { ImageBackground } from "@shared/ui";
 import { View } from "react-native";
 import styled from "styled-components/native";

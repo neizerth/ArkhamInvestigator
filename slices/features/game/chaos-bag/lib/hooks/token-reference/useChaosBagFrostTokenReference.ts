@@ -1,4 +1,4 @@
-import { useAppTranslation } from "@modules/i18n/shared/lib";
+import { useAppTranslation } from "@modules/core/i18n/shared/lib";
 import { useAppSelector } from "@shared/lib";
 import { useMemo } from "react";
 import type { ChaosTokenType } from "../../../model";

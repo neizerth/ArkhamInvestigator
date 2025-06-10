@@ -1,4 +1,4 @@
-import { useAppTranslation } from "@modules/i18n/shared/lib";
+import { useAppTranslation } from "@modules/core/i18n/shared/lib";
 import type { InvestigatorDetailItem } from "@shared/model";
 import { useCallback } from "react";
 import type { ViewProps } from "react-native";

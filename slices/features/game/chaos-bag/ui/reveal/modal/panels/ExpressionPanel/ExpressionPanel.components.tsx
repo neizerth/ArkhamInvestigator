@@ -1,6 +1,6 @@
 import { Copasetic, Enthalpy298, LineSeedKR, ZhenShuai } from "@assets/fonts";
 import { TouchableOpacity } from "@modules/core/haptic/shared/ui";
-import { withLocale } from "@modules/i18n/shared/lib";
+import { withLocale } from "@modules/core/i18n/shared/lib";
 import { color, font } from "@shared/config";
 import { View } from "react-native";
 import styled from "styled-components/native";
