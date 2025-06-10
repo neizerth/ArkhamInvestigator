@@ -1,5 +1,5 @@
 import { storage } from "../../../../../features/storage";
-import type { Translation } from "../../../model";
+import type { Translation } from "../../model";
 
 const key = "118n.translations";
 

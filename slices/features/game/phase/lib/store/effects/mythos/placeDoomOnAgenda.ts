@@ -1,4 +1,4 @@
-import { i18next } from "@modules/i18n/config";
+import { i18next } from "@modules/i18n/shared/config";
 import { selectDoom, setDoom } from "@shared/lib";
 import type { AppThunk } from "@shared/model";
 import { showToast } from "../../../../../../notifications/lib";

@@ -1,5 +1,4 @@
-import type { Translation } from "../../../../modules/i18n/model";
-
+import type { Translation } from "../../model";
 import de from "./de.json";
 import en from "./en.json";
 import es from "./es.json";

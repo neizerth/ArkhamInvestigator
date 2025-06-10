@@ -1,5 +1,5 @@
 import { getLocales } from "react-native-localize";
-import { DEFAULT_LANGUAGE } from "../../../config";
+import { DEFAULT_LANGUAGE } from "../../../shared/config";
 
 export const getDefaultLanguage = (availableLanguages?: string[]) => {
 	const [locale] = getLocales();

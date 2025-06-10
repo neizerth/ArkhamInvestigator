@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { ArkhamDBInvestigatorCard } from "@shared/model/api/game/arkhamDB";
 import { createSliceState } from "redux-toolkit-helpers";
-import { DEFAULT_LANGUAGE } from "../../../../../config";
+import { DEFAULT_LANGUAGE } from "../../../../../shared/config";
 import { fetchTranslationData } from "./actions/translations/fetchTranslationData";
 import { setTranslationsData } from "./reducers/setTranslationsData";
 
