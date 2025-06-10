@@ -1,10 +1,7 @@
-import { useSound } from "@features/sound";
 import { useHapticFeedback } from "@modules/haptic/shared/lib";
-import type {
-	PickerChangeEvent,
-	PickerScrollEvent,
-} from "@widgets/control/picker/model";
+import { useSound } from "@modules/sound/shared/lib";
 import { useCallback, useRef } from "react";
+import type { PickerChangeEvent, PickerScrollEvent } from "../../../../model";
 import type { PickerListProps } from "../PickerList.types";
 
 export const useScrollFeedback = (props: PickerListProps) => {
