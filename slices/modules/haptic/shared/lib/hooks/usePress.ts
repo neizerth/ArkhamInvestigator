@@ -1,4 +1,4 @@
-import type { PressHandler, PressProps } from "../../../model";
+import type { PressHandler, PressProps } from "../../../shared/model";
 import { useHapticFeedback } from "./useHapticFeedback";
 import { usePressCallback } from "./usePressCallback";
 

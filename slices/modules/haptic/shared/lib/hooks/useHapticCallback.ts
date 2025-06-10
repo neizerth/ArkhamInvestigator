@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import type { HapticPatternType } from "../../../model";
+import type { HapticPatternType } from "../../../shared/model";
 import { useHapticFeedback } from "./useHapticFeedback";
 
 type Options = {

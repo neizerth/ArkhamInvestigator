@@ -2,8 +2,8 @@ import {
 	Pressable as BasePressable,
 	type PressableProps as BasePressableProps,
 } from "react-native";
-import type { PressProps } from "../../../model";
 import { usePress } from "../../../shared/lib";
+import type { PressProps } from "../../../shared/model";
 
 export type PressableProps = BasePressableProps & PressProps;
 

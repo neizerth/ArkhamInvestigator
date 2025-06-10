@@ -1,6 +1,6 @@
 import type { HapticOptions } from "react-native-haptic-feedback";
-import { TICK_PATTERN, fallbackWebPatterns } from "../../../config";
-import type { HapticFeedbackType } from "../../../model";
+import type { HapticFeedbackType } from "../../../shared/model";
+import { TICK_PATTERN, fallbackWebPatterns } from "../../config";
 import { vibrate } from "../vibrate";
 
 const Haptics = {

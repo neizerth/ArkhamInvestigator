@@ -1,8 +1,8 @@
 import type { TouchableOpacityProps as BaseTouchableOpacityProps } from "react-native";
 
 import { TouchableOpacity as BaseTouchableOpacity } from "react-native";
-import type { PressProps } from "../../../model";
 import { usePress } from "../../../shared/lib";
+import type { PressProps } from "../../../shared/model";
 
 export type TouchableOpacityProps = BaseTouchableOpacityProps & PressProps;
 

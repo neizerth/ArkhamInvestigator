@@ -1,4 +1,4 @@
-import type { HapticMode } from "@modules/haptic/model";
+import type { HapticMode } from "@modules/haptic/shared/model";
 import type { SelectItem } from "@shared/ui";
 import { Platform } from "react-native";
 
