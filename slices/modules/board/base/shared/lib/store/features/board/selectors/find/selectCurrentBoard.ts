@@ -1,8 +1,3 @@
-import { createSelector } from "@reduxjs/toolkit";
-import { selectCurrentInvestigatorIndex } from "@shared/lib";
-import { selectInvestigatorBoards } from "../../board";
+import { selectBoardById } from "./selectBoardById";
 
-export const selectCurrentBoard = createSelector(
-	[selectInvestigatorBoards, selectCurrentInvestigatorIndex],
-	(boards, index) => boards[index || 0],
-);
+export const selectCurrentBoard = selectBoardById("current");
