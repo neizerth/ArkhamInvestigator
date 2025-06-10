@@ -1,11 +1,13 @@
-import { closeModal } from "@features/modal/lib";
 import { useAppDispatch, useAppSelector, useBackButton } from "@shared/lib";
 import { type PropsWithChildren, useCallback, useRef } from "react";
-import { ModalContext, type ModalEventHandlerType } from "../../lib/context";
+
 import {
+	ModalContext,
+	type ModalEventHandlerType,
+	closeModal,
 	selectModalData,
 	selectModalId,
-} from "../../lib/store/features/modal/modal";
+} from "../../../shared";
 import * as C from "./ModalProvider.components";
 
 export const ModalProvider = ({ children }: PropsWithChildren) => {

@@ -1,6 +1,6 @@
-import type { ModalData } from "@features/modal/model";
 import { createSlice } from "@reduxjs/toolkit";
 import { createSliceState } from "redux-toolkit-helpers";
+import type { ModalData } from "../../../../model";
 
 export type IModalState = {
 	modalId: string | null;

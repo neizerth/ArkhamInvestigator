@@ -1,10 +1,10 @@
 import { Button, TouchableOpacity } from "@modules/haptic/shared/ui";
+import { ContextModal } from "@modules/modal/shared";
 import { color, font, size } from "@shared/config";
 import { Row, Text, TextView } from "@shared/ui";
 import { Dimensions, View } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import styled from "styled-components/native";
-import { ContextModal } from "../../../../modal";
 import {
 	BlessCurseControl,
 	ChaosTokenPreviewMemo as ChaosTokenPreview,

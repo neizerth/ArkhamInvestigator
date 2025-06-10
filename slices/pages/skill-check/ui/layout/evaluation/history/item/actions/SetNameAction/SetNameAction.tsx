@@ -1,7 +1,8 @@
 import * as C from "./SetNameAction.components";
 
-import { type ModalOkEvent, useModal } from "@features/modal";
 import { useAppTranslation } from "@modules/i18n/shared/lib";
+import type { ModalOkEvent } from "@modules/modal/shared";
+import { useModal } from "@modules/modal/shared/lib";
 import {
 	selectCurrentFaction,
 	selectSkillCheckHistoryItemTitle as selectTitle,

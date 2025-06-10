@@ -1,4 +1,4 @@
-import { ContextModal } from "@features/modal";
+import { ContextModal } from "@modules/modal/shared/ui";
 import { color, size } from "@shared/config";
 import { ReferenceSelect } from "@widgets/control/reference-select";
 import styled from "styled-components/native";
