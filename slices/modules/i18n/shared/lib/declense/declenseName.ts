@@ -1,6 +1,6 @@
 import type { InvestigatorSignatureGender } from "arkham-investigator-data";
 import petrovich, { type PetrovichGender } from "petrovich";
-import type { DeclenseCase } from "../../../model";
+import type { DeclenseCase } from "../../model";
 
 type Options = {
 	name: string;

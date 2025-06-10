@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 
-import { DEFAULT_LANGUAGE } from "@modules/i18n/config";
+import { DEFAULT_LANGUAGE } from "@modules/i18n/shared/config";
 import { selectCurrentLanguage } from "@modules/i18n/shared/lib";
 import { useAppSelector } from "@shared/lib";
 import type { Story } from "@shared/model";

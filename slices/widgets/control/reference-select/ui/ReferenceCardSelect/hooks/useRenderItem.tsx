@@ -3,7 +3,7 @@ import type { SelectItem } from "@shared/ui";
 import type { ReferenceCard } from "arkham-investigator-data";
 import { useCallback } from "react";
 
-import { DEFAULT_LANGUAGE } from "@modules/i18n/config";
+import { DEFAULT_LANGUAGE } from "@modules/i18n/shared/config";
 import { useAppSelector } from "@shared/lib";
 import * as C from "../ReferenceCardSelect.components";
 

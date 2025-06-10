@@ -1,5 +1,5 @@
 import { showToast } from "@features/notifications/lib";
-import { i18next } from "@modules/i18n/config";
+import { i18next } from "@modules/i18n/shared/config";
 import { declenseName } from "@modules/i18n/shared/lib";
 import {
 	decreaseCurrentStat,

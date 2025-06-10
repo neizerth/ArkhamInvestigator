@@ -3,7 +3,7 @@ import {
 	selectCanAddChaosToken,
 } from "@features/game/chaos-bag";
 import { showToast } from "@features/notifications/lib";
-import { i18next } from "@modules/i18n/config";
+import { i18next } from "@modules/i18n/shared/config";
 import { selectCurrentBoard } from "@shared/lib";
 import type { AppThunk } from "@shared/model";
 

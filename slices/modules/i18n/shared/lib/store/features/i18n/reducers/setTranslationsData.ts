@@ -5,7 +5,7 @@ import {
 	I18N_NAMESAPCE,
 	i18next,
 	translations,
-} from "../../../../../../config";
+} from "../../../../../../shared/config";
 import { saveStoreTranslation } from "../../../../storage";
 import type { I18NReducer } from "../i18n.types";
 
