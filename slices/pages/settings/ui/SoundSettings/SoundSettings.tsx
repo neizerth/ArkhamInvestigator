@@ -1,10 +1,10 @@
-import { SOUND_VOLUME_BARS_COUNT } from "@modules/sound/shared/config";
+import { SOUND_VOLUME_BARS_COUNT } from "@modules/core/sound/shared/config";
 import {
 	selectSoundEnabled,
 	selectSoundVolume,
 	setSoundEnabled,
 	setSoundVolume,
-} from "@modules/sound/shared/lib";
+} from "@modules/core/sound/shared/lib";
 import { useAppSelector } from "@shared/lib";
 import type { ViewProps } from "react-native";
 import * as C from "./SoundSettings.components";
