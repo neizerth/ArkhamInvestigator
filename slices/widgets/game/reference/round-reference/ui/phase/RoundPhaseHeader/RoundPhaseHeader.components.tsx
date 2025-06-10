@@ -1,6 +1,6 @@
 import { Arkhamic, Conkordia, STXinwei, SanCn } from "@assets/fonts";
-import { TouchableOpacity } from "@features/haptic";
 import { withLocale } from "@features/i18n";
+import { TouchableOpacity } from "@modules/haptic/widgets";
 import { color } from "@shared/config";
 import { Row } from "@shared/ui";
 import { View } from "react-native";

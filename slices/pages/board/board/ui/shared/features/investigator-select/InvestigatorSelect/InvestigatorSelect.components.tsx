@@ -1,4 +1,4 @@
-import { TouchableOpacity } from "@features/haptic";
+import { TouchableOpacity } from "@modules/haptic/widgets";
 import { color } from "@shared/config";
 import { type DefinedIconProps, Icon } from "@shared/ui";
 import { PickerMemo as BasePicker } from "@widgets/control/picker";

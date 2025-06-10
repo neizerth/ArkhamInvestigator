@@ -1,4 +1,4 @@
-import { Pressable } from "@features/haptic";
+import { Pressable } from "@modules/haptic/widgets";
 import { View } from "react-native";
 import styled from "styled-components/native";
 import { TOP_CONTENT_OFFSET } from "../../../../../../../../config";

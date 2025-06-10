@@ -1,4 +1,9 @@
 import {
+	useHapticLongPress,
+	useHapticSwipe,
+	useHapticTap,
+} from "@modules/haptic/shared/lib";
+import {
 	selectCurrentBoardProp,
 	useAppDispatch,
 	useAppSelector,
@@ -10,11 +15,6 @@ import {
 	Gesture,
 	GestureDetector,
 } from "react-native-gesture-handler";
-import {
-	useHapticLongPress,
-	useHapticSwipe,
-	useHapticTap,
-} from "../../../../../../../haptic";
 import { chaosToken } from "../../../../../config";
 import {
 	selectChaosTokenValueByType,

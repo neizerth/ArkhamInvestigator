@@ -1,4 +1,4 @@
-import type { IconButton } from "@features/haptic";
+import type { IconButton } from "@modules/haptic/widgets";
 import { color, size } from "@shared/config";
 import * as Shared from "@shared/ui";
 import { TopBarButton } from "@widgets/navigation";

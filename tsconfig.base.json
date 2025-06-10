@@ -5,7 +5,8 @@
 		"esModuleInterop": true,
 		"sourceMap": true,
 		"paths": {
-			"@assets/*": ["./assets/*"]
+			"@assets/*": ["./assets/*"],
+			"@modules/*": ["./modules/*"]
 		}
 	},
 	"include": [

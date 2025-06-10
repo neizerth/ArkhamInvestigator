@@ -1,5 +1,5 @@
 import { Copasetic } from "@assets/fonts";
-import { TouchableOpacity } from "@features/haptic";
+import { TouchableOpacity } from "@modules/haptic/widgets";
 import { color } from "@shared/config";
 import { UnscaledText } from "@shared/ui";
 import styled from "styled-components/native";

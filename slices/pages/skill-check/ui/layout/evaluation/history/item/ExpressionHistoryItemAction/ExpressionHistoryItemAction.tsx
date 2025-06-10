@@ -1,4 +1,4 @@
-import type { TouchableOpacityProps } from "@features/haptic";
+import type { TouchableOpacityProps } from "@modules/haptic/widgets";
 import type { TextStyle } from "react-native";
 import * as C from "./ExpressionHistoryItemAction.components";
 

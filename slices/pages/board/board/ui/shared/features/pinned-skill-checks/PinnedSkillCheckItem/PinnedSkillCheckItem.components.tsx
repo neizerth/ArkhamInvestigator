@@ -1,6 +1,6 @@
 import { ArnoPro, STXinwei, SanCn, Yoon } from "@assets/fonts";
-import { TouchableOpacity } from "@features/haptic";
 import { withLocale } from "@features/i18n";
+import { TouchableOpacity } from "@modules/haptic/widgets";
 import { color, font, size } from "@shared/config";
 import { Row, TextView } from "@shared/ui";
 import { SkillCheckExpressionDisplay } from "@widgets/game/skill-check";

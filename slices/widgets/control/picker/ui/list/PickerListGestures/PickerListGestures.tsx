@@ -1,4 +1,4 @@
-import { useHapticFeedback, useHapticSwipe } from "@features/haptic";
+import { useHapticFeedback, useHapticSwipe } from "@modules/haptic/shared/lib";
 import { arrayIf } from "@shared/lib";
 import { type PropsWithChildren, useCallback } from "react";
 import {

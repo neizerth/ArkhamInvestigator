@@ -8,6 +8,7 @@
 			"@pages/*": ["./slices/pages/*"],
 			"@widgets/*": ["./slices/widgets/*"],
 			"@features/*": ["./slices/features/*"],
+			"@modules/*": ["./slices/modules/*"],
 			"@assets/*": ["./assets/*"]
 		}
 	},

@@ -1,4 +1,7 @@
-import { type DefinedIconButtonProps, IconButton } from "@features/haptic";
+import {
+	type DefinedIconButtonProps,
+	IconButton,
+} from "@modules/haptic/widgets";
 import { color } from "@shared/config";
 import { Row } from "@shared/ui";
 import type { FC } from "react";

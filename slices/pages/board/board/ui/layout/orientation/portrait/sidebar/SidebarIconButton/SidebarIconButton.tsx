@@ -1,4 +1,7 @@
-import { IconButton, type TouchableOpacityProps } from "@features/haptic";
+import {
+	IconButton,
+	type TouchableOpacityProps,
+} from "@modules/haptic/widgets";
 import { color } from "@shared/config";
 import { Platform } from "react-native";
 import styled, { css } from "styled-components/native";

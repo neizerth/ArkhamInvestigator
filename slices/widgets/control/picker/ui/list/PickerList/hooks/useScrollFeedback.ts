@@ -1,5 +1,5 @@
-import { useHapticFeedback } from "@features/haptic";
 import { useSound } from "@features/sound";
+import { useHapticFeedback } from "@modules/haptic/shared/lib";
 import type {
 	PickerChangeEvent,
 	PickerScrollEvent,

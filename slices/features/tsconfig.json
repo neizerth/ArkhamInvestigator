@@ -5,6 +5,7 @@
 			"@assets/*": ["../../assets/*"],
 			"@shared/*": ["../shared/*"],
 			"@entities/*": ["../entities/*"],
+			"@modules/*": ["../modules/*"],
 			"@features/model": ["./model/*"]
 		}
 	}

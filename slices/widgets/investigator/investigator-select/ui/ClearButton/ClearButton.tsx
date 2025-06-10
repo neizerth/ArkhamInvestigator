@@ -1,4 +1,4 @@
-import type { TouchableOpacityProps } from "@features/haptic";
+import type { TouchableOpacityProps } from "@modules/haptic/widgets";
 import { clearSelectedInvestigators, useAppDispatch } from "@shared/lib";
 import { useCallback } from "react";
 import * as C from "./ClearButton.components";

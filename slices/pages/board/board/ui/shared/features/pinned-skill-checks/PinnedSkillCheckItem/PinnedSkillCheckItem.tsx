@@ -1,6 +1,6 @@
 import { useSkillItemChaosTokenRevealModal } from "@features/game/skill-check";
-import { useHapticSwipe } from "@features/haptic";
 import { selectCurrentLanguage } from "@features/i18n";
+import { useHapticSwipe } from "@modules/haptic/shared/lib";
 import {
 	selectTapToHidePins,
 	setBoardProp,

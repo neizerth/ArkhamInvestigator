@@ -1,5 +1,5 @@
-import type { HapticSelectProps } from "@features/haptic";
 import { useAppTranslation } from "@features/i18n";
+import type { HapticSelectProps } from "@modules/haptic/widgets";
 import type { Selector } from "@reduxjs/toolkit";
 import { useAppDispatch, useAppSelector } from "@shared/lib";
 import type { AppActionCreator, RootState } from "@shared/model";

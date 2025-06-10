@@ -1,8 +1,8 @@
 import { GameText } from "@entities/game-text";
+import { Pressable, type PressableProps } from "@modules/haptic/widgets";
 import { color, font, size } from "@shared/config";
 import type { FC } from "react";
 import styled, { css } from "styled-components/native";
-import { Pressable, type PressableProps } from "../../../../../../../haptic";
 
 type ContainerProps = PressableProps & {
 	last: boolean;

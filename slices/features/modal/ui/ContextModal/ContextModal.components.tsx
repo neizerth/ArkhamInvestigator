@@ -1,10 +1,10 @@
 import { Alegreya } from "@assets/fonts";
+import { TouchableOpacity } from "@modules/haptic/widgets";
 import { color, size, statusBarHeight } from "@shared/config";
 import { Icon, Row, Text } from "@shared/ui";
 import { View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import styled, { css } from "styled-components/native";
-import { TouchableOpacity } from "../../../haptic";
 
 export const Container: typeof View = styled(View)`
   padding: ${statusBarHeight + size.gap.default}px ${size.gap.default}px ${size.gap.small}px;

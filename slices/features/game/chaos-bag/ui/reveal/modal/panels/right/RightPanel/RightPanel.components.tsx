@@ -1,8 +1,8 @@
+import { TouchableOpacity } from "@modules/haptic/widgets";
 import { color, size } from "@shared/config";
 import { IconNumber, type IconNumberProps, Text } from "@shared/ui";
 import { View } from "react-native";
 import styled, { css } from "styled-components/native";
-import { TouchableOpacity } from "../../../../../../../../haptic";
 import { DifficultyControl } from "../DifficultyControl";
 import { SkillCheckResult } from "../SkillCheckResult";
 

@@ -1,3 +1,4 @@
+import { useHapticFeedback } from "@modules/haptic/shared/lib";
 import { useAppDispatch, useAppSelector } from "@shared/lib";
 import { memo, useCallback } from "react";
 import type { ListRenderItemInfo, ViewProps } from "react-native";
@@ -6,7 +7,6 @@ import {
 	Gesture,
 	GestureDetector,
 } from "react-native-gesture-handler";
-import { useHapticFeedback } from "../../../../../haptic";
 import {
 	returnChaosToken,
 	selectCurrentTokenId,

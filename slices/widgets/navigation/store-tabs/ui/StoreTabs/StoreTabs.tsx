@@ -1,5 +1,5 @@
-import { HapticTabs, type HapticTabsProps } from "@features/haptic";
 import { useAppTranslation } from "@features/i18n";
+import { HapticTabs, type HapticTabsProps } from "@modules/haptic/widgets";
 import { useAppDispatch, useAppSelector } from "@shared/lib";
 import type { AppActionCreator, RootState } from "@shared/model";
 import type { TabItem } from "@shared/ui";

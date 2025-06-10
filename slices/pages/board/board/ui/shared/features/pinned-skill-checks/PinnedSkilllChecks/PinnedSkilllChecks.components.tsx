@@ -1,5 +1,5 @@
 import { textureImages } from "@assets/images/game/effects/textures";
-import { TouchableOpacity } from "@features/haptic";
+import { TouchableOpacity } from "@modules/haptic/widgets";
 import { color, size } from "@shared/config";
 import { type DefinedIconProps, Icon, Row } from "@shared/ui";
 import { Image } from "expo-image";

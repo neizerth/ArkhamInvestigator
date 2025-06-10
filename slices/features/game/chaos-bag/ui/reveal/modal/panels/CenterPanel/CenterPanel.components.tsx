@@ -1,7 +1,7 @@
+import { TouchableOpacity } from "@modules/haptic/widgets";
 import { size } from "@shared/config";
 import { View } from "react-native";
 import styled from "styled-components/native";
-import { TouchableOpacity } from "../../../../../../../haptic";
 import { ChaosTokenPreview, ChaosTokenValuePicker } from "../../../../token";
 import { ChaosTokenValue } from "../../../../token/ChaosTokenValue";
 import { ExpressionPanel } from "../ExpressionPanel";

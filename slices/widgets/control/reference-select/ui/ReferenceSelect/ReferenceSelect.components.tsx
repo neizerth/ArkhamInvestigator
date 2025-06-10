@@ -1,5 +1,5 @@
 import { GameText } from "@entities/game-text";
-import { Button, HapticSelect } from "@features/haptic";
+import { Button, HapticSelect } from "@modules/haptic/widgets";
 import { color, font, size } from "@shared/config";
 import { View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
