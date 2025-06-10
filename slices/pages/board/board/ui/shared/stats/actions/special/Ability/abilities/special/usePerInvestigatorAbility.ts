@@ -1,5 +1,6 @@
-import { type ModalOkEvent, useModal } from "@features/modal";
 import { useAppTranslation } from "@modules/i18n/shared/lib";
+import { useModal } from "@modules/modal/shared";
+import type { ModalOkEvent } from "@modules/modal/shared/model";
 import {
 	selectAbilityUseInfo,
 	selectBoardDetailItems,

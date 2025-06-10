@@ -1,5 +1,5 @@
-import { useModal } from "@features/modal";
 import { useAppTranslation } from "@modules/i18n/shared/lib";
+import { useModal } from "@modules/modal/shared/lib";
 import { routes } from "@shared/config";
 import {
 	replacePageTo,

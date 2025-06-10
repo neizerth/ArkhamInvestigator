@@ -1,10 +1,10 @@
+import { useModal } from "@modules/modal/shared";
 import {
 	selectCurrentFaction,
 	useAppDispatch,
 	useAppSelector,
 } from "@shared/lib";
 import { useCallback, useEffect } from "react";
-import { useModal } from "../../../../../modal";
 import {
 	goToNextTimingWizardStep as goToNextStep,
 	goToPrevTimingWizardStep as goToPrevStep,
