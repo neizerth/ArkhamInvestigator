@@ -3,7 +3,7 @@ import type {
 	InvestigatorBoardValues,
 } from "@modules/board/base/shared/model";
 import { createSelector } from "@reduxjs/toolkit";
-import { selectBoardProp } from "../props";
+import { selectBoardProp } from "../props/selectBoardProp";
 
 type Key = keyof InvestigatorBoardValues;
 

@@ -1,3 +1,3 @@
+export * from "./selectInvestigatorBoardImages";
 export * from "./selectBoardProp";
-export * from "./selectBoardIsUnique";
-export * from "./selectBoardImages";
+export * from "./selectCurrentProp";
