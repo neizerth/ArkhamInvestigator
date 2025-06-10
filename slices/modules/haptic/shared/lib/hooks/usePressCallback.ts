@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import type { GestureResponderEvent } from "react-native";
-import type { PressHandler } from "../../../model";
+import type { PressHandler } from "../../../shared/model";
 import { handlePress } from "../handlePress";
 
 type Options = {

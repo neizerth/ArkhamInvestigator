@@ -1,7 +1,7 @@
 import { useAppSelector } from "@shared/lib";
 import { useCallback } from "react";
-import { defaultModeFeedback, fallbackDefaultPatterns } from "../../../config";
-import type { HapticPatternType } from "../../../model";
+import type { HapticPatternType } from "../../../shared/model";
+import { defaultModeFeedback, fallbackDefaultPatterns } from "../../config";
 import { impactHapticFeedback } from "../impactHapticFeedback";
 import { selectHapticMode } from "../store";
 

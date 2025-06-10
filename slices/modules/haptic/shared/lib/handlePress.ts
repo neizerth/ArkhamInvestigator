@@ -1,5 +1,5 @@
 import type { GestureResponderEvent } from "react-native";
-import type { PressHandler } from "../../model";
+import type { PressHandler } from "../../shared/model";
 
 type HandlePressOptions = {
 	event: GestureResponderEvent;

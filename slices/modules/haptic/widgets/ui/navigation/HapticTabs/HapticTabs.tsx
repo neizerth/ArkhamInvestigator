@@ -6,8 +6,8 @@ import {
 	defaultRenderTab,
 } from "@shared/ui";
 import { useCallback } from "react";
-import type { HapticPatternType } from "../../../../model";
 import { useHapticFeedback } from "../../../../shared/lib";
+import type { HapticPatternType } from "../../../../shared/model";
 import * as C from "./HapticTabs.components";
 
 export type HapticTabsProps<T extends TabItem> = TabsProps<T> & {

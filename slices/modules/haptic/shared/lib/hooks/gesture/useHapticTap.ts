@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { Gesture } from "react-native-gesture-handler";
-import type { HapticPatternType } from "../../../../model";
+import type { HapticPatternType } from "../../../../shared/model";
 import { useHapticCallback } from "../useHapticCallback";
 
 type Options = {

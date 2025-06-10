@@ -1,4 +1,4 @@
-import type { HapticPatternType } from "../../model";
+import type { HapticPatternType } from "../../shared/model";
 import Haptics from "./Haptics";
 import { vibrate } from "./vibrate";
 
