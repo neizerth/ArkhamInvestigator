@@ -1,5 +1,5 @@
 import { GameText } from "@entities/game-text";
-import { Pressable, type PressableProps } from "@modules/haptic/widgets";
+import { Pressable, type PressableProps } from "@modules/haptic/shared/ui";
 import { color, font, size } from "@shared/config";
 import type { FC } from "react";
 import styled, { css } from "styled-components/native";

@@ -1,4 +1,4 @@
-import { Button, TouchableOpacity } from "@modules/haptic/widgets";
+import { Button, TouchableOpacity } from "@modules/haptic/shared/ui";
 import { color, font, size } from "@shared/config";
 import { Row, Text, TextView } from "@shared/ui";
 import { Dimensions, View } from "react-native";

@@ -3,7 +3,7 @@ import { Arkhamic, STXingkai } from "@assets/fonts";
 import type {
 	PrimaryButtonProps,
 	PrimaryButtonSize,
-} from "@modules/haptic/widgets";
+} from "@modules/haptic/shared/ui";
 import { withLocale } from "@modules/i18n/shared/lib";
 import { color, font } from "@shared/config";
 import type { FC } from "react";

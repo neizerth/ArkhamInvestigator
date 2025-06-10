@@ -1,4 +1,4 @@
-import { Button } from "@modules/haptic/widgets";
+import { Button } from "@modules/haptic/shared/ui";
 import { size } from "@shared/config";
 import { Image, View } from "react-native";
 import styled from "styled-components/native";

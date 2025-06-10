@@ -1,4 +1,4 @@
-import type { TouchableOpacityProps } from "@modules/haptic/widgets";
+import type { TouchableOpacityProps } from "@modules/haptic/shared/ui";
 import type { Faction } from "@shared/model";
 import * as C from "./FactionSelectButton.components";
 

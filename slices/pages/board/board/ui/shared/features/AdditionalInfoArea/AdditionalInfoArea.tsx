@@ -1,4 +1,4 @@
-import type { PressableProps } from "@modules/haptic/widgets";
+import type { PressableProps } from "@modules/haptic/shared/ui";
 import { setShowAdditionalInformation, useAppDispatch } from "@shared/lib";
 import { useCallback } from "react";
 import * as C from "./AdditionalInfoArea.components";

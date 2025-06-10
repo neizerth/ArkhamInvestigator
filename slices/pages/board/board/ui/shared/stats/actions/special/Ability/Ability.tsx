@@ -1,4 +1,4 @@
-import type { TouchableOpacityProps } from "@modules/haptic/widgets";
+import type { TouchableOpacityProps } from "@modules/haptic/shared/ui";
 import {
 	getAbilityIcon,
 	selectIsAbilityUsed,
