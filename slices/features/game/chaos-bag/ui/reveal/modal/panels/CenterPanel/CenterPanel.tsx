@@ -2,7 +2,7 @@ import {
 	useHapticLongPress,
 	useHapticSwipe,
 	useHapticTap,
-} from "@modules/haptic/shared/lib";
+} from "@modules/core/haptic/shared/lib";
 import {
 	selectCurrentBoardProp,
 	useAppDispatch,

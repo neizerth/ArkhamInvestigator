@@ -1,4 +1,4 @@
-import { useHapticFeedback } from "@modules/haptic/shared/lib";
+import { useHapticFeedback } from "@modules/core/haptic/shared/lib";
 import { useAppDispatch, useAppSelector } from "@shared/lib";
 import { memo, useCallback } from "react";
 import type { ListRenderItemInfo, ViewProps } from "react-native";

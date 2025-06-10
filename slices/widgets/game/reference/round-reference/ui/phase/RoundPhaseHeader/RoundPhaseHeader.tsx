@@ -1,5 +1,5 @@
 import type { TimingPhase } from "@features/game/rules";
-import type { TouchableOpacityProps } from "@modules/haptic/shared/ui";
+import type { TouchableOpacityProps } from "@modules/core/haptic/shared/ui";
 import * as C from "./RoundPhaseHeader.components";
 
 export type RoundPhaseHeaderProps = TouchableOpacityProps & {

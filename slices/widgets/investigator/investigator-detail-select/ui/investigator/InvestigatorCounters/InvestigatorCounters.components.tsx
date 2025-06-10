@@ -1,4 +1,4 @@
-import { HapticCheckbox } from "@modules/haptic/shared/ui";
+import { HapticCheckbox } from "@modules/core/haptic/shared/ui";
 import { View } from "react-native";
 import styled from "styled-components/native";
 

@@ -1,4 +1,7 @@
-import { IconButton, type IconButtonProps } from "@modules/haptic/shared/ui";
+import {
+	IconButton,
+	type IconButtonProps,
+} from "@modules/core/haptic/shared/ui";
 import { color } from "@shared/config";
 import type { FC } from "react";
 import { View } from "react-native";

@@ -1,4 +1,4 @@
-import { useHapticFeedback } from "@modules/haptic/shared/lib";
+import { useHapticFeedback } from "@modules/core/haptic/shared/lib";
 import { useSound } from "@modules/sound/shared/lib";
 import { useCallback, useRef } from "react";
 import type { PickerChangeEvent, PickerScrollEvent } from "../../../../model";

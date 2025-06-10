@@ -1,5 +1,5 @@
 import { Arkhamic, Conkordia, STXinwei, SanCn } from "@assets/fonts";
-import { TouchableOpacity } from "@modules/haptic/shared/ui";
+import { TouchableOpacity } from "@modules/core/haptic/shared/ui";
 import { withLocale } from "@modules/i18n/shared/lib";
 import { color } from "@shared/config";
 import { Row } from "@shared/ui";

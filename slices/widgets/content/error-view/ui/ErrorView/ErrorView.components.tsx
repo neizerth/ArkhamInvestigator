@@ -1,4 +1,4 @@
-import { Button } from "@modules/haptic/shared/ui";
+import { Button } from "@modules/core/haptic/shared/ui";
 import { color, size, statusBarHeight } from "@shared/config";
 import { Text } from "@shared/ui";
 import { View } from "react-native";

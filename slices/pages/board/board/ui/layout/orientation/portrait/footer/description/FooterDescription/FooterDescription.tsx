@@ -1,4 +1,4 @@
-import { useHapticSwipe } from "@modules/haptic/shared/lib";
+import { useHapticSwipe } from "@modules/core/haptic/shared/lib";
 import { useRoute } from "@react-navigation/native";
 import { routes } from "@shared/config";
 import {

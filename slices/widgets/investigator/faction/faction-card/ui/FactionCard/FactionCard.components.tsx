@@ -8,7 +8,7 @@ import {
 	Button,
 	type ButtonProps,
 	TouchableOpacity,
-} from "@modules/haptic/shared/ui";
+} from "@modules/core/haptic/shared/ui";
 import type { Faction } from "@shared/model";
 import type { PropsWithFaction } from "@shared/model/ui";
 import {

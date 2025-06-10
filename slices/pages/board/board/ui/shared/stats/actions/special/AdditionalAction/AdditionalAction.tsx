@@ -1,4 +1,4 @@
-import type { TouchableOpacityProps } from "@modules/haptic/shared/ui";
+import type { TouchableOpacityProps } from "@modules/core/haptic/shared/ui";
 import {
 	selectCurrentStatValue,
 	setCurrentStat,

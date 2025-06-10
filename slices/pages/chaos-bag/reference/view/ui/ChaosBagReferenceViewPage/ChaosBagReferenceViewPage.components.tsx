@@ -1,4 +1,4 @@
-import { Pressable } from "@modules/haptic/shared/ui";
+import { Pressable } from "@modules/core/haptic/shared/ui";
 import { size } from "@shared/config";
 import { ScenarioReference } from "@widgets/game/reference";
 import { View } from "react-native";

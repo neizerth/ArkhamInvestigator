@@ -1,4 +1,4 @@
-import { TouchableOpacity } from "@modules/haptic/shared/ui";
+import { TouchableOpacity } from "@modules/core/haptic/shared/ui";
 import styled from "styled-components/native";
 import { DoomValue } from "../../../../../../investigator/value";
 

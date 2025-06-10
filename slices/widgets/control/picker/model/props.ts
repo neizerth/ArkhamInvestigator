@@ -1,4 +1,4 @@
-import type { HapticPatternType } from "@modules/haptic/shared/model";
+import type { HapticPatternType } from "@modules/core/haptic/shared/model";
 import type { ReactElement } from "react";
 import type {
 	GestureResponderEvent,
