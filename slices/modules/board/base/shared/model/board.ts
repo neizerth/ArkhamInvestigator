@@ -1,0 +1,60 @@
+import type { InvestigatorSignature } from "arkham-investigator-data";
+
+import type {
+	InvestigatorAbilityValues,
+	InvestigatorBoardUsedAbility,
+} from "@modules/board/abilities/shared/model";
+import type {
+	Faction,
+	InvestigatorNumericStat,
+	SkillCheckHistoryItem,
+} from "@shared/model";
+
+export type BoardId = number | "current";
+
+export type InvestigatorBoardStat =
+	| InvestigatorNumericStat
+	| "additionalAction";
+
+export type InvestigatorBoardImage = Omit<
+	InvestigatorSignature["image"],
+	"id"
+> & {
+	id: string;
+};
+
+export type InvestigatorBoardValues = Record<
+	InvestigatorNumericStat,
+	number
+> & {
+	additionalAction: boolean;
+};
+
+export type InvestigatorBoard = {
+	id: number;
+	signatureGroupId: string;
+	skinId?: string;
+
+	investigator: InvestigatorSignature;
+	image: InvestigatorBoardImage;
+	initialValue: InvestigatorBoardValues;
+	baseValue: InvestigatorBoardValues;
+	value: InvestigatorBoardValues;
+	abilityValues?: InvestigatorAbilityValues;
+	history: HistoryItem[];
+	historyIndex: number;
+	checkHistory: SkillCheckHistoryItem[];
+	currentRole?: Faction;
+	usedAbilities?: InvestigatorBoardUsedAbility[];
+	showPinnedSkillChecks?: boolean;
+};
+
+export type HistoryItem = {
+	id: string;
+	initialValue?: Partial<InvestigatorBoardValues>;
+	baseValue?: Partial<InvestigatorBoardValues>;
+	value?: Partial<InvestigatorBoardValues>;
+	usedAbilities?: InvestigatorBoardUsedAbility[];
+	currentRole?: Faction;
+	abilityValues?: Record<string, number>;
+};

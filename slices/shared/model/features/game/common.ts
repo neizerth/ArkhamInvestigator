@@ -23,6 +23,11 @@ export type InvestigatorSkillType =
 
 export type InvestigatorMainStatType = "health" | "sanity";
 
+export type InvestigatorNumericStat =
+	| InvestigatorMainStatType
+	| InvestigatorSkillType
+	| InvestigatorGameStatType;
+
 export type InvestigatorGameStatType =
 	| "actions"
 	| "resources"
