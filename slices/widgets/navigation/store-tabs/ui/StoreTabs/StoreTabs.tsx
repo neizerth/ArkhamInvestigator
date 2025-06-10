@@ -1,4 +1,7 @@
-import { HapticTabs, type HapticTabsProps } from "@modules/haptic/shared/ui";
+import {
+	HapticTabs,
+	type HapticTabsProps,
+} from "@modules/core/haptic/shared/ui";
 import { useAppTranslation } from "@modules/i18n/shared/lib";
 import { useAppDispatch, useAppSelector } from "@shared/lib";
 import type { AppActionCreator, RootState } from "@shared/model";

@@ -1,4 +1,4 @@
-import { Button, TouchableOpacity } from "@modules/haptic/shared/ui";
+import { Button, TouchableOpacity } from "@modules/core/haptic/shared/ui";
 import { ContextModal } from "@modules/modal/shared";
 import { color, font, size } from "@shared/config";
 import { Row, Text, TextView } from "@shared/ui";

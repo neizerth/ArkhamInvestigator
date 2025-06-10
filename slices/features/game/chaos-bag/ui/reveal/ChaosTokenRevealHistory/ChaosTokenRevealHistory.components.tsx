@@ -1,4 +1,4 @@
-import { TouchableOpacity } from "@modules/haptic/shared/ui";
+import { TouchableOpacity } from "@modules/core/haptic/shared/ui";
 import { View } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import styled from "styled-components/native";
