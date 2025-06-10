@@ -3,9 +3,9 @@ import {
 	selectCanAddChaosToken,
 } from "@features/game/chaos-bag";
 import { showToast } from "@features/notifications/lib";
+import { i18next } from "@modules/i18n/config";
 import { selectCurrentBoard } from "@shared/lib";
 import type { AppThunk } from "@shared/model";
-import { i18next } from "../../../../../features/i18n/config";
 
 export const addBlessTokenEffect =
 	(count: number): AppThunk =>

@@ -1,6 +1,6 @@
+import { i18next } from "@modules/i18n/config";
 import { selectDoom, setDoom } from "@shared/lib";
 import type { AppThunk } from "@shared/model";
-import { i18next } from "../../../../../../i18n/config";
 import { showToast } from "../../../../../../notifications/lib";
 
 export const placeDoomOnAgenda = (): AppThunk => (dispatch, getState) => {

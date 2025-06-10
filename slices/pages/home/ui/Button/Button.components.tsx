@@ -1,10 +1,10 @@
 import { SanCn, TeutonicRU, ViaodaLibre } from "@assets/fonts";
 import { Arkhamic, STXingkai } from "@assets/fonts";
-import { withLocale } from "@features/i18n";
 import type {
 	PrimaryButtonProps,
 	PrimaryButtonSize,
 } from "@modules/haptic/widgets";
+import { withLocale } from "@modules/i18n/shared/lib";
 import { color, font } from "@shared/config";
 import type { FC } from "react";
 import type { TextProps as BaseTextProps } from "react-native";

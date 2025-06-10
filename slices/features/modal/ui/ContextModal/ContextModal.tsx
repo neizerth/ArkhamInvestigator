@@ -1,9 +1,9 @@
+import { useAppTranslation } from "@modules/i18n/shared/lib";
 import { statusBarHeight } from "@shared/config";
 import { goBack, useAppDispatch } from "@shared/lib";
 import { Outside } from "@shared/ui";
 import { useCallback } from "react";
 import { type ViewProps, useWindowDimensions } from "react-native";
-import { useAppTranslation } from "../../../i18n";
 import * as C from "./ContextModal.components";
 
 type ContextModalAction = {

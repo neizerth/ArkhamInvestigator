@@ -1,8 +1,8 @@
 import { Arkhamic, Conkordia, STXinwei, SanCn } from "@assets/fonts";
+import { withLocale } from "@modules/i18n/shared/lib";
 import { color } from "@shared/config";
 import { View } from "react-native";
 import styled from "styled-components/native";
-import { withLocale } from "../../../../i18n";
 
 export const Container: typeof View = styled(View)`
 	position: relative;

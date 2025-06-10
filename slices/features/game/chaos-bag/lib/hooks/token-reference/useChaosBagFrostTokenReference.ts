@@ -1,6 +1,6 @@
+import { useAppTranslation } from "@modules/i18n/shared/lib";
 import { useAppSelector } from "@shared/lib";
 import { useMemo } from "react";
-import { useAppTranslation } from "../../../../../i18n";
 import type { ChaosTokenType } from "../../../model";
 import { selectRevealedTokenCountByType } from "../../store";
 

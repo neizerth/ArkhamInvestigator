@@ -1,12 +1,10 @@
 import { Copasetic, Enthalpy298, LineSeedKR, ZhenShuai } from "@assets/fonts";
 import { TouchableOpacity } from "@modules/haptic/widgets";
+import { withLocale } from "@modules/i18n/shared/lib";
 import { color, font } from "@shared/config";
-import { Dimensions, View } from "react-native";
+import { View } from "react-native";
 import styled from "styled-components/native";
 import { SkillCheckExpressionDisplay } from "../../../../../../../../widgets/game/skill-check";
-import { withLocale } from "../../../../../../../i18n";
-
-const { width } = Dimensions.get("screen");
 
 export const Container: typeof View = styled(View)`
   

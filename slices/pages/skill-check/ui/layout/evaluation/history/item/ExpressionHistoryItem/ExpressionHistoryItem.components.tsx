@@ -1,5 +1,5 @@
 import { Enthalpy298 } from "@assets/fonts";
-import { withLocale } from "@features/i18n";
+import { withLocale } from "@modules/i18n/shared/lib";
 import { color, font, size } from "@shared/config";
 import { type DefinedIconProps, Icon, Row } from "@shared/ui";
 import type { FC } from "react";

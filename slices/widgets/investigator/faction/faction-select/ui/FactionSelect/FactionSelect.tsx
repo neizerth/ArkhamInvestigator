@@ -1,5 +1,5 @@
-import { useAppTranslation } from "@features/i18n";
 import { useModal } from "@features/modal";
+import { useAppTranslation } from "@modules/i18n/shared/lib";
 import type { Faction, FactionFilterType } from "@shared/model";
 import { useCallback } from "react";
 import type { ViewProps } from "react-native";

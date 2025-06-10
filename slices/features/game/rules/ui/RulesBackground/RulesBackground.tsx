@@ -1,5 +1,5 @@
+import { useAppTranslation } from "@modules/i18n/shared/lib";
 import type { ImageBackgroundProps } from "@shared/ui";
-import { useAppTranslation } from "../../../../i18n";
 import * as C from "./RulesBackground.components";
 
 export type RulesBackgroundProps = ImageBackgroundProps;

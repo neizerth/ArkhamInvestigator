@@ -1,5 +1,5 @@
-import { useAppTranslation } from "@features/i18n";
 import type { HapticSliderProps } from "@modules/haptic/widgets";
+import { useAppTranslation } from "@modules/i18n/shared/lib";
 import { useAppDispatch, useAppSelector } from "@shared/lib";
 import type { AppActionCreator, RootState } from "@shared/model";
 import { useCallback } from "react";

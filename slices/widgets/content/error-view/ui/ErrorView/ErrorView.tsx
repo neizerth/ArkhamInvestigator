@@ -1,4 +1,4 @@
-import { useAppTranslation } from "@features/i18n";
+import { useAppTranslation } from "@modules/i18n/shared/lib";
 import type { PropsWithError } from "@shared/model";
 import { Title } from "@shared/ui";
 import * as C from "./ErrorView.components";

@@ -1,5 +1,5 @@
+import { useAppTranslation } from "@modules/i18n/shared/lib";
 import { useAppSelector } from "@shared/lib";
-import { useAppTranslation } from "../../../../../i18n";
 import {
 	selectNextTimingWizardStep,
 	selectPrevTimingWizardStep,

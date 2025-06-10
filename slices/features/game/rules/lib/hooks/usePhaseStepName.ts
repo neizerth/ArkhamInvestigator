@@ -1,4 +1,4 @@
-import { useAppTranslation } from "../../../../i18n/lib/hooks";
+import { useAppTranslation } from "../../../../../modules/i18n/shared/lib/hooks";
 import type { TimingPhaseStep } from "../../model";
 
 export const usePhaseStepName = (step?: TimingPhaseStep) => {

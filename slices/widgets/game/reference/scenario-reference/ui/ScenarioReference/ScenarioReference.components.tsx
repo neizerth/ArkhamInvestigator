@@ -1,7 +1,7 @@
 import { ArnoPro, STXinwei, SanCn } from "@assets/fonts";
 import { scenarioReferenceImage } from "@assets/images/game/reference";
 import { ReferenceTitle } from "@features/game/rules";
-import { withLocale } from "@features/i18n";
+import { withLocale } from "@modules/i18n/shared/lib";
 import { color, size } from "@shared/config";
 import { Icon, ImageBackground } from "@shared/ui";
 import { View } from "react-native";

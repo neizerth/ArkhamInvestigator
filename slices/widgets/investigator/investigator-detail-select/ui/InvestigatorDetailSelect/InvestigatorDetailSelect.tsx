@@ -1,4 +1,4 @@
-import { useAppTranslation } from "@features/i18n";
+import { useAppTranslation } from "@modules/i18n/shared/lib";
 import { formatGameText, useAppDispatch, useAppSelector } from "@shared/lib";
 import {
 	selectCurrentSignatureGroup,
