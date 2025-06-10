@@ -8,7 +8,7 @@ import {
 	changeLanguage,
 	selectLanguage,
 	useAppTranslation,
-} from "@modules/i18n/shared/lib";
+} from "@modules/core/i18n/shared/lib";
 import { CAN_ALWAYS_SHOW_GAME_TEXT } from "@shared/config";
 import * as S from "@shared/lib";
 import { useCallback } from "react";

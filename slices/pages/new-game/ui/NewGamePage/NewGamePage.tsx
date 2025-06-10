@@ -1,5 +1,5 @@
 import { selectChaosBagEnabled } from "@features/game/chaos-bag";
-import { useAppTranslation } from "@modules/i18n/shared/lib";
+import { useAppTranslation } from "@modules/core/i18n/shared/lib";
 import { routes } from "@shared/config";
 import { goBack, useAppDispatch, useAppSelector, usePage } from "@shared/lib";
 import { Delay } from "@shared/ui";

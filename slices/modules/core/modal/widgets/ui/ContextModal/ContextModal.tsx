@@ -1,4 +1,4 @@
-import { useAppTranslation } from "@modules/i18n/shared/lib";
+import { useAppTranslation } from "@modules/core/i18n/shared/lib";
 import { statusBarHeight } from "@shared/config";
 import { goBack, useAppDispatch } from "@shared/lib";
 import { Outside } from "@shared/ui";

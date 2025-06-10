@@ -1,6 +1,6 @@
 import { ChaosBagProvider } from "@features/game/chaos-bag";
+import { I18NProvider } from "@modules/core/i18n/app/ui";
 import { ModalProvider } from "@modules/core/modal/app/ui";
-import { I18NProvider } from "@modules/i18n/app/ui";
 import { DarkTheme, ThemeProvider } from "@react-navigation/native";
 import type { PropsWithChildren } from "react";
 import { GestureHandlerRootView } from "react-native-gesture-handler";

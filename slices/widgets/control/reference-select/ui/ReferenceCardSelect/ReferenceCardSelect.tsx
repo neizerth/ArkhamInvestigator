@@ -1,5 +1,5 @@
 import { setChaosTokenValue } from "@features/game/chaos-bag";
-import { useAppTranslation } from "@modules/i18n/shared/lib";
+import { useAppTranslation } from "@modules/core/i18n/shared/lib";
 import {
 	selectReferenceCard,
 	setReferenceCardCode,

@@ -1,6 +1,6 @@
 import { Copasetic, Enthalpy298 } from "@assets/fonts";
 import { TouchableOpacity } from "@modules/core/haptic/shared/ui";
-import { withLocale } from "@modules/i18n/shared/lib";
+import { withLocale } from "@modules/core/i18n/shared/lib";
 import { color, font, size } from "@shared/config";
 import { Row as BaseRow, UnscaledText } from "@shared/ui";
 import {

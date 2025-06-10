@@ -1,4 +1,4 @@
-import { getDefaultLanguage } from "@modules/i18n/shared/lib/detect";
+import { getDefaultLanguage } from "@modules/core/i18n/shared/lib/detect";
 import type { AppThunk } from "@shared/model";
 import { selectLanguage } from "../i18n";
 import { changeLanguage } from "./changeLanguage";
