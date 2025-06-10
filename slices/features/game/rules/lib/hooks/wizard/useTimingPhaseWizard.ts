@@ -1,4 +1,4 @@
-import { useModal } from "@modules/modal/shared";
+import { useModal } from "@modules/core/modal/shared/lib";
 import {
 	selectCurrentFaction,
 	useAppDispatch,

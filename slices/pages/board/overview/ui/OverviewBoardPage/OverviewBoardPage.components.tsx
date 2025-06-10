@@ -1,4 +1,4 @@
-import { ContextModal } from "@modules/modal/shared/ui";
+import { ContextModal } from "@modules/core/modal/widgets/ui";
 import { color, size } from "@shared/config";
 import { View } from "react-native";
 import styled from "styled-components/native";

@@ -1,4 +1,4 @@
-import { SimpleModal } from "@modules/modal/shared/ui";
+import { SimpleModal } from "@modules/core/modal/widgets/ui";
 import { size } from "@shared/config";
 import { Row } from "@shared/ui";
 import { View } from "react-native";

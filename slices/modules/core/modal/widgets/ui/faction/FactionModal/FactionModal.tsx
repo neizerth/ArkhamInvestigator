@@ -1,8 +1,8 @@
 import type { Defined, Faction } from "@shared/model";
 import { useCallback, useContext, useRef, useState } from "react";
 import type { TextInputProps, ViewProps } from "react-native";
-import { ModalContext } from "../../../lib";
-import type { ModalData } from "../../../model";
+import { ModalContext } from "../../../../shared/lib";
+import type { ModalData } from "../../../../shared/model";
 import * as C from "./FactionModal.components";
 
 type TextChangeHandler = Defined<TextInputProps["onChange"]>;
