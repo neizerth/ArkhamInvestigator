@@ -1,5 +1,5 @@
 import { Button, TouchableOpacity } from "@modules/core/haptic/shared/ui";
-import { ContextModal } from "@modules/modal/shared";
+import { ContextModal } from "@modules/core/modal/widgets/ui";
 import { color, font, size } from "@shared/config";
 import { Row, Text, TextView } from "@shared/ui";
 import { Dimensions, View } from "react-native";

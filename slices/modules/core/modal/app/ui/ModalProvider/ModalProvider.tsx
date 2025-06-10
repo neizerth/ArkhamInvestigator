@@ -7,7 +7,7 @@ import {
 	closeModal,
 	selectModalData,
 	selectModalId,
-} from "../../../shared";
+} from "../../../shared/lib";
 import * as C from "./ModalProvider.components";
 
 export const ModalProvider = ({ children }: PropsWithChildren) => {

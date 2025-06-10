@@ -1,6 +1,6 @@
 import { ChaosToken } from "@features/game/chaos-bag";
 import { Button, HapticSelect } from "@modules/core/haptic/shared/ui";
-import { ContextModal } from "@modules/modal/shared/ui";
+import { ContextModal } from "@modules/core/modal/widgets/ui";
 import { color, size } from "@shared/config";
 import { Row } from "@shared/ui";
 import { View } from "react-native";
