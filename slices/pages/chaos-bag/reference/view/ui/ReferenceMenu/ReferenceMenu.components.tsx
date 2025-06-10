@@ -1,4 +1,4 @@
-import { Button } from "@modules/haptic/widgets";
+import { Button } from "@modules/haptic/shared/ui";
 import { Row } from "@shared/ui";
 import styled from "styled-components/native";
 

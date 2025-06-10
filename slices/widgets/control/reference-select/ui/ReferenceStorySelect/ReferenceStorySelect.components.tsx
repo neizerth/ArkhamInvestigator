@@ -1,4 +1,4 @@
-import { HapticSelect } from "@modules/haptic/widgets";
+import { HapticSelect } from "@modules/haptic/shared/ui";
 import { color, size } from "@shared/config";
 import { Icon, Row, Text } from "@shared/ui";
 import { View } from "react-native";

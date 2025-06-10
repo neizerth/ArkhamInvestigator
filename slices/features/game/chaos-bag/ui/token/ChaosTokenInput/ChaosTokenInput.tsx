@@ -1,4 +1,4 @@
-import type { NumericControlProps } from "@modules/haptic/widgets";
+import type { NumericControlProps } from "@modules/haptic/shared/ui";
 import { characters } from "@shared/config";
 import type { ChaosTokenType } from "../../../model";
 import * as C from "./ChaosTokenInput.components";

@@ -1,4 +1,4 @@
-import { TouchableOpacity } from "@modules/haptic/widgets";
+import { TouchableOpacity } from "@modules/haptic/shared/ui";
 import { color, size } from "@shared/config";
 import { IconNumber, type IconNumberProps, Text } from "@shared/ui";
 import { View } from "react-native";

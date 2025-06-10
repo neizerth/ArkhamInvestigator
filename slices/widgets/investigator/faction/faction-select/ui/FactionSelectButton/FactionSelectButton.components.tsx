@@ -1,4 +1,4 @@
-import { TouchableOpacity } from "@modules/haptic/widgets";
+import { TouchableOpacity } from "@modules/haptic/shared/ui";
 import { color, factionColor } from "@shared/config";
 import type { PropsWithFaction } from "@shared/model";
 import {

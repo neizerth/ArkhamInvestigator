@@ -1,4 +1,4 @@
-import { NumericControl, TouchableOpacity } from "@modules/haptic/widgets";
+import { NumericControl, TouchableOpacity } from "@modules/haptic/shared/ui";
 import { color, font, size } from "@shared/config";
 import { Row, TextView } from "@shared/ui";
 import styled from "styled-components/native";

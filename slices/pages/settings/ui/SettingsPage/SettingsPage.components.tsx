@@ -1,4 +1,4 @@
-import { Button as BaseButton } from "@modules/haptic/widgets";
+import { Button as BaseButton } from "@modules/haptic/shared/ui";
 import { color, font, size } from "@shared/config";
 import { Row as BaseRow, Section as BaseSection, TextView } from "@shared/ui";
 import { ContentPage } from "@widgets/content";
