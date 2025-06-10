@@ -3,7 +3,7 @@ import {
 	setChaosBagTokenCount,
 } from "@features/game/chaos-bag";
 import type { ChaosTokenType } from "@features/game/chaos-bag/model";
-import { useAppTranslation } from "@features/index";
+import { useAppTranslation } from "@modules/i18n/shared/lib";
 import {
 	goBack,
 	selectStory,

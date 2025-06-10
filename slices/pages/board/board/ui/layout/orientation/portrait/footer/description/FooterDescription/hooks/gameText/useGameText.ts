@@ -1,4 +1,4 @@
-import { selectCurrentLanguage } from "@features/i18n";
+import { selectCurrentLanguage } from "@modules/i18n/shared/lib";
 import { CAN_ALWAYS_SHOW_GAME_TEXT } from "@shared/config";
 import {
 	selectAlwaysShowGameText,

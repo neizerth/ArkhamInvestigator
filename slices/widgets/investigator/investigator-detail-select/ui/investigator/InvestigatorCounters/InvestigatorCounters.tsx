@@ -1,4 +1,4 @@
-import { useAppTranslation } from "@features/i18n";
+import { useAppTranslation } from "@modules/i18n/shared/lib";
 import {
 	selectInvestigatorSettingsProp,
 	setInvestigatorCounterEnabled as setCounterEnabled,

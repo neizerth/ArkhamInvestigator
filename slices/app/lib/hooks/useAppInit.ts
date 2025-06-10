@@ -1,6 +1,6 @@
 import { initChaosBag } from "@features/game/chaos-bag";
-import { restoreTranslation } from "@features/i18n";
 import { closeModal } from "@features/modal";
+import { restoreTranslation } from "@modules/i18n/shared/lib";
 import { loadInvestigatorsMediaData, useAppDispatch } from "@shared/lib";
 import { useEffect } from "react";
 import { loadAppData } from "../store/actions/loadAppData";

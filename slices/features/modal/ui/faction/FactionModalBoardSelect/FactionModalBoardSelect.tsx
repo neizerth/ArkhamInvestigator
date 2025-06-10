@@ -1,7 +1,7 @@
+import { useAppTranslation } from "@modules/i18n/shared/lib";
 import type { InvestigatorDetailItem } from "@shared/model";
 import { useCallback } from "react";
 import type { ViewProps } from "react-native";
-import { useAppTranslation } from "../../../../i18n";
 import * as C from "./FactionModalBoardSelect.components";
 
 export type FactionModalBoardSelectProps = ViewProps & {

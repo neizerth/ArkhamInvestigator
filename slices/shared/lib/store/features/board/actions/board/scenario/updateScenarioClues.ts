@@ -1,5 +1,5 @@
+import { i18next } from "@modules/i18n/config";
 import type { AppThunk } from "@shared/model";
-import { i18next } from "../../../../../../../../features/i18n/config";
 import { showToast } from "../../../../../../../../features/notifications/lib";
 import { selectClues, selectSyncScenarioClues, setClues } from "../../../board";
 import {

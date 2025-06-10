@@ -1,5 +1,5 @@
+import { useAppTranslation } from "@modules/i18n/shared/lib";
 import { useMemo } from "react";
-import { useAppTranslation } from "../../../../../i18n";
 import type { ChaosTokenType } from "../../../model";
 
 type TokenRecord = Partial<Record<ChaosTokenType, string>>;

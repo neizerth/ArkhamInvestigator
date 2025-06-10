@@ -1,4 +1,4 @@
-import { useAppTranslation } from "@features/i18n";
+import { useAppTranslation } from "@modules/i18n/shared/lib";
 import { getInvestigatorImageUrl } from "@shared/api/getInvestigatorImageUrl";
 import {
 	selectSelectedInvestigators,

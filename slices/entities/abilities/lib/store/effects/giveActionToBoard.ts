@@ -1,6 +1,6 @@
-import { declenseName } from "@features/i18n";
-import { i18next } from "@features/i18n/config";
 import { showToast } from "@features/notifications/lib";
+import { i18next } from "@modules/i18n/config";
+import { declenseName } from "@modules/i18n/shared/lib";
 import {
 	decreaseCurrentStat,
 	reduceCurrentStat,

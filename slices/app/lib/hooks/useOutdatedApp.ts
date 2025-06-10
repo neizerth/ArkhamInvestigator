@@ -1,5 +1,5 @@
-import { useAppTranslation } from "@features/index";
 import { selectModalId, useModal } from "@features/modal";
+import { useAppTranslation } from "@modules/i18n/shared/lib";
 import { APP_DOWNLOAD_URL } from "@shared/config/app";
 import { selectAppOutdated, useAppSelector } from "@shared/lib";
 import { useCallback, useEffect } from "react";

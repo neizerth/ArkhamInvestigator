@@ -1,6 +1,9 @@
 import { getReferenceCardText } from "@entities/reference-card";
-import { selectCurrentLanguage, useAppTranslation } from "@features/i18n";
-import { DEFAULT_LANGUAGE } from "@features/i18n/config";
+import { DEFAULT_LANGUAGE } from "@modules/i18n/config";
+import {
+	selectCurrentLanguage,
+	useAppTranslation,
+} from "@modules/i18n/shared/lib";
 import {
 	selectReferenceCard,
 	selectReferenceCardText,

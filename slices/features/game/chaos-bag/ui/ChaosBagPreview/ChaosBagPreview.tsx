@@ -1,9 +1,9 @@
+import { useAppTranslation } from "@modules/i18n/shared/lib";
 import { REMOVE_CLIPPED_SUBVIEWS } from "@shared/config";
 import { goBack, useAppDispatch } from "@shared/lib";
 import { Delay } from "@shared/ui";
 import { useCallback } from "react";
 import type { ListRenderItemInfo, ViewProps } from "react-native";
-import { useAppTranslation } from "../../../../i18n";
 import { openRevealChaosTokenModal, toggleChaosTokenSeal } from "../../lib";
 import type { ChaosBagToken } from "../../model";
 import * as C from "./ChaosBagPreview.components";

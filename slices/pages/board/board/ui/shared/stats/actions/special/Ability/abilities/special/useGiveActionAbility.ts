@@ -1,5 +1,5 @@
 import { giveActionToBoard } from "@entities/abilities/lib";
-import { useAppTranslation } from "@features/i18n";
+import { useAppTranslation } from "@modules/i18n/shared/lib";
 import { useAppDispatch } from "@shared/lib";
 import type { InvestigatorAbility } from "arkham-investigator-data";
 import { useCallback } from "react";

@@ -1,4 +1,4 @@
-import { selectCurrentLanguage } from "@features/i18n";
+import { selectCurrentLanguage } from "@modules/i18n/shared/lib";
 import {
 	selectShowFanMadeStories,
 	selectShowTranslatedOnlyStories,
