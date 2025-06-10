@@ -1,5 +1,5 @@
 import type { TimingPhaseStep } from "@features/game/rules";
-import { selectCurrentLanguage } from "@modules/i18n/shared/lib";
+import { selectCurrentLanguage } from "@modules/core/i18n/shared/lib";
 import { useAppSelector } from "@shared/lib";
 import type { ViewProps } from "react-native";
 import * as C from "./RoundReferencePhaseStep.components";

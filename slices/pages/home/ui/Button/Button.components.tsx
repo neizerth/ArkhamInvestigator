@@ -3,8 +3,8 @@ import { Arkhamic, STXingkai } from "@assets/fonts";
 import type {
 	PrimaryButtonProps,
 	PrimaryButtonSize,
-} from "@modules/haptic/shared/ui";
-import { withLocale } from "@modules/i18n/shared/lib";
+} from "@modules/core/haptic/shared/ui";
+import { withLocale } from "@modules/core/i18n/shared/lib";
 import { color, font } from "@shared/config";
 import type { FC } from "react";
 import type { TextProps as BaseTextProps } from "react-native";

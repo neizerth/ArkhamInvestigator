@@ -1,7 +1,7 @@
 import {
 	detectDefaultLanguage,
 	setAvailableLanguages,
-} from "@modules/i18n/shared/lib";
+} from "@modules/core/i18n/shared/lib";
 import { loadInvestigatorsMediaData } from "@shared/api";
 import { APP_VERSION } from "@shared/config/app";
 import { setAppOutdated, setIcons, setMediaVersion } from "@shared/lib";

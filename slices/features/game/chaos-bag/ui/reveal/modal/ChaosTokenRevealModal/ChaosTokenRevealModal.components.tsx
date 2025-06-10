@@ -1,4 +1,4 @@
-import { TouchableOpacity } from "@modules/haptic/shared/ui";
+import { TouchableOpacity } from "@modules/core/haptic/shared/ui";
 import { color, size } from "@shared/config";
 import { View } from "react-native";
 import styled from "styled-components/native";

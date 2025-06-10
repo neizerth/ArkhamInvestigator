@@ -1,5 +1,5 @@
-import { useHapticSwipe } from "@modules/haptic/shared/lib";
-import type { TouchableOpacityProps } from "@modules/haptic/shared/ui";
+import { useHapticSwipe } from "@modules/core/haptic/shared/lib";
+import type { TouchableOpacityProps } from "@modules/core/haptic/shared/ui";
 import {
 	Directions,
 	Gesture,
