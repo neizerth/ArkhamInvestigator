@@ -1,12 +1,12 @@
 import type { PayloadAction } from "@reduxjs/toolkit";
-import type { IGameState } from "../game";
+import type { GameState } from "../game";
 
 type SetSkinPayload = {
 	code: string;
 	skinId: string | null;
 };
 export const setInvestigatorSkin = (
-	state: IGameState,
+	state: GameState,
 	action: PayloadAction<SetSkinPayload>,
 ) => {
 	const { code, skinId } = action.payload;
@@ -27,7 +27,7 @@ type SetSignaturePayload = {
 	signatureId: string | null;
 };
 export const setInvestigatorSignature = (
-	state: IGameState,
+	state: GameState,
 	action: PayloadAction<SetSignaturePayload>,
 ) => {
 	const { code, signatureId } = action.payload;

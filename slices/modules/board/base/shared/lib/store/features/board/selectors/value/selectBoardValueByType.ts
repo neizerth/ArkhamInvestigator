@@ -8,7 +8,7 @@ import { selectBoardProp } from "../props/selectBoardProp";
 type Key = keyof InvestigatorBoardValues;
 
 export type SelectBoardValueByTypeOptions<K extends Key> = {
-	boardId?: BoardId;
+	boardId: BoardId;
 	type: "value" | "baseValue" | "initialValue";
 	prop: K;
 	defaultValue?: InvestigatorBoardValues[K];

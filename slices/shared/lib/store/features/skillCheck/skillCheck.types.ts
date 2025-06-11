@@ -1,7 +1,7 @@
 import type { CaseReducer, PayloadAction } from "@reduxjs/toolkit";
-import type { ISkillCheckState } from "./skillCheck";
+import type { SkillCheckState } from "./skillCheck";
 
 export type SkillCheckReducer<Payload> = CaseReducer<
-	ISkillCheckState,
+	SkillCheckState,
 	PayloadAction<Payload>
 >;

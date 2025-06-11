@@ -7,7 +7,7 @@ import type {
 import { createSliceState } from "redux-toolkit-helpers";
 import * as reducers from "./reducers";
 
-export type ISkillCheckState = {
+export type SkillCheckState = {
 	type: InvestigatorBoardNumericStat | null;
 	data: SkillCheckItem[];
 	historyShown: boolean;
@@ -16,7 +16,7 @@ export type ISkillCheckState = {
 	skillCheckDifficultyType: SkillCheckDifficultyType | null;
 };
 
-const initialState: ISkillCheckState = {
+const initialState: SkillCheckState = {
 	type: null,
 	data: [],
 	historyShown: false,

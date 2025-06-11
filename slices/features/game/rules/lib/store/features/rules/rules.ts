@@ -3,7 +3,7 @@ import type { RulesItem } from "@shared/model";
 import { createSliceState } from "redux-toolkit-helpers";
 import type { TimingPhaseId } from "../../../../model";
 
-export type IRulesState = {
+export type RulesState = {
 	rules?: RulesItem[];
 	openTimingPhases?: number[];
 	timingWizardStepIndex: number | null;
@@ -11,7 +11,7 @@ export type IRulesState = {
 	timingWizardActive: boolean;
 };
 
-const initialState: IRulesState = {
+const initialState: RulesState = {
 	rules: [],
 	openTimingPhases: [],
 	timingWizardStepIndex: null,

@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import type { Story } from "@shared/model";
 import { createSliceState } from "redux-toolkit-helpers";
 
-export type IStoriesState = {
+export type StoriesState = {
 	stories: Story[];
 	storyCode: string | null;
 	showTranslatedOnlyStories: boolean;
@@ -12,7 +12,7 @@ export type IStoriesState = {
 	showReferenceBackText: boolean;
 };
 
-const initialState: IStoriesState = {
+const initialState: StoriesState = {
 	stories: [],
 	storyCode: null,
 	showTranslatedOnlyStories: true,

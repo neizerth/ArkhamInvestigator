@@ -6,4 +6,8 @@ type Key = keyof InvestigatorBoardValues;
 
 export const selectCurrentValue = <K extends Key>(
 	options: SelectCurrentValueOptions<K>,
-) => selectBoardValue(options);
+) =>
+	selectBoardValue({
+		...options,
+		boardId: "current",
+	});

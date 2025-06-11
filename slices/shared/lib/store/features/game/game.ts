@@ -8,7 +8,7 @@ import type { InvestigatorSignatureGroup } from "arkham-investigator-data";
 import { createSliceState } from "redux-toolkit-helpers";
 import * as reducers from "./reducers";
 
-export type IGameState = {
+export type GameState = {
 	factionFilter: FactionFilterType | null;
 	selectedInvestigators: SelectedInvestigator[];
 	currentSignatureGroup: Nullable<InvestigatorSignatureGroup>;
@@ -20,7 +20,7 @@ export type IGameState = {
 	replaceInvestigator: boolean;
 };
 
-const initialState: IGameState = {
+const initialState: GameState = {
 	factionFilter: null,
 	selectedInvestigators: [],
 	currentSignatureGroup: null,

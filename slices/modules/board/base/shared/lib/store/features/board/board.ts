@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import type { PickerDecelerationType } from "@shared/model";
 import { createSliceState } from "redux-toolkit-helpers";
 
-export type IBoardState = {
+export type BoardState = {
 	currentInvestigatorIndex: number | null;
 	investigatorBoards: InvestigatorBoard[];
 
@@ -34,7 +34,7 @@ export type IBoardState = {
 	resources: number;
 };
 
-const initialState: IBoardState = {
+const initialState: BoardState = {
 	currentInvestigatorIndex: null,
 	endTurnStrict: true,
 	investigatorBoards: [],

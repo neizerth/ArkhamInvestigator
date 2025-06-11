@@ -3,7 +3,7 @@ import type { BoardId, InvestigatorBoard } from "@shared/model";
 import { selectBoardById } from "../find/selectBoardById";
 
 export type SelectBoardPropOptions<T extends keyof InvestigatorBoard> = {
-	boardId?: BoardId;
+	boardId: BoardId;
 	prop: T;
 	defaultValue?: InvestigatorBoard[T];
 };

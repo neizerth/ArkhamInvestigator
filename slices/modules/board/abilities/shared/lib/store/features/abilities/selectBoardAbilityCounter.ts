@@ -5,7 +5,7 @@ import { selectBoardAbilityById } from "./selectBoardAbilityById";
 
 export type SelectAbilityCounterOptions = {
 	abilityId: string;
-	boardId?: BoardId;
+	boardId: BoardId;
 };
 
 export const selectBoardAbilityCounter = ({

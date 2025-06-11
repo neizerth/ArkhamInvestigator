@@ -1,10 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-export type ISettingsState = {
+export type SettingsState = {
 	enableHapticFeedback: boolean;
 };
 
-const initialState: ISettingsState = {
+const initialState: SettingsState = {
 	enableHapticFeedback: true,
 };
 

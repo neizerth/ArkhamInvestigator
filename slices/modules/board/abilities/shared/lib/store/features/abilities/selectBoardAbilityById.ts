@@ -4,7 +4,7 @@ import { createSelector } from "@reduxjs/toolkit";
 import { whereId } from "@shared/lib";
 
 export type SelectAbilityByIdOptions = {
-	boardId?: BoardId;
+	boardId: BoardId;
 	abilityId: string;
 };
 

@@ -2,11 +2,11 @@ import { createSlice } from "@reduxjs/toolkit";
 import type { ArkhamIcon } from "@shared/model";
 import { createSliceState } from "redux-toolkit-helpers";
 
-export type IIconsState = {
+export type IconsState = {
 	icons: Record<string, ArkhamIcon>;
 };
 
-const initialState: IIconsState = {
+const initialState: IconsState = {
 	icons: {},
 };
 

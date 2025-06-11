@@ -5,7 +5,7 @@ import { whereId } from "@shared/lib";
 
 export type SelectAbilityUseInfoOptions = {
 	abilityId: string;
-	boardId?: BoardId;
+	boardId: BoardId;
 };
 
 export const selectBoardAbilityUseInfo = ({

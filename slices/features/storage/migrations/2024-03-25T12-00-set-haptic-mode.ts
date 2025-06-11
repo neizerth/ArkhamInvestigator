@@ -1,8 +1,8 @@
-import type { IHapticState } from "@modules/core/haptic/shared/lib";
+import type { HapticState } from "@modules/core/haptic/shared/lib";
 import type { PersistedState } from "redux-persist";
 
 type State = PersistedState & {
-	haptic?: IHapticState;
+	haptic?: HapticState;
 };
 
 export default function v1(state?: State) {

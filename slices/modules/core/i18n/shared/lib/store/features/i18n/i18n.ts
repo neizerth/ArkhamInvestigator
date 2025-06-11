@@ -5,14 +5,14 @@ import { DEFAULT_LANGUAGE } from "../../../../../shared/config";
 import { fetchTranslationData } from "./actions/translations/fetchTranslationData";
 import { setTranslationsData } from "./reducers/setTranslationsData";
 
-export type II18nState = {
+export type I18nState = {
 	language: string | null;
 	availableLanguages: string[];
 	loadingLanguage: string | null;
 	investigatorTranslations: ArkhamDBInvestigatorCard[];
 };
 
-const initialState: II18nState = {
+const initialState: I18nState = {
 	language: null,
 	availableLanguages: [DEFAULT_LANGUAGE],
 	loadingLanguage: null,
