@@ -1,12 +1,4 @@
-import {
-	createBoardValuePropReducer,
-	createBoardValuePropSetter,
-} from "./creators";
-
-export const setBoardValueProp = createBoardValuePropSetter("value");
-export const setBoardBaseValueProp = createBoardValuePropSetter("baseValue");
-export const setBoardInitialValueProp =
-	createBoardValuePropSetter("initialValue");
+import { createBoardValuePropReducer } from "./createBoardValuePropReducer";
 
 export const reduceBoardValueProp = createBoardValuePropReducer("value");
 export const reduceBoardBaseValueProp =

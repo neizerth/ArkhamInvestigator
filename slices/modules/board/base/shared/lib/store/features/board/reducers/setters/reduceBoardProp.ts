@@ -3,7 +3,7 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 import {
 	type HandleReduceBoardPropOptions,
 	handleReduceBoardProp,
-} from "../../../handlers";
+} from "../../handlers";
 
 export type ReduceBoardPropPayload<K extends BoardKey> = Omit<
 	HandleReduceBoardPropOptions<K>,
