@@ -1,2 +1,2 @@
-export * from "./handleSetBoard";
-export * from "./handleSetBoardProp";
+export * from "./handleReduceBoard";
+export * from "./handleReduceBoardProp";

@@ -2,15 +2,16 @@ import type {
 	BoardReducer,
 	InvestigatorBoard,
 } from "@modules/board/base/shared/model";
-import { handleSetBoard } from "../../../handlers";
+import { always } from "ramda";
+import { handleReduceBoard } from "../../../handlers";
 
 export const setCurrentBoard: BoardReducer<InvestigatorBoard> = (
 	state,
 	{ payload },
 ) => {
-	handleSetBoard({
+	handleReduceBoard({
 		state,
 		boardId: "current",
-		data: payload,
+		reducer: always(payload),
 	});
 };

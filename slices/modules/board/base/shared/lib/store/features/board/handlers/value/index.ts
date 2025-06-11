@@ -1,1 +1,1 @@
-export * from "./handleSetBoardValueProp";
+export * from "./handleReduceBoardValueProp";
