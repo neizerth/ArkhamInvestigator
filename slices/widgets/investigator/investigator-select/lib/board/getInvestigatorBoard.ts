@@ -10,7 +10,7 @@ import { getInitialHandSize } from "./getInitialHandSize";
 import { getBaseHandSize } from "./geеBaseHandSize";
 
 type Options = {
-	id: number;
+	index: number;
 	selection: SelectedInvestigator;
 	physicalTrauma?: number;
 	mentalTrauma?: number;
@@ -18,7 +18,7 @@ type Options = {
 
 export const getInvestigatorBoard = ({
 	selection,
-	id,
+	index,
 	physicalTrauma = 0,
 	mentalTrauma = 0,
 }: Options): InvestigatorBoard => {
@@ -51,7 +51,8 @@ export const getInvestigatorBoard = ({
 	const usedAbilities = getDefaultUsedAbilities(code);
 
 	return {
-		id,
+		id: index + 1,
+		index,
 		signatureGroupId: selection.signatureGroupId,
 		skinId: selection.skin?.id,
 

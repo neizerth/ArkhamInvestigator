@@ -17,6 +17,7 @@
 		"**/*.tsx",
 		".expo/types/**/*.ts",
 		"expo-env.d.ts",
-		"petrovich.d.ts"
+		"petrovich.d.ts",
+		"slices/modules/board/base/shared/lib/store/features/board/reducers/value/setBoardValuePropByTypets"
 	]
 }

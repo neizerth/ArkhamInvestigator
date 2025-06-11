@@ -2,6 +2,7 @@ import type {
 	Action,
 	ActionCreator,
 	ActionCreatorWithPayload,
+	PayloadAction,
 	ThunkAction,
 } from "@reduxjs/toolkit";
 import type { makeStore } from "../lib/store/makeStore";
@@ -26,3 +27,8 @@ export type AppThunkCreator = ActionCreator<AppThunk>;
 export type AppActionCreator<T> =
 	| ActionCreatorWithPayload<T>
 	| ((value: T) => AppThunk);
+
+export type StateReducer<S, P> = (
+	state: S,
+	action: PayloadAction<P>,
+) => S | void;
