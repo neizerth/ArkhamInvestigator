@@ -108,6 +108,12 @@ export const {
 	setBoardProp,
 	setCurrentBoard,
 	setCurrentBoardProp,
+	setBoardBaseValueProp,
+	setBoardInitialValueProp,
+	setBoardValueProp,
+	setCurrentBaseValueProp,
+	setCurrentInitialValueProp,
+	setCurrentValueProp,
 } = board.actions;
 
 export const {
