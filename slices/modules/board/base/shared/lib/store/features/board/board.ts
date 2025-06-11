@@ -104,27 +104,12 @@ export const {
 	setSyncScenarioClues,
 
 	// reducers
-	setBoard,
-	setBoardProp,
-	setCurrentBoard,
-	setCurrentBoardProp,
-	setBoardBaseValueProp,
-	setBoardInitialValueProp,
-	setBoardValueProp,
-	setCurrentBaseValueProp,
-	setCurrentInitialValueProp,
-	setCurrentValueProp,
 
 	reduceBoard,
 	reduceBoardProp,
 	reduceBoardBaseValueProp,
 	reduceBoardInitialValueProp,
 	reduceBoardValueProp,
-	reduceCurrentBaseValueProp,
-	reduceCurrentBoard,
-	reduceCurrentInitialValueProp,
-	reduceCurrentProp,
-	reduceCurrentValueProp,
 } = board.actions;
 
 export const {
