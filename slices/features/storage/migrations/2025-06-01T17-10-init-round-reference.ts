@@ -1,10 +1,10 @@
-import type { IBoardState } from "@shared/lib";
+import type { BoardState } from "@shared/lib";
 import type { PersistedState } from "redux-persist";
-import type { IRulesState } from "../../game/rules";
+import type { RulesState } from "../../game/rules";
 
 type State = PersistedState & {
-	rules?: IRulesState;
-	board?: IBoardState;
+	rules?: RulesState;
+	board?: BoardState;
 };
 
 export default function v16(state?: State) {

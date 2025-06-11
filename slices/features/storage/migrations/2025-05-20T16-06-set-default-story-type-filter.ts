@@ -1,8 +1,8 @@
-import type { IStoriesState } from "@shared/lib";
+import type { StoriesState } from "@shared/lib";
 import type { PersistedState } from "redux-persist";
 
 type State = PersistedState & {
-	stories?: IStoriesState;
+	stories?: StoriesState;
 };
 
 export default function v12(state?: State) {

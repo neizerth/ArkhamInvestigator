@@ -2,14 +2,14 @@ import { createSlice } from "@reduxjs/toolkit";
 import { createSliceState } from "redux-toolkit-helpers";
 import { APP_VERSION } from "../../../../config/app";
 
-export type IAppState = {
+export type AppState = {
 	loading: boolean;
 	version: string;
 	outdated: boolean;
 	keepAwake: boolean;
 };
 
-const initialState: IAppState = {
+const initialState: AppState = {
 	loading: true,
 	version: APP_VERSION,
 	outdated: false,

@@ -11,7 +11,7 @@ import type {
 	ScenarioChaosTokenValues,
 } from "../../../../model";
 
-export type IChaosBagState = {
+export type ChaosBagState = {
 	tokenCount: ChaosTokensCount;
 	contents: ChaosBagToken[];
 	showRevealModal: boolean;
@@ -36,7 +36,7 @@ export type IChaosBagState = {
 	> | null;
 };
 
-const initialState: IChaosBagState = {
+const initialState: ChaosBagState = {
 	enabled: true,
 	tokenCount: {},
 	contents: [],

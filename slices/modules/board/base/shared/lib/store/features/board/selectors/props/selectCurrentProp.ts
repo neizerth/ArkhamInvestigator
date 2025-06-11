@@ -7,4 +7,7 @@ import {
 type Key = keyof InvestigatorBoard;
 type Options<T extends Key> = Omit<SelectBoardPropOptions<T>, "boardId">;
 export const selectCurrentProp = <T extends Key>(options: Options<T>) =>
-	selectBoardProp(options);
+	selectBoardProp({
+		...options,
+		boardId: "current",
+	});

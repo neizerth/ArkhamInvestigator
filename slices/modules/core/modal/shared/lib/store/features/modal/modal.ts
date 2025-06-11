@@ -2,12 +2,12 @@ import { createSlice } from "@reduxjs/toolkit";
 import { createSliceState } from "redux-toolkit-helpers";
 import type { ModalData } from "../../../../model";
 
-export type IModalState = {
+export type ModalState = {
 	modalId: string | null;
 	data: ModalData | null;
 	ready: boolean;
 };
-const initialState: IModalState = {
+const initialState: ModalState = {
 	modalId: null,
 	data: null,
 	ready: false,

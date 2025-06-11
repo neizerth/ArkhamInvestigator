@@ -7,7 +7,7 @@ import { selectBoardAbilityUseInfo } from "../selectBoardAbilityUseInfo";
 
 type Options = {
 	abilityId: string;
-	boardId?: BoardId;
+	boardId: BoardId;
 };
 
 export const selectBoardIsAbilityUsed = (options: Options) => {

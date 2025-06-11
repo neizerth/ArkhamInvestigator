@@ -1,8 +1,8 @@
-import type { IBoardState } from "@shared/lib";
+import type { BoardState } from "@shared/lib";
 import type { PersistedState } from "redux-persist";
 
 type State = PersistedState & {
-	board?: IBoardState;
+	board?: BoardState;
 };
 
 export default function v0(state?: State) {
