@@ -5,17 +5,17 @@ import type {
 } from "@modules/board/base/shared/model";
 import { getBoardIndex } from "../../getters/props/getBoardIndex";
 
-export type HandleSetBoardOptions = {
+export type HandleReduceBoardOptions = {
 	state: BoardDraft;
 	boardId: BoardId;
-	data: InvestigatorBoard;
+	reducer: (board: InvestigatorBoard) => InvestigatorBoard;
 };
 
-export const handleSetBoard = ({
+export const handleReduceBoard = ({
 	state,
 	boardId,
-	data,
-}: HandleSetBoardOptions) => {
+	reducer,
+}: HandleReduceBoardOptions) => {
 	const index = getBoardIndex({
 		state,
 		boardId,
@@ -24,5 +24,5 @@ export const handleSetBoard = ({
 	if (typeof index !== "number") {
 		return;
 	}
-	state.investigatorBoards[index] = data;
+	state.investigatorBoards[index] = reducer(state.investigatorBoards[index]);
 };

@@ -1,2 +1,3 @@
 export * from "./setCurrentBoard";
-export * from "./setCurrentBoardProp";
+export * from "./reduceCurrentBoard";
+export * from "./prop";
