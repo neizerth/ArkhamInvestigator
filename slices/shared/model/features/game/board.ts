@@ -33,6 +33,7 @@ export type InvestigatorAbilityValues = Record<string, number>;
 
 export type InvestigatorBoard = {
 	id: number;
+	index: number;
 	signatureGroupId: string;
 	skinId?: string;
 

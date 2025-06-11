@@ -32,6 +32,7 @@ export type InvestigatorBoardValues = Record<
 
 export type InvestigatorBoard = {
 	id: number;
+	index: number;
 	signatureGroupId: string;
 	skinId?: string;
 
@@ -41,7 +42,7 @@ export type InvestigatorBoard = {
 	baseValue: InvestigatorBoardValues;
 	value: InvestigatorBoardValues;
 	abilityValues?: InvestigatorAbilityValues;
-	history: HistoryItem[];
+	history: BoardHistoryItem[];
 	historyIndex: number;
 	checkHistory: SkillCheckHistoryItem[];
 	currentRole?: Faction;
@@ -49,7 +50,7 @@ export type InvestigatorBoard = {
 	showPinnedSkillChecks?: boolean;
 };
 
-export type HistoryItem = {
+export type BoardHistoryItem = {
 	id: string;
 	initialValue?: Partial<InvestigatorBoardValues>;
 	baseValue?: Partial<InvestigatorBoardValues>;
@@ -58,3 +59,9 @@ export type HistoryItem = {
 	currentRole?: Faction;
 	abilityValues?: Record<string, number>;
 };
+
+export type PropsWithBoard = {
+	boardId: BoardId;
+};
+
+export type BoardKey = keyof InvestigatorBoard;

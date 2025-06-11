@@ -2,6 +2,7 @@ import type { InvestigatorBoard } from "@modules/board/base/shared/model/board";
 import { createSlice } from "@reduxjs/toolkit";
 import type { PickerDecelerationType } from "@shared/model";
 import { createSliceState } from "redux-toolkit-helpers";
+import * as reducers from "./reducers";
 
 export type BoardState = {
 	currentInvestigatorIndex: number | null;
@@ -68,6 +69,10 @@ const state = createSliceState(initialState);
 export const board = createSlice({
 	name: "board",
 	...state,
+	reducers: {
+		...state.reducers,
+		...reducers,
+	},
 });
 
 export const {
@@ -97,6 +102,12 @@ export const {
 	setAllowNegativeHealthAndSanity,
 	setShowUpkeepResources,
 	setSyncScenarioClues,
+
+	// reducers
+	setBoard,
+	setBoardProp,
+	setCurrentBoard,
+	setCurrentBoardProp,
 } = board.actions;
 
 export const {

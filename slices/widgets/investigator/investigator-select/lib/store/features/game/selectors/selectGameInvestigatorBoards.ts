@@ -13,7 +13,7 @@ export const selectGameInvestigatorBoards = createSelector(
 
 			return getInvestigatorBoard({
 				selection,
-				id: index + 1,
+				index,
 				...investigatorSettings,
 			});
 		});
