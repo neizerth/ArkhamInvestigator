@@ -1,12 +1,12 @@
 import { spawn } from "redux-saga/effects";
+import { watchChangeBoardPartSaga } from "./changeBoardPartSaga";
 import { watchChangeBoardPropSaga } from "./changeBoardPropSaga";
 import { watchChangeBoardPropValueSaga } from "./changeBoardPropValueSaga";
-import { watchChangeBoardSaga } from "./changeBoardSaga";
-import { watchChangeBoardValueSaga } from "./changeBoardValueSaga";
+import { watchChangeBoardValuePartSaga } from "./changeBoardValuePartSaga";
 
 export function* boardSaga() {
 	yield spawn(watchChangeBoardPropSaga);
-	yield spawn(watchChangeBoardValueSaga);
+	yield spawn(watchChangeBoardValuePartSaga);
 	yield spawn(watchChangeBoardPropValueSaga);
-	yield spawn(watchChangeBoardSaga);
+	yield spawn(watchChangeBoardPartSaga);
 }

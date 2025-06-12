@@ -13,7 +13,7 @@ export type HandleSetBoardValueOptions<K extends Key> = {
 	value: Partial<InvestigatorBoardValues>;
 };
 
-export const handleSetBoardValue = <K extends Key>({
+export const handleSetBoardValuePart = <K extends Key>({
 	state,
 	boardId,
 	value,
