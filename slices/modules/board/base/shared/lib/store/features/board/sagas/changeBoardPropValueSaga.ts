@@ -3,7 +3,7 @@ import { put, take, takeEvery } from "redux-saga/effects";
 import {
 	type ChangeBoardPropValuePayload,
 	changeBoardPropValue,
-} from "../actions/changeBoardPropValue";
+} from "../actions";
 import { setBoardValuePropInternal } from "../board";
 
 function* changeBoardPropValueSaga<K extends Key>() {
