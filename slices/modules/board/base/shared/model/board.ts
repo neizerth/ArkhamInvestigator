@@ -16,6 +16,8 @@ export type InvestigatorBoardStat =
 	| InvestigatorNumericStat
 	| "additionalAction";
 
+export type InvestigatorBoardValueProp = "value" | "baseValue" | "initialValue";
+
 export type InvestigatorBoardImage = Omit<
 	InvestigatorSignature["image"],
 	"id"
