@@ -1,4 +1,4 @@
-export * from "./setBoardInternal";
+export * from "./setBoardPartInternal";
 export * from "./setBoardPropInternal";
 export * from "./setBoardValuePropInternal";
-export * from "./setBoardValueInternal";
+export * from "./setBoardValuePartInternal";

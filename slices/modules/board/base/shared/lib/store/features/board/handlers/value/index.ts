@@ -1,2 +1,2 @@
 export * from "./handleSetBoardValueProp";
-export * from "./handleSetBoardValue";
+export * from "./handleSetBoardValuePart";

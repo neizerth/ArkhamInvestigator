@@ -104,10 +104,10 @@ export const {
 	setSyncScenarioClues,
 
 	// reducers
-	setBoardInternal,
+	setBoardPartInternal,
 	setBoardPropInternal,
 	setBoardValuePropInternal,
-	setBoardValueInternal,
+	setBoardValuePartInternal,
 } = board.actions;
 
 export const {

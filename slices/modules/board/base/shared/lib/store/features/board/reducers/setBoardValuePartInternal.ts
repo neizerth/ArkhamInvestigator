@@ -5,19 +5,19 @@ import type {
 import type { PayloadAction } from "@reduxjs/toolkit";
 import {
 	type HandleSetBoardValueOptions,
-	handleSetBoardValue,
+	handleSetBoardValuePart,
 } from "../handlers";
 
-export type SetBoardValueInternalPayload<K extends Key> = Omit<
+export type SetBoardValuePartInternalPayload<K extends Key> = Omit<
 	HandleSetBoardValueOptions<K>,
 	"state"
 >;
 
-export const setBoardValueInternal = <K extends Key>(
+export const setBoardValuePartInternal = <K extends Key>(
 	state: BoardDraft,
-	{ payload }: PayloadAction<SetBoardValueInternalPayload<K>>,
+	{ payload }: PayloadAction<SetBoardValuePartInternalPayload<K>>,
 ) => {
-	handleSetBoardValue({
+	handleSetBoardValuePart({
 		...payload,
 		state,
 	});
