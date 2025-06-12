@@ -6,19 +6,19 @@ import type {
 } from "@modules/board/base/shared/model";
 import { getBoardById } from "../../getters/find";
 
-export type HandleReduceBoardPropOptions<K extends BoardKey> = {
+export type HandleSetBoardPropOptions<K extends BoardKey> = {
 	state: BoardDraft;
 	boardId: BoardId;
 	prop: K;
-	reducer: (value: InvestigatorBoard[K]) => InvestigatorBoard[K];
+	value: InvestigatorBoard[K];
 };
 
-export const handleReduceBoardProp = <K extends BoardKey>({
+export const handleSetBoardProp = <K extends BoardKey>({
 	state,
 	boardId,
 	prop,
-	reducer,
-}: HandleReduceBoardPropOptions<K>) => {
+	value,
+}: HandleSetBoardPropOptions<K>) => {
 	const board = getBoardById({
 		state,
 		boardId,
@@ -28,5 +28,5 @@ export const handleReduceBoardProp = <K extends BoardKey>({
 		return;
 	}
 
-	board[prop] = reducer(board[prop]);
+	board[prop] = value;
 };
