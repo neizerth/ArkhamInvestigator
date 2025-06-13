@@ -1,4 +1,4 @@
-import type { SelectBoardValueByTypeOptions } from "../lib/store/features/board/selectors/value/selectBoardValueByType";
+import type { SelectBoardValueByTypeOptions } from "../lib";
 import type { InvestigatorBoardValues } from "./board";
 
 type Key = keyof InvestigatorBoardValues;

@@ -1,4 +1,4 @@
-import { selectEndTurnStrict } from "@modules/board/base/shared/lib/store/features/board/board";
+import { selectEndTurnStrict } from "@modules/board/base/shared/lib";
 import { createSelector } from "@reduxjs/toolkit";
 import type { BoardId } from "@shared/model";
 import { selectAbilitiesTurnEnd } from "./selectAbilitiesTurnEnd";

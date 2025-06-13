@@ -1,5 +1,5 @@
-import type { SetBoardPartInternalPayload } from "@modules/board/base/shared/lib/store/features/board/reducers";
 import { createAction } from "@reduxjs/toolkit";
+import type { SetBoardPartInternalPayload } from "../reducers";
 
 export type ChangeBoardPartPayload = SetBoardPartInternalPayload & {
 	code: string;

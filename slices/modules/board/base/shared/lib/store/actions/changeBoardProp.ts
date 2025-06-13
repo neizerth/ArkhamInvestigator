@@ -1,6 +1,6 @@
-import type { SetBoardPropInternalPayload } from "@modules/board/base/shared/lib/store/features/board/reducers";
 import type { BoardKey } from "@modules/board/base/shared/model";
 import { createAction } from "@reduxjs/toolkit";
+import type { SetBoardPropInternalPayload } from "../reducers";
 
 export type ChangeBoardPropPayload<K extends BoardKey> =
 	SetBoardPropInternalPayload<K> & {

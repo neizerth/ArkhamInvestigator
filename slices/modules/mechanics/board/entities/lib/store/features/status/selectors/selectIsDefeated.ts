@@ -1,4 +1,4 @@
-import { selectBoardById } from "@modules/board/base/shared/lib/store/features/board/selectors/find/selectBoardById";
+import { selectBoardById } from "@modules/board/base/shared/lib";
 import type { BoardId } from "@modules/board/base/shared/model";
 import { createSelector } from "@reduxjs/toolkit";
 
