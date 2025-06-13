@@ -6,9 +6,9 @@ import {
 import { pick } from "ramda";
 import { put, take, takeEvery } from "redux-saga/effects";
 import { supportedInvestigatorBoardProps } from "../../../config";
-import { withHistoryAction } from "../../withHistoryAction";
+import { createHistoryActionFilter } from "../../createHistoryActionFilter";
 
-const filterAction = withHistoryAction(changeBoardValuePart.match);
+const filterAction = createHistoryActionFilter(changeBoardValuePart.match);
 
 function* changeBoardPartSaga() {
 	const payload: ChangeBoardPartPayload = yield take(filterAction);
