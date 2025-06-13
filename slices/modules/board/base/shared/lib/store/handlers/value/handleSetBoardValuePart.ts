@@ -4,6 +4,7 @@ import type {
 	InvestigatorBoardValues,
 	InvestigatorBoardValueProp as Key,
 } from "@modules/board/base/shared/model";
+import { mergeDeepRight } from "ramda";
 import { getBoardById } from "../../getters/find";
 
 export type HandleSetBoardValueOptions<K extends Key> = {
@@ -27,8 +28,5 @@ export const handleSetBoardValuePart = <K extends Key>({
 	if (!board) {
 		return;
 	}
-	board[type] = {
-		...board[type],
-		...value,
-	};
+	board[type] = mergeDeepRight(board[type], value);
 };
