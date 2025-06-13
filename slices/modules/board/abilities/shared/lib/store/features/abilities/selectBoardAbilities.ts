@@ -1,5 +1,7 @@
-import { selectBoardProp } from "@modules/board/base/shared/lib/store/features/board/selectors/props/selectBoardProp";
-import { selectBoardsCount } from "@modules/board/base/shared/lib/store/features/board/selectors/selectBoardsCount";
+import {
+	selectBoardProp,
+	selectBoardsCount,
+} from "@modules/board/base/shared/lib";
 import { createSelector } from "@reduxjs/toolkit";
 import type { BoardId } from "@shared/model";
 import { isBoardAbility } from "../../../info/isBoardAbility";
