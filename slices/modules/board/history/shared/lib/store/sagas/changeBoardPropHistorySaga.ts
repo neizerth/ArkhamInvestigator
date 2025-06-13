@@ -6,14 +6,20 @@ import {
 import type { BoardKey } from "@modules/board/base/shared/model";
 import { put, take, takeEvery } from "redux-saga/effects";
 import { supportedInvestigatorBoardProps } from "../../../config";
+import { withHistoryAction } from "../../withHistoryAction";
+
+const filterHistoryAction = withHistoryAction(changeBoardProp.match);
+
+const filterAction = (action: unknown) => {
+	if (!filterHistoryAction(action)) {
+		return false;
+	}
+	return supportedInvestigatorBoardProps.includes(action.payload.prop);
+};
 
 function* changeBoardPropHistorySaga<K extends BoardKey>() {
-	const action: ChangeBoardPropPayload<K> = yield take(changeBoardProp.match);
+	const action: ChangeBoardPropPayload<K> = yield take(filterAction);
 	const { boardId } = action;
-
-	if (!supportedInvestigatorBoardProps.includes(action.prop)) {
-		return;
-	}
 
 	yield put(
 		addBoardHistoryItem({
@@ -26,5 +32,5 @@ function* changeBoardPropHistorySaga<K extends BoardKey>() {
 }
 
 export function* watchChangeBoardPropHistorySaga() {
-	yield takeEvery(changeBoardProp.match, changeBoardPropHistorySaga);
+	yield takeEvery(filterAction, changeBoardPropHistorySaga);
 }

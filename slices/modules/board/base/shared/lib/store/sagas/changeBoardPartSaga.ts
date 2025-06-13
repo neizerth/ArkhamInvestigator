@@ -5,7 +5,6 @@ import { setBoardPartInternal } from "../board";
 
 function* changeBoardPartSaga() {
 	const action: ChangeBoardPartPayload = yield take(changeBoardValuePart.match);
-
 	yield put(setBoardPartInternal(action));
 }
 

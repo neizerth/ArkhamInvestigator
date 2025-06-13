@@ -58,3 +58,8 @@ export type PropsWithBoard = {
 };
 
 export type BoardKey = keyof InvestigatorBoard;
+
+export type ChangeBoardEventPayload = {
+	code: string;
+	history?: boolean;
+};

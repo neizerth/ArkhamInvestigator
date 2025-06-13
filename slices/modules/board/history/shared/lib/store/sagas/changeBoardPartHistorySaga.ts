@@ -6,12 +6,14 @@ import {
 import { pick } from "ramda";
 import { put, take, takeEvery } from "redux-saga/effects";
 import { supportedInvestigatorBoardProps } from "../../../config";
+import { withHistoryAction } from "../../withHistoryAction";
+
+const filterAction = withHistoryAction(changeBoardValuePart.match);
 
 function* changeBoardPartSaga() {
-	const payload: ChangeBoardPartPayload = yield take(
-		changeBoardValuePart.match,
-	);
+	const payload: ChangeBoardPartPayload = yield take(filterAction);
 	const { boardId } = payload;
+
 	const data = pick(supportedInvestigatorBoardProps, payload.data);
 
 	yield put(
@@ -23,5 +25,5 @@ function* changeBoardPartSaga() {
 }
 
 export function* watchChangeBoardPartHistorySaga() {
-	yield takeEvery(changeBoardValuePart.match, changeBoardPartSaga);
+	yield takeEvery(filterAction, changeBoardPartSaga);
 }
