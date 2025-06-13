@@ -1,4 +1,2 @@
-export * from "./setBoardPartInternal";
-export * from "./setBoardPropInternal";
-export * from "./setBoardValuePropInternal";
-export * from "./setBoardValuePartInternal";
+export * from "./internal";
+export * from "./addBoardHistoryItem";

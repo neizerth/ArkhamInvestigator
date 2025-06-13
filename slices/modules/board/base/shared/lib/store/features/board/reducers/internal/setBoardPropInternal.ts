@@ -3,7 +3,7 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 import {
 	type HandleSetBoardPropOptions,
 	handleSetBoardProp,
-} from "../handlers";
+} from "../../handlers";
 
 export type SetBoardPropInternalPayload<K extends BoardKey> = Omit<
 	HandleSetBoardPropOptions<K>,

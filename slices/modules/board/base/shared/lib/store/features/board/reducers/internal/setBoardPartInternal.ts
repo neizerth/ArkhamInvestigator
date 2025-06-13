@@ -2,7 +2,7 @@ import type { BoardReducer } from "@modules/board/base/shared/model";
 import {
 	type HandleSetBoardPartOptions,
 	handleSetBoardPart,
-} from "../handlers";
+} from "../../handlers";
 
 export type SetBoardPartInternalPayload = Omit<
 	HandleSetBoardPartOptions,

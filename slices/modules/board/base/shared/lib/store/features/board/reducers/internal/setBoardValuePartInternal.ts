@@ -6,7 +6,7 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 import {
 	type HandleSetBoardValueOptions,
 	handleSetBoardValuePart,
-} from "../handlers";
+} from "../../handlers";
 
 export type SetBoardValuePartInternalPayload<K extends Key> = Omit<
 	HandleSetBoardValueOptions<K>,
