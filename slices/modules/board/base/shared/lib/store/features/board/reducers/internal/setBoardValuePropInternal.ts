@@ -6,7 +6,7 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 import {
 	type HandleSetBoardValuePropOptions,
 	handleSetBoardValueProp,
-} from "../handlers";
+} from "../../handlers";
 
 export type SetBoardPropValueInternalPayload<K extends InvestigatorBoardStat> =
 	Omit<HandleSetBoardValuePropOptions<K>, "state">;

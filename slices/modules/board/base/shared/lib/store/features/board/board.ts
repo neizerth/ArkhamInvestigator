@@ -108,6 +108,8 @@ export const {
 	setBoardPropInternal,
 	setBoardValuePropInternal,
 	setBoardValuePartInternal,
+
+	addBoardHistoryItem,
 } = board.actions;
 
 export const {

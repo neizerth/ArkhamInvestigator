@@ -9,6 +9,7 @@ import type {
 	InvestigatorNumericStat,
 	SkillCheckHistoryItem,
 } from "@shared/model";
+import type { InvestigatorBoardHistoryItem } from "./history";
 
 export type BoardId = number | "current";
 
@@ -44,22 +45,12 @@ export type InvestigatorBoard = {
 	baseValue: InvestigatorBoardValues;
 	value: InvestigatorBoardValues;
 	abilityValues?: InvestigatorAbilityValues;
-	history: BoardHistoryItem[];
+	history: InvestigatorBoardHistoryItem[];
 	historyIndex: number;
 	checkHistory: SkillCheckHistoryItem[];
 	currentRole?: Faction;
 	usedAbilities?: InvestigatorBoardUsedAbility[];
 	showPinnedSkillChecks?: boolean;
-};
-
-export type BoardHistoryItem = {
-	id: string;
-	initialValue?: Partial<InvestigatorBoardValues>;
-	baseValue?: Partial<InvestigatorBoardValues>;
-	value?: Partial<InvestigatorBoardValues>;
-	usedAbilities?: InvestigatorBoardUsedAbility[];
-	currentRole?: Faction;
-	abilityValues?: Record<string, number>;
 };
 
 export type PropsWithBoard = {
