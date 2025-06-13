@@ -3,6 +3,7 @@ import type {
 	BoardId,
 	InvestigatorBoard,
 } from "@modules/board/base/shared/model";
+import { mergeDeepRight } from "ramda";
 import { getBoardIndex } from "../../getters/props/getBoardIndex";
 
 export type HandleSetBoardPartOptions = {
@@ -25,8 +26,5 @@ export const handleSetBoardPart = ({
 		return;
 	}
 	const board = state.investigatorBoards[index];
-	state.investigatorBoards[index] = {
-		...board,
-		...data,
-	};
+	state.investigatorBoards[index] = mergeDeepRight(board, data);
 };
