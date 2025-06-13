@@ -6,9 +6,9 @@ import {
 import type { BoardKey } from "@modules/board/base/shared/model";
 import { put, take, takeEvery } from "redux-saga/effects";
 import { supportedInvestigatorBoardProps } from "../../../config";
-import { withHistoryAction } from "../../withHistoryAction";
+import { createHistoryActionFilter } from "../../createHistoryActionFilter";
 
-const filterHistoryAction = withHistoryAction(changeBoardProp.match);
+const filterHistoryAction = createHistoryActionFilter(changeBoardProp.match);
 
 const filterAction = (action: unknown) => {
 	if (!filterHistoryAction(action)) {

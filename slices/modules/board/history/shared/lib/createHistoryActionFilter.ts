@@ -8,7 +8,7 @@ type MatchCallback<
 	E = never,
 > = (action: unknown) => action is PayloadAction<P, T, M, E>;
 
-export const withHistoryAction =
+export const createHistoryActionFilter =
 	<P extends Payload, T extends string, M = never, E = never>(
 		match: MatchCallback<P, T, M, E>,
 	) =>
