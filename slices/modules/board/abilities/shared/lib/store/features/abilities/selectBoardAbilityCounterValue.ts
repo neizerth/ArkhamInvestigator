@@ -8,7 +8,7 @@ export type SelectAbilityCounterOptions = {
 	boardId: BoardId;
 };
 
-export const selectBoardAbilityCounter = ({
+export const selectBoardAbilityCounterValue = ({
 	boardId,
 	abilityId,
 }: SelectAbilityCounterOptions) =>

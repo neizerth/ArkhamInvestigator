@@ -32,4 +32,5 @@ export const handleAddBoardHistoryItem = ({
 	};
 
 	state.investigatorBoards[index].history.push(item);
+	state.investigatorBoards[index].historyIndex++;
 };
