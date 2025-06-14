@@ -1,18 +1,18 @@
 import type { BoardReducer } from "@modules/board/base/shared/model";
 import {
 	type HandleAddBoardHistoryItemOptions,
-	handleAddBoardHistoryItem,
-} from "../handlers/history";
+	handleClearBoardHistoryIndex,
+} from "../../handlers/history";
 
-export type HandleAddBoardHistoryItemPayload = Omit<
+export type ClearBoardHistoryIndexPayload = Omit<
 	HandleAddBoardHistoryItemOptions,
 	"state"
 >;
 
-export const addBoardHistoryItem: BoardReducer<
-	HandleAddBoardHistoryItemPayload
+export const clearBoardHistoryIndex: BoardReducer<
+	ClearBoardHistoryIndexPayload
 > = (state, { payload }) => {
-	handleAddBoardHistoryItem({
+	handleClearBoardHistoryIndex({
 		...payload,
 		state,
 	});

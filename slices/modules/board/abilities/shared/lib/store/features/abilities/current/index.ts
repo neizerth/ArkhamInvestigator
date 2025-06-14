@@ -1,4 +1,4 @@
 export * from "./selectCurrentAbilityById";
-export * from "./selectCurrentAbilityCounter";
+export * from "./selectCurrentAbilityCounterValue";
 export * from "./selectCurrentAbilityUseInfo";
 export * from "./selectCurrentBoardAbilities";
