@@ -1,4 +1,7 @@
-import type { InvestigatorBoard, InvestigatorBoardValues } from "./board";
+import type {
+	InvestigatorBoard,
+	InvestigatorBoardValues,
+} from "@modules/board/base/shared/model";
 
 export type InvestigatorBoardHistoryItem = InvestigatorBoardHistoryItemData & {
 	id: string;
