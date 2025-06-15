@@ -4,12 +4,12 @@ import type {
 	InvestigatorAbilityValues,
 	InvestigatorBoardUsedAbility,
 } from "@modules/board/abilities/shared/model";
+import type { InvestigatorBoardHistoryItem } from "@modules/board/history/shared/model";
 import type {
 	Faction,
 	InvestigatorNumericStat,
 	SkillCheckHistoryItem,
 } from "@shared/model";
-import type { InvestigatorBoardHistoryItem } from "./history";
 
 export type BoardId = number | "current";
 

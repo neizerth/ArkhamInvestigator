@@ -1,6 +1,7 @@
+import type { OmitBoard } from "@modules/board/base/shared/model";
 import { type GetBoardIndexOptions, getBoardIndex } from "../getBoardIndex";
 
-type Options = Omit<GetBoardIndexOptions, "boardId">;
+type Options = OmitBoard<GetBoardIndexOptions>;
 
 export const getCurrentIndex = (options: Options) =>
 	getBoardIndex({

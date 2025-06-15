@@ -1,5 +1,6 @@
 import type { SelectBoardValueByTypeOptions } from "../lib";
 import type { InvestigatorBoardValues } from "./board";
+import type { OmitBoard } from "./store";
 
 type Key = keyof InvestigatorBoardValues;
 
@@ -8,7 +9,6 @@ export type SelectBoardValueOptions<K extends Key> = Omit<
 	"type"
 >;
 
-export type SelectCurrentValueOptions<K extends Key> = Omit<
-	SelectBoardValueOptions<K>,
-	"boardId"
+export type SelectCurrentValueOptions<K extends Key> = OmitBoard<
+	SelectBoardValueOptions<K>
 >;
