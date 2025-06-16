@@ -1,20 +1,15 @@
 import type { InvestigatorNumericStat as Key } from "@shared/model";
 import type { AppThunk } from "@shared/model";
-import type {
-	BoardId,
-	ChangeBoardEventPayload,
-	InvestigatorBoardValueProp,
-} from "../../../../model";
 import { selectBoardValueProp } from "../../selectors/props/selectBoardValueProp";
-import { setBoardPropValue } from "./setBoardPropValue";
+import {
+	type SetBoardPropValuePayload,
+	setBoardPropValue,
+} from "./setBoardPropValue";
 
-export type DecreaseBoardValuePropInternalPayload<K extends Key> = {
-	boardId: BoardId;
-	type: InvestigatorBoardValueProp;
-	prop: K;
-	value: number;
-	min: number;
-} & ChangeBoardEventPayload;
+export type DecreaseBoardValuePropInternalPayload<K extends Key> =
+	SetBoardPropValuePayload<K> & {
+		min: number;
+	};
 export const decreaseBoardValuePropInternal =
 	<K extends Key>(
 		payload: DecreaseBoardValuePropInternalPayload<K>,
