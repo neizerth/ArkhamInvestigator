@@ -1,5 +1,4 @@
-export * from "./selectInvestigatorBoardImages";
 export * from "./selectBoardProp";
 export * from "./selectCurrentProp";
-export * from "./selectBoardCode";
-export * from "./selectBoardId";
+export * from "./selectBoardValueProp";
+export * from "./static";
