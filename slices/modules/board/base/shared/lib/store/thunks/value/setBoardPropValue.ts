@@ -6,12 +6,15 @@ import {
 } from "../../actions";
 import { selectBoardCode } from "../../selectors/props/static/selectBoardCode";
 
-type Options<K extends Key> = Omit<ChangeBoardPropValuePayload<K>, "code">;
+export type SetBoardPropValuePayload<K extends Key> = Omit<
+	ChangeBoardPropValuePayload<K>,
+	"code"
+>;
 
 export const setBoardPropValue =
-	<K extends Key>(options: Options<K>): AppThunk =>
+	<K extends Key>(payload: SetBoardPropValuePayload<K>): AppThunk =>
 	(dispatch, getState) => {
-		const { boardId } = options;
+		const { boardId } = payload;
 		const state = getState();
 		const code = selectBoardCode(boardId)(state);
 
@@ -21,7 +24,7 @@ export const setBoardPropValue =
 
 		dispatch(
 			changeBoardPropValue({
-				...options,
+				...payload,
 				code,
 			}),
 		);

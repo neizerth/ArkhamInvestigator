@@ -1,21 +1,17 @@
-import type {
-	BoardId,
-	ChangeBoardEventPayload,
-	InvestigatorBoardValueProp,
-} from "../../../../model";
 import { selectBoardValueProp } from "../../selectors/props/selectBoardValueProp";
-import { setBoardPropValue } from "./setBoardPropValue";
+import {
+	type SetBoardPropValuePayload,
+	setBoardPropValue,
+} from "./setBoardPropValue";
 
 import type { InvestigatorNumericStat as Key } from "@shared/model";
 import type { AppThunk } from "@shared/model";
 
-export type IncreaseBoardValuePropInternalPayload<K extends Key> = {
-	boardId: BoardId;
-	type: InvestigatorBoardValueProp;
-	prop: K;
-	value: number;
-	max: number;
-} & ChangeBoardEventPayload;
+export type IncreaseBoardValuePropInternalPayload<K extends Key> =
+	SetBoardPropValuePayload<K> & {
+		max: number;
+	};
+
 export const increaseBoardValuePropInternal =
 	<K extends Key>(
 		payload: IncreaseBoardValuePropInternalPayload<K>,
