@@ -1,10 +1,10 @@
-import { selectBoardCode } from "@modules/board/base/shared/lib";
-import type { InvestigatorBoardStat as Key } from "@modules/board/base/shared/model";
 import type { AppThunk } from "@shared/model";
+import type { InvestigatorBoardStat as Key } from "../../../../model/board";
 import {
 	type ChangeBoardPropValuePayload,
 	changeBoardPropValue,
-} from "../actions";
+} from "../../actions";
+import { selectBoardCode } from "../../selectors/props/static/selectBoardCode";
 
 type Options<K extends Key> = Omit<ChangeBoardPropValuePayload<K>, "code">;
 
