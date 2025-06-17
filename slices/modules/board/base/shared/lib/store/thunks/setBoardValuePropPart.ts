@@ -1,4 +1,3 @@
-import { selectBoardCode } from "@modules/board/base/shared/lib";
 import type {
 	InvestigatorBoardValues,
 	InvestigatorBoardStat as Key,
@@ -23,15 +22,7 @@ const boardProps: ValueProp[] = ["value", "baseValue", "initialValue"];
 
 export const setBoardValuePropPart =
 	<K extends Key>(payload: SetBoardValuePropPartPayload<K>): AppThunk =>
-	(dispatch, getState) => {
-		const { boardId } = payload;
-		const state = getState();
-		const code = selectBoardCode(boardId)(state);
-
-		if (!code) {
-			return;
-		}
-
+	(dispatch) => {
 		const data = boardProps.reduce((target, key) => {
 			if (key in payload) {
 				data[key] = {
