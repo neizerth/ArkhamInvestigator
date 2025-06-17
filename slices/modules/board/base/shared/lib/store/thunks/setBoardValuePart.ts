@@ -6,10 +6,13 @@ import {
 	changeBoardValuePart,
 } from "../actions";
 
-type Options<K extends Key> = Omit<ChangeBoardValuePartPayload<K>, "code">;
+export type SetBoardValuePartPayload<K extends Key> = Omit<
+	ChangeBoardValuePartPayload<K>,
+	"code"
+>;
 
 export const setBoardValuePart =
-	<K extends Key>(options: Options<K>): AppThunk =>
+	<K extends Key>(options: SetBoardValuePartPayload<K>): AppThunk =>
 	(dispatch, getState) => {
 		const { boardId } = options;
 		const state = getState();

@@ -3,10 +3,13 @@ import type { BoardKey } from "@modules/board/base/shared/model";
 import type { AppThunk } from "@shared/model";
 import { type ChangeBoardPropPayload, changeBoardProp } from "../actions";
 
-type Options<K extends BoardKey> = Omit<ChangeBoardPropPayload<K>, "code">;
+export type SetBoardPropPayload<K extends BoardKey> = Omit<
+	ChangeBoardPropPayload<K>,
+	"code"
+>;
 
 export const setBoardProp =
-	<K extends BoardKey>(options: Options<K>): AppThunk =>
+	<K extends BoardKey>(options: SetBoardPropPayload<K>): AppThunk =>
 	(dispatch, getState) => {
 		const { boardId } = options;
 		const state = getState();
