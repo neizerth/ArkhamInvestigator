@@ -24,7 +24,11 @@ export const decreaseBoardValuePropInternal =
 
 		const { min } = payload;
 
-		const value = Math.max(min, currentValue - payload.value);
+		const value = currentValue - payload.value;
+
+		if (value < min) {
+			return;
+		}
 
 		dispatch(
 			setBoardPropValue({
