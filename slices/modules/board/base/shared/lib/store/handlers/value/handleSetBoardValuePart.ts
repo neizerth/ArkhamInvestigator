@@ -1,18 +1,15 @@
 import type {
 	BoardDraft,
-	BoardId,
-	InvestigatorBoardValues,
 	InvestigatorBoardValueProp as Key,
 } from "@modules/board/base/shared/model";
 import { mergeDeepRight } from "ramda";
+import type { ChangeBoardValuePartPayload } from "../../actions";
 import { getBoardById } from "../../getters/find";
 
-export type HandleSetBoardValueOptions<K extends Key> = {
-	state: BoardDraft;
-	boardId: BoardId;
-	type: K;
-	value: Partial<InvestigatorBoardValues>;
-};
+export type HandleSetBoardValueOptions<K extends Key> =
+	ChangeBoardValuePartPayload<K> & {
+		state: BoardDraft;
+	};
 
 export const handleSetBoardValuePart = <K extends Key>({
 	state,

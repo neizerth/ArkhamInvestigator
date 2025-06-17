@@ -106,7 +106,7 @@ export const {
 	// reducers
 	setBoardPartInternal,
 	setBoardPropInternal,
-	setBoardValuePropInternal,
+	setBoardPropValueInternal,
 	setBoardValuePartInternal,
 } = board.actions;
 

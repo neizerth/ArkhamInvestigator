@@ -1,20 +1,13 @@
 import type {
 	BoardDraft,
-	BoardId,
 	InvestigatorBoard,
-	InvestigatorBoardValueProp,
-	InvestigatorBoardValues,
 } from "@modules/board/base/shared/model";
 import { mergeDeepRight } from "ramda";
+import type { ChangeBoardPartPayload } from "../../actions";
 import { getBoardIndex } from "../../getters/props/getBoardIndex";
 
-type Data = Omit<Partial<InvestigatorBoard>, InvestigatorBoardValueProp> &
-	Partial<Record<InvestigatorBoardValueProp, Partial<InvestigatorBoardValues>>>;
-
-export type HandleSetBoardPartOptions = {
+export type HandleSetBoardPartOptions = ChangeBoardPartPayload & {
 	state: BoardDraft;
-	boardId: BoardId;
-	data: Data;
 };
 
 export const handleSetBoardPart = ({

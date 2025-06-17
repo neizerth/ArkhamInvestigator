@@ -1,12 +1,15 @@
 import type {
 	BoardKey,
 	ChangeBoardEventPayload,
+	InvestigatorBoard,
 } from "@modules/board/base/shared/model";
 import { createAction } from "@reduxjs/toolkit";
-import type { SetBoardPropInternalPayload } from "../reducers";
 
 export type ChangeBoardPropPayload<K extends BoardKey> =
-	SetBoardPropInternalPayload<K> & ChangeBoardEventPayload;
+	ChangeBoardEventPayload & {
+		prop: K;
+		value: InvestigatorBoard[K];
+	};
 
 export const changeBoardProp = (<K extends BoardKey>() =>
 	createAction<ChangeBoardPropPayload<K>>("board/changeProp"))();

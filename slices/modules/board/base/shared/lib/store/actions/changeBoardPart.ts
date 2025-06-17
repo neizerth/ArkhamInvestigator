@@ -1,9 +1,17 @@
 import { createAction } from "@reduxjs/toolkit";
-import type { ChangeBoardEventPayload } from "../../../model";
-import type { SetBoardPartInternalPayload } from "../reducers";
+import type {
+	ChangeBoardEventPayload,
+	InvestigatorBoard,
+	InvestigatorBoardValueProp,
+	InvestigatorBoardValues,
+} from "../../../model";
 
-export type ChangeBoardPartPayload = SetBoardPartInternalPayload &
-	ChangeBoardEventPayload;
+type Data = Omit<Partial<InvestigatorBoard>, InvestigatorBoardValueProp> &
+	Partial<Record<InvestigatorBoardValueProp, Partial<InvestigatorBoardValues>>>;
+
+export type ChangeBoardPartPayload = ChangeBoardEventPayload & {
+	data: Data;
+};
 
 export const changeBoardPart =
 	createAction<ChangeBoardPartPayload>("board/changePart");
