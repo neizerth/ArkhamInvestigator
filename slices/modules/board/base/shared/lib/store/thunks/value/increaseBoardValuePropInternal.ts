@@ -26,7 +26,11 @@ export const increaseBoardValuePropInternal =
 
 		const { max } = payload;
 
-		const value = Math.min(max, currentValue + payload.value);
+		const value = currentValue + payload.value;
+
+		if (value > max) {
+			return;
+		}
 
 		dispatch(
 			setBoardPropValue({
