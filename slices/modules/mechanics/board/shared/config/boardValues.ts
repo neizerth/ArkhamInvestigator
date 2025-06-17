@@ -2,6 +2,7 @@ import type { InvestigatorBoardValues } from "@modules/board/base/shared/model";
 
 const maxSkillValue = 20;
 const minSkillValue = 0;
+
 export const minNegativeHealthAndSanityValue = -20;
 
 export const maxRegularValue = 100;
