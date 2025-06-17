@@ -108,6 +108,8 @@ export const {
 	setBoardPropInternal,
 	setBoardPropValueInternal,
 	setBoardValuePartInternal,
+
+	addInvestigatorBoard,
 } = board.actions;
 
 export const {
