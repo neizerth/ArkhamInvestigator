@@ -4,7 +4,7 @@ import {
 } from "@modules/board/base/shared/lib";
 import { createSelector } from "@reduxjs/toolkit";
 import type { BoardId } from "@shared/model";
-import { isBoardAbility } from "../../../info/isBoardAbility";
+import { isBoardAbility } from "../../info/isBoardAbility";
 
 export const selectBoardAbilities = (boardId: BoardId) =>
 	createSelector(
