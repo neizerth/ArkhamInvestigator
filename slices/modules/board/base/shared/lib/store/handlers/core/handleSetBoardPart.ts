@@ -2,14 +2,19 @@ import type {
 	BoardDraft,
 	BoardId,
 	InvestigatorBoard,
+	InvestigatorBoardValueProp,
+	InvestigatorBoardValues,
 } from "@modules/board/base/shared/model";
 import { mergeDeepRight } from "ramda";
 import { getBoardIndex } from "../../getters/props/getBoardIndex";
 
+type Data = Omit<Partial<InvestigatorBoard>, InvestigatorBoardValueProp> &
+	Partial<Record<InvestigatorBoardValueProp, Partial<InvestigatorBoardValues>>>;
+
 export type HandleSetBoardPartOptions = {
 	state: BoardDraft;
 	boardId: BoardId;
-	data: Partial<InvestigatorBoard>;
+	data: Data;
 };
 
 export const handleSetBoardPart = ({
@@ -26,5 +31,8 @@ export const handleSetBoardPart = ({
 		return;
 	}
 	const board = state.investigatorBoards[index];
-	state.investigatorBoards[index] = mergeDeepRight(board, data);
+	state.investigatorBoards[index] = mergeDeepRight(
+		board,
+		data,
+	) as InvestigatorBoard;
 };
