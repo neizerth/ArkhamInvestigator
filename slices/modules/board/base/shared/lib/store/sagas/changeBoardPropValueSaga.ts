@@ -4,12 +4,12 @@ import {
 	type ChangeBoardPropValuePayload,
 	changeBoardPropValue,
 } from "../actions";
-import { setBoardValuePropInternal } from "../board";
+import { setBoardPropValueInternal } from "../board";
 
 export function* watchChangeBoardPropValueSaga<K extends Key>() {
 	const action: ChangeBoardPropValuePayload<K> = yield take(
 		changeBoardPropValue.match,
 	);
 
-	yield put(setBoardValuePropInternal(action));
+	yield put(setBoardPropValueInternal(action));
 }

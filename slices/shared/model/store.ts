@@ -14,6 +14,10 @@ export type AppThunk<ReturnType = void> = ThunkAction<
 	Action
 >;
 
+export type PropwWithState<T> = {
+	state: T;
+};
+
 export type AppSelector<ReturnType = unknown> = (
 	state: RootState,
 ) => ReturnType;

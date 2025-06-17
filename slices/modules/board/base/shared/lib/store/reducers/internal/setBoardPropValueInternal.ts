@@ -4,18 +4,18 @@ import type {
 } from "@modules/board/base/shared/model";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import {
-	type HandleSetBoardValuePropOptions,
-	handleSetBoardValueProp,
+	type HandleSetBoardPropValueOptions,
+	handleSetBoardPropValue,
 } from "../../handlers";
 
 export type SetBoardPropValueInternalPayload<K extends InvestigatorBoardStat> =
-	Omit<HandleSetBoardValuePropOptions<K>, "state">;
+	Omit<HandleSetBoardPropValueOptions<K>, "state">;
 
-export const setBoardValuePropInternal = <K extends InvestigatorBoardStat>(
+export const setBoardPropValueInternal = <K extends InvestigatorBoardStat>(
 	state: BoardDraft,
 	{ payload }: PayloadAction<SetBoardPropValueInternalPayload<K>>,
 ) => {
-	handleSetBoardValueProp({
+	handleSetBoardPropValue({
 		...payload,
 		state,
 	});
