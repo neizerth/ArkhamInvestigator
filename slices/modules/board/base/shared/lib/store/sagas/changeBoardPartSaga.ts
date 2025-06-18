@@ -4,6 +4,8 @@ import type { ChangeBoardPartPayload } from "../actions";
 import { setBoardPartInternal } from "../board";
 
 export function* watchChangeBoardPartSaga() {
-	const action: ChangeBoardPartPayload = yield take(changeBoardValuePart.match);
-	yield put(setBoardPartInternal(action));
+	const payload: ChangeBoardPartPayload = yield take(
+		changeBoardValuePart.match,
+	);
+	yield put(setBoardPartInternal(payload));
 }
