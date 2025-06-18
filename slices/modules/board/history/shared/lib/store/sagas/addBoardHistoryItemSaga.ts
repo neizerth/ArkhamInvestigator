@@ -1,13 +1,11 @@
 import { selectBoardById, setBoardPart } from "@modules/board/base/shared/lib";
+import type { ActionCreatorPayload } from "@shared/model";
 import { put, select, take } from "redux-saga/effects";
 import { v4 } from "uuid";
-import {
-	type AddBoardHistoryItemPayload,
-	addBoardHistoryItem,
-} from "../actions";
+import { addBoardHistoryItem } from "../actions";
 
 export function* watchAddBoardHistoryItemSaga() {
-	const payload: AddBoardHistoryItemPayload = yield take(
+	const payload: ActionCreatorPayload<typeof addBoardHistoryItem> = yield take(
 		addBoardHistoryItem.match,
 	);
 	const { boardId, data } = payload;
