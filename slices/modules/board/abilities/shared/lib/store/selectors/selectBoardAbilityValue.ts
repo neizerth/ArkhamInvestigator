@@ -8,7 +8,7 @@ export type SelectAbilityCounterOptions = {
 	boardId: BoardId;
 };
 
-export const selectBoardAbilityCounterValue = ({
+export const selectBoardAbilityValue = ({
 	boardId,
 	abilityId,
 }: SelectAbilityCounterOptions) =>
@@ -24,9 +24,12 @@ export const selectBoardAbilityCounterValue = ({
 			if (!ability) {
 				return 0;
 			}
-			if (ability.type !== "counter") {
-				return 0;
+			const currentValue = values?.[abilityId];
+
+			if (ability.type === "counter") {
+				return currentValue ?? (ability.defaultValue || 0);
 			}
-			return values?.[abilityId] ?? (ability.defaultValue || 0);
+
+			return currentValue || 0;
 		},
 	);
