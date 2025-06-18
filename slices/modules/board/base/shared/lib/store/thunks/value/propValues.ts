@@ -31,11 +31,11 @@ export const createBoardPropValueSetter =
 		);
 	};
 
-export const setBoardActualPropValueInternal =
+export const setBoardActualPropValueCommon =
 	createBoardPropValueSetter("value");
 
-export const setBoardBasePropValueInternal =
+export const setBoardBasePropValueCommon =
 	createBoardPropValueSetter("baseValue");
 
-export const setBoardInitialPropValueInternal =
+export const setBoardInitialPropValueCommon =
 	createBoardPropValueSetter("initialValue");

@@ -1,6 +1,6 @@
 import {
 	type CreateBoardPropValueSetterPayload,
-	setBoardActualPropValueInternal,
+	setBoardActualPropValueCommon,
 } from "@modules/board/base/shared/lib";
 import type { AppThunk, InvestigatorNumericStat as Key } from "@shared/model";
 import { selectBoardMaxValue, selectBoardMinValue } from "../../../selectors";
@@ -18,7 +18,7 @@ export const setBoardPropValue =
 		const max = selectBoardMaxValue(payload)(state);
 
 		dispatch(
-			setBoardActualPropValueInternal({
+			setBoardActualPropValueCommon({
 				...payload,
 				min,
 				max,
