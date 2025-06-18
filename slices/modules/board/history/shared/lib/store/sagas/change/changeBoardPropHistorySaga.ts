@@ -1,8 +1,5 @@
-import {
-	type ChangeBoardPropPayload,
-	changeBoardProp,
-} from "@modules/board/base/shared/lib";
-import type { BoardKey } from "@modules/board/base/shared/model";
+import { changeBoardProp } from "@modules/board/base/shared/lib";
+import type { ActionCreatorPayload } from "@shared/model";
 import { put, take } from "redux-saga/effects";
 import { supportedInvestigatorBoardHistoryProps as supportedProps } from "../../../../config";
 import { createHistoryActionFilter } from "../../../createHistoryActionFilter";
@@ -17,8 +14,9 @@ const filterAction = (action: unknown) => {
 	return supportedProps.includes(action.payload.prop);
 };
 
-export function* watchChangeBoardPropHistorySaga<K extends BoardKey>() {
-	const action: ChangeBoardPropPayload<K> = yield take(filterAction);
+export function* watchChangeBoardPropHistorySaga() {
+	const action: ActionCreatorPayload<typeof changeBoardProp> =
+		yield take(filterAction);
 	const { boardId } = action;
 
 	yield put(

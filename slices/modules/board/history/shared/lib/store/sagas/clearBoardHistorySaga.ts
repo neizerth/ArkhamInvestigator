@@ -1,11 +1,11 @@
 import { setBoardPart } from "@modules/board/base/shared/lib";
+import type { ActionCreatorPayload } from "@shared/model";
 import { put, take } from "redux-saga/effects";
-import { type ClearBoardHistoryPayload, clearBoardHistory } from "../actions";
+import { clearBoardHistory } from "../actions";
 
 export function* watchClearBoardHistorySaga() {
-	const { boardId }: ClearBoardHistoryPayload = yield take(
-		clearBoardHistory.match,
-	);
+	const { boardId }: ActionCreatorPayload<typeof clearBoardHistory> =
+		yield take(clearBoardHistory.match);
 
 	yield put(
 		setBoardPart({

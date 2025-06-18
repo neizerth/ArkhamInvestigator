@@ -1,11 +1,10 @@
-import type { InvestigatorBoardValueProp as Key } from "@modules/board/base/shared/model";
+import type { ActionCreatorPayload } from "@shared/model";
 import { put, take } from "redux-saga/effects";
-import type { ChangeBoardValuePartPayload } from "../actions";
 import { changeBoardValuePart } from "../actions/changeBoardValuePart";
 import { setBoardValuePartInternal } from "../board";
 
-export function* watchChangeBoardValuePartSaga<K extends Key>() {
-	const action: ChangeBoardValuePartPayload<K> = yield take(
+export function* watchChangeBoardValuePartSaga() {
+	const action: ActionCreatorPayload<typeof changeBoardValuePart> = yield take(
 		changeBoardValuePart.match,
 	);
 
