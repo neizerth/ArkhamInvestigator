@@ -1,24 +1,24 @@
 import {
-	type CreateBoardPropValueSetterPayload,
-	setBoardActualPropValueInternal,
+	type ReduceBoardValuePropCommonPayload,
+	reduceBoardValuePropCommon,
 } from "@modules/board/base/shared/lib";
 import type { AppThunk, InvestigatorNumericStat as Key } from "@shared/model";
 import { selectBoardMaxValue, selectBoardMinValue } from "../../../selectors";
 
-export type SetBoardActualPropValuePayload<K extends Key> = Omit<
-	CreateBoardPropValueSetterPayload<K>,
-	"min" | "max"
+export type ReduceBoardPropValuePayload<K extends Key> = Omit<
+	ReduceBoardValuePropCommonPayload<K>,
+	"max" | "min"
 >;
 
-export const setBoardActualPropValue =
-	<K extends Key>(payload: SetBoardActualPropValuePayload<K>): AppThunk =>
+export const reduceBoardPropValue =
+	<K extends Key>(payload: ReduceBoardPropValuePayload<K>): AppThunk =>
 	(dispatch, getState) => {
 		const state = getState();
 		const min = selectBoardMinValue(payload)(state);
 		const max = selectBoardMaxValue(payload)(state);
 
 		dispatch(
-			setBoardActualPropValueInternal({
+			reduceBoardValuePropCommon({
 				...payload,
 				min,
 				max,

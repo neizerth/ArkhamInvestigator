@@ -10,7 +10,7 @@ export type DecreaseBoardValuePropPayload<K extends Key> = Omit<
 	"min"
 >;
 
-export const decreaseBoardActualPropValue =
+export const decreaseBoardPropValue =
 	<K extends Key>(payload: DecreaseBoardValuePropPayload<K>): AppThunk =>
 	(dispatch, getState) => {
 		const state = getState();

@@ -10,7 +10,7 @@ export type IncreaseBoardValuePropPayload<K extends Key> = Omit<
 	"max"
 >;
 
-export const increaseBoardActualPropValue =
+export const increaseBoardPropValue =
 	<K extends Key>(payload: IncreaseBoardValuePropPayload<K>): AppThunk =>
 	(dispatch, getState) => {
 		const state = getState();
