@@ -1,6 +1,6 @@
-import { decreaseBoardValuePropCommon } from "./decreaseBoardValuePropCommon";
-import { increaseBoardValuePropCommon } from "./increaseBoardValuePropCommon";
-import type { SetBoardPropValueCommonPayload } from "./setBoardPropValueCommon";
+import { decreaseBoardValueProp } from "./decreaseBoardValueProp";
+import { increaseBoardValueProp } from "./increaseBoardValueProp";
+import type { SetBoardPropValueCommonPayload } from "./setBoardPropValue";
 
 import type { InvestigatorNumericStat as Key } from "@shared/model";
 import type { AppThunk } from "@shared/model";
@@ -11,7 +11,7 @@ export type ReduceBoardValuePropCommonPayload<K extends Key> =
 		min: number;
 	};
 
-export const reduceBoardValuePropCommon =
+export const reduceBoardValueProp =
 	<K extends Key>(payload: ReduceBoardValuePropCommonPayload<K>): AppThunk =>
 	(dispatch) => {
 		const { value } = payload;
@@ -24,14 +24,14 @@ export const reduceBoardValuePropCommon =
 
 		if (value > 0) {
 			dispatch(
-				increaseBoardValuePropCommon({
+				increaseBoardValueProp({
 					...payload,
 					value: absValue,
 				}),
 			);
 		} else {
 			dispatch(
-				decreaseBoardValuePropCommon({
+				decreaseBoardValueProp({
 					...payload,
 					value: absValue,
 				}),

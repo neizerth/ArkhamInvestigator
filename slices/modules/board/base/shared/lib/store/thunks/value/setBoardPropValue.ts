@@ -10,4 +10,4 @@ export type SetBoardPropValueCommonPayload<K extends Key> = Omit<
 	"code"
 >;
 
-export const setBoardPropValueCommon = createBoardThunk(changeBoardPropValue);
+export const setBoardPropValue = createBoardThunk(changeBoardPropValue);
