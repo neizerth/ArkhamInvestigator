@@ -2,12 +2,12 @@ import type { InvestigatorNumericStat as Key } from "@shared/model";
 import type { AppThunk } from "@shared/model";
 import { selectBoardValueProp } from "../../selectors/props/selectBoardValueProp";
 import {
-	type SetBoardPropValuePayload,
-	setBoardPropValue,
-} from "./setBoardPropValue";
+	type SetBoardPropValueCommonPayload,
+	setBoardPropValueCommon,
+} from "./setBoardPropValueCommon";
 
 export type DecreaseBoardValuePropCommonPayload<K extends Key> =
-	SetBoardPropValuePayload<K> & {
+	SetBoardPropValueCommonPayload<K> & {
 		min: number;
 	};
 export const decreaseBoardValuePropCommon =
@@ -29,7 +29,7 @@ export const decreaseBoardValuePropCommon =
 		}
 
 		dispatch(
-			setBoardPropValue({
+			setBoardPropValueCommon({
 				...payload,
 				value,
 			}),
