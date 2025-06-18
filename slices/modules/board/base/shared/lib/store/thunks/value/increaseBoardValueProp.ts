@@ -1,18 +1,16 @@
 import { selectBoardValueProp } from "../../selectors/props/selectBoardValueProp";
 import {
 	type SetBoardPropValueCommonPayload,
-	setBoardPropValueCommon,
-} from "./setBoardPropValueCommon";
+	setBoardPropValue,
+} from "./setBoardPropValue";
 
 import type { InvestigatorNumericStat as Key } from "@shared/model";
 import type { AppThunk } from "@shared/model";
 
 export type IncreaseBoardValuePropCommonPayload<K extends Key> =
-	SetBoardPropValueCommonPayload<K> & {
-		max: number;
-	};
+	SetBoardPropValueCommonPayload<K>;
 
-export const increaseBoardValuePropCommon =
+export const increaseBoardValueProp =
 	<K extends Key>(payload: IncreaseBoardValuePropCommonPayload<K>): AppThunk =>
 	(dispatch, getState) => {
 		const state = getState();
@@ -22,16 +20,10 @@ export const increaseBoardValuePropCommon =
 			return;
 		}
 
-		const { max } = payload;
-
 		const value = currentValue + payload.value;
 
-		if (value > max) {
-			return;
-		}
-
 		dispatch(
-			setBoardPropValueCommon({
+			setBoardPropValue({
 				...payload,
 				value,
 			}),

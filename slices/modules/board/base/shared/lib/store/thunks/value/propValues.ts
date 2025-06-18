@@ -1,41 +1,50 @@
-import type { AppThunk, InvestigatorNumericStat as Key } from "@shared/model";
-import type { InvestigatorBoardValueProp } from "../../../../model/board";
-import {
-	type SetBoardPropValueCommonPayload,
-	setBoardPropValueCommon,
-} from "./setBoardPropValueCommon";
+import type { InvestigatorBoardValueProp } from "@modules/board/base/shared/model";
+import { createBoardValueThunkCreator } from "../../util";
+import { increaseBoardValueProp } from "./increaseBoardValueProp";
+import { reduceBoardValueProp } from "./reduceBoardValueProp";
+import { setBoardPropValue } from "./setBoardPropValue";
 
-export type CreateBoardPropValueSetterPayload<K extends Key> = Omit<
-	SetBoardPropValueCommonPayload<K>,
-	"type"
-> & {
-	min: number;
-	max: number;
-};
+const props: InvestigatorBoardValueProp[] = [
+	"value",
+	"baseValue",
+	"initialValue",
+];
 
-export const createBoardPropValueSetter =
-	(type: InvestigatorBoardValueProp) =>
-	<K extends Key>(payload: CreateBoardPropValueSetterPayload<K>): AppThunk =>
-	(dispatch) => {
-		const { value, max, min } = payload;
+const createSetValueThunk = createBoardValueThunkCreator(setBoardPropValue);
+const createIncreaseValueThunk = createBoardValueThunkCreator(
+	increaseBoardValueProp,
+);
+const createDecreaseValueThunk = createBoardValueThunkCreator(
+	increaseBoardValueProp,
+);
+const createReduceValueThunk =
+	createBoardValueThunkCreator(reduceBoardValueProp);
 
-		if (value > max || value < min) {
-			return;
-		}
+export const setValuePropThunks = props.map(createSetValueThunk);
+export const increaseValuePropThunks = props.map(createIncreaseValueThunk);
+export const decreaseValuePropThunks = props.map(createDecreaseValueThunk);
+export const reduceIncreaseValueThunks = props.map(createReduceValueThunk);
 
-		dispatch(
-			setBoardPropValueCommon({
-				...payload,
-				type,
-			}),
-		);
-	};
+export const [
+	setBoardActualPropValue,
+	setBoardBasePropValue,
+	setBoardInitialPropValue,
+] = setValuePropThunks;
 
-export const setBoardActualPropValueCommon =
-	createBoardPropValueSetter("value");
+export const [
+	increaseBoardActualPropValue,
+	increaseBoardBasePropValue,
+	increaseBoardInitialPropValue,
+] = increaseValuePropThunks;
 
-export const setBoardBasePropValueCommon =
-	createBoardPropValueSetter("baseValue");
+export const [
+	decreaseBoardActualPropValue,
+	decreaseBoardBasePropValue,
+	decreaseBoardInitialPropValue,
+] = decreaseValuePropThunks;
 
-export const setBoardInitialPropValueCommon =
-	createBoardPropValueSetter("initialValue");
+export const [
+	reduceBoardActualPropValue,
+	reduceBoardBasePropValue,
+	reduceBoardInitialPropValue,
+] = reduceIncreaseValueThunks;
