@@ -3,6 +3,7 @@ import type {
 	ActionCreator,
 	ActionCreatorWithPayload,
 	PayloadAction,
+	PayloadActionCreator,
 	ThunkAction,
 } from "@reduxjs/toolkit";
 import type { makeStore } from "../lib/store/makeStore";
@@ -36,3 +37,6 @@ export type StateReducer<S, P> = (
 	state: S,
 	action: PayloadAction<P>,
 ) => S | void;
+
+export type ActionCreatorPayload<ActionCreator> =
+	ActionCreator extends PayloadActionCreator<infer P> ? P : never;
