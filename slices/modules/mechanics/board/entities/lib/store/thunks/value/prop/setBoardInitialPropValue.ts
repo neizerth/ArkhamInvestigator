@@ -1,6 +1,6 @@
 import {
 	type CreateBoardPropValueSetterPayload,
-	setBoardInitialPropValueInternal,
+	setBoardInitialPropValueCommon,
 } from "@modules/board/base/shared/lib";
 import type { AppThunk, InvestigatorNumericStat as Key } from "@shared/model";
 
@@ -13,7 +13,7 @@ export const setBoardInitialPropValue =
 	<K extends Key>(payload: SetBoardInitialPropValuePayload<K>): AppThunk =>
 	(dispatch) => {
 		dispatch(
-			setBoardInitialPropValueInternal({
+			setBoardInitialPropValueCommon({
 				...payload,
 				min: 0,
 				max: Number.POSITIVE_INFINITY,
