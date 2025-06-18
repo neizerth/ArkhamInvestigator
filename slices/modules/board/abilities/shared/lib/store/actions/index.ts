@@ -1,3 +1,3 @@
 export * from "./use";
 export * from "./changeBoardAbilityValue";
-export * from "./resetBoardAbilityLimits";
+export * from "./resetBoardAbilitiesAction";

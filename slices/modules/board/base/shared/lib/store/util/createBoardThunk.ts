@@ -24,7 +24,7 @@ export const createBoardThunk =
 		}
 
 		const actionPayload = {
-			sourceBoardId: "current",
+			sourceBoardId: payload.boardId,
 			...payload,
 			code,
 		} as Payload;
