@@ -1,16 +1,19 @@
 import type { AppActionCreator, AppThunk } from "@shared/model";
-import type { PropsWithBoard } from "../../../model";
+import type { PropsWithBoard, PropsWithSourceBoard } from "../../../model";
 import { selectBoardCode } from "../selectors";
 
 type PropsWithCode = {
 	code: string;
 };
 
-type PayloadType = PropsWithCode & PropsWithBoard;
+type PayloadType = PropsWithCode & PropsWithBoard & PropsWithSourceBoard;
 
 export const createBoardThunk =
 	<Payload extends PayloadType>(actionCreator: AppActionCreator<Payload>) =>
-	(payload: Omit<Payload, "code">): AppThunk =>
+	(
+		payload: Omit<Payload, "code" | "sourceBoardId"> &
+			Partial<PropsWithSourceBoard>,
+	): AppThunk =>
 	(dispatch, getState) => {
 		const { boardId } = payload;
 		const state = getState();
@@ -21,6 +24,7 @@ export const createBoardThunk =
 		}
 
 		const actionPayload = {
+			sourceBoardId: "current",
 			...payload,
 			code,
 		} as Payload;
