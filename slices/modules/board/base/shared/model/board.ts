@@ -57,9 +57,14 @@ export type PropsWithBoard = {
 	boardId: BoardId;
 };
 
+export type PropsWithSourceBoard = {
+	sourceBoardId: BoardId;
+};
+
 export type BoardKey = keyof InvestigatorBoard;
 
-export type ChangeBoardEventPayload = PropsWithBoard & {
-	code: string;
-	history?: boolean;
-};
+export type ChangeBoardEventPayload = PropsWithBoard &
+	PropsWithSourceBoard & {
+		code: string;
+		history?: boolean;
+	};
