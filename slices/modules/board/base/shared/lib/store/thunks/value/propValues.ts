@@ -1,12 +1,12 @@
 import type { AppThunk, InvestigatorNumericStat as Key } from "@shared/model";
 import type { InvestigatorBoardValueProp } from "../../../../model/board";
 import {
-	type SetBoardPropValuePayload,
-	setBoardPropValue,
-} from "./setBoardPropValue";
+	type SetBoardPropValueCommonPayload,
+	setBoardPropValueCommon,
+} from "./setBoardPropValueCommon";
 
 export type CreateBoardPropValueSetterPayload<K extends Key> = Omit<
-	SetBoardPropValuePayload<K>,
+	SetBoardPropValueCommonPayload<K>,
 	"type"
 > & {
 	min: number;
@@ -24,7 +24,7 @@ export const createBoardPropValueSetter =
 		}
 
 		dispatch(
-			setBoardPropValue({
+			setBoardPropValueCommon({
 				...payload,
 				type,
 			}),

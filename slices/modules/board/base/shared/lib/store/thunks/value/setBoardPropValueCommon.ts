@@ -5,9 +5,9 @@ import {
 } from "../../actions";
 import { createBoardThunk } from "../../util";
 
-export type SetBoardPropValuePayload<K extends Key> = Omit<
+export type SetBoardPropValueCommonPayload<K extends Key> = Omit<
 	ChangeBoardPropValuePayload<K>,
 	"code"
 >;
 
-export const setBoardPropValue = createBoardThunk(changeBoardPropValue);
+export const setBoardPropValueCommon = createBoardThunk(changeBoardPropValue);
