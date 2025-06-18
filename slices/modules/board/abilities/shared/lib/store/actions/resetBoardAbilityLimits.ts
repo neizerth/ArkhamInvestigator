@@ -3,10 +3,10 @@ import type { ChangeBoardEventPayload } from "@modules/board/base/shared/model";
 import { createAction } from "@reduxjs/toolkit";
 import type { LimitType } from "arkham-investigator-data";
 
-export type SetUsedAbilitiesPayload = ChangeBoardEventPayload & {
+export type ResetBoardAbilitiesPayload = ChangeBoardEventPayload & {
 	limitTypes: LimitType[];
 };
 
-export const resetBoardAbilityLimits = createAction<SetUsedAbilitiesPayload>(
+export const resetBoardAbilityLimits = createAction<ResetBoardAbilitiesPayload>(
 	`${abilitiesPrefix}/resetLimits`,
 );
