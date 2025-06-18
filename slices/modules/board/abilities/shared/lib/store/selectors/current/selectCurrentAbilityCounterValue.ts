@@ -1,7 +1,7 @@
-import { selectBoardAbilityCounterValue } from "../selectBoardAbilityCounterValue";
+import { selectBoardAbilityValue } from "../selectBoardAbilityValue";
 
 export const selectCurrentAbilityCounterValue = (abilityId: string) =>
-	selectBoardAbilityCounterValue({
+	selectBoardAbilityValue({
 		abilityId,
 		boardId: "current",
 	});
