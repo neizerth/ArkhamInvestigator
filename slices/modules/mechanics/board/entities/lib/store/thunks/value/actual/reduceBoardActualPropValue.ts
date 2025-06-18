@@ -1,12 +1,12 @@
 import {
-	type ReduceBoardValuePropInternalPayload,
-	reduceBoardValuePropInternal,
+	type ReduceBoardValuePropCommonPayload,
+	reduceBoardValuePropCommon,
 } from "@modules/board/base/shared/lib";
 import type { AppThunk, InvestigatorNumericStat as Key } from "@shared/model";
 import { selectBoardMaxValue, selectBoardMinValue } from "../../../selectors";
 
 export type ReduceBoardActualPropValuePayload<K extends Key> = Omit<
-	ReduceBoardValuePropInternalPayload<K>,
+	ReduceBoardValuePropCommonPayload<K>,
 	"max" | "min"
 >;
 
@@ -18,7 +18,7 @@ export const reduceBoardActualPropValue =
 		const max = selectBoardMaxValue(payload)(state);
 
 		dispatch(
-			reduceBoardValuePropInternal({
+			reduceBoardValuePropCommon({
 				...payload,
 				min,
 				max,
