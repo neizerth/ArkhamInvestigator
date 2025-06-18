@@ -7,15 +7,13 @@ import {
 import type { InvestigatorNumericStat as Key } from "@shared/model";
 import type { AppThunk } from "@shared/model";
 
-export type IncreaseBoardValuePropInternalPayload<K extends Key> =
+export type IncreaseBoardValuePropCommonPayload<K extends Key> =
 	SetBoardPropValuePayload<K> & {
 		max: number;
 	};
 
-export const increaseBoardValuePropInternal =
-	<K extends Key>(
-		payload: IncreaseBoardValuePropInternalPayload<K>,
-	): AppThunk =>
+export const increaseBoardValuePropCommon =
+	<K extends Key>(payload: IncreaseBoardValuePropCommonPayload<K>): AppThunk =>
 	(dispatch, getState) => {
 		const state = getState();
 		const currentValue = selectBoardValueProp(payload)(state);

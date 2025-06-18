@@ -6,14 +6,12 @@ import {
 	setBoardPropValue,
 } from "./setBoardPropValue";
 
-export type DecreaseBoardValuePropInternalPayload<K extends Key> =
+export type DecreaseBoardValuePropCommonPayload<K extends Key> =
 	SetBoardPropValuePayload<K> & {
 		min: number;
 	};
-export const decreaseBoardValuePropInternal =
-	<K extends Key>(
-		payload: DecreaseBoardValuePropInternalPayload<K>,
-	): AppThunk =>
+export const decreaseBoardValuePropCommon =
+	<K extends Key>(payload: DecreaseBoardValuePropCommonPayload<K>): AppThunk =>
 	(dispatch, getState) => {
 		const state = getState();
 		const currentValue = selectBoardValueProp(payload)(state);
