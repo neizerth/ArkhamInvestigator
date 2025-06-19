@@ -13,10 +13,6 @@ import type {
 
 export type BoardId = number | "current";
 
-export type InvestigatorBoardStat =
-	| InvestigatorNumericStat
-	| "additionalAction";
-
 export type InvestigatorBoardValueProp = "value" | "baseValue" | "initialValue";
 
 export type InvestigatorBoardImage = Omit<
@@ -26,12 +22,7 @@ export type InvestigatorBoardImage = Omit<
 	id: string;
 };
 
-export type InvestigatorBoardValues = Record<
-	InvestigatorNumericStat,
-	number
-> & {
-	additionalAction: boolean;
-};
+export type InvestigatorBoardValues = Record<InvestigatorNumericStat, number>;
 
 export type InvestigatorBoard = {
 	id: number;

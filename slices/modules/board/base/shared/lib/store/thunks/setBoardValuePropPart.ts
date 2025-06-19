@@ -1,19 +1,15 @@
 import type {
 	InvestigatorBoardValues,
-	InvestigatorBoardStat as Key,
 	InvestigatorBoardValueProp as ValueProp,
 } from "@modules/board/base/shared/model";
-import type { AppThunk } from "@shared/model";
+import type { AppThunk, InvestigatorNumericStat } from "@shared/model";
 import { type SetBoardPartPayload, setBoardPart } from "./setBoardPart";
 
-export type SetBoardValuePropPartPayload<K extends Key> = Omit<
-	SetBoardPartPayload,
-	"data"
-> & {
-	prop: K;
-	value?: InvestigatorBoardValues[K];
-	baseValue?: InvestigatorBoardValues[K];
-	initialValue?: InvestigatorBoardValues[K];
+export type SetBoardValuePropPartPayload = Omit<SetBoardPartPayload, "data"> & {
+	prop: InvestigatorNumericStat;
+	value?: number;
+	baseValue?: number;
+	initialValue?: number;
 };
 
 type PartialValue = Record<ValueProp, Partial<InvestigatorBoardValues>>;
@@ -21,7 +17,7 @@ type PartialValue = Record<ValueProp, Partial<InvestigatorBoardValues>>;
 const boardProps: ValueProp[] = ["value", "baseValue", "initialValue"];
 
 export const setBoardValuePropPart =
-	<K extends Key>(payload: SetBoardValuePropPartPayload<K>): AppThunk =>
+	(payload: SetBoardValuePropPartPayload): AppThunk =>
 	(dispatch) => {
 		const data = boardProps.reduce((target, key) => {
 			if (key in payload) {

@@ -11,5 +11,8 @@ export type ChangeBoardPropPayload<K extends BoardKey> =
 		value: InvestigatorBoard[K];
 	};
 
-export const changeBoardProp = (<K extends BoardKey>() =>
-	createAction<ChangeBoardPropPayload<K>>("board/changeProp"))();
+const withPayload = <K extends BoardKey>(
+	payload: K extends BoardKey ? ChangeBoardPropPayload<K> : never,
+) => ({ payload });
+
+export const changeBoardProp = createAction("board/changeProp", withPayload);

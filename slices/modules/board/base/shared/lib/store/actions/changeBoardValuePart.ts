@@ -11,5 +11,11 @@ export type ChangeBoardValuePartPayload<K extends Key> =
 		value: Partial<InvestigatorBoardValues>;
 	};
 
-export const changeBoardValuePart = (<K extends Key>() =>
-	createAction<ChangeBoardValuePartPayload<K>>("board/changeValuePart"))();
+const withPayload = <K extends Key>(
+	payload: K extends Key ? ChangeBoardValuePartPayload<K> : never,
+) => ({ payload });
+
+export const changeBoardValuePart = createAction(
+	"board/changeValuePart",
+	withPayload,
+);
