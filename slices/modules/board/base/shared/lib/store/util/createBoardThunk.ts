@@ -1,4 +1,4 @@
-import type { AppActionCreator, AppThunk } from "@shared/model";
+import type { AppActionCreator, AppThunk, SafeOmit } from "@shared/model";
 import type { PropsWithBoard, PropsWithSourceBoard } from "../../../model";
 import { selectBoardCode } from "../selectors";
 
@@ -11,7 +11,7 @@ type PayloadType = PropsWithCode & PropsWithBoard & PropsWithSourceBoard;
 export const createBoardThunk =
 	<Payload extends PayloadType>(actionCreator: AppActionCreator<Payload>) =>
 	(
-		payload: Omit<Payload, "code" | "sourceBoardId"> &
+		payload: SafeOmit<Payload, "code" | "sourceBoardId"> &
 			Partial<PropsWithSourceBoard>,
 	): AppThunk =>
 	(dispatch, getState) => {

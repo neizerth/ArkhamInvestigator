@@ -18,3 +18,5 @@ export const PERMANENT_BOARD_ABILITY_TYPES: AbilityType[] = [
 ];
 
 export const TURN_ABILITY_LIMITS: LimitType[] = ["phase", "round", "turn"];
+
+export const additionalActionAbilityId = "additionalAction";

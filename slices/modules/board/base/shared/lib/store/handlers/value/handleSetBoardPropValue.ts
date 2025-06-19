@@ -1,22 +1,18 @@
-import type {
-	BoardDraft,
-	InvestigatorBoardStat,
-} from "@modules/board/base/shared/model";
+import type { BoardDraft } from "@modules/board/base/shared/model";
 import type { ChangeBoardPropValuePayload } from "../../actions";
 import { getBoardById } from "../../getters/find";
 
-export type HandleSetBoardPropValueOptions<K extends InvestigatorBoardStat> =
-	ChangeBoardPropValuePayload<K> & {
-		state: BoardDraft;
-	};
+export type HandleSetBoardPropValueOptions = ChangeBoardPropValuePayload & {
+	state: BoardDraft;
+};
 
-export const handleSetBoardPropValue = <K extends InvestigatorBoardStat>({
+export const handleSetBoardPropValue = ({
 	state,
 	boardId,
 	prop,
 	value,
 	type,
-}: HandleSetBoardPropValueOptions<K>) => {
+}: HandleSetBoardPropValueOptions) => {
 	const board = getBoardById({
 		state,
 		boardId,
