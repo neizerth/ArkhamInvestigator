@@ -1,3 +1,3 @@
 export * from "./createBoardThunk";
-export * from "./createCurrentBoardThunk";
+export * from "./createCurrentActionCreator";
 export * from "./createBoardValueThunkCreator";
