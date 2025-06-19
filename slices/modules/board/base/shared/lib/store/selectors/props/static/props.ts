@@ -12,3 +12,9 @@ export const selectBoardUsedAbilities = (boardId: BoardId) =>
 		boardId,
 		prop: "usedAbilities",
 	});
+
+export const selectBoardCheckHistory = (boardId: BoardId) =>
+	selectBoardProp({
+		boardId,
+		prop: "checkHistory",
+	});

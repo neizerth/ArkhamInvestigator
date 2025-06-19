@@ -141,4 +141,4 @@ export const {
 	selectSyncScenarioClues,
 } = board.selectors;
 
-export default board.reducer;
+export const boardReducer = board.reducer;
