@@ -1,14 +1,13 @@
-import type { AppActionCreator, AppThunk } from "@shared/model";
+import type { AppActionCreator } from "@shared/model";
 import type { PropsWithBoard } from "../../../model";
 
-export const createCurrentBoardThunk =
+export const createCurrentActionCreator =
 	<Payload extends PropsWithBoard>(actionCreator: AppActionCreator<Payload>) =>
-	(payload: Omit<Payload, "boardId">): AppThunk =>
-	(dispatch) => {
+	(payload: Omit<Payload, "boardId">) => {
 		const actionPayload = {
 			...payload,
 			boardId: "current",
 		} as Payload;
 
-		dispatch(actionCreator(actionPayload));
+		return actionCreator(actionPayload);
 	};

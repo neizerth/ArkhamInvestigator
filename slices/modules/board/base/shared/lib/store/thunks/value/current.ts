@@ -1,4 +1,4 @@
-import { createCurrentBoardThunk } from "../../util";
+import { createCurrentActionCreator } from "../../util";
 import {
 	decreaseValuePropThunks,
 	increaseValuePropThunks,
@@ -10,22 +10,22 @@ export const [
 	setCurrentActualPropValue,
 	setCurrentBasePropValue,
 	setCurrentInitialPropValue,
-] = setValuePropThunks.map(createCurrentBoardThunk);
+] = setValuePropThunks.map(createCurrentActionCreator);
 
 export const [
 	increaseCurrentActualPropValue,
 	increaseCurrentBasePropValue,
 	increaseCurrentInitialPropValue,
-] = increaseValuePropThunks.map(createCurrentBoardThunk);
+] = increaseValuePropThunks.map(createCurrentActionCreator);
 
 export const [
 	decreaseCurrentActualPropValue,
 	decreaseCurrentBasePropValue,
 	decreaseCurrentInitialPropValue,
-] = decreaseValuePropThunks.map(createCurrentBoardThunk);
+] = decreaseValuePropThunks.map(createCurrentActionCreator);
 
 export const [
 	reduceCurrentActualPropValue,
 	reduceCurrentBasePropValue,
 	reduceCurrentInitialPropValue,
-] = reduceIncreaseValueThunks.map(createCurrentBoardThunk);
+] = reduceIncreaseValueThunks.map(createCurrentActionCreator);

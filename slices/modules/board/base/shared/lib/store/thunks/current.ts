@@ -1,12 +1,13 @@
-import { createCurrentBoardThunk } from "../util";
+import { createCurrentActionCreator } from "../util";
 import { setBoardPart } from "./setBoardPart";
 import { setBoardProp } from "./setBoardProp";
 import { setBoardValuePart } from "./setBoardValuePart";
 import { setBoardValuePropPart } from "./setBoardValuePropPart";
 
-export const setCurrentPart = createCurrentBoardThunk(setBoardPart);
-export const setCurrentProp = createCurrentBoardThunk(setBoardProp);
-export const setCurrentValuePart = createCurrentBoardThunk(setBoardValuePart);
-export const setCurrentValuePropPart = createCurrentBoardThunk(
+export const setCurrentPart = createCurrentActionCreator(setBoardPart);
+export const setCurrentProp = createCurrentActionCreator(setBoardProp);
+export const setCurrentValuePart =
+	createCurrentActionCreator(setBoardValuePart);
+export const setCurrentValuePropPart = createCurrentActionCreator(
 	setBoardValuePropPart,
 );
