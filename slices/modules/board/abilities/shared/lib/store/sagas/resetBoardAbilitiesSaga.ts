@@ -1,10 +1,12 @@
-import { selectBoardUsedAbilities } from "@modules/board/base/shared/lib";
+import {
+	selectBoardUsedAbilities,
+	setBoardUsedAbilities,
+} from "@modules/board/base/shared/lib";
 import { propIncludes } from "@shared/lib";
 import type { ActionCreatorPayload } from "@shared/model";
 import { prop, reject } from "ramda";
 import { put, select, take } from "redux-saga/effects";
 import { getAbilityLimits } from "../../info";
-import { setBoardUsedAbilities } from "../actionCreators";
 import { resetBoardAbilitiesAction } from "../actions";
 import { selectBoardAbilities } from "../selectors";
 
@@ -44,12 +46,12 @@ export function* resetBoardAbilitiesSaga() {
 		})
 		.map(prop("id"));
 
-	const data = reject(propIncludes("id", ids), usedAbilities);
+	const value = reject(propIncludes("id", ids), usedAbilities);
 
 	yield put(
 		setBoardUsedAbilities({
 			...payload,
-			data,
+			value,
 		}),
 	);
 }

@@ -1,4 +1,8 @@
-import type { BoardId, BoardKey } from "@modules/board/base/shared/model";
+import type {
+	BoardId,
+	BoardKey,
+	InvestigatorBoard,
+} from "@modules/board/base/shared/model";
 import { createSelector } from "@reduxjs/toolkit";
 import { selectBoardById } from "../find/selectBoardById";
 
@@ -11,10 +15,13 @@ export const selectBoardProp = <T extends BoardKey>({
 	boardId,
 	prop,
 }: SelectBoardPropOptions<T>) =>
-	createSelector([selectBoardById(boardId)], (board) => {
-		if (!board) {
-			return;
-		}
+	createSelector(
+		[selectBoardById(boardId)],
+		(board): InvestigatorBoard[T] | undefined => {
+			if (!board) {
+				return;
+			}
 
-		return board[prop];
-	});
+			return board[prop];
+		},
+	);

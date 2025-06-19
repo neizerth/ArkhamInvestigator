@@ -1,11 +1,11 @@
 import {
 	selectBoardId,
 	selectBoardUsedAbilities,
+	setBoardUsedAbilities,
 } from "@modules/board/base/shared/lib";
 import type { ActionCreatorPayload } from "@shared/model";
 import { put, select, take } from "redux-saga/effects";
 import { UsedAbilitiesService } from "../../../services";
-import { setBoardUsedAbilities } from "../../actionCreators";
 import { resetBoardAbilityUseAction } from "../../actions";
 import { selectBoardAbilityById } from "../../selectors";
 
@@ -26,7 +26,7 @@ export function* setBoardAbilityUseSaga() {
 		return;
 	}
 
-	const data = UsedAbilitiesService.setAbilityUsed({
+	const value = UsedAbilitiesService.setAbilityUsed({
 		boardId,
 		usedAbilities,
 		ability,
@@ -35,7 +35,7 @@ export function* setBoardAbilityUseSaga() {
 	yield put(
 		setBoardUsedAbilities({
 			...payload,
-			data,
+			value,
 		}),
 	);
 }
