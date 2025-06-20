@@ -1,4 +1,8 @@
-import { selectBoardById, setBoardProp } from "@modules/board/base/shared/lib";
+import {
+	createCurrentActionCreator,
+	selectBoardById,
+	setBoardProp,
+} from "@modules/board/base/shared/lib";
 import type { PropsWithBoard } from "@modules/board/base/shared/model";
 import type { AppThunk } from "@shared/model";
 
@@ -38,3 +42,7 @@ export const setSkillCheckHistoryItemTitle =
 			}),
 		);
 	};
+
+export const setCurrentSkillCheckHistoryItemTitle = createCurrentActionCreator(
+	setSkillCheckHistoryItemTitle,
+);

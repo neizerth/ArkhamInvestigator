@@ -4,7 +4,7 @@ import { watchChangeBoardPropSaga } from "./changeBoardPropSaga";
 import { watchChangeBoardPropValueSaga } from "./changeBoardPropValueSaga";
 import { watchChangeBoardValuePartSaga } from "./changeBoardValuePartSaga";
 
-export function* boardSaga() {
+export function* boardSharedSaga() {
 	yield spawn(watchChangeBoardPropSaga);
 	yield spawn(watchChangeBoardValuePartSaga);
 	yield spawn(watchChangeBoardPropValueSaga);
