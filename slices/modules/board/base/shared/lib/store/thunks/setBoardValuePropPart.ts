@@ -1,12 +1,13 @@
 import type {
+	ChangeBoardEventPayload,
 	InvestigatorBoardValues,
 	InvestigatorBoardValueProp as ValueProp,
 } from "@modules/board/base/shared/model";
 import type { AppThunk, InvestigatorNumericStat } from "@shared/model";
-import { createCurrentActionCreator } from "../util";
-import { type SetBoardPartPayload, setBoardPart } from "./setBoardPart";
+import { createBoardThunk, createCurrentActionCreator } from "../util";
+import { setBoardPart } from "./setBoardPart";
 
-export type SetBoardValuePropPartPayload = Omit<SetBoardPartPayload, "data"> & {
+export type SetBoardValuePropPartPayload = ChangeBoardEventPayload & {
 	prop: InvestigatorNumericStat;
 	value?: number;
 	baseValue?: number;
@@ -17,7 +18,7 @@ type PartialValue = Record<ValueProp, Partial<InvestigatorBoardValues>>;
 
 const boardProps: ValueProp[] = ["value", "baseValue", "initialValue"];
 
-export const setBoardValuePropPart =
+export const setBoardValuePropPartInternal =
 	(payload: SetBoardValuePropPartPayload): AppThunk =>
 	(dispatch) => {
 		const data = boardProps.reduce((target, key) => {
@@ -36,6 +37,10 @@ export const setBoardValuePropPart =
 			}),
 		);
 	};
+
+export const setBoardValuePropPart = createBoardThunk(
+	setBoardValuePropPartInternal,
+);
 
 export const setCurrentValuePropPart = createCurrentActionCreator(
 	setBoardValuePropPart,

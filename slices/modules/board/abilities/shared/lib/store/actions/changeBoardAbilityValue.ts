@@ -12,3 +12,12 @@ export const changeBoardAbilityValue =
 	createAction<ChangeBoardAbilityValuePayload>(
 		`${abilitiesPrefix}/changeValue`,
 	);
+
+export type BoardAbilityValueChangedPayload = ChangeBoardAbilityValuePayload & {
+	prevValue: number;
+};
+
+export const boardAbilityValueChanged =
+	createAction<BoardAbilityValueChangedPayload>(
+		`${abilitiesPrefix}/valueChanged`,
+	);
