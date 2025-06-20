@@ -40,6 +40,7 @@ export const {
 	sendNumberSignal,
 	sendOperatorSignal,
 	sendStatSignal,
+	sendResultSignal,
 	setHistoryShown,
 	setShowCalculationDiff,
 	setSkillCheckDifficulty,

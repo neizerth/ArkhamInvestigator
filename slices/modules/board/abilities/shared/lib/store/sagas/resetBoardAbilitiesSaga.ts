@@ -1,6 +1,6 @@
 import {
+	changeBoardProp,
 	selectBoardUsedAbilities,
-	setBoardUsedAbilities,
 } from "@modules/board/base/shared/lib";
 import { propIncludes } from "@shared/lib";
 import type { ActionCreatorPayload } from "@shared/model";
@@ -49,8 +49,9 @@ export function* resetBoardAbilitiesSaga() {
 	const value = reject(propIncludes("id", ids), usedAbilities);
 
 	yield put(
-		setBoardUsedAbilities({
+		changeBoardProp({
 			...payload,
+			prop: "usedAbilities",
 			value,
 		}),
 	);

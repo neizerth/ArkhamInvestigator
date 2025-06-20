@@ -1,9 +1,8 @@
 import {
+	changeBoardProp,
 	selectBoardAbilityValues,
-	setBoardAbilityValues,
 } from "@modules/board/base/shared/lib";
 import type { ActionCreatorPayload } from "@shared/model";
-import { omit } from "ramda";
 import { put, select, take } from "redux-saga/effects";
 import { changeBoardAbilityValue } from "../actions";
 import { selectBoardAbilityById } from "../selectors";
@@ -36,11 +35,10 @@ export function* changeBoardAbilityValueSaga() {
 		[abilityId]: payload.value,
 	};
 
-	const boardPayload = omit(["value"], payload);
-
 	yield put(
-		setBoardAbilityValues({
-			...boardPayload,
+		changeBoardProp({
+			...payload,
+			prop: "abilityValues",
 			value,
 		}),
 	);
