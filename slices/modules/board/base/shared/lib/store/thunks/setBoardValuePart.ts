@@ -3,7 +3,7 @@ import {
 	type ChangeBoardValuePartPayload,
 	changeBoardValuePart,
 } from "../actions";
-import { createBoardThunk } from "../util";
+import { createBoardThunk, createCurrentActionCreator } from "../util";
 
 export type SetBoardValuePartPayload<K extends Key> = Omit<
 	ChangeBoardValuePartPayload<K>,
@@ -11,3 +11,5 @@ export type SetBoardValuePartPayload<K extends Key> = Omit<
 >;
 
 export const setBoardValuePart = createBoardThunk(changeBoardValuePart);
+export const setCurrentValuePart =
+	createCurrentActionCreator(setBoardValuePart);

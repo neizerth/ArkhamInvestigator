@@ -3,6 +3,7 @@ import type {
 	InvestigatorBoardValueProp as ValueProp,
 } from "@modules/board/base/shared/model";
 import type { AppThunk, InvestigatorNumericStat } from "@shared/model";
+import { createCurrentActionCreator } from "../util";
 import { type SetBoardPartPayload, setBoardPart } from "./setBoardPart";
 
 export type SetBoardValuePropPartPayload = Omit<SetBoardPartPayload, "data"> & {
@@ -35,3 +36,7 @@ export const setBoardValuePropPart =
 			}),
 		);
 	};
+
+export const setCurrentValuePropPart = createCurrentActionCreator(
+	setBoardValuePropPart,
+);
