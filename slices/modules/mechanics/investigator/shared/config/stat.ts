@@ -1,0 +1,4 @@
+export const START_GAME_RESOURCES_COUNT = 5;
+export const NEW_TURN_ACTIONS_COUNT = 3;
+export const DEFAULT_HAND_SIZE = 8;
+export const DEFAULT_UPKEEP_RESOURCES_INCREASE = 1;

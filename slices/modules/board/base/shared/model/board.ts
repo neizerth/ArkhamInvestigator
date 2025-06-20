@@ -44,6 +44,12 @@ export type InvestigatorBoard = {
 	showPinnedSkillChecks?: boolean;
 };
 
+export type InvesigatorBoardPartial = Omit<
+	Partial<InvestigatorBoard>,
+	InvestigatorBoardValueProp
+> &
+	Partial<Record<InvestigatorBoardValueProp, Partial<InvestigatorBoardValues>>>;
+
 export type PropsWithBoard = {
 	boardId: BoardId;
 };
