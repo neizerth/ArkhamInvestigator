@@ -3,7 +3,7 @@ import type { PropsWithBoard } from "@modules/board/base/shared/model";
 import {
 	boardValuesLimit,
 	maxRegularValue,
-} from "@modules/mechanics/board/shared/config";
+} from "@modules/mechanics/board/base/shared/config";
 import { createSelector } from "@reduxjs/toolkit";
 import type { InvestigatorNumericStat } from "@shared/model";
 
