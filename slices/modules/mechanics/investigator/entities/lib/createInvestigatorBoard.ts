@@ -5,8 +5,8 @@ import {
 	DEFAULT_HAND_SIZE,
 	NEW_TURN_ACTIONS_COUNT,
 	START_GAME_RESOURCES_COUNT,
-} from "../config";
-import { investigatorBoardModifications } from "../config/board-modification";
+} from "../../shared/config";
+import { investigatorBoardModifications } from "../../shared/config/board-modification";
 import { getSignatureStats } from "./getSignatureStats";
 
 type Options = {
