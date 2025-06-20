@@ -42,8 +42,6 @@ export const setScenarioClues =
 			return;
 		}
 
-		// const investigatorClues = selectCurrentStatValue("clues")(state);
-
 		const updatedClues = Math.max(investigatorClues - diff, 0);
 
 		const spendCluesValue = investigatorClues - updatedClues;
@@ -54,14 +52,6 @@ export const setScenarioClues =
 				value: spendCluesValue,
 			}),
 		);
-
-		// dispatch(
-		// 	setBoardActualPropValue({
-		// 		boardId,
-		// 		prop: "clues",
-		// 		value: updatedClues,
-		// 	}),
-		// );
 	};
 
 export const setCurrentScenarioClues =
