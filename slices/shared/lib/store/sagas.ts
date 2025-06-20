@@ -1,10 +1,12 @@
 import { abilitiesSaga } from "@modules/board/abilities/shared/lib";
 import { boardSaga } from "@modules/board/base/shared/lib";
 import { boardHistorySaga } from "@modules/board/history/shared/lib";
+import { skillCheckSaga } from "@modules/board/skill-check/shared/lib";
 import { spawn } from "redux-saga/effects";
 
 export default function* rootSaga() {
 	yield spawn(boardSaga);
 	yield spawn(boardHistorySaga);
 	yield spawn(abilitiesSaga);
+	yield spawn(skillCheckSaga);
 }
