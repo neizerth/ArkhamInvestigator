@@ -1,7 +1,7 @@
 import { whereId } from "@shared/lib";
 import type { InvestigatorAbility } from "arkham-investigator-data";
 import { equals, isNotNil, reject } from "ramda";
-import type { InvestigatorBoardUsedAbility } from "../../model";
+import type { InvestigatorBoardUsedAbility } from "../model";
 
 type UseOptions = {
 	boardId: number;

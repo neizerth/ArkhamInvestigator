@@ -4,7 +4,7 @@ import {
 } from "@modules/board/base/shared/lib";
 import type { ActionCreatorPayload } from "@shared/model";
 import { put, select, take } from "redux-saga/effects";
-import { changeBoardAbilityValue } from "../actions";
+import { boardAbilityValueChanged, changeBoardAbilityValue } from "../actions";
 import { selectBoardAbilityById } from "../selectors";
 
 export function* changeBoardAbilityValueSaga() {
@@ -40,6 +40,16 @@ export function* changeBoardAbilityValueSaga() {
 			...payload,
 			prop: "abilityValues",
 			value,
+		}),
+	);
+
+	const prevValue = abilityValues[abilityId];
+
+	yield put(
+		boardAbilityValueChanged({
+			...payload,
+			value: payload.value,
+			prevValue,
 		}),
 	);
 }
