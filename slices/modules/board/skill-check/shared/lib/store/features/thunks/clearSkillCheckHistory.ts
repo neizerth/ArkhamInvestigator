@@ -3,7 +3,7 @@ import { propEq, reject } from "ramda";
 
 import { selectBoardById, setBoardProp } from "@modules/board/base/shared/lib";
 import type { BoardId } from "@modules/board/base/shared/model";
-import { selectSkillCheckType, sendCommandSignal } from "../../skillCheck";
+import { selectSkillCheckType, sendCommandSignal } from "../skillCheck";
 
 export const clearSkillCheckHistory =
 	(boardId: BoardId): AppThunk =>
