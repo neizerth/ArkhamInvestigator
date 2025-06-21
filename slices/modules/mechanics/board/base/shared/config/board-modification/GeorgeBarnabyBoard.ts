@@ -1,5 +1,5 @@
-import { InvesigatorCode } from "..";
-import type { InvestigatorBoardModification } from "../../model";
+import { InvesigatorCode } from "@modules/mechanics/investigator/shared/config";
+import type { InvestigatorBoardModification } from "@modules/mechanics/investigator/shared/model";
 
 export const GeorgeBarnabyBoard: InvestigatorBoardModification = {
 	[InvesigatorCode.GeorgeBarnaby]: {

@@ -1,5 +1,4 @@
-import type { InvestigatorBoardModification } from "../../model";
-
+import type { InvestigatorBoardModification } from "@modules/mechanics/investigator/shared/model";
 import { GeorgeBarnabyBoard } from "./GeorgeBarnabyBoard";
 import { IsabelleBarnesBoard } from "./IsabelleBarnesBoard";
 import { JennyBarnesBoard } from "./JennyBarnesBoard";

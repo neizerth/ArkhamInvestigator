@@ -6,7 +6,7 @@ import {
 	NEW_TURN_ACTIONS_COUNT,
 	START_GAME_RESOURCES_COUNT,
 	investigatorBoardModifications,
-} from "../../../../investigator/shared/config";
+} from "../../shared/config";
 import { getSignatureStats } from "./getSignatureStats";
 
 type Options = {
