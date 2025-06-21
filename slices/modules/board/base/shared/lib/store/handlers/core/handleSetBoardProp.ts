@@ -1,9 +1,9 @@
 import type { BoardDraft, BoardKey } from "@modules/board/base/shared/model";
-import type { ChangeBoardPropPayload } from "../../actions";
+import type { SetBoardPropPayload } from "../../actions";
 import { getBoardById } from "../../getters/find";
 
 export type HandleSetBoardPropOptions<K extends BoardKey> =
-	ChangeBoardPropPayload<K> & {
+	SetBoardPropPayload<K> & {
 		state: BoardDraft;
 	};
 

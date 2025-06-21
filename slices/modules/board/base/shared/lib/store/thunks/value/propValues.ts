@@ -1,8 +1,8 @@
 import type { InvestigatorBoardValueProp } from "@modules/board/base/shared/model";
+import { setBoardPropValue } from "../../actions";
 import { createBoardValueThunkCreator } from "../../util";
 import { increaseBoardValueProp } from "./increaseBoardValueProp";
 import { reduceBoardValueProp } from "./reduceBoardValueProp";
-import { setBoardPropValue } from "./setBoardPropValue";
 
 const props: InvestigatorBoardValueProp[] = [
 	"value",

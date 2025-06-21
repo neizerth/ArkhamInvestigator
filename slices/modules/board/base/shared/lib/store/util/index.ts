@@ -1,3 +1,2 @@
-export * from "./createBoardThunk";
-export * from "./createCurrentActionCreator";
+export * from "./withCurrentPayload";
 export * from "./createBoardValueThunkCreator";

@@ -2,9 +2,9 @@ import { selectBoardById, setBoardPart } from "@modules/board/base/shared/lib";
 import type { ActionCreatorPayload } from "@shared/model";
 import { put, select, take } from "redux-saga/effects";
 import { v4 } from "uuid";
-import { addBoardHistoryItem } from "../actions";
+import { addBoardHistoryItem, boardHistoryItemAdded } from "../actions";
 
-export function* watchAddBoardHistoryItemSaga() {
+export function* addBoardHistoryItemSaga() {
 	const payload: ActionCreatorPayload<typeof addBoardHistoryItem> = yield take(
 		addBoardHistoryItem.match,
 	);
@@ -20,7 +20,7 @@ export function* watchAddBoardHistoryItemSaga() {
 		id: v4(),
 		...data,
 	};
-	const { history, historyIndex } = board;
+	const { history, historyIndex, investigator } = board;
 
 	yield put(
 		setBoardPart({
@@ -29,6 +29,17 @@ export function* watchAddBoardHistoryItemSaga() {
 				history: [...history, item],
 				historyIndex: historyIndex + 1,
 			},
+		}),
+	);
+
+	const { code } = investigator;
+
+	yield put(
+		boardHistoryItemAdded({
+			boardId,
+			code,
+			item,
+			board,
 		}),
 	);
 }

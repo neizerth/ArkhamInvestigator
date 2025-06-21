@@ -1,17 +1,16 @@
+import type { SetBoardPropValuePayload } from "../../actions";
 import { decreaseBoardValueProp } from "./decreaseBoardValueProp";
 import { increaseBoardValueProp } from "./increaseBoardValueProp";
-import type { SetBoardPropValueCommonPayload } from "./setBoardPropValue";
 
 import type { AppThunk } from "@shared/model";
 
-export type ReduceBoardValuePropCommonPayload =
-	SetBoardPropValueCommonPayload & {
-		max: number;
-		min: number;
-	};
+export type ReduceBoardValuePropPayload = SetBoardPropValuePayload & {
+	max: number;
+	min: number;
+};
 
 export const reduceBoardValueProp =
-	(payload: ReduceBoardValuePropCommonPayload): AppThunk =>
+	(payload: ReduceBoardValuePropPayload): AppThunk =>
 	(dispatch) => {
 		const { value } = payload;
 

@@ -3,10 +3,10 @@ import type {
 	InvestigatorBoard,
 } from "@modules/board/base/shared/model";
 import { mergeDeepRight } from "ramda";
-import type { ChangeBoardPartPayload } from "../../actions";
+import type { SetBoardPartPayload } from "../../actions";
 import { getBoardIndex } from "../../getters/props/getBoardIndex";
 
-export type HandleSetBoardPartOptions = ChangeBoardPartPayload & {
+export type HandleSetBoardPartOptions = SetBoardPartPayload & {
 	state: BoardDraft;
 };
 

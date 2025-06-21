@@ -1,6 +1,6 @@
 import {
-	changeBoardProp,
 	selectBoardAbilityValues,
+	setBoardProp,
 } from "@modules/board/base/shared/lib";
 import type { ActionCreatorPayload } from "@shared/model";
 import { put, select, take } from "redux-saga/effects";
@@ -36,7 +36,7 @@ export function* changeBoardAbilityValueSaga() {
 	};
 
 	yield put(
-		changeBoardProp({
+		setBoardProp({
 			...payload,
 			prop: "abilityValues",
 			value,

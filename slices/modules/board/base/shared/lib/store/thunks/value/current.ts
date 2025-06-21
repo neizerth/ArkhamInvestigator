@@ -1,4 +1,4 @@
-import { createCurrentActionCreator } from "../../util";
+import { withCurrentPayload } from "../../util";
 import {
 	decreaseValuePropThunks,
 	increaseValuePropThunks,
@@ -10,22 +10,22 @@ export const [
 	setCurrentActualPropValue,
 	setCurrentBasePropValue,
 	setCurrentInitialPropValue,
-] = setValuePropThunks.map(createCurrentActionCreator);
+] = setValuePropThunks.map(withCurrentPayload);
 
 export const [
 	increaseCurrentActualPropValue,
 	increaseCurrentBasePropValue,
 	increaseCurrentInitialPropValue,
-] = increaseValuePropThunks.map(createCurrentActionCreator);
+] = increaseValuePropThunks.map(withCurrentPayload);
 
 export const [
 	decreaseCurrentActualPropValue,
 	decreaseCurrentBasePropValue,
 	decreaseCurrentInitialPropValue,
-] = decreaseValuePropThunks.map(createCurrentActionCreator);
+] = decreaseValuePropThunks.map(withCurrentPayload);
 
 export const [
 	reduceCurrentActualPropValue,
 	reduceCurrentBasePropValue,
 	reduceCurrentInitialPropValue,
-] = reduceIncreaseValueThunks.map(createCurrentActionCreator);
+] = reduceIncreaseValueThunks.map(withCurrentPayload);

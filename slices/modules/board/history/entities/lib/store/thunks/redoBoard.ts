@@ -1,8 +1,8 @@
-import type { PropsWithBoard } from "@modules/board/base/shared/model";
+import type { PropsWithBoardId } from "@modules/board/base/shared/model";
 import type { AppThunk } from "@shared/model";
 import { setBoardFromHistoryDelta } from "./setBoardFromHistoryDelta";
 
-type UndoBoardOptions = PropsWithBoard;
+type UndoBoardOptions = PropsWithBoardId;
 
 export const redoBoard =
 	(options: UndoBoardOptions): AppThunk =>
