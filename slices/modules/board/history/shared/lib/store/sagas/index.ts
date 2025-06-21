@@ -1,14 +1,14 @@
 import { spawn } from "redux-saga/effects";
 import { boardHistoryWatchChangeSaga } from "./change";
-import { boardHistoryCurrentSaga } from "./current";
 
-import { watchAddBoardHistoryItemSaga } from "./addBoardHistoryItemSaga";
-import { watchClearBoardHistorySaga } from "./clearBoardHistorySaga";
+import { addBoardHistoryItemSaga } from "./addBoardHistoryItemSaga";
+import { clearBoardHistorySaga } from "./clearBoardHistorySaga";
+import { replaceBoardHistoryItemSaga } from "./replaceBoardHistoryItemSaga";
 
 export function* boardHistorySaga() {
 	yield spawn(boardHistoryWatchChangeSaga);
-	yield spawn(boardHistoryCurrentSaga);
 
-	yield spawn(watchAddBoardHistoryItemSaga);
-	yield spawn(watchClearBoardHistorySaga);
+	yield spawn(addBoardHistoryItemSaga);
+	yield spawn(replaceBoardHistoryItemSaga);
+	yield spawn(clearBoardHistorySaga);
 }

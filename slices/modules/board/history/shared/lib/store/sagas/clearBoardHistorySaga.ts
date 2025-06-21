@@ -3,7 +3,7 @@ import type { ActionCreatorPayload } from "@shared/model";
 import { put, take } from "redux-saga/effects";
 import { clearBoardHistory } from "../actions";
 
-export function* watchClearBoardHistorySaga() {
+export function* clearBoardHistorySaga() {
 	const { boardId }: ActionCreatorPayload<typeof clearBoardHistory> =
 		yield take(clearBoardHistory.match);
 

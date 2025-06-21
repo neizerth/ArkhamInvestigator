@@ -50,8 +50,12 @@ export type InvesigatorBoardPartial = Omit<
 > &
 	Partial<Record<InvestigatorBoardValueProp, Partial<InvestigatorBoardValues>>>;
 
-export type PropsWithBoard = {
+export type PropsWithBoardId = {
 	boardId: BoardId;
+};
+
+export type PropsWithBoard = {
+	board: InvestigatorBoard;
 };
 
 export type PropsWithSourceBoard = {
@@ -60,8 +64,7 @@ export type PropsWithSourceBoard = {
 
 export type BoardKey = keyof InvestigatorBoard;
 
-export type ChangeBoardEventPayload = PropsWithBoard &
-	PropsWithSourceBoard & {
-		code: string;
+export type ChangeBoardEventPayload = PropsWithBoardId &
+	Partial<PropsWithSourceBoard> & {
 		history?: boolean;
 	};

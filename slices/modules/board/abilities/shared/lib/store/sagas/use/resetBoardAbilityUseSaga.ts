@@ -1,7 +1,7 @@
 import {
-	changeBoardProp,
 	selectBoardId,
 	selectBoardUsedAbilities,
+	setBoardProp,
 } from "@modules/board/base/shared/lib";
 import type { ActionCreatorPayload } from "@shared/model";
 import { put, select, take } from "redux-saga/effects";
@@ -33,7 +33,7 @@ export function* resetBoardAbilityUseSaga() {
 	});
 
 	yield put(
-		changeBoardProp({
+		setBoardProp({
 			...payload,
 			prop: "usedAbilities",
 			value,

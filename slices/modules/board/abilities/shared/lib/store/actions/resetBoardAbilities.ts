@@ -7,5 +7,6 @@ export type ResetBoardAbilitiesPayload = ChangeBoardEventPayload & {
 	limitTypes?: LimitType[];
 };
 
-export const resetBoardAbilitiesAction =
-	createAction<ResetBoardAbilitiesPayload>(`${abilitiesPrefix}/resetLimits`);
+export const resetBoardAbilities = createAction<ResetBoardAbilitiesPayload>(
+	`${abilitiesPrefix}/resetLimits`,
+);

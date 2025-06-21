@@ -3,11 +3,11 @@ import type {
 	InvestigatorBoardValueProp as Key,
 } from "@modules/board/base/shared/model";
 import { mergeDeepRight } from "ramda";
-import type { ChangeBoardValuePartPayload } from "../../actions";
+import type { SetBoardValuePartPayload } from "../../actions";
 import { getBoardById } from "../../getters/find";
 
 export type HandleSetBoardValueOptions<K extends Key> =
-	ChangeBoardValuePartPayload<K> & {
+	SetBoardValuePartPayload<K> & {
 		state: BoardDraft;
 	};
 

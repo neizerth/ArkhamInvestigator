@@ -1,12 +1,12 @@
 import { spawn } from "redux-saga/effects";
-import { changeBoardPartSaga } from "./changeBoardPartSaga";
-import { changeBoardPropSaga } from "./changeBoardPropSaga";
-import { changeBoardPropValueSaga } from "./changeBoardPropValueSaga";
-import { changeBoardValuePartSaga } from "./changeBoardValuePartSaga";
+import { setBoardPartSaga } from "./setBoardPartSaga";
+import { setBoardPropSaga } from "./setBoardPropSaga";
+import { setBoardPropValueSaga } from "./setBoardPropValueSaga";
+import { setBoardValuePartSaga } from "./setBoardValuePartSaga";
 
 export function* boardSharedSaga() {
-	yield spawn(changeBoardPropSaga);
-	yield spawn(changeBoardValuePartSaga);
-	yield spawn(changeBoardPropValueSaga);
-	yield spawn(changeBoardPartSaga);
+	yield spawn(setBoardPropSaga);
+	yield spawn(setBoardValuePartSaga);
+	yield spawn(setBoardPropValueSaga);
+	yield spawn(setBoardPartSaga);
 }

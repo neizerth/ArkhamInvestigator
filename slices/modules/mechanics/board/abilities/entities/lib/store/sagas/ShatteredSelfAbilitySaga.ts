@@ -1,44 +1,37 @@
-import {
-	boardPropValueChanged,
-	selectBoardById,
-	setBoardValuePart,
-} from "@modules/board/base/shared/lib";
+import { setBoardValuePart } from "@modules/board/base/shared/lib";
+import { boardHistoryItemAdded } from "@modules/board/history/shared/lib/store/actions";
 import { InvesigatorCode } from "@modules/mechanics/investigator/shared/config";
 import type { ActionCreatorPayload } from "@shared/model";
-import { put, select, take } from "redux-saga/effects";
+import { put, take } from "redux-saga/effects";
 
 const filterAction = (action: unknown) => {
-	if (!boardPropValueChanged.match(action)) {
+	if (!boardHistoryItemAdded.match(action)) {
 		return false;
 	}
-	const { code, prop, type } = action.payload;
+	const { code, item } = action.payload;
 
 	if (code !== InvesigatorCode.ShatteredSelf) {
 		return false;
 	}
 
-	if (type !== "value") {
-		return false;
-	}
-
-	return prop === "handSize";
+	return typeof item.value?.handSize === "number";
 };
 
 export function* ShatteredSelfAbilitySaga() {
-	type Payload = ActionCreatorPayload<typeof boardPropValueChanged>;
+	type Payload = ActionCreatorPayload<typeof boardHistoryItemAdded>;
 	const payload: Payload = yield take(filterAction);
 
-	const { boardId, value, prevValue, prop } = payload;
+	const { boardId, board, item } = payload;
 
-	const selectBoard = selectBoardById(boardId);
+	const handSize = item.value?.handSize;
 
-	const board: ReturnType<typeof selectBoard> = yield select(selectBoard);
-
-	if (!board) {
+	if (typeof handSize !== "number") {
 		return;
 	}
 
-	const diff = Math.min(5, value) - Math.min(5, prevValue);
+	const prevValue = board.value.handSize;
+
+	const diff = Math.min(5, handSize) - Math.min(5, prevValue);
 
 	if (diff === 0) {
 		return;

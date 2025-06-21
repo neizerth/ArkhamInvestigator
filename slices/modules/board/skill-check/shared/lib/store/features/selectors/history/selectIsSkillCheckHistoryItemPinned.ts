@@ -1,8 +1,8 @@
-import type { PropsWithBoard } from "@modules/board/base/shared/model";
+import type { PropsWithBoardId } from "@modules/board/base/shared/model";
 import { createSelector } from "@reduxjs/toolkit";
 import { selectSkillCheckHistoryItem } from "./selectSkillCheckHistoryItem";
 
-type Options = PropsWithBoard & {
+type Options = PropsWithBoardId & {
 	id: string;
 };
 

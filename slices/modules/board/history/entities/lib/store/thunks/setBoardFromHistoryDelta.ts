@@ -1,9 +1,9 @@
 import { selectBoardById } from "@modules/board/base/shared/lib";
-import type { PropsWithBoard } from "@modules/board/base/shared/model";
+import type { PropsWithBoardId } from "@modules/board/base/shared/model";
 import type { AppThunk } from "@shared/model";
 import { setValueFromHistoryIndex } from "./setBoardFromHistoryIndex";
 
-type Options = PropsWithBoard & {
+type Options = PropsWithBoardId & {
 	delta: number;
 };
 

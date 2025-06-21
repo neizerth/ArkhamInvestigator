@@ -1,12 +1,12 @@
 import {
-	createCurrentActionCreator,
 	selectBoardById,
 	setBoardProp,
+	withCurrentPayload,
 } from "@modules/board/base/shared/lib";
-import type { PropsWithBoard } from "@modules/board/base/shared/model";
+import type { PropsWithBoardId } from "@modules/board/base/shared/model";
 import type { AppThunk } from "@shared/model";
 
-type Payload = PropsWithBoard & {
+type Payload = PropsWithBoardId & {
 	id: string;
 	title: string;
 };
@@ -43,6 +43,6 @@ export const setSkillCheckHistoryItemTitle =
 		);
 	};
 
-export const setCurrentSkillCheckHistoryItemTitle = createCurrentActionCreator(
+export const setCurrentSkillCheckHistoryItemTitle = withCurrentPayload(
 	setSkillCheckHistoryItemTitle,
 );

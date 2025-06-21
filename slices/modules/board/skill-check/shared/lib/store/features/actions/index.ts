@@ -1,2 +1,2 @@
-export * from "./addBoardSkillCheckItemAction";
-export * from "./removeBoardSkillCheckItemAction";
+export * from "./addBoardSkillCheckItem";
+export * from "./removeBoardSkillCheckItem";

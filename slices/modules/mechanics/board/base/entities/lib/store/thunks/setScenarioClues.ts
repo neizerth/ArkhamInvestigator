@@ -1,16 +1,16 @@
 import type { AppThunk } from "@shared/model";
 
 import {
-	createCurrentActionCreator,
 	selectBoardValue,
 	selectClues,
 	selectSyncScenarioClues,
 	setClues,
+	withCurrentPayload,
 } from "@modules/board/base/shared/lib";
-import type { PropsWithBoard } from "@modules/board/base/shared/model";
-import { spendClues } from "../features/spendClues/spendClues.thunk";
+import type { PropsWithBoardId } from "@modules/board/base/shared/model";
+import { spendClues } from "../features";
 
-type Payload = PropsWithBoard & {
+type Payload = PropsWithBoardId & {
 	value: number;
 };
 
@@ -54,5 +54,4 @@ export const setScenarioClues =
 		);
 	};
 
-export const setCurrentScenarioClues =
-	createCurrentActionCreator(setScenarioClues);
+export const setCurrentScenarioClues = withCurrentPayload(setScenarioClues);

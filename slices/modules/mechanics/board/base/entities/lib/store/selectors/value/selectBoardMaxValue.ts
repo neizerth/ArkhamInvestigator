@@ -1,5 +1,5 @@
 import { selectBoardValueProp } from "@modules/board/base/shared/lib";
-import type { PropsWithBoard } from "@modules/board/base/shared/model";
+import type { PropsWithBoardId } from "@modules/board/base/shared/model";
 import {
 	boardValuesLimit,
 	maxRegularValue,
@@ -7,7 +7,7 @@ import {
 import { createSelector } from "@reduxjs/toolkit";
 import type { InvestigatorNumericStat } from "@shared/model";
 
-type Options = PropsWithBoard & {
+type Options = PropsWithBoardId & {
 	prop: InvestigatorNumericStat;
 };
 

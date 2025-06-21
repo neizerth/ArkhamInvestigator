@@ -1,13 +1,13 @@
-import { selectBoardValueProp } from "../../selectors/props/selectBoardValueProp";
 import {
-	type SetBoardPropValueCommonPayload,
+	type SetBoardPropValuePayload,
 	setBoardPropValue,
-} from "./setBoardPropValue";
+} from "../../actions";
+import { selectBoardValueProp } from "../../selectors/props/selectBoardValueProp";
 
 import type { AppThunk } from "@shared/model";
 
 export const increaseBoardValueProp =
-	(payload: SetBoardPropValueCommonPayload): AppThunk =>
+	(payload: SetBoardPropValuePayload): AppThunk =>
 	(dispatch, getState) => {
 		const state = getState();
 		const currentValue = selectBoardValueProp(payload)(state);

@@ -4,13 +4,13 @@ import { selectBoardById, setBoardPart } from "@modules/board/base/shared/lib";
 import type {
 	InvestigatorBoard,
 	InvestigatorBoardValues,
-	PropsWithBoard,
+	PropsWithBoardId,
 } from "@modules/board/base/shared/model";
 import { omit } from "ramda";
 import { getBoardValueFromHistory } from "../../getBoardValueFromHistory";
 
 type Patch = Partial<InvestigatorBoardValues>;
-type Options = PropsWithBoard & {
+type Options = PropsWithBoardId & {
 	historyIndex: number;
 };
 

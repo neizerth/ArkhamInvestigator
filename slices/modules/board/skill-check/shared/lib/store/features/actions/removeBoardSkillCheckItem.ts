@@ -6,7 +6,7 @@ export type RemoveBoardSkillCheckItemPayload = ChangeBoardEventPayload & {
 	id: string;
 };
 
-export const removeBoardSkillCheckItemAction =
+export const removeBoardSkillCheckItem =
 	createAction<RemoveBoardSkillCheckItemPayload>(
 		`${skillCheckPrefix}/removeItem`,
 	);

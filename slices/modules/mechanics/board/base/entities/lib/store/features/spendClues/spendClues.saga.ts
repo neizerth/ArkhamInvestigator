@@ -4,12 +4,12 @@ import {
 } from "@modules/board/base/shared/lib";
 import type { ActionCreatorPayload } from "@shared/model";
 import { put, select, take } from "redux-saga/effects";
-import { spendCluesAction } from "./spendClues.action";
+import { spendClues } from "./spendClues.action";
 
 export function* spendCluesSaga() {
-	type Payload = ActionCreatorPayload<typeof spendCluesAction>;
+	type Payload = ActionCreatorPayload<typeof spendClues>;
 
-	const payload: Payload = yield take(spendCluesAction.match);
+	const payload: Payload = yield take(spendClues.match);
 
 	const { boardId, value } = payload;
 

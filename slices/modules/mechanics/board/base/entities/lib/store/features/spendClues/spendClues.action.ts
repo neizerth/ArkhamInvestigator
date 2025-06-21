@@ -5,6 +5,6 @@ export type SpendCluesActionPayload = ChangeBoardEventPayload & {
 	value: number;
 };
 
-export const spendCluesAction = createAction<SpendCluesActionPayload>(
+export const spendClues = createAction<SpendCluesActionPayload>(
 	"board/setScenarioClues",
 );

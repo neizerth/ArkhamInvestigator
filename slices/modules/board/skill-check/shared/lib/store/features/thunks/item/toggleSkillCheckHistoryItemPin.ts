@@ -1,12 +1,12 @@
 import {
-	createCurrentActionCreator,
 	selectBoardById,
 	setBoardProp,
+	withCurrentPayload,
 } from "@modules/board/base/shared/lib";
-import type { PropsWithBoard } from "@modules/board/base/shared/model";
+import type { PropsWithBoardId } from "@modules/board/base/shared/model";
 import type { AppThunk } from "@shared/model";
 
-type Options = PropsWithBoard & {
+type Options = PropsWithBoardId & {
 	id: string;
 };
 
@@ -43,6 +43,6 @@ export const toggleSkillCheckHistoryItemPin =
 		);
 	};
 
-export const toggleCurrentSkillCheckHistoryItemPin = createCurrentActionCreator(
+export const toggleCurrentSkillCheckHistoryItemPin = withCurrentPayload(
 	toggleSkillCheckHistoryItemPin,
 );

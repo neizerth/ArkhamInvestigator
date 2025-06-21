@@ -1,7 +1,4 @@
-import {
-	changeBoardProp,
-	selectBoardById,
-} from "@modules/board/base/shared/lib";
+import { selectBoardById, setBoardProp } from "@modules/board/base/shared/lib";
 import type { SkillCheckHistoryItem } from "@modules/board/skill-check/shared/model";
 import type { ActionCreatorPayload } from "@shared/model";
 import { put, select, take } from "redux-saga/effects";
@@ -10,7 +7,7 @@ import {
 	getSkillCheckValue,
 	sanitizeSkillCheckExpression,
 } from "../../../value";
-import { addBoardSkillCheckItemAction } from "../actions";
+import { addBoardSkillCheckItem } from "../actions";
 import {
 	selectSkillCheckData,
 	selectSkillCheckType,
@@ -18,8 +15,8 @@ import {
 } from "../skillCheck";
 
 export function* addBoardSkillCheckItemSaga() {
-	const payload: ActionCreatorPayload<typeof addBoardSkillCheckItemAction> =
-		yield take(addBoardSkillCheckItemAction.match);
+	const payload: ActionCreatorPayload<typeof addBoardSkillCheckItem> =
+		yield take(addBoardSkillCheckItem.match);
 
 	const { boardId } = payload;
 
@@ -52,7 +49,7 @@ export function* addBoardSkillCheckItemSaga() {
 	const checkHistory = [...board.checkHistory, item];
 
 	yield put(
-		changeBoardProp({
+		setBoardProp({
 			...payload,
 			prop: "checkHistory",
 			value: checkHistory,
