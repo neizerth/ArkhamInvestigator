@@ -1,9 +1,9 @@
-import type {
-	InvestigatorBoard,
-	InvestigatorBoardValueProp as Key,
-} from "@modules/board/base/shared/model";
+import type { InvestigatorBoard } from "@modules/board/base/shared/model";
 import type { InvestigatorBoardHistoryItem } from "../../shared/model";
-import { getBoardValuePropFromHistory } from "./getBoardValuePropFromHistory";
+import {
+	type GetBoardValuePropFromHistoryProp as Key,
+	getBoardValuePropFromHistory,
+} from "./getBoardValuePropFromHistory";
 
 type Options = {
 	board: InvestigatorBoard;
@@ -21,5 +21,6 @@ export const getBoardValueFromHistory = (options: Options) => {
 		value: getValue("value"),
 		baseValue: getValue("baseValue"),
 		initialValue: getValue("initialValue"),
+		abilityValues: getValue("abilityValues"),
 	};
 };

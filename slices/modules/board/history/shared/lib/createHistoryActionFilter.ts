@@ -12,5 +12,5 @@ export const createHistoryActionFilter =
 
 		const { history = true } = action.payload;
 
-		return history;
+		return history !== false;
 	};

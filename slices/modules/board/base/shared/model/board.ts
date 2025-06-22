@@ -4,7 +4,10 @@ import type {
 	InvestigatorAbilityValues,
 	InvestigatorBoardUsedAbility,
 } from "@modules/board/abilities/shared/model";
-import type { InvestigatorBoardHistoryItem } from "@modules/board/history/shared/model";
+import type {
+	ChangeHistoryPayload,
+	InvestigatorBoardHistoryItem,
+} from "@modules/board/history/shared/model";
 import type {
 	Faction,
 	InvestigatorNumericStat,
@@ -65,6 +68,5 @@ export type PropsWithSourceBoard = {
 export type BoardKey = keyof InvestigatorBoard;
 
 export type ChangeBoardEventPayload = PropsWithBoardId &
-	Partial<PropsWithSourceBoard> & {
-		history?: boolean;
-	};
+	Partial<PropsWithSourceBoard> &
+	ChangeHistoryPayload;

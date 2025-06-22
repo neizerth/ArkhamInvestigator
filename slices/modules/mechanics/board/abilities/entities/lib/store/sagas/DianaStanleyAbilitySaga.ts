@@ -13,7 +13,7 @@ export function* DianaStanleyAbilitySaga() {
 	type Payload = ActionCreatorPayload<typeof boardAbilityValueChanged>;
 	const payload: Payload = yield take(filterAction);
 
-	const { boardId, value, prevValue } = payload;
+	const { boardId, value, prevValue, historyItem } = payload;
 
 	const selectBoard = selectBoardById(boardId);
 
@@ -32,6 +32,10 @@ export function* DianaStanleyAbilitySaga() {
 			boardId,
 			prop: "willpower",
 			value: willpower,
+			history: {
+				type: "update",
+				id: historyItem.id,
+			},
 		}),
 	);
 }

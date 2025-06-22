@@ -1,10 +1,14 @@
 import type {
 	BoardId,
-	ChangeBoardEventPayload,
+	PropsWithBoardId,
+	PropsWithSourceBoard,
 } from "@modules/board/base/shared/model";
 import type { PropsWithAbility } from "./";
 
-export type AbilityUsePayload = ChangeBoardEventPayload &
+export type AbilityUsePayload = ChangeBoardAbilityEventPayload &
 	PropsWithAbility & {
-		abilityBoardId?: BoardId;
+		abilityTargetBoardId?: BoardId;
 	};
+
+export type ChangeBoardAbilityEventPayload = PropsWithBoardId &
+	Partial<PropsWithSourceBoard>;

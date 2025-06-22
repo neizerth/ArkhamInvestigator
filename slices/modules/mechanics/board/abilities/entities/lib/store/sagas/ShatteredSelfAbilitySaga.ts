@@ -1,5 +1,5 @@
 import { setBoardValuePart } from "@modules/board/base/shared/lib";
-import { boardHistoryItemAdded } from "@modules/board/history/shared/lib/store/actions";
+import { boardHistoryItemAdded } from "@modules/board/history/shared/lib";
 import { InvesigatorCode } from "@modules/mechanics/investigator/shared/config";
 import type { ActionCreatorPayload } from "@shared/model";
 import { put, take } from "redux-saga/effects";
@@ -51,6 +51,10 @@ export function* ShatteredSelfAbilitySaga() {
 			boardId,
 			type: "value",
 			value: change,
+			history: {
+				type: "update",
+				id: item.id,
+			},
 		}),
 	);
 }

@@ -65,5 +65,6 @@ export const getInvestigatorBoard = ({
 		checkHistory: [],
 		historyIndex: -1,
 		usedAbilities,
+		abilityValues: {},
 	};
 };
