@@ -1,10 +1,16 @@
 import type {
 	InvestigatorBoard,
+	InvestigatorBoardValueProp,
 	InvestigatorBoardValues,
-	InvestigatorBoardValueProp as Key,
 } from "@modules/board/base/shared/model";
 import { prop } from "ramda";
 import type { InvestigatorBoardHistoryItem } from "../../shared/model";
+
+export type GetBoardValuePropFromHistoryProp =
+	| InvestigatorBoardValueProp
+	| "abilityValues";
+
+type Key = GetBoardValuePropFromHistoryProp;
 
 type Patch = Partial<InvestigatorBoardValues>;
 
@@ -22,7 +28,7 @@ export const getBoardValuePropFromHistory = <K extends Key>({
 
 	const patch: Patch = Object.assign({}, ...patches);
 
-	const value: InvestigatorBoardValues = {
+	const value: InvestigatorBoard[K] = {
 		...board[type],
 		...patch,
 	};

@@ -1,4 +1,5 @@
 import type { InvestigatorBoard } from "@modules/board/base/shared/model";
+import { getSignatureAbilityValues } from "@modules/mechanics/investigator/lib";
 import type { SelectedInvestigator } from "@shared/model";
 import { mergeDeepRight } from "ramda";
 import {
@@ -14,20 +15,14 @@ type Options = {
 	code: string;
 	index: number;
 	selection: SelectedInvestigator;
-	physicalTrauma?: number;
-	mentalTrauma?: number;
+	physicalTrauma: number;
+	mentalTrauma: number;
 };
 
 export const createInvestigatorBoard = (
 	options: Options,
 ): InvestigatorBoard => {
-	const {
-		id,
-		index,
-		physicalTrauma = 0,
-		mentalTrauma = 0,
-		selection,
-	} = options;
+	const { id, index, physicalTrauma, mentalTrauma, selection } = options;
 
 	const { signature, image, signatureGroupId } = selection;
 	const { additionalAction, code } = signature;
@@ -53,7 +48,9 @@ export const createInvestigatorBoard = (
 
 	const skinId = selection.skin?.id;
 
-	const defaultBoard = {
+	const abilityValues = getSignatureAbilityValues(signature);
+
+	const defaultBoard: InvestigatorBoard = {
 		id,
 		index,
 		signatureGroupId,
@@ -67,6 +64,7 @@ export const createInvestigatorBoard = (
 		checkHistory: [],
 		historyIndex: -1,
 		usedAbilities: [],
+		abilityValues,
 	};
 
 	const modification = investigatorBoardModifications[code] || {};

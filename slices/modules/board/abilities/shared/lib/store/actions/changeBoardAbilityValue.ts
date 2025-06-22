@@ -1,9 +1,12 @@
 import { abilitiesPrefix } from "@modules/board/abilities/shared/config";
-import type { ChangeBoardEventPayload } from "@modules/board/base/shared/model";
+import type { InvestigatorBoardHistoryItem } from "@modules/board/history/shared/model";
 import { createAction } from "@reduxjs/toolkit";
-import type { PropsWithAbility } from "../../../model";
+import type {
+	ChangeBoardAbilityEventPayload,
+	PropsWithAbility,
+} from "../../../model";
 
-export type ChangeBoardAbilityValuePayload = ChangeBoardEventPayload &
+export type ChangeBoardAbilityValuePayload = ChangeBoardAbilityEventPayload &
 	PropsWithAbility & {
 		value: number;
 	};
@@ -15,6 +18,7 @@ export const changeBoardAbilityValue =
 
 export type BoardAbilityValueChangedPayload = ChangeBoardAbilityValuePayload & {
 	prevValue: number;
+	historyItem: InvestigatorBoardHistoryItem;
 };
 
 export const boardAbilityValueChanged =

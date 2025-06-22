@@ -1,10 +1,7 @@
-import {
-	selectBoardAbilityValues,
-	setBoardProp,
-} from "@modules/board/base/shared/lib";
+import { setBoardPart } from "@modules/board/base/shared/lib";
 import type { ActionCreatorPayload } from "@shared/model";
 import { put, select, take } from "redux-saga/effects";
-import { boardAbilityValueChanged, changeBoardAbilityValue } from "../actions";
+import { changeBoardAbilityValue } from "../actions";
 import { selectBoardAbilityById } from "../selectors";
 
 export function* changeBoardAbilityValueSaga() {
@@ -12,11 +9,6 @@ export function* changeBoardAbilityValueSaga() {
 		yield take(changeBoardAbilityValue.match);
 
 	const { boardId, abilityId } = payload;
-	const abilityValuesSelector = selectBoardAbilityValues(boardId);
-
-	const abilityValues: ReturnType<typeof abilityValuesSelector> = yield select(
-		abilityValuesSelector,
-	);
 
 	const abilitySelector = selectBoardAbilityById({
 		boardId,
@@ -26,30 +18,30 @@ export function* changeBoardAbilityValueSaga() {
 	const ability: ReturnType<typeof abilitySelector> =
 		yield select(abilitySelector);
 
-	if (!ability || !abilityValues) {
+	if (!ability) {
 		return;
 	}
 
-	const value = {
-		...abilityValues,
+	const abilityValues = {
 		[abilityId]: payload.value,
 	};
 
 	yield put(
-		setBoardProp({
+		setBoardPart({
 			...payload,
-			prop: "abilityValues",
-			value,
+			data: {
+				abilityValues,
+			},
 		}),
 	);
 
-	const prevValue = abilityValues[abilityId];
+	// const prevValue = abilityValues[abilityId];
 
-	yield put(
-		boardAbilityValueChanged({
-			...payload,
-			value: payload.value,
-			prevValue,
-		}),
-	);
+	// yield put(
+	// 	boardAbilityValueChanged({
+	// 		...payload,
+	// 		value: payload.value,
+	// 		prevValue,
+	// 	}),
+	// );
 }
