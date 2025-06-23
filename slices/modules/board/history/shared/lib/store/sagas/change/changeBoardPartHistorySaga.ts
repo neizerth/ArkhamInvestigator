@@ -4,22 +4,20 @@ import { pick } from "ramda";
 import { put, take } from "redux-saga/effects";
 import { supportedInvestigatorBoardHistoryProps as supportedProps } from "../../../../config";
 import { createHistoryActionFilter } from "../../../createHistoryActionFilter";
-import { addBoardHistoryItem } from "../../actions";
+import { changeBoardHistory } from "../../actions";
 
 const filterAction = createHistoryActionFilter(boardPartChanged.match);
 
 export function* changeBoardPartHistorySaga() {
 	const payload: ActionCreatorPayload<typeof boardPartChanged> =
 		yield take(filterAction);
-	const { boardId, board } = payload;
 
 	const data = pick(supportedProps, payload.data);
 
 	yield put(
-		addBoardHistoryItem({
-			boardId,
+		changeBoardHistory({
+			...payload,
 			data,
-			board,
 		}),
 	);
 }

@@ -1,3 +1,3 @@
-export * from "./addBoardHistoryItem";
 export * from "./clearBoardHistory";
-export * from "./replaceBoardHistoryItem";
+export * from "./changeBoardHistory";
+export * from "./item";

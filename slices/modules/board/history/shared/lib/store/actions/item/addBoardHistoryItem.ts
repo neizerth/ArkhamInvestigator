@@ -3,11 +3,11 @@ import type {
 	PropsWithBoardId,
 } from "@modules/board/base/shared/model";
 import { createAction } from "@reduxjs/toolkit";
-import { boardHistoryPrefix } from "../../../config";
+import { boardHistoryPrefix } from "../../../../config";
 import type {
 	InvestigatorBoardHistoryItem,
 	InvestigatorBoardHistoryItemData,
-} from "../../../model";
+} from "../../../../model";
 
 export type AddBoardHistoryItemPayload = PropsWithBoardId &
 	PropsWithBoard & {
