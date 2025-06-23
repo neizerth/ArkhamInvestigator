@@ -3,7 +3,7 @@ import type { ActionCreatorPayload } from "@shared/model";
 import { put, take } from "redux-saga/effects";
 import { supportedInvestigatorBoardHistoryProps as supportedProps } from "../../../../config";
 import { createHistoryActionFilter } from "../../../createHistoryActionFilter";
-import { addBoardHistoryItem } from "../../actions";
+import { changeBoardHistory } from "../../actions";
 
 const filterHistoryAction = createHistoryActionFilter(boardPropChanged.match);
 
@@ -15,17 +15,15 @@ const filterAction = (action: unknown) => {
 };
 
 export function* changeBoardPropHistorySaga() {
-	const action: ActionCreatorPayload<typeof boardPropChanged> =
+	const payload: ActionCreatorPayload<typeof boardPropChanged> =
 		yield take(filterAction);
-	const { boardId, board } = action;
 
 	yield put(
-		addBoardHistoryItem({
-			boardId,
+		changeBoardHistory({
+			...payload,
 			data: {
-				[action.prop]: action.value,
+				[payload.prop]: payload.value,
 			},
-			board,
 		}),
 	);
 }
