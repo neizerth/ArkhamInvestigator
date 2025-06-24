@@ -1,4 +1,4 @@
-import { createAbilityActionFilter } from "@modules/board/abilities/shared/lib";
+import { createAbilityValueFilter } from "@modules/board/abilities/shared/lib";
 import type { boardAbilityValueChanged } from "@modules/board/abilities/shared/lib/store/actions";
 import {
 	selectBoardById,
@@ -7,7 +7,7 @@ import {
 import type { ActionCreatorPayload } from "@shared/model";
 import { put, select, take } from "redux-saga/effects";
 
-const filterAction = createAbilityActionFilter("ravenous");
+const filterAction = createAbilityValueFilter(["ravenous"]);
 
 export function* Subject5U21AbilitySaga() {
 	type Payload = ActionCreatorPayload<typeof boardAbilityValueChanged>;

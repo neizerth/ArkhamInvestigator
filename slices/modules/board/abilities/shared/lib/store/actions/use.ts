@@ -1,15 +1,41 @@
 import { abilitiesPrefix } from "@modules/board/abilities/shared/config";
-import type { AbilityUsePayload } from "@modules/board/abilities/shared/model";
+import type {
+	ChangeBoardAbilityEventPayload,
+	InvestigatorBoardUsedAbility,
+	PropsWithAbility,
+} from "@modules/board/abilities/shared/model";
+import type { BoardId } from "@modules/board/base/shared/model";
+import type { BoardHistoryItemAddedPayload } from "@modules/board/history/shared/lib";
 import { createAction } from "@reduxjs/toolkit";
 
-export const setBoardAbilityUseAction = createAction<AbilityUsePayload>(
+export type ToggleBoardAbilityUsePayload = ChangeBoardAbilityEventPayload &
+	PropsWithAbility & {
+		abilityTargetBoardId?: BoardId;
+	};
+
+export const toggleBoardAbilityUse = createAction<ToggleBoardAbilityUsePayload>(
+	`${abilitiesPrefix}/toggleBoardUse`,
+);
+
+export type SetBoardAbilityUsePayload = ToggleBoardAbilityUsePayload & {
+	use: boolean;
+};
+
+export const setBoardAbilityUse = createAction<SetBoardAbilityUsePayload>(
 	`${abilitiesPrefix}/setBoardUse`,
 );
 
-export const resetBoardAbilityUseAction = createAction<AbilityUsePayload>(
-	`${abilitiesPrefix}/resetBoardUse`,
-);
+export type ChangedInvestigatorBoardUsedAbility =
+	InvestigatorBoardUsedAbility & {
+		isUsed: boolean;
+	};
 
-export const toggleBoardAbilityUseAction = createAction<AbilityUsePayload>(
-	`${abilitiesPrefix}/toggleBoardUse`,
-);
+export type ChangeBoardHistoryAbilityUsePayload =
+	BoardHistoryItemAddedPayload & {
+		changedAbilities: ChangedInvestigatorBoardUsedAbility[];
+	};
+
+export const changeBoardHistoryAbilityUse =
+	createAction<ChangeBoardHistoryAbilityUsePayload>(
+		`${abilitiesPrefix}/changeBoardHistoryUse`,
+	);
