@@ -4,7 +4,7 @@ import { selectBoardById, setBoardPart } from "@modules/board/base/shared/lib";
 import type { ActionCreatorPayload } from "@shared/model";
 import { put, select, take } from "redux-saga/effects";
 
-const filterAction = createAbilityValueFilter(["george-cards"]);
+const filterAction = createAbilityValueFilter("george-cards");
 
 export function* GeorgeBarnabyAbilitySaga() {
 	type Payload = ActionCreatorPayload<typeof boardAbilityValueChanged>;
