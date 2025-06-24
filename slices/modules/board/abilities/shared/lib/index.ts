@@ -3,4 +3,4 @@ export * from "./info";
 export * from "./validation";
 
 export * from "./UsedAbilitiesService";
-export * from "./createAbilityActionFilter";
+export * from "./createAbilityValueFilter";
