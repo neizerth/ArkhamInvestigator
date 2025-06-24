@@ -1,6 +1,7 @@
 import type { InvestigatorBoard } from "@modules/board/base/shared/model";
 import { getSignatureAbilityValues } from "@modules/mechanics/investigator/lib";
-import type { SelectedInvestigator } from "@shared/model";
+import type { InvestigatorImage } from "@shared/model";
+import type { InvestigatorSignature } from "arkham-investigator-data";
 import { mergeDeepRight } from "ramda";
 import {
 	DEFAULT_HAND_SIZE,
@@ -12,23 +13,33 @@ import { getSignatureStats } from "./getSignatureStats";
 
 type Options = {
 	id: number;
-	code: string;
 	index: number;
-	selection: SelectedInvestigator;
 	physicalTrauma: number;
 	mentalTrauma: number;
+	investigator: InvestigatorSignature;
+	signatureGroupId: string;
+	image: InvestigatorImage;
+	skinId?: string;
 };
 
 export const createInvestigatorBoard = (
 	options: Options,
 ): InvestigatorBoard => {
-	const { id, index, physicalTrauma, mentalTrauma, selection } = options;
+	const {
+		id,
+		index,
+		physicalTrauma,
+		mentalTrauma,
+		investigator,
+		signatureGroupId,
+		image,
+		skinId,
+	} = options;
 
-	const { signature, image, signatureGroupId } = selection;
-	const { additionalAction, code } = signature;
+	const { additionalAction, code } = investigator;
 
 	const initialValue = {
-		...getSignatureStats(signature),
+		...getSignatureStats(investigator),
 		additionalAction: Boolean(additionalAction),
 		resources: START_GAME_RESOURCES_COUNT,
 		actions: NEW_TURN_ACTIONS_COUNT,
@@ -46,16 +57,14 @@ export const createInvestigatorBoard = (
 		sanity: Math.max(0, baseValue.sanity - mentalTrauma),
 	};
 
-	const skinId = selection.skin?.id;
-
-	const abilityValues = getSignatureAbilityValues(signature);
+	const abilityValues = getSignatureAbilityValues(investigator);
 
 	const defaultBoard: InvestigatorBoard = {
 		id,
 		index,
 		signatureGroupId,
 		skinId,
-		investigator: signature,
+		investigator,
 		image,
 		initialValue,
 		baseValue: baseValue,

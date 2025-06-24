@@ -104,6 +104,7 @@ export const {
 	setSyncScenarioClues,
 
 	// reducers
+	setBoardInternal,
 	setBoardPartInternal,
 	setBoardPropInternal,
 	setBoardPropValueInternal,
