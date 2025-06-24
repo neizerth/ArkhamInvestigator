@@ -3,8 +3,8 @@ import type { ActionCreatorPayload } from "@shared/model";
 import { pick } from "ramda";
 import { put, take } from "redux-saga/effects";
 import { supportedInvestigatorBoardHistoryProps as supportedProps } from "../../../../config";
-import { createHistoryActionFilter } from "../../../createHistoryActionFilter";
 import { changeBoardHistory } from "../../actions";
+import { createHistoryActionFilter } from "../../createHistoryActionFilter";
 
 const filterAction = createHistoryActionFilter(boardPartChanged.match);
 

@@ -8,7 +8,6 @@ import type {
 	ActionCreatorPayload,
 	InvestigatorBoardNumericStat,
 } from "@shared/model";
-import { prop } from "ramda";
 import { take } from "redux-saga/effects";
 
 type LilyAbility = {
@@ -34,8 +33,6 @@ const lilyAbilities: LilyAbility[] = [
 		prop: "agility",
 	},
 ];
-
-const ids = lilyAbilities.map(prop("id"));
 
 export function* LilyChenAbilitySaga() {
 	type Payload = ActionCreatorPayload<typeof changeBoardHistoryAbilityUse>;

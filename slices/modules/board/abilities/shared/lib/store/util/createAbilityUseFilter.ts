@@ -1,0 +1,20 @@
+import type { PayloadAction } from "@reduxjs/toolkit";
+import { whereId } from "@shared/lib";
+import type { ActionCreatorPayload } from "@shared/model";
+import { changeBoardHistoryAbilityUse } from "../actions";
+
+type Payload = ActionCreatorPayload<typeof changeBoardHistoryAbilityUse>;
+
+export const createAbilityUseFilter =
+	(id: string) =>
+	(action: unknown): action is PayloadAction<Payload> => {
+		if (!changeBoardHistoryAbilityUse.match(action)) {
+			return false;
+		}
+
+		const { changedAbilities } = action.payload;
+
+		const ability = changedAbilities.find(whereId(id));
+
+		return Boolean(ability);
+	};

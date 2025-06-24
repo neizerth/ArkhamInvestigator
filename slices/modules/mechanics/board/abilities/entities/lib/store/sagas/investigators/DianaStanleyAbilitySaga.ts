@@ -7,7 +7,7 @@ import {
 import type { ActionCreatorPayload } from "@shared/model";
 import { put, select, take } from "redux-saga/effects";
 
-const filterAction = createAbilityValueFilter(["diana-cards"]);
+const filterAction = createAbilityValueFilter("diana-cards");
 
 export function* DianaStanleyAbilitySaga() {
 	type Payload = ActionCreatorPayload<typeof boardAbilityValueChanged>;
