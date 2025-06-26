@@ -3,7 +3,7 @@ import {
 	boardValuesLimit,
 	maxRegularValue,
 	minNegativeHealthAndSanityValue,
-} from "@modules/mechanics/board/base/shared/config";
+} from "@modules/mechanics/board/base/entities/config";
 import { createSelector } from "@reduxjs/toolkit";
 import type { InvestigatorNumericStat } from "@shared/model";
 

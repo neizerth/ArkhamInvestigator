@@ -1,5 +1,5 @@
 import type { InvestigatorBoard } from "@modules/board/base/shared/model";
-import { getSignatureAbilityValues } from "@modules/mechanics/investigator/lib";
+import { getSignatureAbilityValues } from "@modules/mechanics/investigator/entities/lib";
 import type { InvestigatorImage } from "@shared/model";
 import type { InvestigatorSignature } from "arkham-investigator-data";
 import { mergeDeepRight } from "ramda";
@@ -8,7 +8,7 @@ import {
 	NEW_TURN_ACTIONS_COUNT,
 	START_GAME_RESOURCES_COUNT,
 	investigatorBoardModifications,
-} from "../../shared/config";
+} from "../config";
 import { getSignatureStats } from "./getSignatureStats";
 
 type Options = {

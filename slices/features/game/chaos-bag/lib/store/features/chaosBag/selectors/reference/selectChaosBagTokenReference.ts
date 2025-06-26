@@ -1,5 +1,5 @@
 import { createSelector } from "@reduxjs/toolkit";
-import { selectBoardById, selectReferenceCardTokens } from "@shared/lib";
+import { selectBoardById, selectReferenceCardTokenEffects } from "@shared/lib";
 import type { BoardId } from "@shared/model";
 import { mergeTokenReferences } from "../../../../../reference";
 import { selectSpecialReferenceCardTokensModification as selectModification } from "./investigator";
@@ -8,7 +8,7 @@ export const selectChaosBagTokenReference = (boardId: BoardId = "current") =>
 	createSelector(
 		[
 			selectBoardById(boardId),
-			selectReferenceCardTokens,
+			selectReferenceCardTokenEffects,
 			selectModification(boardId),
 		],
 		(board, referenceTokens, modification) => {
