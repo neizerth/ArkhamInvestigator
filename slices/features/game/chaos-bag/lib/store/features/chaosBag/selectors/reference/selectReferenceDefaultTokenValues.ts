@@ -1,9 +1,9 @@
 import { createSelector } from "@reduxjs/toolkit";
-import { selectReferenceCardTokenValues } from "@shared/lib";
+import { selectReferenceCardTokens } from "@shared/lib";
 import { getDefaultReferenceTokenValues } from "../../../../../reference/getDefaultReferenceTokenValues";
 
 export const selectReferenceDefaultTokenValues = createSelector(
-	[selectReferenceCardTokenValues],
+	[selectReferenceCardTokens],
 	(data) => {
 		return getDefaultReferenceTokenValues(data);
 	},

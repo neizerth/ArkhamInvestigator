@@ -9,6 +9,6 @@ export const selectReferenceCardTokens = createSelector(
 			return [];
 		}
 
-		return showBack ? card.back_reference : card.reference;
+		return showBack ? card.back_tokens : card.tokens;
 	},
 );

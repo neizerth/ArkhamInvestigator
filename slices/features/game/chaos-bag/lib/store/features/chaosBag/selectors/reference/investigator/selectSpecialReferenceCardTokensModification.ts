@@ -1,6 +1,6 @@
 import { createSelector } from "@reduxjs/toolkit";
 import { InvesigatorCode } from "@shared/config";
-import { selectBoardById, selectReferenceCardTokens } from "@shared/lib";
+import { selectBoardById, selectReferenceCardTokenEffects } from "@shared/lib";
 import type { BoardId } from "@shared/model";
 import type { ReferencePart } from "arkham-investigator-data";
 import { getReferencePartTokens } from "../../../../../../reference";
@@ -14,7 +14,7 @@ export const selectSpecialReferenceCardTokensModification = (
 	boardId: BoardId,
 ) =>
 	createSelector(
-		[selectBoardById(boardId), selectReferenceCardTokens],
+		[selectBoardById(boardId), selectReferenceCardTokenEffects],
 		(board, reference): ReferencePart[] => {
 			const { code } = board.investigator;
 			if (JimCodes.includes(code)) {

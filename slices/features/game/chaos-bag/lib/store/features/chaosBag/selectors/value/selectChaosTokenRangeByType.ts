@@ -1,5 +1,5 @@
 import { createSelector } from "@reduxjs/toolkit";
-import { rangeStep, selectReferenceCardTokenValues } from "@shared/lib";
+import { rangeStep, selectReferenceCardTokens } from "@shared/lib";
 import { propEq, range } from "ramda";
 import type { ChaosTokenType } from "../../../../../../model";
 import { getInvestigatorSpecialTokenValues } from "../../../../../tokens";
@@ -17,7 +17,7 @@ type Options = {
 
 export const selectChaosTokenRangeByType = ({ type, code }: Options) =>
 	createSelector(
-		[selectReferenceCardTokenValues, selectInvestigatorElderSignValue(code)],
+		[selectReferenceCardTokens, selectInvestigatorElderSignValue(code)],
 		(data, elderSignValue) => {
 			const specialTokens = getInvestigatorSpecialTokenValues(code);
 			const specialValue = specialTokens[type];

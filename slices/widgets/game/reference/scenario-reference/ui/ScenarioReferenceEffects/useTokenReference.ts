@@ -1,12 +1,12 @@
 import {
 	selectReferenceCardText,
-	selectReferenceCardTokens,
+	selectReferenceCardTokenEffects,
 	useAppSelector,
 } from "@shared/lib";
 
 export const useTokenReference = () => {
 	const text = useAppSelector(selectReferenceCardText) || "";
-	const reference = useAppSelector(selectReferenceCardTokens);
+	const reference = useAppSelector(selectReferenceCardTokenEffects);
 
 	const small = text.length > 420;
 

@@ -1,6 +1,6 @@
 import { setBoardValuePart } from "@modules/board/base/shared/lib";
 import { boardHistoryItemAdded } from "@modules/board/history/shared/lib";
-import { InvesigatorCode } from "@modules/mechanics/investigator/shared/config";
+import { InvesigatorCode } from "@modules/mechanics/investigator/entities/config";
 import type { ActionCreatorPayload } from "@shared/model";
 import { put, take } from "redux-saga/effects";
 
