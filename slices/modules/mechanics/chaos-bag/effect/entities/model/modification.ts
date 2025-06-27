@@ -1,14 +1,14 @@
 import type { ReferencePart } from "arkham-investigator-data";
 
-export type InvestigatorReferenceModificationCallbackOptions = {
+export type InvestigatorTokenEffectModificationCallbackOptions = {
 	reference: ReferencePart[];
 };
 
-export type InvestigatorReferenceModificationCallback = (
-	options: InvestigatorReferenceModificationCallbackOptions,
+export type InvestigatorTokenEffectModificationCallback = (
+	options: InvestigatorTokenEffectModificationCallbackOptions,
 ) => ReferencePart[];
 
-export type InvestigatorReferenceModification = Record<
+export type InvestigatorTokenEffectModification = Record<
 	string,
-	InvestigatorReferenceModificationCallback
+	InvestigatorTokenEffectModificationCallback
 >;

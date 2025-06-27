@@ -1,4 +1,4 @@
-import type { InvestigatorReferenceModificationCallback as Callback } from "../../model";
+import type { InvestigatorTokenEffectModificationCallback as Callback } from "../../model";
 import { JimCulverTokenEffects } from "./JimCulverTokenEffects";
 
 export { JimCulverTokenEffects } from "./JimCulverTokenEffects";
