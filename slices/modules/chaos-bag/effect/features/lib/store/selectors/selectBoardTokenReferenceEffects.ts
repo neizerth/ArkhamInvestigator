@@ -1,5 +1,5 @@
 import type { BoardId } from "@modules/board/base/shared/model";
-import { getChaosBagTokenReferenceEffects } from "@modules/chaos-bag/base/shared/lib/features";
+import { getChaosBagTokenReferenceEffects } from "@modules/chaos-bag/effect/entities/lib";
 import { createSelector } from "@reduxjs/toolkit";
 import { selectChaosBagTokenReference } from "./selectChaosBagTokenReference";
 

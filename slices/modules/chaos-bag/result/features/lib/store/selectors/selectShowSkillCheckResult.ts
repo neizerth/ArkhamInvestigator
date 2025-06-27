@@ -1,8 +1,8 @@
-import { createSelector } from "@reduxjs/toolkit";
 import {
 	selectChaosBagSkillValue,
 	selectModifyChaosTokens,
-} from "../../../../../../shared/lib/store/chaosBag";
+} from "@modules/chaos-bag/base/shared/lib";
+import { createSelector } from "@reduxjs/toolkit";
 
 export const selectShowSkillCheckResult = createSelector(
 	[selectChaosBagSkillValue, selectModifyChaosTokens],

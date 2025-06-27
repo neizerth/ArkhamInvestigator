@@ -10,7 +10,7 @@ import {
 } from "@modules/mechanics/chaos-bag/value/entities/lib";
 import { createSelector } from "@reduxjs/toolkit";
 import { selectChaosTokenValue } from "../../../../../base/shared/lib/store/chaosBag";
-import { selectInvestigatorChaosTokenValuesByCode } from "./selectInvestigatorChaosTokenValuesByCode";
+import { selectBoardTokenValues } from "./selectBoardTokenValues";
 
 export const selectDefaultBoardTokenValues = (boardId: BoardId) =>
 	createSelector(
@@ -19,7 +19,7 @@ export const selectDefaultBoardTokenValues = (boardId: BoardId) =>
 			selectBoardRefenceCardTokenValues(boardId),
 			selectBoardElderSignValue(boardId),
 			selectChaosTokenValue,
-			selectInvestigatorChaosTokenValuesByCode(boardId),
+			selectBoardTokenValues(boardId),
 			selectBoardSpecialTokenValues(boardId),
 		],
 		(
