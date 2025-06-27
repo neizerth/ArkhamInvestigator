@@ -1,6 +1,6 @@
 import type { ReferencePart } from "arkham-investigator-data";
 import { isNotNil } from "ramda";
-import { getReferencePartTokens } from "./getReferencePartTokens";
+import { getReferencePartTokens } from "../../../../../effect/entities/lib/getReferencePartTokens";
 
 export const mergeTokenReferences = (
 	base: ReferencePart[],

@@ -1,12 +1,12 @@
 import type { BoardId } from "@modules/board/base/shared/model";
 import type { SkillCheckResult } from "@modules/board/skill-check/shared/model";
 import { numericChaosTokenTypes } from "@modules/chaos-bag/base/shared/config/token/types";
+import { selectChaosBagSkillValue } from "@modules/chaos-bag/base/shared/lib";
 import type { ChaosTokenType } from "@modules/chaos-bag/base/shared/model";
+import { selectRevealedTokens } from "@modules/chaos-bag/reveal/entities/lib";
+import { selectDefaultBoardTokenValues } from "@modules/chaos-bag/value/features/lib";
 import { createSelector } from "@reduxjs/toolkit";
 import { propEq, sum } from "ramda";
-import { selectRevealedTokens } from "../../../../../../../reveal/entities/lib/store/selectors";
-import { selectDefaultBoardTokenValues } from "../../../../../../../value/features/lib/store/value";
-import { selectChaosBagSkillValue } from "../../../../../../shared/lib/store/chaosBag";
 
 export const selectSkillCheckResult = (boardId: BoardId) =>
 	createSelector(

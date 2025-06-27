@@ -1,3 +1,3 @@
 export * from "./selectChaosTokenValueByType";
 export * from "./selectDefaultBoardTokenValues";
-export * from "./selectInvestigatorChaosTokenValuesByCode";
+export * from "./selectBoardTokenValues";
