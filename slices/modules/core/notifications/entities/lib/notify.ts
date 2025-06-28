@@ -2,7 +2,7 @@ import { i18next } from "@modules/core/i18n/shared/config";
 import {
 	type ShowToastOptions,
 	showToast,
-} from "@modules/notifications/shared/lib";
+} from "@modules/core/notifications/shared/lib";
 import type { TOptions } from "i18next";
 
 type Options = ShowToastOptions & {
