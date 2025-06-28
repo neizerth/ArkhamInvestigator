@@ -1,5 +1,5 @@
 import type { BoardId } from "@modules/board/base/shared/model";
-import { mergeTokenReferences } from "@modules/chaos-bag/base/shared/lib/features";
+import { mergeReferenceTokenEffects } from "@modules/chaos-bag/effect/entities/lib";
 import { selectBoardTokenEffectModification } from "@modules/mechanics/chaos-bag/effect/entities/lib";
 import { createSelector } from "@reduxjs/toolkit";
 import { selectBoardById, selectReferenceCardTokenEffects } from "@shared/lib";
@@ -17,9 +17,12 @@ export const selectChaosBagTokenReference = (boardId: BoardId) =>
 			}
 			const { tokens_reference } = board.investigator;
 
-			const baseMerge = mergeTokenReferences(referenceTokens, tokens_reference);
+			const baseMerge = mergeReferenceTokenEffects(
+				referenceTokens,
+				tokens_reference,
+			);
 
-			const result = mergeTokenReferences(baseMerge, modification);
+			const result = mergeReferenceTokenEffects(baseMerge, modification);
 
 			return result;
 		},

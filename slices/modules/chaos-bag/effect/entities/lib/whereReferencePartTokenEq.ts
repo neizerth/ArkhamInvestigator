@@ -1,6 +1,6 @@
+import type { ChaosTokenType } from "@modules/chaos-bag/base/shared/model";
 import type { ReferencePart } from "arkham-investigator-data";
-import { getReferencePartTokens } from "../../../../../effect/entities/lib/getReferencePartTokens";
-import type { ChaosTokenType } from "../../../model";
+import { getReferencePartTokens } from "./getReferencePartTokens";
 
 export const whereReferencePartTokenEq =
 	(type: ChaosTokenType) => (entry: ReferencePart) =>

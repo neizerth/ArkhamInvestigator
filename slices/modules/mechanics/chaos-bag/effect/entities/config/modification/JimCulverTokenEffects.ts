@@ -1,4 +1,4 @@
-import { whereReferencePartTokenEq as tokenEq } from "@modules/chaos-bag/base/shared/lib";
+import { whereReferencePartTokenEq as tokenEq } from "@modules/chaos-bag/effect/entities/lib";
 import { InvesigatorCode } from "@modules/mechanics/investigator/entities/config";
 import type { InvestigatorTokenEffectModification as Modification } from "../../model";
 
