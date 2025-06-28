@@ -1,6 +1,6 @@
-import { getReferencePartTokens } from "@modules/chaos-bag/base/shared/lib";
 import type { ReferencePart } from "arkham-investigator-data";
 import { isNotNil } from "ramda";
+import { getReferencePartTokens } from "./getReferencePartTokens";
 
 export const mergeReferenceTokenEffects = (
 	base: ReferencePart[],
