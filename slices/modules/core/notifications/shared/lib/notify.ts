@@ -1,9 +1,6 @@
 import { i18next } from "@modules/core/i18n/shared/config";
-import {
-	type ShowToastOptions,
-	showToast,
-} from "@modules/core/notifications/shared/lib";
 import type { TOptions } from "i18next";
+import { type ShowToastOptions, showToast } from "./showToast";
 
 type Options = ShowToastOptions & {
 	data?: TOptions;
