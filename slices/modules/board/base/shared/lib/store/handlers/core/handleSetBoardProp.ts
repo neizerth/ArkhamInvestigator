@@ -2,17 +2,10 @@ import type { BoardDraft, BoardKey } from "@modules/board/base/shared/model";
 import type { SetBoardPropPayload } from "../../actions";
 import { getBoardById } from "../../getters/find";
 
-export type HandleSetBoardPropOptions<K extends BoardKey> =
-	SetBoardPropPayload<K> & {
-		state: BoardDraft;
-	};
-
-export const handleSetBoardProp = <K extends BoardKey>({
-	state,
-	boardId,
-	prop,
-	value,
-}: HandleSetBoardPropOptions<K>) => {
+export const handleSetBoardProp = <K extends BoardKey>(
+	state: BoardDraft,
+	{ boardId, prop, value }: SetBoardPropPayload<K>,
+) => {
 	const board = getBoardById({
 		state,
 		boardId,

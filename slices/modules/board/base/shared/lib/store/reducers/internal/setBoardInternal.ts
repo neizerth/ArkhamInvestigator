@@ -1,14 +1,10 @@
 import type { BoardReducer } from "@modules/board/base/shared/model";
-import { type HandleSetBoardOptions, handleSetBoard } from "../../handlers";
+import type { SetBoardPayload } from "../../actions";
+import { handleSetBoard } from "../../handlers";
 
-export type SetBoardInternalPayload = Omit<HandleSetBoardOptions, "state">;
-
-export const setBoardInternal: BoardReducer<SetBoardInternalPayload> = (
+export const setBoardInternal: BoardReducer<SetBoardPayload> = (
 	state,
 	{ payload },
 ) => {
-	handleSetBoard({
-		...payload,
-		state,
-	});
+	handleSetBoard(state, payload);
 };

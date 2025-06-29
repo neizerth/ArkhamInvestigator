@@ -6,17 +6,10 @@ import { mergeDeepRight } from "ramda";
 import type { SetBoardValuePartPayload } from "../../actions";
 import { getBoardById } from "../../getters/find";
 
-export type HandleSetBoardValueOptions<K extends Key> =
-	SetBoardValuePartPayload<K> & {
-		state: BoardDraft;
-	};
-
-export const handleSetBoardValuePart = <K extends Key>({
-	state,
-	boardId,
-	value,
-	type,
-}: HandleSetBoardValueOptions<K>) => {
+export const handleSetBoardValuePart = <K extends Key>(
+	state: BoardDraft,
+	{ boardId, value, type }: SetBoardValuePartPayload<K>,
+) => {
 	const board = getBoardById({
 		state,
 		boardId,

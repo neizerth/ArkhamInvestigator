@@ -1,16 +1,11 @@
-import type { BoardDraft } from "@modules/board/base/shared/model";
+import type { BoardHandler } from "@modules/board/base/shared/model";
 import type { SetBoardPayload } from "../../actions";
 import { getBoardIndex } from "../../getters/props/getBoardIndex";
 
-export type HandleSetBoardOptions = SetBoardPayload & {
-	state: BoardDraft;
-};
-
-export const handleSetBoard = ({
+export const handleSetBoard: BoardHandler<SetBoardPayload> = (
 	state,
-	boardId,
-	data,
-}: HandleSetBoardOptions) => {
+	{ boardId, data },
+) => {
 	const index = getBoardIndex({
 		state,
 		boardId,
