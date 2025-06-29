@@ -13,7 +13,11 @@ export const removeChaosTokenByType =
 		`${chaosBagPrefix}/removeTokenByType`,
 	);
 
+export type ChaosTokenRemovedByTypePayload = PropsWithBoardId & {
+	id: string;
+};
+
 export const chaosTokenRemovedByType =
-	createAction<RemoveChaosTokenByTypePayload>(
+	createAction<ChaosTokenRemovedByTypePayload>(
 		`${chaosBagPrefix}/tokenRemovedByType`,
 	);
