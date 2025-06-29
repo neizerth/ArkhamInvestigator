@@ -15,3 +15,6 @@ export type DeepPartial<T> = T extends object
 export type SafeOmit<T, Keys> = {
 	[K in keyof T as K extends Keys ? never : K]: T[K];
 };
+
+export type RequiredKeys<T, Keys extends keyof T> = Omit<T, Keys> &
+	Required<Pick<T, Keys>>;

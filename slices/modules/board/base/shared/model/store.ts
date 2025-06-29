@@ -6,6 +6,11 @@ import type { BoardId } from "./board";
 export type BoardReducer<Payload> = StateReducer<BoardDraft, Payload>;
 export type BoardDraft = Draft<BoardState>;
 
+export type BoardHandler<Payload> = (
+	state: BoardDraft,
+	payload: Payload,
+) => void;
+
 export type OmitBoard<
 	P extends {
 		boardId: BoardId;

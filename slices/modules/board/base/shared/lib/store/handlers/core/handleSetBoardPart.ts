@@ -1,20 +1,15 @@
 import type {
-	BoardDraft,
+	BoardHandler,
 	InvestigatorBoard,
 } from "@modules/board/base/shared/model";
 import { mergeDeepRight } from "ramda";
 import type { SetBoardPartPayload } from "../../actions";
 import { getBoardIndex } from "../../getters/props/getBoardIndex";
 
-export type HandleSetBoardPartOptions = SetBoardPartPayload & {
-	state: BoardDraft;
-};
-
-export const handleSetBoardPart = ({
+export const handleSetBoardPart: BoardHandler<SetBoardPartPayload> = (
 	state,
-	boardId,
-	data,
-}: HandleSetBoardPartOptions) => {
+	{ boardId, data },
+) => {
 	const index = getBoardIndex({
 		state,
 		boardId,
