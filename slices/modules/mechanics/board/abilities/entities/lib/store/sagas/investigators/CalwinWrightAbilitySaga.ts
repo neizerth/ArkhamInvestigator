@@ -1,8 +1,7 @@
 import { setBoardValuePart } from "@modules/board/base/shared/lib";
 import { boardHistoryItemAdded } from "@modules/board/history/shared/lib";
 import { InvesigatorCode } from "@modules/mechanics/investigator/entities/config";
-import type { ActionCreatorPayload } from "@shared/model";
-import { put, take } from "redux-saga/effects";
+import { put, takeEvery } from "redux-saga/effects";
 
 const filterAction = (action: unknown) => {
 	if (!boardHistoryItemAdded.match(action)) {
@@ -19,10 +18,7 @@ const filterAction = (action: unknown) => {
 	return typeof value?.health === "number" || typeof value?.sanity === "number";
 };
 
-export function* CalwinWrightAbilitySaga() {
-	type Payload = ActionCreatorPayload<typeof boardHistoryItemAdded>;
-	const payload: Payload = yield take(filterAction);
-
+function* worker({ payload }: ReturnType<typeof boardHistoryItemAdded>) {
 	const { boardId, item, board } = payload;
 
 	if (!item.value) {
@@ -68,4 +64,8 @@ export function* CalwinWrightAbilitySaga() {
 			}),
 		);
 	}
+}
+
+export function* CalwinWrightAbilitySaga() {
+	yield takeEvery(filterAction, worker);
 }

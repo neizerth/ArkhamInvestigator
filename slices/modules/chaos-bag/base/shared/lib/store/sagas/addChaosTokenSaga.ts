@@ -1,7 +1,8 @@
-import { take } from "redux-saga/effects";
+import { takeEvery } from "redux-saga/effects";
 import { addChaosToken } from "../actions";
 
+function* worker({ payload }: ReturnType<typeof addChaosToken>) {}
+
 export function* addChaosTokenSaga() {
-	type Action = ReturnType<typeof addChaosToken>;
-	const { payload }: Action = yield take(addChaosToken.match);
+	yield takeEvery(addChaosToken.match, worker);
 }

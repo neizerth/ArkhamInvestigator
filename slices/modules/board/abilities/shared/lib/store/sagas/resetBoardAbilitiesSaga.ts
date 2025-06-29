@@ -3,17 +3,13 @@ import {
 	setBoardProp,
 } from "@modules/board/base/shared/lib";
 import { propIncludes } from "@shared/lib";
-import type { ActionCreatorPayload } from "@shared/model";
 import { prop, reject } from "ramda";
-import { put, select, take } from "redux-saga/effects";
+import { put, select, takeEvery } from "redux-saga/effects";
 import { getAbilityLimits } from "../../info";
 import { resetBoardAbilities } from "../actions";
 import { selectBoardAbilities } from "../selectors";
 
-export function* resetBoardAbilitiesSaga() {
-	const payload: ActionCreatorPayload<typeof resetBoardAbilities> = yield take(
-		resetBoardAbilities.match,
-	);
+function* worker({ payload }: ReturnType<typeof resetBoardAbilities>) {
 	const { boardId, limitTypes = [] } = payload;
 
 	const usedAbilitiesSelector = selectBoardUsedAbilities(boardId);
@@ -56,4 +52,8 @@ export function* resetBoardAbilitiesSaga() {
 			value,
 		}),
 	);
+}
+
+export function* resetBoardAbilitiesSaga() {
+	yield takeEvery(resetBoardAbilities.match, worker);
 }

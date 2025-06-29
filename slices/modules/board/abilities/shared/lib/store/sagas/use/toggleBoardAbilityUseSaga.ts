@@ -1,12 +1,8 @@
-import type { ActionCreatorPayload } from "@shared/model";
-import { put, select, take } from "redux-saga/effects";
+import { put, select, takeEvery } from "redux-saga/effects";
 import { setBoardAbilityUse, toggleBoardAbilityUse } from "../../actions";
 import { selectBoardIsAbilityUsed } from "../../selectors";
 
-export function* toggleBoardAbilityUseSaga() {
-	const payload: ActionCreatorPayload<typeof toggleBoardAbilityUse> =
-		yield take(toggleBoardAbilityUse.match);
-
+function* worker({ payload }: ReturnType<typeof toggleBoardAbilityUse>) {
 	const selectIsUsed = selectBoardIsAbilityUsed(payload);
 
 	const isUsed: ReturnType<typeof selectIsUsed> = yield select(selectIsUsed);
@@ -17,4 +13,8 @@ export function* toggleBoardAbilityUseSaga() {
 			use: !isUsed,
 		}),
 	);
+}
+
+export function* toggleBoardAbilityUseSaga() {
+	yield takeEvery(toggleBoardAbilityUse.match, worker);
 }

@@ -2,15 +2,10 @@ import {
 	selectBoardValue,
 	setBoardActualPropValue,
 } from "@modules/board/base/shared/lib";
-import type { ActionCreatorPayload } from "@shared/model";
-import { put, select, take } from "redux-saga/effects";
+import { put, select, takeEvery } from "redux-saga/effects";
 import { spendClues } from "./spendClues.action";
 
-export function* spendCluesSaga() {
-	type Payload = ActionCreatorPayload<typeof spendClues>;
-
-	const payload: Payload = yield take(spendClues.match);
-
+function* worker({ payload }: ReturnType<typeof spendClues>) {
 	const { boardId, value } = payload;
 
 	const selectClues = selectBoardValue({
@@ -37,4 +32,8 @@ export function* spendCluesSaga() {
 			value: updatedClues,
 		}),
 	);
+}
+
+export function* spendCluesSaga() {
+	yield takeEvery(spendClues.match, worker);
 }

@@ -1,18 +1,14 @@
 import type { InvestigatorBoardUsedAbility } from "@modules/board/abilities/shared/model";
 import { boardHistoryItemAdded } from "@modules/board/history/shared/lib";
 import { whereId } from "@shared/lib";
-import type { ActionCreatorPayload } from "@shared/model";
 import { difference, isNotNil } from "ramda";
-import { take } from "redux-saga/effects";
+import { takeEvery } from "redux-saga/effects";
 import {
 	type ChangedInvestigatorBoardUsedAbility,
 	changeBoardHistoryAbilityUse,
 } from "../../actions";
 
-export function* changeBoardHistoryAbilityUseSaga() {
-	const payload: ActionCreatorPayload<typeof boardHistoryItemAdded> =
-		yield take(boardHistoryItemAdded);
-
+function* worker({ payload }: ReturnType<typeof boardHistoryItemAdded>) {
 	const { board, item } = payload;
 
 	if (!item.usedAbilities) {
@@ -86,3 +82,7 @@ const mapUsedAbility =
 			isUsed,
 		};
 	};
+
+export function* changeBoardHistoryAbilityUseSaga() {
+	yield takeEvery(boardHistoryItemAdded.match, worker);
+}

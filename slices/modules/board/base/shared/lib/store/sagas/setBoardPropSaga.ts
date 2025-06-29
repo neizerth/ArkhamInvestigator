@@ -1,14 +1,10 @@
 import type { ActionCreatorPayload } from "@shared/model";
-import { put, select, take } from "redux-saga/effects";
+import { put, select, takeEvery } from "redux-saga/effects";
 import { boardPropChanged, setBoardProp } from "../actions";
 import { setBoardPropInternal } from "../board";
 import { selectBoardById } from "../selectors";
 
-export function* setBoardPropSaga() {
-	const payload: ActionCreatorPayload<typeof setBoardProp> = yield take(
-		setBoardProp.match,
-	);
-
+function* worker({ payload }: ReturnType<typeof setBoardProp>) {
 	const { boardId } = payload;
 	const selectBoard = selectBoardById(boardId);
 
@@ -26,4 +22,8 @@ export function* setBoardPropSaga() {
 	} as ActionCreatorPayload<typeof boardPropChanged>;
 
 	yield put(boardPropChanged(changePayload));
+}
+
+export function* setBoardPropSaga() {
+	yield takeEvery(setBoardProp.match, worker);
 }

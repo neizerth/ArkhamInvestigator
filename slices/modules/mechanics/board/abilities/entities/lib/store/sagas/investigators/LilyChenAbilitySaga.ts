@@ -4,11 +4,8 @@ import {
 	increaseBoardActualPropValue,
 } from "@modules/board/base/shared/lib";
 import { whereId } from "@shared/lib";
-import type {
-	ActionCreatorPayload,
-	InvestigatorBoardNumericStat,
-} from "@shared/model";
-import { take } from "redux-saga/effects";
+import type { InvestigatorBoardNumericStat } from "@shared/model";
+import { takeEvery } from "redux-saga/effects";
 
 type LilyAbility = {
 	id: string;
@@ -34,10 +31,7 @@ const lilyAbilities: LilyAbility[] = [
 	},
 ];
 
-export function* LilyChenAbilitySaga() {
-	type Payload = ActionCreatorPayload<typeof changeBoardHistoryAbilityUse>;
-	const payload: Payload = yield take(changeBoardHistoryAbilityUse.match);
-
+function* worker({ payload }: ReturnType<typeof changeBoardHistoryAbilityUse>) {
 	const { boardId, changedAbilities } = payload;
 
 	for (const ability of changedAbilities) {
@@ -63,4 +57,8 @@ export function* LilyChenAbilitySaga() {
 			},
 		});
 	}
+}
+
+export function* LilyChenAbilitySaga() {
+	yield takeEvery(changeBoardHistoryAbilityUse.match, worker);
 }

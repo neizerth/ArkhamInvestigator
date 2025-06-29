@@ -1,5 +1,4 @@
-import type { ActionCreatorPayload } from "@shared/model";
-import { put, take } from "redux-saga/effects";
+import { put, takeEvery } from "redux-saga/effects";
 import {
 	addBoardHistoryItem,
 	changeBoardHistory,
@@ -7,10 +6,7 @@ import {
 	updateBoardHistoryItem,
 } from "../actions";
 
-export function* changeBoardHistorySaga() {
-	const payload: ActionCreatorPayload<typeof changeBoardHistory> =
-		yield take(changeBoardHistory);
-
+function* worker({ payload }: ReturnType<typeof changeBoardHistory>) {
 	if (!payload.history) {
 		yield put(addBoardHistoryItem(payload));
 	} else if (payload.history.type === "update") {
@@ -28,4 +24,8 @@ export function* changeBoardHistorySaga() {
 			}),
 		);
 	}
+}
+
+export function* changeBoardHistorySaga() {
+	yield takeEvery(changeBoardHistory.match, worker);
 }

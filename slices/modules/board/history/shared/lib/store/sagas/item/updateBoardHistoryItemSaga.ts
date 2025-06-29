@@ -1,12 +1,9 @@
 import { selectBoardById, setBoardPart } from "@modules/board/base/shared/lib";
-import type { ActionCreatorPayload } from "@shared/model";
 import { mergeDeepRight, propEq } from "ramda";
-import { put, select, take } from "redux-saga/effects";
+import { put, select, takeEvery } from "redux-saga/effects";
 import { updateBoardHistoryItem } from "../../actions";
 
-export function* updateBoardHistoryItemSaga() {
-	const payload: ActionCreatorPayload<typeof updateBoardHistoryItem> =
-		yield take(updateBoardHistoryItem.match);
+function* worker({ payload }: ReturnType<typeof updateBoardHistoryItem>) {
 	const { boardId, data, id } = payload;
 	const selector = selectBoardById(boardId);
 	const board: ReturnType<typeof selector> = yield select(selector);
@@ -34,4 +31,8 @@ export function* updateBoardHistoryItemSaga() {
 			history: false,
 		}),
 	);
+}
+
+export function* updateBoardHistoryItemSaga() {
+	yield takeEvery(updateBoardHistoryItem.match, worker);
 }

@@ -1,11 +1,9 @@
 import { setBoardPart } from "@modules/board/base/shared/lib";
-import type { ActionCreatorPayload } from "@shared/model";
-import { put, take } from "redux-saga/effects";
+import { put, takeEvery } from "redux-saga/effects";
 import { clearBoardHistory } from "../actions";
 
-export function* clearBoardHistorySaga() {
-	const { boardId }: ActionCreatorPayload<typeof clearBoardHistory> =
-		yield take(clearBoardHistory.match);
+function* worker({ payload }: ReturnType<typeof clearBoardHistory>) {
+	const { boardId } = payload;
 
 	yield put(
 		setBoardPart({
@@ -16,4 +14,8 @@ export function* clearBoardHistorySaga() {
 			},
 		}),
 	);
+}
+
+export function* clearBoardHistorySaga() {
+	yield takeEvery(clearBoardHistory.match, worker);
 }
