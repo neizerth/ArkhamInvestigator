@@ -5,7 +5,6 @@ import type { ChaosTokenType } from "../../../model";
 
 export type RemoveChaosTokenByTypePayload = PropsWithBoardId & {
 	type: ChaosTokenType;
-	count: number;
 };
 
 export const removeChaosTokenByType =
