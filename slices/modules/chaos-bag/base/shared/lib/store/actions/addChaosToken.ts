@@ -5,7 +5,6 @@ import type { ChaosBagToken, ChaosTokenType } from "../../../model";
 
 export type AddChaosTokenPayload = PropsWithBoardId & {
 	type: ChaosTokenType;
-	count: number;
 };
 
 export const addChaosToken = createAction<AddChaosTokenPayload>(
@@ -13,7 +12,7 @@ export const addChaosToken = createAction<AddChaosTokenPayload>(
 );
 
 export type ChaosTokenAddedPayload = PropsWithBoardId & {
-	tokens: ChaosBagToken[];
+	token: ChaosBagToken;
 };
 
 export const chaosTokenAdded = createAction<ChaosTokenAddedPayload>(
