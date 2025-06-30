@@ -1,5 +1,4 @@
 import { range } from "ramda";
-// TODO
 import { put, select, takeEvery } from "redux-saga/effects";
 import { v4 } from "uuid";
 import { chaosToken } from "../../../../shared/config";
