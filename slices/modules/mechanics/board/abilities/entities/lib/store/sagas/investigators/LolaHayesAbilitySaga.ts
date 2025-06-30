@@ -15,7 +15,7 @@ function* worker({ payload }: ReturnType<typeof changeBoardHistoryAbilityUse>) {
 	if (ability.isUsed) {
 		return;
 	}
-
+	// TODO change modal module
 	yield put(setShowFactionSelect(true));
 }
 
