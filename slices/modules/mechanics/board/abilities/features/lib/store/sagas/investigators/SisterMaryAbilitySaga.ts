@@ -4,8 +4,10 @@ import {
 	type changeBoardHistoryAbilityUse,
 	createAbilityUseFilter,
 } from "@modules/board/abilities/shared/lib";
-import { selectCanAddMultipleChaosTokens } from "@modules/chaos-bag/base/shared/lib";
-import { addMultipleChaosTokens } from "@modules/chaos-bag/base/shared/lib/store/actions";
+import {
+	addMultipleChaosTokens,
+	selectCanAddMultipleChaosTokens,
+} from "@modules/chaos-bag/base/entities/lib";
 import { select, takeEvery } from "redux-saga/effects";
 
 const filterAction = createAbilityUseFilter("add-2-bless");

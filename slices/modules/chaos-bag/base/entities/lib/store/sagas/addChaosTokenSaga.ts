@@ -1,14 +1,14 @@
 import { put, select, takeEvery } from "redux-saga/effects";
 import { v4 } from "uuid";
-import { chaosToken } from "../../../config";
-import type { ChaosBagToken } from "../../../model";
+import { chaosToken } from "../../../../shared/config";
+import { addChaosTokenInternal } from "../../../../shared/lib/store/chaosBag";
+import type { ChaosBagToken } from "../../../../shared/model";
 import {
 	addChaosToken,
 	cantAddChaosToken,
 	chaosTokenAdded,
 	singleChaosTokenAdded,
 } from "../actions";
-import { addChaosTokenInternal } from "../chaosBag";
 import { selectCanAddChaosToken } from "../selectors";
 
 function* worker({ payload }: ReturnType<typeof addChaosToken>) {

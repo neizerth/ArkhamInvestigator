@@ -4,7 +4,7 @@ import {
 	type changeBoardHistoryAbilityUse,
 	createAbilityUseFilter,
 } from "@modules/board/abilities/shared/lib";
-import { addChaosToken } from "@modules/chaos-bag/base/shared/lib/store/actions";
+import { addChaosToken } from "@modules/chaos-bag/base/entities/lib";
 import { put, takeEvery } from "redux-saga/effects";
 
 const filterAction = createAbilityUseFilter("add-bless");
