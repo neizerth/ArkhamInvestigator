@@ -11,6 +11,14 @@ export const addChaosToken = createAction<AddChaosTokenPayload>(
 	`${chaosBagPrefix}/addToken`,
 );
 
+export type CantAddChaosTokenPayload = PropsWithBoardId & {
+	type: ChaosTokenType;
+};
+
+export const cantAddChaosToken = createAction<CantAddChaosTokenPayload>(
+	`${chaosBagPrefix}/cantAddToken`,
+);
+
 export type ChaosTokenAddedPayload = PropsWithBoardId & {
 	token: ChaosBagToken;
 };

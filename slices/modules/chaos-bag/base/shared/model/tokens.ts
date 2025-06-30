@@ -32,7 +32,7 @@ export type FrostTokenType = "frost";
 
 export type BlessCurseChaosTokenType = "bless" | "curse";
 
-export type ChaosTokensCount = Partial<Record<ChaosTokenType, number>>;
+export type ChaosTokenCount = Partial<Record<ChaosTokenType, number>>;
 
 export type ChaosBagToken = {
 	id: string;

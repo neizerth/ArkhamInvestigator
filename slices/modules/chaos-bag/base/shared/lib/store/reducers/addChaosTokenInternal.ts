@@ -1,6 +1,5 @@
-import type { ChaosBagToken } from "../../../model";
-import type { ChaosBagReducer } from "../../../model/store";
-import { handleAddChaosTokenInternal } from "../handlers/handleAddChaosTokenInternal";
+import type { ChaosBagReducer, ChaosBagToken } from "../../../model";
+import { handleAddChaosTokenInternal } from "../handlers";
 
 export const addChaosTokenInternal: ChaosBagReducer<ChaosBagToken> = (
 	state,
