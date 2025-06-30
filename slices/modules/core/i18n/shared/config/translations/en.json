@@ -118,8 +118,8 @@
 	"chaosToken.frost.second.effect": "Resolve the test as an automatic failure",
 	"chaosToken.autoFail.effect": "Automatic failure",
 
-	"ability.addBless_one": "{{name}} adds {{count}} Bless token to the chaos bag",
-	"ability.addBless_many": "{{name}} adds {{count}} Bless tokens to the chaos bag",
+	"chaosBag.addToken_one": "{{name}} adds {{count}} {{token}} token to the chaos bag",
+	"chaosBag.addToken_many": "{{name}} adds {{count}} {{token}} tokens to the chaos bag",
 	"ability.addBless.full": "You can't add more than 10 bless tokens",
 
 	"board.help.syncScenarioClues": "Enables/disables synchronization of scenario and investigator clues: clues added to the scenario will be removed from the investigator",

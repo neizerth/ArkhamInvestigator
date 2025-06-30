@@ -110,9 +110,9 @@
 	"clues.remains_few": "Осталось {{count}} улики",
 	"clues.remains_many": "Осталось {{count}} улик",
 
-	"ability.addBless_one": "{{name}} добавляет в мешок {{count}} жетон Благословения",
-	"ability.addBless_few": "{{name}} добавляет в мешок {{count}} жетона Благословения",
-	"ability.addBless_many": "{{name}} добавляет в мешок {{many}} жетонов Благословения",
+	"chaosBag.addToken_one": "{{name}} добавляет в мешок {{token}}",
+	"chaosBag.addToken_few": "{{name}} добавляет в мешок {{count}} {{token}}",
+	"chaosBag.addToken_many": "{{name}} добавляет в мешок {{many}} {{token}}",
 
 	"ability.addBless.full": "Нельзя добавить больше 10 Благословений",
 

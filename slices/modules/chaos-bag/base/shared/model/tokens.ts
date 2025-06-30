@@ -1,6 +1,9 @@
 export type ChaosTokenType = BaseChaosTokenType | SpecialChaosTokenType;
 
-export type BaseChaosTokenType = NumericChaosTokenType | SymbolicChaosTokenType;
+export type BaseChaosTokenType =
+	| NumericChaosTokenType
+	| BaseSymbolicChaosTokenType
+	| SpecialSymbolicChaosTokenType;
 
 export type NumericChaosTokenType =
 	| "+1"
@@ -16,7 +19,8 @@ export type NumericChaosTokenType =
 
 export type SymbolicChaosTokenType =
 	| BaseSymbolicChaosTokenType
-	| SpecialSymbolicChaosTokenType;
+	| SpecialSymbolicChaosTokenType
+	| SpecialChaosTokenType;
 
 export type BaseSymbolicChaosTokenType =
 	| "skull"

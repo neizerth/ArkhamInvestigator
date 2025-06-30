@@ -1,3 +1,4 @@
+import { chaosTokenCharacters } from "./character";
 import { chaosTokenColor } from "./color";
 import { chaosTokenCount } from "./count";
 import { chaosTokenMapping } from "./mapping";
@@ -8,4 +9,5 @@ export const chaosToken = {
 	count: chaosTokenCount,
 	types: chaosTokenTypes,
 	mapping: chaosTokenMapping,
+	character: chaosTokenCharacters,
 };

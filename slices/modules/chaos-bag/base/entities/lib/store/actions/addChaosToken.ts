@@ -1,3 +1,4 @@
+import type { PropsWithBoardId } from "@modules/board/base/shared/model";
 import { chaosBagPrefix } from "@modules/chaos-bag/base/shared/config";
 import type {
 	ChaosBagToken,
@@ -5,7 +6,7 @@ import type {
 } from "@modules/chaos-bag/base/shared/model";
 import { createAction } from "@reduxjs/toolkit";
 
-export type AddChaosTokenPayload = {
+export type AddChaosTokenPayload = Partial<PropsWithBoardId> & {
 	type: ChaosTokenType;
 };
 
@@ -17,7 +18,7 @@ export const cantAddChaosToken = createAction<AddChaosTokenPayload>(
 	`${chaosBagPrefix}/cantAddToken`,
 );
 
-export type ChaosTokenAddedPayload = {
+export type ChaosTokenAddedPayload = Partial<PropsWithBoardId> & {
 	token: ChaosBagToken;
 };
 
