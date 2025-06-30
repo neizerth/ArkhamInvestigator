@@ -1,9 +1,8 @@
-import type { PropsWithBoardId } from "@modules/board/base/shared/model";
 import { createAction } from "@reduxjs/toolkit";
 import { chaosBagPrefix } from "../../../config";
 import type { ChaosBagToken, ChaosTokenType } from "../../../model";
 
-export type AddChaosTokenPayload = PropsWithBoardId & {
+export type AddChaosTokenPayload = {
 	type: ChaosTokenType;
 };
 
@@ -11,18 +10,18 @@ export const addChaosToken = createAction<AddChaosTokenPayload>(
 	`${chaosBagPrefix}/addToken`,
 );
 
-export type CantAddChaosTokenPayload = PropsWithBoardId & {
-	type: ChaosTokenType;
-};
-
-export const cantAddChaosToken = createAction<CantAddChaosTokenPayload>(
+export const cantAddChaosToken = createAction<AddChaosTokenPayload>(
 	`${chaosBagPrefix}/cantAddToken`,
 );
 
-export type ChaosTokenAddedPayload = PropsWithBoardId & {
+export type ChaosTokenAddedPayload = {
 	token: ChaosBagToken;
 };
 
 export const chaosTokenAdded = createAction<ChaosTokenAddedPayload>(
 	`${chaosBagPrefix}/tokenAdded`,
+);
+
+export const singleChaosTokenAdded = createAction<ChaosTokenAddedPayload>(
+	`${chaosBagPrefix}/singleTokenAdded`,
 );
