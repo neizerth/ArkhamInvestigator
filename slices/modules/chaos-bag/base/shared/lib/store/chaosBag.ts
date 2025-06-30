@@ -2,15 +2,17 @@ import type { SkillCheckItem } from "@modules/board/skill-check/shared/model";
 import { createSlice } from "@reduxjs/toolkit";
 import type { InvestigatorBoardNumericStat } from "@shared/model";
 import { createSliceState } from "redux-toolkit-helpers";
+import * as reducers from "./reducers";
+
 import type {
 	ChaosBagHistoryItem,
 	ChaosBagToken,
-	ChaosTokensCount,
+	ChaosTokenCount,
 	ScenarioChaosTokenValues,
 } from "../../model";
 
 export type ChaosBagState = {
-	tokenCount: ChaosTokensCount;
+	tokenCount: ChaosTokenCount;
 	contents: ChaosBagToken[];
 	showRevealModal: boolean;
 	revealedTokenIds: string[];
@@ -59,6 +61,10 @@ const state = createSliceState(initialState);
 export const chaosBag = createSlice({
 	name: "chaosBag",
 	...state,
+	reducers: {
+		...state.reducers,
+		...reducers,
+	},
 });
 
 export const {
@@ -79,6 +85,11 @@ export const {
 	setModifyChaosTokens,
 	setChaosTokenValue,
 	setInvestigatorChaosTokenValue,
+
+	// reducers
+	addChaosTokenInternal,
+	removeChaosTokenByTypeInternal,
+	removeChaosTokenInternal,
 } = chaosBag.actions;
 
 export const {
