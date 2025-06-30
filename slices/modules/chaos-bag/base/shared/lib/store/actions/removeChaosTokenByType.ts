@@ -1,9 +1,8 @@
-import type { PropsWithBoardId } from "@modules/board/base/shared/model";
 import { createAction } from "@reduxjs/toolkit";
 import { chaosBagPrefix } from "../../../config";
 import type { ChaosTokenType } from "../../../model";
 
-export type RemoveChaosTokenByTypePayload = PropsWithBoardId & {
+export type RemoveChaosTokenByTypePayload = {
 	type: ChaosTokenType;
 };
 
@@ -12,7 +11,7 @@ export const removeChaosTokenByType =
 		`${chaosBagPrefix}/removeTokenByType`,
 	);
 
-export type ChaosTokenRemovedByTypePayload = PropsWithBoardId & {
+export type ChaosTokenRemovedByTypePayload = {
 	id: string;
 };
 

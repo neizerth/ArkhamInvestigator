@@ -1,11 +1,13 @@
+// TODO
+
 import {
 	type changeBoardHistoryAbilityUse,
 	createAbilityUseFilter,
 } from "@modules/board/abilities/shared/lib";
-import { setShowFactionSelect } from "@modules/board/base/shared/lib";
+import { addChaosToken } from "@modules/chaos-bag/base/shared/lib/store/actions";
 import { put, takeEvery } from "redux-saga/effects";
 
-const filterAction = createAbilityUseFilter("role-switch");
+const filterAction = createAbilityUseFilter("add-bless");
 
 function* worker({ payload }: ReturnType<typeof changeBoardHistoryAbilityUse>) {
 	const { changedAbilities } = payload;
@@ -15,10 +17,14 @@ function* worker({ payload }: ReturnType<typeof changeBoardHistoryAbilityUse>) {
 	if (ability.isUsed) {
 		return;
 	}
-	// TODO change modal module
-	yield put(setShowFactionSelect(true));
+
+	yield put(
+		addChaosToken({
+			type: "bless",
+		}),
+	);
 }
 
-export function* LolaHayesAbilitySaga() {
+export function* ZoeySamarasParallelAbilitySaga() {
 	yield takeEvery(filterAction, worker);
 }
