@@ -1,7 +1,7 @@
 import { chaosToken } from "@modules/chaos-bag/base/shared/config";
 import { createSelector } from "@reduxjs/toolkit";
 import { ascend, sortWith } from "ramda";
-import { selectChaosBagContents } from "../../chaosBag";
+import { selectChaosBagContents } from "../../../../../shared/lib/store/chaosBag";
 
 export const selectOrderedChaosBagContents = createSelector(
 	[selectChaosBagContents],

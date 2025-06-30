@@ -2,15 +2,15 @@ import { range } from "ramda";
 // TODO
 import { put, select, takeEvery } from "redux-saga/effects";
 import { v4 } from "uuid";
-import { chaosToken } from "../../../config";
-import type { ChaosBagToken } from "../../../model";
+import { chaosToken } from "../../../../shared/config";
+import { addChaosTokenInternal } from "../../../../shared/lib/store/chaosBag";
+import type { ChaosBagToken } from "../../../../shared/model";
 import {
 	addMultipleChaosTokens,
 	cantAddMultipleChaosTokens,
 	chaosTokenAdded,
 	multipleChaosTokensAdded,
 } from "../actions";
-import { addChaosTokenInternal } from "../chaosBag";
 import { selectCanAddMultipleChaosTokens } from "../selectors";
 
 function* worker({ payload }: ReturnType<typeof addMultipleChaosTokens>) {

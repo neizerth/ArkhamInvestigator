@@ -1,6 +1,9 @@
+import { chaosBagPrefix } from "@modules/chaos-bag/base/shared/config";
+import type {
+	ChaosBagToken,
+	ChaosTokenType,
+} from "@modules/chaos-bag/base/shared/model";
 import { createAction } from "@reduxjs/toolkit";
-import { chaosBagPrefix } from "../../../config";
-import type { ChaosBagToken, ChaosTokenType } from "../../../model";
 
 export type AddChaosTokenPayload = {
 	type: ChaosTokenType;

@@ -1,10 +1,10 @@
 import type { ChaosTokenType } from "@modules/chaos-bag/base/shared/model";
 import { createSelector } from "@reduxjs/toolkit";
-import { getChaosTokensCanBeAdded } from "../../../logic";
 import {
 	selectChaosBagTokenCount,
 	selectUnlimitedChaosTokens,
-} from "../../chaosBag";
+} from "../../../../../shared/lib/store/chaosBag";
+import { getChaosTokensCanBeAdded } from "../../../logic";
 
 export const selectChaosTokensCanBeAdded = (type: ChaosTokenType) =>
 	createSelector(

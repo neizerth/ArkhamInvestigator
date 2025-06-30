@@ -1,6 +1,9 @@
 import { createSelector } from "@reduxjs/toolkit";
 import { whereId } from "@shared/lib";
-import { selectChaosBagContents, selectCurrentTokenId } from "../chaosBag";
+import {
+	selectChaosBagContents,
+	selectCurrentTokenId,
+} from "../../../../shared/lib/store/chaosBag";
 
 export const selectCurrentToken = createSelector(
 	[selectCurrentTokenId, selectChaosBagContents],

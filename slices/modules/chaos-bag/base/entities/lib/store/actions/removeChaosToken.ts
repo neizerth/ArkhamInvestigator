@@ -1,5 +1,5 @@
+import { chaosBagPrefix } from "@modules/chaos-bag/base/shared/config";
 import { createAction } from "@reduxjs/toolkit";
-import { chaosBagPrefix } from "../../../config";
 
 export type RemoveChaosTokenPayload = {
 	id: string;

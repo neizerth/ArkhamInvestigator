@@ -1,4 +1,4 @@
-import { selectAvailableChaosTokens } from "@modules/chaos-bag/base/shared/lib";
+import { selectAvailableChaosTokens } from "@modules/chaos-bag/base/entities/lib";
 import { createSelector } from "@reduxjs/toolkit";
 import { selectRevealedTokenIds } from "../../../../../base/shared/lib/store/chaosBag";
 

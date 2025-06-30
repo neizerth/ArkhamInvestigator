@@ -1,5 +1,11 @@
-import { MAX_UNLIMITED_TOKEN_COUNT, chaosToken } from "../../config";
-import type { ChaosTokenCount, ChaosTokenType } from "../../model";
+import {
+	MAX_UNLIMITED_TOKEN_COUNT,
+	chaosToken,
+} from "@modules/chaos-bag/base/shared/config";
+import type {
+	ChaosTokenCount,
+	ChaosTokenType,
+} from "@modules/chaos-bag/base/shared/model";
 
 export type GetChaosTokensCanBeAddedOptions = {
 	type: ChaosTokenType;
