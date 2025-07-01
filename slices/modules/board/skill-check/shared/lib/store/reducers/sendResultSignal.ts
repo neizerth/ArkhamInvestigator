@@ -1,5 +1,5 @@
 import type { SkillCheckReducer } from "@modules/board/skill-check/shared/model";
-import { createNumberItem } from "../../../signalItems";
+import { createNumberItem } from "../../signalItems";
 
 export const sendResultSignal: SkillCheckReducer<number> = (
 	state,

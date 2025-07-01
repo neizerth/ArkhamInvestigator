@@ -5,7 +5,7 @@ import { v4 } from "uuid";
 import {
 	getSkillCheckValue,
 	sanitizeSkillCheckExpression,
-} from "../../../value";
+} from "../../features";
 import { addBoardSkillCheckItem } from "../actions";
 import {
 	selectSkillCheckData,

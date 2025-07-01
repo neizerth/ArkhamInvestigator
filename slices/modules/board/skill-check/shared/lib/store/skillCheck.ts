@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { InvestigatorBoardNumericStat } from "@shared/model";
 import { createSliceState } from "redux-toolkit-helpers";
-import type { SkillCheckDifficultyType, SkillCheckItem } from "../../../model";
+import type { SkillCheckDifficultyType, SkillCheckItem } from "../../model";
 import * as reducers from "./reducers";
 
 export type SkillCheckState = {
