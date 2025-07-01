@@ -1,3 +1,3 @@
-export * from "./getToastDuration";
-export * from "./showToast";
+export * from "./toast";
 export * from "./notify";
+export * from "./store";

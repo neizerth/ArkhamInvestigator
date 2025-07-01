@@ -1,16 +1,17 @@
-// TODO
-
 import {
 	type changeBoardHistoryAbilityUse,
 	createAbilityUseFilter,
 } from "@modules/board/abilities/shared/lib";
 import {
 	addMultipleChaosTokens,
+	cantAddMultipleChaosTokens,
 	selectCanAddMultipleChaosTokens,
 } from "@modules/chaos-bag/base/entities/lib";
-import { select, takeEvery } from "redux-saga/effects";
+import { put, select, takeEvery } from "redux-saga/effects";
 
 const filterAction = createAbilityUseFilter("add-2-bless");
+
+const BLESS_COUNT = 2;
 
 function* worker({ payload }: ReturnType<typeof changeBoardHistoryAbilityUse>) {
 	const { changedAbilities } = payload;
@@ -23,18 +24,31 @@ function* worker({ payload }: ReturnType<typeof changeBoardHistoryAbilityUse>) {
 
 	const canAddSelector = selectCanAddMultipleChaosTokens({
 		type: "bless",
-		count: 2,
+		count: BLESS_COUNT,
 	});
 
 	const { available }: ReturnType<typeof canAddSelector> =
 		yield select(canAddSelector);
 
-	const count = Math.min(available, 2);
+	if (available === 0) {
+		yield put(
+			cantAddMultipleChaosTokens({
+				type: "bless",
+				count: BLESS_COUNT,
+				available,
+			}),
+		);
+		return;
+	}
 
-	yield addMultipleChaosTokens({
-		type: "bless",
-		count,
-	});
+	const count = Math.min(available, BLESS_COUNT);
+
+	yield put(
+		addMultipleChaosTokens({
+			type: "bless",
+			count,
+		}),
+	);
 }
 
 export function* SisterMaryAbilitySaga() {

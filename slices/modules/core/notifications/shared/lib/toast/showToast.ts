@@ -1,5 +1,5 @@
 import Toast from "react-native-simple-toast";
-import type { ToastDuration } from "../model";
+import type { ToastDuration } from "../../model";
 import { getToastDuration } from "./getToastDuration";
 
 export type ShowToastOptions = {

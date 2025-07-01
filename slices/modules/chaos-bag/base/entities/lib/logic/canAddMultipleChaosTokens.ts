@@ -1,3 +1,4 @@
+import { getChaosTokenLimit } from "./getChaosTokenCountLimit";
 import {
 	type GetChaosTokensCanBeAddedOptions,
 	getChaosTokensCanBeAdded,
@@ -8,11 +9,13 @@ type Options = GetChaosTokensCanBeAddedOptions & {
 };
 
 export const canAddMultipleChaosTokens = (options: Options) => {
+	const limit = getChaosTokenLimit(options);
 	const available = getChaosTokensCanBeAdded(options);
 	const canBeAdded = available >= options.count;
 
 	return {
 		canBeAdded,
 		available,
+		limit,
 	};
 };

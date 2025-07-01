@@ -1,15 +1,15 @@
 import { put, select, takeEvery } from "redux-saga/effects";
 import { v4 } from "uuid";
-import { chaosToken } from "../../../../shared/config";
-import { addChaosTokenInternal } from "../../../../shared/lib/store/chaosBag";
-import type { ChaosBagToken } from "../../../../shared/model";
+import { chaosToken } from "../../../../../shared/config";
+import { addChaosTokenInternal } from "../../../../../shared/lib/store/chaosBag";
+import type { ChaosBagToken } from "../../../../../shared/model";
 import {
 	addChaosToken,
-	cantAddChaosToken,
+	cantAddSingleChaosToken,
 	chaosTokenAdded,
 	singleChaosTokenAdded,
-} from "../actions";
-import { selectCanAddChaosToken } from "../selectors";
+} from "../../actions";
+import { selectCanAddChaosToken } from "../../selectors";
 
 function* worker({ payload }: ReturnType<typeof addChaosToken>) {
 	const { type } = payload;
@@ -21,7 +21,7 @@ function* worker({ payload }: ReturnType<typeof addChaosToken>) {
 	);
 
 	if (!canAdd) {
-		yield put(cantAddChaosToken(payload));
+		yield put(cantAddSingleChaosToken(payload));
 		return;
 	}
 
@@ -48,6 +48,6 @@ function* worker({ payload }: ReturnType<typeof addChaosToken>) {
 	);
 }
 
-export function* addChaosTokenSaga() {
+export function* addSingleChaosTokenSaga() {
 	yield takeEvery(addChaosToken.match, worker);
 }
