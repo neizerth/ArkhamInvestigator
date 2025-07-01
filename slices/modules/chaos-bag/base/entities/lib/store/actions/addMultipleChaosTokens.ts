@@ -5,6 +5,7 @@ import type {
 	ChaosTokenType,
 } from "@modules/chaos-bag/base/shared/model";
 import { createAction } from "@reduxjs/toolkit";
+import type { CantAddChaosTokenPayload } from "./addChaosToken";
 
 export type AddMultipleChaosTokenPayload = Partial<PropsWithBoardId> & {
 	type: ChaosTokenType;
@@ -16,12 +17,8 @@ export const addMultipleChaosTokens =
 		`${chaosBagPrefix}/addMultipleTokens`,
 	);
 
-export type CantAddMultipleChaosTokenPayload = AddMultipleChaosTokenPayload & {
-	available: number;
-};
-
 export const cantAddMultipleChaosTokens =
-	createAction<CantAddMultipleChaosTokenPayload>(
+	createAction<CantAddChaosTokenPayload>(
 		`${chaosBagPrefix}/cantAddMultipleTokens`,
 	);
 

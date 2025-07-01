@@ -24,7 +24,7 @@ function* worker({ payload }: ReturnType<typeof addMultipleChaosTokens>) {
 		selectCanAddMultipleChaosTokens,
 	);
 
-	if (!response.canBeAdded) {
+	if (!response.canAdd) {
 		yield put(
 			cantAddMultipleChaosTokens({
 				...payload,

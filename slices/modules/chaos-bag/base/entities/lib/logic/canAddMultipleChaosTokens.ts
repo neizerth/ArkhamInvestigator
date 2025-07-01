@@ -9,13 +9,15 @@ type Options = GetChaosTokensCanBeAddedOptions & {
 };
 
 export const canAddMultipleChaosTokens = (options: Options) => {
+	const { count } = options;
 	const limit = getChaosTokenLimit(options);
 	const available = getChaosTokensCanBeAdded(options);
-	const canBeAdded = available >= options.count;
+	const canAdd = available >= count;
 
 	return {
-		canBeAdded,
+		canAdd,
 		available,
 		limit,
+		count,
 	};
 };
