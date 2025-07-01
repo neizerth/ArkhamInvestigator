@@ -1,7 +1,7 @@
-import { sendInvestigatorNotification } from "@modules/board/notifications/entities/store";
+import { sendInvestigatorNotification } from "@modules/board/notifications/entities/lib/store";
 import { chaosToken } from "@modules/chaos-bag/base/shared/config";
 import { put, takeEvery } from "redux-saga/effects";
-import { singleChaosTokenAdded } from "../../../actions";
+import { singleChaosTokenAdded } from "../../../../../../entities/lib/store/actions";
 
 function* worker({ payload }: ReturnType<typeof singleChaosTokenAdded>) {
 	const { boardId } = payload;

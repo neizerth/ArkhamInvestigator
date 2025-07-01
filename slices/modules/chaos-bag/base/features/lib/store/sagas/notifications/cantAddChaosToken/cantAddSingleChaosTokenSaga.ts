@@ -1,6 +1,6 @@
+import { cantAddSingleChaosToken } from "@modules/chaos-bag/base/entities/lib";
 import { sendNotification } from "@modules/core/notifications/shared/lib";
 import { put, takeEvery } from "redux-saga/effects";
-import { cantAddSingleChaosToken } from "../../../actions";
 
 function* worker({ payload }: ReturnType<typeof cantAddSingleChaosToken>) {
 	const { type } = payload;

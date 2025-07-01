@@ -1,2 +1,0 @@
-// TODO
-export function* cantAddChaosTokenSaga() {}
