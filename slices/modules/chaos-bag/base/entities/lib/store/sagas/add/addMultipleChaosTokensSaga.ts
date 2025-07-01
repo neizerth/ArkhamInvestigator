@@ -1,16 +1,16 @@
 import { range } from "ramda";
 import { put, select, takeEvery } from "redux-saga/effects";
 import { v4 } from "uuid";
-import { chaosToken } from "../../../../shared/config";
-import { addChaosTokenInternal } from "../../../../shared/lib/store/chaosBag";
-import type { ChaosBagToken } from "../../../../shared/model";
+import { chaosToken } from "../../../../../shared/config";
+import { addChaosTokenInternal } from "../../../../../shared/lib/store/chaosBag";
+import type { ChaosBagToken } from "../../../../../shared/model";
 import {
 	addMultipleChaosTokens,
 	cantAddMultipleChaosTokens,
 	chaosTokenAdded,
 	multipleChaosTokensAdded,
-} from "../actions";
-import { selectCanAddMultipleChaosTokens } from "../selectors";
+} from "../../actions";
+import { selectCanAddMultipleChaosTokens } from "../../selectors";
 
 function* worker({ payload }: ReturnType<typeof addMultipleChaosTokens>) {
 	const { type, count } = payload;

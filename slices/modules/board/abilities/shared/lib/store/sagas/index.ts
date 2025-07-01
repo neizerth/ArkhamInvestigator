@@ -4,7 +4,7 @@ import { changeBoardAbilityValueSaga } from "./changeBoardAbilityValueSaga";
 import { resetBoardAbilitiesSaga } from "./resetBoardAbilitiesSaga";
 import { abilityUseSaga } from "./use";
 
-export function* abilitiesSaga() {
+export function* abilitiesSharedSaga() {
 	yield spawn(boardHistoryItemAddedSaga);
 
 	yield spawn(changeBoardAbilityValueSaga);

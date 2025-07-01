@@ -4,7 +4,7 @@ import { boardHistoryChangeSaga } from "./change";
 import { clearBoardHistorySaga } from "./clearBoardHistorySaga";
 import { boardHistoryItemSaga } from "./item";
 
-export function* boardHistorySaga() {
+export function* boardHistorySharedSaga() {
 	yield spawn(boardHistoryChangeSaga);
 
 	yield spawn(clearBoardHistorySaga);
