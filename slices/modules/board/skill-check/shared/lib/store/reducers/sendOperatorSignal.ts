@@ -1,7 +1,7 @@
 import type { SkillCheckReducer } from "@modules/board/skill-check/shared/model";
 import type { SkillCheckOperator } from "@shared/model";
 import { last } from "ramda";
-import { createOperatorItem } from "../../../signalItems";
+import { createOperatorItem } from "../../signalItems";
 
 export const sendOperatorSignal: SkillCheckReducer<SkillCheckOperator> = (
 	state,

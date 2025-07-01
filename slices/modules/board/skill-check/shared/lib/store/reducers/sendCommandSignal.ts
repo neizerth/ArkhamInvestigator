@@ -1,7 +1,7 @@
 import type { SkillCheckReducer } from "@modules/board/skill-check/shared/model";
 import type { SkillCheckCommandType } from "@shared/model";
 import { last } from "ramda";
-import { createNumberItem, createStatItem } from "../../../signalItems";
+import { createNumberItem, createStatItem } from "../../signalItems";
 
 export const sendCommandSignal: SkillCheckReducer<SkillCheckCommandType> = (
 	state,
