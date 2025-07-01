@@ -16,12 +16,17 @@ function* worker({ payload }: ReturnType<typeof addChaosToken>) {
 
 	const canAddTokenSelector = selectCanAddChaosToken(type);
 
-	const canAdd: ReturnType<typeof canAddTokenSelector> = yield select(
+	const validation: ReturnType<typeof canAddTokenSelector> = yield select(
 		selectCanAddChaosToken,
 	);
 
-	if (!canAdd) {
-		yield put(cantAddSingleChaosToken(payload));
+	if (!validation.canAdd) {
+		yield put(
+			cantAddSingleChaosToken({
+				...payload,
+				...validation,
+			}),
+		);
 		return;
 	}
 

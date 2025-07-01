@@ -14,7 +14,13 @@ export const addChaosToken = createAction<AddChaosTokenPayload>(
 	`${chaosBagPrefix}/addToken`,
 );
 
-export const cantAddSingleChaosToken = createAction<AddChaosTokenPayload>(
+export type CantAddChaosTokenPayload = AddChaosTokenPayload & {
+	count: number;
+	available: number;
+	limit: number;
+};
+
+export const cantAddSingleChaosToken = createAction<CantAddChaosTokenPayload>(
 	`${chaosBagPrefix}/cantAddToken`,
 );
 

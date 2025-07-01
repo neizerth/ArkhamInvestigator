@@ -27,15 +27,17 @@ function* worker({ payload }: ReturnType<typeof changeBoardHistoryAbilityUse>) {
 		count: BLESS_COUNT,
 	});
 
-	const { available }: ReturnType<typeof canAddSelector> =
+	const validation: ReturnType<typeof canAddSelector> =
 		yield select(canAddSelector);
+
+	const { available } = validation;
 
 	if (available === 0) {
 		yield put(
 			cantAddMultipleChaosTokens({
+				...validation,
 				type: "bless",
 				count: BLESS_COUNT,
-				available,
 			}),
 		);
 		return;
