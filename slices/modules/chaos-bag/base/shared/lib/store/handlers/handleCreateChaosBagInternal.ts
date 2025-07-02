@@ -2,7 +2,7 @@ import { repeat } from "ramda";
 import { chaosToken } from "../../../config";
 import type { ChaosTokenCount } from "../../../model";
 import type { ChaosBagHandler } from "../../../model";
-import { createChaosBagToken, getChaosTokenCountByType } from "../../logic";
+import { createChaosBagToken, getChaosTokenCountByType } from "../../features";
 
 export type HandleCreateChaosBagInternalPayload = {
 	tokenCount: ChaosTokenCount;
