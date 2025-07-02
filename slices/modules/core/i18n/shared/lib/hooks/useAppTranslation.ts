@@ -2,7 +2,7 @@ import { useAppSelector } from "@shared/lib";
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { DEFAULT_LANGUAGE } from "../../../shared/config";
-import { selectLanguage } from "../store/features/i18n/i18n";
+import { selectLanguage } from "../store/i18n";
 
 type Args = Parameters<typeof useTranslation>;
 export const useAppTranslation = (...args: Args) => {

@@ -5,13 +5,6 @@ import {
 	whereId,
 } from "@shared/lib";
 import type { AppThunk } from "@shared/model";
-import type { InvestigatorSignature } from "arkham-investigator-data";
-
-const getCode = ({
-	investigator,
-}: {
-	investigator: InvestigatorSignature;
-}) => investigator.code;
 
 export const updateBoardTranslations = (): AppThunk => (dispatch, getState) => {
 	const state = getState();
