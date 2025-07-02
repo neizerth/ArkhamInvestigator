@@ -90,6 +90,7 @@ export const {
 	addChaosTokenInternal,
 	removeChaosTokenByTypeInternal,
 	removeChaosTokenInternal,
+	updateChaosTokenInternal,
 } = chaosBag.actions;
 
 export const {
