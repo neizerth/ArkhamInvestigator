@@ -1,7 +1,6 @@
+import { createChaosBagToken } from "@modules/chaos-bag/base/shared/lib";
 import { put, select, takeEvery } from "redux-saga/effects";
-import { chaosToken } from "../../../../../shared/config";
 import { addChaosTokenInternal } from "../../../../../shared/lib/store/chaosBag";
-import { createChaosBagToken } from "../../../logic";
 import {
 	addChaosToken,
 	cantAddSingleChaosToken,
@@ -30,7 +29,6 @@ function* worker({ payload }: ReturnType<typeof addChaosToken>) {
 
 	const token = createChaosBagToken({
 		type,
-		removable: chaosToken.types.removable.includes(type),
 	});
 
 	yield put(addChaosTokenInternal(token));

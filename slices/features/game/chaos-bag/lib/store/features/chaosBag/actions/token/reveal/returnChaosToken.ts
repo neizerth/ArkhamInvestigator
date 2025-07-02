@@ -1,6 +1,7 @@
 import { whereId } from "@shared/lib";
 import type { AppThunk } from "@shared/model";
 import { equals, last, reject } from "ramda";
+import { chaosToken } from "../../../../../../../config";
 import type { ChaosBagToken } from "../../../../../../../model";
 import {
 	selectChaosBagContents,
@@ -33,7 +34,9 @@ export const returnChaosToken =
 
 		dispatch(setCurrentTokenId(lastId));
 
-		if (!token.removable || token.sealed) {
+		const removable = chaosToken.types.removable.includes(type);
+
+		if (!removable || token.sealed) {
 			return;
 		}
 

@@ -40,7 +40,6 @@ export type ChaosTokenCount = Partial<Record<ChaosTokenType, number>>;
 
 export type ChaosBagTokenData = {
 	type: ChaosTokenType;
-	removable: boolean;
 	sealed?: boolean;
 };
 

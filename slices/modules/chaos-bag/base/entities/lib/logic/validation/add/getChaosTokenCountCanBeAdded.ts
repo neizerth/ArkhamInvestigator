@@ -2,11 +2,11 @@ import {
 	MAX_UNLIMITED_TOKEN_COUNT,
 	chaosToken,
 } from "@modules/chaos-bag/base/shared/config";
+import { getChaosTokenCountByType } from "@modules/chaos-bag/base/shared/lib";
 import type {
 	ChaosTokenCount,
 	ChaosTokenType,
 } from "@modules/chaos-bag/base/shared/model";
-import { getChaosTokenCountByType } from "../../getChaosTokenCountByType";
 
 export type GetChaosTokenCountCanBeAddedOptions = {
 	type: ChaosTokenType;
