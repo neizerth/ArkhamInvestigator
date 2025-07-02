@@ -1,2 +1,2 @@
-export * as hapticReducer from "./features/reducer";
-export * from "./features";
+export * as hapticReducer from "./reducer";
+export * from "./haptic";

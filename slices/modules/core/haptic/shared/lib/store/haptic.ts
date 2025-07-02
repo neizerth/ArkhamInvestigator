@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { createSliceState } from "redux-toolkit-helpers";
-import type { HapticMode } from "../../../../model";
+import type { HapticMode } from "../../model";
 
 export type HapticState = {
 	hapticMode: HapticMode | null;
