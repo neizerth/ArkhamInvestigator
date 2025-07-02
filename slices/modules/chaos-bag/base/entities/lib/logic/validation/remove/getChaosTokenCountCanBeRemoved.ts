@@ -1,7 +1,7 @@
 import {
 	type GetChaosTokenCountByTypeOptions,
 	getChaosTokenCountByType,
-} from "../../getChaosTokenCountByType";
+} from "@modules/chaos-bag/base/shared/lib";
 
 export type GetChaosTokenCountCanBeRemovedOptions =
 	GetChaosTokenCountByTypeOptions;
