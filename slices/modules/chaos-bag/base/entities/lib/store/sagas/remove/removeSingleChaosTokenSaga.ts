@@ -44,7 +44,6 @@ function* worker({ payload }: ReturnType<typeof removeChaosToken>) {
 	);
 }
 
-// TODO
 export function* removeSingleChaosTokenSaga() {
 	yield takeEvery(removeChaosToken.match, worker);
 }
