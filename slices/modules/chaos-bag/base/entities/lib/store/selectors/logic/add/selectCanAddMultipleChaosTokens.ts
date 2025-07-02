@@ -3,15 +3,20 @@ import { createSelector } from "@reduxjs/toolkit";
 import {
 	selectChaosBagTokenCount,
 	selectUnlimitedChaosTokens,
-} from "../../../../../shared/lib/store/chaosBag";
-import { canAddChaosToken } from "../../../logic";
+} from "../../../../../../shared/lib/store/chaosBag";
+import { canAddMultipleChaosTokens } from "../../../../logic";
 
-export const selectCanAddChaosToken = (type: ChaosTokenType) =>
+type Options = {
+	type: ChaosTokenType;
+	count: number;
+};
+
+export const selectCanAddMultipleChaosTokens = (options: Options) =>
 	createSelector(
 		[selectUnlimitedChaosTokens, selectChaosBagTokenCount],
 		(unlimitedChaosTokens, tokenCount) =>
-			canAddChaosToken({
-				type,
+			canAddMultipleChaosTokens({
+				...options,
 				unlimitedChaosTokens,
 				tokenCount,
 			}),

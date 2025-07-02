@@ -6,23 +6,27 @@ import type {
 	ChaosTokenCount,
 	ChaosTokenType,
 } from "@modules/chaos-bag/base/shared/model";
+import { getChaosTokenCountByType } from "../../getChaosTokenCountByType";
 
-export type GetChaosTokensCanBeAddedOptions = {
+export type GetChaosTokenCountCanBeAddedOptions = {
 	type: ChaosTokenType;
 	unlimitedChaosTokens: boolean;
 	tokenCount: ChaosTokenCount;
 };
 
-export const getChaosTokensCanBeAdded = ({
+export const getChaosTokenCountCanBeAdded = ({
 	type,
 	unlimitedChaosTokens,
 	tokenCount,
-}: GetChaosTokensCanBeAddedOptions) => {
+}: GetChaosTokenCountCanBeAddedOptions) => {
 	const max = unlimitedChaosTokens
 		? MAX_UNLIMITED_TOKEN_COUNT
 		: chaosToken.count[type];
 
-	const currentCount = tokenCount[type] || 0;
+	const currentCount = getChaosTokenCountByType({
+		tokenCount,
+		type,
+	});
 
 	const available = max - currentCount;
 
