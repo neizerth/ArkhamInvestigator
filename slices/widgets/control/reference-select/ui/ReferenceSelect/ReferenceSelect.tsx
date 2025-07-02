@@ -1,4 +1,3 @@
-import { getReferenceCardText } from "@entities/reference-card";
 import { DEFAULT_LANGUAGE } from "@modules/core/i18n/shared/config";
 import {
 	selectCurrentLanguage,
@@ -32,9 +31,6 @@ export const ReferenceSelect = ({
 
 	const referenceTexts = useReferenceCardData();
 
-	const referenceText =
-		referenceCardText && getReferenceCardText(referenceCardText);
-
 	const { t } = useAppTranslation();
 
 	const isDefaultLanguage = language === DEFAULT_LANGUAGE;
@@ -66,9 +62,9 @@ export const ReferenceSelect = ({
 						/>
 					)}
 
-					{referenceText && (
+					{referenceCardText && (
 						<C.ReferencePreview>
-							<C.ReferenceText value={referenceText} />
+							<C.ReferenceText value={referenceCardText} />
 						</C.ReferencePreview>
 					)}
 				</C.Content>
