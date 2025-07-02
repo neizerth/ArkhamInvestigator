@@ -1,5 +1,5 @@
 import type { AppThunk } from "@shared/model";
-import type { ModalData } from "../../../../../model";
+import type { ModalData } from "../../../model";
 import { setModalData, setModalId } from "../modal";
 
 export const openModal =
