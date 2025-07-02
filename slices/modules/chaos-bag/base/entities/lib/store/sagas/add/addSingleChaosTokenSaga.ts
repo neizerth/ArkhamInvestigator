@@ -1,8 +1,7 @@
 import { put, select, takeEvery } from "redux-saga/effects";
-import { v4 } from "uuid";
 import { chaosToken } from "../../../../../shared/config";
 import { addChaosTokenInternal } from "../../../../../shared/lib/store/chaosBag";
-import type { ChaosBagToken } from "../../../../../shared/model";
+import { createChaosBagToken } from "../../../logic";
 import {
 	addChaosToken,
 	cantAddSingleChaosToken,
@@ -14,11 +13,10 @@ import { selectCanAddChaosToken } from "../../selectors";
 function* worker({ payload }: ReturnType<typeof addChaosToken>) {
 	const { type } = payload;
 
-	const canAddTokenSelector = selectCanAddChaosToken(type);
+	const canAddSelector = selectCanAddChaosToken(type);
 
-	const validation: ReturnType<typeof canAddTokenSelector> = yield select(
-		selectCanAddChaosToken,
-	);
+	const validation: ReturnType<typeof canAddSelector> =
+		yield select(canAddSelector);
 
 	if (!validation.canAdd) {
 		yield put(
@@ -30,11 +28,10 @@ function* worker({ payload }: ReturnType<typeof addChaosToken>) {
 		return;
 	}
 
-	const token: ChaosBagToken = {
-		id: v4(),
+	const token = createChaosBagToken({
 		type,
 		removable: chaosToken.types.removable.includes(type),
-	};
+	});
 
 	yield put(addChaosTokenInternal(token));
 

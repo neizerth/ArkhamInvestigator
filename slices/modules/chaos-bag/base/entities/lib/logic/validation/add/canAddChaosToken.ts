@@ -1,7 +1,7 @@
 import { canAddMultipleChaosTokens } from "./canAddMultipleChaosTokens";
-import type { GetChaosTokensCanBeAddedOptions } from "./getChaosTokensCanBeAdded";
+import type { GetChaosTokenCountCanBeAddedOptions } from "./getChaosTokenCountCanBeAdded";
 
-type Options = GetChaosTokensCanBeAddedOptions;
+type Options = GetChaosTokenCountCanBeAddedOptions;
 
 export const canAddChaosToken = (options: Options) =>
 	canAddMultipleChaosTokens({
