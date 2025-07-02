@@ -38,11 +38,14 @@ export type BlessCurseChaosTokenType = "bless" | "curse";
 
 export type ChaosTokenCount = Partial<Record<ChaosTokenType, number>>;
 
-export type ChaosBagToken = {
-	id: string;
+export type ChaosBagTokenData = {
 	type: ChaosTokenType;
 	removable: boolean;
 	sealed?: boolean;
+};
+
+export type ChaosBagToken = ChaosBagTokenData & {
+	id: string;
 };
 
 export type ScenarioChaosTokenValues = Partial<Record<ChaosTokenType, number>>;

@@ -2,7 +2,7 @@ import type { PropsWithBoardId } from "@modules/board/base/shared/model";
 import { chaosBagPrefix } from "@modules/chaos-bag/base/shared/config";
 import { createAction } from "@reduxjs/toolkit";
 
-export type ToggleChaosTokenSealPayload = PropsWithBoardId & {
+export type ToggleChaosTokenSealPayload = Partial<PropsWithBoardId> & {
 	id: string;
 };
 

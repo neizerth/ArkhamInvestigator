@@ -3,9 +3,11 @@ import { boardEntityAbilityMechanicsSaga } from "@modules/mechanics/board/abilit
 import { boardEntityMechanicsSaga } from "@modules/mechanics/board/base/entities/lib/store/sagas";
 import { spawn } from "redux-saga/effects";
 import { boardSagas } from "./board";
+import { chaosBagSaga } from "./chaosBag";
 
 export default function* rootSaga() {
 	yield spawn(boardSagas);
+	yield spawn(chaosBagSaga);
 
 	// shared
 	yield spawn(skillCheckSharedSaga);
