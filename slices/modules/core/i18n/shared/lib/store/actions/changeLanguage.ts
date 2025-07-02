@@ -4,7 +4,7 @@ import {
 	I18N_NAMESAPCE,
 	i18next,
 	translations,
-} from "../../../../../../shared/config";
+} from "../../../../shared/config";
 import { selectLanguage, setLanguage } from "../i18n";
 import { loadTranslation } from "./translations/loadTranslation";
 

@@ -5,9 +5,9 @@ import {
 	I18N_NAMESAPCE,
 	i18next,
 	translations,
-} from "../../../../../../shared/config";
-import { saveStoreTranslation } from "../../../../storage";
-import type { I18NReducer } from "../i18n.types";
+} from "../../../../shared/config";
+import type { I18NReducer } from "../../../model";
+import { saveStoreTranslation } from "../../storage";
 
 export const setTranslationsData: I18NReducer<ArkhamDivider.Translation> = (
 	state,
