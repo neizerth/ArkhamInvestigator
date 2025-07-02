@@ -1,2 +1,3 @@
-export * as modalReducer from "./features/reducer";
-export * from "./features";
+export * as modalReducer from "./reducer";
+export * from "./modal";
+export * from "./thunks";

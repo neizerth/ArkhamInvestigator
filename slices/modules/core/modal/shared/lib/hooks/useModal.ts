@@ -4,7 +4,7 @@ import { Keyboard } from "react-native";
 import type { ModalData, ModalOkEvent } from "../../model";
 import { ModalContext } from "../context";
 import { selectModalId } from "../store";
-import { closeModal, openModal } from "../store/features/modal/actions";
+import { closeModal, openModal } from "../store/thunks";
 
 type ModalEventhandler = (() => void | boolean) | false;
 type OkEventHandler = ((event: ModalOkEvent) => void | boolean) | false;
