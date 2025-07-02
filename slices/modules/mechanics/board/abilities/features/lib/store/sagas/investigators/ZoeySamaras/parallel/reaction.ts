@@ -23,6 +23,6 @@ function* worker({ payload }: ReturnType<typeof changeBoardHistoryAbilityUse>) {
 	);
 }
 
-export function* ZoeySamarasParallelAbilitySaga() {
+export function* ZoeySamarasParallelReactionAbilitySaga() {
 	yield takeEvery(filterAction, worker);
 }
