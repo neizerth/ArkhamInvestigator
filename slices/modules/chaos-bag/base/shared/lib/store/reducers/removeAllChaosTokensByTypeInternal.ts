@@ -1,8 +1,8 @@
-import type { ChaosBagReducer } from "../../../../model";
+import type { ChaosBagReducer } from "../../../model";
 import {
 	type HandleRemoveAllChaosTokensByTypeInternalPayload,
 	handleRemoveAllChaosTokensByTypeInternal,
-} from "../../handlers";
+} from "../handlers";
 
 export const removeAllChaosTokensByTypeInternal: ChaosBagReducer<
 	HandleRemoveAllChaosTokensByTypeInternalPayload

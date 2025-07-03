@@ -1,8 +1,9 @@
 import type { SkillCheckItem } from "@modules/board/skill-check/shared/model";
+import { chaosBagTokenRevealReducers } from "@modules/chaos-bag/reveal/shared/lib";
 import { createSlice } from "@reduxjs/toolkit";
 import type { InvestigatorBoardNumericStat } from "@shared/model";
 import { createSliceState } from "redux-toolkit-helpers";
-import * as reducers from "./reducers";
+import * as baseReducers from "./reducers";
 
 import type {
 	ChaosBagHistoryItem,
@@ -63,7 +64,8 @@ export const chaosBag = createSlice({
 	...state,
 	reducers: {
 		...state.reducers,
-		...reducers,
+		...baseReducers,
+		...chaosBagTokenRevealReducers,
 	},
 });
 
@@ -89,6 +91,8 @@ export const {
 	// reducers
 	clearRevealHistory,
 	addRevealHistoryItem,
+	removeRevealHistoryItem,
+	patchRevealHistoryItem,
 
 	// internal reducers
 	addChaosTokenInternal,
