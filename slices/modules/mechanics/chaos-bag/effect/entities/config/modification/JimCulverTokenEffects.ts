@@ -23,7 +23,7 @@ export const JimCulverTokenEffects: Modification = {
 		const skull = reference.find(tokenEq("skull"));
 		const curse = reference.find(tokenEq("curse"));
 
-		// TODO curse value / effect
+		// TODO global curse value / effect
 		if (!skull || !curse) {
 			return [];
 		}
