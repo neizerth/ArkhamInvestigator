@@ -82,7 +82,7 @@ export const {
 	setCurrentTokenId,
 	setRevealedTokenIds,
 	setRevealHistory,
-	setRevealHistoryItem,
+	setRevealHistoryItem: setCurrentRevealHistoryItem,
 	setUnlimitedChaosTokens,
 	setModifyChaosTokens,
 	setChaosTokenValue,
