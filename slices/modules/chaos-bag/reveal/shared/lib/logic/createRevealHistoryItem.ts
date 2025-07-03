@@ -1,18 +1,12 @@
-import { v4 } from "uuid";
-import type { ChaosBagHistoryItem } from "../../../../base/shared/model";
-
-type CreateRevealHistoryItemOptions = Omit<
+import type {
 	ChaosBagHistoryItem,
-	"id" | "date" | "tokens"
->;
+	ChaosBagHistoryItemData,
+} from "@modules/chaos-bag/base/shared/model";
+import { v4 } from "uuid";
 
 export const createRevealHistoryItem = (
-	options: CreateRevealHistoryItemOptions,
-): ChaosBagHistoryItem => {
-	return {
-		...options,
-		id: v4(),
-		date: Date(),
-		tokens: [],
-	};
-};
+	data: ChaosBagHistoryItemData,
+): ChaosBagHistoryItem => ({
+	id: v4(),
+	...data,
+});

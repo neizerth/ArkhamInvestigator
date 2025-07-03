@@ -3,7 +3,7 @@ import {
 	selectCurrentRevealHistoryItem,
 } from "@modules/chaos-bag/base/shared/lib";
 import { put, select, takeEvery } from "redux-saga/effects";
-import { addCurrentRevealHistoryItem } from "../../actions";
+import { addRevealHistoryItemFromCurrent } from "../../actions";
 import { selectCanAddRevealHistoryItem } from "../../selectors/logic";
 
 // TODO
@@ -23,6 +23,6 @@ function* worker() {
 	yield put(addRevealHistoryItem(item));
 }
 
-export function* addCurrentRevealHistoryItemSaga() {
-	yield takeEvery(addCurrentRevealHistoryItem.match, worker);
+export function* addRevealHistoryItemFromCurrentSaga() {
+	yield takeEvery(addRevealHistoryItemFromCurrent.match, worker);
 }

@@ -1,1 +1,1 @@
-export * from "./selectNewRevealHistoryItem";
+export * from "./selectRevealHistoryItemData";

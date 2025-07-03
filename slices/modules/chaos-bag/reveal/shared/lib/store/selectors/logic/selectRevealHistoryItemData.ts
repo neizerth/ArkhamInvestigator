@@ -7,9 +7,9 @@ import {
 	selectChaosBagSkillValue,
 } from "@modules/chaos-bag/base/shared/lib";
 import { createSelector } from "@reduxjs/toolkit";
-import { createRevealHistoryItem } from "../../../logic";
+import { createRevealHistoryItemData } from "../../../logic";
 
-export const selectNewRevealHistoryItem = (boardId: BoardId) =>
+export const selectRevealHistoryItemData = (boardId: BoardId) =>
 	createSelector(
 		[
 			selectBoardId(boardId),
@@ -22,7 +22,7 @@ export const selectNewRevealHistoryItem = (boardId: BoardId) =>
 			if (typeof boardId === "undefined") {
 				return;
 			}
-			return createRevealHistoryItem({
+			return createRevealHistoryItemData({
 				boardId,
 				skillCheckType,
 				skillCheckValue,
