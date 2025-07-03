@@ -87,11 +87,14 @@ export const {
 	setInvestigatorChaosTokenValue,
 
 	// reducers
+	clearRevealHistory,
+	addRevealHistoryItem,
+
+	// internal reducers
 	addChaosTokenInternal,
 	removeAllChaosTokensByTypeInternal,
 	removeChaosTokenInternal,
 	updateChaosTokenInternal,
-	createChaosBagInternal,
 } = chaosBag.actions;
 
 export const {
@@ -107,7 +110,7 @@ export const {
 	selectCurrentTokenId,
 	selectRevealedTokenIds,
 	selectRevealHistory,
-	selectRevealHistoryItem,
+	selectRevealHistoryItem: selectCurrentRevealHistoryItem,
 	selectUnlimitedChaosTokens,
 	selectModifyChaosTokens,
 	selectChaosTokenValue,
