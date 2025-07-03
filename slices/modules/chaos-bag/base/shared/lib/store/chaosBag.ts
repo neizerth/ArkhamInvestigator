@@ -99,6 +99,8 @@ export const {
 	removeAllChaosTokensByTypeInternal,
 	removeChaosTokenInternal,
 	updateChaosTokenInternal,
+
+	removeRevealedTokenId,
 } = chaosBag.actions;
 
 export const {

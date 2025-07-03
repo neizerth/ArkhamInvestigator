@@ -1,4 +1,2 @@
-export * from "./addRevealHistoryItem";
-export * from "./clearRevealHistory";
-export * from "./removeRevealHistoryItem";
-export * from "./patchRevealHistoryItem";
+export * from "./history";
+export * from "./removeRevealedTokenId";
