@@ -1,4 +1,4 @@
 export * from "./handleAddChaosTokenInternal";
-export * from "./handleRemoveAllChaosTokensByTypeInternal";
-export * from "./handleRemoveChaosTokenInternal";
+export * from "./handleRemoveAllChaosTokensByType";
+export * from "./handleRemoveChaosTokenById";
 export * from "./handleUpdateChaosTokenInternal";

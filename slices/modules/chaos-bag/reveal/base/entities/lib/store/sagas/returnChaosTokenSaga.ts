@@ -1,6 +1,6 @@
 import { selectChaosBagTokenById } from "@modules/chaos-bag/base/entities/lib";
 import {
-	removeChaosTokenInternal,
+	removeChaosTokenById,
 	removeRevealedTokenId,
 } from "@modules/chaos-bag/base/shared/lib";
 import { put, select, takeEvery } from "redux-saga/effects";
@@ -24,7 +24,7 @@ function* worker({ payload }: ReturnType<typeof returnChaosToken>) {
 	}
 
 	yield put(
-		removeChaosTokenInternal({
+		removeChaosTokenById({
 			id: token.id,
 		}),
 	);

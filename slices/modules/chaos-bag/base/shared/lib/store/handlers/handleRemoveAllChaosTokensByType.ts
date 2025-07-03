@@ -1,12 +1,12 @@
 import { ascend, propEq, reject } from "ramda";
 import type { ChaosBagHandler, ChaosTokenType } from "../../../model";
 
-export type HandleRemoveAllChaosTokensByTypeInternalPayload = {
+export type HandleRemoveAllChaosTokensByTypePayload = {
 	type: ChaosTokenType;
 };
 
-export const handleRemoveAllChaosTokensByTypeInternal: ChaosBagHandler<
-	HandleRemoveAllChaosTokensByTypeInternalPayload
+export const handleRemoveAllChaosTokensByType: ChaosBagHandler<
+	HandleRemoveAllChaosTokensByTypePayload
 > = (state, { type }) => {
 	const count = state.tokenCount[type];
 
