@@ -2,7 +2,7 @@ import type { ChaosBagReducer } from "@modules/chaos-bag/base/shared/model";
 import {
 	type HandlePatchRevealHistoryItemPayload,
 	handlePatchRevealHistoryItem,
-} from "../handlers";
+} from "../../handlers";
 
 export const patchRevealHistoryItem: ChaosBagReducer<
 	HandlePatchRevealHistoryItemPayload
