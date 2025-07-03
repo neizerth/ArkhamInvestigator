@@ -1,8 +1,9 @@
 import type { InvestigatorBoard } from "@modules/board/base/shared/model/board";
+import { boardHistoryReducers } from "@modules/board/history/shared/lib";
 import { createSlice } from "@reduxjs/toolkit";
 import type { PickerDecelerationType } from "@shared/model";
 import { createSliceState } from "redux-toolkit-helpers";
-import * as reducers from "./reducers";
+import * as baseReducers from "./reducers";
 
 export type BoardState = {
 	currentInvestigatorIndex: number | null;
@@ -71,7 +72,8 @@ export const board = createSlice({
 	...state,
 	reducers: {
 		...state.reducers,
-		...reducers,
+		...baseReducers,
+		...boardHistoryReducers,
 	},
 });
 
@@ -103,14 +105,19 @@ export const {
 	setShowUpkeepResources,
 	setSyncScenarioClues,
 
-	// reducers
+	// internal reducers
 	setBoardInternal,
 	setBoardPartInternal,
 	setBoardPropInternal,
 	setBoardPropValueInternal,
 	setBoardValuePartInternal,
 
+	// reducers
 	addInvestigatorBoard,
+
+	// board history reducers
+	clearBoardHistory,
+	clearCurrentBoardHistory,
 } = board.actions;
 
 export const {

@@ -3,7 +3,7 @@ import { pick } from "ramda";
 import { put, takeEvery } from "redux-saga/effects";
 import { supportedInvestigatorBoardHistoryProps as supportedProps } from "../../../../config";
 import { changeBoardHistory } from "../../actions";
-import { createHistoryActionFilter } from "../../createHistoryActionFilter";
+import { createHistoryActionFilter } from "../../util/createHistoryActionFilter";
 
 const filterAction = createHistoryActionFilter(boardPartChanged.match);
 
