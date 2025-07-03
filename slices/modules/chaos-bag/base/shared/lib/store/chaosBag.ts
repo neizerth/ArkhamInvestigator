@@ -1,5 +1,6 @@
 import type { SkillCheckItem } from "@modules/board/skill-check/shared/model";
-import { chaosBagTokenRevealReducers } from "@modules/chaos-bag/reveal/shared/lib";
+import { chaosBagTokenRevealReducers } from "@modules/chaos-bag/reveal/base/shared/lib";
+import { chaosBagRevealHistoryReducers } from "@modules/chaos-bag/reveal/history/shared/lib";
 import { createSlice } from "@reduxjs/toolkit";
 import type { InvestigatorBoardNumericStat } from "@shared/model";
 import { createSliceState } from "redux-toolkit-helpers";
@@ -66,6 +67,7 @@ export const chaosBag = createSlice({
 		...state.reducers,
 		...baseReducers,
 		...chaosBagTokenRevealReducers,
+		...chaosBagRevealHistoryReducers,
 	},
 });
 
