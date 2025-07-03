@@ -98,8 +98,8 @@ export const {
 
 	// internal reducers
 	addChaosTokenInternal,
-	removeAllChaosTokensByTypeInternal,
-	removeChaosTokenInternal,
+	removeAllChaosTokensByType,
+	removeChaosTokenById,
 	updateChaosTokenInternal,
 
 	removeRevealedTokenId,
