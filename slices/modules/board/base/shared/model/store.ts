@@ -3,10 +3,10 @@ import type { StateReducer } from "@shared/model";
 import type { BoardState } from "../lib/store/board";
 import type { BoardId } from "./board";
 
-export type BoardReducer<Payload> = StateReducer<BoardDraft, Payload>;
+export type BoardReducer<Payload = void> = StateReducer<BoardDraft, Payload>;
 export type BoardDraft = Draft<BoardState>;
 
-export type BoardHandler<Payload> = (
+export type BoardHandler<Payload = void> = (
 	state: BoardDraft,
 	payload: Payload,
 ) => void;
