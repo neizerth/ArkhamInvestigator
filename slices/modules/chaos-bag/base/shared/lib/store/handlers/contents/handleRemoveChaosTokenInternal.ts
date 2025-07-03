@@ -1,6 +1,6 @@
 import { whereId } from "@shared/lib";
 import { reject } from "ramda";
-import type { ChaosBagHandler } from "../../../model";
+import type { ChaosBagHandler } from "../../../../model";
 
 export type HandleRemoveChaosTokenInternalPayload = {
 	id: string;

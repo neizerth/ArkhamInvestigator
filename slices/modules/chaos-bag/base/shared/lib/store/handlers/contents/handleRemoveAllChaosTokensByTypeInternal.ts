@@ -1,5 +1,5 @@
 import { ascend, propEq, reject } from "ramda";
-import type { ChaosBagHandler, ChaosTokenType } from "../../../model";
+import type { ChaosBagHandler, ChaosTokenType } from "../../../../model";
 
 export type HandleRemoveAllChaosTokensByTypeInternalPayload = {
 	type: ChaosTokenType;
