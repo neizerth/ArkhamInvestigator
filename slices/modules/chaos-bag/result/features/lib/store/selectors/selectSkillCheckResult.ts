@@ -4,7 +4,7 @@ import { numericChaosTokenTypes } from "@modules/chaos-bag/base/shared/config/to
 import { selectChaosBagSkillValue } from "@modules/chaos-bag/base/shared/lib";
 import type { ChaosTokenType } from "@modules/chaos-bag/base/shared/model";
 import { selectRevealedTokens } from "@modules/chaos-bag/reveal/base/entities/lib";
-import { selectDefaultBoardTokenValues } from "@modules/chaos-bag/value/features/lib";
+import { selectChaosBagTokenValues } from "@modules/chaos-bag/value/features/lib";
 import { createSelector } from "@reduxjs/toolkit";
 import { propEq, sum } from "ramda";
 
@@ -13,7 +13,7 @@ export const selectSkillCheckResult = (boardId: BoardId) =>
 		[
 			selectChaosBagSkillValue,
 			selectRevealedTokens,
-			selectDefaultBoardTokenValues(boardId),
+			selectChaosBagTokenValues(boardId),
 		],
 		(skillValue, tokens, specialValueRecord): SkillCheckResult | null => {
 			const baseValue = skillValue || 0;

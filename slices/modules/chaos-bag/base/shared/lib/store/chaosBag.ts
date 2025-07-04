@@ -1,6 +1,7 @@
 import type { SkillCheckItem } from "@modules/board/skill-check/shared/model";
 import { chaosBagTokenRevealReducers } from "@modules/chaos-bag/reveal/base/shared/lib";
 import { chaosBagRevealHistoryReducers } from "@modules/chaos-bag/reveal/history/shared/lib";
+import { chaosBagValueSharedReducers } from "@modules/chaos-bag/value/shared/lib";
 import { createSlice } from "@reduxjs/toolkit";
 import type { InvestigatorBoardNumericStat } from "@shared/model";
 import { createSliceState } from "redux-toolkit-helpers";
@@ -32,10 +33,7 @@ export type ChaosBagState = {
 	unlimitedChaosTokens: boolean;
 	modifyChaosTokens: boolean;
 	chaosTokenValue: ScenarioChaosTokenValues | null;
-	investigatorChaosTokenValue: Record<
-		number,
-		ScenarioChaosTokenValues | null
-	> | null;
+	boardChaosTokenValue: Record<number, ScenarioChaosTokenValues | null> | null;
 };
 
 const initialState: ChaosBagState = {
@@ -55,7 +53,7 @@ const initialState: ChaosBagState = {
 	unlimitedChaosTokens: false,
 	modifyChaosTokens: false,
 	chaosTokenValue: null,
-	investigatorChaosTokenValue: null,
+	boardChaosTokenValue: null,
 };
 
 const state = createSliceState(initialState);
@@ -68,6 +66,7 @@ export const chaosBag = createSlice({
 		...baseReducers,
 		...chaosBagTokenRevealReducers,
 		...chaosBagRevealHistoryReducers,
+		...chaosBagValueSharedReducers,
 	},
 });
 
@@ -87,8 +86,8 @@ export const {
 	setRevealHistoryItem: setCurrentRevealHistoryItem,
 	setUnlimitedChaosTokens,
 	setModifyChaosTokens,
-	setChaosTokenValue,
-	setInvestigatorChaosTokenValue,
+	setChaosTokenValue: setChaosTokenValueInternal,
+	setBoardChaosTokenValue,
 
 	// reducers
 	clearRevealHistory,
@@ -101,6 +100,9 @@ export const {
 	removeAllChaosTokensByType,
 	removeChaosTokenById,
 	updateChaosTokenInternal,
+
+	updateChaosTokenValueInternal,
+	updateBoardChaosTokenValueInternal,
 
 	removeRevealedTokenId,
 	addRevealedTokens,
@@ -122,8 +124,8 @@ export const {
 	selectRevealHistoryItem: selectCurrentRevealHistoryItem,
 	selectUnlimitedChaosTokens,
 	selectModifyChaosTokens,
-	selectChaosTokenValue,
-	selectInvestigatorChaosTokenValue,
+	selectChaosTokenValue: selectChaosTokenValueInternal,
+	selectBoardChaosTokenValue,
 } = chaosBag.selectors;
 
 export default chaosBag.reducer;
