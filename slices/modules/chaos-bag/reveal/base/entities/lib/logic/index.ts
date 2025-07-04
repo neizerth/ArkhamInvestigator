@@ -1,2 +1,4 @@
-export * from "../../../../history/entities/lib/logic/canAddRevealHistoryItem";
 export * from "./canRemoveChaosToken";
+export * from "./canRevealChaosTokens";
+export * from "./getRandomChaosTokens";
+export * from "./getUnrevealedChaosTokens";

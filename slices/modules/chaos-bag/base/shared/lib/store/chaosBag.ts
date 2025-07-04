@@ -103,6 +103,7 @@ export const {
 	updateChaosTokenInternal,
 
 	removeRevealedTokenId,
+	addRevealedTokens,
 } = chaosBag.actions;
 
 export const {

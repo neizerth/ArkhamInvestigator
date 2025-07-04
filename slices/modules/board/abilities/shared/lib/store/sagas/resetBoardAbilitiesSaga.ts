@@ -2,7 +2,7 @@ import {
 	selectBoardUsedAbilities,
 	setBoardProp,
 } from "@modules/board/base/shared/lib";
-import { propIncludes } from "@shared/lib";
+import { idIncludes } from "@shared/lib";
 import { prop, reject } from "ramda";
 import { put, select, takeEvery } from "redux-saga/effects";
 import { getAbilityLimits } from "../../info";
@@ -43,7 +43,7 @@ function* worker({ payload }: ReturnType<typeof resetBoardAbilities>) {
 		})
 		.map(prop("id"));
 
-	const value = reject(propIncludes("id", ids), usedAbilities);
+	const value = reject(idIncludes(ids), usedAbilities);
 
 	yield put(
 		setBoardProp({

@@ -1,7 +1,7 @@
 import { selectIsAdditionalActionUsed } from "@modules/board/abilities/shared/lib/store/selectors/additional-action";
 import { selectBoardById } from "@modules/board/base/shared/lib";
 import { createSelector } from "@reduxjs/toolkit";
-import { propIncludes, selectHaveAdditionalAction } from "@shared/lib";
+import { idIncludes, selectHaveAdditionalAction } from "@shared/lib";
 import type { BoardId } from "@shared/model";
 import { prop } from "ramda";
 
@@ -37,9 +37,7 @@ export const selectAbilitiesTurnEnd = (boardId: BoardId) =>
 
 			const ids = additionalActionAbilities.map(prop("id"));
 			const { usedAbilities = [] } = board;
-			const usedAdditionalAbilities = usedAbilities.filter(
-				propIncludes("id", ids),
-			);
+			const usedAdditionalAbilities = usedAbilities.filter(idIncludes(ids));
 
 			if (usedAdditionalAbilities.length === 0) {
 				return false;
