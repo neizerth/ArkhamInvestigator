@@ -14,6 +14,7 @@
     "test": "jest --watchAll",
     "expo:lint": "expo lint",
     "knip": "npx knip",
+    "circular": "npx madge --circular slices/",
     "ts:check": "tsc",
     "lint": "npx @biomejs/biome check ./slices",
     "format": "npx @biomejs/biome check --write ./slices",
