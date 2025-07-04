@@ -1,7 +1,7 @@
 import type { SkillCheckReducer } from "@modules/board/skill-check/shared/model";
 import type { InvestigatorBoardNumericStat } from "@shared/model";
 import { last } from "ramda";
-import { createStatItem } from "../../signalItems";
+import { createStatItem } from "../../logic";
 
 export const sendStatSignal: SkillCheckReducer<InvestigatorBoardNumericStat> = (
 	state,

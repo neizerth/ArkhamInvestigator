@@ -10,7 +10,7 @@ import { updateCurrentRevealHistoryItem } from "../../actions";
 function* worker({
 	payload,
 }: ReturnType<typeof updateCurrentRevealHistoryItem>) {
-	const { boardId, tokens: revealedTokens } = payload;
+	const { boardId, tokens = [] } = payload;
 
 	const item: ReturnType<typeof selectCurrentRevealHistoryItem> = yield select(
 		selectCurrentRevealHistoryItem,
@@ -26,7 +26,7 @@ function* worker({
 	const update: ChaosBagHistoryItem = {
 		...item,
 		...data,
-		tokens: [...item.tokens, ...revealedTokens],
+		tokens: [...item.tokens, ...tokens],
 	};
 
 	yield put(setCurrentRevealHistoryItem(update));

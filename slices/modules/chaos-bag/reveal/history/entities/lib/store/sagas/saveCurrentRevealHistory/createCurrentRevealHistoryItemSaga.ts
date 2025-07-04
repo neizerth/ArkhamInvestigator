@@ -8,7 +8,7 @@ import { createCurrentRevealHistoryItem } from "../../actions";
 function* worker({
 	payload,
 }: ReturnType<typeof createCurrentRevealHistoryItem>) {
-	const { boardId, tokens: revealedTokens } = payload;
+	const { boardId, tokens = [] } = payload;
 
 	const dataSelector = selectRevealHistoryItemData(boardId);
 	const data: ReturnType<typeof dataSelector> = yield select(dataSelector);
@@ -20,7 +20,7 @@ function* worker({
 	const item: ChaosBagHistoryItem = {
 		...data,
 		id: v4(),
-		tokens: revealedTokens,
+		tokens,
 	};
 
 	yield put(setCurrentRevealHistoryItem(item));

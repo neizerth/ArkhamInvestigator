@@ -4,7 +4,7 @@ import { chaosBagRevealPrefix } from "@modules/chaos-bag/reveal/base/shared/conf
 import { createAction } from "@reduxjs/toolkit";
 
 export type SaveCurrentRevealHistoryItemPayload = PropsWithBoardId & {
-	tokens: ChaosBagToken[];
+	tokens?: ChaosBagToken[];
 };
 
 export const saveCurrentRevealHistoryItem =
