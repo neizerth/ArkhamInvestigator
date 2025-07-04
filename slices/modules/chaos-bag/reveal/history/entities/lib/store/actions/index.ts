@@ -1,2 +1,2 @@
 export * from "./addRevealHistoryItemFromCurrent";
-export * from "./updateCurrentRevealHistoryItem";
+export * from "./saveCurrentRevealHistoryItem";

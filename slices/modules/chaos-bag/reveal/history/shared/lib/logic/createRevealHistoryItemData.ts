@@ -2,7 +2,7 @@ import type { ChaosBagHistoryItemData } from "../../../../../base/shared/model";
 
 type CreateRevealHistoryItemDataOptions = Omit<
 	ChaosBagHistoryItemData,
-	"id" | "date" | "tokens"
+	"id" | "date"
 >;
 
 export const createRevealHistoryItemData = (
@@ -11,6 +11,5 @@ export const createRevealHistoryItemData = (
 	return {
 		...options,
 		date: Date(),
-		tokens: [],
 	};
 };
