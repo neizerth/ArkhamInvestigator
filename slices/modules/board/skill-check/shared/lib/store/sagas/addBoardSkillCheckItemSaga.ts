@@ -2,10 +2,7 @@ import { selectBoardById, setBoardProp } from "@modules/board/base/shared/lib";
 import type { SkillCheckHistoryItem } from "@modules/board/skill-check/shared/model";
 import { put, select, takeEvery } from "redux-saga/effects";
 import { v4 } from "uuid";
-import {
-	getSkillCheckValue,
-	sanitizeSkillCheckExpression,
-} from "../../features";
+import { getSkillCheckValue, sanitizeSkillCheckExpression } from "../../logic";
 import { addBoardSkillCheckItem } from "../actions";
 import {
 	selectSkillCheckData,

@@ -5,7 +5,7 @@ import type {
 	OperatorSkillCheckItem,
 	SkillCheckOperator,
 	StatSkillCheckItem,
-} from "../model";
+} from "../../model";
 
 export const createNumberItem = (
 	value: number,
