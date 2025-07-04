@@ -1,12 +1,12 @@
 import {
 	addRevealHistoryItem,
 	selectCurrentRevealHistoryItem,
+	setCurrentRevealHistoryItem,
 } from "@modules/chaos-bag/base/shared/lib";
 import { put, select, takeEvery } from "redux-saga/effects";
 import { addRevealHistoryItemFromCurrent } from "../actions";
 import { selectCanAddRevealHistoryItem } from "../selectors";
 
-// TODO
 function* worker() {
 	const item: ReturnType<typeof selectCurrentRevealHistoryItem> = yield select(
 		selectCurrentRevealHistoryItem,
@@ -21,6 +21,7 @@ function* worker() {
 	}
 
 	yield put(addRevealHistoryItem(item));
+	yield put(setCurrentRevealHistoryItem(null));
 }
 
 export function* addRevealHistoryItemFromCurrentSaga() {

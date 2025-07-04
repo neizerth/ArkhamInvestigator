@@ -1,6 +1,7 @@
 import type { SkillCheckItem } from "@modules/board/skill-check/shared/model";
 import { chaosBagTokenRevealReducers } from "@modules/chaos-bag/reveal/base/shared/lib";
 import { chaosBagRevealHistoryReducers } from "@modules/chaos-bag/reveal/history/shared/lib";
+import { chaosBagRevealModalSharedReducers } from "@modules/chaos-bag/reveal/modal/shared/lib";
 import { chaosBagValueSharedReducers } from "@modules/chaos-bag/value/shared/lib";
 import { createSlice } from "@reduxjs/toolkit";
 import type { InvestigatorBoardNumericStat } from "@shared/model";
@@ -67,6 +68,7 @@ export const chaosBag = createSlice({
 		...chaosBagTokenRevealReducers,
 		...chaosBagRevealHistoryReducers,
 		...chaosBagValueSharedReducers,
+		...chaosBagRevealModalSharedReducers,
 	},
 });
 
@@ -106,6 +108,10 @@ export const {
 
 	removeRevealedTokenId,
 	addRevealedTokens,
+
+	cancelShowRevealChaosBagModal,
+	closeRevealChaosBagModal,
+	openSkillCheckChaosBagModal,
 } = chaosBag.actions;
 
 export const {
