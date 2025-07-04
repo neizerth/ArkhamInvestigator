@@ -1,0 +1,36 @@
+import {
+	selectCurrentRevealHistoryItem,
+	setCurrentRevealHistoryItem,
+} from "@modules/chaos-bag/base/shared/lib";
+import type { ChaosBagHistoryItem } from "@modules/chaos-bag/base/shared/model";
+import { selectRevealHistoryItemData } from "@modules/chaos-bag/reveal/history/shared/lib";
+import { put, select, takeEvery } from "redux-saga/effects";
+import { updateCurrentRevealHistoryItem } from "../../actions";
+
+function* worker({
+	payload,
+}: ReturnType<typeof updateCurrentRevealHistoryItem>) {
+	const { boardId, tokens: revealedTokens } = payload;
+
+	const item: ReturnType<typeof selectCurrentRevealHistoryItem> = yield select(
+		selectCurrentRevealHistoryItem,
+	);
+
+	const dataSelector = selectRevealHistoryItemData(boardId);
+	const data: ReturnType<typeof dataSelector> = yield select(dataSelector);
+
+	if (!data || !item) {
+		return;
+	}
+
+	const update: ChaosBagHistoryItem = {
+		...item,
+		...data,
+		tokens: [...item.tokens, ...revealedTokens],
+	};
+
+	yield put(setCurrentRevealHistoryItem(update));
+}
+export function* updateCurrentRevealHistoryItemSaga() {
+	yield takeEvery(updateCurrentRevealHistoryItem.match, worker);
+}

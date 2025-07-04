@@ -1,9 +1,9 @@
 import { chaosTokensRevealed } from "@modules/chaos-bag/reveal/base/entities/lib";
 import { put, takeEvery } from "redux-saga/effects";
-import { updateCurrentRevealHistoryItem } from "../actions";
+import { saveCurrentRevealHistoryItem } from "../actions";
 
 function* worker({ payload }: ReturnType<typeof chaosTokensRevealed>) {
-	yield put(updateCurrentRevealHistoryItem(payload));
+	yield put(saveCurrentRevealHistoryItem(payload));
 }
 
 export function* chaosTokensRevealedSaga() {

@@ -6,6 +6,7 @@ import {
 	selectChaosBagSkillCheckType,
 	selectChaosBagSkillValue,
 } from "@modules/chaos-bag/base/shared/lib";
+import { selectRevealedTokens } from "@modules/chaos-bag/reveal/base/entities/lib";
 import { createSelector } from "@reduxjs/toolkit";
 import { createRevealHistoryItemData } from "../../../logic";
 
@@ -17,8 +18,16 @@ export const selectRevealHistoryItemData = (boardId: BoardId) =>
 			selectChaosBagSkillValue,
 			selectChaosBagSkillCheckExpression,
 			selectChaosBagSkillCheckTitle,
+			selectRevealedTokens,
 		],
-		(boardId, skillCheckType, skillCheckValue, skillCheckExpression, title) => {
+		(
+			boardId,
+			skillCheckType,
+			skillCheckValue,
+			skillCheckExpression,
+			title,
+			tokens,
+		) => {
 			if (typeof boardId === "undefined") {
 				return;
 			}
@@ -28,6 +37,7 @@ export const selectRevealHistoryItemData = (boardId: BoardId) =>
 				skillCheckValue,
 				skillCheckExpression,
 				title,
+				tokens,
 			});
 		},
 	);
