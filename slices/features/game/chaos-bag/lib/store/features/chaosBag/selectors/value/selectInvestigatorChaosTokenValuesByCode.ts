@@ -1,10 +1,10 @@
 import { createSelector } from "@reduxjs/toolkit";
 import { selectBoardByCode } from "@shared/lib";
-import { selectInvestigatorChaosTokenValue } from "../../chaosBag";
+import { selectBoardChaosTokenValue } from "../../chaosBag";
 
 export const selectInvestigatorChaosTokenValuesByCode = (code: string) =>
 	createSelector(
-		[selectInvestigatorChaosTokenValue, selectBoardByCode(code)],
+		[selectBoardChaosTokenValue, selectBoardByCode(code)],
 		(value, boardId) => {
 			if (!value || typeof boardId !== "number") {
 				return {};

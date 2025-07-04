@@ -15,11 +15,10 @@ export const selectChaosBagTokenReference = (boardId: BoardId) =>
 			if (!board) {
 				return referenceTokens;
 			}
-			const { tokens_reference } = board.investigator;
 
 			const baseMerge = mergeReferenceTokenEffects(
 				referenceTokens,
-				tokens_reference,
+				board.investigator.tokens_reference,
 			);
 
 			const result = mergeReferenceTokenEffects(baseMerge, modification);

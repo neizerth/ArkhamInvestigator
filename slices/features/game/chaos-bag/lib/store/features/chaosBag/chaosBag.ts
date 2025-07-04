@@ -30,10 +30,7 @@ export type ChaosBagState = {
 	unlimitedChaosTokens: boolean;
 	modifyChaosTokens: boolean;
 	chaosTokenValue: ScenarioChaosTokenValues | null;
-	investigatorChaosTokenValue: Record<
-		string,
-		ScenarioChaosTokenValues | null
-	> | null;
+	boardChaosTokenValue: Record<string, ScenarioChaosTokenValues | null> | null;
 };
 
 const initialState: ChaosBagState = {
@@ -53,7 +50,7 @@ const initialState: ChaosBagState = {
 	unlimitedChaosTokens: false,
 	modifyChaosTokens: false,
 	chaosTokenValue: null,
-	investigatorChaosTokenValue: null,
+	boardChaosTokenValue: null,
 };
 
 const state = createSliceState(initialState);
@@ -80,7 +77,7 @@ export const {
 	setUnlimitedChaosTokens,
 	setModifyChaosTokens,
 	setChaosTokenValue,
-	setInvestigatorChaosTokenValue,
+	setBoardChaosTokenValue,
 } = chaosBag.actions;
 
 export const {
@@ -100,7 +97,7 @@ export const {
 	selectUnlimitedChaosTokens,
 	selectModifyChaosTokens,
 	selectChaosTokenValue,
-	selectInvestigatorChaosTokenValue,
+	selectBoardChaosTokenValue,
 } = chaosBag.selectors;
 
 export default chaosBag.reducer;

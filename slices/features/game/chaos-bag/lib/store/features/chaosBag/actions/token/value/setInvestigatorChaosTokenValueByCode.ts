@@ -1,8 +1,8 @@
 import type { AppThunk } from "@shared/model";
 import type { ChaosTokenType } from "../../../../../../../model";
 import {
-	selectInvestigatorChaosTokenValue,
-	setInvestigatorChaosTokenValue,
+	selectBoardChaosTokenValue,
+	setBoardChaosTokenValue,
 } from "../../../chaosBag";
 
 type Options = {
@@ -14,7 +14,7 @@ export const setInvestigatorChaosTokenValueByCode =
 	({ code, value, type }: Options): AppThunk =>
 	(dispatch, getState) => {
 		const state = getState();
-		const data = selectInvestigatorChaosTokenValue(state) || {};
+		const data = selectBoardChaosTokenValue(state) || {};
 
 		const investigatorData = data[code] || {};
 
@@ -26,5 +26,5 @@ export const setInvestigatorChaosTokenValueByCode =
 			},
 		};
 
-		dispatch(setInvestigatorChaosTokenValue(nextData));
+		dispatch(setBoardChaosTokenValue(nextData));
 	};

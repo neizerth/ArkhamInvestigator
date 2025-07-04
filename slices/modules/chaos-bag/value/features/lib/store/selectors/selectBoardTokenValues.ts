@@ -1,11 +1,11 @@
-import { selectInvestigatorChaosTokenValue } from "@features/game/chaos-bag";
 import { selectBoardId } from "@modules/board/base/shared/lib";
 import type { BoardId } from "@modules/board/base/shared/model";
+import { selectBoardChaosTokenValue } from "@modules/chaos-bag/base/shared/lib";
 import { createSelector } from "@reduxjs/toolkit";
 
 export const selectBoardTokenValues = (boardId: BoardId) =>
 	createSelector(
-		[selectInvestigatorChaosTokenValue, selectBoardId(boardId)],
+		[selectBoardChaosTokenValue, selectBoardId(boardId)],
 		(value, boardId) => {
 			if (!value || !boardId) {
 				return {};

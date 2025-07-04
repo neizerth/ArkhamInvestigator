@@ -1,7 +1,7 @@
 import type { BoardId } from "@modules/board/base/shared/model";
 import type { ChaosTokenType } from "@modules/chaos-bag/base/shared/model";
 import { createSelector } from "@reduxjs/toolkit";
-import { selectDefaultBoardTokenValues } from "./selectDefaultBoardTokenValues";
+import { selectChaosBagTokenValues } from "./selectChaosBagTokenValues";
 
 type Options = {
 	boardId: BoardId;
@@ -9,6 +9,6 @@ type Options = {
 };
 
 export const selectChaosTokenValueByType = ({ type, boardId }: Options) =>
-	createSelector([selectDefaultBoardTokenValues(boardId)], (data) => {
+	createSelector([selectChaosBagTokenValues(boardId)], (data) => {
 		return data[type] || 0;
 	});

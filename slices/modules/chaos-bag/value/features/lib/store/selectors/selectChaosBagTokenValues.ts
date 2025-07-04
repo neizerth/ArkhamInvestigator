@@ -1,5 +1,6 @@
 import type { BoardId } from "@modules/board/base/shared/model";
 
+import { selectChaosTokenValueInternal } from "@modules/chaos-bag/base/shared/lib";
 import {
 	selectBoardRefenceCardTokenValues,
 	selectCurrentReferenceCardTokenValues,
@@ -9,16 +10,15 @@ import {
 	selectBoardSpecialTokenValues,
 } from "@modules/mechanics/chaos-bag/value/entities/lib";
 import { createSelector } from "@reduxjs/toolkit";
-import { selectChaosTokenValue } from "../../../../../base/shared/lib/store/chaosBag";
 import { selectBoardTokenValues } from "./selectBoardTokenValues";
 
-export const selectDefaultBoardTokenValues = (boardId: BoardId) =>
+export const selectChaosBagTokenValues = (boardId: BoardId) =>
 	createSelector(
 		[
 			selectCurrentReferenceCardTokenValues,
 			selectBoardRefenceCardTokenValues(boardId),
 			selectBoardElderSignValue(boardId),
-			selectChaosTokenValue,
+			selectChaosTokenValueInternal,
 			selectBoardTokenValues(boardId),
 			selectBoardSpecialTokenValues(boardId),
 		],
