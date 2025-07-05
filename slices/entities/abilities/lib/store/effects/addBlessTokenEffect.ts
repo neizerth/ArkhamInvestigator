@@ -1,8 +1,12 @@
+// import {
+// 	addChaosToken,
+// 	selectCanAddChaosToken,
+// } from "@features/game/chaos-bag";
+import { showToast } from "@features/notifications/lib";
 import {
 	addChaosToken,
-	selectCanAddChaosToken,
-} from "@features/game/chaos-bag";
-import { showToast } from "@features/notifications/lib";
+	selectCanAddMultipleChaosTokens,
+} from "@modules/chaos-bag/base/entities/lib";
 import { i18next } from "@modules/core/i18n/shared/config";
 import { selectCurrentBoard } from "@shared/lib";
 import type { AppThunk } from "@shared/model";
@@ -13,7 +17,10 @@ export const addBlessTokenEffect =
 		const state = getState();
 		const board = selectCurrentBoard(state);
 
-		const canAddBless = selectCanAddChaosToken("bless", count)(state);
+		const canAddBless = selectCanAddMultipleChaosTokens({
+			type: "bless",
+			count,
+		})(state);
 
 		if (!canAddBless) {
 			const message = i18next.t("ability.addBless.full");
@@ -28,5 +35,9 @@ export const addBlessTokenEffect =
 			count,
 		});
 		dispatch(showToast(message));
-		dispatch(addChaosToken("bless"));
+		dispatch(
+			addChaosToken({
+				type: "bless",
+			}),
+		);
 	};

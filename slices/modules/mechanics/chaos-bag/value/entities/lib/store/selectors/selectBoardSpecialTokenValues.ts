@@ -3,7 +3,7 @@ import type { BoardId } from "@modules/board/base/shared/model";
 import { createSelector } from "@reduxjs/toolkit";
 import { tokenValueModifications } from "../../../config";
 
-export const selectBoardSpecialTokenValues = (boardId: BoardId) =>
+export const selectBoardSpecialTokenValues = (boardId?: BoardId) =>
 	createSelector(
 		[
 			selectBoardProp({
@@ -19,7 +19,7 @@ export const selectBoardSpecialTokenValues = (boardId: BoardId) =>
 			const modification = tokenValueModifications[investigator.code];
 
 			if (!modification) {
-				return [];
+				return {};
 			}
 
 			return modification();

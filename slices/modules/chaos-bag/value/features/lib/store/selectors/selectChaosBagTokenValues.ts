@@ -12,7 +12,7 @@ import {
 import { createSelector } from "@reduxjs/toolkit";
 import { selectBoardTokenValues } from "./selectBoardTokenValues";
 
-export const selectChaosBagTokenValues = (boardId: BoardId) =>
+export const selectChaosBagTokenValues = (boardId?: BoardId) =>
 	createSelector(
 		[
 			selectCurrentReferenceCardTokenValues,

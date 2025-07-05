@@ -1,4 +1,4 @@
-import { openSkillCheckChaosBagModal } from "@features/game/chaos-bag";
+import { openSkillCheckChaosBagModal } from "@modules/chaos-bag/base/shared/lib";
 import { useHapticSwipe } from "@modules/core/haptic/shared/lib";
 import {
 	clearSkillCheckHistory,

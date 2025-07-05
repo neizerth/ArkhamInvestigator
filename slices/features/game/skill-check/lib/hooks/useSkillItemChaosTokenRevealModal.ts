@@ -1,3 +1,4 @@
+import { openSkillCheckChaosBagModal } from "@modules/chaos-bag/base/shared/lib";
 import {
 	getSkillCheckValue,
 	sanitizeSkillCheckExpression,
@@ -7,7 +8,6 @@ import {
 } from "@shared/lib";
 import type { SkillCheckHistoryItem } from "@shared/model";
 import { useCallback } from "react";
-import { openSkillCheckChaosBagModal } from "../../../chaos-bag";
 
 export const useSkillItemChaosTokenRevealModal = () => {
 	const value = useAppSelector(selectCurrentBoardProp("value"));

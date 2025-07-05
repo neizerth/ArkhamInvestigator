@@ -1,5 +1,5 @@
+import type { ChaosBagState } from "@modules/chaos-bag/base/shared/lib";
 import type { PersistedState } from "redux-persist";
-import type { ChaosBagState } from "../../game/chaos-bag";
 
 type State = PersistedState & {
 	chaosBag?: ChaosBagState;

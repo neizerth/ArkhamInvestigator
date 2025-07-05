@@ -1,6 +1,6 @@
+import { selectUnrevealedChaosTokensCount } from "@modules/chaos-bag/reveal/base/entities/lib";
 import { useAppSelector } from "@shared/lib";
 import type { ViewProps } from "react-native";
-import { selectUnrevealedChaosTokensCount } from "../../../../../lib";
 import * as C from "./BottomPanel.components";
 
 export type BottomPanelProps = ViewProps & {

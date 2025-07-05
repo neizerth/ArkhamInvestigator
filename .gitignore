@@ -40,3 +40,4 @@ app-example
 *.swp
 *.apk
 *.aab
+/tmp

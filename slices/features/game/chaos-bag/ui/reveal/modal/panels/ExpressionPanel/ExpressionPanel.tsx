@@ -1,10 +1,11 @@
-import { useAppSelector } from "@shared/lib";
-import { useCallback, useState } from "react";
-import type { ViewProps } from "react-native";
 import {
 	selectChaosBagSkillCheckExpression,
 	selectChaosBagSkillCheckTitle,
-} from "../../../../../lib";
+} from "@modules/chaos-bag/base/shared/lib";
+import { useAppSelector } from "@shared/lib";
+import { useCallback, useState } from "react";
+import type { ViewProps } from "react-native";
+import {} from "../../../../../lib";
 import * as C from "./ExpressionPanel.components";
 import { getExpressionDisplayStyles } from "./ExpressionPanel.styles";
 

@@ -1,10 +1,11 @@
+import { toggleChaosTokenSeal } from "@modules/chaos-bag/base/entities/lib";
+import { showRevealChaosBagModal } from "@modules/chaos-bag/base/shared/lib";
 import { useAppTranslation } from "@modules/core/i18n/shared/lib";
 import { REMOVE_CLIPPED_SUBVIEWS } from "@shared/config";
 import { goBack, useAppDispatch } from "@shared/lib";
 import { Delay } from "@shared/ui";
 import { useCallback } from "react";
 import type { ListRenderItemInfo, ViewProps } from "react-native";
-import { openRevealChaosTokenModal, toggleChaosTokenSeal } from "../../lib";
 import type { ChaosBagToken } from "../../model";
 import * as C from "./ChaosBagPreview.components";
 import { useData, useModalActions } from "./hooks";
@@ -19,7 +20,7 @@ export const ChaosBagPreview = (props: ChaosBagPreviewProps) => {
 
 	const toggleSeal = useCallback(
 		(id: string) => () => {
-			dispatch(toggleChaosTokenSeal(id));
+			dispatch(toggleChaosTokenSeal({ id }));
 		},
 		[dispatch],
 	);
@@ -27,7 +28,7 @@ export const ChaosBagPreview = (props: ChaosBagPreviewProps) => {
 	const reveal = useCallback(() => {
 		dispatch(goBack());
 
-		dispatch(openRevealChaosTokenModal());
+		dispatch(showRevealChaosBagModal());
 	}, [dispatch]);
 
 	const renderTokenRow = useCallback(

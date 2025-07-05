@@ -1,8 +1,8 @@
-import { removeRevealHistoryItem } from "@features/game/chaos-bag";
 import type {
 	ChaosBagHistoryItem,
 	ChaosBagToken,
 } from "@features/game/chaos-bag/model";
+import { removeRevealHistoryItem } from "@modules/chaos-bag/base/shared/lib";
 import { useHapticFeedback } from "@modules/core/haptic/shared/lib";
 import { REMOVE_CLIPPED_SUBVIEWS } from "@shared/config";
 import {
@@ -63,7 +63,11 @@ export const ChaosBagRevealItem = ({
 	}, []);
 
 	const removeItem = useCallback(() => {
-		dispatch(removeRevealHistoryItem(id));
+		dispatch(
+			removeRevealHistoryItem({
+				id,
+			}),
+		);
 		impactFeedback();
 	}, [dispatch, id, impactFeedback]);
 

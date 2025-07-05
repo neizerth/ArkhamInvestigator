@@ -1,7 +1,7 @@
 import {
 	selectModifyChaosTokens,
 	setModifyChaosTokens,
-} from "@features/game/chaos-bag";
+} from "@modules/chaos-bag/base/shared/lib";
 import { routes } from "@shared/config";
 import {
 	delay,

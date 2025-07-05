@@ -1,4 +1,4 @@
-import { setChaosTokenValue } from "@features/game/chaos-bag";
+import { clearChaosTokenValue } from "@modules/chaos-bag/base/shared/lib";
 import { useAppTranslation } from "@modules/core/i18n/shared/lib";
 import {
 	selectReferenceCard,
@@ -26,7 +26,7 @@ export const ReferenceCardSelect = (props: ReferenceCardSelectProps) => {
 	const onReferenceCardSelect = useCallback(
 		({ value }: SelectItem<ReferenceCard>) => {
 			dispatch(setReferenceCardCode(value.code));
-			dispatch(setChaosTokenValue(null));
+			dispatch(clearChaosTokenValue());
 		},
 		[dispatch],
 	);

@@ -1,7 +1,7 @@
 import {
 	setRevealHistory,
 	setRevealedTokenIds,
-} from "@features/game/chaos-bag";
+} from "@modules/chaos-bag/base/shared/lib";
 import type { ActionCreator } from "@reduxjs/toolkit";
 import { routes } from "@shared/config";
 import {

@@ -1,8 +1,8 @@
+import { selectChaosBagTokenReference } from "@modules/chaos-bag/effect/features/lib";
 import { selectBoardById, useAppSelector } from "@shared/lib";
 import type { BoardId } from "@shared/model";
 import { useMemo } from "react";
 import type { ChaosTokenType } from "../../../model";
-import { selectChaosBagTokenReference } from "../../store";
 
 type Options = {
 	boardId?: BoardId;

@@ -1,4 +1,4 @@
-import { setChaosTokenValue } from "@features/game/chaos-bag";
+import { clearChaosTokenValue } from "@modules/chaos-bag/base/shared/lib";
 import { useAppTranslation } from "@modules/core/i18n/shared/lib";
 import {
 	selectStoryTypeFilter,
@@ -39,14 +39,14 @@ export const ReferenceStorySelect = (props: ReferenceStorySelectProps) => {
 	const clearStory = useCallback(() => {
 		dispatch(setStoryCode(null));
 		dispatch(setReferenceCardCode(null));
-		dispatch(setChaosTokenValue(null));
+		dispatch(clearChaosTokenValue());
 	}, [dispatch]);
 
 	const onStorySelect = useCallback(
 		({ value }: SelectItem<Story>) => {
 			dispatch(setStoryCode(value.code));
 			dispatch(setReferenceCardCode(value.referenceCards[0].code));
-			dispatch(setChaosTokenValue(null));
+			dispatch(clearChaosTokenValue());
 		},
 		[dispatch],
 	);

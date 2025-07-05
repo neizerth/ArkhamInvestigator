@@ -1,4 +1,4 @@
 export * from "./handleCancelShowRevealChaosBagModal";
-export * from "./handleShowRevealChaosTokenModal";
+export * from "./handleShowRevealChaosBagModal";
 export * from "./handleCloseRevealChaosBagModal";
 export * from "./handleOpenSkillCheckChaosBagModal";

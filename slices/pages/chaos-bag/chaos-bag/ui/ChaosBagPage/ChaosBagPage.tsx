@@ -1,4 +1,4 @@
-import { createChaosBag } from "@features/game/chaos-bag";
+import { updateChaosBag } from "@modules/chaos-bag/base/entities/lib";
 import { useAppTranslation } from "@modules/core/i18n/shared/lib";
 import { routes } from "@shared/config";
 import {
@@ -19,7 +19,7 @@ export const ChaosBagPage = () => {
 	const { t } = useAppTranslation();
 
 	const createBag = useCallback(() => {
-		dispatch(createChaosBag());
+		dispatch(updateChaosBag());
 	}, [dispatch]);
 
 	const goToPage = usePage();
