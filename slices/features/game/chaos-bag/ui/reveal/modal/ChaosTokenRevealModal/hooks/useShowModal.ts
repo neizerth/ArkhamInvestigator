@@ -1,12 +1,14 @@
+import {
+	closeRevealChaosBagModal,
+	selectShowRevealChaosTokenModal,
+} from "@modules/chaos-bag/base/shared/lib";
+import {
+	selectRevealedTokensCount,
+	selectUnrevealedChaosTokensCount,
+} from "@modules/chaos-bag/reveal/base/entities/lib";
 import { useAppDispatch, useAppSelector } from "@shared/lib";
 import { usePathname } from "expo-router";
 import { useCallback, useEffect } from "react";
-import {
-	closeRevealChaosTokenModal,
-	selectRevealedTokensCount,
-	selectShowRevealChaosTokenModal,
-	selectUnrevealedChaosTokensCount,
-} from "../../../../../lib";
 
 const validPathnames = ["/board", "/board/skill-check"];
 
@@ -28,7 +30,7 @@ export const useShowModal = () => {
 	const hideModal = !showModal || isEmpty;
 
 	const close = useCallback(() => {
-		dispatch(closeRevealChaosTokenModal());
+		dispatch(closeRevealChaosBagModal());
 	}, [dispatch]);
 
 	useEffect(() => {

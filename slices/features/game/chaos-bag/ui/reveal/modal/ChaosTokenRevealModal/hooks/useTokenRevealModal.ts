@@ -7,14 +7,15 @@ import {
 	useBoolean,
 } from "@shared/lib";
 import { useCallback, useEffect } from "react";
+
+import { toggleChaosTokenSeal } from "@modules/chaos-bag/base/entities/lib";
+import { selectChaosBagLoadingAnimation } from "@modules/chaos-bag/base/shared/lib";
 import {
+	returnAllChaosTokens,
 	returnChaosToken,
-	returnChaosTokens,
-	revealChaosToken,
-	selectChaosBagLoadingAnimation,
+	revealChaosTokens,
 	selectRevealedTokensCount,
-	toggleChaosTokenSeal,
-} from "../../../../../lib";
+} from "@modules/chaos-bag/reveal/base/entities/lib";
 import type { ChaosBagToken } from "../../../../../model";
 import { useShowModal } from "./useShowModal";
 
@@ -30,12 +31,21 @@ export const useTokenRevealModal = () => {
 
 	const reveal = useCallback(() => {
 		setOneMoreLoading.off();
-		dispatch(revealChaosToken(1));
+		dispatch(
+			revealChaosTokens({
+				boardId: "current",
+				count: 1,
+			}),
+		);
 	}, [dispatch, setOneMoreLoading.off]);
 
 	const onTokenPress = useCallback(
 		(token: ChaosBagToken) => () => {
-			dispatch(returnChaosToken(token));
+			dispatch(
+				returnChaosToken({
+					id: token.id,
+				}),
+			);
 			if (revealedCount > 1) {
 				return;
 			}
@@ -45,7 +55,7 @@ export const useTokenRevealModal = () => {
 	);
 
 	const returnTokens = useCallback(() => {
-		dispatch(returnChaosTokens());
+		dispatch(returnAllChaosTokens());
 		close();
 	}, [dispatch, close]);
 
@@ -66,7 +76,11 @@ export const useTokenRevealModal = () => {
 
 	const toggleSeal = useCallback(
 		(token: ChaosBagToken) => () => {
-			dispatch(toggleChaosTokenSeal(token.id));
+			dispatch(
+				toggleChaosTokenSeal({
+					id: token.id,
+				}),
+			);
 		},
 		[dispatch],
 	);

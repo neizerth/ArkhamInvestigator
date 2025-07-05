@@ -1,4 +1,5 @@
 import { openReferenceCard } from "@entities/reference-card";
+import { selectRevealHistorySize } from "@modules/chaos-bag/reveal/history/shared/lib";
 import { routes } from "@shared/config";
 import {
 	delay,
@@ -9,14 +10,12 @@ import {
 } from "@shared/lib";
 import type { Href } from "expo-router";
 import { useCallback, useMemo } from "react";
-import { selectRevealHistory } from "../../../lib";
 
 export const useModalActions = () => {
 	const dispatch = useAppDispatch();
 
-	const showHistory = useAppSelector(
-		(state) => selectRevealHistory(state).length > 0,
-	);
+	const historySize = useAppSelector(selectRevealHistorySize);
+	const showHistory = historySize > 0;
 
 	const goTo = useCallback(
 		(href: Href) => async () => {

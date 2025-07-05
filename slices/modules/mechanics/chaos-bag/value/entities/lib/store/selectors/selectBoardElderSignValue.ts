@@ -9,7 +9,7 @@ const resourceCodes = [
 	InvesigatorCode.IsabelleBarnes,
 ];
 
-export const selectBoardElderSignValue = (boardId: BoardId) =>
+export const selectBoardElderSignValue = (boardId?: BoardId) =>
 	createSelector([selectBoardById(boardId)], (board) => {
 		if (!board) {
 			return;

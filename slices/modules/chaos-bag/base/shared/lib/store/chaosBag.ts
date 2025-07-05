@@ -112,6 +112,9 @@ export const {
 	cancelShowRevealChaosBagModal,
 	closeRevealChaosBagModal,
 	openSkillCheckChaosBagModal,
+	showRevealChaosBagModal,
+
+	clearChaosTokenValue,
 } = chaosBag.actions;
 
 export const {

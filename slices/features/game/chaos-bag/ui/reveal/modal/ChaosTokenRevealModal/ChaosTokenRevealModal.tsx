@@ -2,10 +2,9 @@ import { useAppSelector } from "@shared/lib";
 import { init, last } from "ramda";
 import { useMemo } from "react";
 import type { ViewProps } from "react-native";
-import {
-	selectChaosBagLoadingAnimation,
-	selectRevealedTokens,
-} from "../../../../lib";
+
+import { selectChaosBagLoadingAnimation } from "@modules/chaos-bag/base/shared/lib";
+import { selectRevealedTokens } from "@modules/chaos-bag/reveal/base/entities/lib";
 import type { ChaosBagToken } from "../../../../model";
 import * as C from "./ChaosTokenRevealModal.components";
 import { useTokenRevealModal } from "./hooks";

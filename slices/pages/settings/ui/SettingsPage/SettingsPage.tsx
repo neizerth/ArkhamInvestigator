@@ -1,5 +1,5 @@
-import * as chaosBag from "@features/game/chaos-bag";
 import { showToast } from "@features/notifications/lib";
+import * as chaosBag from "@modules/chaos-bag/base/shared/lib";
 import {
 	selectHapticMode,
 	setHapticMode,

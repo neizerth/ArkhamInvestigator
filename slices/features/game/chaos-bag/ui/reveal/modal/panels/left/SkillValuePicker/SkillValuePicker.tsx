@@ -6,10 +6,9 @@ import type {
 	PickerChangeEvent,
 	PickerListRenderItem,
 } from "../../../../../../../../../widgets/control/picker";
-import {
-	selectChaosBagSkillValue,
-	updateChaosBagSkillValue,
-} from "../../../../../../lib";
+
+import { setCustomChaosBagSkillValue } from "@modules/chaos-bag/base/entities/lib";
+import { selectChaosBagSkillValue } from "@modules/chaos-bag/base/shared/lib";
 import * as C from "./SkillValuePicker.components";
 
 export type SkillValuePickerProps = ViewProps;
@@ -30,7 +29,7 @@ export const SkillValuePicker = (props: SkillValuePickerProps) => {
 	const onSkillValueChange = useCallback(
 		({ value = 0 }: PickerChangeEvent) => {
 			dispatch(
-				updateChaosBagSkillValue({
+				setCustomChaosBagSkillValue({
 					boardId: "current",
 					value,
 				}),

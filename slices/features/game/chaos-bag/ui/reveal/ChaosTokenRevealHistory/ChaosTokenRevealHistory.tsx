@@ -7,12 +7,13 @@ import {
 	Gesture,
 	GestureDetector,
 } from "react-native-gesture-handler";
+
+import { toggleChaosTokenSeal } from "@modules/chaos-bag/base/entities/lib";
 import {
-	returnChaosToken,
 	selectCurrentTokenId,
 	setCurrentTokenId,
-	toggleChaosTokenSeal,
-} from "../../../lib";
+} from "@modules/chaos-bag/base/shared/lib";
+import { returnChaosToken } from "@modules/chaos-bag/reveal/base/entities/lib";
 import type { ChaosBagToken } from "../../../model";
 import * as C from "./ChaosTokenRevealHistory.components";
 
@@ -35,7 +36,11 @@ export const ChaosTokenRevealHistory = ({
 
 	const toggleSeal = useCallback(
 		(token: ChaosBagToken) => () => {
-			dispatch(toggleChaosTokenSeal(token.id));
+			dispatch(
+				toggleChaosTokenSeal({
+					id: token.id,
+				}),
+			);
 		},
 		[dispatch],
 	);

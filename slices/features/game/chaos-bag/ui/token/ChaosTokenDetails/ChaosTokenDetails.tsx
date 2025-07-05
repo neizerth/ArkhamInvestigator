@@ -4,13 +4,16 @@ import { range } from "ramda";
 import { memo, useCallback, useMemo } from "react";
 import type { ViewProps } from "react-native";
 import { chaosToken } from "../../../config";
+
 import {
 	addChaosToken,
+	removeChaosToken,
+	selectChaosTokenCountByType,
+} from "@modules/chaos-bag/base/entities/lib";
+import {
 	removeAllChaosTokensByType,
-	removeChaosTokenByType,
-	selectChaosTokenCount,
 	selectUnlimitedChaosTokens,
-} from "../../../lib";
+} from "@modules/chaos-bag/base/shared/lib";
 import type { ChaosTokenType } from "../../../model";
 import * as C from "./ChaosTokenDetails.components";
 
@@ -29,26 +32,38 @@ export const ChaosTokenDetails = ({
 	...props
 }: ChaosTokenDetailsProps) => {
 	const dispatch = useAppDispatch();
-	const count = useAppSelector(selectChaosTokenCount(type));
+	const count = useAppSelector(selectChaosTokenCountByType(type));
 	const isUnlimited = useAppSelector(selectUnlimitedChaosTokens);
 	const max = isUnlimited ? 99 : chaosToken.count[type];
 
 	const clear = useCallback(() => {
-		dispatch(removeAllChaosTokensByType(type));
+		dispatch(
+			removeAllChaosTokensByType({
+				type,
+			}),
+		);
 	}, [dispatch, type]);
 
 	const onDecrement = useCallback(() => {
 		if (count <= 0) {
 			return false;
 		}
-		dispatch(removeChaosTokenByType(type));
+		dispatch(
+			removeChaosToken({
+				type,
+			}),
+		);
 	}, [dispatch, count, type]);
 	const onIncrement = useCallback(() => {
 		if (count >= max) {
 			return false;
 		}
 
-		dispatch(addChaosToken(type));
+		dispatch(
+			addChaosToken({
+				type,
+			}),
+		);
 	}, [dispatch, max, count, type]);
 
 	const previewTokens = count > MAX_PREVIEW_COUNT;

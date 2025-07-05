@@ -9,11 +9,12 @@ import type {
 	PickerListRenderItem,
 	PickerProps,
 } from "../../../../../../widgets/control/picker";
+
+import { setChaosTokenValue } from "@modules/chaos-bag/value/entities/lib/store/actions";
 import {
-	selectChaosTokenRangeByType,
-	selectChaosTokenValueByType,
-	setChaosTokenValueByType,
-} from "../../../lib";
+	selectChaosTokenRangeByType as selectTokenRange,
+	selectChaosTokenValueByType as selectTokenValue,
+} from "@modules/chaos-bag/value/features/lib";
 import type { ChaosTokenType } from "../../../model";
 import type { ChaosTokenValueProps } from "../ChaosTokenValue";
 import * as C from "./ChaosTokenValuePicker.components";
@@ -35,26 +36,25 @@ export const ChaosTokenValuePicker = ({
 }: ChaosTokenValuePickerProps) => {
 	const dispatch = useAppDispatch();
 	const boardId = useAppSelector(selectCurrentBoardProp("id"));
-	const { code } = useAppSelector(selectCurrentBoardProp("investigator"));
 
 	const value = useAppSelector(
-		selectChaosTokenValueByType({
+		selectTokenValue({
 			type,
-			code,
+			boardId,
 		}),
 	);
 
 	const data = useAppSelector(
-		selectChaosTokenRangeByType({
+		selectTokenRange({
 			type,
-			code,
+			boardId,
 		}),
 	);
 
 	const setValue = useCallback(
 		({ value = 0 }: PickerChangeEvent) => {
 			dispatch(
-				setChaosTokenValueByType({
+				setChaosTokenValue({
 					boardId,
 					type,
 					value,

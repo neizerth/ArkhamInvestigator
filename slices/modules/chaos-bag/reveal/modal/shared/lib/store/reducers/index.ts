@@ -1,4 +1,4 @@
 export * from "./cancelShowRevealChaosBagModal";
-export * from "./showChaosBagModal";
+export * from "./showRevealChaosBagModal";
 export * from "./closeRevealChaosBagModal";
 export * from "./openSkillCheckChaosBagModal";

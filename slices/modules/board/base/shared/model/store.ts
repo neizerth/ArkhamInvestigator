@@ -13,6 +13,6 @@ export type BoardHandler<Payload = void> = (
 
 export type OmitBoard<
 	P extends {
-		boardId: BoardId;
+		boardId?: BoardId;
 	},
 > = Omit<P, "boardId">;

@@ -1,4 +1,4 @@
-import { cancelShowRevealModal } from "@features/game/chaos-bag";
+import { cancelShowRevealChaosBagModal } from "@modules/chaos-bag/base/shared/lib";
 import { PrimaryButton } from "@modules/core/haptic/shared/ui";
 import { useAppTranslation } from "@modules/core/i18n/shared/lib";
 import {
@@ -48,7 +48,7 @@ export const Keyboard = ({ ...props }: KeyboardProps) => {
 	const showKeyReveal = useKeyCheck();
 
 	const hideReveal = useCallback(() => {
-		dispatch(cancelShowRevealModal());
+		dispatch(cancelShowRevealChaosBagModal());
 	}, [dispatch]);
 
 	useEffect(() => {

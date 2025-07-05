@@ -1,8 +1,5 @@
-import {
-	createChaosBag,
-	setChaosBagTokenCount,
-} from "@features/game/chaos-bag";
 import type { ChaosTokenType } from "@features/game/chaos-bag/model";
+import { createChaosBag } from "@modules/chaos-bag/base/entities/lib";
 import { useAppTranslation } from "@modules/core/i18n/shared/lib";
 import {
 	goBack,
@@ -63,8 +60,11 @@ export const ChaosBagFillPage = () => {
 			{} as Partial<Record<ChaosTokenType, number>>,
 		);
 
-		dispatch(setChaosBagTokenCount(data));
-		dispatch(createChaosBag());
+		dispatch(
+			createChaosBag({
+				tokenCount: data,
+			}),
+		);
 		dispatch(goBack());
 	}, [dispatch, tokens]);
 

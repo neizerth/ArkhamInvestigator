@@ -3,11 +3,7 @@ import {
 	useHapticSwipe,
 	useHapticTap,
 } from "@modules/core/haptic/shared/lib";
-import {
-	selectCurrentBoardProp,
-	useAppDispatch,
-	useAppSelector,
-} from "@shared/lib";
+import { useAppDispatch, useAppSelector } from "@shared/lib";
 import { useCallback, useMemo } from "react";
 import type { ViewProps } from "react-native";
 import {
@@ -16,11 +12,13 @@ import {
 	GestureDetector,
 } from "react-native-gesture-handler";
 import { chaosToken } from "../../../../../config";
+
+import { selectCurrentBoardId } from "@modules/board/base/shared/lib";
 import {
-	selectChaosTokenValueByType,
 	selectModifyChaosTokens,
 	setCurrentTokenId,
-} from "../../../../../lib";
+} from "@modules/chaos-bag/base/shared/lib";
+import { selectChaosTokenValueByType } from "@modules/chaos-bag/value/features/lib";
 import type { ChaosBagToken, ChaosTokenType } from "../../../../../model";
 import * as C from "./CenterPanel.components";
 
@@ -43,13 +41,17 @@ export const CenterPanel = ({
 	...props
 }: CenterPanelProps) => {
 	const dispatch = useAppDispatch();
-	const { code } = useAppSelector(selectCurrentBoardProp("investigator"));
+	const boardId = useAppSelector(selectCurrentBoardId);
+
+	if (!boardId) {
+		return;
+	}
 	const { type } = lastToken;
 
 	const tokenValue = useAppSelector(
 		selectChaosTokenValueByType({
 			type,
-			code,
+			boardId,
 		}),
 	);
 

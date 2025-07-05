@@ -1,4 +1,4 @@
-import { createChaosBag } from "@features/game/chaos-bag";
+import { updateChaosBag } from "@modules/chaos-bag/base/entities/lib";
 import type { ActionCreator } from "@reduxjs/toolkit";
 import {
 	replacePageTo,
@@ -20,7 +20,7 @@ export const startGame: ActionCreator<AppThunk> =
 		dispatch(setCurrentInvestigatorIndex(0));
 		dispatch(setSelectedInvestigators([]));
 		dispatch(setShowDescription(false));
-		dispatch(createChaosBag());
+		dispatch(updateChaosBag());
 
 		dispatch(replacePageTo("/board"));
 	};

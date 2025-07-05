@@ -1,9 +1,12 @@
+import type { ChaosTokenType } from "@features/game/chaos-bag/model";
+import type { BoardId } from "@modules/board/base/shared/model";
+import {
+	selectBoardElderSignValue,
+	selectBoardSpecialTokenValues,
+} from "@modules/mechanics/chaos-bag/value/entities/lib";
 import { createSelector } from "@reduxjs/toolkit";
 import { rangeStep, selectReferenceCardTokens } from "@shared/lib";
 import { propEq, range } from "ramda";
-import type { ChaosTokenType } from "../../../../../../model";
-import { getInvestigatorSpecialTokenValues } from "../../../../../tokens";
-import { selectInvestigatorElderSignValue } from "../reference";
 
 const MAX_VALUE = 20;
 const MIN_VALUE = -21;
@@ -12,21 +15,24 @@ const defaultData = range(MIN_VALUE, MAX_VALUE + 1);
 
 type Options = {
 	type: ChaosTokenType;
-	code: string;
+	boardId?: BoardId;
 };
 
-export const selectChaosTokenRangeByType = ({ type, code }: Options) =>
+export const selectChaosTokenRangeByType = ({ type, boardId }: Options) =>
 	createSelector(
-		[selectReferenceCardTokens, selectInvestigatorElderSignValue(code)],
-		(data, elderSignValue) => {
-			const specialTokens = getInvestigatorSpecialTokenValues(code);
+		[
+			selectReferenceCardTokens,
+			selectBoardElderSignValue(boardId),
+			selectBoardSpecialTokenValues(boardId),
+		],
+		(data, elderSignValue, specialTokens) => {
 			const specialValue = specialTokens[type];
 
 			if (typeof specialValue === "number") {
 				return [specialValue];
 			}
 			if (type === "elderSign" && elderSignValue) {
-				return [elderSignValue.elderSign];
+				return [elderSignValue];
 			}
 			const item = data.find(propEq(type, "token"));
 

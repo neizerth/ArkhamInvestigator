@@ -8,7 +8,7 @@ import { selectChaosBagTokenValues } from "@modules/chaos-bag/value/features/lib
 import { createSelector } from "@reduxjs/toolkit";
 import { propEq, sum } from "ramda";
 
-export const selectSkillCheckResult = (boardId: BoardId) =>
+export const selectSkillCheckResult = (boardId?: BoardId) =>
 	createSelector(
 		[
 			selectChaosBagSkillValue,

@@ -1,8 +1,8 @@
+import { selectRevealedTokenCountByType } from "@modules/chaos-bag/reveal/base/entities/lib";
 import { useAppTranslation } from "@modules/core/i18n/shared/lib";
 import { useAppSelector } from "@shared/lib";
 import { useMemo } from "react";
 import type { ChaosTokenType } from "../../../model";
-import { selectRevealedTokenCountByType } from "../../store";
 
 type TokenRecord = Partial<Record<ChaosTokenType, string>>;
 
