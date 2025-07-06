@@ -1,14 +1,12 @@
-import type {
-	ChaosBagHandler,
-	ChaosBagToken,
-} from "@modules/chaos-bag/base/shared/model";
+import type { ChaosBagToken } from "@modules/chaos-bag/base/shared/model";
 import { last, prop } from "ramda";
+import type { ChaosBagRevealHandler } from "../../../model";
 
 export type HandleAddRevealedTokensPayload = {
 	tokens: ChaosBagToken[];
 };
 
-export const handleAddRevealedTokens: ChaosBagHandler<
+export const handleAddRevealedTokens: ChaosBagRevealHandler<
 	HandleAddRevealedTokensPayload
 > = (state, { tokens }) => {
 	const lastToken = last(tokens);
@@ -16,5 +14,5 @@ export const handleAddRevealedTokens: ChaosBagHandler<
 	const lastTokenId = lastToken?.id || null;
 
 	state.revealedTokenIds.push(...tokenIds);
-	state.currentTokenId = lastTokenId;
+	state.currentRevealedTokenId = lastTokenId;
 };

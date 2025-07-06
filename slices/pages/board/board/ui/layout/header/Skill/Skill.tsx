@@ -1,4 +1,4 @@
-import { openSkillCheckChaosBagModal } from "@modules/chaos-bag/reveal/modal/shared/lib";
+import { startChaosBagReveal } from "@modules/chaos-bag/reveal/base/shared/lib";
 import {
 	selectAlwaysShowSkillModifiers,
 	selectCurrentStatBaseValue,
@@ -49,7 +49,7 @@ export const Skill = ({ width, height, type, ...props }: SkillProps) => {
 
 	const onLongPress = useCallback(() => {
 		dispatch(
-			openSkillCheckChaosBagModal({
+			startChaosBagReveal({
 				type,
 				value,
 			}),

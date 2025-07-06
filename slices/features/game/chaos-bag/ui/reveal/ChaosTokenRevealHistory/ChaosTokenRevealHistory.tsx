@@ -9,11 +9,12 @@ import {
 } from "react-native-gesture-handler";
 
 import { toggleChaosTokenSeal } from "@modules/chaos-bag/base/entities/lib";
-import {
-	selectCurrentTokenId,
-	setCurrentTokenId,
-} from "@modules/chaos-bag/base/shared/lib";
+
 import { returnChaosToken } from "@modules/chaos-bag/reveal/base/entities/lib";
+import {
+	selectCurrentRevealedTokenId,
+	setCurrentRevealedTokenId,
+} from "@modules/chaos-bag/reveal/base/shared/lib";
 import type { ChaosBagToken } from "../../../model";
 import * as C from "./ChaosTokenRevealHistory.components";
 
@@ -26,7 +27,7 @@ export const ChaosTokenRevealHistory = ({
 	...props
 }: ChaosTokenRevealHistoryProps) => {
 	const dispatch = useAppDispatch();
-	const currentTokenId = useAppSelector(selectCurrentTokenId);
+	const currentTokenId = useAppSelector(selectCurrentRevealedTokenId);
 	const onTokenPress = useCallback(
 		(token: ChaosBagToken) => () => {
 			dispatch(returnChaosToken(token));
@@ -49,7 +50,7 @@ export const ChaosTokenRevealHistory = ({
 
 	const onSwipeDown = useCallback(
 		(token: ChaosBagToken) => () => {
-			dispatch(setCurrentTokenId(token.id));
+			dispatch(setCurrentRevealedTokenId(token.id));
 			impactHapticFeedback();
 		},
 		[impactHapticFeedback, dispatch],

@@ -1,4 +1,4 @@
-import { selectChaosBagSkillValue } from "@modules/chaos-bag/base/shared/lib";
+import { selectChaosBagSkillValue } from "@modules/chaos-bag/reveal/base/shared/lib";
 import { useAppSelector } from "@shared/lib";
 import type { ViewProps } from "react-native";
 import * as C from "./RightPanel.components";

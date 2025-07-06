@@ -1,4 +1,3 @@
-// TODO
 export type CanCancelShowRevealModalOptions = {
 	revealedTokensCount: number;
 };

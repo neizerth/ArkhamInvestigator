@@ -1,8 +1,9 @@
 import { selectCurrentToken } from "@modules/chaos-bag/base/entities/lib";
+
 import {
 	selectRevealedTokenIds,
-	setCurrentTokenId,
-} from "@modules/chaos-bag/base/shared/lib";
+	setCurrentRevealedTokenId,
+} from "@modules/chaos-bag/reveal/base/shared/lib";
 import { useAppDispatch, useAppSelector } from "@shared/lib";
 import { last } from "ramda";
 import { useCallback } from "react";
@@ -29,7 +30,7 @@ export const DescriptionPanel = (props: DescriptionPanelProps) => {
 		if (isLastToken || !lastId) {
 			return false;
 		}
-		dispatch(setCurrentTokenId(lastId));
+		dispatch(setCurrentRevealedTokenId(lastId));
 	}, [dispatch, isLastToken, lastId]);
 
 	if (!effect) {

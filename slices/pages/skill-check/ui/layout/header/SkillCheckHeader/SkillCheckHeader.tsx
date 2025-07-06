@@ -1,4 +1,4 @@
-import { openSkillCheckChaosBagModal } from "@modules/chaos-bag/reveal/modal/shared/lib";
+import { startChaosBagReveal } from "@modules/chaos-bag/reveal/base/shared/lib";
 import { useHapticSwipe } from "@modules/core/haptic/shared/lib";
 import {
 	clearSkillCheckHistory,
@@ -58,7 +58,7 @@ export const SkillCheckHeader = ({ ...props }: SkillCheckHeaderProps) => {
 		}
 
 		dispatch(
-			openSkillCheckChaosBagModal({
+			startChaosBagReveal({
 				type,
 				value,
 			}),

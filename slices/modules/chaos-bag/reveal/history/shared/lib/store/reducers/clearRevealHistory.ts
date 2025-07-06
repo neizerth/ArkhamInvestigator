@@ -1,6 +1,6 @@
-import type { ChaosBagReducer } from "@modules/chaos-bag/base/shared/model";
+import type { ChaosBagRevealHistoryReducer } from "../../../model";
 import { handleClearRevealHistory } from "../handlers";
 
-export const clearRevealHistory: ChaosBagReducer = (state) => {
+export const clearRevealHistory: ChaosBagRevealHistoryReducer = (state) => {
 	handleClearRevealHistory(state);
 };

@@ -1,12 +1,12 @@
-import type { ChaosBagHandler } from "@modules/chaos-bag/base/shared/model";
 import { equals, last, reject } from "ramda";
+import type { ChaosBagRevealHandler } from "../../../model";
 
-export const handleRemoveRevealedTokenId: ChaosBagHandler<string> = (
+export const handleRemoveRevealedTokenId: ChaosBagRevealHandler<string> = (
 	state,
 	id,
 ) => {
 	const ids = reject(equals(id), state.revealedTokenIds);
 	state.revealedTokenIds = ids;
 
-	state.currentTokenId = last(ids) || null;
+	state.currentRevealedTokenId = last(ids) || null;
 };

@@ -1,11 +1,12 @@
 import { selectBoardById } from "@modules/board/base/shared/lib";
 import { getStatDiffExpression } from "@modules/board/skill-check/shared/lib";
+
 import {
 	selectChaosBagSkillCheckType,
 	setChaosBagSkillCheckExpression,
 	setChaosBagSkillCheckTitle,
 	setChaosBagSkillValue,
-} from "@modules/chaos-bag/base/shared/lib";
+} from "@modules/chaos-bag/reveal/base/shared/lib";
 import { put, select, takeEvery } from "redux-saga/effects";
 import {
 	customChaosBagSkillValueSet,

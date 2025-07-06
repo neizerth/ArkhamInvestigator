@@ -1,7 +1,7 @@
-import type { ChaosBagReducer } from "@modules/chaos-bag/base/shared/model";
+import type { ChaosBagRevealReducer } from "../../../model";
 import { handleRemoveRevealedTokenId } from "../handlers";
 
-export const removeRevealedTokenId: ChaosBagReducer<string> = (
+export const removeRevealedTokenId: ChaosBagRevealReducer<string> = (
 	state,
 	{ payload },
 ) => {

@@ -1,6 +1,6 @@
-import type { ChaosBagReducer } from "@modules/chaos-bag/base/shared/model";
+import type { ChaosTokenValueReducer } from "../../../model";
 import { handleClearChaosTokenValue } from "../handlers";
 
-export const clearChaosTokenValue: ChaosBagReducer = (state) => {
+export const clearChaosTokenValue: ChaosTokenValueReducer = (state) => {
 	handleClearChaosTokenValue(state);
 };

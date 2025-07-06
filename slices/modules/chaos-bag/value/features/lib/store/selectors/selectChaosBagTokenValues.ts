@@ -1,10 +1,10 @@
 import type { BoardId } from "@modules/board/base/shared/model";
 
-import { selectChaosTokenValueInternal } from "@modules/chaos-bag/base/shared/lib";
 import {
 	selectBoardRefenceCardTokenValues,
 	selectCurrentReferenceCardTokenValues,
 } from "@modules/chaos-bag/value/entities/lib";
+import { selectChaosTokenValueInternal } from "@modules/chaos-bag/value/shared/lib";
 import {
 	selectBoardElderSignValue,
 	selectBoardSpecialTokenValues,
