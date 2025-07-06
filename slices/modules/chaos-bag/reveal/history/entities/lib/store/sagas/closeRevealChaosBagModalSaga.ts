@@ -1,4 +1,4 @@
-import { closeRevealChaosBagModal } from "@modules/chaos-bag/base/shared/lib";
+import { closeRevealChaosBagModal } from "@modules/chaos-bag/reveal/modal/shared/lib";
 import { put, takeEvery } from "redux-saga/effects";
 import { addRevealHistoryItemFromCurrent } from "../actions";
 

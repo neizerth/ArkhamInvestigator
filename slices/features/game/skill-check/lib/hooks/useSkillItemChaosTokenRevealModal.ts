@@ -1,4 +1,4 @@
-import { openSkillCheckChaosBagModal } from "@modules/chaos-bag/base/shared/lib";
+import { openSkillCheckChaosBagModal } from "@modules/chaos-bag/reveal/modal/shared/lib";
 import {
 	getSkillCheckValue,
 	sanitizeSkillCheckExpression,
