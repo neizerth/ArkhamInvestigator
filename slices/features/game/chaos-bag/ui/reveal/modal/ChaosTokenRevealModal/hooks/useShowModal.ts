@@ -1,11 +1,9 @@
-import {
-	closeRevealChaosBagModal,
-	selectShowRevealChaosTokenModal,
-} from "@modules/chaos-bag/base/shared/lib";
+import { selectShowRevealChaosTokenModal } from "@modules/chaos-bag/base/shared/lib";
 import {
 	selectRevealedTokensCount,
 	selectUnrevealedChaosTokensCount,
 } from "@modules/chaos-bag/reveal/base/entities/lib";
+import { closeRevealChaosBagModal } from "@modules/chaos-bag/reveal/modal/shared/lib";
 import { useAppDispatch, useAppSelector } from "@shared/lib";
 import { usePathname } from "expo-router";
 import { useCallback, useEffect } from "react";

@@ -1,5 +1,5 @@
 import { selectBoardId } from "@modules/board/base/shared/lib";
-import { updateBoardChaosTokenValueInternal } from "@modules/chaos-bag/base/shared/lib";
+import { updateBoardChaosTokenValueInternal } from "@modules/chaos-bag/value/shared/lib";
 import { put, select, takeEvery } from "redux-saga/effects";
 import { updateBoardChaosTokenValue } from "../actions";
 

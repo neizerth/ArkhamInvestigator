@@ -91,30 +91,11 @@ export const {
 	setChaosTokenValue: setChaosTokenValueInternal,
 	setBoardChaosTokenValue,
 
-	// reducers
-	clearRevealHistory,
-	addRevealHistoryItem,
-	removeRevealHistoryItem,
-	patchRevealHistoryItem,
-
 	// internal reducers
 	addChaosTokenInternal,
 	removeAllChaosTokensByType,
 	removeChaosTokenById,
 	updateChaosTokenInternal,
-
-	updateChaosTokenValueInternal,
-	updateBoardChaosTokenValueInternal,
-
-	removeRevealedTokenId,
-	addRevealedTokens,
-
-	cancelShowRevealChaosBagModal,
-	closeRevealChaosBagModal,
-	openSkillCheckChaosBagModal,
-	showRevealChaosBagModal,
-
-	clearChaosTokenValue,
 } = chaosBag.actions;
 
 export const {

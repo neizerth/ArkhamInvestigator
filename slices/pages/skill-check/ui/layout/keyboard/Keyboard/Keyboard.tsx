@@ -1,4 +1,4 @@
-import { cancelShowRevealChaosBagModal } from "@modules/chaos-bag/base/shared/lib";
+import { cancelShowRevealChaosBagModal } from "@modules/chaos-bag/reveal/modal/shared/lib";
 import { PrimaryButton } from "@modules/core/haptic/shared/ui";
 import { useAppTranslation } from "@modules/core/i18n/shared/lib";
 import {
