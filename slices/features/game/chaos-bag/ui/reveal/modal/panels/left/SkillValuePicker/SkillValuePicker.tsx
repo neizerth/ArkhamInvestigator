@@ -8,7 +8,7 @@ import type {
 } from "../../../../../../../../../widgets/control/picker";
 
 import { setCustomChaosBagSkillValue } from "@modules/chaos-bag/base/entities/lib";
-import { selectChaosBagSkillValue } from "@modules/chaos-bag/base/shared/lib";
+import { selectChaosBagSkillValue } from "@modules/chaos-bag/reveal/base/shared/lib";
 import * as C from "./SkillValuePicker.components";
 
 export type SkillValuePickerProps = ViewProps;

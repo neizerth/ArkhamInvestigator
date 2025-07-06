@@ -1,4 +1,4 @@
-import { selectCurrentRevealHistoryItem } from "@modules/chaos-bag/base/shared/lib";
+import { selectCurrentRevealHistoryItem } from "@modules/chaos-bag/reveal/history/shared/lib";
 import { put, select, takeEvery } from "redux-saga/effects";
 import {
 	createCurrentRevealHistoryItem,

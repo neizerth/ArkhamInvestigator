@@ -1,14 +1,12 @@
-import type {
-	ChaosBagHandler,
-	ChaosTokenType,
-} from "@modules/chaos-bag/base/shared/model";
+import type { ChaosTokenType } from "@modules/chaos-bag/base/shared/model";
+import type { ChaosTokenValueHandler } from "../../../model";
 
 export type HandleUpdateChaosTokenValueInternalPayload = {
 	type: ChaosTokenType;
 	value: number;
 };
 
-export const handleUpdateChaosTokenValueInternal: ChaosBagHandler<
+export const handleUpdateChaosTokenValueInternal: ChaosTokenValueHandler<
 	HandleUpdateChaosTokenValueInternalPayload
 > = (state, { type, value }) => {
 	state.chaosTokenValue = {

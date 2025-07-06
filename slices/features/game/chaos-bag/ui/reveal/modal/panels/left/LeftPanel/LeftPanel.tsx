@@ -2,11 +2,10 @@ import { openReferenceCard } from "@entities/reference-card";
 import {
 	selectChaosBagSkillCheckType,
 	selectChaosBagSkillValue,
-} from "@modules/chaos-bag/base/shared/lib";
+} from "@modules/chaos-bag/reveal/base/shared/lib";
 import { useAppDispatch, useAppSelector } from "@shared/lib";
 import { useCallback } from "react";
 import type { ViewProps } from "react-native";
-import {} from "../../../../../../lib";
 import * as C from "./LeftPanel.components";
 
 export type LeftPanelProps = ViewProps;

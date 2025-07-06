@@ -1,7 +1,7 @@
 import {
 	selectChaosBagSkillCheckExpression,
 	selectChaosBagSkillCheckTitle,
-} from "@modules/chaos-bag/base/shared/lib";
+} from "@modules/chaos-bag/reveal/base/shared/lib";
 import { useAppSelector } from "@shared/lib";
 import { useCallback, useState } from "react";
 import type { ViewProps } from "react-native";

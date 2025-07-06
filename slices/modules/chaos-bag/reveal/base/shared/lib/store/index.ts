@@ -1,2 +1,1 @@
-export * as chaosBagTokenRevealReducers from "./reducers";
-export * from "./actionCreators";
+export * from "./chaosBagReveal";

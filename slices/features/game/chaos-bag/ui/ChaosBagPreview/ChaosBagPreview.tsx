@@ -1,5 +1,5 @@
 import { toggleChaosTokenSeal } from "@modules/chaos-bag/base/entities/lib";
-import { showRevealChaosBagModal } from "@modules/chaos-bag/reveal/modal/shared/lib";
+import { openChaosBagRevealModal } from "@modules/chaos-bag/reveal/modal/shared/lib";
 import { useAppTranslation } from "@modules/core/i18n/shared/lib";
 import { REMOVE_CLIPPED_SUBVIEWS } from "@shared/config";
 import { goBack, useAppDispatch } from "@shared/lib";
@@ -28,7 +28,7 @@ export const ChaosBagPreview = (props: ChaosBagPreviewProps) => {
 	const reveal = useCallback(() => {
 		dispatch(goBack());
 
-		dispatch(showRevealChaosBagModal());
+		dispatch(openChaosBagRevealModal());
 	}, [dispatch]);
 
 	const renderTokenRow = useCallback(

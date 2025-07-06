@@ -1,4 +1,4 @@
-import { openSkillCheckChaosBagModal } from "@modules/chaos-bag/reveal/modal/shared/lib";
+import { startChaosBagReveal } from "@modules/chaos-bag/reveal/base/shared/lib";
 import {
 	formatSkillCheckValue as formatValue,
 	getSkillCheckValue,
@@ -37,7 +37,7 @@ export const ExpressionValue = (props: ExpressionValueProps) => {
 			return false;
 		}
 		dispatch(
-			openSkillCheckChaosBagModal({
+			startChaosBagReveal({
 				type,
 				value,
 				expression: validData,

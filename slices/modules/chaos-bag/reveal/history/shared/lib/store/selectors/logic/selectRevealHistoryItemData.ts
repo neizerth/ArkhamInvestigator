@@ -1,12 +1,13 @@
 import { selectBoardId } from "@modules/board/base/shared/lib";
 import type { BoardId } from "@modules/board/base/shared/model";
+
+import { selectRevealedTokens } from "@modules/chaos-bag/reveal/base/entities/lib";
 import {
 	selectChaosBagSkillCheckExpression,
 	selectChaosBagSkillCheckTitle,
 	selectChaosBagSkillCheckType,
 	selectChaosBagSkillValue,
-} from "@modules/chaos-bag/base/shared/lib";
-import { selectRevealedTokens } from "@modules/chaos-bag/reveal/base/entities/lib";
+} from "@modules/chaos-bag/reveal/base/shared/lib";
 import { createSelector } from "@reduxjs/toolkit";
 import { createRevealHistoryItemData } from "../../../logic";
 

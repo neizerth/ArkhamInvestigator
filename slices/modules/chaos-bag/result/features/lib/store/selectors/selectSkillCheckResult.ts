@@ -1,9 +1,9 @@
 import type { BoardId } from "@modules/board/base/shared/model";
 import type { SkillCheckResult } from "@modules/board/skill-check/shared/model";
 import { numericChaosTokenTypes } from "@modules/chaos-bag/base/shared/config/token/types";
-import { selectChaosBagSkillValue } from "@modules/chaos-bag/base/shared/lib";
 import type { ChaosTokenType } from "@modules/chaos-bag/base/shared/model";
 import { selectRevealedTokens } from "@modules/chaos-bag/reveal/base/entities/lib";
+import { selectChaosBagSkillValue } from "@modules/chaos-bag/reveal/base/shared/lib";
 import { selectChaosBagTokenValues } from "@modules/chaos-bag/value/features/lib";
 import { createSelector } from "@reduxjs/toolkit";
 import { propEq, sum } from "ramda";

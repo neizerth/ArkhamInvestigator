@@ -1,4 +1,4 @@
-import { closeRevealChaosBagModal } from "@modules/chaos-bag/reveal/modal/shared/lib";
+import { endChaosBagReveal } from "@modules/chaos-bag/reveal/base/shared/lib";
 import { put, takeEvery } from "redux-saga/effects";
 import { addRevealHistoryItemFromCurrent } from "../actions";
 
@@ -7,5 +7,5 @@ function* worker() {
 }
 
 export function* closeRevealChaosBagModalSaga() {
-	yield takeEvery(closeRevealChaosBagModal.match, worker);
+	yield takeEvery(endChaosBagReveal.match, worker);
 }

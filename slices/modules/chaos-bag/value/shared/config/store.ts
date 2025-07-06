@@ -1,1 +1,1 @@
-export const chaosBagValuePrefix = "chaosBagValue";
+export const chaosTokenValuePrefix = "chaosBagValue";

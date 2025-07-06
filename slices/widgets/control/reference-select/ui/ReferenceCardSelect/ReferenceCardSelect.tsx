@@ -1,4 +1,4 @@
-import { clearChaosTokenValue } from "@modules/chaos-bag/reveal/base/shared/lib";
+import { clearChaosTokenValue } from "@modules/chaos-bag/value/shared/lib";
 import { useAppTranslation } from "@modules/core/i18n/shared/lib";
 import {
 	selectReferenceCard,

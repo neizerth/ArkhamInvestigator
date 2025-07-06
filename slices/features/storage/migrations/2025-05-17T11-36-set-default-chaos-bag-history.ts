@@ -1,11 +1,5 @@
-import type { ChaosBagState } from "@modules/chaos-bag/base/shared/lib";
-import type { PersistedState } from "redux-persist";
-
-type State = PersistedState & {
-	chaosBag?: ChaosBagState;
-};
-
-export default function v10(state?: State) {
+// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+export default function v10(state?: any) {
 	if (!state?.chaosBag) {
 		return;
 	}
@@ -14,8 +8,8 @@ export default function v10(state?: State) {
 		...state,
 		chaosBag: {
 			...state.chaosBag,
-			skillCheckExpression: state.chaosBag.skillCheckExpression || [],
-			revealHistory: state.chaosBag.revealHistory || [],
+			skillCheckExpression: state.chaosBag?.skillCheckExpression || [],
+			revealHistory: state.chaosBag?.revealHistory || [],
 		},
 	};
 }

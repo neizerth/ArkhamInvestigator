@@ -1,4 +1,4 @@
-import { openSkillCheckChaosBagModal } from "@modules/chaos-bag/reveal/modal/shared/lib";
+import { startChaosBagReveal } from "@modules/chaos-bag/reveal/base/shared/lib";
 import {
 	getSkillCheckValue,
 	sanitizeSkillCheckExpression,
@@ -28,7 +28,7 @@ export const useOpenChaosBagModal = () => {
 			value,
 		});
 		dispatch(
-			openSkillCheckChaosBagModal({
+			startChaosBagReveal({
 				type,
 				value: skillValue,
 				expression: safeExpression,

@@ -1,5 +1,5 @@
-import type { ChaosBagHandler } from "@modules/chaos-bag/base/shared/model";
+import type { ChaosTokenValueHandler } from "../../../model";
 
-export const handleClearChaosTokenValue: ChaosBagHandler = (state) => {
+export const handleClearChaosTokenValue: ChaosTokenValueHandler = (state) => {
 	state.chaosTokenValue = null;
 };

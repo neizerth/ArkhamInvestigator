@@ -1,4 +1,4 @@
-import { openSkillCheckChaosBagModal } from "@modules/chaos-bag/reveal/modal/shared/lib";
+import { startChaosBagReveal } from "@modules/chaos-bag/reveal/base/shared/lib";
 import {
 	getSkillCheckValue,
 	selectCurrentBoardProp,
@@ -67,7 +67,7 @@ export const useKeyCheck = () => {
 				});
 
 				dispatch(
-					openSkillCheckChaosBagModal({
+					startChaosBagReveal({
 						type,
 						value,
 						expression,
