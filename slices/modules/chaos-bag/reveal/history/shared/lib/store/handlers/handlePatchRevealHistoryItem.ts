@@ -1,5 +1,5 @@
 import type { ChaosBagHistoryItemData } from "@modules/chaos-bag/base/shared/model";
-import { whereId } from "@shared/lib";
+import { whereId } from "@shared/lib/util";
 import type { ChaosBagRevealHistoryHandler } from "../../../model";
 
 export type HandlePatchRevealHistoryItemPayload = {

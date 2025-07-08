@@ -1,5 +1,5 @@
 import type { InvestigatorBoard } from "@modules/board/base/shared/model/board";
-import { boardHistoryReducers } from "@modules/board/history/shared/lib";
+import * as boardHistoryReducers from "@modules/board/history/shared/lib/store/reducers";
 import { createSlice } from "@reduxjs/toolkit";
 import type { PickerDecelerationType } from "@shared/model";
 import { createSliceState } from "redux-toolkit-helpers";

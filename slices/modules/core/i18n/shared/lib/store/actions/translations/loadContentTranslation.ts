@@ -1,4 +1,4 @@
-import { setRules } from "@features/game/rules";
+import { setRules } from "@features/game/rules/lib/store";
 import { loadLocaleData } from "@shared/api";
 import {
 	setSignatureGroups,

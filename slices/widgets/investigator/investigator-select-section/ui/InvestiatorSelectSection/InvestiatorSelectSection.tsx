@@ -1,5 +1,5 @@
 import { useAppTranslation } from "@modules/core/i18n/shared/lib";
-import { whereId } from "@shared/lib";
+import { whereId } from "@shared/lib/util";
 import { memo } from "react";
 import {
 	type DetailSectionProps,

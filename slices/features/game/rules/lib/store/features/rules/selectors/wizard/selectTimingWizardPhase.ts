@@ -1,5 +1,5 @@
 import { createSelector } from "@reduxjs/toolkit";
-import { whereId } from "@shared/lib";
+import { whereId } from "@shared/lib/util";
 import { selectTimingWizardPhaseId } from "../../rules";
 import { selectRoundPhases } from "../selectRoundPhases";
 

@@ -1,6 +1,6 @@
 import type { InvestigatorBoardUsedAbility } from "@modules/board/abilities/shared/model";
 import { boardHistoryItemAdded } from "@modules/board/history/shared/lib";
-import { whereId } from "@shared/lib";
+import { whereId } from "@shared/lib/util";
 import { difference, isNotNil } from "ramda";
 import { takeEvery } from "redux-saga/effects";
 import {

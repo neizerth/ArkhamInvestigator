@@ -1,4 +1,4 @@
-import { whereId } from "@shared/lib";
+import { whereId } from "@shared/lib/util";
 import type { TimingPhaseStep } from "../../../model";
 
 const stepMapping: Record<string, string | undefined> = {

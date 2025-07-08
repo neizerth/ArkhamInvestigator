@@ -1,4 +1,4 @@
-import { whereId } from "@shared/lib";
+import { whereId } from "@shared/lib/util";
 import type { InvestigatorAbility } from "arkham-investigator-data";
 import { equals, isNotNil, reject } from "ramda";
 import type { InvestigatorBoardUsedAbility } from "../model";

@@ -1,4 +1,4 @@
-export const SOUND_ENABLED = true;
+export const SOUND_ENABLED = false;
 
 export const SOUND_VOLUME_BARS_COUNT = 20;
 
