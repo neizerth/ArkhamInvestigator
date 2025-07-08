@@ -366,12 +366,12 @@
 					"-lc++",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_DEBUG";
-				PRODUCT_BUNDLE_IDENTIFIER = com.arkhaminvestigator;
-				PRODUCT_NAME = Investigator;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.arkhaminvestigator.dev";
+				PRODUCT_NAME = "AIDev";
 				SWIFT_OBJC_BRIDGING_HEADER = "Investigator/Investigator-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1";
 				VERSIONING_SYSTEM = "apple-generic";
 				DEVELOPMENT_TEAM = "34GWMQ49AW";
 				CODE_SIGN_IDENTITY = "Apple Development";
@@ -397,11 +397,11 @@
 					"-lc++",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_RELEASE";
-				PRODUCT_BUNDLE_IDENTIFIER = com.arkhaminvestigator;
-				PRODUCT_NAME = Investigator;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.arkhaminvestigator.dev";
+				PRODUCT_NAME = "AIDev";
 				SWIFT_OBJC_BRIDGING_HEADER = "Investigator/Investigator-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1";
 				VERSIONING_SYSTEM = "apple-generic";
 				DEVELOPMENT_TEAM = "34GWMQ49AW";
 				CODE_SIGN_IDENTITY = "Apple Development";
