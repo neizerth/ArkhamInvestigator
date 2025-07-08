@@ -76,7 +76,15 @@ export const createInvestigatorBoard = (
 		abilityValues,
 	};
 
-	const modification = investigatorBoardModifications[code] || {};
+	const modificationCallback = investigatorBoardModifications[code];
+
+	const modification = modificationCallback
+		? modificationCallback({
+				physicalTrauma,
+				mentalTrauma,
+				investigator,
+			})
+		: {};
 
 	return mergeDeepRight(defaultBoard, modification);
 };

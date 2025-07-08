@@ -2,7 +2,7 @@ import { InvesigatorCode } from "@modules/mechanics/investigator/entities/config
 import type { InvestigatorBoardModification } from "../../model";
 
 export const GeorgeBarnabyBoard: InvestigatorBoardModification = {
-	[InvesigatorCode.GeorgeBarnaby]: {
+	[InvesigatorCode.GeorgeBarnaby]: () => ({
 		initialValue: {
 			handSize: 0,
 		},
@@ -12,5 +12,5 @@ export const GeorgeBarnabyBoard: InvestigatorBoardModification = {
 		value: {
 			handSize: 0,
 		},
-	},
+	}),
 };

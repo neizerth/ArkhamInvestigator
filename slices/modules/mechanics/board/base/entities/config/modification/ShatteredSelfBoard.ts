@@ -5,12 +5,12 @@ import { DEFAULT_HAND_SIZE } from "../stat";
 const handSize = DEFAULT_HAND_SIZE - 3;
 
 export const ShatteredSelfBoard: InvestigatorBoardModification = {
-	[InvesigatorCode.ShatteredSelf]: {
+	[InvesigatorCode.ShatteredSelf]: () => ({
 		baseValue: {
 			handSize,
 		},
 		value: {
 			handSize,
 		},
-	},
+	}),
 };
