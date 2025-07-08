@@ -1,4 +1,5 @@
 import type { InvestigatorBoardModification } from "../../model";
+import { CalwinWrightBoard } from "./CalwinWrightBoard";
 import { GeorgeBarnabyBoard } from "./GeorgeBarnabyBoard";
 import { IsabelleBarnesBoard } from "./IsabelleBarnesBoard";
 import { JennyBarnesBoard } from "./JennyBarnesBoard";
@@ -13,4 +14,5 @@ export const investigatorBoardModifications: InvestigatorBoardModification = {
 	...LilyChenBoard,
 	...PatriceHathawayBoard,
 	...ShatteredSelfBoard,
+	...CalwinWrightBoard,
 };

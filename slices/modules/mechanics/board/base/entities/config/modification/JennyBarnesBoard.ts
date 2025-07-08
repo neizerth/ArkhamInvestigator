@@ -15,6 +15,6 @@ const modification: InvesigatorBoardPartial = {
 };
 
 export const JennyBarnesBoard: InvestigatorBoardModification = {
-	[InvesigatorCode.JennyBarnes.base]: modification,
-	[InvesigatorCode.JennyBarnes.book]: modification,
+	[InvesigatorCode.JennyBarnes.base]: () => modification,
+	[InvesigatorCode.JennyBarnes.book]: () => modification,
 };

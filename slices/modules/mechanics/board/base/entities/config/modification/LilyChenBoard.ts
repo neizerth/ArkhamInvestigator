@@ -17,8 +17,8 @@ const usedAbilities = [
 ];
 
 export const LilyChenBoard: InvestigatorBoardModification = {
-	[InvesigatorCode.LilyChen]: {
+	[InvesigatorCode.LilyChen]: () => ({
 		usedAbilities,
 		initialUsedAbilities: usedAbilities,
-	},
+	}),
 };
