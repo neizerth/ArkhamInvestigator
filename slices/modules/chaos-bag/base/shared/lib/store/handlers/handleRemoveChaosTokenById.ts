@@ -1,4 +1,4 @@
-import { whereId } from "@shared/lib";
+import { whereId } from "@shared/lib/util";
 import { reject } from "ramda";
 import type { ChaosBagHandler } from "../../../model";
 

@@ -1,5 +1,5 @@
 import type { PayloadAction } from "@reduxjs/toolkit";
-import { whereId } from "@shared/lib";
+import { whereId } from "@shared/lib/util";
 import type { ActionCreatorPayload } from "@shared/model";
 import { changeBoardHistoryAbilityUse } from "../actions";
 

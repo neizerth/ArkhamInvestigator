@@ -1,6 +1,6 @@
 import { InvesigatorCode } from "@modules/mechanics/investigator/entities/config";
-import { DEFAULT_UPKEEP_RESOURCES_INCREASE } from "..";
 import type { InvestigatorBoardModification } from "../../model";
+import { DEFAULT_UPKEEP_RESOURCES_INCREASE } from "../stat";
 
 const upkeepResourcesIncrease = DEFAULT_UPKEEP_RESOURCES_INCREASE + 1;
 

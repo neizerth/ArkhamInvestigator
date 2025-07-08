@@ -1,6 +1,6 @@
 import { InvesigatorCode } from "@modules/mechanics/investigator/entities/config";
-import { DEFAULT_HAND_SIZE } from "..";
 import type { InvestigatorBoardModification } from "../../model";
+import { DEFAULT_HAND_SIZE } from "../stat";
 
 const handSize = DEFAULT_HAND_SIZE - 3;
 

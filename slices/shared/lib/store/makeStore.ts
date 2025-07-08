@@ -1,5 +1,5 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import createSagaMiddleware from "redux-saga";
+const createSagaMiddleware = require("redux-saga").default;
 
 import devToolsEnhancer from "redux-devtools-expo-dev-plugin";
 import { createMigrate, persistReducer, persistStore } from "redux-persist";

@@ -1,5 +1,5 @@
 import { selectBoardById, setBoardProp } from "@modules/board/base/shared/lib";
-import { whereId } from "@shared/lib";
+import { whereId } from "@shared/lib/util";
 import { reject } from "ramda";
 import { put, select, takeEvery } from "redux-saga/effects";
 import { removeBoardSkillCheckItem } from "../actions";

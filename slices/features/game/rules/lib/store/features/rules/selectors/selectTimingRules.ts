@@ -1,5 +1,5 @@
 import { createSelector } from "@reduxjs/toolkit";
-import { whereId } from "@shared/lib";
+import { whereId } from "@shared/lib/util";
 import { TIMING_RULES_ID } from "../../../../../config";
 import { selectRules } from "../rules";
 
