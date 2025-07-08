@@ -5,6 +5,7 @@ import type { InvestigatorSignature } from "arkham-investigator-data";
 import { mergeDeepRight } from "ramda";
 import {
 	DEFAULT_HAND_SIZE,
+	DEFAULT_UPKEEP_RESOURCES_INCREASE,
 	NEW_TURN_ACTIONS_COUNT,
 	START_GAME_RESOURCES_COUNT,
 	investigatorBoardModifications,
@@ -44,7 +45,7 @@ export const createInvestigatorBoard = (
 		resources: START_GAME_RESOURCES_COUNT,
 		actions: NEW_TURN_ACTIONS_COUNT,
 		handSize: DEFAULT_HAND_SIZE,
-		upkeepResourcesIncrease: 0,
+		upkeepResourcesIncrease: DEFAULT_UPKEEP_RESOURCES_INCREASE,
 		clues: 0,
 		doom: 0,
 	};

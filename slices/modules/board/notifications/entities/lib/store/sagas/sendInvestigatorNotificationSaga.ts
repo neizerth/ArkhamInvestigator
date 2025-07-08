@@ -19,7 +19,7 @@ function* worker({ payload }: ReturnType<typeof sendInvestigatorNotification>) {
 
 	const board: ReturnType<typeof selectBoard> = yield select(selectBoard);
 
-	if (!dativeName || !board) {
+	if (!dativeName) {
 		return;
 	}
 

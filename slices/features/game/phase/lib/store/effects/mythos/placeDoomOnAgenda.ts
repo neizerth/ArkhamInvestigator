@@ -15,7 +15,6 @@ export const placeDoomOnAgenda = (): AppThunk => (dispatch, getState) => {
 			data: {
 				doom,
 			},
-			duration: 5000,
 		}),
 	);
 };
