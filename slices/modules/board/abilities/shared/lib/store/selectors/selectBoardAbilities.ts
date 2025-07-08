@@ -4,6 +4,7 @@ import {
 } from "@modules/board/base/shared/lib";
 import type { BoardId } from "@modules/board/base/shared/model";
 import { createSelector } from "@reduxjs/toolkit";
+import { additionalActionAbility } from "../../../config";
 import { isBoardAbility } from "../../info/isBoardAbility";
 
 export const selectBoardAbilities = (boardId: BoardId) =>
@@ -20,11 +21,17 @@ export const selectBoardAbilities = (boardId: BoardId) =>
 				return [];
 			}
 			const { abilities = [] } = investigator;
-			return abilities.filter((ability) =>
+			const baseAbilities = abilities.filter((ability) =>
 				isBoardAbility({
 					ability,
 					investigatorsCount,
 				}),
 			);
+
+			if (!investigator.additionalAction) {
+				return baseAbilities;
+			}
+
+			return [...baseAbilities, additionalActionAbility];
 		},
 	);
