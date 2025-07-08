@@ -67,6 +67,7 @@ export const color = {
 		error: "#552D2D",
 		warn: "#C50707",
 		warnText: "#FB4135",
+		info: "#1E3A5F",
 	},
 	token: {
 		skull: "#915c5c",

@@ -1,16 +1,12 @@
-import Toast from "react-native-simple-toast";
-import type { ToastDuration } from "../../model";
-import { getToastDuration } from "./getToastDuration";
+import Toast, { type ToastShowParams } from "react-native-toast-message";
 
-export type ShowToastOptions = {
+export type ShowToastOptions = ToastShowParams & {
 	message: string;
-	duration?: ToastDuration;
 };
 
-export const showToast = ({
-	message,
-	duration = Toast.SHORT,
-}: ShowToastOptions) => {
-	const toastDuration = getToastDuration(duration);
-	Toast.show(message, toastDuration);
+export const showToast = ({ message, ...props }: ShowToastOptions) => {
+	Toast.show({
+		...props,
+		text1: message || props.text1,
+	});
 };

@@ -110,7 +110,7 @@
 	"clues.remains_few": "Осталось {{count}} улики",
 	"clues.remains_many": "Осталось {{count}} улик",
 
-	"chaosBag.addToken_one": "{{name}} добавляет в мешок {{token}}",
+	"chaosBag.addToken_one": "{{name}} добавляет в мешок 1 {{token}}",
 	"chaosBag.addToken_few": "{{name}} добавляет в мешок {{count}} {{token}}",
 	"chaosBag.addToken_many": "{{name}} добавляет в мешок {{many}} {{token}}",
 
