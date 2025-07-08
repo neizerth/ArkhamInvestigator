@@ -4,9 +4,8 @@ import {
 	setBoardActualPropValue,
 } from "@modules/board/base/shared/lib";
 import type { BoardId } from "@modules/board/base/shared/model";
+import { sendNotification } from "@modules/core/notifications/shared/lib";
 import type { AppThunk } from "@shared/model";
-import i18next from "i18next";
-import { showToast } from "../../../../../../../notifications/lib";
 
 export const giveUpkeepResourceToBoard =
 	(boardId: BoardId = "current"): AppThunk =>
@@ -36,10 +35,13 @@ export const giveUpkeepResourceToBoard =
 			}),
 		);
 
-		const message = i18next.t("upkeep.investigator.getResources", {
-			name,
-			count: upkeepResourcesIncrease,
-		});
-
-		dispatch(showToast(message));
+		dispatch(
+			sendNotification({
+				message: "upkeep.investigator.getResources",
+				data: {
+					name,
+					count: upkeepResourcesIncrease,
+				},
+			}),
+		);
 	};
