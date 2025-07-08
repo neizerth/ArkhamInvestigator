@@ -15,4 +15,4 @@ export const undoBoard =
 		);
 
 export const undo = (): AppThunk => (dispatch) =>
-	undoBoard({ boardId: "current" });
+	dispatch(undoBoard({ boardId: "current" }));

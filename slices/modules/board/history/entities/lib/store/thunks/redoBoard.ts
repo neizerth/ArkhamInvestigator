@@ -15,4 +15,4 @@ export const redoBoard =
 		);
 
 export const redo = (): AppThunk => (dispatch) =>
-	redoBoard({ boardId: "current" });
+	dispatch(redoBoard({ boardId: "current" }));
