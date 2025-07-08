@@ -7,6 +7,7 @@ import {
 } from "@modules/board/base/shared/lib";
 import { setRevealedTokenIds } from "@modules/chaos-bag/reveal/base/shared/lib";
 import { clearRevealHistory } from "@modules/chaos-bag/reveal/history/shared/lib";
+import { setShowRevealModal } from "@modules/chaos-bag/reveal/modal/shared/lib";
 import type { ActionCreator } from "@reduxjs/toolkit";
 import { routes } from "@shared/config";
 import {
@@ -31,6 +32,7 @@ export const startNewGame: ActionCreator<AppThunk> =
 
 		dispatch(clearRevealHistory());
 		dispatch(setRevealedTokenIds([]));
+		dispatch(setShowRevealModal(false));
 
 		dispatch(setReplaceInvestigator(false));
 
