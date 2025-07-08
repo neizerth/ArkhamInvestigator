@@ -1,7 +1,8 @@
 import {
 	selectBoardActualPropValue,
-	setBoardActualPropValue,
+	setBoardPropValue,
 } from "@modules/board/base/shared/lib";
+import { sendInvestigatorNotification } from "@modules/board/notifications/entities/lib";
 import { put, select, takeEvery } from "redux-saga/effects";
 import { spendClues } from "./spendClues.action";
 
@@ -15,10 +16,6 @@ function* worker({ payload }: ReturnType<typeof spendClues>) {
 
 	const clues: ReturnType<typeof selectClues> = yield select(selectClues);
 
-	if (typeof clues !== "number") {
-		return;
-	}
-
 	if (clues < value) {
 		return;
 	}
@@ -26,10 +23,21 @@ function* worker({ payload }: ReturnType<typeof spendClues>) {
 	const updatedClues = clues - value;
 
 	yield put(
-		setBoardActualPropValue({
+		setBoardPropValue({
 			boardId,
+			type: "value",
 			prop: "clues",
 			value: updatedClues,
+		}),
+	);
+
+	yield put(
+		sendInvestigatorNotification({
+			boardId,
+			message: "clues.spent",
+			data: {
+				count: value,
+			},
 		}),
 	);
 }
