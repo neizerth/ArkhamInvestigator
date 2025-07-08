@@ -1,14 +1,15 @@
 import { handSizeImage } from "@assets/images/game/stats";
 import { abilitiyBackgrounds } from "@assets/images/game/stats/abilities";
+import { AbilityCode } from "@modules/mechanics/board/abilities/entities/config";
 import type { ImageRequireSource } from "react-native";
 
 export const backgrounds: Record<string, ImageRequireSource> = {
-	"family-inheritance": abilitiyBackgrounds.familyInheritance,
-	"bounty-contracts": abilitiyBackgrounds.bountyContracts,
-	ravenous: abilitiyBackgrounds.ravenous,
+	[AbilityCode.PrestonFairmont]: abilitiyBackgrounds.familyInheritance,
+	[AbilityCode.TonyMorgan]: abilitiyBackgrounds.bountyContracts,
+	[AbilityCode.Subject5U21]: abilitiyBackgrounds.ravenous,
 
-	"diana-cards": handSizeImage,
-	"gloria-cards": handSizeImage,
-	"george-cards": handSizeImage,
-	"shattered-self-cards": handSizeImage,
+	[AbilityCode.DianaStanley]: handSizeImage,
+	[AbilityCode.GloriaGoldberg]: handSizeImage,
+	[AbilityCode.GeorgeBarnaby]: handSizeImage,
+	[AbilityCode.ShatteredSelf]: handSizeImage,
 };

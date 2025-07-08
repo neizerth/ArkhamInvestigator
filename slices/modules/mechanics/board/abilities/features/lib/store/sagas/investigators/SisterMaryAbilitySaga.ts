@@ -8,9 +8,10 @@ import {
 	cantAddMultipleChaosTokens,
 	selectCanAddMultipleChaosTokens,
 } from "@modules/chaos-bag/base/entities/lib";
+import { AbilityCode } from "@modules/mechanics/board/abilities/entities/config";
 import { put, select, takeEvery } from "redux-saga/effects";
 
-const filterAction = createAbilityUseFilter("add-2-bless");
+const filterAction = createAbilityUseFilter(AbilityCode.SisterMary);
 
 const BLESS_COUNT = 2;
 
@@ -18,6 +19,8 @@ function* worker({ payload }: ReturnType<typeof changeBoardHistoryAbilityUse>) {
 	const { changedAbilities } = payload;
 
 	const [ability] = changedAbilities;
+
+	console.log({ ability });
 
 	if (ability.isUsed) {
 		return;

@@ -39,6 +39,8 @@ function* worker({ payload }: ReturnType<typeof boardHistoryItemAdded>) {
 		...changedAbilitiesLeft,
 	].filter(isNotNil);
 
+	console.log("ok!", diffRight, diffLeft);
+
 	if (changedAbilities.length === 0) {
 		return;
 	}
