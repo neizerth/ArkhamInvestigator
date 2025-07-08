@@ -1,6 +1,6 @@
 import { spawn } from "redux-saga/effects";
-import { investigatorAbilitySaga } from "./investigators";
+import { investigatorAbilitiesSaga } from "./investigators";
 
 export function* boardEntityAbilityMechanicsSaga() {
-	yield spawn(investigatorAbilitySaga);
+	yield spawn(investigatorAbilitiesSaga);
 }

@@ -44,7 +44,6 @@ export const setValueFromHistoryIndex =
 			: {
 					usedAbilities: cleanBoard.initialUsedAbilities,
 				};
-
 		const data: InvestigatorBoard = {
 			...board,
 			...boardProps,
