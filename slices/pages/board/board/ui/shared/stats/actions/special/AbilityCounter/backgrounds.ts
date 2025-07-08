@@ -10,4 +10,5 @@ export const backgrounds: Record<string, ImageRequireSource> = {
 	"diana-cards": handSizeImage,
 	"gloria-cards": handSizeImage,
 	"george-cards": handSizeImage,
+	"shattered-self-cards": handSizeImage,
 };
