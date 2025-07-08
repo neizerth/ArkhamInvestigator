@@ -1,5 +1,6 @@
 import { chaosBagEntitiesSaga } from "@modules/chaos-bag/base/entities/lib/store/sagas";
 import { chaosBagFeaturesSaga } from "@modules/chaos-bag/base/features/lib/store/sagas";
+import { chaosBagNotificationsFeaturesSaga } from "@modules/chaos-bag/base/features/lib/store/sagas/notifications";
 import { chaosBagRevealEntitiesSaga } from "@modules/chaos-bag/reveal/base/entities/lib/store/sagas";
 import { chaosBagRevealHistoryEntitiesSaga } from "@modules/chaos-bag/reveal/history/entities/lib/store/sagas";
 import { chaosBagRevealHistoryFeaturesSaga } from "@modules/chaos-bag/reveal/history/features/lib/store/sagas";
@@ -17,4 +18,6 @@ export function* chaosBagSaga() {
 	yield spawn(chaosBagRevealHistoryFeaturesSaga);
 
 	yield spawn(chaosBagRevealHistoryEntitiesSaga);
+
+	yield spawn(chaosBagNotificationsFeaturesSaga);
 }

@@ -1,8 +1,5 @@
 import { additionalActionAbilityId } from "@modules/board/abilities/shared/config";
-import {
-	selectBoardAbilities,
-	selectCurrentHaveAdditionalAction,
-} from "@modules/board/abilities/shared/lib";
+import { selectBoardSpecialAbilities } from "@modules/mechanics/board/abilities/entities/lib";
 import { useAppSelector } from "@shared/lib";
 import type { ViewProps } from "react-native";
 import * as C from "./SpecialActions.components";
@@ -10,11 +7,7 @@ import * as C from "./SpecialActions.components";
 export type SpecialActionsProps = ViewProps;
 
 export const SpecialActions = (props: SpecialActionsProps) => {
-	const haveAdditionalAction = useAppSelector(
-		selectCurrentHaveAdditionalAction,
-	);
-
-	const abilities = useAppSelector(selectBoardAbilities("current"));
+	const abilities = useAppSelector(selectBoardSpecialAbilities("current"));
 
 	return (
 		<C.Container {...props}>

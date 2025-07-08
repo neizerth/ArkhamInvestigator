@@ -3,6 +3,7 @@ import {
 	decreaseBoardActualPropValue,
 	increaseBoardActualPropValue,
 } from "@modules/board/base/shared/lib";
+import { AbilityCode } from "@modules/mechanics/board/abilities/entities/config";
 import { whereId } from "@shared/lib/util";
 import type { InvestigatorBoardNumericStat } from "@shared/model";
 import { takeEvery } from "redux-saga/effects";
@@ -14,19 +15,19 @@ type LilyAbility = {
 
 const lilyAbilities: LilyAbility[] = [
 	{
-		id: "alignment-of-spirit",
+		id: AbilityCode.LilyChen.willpower,
 		prop: "willpower",
 	},
 	{
-		id: "quiescence-of-thought",
+		id: AbilityCode.LilyChen.intellect,
 		prop: "intellect",
 	},
 	{
-		id: "prescience-of-fate",
+		id: AbilityCode.LilyChen.combat,
 		prop: "combat",
 	},
 	{
-		id: "balance-of-body",
+		id: AbilityCode.LilyChen.agility,
 		prop: "agility",
 	},
 ];
