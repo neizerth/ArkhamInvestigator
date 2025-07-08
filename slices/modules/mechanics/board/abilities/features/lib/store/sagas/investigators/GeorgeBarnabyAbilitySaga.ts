@@ -35,6 +35,9 @@ function* worker({ payload }: ReturnType<typeof boardAbilityValueSet>) {
 				baseValue: {
 					handSize: baseHandSize,
 				},
+				initialValue: {
+					handSize: baseHandSize,
+				},
 			},
 			history: {
 				type: "update",
