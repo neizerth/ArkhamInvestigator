@@ -5,13 +5,11 @@ import {
 import type { AppThunk } from "@shared/model";
 import { routes } from "../../../../../config";
 import { whereId } from "../../../../util";
-import { delay } from "../../../../util/promise";
 import { goToPage } from "../../../effects";
 import {
 	setCurrentSignatureGroup,
 	setCurrentSignatureId,
 	setCurrentSkinId,
-	setShowDescription,
 } from "../../game";
 import { selectSignatureGroups } from "../investigators";
 
@@ -33,9 +31,6 @@ export const changeInvestigatorDetails =
 		dispatch(setCurrentSignatureGroup(group));
 		dispatch(setCurrentSignatureId(investigator.id));
 		dispatch(setCurrentSkinId(skinId || null));
-		dispatch(setShowDescription(false));
-
-		await delay(150);
 
 		dispatch(goToPage(routes.selectInvestigatorDetails));
 	};
