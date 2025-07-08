@@ -1,7 +1,6 @@
 import { selectDoom, setDoom } from "@modules/board/base/shared/lib";
-import { i18next } from "@modules/core/i18n/shared/config";
+import { sendNotification } from "@modules/core/notifications/shared/lib";
 import type { AppThunk } from "@shared/model";
-import { showToast } from "../../../../../../notifications/lib";
 
 export const placeDoomOnAgenda = (): AppThunk => (dispatch, getState) => {
 	const state = getState();
@@ -10,8 +9,13 @@ export const placeDoomOnAgenda = (): AppThunk => (dispatch, getState) => {
 
 	dispatch(setDoom(doom));
 
-	const message = i18next.t("mythos.doom", {
-		doom,
-	});
-	dispatch(showToast(message, 5000));
+	dispatch(
+		sendNotification({
+			message: "mythos.doom",
+			data: {
+				doom,
+			},
+			duration: 5000,
+		}),
+	);
 };

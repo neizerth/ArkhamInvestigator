@@ -1,8 +1,7 @@
 import { isBoardExists, selectBoardById } from "@modules/board/base/shared/lib";
 import type { BoardId } from "@modules/board/base/shared/model";
+import { sendNotification } from "@modules/core/notifications/shared/lib";
 import type { AppThunk } from "@shared/model";
-import i18next from "i18next";
-import { showToast } from "../../../../../../../notifications/lib";
 import { startNewTurn } from "../../common";
 
 export const resetUpkeepInvestigatorActions =
@@ -17,9 +16,12 @@ export const resetUpkeepInvestigatorActions =
 		dispatch(startNewTurn(boardId));
 
 		const { name } = board.investigator;
-		const message = i18next.t("upkeep.investigator.actionsReset", {
-			name,
-		});
-
-		dispatch(showToast(message));
+		dispatch(
+			sendNotification({
+				message: "upkeep.investigator.actionsReset",
+				data: {
+					name,
+				},
+			}),
+		);
 	};

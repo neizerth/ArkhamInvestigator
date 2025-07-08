@@ -1,4 +1,3 @@
-import { showToast } from "@features/notifications/lib";
 import * as B from "@modules/board/base/shared/lib";
 import * as SC from "@modules/board/skill-check/shared/lib";
 import * as chaosBag from "@modules/chaos-bag/base/shared/lib";
@@ -11,6 +10,7 @@ import {
 	selectLanguage,
 	useAppTranslation,
 } from "@modules/core/i18n/shared/lib";
+import { sendNotification } from "@modules/core/notifications/shared/lib";
 import { CAN_ALWAYS_SHOW_GAME_TEXT } from "@shared/config";
 import * as S from "@shared/lib";
 import { useCallback } from "react";
@@ -29,8 +29,12 @@ export const SettingsPage = () => {
 
 	const clearImageCache = useCallback(() => {
 		dispatch(S.clearImageCache());
-		dispatch(showToast(t`Image cache cleared`));
-	}, [dispatch, t]);
+		dispatch(
+			sendNotification({
+				message: "Image cache cleared",
+			}),
+		);
+	}, [dispatch]);
 
 	return (
 		<C.Page title="Settings">
