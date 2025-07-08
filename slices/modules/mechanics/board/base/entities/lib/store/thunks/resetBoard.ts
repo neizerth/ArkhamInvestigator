@@ -1,4 +1,8 @@
-import { selectBoardById, setBoard } from "@modules/board/base/shared/lib";
+import {
+	isBoardExists,
+	selectBoardById,
+	setBoard,
+} from "@modules/board/base/shared/lib";
 import type { BoardId } from "@modules/board/base/shared/model";
 import { selectInvestigatorSettingsByCode } from "@shared/lib";
 import type { AppThunk } from "@shared/model";
@@ -10,7 +14,7 @@ export const resetBoard =
 		const state = getState();
 		const board = selectBoardById(boardId)(state);
 
-		if (!board) {
+		if (!isBoardExists(board)) {
 			return;
 		}
 

@@ -1,3 +1,3 @@
-import { selectIsInactive } from "../selectIsInactive";
+import { selectBoardIsInactive } from "../selectBoardIsInactive";
 
-export const selectCurrentIsInactive = selectIsInactive("current");
+export const selectCurrentIsInactive = selectBoardIsInactive("current");

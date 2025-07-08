@@ -1,10 +1,9 @@
-import type { TouchableOpacityProps } from "@modules/core/haptic/shared/ui";
 import {
-	selectCurrentStatValue,
-	setCurrentStat,
-	useAppDispatch,
-	useAppSelector,
-} from "@shared/lib";
+	selectIsAdditionalActionUsed,
+	setAdditionalActionUse,
+} from "@modules/board/abilities/shared/lib";
+import type { TouchableOpacityProps } from "@modules/core/haptic/shared/ui";
+import { useAppDispatch, useAppSelector } from "@shared/lib";
 import { useCallback } from "react";
 import { Special } from "../Special";
 
@@ -14,11 +13,16 @@ export const AdditionalAction = (props: AdditionalActionProps) => {
 	const dispatch = useAppDispatch();
 
 	const additionalAction = useAppSelector(
-		selectCurrentStatValue("additionalAction"),
+		selectIsAdditionalActionUsed("current"),
 	);
 
 	const toggleAdditionalAction = useCallback(() => {
-		dispatch(setCurrentStat("additionalAction", !additionalAction));
+		dispatch(
+			setAdditionalActionUse({
+				boardId: "current",
+				use: !additionalAction,
+			}),
+		);
 	}, [dispatch, additionalAction]);
 
 	return (

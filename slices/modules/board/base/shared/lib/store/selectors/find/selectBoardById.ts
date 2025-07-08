@@ -6,7 +6,7 @@ import {
 } from "../../board";
 import { getBoardById } from "../../getters/find/getBoardById";
 
-export const selectBoardById = (boardId: BoardId = "current") =>
+export const selectBoardById = (boardId: BoardId) =>
 	createSelector(
 		[selectInvestigatorBoards, selectCurrentInvestigatorIndex],
 		(investigatorBoards, currentInvestigatorIndex) => {

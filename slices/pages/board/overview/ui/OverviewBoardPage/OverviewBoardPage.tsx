@@ -1,12 +1,9 @@
 import {
-	delay,
-	goBack,
 	selectBoardIds,
 	selectCurrentInvestigatorIndex,
 	setCurrentInvestigatorIndex,
-	useAppDispatch,
-	useAppSelector,
-} from "@shared/lib";
+} from "@modules/board/base/shared/lib";
+import { delay, goBack, useAppDispatch, useAppSelector } from "@shared/lib";
 import { Fragment, useCallback } from "react";
 import * as C from "./OverviewBoardPage.components";
 

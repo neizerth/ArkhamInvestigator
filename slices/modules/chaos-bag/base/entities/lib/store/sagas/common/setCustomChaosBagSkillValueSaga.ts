@@ -1,4 +1,4 @@
-import { selectBoardById } from "@modules/board/base/shared/lib";
+import { isBoardExists, selectBoardById } from "@modules/board/base/shared/lib";
 import { getStatDiffExpression } from "@modules/board/skill-check/shared/lib";
 
 import {
@@ -23,7 +23,7 @@ function* worker({ payload }: ReturnType<typeof setCustomChaosBagSkillValue>) {
 	const statType: ReturnType<typeof selectChaosBagSkillCheckType> =
 		yield select(selectChaosBagSkillCheckType);
 
-	if (!board) {
+	if (!isBoardExists(board)) {
 		return;
 	}
 

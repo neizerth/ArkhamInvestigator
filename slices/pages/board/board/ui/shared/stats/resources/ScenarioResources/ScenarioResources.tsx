@@ -1,9 +1,5 @@
-import {
-	selectResources,
-	setResources,
-	useAppDispatch,
-	useAppSelector,
-} from "@shared/lib";
+import { selectResources, setResources } from "@modules/board/base/shared/lib";
+import { useAppDispatch, useAppSelector } from "@shared/lib";
 import { useCallback } from "react";
 import { Resources, type ResourcesProps } from "../Resources";
 

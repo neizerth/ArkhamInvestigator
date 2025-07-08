@@ -1,11 +1,10 @@
 import {
 	selectCurrentBoardProp,
-	selectPinnedSkillChecks,
 	selectTapToHidePins,
 	setBoardProp,
-	useAppDispatch,
-	useAppSelector,
-} from "@shared/lib";
+} from "@modules/board/base/shared/lib";
+import { selectPinnedSkillChecks } from "@modules/board/skill-check/shared/lib";
+import { useAppDispatch, useAppSelector } from "@shared/lib";
 import { always } from "ramda";
 import { memo, useCallback } from "react";
 import type { ViewProps } from "react-native";
@@ -15,7 +14,7 @@ export type PinnedSkilllChecksProps = ViewProps;
 
 export const PinnedSkilllChecks = (props: PinnedSkilllChecksProps) => {
 	const dispatch = useAppDispatch();
-	const items = useAppSelector(selectPinnedSkillChecks);
+	const items = useAppSelector(selectPinnedSkillChecks("current"));
 	const tapToHide = useAppSelector(selectTapToHidePins);
 	const defaultShow = useAppSelector(
 		selectCurrentBoardProp("showPinnedSkillChecks"),
@@ -24,7 +23,13 @@ export const PinnedSkilllChecks = (props: PinnedSkilllChecksProps) => {
 	const show = defaultShow ?? true;
 
 	const toggleShow = useCallback(() => {
-		dispatch(setBoardProp("showPinnedSkillChecks", !show));
+		dispatch(
+			setBoardProp({
+				boardId: "current",
+				prop: "showPinnedSkillChecks",
+				value: !show,
+			}),
+		);
 	}, [dispatch, show]);
 
 	if (items.length === 0) {

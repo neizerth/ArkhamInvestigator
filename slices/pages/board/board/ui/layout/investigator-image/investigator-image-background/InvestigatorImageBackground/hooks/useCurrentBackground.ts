@@ -1,4 +1,5 @@
-import { selectCurrentBoardProp, useAppSelector } from "@shared/lib";
+import { selectCurrentBoardProp } from "@modules/board/base/shared/lib";
+import { useAppSelector } from "@shared/lib";
 import { useContext, useMemo } from "react";
 import { LayoutContext } from "../../../../../../config";
 import { getImageLayout } from "../../../../../../lib/image/background/getImageLayout";

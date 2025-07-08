@@ -1,9 +1,10 @@
+import type { InvestigatorBoard } from "@modules/board/base/shared/model";
 import {
 	NEW_TURN_ACTIONS_COUNT,
 	START_GAME_RESOURCES_COUNT,
 } from "@shared/config";
 import { getBoardStats } from "@shared/lib";
-import type { InvestigatorBoard, SelectedInvestigator } from "@shared/model";
+import type { SelectedInvestigator } from "@shared/model";
 import { getDefaultUpkeepResourceIncrease } from "./getDefaultUpkeepResourceIncrease";
 import { getDefaultUsedAbilities } from "./getDefaultUsedAbilities";
 import { getInitialHandSize } from "./getInitialHandSize";

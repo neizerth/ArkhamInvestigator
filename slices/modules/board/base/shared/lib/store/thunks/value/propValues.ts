@@ -1,6 +1,7 @@
 import type { InvestigatorBoardValueProp } from "@modules/board/base/shared/model";
 import { setBoardPropValue } from "../../actions";
 import { createBoardValueThunkCreator } from "../../util";
+import { decreaseBoardValueProp } from "./decreaseBoardValueProp";
 import { increaseBoardValueProp } from "./increaseBoardValueProp";
 import { reduceBoardValueProp } from "./reduceBoardValueProp";
 
@@ -15,7 +16,7 @@ const createIncreaseValueThunk = createBoardValueThunkCreator(
 	increaseBoardValueProp,
 );
 const createDecreaseValueThunk = createBoardValueThunkCreator(
-	increaseBoardValueProp,
+	decreaseBoardValueProp,
 );
 const createReduceValueThunk =
 	createBoardValueThunkCreator(reduceBoardValueProp);

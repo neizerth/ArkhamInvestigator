@@ -1,13 +1,11 @@
 import {
-	decreaseCurrentStat,
-	selectCurrentStatBaseValue,
-	selectCurrentStatInitialValue,
-	selectCurrentStatValue,
-	setCurrentStat,
-	setStatTransaction,
-	useAppDispatch,
-	useAppSelector,
-} from "@shared/lib";
+	selectCurrentActualPropValue,
+	selectCurrentBasePropValue,
+	selectCurrentInitialPropValue,
+	setBoardPart,
+	setCurrentActualPropValue,
+} from "@modules/board/base/shared/lib";
+import { useAppDispatch, useAppSelector } from "@shared/lib";
 import type { InvestigatorBoardNumericStat } from "@shared/model";
 import type { PickerChangeEvent } from "@widgets/control/picker";
 import { useCallback } from "react";
@@ -22,15 +20,20 @@ export const useStat = ({
 	minValue = Number.NEGATIVE_INFINITY,
 }: Options) => {
 	const dispatch = useAppDispatch();
-	const value = useAppSelector(selectCurrentStatValue(statType));
-	const baseValue = useAppSelector(selectCurrentStatBaseValue(statType));
-	const initialValue = useAppSelector(selectCurrentStatInitialValue(statType));
+	const value = useAppSelector(selectCurrentActualPropValue(statType));
+	const baseValue = useAppSelector(selectCurrentBasePropValue(statType));
+	const initialValue = useAppSelector(selectCurrentInitialPropValue(statType));
 
 	const wounds = Math.max(baseValue - value, 0);
 
 	const onChange = useCallback(
 		({ value = 0 }: PickerChangeEvent) => {
-			dispatch(setCurrentStat(statType, value));
+			dispatch(
+				setCurrentActualPropValue({
+					prop: statType,
+					value,
+				}),
+			);
 		},
 		[dispatch, statType],
 	);
@@ -38,7 +41,12 @@ export const useStat = ({
 	const onWoundsChange = useCallback(
 		({ value: wounds = 0 }: PickerChangeEvent) => {
 			const value = baseValue - wounds;
-			dispatch(setCurrentStat(statType, value));
+			dispatch(
+				setCurrentActualPropValue({
+					prop: statType,
+					value,
+				}),
+			);
 		},
 		[dispatch, statType, baseValue],
 	);
@@ -48,10 +56,16 @@ export const useStat = ({
 
 		if (diff === 0) {
 			dispatch(
-				setStatTransaction({
-					statType,
-					value: value + 1,
-					baseValue: baseValue + 1,
+				setBoardPart({
+					boardId: "current",
+					data: {
+						value: {
+							[statType]: value + 1,
+						},
+						baseValue: {
+							[statType]: value + 1,
+						},
+					},
 				}),
 			);
 			return;
@@ -60,17 +74,31 @@ export const useStat = ({
 		const nextValue = value - diff;
 
 		dispatch(
-			setStatTransaction({
-				statType,
-				value: nextValue,
-				baseValue: initialValue,
+			setBoardPart({
+				boardId: "current",
+				data: {
+					value: {
+						[statType]: nextValue,
+					},
+					baseValue: {
+						[statType]: initialValue,
+					},
+				},
 			}),
 		);
 	}, [dispatch, baseValue, initialValue, value, statType]);
 
 	const onPress = useCallback(() => {
-		dispatch(decreaseCurrentStat(statType, minValue));
-	}, [dispatch, statType, minValue]);
+		if (value <= minValue) {
+			return;
+		}
+		dispatch(
+			setCurrentActualPropValue({
+				prop: statType,
+				value: value - 1,
+			}),
+		);
+	}, [dispatch, statType, minValue, value]);
 
 	return {
 		onPress,

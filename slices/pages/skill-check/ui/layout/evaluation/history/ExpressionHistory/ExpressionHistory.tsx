@@ -1,11 +1,13 @@
 import { useSkillItemChaosTokenRevealModal } from "@features/game/skill-check";
+import { selectCurrentBoardProp } from "@modules/board/base/shared/lib";
+import {
+	selectSkillCheckHistory,
+	setSkillCheckData,
+} from "@modules/board/skill-check/shared/lib";
 import { REMOVE_CLIPPED_SUBVIEWS } from "@shared/config";
 import {
 	getSkillCheckValue,
 	sanitizeSkillCheckExpression,
-	selectCurrentBoardProp,
-	selectSkillCheckHistory,
-	setSkillCheckData,
 	useAppDispatch,
 	useAppSelector,
 } from "@shared/lib";
@@ -33,7 +35,7 @@ export const ExpressionHistory = ({
 	...props
 }: ExpressionHistoryProps) => {
 	const dispatch = useAppDispatch();
-	const history = useAppSelector(selectSkillCheckHistory);
+	const history = useAppSelector(selectSkillCheckHistory("current"));
 	const value = useAppSelector(selectCurrentBoardProp("value"));
 
 	const showReveal = useSkillItemChaosTokenRevealModal();

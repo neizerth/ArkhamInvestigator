@@ -1,9 +1,8 @@
 import {
 	selectInvestigatorBoards,
-	selectSignatureGroups,
 	setInvestigatorBoards,
-	whereId,
-} from "@shared/lib";
+} from "@modules/board/base/shared/lib";
+import { selectSignatureGroups, whereId } from "@shared/lib";
 import type { AppThunk } from "@shared/model";
 
 export const updateBoardTranslations = (): AppThunk => (dispatch, getState) => {

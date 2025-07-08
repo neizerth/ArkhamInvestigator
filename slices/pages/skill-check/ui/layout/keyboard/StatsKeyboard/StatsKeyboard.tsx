@@ -1,5 +1,6 @@
+import { sendStatSignal } from "@modules/board/skill-check/shared/lib";
 import { iconMapping } from "@shared/config";
-import { sendStatSignal, useAppDispatch } from "@shared/lib";
+import { useAppDispatch } from "@shared/lib";
 import type { InvestigatorBoardNumericStat } from "@shared/model";
 import { useCallback } from "react";
 import type { ScrollViewProps } from "react-native";

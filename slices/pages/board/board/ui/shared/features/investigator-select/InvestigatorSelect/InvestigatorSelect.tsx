@@ -1,12 +1,10 @@
-import { routes } from "@shared/config";
 import {
 	selectCurrentInvestigatorIndex,
 	selectInvestigatorBoards,
 	setCurrentInvestigatorIndex,
-	useAppDispatch,
-	useAppSelector,
-	usePage,
-} from "@shared/lib";
+} from "@modules/board/base/shared/lib";
+import { routes } from "@shared/config";
+import { useAppDispatch, useAppSelector, usePage } from "@shared/lib";
 import type {
 	PickerChangeEvent,
 	PickerItemInfo,

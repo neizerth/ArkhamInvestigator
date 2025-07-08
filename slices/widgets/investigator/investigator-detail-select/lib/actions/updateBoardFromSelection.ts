@@ -1,19 +1,21 @@
 import {
+	isBoardExists,
+	selectCurrentBoard,
+	setBoardPart,
+} from "@modules/board/base/shared/lib";
+import type {
+	InvestigatorBoard,
+	InvestigatorBoardValues,
+} from "@modules/board/base/shared/model";
+import {
 	getBoardStats,
 	goBack,
 	mergeBoardStats,
-	selectCurrentBoard,
 	selectInvestigatorSettingsByCode,
 	selectReplaceInvestigator,
-	setBoard,
 	setReplaceInvestigator,
 } from "@shared/lib";
-import type {
-	AppThunk,
-	InvestigatorBoard,
-	InvestigatorBoardValues,
-	SelectedInvestigator,
-} from "@shared/model";
+import type { AppThunk, SelectedInvestigator } from "@shared/model";
 
 export const updateBoardFromSelection =
 	(selection: SelectedInvestigator): AppThunk =>
@@ -22,7 +24,7 @@ export const updateBoardFromSelection =
 		const board = selectCurrentBoard(state);
 		const replace = selectReplaceInvestigator(state);
 
-		if (!board) {
+		if (!isBoardExists(board)) {
 			return;
 		}
 		const { signatureGroupId } = board;
@@ -33,12 +35,9 @@ export const updateBoardFromSelection =
 		const investigator = selection.signature;
 		const stats = getBoardStats(investigator);
 
-		const additionalAction = Boolean(investigator.additionalAction);
-
 		const initialValue: InvestigatorBoardValues = {
 			...board.initialValue,
 			...stats,
-			additionalAction,
 		};
 
 		const baseValue = {
@@ -57,7 +56,6 @@ export const updateBoardFromSelection =
 		const value = {
 			...merged,
 			...initStats,
-			additionalAction,
 		};
 
 		const updatedBoard: InvestigatorBoard = {
@@ -77,7 +75,12 @@ export const updateBoardFromSelection =
 			usedAbilities: [],
 		};
 
-		dispatch(setBoard(updatedBoard));
+		dispatch(
+			setBoardPart({
+				boardId: board.id,
+				data: updatedBoard,
+			}),
+		);
 
 		if (!replace) {
 			return;

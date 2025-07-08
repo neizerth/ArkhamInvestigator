@@ -1,9 +1,9 @@
 import {
-	decreaseCurrentStat,
-	increaseCurrentStat,
-	setCurrentStat,
-	useAppDispatch,
-} from "@shared/lib";
+	decreaseBoardActualPropValue,
+	increaseBoardActualPropValue,
+	setBoardActualPropValue,
+} from "@modules/board/base/shared/lib";
+import { useAppDispatch } from "@shared/lib";
 import type { InvestigatorBoardNumericStat } from "@shared/model";
 import type { PickerChangeEvent } from "@widgets/control/picker";
 import { useCallback } from "react";
@@ -15,8 +15,10 @@ export const useValueControl = (boardId: number) => {
 		(stat: InvestigatorBoardNumericStat) =>
 			({ value = 0 }: PickerChangeEvent) => {
 				dispatch(
-					setCurrentStat(stat, value, {
+					setBoardActualPropValue({
 						boardId,
+						prop: stat,
+						value,
 					}),
 				);
 			},
@@ -26,8 +28,10 @@ export const useValueControl = (boardId: number) => {
 	const setValue = useCallback(
 		(stat: InvestigatorBoardNumericStat, value: number) => () => {
 			dispatch(
-				setCurrentStat(stat, value, {
+				setBoardActualPropValue({
 					boardId,
+					prop: stat,
+					value,
 				}),
 			);
 		},
@@ -37,8 +41,10 @@ export const useValueControl = (boardId: number) => {
 	const clear = useCallback(
 		(stat: InvestigatorBoardNumericStat) => () => {
 			dispatch(
-				setCurrentStat(stat, 0, {
+				setBoardActualPropValue({
 					boardId,
+					prop: stat,
+					value: 0,
 				}),
 			);
 		},
@@ -48,8 +54,10 @@ export const useValueControl = (boardId: number) => {
 	const increase = useCallback(
 		(stat: InvestigatorBoardNumericStat, max?: number) => () => {
 			dispatch(
-				increaseCurrentStat(stat, max, {
+				increaseBoardActualPropValue({
 					boardId,
+					prop: stat,
+					max,
 				}),
 			);
 		},
@@ -59,8 +67,10 @@ export const useValueControl = (boardId: number) => {
 	const decrease = useCallback(
 		(stat: InvestigatorBoardNumericStat, min?: number) => () => {
 			dispatch(
-				decreaseCurrentStat(stat, min, {
+				decreaseBoardActualPropValue({
 					boardId,
+					prop: stat,
+					min,
 				}),
 			);
 		},

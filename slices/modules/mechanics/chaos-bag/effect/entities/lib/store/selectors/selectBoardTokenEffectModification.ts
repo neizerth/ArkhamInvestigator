@@ -1,4 +1,4 @@
-import { selectBoardById } from "@modules/board/base/shared/lib";
+import { isBoardExists, selectBoardById } from "@modules/board/base/shared/lib";
 import type { BoardId } from "@modules/board/base/shared/model";
 import { createSelector } from "@reduxjs/toolkit";
 import { selectReferenceCardTokenEffects } from "@shared/lib";
@@ -8,7 +8,7 @@ export const selectBoardTokenEffectModification = (boardId: BoardId) =>
 	createSelector(
 		[selectBoardById(boardId), selectReferenceCardTokenEffects],
 		(board, reference) => {
-			if (!board) {
+			if (!isBoardExists(board)) {
 				return [];
 			}
 

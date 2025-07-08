@@ -5,8 +5,8 @@ import { increaseBoardValueProp } from "./increaseBoardValueProp";
 import type { AppThunk } from "@shared/model";
 
 export type ReduceBoardValuePropPayload = SetBoardPropValuePayload & {
-	max: number;
-	min: number;
+	max?: number;
+	min?: number;
 };
 
 export const reduceBoardValueProp =

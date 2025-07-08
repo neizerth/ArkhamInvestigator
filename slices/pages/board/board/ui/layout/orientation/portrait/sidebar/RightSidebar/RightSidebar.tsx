@@ -1,8 +1,8 @@
 import {
 	selectShowInvestigatorDoom,
 	selectTrackHandSize,
-	useAppSelector,
-} from "@shared/lib";
+} from "@modules/board/base/shared/lib";
+import { useAppSelector } from "@shared/lib";
 import { Dimensions, type ViewProps } from "react-native";
 import { HandSize } from "../../../../../shared";
 import { Sidebar } from "../Sidebar";

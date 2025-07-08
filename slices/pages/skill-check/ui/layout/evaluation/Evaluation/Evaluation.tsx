@@ -1,8 +1,8 @@
 import {
 	selectHistoryShown,
 	selectSkillCheckData,
-	useAppSelector,
-} from "@shared/lib";
+} from "@modules/board/skill-check/shared/lib";
+import { useAppSelector } from "@shared/lib";
 import { memo } from "react";
 import type { ViewProps } from "react-native";
 import { useSkillCheckLayoutType } from "../../../../lib";

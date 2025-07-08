@@ -1,10 +1,9 @@
 import {
-	increaseCurrentStat,
-	selectCurrentStatValue,
-	setCurrentStat,
-	useAppDispatch,
-	useAppSelector,
-} from "@shared/lib";
+	increaseCurrentActualPropValue,
+	selectCurrentActualPropValue,
+	setCurrentActualPropValue,
+} from "@modules/board/base/shared/lib";
+import { useAppDispatch, useAppSelector } from "@shared/lib";
 import type { DoomProps } from "@shared/ui";
 import type { PickerChangeEvent } from "@widgets/control/picker";
 import { range } from "ramda";
@@ -17,20 +16,34 @@ export type { DoomProps as InvestigatorDoomProps };
 
 export const InvestigatorDoom = (props: DoomProps) => {
 	const dispatch = useAppDispatch();
-	const value = useAppSelector(selectCurrentStatValue("doom"));
+	const value = useAppSelector(selectCurrentActualPropValue("doom"));
 	const onChange = useCallback(
 		({ value = 0 }: PickerChangeEvent) => {
-			dispatch(setCurrentStat("doom", value));
+			dispatch(
+				setCurrentActualPropValue({
+					prop: "doom",
+					value,
+				}),
+			);
 		},
 		[dispatch],
 	);
 
 	const onLongPress = useCallback(() => {
-		dispatch(setCurrentStat("doom", 0));
+		dispatch(
+			setCurrentActualPropValue({
+				prop: "doom",
+				value: 0,
+			}),
+		);
 	}, [dispatch]);
 
 	const onPress = useCallback(() => {
-		dispatch(increaseCurrentStat("doom"));
+		dispatch(
+			increaseCurrentActualPropValue({
+				prop: "doom",
+			}),
+		);
 	}, [dispatch]);
 
 	return (

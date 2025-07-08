@@ -1,9 +1,6 @@
 import { useModal } from "@modules/core/modal/shared/lib";
-import {
-	selectCurrentFaction,
-	useAppDispatch,
-	useAppSelector,
-} from "@shared/lib";
+import { selectCurrentFaction } from "@modules/mechanics/board/base/entities/lib";
+import { useAppDispatch, useAppSelector } from "@shared/lib";
 import { useCallback, useEffect } from "react";
 import {
 	goToNextTimingWizardStep as goToNextStep,

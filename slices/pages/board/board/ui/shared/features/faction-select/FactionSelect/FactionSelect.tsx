@@ -1,13 +1,14 @@
+import {
+	selectShowFactionSelect,
+	setBoardProp,
+	setShowFactionSelect,
+} from "@modules/board/base/shared/lib";
 import { useHapticFeedback } from "@modules/core/haptic/shared/lib";
 import {
 	selectAvailableFactions,
 	selectCurrentFaction,
-	selectShowFactionSelect,
-	setBoardProp,
-	setShowFactionSelect,
-	useAppDispatch,
-	useAppSelector,
-} from "@shared/lib";
+} from "@modules/mechanics/board/base/entities/lib";
+import { useAppDispatch, useAppSelector } from "@shared/lib";
 import type { Faction } from "@shared/model";
 import { useCallback } from "react";
 import type { ViewProps } from "react-native";
@@ -17,7 +18,7 @@ export type FactionSelectProps = ViewProps;
 
 export const FactionSelect = (props: FactionSelectProps) => {
 	const dispatch = useAppDispatch();
-	const factions = useAppSelector(selectAvailableFactions);
+	const factions = useAppSelector(selectAvailableFactions("current"));
 	const selected = useAppSelector(selectCurrentFaction);
 	const impactFeedback = useHapticFeedback("clockTick");
 
@@ -29,7 +30,13 @@ export const FactionSelect = (props: FactionSelectProps) => {
 	const onPress = useCallback(
 		(faction: Faction) => () => {
 			dispatch(setShowFactionSelect(false));
-			dispatch(setBoardProp("currentRole", faction));
+			dispatch(
+				setBoardProp({
+					boardId: "current",
+					prop: "currentRole",
+					value: faction,
+				}),
+			);
 		},
 		[dispatch],
 	);

@@ -1,4 +1,5 @@
 import {
+	isBoardExists,
 	selectBoardById,
 	setBoardProp,
 	withCurrentPayload,
@@ -17,7 +18,7 @@ export const toggleSkillCheckHistoryItemPin =
 		const state = getState();
 		const board = selectBoardById(boardId)(state);
 
-		if (!board) {
+		if (!isBoardExists(board)) {
 			return;
 		}
 

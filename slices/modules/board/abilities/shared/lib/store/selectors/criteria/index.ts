@@ -1,4 +1,3 @@
-export * from "./selectHaveAdditionalAction";
-export * from "./selectHaveBoardAbilities";
+export * from "./selectHasBoardAbilities";
 export * from "./selectIsBoardAbilityUsed";
 export * from "./current";

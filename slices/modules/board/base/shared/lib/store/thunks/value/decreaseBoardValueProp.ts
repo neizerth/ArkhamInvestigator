@@ -5,20 +5,26 @@ import {
 } from "../../actions";
 import { selectBoardValueProp } from "../../selectors/props/selectBoardValueProp";
 
+export type DecreaseBoardValuePropPayload = Omit<
+	SetBoardPropValuePayload,
+	"value"
+> & {
+	min?: number;
+	value?: number;
+};
+
 export const decreaseBoardValueProp =
-	(payload: SetBoardPropValuePayload): AppThunk =>
+	(payload: DecreaseBoardValuePropPayload): AppThunk =>
 	(dispatch, getState) => {
 		const state = getState();
+		const { min = Number.NEGATIVE_INFINITY } = payload;
 		const currentValue = selectBoardValueProp(payload)(state);
+		const decrement = payload.value || 1;
+		const value = currentValue - decrement;
 
-		if (typeof currentValue !== "number") {
+		if (value < min) {
 			return;
 		}
-		if (typeof payload.value !== "number") {
-			return;
-		}
-
-		const value = currentValue - payload.value;
 
 		dispatch(
 			setBoardPropValue({

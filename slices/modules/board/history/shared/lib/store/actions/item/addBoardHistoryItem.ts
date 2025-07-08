@@ -12,6 +12,7 @@ import type {
 export type AddBoardHistoryItemPayload = PropsWithBoardId &
 	PropsWithBoard & {
 		data: InvestigatorBoardHistoryItemData;
+		id?: string;
 	};
 
 export const addBoardHistoryItem = createAction<AddBoardHistoryItemPayload>(

@@ -1,8 +1,5 @@
-import { cancelShowRevealChaosBagModal } from "@modules/chaos-bag/reveal/modal/entities/lib";
-import { PrimaryButton } from "@modules/core/haptic/shared/ui";
-import { useAppTranslation } from "@modules/core/i18n/shared/lib";
 import {
-	addCurrentSkillCheckToHistory,
+	addBoardSkillCheckItem,
 	selectHistoryShown,
 	selectSkillCheckDifficulty,
 	sendCommandSignal,
@@ -10,9 +7,11 @@ import {
 	sendOperatorSignal,
 	setHistoryShown,
 	setSkillCheckDifficulty,
-	useAppDispatch,
-	useAppSelector,
-} from "@shared/lib";
+} from "@modules/board/skill-check/shared/lib";
+import { cancelShowRevealChaosBagModal } from "@modules/chaos-bag/reveal/modal/entities/lib";
+import { PrimaryButton } from "@modules/core/haptic/shared/ui";
+import { useAppTranslation } from "@modules/core/i18n/shared/lib";
+import { useAppDispatch, useAppSelector } from "@shared/lib";
 import type { SkillCheckCommandType, SkillCheckOperator } from "@shared/model";
 import memoize from "fast-memoize";
 import { useCallback, useEffect } from "react";
@@ -83,7 +82,11 @@ export const Keyboard = ({ ...props }: KeyboardProps) => {
 	);
 
 	const equals = useCallback(() => {
-		dispatch(addCurrentSkillCheckToHistory());
+		dispatch(
+			addBoardSkillCheckItem({
+				boardId: "current",
+			}),
+		);
 	}, [dispatch]);
 
 	const calcAndCheck = useCallback(() => {

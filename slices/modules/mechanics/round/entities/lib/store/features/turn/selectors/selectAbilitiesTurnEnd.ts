@@ -1,23 +1,22 @@
-import { selectIsAdditionalActionUsed } from "@modules/board/abilities/shared/lib/store/selectors/additional-action";
+import {
+	selectHasAdditionalAction,
+	selectIsAdditionalActionUsed,
+} from "@modules/board/abilities/shared/lib";
 import { selectBoardById } from "@modules/board/base/shared/lib";
+import type { BoardId } from "@modules/board/base/shared/model";
 import { createSelector } from "@reduxjs/toolkit";
-import { idIncludes, selectHaveAdditionalAction } from "@shared/lib";
-import type { BoardId } from "@shared/model";
+import { idIncludes } from "@shared/lib";
 import { prop } from "ramda";
 
 export const selectAbilitiesTurnEnd = (boardId: BoardId) =>
 	createSelector(
 		[
 			selectBoardById(boardId),
-			selectHaveAdditionalAction,
-			selectIsAdditionalActionUsed,
+			selectHasAdditionalAction(boardId),
+			selectIsAdditionalActionUsed(boardId),
 		],
-		(board, haveAdditionalAction, isAdditionalActionUsed) => {
-			if (!board) {
-				return true;
-			}
-
-			if (haveAdditionalAction && !isAdditionalActionUsed) {
+		(board, hasAdditionalAction, isAdditionalActionUsed) => {
+			if (hasAdditionalAction && !isAdditionalActionUsed) {
 				return false;
 			}
 

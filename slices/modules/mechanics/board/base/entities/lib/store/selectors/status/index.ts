@@ -1,2 +1,3 @@
 export * from "./selectIsDefeated";
-export * from "./selectIsInactive";
+export * from "./selectBoardIsInactive";
+export * from "./current";

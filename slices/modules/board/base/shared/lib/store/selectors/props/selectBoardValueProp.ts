@@ -1,6 +1,7 @@
 import type {
 	BoardId,
 	InvestigatorBoardValueProp,
+	OmitBoard,
 } from "@modules/board/base/shared/model";
 import { createSelector } from "@reduxjs/toolkit";
 import type { InvestigatorNumericStat } from "@shared/model";
@@ -18,9 +19,16 @@ export const selectBoardValueProp = ({
 	type,
 }: SelectBoardPropValueOptions) =>
 	createSelector([selectBoardById(boardId)], (board) => {
-		if (!board) {
-			return;
-		}
-
 		return board[type][prop];
+	});
+
+export type SelectCurrentBoardPropValueOptions =
+	OmitBoard<SelectBoardPropValueOptions>;
+
+export const selectCurrentBoardValueProp = (
+	options: SelectCurrentBoardPropValueOptions,
+) =>
+	selectBoardValueProp({
+		...options,
+		boardId: "current",
 	});

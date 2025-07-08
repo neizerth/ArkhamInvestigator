@@ -3,13 +3,13 @@ import * as C from "./SetNameAction.components";
 import { useAppTranslation } from "@modules/core/i18n/shared/lib";
 import { useModal } from "@modules/core/modal/shared/lib";
 import type { ModalOkEvent } from "@modules/core/modal/shared/model";
+import { useAppDispatch, useAppSelector } from "@shared/lib";
+
 import {
-	selectCurrentFaction,
 	selectSkillCheckHistoryItemTitle as selectTitle,
 	setSkillCheckHistoryItemTitle as setTitle,
-	useAppDispatch,
-	useAppSelector,
-} from "@shared/lib";
+} from "@modules/board/skill-check/shared/lib";
+import { selectCurrentFaction } from "@modules/mechanics/board/base/entities/lib";
 import { memo, useCallback } from "react";
 import type { GestureResponderEvent } from "react-native";
 import type { ExpressionHistoryItemActionProps as ActionProps } from "../../ExpressionHistoryItemAction";
@@ -27,12 +27,24 @@ export const SetNameAction = ({
 }: SetNameActionProps) => {
 	const dispatch = useAppDispatch();
 	const { t } = useAppTranslation();
-	const title = useAppSelector(selectTitle(itemId));
+	const title = useAppSelector(
+		selectTitle({
+			boardId: "current",
+			id: itemId,
+		}),
+	);
 	const faction = useAppSelector(selectCurrentFaction);
 
 	const setItemTitle = useCallback(
 		({ textValue }: ModalOkEvent) => {
-			dispatch(setTitle(itemId, textValue?.trim()));
+			const title = textValue?.trim();
+			dispatch(
+				setTitle({
+					boardId: "current",
+					id: itemId,
+					title,
+				}),
+			);
 			onChange?.();
 		},
 		[dispatch, itemId, onChange],

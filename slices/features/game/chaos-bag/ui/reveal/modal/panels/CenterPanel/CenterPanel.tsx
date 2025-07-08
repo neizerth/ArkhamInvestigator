@@ -41,9 +41,6 @@ export const CenterPanel = ({
 	const dispatch = useAppDispatch();
 	const boardId = useAppSelector(selectCurrentBoardId);
 
-	if (!boardId) {
-		return;
-	}
 	const { type } = lastToken;
 
 	const tokenValue = useAppSelector(

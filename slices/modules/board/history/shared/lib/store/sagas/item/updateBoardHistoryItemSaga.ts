@@ -1,4 +1,8 @@
-import { selectBoardById, setBoardPart } from "@modules/board/base/shared/lib";
+import {
+	isBoardExists,
+	selectBoardById,
+	setBoardPart,
+} from "@modules/board/base/shared/lib";
 import { mergeDeepRight, propEq } from "ramda";
 import { put, select, takeEvery } from "redux-saga/effects";
 import { updateBoardHistoryItem } from "../../actions";
@@ -8,7 +12,7 @@ function* worker({ payload }: ReturnType<typeof updateBoardHistoryItem>) {
 	const selector = selectBoardById(boardId);
 	const board: ReturnType<typeof selector> = yield select(selector);
 
-	if (!board) {
+	if (!isBoardExists(board)) {
 		return;
 	}
 

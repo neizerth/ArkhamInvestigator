@@ -1,11 +1,10 @@
 import {
-	selectCurrentStatBaseValue,
-	selectCurrentStatInitialValue,
-	selectCurrentStatValue,
-	setStatTransaction,
-	useAppDispatch,
-	useAppSelector,
-} from "@shared/lib";
+	selectCurrentActualPropValue,
+	selectCurrentBasePropValue,
+	selectCurrentInitialPropValue,
+	setBoardPart,
+} from "@modules/board/base/shared/lib";
+import { useAppDispatch, useAppSelector } from "@shared/lib";
 import type { InvestigatorBoardNumericStat } from "@shared/model";
 import type { PickerChangeEvent } from "@widgets/control/picker";
 import { range } from "ramda";
@@ -31,9 +30,9 @@ export const BaseStatPicker = ({
 	data: defaultData,
 	...props
 }: BaseStatPickerProps) => {
-	const value = useAppSelector(selectCurrentStatValue(statType));
-	const baseValue = useAppSelector(selectCurrentStatBaseValue(statType));
-	const initialValue = useAppSelector(selectCurrentStatInitialValue(statType));
+	const value = useAppSelector(selectCurrentActualPropValue(statType));
+	const baseValue = useAppSelector(selectCurrentBasePropValue(statType));
+	const initialValue = useAppSelector(selectCurrentInitialPropValue(statType));
 
 	const pickerData = useMemo(() => {
 		if (defaultData) {
@@ -57,10 +56,16 @@ export const BaseStatPicker = ({
 				: value + delta;
 
 			dispatch(
-				setStatTransaction({
-					statType,
-					value: nextValue,
-					baseValue: nextBaseValue,
+				setBoardPart({
+					boardId: "current",
+					data: {
+						value: {
+							[statType]: nextValue,
+						},
+						baseValue: {
+							[statType]: nextBaseValue,
+						},
+					},
 				}),
 			);
 		},

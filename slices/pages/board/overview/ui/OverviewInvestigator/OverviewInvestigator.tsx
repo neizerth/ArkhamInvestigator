@@ -2,9 +2,13 @@ import { makeAction } from "@features/game/phase";
 import {
 	selectBoardById,
 	selectShowDamageAndHorror,
-	useAppDispatch,
-	useAppSelector,
-} from "@shared/lib";
+} from "@modules/board/base/shared/lib";
+import {
+	selectBoardDamage,
+	selectBoardFaction,
+	selectBoardHorror,
+} from "@modules/mechanics/board/base/entities/lib";
+import { useAppDispatch, useAppSelector } from "@shared/lib";
 import type { InvestigatorBoardNumericStat } from "@shared/model";
 import { range } from "ramda";
 import { useCallback, useMemo } from "react";
@@ -28,16 +32,17 @@ export const OverviewInvestigator = ({
 }: OverviewInvestigatorProps) => {
 	const dispatch = useAppDispatch();
 	const control = useValueControl(boardId);
-	const board = useAppSelector(selectBoardById(boardId));
+	const { value, baseValue, initialValue, investigator } = useAppSelector(
+		selectBoardById(boardId),
+	);
 	const showWounds = useAppSelector(selectShowDamageAndHorror);
 
-	const { investigator, value, baseValue, initialValue, currentRole } = board;
-	const faction = currentRole || investigator.faction_code;
-	const damage = baseValue.health - value.health;
-	const horror = baseValue.sanity - value.sanity;
+	const faction = useAppSelector(selectBoardFaction(boardId));
+	const damage = useAppSelector(selectBoardDamage(boardId));
+	const horror = useAppSelector(selectBoardHorror(boardId));
 
-	const maxHealth = baseValue.health;
-	const maxSanity = baseValue.sanity;
+	const maxHealth = baseValue?.health;
+	const maxSanity = baseValue?.sanity;
 
 	const healthData = useMemo(() => {
 		return showWounds ? woundsData : range(-20, maxHealth + 1);
@@ -54,6 +59,10 @@ export const OverviewInvestigator = ({
 	}, [dispatch, boardId]);
 
 	const minSanity = sanityData[0];
+
+	if (!faction) {
+		return;
+	}
 
 	const withPicker = (type: InvestigatorBoardNumericStat) => ({
 		type: "picker" as const,

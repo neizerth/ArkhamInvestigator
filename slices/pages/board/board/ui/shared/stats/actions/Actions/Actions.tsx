@@ -1,6 +1,6 @@
 import { makeAction } from "@features/game/phase";
+import { selectHasBoardAbilities } from "@modules/board/abilities/shared/lib";
 import { useAppDispatch, useAppSelector } from "@shared/lib";
-import { selectHaveBoardAbilities } from "@shared/lib";
 import type { ImageBackgroundProps } from "@shared/ui";
 import { range } from "ramda";
 import { useCallback } from "react";
@@ -13,7 +13,7 @@ const actionsData = range(0, 100);
 
 export const Actions = ({ ...props }: ActionsProps) => {
 	const dispatch = useAppDispatch();
-	const haveAbilities = useAppSelector(selectHaveBoardAbilities);
+	const haveAbilities = useAppSelector(selectHasBoardAbilities("current"));
 
 	const { value, baseValue, initialValue, onChange, onLongPress } = useStat({
 		statType: "actions",

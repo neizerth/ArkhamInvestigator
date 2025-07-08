@@ -1,8 +1,9 @@
+import { selectBoardById } from "@modules/board/base/shared/lib";
 import type { BoardId } from "@modules/board/base/shared/model";
 import { mergeReferenceTokenEffects } from "@modules/chaos-bag/effect/entities/lib";
 import { selectBoardTokenEffectModification } from "@modules/mechanics/chaos-bag/effect/entities/lib";
 import { createSelector } from "@reduxjs/toolkit";
-import { selectBoardById, selectReferenceCardTokenEffects } from "@shared/lib";
+import { selectReferenceCardTokenEffects } from "@shared/lib";
 
 export const selectChaosBagTokenReference = (boardId: BoardId) =>
 	createSelector(
@@ -12,10 +13,6 @@ export const selectChaosBagTokenReference = (boardId: BoardId) =>
 			selectBoardTokenEffectModification(boardId),
 		],
 		(board, referenceTokens, modification) => {
-			if (!board) {
-				return referenceTokens;
-			}
-
 			const baseMerge = mergeReferenceTokenEffects(
 				referenceTokens,
 				board.investigator.tokens_reference,

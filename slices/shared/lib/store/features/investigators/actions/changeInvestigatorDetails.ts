@@ -1,9 +1,12 @@
+import {
+	isBoardExists,
+	selectCurrentBoard,
+} from "@modules/board/base/shared/lib";
 import type { AppThunk } from "@shared/model";
 import { routes } from "../../../../../config";
 import { whereId } from "../../../../util";
 import { delay } from "../../../../util/promise";
 import { goToPage } from "../../../effects";
-import { selectCurrentBoard } from "../../board/selectors/current/selectCurrentBoard";
 import {
 	setCurrentSignatureGroup,
 	setCurrentSignatureId,
@@ -15,8 +18,11 @@ import { selectSignatureGroups } from "../investigators";
 export const changeInvestigatorDetails =
 	(): AppThunk => async (dispatch, getState) => {
 		const state = getState();
-		const { signatureGroupId, investigator, skinId } =
-			selectCurrentBoard(state);
+		const board = selectCurrentBoard(state);
+		if (!isBoardExists(board)) {
+			return;
+		}
+		const { signatureGroupId, investigator, skinId } = board;
 		const groups = selectSignatureGroups(state);
 		const group = groups.find(whereId(signatureGroupId));
 

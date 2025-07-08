@@ -15,7 +15,7 @@ const defaultData = range(MIN_VALUE, MAX_VALUE + 1);
 
 type Options = {
 	type: ChaosTokenType;
-	boardId?: BoardId;
+	boardId: BoardId;
 };
 
 export const selectChaosTokenRangeByType = ({ type, boardId }: Options) =>

@@ -13,3 +13,6 @@ export const undoBoard =
 				delta: -1,
 			}),
 		);
+
+export const undo = (): AppThunk => (dispatch) =>
+	undoBoard({ boardId: "current" });

@@ -1,4 +1,4 @@
-import type { InvestigatorBoardValues } from "@shared/model";
+import type { InvestigatorBoardValues } from "@modules/board/base/shared/model";
 import { pick } from "ramda";
 
 type Stats = {
@@ -15,10 +15,7 @@ export const mergeBoardStats = (
 		sanity: prev.baseValue.sanity - prev.value.sanity,
 	};
 
-	const keepValues = pick(
-		["additionalAction", "actions", "resources", "clues"],
-		prev.value,
-	);
+	const keepValues = pick(["actions", "resources", "clues"], prev.value);
 
 	return {
 		...stats,

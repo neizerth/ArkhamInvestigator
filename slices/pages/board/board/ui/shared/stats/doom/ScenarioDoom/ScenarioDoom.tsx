@@ -1,9 +1,5 @@
-import {
-	selectDoom,
-	setDoom,
-	useAppDispatch,
-	useAppSelector,
-} from "@shared/lib";
+import { selectDoom, setDoom } from "@modules/board/base/shared/lib";
+import { useAppDispatch, useAppSelector } from "@shared/lib";
 import type { DoomProps } from "@shared/ui";
 import type { PickerChangeEvent } from "@widgets/control/picker";
 import { range } from "ramda";

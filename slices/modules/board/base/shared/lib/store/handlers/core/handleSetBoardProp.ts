@@ -1,4 +1,5 @@
 import type { BoardDraft, BoardKey } from "@modules/board/base/shared/model";
+import { isBoardExists } from "../../../fallback";
 import type { SetBoardPropPayload } from "../../actions";
 import { getBoardById } from "../../getters/find";
 
@@ -11,7 +12,7 @@ export const handleSetBoardProp = <K extends BoardKey>(
 		boardId,
 	});
 
-	if (!board) {
+	if (!isBoardExists(board)) {
 		return;
 	}
 

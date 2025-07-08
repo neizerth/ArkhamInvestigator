@@ -1,4 +1,5 @@
-import { selectBoardImages, useAppSelector } from "@shared/lib";
+import { selectInvestigatorBoardImages } from "@modules/board/base/shared/lib";
+import { useAppSelector } from "@shared/lib";
 import { useContext, useMemo } from "react";
 import { LayoutContext } from "../../../../../../config";
 import { getImageLayout } from "../../../../../../lib/image/background/getImageLayout";
@@ -6,7 +7,7 @@ import { useImageOffsets } from "./useImageOffsets";
 
 export const useBackgrounds = () => {
 	const { view } = useContext(LayoutContext);
-	const images = useAppSelector(selectBoardImages);
+	const images = useAppSelector(selectInvestigatorBoardImages);
 	const offsets = useImageOffsets();
 
 	return useMemo(() => {

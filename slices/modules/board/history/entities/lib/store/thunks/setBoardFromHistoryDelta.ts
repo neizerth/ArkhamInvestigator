@@ -1,4 +1,4 @@
-import { selectBoardById } from "@modules/board/base/shared/lib";
+import { isBoardExists, selectBoardById } from "@modules/board/base/shared/lib";
 import type { PropsWithBoardId } from "@modules/board/base/shared/model";
 import type { AppThunk } from "@shared/model";
 import { setValueFromHistoryIndex } from "./setBoardFromHistoryIndex";
@@ -14,7 +14,7 @@ export const setBoardFromHistoryDelta =
 
 		const board = selectBoardById(boardId)(state);
 
-		if (!board) {
+		if (!isBoardExists(board)) {
 			return;
 		}
 

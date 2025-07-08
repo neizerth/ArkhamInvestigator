@@ -1,3 +1,3 @@
-import { selectBoardId } from "../selectBoardId";
+import { selectBoardId } from "../id";
 
 export const selectCurrentBoardId = selectBoardId("current");

@@ -1,7 +1,5 @@
-import {
-	clearSkillCheckHistoryItem as removeItem,
-	useAppDispatch,
-} from "@shared/lib";
+import { removeBoardSkillCheckItem } from "@modules/board/skill-check/shared/lib";
+import { useAppDispatch } from "@shared/lib";
 import { memo, useCallback } from "react";
 import type { GestureResponderEvent } from "react-native";
 import type { ExpressionHistoryItemActionProps as ActionProps } from "../../ExpressionHistoryItemAction";
@@ -20,7 +18,7 @@ export const RemoveAction = ({
 	const dispatch = useAppDispatch();
 	const onPress = useCallback(
 		(event: GestureResponderEvent) => {
-			dispatch(removeItem(itemId));
+			dispatch(removeBoardSkillCheckItem({ id: itemId, boardId: "current" }));
 			onRemove?.();
 			onPressProp?.(event);
 		},

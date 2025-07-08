@@ -1,4 +1,5 @@
 import { put, select, takeEvery } from "redux-saga/effects";
+import { isBoardExists } from "../../fallback";
 import { boardChanged, setBoard } from "../actions";
 import { setBoardInternal } from "../board";
 import { selectBoardById } from "../selectors";
@@ -9,7 +10,7 @@ function* worker({ payload }: ReturnType<typeof setBoard>) {
 
 	const board: ReturnType<typeof selectBoard> = yield select(selectBoard);
 
-	if (!board) {
+	if (!isBoardExists(board)) {
 		return;
 	}
 

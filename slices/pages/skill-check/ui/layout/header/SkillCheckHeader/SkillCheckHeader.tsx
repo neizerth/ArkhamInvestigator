@@ -1,9 +1,6 @@
-import { startChaosBagReveal } from "@modules/chaos-bag/reveal/base/shared/lib";
-import { useHapticSwipe } from "@modules/core/haptic/shared/lib";
+import { selectCurrentBoardProp } from "@modules/board/base/shared/lib";
 import {
 	clearSkillCheckHistory,
-	goBack,
-	selectCurrentBoardProp,
 	selectHistoryShown,
 	selectSkillCheckDifficulty,
 	selectSkillCheckDifficultyCharacter,
@@ -11,9 +8,10 @@ import {
 	setHistoryShown,
 	setSkillCheckDifficulty,
 	toggleSkillCheckDifficultyType,
-	useAppDispatch,
-	useAppSelector,
-} from "@shared/lib";
+} from "@modules/board/skill-check/shared/lib";
+import { startChaosBagReveal } from "@modules/chaos-bag/reveal/base/shared/lib";
+import { useHapticSwipe } from "@modules/core/haptic/shared/lib";
+import { goBack, useAppDispatch, useAppSelector } from "@shared/lib";
 import { useCallback } from "react";
 import type { ViewProps } from "react-native";
 import { Directions, GestureDetector } from "react-native-gesture-handler";
@@ -30,7 +28,7 @@ export const SkillCheckHeader = ({ ...props }: SkillCheckHeaderProps) => {
 		selectSkillCheckDifficultyCharacter,
 	);
 
-	const value = type && stats[type];
+	const value = type && stats?.[type];
 
 	const historyShown = useAppSelector(selectHistoryShown);
 	const layoutType = useSkillCheckLayoutType();
@@ -41,7 +39,7 @@ export const SkillCheckHeader = ({ ...props }: SkillCheckHeaderProps) => {
 	}, [dispatch, historyShown]);
 
 	const clearHistory = useCallback(() => {
-		dispatch(clearSkillCheckHistory());
+		dispatch(clearSkillCheckHistory("current"));
 	}, [dispatch]);
 
 	const back = useCallback(() => {

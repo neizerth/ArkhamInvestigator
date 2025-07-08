@@ -1,4 +1,4 @@
-import type { BoardState } from "@shared/lib";
+import type { BoardState } from "@modules/board/base/shared/lib";
 import type { PersistedState } from "redux-persist";
 import type { RulesState } from "../../game/rules";
 

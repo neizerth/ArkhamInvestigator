@@ -1,9 +1,9 @@
 import {
-	selectCurrentHorror,
-	selectCurrentStatBaseValue,
-	selectCurrentStatValue,
-	useAppSelector,
-} from "@shared/lib";
+	selectCurrentActualPropValue,
+	selectCurrentBasePropValue,
+} from "@modules/board/base/shared/lib";
+import { selectCurrentHorror } from "@modules/mechanics/board/base/entities/lib";
+import { useAppSelector } from "@shared/lib";
 import type { ViewProps } from "react-native";
 import * as C from "./HorrorOverlay.components";
 
@@ -11,8 +11,8 @@ export type HorrorOverlayProps = ViewProps;
 
 export const HorrorOverlay = (props: HorrorOverlayProps) => {
 	const horror = useAppSelector(selectCurrentHorror);
-	const sanity = useAppSelector(selectCurrentStatValue("sanity"));
-	const baseSanity = useAppSelector(selectCurrentStatBaseValue("sanity"));
+	const sanity = useAppSelector(selectCurrentActualPropValue("sanity"));
+	const baseSanity = useAppSelector(selectCurrentBasePropValue("sanity"));
 
 	const percentage = (horror * 100) / baseSanity;
 

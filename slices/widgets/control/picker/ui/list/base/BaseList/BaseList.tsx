@@ -1,8 +1,8 @@
 import {
 	selectPickerDecelerationType,
 	selectPickerIntervalMomentum,
-	useAppSelector,
-} from "@shared/lib";
+} from "@modules/board/base/shared/lib";
+import { useAppSelector } from "@shared/lib";
 import { memo, useCallback, useMemo } from "react";
 import type { ListRenderItemInfo } from "react-native";
 import { REMOVE_CLIPPED_SUBVIEWS } from "../../../../../../../shared/config/device";

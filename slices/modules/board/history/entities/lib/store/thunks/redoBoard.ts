@@ -13,3 +13,6 @@ export const redoBoard =
 				delta: 1,
 			}),
 		);
+
+export const redo = (): AppThunk => (dispatch) =>
+	redoBoard({ boardId: "current" });

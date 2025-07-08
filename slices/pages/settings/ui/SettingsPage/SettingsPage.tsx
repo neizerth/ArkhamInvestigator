@@ -1,4 +1,6 @@
 import { showToast } from "@features/notifications/lib";
+import * as B from "@modules/board/base/shared/lib";
+import * as SC from "@modules/board/skill-check/shared/lib";
 import * as chaosBag from "@modules/chaos-bag/base/shared/lib";
 import {
 	selectHapticMode,
@@ -63,46 +65,46 @@ export const SettingsPage = () => {
 					<C.Row>
 						<C.Select
 							label="Turn end"
-							selector={S.selectEndTurnStrict}
-							actionCreator={S.setEndTurnStrict}
+							selector={B.selectEndTurnStrict}
+							actionCreator={B.setEndTurnStrict}
 							data={turnEndValues}
 						/>
 					</C.Row>
 					<C.Row>
 						<C.Select
 							label="Pinned calculations"
-							selector={S.selectTapToHidePins}
-							actionCreator={S.setTapToHidePins}
+							selector={B.selectTapToHidePins}
+							actionCreator={B.setTapToHidePins}
 							data={tapOnPinValues}
 						/>
 					</C.Row>
 					<C.Row>
 						<C.Checkbox
 							label="Show calculation changes"
-							selector={S.selectShowCalculationDiff}
-							actionCreator={S.setShowCalculationDiff}
+							selector={SC.selectShowCalculationDiff}
+							actionCreator={SC.setShowCalculationDiff}
 						/>
 					</C.Row>
 					<C.Row>
 						<C.Checkbox
 							label="Skill modfiers"
-							selector={S.selectAlwaysShowSkillModifiers}
-							actionCreator={S.setAlwaysShowSkillModifiers}
+							selector={B.selectAlwaysShowSkillModifiers}
+							actionCreator={B.setAlwaysShowSkillModifiers}
 						/>
 					</C.Row>
 					<C.Rule />
 					<C.Row>
 						<C.Checkbox
 							label="Save trauma"
-							selector={S.selectSaveTrauma}
-							actionCreator={S.setSaveTrauma}
+							selector={B.selectSaveTrauma}
+							actionCreator={B.setSaveTrauma}
 						/>
 					</C.Row>
 					<C.Row>
 						<C.Checkbox
 							label="Track experience points"
-							selector={S.selectTrackXP}
-							actionCreator={S.setTrackXP}
+							selector={B.selectTrackXP}
+							actionCreator={B.setTrackXP}
 						/>
 					</C.Row>
 				</C.Section>
@@ -140,31 +142,31 @@ export const SettingsPage = () => {
 					<C.Row>
 						<C.Select
 							label="Health/Sanity"
-							selector={S.selectShowDamageAndHorror}
-							actionCreator={S.setShowDamageAndHorror}
+							selector={B.selectShowDamageAndHorror}
+							actionCreator={B.setShowDamageAndHorror}
 							data={healthSanityModeValues}
 						/>
 					</C.Row>
 					<C.Row>
 						<C.Checkbox
 							label="Initial values"
-							selector={S.selectShowInitialHealthAndSanity}
-							actionCreator={S.setShowInitialHealthAndSanity}
+							selector={B.selectShowInitialHealthAndSanity}
+							actionCreator={B.setShowInitialHealthAndSanity}
 						/>
 					</C.Row>
 					<C.Row>
 						<C.Checkbox
 							label="Negative values"
-							selector={S.selectAllowNegativeHealthAndSanity}
-							actionCreator={S.setAllowNegativeHealthAndSanity}
+							selector={B.selectAllowNegativeHealthAndSanity}
+							actionCreator={B.setAllowNegativeHealthAndSanity}
 						/>
 					</C.Row>
 					<C.Rule />
 					<C.Row>
 						<C.Checkbox
 							label="Damage/Horror visual effects"
-							selector={S.selectShowDamageAndHorrorEffects}
-							actionCreator={S.setShowDamageAndHorrorEffects}
+							selector={B.selectShowDamageAndHorrorEffects}
+							actionCreator={B.setShowDamageAndHorrorEffects}
 						/>
 					</C.Row>
 				</C.Section>
@@ -172,22 +174,22 @@ export const SettingsPage = () => {
 					<C.Row>
 						<C.Checkbox
 							label="Hand Size"
-							selector={S.selectTrackHandSize}
-							actionCreator={S.setTrackHandSize}
+							selector={B.selectTrackHandSize}
+							actionCreator={B.setTrackHandSize}
 						/>
 					</C.Row>
 					<C.Row>
 						<C.Checkbox
 							label="Doom"
-							selector={S.selectShowInvestigatorDoom}
-							actionCreator={S.setShowInvestigatorDoom}
+							selector={B.selectShowInvestigatorDoom}
+							actionCreator={B.setShowInvestigatorDoom}
 						/>
 					</C.Row>
 					<C.Row>
 						<C.Checkbox
 							label="Upkeep resources"
-							selector={S.selectShowUpkeepResources}
-							actionCreator={S.setShowUpkeepResources}
+							selector={B.selectShowUpkeepResources}
+							actionCreator={B.setShowUpkeepResources}
 						/>
 					</C.Row>
 					{CAN_ALWAYS_SHOW_GAME_TEXT && (
@@ -196,8 +198,8 @@ export const SettingsPage = () => {
 							<C.Row>
 								<C.Checkbox
 									label="Show Game Text"
-									selector={S.selectAlwaysShowGameText}
-									actionCreator={S.setAlwaysShowGameText}
+									selector={B.selectAlwaysShowGameText}
+									actionCreator={B.setAlwaysShowGameText}
 								/>
 							</C.Row>
 						</>
@@ -207,30 +209,30 @@ export const SettingsPage = () => {
 					<C.Row>
 						<C.Checkbox
 							label="Doom"
-							selector={S.selectShowDoom}
-							actionCreator={S.setShowDoom}
+							selector={B.selectShowDoom}
+							actionCreator={B.setShowDoom}
 						/>
 					</C.Row>
 					<C.Row>
 						<C.Checkbox
 							label="Clues"
-							selector={S.selectShowScenarioClues}
-							actionCreator={S.setShowScenarioClues}
+							selector={B.selectShowScenarioClues}
+							actionCreator={B.setShowScenarioClues}
 						/>
 					</C.Row>
 					<C.Row>
 						<C.Checkbox
 							label="Sync with investigator clues"
 							hint="settings.syncScenarioClues.hint"
-							selector={S.selectSyncScenarioClues}
-							actionCreator={S.setSyncScenarioClues}
+							selector={B.selectSyncScenarioClues}
+							actionCreator={B.setSyncScenarioClues}
 						/>
 					</C.Row>
 					<C.Row>
 						<C.Checkbox
 							label="Resources"
-							selector={S.selectShowScenarioResources}
-							actionCreator={S.setShowScenarioResources}
+							selector={B.selectShowScenarioResources}
+							actionCreator={B.setShowScenarioResources}
 						/>
 					</C.Row>
 				</C.Section>

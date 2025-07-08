@@ -1,8 +1,8 @@
+import { selectCurrentBoard } from "@modules/board/base/shared/lib";
 import { useAppTranslation } from "@modules/core/i18n/shared/lib";
 import { useModal } from "@modules/core/modal/shared/lib";
 import { routes } from "@shared/config";
 import {
-	selectCurrentBoard,
 	useAppDispatch,
 	useAppSelector,
 	usePage,

@@ -1,11 +1,13 @@
+import { selectCurrentBoardProp } from "@modules/board/base/shared/lib";
 import { useAppTranslation } from "@modules/core/i18n/shared/lib";
 import { useModal } from "@modules/core/modal/shared/lib";
+import {
+	resetCurrentBoard,
+	selectCurrentFaction,
+} from "@modules/mechanics/board/base/entities/lib";
 import { routes } from "@shared/config";
 import {
 	replacePageTo,
-	resetBoard,
-	selectCurrentBoardProp,
-	selectCurrentFaction,
 	useAppDispatch,
 	useAppSelector,
 	usePage,
@@ -30,7 +32,7 @@ export const DescriptionTopMenu = ({ ...props }: DescriptionTopMenuProps) => {
 	}, [dispatch]);
 
 	const clear = useCallback(() => {
-		dispatch(resetBoard());
+		dispatch(resetCurrentBoard());
 	}, [dispatch]);
 
 	const [showClearModal] = useModal({
@@ -40,7 +42,7 @@ export const DescriptionTopMenu = ({ ...props }: DescriptionTopMenuProps) => {
 			type: "faction",
 			faction,
 			title: t`Reset Board?`,
-			subtitle: t(investigator.name),
+			subtitle: investigator && t(investigator.name),
 			text: t`board.reset.text`,
 			okText: t`Reset`,
 			cancelText: t`Cancel`,

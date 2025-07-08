@@ -3,9 +3,8 @@ import {
 	selectSkillCheckDifficultyCharacter,
 	setSkillCheckDifficulty,
 	toggleSkillCheckDifficultyType,
-	useAppDispatch,
-	useAppSelector,
-} from "@shared/lib";
+} from "@modules/board/skill-check/shared/lib";
+import { useAppDispatch, useAppSelector } from "@shared/lib";
 import { range } from "ramda";
 import { useCallback } from "react";
 import type { ViewProps } from "react-native";

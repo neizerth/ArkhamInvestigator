@@ -1,4 +1,5 @@
 import type { BoardHandler } from "@modules/board/base/shared/model";
+import { isBoardExists } from "../../../fallback";
 import type { SetBoardPropValuePayload } from "../../actions";
 import { getBoardById } from "../../getters/find";
 
@@ -11,7 +12,7 @@ export const handleSetBoardPropValue: BoardHandler<SetBoardPropValuePayload> = (
 		boardId,
 	});
 
-	if (!board) {
+	if (!isBoardExists(board)) {
 		return;
 	}
 	board[type][prop] = value;
