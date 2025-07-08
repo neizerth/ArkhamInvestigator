@@ -10,7 +10,7 @@ function* worker({ payload }: ReturnType<typeof toggleBoardAbilityUse>) {
 	yield put(
 		setBoardAbilityUse({
 			...payload,
-			use: !isUsed,
+			use: isUsed,
 		}),
 	);
 }

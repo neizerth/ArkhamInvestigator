@@ -6,11 +6,11 @@ import type { InvestigatorBoardUsedAbility } from "../model";
 type UseOptions = {
 	boardId: number;
 	ability: InvestigatorAbility;
-	usedAbilities: InvestigatorBoardUsedAbility[];
+	usedAbilities?: InvestigatorBoardUsedAbility[];
 };
 
 export const UsedAbilitiesService = {
-	resetAbilityUse({ boardId, ability, usedAbilities }: UseOptions) {
+	resetAbilityUse({ boardId, ability, usedAbilities = [] }: UseOptions) {
 		const abilityUseData = usedAbilities.find(whereId(ability.id));
 
 		const data = reject(whereId(ability.id), usedAbilities);
@@ -32,7 +32,7 @@ export const UsedAbilitiesService = {
 
 		return [...data, item];
 	},
-	setAbilityUsed({ ability, boardId, usedAbilities }: UseOptions) {
+	setAbilityUsed({ ability, boardId, usedAbilities = [] }: UseOptions) {
 		if (ability.perInvestigator && boardId === undefined) {
 			return usedAbilities;
 		}

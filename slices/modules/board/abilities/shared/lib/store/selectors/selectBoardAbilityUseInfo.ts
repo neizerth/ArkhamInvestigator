@@ -12,6 +12,6 @@ export const selectBoardAbilityUseInfo = ({
 	abilityId,
 	boardId,
 }: SelectAbilityUseInfoOptions) =>
-	createSelector([selectBoardUsedAbilities(boardId)], (data) =>
-		data?.find(whereId(abilityId)),
-	);
+	createSelector([selectBoardUsedAbilities(boardId)], (data) => {
+		return data?.find(whereId(abilityId));
+	});

@@ -1,4 +1,5 @@
 import type {
+	InvestigatorAbility,
 	InvestigatorAbilityType,
 	LimitType,
 } from "arkham-investigator-data";
@@ -20,3 +21,9 @@ export const PERMANENT_BOARD_ABILITY_TYPES: AbilityType[] = [
 export const TURN_ABILITY_LIMITS: LimitType[] = ["phase", "round", "turn"];
 
 export const additionalActionAbilityId = "additionalAction";
+
+export const additionalActionAbility: InvestigatorAbility = {
+	id: additionalActionAbilityId,
+	additionalAction: true,
+	type: "permanent",
+};

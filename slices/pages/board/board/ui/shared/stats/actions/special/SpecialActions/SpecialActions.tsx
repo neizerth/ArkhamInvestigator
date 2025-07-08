@@ -1,3 +1,4 @@
+import { additionalActionAbilityId } from "@modules/board/abilities/shared/config";
 import {
 	selectBoardAbilities,
 	selectCurrentHaveAdditionalAction,
@@ -17,12 +18,14 @@ export const SpecialActions = (props: SpecialActionsProps) => {
 
 	return (
 		<C.Container {...props}>
-			{haveAdditionalAction && <C.Additional />}
 			{abilities.map((ability, index) => {
 				const props = {
 					ability,
 					index,
 				};
+				if (ability.id === additionalActionAbilityId) {
+					return <C.Additional key={ability.id} />;
+				}
 				if (ability.type === "counter") {
 					return <C.Counter key={ability.id} {...ability} {...props} />;
 				}
