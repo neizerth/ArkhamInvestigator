@@ -2,7 +2,7 @@ import type { InvestigatorBoardUsedAbility } from "@modules/board/abilities/shar
 import { boardHistoryItemAdded } from "@modules/board/history/shared/lib";
 import { whereId } from "@shared/lib/util";
 import { difference, isNotNil } from "ramda";
-import { takeEvery } from "redux-saga/effects";
+import { put, takeEvery } from "redux-saga/effects";
 import {
 	type ChangedInvestigatorBoardUsedAbility,
 	changeBoardHistoryAbilityUse,
@@ -39,16 +39,16 @@ function* worker({ payload }: ReturnType<typeof boardHistoryItemAdded>) {
 		...changedAbilitiesLeft,
 	].filter(isNotNil);
 
-	console.log("ok!", diffRight, diffLeft);
-
 	if (changedAbilities.length === 0) {
 		return;
 	}
 
-	yield changeBoardHistoryAbilityUse({
-		...payload,
-		changedAbilities,
-	});
+	yield put(
+		changeBoardHistoryAbilityUse({
+			...payload,
+			changedAbilities,
+		}),
+	);
 }
 
 type MapUsedAbilityOptions = {
@@ -63,7 +63,7 @@ const mapUsedAbility =
 	): ChangedInvestigatorBoardUsedAbility | null => {
 		const prevItem = usedAbilities.find(whereId(change.id));
 
-		if (!prevItem) {
+		if (!prevItem || !prevItem.boardIds) {
 			return {
 				...change,
 				isUsed,

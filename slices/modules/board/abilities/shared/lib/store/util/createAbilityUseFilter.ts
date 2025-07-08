@@ -11,7 +11,6 @@ export const createAbilityUseFilter =
 		if (!changeBoardHistoryAbilityUse.match(action)) {
 			return false;
 		}
-
 		const { changedAbilities } = action.payload;
 
 		const ability = changedAbilities.find(whereId(id));
