@@ -1,8 +1,8 @@
 import type { ChaosTokenType } from "@features/game/chaos-bag/model";
 import type { BoardId } from "@modules/board/base/shared/model";
 import {
+	selectBoardChaosTokenValueModifications,
 	selectBoardElderSignValue,
-	selectBoardSpecialTokenValues,
 } from "@modules/mechanics/chaos-bag/value/entities/lib";
 import { createSelector } from "@reduxjs/toolkit";
 import { rangeStep, selectReferenceCardTokens } from "@shared/lib";
@@ -23,7 +23,7 @@ export const selectChaosTokenRangeByType = ({ type, boardId }: Options) =>
 		[
 			selectReferenceCardTokens,
 			selectBoardElderSignValue(boardId),
-			selectBoardSpecialTokenValues(boardId),
+			selectBoardChaosTokenValueModifications(boardId),
 		],
 		(data, elderSignValue, specialTokens) => {
 			const specialValue = specialTokens[type];

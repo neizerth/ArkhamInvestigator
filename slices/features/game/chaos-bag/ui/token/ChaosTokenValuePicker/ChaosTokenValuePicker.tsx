@@ -1,4 +1,4 @@
-import { useAppDispatch, useAppSelector } from "@shared/lib";
+import { signedNumber, useAppDispatch, useAppSelector } from "@shared/lib";
 import { useCallback } from "react";
 import type {
 	PickerChangeEvent,
@@ -64,9 +64,10 @@ export const ChaosTokenValuePicker = ({
 
 	const renderItem: PickerListRenderItem = useCallback(
 		({ item }) => {
+			const value = signedNumber(item);
 			return (
 				<C.TokenValue
-					value={item}
+					value={value}
 					type={type}
 					style={valueStyle}
 					sizes={valueSizes}

@@ -28,6 +28,8 @@ export type CenterPanelProps = ViewProps & {
 
 const specialTokenTypes: ChaosTokenType[] = [
 	...chaosToken.types.symbolic.base,
+	"bless",
+	"curse",
 	"elderSign",
 ];
 

@@ -3,7 +3,7 @@ import type { BoardId } from "@modules/board/base/shared/model";
 import { createSelector } from "@reduxjs/toolkit";
 import { tokenValueModifications } from "../../../config";
 
-export const selectBoardSpecialTokenValues = (boardId: BoardId) =>
+export const selectBoardChaosTokenValueModifications = (boardId: BoardId) =>
 	createSelector(
 		[
 			selectBoardProp({
