@@ -24,8 +24,7 @@ export const LeftSidebar = ({ ...props }: LeftSidebarProps) => {
 	const count = useAppSelector(selectBoardsCount);
 	const chaosBagEnabled = useAppSelector(selectChaosBagEnabled);
 	const history = useAppSelector(selectCurrentBoardProp("history"));
-	const historyIndex =
-		useAppSelector(selectCurrentBoardProp("historyIndex")) || -1;
+	const historyIndex = useAppSelector(selectCurrentBoardProp("historyIndex"));
 
 	const showText = useAppSelector(selectAlwaysShowGameText);
 
