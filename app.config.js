@@ -2,21 +2,15 @@ const pkg = require("./package.json");
 
 const dev = process.env.MODE === "development";
 const packageId = dev ? "com.arkhaminvestigator.dev" : "com.arkhaminvestigator";
-const icon = dev
-  ? "./assets/images/icon1024-dev.png"
-  : "./assets/images/icon1024.png";
-
-const androdIcon = dev
-  ? "./assets/images/icon1024-dev.png"
-  : "./assets/images/icon.png";
+const name = dev ? "AI Dev" : "Investigator";
 
 module.exports = {
   expo: {
-    name: "Investigator",
+    name,
     slug: "arkham-investigator",
     version: pkg.version,
     orientation: "portrait",
-    icon,
+    icon: "./assets/images/icon1024.png",
     scheme: "arkham-investigator",
     userInterfaceStyle: "dark",
     newArchEnabled: true,
@@ -29,7 +23,7 @@ module.exports = {
     },
     android: {
       adaptiveIcon: {
-        foregroundImage: androdIcon,
+        foregroundImage: "./assets/images/icon.png",
         backgroundColor: "#000",
       },
       package: packageId,
