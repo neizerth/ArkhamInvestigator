@@ -25,8 +25,6 @@ export const ChaosTokenRevealModal = (props: ChaosTokenRevealModalProps) => {
 		return null;
 	}
 
-	console.log(tokens);
-
 	if (tokens.length === 0) {
 		return animate ? (
 			<C.Loader {...props} onLoad={control.reveal} show={control.visible} />
