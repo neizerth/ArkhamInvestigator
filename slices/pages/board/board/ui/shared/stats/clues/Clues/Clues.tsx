@@ -1,3 +1,8 @@
+import {
+	selectSyncScenarioClues,
+	setSyncScenarioClues,
+} from "@modules/board/base/shared/lib";
+import { useAppDispatch, useAppSelector } from "@shared/lib";
 import type { ImageBackgroundProps } from "@shared/ui";
 import type { PickerChangeEvent } from "@widgets/control/picker";
 import { range } from "ramda";
@@ -22,6 +27,9 @@ export const Clues = ({
 	data = cluesData,
 	...props
 }: CluesProps) => {
+	const dispatch = useAppDispatch();
+	const syncEnabled = useAppSelector(selectSyncScenarioClues);
+
 	const onChange = useCallback(
 		({ value }: PickerChangeEvent) => {
 			onChangeProp?.(value);
@@ -29,8 +37,15 @@ export const Clues = ({
 		[onChangeProp],
 	);
 
+	const toggleSync = useCallback(() => {
+		dispatch(setSyncScenarioClues(!syncEnabled));
+	}, [dispatch, syncEnabled]);
+
+	const lockIcon = syncEnabled ? "icomoonfree-lock" : "unlocked";
+
 	return (
 		<C.Container {...props}>
+			<C.Lock icon={lockIcon} enabled={syncEnabled} onPress={toggleSync} />
 			<C.Picker
 				value={value}
 				data={data}
