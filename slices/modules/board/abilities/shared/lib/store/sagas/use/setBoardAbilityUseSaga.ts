@@ -30,8 +30,6 @@ function* worker({ payload }: ReturnType<typeof setBoardAbilityUse>) {
 		return;
 	}
 
-	console.log("set ability");
-
 	const value = UsedAbilitiesService.setAbilityUsed({
 		boardId,
 		usedAbilities,

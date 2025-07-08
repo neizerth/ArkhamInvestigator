@@ -5,6 +5,7 @@ import {
 	setBoardActualPropValue,
 } from "@modules/board/base/shared/lib";
 import type { BoardId } from "@modules/board/base/shared/model";
+import { createBoardHistoryGroup } from "@modules/board/history/shared/lib";
 import type { AppThunk } from "@shared/model";
 import { startNewTurn } from "../common/startNewTurn";
 import { giveUpkeepResourceToBoard } from "../upkeep";
@@ -22,11 +23,13 @@ export const makeAction =
 		const { actions } = board.value;
 
 		if (actions > 0) {
+			const historyGroup = createBoardHistoryGroup();
 			dispatch(
 				setBoardActualPropValue({
 					boardId,
 					prop: "actions",
 					value: actions - 1,
+					history: historyGroup,
 				}),
 			);
 
@@ -34,6 +37,7 @@ export const makeAction =
 				resetBoardAbilities({
 					boardId,
 					limitTypes: ["turn"],
+					history: historyGroup,
 				}),
 			);
 			return;
