@@ -20,8 +20,6 @@ function* worker({ payload }: ReturnType<typeof changeBoardHistoryAbilityUse>) {
 
 	const [ability] = changedAbilities;
 
-	console.log({ ability });
-
 	if (ability.isUsed) {
 		return;
 	}
@@ -51,6 +49,7 @@ function* worker({ payload }: ReturnType<typeof changeBoardHistoryAbilityUse>) {
 
 	yield put(
 		addMultipleChaosTokens({
+			...payload,
 			type: "bless",
 			count,
 		}),

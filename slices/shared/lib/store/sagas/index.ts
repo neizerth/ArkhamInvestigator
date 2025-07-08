@@ -1,4 +1,3 @@
-import { investigatorAbilitiesSaga } from "@modules/mechanics/board/abilities/features/lib/store/sagas/investigators";
 // TODO enable all module sagas
 import { spawn } from "redux-saga/effects";
 import { boardSagas } from "./board";
@@ -13,6 +12,4 @@ export default function* rootSaga() {
 	yield spawn(skillCheckSaga);
 	yield spawn(mechanicsSaga);
 	yield spawn(notificationsSaga);
-
-	yield spawn(investigatorAbilitiesSaga);
 }
