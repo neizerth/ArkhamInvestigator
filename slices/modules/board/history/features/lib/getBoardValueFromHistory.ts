@@ -1,4 +1,5 @@
 import type { InvestigatorBoard } from "@modules/board/base/shared/model";
+import { isNotEmpty, last, prop } from "ramda";
 import type { InvestigatorBoardHistoryItem } from "../../shared/model";
 import { getBoardValuePropFromHistory } from "./getBoardValuePropFromHistory";
 
@@ -9,6 +10,9 @@ type Options = {
 
 export const getBoardValueFromHistory = (options: Options) => {
 	const { board, historyItems } = options;
+
+	const nonEmptyAbilities = historyItems.map(prop("usedAbilities"));
+	const usedAbilities = last(nonEmptyAbilities.filter(isNotEmpty));
 
 	return {
 		value: getBoardValuePropFromHistory({
@@ -31,5 +35,6 @@ export const getBoardValueFromHistory = (options: Options) => {
 			type: "abilityValues",
 			initialValue: board.abilityValues,
 		}),
+		usedAbilities,
 	};
 };
