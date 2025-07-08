@@ -5,7 +5,6 @@ import {
 	selectCurrentActualPropValue,
 	selectSyncScenarioClues,
 	setClues,
-	setSyncScenarioClues,
 } from "@modules/board/base/shared/lib";
 import { setScenarioClues } from "@modules/mechanics/board/base/entities/lib";
 import { useAppDispatch, useAppSelector } from "@shared/lib";
@@ -61,15 +60,8 @@ export const ScenarioClues = ({
 		dispatch(setClues(0));
 	}, [dispatch]);
 
-	const toggleSync = useCallback(() => {
-		dispatch(setSyncScenarioClues(!syncEnabled));
-	}, [dispatch, syncEnabled]);
-
-	const lockIcon = syncEnabled ? "icomoonfree-lock" : "unlocked";
-
 	return (
 		<C.Container>
-			<C.Lock icon={lockIcon} enabled={syncEnabled} onPress={toggleSync} />
 			<C.Control
 				{...props}
 				data={data}
