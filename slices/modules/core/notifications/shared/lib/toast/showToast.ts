@@ -7,6 +7,6 @@ export type ShowToastOptions = ToastShowParams & {
 export const showToast = ({ message, ...props }: ShowToastOptions) => {
 	Toast.show({
 		...props,
-		text1: message || props.text1,
+		text1: message,
 	});
 };
