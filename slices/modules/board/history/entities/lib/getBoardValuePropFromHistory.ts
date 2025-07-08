@@ -29,7 +29,7 @@ export const getBoardValuePropFromHistory = <K extends Key>({
 	const patch: Patch = Object.assign({}, ...patches);
 
 	const value: InvestigatorBoard[K] = {
-		...board[type],
+		...board.initialValue,
 		...patch,
 	};
 
