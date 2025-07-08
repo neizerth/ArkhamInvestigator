@@ -14,8 +14,8 @@ import { getSignatureStats } from "./getSignatureStats";
 type Options = {
 	id: number;
 	index: number;
-	physicalTrauma: number;
-	mentalTrauma: number;
+	physicalTrauma?: number;
+	mentalTrauma?: number;
 	investigator: InvestigatorSignature;
 	signatureGroupId: string;
 	image: InvestigatorImage;
@@ -28,8 +28,8 @@ export const createInvestigatorBoard = (
 	const {
 		id,
 		index,
-		physicalTrauma,
-		mentalTrauma,
+		physicalTrauma = 0,
+		mentalTrauma = 0,
 		investigator,
 		signatureGroupId,
 		image,
