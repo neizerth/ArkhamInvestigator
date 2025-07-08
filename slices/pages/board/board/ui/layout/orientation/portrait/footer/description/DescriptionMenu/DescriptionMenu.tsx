@@ -1,6 +1,7 @@
 import {
 	changeInvestigator,
 	changeInvestigatorDetails,
+	delay,
 	setShowDescription,
 	useAppDispatch,
 } from "@shared/lib";
@@ -13,17 +14,22 @@ export type DescriptionMenuProps = ViewProps;
 export const DescriptionMenu = (props: DescriptionMenuProps) => {
 	const dispatch = useAppDispatch();
 
-	const hide = useCallback(() => {
+	const hide = useCallback(async () => {
 		dispatch(setShowDescription(false));
+
+		await delay(700);
 	}, [dispatch]);
 
-	const onDetailsChange = useCallback(() => {
+	const onDetailsChange = useCallback(async () => {
+		await hide();
+
 		dispatch(changeInvestigatorDetails());
-	}, [dispatch]);
+	}, [dispatch, hide]);
 
-	const onChangeInvestigator = useCallback(() => {
+	const onChangeInvestigator = useCallback(async () => {
+		await hide();
 		dispatch(changeInvestigator());
-	}, [dispatch]);
+	}, [dispatch, hide]);
 
 	return (
 		<C.Container {...props}>

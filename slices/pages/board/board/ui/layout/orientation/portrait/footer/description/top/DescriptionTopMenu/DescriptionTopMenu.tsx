@@ -8,6 +8,7 @@ import {
 import { routes } from "@shared/config";
 import {
 	replacePageTo,
+	setShowDescription,
 	useAppDispatch,
 	useAppSelector,
 	usePage,
@@ -33,6 +34,7 @@ export const DescriptionTopMenu = ({ ...props }: DescriptionTopMenuProps) => {
 
 	const clear = useCallback(() => {
 		dispatch(resetCurrentBoard());
+		dispatch(setShowDescription(false));
 	}, [dispatch]);
 
 	const [showClearModal] = useModal({
