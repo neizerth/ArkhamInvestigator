@@ -23,11 +23,13 @@ function* worker({ payload }: ReturnType<typeof addBoardHistoryItem>) {
 
 	const { history, historyIndex, investigator } = board;
 
+	const historyData = [...history, item];
+
 	yield put(
 		setBoardPart({
 			boardId,
 			data: {
-				history: [...history, item],
+				history: historyData,
 				historyIndex: historyIndex + 1,
 			},
 			history: false,

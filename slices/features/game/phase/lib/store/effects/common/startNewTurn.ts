@@ -9,8 +9,8 @@ import {
 	setBoardActualPropValue,
 } from "@modules/board/base/shared/lib";
 import type { BoardId } from "@modules/board/base/shared/model";
+import { createBoardHistoryGroup } from "@modules/board/history/shared/lib";
 import type { AppThunk } from "@shared/model";
-import { v4 } from "uuid";
 import { TURN_ABILITY_LIMITS } from "../../../../../../../shared/config";
 
 export const startNewTurn =
@@ -26,25 +26,23 @@ export const startNewTurn =
 		const { baseValue } = board;
 		const additionalAction = selectHasAdditionalAction(boardId)(state);
 
+		const historyGroup = createBoardHistoryGroup();
+
 		dispatch(
 			resetBoardAbilities({
 				boardId,
 				limitTypes: TURN_ABILITY_LIMITS,
+				history: historyGroup,
 			}),
 		);
 
 		if (additionalAction) {
-			const historyId = v4();
-
 			dispatch(
 				setBoardActualPropValue({
 					boardId,
 					prop: "actions",
 					value: baseValue.actions,
-					history: {
-						type: "group",
-						id: historyId,
-					},
+					history: historyGroup,
 				}),
 			);
 
@@ -52,10 +50,7 @@ export const startNewTurn =
 				setAdditionalActionUse({
 					use: false,
 					boardId,
-					history: {
-						type: "group",
-						id: historyId,
-					},
+					history: historyGroup,
 				}),
 			);
 			return;
@@ -66,6 +61,7 @@ export const startNewTurn =
 				boardId,
 				prop: "actions",
 				value: baseValue.actions,
+				history: historyGroup,
 			}),
 		);
 	};
