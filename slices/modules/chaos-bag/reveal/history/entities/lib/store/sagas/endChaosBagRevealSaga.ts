@@ -6,6 +6,6 @@ function* worker() {
 	yield put(addRevealHistoryItemFromCurrent());
 }
 
-export function* closeRevealChaosBagModalSaga() {
+export function* endChaosBagRevealSaga() {
 	yield takeEvery(endChaosBagReveal.match, worker);
 }
