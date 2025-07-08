@@ -63,7 +63,7 @@ export const useStat = ({
 							[statType]: value + 1,
 						},
 						baseValue: {
-							[statType]: value + 1,
+							[statType]: baseValue + 1,
 						},
 					},
 				}),
