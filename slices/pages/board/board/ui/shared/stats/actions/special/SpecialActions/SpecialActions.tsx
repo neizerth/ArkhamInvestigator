@@ -1,17 +1,19 @@
 import {
-	selectCurrentBoardAbilities,
-	selectHaveAdditionalAction,
-	useAppSelector,
-} from "@shared/lib";
+	selectBoardAbilities,
+	selectCurrentHaveAdditionalAction,
+} from "@modules/board/abilities/shared/lib";
+import { useAppSelector } from "@shared/lib";
 import type { ViewProps } from "react-native";
 import * as C from "./SpecialActions.components";
 
 export type SpecialActionsProps = ViewProps;
 
 export const SpecialActions = (props: SpecialActionsProps) => {
-	const haveAdditionalAction = useAppSelector(selectHaveAdditionalAction);
+	const haveAdditionalAction = useAppSelector(
+		selectCurrentHaveAdditionalAction,
+	);
 
-	const abilities = useAppSelector(selectCurrentBoardAbilities);
+	const abilities = useAppSelector(selectBoardAbilities("current"));
 
 	return (
 		<C.Container {...props}>

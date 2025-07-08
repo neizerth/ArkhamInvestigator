@@ -1,4 +1,4 @@
-import { selectInvestigatorBoards } from "@shared/lib";
+import { selectInvestigatorBoards } from "@modules/board/base/shared/lib";
 import type { AppThunk } from "@shared/model";
 import { resetUpkeepInvestigatorActions } from "./resetUpkeepInvestigatorActions";
 

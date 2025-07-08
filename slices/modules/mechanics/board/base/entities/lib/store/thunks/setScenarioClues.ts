@@ -1,7 +1,7 @@
 import type { AppThunk } from "@shared/model";
 
 import {
-	selectBoardValue,
+	selectBoardActualPropValue,
 	selectClues,
 	selectSyncScenarioClues,
 	setClues,
@@ -33,7 +33,7 @@ export const setScenarioClues =
 			return;
 		}
 
-		const investigatorClues = selectBoardValue({
+		const investigatorClues = selectBoardActualPropValue({
 			boardId,
 			prop: "clues",
 		})(state);

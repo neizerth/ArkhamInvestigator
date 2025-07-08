@@ -2,4 +2,5 @@ export * from "./selectBoard";
 export * from "./selectBoardByCode";
 export * from "./selectBoardById";
 export * from "./selectCurrentBoard";
-export * from "../props";
+export * from "./selectNextBoard";
+export * from "./selectPrevBoard";

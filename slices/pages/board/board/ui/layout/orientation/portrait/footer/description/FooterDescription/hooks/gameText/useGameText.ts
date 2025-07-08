@@ -1,12 +1,11 @@
-import { selectCurrentLanguage } from "@modules/core/i18n/shared/lib";
-import { CAN_ALWAYS_SHOW_GAME_TEXT } from "@shared/config";
 import {
 	selectAlwaysShowGameText,
 	selectBoardsCount,
 	selectCurrentBoardProp,
-	selectShowDescription,
-	useAppSelector,
-} from "@shared/lib";
+} from "@modules/board/base/shared/lib";
+import { selectCurrentLanguage } from "@modules/core/i18n/shared/lib";
+import { CAN_ALWAYS_SHOW_GAME_TEXT } from "@shared/config";
+import { selectShowDescription, useAppSelector } from "@shared/lib";
 import { useGameTextLayout } from "./useGameTextLayout";
 
 export const useGameText = () => {

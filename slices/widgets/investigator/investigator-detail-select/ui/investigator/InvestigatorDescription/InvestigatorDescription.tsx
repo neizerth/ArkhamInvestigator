@@ -1,9 +1,9 @@
+import { selectTrackXP } from "@modules/board/base/shared/lib";
 import { getInvestigatorImageUrl as getImageUrl } from "@shared/api/getInvestigatorImageUrl";
 import {
 	getBoardStats,
 	selectCurrentSkinId,
 	selectReplaceInvestigator,
-	selectTrackXP,
 	useAppSelector,
 } from "@shared/lib";
 import { selectCurrentSignature } from "../../../lib";

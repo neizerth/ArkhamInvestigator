@@ -3,7 +3,8 @@ import {
 	selectPickerIntervalMomentum,
 	setPickerDecelerationType,
 	setPickerIntervalMomentum,
-} from "@shared/lib";
+} from "@modules/board/base/shared/lib";
+import {} from "@shared/lib";
 import type { ViewProps } from "react-native";
 import * as C from "./PickerSettings.components";
 import { decelerationValues } from "./values";

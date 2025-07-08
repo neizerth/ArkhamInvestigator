@@ -19,10 +19,10 @@ export type InvestigatorBoardHistoryItemData = Pick<
 export type ChangeHistoryPayload = {
 	history?:
 		| {
-				type: "update" | "replace";
+				type: "update" | "replace" | "group";
 				id: string;
 		  }
 		| false;
 };
 
-export type ChangeHistoryType = "create" | "update" | "replace";
+export type ChangeHistoryType = "group" | "update" | "replace";

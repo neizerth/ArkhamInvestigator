@@ -1,15 +1,15 @@
-import { selectChaosBagEnabled } from "@modules/chaos-bag/base/shared/lib";
 import {
-	redo,
 	selectAlwaysShowGameText,
 	selectBoardsCount,
 	selectCurrentBoardProp,
+} from "@modules/board/base/shared/lib";
+import {
+	redo,
 	setValueFromHistoryIndex,
 	undo,
-	useAppDispatch,
-	useAppSelector,
-	useDispatchAction,
-} from "@shared/lib";
+} from "@modules/board/history/entities/lib";
+import { selectChaosBagEnabled } from "@modules/chaos-bag/base/shared/lib";
+import { useAppDispatch, useAppSelector, useDispatchAction } from "@shared/lib";
 import { useCallback } from "react";
 import { type ViewProps, useWindowDimensions } from "react-native";
 import { InvestigatorSelect } from "../../../../../../shared";
@@ -24,22 +24,33 @@ export const LeftSidebar = ({ ...props }: LeftSidebarProps) => {
 	const count = useAppSelector(selectBoardsCount);
 	const chaosBagEnabled = useAppSelector(selectChaosBagEnabled);
 	const history = useAppSelector(selectCurrentBoardProp("history"));
-	const historyIndex = useAppSelector(selectCurrentBoardProp("historyIndex"));
+	const historyIndex =
+		useAppSelector(selectCurrentBoardProp("historyIndex")) || -1;
 
 	const showText = useAppSelector(selectAlwaysShowGameText);
 
-	const historyLength = history?.length || 0;
+	const historyLength = history?.length || -1;
 
 	const onUndo = useDispatchAction(undo);
 
 	const onRedo = useDispatchAction(redo);
 
 	const beginHistory = useCallback(() => {
-		dispatch(setValueFromHistoryIndex(-1));
+		dispatch(
+			setValueFromHistoryIndex({
+				boardId: "current",
+				historyIndex: -1,
+			}),
+		);
 	}, [dispatch]);
 
 	const returnToNow = useCallback(() => {
-		dispatch(setValueFromHistoryIndex(historyLength - 1));
+		dispatch(
+			setValueFromHistoryIndex({
+				boardId: "current",
+				historyIndex: historyLength - 1,
+			}),
+		);
 	}, [dispatch, historyLength]);
 
 	const single = count === 1;

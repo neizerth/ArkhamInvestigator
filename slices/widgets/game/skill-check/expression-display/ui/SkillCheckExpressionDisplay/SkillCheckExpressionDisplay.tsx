@@ -1,10 +1,12 @@
+import { selectCurrentBoardProp } from "@modules/board/base/shared/lib";
+import {
+	selectShowCalculationDiff,
+	selectSkillCheckHistory,
+} from "@modules/board/skill-check/shared/lib";
 import {
 	formatSkillCheckValue as formatValue,
 	getSkillCheckValue,
 	sanitizeSkillCheckExpression,
-	selectCurrentBoardProp,
-	selectShowCalculationDiff,
-	selectSkillCheckHistory,
 	useAppSelector,
 } from "@shared/lib";
 import type { TextViewProps } from "@shared/ui";
@@ -39,7 +41,7 @@ export const SkillCheckExpressionDisplay = ({
 				? showDiffProp
 				: showDefaultDiff;
 
-	const history = useAppSelector(selectSkillCheckHistory);
+	const history = useAppSelector(selectSkillCheckHistory("current"));
 	const boardValue = useAppSelector(selectCurrentBoardProp("value"));
 
 	const lastValue = last(history)?.value;

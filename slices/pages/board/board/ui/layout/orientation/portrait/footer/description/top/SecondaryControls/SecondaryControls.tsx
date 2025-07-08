@@ -2,8 +2,8 @@ import {
 	selectShowDoom,
 	selectShowScenarioClues,
 	selectShowScenarioResources,
-	useAppSelector,
-} from "@shared/lib";
+} from "@modules/board/base/shared/lib";
+import { useAppSelector } from "@shared/lib";
 import type { ViewProps } from "react-native";
 import {
 	ScenarioClues,

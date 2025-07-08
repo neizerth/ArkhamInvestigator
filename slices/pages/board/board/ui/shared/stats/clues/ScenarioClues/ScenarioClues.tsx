@@ -2,14 +2,13 @@
 
 import {
 	selectClues,
-	selectCurrentStatValue,
+	selectCurrentActualPropValue,
 	selectSyncScenarioClues,
 	setClues,
 	setSyncScenarioClues,
-	updateScenarioClues,
-	useAppDispatch,
-	useAppSelector,
-} from "@shared/lib";
+} from "@modules/board/base/shared/lib";
+import { setScenarioClues } from "@modules/mechanics/board/base/entities/lib";
+import { useAppDispatch, useAppSelector } from "@shared/lib";
 import { range } from "ramda";
 import { useCallback, useMemo } from "react";
 import type { CluesProps } from "../Clues";
@@ -23,7 +22,9 @@ export const ScenarioClues = ({
 }: ScenarioCluesProps) => {
 	const dispatch = useAppDispatch();
 	const syncEnabled = useAppSelector(selectSyncScenarioClues);
-	const investigatorClues = useAppSelector(selectCurrentStatValue("clues"));
+	const investigatorClues = useAppSelector(
+		selectCurrentActualPropValue("clues"),
+	);
 	const value = useAppSelector(selectClues);
 
 	const maxValue = value + investigatorClues;
@@ -37,13 +38,23 @@ export const ScenarioClues = ({
 
 	const onChange = useCallback(
 		(value = 0) => {
-			dispatch(updateScenarioClues(value));
+			dispatch(
+				setScenarioClues({
+					boardId: "current",
+					value,
+				}),
+			);
 		},
 		[dispatch],
 	);
 
 	const onPress = useCallback(() => {
-		dispatch(updateScenarioClues(value + 1));
+		dispatch(
+			setScenarioClues({
+				boardId: "current",
+				value: value + 1,
+			}),
+		);
 	}, [dispatch, value]);
 
 	const onLongPress = useCallback(() => {

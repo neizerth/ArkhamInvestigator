@@ -1,14 +1,14 @@
 import { useAppTranslation } from "@modules/core/i18n/shared/lib";
 import { useModal } from "@modules/core/modal/shared/lib";
 import type { ModalOkEvent } from "@modules/core/modal/shared/model";
+import { useAppDispatch, useAppSelector } from "@shared/lib";
+
 import {
-	selectCurrentFaction,
 	selectSkillCheckHistoryItem,
 	setSkillCheckHistoryItemTitle as setTitle,
-	toggleSkillCheckHistoryItemPin as togglePin,
-	useAppDispatch,
-	useAppSelector,
-} from "@shared/lib";
+	toggleSkillCheckHistoryItemPin,
+} from "@modules/board/skill-check/shared/lib";
+import { selectCurrentFaction } from "@modules/mechanics/board/base/entities/lib";
 import { memo, useCallback } from "react";
 import type { GestureResponderEvent } from "react-native";
 import type { ExpressionHistoryItemActionProps as ActionProps } from "../../ExpressionHistoryItemAction";
@@ -27,14 +27,27 @@ export const PinAction = ({
 }: PinActionProps) => {
 	const dispatch = useAppDispatch();
 	const { t } = useAppTranslation();
-	const { title, pinned } = useAppSelector(selectSkillCheckHistoryItem(itemId));
+	const { title, pinned } = useAppSelector(
+		selectSkillCheckHistoryItem({ boardId: "current", id: itemId }),
+	);
 	const faction = useAppSelector(selectCurrentFaction);
 
 	const setItemTitle = useCallback(
 		({ textValue }: ModalOkEvent) => {
-			dispatch(setTitle(itemId, textValue?.trim()));
+			dispatch(
+				setTitle({
+					boardId: "current",
+					id: itemId,
+					title: textValue?.trim(),
+				}),
+			);
 
-			dispatch(togglePin(itemId));
+			dispatch(
+				toggleSkillCheckHistoryItemPin({
+					boardId: "current",
+					id: itemId,
+				}),
+			);
 			onPin?.();
 		},
 		[dispatch, itemId, onPin],
@@ -57,7 +70,12 @@ export const PinAction = ({
 	const onPress = useCallback(
 		(event: GestureResponderEvent) => {
 			if (pinned || title) {
-				dispatch(togglePin(itemId));
+				dispatch(
+					toggleSkillCheckHistoryItemPin({
+						boardId: "current",
+						id: itemId,
+					}),
+				);
 			} else {
 				showSetNameModal();
 			}

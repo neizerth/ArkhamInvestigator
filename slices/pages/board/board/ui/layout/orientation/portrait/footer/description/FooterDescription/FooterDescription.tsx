@@ -1,9 +1,9 @@
+import { selectCurrentBoardProp } from "@modules/board/base/shared/lib";
 import { useHapticSwipe } from "@modules/core/haptic/shared/lib";
+import { selectCurrentFaction } from "@modules/mechanics/board/base/entities/lib";
 import { useRoute } from "@react-navigation/native";
 import { routes } from "@shared/config";
 import {
-	selectCurrentBoardProp,
-	selectCurrentFaction,
 	selectShowDescription,
 	setShowDescription,
 	useAppDispatch,
@@ -74,7 +74,7 @@ export const FooterDescription = ({ ...props }: FooterDescriptionProps) => {
 
 	const gesture = Gesture.Exclusive(swipeDown, swipeRight);
 
-	if (!vw || !investigator) {
+	if (!vw || !investigator || !faction) {
 		return null;
 	}
 

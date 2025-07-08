@@ -7,7 +7,7 @@ import { createSelector } from "@reduxjs/toolkit";
 import { selectBoardById } from "../find/selectBoardById";
 
 export type SelectBoardPropOptions<T extends BoardKey> = {
-	boardId?: BoardId;
+	boardId: BoardId;
 	prop: T;
 };
 
@@ -15,13 +15,17 @@ export const selectBoardProp = <T extends BoardKey>({
 	boardId,
 	prop,
 }: SelectBoardPropOptions<T>) =>
-	createSelector(
-		[selectBoardById(boardId)],
-		(board): InvestigatorBoard[T] | undefined => {
-			if (!board) {
-				return;
-			}
+	createSelector([selectBoardById(boardId)], (board): InvestigatorBoard[T] => {
+		return board[prop];
+	});
 
-			return board[prop];
-		},
-	);
+export type SelectCurrentBoardPropOptions<T extends BoardKey> = Omit<
+	SelectBoardPropOptions<T>,
+	"boardId"
+>;
+
+export const selectCurrentBoardProp = <T extends BoardKey>(prop: T) =>
+	selectBoardProp({
+		boardId: "current",
+		prop,
+	});

@@ -18,12 +18,7 @@ export type BoardId = number | "current";
 
 export type InvestigatorBoardValueProp = "value" | "baseValue" | "initialValue";
 
-export type InvestigatorBoardImage = Omit<
-	InvestigatorSignature["image"],
-	"id"
-> & {
-	id: string;
-};
+export type InvestigatorBoardImage = InvestigatorSignature["image"];
 
 export type InvestigatorBoardValues = Record<InvestigatorNumericStat, number>;
 

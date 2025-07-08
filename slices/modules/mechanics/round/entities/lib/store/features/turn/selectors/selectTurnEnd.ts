@@ -1,6 +1,6 @@
 import { selectEndTurnStrict } from "@modules/board/base/shared/lib";
+import type { BoardId } from "@modules/board/base/shared/model";
 import { createSelector } from "@reduxjs/toolkit";
-import type { BoardId } from "@shared/model";
 import { selectAbilitiesTurnEnd } from "./selectAbilitiesTurnEnd";
 import { selectBaseTurnEnd } from "./selectBaseTurnEnd";
 

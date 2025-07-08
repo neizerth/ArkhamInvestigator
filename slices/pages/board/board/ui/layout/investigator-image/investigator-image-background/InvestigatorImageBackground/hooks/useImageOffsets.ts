@@ -1,4 +1,5 @@
-import { selectCurrentBoardProp, useAppSelector } from "@shared/lib";
+import { selectCurrentBoardProp } from "@modules/board/base/shared/lib";
+import { useAppSelector } from "@shared/lib";
 import { useEffect, useState } from "react";
 import { DEFAULT_PORTRAIT_DESCRIPTION_HEIGHT } from "../../../../../../config";
 import { useDescriptionHeight } from "../../../../../../lib";

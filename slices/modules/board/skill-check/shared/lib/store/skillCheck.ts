@@ -56,4 +56,4 @@ export const {
 	selectSkillCheckDifficultyType,
 } = skillCheck.selectors;
 
-export const skillCheckReducer = skillCheck.reducer;
+export default skillCheck.reducer;

@@ -5,10 +5,6 @@ import { createSelector } from "@reduxjs/toolkit";
 
 export const selectBoardChaosTokenTypes = (boardId: BoardId) =>
 	createSelector([selectBoardById(boardId)], (board) => {
-		if (!board) {
-			return [];
-		}
-
 		const parts = board.investigator.tokens_reference;
 
 		return parts.flatMap(getReferencePartTokens);

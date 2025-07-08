@@ -1,14 +1,15 @@
 import { useSkillItemChaosTokenRevealModal } from "@features/game/skill-check";
-import { useHapticSwipe } from "@modules/core/haptic/shared/lib";
-import { selectCurrentLanguage } from "@modules/core/i18n/shared/lib";
 import {
 	selectTapToHidePins,
 	setBoardProp,
+} from "@modules/board/base/shared/lib";
+import {
 	startSkillCheck,
-	toggleSkillCheckHistoryItemPin as togglePin,
-	useAppDispatch,
-	useAppSelector,
-} from "@shared/lib";
+	toggleCurrentSkillCheckHistoryItemPin as togglePin,
+} from "@modules/board/skill-check/shared/lib";
+import { useHapticSwipe } from "@modules/core/haptic/shared/lib";
+import { selectCurrentLanguage } from "@modules/core/i18n/shared/lib";
+import { useAppDispatch, useAppSelector } from "@shared/lib";
 import type { SkillCheckHistoryItem } from "@shared/model";
 import { useCallback, useMemo } from "react";
 import type { ViewProps } from "react-native";
@@ -40,10 +41,16 @@ export const PinnedSkillCheckItem = ({
 
 	const tapOnPin = useCallback(() => {
 		if (tapToHide) {
-			dispatch(setBoardProp("showPinnedSkillChecks", false));
+			dispatch(
+				setBoardProp({
+					boardId: "current",
+					prop: "showPinnedSkillChecks",
+					value: false,
+				}),
+			);
 			return;
 		}
-		dispatch(togglePin(id));
+		dispatch(togglePin({ id }));
 	}, [dispatch, tapToHide, id]);
 
 	const setupReveal = useSkillItemChaosTokenRevealModal();
@@ -52,7 +59,7 @@ export const PinnedSkillCheckItem = ({
 		if (!tapToHide) {
 			return false;
 		}
-		dispatch(togglePin(id));
+		dispatch(togglePin({ id }));
 	}, [dispatch, tapToHide, id]);
 
 	const onSwipeDown = useCallback(() => {

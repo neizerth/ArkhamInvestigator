@@ -2,9 +2,8 @@ import {
 	selectDoom,
 	selectShowDoom,
 	setDoom,
-	useAppDispatch,
-	useAppSelector,
-} from "@shared/lib";
+} from "@modules/board/base/shared/lib";
+import { useAppDispatch, useAppSelector } from "@shared/lib";
 import { useCallback } from "react";
 import type { ViewProps } from "react-native";
 import * as C from "./StepDoom.components";

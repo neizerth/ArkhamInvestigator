@@ -1,4 +1,5 @@
-import { selectShowDamageAndHorrorEffects, useAppSelector } from "@shared/lib";
+import { selectShowDamageAndHorrorEffects } from "@modules/board/base/shared/lib";
+import { useAppSelector } from "@shared/lib";
 import { useContext } from "react";
 import type { ViewProps } from "react-native";
 import { LayoutContext } from "../../../../config";

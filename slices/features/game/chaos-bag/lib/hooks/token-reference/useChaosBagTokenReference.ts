@@ -1,6 +1,6 @@
+import type { BoardId } from "@modules/board/base/shared/model";
 import { selectBoardTokenReferenceEffects } from "@modules/chaos-bag/effect/features/lib/store/selectors";
 import { useAppSelector } from "@shared/lib";
-import type { BoardId } from "@shared/model";
 import { useMemo } from "react";
 // import { selectChaosBagTokenReferenceEffects } from "../../store";
 import { useChaosBagBaseTokenReference } from "./useChaosBagBaseTokenReference";

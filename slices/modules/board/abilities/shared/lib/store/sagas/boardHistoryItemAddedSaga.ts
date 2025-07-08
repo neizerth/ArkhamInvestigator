@@ -1,6 +1,6 @@
 import { boardHistoryItemAdded } from "@modules/board/history/shared/lib";
 import { put, takeEvery } from "redux-saga/effects";
-import { boardAbilityValueChanged } from "../actions";
+import { boardAbilityValueSet } from "../actions";
 
 function* worker({ payload }: ReturnType<typeof boardHistoryItemAdded>) {
 	const { item, board, boardId } = payload;
@@ -20,7 +20,7 @@ function* worker({ payload }: ReturnType<typeof boardHistoryItemAdded>) {
 		}
 
 		yield put(
-			boardAbilityValueChanged({
+			boardAbilityValueSet({
 				abilityId,
 				boardId,
 				value,

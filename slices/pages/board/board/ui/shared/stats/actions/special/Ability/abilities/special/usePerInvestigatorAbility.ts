@@ -1,20 +1,19 @@
+import {
+	selectCurrentAbilityUseInfo,
+	selectIsCurrentAbilityUsed,
+	setBoardAbilityUse,
+} from "@modules/board/abilities/shared/lib";
+import { selectBoardDetailItems } from "@modules/board/base/entities/lib";
+import {
+	selectBoardsCount,
+	selectCurrentBoardProp,
+	selectNextBoardId,
+} from "@modules/board/base/shared/lib";
 import { useAppTranslation } from "@modules/core/i18n/shared/lib";
 import { useModal } from "@modules/core/modal/shared/lib";
 import type { ModalOkEvent } from "@modules/core/modal/shared/model";
-import {
-	selectAbilityUseInfo,
-	selectBoardDetailItems,
-	selectBoardsCount,
-	selectCurrentBoardProp,
-	selectCurrentFaction,
-	selectIsAbilityUsed,
-	selectNextBoardId,
-	useAppDispatch,
-	useAppSelector,
-	whereId,
-} from "@shared/lib";
-import { setAbilityUsed } from "@shared/lib/store/features/board/actions/stats/ability/setAbilityUsed";
-import { unsetAbilityUse } from "@shared/lib/store/features/board/actions/stats/ability/unsetAbilityUse";
+import { selectCurrentFaction } from "@modules/mechanics/board/base/entities/lib";
+import { useAppDispatch, useAppSelector, whereId } from "@shared/lib";
 import type { InvestigatorAbility } from "arkham-investigator-data";
 import { prop, reject } from "ramda";
 import { useCallback, useMemo } from "react";
@@ -40,9 +39,9 @@ export const usePerInvestigatorAbility = ({
 
 	const faction = useAppSelector(selectCurrentFaction);
 	const data = useAppSelector(selectBoardDetailItems);
-	const useInfo = useAppSelector(selectAbilityUseInfo(ability.id));
+	const useInfo = useAppSelector(selectCurrentAbilityUseInfo(ability.id));
 
-	const used = useAppSelector(selectIsAbilityUsed(ability.id));
+	const used = useAppSelector(selectIsCurrentAbilityUsed(ability.id));
 	const boardIds = useInfo?.boardIds || [];
 
 	const value = useMemo(() => {
@@ -60,7 +59,13 @@ export const usePerInvestigatorAbility = ({
 
 	const handleBoardId = useCallback(
 		(boardId: number) => {
-			dispatch(setAbilityUsed(ability.id, boardId));
+			dispatch(
+				setBoardAbilityUse({
+					boardId,
+					abilityId: ability.id,
+					use: true,
+				}),
+			);
 			onChange?.(boardId);
 		},
 		[dispatch, onChange, ability.id],
@@ -105,11 +110,24 @@ export const usePerInvestigatorAbility = ({
 	});
 
 	const handleNextBoard = useCallback(() => {
+		if (typeof nextBoardId !== "number") {
+			return;
+		}
 		handleBoardId(nextBoardId);
 	}, [handleBoardId, nextBoardId]);
 
 	const removeUses = useCallback(() => {
-		dispatch(unsetAbilityUse(ability.id, nextBoardId));
+		if (typeof nextBoardId !== "number") {
+			return;
+		}
+
+		dispatch(
+			setBoardAbilityUse({
+				use: false,
+				abilityId: ability.id,
+				boardId: nextBoardId,
+			}),
+		);
 	}, [dispatch, nextBoardId, ability.id]);
 
 	const modalBoardsCount = ability.personalUse ? 2 : 3;

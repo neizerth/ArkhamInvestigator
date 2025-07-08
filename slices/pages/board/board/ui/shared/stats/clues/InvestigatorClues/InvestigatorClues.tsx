@@ -1,10 +1,9 @@
 import {
-	increaseCurrentStat,
-	selectCurrentStatValue,
-	setCurrentStat,
-	useAppDispatch,
-	useAppSelector,
-} from "@shared/lib";
+	increaseCurrentActualPropValue,
+	selectCurrentActualPropValue,
+	setCurrentActualPropValue,
+} from "@modules/board/base/shared/lib";
+import { useAppDispatch, useAppSelector } from "@shared/lib";
 import { useCallback } from "react";
 import type { ViewProps } from "react-native";
 import { Clues } from "../Clues";
@@ -13,20 +12,34 @@ export type InvestigatorCluesProps = ViewProps;
 
 export const InvestigatorClues = (props: InvestigatorCluesProps) => {
 	const dispatch = useAppDispatch();
-	const value = useAppSelector(selectCurrentStatValue("clues"));
+	const value = useAppSelector(selectCurrentActualPropValue("clues"));
 	const onChange = useCallback(
 		(value = 0) => {
-			dispatch(setCurrentStat("clues", value));
+			dispatch(
+				setCurrentActualPropValue({
+					prop: "clues",
+					value,
+				}),
+			);
 		},
 		[dispatch],
 	);
 
 	const onLongPress = useCallback(() => {
-		dispatch(setCurrentStat("clues", 0));
+		dispatch(
+			setCurrentActualPropValue({
+				prop: "clues",
+				value: 0,
+			}),
+		);
 	}, [dispatch]);
 
 	const onPress = useCallback(() => {
-		dispatch(increaseCurrentStat("clues"));
+		dispatch(
+			increaseCurrentActualPropValue({
+				prop: "clues",
+			}),
+		);
 	}, [dispatch]);
 
 	return (

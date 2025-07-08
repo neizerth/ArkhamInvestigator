@@ -1,10 +1,9 @@
 import {
 	selectAllowNegativeHealthAndSanity,
-	selectShowAdditionalInformation,
 	selectShowDamageAndHorror,
 	selectShowInitialHealthAndSanity,
-	useAppSelector,
-} from "@shared/lib";
+} from "@modules/board/base/shared/lib";
+import { selectShowAdditionalInformation, useAppSelector } from "@shared/lib";
 import type { HealthProps as BaseHealthProps } from "@shared/ui";
 import { range } from "ramda";
 import { useMemo } from "react";

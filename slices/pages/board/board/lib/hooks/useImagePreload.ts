@@ -1,5 +1,6 @@
+import { selectInvestigatorBoardImages } from "@modules/board/base/shared/lib";
 import { getInvestigatorImageUrl } from "@shared/api";
-import { selectBoardImages, useAppSelector } from "@shared/lib";
+import { useAppSelector } from "@shared/lib";
 import type { InvestigatorImage } from "@shared/model";
 import { useEffect } from "react";
 import { Image, Platform } from "react-native";
@@ -36,7 +37,7 @@ const prefetch = async (data: string[]) => {
 };
 
 export const useImagePrelaod = () => {
-	const images = useAppSelector(selectBoardImages);
+	const images = useAppSelector(selectInvestigatorBoardImages);
 
 	useEffect(() => {
 		const urls = getUrls(images);

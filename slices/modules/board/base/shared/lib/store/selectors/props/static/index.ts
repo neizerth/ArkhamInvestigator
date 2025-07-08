@@ -1,5 +1,5 @@
 export * from "./selectBoardCode";
-export * from "./selectBoardId";
 export * from "./selectInvestigatorBoardImages";
 export * from "./current";
 export * from "./props";
+export * from "./id";

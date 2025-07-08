@@ -4,11 +4,8 @@ import ReanimatedSwipeable, {
 } from "react-native-gesture-handler/ReanimatedSwipeable";
 import type { ExpressionDisplayProps } from "../../../ExpressionDisplay";
 
-import {
-	delay,
-	selectSkillCheckHistoryItem as selectItem,
-	useAppSelector,
-} from "@shared/lib";
+import { selectSkillCheckHistoryItem as selectItem } from "@modules/board/skill-check/shared/lib";
+import { delay, useAppSelector } from "@shared/lib";
 import { memo, useCallback, useRef } from "react";
 import { type SharedValue, useAnimatedStyle } from "react-native-reanimated";
 import * as C from "./ExpressionHistoryItem.components";
@@ -30,7 +27,12 @@ export const ExpressionHistoryItem = ({
 	onLongPress,
 	...props
 }: ExpressionHistoryItemProps) => {
-	const { pinned, title } = useAppSelector(selectItem(itemId));
+	const { pinned, title } = useAppSelector(
+		selectItem({
+			boardId: "current",
+			id: itemId,
+		}),
+	);
 
 	const ref = useRef<SwipeableMethods>(null);
 

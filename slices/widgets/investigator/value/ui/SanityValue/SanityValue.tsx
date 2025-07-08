@@ -1,4 +1,5 @@
-import { selectShowInitialHealthAndSanity, useAppSelector } from "@shared/lib";
+import { selectShowInitialHealthAndSanity } from "@modules/board/base/shared/lib";
+import { useAppSelector } from "@shared/lib";
 import { type WithPickerValueProps, withPickerValue } from "../../lib";
 import * as C from "./SanityValue.components";
 

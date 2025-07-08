@@ -1,13 +1,15 @@
-import { startChaosBagReveal } from "@modules/chaos-bag/reveal/base/shared/lib";
+import { selectCurrentIsParallel } from "@modules/board/base/entities/lib";
 import {
 	selectAlwaysShowSkillModifiers,
-	selectCurrentStatBaseValue,
-	selectCurrentStatValue,
-	selectIsParallel,
+	selectCurrentActualPropValue,
+	selectCurrentBasePropValue,
+	setCurrentActualPropValue,
+} from "@modules/board/base/shared/lib";
+import { startSkillCheck } from "@modules/board/skill-check/shared/lib";
+import { startChaosBagReveal } from "@modules/chaos-bag/reveal/base/shared/lib";
+import {
 	selectShowAdditionalInformation,
-	setCurrentStat,
 	signedNumber,
-	startSkillCheck,
 	useAppDispatch,
 	useAppSelector,
 	usePageLoader,
@@ -33,9 +35,9 @@ const SKILL_RANGE = range(0, 21);
 
 export const Skill = ({ width, height, type, ...props }: SkillProps) => {
 	const dispatch = useAppDispatch();
-	const value = useAppSelector(selectCurrentStatValue(type));
-	const baseValue = useAppSelector(selectCurrentStatBaseValue(type));
-	const isParallel = useAppSelector(selectIsParallel);
+	const value = useAppSelector(selectCurrentActualPropValue(type));
+	const baseValue = useAppSelector(selectCurrentBasePropValue(type));
+	const isParallel = useAppSelector(selectCurrentIsParallel);
 
 	const showInfo = useAppSelector(selectShowAdditionalInformation);
 	const showModifiers = useAppSelector(selectAlwaysShowSkillModifiers);
@@ -69,7 +71,12 @@ export const Skill = ({ width, height, type, ...props }: SkillProps) => {
 
 	const onChange = useCallback(
 		({ value = 0 }: PickerChangeEvent) => {
-			dispatch(setCurrentStat(type, value));
+			dispatch(
+				setCurrentActualPropValue({
+					prop: type,
+					value,
+				}),
+			);
 		},
 		[dispatch, type],
 	);

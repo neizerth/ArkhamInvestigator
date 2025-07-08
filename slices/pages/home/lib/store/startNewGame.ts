@@ -1,3 +1,10 @@
+import {
+	selectSaveTrauma,
+	setClues,
+	setDoom,
+	setInvestigatorBoards,
+	setResources,
+} from "@modules/board/base/shared/lib";
 import { setRevealedTokenIds } from "@modules/chaos-bag/reveal/base/shared/lib";
 import { clearRevealHistory } from "@modules/chaos-bag/reveal/history/shared/lib";
 import type { ActionCreator } from "@reduxjs/toolkit";
@@ -5,12 +12,7 @@ import { routes } from "@shared/config";
 import {
 	clearTraumaSettings,
 	goToPage,
-	selectSaveTrauma,
-	setClues,
-	setDoom,
-	setInvestigatorBoards,
 	setReplaceInvestigator,
-	setResources,
 	setSelectedInvestigators,
 } from "@shared/lib";
 import type { AppThunk } from "@shared/model";

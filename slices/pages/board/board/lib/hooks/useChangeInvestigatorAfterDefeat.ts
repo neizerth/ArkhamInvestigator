@@ -1,10 +1,12 @@
+import {
+	selectCurrentActualPropValue,
+	selectCurrentBoardProp,
+} from "@modules/board/base/shared/lib";
 import { useAppTranslation } from "@modules/core/i18n/shared/lib";
 import { useModal } from "@modules/core/modal/shared/lib";
+import { selectCurrentFaction } from "@modules/mechanics/board/base/entities/lib";
 import {
 	changeInvestigatorDetails,
-	selectCurrentBoardProp,
-	selectCurrentFaction,
-	selectCurrentStatValue,
 	useAppDispatch,
 	useAppSelector,
 } from "@shared/lib";
@@ -17,12 +19,12 @@ export const useChangeInvestigatorAfterDefeat = (codes: string[]) => {
 
 	const faction = useAppSelector(selectCurrentFaction);
 	const investigator = useAppSelector(selectCurrentBoardProp("investigator"));
-	const health = useAppSelector(selectCurrentStatValue("health"));
-	const sanity = useAppSelector(selectCurrentStatValue("sanity"));
+	const health = useAppSelector(selectCurrentActualPropValue("health"));
+	const sanity = useAppSelector(selectCurrentActualPropValue("sanity"));
 
 	const defeated = health === 0 || sanity === 0;
 
-	const trackChanges = codes.includes(investigator?.code);
+	const trackChanges = investigator?.code && codes.includes(investigator?.code);
 
 	const [shown, setShown] = useState(false);
 

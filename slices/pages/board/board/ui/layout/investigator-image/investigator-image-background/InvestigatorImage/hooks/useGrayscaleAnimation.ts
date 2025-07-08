@@ -1,8 +1,5 @@
-import {
-	selectCurrentIsInactive,
-	useAppSelector,
-	useBooleanAnimation,
-} from "@shared/lib";
+import { selectCurrentIsInactive } from "@modules/mechanics/board/base/entities/lib";
+import { useAppSelector, useBooleanAnimation } from "@shared/lib";
 import type { ViewStyle } from "react-native";
 
 export const useGrayscaleAnimation = () => {

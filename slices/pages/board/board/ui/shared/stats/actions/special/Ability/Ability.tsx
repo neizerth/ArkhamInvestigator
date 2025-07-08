@@ -1,11 +1,9 @@
-import type { TouchableOpacityProps } from "@modules/core/haptic/shared/ui";
 import {
-	getAbilityIcon,
-	selectIsAbilityUsed,
-	useAppDispatch,
-	useAppSelector,
-} from "@shared/lib";
-import { unsetAbilityUse } from "@shared/lib/store/features/board/actions/stats/ability/unsetAbilityUse";
+	selectIsCurrentAbilityUsed,
+	setBoardAbilityUse,
+} from "@modules/board/abilities/shared/lib";
+import type { TouchableOpacityProps } from "@modules/core/haptic/shared/ui";
+import { getAbilityIcon, useAppDispatch, useAppSelector } from "@shared/lib";
 import type { InvestigatorAbility } from "arkham-investigator-data";
 import { useCallback } from "react";
 import { Special } from "../Special";
@@ -19,12 +17,18 @@ export const Ability = ({ ability, ...props }: AbilityProps) => {
 	const dispatch = useAppDispatch();
 	const { id } = ability;
 
-	const isUsed = useAppSelector(selectIsAbilityUsed(id));
+	const isUsed = useAppSelector(selectIsCurrentAbilityUsed(id));
 	const icon = getAbilityIcon(ability);
 	const onPress = useAbility(ability);
 
 	const removeUses = useCallback(() => {
-		dispatch(unsetAbilityUse(ability.id));
+		dispatch(
+			setBoardAbilityUse({
+				boardId: "current",
+				abilityId: ability.id,
+				use: false,
+			}),
+		);
 	}, [dispatch, ability.id]);
 
 	return (

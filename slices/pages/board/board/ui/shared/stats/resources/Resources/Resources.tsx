@@ -1,4 +1,5 @@
-import { selectShowUpkeepResources, useAppSelector } from "@shared/lib";
+import { selectShowUpkeepResources } from "@modules/board/base/shared/lib";
+import { useAppSelector } from "@shared/lib";
 import type { ImageBackgroundProps } from "@shared/ui";
 import type { PickerChangeEvent } from "@widgets/control/picker";
 import { range } from "ramda";

@@ -1,5 +1,5 @@
+import { selectCurrentBoard } from "@modules/board/base/shared/lib";
 import { createSelector } from "@reduxjs/toolkit";
-import { selectCurrentBoard } from "../../board/selectors/current/selectCurrentBoard";
 import { selectReplaceInvestigator } from "../game";
 
 export const selectReplaceCode = createSelector(

@@ -1,13 +1,11 @@
-import { useHapticFeedback } from "@modules/core/haptic/shared/lib";
 import {
-	minMax,
 	selectSkillCheckData,
 	selectSkillCheckDifficulty,
 	sendCommandSignal,
 	setSkillCheckDifficulty,
-	useAppDispatch,
-	useAppSelector,
-} from "@shared/lib";
+} from "@modules/board/skill-check/shared/lib";
+import { useHapticFeedback } from "@modules/core/haptic/shared/lib";
+import { minMax, useAppDispatch, useAppSelector } from "@shared/lib";
 import { type PropsWithChildren, useCallback } from "react";
 import {
 	Directions,

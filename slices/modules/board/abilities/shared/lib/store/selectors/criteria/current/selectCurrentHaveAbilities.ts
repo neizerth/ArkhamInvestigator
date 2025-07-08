@@ -1,3 +1,3 @@
-import { selectHaveBoardAbilities } from "../selectHaveBoardAbilities";
+import { selectHasBoardAbilities } from "../selectHasBoardAbilities";
 
-export const selectCurrentHaveAbilities = selectHaveBoardAbilities("current");
+export const selectCurrentHaveAbilities = selectHasBoardAbilities("current");

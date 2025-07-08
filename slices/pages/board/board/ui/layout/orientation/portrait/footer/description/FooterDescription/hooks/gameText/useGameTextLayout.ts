@@ -1,7 +1,9 @@
 import {
 	selectGameTextHeight,
-	selectShowDescription,
 	setGameTextHeight,
+} from "@modules/board/base/shared/lib";
+import {
+	selectShowDescription,
 	useAppDispatch,
 	useAppSelector,
 	useLayoutSize,

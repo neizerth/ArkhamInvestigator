@@ -1,7 +1,9 @@
+import type { InvestigatorBoardUsedAbility } from "@modules/board/abilities/shared/model";
 import { InvesigatorCode } from "@shared/config";
-import type { UsedAbility } from "@shared/model";
 
-export const getDefaultUsedAbilities = (code: string): UsedAbility[] => {
+export const getDefaultUsedAbilities = (
+	code: string,
+): InvestigatorBoardUsedAbility[] => {
 	if (code === InvesigatorCode.LilyChen) {
 		return [
 			{

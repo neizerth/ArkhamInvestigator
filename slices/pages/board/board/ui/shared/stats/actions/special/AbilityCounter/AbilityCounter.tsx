@@ -1,11 +1,12 @@
 import type { ViewProps } from "react-native";
 
-import { setAbilityCounterEffect } from "@entities/abilities/lib";
 import {
-	selectAbilityCounter,
-	selectCurrentBoardProp,
+	selectCurrentAbilityValue,
+	setBoardAbilityValue,
+} from "@modules/board/abilities/shared/lib";
+import { selectCurrentBoardProp } from "@modules/board/base/shared/lib";
+import {
 	selectInvestigatorCounterEnabled,
-	setAbilityCounter,
 	useAppDispatch,
 	useAppSelector,
 } from "@shared/lib";
@@ -35,7 +36,7 @@ export const AbilityCounter = ({
 	const source = backgrounds[id];
 	const { code } = useAppSelector(selectCurrentBoardProp("investigator"));
 
-	const value = useAppSelector(selectAbilityCounter(id));
+	const value = useAppSelector(selectCurrentAbilityValue(id));
 	const enabled = useAppSelector(selectInvestigatorCounterEnabled(code, id));
 
 	const direction =
@@ -49,17 +50,15 @@ export const AbilityCounter = ({
 
 	const setValue = useCallback(
 		(nextValue: number) => {
-			dispatch(setAbilityCounter(id, nextValue));
-
 			dispatch(
-				setAbilityCounterEffect({
+				setBoardAbilityValue({
+					boardId: "current",
 					abilityId: id,
 					value: nextValue,
-					prevValue: value,
 				}),
 			);
 		},
-		[dispatch, value, id],
+		[dispatch, id],
 	);
 
 	const onChange = useCallback(

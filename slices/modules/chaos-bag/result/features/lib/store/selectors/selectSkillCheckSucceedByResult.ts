@@ -6,7 +6,7 @@ import {
 import { createSelector } from "@reduxjs/toolkit";
 import { selectSkillCheckResult } from "./selectSkillCheckResult";
 
-export const selectSkillCheckSucceedByResult = (boardId?: BoardId) =>
+export const selectSkillCheckSucceedByResult = (boardId: BoardId) =>
 	createSelector(
 		[
 			selectSkillCheckDifficulty,

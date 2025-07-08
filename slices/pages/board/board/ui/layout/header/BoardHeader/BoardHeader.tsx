@@ -1,14 +1,17 @@
 import {
+	selectCurrentIsParallel,
+	selectCurrentIsUnique,
+} from "@modules/board/base/entities/lib";
+import {
 	selectBoardsCount,
 	selectCurrentBoardProp,
-	selectCurrentFaction,
-	selectIsParallel,
 	toggleFactionSelect,
-	useAppDispatch,
-	useAppSelector,
-} from "@shared/lib";
-import { selectAvailableFactions } from "@shared/lib/store/features/board/selectors/current/faction/selectAvailableFactions";
-import { selectIsUnique } from "@shared/lib/store/features/board/selectors/current/signature/selectIsUnique";
+} from "@modules/board/base/shared/lib";
+import {
+	selectCanChangeFaction,
+	selectCurrentFaction,
+} from "@modules/mechanics/board/base/entities/lib";
+import { useAppDispatch, useAppSelector } from "@shared/lib";
 import { InvestigatorHeaderMemo as InvestigatorHeader } from "@widgets/game/investigator";
 import type { RenderInvestigatorSkillItem } from "@widgets/game/investigator";
 import { useCallback, useContext } from "react";
@@ -25,13 +28,11 @@ export const BoardHeader = (props: BoardHeaderProps) => {
 	const single = boardsCount === 1;
 
 	const investigator = useAppSelector(selectCurrentBoardProp("investigator"));
-	const isParallel = useAppSelector(selectIsParallel);
-	const unique = useAppSelector(selectIsUnique);
-	const id = useAppSelector(selectCurrentBoardProp("id"));
+	const isParallel = useAppSelector(selectCurrentIsParallel);
+	const unique = useAppSelector(selectCurrentIsUnique);
+	const boardId = useAppSelector(selectCurrentBoardProp("id"));
 	const faction = useAppSelector(selectCurrentFaction);
-	const availableFactions = useAppSelector(selectAvailableFactions);
-
-	const pressableTitle = availableFactions.length > 0;
+	const pressableTitle = useAppSelector(selectCanChangeFaction("current"));
 
 	const onTitlePress = useCallback(() => {
 		if (!pressableTitle) {
@@ -44,14 +45,14 @@ export const BoardHeader = (props: BoardHeaderProps) => {
 		return <C.Skill {...props} />;
 	}, []);
 
-	if (!investigator) {
+	if (!investigator || !faction || typeof boardId !== "number") {
 		return null;
 	}
 
 	const { subname, name, locale } = investigator;
 
 	const titleProps = {
-		entityId: id,
+		entityId: boardId,
 		parallel: isParallel,
 		pressableTitle,
 		onTitlePress,

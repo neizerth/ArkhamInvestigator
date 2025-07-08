@@ -1,5 +1,5 @@
 import {
-	selectBoardValue,
+	selectBoardActualPropValue,
 	setBoardActualPropValue,
 } from "@modules/board/base/shared/lib";
 import { put, select, takeEvery } from "redux-saga/effects";
@@ -8,7 +8,7 @@ import { spendClues } from "./spendClues.action";
 function* worker({ payload }: ReturnType<typeof spendClues>) {
 	const { boardId, value } = payload;
 
-	const selectClues = selectBoardValue({
+	const selectClues = selectBoardActualPropValue({
 		boardId,
 		prop: "clues",
 	});

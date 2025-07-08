@@ -2,16 +2,14 @@ import type {
 	ChaosBagHistoryItem,
 	ChaosBagToken,
 } from "@features/game/chaos-bag/model";
+import {
+	selectBoardProp,
+	setCurrentInvestigatorIndex,
+} from "@modules/board/base/shared/lib";
 import { removeRevealHistoryItem } from "@modules/chaos-bag/reveal/history/shared/lib";
 import { useHapticFeedback } from "@modules/core/haptic/shared/lib";
 import { REMOVE_CLIPPED_SUBVIEWS } from "@shared/config";
-import {
-	goBack,
-	selectBoardProp,
-	setCurrentInvestigatorIndex,
-	useAppDispatch,
-	useAppSelector,
-} from "@shared/lib";
+import { goBack, useAppDispatch, useAppSelector } from "@shared/lib";
 import { useCallback } from "react";
 import type { ListRenderItemInfo, ViewProps } from "react-native";
 import { Gesture, GestureDetector } from "react-native-gesture-handler";
@@ -32,7 +30,12 @@ export const ChaosBagRevealItem = ({
 
 	const { boardId, tokens, id } = item;
 
-	const investigator = useAppSelector(selectBoardProp(boardId, "investigator"));
+	const investigator = useAppSelector(
+		selectBoardProp({
+			boardId,
+			prop: "investigator",
+		}),
+	);
 
 	const index = boardId - 1;
 

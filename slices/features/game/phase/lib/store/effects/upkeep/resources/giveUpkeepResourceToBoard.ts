@@ -1,5 +1,10 @@
-import { selectBoardById, setBoard } from "@shared/lib";
-import type { AppThunk, BoardId } from "@shared/model";
+import {
+	isBoardExists,
+	selectBoardById,
+	setBoardActualPropValue,
+} from "@modules/board/base/shared/lib";
+import type { BoardId } from "@modules/board/base/shared/model";
+import type { AppThunk } from "@shared/model";
 import i18next from "i18next";
 import { showToast } from "../../../../../../../notifications/lib";
 
@@ -8,7 +13,7 @@ export const giveUpkeepResourceToBoard =
 	(dispatch, getState) => {
 		const state = getState();
 		const board = selectBoardById(boardId)(state);
-		if (!board) {
+		if (!isBoardExists(board)) {
 			return;
 		}
 
@@ -23,15 +28,13 @@ export const giveUpkeepResourceToBoard =
 
 		const resources = value.resources + upkeepResourcesIncrease;
 
-		const data = {
-			...board,
-			value: {
-				...value,
-				resources,
-			},
-		};
-
-		dispatch(setBoard(data, boardId));
+		dispatch(
+			setBoardActualPropValue({
+				boardId,
+				prop: "resources",
+				value: resources,
+			}),
+		);
 
 		const message = i18next.t("upkeep.investigator.getResources", {
 			name,

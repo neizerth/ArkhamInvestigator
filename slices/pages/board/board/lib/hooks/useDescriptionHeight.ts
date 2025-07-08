@@ -1,11 +1,11 @@
 import { CAN_ALWAYS_SHOW_GAME_TEXT, navBarHeight } from "@shared/config";
 
+import { useAppSelector } from "@shared/lib";
+
 import {
 	selectAlwaysShowGameText,
 	selectGameTextHeight,
-	useAppSelector,
-} from "@shared/lib";
-
+} from "@modules/board/base/shared/lib";
 import { DEFAULT_PORTRAIT_DESCRIPTION_HEIGHT } from "../../config";
 
 const isNavbarVisible = navBarHeight > 0;

@@ -1,8 +1,8 @@
+import { selectCurrentBoardProp } from "@modules/board/base/shared/lib";
+import { selectSkillCheckType } from "@modules/board/skill-check/shared/lib";
 import { startChaosBagReveal } from "@modules/chaos-bag/reveal/base/shared/lib";
 import {
 	getSkillCheckValue,
-	selectCurrentBoardProp,
-	selectSkillCheckType,
 	useAppDispatch,
 	useAppSelector,
 } from "@shared/lib";

@@ -1,3 +1,4 @@
+import { fallbackBoard } from "@modules/board/base/shared/config";
 import type { BoardId } from "@modules/board/base/shared/model";
 import { whereId } from "@shared/lib";
 import type { BoardState } from "../../board";
@@ -11,9 +12,9 @@ export const getBoardById = ({ state, boardId }: GetBoardByIdOptions) => {
 	const { investigatorBoards } = state;
 
 	if (boardId === "current") {
-		return getCurrentBoard({ state });
+		return getCurrentBoard({ state }) || fallbackBoard;
 	}
 	const board = investigatorBoards.find(whereId(boardId));
 
-	return board;
+	return board || fallbackBoard;
 };

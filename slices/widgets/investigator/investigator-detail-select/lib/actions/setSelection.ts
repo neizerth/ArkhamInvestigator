@@ -1,7 +1,10 @@
 import {
+	isBoardExists,
+	selectCurrentBoard,
+} from "@modules/board/base/shared/lib";
+import {
 	addSelectedInvestigator,
 	resetCurrentDetails,
-	selectCurrentBoard,
 	selectCurrentSignatureGroup,
 } from "@shared/lib";
 import type { AppThunk } from "@shared/model";
@@ -40,7 +43,7 @@ export const setSelection = (): AppThunk => (dispatch, getState) => {
 		signatureGroupId,
 	};
 
-	if (!board) {
+	if (!isBoardExists(board)) {
 		dispatch(addSelectedInvestigator(selection));
 	}
 

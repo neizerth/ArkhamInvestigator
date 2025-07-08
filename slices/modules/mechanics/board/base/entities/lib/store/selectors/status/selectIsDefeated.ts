@@ -5,8 +5,5 @@ import { getIsDefeated } from "../../../logic";
 
 export const selectIsDefeated = (boardId: BoardId) =>
 	createSelector([selectBoardById(boardId)], (board) => {
-		if (!board) {
-			return false;
-		}
 		return getIsDefeated(board.value);
 	});

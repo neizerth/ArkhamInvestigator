@@ -1,5 +1,5 @@
 import { createAbilityValueFilter } from "@modules/board/abilities/shared/lib";
-import type { boardAbilityValueChanged } from "@modules/board/abilities/shared/lib/store/actions";
+import type { boardAbilityValueSet } from "@modules/board/abilities/shared/lib/store/actions";
 import {
 	selectBoardById,
 	setBoardActualPropValue,
@@ -8,16 +8,12 @@ import { put, select, takeEvery } from "redux-saga/effects";
 
 const filterAction = createAbilityValueFilter("diana-cards");
 
-function* worker({ payload }: ReturnType<typeof boardAbilityValueChanged>) {
+function* worker({ payload }: ReturnType<typeof boardAbilityValueSet>) {
 	const { boardId, value, prevValue, historyItem } = payload;
 
 	const selectBoard = selectBoardById(boardId);
 
 	const board: ReturnType<typeof selectBoard> = yield select(selectBoard);
-
-	if (!board) {
-		return;
-	}
 
 	const diff = value - prevValue;
 

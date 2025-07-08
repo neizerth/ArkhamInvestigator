@@ -1,4 +1,5 @@
 import {
+	isBoardExists,
 	selectBoardById,
 	setBoardProp,
 	withCurrentPayload,
@@ -8,7 +9,7 @@ import type { AppThunk } from "@shared/model";
 
 type Payload = PropsWithBoardId & {
 	id: string;
-	title: string;
+	title?: string;
 };
 
 export const setSkillCheckHistoryItemTitle =
@@ -17,7 +18,7 @@ export const setSkillCheckHistoryItemTitle =
 		const state = getState();
 		const board = selectBoardById(boardId)(state);
 
-		if (!board) {
+		if (!isBoardExists(board)) {
 			return;
 		}
 

@@ -1,9 +1,11 @@
+import {
+	setCurrentInvestigatorIndex,
+	setInvestigatorBoards,
+} from "@modules/board/base/shared/lib";
 import { updateChaosBag } from "@modules/chaos-bag/base/entities/lib";
 import type { ActionCreator } from "@reduxjs/toolkit";
 import {
 	replacePageTo,
-	setCurrentInvestigatorIndex,
-	setInvestigatorBoards,
 	setSelectedInvestigators,
 	setShowDescription,
 } from "@shared/lib";
