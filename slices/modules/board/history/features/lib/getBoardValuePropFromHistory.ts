@@ -15,21 +15,21 @@ type Key = GetBoardValuePropFromHistoryProp;
 type Patch = Partial<InvestigatorBoardValues>;
 
 type Options<K extends Key> = {
-	board: InvestigatorBoard;
 	type: K;
 	historyItems: InvestigatorBoardHistoryItem[];
+	initialValue: InvestigatorBoard[K];
 };
 export const getBoardValuePropFromHistory = <K extends Key>({
-	board,
 	type,
 	historyItems,
+	initialValue,
 }: Options<K>) => {
 	const patches = historyItems.map(prop(type));
 
 	const patch: Patch = Object.assign({}, ...patches);
 
 	const value: InvestigatorBoard[K] = {
-		...board.initialValue,
+		...initialValue,
 		...patch,
 	};
 

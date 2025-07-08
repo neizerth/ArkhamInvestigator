@@ -7,7 +7,7 @@ import {
 	redo,
 	setValueFromHistoryIndex,
 	undo,
-} from "@modules/board/history/entities/lib";
+} from "@modules/board/history/features/lib";
 import { selectChaosBagEnabled } from "@modules/chaos-bag/base/shared/lib";
 import { useAppDispatch, useAppSelector, useDispatchAction } from "@shared/lib";
 import { useCallback } from "react";

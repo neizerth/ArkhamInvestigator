@@ -9,6 +9,7 @@ import type {
 	InvestigatorBoard,
 	PropsWithBoardId,
 } from "@modules/board/base/shared/model";
+import { selectCleanInvestigatorBoard } from "@modules/mechanics/board/base/entities/lib";
 import { omit } from "ramda";
 import { getBoardValueFromHistory } from "../../getBoardValueFromHistory";
 
@@ -21,6 +22,7 @@ export const setValueFromHistoryIndex =
 	(dispatch, getState) => {
 		const state = getState();
 		const board = selectBoardById(boardId)(state);
+		const cleanBoard = selectCleanInvestigatorBoard(boardId)(state);
 
 		if (!isBoardExists(board)) {
 			return;
@@ -33,11 +35,15 @@ export const setValueFromHistoryIndex =
 		const lastItem = history[historyIndex];
 
 		const values = getBoardValueFromHistory({
-			board,
+			board: cleanBoard,
 			historyItems,
 		});
 
-		const boardProps = lastItem ? omit(["id"], lastItem) : {};
+		const boardProps = lastItem
+			? omit(["id"], lastItem)
+			: {
+					usedAbilities: cleanBoard.initialUsedAbilities,
+				};
 
 		const data: InvestigatorBoard = {
 			...board,
