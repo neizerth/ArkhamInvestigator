@@ -1,4 +1,3 @@
-import { placeDoomOnAgenda } from "@features/game/phase";
 import {
 	selectDoom,
 	selectShowDoom,
@@ -17,8 +16,8 @@ export const StepDoom = (props: StepDoomProps) => {
 	const show = useAppSelector(selectShowDoom);
 
 	const increaseDoom = useCallback(() => {
-		dispatch(placeDoomOnAgenda());
-	}, [dispatch]);
+		dispatch(setDoom(doom + 1));
+	}, [dispatch, doom]);
 
 	const decreaseDoom = useCallback(() => {
 		const value = Math.max(0, doom - 1);
