@@ -17,7 +17,6 @@ export const Container: typeof View = styled(View)`
 	position: relative;
 	margin-top: ${-size.gap.xxl}px;
 	padding-top: ${size.gap.xxl}px;
-	padding-bottom: ${size.gap.default}px;
 	min-width: ${assetsSize.main}px;
 	align-items: center;
 `;

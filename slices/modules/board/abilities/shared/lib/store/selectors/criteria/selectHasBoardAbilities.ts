@@ -6,5 +6,7 @@ import { selectBoardAbilities } from "../selectBoardAbilities";
 export const selectHasBoardAbilities = (boardId: BoardId) =>
 	createSelector(
 		[selectHasAdditionalAction(boardId), selectBoardAbilities(boardId)],
-		(additionalAction, abilities) => additionalAction || abilities.length > 0,
+		(additionalAction, abilities) => {
+			return additionalAction || abilities.length > 0;
+		},
 	);

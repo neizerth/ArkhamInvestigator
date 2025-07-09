@@ -1,5 +1,5 @@
+import { AbilityCode } from "../../../shared/config";
 import type { InvestigatorAbilityModification } from "../../model";
-import { AbilityCode } from "../codes";
 
 export const ShatteredSelfCounter: InvestigatorAbilityModification = {
 	[AbilityCode.ShatteredSelf]: ({ board, ability }) => {

@@ -26,7 +26,7 @@ function* worker({ payload }: ReturnType<typeof setBoardAbilityUse>) {
 		yield select(selectUsedAbilities);
 	const boardId: ReturnType<typeof selectId> = yield select(selectId);
 
-	if (!ability) {
+	if (!ability || ability.toggle === false) {
 		return;
 	}
 

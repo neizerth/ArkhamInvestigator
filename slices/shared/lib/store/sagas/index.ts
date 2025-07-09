@@ -1,4 +1,3 @@
-// TODO enable all module sagas
 import { spawn } from "redux-saga/effects";
 import { boardSagas } from "./board";
 import { chaosBagSaga } from "./chaosBag";

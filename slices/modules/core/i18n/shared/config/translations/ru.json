@@ -93,9 +93,9 @@
 
 	"upkeep.investigator.actionsReset": "{{name}}: действия обновлены",
 
-	"upkeep.investigator.getResources_one": "{{name}} получает {{count}} ресурс",
-	"upkeep.investigator.getResources_few": "{{name}} получает {{count}} ресурса",
-	"upkeep.investigator.getResources_many": "{{name}} получает {{count}} ресурсов",
+	"investigator.getResources_one": "{{name}} получает {{count}} ресурс",
+	"investigator.getResources_few": "{{name}} получает {{count}} ресурса",
+	"investigator.getResources_many": "{{name}} получает {{count}} ресурсов",
 
 	"actions.give_one": "{{fromName}} даёт {{dativeName}} {{count}} действие",
 	"actions.give_few": "{{fromName}} даёт {{dativeName}} {{count}} действия",

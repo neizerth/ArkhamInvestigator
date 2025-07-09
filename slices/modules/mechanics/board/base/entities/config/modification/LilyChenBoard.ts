@@ -1,4 +1,4 @@
-import { AbilityCode } from "@modules/mechanics/board/abilities/entities/config";
+import { AbilityCode } from "@modules/mechanics/board/abilities/shared/config";
 import { InvesigatorCode } from "@modules/mechanics/investigator/entities/config";
 import type { InvestigatorBoardModification } from "../../model";
 

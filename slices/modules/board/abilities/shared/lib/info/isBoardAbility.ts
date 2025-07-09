@@ -1,5 +1,6 @@
 import type { InvestigatorAbility } from "arkham-investigator-data";
 
+import { specialAbilitityCodes } from "@modules/mechanics/board/abilities/shared/config";
 import {
 	BOARD_ABILITY_LIMITS,
 	PERMANENT_BOARD_ABILITY_TYPES,
@@ -20,7 +21,7 @@ export const isBoardAbility = ({ ability, investigatorsCount }: Options) => {
 		return false;
 	}
 
-	if (ability.type === "special-action") {
+	if (specialAbilitityCodes.includes(ability.id)) {
 		return true;
 	}
 

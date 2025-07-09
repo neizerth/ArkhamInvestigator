@@ -8,7 +8,7 @@ import {
 	cantAddMultipleChaosTokens,
 	selectCanAddMultipleChaosTokens,
 } from "@modules/chaos-bag/base/entities/lib";
-import { AbilityCode } from "@modules/mechanics/board/abilities/entities/config";
+import { AbilityCode } from "@modules/mechanics/board/abilities/shared/config";
 import { put, select, takeEvery } from "redux-saga/effects";
 
 const filterAction = createAbilityUseFilter(AbilityCode.SisterMary);
