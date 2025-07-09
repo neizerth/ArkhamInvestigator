@@ -19,6 +19,7 @@ function* worker({ payload }: ReturnType<typeof changeBoardHistoryAbilityUse>) {
 
 	yield put(
 		addChaosToken({
+			...payload,
 			type: "bless",
 		}),
 	);

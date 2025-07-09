@@ -86,6 +86,9 @@ export const getInvestigatorTextStyle = ({
 			icon_bullet: {
 				lineHeight: fontSize * 0.7,
 			},
+			icon_bless: {
+				marginTop: -20,
+			},
 			break: {
 				height: fontSize * 2.7,
 			},
