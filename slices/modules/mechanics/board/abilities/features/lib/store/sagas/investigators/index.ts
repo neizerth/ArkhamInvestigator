@@ -5,6 +5,7 @@ import { GeorgeBarnabyAbilitySaga } from "./GeorgeBarnabyAbilitySaga";
 import { ShatteredSelfAbilitySaga } from "./ShatteredSelfAbilitySaga";
 import { SisterMaryAbilitySaga } from "./SisterMaryAbilitySaga";
 import { Subject5U21AbilitySaga } from "./Subject5U21AbilitySaga";
+import { ZoeySamarasAbilitySaga } from "./ZoeySamaras";
 
 export function* investigatorAbilitiesSaga() {
 	yield spawn(DianaStanleyAbilitySaga);
@@ -13,5 +14,5 @@ export function* investigatorAbilitiesSaga() {
 	yield spawn(CalwinWrightAbilitySaga);
 	yield spawn(ShatteredSelfAbilitySaga);
 	yield spawn(SisterMaryAbilitySaga);
-	// yield spawn(ZoeySamarasAbilitySaga);
+	yield spawn(ZoeySamarasAbilitySaga);
 }

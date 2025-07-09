@@ -1,6 +1,6 @@
 import { handSizeImage } from "@assets/images/game/stats";
 import { abilitiyBackgrounds } from "@assets/images/game/stats/abilities";
-import { AbilityCode } from "@modules/mechanics/board/abilities/entities/config";
+import { AbilityCode } from "@modules/mechanics/board/abilities/shared/config";
 import type { ImageRequireSource } from "react-native";
 
 export const backgrounds: Record<string, ImageRequireSource> = {

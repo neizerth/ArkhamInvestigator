@@ -81,8 +81,8 @@
 	"board.help.pins.swipe": "Swipe down on a pinned calculation to go to a page where you've created this calculation",
 	"board.help.longPress.investigatorSelect": "If you are playing with 2+ investigators, hold down on the mini image to view all investigators' stats",
 
-	"upkeep.investigator.getResources_one": "{{name}} has got {{count}} resource",
-	"upkeep.investigator.getResources_other": "{{name}} has got {{count}} resources",
+	"investigator.getResources_one": "{{name}} has got {{count}} resource",
+	"investigator.getResources_other": "{{name}} has got {{count}} resources",
 
 	"clues.spent_one": "{{name}} has spent {{count}} clue",
 	"clues.spent_other": "{{name}} has spent {{count}} clues",

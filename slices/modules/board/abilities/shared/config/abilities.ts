@@ -13,10 +13,7 @@ export const BOARD_ABILITY_LIMITS: LimitType[] = [
 	"turn",
 ];
 
-export const PERMANENT_BOARD_ABILITY_TYPES: AbilityType[] = [
-	"counter",
-	"permanent",
-];
+export const PERMANENT_BOARD_ABILITY_TYPES: AbilityType[] = ["counter"];
 
 export const TURN_ABILITY_LIMITS: LimitType[] = ["phase", "round", "turn"];
 

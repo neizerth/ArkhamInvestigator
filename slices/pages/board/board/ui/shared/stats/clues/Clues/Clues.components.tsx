@@ -48,7 +48,8 @@ export const Lock: FC<LockProps> = styled(IconButton).attrs(
   position: absolute;
   z-index: 2;
   right: -25px;
-  top: -57px;
+  top: -52px;
 	width: 50px;
 	align-items: flex-start;
+	filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.5));
 `;

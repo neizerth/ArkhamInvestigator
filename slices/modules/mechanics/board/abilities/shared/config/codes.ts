@@ -13,4 +13,14 @@ export const AbilityCode = {
 	GloriaGoldberg: "gloria-cards",
 	PrestonFairmont: "family-inheritance",
 	TonyMorgan: "bounty-contracts",
+	CarsonSinclair: "give-action",
+	MinhThiPhan: "add-2wild",
+	ZoeySamaras: "get-resource",
 };
+
+export const specialAbilitityCodes = [
+	AbilityCode.CarsonSinclair,
+	AbilityCode.ZoeySamaras,
+	AbilityCode.MinhThiPhan,
+	...Object.values(AbilityCode.LilyChen),
+];

@@ -37,7 +37,7 @@ export const giveUpkeepResourceToBoard =
 
 		dispatch(
 			sendNotification({
-				message: "upkeep.investigator.getResources",
+				message: "investigator.getResources",
 				data: {
 					name,
 					count: upkeepResourcesIncrease,

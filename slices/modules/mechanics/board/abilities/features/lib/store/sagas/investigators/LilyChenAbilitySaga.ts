@@ -3,7 +3,7 @@ import {
 	decreaseBoardActualPropValue,
 	increaseBoardActualPropValue,
 } from "@modules/board/base/shared/lib";
-import { AbilityCode } from "@modules/mechanics/board/abilities/entities/config";
+import { AbilityCode } from "@modules/mechanics/board/abilities/shared/config";
 import { whereId } from "@shared/lib/util";
 import type { InvestigatorBoardNumericStat } from "@shared/model";
 import { takeEvery } from "redux-saga/effects";
