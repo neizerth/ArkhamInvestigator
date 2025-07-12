@@ -13,7 +13,7 @@ import type { ActionCreator } from "@reduxjs/toolkit";
 import type { AppThunk } from "@shared/model";
 import { routes } from "../../../../../config";
 import { goToPage } from "../../../effects";
-import { clearTraumaSettings } from "../../investigators";
+import { clearTraumaSettings } from "../../investigators/thunks/clearTraumaSettings";
 import { setReplaceInvestigator, setSelectedInvestigators } from "../game";
 
 export const startNewGame: ActionCreator<AppThunk> =
