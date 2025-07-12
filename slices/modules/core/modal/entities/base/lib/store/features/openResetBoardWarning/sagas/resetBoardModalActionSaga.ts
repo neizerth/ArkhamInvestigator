@@ -1,4 +1,4 @@
-import { ModalActionId } from "@modules/core/modal/entities/config";
+import { ModalActionId } from "@modules/core/modal/entities/base/config";
 import { createCustomModalActionSaga } from "@modules/core/modal/shared/base/lib";
 import { resetBoard } from "@modules/mechanics/board/base/entities/lib";
 import { put } from "redux-saga/effects";

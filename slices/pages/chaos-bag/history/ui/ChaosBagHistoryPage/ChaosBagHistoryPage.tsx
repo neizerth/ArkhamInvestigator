@@ -1,7 +1,7 @@
 import type { ChaosBagHistoryItem } from "@features/game/chaos-bag/model";
 import { selectRevealHistory } from "@modules/chaos-bag/reveal/history/shared/lib";
 import { useAppTranslation } from "@modules/core/i18n/shared/lib";
-import { openClearRevealHistoryWarning } from "@modules/core/modal/entities/lib";
+import { openClearRevealHistoryWarning } from "@modules/core/modal/entities/base/lib";
 import { REMOVE_CLIPPED_SUBVIEWS } from "@shared/config";
 import { goBack, useAppDispatch, useAppSelector } from "@shared/lib";
 import { Delay } from "@shared/ui";

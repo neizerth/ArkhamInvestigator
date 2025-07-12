@@ -1,4 +1,4 @@
-import { openNewGameWarning } from "@modules/core/modal/entities/lib";
+import { openNewGameWarning } from "@modules/core/modal/entities/base/lib";
 import {
 	selectHasPreviousGame,
 	startNewGame,

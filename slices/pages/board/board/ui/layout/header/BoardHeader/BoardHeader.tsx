@@ -6,7 +6,7 @@ import {
 	selectBoardsCount,
 	selectCurrentBoardProp,
 } from "@modules/board/base/shared/lib";
-import { CustomModalId } from "@modules/core/modal/entities/config";
+import { CustomModalId } from "@modules/core/modal/entities/base/config";
 import { openCustomModal } from "@modules/core/modal/shared/base/lib";
 import {
 	selectCanChangeFaction,

@@ -1,5 +1,8 @@
 import { isBoardExists, selectBoardById } from "@modules/board/base/shared/lib";
-import { ModalActionId, ModalId } from "@modules/core/modal/entities/config";
+import {
+	ModalActionId,
+	ModalId,
+} from "@modules/core/modal/entities/base/config";
 import { createCancelModalAction } from "@modules/core/modal/shared/actions/cancel/lib";
 import { createConfirmModalAction } from "@modules/core/modal/shared/actions/confirm/lib";
 import { openConfirm } from "@modules/core/modal/shared/confirm/lib";
