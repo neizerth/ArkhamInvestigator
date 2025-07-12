@@ -1,12 +1,7 @@
-import type {
-	BoardKey,
-	PropsWithBoardId,
-} from "@modules/board/base/shared/model";
-import type { BoardState } from "../../board";
-import { getBoardById } from "../find/getBoardById";
+import type { BoardKey } from "@modules/board/base/shared/model";
+import { type GetBoardByIdOptions, getBoardById } from "../find/getBoardById";
 
-export type GetBoardPropOptions<K extends BoardKey> = PropsWithBoardId & {
-	state: BoardState;
+export type GetBoardPropOptions<K extends BoardKey> = GetBoardByIdOptions & {
 	prop: K;
 };
 

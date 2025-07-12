@@ -11,10 +11,8 @@ export const selectBoardById = (boardId: BoardId) =>
 		[selectInvestigatorBoards, selectCurrentInvestigatorIndex],
 		(investigatorBoards, currentInvestigatorIndex) => {
 			return getBoardById({
-				state: {
-					investigatorBoards,
-					currentInvestigatorIndex,
-				},
+				investigatorBoards,
+				currentInvestigatorIndex,
 				boardId,
 			});
 		},

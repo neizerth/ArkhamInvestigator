@@ -8,7 +8,7 @@ export const handleSetBoardPropValue: BoardHandler<SetBoardPropValuePayload> = (
 	{ boardId, prop, value, type },
 ) => {
 	const board = getBoardById({
-		state,
+		...state,
 		boardId,
 	});
 

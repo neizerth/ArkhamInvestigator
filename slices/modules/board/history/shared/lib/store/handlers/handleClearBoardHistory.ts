@@ -6,7 +6,7 @@ export const handleClearBoardHistory: BoardHandler<BoardId> = (
 	boardId,
 ) => {
 	const index = getBoardIndex({
-		state,
+		...state,
 		boardId,
 	});
 

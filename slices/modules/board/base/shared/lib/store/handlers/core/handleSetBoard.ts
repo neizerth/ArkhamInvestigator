@@ -7,7 +7,7 @@ export const handleSetBoard: BoardHandler<SetBoardPayload> = (
 	{ boardId, data },
 ) => {
 	const index = getBoardIndex({
-		state,
+		...state,
 		boardId,
 	});
 
