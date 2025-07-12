@@ -6,6 +6,7 @@ import { useAppDispatch } from "@shared/lib";
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import type { ViewProps } from "react-native";
+import { closeModal } from "../../lib";
 import * as C from "./FactionModal.components";
 import { useFactionModalActions } from "./useFactionModalActions";
 
@@ -26,7 +27,11 @@ export function FactionModal<
 
 	const close = useCallback(() => {
 		onClose?.();
-		dispatch;
+		dispatch(
+			closeModal({
+				source: "event",
+			}),
+		);
 	}, [onClose, dispatch]);
 	const { faction = "neutral", actions } = data;
 
