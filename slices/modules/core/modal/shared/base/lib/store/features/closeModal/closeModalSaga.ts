@@ -13,14 +13,15 @@ function* worker({ payload }: ReturnType<typeof closeModal>) {
 	const modalId: ReturnType<typeof selectModalId> = yield select(selectModalId);
 	const modalType: ReturnType<typeof selectModalType> =
 		yield select(selectModalType);
-	const data: BaseModalData<BaseModalAction> = yield select(selectModalData);
+	const data: BaseModalData<BaseModalAction> | null =
+		yield select(selectModalData);
 
-	if (!modalId || !data || !modalType) {
+	if (!modalId || !modalType) {
 		return;
 	}
 
 	const actionPayload =
-		payload.source === "action"
+		payload.source === "action" && data
 			? {
 					action: getActionById({
 						data,

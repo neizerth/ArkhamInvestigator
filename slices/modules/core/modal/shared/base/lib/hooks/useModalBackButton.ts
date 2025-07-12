@@ -10,7 +10,7 @@ export const useModalBackButton = () => {
 		if (modalId) {
 			dispatch(
 				closeModal({
-					source: "event",
+					source: "ui",
 				}),
 			);
 		}

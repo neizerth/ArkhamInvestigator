@@ -13,7 +13,7 @@ export type CloseModalPayload<A extends BaseModalAction> =
 			modalAction: A;
 	  }
 	| {
-			source: "event";
+			source: "ui";
 	  };
 
 export const closeModal = createAction<CloseModalPayload<BaseModalAction>>(
@@ -27,7 +27,7 @@ export type ModalClosedPayload<
 	modalType: ModalType;
 	modalId: string;
 	modalAction?: A;
-	data: D;
+	data: D | null;
 };
 
 export const modalClosed = createAction<

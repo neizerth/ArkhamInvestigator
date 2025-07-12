@@ -1,6 +1,5 @@
+export { closeModal, modalClosed } from "../features/closeModal";
 export {
-	closeModal,
-	modalClosed,
 	modalActionProcessed,
 	processModalAction,
-} from "../features";
+} from "../features/processModalAction";

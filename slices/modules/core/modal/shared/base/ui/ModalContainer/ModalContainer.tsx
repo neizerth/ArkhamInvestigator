@@ -1,9 +1,9 @@
 import { StoreDisplay } from "@shared/ui";
-import type { ViewProps } from "react-native";
 import { selectModaShown } from "../../lib";
+import type { ModalProps } from "../Modal";
 import * as C from "./ModalContainer.components";
 
-export type ModalContainerProps = ViewProps & {
+export type ModalContainerProps = ModalProps & {
 	id: string;
 };
 

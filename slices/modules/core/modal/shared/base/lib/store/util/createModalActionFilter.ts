@@ -3,7 +3,7 @@ import type { BaseModalAction, BaseModalData } from "../../../model";
 import {
 	type ModalActionProcessedPayload,
 	modalActionProcessed,
-} from "../features";
+} from "../features/processModalAction";
 
 type Options = {
 	ids: string[];

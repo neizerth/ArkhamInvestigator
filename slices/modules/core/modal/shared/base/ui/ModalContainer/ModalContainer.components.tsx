@@ -1,8 +1,7 @@
-import { View } from "react-native";
 import styled from "styled-components/native";
+import { Modal as BaseModal } from "../Modal";
 
-export const Modal: typeof View = styled(View)`
-  z-index: 1000;
+export const Modal: typeof BaseModal = styled(BaseModal)`
   position: absolute;
   left: 0;
   right: 0;

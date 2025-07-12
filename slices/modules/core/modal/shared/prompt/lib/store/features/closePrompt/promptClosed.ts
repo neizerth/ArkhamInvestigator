@@ -6,7 +6,7 @@ import type { PromptModalData } from "../../../../model";
 export type PromptClosedPayload<A extends BaseModalAction> = {
 	modalId: string;
 	modalAction?: A;
-	data: PromptModalData<A>;
+	data: PromptModalData<A> | null;
 };
 
 export const promptClosed = createAction<PromptClosedPayload<BaseModalAction>>(

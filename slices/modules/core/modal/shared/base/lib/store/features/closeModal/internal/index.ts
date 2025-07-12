@@ -1,2 +1,2 @@
+export * from "./closeModalInternal";
 export * from "./handleCloseModalInternal";
-export * from "./handleOpenModal";

@@ -4,8 +4,9 @@ import { goToPageActionSaga } from "@modules/core/modal/shared/actions/custom/go
 import { confirmSaga } from "@modules/core/modal/shared/confirm/lib/store/sagas";
 import { promptSaga } from "@modules/core/modal/shared/prompt/lib/store/sagas";
 import { spawn } from "redux-saga/effects";
-import { closeModalSaga, processModalActionSaga } from "../features";
 import { closeModalActionSaga } from "../features/closeModal/closeModalActionSaga";
+import { closeModalSaga } from "../features/closeModal/closeModalSaga";
+import { processModalActionSaga } from "../features/processModalAction/processModalActionSaga";
 
 export function* modalSharedSaga() {
 	yield spawn(closeModalSaga);

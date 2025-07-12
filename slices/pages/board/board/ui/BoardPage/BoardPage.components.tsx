@@ -8,7 +8,6 @@ import {
 	type PortraitLayoutProps as BasePortraitLayoutProps,
 } from "../layout";
 import { InvestigatorBackground } from "../layout/investigator-image/InvestigatorBackground";
-import { FactionSelect } from "../shared";
 
 export const Container: typeof View = styled(View)`
   flex: 1;
@@ -52,13 +51,4 @@ export const PortraitLayout: FC<BasePortraitLayoutProps> = styled(
   right: 0;
   bottom: 0;
   top: 0;
-`;
-
-export const FactionModal: typeof FactionSelect = styled(FactionSelect)`
-  position: absolute;
-  z-index: 3;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
 `;

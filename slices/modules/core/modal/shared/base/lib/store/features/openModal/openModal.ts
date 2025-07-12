@@ -3,8 +3,11 @@ import type {
 	BaseModalAction,
 	BaseModalData,
 	ModalDraft,
-} from "../../../model";
-import { type HandleOpenModalPayload, handleOpenModal } from "../handlers";
+} from "../../../../model";
+import {
+	type HandleOpenModalPayload,
+	handleOpenModal,
+} from "./handleOpenModal";
 
 export type { HandleOpenModalPayload as OpenModalPayload };
 

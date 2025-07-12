@@ -3,7 +3,7 @@ import type {
 	BaseModalData,
 	ModalDraft,
 	ModalType,
-} from "../../../model";
+} from "../../../../model";
 
 export type HandleOpenModalPayload<
 	Action extends BaseModalAction,

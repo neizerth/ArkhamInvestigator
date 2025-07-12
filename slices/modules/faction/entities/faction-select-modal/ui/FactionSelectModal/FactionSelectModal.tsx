@@ -1,8 +1,7 @@
-import {
-	setBoardProp,
-	setShowFactionSelect,
-} from "@modules/board/base/shared/lib";
+import { setBoardProp } from "@modules/board/base/shared/lib";
 import { useHapticFeedback } from "@modules/core/haptic/shared/lib";
+import { CustomModalId } from "@modules/core/modal/entities/config";
+import { closeModal } from "@modules/core/modal/shared/base/lib";
 import {
 	selectAvailableFactions,
 	selectCurrentFaction,
@@ -11,24 +10,32 @@ import { useAppDispatch, useAppSelector } from "@shared/lib";
 import type { Faction } from "@shared/model";
 import { useCallback } from "react";
 import type { ViewProps } from "react-native";
-import * as C from "./FactionSelect.components";
+import * as C from "./FactionSelectModal.components";
 
-export type FactionSelectProps = ViewProps;
+export type FactionSelectModalProps = ViewProps;
 
-export const FactionSelect = (props: FactionSelectProps) => {
+export const FactionSelectModal = (props: FactionSelectModalProps) => {
 	const dispatch = useAppDispatch();
 	const factions = useAppSelector(selectAvailableFactions("current"));
 	const selected = useAppSelector(selectCurrentFaction);
 	const impactFeedback = useHapticFeedback("clockTick");
 
 	const hide = useCallback(() => {
-		dispatch(setShowFactionSelect(false));
+		dispatch(
+			closeModal({
+				source: "ui",
+			}),
+		);
 		impactFeedback();
 	}, [dispatch, impactFeedback]);
 
 	const onPress = useCallback(
 		(faction: Faction) => () => {
-			dispatch(setShowFactionSelect(false));
+			dispatch(
+				closeModal({
+					source: "ui",
+				}),
+			);
 			dispatch(
 				setBoardProp({
 					boardId: "current",
@@ -41,7 +48,7 @@ export const FactionSelect = (props: FactionSelectProps) => {
 	);
 
 	return (
-		<C.Modal {...props} id="faction-select" onClose={hide}>
+		<C.Modal {...props} id={CustomModalId.factionSelect} onClose={hide}>
 			{factions.map((faction) => (
 				<C.Button
 					key={faction}
