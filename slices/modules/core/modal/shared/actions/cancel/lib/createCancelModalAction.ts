@@ -11,5 +11,5 @@ export const createCancelModalAction = (
 	title: "Cancel",
 	...options,
 	id: cancelModalActionId,
-	type: "close",
+	type: "cancel",
 });
