@@ -1,24 +1,33 @@
-import { createModalActionFilter } from "@modules/core/modal/shared/base/lib";
-import type { PayloadAction } from "@reduxjs/toolkit";
+import {
+	type CreateModalActionFilterAction,
+	createModalActionFilter,
+} from "@modules/core/modal/shared/base/lib";
 import { put, takeEvery } from "redux-saga/effects";
-import { timingWizardModalActionId } from "../config";
+import { processTimingWizardStep } from "../../../processTimingWizardStep";
+import { TimingWizardModalActionId } from "../config";
 import type { TimingWizardModalAction } from "../model";
 import { openTimingWizardModal } from "../openTimingWizardModal";
 
 const filterAction = createModalActionFilter({
-	id: timingWizardModalActionId,
+	ids: [TimingWizardModalActionId.next, TimingWizardModalActionId.prev],
 });
 
-type Action = PayloadAction<TimingWizardModalAction>;
+type Action = CreateModalActionFilterAction<TimingWizardModalAction>;
 
 function* worker({ payload }: Action) {
-	const { step, phaseId } = payload;
+	const { step, phaseId, prevStep } = payload.modalAction;
 
 	if (!step) {
 		return;
 	}
 
 	const stepIndex = step.index;
+
+	yield put(
+		processTimingWizardStep({
+			step: prevStep,
+		}),
+	);
 
 	yield put(
 		openTimingWizardModal({
@@ -28,6 +37,6 @@ function* worker({ payload }: Action) {
 	);
 }
 
-export function* startTimingWizardSaga() {
+export function* timingWizardModalActionSaga() {
 	yield takeEvery(filterAction, worker);
 }

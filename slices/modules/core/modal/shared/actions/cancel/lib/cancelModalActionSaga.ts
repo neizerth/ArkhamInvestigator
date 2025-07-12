@@ -12,7 +12,7 @@ type Payload = ProcessModalActionPayload<CancelModalAction>;
 type Action = PayloadAction<Payload>;
 
 const filterAction = createModalActionFilter({
-	id: cancelModalActionId,
+	ids: [cancelModalActionId],
 });
 
 function* worker({ payload }: Action) {

@@ -61,8 +61,8 @@ export function* getTimingWizardModalSagaData(payload: Payload) {
 		faction,
 		step,
 		phase,
-		next: prevStep,
-		prev: nextStep,
+		next: nextStep,
+		prev: prevStep,
 	};
 
 	return data;

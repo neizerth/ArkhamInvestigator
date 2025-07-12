@@ -17,11 +17,11 @@ export const AppProvider = ({ children }: PropsWithChildren) => {
 					<I18NProvider>
 						<ErrorProvider>
 							<InitProvider>
-								<ModalProvider>
-									<ChaosBagProvider>
-										<ToastProvider>{children}</ToastProvider>
-									</ChaosBagProvider>
-								</ModalProvider>
+								<ToastProvider>
+									<ModalProvider>
+										<ChaosBagProvider>{children}</ChaosBagProvider>
+									</ModalProvider>
+								</ToastProvider>
 							</InitProvider>
 						</ErrorProvider>
 					</I18NProvider>

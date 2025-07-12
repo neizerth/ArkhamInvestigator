@@ -5,17 +5,13 @@ import {
 	type CreateModalActionFilterAction,
 	createModalActionFilter,
 } from "@modules/core/modal/shared/base/lib";
-import type { BaseModalData } from "@modules/core/modal/shared/base/model";
 import { goToPageModalActionId } from "../config";
 import type { GoToPageModalAction } from "../model";
 
-type Action = CreateModalActionFilterAction<
-	GoToPageModalAction,
-	BaseModalData<GoToPageModalAction>
->;
+type Action = CreateModalActionFilterAction<GoToPageModalAction>;
 
 const filterAction = createModalActionFilter({
-	id: goToPageModalActionId,
+	ids: [goToPageModalActionId],
 });
 
 function* worker({ payload }: Action) {

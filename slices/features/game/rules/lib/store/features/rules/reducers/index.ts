@@ -1,5 +1,3 @@
-export {
-	openTimingPhase,
-	closeTimingPhase,
-	startTimingWizard,
-} from "../features";
+export { openTimingPhase } from "../features/openTimingPhase";
+export { closeTimingPhase } from "../features/closeTimingPhase";
+export { startTimingWizard } from "../features/startTimingWizard";

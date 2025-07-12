@@ -2,7 +2,7 @@ import type {
 	TimingPhaseId,
 	TimingPhaseStep,
 } from "../../../../../../../../model";
-import { timingWizardModalActionId as id } from "../config";
+import { TimingWizardModalActionId } from "../config";
 import type { TimingWizardModalAction as ModalAction } from "../model";
 import { getPhaseStepTitle } from "./getPhaseStepTitle";
 
@@ -10,6 +10,7 @@ type GetPhaseStepModalActionOptions = {
 	type: "prev" | "next";
 	phaseId: TimingPhaseId;
 	step?: TimingPhaseStep;
+	prevStep: TimingPhaseStep;
 };
 
 const actionIcon = {
@@ -20,15 +21,19 @@ const actionIcon = {
 export const getPhaseStepModalAction = ({
 	phaseId,
 	step,
+	prevStep,
 	type,
 }: GetPhaseStepModalActionOptions): ModalAction => {
 	const isStart = !step?.index;
 	const isEnd = step?.type === "end";
 
+	const id = TimingWizardModalActionId[type];
+
 	const baseAction = {
 		id,
 		type: "custom" as const,
 		phaseId,
+		prevStep,
 	};
 
 	if (isStart) {
