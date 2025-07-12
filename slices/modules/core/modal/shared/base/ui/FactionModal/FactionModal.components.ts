@@ -1,14 +1,8 @@
-import { GameText } from "@entities/game-text";
 import { FactionCardMemo } from "@modules/faction/shared/faction-card";
-import { color, font, size } from "@shared/config";
+import { size } from "@shared/config";
 import { Outside as BaseOutside, Input as TextInput } from "@shared/ui";
 import { KeyboardAvoidingView, View } from "react-native";
 import styled from "styled-components/native";
-
-export const Text: typeof GameText = styled(GameText)`
-  color: ${color.light10};
-  font-size: ${font.size.default}px;
-`;
 
 export const Card: typeof FactionCardMemo = styled(FactionCardMemo)`
   flex: 1;
