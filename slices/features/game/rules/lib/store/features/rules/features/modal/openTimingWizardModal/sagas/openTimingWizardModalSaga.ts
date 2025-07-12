@@ -17,6 +17,7 @@ function* worker({ payload }: ReturnType<typeof openTimingWizardModal>) {
 
 	const { step, phase, faction } = data;
 
+	const phaseId = phase.id;
 	const { text } = step;
 	const { title } = phase;
 
@@ -29,10 +30,12 @@ function* worker({ payload }: ReturnType<typeof openTimingWizardModal>) {
 				faction,
 				actions: [
 					getPhaseStepModalAction({
+						phaseId,
 						type: "prev",
 						step: data.prev,
 					}),
 					getPhaseStepModalAction({
+						phaseId,
 						type: "next",
 						step: data.next,
 					}),

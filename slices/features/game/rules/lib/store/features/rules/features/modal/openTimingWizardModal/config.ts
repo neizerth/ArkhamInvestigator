@@ -1,4 +1,1 @@
-export const TimingWizardModalActionId = {
-	next: "next-timing-wizard-step",
-	prev: "prev-timing-wizard-step",
-};
+export const timingWizardModalActionId = "timing-wizard-step";
