@@ -1,5 +1,5 @@
 import { boardHistoryItemAdded } from "@modules/board/history/shared/lib";
-import { ModalActionId } from "@modules/core/modal/entities/config";
+import { ModalActionId } from "@modules/core/modal/entities/base/config";
 import { createCancelModalAction } from "@modules/core/modal/shared/actions/cancel/lib";
 import { createConfirmModalAction } from "@modules/core/modal/shared/actions/confirm/lib";
 

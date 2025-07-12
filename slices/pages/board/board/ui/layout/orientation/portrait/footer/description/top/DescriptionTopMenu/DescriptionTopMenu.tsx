@@ -1,4 +1,4 @@
-import { openResetBoardWarning } from "@modules/core/modal/entities/lib";
+import { openResetBoardWarning } from "@modules/core/modal/entities/base/lib";
 import { routes } from "@shared/config";
 import { replacePageTo, useAppDispatch, usePage } from "@shared/lib";
 import { useCallback } from "react";

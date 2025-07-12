@@ -1,6 +1,6 @@
 import { setBoardProp } from "@modules/board/base/shared/lib";
 import { useHapticFeedback } from "@modules/core/haptic/shared/lib";
-import { CustomModalId } from "@modules/core/modal/entities/config";
+import { CustomModalId } from "@modules/core/modal/entities/base/config";
 import { closeModal } from "@modules/core/modal/shared/base/lib";
 import {
 	selectAvailableFactions,

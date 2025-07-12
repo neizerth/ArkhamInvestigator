@@ -1,5 +1,5 @@
 import { selectSkillCheckHistoryItem } from "@modules/board/skill-check/shared/lib";
-import { openBoardModal } from "@modules/core/modal/entities/lib";
+import { openBoardModal } from "@modules/core/modal/entities/base/lib";
 
 import { createCancelModalAction } from "@modules/core/modal/shared/actions/cancel/lib";
 import { createConfirmModalAction } from "@modules/core/modal/shared/actions/confirm/lib";
