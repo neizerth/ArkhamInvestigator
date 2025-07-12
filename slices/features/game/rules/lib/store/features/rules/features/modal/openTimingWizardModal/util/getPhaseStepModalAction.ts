@@ -1,11 +1,14 @@
-import { createCustomModalAction } from "@modules/core/modal/shared/actions/custom/base/lib";
-import type { TimingPhaseStep } from "../../../../../../../../model";
-import { TimingWizardModalActionId } from "../config";
+import type {
+	TimingPhaseId,
+	TimingPhaseStep,
+} from "../../../../../../../../model";
+import { timingWizardModalActionId as id } from "../config";
 import type { TimingWizardModalAction as ModalAction } from "../model";
 import { getPhaseStepTitle } from "./getPhaseStepTitle";
 
 type GetPhaseStepModalActionOptions = {
 	type: "prev" | "next";
+	phaseId: TimingPhaseId;
 	step?: TimingPhaseStep;
 };
 
@@ -15,39 +18,44 @@ const actionIcon = {
 };
 
 export const getPhaseStepModalAction = ({
+	phaseId,
 	step,
 	type,
 }: GetPhaseStepModalActionOptions): ModalAction => {
 	const isStart = !step?.index;
 	const isEnd = step?.type === "end";
 
-	const id = TimingWizardModalActionId[type];
+	const baseAction = {
+		id,
+		type: "custom" as const,
+		phaseId,
+	};
 
 	if (isStart) {
-		return createCustomModalAction<ModalAction>({
-			id,
+		return {
+			...baseAction,
 			title: "Close",
 			icon: "dismiss",
-			step,
-		});
+			close: true,
+		};
 	}
 
 	if (isEnd) {
-		createCustomModalAction<ModalAction>({
-			id,
-			title: "Close",
-			icon: "dismiss",
-			step,
-		});
+		return {
+			...baseAction,
+			title: "Phase end",
+			icon: "check",
+			close: true,
+		};
 	}
 
 	const title = step ? getPhaseStepTitle(step) : "???";
 	const icon = actionIcon[type];
 
-	return createCustomModalAction<ModalAction>({
-		id,
+	return {
+		...baseAction,
 		title,
 		icon,
 		step,
-	});
+	};
 };
