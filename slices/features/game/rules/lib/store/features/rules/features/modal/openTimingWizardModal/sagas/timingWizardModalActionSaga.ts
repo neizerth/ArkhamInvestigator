@@ -23,11 +23,13 @@ function* worker({ payload }: Action) {
 
 	const stepIndex = step.index;
 
-	yield put(
-		processTimingWizardStep({
-			step: prevStep,
-		}),
-	);
+	if (prevStep) {
+		yield put(
+			processTimingWizardStep({
+				step: prevStep,
+			}),
+		);
+	}
 
 	yield put(
 		openTimingWizardModal({

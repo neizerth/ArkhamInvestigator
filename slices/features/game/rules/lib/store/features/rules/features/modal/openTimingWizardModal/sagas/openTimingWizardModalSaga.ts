@@ -33,7 +33,7 @@ function* worker({ payload }: ReturnType<typeof openTimingWizardModal>) {
 						phaseId,
 						type: "prev",
 						step: data.prev,
-						prevStep: step,
+						nextStep: step,
 					}),
 					getPhaseStepModalAction({
 						phaseId,
