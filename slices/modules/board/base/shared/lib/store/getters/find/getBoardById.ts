@@ -1,16 +1,9 @@
-import type {
-	BoardId,
-	InvestigatorBoard,
-} from "@modules/board/base/shared/model";
+import type { PropsWithBoardId } from "@modules/board/base/shared/model";
 import { whereId } from "@shared/lib/util";
 import { createFallbackBoard } from "../../../fallback/createFallbackBoard";
-import { getCurrentBoard } from "./current";
+import { type GetCurrentBoardOptions, getCurrentBoard } from "./current";
 
-export type GetBoardByIdOptions = {
-	investigatorBoards: InvestigatorBoard[];
-	currentInvestigatorIndex: number | null;
-	boardId: BoardId;
-};
+export type GetBoardByIdOptions = GetCurrentBoardOptions & PropsWithBoardId;
 
 const fallbackBoard = createFallbackBoard();
 
