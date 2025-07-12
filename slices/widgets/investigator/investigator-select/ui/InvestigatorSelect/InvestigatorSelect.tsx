@@ -3,9 +3,9 @@ import {
 	changeSelectedInvestigator,
 	selectFactionFilter,
 	selectSignatureGroups,
-	splitIntoGroups,
 } from "@shared/lib";
 import { useAppDispatch, useAppSelector } from "@shared/lib/hooks";
+import { splitIntoGroups } from "@shared/lib/util";
 import type { InvestigatorSignatureGroup } from "arkham-investigator-data";
 import { propEq } from "ramda";
 import { useCallback } from "react";

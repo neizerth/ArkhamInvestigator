@@ -1,21 +1,24 @@
-import type { Nullable } from "@shared/model";
 import type { PropsWithFaction } from "@shared/model/ui";
-import { memo } from "react";
+import { Fragment, memo } from "react";
 import { type ViewProps, useWindowDimensions } from "react-native";
 import { useLayoutSize } from "../../../../../../shared/lib/hooks/ui/useLayoutSize";
 import * as C from "./FactionCard.components";
+
+export type FactionCardAction = {
+	id: string;
+	primary?: boolean;
+	icon?: string;
+	title: string;
+	onPress: () => void;
+};
 
 export type FactionCardProps = ViewProps &
 	PropsWithFaction & {
 		title?: string;
 		subtitle?: string;
-		okText?: string;
-		cancelText?: string;
-		cancelIcon?: string;
 		okIcon?: string;
-		onClose?: Nullable<() => void>;
-		onOk?: Nullable<() => void>;
-		onCancel?: Nullable<() => void>;
+		actions: FactionCardAction[];
+		onClose: () => void;
 	};
 
 const MAX_HEIGHT_AREA = 146;
@@ -25,13 +28,14 @@ export const FactionCard = ({
 	title,
 	subtitle,
 	children,
+	actions,
 	onClose,
-	onOk,
-	onCancel,
+	// onOk,
+	// onCancel,
 	onTouchCancel,
-	okText,
-	cancelText,
-	cancelIcon = "dismiss",
+	// okText,
+	// cancelText,
+	// cancelIcon = "dismiss",
 	okIcon = "check",
 	...props
 }: FactionCardProps) => {
@@ -85,27 +89,30 @@ export const FactionCard = ({
 						<C.ScrollContent onLayout={onLayout}>{children}</C.ScrollContent>
 					</C.ScrollContainer>
 					<C.Actions>
-						{onCancel && (
-							<C.Cancel
-								text={cancelText}
-								icon={cancelIcon}
-								onPress={onCancel}
-							/>
-						)}
-						{onOk && (
-							<C.OK
-								text={okText}
-								faction={faction}
-								icon={okIcon}
-								onPress={onOk}
-							>
-								<C.OKBackground
-									faction={faction}
-									width={containerSize?.width || 300}
-									height={55}
-								/>
-							</C.OK>
-						)}
+						{actions.map((action) => (
+							<Fragment key={action.id}>
+								{action.primary ? (
+									<C.PrimaryAction
+										text={action.title}
+										faction={faction}
+										icon={action.icon}
+										onPress={action.onPress}
+									>
+										<C.OKBackground
+											faction={faction}
+											width={containerSize?.width || 300}
+											height={55}
+										/>
+									</C.PrimaryAction>
+								) : (
+									<C.Action
+										text={action.title}
+										icon={action.icon}
+										onPress={action.onPress}
+									/>
+								)}
+							</Fragment>
+						))}
 					</C.Actions>
 				</C.Content>
 			</C.Body>

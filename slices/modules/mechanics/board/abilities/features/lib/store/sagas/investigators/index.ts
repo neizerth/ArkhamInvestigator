@@ -2,6 +2,8 @@ import { spawn } from "redux-saga/effects";
 import { CalwinWrightAbilitySaga } from "./CalwinWrightAbilitySaga";
 import { DianaStanleyAbilitySaga } from "./DianaStanleyAbilitySaga";
 import { GeorgeBarnabyAbilitySaga } from "./GeorgeBarnabyAbilitySaga";
+import { LilyChenAbilitySaga } from "./LilyChenAbilitySaga";
+import { LolaHayesAbilitySaga } from "./LolaHayesAbilitySaga";
 import { ShatteredSelfAbilitySaga } from "./ShatteredSelfAbilitySaga";
 import { SisterMaryAbilitySaga } from "./SisterMaryAbilitySaga";
 import { Subject5U21AbilitySaga } from "./Subject5U21AbilitySaga";
@@ -15,4 +17,6 @@ export function* investigatorAbilitiesSaga() {
 	yield spawn(ShatteredSelfAbilitySaga);
 	yield spawn(SisterMaryAbilitySaga);
 	yield spawn(ZoeySamarasAbilitySaga);
+	yield spawn(LolaHayesAbilitySaga);
+	yield spawn(LilyChenAbilitySaga);
 }

@@ -1,7 +1,6 @@
-import { useModal } from "@modules/core/modal/shared/lib";
 import { selectCurrentFaction } from "@modules/mechanics/board/base/entities/lib";
 import { useAppDispatch, useAppSelector } from "@shared/lib";
-import { useCallback, useEffect } from "react";
+import { useCallback } from "react";
 import {
 	goToNextTimingWizardStep as goToNextStep,
 	goToPrevTimingWizardStep as goToPrevStep,
@@ -10,7 +9,6 @@ import {
 	selectTimingWizardActive,
 	selectTimingWizardPhase,
 	selectTimingWizardStep,
-	setTimingWizardActive,
 } from "../../store";
 import { usePhaseStepName } from "../usePhaseStepName";
 import { useTimingWizardButtons } from "./useTimingWizardButtons";
@@ -49,26 +47,18 @@ export const useTimingPhaseWizard = () => {
 		return false;
 	}, [dispatch, isStart]);
 
-	const [showModal] = useModal({
-		id: "timing",
-		data: {
-			...modalButtonData,
-			title,
-			subtitle,
-			text,
-			faction,
-			type: "faction",
-			contentType: "text",
-		},
-		onOk: next,
-		onCancel: prev,
-	});
-
-	useEffect(() => {
-		if (!active) {
-			return;
-		}
-		dispatch(setTimingWizardActive(false));
-		showModal();
-	}, [dispatch, active, showModal]);
+	// const [showModal] = useModal({
+	// 	id: "timing",
+	// 	data: {
+	// 		...modalButtonData,
+	// 		title,
+	// 		subtitle,
+	// 		text,
+	// 		faction,
+	// 		type: "faction",
+	// 		contentType: "text",
+	// 	},
+	// 	onOk: next,
+	// 	onCancel: prev,
+	// });
 };

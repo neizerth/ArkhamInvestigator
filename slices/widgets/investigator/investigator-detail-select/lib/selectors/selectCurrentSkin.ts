@@ -1,9 +1,6 @@
 import { createSelector } from "@reduxjs/toolkit";
-import {
-	selectCurrentSignatureGroup,
-	selectCurrentSkinId,
-	whereId,
-} from "@shared/lib";
+import { selectCurrentSignatureGroup, selectCurrentSkinId } from "@shared/lib";
+import { whereId } from "@shared/lib/util";
 import { getSkins } from "../details";
 
 export const selectCurrentSkin = createSelector(

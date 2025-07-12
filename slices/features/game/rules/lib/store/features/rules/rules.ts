@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import type { RulesItem } from "@shared/model";
 import { createSliceState } from "redux-toolkit-helpers";
 import type { TimingPhaseId } from "../../../../model";
+import * as reducers from "./reducers";
 
 export type RulesState = {
 	rules?: RulesItem[];
@@ -19,9 +20,15 @@ const initialState: RulesState = {
 	timingWizardActive: false,
 };
 
+const state = createSliceState(initialState);
+
 export const rules = createSlice({
 	name: "rules",
-	...createSliceState(initialState),
+	...state,
+	reducers: {
+		...state.reducers,
+		...reducers,
+	},
 });
 
 export const {
@@ -30,6 +37,10 @@ export const {
 	setTimingWizardStepIndex,
 	setTimingWizardActive,
 	setTimingWizardPhaseId,
+
+	openTimingPhase,
+	closeTimingPhase,
+	startTimingWizard,
 } = rules.actions;
 
 export const {

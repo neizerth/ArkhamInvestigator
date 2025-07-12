@@ -1,3 +1,4 @@
+import { TURN_ABILITY_LIMITS } from "@modules/board/abilities/shared/config";
 import {
 	resetBoardAbilities,
 	selectHasAdditionalAction,
@@ -11,7 +12,6 @@ import {
 import type { BoardId } from "@modules/board/base/shared/model";
 import { createBoardHistoryGroup } from "@modules/board/history/shared/lib";
 import type { AppThunk } from "@shared/model";
-import { TURN_ABILITY_LIMITS } from "../../../../../../../shared/config";
 
 export const startNewTurn =
 	(boardId: BoardId = "current"): AppThunk =>

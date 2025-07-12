@@ -2,7 +2,7 @@ import {
 	selectInvestigatorByCode,
 	useAppTranslation,
 } from "@modules/core/i18n/shared/lib";
-import { InvesigatorCode } from "@shared/config";
+import { InvesigatorCode } from "@modules/mechanics/investigator/entities/config";
 import { useAppSelector } from "@shared/lib";
 import { Bold, List, Paragraph, Text, Title } from "@shared/ui";
 import { ContentPage } from "@widgets/content/content-page";

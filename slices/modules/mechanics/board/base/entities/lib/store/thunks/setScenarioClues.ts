@@ -38,10 +38,6 @@ export const setScenarioClues =
 			prop: "clues",
 		})(state);
 
-		if (typeof investigatorClues !== "number") {
-			return;
-		}
-
 		const updatedClues = Math.max(investigatorClues - diff, 0);
 
 		const spendCluesValue = investigatorClues - updatedClues;

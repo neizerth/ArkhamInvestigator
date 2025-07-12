@@ -18,3 +18,11 @@ export type SafeOmit<T, Keys> = {
 
 export type RequiredKeys<T, Keys extends keyof T> = Omit<T, Keys> &
 	Required<Pick<T, Keys>>;
+
+export type PickPartial<T, K extends keyof T> = Omit<T, K> &
+	Partial<Pick<T, K>>;
+
+export type PickRequired<T, K extends keyof T> = Omit<T, K> &
+	Required<Pick<T, K>>;
+
+export type MaybeData<T> = T extends void ? Record<string, never> : { data: T };

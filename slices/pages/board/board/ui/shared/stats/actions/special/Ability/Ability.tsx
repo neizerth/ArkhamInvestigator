@@ -1,13 +1,14 @@
 import {
+	getAbilityIcon,
 	selectIsCurrentAbilityUsed,
 	setBoardAbilityUse,
 } from "@modules/board/abilities/shared/lib";
 import type { TouchableOpacityProps } from "@modules/core/haptic/shared/ui";
-import { getAbilityIcon, useAppDispatch, useAppSelector } from "@shared/lib";
+import { useAppDispatch, useAppSelector } from "@shared/lib";
 import type { InvestigatorAbility } from "arkham-investigator-data";
 import { useCallback } from "react";
 import { Special } from "../Special";
-import { useAbility } from "./abilities";
+import { useAbility } from "./useAbility";
 
 export type AbilityProps = TouchableOpacityProps & {
 	ability: InvestigatorAbility;

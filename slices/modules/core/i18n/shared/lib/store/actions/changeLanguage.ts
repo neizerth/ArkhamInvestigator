@@ -1,4 +1,4 @@
-import type { AppThunkCreator } from "@shared/model";
+import type { AppThunk } from "@shared/model";
 import {
 	DEFAULT_LANGUAGE,
 	I18N_NAMESAPCE,
@@ -8,12 +8,13 @@ import {
 import { selectLanguage, setLanguage } from "../i18n";
 import { loadTranslation } from "./translations/loadTranslation";
 
-export const changeLanguage: AppThunkCreator =
-	(language: string | null) => (dispatch, getState) => {
+export const changeLanguage =
+	(language: string | null): AppThunk =>
+	(dispatch, getState) => {
 		const state = getState();
 		const currentLanguage = selectLanguage(state);
 
-		if (language === currentLanguage) {
+		if (!language || language === currentLanguage) {
 			return;
 		}
 		if (language === DEFAULT_LANGUAGE) {
@@ -21,5 +22,6 @@ export const changeLanguage: AppThunkCreator =
 			i18next.addResourceBundle(language, I18N_NAMESAPCE, translations.en);
 			i18next.changeLanguage(language);
 		}
+
 		dispatch(loadTranslation(language));
 	};

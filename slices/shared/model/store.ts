@@ -8,12 +8,10 @@ import type {
 } from "@reduxjs/toolkit";
 import type { makeStore } from "../lib/store/makeStore";
 
-export type AppThunk<ReturnType = void> = ThunkAction<
-	ReturnType,
-	RootState,
-	unknown,
-	Action
->;
+export type AppThunk<
+	ReturnType = void,
+	BasicAction extends Action = Action,
+> = ThunkAction<ReturnType, RootState, unknown, BasicAction>;
 
 export type PropwWithState<T> = {
 	state: T;
@@ -32,6 +30,10 @@ export type AppThunkCreator = ActionCreator<AppThunk>;
 export type AppActionCreator<T> =
 	| ActionCreatorWithPayload<T>
 	| ((value: T) => AppThunk);
+
+export type AppActionCreatorWithoutPayload =
+	| ActionCreatorWithPayload<void>
+	| (() => AppThunk);
 
 export type StateReducer<S, P> = (
 	state: S,

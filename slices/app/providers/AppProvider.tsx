@@ -7,7 +7,6 @@ import type { PropsWithChildren } from "react";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { ErrorProvider } from "./ErrorProvider";
 import { InitProvider } from "./InitProvider";
-import { OutdatedCheckProvider } from "./OutdatedCheckProvider";
 import { StoreProvider } from "./StoreProvider";
 
 export const AppProvider = ({ children }: PropsWithChildren) => {
@@ -19,11 +18,9 @@ export const AppProvider = ({ children }: PropsWithChildren) => {
 						<ErrorProvider>
 							<InitProvider>
 								<ModalProvider>
-									<OutdatedCheckProvider>
-										<ChaosBagProvider>
-											<ToastProvider>{children}</ToastProvider>
-										</ChaosBagProvider>
-									</OutdatedCheckProvider>
+									<ChaosBagProvider>
+										<ToastProvider>{children}</ToastProvider>
+									</ChaosBagProvider>
 								</ModalProvider>
 							</InitProvider>
 						</ErrorProvider>

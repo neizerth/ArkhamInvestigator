@@ -1,0 +1,5 @@
+export const ModalId = {
+	resetBoard: "reset-board",
+	clearRevealHistory: "clear-reveal-history",
+	startNewGame: "start-new-game",
+};

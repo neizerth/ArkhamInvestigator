@@ -1,6 +1,6 @@
 import { ArnoPro, STKaiti, STXinwei, SanCn, Yoon } from "@assets/fonts";
 import type { ComponentStyleMap } from "@entities/game-text";
-import { type KeyConfig, getKeyConfig } from "@shared/lib";
+import { type KeyConfig, getKeyConfig } from "@shared/lib/util";
 import type { TextStyle } from "react-native";
 import { refUnit as u } from "../../lib";
 

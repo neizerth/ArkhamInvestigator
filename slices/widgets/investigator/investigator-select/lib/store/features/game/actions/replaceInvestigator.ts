@@ -1,5 +1,5 @@
 import { selectCurrentBoard } from "@modules/board/base/shared/lib";
-import { replaceCurrentBoard } from "@modules/mechanics/board/base/entities/lib";
+import { replaceBoard } from "@modules/mechanics/board/base/entities/lib";
 import type { ActionCreator } from "@reduxjs/toolkit";
 import {
 	goBack,
@@ -20,7 +20,8 @@ export const replaceInvestigator: ActionCreator<AppThunk> =
 		}
 
 		dispatch(
-			replaceCurrentBoard({
+			replaceBoard({
+				boardId: "current",
 				board,
 			}),
 		);

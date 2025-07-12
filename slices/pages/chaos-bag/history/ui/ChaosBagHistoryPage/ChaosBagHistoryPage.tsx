@@ -1,10 +1,7 @@
 import type { ChaosBagHistoryItem } from "@features/game/chaos-bag/model";
-import {
-	clearRevealHistory,
-	selectRevealHistory,
-} from "@modules/chaos-bag/reveal/history/shared/lib";
+import { selectRevealHistory } from "@modules/chaos-bag/reveal/history/shared/lib";
 import { useAppTranslation } from "@modules/core/i18n/shared/lib";
-import { useModal } from "@modules/core/modal/shared/lib";
+import { openClearRevealHistoryWarning } from "@modules/core/modal/entities/lib";
 import { REMOVE_CLIPPED_SUBVIEWS } from "@shared/config";
 import { goBack, useAppDispatch, useAppSelector } from "@shared/lib";
 import { Delay } from "@shared/ui";
@@ -22,23 +19,13 @@ export const ChaosBagHistoryPage = () => {
 		dispatch(goBack());
 	}, [dispatch]);
 
-	const clearHistory = useCallback(() => {
-		dispatch(clearRevealHistory());
+	const showClearModal = useCallback(() => {
+		dispatch(
+			openClearRevealHistoryWarning({
+				boardId: "current",
+			}),
+		);
 	}, [dispatch]);
-
-	const [showClearModal] = useModal({
-		id: "clear-board",
-		data: {
-			contentType: "text",
-			type: "faction",
-			faction: "neutral",
-			title: t`modal.skillCheck.clear`,
-			text: t`modal.skillCheck.clear.text`,
-			okText: t`Clear`,
-			cancelText: t`Cancel`,
-		},
-		onOk: clearHistory,
-	});
 
 	const renderItem = useCallback(
 		({ item, index }: ListRenderItemInfo<ChaosBagHistoryItem>) => {

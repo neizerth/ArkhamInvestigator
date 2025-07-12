@@ -1,4 +1,5 @@
 import { createSelector } from "@reduxjs/toolkit";
+import { getTimingWizardStep } from "../../getters";
 import { selectTimingWizardStepIndex } from "../../rules";
 import { selectTimingWizardPhase } from "./selectTimingWizardPhase";
 
@@ -8,6 +9,9 @@ export const selectTimingWizardStep = createSelector(
 		if (!phase || typeof index !== "number") {
 			return;
 		}
-		return phase.steps[index];
+		return getTimingWizardStep({
+			index,
+			phase,
+		});
 	},
 );
