@@ -1,8 +1,8 @@
+import { FactionCardMemo as FactionCard } from "@modules/faction/shared/faction-card";
 import { size } from "@shared/config";
 import { Outside as BaseOutside } from "@shared/ui";
 import { View } from "react-native";
 import styled from "styled-components/native";
-import { FactionCardMemo as FactionCard } from "../../../faction/faction-card";
 
 export const Outside = styled(BaseOutside)`
   z-index: 1;

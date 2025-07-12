@@ -1,7 +1,7 @@
 import { processModalAction } from "@modules/core/modal/shared/base/lib";
 import type { BaseModalAction } from "@modules/core/modal/shared/base/model";
+import type { FactionCardAction } from "@modules/faction/shared/faction-card";
 import { useAppDispatch } from "@shared/lib";
-import type { FactionCardAction } from "@widgets/investigator/faction/faction-card";
 import { useMemo } from "react";
 
 export function useFactionModalActions<Action extends BaseModalAction>(

@@ -7,7 +7,7 @@ type Options = Omit<PickPartial<BaseModalAction, "title">, "close" | "id">;
 export const createCancelModalAction = (
 	options: Options = {},
 ): CancelModalAction => ({
-	icon: "close",
+	icon: "dismiss",
 	title: "Cancel",
 	...options,
 	id: cancelModalActionId,

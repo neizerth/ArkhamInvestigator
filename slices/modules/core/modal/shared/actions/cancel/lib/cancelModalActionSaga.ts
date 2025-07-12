@@ -1,4 +1,3 @@
-// TODO
 import {
 	type ProcessModalActionPayload,
 	closeModal,
