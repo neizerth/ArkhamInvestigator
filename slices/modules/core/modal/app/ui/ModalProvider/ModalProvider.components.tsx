@@ -1,7 +1,7 @@
-import { FactionModal } from "@modules/core/modal/shared/base/ui";
 import styled from "styled-components/native";
+import { ActiveModal } from "../ActiveModal";
 
-export const Modal: typeof FactionModal = styled(FactionModal)`
+export const Modal: typeof ActiveModal = styled(ActiveModal)`
   z-index: 1000;
   position: absolute;
   left: 0;
