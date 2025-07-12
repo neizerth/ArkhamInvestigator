@@ -1,2 +1,2 @@
 export * from "./openResetBoardWarning";
-export * from "./openResetBoardWarningSaga";
+export * from "./sagas";
