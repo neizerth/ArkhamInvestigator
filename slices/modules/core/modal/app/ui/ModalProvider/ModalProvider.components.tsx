@@ -1,4 +1,4 @@
-import { FactionModal } from "@modules/core/modal/widgets/faction-modal";
+import { FactionModal } from "@modules/core/modal/shared/base/ui";
 import styled from "styled-components/native";
 
 export const Modal: typeof FactionModal = styled(FactionModal)`
