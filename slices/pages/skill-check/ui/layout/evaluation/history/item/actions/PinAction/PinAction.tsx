@@ -9,13 +9,11 @@ import * as C from "./PinAction.components";
 
 export type PinActionProps = Omit<ActionProps, "icon"> & {
 	itemId: string;
-	onPin?: () => void;
 };
 
 export const PinAction = ({
 	itemId,
 	onPress: onPressProp,
-	onPin,
 	...props
 }: PinActionProps) => {
 	const dispatch = useAppDispatch();

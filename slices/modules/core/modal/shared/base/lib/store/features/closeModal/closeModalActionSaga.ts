@@ -7,13 +7,13 @@ const filterAction = (action: unknown) => {
 		return false;
 	}
 
-	const { modalType, modalAction } = action.payload;
+	const { modalAction } = action.payload;
 
 	if (!modalAction.close) {
 		return false;
 	}
 
-	return modalType !== "prompt";
+	return true;
 };
 
 function* worker() {

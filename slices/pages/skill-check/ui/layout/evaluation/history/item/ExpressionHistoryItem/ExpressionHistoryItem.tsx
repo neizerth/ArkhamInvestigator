@@ -50,7 +50,7 @@ export const ExpressionHistoryItem = ({
 				};
 			});
 			return (
-				<C.RightActions itemId={itemId} style={style} onNameChange={close} />
+				<C.RightActions itemId={itemId} style={style} onRenameStart={close} />
 			);
 		},
 		[itemId, close],

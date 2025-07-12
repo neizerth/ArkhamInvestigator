@@ -3,10 +3,7 @@ import {
 	skillCheckItemChangeModalActionId as actionId,
 } from "@modules/board/skill-check/entities/config";
 import type { SkillCheckConfirmPayload } from "@modules/board/skill-check/entities/model";
-import {
-	setSkillCheckHistoryItemTitle as setTitle,
-	toggleSkillCheckHistoryItemPin as togglePin,
-} from "@modules/board/skill-check/shared/lib";
+import { updateSkillCheckHistoryItem as updateItem } from "@modules/board/skill-check/shared/lib";
 import { createPromptModalActionFilter } from "@modules/core/modal/shared/prompt/lib";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { put, takeEvery } from "redux-saga/effects";
@@ -31,17 +28,11 @@ function* worker({ payload }: Action) {
 	const { boardId, itemId } = data;
 
 	yield put(
-		setTitle({
+		updateItem({
 			boardId,
 			id: itemId,
 			title: value,
-		}),
-	);
-
-	yield put(
-		togglePin({
-			boardId,
-			id: itemId,
+			pinned: true,
 		}),
 	);
 }

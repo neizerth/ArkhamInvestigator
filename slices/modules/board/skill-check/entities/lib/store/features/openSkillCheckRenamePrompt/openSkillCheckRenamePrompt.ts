@@ -7,7 +7,7 @@ import {
 
 export type Payload = Omit<OpenSkillCheckPromptPayload, "id">;
 
-export const openSkillCheckItemTitlePrompt =
+export const openSkillCheckRenamePrompt =
 	(payload: Payload): AppThunk =>
 	(dispatch) =>
 		dispatch(

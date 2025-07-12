@@ -10,10 +10,11 @@ import type { AppThunk } from "@shared/model";
 type Payload = PropsWithBoardId & {
 	id: string;
 	title?: string;
+	pinned?: boolean;
 };
 
-export const setSkillCheckHistoryItemTitle =
-	({ boardId, id, title }: Payload): AppThunk =>
+export const updateSkillCheckHistoryItem =
+	({ boardId, id, ...update }: Payload): AppThunk =>
 	(dispatch, getState) => {
 		const state = getState();
 		const board = selectBoardById(boardId)(state);
@@ -28,7 +29,7 @@ export const setSkillCheckHistoryItemTitle =
 			if (item.id === id) {
 				return {
 					...item,
-					title,
+					...update,
 				};
 			}
 
@@ -44,6 +45,6 @@ export const setSkillCheckHistoryItemTitle =
 		);
 	};
 
-export const setCurrentSkillCheckHistoryItemTitle = withCurrentPayload(
-	setSkillCheckHistoryItemTitle,
+export const updateCurrentSkillCheckHistoryItem = withCurrentPayload(
+	updateSkillCheckHistoryItem,
 );

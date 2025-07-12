@@ -21,7 +21,7 @@ function* worker({ payload }: ReturnType<typeof openSkillCheckPrompt>) {
 		return;
 	}
 
-	const defaultValue = item.title || "New Name";
+	const defaultValue = item.title;
 
 	yield put(
 		openBoardModal({
@@ -31,12 +31,14 @@ function* worker({ payload }: ReturnType<typeof openSkillCheckPrompt>) {
 			data: {
 				title: "New Name",
 				defaultValue,
+				placeholder: "New Name",
 				actions: [
 					createCancelModalAction(),
 					createConfirmModalAction({
 						id: skillCheckItemChangeModalActionId,
 						data: {
 							itemId,
+							boardId,
 						},
 					}),
 				],

@@ -18,7 +18,7 @@ export const processModalAction = createAction<
 
 export type ModalActionProcessedPayload<
 	Action extends BaseModalAction,
-	Data extends BaseModalData<Action>,
+	Data extends BaseModalData<Action> = BaseModalData<Action>,
 > = ProcessModalActionPayload<Action> & {
 	modalId: string;
 	modalType: ModalType;

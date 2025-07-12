@@ -22,7 +22,8 @@ export function Prompt<A extends BaseModalAction, D extends PromptModalData<A>>(
 	const dispatch = useAppDispatch();
 	const { t } = useTranslation();
 	const { data } = props;
-	const { defaultValue } = data;
+	const defaultValue = data.defaultValue && t(data.defaultValue);
+	const placeholder = data.placeholder && t(data.placeholder);
 
 	const text = data.text && t(data.text);
 
@@ -37,7 +38,12 @@ export function Prompt<A extends BaseModalAction, D extends PromptModalData<A>>(
 	return (
 		<C.Container {...props}>
 			{text && <C.Text value={text} />}
-			<C.Input defaultValue={defaultValue} onChange={onChange} autoFocus />
+			<C.Input
+				placeholder={placeholder}
+				defaultValue={defaultValue}
+				onChange={onChange}
+				autoFocus
+			/>
 		</C.Container>
 	);
 }
