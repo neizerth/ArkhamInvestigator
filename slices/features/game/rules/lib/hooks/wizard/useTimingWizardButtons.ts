@@ -1,16 +1,16 @@
 import { useAppTranslation } from "@modules/core/i18n/shared/lib";
 import { useAppSelector } from "@shared/lib";
 import {
+	selectCurrentTimingWizardStep,
 	selectNextTimingWizardStep,
 	selectPrevTimingWizardStep,
-	selectTimingWizardStep,
 } from "../../store";
 import { usePhaseStepName } from "../usePhaseStepName";
 
 export const useTimingWizardButtons = () => {
 	const { t } = useAppTranslation();
 
-	const step = useAppSelector(selectTimingWizardStep);
+	const step = useAppSelector(selectCurrentTimingWizardStep);
 	const prevStep = useAppSelector(selectPrevTimingWizardStep);
 	const nextStep = useAppSelector(selectNextTimingWizardStep);
 

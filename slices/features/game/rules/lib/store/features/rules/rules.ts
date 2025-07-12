@@ -9,7 +9,6 @@ export type RulesState = {
 	openTimingPhases?: number[];
 	timingWizardStepIndex: number | null;
 	timingWizardPhaseId: TimingPhaseId | null;
-	timingWizardActive: boolean;
 };
 
 const initialState: RulesState = {
@@ -17,7 +16,6 @@ const initialState: RulesState = {
 	openTimingPhases: [],
 	timingWizardStepIndex: null,
 	timingWizardPhaseId: null,
-	timingWizardActive: false,
 };
 
 const state = createSliceState(initialState);
@@ -35,7 +33,6 @@ export const {
 	setRules,
 	setOpenTimingPhases,
 	setTimingWizardStepIndex,
-	setTimingWizardActive,
 	setTimingWizardPhaseId,
 
 	openTimingPhase,
@@ -47,7 +44,6 @@ export const {
 	selectRules,
 	selectOpenTimingPhases,
 	selectTimingWizardStepIndex,
-	selectTimingWizardActive,
 	selectTimingWizardPhaseId,
 } = rules.selectors;
 

@@ -1,4 +1,4 @@
-import type { TimingPhase } from "../../../../../../../model";
+import type { TimingPhase } from "../../../../../../model";
 
 type Options = {
 	index: number;
