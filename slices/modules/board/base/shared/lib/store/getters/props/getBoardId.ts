@@ -1,15 +1,10 @@
-import type { PropsWithBoardId } from "@modules/board/base/shared/model";
-import type { BoardState } from "../../board";
-import { getBoardProp } from "./getBoardProp";
+import { type GetBoardPropOptions, getBoardProp } from "./getBoardProp";
 
-type Options = {
-	state: BoardState;
-} & PropsWithBoardId;
+type Options = Omit<GetBoardPropOptions<"id">, "prop">;
 
-export const getBoardId = ({ state, boardId }: Options) => {
+export const getBoardId = (options: Options) => {
 	return getBoardProp({
-		state,
-		boardId,
+		...options,
 		prop: "id",
 	});
 };

@@ -8,7 +8,7 @@ export const handleSetBoardProp = <K extends BoardKey>(
 	{ boardId, prop, value }: SetBoardPropPayload<K>,
 ) => {
 	const board = getBoardById({
-		state,
+		...state,
 		boardId,
 	});
 

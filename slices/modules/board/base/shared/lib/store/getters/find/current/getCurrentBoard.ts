@@ -1,11 +1,13 @@
-import type { BoardState } from "../../../board";
+import type { InvestigatorBoard } from "@modules/board/base/shared/model";
 
 type Options = {
-	state: Pick<BoardState, "investigatorBoards" | "currentInvestigatorIndex">;
+	investigatorBoards: InvestigatorBoard[];
+	currentInvestigatorIndex: number | null;
 };
-export const getCurrentBoard = ({ state }: Options) => {
-	const { investigatorBoards, currentInvestigatorIndex } = state;
-
+export const getCurrentBoard = ({
+	investigatorBoards,
+	currentInvestigatorIndex,
+}: Options) => {
 	if (typeof currentInvestigatorIndex !== "number") {
 		return;
 	}

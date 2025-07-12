@@ -12,7 +12,7 @@ export const handleSetBoardValuePart = <K extends Key>(
 	{ boardId, value, type }: SetBoardValuePartPayload<K>,
 ) => {
 	const board = getBoardById({
-		state,
+		...state,
 		boardId,
 	});
 

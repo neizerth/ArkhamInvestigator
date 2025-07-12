@@ -1,21 +1,24 @@
-import type { BoardId } from "@modules/board/base/shared/model";
+import type {
+	BoardId,
+	InvestigatorBoard,
+} from "@modules/board/base/shared/model";
 import { whereId } from "@shared/lib/util";
 import { createFallbackBoard } from "../../../fallback/createFallbackBoard";
-import type { BoardState } from "../../board";
 import { getCurrentBoard } from "./current";
 
 export type GetBoardByIdOptions = {
-	state: Pick<BoardState, "investigatorBoards" | "currentInvestigatorIndex">;
+	investigatorBoards: InvestigatorBoard[];
+	currentInvestigatorIndex: number | null;
 	boardId: BoardId;
 };
 
 const fallbackBoard = createFallbackBoard();
 
-export const getBoardById = ({ state, boardId }: GetBoardByIdOptions) => {
-	const { investigatorBoards } = state;
+export const getBoardById = (options: GetBoardByIdOptions) => {
+	const { boardId, investigatorBoards } = options;
 
 	if (boardId === "current") {
-		return getCurrentBoard({ state }) || fallbackBoard;
+		return getCurrentBoard(options) || fallbackBoard;
 	}
 	const board = investigatorBoards.find(whereId(boardId));
 

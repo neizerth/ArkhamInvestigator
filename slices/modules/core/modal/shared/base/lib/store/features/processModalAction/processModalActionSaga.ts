@@ -26,6 +26,6 @@ function* worker<
 	);
 }
 
-export function* closeModalActionSaga() {
+export function* processModalActionSaga() {
 	yield takeEvery(processModalAction.match, worker);
 }
