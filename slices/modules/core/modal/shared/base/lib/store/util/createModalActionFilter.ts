@@ -6,19 +6,19 @@ import {
 } from "../features";
 
 type Options = {
-	id: string;
+	ids: string[];
 	modalId?: string;
 };
 
 export type CreateModalActionFilterAction<
 	Action extends BaseModalAction,
-	Data extends BaseModalData<Action>,
+	Data extends BaseModalData<Action> = BaseModalData<Action>,
 > = PayloadAction<ModalActionProcessedPayload<Action, Data>>;
 
 export function createModalActionFilter<
 	Action extends BaseModalAction,
 	Data extends BaseModalData<Action>,
->({ id, modalId }: Options) {
+>({ ids, modalId }: Options) {
 	return (
 		action: unknown,
 	): action is CreateModalActionFilterAction<Action, Data> => {
@@ -32,6 +32,6 @@ export function createModalActionFilter<
 			return false;
 		}
 
-		return modalAction.id === id;
+		return ids.includes(modalAction.id);
 	};
 }

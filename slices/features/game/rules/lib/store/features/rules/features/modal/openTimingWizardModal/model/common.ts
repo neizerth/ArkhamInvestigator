@@ -8,6 +8,7 @@ import type {
 export type TimingWizardModalAction = CustomModalAction & {
 	phaseId: TimingPhaseId;
 	step?: TimingPhaseStep;
+	prevStep: TimingPhaseStep;
 };
 
 export type TimingWizardModalData = BaseModalData<TimingWizardModalAction>;

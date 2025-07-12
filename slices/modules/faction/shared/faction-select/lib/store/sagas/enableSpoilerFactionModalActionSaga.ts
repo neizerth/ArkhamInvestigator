@@ -5,7 +5,7 @@ import { setFactionFilter } from "@shared/lib";
 import { put, takeEvery } from "redux-saga/effects";
 
 const filterAction = createModalActionFilter({
-	id: actionId,
+	ids: [actionId],
 });
 
 function* worker() {

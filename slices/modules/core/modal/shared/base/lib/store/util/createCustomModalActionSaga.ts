@@ -10,7 +10,7 @@ type Options = {
 export const createCustomModalActionSaga = (options: Options) => {
 	const { actionId, name, worker } = options;
 	const filterAction = createModalActionFilter({
-		id: actionId,
+		ids: [actionId],
 	});
 
 	function* customModalActionSaga() {
