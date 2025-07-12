@@ -10,7 +10,7 @@ type Options = {
 	modalId?: string;
 };
 
-type CreateModalActionFilterAction<
+export type CreateModalActionFilterAction<
 	Action extends BaseModalAction,
 	Data extends BaseModalData<Action>,
 > = PayloadAction<ModalActionProcessedPayload<Action, Data>>;

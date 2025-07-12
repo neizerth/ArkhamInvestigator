@@ -6,9 +6,10 @@ import { enableSpoilerFactionModalActionId } from "../../../config";
 import { openSpoilerWarning } from "../actions";
 
 function* worker() {
+	console.log("open spoil!");
 	yield put(
 		openConfirm({
-			id: "faction-select-spoiler-alert",
+			id: "faction-select-spoiler-warning",
 			data: {
 				title: "Spoiler Alert",
 				text: "modal.spoiler.message",

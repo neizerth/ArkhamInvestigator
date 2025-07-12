@@ -1,6 +1,7 @@
 import { spawn } from "redux-saga/effects";
 import { boardSagas } from "./board";
 import { chaosBagSaga } from "./chaosBag";
+import { factionSaga } from "./faction";
 import { mechanicsSaga } from "./mechanics";
 import { modalSaga } from "./modal";
 import { notificationsSaga } from "./notifications";
@@ -13,4 +14,5 @@ export function* modulesSaga() {
 	yield spawn(mechanicsSaga);
 	yield spawn(notificationsSaga);
 	yield spawn(modalSaga);
+	yield spawn(factionSaga);
 }
