@@ -12,7 +12,11 @@ export const Card: typeof FactionCardMemo = styled(FactionCardMemo)`
 export const Container: typeof KeyboardAvoidingView = styled(
 	KeyboardAvoidingView,
 )`
-
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
   justify-content: center;
   align-items: center;
   background: rgba(0, 0, 0, 0.5);

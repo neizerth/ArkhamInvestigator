@@ -1,6 +1,6 @@
 import { GameText } from "@entities/game-text";
 import { color, font } from "@shared/config";
-import { TextInput } from "react-native-gesture-handler";
+import { Input as TextInput } from "@shared/ui";
 import styled from "styled-components/native";
 import { FactionModal } from "../../../base/ui";
 

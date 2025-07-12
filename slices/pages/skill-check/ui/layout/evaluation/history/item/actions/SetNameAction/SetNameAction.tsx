@@ -1,4 +1,4 @@
-import { openSkillCheckItemTitlePrompt } from "@modules/board/skill-check/entities/lib/store/features/openSkillCheckItemTitlePrompt";
+import { openSkillCheckRenamePrompt } from "@modules/board/skill-check/entities/lib";
 import { useAppDispatch } from "@shared/lib";
 import { memo, useCallback } from "react";
 import type { GestureResponderEvent } from "react-native";
@@ -7,13 +7,11 @@ import * as C from "./SetNameAction.components";
 
 export type SetNameActionProps = Omit<ActionProps, "icon"> & {
 	itemId: string;
-	onChange?: () => void;
 };
 
 export const SetNameAction = ({
 	itemId,
 	onPress: onPressProp,
-	onChange,
 	...props
 }: SetNameActionProps) => {
 	const dispatch = useAppDispatch();
@@ -21,7 +19,7 @@ export const SetNameAction = ({
 	const onPress = useCallback(
 		(event: GestureResponderEvent) => {
 			dispatch(
-				openSkillCheckItemTitlePrompt({
+				openSkillCheckRenamePrompt({
 					itemId,
 					boardId: "current",
 				}),

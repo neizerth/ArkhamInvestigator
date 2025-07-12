@@ -12,8 +12,8 @@ export const createConfirmModalAction = (
 	title: "Okay",
 	close: true,
 	icon: "check",
+	data: null,
 	...options,
 	type: "confirm",
 	primary: true,
-	data: null,
 });
