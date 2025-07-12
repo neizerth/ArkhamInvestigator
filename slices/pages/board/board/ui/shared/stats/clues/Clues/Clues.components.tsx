@@ -39,7 +39,7 @@ type LockProps = IconButtonProps & {
 export const Lock: FC<LockProps> = styled(IconButton).attrs(
 	({ enabled }: LockProps) => ({
 		iconStyle: {
-			color: enabled ? "rgb(86, 122, 45)" : color.dark10,
+			color: enabled ? "rgba(86, 122, 45, 0.8)" : "rgba(255, 255, 255, 0.4)",
 			fontSize: 24,
 		},
 	}),
@@ -51,5 +51,5 @@ export const Lock: FC<LockProps> = styled(IconButton).attrs(
   top: -52px;
 	width: 50px;
 	align-items: flex-start;
-	filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.5));
+	filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.3));
 `;

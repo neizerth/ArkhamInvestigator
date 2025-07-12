@@ -24,6 +24,7 @@ function* worker() {
 				text: "app.outdated.text",
 				actions: [
 					createFollowURLModalAction({
+						icon: "download",
 						title: "Download now",
 						url: APP_DOWNLOAD_URL,
 					}),
