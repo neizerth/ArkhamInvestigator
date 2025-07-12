@@ -5,7 +5,7 @@ import { createConfirmModalAction } from "@modules/core/modal/shared/actions/con
 import { openConfirm } from "@modules/core/modal/shared/confirm/lib";
 import { getBoardFaction } from "@modules/mechanics/board/base/entities/lib";
 import { put, select, takeEvery } from "redux-saga/effects";
-import { openResetBoardWarning } from "./openResetBoardWarning";
+import { openResetBoardWarning } from "../openResetBoardWarning";
 
 function* worker({ payload }: ReturnType<typeof openResetBoardWarning>) {
 	const { boardId } = payload;

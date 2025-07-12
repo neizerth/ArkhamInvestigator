@@ -1,2 +1,2 @@
 export * from "./openNewGameWarning";
-export * from "./openNewGameWarningSaga";
+export * from "./sagas";
