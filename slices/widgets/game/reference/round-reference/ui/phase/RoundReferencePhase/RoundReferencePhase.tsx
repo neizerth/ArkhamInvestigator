@@ -26,12 +26,21 @@ export const RoundReferencePhase = ({
 	const toggle = open ? onClose : onOpen;
 
 	const play = useCallback(() => {
-		dispatch(startTimingWizard(phase.id));
+		dispatch(
+			startTimingWizard({
+				phaseId: phase.id,
+			}),
+		);
 	}, [dispatch, phase.id]);
 
 	const playStep = useCallback(
 		(stepIndex: number) => () => {
-			dispatch(startTimingWizard(phase.id, stepIndex));
+			dispatch(
+				startTimingWizard({
+					phaseId: phase.id,
+					stepIndex,
+				}),
+			);
 		},
 		[dispatch, phase.id],
 	);

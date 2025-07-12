@@ -1,6 +1,6 @@
 import { endChaosBagReveal } from "@modules/chaos-bag/reveal/base/shared/lib";
 import { restoreTranslation } from "@modules/core/i18n/shared/lib";
-import { closeModal } from "@modules/core/modal/shared/lib";
+import { closeModalInternal } from "@modules/core/modal/shared/base/lib";
 import { loadInvestigatorsMediaData, useAppDispatch } from "@shared/lib";
 import { useEffect } from "react";
 import { loadAppData } from "../store/actions/loadAppData";
@@ -17,6 +17,6 @@ export const useAppInit = () => {
 		dispatch(loadInvestigatorsMediaData());
 		dispatch(loadAppData());
 		dispatch(restoreTranslation());
-		dispatch(closeModal());
+		dispatch(closeModalInternal());
 	}, [dispatch]);
 };

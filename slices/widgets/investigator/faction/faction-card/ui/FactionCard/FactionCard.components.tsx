@@ -86,14 +86,14 @@ export const Actions: typeof Row = styled(Row)`
   gap: ${size.gap.default}px;
 `;
 
-export const Cancel: typeof Button = styled(Button)`
+export const Action: typeof Button = styled(Button)`
   background-color: ${color.dark15};
   flex: 1;
 `;
 
-type OKProps = ButtonProps & PropsWithFaction;
+type PrimaryActionProps = ButtonProps & PropsWithFaction;
 
-export const OK: FC<OKProps> = styled(Button)`
+export const PrimaryAction: FC<PrimaryActionProps> = styled(Button)`
   flex: 1;
   position: relative;
   overflow: hidden;

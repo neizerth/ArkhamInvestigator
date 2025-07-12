@@ -1,0 +1,25 @@
+import { processModalAction } from "@modules/core/modal/shared/base/lib";
+import type { BaseModalAction } from "@modules/core/modal/shared/base/model";
+import { useAppDispatch } from "@shared/lib";
+import type { FactionCardAction } from "@widgets/investigator/faction/faction-card";
+import { useMemo } from "react";
+
+export function useFactionModalActions<Action extends BaseModalAction>(
+	actions: Action[],
+) {
+	const dispatch = useAppDispatch();
+
+	return useMemo(() => {
+		return actions.map(
+			(modalAction): FactionCardAction => ({
+				...modalAction,
+				onPress: () =>
+					dispatch(
+						processModalAction({
+							modalAction,
+						}),
+					),
+			}),
+		);
+	}, [actions, dispatch]);
+}

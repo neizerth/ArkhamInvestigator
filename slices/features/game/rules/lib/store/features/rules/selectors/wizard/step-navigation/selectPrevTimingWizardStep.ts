@@ -1,13 +1,17 @@
 import { createSelector } from "@reduxjs/toolkit";
+import { getTimingWizardStep } from "../../../getters";
 import { selectTimingWizardPhase } from "../selectTimingWizardPhase";
 import { selectPrevTimingWizardStepIndex } from "./selectPrevTimingWizardStepIndex";
 
 export const selectPrevTimingWizardStep = createSelector(
 	[selectTimingWizardPhase, selectPrevTimingWizardStepIndex],
-	(phase, prevIndex) => {
-		if (!phase || typeof prevIndex !== "number") {
+	(phase, index) => {
+		if (!phase || typeof index !== "number") {
 			return;
 		}
-		return phase.steps[prevIndex];
+		return getTimingWizardStep({
+			index,
+			phase,
+		});
 	},
 );

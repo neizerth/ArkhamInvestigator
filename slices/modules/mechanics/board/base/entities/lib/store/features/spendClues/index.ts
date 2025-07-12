@@ -1,2 +1,2 @@
-export * from "./spendClues.action";
-export * from "./spendClues.saga";
+export * from "./spendClues";
+export * from "./spendCluesSaga";

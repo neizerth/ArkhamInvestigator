@@ -1,5 +1,4 @@
 import {
-	selectShowFactionSelect,
 	setBoardProp,
 	setShowFactionSelect,
 } from "@modules/board/base/shared/lib";
@@ -42,7 +41,7 @@ export const FactionSelect = (props: FactionSelectProps) => {
 	);
 
 	return (
-		<C.Modal {...props} selector={selectShowFactionSelect} onClose={hide}>
+		<C.Modal {...props} id="faction-select" onClose={hide}>
 			{factions.map((faction) => (
 				<C.Button
 					key={faction}

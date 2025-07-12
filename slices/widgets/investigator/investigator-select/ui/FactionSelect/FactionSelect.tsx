@@ -1,10 +1,10 @@
 import { setFactionFilter, useAppDispatch } from "@shared/lib";
 import type { FactionFilterType } from "@shared/model";
+import { useCallback } from "react";
 import {
 	FactionSelect as Select,
 	type FactionSelectProps as SelectProps,
-} from "@widgets/investigator/faction/faction-select";
-import { useCallback } from "react";
+} from "../../../faction/faction-select";
 
 export type FactionSelectProps = SelectProps;
 

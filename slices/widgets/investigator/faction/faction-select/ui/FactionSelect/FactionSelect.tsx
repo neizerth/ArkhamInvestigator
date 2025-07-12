@@ -1,9 +1,9 @@
-import { useAppTranslation } from "@modules/core/i18n/shared/lib";
-import { useModal } from "@modules/core/modal/shared/lib";
+import { useAppDispatch } from "@shared/lib";
 import type { Faction, FactionFilterType } from "@shared/model";
 import { useCallback } from "react";
 import type { ViewProps } from "react-native";
 import { FACTION_SELECT_VALUES } from "../../config";
+import { openSpoilerWarning } from "../../lib";
 import * as C from "./FactionSelect.components";
 
 export type FactionSelectValue = Faction | "spoiler";
@@ -20,20 +20,7 @@ export const FactionSelect = ({
 	onChange,
 	...props
 }: FactionSelectProps) => {
-	const { t } = useAppTranslation();
-	const [showSpilerAlert] = useModal({
-		id: "faction-select-spoiler-alert",
-		data: {
-			contentType: "text",
-			type: "faction",
-			faction: "neutral",
-			title: t`Spoiler Alert`,
-			text: t`modal.spoiler.message`,
-			okText: t`Yes`,
-			cancelText: t`Cancel`,
-		},
-		onOk: () => onChange?.("spoiler"),
-	});
+	const dispatch = useAppDispatch();
 
 	const onPress = useCallback(
 		(item: FactionFilterType) => () => {
@@ -44,12 +31,12 @@ export const FactionSelect = ({
 				return false;
 			}
 			if (item === "spoiler") {
-				showSpilerAlert();
+				dispatch(openSpoilerWarning());
 				return;
 			}
 			onChange(item);
 		},
-		[value, onChange, showSpilerAlert],
+		[value, onChange, dispatch],
 	);
 
 	return (

@@ -2,8 +2,8 @@ import { createSelector } from "@reduxjs/toolkit";
 import {
 	selectCurrentSignatureGroup,
 	selectCurrentSignatureId,
-	whereId,
 } from "@shared/lib";
+import { whereId } from "@shared/lib/util";
 
 export const selectCurrentSignature = createSelector(
 	[selectCurrentSignatureGroup, selectCurrentSignatureId],

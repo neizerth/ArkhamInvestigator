@@ -1,13 +1,12 @@
 import { useAppTranslation } from "@modules/core/i18n/shared/lib";
 import {
 	reduceInvestigatorSettings,
-	safeDecrement,
-	safeIncrement,
 	selectCurrentSignatureGroup,
 	selectInvestigatorSettingsProp,
 	useAppDispatch,
 	useAppSelector,
 } from "@shared/lib";
+import { safeDecrement, safeIncrement } from "@shared/lib/util";
 import type { InvestigatorSignatureGroup } from "arkham-investigator-data";
 import { useCallback } from "react";
 import type { ViewProps } from "react-native";

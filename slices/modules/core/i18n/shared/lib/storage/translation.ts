@@ -1,4 +1,4 @@
-import { storage } from "@features/storage";
+import { storage } from "@modules/core/storage/shared";
 import type { Translation } from "../../model";
 
 const key = "118n.translations";

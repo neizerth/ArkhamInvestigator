@@ -67,6 +67,8 @@ export const InvestigatorDetailSelect = () => {
 	const formattedName = formatGameText(name);
 	const formattedSubname = formatGameText(subname);
 
+	const okText = replaceInvestigator ? t`Continue` : t`Okay`;
+
 	return (
 		<C.Container>
 			<C.Outside onPress={cancel} />
@@ -77,10 +79,21 @@ export const InvestigatorDetailSelect = () => {
 					title={formattedName}
 					subtitle={formattedSubname}
 					onClose={cancel}
-					onOk={select}
-					onCancel={cancel}
-					okText={replaceInvestigator ? t`Continue` : t`Okay`}
-					cancelText={t`Cancel`}
+					actions={[
+						{
+							id: "dismiss",
+							title: "Cancel",
+							icon: "dismiss",
+							onPress: cancel,
+						},
+						{
+							id: "ok",
+							icon: "check",
+							primary: true,
+							title: okText,
+							onPress: select,
+						},
+					]}
 				>
 					<C.Sections>
 						<InvestigatorDescription />

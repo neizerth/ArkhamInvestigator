@@ -11,11 +11,11 @@ export const routes = {
 	selectInvestigatorDetails: r("/select-investigators/details"),
 
 	board: r("/board"),
-	skillCheck: r("/board/skill-check"),
 	boardHelp: r("/board/help"),
-	replaceInvestigator: r("/board/replace-investigator"),
-	overview: r("/board/overview"),
-	roundReference: r("/board/round-reference"),
+	skillCheck: r("/board/skill-check"),
+	replaceInvestigator: r("/board/modal/replace-investigator"),
+	overview: r("/board/modal/overview"),
+	roundReference: r("/board/modal/round-reference"),
 
 	chaosBag: r("/chaos-bag"),
 	chaosBagPreview: r("/chaos-bag/preview"),

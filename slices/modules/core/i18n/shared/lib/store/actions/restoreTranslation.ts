@@ -1,4 +1,4 @@
-import type { AppThunkCreator } from "@shared/model";
+import type { AppThunk } from "@shared/model";
 import {
 	DEFAULT_LANGUAGE,
 	I18N_NAMESAPCE,
@@ -9,8 +9,8 @@ import { loadStoreTranslation } from "../../storage/translation";
 import { selectLanguage } from "../i18n";
 import { loadTranslation } from "./translations/loadTranslation";
 
-export const restoreTranslation: AppThunkCreator =
-	() => async (dispatch, getState) => {
+export const restoreTranslation =
+	(): AppThunk => async (dispatch, getState) => {
 		const state = getState();
 		const language = selectLanguage(state);
 

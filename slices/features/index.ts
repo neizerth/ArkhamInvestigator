@@ -1,1 +1,1 @@
-export * from "./storage";
+export * from "../modules/core/storage/shared";
