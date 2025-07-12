@@ -82,7 +82,7 @@ export const InvestigatorDetailSelect = () => {
 					actions={[
 						{
 							id: "dismiss",
-							title: "Cancel",
+							title: t`Cancel`,
 							icon: "dismiss",
 							onPress: cancel,
 						},
