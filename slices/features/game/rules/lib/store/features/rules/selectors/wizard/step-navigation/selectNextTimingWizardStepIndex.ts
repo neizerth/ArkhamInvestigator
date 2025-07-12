@@ -1,4 +1,5 @@
 import { createSelector } from "@reduxjs/toolkit";
+import { inc } from "ramda";
 import { selectTimingWizardStepIndex } from "../../../rules";
 
 export const selectNextTimingWizardStepIndex = createSelector(
@@ -8,7 +9,6 @@ export const selectNextTimingWizardStepIndex = createSelector(
 			return;
 		}
 
-		const nextIndex = stepIndex + 1;
-		return nextIndex;
+		return inc(stepIndex);
 	},
 );

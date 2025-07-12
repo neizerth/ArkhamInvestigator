@@ -1,18 +1,34 @@
 import { processModalAction } from "@modules/core/modal/shared/base/lib";
-import type { BaseModalAction } from "@modules/core/modal/shared/base/model";
+import type {
+	BaseModalAction,
+	BaseModalActionTitle,
+} from "@modules/core/modal/shared/base/model";
 import type { FactionCardAction } from "@modules/faction/shared/faction-card";
 import { useAppDispatch } from "@shared/lib";
-import { useMemo } from "react";
+import { useCallback, useMemo } from "react";
+import { useTranslation } from "react-i18next";
 
 export function useFactionModalActions<Action extends BaseModalAction>(
 	actions: Action[],
 ) {
 	const dispatch = useAppDispatch();
+	const { t } = useTranslation();
+
+	const getTitle = useCallback(
+		(title: BaseModalActionTitle) => {
+			if (typeof title === "string") {
+				return title;
+			}
+			return t(title.i18nKey, title.data);
+		},
+		[t],
+	);
 
 	return useMemo(() => {
 		return actions.map(
 			(modalAction): FactionCardAction => ({
 				...modalAction,
+				title: getTitle(modalAction.title),
 				onPress: () =>
 					dispatch(
 						processModalAction({
@@ -21,5 +37,5 @@ export function useFactionModalActions<Action extends BaseModalAction>(
 					),
 			}),
 		);
-	}, [actions, dispatch]);
+	}, [actions, dispatch, getTitle]);
 }

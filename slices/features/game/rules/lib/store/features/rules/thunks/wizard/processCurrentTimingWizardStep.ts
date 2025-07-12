@@ -4,12 +4,12 @@ import {
 	placeDoomOnAgenda,
 	resetUpkeepAllInvestigatorActions,
 } from "../../../../../../../phase";
-import { selectTimingWizardStep } from "../../selectors";
+import { selectCurrentTimingWizardStep } from "../../selectors";
 
 export const processCurrentTimingWizardStep =
 	(): AppThunk => (dispatch, getState) => {
 		const state = getState();
-		const step = selectTimingWizardStep(state);
+		const step = selectCurrentTimingWizardStep(state);
 
 		if (!step) {
 			return;

@@ -1,5 +1,5 @@
 import { createSelector } from "@reduxjs/toolkit";
-import { getPrevTimingWizardStepIndex } from "../../../getters";
+import { dec } from "ramda";
 import { selectTimingWizardStepIndex } from "../../../rules";
 
 export const selectPrevTimingWizardStepIndex = createSelector(
@@ -9,6 +9,6 @@ export const selectPrevTimingWizardStepIndex = createSelector(
 			return;
 		}
 
-		return getPrevTimingWizardStepIndex(stepIndex);
+		return dec(stepIndex);
 	},
 );

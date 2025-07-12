@@ -1,2 +1,2 @@
 export * from "./getTimingWizardPhase";
-export * from "./steps";
+export * from "./getTimingWizardStep";

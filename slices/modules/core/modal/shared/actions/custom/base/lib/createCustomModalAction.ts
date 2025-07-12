@@ -1,13 +1,10 @@
 import type { CustomModalAction } from "../model";
 
-type Options = Omit<CustomModalAction, "type"> & {
-	url: string;
-};
+type Options<Action extends CustomModalAction> = Omit<Action, "type">;
 
-export const createCustomModalAction = ({
-	url,
-	...options
-}: Options): CustomModalAction => ({
+export const createCustomModalAction = <Action extends CustomModalAction>(
+	options: Options<Action>,
+): CustomModalAction => ({
 	...options,
 	type: "custom",
 });

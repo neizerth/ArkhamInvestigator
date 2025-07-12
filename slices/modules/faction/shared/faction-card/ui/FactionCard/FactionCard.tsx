@@ -14,7 +14,7 @@ export type FactionCardAction = {
 
 export type FactionCardProps = ViewProps &
 	PropsWithFaction & {
-		title?: string;
+		title: string;
 		subtitle?: string;
 		actions: FactionCardAction[];
 		onClose: () => void;
