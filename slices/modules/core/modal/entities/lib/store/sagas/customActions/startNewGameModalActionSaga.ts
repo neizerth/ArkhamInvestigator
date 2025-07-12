@@ -4,6 +4,6 @@ import { startNewGame } from "@shared/lib";
 
 export const startNewGameModalActionSaga = createCustomModalActionSaga({
 	type: "thunk",
-	actionId: ModalActionId.changeInvestigatorDetails,
+	actionId: ModalActionId.startNewGame,
 	actionCreator: startNewGame,
 });

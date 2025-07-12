@@ -24,6 +24,7 @@ export const createCustomModalActionSaga = (options: Options) => {
 	});
 
 	function* worker() {
+		console.log(options);
 		if (options.type === "action") {
 			yield put(options.actionCreator());
 			return;
