@@ -5,8 +5,9 @@ import {
 import {
 	selectBoardsCount,
 	selectCurrentBoardProp,
-	toggleFactionSelect,
 } from "@modules/board/base/shared/lib";
+import { CustomModalId } from "@modules/core/modal/entities/config";
+import { openCustomModal } from "@modules/core/modal/shared/base/lib";
 import {
 	selectCanChangeFaction,
 	selectCurrentFaction,
@@ -38,7 +39,11 @@ export const BoardHeader = (props: BoardHeaderProps) => {
 		if (!pressableTitle) {
 			return false;
 		}
-		dispatch(toggleFactionSelect());
+		dispatch(
+			openCustomModal({
+				id: CustomModalId.factionSelect,
+			}),
+		);
 	}, [dispatch, pressableTitle]);
 
 	const renderSkill = useCallback((props: RenderInvestigatorSkillItem) => {

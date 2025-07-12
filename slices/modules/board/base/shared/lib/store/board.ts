@@ -12,7 +12,6 @@ export type BoardState = {
 	endTurnStrict: boolean;
 	showDamageAndHorror: boolean;
 	showDamageAndHorrorEffects: boolean;
-	showFactionSelect: boolean;
 	pickerDecelerationType: PickerDecelerationType;
 	pickerIntervalMomentum: boolean;
 	trackXP: boolean;
@@ -42,7 +41,6 @@ const initialState: BoardState = {
 	investigatorBoards: [],
 	showDamageAndHorror: false,
 	showDamageAndHorrorEffects: false,
-	showFactionSelect: false,
 	pickerDecelerationType: false,
 	pickerIntervalMomentum: false,
 	trackXP: true,
@@ -81,7 +79,6 @@ export const {
 	setCurrentInvestigatorIndex,
 	setInvestigatorBoards,
 	setEndTurnStrict,
-	setShowFactionSelect,
 	setShowDamageAndHorrorEffects,
 	setPickerDecelerationType,
 	setPickerIntervalMomentum,
@@ -124,7 +121,6 @@ export const {
 	selectCurrentInvestigatorIndex,
 	selectInvestigatorBoards,
 	selectEndTurnStrict,
-	selectShowFactionSelect,
 	selectShowDamageAndHorrorEffects,
 	selectPickerDecelerationType,
 	selectPickerIntervalMomentum,

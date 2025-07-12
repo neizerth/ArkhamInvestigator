@@ -10,7 +10,7 @@ export type PromptConfirmedPayload<
 	modalId: string;
 	modalAction?: A;
 	value: string;
-	data: D;
+	data: D | null;
 };
 
 export const promptConfirmed = createAction<

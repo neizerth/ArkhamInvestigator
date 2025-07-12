@@ -29,7 +29,7 @@ export function FactionModal<
 		onClose?.();
 		dispatch(
 			closeModal({
-				source: "event",
+				source: "ui",
 			}),
 		);
 	}, [onClose, dispatch]);

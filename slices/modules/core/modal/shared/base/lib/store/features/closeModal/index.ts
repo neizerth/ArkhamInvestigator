@@ -1,2 +1,2 @@
 export * from "./closeModal";
-export * from "./closeModalSaga";
+export * from "./internal";

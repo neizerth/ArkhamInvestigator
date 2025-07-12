@@ -1,4 +1,4 @@
-import type { ModalHandler } from "../../../model";
+import type { ModalHandler } from "../../../../../model";
 
 export const handleCloseModalInternal: ModalHandler = (state) => {
 	state.modalId = null;

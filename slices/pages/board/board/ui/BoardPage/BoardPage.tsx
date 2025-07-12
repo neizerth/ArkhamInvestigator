@@ -10,8 +10,6 @@ export const BoardPage = () => {
 	const orientation = useScreenOrientation();
 	useStatusBar();
 
-	// useChangeInvestigatorAfterDefeat([InvesigatorCode.HankSamson]);
-
 	const [view, onLayout] = useLayoutSize(window);
 
 	const layout = getHeaderLayout(view);
