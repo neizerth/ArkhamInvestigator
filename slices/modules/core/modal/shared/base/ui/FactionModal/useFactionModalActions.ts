@@ -17,7 +17,7 @@ export function useFactionModalActions<Action extends BaseModalAction>(
 	const getTitle = useCallback(
 		(title: BaseModalActionTitle) => {
 			if (typeof title === "string") {
-				return title;
+				return t(title);
 			}
 			return t(title.i18nKey, title.data);
 		},

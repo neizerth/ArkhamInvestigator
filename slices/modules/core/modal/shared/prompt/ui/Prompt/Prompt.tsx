@@ -1,6 +1,7 @@
 import { useAppDispatch } from "@shared/lib";
 import type { Defined } from "@shared/model";
 import { useCallback } from "react";
+import { useTranslation } from "react-i18next";
 import type { TextInputProps } from "react-native";
 import { setModalTextValue } from "../../../base/lib";
 import type { BaseModalAction } from "../../../base/model";
@@ -19,7 +20,11 @@ export function Prompt<A extends BaseModalAction, D extends PromptModalData<A>>(
 	props: PromptProps<A, D>,
 ) {
 	const dispatch = useAppDispatch();
-	const { defaultValue, text } = props.data;
+	const { t } = useTranslation();
+	const { data } = props;
+	const { defaultValue } = data;
+
+	const text = data.text && t(data.text);
 
 	const onChange: TextChangeHandler = useCallback(
 		(event) => {
