@@ -10,7 +10,8 @@ type GetPhaseStepModalActionOptions = {
 	type: "prev" | "next";
 	phaseId: TimingPhaseId;
 	step?: TimingPhaseStep;
-	prevStep: TimingPhaseStep;
+	prevStep?: TimingPhaseStep;
+	nextStep?: TimingPhaseStep;
 };
 
 const actionIcon = {
@@ -22,6 +23,7 @@ export const getPhaseStepModalAction = ({
 	phaseId,
 	step,
 	prevStep,
+	nextStep,
 	type,
 }: GetPhaseStepModalActionOptions): ModalAction => {
 	const isStart = !step?.index;
@@ -34,6 +36,7 @@ export const getPhaseStepModalAction = ({
 		type: "custom" as const,
 		phaseId,
 		prevStep,
+		nextStep,
 	};
 
 	if (isStart) {
