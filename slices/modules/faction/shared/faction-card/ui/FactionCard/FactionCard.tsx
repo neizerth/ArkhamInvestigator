@@ -1,7 +1,7 @@
+import { useLayoutSize } from "@shared/lib";
 import type { PropsWithFaction } from "@shared/model/ui";
 import { Fragment, memo } from "react";
 import { type ViewProps, useWindowDimensions } from "react-native";
-import { useLayoutSize } from "../../../../../../shared/lib/hooks/ui/useLayoutSize";
 import * as C from "./FactionCard.components";
 
 export type FactionCardAction = {
@@ -16,7 +16,6 @@ export type FactionCardProps = ViewProps &
 	PropsWithFaction & {
 		title?: string;
 		subtitle?: string;
-		okIcon?: string;
 		actions: FactionCardAction[];
 		onClose: () => void;
 	};
@@ -30,13 +29,7 @@ export const FactionCard = ({
 	children,
 	actions,
 	onClose,
-	// onOk,
-	// onCancel,
 	onTouchCancel,
-	// okText,
-	// cancelText,
-	// cancelIcon = "dismiss",
-	okIcon = "check",
 	...props
 }: FactionCardProps) => {
 	const window = useWindowDimensions();

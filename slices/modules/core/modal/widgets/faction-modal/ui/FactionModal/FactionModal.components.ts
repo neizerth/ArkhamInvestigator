@@ -1,7 +1,7 @@
 import { GameText } from "@entities/game-text";
+import { FactionCardMemo } from "@modules/faction/shared/faction-card";
 import { color, font, size } from "@shared/config";
 import { Outside as BaseOutside, Input as TextInput } from "@shared/ui";
-import { FactionCardMemo } from "@widgets/investigator/faction/faction-card";
 import { KeyboardAvoidingView, View } from "react-native";
 import styled from "styled-components/native";
 
