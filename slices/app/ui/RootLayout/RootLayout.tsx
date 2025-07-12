@@ -31,8 +31,8 @@ export const RootLayout = ({ children }: PropsWithChildren) => {
 				<Stack.Screen name="chaos-bag/reference/edit" options={asModal} />
 				<Stack.Screen name="chaos-bag/fill" options={asModal} />
 
-				<Stack.Screen name="board/overview" options={asModal} />
-				<Stack.Screen name="board/round-reference" options={asModal} />
+				<Stack.Screen name="board/modal/overview" options={asModal} />
+				<Stack.Screen name="board/modal/round-reference" options={asModal} />
 			</Stack>
 			<StatusBar style="light" />
 			{children}

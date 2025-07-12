@@ -1,5 +1,5 @@
 import type { ChaosBagToken } from "@features/game/chaos-bag/model";
-import { idIncludes } from "@shared/lib";
+import { idIncludes } from "@shared/lib/util";
 import { reject } from "ramda";
 
 export type GetUnrevealedChaosTokensOptions = {
