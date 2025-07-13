@@ -6,7 +6,6 @@ import { FactionSelectButton } from "../FactionSelectButton";
 
 export const Content: typeof Row = styled(Row)`
   flex: 1;
-  width: 100%;
   justify-content: center;
   padding: 0px ${size.gap.medium}px;
   background-color: rgba(0, 0, 0, 0.5);

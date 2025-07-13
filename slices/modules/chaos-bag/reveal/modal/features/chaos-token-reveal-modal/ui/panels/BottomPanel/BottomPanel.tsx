@@ -13,7 +13,7 @@ export type BottomPanelProps = ViewProps;
 
 export const BottomPanel = ({ ...props }: BottomPanelProps) => {
 	const dispatch = useAppDispatch();
-	const canReveal = useAppSelector(selectCanRevealChaosTokens(1));
+	const { canReveal } = useAppSelector(selectCanRevealChaosTokens(1));
 
 	const returnTokens = useCallback(() => {
 		dispatch(returnAllChaosTokens());
