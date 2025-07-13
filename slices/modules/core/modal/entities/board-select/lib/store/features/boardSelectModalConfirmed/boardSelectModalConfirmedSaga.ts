@@ -6,37 +6,41 @@ import {
 } from "@modules/core/modal/shared/base/lib";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { put, select, takeEvery } from "redux-saga/effects";
-import { promptConfirmed } from "./promptConfirmed";
+import type { BoardSelectModalData } from "../../../../model";
+import { boardSelectModalConfirmed } from "./boardSelectModalConfirmed";
 
-type Payload = ModalActionProcessedPayload<ConfirmModalAction>;
+type Payload = ModalActionProcessedPayload<
+	ConfirmModalAction,
+	BoardSelectModalData<ConfirmModalAction>
+>;
 type Action = PayloadAction<Payload>;
 
-const filterAction = (action: unknown): action is Action => {
+const filterAction = (action: unknown) => {
 	if (!modalConfirmed.match(action)) {
 		return false;
 	}
 
 	const { payload } = action;
 
-	return payload.modalType === "prompt";
+	return payload.modalType === "board-select";
 };
 
 function* worker({ payload }: Action) {
 	const value: ReturnType<typeof selectModalValue> =
 		yield select(selectModalValue);
 
-	if (typeof value !== "string") {
+	if (typeof value !== "number") {
 		return;
 	}
 
 	yield put(
-		promptConfirmed({
+		boardSelectModalConfirmed({
 			...payload,
 			value,
 		}),
 	);
 }
 
-export function* confirmPromptSaga() {
+export function* boardSelectModalConfirmedSaga() {
 	yield takeEvery(filterAction, worker);
 }

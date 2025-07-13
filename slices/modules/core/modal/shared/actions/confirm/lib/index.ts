@@ -1,2 +1,2 @@
 export * from "./createConfirmModalAction";
-export * from "./isConfirmModalAction";
+export * from "./modalConfirmed";
