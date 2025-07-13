@@ -18,7 +18,7 @@ export const Modal = ({
 	return (
 		<C.Container {...props} type={type}>
 			<Outside onPress={onClose} />
-			<C.Content>{children}</C.Content>
+			{children}
 		</C.Container>
 	);
 };
