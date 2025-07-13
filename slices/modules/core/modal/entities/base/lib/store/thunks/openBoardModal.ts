@@ -4,28 +4,19 @@ import {
 	type OpenModalPayload,
 	openModal,
 } from "@modules/core/modal/shared/base/lib";
-import type {
-	BaseModalAction,
-	BaseModalData,
-} from "@modules/core/modal/shared/base/model";
 import { getBoardFaction } from "@modules/mechanics/board/base/entities/lib";
+import { isObject } from "@shared/lib/util";
 import type { AppThunk } from "@shared/model";
 
-type OpenBoardModalPayload<
-	Action extends BaseModalAction,
-	Data extends BaseModalData<Action>,
-> = OpenModalPayload<Action, Data> & PropsWithBoardId;
+type OpenBoardModalPayload = OpenModalPayload & PropsWithBoardId;
 
-export function openBoardModal<
-	Action extends BaseModalAction,
-	Data extends BaseModalData<Action>,
->(payload: OpenBoardModalPayload<Action, Data>): AppThunk {
+export function openBoardModal(payload: OpenBoardModalPayload): AppThunk {
 	return (dispatch, getState) => {
 		const { boardId } = payload;
 		const state = getState();
 		const board = selectBoardById(boardId)(state);
 
-		if (!isBoardExists(board)) {
+		if (!isBoardExists(board) || !isObject(payload.data)) {
 			return;
 		}
 

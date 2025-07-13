@@ -1,12 +1,8 @@
-import type {
-	BaseModalAction,
-	BaseModalData,
-	ModalType,
-} from "../../../base/model";
+import type { BaseModalAction, ModalType } from "../../../base/model";
 import type { PromptModalData } from "../../model";
 
 export const isPromptModalData = (
-	data: BaseModalData<unknown>,
+	data: unknown,
 	type: ModalType,
 ): data is PromptModalData<BaseModalAction> => {
 	return type === "prompt";

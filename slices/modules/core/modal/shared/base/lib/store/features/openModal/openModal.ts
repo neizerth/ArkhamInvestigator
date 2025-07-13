@@ -1,9 +1,5 @@
 import type { PayloadAction } from "@reduxjs/toolkit";
-import type {
-	BaseModalAction,
-	BaseModalData,
-	ModalDraft,
-} from "../../../../model";
+import type { ModalDraft } from "../../../../model";
 import {
 	type HandleOpenModalPayload,
 	handleOpenModal,
@@ -11,12 +7,9 @@ import {
 
 export type { HandleOpenModalPayload as OpenModalPayload };
 
-export function openModal<
-	Action extends BaseModalAction,
-	Data extends BaseModalData<Action>,
->(
+export function openModal(
 	state: ModalDraft,
-	{ payload }: PayloadAction<HandleOpenModalPayload<Action, Data>>,
+	{ payload }: PayloadAction<HandleOpenModalPayload>,
 ) {
 	handleOpenModal(state, payload);
 }
