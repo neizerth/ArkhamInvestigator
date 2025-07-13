@@ -1,9 +1,9 @@
-import { selectChaosBagTokenById } from "@modules/chaos-bag/base/entities/lib";
-import { removeChaosTokenById } from "@modules/chaos-bag/base/shared/lib";
+import {
+	removeChaosToken,
+	selectChaosBagTokenById,
+} from "@modules/chaos-bag/base/entities/lib";
 import { removeRevealedTokenId } from "@modules/chaos-bag/reveal/base/shared/lib";
 import { put, select, takeEvery } from "redux-saga/effects";
-import { canRemoveChaosToken } from "../../../../logic";
-import { chaosTokenRemoved } from "./chaosTokenRemoved";
 import { chaosTokenReturned, returnChaosToken } from "./returnChaosToken";
 
 function* worker({ payload }: ReturnType<typeof returnChaosToken>) {
@@ -18,19 +18,12 @@ function* worker({ payload }: ReturnType<typeof returnChaosToken>) {
 
 	yield put(removeRevealedTokenId(id));
 
-	if (canRemoveChaosToken(token)) {
-		yield put(
-			removeChaosTokenById({
-				id: token.id,
-			}),
-		);
-
-		yield put(
-			chaosTokenRemoved({
-				token,
-			}),
-		);
-	}
+	// TODO fix to id
+	yield put(
+		removeChaosToken({
+			type: token.type,
+		}),
+	);
 
 	yield put(
 		chaosTokenReturned({

@@ -1,5 +1,7 @@
-import type { ChaosBagToken } from "../../../model";
-import type { ChaosBagHandler } from "../../../model";
+import type {
+	ChaosBagHandler,
+	ChaosBagToken,
+} from "@modules/chaos-bag/base/shared/model";
 
 export const handleAddChaosTokenInternal: ChaosBagHandler<ChaosBagToken> = (
 	state,

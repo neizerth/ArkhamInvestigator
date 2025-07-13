@@ -1,5 +1,6 @@
+import type { ChaosTokenType } from "@features/game/chaos-bag/model";
+import type { ChaosBagHandler } from "@modules/chaos-bag/base/shared/model";
 import { ascend, propEq, reject } from "ramda";
-import type { ChaosBagHandler, ChaosTokenType } from "../../../model";
 
 export type HandleRemoveAllChaosTokensByTypePayload = {
 	type: ChaosTokenType;
