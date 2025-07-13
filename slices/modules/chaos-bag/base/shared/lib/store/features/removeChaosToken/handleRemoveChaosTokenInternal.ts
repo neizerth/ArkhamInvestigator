@@ -1,13 +1,13 @@
 import { whereId } from "@shared/lib/util";
 import { reject } from "ramda";
-import type { ChaosBagHandler } from "../../../model";
+import type { ChaosBagHandler } from "../../../../model";
 
-export type HandleRemoveChaosTokenByIdPayload = {
+export type HandleRemoveChaosTokenInternalPayload = {
 	id: string;
 };
 
-export const handleRemoveChaosTokenById: ChaosBagHandler<
-	HandleRemoveChaosTokenByIdPayload
+export const handleRemoveChaosTokenInternal: ChaosBagHandler<
+	HandleRemoveChaosTokenInternalPayload
 > = (state, { id }) => {
 	const token = state.contents.find(whereId(id));
 	if (!token) {

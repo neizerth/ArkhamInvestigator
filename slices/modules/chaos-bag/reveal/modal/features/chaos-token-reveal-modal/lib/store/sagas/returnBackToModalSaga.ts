@@ -3,7 +3,7 @@ import { CustomModalId } from "@modules/core/modal/entities/base/config";
 import { modalClosed, openModal } from "@modules/core/modal/shared/base/lib";
 import { put, select, takeEvery } from "redux-saga/effects";
 
-export function* worker() {
+function* worker() {
 	const count: ReturnType<typeof selectRevealedTokensCount> = yield select(
 		selectRevealedTokensCount,
 	);

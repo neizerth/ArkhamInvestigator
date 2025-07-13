@@ -1,4 +1,4 @@
-import { removeChaosTokenById } from "@modules/chaos-bag/base/shared/lib";
+import { removeChaosTokenInternal } from "@modules/chaos-bag/base/shared/lib";
 import { put, select, takeEvery } from "redux-saga/effects";
 import {
 	cantRemoveChaosToken,
@@ -31,7 +31,7 @@ function* worker({ payload }: ReturnType<typeof removeChaosToken>) {
 	const [token]: ReturnType<typeof tokenSelector> = yield select(tokenSelector);
 
 	yield put(
-		removeChaosTokenById({
+		removeChaosTokenInternal({
 			id: token.id,
 		}),
 	);

@@ -1,5 +1,5 @@
 import { whereId } from "@shared/lib/util";
-import type { ChaosBagHandler, ChaosBagTokenData } from "../../../model";
+import type { ChaosBagHandler, ChaosBagTokenData } from "../../../../model";
 
 export type HandleUpdateChaosTokenInternalPayload = {
 	id: string;
