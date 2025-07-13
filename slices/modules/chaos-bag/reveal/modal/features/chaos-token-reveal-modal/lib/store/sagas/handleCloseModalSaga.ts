@@ -3,18 +3,15 @@ import {
 	selectRevealedTokensCount,
 } from "@modules/chaos-bag/reveal/base/entities/lib";
 import { CustomModalId } from "@modules/core/modal/entities/base/config";
-import { closeModal } from "@modules/core/modal/shared/base/lib";
+import { modalClosed } from "@modules/core/modal/shared/base/lib";
 import { put, select, takeEvery } from "redux-saga/effects";
 
 const filterAction = (action: unknown) => {
-	if (!closeModal.match(action)) {
+	if (!modalClosed.match(action)) {
 		return false;
 	}
 
-	return (
-		action.payload.source === "backButton" &&
-		action.payload.id === CustomModalId.chaosTokenReveal
-	);
+	return action.payload.modalId === CustomModalId.chaosTokenReveal;
 };
 
 function* worker() {
@@ -24,14 +21,8 @@ function* worker() {
 	if (revealedCount > 0) {
 		yield put(returnAllChaosTokens());
 	}
-
-	yield put(
-		closeModal({
-			source: "effect",
-		}),
-	);
 }
 
-export function* handleBackButtonSaga() {
+export function* handleCloseModalSaga() {
 	yield takeEvery(filterAction, worker);
 }

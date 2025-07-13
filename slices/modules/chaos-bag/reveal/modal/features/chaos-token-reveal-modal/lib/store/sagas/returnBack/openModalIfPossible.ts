@@ -15,7 +15,6 @@ export function* openModalIfPossible() {
 	yield putResolve(
 		openModal({
 			id: CustomModalId.chaosTokenReveal,
-			closeFromBackButton: false,
 		}),
 	);
 }

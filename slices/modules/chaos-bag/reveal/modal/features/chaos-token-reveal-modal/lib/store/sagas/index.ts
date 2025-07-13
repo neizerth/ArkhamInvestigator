@@ -1,6 +1,6 @@
 import { fork } from "redux-saga/effects";
 import { closeModalEndChaosTokenRevealSaga } from "./closeModalEndChaosTokenRevealSaga";
-import { handleBackButtonSaga } from "./handleBackButtonSaga";
+import { handleCloseModalSaga } from "./handleCloseModalSaga";
 import { openModalSaga } from "./openModalSaga";
 import { returnBackSaga } from "./returnBack";
 
@@ -8,6 +8,6 @@ import { returnBackSaga } from "./returnBack";
 export function* chaosTokenRevealModalSaga() {
 	yield fork(returnBackSaga);
 	yield fork(closeModalEndChaosTokenRevealSaga);
-	yield fork(handleBackButtonSaga);
+	yield fork(handleCloseModalSaga);
 	yield fork(openModalSaga);
 }
