@@ -1,3 +1,3 @@
-export * from "./canRemoveChaosToken";
+export * from "./canRemoveChaosTokenFromBag";
 export * from "./canRemoveMultipleChaosTokens";
-export * from "./getChaosTokenCountCanBeRemoved";
+export * from "./getChaosTokenCountCanBeRemovedFromBag";

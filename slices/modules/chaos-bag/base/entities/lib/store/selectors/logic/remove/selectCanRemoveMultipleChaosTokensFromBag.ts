@@ -1,12 +1,17 @@
 import { selectChaosBagTokenCount } from "@modules/chaos-bag/base/shared/lib";
 import type { ChaosTokenType } from "@modules/chaos-bag/base/shared/model";
 import { createSelector } from "@reduxjs/toolkit";
-import { getChaosTokenCountCanBeRemoved } from "../../../../logic";
+import { canRemoveMultipleChaosTokensFromBag } from "../../../../logic";
 
-export const selectChaosTokenCountCanBeRemoved = (type: ChaosTokenType) =>
+type Options = {
+	type: ChaosTokenType;
+	count: number;
+};
+
+export const selectCanRemoveMultipleChaosTokensFromBag = (options: Options) =>
 	createSelector([selectChaosBagTokenCount], (tokenCount) =>
-		getChaosTokenCountCanBeRemoved({
-			type,
+		canRemoveMultipleChaosTokensFromBag({
+			...options,
 			tokenCount,
 		}),
 	);
