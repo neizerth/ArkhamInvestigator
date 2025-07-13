@@ -6,4 +6,5 @@ export const ModalId = {
 
 export const CustomModalId = {
 	factionSelect: "faction-select",
+	chaosTokenReveal: "chaos-token-reveal",
 };
