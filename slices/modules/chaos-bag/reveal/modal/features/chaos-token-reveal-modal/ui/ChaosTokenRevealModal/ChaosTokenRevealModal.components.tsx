@@ -1,7 +1,7 @@
-import { CustomModal } from "@modules/core/modal/shared/base/ui";
 import type { View } from "react-native";
 import styled from "styled-components/native";
 import { ChaosTokenOneMoreRevealLoader } from "../ChaosTokenOneMoreRevealLoader";
+import { ChaosTokenRevealModalContainer } from "../ChaosTokenRevealModalContainer";
 import { ChaosTokenRevealModalContent } from "../ChaosTokenRevealModalContent";
 import {
 	BottomPanel,
@@ -11,7 +11,9 @@ import {
 	TopPanel,
 } from "../panels";
 
-export const Container: typeof CustomModal = styled(CustomModal)`
+export const Container: typeof ChaosTokenRevealModalContainer = styled(
+	ChaosTokenRevealModalContainer,
+)`
 
 `;
 

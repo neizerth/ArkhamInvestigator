@@ -5,11 +5,13 @@ import { loadInvestigatorsMediaData, useAppDispatch } from "@shared/lib";
 import { useEffect } from "react";
 import { loadAppData } from "../store/actions/loadAppData";
 import { useDeviceEffects } from "./device";
+import { useAppEffects } from "./useAppEffects";
 
 export const useAppInit = () => {
 	const dispatch = useAppDispatch();
 
 	useDeviceEffects();
+	useAppEffects();
 
 	useEffect(() => {
 		dispatch(endChaosBagReveal());

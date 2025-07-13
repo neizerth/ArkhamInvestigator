@@ -5,6 +5,7 @@ import { endRevealAfterChaosTokenRevealSaga } from "@modules/chaos-bag/reveal/ba
 import { chaosBagRevealHistoryEntitiesSaga } from "@modules/chaos-bag/reveal/history/entities/lib/store/sagas";
 import { chaosBagRevealHistoryFeaturesSaga } from "@modules/chaos-bag/reveal/history/features/lib/store/sagas";
 import { chaosTokenRevealModalSaga } from "@modules/chaos-bag/reveal/modal/features/chaos-token-reveal-modal/lib/store/sagas";
+import { closeModalOnNavigationSaga } from "@modules/core/modal/features/close-modal-on-navigation/closeModalOnNavigationSaga";
 import { spawn } from "redux-saga/effects";
 
 export function* chaosBagSaga() {
@@ -19,5 +20,7 @@ export function* chaosBagSaga() {
 
 	yield spawn(chaosTokenRevealModalSaga);
 
+	// features
 	yield spawn(endRevealAfterChaosTokenRevealSaga);
+	yield spawn(closeModalOnNavigationSaga);
 }
