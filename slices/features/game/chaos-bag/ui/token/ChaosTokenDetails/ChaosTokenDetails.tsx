@@ -7,7 +7,7 @@ import { chaosToken } from "../../../config";
 
 import {
 	addChaosToken,
-	removeChaosToken,
+	removeChaosTokenByType,
 	selectChaosTokenCountByType,
 } from "@modules/chaos-bag/base/entities/lib";
 import {
@@ -49,7 +49,7 @@ export const ChaosTokenDetails = ({
 			return false;
 		}
 		dispatch(
-			removeChaosToken({
+			removeChaosTokenByType({
 				type,
 			}),
 		);

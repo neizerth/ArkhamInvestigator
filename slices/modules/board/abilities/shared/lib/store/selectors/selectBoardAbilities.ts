@@ -21,11 +21,13 @@ export const selectBoardAbilities = (boardId: BoardId) =>
 				return [];
 			}
 			const { abilities = [] } = investigator;
-			const baseAbilities = abilities.filter((ability) =>
-				isBoardAbility({
-					ability,
-					investigatorsCount,
-				}),
+			const baseAbilities = abilities.filter(
+				(ability) =>
+					ability.visible !== false &&
+					isBoardAbility({
+						ability,
+						investigatorsCount,
+					}),
 			);
 
 			if (!investigator.additionalAction) {

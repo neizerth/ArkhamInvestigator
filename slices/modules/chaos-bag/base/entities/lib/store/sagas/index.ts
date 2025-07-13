@@ -4,7 +4,8 @@ import { addSingleChaosTokenSaga } from "../features/add/addSingleChaosToken/add
 import { createChaosBagSaga } from "../features/bag/createChaosBag/createChaosBagSaga";
 import { setCustomChaosBagSkillValueSaga } from "../features/bag/setCustomChaosBagSkillValue/setCustomChaosBagSkillValueSaga";
 import { updateChaosBagSaga } from "../features/bag/updateChaosBag/updateChaosBagSaga";
-import { removeSingleChaosTokenSaga } from "../features/remove/removeSingleChaosTokenSaga";
+import { removeChaosTokenSaga } from "../features/remove/removeChaosToken/removeChaosTokenSaga";
+import { removeSingleChaosTokenSaga } from "../features/remove/removeChaosTokenByType/removeChaosTokenByTypeSaga";
 import { sealChaosTokenSaga } from "../features/seal/sealChaosToken/sealChaosTokenSaga";
 import { toggleChaosTokenSealSaga } from "../features/seal/toggleChaosTokenSeal/toggleChaosTokenSealSaga";
 import { unsealChaosTokenSaga } from "../features/seal/unsealChaosToken/unsealChaosTokenSaga";
@@ -19,6 +20,7 @@ export function* chaosBagEntitiesSaga() {
 	yield spawn(updateChaosBagSaga);
 
 	yield spawn(removeSingleChaosTokenSaga);
+	yield spawn(removeChaosTokenSaga);
 
 	yield spawn(sealChaosTokenSaga);
 	yield spawn(unsealChaosTokenSaga);
