@@ -1,8 +1,8 @@
-import { ChaosTokenRevealLoader } from "@features/game/chaos-bag";
-import { TouchableOpacity } from "@modules/core/haptic/shared/ui";
 import { CustomModal } from "@modules/core/modal/shared/base/ui";
-import { View } from "react-native";
+import type { View } from "react-native";
 import styled from "styled-components/native";
+import { ChaosTokenOneMoreRevealLoader } from "../ChaosTokenOneMoreRevealLoader";
+import { ChaosTokenRevealModalContent } from "../ChaosTokenRevealModalContent";
 import {
 	BottomPanel,
 	CenterPanel,
@@ -16,15 +16,14 @@ export const Container: typeof CustomModal = styled(CustomModal)`
   align-items: center;
 `;
 
-export const Loader: typeof ChaosTokenRevealLoader = styled(
-	ChaosTokenRevealLoader,
-).attrs({
-	size: 150,
-})`
+export const OneMoreLoader: typeof ChaosTokenOneMoreRevealLoader = styled(
+	ChaosTokenOneMoreRevealLoader,
+)`
 `;
 
-export const Content: typeof View = styled(View)`
-
+export const Content: typeof ChaosTokenRevealModalContent = styled(
+	ChaosTokenRevealModalContent,
+)`
   position: relative;
 `;
 
@@ -55,19 +54,4 @@ export const RightView: typeof LeftPanel = styled(RightPanel)`
 
 export const CenterView: typeof CenterPanel = styled(CenterPanel)`
 
-`;
-
-export const OneMoreLoader: typeof Loader = styled(Loader)`
-  flex: 1;
-`;
-
-export const OneMoreLoaderCancel: typeof TouchableOpacity = styled(
-	TouchableOpacity,
-)`
-  position: absolute;
-  z-index: 5;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
 `;
