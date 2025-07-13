@@ -1,9 +1,6 @@
-import { put, select, takeEvery } from "redux-saga/effects";
-import {
-	closeModalInternal,
-	selectCloseModalFromBackButton,
-} from "../../modal";
+import { put, takeEvery } from "redux-saga/effects";
 import { modalActionProcessed } from "../processModalAction";
+import { closeModal } from "./closeModal";
 
 const filterAction = (action: unknown) => {
 	if (!modalActionProcessed.match(action)) {
@@ -19,15 +16,13 @@ const filterAction = (action: unknown) => {
 	return true;
 };
 
-function* worker() {
-	const canClose: ReturnType<typeof selectCloseModalFromBackButton> =
-		yield select(selectCloseModalFromBackButton);
-
-	if (!canClose) {
-		return;
-	}
-
-	yield put(closeModalInternal());
+function* worker({ payload }: ReturnType<typeof modalActionProcessed>) {
+	yield put(
+		closeModal({
+			...payload,
+			source: "action",
+		}),
+	);
 }
 
 export function* closeModalActionSaga() {

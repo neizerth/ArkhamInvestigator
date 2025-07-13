@@ -10,6 +10,7 @@ export const useModalBackButton = () => {
 		if (modalId) {
 			dispatch(
 				closeModal({
+					id: modalId,
 					source: "backButton",
 				}),
 			);

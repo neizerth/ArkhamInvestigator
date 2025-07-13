@@ -3,6 +3,7 @@ import type { BaseModalAction, BaseModalData } from "../../../../model";
 import { getActionById } from "../../../logic";
 import {
 	closeModalInternal,
+	selectCloseModalFromBackButton,
 	selectModalData,
 	selectModalId,
 	selectModalType,
@@ -13,6 +14,13 @@ function* worker({ payload }: ReturnType<typeof closeModal>) {
 	const modalId: ReturnType<typeof selectModalId> = yield select(selectModalId);
 
 	if (payload.id && payload.id !== modalId) {
+		return;
+	}
+
+	const canClose: ReturnType<typeof selectCloseModalFromBackButton> =
+		yield select(selectCloseModalFromBackButton);
+
+	if (!canClose && payload.source === "backButton") {
 		return;
 	}
 
