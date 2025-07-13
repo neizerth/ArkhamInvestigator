@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useMemo } from "react";
 import {
-	type AnimationCallback,
 	useAnimatedStyle,
 	useSharedValue,
 	withTiming,
@@ -17,7 +16,7 @@ export type UseBooleanAnimationOptions<T extends DefaultStyle> = {
 	delayIn?: number;
 	delayOut?: number;
 	styleResolver: (value: number) => T;
-	onComplete?: AnimationCallback;
+	onComplete?: () => void;
 };
 
 export const useBooleanAnimation = <T extends DefaultStyle = DefaultStyle>({
@@ -38,12 +37,13 @@ export const useBooleanAnimation = <T extends DefaultStyle = DefaultStyle>({
 	}, [enabled, delayProp, delayIn, delayOut]);
 
 	const trigger = useCallback(
-		(value: number, delayMs = 0) => {
-			delay(delayMs).then(() => {
-				sharedValue.value = value;
-			});
+		async (value: number, delayMs = 0) => {
+			await delay(delayMs);
+			sharedValue.value = value;
+			await delay(duration);
+			onComplete?.();
 		},
-		[sharedValue],
+		[sharedValue, duration, onComplete],
 	);
 
 	useEffect(() => {
@@ -52,13 +52,9 @@ export const useBooleanAnimation = <T extends DefaultStyle = DefaultStyle>({
 	}, [enabled, maxValue, minValue, delayMs, trigger]);
 
 	return useAnimatedStyle(() => {
-		const value = withTiming(
-			sharedValue.value,
-			{
-				duration,
-			},
-			onComplete,
-		);
+		const value = withTiming(sharedValue.value, {
+			duration,
+		});
 
 		return styleResolver(value);
 	}, [duration, styleResolver]);

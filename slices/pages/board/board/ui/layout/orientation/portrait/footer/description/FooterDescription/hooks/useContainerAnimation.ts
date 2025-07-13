@@ -1,10 +1,13 @@
 import { statusBarHeight } from "@shared/config";
 import {
+	descriptionHidden,
+	descriptionShown,
 	selectShowDescription,
+	useAppDispatch,
 	useAppSelector,
 	useBooleanAnimation,
 } from "@shared/lib";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Dimensions, useWindowDimensions } from "react-native";
 import { descriptionSize } from "../../../../../../../../config";
 import { useDescriptionHeight } from "../../../../../../../../lib";
@@ -18,6 +21,8 @@ type Options = {
 const DELAY_OUT = 300;
 
 export const useContainerAnimation = ({ offsetTop = 0 }: Options) => {
+	const dispatch = useAppDispatch();
+
 	const descriptionHeight = useDescriptionHeight();
 	const showDescription = useAppSelector(selectShowDescription);
 	const window = useWindowDimensions();
@@ -46,6 +51,14 @@ export const useContainerAnimation = ({ offsetTop = 0 }: Options) => {
 		setZIndex(5);
 	}, [showDescription]);
 
+	const onComplete = useCallback(() => {
+		const actionCreator = showDescription
+			? descriptionShown
+			: descriptionHidden;
+
+		dispatch(actionCreator());
+	}, [showDescription, dispatch]);
+
 	const positionStyle = {
 		zIndex,
 	};
@@ -64,6 +77,7 @@ export const useContainerAnimation = ({ offsetTop = 0 }: Options) => {
 				top,
 			};
 		},
+		onComplete,
 	});
 
 	return [animatedStyle, positionStyle];
