@@ -5,7 +5,8 @@ export * from "../features/bag/createChaosBag";
 export * from "../features/bag/setCustomChaosBagSkillValue";
 export * from "../features/bag/updateChaosBag";
 
-export * from "../features/remove";
+export * from "../features/remove/removeChaosTokenByType";
+export * from "../features/remove/removeChaosToken";
 
 export * from "../features/seal/sealChaosToken";
 export * from "../features/seal/toggleChaosTokenSeal";

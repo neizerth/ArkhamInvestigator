@@ -1,15 +1,15 @@
-import { removeChaosTokenInternal } from "@modules/chaos-bag/base/shared/lib";
 import { put, select, takeEvery } from "redux-saga/effects";
+
+import { selectChaosBagTokensByType } from "../../../selectors";
+import { selectCanRemoveChaosTokenFromBag } from "../../../selectors/logic";
+import { removeChaosToken } from "../removeChaosToken/removeChaosToken";
 import {
 	cantRemoveChaosToken,
-	chaosTokenRemoved,
-	removeChaosToken,
-} from "../../actions";
-import { selectChaosBagTokensByType } from "../../selectors";
-import { selectCanRemoveChaosTokenFromBag } from "../../selectors/logic/remove";
+	removeChaosTokenByType,
+} from "./removeChaosTokenByType";
 
-function* worker({ payload }: ReturnType<typeof removeChaosToken>) {
-	const { type } = payload;
+function* worker({ payload }: ReturnType<typeof removeChaosTokenByType>) {
+	const { type, boardId } = payload;
 
 	const canRemoveSelector = selectCanRemoveChaosTokenFromBag(type);
 
@@ -31,19 +31,13 @@ function* worker({ payload }: ReturnType<typeof removeChaosToken>) {
 	const [token]: ReturnType<typeof tokenSelector> = yield select(tokenSelector);
 
 	yield put(
-		removeChaosTokenInternal({
+		removeChaosToken({
+			boardId,
 			id: token.id,
-		}),
-	);
-
-	yield put(
-		chaosTokenRemoved({
-			...payload,
-			token,
 		}),
 	);
 }
 
 export function* removeSingleChaosTokenSaga() {
-	yield takeEvery(removeChaosToken.match, worker);
+	yield takeEvery(removeChaosTokenByType.match, worker);
 }

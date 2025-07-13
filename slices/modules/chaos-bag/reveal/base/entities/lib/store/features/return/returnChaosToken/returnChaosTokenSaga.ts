@@ -18,10 +18,9 @@ function* worker({ payload }: ReturnType<typeof returnChaosToken>) {
 
 	yield put(removeRevealedTokenId(id));
 
-	// TODO fix to id
 	yield put(
 		removeChaosToken({
-			type: token.type,
+			id: token.id,
 		}),
 	);
 
