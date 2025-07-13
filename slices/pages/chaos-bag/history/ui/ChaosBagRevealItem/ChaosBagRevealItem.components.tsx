@@ -1,4 +1,4 @@
-import { ChaosBagRevealedToken } from "@features/game/chaos-bag/ui/reveal/ChaosBagRevealedToken";
+import { ChaosBagRevealedToken } from "@modules/chaos-bag/reveal/base/entities/ui/ChaosBagRevealedToken";
 import { color, factionColor, font, size } from "@shared/config";
 import { IconNumber, Row, StatIcon, Text } from "@shared/ui";
 import { SkillCheckExpressionDisplay } from "@widgets/game/skill-check";

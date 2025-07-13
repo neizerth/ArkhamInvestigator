@@ -1,4 +1,4 @@
-import { ChaosTokenRevealModal } from "@features/game/chaos-bag";
+import { ChaosTokenRevealModal } from "@modules/chaos-bag/reveal/modal/features/chaos-token-reveal-modal/ui";
 import { color } from "@shared/config";
 import { ScreenView } from "@shared/ui";
 import styled from "styled-components/native";

@@ -1,4 +1,4 @@
-import { ModalContainer } from "@modules/core/modal/shared/base/ui";
+import { CustomModal } from "@modules/core/modal/shared/base/ui";
 import { size } from "@shared/config";
 import { Row } from "@shared/ui";
 import { View } from "react-native";
@@ -23,7 +23,7 @@ export const Content: typeof Row = styled(Row)`
   max-height: 85px;
 `;
 
-export const Modal: typeof ModalContainer = styled(ModalContainer)`
+export const Modal: typeof CustomModal = styled(CustomModal)`
 
 `;
 
