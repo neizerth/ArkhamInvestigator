@@ -5,4 +5,5 @@ export const handleCloseModalInternal: ModalHandler = (state) => {
 	state.data = null;
 	state.textValue = null;
 	state.type = null;
+	state.closeFromBackButton = true;
 };

@@ -9,12 +9,14 @@ export type ModalState = {
 	type: ModalType | null;
 	data: unknown | null;
 	textValue: string | null;
+	closeFromBackButton: boolean | null;
 };
 const initialState: ModalState = {
 	modalId: null,
 	type: null,
 	data: null,
 	textValue: null,
+	closeFromBackButton: true,
 };
 
 const state = createSliceState(initialState);
@@ -35,6 +37,7 @@ export const {
 	openModal,
 	closeModalInternal,
 	setTextValue: setModalTextValue,
+	setCloseFromBackButton,
 } = modal.actions;
 
 export const {
@@ -42,6 +45,7 @@ export const {
 	selectData: selectModalData,
 	selectModalId,
 	selectTextValue: selectModalTextValue,
+	selectCloseFromBackButton: selectCloseModalFromBackButton,
 } = modal.selectors;
 
 export default modal.reducer;

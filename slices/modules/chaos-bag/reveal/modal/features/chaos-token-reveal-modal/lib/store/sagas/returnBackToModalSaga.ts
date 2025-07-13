@@ -21,6 +21,7 @@ function* worker({ payload }: ReturnType<typeof modalClosed>) {
 	yield put(
 		openModal({
 			id: CustomModalId.chaosTokenReveal,
+			closeFromBackButton: false,
 		}),
 	);
 }

@@ -15,7 +15,7 @@ export type CloseModalPayload<A extends BaseModalAction> = {
 			modalAction: A;
 	  }
 	| {
-			source: "ui" | "effect";
+			source: "ui" | "effect" | "backButton";
 	  }
 );
 
