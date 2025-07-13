@@ -11,6 +11,11 @@ import { closeModal, modalClosed } from "./closeModal";
 
 function* worker({ payload }: ReturnType<typeof closeModal>) {
 	const modalId: ReturnType<typeof selectModalId> = yield select(selectModalId);
+
+	if (payload.id && payload.id !== modalId) {
+		return;
+	}
+
 	const modalType: ReturnType<typeof selectModalType> =
 		yield select(selectModalType);
 	const data: BaseModalData<BaseModalAction> | null =

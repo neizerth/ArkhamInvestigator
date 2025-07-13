@@ -1,6 +1,6 @@
 import type { ChaosBagToken } from "@modules/chaos-bag/base/shared/model";
 import { last, prop } from "ramda";
-import type { ChaosBagRevealHandler } from "../../../model";
+import type { ChaosBagRevealHandler } from "../../../../model";
 
 export type HandleAddRevealedTokensPayload = {
 	tokens: ChaosBagToken[];

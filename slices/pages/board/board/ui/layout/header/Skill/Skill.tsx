@@ -6,7 +6,7 @@ import {
 	setCurrentActualPropValue,
 } from "@modules/board/base/shared/lib";
 import { startSkillCheck } from "@modules/board/skill-check/shared/lib";
-import { startChaosBagReveal } from "@modules/chaos-bag/reveal/base/shared/lib";
+import { startChaosBagRevealInternal } from "@modules/chaos-bag/reveal/base/shared/lib";
 import {
 	selectShowAdditionalInformation,
 	signedNumber,
@@ -51,7 +51,7 @@ export const Skill = ({ width, height, type, ...props }: SkillProps) => {
 
 	const onLongPress = useCallback(() => {
 		dispatch(
-			startChaosBagReveal({
+			startChaosBagRevealInternal({
 				type,
 				value,
 			}),

@@ -1,5 +1,5 @@
 import { equals, last, reject } from "ramda";
-import type { ChaosBagRevealHandler } from "../../../model";
+import type { ChaosBagRevealHandler } from "../../../../model";
 
 export const handleRemoveRevealedTokenId: ChaosBagRevealHandler<string> = (
 	state,

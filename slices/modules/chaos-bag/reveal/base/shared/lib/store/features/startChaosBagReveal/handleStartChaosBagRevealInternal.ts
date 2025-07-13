@@ -2,7 +2,7 @@ import type {
 	InvestigatorBoardNumericStat,
 	SkillCheckItem,
 } from "@shared/model";
-import type { ChaosBagRevealHandler } from "../../../model";
+import type { ChaosBagRevealHandler } from "../../../../model";
 
 export type HandleStartChaosBagRevealPayload = {
 	type: InvestigatorBoardNumericStat;
@@ -11,7 +11,7 @@ export type HandleStartChaosBagRevealPayload = {
 	expression?: SkillCheckItem[];
 };
 
-export const handleStartChaosBagReveal: ChaosBagRevealHandler<
+export const handleStartChaosBagRevealInternal: ChaosBagRevealHandler<
 	HandleStartChaosBagRevealPayload
 > = (state, payload) => {
 	state.revealedTokenIds = [];

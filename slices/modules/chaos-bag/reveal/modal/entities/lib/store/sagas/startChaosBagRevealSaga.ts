@@ -1,4 +1,4 @@
-import { startChaosBagReveal } from "@modules/chaos-bag/reveal/base/shared/lib";
+import { startChaosBagRevealInternal } from "@modules/chaos-bag/reveal/base/shared/lib";
 import { setShowRevealModal } from "@modules/chaos-bag/reveal/modal/shared/lib";
 import { put, takeEvery } from "redux-saga/effects";
 
@@ -7,5 +7,5 @@ function* worker() {
 }
 
 export function* startChaosBagRevealSaga() {
-	yield takeEvery(startChaosBagReveal.match, worker);
+	yield takeEvery(startChaosBagRevealInternal.match, worker);
 }

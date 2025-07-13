@@ -4,3 +4,7 @@ import { createAction } from "@reduxjs/toolkit";
 export const returnAllChaosTokens = createAction(
 	`${chaosBagRevealPrefix}/returnAllChaosTokens`,
 );
+
+export const allChaosTokensReturned = createAction(
+	`${chaosBagRevealPrefix}/allChaosTokensReturned`,
+);
