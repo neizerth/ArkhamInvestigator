@@ -1,7 +1,11 @@
 import { selectRevealedTokenIds } from "@modules/chaos-bag/reveal/base/shared/lib";
-import { put, select, takeEvery } from "redux-saga/effects";
+import { put, select, take, takeEvery } from "redux-saga/effects";
+import { createReturnFilterAction } from "../../../util";
 import { returnChaosToken } from "../returnChaosToken/returnChaosToken";
-import { returnAllChaosTokens } from "./returnAllChaosTokens";
+import {
+	allChaosTokensReturned,
+	returnAllChaosTokens,
+} from "./returnAllChaosTokens";
 
 function* worker() {
 	const ids: ReturnType<typeof selectRevealedTokenIds> = yield select(
@@ -14,7 +18,13 @@ function* worker() {
 				id,
 			}),
 		);
+
+		const waitCompleted = createReturnFilterAction(id);
+
+		yield take(waitCompleted);
 	}
+
+	yield put(allChaosTokensReturned());
 }
 
 export function* returnAllChaosTokensSaga() {

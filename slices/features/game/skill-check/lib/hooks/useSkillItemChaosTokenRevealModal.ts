@@ -1,5 +1,5 @@
 import { selectCurrentBoardProp } from "@modules/board/base/shared/lib";
-import { startChaosBagReveal } from "@modules/chaos-bag/reveal/base/shared/lib";
+import { startChaosBagRevealInternal } from "@modules/chaos-bag/reveal/base/shared/lib";
 import {
 	getSkillCheckValue,
 	sanitizeSkillCheckExpression,
@@ -23,7 +23,7 @@ export const useSkillItemChaosTokenRevealModal = () => {
 					value,
 				});
 				dispatch(
-					startChaosBagReveal({
+					startChaosBagRevealInternal({
 						type,
 						title,
 						value: expressionValue,

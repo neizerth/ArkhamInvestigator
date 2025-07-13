@@ -44,7 +44,7 @@ export const {
 
 	addRevealedTokens,
 	removeRevealedTokenId,
-	startChaosBagReveal,
+	startChaosBagRevealInternal,
 	endChaosBagReveal,
 	setCurrentRevealedTokenId,
 } = chaosBagReveal.actions;

@@ -1,6 +1,6 @@
 import { selectCurrentBoardProp } from "@modules/board/base/shared/lib";
 import { selectSkillCheckType } from "@modules/board/skill-check/shared/lib";
-import { startChaosBagReveal } from "@modules/chaos-bag/reveal/base/shared/lib";
+import { startChaosBagRevealInternal } from "@modules/chaos-bag/reveal/base/shared/lib";
 import {
 	getSkillCheckValue,
 	useAppDispatch,
@@ -67,7 +67,7 @@ export const useKeyCheck = () => {
 				});
 
 				dispatch(
-					startChaosBagReveal({
+					startChaosBagRevealInternal({
 						type,
 						value,
 						expression,

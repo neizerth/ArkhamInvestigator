@@ -3,7 +3,7 @@ import {
 	selectSkillCheckData,
 	selectSkillCheckType,
 } from "@modules/board/skill-check/shared/lib";
-import { startChaosBagReveal } from "@modules/chaos-bag/reveal/base/shared/lib";
+import { startChaosBagRevealInternal } from "@modules/chaos-bag/reveal/base/shared/lib";
 import {
 	getSkillCheckValue,
 	sanitizeSkillCheckExpression,
@@ -30,7 +30,7 @@ export const useOpenChaosBagModal = () => {
 			value,
 		});
 		dispatch(
-			startChaosBagReveal({
+			startChaosBagRevealInternal({
 				type,
 				value: skillValue,
 				expression: safeExpression,

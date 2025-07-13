@@ -1,8 +1,8 @@
-import type { ChaosBagRevealReducer } from "../../../model";
+import type { ChaosBagRevealReducer } from "../../../../model";
 import {
 	type HandleAddRevealedTokensPayload,
 	handleAddRevealedTokens,
-} from "../handlers";
+} from "./handleAddRevealedTokens";
 
 export const addRevealedTokens: ChaosBagRevealReducer<
 	HandleAddRevealedTokensPayload

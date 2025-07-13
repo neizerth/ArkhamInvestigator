@@ -1,6 +1,4 @@
-import { routes } from "@shared/config";
 import {
-	goToPage,
 	useAppDispatch,
 	useAppSelector,
 	useBackButton,
@@ -46,18 +44,13 @@ export const useTokenRevealModal = () => {
 					id: token.id,
 				}),
 			);
-			if (revealedCount > 1) {
-				return;
-			}
-			close();
 		},
-		[dispatch, close, revealedCount],
+		[dispatch],
 	);
 
 	const returnTokens = useCallback(() => {
 		dispatch(returnAllChaosTokens());
-		close();
-	}, [dispatch, close]);
+	}, [dispatch]);
 
 	const handleBack = revealedCount > 0;
 
@@ -85,11 +78,11 @@ export const useTokenRevealModal = () => {
 		[dispatch],
 	);
 
-	useEffect(() => {
-		if (visible && isEmpty) {
-			dispatch(goToPage(routes.chaosBagPreview));
-		}
-	}, [dispatch, visible, isEmpty]);
+	// useEffect(() => {
+	// 	if (visible && isEmpty) {
+	// 		dispatch(goToPage(routes.chaosBagPreview));
+	// 	}
+	// }, [dispatch, visible, isEmpty]);
 
 	const revealFirstToken =
 		visible && !animate && !isEmpty && revealedCount === 0;

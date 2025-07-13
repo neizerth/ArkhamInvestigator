@@ -9,7 +9,7 @@ import {
 	setSkillCheckDifficulty,
 	toggleSkillCheckDifficultyType,
 } from "@modules/board/skill-check/shared/lib";
-import { startChaosBagReveal } from "@modules/chaos-bag/reveal/base/shared/lib";
+import { startChaosBagRevealInternal } from "@modules/chaos-bag/reveal/base/shared/lib";
 import { useHapticSwipe } from "@modules/core/haptic/shared/lib";
 import { goBack, useAppDispatch, useAppSelector } from "@shared/lib";
 import { useCallback } from "react";
@@ -56,7 +56,7 @@ export const SkillCheckHeader = ({ ...props }: SkillCheckHeaderProps) => {
 		}
 
 		dispatch(
-			startChaosBagReveal({
+			startChaosBagRevealInternal({
 				type,
 				value,
 			}),

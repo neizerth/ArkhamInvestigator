@@ -1,4 +1,4 @@
-import type { ChaosBagRevealHandler } from "../../../model";
+import type { ChaosBagRevealHandler } from "../../../../model";
 
 export const handleEndChaosBagReveal: ChaosBagRevealHandler = (state) => {
 	state.revealedTokenIds = [];
