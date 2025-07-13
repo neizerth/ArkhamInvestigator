@@ -11,10 +11,5 @@ export const Loader: typeof ChaosTokenRevealLoader = styled(
 `;
 
 export const Container: typeof TouchableOpacity = styled(TouchableOpacity)`
-  position: absolute;
-  z-index: 5;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
+
 `;

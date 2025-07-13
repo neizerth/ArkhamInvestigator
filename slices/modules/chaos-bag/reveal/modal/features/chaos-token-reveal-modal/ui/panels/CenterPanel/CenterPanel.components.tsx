@@ -24,7 +24,6 @@ export const LastToken: typeof ChaosTokenPreview = styled(
 	tokenPadding: 5,
 	sealOffset: 5,
 })`
-  
 `;
 
 export const Expression: typeof ExpressionPanel = styled(ExpressionPanel)`
