@@ -6,6 +6,7 @@ import {
 } from "@modules/core/modal/shared/base/ui";
 import { routes } from "@shared/config";
 import { usePathname } from "expo-router";
+import { canDisplayChaosTokenRevealModal as canDisplay } from "../../lib/logic";
 
 export type ChaosTokenRevealModalContainerProps = Omit<
 	CustomModalProps,
@@ -20,7 +21,7 @@ export const ChaosTokenRevealModalContainer = (
 	const modalType: ModalBackgroundType =
 		pathname === routes.skillCheck ? "dark" : "light";
 
-	if (pathname === "/") {
+	if (!canDisplay(pathname)) {
 		return;
 	}
 

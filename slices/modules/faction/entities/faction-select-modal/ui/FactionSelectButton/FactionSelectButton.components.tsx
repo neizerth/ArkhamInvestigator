@@ -10,7 +10,7 @@ export const Container: typeof TouchableOpacity = styled(TouchableOpacity)`
 `;
 
 export const Faction: typeof FactionIconImage = styled(FactionIconImage)`
-  width: 45px;
+  width: 50px;
   flex: 1;
 `;
 
@@ -22,7 +22,7 @@ export const Neutral: typeof View = styled(View)`
 export const NeutralIcon: typeof Icon = styled(Icon)`
   color: ${color.light10};
   padding-bottom: 5px;
-  font-size: 35px;
+  font-size: 40px;
   line-height: 40px;
   text-align: center;
 `;
