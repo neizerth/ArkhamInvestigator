@@ -6,12 +6,12 @@ import {
 	removeChaosToken,
 } from "../../actions";
 import { selectChaosBagTokensByType } from "../../selectors";
-import { selectCanRemoveChaosToken } from "../../selectors/logic/remove";
+import { selectCanRemoveChaosTokenFromBag } from "../../selectors/logic/remove";
 
 function* worker({ payload }: ReturnType<typeof removeChaosToken>) {
 	const { type } = payload;
 
-	const canRemoveSelector = selectCanRemoveChaosToken(type);
+	const canRemoveSelector = selectCanRemoveChaosTokenFromBag(type);
 
 	const validation: ReturnType<typeof canRemoveSelector> =
 		yield select(canRemoveSelector);

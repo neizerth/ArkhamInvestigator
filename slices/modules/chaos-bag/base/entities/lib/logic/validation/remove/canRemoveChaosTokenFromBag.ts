@@ -1,6 +1,6 @@
 import {
 	type CanRemoveMultipleChaosTokensOptions,
-	canRemoveMultipleChaosTokens,
+	canRemoveMultipleChaosTokensFromBag,
 } from "./canRemoveMultipleChaosTokens";
 
 export type CanRemoveChaosTokenOptions = Omit<
@@ -8,8 +8,10 @@ export type CanRemoveChaosTokenOptions = Omit<
 	"count"
 >;
 
-export const canRemoveChaosToken = (options: CanRemoveChaosTokenOptions) => {
-	return canRemoveMultipleChaosTokens({
+export const canRemoveChaosTokenFromBag = (
+	options: CanRemoveChaosTokenOptions,
+) => {
+	return canRemoveMultipleChaosTokensFromBag({
 		...options,
 		count: 1,
 	});

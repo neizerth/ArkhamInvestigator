@@ -1,14 +1,14 @@
 import {
 	type GetChaosTokenCountCanBeRemovedOptions,
 	getChaosTokenCountCanBeRemoved,
-} from "./getChaosTokenCountCanBeRemoved";
+} from "./getChaosTokenCountCanBeRemovedFromBag";
 
 export type CanRemoveMultipleChaosTokensOptions =
 	GetChaosTokenCountCanBeRemovedOptions & {
 		count: number;
 	};
 
-export const canRemoveMultipleChaosTokens = (
+export const canRemoveMultipleChaosTokensFromBag = (
 	options: CanRemoveMultipleChaosTokensOptions,
 ) => {
 	const { count } = options;
