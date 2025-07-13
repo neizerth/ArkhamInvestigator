@@ -1,7 +1,7 @@
 import type { ActionCreatorWithPayload, PayloadAction } from "@reduxjs/toolkit";
 import { put, select } from "redux-saga/effects";
-import { type SealChaosTokenPayload, updateChaosToken } from "../../actions";
-import { selectChaosBagTokenById } from "../../selectors";
+import { type SealChaosTokenPayload, updateChaosToken } from "../../../actions";
+import { selectChaosBagTokenById } from "../../../selectors";
 
 type SealAction = PayloadAction<SealChaosTokenPayload>;
 

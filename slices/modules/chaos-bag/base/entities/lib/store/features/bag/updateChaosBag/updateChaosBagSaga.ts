@@ -4,7 +4,7 @@ import {
 	setChaosBagContents,
 } from "@modules/chaos-bag/base/shared/lib";
 import { put, select, takeEvery } from "redux-saga/effects";
-import { chaosBagUpdated, updateChaosBag } from "../../actions";
+import { chaosBagUpdated, updateChaosBag } from "../../../actions";
 
 function* worker({ payload }: ReturnType<typeof updateChaosBag>) {
 	const tokenCount: ReturnType<typeof selectChaosBagTokenCount> = yield select(

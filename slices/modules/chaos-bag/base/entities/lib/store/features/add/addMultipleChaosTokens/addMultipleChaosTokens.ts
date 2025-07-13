@@ -5,7 +5,7 @@ import type {
 	ChaosTokenType,
 } from "@modules/chaos-bag/base/shared/model";
 import { createAction } from "@reduxjs/toolkit";
-import type { CantAddChaosTokenPayload } from "./addChaosToken";
+import type { CantAddChaosTokenPayload } from "../addSingleChaosToken";
 
 export type AddMultipleChaosTokenPayload = Partial<PropsWithBoardId> & {
 	type: ChaosTokenType;

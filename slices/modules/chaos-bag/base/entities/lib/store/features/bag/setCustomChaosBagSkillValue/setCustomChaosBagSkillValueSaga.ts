@@ -11,7 +11,7 @@ import { put, select, takeEvery } from "redux-saga/effects";
 import {
 	customChaosBagSkillValueSet,
 	setCustomChaosBagSkillValue,
-} from "../../actions";
+} from "./setCustomChaosBagSkillValue";
 
 function* worker({ payload }: ReturnType<typeof setCustomChaosBagSkillValue>) {
 	const { boardId, value } = payload;
