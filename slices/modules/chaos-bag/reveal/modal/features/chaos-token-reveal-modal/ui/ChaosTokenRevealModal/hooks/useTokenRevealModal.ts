@@ -10,13 +10,13 @@ import { useCallback, useEffect } from "react";
 
 import { toggleChaosTokenSeal } from "@modules/chaos-bag/base/entities/lib";
 import { selectChaosBagLoadingAnimation } from "@modules/chaos-bag/base/shared/lib";
+import type { ChaosBagToken } from "@modules/chaos-bag/base/shared/model";
 import {
 	returnAllChaosTokens,
 	returnChaosToken,
 	revealChaosTokens,
 	selectRevealedTokensCount,
 } from "@modules/chaos-bag/reveal/base/entities/lib";
-import type { ChaosBagToken } from "../../../../../../../../../features/game/chaos-bag/model";
 import { useShowModal } from "./useShowModal";
 
 export const useTokenRevealModal = () => {

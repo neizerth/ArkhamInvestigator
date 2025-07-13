@@ -1,11 +1,11 @@
-import type {
-	ChaosBagHistoryItem,
-	ChaosBagToken,
-} from "@features/game/chaos-bag/model";
 import {
 	selectBoardProp,
 	setCurrentInvestigatorIndex,
 } from "@modules/board/base/shared/lib";
+import type {
+	ChaosBagHistoryItem,
+	ChaosBagToken,
+} from "@modules/chaos-bag/base/shared/model";
 import { removeRevealHistoryItem } from "@modules/chaos-bag/reveal/history/shared/lib";
 import { useHapticFeedback } from "@modules/core/haptic/shared/lib";
 import { REMOVE_CLIPPED_SUBVIEWS } from "@shared/config";

@@ -10,12 +10,12 @@ import {
 
 import { toggleChaosTokenSeal } from "@modules/chaos-bag/base/entities/lib";
 
+import type { ChaosBagToken } from "@modules/chaos-bag/base/shared/model";
 import { returnChaosToken } from "@modules/chaos-bag/reveal/base/entities/lib";
 import {
 	selectCurrentRevealedTokenId,
 	setCurrentRevealedTokenId,
 } from "@modules/chaos-bag/reveal/base/shared/lib";
-import type { ChaosBagToken } from "../../../../../../../features/game/chaos-bag/model";
 import * as C from "./ChaosTokenRevealHistory.components";
 
 export type ChaosTokenRevealHistoryProps = ViewProps & {

@@ -1,4 +1,5 @@
 import { toggleChaosTokenSeal } from "@modules/chaos-bag/base/entities/lib";
+import type { ChaosBagToken } from "@modules/chaos-bag/base/shared/model";
 import { openChaosBagRevealModal } from "@modules/chaos-bag/reveal/modal/shared/lib";
 import { useAppTranslation } from "@modules/core/i18n/shared/lib";
 import { REMOVE_CLIPPED_SUBVIEWS } from "@shared/config";
@@ -6,7 +7,6 @@ import { goBack, useAppDispatch } from "@shared/lib";
 import { Delay } from "@shared/ui";
 import { useCallback } from "react";
 import type { ListRenderItemInfo, ViewProps } from "react-native";
-import type { ChaosBagToken } from "../../model";
 import * as C from "./ChaosBagPreview.components";
 import { useData, useModalActions } from "./hooks";
 

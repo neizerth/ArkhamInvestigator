@@ -7,7 +7,7 @@ import {
 	selectCurrentBoardProp,
 } from "@modules/board/base/shared/lib";
 import { CustomModalId } from "@modules/core/modal/entities/base/config";
-import { openCustomModal } from "@modules/core/modal/shared/base/lib";
+import { openModal } from "@modules/core/modal/shared/base/lib";
 import {
 	selectCanChangeFaction,
 	selectCurrentFaction,
@@ -40,7 +40,7 @@ export const BoardHeader = (props: BoardHeaderProps) => {
 			return false;
 		}
 		dispatch(
-			openCustomModal({
+			openModal({
 				id: CustomModalId.factionSelect,
 			}),
 		);

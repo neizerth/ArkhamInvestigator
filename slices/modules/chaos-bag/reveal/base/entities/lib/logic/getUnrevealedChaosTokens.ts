@@ -1,4 +1,4 @@
-import type { ChaosBagToken } from "@features/game/chaos-bag/model";
+import type { ChaosBagToken } from "@modules/chaos-bag/base/shared/model";
 import { idIncludes } from "@shared/lib/util";
 import { reject } from "ramda";
 
