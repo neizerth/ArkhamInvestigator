@@ -4,24 +4,24 @@ import { View, type ViewProps } from "react-native";
 import styled, { css } from "styled-components/native";
 import type { ModalBackgroundType } from "./Modal.types";
 
-export const Container: typeof View = styled(View)`
-  background-color: ${color.modal.background.light};
-
-  justify-content: center;
-  align-items: center;
-`;
-
-type ContentProps = ViewProps & {
+type ContainerProps = ViewProps & {
 	type: ModalBackgroundType;
 };
 
-export const Content: FC<ContentProps> = styled(View)`
-  flex: 1;
+export const Container: FC<ContainerProps> = styled(View)`
   justify-content: center;
+  align-items: center;
 
-  ${({ type }: ContentProps) =>
+
+  ${({ type }: ContainerProps) =>
 		type !== "transparent" &&
 		css`
       background-color: ${color.modal.background[type]};
   `}
+`;
+
+export const Content: typeof View = styled(View)`
+  flex: 1;
+  justify-content: center;
+
 `;
