@@ -3,6 +3,7 @@ import { returnAllChaosTokensSaga } from "../features/return/returnAllChaosToken
 import { returnChaosTokenSaga } from "../features/return/returnChaosToken/returnChaosTokenSaga";
 import { returnSingleChaosTokenSaga } from "../features/return/returnSingleChaosToken/returnSingleChaosTokenSaga";
 import { revealChaosTokensSaga } from "../features/revealChaosTokens/revealChaosTokensSaga";
+import { startChaosBagRevealSaga } from "../features/startChaosBagReveal/startChaosBagRevealSaga";
 
 export function* chaosBagRevealEntitiesSaga() {
 	yield spawn(returnAllChaosTokensSaga);
@@ -10,4 +11,5 @@ export function* chaosBagRevealEntitiesSaga() {
 	yield spawn(returnChaosTokenSaga);
 
 	yield spawn(revealChaosTokensSaga);
+	yield spawn(startChaosBagRevealSaga);
 }
