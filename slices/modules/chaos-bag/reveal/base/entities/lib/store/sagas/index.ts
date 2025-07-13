@@ -1,7 +1,7 @@
 import { spawn } from "redux-saga/effects";
-import { returnAllChaosTokensSaga } from "./returnAllChaosTokensSaga";
-import { returnChaosTokenSaga } from "./returnChaosTokenSaga";
-import { revealChaosTokensSaga } from "./revealChaosTokensSaga";
+import { returnAllChaosTokensSaga } from "../features/return/returnAllChaosTokens/returnAllChaosTokensSaga";
+import { returnChaosTokenSaga } from "../features/return/returnChaosToken/returnChaosTokenSaga";
+import { revealChaosTokensSaga } from "../features/revealChaosTokens/revealChaosTokensSaga";
 
 export function* chaosBagRevealEntitiesSaga() {
 	yield spawn(returnAllChaosTokensSaga);

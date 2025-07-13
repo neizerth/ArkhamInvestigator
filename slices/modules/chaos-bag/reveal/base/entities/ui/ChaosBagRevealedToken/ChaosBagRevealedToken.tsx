@@ -1,5 +1,5 @@
+import type { ChaosBagToken } from "@modules/chaos-bag/base/shared/model";
 import type { ViewProps } from "react-native";
-import type { ChaosBagToken } from "../../../../../../../features/game/chaos-bag/model";
 import * as C from "./ChaosBagRevealedToken.components";
 
 export type ChaosBagRevealedTokenProps = ViewProps & {

@@ -1,8 +1,8 @@
+import type { ChaosBagToken } from "@modules/chaos-bag/base/shared/model";
 import type {
 	InvestigatorBoardNumericStat,
 	SkillCheckItem,
 } from "@shared/model";
-import type { ChaosBagToken } from "./tokens";
 
 export type ChaosBagHistoryItem = {
 	id: string;

@@ -33,7 +33,6 @@ export const {
 	setType: setModalType,
 	setModalId,
 	openModal,
-	openCustomModal,
 	closeModalInternal,
 	setTextValue: setModalTextValue,
 } = modal.actions;

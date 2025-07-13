@@ -3,9 +3,9 @@ import { last } from "ramda";
 import type { ViewProps } from "react-native";
 
 import { selectChaosBagLoadingAnimation } from "@modules/chaos-bag/base/shared/lib";
+import type { ChaosBagToken } from "@modules/chaos-bag/base/shared/model";
 import { selectRevealedTokens } from "@modules/chaos-bag/reveal/base/entities/lib";
 import { CustomModalId } from "@modules/core/modal/entities/base/config";
-import type { ChaosBagToken } from "../../../../../../../../features/game/chaos-bag/model";
 import * as C from "./ChaosTokenRevealModal.components";
 import { useTokenRevealModal } from "./hooks";
 

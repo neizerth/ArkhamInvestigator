@@ -3,7 +3,7 @@ import {
 	createAbilityUseFilter,
 } from "@modules/board/abilities/shared/lib";
 import { CustomModalId } from "@modules/core/modal/entities/base/config";
-import { openCustomModal } from "@modules/core/modal/shared/base/lib";
+import { openModal } from "@modules/core/modal/shared/base/lib";
 import { put, takeEvery } from "redux-saga/effects";
 
 const filterAction = createAbilityUseFilter("role-switch");
@@ -16,13 +16,11 @@ function* worker({ payload }: ReturnType<typeof changeBoardHistoryAbilityUse>) {
 	if (ability.isUsed) {
 		return;
 	}
-	// TODO change modal module
 	yield put(
-		openCustomModal({
+		openModal({
 			id: CustomModalId.factionSelect,
 		}),
 	);
-	// yield put(setShowFactionSelect(true));
 }
 
 export function* LolaHayesAbilitySaga() {

@@ -17,10 +17,11 @@ import { selectCurrentBoardId } from "@modules/board/base/shared/lib";
 import { selectModifyChaosTokens } from "@modules/chaos-bag/base/shared/lib";
 import { setCurrentRevealedTokenId } from "@modules/chaos-bag/reveal/base/shared/lib";
 import { selectChaosTokenValueByType } from "@modules/chaos-bag/value/features/lib";
+
 import type {
 	ChaosBagToken,
 	ChaosTokenType,
-} from "../../../../../../../../../features/game/chaos-bag/model";
+} from "@modules/chaos-bag/base/shared/model";
 import * as C from "./CenterPanel.components";
 
 export type CenterPanelProps = ViewProps & {
