@@ -21,7 +21,6 @@ export const Container: FC<ContainerProps> = styled(View)`
 `;
 
 export const Content: typeof View = styled(View)`
-  flex: 1;
   justify-content: center;
 
 `;

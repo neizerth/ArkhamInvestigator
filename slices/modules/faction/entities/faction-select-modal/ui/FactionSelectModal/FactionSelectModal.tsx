@@ -49,14 +49,16 @@ export const FactionSelectModal = (props: FactionSelectModalProps) => {
 
 	return (
 		<C.Modal {...props} id={CustomModalId.factionSelect} onClose={hide}>
-			{factions.map((faction) => (
-				<C.Button
-					key={faction}
-					faction={faction}
-					selected={selected === faction}
-					onPress={onPress(faction)}
-				/>
-			))}
+			<C.Content>
+				{factions.map((faction) => (
+					<C.Button
+						key={faction}
+						faction={faction}
+						selected={selected === faction}
+						onPress={onPress(faction)}
+					/>
+				))}
+			</C.Content>
 		</C.Modal>
 	);
 };

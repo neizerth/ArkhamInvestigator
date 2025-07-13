@@ -20,6 +20,10 @@ export const ChaosTokenRevealModalContainer = (
 	const modalType: ModalBackgroundType =
 		pathname === routes.skillCheck ? "dark" : "light";
 
+	if (pathname === "/") {
+		return;
+	}
+
 	return (
 		<CustomModal
 			{...props}
