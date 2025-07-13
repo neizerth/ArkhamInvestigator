@@ -1,11 +1,13 @@
 import type { ChaosBagRevealReducer } from "../../../../model";
 import {
-	type HandleStartChaosBagRevealPayload,
+	type HandleStartChaosBagRevealInternalPayload,
 	handleStartChaosBagRevealInternal,
 } from "./handleStartChaosBagRevealInternal";
 
+export type { HandleStartChaosBagRevealInternalPayload as StartChaosBagRevealInternalPayload } from "./handleStartChaosBagRevealInternal";
+
 export const startChaosBagRevealInternal: ChaosBagRevealReducer<
-	HandleStartChaosBagRevealPayload
+	HandleStartChaosBagRevealInternalPayload
 > = (state, { payload }) => {
 	handleStartChaosBagRevealInternal(state, payload);
 };

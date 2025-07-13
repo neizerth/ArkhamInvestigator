@@ -4,7 +4,7 @@ import type {
 } from "@shared/model";
 import type { ChaosBagRevealHandler } from "../../../../model";
 
-export type HandleStartChaosBagRevealPayload = {
+export type HandleStartChaosBagRevealInternalPayload = {
 	type: InvestigatorBoardNumericStat;
 	value: number;
 	title?: string;
@@ -12,7 +12,7 @@ export type HandleStartChaosBagRevealPayload = {
 };
 
 export const handleStartChaosBagRevealInternal: ChaosBagRevealHandler<
-	HandleStartChaosBagRevealPayload
+	HandleStartChaosBagRevealInternalPayload
 > = (state, payload) => {
 	state.revealedTokenIds = [];
 
