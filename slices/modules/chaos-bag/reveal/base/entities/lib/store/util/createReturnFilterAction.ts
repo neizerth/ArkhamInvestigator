@@ -1,7 +1,7 @@
-import { singleChaosTokenReturned } from "../features/return/returnSingleChaosToken/returnSingleChaosToken";
+import { chaosTokenReturned } from "../actions";
 
 export const createReturnFilterAction = (id: string) => (action: unknown) => {
-	if (!singleChaosTokenReturned.match(action)) {
+	if (!chaosTokenReturned.match(action)) {
 		return false;
 	}
 

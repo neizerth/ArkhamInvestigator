@@ -24,7 +24,7 @@ import type {
 	ChaosTokenType,
 } from "@modules/chaos-bag/base/shared/model";
 import {
-	returnChaosToken,
+	returnSingleChaosToken,
 	selectRevealedTokens,
 } from "@modules/chaos-bag/reveal/base/entities/lib";
 import { last } from "ramda";
@@ -66,7 +66,7 @@ export const CenterPanel = ({ style, ...props }: CenterPanelProps) => {
 
 	const onPress = useCallback(() => {
 		dispatch(
-			returnChaosToken({
+			returnSingleChaosToken({
 				id: lastToken.id,
 			}),
 		);
