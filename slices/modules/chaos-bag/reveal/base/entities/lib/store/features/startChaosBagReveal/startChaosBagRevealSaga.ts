@@ -3,9 +3,11 @@ import { startChaosBagRevealInternal } from "@modules/chaos-bag/reveal/base/shar
 import { routes } from "@shared/config";
 import { goToPage } from "@shared/lib";
 import { put, select, takeEvery } from "redux-saga/effects";
+import { revealChaosTokens } from "../revealChaosTokens";
 import { startChaosBagReveal } from "./startChaosBagReveal";
 
 function* worker({ payload }: ReturnType<typeof startChaosBagReveal>) {
+	const { boardId } = payload;
 	const isEmpty: ReturnType<typeof selectIsChaosBagEmpty> = yield select(
 		selectIsChaosBagEmpty,
 	);
@@ -16,6 +18,12 @@ function* worker({ payload }: ReturnType<typeof startChaosBagReveal>) {
 	}
 
 	yield put(startChaosBagRevealInternal(payload));
+	yield put(
+		revealChaosTokens({
+			boardId,
+			count: 1,
+		}),
+	);
 }
 
 export function* startChaosBagRevealSaga() {

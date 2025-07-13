@@ -19,11 +19,15 @@ import { setCurrentRevealedTokenId } from "@modules/chaos-bag/reveal/base/shared
 import { selectChaosTokenValueByType } from "@modules/chaos-bag/value/features/lib";
 
 import { toggleChaosTokenSeal } from "@modules/chaos-bag/base/entities/lib";
-import type { ChaosTokenType } from "@modules/chaos-bag/base/shared/model";
+import type {
+	ChaosBagToken,
+	ChaosTokenType,
+} from "@modules/chaos-bag/base/shared/model";
 import {
 	returnChaosToken,
 	selectRevealedTokens,
 } from "@modules/chaos-bag/reveal/base/entities/lib";
+import { last } from "ramda";
 import * as C from "./CenterPanel.components";
 
 export type CenterPanelProps = ViewProps;
@@ -38,8 +42,9 @@ const specialTokenTypes: ChaosTokenType[] = [
 export const CenterPanel = ({ style, ...props }: CenterPanelProps) => {
 	const dispatch = useAppDispatch();
 	const boardId = useAppSelector(selectCurrentBoardId);
-	const [lastToken] = useAppSelector(selectRevealedTokens);
+	const tokens = useAppSelector(selectRevealedTokens);
 
+	const lastToken = last(tokens) as ChaosBagToken;
 	const { type } = lastToken;
 
 	const tokenValue = useAppSelector(

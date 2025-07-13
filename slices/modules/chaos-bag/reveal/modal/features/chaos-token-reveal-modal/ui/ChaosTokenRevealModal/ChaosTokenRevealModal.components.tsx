@@ -12,8 +12,6 @@ import {
 } from "../panels";
 
 export const Container: typeof CustomModal = styled(CustomModal)`
-  justify-content: center;
-  align-items: center;
 `;
 
 export const OneMoreLoader: typeof ChaosTokenOneMoreRevealLoader = styled(

@@ -8,7 +8,11 @@ export type ChaosTokenRevealModalProps = ViewProps;
 
 export const ChaosTokenRevealModal = (props: ChaosTokenRevealModalProps) => {
 	return (
-		<C.Container {...props} dark id={CustomModalId.chaosTokenReveal}>
+		<C.Container
+			{...props}
+			type="transparent"
+			id={CustomModalId.chaosTokenReveal}
+		>
 			<ContextProvider>
 				<C.Content>
 					<C.TopView />
