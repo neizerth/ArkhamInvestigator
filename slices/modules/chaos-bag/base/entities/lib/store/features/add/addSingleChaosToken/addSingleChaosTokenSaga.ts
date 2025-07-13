@@ -1,13 +1,13 @@
 import { createChaosBagToken } from "@modules/chaos-bag/base/shared/lib";
 import { put, select, takeEvery } from "redux-saga/effects";
-import { addChaosTokenInternal } from "../../../../../shared/lib/store/chaosBag";
+import { addChaosTokenInternal } from "../../../../../../shared/lib/store/chaosBag";
 import {
 	addChaosToken,
 	cantAddSingleChaosToken,
 	chaosTokenAdded,
 	singleChaosTokenAdded,
-} from "../../actions";
-import { selectCanAddChaosToken } from "../../selectors";
+} from "../../../actions";
+import { selectCanAddChaosToken } from "../../../selectors";
 
 function* worker({ payload }: ReturnType<typeof addChaosToken>) {
 	const { type } = payload;

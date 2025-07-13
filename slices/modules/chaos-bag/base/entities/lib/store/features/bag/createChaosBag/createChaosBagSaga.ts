@@ -4,7 +4,7 @@ import {
 	setChaosBagTokenCount,
 } from "@modules/chaos-bag/base/shared/lib";
 import { put, takeEvery } from "redux-saga/effects";
-import { chaosBagCreated, createChaosBag } from "../../actions";
+import { chaosBagCreated, createChaosBag } from "./createChaosBag";
 
 function* worker({ payload }: ReturnType<typeof createChaosBag>) {
 	const { tokenCount } = payload;

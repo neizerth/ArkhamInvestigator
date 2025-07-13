@@ -1,10 +1,8 @@
 import { put, select, takeEvery } from "redux-saga/effects";
-import {
-	sealChaosToken,
-	toggleChaosTokenSeal,
-	unsealChaosToken,
-} from "../../actions";
-import { selectChaosBagTokenById } from "../../selectors";
+import { selectChaosBagTokenById } from "../../../selectors";
+import { sealChaosToken } from "../sealChaosToken";
+import { unsealChaosToken } from "../unsealChaosToken";
+import { toggleChaosTokenSeal } from "./toggleChaosTokenSeal";
 
 function* worker({ payload }: ReturnType<typeof toggleChaosTokenSeal>) {
 	const { id } = payload;

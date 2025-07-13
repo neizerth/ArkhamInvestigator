@@ -1,6 +1,6 @@
 import { takeEvery } from "redux-saga/effects";
-import { chaosTokenUnsealed, unsealChaosToken } from "../../actions";
-import { createSealChaosTokenWorker } from "./createSealChaosTokenWorker";
+import { createSealChaosTokenWorker } from "../lib/createSealChaosTokenWorker";
+import { chaosTokenUnsealed, unsealChaosToken } from "./unsealChaosToken";
 
 const worker = createSealChaosTokenWorker({
 	sealed: false,
