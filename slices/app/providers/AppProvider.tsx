@@ -1,4 +1,3 @@
-import { ChaosBagProvider } from "@features/game/chaos-bag";
 import { I18NProvider } from "@modules/core/i18n/app/ui";
 import { ModalProvider } from "@modules/core/modal/app/ui";
 import { ToastProvider } from "@modules/core/notifications/app/ui/ToastProvider";
@@ -18,9 +17,7 @@ export const AppProvider = ({ children }: PropsWithChildren) => {
 						<ErrorProvider>
 							<InitProvider>
 								<ToastProvider>
-									<ModalProvider>
-										<ChaosBagProvider>{children}</ChaosBagProvider>
-									</ModalProvider>
+									<ModalProvider>{children}</ModalProvider>
 								</ToastProvider>
 							</InitProvider>
 						</ErrorProvider>
