@@ -8,14 +8,14 @@ export type ModalState = {
 	modalId: string | null;
 	type: ModalType | null;
 	data: unknown | null;
-	textValue: string | null;
+	value: unknown | null;
 	closeFromBackButton: boolean | null;
 };
 const initialState: ModalState = {
 	modalId: null,
 	type: null,
 	data: null,
-	textValue: null,
+	value: null,
 	closeFromBackButton: true,
 };
 
@@ -36,7 +36,7 @@ export const {
 	setModalId,
 	openModal,
 	closeModalInternal,
-	setTextValue: setModalTextValue,
+	setValue: setModalValue,
 	setCloseFromBackButton,
 } = modal.actions;
 
@@ -44,7 +44,7 @@ export const {
 	selectType: selectModalType,
 	selectData: selectModalData,
 	selectModalId,
-	selectTextValue: selectModalTextValue,
+	selectValue: selectModalValue,
 	selectCloseFromBackButton: selectCloseModalFromBackButton,
 } = modal.selectors;
 

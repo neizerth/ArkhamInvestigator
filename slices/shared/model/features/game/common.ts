@@ -60,7 +60,7 @@ export type InvestigatorDetails = {
 	isOfficial: boolean;
 };
 
-export type InvestigatorDetailItem<T = object> = {
+export type InvestigatorDetailItem<T = unknown> = {
 	id: string;
 	code: string;
 	imageId: string;

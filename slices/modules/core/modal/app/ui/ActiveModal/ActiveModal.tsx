@@ -1,3 +1,5 @@
+import { isBoardSelectModalData } from "@modules/core/modal/entities/board-select/lib";
+import { BoardSelectModal } from "@modules/core/modal/entities/board-select/ui";
 import {
 	selectModalData,
 	selectModalId,
@@ -26,6 +28,10 @@ export const ActiveModal = (props: ActiveModalProps) => {
 
 	if (isPromptModalData(data, type)) {
 		return <Prompt data={data} />;
+	}
+
+	if (isBoardSelectModalData(data, type)) {
+		return <BoardSelectModal data={data} />;
 	}
 
 	return null;

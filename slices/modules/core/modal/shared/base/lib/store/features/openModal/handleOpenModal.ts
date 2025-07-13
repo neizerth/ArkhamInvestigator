@@ -4,7 +4,7 @@ export type HandleOpenModalPayload<Data = unknown> = {
 	id: string;
 	data?: Data;
 	type?: ModalType;
-	textValue?: string;
+	value?: string;
 	closeFromBackButton?: boolean;
 };
 
@@ -15,6 +15,6 @@ export function handleOpenModal(
 	state.modalId = payload.id;
 	state.data = payload.data || null;
 	state.type = payload.type || "custom";
-	state.textValue = payload.textValue || null;
+	state.value = payload.value || null;
 	state.closeFromBackButton = payload.closeFromBackButton || true;
 }

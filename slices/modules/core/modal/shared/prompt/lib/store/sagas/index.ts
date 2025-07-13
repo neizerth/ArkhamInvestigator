@@ -1,4 +1,4 @@
-import { spawn } from "redux-saga/effects";
+import { fork } from "redux-saga/effects";
 import {
 	closePromptSaga,
 	confirmPromptSaga,
@@ -6,7 +6,7 @@ import {
 } from "../features";
 
 export function* promptSaga() {
-	yield spawn(closePromptSaga);
-	yield spawn(confirmPromptSaga);
-	yield spawn(openPromptSaga);
+	yield fork(closePromptSaga);
+	yield fork(confirmPromptSaga);
+	yield fork(openPromptSaga);
 }

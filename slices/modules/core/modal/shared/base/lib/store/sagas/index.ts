@@ -1,4 +1,5 @@
 import { cancelModalActionSaga } from "@modules/core/modal/shared/actions/cancel/lib";
+import { confirmModalActionSaga } from "@modules/core/modal/shared/actions/confirm/lib/confirmModalActionSaga";
 import { followURLActionSaga } from "@modules/core/modal/shared/actions/custom/follow-url/lib";
 import { goToPageActionSaga } from "@modules/core/modal/shared/actions/custom/go-to-page/lib";
 import { confirmSaga } from "@modules/core/modal/shared/confirm/lib/store/sagas";
@@ -14,11 +15,10 @@ export function* modalSharedSaga() {
 	yield spawn(closeModalActionSaga);
 
 	yield spawn(cancelModalActionSaga);
+	yield spawn(confirmModalActionSaga);
 	yield spawn(followURLActionSaga);
 	yield spawn(goToPageActionSaga);
 
 	yield spawn(confirmSaga);
 	yield spawn(promptSaga);
-	// yield spawn(closePromptSaga);
-	// yield spawn(confirmPromptSaga);
 }
