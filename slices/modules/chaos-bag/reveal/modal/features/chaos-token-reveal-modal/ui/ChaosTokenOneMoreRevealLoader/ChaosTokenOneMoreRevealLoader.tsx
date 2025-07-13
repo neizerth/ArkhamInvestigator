@@ -34,7 +34,8 @@ const LoaderView = (props: ChaosTokenOneMoreRevealLoaderProps) => {
 				count: 1,
 			}),
 		);
-	}, [dispatch]);
+		setOneMoreLoading(false);
+	}, [dispatch, setOneMoreLoading]);
 
 	return (
 		<C.Container onPress={onPress} {...props}>

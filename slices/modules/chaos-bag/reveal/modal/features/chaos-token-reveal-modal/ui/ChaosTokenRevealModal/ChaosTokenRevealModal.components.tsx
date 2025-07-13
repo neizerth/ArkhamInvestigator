@@ -12,21 +12,30 @@ import {
 } from "../panels";
 
 export const Container: typeof CustomModal = styled(CustomModal)`
+
 `;
 
 export const OneMoreLoader: typeof ChaosTokenOneMoreRevealLoader = styled(
 	ChaosTokenOneMoreRevealLoader,
 )`
+  position: absolute;
+  z-index: 5;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
 `;
 
 export const Content: typeof ChaosTokenRevealModalContent = styled(
 	ChaosTokenRevealModalContent,
 )`
-  position: relative;
 `;
 
 export const TopView: typeof View = styled(TopPanel)`
   position: absolute;
+  bottom: 165px; 
+  left: -90px;
+  right: -90px;
 `;
 
 export const BottomView: typeof BottomPanel = styled(BottomPanel)`

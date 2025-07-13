@@ -11,7 +11,7 @@ export const TopPanel = (props: TopPanelProps) => {
 	const tokens = useAppSelector(selectRevealedTokens);
 
 	const history = useMemo(() => {
-		return tokens.length > 1 ? tokens : init(tokens);
+		return init(tokens);
 	}, [tokens]);
 
 	return (
