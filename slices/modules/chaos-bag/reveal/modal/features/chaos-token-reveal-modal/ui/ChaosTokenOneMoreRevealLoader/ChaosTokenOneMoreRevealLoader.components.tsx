@@ -1,4 +1,4 @@
-import { ChaosTokenRevealLoader } from "@features/game/chaos-bag";
+import { ChaosTokenRevealLoader } from "@modules/chaos-bag/reveal/base/entities/ui";
 import { TouchableOpacity } from "@modules/core/haptic/shared/ui";
 import styled from "styled-components/native";
 
