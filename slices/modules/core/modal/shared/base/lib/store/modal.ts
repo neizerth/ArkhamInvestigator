@@ -1,13 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { createSliceState } from "redux-toolkit-helpers";
 import { modalPrefix } from "../../config";
-import type { BaseModalData, ModalType } from "../../model";
+import type { ModalType } from "../../model";
 import * as reducers from "./reducers";
 
 export type ModalState = {
 	modalId: string | null;
 	type: ModalType | null;
-	data: BaseModalData<unknown> | null;
+	data: unknown | null;
 	textValue: string | null;
 };
 const initialState: ModalState = {

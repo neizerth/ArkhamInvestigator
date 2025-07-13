@@ -4,11 +4,14 @@ import type { BaseModalAction } from "@modules/core/modal/shared/base/model";
 import { createAction } from "@reduxjs/toolkit";
 import type { PromptModalData } from "../../../../model";
 
-export type OpenPromptPayload<
-	Action extends BaseModalAction,
-	Data extends PromptModalData<Action>,
-> = Omit<OpenModalPayload<Action, Data>, "type">;
+export type OpenPromptPayloadData<Action extends BaseModalAction> =
+	PromptModalData<Action>;
 
-export const openPrompt = createAction<
-	OpenPromptPayload<BaseModalAction, PromptModalData<BaseModalAction>>
->(`${modalPrefix}/openPrompt`);
+export type OpenPromptPayload<Action extends BaseModalAction> = Omit<
+	OpenModalPayload<OpenPromptPayloadData<Action>>,
+	"type"
+>;
+
+export const openPrompt = createAction<OpenPromptPayload<BaseModalAction>>(
+	`${modalPrefix}/openPrompt`,
+);

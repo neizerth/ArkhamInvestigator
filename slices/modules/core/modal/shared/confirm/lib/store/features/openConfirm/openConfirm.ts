@@ -4,11 +4,14 @@ import type { BaseModalAction } from "@modules/core/modal/shared/base/model";
 import { createAction } from "@reduxjs/toolkit";
 import type { ConfirmModalData } from "../../../../model";
 
-export type OpenConfirmPayload<
-	Action extends BaseModalAction,
-	Data extends ConfirmModalData<Action>,
-> = Omit<OpenModalPayload<Action, Data>, "type">;
+export type OpenConfirmPayloadData<Action extends BaseModalAction> =
+	ConfirmModalData<Action>;
 
-export const openConfirm = createAction<
-	OpenConfirmPayload<BaseModalAction, ConfirmModalData<BaseModalAction>>
->(`${modalPrefix}/openConfirm`);
+export type OpenConfirmPayload<Action extends BaseModalAction> = Omit<
+	OpenModalPayload<OpenConfirmPayloadData<Action>>,
+	"type"
+>;
+
+export const openConfirm = createAction<OpenConfirmPayload<BaseModalAction>>(
+	`${modalPrefix}/openConfirm`,
+);
