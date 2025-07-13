@@ -1,5 +1,5 @@
 import { openReferenceCard } from "@entities/reference-card";
-import { openChaosBagRevealModal } from "@modules/chaos-bag/reveal/modal/shared/lib";
+import { startChaosBagReveal } from "@modules/chaos-bag/reveal/base/entities/lib";
 import { useHapticSwipe } from "@modules/core/haptic/shared/lib";
 import { routes } from "@shared/config";
 import { useAppDispatch, usePage } from "@shared/lib";
@@ -19,7 +19,11 @@ export const ChaosBagButton = (props: ChaosBagButtonProps) => {
 	const goToPage = usePage();
 
 	const revealToken = useCallback(() => {
-		dispatch(openChaosBagRevealModal());
+		dispatch(
+			startChaosBagReveal({
+				boardId: "current",
+			}),
+		);
 	}, [dispatch]);
 
 	const onSwipeUp = useCallback(() => {

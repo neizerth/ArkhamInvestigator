@@ -78,12 +78,6 @@ export const useTokenRevealModal = () => {
 		[dispatch],
 	);
 
-	// useEffect(() => {
-	// 	if (visible && isEmpty) {
-	// 		dispatch(goToPage(routes.chaosBagPreview));
-	// 	}
-	// }, [dispatch, visible, isEmpty]);
-
 	const revealFirstToken =
 		visible && !animate && !isEmpty && revealedCount === 0;
 

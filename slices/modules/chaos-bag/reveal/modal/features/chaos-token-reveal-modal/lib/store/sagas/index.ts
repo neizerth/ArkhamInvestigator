@@ -1,9 +1,9 @@
 import { fork } from "redux-saga/effects";
-import { closeModalAfterReturnTokenSaga } from "./closeModalAfterReturnTokenSaga";
+import { closeModalEndChaosTokenRevealSaga } from "./closeModalEndChaosTokenRevealSaga";
 import { returnBackToModalSaga } from "./returnBackToModalSaga";
 
 // TODO
 export function* chaosTokenRevealModalSaga() {
 	yield fork(returnBackToModalSaga);
-	yield fork(closeModalAfterReturnTokenSaga);
+	yield fork(closeModalEndChaosTokenRevealSaga);
 }

@@ -18,17 +18,15 @@ import { selectModifyChaosTokens } from "@modules/chaos-bag/base/shared/lib";
 import { setCurrentRevealedTokenId } from "@modules/chaos-bag/reveal/base/shared/lib";
 import { selectChaosTokenValueByType } from "@modules/chaos-bag/value/features/lib";
 
-import type {
-	ChaosBagToken,
-	ChaosTokenType,
-} from "@modules/chaos-bag/base/shared/model";
+import { toggleChaosTokenSeal } from "@modules/chaos-bag/base/entities/lib";
+import type { ChaosTokenType } from "@modules/chaos-bag/base/shared/model";
+import {
+	returnChaosToken,
+	selectRevealedTokens,
+} from "@modules/chaos-bag/reveal/base/entities/lib";
 import * as C from "./CenterPanel.components";
 
-export type CenterPanelProps = ViewProps & {
-	onPress?: () => void;
-	onLongPress?: () => void;
-	lastToken: ChaosBagToken;
-};
+export type CenterPanelProps = ViewProps;
 
 const specialTokenTypes: ChaosTokenType[] = [
 	...chaosToken.types.symbolic.base,
@@ -37,15 +35,10 @@ const specialTokenTypes: ChaosTokenType[] = [
 	"elderSign",
 ];
 
-export const CenterPanel = ({
-	lastToken,
-	style,
-	onPress,
-	onLongPress,
-	...props
-}: CenterPanelProps) => {
+export const CenterPanel = ({ style, ...props }: CenterPanelProps) => {
 	const dispatch = useAppDispatch();
 	const boardId = useAppSelector(selectCurrentBoardId);
+	const [lastToken] = useAppSelector(selectRevealedTokens);
 
 	const { type } = lastToken;
 
@@ -64,6 +57,22 @@ export const CenterPanel = ({
 
 	const setCurrentToken = useCallback(() => {
 		dispatch(setCurrentRevealedTokenId(lastToken.id));
+	}, [dispatch, lastToken]);
+
+	const onPress = useCallback(() => {
+		dispatch(
+			returnChaosToken({
+				id: lastToken.id,
+			}),
+		);
+	}, [dispatch, lastToken]);
+
+	const onLongPress = useCallback(() => {
+		dispatch(
+			toggleChaosTokenSeal({
+				id: lastToken.id,
+			}),
+		);
 	}, [dispatch, lastToken]);
 
 	const tap = useHapticTap({
