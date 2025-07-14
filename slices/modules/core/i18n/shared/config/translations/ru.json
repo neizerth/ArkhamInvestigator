@@ -115,6 +115,7 @@
 	"chaosBag.addToken_many": "{{name}} добавляет в мешок {{many}} {{token}}",
 
 	"ability.addBless.full": "Нельзя добавить больше 10 Благословений",
+	"chaosBag.cantAddToken": "Нельзя добавить больше {{limit}} {{character}}",
 
 	"mythos.doom": "Добавлена 1 Безысходность. Итого: {{doom}}",
 	"timing.step.name": "Шаг {{name}}",
