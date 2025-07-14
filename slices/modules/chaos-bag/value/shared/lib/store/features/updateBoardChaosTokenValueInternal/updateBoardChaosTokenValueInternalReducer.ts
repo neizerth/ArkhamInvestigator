@@ -1,10 +1,10 @@
-import type { ChaosTokenValueReducer } from "../../../model";
+import type { ChaosTokenValueReducer } from "@modules/chaos-bag/value/shared/model";
 import {
 	type HandleUpdateBoardChaosTokenValueInternalPayload,
 	handleUpdateBoardChaosTokenValueInternal,
-} from "../handlers";
+} from "./handleUpdateBoardChaosTokenValueInternal";
 
-export const updateBoardChaosTokenValueInternal: ChaosTokenValueReducer<
+export const updateBoardChaosTokenValueInternalReducer: ChaosTokenValueReducer<
 	HandleUpdateBoardChaosTokenValueInternalPayload
 > = (state, { payload }) => {
 	handleUpdateBoardChaosTokenValueInternal(state, payload);

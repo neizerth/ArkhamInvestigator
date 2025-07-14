@@ -1,5 +1,5 @@
 import type { ChaosTokenType } from "@modules/chaos-bag/base/shared/model";
-import type { ChaosTokenValueHandler } from "../../../model";
+import type { ChaosTokenValueHandler } from "@modules/chaos-bag/value/shared/model";
 
 export type HandleUpdateChaosTokenValueInternalPayload = {
 	type: ChaosTokenType;
