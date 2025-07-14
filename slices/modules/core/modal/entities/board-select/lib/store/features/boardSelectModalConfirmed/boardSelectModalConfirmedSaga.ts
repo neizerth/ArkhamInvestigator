@@ -29,7 +29,7 @@ function* worker({ payload }: Action) {
 	const value: ReturnType<typeof selectModalValue> =
 		yield select(selectModalValue);
 
-	if (typeof value !== "number") {
+	if (!value || typeof value !== "number") {
 		return;
 	}
 
