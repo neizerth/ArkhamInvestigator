@@ -1,8 +1,8 @@
 import { selectBoardById } from "@modules/board/base/shared/lib";
 import type { BoardId } from "@modules/board/base/shared/model";
-import { createSelector } from "@reduxjs/toolkit";
+import type { RootState } from "@shared/model";
 
-export const selectBoardHorror = (boardId: BoardId) =>
-	createSelector([selectBoardById(boardId)], (board) => {
-		return Math.min(board.baseValue.sanity - board.value.sanity, 0);
-	});
+export const selectBoardHorror = (boardId: BoardId) => (state: RootState) => {
+	const board = selectBoardById(boardId)(state);
+	return Math.min(board.baseValue.sanity - board.value.sanity, 0);
+};

@@ -3,37 +3,34 @@ import {
 	selectBoardsCount,
 } from "@modules/board/base/shared/lib";
 import type { BoardId } from "@modules/board/base/shared/model";
-import { createSelector } from "@reduxjs/toolkit";
+import type { RootState } from "@shared/model";
 import { additionalActionAbility } from "../../../config";
 import { isBoardAbility } from "../../info/isBoardAbility";
 
-export const selectBoardAbilities = (boardId: BoardId) =>
-	createSelector(
-		[
-			selectBoardProp({
-				prop: "investigator",
-				boardId,
-			}),
-			selectBoardsCount,
-		],
-		(investigator, investigatorsCount) => {
-			if (!investigator) {
-				return [];
-			}
-			const { abilities = [] } = investigator;
-			const baseAbilities = abilities.filter(
-				(ability) =>
-					ability.visible !== false &&
-					isBoardAbility({
-						ability,
-						investigatorsCount,
-					}),
-			);
+export const selectBoardAbilities =
+	(boardId: BoardId) => (state: RootState) => {
+		const investigator = selectBoardProp({
+			prop: "investigator",
+			boardId,
+		})(state);
+		const investigatorsCount = selectBoardsCount(state);
 
-			if (!investigator.additionalAction) {
-				return baseAbilities;
-			}
+		if (!investigator) {
+			return [];
+		}
+		const { abilities = [] } = investigator;
+		const baseAbilities = abilities.filter(
+			(ability) =>
+				ability.visible !== false &&
+				isBoardAbility({
+					ability,
+					investigatorsCount,
+				}),
+		);
 
-			return [...baseAbilities, additionalActionAbility];
-		},
-	);
+		if (!investigator.additionalAction) {
+			return baseAbilities;
+		}
+
+		return [...baseAbilities, additionalActionAbility];
+	};

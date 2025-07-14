@@ -1,10 +1,8 @@
-import { createSelector } from "@reduxjs/toolkit";
+import type { RootState } from "@shared/model";
 import { getRoundPhases } from "../../../../logic";
 import { selectTimingRules } from "./selectTimingRules";
 
-export const selectRoundPhases = createSelector(
-	[selectTimingRules],
-	(rules) => {
-		return getRoundPhases(rules);
-	},
-);
+export const selectRoundPhases = (state: RootState) => {
+	const rules = selectTimingRules(state);
+	return getRoundPhases(rules);
+};

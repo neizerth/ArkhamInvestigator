@@ -1,8 +1,7 @@
-import { createSelector } from "@reduxjs/toolkit";
 import { selectReferenceCardTokens } from "@shared/lib";
+import type { RootState } from "@shared/model";
 import { getReferenceCardTokenValues } from "../../logic";
 
-export const selectCurrentReferenceCardTokenValues = createSelector(
-	[selectReferenceCardTokens],
-	getReferenceCardTokenValues,
-);
+export const selectCurrentReferenceCardTokenValues = (state: RootState) => {
+	return getReferenceCardTokenValues(selectReferenceCardTokens(state));
+};

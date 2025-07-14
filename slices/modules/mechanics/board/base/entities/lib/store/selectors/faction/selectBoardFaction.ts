@@ -1,9 +1,9 @@
 import { selectBoardById } from "@modules/board/base/shared/lib";
 import type { BoardId } from "@modules/board/base/shared/model";
-import { createSelector } from "@reduxjs/toolkit";
+import type { RootState } from "@shared/model";
 import { getBoardFaction } from "../../../logic";
 
-export const selectBoardFaction = (boardId: BoardId) =>
-	createSelector([selectBoardById(boardId)], (board) => {
-		return getBoardFaction(board);
-	});
+export const selectBoardFaction = (boardId: BoardId) => (state: RootState) => {
+	const board = selectBoardById(boardId)(state);
+	return getBoardFaction(board);
+};

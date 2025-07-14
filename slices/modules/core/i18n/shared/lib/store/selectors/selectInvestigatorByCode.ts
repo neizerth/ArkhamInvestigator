@@ -1,8 +1,6 @@
-import { createSelector } from "@reduxjs/toolkit";
 import { selectSignatureGroups } from "@shared/lib";
+import type { RootState } from "@shared/model";
 import { propEq } from "ramda";
 
-export const selectInvestigatorByCode = (code: string) =>
-	createSelector([selectSignatureGroups], (groups) =>
-		groups.find(propEq(code, "code")),
-	);
+export const selectInvestigatorByCode = (code: string) => (state: RootState) =>
+	selectSignatureGroups(state).find(propEq(code, "code"));

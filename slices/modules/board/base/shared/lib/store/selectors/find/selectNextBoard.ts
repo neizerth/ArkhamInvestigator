@@ -1,17 +1,17 @@
-import { createSelector } from "@reduxjs/toolkit";
+import type { RootState } from "@shared/model";
 import {
 	selectCurrentInvestigatorIndex,
 	selectInvestigatorBoards,
 } from "../../board";
 
-export const selectNextBoard = createSelector(
-	[selectCurrentInvestigatorIndex, selectInvestigatorBoards],
-	(index, boards) => {
-		if (typeof index !== "number") {
-			return;
-		}
-		const nextIndex = (index + 1) % boards.length;
+export const selectNextBoard = (state: RootState) => {
+	const index = selectCurrentInvestigatorIndex(state);
+	const boards = selectInvestigatorBoards(state);
 
-		return boards[nextIndex];
-	},
-);
+	if (typeof index !== "number" || boards.length === 0) {
+		return;
+	}
+	const nextIndex = (index + 1) % boards.length;
+
+	return boards[nextIndex];
+};

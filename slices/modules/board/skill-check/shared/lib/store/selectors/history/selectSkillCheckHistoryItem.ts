@@ -1,15 +1,24 @@
 import { selectBoardCheckHistory } from "@modules/board/base/shared/lib";
 import type { PropsWithBoardId } from "@modules/board/base/shared/model";
-import { createSelector } from "@reduxjs/toolkit";
+import type { SkillCheckHistoryItem } from "@modules/board/skill-check/shared/model";
 import { whereId } from "@shared/lib/util";
-import type { SkillCheckHistoryItem } from "@shared/model";
+import type { RootState } from "@shared/model";
 
 type Options = PropsWithBoardId & {
 	id: string;
 };
 
-export const selectSkillCheckHistoryItem = ({ boardId, id }: Options) =>
-	createSelector(
-		[selectBoardCheckHistory(boardId)],
-		(history = []) => history.find(whereId(id)) as SkillCheckHistoryItem,
-	);
+const fallbackItem: SkillCheckHistoryItem = {
+	id: "fallback",
+	type: "health",
+	expression: [],
+	value: 0,
+};
+
+export const selectSkillCheckHistoryItem =
+	({ boardId, id }: Options) =>
+	(state: RootState) => {
+		const history = selectBoardCheckHistory(boardId)(state) || [];
+
+		return history.find(whereId(id)) || fallbackItem;
+	};

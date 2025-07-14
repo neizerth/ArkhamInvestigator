@@ -1,15 +1,14 @@
 import { selectBoardId } from "@modules/board/base/shared/lib";
 import type { BoardId } from "@modules/board/base/shared/model";
 import { selectBoardChaosTokenValue } from "@modules/chaos-bag/value/shared/lib";
-import { createSelector } from "@reduxjs/toolkit";
+import type { RootState } from "@shared/model";
 
-export const selectBoardTokenValues = (boardId: BoardId) =>
-	createSelector(
-		[selectBoardChaosTokenValue, selectBoardId(boardId)],
-		(value, boardId) => {
-			if (!value || !boardId) {
-				return {};
-			}
-			return value[boardId] || {};
-		},
-	);
+export const selectBoardTokenValues =
+	(boardId: BoardId) => (state: RootState) => {
+		const value = selectBoardChaosTokenValue(state);
+		const id = selectBoardId(boardId)(state);
+		if (!value || !id) {
+			return {};
+		}
+		return value[id] || {};
+	};

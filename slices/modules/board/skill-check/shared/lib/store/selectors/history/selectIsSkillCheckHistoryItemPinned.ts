@@ -1,12 +1,13 @@
 import type { PropsWithBoardId } from "@modules/board/base/shared/model";
-import { createSelector } from "@reduxjs/toolkit";
+import type { RootState } from "@shared/model";
 import { selectSkillCheckHistoryItem } from "./selectSkillCheckHistoryItem";
 
-type Options = PropsWithBoardId & {
+export type Options = PropsWithBoardId & {
 	id: string;
 };
 
-export const selectIsSkillCheckHistoryItemPinned = (options: Options) =>
-	createSelector([selectSkillCheckHistoryItem(options)], (item) =>
-		Boolean(item?.pinned),
-	);
+export const selectIsSkillCheckHistoryItemPinned =
+	(options: Options) => (state: RootState) => {
+		const item = selectSkillCheckHistoryItem(options)(state);
+		return Boolean(item?.pinned);
+	};

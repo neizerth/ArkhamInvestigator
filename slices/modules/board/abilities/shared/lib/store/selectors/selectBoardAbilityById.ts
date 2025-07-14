@@ -1,6 +1,6 @@
 import type { BoardId } from "@modules/board/base/shared/model";
-import { createSelector } from "@reduxjs/toolkit";
 import { whereId } from "@shared/lib/util";
+import type { RootState } from "@shared/model";
 import { selectBoardAbilities } from "./selectBoardAbilities";
 
 export type SelectAbilityByIdOptions = {
@@ -8,10 +8,9 @@ export type SelectAbilityByIdOptions = {
 	abilityId: string;
 };
 
-export const selectBoardAbilityById = ({
-	boardId,
-	abilityId,
-}: SelectAbilityByIdOptions) =>
-	createSelector([selectBoardAbilities(boardId)], (abilities) => {
+export const selectBoardAbilityById =
+	({ boardId, abilityId }: SelectAbilityByIdOptions) =>
+	(state: RootState) => {
+		const abilities = selectBoardAbilities(boardId)(state);
 		return abilities.find(whereId(abilityId));
-	});
+	};

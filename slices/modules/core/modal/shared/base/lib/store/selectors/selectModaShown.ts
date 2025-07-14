@@ -1,5 +1,5 @@
-import { createSelector } from "@reduxjs/toolkit";
+import type { RootState } from "@shared/model";
 import { selectModalId } from "../modal";
 
-export const selectModaShown = (id: string) =>
-	createSelector([selectModalId], (modalId) => modalId === id);
+export const selectModaShown = (id: string) => (state: RootState) =>
+	selectModalId(state) === id;

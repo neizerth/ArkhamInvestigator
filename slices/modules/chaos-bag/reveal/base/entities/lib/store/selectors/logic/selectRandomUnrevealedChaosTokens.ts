@@ -1,16 +1,15 @@
 import { selectChaosBagContents } from "@modules/chaos-bag/base/shared/lib";
 import { selectRevealedTokenIds } from "@modules/chaos-bag/reveal/base/shared/lib";
-import { createSelector } from "@reduxjs/toolkit";
+import type { RootState } from "@shared/model";
 import { getRandomChaosTokens } from "../../../logic";
 
-export const selectRandomUnrevealedChaosTokens = (count: number) =>
-	createSelector(
-		[selectRevealedTokenIds, selectChaosBagContents],
-		(revealedIds, contents) => {
-			return getRandomChaosTokens({
-				revealedIds,
-				contents,
-				count,
-			});
-		},
-	);
+export const selectRandomUnrevealedChaosTokens =
+	(count: number) => (state: RootState) => {
+		const revealedIds = selectRevealedTokenIds(state);
+		const contents = selectChaosBagContents(state);
+		return getRandomChaosTokens({
+			revealedIds,
+			contents,
+			count,
+		});
+	};

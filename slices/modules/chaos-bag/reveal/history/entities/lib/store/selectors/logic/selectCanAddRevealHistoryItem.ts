@@ -1,11 +1,6 @@
 import { selectChaosTokenCount } from "@modules/chaos-bag/base/shared/lib";
-import { createSelector } from "@reduxjs/toolkit";
+import type { RootState } from "@shared/model";
 import { canAddRevealHistoryItem } from "../../../logic";
 
-export const selectCanAddRevealHistoryItem = createSelector(
-	[selectChaosTokenCount],
-	(chaosTokenCount) =>
-		canAddRevealHistoryItem({
-			chaosTokenCount,
-		}),
-);
+export const selectCanAddRevealHistoryItem = (state: RootState) =>
+	canAddRevealHistoryItem({ chaosTokenCount: selectChaosTokenCount(state) });

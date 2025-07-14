@@ -1,14 +1,11 @@
-import { createSelector } from "@reduxjs/toolkit";
+import type { RootState } from "@shared/model";
 import { dec } from "ramda";
 import { selectTimingWizardStepIndex } from "../../../rules";
 
-export const selectPrevTimingWizardStepIndex = createSelector(
-	[selectTimingWizardStepIndex],
-	(stepIndex) => {
-		if (typeof stepIndex !== "number") {
-			return;
-		}
-
-		return dec(stepIndex);
-	},
-);
+export const selectPrevTimingWizardStepIndex = (state: RootState) => {
+	const stepIndex = selectTimingWizardStepIndex(state);
+	if (typeof stepIndex !== "number") {
+		return;
+	}
+	return dec(stepIndex);
+};

@@ -4,8 +4,8 @@ import {
 	selectBoardChaosTokenValueModifications,
 	selectBoardElderSignValue,
 } from "@modules/mechanics/chaos-bag/value/entities/lib";
-import { createSelector } from "@reduxjs/toolkit";
 import { rangeStep, selectReferenceCardTokens } from "@shared/lib";
+import type { RootState } from "@shared/model";
 import { propEq, range } from "ramda";
 
 const MAX_VALUE = 20;
@@ -18,38 +18,35 @@ type Options = {
 	boardId: BoardId;
 };
 
-export const selectChaosTokenRangeByType = ({ type, boardId }: Options) =>
-	createSelector(
-		[
-			selectReferenceCardTokens,
-			selectBoardElderSignValue(boardId),
-			selectBoardChaosTokenValueModifications(boardId),
-		],
-		(data, elderSignValue, specialTokens) => {
-			const specialValue = specialTokens[type];
+export const selectChaosTokenRangeByType =
+	({ type, boardId }: Options) =>
+	(state: RootState) => {
+		const data = selectReferenceCardTokens(state);
+		const elderSignValue = selectBoardElderSignValue(boardId)(state);
+		const specialTokens =
+			selectBoardChaosTokenValueModifications(boardId)(state);
+		const specialValue = specialTokens[type];
 
-			if (typeof specialValue === "number") {
-				return [specialValue];
-			}
-			if (type === "elderSign" && elderSignValue) {
-				return [elderSignValue];
-			}
-			const item = data.find(propEq(type, "token"));
+		if (typeof specialValue === "number") {
+			return [specialValue];
+		}
+		if (type === "elderSign" && elderSignValue) {
+			return [elderSignValue];
+		}
+		const item = data.find(propEq(type, "token"));
 
-			if (!item || item.type === "value") {
-				return defaultData;
-			}
-
-			if (item.type === "counter") {
-				const { min = MIN_VALUE, max = MAX_VALUE, step } = item;
-
-				return rangeStep(min, max + 1, step);
-			}
-
-			if (item.type === "select" && item.values) {
-				return item.values;
-			}
-
+		if (!item || item.type === "value") {
 			return defaultData;
-		},
-	);
+		}
+
+		if (item.type === "counter") {
+			const { min = MIN_VALUE, max = MAX_VALUE, step } = item;
+			return rangeStep(min, max + 1, step);
+		}
+
+		if (item.type === "select" && item.values) {
+			return item.values;
+		}
+
+		return defaultData;
+	};

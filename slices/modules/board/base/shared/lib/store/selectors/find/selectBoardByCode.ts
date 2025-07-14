@@ -1,7 +1,7 @@
-import { createSelector } from "@reduxjs/toolkit";
+import type { RootState } from "@shared/model";
 import { selectInvestigatorBoards } from "../../board";
 
-export const selectBoardByCode = (code: string) =>
-	createSelector([selectInvestigatorBoards], (boards) => {
-		return boards.find(({ investigator }) => investigator.code === code);
-	});
+export const selectBoardByCode = (code: string) => (state: RootState) => {
+	const boards = selectInvestigatorBoards(state);
+	return boards.find(({ investigator }) => investigator.code === code);
+};

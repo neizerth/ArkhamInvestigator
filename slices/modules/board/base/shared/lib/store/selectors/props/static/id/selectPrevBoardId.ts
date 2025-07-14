@@ -1,7 +1,7 @@
-import { createSelector } from "@reduxjs/toolkit";
+import type { RootState } from "@shared/model";
 import { selectPrevBoard } from "../../../find";
 
-export const selectPrevBoardId = createSelector(
-	[selectPrevBoard],
-	(board) => board?.id,
-);
+export const selectPrevBoardId = (state: RootState) => {
+	const board = selectPrevBoard(state);
+	return board?.id;
+};

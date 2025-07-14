@@ -4,36 +4,31 @@ import {
 	boardValuesLimit,
 	maxRegularValue,
 } from "@modules/mechanics/board/base/entities/config";
-import { createSelector } from "@reduxjs/toolkit";
-import type { InvestigatorNumericStat } from "@shared/model";
+import type { InvestigatorNumericStat, RootState } from "@shared/model";
 
 type Options = PropsWithBoardId & {
 	prop: InvestigatorNumericStat;
 };
 
-export const selectBoardMaxValue = ({ boardId, prop }: Options) =>
-	createSelector(
-		[
-			selectBoardValueProp({
-				boardId,
-				type: "baseValue",
-				prop,
-			}),
-		],
-		(baseValue) => {
-			switch (prop) {
-				case "health":
-				case "sanity":
+export const selectBoardMaxValue =
+	({ boardId, prop }: Options) =>
+	(state: RootState) => {
+		const baseValue = selectBoardValueProp({
+			boardId,
+			type: "baseValue",
+			prop,
+		})(state);
 
-				case "handSize":
-
-				case "willpower":
-				case "intellect":
-				case "combat":
-				case "agility":
-					return baseValue ?? Number.POSITIVE_INFINITY;
-				default:
-					return boardValuesLimit.max[prop] ?? maxRegularValue;
-			}
-		},
-	);
+		switch (prop) {
+			case "health":
+			case "sanity":
+			case "handSize":
+			case "willpower":
+			case "intellect":
+			case "combat":
+			case "agility":
+				return baseValue ?? Number.POSITIVE_INFINITY;
+			default:
+				return boardValuesLimit.max[prop] ?? maxRegularValue;
+		}
+	};

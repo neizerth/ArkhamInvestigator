@@ -3,7 +3,7 @@ import type {
 	BoardKey,
 	InvestigatorBoard,
 } from "@modules/board/base/shared/model";
-import { createSelector } from "@reduxjs/toolkit";
+import type { RootState } from "@shared/model";
 import { selectBoardById } from "../find/selectBoardById";
 
 export type SelectBoardPropOptions<T extends BoardKey> = {
@@ -11,13 +11,12 @@ export type SelectBoardPropOptions<T extends BoardKey> = {
 	prop: T;
 };
 
-export const selectBoardProp = <T extends BoardKey>({
-	boardId,
-	prop,
-}: SelectBoardPropOptions<T>) =>
-	createSelector([selectBoardById(boardId)], (board): InvestigatorBoard[T] => {
+export const selectBoardProp =
+	<T extends BoardKey>({ boardId, prop }: SelectBoardPropOptions<T>) =>
+	(state: RootState): InvestigatorBoard[T] => {
+		const board = selectBoardById(boardId)(state);
 		return board[prop];
-	});
+	};
 
 export type SelectCurrentBoardPropOptions<T extends BoardKey> = Omit<
 	SelectBoardPropOptions<T>,

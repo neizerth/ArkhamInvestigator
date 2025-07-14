@@ -10,35 +10,27 @@ import {
 	selectBoardChaosTokenValueModifications,
 	selectBoardElderSignValue,
 } from "@modules/mechanics/chaos-bag/value/entities/lib";
-import { createSelector } from "@reduxjs/toolkit";
+import type { RootState } from "@shared/model";
 import { selectBoardTokenValues } from "./selectBoardTokenValues";
 
-export const selectChaosBagTokenValues = (boardId: BoardId) =>
-	createSelector(
-		[
-			selectCurrentReferenceCardTokenValues,
-			selectBoardRefenceCardTokenValues(boardId),
-			selectBoardElderSignValue(boardId),
-			selectChaosTokenValueInternal,
-			selectBoardTokenValues(boardId),
-			selectBoardChaosTokenValueModifications(boardId),
-		],
-		(
-			defaultValues,
-			defaultInvestigatorValues,
-			elderSign,
-			values,
-			investigatorValues,
-			specialValues,
-		) => {
-			return {
-				...defaultChaosTokenValues,
-				...defaultValues,
-				...defaultInvestigatorValues,
-				...(elderSign ? { elderSign } : {}),
-				...(values || {}),
-				...(investigatorValues || {}),
-				...specialValues,
-			};
-		},
-	);
+export const selectChaosBagTokenValues =
+	(boardId: BoardId) => (state: RootState) => {
+		const defaultValues = selectCurrentReferenceCardTokenValues(state);
+		const defaultInvestigatorValues =
+			selectBoardRefenceCardTokenValues(boardId)(state);
+		const elderSign = selectBoardElderSignValue(boardId)(state);
+		const values = selectChaosTokenValueInternal(state);
+		const investigatorValues = selectBoardTokenValues(boardId)(state);
+		const specialValues =
+			selectBoardChaosTokenValueModifications(boardId)(state);
+
+		return {
+			...defaultChaosTokenValues,
+			...defaultValues,
+			...defaultInvestigatorValues,
+			...(elderSign ? { elderSign } : {}),
+			...(values || {}),
+			...(investigatorValues || {}),
+			...specialValues,
+		};
+	};

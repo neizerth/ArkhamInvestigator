@@ -1,25 +1,24 @@
 import { isBoardExists, selectBoardById } from "@modules/board/base/shared/lib";
 import type { BoardId } from "@modules/board/base/shared/model";
-import { createSelector } from "@reduxjs/toolkit";
 import { selectReferenceCardTokenEffects } from "@shared/lib";
+import type { RootState } from "@shared/model";
 import { tokenEffectModifications } from "../../../config";
 
-export const selectBoardTokenEffectModification = (boardId: BoardId) =>
-	createSelector(
-		[selectBoardById(boardId), selectReferenceCardTokenEffects],
-		(board, reference) => {
-			if (!isBoardExists(board)) {
-				return [];
-			}
+export const selectBoardTokenEffectModification =
+	(boardId: BoardId) => (state: RootState) => {
+		const board = selectBoardById(boardId)(state);
+		const reference = selectReferenceCardTokenEffects(state);
 
-			const { code } = board.investigator;
+		if (!isBoardExists(board)) {
+			return [];
+		}
 
-			const modification = tokenEffectModifications[code];
+		const { code } = board.investigator;
+		const modification = tokenEffectModifications[code];
 
-			if (!modification) {
-				return [];
-			}
+		if (!modification) {
+			return [];
+		}
 
-			return modification({ reference });
-		},
-	);
+		return modification({ reference });
+	};

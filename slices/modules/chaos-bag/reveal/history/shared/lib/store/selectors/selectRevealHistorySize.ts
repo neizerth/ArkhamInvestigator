@@ -1,7 +1,5 @@
-import { createSelector } from "@reduxjs/toolkit";
+import type { RootState } from "@shared/model";
 import { selectRevealHistory } from "../chaosBagRevealHistory";
 
-export const selectRevealHistorySize = createSelector(
-	[selectRevealHistory],
-	({ length }) => length,
-);
+export const selectRevealHistorySize = (state: RootState) =>
+	selectRevealHistory(state).length;

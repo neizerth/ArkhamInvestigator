@@ -1,5 +1,5 @@
 import type { SkillCheckDifficultyType } from "@modules/board/skill-check/shared/model";
-import { createSelector } from "@reduxjs/toolkit";
+import type { RootState } from "@shared/model";
 import { selectSkillCheckDifficultyType } from "../skillCheck";
 
 const mapping: Record<SkillCheckDifficultyType, string> = {
@@ -7,12 +7,10 @@ const mapping: Record<SkillCheckDifficultyType, string> = {
 	gte: "⩾",
 };
 
-export const selectSkillCheckDifficultyCharacter = createSelector(
-	[selectSkillCheckDifficultyType],
-	(type) => {
-		if (!type) {
-			return mapping.gte;
-		}
-		return mapping[type];
-	},
-);
+export const selectSkillCheckDifficultyCharacter = (state: RootState) => {
+	const type = selectSkillCheckDifficultyType(state);
+	if (!type) {
+		return mapping.gte;
+	}
+	return mapping[type];
+};
