@@ -3,28 +3,25 @@ import {
 	selectSkillCheckDifficulty,
 	selectSkillCheckDifficultyType,
 } from "@modules/board/skill-check/shared/lib";
-import { createSelector } from "@reduxjs/toolkit";
+import type { RootState } from "@shared/model";
 import { selectSkillCheckResult } from "./selectSkillCheckResult";
 
-export const selectSkillCheckSucceedByResult = (boardId: BoardId) =>
-	createSelector(
-		[
-			selectSkillCheckDifficulty,
-			selectSkillCheckResult(boardId),
-			selectSkillCheckDifficultyType,
-		],
-		(difficultyValue, resultValue, type) => {
-			if (resultValue === "fail") {
-				return 0;
-			}
-			const total = typeof resultValue === "number" ? resultValue : 0;
-			const difficulty = difficultyValue || 0;
+export const selectSkillCheckSucceedByResult =
+	(boardId: BoardId) => (state: RootState) => {
+		const difficultyValue = selectSkillCheckDifficulty(state);
+		const resultValue = selectSkillCheckResult(boardId)(state);
+		const type = selectSkillCheckDifficultyType(state);
 
-			const diff = total - difficulty;
+		if (resultValue === "fail") {
+			return 0;
+		}
+		const total = typeof resultValue === "number" ? resultValue : 0;
+		const difficulty = difficultyValue || 0;
 
-			if (type === "gt") {
-				return diff - 1;
-			}
-			return diff;
-		},
-	);
+		const diff = total - difficulty;
+
+		if (type === "gt") {
+			return diff - 1;
+		}
+		return diff;
+	};

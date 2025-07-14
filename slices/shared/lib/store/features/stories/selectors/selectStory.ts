@@ -1,14 +1,11 @@
-import { createSelector } from "@reduxjs/toolkit";
+import type { RootState } from "@shared/model";
 import { selectStories, selectStoryCode } from "../stories";
 
-export const selectStory = createSelector(
-	selectStoryCode,
-	selectStories,
-	(code, stories) => {
-		if (!code) {
-			return null;
-		}
-
-		return stories.find((story) => story.code === code);
-	},
-);
+export const selectStory = (state: RootState) => {
+	const code = selectStoryCode(state);
+	const stories = selectStories(state);
+	if (!code) {
+		return null;
+	}
+	return stories.find((story) => story.code === code);
+};

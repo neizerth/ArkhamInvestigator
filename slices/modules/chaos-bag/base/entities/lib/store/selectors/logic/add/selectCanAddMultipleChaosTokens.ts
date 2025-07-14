@@ -1,5 +1,5 @@
 import type { ChaosTokenType } from "@modules/chaos-bag/base/shared/model";
-import { createSelector } from "@reduxjs/toolkit";
+import type { RootState } from "@shared/model";
 import {
 	selectChaosBagTokenCount,
 	selectUnlimitedChaosTokens,
@@ -11,13 +11,13 @@ type Options = {
 	count: number;
 };
 
-export const selectCanAddMultipleChaosTokens = (options: Options) =>
-	createSelector(
-		[selectUnlimitedChaosTokens, selectChaosBagTokenCount],
-		(unlimitedChaosTokens, tokenCount) =>
-			canAddMultipleChaosTokens({
-				...options,
-				unlimitedChaosTokens,
-				tokenCount,
-			}),
-	);
+export const selectCanAddMultipleChaosTokens =
+	(options: Options) => (state: RootState) => {
+		const unlimitedChaosTokens = selectUnlimitedChaosTokens(state);
+		const tokenCount = selectChaosBagTokenCount(state);
+		return canAddMultipleChaosTokens({
+			...options,
+			unlimitedChaosTokens,
+			tokenCount,
+		});
+	};

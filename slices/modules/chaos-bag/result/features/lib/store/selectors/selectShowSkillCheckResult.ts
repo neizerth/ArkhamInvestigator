@@ -1,10 +1,9 @@
 import { selectModifyChaosTokens } from "@modules/chaos-bag/base/shared/lib";
 import { selectChaosBagSkillValue } from "@modules/chaos-bag/reveal/base/shared/lib";
-import { createSelector } from "@reduxjs/toolkit";
+import type { RootState } from "@shared/model";
 
-export const selectShowSkillCheckResult = createSelector(
-	[selectChaosBagSkillValue, selectModifyChaosTokens],
-	(skillValue, modifyEnabled) => {
-		return modifyEnabled && typeof skillValue === "number";
-	},
-);
+export const selectShowSkillCheckResult = (state: RootState) => {
+	const skillValue = selectChaosBagSkillValue(state);
+	const modifyEnabled = selectModifyChaosTokens(state);
+	return modifyEnabled && typeof skillValue === "number";
+};

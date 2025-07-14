@@ -1,7 +1,7 @@
-import { createSelector } from "@reduxjs/toolkit";
+import type { RootState } from "@shared/model";
 import { selectChaosBagContents } from "../chaosBag";
 
-export const selectIsChaosBagEmpty = createSelector(
-	[selectChaosBagContents],
-	({ length }) => length === 0,
-);
+export const selectIsChaosBagEmpty = (state: RootState) => {
+	const contents = selectChaosBagContents(state);
+	return contents.length === 0;
+};

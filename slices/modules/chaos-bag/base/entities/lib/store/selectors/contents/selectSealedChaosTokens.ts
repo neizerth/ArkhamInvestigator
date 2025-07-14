@@ -1,7 +1,5 @@
-import { createSelector } from "@reduxjs/toolkit";
+import type { RootState } from "@shared/model";
 import { selectOrderedChaosBagContents } from "./selectOrderedChaosBagContents";
 
-export const selectSealedChaosTokens = createSelector(
-	[selectOrderedChaosBagContents],
-	(contents) => contents.filter(({ sealed }) => sealed),
-);
+export const selectSealedChaosTokens = (state: RootState) =>
+	selectOrderedChaosBagContents(state).filter(({ sealed }) => sealed);

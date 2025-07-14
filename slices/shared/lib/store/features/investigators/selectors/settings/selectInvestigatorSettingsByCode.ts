@@ -1,7 +1,8 @@
-import { createSelector } from "@reduxjs/toolkit";
+import type { RootState } from "@shared/model";
 import { selectInvestigatorSettings } from "../../investigators";
 
-export const selectInvestigatorSettingsByCode = (code: string) =>
-	createSelector([selectInvestigatorSettings], (settings) => {
+export const selectInvestigatorSettingsByCode =
+	(code: string) => (state: RootState) => {
+		const settings = selectInvestigatorSettings(state);
 		return settings?.[code] || {};
-	});
+	};

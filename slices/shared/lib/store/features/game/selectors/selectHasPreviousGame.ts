@@ -2,11 +2,9 @@ import {
 	isBoardExists,
 	selectCurrentBoard,
 } from "@modules/board/base/shared/lib";
-import { createSelector } from "@reduxjs/toolkit";
+import type { RootState } from "@shared/model";
 
-export const selectHasPreviousGame = createSelector(
-	[selectCurrentBoard],
-	(board) => {
-		return isBoardExists(board);
-	},
-);
+export const selectHasPreviousGame = (state: RootState) => {
+	const board = selectCurrentBoard(state);
+	return isBoardExists(board);
+};
