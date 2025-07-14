@@ -1,7 +1,7 @@
 import { setBoardPart } from "@modules/board/base/shared/lib";
 import { put, select, takeEvery } from "redux-saga/effects";
-import { setBoardAbilityValue } from "../actions";
-import { selectBoardAbilityById } from "../selectors";
+import { selectBoardAbilityById } from "../../selectors";
+import { setBoardAbilityValue } from "./setBoardAbilityValue";
 
 function* worker({ payload }: ReturnType<typeof setBoardAbilityValue>) {
 	const { boardId, abilityId } = payload;

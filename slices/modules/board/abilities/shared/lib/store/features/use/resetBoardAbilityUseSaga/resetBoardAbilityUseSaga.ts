@@ -4,9 +4,9 @@ import {
 	setBoardProp,
 } from "@modules/board/base/shared/lib";
 import { put, select, takeEvery } from "redux-saga/effects";
-import { UsedAbilitiesService } from "../../../UsedAbilitiesService";
-import { setBoardAbilityUse } from "../../actions";
-import { selectBoardAbilityById } from "../../selectors";
+import { UsedAbilitiesService } from "../../../../UsedAbilitiesService";
+import { selectBoardAbilityById } from "../../../selectors";
+import { setBoardAbilityUse } from "../setBoardAbilityUse";
 
 const filterAction = (action: unknown) =>
 	setBoardAbilityUse.match(action) && action.payload.use === true;

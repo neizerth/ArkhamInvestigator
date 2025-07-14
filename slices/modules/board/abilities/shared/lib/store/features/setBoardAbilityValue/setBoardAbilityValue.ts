@@ -1,10 +1,10 @@
 import { abilitiesPrefix } from "@modules/board/abilities/shared/config";
-import type { InvestigatorBoardHistoryItem } from "@modules/board/history/shared/model";
-import { createAction } from "@reduxjs/toolkit";
 import type {
 	ChangeBoardAbilityEventPayload,
 	PropsWithAbility,
-} from "../../../model";
+} from "@modules/board/abilities/shared/model";
+import type { InvestigatorBoardHistoryItem } from "@modules/board/history/shared/model";
+import { createAction } from "@reduxjs/toolkit";
 
 export type SetBoardAbilityValuePayload = ChangeBoardAbilityEventPayload &
 	PropsWithAbility & {

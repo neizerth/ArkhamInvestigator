@@ -1,5 +1,5 @@
 import { createAbilityValueFilter } from "@modules/board/abilities/shared/lib";
-import type { boardAbilityValueSet } from "@modules/board/abilities/shared/lib/store/actions";
+import type { boardAbilityValueSet } from "@modules/board/abilities/shared/lib";
 import {
 	isBoardExists,
 	selectBoardById,

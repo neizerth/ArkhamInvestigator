@@ -1,6 +1,6 @@
 import { boardHistoryItemAdded } from "@modules/board/history/shared/lib";
 import { put, takeEvery } from "redux-saga/effects";
-import { boardAbilityValueSet } from "../actions";
+import { boardAbilityValueSet } from "./setBoardAbilityValue";
 
 function* worker({ payload }: ReturnType<typeof boardHistoryItemAdded>) {
 	const { item, board, boardId } = payload;

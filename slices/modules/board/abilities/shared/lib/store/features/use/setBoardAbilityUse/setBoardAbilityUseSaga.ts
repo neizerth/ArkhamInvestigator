@@ -5,9 +5,9 @@ import {
 } from "@modules/board/base/shared/lib";
 import type { BoardId } from "@modules/board/base/shared/model";
 import { put, select, takeEvery } from "redux-saga/effects";
-import { UsedAbilitiesService } from "../../../UsedAbilitiesService";
-import { setBoardAbilityUse } from "../../actions";
-import { selectBoardAbilityById } from "../../selectors";
+import { UsedAbilitiesService } from "../../../../UsedAbilitiesService";
+import { selectBoardAbilityById } from "../../../selectors";
+import { setBoardAbilityUse } from "./setBoardAbilityUse";
 
 const filterAction = (action: unknown) => {
 	if (!setBoardAbilityUse.match(action)) {
