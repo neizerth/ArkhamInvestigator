@@ -6,7 +6,7 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 import { handleSetBoardValuePart } from "./handleSetBoardValuePart";
 import type { SetBoardValuePartPayload } from "./setBoardValuePart";
 
-export const setBoardValuePartInternal = <K extends Key>(
+export const setBoardValuePartInternalReducer = <K extends Key>(
 	state: BoardDraft,
 	{ payload }: PayloadAction<SetBoardValuePartPayload<K>>,
 ) => {

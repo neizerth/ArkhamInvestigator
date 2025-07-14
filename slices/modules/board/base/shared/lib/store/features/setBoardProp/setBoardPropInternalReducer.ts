@@ -3,7 +3,7 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 import { handleSetBoardProp } from "./handleSetBoardProp";
 import type { SetBoardPropPayload } from "./setBoardProp";
 
-export const setBoardPropInternal = <K extends BoardKey>(
+export const setBoardPropInternalReducer = <K extends BoardKey>(
 	state: BoardDraft,
 	{ payload }: PayloadAction<SetBoardPropPayload<K>>,
 ) => {
