@@ -1,8 +1,9 @@
 import type { AppThunk } from "@shared/model";
+
 import {
 	type SetBoardPropValuePayload,
 	setBoardPropValue,
-} from "../../actions";
+} from "../../features";
 import { selectBoardValueProp } from "../../selectors/props/selectBoardValueProp";
 
 export type DecreaseBoardValuePropPayload = Omit<

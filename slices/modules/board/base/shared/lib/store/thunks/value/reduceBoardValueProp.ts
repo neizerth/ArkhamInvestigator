@@ -1,4 +1,4 @@
-import type { SetBoardPropValuePayload } from "../../actions";
+import type { SetBoardPropValuePayload } from "../../features";
 import { decreaseBoardValueProp } from "./decreaseBoardValueProp";
 import { increaseBoardValueProp } from "./increaseBoardValueProp";
 

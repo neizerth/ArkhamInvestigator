@@ -3,7 +3,7 @@ import * as boardHistoryReducers from "@modules/board/history/shared/lib/store/r
 import { createSlice } from "@reduxjs/toolkit";
 import type { PickerDecelerationType } from "@shared/model";
 import { createSliceState } from "redux-toolkit-helpers";
-import * as baseReducers from "./reducers";
+import * as baseReducers from "./features/reducers";
 
 export type BoardState = {
 	currentInvestigatorIndex: number | null;

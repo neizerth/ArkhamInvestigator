@@ -1,5 +1,6 @@
 import type { InvestigatorBoardValueProp } from "@modules/board/base/shared/model";
-import { setBoardPropValue } from "../../actions";
+
+import { setBoardPropValue } from "../../features";
 import { createBoardValueThunkCreator } from "../../util";
 import { decreaseBoardValueProp } from "./decreaseBoardValueProp";
 import { increaseBoardValueProp } from "./increaseBoardValueProp";
