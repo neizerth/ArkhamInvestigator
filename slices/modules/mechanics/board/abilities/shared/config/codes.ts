@@ -9,6 +9,7 @@ export const AbilityCode = {
 		combat: "prescience-of-fate",
 		agility: "balance-of-body",
 	},
+	LolaHayes: "role-switch",
 	Subject5U21: "ravenous",
 	GloriaGoldberg: "gloria-cards",
 	PrestonFairmont: "family-inheritance",

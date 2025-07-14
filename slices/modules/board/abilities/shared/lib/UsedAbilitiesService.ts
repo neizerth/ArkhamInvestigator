@@ -4,7 +4,7 @@ import { equals, isNotNil, reject } from "ramda";
 import type { InvestigatorBoardUsedAbility } from "../model";
 
 type UseOptions = {
-	boardId: number;
+	boardId?: number;
 	ability: InvestigatorAbility;
 	usedAbilities?: InvestigatorBoardUsedAbility[];
 };
@@ -42,6 +42,10 @@ export const UsedAbilitiesService = {
 
 		if (!ability.perInvestigator) {
 			return [...usedAbilities, { id }];
+		}
+
+		if (!boardId) {
+			return;
 		}
 
 		if (index === -1) {

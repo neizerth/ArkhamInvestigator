@@ -1,10 +1,13 @@
+import { selectInvestigatorBoards } from "@modules/board/base/shared/lib";
 import { setModalValue } from "@modules/core/modal/shared/base/lib";
 import type { BaseModalAction } from "@modules/core/modal/shared/base/model";
 import type { FactionModalProps } from "@modules/core/modal/shared/base/ui";
-import { useAppDispatch } from "@shared/lib";
+import { propIncludes, useAppDispatch, useAppSelector } from "@shared/lib";
 import type { InvestigatorDetailItem } from "@shared/model";
-import { useCallback } from "react";
+import { prop } from "ramda";
+import { useCallback, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { getBoardDetailItem } from "../../lib";
 import type { BoardSelectModalData } from "../../model";
 import * as C from "./BoardSelectModal.components";
 
@@ -20,14 +23,28 @@ export function BoardSelectModal<
 	const dispatch = useAppDispatch();
 	const { t } = useTranslation();
 	const { data } = props;
+	const { boardIds, disabledBoardIds = [] } = data;
 	const text = data.text && t(data.text);
-	const disabled = data.disabledIds || [];
+
+	const [selectedId, setSelectedId] = useState<string>();
+	const boards = useAppSelector(selectInvestigatorBoards);
+
+	const detailItems = useMemo(() => {
+		return boards.filter(propIncludes("id", boardIds)).map(getBoardDetailItem);
+	}, [boards, boardIds]);
+
+	const disabled = useMemo(() => {
+		return boards
+			.filter(propIncludes("id", disabledBoardIds))
+			.map(prop("signatureGroupId"));
+	}, [boards, disabledBoardIds]);
 
 	const onChange = useCallback(
 		(item: InvestigatorDetailItem | null) => {
 			if (!item) {
 				return;
 			}
+			setSelectedId(item.id);
 			dispatch(setModalValue(item.data));
 		},
 		[dispatch],
@@ -38,9 +55,9 @@ export function BoardSelectModal<
 			{text && <C.Text value={text} />}
 			<C.Select
 				title={t`Investigators`}
-				data={data.data}
+				data={detailItems}
 				size={75}
-				selectedId={data.selectedId}
+				selectedId={selectedId}
 				disabled={disabled}
 				onChange={onChange}
 			/>

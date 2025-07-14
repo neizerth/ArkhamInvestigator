@@ -8,7 +8,7 @@ import type {
 } from "../../../../model";
 
 export type ProcessModalActionPayload<Action extends BaseModalAction> =
-	Partial<PropsWithBoardId> & {
+	PropsWithBoardId & {
 		modalAction: Action;
 	};
 

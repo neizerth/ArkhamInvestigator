@@ -1,6 +1,6 @@
-import { spawn } from "redux-saga/effects";
-import { ZoeySamarasParallelReactionAbilitySaga } from "./reaction";
+import { fork } from "redux-saga/effects";
+import { ZoeySamarasParallelReactionAbilitySaga } from "./reactionSaga";
 
 export function* ZoeySamarasParallelAbilitySaga() {
-	yield spawn(ZoeySamarasParallelReactionAbilitySaga);
+	yield fork(ZoeySamarasParallelReactionAbilitySaga);
 }
