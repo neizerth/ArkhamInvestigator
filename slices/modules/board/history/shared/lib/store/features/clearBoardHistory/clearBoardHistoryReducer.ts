@@ -1,7 +1,7 @@
 import type { BoardId, BoardReducer } from "@modules/board/base/shared/model";
-import { handleClearBoardHistory } from "../handlers";
+import { handleClearBoardHistory } from "./handleClearBoardHistory";
 
-export const clearBoardHistory: BoardReducer<BoardId> = (
+export const clearBoardHistoryReducer: BoardReducer<BoardId> = (
 	state,
 	{ payload },
 ) => {

@@ -1,11 +1,11 @@
 import { put, select, takeEvery } from "redux-saga/effects";
+import { selectBoardHistoryItem } from "../../selectors";
 import {
 	addBoardHistoryItem,
-	changeBoardHistory,
 	replaceBoardHistoryItem,
 	updateBoardHistoryItem,
-} from "../actions";
-import { selectBoardHistoryItem } from "../selectors";
+} from "../item";
+import { changeBoardHistory } from "./changeBoardHistory";
 
 const actionMap = {
 	group: addBoardHistoryItem,

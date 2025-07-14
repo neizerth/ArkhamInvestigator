@@ -1,8 +1,7 @@
+import { boardHistoryPrefix } from "@modules/board/history/shared/config";
+import type { ChangeHistoryPayload } from "@modules/board/history/shared/model";
 import { createAction } from "@reduxjs/toolkit";
-import { boardHistoryPrefix } from "../../../config";
-import type { ChangeHistoryPayload } from "../../../model";
-import type { AddBoardHistoryItemPayload } from "./item/addBoardHistoryItem";
-
+import type { AddBoardHistoryItemPayload } from "../item";
 export type ChangeBoardHistoryItemPayload = AddBoardHistoryItemPayload &
 	ChangeHistoryPayload;
 
