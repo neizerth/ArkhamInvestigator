@@ -1,4 +1,4 @@
-import type { ChaosBagRevealHistoryHandler } from "../../../model";
+import type { ChaosBagRevealHistoryHandler } from "../../../../model";
 
 export const handleClearRevealHistory: ChaosBagRevealHistoryHandler = (
 	store,

@@ -1,6 +1,6 @@
 import { whereId } from "@shared/lib/util";
 import { reject } from "ramda";
-import type { ChaosBagRevealHistoryHandler } from "../../../model";
+import type { ChaosBagRevealHistoryHandler } from "../../../../model";
 
 export type HandleRemoveRevealHistoryItemPayload = {
 	id: string;
