@@ -27,7 +27,7 @@ export const Ability = ({ ability, ...props }: AbilityProps) => {
 			setBoardAbilityUse({
 				boardId: "current",
 				abilityId: ability.id,
-				use: false,
+				use: true,
 			}),
 		);
 	}, [dispatch, ability.id]);
