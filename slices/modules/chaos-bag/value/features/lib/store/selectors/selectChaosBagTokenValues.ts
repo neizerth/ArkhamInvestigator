@@ -27,22 +27,22 @@ export const selectChaosBagTokenValues = (boardId: BoardId) =>
 			selectBoardChaosTokenValueModifications(boardId),
 		],
 		(
-			defaultValues,
+			referenceCardValues,
 			defaultInvestigatorValues,
 			elderSign,
 			values,
-			investigatorValues,
-			specialValues,
+			customizedValues,
+			signatureModifications,
 		) => {
 			return {
 				...defaultNumericChaosTokenValue,
 				...defaultChaosTokenValues,
-				...defaultValues,
+				...referenceCardValues,
 				...defaultInvestigatorValues,
 				...(elderSign ? { elderSign } : {}),
 				...(values || {}),
-				...(investigatorValues || {}),
-				...specialValues,
+				...(customizedValues || {}),
+				...signatureModifications,
 			};
 		},
 	);
