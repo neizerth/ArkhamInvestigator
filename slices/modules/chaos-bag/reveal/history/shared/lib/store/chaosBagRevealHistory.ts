@@ -2,7 +2,7 @@ import type { ChaosBagHistoryItem } from "@modules/chaos-bag/base/shared/model";
 import { createSlice } from "@reduxjs/toolkit";
 import { createSliceState } from "redux-toolkit-helpers";
 import { chaosBagRevealHistoryPrefix } from "../../config";
-import * as reducers from "./reducers";
+import * as reducers from "./features/reducers";
 
 export type ChaosBagRevealHistoryState = {
 	revealHistory: ChaosBagHistoryItem[];

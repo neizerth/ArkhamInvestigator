@@ -1,10 +1,10 @@
-import type { ChaosBagRevealHistoryReducer } from "../../../model";
+import type { ChaosBagRevealHistoryReducer } from "../../../../model";
 import {
 	type HandlePatchRevealHistoryItemPayload,
 	handlePatchRevealHistoryItem,
-} from "../handlers";
+} from "./handlePatchRevealHistoryItem";
 
-export const patchRevealHistoryItem: ChaosBagRevealHistoryReducer<
+export const patchRevealHistoryItemReducer: ChaosBagRevealHistoryReducer<
 	HandlePatchRevealHistoryItemPayload
 > = (state, { payload }) => {
 	handlePatchRevealHistoryItem(state, payload);
