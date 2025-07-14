@@ -2,7 +2,7 @@ import type { ScenarioChaosTokenValues } from "@modules/chaos-bag/base/shared/mo
 import { createSlice } from "@reduxjs/toolkit";
 import { createSliceState } from "redux-toolkit-helpers";
 import { chaosTokenValuePrefix } from "../../config";
-import * as reducers from "./reducers";
+import * as reducers from "./features/reducers";
 
 export type ChaosTokenValueState = {
 	chaosTokenValue: ScenarioChaosTokenValues | null;
