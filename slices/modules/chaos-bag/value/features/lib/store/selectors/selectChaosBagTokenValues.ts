@@ -4,7 +4,10 @@ import {
 	selectBoardRefenceCardTokenValues,
 	selectCurrentReferenceCardTokenValues,
 } from "@modules/chaos-bag/value/entities/lib";
-import { defaultChaosTokenValues } from "@modules/chaos-bag/value/shared/config";
+import {
+	defaultChaosTokenValues,
+	defaultNumericChaosTokenValue,
+} from "@modules/chaos-bag/value/shared/config";
 import { selectChaosTokenValueInternal } from "@modules/chaos-bag/value/shared/lib";
 import {
 	selectBoardChaosTokenValueModifications,
@@ -32,6 +35,7 @@ export const selectChaosBagTokenValues = (boardId: BoardId) =>
 			specialValues,
 		) => {
 			return {
+				...defaultNumericChaosTokenValue,
 				...defaultChaosTokenValues,
 				...defaultValues,
 				...defaultInvestigatorValues,

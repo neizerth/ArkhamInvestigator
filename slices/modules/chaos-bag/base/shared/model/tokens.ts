@@ -47,4 +47,4 @@ export type ChaosBagToken = ChaosBagTokenData & {
 	id: string;
 };
 
-export type ScenarioChaosTokenValues = Partial<Record<ChaosTokenType, number>>;
+export type ChaosTokenValues = Partial<Record<ChaosTokenType, number>>;

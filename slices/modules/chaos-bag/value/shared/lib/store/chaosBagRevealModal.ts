@@ -1,12 +1,12 @@
-import type { ScenarioChaosTokenValues } from "@modules/chaos-bag/base/shared/model";
+import type { ChaosTokenValues } from "@modules/chaos-bag/base/shared/model";
 import { createSlice } from "@reduxjs/toolkit";
 import { createSliceState } from "redux-toolkit-helpers";
 import { chaosTokenValuePrefix } from "../../config";
 import * as reducers from "./features/reducers";
 
 export type ChaosTokenValueState = {
-	chaosTokenValue: ScenarioChaosTokenValues | null;
-	boardChaosTokenValue: Record<number, ScenarioChaosTokenValues | null> | null;
+	chaosTokenValue: ChaosTokenValues | null;
+	boardChaosTokenValue: Record<number, ChaosTokenValues | null> | null;
 };
 
 const initialState: ChaosTokenValueState = {

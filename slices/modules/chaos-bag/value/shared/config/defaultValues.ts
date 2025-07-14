@@ -1,8 +1,23 @@
-import type { ChaosTokenType } from "@features/game/chaos-bag/model";
+import type { NumericChaosTokenType } from "@features/game/chaos-bag/model";
 
-export const defaultChaosTokenValues: Partial<Record<ChaosTokenType, number>> =
-	{
-		frost: -1,
-		bless: 2,
-		curse: -2,
-	};
+export const defaultChaosTokenValues = {
+	frost: -1,
+	bless: 2,
+	curse: -2,
+};
+
+export const defaultNumericChaosTokenValue: Record<
+	NumericChaosTokenType,
+	number
+> = {
+	"+1": 1,
+	"-1": -1,
+	"-2": -2,
+	"-3": -3,
+	"-4": 4,
+	"-5": -5,
+	"-6": 6,
+	"-7": -7,
+	"-8": -8,
+	"0": 0,
+};
