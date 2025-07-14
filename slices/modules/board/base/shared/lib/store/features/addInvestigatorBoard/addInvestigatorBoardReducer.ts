@@ -4,7 +4,7 @@ import type {
 } from "@modules/board/base/shared/model";
 import { handleAddInvestigatorBoard } from "./handleAddInvestigatorBoard";
 
-export const addInvestigatorBoard: BoardReducer<InvestigatorBoard> = (
+export const addInvestigatorBoardReducer: BoardReducer<InvestigatorBoard> = (
 	state,
 	{ payload },
 ) => {

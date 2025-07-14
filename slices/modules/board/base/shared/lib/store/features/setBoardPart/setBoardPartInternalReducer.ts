@@ -2,7 +2,7 @@ import type { BoardReducer } from "@modules/board/base/shared/model";
 import { handleSetBoardPart } from "./handleSetBoardPart";
 import type { SetBoardPartPayload } from "./setBoardPart";
 
-export const setBoardPartInternal: BoardReducer<SetBoardPartPayload> = (
+export const setBoardPartInternalReducer: BoardReducer<SetBoardPartPayload> = (
 	state,
 	{ payload },
 ) => {
