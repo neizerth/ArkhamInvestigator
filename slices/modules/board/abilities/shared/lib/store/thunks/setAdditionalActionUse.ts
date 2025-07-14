@@ -1,9 +1,10 @@
 import { additionalActionAbilityId } from "@modules/board/abilities/shared/config";
+
+import type { AppThunk } from "@shared/model";
 import {
 	type SetBoardAbilityUsePayload,
 	setBoardAbilityUse,
-} from "@modules/board/abilities/shared/lib";
-import type { AppThunk } from "@shared/model";
+} from "../features";
 
 export type SetAdditionalActionUsePayload = Omit<
 	SetBoardAbilityUsePayload,
