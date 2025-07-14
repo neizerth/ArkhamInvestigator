@@ -1,7 +1,7 @@
 import { put, select, takeEvery } from "redux-saga/effects";
-import { setBoardAbilityUse, toggleBoardAbilityUse } from "../../actions";
-import { selectBoardIsAbilityUsed } from "../../selectors";
-
+import { selectBoardIsAbilityUsed } from "../../../selectors";
+import { setBoardAbilityUse } from "../setBoardAbilityUse/setBoardAbilityUse";
+import { toggleBoardAbilityUse } from "./toggleBoardAbilityUse";
 function* worker({ payload }: ReturnType<typeof toggleBoardAbilityUse>) {
 	const selectIsUsed = selectBoardIsAbilityUsed(payload);
 

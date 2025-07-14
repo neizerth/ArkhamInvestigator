@@ -6,7 +6,7 @@ import { put, takeEvery } from "redux-saga/effects";
 import {
 	type ChangedInvestigatorBoardUsedAbility,
 	changeBoardHistoryAbilityUse,
-} from "../../actions";
+} from "./changeBoardHistoryAbilityUse";
 
 function* worker({ payload }: ReturnType<typeof boardHistoryItemAdded>) {
 	const { board, item } = payload;

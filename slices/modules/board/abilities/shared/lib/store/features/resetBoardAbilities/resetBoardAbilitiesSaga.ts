@@ -5,9 +5,9 @@ import {
 import { idIncludes } from "@shared/lib";
 import { prop, reject } from "ramda";
 import { put, select, takeEvery } from "redux-saga/effects";
-import { getAbilityLimits } from "../../info";
-import { resetBoardAbilities } from "../actions";
-import { selectBoardAbilities } from "../selectors";
+import { getAbilityLimits } from "../../../info";
+import { selectBoardAbilities } from "../../selectors";
+import { resetBoardAbilities } from "./resetBoardAbilities";
 
 function* worker({ payload }: ReturnType<typeof resetBoardAbilities>) {
 	const { boardId, limitTypes = [] } = payload;

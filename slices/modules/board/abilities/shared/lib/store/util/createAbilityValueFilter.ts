@@ -1,6 +1,6 @@
 import type { PayloadAction } from "@reduxjs/toolkit";
 import type { ActionCreatorPayload } from "@shared/model";
-import { boardAbilityValueSet } from "../actions";
+import { boardAbilityValueSet } from "../features";
 
 type Payload = ActionCreatorPayload<typeof boardAbilityValueSet>;
 export const createAbilityValueFilter =
