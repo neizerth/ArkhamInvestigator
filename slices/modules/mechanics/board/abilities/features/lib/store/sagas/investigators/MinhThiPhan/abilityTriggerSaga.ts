@@ -1,10 +1,11 @@
+// TODO
 import { setBoardAbilityUse } from "@modules/board/abilities/shared/lib";
 import { openBoardSelectModal } from "@modules/core/modal/entities/board-select/lib";
 import { createCancelModalAction } from "@modules/core/modal/shared/actions/cancel/lib";
 import { createConfirmModalAction } from "@modules/core/modal/shared/actions/confirm/lib";
 import { AbilityCode } from "@modules/mechanics/board/abilities/shared/config";
 import { put, takeEvery } from "redux-saga/effects";
-import { giveAction } from "./giveAction";
+import { addWild } from "./addWild";
 import { type SelectModalDataResult, selectModalData } from "./selectModalData";
 
 const filterAction = (action: unknown) => {
@@ -15,7 +16,7 @@ const filterAction = (action: unknown) => {
 	const { payload } = action;
 
 	return (
-		payload.abilityId === AbilityCode.CarsonSinclair &&
+		payload.abilityId === AbilityCode.MinhThiPhan &&
 		!payload.abilityTargetBoardId &&
 		payload.use === false
 	);
@@ -31,7 +32,7 @@ function* worker(action: ReturnType<typeof setBoardAbilityUse>) {
 
 	if (modalData.boardIds.length === 1) {
 		yield put(
-			giveAction({
+			addWild({
 				...action.payload,
 				targetBoardId: modalData.boardIds[0],
 			}),
@@ -41,15 +42,15 @@ function* worker(action: ReturnType<typeof setBoardAbilityUse>) {
 
 	yield put(
 		openBoardSelectModal({
-			id: "carson-sinclair-board-select",
+			id: "minh-thi-phan-board-select",
 			data: {
 				...modalData,
 				title: "Choose an Investigator",
-				subtitle: "Give an action",
+				subtitle: "Add wild",
 				actions: [
 					createCancelModalAction(),
 					createConfirmModalAction({
-						id: AbilityCode.CarsonSinclair,
+						id: AbilityCode.MinhThiPhan,
 					}),
 				],
 			},
@@ -57,6 +58,6 @@ function* worker(action: ReturnType<typeof setBoardAbilityUse>) {
 	);
 }
 
-export function* CarsonSinclairAbilityTriggerSaga() {
+export function* MinhThiPhanAbilityTriggerSaga() {
 	yield takeEvery(filterAction, worker);
 }
