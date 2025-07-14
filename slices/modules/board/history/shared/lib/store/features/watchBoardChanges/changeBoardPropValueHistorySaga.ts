@@ -1,7 +1,7 @@
 import { boardPropValueChanged } from "@modules/board/base/shared/lib";
 import { put, takeEvery } from "redux-saga/effects";
-import { changeBoardHistory } from "../../actions";
 import { createHistoryActionFilter } from "../../util/createHistoryActionFilter";
+import { changeBoardHistory } from "../changeBoardHistory";
 
 const filterAction = createHistoryActionFilter(boardPropValueChanged.match);
 

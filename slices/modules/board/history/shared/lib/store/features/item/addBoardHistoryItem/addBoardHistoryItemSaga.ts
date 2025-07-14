@@ -1,7 +1,10 @@
 import { setBoardPart } from "@modules/board/base/shared/lib";
 import { put, takeEvery } from "redux-saga/effects";
 import { v4 } from "uuid";
-import { addBoardHistoryItem, boardHistoryItemAdded } from "../../actions";
+import {
+	addBoardHistoryItem,
+	boardHistoryItemAdded,
+} from "./addBoardHistoryItem";
 
 function* worker({ payload }: ReturnType<typeof addBoardHistoryItem>) {
 	const { boardId, data, id = v4(), board } = payload;

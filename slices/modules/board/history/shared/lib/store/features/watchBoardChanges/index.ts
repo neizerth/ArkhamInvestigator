@@ -4,7 +4,7 @@ import { changeBoardPropHistorySaga } from "./changeBoardPropHistorySaga";
 import { changeBoardPropValueHistorySaga } from "./changeBoardPropValueHistorySaga";
 import { changeBoardValuePartHistorySaga } from "./changeBoardValuePartHistorySaga";
 
-export function* boardHistoryChangeSaga() {
+export function* watchHistoryBoardChangesSaga() {
 	yield spawn(changeBoardPartHistorySaga);
 	yield spawn(changeBoardPropHistorySaga);
 	yield spawn(changeBoardPropValueHistorySaga);

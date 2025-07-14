@@ -3,12 +3,11 @@ import {
 	selectBoardById,
 	setBoardPart,
 } from "@modules/board/base/shared/lib";
-import { propEq } from "ramda";
+import { mergeDeepRight, propEq } from "ramda";
 import { put, select, takeEvery } from "redux-saga/effects";
-import { v4 } from "uuid";
-import { replaceBoardHistoryItem } from "../../actions";
+import { updateBoardHistoryItem } from "./updateBoardHistoryItem";
 
-function* worker({ payload }: ReturnType<typeof replaceBoardHistoryItem>) {
+function* worker({ payload }: ReturnType<typeof updateBoardHistoryItem>) {
 	const { boardId, data, id } = payload;
 	const selector = selectBoardById(boardId);
 	const board: ReturnType<typeof selector> = yield select(selector);
@@ -23,10 +22,7 @@ function* worker({ payload }: ReturnType<typeof replaceBoardHistoryItem>) {
 		return;
 	}
 
-	const item = {
-		id: v4(),
-		...data,
-	};
+	const item = mergeDeepRight(board.history[index], data);
 
 	const history = board.history.with(index, item);
 
@@ -41,6 +37,6 @@ function* worker({ payload }: ReturnType<typeof replaceBoardHistoryItem>) {
 	);
 }
 
-export function* replaceBoardHistoryItemSaga() {
-	yield takeEvery(replaceBoardHistoryItem.match, worker);
+export function* updateBoardHistoryItemSaga() {
+	yield takeEvery(updateBoardHistoryItem.match, worker);
 }
