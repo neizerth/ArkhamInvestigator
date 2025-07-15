@@ -1,10 +1,10 @@
-import { ChaosTokenInput } from "@modules/chaos-bag/base/entities/ui";
 import { ChaosTokenMemo as ChaosToken } from "@modules/chaos-bag/base/shared/ui";
 import { TouchableOpacity } from "@modules/core/haptic/shared/ui";
 import { font, size } from "@shared/config";
 import { Row, TextView } from "@shared/ui";
 import { View } from "react-native";
 import styled from "styled-components/native";
+import { ChaosTokenInput } from "../ChaosTokenInput";
 
 export const Container: typeof View = styled(View)`
   padding: ${size.gap.small}px 0px;

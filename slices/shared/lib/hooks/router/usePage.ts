@@ -18,7 +18,7 @@ export const usePage = () => {
 			async () => {
 				if (showDescription) {
 					dispatch(setShowDescription(false));
-					await delay(450);
+					await delay(150);
 				}
 				if (replace) {
 					dispatch(replacePageTo(href));

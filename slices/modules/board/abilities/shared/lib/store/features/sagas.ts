@@ -2,7 +2,7 @@ import { spawn } from "redux-saga/effects";
 import { resetBoardAbilitiesSaga } from "./resetBoardAbilities/resetBoardAbilitiesSaga";
 import { boardHistoryItemAddedSaga } from "./setBoardAbilityValue/boardHistoryItemAddedSaga";
 import { setBoardAbilityValueSaga } from "./setBoardAbilityValue/setBoardAbilityValueSaga";
-import { changeBoardHistoryAbilityUseSaga } from "./use/changeBoardHistoryAbilityUse/changeBoardHistoryAbilityUseSaga";
+import { boardAbilityUseSharedSagas } from "./use/sagas";
 
 export function* abilitiesSharedSaga() {
 	yield spawn(boardHistoryItemAddedSaga);
@@ -10,5 +10,5 @@ export function* abilitiesSharedSaga() {
 	yield spawn(setBoardAbilityValueSaga);
 	yield spawn(resetBoardAbilitiesSaga);
 
-	yield spawn(changeBoardHistoryAbilityUseSaga);
+	yield spawn(boardAbilityUseSharedSagas);
 }

@@ -1,1 +1,1 @@
-export * from "./useChaosBagTokenEffects";
+export * from "./useDefaultChaosBagEffects";

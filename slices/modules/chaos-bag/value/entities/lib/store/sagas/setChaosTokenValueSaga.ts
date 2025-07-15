@@ -1,4 +1,4 @@
-import { selectBoardChaosTokenTypes } from "@modules/chaos-bag/base/shared/lib";
+import { selectBoardChaosTokenTypes } from "@modules/chaos-bag/effect/entities/lib";
 import { updateChaosTokenValueInternal } from "@modules/chaos-bag/value/shared/lib";
 import { put, select, takeEvery } from "redux-saga/effects";
 import { setChaosTokenValue, updateBoardChaosTokenValue } from "../actions";
