@@ -1,4 +1,4 @@
-import { ChaosBagContents } from "@features/game/chaos-bag";
+import { ChaosTokenList } from "@modules/chaos-bag/base/entities/ui";
 import { Button } from "@modules/core/haptic/shared/ui";
 import { color, font, size } from "@shared/config";
 import { Row, Text } from "@shared/ui";
@@ -9,7 +9,7 @@ export const Container: typeof ContentPage = styled(ContentPage)`
   background-color: ${color.dark30};
 `;
 
-export const Bag: typeof ChaosBagContents = styled(ChaosBagContents)`
+export const Bag: typeof ChaosTokenList = styled(ChaosTokenList)`
 	flex: 1;
 `;
 

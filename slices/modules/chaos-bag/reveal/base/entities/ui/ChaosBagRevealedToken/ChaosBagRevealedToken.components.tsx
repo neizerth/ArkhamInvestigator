@@ -1,10 +1,10 @@
+import { chaosToken } from "@modules/chaos-bag/base/shared/config";
+import { ChaosTokenPreview } from "@modules/chaos-bag/base/shared/ui";
 import { color, font } from "@shared/config";
 import { Text } from "@shared/ui";
 import type { FC } from "react";
 import { type TextProps, View, type ViewProps } from "react-native";
 import styled, { css } from "styled-components/native";
-import { chaosTokenColor } from "../../../../../../../features/game/chaos-bag/config/token/color";
-import { ChaosTokenPreview } from "../../../../../../../features/game/chaos-bag/ui/token";
 
 type PropsWithSelection = {
 	selected?: boolean;
@@ -35,7 +35,7 @@ export const Position: FC<PositionProps> = styled(View)`
   ${({ selected }: PositionProps) =>
 		selected &&
 		css`
-    background-color: ${chaosTokenColor.selected};
+    background-color: ${chaosToken.color.selected};
   `}
 `;
 

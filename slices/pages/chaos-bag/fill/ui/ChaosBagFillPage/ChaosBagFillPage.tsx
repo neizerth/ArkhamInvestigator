@@ -1,5 +1,5 @@
-import type { ChaosTokenType } from "@features/game/chaos-bag/model";
 import { createChaosBag } from "@modules/chaos-bag/base/entities/lib";
+import type { ChaosTokenType } from "@modules/chaos-bag/base/shared/model";
 import { useAppTranslation } from "@modules/core/i18n/shared/lib";
 import {
 	goBack,

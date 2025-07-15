@@ -1,7 +1,7 @@
 import { selectChaosBagLoadingAnimation } from "@modules/chaos-bag/base/shared/lib";
 import { useAppSelector, useBoolean } from "@shared/lib";
 
-import { selectRevealedTokensCount } from "@modules/chaos-bag/reveal/base/entities/lib";
+import { selectRevealedTokensCount } from "@modules/chaos-bag/reveal/base/shared/lib";
 import type { ViewProps } from "react-native";
 import * as C from "./ChaosTokenRevealModalContent.components";
 

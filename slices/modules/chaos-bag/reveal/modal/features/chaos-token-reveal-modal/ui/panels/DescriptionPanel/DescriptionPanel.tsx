@@ -1,5 +1,6 @@
 import { selectCurrentToken } from "@modules/chaos-bag/base/entities/lib";
 
+import { useChaosBagTokenEffects } from "@modules/chaos-bag/effect/entities/lib";
 import {
 	selectRevealedTokenIds,
 	setCurrentRevealedTokenId,
@@ -8,7 +9,6 @@ import { useAppDispatch, useAppSelector } from "@shared/lib";
 import { last } from "ramda";
 import { useCallback } from "react";
 import type { ViewProps } from "react-native";
-import { useChaosBagTokenReference } from "../../../../../../../../../features/game/chaos-bag/lib";
 import * as C from "./DescriptionPanel.components";
 
 export type DescriptionPanelProps = ViewProps;
@@ -17,11 +17,11 @@ export const DescriptionPanel = (props: DescriptionPanelProps) => {
 	const dispatch = useAppDispatch();
 	const currentToken = useAppSelector(selectCurrentToken);
 	const tokenIds = useAppSelector(selectRevealedTokenIds);
-	const reference = useChaosBagTokenReference({
+	const effects = useChaosBagTokenEffects({
 		boardId: "current",
 	});
 
-	const effect = currentToken && reference[currentToken.type];
+	const effect = currentToken && effects[currentToken.type];
 	const lastId = last(tokenIds);
 
 	const isLastToken = !currentToken || currentToken.id === lastId;

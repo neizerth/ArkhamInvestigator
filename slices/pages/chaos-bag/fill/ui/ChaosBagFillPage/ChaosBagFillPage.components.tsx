@@ -1,4 +1,4 @@
-import { ChaosToken } from "@features/game/chaos-bag";
+import { ChaosToken } from "@modules/chaos-bag/base/shared/ui";
 import { Button, HapticSelect } from "@modules/core/haptic/shared/ui";
 import { ContextModal } from "@modules/core/modal/shared/base/ui";
 import { color, size } from "@shared/config";

@@ -1,4 +1,4 @@
-import type { NumericChaosTokenType } from "@features/game/chaos-bag/model";
+import type { NumericChaosTokenType } from "@modules/chaos-bag/base/shared/model";
 
 export const defaultChaosTokenValues = {
 	frost: -1,
