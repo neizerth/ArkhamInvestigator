@@ -1,9 +1,9 @@
-import { put, takeEvery } from "redux-saga/effects";
 import {
 	giveUpkeepResourcesToAllBoards,
 	placeDoomOnAgenda,
 	resetUpkeepAllInvestigatorActions,
-} from "../../../../../../../phase";
+} from "@modules/mechanics/phase/entities/lib";
+import { put, takeEvery } from "redux-saga/effects";
 import { processTimingWizardStep } from "./processTimingWizardStep";
 
 function* worker({ payload }: ReturnType<typeof processTimingWizardStep>) {

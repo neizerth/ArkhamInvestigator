@@ -7,7 +7,7 @@ import { createMigrate, persistReducer, persistStore } from "redux-persist";
 import {
 	persistConfigMigrations,
 	persistStorageConfig,
-} from "../../../modules/core/storage/shared";
+} from "@modules/core/storage/shared";
 import reducers from "./reducer";
 import rootSaga from "./sagas";
 
