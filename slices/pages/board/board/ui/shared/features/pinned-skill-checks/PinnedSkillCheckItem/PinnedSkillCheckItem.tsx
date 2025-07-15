@@ -1,8 +1,8 @@
-import { useSkillItemChaosTokenRevealModal } from "@features/game/skill-check";
 import {
 	selectTapToHidePins,
 	setBoardProp,
 } from "@modules/board/base/shared/lib";
+import { useSkillItemChaosTokenRevealModal } from "@modules/board/skill-check/features/skill-item-chaos-token-reveal-modal";
 import {
 	startSkillCheck,
 	toggleCurrentSkillCheckHistoryItemPin as togglePin,
