@@ -1,12 +1,9 @@
+import { ChaosTokenValuePicker } from "@modules/chaos-bag/base/entities/ui";
+import { ChaosTokenPreview } from "@modules/chaos-bag/base/shared/ui";
 import { TouchableOpacity } from "@modules/core/haptic/shared/ui";
 import { size } from "@shared/config";
 import { View } from "react-native";
 import styled from "styled-components/native";
-import {
-	ChaosTokenPreview,
-	ChaosTokenValuePicker,
-} from "../../../../../../../../../features/game/chaos-bag/ui/token";
-import { ChaosTokenValue } from "../../../../../../../../../features/game/chaos-bag/ui/token/ChaosTokenValue";
 import { ExpressionPanel } from "../ExpressionPanel";
 
 export const Container: typeof View = styled(View)`
@@ -57,8 +54,4 @@ export const Control: typeof ChaosTokenValuePicker = styled(
 	},
 })`
   
-`;
-
-export const TokenValue: typeof ChaosTokenValue = styled(ChaosTokenValue)`
-
 `;

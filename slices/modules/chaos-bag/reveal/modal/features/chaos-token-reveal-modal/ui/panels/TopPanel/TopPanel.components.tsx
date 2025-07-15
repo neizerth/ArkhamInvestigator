@@ -1,7 +1,7 @@
+import { BlessCurseControl } from "@modules/chaos-bag/base/entities/ui";
 import { size } from "@shared/config";
 import { View } from "react-native";
 import styled from "styled-components/native";
-import { BlessCurseControl } from "../../../../../../../../../features/game/chaos-bag/ui/token";
 import { ChaosTokenRevealHistory } from "../../../../../../base/entities/ui/ChaosTokenRevealHistory";
 
 export const Container: typeof View = styled(View)`

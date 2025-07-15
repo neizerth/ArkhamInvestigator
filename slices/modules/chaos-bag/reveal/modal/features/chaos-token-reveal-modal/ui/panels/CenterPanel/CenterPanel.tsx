@@ -11,22 +11,22 @@ import {
 	Gesture,
 	GestureDetector,
 } from "react-native-gesture-handler";
-import { chaosToken } from "../../../../../../../../../features/game/chaos-bag/config";
 
 import { selectCurrentBoardId } from "@modules/board/base/shared/lib";
 import { selectModifyChaosTokens } from "@modules/chaos-bag/base/shared/lib";
-import { setCurrentRevealedTokenId } from "@modules/chaos-bag/reveal/base/shared/lib";
+import {
+	selectRevealedTokens,
+	setCurrentRevealedTokenId,
+} from "@modules/chaos-bag/reveal/base/shared/lib";
 import { selectChaosTokenValueByType } from "@modules/chaos-bag/value/features/lib";
 
 import { toggleChaosTokenSeal } from "@modules/chaos-bag/base/entities/lib";
+import { chaosToken } from "@modules/chaos-bag/base/shared/config";
 import type {
 	ChaosBagToken,
 	ChaosTokenType,
 } from "@modules/chaos-bag/base/shared/model";
-import {
-	returnSingleChaosToken,
-	selectRevealedTokens,
-} from "@modules/chaos-bag/reveal/base/entities/lib";
+import { returnSingleChaosToken } from "@modules/chaos-bag/reveal/base/entities/lib";
 import { last } from "ramda";
 import * as C from "./CenterPanel.components";
 

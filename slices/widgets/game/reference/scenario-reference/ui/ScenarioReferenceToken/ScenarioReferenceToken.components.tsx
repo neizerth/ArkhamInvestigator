@@ -1,5 +1,5 @@
-import { ChaosToken } from "@features/game/chaos-bag";
-import { ChaosTokenValuePicker } from "@features/game/chaos-bag";
+import { ChaosTokenValuePicker } from "@modules/chaos-bag/base/entities/ui";
+import { ChaosToken } from "@modules/chaos-bag/base/shared/ui";
 import { View } from "react-native";
 import styled from "styled-components/native";
 

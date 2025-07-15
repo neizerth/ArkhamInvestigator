@@ -1,4 +1,4 @@
-import { selectRevealedTokensCount } from "@modules/chaos-bag/reveal/base/entities/lib";
+import { selectRevealedTokensCount } from "@modules/chaos-bag/reveal/base/shared/lib";
 import { CustomModalId } from "@modules/core/modal/entities/base/config";
 import { openModal } from "@modules/core/modal/shared/base/lib";
 import { putResolve, select } from "redux-saga/effects";

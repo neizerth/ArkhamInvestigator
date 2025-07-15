@@ -1,5 +1,5 @@
-import type { ChaosTokenType } from "@features/game/chaos-bag/model";
 import type { BoardId } from "@modules/board/base/shared/model";
+import type { ChaosTokenType } from "@modules/chaos-bag/base/shared/model";
 import {
 	selectBoardChaosTokenValueModifications,
 	selectBoardElderSignValue,

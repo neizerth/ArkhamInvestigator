@@ -1,4 +1,4 @@
-import { selectRevealedTokens } from "@modules/chaos-bag/reveal/base/entities/lib";
+import { selectRevealedTokens } from "@modules/chaos-bag/reveal/base/shared/lib";
 import { useAppSelector } from "@shared/lib";
 import { init } from "ramda";
 import { useMemo } from "react";

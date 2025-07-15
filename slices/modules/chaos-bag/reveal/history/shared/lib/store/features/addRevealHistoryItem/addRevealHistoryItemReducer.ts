@@ -1,4 +1,4 @@
-import type { ChaosBagHistoryItem } from "@features/game/chaos-bag/model";
+import type { ChaosBagHistoryItem } from "@modules/chaos-bag/base/shared/model";
 import type { ChaosBagRevealHistoryReducer } from "../../../../model";
 import { handleAddRevealHistoryItem } from "./handleAddRevealHistoryItem";
 

@@ -5,7 +5,6 @@ import {
 import { useAppSelector } from "@shared/lib";
 import { useCallback, useState } from "react";
 import type { ViewProps } from "react-native";
-import {} from "../../../../../../../../../features/game/chaos-bag/lib";
 import * as C from "./ExpressionPanel.components";
 import { getExpressionDisplayStyles } from "./ExpressionPanel.styles";
 

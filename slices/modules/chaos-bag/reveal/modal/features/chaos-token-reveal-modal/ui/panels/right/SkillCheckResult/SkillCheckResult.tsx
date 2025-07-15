@@ -1,9 +1,9 @@
 import { signedNumber, useAppSelector } from "@shared/lib";
 import { useMemo } from "react";
 import type { ViewProps } from "react-native";
-import { chaosToken } from "../../../../../../../../../../features/game/chaos-bag/config";
 
 import { selectBoardId } from "@modules/board/base/shared/lib";
+import { chaosToken } from "@modules/chaos-bag/base/shared/config";
 import {
 	selectShowSkillCheckResult,
 	selectSkillCheckResult,
