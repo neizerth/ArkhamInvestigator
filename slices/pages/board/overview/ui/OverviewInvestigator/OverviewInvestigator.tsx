@@ -1,4 +1,3 @@
-import { makeAction } from "@features/game/phase";
 import {
 	selectBoardById,
 	selectShowDamageAndHorror,
@@ -8,6 +7,7 @@ import {
 	selectBoardFaction,
 	selectBoardHorror,
 } from "@modules/mechanics/board/base/entities/lib";
+import { makeAction } from "@modules/mechanics/phase/entities/lib";
 import { useAppDispatch, useAppSelector } from "@shared/lib";
 import type { InvestigatorBoardNumericStat } from "@shared/model";
 import { range } from "ramda";

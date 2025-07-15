@@ -1,9 +1,9 @@
-import type { AppThunk } from "@shared/model";
 import {
 	giveUpkeepResourcesToAllBoards,
 	placeDoomOnAgenda,
 	resetUpkeepAllInvestigatorActions,
-} from "../../../../../../../phase";
+} from "@modules/mechanics/phase/entities/lib";
+import type { AppThunk } from "@shared/model";
 import { selectCurrentTimingWizardStep } from "../../selectors";
 
 export const processCurrentTimingWizardStep =

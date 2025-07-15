@@ -1,5 +1,5 @@
-import { makeAction } from "@features/game/phase";
 import { selectHasBoardAbilities } from "@modules/board/abilities/shared/lib";
+import { makeAction } from "@modules/mechanics/phase/entities/lib";
 import { useAppDispatch, useAppSelector } from "@shared/lib";
 import type { ImageBackgroundProps } from "@shared/ui";
 import { range } from "ramda";
