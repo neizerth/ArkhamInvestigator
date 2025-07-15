@@ -25,6 +25,10 @@ export const ChaosBagPreview = (props: ChaosBagPreviewProps) => {
 		[dispatch],
 	);
 
+	const onClose = useCallback(() => {
+		dispatch(goBack());
+	}, [dispatch]);
+
 	const reveal = useCallback(() => {
 		dispatch(goBack());
 
@@ -58,7 +62,12 @@ export const ChaosBagPreview = (props: ChaosBagPreviewProps) => {
 	const actions = useModalActions();
 
 	return (
-		<C.Container {...props} title="Chaos Bag" actions={actions}>
+		<C.Container
+			{...props}
+			title="Chaos Bag"
+			actions={actions}
+			onClose={onClose}
+		>
 			<C.Content>
 				<Delay>
 					{isEmpty && <C.Hint>{t`Chaos bag is empty`}</C.Hint>}

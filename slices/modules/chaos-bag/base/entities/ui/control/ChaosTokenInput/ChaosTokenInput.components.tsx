@@ -1,10 +1,13 @@
-import { ChaosTokenMemo as ChaosToken } from "@modules/chaos-bag/base/shared/ui";
+import {
+	ChaosTokenMemo as ChaosToken,
+	ChaosTokenCounter,
+} from "@modules/chaos-bag/base/shared/ui";
 import {
 	NumericControl,
 	TouchableOpacity,
 } from "@modules/core/haptic/shared/ui";
-import { color, font, size } from "@shared/config";
-import { Row, TextView } from "@shared/ui";
+import { color, size } from "@shared/config";
+import { Row } from "@shared/ui";
 import styled from "styled-components/native";
 
 export const Token: typeof ChaosToken = styled(ChaosToken)`
@@ -16,19 +19,10 @@ export const TokenButton: typeof TouchableOpacity = styled(TouchableOpacity)`
 `;
 
 export const Content: typeof Row = styled(Row)`
+	gap: ${size.gap.small}px;
 `;
 
-export const Value: typeof TextView = styled(TextView).attrs({
-	contentContainerStyle: {
-		alignItems: "center",
-		justifyContent: "center",
-		width: 36,
-		height: 44,
-		paddingRight: size.gap.small,
-	},
-})`
-	font-size: ${font.size.medium}px;
-	text-align: right;
+export const Value: typeof ChaosTokenCounter = styled(ChaosTokenCounter)`
 `;
 
 export const Control: typeof NumericControl = styled(NumericControl).attrs({

@@ -1,6 +1,6 @@
-import { ChaosTokenMemo as ChaosToken } from "@modules/chaos-bag/base/shared/ui";
 import { View } from "react-native";
 import styled from "styled-components/native";
+import { ChaosToken } from "../chaos-token";
 import { SealedImage } from "./images";
 
 export const Container: typeof View = styled(View)`

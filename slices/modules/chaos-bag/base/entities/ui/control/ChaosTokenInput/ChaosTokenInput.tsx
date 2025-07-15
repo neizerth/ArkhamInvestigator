@@ -1,6 +1,5 @@
 import type { ChaosTokenType } from "@modules/chaos-bag/base/shared/model";
 import type { NumericControlProps } from "@modules/core/haptic/shared/ui";
-import { characters } from "@shared/config";
 import * as C from "./ChaosTokenInput.components";
 
 export type ChaosTokenInputProps = NumericControlProps & {
@@ -16,7 +15,7 @@ export const ChaosTokenInput = ({
 	...props
 }: ChaosTokenInputProps) => {
 	const {
-		value,
+		value = 0,
 		onIncrement,
 		onDecrement,
 		onLongPress = onDecrement,
@@ -25,7 +24,7 @@ export const ChaosTokenInput = ({
 	return (
 		<C.Control {...props}>
 			<C.Content>
-				{showValue && <C.Value>{`${characters.multiply}${value}`}</C.Value>}
+				{showValue && <C.Value value={value} />}
 				<C.TokenButton
 					onPress={onPress}
 					onLongPress={onLongPress}

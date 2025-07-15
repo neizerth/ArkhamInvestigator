@@ -17,7 +17,7 @@ export const DescriptionMenu = (props: DescriptionMenuProps) => {
 	const hide = useCallback(async () => {
 		dispatch(setShowDescription(false));
 
-		await delay(700);
+		await delay(350);
 	}, [dispatch]);
 
 	const onDetailsChange = useCallback(async () => {

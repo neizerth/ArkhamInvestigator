@@ -1,8 +1,8 @@
 import type { PropsWithBoardId } from "@modules/board/base/shared/model";
-import { selectBoardTokenReferenceEffects } from "@modules/chaos-bag/effect/features/lib";
 import { useAppSelector } from "@shared/lib";
 import { useMemo } from "react";
-import { useDefaultChaosBagEffects } from "./useDefaultChaosBagEffects";
+import { useDefaultChaosBagEffects } from "../../entities/lib";
+import { selectBoardTokenReferenceEffects } from "./selectBoardTokenReferenceEffects";
 
 type Options = PropsWithBoardId;
 export const useChaosBagTokenEffects = ({ boardId }: Options) => {

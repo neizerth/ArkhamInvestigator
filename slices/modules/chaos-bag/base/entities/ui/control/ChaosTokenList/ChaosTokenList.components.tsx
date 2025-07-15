@@ -1,7 +1,7 @@
-import { BlessCurseControl } from "@modules/chaos-bag/base/entities/ui";
 import { color } from "@shared/config";
 import { FlatList } from "react-native-gesture-handler";
 import styled from "styled-components/native";
+import { BlessCurseControl } from "../BlessCurseControl";
 import { ChaosTokenDetailsMemo as ChaosTokenDetails } from "../ChaosTokenDetails";
 
 export const Container: typeof FlatList = styled(FlatList)`

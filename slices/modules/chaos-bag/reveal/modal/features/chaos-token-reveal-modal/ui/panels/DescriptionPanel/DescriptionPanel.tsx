@@ -1,6 +1,6 @@
 import { selectCurrentToken } from "@modules/chaos-bag/base/entities/lib";
 
-import { useChaosBagTokenEffects } from "@modules/chaos-bag/effect/entities/lib";
+import { useChaosBagTokenEffects } from "@modules/chaos-bag/effect/features/board-token-effects";
 import {
 	selectRevealedTokenIds,
 	setCurrentRevealedTokenId,
