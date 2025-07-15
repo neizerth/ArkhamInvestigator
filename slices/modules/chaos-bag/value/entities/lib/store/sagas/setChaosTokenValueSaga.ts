@@ -10,7 +10,6 @@ function* worker({ payload }: ReturnType<typeof setChaosTokenValue>) {
 	const types: ReturnType<typeof tokenSelector> = yield select(tokenSelector);
 
 	const isInvestigatorToken = types.includes(type);
-
 	if (isInvestigatorToken) {
 		yield put(updateBoardChaosTokenValue(payload));
 		return;

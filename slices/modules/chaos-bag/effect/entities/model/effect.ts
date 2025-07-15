@@ -1,9 +1,5 @@
-import type {
-	ChaosBagToken,
-	ChaosTokenType,
-} from "@modules/chaos-bag/base/shared/model";
-
-export type ChaosBagEffects = Partial<Record<ChaosTokenType, string>>;
+import type { ChaosBagToken } from "@modules/chaos-bag/base/shared/model";
+import type { ChaosBagEffects } from "../../shared/model";
 
 export type ChaosBagEffectsCallbackOptions = {
 	tokens: ChaosBagToken[];
