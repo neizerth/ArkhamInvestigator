@@ -12,13 +12,10 @@ import {
 	useAppSelector,
 } from "@shared/lib";
 import type { SkillCheckHistoryItem, SkillCheckItem } from "@shared/model";
-import { always } from "ramda";
 import { memo, useCallback, useMemo, useRef } from "react";
 import type { ListRenderItemInfo, ViewProps, ViewStyle } from "react-native";
 import type { FlatList } from "react-native-gesture-handler";
 import * as C from "./ExpressionHistory.components";
-
-const emptyCallback = always(false);
 
 export type ExpressionHistoryProps = ViewProps & {
 	size?: number;
