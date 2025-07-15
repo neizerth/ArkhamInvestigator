@@ -1,5 +1,5 @@
 import { selectCurrentBoardProp } from "@modules/board/base/shared/lib";
-import { startChaosBagReveal } from "@modules/chaos-bag/reveal/base/entities/lib/store/features/startChaosBagReveal";
+import { startChaosBagReveal } from "@modules/chaos-bag/reveal/base/entities/lib";
 import {
 	getSkillCheckValue,
 	sanitizeSkillCheckExpression,
