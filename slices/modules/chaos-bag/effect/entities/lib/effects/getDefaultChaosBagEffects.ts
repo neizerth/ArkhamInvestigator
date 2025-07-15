@@ -1,8 +1,6 @@
 import type { ChaosTokenType } from "@modules/chaos-bag/base/shared/model";
-import type {
-	ChaosBagEffects,
-	ChaosBagEffectsCallbackOptions,
-} from "../../model/effect";
+import type { ChaosBagEffects } from "@modules/chaos-bag/effect/shared/model";
+import type { ChaosBagEffectsCallbackOptions } from "../../model/effect";
 import { defaultChaosBagEffectCallbacks } from "./callbacks";
 
 export const getDefaultChaosBagEffects = (

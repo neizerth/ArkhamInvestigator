@@ -1,12 +1,16 @@
-import type { ReferencePart } from "arkham-investigator-data";
+import type { ChaosTokenValues } from "@modules/chaos-bag/base/shared/model";
+import type { ChaosBagEffects } from "@modules/chaos-bag/effect/shared/model";
 
 export type InvestigatorTokenEffectModificationCallbackOptions = {
-	reference: ReferencePart[];
+	defaultEffects: ChaosBagEffects;
+	signatureEffects: ChaosBagEffects;
+	referenceCardEffects: ChaosBagEffects;
+	tokenValues: ChaosTokenValues;
 };
 
 export type InvestigatorTokenEffectModificationCallback = (
 	options: InvestigatorTokenEffectModificationCallbackOptions,
-) => ReferencePart[];
+) => ChaosBagEffects;
 
 export type InvestigatorTokenEffectModification = Record<
 	string,

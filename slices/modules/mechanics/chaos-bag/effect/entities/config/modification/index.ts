@@ -1,10 +1,12 @@
 import type { InvestigatorTokenEffectModificationCallback as Callback } from "../../model";
-import { JimCulverTokenEffects } from "./JimCulverTokenEffects";
+import { JimCulverBaseTokenEffects } from "./JimCulverBaseTokenEffects";
+import { JimCulverParallelTokenEffects } from "./JimCulverParallelTokenEffects";
 
-export { JimCulverTokenEffects } from "./JimCulverTokenEffects";
+export { JimCulverBaseTokenEffects as JimCulverTokenEffects } from "./JimCulverBaseTokenEffects";
 
 type EffectModifications = Partial<Record<string, Callback>>;
 
 export const tokenEffectModifications: EffectModifications = {
-	...JimCulverTokenEffects,
+	...JimCulverBaseTokenEffects,
+	...JimCulverParallelTokenEffects,
 };

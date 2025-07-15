@@ -112,9 +112,9 @@
 	"Modify scenario tokens": "Modify scenario tokens",
 	"Show skill check result": "Show skill check result",
 
-	"chaosToken.curse.effect": "–2. Reveal another token. Instead of returning this token to the chaos bag, return it to the token pool.",
-	"chaosToken.bless.effect": "+2. Reveal another token. Instead of returning this token to the chaos bag, return it to the token pool",
-	"chaosToken.frost.first.effect": "–1. Reveal another token",
+	"chaosToken.curse.effect": "{{value}}. Reveal another token. Instead of returning this token to the chaos bag, return it to the token pool.",
+	"chaosToken.bless.effect": "{{value}}. Reveal another token. Instead of returning this token to the chaos bag, return it to the token pool",
+	"chaosToken.frost.first.effect": "{{value}}. Reveal another token",
 	"chaosToken.frost.second.effect": "Resolve the test as an automatic failure",
 	"chaosToken.autoFail.effect": "Automatic failure",
 
