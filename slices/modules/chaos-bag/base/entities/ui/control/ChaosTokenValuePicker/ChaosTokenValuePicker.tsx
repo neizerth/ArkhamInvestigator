@@ -9,7 +9,7 @@ import type {
 import type { PropsWithBoardId } from "@modules/board/base/shared/model";
 import type { ChaosTokenType } from "@modules/chaos-bag/base/shared/model";
 import type { ChaosTokenValueProps } from "@modules/chaos-bag/base/shared/ui";
-import { setChaosTokenValue } from "@modules/chaos-bag/value/entities/lib/store/actions";
+import { setChaosTokenValue } from "@modules/chaos-bag/value/entities/lib";
 import {
 	selectChaosTokenRangeByType as selectTokenRange,
 	selectChaosTokenValueByType as selectTokenValue,

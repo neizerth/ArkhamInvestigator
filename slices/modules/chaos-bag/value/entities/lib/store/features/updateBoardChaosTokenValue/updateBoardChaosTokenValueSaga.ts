@@ -1,7 +1,7 @@
 import { selectBoardId } from "@modules/board/base/shared/lib";
 import { updateBoardChaosTokenValueInternal } from "@modules/chaos-bag/value/shared/lib";
 import { put, select, takeEvery } from "redux-saga/effects";
-import { updateBoardChaosTokenValue } from "../actions";
+import { updateBoardChaosTokenValue } from "./updateBoardChaosTokenValue";
 
 function* worker({ payload }: ReturnType<typeof updateBoardChaosTokenValue>) {
 	const boardIdSelector = selectBoardId(payload.boardId);

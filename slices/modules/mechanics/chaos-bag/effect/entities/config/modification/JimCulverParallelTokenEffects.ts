@@ -27,8 +27,8 @@ export const JimCulverParallelTokenEffects: Modification = {
 		});
 
 		const elderSignEffects = [
-			skull && `<i>[skull]: ${skullEffect}</i>`,
-			curse && `<i>[curse]: ${curse}</i>`,
+			`<i>[skull]: ${skullEffect}</i>`,
+			`<i>[curse]: ${curse}</i>`,
 		].join("\n");
 
 		return {
