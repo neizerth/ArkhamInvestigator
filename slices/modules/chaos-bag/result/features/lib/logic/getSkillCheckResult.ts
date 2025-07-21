@@ -37,7 +37,5 @@ export const getSkillCheckResult = ({
 		return value + total;
 	}, 0);
 
-	const total = Math.max(0, tokensvalueSum + skillValue);
-
-	return total;
+	return tokensvalueSum + skillValue;
 };

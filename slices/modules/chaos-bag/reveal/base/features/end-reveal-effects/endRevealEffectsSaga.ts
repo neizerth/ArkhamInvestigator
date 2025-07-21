@@ -1,3 +1,7 @@
+import {
+	allChaosTokensByTypeRemoved,
+	chaosTokenRemoved,
+} from "@modules/chaos-bag/base/entities/lib";
 import { put, select, takeEvery } from "redux-saga/effects";
 import {
 	allChaosTokensReturned,
@@ -20,7 +24,12 @@ function* worker() {
 	yield endWorker();
 }
 
-export function* endRevealAfterChaosTokenRevealSaga() {
+export function* endRevealEffectsSaga() {
+	// watch return actions
 	yield takeEvery(singleChaosTokenReturned.match, worker);
 	yield takeEvery(allChaosTokensReturned.match, endWorker);
+
+	// watch remove actions
+	yield takeEvery(allChaosTokensByTypeRemoved.match, worker);
+	yield takeEvery(chaosTokenRemoved.match, worker);
 }
