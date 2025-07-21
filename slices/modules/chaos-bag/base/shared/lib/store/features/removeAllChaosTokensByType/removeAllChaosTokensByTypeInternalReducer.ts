@@ -4,7 +4,7 @@ import {
 	handleRemoveAllChaosTokensByType,
 } from "./handleRemoveAllChaosTokensByType";
 
-export const removeAllChaosTokensByType: ChaosBagReducer<
+export const removeAllChaosTokensByTypeInternalReducer: ChaosBagReducer<
 	HandleRemoveAllChaosTokensByTypePayload
 > = (state, { payload }) => {
 	handleRemoveAllChaosTokensByType(state, payload);

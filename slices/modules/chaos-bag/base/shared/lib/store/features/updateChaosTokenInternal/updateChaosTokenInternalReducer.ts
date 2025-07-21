@@ -4,7 +4,7 @@ import {
 	handleUpdateChaosTokenInternal,
 } from "./handleUpdateChaosTokenInternal";
 
-export const updateChaosTokenInternal: ChaosBagReducer<
+export const updateChaosTokenInternalReducer: ChaosBagReducer<
 	HandleUpdateChaosTokenInternalPayload
 > = (state, { payload }) => {
 	handleUpdateChaosTokenInternal(state, payload);

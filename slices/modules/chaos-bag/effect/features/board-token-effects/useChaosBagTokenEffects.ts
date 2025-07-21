@@ -3,8 +3,10 @@ import type { ChaosTokenValues } from "@modules/chaos-bag/base/shared/model";
 import { selectBoardTokenEffectModification } from "@modules/mechanics/chaos-bag/effect/entities/lib";
 import { useAppSelector } from "@shared/lib";
 import { useMemo } from "react";
-import { useDefaultChaosBagEffects } from "../../entities/lib";
-import { selectReferenceCardEffects } from "./selectReferenceCardEffects";
+import {
+	selectReferenceCardEffects,
+	useDefaultChaosBagEffects,
+} from "../../entities/lib";
 import { selectSignatureEffects } from "./selectSignatureEffects";
 
 type Options = PropsWithBoardId & {

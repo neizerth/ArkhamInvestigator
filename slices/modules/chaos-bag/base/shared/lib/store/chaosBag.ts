@@ -45,7 +45,7 @@ export const {
 
 	// internal reducers
 	addChaosTokenInternal,
-	removeAllChaosTokensByType,
+	removeAllChaosTokensByTypeInternal,
 	removeChaosTokenInternal,
 	updateChaosTokenInternal,
 } = chaosBag.actions;
