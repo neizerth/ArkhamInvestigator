@@ -57,8 +57,7 @@ export const CenterPanel = ({ style, ...props }: CenterPanelProps) => {
 	const showTokenValue = useAppSelector(selectModifyChaosTokens);
 	const showTokenType = specialTokenTypes.includes(type);
 
-	const enabled =
-		showTokenType && showTokenValue && typeof tokenValue === "number";
+	const enabled = showTokenType && showTokenValue;
 
 	const setCurrentToken = useCallback(() => {
 		dispatch(setCurrentRevealedTokenId(lastToken.id));
