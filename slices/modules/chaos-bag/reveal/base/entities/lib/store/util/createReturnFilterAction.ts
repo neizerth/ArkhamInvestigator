@@ -1,4 +1,4 @@
-import { chaosTokenReturned } from "../actions";
+import { chaosTokenReturned } from "../features";
 
 export const createReturnFilterAction = (id: string) => (action: unknown) => {
 	if (!chaosTokenReturned.match(action)) {

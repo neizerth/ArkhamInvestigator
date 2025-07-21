@@ -1,12 +1,24 @@
-import { snakeCase } from "@shared/lib";
+import { propIncludes, snakeCase } from "@shared/lib";
 import type {
 	BaseSymbolicChaosTokenType,
 	BlessCurseChaosTokenType,
 	ChaosTokenType,
 } from "../../../model";
+import type { ChaosTokenPartType } from "./ChaosToken.types";
+
+type Options = {
+	type: ChaosTokenType;
+	partTypes: ChaosTokenPartType[];
+};
+
+export const getChaosTokenParts = ({ type, partTypes }: Options) => {
+	const parts = getAllChaosTokenParts(type);
+
+	return parts.filter(propIncludes("type", partTypes));
+};
 
 type ChaosTokenPart = {
-	type: "fill" | "overlay" | "highlight";
+	type: ChaosTokenPartType;
 	icon: string;
 	color: string;
 };
@@ -15,6 +27,7 @@ type Parts = ChaosTokenPart[];
 
 const numericParts = (type: ChaosTokenType): Parts => [
 	{ type: "fill", icon: "token_symbol_fill", color: "#394852" },
+	{ type: "modification", icon: "token-modification", color: "#394852" },
 	{ type: "overlay", icon: "token_number_overlay", color: "#E6E1D3" },
 	{ type: "highlight", icon: `token_${type}_highlight`, color: "#FFFBF2" },
 ];
@@ -86,7 +99,7 @@ const specialParts = {
 	frost: frostParts,
 };
 
-export const getChaosTokenParts = (type: ChaosTokenType) => {
+export const getAllChaosTokenParts = (type: ChaosTokenType) => {
 	switch (type) {
 		case "0":
 		case "-1":
