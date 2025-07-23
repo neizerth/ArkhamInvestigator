@@ -21,6 +21,7 @@ export const Background: FC<BackgroundProps> = styled(View)`
   right: 0;
   top: 0;
   bottom: 0;
+  border: 1px solid #D6CFB9;
   ${({ value }: BackgroundProps) => css`
     background-color: ${getChaosTokenModificationColor(value)};
   `}

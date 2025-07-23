@@ -47,6 +47,7 @@ function* worker({ payload }: ReturnType<typeof closeModal>) {
 
 	yield put(
 		modalClosed({
+			...payload,
 			...actionPayload,
 			modalType,
 			modalId,

@@ -47,7 +47,7 @@ export const Modification: FC<ModificationProps> = styled(
   ${({ size, padding }: ModificationProps) => {
 		const mSize = size * modificationRatio;
 		const top = (size - mSize) / 2 + padding;
-		const left = -mSize * 0.1;
+		const left = -mSize * 0.18;
 		return css`
       top: ${top}px;
       left: ${left}px;

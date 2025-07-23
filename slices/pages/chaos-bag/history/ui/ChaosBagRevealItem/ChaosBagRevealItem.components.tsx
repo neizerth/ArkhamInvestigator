@@ -13,12 +13,12 @@ import styled, { css } from "styled-components/native";
 export const Container: typeof Row = styled(Row)`
   padding: ${size.gap.small}px ${size.gap.default}px;
   align-items: center;
-  gap: ${size.gap.default}px;
+  gap: ${size.gap.small}px;
 `;
 
 export const Investigator: typeof View = styled(View)`
   position: relative;
-  margin-right: ${size.gap.small}px;
+  margin-right: ${size.gap.default}px;
 `;
 
 export const SkillTypeIcon: typeof StatIcon = styled(StatIcon)`
@@ -44,11 +44,11 @@ export const Image: typeof InvestigatorPreview = styled(InvestigatorPreview)`
 export const TokenList: typeof FlatList = styled(FlatList).attrs({
 	contentContainerStyle: {
 		paddingRight: size.gap.default,
-		gap: size.gap.small,
+		gap: size.gap.default,
 	},
 })`
   border-radius: 32px;
-	padding: ${size.gap.small}px;
+	padding: ${size.gap.small}px ${size.gap.default}px;
 `;
 
 export const List: typeof View = styled(View)`
