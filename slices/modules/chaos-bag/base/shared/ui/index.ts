@@ -1,4 +1,4 @@
 export * from "./chaos-token";
-export * from "./ChaosTokenPreview";
+export * from "./chaos-token-preview";
 export * from "./ChaosTokenValue";
 export * from "./ChaosTokenCounter";

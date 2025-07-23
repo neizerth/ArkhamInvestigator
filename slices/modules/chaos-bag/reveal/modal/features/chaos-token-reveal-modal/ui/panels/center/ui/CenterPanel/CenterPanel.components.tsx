@@ -1,10 +1,10 @@
 import { ChaosTokenValuePicker } from "@modules/chaos-bag/base/entities/ui";
-import { ChaosTokenPreview } from "@modules/chaos-bag/base/shared/ui";
 import { TouchableOpacity } from "@modules/core/haptic/shared/ui";
 import { size } from "@shared/config";
 import { View } from "react-native";
 import styled from "styled-components/native";
 import { ExpressionPanel } from "../ExpressionPanel";
+import { ModalChaosToken } from "../ModalChaosToken";
 
 export const Container: typeof View = styled(View)`
   position: relative;
@@ -14,9 +14,7 @@ export const TokenButton: typeof TouchableOpacity = styled(TouchableOpacity)`
   position: relative;
 `;
 
-export const LastToken: typeof ChaosTokenPreview = styled(
-	ChaosTokenPreview,
-).attrs({
+export const LastToken: typeof ModalChaosToken = styled(ModalChaosToken).attrs({
 	size: 150,
 	tokenPadding: 5,
 	sealOffset: 5,

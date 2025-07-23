@@ -2,7 +2,7 @@ import { selectChaosBagLoadingAnimation } from "@modules/chaos-bag/base/shared/l
 import { revealChaosTokens } from "@modules/chaos-bag/reveal/base/entities/lib";
 import { useAppDispatch, useAppSelector } from "@shared/lib";
 import { useCallback, useContext } from "react";
-import { ChaosTokenRevealModalContext as Context } from "../../../lib";
+import { ChaosTokenRevealModalContext as Context } from "../../../../../lib";
 
 export const useOneMoreChaosToken = () => {
 	const dispatch = useAppDispatch();

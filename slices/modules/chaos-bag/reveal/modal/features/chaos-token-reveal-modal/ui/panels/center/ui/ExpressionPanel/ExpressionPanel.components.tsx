@@ -4,7 +4,7 @@ import { withLocale } from "@modules/core/i18n/shared/lib";
 import { color, font } from "@shared/config";
 import { View } from "react-native";
 import styled from "styled-components/native";
-import { SkillCheckExpressionDisplay } from "../../../../../../../../../widgets/game/skill-check";
+import { SkillCheckExpressionDisplay } from "../../../../../../../../../../../widgets/game/skill-check";
 
 export const Container: typeof View = styled(View)`
   

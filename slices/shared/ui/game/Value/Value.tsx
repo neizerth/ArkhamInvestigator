@@ -11,6 +11,8 @@ export type ValueProps = IconNumberProps & {
 	scale?: boolean;
 };
 
+export { defaultValueFontSizes } from "./Value.styles";
+
 export const Value = ({
 	stroke = true,
 	textStyle,

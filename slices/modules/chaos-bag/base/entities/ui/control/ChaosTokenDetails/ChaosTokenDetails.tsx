@@ -6,14 +6,12 @@ import type { ViewProps } from "react-native";
 
 import {
 	addChaosToken,
+	removeAllChaosTokensByType,
 	removeChaosTokenByType,
 	selectChaosTokenCountByType,
 } from "@modules/chaos-bag/base/entities/lib";
 import { chaosToken } from "@modules/chaos-bag/base/shared/config";
-import {
-	removeAllChaosTokensByTypeInternal,
-	selectUnlimitedChaosTokens,
-} from "@modules/chaos-bag/base/shared/lib";
+import { selectUnlimitedChaosTokens } from "@modules/chaos-bag/base/shared/lib";
 import type { ChaosTokenType } from "@modules/chaos-bag/base/shared/model";
 import * as C from "./ChaosTokenDetails.components";
 
@@ -38,7 +36,7 @@ export const ChaosTokenDetails = ({
 
 	const clear = useCallback(() => {
 		dispatch(
-			removeAllChaosTokensByTypeInternal({
+			removeAllChaosTokensByType({
 				type,
 			}),
 		);

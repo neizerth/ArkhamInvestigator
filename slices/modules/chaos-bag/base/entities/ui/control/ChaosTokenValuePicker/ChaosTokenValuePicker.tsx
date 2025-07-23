@@ -14,6 +14,7 @@ import {
 	selectChaosTokenRangeByType as selectTokenRange,
 	selectChaosTokenValueByType as selectTokenValue,
 } from "@modules/chaos-bag/value/features/lib";
+import { isChaosTokenModified } from "@modules/chaos-bag/value/shared/lib";
 import * as C from "./ChaosTokenValuePicker.components";
 
 export type ChaosTokenValuePickerProps = Omit<
@@ -62,19 +63,25 @@ export const ChaosTokenValuePicker = ({
 		[dispatch, type, boardId],
 	);
 
+	const isModified = isChaosTokenModified({
+		type,
+		value,
+	});
+
 	const renderItem: PickerListRenderItem = useCallback(
 		({ item }) => {
-			const value = signedNumber(item);
+			const tokenValue = signedNumber(item);
 			return (
 				<C.TokenValue
-					value={value}
+					value={tokenValue}
 					type={type}
 					style={valueStyle}
 					sizes={valueSizes}
+					modified={isModified}
 				/>
 			);
 		},
-		[type, valueStyle],
+		[type, valueStyle, isModified],
 	);
 
 	return (

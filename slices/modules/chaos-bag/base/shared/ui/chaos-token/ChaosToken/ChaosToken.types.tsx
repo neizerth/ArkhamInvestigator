@@ -8,7 +8,8 @@ export type ChaosTokenConfig = {
 	size?: number;
 	selected?: boolean;
 	dark?: boolean;
-	partTypes?: ChaosTokenPartType[];
+	modified?: boolean;
+	highlight?: boolean;
 };
 
 export type ChaosTokenPartType =

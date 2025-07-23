@@ -1,23 +1,23 @@
 import { memo } from "react";
+import { chaosToken } from "../../../config";
 import * as C from "./ChaosToken.components";
 import { getChaosTokenParts } from "./ChaosToken.styles";
-import type { ChaosTokenPartType, ChaosTokenProps } from "./ChaosToken.types";
-
-const defaultPartTypes: ChaosTokenPartType[] = ["fill", "highlight", "overlay"];
+import type { ChaosTokenProps } from "./ChaosToken.types";
 
 export const ChaosToken = ({
-	size = 48,
+	size = chaosToken.size.default,
 	type,
 	dark = false,
 	selected = false,
-	partTypes = defaultPartTypes,
+	modified = false,
+	highlight = true,
 	...props
 }: ChaosTokenProps) => {
-	const parts =
-		getChaosTokenParts({
-			type,
-			partTypes,
-		}) || [];
+	const parts = getChaosTokenParts({
+		type,
+		modified,
+		highlight,
+	});
 	return (
 		<C.Container {...props} size={size}>
 			{parts.map((part) => (
