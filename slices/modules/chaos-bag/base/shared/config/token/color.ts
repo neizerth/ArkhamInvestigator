@@ -13,5 +13,10 @@ const chaosTokenTypeColor: Partial<Record<ChaosTokenType, string>> = {
 export const chaosTokenColor = {
 	background: "#D6CFB9",
 	selected: "#D4AF37",
+	default: "#394852",
+	value: {
+		numeric: "#FFFBF2",
+	},
+	plusOneOverlay: "#ECBA59",
 	types: chaosTokenTypeColor,
 };

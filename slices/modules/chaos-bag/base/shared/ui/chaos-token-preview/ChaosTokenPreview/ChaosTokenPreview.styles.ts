@@ -1,6 +1,7 @@
 import { size } from "@shared/config";
 import type { ViewStyle } from "react-native";
 import type { SvgProps } from "react-native-svg";
+import { chaosToken } from "../../../config";
 
 type Options = {
 	sealed?: boolean;
@@ -11,7 +12,7 @@ type Options = {
 
 export const getChaosTokentPreviewStyles = ({
 	sealed = false,
-	defaultSize = 48,
+	defaultSize = chaosToken.size.default,
 	offset = 2,
 	padding = size.gap.small,
 }: Options) => {

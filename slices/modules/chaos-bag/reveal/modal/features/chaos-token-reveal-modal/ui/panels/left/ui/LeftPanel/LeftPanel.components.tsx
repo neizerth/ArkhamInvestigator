@@ -25,6 +25,7 @@ export const SkillPicker: typeof SkillValuePicker = styled(
 ).attrs({
 	gap: 50,
 })`
+  z-index: 5;
 `;
 
 export const SkillTypeIcon: typeof StatIcon = styled(StatIcon)`
@@ -35,8 +36,8 @@ export const SkillTypeIcon: typeof StatIcon = styled(StatIcon)`
 
 export const SkillType: typeof View = styled(View)`
   position: absolute;
-  top: -3px;
-  right: -25px;
+  top: -5px;
+  right: -30px;
 `;
 
 export const ReferenceButton: typeof TouchableOpacity = styled(

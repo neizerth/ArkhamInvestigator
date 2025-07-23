@@ -24,7 +24,7 @@ export const Position: FC<PositionProps> = styled(View)`
   position: absolute;
   z-index: 1;
   top: -2px;
-  right: 7px;
+  right: 2px;
   width: 16px;
   height: 16px;
   border-radius: 16px;
@@ -58,6 +58,7 @@ export const PositionText: FC<PositionTextProps> = styled(Text)`
     font-size: ${positionFontSize[size]}px;
     line-height: ${positionLineHeight[size]}px;
   `}
-  
+  position: absolute;
+  top: -1px;
   color: ${color.text};
 `;

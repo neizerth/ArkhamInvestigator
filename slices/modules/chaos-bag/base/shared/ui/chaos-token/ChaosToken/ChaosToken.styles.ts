@@ -1,4 +1,4 @@
-import { propIncludes, snakeCase } from "@shared/lib";
+import { arrayIf, snakeCase } from "@shared/lib";
 import type {
 	BaseSymbolicChaosTokenType,
 	BlessCurseChaosTokenType,
@@ -8,13 +8,8 @@ import type { ChaosTokenPartType } from "./ChaosToken.types";
 
 type Options = {
 	type: ChaosTokenType;
-	partTypes: ChaosTokenPartType[];
-};
-
-export const getChaosTokenParts = ({ type, partTypes }: Options) => {
-	const parts = getAllChaosTokenParts(type);
-
-	return parts.filter(propIncludes("type", partTypes));
+	modified: boolean;
+	highlight: boolean;
 };
 
 type ChaosTokenPart = {
@@ -25,18 +20,45 @@ type ChaosTokenPart = {
 
 type Parts = ChaosTokenPart[];
 
-const numericParts = (type: ChaosTokenType): Parts => [
-	{ type: "fill", icon: "token_symbol_fill", color: "#394852" },
-	{ type: "modification", icon: "token-modification", color: "#394852" },
-	{ type: "overlay", icon: "token_number_overlay", color: "#E6E1D3" },
-	{ type: "highlight", icon: `token_${type}_highlight`, color: "#FFFBF2" },
-];
+const numericParts = ({ type, modified, highlight }: Options): Parts => {
+	if (modified) {
+		return [
+			{ type: "overlay", icon: "token_sealed_outline", color: "#394852" },
+		];
+	}
 
-const plusOneParts: Parts = [
-	{ type: "fill", icon: "token_symbol_fill", color: "#394852" },
-	{ type: "overlay", icon: "token_number_overlay", color: "#ECBA59" },
-	{ type: "highlight", icon: "token_1_highlight", color: "#FFFBF2" },
-];
+	const highlightPart: ChaosTokenPart = {
+		type: "highlight",
+		icon: `token_${type}_highlight`,
+		color: "#FFFBF2",
+	};
+
+	return [
+		{ type: "fill", icon: "token_symbol_fill", color: "#394852" },
+		{ type: "overlay", icon: "token_number_overlay", color: "#E6E1D3" },
+		...arrayIf(highlight, highlightPart),
+	];
+};
+
+const plusOneParts = ({ modified, highlight }: Options): Parts => {
+	if (modified) {
+		return [
+			{ type: "overlay", icon: "token_sealed_outline", color: "#394852" },
+		];
+	}
+
+	const highlightPart: ChaosTokenPart = {
+		type: "highlight",
+		icon: "token_1_highlight",
+		color: "#FFFBF2",
+	};
+
+	return [
+		{ type: "fill", icon: "token_symbol_fill", color: "#394852" },
+		{ type: "overlay", icon: "token_number_overlay", color: "#ECBA59" },
+		...arrayIf(highlight, highlightPart),
+	];
+};
 
 const symbolFillColor = {
 	skull: "#552D2D",
@@ -93,14 +115,16 @@ const frostParts: Parts = [
 ];
 
 const specialParts = {
-	"+1": plusOneParts,
 	autoFail: autoFailParts,
 	elderSign: elderSignParts,
 	frost: frostParts,
 };
 
-export const getAllChaosTokenParts = (type: ChaosTokenType) => {
+export const getChaosTokenParts = (options: Options) => {
+	const { type, modified } = options;
 	switch (type) {
+		case "+1":
+			return plusOneParts(options);
 		case "0":
 		case "-1":
 		case "-2":
@@ -110,7 +134,7 @@ export const getAllChaosTokenParts = (type: ChaosTokenType) => {
 		case "-6":
 		case "-7":
 		case "-8":
-			return numericParts(type);
+			return numericParts(options);
 		case "skull":
 		case "cultist":
 		case "tablet":
