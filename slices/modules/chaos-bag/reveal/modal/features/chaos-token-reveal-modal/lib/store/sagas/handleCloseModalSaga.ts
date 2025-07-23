@@ -9,7 +9,12 @@ const filterAction = (action: unknown) => {
 		return false;
 	}
 
-	return action.payload.modalId === CustomModalId.chaosTokenReveal;
+	const { payload } = action;
+
+	return (
+		payload.modalId === CustomModalId.chaosTokenReveal &&
+		payload.source !== "effect"
+	);
 };
 
 function* worker() {

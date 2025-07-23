@@ -7,17 +7,18 @@ import type {
 	ModalType,
 } from "../../../../model";
 
-export type CloseModalPayload<A extends BaseModalAction> = {
-	id?: string;
-} & (
+type CloseModalSource<A extends BaseModalAction> =
 	| {
 			source: "action";
 			modalAction: A;
 	  }
 	| {
 			source: "ui" | "effect" | "backButton";
-	  }
-);
+	  };
+
+export type CloseModalPayload<A extends BaseModalAction> = {
+	id?: string;
+} & CloseModalSource<A>;
 
 export const closeModal = createAction<CloseModalPayload<BaseModalAction>>(
 	`${modalPrefix}/close`,
@@ -26,7 +27,7 @@ export const closeModal = createAction<CloseModalPayload<BaseModalAction>>(
 export type ModalClosedPayload<
 	A extends BaseModalAction,
 	D extends BaseModalData<A>,
-> = {
+> = CloseModalSource<A> & {
 	modalType: ModalType;
 	modalId: string;
 	modalAction?: A;
