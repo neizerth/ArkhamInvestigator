@@ -2,10 +2,8 @@ import {
 	selectBoardProp,
 	setCurrentInvestigatorIndex,
 } from "@modules/board/base/shared/lib";
-import type {
-	ChaosBagHistoryItem,
-	ChaosBagToken,
-} from "@modules/chaos-bag/base/shared/model";
+import type { ChaosBagHistoryItem } from "@modules/chaos-bag/base/shared/model";
+import type { RevealedChaosBagToken } from "@modules/chaos-bag/reveal/base/shared/model";
 import { removeRevealHistoryItem } from "@modules/chaos-bag/reveal/history/shared/lib";
 import { useHapticFeedback } from "@modules/core/haptic/shared/lib";
 import { REMOVE_CLIPPED_SUBVIEWS } from "@shared/config";
@@ -49,7 +47,7 @@ export const ChaosBagRevealItem = ({
 	const impactFeedback = useHapticFeedback();
 
 	const renderItem = useCallback(
-		({ item, index }: ListRenderItemInfo<ChaosBagToken>) => {
+		({ item, index }: ListRenderItemInfo<RevealedChaosBagToken>) => {
 			return (
 				<C.Token
 					token={item}
@@ -61,9 +59,12 @@ export const ChaosBagRevealItem = ({
 		[showPosition],
 	);
 
-	const keyExtractor = useCallback((_: ChaosBagToken, index: number) => {
-		return index.toString();
-	}, []);
+	const keyExtractor = useCallback(
+		(_: RevealedChaosBagToken, index: number) => {
+			return index.toString();
+		},
+		[],
+	);
 
 	const removeItem = useCallback(() => {
 		dispatch(

@@ -19,8 +19,8 @@ import {
 } from "@modules/chaos-bag/reveal/base/shared/lib";
 
 import { toggleChaosTokenSeal } from "@modules/chaos-bag/base/entities/lib";
-import type { ChaosBagToken } from "@modules/chaos-bag/base/shared/model";
 import { returnSingleChaosToken } from "@modules/chaos-bag/reveal/base/entities/lib";
+import type { RevealedChaosBagToken } from "@modules/chaos-bag/reveal/base/shared/model";
 import { last } from "ramda";
 import * as C from "./CenterPanel.components";
 
@@ -30,7 +30,7 @@ export const CenterPanel = ({ style, ...props }: CenterPanelProps) => {
 	const dispatch = useAppDispatch();
 	const tokens = useAppSelector(selectRevealedTokens);
 
-	const lastToken = last(tokens) as ChaosBagToken;
+	const lastToken = last(tokens) as RevealedChaosBagToken;
 	const { type } = lastToken;
 
 	const showTokenValue = useAppSelector(selectModifyChaosTokens);

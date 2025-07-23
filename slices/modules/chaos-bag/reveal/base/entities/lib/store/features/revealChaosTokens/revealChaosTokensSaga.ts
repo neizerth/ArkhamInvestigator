@@ -7,7 +7,7 @@ import {
 import { chaosTokensRevealed, revealChaosTokens } from "./revealChaosTokens";
 
 function* worker({ payload }: ReturnType<typeof revealChaosTokens>) {
-	const { count } = payload;
+	const { count, boardId } = payload;
 
 	const validateSelector = selectCanRevealChaosTokens(count);
 	const validation: ReturnType<typeof validateSelector> =
@@ -17,7 +17,11 @@ function* worker({ payload }: ReturnType<typeof revealChaosTokens>) {
 		return;
 	}
 
-	const revealSelector = selectRandomUnrevealedChaosTokens(count);
+	const revealSelector = selectRandomUnrevealedChaosTokens({
+		boardId,
+		count,
+	});
+
 	const tokens: ReturnType<typeof revealSelector> =
 		yield select(revealSelector);
 

@@ -6,8 +6,8 @@ import {
 import { createCancelModalAction } from "@modules/core/modal/shared/actions/cancel/lib";
 import { createConfirmModalAction } from "@modules/core/modal/shared/actions/confirm/lib";
 import { put, takeEvery } from "redux-saga/effects";
-import { openBoardModal } from "../../thunks";
-import { openClearRevealHistoryWarning } from "./openClearRevealHistoryWarning";
+import { openBoardModal } from "../../../thunks";
+import { openClearRevealHistoryWarning } from "../openClearRevealHistoryWarning";
 
 function* worker({
 	payload,
@@ -25,7 +25,7 @@ function* worker({
 				actions: [
 					createCancelModalAction(),
 					createConfirmModalAction({
-						id: ModalActionId.resetBoard,
+						id: ModalActionId.clearRevealHistory,
 						title: "Clear",
 					}),
 				],

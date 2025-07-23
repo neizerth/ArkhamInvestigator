@@ -5,10 +5,10 @@ import {
 	setInvestigatorBoards,
 	setResources,
 } from "@modules/board/base/shared/lib";
-import { setRevealedTokenIds } from "@modules/chaos-bag/reveal/base/shared/lib";
 import { clearRevealHistory } from "@modules/chaos-bag/reveal/history/shared/lib";
 import type { ActionCreator } from "@reduxjs/toolkit";
 
+import { setRevealedTokens } from "@modules/chaos-bag/reveal/base/shared/lib";
 import { closeModal } from "@modules/core/modal/shared/base/lib";
 import type { AppThunk } from "@shared/model";
 import { routes } from "../../../../../config";
@@ -29,7 +29,7 @@ export const startNewGame: ActionCreator<AppThunk> =
 		dispatch(setResources(0));
 
 		dispatch(clearRevealHistory());
-		dispatch(setRevealedTokenIds([]));
+		dispatch(setRevealedTokens([]));
 		dispatch(
 			closeModal({
 				source: "effect",

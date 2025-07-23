@@ -7,6 +7,5 @@ type Options = {
 };
 export const isNumericTokenModified = ({ type, value }: Options) => {
 	const defaultValue = defaultNumericChaosTokenValue[type];
-
 	return defaultValue !== value;
 };

@@ -4,5 +4,5 @@ import { selectInvestigatorBoards } from "../../../../board";
 
 export const selectBoardIds = createSelector(
 	[selectInvestigatorBoards],
-	(boards) => boards.map(prop("id")),
+	(boards = []) => boards.map(prop("id")),
 );

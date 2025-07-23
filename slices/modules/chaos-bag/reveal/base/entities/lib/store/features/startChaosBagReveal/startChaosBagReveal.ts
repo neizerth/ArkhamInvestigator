@@ -3,7 +3,10 @@ import { chaosBagRevealPrefix } from "@modules/chaos-bag/reveal/base/shared/conf
 import type { StartChaosBagRevealInternalPayload } from "@modules/chaos-bag/reveal/base/shared/lib";
 import { createAction } from "@reduxjs/toolkit";
 
-export type StartChaosBagRevealPayload = StartChaosBagRevealInternalPayload &
+export type StartChaosBagRevealPayload = Omit<
+	StartChaosBagRevealInternalPayload,
+	"boardId"
+> &
 	PropsWithBoardId;
 
 export const startChaosBagReveal = createAction<StartChaosBagRevealPayload>(

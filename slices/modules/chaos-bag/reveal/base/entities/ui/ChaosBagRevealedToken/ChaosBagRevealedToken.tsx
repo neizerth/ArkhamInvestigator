@@ -1,9 +1,10 @@
-import type { ChaosBagToken } from "@modules/chaos-bag/base/shared/model";
+import { getDefaultChaosTokenValue } from "@modules/chaos-bag/value/shared/lib";
 import type { ViewProps } from "react-native";
+import type { RevealedChaosBagToken } from "../../../shared/model";
 import * as C from "./ChaosBagRevealedToken.components";
 
 export type ChaosBagRevealedTokenProps = ViewProps & {
-	token: ChaosBagToken;
+	token: RevealedChaosBagToken;
 	position: number;
 	showPosition?: boolean;
 	selected?: boolean;
@@ -17,6 +18,8 @@ export const ChaosBagRevealedToken = ({
 	...props
 }: ChaosBagRevealedTokenProps) => {
 	const size = position?.toString().length ?? 0;
+	const defaultValue = getDefaultChaosTokenValue(token.type);
+
 	return (
 		<C.Container {...props}>
 			{showPosition && (
@@ -24,7 +27,7 @@ export const ChaosBagRevealedToken = ({
 					<C.PositionText size={size}>{position}</C.PositionText>
 				</C.Position>
 			)}
-			<C.Token {...token} selected={selected} />
+			<C.Token {...token} selected={selected} defaultValue={defaultValue} />
 		</C.Container>
 	);
 };

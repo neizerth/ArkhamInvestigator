@@ -43,11 +43,12 @@ export const Image: typeof InvestigatorPreview = styled(InvestigatorPreview)`
 
 export const TokenList: typeof FlatList = styled(FlatList).attrs({
 	contentContainerStyle: {
-		paddingRight: 10,
+		paddingRight: size.gap.default,
+		gap: size.gap.small,
 	},
 })`
   border-radius: 32px;
-	padding: 5px 0;
+	padding: ${size.gap.small}px;
 `;
 
 export const List: typeof View = styled(View)`

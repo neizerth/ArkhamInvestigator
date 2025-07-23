@@ -1,4 +1,7 @@
+import type { ChaosTokenValues } from "@modules/chaos-bag/base/shared/model";
 import { shuffle } from "fast-shuffle";
+import { isNotNil } from "ramda";
+import type { RevealedChaosBagToken } from "../../../shared/model";
 import {
 	type GetUnrevealedChaosTokensOptions,
 	getUnrevealedChaosTokens,
@@ -6,15 +9,30 @@ import {
 
 export type GetRandomChaosTokensOptions = GetUnrevealedChaosTokensOptions & {
 	count: number;
+	values: ChaosTokenValues;
 };
 
-export const getRandomChaosTokens = (options: GetRandomChaosTokensOptions) => {
-	const { count } = options;
+export const getRandomChaosTokens = (
+	options: GetRandomChaosTokensOptions,
+): RevealedChaosBagToken[] => {
+	const { count, values } = options;
 
 	const nonRevealed = getUnrevealedChaosTokens(options);
 	const unsealed = nonRevealed.filter(({ sealed }) => !sealed);
 
 	const tokens = shuffle(unsealed).slice(0, count);
 
-	return tokens;
+	return tokens
+		.map((token) => {
+			const value = values[token.type];
+
+			if (typeof value !== "number") {
+				return null;
+			}
+			return {
+				...token,
+				value,
+			};
+		})
+		.filter(isNotNil);
 };

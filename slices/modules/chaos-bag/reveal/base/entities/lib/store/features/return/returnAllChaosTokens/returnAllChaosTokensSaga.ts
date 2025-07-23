@@ -1,4 +1,4 @@
-import { selectRevealedTokenIds } from "@modules/chaos-bag/reveal/base/shared/lib";
+import { selectRevealedTokens } from "@modules/chaos-bag/reveal/base/shared/lib";
 import { put, select, take, takeEvery } from "redux-saga/effects";
 import { createReturnFilterAction } from "../../../util";
 import { returnChaosToken } from "../returnChaosToken/returnChaosToken";
@@ -8,11 +8,11 @@ import {
 } from "./returnAllChaosTokens";
 
 function* worker() {
-	const ids: ReturnType<typeof selectRevealedTokenIds> = yield select(
-		selectRevealedTokenIds,
-	);
+	const tokens: ReturnType<typeof selectRevealedTokens> =
+		yield select(selectRevealedTokens);
 
-	for (const id of ids) {
+	for (const token of tokens) {
+		const { id } = token;
 		yield put(
 			returnChaosToken({
 				id,

@@ -4,7 +4,7 @@ import {
 	selectChaosBagSkillValue,
 	selectRevealedTokens,
 } from "@modules/chaos-bag/reveal/base/shared/lib";
-import { selectChaosBagTokenValues } from "@modules/chaos-bag/value/features/lib";
+import { selectChaosBagTokenValues } from "@modules/chaos-bag/value/entities/lib";
 import { createSelector } from "@reduxjs/toolkit";
 import { getSkillCheckResult } from "../../logic";
 

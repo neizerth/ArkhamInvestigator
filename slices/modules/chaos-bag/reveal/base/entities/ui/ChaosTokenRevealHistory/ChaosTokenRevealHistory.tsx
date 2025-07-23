@@ -10,16 +10,16 @@ import {
 
 import { toggleChaosTokenSeal } from "@modules/chaos-bag/base/entities/lib";
 
-import type { ChaosBagToken } from "@modules/chaos-bag/base/shared/model";
 import { returnChaosToken } from "@modules/chaos-bag/reveal/base/entities/lib";
 import {
 	selectCurrentRevealedTokenId,
 	setCurrentRevealedTokenId,
 } from "@modules/chaos-bag/reveal/base/shared/lib";
+import type { RevealedChaosBagToken } from "../../../shared/model";
 import * as C from "./ChaosTokenRevealHistory.components";
 
 export type ChaosTokenRevealHistoryProps = ViewProps & {
-	tokens: ChaosBagToken[];
+	tokens: RevealedChaosBagToken[];
 };
 
 export const ChaosTokenRevealHistory = ({
@@ -29,14 +29,14 @@ export const ChaosTokenRevealHistory = ({
 	const dispatch = useAppDispatch();
 	const currentTokenId = useAppSelector(selectCurrentRevealedTokenId);
 	const onTokenPress = useCallback(
-		(token: ChaosBagToken) => () => {
+		(token: RevealedChaosBagToken) => () => {
 			dispatch(returnChaosToken(token));
 		},
 		[dispatch],
 	);
 
 	const toggleSeal = useCallback(
-		(token: ChaosBagToken) => () => {
+		(token: RevealedChaosBagToken) => () => {
 			dispatch(
 				toggleChaosTokenSeal({
 					id: token.id,
@@ -49,7 +49,7 @@ export const ChaosTokenRevealHistory = ({
 	const impactHapticFeedback = useHapticFeedback();
 
 	const onSwipeDown = useCallback(
-		(token: ChaosBagToken) => () => {
+		(token: RevealedChaosBagToken) => () => {
 			dispatch(setCurrentRevealedTokenId(token.id));
 			impactHapticFeedback();
 		},
@@ -57,7 +57,7 @@ export const ChaosTokenRevealHistory = ({
 	);
 
 	const renderItem = useCallback(
-		({ item, index }: ListRenderItemInfo<ChaosBagToken>) => {
+		({ item, index }: ListRenderItemInfo<RevealedChaosBagToken>) => {
 			const onSwipe = onSwipeDown(item);
 
 			const swipeDown = Gesture.Fling()

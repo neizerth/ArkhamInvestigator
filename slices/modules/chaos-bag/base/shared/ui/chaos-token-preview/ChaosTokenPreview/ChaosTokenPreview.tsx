@@ -22,7 +22,7 @@ export const ChaosTokenPreview = ({
 	sealOffset,
 	tokenPadding = 0,
 	selected = false,
-	highlight,
+	highlight = true,
 	value,
 	defaultValue,
 	...props
@@ -53,6 +53,11 @@ export const ChaosTokenPreview = ({
 						padding={tokenPadding}
 						value={defaultValue}
 					/>
+				)}
+				{modified && highlight && typeof value === "number" && (
+					<C.ModifiedHighlight>
+						<C.Highlight value={value} size={size} />
+					</C.ModifiedHighlight>
 				)}
 				<C.Token
 					type={type}
