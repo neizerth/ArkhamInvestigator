@@ -1,2 +1,2 @@
 export * from "./openClearRevealHistoryWarning";
-export * from "./openClearRevealHistoryWarningSaga";
+export * from "./sagas";

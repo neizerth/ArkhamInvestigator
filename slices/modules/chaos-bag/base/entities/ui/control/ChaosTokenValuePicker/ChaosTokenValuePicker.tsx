@@ -1,10 +1,10 @@
 import { signedNumber, useAppDispatch, useAppSelector } from "@shared/lib";
-import { useCallback } from "react";
 import type {
 	PickerChangeEvent,
 	PickerListRenderItem,
 	PickerProps,
-} from "../../../../../../../widgets/control/picker";
+} from "@widgets/control/picker";
+import { useCallback } from "react";
 
 import type { PropsWithBoardId } from "@modules/board/base/shared/model";
 import type { ChaosTokenType } from "@modules/chaos-bag/base/shared/model";
@@ -13,7 +13,7 @@ import { setChaosTokenValue } from "@modules/chaos-bag/value/entities/lib";
 import {
 	selectChaosTokenRangeByType as selectTokenRange,
 	selectChaosTokenValueByType as selectTokenValue,
-} from "@modules/chaos-bag/value/features/lib";
+} from "@modules/chaos-bag/value/entities/lib";
 import { isChaosTokenModified } from "@modules/chaos-bag/value/shared/lib";
 import * as C from "./ChaosTokenValuePicker.components";
 

@@ -11,11 +11,19 @@ type Options = {
 export const isChaosTokenModified = (options: Options) => {
 	const { type, value, defaultValue } = options;
 
-	if (typeof value === "number" && isNumericChaosTokenType(type)) {
+	if (typeof value !== "number") {
+		return false;
+	}
+
+	if (isNumericChaosTokenType(type)) {
 		return isNumericTokenModified({
 			value,
 			type,
 		});
+	}
+
+	if (typeof defaultValue !== "number") {
+		return false;
 	}
 
 	return value !== defaultValue;

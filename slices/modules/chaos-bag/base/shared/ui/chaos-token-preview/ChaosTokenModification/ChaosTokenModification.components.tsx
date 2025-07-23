@@ -1,4 +1,4 @@
-import { Value } from "@shared/ui";
+import { Value, type ValueProps } from "@shared/ui";
 import type { FC } from "react";
 import { View } from "react-native";
 import styled from "styled-components";
@@ -27,8 +27,15 @@ export const Background: FC<BackgroundProps> = styled(View)`
   transform: rotate(45deg);
 `;
 
-export const TokenValue: typeof Value = styled(Value)`
-  font-size: 38px;
+type TokenValueProps = ValueProps & {
+	size: number;
+};
+
+export const TokenValue: FC<TokenValueProps> = styled(Value)`
+  /* font-size: 38px; */
+  ${({ size }: TokenValueProps) => css`
+    font-size: ${size * 0.25}px;
+  `}
   position: relative;
   z-index: 2;
 `;

@@ -1,7 +1,8 @@
 import { createSelector } from "@reduxjs/toolkit";
+import { prop } from "ramda";
 import { selectRevealedTokens } from "../chaosBagReveal";
 
-export const selectRevealedTokensCount = createSelector(
+export const selectRevealedTokenIds = createSelector(
 	[selectRevealedTokens],
-	(tokens) => tokens.length || 0,
+	(tokens) => tokens.map(prop("id")),
 );

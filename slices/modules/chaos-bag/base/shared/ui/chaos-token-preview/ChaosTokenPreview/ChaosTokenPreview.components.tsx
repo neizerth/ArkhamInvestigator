@@ -1,6 +1,8 @@
+import { Value, type ValueProps } from "@shared/ui";
 import type { FC } from "react";
 import { View } from "react-native";
 import styled, { css } from "styled-components/native";
+import { chaosToken } from "../../../config";
 import { ChaosToken } from "../../chaos-token";
 import {
 	ChaosTokenModification,
@@ -45,7 +47,7 @@ export const Modification: FC<ModificationProps> = styled(
   ${({ size, padding }: ModificationProps) => {
 		const mSize = size * modificationRatio;
 		const top = (size - mSize) / 2 + padding;
-		const left = -mSize * 0.2;
+		const left = -mSize * 0.1;
 		return css`
       top: ${top}px;
       left: ${left}px;
@@ -53,4 +55,30 @@ export const Modification: FC<ModificationProps> = styled(
       height: ${mSize}px;
     `;
 	}}
+`;
+
+export const ModifiedHighlight: typeof View = styled(View)`
+  position: absolute;
+  z-index: 2;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  justify-content: center;
+  align-items: center;
+`;
+
+type HighlightProps = ValueProps & {
+	size: number;
+};
+
+export const Highlight: FC<HighlightProps> = styled(Value).attrs({
+	stroke: false,
+	textStyle: {
+		color: chaosToken.color.default,
+	},
+})`
+  ${({ size }: HighlightProps) => css`
+    font-size: ${size * 0.43}px;
+  `}
 `;

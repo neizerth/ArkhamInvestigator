@@ -5,6 +5,7 @@ import type {
 import type { ChaosBagRevealHandler } from "../../../../model";
 
 export type HandleStartChaosBagRevealInternalPayload = {
+	boardId: number;
 	type?: InvestigatorBoardNumericStat;
 	value?: number;
 	title?: string;
@@ -14,8 +15,9 @@ export type HandleStartChaosBagRevealInternalPayload = {
 export const handleStartChaosBagRevealInternal: ChaosBagRevealHandler<
 	HandleStartChaosBagRevealInternalPayload
 > = (state, payload) => {
-	state.revealedTokenIds = [];
+	state.revealedTokens = [];
 
+	state.skillCheckBoardId = payload.boardId;
 	state.skillCheckType = payload.type || null;
 	state.skillValue = payload.value || null;
 	state.skillCheckTitle = payload.title || null;

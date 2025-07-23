@@ -4,6 +4,7 @@ import {
 	selectBoardChaosTokenValueModifications,
 	selectBoardElderSignValue,
 } from "@modules/mechanics/chaos-bag/value/entities/lib";
+
 import { createSelector } from "@reduxjs/toolkit";
 import { rangeStep, selectReferenceCardTokens } from "@shared/lib";
 import { propEq, range } from "ramda";

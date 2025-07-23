@@ -27,6 +27,7 @@ export const ChaosTokenModification = ({
 				textStyle={{ color }}
 				stroke={false}
 				sizes={defaultSizes}
+				size={size}
 			/>
 			<C.Background value={value} />
 		</C.Container>
