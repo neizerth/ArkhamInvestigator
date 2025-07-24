@@ -14,9 +14,9 @@ export const removeMultipleChaosTokensByType =
 		`${chaosBagPrefix}/removeMultipleTokensByType`,
 	);
 
-export const multipleChaosTokensByTypeRemoved =
+export const multipleChaosTokensRemovedByType =
 	createAction<RemoveMultipleChaosTokensByTypePayload>(
-		`${chaosBagPrefix}/multipleChaosTokensByTypeRemoved`,
+		`${chaosBagPrefix}/multipleChaosTokensRemovedByType`,
 	);
 
 export const cantRemoveMultipleChaosTokens =

@@ -16,8 +16,15 @@ export const AbilityCode = {
 	TonyMorgan: "bounty-contracts",
 	CarsonSinclair: "give-action",
 	MinhThiPhan: "add-2wild",
-	ZoeySamaras: "get-resource",
 	KohakuNarukami: "bless-curse",
+
+	ZoeySamaras: {
+		parallel: {
+			fast: "remove-3-bless",
+			reaction: "add-bless",
+		},
+		base: "get-resource",
+	},
 };
 
 export const specialAbilitityCodes = [

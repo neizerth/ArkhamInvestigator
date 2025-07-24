@@ -12,6 +12,11 @@ export const removeChaosTokenByType =
 		`${chaosBagPrefix}/removeTokenByType`,
 	);
 
+export const singleChaosTokenRemovedByType =
+	createAction<RemoveChaosTokenByTypePayload>(
+		`${chaosBagPrefix}/singleTokenRemovedByType`,
+	);
+
 export const cantRemoveChaosToken = createAction<RemoveChaosTokenByTypePayload>(
 	`${chaosBagPrefix}/cantRemoveToken`,
 );

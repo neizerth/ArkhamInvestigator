@@ -6,7 +6,7 @@ import {
 import { removeChaosToken } from "../removeChaosToken";
 import {
 	cantRemoveMultipleChaosTokens,
-	multipleChaosTokensByTypeRemoved,
+	multipleChaosTokensRemovedByType,
 	removeMultipleChaosTokensByType,
 } from "./removeMultipleChaosTokensByType";
 
@@ -49,7 +49,7 @@ function* worker({
 		);
 	}
 
-	yield put(multipleChaosTokensByTypeRemoved(payload));
+	yield put(multipleChaosTokensRemovedByType(payload));
 }
 
 export function* removeMultipleChaosTokensByTypeSaga() {
