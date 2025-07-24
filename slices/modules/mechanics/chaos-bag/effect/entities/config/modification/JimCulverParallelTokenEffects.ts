@@ -1,6 +1,6 @@
 import { InvesigatorCode } from "@modules/mechanics/investigator/entities/config";
 import { isNumber } from "mathjs";
-import { replaceXEffectValue } from "../../../shared/lib";
+import { replaceEffectValue } from "../../../shared/lib";
 import { getDefultEffectModificationCallback } from "../../lib/logic";
 import type { InvestigatorTokenEffectModification as Modification } from "../../model";
 
@@ -21,7 +21,7 @@ export const JimCulverParallelTokenEffects: Modification = {
 			return effects;
 		}
 
-		const skullEffect = replaceXEffectValue({
+		const skullEffect = replaceEffectValue({
 			text: referenceCardEffects.skull,
 			value: skullValue,
 		});
