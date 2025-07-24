@@ -17,6 +17,7 @@ export const defaultComponentStyles: ComponentStyleMap = {
 	icon: {
 		fontSize: 14,
 		lineHeight: 16,
+		marginTop: -18,
 	},
 	iconToken: {},
 	paragraph: {},

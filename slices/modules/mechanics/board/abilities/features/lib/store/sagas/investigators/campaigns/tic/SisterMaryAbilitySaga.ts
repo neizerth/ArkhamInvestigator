@@ -11,19 +11,14 @@ import {
 import { AbilityCode } from "@modules/mechanics/board/abilities/shared/config";
 import { put, select, takeEvery } from "redux-saga/effects";
 
-const filterAction = createAbilityUseFilter(AbilityCode.SisterMary);
+const filterAction = createAbilityUseFilter({
+	id: AbilityCode.SisterMary,
+	isUsed: false,
+});
 
 const BLESS_COUNT = 2;
 
 function* worker({ payload }: ReturnType<typeof changeBoardHistoryAbilityUse>) {
-	const { changedAbilities } = payload;
-
-	const [ability] = changedAbilities;
-
-	if (ability.isUsed) {
-		return;
-	}
-
 	const canAddSelector = selectCanAddMultipleChaosTokens({
 		type: "bless",
 		count: BLESS_COUNT,

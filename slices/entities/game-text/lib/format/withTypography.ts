@@ -11,7 +11,9 @@ export const withTypography = (text: string) => {
 		// nbsp before digit
 		.replace(/(?<!\])(\d+) /g, `$1${nbsp}`)
 		// nbsp after digit
-		.replace(/(\d+) /g, `$1${nbsp}`);
+		.replace(/(\d+) /g, `$1${nbsp}`)
+		// dot after ) or >
+		.replace(/([\)\>])\./g, `$1${shortNbsp}.`);
 
 	const haveWesternGlyphs = haveChineseGlyphs(text) || haveKoreanGlyphs(text);
 

@@ -7,7 +7,7 @@ import {
 
 export type { HandleOpenModalPayload as OpenModalPayload };
 
-export function openModal(
+export function openModalReducer(
 	state: ModalDraft,
 	{ payload }: PayloadAction<HandleOpenModalPayload>,
 ) {

@@ -3,6 +3,7 @@ import { confirmModalActionSaga } from "@modules/core/modal/shared/actions/confi
 import { followURLActionSaga } from "@modules/core/modal/shared/actions/custom/follow-url/lib";
 import { goToPageActionSaga } from "@modules/core/modal/shared/actions/custom/go-to-page/lib";
 import { confirmSaga } from "@modules/core/modal/shared/confirm/lib/store/sagas";
+import { customModalSaga } from "@modules/core/modal/shared/custom/lib/store/sagas";
 import { promptSaga } from "@modules/core/modal/shared/prompt/lib/store/sagas";
 import { spawn } from "redux-saga/effects";
 import { closeModalActionSaga } from "../features/closeModal/closeModalActionSaga";
@@ -21,4 +22,5 @@ export function* modalSharedSaga() {
 
 	yield spawn(confirmSaga);
 	yield spawn(promptSaga);
+	yield spawn(customModalSaga);
 }

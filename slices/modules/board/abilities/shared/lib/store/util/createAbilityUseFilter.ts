@@ -5,8 +5,13 @@ import { changeBoardHistoryAbilityUse } from "../features";
 
 type Payload = ActionCreatorPayload<typeof changeBoardHistoryAbilityUse>;
 
+type Options = {
+	id: string;
+	isUsed?: boolean;
+};
+
 export const createAbilityUseFilter =
-	(id: string) =>
+	({ id, isUsed }: Options) =>
 	(action: unknown): action is PayloadAction<Payload> => {
 		if (!changeBoardHistoryAbilityUse.match(action)) {
 			return false;
@@ -15,5 +20,13 @@ export const createAbilityUseFilter =
 
 		const ability = changedAbilities.find(whereId(id));
 
-		return Boolean(ability);
+		if (!ability) {
+			return false;
+		}
+
+		if (typeof isUsed !== "boolean") {
+			return true;
+		}
+
+		return ability.isUsed === isUsed;
 	};

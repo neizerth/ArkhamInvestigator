@@ -38,7 +38,7 @@ export const Button = ({
 	return (
 		<C.Container {...props} onPress={handlePress}>
 			{icon && <C.Icon style={iconStyle} icon={icon} />}
-			{text && <C.Text style={textStyle}>{text}</C.Text>}
+			{text && <C.Text style={textStyle} value={text} />}
 			{children}
 		</C.Container>
 	);
