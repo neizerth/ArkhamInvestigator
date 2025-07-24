@@ -52,6 +52,7 @@ export const {
 	endChaosBagReveal,
 	setCurrentRevealedTokenId,
 	setRevealedTokenValue,
+	updateRevealedToken,
 } = chaosBagReveal.actions;
 
 export const {

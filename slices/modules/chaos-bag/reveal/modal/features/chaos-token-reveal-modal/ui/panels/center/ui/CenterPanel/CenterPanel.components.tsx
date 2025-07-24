@@ -14,7 +14,9 @@ export const TokenButton: typeof TouchableOpacity = styled(TouchableOpacity)`
   position: relative;
 `;
 
-export const LastToken: typeof ModalChaosToken = styled(ModalChaosToken).attrs({
+export const CurrentToken: typeof ModalChaosToken = styled(
+	ModalChaosToken,
+).attrs({
 	size: 150,
 	tokenPadding: 5,
 	sealOffset: 5,

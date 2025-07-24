@@ -4,10 +4,7 @@ import { View } from "react-native";
 import styled, { css } from "styled-components/native";
 import { chaosToken } from "../../../config";
 import { ChaosToken } from "../../chaos-token";
-import {
-	ChaosTokenModification,
-	type ChaosTokenModificationProps,
-} from "../ChaosTokenModification";
+import { ChaosTokenModification } from "../ChaosTokenModification";
 import { SealedImage } from "./images";
 
 export const Container: typeof View = styled(View)`
@@ -32,29 +29,11 @@ export const Sealed: typeof SealedImage = styled(SealedImage).attrs({
   bottom: 0px;
 `;
 
-type ModificationProps = ChaosTokenModificationProps & {
-	padding: number;
-};
-
-const modificationRatio = 0.3;
-
-export const Modification: FC<ModificationProps> = styled(
+export const Modification: typeof ChaosTokenModification = styled(
 	ChaosTokenModification,
 )`
   position: absolute;
   z-index: 3;
-
-  ${({ size, padding }: ModificationProps) => {
-		const mSize = size * modificationRatio;
-		const top = (size - mSize) / 2 + padding;
-		const left = -mSize * 0.18;
-		return css`
-      top: ${top}px;
-      left: ${left}px;
-      width: ${mSize}px;
-      height: ${mSize}px;
-    `;
-	}}
 `;
 
 export const ModifiedHighlight: typeof View = styled(View)`

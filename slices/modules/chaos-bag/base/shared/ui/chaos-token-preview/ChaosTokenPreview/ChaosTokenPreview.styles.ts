@@ -1,20 +1,18 @@
-import { size } from "@shared/config";
-import type { ViewStyle } from "react-native";
+import type { ViewProps, ViewStyle } from "react-native";
 import type { SvgProps } from "react-native-svg";
-import { chaosToken } from "../../../config";
 
 type Options = {
+	size: number;
+	padding: number;
 	sealed?: boolean;
-	defaultSize?: number;
-	offset?: number;
-	padding?: number;
+	offset: number;
 };
 
 export const getChaosTokentPreviewStyles = ({
 	sealed = false,
-	defaultSize = chaosToken.size.default,
-	offset = 2,
-	padding = size.gap.small,
+	size,
+	offset,
+	padding,
 }: Options) => {
 	const container: ViewStyle = {
 		padding: sealed ? offset : 0,
@@ -26,8 +24,8 @@ export const getChaosTokentPreviewStyles = ({
 		left: offset,
 		top: offset,
 	};
-	const sealedSize = defaultSize - offset * 4;
-	const tokenSize = sealed ? sealedSize : defaultSize;
+	const sealedSize = size - offset * 4;
+	const tokenSize = sealed ? sealedSize : size;
 
 	return {
 		container,
@@ -35,5 +33,35 @@ export const getChaosTokentPreviewStyles = ({
 		background,
 		size: tokenSize,
 		offset,
+	};
+};
+
+export const getModificationSize = ({
+	sealed,
+	size,
+	offset,
+	padding,
+}: Options) => {
+	if (!sealed) {
+		return size;
+	}
+
+	return size - 4 * offset - 2 * padding;
+};
+
+export const getModificationStyle = (options: Options): ViewProps["style"] => {
+	const { sealed, padding, offset } = options;
+	const offsetTop = sealed ? padding - offset : padding;
+	const offsetLeft = sealed ? padding * 1.5 : padding;
+	const k = sealed ? 0.22 : 0.3;
+	const size = options.size * k;
+	const top = (options.size - size) / 2 + offsetTop;
+	const left = -size * 0.3 + offsetLeft;
+
+	return {
+		top,
+		left,
+		width: size,
+		height: size,
 	};
 };

@@ -24,17 +24,21 @@ export type ChaosTokenValuePickerProps = Omit<
 	Partial<PropsWithBoardId> & {
 		valueStyle?: ChaosTokenValueProps["style"];
 		type: ChaosTokenType;
+		sealed?: boolean;
 	};
 
-const valueSizes = [1, 1, 0.7];
+const sealedSizes = [1, 1, 0.7];
+const unsealedSizes = [0.9, 0.9, 0.65];
 
 export const ChaosTokenValuePicker = ({
 	type,
 	valueStyle,
 	boardId = "current",
+	sealed,
 	...props
 }: ChaosTokenValuePickerProps) => {
 	const dispatch = useAppDispatch();
+	const valueSizes = sealed ? sealedSizes : unsealedSizes;
 
 	const value = useAppSelector(
 		selectTokenValue({
@@ -81,7 +85,7 @@ export const ChaosTokenValuePicker = ({
 				/>
 			);
 		},
-		[type, valueStyle, isModified],
+		[type, valueStyle, isModified, valueSizes],
 	);
 
 	return (

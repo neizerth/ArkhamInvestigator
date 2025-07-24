@@ -30,9 +30,15 @@ export const ChaosTokenRevealHistory = ({
 	const currentTokenId = useAppSelector(selectCurrentRevealedTokenId);
 	const onTokenPress = useCallback(
 		(token: RevealedChaosBagToken) => () => {
-			dispatch(returnChaosToken(token));
+			const isCurrent = currentTokenId === token.id;
+
+			if (isCurrent) {
+				dispatch(returnChaosToken(token));
+				return;
+			}
+			dispatch(setCurrentRevealedTokenId(token.id));
 		},
-		[dispatch],
+		[dispatch, currentTokenId],
 	);
 
 	const toggleSeal = useCallback(

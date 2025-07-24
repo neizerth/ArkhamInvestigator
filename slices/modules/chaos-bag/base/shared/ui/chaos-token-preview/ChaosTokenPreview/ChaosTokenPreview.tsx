@@ -1,10 +1,15 @@
 import { isChaosTokenModified } from "@modules/chaos-bag/value/shared/lib";
+import { size } from "@shared/config";
 import { memo } from "react";
 import type { ViewProps } from "react-native";
 import { chaosToken } from "../../../config";
 import type { ChaosTokenConfig } from "../../chaos-token";
 import * as C from "./ChaosTokenPreview.components";
-import { getChaosTokentPreviewStyles } from "./ChaosTokenPreview.styles";
+import {
+	getChaosTokentPreviewStyles,
+	getModificationSize,
+	getModificationStyle,
+} from "./ChaosTokenPreview.styles";
 
 export type ChaosTokenPreviewProps = ViewProps &
 	ChaosTokenConfig & {
@@ -16,11 +21,13 @@ export type ChaosTokenPreviewProps = ViewProps &
 		defaultValue?: number;
 	};
 
+const defaultPadding = size.gap.small;
+
 export const ChaosTokenPreview = ({
 	type,
 	sealed,
-	sealOffset,
-	tokenPadding = 0,
+	sealOffset = 2,
+	tokenPadding = defaultPadding,
 	selected = false,
 	highlight = true,
 	value,
@@ -28,17 +35,21 @@ export const ChaosTokenPreview = ({
 	...props
 }: ChaosTokenPreviewProps) => {
 	const { size = chaosToken.size.default } = props;
-	const style = getChaosTokentPreviewStyles({
+	const options = {
 		sealed,
+		size,
 		offset: sealOffset,
-		defaultSize: size,
 		padding: tokenPadding,
-	});
+	};
+	const style = getChaosTokentPreviewStyles(options);
 
 	const modified = isChaosTokenModified({
 		type,
 		value,
 	});
+
+	const modificationSize = getModificationSize(options);
+	const modificationStyle = getModificationStyle(options);
 
 	return (
 		<C.Container {...props} style={style.container}>
@@ -49,9 +60,10 @@ export const ChaosTokenPreview = ({
 				{modified && typeof defaultValue === "number" && (
 					<C.Modification
 						type={type}
-						size={size}
-						padding={tokenPadding}
+						size={modificationSize}
 						value={defaultValue}
+						style={modificationStyle}
+						sealed={sealed}
 					/>
 				)}
 				{modified && highlight && typeof value === "number" && (
