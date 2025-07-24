@@ -5,6 +5,7 @@ export const ModalId = {
 };
 
 export const CustomModalId = {
+	KohakuNarukami: "kohaku",
 	factionSelect: "faction-select",
 	chaosTokenReveal: "chaos-token-reveal",
 };

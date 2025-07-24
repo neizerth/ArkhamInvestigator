@@ -17,6 +17,7 @@ export const AbilityCode = {
 	CarsonSinclair: "give-action",
 	MinhThiPhan: "add-2wild",
 	ZoeySamaras: "get-resource",
+	KohakuNarukami: "bless-curse",
 };
 
 export const specialAbilitityCodes = [

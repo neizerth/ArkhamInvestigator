@@ -1,26 +1,8 @@
-import { spawn } from "redux-saga/effects";
-import { CalwinWrightAbilitySaga } from "./CalwinWrightAbilitySaga";
-import { CarsonSinclairAbilitySaga } from "./CarsonSinclair";
-import { DianaStanleyAbilitySaga } from "./DianaStanleyAbilitySaga";
-import { GeorgeBarnabyAbilitySaga } from "./GeorgeBarnabyAbilitySaga";
-import { LilyChenAbilitySaga } from "./LilyChenAbilitySaga";
-import { LolaHayesAbilitySaga } from "./LolaHayesAbilitySaga";
-import { MinhThiPhanAbilitySaga } from "./MinhThiPhan";
-import { ShatteredSelfAbilitySaga } from "./ShatteredSelfAbilitySaga";
-import { SisterMaryAbilitySaga } from "./SisterMaryAbilitySaga";
-import { Subject5U21AbilitySaga } from "./Subject5U21AbilitySaga";
-import { ZoeySamarasAbilitySaga } from "./ZoeySamaras";
+import { fork } from "redux-saga/effects";
+import { campaignsInvestigatorAbilitySaga as campaignsSaga } from "./campaigns";
+import { sideScenariosInvestigatorAbilitySaga as sideScenariosSaga } from "./side";
 
 export function* investigatorAbilitiesSaga() {
-	yield spawn(DianaStanleyAbilitySaga);
-	yield spawn(GeorgeBarnabyAbilitySaga);
-	yield spawn(Subject5U21AbilitySaga);
-	yield spawn(CalwinWrightAbilitySaga);
-	yield spawn(ShatteredSelfAbilitySaga);
-	yield spawn(SisterMaryAbilitySaga);
-	yield spawn(ZoeySamarasAbilitySaga);
-	yield spawn(LolaHayesAbilitySaga);
-	yield spawn(LilyChenAbilitySaga);
-	yield spawn(CarsonSinclairAbilitySaga);
-	yield spawn(MinhThiPhanAbilitySaga);
+	yield fork(campaignsSaga);
+	yield fork(sideScenariosSaga);
 }
