@@ -7,6 +7,7 @@ export const BlessCurseCount = (props: BlessCurseCountProps) => {
 	return (
 		<C.Container {...props}>
 			<C.Token type="bless" />
+			<C.Separator />
 			<C.Token type="curse" />
 		</C.Container>
 	);

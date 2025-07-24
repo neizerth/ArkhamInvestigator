@@ -10,6 +10,7 @@ export type FactionCardAction = {
 	icon?: string;
 	title: string;
 	onPress: () => void;
+	style?: ViewProps["style"];
 };
 
 export type FactionCardProps = ViewProps &
@@ -90,6 +91,7 @@ export const FactionCard = ({
 										faction={faction}
 										icon={action.icon}
 										onPress={action.onPress}
+										style={action.style}
 									>
 										<C.OKBackground
 											faction={faction}
@@ -102,6 +104,7 @@ export const FactionCard = ({
 										text={action.title}
 										icon={action.icon}
 										onPress={action.onPress}
+										style={action.style}
 									/>
 								)}
 							</Fragment>

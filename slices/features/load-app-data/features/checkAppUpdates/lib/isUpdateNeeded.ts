@@ -31,8 +31,6 @@ export const isUpdateNeeded = ({
 		return true;
 	}
 
-	console.log(mediaUpdateTime);
-
 	const localTime = moment(mediaUpdateTime);
 	const lastUpdateAt = moment(update.cards_updated_at);
 

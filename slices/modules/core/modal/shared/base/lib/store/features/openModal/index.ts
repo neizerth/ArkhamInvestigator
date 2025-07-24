@@ -1,2 +1,2 @@
 export * from "./handleOpenModal";
-export * from "./openModal";
+export * from "./openModalReducer";
