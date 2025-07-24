@@ -110,11 +110,9 @@
 	"clues.remains_few": "Осталось {{count}} улики",
 	"clues.remains_many": "Осталось {{count}} улик",
 
-	"chaosBag.addToken_one": "{{name}} добавляет в мешок 1 {{token}}",
-	"chaosBag.addToken_few": "{{name}} добавляет в мешок {{count}} {{token}}",
-	"chaosBag.addToken_many": "{{name}} добавляет в мешок {{many}} {{token}}",
+	"chaosBag.addToken": "{{name}} добавляет в мешок {{count}} {{token}}",
+	"chaosBag.removeToken": "{{name}} удаляет из мешка {{count}} {{token}}",
 
-	"ability.addBless.full": "Нельзя добавить больше 10 Благословений",
 	"chaosBag.cantAddToken": "Нельзя добавить больше {{limit}} {{character}}",
 
 	"mythos.doom": "Добавлена 1 Безысходность. Итого: {{doom}}",

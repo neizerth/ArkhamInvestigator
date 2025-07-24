@@ -6,6 +6,7 @@ import { removeChaosToken } from "../removeChaosToken/removeChaosToken";
 import {
 	cantRemoveChaosToken,
 	removeChaosTokenByType,
+	singleChaosTokenRemovedByType,
 } from "./removeChaosTokenByType";
 
 function* worker({ payload }: ReturnType<typeof removeChaosTokenByType>) {
@@ -36,6 +37,8 @@ function* worker({ payload }: ReturnType<typeof removeChaosTokenByType>) {
 			id: token.id,
 		}),
 	);
+
+	yield put(singleChaosTokenRemovedByType(payload));
 }
 
 export function* removeChaosTokenByTypeSaga() {
