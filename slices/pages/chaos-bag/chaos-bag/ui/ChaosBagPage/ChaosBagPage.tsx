@@ -1,33 +1,25 @@
-import { updateChaosBag } from "@modules/chaos-bag/base/entities/lib";
 import { useAppTranslation } from "@modules/core/i18n/shared/lib";
 import { routes } from "@shared/config";
 import {
 	selectReferenceCard,
 	selectStory,
-	useAppDispatch,
 	useAppSelector,
 	usePage,
 } from "@shared/lib";
 import { Delay } from "@shared/ui";
-import { useCallback } from "react";
 import * as C from "./ChaosBagPage.components";
 
 export const ChaosBagPage = () => {
-	const dispatch = useAppDispatch();
 	const story = useAppSelector(selectStory);
 	const referenceCard = useAppSelector(selectReferenceCard);
 	const { t } = useAppTranslation();
-
-	const createBag = useCallback(() => {
-		dispatch(updateChaosBag());
-	}, [dispatch]);
 
 	const goToPage = usePage();
 
 	const label = referenceCard?.name || t`Scenario reference`;
 
 	return (
-		<C.Container title="Chaos bag" onBack={createBag} full>
+		<C.Container title="Chaos bag" full>
 			<Delay>
 				<C.Reference>
 					<C.ReferenceButton
