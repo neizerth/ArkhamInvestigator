@@ -11,5 +11,7 @@ export const getUnrevealedChaosTokens = ({
 	contents,
 	revealedIds,
 }: GetUnrevealedChaosTokensOptions) => {
-	return reject(idIncludes(revealedIds), contents);
+	return reject(idIncludes(revealedIds), contents).filter(
+		({ sealed }) => !sealed,
+	);
 };

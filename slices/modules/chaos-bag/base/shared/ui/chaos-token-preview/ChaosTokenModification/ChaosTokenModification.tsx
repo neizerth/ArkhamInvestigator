@@ -10,26 +10,39 @@ export type ChaosTokenModificationProps = ViewProps & {
 	type: ChaosTokenType;
 	size: number;
 	value: number;
+	sealed?: boolean;
 };
 
 export const ChaosTokenModification = ({
 	size,
 	type,
 	value,
+	sealed,
 	...props
 }: ChaosTokenModificationProps) => {
 	const color = getChaosTokenModificationValueColor(value);
 
+	const sealedBorder = size > 40;
+	const showBackgoundBorder = value < 1;
+
 	return (
 		<C.Container {...props}>
-			<C.TokenValue
-				value={signedNumber(value)}
-				textStyle={{ color }}
-				stroke={false}
-				sizes={defaultSizes}
-				size={size}
+			<C.Content>
+				<C.TokenValue
+					value={signedNumber(value)}
+					textStyle={{ color }}
+					stroke={false}
+					sizes={defaultSizes}
+					size={size}
+				/>
+			</C.Content>
+
+			<C.Background
+				value={value}
+				sealed={sealed}
+				sealedBorder={sealedBorder}
+				showBorder={showBackgoundBorder}
 			/>
-			<C.Background value={value} />
 		</C.Container>
 	);
 };

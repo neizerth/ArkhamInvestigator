@@ -2,7 +2,7 @@ import { chaosBagEntitiesSaga } from "@modules/chaos-bag/base/entities/lib/store
 import { chaosBagFeaturesSaga } from "@modules/chaos-bag/base/features/lib/store/sagas";
 import { chaosBagRevealEntitiesSaga } from "@modules/chaos-bag/reveal/base/entities/lib/store/sagas";
 import { endRevealEffectsSaga } from "@modules/chaos-bag/reveal/base/features/end-reveal-effects/endRevealEffectsSaga";
-import { updateRevealedTokenValueSaga } from "@modules/chaos-bag/reveal/base/features/update-revealed-token-value/updateRevealedTokenValueSaga";
+import { updateRevealedTokenSaga } from "@modules/chaos-bag/reveal/base/features/update-revealed-token/updateRevealedTokenSaga";
 import { chaosBagRevealHistoryEntitiesSaga } from "@modules/chaos-bag/reveal/history/entities/lib/store/sagas";
 import { chaosBagRevealHistoryFeaturesSaga } from "@modules/chaos-bag/reveal/history/features/lib/store/sagas";
 import { chaosTokenRevealModalSaga } from "@modules/chaos-bag/reveal/modal/features/chaos-token-reveal-modal/lib/store/sagas";
@@ -29,5 +29,5 @@ export function* chaosBagSaga() {
 	// features
 	yield spawn(endRevealEffectsSaga);
 	yield spawn(closeModalOnNavigationSaga);
-	yield spawn(updateRevealedTokenValueSaga);
+	yield spawn(updateRevealedTokenSaga);
 }

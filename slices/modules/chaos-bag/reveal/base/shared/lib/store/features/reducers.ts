@@ -3,3 +3,4 @@ export { addRevealedTokensReducer as addRevealedTokens } from "./addRevealedToke
 export { startChaosBagRevealInternalReducer as startChaosBagRevealInternal } from "./startChaosBagRevealInternal/startChaosBagRevealInternalReducer";
 export { endChaosBagRevealReducer as endChaosBagReveal } from "./endChaosBagReveal/endChaosBagRevealReducer";
 export { setRevealedTokenValueReducer as setRevealedTokenValue } from "./setRevealedTokenValue/setRevealedTokenValueReducer";
+export { updateRevealedTokenReducer as updateRevealedToken } from "./updateRevealedToken/updateRevealedTokenReducer";

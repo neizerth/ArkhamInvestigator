@@ -13,47 +13,45 @@ import {
 } from "react-native-gesture-handler";
 
 import { selectModifyChaosTokens } from "@modules/chaos-bag/base/shared/lib";
-import {
-	selectRevealedTokens,
-	setCurrentRevealedTokenId,
-} from "@modules/chaos-bag/reveal/base/shared/lib";
+import { setCurrentRevealedTokenId } from "@modules/chaos-bag/reveal/base/shared/lib";
 
 import { toggleChaosTokenSeal } from "@modules/chaos-bag/base/entities/lib";
 import { returnSingleChaosToken } from "@modules/chaos-bag/reveal/base/entities/lib";
 import type { RevealedChaosBagToken } from "@modules/chaos-bag/reveal/base/shared/model";
-import { last } from "ramda";
+import { selectCurrentRevealedToken } from "../../../../../lib";
 import * as C from "./CenterPanel.components";
 
 export type CenterPanelProps = ViewProps;
 
 export const CenterPanel = ({ style, ...props }: CenterPanelProps) => {
 	const dispatch = useAppDispatch();
-	const tokens = useAppSelector(selectRevealedTokens);
+	const token = useAppSelector(
+		selectCurrentRevealedToken,
+	) as RevealedChaosBagToken;
 
-	const lastToken = last(tokens) as RevealedChaosBagToken;
-	const { type } = lastToken;
+	const { type } = token;
 
 	const showTokenValue = useAppSelector(selectModifyChaosTokens);
 
 	const setCurrentToken = useCallback(() => {
-		dispatch(setCurrentRevealedTokenId(lastToken.id));
-	}, [dispatch, lastToken]);
+		dispatch(setCurrentRevealedTokenId(token.id));
+	}, [dispatch, token]);
 
 	const onPress = useCallback(() => {
 		dispatch(
 			returnSingleChaosToken({
-				id: lastToken.id,
+				id: token.id,
 			}),
 		);
-	}, [dispatch, lastToken]);
+	}, [dispatch, token]);
 
 	const onLongPress = useCallback(() => {
 		dispatch(
 			toggleChaosTokenSeal({
-				id: lastToken.id,
+				id: token.id,
 			}),
 		);
-	}, [dispatch, lastToken]);
+	}, [dispatch, token]);
 
 	const tap = useHapticTap({
 		onPress,
@@ -77,7 +75,7 @@ export const CenterPanel = ({ style, ...props }: CenterPanelProps) => {
 	return (
 		<GestureDetector gesture={getsture}>
 			<C.Container style={style}>
-				<C.LastToken {...lastToken} {...props} />
+				<C.CurrentToken {...token} {...props} />
 				{showTokenValue && (
 					<C.ControlContainer>
 						<C.Control type={type} onTouchStart={setCurrentToken} />
