@@ -10,6 +10,7 @@ import { loadLocaleData } from "../app/actions/api";
 
 export type IInvestigatorsState = {
 	mediaVersion: string | null;
+	mediaUpdateTime: string | null;
 	signatureGroups: InvestigatorSignatureGroup[];
 	tabooSignatures: InvestigatorSignature[];
 	investigatorSettings: Record<string, InvestigatorSettings> | null;
@@ -17,6 +18,7 @@ export type IInvestigatorsState = {
 
 const initialState: IInvestigatorsState = {
 	mediaVersion: null,
+	mediaUpdateTime: null,
 	signatureGroups: [],
 	tabooSignatures: [],
 	investigatorSettings: null,
@@ -38,6 +40,7 @@ export const {
 	setSignatureGroups,
 	setTabooSignatures,
 	setInvestigatorSettings,
+	setMediaUpdateTime,
 } = investigators.actions;
 
 export const {
@@ -45,6 +48,7 @@ export const {
 	selectSignatureGroups,
 	selectTabooSignatures,
 	selectInvestigatorSettings,
+	selectMediaUpdateTime,
 } = investigators.selectors;
 
 export default investigators.reducer;
