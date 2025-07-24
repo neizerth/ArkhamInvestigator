@@ -32,7 +32,7 @@ export const selectChaosBagTokenValues = (boardId: BoardId) =>
 			customizedValues,
 			signatureModifications,
 		) => {
-			return {
+			const tokenValues = {
 				...defaultNumericChaosTokenValue,
 				...defaultChaosTokenValues,
 				...referenceCardValues,
@@ -42,5 +42,7 @@ export const selectChaosBagTokenValues = (boardId: BoardId) =>
 				...(customizedValues || {}),
 				...signatureModifications,
 			};
+
+			return tokenValues;
 		},
 	);

@@ -9,6 +9,7 @@ import { clearRevealHistory } from "@modules/chaos-bag/reveal/history/shared/lib
 import type { ActionCreator } from "@reduxjs/toolkit";
 
 import { setRevealedTokens } from "@modules/chaos-bag/reveal/base/shared/lib";
+import { setBoardChaosTokenValue } from "@modules/chaos-bag/value/shared/lib";
 import { closeModal } from "@modules/core/modal/shared/base/lib";
 import type { AppThunk } from "@shared/model";
 import { routes } from "../../../../../config";
@@ -37,6 +38,7 @@ export const startNewGame: ActionCreator<AppThunk> =
 		);
 
 		dispatch(setReplaceInvestigator(false));
+		dispatch(setBoardChaosTokenValue(null));
 
 		dispatch(setSelectedInvestigators([]));
 		dispatch(setInvestigatorBoards([]));

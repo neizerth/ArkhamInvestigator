@@ -1,19 +1,13 @@
 import {
 	useHapticLongPress,
-	useHapticSwipe,
 	useHapticTap,
 } from "@modules/core/haptic/shared/lib";
 import { useAppDispatch, useAppSelector } from "@shared/lib";
 import { useCallback, useMemo } from "react";
 import type { ViewProps } from "react-native";
-import {
-	Directions,
-	Gesture,
-	GestureDetector,
-} from "react-native-gesture-handler";
+import { Gesture, GestureDetector } from "react-native-gesture-handler";
 
 import { selectModifyChaosTokens } from "@modules/chaos-bag/base/shared/lib";
-import { setCurrentRevealedTokenId } from "@modules/chaos-bag/reveal/base/shared/lib";
 
 import { toggleChaosTokenSeal } from "@modules/chaos-bag/base/entities/lib";
 import { returnSingleChaosToken } from "@modules/chaos-bag/reveal/base/entities/lib";
@@ -32,10 +26,6 @@ export const CenterPanel = ({ style, ...props }: CenterPanelProps) => {
 	const { type } = token;
 
 	const showTokenValue = useAppSelector(selectModifyChaosTokens);
-
-	const setCurrentToken = useCallback(() => {
-		dispatch(setCurrentRevealedTokenId(token.id));
-	}, [dispatch, token]);
 
 	const onPress = useCallback(() => {
 		dispatch(
@@ -61,14 +51,9 @@ export const CenterPanel = ({ style, ...props }: CenterPanelProps) => {
 		onLongPress,
 	});
 
-	const swipeDown = useHapticSwipe({
-		direction: Directions.DOWN,
-		onSwipe: setCurrentToken,
-	});
-
 	const gestures = useMemo(() => {
-		return [tap, longPress, swipeDown];
-	}, [tap, longPress, swipeDown]);
+		return [tap, longPress];
+	}, [tap, longPress]);
 
 	const getsture = Gesture.Exclusive(...gestures);
 
@@ -78,7 +63,7 @@ export const CenterPanel = ({ style, ...props }: CenterPanelProps) => {
 				<C.CurrentToken {...token} {...props} />
 				{showTokenValue && (
 					<C.ControlContainer>
-						<C.Control type={type} onTouchStart={setCurrentToken} />
+						<C.Control type={type} />
 					</C.ControlContainer>
 				)}
 
