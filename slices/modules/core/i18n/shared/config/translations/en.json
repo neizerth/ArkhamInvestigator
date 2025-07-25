@@ -91,8 +91,8 @@
 	"clues.remains_one": "Remains {{count}} clue",
 	"clues.remains_other": "Reamains {{count}} clues",
 
-	"actions.give_one": "{{name}} has got {{count}} action from {{fromName}}",
-	"actions.give_other": "{{name}} has got {{count}} actions from {{fromName}}",
+	"actions.give_one": "{{name}} has got [action] from {{fromName}}",
+	"actions.give_other": "{{name}} has got {{count}} [actions] from {{fromName}}",
 
 	"upkeep.investigator.actionsReset": "{{name}}: Actions reset",
 
