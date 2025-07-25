@@ -3,7 +3,7 @@ import { put, select, takeEvery } from "redux-saga/effects";
 import { selectCanRemoveMultipleChaosTokensFromBag } from "../../../selectors";
 import { removeChaosToken } from "../removeChaosToken";
 import {
-	cantRemoveMultipleChaosTokens,
+	cantRemoveMultipleChaosTokensByType,
 	multipleChaosTokensRemovedByType,
 	removeMultipleChaosTokensByType,
 } from "./removeMultipleChaosTokensByType";
@@ -23,7 +23,7 @@ function* worker({
 
 	if (!validation.canRemove) {
 		yield put(
-			cantRemoveMultipleChaosTokens({
+			cantRemoveMultipleChaosTokensByType({
 				...payload,
 				...validation,
 			}),

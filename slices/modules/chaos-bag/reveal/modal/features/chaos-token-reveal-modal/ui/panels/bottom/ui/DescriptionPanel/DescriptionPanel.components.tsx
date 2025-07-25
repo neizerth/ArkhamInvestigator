@@ -26,6 +26,10 @@ export const Effect: typeof GameText = styled(GameText).attrs({
 		paragraph: {
 			justifyContent: "center",
 		},
+		icon: {
+			lineHeight: 14,
+			marginTop: -14,
+		},
 	},
 })`
   font-size: ${font.size.small}px;

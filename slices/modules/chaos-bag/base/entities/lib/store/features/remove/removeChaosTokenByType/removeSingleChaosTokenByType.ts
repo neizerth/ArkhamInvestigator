@@ -7,7 +7,7 @@ export type RemoveChaosTokenByTypePayload = Partial<PropsWithBoardId> & {
 	type: ChaosTokenType;
 };
 
-export const removeChaosTokenByType =
+export const removeSingleChaosTokenByType =
 	createAction<RemoveChaosTokenByTypePayload>(
 		`${chaosBagPrefix}/removeTokenByType`,
 	);
@@ -17,6 +17,12 @@ export const singleChaosTokenRemovedByType =
 		`${chaosBagPrefix}/singleTokenRemovedByType`,
 	);
 
-export const cantRemoveChaosToken = createAction<RemoveChaosTokenByTypePayload>(
-	`${chaosBagPrefix}/cantRemoveToken`,
-);
+export type CantRemoveSingleChaosTokenByTypePayload =
+	RemoveChaosTokenByTypePayload & {
+		available: number;
+	};
+
+export const cantRemoveSingleChaosTokenByType =
+	createAction<CantRemoveSingleChaosTokenByTypePayload>(
+		`${chaosBagPrefix}/cantRemoveTokenByType`,
+	);
