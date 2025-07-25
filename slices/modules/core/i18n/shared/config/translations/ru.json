@@ -105,6 +105,10 @@
 	"clues.spent_few": "{{name}} тратит {{count}} улики",
 	"clues.spent_many": "{{name}} тратит {{count}} улик",
 
+	"clues.scenario.add_one": "{{name}} добавляет на сценарий {{count}} улику",
+	"clues.scenario.add_few": "{{name}} добавляет на сценарий {{count}} улики",
+	"clues.scenario.add_many": "{{name}} добавляет на сценарий {{count}} улик",
+
 	"clues.remains_zero": "Улики закончились",
 	"clues.remains_one": "Осталась {{count}} улика",
 	"clues.remains_few": "Осталось {{count}} улики",

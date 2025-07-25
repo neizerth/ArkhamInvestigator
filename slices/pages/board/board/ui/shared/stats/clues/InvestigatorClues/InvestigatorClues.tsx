@@ -1,8 +1,5 @@
-import {
-	increaseCurrentActualPropValue,
-	selectCurrentActualPropValue,
-	setCurrentActualPropValue,
-} from "@modules/board/base/shared/lib";
+import { selectCurrentActualPropValue } from "@modules/board/base/shared/lib";
+import { setInvestigatorClues } from "@modules/mechanics/board/base/features/clues/set-clues";
 import { useAppDispatch, useAppSelector } from "@shared/lib";
 import { useCallback } from "react";
 import type { ViewProps } from "react-native";
@@ -16,8 +13,8 @@ export const InvestigatorClues = (props: InvestigatorCluesProps) => {
 	const onChange = useCallback(
 		(value = 0) => {
 			dispatch(
-				setCurrentActualPropValue({
-					prop: "clues",
+				setInvestigatorClues({
+					boardId: "current",
 					value,
 				}),
 			);
@@ -27,8 +24,8 @@ export const InvestigatorClues = (props: InvestigatorCluesProps) => {
 
 	const onLongPress = useCallback(() => {
 		dispatch(
-			setCurrentActualPropValue({
-				prop: "clues",
+			setInvestigatorClues({
+				boardId: "current",
 				value: 0,
 			}),
 		);
@@ -36,11 +33,12 @@ export const InvestigatorClues = (props: InvestigatorCluesProps) => {
 
 	const onPress = useCallback(() => {
 		dispatch(
-			increaseCurrentActualPropValue({
-				prop: "clues",
+			setInvestigatorClues({
+				boardId: "current",
+				value: value + 1,
 			}),
 		);
-	}, [dispatch]);
+	}, [dispatch, value]);
 
 	return (
 		<Clues
