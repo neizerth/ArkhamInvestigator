@@ -1,1 +1,1 @@
-export * from "./removeChaosTokenByType";
+export * from "./removeSingleChaosTokenByType";

@@ -91,8 +91,8 @@
 	"clues.remains_one": "Remains {{count}} clue",
 	"clues.remains_other": "Reamains {{count}} clues",
 
-	"actions.give_one": "{{name}} has got [action] from {{fromName}}",
-	"actions.give_other": "{{name}} has got {{count}} [actions] from {{fromName}}",
+	"actions.give_one": "{{name}} has got action [action] from {{fromName}}",
+	"actions.give_other": "{{name}} has got {{count}} actions [action] from {{fromName}}",
 
 	"upkeep.investigator.actionsReset": "{{name}}: Actions reset",
 
@@ -125,6 +125,7 @@
 	"chaosBag.removeToken_many": "{{name}} removes {{count}} {{token}} tokens from the chaos bag",
 
 	"chaosBag.cantAddToken": "You can't add more than {{limit}} {{character}}",
+	"chaosBag.cantRemoveToken": "You can't remove {{count}} {{character}}. Available: {{available}}",
 
 	"board.help.syncScenarioClues": "Enables/disables synchronization of scenario and investigator clues: clues added to the scenario will be removed from the investigator",
 

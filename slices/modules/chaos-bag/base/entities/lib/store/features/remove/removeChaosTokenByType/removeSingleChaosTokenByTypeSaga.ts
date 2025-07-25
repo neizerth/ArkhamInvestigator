@@ -4,12 +4,12 @@ import { selectChaosBagTokensByType } from "@modules/chaos-bag/base/shared/lib";
 import { selectCanRemoveChaosTokenFromBag } from "../../../selectors/logic";
 import { removeChaosToken } from "../removeChaosToken/removeChaosToken";
 import {
-	cantRemoveChaosToken,
-	removeChaosTokenByType,
+	cantRemoveSingleChaosTokenByType,
+	removeSingleChaosTokenByType,
 	singleChaosTokenRemovedByType,
-} from "./removeChaosTokenByType";
+} from "./removeSingleChaosTokenByType";
 
-function* worker({ payload }: ReturnType<typeof removeChaosTokenByType>) {
+function* worker({ payload }: ReturnType<typeof removeSingleChaosTokenByType>) {
 	const { type, boardId } = payload;
 
 	const canRemoveSelector = selectCanRemoveChaosTokenFromBag(type);
@@ -19,7 +19,7 @@ function* worker({ payload }: ReturnType<typeof removeChaosTokenByType>) {
 
 	if (!validation.canRemove) {
 		yield put(
-			cantRemoveChaosToken({
+			cantRemoveSingleChaosTokenByType({
 				...payload,
 				...validation,
 			}),
@@ -41,6 +41,6 @@ function* worker({ payload }: ReturnType<typeof removeChaosTokenByType>) {
 	yield put(singleChaosTokenRemovedByType(payload));
 }
 
-export function* removeChaosTokenByTypeSaga() {
-	yield takeEvery(removeChaosTokenByType.match, worker);
+export function* removeSingleChaosTokenByTypeSaga() {
+	yield takeEvery(removeSingleChaosTokenByType.match, worker);
 }

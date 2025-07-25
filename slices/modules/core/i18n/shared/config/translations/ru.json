@@ -97,9 +97,9 @@
 	"investigator.getResources_few": "{{name}} получает {{count}} ресурса",
 	"investigator.getResources_many": "{{name}} получает {{count}} ресурсов",
 
-	"actions.give_one": "{{fromName}} даёт {{dativeName}} [action]",
-	"actions.give_few": "{{fromName}} даёт {{dativeName}} {{count}} [action]",
-	"actions.give_many": "{{fromName}} даёт {{dativeName}} {{count}} [action]",
+	"actions.give_one": "{{fromName}} даёт {{dativeName}} 1 действие [action]",
+	"actions.give_few": "{{fromName}} даёт {{dativeName}} {{count}} действия [action]",
+	"actions.give_many": "{{fromName}} даёт {{dativeName}} {{count}} действий [action]",
 
 	"clues.spent_one": "{{name}} тратит {{count}} улику",
 	"clues.spent_few": "{{name}} тратит {{count}} улики",
@@ -118,6 +118,7 @@
 	"chaosBag.removeToken": "{{name}} удаляет из мешка {{count}} {{token}}",
 
 	"chaosBag.cantAddToken": "Нельзя добавить больше {{limit}} {{character}}",
+	"chaosBag.cantRemoveToken": "Нельзя удалить {{count}} {{character}}, в мешке осталось {{available}}",
 
 	"mythos.doom": "Добавлена 1 Безысходность. Итого: {{doom}}",
 	"timing.step.name": "Шаг {{name}}",
