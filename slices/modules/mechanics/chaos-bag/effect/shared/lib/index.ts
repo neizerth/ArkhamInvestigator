@@ -1,4 +1,5 @@
 export * from "./replaceXEffectValue";
 export * from "./replaceTokenEffectsValues";
 export * from "./replaceNumericEffectValue";
-export * from "./replaceEffectValue";
+export * from "./replaceTokenEffectValue";
+export * from "./mergeTokenEffects";

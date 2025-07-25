@@ -1,1 +1,1 @@
-export * from "./getDefultEffectModificationCallback";
+export * from "./defultEffectModificationCallback";
