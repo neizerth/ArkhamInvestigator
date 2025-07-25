@@ -70,6 +70,7 @@ function* worker({ payload }: ReturnType<typeof giveAction>) {
 	yield put(
 		sendInvestigatorNotification({
 			boardId: targetBoardId,
+			sourceBoardId: boardId,
 			message: "actions.give",
 			data: {
 				fromName: board.investigator.name,

@@ -1,6 +1,8 @@
 import { Alegreya } from "@assets/fonts";
 import { GameText } from "@entities/game-text";
 import { color, font, size } from "@shared/config";
+import { Row } from "@shared/ui";
+import { Image } from "expo-image";
 import type { FC } from "react";
 import { View, type ViewProps } from "react-native";
 import type { ToastType } from "react-native-toast-message";
@@ -19,17 +21,43 @@ const boarderColor: Record<ToastType, string> = {
 export const Container: FC<ContainerProps> = styled(View)`
   max-width: 340px;
   min-height: 60px;
+  width: 100%;
   justify-content: center;
   background-color: ${color.dark40};
   border-radius: ${size.borderRadius.default}px;
-  padding: ${size.gap.small}px ${size.gap.large}px;
+  padding: ${size.gap.small}px ${size.gap.default}px;
   border-left-width: ${size.gap.small}px;
   ${({ type }: ContainerProps) => css`
     border-left-color: ${boarderColor[type]};
   `}
 `;
 
-export const Text: typeof GameText = styled(GameText)`
+export const Content: typeof Row = styled(Row)`
+  flex: 1;
+  align-items: center;
+  padding: ${size.gap.small}px;
+  gap: ${size.gap.default}px;
+`;
+
+export const Body: typeof View = styled(View)`
+  flex: 1;
+  justify-content: center;
+`;
+
+export const Img: typeof Image = styled(Image)`
+  width: 40px;
+  height: 40px;
+  border-radius: 40px;
+`;
+
+export const Text: typeof GameText = styled(GameText).attrs({
+	componentStyles: {
+		icon: {
+			lineHeight: 14,
+			marginTop: -16,
+		},
+	},
+})`
   color: ${color.light10};
   font-family: ${Alegreya.regular};
   font-size: ${font.size.small}px;
