@@ -2,6 +2,7 @@ import { selectDeclensedSignatureName } from "@modules/board/base/entities/lib";
 import { selectBoardById } from "@modules/board/base/shared/lib";
 import type { InvestigatorBoard } from "@modules/board/base/shared/model";
 import { sendNotification } from "@modules/core/notifications/shared/lib";
+import { getBoardFaction } from "@modules/mechanics/board/base/entities/lib";
 import { getInvestigatorImageUrl } from "@shared/api";
 import { put, select, takeEvery } from "redux-saga/effects";
 import { sendInvestigatorNotification } from "./sendInvestigatorNotification";
@@ -30,11 +31,11 @@ function* worker({ payload }: ReturnType<typeof sendInvestigatorNotification>) {
 		sourceBoard = yield select(selectBoardById(sourceBoardId));
 	}
 
-	const sourceImage =
-		sourceBoard?.investigator.image || board.investigator.image;
-
 	const { name } = board.investigator;
 	const payloadData = payload.data || {};
+
+	const faction = getBoardFaction(board);
+	const sourceFaction = sourceBoard && getBoardFaction(sourceBoard);
 
 	const data = {
 		...payloadData,
@@ -42,23 +43,25 @@ function* worker({ payload }: ReturnType<typeof sendInvestigatorNotification>) {
 		name,
 	};
 
-	const image1 = getInvestigatorImageUrl({
-		code: sourceImage.id,
+	const targetImage = getInvestigatorImageUrl({
+		code: board.investigator.image.id,
 		type: "square",
 	});
 
-	const image2 =
+	const sourceImage =
 		sourceBoard &&
 		getInvestigatorImageUrl({
-			code: board.investigator.image.id,
+			code: sourceBoard.investigator.image.id,
 			type: "square",
 		});
 
 	yield put(
 		sendNotification({
 			...payload,
-			image1,
-			image2,
+			faction: sourceFaction || faction,
+			faction2: sourceFaction && faction,
+			image1: sourceImage || targetImage,
+			image2: sourceImage && targetImage,
 			data,
 		}),
 	);

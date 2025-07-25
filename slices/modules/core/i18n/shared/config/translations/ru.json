@@ -97,9 +97,9 @@
 	"investigator.getResources_few": "{{name}} получает {{count}} ресурса",
 	"investigator.getResources_many": "{{name}} получает {{count}} ресурсов",
 
-	"actions.give_one": "{{fromName}} даёт {{dativeName}} {{count}} действие",
-	"actions.give_few": "{{fromName}} даёт {{dativeName}} {{count}} действия",
-	"actions.give_many": "{{fromName}} даёт {{dativeName}} {{count}} действий",
+	"actions.give_one": "{{fromName}} даёт {{dativeName}} [action]",
+	"actions.give_few": "{{fromName}} даёт {{dativeName}} {{count}} [action]",
+	"actions.give_many": "{{fromName}} даёт {{dativeName}} {{count}} [action]",
 
 	"clues.spent_one": "{{name}} тратит {{count}} улику",
 	"clues.spent_few": "{{name}} тратит {{count}} улики",

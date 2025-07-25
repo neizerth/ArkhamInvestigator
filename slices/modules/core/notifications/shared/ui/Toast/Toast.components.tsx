@@ -1,8 +1,9 @@
 import { Alegreya } from "@assets/fonts";
 import { GameText } from "@entities/game-text";
-import { color, font, size } from "@shared/config";
+import { color, factionColor, font, size } from "@shared/config";
+import type { PropsWithFaction } from "@shared/model";
 import { Row } from "@shared/ui";
-import { Image } from "expo-image";
+import { Image, type ImageProps } from "expo-image";
 import type { FC } from "react";
 import { View, type ViewProps } from "react-native";
 import type { ToastType } from "react-native-toast-message";
@@ -44,17 +45,40 @@ export const Body: typeof View = styled(View)`
   justify-content: center;
 `;
 
-export const Img: typeof Image = styled(Image)`
+export const Images: typeof View = styled(View)`
+  position: relative;
+`;
+
+type ImageWithFactionProps = ImageProps & Partial<PropsWithFaction>;
+
+const factionBorderStyle = css<ImageWithFactionProps>`
+   ${({ faction }: ImageWithFactionProps) => css`
+    border: 1px solid ${faction ? factionColor[faction].border : color.gray20};
+  `}
+`;
+
+export const SourceImage: FC<ImageWithFactionProps> = styled(Image)`
   width: 40px;
   height: 40px;
   border-radius: 40px;
+  ${factionBorderStyle};
+`;
+
+export const TargetImage: FC<ImageWithFactionProps> = styled(Image)`
+  position: absolute;
+  bottom: -5px;
+  right: -2px;
+  width: 25px;
+  height: 25px;
+  border-radius: 25px;
+  ${factionBorderStyle};
 `;
 
 export const Text: typeof GameText = styled(GameText).attrs({
 	componentStyles: {
 		icon: {
 			lineHeight: 14,
-			marginTop: -16,
+			marginTop: -14,
 		},
 	},
 })`
