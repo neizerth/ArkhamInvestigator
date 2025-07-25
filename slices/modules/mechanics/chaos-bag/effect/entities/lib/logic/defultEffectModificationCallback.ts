@@ -1,18 +1,20 @@
-import { replaceTokenEffectsValues } from "../../../shared/lib";
+import {
+	mergeTokenEffects,
+	replaceTokenEffectsValues,
+} from "../../../shared/lib";
 import type { InvestigatorTokenEffectModificationCallback } from "../../model";
 
-export const getDefultEffectModificationCallback: InvestigatorTokenEffectModificationCallback =
+export const defultEffectModificationCallback: InvestigatorTokenEffectModificationCallback =
 	({ referenceCardEffects, signatureEffects, defaultEffects, tokenValues }) => {
 		const referenceEffects = replaceTokenEffectsValues({
 			tokenEffects: referenceCardEffects,
 			tokenValues,
 		});
 
-		const effects = {
-			...defaultEffects,
-			...referenceEffects,
-			...signatureEffects,
-		};
+		const effects = mergeTokenEffects(
+			mergeTokenEffects(defaultEffects, referenceEffects),
+			signatureEffects,
+		);
 
 		return effects;
 	};

@@ -6,7 +6,7 @@ type Options = {
 	value: number;
 };
 
-export const replaceEffectValue = (options: Options) => {
+export const replaceTokenEffectValue = (options: Options) => {
 	const { value } = options;
 	const text = replaceXEffectValue(options);
 

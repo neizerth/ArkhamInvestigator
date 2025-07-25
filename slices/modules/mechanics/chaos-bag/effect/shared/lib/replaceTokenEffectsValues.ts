@@ -4,7 +4,7 @@ import type {
 } from "@modules/chaos-bag/base/shared/model";
 import type { ChaosBagEffects } from "@modules/chaos-bag/effect/shared/model";
 import { fromPairs } from "ramda";
-import { replaceEffectValue } from "./replaceEffectValue";
+import { replaceTokenEffectValue } from "./replaceTokenEffectValue";
 
 type Options = {
 	tokenEffects: ChaosBagEffects;
@@ -25,7 +25,7 @@ export const replaceTokenEffectsValues = ({
 		const value = tokenValues[type];
 
 		if (typeof value === "number") {
-			const replacedEffect = replaceEffectValue({
+			const replacedEffect = replaceTokenEffectValue({
 				text: effect,
 				value,
 			});
