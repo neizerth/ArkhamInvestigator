@@ -1,8 +1,8 @@
 import { spawn } from "redux-saga/effects";
-import { replaceBoardSaga, resetBoardSaga, spendCluesSaga } from "../features";
+import { replaceBoardSaga } from "./replaceBoard/replaceBoardSaga";
+import { resetBoardSaga } from "./resetBoard/resetBoardSaga";
 
 export function* boardEntityMechanicsSaga() {
-	yield spawn(spendCluesSaga);
 	yield spawn(replaceBoardSaga);
 	yield spawn(resetBoardSaga);
 }

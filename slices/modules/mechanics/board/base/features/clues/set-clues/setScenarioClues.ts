@@ -1,6 +1,7 @@
 import type { AppThunk } from "@shared/model";
 
 import {
+	increaseBoardActualPropValue,
 	selectBoardActualPropValue,
 	selectClues,
 	selectSyncScenarioClues,
@@ -8,7 +9,7 @@ import {
 	withCurrentPayload,
 } from "@modules/board/base/shared/lib";
 import type { PropsWithBoardId } from "@modules/board/base/shared/model";
-import { spendClues } from "../features";
+import { spendClues } from "../spend-clues";
 
 type Payload = PropsWithBoardId & {
 	value: number;
@@ -40,12 +41,20 @@ export const setScenarioClues =
 
 		const updatedClues = Math.max(investigatorClues - diff, 0);
 
-		const spendCluesValue = investigatorClues - updatedClues;
+		const cluesSpent = investigatorClues - updatedClues;
+
+		dispatch(
+			increaseBoardActualPropValue({
+				boardId,
+				prop: "clues",
+				value: cluesSpent,
+			}),
+		);
 
 		dispatch(
 			spendClues({
 				boardId,
-				value: spendCluesValue,
+				count: cluesSpent,
 			}),
 		);
 	};

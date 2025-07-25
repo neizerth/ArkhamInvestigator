@@ -6,7 +6,7 @@ import {
 	selectSyncScenarioClues,
 	setClues,
 } from "@modules/board/base/shared/lib";
-import { setScenarioClues } from "@modules/mechanics/board/base/entities/lib";
+import { setScenarioClues } from "@modules/mechanics/board/base/features/clues/set-clues";
 import { useAppDispatch, useAppSelector } from "@shared/lib";
 import { range } from "ramda";
 import { useCallback, useMemo } from "react";
