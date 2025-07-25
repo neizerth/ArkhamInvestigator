@@ -1,4 +1,4 @@
-import { selectOrderedChaosBagContents } from "@modules/chaos-bag/base/entities/lib";
+import { selectOrderedChaosBagContents } from "@modules/chaos-bag/base/shared/lib";
 import { splitIntoGroups, useAppSelector } from "@shared/lib";
 import { useMemo } from "react";
 import { useListColumns } from "./useListColumns";

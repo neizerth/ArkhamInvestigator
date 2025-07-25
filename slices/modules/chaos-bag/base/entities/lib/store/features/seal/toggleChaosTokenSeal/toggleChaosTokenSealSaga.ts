@@ -1,5 +1,5 @@
+import { selectChaosBagTokenById } from "@modules/chaos-bag/base/shared/lib";
 import { put, select, takeEvery } from "redux-saga/effects";
-import { selectChaosBagTokenById } from "../../../selectors";
 import { sealChaosToken } from "../sealChaosToken";
 import { unsealChaosToken } from "../unsealChaosToken";
 import { toggleChaosTokenSeal } from "./toggleChaosTokenSeal";

@@ -1,7 +1,5 @@
-import {
-	removeChaosToken,
-	selectChaosBagTokenById,
-} from "@modules/chaos-bag/base/entities/lib";
+import { removeChaosToken } from "@modules/chaos-bag/base/entities/lib";
+import { selectChaosBagTokenById } from "@modules/chaos-bag/base/shared/lib";
 import { removeRevealedTokenId } from "@modules/chaos-bag/reveal/base/shared/lib";
 import { put, select, takeEvery } from "redux-saga/effects";
 import { canRemoveChaosToken } from "../../../../logic";

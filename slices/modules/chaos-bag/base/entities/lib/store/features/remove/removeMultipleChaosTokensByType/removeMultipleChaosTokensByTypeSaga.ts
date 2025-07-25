@@ -1,8 +1,6 @@
+import { selectChaosBagTokensByType } from "@modules/chaos-bag/base/shared/lib";
 import { put, select, takeEvery } from "redux-saga/effects";
-import {
-	selectCanRemoveMultipleChaosTokensFromBag,
-	selectChaosBagTokensByType,
-} from "../../../selectors";
+import { selectCanRemoveMultipleChaosTokensFromBag } from "../../../selectors";
 import { removeChaosToken } from "../removeChaosToken";
 import {
 	cantRemoveMultipleChaosTokens,

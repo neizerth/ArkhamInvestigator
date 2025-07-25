@@ -19,4 +19,7 @@ export const InvesigatorCode = {
 	},
 	LilyChen: "08010",
 	ShatteredSelf: "10661",
+	ZoeySamaras: {
+		parallel: "90059",
+	},
 };

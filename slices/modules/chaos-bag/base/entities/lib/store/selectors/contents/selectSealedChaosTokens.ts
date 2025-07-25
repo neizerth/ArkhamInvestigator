@@ -1,5 +1,5 @@
+import { selectOrderedChaosBagContents } from "@modules/chaos-bag/base/shared/lib";
 import { createSelector } from "@reduxjs/toolkit";
-import { selectOrderedChaosBagContents } from "./selectOrderedChaosBagContents";
 
 export const selectSealedChaosTokens = createSelector(
 	[selectOrderedChaosBagContents],
