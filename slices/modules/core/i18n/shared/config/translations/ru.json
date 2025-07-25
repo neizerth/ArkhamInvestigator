@@ -111,6 +111,10 @@
 	"clues.remains_many": "Осталось {{count}} улик",
 
 	"chaosBag.addToken": "{{name}} добавляет в мешок {{count}} {{token}}",
+	"chaosBag.addToken_one": "{{name}} добавляет в мешок 1 {{token}}",
+	"chaosBag.addToken_few": "{{name}} добавляет в мешок {{count}} {{token}}",
+	"chaosBag.addToken_many": "{{name}} добавляет в мешок {{count}} {{token}}",
+
 	"chaosBag.removeToken": "{{name}} удаляет из мешка {{count}} {{token}}",
 
 	"chaosBag.cantAddToken": "Нельзя добавить больше {{limit}} {{character}}",
