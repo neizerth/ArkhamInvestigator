@@ -1,6 +1,6 @@
+import { selectChaosBagTokenById } from "@modules/chaos-bag/base/shared/lib";
 import type { ActionCreatorWithPayload, PayloadAction } from "@reduxjs/toolkit";
 import { put, select } from "redux-saga/effects";
-import { selectChaosBagTokenById } from "../../../selectors";
 import { updateChaosToken } from "../../update";
 import type { SealChaosTokenPayload } from "../sealChaosToken";
 

@@ -1,7 +1,9 @@
-import { removeChaosTokenInternal } from "@modules/chaos-bag/base/shared/lib";
+import {
+	removeChaosTokenInternal,
+	selectChaosBagTokenById,
+} from "@modules/chaos-bag/base/shared/lib";
 import { put, select, takeEvery } from "redux-saga/effects";
 
-import { selectChaosBagTokenById } from "../../../selectors";
 import { chaosTokenRemoved, removeChaosToken } from "./removeChaosToken";
 
 function* worker({ payload }: ReturnType<typeof removeChaosToken>) {

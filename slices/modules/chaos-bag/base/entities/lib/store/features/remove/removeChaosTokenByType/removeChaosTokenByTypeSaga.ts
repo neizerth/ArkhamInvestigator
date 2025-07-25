@@ -1,6 +1,6 @@
 import { put, select, takeEvery } from "redux-saga/effects";
 
-import { selectChaosBagTokensByType } from "../../../selectors";
+import { selectChaosBagTokensByType } from "@modules/chaos-bag/base/shared/lib";
 import { selectCanRemoveChaosTokenFromBag } from "../../../selectors/logic";
 import { removeChaosToken } from "../removeChaosToken/removeChaosToken";
 import {

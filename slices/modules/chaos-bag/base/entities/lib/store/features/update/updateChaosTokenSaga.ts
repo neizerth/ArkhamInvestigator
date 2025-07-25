@@ -1,7 +1,9 @@
-import { updateChaosTokenInternal } from "@modules/chaos-bag/base/shared/lib";
+import {
+	selectChaosBagTokenById,
+	updateChaosTokenInternal,
+} from "@modules/chaos-bag/base/shared/lib";
 import { put, select, takeEvery } from "redux-saga/effects";
 import { chaosTokenUpdated, updateChaosToken } from "../../features";
-import { selectChaosBagTokenById } from "../../selectors";
 
 function* worker({ payload }: ReturnType<typeof updateChaosToken>) {
 	const { id } = payload;
