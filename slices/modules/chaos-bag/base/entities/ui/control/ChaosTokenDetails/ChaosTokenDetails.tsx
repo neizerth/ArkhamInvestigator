@@ -5,7 +5,7 @@ import { memo, useCallback, useMemo } from "react";
 import type { ViewProps } from "react-native";
 
 import {
-	addChaosToken,
+	addSingleChaosToken,
 	removeAllChaosTokensByType,
 	removeSingleChaosTokenByType,
 	selectChaosTokenCountByType,
@@ -37,6 +37,7 @@ export const ChaosTokenDetails = ({
 	const clear = useCallback(() => {
 		dispatch(
 			removeAllChaosTokensByType({
+				boardId: "current",
 				type,
 			}),
 		);
@@ -48,6 +49,7 @@ export const ChaosTokenDetails = ({
 		}
 		dispatch(
 			removeSingleChaosTokenByType({
+				boardId: "current",
 				type,
 			}),
 		);
@@ -58,7 +60,8 @@ export const ChaosTokenDetails = ({
 		}
 
 		dispatch(
-			addChaosToken({
+			addSingleChaosToken({
+				boardId: "current",
 				type,
 			}),
 		);

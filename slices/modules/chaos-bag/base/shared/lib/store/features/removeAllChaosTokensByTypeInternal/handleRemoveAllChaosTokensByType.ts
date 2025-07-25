@@ -26,5 +26,5 @@ export const handleRemoveAllChaosTokensByType: ChaosBagHandler<
 	}
 
 	state.contents = reject(propEq(type, "type"), state.contents);
-	state.tokenCount[type] = count - tokens.length;
+	state.tokenCount[type] = Math.max(0, count - tokens.length);
 };

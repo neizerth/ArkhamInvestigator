@@ -1,5 +1,5 @@
 import { increaseBoardActualPropValue } from "@modules/board/base/shared/lib";
-import { addChaosToken } from "@modules/chaos-bag/base/entities/lib";
+import { addSingleChaosToken } from "@modules/chaos-bag/base/entities/lib";
 import {
 	createModalActionFilter,
 	type modalActionProcessed,
@@ -15,7 +15,7 @@ function* worker({ payload }: ReturnType<typeof modalActionProcessed>) {
 	const { boardId } = payload;
 
 	yield put(
-		addChaosToken({
+		addSingleChaosToken({
 			boardId,
 			type: "bless",
 		}),

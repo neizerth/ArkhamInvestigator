@@ -1,0 +1,10 @@
+import { spawn } from "redux-saga/effects";
+import { endRevealEffectsSaga } from "./end-reveal-effects/endRevealEffectsSaga";
+import { syncRevealedTokensWithChaosBagContentsSaga } from "./sync-chaos-bag-updates/syncRevealedTokensWithChaosBagContentsSaga";
+import { updateRevealedTokenSaga } from "./update-revealed-token/updateRevealedTokenSaga";
+
+export function* chaosBagRevealFeaturesSaga() {
+	yield spawn(endRevealEffectsSaga);
+	yield spawn(syncRevealedTokensWithChaosBagContentsSaga);
+	yield spawn(updateRevealedTokenSaga);
+}

@@ -4,9 +4,9 @@ import { chaosToken } from "@modules/chaos-bag/base/shared/config";
 import { put, takeEvery } from "redux-saga/effects";
 
 function* worker({ payload }: ReturnType<typeof multipleChaosTokensAdded>) {
-	const { type, count, boardId } = payload;
+	const { type, count, boardId, source } = payload;
 
-	if (boardId === undefined) {
+	if (boardId === undefined || source !== "effect") {
 		return;
 	}
 

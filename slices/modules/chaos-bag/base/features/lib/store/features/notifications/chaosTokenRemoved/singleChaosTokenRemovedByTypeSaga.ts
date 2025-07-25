@@ -6,9 +6,9 @@ import { put, takeEvery } from "redux-saga/effects";
 function* worker({
 	payload,
 }: ReturnType<typeof singleChaosTokenRemovedByType>) {
-	const { type, boardId } = payload;
+	const { type, boardId, source } = payload;
 
-	if (boardId === undefined) {
+	if (boardId === undefined || source !== "effect") {
 		return;
 	}
 

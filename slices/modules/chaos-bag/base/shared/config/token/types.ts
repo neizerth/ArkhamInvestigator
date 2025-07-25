@@ -25,15 +25,16 @@ export const specialSymbolicChaosTokenTypes: ChaosTokenType[] = [
 	"autoFail",
 ];
 
-export const symbolicChaosTokenTypes = [
-	...baseSymbolicChaosTokenTypes,
-	...specialSymbolicChaosTokenTypes,
-];
-
 export const specialChaosTokenTypes: ChaosTokenType[] = [
 	"frost",
 	"bless",
 	"curse",
+];
+
+export const symbolicChaosTokenTypes = [
+	...baseSymbolicChaosTokenTypes,
+	...specialSymbolicChaosTokenTypes,
+	...specialChaosTokenTypes,
 ];
 
 export const baseChaosTokenTypes = [

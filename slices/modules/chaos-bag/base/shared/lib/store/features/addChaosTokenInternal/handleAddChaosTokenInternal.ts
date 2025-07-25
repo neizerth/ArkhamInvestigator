@@ -10,5 +10,5 @@ export const handleAddChaosTokenInternal: ChaosBagHandler<ChaosBagToken> = (
 	const { type } = payload;
 	const count = state.tokenCount[type] ?? 0;
 	state.contents.push(payload);
-	state.tokenCount[type] = count + 1;
+	state.tokenCount[type] = Math.max(0, count + 1);
 };

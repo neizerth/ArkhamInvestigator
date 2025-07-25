@@ -19,5 +19,5 @@ export const handleRemoveChaosTokenInternal: ChaosBagHandler<
 		return;
 	}
 	state.contents = reject(whereId(id), state.contents);
-	state.tokenCount[type] = count - 1;
+	state.tokenCount[type] = Math.max(0, count - 1);
 };
