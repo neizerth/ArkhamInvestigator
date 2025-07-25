@@ -45,6 +45,7 @@ function* worker({ payload }: ReturnType<typeof changeBoardHistoryAbilityUse>) {
 	yield put(
 		addMultipleChaosTokens({
 			...payload,
+			source: "effect",
 			type: "bless",
 			count,
 		}),

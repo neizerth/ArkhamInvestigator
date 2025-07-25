@@ -1,5 +1,6 @@
 import {
 	addChaosTokenInternal,
+	chaosBagUpdated,
 	createChaosBagToken,
 } from "@modules/chaos-bag/base/shared/lib";
 import { range } from "ramda";
@@ -56,6 +57,8 @@ function* worker({ payload }: ReturnType<typeof addMultipleChaosTokens>) {
 			tokens,
 		}),
 	);
+
+	yield put(chaosBagUpdated(payload));
 }
 
 export function* addMultipleChaosTokensSaga() {

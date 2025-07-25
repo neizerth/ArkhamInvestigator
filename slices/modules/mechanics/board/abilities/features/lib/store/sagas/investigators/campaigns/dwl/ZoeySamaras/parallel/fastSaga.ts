@@ -15,6 +15,7 @@ function* worker({ payload }: ReturnType<typeof changeBoardHistoryAbilityUse>) {
 	yield put(
 		removeMultipleChaosTokensByType({
 			...payload,
+			source: "effect",
 			type: "bless",
 			count: 3,
 		}),

@@ -4,7 +4,7 @@ import {
 	useSharedValue,
 	withTiming,
 } from "react-native-reanimated";
-import type { DefaultStyle } from "../../../model/styles";
+import type { DefaultStyle } from "../../../model/ui/styles";
 
 export type UseNumericAnimationOptions<T extends DefaultStyle> = {
 	duration?: number;

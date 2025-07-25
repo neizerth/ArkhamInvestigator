@@ -1,10 +1,11 @@
 import {
+	chaosBagUpdated,
 	getChaosBagContentsByTokenCount,
 	selectChaosBagTokenCount,
 	setChaosBagContents,
 } from "@modules/chaos-bag/base/shared/lib";
 import { put, select, takeEvery } from "redux-saga/effects";
-import { chaosBagUpdated, updateChaosBag } from "./updateChaosBag";
+import { updateChaosBag } from "./updateChaosBag";
 
 function* worker({ payload }: ReturnType<typeof updateChaosBag>) {
 	const tokenCount: ReturnType<typeof selectChaosBagTokenCount> = yield select(
@@ -13,12 +14,7 @@ function* worker({ payload }: ReturnType<typeof updateChaosBag>) {
 	const contents = getChaosBagContentsByTokenCount(tokenCount);
 	yield put(setChaosBagContents(contents));
 
-	yield put(
-		chaosBagUpdated({
-			...(payload || {}),
-			contents,
-		}),
-	);
+	yield put(chaosBagUpdated(payload));
 }
 export function* updateChaosBagSaga() {
 	yield takeEvery(updateChaosBag.match, worker);

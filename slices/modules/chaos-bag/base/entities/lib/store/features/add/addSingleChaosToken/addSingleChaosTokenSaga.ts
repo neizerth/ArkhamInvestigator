@@ -1,16 +1,19 @@
-import { createChaosBagToken } from "@modules/chaos-bag/base/shared/lib";
+import {
+	chaosBagUpdated,
+	createChaosBagToken,
+} from "@modules/chaos-bag/base/shared/lib";
 import { put, select, takeEvery } from "redux-saga/effects";
 import { addChaosTokenInternal } from "../../../../../../shared/lib/store/chaosBag";
 
 import { selectCanAddChaosToken } from "../../../selectors";
 import {
-	addChaosToken,
+	addSingleChaosToken,
 	cantAddSingleChaosToken,
 	chaosTokenAdded,
 	singleChaosTokenAdded,
 } from "./addSingleChaosToken";
 
-function* worker({ payload }: ReturnType<typeof addChaosToken>) {
+function* worker({ payload }: ReturnType<typeof addSingleChaosToken>) {
 	const { type } = payload;
 
 	const canAddSelector = selectCanAddChaosToken(type);
@@ -47,8 +50,10 @@ function* worker({ payload }: ReturnType<typeof addChaosToken>) {
 			token,
 		}),
 	);
+
+	yield put(chaosBagUpdated(payload));
 }
 
 export function* addSingleChaosTokenSaga() {
-	yield takeEvery(addChaosToken.match, worker);
+	yield takeEvery(addSingleChaosToken.match, worker);
 }

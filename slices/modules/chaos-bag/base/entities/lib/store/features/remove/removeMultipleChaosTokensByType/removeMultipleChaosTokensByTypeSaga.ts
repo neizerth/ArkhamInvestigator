@@ -1,4 +1,7 @@
-import { selectChaosBagTokensByType } from "@modules/chaos-bag/base/shared/lib";
+import {
+	chaosBagUpdated,
+	selectChaosBagTokensByType,
+} from "@modules/chaos-bag/base/shared/lib";
 import { put, select, takeEvery } from "redux-saga/effects";
 import { selectCanRemoveMultipleChaosTokensFromBag } from "../../../selectors";
 import { removeChaosToken } from "../removeChaosToken";
@@ -48,6 +51,8 @@ function* worker({
 	}
 
 	yield put(multipleChaosTokensRemovedByType(payload));
+
+	yield put(chaosBagUpdated(payload));
 }
 
 export function* removeMultipleChaosTokensByTypeSaga() {

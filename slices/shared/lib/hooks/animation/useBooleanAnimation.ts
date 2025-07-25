@@ -4,7 +4,7 @@ import {
 	useSharedValue,
 	withTiming,
 } from "react-native-reanimated";
-import type { DefaultStyle } from "../../../model/styles";
+import type { DefaultStyle } from "../../../model/ui/styles";
 import { delay } from "../../util";
 
 export type UseBooleanAnimationOptions<T extends DefaultStyle> = {

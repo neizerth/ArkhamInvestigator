@@ -16,3 +16,5 @@ export type ChaosBagHandler<Payload = void> = (
 	state: ChaosBagDraft,
 	payload: Payload,
 ) => void;
+
+export type ChaosBagChangeSource = "ui" | "effect";

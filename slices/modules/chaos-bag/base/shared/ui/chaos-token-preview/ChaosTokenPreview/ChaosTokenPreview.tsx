@@ -1,5 +1,6 @@
 import { isChaosTokenModified } from "@modules/chaos-bag/value/shared/lib";
 import { size } from "@shared/config";
+import { signedNumber } from "@shared/lib";
 import { memo } from "react";
 import type { ViewProps } from "react-native";
 import { chaosToken } from "../../../config";
@@ -19,6 +20,7 @@ export type ChaosTokenPreviewProps = ViewProps &
 		selected?: boolean;
 		value?: number;
 		defaultValue?: number;
+		showValue?: boolean;
 	};
 
 const defaultPadding = size.gap.small;
@@ -30,6 +32,7 @@ export const ChaosTokenPreview = ({
 	tokenPadding = defaultPadding,
 	selected = false,
 	highlight = true,
+	showValue = false,
 	value,
 	defaultValue,
 	...props
@@ -51,6 +54,8 @@ export const ChaosTokenPreview = ({
 	const modificationSize = getModificationSize(options);
 	const modificationStyle = getModificationStyle(options);
 
+	const showHighlight = modified && highlight;
+
 	return (
 		<C.Container {...props} style={style.container}>
 			{sealed && (
@@ -66,10 +71,15 @@ export const ChaosTokenPreview = ({
 						sealed={sealed}
 					/>
 				)}
-				{modified && highlight && typeof value === "number" && (
-					<C.ModifiedHighlight>
+				{showHighlight && typeof value === "number" && (
+					<C.HighlightContainer>
 						<C.Highlight value={value} size={size} />
-					</C.ModifiedHighlight>
+					</C.HighlightContainer>
+				)}
+				{showValue && typeof value === "number" && (
+					<C.HighlightContainer>
+						<C.TokenValue type={type} value={signedNumber(value)} size={size} />
+					</C.HighlightContainer>
 				)}
 				<C.Token
 					type={type}

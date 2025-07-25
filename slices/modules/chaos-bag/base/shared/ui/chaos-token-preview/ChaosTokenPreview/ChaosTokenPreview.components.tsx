@@ -3,6 +3,10 @@ import type { FC } from "react";
 import { View } from "react-native";
 import styled, { css } from "styled-components/native";
 import { chaosToken } from "../../../config";
+import {
+	ChaosTokenValue,
+	type ChaosTokenValueProps,
+} from "../../ChaosTokenValue";
 import { ChaosToken } from "../../chaos-token";
 import { ChaosTokenModification } from "../ChaosTokenModification";
 import { SealedImage } from "./images";
@@ -36,9 +40,9 @@ export const Modification: typeof ChaosTokenModification = styled(
   z-index: 3;
 `;
 
-export const ModifiedHighlight: typeof View = styled(View)`
+export const HighlightContainer: typeof View = styled(View)`
   position: absolute;
-  z-index: 2;
+  z-index: 3;
   left: 0;
   right: 0;
   top: 0;
@@ -59,5 +63,15 @@ export const Highlight: FC<HighlightProps> = styled(Value).attrs({
 })`
   ${({ size }: HighlightProps) => css`
     font-size: ${size * 0.43}px;
+  `}
+`;
+
+type TokenValueProps = ChaosTokenValueProps & {
+	size: number;
+};
+
+export const TokenValue: FC<TokenValueProps> = styled(ChaosTokenValue)`
+  ${({ size }: TokenValueProps) => css`
+    font-size: ${size * 0.7}px;
   `}
 `;

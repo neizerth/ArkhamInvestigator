@@ -1,4 +1,5 @@
 import {
+	chaosBagUpdated,
 	getChaosBagContentsByTokenCount,
 	setChaosBagContents,
 	setChaosBagTokenCount,
@@ -18,6 +19,8 @@ function* worker({ payload }: ReturnType<typeof createChaosBag>) {
 			contents,
 		}),
 	);
+
+	yield put(chaosBagUpdated({}));
 }
 export function* createChaosBagSaga() {
 	yield takeEvery(createChaosBag.match, worker);

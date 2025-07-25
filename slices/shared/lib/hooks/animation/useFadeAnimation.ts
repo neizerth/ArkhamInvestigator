@@ -1,4 +1,4 @@
-import type { DefaultStyle } from "../../../model/styles";
+import type { DefaultStyle } from "../../../model/ui/styles";
 import {
 	type UseBooleanAnimationOptions,
 	useBooleanAnimation,

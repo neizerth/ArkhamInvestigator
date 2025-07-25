@@ -1,4 +1,5 @@
 import {
+	chaosBagUpdated,
 	removeChaosTokenInternal,
 	selectChaosBagTokenById,
 } from "@modules/chaos-bag/base/shared/lib";
@@ -29,6 +30,7 @@ function* worker({ payload }: ReturnType<typeof removeChaosToken>) {
 			token,
 		}),
 	);
+	yield put(chaosBagUpdated(payload));
 }
 
 export function* removeChaosTokenSaga() {
