@@ -17,15 +17,11 @@ export const Toast = ({ type, text1, ...restProps }: ToastProps) => {
 	return (
 		<C.Container type={type}>
 			<C.Content>
-				{image1 && (
-					<C.Images>
-						<C.SourceImage source={{ uri: image1 }} faction={faction} />
-						{image2 && (
-							<C.TargetImage source={{ uri: image2 }} faction={faction2} />
-						)}
-					</C.Images>
-				)}
+				{image1 && <C.SourceImage source={{ uri: image1 }} faction={faction} />}
 				<C.Body>{text1 && <C.Text1 value={text1} />}</C.Body>
+				{image2 && (
+					<C.SourceImage source={{ uri: image2 }} faction={faction2} />
+				)}
 			</C.Content>
 		</C.Container>
 	);
