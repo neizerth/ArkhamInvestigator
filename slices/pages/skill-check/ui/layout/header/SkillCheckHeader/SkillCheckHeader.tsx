@@ -10,11 +10,11 @@ import {
 	toggleSkillCheckDifficultyType,
 } from "@modules/board/skill-check/shared/lib";
 import { startChaosBagReveal } from "@modules/chaos-bag/reveal/base/entities/lib/store/features/startChaosBagReveal";
-import { useHapticSwipe } from "@modules/core/haptic/shared/lib";
+import { useSwipe } from "@modules/core/touch/shared/lib";
 import { goBack, useAppDispatch, useAppSelector } from "@shared/lib";
 import { useCallback } from "react";
 import type { ViewProps } from "react-native";
-import { Directions, GestureDetector } from "react-native-gesture-handler";
+import { GestureDetector } from "react-native-gesture-handler";
 import { useSkillCheckLayoutType } from "../../../../lib";
 import * as C from "./SkillCheckHeader.components";
 
@@ -68,8 +68,8 @@ export const SkillCheckHeader = ({ ...props }: SkillCheckHeaderProps) => {
 		dispatch(toggleSkillCheckDifficultyType());
 	}, [dispatch]);
 
-	const swipeDown = useHapticSwipe({
-		direction: Directions.DOWN,
+	const swipeDown = useSwipe({
+		direction: "down",
 		onSwipe: onSwipeDown,
 	});
 

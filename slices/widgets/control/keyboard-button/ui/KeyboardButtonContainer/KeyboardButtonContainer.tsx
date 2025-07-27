@@ -1,10 +1,6 @@
-import { useHapticSwipe } from "@modules/core/haptic/shared/lib";
 import type { TouchableOpacityProps } from "@modules/core/haptic/shared/ui";
-import {
-	Directions,
-	Gesture,
-	GestureDetector,
-} from "react-native-gesture-handler";
+import { Gesture, GestureDetector } from "react-native-gesture-handler";
+import { useSwipe } from "../../../../../modules/core/touch/shared/lib/hooks/gestures/useSwipe";
 import * as C from "./KeyboardButtonContainer.components";
 
 export type KeyboardButtonContainerProps = TouchableOpacityProps & {
@@ -17,13 +13,13 @@ export const KeyboardButtonContainer = ({
 	onSwipeDown,
 	...props
 }: KeyboardButtonContainerProps) => {
-	const swipeUp = useHapticSwipe({
-		direction: Directions.UP,
+	const swipeUp = useSwipe({
+		direction: "up",
 		onSwipe: onSwipeUp,
 	});
 
-	const swipeDown = useHapticSwipe({
-		direction: Directions.DOWN,
+	const swipeDown = useSwipe({
+		direction: "down",
 		onSwipe: onSwipeDown,
 	});
 

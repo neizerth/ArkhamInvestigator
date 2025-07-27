@@ -7,17 +7,13 @@ import {
 	startSkillCheck,
 	toggleCurrentSkillCheckHistoryItemPin as togglePin,
 } from "@modules/board/skill-check/shared/lib";
-import { useHapticSwipe } from "@modules/core/haptic/shared/lib";
 import { selectCurrentLanguage } from "@modules/core/i18n/shared/lib";
+import { useSwipe } from "@modules/core/touch/shared/lib";
 import { useAppDispatch, useAppSelector } from "@shared/lib";
 import type { SkillCheckHistoryItem } from "@shared/model";
 import { useCallback, useMemo } from "react";
 import type { ViewProps } from "react-native";
-import {
-	Directions,
-	Gesture,
-	GestureDetector,
-} from "react-native-gesture-handler";
+import { Gesture, GestureDetector } from "react-native-gesture-handler";
 import * as C from "./PinnedSkillCheckItem.components";
 import { getExpressionDisplayStyle } from "./PinnedSkilllCheckItem.styles";
 
@@ -66,13 +62,13 @@ export const PinnedSkillCheckItem = ({
 		dispatch(startSkillCheck(type));
 	}, [dispatch, type]);
 
-	const swipeRight = useHapticSwipe({
-		direction: Directions.RIGHT,
+	const swipeRight = useSwipe({
+		direction: "right",
 		onSwipe: onSwipeRight,
 	});
 
-	const swipeDown = useHapticSwipe({
-		direction: Directions.DOWN,
+	const swipeDown = useSwipe({
+		direction: "down",
 		onSwipe: onSwipeDown,
 	});
 

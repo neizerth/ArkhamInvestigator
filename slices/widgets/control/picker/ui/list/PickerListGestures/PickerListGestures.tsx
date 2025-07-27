@@ -1,14 +1,8 @@
-import {
-	useHapticFeedback,
-	useHapticSwipe,
-} from "@modules/core/haptic/shared/lib";
+import { useHapticFeedback } from "@modules/core/haptic/shared/lib";
+import { useSwipe } from "@modules/core/touch/shared/lib";
 import { arrayIf } from "@shared/lib";
 import { type PropsWithChildren, useCallback } from "react";
-import {
-	Directions,
-	Gesture,
-	GestureDetector,
-} from "react-native-gesture-handler";
+import { Gesture, GestureDetector } from "react-native-gesture-handler";
 import type {
 	PickerActivationProps,
 	PickerGestureProps,
@@ -49,11 +43,9 @@ export const PickerListGestures = ({
 
 	swipeLeftEnabled,
 	onSwipeLeft,
-	swipeLeftHapticPattern,
 
 	swipeRightEnabled,
 	onSwipeRight,
-	swipeRightHapticPattern,
 
 	onUserDeactivated,
 	onDeactivated,
@@ -77,16 +69,14 @@ export const PickerListGestures = ({
 		onLongPress?.();
 	}, [longPressFeedback, onLongPress]);
 
-	const swipeRight = useHapticSwipe({
-		direction: Directions.RIGHT,
+	const swipeRight = useSwipe({
+		direction: "right",
 		onSwipe: onSwipeRight,
-		pattern: swipeRightHapticPattern,
 	});
 
-	const swipeLeft = useHapticSwipe({
-		direction: Directions.LEFT,
+	const swipeLeft = useSwipe({
+		direction: "left",
 		onSwipe: onSwipeLeft,
-		pattern: swipeLeftHapticPattern,
 	});
 
 	const gestures = [
