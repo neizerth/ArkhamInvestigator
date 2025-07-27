@@ -1,5 +1,5 @@
 import { ChaosTokenRevealLoader } from "@modules/chaos-bag/reveal/base/entities/ui";
-import { TouchableOpacity } from "@modules/core/haptic/shared/ui";
+import { TouchableOpacity } from "@modules/core/touch/shared/ui";
 import styled from "styled-components/native";
 
 export const Loader: typeof ChaosTokenRevealLoader = styled(

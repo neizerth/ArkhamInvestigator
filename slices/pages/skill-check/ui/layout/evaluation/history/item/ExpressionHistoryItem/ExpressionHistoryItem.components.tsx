@@ -10,7 +10,7 @@ import { ExpressionHistoryItemRightActionsMemo as ItemRightActions } from "../Ex
 
 import { ZhenShuai } from "@assets/fonts";
 import { LineSeedKR } from "@assets/fonts/ko/LineSeedKR";
-import { TouchableOpacity } from "@modules/core/haptic/shared/ui";
+import { TouchableOpacity } from "@modules/core/touch/shared/ui";
 
 export const Container: typeof Row = styled(Row)`
   justify-content: flex-end;

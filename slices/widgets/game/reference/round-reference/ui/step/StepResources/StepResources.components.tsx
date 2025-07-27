@@ -1,4 +1,4 @@
-import { TouchableOpacity } from "@modules/core/haptic/shared/ui";
+import { TouchableOpacity } from "@modules/core/touch/shared/ui";
 import { Resource } from "@shared/ui";
 import styled from "styled-components/native";
 

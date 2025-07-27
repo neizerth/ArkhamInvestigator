@@ -1,4 +1,4 @@
-import type { TouchableOpacityProps } from "@modules/core/haptic/shared/ui";
+import type { TouchableOpacityProps } from "@modules/core/touch/shared/ui";
 import type { SkillCheckOperator } from "@shared/model";
 import type { KeyboardButtonSize, KeyboardButtonType } from "./common";
 

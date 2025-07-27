@@ -1,5 +1,5 @@
 import { Alegreya } from "@assets/fonts";
-import { TouchableOpacity } from "@modules/core/haptic/shared/ui";
+import { TouchableOpacity } from "@modules/core/touch/shared/ui";
 import { color, font, size } from "@shared/config";
 import { Icon as BaseIcon, Row, UnscaledText } from "@shared/ui";
 import { Image, View } from "react-native";

@@ -8,8 +8,9 @@ import {
 	Yoon,
 } from "@assets/fonts";
 import { GameText } from "@entities/game-text";
-import { IconButton, TouchableOpacity } from "@modules/core/haptic/shared/ui";
+import { IconButton } from "@modules/core/haptic/shared/ui";
 import { withLocale } from "@modules/core/i18n/shared/lib";
+import { TouchableOpacity } from "@modules/core/touch/shared/ui";
 import { color, size } from "@shared/config";
 import { Icon, type IconProps, Row, type UnscaledTextProps } from "@shared/ui";
 import type { FC } from "react";

@@ -4,11 +4,8 @@ import { ScrollView, View } from "react-native";
 import type { TextProps, ViewProps } from "react-native";
 
 import { Alegreya } from "@assets/fonts";
-import {
-	Button,
-	type ButtonProps,
-	TouchableOpacity,
-} from "@modules/core/haptic/shared/ui";
+import { Button, type ButtonProps } from "@modules/core/haptic/shared/ui";
+import { TouchableOpacity } from "@modules/core/touch/shared/ui";
 import type { Faction } from "@shared/model";
 import type { PropsWithFaction } from "@shared/model/ui";
 import {

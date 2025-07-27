@@ -6,7 +6,7 @@ import type { ViewProps } from "react-native";
 import styled, { css } from "styled-components/native";
 
 import { ArkhamDigits } from "@assets/fonts";
-import { TouchableOpacity } from "@modules/core/haptic/shared/ui";
+import { TouchableOpacity } from "@modules/core/touch/shared/ui";
 import { color, factionColor, size } from "@shared/config";
 import type { PropsWithFaction } from "@shared/model/ui";
 import { Icon, UnscaledText } from "@shared/ui";

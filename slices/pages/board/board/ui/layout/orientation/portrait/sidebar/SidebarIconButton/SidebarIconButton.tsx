@@ -1,6 +1,6 @@
 import {
 	IconButton,
-	type TouchableOpacityProps,
+	type IconButtonProps,
 } from "@modules/core/haptic/shared/ui";
 import { color } from "@shared/config";
 import { Platform } from "react-native";
@@ -22,7 +22,7 @@ export const SidebarIconButton: typeof IconButton = styled(IconButton).attrs({
   height: 50px;
   justify-content: center;
   align-items: center;
-  ${({ disabled }: TouchableOpacityProps) =>
+  ${({ disabled }: IconButtonProps) =>
 		disabled &&
 		css`
     opacity: 0.5;
