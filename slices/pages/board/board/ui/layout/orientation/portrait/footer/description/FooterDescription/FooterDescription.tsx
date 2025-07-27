@@ -1,5 +1,5 @@
 import { selectCurrentBoardProp } from "@modules/board/base/shared/lib";
-import { useHapticSwipe } from "@modules/core/haptic/shared/lib";
+import { useSwipe } from "@modules/core/touch/shared/lib";
 import { selectCurrentFaction } from "@modules/mechanics/board/base/entities/lib";
 import { useRoute } from "@react-navigation/native";
 import { routes } from "@shared/config";
@@ -14,11 +14,7 @@ import {
 } from "@shared/lib";
 import { useCallback, useContext } from "react";
 import type { ViewProps } from "react-native";
-import {
-	Directions,
-	Gesture,
-	GestureDetector,
-} from "react-native-gesture-handler";
+import { Gesture, GestureDetector } from "react-native-gesture-handler";
 import { LayoutContext, TOP_CONTENT_OFFSET } from "../../../../../../../config";
 import * as C from "./FooterDescription.components";
 import { useGameText } from "./hooks";
@@ -62,13 +58,13 @@ export const FooterDescription = ({ ...props }: FooterDescriptionProps) => {
 
 	const goTo = usePage();
 
-	const swipeDown = useHapticSwipe({
-		direction: Directions.DOWN,
+	const swipeDown = useSwipe({
+		direction: "down",
 		onSwipe: hide,
 	});
 
-	const swipeRight = useHapticSwipe({
-		direction: Directions.RIGHT,
+	const swipeRight = useSwipe({
+		direction: "right",
 		onSwipe: goTo(routes.roundReference),
 	});
 

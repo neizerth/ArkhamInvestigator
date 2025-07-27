@@ -1,13 +1,9 @@
-import { useHapticSwipe } from "@modules/core/haptic/shared/lib";
+import { useSwipe } from "@modules/core/touch/shared/lib";
 import { routes } from "@shared/config";
 import { goToPage, setShowDescription, useAppDispatch } from "@shared/lib";
 import { useCallback } from "react";
 import type { ViewProps } from "react-native";
-import {
-	Directions,
-	Gesture,
-	GestureDetector,
-} from "react-native-gesture-handler";
+import { Gesture, GestureDetector } from "react-native-gesture-handler";
 import * as C from "./FooterDescriptionExpandArea.components";
 
 export type FooterDescriptionExpandAreaProps = ViewProps;
@@ -25,13 +21,13 @@ export const FooterDescriptionExpandArea = (
 		dispatch(goToPage(routes.roundReference));
 	}, [dispatch]);
 
-	const swipeUp = useHapticSwipe({
-		direction: Directions.UP,
+	const swipeUp = useSwipe({
+		direction: "up",
 		onSwipe: show,
 	});
 
-	const swipeRight = useHapticSwipe({
-		direction: Directions.RIGHT,
+	const swipeRight = useSwipe({
+		direction: "right",
 		onSwipe: openReference,
 	});
 
