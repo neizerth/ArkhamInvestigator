@@ -1,5 +1,5 @@
 import { spawn } from "redux-saga/effects";
-import { featuresSaga } from "./features";
+import { featuresSaga } from "../../../../../features/sagas";
 import { sharedSaga } from "./shared";
 import { widgetsSaga } from "./widgets";
 
