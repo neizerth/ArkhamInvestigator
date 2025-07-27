@@ -5,14 +5,11 @@ import type { HapticPatternType } from "../../model";
 import { impactHapticFeedback } from "../impactHapticFeedback";
 import { selectHapticMode } from "../store";
 
-export const useHapticFeedback = (
-	hapticPattern?: HapticPatternType,
-	defaultForce = false,
-) => {
+export const useHapticFeedback = (hapticPattern?: HapticPatternType) => {
 	const mode = useAppSelector(selectHapticMode);
 	return useCallback(
 		(currentPattern?: HapticPatternType, force = false) => {
-			const enabled = force || defaultForce || Boolean(mode);
+			const enabled = force || Boolean(mode);
 			if (!enabled) {
 				return;
 			}
@@ -27,6 +24,6 @@ export const useHapticFeedback = (
 
 			impactHapticFeedback(feedback);
 		},
-		[mode, hapticPattern, defaultForce],
+		[mode, hapticPattern],
 	);
 };

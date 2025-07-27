@@ -1,8 +1,8 @@
 import { ChaosToken } from "@modules/chaos-bag/base/shared/ui";
-import { Button, HapticSelect } from "@modules/core/haptic/shared/ui";
 import { ContextModal } from "@modules/core/modal/shared/base/ui";
 import { color, size } from "@shared/config";
-import { Row } from "@shared/ui";
+import { Button } from "@shared/ui";
+import { Select as BaseSelect, Row } from "@shared/ui";
 import { View } from "react-native";
 import styled from "styled-components/native";
 
@@ -17,7 +17,7 @@ export const Container: typeof ContextModal = styled(ContextModal).attrs({
   justify-content: flex-start;
 `;
 
-export const Select: typeof HapticSelect = styled(HapticSelect)`
+export const Select: typeof BaseSelect = styled(BaseSelect)`
   border: 1px solid ${color.dark10};
 `;
 

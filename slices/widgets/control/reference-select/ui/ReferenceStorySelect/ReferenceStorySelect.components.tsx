@@ -1,6 +1,5 @@
-import { HapticSelect } from "@modules/core/haptic/shared/ui";
 import { color, size } from "@shared/config";
-import { Icon, Row, Text } from "@shared/ui";
+import { Select as BaseSelect, Icon, Row, Text } from "@shared/ui";
 import { View } from "react-native";
 import styled from "styled-components/native";
 import { StoreTabs } from "../../../../navigation/store-tabs";
@@ -13,7 +12,7 @@ export const Tabs: typeof StoreTabs = styled(StoreTabs)`
   
 `;
 
-export const Select: typeof HapticSelect = styled(HapticSelect)`
+export const Select: typeof BaseSelect = styled(BaseSelect)`
   background-color: ${color.dark30};
   border: 1px solid ${color.dark20};
   border-top-left-radius: 0px;

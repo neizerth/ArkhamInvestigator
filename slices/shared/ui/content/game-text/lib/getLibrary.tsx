@@ -1,9 +1,9 @@
-import { Icon } from "@shared/ui";
 import type { HTMLReactParserOptions } from "html-react-parser";
 import { omit } from "ramda";
 import { Fragment } from "react";
 import type { TextProps } from "react-native";
 import { v4 } from "uuid";
+import { Icon } from "../../../game";
 import { iconMapping } from "../config";
 import type { ComponentStyleMap } from "../model";
 import * as C from "../ui/GameText/GameText.components";

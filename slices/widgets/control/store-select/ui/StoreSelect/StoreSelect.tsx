@@ -1,16 +1,12 @@
-import type { HapticSelectProps } from "@modules/core/haptic/shared/ui";
 import { useAppTranslation } from "@modules/core/i18n/shared/lib";
 import type { Selector } from "@reduxjs/toolkit";
 import { useAppDispatch, useAppSelector } from "@shared/lib";
 import type { AppActionCreator, RootState } from "@shared/model";
-import type { SelectItem } from "@shared/ui";
+import type { SelectItem, SelectProps } from "@shared/ui";
 import { useCallback } from "react";
 import * as C from "./StoreSelect.components";
 
-export type StoreSelectProps<T> = Omit<
-	HapticSelectProps<T>,
-	"onChange" | "value"
-> & {
+export type StoreSelectProps<T> = Omit<SelectProps<T>, "onChange" | "value"> & {
 	selector: Selector<RootState, T>;
 	actionCreator: AppActionCreator<T>;
 	translate?: boolean;

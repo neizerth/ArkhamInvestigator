@@ -1,5 +1,6 @@
 import { Copasetic } from "@assets/fonts";
-import { IconButton } from "@modules/core/haptic/shared/ui";
+import { IconButton } from "@shared/ui";
+
 import { TouchableOpacity } from "@modules/core/touch/shared/ui";
 import { color, size, statusBarHeight } from "@shared/config";
 import { Row as BaseRow, Icon, UnscaledText } from "@shared/ui";

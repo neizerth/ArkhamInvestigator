@@ -1,5 +1,5 @@
 import type { ChaosTokenType } from "@modules/chaos-bag/base/shared/model";
-import type { NumericControlProps } from "@modules/core/haptic/shared/ui";
+import type { NumericControlProps } from "@shared/ui";
 import * as C from "./ChaosTokenInput.components";
 
 export type ChaosTokenInputProps = NumericControlProps & {

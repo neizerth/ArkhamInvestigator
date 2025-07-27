@@ -1,7 +1,6 @@
 import { Alegreya } from "@assets/fonts";
-import { HapticSlider } from "@modules/core/haptic/shared/ui";
 import { font, size } from "@shared/config";
-import { type Row, Text } from "@shared/ui";
+import { Slider as BaseSlider, type Row, Text } from "@shared/ui";
 import { View } from "react-native";
 import styled from "styled-components/native";
 
@@ -12,7 +11,7 @@ export const Container: typeof Row = styled(View)`
   gap: ${size.gap.default}px;
 `;
 
-export const Slider: typeof HapticSlider = styled(HapticSlider)`
+export const Slider: typeof BaseSlider = styled(BaseSlider)`
   
 `;
 

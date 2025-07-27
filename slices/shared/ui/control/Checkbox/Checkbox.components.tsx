@@ -1,12 +1,12 @@
 import { Alegreya } from "@assets/fonts";
-import { View } from "react-native";
+import { TouchableOpacity } from "@modules/core/touch/shared/ui";
 import styled from "styled-components";
 import { color, size } from "../../../config";
 import { Text, TextView } from "../../content";
 import { Icon } from "../../game";
 import { Row } from "../../grid";
 
-export const Container: typeof View = styled(View)`
+export const Container: typeof TouchableOpacity = styled(TouchableOpacity)`
   gap: ${size.gap.default}px;
   padding: ${size.gap.small}px 2px;
 `;

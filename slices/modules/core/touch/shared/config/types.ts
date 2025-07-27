@@ -1,1 +1,1 @@
-export const COMMON_PRESS_TYPE_ID = "common";
+export const COMMON_TOUCH_TYPE_ID = "common";

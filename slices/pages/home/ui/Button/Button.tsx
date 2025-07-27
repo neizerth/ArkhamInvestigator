@@ -1,7 +1,4 @@
-import {
-	PrimaryButton,
-	type PrimaryButtonProps,
-} from "@modules/core/haptic/shared/ui";
+import { PrimaryButton, type PrimaryButtonProps } from "@shared/ui";
 import * as C from "./Button.components";
 
 export const Button = ({ children, ...props }: PrimaryButtonProps) => {

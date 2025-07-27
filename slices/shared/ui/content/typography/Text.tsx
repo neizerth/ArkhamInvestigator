@@ -1,6 +1,6 @@
 import { Alegreya } from "@assets/fonts";
-import { color, font } from "@shared/config";
 import styled from "styled-components/native";
+import { color, font } from "../../../config";
 import { UnscaledText } from "../../behavior/UnscaledText";
 
 export const Text: typeof UnscaledText = styled(UnscaledText)`

@@ -1,5 +1,5 @@
-import { GameText } from "@entities/game-text";
 import { color, font } from "@shared/config";
+import { GameText } from "@shared/ui";
 import { Input as TextInput } from "@shared/ui";
 import styled from "styled-components/native";
 import { FactionModal } from "../../../base/ui";

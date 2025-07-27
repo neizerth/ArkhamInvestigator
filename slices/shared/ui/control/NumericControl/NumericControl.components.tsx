@@ -1,7 +1,7 @@
-import { color, size } from "@shared/config";
-import { Row } from "@shared/ui";
 import styled from "styled-components/native";
-import { Button as BaseButton } from "../../button/Button";
+import { color, size } from "../../../config";
+import { Row } from "../../grid";
+import { Button as BaseButton } from "../button/Button";
 
 export const Container: typeof Row = styled(Row)`
   align-items: center;

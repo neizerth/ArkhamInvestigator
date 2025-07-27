@@ -1,6 +1,6 @@
-import { GameText } from "@entities/game-text";
 import { Pressable, type PressableProps } from "@modules/core/touch/shared/ui";
 import { color, font, size } from "@shared/config";
+import { GameText } from "@shared/ui";
 import type { FC } from "react";
 import styled, { css } from "styled-components/native";
 

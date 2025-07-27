@@ -1,7 +1,8 @@
-import type { TextStyle, ViewProps, ViewStyle } from "react-native";
+import type { TouchableOpacityProps } from "@modules/core/touch/shared/ui";
+import type { TextStyle, ViewStyle } from "react-native";
 import * as C from "./Checkbox.components";
 
-export type CheckboxProps = ViewProps & {
+export type CheckboxProps = TouchableOpacityProps & {
 	contentContainerStyle?: ViewStyle;
 	contentStyle?: ViewStyle;
 	controlStyle?: TextStyle;

@@ -1,6 +1,10 @@
-import { Button as BaseButton } from "@modules/core/haptic/shared/ui";
 import { color, font, size } from "@shared/config";
-import { Row as BaseRow, Section as BaseSection, TextView } from "@shared/ui";
+import {
+	Button as BaseButton,
+	Row as BaseRow,
+	Section as BaseSection,
+	TextView,
+} from "@shared/ui";
 import { ContentPage } from "@widgets/content";
 import { StoreCheckbox } from "@widgets/control/store-checkbox";
 import { StoreSelect } from "@widgets/control/store-select";

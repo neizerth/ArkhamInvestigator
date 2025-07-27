@@ -1,6 +1,7 @@
-import { Row, UnscaledText } from "@shared/ui";
 import { View } from "react-native";
 import styled from "styled-components/native";
+import { UnscaledText } from "../../../../behavior";
+import { Row } from "../../../../grid";
 
 export const Text: typeof UnscaledText = styled(UnscaledText)`
   /* letter-spacing: 2; */

@@ -45,7 +45,7 @@ export const InvestigatorCounters = (props: InvestigatorCountersProps) => {
 			{counters.map(
 				(ability) =>
 					ability.type === "counter" && (
-						<C.Checkbox
+						<C.Check
 							key={ability.id}
 							label={t(ability.name)}
 							onPress={onAbilityPress(ability)}

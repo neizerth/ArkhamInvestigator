@@ -1,6 +1,6 @@
-import { size } from "@shared/config";
 import { type TextProps, View, type ViewStyle } from "react-native";
 import styled from "styled-components/native";
+import { size } from "../../../config";
 import { Text } from "./Text";
 
 const Container: typeof View = styled(View)`

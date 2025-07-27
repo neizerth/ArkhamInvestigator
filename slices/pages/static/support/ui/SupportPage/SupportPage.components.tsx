@@ -1,5 +1,5 @@
-import { Button } from "@modules/core/haptic/shared/ui";
 import { size } from "@shared/config";
+import { Button } from "@shared/ui";
 import { Image, View } from "react-native";
 import styled from "styled-components/native";
 import { cthulhuImage } from "./images";

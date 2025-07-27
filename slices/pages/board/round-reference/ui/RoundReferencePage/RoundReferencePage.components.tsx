@@ -1,4 +1,5 @@
-import { IconButton } from "@modules/core/haptic/shared/ui";
+import { IconButton } from "@shared/ui";
+
 import { color, size } from "@shared/config";
 import { Row } from "@shared/ui";
 import { RoundReference } from "@widgets/game/reference";

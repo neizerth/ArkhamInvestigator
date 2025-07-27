@@ -1,6 +1,7 @@
 import { useCallback } from "react";
 import * as C from "./Dropdown.components";
 
+import { useUICallback } from "@modules/core/ui/lib";
 import type { ViewStyle } from "react-native";
 import { Dropdown as BaseDropdown } from "react-native-element-dropdown";
 import type { DropdownProps as BaseDropdownProps } from "react-native-element-dropdown/lib/typescript/components/Dropdown/model";
@@ -25,6 +26,8 @@ export function Dropdown<T>({
 	itemStyle,
 	style,
 	itemTextStyle,
+	onChange: onChangeProp,
+	onFocus: onFocusProp,
 	...props
 }: DropdownProps<T>) {
 	const renderItem = useCallback(
@@ -39,6 +42,22 @@ export function Dropdown<T>({
 		},
 		[itemStyle, itemTextStyle],
 	);
+
+	const onChange = useUICallback({
+		payload: {
+			source: "dropdown",
+			type: "change",
+		},
+		callback: onChangeProp,
+	});
+
+	const onFocus = useUICallback({
+		payload: {
+			source: "dropdown",
+			type: "focus",
+		},
+		callback: onFocusProp,
+	});
 
 	return (
 		<C.Container style={contentContainerStyle}>
@@ -59,6 +78,8 @@ export function Dropdown<T>({
 				labelField="label"
 				valueField="value"
 				maxHeight={300}
+				onChange={onChange}
+				onFocus={onFocus}
 			/>
 		</C.Container>
 	);

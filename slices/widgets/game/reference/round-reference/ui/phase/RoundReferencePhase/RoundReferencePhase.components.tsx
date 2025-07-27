@@ -7,11 +7,12 @@ import {
 	SanCn,
 	Yoon,
 } from "@assets/fonts";
-import { GameText } from "@entities/game-text";
-import { IconButton } from "@modules/core/haptic/shared/ui";
+import { IconButton } from "@shared/ui";
+
 import { withLocale } from "@modules/core/i18n/shared/lib";
 import { TouchableOpacity } from "@modules/core/touch/shared/ui";
 import { color, size } from "@shared/config";
+import { GameText } from "@shared/ui";
 import { Icon, type IconProps, Row, type UnscaledTextProps } from "@shared/ui";
 import type { FC } from "react";
 import { View, type ViewProps } from "react-native";
