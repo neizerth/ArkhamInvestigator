@@ -1,5 +1,8 @@
+import {
+	TouchableOpacity,
+	type TouchableOpacityProps,
+} from "@modules/core/touch/shared/ui";
 import type { FC } from "react";
-import { View, type ViewProps } from "react-native";
 import type { TextProps } from "react-native";
 import styled, { css } from "styled-components/native";
 import { color, font, size } from "../../../config";
@@ -15,9 +18,10 @@ type PropsWithSelected = {
 	selected: boolean;
 };
 
-type TabProps = ViewProps & PropsWithSelected;
+type TabProps = TouchableOpacityProps & PropsWithSelected;
 
-export const Tab: FC<TabProps> = styled(View)`
+export const Tab: FC<TabProps> = styled(TouchableOpacity)`
+	flex: 1;
   padding: ${size.gap.small}px;
 	align-items: center;
 	background-color: ${color.dark20};

@@ -8,10 +8,10 @@ import {
 	setHistoryShown,
 	setSkillCheckDifficulty,
 } from "@modules/board/skill-check/shared/lib";
-import { PrimaryButton } from "@modules/core/haptic/shared/ui";
 import { useAppTranslation } from "@modules/core/i18n/shared/lib";
 import { useAppDispatch, useAppSelector } from "@shared/lib";
 import type { SkillCheckCommandType, SkillCheckOperator } from "@shared/model";
+import { PrimaryButton } from "@shared/ui";
 import memoize from "fast-memoize";
 import { useCallback } from "react";
 import { type ViewProps, useWindowDimensions } from "react-native";

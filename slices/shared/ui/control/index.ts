@@ -5,3 +5,5 @@ export * from "./Progress";
 export * from "./Dropdown";
 export * from "./Checkbox";
 export * from "./list";
+export * from "./NumericControl";
+export * from "./button";

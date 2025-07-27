@@ -1,8 +1,5 @@
-import {
-	IconButton,
-	type IconButtonProps,
-} from "@modules/core/haptic/shared/ui";
 import { color, gameAssets } from "@shared/config";
+import { IconButton, type IconButtonProps } from "@shared/ui";
 import * as UI from "@shared/ui";
 import { Value as BaseValue } from "@shared/ui";
 import type { FC } from "react";

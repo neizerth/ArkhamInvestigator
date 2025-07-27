@@ -4,18 +4,19 @@ import { ScrollView, View } from "react-native";
 import type { TextProps, ViewProps } from "react-native";
 
 import { Alegreya } from "@assets/fonts";
-import { Button, type ButtonProps } from "@modules/core/haptic/shared/ui";
 import { TouchableOpacity } from "@modules/core/touch/shared/ui";
 import type { Faction } from "@shared/model";
 import type { PropsWithFaction } from "@shared/model/ui";
 import {
 	Icon as BaseIcon,
+	Button,
+	type ButtonProps,
 	FactionFontIcon,
 	FactionSVGPattern,
+	type IconProps,
 	Row,
 	UnscaledText,
 } from "@shared/ui";
-import type { IconProps } from "@shared/ui";
 import styled, { css } from "styled-components/native";
 export type ElementWithFaction<T> = FC<T & PropsWithFaction>;
 export type ViewWithFaction = ElementWithFaction<ViewProps>;

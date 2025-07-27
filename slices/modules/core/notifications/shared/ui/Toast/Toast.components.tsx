@@ -1,7 +1,7 @@
 import { Alegreya } from "@assets/fonts";
-import { GameText } from "@entities/game-text";
 import { color, factionColor, font, size } from "@shared/config";
 import type { PropsWithFaction } from "@shared/model";
+import { GameText } from "@shared/ui";
 import { Row } from "@shared/ui";
 import { Image, type ImageProps } from "expo-image";
 import type { FC } from "react";

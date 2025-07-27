@@ -1,8 +1,5 @@
-import {
-	IconButton,
-	type IconButtonProps,
-} from "@modules/core/haptic/shared/ui";
 import { color } from "@shared/config";
+import { IconButton, type IconButtonProps } from "@shared/ui";
 import { Platform } from "react-native";
 import styled, { css } from "styled-components/native";
 

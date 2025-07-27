@@ -1,15 +1,12 @@
-import {
-	HapticCheckbox,
-	type HapticCheckboxProps,
-} from "@modules/core/haptic/shared/ui";
 import { useAppTranslation } from "@modules/core/i18n/shared/lib";
 import { useAppDispatch, useAppSelector } from "@shared/lib";
 import type { AppActionCreator, RootState } from "@shared/model";
+import { Checkbox, type CheckboxProps } from "@shared/ui";
 import { useCallback } from "react";
 import type { GestureResponderEvent } from "react-native";
 import type { Selector } from "react-redux";
 
-export type StoreCheckboxProps = HapticCheckboxProps & {
+export type StoreCheckboxProps = CheckboxProps & {
 	selector: Selector<RootState, boolean>;
 	actionCreator: AppActionCreator<boolean>;
 	translate?: boolean;
@@ -39,7 +36,7 @@ export function StoreCheckbox<T>({
 	);
 
 	return (
-		<HapticCheckbox
+		<Checkbox
 			{...props}
 			hint={hint}
 			label={label}

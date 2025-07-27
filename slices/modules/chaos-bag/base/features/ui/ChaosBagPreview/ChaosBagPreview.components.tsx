@@ -1,9 +1,9 @@
 import { BlessCurseControl } from "@modules/chaos-bag/base/entities/ui";
 import { ChaosTokenPreviewMemo as ChaosToken } from "@modules/chaos-bag/base/shared/ui";
-import { Button } from "@modules/core/haptic/shared/ui";
 import { ContextModal } from "@modules/core/modal/shared/base/ui";
 import { TouchableOpacity } from "@modules/core/touch/shared/ui";
 import { color, font, size } from "@shared/config";
+import { Button } from "@shared/ui";
 import { Row, Text, TextView } from "@shared/ui";
 import { Dimensions, View } from "react-native";
 import { FlatList } from "react-native-gesture-handler";

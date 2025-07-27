@@ -1,12 +1,12 @@
-import type { HapticSliderProps } from "@modules/core/haptic/shared/ui";
 import { useAppTranslation } from "@modules/core/i18n/shared/lib";
 import { useAppDispatch, useAppSelector } from "@shared/lib";
 import type { AppActionCreator, RootState } from "@shared/model";
+import type { SliderProps } from "@shared/ui";
 import { useCallback } from "react";
 import type { Selector } from "react-redux";
 import * as C from "./StoreSlider.components";
 
-export type StoreSliderProps = HapticSliderProps & {
+export type StoreSliderProps = SliderProps & {
 	selector: Selector<RootState, number>;
 	actionCreator: AppActionCreator<number>;
 	translate?: boolean;

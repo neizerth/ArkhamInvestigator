@@ -1,8 +1,5 @@
-import {
-	type DefinedIconButtonProps,
-	IconButton,
-} from "@modules/core/haptic/shared/ui";
 import { color } from "@shared/config";
+import { type DefinedIconButtonProps, IconButton } from "@shared/ui";
 import { Row } from "@shared/ui";
 import type { FC } from "react";
 import styled from "styled-components/native";

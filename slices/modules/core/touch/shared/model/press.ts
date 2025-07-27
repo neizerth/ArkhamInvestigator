@@ -4,7 +4,7 @@ import type { AbstractTouchCallback } from "./common";
 export type PressCallback = AbstractTouchCallback<GestureResponderEvent>;
 
 export type AbstractPressProps<T> = {
-	pressActionType?: string;
+	touchActionType?: string;
 
 	onPress?: AbstractTouchCallback<T>;
 	onPressIn?: AbstractTouchCallback<T>;
@@ -13,7 +13,7 @@ export type AbstractPressProps<T> = {
 };
 
 export type PressProps = {
-	pressActionType?: string;
+	touchActionType?: string;
 
 	onPress?: PressCallback;
 	onPressIn?: PressCallback;

@@ -5,4 +5,4 @@ export type AbstractTouchCallback<T = void> = (
 	args: T,
 ) => (void | Promise<void>) | false;
 
-export type TouchType = PressGestureType | SwipeGestureType;
+export type TouchType = PressGestureType | SwipeGestureType | "custom";

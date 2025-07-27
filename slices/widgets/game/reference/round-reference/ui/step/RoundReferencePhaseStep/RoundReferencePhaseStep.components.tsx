@@ -1,5 +1,5 @@
-import { GameText, type GameTextProps } from "@entities/game-text";
 import { size } from "@shared/config";
+import { GameText, type GameTextProps } from "@shared/ui";
 import { Row } from "@shared/ui";
 import type { FC } from "react";
 import { View } from "react-native";

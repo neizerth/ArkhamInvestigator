@@ -2,10 +2,9 @@ import {
 	ChaosTokenMemo as ChaosToken,
 	ChaosTokenCounter,
 } from "@modules/chaos-bag/base/shared/ui";
-import { NumericControl } from "@modules/core/haptic/shared/ui";
 import { TouchableOpacity } from "@modules/core/touch/shared/ui";
 import { color, size } from "@shared/config";
-import { Row } from "@shared/ui";
+import { NumericControl, Row } from "@shared/ui";
 import styled from "styled-components/native";
 
 export const Token: typeof ChaosToken = styled(ChaosToken)`

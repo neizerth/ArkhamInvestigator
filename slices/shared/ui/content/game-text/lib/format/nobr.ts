@@ -1,4 +1,4 @@
-import { nbsp, shortNbsp } from "@shared/config";
+import { nbsp, shortNbsp } from "../../../../../config";
 
 // changes nbsp to <nobr>
 export const nobr = (text: string) => {

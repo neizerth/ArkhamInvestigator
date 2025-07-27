@@ -1,19 +1,12 @@
-import {
-	HapticTabs,
-	type HapticTabsProps,
-} from "@modules/core/haptic/shared/ui";
 import { useAppTranslation } from "@modules/core/i18n/shared/lib";
 import { useAppDispatch, useAppSelector } from "@shared/lib";
 import type { AppActionCreator, RootState } from "@shared/model";
-import type { TabItem } from "@shared/ui";
+import { type TabItem, Tabs, type TabsProps } from "@shared/ui";
 import { propEq } from "ramda";
 import { useCallback, useMemo } from "react";
 import type { Selector } from "react-redux";
 
-export type StoreTabsProps<T extends TabItem> = Omit<
-	HapticTabsProps<T>,
-	"value"
-> & {
+export type StoreTabsProps<T extends TabItem> = Omit<TabsProps<T>, "value"> & {
 	selector: Selector<RootState, string>;
 	actionCreator: AppActionCreator<string>;
 	translate?: boolean;
@@ -50,7 +43,5 @@ export function StoreTabs<T extends TabItem>({
 
 	const value = values.find(propEq(id, "id"));
 
-	return (
-		<HapticTabs {...props} data={values} value={value} onSelect={onTabSelect} />
-	);
+	return <Tabs {...props} data={values} value={value} onSelect={onTabSelect} />;
 }

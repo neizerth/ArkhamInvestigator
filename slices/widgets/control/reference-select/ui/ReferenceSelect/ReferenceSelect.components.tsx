@@ -1,6 +1,7 @@
-import { GameText } from "@entities/game-text";
-import { Button, HapticSelect } from "@modules/core/haptic/shared/ui";
 import { color, font, size } from "@shared/config";
+import { Button } from "@shared/ui";
+import { GameText } from "@shared/ui";
+import { Select as BaseSelect } from "@shared/ui";
 import { View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import styled from "styled-components/native";
@@ -35,7 +36,7 @@ export const Tabs: typeof StoreTabs = styled(StoreTabs)`
   
 `;
 
-export const Select: typeof HapticSelect = styled(HapticSelect)`
+export const Select: typeof BaseSelect = styled(BaseSelect)`
   background-color: ${color.dark30};
   border: 1px solid ${color.dark20};
 `;
