@@ -1,5 +1,5 @@
-import type { TouchableOpacityProps } from "@modules/core/haptic/shared/ui";
-import type { PropsWithFaction } from "@shared/model";
+import type { TouchableOpacityProps } from "@modules/core/touch/shared/ui";
+import type { PropsWithFaction } from "@shared/model/ui";
 import * as C from "./FactionSelectButton.components";
 
 export type FactionSelectButtonProps = TouchableOpacityProps &

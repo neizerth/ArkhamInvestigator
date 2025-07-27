@@ -1,4 +1,4 @@
-import type { TouchableOpacityProps } from "@modules/core/haptic/shared/ui";
+import type { TouchableOpacityProps } from "@modules/core/touch/shared/ui";
 import { Gesture, GestureDetector } from "react-native-gesture-handler";
 import { useSwipe } from "../../../../../modules/core/touch/shared/lib/hooks/gestures/useSwipe";
 import * as C from "./KeyboardButtonContainer.components";

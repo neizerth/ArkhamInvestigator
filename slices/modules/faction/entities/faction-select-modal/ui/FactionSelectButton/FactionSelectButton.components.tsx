@@ -1,4 +1,4 @@
-import { TouchableOpacity } from "@modules/core/haptic/shared/ui";
+import { TouchableOpacity } from "@modules/core/touch/shared/ui";
 import { color } from "@shared/config";
 import { FactionIconImage, Icon } from "@shared/ui";
 import { View } from "react-native";

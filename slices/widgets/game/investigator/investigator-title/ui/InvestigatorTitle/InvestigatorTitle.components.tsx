@@ -1,5 +1,5 @@
 import { Arkhamic } from "@assets/fonts";
-import { TouchableOpacity } from "@modules/core/haptic/shared/ui";
+import { TouchableOpacity } from "@modules/core/touch/shared/ui";
 import { withIcon } from "@shared/lib/hoc";
 import {
 	ImageBackground,

@@ -2,7 +2,7 @@ import {
 	selectIsAdditionalActionUsed,
 	setAdditionalActionUse,
 } from "@modules/board/abilities/shared/lib";
-import type { TouchableOpacityProps } from "@modules/core/haptic/shared/ui";
+import type { TouchableOpacityProps } from "@modules/core/touch/shared/ui";
 import { useAppDispatch, useAppSelector } from "@shared/lib";
 import { useCallback } from "react";
 import { Special } from "../Special";

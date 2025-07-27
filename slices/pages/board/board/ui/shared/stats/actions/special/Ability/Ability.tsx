@@ -3,7 +3,7 @@ import {
 	selectIsCurrentAbilityUsed,
 	setBoardAbilityUse,
 } from "@modules/board/abilities/shared/lib";
-import type { TouchableOpacityProps } from "@modules/core/haptic/shared/ui";
+import type { TouchableOpacityProps } from "@modules/core/touch/shared/ui";
 import { useAppDispatch, useAppSelector } from "@shared/lib";
 import type { InvestigatorAbility } from "arkham-investigator-data";
 import { useCallback } from "react";

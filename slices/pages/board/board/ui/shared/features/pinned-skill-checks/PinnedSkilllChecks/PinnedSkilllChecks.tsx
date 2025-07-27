@@ -36,7 +36,7 @@ export const PinnedSkilllChecks = (props: PinnedSkilllChecksProps) => {
 		return null;
 	}
 
-	const onAreaPress = tapToHide ? toggleShow : always(false);
+	const onAreaPress = tapToHide ? toggleShow : always(false as const);
 
 	const showToggle = (tapToHide && !show) || !tapToHide;
 
