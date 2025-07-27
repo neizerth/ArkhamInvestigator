@@ -2,7 +2,7 @@ import { useAppDispatch } from "@shared/lib";
 import { useCallback } from "react";
 import { COMMON_PRESS_TYPE_ID } from "../../config";
 import type { AbstractTouchCallback, TouchType } from "../../model";
-import { touchActions } from "../store";
+import { touch } from "../store";
 
 type Options<T> = {
 	touchActionType?: string;
@@ -16,24 +16,24 @@ export function useTouchCallback<T>({
 	callback,
 }: Options<T>) {
 	const dispatch = useAppDispatch();
-	const action = touchActions[touchType];
 
 	const extendedCallback: AbstractTouchCallback<T> = useCallback(
 		(...args) => {
 			if (!callback) {
 				return;
 			}
-			const response = callback(...args);
-			if (response === false) {
-				return;
-			}
+			const enabled = callback(...args);
+			const canceled = enabled === false;
+
 			dispatch(
-				action({
-					touchType: touchActionType,
+				touch({
+					type: touchActionType,
+					touchType,
+					canceled,
 				}),
 			);
 		},
-		[dispatch, action, touchActionType, callback],
+		[dispatch, touchType, touchActionType, callback],
 	);
 
 	return extendedCallback;

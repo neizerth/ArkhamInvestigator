@@ -1,4 +1,4 @@
-import { Pressable } from "@modules/core/haptic/shared/ui";
+import { Pressable } from "@modules/core/touch/shared/ui";
 import { View } from "react-native";
 import styled from "styled-components/native";
 import { TOP_CONTENT_OFFSET } from "../../../../../../../../config";

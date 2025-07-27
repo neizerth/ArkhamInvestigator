@@ -3,7 +3,7 @@ import { createSliceState } from "redux-toolkit-helpers";
 import type { HapticMode } from "../../model";
 
 export type HapticState = {
-	hapticMode: HapticMode | null;
+	hapticMode?: HapticMode;
 };
 
 const initialState: HapticState = {

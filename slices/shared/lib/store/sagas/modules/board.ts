@@ -4,7 +4,7 @@ import { boardHistorySharedSaga } from "@modules/board/history/shared/lib/store/
 import { boardNotificationSharedSaga } from "@modules/board/notifications/entities/lib/store/sagas";
 import { spawn } from "redux-saga/effects";
 
-export function* boardSagas() {
+export function* boardSaga() {
 	yield spawn(boardSharedSaga);
 	yield spawn(boardHistorySharedSaga);
 
