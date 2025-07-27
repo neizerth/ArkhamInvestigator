@@ -5,3 +5,5 @@ export const defaultModeFeedback: Record<Mode, HapticPatternType> = {
 	system: "effectTick",
 	default: "clockTick",
 };
+
+export const DEFAULT_HAPTIC_FEEDBACK: HapticPatternType = "clockTick";

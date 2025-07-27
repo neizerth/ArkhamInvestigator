@@ -1,4 +1,4 @@
-import { Pressable } from "@modules/core/haptic/shared/ui";
+import { Pressable } from "@modules/core/touch/shared/ui";
 import { color } from "@shared/config";
 import Animated from "react-native-reanimated";
 import styled from "styled-components/native";
