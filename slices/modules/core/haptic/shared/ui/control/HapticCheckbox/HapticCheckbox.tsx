@@ -1,8 +1,8 @@
+import type { TouchableOpacityProps } from "@modules/core/touch/shared/ui";
 import type { CheckboxProps } from "@shared/ui";
 import { useCallback } from "react";
 import type { GestureResponderEvent } from "react-native";
 import { useHapticFeedback } from "../../../lib";
-import type { TouchableOpacityProps } from "../../TouchableOpacity";
 import * as C from "./HapticCheckbox.components";
 
 export type HapticCheckboxProps = CheckboxProps & TouchableOpacityProps;

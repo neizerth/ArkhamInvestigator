@@ -1,9 +1,8 @@
-import { TouchableOpacity } from "@modules/core/touch/shared/ui";
 import { size } from "@shared/config";
 import { View } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import styled from "styled-components/native";
-import { ChaosBagRevealedToken } from "../ChaosBagRevealedToken";
+import { ChaosTokenRevealHistoryItem } from "../ChaosTokenRevealHistoryItem";
 export const Container: typeof View = styled(View)`
 	height: 64px;
 	padding-bottom: 5px;
@@ -19,12 +18,7 @@ export const List: typeof FlatList = styled(FlatList).attrs({
 	padding: ${size.gap.small}px 0;
 `;
 
-export const Button: typeof TouchableOpacity = styled(TouchableOpacity)`
-	position: relative;
-`;
-
-export const Token: typeof ChaosBagRevealedToken = styled(
-	ChaosBagRevealedToken,
+export const Item: typeof ChaosTokenRevealHistoryItem = styled(
+	ChaosTokenRevealHistoryItem,
 )`
-  
 `;
