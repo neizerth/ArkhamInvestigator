@@ -3,7 +3,7 @@ import type { HapticPatternType } from "../../model";
 import { useHapticFeedback } from "./useHapticFeedback";
 
 type Options = {
-	callback?: () => void | unknown;
+	callback?: () => void | false;
 	pattern?: HapticPatternType;
 };
 

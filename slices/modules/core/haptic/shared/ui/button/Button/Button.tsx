@@ -1,10 +1,10 @@
+import type { TouchableOpacityProps } from "@modules/core/touch/shared/ui";
 import { useCallback } from "react";
 import {
 	type GestureResponderEvent,
 	Linking,
 	type TextProps,
 } from "react-native";
-import type { TouchableOpacityProps } from "../../TouchableOpacity";
 import * as C from "./Button.components";
 
 export type ButtonProps = TouchableOpacityProps & {

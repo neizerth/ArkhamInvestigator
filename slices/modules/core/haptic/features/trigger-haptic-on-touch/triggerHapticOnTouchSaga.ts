@@ -1,10 +1,6 @@
 import { createTouchFilter } from "@modules/core/touch/shared/lib";
-import { select, takeEvery } from "redux-saga/effects";
-import {
-	getHapticPattern,
-	impactHapticFeedback,
-	selectHapticMode,
-} from "../../shared/lib";
+import { put, takeEvery } from "redux-saga/effects";
+import { triggerHapticFeedback } from "../../shared/lib/store/features/triggerHapticFeedback/triggerHapticFeedback";
 
 const filterAction = createTouchFilter({
 	cancelled: false,
@@ -13,18 +9,7 @@ const filterAction = createTouchFilter({
 // TODO touch category definition
 // function* worker({ payload }: ReturnType<typeof touch>) {
 function* worker() {
-	const mode: ReturnType<typeof selectHapticMode> =
-		yield select(selectHapticMode);
-
-	if (mode === false) {
-		return;
-	}
-
-	const pattern = getHapticPattern({
-		mode,
-	});
-
-	impactHapticFeedback(pattern);
+	yield put(triggerHapticFeedback({}));
 }
 
 export function* triggerHapticOnTouchSaga() {

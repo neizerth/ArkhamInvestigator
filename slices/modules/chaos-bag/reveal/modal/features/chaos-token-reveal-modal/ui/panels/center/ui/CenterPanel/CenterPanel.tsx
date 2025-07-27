@@ -1,7 +1,3 @@
-import {
-	useHapticLongPress,
-	useHapticTap,
-} from "@modules/core/haptic/shared/lib";
 import { useAppDispatch, useAppSelector } from "@shared/lib";
 import { useCallback, useMemo } from "react";
 import type { ViewProps } from "react-native";
@@ -12,6 +8,7 @@ import { selectModifyChaosTokens } from "@modules/chaos-bag/base/shared/lib";
 import { toggleChaosTokenSeal } from "@modules/chaos-bag/base/entities/lib";
 import { returnSingleChaosToken } from "@modules/chaos-bag/reveal/base/entities/lib";
 import type { RevealedChaosBagToken } from "@modules/chaos-bag/reveal/base/shared/model";
+import { useLongPress, useTap } from "@modules/core/touch/shared/lib";
 import { selectCurrentRevealedToken } from "../../../../../lib";
 import * as C from "./CenterPanel.components";
 
@@ -27,7 +24,7 @@ export const CenterPanel = ({ style, ...props }: CenterPanelProps) => {
 
 	const showTokenValue = useAppSelector(selectModifyChaosTokens);
 
-	const onPress = useCallback(() => {
+	const onTap = useCallback(() => {
 		dispatch(
 			returnSingleChaosToken({
 				id: token.id,
@@ -43,11 +40,11 @@ export const CenterPanel = ({ style, ...props }: CenterPanelProps) => {
 		);
 	}, [dispatch, token]);
 
-	const tap = useHapticTap({
-		onPress,
+	const tap = useTap({
+		onTap,
 	});
 
-	const longPress = useHapticLongPress({
+	const longPress = useLongPress({
 		onLongPress,
 	});
 

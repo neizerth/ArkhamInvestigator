@@ -23,7 +23,7 @@ export type NumericControlProps = ViewProps & {
 	max?: number;
 };
 
-const disabledCallback = always(false);
+const disabledCallback = always(false as const);
 
 export const NumericControl = ({
 	onDecrement,

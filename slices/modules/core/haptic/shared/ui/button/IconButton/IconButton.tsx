@@ -1,5 +1,5 @@
+import type { TouchableOpacityProps } from "@modules/core/touch/shared/ui";
 import { Icon, type IconProps } from "@shared/ui/game";
-import type { TouchableOpacityProps } from "../../TouchableOpacity";
 import * as C from "./IconButton.components";
 
 export type IconButtonProps = TouchableOpacityProps & {
