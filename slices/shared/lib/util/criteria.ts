@@ -12,3 +12,19 @@ export const whereId = <T>(value: T) => propEq(value, "id");
 
 export const idIncludes = <T extends { id: string }>(values: string[]) =>
 	propIncludes<T, "id">("id", values);
+
+export const partiallyEquals =
+	<T>(criteria: Partial<T>) =>
+	(data: T) => {
+		type Key = keyof T;
+		const keys = Object.keys(criteria) as Key[];
+		return keys.every((key) => {
+			const value = criteria[key];
+
+			if (typeof value === "undefined") {
+				return true;
+			}
+
+			return value === data[key];
+		});
+	};

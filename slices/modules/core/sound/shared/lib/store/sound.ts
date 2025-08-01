@@ -39,6 +39,7 @@ export const {
 
 	registerSFXWorker,
 	unregisterSFXWorker,
+	updateSFXWorker,
 
 	addSoundQueueItem,
 	removeSoundQueueItem,

@@ -7,3 +7,4 @@ export * from "./number";
 export * from "./promise";
 export * from "./object";
 export * from "./date";
+export * from "./store";

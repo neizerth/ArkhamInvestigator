@@ -65,8 +65,6 @@ export type PickerDataProps = {
 	value?: number;
 	onValueChanged?: (event: PickerChangeEvent) => void;
 	onValueChanging?: (event: PickerChangeEvent) => void | false;
-
-	sound?: boolean;
 };
 
 export type PickerHapticScrollProps = {

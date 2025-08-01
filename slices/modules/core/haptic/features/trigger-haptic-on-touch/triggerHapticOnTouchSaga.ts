@@ -3,7 +3,7 @@ import { put, takeEvery } from "redux-saga/effects";
 import { triggerHapticFeedback } from "../../shared/lib/store/features/triggerHapticFeedback/triggerHapticFeedback";
 
 const filterAction = createTouchFilter({
-	cancelled: false,
+	canceled: false,
 });
 
 // TODO touch category definition
