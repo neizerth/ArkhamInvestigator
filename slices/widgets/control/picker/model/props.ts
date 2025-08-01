@@ -1,4 +1,5 @@
 import type { HapticPatternType } from "@modules/core/haptic/shared/model";
+import type { MaybePromise } from "@shared/model";
 import type { ReactElement } from "react";
 import type {
 	GestureResponderEvent,
@@ -72,10 +73,12 @@ export type PickerHapticScrollProps = {
 	scrollHapticPattern?: HapticPatternType;
 };
 
+export type PickerPressCallback = () => MaybePromise<void | false>;
+
 export type PickerPressProps = {
-	onPress?: () => void | false;
-	onLongPress?: () => void | false;
-	onDoublePress?: () => void | false;
+	onPress?: PickerPressCallback;
+	onLongPress?: PickerPressCallback;
+	onDoublePress?: PickerPressCallback;
 	pressMaxDuration?: number;
 	longPressMinDuration?: number;
 	doublePressMaxDuration?: number;

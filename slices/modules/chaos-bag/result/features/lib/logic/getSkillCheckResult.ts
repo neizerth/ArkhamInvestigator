@@ -1,6 +1,6 @@
 import type { SkillCheckResult } from "@modules/board/skill-check/shared/model";
 import type { ChaosTokenType } from "@modules/chaos-bag/base/shared/model";
-import { RevealedChaosBagToken } from "@modules/chaos-bag/reveal/base/shared/model";
+import type { RevealedChaosBagToken } from "@modules/chaos-bag/reveal/base/shared/model";
 import { propEq } from "ramda";
 
 type Options = {

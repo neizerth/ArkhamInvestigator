@@ -1,3 +1,8 @@
+import {
+	registerSFXWorker,
+	unregisterSFXWorker,
+} from "@modules/core/sound/shared/lib";
+import { useAppDispatch } from "@shared/lib";
 import { useEffect } from "react";
 
 export type SFXWorkerProps = {
@@ -5,13 +10,13 @@ export type SFXWorkerProps = {
 };
 
 export const SFXWorker = ({ id }: SFXWorkerProps) => {
+	const dispatch = useAppDispatch();
 	useEffect(() => {
-		console.log("sound worker registered", id);
-
+		dispatch(registerSFXWorker({ id }));
 		return () => {
-			console.log("sound worker unregistered", id);
+			dispatch(unregisterSFXWorker({ id }));
 		};
-	}, [id]);
+	}, [id, dispatch]);
 
 	return null;
 };

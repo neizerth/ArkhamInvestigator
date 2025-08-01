@@ -31,3 +31,5 @@ export type MaybeData<T> = T extends void ? Record<string, never> : { data: T };
 export type GenericFunction = (...args: any) => any;
 
 export type ReturnAwaited<T extends GenericFunction> = Awaited<ReturnType<T>>;
+
+export type MaybePromise<T> = T | Promise<T>;

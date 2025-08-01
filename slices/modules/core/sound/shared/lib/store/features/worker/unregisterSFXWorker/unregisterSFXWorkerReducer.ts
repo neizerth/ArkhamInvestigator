@@ -1,7 +1,7 @@
-import { SoundReducer } from "@modules/core/sound/shared/model";
+import type { SoundReducer } from "@modules/core/sound/shared/model";
 import {
+	type HandleUnregisterSFXWorkerPayload,
 	handleUnregisterSFXWorker,
-	HandleUnregisterSFXWorkerPayload,
 } from "./handleUnregisterSFXWorker";
 
 export const unregisterSFXWorkerReducer: SoundReducer<

@@ -8,5 +8,8 @@ export const handleRegisterSFXWorker: SoundHandler<
 	HandleRegisterSFXWorkerPayload
 > = (state, payload) => {
 	const { id } = payload;
-	state.sfxWorkers.push(id);
+	state.sfxWorkers.push({
+		id,
+		status: "idle",
+	});
 };
