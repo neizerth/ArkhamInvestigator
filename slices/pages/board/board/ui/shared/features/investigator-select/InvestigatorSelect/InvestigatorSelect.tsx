@@ -84,7 +84,6 @@ export const InvestigatorSelect = ({ ...props }: InvestigatorSelectProps) => {
 				onLongPress={goToPage(routes.overview)}
 				decelerationRate={0}
 				disableIntervalMomentum
-				sound={false}
 			/>
 			{showDown && (
 				<C.Down onPress={prev}>

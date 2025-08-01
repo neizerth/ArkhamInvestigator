@@ -1,23 +1,21 @@
 import { useAppSelector } from "@shared/lib";
 import { useCallback } from "react";
 import { SOUND_ENABLED } from "../../config";
-import type { SoundId } from "../../model";
 import { selectSoundEnabled } from "../store";
-import { useSoundPlayer } from "./useSoundPlayer";
+import { type UseSoundPlayerOptions, useSoundPlayer } from "./useSoundPlayer";
 
-export const useSound = (id?: SoundId) => {
+export const useSound = (options: UseSoundPlayerOptions) => {
 	const soundEnabled = useAppSelector(selectSoundEnabled);
 
-	const player = useSoundPlayer(id);
+	const player = useSoundPlayer(options);
 
 	return useCallback(
-		(enabled = true) => {
+		async (enabled = true) => {
 			if (!soundEnabled || !enabled || !SOUND_ENABLED) {
 				return;
 			}
-			player.seekTo(0).then(() => {
-				player.play();
-			});
+			await player.seekTo(0);
+			player.play();
 		},
 		[player, soundEnabled],
 	);

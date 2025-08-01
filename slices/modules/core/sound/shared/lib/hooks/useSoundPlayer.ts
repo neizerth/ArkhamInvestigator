@@ -1,30 +1,42 @@
 import { soundAssets } from "@assets/sounds";
 import { useAppSelector } from "@shared/lib";
-import { useAudioPlayer } from "expo-audio";
+import { useAudioPlayer, useAudioPlayerStatus } from "expo-audio";
 import { useEffect } from "react";
-import { SOUND_ENABLED, SOUND_VOLUME_MODIFIER } from "../../config";
+import { SOUND_VOLUME_MODIFIER } from "../../config";
 import type { SoundId } from "../../model";
 import { selectSoundEnabled, selectSoundVolume } from "../store";
+import { useSoundPreload } from "./useSoundPreload";
 
-export const useSoundPlayer = (id: SoundId = "switchTap") => {
+export type UseSoundPlayerOptions = {
+	id?: SoundId;
+	preload?: boolean;
+	onFinish?: () => void;
+};
+
+export const useSoundPlayer = (options: UseSoundPlayerOptions) => {
+	const { id, onFinish } = options;
 	const volume = useAppSelector(selectSoundVolume);
 	const enabled = useAppSelector(selectSoundEnabled);
-	const source = soundAssets[id];
+	const source = id && soundAssets[id];
 
 	const player = useAudioPlayer(source);
+	const { didJustFinish } = useAudioPlayerStatus(player);
 	const playerVolume = volume * SOUND_VOLUME_MODIFIER;
+	const preload = enabled && options.preload;
 
 	player.volume = playerVolume;
 
-	// preload sound
 	useEffect(() => {
-		if (!SOUND_ENABLED || !enabled) {
+		if (!didJustFinish) {
 			return;
 		}
-		player.play();
-		player.pause();
-		player.seekTo(0);
-	}, [player, enabled]);
+		onFinish?.();
+	}, [didJustFinish, onFinish]);
+
+	useSoundPreload({
+		player,
+		preload,
+	});
 
 	return player;
 };

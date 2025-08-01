@@ -1,4 +1,3 @@
-import { useSound } from "@modules/core/sound/shared/lib";
 import { useUICallback } from "@modules/core/ui/lib";
 import { useCallback, useRef } from "react";
 import type { PickerChangeEvent, PickerScrollEvent } from "../../../../model";
@@ -11,10 +10,8 @@ export const useScrollFeedback = (props: PickerListProps) => {
 		onScrollDeactivated: onScrollDeactivatedProp,
 		onLongPress: onLongPressProp,
 		onValueChanged: onValueChangedProp,
-		sound = true,
 	} = props;
 
-	const playSound = useSound();
 	const hapticEnabled = useRef(false);
 	const longPress = useRef(false);
 
@@ -53,14 +50,13 @@ export const useScrollFeedback = (props: PickerListProps) => {
 		},
 	});
 
-	const onValueChanged = useCallback(
-		(e: PickerChangeEvent) => {
-			onValueChangedProp?.(e);
-
-			playSound(sound);
+	const onValueChanged = useUICallback<PickerChangeEvent>({
+		payload: {
+			source: "picker",
+			type: "change",
 		},
-		[onValueChangedProp, playSound, sound],
-	);
+		callback: onValueChangedProp,
+	});
 
 	return {
 		...props,
