@@ -5,12 +5,12 @@ import {
 import type { ChaosBagHistoryItem } from "@modules/chaos-bag/base/shared/model";
 import type { RevealedChaosBagToken } from "@modules/chaos-bag/reveal/base/shared/model";
 import { removeRevealHistoryItem } from "@modules/chaos-bag/reveal/history/shared/lib";
-import { useHapticFeedback } from "@modules/core/haptic/shared/lib";
+import { useLongPress } from "@modules/core/touch/shared/lib";
 import { REMOVE_CLIPPED_SUBVIEWS } from "@shared/config";
 import { goBack, useAppDispatch, useAppSelector } from "@shared/lib";
 import { useCallback } from "react";
 import type { ListRenderItemInfo, ViewProps } from "react-native";
-import { Gesture, GestureDetector } from "react-native-gesture-handler";
+import { GestureDetector } from "react-native-gesture-handler";
 import * as C from "./ChaosBagRevealItem.components";
 import { getExpressionDisplayStyles } from "./ChaosBagRevealItem.styles";
 
@@ -44,8 +44,6 @@ export const ChaosBagRevealItem = ({
 		dispatch(goBack());
 	}, [dispatch, index]);
 
-	const impactFeedback = useHapticFeedback();
-
 	const renderItem = useCallback(
 		({ item, index }: ListRenderItemInfo<RevealedChaosBagToken>) => {
 			return (
@@ -72,8 +70,7 @@ export const ChaosBagRevealItem = ({
 				id,
 			}),
 		);
-		impactFeedback();
-	}, [dispatch, id, impactFeedback]);
+	}, [dispatch, id]);
 
 	if (!investigator) {
 		return null;
@@ -81,7 +78,9 @@ export const ChaosBagRevealItem = ({
 
 	const { skillCheckType, skillCheckValue, title, skillCheckExpression } = item;
 
-	const longPress = Gesture.LongPress().runOnJS(true).onStart(removeItem);
+	const longPress = useLongPress({
+		onLongPress: removeItem,
+	});
 
 	const expressionStyles = getExpressionDisplayStyles();
 

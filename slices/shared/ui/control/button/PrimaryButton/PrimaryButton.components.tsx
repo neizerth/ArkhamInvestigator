@@ -1,8 +1,8 @@
 import { buttonImages } from "@assets/images/ui/buttons/primary";
 import { TouchableOpacity } from "@modules/core/touch/shared/ui";
-import { ImageBackground, type ImageBackgroundProps } from "@shared/ui";
 import type { FC } from "react";
 import styled, { css } from "styled-components/native";
+import { ImageBackground, type ImageBackgroundProps } from "../../../image";
 import type {
 	PrimaryButtonSize,
 	PrimaryButtonStyle,

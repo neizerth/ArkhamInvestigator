@@ -4,14 +4,10 @@ import {
 	sendCommandSignal,
 	setSkillCheckDifficulty,
 } from "@modules/board/skill-check/shared/lib";
-import { useHapticFeedback } from "@modules/core/haptic/shared/lib";
+import { useLongPress, useSwipe } from "@modules/core/touch/shared/lib";
 import { minMax, useAppDispatch, useAppSelector } from "@shared/lib";
 import { type PropsWithChildren, useCallback } from "react";
-import {
-	Directions,
-	Gesture,
-	GestureDetector,
-} from "react-native-gesture-handler";
+import { Gesture, GestureDetector } from "react-native-gesture-handler";
 
 export type EvaluationExpressionGesturesProps = PropsWithChildren;
 
@@ -19,7 +15,6 @@ export const EvaluationExpressionGestures = ({
 	children,
 }: EvaluationExpressionGesturesProps) => {
 	const dispatch = useAppDispatch();
-	const impactHapticFeedback = useHapticFeedback();
 	const expression = useAppSelector(selectSkillCheckData);
 	const difficulty = useAppSelector(selectSkillCheckDifficulty);
 
@@ -27,27 +22,37 @@ export const EvaluationExpressionGestures = ({
 		dispatch(sendCommandSignal("clear-last"));
 	}, [dispatch]);
 
-	const onTap = useCallback(() => {
+	const onLongPress = useCallback(() => {
 		const [first] = expression;
 
 		if (expression.length > 1 || first.type !== "number") {
-			return;
+			return false;
 		}
 
-		impactHapticFeedback();
 		const nextDifficulty =
 			difficulty === first.value ? null : minMax(first.value, -9, 100);
 		dispatch(setSkillCheckDifficulty(nextDifficulty));
-	}, [dispatch, impactHapticFeedback, expression, difficulty]);
+	}, [dispatch, expression, difficulty]);
+
+	const swipeLeft = useSwipe({
+		direction: "left",
+		onSwipe: clearLast,
+	});
+
+	const swipeRight = useSwipe({
+		direction: "right",
+		onSwipe: clearLast,
+	});
+
+	const longPress = useLongPress({
+		onLongPress,
+	});
 
 	const gestures = [
-		Gesture.Fling().direction(Directions.LEFT).runOnJS(true).onStart(clearLast),
+		swipeLeft,
 
-		Gesture.Fling()
-			.direction(Directions.RIGHT)
-			.runOnJS(true)
-			.onStart(clearLast),
-		Gesture.LongPress().runOnJS(true).onStart(onTap),
+		swipeRight,
+		longPress,
 	];
 
 	const gestureConfig = Gesture.Exclusive(...gestures);

@@ -1,5 +1,4 @@
 import { setBoardProp } from "@modules/board/base/shared/lib";
-import { useHapticFeedback } from "@modules/core/haptic/shared/lib";
 import { CustomModalId } from "@modules/core/modal/entities/base/config";
 import { closeModal } from "@modules/core/modal/shared/base/lib";
 import {
@@ -18,7 +17,6 @@ export const FactionSelectModal = (props: FactionSelectModalProps) => {
 	const dispatch = useAppDispatch();
 	const factions = useAppSelector(selectAvailableFactions("current"));
 	const selected = useAppSelector(selectCurrentFaction);
-	const impactFeedback = useHapticFeedback("clockTick");
 
 	const hide = useCallback(() => {
 		dispatch(
@@ -26,8 +24,7 @@ export const FactionSelectModal = (props: FactionSelectModalProps) => {
 				source: "ui",
 			}),
 		);
-		impactFeedback();
-	}, [dispatch, impactFeedback]);
+	}, [dispatch]);
 
 	const onPress = useCallback(
 		(faction: Faction) => () => {

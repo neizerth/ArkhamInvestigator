@@ -1,5 +1,5 @@
-import { useHapticFeedback } from "@modules/core/haptic/shared/lib";
 import { useSound } from "@modules/core/sound/shared/lib";
+import { useUICallback } from "@modules/core/ui/lib";
 import { useCallback, useRef } from "react";
 import type { PickerChangeEvent, PickerScrollEvent } from "../../../../model";
 import type { PickerListProps } from "../PickerList.types";
@@ -11,11 +11,9 @@ export const useScrollFeedback = (props: PickerListProps) => {
 		onScrollDeactivated: onScrollDeactivatedProp,
 		onLongPress: onLongPressProp,
 		onValueChanged: onValueChangedProp,
-		scrollHapticPattern,
 		sound = true,
 	} = props;
 
-	const impactFeedback = useHapticFeedback(scrollHapticPattern);
 	const playSound = useSound();
 	const hapticEnabled = useRef(false);
 	const longPress = useRef(false);
@@ -42,16 +40,18 @@ export const useScrollFeedback = (props: PickerListProps) => {
 		onLongPressProp?.();
 	}, [onLongPressProp]);
 
-	const onValueChanging = useCallback(
-		(e: PickerChangeEvent) => {
+	const onValueChanging = useUICallback<PickerChangeEvent>({
+		payload: {
+			source: "picker",
+			type: "changing",
+		},
+		callback(e) {
 			onValueChangingProp?.(e);
 			if (!hapticEnabled.current) {
-				return;
+				return false;
 			}
-			impactFeedback();
 		},
-		[onValueChangingProp, impactFeedback],
-	);
+	});
 
 	const onValueChanged = useCallback(
 		(e: PickerChangeEvent) => {

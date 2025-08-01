@@ -21,4 +21,9 @@ export type PressProps = {
 	onLongPress?: PressCallback;
 };
 
-export type PressGestureType = "press" | "pressIn" | "pressOut" | "longPress";
+export type PressGestureType =
+	| "press"
+	| "pressIn"
+	| "pressOut"
+	| "longPress"
+	| "doublePress";

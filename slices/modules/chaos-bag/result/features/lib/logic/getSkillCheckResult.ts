@@ -1,21 +1,16 @@
 import type { SkillCheckResult } from "@modules/board/skill-check/shared/model";
-import type {
-	ChaosBagToken,
-	ChaosTokenType,
-	ChaosTokenValues,
-} from "@modules/chaos-bag/base/shared/model";
+import type { ChaosTokenType } from "@modules/chaos-bag/base/shared/model";
+import { RevealedChaosBagToken } from "@modules/chaos-bag/reveal/base/shared/model";
 import { propEq } from "ramda";
 
 type Options = {
 	skillValue: number;
-	tokens: ChaosBagToken[];
-	tokenValues: ChaosTokenValues;
+	tokens: RevealedChaosBagToken[];
 };
 
 export const getSkillCheckResult = ({
 	skillValue,
 	tokens,
-	tokenValues,
 }: Options): SkillCheckResult => {
 	const getCount = (type: ChaosTokenType) =>
 		tokens.filter(propEq(type, "type")).length;
@@ -31,9 +26,7 @@ export const getSkillCheckResult = ({
 		return "fail";
 	}
 
-	const tokensvalueSum = tokens.reduce((total, { type }) => {
-		const value = tokenValues[type] || 0;
-
+	const tokensvalueSum = tokens.reduce((total, { value }) => {
 		return value + total;
 	}, 0);
 
