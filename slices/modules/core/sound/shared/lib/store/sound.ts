@@ -1,12 +1,16 @@
-import type { SoundQueueItem } from "@modules/core/sound/shared/model";
+import type {
+	SFXWorkerInfo,
+	SoundQueueItem,
+} from "@modules/core/sound/shared/model";
 import { createSlice } from "@reduxjs/toolkit";
 import { createSliceState } from "redux-toolkit-helpers";
+import * as reducers from "./reducers";
 
 export type SoundState = {
 	enabled: boolean;
 	volume: number;
 	queue: SoundQueueItem[];
-	sfxWorkers: string[];
+	sfxWorkers: SFXWorkerInfo[];
 };
 
 const initialState: SoundState = {
@@ -16,9 +20,15 @@ const initialState: SoundState = {
 	sfxWorkers: [],
 };
 
+const state = createSliceState(initialState);
+
 export const sound = createSlice({
 	name: "sound",
-	...createSliceState(initialState),
+	...state,
+	reducers: {
+		...state.reducers,
+		...reducers,
+	},
 });
 
 export const {
@@ -26,13 +36,20 @@ export const {
 	setVolume: setSoundVolume,
 	setQueue: setSoundQueue,
 	setSfxWorkers,
+
+	registerSFXWorker,
+	unregisterSFXWorker,
+
+	addSoundQueueItem,
+	removeSoundQueueItem,
+	updateSoundQueueItem,
 } = sound.actions;
 
 export const {
 	selectEnabled: selectSoundEnabled,
 	selectVolume: selectSoundVolume,
-	selectQueue,
-	selectSfxWorkers,
+	selectQueue: selectSoundQueue,
+	selectSfxWorkers: selectSFXWorkers,
 } = sound.selectors;
 
 export default sound.reducer;

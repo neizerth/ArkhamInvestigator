@@ -1,3 +1,4 @@
+import { soundSaga } from "@modules/core/sound/sagas";
 import { spawn } from "redux-saga/effects";
 import { boardSaga } from "./board";
 import { chaosBagSaga } from "./chaosBag";
@@ -17,4 +18,6 @@ export function* modulesSaga() {
 	yield spawn(modalSaga);
 	yield spawn(factionSaga);
 	yield spawn(hapticSaga);
+
+	yield spawn(soundSaga);
 }
