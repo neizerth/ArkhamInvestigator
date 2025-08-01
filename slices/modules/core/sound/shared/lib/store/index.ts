@@ -1,2 +1,2 @@
-export * as soundReducer from "./features/reducer";
-export * from "./features";
+export * as soundReducer from "./reducer";
+export * from "./sound";

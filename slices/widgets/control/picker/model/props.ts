@@ -22,8 +22,6 @@ export type PickerContainerInfo = PickerItemInfo & {
 	currentValue?: number;
 };
 
-type BaseListProps = FlatListPropsWithLayout<number>;
-
 type ListProps = Omit<
 	FlatListPropsWithLayout<number>,
 	"data" | "renderItem" | "contentContainerStyle"
@@ -75,16 +73,12 @@ export type PickerHapticScrollProps = {
 };
 
 export type PickerPressProps = {
-	onPress?: () => void | unknown;
-	onLongPress?: () => void | unknown;
-	onDoublePress?: () => void | unknown;
+	onPress?: () => void | false;
+	onLongPress?: () => void | false;
+	onDoublePress?: () => void | false;
 	pressMaxDuration?: number;
 	longPressMinDuration?: number;
 	doublePressMaxDuration?: number;
-
-	pressHapticPattern?: HapticPatternType;
-	doublePressHapticPattern?: HapticPatternType;
-	longPressHapticPattern?: HapticPatternType;
 };
 
 export type PickerGestureProps = {

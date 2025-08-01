@@ -1,7 +1,6 @@
-import { useHapticFeedback } from "@modules/core/haptic/shared/lib";
-import { useSwipe } from "@modules/core/touch/shared/lib";
+import { useSwipe, useTouchCallback } from "@modules/core/touch/shared/lib";
 import { arrayIf } from "@shared/lib";
-import { type PropsWithChildren, useCallback } from "react";
+import type { PropsWithChildren } from "react";
 import { Gesture, GestureDetector } from "react-native-gesture-handler";
 import type {
 	PickerActivationProps,
@@ -27,19 +26,16 @@ export const PickerListGestures = ({
 	children,
 
 	pressEnabled,
-	onPress,
+	onPress: onPressProp,
 	pressMaxDuration = 250,
-	pressHapticPattern,
 
 	doublePressEnabled,
-	onDoublePress,
-	doublePressHapticPattern,
+	onDoublePress: onDoublePressProp,
 	doublePressMaxDuration = 250,
 
 	longPressEnabled,
-	onLongPress,
+	onLongPress: onLongPressProp,
 	longPressMinDuration = 500,
-	longPressHapticPattern,
 
 	swipeLeftEnabled,
 	onSwipeLeft,
@@ -50,24 +46,20 @@ export const PickerListGestures = ({
 	onUserDeactivated,
 	onDeactivated,
 }: PickerListGesturesProps) => {
-	const pressFeedback = useHapticFeedback(pressHapticPattern);
-	const doublePressFeedback = useHapticFeedback(doublePressHapticPattern);
-	const longPressFeedback = useHapticFeedback(longPressHapticPattern);
+	const onPress = useTouchCallback({
+		touchType: "press",
+		callback: onPressProp,
+	});
 
-	const onTap = useCallback(() => {
-		pressFeedback();
-		onPress?.();
-	}, [pressFeedback, onPress]);
+	const onDoublePress = useTouchCallback({
+		touchType: "doublePress",
+		callback: onDoublePressProp,
+	});
 
-	const onDoubleTap = useCallback(() => {
-		doublePressFeedback();
-		onDoublePress?.();
-	}, [doublePressFeedback, onDoublePress]);
-
-	const onLongPressCallback = useCallback(() => {
-		longPressFeedback();
-		onLongPress?.();
-	}, [longPressFeedback, onLongPress]);
+	const onLongPress = useTouchCallback({
+		touchType: "longPress",
+		callback: onLongPressProp,
+	});
 
 	const swipeRight = useSwipe({
 		direction: "right",
@@ -85,7 +77,7 @@ export const PickerListGestures = ({
 			Gesture.Tap()
 				.maxDuration(pressMaxDuration)
 				.runOnJS(true)
-				.onStart(onTap)
+				.onStart(onPress)
 				.onTouchesUp(() => {
 					onUserDeactivated?.();
 					onDeactivated?.();
@@ -97,14 +89,14 @@ export const PickerListGestures = ({
 				.numberOfTaps(2)
 				.maxDuration(doublePressMaxDuration)
 				.runOnJS(true)
-				.onStart(onDoubleTap),
+				.onStart(onDoublePress),
 		),
 		arrayIf(
 			longPressEnabled,
 			Gesture.LongPress()
 				.minDuration(longPressMinDuration)
 				.runOnJS(true)
-				.onStart(onLongPressCallback)
+				.onStart(onLongPress)
 				.onTouchesUp(() => {
 					onUserDeactivated?.();
 					onDeactivated?.();

@@ -1,1 +1,1 @@
-export type UIEventType = "change" | "focus";
+export type UIEventType = "change" | "focus" | "changing";
