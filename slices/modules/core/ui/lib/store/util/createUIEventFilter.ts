@@ -4,6 +4,7 @@ import { UIEvent, type UIEventPayload } from "../actions";
 
 type Criteria = Partial<UIEventPayload> & {
 	types?: UIEventType[];
+	exceptTypes?: UIEventType[];
 };
 
 const filterAction = createPayloadFilter({
@@ -18,8 +19,12 @@ export const createUIEventFilter = (criteria: Criteria) => {
 			return false;
 		}
 
-		const { types } = criteria;
+		const { types, exceptTypes } = criteria;
 		const { payload } = action;
+
+		if (exceptTypes?.includes(payload.type)) {
+			return false;
+		}
 
 		if (types && !types.includes(payload.type)) {
 			return false;
