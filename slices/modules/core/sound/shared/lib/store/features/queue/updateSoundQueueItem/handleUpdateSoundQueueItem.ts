@@ -11,8 +11,9 @@ export type HandleUpdateSoundQueueItemPayload = {
 export const handleUpdateSoundQueueItem: SoundHandler<
 	HandleUpdateSoundQueueItemPayload
 > = (state, payload) => {
+	const queue = state.queue || [];
 	const { id, data } = payload;
-	state.queue = state.queue.map((item) => {
+	state.queue = queue.map((item) => {
 		if (item.id !== id) {
 			return item;
 		}

@@ -1,6 +1,7 @@
 import { I18NProvider } from "@modules/core/i18n/app/ui";
 import { ModalProvider } from "@modules/core/modal/app/ui";
 import { ToastProvider } from "@modules/core/notifications/app/ui/ToastProvider";
+import { SoundProvider } from "@modules/core/sound/app";
 import { DarkTheme, ThemeProvider } from "@react-navigation/native";
 import type { PropsWithChildren } from "react";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
@@ -17,7 +18,9 @@ export const AppProvider = ({ children }: PropsWithChildren) => {
 						<ErrorProvider>
 							<InitProvider>
 								<ToastProvider>
-									<ModalProvider>{children}</ModalProvider>
+									<ModalProvider>
+										<SoundProvider>{children}</SoundProvider>
+									</ModalProvider>
 								</ToastProvider>
 							</InitProvider>
 						</ErrorProvider>

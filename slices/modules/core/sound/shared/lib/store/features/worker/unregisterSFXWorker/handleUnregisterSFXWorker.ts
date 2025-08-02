@@ -9,6 +9,7 @@ export type HandleUnregisterSFXWorkerPayload = {
 export const handleUnregisterSFXWorker: SoundHandler<
 	HandleUnregisterSFXWorkerPayload
 > = (state, payload) => {
+	const workers = state.sfxWorkers || [];
 	const { id } = payload;
-	state.sfxWorkers = reject(whereId(id), state.sfxWorkers);
+	state.sfxWorkers = reject(whereId(id), workers);
 };

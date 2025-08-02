@@ -7,9 +7,13 @@ export type HandleRegisterSFXWorkerPayload = {
 export const handleRegisterSFXWorker: SoundHandler<
 	HandleRegisterSFXWorkerPayload
 > = (state, payload) => {
+	const workers = state.sfxWorkers || [];
 	const { id } = payload;
-	state.sfxWorkers.push({
-		id,
-		status: "idle",
-	});
+	state.sfxWorkers = [
+		...workers,
+		{
+			id,
+			status: "idle",
+		},
+	];
 };

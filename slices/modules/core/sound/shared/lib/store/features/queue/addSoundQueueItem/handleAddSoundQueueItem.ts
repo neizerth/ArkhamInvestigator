@@ -7,5 +7,6 @@ export const handleAddSoundQueueItem: SoundHandler<SoundQueueItem> = (
 	state,
 	payload,
 ) => {
-	state.queue.push(payload);
+	const queue = state.queue || [];
+	state.queue = [...queue, payload];
 };

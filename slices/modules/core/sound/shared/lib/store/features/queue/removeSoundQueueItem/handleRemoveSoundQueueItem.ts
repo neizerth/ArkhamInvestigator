@@ -3,5 +3,6 @@ import { whereId } from "@shared/lib";
 import { reject } from "ramda";
 
 export const handleRemoveSoundQueueItem: SoundHandler<string> = (state, id) => {
-	state.queue = reject(whereId(id), state.queue);
+	const queue = state.queue || [];
+	state.queue = reject(whereId(id), queue);
 };

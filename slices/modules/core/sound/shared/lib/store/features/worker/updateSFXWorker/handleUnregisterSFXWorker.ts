@@ -13,11 +13,12 @@ export const handleUpdateSFXWorker: SoundHandler<UpdateSFXWorkerPayload> = (
 	state,
 	payload,
 ) => {
+	const workers = state.sfxWorkers || [];
 	const { id, data } = payload;
-	const index = state.sfxWorkers.findIndex(whereId(id));
+	const index = workers.findIndex(whereId(id));
 
-	state.sfxWorkers[index] = {
-		...state.sfxWorkers[index],
+	state.sfxWorkers = workers.with(index, {
+		...workers[index],
 		...data,
-	};
+	});
 };
