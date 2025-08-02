@@ -9,15 +9,15 @@ import * as reducers from "./reducers";
 export type SoundState = {
 	enabled: boolean;
 	volume: number;
-	queue: SoundQueueItem[];
-	sfxWorkers: SFXWorkerInfo[];
+	queue: SoundQueueItem[] | null;
+	sfxWorkers: SFXWorkerInfo[] | null;
 };
 
 const initialState: SoundState = {
 	enabled: false,
 	volume: 10,
-	queue: [],
-	sfxWorkers: [],
+	queue: null,
+	sfxWorkers: null,
 };
 
 const state = createSliceState(initialState);
@@ -44,6 +44,7 @@ export const {
 	addSoundQueueItem,
 	removeSoundQueueItem,
 	updateSoundQueueItem,
+	clearSoundQueue,
 } = sound.actions;
 
 export const {

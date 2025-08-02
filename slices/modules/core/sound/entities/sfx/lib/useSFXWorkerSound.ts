@@ -37,6 +37,8 @@ export const useSFXWorkerSound = (workerId: string) => {
 			return;
 		}
 
+		console.log("playing", task);
+
 		dispatch(
 			soundPlayStarted({
 				taskId: task.id,
