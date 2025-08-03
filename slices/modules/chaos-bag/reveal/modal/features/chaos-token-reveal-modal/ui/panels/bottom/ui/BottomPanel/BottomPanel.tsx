@@ -28,6 +28,7 @@ export const BottomPanel = ({ ...props }: BottomPanelProps) => {
 	return (
 		<C.Container {...props}>
 			<C.Actions>
+				{/* retry */}
 				<C.Return onPress={onClose}>
 					<C.ReturnAllIcon icon="reply" />
 				</C.Return>
@@ -41,6 +42,7 @@ export const BottomPanel = ({ ...props }: BottomPanelProps) => {
 					<C.ReturnFillIcon icon="token_symbol_fill" />
 					<C.ReturnIcon icon="token_dismiss_highlight" />
 				</C.Return>
+				{/* token effect */}
 			</C.Actions>
 			<C.Description />
 		</C.Container>
