@@ -37,8 +37,7 @@ export const {
 	setQueue: setSoundQueue,
 	setSfxWorkers,
 
-	registerSFXWorker,
-	unregisterSFXWorker,
+	registerSFXWorkers,
 	updateSFXWorker,
 
 	addSoundQueueItem,
