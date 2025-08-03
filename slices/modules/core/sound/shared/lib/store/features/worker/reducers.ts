@@ -1,3 +1,2 @@
-export { registerSFXWorkerReducer as registerSFXWorker } from "./registerSFXWorker/registerSFXWorkerReducer";
-export { unregisterSFXWorkerReducer as unregisterSFXWorker } from "./unregisterSFXWorker/unregisterSFXWorkerReducer";
+export { registerSFXWorkersReducer as registerSFXWorkers } from "./registerSFXWorkers/registerSFXWorkersReducer";
 export { updateSFXWorkerReducer as updateSFXWorker } from "./updateSFXWorker/updateSFXWorkerReducer";
