@@ -22,10 +22,10 @@ export const useSFXWorkerSound = (workerId: string) => {
 			soundPlayEnd({
 				taskId: task.id,
 				soundId: task.soundId,
-				workerId,
+				workerId: task.workerId,
 			}),
 		);
-	}, [dispatch, workerId, task, worker]);
+	}, [dispatch, task, worker]);
 
 	const play = useSound({
 		id: task?.soundId,
