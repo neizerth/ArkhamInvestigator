@@ -7,7 +7,7 @@ import { getDefaultChaosTokenValue } from "@modules/chaos-bag/value/shared/lib";
 import { useAppSelector } from "@shared/lib";
 import * as C from "./ModalChaosToken.components";
 export type ModalChaosTokenProps = ChaosTokenPreviewProps & {
-	value: number;
+	value?: number;
 };
 
 export const ModalChaosToken = (props: ModalChaosTokenProps) => {

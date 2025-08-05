@@ -27,6 +27,9 @@ export const getSkillCheckResult = ({
 	}
 
 	const tokensvalueSum = tokens.reduce((total, { value }) => {
+		if (typeof value !== "number") {
+			return total;
+		}
 		return value + total;
 	}, 0);
 

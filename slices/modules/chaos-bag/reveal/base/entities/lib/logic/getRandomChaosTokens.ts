@@ -20,15 +20,13 @@ export const getRandomChaosTokens = (
 	const nonRevealed = getUnrevealedChaosTokens(options);
 	const unsealed = nonRevealed.filter(({ sealed }) => !sealed);
 
-	const tokens = shuffle(unsealed).slice(0, count);
+	const source = shuffle(unsealed);
+	const tokens = source.slice(0, count);
 
 	return tokens
 		.map((token) => {
 			const value = values[token.type];
 
-			if (typeof value !== "number") {
-				return null;
-			}
 			return {
 				...token,
 				value,
