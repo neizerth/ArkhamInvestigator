@@ -13,8 +13,8 @@ export const useSFXWorkerSound = (workerId: string) => {
 	const task = useAppSelector(selectSFXWorkerTask(workerId));
 	const worker = useAppSelector(selectSFXWorkerById(workerId));
 
-	const onFinish = useCallback(() => {
-		if (task?.status !== "playing" || worker?.status !== "playing") {
+	const onFinish = useCallback(async () => {
+		if (!task || !worker) {
 			return;
 		}
 

@@ -9,7 +9,7 @@ export type SoundProviderProps = PropsWithChildren & {
 };
 
 export const SoundProvider = ({
-	workersCount = 1,
+	workersCount = 5,
 	children,
 }: SoundProviderProps) => {
 	const enabled = useAppSelector(selectSoundEnabled);

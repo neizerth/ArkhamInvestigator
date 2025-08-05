@@ -7,5 +7,10 @@ const empty: SoundQueueItem[] = [];
 
 export const selectIdleSFXWorkers = createSelector(
 	[selectSFXWorkers],
-	(workers) => (workers || empty).filter(propEq("idle", "status")),
+	(workers) => {
+		if (!workers) {
+			return empty;
+		}
+		return workers.filter(propEq("idle", "status"));
+	},
 );
