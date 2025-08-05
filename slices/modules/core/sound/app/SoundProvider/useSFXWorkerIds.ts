@@ -6,6 +6,7 @@ import { registerSFXWorkers } from "../../shared/lib";
 
 export const useSFXWorkerIds = (count: number) => {
 	const dispatch = useAppDispatch();
+
 	const ids = useMemo(() => {
 		return range(0, count).map(() => v4());
 	}, [count]);
