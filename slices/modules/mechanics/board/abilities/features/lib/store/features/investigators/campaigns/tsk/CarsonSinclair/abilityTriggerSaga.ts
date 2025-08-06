@@ -4,7 +4,7 @@ import { createCancelModalAction } from "@modules/core/modal/shared/actions/canc
 import { createConfirmModalAction } from "@modules/core/modal/shared/actions/confirm/lib";
 import { AbilityCode } from "@modules/mechanics/board/abilities/shared/config";
 import { put, takeEvery } from "redux-saga/effects";
-import { giveAction } from "./giveAction";
+import { giveAction } from "./giveAction/sagas";
 import { type SelectModalDataResult, selectModalData } from "./selectModalData";
 
 const filterAction = (action: unknown) => {

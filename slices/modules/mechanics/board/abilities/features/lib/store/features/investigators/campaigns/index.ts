@@ -1,13 +1,13 @@
 import { fork } from "redux-saga/effects";
-import { TheDunwichLegacyInvestigatorAbilitySaga as TheDunwichLegacySaga } from "./dwl";
-import { EdgeOfTheEarthInvestigatorAbilitySaga as EdgeOfTheEarthSaga } from "./eoe";
-import { TheFeastOfHemlockValeInvestigatorAbilitySaga as TheFeastOfHemlockValeSaga } from "./fhv";
-import { ThePathToCarcosaInvestigatorAbilitySaga as ThePathToCarcosaSaga } from "./ptc";
-import { TheCircleUndoneInvestigatorAbilitySaga as TheCircleUndoneSaga } from "./tcu";
-import { TheDrownedCityInvestigatorAbilitySaga as TheDrownedCitySaga } from "./tdc";
-import { TheForgottenAgeInvestigatorAbilitySaga as TheForgottenAgeSaga } from "./tfa";
-import { TheInnsmouthConspiracyInvestigatorAbilitySaga as TheInnsmouthConspiracySaga } from "./tic";
-import { TheScarletKeysInvestigatorAbilitySaga as TheScarletKeysSaga } from "./tsk";
+import { TheDunwichLegacyInvestigatorAbilitySaga as TheDunwichLegacySaga } from "./dwl/sagas";
+import { EdgeOfTheEarthInvestigatorAbilitySaga as EdgeOfTheEarthSaga } from "./eoe/sagas";
+import { TheFeastOfHemlockValeInvestigatorAbilitySaga as TheFeastOfHemlockValeSaga } from "./fhv/sagas";
+import { ThePathToCarcosaInvestigatorAbilitySaga as ThePathToCarcosaSaga } from "./ptc/sagas";
+import { TheCircleUndoneInvestigatorAbilitySaga as TheCircleUndoneSaga } from "./tcu/sagas";
+import { TheDrownedCityInvestigatorAbilitySaga as TheDrownedCitySaga } from "./tdc/sagas";
+import { TheForgottenAgeInvestigatorAbilitySaga as TheForgottenAgeSaga } from "./tfa/sagas";
+import { TheInnsmouthConspiracyInvestigatorAbilitySaga as TheInnsmouthConspiracySaga } from "./tic/sagas";
+import { TheScarletKeysInvestigatorAbilitySaga as TheScarletKeysSaga } from "./tsk/sagas";
 
 export function* campaignsInvestigatorAbilitySaga() {
 	yield fork(TheDunwichLegacySaga);
