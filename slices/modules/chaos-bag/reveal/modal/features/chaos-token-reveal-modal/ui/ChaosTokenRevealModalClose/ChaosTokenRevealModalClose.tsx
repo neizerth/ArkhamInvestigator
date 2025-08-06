@@ -21,7 +21,7 @@ export const ChaosTokenRevealModalClose = (
 
 	return (
 		<C.Container {...props} onPress={close}>
-			<C.CloseIcon icon="close" />
+			<C.CloseIcon icon="dismiss" />
 		</C.Container>
 	);
 };
