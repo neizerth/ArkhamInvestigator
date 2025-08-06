@@ -14,7 +14,7 @@ export const Button: typeof IconButton = styled(IconButton).attrs({
 	iconStyle: {
 		color: color.light10,
 		fontSize: 28,
-		lineHeight: 30,
+		lineHeight: 28,
 	},
 })`
 	width: 48px;

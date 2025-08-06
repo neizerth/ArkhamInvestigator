@@ -3,7 +3,7 @@ import { View, type ViewProps } from "react-native";
 import styled, { css } from "styled-components/native";
 import { assetsSize } from "../../../../../../../config";
 import { SidebarIconButton } from "../../SidebarIconButton";
-import { ChaosBagButton } from "../ChaosBagButton";
+import { ChaosBagButton } from "../button";
 
 type ContainerProps = ViewProps & {
 	single: boolean;

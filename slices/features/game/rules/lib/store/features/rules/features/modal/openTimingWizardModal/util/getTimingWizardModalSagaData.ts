@@ -6,7 +6,6 @@ import {
 } from "../../../../selectors";
 import type { openTimingWizardModal } from "../openTimingWizardModal";
 
-import type { BaseModalActionTitle } from "@modules/core/modal/shared/base/model";
 import { selectCurrentFaction } from "@modules/mechanics/board/base/entities/lib";
 import { dec, inc } from "ramda";
 import type {
@@ -15,11 +14,6 @@ import type {
 } from "../../../../../../../../model";
 
 type Payload = ActionCreatorPayload<typeof openTimingWizardModal>;
-
-type StepNavigation = {
-	step: TimingPhaseStep;
-	title: BaseModalActionTitle;
-};
 
 export type TimingWizardModalSagaData = PropsWithFaction & {
 	step: TimingPhaseStep;

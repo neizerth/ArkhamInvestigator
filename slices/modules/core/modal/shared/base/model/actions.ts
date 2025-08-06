@@ -1,16 +1,9 @@
-import type { TOptions } from "i18next";
+import type { I18NText } from "@modules/core/i18n/shared/model";
 import type { ViewProps } from "react-native";
-
-export type BaseModalActionTitle =
-	| string
-	| {
-			i18nKey: string;
-			data?: TOptions;
-	  };
 
 export type BaseModalAction = {
 	id: string;
-	title: BaseModalActionTitle;
+	title: I18NText;
 	icon?: string;
 	primary?: boolean;
 	close?: boolean;

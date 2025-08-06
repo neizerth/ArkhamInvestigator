@@ -1,10 +1,10 @@
+import { useI18NText } from "@modules/core/i18n/shared/lib";
 import type {
 	BaseModalAction,
 	BaseModalData,
 } from "@modules/core/modal/shared/base/model";
 import { useAppDispatch } from "@shared/lib";
 import { useCallback } from "react";
-import { useTranslation } from "react-i18next";
 import type { ViewProps } from "react-native";
 import { closeModal } from "../../lib";
 import * as C from "./FactionModal.components";
@@ -23,7 +23,7 @@ export function FactionModal<
 	D extends BaseModalData<A>,
 >({ data, children, onClose, ...props }: FactionModalProps<A, D>) {
 	const dispatch = useAppDispatch();
-	const { t } = useTranslation();
+	const translate = useI18NText();
 
 	const close = useCallback(() => {
 		onClose?.();
@@ -35,8 +35,8 @@ export function FactionModal<
 	}, [onClose, dispatch]);
 	const { faction = "neutral", actions } = data;
 
-	const title = t(data.title);
-	const subtitle = data.subtitle && t(data.subtitle);
+	const title = translate(data.title);
+	const subtitle = data.subtitle && translate(data.subtitle);
 
 	const cardActions = useFactionModalActions(actions);
 

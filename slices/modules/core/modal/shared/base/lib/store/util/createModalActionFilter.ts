@@ -25,6 +25,7 @@ export function createModalActionFilter<
 		if (!modalActionProcessed.match(action)) {
 			return false;
 		}
+
 		const { payload } = action;
 		const { modalAction } = payload;
 

@@ -134,6 +134,11 @@
 	"chaosToken.autoFail.effect": "Проверка автоматически провалена",
 
 	"defeat.modal.text": "Выберите другого сыщика",
+
+	"reveal.startNewConfirm.title": "Продолжить проверку?",
+	"reveal.startNewConfirm.text": "У вас осталась проверка{{skillCheck}}. Продолжить её?",
+	"reveal.startNewConfirm.startNew": "Начать новую",
+
 	"Defeated": "Поражение",
 	"Change": "Сменить",
 
