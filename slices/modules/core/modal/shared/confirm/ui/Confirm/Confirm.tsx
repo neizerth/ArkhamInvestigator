@@ -1,4 +1,4 @@
-import { useTranslation } from "react-i18next";
+import { useI18NText } from "@modules/core/i18n/shared/lib";
 import type { BaseModalAction } from "../../../base/model";
 import type { FactionModalProps } from "../../../base/ui";
 import type { ConfirmModalData } from "../../model";
@@ -13,9 +13,9 @@ export function Confirm<
 	A extends BaseModalAction,
 	D extends ConfirmModalData<A>,
 >(props: ConfirmProps<A, D>) {
-	const { t } = useTranslation();
+	const translate = useI18NText();
 	const { data } = props;
-	const text = t(data.text);
+	const text = translate(data.text);
 
 	return (
 		<C.Container {...props}>

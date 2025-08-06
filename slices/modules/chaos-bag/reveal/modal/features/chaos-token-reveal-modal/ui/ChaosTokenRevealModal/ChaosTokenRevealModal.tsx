@@ -9,6 +9,7 @@ export const ChaosTokenRevealModal = (props: ChaosTokenRevealModalProps) => {
 	return (
 		<C.Container {...props}>
 			<ContextProvider>
+				<C.Close />
 				<C.Content>
 					<C.TopView />
 

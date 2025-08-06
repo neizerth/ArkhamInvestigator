@@ -3,7 +3,7 @@ import {
 	selectSkillCheckData,
 	selectSkillCheckType,
 } from "@modules/board/skill-check/shared/lib";
-import { startChaosBagReveal } from "@modules/chaos-bag/reveal/base/entities/lib/store/features/startChaosBagReveal";
+import { startChaosBagReveal } from "@modules/chaos-bag/reveal/base/entities/lib/store/features/startReveal/startChaosBagReveal";
 import {
 	formatSkillCheckValue as formatValue,
 	getSkillCheckValue,

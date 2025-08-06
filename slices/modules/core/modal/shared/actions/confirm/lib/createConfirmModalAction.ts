@@ -3,7 +3,7 @@ import type { ConfirmModalAction } from "../model";
 
 type ConfirmModalOptions = Omit<
 	PickPartial<ConfirmModalAction, "title" | "data">,
-	"type" | "primary"
+	"type"
 >;
 
 export const createConfirmModalAction = (
@@ -13,7 +13,7 @@ export const createConfirmModalAction = (
 	close: true,
 	icon: "check",
 	data: null,
+	primary: true,
 	...options,
 	type: "confirm",
-	primary: true,
 });

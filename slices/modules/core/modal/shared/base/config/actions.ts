@@ -1,4 +1,4 @@
 export const BaseModalActionId = {
-	close: "close",
+	cancel: "cancel",
 	confirm: "confirm",
 };

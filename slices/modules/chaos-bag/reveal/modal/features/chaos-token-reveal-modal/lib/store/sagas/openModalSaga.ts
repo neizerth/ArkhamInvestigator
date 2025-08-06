@@ -1,4 +1,7 @@
-import { startChaosBagRevealInternal } from "@modules/chaos-bag/reveal/base/shared/lib";
+import {
+	continueChaosBagReveal,
+	startNewChaosBagReveal,
+} from "@modules/chaos-bag/reveal/base/entities/lib";
 import { CustomModalId } from "@modules/core/modal/entities/base/config";
 import { openModal } from "@modules/core/modal/shared/base/lib";
 import { put, takeEvery } from "redux-saga/effects";
@@ -13,5 +16,6 @@ function* worker() {
 }
 
 export function* openModalSaga() {
-	yield takeEvery(startChaosBagRevealInternal.match, worker);
+	yield takeEvery(startNewChaosBagReveal.match, worker);
+	yield takeEvery(continueChaosBagReveal.match, worker);
 }

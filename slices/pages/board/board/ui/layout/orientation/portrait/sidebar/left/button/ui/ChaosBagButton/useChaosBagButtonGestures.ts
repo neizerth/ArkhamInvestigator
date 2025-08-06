@@ -1,16 +1,12 @@
 import { openReferenceCard } from "@entities/reference-card";
 import { startChaosBagReveal } from "@modules/chaos-bag/reveal/base/entities/lib";
-import { useSwipe } from "@modules/core/touch/shared/lib";
+import { useLongPress, useSwipe, useTap } from "@modules/core/touch/shared/lib";
 import { routes } from "@shared/config";
 import { useAppDispatch, usePage } from "@shared/lib";
 import { useCallback } from "react";
-import type { ViewProps } from "react-native";
-import { Gesture, GestureDetector } from "react-native-gesture-handler";
-import * as C from "./ChaosBagButton.components";
+import { Gesture } from "react-native-gesture-handler";
 
-export type ChaosBagButtonProps = ViewProps;
-
-export const ChaosBagButton = (props: ChaosBagButtonProps) => {
+export const useChaosBagButtonGestures = () => {
 	const dispatch = useAppDispatch();
 	const goToPage = usePage();
 
@@ -25,7 +21,6 @@ export const ChaosBagButton = (props: ChaosBagButtonProps) => {
 	const onSwipeUp = useCallback(() => {
 		dispatch(openReferenceCard());
 	}, [dispatch]);
-
 	const chaosBagSwipeRight = useSwipe({
 		direction: "right",
 		onSwipe: revealToken,
@@ -41,22 +36,21 @@ export const ChaosBagButton = (props: ChaosBagButtonProps) => {
 		onSwipe: onSwipeUp,
 	});
 
+	const longPress = useLongPress({
+		onLongPress: revealToken,
+	});
+
+	const tap = useTap({
+		onTap: goToPage(routes.chaosBagPreview),
+	});
+
 	const chaosBagGestures = [
 		chaosBagSwipeRight,
 		chaosBagSwipeDown,
 		chaosBagSwipeUp,
+		longPress,
+		tap,
 	];
 
-	const chaosBagGestureConfig = Gesture.Exclusive(...chaosBagGestures);
-
-	return (
-		<GestureDetector gesture={chaosBagGestureConfig}>
-			<C.Button
-				{...props}
-				icon="chaos-bag-thin"
-				onPress={goToPage(routes.chaosBagPreview)}
-				onLongPress={revealToken}
-			/>
-		</GestureDetector>
-	);
+	return Gesture.Exclusive(...chaosBagGestures);
 };

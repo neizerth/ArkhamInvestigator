@@ -9,7 +9,7 @@ import {
 	setSkillCheckDifficulty,
 	toggleSkillCheckDifficultyType,
 } from "@modules/board/skill-check/shared/lib";
-import { startChaosBagReveal } from "@modules/chaos-bag/reveal/base/entities/lib/store/features/startChaosBagReveal";
+import { startChaosBagReveal } from "@modules/chaos-bag/reveal/base/entities/lib/store/features/startReveal/startChaosBagReveal";
 import { useSwipe } from "@modules/core/touch/shared/lib";
 import { goBack, useAppDispatch, useAppSelector } from "@shared/lib";
 import { useCallback } from "react";

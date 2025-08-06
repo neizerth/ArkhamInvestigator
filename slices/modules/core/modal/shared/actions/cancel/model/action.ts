@@ -1,5 +1,6 @@
 import type { BaseModalAction } from "../../../base/model";
 
-export type CancelModalAction = BaseModalAction & {
+export type CancelModalAction<T = unknown> = BaseModalAction & {
 	type: "cancel";
+	data?: T;
 };

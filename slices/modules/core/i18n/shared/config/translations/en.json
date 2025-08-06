@@ -130,6 +130,11 @@
 	"board.help.syncScenarioClues": "Enables/disables synchronization of scenario and investigator clues: clues added to the scenario will be removed from the investigator",
 
 	"defeat.modal.text": "Choose other investigator",
+
+	"reveal.startNewConfirm.title": "Continue the skill test?",
+	"reveal.startNewConfirm.text": "You have an unfinished test{{skillCheck}}. Do you want to continue it?",
+	"reveal.startNewConfirm.startNew": "Start new",
+
 	"Defeated": "Defeated",
 	"Change": "Change",
 

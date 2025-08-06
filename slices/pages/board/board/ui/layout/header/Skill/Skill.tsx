@@ -6,7 +6,7 @@ import {
 	setCurrentActualPropValue,
 } from "@modules/board/base/shared/lib";
 import { startSkillCheck } from "@modules/board/skill-check/shared/lib";
-import { startChaosBagReveal } from "@modules/chaos-bag/reveal/base/entities/lib/store/features/startChaosBagReveal";
+import { startChaosBagReveal } from "@modules/chaos-bag/reveal/base/entities/lib/store/features/startReveal/startChaosBagReveal";
 import {
 	selectShowAdditionalInformation,
 	signedNumber,

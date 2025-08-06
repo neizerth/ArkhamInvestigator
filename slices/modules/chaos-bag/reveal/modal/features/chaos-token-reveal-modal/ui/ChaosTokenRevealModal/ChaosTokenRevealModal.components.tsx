@@ -1,6 +1,8 @@
+import { statusBarHeight } from "@shared/config";
 import type { View } from "react-native";
 import styled from "styled-components/native";
 import { ChaosTokenOneMoreRevealLoader } from "../ChaosTokenOneMoreRevealLoader";
+import { ChaosTokenRevealModalClose } from "../ChaosTokenRevealModalClose";
 import { ChaosTokenRevealModalContainer } from "../ChaosTokenRevealModalContainer";
 import { ChaosTokenRevealModalContent } from "../ChaosTokenRevealModalContent";
 import {
@@ -63,4 +65,12 @@ export const RightView: typeof LeftPanel = styled(RightPanel)`
 
 export const CenterView: typeof CenterPanel = styled(CenterPanel)`
 
+`;
+
+export const Close: typeof ChaosTokenRevealModalClose = styled(
+	ChaosTokenRevealModalClose,
+)`
+  position: absolute;
+  top: ${statusBarHeight}px;
+  right: 0;
 `;
