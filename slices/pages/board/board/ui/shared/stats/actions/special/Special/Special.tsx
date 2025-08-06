@@ -5,6 +5,7 @@ import { getIconStyle } from "./Special.styles";
 export type SpecialProps = TouchableOpacityProps & {
 	icon: string;
 	value: boolean;
+	enabled?: boolean;
 };
 
 export const Special = ({ value, icon, ...props }: SpecialProps) => {

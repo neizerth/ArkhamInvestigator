@@ -1,13 +1,26 @@
-import { TouchableOpacity } from "@modules/core/touch/shared/ui";
+import {
+	TouchableOpacity,
+	type TouchableOpacityProps,
+} from "@modules/core/touch/shared/ui";
 import { color } from "@shared/config";
 import { Icon as BaseIcon } from "@shared/ui";
-import styled from "styled-components/native";
+import type { FC } from "react";
+import styled, { css } from "styled-components/native";
 
-export const Container: typeof TouchableOpacity = styled(TouchableOpacity)`
+type ContainerProps = TouchableOpacityProps & {
+	enabled?: boolean;
+};
+
+export const Container: FC<ContainerProps> = styled(TouchableOpacity)`
   height: 38px;
   width: 38px;
   justify-content: center;
   align-items: center;
+  ${({ enabled = true }: ContainerProps) =>
+		!enabled &&
+		css`
+    opacity: 0.6;
+  `}
 `;
 
 export const Icon: typeof BaseIcon = styled(BaseIcon)`

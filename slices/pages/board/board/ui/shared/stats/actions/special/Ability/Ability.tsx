@@ -4,6 +4,7 @@ import {
 	setBoardAbilityUse,
 } from "@modules/board/abilities/shared/lib";
 import type { TouchableOpacityProps } from "@modules/core/touch/shared/ui";
+import { selectCanUseBoardAbility } from "@modules/mechanics/board/abilities/features/base/lib";
 import { useAppDispatch, useAppSelector } from "@shared/lib";
 import type { InvestigatorAbility } from "arkham-investigator-data";
 import { useCallback } from "react";
@@ -18,6 +19,7 @@ export const Ability = ({ ability, ...props }: AbilityProps) => {
 	const dispatch = useAppDispatch();
 	const { id } = ability;
 
+	const canUse = useAppSelector(selectCanUseBoardAbility(id));
 	const isUsed = useAppSelector(selectIsCurrentAbilityUsed(id));
 	const icon = getAbilityIcon(ability);
 	const onPress = useAbility(ability);
@@ -32,9 +34,12 @@ export const Ability = ({ ability, ...props }: AbilityProps) => {
 		);
 	}, [dispatch, ability.id]);
 
+	const enabled = isUsed || canUse;
+
 	return (
 		<Special
 			{...props}
+			enabled={enabled}
 			value={!isUsed}
 			icon={icon}
 			onPress={onPress}
