@@ -1,7 +1,7 @@
 import { boardSelectModalConfirmed } from "@modules/core/modal/entities/board-select/lib";
 import { AbilityCode } from "@modules/mechanics/board/abilities/shared/config";
 import { put, takeEvery } from "redux-saga/effects";
-import { giveAction } from "./giveAction";
+import { giveAction } from "./giveAction/sagas";
 
 const filterAction = (action: unknown) => {
 	if (!boardSelectModalConfirmed.match(action)) {

@@ -1,6 +1,6 @@
 import { fork } from "redux-saga/effects";
 import { HankSamsonAbilitySaga } from "./HankSamsonAbilitySaga";
-import { KohakuNarukamiAbilitySaga } from "./KohakuNarukami";
+import { KohakuNarukamiAbilitySaga } from "./KohakuNarukami/sagas";
 import { ShatteredSelfAbilitySaga } from "./ShatteredSelfAbilitySaga";
 
 export function* TheFeastOfHemlockValeInvestigatorAbilitySaga() {
