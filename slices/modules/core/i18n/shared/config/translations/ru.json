@@ -122,7 +122,7 @@
 	"chaosBag.removeToken": "{{name}} удаляет из мешка {{count}} {{token}}",
 
 	"chaosBag.cantAddToken": "Нельзя добавить больше {{limit}} {{character}}",
-	"chaosBag.cantRemoveToken": "Нельзя удалить {{count}} {{character}}, в мешке осталось {{available}}",
+	"chaosBag.cantRemoveToken": "Нельзя удалить {{count}} {{character}}, в мешке {{available}} {{character}}",
 
 	"mythos.doom": "Добавлена 1 Безысходность. Итого: {{doom}}",
 	"timing.step.name": "Шаг {{name}}",
