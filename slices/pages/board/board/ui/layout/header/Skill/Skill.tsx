@@ -83,7 +83,7 @@ export const Skill = ({ width, height, type, ...props }: SkillProps) => {
 	);
 
 	const renderItem = useCallback(
-		(props: PickerItemInfo) => {
+		(props: PickerItemInfo<number>) => {
 			const { item } = props;
 
 			const diff = item - baseValue;

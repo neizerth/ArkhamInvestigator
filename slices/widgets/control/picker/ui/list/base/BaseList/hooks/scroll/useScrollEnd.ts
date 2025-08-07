@@ -4,7 +4,7 @@ import type { BaseListProps } from "../../BaseList.types";
 
 const END_TIMEOUT = 50;
 
-export const useScrollEnd = (props: BaseListProps) => {
+export function useScrollEnd<T>(props: BaseListProps<T>) {
 	const {
 		onScrollEnd,
 		onLastScroll,
@@ -48,4 +48,4 @@ export const useScrollEnd = (props: BaseListProps) => {
 		onScroll,
 		onMomentumScrollEnd,
 	};
-};
+}

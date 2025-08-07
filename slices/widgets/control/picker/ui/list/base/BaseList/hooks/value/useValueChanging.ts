@@ -5,7 +5,7 @@ import { range } from "ramda";
 import { useCallback, useRef } from "react";
 import type { BaseListProps } from "../../BaseList.types";
 
-export const useValueChanging = (props: BaseListProps) => {
+export function useValueChanging<T>(props: BaseListProps<T>) {
 	const {
 		onScroll: onScrollProp,
 		onScrollBeginDrag: onScrollBeginDragProp,
@@ -99,7 +99,7 @@ export const useValueChanging = (props: BaseListProps) => {
 		onScrollBeginDrag,
 		onScrollEnd,
 	};
-};
+}
 
 const getIndexes = (index: number, prevIndex: number) => {
 	if (index > prevIndex) {

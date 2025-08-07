@@ -1,8 +1,8 @@
 import { safeIndexOf } from "@shared/lib";
 
-type Options = {
-	value?: number;
-	data: number[];
+type Options<T> = {
+	value?: T;
+	data: T[];
 };
-export const getValueIndex = ({ value, data }: Options) =>
+export const getValueIndex = <T>({ value, data }: Options<T>) =>
 	Math.max(safeIndexOf(value, data), 0);

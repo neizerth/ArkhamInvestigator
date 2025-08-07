@@ -10,7 +10,7 @@ type WithPickerValueOptions = {
 };
 
 export type WithPickerValueProps = Omit<
-	PickerProps,
+	PickerProps<number>,
 	"renderItem" | "value" | "data" | "children" | "style"
 > &
 	PropsWithChildren & {

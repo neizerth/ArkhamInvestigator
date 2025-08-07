@@ -1,6 +1,6 @@
-import type { SkillCheckResult } from "@modules/board/skill-check/shared/model";
 import type { ChaosTokenType } from "@modules/chaos-bag/base/shared/model";
 import type { RevealedChaosBagToken } from "@modules/chaos-bag/reveal/base/shared/model";
+import type { ChaosTokenValue } from "@modules/chaos-bag/value/shared/model";
 import { propEq } from "ramda";
 
 type Options = {
@@ -11,7 +11,7 @@ type Options = {
 export const getSkillCheckResult = ({
 	skillValue,
 	tokens,
-}: Options): SkillCheckResult => {
+}: Options): ChaosTokenValue => {
 	const getCount = (type: ChaosTokenType) =>
 		tokens.filter(propEq(type, "type")).length;
 

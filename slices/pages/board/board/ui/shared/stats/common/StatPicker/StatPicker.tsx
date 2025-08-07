@@ -5,7 +5,7 @@ import { type FC, memo, useCallback } from "react";
 import * as C from "./StatPicker.components";
 import { defaultStyles } from "./StatPicker.styles";
 
-export type StatPickerProps = Omit<PickerProps, "renderItem"> & {
+export type StatPickerProps = Omit<PickerProps<number>, "renderItem"> & {
 	valueStyle?: ValueProps["style"];
 	textStyle?: ValueProps["textStyle"];
 	Component?: FC<ValueProps>;
@@ -13,16 +13,16 @@ export type StatPickerProps = Omit<PickerProps, "renderItem"> & {
 	zeroSign?: string;
 };
 
-export const StatPicker = ({
+export function StatPicker({
 	valueStyle,
 	textStyle,
 	Component = C.Value,
 	signed,
 	zeroSign = "",
 	...props
-}: StatPickerProps) => {
+}: StatPickerProps) {
 	const renderItem = useCallback(
-		(props: PickerItemInfo) => {
+		(props: PickerItemInfo<number>) => {
 			const { item } = props;
 
 			const value = signed
@@ -44,6 +44,6 @@ export const StatPicker = ({
 	);
 
 	return <C.Picker {...defaultStyles} {...props} renderItem={renderItem} />;
-};
+}
 
 export const StatPickerMemo = memo(StatPicker);

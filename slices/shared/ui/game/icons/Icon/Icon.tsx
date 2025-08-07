@@ -21,6 +21,7 @@ export const Icon = ({ icon, style, scaleType, ...props }: IconProps) => {
 	const item = useAppSelector(selectIcon(icon));
 
 	if (!item) {
+		// console.warn(`icon ${icon} not found`);
 		return null;
 	}
 

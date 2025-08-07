@@ -2,8 +2,8 @@ import type { NativeScrollEvent, NativeSyntheticEvent } from "react-native";
 
 export type PickerScrollEvent = NativeSyntheticEvent<NativeScrollEvent>;
 
-export type PickerChangeEvent = {
-	value?: number;
+export type PickerChangeEvent<T = number> = {
+	value?: T;
 	index: number;
 };
 

@@ -1,7 +1,7 @@
 import { useCallback, useState } from "react";
 import type { PickerListProps } from "../PickerList.types";
 
-export const useLongPress = (props: PickerListProps) => {
+export const useLongPress = <T>(props: PickerListProps<T>) => {
 	const {
 		onLongPress: onLongPressProp,
 		onUserDeactivated: onUserDeactivatedProp,

@@ -15,10 +15,11 @@ import {
 	selectChaosTokenValueByType as selectTokenValue,
 } from "@modules/chaos-bag/value/entities/lib";
 import { isChaosTokenModified } from "@modules/chaos-bag/value/shared/lib";
+import type { ChaosTokenValue } from "@modules/chaos-bag/value/shared/model";
 import * as C from "./ChaosTokenValuePicker.components";
 
 export type ChaosTokenValuePickerProps = Omit<
-	PickerProps,
+	PickerProps<ChaosTokenValue>,
 	"renderItem" | "data"
 > &
 	Partial<PropsWithBoardId> & {
@@ -55,7 +56,7 @@ export const ChaosTokenValuePicker = ({
 	);
 
 	const setValue = useCallback(
-		({ value = 0 }: PickerChangeEvent) => {
+		({ value = 0 }: PickerChangeEvent<ChaosTokenValue>) => {
 			dispatch(
 				setChaosTokenValue({
 					boardId,
@@ -72,9 +73,16 @@ export const ChaosTokenValuePicker = ({
 		value,
 	});
 
-	const renderItem: PickerListRenderItem = useCallback(
+	const renderItem: PickerListRenderItem<ChaosTokenValue> = useCallback(
 		({ item }) => {
-			const tokenValue = signedNumber(item);
+			if (item === "fail") {
+				return <C.AutoFail type={type} />;
+			}
+			if (item === "success") {
+				return <C.AutoSuccess type={type} />;
+			}
+			const value = typeof item === "number" ? item : 0;
+			const tokenValue = signedNumber(value);
 			return (
 				<C.TokenValue
 					value={tokenValue}

@@ -42,7 +42,7 @@ export const DifficultyControl = (props: DifficultyControlProps) => {
 		[dispatch],
 	);
 
-	const renderItem: PickerListRenderItem = useCallback(({ item }) => {
+	const renderItem: PickerListRenderItem<number> = useCallback(({ item }) => {
 		return <C.Difficulty value={item} />;
 	}, []);
 

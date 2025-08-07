@@ -3,7 +3,7 @@ import { useCallback, useRef } from "react";
 import type { GestureResponderEvent } from "react-native";
 import type { BaseListProps } from "../../BaseList.types";
 
-export const useUserActivation = (props: BaseListProps) => {
+export function useUserActivation<T>(props: BaseListProps<T>) {
 	const {
 		onUserActivated: onUserActivateProp,
 		onUserDeactivated: onUserDeactivatedProp,
@@ -71,4 +71,4 @@ export const useUserActivation = (props: BaseListProps) => {
 		onPressOut,
 		onScrollEnd,
 	};
-};
+}

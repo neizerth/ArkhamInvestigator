@@ -10,12 +10,12 @@ import type {
 	PickerScrollProps,
 } from "../../../model";
 
-export type PickerListProps = PickerBaseListProps &
+export type PickerListProps<T> = PickerBaseListProps<T> &
 	PickerScrollProps &
 	PickerAnimationProps &
 	PickerActivationProps &
 	PickerBasePressProps &
 	PickerPressProps &
 	PickerGestureProps &
-	PickerRenderProps &
+	PickerRenderProps<T> &
 	PickerHapticScrollProps;

@@ -9,12 +9,14 @@ import type {
 	PickerScrollProps,
 } from "../../../../model";
 
-export type BaseListProps = PickerBaseListProps &
+export type BaseListProps<T> = PickerBaseListProps<T> &
 	PickerScrollProps &
 	PickerAnimationProps &
 	PickerActivationProps &
 	PickerBasePressProps &
-	PickerRenderProps & {
+	PickerRenderProps<T> & {
 		itemContainerStyle?: ViewStyle;
-		ref?: RefObject<FlatList<number> | null>;
+		ref?: RefObject<FlatList<T> | null>;
 	};
+
+export type BaseListItemValue<T> = ArrayLike<T> | null | undefined;
