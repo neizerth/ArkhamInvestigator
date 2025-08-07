@@ -8,6 +8,7 @@ import {
 import { createSelector } from "@reduxjs/toolkit";
 import { rangeStep, selectReferenceCardTokens } from "@shared/lib";
 import { propEq, range } from "ramda";
+import { getSelectRange, getValueRange } from "../../logic";
 
 const MAX_VALUE = 20;
 const MIN_VALUE = -21;
@@ -37,8 +38,12 @@ export const selectChaosTokenRangeByType = ({ type, boardId }: Options) =>
 			}
 			const item = data.find(propEq(type, "token"));
 
-			if (!item || item.type === "value") {
+			if (!item) {
 				return defaultData;
+			}
+
+			if (item.type === "value") {
+				return getValueRange(item);
 			}
 
 			if (item.type === "counter") {
@@ -48,7 +53,7 @@ export const selectChaosTokenRangeByType = ({ type, boardId }: Options) =>
 			}
 
 			if (item.type === "select" && item.values) {
-				return item.values;
+				return getSelectRange(item);
 			}
 
 			return defaultData;

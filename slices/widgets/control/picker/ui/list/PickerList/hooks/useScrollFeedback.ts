@@ -3,7 +3,7 @@ import { useCallback, useRef } from "react";
 import type { PickerChangeEvent, PickerScrollEvent } from "../../../../model";
 import type { PickerListProps } from "../PickerList.types";
 
-export const useScrollFeedback = (props: PickerListProps) => {
+export const useScrollFeedback = <T>(props: PickerListProps<T>) => {
 	const {
 		onValueChanging: onValueChangingProp,
 		onScrollBeginDrag: onScrollBeginDragProp,
@@ -37,7 +37,7 @@ export const useScrollFeedback = (props: PickerListProps) => {
 		onLongPressProp?.();
 	}, [onLongPressProp]);
 
-	const onValueChanging = useUICallback<PickerChangeEvent>({
+	const onValueChanging = useUICallback<PickerChangeEvent<T>>({
 		payload: {
 			source: "picker",
 			type: "changing",
@@ -50,7 +50,7 @@ export const useScrollFeedback = (props: PickerListProps) => {
 		},
 	});
 
-	const onValueChanged = useUICallback<PickerChangeEvent>({
+	const onValueChanged = useUICallback<PickerChangeEvent<T>>({
 		payload: {
 			source: "picker",
 			type: "change",

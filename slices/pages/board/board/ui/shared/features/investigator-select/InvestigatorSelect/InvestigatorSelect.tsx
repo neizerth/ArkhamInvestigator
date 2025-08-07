@@ -27,7 +27,7 @@ export const InvestigatorSelect = ({ ...props }: InvestigatorSelectProps) => {
 	const prevIndex = currentIndex === 0 ? boards.length - 1 : currentIndex - 1;
 	const [scrollIndex, setScrollIndex] = useState(currentIndex);
 
-	const renderItem = useCallback((props: PickerItemInfo) => {
+	const renderItem = useCallback((props: PickerItemInfo<number>) => {
 		const { item } = props;
 
 		return <C.Value boardId={item} />;

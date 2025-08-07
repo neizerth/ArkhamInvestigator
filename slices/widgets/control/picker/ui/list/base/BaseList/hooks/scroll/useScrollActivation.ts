@@ -2,7 +2,7 @@ import type { PickerScrollEvent } from "@widgets/control/picker/model";
 import { useCallback, useRef } from "react";
 import type { BaseListProps } from "../../BaseList.types";
 
-export const useScrollActivation = (props: BaseListProps) => {
+export function useScrollActivation<T>(props: BaseListProps<T>) {
 	const {
 		onScrollEnd: onScrollEndProp,
 		onScrollDeactivated: onScrollDeactivatedProp,
@@ -53,4 +53,4 @@ export const useScrollActivation = (props: BaseListProps) => {
 		onDeactivated,
 		onScrollEnd,
 	};
-};
+}

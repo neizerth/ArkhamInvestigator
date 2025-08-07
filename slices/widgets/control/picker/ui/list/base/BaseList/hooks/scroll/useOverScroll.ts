@@ -1,11 +1,10 @@
-import { OVERSCROLL_TRESHOLD } from "@widgets/control/picker/config";
-import { getValueIndex } from "@widgets/control/picker/lib";
 import { useCallback, useRef } from "react";
 import type { GestureResponderEvent } from "react-native";
+import { OVERSCROLL_TRESHOLD } from "../../../../../../config";
+import { getValueIndex } from "../../../../../../lib";
 import type { BaseListProps } from "../../BaseList.types";
 
-type Props = BaseListProps;
-export const useOverScroll = (props: Props) => {
+export function useOverScroll<T>(props: BaseListProps<T>) {
 	const {
 		onTouchStart: onTouchStartProp,
 		onPressOut: onPressOutProp,
@@ -66,4 +65,4 @@ export const useOverScroll = (props: Props) => {
 		onPressOut,
 		onTouchMove,
 	};
-};
+}

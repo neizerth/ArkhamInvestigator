@@ -46,7 +46,7 @@ export const SkillValuePicker = (props: SkillValuePickerProps) => {
 		};
 	}, [skillType]);
 
-	const renderSkillValue: PickerListRenderItem = useCallback(
+	const renderSkillValue: PickerListRenderItem<number> = useCallback(
 		({ item }) => {
 			return <C.SkillValueItem value={item} strokeStyle={strokeStyle} />;
 		},

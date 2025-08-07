@@ -1,4 +1,5 @@
 import type { SkillCheckItem } from "@modules/board/skill-check/shared/model";
+import type { ChaosTokenValue } from "@modules/chaos-bag/value/shared/model";
 import { createSlice } from "@reduxjs/toolkit";
 import type { InvestigatorBoardNumericStat } from "@shared/model";
 import { createSliceState } from "redux-toolkit-helpers";
@@ -15,6 +16,7 @@ export type ChaosBagRevealState = {
 	skillCheckBoardId: number | null;
 
 	currentRevealedTokenId: string | null;
+	result: ChaosTokenValue | null;
 };
 
 const initialState: ChaosBagRevealState = {
@@ -25,6 +27,7 @@ const initialState: ChaosBagRevealState = {
 	skillCheckTitle: null,
 	skillValue: null,
 	currentRevealedTokenId: null,
+	result: null,
 };
 
 const state = createSliceState(initialState);
@@ -44,6 +47,7 @@ export const {
 	setSkillValue: setChaosBagSkillValue,
 	setSkillCheckTitle: setChaosBagSkillCheckTitle,
 	setSkillCheckExpression: setChaosBagSkillCheckExpression,
+	setResult: setChaosBagRevealResult,
 	setRevealedTokens,
 
 	addRevealedTokens,
@@ -64,6 +68,7 @@ export const {
 	selectSkillValue: selectChaosBagSkillValue,
 	selectSkillCheckTitle: selectChaosBagSkillCheckTitle,
 	selectSkillCheckExpression: selectChaosBagSkillCheckExpression,
+	selectResult: selectChaosBagRevealResult,
 } = chaosBagReveal.selectors;
 
 export default chaosBagReveal.reducer;

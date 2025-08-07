@@ -1,4 +1,5 @@
 import { isChaosTokenModified } from "@modules/chaos-bag/value/shared/lib";
+import type { ChaosTokenValue } from "@modules/chaos-bag/value/shared/model";
 import { size } from "@shared/config";
 import { signedNumber } from "@shared/lib";
 import { memo } from "react";
@@ -18,7 +19,7 @@ export type ChaosTokenPreviewProps = ViewProps &
 		sealOffset?: number;
 		tokenPadding?: number;
 		selected?: boolean;
-		value?: number;
+		value?: ChaosTokenValue;
 		defaultValue?: number;
 		showValue?: boolean;
 	};

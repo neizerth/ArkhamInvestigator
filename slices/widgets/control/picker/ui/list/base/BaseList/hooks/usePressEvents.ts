@@ -3,7 +3,7 @@ import type { GestureResponderEvent } from "react-native";
 import type { PickerScrollEvent } from "../../../../../model";
 import type { BaseListProps } from "../BaseList.types";
 
-export const usePressEvents = (props: BaseListProps) => {
+export function usePressEvents<T>(props: BaseListProps<T>) {
 	const {
 		onTouchStart: onTouchStartProp,
 		onPressIn,
@@ -61,4 +61,4 @@ export const usePressEvents = (props: BaseListProps) => {
 		onScrollEndDrag,
 		onTouchEnd,
 	};
-};
+}

@@ -1,11 +1,11 @@
 import { Value, type ValueProps, defaultValueFontSizes } from "@shared/ui";
 import { useMemo } from "react";
-import type { ChaosTokenType } from "../../model";
 import {
 	getChaosTokenValueColor,
-	getChaosTokenValueFontSizes,
 	getChaosTokenValueTextColor,
-} from "./ChaosTokenValue.styles";
+} from "../../lib";
+import type { ChaosTokenType } from "../../model";
+import { getChaosTokenValueFontSizes } from "./ChaosTokenValue.styles";
 
 export type ChaosTokenValueProps = ValueProps & {
 	type: ChaosTokenType;

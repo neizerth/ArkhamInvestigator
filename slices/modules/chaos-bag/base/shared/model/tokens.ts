@@ -1,3 +1,5 @@
+import type { ChaosTokenValue } from "@modules/chaos-bag/value/shared/model";
+
 export type ChaosTokenType = BaseChaosTokenType | SpecialChaosTokenType;
 
 export type BaseChaosTokenType =
@@ -47,4 +49,4 @@ export type ChaosBagToken = ChaosBagTokenData & {
 	id: string;
 };
 
-export type ChaosTokenValues = Partial<Record<ChaosTokenType, number>>;
+export type ChaosTokenValues = Partial<Record<ChaosTokenType, ChaosTokenValue>>;

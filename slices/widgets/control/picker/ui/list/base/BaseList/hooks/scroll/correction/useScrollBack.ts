@@ -8,7 +8,7 @@ import { useCallback, useRef } from "react";
 import type { GestureResponderEvent } from "react-native";
 import type { BaseListProps } from "../../../BaseList.types";
 
-export const useScrollBack = (props: BaseListProps) => {
+export function useScrollBack<T>(props: BaseListProps<T>) {
 	const {
 		onStartReached: onStartReachedProp,
 		onEndReached: onEndReachedProp,
@@ -110,4 +110,4 @@ export const useScrollBack = (props: BaseListProps) => {
 		onScroll,
 		onScrollBeginDrag,
 	};
-};
+}

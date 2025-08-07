@@ -1,5 +1,5 @@
 import { color } from "@shared/config";
-import { IconView, Row, TextView } from "@shared/ui";
+import { Icon, Row, TextView } from "@shared/ui";
 import { View } from "react-native";
 import styled from "styled-components/native";
 
@@ -30,5 +30,5 @@ export const Lower: typeof TextView = styled(TextView)`
   color: #dc3545;
 `;
 
-export const Stat: typeof IconView = styled(IconView)`
+export const Stat: typeof Icon = styled(Icon)`
 `;

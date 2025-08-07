@@ -2,17 +2,17 @@ import {
 	selectPickerDecelerationType,
 	selectPickerIntervalMomentum,
 } from "@modules/board/base/shared/lib";
-import { useAppSelector } from "@shared/lib";
+import { isObject, useAppSelector } from "@shared/lib";
 import { memo, useCallback, useMemo } from "react";
 import type { ListRenderItemInfo } from "react-native";
 import { REMOVE_CLIPPED_SUBVIEWS } from "../../../../../../../shared/config/device";
 import { getDataOffsets, getValueIndex } from "../../../../lib";
 import * as C from "./BaseList.components";
-import type { BaseListProps } from "./BaseList.types";
+import type { BaseListItemValue, BaseListProps } from "./BaseList.types";
 import { defaultRenderItemContainer } from "./defaultRenderItemContainer";
 import useBaseListHooks from "./hooks";
 
-export const BaseList = (baseProps: BaseListProps) => {
+export function BaseList<T>(baseProps: BaseListProps<T>) {
 	const props = useBaseListHooks(baseProps);
 	const {
 		itemHeight,
@@ -25,7 +25,7 @@ export const BaseList = (baseProps: BaseListProps) => {
 	const index = getValueIndex(baseProps);
 
 	const renderListItem = useCallback(
-		(info: ListRenderItemInfo<number>) => {
+		(info: ListRenderItemInfo<T>) => {
 			return renderItemContainer({
 				...info,
 				itemContainerStyle,
@@ -49,7 +49,7 @@ export const BaseList = (baseProps: BaseListProps) => {
 	);
 
 	const getItemLayout = useCallback(
-		(_: unknown, index: number) => ({
+		(_: BaseListItemValue<T>, index: number) => ({
 			length: itemHeight,
 			offset: itemHeight * index,
 			index: index,
@@ -64,6 +64,13 @@ export const BaseList = (baseProps: BaseListProps) => {
 		(state) => !selectPickerIntervalMomentum(state),
 	);
 
+	const keyExtractor = (item: T, index: number) => {
+		if (isObject(item)) {
+			return index.toString();
+		}
+		return String(item);
+	};
+
 	return (
 		<C.List
 			decelerationRate={decelerationRate}
@@ -74,12 +81,12 @@ export const BaseList = (baseProps: BaseListProps) => {
 			style={[props.style, style]}
 			data={data}
 			renderItem={renderListItem}
-			keyExtractor={(item) => item.toString()}
+			keyExtractor={keyExtractor}
 			snapToOffsets={snapToOffsets}
 			showsVerticalScrollIndicator={false}
 			removeClippedSubviews={REMOVE_CLIPPED_SUBVIEWS}
 		/>
 	);
-};
+}
 
 export const BaseListMemo = memo(BaseList);

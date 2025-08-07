@@ -8,7 +8,7 @@ import type { BaseListProps } from "../../BaseList.types";
 
 const getInactiveState = always(false);
 
-export const useValueSet = (props: BaseListProps) => {
+export function useValueSet<T>(props: BaseListProps<T>) {
 	const {
 		data,
 		onScrollBeginDrag: onScrollBeginDragProp,
@@ -20,7 +20,7 @@ export const useValueSet = (props: BaseListProps) => {
 		onScroll: onScrollProp,
 		itemHeight,
 	} = props;
-	const ref = useRef<FlatList<number>>(null);
+	const ref = useRef<FlatList<T>>(null);
 	const active = useRef(false);
 	const scrolling = useRef(false);
 	const offset = useRef(0);
@@ -127,4 +127,4 @@ export const useValueSet = (props: BaseListProps) => {
 		onTouchEnd,
 		onScrollBeginDrag,
 	};
-};
+}

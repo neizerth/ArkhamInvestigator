@@ -2,7 +2,8 @@ import type {
 	ChaosTokenType,
 	ChaosTokenValues,
 } from "@modules/chaos-bag/base/shared/model";
-import { signedNumber, useAppSelector } from "@shared/lib";
+import { formatChaosTokenValue } from "@modules/chaos-bag/value/shared/lib";
+import { useAppSelector } from "@shared/lib";
 import { fromPairs } from "ramda";
 import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
@@ -23,7 +24,7 @@ export const useDefaultChaosBagEffects = ({ tokenValues }: Options) => {
 			const value = tokenValues[type];
 
 			const effect = t(key, {
-				value: signedNumber(value || 0, "+"),
+				value: formatChaosTokenValue(value || 0),
 			});
 
 			return [type, effect] as [ChaosTokenType, string];

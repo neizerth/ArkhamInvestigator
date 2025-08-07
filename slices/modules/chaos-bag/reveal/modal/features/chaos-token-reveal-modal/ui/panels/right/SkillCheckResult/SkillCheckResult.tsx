@@ -2,7 +2,6 @@ import { signedNumber, useAppSelector } from "@shared/lib";
 import { useMemo } from "react";
 import type { ViewProps } from "react-native";
 
-import { selectBoardId } from "@modules/board/base/shared/lib";
 import { chaosToken } from "@modules/chaos-bag/base/shared/config";
 import {
 	selectShowSkillCheckResult,
@@ -16,10 +15,8 @@ export type SkillCheckResultProps = ViewProps;
 const tokenColor = chaosToken.color.types;
 
 export const SkillCheckResult = (props: SkillCheckResultProps) => {
-	const boardId = useAppSelector(selectBoardId("current"));
-
-	const result = useAppSelector(selectSkillCheckResult(boardId));
-	const succedBy = useAppSelector(selectSkillCheckSucceedByResult(boardId));
+	const result = useAppSelector(selectSkillCheckResult);
+	const succedBy = useAppSelector(selectSkillCheckSucceedByResult);
 	const show = useAppSelector(selectShowSkillCheckResult);
 
 	const fail = succedBy < 0 || result === "fail";

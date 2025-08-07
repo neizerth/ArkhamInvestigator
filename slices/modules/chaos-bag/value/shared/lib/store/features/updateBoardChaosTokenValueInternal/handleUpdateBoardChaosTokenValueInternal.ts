@@ -1,9 +1,12 @@
 import type { ChaosTokenType } from "@modules/chaos-bag/base/shared/model";
-import type { ChaosTokenValueHandler } from "@modules/chaos-bag/value/shared/model";
+import type {
+	ChaosTokenValue,
+	ChaosTokenValueHandler,
+} from "@modules/chaos-bag/value/shared/model";
 
 export type HandleUpdateBoardChaosTokenValueInternalPayload = {
 	boardId: number;
-	value: number;
+	value: ChaosTokenValue;
 	type: ChaosTokenType;
 };
 

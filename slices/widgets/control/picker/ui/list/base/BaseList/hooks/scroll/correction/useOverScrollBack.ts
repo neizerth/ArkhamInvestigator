@@ -8,7 +8,7 @@ import type { PickerScrollDirection } from "@widgets/control/picker/model/common
 import { useCallback, useRef } from "react";
 import type { BaseListProps } from "../../../BaseList.types";
 
-export const useOverScrollBack = (props: BaseListProps) => {
+export function useOverScrollBack<T>(props: BaseListProps<T>) {
 	const {
 		onScroll: onScrollProp,
 		onScrollBeginDrag: onScrollBeginDragProp,
@@ -125,4 +125,4 @@ export const useOverScrollBack = (props: BaseListProps) => {
 		onStartReached,
 		onEndReached,
 	};
-};
+}

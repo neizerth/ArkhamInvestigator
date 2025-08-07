@@ -4,7 +4,7 @@ import * as C from "./PickerList.components";
 import type { PickerListProps } from "./PickerList.types";
 import usePickerEffects from "./hooks";
 
-export const PickerList = (props: PickerListProps) => {
+export function PickerList<T>(props: PickerListProps<T>) {
 	const { onPress, onDoublePress, onLongPress, onSwipeLeft, onSwipeRight } =
 		props;
 	const scrollProps = usePickerEffects(props);
@@ -21,6 +21,6 @@ export const PickerList = (props: PickerListProps) => {
 			<C.List {...scrollProps} />
 		</PickerListGestures>
 	);
-};
+}
 
 export const PickerListMemo = memo(PickerList);

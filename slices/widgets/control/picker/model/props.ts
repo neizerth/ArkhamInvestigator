@@ -4,32 +4,38 @@ import type { ReactElement } from "react";
 import type {
 	GestureResponderEvent,
 	ListRenderItem,
+	StyleProp,
 	ViewStyle,
 } from "react-native";
 import type { ListRenderItemInfo } from "react-native";
-import type { FlatListPropsWithLayout } from "react-native-reanimated";
+import type {
+	AnimatedStyle,
+	FlatListPropsWithLayout,
+} from "react-native-reanimated";
 import type { PickerChangeEvent } from "./events";
 
-export type PickerRenderProp = (info: PickerContainerInfo) => ReactElement;
+export type PickerRenderProp<T> = (
+	info: PickerContainerInfo<T>,
+) => ReactElement;
 
-export type PickerListRenderItem = ListRenderItem<number>;
+export type PickerListRenderItem<T> = ListRenderItem<T>;
 
-export type PickerItemInfo = ListRenderItemInfo<number>;
+export type PickerItemInfo<T> = ListRenderItemInfo<T>;
 
-export type PickerContainerInfo = PickerItemInfo & {
-	renderItem?: PickerListRenderItem;
+export type PickerContainerInfo<T> = PickerItemInfo<T> & {
+	renderItem?: PickerListRenderItem<T>;
 	itemHeight?: number;
 	itemContainerStyle?: ViewStyle;
-	currentValue?: number;
+	currentValue?: T;
 };
 
-type ListProps = Omit<
-	FlatListPropsWithLayout<number>,
+type ListProps<T> = Omit<
+	FlatListPropsWithLayout<T>,
 	"data" | "renderItem" | "contentContainerStyle"
 >;
 
-export type PickerBaseListProps = ListProps &
-	PickerDataProps & {
+export type PickerBaseListProps<T> = ListProps<T> &
+	PickerDataProps<T> & {
 		itemHeight: number;
 	};
 
@@ -60,11 +66,11 @@ export type PickerActivationProps = {
 	onUserActivationChange?: (activated: boolean) => void;
 };
 
-export type PickerDataProps = {
-	data: number[];
-	value?: number;
-	onValueChanged?: (event: PickerChangeEvent) => void;
-	onValueChanging?: (event: PickerChangeEvent) => void | false;
+export type PickerDataProps<T = number> = {
+	data: T[];
+	value?: T;
+	onValueChanged?: (event: PickerChangeEvent<T>) => void;
+	onValueChanging?: (event: PickerChangeEvent<T>) => void | false;
 };
 
 export type PickerHapticScrollProps = {
@@ -89,7 +95,7 @@ export type PickerGestureProps = {
 
 export type PickerStyleProps = {
 	itemContainerStyle?: ViewStyle;
-	listStyle?: ListProps["style"];
+	listStyle?: StyleProp<AnimatedStyle<ViewStyle>>;
 };
 
 export type PickerItemStyleProps = {
@@ -97,23 +103,23 @@ export type PickerItemStyleProps = {
 	gap?: number;
 };
 
-export type PickerRenderProps = {
-	renderItemContainer?: PickerRenderProp;
-	renderItem: PickerListRenderItem;
+export type PickerRenderProps<T> = {
+	renderItemContainer?: PickerRenderProp<T>;
+	renderItem: PickerListRenderItem<T>;
 };
 
 export type PickerAnimationProps = {
 	animated?: boolean;
 };
 
-export type PickerProps = ListProps &
+export type PickerProps<T> = ListProps<T> &
 	PickerAnimationProps &
 	PickerStyleProps &
 	PickerItemStyleProps &
 	PickerBasePressProps &
 	PickerGestureProps &
 	PickerActivationProps &
-	PickerRenderProps &
+	PickerRenderProps<T> &
 	PickerPressProps &
 	PickerHapticScrollProps &
-	PickerDataProps;
+	PickerDataProps<T>;

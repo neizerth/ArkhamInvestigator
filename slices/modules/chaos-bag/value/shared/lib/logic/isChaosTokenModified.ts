@@ -1,9 +1,10 @@
 import { isNumericChaosTokenType } from "@modules/chaos-bag/base/shared/lib";
 import type { ChaosTokenType } from "@modules/chaos-bag/base/shared/model";
+import type { ChaosTokenValue } from "../../model";
 import { isNumericTokenModified } from "./isNumericTokenModified";
 
 type Options = {
-	value?: number;
+	value?: ChaosTokenValue;
 	defaultValue?: number;
 	type: ChaosTokenType;
 };

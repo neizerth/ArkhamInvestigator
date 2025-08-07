@@ -1,9 +1,10 @@
 import type { ChaosTokenType } from "@modules/chaos-bag/base/shared/model";
+import type { ChaosTokenValue } from "@modules/chaos-bag/value/shared/model";
 import type { ChaosBagRevealHandler } from "../../../../model";
 
 export type HandleSetRevealedTokenValuePayload = {
 	type: ChaosTokenType;
-	value: number;
+	value: ChaosTokenValue;
 };
 
 export const handleSetRevealedTokenValue: ChaosBagRevealHandler<

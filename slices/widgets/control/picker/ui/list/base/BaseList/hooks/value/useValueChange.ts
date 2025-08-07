@@ -3,7 +3,7 @@ import type { PickerChangeEvent } from "@widgets/control/picker/model";
 import { useCallback, useRef } from "react";
 import type { BaseListProps } from "../../BaseList.types";
 
-export const useValueChange = (props: BaseListProps) => {
+export function useValueChange<T>(props: BaseListProps<T>) {
 	const {
 		onScrollDeactivated: onScrollDeactivatedProp,
 		onValueChanging: onValueChangingProp,
@@ -13,7 +13,7 @@ export const useValueChange = (props: BaseListProps) => {
 
 	const index = getValueIndex(props);
 
-	const item = useRef<PickerChangeEvent>({
+	const item = useRef<PickerChangeEvent<T>>({
 		value,
 		index,
 	});
@@ -27,7 +27,7 @@ export const useValueChange = (props: BaseListProps) => {
 	}, [onValueChanged, onScrollDeactivatedProp, value]);
 
 	const onValueChanging = useCallback(
-		(e: PickerChangeEvent) => {
+		(e: PickerChangeEvent<T>) => {
 			item.current = e;
 			onValueChangingProp?.(e);
 		},
@@ -39,4 +39,4 @@ export const useValueChange = (props: BaseListProps) => {
 		onValueChanging,
 		onScrollDeactivated,
 	};
-};
+}
