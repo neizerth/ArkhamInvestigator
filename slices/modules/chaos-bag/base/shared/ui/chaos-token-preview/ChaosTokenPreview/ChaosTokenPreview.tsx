@@ -10,6 +10,7 @@ import {
 	getChaosTokentPreviewStyles,
 	getModificationSize,
 	getModificationStyle,
+	showValueOverlay,
 } from "./ChaosTokenPreview.styles";
 
 export type ChaosTokenPreviewProps = ViewProps &
@@ -21,6 +22,7 @@ export type ChaosTokenPreviewProps = ViewProps &
 		value?: ChaosTokenValue;
 		defaultValue?: number;
 		showValue?: boolean;
+		showOverlay?: boolean;
 	};
 
 const defaultPadding = size.gap.small;
@@ -33,6 +35,7 @@ export const ChaosTokenPreview = ({
 	selected = false,
 	highlight = true,
 	showValue = false,
+	showOverlay = false,
 	value,
 	defaultValue,
 	...props
@@ -56,6 +59,8 @@ export const ChaosTokenPreview = ({
 
 	const showHighlight = modified && highlight;
 
+	const overlay = showOverlay && showValueOverlay(value);
+
 	return (
 		<C.Container {...props} style={style.container}>
 			{sealed && (
@@ -78,6 +83,11 @@ export const ChaosTokenPreview = ({
 				)}
 				{showValue && typeof value !== "undefined" && (
 					<C.TokenValue type={type} value={value} size={size} />
+				)}
+				{overlay && (
+					<C.OverlayLayer>
+						<C.Overlay size={style.size} />
+					</C.OverlayLayer>
 				)}
 				<C.Token
 					type={type}

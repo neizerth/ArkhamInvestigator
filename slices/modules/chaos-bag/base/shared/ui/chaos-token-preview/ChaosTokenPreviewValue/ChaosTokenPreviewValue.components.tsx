@@ -8,7 +8,7 @@ import {
 import {
 	type CreateChaosTokenIconHOCProps,
 	AutoFail as Fail,
-	AutoSuccessBold as Success,
+	AutoSuccessThin as Success,
 } from "../../icons";
 
 export const Container: typeof View = styled(View)`
