@@ -1,6 +1,6 @@
 import { endChaosBagReveal } from "@modules/chaos-bag/reveal/base/shared/lib";
 import { put, takeEvery } from "redux-saga/effects";
-import { addRevealHistoryItemFromCurrent } from "../actions";
+import { addRevealHistoryItemFromCurrent } from "./addRevealHistoryItemFromCurrent";
 
 function* worker() {
 	yield put(addRevealHistoryItemFromCurrent());

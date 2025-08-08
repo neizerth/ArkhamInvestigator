@@ -5,7 +5,7 @@ import {
 	setCurrentRevealHistoryItem,
 } from "@modules/chaos-bag/reveal/history/shared/lib";
 import { put, select, takeEvery } from "redux-saga/effects";
-import { updateCurrentRevealHistoryItem } from "../../actions";
+import { updateCurrentRevealHistoryItem } from "./updateCurrentRevealHistoryItem";
 
 function* worker({
 	payload,
