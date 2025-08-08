@@ -34,6 +34,7 @@ export const ChaosBagReferenceEditPage = (
 			title="Scenario reference"
 			actions={actions}
 			closeIcon="check"
+			onClose={back}
 		>
 			<C.Select onClose={back} />
 		</C.Container>
