@@ -7,4 +7,6 @@ export const handleEndChaosBagReveal: ChaosBagRevealHandler = (state) => {
 	state.skillCheckExpression = [];
 	state.skillCheckType = null;
 	state.skillCheckBoardId = null;
+	state.succeedBy = null;
+	state.result = null;
 };
