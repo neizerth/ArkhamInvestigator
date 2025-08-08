@@ -45,7 +45,7 @@ export const Overlay: FC<OverlayProps> = styled(View)`
     border-radius: ${size}px;
   `}
   overflow: hidden;
-  background-color: #d6cfb999;
+  background-color: #d6cfb97a;
 `;
 
 export const Token: typeof ChaosToken = styled(ChaosToken)`
