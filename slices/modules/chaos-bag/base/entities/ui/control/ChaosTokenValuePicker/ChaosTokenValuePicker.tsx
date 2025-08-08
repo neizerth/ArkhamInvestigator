@@ -103,6 +103,7 @@ export const ChaosTokenValuePicker = ({
 	return (
 		<C.Control
 			{...props}
+			key={data.length}
 			data={data}
 			renderItem={renderItem}
 			value={value}
