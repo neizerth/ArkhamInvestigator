@@ -8,13 +8,13 @@ import { View } from "react-native";
 import styled from "styled-components/native";
 
 export const Container: typeof View = styled(View)`
-	position: relative;
+	position: absolute;
+
 `;
 
 export const Control: typeof Picker = styled(Picker).attrs({
 	gap: 50,
 })`
-	position: absolute
 `;
 
 export const Value: typeof ChaosTokenValue = styled(ChaosTokenValue)`

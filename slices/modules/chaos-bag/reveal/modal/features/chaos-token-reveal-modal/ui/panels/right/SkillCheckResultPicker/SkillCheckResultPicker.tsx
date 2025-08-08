@@ -1,37 +1,59 @@
 import type { ChaosTokenType } from "@modules/chaos-bag/base/shared/model";
-import type { PickerListRenderItem } from "@widgets/control/picker";
+import { setChaosBagRevealResult } from "@modules/chaos-bag/reveal/base/shared/lib";
+import { useAppDispatch } from "@shared/lib";
+import type {
+	PickerChangeEvent,
+	PickerListRenderItem,
+} from "@widgets/control/picker";
 import { useCallback } from "react";
 import type { ViewProps } from "react-native";
 import * as C from "./SkillCheckResultPicker.components";
+import type { SkillCheckPickerItem } from "./SkillCheckResultPicker.types";
+import { useSkillCheckPickerData } from "./useSkillCheckPickerData";
 
-export type SkillCheckResultPickerProps = ViewProps & {
-	succeedBy: string;
-	value: string;
-	fail?: boolean;
-};
+export type SkillCheckResultPickerProps = ViewProps;
 
-export const SkillCheckResultPicker = ({
-	succeedBy,
-	fail,
-	value,
-}: SkillCheckResultPickerProps) => {
-	// const data = ["success", succeedBy];
-	const data = ["success", succeedBy, "fail"];
-	// const data = [succeedBy];
+export const SkillCheckResultPicker = (props: SkillCheckResultPickerProps) => {
+	const dispatch = useAppDispatch();
+	const { fail, data, value } = useSkillCheckPickerData();
 
-	const renderItem: PickerListRenderItem<string> = useCallback(
+	const renderItem: PickerListRenderItem<SkillCheckPickerItem> = useCallback(
 		({ item }) => {
-			if (item === "success") {
+			const { label } = item;
+			if (label === "success") {
 				return <C.AutoSuccess type="elderSign" />;
 			}
-			if (item === "fail") {
+			if (label === "fail") {
 				return <C.AutoFail type="autoFail" />;
 			}
 			const type: ChaosTokenType = fail ? "autoFail" : "elderSign";
-			return <C.Value value={item} type={type} scale={false} />;
+			return <C.Value value={label} type={type} scale={false} />;
 		},
 		[fail],
 	);
 
-	return <C.Control data={data} renderItem={renderItem} value={value} />;
+	const onChange = useCallback(
+		(event: PickerChangeEvent<SkillCheckPickerItem>) => {
+			if (!event.value) {
+				return;
+			}
+			const { value } = event.value;
+
+			dispatch(setChaosBagRevealResult(value));
+		},
+		[dispatch],
+	);
+
+	const item = data.find((item) => item.value === value);
+
+	return (
+		<C.Container {...props}>
+			<C.Control
+				data={data}
+				renderItem={renderItem}
+				value={item}
+				onValueChanged={onChange}
+			/>
+		</C.Container>
+	);
 };
