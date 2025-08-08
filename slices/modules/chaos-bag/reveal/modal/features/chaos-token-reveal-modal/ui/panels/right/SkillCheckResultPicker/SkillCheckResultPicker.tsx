@@ -1,5 +1,8 @@
 import type { ChaosTokenType } from "@modules/chaos-bag/base/shared/model";
-import { setChaosBagRevealResult } from "@modules/chaos-bag/reveal/base/shared/lib";
+import {
+	setChaosBagRevealResult,
+	setChaosBagSucceedBy,
+} from "@modules/chaos-bag/reveal/base/shared/lib";
 import { useAppDispatch } from "@shared/lib";
 import type {
 	PickerChangeEvent,
@@ -15,7 +18,7 @@ export type SkillCheckResultPickerProps = ViewProps;
 
 export const SkillCheckResultPicker = (props: SkillCheckResultPickerProps) => {
 	const dispatch = useAppDispatch();
-	const { fail, data, value } = useSkillCheckPickerData();
+	const { fail, data, value, succeedBy } = useSkillCheckPickerData();
 
 	const renderItem: PickerListRenderItem<SkillCheckPickerItem> = useCallback(
 		({ item }) => {
@@ -38,10 +41,12 @@ export const SkillCheckResultPicker = (props: SkillCheckResultPickerProps) => {
 				return;
 			}
 			const { value } = event.value;
+			const succeedByValue = typeof value === "number" ? succeedBy : null;
 
 			dispatch(setChaosBagRevealResult(value));
+			dispatch(setChaosBagSucceedBy(succeedByValue));
 		},
-		[dispatch],
+		[dispatch, succeedBy],
 	);
 
 	const item = data.find((item) => item.value === value);

@@ -1,4 +1,11 @@
 import {
+	selectSkillCheckDifficulty,
+	selectSkillCheckDifficultyType,
+} from "@modules/board/skill-check/shared/lib";
+import type { ChaosBagHistoryItem } from "@modules/chaos-bag/base/shared/model";
+import { selectSkillCheckResult } from "@modules/chaos-bag/result/features/lib";
+import { selectChaosBagSucceedBy } from "@modules/chaos-bag/reveal/base/shared/lib";
+import {
 	addRevealHistoryItem,
 	selectCurrentRevealHistoryItem,
 	setCurrentRevealHistoryItem,
@@ -20,7 +27,27 @@ function* worker() {
 		return;
 	}
 
-	yield put(addRevealHistoryItem(item));
+	const difficulty: ReturnType<typeof selectSkillCheckDifficulty> =
+		yield select(selectSkillCheckDifficulty);
+	const difficultyType: ReturnType<typeof selectSkillCheckDifficultyType> =
+		yield select(selectSkillCheckDifficultyType);
+
+	const result: ReturnType<typeof selectSkillCheckResult> = yield select(
+		selectSkillCheckResult,
+	);
+	const succeedBy: ReturnType<typeof selectChaosBagSucceedBy> = yield select(
+		selectChaosBagSucceedBy,
+	);
+
+	const data: ChaosBagHistoryItem = {
+		...item,
+		difficulty,
+		difficultyType,
+		result,
+		succeedBy,
+	};
+
+	yield put(addRevealHistoryItem(data));
 	yield put(setCurrentRevealHistoryItem(null));
 }
 

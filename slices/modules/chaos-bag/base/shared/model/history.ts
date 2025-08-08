@@ -1,4 +1,7 @@
-import type { SkillCheckItem } from "@modules/board/skill-check/shared/model";
+import type {
+	SkillCheckDifficultyType,
+	SkillCheckItem,
+} from "@modules/board/skill-check/shared/model";
 import type { RevealedChaosBagToken } from "@modules/chaos-bag/reveal/base/shared/model";
 import type { ChaosTokenValue } from "@modules/chaos-bag/value/shared/model";
 import type { InvestigatorBoardNumericStat } from "@shared/model";
@@ -9,9 +12,10 @@ export type ChaosBagHistoryItemData = {
 	skillCheckType?: InvestigatorBoardNumericStat | null;
 	skillCheckValue?: number | null;
 	skillCheckExpression?: SkillCheckItem[];
-	difficulty?: number;
-	result?: ChaosTokenValue;
-	succeedBy?: number;
+	difficulty?: number | null;
+	difficultyType?: SkillCheckDifficultyType | null;
+	result?: ChaosTokenValue | null;
+	succeedBy?: number | null;
 	tokens: RevealedChaosBagToken[];
 	date: string;
 };
