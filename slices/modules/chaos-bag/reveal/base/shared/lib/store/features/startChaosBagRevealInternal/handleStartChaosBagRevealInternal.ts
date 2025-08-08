@@ -22,4 +22,6 @@ export const handleStartChaosBagRevealInternal: ChaosBagRevealHandler<
 	state.skillValue = payload.value || null;
 	state.skillCheckTitle = payload.title || null;
 	state.skillCheckExpression = payload.expression || [];
+	state.result = null;
+	state.succeedBy = null;
 };

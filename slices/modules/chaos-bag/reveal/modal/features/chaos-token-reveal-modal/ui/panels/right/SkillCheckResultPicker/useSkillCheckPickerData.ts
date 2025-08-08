@@ -37,7 +37,7 @@ export const useSkillCheckPickerData = () => {
 
 	return {
 		result,
-		succeddBy: succeedByValue,
+		succeedBy,
 		fail,
 		data,
 		value,
