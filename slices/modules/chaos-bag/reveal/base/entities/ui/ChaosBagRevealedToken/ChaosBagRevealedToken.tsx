@@ -35,6 +35,7 @@ export const ChaosBagRevealedToken = ({
 				selected={selected}
 				defaultValue={defaultValue}
 				showValue={showValue}
+				showOverlay
 			/>
 		</C.Container>
 	);

@@ -1,3 +1,4 @@
+import type { ChaosTokenValue } from "@modules/chaos-bag/value/shared/model";
 import type { ViewProps, ViewStyle } from "react-native";
 import type { SvgProps } from "react-native-svg";
 
@@ -64,4 +65,8 @@ export const getModificationStyle = (options: Options): ViewProps["style"] => {
 		width: size,
 		height: size,
 	};
+};
+
+export const showValueOverlay = (value?: ChaosTokenValue) => {
+	return value === "fail" || value === "success";
 };
