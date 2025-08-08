@@ -68,7 +68,7 @@ export const Value: typeof IconNumber = styled(IconNumber).attrs({
 export const DifficultyPicker: typeof DifficultyControl = styled(
 	DifficultyControl,
 )`
-  margin-top: -10px;
+  margin-top: -15px;
 `;
 
 export const Result: typeof SkillCheckResult = styled(SkillCheckResult)`
