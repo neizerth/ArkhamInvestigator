@@ -17,6 +17,7 @@ export type ChaosBagRevealState = {
 
 	currentRevealedTokenId: string | null;
 	result: ChaosTokenValue | null;
+	succeedBy: number | null;
 };
 
 const initialState: ChaosBagRevealState = {
@@ -28,6 +29,7 @@ const initialState: ChaosBagRevealState = {
 	skillValue: null,
 	currentRevealedTokenId: null,
 	result: null,
+	succeedBy: null,
 };
 
 const state = createSliceState(initialState);
@@ -48,6 +50,7 @@ export const {
 	setSkillCheckTitle: setChaosBagSkillCheckTitle,
 	setSkillCheckExpression: setChaosBagSkillCheckExpression,
 	setResult: setChaosBagRevealResult,
+	setSucceedBy: setChaosBagSucceedBy,
 	setRevealedTokens,
 
 	addRevealedTokens,
@@ -69,6 +72,7 @@ export const {
 	selectSkillCheckTitle: selectChaosBagSkillCheckTitle,
 	selectSkillCheckExpression: selectChaosBagSkillCheckExpression,
 	selectResult: selectChaosBagRevealResult,
+	selectSucceedBy: selectChaosBagSucceedBy,
 } = chaosBagReveal.selectors;
 
 export default chaosBagReveal.reducer;
