@@ -10,8 +10,8 @@ import { rangeStep, selectReferenceCardTokens } from "@shared/lib";
 import { propEq, range } from "ramda";
 import { getSelectRange, getValueRange } from "../../logic";
 
-const MAX_VALUE = 20;
-const MIN_VALUE = -21;
+const MAX_VALUE = 10;
+const MIN_VALUE = -9;
 
 const defaultData = range(MIN_VALUE, MAX_VALUE + 1);
 
