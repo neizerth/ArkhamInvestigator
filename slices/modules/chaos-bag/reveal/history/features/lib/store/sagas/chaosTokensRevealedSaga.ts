@@ -1,5 +1,5 @@
 import { chaosTokensRevealed } from "@modules/chaos-bag/reveal/base/entities/lib";
-import { saveCurrentRevealHistoryItem } from "@modules/chaos-bag/reveal/history/entities/lib/store/actions";
+import { saveCurrentRevealHistoryItem } from "@modules/chaos-bag/reveal/history/entities/lib";
 import { put, takeEvery } from "redux-saga/effects";
 
 function* worker({ payload }: ReturnType<typeof chaosTokensRevealed>) {
