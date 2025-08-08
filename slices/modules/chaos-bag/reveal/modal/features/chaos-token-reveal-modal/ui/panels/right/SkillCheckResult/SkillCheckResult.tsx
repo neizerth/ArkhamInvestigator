@@ -8,6 +8,7 @@ import {
 	selectSkillCheckResult,
 	selectSkillCheckSucceedByResult,
 } from "@modules/chaos-bag/result/features/lib";
+import { getChaosBagResultSign } from "@modules/chaos-bag/result/shared/lib";
 import * as C from "./SkillCheckResult.components";
 
 export type SkillCheckResultProps = ViewProps;
@@ -33,16 +34,15 @@ export const SkillCheckResult = (props: SkillCheckResultProps) => {
 		return;
 	}
 
+	const sign = getChaosBagResultSign(result);
+	const value = signedNumber(succedBy, sign);
+
 	return (
 		<C.Container {...props}>
 			<C.Content>
 				<C.CompareSymbol>=</C.CompareSymbol>
 				<C.Result>
-					<C.ResultValue
-						value={signedNumber(succedBy)}
-						style={style}
-						scale={false}
-					/>
+					<C.ResultValue value={value} style={style} scale={false} />
 				</C.Result>
 			</C.Content>
 		</C.Container>

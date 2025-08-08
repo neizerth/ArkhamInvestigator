@@ -3,6 +3,7 @@ import {
 	selectSkillCheckDifficultyType,
 } from "@modules/board/skill-check/shared/lib";
 import { createSelector } from "@reduxjs/toolkit";
+import { getSkillCheckSucceedBy } from "../../logic";
 import { selectSkillCheckResult } from "./selectSkillCheckResult";
 
 export const selectSkillCheckSucceedByResult = createSelector(
@@ -11,18 +12,17 @@ export const selectSkillCheckSucceedByResult = createSelector(
 		selectSkillCheckResult,
 		selectSkillCheckDifficultyType,
 	],
-	(difficultyValue, resultValue, type) => {
-		if (resultValue === "fail") {
+	(difficultyValue, result, type) => {
+		if (result === null) {
 			return 0;
 		}
-		const total = typeof resultValue === "number" ? resultValue : 0;
 		const difficulty = difficultyValue || 0;
+		const difficultyType = type || "gte";
 
-		const diff = total - difficulty;
-
-		if (type === "gt") {
-			return diff - 1;
-		}
-		return diff;
+		return getSkillCheckSucceedBy({
+			difficulty,
+			result,
+			difficultyType,
+		});
 	},
 );

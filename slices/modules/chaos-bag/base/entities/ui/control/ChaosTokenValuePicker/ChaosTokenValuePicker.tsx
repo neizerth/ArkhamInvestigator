@@ -24,6 +24,8 @@ export type ChaosTokenValuePickerProps = Omit<
 > &
 	Partial<PropsWithBoardId> & {
 		valueStyle?: ChaosTokenValueProps["style"];
+		autoSuccessStyle?: ChaosTokenValueProps["style"];
+		autoFailStyle?: ChaosTokenValueProps["style"];
 		type: ChaosTokenType;
 		sealed?: boolean;
 	};
@@ -34,6 +36,8 @@ const unsealedSizes = [0.9, 0.9, 0.65];
 export const ChaosTokenValuePicker = ({
 	type,
 	valueStyle,
+	autoSuccessStyle = valueStyle,
+	autoFailStyle = valueStyle,
 	boardId = "current",
 	sealed,
 	...props
@@ -76,10 +80,10 @@ export const ChaosTokenValuePicker = ({
 	const renderItem: PickerListRenderItem<ChaosTokenValue> = useCallback(
 		({ item }) => {
 			if (item === "fail") {
-				return <C.AutoFail type={type} />;
+				return <C.AutoFail type={type} style={autoFailStyle} />;
 			}
 			if (item === "success") {
-				return <C.AutoSuccess type={type} />;
+				return <C.AutoSuccess type={type} style={autoSuccessStyle} />;
 			}
 			const value = typeof item === "number" ? item : 0;
 			const tokenValue = signedNumber(value);
@@ -93,7 +97,7 @@ export const ChaosTokenValuePicker = ({
 				/>
 			);
 		},
-		[type, valueStyle, isModified, valueSizes],
+		[type, valueStyle, isModified, valueSizes, autoFailStyle, autoSuccessStyle],
 	);
 
 	return (
