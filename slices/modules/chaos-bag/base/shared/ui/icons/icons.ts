@@ -1,14 +1,22 @@
 import { chaosToken } from "../../config";
 import { createChaosTokenIcon } from "./createChaosTokenIcon";
 
-export const AutoSuccess = createChaosTokenIcon({
-	icon: "check-fill",
-	backgroundIcon: "check-outline",
+export const AutoSuccessBold = createChaosTokenIcon({
+	scale: 0.8,
+	icon: "check-outline_bold",
+	backgroundIcon: "check-fill",
+	// foregroundColor: chaosToken.color.types.,
+});
+
+export const AutoSuccessThin = createChaosTokenIcon({
+	scale: 0.8,
+	icon: "check-outline",
+	backgroundIcon: "check-fill",
 });
 
 export const AutoFail = createChaosTokenIcon({
-	scale: 1.2,
+	foregroundScale: 1.2,
 	icon: "token_auto_fail_highlight",
 	backgroundIcon: "token_auto_fail_highlight_inverse",
-	backgroundColor: chaosToken.color.types.autoFail,
+	foregroundColor: chaosToken.color.types.autoFail,
 });

@@ -8,21 +8,23 @@ import * as C from "./ChaosTokenIcon.components";
 
 export type ChaosTokenIconProps = Omit<LayeredIconProps, "layers"> & {
 	icon: string;
+	foregroundScale?: number;
 	scale?: number;
 	backgroundIcon: string;
 	type: ChaosTokenType;
 	modified?: boolean;
+	foregroundColor?: string;
 	backgroundColor?: string;
 };
-
-const foregroundColor = chaosToken.color.value.numeric;
 
 export const ChaosTokenIcon = ({
 	type,
 	scale = 1,
+	foregroundScale = 1,
 	modified,
 	icon,
 	backgroundIcon,
+	foregroundColor,
 	backgroundColor,
 	...props
 }: ChaosTokenIconProps) => {
@@ -31,17 +33,21 @@ export const ChaosTokenIcon = ({
 		modified,
 	});
 
-	const { fontSize } = StyleSheet.flatten(props.style);
-	const foregroundFontSize = fontSize && fontSize * scale;
+	const style = StyleSheet.flatten(props.style);
+	const size = style.fontSize || 48;
+	const fontSize = size * scale;
+	const foregroundFontSize = fontSize * foregroundScale;
 
-	const bgColor = backgroundColor || outlineColor;
+	const color = foregroundColor || outlineColor;
+
+	const bgColor = backgroundColor || chaosToken.color.value.numeric;
 
 	const layers: IconLayer[] = useMemo(() => {
 		return [
 			{
 				icon,
 				fontSize: foregroundFontSize,
-				color: foregroundColor,
+				color,
 			},
 			{
 				icon: backgroundIcon,
@@ -49,7 +55,7 @@ export const ChaosTokenIcon = ({
 				color: bgColor,
 			},
 		];
-	}, [icon, backgroundIcon, fontSize, foregroundFontSize, bgColor]);
+	}, [icon, backgroundIcon, fontSize, foregroundFontSize, color, bgColor]);
 
 	return <C.Icon layers={layers} {...props} />;
 };

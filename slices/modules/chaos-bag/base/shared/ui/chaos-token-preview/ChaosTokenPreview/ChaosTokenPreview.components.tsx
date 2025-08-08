@@ -3,12 +3,9 @@ import type { FC } from "react";
 import { View } from "react-native";
 import styled, { css } from "styled-components/native";
 import { chaosToken } from "../../../config";
-import {
-	ChaosTokenValue,
-	type ChaosTokenValueProps,
-} from "../../ChaosTokenValue";
 import { ChaosToken } from "../../chaos-token";
 import { ChaosTokenModification } from "../ChaosTokenModification";
+import { ChaosTokenPreviewValue } from "../ChaosTokenPreviewValue";
 import { SealedImage } from "./images";
 
 export const Container: typeof View = styled(View)`
@@ -51,6 +48,17 @@ export const HighlightContainer: typeof View = styled(View)`
   align-items: center;
 `;
 
+export const TokenValue: typeof ChaosTokenPreviewValue = styled(
+	ChaosTokenPreviewValue,
+)`
+  position: absolute;
+  z-index: 3;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+`;
+
 type HighlightProps = ValueProps & {
 	size: number;
 };
@@ -63,15 +71,5 @@ export const Highlight: FC<HighlightProps> = styled(Value).attrs({
 })`
   ${({ size }: HighlightProps) => css`
     font-size: ${size * 0.43}px;
-  `}
-`;
-
-type TokenValueProps = ChaosTokenValueProps & {
-	size: number;
-};
-
-export const TokenValue: FC<TokenValueProps> = styled(ChaosTokenValue)`
-  ${({ size }: TokenValueProps) => css`
-    font-size: ${size * 0.7}px;
   `}
 `;

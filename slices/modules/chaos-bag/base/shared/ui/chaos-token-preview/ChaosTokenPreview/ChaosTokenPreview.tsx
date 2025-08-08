@@ -1,7 +1,6 @@
 import { isChaosTokenModified } from "@modules/chaos-bag/value/shared/lib";
 import type { ChaosTokenValue } from "@modules/chaos-bag/value/shared/model";
 import { size } from "@shared/config";
-import { signedNumber } from "@shared/lib";
 import { memo } from "react";
 import type { ViewProps } from "react-native";
 import { chaosToken } from "../../../config";
@@ -77,10 +76,8 @@ export const ChaosTokenPreview = ({
 						<C.Highlight value={value} size={size} />
 					</C.HighlightContainer>
 				)}
-				{showValue && typeof value === "number" && (
-					<C.HighlightContainer>
-						<C.TokenValue type={type} value={signedNumber(value)} size={size} />
-					</C.HighlightContainer>
+				{showValue && typeof value !== "undefined" && (
+					<C.TokenValue type={type} value={value} size={size} />
 				)}
 				<C.Token
 					type={type}

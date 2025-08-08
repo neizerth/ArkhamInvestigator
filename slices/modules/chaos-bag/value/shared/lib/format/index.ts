@@ -1,1 +1,1 @@
-export * from "./formatChaosTokenValue";
+export * from "./getChaosTokenValueSymbol";

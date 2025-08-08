@@ -1,10 +1,11 @@
+import type { ChaosTokenValue } from "@modules/chaos-bag/value/shared/model";
 import { haveXEffect } from "./haveXEffect";
 import { replaceNumericEffectValue } from "./replaceNumericEffectValue";
 import { replaceXEffectValue } from "./replaceXEffectValue";
 
 type Options = {
 	text: string;
-	value: number;
+	value: ChaosTokenValue;
 };
 
 export const replaceTokenEffectValue = (options: Options) => {

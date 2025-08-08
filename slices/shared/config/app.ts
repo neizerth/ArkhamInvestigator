@@ -16,3 +16,5 @@ export const APP_STORE_DOWNLOAD_URL = process.env
 
 export const APP_DOWNLOAD_URL =
 	Platform.OS === "android" ? GOOGLE_PLAY_DOWNLOAD_URL : APP_STORE_DOWNLOAD_URL;
+
+export const DEVELOPMENT_MODE = process.env.MODE === "development";

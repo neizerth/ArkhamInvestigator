@@ -1,8 +1,12 @@
+import type { ChaosTokenValue } from "@modules/chaos-bag/value/shared/model";
+import { getEffectTokenValue } from "./getEffectTokenValue";
+
 type Options = {
 	text: string;
-	value: number;
+	value: ChaosTokenValue;
 };
 
 export const replaceXEffectValue = ({ text, value }: Options) => {
-	return text.replace(/([-—−]X)/, `${value} ($1)`);
+	const effectValue = getEffectTokenValue(value);
+	return text.replace(/([-—−]X)/, `${effectValue} ($1)`);
 };

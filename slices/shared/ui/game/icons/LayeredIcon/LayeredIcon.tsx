@@ -4,6 +4,7 @@ import * as C from "./LayeredIcon.components";
 
 export type IconLayer = {
 	icon: string;
+	lineHeight?: number;
 	fontSize?: number;
 	color?: string;
 	style?: IconProps["style"];
@@ -22,7 +23,7 @@ export const LayeredIcon = ({
 }: LayeredIconProps) => {
 	return (
 		<C.Container style={contentContainerStyle}>
-			{layers.map(({ fontSize, color, ...layer }, index) => (
+			{layers.map(({ fontSize, color, lineHeight, ...layer }, index) => (
 				<C.Layer key={layer.icon} background={index === layers.length - 1}>
 					<C.LayerIcon
 						{...props}
@@ -30,6 +31,7 @@ export const LayeredIcon = ({
 							props.style,
 							color && { color },
 							Boolean(fontSize) && { fontSize },
+							Boolean(lineHeight) && { lineHeight },
 							layer.style,
 						]}
 						icon={layer.icon}

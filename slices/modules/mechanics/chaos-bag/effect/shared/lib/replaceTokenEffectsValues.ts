@@ -24,7 +24,7 @@ export const replaceTokenEffectsValues = ({
 
 		const value = tokenValues[type];
 
-		if (typeof value === "number") {
+		if (typeof value !== "undefined") {
 			const replacedEffect = replaceTokenEffectValue({
 				text: effect,
 				value,

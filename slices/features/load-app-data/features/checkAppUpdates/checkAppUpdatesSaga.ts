@@ -24,6 +24,7 @@ function* worker() {
 
 	if (isOutdatedAppVersion(minClientVersion)) {
 		yield put(setAppOutdated(true));
+		return;
 	}
 
 	const locale: ReturnType<typeof selectCurrentLanguage> = yield select(

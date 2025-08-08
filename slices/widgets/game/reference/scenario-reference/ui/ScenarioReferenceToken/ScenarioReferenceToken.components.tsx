@@ -32,6 +32,14 @@ export const Control: typeof ChaosTokenValuePicker = styled(
 	valueStyle: {
 		fontSize: 30,
 	},
+	autoFailStyle: {
+		fontSize: 40,
+		lineHeight: 40,
+	},
+	autoSuccessStyle: {
+		fontSize: 60,
+		lineHeight: 50,
+	},
 })`
   
 `;
