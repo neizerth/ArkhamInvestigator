@@ -2,6 +2,7 @@ import type { SkillCheckItem } from "@modules/board/skill-check/shared/model";
 import type { ChaosTokenValue } from "@modules/chaos-bag/value/shared/model";
 import { createSlice } from "@reduxjs/toolkit";
 import type { InvestigatorBoardNumericStat } from "@shared/model";
+import { identity } from "ramda";
 import { createSliceState } from "redux-toolkit-helpers";
 import { chaosBagRevealPrefix } from "../../config";
 import type { RevealedChaosBagToken } from "../../model";
@@ -9,6 +10,7 @@ import * as reducers from "./reducers";
 
 export type ChaosBagRevealState = {
 	revealedTokens: RevealedChaosBagToken[];
+	allRevealedTokens: RevealedChaosBagToken[];
 	skillCheckType: InvestigatorBoardNumericStat | null;
 	skillCheckTitle: string | null;
 	skillValue: number | null;
@@ -22,6 +24,7 @@ export type ChaosBagRevealState = {
 
 const initialState: ChaosBagRevealState = {
 	revealedTokens: [],
+	allRevealedTokens: [],
 	skillCheckExpression: [],
 	skillCheckBoardId: null,
 	skillCheckType: null,
@@ -41,6 +44,10 @@ export const chaosBagReveal = createSlice({
 		...state.reducers,
 		...reducers,
 	},
+	selectors: {
+		...state.selectors,
+		selectChaosBagReveal: identity,
+	},
 });
 
 export const {
@@ -52,11 +59,12 @@ export const {
 	setResult: setChaosBagRevealResult,
 	setSucceedBy: setChaosBagSucceedBy,
 	setRevealedTokens,
+	setAllRevealedTokens,
 
 	addRevealedTokens,
 	removeRevealedTokenId,
 	startChaosBagRevealInternal,
-	endChaosBagReveal,
+	endChaosBagRevealInternal,
 	setCurrentRevealedTokenId,
 	setRevealedTokenValue,
 	updateRevealedToken,
@@ -66,6 +74,7 @@ export const {
 export const {
 	selectCurrentRevealedTokenId,
 	selectRevealedTokens,
+	selectAllRevealedTokens,
 	selectSkillCheckBoardId: selectChaosBagSkillCheckBoardId,
 	selectSkillCheckType: selectChaosBagSkillCheckType,
 	selectSkillValue: selectChaosBagSkillValue,
@@ -73,6 +82,7 @@ export const {
 	selectSkillCheckExpression: selectChaosBagSkillCheckExpression,
 	selectResult: selectChaosBagRevealResult,
 	selectSucceedBy: selectChaosBagSucceedBy,
+	selectChaosBagReveal,
 } = chaosBagReveal.selectors;
 
 export default chaosBagReveal.reducer;

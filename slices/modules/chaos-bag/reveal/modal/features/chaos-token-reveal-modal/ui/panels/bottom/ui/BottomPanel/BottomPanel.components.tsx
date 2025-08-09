@@ -56,7 +56,7 @@ export const Return: typeof Action = styled(Action)`
 `;
 
 export const RevealMore: typeof Action = styled(Action)`
-  border: 1px dashed ${color.light20};
+  border: 1px dashed ${color.light10};
 
   background-color: rgba(0, 0, 0, 0.2);
 `;

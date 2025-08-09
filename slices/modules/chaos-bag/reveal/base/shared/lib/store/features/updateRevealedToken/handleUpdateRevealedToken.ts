@@ -1,25 +1,30 @@
 import type {
 	ChaosBagRevealHandler,
-	RevealedChaosBagTokenCancelType,
+	RevealedChaosBagToken,
 } from "../../../../model";
 
 export type HandleUpdateRevealedTokenPayload = {
 	id: string;
-	canceled?: RevealedChaosBagTokenCancelType;
-	sealed?: boolean;
-	value?: number;
+	data: Partial<Omit<RevealedChaosBagToken, "id">>;
+	updateType?: "actual" | "all";
 };
 
 export const handleUpdateRevealedToken: ChaosBagRevealHandler<
 	HandleUpdateRevealedTokenPayload
-> = (state, { id, ...update }) => {
-	state.revealedTokens = state.revealedTokens.map((token) => {
+> = (state, { id, data, updateType }) => {
+	const update = (token: RevealedChaosBagToken) => {
 		if (token.id === id) {
 			return {
 				...token,
-				...update,
+				...data,
 			};
 		}
 		return token;
-	});
+	};
+	if (!updateType || updateType === "actual") {
+		state.revealedTokens = state.revealedTokens.map(update);
+	}
+	if (!updateType || updateType === "all") {
+		state.allRevealedTokens = state.allRevealedTokens.map(update);
+	}
 };

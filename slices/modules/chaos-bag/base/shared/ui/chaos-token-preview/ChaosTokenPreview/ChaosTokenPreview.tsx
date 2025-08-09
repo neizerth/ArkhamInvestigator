@@ -1,3 +1,4 @@
+import type { RevealedChaosBagTokenCancelType } from "@modules/chaos-bag/reveal/base/shared/model";
 import { isChaosTokenModified } from "@modules/chaos-bag/value/shared/lib";
 import type { ChaosTokenValue } from "@modules/chaos-bag/value/shared/model";
 import { size } from "@shared/config";
@@ -16,6 +17,8 @@ import {
 export type ChaosTokenPreviewProps = ViewProps &
 	ChaosTokenConfig & {
 		sealed?: boolean;
+		removed?: boolean;
+		canceled?: RevealedChaosBagTokenCancelType;
 		sealOffset?: number;
 		tokenPadding?: number;
 		selected?: boolean;
@@ -36,6 +39,8 @@ export const ChaosTokenPreview = ({
 	highlight = true,
 	showValue = false,
 	showOverlay = false,
+	removed,
+	canceled,
 	value,
 	defaultValue,
 	...props
@@ -59,7 +64,13 @@ export const ChaosTokenPreview = ({
 
 	const showHighlight = modified && highlight;
 
-	const overlay = showOverlay && showValueOverlay(value);
+	const overlay =
+		showOverlay &&
+		showValueOverlay({
+			showValue,
+			type,
+			value,
+		});
 
 	return (
 		<C.Container {...props} style={style.container}>
@@ -88,6 +99,20 @@ export const ChaosTokenPreview = ({
 					<C.OverlayLayer>
 						<C.Overlay size={style.size} />
 					</C.OverlayLayer>
+				)}
+				{canceled && (
+					<C.OverlayLayer>
+						<C.CancelIcon
+							icon="blocked-medium"
+							byEffect={canceled === "effect"}
+							size={style.size}
+						/>
+					</C.OverlayLayer>
+				)}
+				{removed && (
+					<C.RemovedLayer size={style.size}>
+						<C.RemovedIcon icon="reply" size={style.size} />
+					</C.RemovedLayer>
 				)}
 				<C.Token
 					type={type}

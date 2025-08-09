@@ -24,7 +24,11 @@ function* worker() {
 		yield take(waitCompleted);
 	}
 
-	yield put(allChaosTokensReturned());
+	yield put(
+		allChaosTokensReturned({
+			tokens,
+		}),
+	);
 }
 
 export function* returnAllChaosTokensSaga() {

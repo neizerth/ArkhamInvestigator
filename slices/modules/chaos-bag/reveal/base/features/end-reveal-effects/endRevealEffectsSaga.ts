@@ -5,9 +5,10 @@ import {
 import { put, select, takeEvery } from "redux-saga/effects";
 import {
 	allChaosTokensReturned,
+	endChaosBagReveal,
 	singleChaosTokenReturned,
 } from "../../entities/lib";
-import { endChaosBagReveal, selectRevealedTokensCount } from "../../shared/lib";
+import { selectRevealedTokensCount } from "../../shared/lib";
 
 function* endWorker() {
 	yield put(endChaosBagReveal());

@@ -14,7 +14,9 @@ export const createSealWorker = (sealed: boolean) =>
 		yield put(
 			updateRevealedToken({
 				id,
-				sealed,
+				data: {
+					sealed,
+				},
 			}),
 		);
 	};

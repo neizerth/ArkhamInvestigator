@@ -14,6 +14,10 @@ export const defaultComponentStyles: ComponentStyleMap = {
 	u: {
 		fontFamily: Alegreya.regular,
 	},
+	old: {
+		fontFamily: Alegreya.regular,
+		opacity: 0.7,
+	},
 	icon: {
 		fontSize: 14,
 		lineHeight: 16,

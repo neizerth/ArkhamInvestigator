@@ -3,27 +3,37 @@ import {
 	selectSkillCheckDifficultyType,
 } from "@modules/board/skill-check/shared/lib";
 import type { ChaosBagHistoryItem } from "@modules/chaos-bag/base/shared/model";
-import { selectSkillCheckResult } from "@modules/chaos-bag/result/features/lib";
-import { selectChaosBagSucceedBy } from "@modules/chaos-bag/reveal/base/shared/lib";
+import { chaosBagRevealEnd } from "@modules/chaos-bag/reveal/base/entities/lib";
 import {
 	addRevealHistoryItem,
-	selectCurrentRevealHistoryItem,
 	setCurrentRevealHistoryItem,
 } from "@modules/chaos-bag/reveal/history/shared/lib";
 import { put, select, takeEvery } from "redux-saga/effects";
-import { selectCanAddRevealHistoryItem } from "../../selectors";
-import { addRevealHistoryItemFromCurrent } from "./addRevealHistoryItemFromCurrent";
+import { v4 } from "uuid";
 
-function* worker() {
-	const item: ReturnType<typeof selectCurrentRevealHistoryItem> = yield select(
-		selectCurrentRevealHistoryItem,
+const filterAction = (action: unknown) => {
+	if (!chaosBagRevealEnd.match(action)) {
+		return false;
+	}
+
+	const { payload } = action;
+	return (
+		payload.allRevealedTokens.length > 0 && Boolean(payload.skillCheckBoardId)
 	);
+};
 
-	const canAdd: ReturnType<typeof selectCanAddRevealHistoryItem> = yield select(
-		selectCanAddRevealHistoryItem,
-	);
+function* worker({ payload }: ReturnType<typeof chaosBagRevealEnd>) {
+	const {
+		allRevealedTokens: tokens,
+		skillCheckTitle: title,
+		skillValue: skillCheckValue,
+		skillCheckBoardId: boardId,
+		succeedBy,
+		skillCheckExpression,
+		result,
+	} = payload;
 
-	if (!item || !canAdd) {
+	if (!boardId) {
 		return;
 	}
 
@@ -32,19 +42,18 @@ function* worker() {
 	const difficultyType: ReturnType<typeof selectSkillCheckDifficultyType> =
 		yield select(selectSkillCheckDifficultyType);
 
-	const result: ReturnType<typeof selectSkillCheckResult> = yield select(
-		selectSkillCheckResult,
-	);
-	const succeedBy: ReturnType<typeof selectChaosBagSucceedBy> = yield select(
-		selectChaosBagSucceedBy,
-	);
-
 	const data: ChaosBagHistoryItem = {
-		...item,
+		boardId,
+		id: v4(),
+		tokens,
+		title,
+		result,
+		skillCheckExpression,
+		skillCheckValue,
 		difficulty,
 		difficultyType,
-		result,
 		succeedBy,
+		date: Date(),
 	};
 
 	yield put(addRevealHistoryItem(data));
@@ -52,5 +61,5 @@ function* worker() {
 }
 
 export function* addRevealHistoryItemFromCurrentSaga() {
-	yield takeEvery(addRevealHistoryItemFromCurrent.match, worker);
+	yield takeEvery(filterAction, worker);
 }

@@ -6,4 +6,5 @@ export type RevealedChaosBagTokenCancelType = boolean | "effect";
 export type RevealedChaosBagToken = ChaosBagToken & {
 	value?: ChaosTokenValue;
 	canceled?: RevealedChaosBagTokenCancelType;
+	removed?: boolean;
 };
