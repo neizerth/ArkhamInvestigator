@@ -132,6 +132,7 @@
 	"chaosToken.frost.first.effect": "{{value}}. Вытяните ещё один жетон",
 	"chaosToken.frost.second.effect": "Проверка автоматически провалена",
 	"chaosToken.autoFail.effect": "Проверка автоматически провалена",
+
 	"chaosToken.canceled": "Данный жетон отменён или игнорируется\n<old>{{effect}}</old>",
 	"chaosToken.canceled.effect": "Эффект жетона отменён\n<old>{{effect}}</old>",
 

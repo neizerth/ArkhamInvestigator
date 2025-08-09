@@ -118,6 +118,9 @@
 	"chaosToken.frost.second.effect": "Resolve the test as an automatic failure",
 	"chaosToken.autoFail.effect": "Automatic failure",
 
+	"chaosToken.canceled": "This token has been canceled or ignored\n<old>{{effect}}</old>",
+	"chaosToken.canceled.effect": "The token's effect has been canceled\n<old>{{effect}}</old>",
+
 	"chaosBag.addToken_one": "{{name}} adds {{count}} {{token}} token to the chaos bag",
 	"chaosBag.addToken_many": "{{name}} adds {{count}} {{token}} tokens to the chaos bag",
 
