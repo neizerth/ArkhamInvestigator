@@ -6,7 +6,7 @@ import {
 import { AbilityCode } from "@modules/mechanics/board/abilities/shared/config";
 import { whereId } from "@shared/lib/util";
 import type { InvestigatorBoardNumericStat } from "@shared/model";
-import { takeEvery } from "redux-saga/effects";
+import { put, takeEvery } from "redux-saga/effects";
 
 type LilyAbility = {
 	id: string;
@@ -48,15 +48,17 @@ function* worker({ payload }: ReturnType<typeof changeBoardHistoryAbilityUse>) {
 
 		const { prop } = item;
 
-		yield action({
-			boardId,
-			prop,
-			value: 1,
-			history: {
-				type: "update",
-				id: payload.item.id,
-			},
-		});
+		yield put(
+			action({
+				boardId,
+				prop,
+				value: 1,
+				history: {
+					type: "update",
+					id: payload.item.id,
+				},
+			}),
+		);
 	}
 }
 
