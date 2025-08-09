@@ -39,8 +39,8 @@ export const getSkillCheckResult = ({
 		return "success";
 	}
 
-	const tokensvalueSum = tokens.reduce((total, { value }) => {
-		if (typeof value !== "number") {
+	const tokensvalueSum = tokens.reduce((total, { value, canceled }) => {
+		if (typeof value !== "number" || canceled) {
 			return total;
 		}
 		return value + total;

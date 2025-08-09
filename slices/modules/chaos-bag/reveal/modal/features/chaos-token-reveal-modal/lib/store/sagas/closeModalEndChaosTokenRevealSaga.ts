@@ -1,4 +1,4 @@
-import { endChaosBagReveal } from "@modules/chaos-bag/reveal/base/shared/lib";
+import { endChaosBagReveal } from "@modules/chaos-bag/reveal/base/entities/lib";
 import { CustomModalId } from "@modules/core/modal/entities/base/config";
 import { closeModal } from "@modules/core/modal/shared/base/lib";
 import { put, takeEvery } from "redux-saga/effects";

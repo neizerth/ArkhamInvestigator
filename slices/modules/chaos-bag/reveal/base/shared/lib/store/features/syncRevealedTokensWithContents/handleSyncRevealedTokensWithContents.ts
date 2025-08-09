@@ -2,7 +2,10 @@ import type {
 	ChaosBagToken,
 	ChaosTokenValues,
 } from "@modules/chaos-bag/base/shared/model";
-import type { ChaosBagRevealHandler } from "@modules/chaos-bag/reveal/base/shared/model";
+import type {
+	ChaosBagRevealHandler,
+	RevealedChaosBagToken,
+} from "@modules/chaos-bag/reveal/base/shared/model";
 import { whereId } from "@shared/lib/util";
 
 export type HandleSyncRevealedTokensWithContentsPayload = {
@@ -13,7 +16,7 @@ export type HandleSyncRevealedTokensWithContentsPayload = {
 export const handleSyncRevealedTokensWithContents: ChaosBagRevealHandler<
 	HandleSyncRevealedTokensWithContentsPayload
 > = (state, { contents, values }) => {
-	state.revealedTokens = state.revealedTokens.map((token) => {
+	const update = (token: RevealedChaosBagToken) => {
 		const chaosBagToken = contents.find(whereId(token.id));
 
 		const value = values[token.type] || token.value;
@@ -31,5 +34,7 @@ export const handleSyncRevealedTokensWithContents: ChaosBagRevealHandler<
 			...updatedValue,
 			value,
 		};
-	});
+	};
+	state.revealedTokens = state.revealedTokens.map(update);
+	state.allRevealedTokens = state.allRevealedTokens.map(update);
 };

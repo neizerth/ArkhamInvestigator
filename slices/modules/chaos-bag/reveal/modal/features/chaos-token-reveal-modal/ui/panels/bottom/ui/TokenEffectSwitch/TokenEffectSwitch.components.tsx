@@ -15,6 +15,7 @@ export const Container: typeof TouchableOpacity = styled(TouchableOpacity)`
 
 type SwitchIconProps = IconProps & {
 	active?: boolean;
+	byEffect?: boolean;
 };
 
 export const SwitchIcon: FC<SwitchIconProps> = styled(Icon)`
@@ -28,6 +29,11 @@ export const SwitchIcon: FC<SwitchIconProps> = styled(Icon)`
 		css`
     opacity: 0.4;
     color: ${color.light10};
+  `}
+    ${({ byEffect }: SwitchIconProps) =>
+			byEffect &&
+			css`
+    color: #663399;
   `}
 `;
 

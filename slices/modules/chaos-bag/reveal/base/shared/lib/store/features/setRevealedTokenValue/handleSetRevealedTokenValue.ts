@@ -1,6 +1,9 @@
 import type { ChaosTokenType } from "@modules/chaos-bag/base/shared/model";
 import type { ChaosTokenValue } from "@modules/chaos-bag/value/shared/model";
-import type { ChaosBagRevealHandler } from "../../../../model";
+import type {
+	ChaosBagRevealHandler,
+	RevealedChaosBagToken,
+} from "../../../../model";
 
 export type HandleSetRevealedTokenValuePayload = {
 	type: ChaosTokenType;
@@ -10,7 +13,7 @@ export type HandleSetRevealedTokenValuePayload = {
 export const handleSetRevealedTokenValue: ChaosBagRevealHandler<
 	HandleSetRevealedTokenValuePayload
 > = (state, { type, value }) => {
-	state.revealedTokens = state.revealedTokens.map((token) => {
+	const update = (token: RevealedChaosBagToken) => {
 		if (token.type === type) {
 			return {
 				...token,
@@ -18,5 +21,8 @@ export const handleSetRevealedTokenValue: ChaosBagRevealHandler<
 			};
 		}
 		return token;
-	});
+	};
+
+	state.revealedTokens = state.revealedTokens.map(update);
+	state.allRevealedTokens = state.allRevealedTokens.map(update);
 };

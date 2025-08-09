@@ -15,5 +15,6 @@ export const handleAddRevealedTokens: ChaosBagRevealHandler<
 	const lastTokenId = lastToken?.id || null;
 
 	state.revealedTokens.push(...tokens);
+	state.allRevealedTokens.push(...tokens);
 	state.currentRevealedTokenId = lastTokenId;
 };

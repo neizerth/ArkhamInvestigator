@@ -16,7 +16,7 @@ export const handleStartChaosBagRevealInternal: ChaosBagRevealHandler<
 	HandleStartChaosBagRevealInternalPayload
 > = (state, payload) => {
 	state.revealedTokens = [];
-
+	state.allRevealedTokens = [];
 	state.skillCheckBoardId = payload.boardId || null;
 	state.skillCheckType = payload.type || null;
 	state.skillValue = payload.value || null;

@@ -1,8 +1,8 @@
 import {
+	endChaosBagReveal,
 	returnAllChaosTokens,
 	selectCanRevealChaosTokens,
 } from "@modules/chaos-bag/reveal/base/entities/lib";
-import { endChaosBagReveal } from "@modules/chaos-bag/reveal/base/shared/lib";
 import { useAppDispatch, useAppSelector } from "@shared/lib";
 import { useCallback } from "react";
 import type { ViewProps } from "react-native";

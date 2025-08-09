@@ -1,27 +1,20 @@
-import { useChaosBagTokenEffects } from "@modules/chaos-bag/effect/features/board-token-effects";
 import {
 	selectRevealedTokens,
 	setCurrentRevealedTokenId,
 } from "@modules/chaos-bag/reveal/base/shared/lib";
-import { selectChaosBagTokenValues } from "@modules/chaos-bag/value/entities/lib";
 import { useAppDispatch, useAppSelector } from "@shared/lib";
 import { last } from "ramda";
 import { useCallback } from "react";
-import { selectCurrentRevealedToken } from "../../../../../lib";
+import { selectCurrentRevealedToken } from "../../../../../../lib";
+import { getCurrentTokenEffect } from "./useCurrentTokenEffect";
 
 export const useCurrentToken = () => {
 	const dispatch = useAppDispatch();
-	const tokenValues = useAppSelector(selectChaosBagTokenValues("current"));
 
-	const effects = useChaosBagTokenEffects({
-		boardId: "current",
-		tokenValues,
-	});
+	const effect = getCurrentTokenEffect();
 
 	const tokens = useAppSelector(selectRevealedTokens);
 	const currentToken = useAppSelector(selectCurrentRevealedToken);
-
-	const effect = currentToken && effects[currentToken.type];
 
 	const lastToken = last(tokens);
 

@@ -1,4 +1,5 @@
-import { Value, type ValueProps } from "@shared/ui";
+import { color } from "@shared/config";
+import { Icon, type IconProps, Value, type ValueProps } from "@shared/ui";
 import type { FC } from "react";
 import { View, type ViewProps } from "react-native";
 import styled, { css } from "styled-components/native";
@@ -34,8 +35,60 @@ export const Layer: typeof View = styled(View)`
   align-items: center;
 `;
 
-export const OverlayLayer: typeof Layer = styled(Layer)`
+type CancelIconProps = IconProps &
+	PropsWithSize & {
+		byEffect?: boolean;
+	};
+
+export const CancelIcon: FC<CancelIconProps> = styled(Icon)`
+  color: #fb423589;
+  ${({ byEffect }: CancelIconProps) =>
+		byEffect &&
+		css`
+    color: #66339992;
+  `}
+  ${({ size }: CancelIconProps) => css`
+    font-size: ${size}px;
+    line-height: ${size}px;
+  `}
+`;
+
+type RemovedLayerProps = ViewProps & PropsWithSize;
+
+export const RemovedLayer: FC<RemovedLayerProps> = styled(View)`
+  position: absolute;
+  z-index: 4;
+  background-color: #FFFBF2;
+
+  justify-content: center;
+  align-items: center;
+  
+
+  ${({ size }: CancelIconProps) => css`
+    width: ${size * 0.3}px;
+    height: ${size * 0.3}px;
+    border-radius: ${size * 0.3}px;
+    left: ${size * 0.1}px;
+    bottom: ${size * 0.1}px;
+  `}
+`;
+
+type RemoveIconpProps = IconProps & PropsWithSize;
+
+export const RemovedIcon: FC<RemoveIconpProps> = styled(Icon)`
+  color: ${color.text};
+  ${({ size }: CancelIconProps) => css`
+    font-size: ${size * 0.2}px;
+    line-height: ${size * 0.2}px;
+  `}
+`;
+
+export const CancelLayer: typeof Layer = styled(Layer)`
   z-index: 3;
+`;
+
+export const OverlayLayer: typeof Layer = styled(Layer)`
+  z-index: 4;
 `;
 
 export const Overlay: FC<OverlayProps> = styled(View)`
@@ -69,7 +122,7 @@ export const Modification: typeof ChaosTokenModification = styled(
 
 export const HighlightContainer: typeof View = styled(View)`
   position: absolute;
-  z-index: 4;
+  z-index: 5;
   left: 0;
   right: 0;
   top: 0;
@@ -82,7 +135,7 @@ export const TokenValue: typeof ChaosTokenPreviewValue = styled(
 	ChaosTokenPreviewValue,
 )`
   position: absolute;
-  z-index: 4;
+  z-index: 5;
   left: 0;
   right: 0;
   top: 0;

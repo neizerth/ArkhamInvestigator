@@ -1,7 +1,10 @@
 import type { ChaosBagRevealHandler } from "../../../../model";
 
-export const handleEndChaosBagReveal: ChaosBagRevealHandler = (state) => {
+export const handleEndChaosBagRevealInternal: ChaosBagRevealHandler = (
+	state,
+) => {
 	state.revealedTokens = [];
+	state.allRevealedTokens = [];
 	state.skillValue = null;
 	state.skillCheckTitle = null;
 	state.skillCheckExpression = [];

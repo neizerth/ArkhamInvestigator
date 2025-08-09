@@ -29,7 +29,9 @@ export const TokenEffectSwitch = ({
 		dispatch(
 			updateRevealedToken({
 				id: id,
-				canceled: nextType,
+				data: {
+					canceled: nextType,
+				},
 			}),
 		);
 	}, [dispatch, id, nextType]);
@@ -38,7 +40,11 @@ export const TokenEffectSwitch = ({
 
 	return (
 		<C.Container {...props} onPress={switchCancelType}>
-			<C.SwitchIcon icon="blocked-medium" active={active} />
+			<C.SwitchIcon
+				icon="blocked-medium"
+				active={active}
+				byEffect={token.canceled === "effect"}
+			/>
 			{token.canceled === "effect" && <C.EffectIcon icon="effect" />}
 		</C.Container>
 	);

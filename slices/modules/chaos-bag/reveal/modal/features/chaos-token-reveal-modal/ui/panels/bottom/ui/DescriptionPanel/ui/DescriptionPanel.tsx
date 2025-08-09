@@ -1,6 +1,6 @@
 import type { ViewProps } from "react-native";
+import { useCurrentToken } from "../lib";
 import * as C from "./DescriptionPanel.components";
-import { useCurrentToken } from "./useCurrentToken";
 
 export type DescriptionPanelProps = ViewProps;
 
