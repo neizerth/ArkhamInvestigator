@@ -1,11 +1,12 @@
 {
   "name": "arkham-investigator",
   "main": "expo-router/entry",
-  "version": "1.34.0",
+  "version": "2.0.0-alpha.2",
   "scripts": {
     "start": "expo start",
     "reset-project": "node ./scripts/reset-project.js",
     "a": "npm run android",
+    "p:a": "npm run prebuild:android:dev",
     "i": "npm run ios",
     "android": "expo run:android",
     "ios": "expo run:ios",
