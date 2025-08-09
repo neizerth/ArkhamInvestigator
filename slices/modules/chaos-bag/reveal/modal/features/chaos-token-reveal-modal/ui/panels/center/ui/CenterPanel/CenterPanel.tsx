@@ -22,7 +22,9 @@ export const CenterPanel = ({ style, ...props }: CenterPanelProps) => {
 
 	const { type } = token;
 
-	const showTokenValue = useAppSelector(selectModifyChaosTokens);
+	const modify = useAppSelector(selectModifyChaosTokens);
+
+	const showTokenValue = modify && type !== "autoFail";
 
 	const onTap = useCallback(() => {
 		dispatch(
