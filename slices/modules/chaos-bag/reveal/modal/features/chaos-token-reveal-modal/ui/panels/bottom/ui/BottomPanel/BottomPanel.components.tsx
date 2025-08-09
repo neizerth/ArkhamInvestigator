@@ -4,8 +4,10 @@ import { Icon, Row } from "@shared/ui";
 import { View } from "react-native";
 import styled from "styled-components/native";
 import { DescriptionPanel } from "../DescriptionPanel";
+import { TokenEffectSwitch } from "../TokenEffectSwitch";
 
 export const Container: typeof View = styled(View)`
+  margin: 0px -20px;
   gap: 10px;
 `;
 
@@ -68,4 +70,8 @@ export const RevealMoreIcon: typeof Icon = styled(Icon)`
 `;
 
 export const Description: typeof DescriptionPanel = styled(DescriptionPanel)`
+`;
+
+export const EffectSwitch: typeof TokenEffectSwitch = styled(TokenEffectSwitch)`
+  
 `;

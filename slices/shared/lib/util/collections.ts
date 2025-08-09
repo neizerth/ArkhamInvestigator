@@ -25,3 +25,14 @@ export const splitIntoGroups = <T>(
 	}
 	return groups;
 };
+
+export const getLoopNext = <T>(data: T[], index: number) => {
+	const nextIndex = (index + 1) % data.length;
+
+	return data[nextIndex];
+};
+
+export const getLoopPrev = <T>(data: T[], index: number) => {
+	const prevIndex = index === 0 ? data.length - 1 : index - 1;
+	return data[prevIndex];
+};

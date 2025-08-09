@@ -1,7 +1,11 @@
-import type { ChaosBagRevealHandler } from "../../../../model";
+import type {
+	ChaosBagRevealHandler,
+	RevealedChaosBagTokenCancelType,
+} from "../../../../model";
 
 export type HandleUpdateRevealedTokenPayload = {
 	id: string;
+	canceled?: RevealedChaosBagTokenCancelType;
 	sealed?: boolean;
 	value?: number;
 };
