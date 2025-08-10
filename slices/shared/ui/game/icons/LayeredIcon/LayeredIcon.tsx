@@ -1,3 +1,4 @@
+import { isNumber } from "mathjs";
 import { StyleSheet, type ViewProps } from "react-native";
 import type { IconProps } from "../Icon";
 import * as C from "./LayeredIcon.components";
@@ -26,9 +27,9 @@ export const LayeredIcon = ({
 	return (
 		<C.Container
 			style={[
-				Boolean(fontSize) && {
-					width: fontSize,
-					height: fontSize,
+				isNumber(fontSize) && {
+					width: fontSize * 1.2,
+					height: fontSize * 1.2,
 				},
 				contentContainerStyle,
 			]}
