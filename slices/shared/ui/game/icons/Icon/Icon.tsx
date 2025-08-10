@@ -1,13 +1,12 @@
 import type { IconScaleType, PropsWithStroke } from "@shared/model";
 import { ArkhamIcons } from "../../../../../../assets/fonts";
 import { getIconScale } from "../../../../lib/features/game/icons";
-import { useAppSelector } from "../../../../lib/hooks/store/useAppSelector";
-import { selectIcon } from "../../../../lib/store/features/icons";
 import { scaleFontFromStyle } from "../../../../lib/ui";
 import {
 	UnscaledText,
 	type UnscaledTextProps,
 } from "../../../behavior/UnscaledText";
+import { ArkhamIconsMapping } from "./mapping";
 
 export type IconProps = UnscaledTextProps &
 	PropsWithStroke & {
@@ -18,7 +17,7 @@ export type IconProps = UnscaledTextProps &
 export type DefinedIconProps = Omit<IconProps, "icon">;
 
 export const Icon = ({ icon, style, scaleType, ...props }: IconProps) => {
-	const item = useAppSelector(selectIcon(icon));
+	const item = ArkhamIconsMapping[icon];
 
 	if (!item) {
 		// console.warn(`icon ${icon} not found`);

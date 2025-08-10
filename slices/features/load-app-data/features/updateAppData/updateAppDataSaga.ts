@@ -2,37 +2,19 @@ import {
 	detectDefaultLanguage,
 	setAvailableLanguages,
 } from "@modules/core/i18n/shared/lib";
-import { loadInvestigatorsMediaData } from "@shared/api";
-import {
-	seconds,
-	setIcons,
-	setMediaUpdateTime,
-	setMediaVersion,
-} from "@shared/lib";
-import type { ReturnAwaited } from "@shared/model";
+import { setMediaUpdateTime, setMediaVersion } from "@shared/lib";
 import moment from "moment";
-import { put, retry, takeEvery } from "redux-saga/effects";
-import { getIconMapping } from "./getIconMapping";
+import { put, takeEvery } from "redux-saga/effects";
 import { updateAppData } from "./updateAppData";
 
-function* worker() {
-	const maxRetries = 3;
-
-	const data: ReturnAwaited<typeof loadInvestigatorsMediaData> = yield retry(
-		maxRetries,
-		seconds(1),
-		loadInvestigatorsMediaData,
-	);
-	const { icons, languages, version } = data;
-
-	const iconMapping = getIconMapping(icons);
+function* worker({ payload }: ReturnType<typeof updateAppData>) {
+	const { languages, version } = payload;
 
 	const updatedAt = moment().format();
 
 	yield put(setMediaVersion(version));
 	yield put(setMediaUpdateTime(updatedAt));
 	yield put(setAvailableLanguages(languages));
-	yield put(setIcons(iconMapping));
 	yield put(detectDefaultLanguage(languages));
 }
 
