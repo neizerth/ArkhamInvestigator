@@ -48,7 +48,7 @@ export const startNewTurn =
 
 			dispatch(
 				setAdditionalActionUse({
-					use: false,
+					use: true,
 					boardId,
 					history: historyGroup,
 				}),
