@@ -1,6 +1,6 @@
 # Arkham Investigator
 
-Digital Investigator Board for Arkham Horror LCG (Arkham Horro: The Card Game)
+Digital Investigator Board for Arkham Horror LCG (Arkham Horror: The Card Game)
 
 ## Translations
 
