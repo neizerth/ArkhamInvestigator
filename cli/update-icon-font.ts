@@ -11,9 +11,11 @@ const dest = path.join(__dirname, "/../assets/fonts/common/ArkhamIcons");
 const copy = (url: string, file: string) => {
 	console.log(`downloading file ${url}`);
 	fetch(url)
-		.then((r) => r.text())
-		.then((contents) => {
-			fs.writeFileSync(file, contents);
+		.then((r) => r.arrayBuffer())
+		.then((arrayBuffer) => {
+			const buffer = Buffer.from(arrayBuffer);
+
+			fs.writeFileSync(file, buffer);
 			console.log(`file ${file} updated!`);
 		});
 };
