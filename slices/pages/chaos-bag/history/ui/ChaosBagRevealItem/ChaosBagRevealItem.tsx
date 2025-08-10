@@ -1,13 +1,10 @@
-import {
-	selectBoardProp,
-	setCurrentInvestigatorIndex,
-} from "@modules/board/base/shared/lib";
+import { selectBoardProp } from "@modules/board/base/shared/lib";
 import type { ChaosBagHistoryItem } from "@modules/chaos-bag/base/shared/model";
 import type { RevealedChaosBagToken } from "@modules/chaos-bag/reveal/base/shared/model";
 import { removeRevealHistoryItem } from "@modules/chaos-bag/reveal/history/shared/lib";
 import { useLongPress } from "@modules/core/touch/shared/lib";
 import { REMOVE_CLIPPED_SUBVIEWS } from "@shared/config";
-import { goBack, useAppDispatch, useAppSelector } from "@shared/lib";
+import { useAppDispatch, useAppSelector } from "@shared/lib";
 import { useCallback } from "react";
 import type { ListRenderItemInfo, ViewProps } from "react-native";
 import { GestureDetector } from "react-native-gesture-handler";
@@ -35,14 +32,7 @@ export const ChaosBagRevealItem = ({
 		}),
 	);
 
-	const index = boardId - 1;
-
 	const showPosition = tokens.length > 1;
-
-	const selectBoard = useCallback(() => {
-		dispatch(setCurrentInvestigatorIndex(index));
-		dispatch(goBack());
-	}, [dispatch, index]);
 
 	const renderItem = useCallback(
 		({ item, index }: ListRenderItemInfo<RevealedChaosBagToken>) => {
@@ -76,7 +66,7 @@ export const ChaosBagRevealItem = ({
 		return null;
 	}
 
-	const { skillCheckType, skillCheckValue, title, skillCheckExpression } = item;
+	const { title, skillCheckExpression } = item;
 
 	const longPress = useLongPress({
 		onLongPress: removeItem,
@@ -89,26 +79,7 @@ export const ChaosBagRevealItem = ({
 			<C.Container {...props}>
 				<C.Position>{position}</C.Position>
 
-				<C.Investigator>
-					<C.Image
-						faction={investigator.faction_code}
-						code={investigator.id}
-						imageId={investigator.image.id}
-						size={50}
-						showIcon={false}
-						onPress={selectBoard}
-					/>
-					{skillCheckType && (
-						<C.SkillType>
-							<C.SkillTypeIcon statType={skillCheckType} />
-						</C.SkillType>
-					)}
-					{typeof skillCheckValue === "number" && (
-						<C.SkillValue>
-							<C.SkillValueText value={skillCheckValue} />
-						</C.SkillValue>
-					)}
-				</C.Investigator>
+				<C.SkillCheck boardId={boardId} item={item} />
 
 				<C.Separator />
 				<C.List>

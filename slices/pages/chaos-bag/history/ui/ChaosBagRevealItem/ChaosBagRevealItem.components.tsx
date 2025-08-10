@@ -1,6 +1,6 @@
 import { ChaosBagRevealedToken } from "@modules/chaos-bag/reveal/base/entities/ui/ChaosBagRevealedToken";
 import { color, factionColor, font, size } from "@shared/config";
-import { IconNumber, Row, StatIcon, Text } from "@shared/ui";
+import { Row, Text } from "@shared/ui";
 import { SkillCheckExpressionDisplay } from "@widgets/game/skill-check";
 import {
 	InvestigatorPreview,
@@ -9,6 +9,7 @@ import {
 import { View } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import styled, { css } from "styled-components/native";
+import { ChaosBagRevalItemSkillCheck } from "../ChaosBagRevalItemSkillCheck";
 
 export const Container: typeof Row = styled(Row)`
   padding: ${size.gap.small}px ${size.gap.default}px;
@@ -16,21 +17,10 @@ export const Container: typeof Row = styled(Row)`
   gap: ${size.gap.small}px;
 `;
 
-export const Investigator: typeof View = styled(View)`
-  position: relative;
+export const SkillCheck: typeof ChaosBagRevalItemSkillCheck = styled(
+	ChaosBagRevalItemSkillCheck,
+)`
   margin-right: ${size.gap.medium}px;
-`;
-
-export const SkillTypeIcon: typeof StatIcon = styled(StatIcon)`
-  font-size: 24px;
-  line-height: 40px;
-  color: white;
-`;
-
-export const SkillType: typeof View = styled(View)`
-  position: absolute;
-  bottom: -15px;
-  right: -10px;
 `;
 
 export const Image: typeof InvestigatorPreview = styled(InvestigatorPreview)`
@@ -67,22 +57,6 @@ export const TitleText: typeof Text = styled(Text)`
   padding: 0 ${size.gap.small}px;
   background-color: ${color.dark20};
   border-radius: ${size.borderRadius.default}px;
-`;
-
-export const SkillValue: typeof View = styled(View)`
-  position: absolute;
-  top: -5px;
-  right: -5px;
-`;
-
-export const SkillValueText: typeof IconNumber = styled(IconNumber).attrs({
-	stroke: true,
-	strokeStyle: {
-		color: color.text,
-	},
-})`
-  color: ${color.white};
-  font-size: 20px;
 `;
 
 export const Token: typeof ChaosBagRevealedToken = styled(

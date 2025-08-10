@@ -28,3 +28,9 @@ export const partiallyEquals =
 			return value === data[key];
 		});
 	};
+
+export const isNotEmpty = <T>(
+	value?: T,
+): value is Exclude<T, null | undefined> => {
+	return value !== undefined && value !== null;
+};

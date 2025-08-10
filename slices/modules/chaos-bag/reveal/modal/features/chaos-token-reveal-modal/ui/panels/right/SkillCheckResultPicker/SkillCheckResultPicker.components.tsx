@@ -1,8 +1,8 @@
 import {
-	ChaosTokenValue,
 	AutoFail as Fail,
 	AutoSuccessThin as Success,
 } from "@modules/chaos-bag/base/shared/ui";
+import { ResultValue } from "@modules/chaos-bag/result/shared/ui";
 import { Picker } from "@widgets/control/picker";
 import { View } from "react-native";
 import styled from "styled-components/native";
@@ -17,7 +17,7 @@ export const Control: typeof Picker = styled(Picker).attrs({
 })`
 `;
 
-export const Value: typeof ChaosTokenValue = styled(ChaosTokenValue)`
+export const Value: typeof ResultValue = styled(ResultValue)`
 	font-size: 38px;
 	width: 60px;
 `;

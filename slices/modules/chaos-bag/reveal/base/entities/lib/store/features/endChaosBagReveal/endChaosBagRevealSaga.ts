@@ -1,3 +1,4 @@
+import { selectSkillCheckResult } from "@modules/chaos-bag/result/features/lib";
 import {
 	endChaosBagRevealInternal,
 	selectChaosBagReveal,
@@ -9,9 +10,18 @@ function* worker() {
 	const state: ReturnType<typeof selectChaosBagReveal> =
 		yield select(selectChaosBagReveal);
 
+	const result: ReturnType<typeof selectSkillCheckResult> = yield select(
+		selectSkillCheckResult,
+	);
+
 	yield put(endChaosBagRevealInternal());
 
-	yield put(chaosBagRevealEnd(state));
+	yield put(
+		chaosBagRevealEnd({
+			...state,
+			result: state.result || result,
+		}),
+	);
 }
 
 export function* endChaosBagRevealSaga() {

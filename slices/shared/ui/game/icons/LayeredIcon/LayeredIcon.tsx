@@ -1,4 +1,4 @@
-import type { ViewProps } from "react-native";
+import { StyleSheet, type ViewProps } from "react-native";
 import type { IconProps } from "../Icon";
 import * as C from "./LayeredIcon.components";
 
@@ -21,8 +21,18 @@ export const LayeredIcon = ({
 	layers,
 	...props
 }: LayeredIconProps) => {
+	const { fontSize } = StyleSheet.flatten(props.style);
+
 	return (
-		<C.Container style={contentContainerStyle}>
+		<C.Container
+			style={[
+				Boolean(fontSize) && {
+					width: fontSize,
+					height: fontSize,
+				},
+				contentContainerStyle,
+			]}
+		>
 			{layers.map(({ fontSize, color, lineHeight, ...layer }, index) => (
 				<C.Layer key={layer.icon} background={index === layers.length - 1}>
 					<C.LayerIcon

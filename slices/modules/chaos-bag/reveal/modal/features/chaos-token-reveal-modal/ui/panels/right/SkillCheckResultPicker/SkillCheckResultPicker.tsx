@@ -1,4 +1,3 @@
-import type { ChaosTokenType } from "@modules/chaos-bag/base/shared/model";
 import {
 	setChaosBagRevealResult,
 	setChaosBagSucceedBy,
@@ -29,8 +28,7 @@ export const SkillCheckResultPicker = (props: SkillCheckResultPickerProps) => {
 			if (label === "fail") {
 				return <C.AutoFail type="autoFail" />;
 			}
-			const type: ChaosTokenType = fail ? "autoFail" : "elderSign";
-			return <C.Value value={label} type={type} scale={false} />;
+			return <C.Value value={label} fail={fail} scale={false} />;
 		},
 		[fail],
 	);
