@@ -52,6 +52,7 @@
 	"board.help.chaosBag.oneMore": "Tap to reveal one more token",
 	"board.help.chaosBag.swipe": "Swipe down for chaos bag history, right to draw a token, up for scenario reference",
 	"board.help.chaosBag.reference": "Opens a chaos token reference",
+	"board.help.chaosBag.cancelToken": "[blocked] – Toggles token cancel modes. Off by default. Press again to cancel/ignore a token: it’s drawn but its modifier isn’t applied, and its effect is marked as cancelled. Press again ([effect]) to cancel only the token’s text effect",
 
 	"board.help.press.chaosBag": "Chaos bag contents",
 	"board.help.longPress.chaosBag": "Reveals a chaos token",
