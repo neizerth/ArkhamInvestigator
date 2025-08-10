@@ -151,6 +151,8 @@ export const HelpPage = () => {
 				{t`board.help.chaosBag.oneMore`}
 			</Text>
 
+			<C.IconText value={t`board.help.chaosBag.cancelToken`} />
+
 			<Text>
 				<C.Icon icon="list2" />
 				{" - "}
