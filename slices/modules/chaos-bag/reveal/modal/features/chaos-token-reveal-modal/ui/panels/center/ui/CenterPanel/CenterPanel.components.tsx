@@ -60,7 +60,6 @@ export const Control: typeof ChaosTokenValuePicker = styled(
 		fontSize: 180,
 		lineHeight: 160,
 		top: -10,
-		left: -10,
 	},
 })`
   

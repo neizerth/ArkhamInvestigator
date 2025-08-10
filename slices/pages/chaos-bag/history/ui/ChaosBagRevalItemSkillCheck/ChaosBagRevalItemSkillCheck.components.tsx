@@ -91,11 +91,12 @@ export const SpecialResult: typeof View = styled(View)`
 export const AutoFail: typeof Fail = styled(Fail)`
   line-height: 20px;
   font-size: 20px;
+  top: 2px;
 `;
 
 export const AutoSuccess: typeof Success = styled(Success)`
   line-height: 35px;
   font-size: 35px;
-  top: 6px;
+  top: 8px;
   right: -12px;
 `;
