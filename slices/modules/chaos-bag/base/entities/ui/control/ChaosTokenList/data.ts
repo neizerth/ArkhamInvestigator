@@ -5,7 +5,7 @@ export const chaosTokenListData: ChaosTokenListItem[] = [
 	{
 		type: "blessCurse",
 	},
-	...chaosToken.types.regular.map(
+	...chaosToken.types.base.map(
 		(value): ChaosTokenListItem => ({
 			type: "token",
 			value,
