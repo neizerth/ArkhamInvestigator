@@ -12,6 +12,10 @@ export const OverviewBoardPage = () => {
 	const ids = useAppSelector(selectBoardIds);
 	const currentIndex = useAppSelector(selectCurrentInvestigatorIndex);
 
+	const back = useCallback(() => {
+		dispatch(goBack());
+	}, [dispatch]);
+
 	const onSelect = useCallback(
 		(index: number) => () => {
 			dispatch(goBack());
@@ -23,7 +27,7 @@ export const OverviewBoardPage = () => {
 	);
 
 	return (
-		<C.Container title="Investigators">
+		<C.Container title="Investigators" onClose={back}>
 			<C.Content>
 				{ids.map((id, index) => (
 					<Fragment key={id}>
