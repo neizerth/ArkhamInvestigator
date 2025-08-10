@@ -30,7 +30,9 @@
     "eas:android": "npm run prebuild:android && eas build -p android",
     "eas:apk": "npm run eas:android -- --profile apk",
     "build:apk": "npm run eas:apk -- --local",
-    "build:android": "npm run eas:android -- --local"
+    "build:android": "npm run eas:android -- --local",
+    "setup:font": "tsx ./cli/update-icon-font.ts",
+    "setup": "npm run setup"
   },
   "jest": {
     "preset": "jest-expo"
@@ -45,6 +47,7 @@
     "@reduxjs/toolkit": "^2.5.1",
     "arkham-divider-data": "^1.1.14",
     "arkham-investigator-data": "^2.0.6",
+    "dotenv": "^17.2.1",
     "expo": "^53.0.11",
     "expo-application": "~6.1.4",
     "expo-asset": "~11.1.5",
@@ -123,6 +126,7 @@
     "lefthook": "^1.11.3",
     "react-native-svg-transformer": "^1.5.0",
     "react-test-renderer": "19.0.0",
+    "tsx": "^4.20.3",
     "typescript": "^5.3.3"
   },
   "private": true,

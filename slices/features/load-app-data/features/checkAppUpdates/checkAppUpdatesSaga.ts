@@ -43,7 +43,7 @@ function* worker() {
 	});
 
 	if (needUpdate) {
-		yield put(updateAppData());
+		yield put(updateAppData(data));
 	}
 }
 export function* checkAppUpdatesSaga() {

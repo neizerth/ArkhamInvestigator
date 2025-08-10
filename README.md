@@ -2,6 +2,13 @@
 
 Digital Investigator Board for Arkham Horror LCG (Arkham Horror: The Card Game)
 
+## Setup
+
+1. Run `npm install`
+2. Follow Expo Setup Guide
+3. Run `npm run setup`
+4. Run `npm run android` for Android Development and `npm run ios` for iOS
+
 ## Translations
 
 1. Copy [slices/modules/core/i18n/shared/config/translations/en.json](./slices/modules/core/i18n/shared/config/translations/en.json) and rename it to your locale's ISO-639 code.
