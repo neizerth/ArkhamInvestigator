@@ -14,6 +14,4 @@ If you want to add skins or new investigators, follow to the [data repository](h
 
 ## Architecture Concepts
 
-This App in general is following by [FSD](https://github.com/feature-sliced) concepts, except:
-
-   UI components can be used in the same slice. 
+This App in general is following by [FSD](https://github.com/feature-sliced) concepts
