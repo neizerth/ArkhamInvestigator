@@ -12,24 +12,22 @@ export type AdditionalActionProps = TouchableOpacityProps;
 export const AdditionalAction = (props: AdditionalActionProps) => {
 	const dispatch = useAppDispatch();
 
-	const additionalAction = useAppSelector(
-		selectIsAdditionalActionUsed("current"),
-	);
+	const isUsed = useAppSelector(selectIsAdditionalActionUsed("current"));
 
 	const toggleAdditionalAction = useCallback(() => {
 		dispatch(
 			setAdditionalActionUse({
 				boardId: "current",
-				use: !additionalAction,
+				use: isUsed,
 			}),
 		);
-	}, [dispatch, additionalAction]);
+	}, [dispatch, isUsed]);
 
 	return (
 		<Special
 			{...props}
 			icon="investigator"
-			value={additionalAction}
+			value={!isUsed}
 			onPress={toggleAdditionalAction}
 		/>
 	);

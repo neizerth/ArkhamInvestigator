@@ -11,5 +11,7 @@ export const selectIsAdditionalActionUsed = (boardId: BoardId) =>
 				abilityId: additionalActionAbilityId,
 			}),
 		],
-		(abilityuseInfo) => !abilityuseInfo,
+		(abilityUseInfo) => {
+			return Boolean(abilityUseInfo);
+		},
 	);
