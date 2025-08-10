@@ -4,7 +4,7 @@ Digital Investigator Board for Arkham Horror LCG (Arkham Horro: The Card Game)
 
 ## Translations
 
-1. Copy [slices/features/i18n/config/translations/en.json] and rename it to your locale's ISO-639 code.
+1. Copy [slices/modules/core/i18n/shared/config/translations/en.json](./slices/modules/core/i18n/shared/config/translations/en.json) and rename it to your locale's ISO-639 code.
 2. Prefix your commit with `feat: ` or `fix: `
 2. Translate and open a PR.
 
