@@ -50,7 +50,7 @@
 	"board.help.chaosBag.token.press": "Tap on a revealed token to return it to the chaos bag (or remove if it is [bless] or [curse])",
 	"board.help.chaosBag.token.longPress": "Long press on a revealed token to seal it",
 	"board.help.chaosBag.oneMore": "Tap to reveal one more token",
-	"board.help.chaosBag.swipe": "Swipe down on a token to see its reference information (if its presented)",
+	"board.help.chaosBag.swipe": "Swipe down for chaos bag history, right to draw a token, up for scenario reference",
 	"board.help.chaosBag.reference": "Opens a chaos token reference",
 
 	"board.help.press.chaosBag": "Chaos bag contents",
