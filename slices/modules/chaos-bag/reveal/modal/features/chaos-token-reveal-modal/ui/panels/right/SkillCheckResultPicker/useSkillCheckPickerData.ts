@@ -11,7 +11,7 @@ import type { SkillCheckPickerItem } from "./SkillCheckResultPicker.types";
 export const useSkillCheckPickerData = () => {
 	const result = useAppSelector(selectSkillCheckResult);
 	const succeedBy = useAppSelector(selectSkillCheckSucceedByResult);
-	const value = useAppSelector(selectChaosBagRevealResult);
+	const storeValue = useAppSelector(selectChaosBagRevealResult);
 
 	const fail = succeedBy < 0 || result === "fail";
 
@@ -34,6 +34,8 @@ export const useSkillCheckPickerData = () => {
 			},
 		];
 	}, [result, succeedByValue]);
+
+	const value = storeValue ?? result;
 
 	return {
 		result,
