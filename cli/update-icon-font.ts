@@ -8,13 +8,15 @@ const fontURL = `${baseURL}/fonts/icons.ttf`;
 
 const dest = path.join(__dirname, "/../assets/fonts/common/ArkhamIcons");
 
-const copy = (url: string, file: string) =>
+const copy = (url: string, file: string) => {
+	console.log(`downloading file ${url}`);
 	fetch(url)
 		.then((r) => r.text())
 		.then((contents) => {
 			fs.writeFileSync(file, contents);
 			console.log(`file ${file} updated!`);
 		});
+};
 
 copy(fontURL, `${dest}/ArkhamIcons.ttf`);
 copy(jsonURL, `${dest}/ArkhamIcons.json`);
