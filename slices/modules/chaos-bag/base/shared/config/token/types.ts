@@ -53,11 +53,6 @@ export const curseChaosTokenType: ChaosTokenType = "curse";
 
 export const frostChaosTokenType: ChaosTokenType = "frost";
 
-export const regulatChaosTokenTypes: ChaosTokenType[] = [
-	...baseChaosTokenTypes,
-	frostChaosTokenType,
-];
-
 export const removableChaosTokenTypes: ChaosTokenType[] = [
 	blessChaosTokenType,
 	curseChaosTokenType,
@@ -84,7 +79,6 @@ export const chaosTokenTypes = {
 	},
 	special: specialChaosTokenTypes,
 	base: baseChaosTokenTypes,
-	regular: regulatChaosTokenTypes,
 	all: allChaosTokenTypes,
 	order: chaosTokenOrder,
 	removable: removableChaosTokenTypes,
