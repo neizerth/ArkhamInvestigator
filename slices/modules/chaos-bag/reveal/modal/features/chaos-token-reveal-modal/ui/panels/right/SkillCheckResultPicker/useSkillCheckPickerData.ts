@@ -7,6 +7,7 @@ import {
 	getChaosBagSkillCheckFailed,
 } from "@modules/chaos-bag/result/shared/lib";
 import { selectChaosBagRevealResult } from "@modules/chaos-bag/reveal/base/shared/lib";
+import type { ChaosTokenValue } from "@modules/chaos-bag/value/shared/model";
 import { signedNumber, useAppSelector } from "@shared/lib";
 import { useMemo } from "react";
 import type { SkillCheckPickerItem } from "./SkillCheckResultPicker.types";
@@ -41,7 +42,10 @@ export const useSkillCheckPickerData = () => {
 		];
 	}, [result, succeedByValue]);
 
-	const value = storeValue || result;
+	const value = getActualValue({
+		currentValue: storeValue,
+		defaultValue: result,
+	});
 
 	return {
 		result,
@@ -50,4 +54,22 @@ export const useSkillCheckPickerData = () => {
 		data,
 		value,
 	};
+};
+
+const getActualValue = ({
+	currentValue,
+	defaultValue,
+}: {
+	currentValue: ChaosTokenValue | null;
+	defaultValue: ChaosTokenValue | null;
+}) => {
+	if (currentValue === "fail" || currentValue === "success") {
+		return currentValue;
+	}
+
+	if (!currentValue) {
+		return defaultValue;
+	}
+
+	return defaultValue;
 };
