@@ -8,8 +8,6 @@ export const Container: typeof View = styled(View)`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 120px;
-  height: 120px;
 `;
 
 type LayerProps = ViewProps & {

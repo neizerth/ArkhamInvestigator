@@ -2,7 +2,10 @@ import {
 	selectSkillCheckResult,
 	selectSkillCheckSucceedByResult,
 } from "@modules/chaos-bag/result/features/lib";
-import { getChaosBagResultSign } from "@modules/chaos-bag/result/shared/lib";
+import {
+	getChaosBagResultSign,
+	getChaosBagSkillCheckFailed,
+} from "@modules/chaos-bag/result/shared/lib";
 import { selectChaosBagRevealResult } from "@modules/chaos-bag/reveal/base/shared/lib";
 import { signedNumber, useAppSelector } from "@shared/lib";
 import { useMemo } from "react";
@@ -13,7 +16,10 @@ export const useSkillCheckPickerData = () => {
 	const succeedBy = useAppSelector(selectSkillCheckSucceedByResult);
 	const storeValue = useAppSelector(selectChaosBagRevealResult);
 
-	const fail = succeedBy < 0 || result === "fail";
+	const fail = getChaosBagSkillCheckFailed({
+		succeedBy,
+		result,
+	});
 
 	const sign = getChaosBagResultSign(result);
 	const succeedByValue = signedNumber(succeedBy, sign);
@@ -35,7 +41,7 @@ export const useSkillCheckPickerData = () => {
 		];
 	}, [result, succeedByValue]);
 
-	const value = storeValue ?? result;
+	const value = storeValue || result;
 
 	return {
 		result,
