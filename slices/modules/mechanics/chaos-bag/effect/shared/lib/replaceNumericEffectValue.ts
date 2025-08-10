@@ -20,6 +20,6 @@ export const replaceNumericEffectValue = ({ text, value }: Options) => {
 		if (!Number.isNaN(sourceValue) && sourceValue === effectValue) {
 			return source;
 		}
-		return `${effectValue} (${source})`;
+		return `${effectValue}  ↩ ${source}`;
 	});
 };

@@ -8,5 +8,5 @@ type Options = {
 
 export const replaceXEffectValue = ({ text, value }: Options) => {
 	const effectValue = getEffectTokenValue(value);
-	return text.replace(/([-—−]X)/, `${effectValue} ($1)`);
+	return text.replace(/([-—−]X)/, `${effectValue} ↩ $1`);
 };
