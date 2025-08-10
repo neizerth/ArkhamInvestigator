@@ -17,9 +17,13 @@ export const Control: typeof Picker = styled(Picker).attrs({
 })`
 `;
 
+export const ValueContainer: typeof View = styled(View)`
+	width: 100%;
+`;
+
 export const Value: typeof ResultValue = styled(ResultValue)`
 	font-size: 38px;
-	width: 60px;
+	flex: 1;
 `;
 
 export const AutoFail: typeof Fail = styled(Fail)`

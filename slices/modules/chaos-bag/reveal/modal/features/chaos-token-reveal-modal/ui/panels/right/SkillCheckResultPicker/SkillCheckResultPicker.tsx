@@ -28,7 +28,11 @@ export const SkillCheckResultPicker = (props: SkillCheckResultPickerProps) => {
 			if (label === "fail") {
 				return <C.AutoFail type="autoFail" />;
 			}
-			return <C.Value value={label} fail={fail} scale={false} />;
+			return (
+				<C.ValueContainer>
+					<C.Value value={label} fail={fail} scale={false} />
+				</C.ValueContainer>
+			);
 		},
 		[fail],
 	);
