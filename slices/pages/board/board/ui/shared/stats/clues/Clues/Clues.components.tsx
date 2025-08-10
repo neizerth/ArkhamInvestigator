@@ -3,7 +3,7 @@ import { IconButton, type IconButtonProps } from "@shared/ui";
 import * as UI from "@shared/ui";
 import { Value as BaseValue } from "@shared/ui";
 import type { FC } from "react";
-import styled from "styled-components/native";
+import styled, { css } from "styled-components/native";
 import { assetsSize } from "../../../../../config";
 import { withStat } from "../../../../../lib";
 import { StatPickerMemo as StatPicker } from "../../common/StatPicker";
@@ -49,4 +49,9 @@ export const Lock: FC<LockProps> = styled(IconButton).attrs(
 	width: 50px;
 	align-items: flex-start;
 	filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.3));
+	${({ enabled }: LockProps) =>
+		enabled &&
+		css`
+		filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.3));
+	`}
 `;
