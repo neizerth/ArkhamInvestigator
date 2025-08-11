@@ -1,9 +1,8 @@
-// TODO revert tokens
 import {
 	type changeBoardHistoryAbilityUse,
 	createAbilityUseFilter,
 } from "@modules/board/abilities/shared/lib";
-import { removeMultipleChaosTokensByType } from "@modules/chaos-bag/base/entities/lib";
+import { removeChaosTokens } from "@modules/chaos-bag/base/entities/lib";
 import { put, takeEvery } from "redux-saga/effects";
 
 const filterAction = createAbilityUseFilter({
@@ -13,8 +12,9 @@ const filterAction = createAbilityUseFilter({
 
 function* worker({ payload }: ReturnType<typeof changeBoardHistoryAbilityUse>) {
 	yield put(
-		removeMultipleChaosTokensByType({
+		removeChaosTokens({
 			...payload,
+			removeType: "multiple",
 			source: "effect",
 			type: "bless",
 			count: 3,

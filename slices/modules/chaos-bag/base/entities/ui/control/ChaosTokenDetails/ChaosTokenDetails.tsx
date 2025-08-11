@@ -6,8 +6,7 @@ import type { ViewProps } from "react-native";
 
 import {
 	addSingleChaosToken,
-	removeAllChaosTokensByType,
-	removeSingleChaosTokenByType,
+	removeChaosTokens,
 	selectChaosTokenCountByType,
 } from "@modules/chaos-bag/base/entities/lib";
 import { chaosToken } from "@modules/chaos-bag/base/shared/config";
@@ -36,7 +35,8 @@ export const ChaosTokenDetails = ({
 
 	const clear = useCallback(() => {
 		dispatch(
-			removeAllChaosTokensByType({
+			removeChaosTokens({
+				removeType: "all",
 				boardId: "current",
 				type,
 			}),
@@ -48,7 +48,8 @@ export const ChaosTokenDetails = ({
 			return false;
 		}
 		dispatch(
-			removeSingleChaosTokenByType({
+			removeChaosTokens({
+				removeType: "type",
 				boardId: "current",
 				type,
 			}),

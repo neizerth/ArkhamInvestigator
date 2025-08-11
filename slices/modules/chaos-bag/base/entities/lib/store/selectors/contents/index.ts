@@ -1,2 +1,2 @@
-export * from "./selectAvailableChaosTokens";
+export * from "./selectUnsealedChaosTokens";
 export * from "./selectSealedChaosTokens";

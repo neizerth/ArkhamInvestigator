@@ -53,6 +53,17 @@
 	"board.help.chaosBag.reference": "Открыть справку по жетонам",
 	"board.help.chaosBag.cancelToken": "[blocked] - Переключает режимы отмены жетона. Изначально выключен. Повторное нажатие отменяет/игнорирует жетон: жетон вытянут из мешка, но его модификатор не учитывается в итоговом значении проверки, а эффект помечается как отменённый. Повторное нажатие с [effect] отменяет только эффект жетона (текст)",
 
+	"chaosToken.remove.confirm.title_one": "Жетон участвует в проверке",
+	"chaosToken.remove.confirm.title_few": "Жетоны участвуют в проверке",
+	"chaosToken.remove.confirm.title_many": "Жетоны жетонов участвуют в проверке",
+	"chaosToken.remove.confirm.subtitle_one": "Удалить жетон?",
+	"chaosToken.remove.confirm.subtitle_few": "Удалить жетоны?",
+	"chaosToken.remove.confirm.subtitle_many": "Удалить жетоны?",
+
+	"chaosToken.remove.confirm.text_one": "Жетон {{token}} участвует в проверке. Его удаление может изменить результат текущей проверки или отменить её",
+	"chaosToken.remove.confirm.text_few": "{{count}} жетона {{token}} участвуют в проверке. Их удаление может изменить результат текущей проверки или отменить её",
+	"chaosToken.remove.confirm.text_many": "{{count}} жетонов {{token}} участвуют в проверке. Их удаление может изменить результат текущей проверки или отменить её",
+
 	"Modify tokens": "Изменять значения жетонов",
 
 	"board.help.press.chaosBag": "Показывает содержимое мешка хаоса",

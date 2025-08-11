@@ -11,22 +11,17 @@ export type RemoveChaosTokenByTypePayload = Partial<PropsWithBoardId> & {
 	type: ChaosTokenType;
 };
 
-export const removeSingleChaosTokenByType =
+export const removeChaosTokenByType =
 	createAction<RemoveChaosTokenByTypePayload>(
 		`${chaosBagPrefix}/removeTokenByType`,
 	);
 
-export const singleChaosTokenRemovedByType =
+export const processSingleChaosTokenByType =
 	createAction<RemoveChaosTokenByTypePayload>(
-		`${chaosBagPrefix}/singleTokenRemovedByType`,
+		`${chaosBagPrefix}/processRemoveTokenByType`,
 	);
 
-export type CantRemoveSingleChaosTokenByTypePayload =
-	RemoveChaosTokenByTypePayload & {
-		available: number;
-	};
-
-export const cantRemoveSingleChaosTokenByType =
-	createAction<CantRemoveSingleChaosTokenByTypePayload>(
-		`${chaosBagPrefix}/cantRemoveTokenByType`,
+export const chaosTokenRemovedByType =
+	createAction<RemoveChaosTokenByTypePayload>(
+		`${chaosBagPrefix}/tokenRemovedByType`,
 	);

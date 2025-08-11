@@ -7,6 +7,7 @@ import type {
 	RevealedChaosBagToken,
 } from "@modules/chaos-bag/reveal/base/shared/model";
 import { whereId } from "@shared/lib/util";
+import { isNotNil } from "ramda";
 
 export type HandleSyncRevealedTokensWithContentsPayload = {
 	contents: ChaosBagToken[];
@@ -27,7 +28,7 @@ export const handleSyncRevealedTokensWithContents: ChaosBagRevealHandler<
 		};
 
 		if (!chaosBagToken) {
-			return updatedValue;
+			return null;
 		}
 
 		return {
@@ -35,6 +36,8 @@ export const handleSyncRevealedTokensWithContents: ChaosBagRevealHandler<
 			value,
 		};
 	};
-	state.revealedTokens = state.revealedTokens.map(update);
-	state.allRevealedTokens = state.allRevealedTokens.map(update);
+	state.revealedTokens = state.revealedTokens.map(update).filter(isNotNil);
+	state.allRevealedTokens = state.allRevealedTokens
+		.map(update)
+		.filter(isNotNil);
 };
