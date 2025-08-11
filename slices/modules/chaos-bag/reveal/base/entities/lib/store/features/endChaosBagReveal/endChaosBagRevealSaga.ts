@@ -23,8 +23,8 @@ function* worker() {
 	yield put(
 		chaosBagRevealEnd({
 			...state,
-			result: state.result || result,
-			succeedBy: state.succeedBy || succeedBy,
+			result: state.result ?? result,
+			succeedBy: state.succeedBy ?? succeedBy,
 		}),
 	);
 }

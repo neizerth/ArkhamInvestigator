@@ -22,4 +22,8 @@ export const InvesigatorCode = {
 	ZoeySamaras: {
 		parallel: "90059",
 	},
+	FatherMateo: {
+		base: "04004",
+		parallel: "90081",
+	},
 };

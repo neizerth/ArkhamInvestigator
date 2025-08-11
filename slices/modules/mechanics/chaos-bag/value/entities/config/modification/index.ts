@@ -1,8 +1,10 @@
 import type { InvestigatorTokenValueModificationCallback as Callback } from "../../model";
-import { JimCulverTokenValues } from "./JimCulverTokenValues";
+import { CampaignTokenValues } from "./campaigns";
+import { CustomContentTokenValues } from "./custom";
 
 type TokenModifications = Partial<Record<string, Callback>>;
 
 export const tokenValueModifications: TokenModifications = {
-	...JimCulverTokenValues,
+	...CampaignTokenValues,
+	...CustomContentTokenValues,
 };

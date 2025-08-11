@@ -16,6 +16,9 @@ export const selectSkillCheckSucceedByResult = createSelector(
 		if (result === null) {
 			return 0;
 		}
+		if (result === "fail") {
+			return 0;
+		}
 		const difficulty = difficultyValue || 0;
 		const difficultyType = type || "gte";
 
