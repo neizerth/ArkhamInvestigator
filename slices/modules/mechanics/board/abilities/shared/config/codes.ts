@@ -25,6 +25,9 @@ export const AbilityCode = {
 		},
 		base: "get-resource",
 	},
+	FatherMateo: {
+		base: "mateo-auto-fail-reveal",
+	},
 };
 
 export const specialAbilitityCodes = [

@@ -8,32 +8,30 @@ type Options = {
 	tokens: RevealedChaosBagToken[];
 };
 
-export const getSkillCheckResult = ({
-	skillValue,
-	tokens,
-}: Options): ChaosTokenValue => {
+export const getSkillCheckResult = (options: Options): ChaosTokenValue => {
+	const { skillValue } = options;
+	const tokens = options.tokens.filter(({ removed }) => !removed);
+
+	// const activeTokens =
 	const getCount = (type: ChaosTokenType) =>
 		tokens.filter(propEq(type, "type")).length;
 
 	const autoFailCount = getCount("autoFail");
+	const frostCount = getCount("frost");
+	const containsAutoFail = tokens.some(({ value }) => value === "fail");
+	const containsAutoSuccess = tokens.some(({ value }) => value === "success");
 
 	if (autoFailCount > 0) {
 		return "fail";
 	}
 
-	const frostCount = getCount("frost");
-
 	if (frostCount > 1) {
 		return "fail";
 	}
 
-	const containsAutoFail = tokens.some(({ value }) => value === "fail");
-
 	if (containsAutoFail) {
 		return "fail";
 	}
-
-	const containsAutoSuccess = tokens.some(({ value }) => value === "success");
 
 	if (containsAutoSuccess) {
 		return "success";

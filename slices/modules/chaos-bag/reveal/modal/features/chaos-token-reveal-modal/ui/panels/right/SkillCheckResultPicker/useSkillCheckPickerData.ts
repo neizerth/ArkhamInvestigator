@@ -2,15 +2,19 @@ import {
 	selectSkillCheckResult,
 	selectSkillCheckSucceedByResult,
 } from "@modules/chaos-bag/result/features/lib";
-import {
-	getChaosBagResultSign,
-	getChaosBagSkillCheckFailed,
-} from "@modules/chaos-bag/result/shared/lib";
+import { getChaosBagSkillCheckFailed } from "@modules/chaos-bag/result/shared/lib";
 import { selectChaosBagRevealResult } from "@modules/chaos-bag/reveal/base/shared/lib";
 import type { ChaosTokenValue } from "@modules/chaos-bag/value/shared/model";
-import { signedNumber, useAppSelector } from "@shared/lib";
+import { useAppSelector } from "@shared/lib";
+import { compact } from "ramda-adjunct";
 import { useMemo } from "react";
 import type { SkillCheckPickerItem } from "./SkillCheckResultPicker.types";
+
+export type SkillCheckResultItem = {
+	type: "success" | "fail";
+	value: ChaosTokenValue;
+	succeedBy: string | null;
+};
 
 export const useSkillCheckPickerData = () => {
 	const result = useAppSelector(selectSkillCheckResult);
@@ -22,25 +26,25 @@ export const useSkillCheckPickerData = () => {
 		result,
 	});
 
-	const sign = getChaosBagResultSign(result);
-	const succeedByValue = signedNumber(succeedBy, sign);
-
 	const data = useMemo((): SkillCheckPickerItem[] => {
-		return [
+		return compact([
 			{
-				label: "success",
+				type: "success",
+				succeedBy: 0,
 				value: "success",
 			},
-			{
-				label: succeedByValue,
+			typeof result === "number" && {
+				type: fail ? "fail" : "success",
+				succeedBy,
 				value: result,
 			},
 			{
-				label: "fail",
+				type: "fail",
+				succeedBy: 0,
 				value: "fail",
 			},
-		];
-	}, [result, succeedByValue]);
+		]);
+	}, [result, succeedBy, fail]);
 
 	const value = getActualValue({
 		currentValue: storeValue,

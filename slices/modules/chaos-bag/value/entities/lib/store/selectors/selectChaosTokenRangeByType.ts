@@ -1,13 +1,11 @@
 import type { BoardId } from "@modules/board/base/shared/model";
 import type { ChaosTokenType } from "@modules/chaos-bag/base/shared/model";
-import {
-	selectBoardChaosTokenValueModifications,
-	selectBoardElderSignValue,
-} from "@modules/mechanics/chaos-bag/value/entities/lib";
+import { selectBoardChaosTokenValueModifications } from "@modules/mechanics/chaos-bag/value/entities/lib";
 
 import { createSelector } from "@reduxjs/toolkit";
 import { rangeStep, selectReferenceCardTokens } from "@shared/lib";
 import { propEq, range } from "ramda";
+import { isUndefined } from "ramda-adjunct";
 import { getSelectRange, getValueRange } from "../../logic";
 
 const MAX_VALUE = 10;
@@ -24,19 +22,22 @@ export const selectChaosTokenRangeByType = ({ type, boardId }: Options) =>
 	createSelector(
 		[
 			selectReferenceCardTokens,
-			selectBoardElderSignValue(boardId),
 			selectBoardChaosTokenValueModifications(boardId),
 		],
-		(data, elderSignValue, specialTokens) => {
+		(data, specialTokens) => {
 			const specialValue = specialTokens[type];
+			const item = data.find(propEq(type, "token"));
 
-			if (typeof specialValue === "number") {
+			if (
+				type === "autoFail" &&
+				(isUndefined(specialValue) || specialValue === "fail")
+			) {
+				return [];
+			}
+
+			if (typeof specialValue !== "undefined") {
 				return [specialValue];
 			}
-			if (type === "elderSign" && elderSignValue) {
-				return [elderSignValue];
-			}
-			const item = data.find(propEq(type, "token"));
 
 			if (!item) {
 				return defaultData;

@@ -5,10 +5,7 @@ import {
 	defaultNumericChaosTokenValue,
 } from "@modules/chaos-bag/value/shared/config";
 import { selectChaosTokenValueInternal } from "@modules/chaos-bag/value/shared/lib";
-import {
-	selectBoardChaosTokenValueModifications,
-	selectBoardElderSignValue,
-} from "@modules/mechanics/chaos-bag/value/entities/lib";
+import { selectBoardChaosTokenValueModifications } from "@modules/mechanics/chaos-bag/value/entities/lib";
 import { createSelector } from "@reduxjs/toolkit";
 import { selectBoardRefenceCardTokenValues } from "./selectBoardRefenceCardTokenValues";
 import { selectBoardTokenValues } from "./selectBoardTokenValues";
@@ -19,7 +16,6 @@ export const selectChaosBagTokenValues = (boardId: BoardId) =>
 		[
 			selectCurrentReferenceCardTokenValues,
 			selectBoardRefenceCardTokenValues(boardId),
-			selectBoardElderSignValue(boardId),
 			selectChaosTokenValueInternal,
 			selectBoardTokenValues(boardId),
 			selectBoardChaosTokenValueModifications(boardId),
@@ -27,7 +23,6 @@ export const selectChaosBagTokenValues = (boardId: BoardId) =>
 		(
 			referenceCardValues,
 			defaultInvestigatorValues,
-			elderSign,
 			values,
 			customizedValues,
 			signatureModifications,
@@ -37,7 +32,6 @@ export const selectChaosBagTokenValues = (boardId: BoardId) =>
 				...defaultChaosTokenValues,
 				...referenceCardValues,
 				...defaultInvestigatorValues,
-				...(elderSign ? { elderSign } : {}),
 				...(values || {}),
 				...(customizedValues || {}),
 				...signatureModifications,

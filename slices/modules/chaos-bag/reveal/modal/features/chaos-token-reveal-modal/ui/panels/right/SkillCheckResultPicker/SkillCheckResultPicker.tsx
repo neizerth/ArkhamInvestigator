@@ -17,24 +17,22 @@ export type SkillCheckResultPickerProps = ViewProps;
 
 export const SkillCheckResultPicker = (props: SkillCheckResultPickerProps) => {
 	const dispatch = useAppDispatch();
-	const { fail, data, value, succeedBy } = useSkillCheckPickerData();
+	const { data, value, succeedBy } = useSkillCheckPickerData();
 
 	const renderItem: PickerListRenderItem<SkillCheckPickerItem> = useCallback(
 		({ item }) => {
-			const { label } = item;
-			if (label === "success") {
-				return <C.AutoSuccess type="elderSign" />;
-			}
-			if (label === "fail") {
-				return <C.AutoFail type="autoFail" />;
-			}
+			const { succeedBy, type } = item;
+			const fail = type === "fail";
+			const value = succeedBy.toString();
 			return (
-				<C.ValueContainer>
-					<C.Value value={label} fail={fail} scale={false} />
-				</C.ValueContainer>
+				<C.Special>
+					{type === "success" && <C.AutoSuccess type="elderSign" />}
+					{type === "fail" && <C.AutoFail type="autoFail" />}
+					{value !== null && <C.SpecialValue value={value} fail={fail} />}
+				</C.Special>
 			);
 		},
-		[fail],
+		[],
 	);
 
 	const onChange = useCallback(
@@ -42,13 +40,12 @@ export const SkillCheckResultPicker = (props: SkillCheckResultPickerProps) => {
 			if (!event.value) {
 				return;
 			}
-			const { value } = event.value;
-			const succeedByValue = typeof value === "number" ? succeedBy : null;
+			const { value, succeedBy } = event.value;
 
 			dispatch(setChaosBagRevealResult(value));
-			dispatch(setChaosBagSucceedBy(succeedByValue));
+			dispatch(setChaosBagSucceedBy(succeedBy));
 		},
-		[dispatch, succeedBy],
+		[dispatch],
 	);
 
 	const item = data.find((item) => item.value === value);
