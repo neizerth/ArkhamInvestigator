@@ -122,6 +122,15 @@
 	"chaosToken.canceled": "This token has been canceled or ignored\n<old>{{effect}}</old>",
 	"chaosToken.canceled.effect": "The token's effect has been canceled\n<old>{{effect}}</old>",
 
+	"chaosToken.remove.confirm.title_one": "Token in skill check",
+	"chaosToken.remove.confirm.title_many": "Tokens in skill check",
+
+	"chaosToken.remove.confirm.subtitle_one": "Remove token?",
+	"chaosToken.remove.confirm.subtitle_many": "Remove tokens?",
+
+	"chaosToken.remove.confirm.text_one": "Token {{token}} is in the skill check. Removing it may change the result cancel the skill check.",
+	"chaosToken.remove.confirm.text_many": "{{count}} tokens {{token}} are in the skill check. Removing them may change the result cancel the skill check.",
+
 	"chaosBag.addToken_one": "{{name}} adds {{count}} {{token}} token to the chaos bag",
 	"chaosBag.addToken_many": "{{name}} adds {{count}} {{token}} tokens to the chaos bag",
 

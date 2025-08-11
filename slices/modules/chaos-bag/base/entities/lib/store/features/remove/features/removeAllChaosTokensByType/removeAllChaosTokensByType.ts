@@ -16,6 +16,11 @@ export const removeAllChaosTokensByType =
 		`${chaosBagPrefix}/removeAllChaosTokensByType`,
 	);
 
+export const processRemoveAllChaosTokensByType =
+	createAction<RemoveAllChaosTokensByTypePayload>(
+		`${chaosBagPrefix}/processRemoveAllChaosTokensByType`,
+	);
+
 export const allChaosTokensByTypeRemoved =
 	createAction<RemoveAllChaosTokensByTypePayload>(
 		`${chaosBagPrefix}/allChaosTokensByTypeRemoved`,

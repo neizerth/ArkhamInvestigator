@@ -1,6 +1,6 @@
 import { spawn } from "redux-saga/effects";
-import { chaosBagEntitiesSaga } from "./entities/lib/store/sagas";
-import { chaosBagFeaturesSaga } from "./features/lib/store/sagas";
+import { chaosBagEntitiesSaga } from "./entities/sagas";
+import { chaosBagFeaturesSaga } from "./features/sagas";
 
 export function* chaosBagBaseSaga() {
 	yield spawn(chaosBagEntitiesSaga);

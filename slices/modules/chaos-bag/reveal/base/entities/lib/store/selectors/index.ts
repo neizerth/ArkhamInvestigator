@@ -1,2 +1,3 @@
 export * from "./logic";
-export * from "./selectUnrevealedChaosTokensCount";
+export * from "./selectUnrevealedChaosTokens";
+export * from "./selectUnrevealedChaosTokensByType";

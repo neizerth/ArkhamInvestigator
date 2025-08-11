@@ -22,14 +22,3 @@ export const multipleChaosTokensRemovedByType =
 	createAction<RemoveMultipleChaosTokensByTypePayload>(
 		`${chaosBagPrefix}/multipleChaosTokensRemovedByType`,
 	);
-
-export type CantRemoveMultipleChaosTokensByTypePayload =
-	RemoveMultipleChaosTokensByTypePayload & {
-		count: number;
-		available: number;
-	};
-
-export const cantRemoveMultipleChaosTokensByType =
-	createAction<CantRemoveMultipleChaosTokensByTypePayload>(
-		`${chaosBagPrefix}/cantRemoveMultipleTokensByType`,
-	);

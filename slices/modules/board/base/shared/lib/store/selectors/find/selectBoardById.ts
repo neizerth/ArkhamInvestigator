@@ -8,8 +8,8 @@ import { getBoardById } from "../../getters/find/getBoardById";
 
 export const selectBoardById = (boardId: BoardId) =>
 	createSelector(
-		[selectInvestigatorBoards, selectCurrentInvestigatorIndex],
-		(investigatorBoards, currentInvestigatorIndex) => {
+		[selectInvestigatorBoards, selectCurrentInvestigatorIndex, () => boardId],
+		(investigatorBoards, currentInvestigatorIndex, boardId) => {
 			return getBoardById({
 				investigatorBoards,
 				currentInvestigatorIndex,

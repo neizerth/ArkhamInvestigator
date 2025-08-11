@@ -8,7 +8,7 @@ export type CanRemoveMultipleChaosTokensOptions =
 		count: number;
 	};
 
-export const canRemoveMultipleChaosTokensFromBag = (
+export const canRemoveChaosTokens = (
 	options: CanRemoveMultipleChaosTokensOptions,
 ) => {
 	const { count } = options;

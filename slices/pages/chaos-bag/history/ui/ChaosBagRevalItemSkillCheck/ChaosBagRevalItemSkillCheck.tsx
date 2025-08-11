@@ -68,10 +68,10 @@ export const ChaosBagRevalItemSkillCheck = ({
 					<C.SkillTypeIcon statType={skillCheckType} />
 				</C.SkillType>
 			)}
-			{isNotEmpty(result) && (
+			{isNotEmpty(result) && isNotEmpty(succeedBy) && (
 				<C.Result>
 					{isNumber(result) ? (
-						<C.ResultValue value={result} fail={fail} scale={false} />
+						<C.ResultValue value={succeedBy} fail={fail} scale={false} />
 					) : (
 						<C.SpecialResult>
 							{result === "fail" && <C.AutoFail type="autoFail" />}
