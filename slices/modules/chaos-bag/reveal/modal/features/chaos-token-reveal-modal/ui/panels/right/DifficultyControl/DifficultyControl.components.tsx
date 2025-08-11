@@ -30,7 +30,7 @@ export const Difficulty: typeof Value = styled(Value).attrs({
 
 export const CompareSymbol: typeof UnscaledText = styled(UnscaledText)`
   position: absolute;
-  top: -14px;
+  top: -15px;
   left: -17px;
   color: ${color.white};
   font-size: 30px;
