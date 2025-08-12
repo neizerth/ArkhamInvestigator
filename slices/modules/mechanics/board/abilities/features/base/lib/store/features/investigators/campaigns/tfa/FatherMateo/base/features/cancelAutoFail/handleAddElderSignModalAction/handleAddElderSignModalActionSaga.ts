@@ -10,7 +10,7 @@ import {
 import { AbilityCode } from "@modules/mechanics/board/abilities/shared/config";
 import { put, select, takeEvery } from "redux-saga/effects";
 import { v4 } from "uuid";
-import { addElderSignModalActionId } from "../../config";
+import { addElderSignModalActionId, elderSignTokenId } from "../../../config";
 
 const filterAction = createModalActionFilter({
 	ids: [addElderSignModalActionId],
@@ -27,7 +27,7 @@ function* worker({ payload }: ReturnType<typeof modalActionProcessed>) {
 	const value = values.elderSign;
 
 	const token: RevealedChaosBagToken = {
-		id: v4(),
+		id: elderSignTokenId,
 		revealId: v4(),
 		type: "elderSign",
 		virtual: true,
@@ -51,6 +51,6 @@ function* worker({ payload }: ReturnType<typeof modalActionProcessed>) {
 	yield put(openChaosTokenRevealModal());
 }
 
-export function* handleAddElderSignModalActionSaga() {
+export function* handleFatherMateoAddElderSignModalActionSaga() {
 	yield takeEvery(filterAction, worker);
 }
