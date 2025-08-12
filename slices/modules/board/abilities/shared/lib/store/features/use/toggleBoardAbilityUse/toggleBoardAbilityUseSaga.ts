@@ -1,10 +1,10 @@
 import { put, select, takeEvery } from "redux-saga/effects";
-import { selectBoardIsAbilityUsed } from "../../../selectors";
+import { selectIsBoardAbilityUsed } from "../../../selectors";
 import { checkBoardAbilityUse } from "../checkBoardAbilityUse";
 import { setBoardAbilityUse } from "../setBoardAbilityUse/setBoardAbilityUse";
 import { toggleBoardAbilityUse } from "./toggleBoardAbilityUse";
 function* worker({ payload }: ReturnType<typeof toggleBoardAbilityUse>) {
-	const selectIsUsed = selectBoardIsAbilityUsed(payload);
+	const selectIsUsed = selectIsBoardAbilityUsed(payload);
 
 	const isUsed: ReturnType<typeof selectIsUsed> = yield select(selectIsUsed);
 
@@ -16,7 +16,7 @@ function* worker({ payload }: ReturnType<typeof toggleBoardAbilityUse>) {
 	yield put(
 		setBoardAbilityUse({
 			...payload,
-			use: isUsed,
+			canUse: isUsed,
 		}),
 	);
 }

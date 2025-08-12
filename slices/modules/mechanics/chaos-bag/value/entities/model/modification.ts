@@ -1,4 +1,7 @@
-import type { PropsWithBoard } from "@modules/board/base/shared/model";
+import type {
+	InvestigatorBoard,
+	PropsWithBoard,
+} from "@modules/board/base/shared/model";
 import type {
 	ChaosBagToken,
 	ChaosTokenValues,
@@ -6,6 +9,7 @@ import type {
 
 export type InvestigatorTokenValueModificationCallbackOptions =
 	PropsWithBoard & {
+		boards: InvestigatorBoard[];
 		chaosBagContents: ChaosBagToken[];
 		revealedIds: string[];
 	};

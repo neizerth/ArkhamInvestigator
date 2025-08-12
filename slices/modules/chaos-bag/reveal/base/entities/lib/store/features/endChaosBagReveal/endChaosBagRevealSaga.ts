@@ -9,7 +9,7 @@ import {
 import { put, select, takeEvery } from "redux-saga/effects";
 import { chaosBagRevealEnd, endChaosBagReveal } from "./endChaosBagReveal";
 
-function* worker() {
+function* worker({ payload }: ReturnType<typeof endChaosBagReveal>) {
 	const state: ReturnType<typeof selectChaosBagReveal> =
 		yield select(selectChaosBagReveal);
 
@@ -22,6 +22,7 @@ function* worker() {
 
 	yield put(
 		chaosBagRevealEnd({
+			...payload,
 			...state,
 			result: state.result ?? result,
 			succeedBy: state.succeedBy ?? succeedBy,

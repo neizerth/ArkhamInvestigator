@@ -3,7 +3,8 @@ import { createAction } from "@reduxjs/toolkit";
 import type { ToggleBoardAbilityUsePayload } from "../toggleBoardAbilityUse/toggleBoardAbilityUse";
 
 export type SetBoardAbilityUsePayload = ToggleBoardAbilityUsePayload & {
-	use: boolean;
+	canUse: boolean;
+	active?: boolean;
 };
 
 export const setBoardAbilityUse = createAction<SetBoardAbilityUsePayload>(

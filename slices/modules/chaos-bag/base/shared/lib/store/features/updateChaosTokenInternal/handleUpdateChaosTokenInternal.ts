@@ -1,4 +1,3 @@
-import { whereId } from "@shared/lib/util";
 import type { ChaosBagHandler, ChaosBagTokenData } from "../../../../model";
 
 export type HandleUpdateChaosTokenInternalPayload = {
@@ -9,14 +8,14 @@ export type HandleUpdateChaosTokenInternalPayload = {
 export const handleUpdateChaosTokenInternal: ChaosBagHandler<
 	HandleUpdateChaosTokenInternalPayload
 > = (state, { id, data }) => {
-	const index = state.contents.findIndex(whereId(id));
-	if (index === -1) {
-		return;
-	}
-	const token = state.contents[index];
+	state.contents = state.contents.map((token) => {
+		if (token.id === id) {
+			return {
+				...token,
+				...data,
+			};
+		}
 
-	state.contents[index] = {
-		...token,
-		...data,
-	};
+		return token;
+	});
 };

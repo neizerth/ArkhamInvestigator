@@ -1,6 +1,8 @@
 import { spawn } from "redux-saga/effects";
-import { chaosTokenRevealModalSaga } from "./features/chaos-token-reveal-modal/lib/store/sagas";
+import { chaosBagRevealModalEntitiesSaga } from "./entities/sagas";
+import { chaosTokenRevelModalFeaturesSaga } from "./features/sagas";
 
 export function* chaosBagRevealModalSaga() {
-	yield spawn(chaosTokenRevealModalSaga);
+	yield spawn(chaosTokenRevelModalFeaturesSaga);
+	yield spawn(chaosBagRevealModalEntitiesSaga);
 }

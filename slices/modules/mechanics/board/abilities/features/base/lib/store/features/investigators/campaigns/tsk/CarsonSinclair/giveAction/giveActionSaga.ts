@@ -43,7 +43,7 @@ function* worker({ payload }: ReturnType<typeof giveAction>) {
 			abilityId,
 			boardId,
 			abilityTargetBoardId: targetBoardId,
-			use: false,
+			canUse: false,
 		}),
 	);
 

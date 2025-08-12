@@ -1,3 +1,10 @@
-const validPathnames = ["/board", "/board/skill-check"];
-export const canDisplayChaosTokenRevealModal = (path: string) =>
-	validPathnames.includes(path);
+import { routes } from "@shared/config";
+import type { Href } from "expo-router";
+
+const validPathnames: Href[] = [
+	routes.board,
+	routes.skillCheck,
+	routes.chaosBag,
+];
+export const canDisplayChaosTokenRevealModal = (path: Href | string) =>
+	validPathnames.includes(path as Href);

@@ -8,7 +8,11 @@ import {
 import { selectRevealedTokensCount } from "../../shared/lib";
 
 function* endWorker() {
-	yield put(endChaosBagReveal());
+	yield put(
+		endChaosBagReveal({
+			boardId: "current",
+		}),
+	);
 }
 
 function* worker() {

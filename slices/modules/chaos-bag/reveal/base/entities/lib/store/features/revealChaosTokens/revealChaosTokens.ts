@@ -12,6 +12,7 @@ export const revealChaosTokens = createAction<RevealChaosTokensPayload>(
 );
 
 export type ChaosTokensRevealedPayload = PropsWithBoardId & {
+	code: string;
 	tokens: RevealedChaosBagToken[];
 };
 

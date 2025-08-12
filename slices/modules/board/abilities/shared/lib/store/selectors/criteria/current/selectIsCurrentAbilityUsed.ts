@@ -1,7 +1,7 @@
-import { selectBoardIsAbilityUsed } from "../selectIsBoardAbilityUsed";
+import { selectIsBoardAbilityUsed } from "../selectIsBoardAbilityUsed";
 
 export const selectIsCurrentAbilityUsed = (abilityId: string) =>
-	selectBoardIsAbilityUsed({
+	selectIsBoardAbilityUsed({
 		abilityId,
 		boardId: "current",
 	});

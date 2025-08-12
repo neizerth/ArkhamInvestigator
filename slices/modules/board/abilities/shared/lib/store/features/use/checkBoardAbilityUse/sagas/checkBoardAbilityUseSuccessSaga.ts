@@ -6,7 +6,7 @@ function* worker({ payload }: ReturnType<typeof checkBoardAbilityUseSuccess>) {
 	yield put(
 		setBoardAbilityUse({
 			...payload,
-			use: false,
+			canUse: false,
 		}),
 	);
 }

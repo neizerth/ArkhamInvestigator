@@ -2,17 +2,11 @@ import {
 	continueChaosBagReveal,
 	startNewChaosBagReveal,
 } from "@modules/chaos-bag/reveal/base/entities/lib";
-import { CustomModalId } from "@modules/core/modal/entities/base/config";
-import { openModal } from "@modules/core/modal/shared/base/lib";
+import { openChaosTokenRevealModal } from "@modules/chaos-bag/reveal/modal/entities/lib";
 import { put, takeEvery } from "redux-saga/effects";
 
 function* worker() {
-	yield put(
-		openModal({
-			id: CustomModalId.chaosTokenReveal,
-			closeFromBackButton: false,
-		}),
-	);
+	yield put(openChaosTokenRevealModal());
 }
 
 export function* openModalSaga() {

@@ -14,7 +14,7 @@ const filterAction = (action: unknown) => {
 		return false;
 	}
 
-	return action.payload.use === false;
+	return action.payload.canUse === false;
 };
 
 function* selectTargetBoardId(boardId?: BoardId) {

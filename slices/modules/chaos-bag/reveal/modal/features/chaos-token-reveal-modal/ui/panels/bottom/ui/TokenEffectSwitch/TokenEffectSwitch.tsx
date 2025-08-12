@@ -1,4 +1,4 @@
-import { updateRevealedToken } from "@modules/chaos-bag/reveal/base/shared/lib";
+import { updateRevealedToken } from "@modules/chaos-bag/reveal/base/entities/lib";
 import type {
 	RevealedChaosBagToken,
 	RevealedChaosBagTokenCancelType,
@@ -20,15 +20,15 @@ export const TokenEffectSwitch = ({
 }: TokenEffectSwitchProps) => {
 	const dispatch = useAppDispatch();
 
-	const { id } = token;
-	const cancelType = token.canceled || false;
-	const index = switchValues.indexOf(cancelType);
+	const { id, canceled = false } = token;
+	const index = switchValues.indexOf(canceled);
 	const nextType = getLoopNext(switchValues, index);
 
 	const switchCancelType = useCallback(() => {
 		dispatch(
 			updateRevealedToken({
-				id: id,
+				boardId: "current",
+				id,
 				data: {
 					canceled: nextType,
 				},
@@ -36,7 +36,7 @@ export const TokenEffectSwitch = ({
 		);
 	}, [dispatch, id, nextType]);
 
-	const active = Boolean(cancelType);
+	const active = Boolean(canceled);
 
 	return (
 		<C.Container {...props} onPress={switchCancelType}>

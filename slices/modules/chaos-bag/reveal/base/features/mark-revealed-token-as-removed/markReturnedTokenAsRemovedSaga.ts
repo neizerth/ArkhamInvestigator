@@ -1,9 +1,9 @@
 import { put, select, takeEvery } from "redux-saga/effects";
-import { singleChaosTokenReturned } from "../../entities/lib";
 import {
-	selectRevealedTokensCount,
+	singleChaosTokenReturned,
 	updateRevealedToken,
-} from "../../shared/lib";
+} from "../../entities/lib";
+import { selectRevealedTokensCount } from "../../shared/lib";
 
 function* worker({ payload }: ReturnType<typeof singleChaosTokenReturned>) {
 	const { token } = payload;

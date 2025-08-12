@@ -37,6 +37,7 @@ export const ChaosTokenRevealHistoryItem = ({
 	const toggleSeal = useCallback(() => {
 		dispatch(
 			toggleChaosTokenSeal({
+				boardId: "current",
 				id,
 			}),
 		);

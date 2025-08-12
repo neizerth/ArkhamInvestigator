@@ -21,10 +21,6 @@ export const getSkillCheckResult = (options: Options): ChaosTokenValue => {
 	const containsAutoFail = tokens.some(({ value }) => value === "fail");
 	const containsAutoSuccess = tokens.some(({ value }) => value === "success");
 
-	if (autoFailCount > 0) {
-		return "fail";
-	}
-
 	if (frostCount > 1) {
 		return "fail";
 	}
