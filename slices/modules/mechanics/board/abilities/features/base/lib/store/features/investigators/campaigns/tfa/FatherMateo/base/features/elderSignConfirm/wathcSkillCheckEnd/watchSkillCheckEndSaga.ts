@@ -17,7 +17,7 @@ const filterAction = (action: unknown) => {
 };
 
 function* worker({ payload }: ReturnType<typeof chaosBagRevealEnd>) {
-	const { boardId } = payload;
+	const { boardId, skillCheckBoardId } = payload;
 
 	if (!boardId) {
 		return;
@@ -29,6 +29,10 @@ function* worker({ payload }: ReturnType<typeof chaosBagRevealEnd>) {
 
 	if (!mateoBoard.id) {
 		return;
+	}
+
+	if (skillCheckBoardId !== mateoBoard.id) {
+		return false;
 	}
 
 	yield put(
