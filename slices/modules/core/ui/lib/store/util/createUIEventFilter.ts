@@ -1,5 +1,6 @@
 import type { UIEventType } from "@modules/core/ui/model";
 import { createPayloadFilter } from "@shared/lib";
+import { omit } from "ramda";
 import { UIEvent, type UIEventPayload } from "../actions";
 
 type Criteria = Partial<UIEventPayload> & {
@@ -12,13 +13,13 @@ const filterAction = createPayloadFilter({
 });
 
 export const createUIEventFilter = (criteria: Criteria) => {
-	const filter = filterAction(criteria);
+	const filterCriteria = omit(["exceptTypes", "types"], criteria);
+	const filter = filterAction(filterCriteria);
 
 	return (action: unknown) => {
 		if (!UIEvent.match(action)) {
 			return false;
 		}
-
 		const { types, exceptTypes } = criteria;
 		const { payload } = action;
 

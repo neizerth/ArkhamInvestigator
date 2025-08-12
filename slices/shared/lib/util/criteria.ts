@@ -18,15 +18,21 @@ export const partiallyEquals =
 	(data: T) => {
 		type Key = keyof T;
 		const keys = Object.keys(criteria) as Key[];
-		return keys.every((key) => {
+
+		const comparsion = keys.every((key) => {
 			const value = criteria[key];
 
-			if (typeof value === "undefined") {
+			const dataValue = data[key];
+
+			if (typeof dataValue === "undefined") {
 				return true;
 			}
+			const comparsion = value === dataValue;
 
-			return value === data[key];
+			return comparsion;
 		});
+
+		return comparsion;
 	};
 
 export const isNotEmpty = <T>(
