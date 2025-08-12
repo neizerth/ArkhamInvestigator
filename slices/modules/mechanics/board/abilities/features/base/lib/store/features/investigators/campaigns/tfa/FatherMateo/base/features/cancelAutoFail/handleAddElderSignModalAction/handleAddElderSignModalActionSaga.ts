@@ -35,20 +35,20 @@ function* worker({ payload }: ReturnType<typeof modalActionProcessed>) {
 	};
 
 	yield put(
-		setBoardAbilityUse({
-			boardId,
-			abilityId,
-			canUse: false,
-		}),
-	);
-
-	yield put(
 		addRevealedTokens({
 			tokens: [token],
 		}),
 	);
 
 	yield put(openChaosTokenRevealModal());
+
+	yield put(
+		setBoardAbilityUse({
+			boardId,
+			abilityId,
+			canUse: false,
+		}),
+	);
 }
 
 export function* handleFatherMateoAddElderSignModalActionSaga() {
