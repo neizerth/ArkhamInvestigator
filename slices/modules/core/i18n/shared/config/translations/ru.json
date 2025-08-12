@@ -114,9 +114,13 @@
 	"wild.give": "{{name}} добавляет карте {{dativeName}} дополнительный [wild] до конца проверки",
 	"wild.give.self": "{{name}} добавляет своей карте дополнительный [wild] до конца проверки",
 
+	"actions.get_one": "{{name}} получает 1 действие",
+	"actions.get_few": "{{name}} получает {{count}} действия",
+	"actions.get_many": "{{name}} получает {{count}} действий",
+
 	"actions.give_one": "{{fromName}} даёт 1 действие [action] {{dativeName}}",
 	"actions.give_few": "{{fromName}} даёт {{count}} действия [action] {{dativeName}}",
-	"actions.give_many": "{{fromName}} даёт {{count}} действий [action] {{dativeName}} ",
+	"actions.give_many": "{{fromName}} даёт {{count}} действий [action] {{dativeName}}",
 
 	"clues.spent_one": "{{name}} тратит {{count}} улику",
 	"clues.spent_few": "{{name}} тратит {{count}} улики",
@@ -162,6 +166,10 @@
 	"ability.mateo.base.confirm.title": "Добавить [elder_sign]?",
 	"ability.mateo.base.confirm.text": "Это добавит дополнительный жетон [elder_sign] на время проверки",
 	"ability.mateo.base.confirm.submit": "Добавить [elder_sign]",
+
+	"ability.mateo.base.elderSign.title": "Эффект [elder_sign]",
+	"ability.mateo.base.elderSign.cardAndResource": "Карта и [resource]",
+	"ability.mateo.base.elderSign.action": "Действие",
 
 	"Defeated": "Поражение",
 	"Change": "Сменить",
@@ -240,6 +248,7 @@
 	"Game settings": "Игра",
 
 	"Select a campaign": "Выберите кампанию",
+	"Make a choice": "Сделайте выбор",
 
 	"Translated content": "На русском",
 	"Unlimited chaos tokens": "Неограниченный состав",

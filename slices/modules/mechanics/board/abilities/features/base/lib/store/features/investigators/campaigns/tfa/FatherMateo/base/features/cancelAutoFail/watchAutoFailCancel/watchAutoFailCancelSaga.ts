@@ -1,12 +1,17 @@
 import { selectIsBoardAbilityUsed } from "@modules/board/abilities/shared/lib";
-import { selectInvestigatorBoards } from "@modules/board/base/shared/lib";
+import { selectBoardByCode } from "@modules/board/base/shared/lib";
 import { revealedTokenUpdated } from "@modules/chaos-bag/reveal/base/entities/lib";
-import { selectChaosBagSkillCheckBoardId } from "@modules/chaos-bag/reveal/base/shared/lib";
+import {
+	selectChaosBagSkillCheckBoardId,
+	selectRevealedTokens,
+} from "@modules/chaos-bag/reveal/base/shared/lib";
 import { AbilityCode } from "@modules/mechanics/board/abilities/shared/config";
 import { getIsDefeated } from "@modules/mechanics/board/base/entities/lib";
 import { InvesigatorCode } from "@modules/mechanics/investigator/entities/config";
+import { whereId } from "@shared/lib";
 import { put, select, takeEvery } from "redux-saga/effects";
-import { openFatherMateoConfirm } from "../openConfirm/openConfirm";
+import { elderSignTokenId } from "../../../config";
+import { openFatherMateoConfirm } from "../openConfirm";
 
 const filterAction = (action: unknown) => {
 	if (!revealedTokenUpdated.match(action)) {
@@ -22,15 +27,11 @@ const code = InvesigatorCode.FatherMateo.base;
 const abilityId = AbilityCode.FatherMateo.base;
 
 function* worker({ payload }: ReturnType<typeof revealedTokenUpdated>) {
-	const boards: ReturnType<typeof selectInvestigatorBoards> = yield select(
-		selectInvestigatorBoards,
-	);
+	const boardSelector = selectBoardByCode(code);
+	const mateoBoard: ReturnType<typeof boardSelector> =
+		yield select(boardSelector);
 
-	const mateoBoard = boards.find(
-		({ investigator }) => investigator.code === code,
-	);
-
-	if (!mateoBoard) {
+	if (!mateoBoard.id) {
 		return;
 	}
 
@@ -52,6 +53,15 @@ function* worker({ payload }: ReturnType<typeof revealedTokenUpdated>) {
 		return;
 	}
 
+	const revealed: ReturnType<typeof selectRevealedTokens> =
+		yield select(selectRevealedTokens);
+
+	const isElderSignRevealed = revealed.some(whereId(elderSignTokenId));
+
+	if (isElderSignRevealed) {
+		return false;
+	}
+
 	const boardId: ReturnType<typeof selectChaosBagSkillCheckBoardId> =
 		yield select(selectChaosBagSkillCheckBoardId);
 
@@ -62,6 +72,7 @@ function* worker({ payload }: ReturnType<typeof revealedTokenUpdated>) {
 	yield put(
 		openFatherMateoConfirm({
 			boardId,
+			sourceBoardId: mateoBoard.id,
 		}),
 	);
 }

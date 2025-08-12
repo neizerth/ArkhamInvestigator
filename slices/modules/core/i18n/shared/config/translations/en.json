@@ -92,6 +92,9 @@
 	"clues.remains_one": "Remains {{count}} clue",
 	"clues.remains_other": "Reamains {{count}} clues",
 
+	"actions.get_one": "{{name}} gets 1 action",
+	"actions.get_many": "{{name}} gets {{count}} actions",
+
 	"actions.give_one": "{{name}} has got action [action] from {{fromName}}",
 	"actions.give_other": "{{name}} has got {{count}} actions [action] from {{fromName}}",
 
@@ -157,6 +160,10 @@
 	"ability.mateo.base.confirm.text": "This will add a temporary [elder_sign] token to the test",
 	"ability.mateo.base.confirm.submit": "Add [elder_sign]",
 
+	"ability.mateo.base.elderSign.title": "[elder_sign] effect",
+	"ability.mateo.base.elderSign.cardAndResource": "Card and [resource]",
+	"ability.mateo.base.elderSign.action": "Action",
+
 	"Defeated": "Defeated",
 	"Change": "Change",
 
@@ -177,6 +184,7 @@
 	"General": "General",
 	"Sound Effects": "Sound Effects",
 	"Volume": "Volume",
+	"Make a choice": "Make a choice",
 
 	"New Game": "New Game",
 	"Versions": "Versions",
