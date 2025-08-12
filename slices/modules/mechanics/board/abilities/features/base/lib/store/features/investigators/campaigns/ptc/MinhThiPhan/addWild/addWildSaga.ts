@@ -30,14 +30,19 @@ function* worker({ payload }: ReturnType<typeof addWild>) {
 			abilityId,
 			boardId,
 			abilityTargetBoardId: targetBoardId,
-			use: false,
+			canUse: false,
 		}),
 	);
+
+	const self = targetBoardId === boardId;
+
+	const message = self ? "wild.give.self" : "wild.give";
 
 	yield put(
 		sendInvestigatorNotification({
 			boardId: targetBoardId,
-			message: "wild.give",
+			...(self ? {} : { sourceBoardId: boardId }),
+			message,
 			data: {
 				fromName: board.investigator.name,
 				count: 1,

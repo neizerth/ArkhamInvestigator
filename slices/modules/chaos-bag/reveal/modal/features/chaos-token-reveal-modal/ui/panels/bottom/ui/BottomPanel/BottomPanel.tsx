@@ -23,7 +23,11 @@ export const BottomPanel = ({ ...props }: BottomPanelProps) => {
 	}, [dispatch]);
 
 	const onClose = useCallback(() => {
-		dispatch(endChaosBagReveal());
+		dispatch(
+			endChaosBagReveal({
+				boardId: "current",
+			}),
+		);
 	}, [dispatch]);
 
 	const loadMore = useOneMoreChaosToken();

@@ -2,18 +2,19 @@ import {
 	sealChaosToken,
 	unsealChaosToken,
 } from "@modules/chaos-bag/base/entities/lib";
+import type { ChaosBagToken } from "@modules/chaos-bag/base/shared/model";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { put, takeEvery } from "redux-saga/effects";
-import { updateRevealedToken } from "../../shared/lib";
+import { updateRevealedTokenInternal } from "../../shared/lib";
 
-type Action = PayloadAction<{ id: string }>;
+type Action = PayloadAction<{ token: ChaosBagToken }>;
 
 export const createSealWorker = (sealed: boolean) =>
 	function* worker({ payload }: Action) {
-		const { id } = payload;
+		const { token } = payload;
 		yield put(
-			updateRevealedToken({
-				id,
+			updateRevealedTokenInternal({
+				id: token.id,
 				data: {
 					sealed,
 				},

@@ -7,7 +7,7 @@ import { cantRemoveChaosTokens } from "@modules/chaos-bag/base/entities/lib/stor
 import { AbilityCode } from "@modules/mechanics/board/abilities/shared/config";
 import { put, select, takeEvery } from "redux-saga/effects";
 
-export const filterAction = createBoardAbilityCheckFilter({
+const filterAction = createBoardAbilityCheckFilter({
 	abilityId: AbilityCode.ZoeySamaras.parallel.fast,
 	success: false,
 });

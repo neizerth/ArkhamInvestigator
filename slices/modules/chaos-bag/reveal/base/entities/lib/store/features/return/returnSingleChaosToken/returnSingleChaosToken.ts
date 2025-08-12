@@ -1,8 +1,9 @@
+import type { PropsWithBoardId } from "@modules/board/base/shared/model";
 import type { ChaosBagToken } from "@modules/chaos-bag/base/shared/model";
 import { chaosBagRevealPrefix } from "@modules/chaos-bag/reveal/base/shared/config";
 import { createAction } from "@reduxjs/toolkit";
 
-export type ReturnSingleChaosTokenPayload = {
+export type ReturnSingleChaosTokenPayload = Partial<PropsWithBoardId> & {
 	id: string;
 };
 

@@ -1,3 +1,4 @@
+import { selectBoardCode } from "@modules/board/base/shared/lib";
 import { addRevealedTokens } from "@modules/chaos-bag/reveal/base/shared/lib";
 import { put, select, takeEvery } from "redux-saga/effects";
 import {
@@ -25,6 +26,9 @@ function* worker({ payload }: ReturnType<typeof revealChaosTokens>) {
 	const tokens: ReturnType<typeof revealSelector> =
 		yield select(revealSelector);
 
+	const codeSelector = selectBoardCode(boardId);
+	const code: ReturnType<typeof codeSelector> = yield select(codeSelector);
+
 	yield put(
 		addRevealedTokens({
 			tokens,
@@ -34,6 +38,7 @@ function* worker({ payload }: ReturnType<typeof revealChaosTokens>) {
 	yield put(
 		chaosTokensRevealed({
 			...payload,
+			code,
 			tokens,
 		}),
 	);

@@ -1,0 +1,42 @@
+import { selectBoardById } from "@modules/board/base/shared/lib";
+import { createCancelModalAction } from "@modules/core/modal/shared/actions/cancel/lib";
+import { createConfirmModalAction } from "@modules/core/modal/shared/actions/confirm/lib";
+import { openConfirm } from "@modules/core/modal/shared/confirm/lib";
+import { getBoardFaction } from "@modules/mechanics/board/base/entities/lib";
+import { put, select, takeEvery } from "redux-saga/effects";
+import { addElderSignModalActionId, modalId } from "../../config";
+import { openFatherMateoConfirm } from "./openConfirm";
+
+function* worker({ payload }: ReturnType<typeof openFatherMateoConfirm>) {
+	const { boardId } = payload;
+
+	const boardSelector = selectBoardById(boardId);
+	const board: ReturnType<typeof boardSelector> = yield select(boardSelector);
+
+	const title = "Добавить [elder_sign]?";
+	const subtitle = board.investigator.name;
+
+	const faction = getBoardFaction(board);
+	yield put(
+		openConfirm({
+			id: modalId,
+			data: {
+				title,
+				subtitle,
+				faction,
+				text: "ability.mateo.base.confirm.text",
+				actions: [
+					createCancelModalAction(),
+					createConfirmModalAction({
+						id: addElderSignModalActionId,
+						title: "ability.mateo.base.confirm.submit",
+					}),
+				],
+			},
+		}),
+	);
+}
+
+export function* FatherMateoOpenConfirmSaga() {
+	yield takeEvery(openFatherMateoConfirm.match, worker);
+}

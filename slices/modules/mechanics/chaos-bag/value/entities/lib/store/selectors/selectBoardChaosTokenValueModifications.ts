@@ -1,4 +1,7 @@
-import { selectBoardById } from "@modules/board/base/shared/lib";
+import {
+	selectBoardById,
+	selectInvestigatorBoards,
+} from "@modules/board/base/shared/lib";
 import type { BoardId } from "@modules/board/base/shared/model";
 import { selectChaosBagContents } from "@modules/chaos-bag/base/shared/lib";
 import { selectRevealedTokenIds } from "@modules/chaos-bag/reveal/base/shared/lib";
@@ -7,8 +10,13 @@ import { tokenValueModifications } from "../../../config";
 
 export const selectBoardChaosTokenValueModifications = (boardId: BoardId) =>
 	createSelector(
-		[selectBoardById(boardId), selectChaosBagContents, selectRevealedTokenIds],
-		(board, chaosBagContents, revealedIds) => {
+		[
+			selectBoardById(boardId),
+			selectChaosBagContents,
+			selectRevealedTokenIds,
+			selectInvestigatorBoards,
+		],
+		(board, chaosBagContents, revealedIds, boards) => {
 			const { investigator } = board;
 			const modification = tokenValueModifications[investigator.code];
 			if (!modification) {
@@ -18,6 +26,7 @@ export const selectBoardChaosTokenValueModifications = (boardId: BoardId) =>
 				board,
 				chaosBagContents,
 				revealedIds,
+				boards,
 			});
 		},
 	);

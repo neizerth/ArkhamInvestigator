@@ -1,9 +1,12 @@
 import { chaosToken } from "@modules/chaos-bag/base/shared/config";
-import { createCancelModalAction } from "@modules/core/modal/shared/actions/cancel/lib";
 import { createConfirmModalAction } from "@modules/core/modal/shared/actions/confirm/lib";
 import { openConfirm } from "@modules/core/modal/shared/confirm/lib";
 import { put, takeEvery } from "redux-saga/effects";
-import { confirmRemoveModalActionId } from "../config";
+import {
+	confirmRemoveModalActionId,
+	modalId,
+	returnToSkillTestModalActionId,
+} from "../config";
 import { openRemoveChaosTokenConfirm } from "../removeChaosTokens";
 
 function* worker({ payload }: ReturnType<typeof openRemoveChaosTokenConfirm>) {
@@ -18,7 +21,7 @@ function* worker({ payload }: ReturnType<typeof openRemoveChaosTokenConfirm>) {
 
 	yield put(
 		openConfirm({
-			id: "remove-chaos-token",
+			id: modalId,
 			data: {
 				title: {
 					i18nKey: "chaosToken.remove.confirm.title",
@@ -29,7 +32,12 @@ function* worker({ payload }: ReturnType<typeof openRemoveChaosTokenConfirm>) {
 					data,
 				},
 				actions: [
-					createCancelModalAction(),
+					createConfirmModalAction({
+						id: returnToSkillTestModalActionId,
+						title: "chaosToken.remove.confirm.return",
+						icon: "chaos-bag-thin",
+						primary: false,
+					}),
 					createConfirmModalAction({
 						id: confirmRemoveModalActionId,
 						title: "Remove",

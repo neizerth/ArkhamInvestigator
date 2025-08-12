@@ -1,7 +1,5 @@
-import {
-	selectLastRevealedToken,
-	updateRevealedToken,
-} from "@modules/chaos-bag/reveal/base/shared/lib";
+import { updateRevealedToken } from "@modules/chaos-bag/reveal/base/entities/lib";
+import { selectLastRevealedToken } from "@modules/chaos-bag/reveal/base/shared/lib";
 import { put, select, takeEvery } from "redux-saga/effects";
 import { updateCurrentRevealedTokenValue } from "./updateCurrentRevealedTokenValue";
 

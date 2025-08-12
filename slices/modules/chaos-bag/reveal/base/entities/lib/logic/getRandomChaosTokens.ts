@@ -1,6 +1,7 @@
 import type { ChaosTokenValues } from "@modules/chaos-bag/base/shared/model";
 import { shuffle } from "fast-shuffle";
 import { isNotNil } from "ramda";
+import { v4 } from "uuid";
 import type { RevealedChaosBagToken } from "../../../shared/model";
 import {
 	type GetUnrevealedChaosTokensOptions,
@@ -29,6 +30,7 @@ export const getRandomChaosTokens = (
 
 			return {
 				...token,
+				revealId: v4(),
 				value,
 			};
 		})

@@ -1,10 +1,16 @@
+import type { PropsWithBoardId } from "@modules/board/base/shared/model";
 import { chaosBagRevealPrefix } from "@modules/chaos-bag/reveal/base/shared/config";
 import type { ChaosBagRevealState } from "@modules/chaos-bag/reveal/base/shared/lib";
 import { createAction } from "@reduxjs/toolkit";
 
-export const endChaosBagReveal = createAction(`${chaosBagRevealPrefix}/end`);
+export type EndChaosBagRevealPayload = Partial<PropsWithBoardId>;
 
-export type ChaosBagRevealEndPayload = ChaosBagRevealState;
+export const endChaosBagReveal = createAction<EndChaosBagRevealPayload>(
+	`${chaosBagRevealPrefix}/end`,
+);
+
+export type ChaosBagRevealEndPayload = EndChaosBagRevealPayload &
+	ChaosBagRevealState;
 
 export const chaosBagRevealEnd = createAction<ChaosBagRevealEndPayload>(
 	`${chaosBagRevealPrefix}/revealEnd`,

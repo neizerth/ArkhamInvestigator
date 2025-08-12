@@ -4,7 +4,9 @@ import type { ChaosTokenValue } from "@modules/chaos-bag/value/shared/model";
 export type RevealedChaosBagTokenCancelType = boolean | "effect";
 
 export type RevealedChaosBagToken = ChaosBagToken & {
+	revealId: string;
 	value?: ChaosTokenValue;
 	canceled?: RevealedChaosBagTokenCancelType;
 	removed?: boolean;
+	virtual?: boolean;
 };

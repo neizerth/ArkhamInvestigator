@@ -1,5 +1,5 @@
 import { isChaosTokenTypeRemovable } from "@modules/chaos-bag/base/shared/lib";
-import type { ChaosBagToken } from "@modules/chaos-bag/base/shared/model";
+import type { RevealedChaosBagToken } from "../../../shared/model";
 
-export const canRemoveChaosToken = (token: ChaosBagToken) =>
+export const canRemoveChaosToken = (token: RevealedChaosBagToken) =>
 	isChaosTokenTypeRemovable(token.type) && !token.sealed;

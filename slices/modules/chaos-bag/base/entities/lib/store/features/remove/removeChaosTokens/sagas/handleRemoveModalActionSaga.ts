@@ -11,7 +11,7 @@ import {
 } from "../../removeChaosTokens";
 import { confirmRemoveModalActionId } from "../config";
 
-export const filterAction = createModalActionFilter({
+const filterAction = createModalActionFilter({
 	ids: [confirmRemoveModalActionId],
 });
 

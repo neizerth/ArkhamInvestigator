@@ -17,7 +17,7 @@ const filterAction = (action: unknown) => {
 	return (
 		payload.abilityId === AbilityCode.CarsonSinclair &&
 		!payload.abilityTargetBoardId &&
-		payload.use === false
+		payload.canUse === false
 	);
 };
 

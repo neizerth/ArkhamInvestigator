@@ -20,13 +20,14 @@ export const CenterPanel = ({ style, ...props }: CenterPanelProps) => {
 		selectCurrentRevealedToken,
 	) as RevealedChaosBagToken;
 
-	const { type } = token;
+	const { type, id } = token;
 
 	const showTokenValue = useAppSelector(selectModifyChaosTokens);
 
 	const onTap = useCallback(() => {
 		dispatch(
 			returnSingleChaosToken({
+				boardId: "current",
 				id: token.id,
 			}),
 		);
@@ -35,10 +36,11 @@ export const CenterPanel = ({ style, ...props }: CenterPanelProps) => {
 	const onLongPress = useCallback(() => {
 		dispatch(
 			toggleChaosTokenSeal({
-				id: token.id,
+				boardId: "current",
+				id,
 			}),
 		);
-	}, [dispatch, token]);
+	}, [dispatch, id]);
 
 	const tap = useTap({
 		onTap,

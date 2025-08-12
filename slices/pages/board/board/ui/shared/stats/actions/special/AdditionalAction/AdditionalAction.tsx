@@ -18,7 +18,7 @@ export const AdditionalAction = (props: AdditionalActionProps) => {
 		dispatch(
 			setAdditionalActionUse({
 				boardId: "current",
-				use: isUsed,
+				canUse: isUsed,
 			}),
 		);
 	}, [dispatch, isUsed]);

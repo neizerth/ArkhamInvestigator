@@ -64,6 +64,8 @@
 	"chaosToken.remove.confirm.text_few": "{{count}} жетона {{token}} участвуют в проверке. Их удаление может изменить результат текущей проверки или отменить её",
 	"chaosToken.remove.confirm.text_many": "{{count}} жетонов {{token}} участвуют в проверке. Их удаление может изменить результат текущей проверки или отменить её",
 
+	"chaosToken.remove.confirm.return": "К проверке",
+
 	"Modify tokens": "Изменять значения жетонов",
 
 	"board.help.press.chaosBag": "Показывает содержимое мешка хаоса",
@@ -109,6 +111,9 @@
 	"investigator.getResources_few": "{{name}} получает {{count}} ресурса",
 	"investigator.getResources_many": "{{name}} получает {{count}} ресурсов",
 
+	"wild.give": "{{name}} добавляет карте {{dativeName}} дополнительный [wild] до конца проверки",
+	"wild.give.self": "{{name}} добавляет своей карте дополнительный [wild] до конца проверки",
+
 	"actions.give_one": "{{fromName}} даёт 1 действие [action] {{dativeName}}",
 	"actions.give_few": "{{fromName}} даёт {{count}} действия [action] {{dativeName}}",
 	"actions.give_many": "{{fromName}} даёт {{count}} действий [action] {{dativeName}} ",
@@ -153,6 +158,10 @@
 	"reveal.startNewConfirm.title": "Продолжить проверку?",
 	"reveal.startNewConfirm.text": "У вас осталась проверка{{skillCheck}}. Продолжить её?",
 	"reveal.startNewConfirm.startNew": "Начать новую",
+
+	"ability.mateo.base.confirm.title": "Добавить [elder_sign]?",
+	"ability.mateo.base.confirm.text": "Это добавит дополнительный жетон [elder_sign] на время проверки",
+	"ability.mateo.base.confirm.submit": "Добавить [elder_sign]",
 
 	"Defeated": "Поражение",
 	"Change": "Сменить",

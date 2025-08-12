@@ -78,7 +78,10 @@ export const showValueOverlay = ({
 	type: ChaosTokenType;
 	value?: ChaosTokenValue;
 }) => {
-	if (value === "fail" || value === "success") {
+	if (value === "fail" && type !== "autoFail") {
+		return true;
+	}
+	if (value === "success") {
 		return true;
 	}
 	if (showValue && chaosToken.types.symbolic.base.includes(type)) {

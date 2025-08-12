@@ -67,8 +67,8 @@ export const FactionCard = ({
 				<C.HeaderContent>
 					<C.Icon faction={faction} />
 					<C.HeaderTextContent>
-						<C.Title>{title}</C.Title>
-						{subtitle && <C.Subtitle>{subtitle}</C.Subtitle>}
+						<C.Title value={title} />
+						{subtitle && <C.Subtitle value={subtitle} />}
 					</C.HeaderTextContent>
 					{onClose && (
 						<C.Close onPress={onClose}>

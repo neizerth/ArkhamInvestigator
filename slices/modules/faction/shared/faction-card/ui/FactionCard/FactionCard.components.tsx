@@ -13,9 +13,9 @@ import {
 	type ButtonProps,
 	FactionFontIcon,
 	FactionSVGPattern,
+	GameText,
 	type IconProps,
 	Row,
-	UnscaledText,
 } from "@shared/ui";
 import styled, { css } from "styled-components/native";
 export type ElementWithFaction<T> = FC<T & PropsWithFaction>;
@@ -147,15 +147,27 @@ export const HeaderTextContent: typeof View = styled(View)`
   padding: ${size.gap.small}px 0;
 `;
 
-const HeaderText: typeof UnscaledText = styled(UnscaledText)`
+const HeaderText: typeof GameText = styled(GameText)`
   font-size: ${font.size.default}px;
   color: ${textColor};
 `;
 
-export const Title: typeof UnscaledText = styled(HeaderText)`
+export const Title: typeof HeaderText = styled(HeaderText).attrs({
+	componentStyles: {
+		text: {
+			fontFamily: Alegreya.bold,
+		},
+	},
+})`
   font-family: ${Alegreya.bold};
 `;
 
-export const Subtitle: typeof UnscaledText = styled(HeaderText)`
+export const Subtitle: typeof HeaderText = styled(HeaderText).attrs({
+	componentStyles: {
+		text: {
+			fontFamily: Alegreya.italic,
+		},
+	},
+})`
   font-family: ${Alegreya.italic};
 `;

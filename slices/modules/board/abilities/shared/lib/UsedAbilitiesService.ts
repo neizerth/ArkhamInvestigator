@@ -7,6 +7,7 @@ type UseOptions = {
 	boardId?: number;
 	ability: InvestigatorAbility;
 	usedAbilities?: InvestigatorBoardUsedAbility[];
+	active?: boolean;
 };
 
 export const UsedAbilitiesService = {
@@ -25,14 +26,15 @@ export const UsedAbilitiesService = {
 			return data;
 		}
 
-		const item = {
+		const item: InvestigatorBoardUsedAbility = {
 			id: ability.id,
 			boardIds,
+			active: false,
 		};
 
 		return [...data, item];
 	},
-	setAbilityUsed({ ability, boardId, usedAbilities = [] }: UseOptions) {
+	setAbilityUsed({ ability, boardId, active, usedAbilities = [] }: UseOptions) {
 		if (ability.perInvestigator && boardId === undefined) {
 			return usedAbilities;
 		}
@@ -49,9 +51,10 @@ export const UsedAbilitiesService = {
 		}
 
 		if (index === -1) {
-			const item = {
+			const item: InvestigatorBoardUsedAbility = {
 				id,
 				boardIds: [boardId],
+				active,
 			};
 
 			return [...usedAbilities, item];
@@ -61,9 +64,10 @@ export const UsedAbilitiesService = {
 
 		const boardIds = usedData?.boardIds || [];
 
-		const item = {
+		const item: InvestigatorBoardUsedAbility = {
 			id,
 			boardIds: [...boardIds, boardId].filter(isNotNil),
+			active,
 		};
 
 		return usedAbilities.with(index, item);

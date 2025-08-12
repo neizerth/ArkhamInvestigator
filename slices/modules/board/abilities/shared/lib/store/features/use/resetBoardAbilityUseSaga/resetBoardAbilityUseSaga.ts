@@ -9,9 +9,10 @@ import { selectBoardAbilityById } from "../../../selectors";
 import { setBoardAbilityUse } from "../setBoardAbilityUse";
 
 const filterAction = (action: unknown) =>
-	setBoardAbilityUse.match(action) && action.payload.use === true;
+	setBoardAbilityUse.match(action) && action.payload.canUse === true;
 
 function* worker({ payload }: ReturnType<typeof setBoardAbilityUse>) {
+	const { active } = payload;
 	const selectAbility = selectBoardAbilityById(payload);
 	const selectUsedAbilities = selectBoardUsedAbilities(payload.boardId);
 	const selectId = selectBoardId(payload.boardId);
@@ -29,6 +30,7 @@ function* worker({ payload }: ReturnType<typeof setBoardAbilityUse>) {
 		boardId,
 		usedAbilities,
 		ability,
+		active,
 	});
 
 	yield put(

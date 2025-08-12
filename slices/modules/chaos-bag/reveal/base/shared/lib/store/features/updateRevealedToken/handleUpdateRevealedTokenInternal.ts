@@ -3,14 +3,14 @@ import type {
 	RevealedChaosBagToken,
 } from "../../../../model";
 
-export type HandleUpdateRevealedTokenPayload = {
+export type HandleUpdateRevealedTokenInternalPayload = {
 	id: string;
 	data: Partial<Omit<RevealedChaosBagToken, "id">>;
 	updateType?: "actual" | "all";
 };
 
-export const handleUpdateRevealedToken: ChaosBagRevealHandler<
-	HandleUpdateRevealedTokenPayload
+export const handleUpdateRevealedTokenInternal: ChaosBagRevealHandler<
+	HandleUpdateRevealedTokenInternalPayload
 > = (state, { id, data, updateType }) => {
 	const update = (token: RevealedChaosBagToken) => {
 		if (token.id === id) {

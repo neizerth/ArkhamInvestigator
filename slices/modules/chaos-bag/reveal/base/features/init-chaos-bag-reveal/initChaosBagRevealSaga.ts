@@ -3,7 +3,7 @@ import { put, takeEvery } from "redux-saga/effects";
 import { endChaosBagReveal } from "../../entities/lib";
 
 function* worker() {
-	yield put(endChaosBagReveal());
+	yield put(endChaosBagReveal({}));
 }
 
 export function* initChaosBagRevealSaga() {
