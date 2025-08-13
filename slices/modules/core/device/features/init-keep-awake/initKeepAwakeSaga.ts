@@ -1,4 +1,4 @@
-import { appStarted } from "@modules/core/app/shared/lib";
+import { initAppUI } from "@modules/core/app/shared/lib";
 import { put, takeEvery } from "redux-saga/effects";
 import { setKeepAwake } from "../../entities/keep-awake";
 
@@ -7,5 +7,5 @@ function* worker() {
 }
 
 export function* initKeepAwakeSaga() {
-	yield takeEvery(appStarted.match, worker);
+	yield takeEvery(initAppUI.match, worker);
 }

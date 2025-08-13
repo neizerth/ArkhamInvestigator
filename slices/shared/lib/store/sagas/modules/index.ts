@@ -1,4 +1,5 @@
 import { chaosBagSaga } from "@modules/chaos-bag/sagas";
+import { appSaga } from "@modules/core/app/sagas";
 import { assetsSaga } from "@modules/core/assets/sagas";
 import { deviceSaga } from "@modules/core/device/sagas";
 import { hapticSaga } from "@modules/core/haptic/sagas";
@@ -27,4 +28,5 @@ export function* modulesSaga() {
 
 	yield spawn(i18nSaga);
 	yield spawn(assetsSaga);
+	yield spawn(appSaga);
 }

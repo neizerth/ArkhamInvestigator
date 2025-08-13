@@ -2,11 +2,11 @@ import { createSlice } from "@reduxjs/toolkit";
 import { createSliceState } from "redux-toolkit-helpers";
 
 export type DeviceState = {
-	keepAwake: boolean;
+	keepAwakeEnabled: boolean;
 };
 
 const initialState: DeviceState = {
-	keepAwake: false,
+	keepAwakeEnabled: false,
 };
 
 const state = createSliceState(initialState);
@@ -16,8 +16,8 @@ export const assets = createSlice({
 	...state,
 });
 
-export const { setKeepAwake: setKeepAwakeInternal } = assets.actions;
+export const { setKeepAwakeEnabled } = assets.actions;
 
-export const { selectKeepAwake } = assets.selectors;
+export const { selectKeepAwakeEnabled: selectKeepAwake } = assets.selectors;
 
 export default assets.reducer;

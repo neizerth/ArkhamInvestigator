@@ -14,7 +14,6 @@ export const SoundProvider = ({
 }: SoundProviderProps) => {
 	const enabled = useAppSelector(selectSoundEnabled);
 	const ids = useSFXWorkerIds(workersCount);
-
 	if (!enabled) {
 		return children;
 	}

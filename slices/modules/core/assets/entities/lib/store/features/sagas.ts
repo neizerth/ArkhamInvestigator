@@ -1,5 +1,5 @@
 import { spawn } from "redux-saga/effects";
-import { preloadAssetImageSaga } from "./preloadAssetImage/preloadAssetImageByIndexSaga";
+import { preloadAssetImageSaga } from "./preloadAssetImage/preloadAssetImageSaga";
 import { preloadFontsSaga } from "./preloadFonts/preloadFontsSaga";
 
 export function* assetsEntitiesSaga() {
