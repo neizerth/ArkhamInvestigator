@@ -4,10 +4,8 @@ const createSagaMiddleware = require("redux-saga").default;
 import devToolsEnhancer from "redux-devtools-expo-dev-plugin";
 import { createMigrate, persistReducer, persistStore } from "redux-persist";
 
-import {
-	persistConfigMigrations,
-	persistStorageConfig,
-} from "@modules/core/storage/shared";
+import { persistStorageConfig } from "@modules/core/storage/shared/config";
+import { persistConfigMigrations } from "@modules/core/storage/shared/migrations";
 import reducers from "./reducer";
 import rootSaga from "./sagas";
 
