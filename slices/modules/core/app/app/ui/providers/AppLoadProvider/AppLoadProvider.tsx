@@ -1,10 +1,9 @@
-import { selectAssetsLoaded } from "@modules/core/assets/shared/lib";
-import { useAppSelector } from "@shared/lib";
 import type { PropsWithChildren } from "react";
 import { AppLoader } from "../../AppLoader";
+import { useAppLoad } from "./useAppLoad";
 
 export const AppLoadProvider = ({ children }: PropsWithChildren) => {
-	const loaded = useAppSelector(selectAssetsLoaded);
+	const loaded = useAppLoad();
 
 	if (!loaded) {
 		return <AppLoader />;
