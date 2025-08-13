@@ -1,6 +1,8 @@
 import * as B from "@modules/board/base/shared/lib";
 import * as SC from "@modules/board/skill-check/shared/lib";
 import * as chaosBag from "@modules/chaos-bag/base/shared/lib";
+import { setKeepAwake } from "@modules/core/device/entities/keep-awake";
+import { selectKeepAwake } from "@modules/core/device/shared/lib";
 import {
 	selectHapticMode,
 	setHapticMode,
@@ -59,8 +61,8 @@ export const SettingsPage = () => {
 					<C.Row>
 						<C.Checkbox
 							label="Keep awake"
-							selector={S.selectKeepAwake}
-							actionCreator={S.setKeepAwake}
+							selector={selectKeepAwake}
+							actionCreator={setKeepAwake}
 						/>
 					</C.Row>
 					<C.Sound />

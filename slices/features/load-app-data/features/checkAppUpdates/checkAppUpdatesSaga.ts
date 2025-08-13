@@ -1,10 +1,10 @@
+import { appIsOutdated } from "@modules/core/app/shared/lib";
 import { selectCurrentLanguage } from "@modules/core/i18n/shared/lib";
 import { loadAPIStatus } from "@shared/api";
 import {
 	seconds,
 	selectMediaUpdateTime,
 	selectMediaVersion,
-	setAppOutdated,
 } from "@shared/lib";
 import type { ReturnAwaited } from "@shared/model";
 import { put, retry, select, takeEvery } from "redux-saga/effects";
@@ -22,8 +22,10 @@ function* worker() {
 
 	const { minClientVersion } = data;
 
-	if (isOutdatedAppVersion(minClientVersion)) {
-		yield put(setAppOutdated(true));
+	const outdated = isOutdatedAppVersion(minClientVersion);
+
+	if (outdated) {
+		yield put(appIsOutdated());
 		return;
 	}
 

@@ -1,18 +1,8 @@
+import { appIsOutdated } from "@modules/core/app/shared/lib";
 import { createFollowURLModalAction } from "@modules/core/modal/shared/actions/custom/follow-url/lib";
 import { openConfirm } from "@modules/core/modal/shared/confirm/lib";
 import { APP_DOWNLOAD_URL } from "@shared/config/app";
-import { setAppOutdated } from "@shared/lib";
 import { put, takeEvery } from "redux-saga/effects";
-
-const filterAction = (action: unknown) => {
-	if (!setAppOutdated.match(action)) {
-		return false;
-	}
-
-	const isOutdated = action.payload;
-
-	return isOutdated === true;
-};
 
 function* worker() {
 	yield put(
@@ -35,5 +25,5 @@ function* worker() {
 }
 
 export function* checkOutdatedAppSaga() {
-	yield takeEvery(filterAction, worker);
+	yield takeEvery(appIsOutdated.match, worker);
 }
