@@ -2,8 +2,8 @@ import {
 	selectReferenceCard,
 	selectReferenceCardDifficulty,
 	selectReferenceCardText,
-	useAppSelector,
-} from "@shared/lib";
+} from "@modules/stories/shared/lib";
+import { useAppSelector } from "@shared/lib";
 import { stripTags } from "@shared/lib/util";
 import type { ViewProps } from "react-native";
 import * as C from "./ScenarioReference.components";

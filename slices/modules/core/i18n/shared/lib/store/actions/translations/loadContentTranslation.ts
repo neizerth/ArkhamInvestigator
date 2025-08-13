@@ -1,10 +1,7 @@
 import { setRules } from "@features/game/rules/lib/store";
+import { setStories } from "@modules/stories/shared/lib";
 import { loadLocaleData } from "@shared/api";
-import {
-	setSignatureGroups,
-	setStories,
-	setTabooSignatures,
-} from "@shared/lib";
+import { setSignatureGroups, setTabooSignatures } from "@shared/lib";
 import type { AppThunk } from "@shared/model";
 import { updateBoardTranslations } from "./updateBoardTranslations";
 

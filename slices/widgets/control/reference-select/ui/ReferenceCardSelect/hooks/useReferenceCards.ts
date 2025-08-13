@@ -1,4 +1,5 @@
-import { selectStory, useAppSelector } from "@shared/lib";
+import { selectStory } from "@modules/stories/shared/lib";
+import { useAppSelector } from "@shared/lib";
 import { useMemo } from "react";
 
 export const useReferenceCards = () => {

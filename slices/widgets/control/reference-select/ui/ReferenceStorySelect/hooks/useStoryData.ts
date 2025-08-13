@@ -5,8 +5,8 @@ import {
 	selectStories,
 	selectStory,
 	selectStoryTypeFilter,
-	useAppSelector,
-} from "@shared/lib";
+} from "@modules/stories/shared/lib";
+import { useAppSelector } from "@shared/lib";
 import type { Story } from "@shared/model";
 import { useCallback, useMemo } from "react";
 

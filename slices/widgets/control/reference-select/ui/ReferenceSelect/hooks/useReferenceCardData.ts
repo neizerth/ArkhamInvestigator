@@ -1,4 +1,5 @@
-import { selectReferenceCard, stripTags, useAppSelector } from "@shared/lib";
+import { selectReferenceCard } from "@modules/stories/shared/lib";
+import { stripTags, useAppSelector } from "@shared/lib";
 import { useMemo } from "react";
 
 export const useReferenceCardData = () => {

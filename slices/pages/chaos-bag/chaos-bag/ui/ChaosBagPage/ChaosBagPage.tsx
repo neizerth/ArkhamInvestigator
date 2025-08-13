@@ -1,11 +1,7 @@
 import { useAppTranslation } from "@modules/core/i18n/shared/lib";
+import { selectReferenceCard, selectStory } from "@modules/stories/shared/lib";
 import { routes } from "@shared/config";
-import {
-	selectReferenceCard,
-	selectStory,
-	useAppSelector,
-	usePage,
-} from "@shared/lib";
+import { useAppSelector, usePage } from "@shared/lib";
 import { Delay } from "@shared/ui";
 import * as C from "./ChaosBagPage.components";
 

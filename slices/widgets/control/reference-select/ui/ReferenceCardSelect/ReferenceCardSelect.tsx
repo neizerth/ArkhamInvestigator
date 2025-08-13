@@ -3,9 +3,8 @@ import { useAppTranslation } from "@modules/core/i18n/shared/lib";
 import {
 	selectReferenceCard,
 	setReferenceCardCode,
-	useAppDispatch,
-	useAppSelector,
-} from "@shared/lib";
+} from "@modules/stories/shared/lib";
+import { useAppDispatch, useAppSelector } from "@shared/lib";
 import type { SelectItem } from "@shared/ui";
 import type { ReferenceCard } from "arkham-investigator-data";
 import { useCallback } from "react";

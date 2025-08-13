@@ -1,8 +1,8 @@
 import { selectBoardById } from "@modules/board/base/shared/lib";
 import type { BoardId } from "@modules/board/base/shared/model";
 import { mergeReferenceTokenEffects } from "@modules/chaos-bag/effect/entities/lib";
+import { selectReferenceCardTokenEffects } from "@modules/stories/shared/lib";
 import { createSelector } from "@reduxjs/toolkit";
-import { selectReferenceCardTokenEffects } from "@shared/lib";
 
 export const selectChaosBagTokenReference = (boardId: BoardId) =>
 	createSelector(
