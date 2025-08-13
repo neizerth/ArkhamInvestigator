@@ -1,21 +1,24 @@
-import type { AppLoadState } from "@app/model";
+import {
+	selectAssetImagesCount,
+	selectAssetImagesLoadedCount,
+} from "@modules/core/assets/shared/lib";
+import { useAppSelector } from "@shared/lib";
 import { Loader, Progress } from "@shared/ui";
 import type { ViewProps } from "react-native";
 import * as C from "./AppLoader.components";
 
-export type AppLoaderProps = ViewProps & {
-	state: AppLoadState;
-};
+export type AppLoaderProps = ViewProps;
 
-export const AppLoader = ({ state, ...props }: AppLoaderProps) => {
-	const { total, loadedCount, done } = state.assets;
+export const AppLoader = (props: AppLoaderProps) => {
+	const total = useAppSelector(selectAssetImagesCount);
+	const loaded = useAppSelector(selectAssetImagesLoadedCount);
 
-	const progress = Math.round((loadedCount * 100) / total);
+	const progress = Math.round((loaded * 100) / total);
 
 	return (
 		<C.Container {...props}>
 			<Loader />
-			{!done && <Progress value={progress} />}
+			<Progress value={progress} />
 		</C.Container>
 	);
 };

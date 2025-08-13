@@ -1,4 +1,4 @@
-import { initApp } from "@shared/lib";
+import { initAppUI } from "@modules/core/app/shared/lib";
 import { put, takeEvery } from "redux-saga/effects";
 import { closeModalInternal } from "../../shared/base/lib";
 
@@ -7,5 +7,5 @@ function* worker() {
 }
 
 export function* initModalSaga() {
-	yield takeEvery(initApp.match, worker);
+	yield takeEvery(initAppUI.match, worker);
 }

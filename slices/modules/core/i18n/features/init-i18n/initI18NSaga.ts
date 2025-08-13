@@ -1,4 +1,4 @@
-import { initApp } from "@shared/lib";
+import { initAppUI } from "@modules/core/app/shared/lib";
 import { put, takeEvery } from "redux-saga/effects";
 import { restoreTranslation } from "../../shared/lib";
 
@@ -7,5 +7,5 @@ function* worker() {
 }
 
 export function* initI18NSaga() {
-	yield takeEvery(initApp.match, worker);
+	yield takeEvery(initAppUI.match, worker);
 }

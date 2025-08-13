@@ -1,12 +1,10 @@
 import "react-native-get-random-values";
 import "intl-pluralrules";
 
-import { useAppLoader, useDeviceInit } from "@app/lib";
-import { AppProvider } from "@app/providers/AppProvider";
+import { AppProvider } from "@modules/core/app/app/ui";
 import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import type { PropsWithChildren } from "react";
-import * as C from "./RootLayout.components";
 import { screenOptions } from "./RootLayout.config";
 
 const asModal = {
@@ -14,13 +12,6 @@ const asModal = {
 };
 
 export const RootLayout = ({ children }: PropsWithChildren) => {
-	const status = useAppLoader();
-	useDeviceInit();
-
-	if (!status.done) {
-		return <C.Loader state={status} />;
-	}
-
 	return (
 		<AppProvider>
 			<Stack screenOptions={screenOptions}>

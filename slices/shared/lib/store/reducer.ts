@@ -1,5 +1,7 @@
 import { boardReducer } from "@modules/board/base/shared/lib";
 import { chaosBagReducer } from "@modules/chaos-bag/base/shared/lib";
+import { assetsReducer } from "@modules/core/assets/shared/lib";
+import { deviceReducer } from "@modules/core/device/shared/lib";
 import { hapticReducer } from "@modules/core/haptic/shared/lib";
 import { i18nReducer } from "@modules/core/i18n/shared/lib";
 import { modalReducer } from "@modules/core/modal/shared/base/lib";
@@ -9,6 +11,8 @@ import * as reducer from "./features/reducer";
 
 export default {
 	...reducer,
+	...deviceReducer,
+	...assetsReducer,
 	...boardReducer,
 	...i18nReducer,
 	...hapticReducer,
