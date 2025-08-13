@@ -1,8 +1,8 @@
 import {
 	selectReferenceCardText,
 	selectReferenceCardTokenEffects,
-	useAppSelector,
-} from "@shared/lib";
+} from "@modules/stories/shared/lib";
+import { useAppSelector } from "@shared/lib";
 
 export const useTokenReference = () => {
 	const text = useAppSelector(selectReferenceCardText) || "";

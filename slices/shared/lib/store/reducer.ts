@@ -6,11 +6,13 @@ import { hapticReducer } from "@modules/core/haptic/shared/lib";
 import { i18nReducer } from "@modules/core/i18n/shared/lib";
 import { modalReducer } from "@modules/core/modal/shared/base/lib";
 import { soundReducer } from "@modules/core/sound/shared/lib";
+import { storiesReducer } from "@modules/stories/shared/lib";
 import { rulesReducer } from "../../../features/game/rules";
 import * as reducer from "./features/reducer";
 
 export default {
 	...reducer,
+	...storiesReducer,
 	...deviceReducer,
 	...assetsReducer,
 	...boardReducer,

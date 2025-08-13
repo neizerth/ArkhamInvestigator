@@ -1,4 +1,5 @@
-import { goBack, setReferenceCardCode, useAppDispatch } from "@shared/lib";
+import { setReferenceCardCode } from "@modules/stories/shared/lib";
+import { goBack, useAppDispatch } from "@shared/lib";
 import { useCallback, useMemo } from "react";
 import type { ViewProps } from "react-native";
 import * as C from "./ChaosBagReferenceEditPage.components";

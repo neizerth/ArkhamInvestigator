@@ -1,5 +1,6 @@
+import { selectReferenceCard } from "@modules/stories/shared/lib";
 import { routes } from "@shared/config";
-import { goToPage, selectReferenceCard } from "@shared/lib";
+import { goToPage } from "@shared/lib";
 import type { AppThunk } from "@shared/model";
 
 export const openReferenceCard = (): AppThunk => (dispatch, getState) => {

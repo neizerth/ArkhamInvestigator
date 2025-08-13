@@ -1,4 +1,5 @@
-import { selectReferenceCard, useAppSelector } from "@shared/lib";
+import { selectReferenceCard } from "@modules/stories/shared/lib";
+import { useAppSelector } from "@shared/lib";
 import type { ViewProps } from "react-native";
 import * as C from "./ScenarioReferenceEffects.components";
 import { getScenarioEffectsStyle } from "./ScenarioReferenceEffects.style";

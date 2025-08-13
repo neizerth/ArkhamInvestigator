@@ -2,8 +2,9 @@ import type { BoardId } from "@modules/board/base/shared/model";
 import type { ChaosTokenType } from "@modules/chaos-bag/base/shared/model";
 import { selectBoardChaosTokenValueModifications } from "@modules/mechanics/chaos-bag/value/entities/lib";
 
+import { selectReferenceCardTokens } from "@modules/stories/shared/lib";
 import { createSelector } from "@reduxjs/toolkit";
-import { rangeStep, selectReferenceCardTokens } from "@shared/lib";
+import { rangeStep } from "@shared/lib";
 import { propEq, range } from "ramda";
 import { isUndefined } from "ramda-adjunct";
 import { getSelectRange, getValueRange } from "../../logic";

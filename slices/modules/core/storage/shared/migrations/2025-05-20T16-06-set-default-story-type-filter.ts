@@ -1,4 +1,4 @@
-import type { StoriesState } from "@shared/lib";
+import type { StoriesState } from "@modules/stories/shared/lib";
 import type { PersistedState } from "redux-persist";
 
 type State = PersistedState & {

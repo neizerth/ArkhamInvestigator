@@ -12,8 +12,8 @@ import {
 	setShowFanMadeStories,
 	setShowReferenceBackText,
 	setShowTranslatedOnlyStories,
-	useAppSelector,
-} from "@shared/lib";
+} from "@modules/stories/shared/lib";
+import { useAppSelector } from "@shared/lib";
 import type { ViewProps } from "react-native";
 import * as C from "./ReferenceSelect.components";
 import { useReferenceCardData } from "./hooks";

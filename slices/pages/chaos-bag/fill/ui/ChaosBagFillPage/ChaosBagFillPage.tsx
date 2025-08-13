@@ -1,12 +1,8 @@
 import { createChaosBag } from "@modules/chaos-bag/base/entities/lib";
 import type { ChaosTokenType } from "@modules/chaos-bag/base/shared/model";
 import { useAppTranslation } from "@modules/core/i18n/shared/lib";
-import {
-	goBack,
-	selectStory,
-	useAppDispatch,
-	useAppSelector,
-} from "@shared/lib";
+import { selectStory } from "@modules/stories/shared/lib";
+import { goBack, useAppDispatch, useAppSelector } from "@shared/lib";
 import type { DropdownItem } from "@shared/ui";
 import { useCallback, useMemo, useState } from "react";
 import { v4 } from "uuid";

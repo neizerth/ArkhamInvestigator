@@ -5,9 +5,8 @@ import {
 	setReferenceCardCode,
 	setStoryCode,
 	setStoryTypeFilter,
-	useAppDispatch,
-	useAppSelector,
-} from "@shared/lib";
+} from "@modules/stories/shared/lib";
+import { useAppDispatch, useAppSelector } from "@shared/lib";
 import type { Story } from "@shared/model";
 import type { SelectItem } from "@shared/ui";
 import { useCallback } from "react";

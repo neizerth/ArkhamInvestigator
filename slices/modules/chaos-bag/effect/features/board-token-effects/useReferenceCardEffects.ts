@@ -1,6 +1,7 @@
 import type { ChaosTokenValues } from "@modules/chaos-bag/base/shared/model";
 import { selectCurrentLanguage } from "@modules/core/i18n/shared/lib";
-import { selectReferenceCardTokens, useAppSelector } from "@shared/lib";
+import { selectReferenceCardTokens } from "@modules/stories/shared/lib";
+import { useAppSelector } from "@shared/lib";
 import { selectReferenceCardEffects } from "../../entities/lib";
 
 type Options = {
