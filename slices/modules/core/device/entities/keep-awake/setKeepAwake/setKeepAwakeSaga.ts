@@ -1,6 +1,6 @@
 import * as KeepAwake from "expo-keep-awake";
 
-import { setKeepAwakeInternal } from "@modules/core/device/shared/lib";
+import { setKeepAwakeEnabled } from "@modules/core/device/shared/lib";
 import { call, put, takeEvery } from "redux-saga/effects";
 import { keepAwakeChanged, setKeepAwake } from "./setKeepAwake";
 
@@ -15,7 +15,7 @@ function* worker({ payload }: ReturnType<typeof setKeepAwake>) {
 		: KeepAwake.deactivateKeepAwake;
 
 	yield call(action);
-	yield put(setKeepAwakeInternal(payload));
+	yield put(setKeepAwakeEnabled(payload));
 	yield put(keepAwakeChanged(payload));
 }
 

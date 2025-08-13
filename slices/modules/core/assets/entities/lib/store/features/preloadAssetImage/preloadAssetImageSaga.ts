@@ -1,3 +1,4 @@
+import images from "@assets/images";
 import {
 	selectAssetImagesLoadedCount,
 	setAssetImagesLoadedCount,
@@ -6,8 +7,20 @@ import { call, put, select, takeEvery } from "redux-saga/effects";
 import { preloadAssetImage } from "./preloadAssetImage";
 import { preloadAssetImageSource } from "./preloadAssetImageSource";
 
+const filterAction = (action: unknown) => {
+	if (!preloadAssetImage.match(action)) {
+		return false;
+	}
+
+	const source = images[action.payload];
+
+	return typeof source === "number";
+};
+
 function* worker({ payload }: ReturnType<typeof preloadAssetImage>) {
-	yield call(preloadAssetImageSource, payload);
+	const source = images[payload];
+
+	yield call(preloadAssetImageSource, source);
 
 	const count: ReturnType<typeof selectAssetImagesLoadedCount> = yield select(
 		selectAssetImagesLoadedCount,
@@ -16,5 +29,5 @@ function* worker({ payload }: ReturnType<typeof preloadAssetImage>) {
 }
 
 export function* preloadAssetImageSaga() {
-	yield takeEvery(preloadAssetImage.match, worker);
+	yield takeEvery(filterAction, worker);
 }

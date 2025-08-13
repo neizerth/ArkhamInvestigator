@@ -1,6 +1,3 @@
-import "react-native-get-random-values";
-import "intl-pluralrules";
-
 import { AppProvider } from "@modules/core/app/app/ui";
 import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
@@ -26,6 +23,7 @@ export const RootLayout = ({ children }: PropsWithChildren) => {
 				<Stack.Screen name="board/modal/round-reference" options={asModal} />
 			</Stack>
 			<StatusBar style="light" />
+
 			{children}
 		</AppProvider>
 	);
