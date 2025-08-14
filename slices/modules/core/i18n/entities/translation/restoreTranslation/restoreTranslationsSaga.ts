@@ -1,7 +1,11 @@
 import type { ReturnAwaited } from "@shared/model";
 import { call, put, takeEvery } from "redux-saga/effects";
-import { DEFAULT_LANGUAGE, translations } from "../../../shared/config";
-import { StoreTranslation, loadLanguage } from "../../../shared/lib";
+import { DEFAULT_LANGUAGE } from "../../../shared/config";
+import {
+	StoreTranslation,
+	loadLanguage,
+	setLanguage,
+} from "../../../shared/lib";
 import { setTranslation } from "../setTranslation";
 import { restoreTranslation, translationRestored } from "./restoreTranslation";
 
@@ -13,23 +17,19 @@ function* worker({ payload }: ReturnType<typeof restoreTranslation>) {
 		return;
 	}
 
-	const data: ReturnAwaited<typeof StoreTranslation.load> = yield call(
+	const translation: ReturnAwaited<typeof StoreTranslation.load> = yield call(
 		StoreTranslation.load,
 	);
 
-	if (data) {
-		const appTranslation = translations?.[language] || {};
-		const translation = {
-			...data,
-			...appTranslation,
-		};
-
+	if (translation) {
 		yield put(
 			setTranslation({
 				language,
 				translation,
 			}),
 		);
+
+		yield put(setLanguage(language));
 
 		yield put(translationRestored(language));
 		return;
