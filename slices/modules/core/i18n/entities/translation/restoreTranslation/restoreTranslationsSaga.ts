@@ -18,21 +18,21 @@ function* worker({ payload }: ReturnType<typeof restoreTranslation>) {
 		language,
 	);
 
-	if (translation) {
-		yield put(
-			setTranslation({
-				language,
-				translation,
-			}),
-		);
-
-		yield put(setLanguage(language));
-
-		yield put(translationRestored(language));
+	if (!translation) {
+		yield put(loadLanguage(language));
 		return;
 	}
 
-	yield put(loadLanguage(language));
+	yield put(
+		setTranslation({
+			language,
+			translation,
+		}),
+	);
+
+	yield put(setLanguage(language));
+
+	yield put(translationRestored(language));
 }
 
 export function* restoreTranslationsSaga() {
