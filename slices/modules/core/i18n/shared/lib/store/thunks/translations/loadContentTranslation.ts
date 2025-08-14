@@ -1,4 +1,4 @@
-import { setRules } from "@features/game/rules/lib/store";
+import { setRules } from "@modules/mechanics/rules/base/shared/lib";
 import { setStories } from "@modules/stories/shared/lib";
 import { loadLocaleData } from "@shared/api";
 import { setSignatureGroups } from "@shared/lib";

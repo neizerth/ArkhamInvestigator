@@ -1,5 +1,6 @@
-import { type TimingPhase, startTimingWizard } from "@features/game/rules";
-import { roundPhaseColors } from "@features/game/rules/config";
+import { roundPhaseColors } from "@modules/mechanics/rules/base/shared/config";
+import { startTimingWizard } from "@modules/mechanics/rules/round-timing/shared/lib";
+import type { TimingPhase } from "@modules/mechanics/rules/round-timing/shared/model";
 import { useAppDispatch } from "@shared/lib";
 import { useCallback } from "react";
 import type { ViewProps } from "react-native";

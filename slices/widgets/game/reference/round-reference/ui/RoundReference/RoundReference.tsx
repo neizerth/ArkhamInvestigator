@@ -1,9 +1,9 @@
 import {
-	type TimingPhase,
 	selectRoundPhases,
 	selectTimingRules,
 	useTimingPhase,
-} from "@features/game/rules";
+} from "@modules/mechanics/rules/round-timing/shared/lib";
+import type { TimingPhase } from "@modules/mechanics/rules/round-timing/shared/model";
 import { useAppSelector } from "@shared/lib";
 import { Delay } from "@shared/ui";
 import { useCallback } from "react";

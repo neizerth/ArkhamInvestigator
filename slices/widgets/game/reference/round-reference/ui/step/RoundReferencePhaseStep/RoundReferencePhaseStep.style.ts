@@ -1,5 +1,5 @@
 import { ArnoPro, STKaiti, STXinwei, SanCn, Yoon } from "@assets/fonts";
-import type { TimingPhaseStepType } from "@features/game/rules";
+import type { TimingPhaseStepType } from "@modules/mechanics/rules/round-timing/shared/model";
 import { getKeyConfig } from "@shared/lib";
 import type { ComponentStyleMap } from "@shared/ui";
 

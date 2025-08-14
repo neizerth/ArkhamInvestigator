@@ -1,5 +1,5 @@
-import type { RulesState } from "@features/game/rules";
 import type { BoardState } from "@modules/board/base/shared/lib";
+import type { RulesState } from "@modules/mechanics/rules/base/shared/lib";
 import type { PersistedState } from "redux-persist";
 
 type State = PersistedState & {
