@@ -15,7 +15,6 @@ function* worker({ payload }: ReturnType<typeof restoreTranslation>) {
 
 	const data: ReturnAwaited<typeof StoreTranslation.load> = yield call(
 		StoreTranslation.load,
-		language,
 	);
 
 	if (data) {

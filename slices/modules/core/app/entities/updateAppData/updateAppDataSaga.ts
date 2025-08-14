@@ -1,6 +1,9 @@
 import { appUpdated } from "@modules/core/app/shared/lib";
 import { setAvailableLanguages } from "@modules/core/i18n/shared/lib";
-import { setMediaUpdateTime, setMediaVersion } from "@shared/lib";
+import {
+	setMediaUpdateTime,
+	setMediaVersion,
+} from "@modules/signature/shared/lib";
 import moment from "moment";
 import { put, takeEvery } from "redux-saga/effects";
 import { updateAppData } from "./updateAppData";

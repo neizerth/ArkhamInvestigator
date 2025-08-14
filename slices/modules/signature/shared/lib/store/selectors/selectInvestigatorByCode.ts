@@ -1,6 +1,6 @@
 import { createSelector } from "@reduxjs/toolkit";
-import { selectSignatureGroups } from "@shared/lib";
 import { propEq } from "ramda";
+import { selectSignatureGroups } from "../signatures";
 
 export const selectInvestigatorByCode = (code: string) =>
 	createSelector([selectSignatureGroups], (groups) =>

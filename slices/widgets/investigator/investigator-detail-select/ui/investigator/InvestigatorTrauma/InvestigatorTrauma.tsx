@@ -1,84 +1,50 @@
-import {
-	reduceInvestigatorSettings,
-	selectCurrentSignatureGroup,
-	selectInvestigatorSettingsProp,
-	useAppDispatch,
-	useAppSelector,
-} from "@shared/lib";
-import { safeDecrement, safeIncrement } from "@shared/lib/util";
+import { selectCurrentSignatureGroup, useAppSelector } from "@shared/lib";
 import type { InvestigatorSignatureGroup } from "arkham-investigator-data";
-import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import type { ViewProps } from "react-native";
 import * as C from "./InvestigatorTrauma.components";
+import { useInvestigatorTrauma } from "./useInvestigatorTrauma";
 
 export type InvestigatorTraumaProps = ViewProps;
 
-type TraumaProp = "physicalTrauma" | "mentalTrauma";
-
 export const InvestigatorTrauma = (props: InvestigatorTraumaProps) => {
 	const { t } = useTranslation();
-	const dispatch = useAppDispatch();
 	const group = useAppSelector(
 		selectCurrentSignatureGroup,
 	) as InvestigatorSignatureGroup;
 
-	const physical =
-		useAppSelector(
-			selectInvestigatorSettingsProp(group.id, "physicalTrauma"),
-		) || 0;
+	const code = group.id;
+	const physical = useInvestigatorTrauma({
+		code,
+		prop: "physicalTrauma",
+	});
 
-	const mental =
-		useAppSelector(selectInvestigatorSettingsProp(group.id, "mentalTrauma")) ||
-		0;
-
-	const onIncrement = useCallback(
-		(prop: TraumaProp) => () => {
-			dispatch(
-				reduceInvestigatorSettings({
-					code: group.code,
-					prop,
-					reducer: safeIncrement(),
-				}),
-			);
-		},
-		[dispatch, group.code],
-	);
-
-	const onDecrement = useCallback(
-		(prop: TraumaProp) => () => {
-			dispatch(
-				reduceInvestigatorSettings({
-					code: group.code,
-					prop,
-					reducer: safeDecrement(0),
-				}),
-			);
-		},
-		[dispatch, group.code],
-	);
+	const mental = useInvestigatorTrauma({
+		code,
+		prop: "mentalTrauma",
+	});
 
 	return (
 		<C.Container {...props}>
 			<C.Title>{t`Trauma`}</C.Title>
 			<C.Controls>
 				<C.Control
-					onIncrement={onIncrement("physicalTrauma")}
-					onDecrement={onDecrement("physicalTrauma")}
+					onIncrement={physical.increment}
+					onDecrement={physical.decrement}
 					min={0}
 					max={20}
-					value={physical}
+					value={physical.value}
 				>
-					<C.Health value={physical} />
+					<C.Health value={physical.value} />
 				</C.Control>
 				<C.Control
-					onIncrement={onIncrement("mentalTrauma")}
-					onDecrement={onDecrement("mentalTrauma")}
+					onIncrement={mental.increment}
+					onDecrement={mental.decrement}
 					min={0}
 					max={20}
-					value={mental}
+					value={mental.value}
 				>
-					<C.Sanity value={mental} />
+					<C.Sanity value={mental.value} />
 				</C.Control>
 			</C.Controls>
 		</C.Container>

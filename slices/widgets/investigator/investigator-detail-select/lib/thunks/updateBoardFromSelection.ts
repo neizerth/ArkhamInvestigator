@@ -7,11 +7,11 @@ import type {
 	InvestigatorBoard,
 	InvestigatorBoardValues,
 } from "@modules/board/base/shared/model";
+import { selectInvestigatorSettingsByCode } from "@modules/signature/shared/lib";
 import {
 	getBoardStats,
 	goBack,
 	mergeBoardStats,
-	selectInvestigatorSettingsByCode,
 	selectReplaceInvestigator,
 	setReplaceInvestigator,
 } from "@shared/lib";

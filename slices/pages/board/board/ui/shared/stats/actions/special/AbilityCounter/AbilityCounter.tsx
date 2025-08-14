@@ -5,11 +5,8 @@ import {
 	setBoardAbilityValue,
 } from "@modules/board/abilities/shared/lib";
 import { selectCurrentBoardProp } from "@modules/board/base/shared/lib";
-import {
-	selectInvestigatorCounterEnabled,
-	useAppDispatch,
-	useAppSelector,
-} from "@shared/lib";
+import { selectInvestigatorCounterEnabled } from "@modules/signature/shared/lib";
+import { useAppDispatch, useAppSelector } from "@shared/lib";
 import type { PickerChangeEvent } from "@widgets/control/picker";
 import type { InvestigatorAbility } from "arkham-investigator-data";
 import { range } from "ramda";
@@ -37,7 +34,12 @@ export const AbilityCounter = ({
 	const { code } = useAppSelector(selectCurrentBoardProp("investigator"));
 
 	const value = useAppSelector(selectCurrentAbilityValue(id));
-	const enabled = useAppSelector(selectInvestigatorCounterEnabled(code, id));
+	const enabled = useAppSelector(
+		selectInvestigatorCounterEnabled({
+			code,
+			abilityId: id,
+		}),
+	);
 
 	const direction =
 		(ability.type === "counter" && ability.direction) || "decrease";

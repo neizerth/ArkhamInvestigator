@@ -1,6 +1,6 @@
 import { ModalActionId } from "@modules/core/modal/entities/base/config";
 import { createCustomModalActionSaga } from "@modules/core/modal/shared/base/lib";
-import { changeInvestigatorDetails } from "@shared/lib";
+import { changeInvestigatorDetails } from "@modules/signature/shared/lib";
 import { put } from "redux-saga/effects";
 
 function* worker() {
