@@ -8,14 +8,12 @@ import {
 	setHapticMode,
 } from "@modules/core/haptic/shared/lib";
 import { changeLanguage } from "@modules/core/i18n/entities/language/changeLanguage";
-import {
-	selectLanguage,
-	useAppTranslation,
-} from "@modules/core/i18n/shared/lib";
+import { selectLanguage } from "@modules/core/i18n/shared/lib";
 import { sendNotification } from "@modules/core/notifications/shared/lib";
 import { CAN_ALWAYS_SHOW_GAME_TEXT } from "@shared/config";
 import * as S from "@shared/lib";
 import { useCallback } from "react";
+import { useTranslation } from "react-i18next";
 import * as C from "./SettingsPage.components";
 import {
 	hapticValues,
@@ -26,7 +24,7 @@ import {
 } from "./values";
 
 export const SettingsPage = () => {
-	const { t } = useAppTranslation();
+	const { t } = useTranslation();
 	const dispatch = S.useAppDispatch();
 
 	const clearImageCache = useCallback(() => {

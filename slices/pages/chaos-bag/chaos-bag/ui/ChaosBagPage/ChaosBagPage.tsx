@@ -1,14 +1,14 @@
-import { useAppTranslation } from "@modules/core/i18n/shared/lib";
 import { selectReferenceCard, selectStory } from "@modules/stories/shared/lib";
 import { routes } from "@shared/config";
 import { useAppSelector, usePage } from "@shared/lib";
 import { Delay } from "@shared/ui";
+import { useTranslation } from "react-i18next";
 import * as C from "./ChaosBagPage.components";
 
 export const ChaosBagPage = () => {
 	const story = useAppSelector(selectStory);
 	const referenceCard = useAppSelector(selectReferenceCard);
-	const { t } = useAppTranslation();
+	const { t } = useTranslation();
 
 	const goToPage = usePage();
 

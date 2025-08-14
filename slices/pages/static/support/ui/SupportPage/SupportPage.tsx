@@ -1,15 +1,15 @@
-import { useAppTranslation } from "@modules/core/i18n/shared/lib";
 import { Title } from "@shared/ui";
 import {
 	ContentPage,
 	type ContentPageProps,
 } from "@widgets/content/content-page";
+import { useTranslation } from "react-i18next";
 import * as C from "./SupportPage.components";
 import { contactLinks, donateLinks } from "./links";
 
 export type SupportPageProps = Omit<ContentPageProps, "title">;
 export const SupportPage = (props: SupportPageProps) => {
-	const { t } = useAppTranslation();
+	const { t } = useTranslation();
 
 	return (
 		<ContentPage {...props} title="Support">

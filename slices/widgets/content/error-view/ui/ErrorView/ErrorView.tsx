@@ -1,12 +1,12 @@
-import { useAppTranslation } from "@modules/core/i18n/shared/lib";
 import type { PropsWithError } from "@shared/model";
 import { Title } from "@shared/ui";
+import { useTranslation } from "react-i18next";
 import * as C from "./ErrorView.components";
 
 export type ErrorViewProps = PropsWithError;
 
 export const ErrorView = ({ error }: ErrorViewProps) => {
-	const { t } = useAppTranslation();
+	const { t } = useTranslation();
 
 	return (
 		<C.Container>

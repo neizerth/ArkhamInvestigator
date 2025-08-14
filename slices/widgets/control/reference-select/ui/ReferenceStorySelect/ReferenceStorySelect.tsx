@@ -1,5 +1,4 @@
 import { clearChaosTokenValue } from "@modules/chaos-bag/value/shared/lib";
-import { useAppTranslation } from "@modules/core/i18n/shared/lib";
 import {
 	selectStoryTypeFilter,
 	setReferenceCardCode,
@@ -10,6 +9,7 @@ import { useAppDispatch, useAppSelector } from "@shared/lib";
 import type { Story } from "@shared/model";
 import type { SelectItem } from "@shared/ui";
 import { useCallback } from "react";
+import { useTranslation } from "react-i18next";
 import type { ViewProps } from "react-native";
 import * as C from "./ReferenceStorySelect.components";
 import { useRenderItem, useStoryData } from "./hooks";
@@ -29,7 +29,7 @@ const tabs = [
 
 export const ReferenceStorySelect = (props: ReferenceStorySelectProps) => {
 	const dispatch = useAppDispatch();
-	const { t } = useAppTranslation();
+	const { t } = useTranslation();
 
 	const storyType = useAppSelector(selectStoryTypeFilter);
 

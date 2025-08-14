@@ -1,9 +1,9 @@
-import { useAppTranslation } from "@modules/core/i18n/shared/lib";
 import { useAppDispatch, useAppSelector } from "@shared/lib";
 import type { AppActionCreator, RootState } from "@shared/model";
 import { type TabItem, Tabs, type TabsProps } from "@shared/ui";
 import { propEq } from "ramda";
 import { useCallback, useMemo } from "react";
+import { useTranslation } from "react-i18next";
 import type { Selector } from "react-redux";
 
 export type StoreTabsProps<T extends TabItem> = Omit<TabsProps<T>, "value"> & {
@@ -23,7 +23,7 @@ export function StoreTabs<T extends TabItem>({
 	...props
 }: StoreTabsProps<T>) {
 	const dispatch = useAppDispatch();
-	const { t } = useAppTranslation();
+	const { t } = useTranslation();
 	const id = useAppSelector(selector) || defaultValue;
 
 	const onTabSelect = useCallback(

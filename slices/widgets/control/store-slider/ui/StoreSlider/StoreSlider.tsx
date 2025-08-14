@@ -1,8 +1,8 @@
-import { useAppTranslation } from "@modules/core/i18n/shared/lib";
 import { useAppDispatch, useAppSelector } from "@shared/lib";
 import type { AppActionCreator, RootState } from "@shared/model";
 import type { SliderProps } from "@shared/ui";
 import { useCallback } from "react";
+import { useTranslation } from "react-i18next";
 import type { Selector } from "react-redux";
 import * as C from "./StoreSlider.components";
 
@@ -21,7 +21,7 @@ export const StoreSlider = ({
 	actionCreator,
 	...props
 }: StoreSliderProps) => {
-	const { t } = useAppTranslation();
+	const { t } = useTranslation();
 	const dispatch = useAppDispatch();
 	const value = useAppSelector(selector);
 

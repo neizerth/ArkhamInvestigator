@@ -1,4 +1,3 @@
-import { useAppTranslation } from "@modules/core/i18n/shared/lib";
 import {
 	changeSelectedInvestigator,
 	selectFactionFilter,
@@ -9,6 +8,7 @@ import { splitIntoGroups } from "@shared/lib/util";
 import type { InvestigatorSignatureGroup } from "arkham-investigator-data";
 import { propEq } from "ramda";
 import { useCallback } from "react";
+import { useTranslation } from "react-i18next";
 import { useColumnsCount } from "../../lib";
 import { InvestigatorList as List } from "../investigator-list/InvestigatorList";
 import * as C from "./InvestigatorSelect.components";
@@ -17,7 +17,7 @@ export const InvestigatorSelect = () => {
 	const dispatch = useAppDispatch();
 	const factionFilterValue = useAppSelector(selectFactionFilter);
 	const data = useAppSelector(selectSignatureGroups);
-	const { t } = useAppTranslation();
+	const { t } = useTranslation();
 	const columns = useColumnsCount();
 
 	const onChange = useCallback(

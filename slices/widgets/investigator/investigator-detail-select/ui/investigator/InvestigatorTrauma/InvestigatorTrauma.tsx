@@ -1,4 +1,3 @@
-import { useAppTranslation } from "@modules/core/i18n/shared/lib";
 import {
 	reduceInvestigatorSettings,
 	selectCurrentSignatureGroup,
@@ -9,6 +8,7 @@ import {
 import { safeDecrement, safeIncrement } from "@shared/lib/util";
 import type { InvestigatorSignatureGroup } from "arkham-investigator-data";
 import { useCallback } from "react";
+import { useTranslation } from "react-i18next";
 import type { ViewProps } from "react-native";
 import * as C from "./InvestigatorTrauma.components";
 
@@ -17,7 +17,7 @@ export type InvestigatorTraumaProps = ViewProps;
 type TraumaProp = "physicalTrauma" | "mentalTrauma";
 
 export const InvestigatorTrauma = (props: InvestigatorTraumaProps) => {
-	const { t } = useAppTranslation();
+	const { t } = useTranslation();
 	const dispatch = useAppDispatch();
 	const group = useAppSelector(
 		selectCurrentSignatureGroup,

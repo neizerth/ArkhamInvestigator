@@ -1,4 +1,3 @@
-import { useAppTranslation } from "@modules/core/i18n/shared/lib";
 import {
 	selectInvestigatorSettingsProp,
 	setInvestigatorCounterEnabled as setCounterEnabled,
@@ -8,6 +7,7 @@ import {
 import type { InvestigatorAbility } from "arkham-investigator-data";
 import memoize from "fast-memoize";
 import { propEq } from "ramda";
+import { useTranslation } from "react-i18next";
 import type { ViewProps } from "react-native";
 import { selectCurrentSignature } from "../../../lib";
 import * as C from "./InvestigatorCounters.components";
@@ -20,7 +20,7 @@ export const InvestigatorCounters = (props: InvestigatorCountersProps) => {
 	const code = investigator?.code || "";
 	const counterEnabled =
 		useAppSelector(selectInvestigatorSettingsProp(code, "counters")) || {};
-	const { t } = useAppTranslation();
+	const { t } = useTranslation();
 	const abilities = investigator?.abilities ?? [];
 	const counters = abilities.filter(propEq("counter", "type"));
 

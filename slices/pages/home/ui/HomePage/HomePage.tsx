@@ -1,9 +1,9 @@
-import { useAppTranslation } from "@modules/core/i18n/shared/lib";
+import { useTranslation } from "react-i18next";
 import { useResumeGame, useStartGame } from "../../lib";
 import { Button } from "../Button";
 import * as C from "./HomePage.components";
 export const HomePage = () => {
-	const { t } = useAppTranslation();
+	const { t } = useTranslation();
 	const onResume = useResumeGame();
 	const onStart = useStartGame();
 
