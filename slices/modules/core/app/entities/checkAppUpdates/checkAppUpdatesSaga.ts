@@ -4,20 +4,20 @@ import {
 	selectMediaUpdateTime,
 	selectMediaVersion,
 } from "@modules/signature/shared/lib";
-import { loadAPIStatus } from "@shared/api";
 import { seconds } from "@shared/lib";
 import type { ReturnAwaited } from "@shared/model";
 import { put, retry, select, takeEvery } from "redux-saga/effects";
-import { updateAppData } from "../updateAppData";
+import { updateAppInfo } from "../updateAppInfo";
 import { checkAppUpdates } from "./checkAppUpdates";
+import { getAppStatusData } from "./getAppStatusData";
 import { isOutdatedAppVersion, isUpdateNeeded } from "./lib";
 
 function* worker() {
 	const maxTries = 3;
-	const data: ReturnAwaited<typeof loadAPIStatus> = yield retry(
+	const { data }: ReturnAwaited<typeof getAppStatusData> = yield retry(
 		maxTries,
 		seconds(1),
-		loadAPIStatus,
+		getAppStatusData,
 	);
 
 	const { minClientVersion } = data;
@@ -45,7 +45,7 @@ function* worker() {
 	});
 
 	if (needUpdate) {
-		yield put(updateAppData(data));
+		yield put(updateAppInfo(data));
 	}
 }
 export function* checkAppUpdatesSaga() {

@@ -1,23 +1,30 @@
-import { appUpdated } from "@modules/core/app/shared/lib";
-import { setAvailableLanguages } from "@modules/core/i18n/shared/lib";
-import {
-	setMediaUpdateTime,
-	setMediaVersion,
-} from "@modules/signature/shared/lib";
-import moment from "moment";
-import { put, takeEvery } from "redux-saga/effects";
+import { setRules } from "@modules/mechanics/rules/base/shared/lib";
+import { setSignatureGroups } from "@modules/signature/shared/lib";
+import { setStories } from "@modules/stories/shared/lib";
+import { seconds } from "@shared/lib";
+import type { ReturnAwaited } from "@shared/model";
+import { put, retry, takeEvery } from "redux-saga/effects";
+import { getAppData } from "./getAppData";
 import { updateAppData } from "./updateAppData";
 
 function* worker({ payload }: ReturnType<typeof updateAppData>) {
-	const { languages, version } = payload;
+	const { language } = payload;
 
-	const updatedAt = moment().format();
+	const maxTries = 3;
+	const delayMs = seconds(1);
 
-	yield put(setMediaVersion(version));
-	yield put(setMediaUpdateTime(updatedAt));
-	yield put(setAvailableLanguages(languages));
+	const { data }: ReturnAwaited<typeof getAppData> = yield retry(
+		maxTries,
+		delayMs,
+		getAppData,
+		language,
+	);
 
-	yield put(appUpdated(payload));
+	const { groups, stories, rules } = data;
+
+	yield put(setSignatureGroups(groups));
+	yield put(setRules(rules));
+	yield put(setStories(stories));
 }
 
 export function* updateAppDataSaga() {

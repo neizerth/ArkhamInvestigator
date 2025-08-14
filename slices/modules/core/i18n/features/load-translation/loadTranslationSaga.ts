@@ -1,4 +1,4 @@
-import { contentAPI } from "@shared/api";
+import { translationAPI } from "@shared/api";
 import { BUILD_VERSION } from "@shared/config/app";
 import { seconds } from "@shared/lib";
 import type { GameTranslationData } from "@shared/model";
@@ -20,7 +20,7 @@ function* worker({ payload }: ReturnType<typeof loadLanguage>) {
 	const response: AxiosResponse<GameTranslationData> = yield retry(
 		maxTries,
 		delayMs,
-		contentAPI.get,
+		translationAPI.get,
 		path,
 	);
 

@@ -1,5 +1,5 @@
 export * from "./getInvestigatorImageUrl";
 export * from "./gameData";
 export * from "./loadLocaleData";
-export * from "./loadAPIStatus";
-export * from "./content";
+export * from "./translation";
+export * from "./data";

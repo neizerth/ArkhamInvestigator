@@ -1,1 +1,1 @@
-export * from "./updateAppData";
+export * from "./updateAppDataSaga";
