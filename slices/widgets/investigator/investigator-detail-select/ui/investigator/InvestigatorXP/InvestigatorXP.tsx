@@ -1,11 +1,12 @@
 import {
-	reduceInvestigatorSettings,
+	selectInvestigatorXPByCode,
+	setInvestigatorSettingsProp,
+} from "@modules/signature/shared/lib";
+import {
 	selectCurrentSignatureGroup,
-	selectInvestigatorSettingsProp,
 	useAppDispatch,
 	useAppSelector,
 } from "@shared/lib";
-import { safeDecrement, safeIncrement } from "@shared/lib/util";
 import type { InvestigatorSignatureGroup } from "arkham-investigator-data";
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
@@ -20,29 +21,29 @@ export const InvestigatorXP = ({ ...props }: InvestigatorXPProps) => {
 		selectCurrentSignatureGroup,
 	) as InvestigatorSignatureGroup;
 
-	const xp = useAppSelector(selectInvestigatorSettingsProp(code, "xp", 0));
+	const xp = useAppSelector(selectInvestigatorXPByCode(code));
 
 	const { t } = useTranslation();
 
 	const onIncrement = useCallback(() => {
 		dispatch(
-			reduceInvestigatorSettings({
+			setInvestigatorSettingsProp({
 				code,
 				prop: "xp",
-				reducer: safeIncrement(),
+				value: xp + 1,
 			}),
 		);
-	}, [dispatch, code]);
+	}, [dispatch, code, xp]);
 
 	const onDecrement = useCallback(() => {
 		dispatch(
-			reduceInvestigatorSettings({
+			setInvestigatorSettingsProp({
 				code,
 				prop: "xp",
-				reducer: safeDecrement(0),
+				value: Math.max(xp - 1, 0),
 			}),
 		);
-	}, [dispatch, code]);
+	}, [dispatch, code, xp]);
 
 	return (
 		<C.Container {...props}>

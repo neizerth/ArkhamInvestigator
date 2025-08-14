@@ -3,16 +3,17 @@ import {
 	selectCurrentBoard,
 } from "@modules/board/base/shared/lib";
 import type { AppThunk } from "@shared/model";
-import { routes } from "../../../../../config";
-import { whereId } from "../../../../util";
-import { goToPage } from "../../../effects";
+import { routes } from "../../../../../../shared/config";
+import { goToPage } from "../../../../../../shared/lib/store/effects";
 import {
 	setCurrentSignatureGroup,
 	setCurrentSignatureId,
 	setCurrentSkinId,
-} from "../../game";
-import { selectSignatureGroups } from "../investigators";
+} from "../../../../../../shared/lib/store/features/game";
+import { whereId } from "../../../../../../shared/lib/util";
+import { selectSignatureGroups } from "../signatures";
 
+// @TODO change to saga
 export const changeInvestigatorDetails =
 	(): AppThunk => async (dispatch, getState) => {
 		const state = getState();

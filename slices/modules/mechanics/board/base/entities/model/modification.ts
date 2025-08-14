@@ -1,5 +1,5 @@
 import type { InvesigatorBoardPartial } from "@modules/board/base/shared/model";
-import type { InvestigatorSettings } from "@shared/model";
+import type { InvestigatorSettings } from "@modules/signature/shared/model";
 import type { InvestigatorSignature } from "arkham-investigator-data";
 
 export type InvestigatorBoardModificationCallbackOptions =

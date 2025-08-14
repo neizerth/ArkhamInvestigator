@@ -1,9 +1,8 @@
 import {
-	selectInvestigatorSettingsProp,
-	setInvestigatorCounterEnabled as setCounterEnabled,
-	useAppDispatch,
-	useAppSelector,
-} from "@shared/lib";
+	selectInvestigatorCounters,
+	toggleInvestigatorCounter,
+} from "@modules/signature/shared/lib";
+import { useAppDispatch, useAppSelector } from "@shared/lib";
 import type { InvestigatorAbility } from "arkham-investigator-data";
 import memoize from "fast-memoize";
 import { propEq } from "ramda";
@@ -18,8 +17,8 @@ export const InvestigatorCounters = (props: InvestigatorCountersProps) => {
 
 	const investigator = useAppSelector(selectCurrentSignature);
 	const code = investigator?.code || "";
-	const counterEnabled =
-		useAppSelector(selectInvestigatorSettingsProp(code, "counters")) || {};
+	const counterEnabled = useAppSelector(selectInvestigatorCounters(code));
+
 	const { t } = useTranslation();
 	const abilities = investigator?.abilities ?? [];
 	const counters = abilities.filter(propEq("counter", "type"));
@@ -29,10 +28,9 @@ export const InvestigatorCounters = (props: InvestigatorCountersProps) => {
 			return;
 		}
 		dispatch(
-			setCounterEnabled({
+			toggleInvestigatorCounter({
 				abilityId: ability.id,
 				code,
-				enabled: (value) => !value,
 			}),
 		);
 	});

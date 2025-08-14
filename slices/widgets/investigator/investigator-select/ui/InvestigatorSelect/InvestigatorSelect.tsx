@@ -1,8 +1,5 @@
-import {
-	changeSelectedInvestigator,
-	selectFactionFilter,
-	selectSignatureGroups,
-} from "@shared/lib";
+import { selectSignatureGroups } from "@modules/signature/shared/lib";
+import { changeSelectedInvestigator, selectFactionFilter } from "@shared/lib";
 import { useAppDispatch, useAppSelector } from "@shared/lib/hooks";
 import { splitIntoGroups } from "@shared/lib/util";
 import type { InvestigatorSignatureGroup } from "arkham-investigator-data";

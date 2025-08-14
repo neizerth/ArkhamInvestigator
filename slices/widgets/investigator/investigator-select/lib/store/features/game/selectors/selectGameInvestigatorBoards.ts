@@ -1,9 +1,7 @@
 import { createInvestigatorBoard } from "@modules/mechanics/board/base/entities/lib";
+import { selectInvestigatorSettings } from "@modules/signature/shared/lib";
 import { createSelector } from "@reduxjs/toolkit";
-import {
-	selectInvestigatorSettings,
-	selectSelectedInvestigators,
-} from "@shared/lib";
+import { selectSelectedInvestigators } from "@shared/lib";
 
 export const selectGameInvestigatorBoards = createSelector(
 	[selectSelectedInvestigators, selectInvestigatorSettings],

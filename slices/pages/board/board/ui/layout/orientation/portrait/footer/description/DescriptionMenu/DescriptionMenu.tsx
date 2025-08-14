@@ -1,7 +1,9 @@
+import { changeInvestigatorDetails } from "@modules/signature/shared/lib";
+import { routes } from "@shared/config";
 import {
-	changeInvestigator,
-	changeInvestigatorDetails,
 	delay,
+	goToPage,
+	setReplaceInvestigator,
 	setShowDescription,
 	useAppDispatch,
 } from "@shared/lib";
@@ -28,7 +30,11 @@ export const DescriptionMenu = (props: DescriptionMenuProps) => {
 
 	const onChangeInvestigator = useCallback(async () => {
 		await hide();
-		dispatch(changeInvestigator());
+		dispatch(setReplaceInvestigator(true));
+
+		await delay(150);
+
+		dispatch(goToPage(routes.replaceInvestigator));
 	}, [dispatch, hide]);
 
 	return (

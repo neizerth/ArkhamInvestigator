@@ -1,5 +1,5 @@
 import { updateBoardSignatures } from "@modules/signature/entities/updateBoardSignatures/updateBoardSignatures";
-import { setSignatureGroups } from "@shared/lib";
+import { setSignatureGroups } from "@modules/signature/shared/lib";
 import { put, takeEvery } from "redux-saga/effects";
 
 function* worker({ payload }: ReturnType<typeof setSignatureGroups>) {

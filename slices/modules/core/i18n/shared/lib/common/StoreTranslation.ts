@@ -1,23 +1,20 @@
 import { Storage } from "@modules/core/storage/shared/lib";
-import { DEFAULT_LANGUAGE } from "../../config";
 import type { Translation } from "../../model";
 
-type Language = string | null;
-const getKey = (language: Language) =>
-	`118n.translations.${language ?? DEFAULT_LANGUAGE}`;
+const key = "118n.translations";
 
 export const StoreTranslation = {
-	save: (language: Language, data: Translation) =>
+	save: (data: Translation) =>
 		Storage.save({
-			key: getKey(language),
+			key,
 			data,
 		}),
-	load: (language: Language) =>
+	load: () =>
 		Storage.load<Translation>({
-			key: getKey(language),
+			key,
 		}),
-	exists: (language: Language) =>
+	exists: () =>
 		Storage.has({
-			key: getKey(language),
+			key,
 		}),
 };

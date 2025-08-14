@@ -1,3 +1,4 @@
+import { selectMediaVersion } from "@modules/signature/shared/lib";
 import {
 	DEVICE_FONT_SCALE,
 	DPR,
@@ -6,7 +7,7 @@ import {
 	wordJoiner,
 } from "@shared/config";
 import { BUILD_ID, BUILD_VERSION } from "@shared/config/app";
-import { selectMediaVersion, useAppSelector } from "@shared/lib";
+import { useAppSelector } from "@shared/lib";
 import { A, Bold, List, Paragraph, Title } from "@shared/ui";
 import {
 	ContentPage,

@@ -11,10 +11,10 @@ import type { ActionCreator } from "@reduxjs/toolkit";
 import { setRevealedTokens } from "@modules/chaos-bag/reveal/base/shared/lib";
 import { setBoardChaosTokenValue } from "@modules/chaos-bag/value/shared/lib";
 import { closeModal } from "@modules/core/modal/shared/base/lib";
+import { clearTraumaSettings } from "@modules/signature/shared/lib";
 import type { AppThunk } from "@shared/model";
 import { routes } from "../../../../../config";
 import { goToPage } from "../../../effects";
-import { clearTraumaSettings } from "../../investigators/thunks/clearTraumaSettings";
 import { setReplaceInvestigator, setSelectedInvestigators } from "../game";
 
 export const startNewGame: ActionCreator<AppThunk> =
