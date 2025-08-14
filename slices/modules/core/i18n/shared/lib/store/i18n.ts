@@ -2,34 +2,26 @@ import { createSlice } from "@reduxjs/toolkit";
 import type { ArkhamDBInvestigatorCard } from "@shared/model/api/game/arkhamDB";
 import { createSliceState } from "redux-toolkit-helpers";
 import { DEFAULT_LANGUAGE } from "../../config";
-import { fetchTranslationData } from "./actions/translations/fetchTranslationData";
-import { setTranslationsData } from "./reducers/setTranslationsData";
 
-export type I18nState = {
+export type I18NState = {
 	language: string | null;
 	availableLanguages: string[];
-	loadingLanguage: string | null;
 	investigatorTranslations: ArkhamDBInvestigatorCard[];
 };
 
-const initialState: I18nState = {
+const initialState: I18NState = {
 	language: null,
 	availableLanguages: [DEFAULT_LANGUAGE],
-	loadingLanguage: null,
 	investigatorTranslations: [],
 };
 
 export const i18n = createSlice({
 	name: "i18n",
 	...createSliceState(initialState),
-	extraReducers(builder) {
-		builder.addCase(fetchTranslationData.fulfilled, setTranslationsData);
-	},
 });
 
 export const {
 	setLanguage,
-	setLoadingLanguage,
 	setAvailableLanguages,
 	setInvestigatorTranslations,
 } = i18n.actions;

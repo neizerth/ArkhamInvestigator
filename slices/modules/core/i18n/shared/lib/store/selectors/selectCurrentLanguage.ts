@@ -1,5 +1,5 @@
 import { createSelector } from "@reduxjs/toolkit";
-import { getDefaultLanguage } from "../../detect";
+import { getDefaultLanguage } from "../../common";
 import { selectAvailableLanguages, selectLanguage } from "../i18n";
 
 export const selectCurrentLanguage = createSelector(

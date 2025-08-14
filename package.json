@@ -47,6 +47,7 @@
     "@reduxjs/toolkit": "^2.5.1",
     "arkham-divider-data": "^1.1.14",
     "arkham-investigator-data": "^2.0.6",
+    "axios": "^1.11.0",
     "dotenv": "^17.2.1",
     "expo": "^53.0.11",
     "expo-application": "~6.1.4",
