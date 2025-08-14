@@ -1,8 +1,8 @@
-import { useAppTranslation } from "@modules/core/i18n/shared/lib";
 import { useAppDispatch, useAppSelector } from "@shared/lib";
 import type { AppActionCreator, RootState } from "@shared/model";
 import { Checkbox, type CheckboxProps } from "@shared/ui";
 import { useCallback } from "react";
+import { useTranslation } from "react-i18next";
 import type { GestureResponderEvent } from "react-native";
 import type { Selector } from "react-redux";
 
@@ -21,7 +21,7 @@ export function StoreCheckbox<T>({
 	label: labelProp,
 	...props
 }: StoreCheckboxProps) {
-	const { t } = useAppTranslation();
+	const { t } = useTranslation();
 	const dispatch = useAppDispatch();
 	const checked = useAppSelector(selector);
 	const label = translate ? t(labelProp || "") : labelProp;

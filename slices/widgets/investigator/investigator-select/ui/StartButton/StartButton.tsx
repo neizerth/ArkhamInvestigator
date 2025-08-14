@@ -1,4 +1,3 @@
-import { useAppTranslation } from "@modules/core/i18n/shared/lib";
 import { getInvestigatorImageUrl } from "@shared/api/getInvestigatorImageUrl";
 import {
 	selectSelectedInvestigators,
@@ -8,6 +7,7 @@ import {
 } from "@shared/lib";
 import type { SelectedInvestigator } from "@shared/model";
 import { useCallback } from "react";
+import { useTranslation } from "react-i18next";
 import { startGame } from "../../lib";
 import * as C from "./StartButton.components";
 
@@ -20,7 +20,7 @@ const getImageSource = ({ code, image }: SelectedInvestigator) => ({
 
 export const StartButton = () => {
 	const dispatch = useAppDispatch();
-	const { t } = useAppTranslation();
+	const { t } = useTranslation();
 	const investigators = useAppSelector(selectSelectedInvestigators);
 
 	const start = useCallback(() => {

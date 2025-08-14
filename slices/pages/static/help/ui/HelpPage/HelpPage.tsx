@@ -1,15 +1,13 @@
-import {
-	selectInvestigatorByCode,
-	useAppTranslation,
-} from "@modules/core/i18n/shared/lib";
 import { InvesigatorCode } from "@modules/mechanics/investigator/entities/config";
+import { selectInvestigatorByCode } from "@modules/signature/shared/lib";
 import { useAppSelector } from "@shared/lib";
 import { Bold, List, Paragraph, Text, Title } from "@shared/ui";
 import { ContentPage } from "@widgets/content/content-page";
+import { useTranslation } from "react-i18next";
 import * as C from "./HelpPage.components";
 
 export const HelpPage = () => {
-	const { t } = useAppTranslation();
+	const { t } = useTranslation();
 	const lolaHayes = useAppSelector(
 		selectInvestigatorByCode(InvesigatorCode.LolaHayes),
 	);

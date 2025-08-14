@@ -1,4 +1,3 @@
-import { useAppTranslation } from "@modules/core/i18n/shared/lib";
 import { formatGameText, useAppDispatch, useAppSelector } from "@shared/lib";
 import {
 	selectCurrentSignatureGroup,
@@ -10,6 +9,7 @@ import {
 } from "@shared/lib/store";
 import type { InvestigatorDetailItem } from "@shared/model";
 import { useCallback } from "react";
+import { useTranslation } from "react-i18next";
 import { InvestigatorSelectSectionMemo as DataSection } from "../../../investigator-select-section";
 import { CARD_SIZE } from "../../config";
 import {
@@ -25,7 +25,7 @@ import * as C from "./InvestigatorDetailSelect.components";
 type DetailItem = InvestigatorDetailItem | null;
 export const InvestigatorDetailSelect = () => {
 	const dispatch = useAppDispatch();
-	const { t } = useAppTranslation();
+	const { t } = useTranslation();
 	const group = useAppSelector(selectCurrentSignatureGroup);
 	const skinId = useAppSelector(selectCurrentSkinId);
 	const currentSignatureId = useAppSelector(selectCurrentSignatureId);

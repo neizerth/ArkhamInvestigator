@@ -1,15 +1,15 @@
 import { selectChaosBagEnabled } from "@modules/chaos-bag/base/shared/lib";
-import { useAppTranslation } from "@modules/core/i18n/shared/lib";
 import { routes } from "@shared/config";
 import { goBack, useAppDispatch, useAppSelector, usePage } from "@shared/lib";
 import { Delay } from "@shared/ui";
 import { InvestigatorSelect } from "@widgets/investigator/investigator-select";
 import { TopBar } from "@widgets/navigation";
 import { useCallback } from "react";
+import { useTranslation } from "react-i18next";
 import * as C from "./NewGamePage.components";
 
 export const NewGamePage = () => {
-	const { t } = useAppTranslation();
+	const { t } = useTranslation();
 	const dispatch = useAppDispatch();
 	const chaosBagEnabled = useAppSelector(selectChaosBagEnabled);
 

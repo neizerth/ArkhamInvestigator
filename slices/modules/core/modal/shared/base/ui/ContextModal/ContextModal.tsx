@@ -1,6 +1,6 @@
-import { useAppTranslation } from "@modules/core/i18n/shared/lib";
 import { statusBarHeight } from "@shared/config";
 import { Outside } from "@shared/ui";
+import { useTranslation } from "react-i18next";
 import { type ViewProps, useWindowDimensions } from "react-native";
 import * as C from "./ContextModal.components";
 
@@ -33,7 +33,7 @@ export const ContextModal = ({
 		maxHeight,
 	};
 
-	const { t } = useAppTranslation();
+	const { t } = useTranslation();
 
 	return (
 		<C.Container {...props}>

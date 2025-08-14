@@ -1,9 +1,9 @@
-import { useAppTranslation } from "@modules/core/i18n/shared/lib";
 import type { Selector } from "@reduxjs/toolkit";
 import { useAppDispatch, useAppSelector } from "@shared/lib";
 import type { AppActionCreator, RootState } from "@shared/model";
 import type { SelectItem, SelectProps } from "@shared/ui";
 import { useCallback } from "react";
+import { useTranslation } from "react-i18next";
 import * as C from "./StoreSelect.components";
 
 export type StoreSelectProps<T> = Omit<SelectProps<T>, "onChange" | "value"> & {
@@ -20,7 +20,7 @@ export function StoreSelect<T>({
 	translate = true,
 	...props
 }: StoreSelectProps<T>) {
-	const { t } = useAppTranslation();
+	const { t } = useTranslation();
 	const dispatch = useAppDispatch();
 	const value = useAppSelector(selector);
 

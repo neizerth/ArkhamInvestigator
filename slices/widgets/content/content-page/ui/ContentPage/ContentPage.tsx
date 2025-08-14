@@ -1,7 +1,7 @@
-import { useAppTranslation } from "@modules/core/i18n/shared/lib";
 import { goBack, useAppDispatch } from "@shared/lib";
 import { Page } from "@shared/ui";
 import { useCallback } from "react";
+import { useTranslation } from "react-i18next";
 import { TopBar } from "../../../../navigation/top-bar";
 import * as C from "./ContentPage.components";
 import { ContentPageProps } from "./ContentPage.types";
@@ -17,7 +17,7 @@ export const ContentPage = ({
 	...props
 }: ContentPageProps) => {
 	const dispatch = useAppDispatch();
-	const { t } = useAppTranslation();
+	const { t } = useTranslation();
 
 	const back = useCallback(() => {
 		dispatch(goBack());

@@ -1,6 +1,6 @@
-import { useAppTranslation } from "@modules/core/i18n/shared/lib";
 import { whereId } from "@shared/lib/util";
 import { memo } from "react";
+import { useTranslation } from "react-i18next";
 import {
 	type DetailSectionProps,
 	DetailSection as Section,
@@ -24,7 +24,7 @@ export const InvestigatorSelectSection = ({
 	defaultLabel: defaultLabelProp,
 	...props
 }: InvestigatorSelectSectionProps) => {
-	const { t } = useAppTranslation();
+	const { t } = useTranslation();
 	const { length } = data;
 	if (length < 2) {
 		return null;

@@ -1,5 +1,5 @@
-import { useAppTranslation } from "@modules/core/i18n/shared/lib";
 import type { PropsWithChildren } from "react";
+import { useTranslation } from "react-i18next";
 import { Container, Header, Title, Value } from "./DetailSection.components";
 
 export type DetailSectionProps = PropsWithChildren & {
@@ -12,7 +12,7 @@ export const DetailSection = ({
 	children,
 	...props
 }: DetailSectionProps) => {
-	const { t } = useAppTranslation();
+	const { t } = useTranslation();
 	const value = t(props.value || "");
 	return (
 		<Container {...props}>

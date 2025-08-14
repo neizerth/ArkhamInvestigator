@@ -1,5 +1,5 @@
-import { useAppTranslation } from "@modules/core/i18n/shared/lib";
 import type { ImageBackgroundProps } from "@shared/ui";
+import { useTranslation } from "react-i18next";
 import * as C from "./RulesBackground.components";
 
 export type RulesBackgroundProps = ImageBackgroundProps;
@@ -8,7 +8,7 @@ export const RulesBackground = ({
 	children,
 	...props
 }: RulesBackgroundProps) => {
-	const { t } = useAppTranslation();
+	const { t } = useTranslation();
 	return (
 		<C.Container {...props}>
 			<C.Content>{children}</C.Content>

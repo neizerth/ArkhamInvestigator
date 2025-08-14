@@ -1,11 +1,11 @@
 import { toggleChaosTokenSeal } from "@modules/chaos-bag/base/entities/lib";
 import type { ChaosBagToken } from "@modules/chaos-bag/base/shared/model";
 import { startChaosBagReveal } from "@modules/chaos-bag/reveal/base/entities/lib";
-import { useAppTranslation } from "@modules/core/i18n/shared/lib";
 import { REMOVE_CLIPPED_SUBVIEWS } from "@shared/config";
 import { goBack, useAppDispatch } from "@shared/lib";
 import { Delay } from "@shared/ui";
 import { useCallback } from "react";
+import { useTranslation } from "react-i18next";
 import type { ListRenderItemInfo, ViewProps } from "react-native";
 import * as C from "./ChaosBagPreview.components";
 import { useData, useModalActions } from "./hooks";
@@ -14,7 +14,7 @@ export type ChaosBagPreviewProps = ViewProps;
 
 export const ChaosBagPreview = (props: ChaosBagPreviewProps) => {
 	const dispatch = useAppDispatch();
-	const { t } = useAppTranslation();
+	const { t } = useTranslation();
 	const data = useData();
 	const isEmpty = data.regular.length === 0 && data.sealed.length === 0;
 

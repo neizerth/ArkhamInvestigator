@@ -1,8 +1,5 @@
 import { DEFAULT_LANGUAGE } from "@modules/core/i18n/shared/config";
-import {
-	selectCurrentLanguage,
-	useAppTranslation,
-} from "@modules/core/i18n/shared/lib";
+import { selectCurrentLanguage } from "@modules/core/i18n/shared/lib";
 import {
 	selectReferenceCard,
 	selectReferenceCardText,
@@ -14,6 +11,7 @@ import {
 	setShowTranslatedOnlyStories,
 } from "@modules/stories/shared/lib";
 import { useAppSelector } from "@shared/lib";
+import { useTranslation } from "react-i18next";
 import type { ViewProps } from "react-native";
 import * as C from "./ReferenceSelect.components";
 import { useReferenceCardData } from "./hooks";
@@ -31,7 +29,7 @@ export const ReferenceSelect = ({
 
 	const referenceTexts = useReferenceCardData();
 
-	const { t } = useAppTranslation();
+	const { t } = useTranslation();
 
 	const isDefaultLanguage = language === DEFAULT_LANGUAGE;
 

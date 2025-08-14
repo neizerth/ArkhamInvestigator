@@ -8,12 +8,12 @@ import {
 	setHistoryShown,
 	setSkillCheckDifficulty,
 } from "@modules/board/skill-check/shared/lib";
-import { useAppTranslation } from "@modules/core/i18n/shared/lib";
 import { useAppDispatch, useAppSelector } from "@shared/lib";
 import type { SkillCheckCommandType, SkillCheckOperator } from "@shared/model";
 import { PrimaryButton } from "@shared/ui";
 import memoize from "fast-memoize";
 import { useCallback } from "react";
+import { useTranslation } from "react-i18next";
 import { type ViewProps, useWindowDimensions } from "react-native";
 import { characters, skillCheckColor } from "../../../../config";
 import { useKeyCheck } from "../../../../lib";
@@ -26,7 +26,7 @@ export type KeyboardProps = ViewProps;
 
 export const Keyboard = ({ ...props }: KeyboardProps) => {
 	const dispatch = useAppDispatch();
-	const { t } = useAppTranslation();
+	const { t } = useTranslation();
 	const historyShown = useAppSelector(selectHistoryShown);
 	const difficulty = useAppSelector(selectSkillCheckDifficulty);
 

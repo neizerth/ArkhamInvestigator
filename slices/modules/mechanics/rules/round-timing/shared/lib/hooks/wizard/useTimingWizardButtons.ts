@@ -1,5 +1,5 @@
-import { useAppTranslation } from "@modules/core/i18n/shared/lib";
 import { useAppSelector } from "@shared/lib";
+import { useTranslation } from "react-i18next";
 import {
 	selectCurrentTimingWizardStep,
 	selectNextTimingWizardStep,
@@ -8,7 +8,7 @@ import {
 import { usePhaseStepName } from "../usePhaseStepName";
 
 export const useTimingWizardButtons = () => {
-	const { t } = useAppTranslation();
+	const { t } = useTranslation();
 
 	const step = useAppSelector(selectCurrentTimingWizardStep);
 	const prevStep = useAppSelector(selectPrevTimingWizardStep);

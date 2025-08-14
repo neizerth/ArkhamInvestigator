@@ -1,17 +1,17 @@
 import { createChaosBag } from "@modules/chaos-bag/base/entities/lib";
 import type { ChaosTokenType } from "@modules/chaos-bag/base/shared/model";
-import { useAppTranslation } from "@modules/core/i18n/shared/lib";
 import { selectStory } from "@modules/stories/shared/lib";
 import { goBack, useAppDispatch, useAppSelector } from "@shared/lib";
 import type { DropdownItem } from "@shared/ui";
 import { useCallback, useMemo, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { v4 } from "uuid";
 import * as C from "./ChaosBagFillPage.components";
 
 export const ChaosBagFillPage = () => {
 	const dispatch = useAppDispatch();
 	const story = useAppSelector(selectStory);
-	const { t } = useAppTranslation();
+	const { t } = useTranslation();
 
 	const levels = story?.difficultyLevels || [];
 

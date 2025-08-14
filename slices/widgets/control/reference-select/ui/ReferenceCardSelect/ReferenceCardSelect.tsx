@@ -1,5 +1,4 @@
 import { clearChaosTokenValue } from "@modules/chaos-bag/value/shared/lib";
-import { useAppTranslation } from "@modules/core/i18n/shared/lib";
 import {
 	selectReferenceCard,
 	setReferenceCardCode,
@@ -8,6 +7,7 @@ import { useAppDispatch, useAppSelector } from "@shared/lib";
 import type { SelectItem } from "@shared/ui";
 import type { ReferenceCard } from "arkham-investigator-data";
 import { useCallback } from "react";
+import { useTranslation } from "react-i18next";
 import type { ViewProps } from "react-native";
 import * as C from "./ReferenceCardSelect.components";
 import { useReferenceCards, useRenderItem } from "./hooks";
@@ -16,7 +16,7 @@ export type ReferenceCardSelectProps = ViewProps;
 
 export const ReferenceCardSelect = (props: ReferenceCardSelectProps) => {
 	const dispatch = useAppDispatch();
-	const { t } = useAppTranslation();
+	const { t } = useTranslation();
 
 	const renderReferenceItem = useRenderItem();
 	const referenceCards = useReferenceCards();
