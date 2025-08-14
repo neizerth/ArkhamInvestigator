@@ -1,6 +1,8 @@
 import { createAction } from "@reduxjs/toolkit";
-import type { BuildInfo } from "arkham-investigator-data";
 
-export type UpdateAppDataPayload = BuildInfo;
+export type UpdateAppDataPayload = {
+	language: string;
+};
+
 export const updateAppData =
 	createAction<UpdateAppDataPayload>("app/updateData");
