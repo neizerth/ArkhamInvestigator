@@ -1,4 +1,4 @@
-import type { TimingPhase } from "@features/game/rules";
+import type { TimingPhase } from "@modules/mechanics/rules/round-timing/shared/model";
 import { useCallback, useState } from "react";
 import type { FlatListProps } from "react-native";
 
