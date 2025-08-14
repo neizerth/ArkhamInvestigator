@@ -7,8 +7,8 @@ import {
 	selectHapticMode,
 	setHapticMode,
 } from "@modules/core/haptic/shared/lib";
+import { changeLanguage } from "@modules/core/i18n/entities/language/changeLanguage";
 import {
-	changeLanguage,
 	selectLanguage,
 	useAppTranslation,
 } from "@modules/core/i18n/shared/lib";
