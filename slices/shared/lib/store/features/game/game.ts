@@ -53,6 +53,7 @@ export const {
 	setFactionFilter,
 	setCurrentSignatureId,
 	setCurrentSkinId,
+	setSignatureSelection,
 } = game.actions;
 
 export const {

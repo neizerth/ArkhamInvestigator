@@ -1,4 +1,4 @@
-import { changeInvestigatorDetails } from "@modules/signature/shared/lib";
+import { changeSignatureDetails } from "@modules/signature/entities/changeSignatureDetails/changeSignatureDetails";
 import { routes } from "@shared/config";
 import {
 	delay,
@@ -25,7 +25,7 @@ export const DescriptionMenu = (props: DescriptionMenuProps) => {
 	const onDetailsChange = useCallback(async () => {
 		await hide();
 
-		dispatch(changeInvestigatorDetails());
+		dispatch(changeSignatureDetails());
 	}, [dispatch, hide]);
 
 	const onChangeInvestigator = useCallback(async () => {
