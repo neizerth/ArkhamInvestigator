@@ -1,5 +1,5 @@
 import { put, select, takeEvery } from "redux-saga/effects";
-import { preloadAssetImage } from "../../entities/lib";
+import { preloadAssetImage } from "../../entities/preloadAssetImage";
 import {
 	selectAssetImagesCount,
 	setAssetImagesLoaded,

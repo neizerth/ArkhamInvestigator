@@ -1,4 +1,4 @@
-import { setAssetsLoaded } from "@modules/core/assets/shared/lib";
+import { setAssetsLoaded } from "@modules/core/assets/base/shared/lib";
 import { put, takeEvery } from "redux-saga/effects";
 import { initAppUI } from "../../shared/lib";
 

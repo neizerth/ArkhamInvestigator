@@ -1,5 +1,5 @@
 import images from "@assets/images";
-import type { AssetsHandler } from "@modules/core/assets/shared/model";
+import type { AssetsHandler } from "@modules/core/assets/base/shared/model";
 
 export const handleInitAssetsInternal: AssetsHandler = (state) => {
 	state.assetImagesCount = images.length;

@@ -1,4 +1,4 @@
-import type { AssetsReducer } from "@modules/core/assets/shared/model";
+import type { AssetsReducer } from "@modules/core/assets/base/shared/model";
 import { handleInitAssetsInternal } from "./handleInitAssetsInternal";
 
 export const initAssetsInternalReducer: AssetsReducer = (

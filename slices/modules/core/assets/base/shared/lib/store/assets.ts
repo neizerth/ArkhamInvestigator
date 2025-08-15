@@ -2,6 +2,7 @@ import images from "@assets/images";
 import { createSlice } from "@reduxjs/toolkit";
 import { createSliceState } from "redux-toolkit-helpers";
 
+import type { AssetInfo } from "arkham-investigator-data";
 import * as reducers from "./features/reducers";
 
 const assetImagesCount = images.length;
@@ -12,6 +13,7 @@ export type AssetsState = {
 	assetImagesLoaded: boolean;
 	fontsLoaded: boolean;
 	assetsLoaded: boolean;
+	assetInfo: AssetInfo | null;
 };
 
 const initialState: AssetsState = {
@@ -20,6 +22,7 @@ const initialState: AssetsState = {
 	assetImagesLoaded: false,
 	fontsLoaded: false,
 	assetsLoaded: false,
+	assetInfo: null,
 };
 
 const state = createSliceState(initialState);
@@ -37,6 +40,7 @@ export const {
 	setAssetImagesCount,
 	setAssetImagesLoadedCount,
 	setAssetImagesLoaded,
+	setAssetInfo,
 	setFontsLoaded,
 	setAssetsLoaded,
 	initAssetsInternal,
@@ -48,6 +52,7 @@ export const {
 	selectAssetImagesLoaded,
 	selectFontsLoaded,
 	selectAssetsLoaded,
+	selectAssetInfo,
 } = assets.selectors;
 
 export default assets.reducer;

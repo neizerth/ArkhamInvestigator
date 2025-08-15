@@ -2,7 +2,7 @@ import images from "@assets/images";
 import {
 	selectAssetImagesLoadedCount,
 	setAssetImagesLoadedCount,
-} from "@modules/core/assets/shared/lib/store";
+} from "@modules/core/assets/base/shared/lib/store";
 import { call, put, select, takeEvery } from "redux-saga/effects";
 import { preloadAssetImage } from "./preloadAssetImage";
 import { preloadAssetImageSource } from "./preloadAssetImageSource";

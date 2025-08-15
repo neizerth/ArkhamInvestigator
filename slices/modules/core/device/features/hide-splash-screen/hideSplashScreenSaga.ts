@@ -1,4 +1,4 @@
-import { setFontsLoaded } from "@modules/core/assets/shared/lib";
+import { setFontsLoaded } from "@modules/core/assets/base/shared/lib";
 import { put, takeEvery } from "redux-saga/effects";
 import { hideSplashScreen } from "../../entities/splash-screen";
 

@@ -1,5 +1,5 @@
 import { appStarted } from "@modules/core/app/shared/lib";
-import { selectAssetsLoaded } from "@modules/core/assets/shared/lib";
+import { selectAssetsLoaded } from "@modules/core/assets/base/shared/lib";
 import { useAppDispatch, useAppSelector } from "@shared/lib";
 import { useEffect, useState } from "react";
 
