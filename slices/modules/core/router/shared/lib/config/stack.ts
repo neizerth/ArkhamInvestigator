@@ -10,6 +10,14 @@ export const stackScreenOptions: StackProps["screenOptions"] = {
 	},
 };
 
+export const modalStackScreenOptions: StackProps["screenOptions"] = {
+	headerShown: false,
+	contentStyle: {
+		backgroundColor: "transparent",
+	},
+	presentation: "transparentModal",
+};
+
 export const asTransparentModal = {
 	presentation: "transparentModal" as const,
 };
