@@ -38,6 +38,7 @@ module.exports = {
     plugins: [
       "expo-audio",
       "expo-router",
+      "expo-web-browser",
       [
         "expo-splash-screen",
         {
