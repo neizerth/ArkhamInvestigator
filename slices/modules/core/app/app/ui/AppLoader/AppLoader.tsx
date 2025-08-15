@@ -1,7 +1,7 @@
 import {
 	selectAssetImagesCount,
 	selectAssetImagesLoadedCount,
-} from "@modules/core/assets/shared/lib";
+} from "@modules/core/assets/base/shared/lib";
 import { useAppSelector } from "@shared/lib";
 import { Loader, Progress } from "@shared/ui";
 import type { ViewProps } from "react-native";

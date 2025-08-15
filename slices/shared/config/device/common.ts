@@ -16,8 +16,9 @@ export const navBarHeight =
 
 export const IS_WEB = Platform.OS === "web";
 
-// export const HAVE_AVIF_SUPPORT = Platform.OS !== 'android' || (Platform.OS === 'android' && Platform.Version >= 12)
-export const HAVE_AVIF_SUPPORT = false;
+export const HAVE_AVIF_SUPPORT =
+	Platform.OS !== "android" ||
+	(Platform.OS === "android" && Platform.Version >= 12);
 
 export const breakpoints: DeviceBreakpoints = {
 	default: {
