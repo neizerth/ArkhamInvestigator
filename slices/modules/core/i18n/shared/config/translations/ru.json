@@ -171,6 +171,9 @@
 	"ability.mateo.base.elderSign.cardAndResource": "Карта и [resource]",
 	"ability.mateo.base.elderSign.action": "Действие",
 
+	"disk.notEnoughSpace.title": "Недосаточно свободного места",
+	"disk.notEnoughSpace.text": "Для работы приложения нужно {{required}}МБ свободного места",
+
 	"Defeated": "Поражение",
 	"Change": "Сменить",
 
