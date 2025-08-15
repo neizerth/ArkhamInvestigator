@@ -21,7 +21,7 @@ extensions.configure(com.facebook.react.ReactSettingsExtension) { ex ->
   }
 }
 
-rootProject.name = 'AI Dev'
+rootProject.name = 'Investigator'
 
 dependencyResolutionManagement {
   versionCatalogs {

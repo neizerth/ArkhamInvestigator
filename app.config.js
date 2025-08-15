@@ -27,7 +27,8 @@ module.exports = {
         backgroundColor: "#000",
       },
       package: packageId,
-      versionCode: 324,
+      versionCode: 325,
+      edgeToEdgeEnabled: true,
     },
     web: {
       bundler: "metro",
