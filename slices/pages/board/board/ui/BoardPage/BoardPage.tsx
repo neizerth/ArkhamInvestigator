@@ -1,14 +1,13 @@
 import { useLayoutSize, useScreenOrientation } from "@shared/lib";
 import { useWindowDimensions } from "react-native";
 import { LayoutContext } from "../../config";
-import { getHeaderLayout, useImagePrelaod, useStatusBar } from "../../lib";
+import { getHeaderLayout, useImagePrelaod } from "../../lib";
 import * as C from "./BoardPage.components";
 
 export const BoardPage = () => {
 	useImagePrelaod();
 	const window = useWindowDimensions();
 	const orientation = useScreenOrientation();
-	useStatusBar();
 
 	const [view, onLayout] = useLayoutSize(window);
 

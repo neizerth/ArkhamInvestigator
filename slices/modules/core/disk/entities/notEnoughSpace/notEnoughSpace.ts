@@ -1,7 +1,7 @@
 import { createAction } from "@reduxjs/toolkit";
 
 type NotEnoughSpacePayload = {
-	total: number;
+	freeSpace: number;
 	required: number;
 };
 

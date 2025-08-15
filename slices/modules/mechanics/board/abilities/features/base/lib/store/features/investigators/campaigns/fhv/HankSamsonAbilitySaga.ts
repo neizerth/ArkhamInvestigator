@@ -1,10 +1,10 @@
 import { boardHistoryItemAdded } from "@modules/board/history/shared/lib";
-import { ModalActionId } from "@modules/core/modal/entities/base/config";
 import { createCancelModalAction } from "@modules/core/modal/shared/actions/cancel/lib";
 import { createConfirmModalAction } from "@modules/core/modal/shared/actions/confirm/lib";
 
 import { openConfirm } from "@modules/core/modal/shared/confirm/lib";
 import { InvesigatorCode } from "@modules/mechanics/investigator/entities/config";
+import { changeSignatureModalActionId } from "@modules/signature/shared/config";
 import { put, takeEvery } from "redux-saga/effects";
 
 const filterAction = (action: unknown) => {
@@ -41,7 +41,7 @@ function* worker({ payload }: ReturnType<typeof boardHistoryItemAdded>) {
 				actions: [
 					createCancelModalAction(),
 					createConfirmModalAction({
-						id: ModalActionId.changeInvestigatorDetails,
+						id: changeSignatureModalActionId,
 						title: "Change",
 					}),
 				],

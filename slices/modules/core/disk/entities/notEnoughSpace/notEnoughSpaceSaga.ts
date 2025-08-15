@@ -1,14 +1,22 @@
+import { createConfirmModalAction } from "@modules/core/modal/shared/actions/confirm/lib";
 import { openConfirm } from "@modules/core/modal/shared/confirm/lib";
 import { put, takeEvery } from "redux-saga/effects";
+import { formatBytes } from "../../shared/lib";
 import { notEnoughSpace } from "./notEnoughSpace";
 
 function* worker({ payload }: ReturnType<typeof notEnoughSpace>) {
-	const { required } = payload;
+	const format = formatBytes({
+		size: payload.required,
+		precision: 0,
+	});
+	const required = `${format.value}${format.unit}`;
 
 	yield put(
 		openConfirm({
 			id: "not-enough-space",
+			closeFromBackButton: false,
 			data: {
+				faction: "survivor",
 				title: "disk.notEnoughSpace.title",
 				text: {
 					i18nKey: "disk.notEnoughSpace.text",
@@ -16,7 +24,12 @@ function* worker({ payload }: ReturnType<typeof notEnoughSpace>) {
 						required,
 					},
 				},
-				actions: [],
+				actions: [
+					createConfirmModalAction({
+						id: "restart",
+						title: "Reload",
+					}),
+				],
 			},
 		}),
 	);

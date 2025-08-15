@@ -24,7 +24,7 @@ function* worker({ payload }: ReturnType<typeof loadLanguage>) {
 		path,
 	);
 
-	const localTranslation = translations[language] || {};
+	const localTranslation = translations?.[language] || {};
 
 	const data = pick(
 		["encounterSets", "campaigns", "scenarios", "stories", "common"],
@@ -33,13 +33,17 @@ function* worker({ payload }: ReturnType<typeof loadLanguage>) {
 
 	const uiTranslation = Object.assign({}, ...Object.values(data));
 
-	const translation = {
+	const storeTranslation = {
 		...translations.en,
 		...uiTranslation,
-		...localTranslation,
 	};
 
-	StoreTranslation.save(language, translation);
+	StoreTranslation.save(language, storeTranslation);
+
+	const translation = {
+		...storeTranslation,
+		...localTranslation,
+	};
 
 	yield put(
 		setTranslation({

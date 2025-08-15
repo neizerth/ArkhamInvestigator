@@ -172,7 +172,7 @@
 	"ability.mateo.base.elderSign.action": "Действие",
 
 	"disk.notEnoughSpace.title": "Недосаточно свободного места",
-	"disk.notEnoughSpace.text": "Для работы приложения нужно {{required}}МБ свободного места",
+	"disk.notEnoughSpace.text": "Для работы приложения нужно {{required}} свободного места",
 
 	"Defeated": "Поражение",
 	"Change": "Сменить",
