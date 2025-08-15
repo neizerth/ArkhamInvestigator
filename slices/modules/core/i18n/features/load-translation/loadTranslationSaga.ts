@@ -39,7 +39,7 @@ function* worker({ payload }: ReturnType<typeof loadLanguage>) {
 		...localTranslation,
 	};
 
-	StoreTranslation.save(translation);
+	StoreTranslation.save(language, translation);
 
 	yield put(
 		setTranslation({
