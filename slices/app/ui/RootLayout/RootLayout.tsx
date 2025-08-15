@@ -6,7 +6,7 @@ import { screenOptions } from "./RootLayout.config";
 export const RootLayout = ({ children }: PropsWithChildren) => {
 	return (
 		<AppLayout>
-			<Stack screenOptions={screenOptions} initialRouteName="index" />
+			<Stack screenOptions={screenOptions} />
 
 			{children}
 		</AppLayout>
