@@ -1,5 +1,6 @@
 import type { ImageSizeType } from "@shared/model";
-import { INVESTIGATORS_API_URL } from "../config";
+import { documentDirectory } from "expo-file-system";
+import { HAVE_AVIF_SUPPORT } from "../config";
 
 type GetInvestigatorImageUrlOptions = {
 	code: string;
@@ -7,14 +8,15 @@ type GetInvestigatorImageUrlOptions = {
 	grayscale?: boolean;
 	version?: number;
 };
+
 export const getInvestigatorImageUrl = ({
 	code,
 	type,
 	grayscale = false,
 	version = 1,
 }: GetInvestigatorImageUrlOptions) => {
-	const format = "jpg";
 	const colorType = grayscale ? "/grayscale" : "";
-	const url = `${INVESTIGATORS_API_URL}/images/${format}/${type}${colorType}/${code}.${format}?v=${version}`;
+	const format = HAVE_AVIF_SUPPORT ? "avif" : "webp";
+	const url = `${documentDirectory}images/${format}/${type}${colorType}/${code}.${format}`;
 	return url;
 };

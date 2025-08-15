@@ -1,6 +1,6 @@
 import { createSelector } from "@reduxjs/toolkit";
 import { whereId } from "../../../../../../shared/lib/util";
-import { selectSignatureGroups } from "../signatures";
+import { selectSignatureGroups } from "../signature";
 
 export const selectHaveDetails = (id: string) =>
 	createSelector([selectSignatureGroups], (groups) => {

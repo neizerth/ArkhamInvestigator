@@ -1,1 +1,1 @@
-export { default as signatures } from "./signatures";
+export { default as signature } from "./signature";

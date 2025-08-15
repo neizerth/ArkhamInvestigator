@@ -22,7 +22,7 @@ const initialState: SignatureState = {
 const state = createSliceState(initialState);
 
 export const signatures = createSlice({
-	name: "signatures",
+	name: "signature",
 	...state,
 	reducers: {
 		...state.reducers,

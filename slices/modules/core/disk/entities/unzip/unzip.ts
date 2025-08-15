@@ -3,6 +3,7 @@ import { createAction } from "@reduxjs/toolkit";
 export type UnzipPayload = {
 	src: string;
 	dest: string;
+	unlink?: boolean;
 };
 
 export const unzip = createAction<UnzipPayload>("disk/unzip");

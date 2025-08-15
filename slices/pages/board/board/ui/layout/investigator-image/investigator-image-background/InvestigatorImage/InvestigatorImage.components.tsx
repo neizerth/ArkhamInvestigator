@@ -1,6 +1,7 @@
 import type { BoxLayout } from "@shared/model";
+import { Image, type ImageProps } from "expo-image";
 import type { FC } from "react";
-import { Image, type ImageProps, View, type ViewProps } from "react-native";
+import { View, type ViewProps } from "react-native";
 import Animated from "react-native-reanimated";
 import styled, { css } from "styled-components/native";
 
