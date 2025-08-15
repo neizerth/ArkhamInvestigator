@@ -1,4 +1,4 @@
-import { initAppUI } from "@modules/core/app/shared/lib";
+import { appStarted } from "@modules/core/app/shared/lib";
 import { put, takeEvery } from "redux-saga/effects";
 import { checkAppUpdates } from "../../entities/checkAppUpdates";
 
@@ -7,5 +7,5 @@ function* worker() {
 }
 
 export function* checkInitialAppUpdatesSaga() {
-	yield takeEvery(initAppUI.match, worker);
+	yield takeEvery(appStarted.match, worker);
 }

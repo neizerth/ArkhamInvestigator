@@ -1,5 +1,5 @@
-import { notificationsSharedSaga } from "@modules/core/notifications/shared/lib/store/sagas/index";
 import { spawn } from "redux-saga/effects";
+import { notificationsSharedSaga } from "./shared/sagas";
 
 export function* notificationsSaga() {
 	yield spawn(notificationsSharedSaga);

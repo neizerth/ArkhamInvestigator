@@ -165,7 +165,7 @@
 	"ability.mateo.base.elderSign.action": "Action",
 
 	"disk.notEnoughSpace.title": "Not enough free space",
-	"disk.notEnoughSpace.text": "The application requires {{required}}MB of free space",
+	"disk.notEnoughSpace.text": "The application requires {{required}} of free space",
 
 	"Defeated": "Defeated",
 	"Change": "Change",

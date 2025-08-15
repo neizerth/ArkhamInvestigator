@@ -1,1 +1,1 @@
-export * from "./notEnoughSpaceSaga";
+export * from "./notEnoughSpace";

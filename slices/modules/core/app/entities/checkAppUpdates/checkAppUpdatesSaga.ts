@@ -8,7 +8,7 @@ import { seconds } from "@shared/lib";
 import type { ReturnAwaited } from "@shared/model";
 import { put, retry, select, takeEvery } from "redux-saga/effects";
 import { updateAppInfo } from "../updateAppInfo";
-import { checkAppUpdates } from "./checkAppUpdates";
+import { appUpdatesChecked, checkAppUpdates } from "./checkAppUpdates";
 import { getAppStatusData } from "./getAppStatusData";
 import { isOutdatedAppVersion, isUpdateNeeded } from "./lib";
 
@@ -47,6 +47,7 @@ function* worker() {
 	if (needUpdate) {
 		yield put(updateAppInfo(data));
 	}
+	yield put(appUpdatesChecked(data));
 }
 export function* checkAppUpdatesSaga() {
 	yield takeEvery(checkAppUpdates.match, worker);

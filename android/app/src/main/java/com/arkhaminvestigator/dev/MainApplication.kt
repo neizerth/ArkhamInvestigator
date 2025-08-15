@@ -1,4 +1,4 @@
-package com.arkhaminvestigator
+package com.arkhaminvestigator.dev
 
 import android.app.Application
 import android.content.res.Configuration

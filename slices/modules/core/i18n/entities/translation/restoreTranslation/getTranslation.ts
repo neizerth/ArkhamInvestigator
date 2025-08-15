@@ -9,5 +9,11 @@ export const getTranslation = async (language: string) => {
 		return translations.en;
 	}
 
-	return await StoreTranslation.load(language);
+	const translation = await StoreTranslation.load(language);
+	const localTranslation = translations?.[language] || {};
+
+	return {
+		...translation,
+		...localTranslation,
+	};
 };

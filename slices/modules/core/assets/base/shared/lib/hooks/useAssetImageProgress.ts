@@ -5,5 +5,11 @@ export const useAssetImageProgress = () => {
 	const total = useAppSelector(selectAssetImagesCount);
 	const loaded = useAppSelector(selectAssetImagesLoadedCount);
 
-	return Math.round(loaded / total) * 100;
+	const progress = Math.round(loaded / total) * 100;
+
+	return {
+		total,
+		loaded,
+		progress,
+	};
 };
