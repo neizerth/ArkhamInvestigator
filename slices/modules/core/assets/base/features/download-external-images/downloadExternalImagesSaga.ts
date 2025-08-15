@@ -12,6 +12,7 @@ import {
 } from "../../shared/config";
 import {
 	selectExternalImagesLoaded,
+	setExternalAssetsDownloadedAt,
 	setExternalImagesLoaded,
 	setExternalImagesReady,
 } from "../../shared/lib";
@@ -30,7 +31,7 @@ function* worker({ payload }: ReturnType<typeof appUpdatesChecked>) {
 	);
 
 	if (loaded) {
-		// return;
+		return;
 	}
 
 	const asset = payload.assets.find(propEq(externalImagesFilename, "filename"));
@@ -57,12 +58,14 @@ function* worker({ payload }: ReturnType<typeof appUpdatesChecked>) {
 		unzip({
 			src: externalImagesArchiveDiskPath,
 			dest: externalImagesDiskPath,
+			unlink: true,
 		}),
 	);
 
 	yield take(unzipComplete);
 
 	yield put(setExternalImagesReady(true));
+	yield put(setExternalAssetsDownloadedAt(Date()));
 }
 
 export function* downloadExternalImagesSaga() {

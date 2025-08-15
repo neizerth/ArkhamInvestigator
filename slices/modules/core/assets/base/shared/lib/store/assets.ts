@@ -13,6 +13,7 @@ export type AssetsState = {
 	assetImagesLoaded: boolean;
 	externalImagesLoaded: boolean;
 	externalImagesReady: boolean;
+	externalAssetsDownloadedAt: string | null;
 	fontsLoaded: boolean;
 	assetsLoaded: boolean;
 	assetInfo: AssetInfo | null;
@@ -22,6 +23,7 @@ const initialState: AssetsState = {
 	assetImagesCount,
 	externalImagesLoaded: false,
 	externalImagesReady: false,
+	externalAssetsDownloadedAt: null,
 	assetImagesLoadedCount: 0,
 	assetImagesLoaded: false,
 	fontsLoaded: false,
@@ -50,6 +52,7 @@ export const {
 	initAssetsInternal,
 	setExternalImagesLoaded,
 	setExternalImagesReady,
+	setExternalAssetsDownloadedAt,
 } = assets.actions;
 
 export const {
@@ -61,6 +64,7 @@ export const {
 	selectExternalImagesLoaded,
 	selectExternalImagesReady,
 	selectAssetInfo,
+	selectExternalAssetsDownloadedAt,
 } = assets.selectors;
 
 export default assets.reducer;

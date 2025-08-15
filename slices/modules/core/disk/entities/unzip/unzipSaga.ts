@@ -7,6 +7,7 @@ import { unzip, unzipComplete } from "./unzip";
 const rootDir = FileSystem.documentDirectory;
 
 function* worker({ payload }: ReturnType<typeof unzip>) {
+	// const { unlink } = payload;
 	const src = rootDir + payload.src;
 	const dest = rootDir + payload.dest;
 
@@ -15,6 +16,10 @@ function* worker({ payload }: ReturnType<typeof unzip>) {
 		src,
 		dest,
 	);
+
+	if (payload.unlink) {
+		yield call(FileSystem.deleteAsync, src);
+	}
 
 	yield put(
 		unzipComplete({

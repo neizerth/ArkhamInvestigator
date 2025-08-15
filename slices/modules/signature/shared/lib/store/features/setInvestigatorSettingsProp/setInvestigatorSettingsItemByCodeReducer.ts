@@ -1,6 +1,6 @@
 import type { InvestigatorSettings } from "@modules/signature/shared/model";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import type { SignatureState } from "../../signatures";
+import type { SignatureState } from "../../signature";
 import {
 	type SetInvestigatorSettingsPropPayload,
 	handleSetInvestigatorSettingsProp,

@@ -1,5 +1,5 @@
 import { createCustomModalActionSaga } from "@modules/core/modal/shared/base/lib";
-import { changeSignatureDetails } from "@modules/signature/entities/changeSignatureDetails/changeSignatureDetails";
+import { changeSignatureDetails } from "@modules/signature/entities/lib/store/features/changeSignatureDetails/changeSignatureDetails";
 import { changeSignatureModalActionId } from "@modules/signature/shared/config";
 import { put } from "redux-saga/effects";
 

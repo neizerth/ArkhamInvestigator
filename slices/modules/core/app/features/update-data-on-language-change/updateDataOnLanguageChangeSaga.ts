@@ -5,6 +5,7 @@ import { updateAppData } from "../../entities/updateAppData/updateAppData";
 
 function* worker({ payload }: ReturnType<typeof setLanguage>) {
 	const language = payload ?? DEFAULT_LANGUAGE;
+
 	yield put(
 		updateAppData({
 			language,

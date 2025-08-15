@@ -7,7 +7,7 @@ import { screenOptions } from "./RootLayout.config";
 export const RootLayout = ({ children }: PropsWithChildren) => {
 	return (
 		<AppLayout>
-			<Stack screenOptions={screenOptions}>
+			<Stack screenOptions={screenOptions} initialRouteName="index">
 				<Stack.Screen name="(modal)" options={asTransparentModal} />
 			</Stack>
 

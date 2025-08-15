@@ -1,4 +1,4 @@
-import { updateBoardSignatures } from "@modules/signature/entities/updateBoardSignatures/updateBoardSignatures";
+import { updateBoardSignatures } from "@modules/signature/entities/lib/store/features/updateBoardSignatures/updateBoardSignatures";
 import { setSignatureGroups } from "@modules/signature/shared/lib";
 import { put, takeEvery } from "redux-saga/effects";
 

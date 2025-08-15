@@ -1,4 +1,4 @@
-import { changeSignatureDetails } from "@modules/signature/entities/changeSignatureDetails/changeSignatureDetails";
+import { changeSignatureDetails } from "@modules/signature/entities/lib/store/features/changeSignatureDetails/changeSignatureDetails";
 import { routes } from "@shared/config";
 import {
 	delay,
