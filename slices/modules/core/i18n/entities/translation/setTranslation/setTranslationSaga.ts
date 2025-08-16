@@ -7,10 +7,7 @@ function worker({ payload }: ReturnType<typeof setTranslation>) {
 	const { translation } = payload;
 	const language = hyphens2camelCase(payload.language);
 
-	if (!i18next.hasResourceBundle(language, I18N_NAMESAPCE)) {
-		i18next.addResourceBundle(language, I18N_NAMESAPCE, translation);
-	}
-
+	i18next.addResourceBundle(language, I18N_NAMESAPCE, translation);
 	i18next.changeLanguage(language);
 }
 
