@@ -9,5 +9,15 @@ export type AssetSuccessfullyDownloadedPayload = InitAssetDownloadPayload & {
 	uri: string;
 };
 
-export const assetSuccessfullyDownloaded =
-	createAction<AssetSuccessfullyDownloadedPayload>("assetDownloader/");
+export const assetDownloadComplete =
+	createAction<AssetSuccessfullyDownloadedPayload>(
+		"assetDownloader/downloadComplete",
+	);
+
+export type AssetDownloadErrorPayload = InitAssetDownloadPayload & {
+	error: unknown;
+};
+
+export const assetDownloadError = createAction<AssetDownloadErrorPayload>(
+	"assetDownloader/error",
+);

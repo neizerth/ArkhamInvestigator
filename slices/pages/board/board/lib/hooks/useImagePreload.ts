@@ -1,5 +1,5 @@
 import { selectInvestigatorBoardImages } from "@modules/board/base/shared/lib";
-import { getInvestigatorImageUrl } from "@shared/api";
+import { getSignatureImageUrl } from "@modules/signature/shared/lib";
 import { useAppSelector } from "@shared/lib";
 import type { InvestigatorImage } from "@shared/model";
 import { useEffect } from "react";
@@ -8,11 +8,10 @@ import { Image, Platform } from "react-native";
 const includeGrayscale = Platform.OS === "ios";
 
 const getUrls = (data: InvestigatorImage[]) =>
-	data.flatMap(({ id, version }) => {
-		const url = getInvestigatorImageUrl({
+	data.flatMap(({ id }) => {
+		const url = getSignatureImageUrl({
 			code: id,
 			type: "full",
-			version,
 		});
 
 		if (!includeGrayscale) {
@@ -21,11 +20,10 @@ const getUrls = (data: InvestigatorImage[]) =>
 
 		return [
 			url,
-			getInvestigatorImageUrl({
+			getSignatureImageUrl({
 				code: id,
 				type: "full",
 				grayscale: true,
-				version,
 			}),
 		];
 	});

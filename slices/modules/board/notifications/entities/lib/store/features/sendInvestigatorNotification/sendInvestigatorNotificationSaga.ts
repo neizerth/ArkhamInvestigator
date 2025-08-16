@@ -3,7 +3,7 @@ import { selectBoardById } from "@modules/board/base/shared/lib";
 import type { InvestigatorBoard } from "@modules/board/base/shared/model";
 import { sendNotification } from "@modules/core/notifications/shared/lib";
 import { getBoardFaction } from "@modules/mechanics/board/base/entities/lib";
-import { getInvestigatorImageUrl } from "@shared/api";
+import { getSignatureImageUrl } from "@modules/signature/shared/lib";
 import { put, select, takeEvery } from "redux-saga/effects";
 import { sendInvestigatorNotification } from "./sendInvestigatorNotification";
 
@@ -43,14 +43,14 @@ function* worker({ payload }: ReturnType<typeof sendInvestigatorNotification>) {
 		name,
 	};
 
-	const targetImage = getInvestigatorImageUrl({
+	const targetImage = getSignatureImageUrl({
 		code: board.investigator.image.id,
 		type: "square",
 	});
 
 	const sourceImage =
 		sourceBoard &&
-		getInvestigatorImageUrl({
+		getSignatureImageUrl({
 			code: sourceBoard.investigator.image.id,
 			type: "square",
 		});

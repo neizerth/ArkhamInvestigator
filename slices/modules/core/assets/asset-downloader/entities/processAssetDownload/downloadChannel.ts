@@ -17,7 +17,7 @@ export type DownloadChannelData =
 			value?: FileSystem.FileSystemDownloadResult;
 	  };
 
-export const createDownloadChannel = ({
+export const downloadChannel = ({
 	url,
 	diskPath,
 }: InitAssetDownloadPayload) => {

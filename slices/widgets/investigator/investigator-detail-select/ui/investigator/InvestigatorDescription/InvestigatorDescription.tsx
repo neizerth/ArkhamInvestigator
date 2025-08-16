@@ -1,5 +1,5 @@
 import { selectTrackXP } from "@modules/board/base/shared/lib";
-import { getInvestigatorImageUrl as getImageUrl } from "@shared/api/getInvestigatorImageUrl";
+import { getSignatureImageUrl } from "@modules/signature/shared/lib";
 import {
 	getBoardStats,
 	selectCurrentSkinId,
@@ -19,12 +19,10 @@ export const InvestigatorDescription = () => {
 	}
 
 	const imageId = skinId || signature.image.id;
-	const version = skinId ? 1 : signature.image.version;
 
-	const uri = getImageUrl({
+	const uri = getSignatureImageUrl({
 		code: imageId,
 		type: "square",
-		version,
 	});
 	const source = { uri };
 

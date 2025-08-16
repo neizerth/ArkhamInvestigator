@@ -1,4 +1,4 @@
-import { getInvestigatorImageUrl as getImageUrl } from "@shared/api/getInvestigatorImageUrl";
+import { getSignatureImageUrl } from "@modules/signature/shared/lib";
 import type { PropsWithFaction } from "@shared/model";
 import { memo, useCallback } from "react";
 import {
@@ -37,17 +37,15 @@ export const InvestigatorPreview = ({
 	disabled,
 	size,
 	selectionStyle,
-	imageVersion,
 	...props
 }: InvestigatorPreviewProps) => {
 	const imageId = props.imageId || props.code;
 	const grayscaleImage = props.grayscale && ios;
 	const grayscaleFilter = props.grayscale && !ios;
-	const uri = getImageUrl({
+	const uri = getSignatureImageUrl({
 		code: imageId,
 		type: "square",
 		grayscale: grayscaleImage,
-		version: imageVersion,
 	});
 	const source = { uri };
 

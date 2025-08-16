@@ -1,1 +1,1 @@
-export * from "./<FTName>Saga";
+export * from "./<FTName>";

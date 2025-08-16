@@ -1,4 +1,4 @@
-import { getInvestigatorImageUrl } from "@shared/api";
+import { getSignatureImageUrl } from "@modules/signature/shared/lib";
 import { Image } from "expo-image";
 import { useMemo } from "react";
 import * as C from "./InvestigatorSelectItemImage.components";
@@ -7,19 +7,17 @@ import type { InvestigatorSelectItemImageProps } from "./InvestigatorSelectItemI
 export const InvestigatorSelectItemImage = ({
 	active,
 	code,
-	version,
 	...props
 }: InvestigatorSelectItemImageProps) => {
 	const source = useMemo(() => {
 		return {
-			uri: getInvestigatorImageUrl({
+			uri: getSignatureImageUrl({
 				code,
 				type: "square",
 				grayscale: !active,
-				version,
 			}),
 		};
-	}, [active, code, version]);
+	}, [active, code]);
 
 	return (
 		<C.ImageContainer>

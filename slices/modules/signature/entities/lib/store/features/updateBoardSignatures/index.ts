@@ -1,1 +1,1 @@
-export * from "./updateBoardSignaturesSaga";
+export * from "./updateBoardSignatures";

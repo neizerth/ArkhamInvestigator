@@ -1,11 +1,11 @@
 import { setRules } from "@modules/mechanics/rules/base/shared/lib";
-import { setSignatureGroups } from "@modules/signature/shared/lib";
+import { updateSignatureGroups } from "@modules/signature/entities/lib";
 import { setStories } from "@modules/stories/shared/lib";
 import { seconds } from "@shared/lib";
 import type { ReturnAwaited } from "@shared/model";
 import { put, retry, takeEvery } from "redux-saga/effects";
+import { updateAppData } from "../updateAppData";
 import { getAppData } from "./getAppData";
-import { updateAppData } from "./updateAppData";
 
 function* worker({ payload }: ReturnType<typeof updateAppData>) {
 	const { language } = payload;
@@ -22,7 +22,7 @@ function* worker({ payload }: ReturnType<typeof updateAppData>) {
 
 	const { groups, stories, rules } = data;
 
-	yield put(setSignatureGroups(groups));
+	yield put(updateSignatureGroups(groups));
 	yield put(setRules(rules));
 	yield put(setStories(stories));
 }

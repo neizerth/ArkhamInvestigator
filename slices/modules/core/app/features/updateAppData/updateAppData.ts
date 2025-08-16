@@ -1,6 +1,6 @@
 import { createAction } from "@reduxjs/toolkit";
 
-export type UpdateAppDataPayload = {
+type UpdateAppDataPayload = {
 	language: string;
 };
 
