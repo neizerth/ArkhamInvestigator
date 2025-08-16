@@ -4,5 +4,5 @@ import { createSelector } from "@reduxjs/toolkit";
 
 export const selectBoardDamage = (boardId: BoardId) =>
 	createSelector([selectBoardById(boardId)], (board) => {
-		return Math.min(board.baseValue.health - board.value.health, 0);
+		return Math.max(board.baseValue.health - board.value.health, 0);
 	});
