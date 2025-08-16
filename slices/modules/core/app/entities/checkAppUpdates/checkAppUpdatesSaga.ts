@@ -13,8 +13,8 @@ import { getAppStatusData } from "./getAppStatusData";
 import { isOutdatedAppVersion, isUpdateNeeded } from "./lib";
 
 function* worker() {
-	const maxTries = 3;
 	try {
+		const maxTries = 3;
 		const { data }: ReturnAwaited<typeof getAppStatusData> = yield retry(
 			maxTries,
 			seconds(1),

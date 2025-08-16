@@ -16,6 +16,7 @@ function* worker({ payload }: ReturnType<typeof updateSignatureGroups>) {
 	const groups = defaultGroups ?? [];
 
 	const imageIds = compareSignatureGroups(groups, payload);
+
 	const downloadItems = imageIds.flatMap(createDownloadQueueItems);
 
 	if (downloadItems.length > 0) {

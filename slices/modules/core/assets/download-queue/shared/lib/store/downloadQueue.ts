@@ -17,6 +17,7 @@ export const downloadQueue = createSlice({
 		addDownloadQueueItem: downloadQueueAdapter.addOne,
 		removeDownloadQueueItemById: downloadQueueAdapter.removeOne,
 		setDownloadQueue: downloadQueueAdapter.setAll,
+		clearDownloadQueue: downloadQueueAdapter.removeAll,
 	},
 });
 
@@ -25,6 +26,7 @@ export const {
 	removeDownloadQueueItemById,
 	setDownloadQueue,
 	addManyDownloadQueueItems,
+	clearDownloadQueue,
 } = downloadQueue.actions;
 
 const downloadQueueSelectors = downloadQueueAdapter.getSelectors(
