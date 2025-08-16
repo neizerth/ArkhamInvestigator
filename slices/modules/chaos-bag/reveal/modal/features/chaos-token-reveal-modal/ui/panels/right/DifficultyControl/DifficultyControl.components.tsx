@@ -1,4 +1,5 @@
-import { color } from "@shared/config";
+import { TouchableOpacity } from "@modules/core/touch/shared/ui";
+import { color, size } from "@shared/config";
 import { UnscaledText, Value } from "@shared/ui";
 import { View } from "react-native";
 import styled from "styled-components/native";
@@ -28,10 +29,15 @@ export const Difficulty: typeof Value = styled(Value).attrs({
   width: 60px;
 `;
 
-export const CompareSymbol: typeof UnscaledText = styled(UnscaledText)`
+export const Compare: typeof TouchableOpacity = styled(TouchableOpacity)`
   position: absolute;
-  top: -15px;
-  left: -17px;
+  z-index: 1;
+  top: -25px;
+  left: -27px;
+  padding: ${size.gap.default}px;
+`;
+
+export const CompareSymbol: typeof UnscaledText = styled(UnscaledText)`
   color: ${color.white};
   font-size: 30px;
 `;

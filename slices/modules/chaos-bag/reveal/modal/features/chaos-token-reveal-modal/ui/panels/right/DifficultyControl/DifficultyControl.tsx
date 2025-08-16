@@ -48,7 +48,9 @@ export const DifficultyControl = (props: DifficultyControlProps) => {
 
 	return (
 		<C.Container {...props}>
-			<C.CompareSymbol>{dificultyCharacter}</C.CompareSymbol>
+			<C.Compare onPress={toggleDifficultyType}>
+				<C.CompareSymbol>{dificultyCharacter}</C.CompareSymbol>
+			</C.Compare>
 			<C.Content>
 				<C.Control
 					data={data}
