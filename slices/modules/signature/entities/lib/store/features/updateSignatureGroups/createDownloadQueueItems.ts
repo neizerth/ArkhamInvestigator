@@ -13,7 +13,7 @@ const createSingleItem = (
 ): DownloadQueueItem => {
 	const url = getUrl({
 		...options,
-		relative: false,
+		pathType: "absolute",
 	});
 	const diskPath = getUrl(options);
 
