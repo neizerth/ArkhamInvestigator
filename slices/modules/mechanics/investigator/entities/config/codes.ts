@@ -26,4 +26,5 @@ export const InvesigatorCode = {
 		base: "04004",
 		parallel: "90081",
 	},
+	HenryBigby: "zdh_00012",
 };
