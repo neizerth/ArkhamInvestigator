@@ -18,7 +18,7 @@ const initialState: ChaosBagState = {
 	enabled: true,
 	tokenCount: {},
 	contents: [],
-	loadingAnimation: true,
+	loadingAnimation: false,
 
 	unlimitedChaosTokens: false,
 	modifyChaosTokens: false,
