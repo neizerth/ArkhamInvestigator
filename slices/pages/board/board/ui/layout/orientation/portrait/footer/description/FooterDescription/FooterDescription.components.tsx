@@ -1,4 +1,4 @@
-import { size } from "@shared/config";
+import { navBarHeight, size } from "@shared/config";
 import { InvestigatorDescription } from "@widgets/game/investigator";
 import { View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
@@ -75,4 +75,14 @@ export const Flavor: typeof InvestigatorFlavor = styled(
 
 export const Text: typeof InvestigatorText = styled(InvestigatorText)`
   position: relative;
+`;
+
+export const NavbarBackground: typeof View = styled(View)`
+  position: absolute;
+	z-index: 5;
+	bottom: 0;
+	height: ${navBarHeight}px;
+	left: 0;
+	right: 0;
+	background-color: rgba(0, 0, 0, 0.7);
 `;

@@ -5,14 +5,14 @@ export type GetSignatureImageUrlOptions = {
 	code: string;
 	type: "full" | "square";
 	grayscale?: boolean;
-	pathType?: "storage" | "absolute";
+	pathType?: "storage" | "absolute" | "relative";
 };
 
 export const getSignatureImageUrl = ({
 	code,
 	type,
 	grayscale = false,
-	pathType,
+	pathType = "storage",
 }: GetSignatureImageUrlOptions) => {
 	const colorType = grayscale ? "/grayscale" : "";
 	const format = HAVE_AVIF_SUPPORT ? "avif" : "webp";
