@@ -1,5 +1,11 @@
 import { Alegreya } from "@assets/fonts";
-import { color, font, size, statusBarHeight } from "@shared/config";
+import {
+	color,
+	font,
+	navBarHeight,
+	size,
+	statusBarHeight,
+} from "@shared/config";
 import { UnscaledText } from "@shared/ui";
 import { View } from "react-native";
 import styled from "styled-components/native";
@@ -32,7 +38,7 @@ export const Menu: typeof HomeMenu = styled(HomeMenu)`
 
 export const Disclaimer: typeof View = styled(View)`
   position: absolute;
-  bottom: ${size.gap.large}px;
+  bottom: ${size.gap.large + navBarHeight}px;
   left: ${size.gap.large}px;
   right: ${size.gap.large}px;
 `;

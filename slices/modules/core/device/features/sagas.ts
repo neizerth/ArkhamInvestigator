@@ -1,7 +1,8 @@
 import { spawn } from "redux-saga/effects";
 import { hideSplashScreenSaga } from "./hide-splash-screen/hideSplashScreenSaga";
+import { initBackgroundColorSaga } from "./init-background-color/initBackgroundColorSaga";
 import { initKeepAwakeSaga } from "./init-keep-awake/initKeepAwakeSaga";
-import { initBackgroundColorSaga } from "./inti-background-color/initBackgroundColorSaga";
+import { initNavigationbarSaga } from "./init-navigation-bar/initNavigationbarSaga";
 import { lockPortraitOrientationSaga } from "./lock-portrait-orientation/lockPortraitOrientationSaga";
 
 export function* deviceFeaturesSaga() {
@@ -9,4 +10,5 @@ export function* deviceFeaturesSaga() {
 	yield spawn(initKeepAwakeSaga);
 	yield spawn(lockPortraitOrientationSaga);
 	yield spawn(initBackgroundColorSaga);
+	yield spawn(initNavigationbarSaga);
 }

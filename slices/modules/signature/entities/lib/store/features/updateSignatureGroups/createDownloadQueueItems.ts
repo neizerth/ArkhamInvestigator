@@ -15,7 +15,10 @@ const createSingleItem = (
 		...options,
 		pathType: "absolute",
 	});
-	const diskPath = getUrl(options);
+	const diskPath = getUrl({
+		...options,
+		pathType: "storage",
+	});
 
 	return {
 		id: v4(),

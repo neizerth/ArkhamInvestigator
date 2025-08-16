@@ -14,6 +14,7 @@ import type {
 const isAndroid = Platform.OS === "android";
 
 export const navBarHeight = isAndroid ? getNavigationBarHeight() : 0;
+export const isNavbarVisible = navBarHeight > 0;
 
 export const IS_WEB = Platform.OS === "web";
 

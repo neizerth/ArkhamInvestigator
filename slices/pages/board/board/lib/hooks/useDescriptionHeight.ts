@@ -1,4 +1,8 @@
-import { CAN_ALWAYS_SHOW_GAME_TEXT } from "@shared/config";
+import {
+	CAN_ALWAYS_SHOW_GAME_TEXT,
+	isNavbarVisible,
+	navBarHeight,
+} from "@shared/config";
 
 import { useAppSelector } from "@shared/lib";
 
@@ -16,7 +20,7 @@ export const useDescriptionHeight = () => {
 		return DEFAULT_PORTRAIT_DESCRIPTION_HEIGHT;
 	}
 
-	const gap = 50;
+	const gap = isNavbarVisible ? navBarHeight - 5 : 50;
 
 	const fullHeight = gameTextHeight + gap;
 
