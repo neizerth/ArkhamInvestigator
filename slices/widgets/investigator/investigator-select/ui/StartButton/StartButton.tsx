@@ -1,4 +1,4 @@
-import { getInvestigatorImageUrl } from "@shared/api/getInvestigatorImageUrl";
+import { getSignatureImageUrl } from "@modules/signature/shared/lib";
 import {
 	selectSelectedInvestigators,
 	useAppDispatch,
@@ -12,7 +12,7 @@ import { startGame } from "../../lib";
 import * as C from "./StartButton.components";
 
 const getImageSource = ({ code, image }: SelectedInvestigator) => ({
-	uri: getInvestigatorImageUrl({
+	uri: getSignatureImageUrl({
 		code: image.id || code,
 		type: "square",
 	}),

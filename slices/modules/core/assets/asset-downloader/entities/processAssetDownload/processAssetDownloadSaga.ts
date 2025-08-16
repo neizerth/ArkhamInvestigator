@@ -6,21 +6,19 @@ import {
 	setAssetDownloadedSize,
 	setAssetSize,
 } from "../../shared/lib";
+import { type DownloadChannelData, downloadChannel } from "./downloadChannel";
 import {
-	type DownloadChannelData,
-	createDownloadChannel,
-} from "./createDownloadChannel";
-import {
-	assetSuccessfullyDownloaded,
+	assetDownloadComplete,
+	assetDownloadError,
 	processAssetDownload,
 } from "./processAssetDownload";
 
-type Channel = ReturnType<typeof createDownloadChannel>;
+type Channel = ReturnType<typeof downloadChannel>;
 
 function* worker({ payload }: ReturnType<typeof processAssetDownload>) {
 	yield put(initAssetDownload(payload));
 
-	const channel: Channel = yield call(createDownloadChannel, payload);
+	const channel: Channel = yield call(downloadChannel, payload);
 	let first = true;
 	try {
 		while (true) {
@@ -32,7 +30,7 @@ function* worker({ payload }: ReturnType<typeof processAssetDownload>) {
 			if (item.type === "result") {
 				if (item.value) {
 					yield put(
-						assetSuccessfullyDownloaded({
+						assetDownloadComplete({
 							...payload,
 							uri: item.value.uri,
 						}),
@@ -54,7 +52,12 @@ function* worker({ payload }: ReturnType<typeof processAssetDownload>) {
 			yield put(setAssetDownloadedSize(totalBytesWritten));
 		}
 	} catch (error) {
-		console.error("download error", error);
+		yield put(
+			assetDownloadError({
+				...payload,
+				error,
+			}),
+		);
 	} finally {
 		yield put(clearAssetDownload());
 	}

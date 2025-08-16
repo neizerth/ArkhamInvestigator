@@ -1,4 +1,4 @@
-import { getInvestigatorImageUrl } from "@shared/api";
+import { getSignatureImageUrl } from "@modules/signature/shared/lib";
 import { memo } from "react";
 import * as C from "./InvestigatorImage.components";
 import type { InvestigatorImageProps } from "./InvestigatorImage.types";
@@ -11,7 +11,6 @@ export const InvestigatorImage = ({
 	onLoad,
 	onLoadStart: onLoadStartProp,
 	onLoadEnd: onLoadEndProp,
-	version,
 	...props
 }: InvestigatorImageProps) => {
 	const { layout } = props;
@@ -19,19 +18,17 @@ export const InvestigatorImage = ({
 	const grayscaleStyle = useOpacityAnimation(code);
 
 	const source = {
-		uri: getInvestigatorImageUrl({
+		uri: getSignatureImageUrl({
 			code,
 			type: "full",
-			version,
 		}),
 	};
 
 	const grayscaleSource = {
-		uri: getInvestigatorImageUrl({
+		uri: getSignatureImageUrl({
 			code,
 			type: "full",
 			grayscale: true,
-			version,
 		}),
 	};
 

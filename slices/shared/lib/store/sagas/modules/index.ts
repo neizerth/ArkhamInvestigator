@@ -6,6 +6,7 @@ import { diskSaga } from "@modules/core/disk/sagas";
 import { hapticSaga } from "@modules/core/haptic/sagas";
 import { i18nSaga } from "@modules/core/i18n/sagas";
 import { modalSaga } from "@modules/core/modal/sagas";
+import { networkSaga } from "@modules/core/network/sagas";
 import { notificationsSaga } from "@modules/core/notifications/sagas";
 import { soundSaga } from "@modules/core/sound/sagas";
 import { factionSaga } from "@modules/faction/sagas";
@@ -32,5 +33,6 @@ export function* modulesSaga() {
 	yield spawn(assetsSaga);
 	yield spawn(signatureSaga);
 	yield spawn(diskSaga);
+	yield spawn(networkSaga);
 	yield spawn(appSaga);
 }

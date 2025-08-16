@@ -7,6 +7,12 @@ import { downloadAsset } from "./downloadAsset";
 
 function* worker({ payload }: ReturnType<typeof downloadAsset>) {
 	const { requiredSize } = payload;
+
+	if (typeof requiredSize !== "number") {
+		yield put(processAssetDownload(payload));
+		return;
+	}
+
 	const freeSpace: ReturnAwaited<typeof FileSystem.getFreeDiskStorageAsync> =
 		yield call(FileSystem.getFreeDiskStorageAsync);
 

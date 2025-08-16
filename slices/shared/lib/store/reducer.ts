@@ -2,6 +2,7 @@ import { boardReducer } from "@modules/board/base/shared/lib";
 import { chaosBagReducer } from "@modules/chaos-bag/base/shared/lib";
 import { assetsDownloaderReducer } from "@modules/core/assets/asset-downloader/shared/lib";
 import { assetsReducer } from "@modules/core/assets/base/shared/lib";
+import { downloadQueueReducer } from "@modules/core/assets/download-queue/shared/lib";
 import { deviceReducer } from "@modules/core/device/shared/lib";
 import { hapticReducer } from "@modules/core/haptic/shared/lib";
 import { i18nReducer } from "@modules/core/i18n/shared/lib";
@@ -28,4 +29,5 @@ export default {
 	...rulesReducer,
 	...roundTimingReducer,
 	...signatureReducer,
+	...downloadQueueReducer,
 };

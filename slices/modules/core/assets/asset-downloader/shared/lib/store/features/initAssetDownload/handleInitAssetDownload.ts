@@ -2,7 +2,7 @@ import type { AssetDownloaderHandler } from "@modules/core/assets/asset-download
 
 export type InitAssetDownloadPayload = {
 	url: string;
-	size: number;
+	size?: number;
 	diskPath: string;
 };
 
@@ -10,7 +10,7 @@ export const handleInitAssetDownload: AssetDownloaderHandler<
 	InitAssetDownloadPayload
 > = (state, payload) => {
 	state.assetUrl = payload.url;
-	state.assetSize = payload.size;
+	state.assetSize = payload.size ?? 0;
 	state.assetDownloadedSize = 0;
 	state.assetDiskPath = payload.diskPath;
 };

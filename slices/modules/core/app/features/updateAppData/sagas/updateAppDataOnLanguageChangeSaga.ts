@@ -1,7 +1,7 @@
 import { DEFAULT_LANGUAGE } from "@modules/core/i18n/shared/config";
 import { setLanguage } from "@modules/core/i18n/shared/lib";
 import { put, takeEvery } from "redux-saga/effects";
-import { updateAppData } from "../../entities/updateAppData/updateAppData";
+import { updateAppData } from "../updateAppData";
 
 function* worker({ payload }: ReturnType<typeof setLanguage>) {
 	const language = payload ?? DEFAULT_LANGUAGE;
@@ -13,6 +13,6 @@ function* worker({ payload }: ReturnType<typeof setLanguage>) {
 	);
 }
 
-export function* updateDataOnLanguageChangeSaga() {
+export function* updateAppDataOnLanguageChangeSaga() {
 	yield takeEvery(setLanguage.match, worker);
 }

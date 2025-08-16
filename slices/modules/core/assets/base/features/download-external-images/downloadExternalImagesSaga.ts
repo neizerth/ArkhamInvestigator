@@ -1,6 +1,6 @@
 import { appUpdatesChecked } from "@modules/core/app/entities/checkAppUpdates";
 import { downloadAsset } from "@modules/core/assets/asset-downloader/entities/downloadAsset/downloadAsset";
-import { assetSuccessfullyDownloaded } from "@modules/core/assets/asset-downloader/entities/processAssetDownload/processAssetDownload";
+import { assetDownloadComplete } from "@modules/core/assets/asset-downloader/entities/processAssetDownload/processAssetDownload";
 import { unzip, unzipComplete } from "@modules/core/disk/entities/unzip/unzip";
 import { propEq } from "ramda";
 import { put, select, take, takeEvery } from "redux-saga/effects";
@@ -18,11 +18,19 @@ import {
 } from "../../shared/lib";
 
 const downloadComplete = (action: unknown) => {
-	if (!assetSuccessfullyDownloaded.match(action)) {
+	if (!assetDownloadComplete.match(action)) {
 		return false;
 	}
 
 	return action.payload.url === externalImagesUrl;
+};
+
+const matchUnzipComplete = (action: unknown) => {
+	if (!unzipComplete.match(action)) {
+		return false;
+	}
+
+	return action.payload.src === externalImagesArchiveDiskPath;
 };
 
 function* worker({ payload }: ReturnType<typeof appUpdatesChecked>) {
@@ -62,7 +70,7 @@ function* worker({ payload }: ReturnType<typeof appUpdatesChecked>) {
 		}),
 	);
 
-	yield take(unzipComplete);
+	yield take(matchUnzipComplete);
 
 	yield put(setExternalImagesReady(true));
 	yield put(setExternalAssetsDownloadedAt(Date()));

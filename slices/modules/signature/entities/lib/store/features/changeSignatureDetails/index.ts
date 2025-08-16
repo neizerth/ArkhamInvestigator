@@ -1,1 +1,1 @@
-export * from "./changeSignatureDetailsSaga";
+export * from "./changeSignatureDetails";
