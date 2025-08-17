@@ -26,14 +26,13 @@ export const JimCulverParallelTokenEffects: Modification = {
 			value: skullValue,
 		});
 
-		const elderSignEffects = [
-			`<i>[skull]: ${skullEffect}</i>`,
-			`<i>[curse]: ${curse}</i>`,
-		].join("\n");
+		const elderSignEffects = [`<i>${skullEffect}</i>`, `<i>${curse}</i>`].join(
+			"\n",
+		);
 
 		return {
 			...effects,
-			curse: `[curse]: ${effects.curse}`,
+			curse: `${effects.curse}`,
 			elderSign: `${effects.elderSign}\n${elderSignEffects}`,
 		};
 	},
