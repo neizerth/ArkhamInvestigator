@@ -1,4 +1,4 @@
-import { symbolicChaosTokenTypes } from "@modules/chaos-bag/base/shared/config/token/types";
+import { chaosToken } from "@modules/chaos-bag/base/shared/config";
 import { getDefaultChaosTokenValue } from "@modules/chaos-bag/value/shared/lib";
 import type { ViewProps } from "react-native";
 import type { RevealedChaosBagToken } from "../../../shared/model";
@@ -21,7 +21,7 @@ export const ChaosBagRevealedToken = ({
 	const { type } = token;
 	const size = position?.toString().length ?? 0;
 	const defaultValue = getDefaultChaosTokenValue(type);
-	const showValue = symbolicChaosTokenTypes.includes(type);
+	const showValue = chaosToken.types.symbolic.all.includes(type);
 
 	return (
 		<C.Container {...props}>

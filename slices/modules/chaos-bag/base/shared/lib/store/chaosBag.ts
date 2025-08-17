@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { createSliceState } from "redux-toolkit-helpers";
-import * as baseReducers from "./reducers";
+import * as baseReducers from "./features/reducers";
 
 import type { ChaosBagToken, ChaosTokenCount } from "../../model";
 
