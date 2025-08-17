@@ -25,18 +25,23 @@ function* worker({ payload }: ReturnType<typeof boardHistoryItemAdded>) {
 		return;
 	}
 
-	const { willpower, intellect, combat, agility } = board.value;
-
 	if (typeof item.value.health === "number") {
 		const diff = item.value.health - board.value.health;
+
+		const combat = board.value.combat - diff;
+		const agility = board.value.agility - diff;
+
+		if (diff === 0 || combat < 0 || agility < 0) {
+			return;
+		}
 
 		yield put(
 			setBoardValuePart({
 				boardId,
 				type: "value",
 				value: {
-					combat: combat - diff,
-					agility: agility - diff,
+					combat,
+					agility,
 				},
 				history: {
 					type: "update",
@@ -49,13 +54,20 @@ function* worker({ payload }: ReturnType<typeof boardHistoryItemAdded>) {
 	if (typeof item.value.sanity === "number") {
 		const diff = item.value.sanity - board.value.sanity;
 
+		const willpower = board.value.willpower - diff;
+		const intellect = board.value.intellect - diff;
+
+		if (diff === 0 || intellect < 0 || willpower < 0) {
+			return;
+		}
+
 		yield put(
 			setBoardValuePart({
 				boardId,
 				type: "value",
 				value: {
-					willpower: willpower - diff,
-					intellect: intellect - diff,
+					willpower,
+					intellect,
 				},
 				history: {
 					type: "update",
