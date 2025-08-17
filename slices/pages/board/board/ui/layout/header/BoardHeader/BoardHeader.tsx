@@ -5,6 +5,7 @@ import {
 import {
 	selectBoardsCount,
 	selectCurrentBoardProp,
+	selectNonUniqueId,
 } from "@modules/board/base/shared/lib";
 import { CustomModalId } from "@modules/core/modal/entities/base/config";
 import { openModal } from "@modules/core/modal/shared/base/lib";
@@ -31,7 +32,7 @@ export const BoardHeader = (props: BoardHeaderProps) => {
 	const investigator = useAppSelector(selectCurrentBoardProp("investigator"));
 	const isParallel = useAppSelector(selectCurrentIsParallel);
 	const unique = useAppSelector(selectCurrentIsUnique);
-	const boardId = useAppSelector(selectCurrentBoardProp("id"));
+	const boardId = useAppSelector(selectNonUniqueId("current"));
 	const faction = useAppSelector(selectCurrentFaction);
 	const pressableTitle = useAppSelector(selectCanChangeFaction("current"));
 

@@ -1,6 +1,8 @@
-import { selectHasAdditionalAction } from "@modules/board/abilities/shared/lib";
 import { selectBoardIsUnique } from "@modules/board/base/entities/lib";
-import { selectBoardProp } from "@modules/board/base/shared/lib";
+import {
+	selectBoardProp,
+	selectNonUniqueId,
+} from "@modules/board/base/shared/lib";
 import type { BoardId } from "@modules/board/base/shared/model";
 import { selectBoardIsInactive } from "@modules/mechanics/board/base/entities/lib";
 import { useAppSelector } from "@shared/lib";
@@ -31,8 +33,7 @@ export const InvestigatorSelectItem = ({
 	const unique = useAppSelector(selectBoardIsUnique(boardId));
 	const inactive = useAppSelector(selectBoardIsInactive(boardId));
 
-	// const end = useAppSelector(selectTurnEnd(boardId));
-	const end = useAppSelector(selectHasAdditionalAction(boardId));
+	const id = useAppSelector(selectNonUniqueId(boardId));
 
 	if (!image || !investigator) {
 		return null;
@@ -46,7 +47,7 @@ export const InvestigatorSelectItem = ({
 			<C.Image code={image.id} version={image.version} active={!inactive} />
 			{showId && (
 				<C.Overlay>
-					<C.Id value={boardId} />
+					<C.Id value={id} />
 				</C.Overlay>
 			)}
 		</C.Container>
