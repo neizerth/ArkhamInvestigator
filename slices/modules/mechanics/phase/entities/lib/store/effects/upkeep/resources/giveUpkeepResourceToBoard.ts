@@ -4,7 +4,7 @@ import {
 	setBoardActualPropValue,
 } from "@modules/board/base/shared/lib";
 import type { BoardId } from "@modules/board/base/shared/model";
-import { sendNotification } from "@modules/core/notifications/shared/lib";
+import { sendInvestigatorNotification } from "@modules/board/notifications/entities/lib";
 import type { AppThunk } from "@shared/model";
 
 export const giveUpkeepResourceToBoard =
@@ -36,7 +36,8 @@ export const giveUpkeepResourceToBoard =
 		);
 
 		dispatch(
-			sendNotification({
+			sendInvestigatorNotification({
+				boardId,
 				message: "investigator.getResources",
 				data: {
 					name,
