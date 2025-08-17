@@ -10,7 +10,9 @@ export const endChaosBagReveal = createAction<EndChaosBagRevealPayload>(
 );
 
 export type ChaosBagRevealEndPayload = EndChaosBagRevealPayload &
-	ChaosBagRevealState;
+	Omit<ChaosBagRevealState, "failed"> & {
+		failed: boolean;
+	};
 
 export const chaosBagRevealEnd = createAction<ChaosBagRevealEndPayload>(
 	`${chaosBagRevealPrefix}/revealEnd`,

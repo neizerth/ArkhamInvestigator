@@ -4,7 +4,6 @@ import {
 } from "@modules/board/base/shared/lib";
 import { getSkillCheckDifficultyCharacter } from "@modules/board/skill-check/shared/lib";
 import type { ChaosBagHistoryItem } from "@modules/chaos-bag/base/shared/model";
-import { getChaosBagSkillCheckFailed } from "@modules/chaos-bag/result/shared/lib";
 import {
 	goBack,
 	isNotEmpty,
@@ -44,14 +43,10 @@ export const ChaosBagRevalItemSkillCheck = ({
 		difficultyType,
 		result,
 		succeedBy,
+		failed,
 	} = item;
 
 	const difficultyCharacter = getSkillCheckDifficultyCharacter(difficultyType);
-
-	const fail = getChaosBagSkillCheckFailed({
-		succeedBy,
-		result,
-	});
 
 	return (
 		<C.Container {...props}>
@@ -70,13 +65,8 @@ export const ChaosBagRevalItemSkillCheck = ({
 			)}
 			{isNotEmpty(result) && isNotEmpty(succeedBy) && (
 				<C.Result>
-					{isNumber(result) ? (
-						<C.ResultValue value={succeedBy} fail={fail} scale={false} />
-					) : (
-						<C.SpecialResult>
-							{result === "fail" && <C.AutoFail type="autoFail" />}
-							{result === "success" && <C.AutoSuccess type="elderSign" />}
-						</C.SpecialResult>
+					{isNumber(result) && (
+						<C.ResultValue value={succeedBy} fail={failed} scale={false} />
 					)}
 				</C.Result>
 			)}

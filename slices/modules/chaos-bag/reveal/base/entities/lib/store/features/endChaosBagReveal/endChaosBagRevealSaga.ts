@@ -1,7 +1,8 @@
 import {
+	selectIsSkillCheckFailed as selectFailed,
 	selectSkillCheckResult as selectResult,
-	selectSkillCheckSucceedByResult as selectSucceedBy,
-} from "@modules/chaos-bag/result/features/lib";
+	selectSkillCheckSucceedBy as selectSucceedBy,
+} from "@modules/chaos-bag/result/entities/lib";
 import {
 	endChaosBagRevealInternal,
 	selectChaosBagReveal,
@@ -18,12 +19,15 @@ function* worker({ payload }: ReturnType<typeof endChaosBagReveal>) {
 	const succeedBy: ReturnType<typeof selectSucceedBy> =
 		yield select(selectSucceedBy);
 
+	const failed: ReturnType<typeof selectFailed> = yield select(selectFailed);
+
 	yield put(endChaosBagRevealInternal());
 
 	yield put(
 		chaosBagRevealEnd({
 			...payload,
 			...state,
+			failed: state.failed ?? failed,
 			result: state.result ?? result,
 			succeedBy: state.succeedBy ?? succeedBy,
 		}),

@@ -20,7 +20,7 @@ export const Container: typeof Row = styled(Row)`
 export const SkillCheck: typeof ChaosBagRevalItemSkillCheck = styled(
 	ChaosBagRevalItemSkillCheck,
 )`
-  margin-right: ${size.gap.medium}px;
+  margin-right: ${size.gap.large}px;
 `;
 
 export const Image: typeof InvestigatorPreview = styled(InvestigatorPreview)`

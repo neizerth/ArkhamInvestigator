@@ -1,5 +1,4 @@
 import type { SkillCheckItem } from "@modules/board/skill-check/shared/model";
-import type { ChaosTokenValue } from "@modules/chaos-bag/value/shared/model";
 import { createSlice } from "@reduxjs/toolkit";
 import type { InvestigatorBoardNumericStat } from "@shared/model";
 import { identity } from "ramda";
@@ -18,8 +17,9 @@ export type ChaosBagRevealState = {
 	skillCheckBoardId: number | null;
 
 	currentRevealedTokenId: string | null;
-	result: ChaosTokenValue | null;
+	result: number | null;
 	succeedBy: number | null;
+	failed: boolean | null;
 };
 
 const initialState: ChaosBagRevealState = {
@@ -33,6 +33,7 @@ const initialState: ChaosBagRevealState = {
 	currentRevealedTokenId: null,
 	result: null,
 	succeedBy: null,
+	failed: null,
 };
 
 const state = createSliceState(initialState);
@@ -58,6 +59,7 @@ export const {
 	setSkillCheckExpression: setChaosBagSkillCheckExpression,
 	setResult: setChaosBagRevealResult,
 	setSucceedBy: setChaosBagSucceedBy,
+	setFailed: setChaosBagSkillCheckFailed,
 	setRevealedTokens,
 	setAllRevealedTokens,
 
@@ -69,6 +71,7 @@ export const {
 	setRevealedTokenValue,
 	updateRevealedTokenInternal,
 	syncRevealedValuesWithContents,
+	setCustomChaosBagRevealResult,
 } = chaosBagReveal.actions;
 
 export const {
@@ -82,6 +85,7 @@ export const {
 	selectSkillCheckExpression: selectChaosBagSkillCheckExpression,
 	selectResult: selectChaosBagRevealResult,
 	selectSucceedBy: selectChaosBagSucceedBy,
+	selectFailed: selectChaosBagSkillCheckFailed,
 	selectChaosBagReveal,
 } = chaosBagReveal.selectors;
 

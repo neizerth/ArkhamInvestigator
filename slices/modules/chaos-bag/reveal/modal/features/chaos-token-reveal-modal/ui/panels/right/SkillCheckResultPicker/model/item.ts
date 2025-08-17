@@ -1,12 +1,11 @@
-import type { ChaosTokenValue } from "@modules/chaos-bag/value/shared/model";
-
 // export type SkillCheckPickerItem = {
 // 	label: string;
 // 	value: ChaosTokenValue | null;
 // };
 
 export type SkillCheckPickerItem = {
-	type: "success" | "fail";
-	value: ChaosTokenValue;
+	type: "fail" | "success" | "value";
+	failed: boolean;
+	value: number;
 	succeedBy: number;
 };
