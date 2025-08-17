@@ -1,4 +1,3 @@
-import { increaseBoardActualPropValue } from "@modules/board/base/shared/lib";
 import { addSingleChaosToken } from "@modules/chaos-bag/base/entities/lib";
 import {
 	createModalActionFilter,
@@ -18,13 +17,6 @@ function* worker({ payload }: ReturnType<typeof modalActionProcessed>) {
 		addSingleChaosToken({
 			boardId,
 			type: "curse",
-		}),
-	);
-
-	yield put(
-		increaseBoardActualPropValue({
-			boardId,
-			prop: "actions",
 		}),
 	);
 }
