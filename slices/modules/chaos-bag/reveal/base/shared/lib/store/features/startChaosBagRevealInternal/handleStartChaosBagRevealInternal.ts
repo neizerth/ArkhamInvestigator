@@ -17,10 +17,10 @@ export const handleStartChaosBagRevealInternal: ChaosBagRevealHandler<
 > = (state, payload) => {
 	state.revealedTokens = [];
 	state.allRevealedTokens = [];
-	state.skillCheckBoardId = payload.boardId || null;
-	state.skillCheckType = payload.type || null;
-	state.skillValue = payload.value || null;
-	state.skillCheckTitle = payload.title || null;
+	state.skillCheckBoardId = payload.boardId ?? null;
+	state.skillCheckType = payload.type ?? null;
+	state.skillValue = payload.value ?? null;
+	state.skillCheckTitle = payload.title ?? null;
 	state.skillCheckExpression = payload.expression || [];
 	state.result = null;
 	state.succeedBy = null;
