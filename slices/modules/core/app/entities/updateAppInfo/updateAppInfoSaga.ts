@@ -1,4 +1,4 @@
-import { appUpdated } from "@modules/core/app/shared/lib";
+import { appInfoUpdated } from "@modules/core/app/shared/lib";
 import { setAvailableLanguages } from "@modules/core/i18n/shared/lib";
 import {
 	setMediaUpdateTime,
@@ -17,7 +17,7 @@ function* worker({ payload }: ReturnType<typeof updateAppInfo>) {
 	yield put(setMediaUpdateTime(updatedAt));
 	yield put(setAvailableLanguages(languages));
 
-	yield put(appUpdated(payload));
+	yield put(appInfoUpdated(payload));
 }
 
 export function* updateAppInfoSaga() {

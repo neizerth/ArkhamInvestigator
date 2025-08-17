@@ -7,14 +7,14 @@ type Options = {
 	info: BuildInfo;
 	mediaVersion: string | null;
 	mediaUpdateTime: string | null;
-	locale: string;
+	language: string;
 };
 
 export const isUpdateNeeded = ({
 	mediaVersion,
 	mediaUpdateTime,
 	info,
-	locale,
+	language,
 }: Options) => {
 	if (!mediaVersion || !mediaUpdateTime) {
 		return true;
@@ -25,7 +25,7 @@ export const isUpdateNeeded = ({
 		return true;
 	}
 
-	const update = arkhamCardsUpdates.find(propEq(locale, "locale"));
+	const update = arkhamCardsUpdates.find(propEq(language, "locale"));
 
 	if (!update) {
 		return true;

@@ -1,4 +1,4 @@
-import { appIsOutdated } from "@modules/core/app/shared/lib";
+import { appIsOutdated, updateAppData } from "@modules/core/app/shared/lib";
 import { selectCurrentLanguage } from "@modules/core/i18n/shared/lib";
 import {
 	selectMediaUpdateTime,
@@ -30,7 +30,7 @@ function* worker() {
 			return;
 		}
 
-		const locale: ReturnType<typeof selectCurrentLanguage> = yield select(
+		const language: ReturnType<typeof selectCurrentLanguage> = yield select(
 			selectCurrentLanguage,
 		);
 		const mediaVersion: ReturnType<typeof selectMediaVersion> =
@@ -40,13 +40,18 @@ function* worker() {
 
 		const needUpdate = isUpdateNeeded({
 			info: data,
-			locale,
+			language,
 			mediaVersion,
 			mediaUpdateTime,
 		});
 
 		if (needUpdate) {
 			yield put(updateAppInfo(data));
+			yield put(
+				updateAppData({
+					language,
+				}),
+			);
 		}
 		yield put(appUpdatesChecked(data));
 	} catch (e) {

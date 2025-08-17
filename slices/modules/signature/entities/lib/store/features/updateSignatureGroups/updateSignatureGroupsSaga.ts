@@ -19,6 +19,7 @@ function* worker({ payload }: ReturnType<typeof updateSignatureGroups>) {
 
 	const downloadItems = imageIds.flatMap(createDownloadQueueItems);
 
+	console.log("image id queue", imageIds);
 	if (downloadItems.length > 0) {
 		yield put(addManyDownloadQueueItems(downloadItems));
 	}
