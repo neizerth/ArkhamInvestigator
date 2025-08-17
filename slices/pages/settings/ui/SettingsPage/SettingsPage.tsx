@@ -7,8 +7,7 @@ import {
 	selectHapticMode,
 	setHapticMode,
 } from "@modules/core/haptic/shared/lib";
-import { changeLanguage } from "@modules/core/i18n/entities/language/changeLanguage";
-import { selectLanguage } from "@modules/core/i18n/shared/lib";
+import { loadLanguage, selectLanguage } from "@modules/core/i18n/shared/lib";
 import { sendNotification } from "@modules/core/notifications/shared/lib";
 import { CAN_ALWAYS_SHOW_GAME_TEXT } from "@shared/config";
 import * as S from "@shared/lib";
@@ -44,7 +43,7 @@ export const SettingsPage = () => {
 						<C.Select
 							label="Language"
 							selector={selectLanguage}
-							actionCreator={changeLanguage}
+							actionCreator={loadLanguage}
 							data={languageValues}
 						/>
 					</C.Row>

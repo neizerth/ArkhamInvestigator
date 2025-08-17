@@ -31,12 +31,17 @@ function* worker({ payload }: ReturnType<typeof loadLanguage>) {
 		response.data,
 	);
 
-	const uiTranslation = Object.assign({}, ...Object.values(data));
+	const uiTranslation: Record<string, string> = Object.assign(
+		{},
+		...Object.values(data),
+	);
 
 	const storeTranslation = {
 		...translations.en,
 		...uiTranslation,
 	};
+
+	console.log(uiTranslation.Continue);
 
 	StoreTranslation.save(language, storeTranslation);
 
