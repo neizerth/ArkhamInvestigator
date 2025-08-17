@@ -4,9 +4,9 @@ import {
 	createAbilityUseFilter,
 } from "@modules/board/abilities/shared/lib";
 import {
-	addMultipleChaosTokens,
-	cantAddMultipleChaosTokens,
-	selectCanAddMultipleChaosTokens,
+	addSingleChaosToken,
+	cantAddSingleChaosToken,
+	selectCanAddChaosToken,
 } from "@modules/chaos-bag/base/entities/lib";
 import { AbilityCode } from "@modules/mechanics/board/abilities/shared/config";
 import { put, select, takeEvery } from "redux-saga/effects";
@@ -16,13 +16,8 @@ const filterAction = createAbilityUseFilter({
 	isUsed: false,
 });
 
-const BLESS_COUNT = 2;
-
 function* worker({ payload }: ReturnType<typeof changeBoardHistoryAbilityUse>) {
-	const canAddSelector = selectCanAddMultipleChaosTokens({
-		type: "bless",
-		count: BLESS_COUNT,
-	});
+	const canAddSelector = selectCanAddChaosToken("bless");
 
 	const validation: ReturnType<typeof canAddSelector> =
 		yield select(canAddSelector);
@@ -31,23 +26,19 @@ function* worker({ payload }: ReturnType<typeof changeBoardHistoryAbilityUse>) {
 
 	if (available === 0) {
 		yield put(
-			cantAddMultipleChaosTokens({
+			cantAddSingleChaosToken({
 				...validation,
 				type: "bless",
-				count: BLESS_COUNT,
 			}),
 		);
 		return;
 	}
 
-	const count = Math.min(available, BLESS_COUNT);
-
 	yield put(
-		addMultipleChaosTokens({
+		addSingleChaosToken({
 			...payload,
 			source: "effect",
 			type: "bless",
-			count,
 		}),
 	);
 }
