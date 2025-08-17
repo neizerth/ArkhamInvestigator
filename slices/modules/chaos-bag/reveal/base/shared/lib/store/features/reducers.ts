@@ -5,3 +5,4 @@ export { endChaosBagRevealInternalReducer as endChaosBagRevealInternal } from ".
 export { setRevealedTokenValueReducer as setRevealedTokenValue } from "./setRevealedTokenValue/setRevealedTokenValueReducer";
 export { updateRevealedTokenInternalReducer as updateRevealedTokenInternal } from "./updateRevealedToken/updateRevealedTokenInternalReducer";
 export { syncRevealedValuesWithContentsReducer as syncRevealedValuesWithContents } from "./syncRevealedTokensWithContents/syncRevealedValuesWithContentsReducer";
+export { setCustomChaosBagRevealResultReducer as setCustomChaosBagRevealResult } from "./setCustomChaosBagRevealResult/setCustomChaosBagRevealResultReducer";

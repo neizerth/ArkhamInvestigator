@@ -1,7 +1,4 @@
-import {
-	setChaosBagRevealResult,
-	setChaosBagSucceedBy,
-} from "@modules/chaos-bag/reveal/base/shared/lib";
+import { setCustomChaosBagRevealResult } from "@modules/chaos-bag/reveal/base/shared/lib";
 import { useAppDispatch } from "@shared/lib";
 import type {
 	PickerChangeEvent,
@@ -9,26 +6,25 @@ import type {
 } from "@widgets/control/picker";
 import { useCallback } from "react";
 import type { ViewProps } from "react-native";
+import { useSkillCheckPickerData } from "../lib";
+import type { SkillCheckPickerItem } from "../model";
 import * as C from "./SkillCheckResultPicker.components";
-import type { SkillCheckPickerItem } from "./SkillCheckResultPicker.types";
-import { useSkillCheckPickerData } from "./useSkillCheckPickerData";
 
 export type SkillCheckResultPickerProps = ViewProps;
 
 export const SkillCheckResultPicker = (props: SkillCheckResultPickerProps) => {
 	const dispatch = useAppDispatch();
-	const { data, value, succeedBy } = useSkillCheckPickerData();
+	const { data, value, failed } = useSkillCheckPickerData();
 
 	const renderItem: PickerListRenderItem<SkillCheckPickerItem> = useCallback(
 		({ item }) => {
-			const { succeedBy, type } = item;
-			const fail = type === "fail";
-			const value = succeedBy.toString();
+			const { succeedBy, failed } = item;
+			const value = Math.abs(succeedBy).toString();
 			return (
 				<C.Special>
-					{type === "success" && <C.AutoSuccess type="elderSign" />}
-					{type === "fail" && <C.AutoFail type="autoFail" />}
-					{value !== null && <C.SpecialValue value={value} fail={fail} />}
+					{!failed && <C.AutoSuccess type="elderSign" />}
+					{failed && <C.AutoFail type="autoFail" />}
+					<C.SpecialValue value={value} fail={failed} />
 				</C.Special>
 			);
 		},
@@ -40,15 +36,22 @@ export const SkillCheckResultPicker = (props: SkillCheckResultPickerProps) => {
 			if (!event.value) {
 				return;
 			}
-			const { value, succeedBy } = event.value;
+			const { value, succeedBy, failed } = event.value;
 
-			dispatch(setChaosBagRevealResult(value));
-			dispatch(setChaosBagSucceedBy(succeedBy));
+			dispatch(
+				setCustomChaosBagRevealResult({
+					failed,
+					result: value,
+					succeedBy,
+				}),
+			);
 		},
 		[dispatch],
 	);
 
-	const item = data.find((item) => item.value === value);
+	const item = data.find(
+		(item) => item.value === value && item.failed === failed,
+	);
 
 	return (
 		<C.Container {...props}>

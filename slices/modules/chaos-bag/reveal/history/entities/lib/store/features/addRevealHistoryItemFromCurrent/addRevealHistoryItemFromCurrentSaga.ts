@@ -32,6 +32,7 @@ function* worker({ payload }: ReturnType<typeof chaosBagRevealEnd>) {
 		succeedBy,
 		skillCheckExpression,
 		result,
+		failed,
 	} = payload;
 
 	if (!boardId) {
@@ -55,6 +56,7 @@ function* worker({ payload }: ReturnType<typeof chaosBagRevealEnd>) {
 		difficulty,
 		difficultyType,
 		succeedBy,
+		failed,
 		date: Date(),
 	};
 

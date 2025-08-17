@@ -30,6 +30,7 @@ export const useSFXWorkerSound = (workerId: string) => {
 	const play = useSound({
 		id: task?.soundId,
 		onFinish,
+		preload: true,
 	});
 
 	useEffect(() => {
@@ -44,7 +45,6 @@ export const useSFXWorkerSound = (workerId: string) => {
 				workerId: task.workerId,
 			}),
 		);
-
 		play();
 	}, [dispatch, task, play, worker]);
 };

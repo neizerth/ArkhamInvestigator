@@ -1,4 +1,4 @@
-import { selectShowSkillCheckResult } from "@modules/chaos-bag/result/features/lib";
+import { selectShowSkillCheckResult } from "@modules/chaos-bag/result/entities/lib";
 import { selectChaosBagSkillValue } from "@modules/chaos-bag/reveal/base/shared/lib";
 import { useAppSelector } from "@shared/lib";
 import type { ViewProps } from "react-native";
