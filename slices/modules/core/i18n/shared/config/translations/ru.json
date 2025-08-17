@@ -72,6 +72,7 @@
 	"board.help.longPress.chaosBag": "Вытягивает жетон хаоса.",
 
 	"settings.sound": "Звук (Beta)",
+	"settings.sound.hint": "Звук смены значений",
 	"settings.syncScenarioClues.hint": "Улики, добавленные на сценарий, удалятся у сыщика",
 
 	"board.help.syncScenarioClues": "Включаeт/выключаeт синхронизацию улик сценария и сыщика: улики, добавленные на сценарий, удалятся у сыщика.",

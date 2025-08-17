@@ -58,6 +58,7 @@
 	"board.help.longPress.chaosBag": "Reveals a chaos token",
 
 	"settings.sound": "Sound (Beta)",
+	"settings.sound.hint": "Picker sound",
 	"settings.syncScenarioClues.hint": "Clues added to the scenario will be removed from the investigator",
 
 	"board.help.syncScenarioClue": "Enable/disable clues sync: clues added to the scenario will be removed from the investigator",
