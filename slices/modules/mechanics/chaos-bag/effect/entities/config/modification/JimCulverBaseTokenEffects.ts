@@ -21,8 +21,8 @@ export const JimCulverBaseTokenEffects: Modification = {
 
 		return {
 			...effects,
-			skull: `${effects.skull}\n<i>[skull]: ${skullEffect}</i>`,
-			elderSign: `${effects.elderSign}\n<i>[skull]: ${referenceCardEffects.skull}</i>`,
+			skull: `${effects.skull}\n<i>${skullEffect}</i>`,
+			elderSign: `${effects.elderSign}\n<i>${referenceCardEffects.skull}</i>`,
 		};
 	},
 };
