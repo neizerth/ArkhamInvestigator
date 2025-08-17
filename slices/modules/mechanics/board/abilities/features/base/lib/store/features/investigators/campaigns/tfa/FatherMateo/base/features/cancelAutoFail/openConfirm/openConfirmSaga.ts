@@ -10,7 +10,7 @@ import {
 import { openFatherMateoConfirm } from "./openConfirm";
 
 function* worker({ payload }: ReturnType<typeof openFatherMateoConfirm>) {
-	const { sourceBoardId } = payload;
+	const { sourceBoardId, boardId } = payload;
 
 	const boardSelector = selectBoardById(sourceBoardId);
 	const board: ReturnType<typeof boardSelector> = yield select(boardSelector);
@@ -31,6 +31,9 @@ function* worker({ payload }: ReturnType<typeof openFatherMateoConfirm>) {
 					createConfirmModalAction({
 						id: addElderSignModalActionId,
 						title: "ability.mateo.base.confirm.submit",
+						data: {
+							sourceBoardId,
+						},
 					}),
 				],
 			},
