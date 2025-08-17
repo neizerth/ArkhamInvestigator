@@ -33,7 +33,7 @@ export const JimCulverParallelTokenEffects: Modification = {
 
 		return {
 			...effects,
-			curse: `[curse]: ${defaultEffects.curse}\n${effects.curse}`,
+			curse: `[curse]: ${effects.curse}`,
 			elderSign: `${effects.elderSign}\n${elderSignEffects}`,
 		};
 	},
