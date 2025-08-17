@@ -30,6 +30,9 @@ export const Effect: typeof GameText = styled(GameText).attrs({
 			lineHeight: 14,
 			marginTop: -14,
 		},
+		icon_bullet: {
+			marginTop: -17,
+		},
 	},
 })`
   font-size: ${font.size.small}px;
