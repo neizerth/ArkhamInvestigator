@@ -39,7 +39,7 @@ export const symbolicChaosTokenTypes = [
 
 export const baseChaosTokenTypes = [
 	...numericChaosTokenTypes,
-	...symbolicChaosTokenTypes,
+	...baseSymbolicChaosTokenTypes,
 ];
 
 export const allChaosTokenTypes = [

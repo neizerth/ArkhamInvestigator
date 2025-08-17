@@ -22,7 +22,11 @@ export const startGame: ActionCreator<AppThunk> =
 		dispatch(setCurrentInvestigatorIndex(0));
 		dispatch(setSelectedInvestigators([]));
 		dispatch(setShowDescription(false));
-		dispatch(updateChaosBag({}));
+		dispatch(
+			updateChaosBag({
+				source: "effect",
+			}),
+		);
 
 		dispatch(replacePageTo("/board"));
 	};

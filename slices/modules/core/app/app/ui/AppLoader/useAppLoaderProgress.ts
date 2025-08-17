@@ -9,8 +9,9 @@ export const useAppLoaderProgress = () => {
 	const local = useAssetImageProgress();
 	const external = useAssetDownloadProgress();
 
-	const externalProgress =
-		external.progress === 0 && externalImagesReady ? 100 : external.progress;
+	if (external.progress === 0 && externalImagesReady) {
+		return local.progress;
+	}
 
-	return round(0.2 * local.progress) + round(0.8 * externalProgress);
+	return round(0.2 * local.progress) + round(0.8 * external.progress);
 };
