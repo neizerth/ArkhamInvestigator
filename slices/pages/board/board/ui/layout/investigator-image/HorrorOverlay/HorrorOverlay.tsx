@@ -14,8 +14,6 @@ export const HorrorOverlay = (props: HorrorOverlayProps) => {
 	const sanity = useAppSelector(selectCurrentActualPropValue("sanity"));
 	const baseSanity = useAppSelector(selectCurrentBasePropValue("sanity"));
 
-	console.log(horror);
-
 	const percentage = (horror * 100) / baseSanity;
 
 	return (
