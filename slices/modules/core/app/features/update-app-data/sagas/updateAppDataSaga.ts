@@ -1,10 +1,10 @@
+import { updateAppData } from "@modules/core/app/shared/lib";
 import { setRules } from "@modules/mechanics/rules/base/shared/lib";
 import { updateSignatureGroups } from "@modules/signature/entities/lib";
 import { setStories } from "@modules/stories/shared/lib";
 import { seconds } from "@shared/lib";
 import type { ReturnAwaited } from "@shared/model";
 import { put, retry, takeEvery } from "redux-saga/effects";
-import { updateAppData } from "../updateAppData";
 import { getAppData } from "./getAppData";
 
 function* worker({ payload }: ReturnType<typeof updateAppData>) {
