@@ -37,34 +37,38 @@ export const ReferenceSelect = ({
 		<C.Container {...props}>
 			<C.Body>
 				<C.Content>
-					{!isDefaultLanguage && (
+					<C.Header>
+						{!isDefaultLanguage && (
+							<C.Checkbox
+								label={t`Translated content`}
+								actionCreator={setShowTranslatedOnlyStories}
+								selector={selectShowTranslatedOnlyStories}
+							/>
+						)}
 						<C.Checkbox
-							label={t`Translated content`}
-							actionCreator={setShowTranslatedOnlyStories}
-							selector={selectShowTranslatedOnlyStories}
+							label={t`Fan-made Scenarios`}
+							actionCreator={setShowFanMadeStories}
+							selector={selectShowFanMadeStories}
 						/>
-					)}
-					<C.Checkbox
-						label={t`Fan-made Scenarios`}
-						actionCreator={setShowFanMadeStories}
-						selector={selectShowFanMadeStories}
-					/>
-					<C.StorySelect />
-					<C.CardSelect />
-					{referenceCard && (
-						<C.StoreSelect
-							label={t`Difficulty`}
-							data={referenceTexts}
-							actionCreator={setShowReferenceBackText}
-							selector={selectShowReferenceBackText}
-						/>
-					)}
+					</C.Header>
+					<C.ScrollArea>
+						<C.StorySelect />
+						<C.CardSelect />
+						{referenceCard && (
+							<C.StoreSelect
+								label={t`Difficulty`}
+								data={referenceTexts}
+								actionCreator={setShowReferenceBackText}
+								selector={selectShowReferenceBackText}
+							/>
+						)}
 
-					{referenceCardText && (
-						<C.ReferencePreview>
-							<C.ReferenceText value={referenceCardText} />
-						</C.ReferencePreview>
-					)}
+						{referenceCardText && (
+							<C.ReferencePreview>
+								<C.ReferenceText value={referenceCardText} />
+							</C.ReferencePreview>
+						)}
+					</C.ScrollArea>
 				</C.Content>
 			</C.Body>
 			{onClose && (
