@@ -20,7 +20,6 @@ export const getInvestigatorBoardAbilities = ({
 				investigatorsCount,
 			}),
 	);
-
 	if (!investigator.additionalAction) {
 		return baseAbilities;
 	}

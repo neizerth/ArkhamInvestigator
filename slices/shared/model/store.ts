@@ -6,7 +6,7 @@ import type {
 	PayloadActionCreator,
 	ThunkAction,
 } from "@reduxjs/toolkit";
-import type { makeStore } from "../lib/store/makeStore";
+import type { store } from "../lib/store/store";
 
 export type AppThunk<
 	ReturnType = void,
@@ -22,7 +22,7 @@ export type AppSelector<ReturnType = unknown> = (
 ) => ReturnType;
 
 // Infer the type of makeStore
-export type AppStore = ReturnType<typeof makeStore>["store"];
+export type AppStore = typeof store;
 // Infer the `RootState` and `AppDispatch` types from the store itself
 export type RootState = ReturnType<AppStore["getState"]>;
 export type AppDispatch = AppStore["dispatch"];

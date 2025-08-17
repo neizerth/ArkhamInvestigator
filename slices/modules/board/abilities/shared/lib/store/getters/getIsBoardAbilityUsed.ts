@@ -9,7 +9,7 @@ type Options = {
 	boardsCount: number;
 };
 
-export const getBoardIsAbilityUsed = ({
+export const getIsBoardAbilityUsed = ({
 	ability,
 	usedAbility,
 	targetBoardId,

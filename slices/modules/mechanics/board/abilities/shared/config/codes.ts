@@ -28,11 +28,13 @@ export const AbilityCode = {
 	FatherMateo: {
 		base: "mateo-auto-fail-reveal",
 	},
+	WendyAdams: "wendys-amulet",
 };
 
 export const specialAbilitityCodes = [
 	AbilityCode.CarsonSinclair,
 	AbilityCode.ZoeySamaras,
 	AbilityCode.MinhThiPhan,
+	AbilityCode.WendyAdams,
 	...Object.values(AbilityCode.LilyChen),
 ];
