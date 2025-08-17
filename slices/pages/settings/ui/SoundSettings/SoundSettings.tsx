@@ -20,6 +20,7 @@ export const SoundSettings = (props: SoundSettingsProps) => {
 					label="settings.sound"
 					selector={selectSoundEnabled}
 					actionCreator={setSoundEnabled}
+					hint="settings.sound.hint"
 				/>
 			</C.Row>
 			{enabled && (
