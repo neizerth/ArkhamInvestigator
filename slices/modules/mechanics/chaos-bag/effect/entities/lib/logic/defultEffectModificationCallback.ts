@@ -5,9 +5,15 @@ import {
 import type { InvestigatorTokenEffectModificationCallback } from "../../model";
 
 export const defultEffectModificationCallback: InvestigatorTokenEffectModificationCallback =
-	({ referenceCardEffects, signatureEffects, defaultEffects, tokenValues }) => {
+	(options) => {
+		const { defaultEffects, tokenValues } = options;
 		const referenceEffects = replaceTokenEffectsValues({
-			tokenEffects: referenceCardEffects,
+			tokenEffects: options.referenceCardEffects,
+			tokenValues,
+		});
+
+		const signatureEffects = replaceTokenEffectsValues({
+			tokenEffects: options.signatureEffects,
 			tokenValues,
 		});
 

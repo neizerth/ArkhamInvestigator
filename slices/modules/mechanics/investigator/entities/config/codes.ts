@@ -27,4 +27,8 @@ export const InvesigatorCode = {
 		parallel: "90081",
 	},
 	HenryBigby: "zdh_00012",
+	WendyAdams: {
+		base: "01005",
+		parallel: "90037",
+	},
 };

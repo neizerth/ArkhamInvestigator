@@ -6,6 +6,7 @@ import { JennyBarnesBoard } from "./JennyBarnesBoard";
 import { LilyChenBoard } from "./LilyChenBoard";
 import { PatriceHathawayBoard } from "./PatriceHathawayBoard";
 import { ShatteredSelfBoard } from "./ShatteredSelfBoard";
+import { WendyAdamsBoard } from "./WendyAdamsBoard";
 
 export const investigatorBoardModifications: InvestigatorBoardModification = {
 	...GeorgeBarnabyBoard,
@@ -15,4 +16,5 @@ export const investigatorBoardModifications: InvestigatorBoardModification = {
 	...PatriceHathawayBoard,
 	...ShatteredSelfBoard,
 	...CalwinWrightBoard,
+	...WendyAdamsBoard,
 };

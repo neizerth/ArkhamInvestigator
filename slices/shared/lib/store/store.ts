@@ -17,28 +17,20 @@ const reducer = persistReducer(
 	},
 	rootReducer,
 );
+const sagaMiddleware = createSagaMiddleware();
 
-export const makeStore = () => {
-	const sagaMiddleware = createSagaMiddleware();
+export const store = configureStore({
+	reducer,
+	middleware: (getDefaultMiddleware) =>
+		getDefaultMiddleware({
+			immutableCheck: false,
+			serializableCheck: false,
+		}).concat(sagaMiddleware),
+	devTools: false,
+	enhancers: (getDefaultEnhancers) =>
+		getDefaultEnhancers().concat(devToolsEnhancer()),
+});
 
-	const store = configureStore({
-		reducer,
-		middleware: (getDefaultMiddleware) =>
-			getDefaultMiddleware({
-				immutableCheck: false,
-				serializableCheck: false,
-			}).concat(sagaMiddleware),
-		devTools: false,
-		enhancers: (getDefaultEnhancers) =>
-			getDefaultEnhancers().concat(devToolsEnhancer()),
-	});
+sagaMiddleware.run(rootSaga);
 
-	sagaMiddleware.run(rootSaga);
-
-	const persistor = persistStore(store);
-
-	return {
-		persistor,
-		store,
-	};
-};
+export const storePersistor = persistStore(store);
