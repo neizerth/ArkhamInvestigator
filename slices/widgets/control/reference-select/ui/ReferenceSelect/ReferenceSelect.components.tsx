@@ -2,7 +2,7 @@ import { color, font, size } from "@shared/config";
 import { Button } from "@shared/ui";
 import { GameText } from "@shared/ui";
 import { Select as BaseSelect } from "@shared/ui";
-import { View } from "react-native";
+import { Dimensions, View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import styled from "styled-components/native";
 import { StoreTabs } from "../../../../navigation/store-tabs";
@@ -11,12 +11,25 @@ import { StoreSelect as BaseStoreSelect } from "../../../store-select";
 import { ReferenceCardSelect } from "../ReferenceCardSelect";
 import { ReferenceStorySelect } from "../ReferenceStorySelect";
 
+const screen = Dimensions.get("screen");
+
 export const Container: typeof View = styled(View)`
   gap: ${size.gap.default}px;
 `;
 
-export const Body: typeof ScrollView = styled(ScrollView)`
+export const Body: typeof View = styled(View)`
+  
+`;
 
+export const Header: typeof View = styled(View)`
+`;
+
+export const ScrollArea: typeof ScrollView = styled(ScrollView).attrs({
+	contentContainerStyle: {
+		gap: size.gap.default,
+	},
+})`
+  max-height: ${screen.height - 290}px;
 `;
 
 export const Content: typeof View = styled(View)`
@@ -25,6 +38,7 @@ export const Content: typeof View = styled(View)`
 `;
 
 export const Checkbox: typeof StoreCheckbox = styled(StoreCheckbox)`
+  min-height: 40px;
   justify-content: flex-end;
 `;
 

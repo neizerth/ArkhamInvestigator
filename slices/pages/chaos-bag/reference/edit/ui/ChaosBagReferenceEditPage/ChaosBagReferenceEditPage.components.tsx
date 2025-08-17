@@ -10,7 +10,6 @@ export const Container: typeof ContextModal = styled(ContextModal).attrs({
 		paddingLeft: size.gap.small,
 	},
 })`
-  flex: 1;
   justify-content: flex-start;
 `;
 
