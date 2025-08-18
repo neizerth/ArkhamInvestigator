@@ -26,9 +26,6 @@ export const InvestigatorSelectSection = ({
 }: InvestigatorSelectSectionProps) => {
 	const { t } = useTranslation();
 	const { length } = data;
-	if (length < 2) {
-		return null;
-	}
 
 	const selected = data.find(whereId(props.selectedId));
 

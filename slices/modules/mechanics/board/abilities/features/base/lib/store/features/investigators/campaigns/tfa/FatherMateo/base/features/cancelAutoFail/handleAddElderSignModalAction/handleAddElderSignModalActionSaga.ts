@@ -1,4 +1,6 @@
 import { setBoardAbilityUse } from "@modules/board/abilities/shared/lib";
+import { selectBoardCode } from "@modules/board/base/shared/lib";
+import { chaosTokensRevealed } from "@modules/chaos-bag/reveal/base/entities/lib";
 import { addRevealedTokens } from "@modules/chaos-bag/reveal/base/shared/lib";
 import type { RevealedChaosBagToken } from "@modules/chaos-bag/reveal/base/shared/model";
 import { openChaosTokenRevealModal } from "@modules/chaos-bag/reveal/modal/entities/lib";
@@ -34,6 +36,9 @@ function* worker({ payload }: Action) {
 	const values: ReturnType<typeof valuesSelector> =
 		yield select(valuesSelector);
 
+	const codeSelector = selectBoardCode(boardId);
+	const code: ReturnType<typeof codeSelector> = yield select(codeSelector);
+
 	const value = values.elderSign;
 
 	const token: RevealedChaosBagToken = {
@@ -44,9 +49,19 @@ function* worker({ payload }: Action) {
 		value,
 	};
 
+	const tokens = [token];
+
 	yield put(
 		addRevealedTokens({
-			tokens: [token],
+			tokens,
+		}),
+	);
+
+	yield put(
+		chaosTokensRevealed({
+			code,
+			boardId,
+			tokens,
 		}),
 	);
 

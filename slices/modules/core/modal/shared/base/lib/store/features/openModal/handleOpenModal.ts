@@ -4,7 +4,7 @@ export type HandleOpenModalPayload<Data = unknown> = {
 	id: string;
 	data?: Data;
 	type?: ModalType;
-	value?: string;
+	value?: unknown;
 	closeFromBackButton?: boolean;
 };
 

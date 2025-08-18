@@ -4,6 +4,7 @@ import {
 	selectModalData,
 	selectModalId,
 	selectModalType,
+	selectModalValue,
 } from "@modules/core/modal/shared/base/lib";
 import { isConfirmModalData } from "@modules/core/modal/shared/confirm/lib";
 import { Confirm } from "@modules/core/modal/shared/confirm/ui";
@@ -17,6 +18,7 @@ export const ActiveModal = (props: ActiveModalProps) => {
 	const id = useAppSelector(selectModalId);
 	const data = useAppSelector(selectModalData);
 	const type = useAppSelector(selectModalType);
+	const value = useAppSelector(selectModalValue);
 
 	if (!id || !data || !type) {
 		return null;
@@ -31,7 +33,8 @@ export const ActiveModal = (props: ActiveModalProps) => {
 	}
 
 	if (isBoardSelectModalData(data, type)) {
-		return <BoardSelectModal data={data} />;
+		const boardId = value as number;
+		return <BoardSelectModal data={data} value={boardId} />;
 	}
 
 	return null;

@@ -16,7 +16,7 @@ export const replaceNumericEffectValue = ({ text, value }: Options) => {
 		if (index > MAX_INDEX) {
 			return source;
 		}
-		const sourceValue = +source.replace(/[-—−+]/, "-");
+		const sourceValue = +source.replace(/[-—−]/, "-").replace("+", "");
 		if (!Number.isNaN(sourceValue) && sourceValue === effectValue) {
 			return source;
 		}

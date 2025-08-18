@@ -165,6 +165,16 @@
 	"ability.mateo.base.elderSign.cardAndResource": "Card and [resource]",
 	"ability.mateo.base.elderSign.action": "Action",
 
+	"ability.carolyn.modal.heal": "Heal",
+
+	"heal.horror_one": "{{fromName}} heals {{dativeName}} {{count}} horror",
+	"heal.horror_few": "{{fromName}} heals {{dativeName}} {{count}} horrors",
+	"heal.horror_many": "{{fromName}} heals {{dativeName}} {{count}} horrors",
+
+	"heal.horror.self_one": "{{fromName}} heals {{count}} horror",
+	"heal.horror.self_few": "{{fromName}} heals {{count}} horrors",
+	"heal.horror.self_many": "{{fromName}} heals {{count}} horrors",
+
 	"disk.notEnoughSpace.title": "Not enough free space",
 	"disk.notEnoughSpace.text": "The application requires {{required}} of free space",
 

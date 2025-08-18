@@ -172,6 +172,16 @@
 	"ability.mateo.base.elderSign.cardAndResource": "Карта и [resource]",
 	"ability.mateo.base.elderSign.action": "Действие",
 
+	"ability.carolyn.modal.heal": "Вылечить",
+
+	"heal.horror_one": "{{fromName}} лечит {{dativeName}} {{count}} ужас",
+	"heal.horror_few": "{{fromName}} лечит {{dativeName}} {{count}} ужаса",
+	"heal.horror_many": "{{fromName}} лечит {{dativeName}} {{count}} ужасов",
+
+	"heal.horror.self_one": "{{fromName}} лечит себе {{count}} ужас",
+	"heal.horror.self_few": "{{fromName}} лечит себе {{count}} ужаса",
+	"heal.horror.self_many": "{{fromName}} лечит себе {{count}} ужасов",
+
 	"disk.notEnoughSpace.title": "Недосаточно свободного места",
 	"disk.notEnoughSpace.text": "Для работы приложения нужно {{required}} свободного места",
 
