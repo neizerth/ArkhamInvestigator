@@ -15,7 +15,7 @@ export const selectTurnEnd = (boardId: BoardId) => {
 			if (!baseTurnEnd) {
 				return false;
 			}
-			return strict ? abilitiesTurnEnd : false;
+			return strict ? abilitiesTurnEnd : true;
 		},
 	);
 };
