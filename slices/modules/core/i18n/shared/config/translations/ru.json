@@ -154,6 +154,7 @@
 	"chaosToken.frost.first.effect": "{{value}}. Вытяните ещё один жетон",
 	"chaosToken.frost.second.effect": "Проверка автоматически провалена",
 	"chaosToken.autoFail.effect": "Проверка автоматически провалена",
+	"chaosToken.effect": "Эффект {{token}}",
 
 	"chaosToken.canceled": "Данный жетон отменён или игнорируется\n<old>{{effect}}</old>",
 	"chaosToken.canceled.effect": "Эффект жетона отменён\n<old>{{effect}}</old>",
@@ -168,7 +169,6 @@
 	"ability.mateo.base.confirm.text": "Это добавит дополнительный жетон [elder_sign] на время проверки",
 	"ability.mateo.base.confirm.submit": "Добавить [elder_sign]",
 
-	"ability.mateo.base.elderSign.title": "Эффект [elder_sign]",
 	"ability.mateo.base.elderSign.cardAndResource": "Карта и [resource]",
 	"ability.mateo.base.elderSign.action": "Действие",
 
