@@ -2,7 +2,7 @@ import { selectCurrentBoardProp } from "@modules/board/base/shared/lib";
 import { useSwipe } from "@modules/core/touch/shared/lib";
 import { selectCurrentFaction } from "@modules/mechanics/board/base/entities/lib";
 import { useRoute } from "@react-navigation/native";
-import { isNavbarVisible, routes } from "@shared/config";
+import { routes } from "@shared/config";
 import {
 	selectShowDescription,
 	setShowDescription,
@@ -79,38 +79,33 @@ export const FooterDescription = ({ ...props }: FooterDescriptionProps) => {
 
 	const textUnit = gameText.showSmallText ? vw * 0.9 : vw;
 
-	const showNavbarBackground = isNavbarVisible && !showDescription;
-
 	return (
-		<>
-			<C.Container {...props} style={[props.style, containerStyle]}>
-				<C.Content>
-					{!showDescription && <C.ExpandArea />}
-					<C.TopContent />
-					<GestureDetector gesture={gesture}>
-						<C.Background faction={faction} width={view.width}>
-							<C.DescriptionContent>
-								<C.TextContent>
-									{showTraits && (
-										<C.Traits unit={vw} investigator={investigator} />
+		<C.Container {...props} style={[props.style, containerStyle]}>
+			<C.Content>
+				{!showDescription && <C.ExpandArea />}
+				<C.TopContent />
+				<GestureDetector gesture={gesture}>
+					<C.Background faction={faction} width={view.width}>
+						<C.DescriptionContent>
+							<C.TextContent>
+								{showTraits && (
+									<C.Traits unit={vw} investigator={investigator} />
+								)}
+								<C.Description
+									style={descriptionStyle}
+									onLayout={gameText.onLayout}
+								>
+									<C.Text investigator={investigator} unit={textUnit} />
+									{showFlavor && (
+										<C.Flavor unit={vw} investigator={investigator} />
 									)}
-									<C.Description
-										style={descriptionStyle}
-										onLayout={gameText.onLayout}
-									>
-										<C.Text investigator={investigator} unit={textUnit} />
-										{showFlavor && (
-											<C.Flavor unit={vw} investigator={investigator} />
-										)}
-									</C.Description>
-								</C.TextContent>
-								<C.Menu />
-							</C.DescriptionContent>
-						</C.Background>
-					</GestureDetector>
-				</C.Content>
-			</C.Container>
-			{showNavbarBackground && <C.NavbarBackground />}
-		</>
+								</C.Description>
+							</C.TextContent>
+							<C.Menu />
+						</C.DescriptionContent>
+					</C.Background>
+				</GestureDetector>
+			</C.Content>
+		</C.Container>
 	);
 };

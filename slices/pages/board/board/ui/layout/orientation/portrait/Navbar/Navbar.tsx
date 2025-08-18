@@ -1,0 +1,19 @@
+import {
+	selectShowDescription,
+	useAppSelector,
+	useFadeAnimation,
+} from "@shared/lib";
+import type { ViewProps } from "react-native";
+import * as C from "./Navbar.components";
+
+export type NavbarProps = ViewProps;
+
+export const Navbar = (props: NavbarProps) => {
+	const showDescription = useAppSelector(selectShowDescription);
+
+	const style = useFadeAnimation({
+		show: !showDescription,
+	});
+
+	return <C.Container {...props} style={[props.style, style]} />;
+};
