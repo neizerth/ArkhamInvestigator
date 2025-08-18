@@ -41,8 +41,6 @@ function* worker({ payload }: ReturnType<typeof loadLanguage>) {
 		...uiTranslation,
 	};
 
-	console.log(uiTranslation.Continue);
-
 	StoreTranslation.save(language, storeTranslation);
 
 	const translation = {

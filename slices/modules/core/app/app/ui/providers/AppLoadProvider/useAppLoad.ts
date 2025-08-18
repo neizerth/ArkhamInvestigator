@@ -14,8 +14,13 @@ export const useAppLoad = () => {
 	useEffect(() => {
 		dispatch(appStarted());
 		setStarted(true);
-		appLoaded = true;
 	}, [dispatch]);
+
+	useEffect(() => {
+		if (loaded) {
+			appLoaded = true;
+		}
+	}, [loaded]);
 
 	return appLoaded || loaded;
 };

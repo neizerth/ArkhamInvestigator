@@ -2,16 +2,29 @@ import { useAssetDownloadProgress } from "@modules/core/assets/asset-downloader/
 import { selectExternalImagesReady } from "@modules/core/assets/base/shared/lib";
 import { useAssetImageProgress } from "@modules/core/assets/base/shared/lib/hooks";
 import { useAppSelector } from "@shared/lib";
+import { useEffect, useState } from "react";
 
 export const useAppLoaderProgress = () => {
 	const { round } = Math;
-	const externalImagesReady = useAppSelector(selectExternalImagesReady);
+
 	const local = useAssetImageProgress();
 	const external = useAssetDownloadProgress();
 
-	if (external.progress === 0 && externalImagesReady) {
+	const externalImagesReady = useAppSelector(selectExternalImagesReady);
+	const [imagesReady, setImagesReady] = useState(externalImagesReady);
+
+	useEffect(() => {
+		if (imagesReady) {
+			setImagesReady(true);
+		}
+	}, [imagesReady]);
+
+	if (externalImagesReady) {
 		return local.progress;
 	}
 
-	return round(0.2 * local.progress) + round(0.8 * external.progress);
+	const externalProgress =
+		external.progress === 0 && imagesReady ? 100 : external.progress;
+
+	return round(0.2 * local.progress) + round(0.8 * externalProgress);
 };

@@ -10,6 +10,11 @@ export const getTranslation = async (language: string) => {
 	}
 
 	const translation = await StoreTranslation.load(language);
+
+	if (!translation) {
+		return;
+	}
+
 	const localTranslation = translations?.[language] || {};
 
 	return {
