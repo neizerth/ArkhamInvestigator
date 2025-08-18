@@ -1,3 +1,4 @@
+import { ModalActionId } from "@modules/core/modal/entities/base/config";
 import { createConfirmModalAction } from "@modules/core/modal/shared/actions/confirm/lib";
 import { openConfirm } from "@modules/core/modal/shared/confirm/lib";
 import { put, takeEvery } from "redux-saga/effects";
@@ -26,7 +27,7 @@ function* worker({ payload }: ReturnType<typeof notEnoughSpace>) {
 				},
 				actions: [
 					createConfirmModalAction({
-						id: "restart",
+						id: ModalActionId.restartApp,
 						title: "Reload",
 					}),
 				],
