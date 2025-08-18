@@ -26,17 +26,16 @@ export const Button: typeof TouchableOpacity = styled(TouchableOpacity)`
 
 export const Icon: typeof BaseIcon = styled(BaseIcon)`
   font-size: 26px;
+  line-height: 26px;
   color: ${color.light10};
 `;
 
 export const InfoIcon: FC<DefinedIconProps> = styled(Icon).attrs({
 	icon: "info",
 })`
-    font-size: 26px;
   `;
 
 export const SupportIcon: FC<DefinedIconProps> = styled(Icon).attrs({
 	icon: "heart",
 })`
-    font-size: 26px;
   `;
