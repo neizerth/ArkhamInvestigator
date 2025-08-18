@@ -1,14 +1,18 @@
+import { selectExternalImagesReady } from "@modules/core/assets/base/shared/lib";
 import { addManyDownloadQueueItems } from "@modules/core/assets/download-queue/shared/lib";
 import {
 	selectSignatureGroups,
 	setSignatureGroups,
 } from "@modules/signature/shared/lib";
 import { put, select, takeEvery } from "redux-saga/effects";
-import { compareSignatureGroups } from "./compareSignatureGroups";
-import { createDownloadQueueItems } from "./createDownloadQueueItems";
+import { createDownloadQueueItems } from "./lib";
+import { compareSignatureGroups } from "./lib/compareSignatureGroups";
 import { updateSignatureGroups } from "./updateSignatureGroups";
 
 function* worker({ payload }: ReturnType<typeof updateSignatureGroups>) {
+	const ready: ReturnType<typeof selectExternalImagesReady> = yield select(
+		selectExternalImagesReady,
+	);
 	const defaultGroups: ReturnType<typeof selectSignatureGroups> = yield select(
 		selectSignatureGroups,
 	);
@@ -19,8 +23,9 @@ function* worker({ payload }: ReturnType<typeof updateSignatureGroups>) {
 
 	const downloadItems = imageIds.flatMap(createDownloadQueueItems);
 
-	console.log("image id queue", imageIds);
-	if (downloadItems.length > 0) {
+	const download = groups.length > 0 && ready && downloadItems.length > 0;
+	if (download) {
+		console.log("image id queue", imageIds);
 		yield put(addManyDownloadQueueItems(downloadItems));
 	}
 	yield put(setSignatureGroups(payload));
