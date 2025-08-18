@@ -139,6 +139,7 @@
 	"chaosToken.remove.confirm.text_many": "{{count}} tokens {{token}} are in the skill test. Removing them may change the result or cancel the skill test.",
 
 	"chaosToken.remove.confirm.return": "Return",
+	"chaosToken.effect": "[elder_sign] effect",
 
 	"chaosBag.addToken_one": "{{name}} adds {{count}} {{token}} token to the chaos bag",
 	"chaosBag.addToken_many": "{{name}} adds {{count}} {{token}} tokens to the chaos bag",
@@ -161,7 +162,6 @@
 	"ability.mateo.base.confirm.text": "This will add a temporary [elder_sign] token to the test",
 	"ability.mateo.base.confirm.submit": "Add [elder_sign]",
 
-	"ability.mateo.base.elderSign.title": "[elder_sign] effect",
 	"ability.mateo.base.elderSign.cardAndResource": "Card and [resource]",
 	"ability.mateo.base.elderSign.action": "Action",
 

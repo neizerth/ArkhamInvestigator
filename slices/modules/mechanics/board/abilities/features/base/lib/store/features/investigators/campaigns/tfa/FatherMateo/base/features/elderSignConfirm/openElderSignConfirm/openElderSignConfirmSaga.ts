@@ -1,4 +1,5 @@
 import { selectBoardById } from "@modules/board/base/shared/lib";
+import { chaosToken } from "@modules/chaos-bag/base/shared/config";
 import { whereReferencePartTokenEq } from "@modules/chaos-bag/effect/entities/lib";
 import { createConfirmModalAction } from "@modules/core/modal/shared/actions/confirm/lib";
 import { openConfirm } from "@modules/core/modal/shared/confirm/lib";
@@ -30,7 +31,12 @@ function* worker({
 		openConfirm({
 			id: elderSignModalId,
 			data: {
-				title: "ability.mateo.base.elderSign.title",
+				title: {
+					i18nKey: "chaosToken.effect",
+					data: {
+						token: chaosToken.character.elderSign,
+					},
+				},
 				subtitle,
 				text,
 				faction: "mystic",
