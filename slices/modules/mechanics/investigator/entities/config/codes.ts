@@ -31,4 +31,5 @@ export const InvesigatorCode = {
 		base: "01005",
 		parallel: "90037",
 	},
+	CarolynFern: "05001",
 };

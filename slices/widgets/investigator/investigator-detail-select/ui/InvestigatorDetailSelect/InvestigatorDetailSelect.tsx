@@ -97,22 +97,26 @@ export const InvestigatorDetailSelect = () => {
 				>
 					<C.Sections>
 						<InvestigatorDescription />
-						<DataSection
-							title={t`Versions`}
-							data={signatures}
-							selectedId={signatureId}
-							onChange={onChangeSignature}
-							size={CARD_SIZE}
-						/>
-						<DataSection
-							title={t`Skins`}
-							data={skins}
-							onChange={onChangeSkin}
-							selectedId={skinId}
-							showIcon={false}
-							size={CARD_SIZE}
-							showNone
-						/>
+						{signatures.length > 1 && (
+							<DataSection
+								title={t`Versions`}
+								data={signatures}
+								selectedId={signatureId}
+								onChange={onChangeSignature}
+								size={CARD_SIZE}
+							/>
+						)}
+						{skins.length > 1 && (
+							<DataSection
+								title={t`Skins`}
+								data={skins}
+								onChange={onChangeSkin}
+								selectedId={skinId}
+								showIcon={false}
+								size={CARD_SIZE}
+								showNone
+							/>
+						)}
 					</C.Sections>
 				</C.Card>
 			</C.Content>
