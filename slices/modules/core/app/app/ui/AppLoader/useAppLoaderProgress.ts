@@ -14,12 +14,12 @@ export const useAppLoaderProgress = () => {
 	const [imagesReady, setImagesReady] = useState(externalImagesReady);
 
 	useEffect(() => {
-		if (imagesReady) {
+		if (externalImagesReady) {
 			setImagesReady(true);
 		}
-	}, [imagesReady]);
+	}, [externalImagesReady]);
 
-	if (externalImagesReady) {
+	if (imagesReady) {
 		return local.progress;
 	}
 
