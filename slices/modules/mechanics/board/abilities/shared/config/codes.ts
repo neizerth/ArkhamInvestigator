@@ -29,6 +29,7 @@ export const AbilityCode = {
 		base: "mateo-auto-fail-reveal",
 	},
 	WendyAdams: "wendys-amulet",
+	DanielaReyes: "been-attacked",
 };
 
 export const specialAbilitityCodes = [
@@ -36,5 +37,6 @@ export const specialAbilitityCodes = [
 	AbilityCode.ZoeySamaras,
 	AbilityCode.MinhThiPhan,
 	AbilityCode.WendyAdams,
+	AbilityCode.DanielaReyes,
 	...Object.values(AbilityCode.LilyChen),
 ];
