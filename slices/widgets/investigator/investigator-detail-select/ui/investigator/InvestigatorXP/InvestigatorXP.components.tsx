@@ -14,9 +14,10 @@ export const Title: typeof Text = styled(Text)`
 `;
 
 export const Value: typeof Text = styled(Text)`
+  top: -4px;
   font-family: ${Alegreya.medium};
   font-size: 30px;
-  line-height: 37px;
+  height: 37px;
 `;
 
 export const Controls: typeof Row = styled(Row)`
