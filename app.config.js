@@ -27,7 +27,7 @@ module.exports = {
         backgroundColor: "#000",
       },
       package: packageId,
-      versionCode: 326,
+      versionCode: 327,
       edgeToEdgeEnabled: true,
     },
     web: {
