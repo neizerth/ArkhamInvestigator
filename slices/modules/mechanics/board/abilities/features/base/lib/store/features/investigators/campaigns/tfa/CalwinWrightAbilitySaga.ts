@@ -26,7 +26,11 @@ function* worker({ payload }: ReturnType<typeof boardHistoryItemAdded>) {
 	}
 
 	if (typeof item.value.health === "number") {
-		const diff = item.value.health - board.value.health;
+		const baseValueChange = item.baseValue?.health ?? board.baseValue.health;
+		const baseDiff = baseValueChange - board.baseValue.health;
+		const valueDiff = item.value.health - board.value.health;
+
+		const diff = valueDiff - baseDiff;
 
 		const combat = board.value.combat - diff;
 		const agility = board.value.agility - diff;
@@ -52,7 +56,11 @@ function* worker({ payload }: ReturnType<typeof boardHistoryItemAdded>) {
 	}
 
 	if (typeof item.value.sanity === "number") {
-		const diff = item.value.sanity - board.value.sanity;
+		const baseValueChange = item.baseValue?.sanity ?? board.baseValue.sanity;
+		const baseDiff = baseValueChange - board.baseValue.sanity;
+		const valueDiff = item.value.sanity - board.value.sanity;
+
+		const diff = valueDiff - baseDiff;
 
 		const willpower = board.value.willpower - diff;
 		const intellect = board.value.intellect - diff;
