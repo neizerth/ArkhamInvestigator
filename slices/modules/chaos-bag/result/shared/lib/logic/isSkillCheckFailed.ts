@@ -19,5 +19,8 @@ export const isSkillCheckFailed = (options: Options) => {
 
 	const result = getSkillCheckResult(options);
 
-	return difficultyType === "gt" ? result > difficulty : result >= difficulty;
+	const passed =
+		difficultyType === "gt" ? result > difficulty : result >= difficulty;
+
+	return !passed;
 };

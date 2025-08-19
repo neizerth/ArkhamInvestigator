@@ -15,12 +15,12 @@ export const getSkillCheckResult = (options: Options): number => {
 		return 0;
 	}
 
-	const tokensvalueSum = tokens.reduce((total, { value, canceled }) => {
+	const sum = tokens.reduce((total, { value, canceled }) => {
 		if (typeof value !== "number" || canceled === true) {
 			return total;
 		}
 		return value + total;
 	}, 0);
 
-	return tokensvalueSum + skillValue;
+	return sum + skillValue;
 };

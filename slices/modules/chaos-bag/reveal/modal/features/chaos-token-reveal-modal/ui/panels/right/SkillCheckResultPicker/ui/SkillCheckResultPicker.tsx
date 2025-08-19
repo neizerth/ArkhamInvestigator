@@ -14,7 +14,7 @@ export type SkillCheckResultPickerProps = ViewProps;
 
 export const SkillCheckResultPicker = (props: SkillCheckResultPickerProps) => {
 	const dispatch = useAppDispatch();
-	const { data, value, failed } = useSkillCheckPickerData();
+	const { data, selected } = useSkillCheckPickerData();
 
 	const renderItem: PickerListRenderItem<SkillCheckPickerItem> = useCallback(
 		({ item }) => {
@@ -49,16 +49,13 @@ export const SkillCheckResultPicker = (props: SkillCheckResultPickerProps) => {
 		[dispatch],
 	);
 
-	const item = data.find(
-		(item) => item.value === value && item.failed === failed,
-	);
-
 	return (
 		<C.Container {...props}>
 			<C.Control
+				key={data.length}
 				data={data}
 				renderItem={renderItem}
-				value={item}
+				value={selected}
 				onValueChanged={onChange}
 			/>
 		</C.Container>
