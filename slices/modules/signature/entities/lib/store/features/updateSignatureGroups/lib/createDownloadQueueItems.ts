@@ -17,7 +17,7 @@ const createSingleItem = (
 	});
 	const diskPath = getUrl({
 		...options,
-		pathType: "storage",
+		pathType: "relative",
 	});
 
 	return {
