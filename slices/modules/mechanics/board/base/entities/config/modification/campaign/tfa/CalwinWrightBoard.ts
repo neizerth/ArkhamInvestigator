@@ -1,5 +1,5 @@
 import { InvesigatorCode } from "@modules/mechanics/investigator/entities/config";
-import type { InvestigatorBoardModification } from "../../model";
+import type { InvestigatorBoardModification } from "../../../../model";
 
 export const CalwinWrightBoard: InvestigatorBoardModification = {
 	[InvesigatorCode.CalvinWright]: ({
