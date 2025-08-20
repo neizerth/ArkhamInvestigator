@@ -14,6 +14,9 @@ export const HelpPage = () => {
 	const DanielaReyes = useAppSelector(
 		selectInvestigatorByCode(InvesigatorCode.DanielaReyes),
 	);
+	const KymaniJones = useAppSelector(
+		selectInvestigatorByCode(InvesigatorCode.KymaniJones),
+	);
 	return (
 		<ContentPage title="Help">
 			<Title>{t`Scroll`}</Title>
@@ -226,6 +229,9 @@ export const HelpPage = () => {
 				</List.Item>
 				<List.Item>
 					<Bold>{DanielaReyes?.name}</Bold>: {t`board.help.special.daniela`}
+				</List.Item>
+				<List.Item>
+					<Bold>{KymaniJones?.name}</Bold>: {t`board.help.special.kymani`}
 				</List.Item>
 			</List>
 		</ContentPage>
