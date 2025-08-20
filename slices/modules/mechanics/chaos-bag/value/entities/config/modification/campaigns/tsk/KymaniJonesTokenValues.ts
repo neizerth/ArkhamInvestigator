@@ -1,0 +1,17 @@
+import { AbilityCode } from "@modules/mechanics/board/abilities/shared/config";
+import { createSuccessAbilityTokenValues } from "@modules/mechanics/chaos-bag/value/shared/lib";
+import type { InvestigatorTokenValueModification } from "@modules/mechanics/chaos-bag/value/shared/model";
+import { InvesigatorCode } from "@modules/mechanics/investigator/entities/config";
+
+const abilityId = AbilityCode.KymaniJones;
+
+export const KymaniJonesTokenValues: InvestigatorTokenValueModification = {
+	[InvesigatorCode.KymaniJones]: ({ board, boards }) => {
+		return createSuccessAbilityTokenValues({
+			board,
+			boards,
+			abilityId,
+			token: "elderSign",
+		});
+	},
+};

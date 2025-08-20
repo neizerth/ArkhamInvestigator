@@ -5,7 +5,7 @@ import { resetBoardAbilityUseSaga } from "./resetBoardAbilityUseSaga/resetBoardA
 import { setBoardAbilityUseSaga } from "./setBoardAbilityUse/setBoardAbilityUseSaga";
 import { toggleBoardAbilityUseSaga } from "./toggleBoardAbilityUse/toggleBoardAbilityUseSaga";
 
-export function* boardAbilityUseSharedSagas() {
+export function* boardAbilityUseSharedSaga() {
 	yield spawn(changeBoardHistoryAbilityUseSaga);
 	yield spawn(resetBoardAbilityUseSaga);
 	yield spawn(setBoardAbilityUseSaga);

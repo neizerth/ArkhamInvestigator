@@ -42,6 +42,6 @@ function* worker({ payload }: ReturnType<typeof healHorror>) {
 	);
 }
 
-export function* healHorrorAbilitySaga() {
+export function* CarolynFernHealHorrorAbilitySaga() {
 	yield takeEvery(healHorror.match, worker);
 }

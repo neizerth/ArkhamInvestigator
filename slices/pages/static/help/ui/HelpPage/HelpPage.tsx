@@ -8,8 +8,11 @@ import * as C from "./HelpPage.components";
 
 export const HelpPage = () => {
 	const { t } = useTranslation();
-	const lolaHayes = useAppSelector(
+	const LolaHayes = useAppSelector(
 		selectInvestigatorByCode(InvesigatorCode.LolaHayes),
+	);
+	const DanielaReyes = useAppSelector(
+		selectInvestigatorByCode(InvesigatorCode.DanielaReyes),
 	);
 	return (
 		<ContentPage title="Help">
@@ -219,7 +222,10 @@ export const HelpPage = () => {
 			</Text>
 			<List>
 				<List.Item>
-					<Bold>{lolaHayes?.name}</Bold>: {t`board.help.special.lola`}
+					<Bold>{LolaHayes?.name}</Bold>: {t`board.help.special.lola`}
+				</List.Item>
+				<List.Item>
+					<Bold>{DanielaReyes?.name}</Bold>: {t`board.help.special.daniela`}
 				</List.Item>
 			</List>
 		</ContentPage>

@@ -33,4 +33,6 @@ export const InvesigatorCode = {
 	},
 	CarolynFern: "05001",
 	DanielaReyes: "08001",
+	KymaniJones: "09008",
+	PrestonFairmont: "05003",
 };

@@ -4,7 +4,7 @@ import {
 } from "@modules/board/base/shared/lib";
 import type { BoardId } from "@modules/board/base/shared/model";
 import type { AppSelector } from "@shared/model";
-import { getIsBoardAbilityUsed } from "../../getters/getIsBoardAbilityUsed";
+import { getIsAbilityUsed } from "../../getters/getIsAbilityUsed";
 import { selectBoardAbilityById } from "../selectBoardAbilityById";
 import { selectBoardAbilityUseInfo } from "../selectBoardAbilityUseInfo";
 
@@ -26,7 +26,7 @@ export const selectIsBoardAbilityUsed = (
 			abilityTargetBoardId && selectBoardId(abilityTargetBoardId)(state);
 		const boardsCount = selectBoardsCount(state);
 
-		return getIsBoardAbilityUsed({
+		return getIsAbilityUsed({
 			ability,
 			usedAbility,
 			targetBoardId,

@@ -1,6 +1,4 @@
-import type { InvestigatorBoardModification } from "../../../../model";
-import { LilyChenBoard } from "./LilyChenBoard";
+import type { InvestigatorBoardModification } from "@modules/mechanics/board/base/shared/model";
 
-export const EdgeOfTheEarthBoardModification: InvestigatorBoardModification = {
-	...LilyChenBoard,
-};
+export const EdgeOfTheEarthBoardModification: InvestigatorBoardModification =
+	{};

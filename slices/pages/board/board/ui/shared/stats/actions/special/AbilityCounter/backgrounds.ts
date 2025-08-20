@@ -4,7 +4,8 @@ import { AbilityCode } from "@modules/mechanics/board/abilities/shared/config";
 import type { ImageRequireSource } from "react-native";
 
 export const backgrounds: Record<string, ImageRequireSource> = {
-	[AbilityCode.PrestonFairmont]: abilitiyBackgrounds.familyInheritance,
+	[AbilityCode.PrestonFairmont.familyInheritance]:
+		abilitiyBackgrounds.familyInheritance,
 	[AbilityCode.TonyMorgan]: abilitiyBackgrounds.bountyContracts,
 	[AbilityCode.Subject5U21]: abilitiyBackgrounds.ravenous,
 

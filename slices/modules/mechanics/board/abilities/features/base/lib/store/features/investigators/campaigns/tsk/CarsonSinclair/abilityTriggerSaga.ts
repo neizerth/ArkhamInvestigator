@@ -4,6 +4,7 @@ import { createCancelModalAction } from "@modules/core/modal/shared/actions/canc
 import { createConfirmModalAction } from "@modules/core/modal/shared/actions/confirm/lib";
 import { AbilityCode } from "@modules/mechanics/board/abilities/shared/config";
 import { put, takeEvery } from "redux-saga/effects";
+import { modalId } from "./config";
 import { giveAction } from "./giveAction/sagas";
 import { type SelectModalDataResult, selectModalData } from "./selectModalData";
 
@@ -41,7 +42,7 @@ function* worker(action: ReturnType<typeof setBoardAbilityUse>) {
 
 	yield put(
 		openBoardSelectModal({
-			id: "carson-sinclair-board-select",
+			id: modalId,
 			data: {
 				...modalData,
 				title: "Choose an Investigator",
