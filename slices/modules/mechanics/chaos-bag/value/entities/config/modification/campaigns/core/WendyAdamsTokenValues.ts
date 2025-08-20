@@ -1,5 +1,5 @@
-import { getIsBoardAbilityUsed } from "@modules/board/abilities/shared/lib/store/getters";
 import { AbilityCode } from "@modules/mechanics/board/abilities/shared/config";
+import { createAbilityTokenValues } from "@modules/mechanics/chaos-bag/value/shared/lib";
 import type { InvestigatorTokenValueModification } from "@modules/mechanics/chaos-bag/value/shared/model";
 import { InvesigatorCode } from "@modules/mechanics/investigator/entities/config";
 
@@ -7,18 +7,13 @@ const abilityId = AbilityCode.WendyAdams;
 
 export const WendyAdamsTokenValues: InvestigatorTokenValueModification = {
 	[InvesigatorCode.WendyAdams.base]: ({ board, boards }) => {
-		const isUsed = getIsBoardAbilityUsed({
+		return createAbilityTokenValues({
 			board,
+			boards,
 			abilityId,
-			boardsCount: boards.length,
+			activeUseValue: false,
+			token: "elderSign",
+			value: "success",
 		});
-
-		if (isUsed) {
-			return {};
-		}
-
-		return {
-			elderSign: "success",
-		};
 	},
 };

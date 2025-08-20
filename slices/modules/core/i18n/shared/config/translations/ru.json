@@ -175,6 +175,7 @@
 	"ability.carolyn.modal.heal": "Вылечить",
 
 	"ability.preston.modal.text": "Потратить 2 [resource], чтобы автоматически пройти эту проверку?",
+	"ability.rex.base.modal.text": "Провалить проверку чтобы взять 3 карты?",
 
 	"heal.horror_one": "{{fromName}} лечит {{dativeName}} {{count}} ужас",
 	"heal.horror_few": "{{fromName}} лечит {{dativeName}} {{count}} ужаса",

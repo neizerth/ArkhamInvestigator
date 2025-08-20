@@ -167,7 +167,8 @@
 
 	"ability.carolyn.modal.heal": "Heal",
 
-	"ability.preston.modal.text": "Spend 2 [resource] to  automatically succeed?",
+	"ability.preston.modal.text": "Spend 2 [resource] to automatically succeed the test?",
+	"ability.rex.base.modal.text": "Fail the test to draw 3 cards?",
 
 	"heal.horror_one": "{{fromName}} heals {{dativeName}} {{count}} horror",
 	"heal.horror_few": "{{fromName}} heals {{dativeName}} {{count}} horrors",

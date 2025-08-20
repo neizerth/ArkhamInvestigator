@@ -1,3 +1,4 @@
+import { boardAbilityUseSet } from "@modules/board/abilities/shared/lib";
 import type { PropsWithBoardId } from "@modules/board/base/shared/model";
 import {
 	chaosBagUpdated,
@@ -39,4 +40,5 @@ function* worker({ payload }: Action) {
 
 export function* syncRevealedTokensWithChaosBagContentsSaga() {
 	yield takeEvery(filterAction, worker);
+	yield takeEvery(boardAbilityUseSet, worker);
 }

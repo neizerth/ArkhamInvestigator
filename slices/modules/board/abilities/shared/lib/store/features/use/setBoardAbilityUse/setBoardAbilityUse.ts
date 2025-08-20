@@ -10,3 +10,7 @@ export type SetBoardAbilityUsePayload = ToggleBoardAbilityUsePayload & {
 export const setBoardAbilityUse = createAction<SetBoardAbilityUsePayload>(
 	`${abilitiesPrefix}/setBoardUse`,
 );
+
+export const boardAbilityUseSet = createAction<SetBoardAbilityUsePayload>(
+	`${abilitiesPrefix}/boardUseSet`,
+);
