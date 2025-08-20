@@ -1,4 +1,4 @@
-import type { InvestigatorBoardModification } from "../../../model";
+import type { InvestigatorBoardModification } from "../../../../shared/model";
 import { CoreBoardModification } from "./core";
 import { TheDunwichLegacyBoardModification } from "./dwl";
 import { EdgeOfTheEarthBoardModification } from "./eoe";

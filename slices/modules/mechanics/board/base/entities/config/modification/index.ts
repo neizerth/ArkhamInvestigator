@@ -1,4 +1,4 @@
-import type { InvestigatorBoardModification } from "../../model";
+import type { InvestigatorBoardModification } from "../../../shared/model";
 import { CampaignBoardModification } from "./campaign";
 import { CustomBoardModification } from "./custom";
 

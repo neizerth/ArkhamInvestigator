@@ -1,5 +1,5 @@
+import type { InvestigatorTokenValueModification } from "@modules/mechanics/chaos-bag/value/shared/model";
 import { InvesigatorCode } from "@modules/mechanics/investigator/entities/config";
-import type { InvestigatorTokenValueModification } from "../../../../model";
 
 export const FatherMateoTokenValues: InvestigatorTokenValueModification = {
 	[InvesigatorCode.FatherMateo.base]: () => {

@@ -1,5 +1,5 @@
 export * from "./Ability";
 export * from "./AdditionalAction";
-export * from "./Special";
+export * from "./AbilityView";
 export * from "./SpecialActions";
 export * from "./AbilityCounter";

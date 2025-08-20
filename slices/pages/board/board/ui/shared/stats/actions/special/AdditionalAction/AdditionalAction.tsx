@@ -5,7 +5,7 @@ import {
 import type { TouchableOpacityProps } from "@modules/core/touch/shared/ui";
 import { useAppDispatch, useAppSelector } from "@shared/lib";
 import { useCallback } from "react";
-import { Special } from "../Special";
+import { AbilityView } from "../AbilityView";
 
 export type AdditionalActionProps = TouchableOpacityProps;
 
@@ -24,7 +24,7 @@ export const AdditionalAction = (props: AdditionalActionProps) => {
 	}, [dispatch, isUsed]);
 
 	return (
-		<Special
+		<AbilityView
 			{...props}
 			icon="investigator"
 			value={!isUsed}

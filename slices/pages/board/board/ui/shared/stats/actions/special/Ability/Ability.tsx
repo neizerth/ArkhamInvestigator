@@ -5,10 +5,11 @@ import {
 } from "@modules/board/abilities/shared/lib";
 import type { TouchableOpacityProps } from "@modules/core/touch/shared/ui";
 import { selectCanUseBoardAbility } from "@modules/mechanics/board/abilities/features/base/lib";
+import { checkAbilityCodes } from "@modules/mechanics/board/abilities/shared/config";
 import { useAppDispatch, useAppSelector } from "@shared/lib";
 import type { InvestigatorAbility } from "arkham-investigator-data";
 import { useCallback } from "react";
-import { Special } from "../Special";
+import { AbilityView } from "../AbilityView";
 import { useAbility } from "./useAbility";
 
 export type AbilityProps = TouchableOpacityProps & {
@@ -35,12 +36,14 @@ export const Ability = ({ ability, ...props }: AbilityProps) => {
 	}, [dispatch, ability.id]);
 
 	const enabled = isUsed || canUse;
+	const inverted = checkAbilityCodes.includes(ability.id);
 
 	return (
-		<Special
+		<AbilityView
 			{...props}
 			enabled={enabled}
 			value={!isUsed}
+			type={inverted ? "checked" : "crossed"}
 			icon={icon}
 			onPress={onPress}
 			onLongPress={removeUses}

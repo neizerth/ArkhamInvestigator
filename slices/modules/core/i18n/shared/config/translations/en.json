@@ -139,7 +139,7 @@
 	"chaosToken.remove.confirm.text_many": "{{count}} tokens {{token}} are in the skill test. Removing them may change the result or cancel the skill test.",
 
 	"chaosToken.remove.confirm.return": "Return",
-	"chaosToken.effect": "[elder_sign] effect",
+	"chaosToken.effect": "{{token}} effect",
 
 	"chaosBag.addToken_one": "{{name}} adds {{count}} {{token}} token to the chaos bag",
 	"chaosBag.addToken_many": "{{name}} adds {{count}} {{token}} tokens to the chaos bag",
@@ -166,6 +166,8 @@
 	"ability.mateo.base.elderSign.action": "Action",
 
 	"ability.carolyn.modal.heal": "Heal",
+
+	"ability.preston.modal.text": "Spend 2 [resource] to  automatically succeed?",
 
 	"heal.horror_one": "{{fromName}} heals {{dativeName}} {{count}} horror",
 	"heal.horror_few": "{{fromName}} heals {{dativeName}} {{count}} horrors",

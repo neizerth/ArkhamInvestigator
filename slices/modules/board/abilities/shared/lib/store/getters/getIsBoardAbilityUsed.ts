@@ -1,35 +1,31 @@
-import type { BoardId } from "@modules/board/base/shared/model";
-import type { InvestigatorAbility } from "arkham-investigator-data";
-import type { InvestigatorBoardUsedAbility } from "../../../model";
+import type { PropsWithBoard } from "@modules/board/base/shared/model";
+import { whereId } from "@shared/lib";
+import { getInvestigatorBoardAbilities } from "./getInvestigatorBoardAbilities";
+import {
+	type GetIsAbilityUsedOptions,
+	getIsAbilityUsed,
+} from "./getIsAbilityUsed";
 
-type Options = {
-	ability?: InvestigatorAbility;
-	usedAbility?: InvestigatorBoardUsedAbility;
-	targetBoardId?: BoardId;
-	boardsCount: number;
-};
+type Options = Omit<GetIsAbilityUsedOptions, "ability" | "usedAbility"> &
+	PropsWithBoard & {
+		abilityId: string;
+	};
 
-export const getIsBoardAbilityUsed = ({
-	ability,
-	usedAbility,
-	targetBoardId,
-	boardsCount,
-}: Options) => {
-	if (!usedAbility) {
-		return false;
-	}
+export const getIsBoardAbilityUsed = (options: Options) => {
+	const { board, boardsCount, abilityId } = options;
+	const { investigator, usedAbilities = [] } = board;
+	const abilities = getInvestigatorBoardAbilities({
+		investigator,
+		investigatorsCount: boardsCount,
+	});
 
-	if (!ability?.perInvestigator || !usedAbility.boardIds) {
-		return true;
-	}
+	const ability = abilities.find(whereId(abilityId));
 
-	if (typeof targetBoardId === "number") {
-		return usedAbility.boardIds.includes(targetBoardId);
-	}
+	const usedAbility = usedAbilities.find(whereId(abilityId));
 
-	const { personalUse } = ability;
-
-	const maxUses = personalUse ? boardsCount : boardsCount - 1;
-	const usesCount = usedAbility.boardIds.length;
-	return usesCount >= maxUses;
+	return getIsAbilityUsed({
+		ability,
+		usedAbility,
+		...options,
+	});
 };

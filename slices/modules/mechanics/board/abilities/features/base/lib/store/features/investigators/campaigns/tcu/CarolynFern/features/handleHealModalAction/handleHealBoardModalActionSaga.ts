@@ -1,17 +1,13 @@
-import { boardSelectModalConfirmed } from "@modules/core/modal/entities/board-select/lib";
+import type { boardSelectModalConfirmed } from "@modules/core/modal/entities/board-select/lib";
 import { put, takeEvery } from "redux-saga/effects";
 import { modalId } from "../../config";
 
+import { createConfirmModalFilter } from "@modules/core/modal/shared/actions/confirm/lib";
 import { healHorror } from "../healHorror/healHorror";
 
-const filterAction = (action: unknown) => {
-	if (!boardSelectModalConfirmed.match(action)) {
-		return false;
-	}
-
-	const { payload } = action;
-	return payload.modalId === modalId;
-};
+export const filterAction = createConfirmModalFilter({
+	modalId,
+});
 
 function* worker({ payload }: ReturnType<typeof boardSelectModalConfirmed>) {
 	const { boardId, value } = payload;
@@ -23,6 +19,6 @@ function* worker({ payload }: ReturnType<typeof boardSelectModalConfirmed>) {
 	);
 }
 
-export function* handleHealModalActionSaga() {
+export function* CarolynFernHandleHealModalActionSaga() {
 	yield takeEvery(filterAction, worker);
 }

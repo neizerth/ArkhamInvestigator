@@ -1,8 +1,8 @@
-import { InvesigatorCode } from "@modules/mechanics/investigator/entities/config";
 import type {
 	InvestigatorTokenValueModificationCallback as Callback,
 	InvestigatorTokenValueModification,
-} from "../../../../model";
+} from "@modules/mechanics/chaos-bag/value/shared/model";
+import { InvesigatorCode } from "@modules/mechanics/investigator/entities/config";
 
 const callback: Callback = ({ board }) => {
 	const { value } = board;

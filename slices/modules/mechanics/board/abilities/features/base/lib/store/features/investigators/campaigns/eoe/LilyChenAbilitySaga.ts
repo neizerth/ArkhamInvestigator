@@ -37,8 +37,8 @@ function* worker({ payload }: ReturnType<typeof changeBoardHistoryAbilityUse>) {
 
 	for (const ability of changedAbilities) {
 		const action = ability.isUsed
-			? increaseBoardActualPropValue
-			: decreaseBoardActualPropValue;
+			? decreaseBoardActualPropValue
+			: increaseBoardActualPropValue;
 
 		const item = lilyAbilities.find(whereId(ability.id));
 

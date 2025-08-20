@@ -1,21 +1,9 @@
-import { openChaosTokenRevealModal } from "@modules/chaos-bag/reveal/modal/entities/lib";
-import { modalClosed } from "@modules/core/modal/shared/base/lib";
-import { put, takeEvery } from "redux-saga/effects";
+import { createReturnToChaosTokenRevealModalSaga } from "@modules/chaos-bag/reveal/modal/entities/lib";
+
 import { modalId } from "../../config";
 
-const filterAction = (action: unknown) => {
-	if (!modalClosed.match(action)) {
-		return false;
-	}
-
-	const { payload } = action;
-	return payload.modalId === modalId;
-};
-
-function* worker() {
-	yield put(openChaosTokenRevealModal());
-}
-
-export function* cancelElderSignModalSaga() {
-	yield takeEvery(filterAction, worker);
-}
+export const CarolynFernCancelElderSignModalSaga =
+	createReturnToChaosTokenRevealModalSaga({
+		modalId,
+		name: "CarolynFernCancelElderSignModalSaga",
+	});

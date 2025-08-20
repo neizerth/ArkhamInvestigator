@@ -6,6 +6,7 @@ import { createConfirmModalAction } from "@modules/core/modal/shared/actions/con
 import { AbilityCode } from "@modules/mechanics/board/abilities/shared/config";
 import { put, takeEvery } from "redux-saga/effects";
 import { addWild } from "./addWild";
+import { modalId } from "./config";
 import { type SelectModalDataResult, selectModalData } from "./selectModalData";
 
 const filterAction = (action: unknown) => {
@@ -42,7 +43,7 @@ function* worker(action: ReturnType<typeof setBoardAbilityUse>) {
 
 	yield put(
 		openBoardSelectModal({
-			id: "minh-thi-phan-board-select",
+			id: modalId,
 			data: {
 				...modalData,
 				title: "Choose an Investigator",

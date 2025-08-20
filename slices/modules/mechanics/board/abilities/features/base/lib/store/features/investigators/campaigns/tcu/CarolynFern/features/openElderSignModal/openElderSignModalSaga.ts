@@ -1,7 +1,10 @@
 import { selectInvestigatorBoards } from "@modules/board/base/shared/lib";
 import { chaosToken } from "@modules/chaos-bag/base/shared/config";
 import { whereReferencePartTokenEq } from "@modules/chaos-bag/effect/entities/lib";
-import { chaosTokensRevealed } from "@modules/chaos-bag/reveal/base/entities/lib";
+import {
+	type chaosTokensRevealed,
+	createRevealedTokenFilterAction,
+} from "@modules/chaos-bag/reveal/base/entities/lib";
 import type { I18NText } from "@modules/core/i18n/shared/model";
 import { openBoardSelectModal } from "@modules/core/modal/entities/board-select/lib";
 import { createCancelModalAction } from "@modules/core/modal/shared/actions/cancel/lib";
@@ -13,19 +16,10 @@ import { prop } from "ramda";
 import { put, select, takeEvery } from "redux-saga/effects";
 import { healModalActionId, modalId } from "../../config";
 
-const filterRevealedTokens = (action: unknown) => {
-	if (!chaosTokensRevealed.match(action)) {
-		return false;
-	}
-	const { payload } = action;
-	const { tokens, code } = payload;
-
-	if (code === InvesigatorCode.CarolynFern) {
-		return true;
-	}
-
-	return tokens.some(({ type }) => type === "elderSign");
-};
+const filterRevealedTokens = createRevealedTokenFilterAction({
+	code: InvesigatorCode.CarolynFern,
+	tokens: ["elderSign"],
+});
 
 function* worker({ payload }: ReturnType<typeof chaosTokensRevealed>) {
 	const { boardId } = payload;
@@ -84,6 +78,6 @@ function* worker({ payload }: ReturnType<typeof chaosTokensRevealed>) {
 	);
 }
 
-export function* openElderSignModalSaga() {
+export function* CarolynFernOpenElderSignModalSaga() {
 	yield takeEvery(filterRevealedTokens, worker);
 }
