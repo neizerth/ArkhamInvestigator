@@ -35,4 +35,8 @@ export const InvesigatorCode = {
 	DanielaReyes: "08001",
 	KymaniJones: "09008",
 	PrestonFairmont: "05003",
+	RexMurphy: {
+		base: "02002",
+		parallel: "90078",
+	},
 };
