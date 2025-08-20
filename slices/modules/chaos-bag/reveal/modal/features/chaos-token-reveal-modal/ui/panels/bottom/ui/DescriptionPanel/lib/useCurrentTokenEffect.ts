@@ -1,7 +1,11 @@
-import { useChaosBagTokenEffects } from "@modules/chaos-bag/effect/features/board-token-effects";
+import {
+	useChaosBagEffects,
+	useChaosBagTokenEffects,
+} from "@modules/chaos-bag/effect/features/chaos-bag-effects";
 import { selectCurrentRevealedToken } from "@modules/chaos-bag/reveal/modal/features/chaos-token-reveal-modal/lib";
 import { selectChaosBagTokenValues } from "@modules/chaos-bag/value/entities/lib";
 import { useAppSelector } from "@shared/lib";
+import { compact } from "ramda-adjunct";
 import { useTranslation } from "react-i18next";
 
 export const getCurrentTokenEffect = () => {
@@ -9,10 +13,13 @@ export const getCurrentTokenEffect = () => {
 	const tokenValues = useAppSelector(selectChaosBagTokenValues("current"));
 
 	const currentToken = useAppSelector(selectCurrentRevealedToken);
-	const effects = useChaosBagTokenEffects({
-		boardId: "current",
+	const options = {
+		boardId: "current" as const,
 		tokenValues,
-	});
+	};
+	const effects = useChaosBagTokenEffects(options);
+
+	const chaosBagEffects = useChaosBagEffects(options);
 
 	if (!currentToken) {
 		return;
@@ -32,5 +39,7 @@ export const getCurrentTokenEffect = () => {
 		return translation.trim();
 	}
 
-	return effect;
+	const result = compact([effect, chaosBagEffects]).join("\n");
+
+	return result;
 };
