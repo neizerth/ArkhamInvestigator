@@ -1,11 +1,11 @@
 import type { PropsWithBoardId } from "@modules/board/base/shared/model";
-import { endChaosBagReveal } from "@modules/chaos-bag/reveal/base/entities/lib";
+import { chaosBagRevealEnd } from "@modules/chaos-bag/reveal/base/entities/lib";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { put, takeEvery } from "redux-saga/effects";
 import { resetBoardAbilities } from "../../shared/lib";
 
 const filterAction = (action: unknown) => {
-	if (!endChaosBagReveal.match(action)) {
+	if (!chaosBagRevealEnd.match(action)) {
 		return false;
 	}
 

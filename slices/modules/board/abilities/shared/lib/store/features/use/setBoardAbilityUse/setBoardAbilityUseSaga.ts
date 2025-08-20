@@ -7,7 +7,7 @@ import type { BoardId } from "@modules/board/base/shared/model";
 import { put, select, takeEvery } from "redux-saga/effects";
 import { UsedAbilitiesService } from "../../../../UsedAbilitiesService";
 import { selectBoardAbilityById } from "../../../selectors";
-import { setBoardAbilityUse } from "./setBoardAbilityUse";
+import { boardAbilityUseSet, setBoardAbilityUse } from "./setBoardAbilityUse";
 
 const filterAction = (action: unknown) => {
 	if (!setBoardAbilityUse.match(action)) {
@@ -57,6 +57,8 @@ function* worker({ payload }: ReturnType<typeof setBoardAbilityUse>) {
 			value,
 		}),
 	);
+
+	yield put(boardAbilityUseSet(payload));
 }
 
 export function* setBoardAbilityUseSaga() {

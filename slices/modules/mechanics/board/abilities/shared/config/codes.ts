@@ -34,6 +34,9 @@ export const AbilityCode = {
 	WendyAdams: "wendys-amulet",
 	DanielaReyes: "been-attacked",
 	KymaniJones: "exhausted-enemy",
+	RexMurphy: {
+		base: "auto-fail-for-3-cards",
+	},
 };
 
 export const LilyChenAbilityCodes = Object.values(AbilityCode.LilyChen);
@@ -45,10 +48,14 @@ export const specialAbilitityCodes = [
 	AbilityCode.WendyAdams,
 	AbilityCode.DanielaReyes,
 	AbilityCode.PrestonFairmont.elderSign,
+	AbilityCode.RexMurphy.base,
 	...LilyChenAbilityCodes,
 ];
 
-export const hiddenAbilityCodes = [AbilityCode.PrestonFairmont.elderSign];
+export const hiddenAbilityCodes = [
+	AbilityCode.PrestonFairmont.elderSign,
+	AbilityCode.RexMurphy.base,
+];
 
 export const checkAbilityCodes = [
 	AbilityCode.DanielaReyes,

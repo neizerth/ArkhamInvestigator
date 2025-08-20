@@ -7,18 +7,23 @@ import type {
 	ChaosTokenType,
 	ChaosTokenValues,
 } from "@modules/chaos-bag/base/shared/model";
+import type { ChaosTokenValue } from "@modules/chaos-bag/value/shared/model";
 
 type Options = PropsWithBoard & {
 	token: ChaosTokenType;
 	abilityId: string;
 	boards: InvestigatorBoard[];
+	value: ChaosTokenValue;
+	activeUseValue?: boolean;
 };
 
-export const createSuccessAbilityTokenValues = ({
+export const createAbilityTokenValues = ({
 	board,
 	abilityId,
 	token,
 	boards,
+	value,
+	activeUseValue = true,
 }: Options): ChaosTokenValues => {
 	const isUsed = getIsBoardAbilityUsed({
 		board,
@@ -26,11 +31,11 @@ export const createSuccessAbilityTokenValues = ({
 		boardsCount: boards.length,
 	});
 
-	if (!isUsed) {
+	if (isUsed !== activeUseValue) {
 		return {};
 	}
 
 	return {
-		[token]: "success",
+		[token]: value,
 	};
 };

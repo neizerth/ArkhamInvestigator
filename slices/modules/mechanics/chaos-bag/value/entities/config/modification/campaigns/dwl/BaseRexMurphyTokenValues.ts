@@ -3,16 +3,16 @@ import { createAbilityTokenValues } from "@modules/mechanics/chaos-bag/value/sha
 import type { InvestigatorTokenValueModification } from "@modules/mechanics/chaos-bag/value/shared/model";
 import { InvesigatorCode } from "@modules/mechanics/investigator/entities/config";
 
-const abilityId = AbilityCode.KymaniJones;
+const abilityId = AbilityCode.RexMurphy.base;
 
-export const KymaniJonesTokenValues: InvestigatorTokenValueModification = {
-	[InvesigatorCode.KymaniJones]: ({ board, boards }) => {
+export const BaseRexMurphyTokenValues: InvestigatorTokenValueModification = {
+	[InvesigatorCode.RexMurphy.base]: ({ board, boards }) => {
 		return createAbilityTokenValues({
 			board,
 			boards,
 			abilityId,
 			token: "elderSign",
-			value: "success",
+			value: "fail",
 		});
 	},
 };

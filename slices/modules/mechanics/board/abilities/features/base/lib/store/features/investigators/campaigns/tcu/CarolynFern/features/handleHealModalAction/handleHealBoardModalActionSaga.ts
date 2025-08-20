@@ -5,7 +5,7 @@ import { modalId } from "../../config";
 import { createConfirmModalFilter } from "@modules/core/modal/shared/actions/confirm/lib";
 import { healHorror } from "../healHorror/healHorror";
 
-export const filterAction = createConfirmModalFilter({
+const filterAction = createConfirmModalFilter({
 	modalId,
 });
 
