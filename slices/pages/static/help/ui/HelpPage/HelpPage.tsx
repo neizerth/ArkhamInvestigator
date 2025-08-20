@@ -225,13 +225,19 @@ export const HelpPage = () => {
 			</Text>
 			<List>
 				<List.Item>
-					<Bold>{LolaHayes?.name}</Bold>: {t`board.help.special.lola`}
+					<Bold>{LolaHayes?.name}</Bold> <C.Icon icon="neutral" />
+					<C.IconText value={t`board.help.special.lola`} />
+					{"\n"}
 				</List.Item>
 				<List.Item>
-					<Bold>{DanielaReyes?.name}</Bold>: {t`board.help.special.daniela`}
+					<Bold>{DanielaReyes?.name}</Bold> <C.Icon icon="guardian" />
+					<C.IconText value={t`board.help.special.daniela`} />
+					{"\n"}
 				</List.Item>
 				<List.Item>
-					<Bold>{KymaniJones?.name}</Bold>: {t`board.help.special.kymani`}
+					<Bold>{KymaniJones?.name}</Bold> <C.Icon icon="rogue" />
+					<C.IconText value={t`board.help.special.kymani`} />
+					{"\n"}
 				</List.Item>
 			</List>
 		</ContentPage>
