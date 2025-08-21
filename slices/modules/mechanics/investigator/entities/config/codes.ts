@@ -39,4 +39,5 @@ export const InvesigatorCode = {
 		base: "02002",
 		parallel: "90078",
 	},
+	StellaClark: "60501",
 };
