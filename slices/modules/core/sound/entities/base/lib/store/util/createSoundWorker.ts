@@ -1,6 +1,6 @@
+import type { SoundId } from "@modules/core/sound/shared/model";
 import { put } from "redux-saga/effects";
-import { playSound } from "../../entities/base/lib";
-import type { SoundId } from "../../shared/model";
+import { playSound } from "../features";
 
 export const createSoundWorker = (soundId: SoundId) => {
 	return function* worker() {
