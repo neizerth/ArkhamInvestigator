@@ -2,6 +2,7 @@ import type { SkillCheckDifficultyType } from "@modules/board/skill-check/shared
 import type { RevealedChaosBagToken } from "@modules/chaos-bag/reveal/base/shared/model";
 import { getSkillCheckResult } from "./getSkillCheckResult";
 import { isAutoFail } from "./isAutoFail";
+import { isAutoSuccess } from "./isAutoSuccess";
 
 type Options = {
 	skillValue: number;
@@ -13,6 +14,10 @@ type Options = {
 export const isSkillCheckFailed = (options: Options) => {
 	if (isAutoFail(options)) {
 		return true;
+	}
+
+	if (isAutoSuccess(options)) {
+		return false;
 	}
 
 	const { difficulty, difficultyType } = options;
