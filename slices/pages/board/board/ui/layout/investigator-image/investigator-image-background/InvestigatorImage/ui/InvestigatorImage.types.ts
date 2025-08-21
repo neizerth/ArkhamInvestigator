@@ -6,5 +6,4 @@ export type InvestigatorImageProps = Omit<ImageProps, "source"> & {
 	layout: BoxLayout;
 	contentContainerStyle?: ViewStyle;
 	code: string;
-	version?: number;
 };

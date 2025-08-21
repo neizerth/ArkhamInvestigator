@@ -18,7 +18,7 @@ export const useImageOffsets = () => {
 		if (!id) {
 			return;
 		}
-		if (offsets[id] === offsetBottom) {
+		if (offsets[id]) {
 			return;
 		}
 		setOffsets({

@@ -4,7 +4,7 @@ import type { ViewProps } from "react-native";
 import styled from "styled-components/native";
 
 import Animated from "react-native-reanimated";
-import { InvestigatorImageMemo as Image } from "../InvestigatorImage";
+import { InvestigatorImageMemo as Image } from "../../InvestigatorImage";
 
 export const Background: typeof Image = styled(Image).attrs({
 	contentContainerStyle: {

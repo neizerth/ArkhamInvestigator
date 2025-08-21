@@ -1,1 +1,1 @@
-export * from "./InvestigatorImageBackground";
+export * from "./ui/InvestigatorImageBackground";

@@ -1,20 +1,18 @@
 import { selectCurrentBoardProp } from "@modules/board/base/shared/lib";
 import { useAppSelector } from "@shared/lib";
-import { useContext, useMemo } from "react";
-import { LayoutContext } from "../../../../../../config";
+import { useMemo } from "react";
+import { Dimensions } from "react-native";
 import { getImageLayout } from "../../../../../../lib/image/background/getImageLayout";
 import { useImageOffsets } from "./useImageOffsets";
 
+const view = Dimensions.get("screen");
+
 export const useCurrentBackground = () => {
-	const { view } = useContext(LayoutContext);
 	const image = useAppSelector(selectCurrentBoardProp("image"));
 	const offsets = useImageOffsets();
-	const offsetBottom = (image && offsets[image.id]) || 0;
+	const offsetBottom = offsets[image.id] ?? 0;
 
 	return useMemo(() => {
-		if (!image) {
-			return;
-		}
 		return {
 			version: image.version,
 			code: image.id,
@@ -24,5 +22,5 @@ export const useCurrentBackground = () => {
 				offsetBottom,
 			}),
 		};
-	}, [image, view, offsetBottom]);
+	}, [image, offsetBottom]);
 };

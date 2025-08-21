@@ -1,8 +1,8 @@
 import { getSignatureImageUrl } from "@modules/signature/shared/lib";
 import { memo } from "react";
+import { useGrayscaleAnimation } from "../lib/useGrayscaleAnimation";
 import * as C from "./InvestigatorImage.components";
 import type { InvestigatorImageProps } from "./InvestigatorImage.types";
-import { useGrayscaleAnimation } from "./hooks/useGrayscaleAnimation";
 
 export const InvestigatorImage = ({
 	contentContainerStyle,

@@ -2,8 +2,8 @@ import { selectCurrentInvestigatorIndex } from "@modules/board/base/shared/lib";
 import { useAppSelector } from "@shared/lib";
 import { memo } from "react";
 import type { ViewProps } from "react-native";
+import { useBackgrounds } from "../lib";
 import * as C from "./InvestigatorImageBackground.components";
-import { useBackgrounds } from "./hooks";
 export type InvestigatorImageBackgroundProps = ViewProps;
 
 export const InvestigatorImageBackground = ({

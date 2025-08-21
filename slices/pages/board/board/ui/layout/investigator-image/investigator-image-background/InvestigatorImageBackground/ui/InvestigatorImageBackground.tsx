@@ -1,7 +1,7 @@
 import { memo } from "react";
 import type { ViewProps } from "react-native";
+import { useCurrentBackground } from "../lib";
 import * as C from "./InvestigatorImageBackground.components";
-import { useCurrentBackground } from "./hooks";
 export type InvestigatorImageBackgroundProps = ViewProps;
 
 export const InvestigatorImageBackground = ({
