@@ -1,11 +1,12 @@
-import { StatusBar } from "expo-status-bar";
+import { SystemBars } from "react-native-edge-to-edge";
+
 import type { PropsWithChildren } from "react";
 import { AppProvider } from "./AppProvider";
 
 export const AppLayout = ({ children }: PropsWithChildren) => {
 	return (
 		<AppProvider>
-			<StatusBar style="light" />
+			<SystemBars style="light" />
 
 			{children}
 		</AppProvider>

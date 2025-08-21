@@ -13,7 +13,7 @@ module.exports = {
     orientation: "portrait",
     icon: "./assets/images/icon1024.png",
     scheme: "arkham-investigator",
-    userInterfaceStyle: "dark",
+    userInterfaceStyle: "light",
     newArchEnabled: true,
     ios: {
       supportsTablet: false,
