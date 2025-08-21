@@ -4,5 +4,5 @@ import { selectDownloadQueue } from "../downloadQueue";
 
 export const selectFirstDownloadQueueItem = createSelector(
 	[selectDownloadQueue],
-	head,
+	(items) => head(items),
 );
