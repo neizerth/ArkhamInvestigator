@@ -18,6 +18,7 @@
 	"picker.deceleration.fast": "Fast",
 	"picker.deceleration.normal": "Normal",
 	"picker.deceleration.instant": "Instant",
+	"picker.deceleration.custom": "Custom",
 
 	"board.reset.text": "This action will reset the data to the beginning of the game for this investigator",
 	"board.help.scroll": "You can change any investigator value by scrolling a picker to a needed position",
@@ -91,12 +92,15 @@
 	"clues.spent_one": "{{name}} has spent {{count}} clue",
 	"clues.spent_other": "{{name}} has spent {{count}} clues",
 
+	"clues.scenario.add_one": "{{name}} places {{count}} clue on the scenario",
+	"clues.scenario.add_other": "{{name}} places {{count}} clues on the scenario",
+
 	"clues.remains_zero": "Clues are out",
 	"clues.remains_one": "Remains {{count}} clue",
 	"clues.remains_other": "Reamains {{count}} clues",
 
 	"actions.get_one": "{{name}} gets 1 action",
-	"actions.get_many": "{{name}} gets {{count}} actions",
+	"actions.get_other": "{{name}} gets {{count}} actions",
 
 	"actions.give_one": "{{name}} has got action [action] from {{fromName}}",
 	"actions.give_other": "{{name}} has got {{count}} actions [action] from {{fromName}}",
@@ -132,22 +136,22 @@
 	"chaosToken.canceled.effect": "The token's effect has been canceled\n<old>{{effect}}</old>",
 
 	"chaosToken.remove.confirm.title_one": "Token in skill test",
-	"chaosToken.remove.confirm.title_many": "Tokens in skill test",
+	"chaosToken.remove.confirm.title_other": "Tokens in skill test",
 
 	"chaosToken.remove.confirm.subtitle_one": "Remove token?",
-	"chaosToken.remove.confirm.subtitle_many": "Remove tokens?",
+	"chaosToken.remove.confirm.subtitle_other": "Remove tokens?",
 
 	"chaosToken.remove.confirm.text_one": "Token {{token}} is in the skill test. Removing it may change the result or cancel the skill test.",
-	"chaosToken.remove.confirm.text_many": "{{count}} tokens {{token}} are in the skill test. Removing them may change the result or cancel the skill test.",
+	"chaosToken.remove.confirm.text_other": "{{count}} tokens {{token}} are in the skill test. Removing them may change the result or cancel the skill test.",
 
 	"chaosToken.remove.confirm.return": "Return",
 	"chaosToken.effect": "{{token}} effect",
 
 	"chaosBag.addToken_one": "{{name}} adds {{count}} {{token}} token to the chaos bag",
-	"chaosBag.addToken_many": "{{name}} adds {{count}} {{token}} tokens to the chaos bag",
+	"chaosBag.addToken_other": "{{name}} adds {{count}} {{token}} tokens to the chaos bag",
 
 	"chaosBag.removeToken_one": "{{name}} removes {{count}} {{token}} token from the chaos bag",
-	"chaosBag.removeToken_many": "{{name}} removes {{count}} {{token}} tokens from the chaos bag",
+	"chaosBag.removeToken_other": "{{name}} removes {{count}} {{token}} tokens from the chaos bag",
 
 	"chaosBag.cantAddToken": "You can't add more than {{limit}} {{character}}",
 	"chaosBag.cantRemoveToken": "You can't remove {{count}} {{character}}. Available: {{available}}",
@@ -172,13 +176,16 @@
 	"ability.preston.modal.text": "Spend 2 [resource] to automatically succeed the test?",
 	"ability.rex.base.modal.text": "Fail the test to draw 3 cards?",
 
-	"heal.horror_one": "{{fromName}} heals {{dativeName}} {{count}} horror",
-	"heal.horror_few": "{{fromName}} heals {{dativeName}} {{count}} horrors",
-	"heal.horror_many": "{{fromName}} heals {{dativeName}} {{count}} horrors",
+	"ability.stella.modal.text": "Fail the test to heal 1 damage and 1 horror?",
+	"action.heal": "{{fromName}} heals {{dativeName}} for {{value}}",
+	"action.heal.self": "{{fromName}} heals self for {{value}}",
 
-	"heal.horror.self_one": "{{fromName}} heals {{count}} horror",
-	"heal.horror.self_few": "{{fromName}} heals {{count}} horrors",
-	"heal.horror.self_many": "{{fromName}} heals {{count}} horrors",
+	"preposition.and": "and",
+	"plural.accusative.horror_one": "{{count}} horror",
+	"plural.accusative.horror_other": "{{count}} horror",
+
+	"plural.accusative.damage_one": "{{count}} damage",
+	"plural.accusative.damage_other": "{{count}} damage",
 
 	"disk.notEnoughSpace.title": "Not enough free space",
 	"disk.notEnoughSpace.text": "The application requires {{required}} of free space",

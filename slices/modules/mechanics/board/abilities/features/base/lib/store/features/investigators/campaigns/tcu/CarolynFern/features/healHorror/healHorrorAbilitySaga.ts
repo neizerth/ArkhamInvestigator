@@ -3,6 +3,7 @@ import {
 	selectBoardById,
 } from "@modules/board/base/shared/lib";
 import { sendInvestigatorNotification } from "@modules/board/notifications/entities/lib";
+import { i18next } from "@modules/core/i18n/shared/config";
 import { put, select, takeEvery } from "redux-saga/effects";
 import { healHorror } from "./healHorror";
 
@@ -25,6 +26,16 @@ function* worker({ payload }: ReturnType<typeof healHorror>) {
 
 	const healSelf = targetBoardId === boardId;
 
+	const i18nKey = healSelf ? "action.heal.self" : "action.heal";
+
+	const value = i18next.t("plural.accusative.horror", {
+		count: 1,
+	});
+
+	const message = i18next.t(i18nKey, {
+		value,
+	});
+
 	yield put(
 		sendInvestigatorNotification({
 			boardId: targetBoardId,
@@ -33,10 +44,9 @@ function* worker({ payload }: ReturnType<typeof healHorror>) {
 				: {
 						sourceBoardId: boardId,
 					}),
-			message: healSelf ? "heal.horror.self" : "heal.horror",
+			message,
 			data: {
 				fromName: board.investigator.name,
-				count: 1,
 			},
 		}),
 	);

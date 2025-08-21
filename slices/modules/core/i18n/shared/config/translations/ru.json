@@ -178,17 +178,22 @@
 
 	"ability.preston.modal.text": "Потратить 2 [resource], чтобы автоматически пройти эту проверку?",
 	"ability.rex.base.modal.text": "Провалить проверку чтобы взять 3 карты?",
+	"ability.stella.modal.text": "Провалить проверку, чтобы вылечить 1 рану и 1 ужас?",
 
-	"heal.horror_one": "{{fromName}} лечит {{dativeName}} {{count}} ужас",
-	"heal.horror_few": "{{fromName}} лечит {{dativeName}} {{count}} ужаса",
-	"heal.horror_many": "{{fromName}} лечит {{dativeName}} {{count}} ужасов",
-
-	"heal.horror.self_one": "{{fromName}} лечит себе {{count}} ужас",
-	"heal.horror.self_few": "{{fromName}} лечит себе {{count}} ужаса",
-	"heal.horror.self_many": "{{fromName}} лечит себе {{count}} ужасов",
+	"action.heal": "{{fromName}} лечит {{dativeName}} {{value}}",
+	"action.heal.self": "{{fromName}} лечит себе {{value}}",
 
 	"disk.notEnoughSpace.title": "Недосаточно свободного места",
 	"disk.notEnoughSpace.text": "Для работы приложения нужно {{required}} свободного места",
+
+	"preposition.and": "и",
+	"plural.accusative.horror_one": "{{count}} ужас",
+	"plural.accusative.horror_few": "{{count}} ужаса",
+	"plural.accusative.horror_many": "{{count}} ужасов",
+
+	"plural.accusative.damage_one": "{{count}} рану",
+	"plural.accusative.damage_few": "{{count}} раны",
+	"plural.accusative.damage_many": "{{count}} ран",
 
 	"Defeated": "Поражение",
 	"Change": "Сменить",
