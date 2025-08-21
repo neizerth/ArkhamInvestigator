@@ -1,12 +1,10 @@
-import type { FC } from "react";
-import { Dimensions, Image, type ImageProps } from "react-native";
+import { FactionBackground } from "@modules/faction/shared/ui";
+import { Dimensions } from "react-native";
 import styled from "styled-components/native";
 
 const screen = Dimensions.get("screen");
 
-type BackgroundProps = ImageProps;
-
-export const Background: FC<BackgroundProps> = styled(Image)`
+export const Background: typeof FactionBackground = styled(FactionBackground)`
   width: ${screen.width}px;
   height: ${screen.height}px;
 `;
