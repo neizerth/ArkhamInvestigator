@@ -19,4 +19,4 @@ export type DownloadQueueItemFailedPayload = DownloadQueueItem & {
 };
 
 export const downloadQueueItemFailed =
-	createAction<DownloadQueueItemFailedPayload>("downloadQueue/downloadfailed");
+	createAction<DownloadQueueItemFailedPayload>("downloadQueue/downloadFailed");
