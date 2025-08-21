@@ -10,7 +10,7 @@ export type InvestigatorBackgroundProps = ViewProps;
 export const InvestigatorBackground = ({
 	...props
 }: InvestigatorBackgroundProps) => {
-	const { view, layout } = useContext(LayoutContext);
+	const { view } = useContext(LayoutContext);
 	const showEffects = useAppSelector(selectShowDamageAndHorrorEffects);
 
 	return (
