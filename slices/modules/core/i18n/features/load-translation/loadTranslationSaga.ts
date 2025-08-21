@@ -4,7 +4,7 @@ import { seconds } from "@shared/lib";
 import type { GameTranslationData } from "@shared/model";
 import type { AxiosResponse } from "axios";
 import { pick } from "ramda";
-import { put, retry, takeEvery } from "redux-saga/effects";
+import { put, retry, takeLatest } from "redux-saga/effects";
 import { setTranslation } from "../../entities/translation/setTranslation";
 import { DEFAULT_LANGUAGE, translations } from "../../shared/config";
 import { StoreTranslation, loadLanguage, setLanguage } from "../../shared/lib";
@@ -59,5 +59,5 @@ function* worker({ payload }: ReturnType<typeof loadLanguage>) {
 }
 
 export function* loadTranslationSaga() {
-	yield takeEvery(loadLanguage.match, worker);
+	yield takeLatest(loadLanguage.match, worker);
 }

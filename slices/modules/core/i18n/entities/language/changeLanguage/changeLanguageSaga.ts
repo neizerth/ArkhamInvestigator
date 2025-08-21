@@ -1,4 +1,4 @@
-import { put, select, take, takeEvery } from "redux-saga/effects";
+import { put, select, take, takeLatest } from "redux-saga/effects";
 import { selectLanguage, setLanguage } from "../../../shared/lib";
 import {
 	restoreTranslation,
@@ -27,5 +27,5 @@ function* worker({ payload: language }: ReturnType<typeof changeLanguage>) {
 }
 
 export function* changeLanguageSaga() {
-	yield takeEvery(changeLanguage.match, worker);
+	yield takeLatest(changeLanguage.match, worker);
 }
