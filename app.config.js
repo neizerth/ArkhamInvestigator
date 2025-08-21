@@ -1,4 +1,5 @@
 const pkg = require("./package.json");
+const { versionCode } = require("./app.version.json");
 
 const dev = process.env.MODE === "development";
 const packageId = dev ? "com.arkhaminvestigator.dev" : "com.arkhaminvestigator";
@@ -27,7 +28,7 @@ module.exports = {
         backgroundColor: "#000",
       },
       package: packageId,
-      versionCode: 328,
+      versionCode,
       edgeToEdgeEnabled: true,
     },
     web: {
