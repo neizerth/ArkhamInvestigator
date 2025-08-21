@@ -47,16 +47,19 @@ export const PickerListGestures = ({
 	onDeactivated,
 }: PickerListGesturesProps) => {
 	const onPress = useTouchCallback({
+		touchActionType: "picker",
 		touchType: "press",
 		callback: onPressProp,
 	});
 
 	const onDoublePress = useTouchCallback({
+		touchActionType: "picker",
 		touchType: "doublePress",
 		callback: onDoublePressProp,
 	});
 
 	const onLongPress = useTouchCallback({
+		touchActionType: "picker",
 		touchType: "longPress",
 		callback: onLongPressProp,
 	});

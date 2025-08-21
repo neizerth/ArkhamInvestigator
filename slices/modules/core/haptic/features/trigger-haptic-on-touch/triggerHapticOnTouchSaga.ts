@@ -6,8 +6,6 @@ const filterAction = createTouchFilter({
 	canceled: false,
 });
 
-// TODO touch category definition
-// function* worker({ payload }: ReturnType<typeof touch>) {
 function* worker() {
 	yield put(triggerHapticFeedback({}));
 }
