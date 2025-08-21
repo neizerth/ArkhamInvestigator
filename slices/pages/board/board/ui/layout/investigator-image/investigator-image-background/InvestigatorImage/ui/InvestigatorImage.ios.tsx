@@ -1,8 +1,8 @@
 import { getSignatureImageUrl } from "@modules/signature/shared/lib";
 import { memo } from "react";
+import { useOpacityAnimation } from "../lib";
 import * as C from "./InvestigatorImage.components";
 import type { InvestigatorImageProps } from "./InvestigatorImage.types";
-import { useOpacityAnimation } from "./hooks";
 
 export const InvestigatorImage = ({
 	contentContainerStyle,
