@@ -1,7 +1,7 @@
 import {
 	FactionSelect as Select,
 	type FactionSelectProps as SelectProps,
-} from "@modules/faction/shared/faction-select";
+} from "@modules/faction/shared/ui/faction-select";
 import { setFactionFilter, useAppDispatch } from "@shared/lib";
 import type { FactionFilterType } from "@shared/model";
 import { useCallback } from "react";
