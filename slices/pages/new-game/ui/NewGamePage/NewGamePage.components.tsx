@@ -1,4 +1,4 @@
-import { color, size } from "@shared/config";
+import { color } from "@shared/config";
 import type { IconButton } from "@shared/ui";
 import * as Shared from "@shared/ui";
 import { TopBarButton } from "@widgets/navigation";
@@ -7,7 +7,6 @@ import styled from "styled-components/native";
 
 export const Page: typeof Shared.Page = styled(Shared.Page)`
   background-color: ${color.dark30};
-  padding-bottom: ${size.gap.default}px;
 `;
 
 export const Loader: typeof ActivityIndicator = styled(ActivityIndicator).attrs(

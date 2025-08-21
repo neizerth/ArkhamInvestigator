@@ -5,6 +5,7 @@ import styled from "styled-components/native";
 
 export const FullContent: typeof View = styled(View)`
   flex: 1;
+  padding-bottom: ${navBarHeight}px;
 `;
 
 export const Content: typeof ScrollView = styled(ScrollView)`
