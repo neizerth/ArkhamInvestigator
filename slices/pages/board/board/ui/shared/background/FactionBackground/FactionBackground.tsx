@@ -1,34 +1,15 @@
 import { factionBackgroundImages } from "@assets/images/game/faction/background";
 import { selectCurrentFaction } from "@modules/mechanics/board/base/entities/lib";
 import { useAppSelector } from "@shared/lib";
-import type { Box } from "@shared/model";
 import type { ImageProps } from "react-native";
-import type { PropsWithLayout } from "../../../../model";
 import * as C from "./FactionBackground.components";
 
-export type FactionBackgroundProps = ImageProps &
-	PropsWithLayout & {
-		view: Box;
-	};
+export type FactionBackgroundProps = ImageProps;
 
-export const FactionBackground = ({
-	view,
-	...props
-}: FactionBackgroundProps) => {
+export const FactionBackground = (props: FactionBackgroundProps) => {
 	const faction = useAppSelector(selectCurrentFaction);
-
-	if (!faction) {
-		return;
-	}
 
 	const background = factionBackgroundImages[faction];
 
-	return (
-		<C.Background
-			{...props}
-			source={background}
-			width={view.width}
-			height={view.height}
-		/>
-	);
+	return <C.Background {...props} source={background} />;
 };

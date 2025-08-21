@@ -1,4 +1,4 @@
-import { FactionCardMemo as FactionCard } from "@modules/faction/shared/faction-card";
+import { FactionCardMemo as FactionCard } from "@modules/faction/shared/ui/faction-card";
 import { size } from "@shared/config";
 import { Outside as BaseOutside } from "@shared/ui";
 import { View } from "react-native";

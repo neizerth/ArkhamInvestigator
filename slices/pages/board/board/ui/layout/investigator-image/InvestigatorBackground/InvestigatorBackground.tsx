@@ -16,7 +16,7 @@ export const InvestigatorBackground = ({
 	return (
 		<C.Container {...props} view={view}>
 			<C.Content>
-				<C.FactionBackground view={view} layout={layout} />
+				<C.FactionBackground />
 				<C.Background />
 				{showEffects && (
 					<>

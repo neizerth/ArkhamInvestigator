@@ -1,4 +1,4 @@
-import { FactionCardMemo } from "@modules/faction/shared/faction-card";
+import { FactionCardMemo } from "@modules/faction/shared/ui/faction-card";
 import { size } from "@shared/config";
 import { Outside as BaseOutside, Input as TextInput } from "@shared/ui";
 import { KeyboardAvoidingView, View } from "react-native";
