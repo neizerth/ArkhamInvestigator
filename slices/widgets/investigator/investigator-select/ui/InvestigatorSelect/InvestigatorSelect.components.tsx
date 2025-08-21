@@ -1,3 +1,4 @@
+import { size } from "@shared/config";
 import { View } from "react-native";
 import styled from "styled-components/native";
 import { FactionSelect as BaseFactionSelect } from "../FactionSelect";
@@ -23,7 +24,7 @@ export const Footer: typeof InvestigatorSelectFooter = styled(
   position: absolute;
   z-index: 1;
   width: 100%;
-  bottom: 0px;
+  bottom: ${size.gap.default}px;
   left: 0;
   right: 0;
 `;
