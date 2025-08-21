@@ -3,7 +3,6 @@ import {
 	selectDownloadQueueSize,
 	selectFirstDownloadQueueItem,
 } from "../../shared/lib/store";
-import type { DownloadQueueItem } from "../../shared/model";
 import {
 	downloadQueueItemFailed,
 	downloadQueueItemSuccess,
@@ -35,10 +34,10 @@ function* worker() {
 		return;
 	}
 
-	let item: DownloadQueueItem | undefined;
-
-	do {
-		item = yield select(selectFirstDownloadQueueItem);
+	for (let i = 0; i < size; i++) {
+		const item: ReturnType<typeof selectFirstDownloadQueueItem> = yield select(
+			selectFirstDownloadQueueItem,
+		);
 
 		if (!item) {
 			return;
@@ -50,9 +49,8 @@ function* worker() {
 
 		if (downloadQueueItemFailed.match(action)) {
 			console.log("error downloading", action.payload);
-			break;
 		}
-	} while (item);
+	}
 }
 
 export function* checkDownloadQueueSaga() {
