@@ -4,6 +4,7 @@ import { useAppSelector } from "@shared/lib";
 import { Bold, Break, List, Paragraph, Text, Title } from "@shared/ui";
 import { ContentPage } from "@widgets/content/content-page";
 import { useTranslation } from "react-i18next";
+import { View } from "react-native";
 import * as C from "./HelpPage.components";
 
 export const HelpPage = () => {
@@ -226,17 +227,23 @@ export const HelpPage = () => {
 			<List>
 				<List.Item>
 					<Bold>{LolaHayes?.name}</Bold> <C.Icon icon="neutral" />
-					<C.IconText value={t`board.help.special.lola`} />
+					<View>
+						<C.IconText value={t`board.help.special.lola`} />
+					</View>
 					<Break />
 				</List.Item>
 				<List.Item>
 					<Bold>{DanielaReyes?.name}</Bold> <C.Icon icon="guardian" />
-					<C.IconText value={t`board.help.special.daniela`} />
+					<View>
+						<C.IconText value={t`board.help.special.daniela`} />
+					</View>
 					<Break />
 				</List.Item>
 				<List.Item>
 					<Bold>{KymaniJones?.name}</Bold> <C.Icon icon="rogue" />
-					<C.IconText value={t`board.help.special.kymani`} />
+					<View>
+						<C.IconText value={t`board.help.special.kymani`} />
+					</View>
 					<Break />
 				</List.Item>
 			</List>
