@@ -1,21 +1,13 @@
-import type { Box } from "@shared/model";
-import type { FC } from "react";
-import { View, type ViewProps } from "react-native";
-import styled, { css } from "styled-components/native";
+import { Dimensions, View } from "react-native";
+import styled from "styled-components/native";
 import { FactionBackground as BaseFactionBackground } from "../../../shared/background/FactionBackground";
 import { DamageOverlay, HorrorOverlay } from "../effects";
 import { InvestigatorImageBackground as InvestigatorBackground } from "../investigator-image-background/InvestigatorImageBackground";
 
-type PropsWithView = {
-	view: Box;
-};
+const screen = Dimensions.get("screen");
 
-export const Container: FC<ViewProps & PropsWithView> = styled(View)`
-  ${({ view }: PropsWithView) =>
-		view &&
-		css`
-    height: ${view.height}px;
-  `}
+export const Container: typeof View = styled(View)`
+  height: ${screen.height}px;
 `;
 
 export const Content: typeof View = styled(View)`
