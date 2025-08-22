@@ -1,7 +1,7 @@
 import { selectIsChaosBagEmpty } from "@modules/chaos-bag/base/shared/lib";
 import { selectRevealedTokensCount } from "@modules/chaos-bag/reveal/base/shared/lib";
+import { goToPage } from "@modules/core/router/shared/lib";
 import { routes } from "@shared/config";
-import { goToPage } from "@shared/lib";
 import { put, select, takeEvery } from "redux-saga/effects";
 import { openChaosBagRevealConfirm } from "../openChaosBagRevealConfirm";
 import { startNewChaosBagReveal } from "../startNewChaosBagReveal/startNewChaosBagReveal";

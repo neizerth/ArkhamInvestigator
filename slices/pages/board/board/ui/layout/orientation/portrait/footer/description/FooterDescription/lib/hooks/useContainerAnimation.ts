@@ -1,7 +1,9 @@
-import { statusBarHeight } from "@shared/config";
 import {
 	descriptionHidden,
 	descriptionShown,
+} from "@modules/board/base/shared/lib";
+import { statusBarHeight } from "@shared/config";
+import {
 	selectShowDescription,
 	useAppDispatch,
 	useAppSelector,

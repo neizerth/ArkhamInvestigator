@@ -1,20 +1,22 @@
+import { useLeaveBoard } from "@modules/board/base/features/leave-board";
 import { openResetBoardWarning } from "@modules/core/modal/entities/base/lib";
 import { routes } from "@shared/config";
-import { replacePageTo, useAppDispatch, usePage } from "@shared/lib";
+import { useAppDispatch } from "@shared/lib";
 import { useCallback } from "react";
 import type { ViewProps } from "react-native";
 import * as C from "./DescriptionTopMenu.components";
 
 export type DescriptionTopMenuProps = ViewProps;
 
+const homeRoute = {
+	href: routes.home,
+	replace: true,
+};
+
 export const DescriptionTopMenu = ({ ...props }: DescriptionTopMenuProps) => {
 	const dispatch = useAppDispatch();
 
-	const goToPage = usePage();
-
-	const goHome = useCallback(() => {
-		dispatch(replacePageTo(routes.home));
-	}, [dispatch]);
+	const goToPage = useLeaveBoard();
 
 	const showClearModal = useCallback(() => {
 		dispatch(
@@ -26,7 +28,7 @@ export const DescriptionTopMenu = ({ ...props }: DescriptionTopMenuProps) => {
 
 	return (
 		<C.Container {...props}>
-			<C.GoHome icon="resign" onPress={goHome} />
+			<C.GoHome icon="resign" onPress={goToPage(homeRoute)} />
 			<C.Button icon="info" onPress={goToPage(routes.boardHelp)} />
 			<C.Button icon="stopwatch" onPress={goToPage(routes.roundReference)} />
 			<C.Button icon="wrench" onPress={goToPage(routes.settings)} />

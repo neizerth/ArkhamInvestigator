@@ -1,11 +1,8 @@
 import { selectCurrentBoard } from "@modules/board/base/shared/lib";
+import { goBack } from "@modules/core/router/shared/lib";
 import { replaceBoard } from "@modules/mechanics/board/base/entities/lib";
 import type { ActionCreator } from "@reduxjs/toolkit";
-import {
-	goBack,
-	setReplaceInvestigator,
-	setSelectedInvestigators,
-} from "@shared/lib";
+import { setReplaceInvestigator, setSelectedInvestigators } from "@shared/lib";
 import type { AppThunk } from "@shared/model";
 import { selectGameInvestigatorBoards } from "../selectors";
 

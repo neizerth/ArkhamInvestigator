@@ -1,10 +1,11 @@
+import { useLeaveBoard } from "@modules/board/base/features/leave-board";
 import {
 	selectCurrentInvestigatorIndex,
 	selectInvestigatorBoards,
 	setCurrentInvestigatorIndex,
 } from "@modules/board/base/shared/lib";
 import { routes } from "@shared/config";
-import { useAppDispatch, useAppSelector, usePage } from "@shared/lib";
+import { useAppDispatch, useAppSelector } from "@shared/lib";
 import type {
 	PickerChangeEvent,
 	PickerItemInfo,
@@ -20,7 +21,7 @@ export const InvestigatorSelect = ({ ...props }: InvestigatorSelectProps) => {
 	const index = useAppSelector(selectCurrentInvestigatorIndex);
 	const boards = useAppSelector(selectInvestigatorBoards);
 	const dispatch = useAppDispatch();
-	const goToPage = usePage();
+	const goToPage = useLeaveBoard();
 
 	const currentIndex = index || 0;
 	const nextIndex = (currentIndex + 1) % boards.length;

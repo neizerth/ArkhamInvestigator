@@ -1,5 +1,5 @@
+import { usePage } from "@modules/core/router/shared/lib";
 import { routes } from "@shared/config";
-import { usePage } from "@shared/lib";
 import type { ViewProps } from "react-native";
 import * as C from "./HomeMenu.components";
 

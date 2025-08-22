@@ -1,13 +1,8 @@
 import { openReferenceCard } from "@entities/reference-card";
 import { selectRevealHistorySize } from "@modules/chaos-bag/reveal/history/shared/lib";
+import { goBack, goToPage } from "@modules/core/router/shared/lib";
 import { routes } from "@shared/config";
-import {
-	delay,
-	goBack,
-	goToPage,
-	useAppDispatch,
-	useAppSelector,
-} from "@shared/lib";
+import { delay, useAppDispatch, useAppSelector } from "@shared/lib";
 import type { Href } from "expo-router";
 import { useCallback, useMemo } from "react";
 

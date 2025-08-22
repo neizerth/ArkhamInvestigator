@@ -2,14 +2,9 @@ import {
 	selectModifyChaosTokens,
 	setModifyChaosTokens,
 } from "@modules/chaos-bag/base/shared/lib";
+import { goBack, goToPage } from "@modules/core/router/shared/lib";
 import { routes } from "@shared/config";
-import {
-	delay,
-	goBack,
-	goToPage,
-	useAppDispatch,
-	useAppSelector,
-} from "@shared/lib";
+import { delay, useAppDispatch, useAppSelector } from "@shared/lib";
 import { useCallback } from "react";
 import type { ViewProps } from "react-native";
 import * as C from "./ReferenceMenu.components";

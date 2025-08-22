@@ -1,7 +1,8 @@
 import { selectCurrentBoard } from "@modules/board/base/shared/lib";
+import { goToPage } from "@modules/core/router/shared/lib";
 import { selectSignatureGroups } from "@modules/signature/shared/lib";
 import { routes } from "@shared/config";
-import { goToPage, setSignatureSelection, whereId } from "@shared/lib";
+import { setSignatureSelection, whereId } from "@shared/lib";
 import { put, select, takeEvery } from "redux-saga/effects";
 import { changeSignatureDetails } from "./changeSignatureDetails";
 

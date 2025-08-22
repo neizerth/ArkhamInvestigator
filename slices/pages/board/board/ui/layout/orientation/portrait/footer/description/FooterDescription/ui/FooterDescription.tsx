@@ -1,3 +1,4 @@
+import { useLeaveBoard } from "@modules/board/base/features/leave-board";
 import { selectCurrentBoardProp } from "@modules/board/base/shared/lib";
 import { useSwipe } from "@modules/core/touch/shared/lib";
 import { selectCurrentFaction } from "@modules/mechanics/board/base/entities/lib";
@@ -10,7 +11,6 @@ import {
 	useAppSelector,
 	useBackButton,
 	useFadeAnimation,
-	usePage,
 } from "@shared/lib";
 import { useCallback, useContext } from "react";
 import type { ViewProps } from "react-native";
@@ -58,7 +58,7 @@ export const FooterDescription = ({ ...props }: FooterDescriptionProps) => {
 		dispatch(setShowDescription(false));
 	}, [dispatch]);
 
-	const goTo = usePage();
+	const goTo = useLeaveBoard();
 
 	const swipeDown = useSwipe({
 		direction: "down",

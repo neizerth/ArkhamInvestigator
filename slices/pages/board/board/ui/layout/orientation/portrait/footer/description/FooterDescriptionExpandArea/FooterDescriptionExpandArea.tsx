@@ -1,6 +1,7 @@
+import { goToPage } from "@modules/core/router/shared/lib";
 import { useSwipe } from "@modules/core/touch/shared/lib";
 import { routes } from "@shared/config";
-import { goToPage, setShowDescription, useAppDispatch } from "@shared/lib";
+import { setShowDescription, useAppDispatch } from "@shared/lib";
 import { useCallback } from "react";
 import type { ViewProps } from "react-native";
 import { Gesture, GestureDetector } from "react-native-gesture-handler";

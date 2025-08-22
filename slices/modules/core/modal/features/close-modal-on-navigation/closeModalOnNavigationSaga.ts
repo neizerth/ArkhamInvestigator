@@ -1,4 +1,4 @@
-import { goBack, goToPage, replacePageTo } from "@shared/lib";
+import { goBack, goToPage } from "@modules/core/router/shared/lib";
 import { put, takeEvery } from "redux-saga/effects";
 import { closeModal } from "../../shared/base/lib";
 
@@ -13,5 +13,4 @@ function* worker() {
 export function* closeModalOnNavigationSaga() {
 	yield takeEvery(goBack.match, worker);
 	yield takeEvery(goToPage.match, worker);
-	yield takeEvery(replacePageTo.match, worker);
 }

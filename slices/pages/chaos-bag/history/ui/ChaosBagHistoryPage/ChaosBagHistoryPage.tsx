@@ -1,8 +1,9 @@
 import type { ChaosBagHistoryItem } from "@modules/chaos-bag/base/shared/model";
 import { selectRevealHistory } from "@modules/chaos-bag/reveal/history/shared/lib";
 import { openClearRevealHistoryWarning } from "@modules/core/modal/entities/base/lib";
+import { useGoBack } from "@modules/core/router/shared/lib";
 import { REMOVE_CLIPPED_SUBVIEWS } from "@shared/config";
-import { goBack, useAppDispatch, useAppSelector } from "@shared/lib";
+import { useAppDispatch, useAppSelector } from "@shared/lib";
 import { Delay } from "@shared/ui";
 import { TopBar } from "@widgets/navigation";
 import { useCallback } from "react";
@@ -15,9 +16,7 @@ export const ChaosBagHistoryPage = () => {
 	const dispatch = useAppDispatch();
 	const data = useAppSelector(selectRevealHistory);
 
-	const back = useCallback(() => {
-		dispatch(goBack());
-	}, [dispatch]);
+	const back = useGoBack();
 
 	const showClearModal = useCallback(() => {
 		dispatch(

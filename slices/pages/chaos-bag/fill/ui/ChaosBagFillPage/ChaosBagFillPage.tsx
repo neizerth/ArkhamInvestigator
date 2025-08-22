@@ -1,7 +1,8 @@
 import { createChaosBag } from "@modules/chaos-bag/base/entities/lib";
 import type { ChaosTokenType } from "@modules/chaos-bag/base/shared/model";
+import { useGoBack } from "@modules/core/router/shared/lib";
 import { selectStory } from "@modules/stories/shared/lib";
-import { goBack, useAppDispatch, useAppSelector } from "@shared/lib";
+import { useAppDispatch, useAppSelector } from "@shared/lib";
 import type { DropdownItem } from "@shared/ui";
 import { useCallback, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -30,9 +31,7 @@ export const ChaosBagFillPage = () => {
 		setValue(value);
 	}, []);
 
-	const back = useCallback(() => {
-		dispatch(goBack());
-	}, [dispatch]);
+	const back = useGoBack();
 
 	const tokens = useMemo(() => {
 		if (!value) {
@@ -61,8 +60,8 @@ export const ChaosBagFillPage = () => {
 				tokenCount: data,
 			}),
 		);
-		dispatch(goBack());
-	}, [dispatch, tokens]);
+		back();
+	}, [dispatch, back, tokens]);
 
 	const title = story ? story.name : "Fill Chaos Bag";
 
