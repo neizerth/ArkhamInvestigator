@@ -1,4 +1,4 @@
-import { selectBoardIsUnique } from "@modules/board/base/entities/lib";
+import { selectBoardIsUnique } from "@modules/board/base/entities/base/lib";
 import {
 	selectBoardProp,
 	selectNonUniqueId,

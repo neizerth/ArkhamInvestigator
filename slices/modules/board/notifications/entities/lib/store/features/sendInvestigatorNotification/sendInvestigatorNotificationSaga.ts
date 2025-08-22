@@ -1,4 +1,4 @@
-import { selectDeclensedSignatureName } from "@modules/board/base/entities/lib";
+import { selectDeclensedSignatureName } from "@modules/board/base/entities/base/lib";
 import { selectBoardById } from "@modules/board/base/shared/lib";
 import type { InvestigatorBoard } from "@modules/board/base/shared/model";
 import { sendNotification } from "@modules/core/notifications/shared/lib";

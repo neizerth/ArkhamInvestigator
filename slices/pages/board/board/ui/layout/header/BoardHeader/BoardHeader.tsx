@@ -1,7 +1,7 @@
 import {
 	selectCurrentIsParallel,
 	selectCurrentIsUnique,
-} from "@modules/board/base/entities/lib";
+} from "@modules/board/base/entities/base/lib";
 import {
 	selectBoardsCount,
 	selectCurrentBoardProp,

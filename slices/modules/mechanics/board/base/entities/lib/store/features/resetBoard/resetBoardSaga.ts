@@ -1,4 +1,4 @@
-import { selectBoardInvestigatorSettings } from "@modules/board/base/entities/lib";
+import { selectBoardInvestigatorSettings } from "@modules/board/base/entities/base/lib";
 import {
 	isBoardExists,
 	selectBoardById,
