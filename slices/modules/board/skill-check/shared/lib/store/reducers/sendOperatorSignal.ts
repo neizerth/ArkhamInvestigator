@@ -1,5 +1,7 @@
-import type { SkillCheckReducer } from "@modules/board/skill-check/shared/model";
-import type { SkillCheckOperator } from "@shared/model";
+import type {
+	SkillCheckOperator,
+	SkillCheckReducer,
+} from "@modules/board/skill-check/shared/model";
 import { last } from "ramda";
 import { createOperatorItem } from "../../logic";
 

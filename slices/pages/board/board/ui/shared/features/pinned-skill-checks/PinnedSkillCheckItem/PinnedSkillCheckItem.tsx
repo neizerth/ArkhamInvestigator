@@ -7,10 +7,10 @@ import {
 	startSkillCheck,
 	toggleCurrentSkillCheckHistoryItemPin as togglePin,
 } from "@modules/board/skill-check/shared/lib";
+import type { SkillCheckHistoryItem } from "@modules/board/skill-check/shared/model";
 import { selectCurrentLanguage } from "@modules/core/i18n/shared/lib";
 import { useSwipe } from "@modules/core/touch/shared/lib";
 import { useAppDispatch, useAppSelector } from "@shared/lib";
-import type { SkillCheckHistoryItem } from "@shared/model";
 import { useCallback, useMemo } from "react";
 import type { ViewProps } from "react-native";
 import { Gesture, GestureDetector } from "react-native-gesture-handler";

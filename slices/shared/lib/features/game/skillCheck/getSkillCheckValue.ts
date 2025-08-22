@@ -1,5 +1,8 @@
 import type { InvestigatorBoardValues } from "@modules/board/base/shared/model";
-import type { SkillCheckItem, SkillCheckOperator } from "@shared/model";
+import type {
+	SkillCheckItem,
+	SkillCheckOperator,
+} from "@modules/board/skill-check/shared/model";
 import { evaluate } from "mathjs";
 
 const operatorMapping: Record<SkillCheckOperator, string> = {

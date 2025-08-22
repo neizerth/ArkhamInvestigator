@@ -1,4 +1,4 @@
-import type { SkillCheckOperator } from "@shared/model";
+import type { SkillCheckOperator } from "@modules/board/skill-check/shared/model";
 import { characters } from "../../../../config";
 
 export const operatorMapping: Record<SkillCheckOperator, string> = {

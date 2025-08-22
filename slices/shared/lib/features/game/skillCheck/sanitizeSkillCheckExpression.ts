@@ -1,4 +1,4 @@
-import type { SkillCheckItem } from "@shared/model";
+import type { SkillCheckItem } from "@modules/board/skill-check/shared/model";
 import { last } from "ramda";
 
 export const sanitizeSkillCheckExpression = (data: SkillCheckItem[]) => {
