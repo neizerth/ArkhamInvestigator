@@ -9,6 +9,7 @@ import type {
 	InvestigatorBoardHistoryItem,
 } from "@modules/board/history/shared/model";
 import type {
+	BoxLayout,
 	Faction,
 	InvestigatorNumericStat,
 	SkillCheckHistoryItem,
@@ -30,6 +31,7 @@ export type InvestigatorBoard = {
 
 	investigator: InvestigatorSignature;
 	image: InvestigatorBoardImage;
+	imageLayout?: BoxLayout;
 	initialValue: InvestigatorBoardValues;
 	baseValue: InvestigatorBoardValues;
 	value: InvestigatorBoardValues;
