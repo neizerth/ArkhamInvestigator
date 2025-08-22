@@ -8,8 +8,11 @@ import {
 	setHistoryShown,
 	setSkillCheckDifficulty,
 } from "@modules/board/skill-check/shared/lib";
+import type {
+	SkillCheckCommandType,
+	SkillCheckOperator,
+} from "@modules/board/skill-check/shared/model";
 import { useAppDispatch, useAppSelector } from "@shared/lib";
-import type { SkillCheckCommandType, SkillCheckOperator } from "@shared/model";
 import { PrimaryButton } from "@shared/ui";
 import memoize from "fast-memoize";
 import { useCallback } from "react";

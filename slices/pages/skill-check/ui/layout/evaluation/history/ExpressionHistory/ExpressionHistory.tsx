@@ -4,6 +4,10 @@ import {
 	selectSkillCheckHistory,
 	setSkillCheckData,
 } from "@modules/board/skill-check/shared/lib";
+import type {
+	SkillCheckHistoryItem,
+	SkillCheckItem,
+} from "@modules/board/skill-check/shared/model";
 import { REMOVE_CLIPPED_SUBVIEWS } from "@shared/config";
 import {
 	getSkillCheckValue,
@@ -11,7 +15,6 @@ import {
 	useAppDispatch,
 	useAppSelector,
 } from "@shared/lib";
-import type { SkillCheckHistoryItem, SkillCheckItem } from "@shared/model";
 import { memo, useCallback, useMemo, useRef } from "react";
 import type { ListRenderItemInfo, ViewProps, ViewStyle } from "react-native";
 import type { FlatList } from "react-native-gesture-handler";

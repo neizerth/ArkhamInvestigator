@@ -6,8 +6,8 @@ import {
 	useAppDispatch,
 	useAppSelector,
 } from "@shared/lib";
-import type { SkillCheckHistoryItem } from "@shared/model";
 import { useCallback } from "react";
+import type { SkillCheckHistoryItem } from "../../shared/model";
 
 export const useSkillItemChaosTokenRevealModal = () => {
 	const value = useAppSelector(selectCurrentBoardProp("value"));

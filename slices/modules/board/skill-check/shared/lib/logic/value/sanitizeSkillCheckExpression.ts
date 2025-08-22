@@ -1,5 +1,5 @@
-import type { SkillCheckItem } from "@shared/model";
 import { last } from "ramda";
+import type { SkillCheckItem } from "../../../model";
 
 export const sanitizeSkillCheckExpression = (data: SkillCheckItem[]) => {
 	const lastItem = last(data);

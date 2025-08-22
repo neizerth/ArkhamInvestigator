@@ -1,7 +1,5 @@
-import type {
-	InvestigatorBoardNumericStat,
-	SkillCheckItem,
-} from "@shared/model";
+import type { SkillCheckItem } from "@modules/board/skill-check/shared/model";
+import type { InvestigatorBoardNumericStat } from "@shared/model";
 import type { ChaosBagRevealHandler } from "../../../../model";
 
 export type HandleStartChaosBagRevealInternalPayload = {

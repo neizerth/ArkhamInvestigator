@@ -8,11 +8,11 @@ import type {
 	ChangeHistoryPayload,
 	InvestigatorBoardHistoryItem,
 } from "@modules/board/history/shared/model";
+import type { SkillCheckHistoryItem } from "@modules/board/skill-check/shared/model";
 import type {
 	BoxLayout,
 	Faction,
 	InvestigatorNumericStat,
-	SkillCheckHistoryItem,
 } from "@shared/model";
 
 export type BoardId = number | "current";

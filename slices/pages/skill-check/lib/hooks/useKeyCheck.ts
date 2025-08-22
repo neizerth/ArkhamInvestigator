@@ -1,16 +1,16 @@
 import { selectCurrentBoardProp } from "@modules/board/base/shared/lib";
 import { selectSkillCheckType } from "@modules/board/skill-check/shared/lib";
+import type {
+	SkillCheckItem,
+	SkillCheckOperator,
+} from "@modules/board/skill-check/shared/model";
 import { startChaosBagReveal } from "@modules/chaos-bag/reveal/base/entities/lib/store/features/startReveal/startChaosBagReveal";
 import {
 	getSkillCheckValue,
 	useAppDispatch,
 	useAppSelector,
 } from "@shared/lib";
-import type {
-	InvestigatorBoardNumericStat,
-	SkillCheckItem,
-	SkillCheckOperator,
-} from "@shared/model";
+import type { InvestigatorBoardNumericStat } from "@shared/model";
 import { useCallback } from "react";
 
 type Options = {

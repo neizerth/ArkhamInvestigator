@@ -1,5 +1,5 @@
+import type { SkillCheckOperator } from "@modules/board/skill-check/shared/model";
 import type { TouchableOpacityProps } from "@modules/core/touch/shared/ui";
-import type { SkillCheckOperator } from "@shared/model";
 import type { KeyboardButtonSize, KeyboardButtonType } from "./common";
 
 export type PropsWithKeyboardSize = {
