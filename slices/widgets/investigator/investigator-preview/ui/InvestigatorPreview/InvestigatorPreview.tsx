@@ -1,4 +1,4 @@
-import { getSignatureImageUrl } from "@modules/signature/shared/lib";
+import { getSignatureImageUrl } from "@modules/signature/shared/api";
 import type { PropsWithFaction } from "@shared/model";
 import { memo, useCallback } from "react";
 import {

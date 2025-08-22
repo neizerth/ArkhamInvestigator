@@ -14,7 +14,7 @@ export const InvestigatorBackground = ({
 		<C.Container {...props}>
 			<C.Content>
 				<C.FactionBackground />
-				<C.Background />
+				{/* <C.Background /> */}
 				{showEffects && (
 					<>
 						<C.Damage />

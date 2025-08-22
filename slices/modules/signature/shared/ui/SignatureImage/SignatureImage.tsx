@@ -3,7 +3,7 @@ import { pick } from "ramda";
 import {
 	type GetSignatureImageUrlOptions,
 	getSignatureImageUrl,
-} from "../../lib";
+} from "../../api";
 
 export type SignatureImageProps = Omit<ImageProps, "source"> &
 	GetSignatureImageUrlOptions;

@@ -1,4 +1,4 @@
-import { getSignatureImageUrl } from "@modules/signature/shared/lib";
+import { getSignatureImageUrl } from "@modules/signature/shared/api";
 import { memo } from "react";
 import { useOpacityAnimation } from "../lib";
 import * as C from "./InvestigatorImage.components";

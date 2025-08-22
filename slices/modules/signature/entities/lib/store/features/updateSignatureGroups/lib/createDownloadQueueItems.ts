@@ -2,7 +2,7 @@ import type { DownloadQueueItem } from "@modules/core/assets/download-queue/shar
 import {
 	type GetSignatureImageUrlOptions,
 	getSignatureImageUrl as getUrl,
-} from "@modules/signature/shared/lib";
+} from "@modules/signature/shared/api";
 import { Platform } from "react-native";
 import { v4 } from "uuid";
 

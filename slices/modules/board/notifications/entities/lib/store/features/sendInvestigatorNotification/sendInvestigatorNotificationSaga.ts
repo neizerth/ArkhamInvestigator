@@ -3,7 +3,7 @@ import { selectBoardById } from "@modules/board/base/shared/lib";
 import type { InvestigatorBoard } from "@modules/board/base/shared/model";
 import { sendNotification } from "@modules/core/notifications/shared/lib";
 import { getBoardFaction } from "@modules/mechanics/board/base/entities/lib";
-import { getSignatureImageUrl } from "@modules/signature/shared/lib";
+import { getSignatureImageUrl } from "@modules/signature/shared/api";
 import { put, select, takeEvery } from "redux-saga/effects";
 import { sendInvestigatorNotification } from "./sendInvestigatorNotification";
 
