@@ -3,8 +3,7 @@ import type { FC } from "react";
 import { View, type ViewProps } from "react-native";
 import styled, { css } from "styled-components/native";
 import { FactionBackground as BaseFactionBackground } from "../../../shared/background/FactionBackground";
-import { DamageOverlay } from "../DamageOverlay";
-import { HorrorOverlay } from "../HorrorOverlay";
+import { DamageOverlay, HorrorOverlay } from "../effects";
 import { InvestigatorImageBackground as InvestigatorBackground } from "../investigator-image-background/InvestigatorImageBackground";
 
 type PropsWithView = {
