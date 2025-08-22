@@ -9,11 +9,8 @@ import type {
 	InvestigatorBoardHistoryItem,
 } from "@modules/board/history/shared/model";
 import type { SkillCheckHistoryItem } from "@modules/board/skill-check/shared/model";
-import type {
-	BoxLayout,
-	Faction,
-	InvestigatorNumericStat,
-} from "@shared/model";
+import type { Faction, InvestigatorNumericStat } from "@shared/model";
+import type { InvestigatorBoardLayout } from "./layout";
 
 export type BoardId = number | "current";
 
@@ -23,7 +20,7 @@ export type InvestigatorBoardImage = InvestigatorSignature["image"];
 
 export type InvestigatorBoardValues = Record<InvestigatorNumericStat, number>;
 
-export type InvestigatorBoard = {
+export type InvestigatorBoard = InvestigatorBoardLayout & {
 	id: number;
 	index: number;
 	signatureGroupId: string;
@@ -31,7 +28,6 @@ export type InvestigatorBoard = {
 
 	investigator: InvestigatorSignature;
 	image: InvestigatorBoardImage;
-	imageLayout?: BoxLayout;
 	initialValue: InvestigatorBoardValues;
 	baseValue: InvestigatorBoardValues;
 	value: InvestigatorBoardValues;
