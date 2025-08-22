@@ -9,8 +9,8 @@ import {
 } from "@shared/lib";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Dimensions, useWindowDimensions } from "react-native";
-import { descriptionSize } from "../../../../../../../../config";
-import { useDescriptionHeight } from "../../../../../../../../lib";
+import { descriptionSize } from "../../../../../../../../../config";
+import { useDescriptionHeight } from "../../../../../../../../../lib";
 
 const screen = Dimensions.get("screen");
 

@@ -4,15 +4,15 @@ import { View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import Animated from "react-native-reanimated";
 import styled from "styled-components/native";
-import { TOP_CONTENT_OFFSET } from "../../../../../../../config";
+import { TOP_CONTENT_OFFSET } from "../../../../../../../../config";
 import {
 	InvestigatorFlavor,
 	InvestigatorText,
 	InvestigatorTraits,
-} from "../../../../../../shared";
-import { DescriptionMenu } from "../DescriptionMenu";
-import { FooterDescriptionExpandArea } from "../FooterDescriptionExpandArea";
-import { FooterTopContent } from "../top";
+} from "../../../../../../../shared";
+import { DescriptionMenu } from "../../DescriptionMenu";
+import { FooterDescriptionExpandArea } from "../../FooterDescriptionExpandArea";
+import { FooterTopContent } from "../../top";
 
 export const Container: typeof Animated.View = styled(Animated.View)`
   position: relative;

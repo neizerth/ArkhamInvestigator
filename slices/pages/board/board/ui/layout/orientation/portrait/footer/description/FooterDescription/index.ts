@@ -1,1 +1,2 @@
-export * from "./FooterDescription";
+export * from "./ui";
+export * from "./lib";
