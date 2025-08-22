@@ -4,7 +4,10 @@ export const InvesigatorCode = {
 		base: "02003",
 		book: "98001",
 	},
-	AgnesBaker: "01004",
+	AgnesBaker: {
+		base: "01004",
+		parallel: "90017",
+	},
 	IsabelleBarnes: "zjc_00027",
 	MarkHarrigan: "03001",
 

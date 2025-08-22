@@ -180,8 +180,10 @@
 	"ability.rex.base.modal.text": "Провалить проверку чтобы взять 3 карты?",
 	"ability.stella.modal.text": "Провалить проверку, чтобы вылечить 1 рану и 1 ужас?",
 
+	"ability.agnes.parallel.modal.text": "Вылечить 1 рану?",
+
 	"action.heal": "{{fromName}} лечит {{dativeName}} {{value}}",
-	"action.heal.self": "{{fromName}} лечит себе {{value}}",
+	"action.heal.self": "{{name}} лечит {{value}}",
 
 	"disk.notEnoughSpace.title": "Недосаточно свободного места",
 	"disk.notEnoughSpace.text": "Для работы приложения нужно {{required}} свободного места",

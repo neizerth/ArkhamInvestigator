@@ -7,7 +7,7 @@ import { createAction } from "@reduxjs/toolkit";
 
 export type SendInvestigatorNotificationPayload = SendNotificationPayload &
 	PropsWithBoardId & {
-		sourceBoardId?: BoardId;
+		sourceBoardId?: BoardId | null;
 	};
 
 export const sendInvestigatorNotification =

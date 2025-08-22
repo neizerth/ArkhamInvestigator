@@ -2,7 +2,7 @@ import type { InvestigatorTokenValueModification } from "@modules/mechanics/chao
 import { InvesigatorCode } from "@modules/mechanics/investigator/entities/config";
 
 export const AgnesBakerTokenValues: InvestigatorTokenValueModification = {
-	[InvesigatorCode.AgnesBaker]: ({ board }) => {
+	[InvesigatorCode.AgnesBaker.base]: ({ board }) => {
 		const { value, baseValue } = board;
 		const horror = Math.max(0, baseValue.sanity - value.sanity);
 		return {
