@@ -1,4 +1,4 @@
-import { selectCurrentIsParallel } from "@modules/board/base/entities/lib";
+import { selectCurrentIsParallel } from "@modules/board/base/entities/base/lib";
 import {
 	selectAlwaysShowSkillModifiers,
 	selectCurrentActualPropValue,
