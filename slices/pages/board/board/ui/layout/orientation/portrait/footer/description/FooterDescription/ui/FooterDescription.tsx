@@ -15,10 +15,12 @@ import {
 import { useCallback, useContext } from "react";
 import type { ViewProps } from "react-native";
 import { Gesture, GestureDetector } from "react-native-gesture-handler";
-import { LayoutContext, TOP_CONTENT_OFFSET } from "../../../../../../../config";
+import {
+	LayoutContext,
+	TOP_CONTENT_OFFSET,
+} from "../../../../../../../../config";
+import { useContainerAnimation, useGameText } from "../lib";
 import * as C from "./FooterDescription.components";
-import { useGameText } from "./hooks";
-import { useContainerAnimation } from "./hooks/useContainerAnimation";
 
 export type FooterDescriptionProps = ViewProps;
 export const FooterDescription = ({ ...props }: FooterDescriptionProps) => {
@@ -70,7 +72,7 @@ export const FooterDescription = ({ ...props }: FooterDescriptionProps) => {
 
 	const gesture = Gesture.Exclusive(swipeDown, swipeRight);
 
-	if (!vw || !investigator || !faction) {
+	if (!vw) {
 		return null;
 	}
 
