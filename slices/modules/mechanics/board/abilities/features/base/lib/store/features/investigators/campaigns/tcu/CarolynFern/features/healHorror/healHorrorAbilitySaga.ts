@@ -36,14 +36,12 @@ function* worker({ payload }: ReturnType<typeof healHorror>) {
 		value,
 	});
 
+	const sourceBoardId = healSelf ? null : boardId;
+
 	yield put(
 		sendInvestigatorNotification({
 			boardId: targetBoardId,
-			...(healSelf
-				? {}
-				: {
-						sourceBoardId: boardId,
-					}),
+			sourceBoardId,
 			message,
 			data: {
 				fromName: board.investigator.name,

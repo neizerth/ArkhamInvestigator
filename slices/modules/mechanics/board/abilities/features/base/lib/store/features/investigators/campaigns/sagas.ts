@@ -1,4 +1,5 @@
 import { fork } from "redux-saga/effects";
+import { CoreGameAbilitySaga } from "./core/sagas";
 import { TheDunwichLegacyInvestigatorAbilitySaga as TheDunwichLegacySaga } from "./dwl/sagas";
 import { EdgeOfTheEarthInvestigatorAbilitySaga as EdgeOfTheEarthSaga } from "./eoe/sagas";
 import { TheFeastOfHemlockValeInvestigatorAbilitySaga as TheFeastOfHemlockValeSaga } from "./fhv/sagas";
@@ -10,6 +11,7 @@ import { TheInnsmouthConspiracyInvestigatorAbilitySaga as TheInnsmouthConspiracy
 import { TheScarletKeysInvestigatorAbilitySaga as TheScarletKeysSaga } from "./tsk/sagas";
 
 export function* campaignsInvestigatorAbilitySaga() {
+	yield fork(CoreGameAbilitySaga);
 	yield fork(TheDunwichLegacySaga);
 	yield fork(ThePathToCarcosaSaga);
 	yield fork(TheForgottenAgeSaga);

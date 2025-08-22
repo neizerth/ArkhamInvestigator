@@ -177,8 +177,11 @@
 	"ability.rex.base.modal.text": "Fail the test to draw 3 cards?",
 
 	"ability.stella.modal.text": "Fail the test to heal 1 damage and 1 horror?",
-	"action.heal": "{{fromName}} heals {{dativeName}} for {{value}}",
-	"action.heal.self": "{{fromName}} heals self for {{value}}",
+
+	"ability.agnes.parallel.modal.text": "Heal 1 damage?",
+
+	"action.heal": "{{fromName}} heals {{dativeName}} {{value}}",
+	"action.heal.self": "{{name}} heals {{value}}",
 
 	"preposition.and": "and",
 	"plural.accusative.horror_one": "{{count}} horror",
