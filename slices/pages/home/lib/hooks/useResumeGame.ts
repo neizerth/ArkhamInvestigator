@@ -1,8 +1,8 @@
+import { usePage } from "@modules/core/router/shared/lib";
 import { routes } from "@shared/config";
 import {
 	selectHasPreviousGame,
 	useAppSelector,
-	usePage,
 	usePageLoader,
 } from "@shared/lib";
 

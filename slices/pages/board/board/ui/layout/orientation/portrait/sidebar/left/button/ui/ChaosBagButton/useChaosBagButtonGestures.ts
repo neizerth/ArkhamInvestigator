@@ -1,14 +1,15 @@
 import { openReferenceCard } from "@entities/reference-card";
+import { useLeaveBoard } from "@modules/board/base/features/leave-board";
 import { startChaosBagReveal } from "@modules/chaos-bag/reveal/base/entities/lib";
 import { useLongPress, useSwipe, useTap } from "@modules/core/touch/shared/lib";
 import { routes } from "@shared/config";
-import { useAppDispatch, usePage } from "@shared/lib";
+import { useAppDispatch } from "@shared/lib";
 import { useCallback } from "react";
 import { Gesture } from "react-native-gesture-handler";
 
 export const useChaosBagButtonGestures = () => {
 	const dispatch = useAppDispatch();
-	const goToPage = usePage();
+	const goToPage = useLeaveBoard();
 
 	const revealToken = useCallback(() => {
 		dispatch(

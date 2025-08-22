@@ -10,8 +10,9 @@ import {
 	toggleSkillCheckDifficultyType,
 } from "@modules/board/skill-check/shared/lib";
 import { startChaosBagReveal } from "@modules/chaos-bag/reveal/base/entities/lib/store/features/startReveal/startChaosBagReveal";
+import { useGoBack } from "@modules/core/router/shared/lib";
 import { useSwipe } from "@modules/core/touch/shared/lib";
-import { goBack, useAppDispatch, useAppSelector } from "@shared/lib";
+import { useAppDispatch, useAppSelector } from "@shared/lib";
 import { useCallback } from "react";
 import type { ViewProps } from "react-native";
 import { GestureDetector } from "react-native-gesture-handler";
@@ -42,9 +43,7 @@ export const SkillCheckHeader = ({ ...props }: SkillCheckHeaderProps) => {
 		dispatch(clearSkillCheckHistory("current"));
 	}, [dispatch]);
 
-	const back = useCallback(() => {
-		dispatch(goBack());
-	}, [dispatch]);
+	const back = useGoBack();
 
 	const clearDifficulty = useCallback(() => {
 		dispatch(setSkillCheckDifficulty(null));

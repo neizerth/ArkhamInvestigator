@@ -1,4 +1,5 @@
-import { goBack, useAppDispatch } from "@shared/lib";
+import { goBack } from "@modules/core/router/shared/lib";
+import { useAppDispatch } from "@shared/lib";
 import { Page } from "@shared/ui";
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";

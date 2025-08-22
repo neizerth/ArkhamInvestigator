@@ -1,3 +1,4 @@
+import { goToPage } from "@modules/core/router/shared/lib/store/features/goToPage";
 import type { ActionCreator } from "@reduxjs/toolkit";
 import type { AppThunk, SelectedInvestigator } from "@shared/model";
 import type { InvestigatorSignatureGroup } from "arkham-investigator-data";
@@ -5,7 +6,6 @@ import { propEq, reject } from "ramda";
 import { v4 } from "uuid";
 import { MAX_PLAYERS, routes } from "../../../../../config";
 import { includesBy } from "../../../../util";
-import { goToPage } from "../../../effects";
 import {
 	selectSelectedInvestigators,
 	setCurrentSignatureGroup,

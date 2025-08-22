@@ -1,5 +1,6 @@
+import { useGoBack } from "@modules/core/router/shared/lib";
 import { setReferenceCardCode } from "@modules/stories/shared/lib";
-import { goBack, useAppDispatch } from "@shared/lib";
+import { useAppDispatch } from "@shared/lib";
 import { useCallback, useMemo } from "react";
 import type { ViewProps } from "react-native";
 import * as C from "./ChaosBagReferenceEditPage.components";
@@ -11,14 +12,12 @@ export const ChaosBagReferenceEditPage = (
 ) => {
 	const dispatch = useAppDispatch();
 
-	const back = useCallback(() => {
-		dispatch(goBack());
-	}, [dispatch]);
+	const back = useGoBack();
 
 	const removeReference = useCallback(() => {
-		dispatch(goBack());
+		back();
 		dispatch(setReferenceCardCode(null));
-	}, [dispatch]);
+	}, [dispatch, back]);
 
 	const actions = useMemo(() => {
 		return [

@@ -1,6 +1,6 @@
 import { spawn } from "redux-saga/effects";
-import { routerEntitiesSaga } from "./entities/sagas";
+import { routerSharedSaga } from "./shared/sagas";
 
 export function* routerSaga() {
-	yield spawn(routerEntitiesSaga);
+	yield spawn(routerSharedSaga);
 }

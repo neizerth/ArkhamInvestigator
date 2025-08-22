@@ -5,7 +5,7 @@ import { setBoardPropSaga } from "./setBoardProp/setBoardPropSaga";
 import { setBoardPropValueSaga } from "./setBoardPropValue/setBoardPropValueSaga";
 import { setBoardValuePartSaga } from "./setBoardValuePart/setBoardValuePartSaga";
 
-export function* boardSharedSaga() {
+export function* boardBaseSharedSaga() {
 	yield spawn(setBoardSaga);
 	yield spawn(setBoardPropSaga);
 	yield spawn(setBoardValuePartSaga);

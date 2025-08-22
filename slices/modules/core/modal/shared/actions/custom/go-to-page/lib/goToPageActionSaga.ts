@@ -1,10 +1,10 @@
-import { goToPage, replacePageTo } from "@shared/lib";
 import { put, takeEvery } from "redux-saga/effects";
 
 import {
 	type CreateModalActionFilterAction,
 	createModalActionFilter,
 } from "@modules/core/modal/shared/base/lib";
+import { goToPage } from "@modules/core/router/shared/lib";
 import { goToPageModalActionId } from "../config";
 import type { GoToPageModalAction } from "../model";
 
@@ -15,14 +15,9 @@ const filterAction = createModalActionFilter({
 });
 
 function* worker({ payload }: Action) {
-	const { href, replace } = payload.modalAction;
+	const { modalAction } = payload;
 
-	if (replace) {
-		yield put(replacePageTo(href));
-		return;
-	}
-
-	yield put(goToPage(href));
+	yield put(goToPage(modalAction));
 }
 
 export function* goToPageActionSaga() {

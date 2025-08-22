@@ -1,6 +1,7 @@
+import { usePage } from "@modules/core/router/shared/lib";
 import { selectReferenceCard, selectStory } from "@modules/stories/shared/lib";
 import { routes } from "@shared/config";
-import { useAppSelector, usePage } from "@shared/lib";
+import { useAppSelector } from "@shared/lib";
 import { Delay } from "@shared/ui";
 import { useTranslation } from "react-i18next";
 import * as C from "./ChaosBagPage.components";

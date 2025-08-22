@@ -3,12 +3,10 @@ import {
 	setInvestigatorBoards,
 } from "@modules/board/base/shared/lib";
 import { updateChaosBag } from "@modules/chaos-bag/base/entities/lib";
+import { goToPage } from "@modules/core/router/shared/lib";
 import type { ActionCreator } from "@reduxjs/toolkit";
-import {
-	replacePageTo,
-	setSelectedInvestigators,
-	setShowDescription,
-} from "@shared/lib";
+import { routes } from "@shared/config";
+import { setSelectedInvestigators, setShowDescription } from "@shared/lib";
 import type { AppThunk } from "@shared/model";
 import { selectGameInvestigatorBoards } from "../selectors";
 
@@ -28,5 +26,10 @@ export const startGame: ActionCreator<AppThunk> =
 			}),
 		);
 
-		dispatch(replacePageTo("/board"));
+		dispatch(
+			goToPage({
+				href: routes.board,
+				replace: true,
+			}),
+		);
 	};

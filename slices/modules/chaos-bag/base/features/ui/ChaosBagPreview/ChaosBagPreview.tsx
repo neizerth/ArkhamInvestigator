@@ -1,8 +1,9 @@
 import { toggleChaosTokenSeal } from "@modules/chaos-bag/base/entities/lib";
 import type { ChaosBagToken } from "@modules/chaos-bag/base/shared/model";
 import { startChaosBagReveal } from "@modules/chaos-bag/reveal/base/entities/lib";
+import { useGoBack } from "@modules/core/router/shared/lib";
 import { REMOVE_CLIPPED_SUBVIEWS } from "@shared/config";
-import { goBack, useAppDispatch } from "@shared/lib";
+import { useAppDispatch } from "@shared/lib";
 import { Delay } from "@shared/ui";
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
@@ -25,19 +26,17 @@ export const ChaosBagPreview = (props: ChaosBagPreviewProps) => {
 		[dispatch],
 	);
 
-	const onClose = useCallback(() => {
-		dispatch(goBack());
-	}, [dispatch]);
+	const back = useGoBack();
 
 	const reveal = useCallback(() => {
-		dispatch(goBack());
+		back();
 
 		dispatch(
 			startChaosBagReveal({
 				boardId: "current",
 			}),
 		);
-	}, [dispatch]);
+	}, [dispatch, back]);
 
 	const renderTokenRow = useCallback(
 		(info: ListRenderItemInfo<ChaosBagToken[]>) => {
@@ -62,12 +61,7 @@ export const ChaosBagPreview = (props: ChaosBagPreviewProps) => {
 	const actions = useModalActions();
 
 	return (
-		<C.Container
-			{...props}
-			title="Chaos Bag"
-			actions={actions}
-			onClose={onClose}
-		>
+		<C.Container {...props} title="Chaos Bag" actions={actions} onClose={back}>
 			<C.Content>
 				<Delay>
 					{isEmpty && <C.Hint>{t`Chaos bag is empty`}</C.Hint>}

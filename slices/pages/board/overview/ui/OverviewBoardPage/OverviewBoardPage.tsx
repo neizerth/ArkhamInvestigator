@@ -3,7 +3,8 @@ import {
 	selectCurrentInvestigatorIndex,
 	setCurrentInvestigatorIndex,
 } from "@modules/board/base/shared/lib";
-import { delay, goBack, useAppDispatch, useAppSelector } from "@shared/lib";
+import { useGoBack } from "@modules/core/router/shared/lib";
+import { delay, useAppDispatch, useAppSelector } from "@shared/lib";
 import { Fragment, useCallback } from "react";
 import * as C from "./OverviewBoardPage.components";
 
@@ -12,18 +13,16 @@ export const OverviewBoardPage = () => {
 	const ids = useAppSelector(selectBoardIds);
 	const currentIndex = useAppSelector(selectCurrentInvestigatorIndex);
 
-	const back = useCallback(() => {
-		dispatch(goBack());
-	}, [dispatch]);
+	const back = useGoBack();
 
 	const onSelect = useCallback(
 		(index: number) => () => {
-			dispatch(goBack());
+			back();
 			delay(100).then(() => {
 				dispatch(setCurrentInvestigatorIndex(index));
 			});
 		},
-		[dispatch],
+		[dispatch, back],
 	);
 
 	return (

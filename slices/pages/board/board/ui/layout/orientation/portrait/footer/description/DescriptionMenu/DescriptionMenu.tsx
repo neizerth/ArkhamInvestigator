@@ -1,8 +1,8 @@
+import { goToPage } from "@modules/core/router/shared/lib";
 import { changeSignatureDetails } from "@modules/signature/entities/lib/store/features/changeSignatureDetails/changeSignatureDetails";
 import { routes } from "@shared/config";
 import {
 	delay,
-	goToPage,
 	setReplaceInvestigator,
 	setShowDescription,
 	useAppDispatch,

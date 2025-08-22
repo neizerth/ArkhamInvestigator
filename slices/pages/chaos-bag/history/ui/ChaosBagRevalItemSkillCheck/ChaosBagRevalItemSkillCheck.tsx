@@ -4,12 +4,8 @@ import {
 } from "@modules/board/base/shared/lib";
 import { getSkillCheckDifficultyCharacter } from "@modules/board/skill-check/shared/lib";
 import type { ChaosBagHistoryItem } from "@modules/chaos-bag/base/shared/model";
-import {
-	goBack,
-	isNotEmpty,
-	useAppDispatch,
-	useAppSelector,
-} from "@shared/lib";
+import { goBack } from "@modules/core/router/shared/lib";
+import { isNotEmpty, useAppDispatch, useAppSelector } from "@shared/lib";
 import { isNumber } from "mathjs";
 import { useCallback } from "react";
 import type { ViewProps } from "react-native";

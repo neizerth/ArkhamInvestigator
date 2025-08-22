@@ -1,4 +1,4 @@
-import { goBack } from "@shared/lib";
+import { goBack } from "@modules/core/router/shared/lib";
 import { resetCurrentDetails } from "@shared/lib";
 import type { AppThunk } from "@shared/model";
 
