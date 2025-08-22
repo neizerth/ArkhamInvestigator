@@ -1,5 +1,5 @@
 import { selectInvestigatorBoardImages } from "@modules/board/base/shared/lib";
-import { getSignatureImageUrl } from "@modules/signature/shared/lib";
+import { getSignatureImageUrl } from "@modules/signature/shared/api";
 import { useAppSelector } from "@shared/lib";
 import type { InvestigatorImage } from "@shared/model";
 import { useEffect } from "react";
