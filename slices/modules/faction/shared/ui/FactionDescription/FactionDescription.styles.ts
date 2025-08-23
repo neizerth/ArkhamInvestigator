@@ -1,52 +1,75 @@
 import type { Faction } from "@shared/model";
 import { Platform } from "react-native";
-import type { RuleSet } from "styled-components";
 import { css } from "styled-components/native";
 
-export const descriptionSize = {
+export const factionDescriptionSize = {
 	width: 523,
 	height: 591,
 	ratio: 523 / 591,
 };
 
+type Offsets = {
+	paddingTop: number;
+
+	paddingBottom: number;
+	paddingLeft: number;
+	paddingRight: number;
+};
+
 const offsetY = Platform.OS === "ios" ? 4 : 0;
 
-export const getFactionStyle = (faction: Faction) => {
-	const ruleSet: Record<Faction, RuleSet> = {
-		neutral: css`
-      padding-left: 10%;
-      padding-right: 15%;
-      padding-bottom: ${offsetY + 2}%;
-    `,
-		mystic: css`
-      padding-top: 9%;
-      padding-left: 12%;
-      padding-right: 12%;
-      padding-bottom: ${offsetY + 4}%;
-    `,
-		rogue: css`
-      padding-top: 8%;
-      padding-left: 6%;
-      padding-right: 6%;
-      padding-bottom: ${offsetY + 2}%;
-    `,
-		survivor: css`
-      padding-left: 7%;
-      padding-right: 7%;
-      padding-bottom: ${offsetY + 2}%;
-    `,
-		seeker: css`
-      padding-top: 8%;
-      padding-left: 9%;
-      padding-right: 7%;
-      padding-bottom: ${offsetY + 2}%;
-    `,
-		guardian: css`
-      padding-left: 10%;
-      padding-right: 11%;
-      padding-bottom: ${offsetY + 2}%;
-    `,
-	};
+export const factionDescriptionRelativeOffsets: Record<Faction, Offsets> = {
+	neutral: {
+		paddingTop: 10,
+		paddingLeft: 10,
+		paddingRight: 15,
+		paddingBottom: offsetY + 2,
+	},
+	mystic: {
+		paddingTop: 9,
+		paddingLeft: 12,
+		paddingRight: 12,
+		paddingBottom: offsetY + 4,
+	},
+	rogue: {
+		paddingTop: 8,
+		paddingLeft: 6,
+		paddingRight: 6,
+		paddingBottom: offsetY + 2,
+	},
+	survivor: {
+		paddingTop: 10,
+		paddingLeft: 7,
+		paddingRight: 7,
+		paddingBottom: offsetY + 2,
+	},
+	seeker: {
+		paddingTop: 8,
+		paddingLeft: 9,
+		paddingRight: 7,
+		paddingBottom: offsetY + 2,
+	},
+	guardian: {
+		paddingTop: 10,
+		paddingLeft: 10,
+		paddingRight: 11,
+		paddingBottom: offsetY + 2,
+	},
+};
 
-	return ruleSet[faction];
+const toRuleSet = ({
+	paddingTop,
+	paddingBottom,
+	paddingLeft,
+	paddingRight,
+}: Offsets) => css`
+  padding-top: ${paddingTop}%;
+  padding-left: ${paddingLeft}%;
+  padding-right: ${paddingRight}%;
+  padding-bottom: ${paddingBottom}%;
+`;
+
+export const getFactionDescriptionStyle = (faction: Faction) => {
+	const offsets = factionDescriptionRelativeOffsets[faction];
+	return toRuleSet(offsets);
 };

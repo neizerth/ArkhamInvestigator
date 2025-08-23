@@ -14,7 +14,7 @@ function* worker({ payload }: ReturnType<typeof updateGameTextHeight>) {
 	const height: ReturnType<typeof heightSelector> =
 		yield select(heightSelector);
 
-	if (height || height === value) {
+	if (height === value) {
 		return;
 	}
 
