@@ -1,18 +1,17 @@
 import type { BoxLayout } from "@shared/model";
 import type { FC } from "react";
 import styled, { css } from "styled-components/native";
-import {
-	AnimatedSignatureImage,
-	type AnimatedSignatureImageProps,
-} from "../AnimatedSignatureImage";
+import { SignatureImage, type SignatureImageProps } from "../signature-image";
 
-export type SignatureBackgroundProps = AnimatedSignatureImageProps & {
+export type SignatureBackgroundProps = SignatureImageProps & {
 	layout: BoxLayout;
 };
 
 export const SignatureBackground: FC<SignatureBackgroundProps> = styled(
-	AnimatedSignatureImage,
-)`
+	SignatureImage,
+).attrs({
+	animated: true,
+})`
   position: absolute;
   ${({ layout }: SignatureBackgroundProps) => css`
     left: ${-layout.left}px;

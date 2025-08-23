@@ -1,3 +1,2 @@
-export * from "./StaticSignatureImage";
 export * from "./SignatureBackground";
-export * from "./AnimatedSignatureImage";
+export * from "./signature-image";
