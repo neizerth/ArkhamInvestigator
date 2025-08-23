@@ -1,6 +1,6 @@
 import { ArnoPro, STKaiti, Yoon } from "@assets/fonts";
 import { getKeyConfig } from "@shared/lib";
-import { boardText } from "../../../../config";
+import { boardText } from "../../config";
 
 export type GetStylesOptions = {
 	language: string;

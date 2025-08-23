@@ -1,3 +1,8 @@
+import {
+	InvestigatorFlavor,
+	InvestigatorText,
+	InvestigatorTraits,
+} from "@modules/board/base/entities/typography/ui";
 import { FactionDescription } from "@modules/faction/shared/ui";
 import { size } from "@shared/config";
 import { View } from "react-native";
@@ -5,11 +10,6 @@ import { ScrollView } from "react-native-gesture-handler";
 import Animated from "react-native-reanimated";
 import styled from "styled-components/native";
 import { TOP_CONTENT_OFFSET } from "../../../../../../../../config";
-import {
-	InvestigatorFlavor,
-	InvestigatorText,
-	InvestigatorTraits,
-} from "../../../../../../../shared";
 import { DescriptionMenu } from "../../DescriptionMenu";
 import { FooterDescriptionExpandArea } from "../../FooterDescriptionExpandArea";
 import { FooterTopContent } from "../../top";

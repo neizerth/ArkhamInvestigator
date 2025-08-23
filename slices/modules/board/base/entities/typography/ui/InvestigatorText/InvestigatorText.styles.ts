@@ -4,7 +4,7 @@ import { Yoon } from "@assets/fonts";
 import { type KeyConfig, getKeyConfig } from "@shared/lib";
 import type { ComponentStyleMap } from "@shared/ui";
 import type { TextStyle } from "react-native";
-import { boardText } from "../../../../config";
+import { boardText } from "../../config";
 
 const zhComponentStyles: ComponentStyleMap = {
 	i: {
