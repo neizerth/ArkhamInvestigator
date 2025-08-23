@@ -23,7 +23,6 @@ export type BoardState = {
 	showInvestigatorDoom: boolean;
 	tapToHidePins: boolean;
 	alwaysShowGameText: boolean;
-	gameTextHeight: number;
 	showInitialHealthAndSanity: boolean;
 	alwaysShowSkillModifiers: boolean;
 	allowNegativeHealthAndSanity: boolean;
@@ -67,7 +66,6 @@ const initialState: BoardState = {
 	doom: 0,
 	clues: 0,
 	resources: 0,
-	gameTextHeight: 0,
 };
 
 const state = createSliceState(initialState);
@@ -103,7 +101,6 @@ export const {
 	setShowInvestigatorDoom,
 	setTapToHidePins,
 	setAlwaysShowGameText,
-	setGameTextHeight,
 	setShowInitialHealthAndSanity,
 	setAlwaysShowSkillModifiers,
 	setAllowNegativeHealthAndSanity,
@@ -150,7 +147,6 @@ export const {
 	selectShowInvestigatorDoom,
 	selectTapToHidePins,
 	selectAlwaysShowGameText,
-	selectGameTextHeight,
 	selectShowInitialHealthAndSanity,
 	selectAlwaysShowSkillModifiers,
 	selectAllowNegativeHealthAndSanity,

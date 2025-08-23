@@ -2,7 +2,7 @@ import { selectBoardProp } from "@modules/board/base/shared/lib";
 import { useAppDispatch, useAppSelector, useLayoutSize } from "@shared/lib";
 import { useEffect } from "react";
 import { Dimensions } from "react-native";
-import { updateGameTextHeight } from "../store/features";
+import { updateGameTextSize } from "../store/features";
 
 const screen = Dimensions.get("screen");
 
@@ -13,23 +13,22 @@ export const useDescriptionLayout = () => {
 	const defaultValue = useAppSelector(
 		selectBoardProp({
 			boardId: "current",
-			prop: "gameTextHeight",
+			prop: "gameTextSize",
 		}),
 	);
-	const value = Math.round(size?.height ?? 0);
 
 	useEffect(() => {
-		if (defaultValue) {
+		if (defaultValue || !size) {
 			return;
 		}
 		dispatch(
-			updateGameTextHeight({
+			updateGameTextSize({
 				boardId: "current",
-				value,
+				value: size,
 				view: screen,
 			}),
 		);
-	}, [dispatch, value, defaultValue]);
+	}, [dispatch, size, defaultValue]);
 
 	return onLayout;
 };
