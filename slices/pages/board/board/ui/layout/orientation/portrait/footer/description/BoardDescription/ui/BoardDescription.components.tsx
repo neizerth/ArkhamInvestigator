@@ -10,9 +10,9 @@ import { ScrollView } from "react-native-gesture-handler";
 import Animated from "react-native-reanimated";
 import styled from "styled-components/native";
 import { TOP_CONTENT_OFFSET } from "../../../../../../../../config";
-import { DescriptionMenu } from "../../DescriptionMenu";
-import { FooterDescriptionExpandArea } from "../../FooterDescriptionExpandArea";
-import { FooterTopContent } from "../../top";
+import { BoardDescriptionExpandArea } from "../../BoardDescriptionExpandArea";
+import { BoardDescriptionMenu } from "../../BoardDescriptionMenu";
+import { BoardDescriptionTopContent } from "../../top";
 
 export const Container: typeof Animated.View = styled(Animated.View)`
   position: relative;
@@ -26,8 +26,8 @@ export const Background: typeof FactionDescription = styled(FactionDescription)`
 export const Content: typeof View = styled(View)`
 `;
 
-export const ExpandArea: typeof FooterDescriptionExpandArea = styled(
-	FooterDescriptionExpandArea,
+export const ExpandArea: typeof BoardDescriptionExpandArea = styled(
+	BoardDescriptionExpandArea,
 )`
 	position: absolute;
 	top: ${TOP_CONTENT_OFFSET}px;
@@ -37,7 +37,9 @@ export const ExpandArea: typeof FooterDescriptionExpandArea = styled(
   z-index: 10;
 `;
 
-export const TopContent: typeof FooterTopContent = styled(FooterTopContent)`
+export const TopContent: typeof BoardDescriptionTopContent = styled(
+	BoardDescriptionTopContent,
+)`
 
 `;
 
@@ -54,7 +56,7 @@ export const Description: typeof Animated.View = styled(Animated.View)`
 	
 `;
 
-export const Menu: typeof DescriptionMenu = styled(DescriptionMenu)`
+export const Menu: typeof BoardDescriptionMenu = styled(BoardDescriptionMenu)`
 
 `;
 

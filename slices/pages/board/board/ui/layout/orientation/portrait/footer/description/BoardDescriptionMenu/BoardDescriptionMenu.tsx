@@ -5,11 +5,11 @@ import { routes } from "@shared/config";
 import { delay, setReplaceInvestigator, useAppDispatch } from "@shared/lib";
 import { useCallback } from "react";
 import type { ViewProps } from "react-native-svg/lib/typescript/fabric/utils";
-import * as C from "./DescriptionMenu.components";
+import * as C from "./BoardDescriptionMenu.components";
 
-export type DescriptionMenuProps = ViewProps;
+export type BoardDescriptionMenuProps = ViewProps;
 
-export const DescriptionMenu = (props: DescriptionMenuProps) => {
+export const BoardDescriptionMenu = (props: BoardDescriptionMenuProps) => {
 	const dispatch = useAppDispatch();
 
 	const hide = useCallback(async () => {

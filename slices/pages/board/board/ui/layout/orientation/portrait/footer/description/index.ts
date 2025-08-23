@@ -1,4 +1,4 @@
-export * from "./DescriptionMenu";
-export * from "./FooterDescription";
-export * from "./FooterDescriptionExpandArea";
+export * from "./BoardDescriptionMenu";
+export * from "./BoardDescription";
+export * from "./BoardDescriptionExpandArea";
 export * from "./top";

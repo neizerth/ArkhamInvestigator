@@ -24,6 +24,7 @@ export const useGameText = () => {
 	const showSmallText =
 		show &&
 		boardsCount > 1 &&
+		!showDescription &&
 		(isLargeText || EASTERN_LANGUAGES.includes(language));
 
 	return {

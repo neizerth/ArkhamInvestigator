@@ -14,13 +14,13 @@ import {
 	useDescriptionGestures,
 	useGameText,
 } from "../lib";
-import * as C from "./FooterDescription.components";
+import * as C from "./BoardDescription.components";
 
 const screen = Dimensions.get("screen");
 const vw = (screen.width * 6) / 100;
 
-export type FooterDescriptionProps = ViewProps;
-export const FooterDescription = ({ ...props }: FooterDescriptionProps) => {
+export type BoardDescriptionProps = ViewProps;
+export const FooterDescription = ({ ...props }: BoardDescriptionProps) => {
 	const gameText = useGameText();
 	const onLayout = useDescriptionLayout();
 

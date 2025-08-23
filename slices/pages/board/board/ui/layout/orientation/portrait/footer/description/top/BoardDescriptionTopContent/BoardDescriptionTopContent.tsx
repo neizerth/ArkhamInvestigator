@@ -5,11 +5,13 @@ import {
 import { delay, useAppDispatch, useAppSelector } from "@shared/lib";
 import { useCallback, useEffect, useState } from "react";
 import type { ViewProps } from "react-native";
-import * as C from "./FooterTopContent.components";
+import * as C from "./BoardDescriptionTopContent.components";
 
-export type FooterTopContentProps = ViewProps;
+export type BoardDescriptionTopContentProps = ViewProps;
 
-export const FooterTopContent = (props: FooterTopContentProps) => {
+export const BoardDescriptionTopContent = (
+	props: BoardDescriptionTopContentProps,
+) => {
 	const dispatch = useAppDispatch();
 	const defaultShow = useAppSelector(selectShowDescription);
 
