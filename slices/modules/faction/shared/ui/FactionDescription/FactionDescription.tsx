@@ -2,20 +2,17 @@ import { descriptionImages } from "@assets/images/game/description";
 import { getBoxByRatio } from "@shared/lib/util/size/box";
 import type { PropsWithFaction } from "@shared/model";
 import type { ImageBackgroundProps } from "@shared/ui";
-import * as C from "./InvestigatorDescription.components";
-import { descriptionSize } from "./InvestigatorDescription.styles";
+import * as C from "./FactionDescription.components";
+import { descriptionSize } from "./FactionDescription.styles";
 
-export type InvestigatorDescriptionProps = Omit<
-	ImageBackgroundProps,
-	"source"
-> &
+export type FactionDescriptionProps = Omit<ImageBackgroundProps, "source"> &
 	PropsWithFaction;
 
-export const InvestigatorDescription = ({
+export const FactionDescription = ({
 	children,
 	faction,
 	...props
-}: InvestigatorDescriptionProps) => {
+}: FactionDescriptionProps) => {
 	const { width, height } = props;
 
 	const box = {

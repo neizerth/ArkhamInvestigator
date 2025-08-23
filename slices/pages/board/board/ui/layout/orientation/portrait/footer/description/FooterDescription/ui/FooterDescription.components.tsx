@@ -1,5 +1,5 @@
+import { FactionDescription } from "@modules/faction/shared/ui";
 import { size } from "@shared/config";
-import { InvestigatorDescription } from "@widgets/game/investigator";
 import { View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import Animated from "react-native-reanimated";
@@ -19,9 +19,7 @@ export const Container: typeof Animated.View = styled(Animated.View)`
  
 `;
 
-export const Background: typeof InvestigatorDescription = styled(
-	InvestigatorDescription,
-)`
+export const Background: typeof FactionDescription = styled(FactionDescription)`
 
 `;
 
