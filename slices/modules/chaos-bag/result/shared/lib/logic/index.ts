@@ -1,4 +1,3 @@
 export * from "./getSkillCheckResult";
-export * from "./getSkillCheckSucceedBy";
-export * from "./isAutoFail";
-export * from "./isAutoSuccess";
+export * from "./succeedBy";
+export * from "./auto";

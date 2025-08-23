@@ -1,6 +1,8 @@
 import {
 	selectAutoFailedBy,
 	selectAutoSucceedBy,
+	selectIsAutoFail,
+	selectIsAutoSuccess,
 	selectIsSkillCheckFailed,
 	selectSkillCheckResult,
 	selectSkillCheckSucceedBy,
@@ -17,6 +19,8 @@ export const selectSkillCheckData = createSelector(
 		selectIsSkillCheckFailed,
 		selectAutoFailedBy,
 		selectAutoSucceedBy,
+		selectIsAutoSuccess,
+		selectIsAutoFail,
 	],
 	(
 		currentResult,
@@ -24,11 +28,15 @@ export const selectSkillCheckData = createSelector(
 		failed,
 		autoFailedBy,
 		autoSucceedBy,
+		isAutoSuccess,
+		isAutoFail,
 	): SkillCheckPickerItem[] => {
 		const result = currentResult ?? 0;
 
-		const rawData = compact<SkillCheckPickerItem>([
-			{
+		const showValue = !isAutoFail && !isAutoSuccess;
+
+		const rawData = compact([
+			failed && {
 				type: "success",
 				succeedBy: autoSucceedBy,
 				value: result,
@@ -40,13 +48,13 @@ export const selectSkillCheckData = createSelector(
 				succeedBy,
 				value: result,
 			},
-			{
+			!failed && {
 				type: "fail",
 				failed: true,
 				succeedBy: autoFailedBy,
 				value: 0,
 			},
-		]);
+		]) as SkillCheckPickerItem[];
 
 		return uniqWith((a, b) => {
 			return a.failed === b.failed && a.succeedBy === b.succeedBy;

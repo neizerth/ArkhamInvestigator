@@ -1,8 +1,8 @@
 import type { SkillCheckDifficultyType } from "@modules/board/skill-check/shared/model";
 import type { RevealedChaosBagToken } from "@modules/chaos-bag/reveal/base/shared/model";
+import { isAutoFail } from "./auto/isAutoFail";
+import { isAutoSuccess } from "./auto/isAutoSuccess";
 import { getSkillCheckResult } from "./getSkillCheckResult";
-import { isAutoFail } from "./isAutoFail";
-import { isAutoSuccess } from "./isAutoSuccess";
 
 type Options = {
 	skillValue: number;
