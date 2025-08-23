@@ -1,12 +1,7 @@
-import type { BoxLayout } from "@shared/model";
 import { View } from "react-native";
 import Animated from "react-native-reanimated";
 import styled from "styled-components/native";
 import { StaticSignatureImage } from "../../StaticSignatureImage";
-
-type PropsWithLayout = {
-	layout: BoxLayout;
-};
 
 export const Container: typeof View = styled(View)`
   position: relative;
