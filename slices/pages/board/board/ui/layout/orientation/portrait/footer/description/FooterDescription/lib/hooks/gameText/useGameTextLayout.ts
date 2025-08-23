@@ -1,13 +1,9 @@
 import {
 	selectGameTextHeight,
+	selectShowDescription,
 	setGameTextHeight,
 } from "@modules/board/base/shared/lib";
-import {
-	selectShowDescription,
-	useAppDispatch,
-	useAppSelector,
-	useLayoutSize,
-} from "@shared/lib";
+import { useAppDispatch, useAppSelector, useLayoutSize } from "@shared/lib";
 import { useEffect, useRef } from "react";
 
 export const useGameTextLayout = () => {
@@ -18,10 +14,6 @@ export const useGameTextLayout = () => {
 	const showDescription = useAppSelector(selectShowDescription);
 
 	const maxHeight = useRef(Number.POSITIVE_INFINITY);
-
-	useEffect(() => {
-		maxHeight.current = Number.POSITIVE_INFINITY;
-	}, []);
 
 	useEffect(() => {
 		if (!size?.height) {

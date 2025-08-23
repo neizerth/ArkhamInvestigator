@@ -1,8 +1,5 @@
-import {
-	selectShowDescription,
-	useAppSelector,
-	useFadeAnimation,
-} from "@shared/lib";
+import { selectShowDescription } from "@modules/board/base/shared/lib";
+import { useAppSelector, useFadeAnimation } from "@shared/lib";
 import type { ViewProps } from "react-native";
 import * as C from "./Navbar.components";
 

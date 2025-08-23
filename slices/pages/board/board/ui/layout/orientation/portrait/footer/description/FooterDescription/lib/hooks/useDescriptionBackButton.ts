@@ -1,11 +1,9 @@
-import { useRoute } from "@react-navigation/native";
 import {
 	selectShowDescription,
 	setShowDescription,
-	useAppDispatch,
-	useAppSelector,
-	useBackButton,
-} from "@shared/lib";
+} from "@modules/board/base/shared/lib";
+import { useRoute } from "@react-navigation/native";
+import { useAppDispatch, useAppSelector, useBackButton } from "@shared/lib";
 import { useCallback } from "react";
 
 export const useDescriptionBackButton = () => {

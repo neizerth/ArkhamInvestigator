@@ -1,7 +1,10 @@
 import { goToPage } from "@modules/core/router/shared/lib";
-import { selectShowDescription, setShowDescription } from "@shared/lib";
 import { put, select, take, takeEvery } from "redux-saga/effects";
-import { descriptionHidden } from "../../shared/lib";
+import {
+	descriptionHidden,
+	selectShowDescription,
+	setShowDescription,
+} from "../../shared/lib";
 import { leaveBoard } from "./leaveBoard";
 
 function* worker({ payload }: ReturnType<typeof leaveBoard>) {

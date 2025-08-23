@@ -15,7 +15,6 @@ export type GameState = {
 	currentSkinId: string | null;
 	currentSignatureId: string | null;
 
-	showDescription: boolean;
 	showAdditionalInformation: boolean;
 	replaceInvestigator: boolean;
 };
@@ -24,7 +23,6 @@ const initialState: GameState = {
 	factionFilter: null,
 	selectedInvestigators: [],
 	currentSignatureGroup: null,
-	showDescription: false,
 	showAdditionalInformation: false,
 	replaceInvestigator: false,
 	currentSignatureId: null,
@@ -47,7 +45,6 @@ export const {
 	setCurrentSignatureGroup,
 	setInvestigatorSkin,
 	setInvestigatorSignature,
-	setShowDescription,
 	setReplaceInvestigator,
 	setShowAdditionalInformation,
 	setFactionFilter,
@@ -59,7 +56,6 @@ export const {
 export const {
 	selectSelectedInvestigators,
 	selectCurrentSignatureGroup,
-	selectShowDescription,
 	selectReplaceInvestigator,
 	selectShowAdditionalInformation,
 	selectFactionFilter,

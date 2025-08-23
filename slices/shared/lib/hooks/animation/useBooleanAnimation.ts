@@ -17,6 +17,7 @@ export type UseBooleanAnimationOptions<T extends DefaultStyle> = {
 	delayOut?: number;
 	styleResolver: (value: number) => T;
 	onComplete?: () => void;
+	onStart?: () => void;
 };
 
 export const useBooleanAnimation = <T extends DefaultStyle = DefaultStyle>({
@@ -29,6 +30,7 @@ export const useBooleanAnimation = <T extends DefaultStyle = DefaultStyle>({
 	delayIn,
 	delayOut,
 	onComplete,
+	onStart,
 }: UseBooleanAnimationOptions<T>) => {
 	const sharedValue = useSharedValue(minValue);
 
@@ -39,11 +41,12 @@ export const useBooleanAnimation = <T extends DefaultStyle = DefaultStyle>({
 	const trigger = useCallback(
 		async (value: number, delayMs = 0) => {
 			await delay(delayMs);
+			onStart?.();
 			sharedValue.value = value;
 			await delay(duration);
 			onComplete?.();
 		},
-		[sharedValue, duration, onComplete],
+		[sharedValue, duration, onComplete, onStart],
 	);
 
 	useEffect(() => {

@@ -1,12 +1,13 @@
 import {
 	setCurrentInvestigatorIndex,
 	setInvestigatorBoards,
+	setShowDescription,
 } from "@modules/board/base/shared/lib";
 import { updateChaosBag } from "@modules/chaos-bag/base/entities/lib";
 import { goToPage } from "@modules/core/router/shared/lib";
 import type { ActionCreator } from "@reduxjs/toolkit";
 import { routes } from "@shared/config";
-import { setSelectedInvestigators, setShowDescription } from "@shared/lib";
+import { setSelectedInvestigators } from "@shared/lib";
 import type { AppThunk } from "@shared/model";
 import { selectGameInvestigatorBoards } from "../selectors";
 

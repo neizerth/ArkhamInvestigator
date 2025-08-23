@@ -1,10 +1,12 @@
+import { selectDescriptionHeight } from "@modules/board/base/entities/description/lib";
 import {
 	descriptionHidden,
 	descriptionShown,
+	selectShowDescription,
+	setDescriptionTransition,
 } from "@modules/board/base/shared/lib";
 import { statusBarHeight } from "@shared/config";
 import {
-	selectShowDescription,
 	useAppDispatch,
 	useAppSelector,
 	useBooleanAnimation,
@@ -12,20 +14,25 @@ import {
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Dimensions, useWindowDimensions } from "react-native";
 import { descriptionSize } from "../../../../../../../../../config";
-import { useDescriptionHeight } from "../../../../../../../../../lib";
 
 const screen = Dimensions.get("screen");
 
 type Options = {
 	offsetTop?: number;
+	onShow?: () => void;
+	onHide?: () => void;
 };
 
 const DELAY_OUT = 300;
 
-export const useContainerAnimation = ({ offsetTop = 0 }: Options) => {
+export const useContainerAnimation = ({
+	offsetTop = 0,
+	onHide,
+	onShow,
+}: Options) => {
 	const dispatch = useAppDispatch();
 
-	const descriptionHeight = useDescriptionHeight();
+	const descriptionHeight = useAppSelector(selectDescriptionHeight("current"));
 	const showDescription = useAppSelector(selectShowDescription);
 	const window = useWindowDimensions();
 
@@ -54,12 +61,20 @@ export const useContainerAnimation = ({ offsetTop = 0 }: Options) => {
 	}, [showDescription]);
 
 	const onComplete = useCallback(() => {
-		const actionCreator = showDescription
-			? descriptionShown
-			: descriptionHidden;
+		if (showDescription) {
+			onShow?.();
+			dispatch(descriptionShown());
+		} else {
+			onHide?.();
+			dispatch(descriptionHidden());
+		}
 
-		dispatch(actionCreator());
-	}, [showDescription, dispatch]);
+		dispatch(setDescriptionTransition(false));
+	}, [showDescription, dispatch, onShow, onHide]);
+
+	const onStart = useCallback(() => {
+		dispatch(setDescriptionTransition(true));
+	}, [dispatch]);
 
 	const positionStyle = {
 		zIndex,
@@ -79,6 +94,7 @@ export const useContainerAnimation = ({ offsetTop = 0 }: Options) => {
 				top,
 			};
 		},
+		onStart,
 		onComplete,
 	});
 

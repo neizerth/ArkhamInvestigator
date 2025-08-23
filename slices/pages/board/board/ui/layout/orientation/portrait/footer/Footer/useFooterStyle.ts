@@ -1,9 +1,10 @@
+import { selectDescriptionHeight } from "@modules/board/base/entities/description/lib";
 import { navBarHeight, size } from "@shared/config";
+import { useAppSelector } from "@shared/lib";
 import type { ViewStyle } from "react-native";
-import { useDescriptionHeight } from "../../../../../../lib";
 
 export const useFooterStyle = () => {
-	const descriptionHeight = useDescriptionHeight();
+	const descriptionHeight = useAppSelector(selectDescriptionHeight("current"));
 
 	const container: ViewStyle = {
 		paddingBottom: descriptionHeight + size.gap.small + navBarHeight,

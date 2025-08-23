@@ -2,11 +2,12 @@ import {
 	selectAlwaysShowGameText,
 	selectBoardsCount,
 	selectCurrentBoardProp,
+	selectShowDescription,
 } from "@modules/board/base/shared/lib";
+import { EASTERN_LANGUAGES } from "@modules/core/i18n/shared/config";
 import { selectCurrentLanguage } from "@modules/core/i18n/shared/lib";
 import { CAN_ALWAYS_SHOW_GAME_TEXT } from "@shared/config";
-import { selectShowDescription, useAppSelector } from "@shared/lib";
-import { useGameTextLayout } from "./useGameTextLayout";
+import { useAppSelector } from "@shared/lib";
 
 export const useGameText = () => {
 	const alwaysShowText = useAppSelector(selectAlwaysShowGameText);
@@ -24,12 +25,10 @@ export const useGameText = () => {
 		show &&
 		!showDescription &&
 		boardsCount > 1 &&
-		(isLargeText || ["ko", "zh", "zh-cn"].includes(language));
-	const onLayout = useGameTextLayout();
+		(isLargeText || EASTERN_LANGUAGES.includes(language));
 
 	return {
 		show,
 		showSmallText,
-		onLayout,
 	};
 };
