@@ -4,7 +4,7 @@ import type { FC } from "react";
 import { View } from "react-native";
 import type { ViewProps } from "react-native";
 import styled, { css } from "styled-components/native";
-import { getFactionStyle } from "./FactionDescription.styles";
+import { getFactionDescriptionStyle } from "./FactionDescription.styles";
 
 export type BackgroundProps = ImageBackgroundProps & PropsWithBox;
 
@@ -26,7 +26,7 @@ export const Content: FC<ContentProps> = styled(View)`
 		return css`
       width: ${box.width}px;
       height: ${box.height}px;
-      ${getFactionStyle(faction)}
+      ${getFactionDescriptionStyle(faction)}
     `;
 	}}
  

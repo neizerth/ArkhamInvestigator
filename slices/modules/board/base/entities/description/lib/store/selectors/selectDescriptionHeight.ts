@@ -5,6 +5,7 @@ import {
 import type { BoardId } from "@modules/board/base/shared/model";
 import { createSelector } from "@reduxjs/toolkit";
 
+import { selectCurrentFaction } from "@modules/mechanics/board/base/entities/lib";
 import { getDescriptionHeight } from "../../logic";
 
 export const selectDescriptionHeight = (boardId: BoardId) =>
@@ -15,11 +16,13 @@ export const selectDescriptionHeight = (boardId: BoardId) =>
 				boardId,
 				prop: "gameTextHeight",
 			}),
+			selectCurrentFaction,
 		],
-		(showGameText, gameTextHeight) => {
+		(showGameText, gameTextHeight, faction) => {
 			return getDescriptionHeight({
 				showGameText,
 				gameTextHeight,
+				faction,
 			});
 		},
 	);
