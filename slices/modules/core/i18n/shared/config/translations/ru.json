@@ -182,6 +182,9 @@
 
 	"ability.agnes.parallel.modal.text": "Вылечить 1 рану?",
 
+	"ability.lily.elderSign.confirm.text": "Переверните 1 [[сломленную]] «Дисциплину» [[несломленной]] стороной вверх.",
+	"ability.lily.discipline.flip.unbroken": "{{name}} переворачивает [[сломленную]] {{discipline}} «Дисциплину» [[несломленной]] стороной вверх.",
+
 	"action.heal": "{{fromName}} лечит {{dativeName}} {{value}}",
 	"action.heal.self": "{{name}} лечит {{value}}",
 

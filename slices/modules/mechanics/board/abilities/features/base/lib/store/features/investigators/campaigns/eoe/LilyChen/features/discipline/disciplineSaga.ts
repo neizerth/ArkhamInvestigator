@@ -62,6 +62,6 @@ function* worker({ payload }: ReturnType<typeof changeBoardHistoryAbilityUse>) {
 	}
 }
 
-export function* LilyChenAbilitySaga() {
+export function* LilyChenDisciplineAbilitySaga() {
 	yield takeEvery(changeBoardHistoryAbilityUse.match, worker);
 }

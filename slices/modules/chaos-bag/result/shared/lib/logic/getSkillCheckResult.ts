@@ -1,6 +1,6 @@
 import type { RevealedChaosBagToken } from "@modules/chaos-bag/reveal/base/shared/model";
 import { isAutoFail } from "./auto/isAutoFail";
-import { includeChaosTokenInResult } from "./includeChaosTokenInResult";
+import { isRevealedTokenActive } from "./isRevealedTokenActive";
 
 type Options = {
 	skillValue: number;
@@ -9,7 +9,7 @@ type Options = {
 
 export const getSkillCheckResult = (options: Options): number => {
 	const { skillValue } = options;
-	const tokens = options.tokens.filter(includeChaosTokenInResult);
+	const tokens = options.tokens.filter(isRevealedTokenActive);
 
 	if (isAutoFail({ tokens })) {
 		return 0;

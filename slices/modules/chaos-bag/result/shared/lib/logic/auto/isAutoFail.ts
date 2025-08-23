@@ -1,6 +1,6 @@
 import type { RevealedChaosBagToken } from "@modules/chaos-bag/reveal/base/shared/model";
 import { propEq } from "ramda";
-import { includeChaosTokenInResult } from "../includeChaosTokenInResult";
+import { isRevealedTokenActive } from "../isRevealedTokenActive";
 
 type Options = {
 	tokens: RevealedChaosBagToken[];
@@ -8,7 +8,7 @@ type Options = {
 
 export const isAutoFail = ({ tokens }: Options) => {
 	const containsAutoFail = tokens
-		.filter(includeChaosTokenInResult)
+		.filter(isRevealedTokenActive)
 		.some(({ value }) => value === "fail");
 
 	if (containsAutoFail) {

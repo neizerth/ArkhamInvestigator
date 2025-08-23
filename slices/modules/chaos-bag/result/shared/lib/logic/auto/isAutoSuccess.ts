@@ -1,5 +1,5 @@
 import type { RevealedChaosBagToken } from "@modules/chaos-bag/reveal/base/shared/model";
-import { includeChaosTokenInResult } from "../includeChaosTokenInResult";
+import { isRevealedTokenActive } from "../isRevealedTokenActive";
 
 type Options = {
 	tokens: RevealedChaosBagToken[];
@@ -7,6 +7,6 @@ type Options = {
 
 export const isAutoSuccess = ({ tokens }: Options) => {
 	return tokens
-		.filter(includeChaosTokenInResult)
+		.filter(isRevealedTokenActive)
 		.some(({ value }) => value === "success");
 };

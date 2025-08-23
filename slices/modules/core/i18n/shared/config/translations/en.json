@@ -180,6 +180,9 @@
 
 	"ability.agnes.parallel.modal.text": "Heal 1 damage?",
 
+	"ability.lily.elderSign.confirm.text": "flip a [[Broken]] Discipline you control to its [[Unbroken]] side.",
+	"ability.lily.discipline.flip.unbroken": "{{name}} flips [[Broken]] Discipline {{discipline}} to its [[Unbroken]] side.",
+
 	"action.heal": "{{fromName}} heals {{dativeName}} {{value}}",
 	"action.heal.self": "{{name}} heals {{value}}",
 
