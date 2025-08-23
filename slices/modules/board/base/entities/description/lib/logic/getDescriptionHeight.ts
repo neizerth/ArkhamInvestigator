@@ -26,12 +26,13 @@ export const getDescriptionHeight = ({
 	const gameTextWidth = gameTextSize?.width ?? 0;
 
 	const offsets = factionDescriptionRelativeOffsets[faction];
-	const k = 100 - offsets.paddingLeft - offsets.paddingRight;
-	const width = (gameTextWidth * k) / 100;
+	const width = gameTextWidth;
 
 	const imageHeight = width / factionDescriptionSize.ratio;
 
-	const offsetTop = Math.round((imageHeight * offsets.paddingTop) / 100);
+	const offsetTop = Math.round(
+		(imageHeight * (offsets.paddingTop + offsets.paddingBottom)) / 100,
+	);
 
 	const gap = offsetTop + navBarHeight;
 

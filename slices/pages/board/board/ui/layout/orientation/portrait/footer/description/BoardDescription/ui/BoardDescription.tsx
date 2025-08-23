@@ -1,37 +1,47 @@
-import { useDescriptionLayout } from "@modules/board/base/entities/description/lib";
+import { selectDescriptionTextSize } from "@modules/board/base/entities/description/lib";
 import {
+	selectAlwaysShowGameText,
 	selectCurrentBoardProp,
 	selectShowDescription,
 } from "@modules/board/base/shared/lib";
 import { selectCurrentFaction } from "@modules/mechanics/board/base/entities/lib";
+import { CAN_ALWAYS_SHOW_GAME_TEXT } from "@shared/config";
 import { useAppSelector, useFadeAnimation } from "@shared/lib";
-import { Dimensions, View, type ViewProps } from "react-native";
+import { Dimensions, type ViewProps } from "react-native";
 import { GestureDetector } from "react-native-gesture-handler";
-import { TOP_CONTENT_OFFSET } from "../../../../../../../../config";
+import {
+	TOP_CONTENT_OFFSET,
+	DESCRIPTION_TEXT_UNIT_SIZE as vw,
+} from "../../../../../../../../config";
 import {
 	useContainerAnimation,
 	useDescriptionBackButton,
 	useDescriptionGestures,
-	useGameText,
 } from "../lib";
 import * as C from "./BoardDescription.components";
 
 const screen = Dimensions.get("screen");
-const vw = (screen.width * 6) / 100;
 
 export type BoardDescriptionProps = ViewProps;
-export const FooterDescription = ({ ...props }: BoardDescriptionProps) => {
-	const gameText = useGameText();
-	const onLayout = useDescriptionLayout();
+export const BoardDescription = ({ ...props }: BoardDescriptionProps) => {
+	const alwaysShowText = useAppSelector(selectAlwaysShowGameText);
+
+	const show = alwaysShowText && CAN_ALWAYS_SHOW_GAME_TEXT;
 
 	const showDescription = useAppSelector(selectShowDescription);
+	const textUnit = useAppSelector(
+		selectDescriptionTextSize({
+			boardId: "current",
+			unit: vw,
+		}),
+	);
 
 	const investigator = useAppSelector(selectCurrentBoardProp("investigator"));
 	const faction = useAppSelector(selectCurrentFaction);
 
 	useDescriptionBackButton();
 
-	const showText = showDescription || gameText.show;
+	const showText = showDescription || show;
 
 	const descriptionStyle = useFadeAnimation({
 		show: showText,
@@ -43,10 +53,8 @@ export const FooterDescription = ({ ...props }: BoardDescriptionProps) => {
 
 	const gesture = useDescriptionGestures();
 
-	const showFlavor = investigator.flavor && (!gameText.show || showDescription);
-	const showTraits = !gameText.show || showDescription;
-
-	const textUnit = gameText.showSmallText ? vw * 0.9 : vw;
+	const showFlavor = investigator.flavor && (!show || showDescription);
+	const showTraits = !show || showDescription;
 
 	return (
 		<C.Container {...props} style={[props.style, containerStyle]}>
@@ -61,13 +69,7 @@ export const FooterDescription = ({ ...props }: BoardDescriptionProps) => {
 									<C.Traits unit={vw} investigator={investigator} />
 								)}
 								<C.Description style={descriptionStyle}>
-									{showDescription ? (
-										<C.Text investigator={investigator} unit={vw} />
-									) : (
-										<View onLayout={onLayout}>
-											<C.Text investigator={investigator} unit={textUnit} />
-										</View>
-									)}
+									<C.Text investigator={investigator} unit={textUnit} />
 									{showFlavor && (
 										<C.Flavor unit={vw} investigator={investigator} />
 									)}

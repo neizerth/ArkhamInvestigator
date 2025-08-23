@@ -1,18 +1,19 @@
 import { selectBoardProp } from "@modules/board/base/shared/lib";
+import type { BoardId } from "@modules/board/base/shared/model";
 import { useAppDispatch, useAppSelector, useLayoutSize } from "@shared/lib";
 import { useEffect } from "react";
 import { Dimensions } from "react-native";
-import { updateGameTextSize } from "../store/features";
+import { updateGameTextSize } from "../../../entities/description/lib/store/features";
 
 const screen = Dimensions.get("screen");
 
-export const useDescriptionLayout = () => {
+export const useDescriptionLayout = (boardId: BoardId) => {
 	const dispatch = useAppDispatch();
 
 	const [size, onLayout] = useLayoutSize();
 	const defaultValue = useAppSelector(
 		selectBoardProp({
-			boardId: "current",
+			boardId,
 			prop: "gameTextSize",
 		}),
 	);
@@ -23,12 +24,12 @@ export const useDescriptionLayout = () => {
 		}
 		dispatch(
 			updateGameTextSize({
-				boardId: "current",
+				boardId,
 				value: size,
 				view: screen,
 			}),
 		);
-	}, [dispatch, size, defaultValue]);
+	}, [dispatch, size, defaultValue, boardId]);
 
 	return onLayout;
 };
