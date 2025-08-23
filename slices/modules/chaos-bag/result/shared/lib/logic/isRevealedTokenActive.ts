@@ -1,6 +1,6 @@
 import type { RevealedChaosBagToken } from "@modules/chaos-bag/reveal/base/shared/model";
 
-export const includeChaosTokenInResult = ({
+export const isRevealedTokenActive = ({
 	sealed,
 	canceled,
 	removed,
