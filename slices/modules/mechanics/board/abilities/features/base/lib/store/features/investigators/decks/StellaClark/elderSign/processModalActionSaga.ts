@@ -38,7 +38,7 @@ function* worker({ payload }: ReturnType<typeof modalConfirmed>) {
 	yield put(
 		setBoardAbilityUse({
 			boardId,
-			abilityId: AbilityCode.StellaClark,
+			abilityId: AbilityCode.StellaClark.elderSign,
 			canUse: false,
 		}),
 	);
@@ -67,6 +67,10 @@ function* worker({ payload }: ReturnType<typeof modalConfirmed>) {
 				},
 			}),
 		);
+	}
+
+	if (!healDamage && !healHorror) {
+		return;
 	}
 
 	const t = {

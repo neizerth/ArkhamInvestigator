@@ -3,7 +3,7 @@ import { createAbilityTokenValues } from "@modules/mechanics/chaos-bag/value/sha
 import type { InvestigatorTokenValueModification } from "@modules/mechanics/chaos-bag/value/shared/model";
 import { InvesigatorCode } from "@modules/mechanics/investigator/entities/config";
 
-const abilityId = AbilityCode.StellaClark;
+const abilityId = AbilityCode.StellaClark.elderSign;
 
 export const StellaClarkTokenValues: InvestigatorTokenValueModification = {
 	[InvesigatorCode.StellaClark]: ({ board, boards }) => {

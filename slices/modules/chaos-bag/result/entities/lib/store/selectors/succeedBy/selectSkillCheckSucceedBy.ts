@@ -3,9 +3,10 @@ import {
 	selectSkillCheckDifficulty,
 	selectSkillCheckDifficultyType,
 } from "@modules/board/skill-check/shared/lib";
+import { selectAllRevealedTokens } from "@modules/chaos-bag/reveal/base/shared/lib";
 import { createSelector } from "@reduxjs/toolkit";
-import { getSkillCheckSucceedBy } from "../../../../shared/lib/logic";
-import { selectSkillCheckResult } from "./selectSkillCheckResult";
+import { getSkillCheckSucceedBy } from "../../../../../shared/lib/logic";
+import { selectSkillCheckResult } from "../selectSkillCheckResult";
 
 export const selectSkillCheckSucceedBy = createSelector(
 	[
@@ -13,8 +14,10 @@ export const selectSkillCheckSucceedBy = createSelector(
 
 		selectSkillCheckDifficultyType,
 		selectSkillCheckResult,
+
+		selectAllRevealedTokens,
 	],
-	(currentDifficulty, currentDifficultyType, result) => {
+	(currentDifficulty, currentDifficultyType, result, tokens) => {
 		if (result === null) {
 			return 0;
 		}
@@ -27,6 +30,7 @@ export const selectSkillCheckSucceedBy = createSelector(
 			difficulty,
 			result,
 			difficultyType,
+			tokens,
 		});
 	},
 );

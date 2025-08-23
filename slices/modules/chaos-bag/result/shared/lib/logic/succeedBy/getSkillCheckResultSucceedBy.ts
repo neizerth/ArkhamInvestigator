@@ -6,7 +6,7 @@ type Options = {
 	difficultyType: SkillCheckDifficultyType;
 };
 
-export const getSkillCheckSucceedBy = ({
+export const getSkillCheckResultSucceedBy = ({
 	result,
 	difficulty,
 	difficultyType,

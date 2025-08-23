@@ -1,6 +1,6 @@
 import type { RevealedChaosBagToken } from "@modules/chaos-bag/reveal/base/shared/model";
+import { isAutoFail } from "./auto/isAutoFail";
 import { includeChaosTokenInResult } from "./includeChaosTokenInResult";
-import { isAutoFail } from "./isAutoFail";
 
 type Options = {
 	skillValue: number;

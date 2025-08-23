@@ -38,7 +38,9 @@ export const AbilityCode = {
 		base: "auto-fail-for-3-cards",
 	},
 
-	StellaClark: "autofail-to-heal-horror-and-damage",
+	StellaClark: {
+		elderSign: "autofail-to-heal-horror-and-damage",
+	},
 };
 
 export const LilyChenAbilityCodes = Object.values(AbilityCode.LilyChen);
@@ -51,13 +53,14 @@ export const specialAbilitityCodes = [
 	AbilityCode.DanielaReyes,
 	AbilityCode.PrestonFairmont.elderSign,
 	AbilityCode.RexMurphy.base,
-	AbilityCode.StellaClark,
+	AbilityCode.StellaClark.elderSign,
 	...LilyChenAbilityCodes,
 ];
 
 export const hiddenAbilityCodes = [
 	AbilityCode.PrestonFairmont.elderSign,
 	AbilityCode.RexMurphy.base,
+	AbilityCode.StellaClark.elderSign,
 ];
 
 export const checkAbilityCodes = [

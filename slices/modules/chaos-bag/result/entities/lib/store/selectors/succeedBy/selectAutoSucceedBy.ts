@@ -3,8 +3,8 @@ import {
 	selectSkillCheckDifficultyType,
 } from "@modules/board/skill-check/shared/lib";
 import { createSelector } from "@reduxjs/toolkit";
-import { getSkillCheckSucceedBy } from "../../../../shared/lib/logic";
-import { selectSkillCheckResult } from "./selectSkillCheckResult";
+import { getSkillCheckResultSucceedBy } from "../../../../../shared/lib/logic";
+import { selectSkillCheckResult } from "../selectSkillCheckResult";
 
 export const selectAutoSucceedBy = createSelector(
 	[selectSkillCheckResult, selectSkillCheckDifficultyType],
@@ -16,7 +16,7 @@ export const selectAutoSucceedBy = createSelector(
 			currentDifficultyType,
 		);
 
-		return getSkillCheckSucceedBy({
+		return getSkillCheckResultSucceedBy({
 			difficulty: 0,
 			difficultyType,
 			result,
