@@ -2,7 +2,7 @@ import type { BoxLayout } from "@shared/model";
 import { View } from "react-native";
 import Animated from "react-native-reanimated";
 import styled from "styled-components/native";
-import { SignatureImage } from "../../SignatureImage";
+import { StaticSignatureImage } from "../../StaticSignatureImage";
 
 type PropsWithLayout = {
 	layout: BoxLayout;
@@ -29,7 +29,7 @@ export const GrayscaleContainer: typeof AnimatedContainer = styled(
   opacity: 0;
 `;
 
-export const Image: typeof SignatureImage = styled(SignatureImage)`
+export const Image: typeof StaticSignatureImage = styled(StaticSignatureImage)`
   z-index: 1;
 `;
 

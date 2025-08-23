@@ -5,10 +5,10 @@ import {
 	getSignatureImageUrl,
 } from "../../api";
 
-export type SignatureImageProps = Omit<ImageProps, "source"> &
+export type StaticSignatureImageProps = Omit<ImageProps, "source"> &
 	GetSignatureImageUrlOptions;
 
-export const SignatureImage = (props: SignatureImageProps) => {
+export const StaticSignatureImage = (props: StaticSignatureImageProps) => {
 	const sourceProps = pick(["code", "type", "grayscale", "pathType"], props);
 	const source = {
 		uri: getSignatureImageUrl(sourceProps),
