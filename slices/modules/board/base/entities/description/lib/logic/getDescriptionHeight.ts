@@ -33,7 +33,7 @@ export const getDescriptionHeight = ({
 
 	const offsetTop = Math.round((imageHeight * offsets.paddingTop) / 100);
 
-	const gap = isNavbarVisible ? navBarHeight - 5 : offsetTop + 50;
+	const gap = isNavbarVisible ? navBarHeight - 5 : offsetTop;
 
 	const fullHeight = gameTextHeight + gap;
 

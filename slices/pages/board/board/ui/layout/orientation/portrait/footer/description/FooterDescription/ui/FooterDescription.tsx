@@ -5,7 +5,7 @@ import {
 } from "@modules/board/base/shared/lib";
 import { selectCurrentFaction } from "@modules/mechanics/board/base/entities/lib";
 import { useAppSelector, useFadeAnimation } from "@shared/lib";
-import { Dimensions, type ViewProps } from "react-native";
+import { Dimensions, View, type ViewProps } from "react-native";
 import { GestureDetector } from "react-native-gesture-handler";
 import { TOP_CONTENT_OFFSET } from "../../../../../../../../config";
 import {
@@ -60,8 +60,14 @@ export const FooterDescription = ({ ...props }: FooterDescriptionProps) => {
 								{showTraits && (
 									<C.Traits unit={vw} investigator={investigator} />
 								)}
-								<C.Description style={descriptionStyle} onLayout={onLayout}>
-									<C.Text investigator={investigator} unit={textUnit} />
+								<C.Description style={descriptionStyle}>
+									{showDescription ? (
+										<C.Text investigator={investigator} unit={vw} />
+									) : (
+										<View onLayout={onLayout}>
+											<C.Text investigator={investigator} unit={textUnit} />
+										</View>
+									)}
 									{showFlavor && (
 										<C.Flavor unit={vw} investigator={investigator} />
 									)}
