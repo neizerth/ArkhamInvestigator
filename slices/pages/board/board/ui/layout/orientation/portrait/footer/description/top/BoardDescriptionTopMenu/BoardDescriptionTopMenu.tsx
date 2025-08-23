@@ -4,16 +4,18 @@ import { routes } from "@shared/config";
 import { useAppDispatch } from "@shared/lib";
 import { useCallback } from "react";
 import type { ViewProps } from "react-native";
-import * as C from "./DescriptionTopMenu.components";
+import * as C from "./BoardDescriptionTopMenu.components";
 
-export type DescriptionTopMenuProps = ViewProps;
+export type BoardDescriptionTopMenuProps = ViewProps;
 
 const homeRoute = {
 	href: routes.home,
 	replace: true,
 };
 
-export const DescriptionTopMenu = ({ ...props }: DescriptionTopMenuProps) => {
+export const BoardDescriptionTopMenu = ({
+	...props
+}: BoardDescriptionTopMenuProps) => {
 	const dispatch = useAppDispatch();
 
 	const goToPage = useLeaveBoard();

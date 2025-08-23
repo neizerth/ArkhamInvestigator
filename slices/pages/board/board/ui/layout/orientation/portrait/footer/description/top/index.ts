@@ -1,3 +1,3 @@
-export * from "./FooterTopContent";
-export * from "./SecondaryControls";
-export * from "./DescriptionTopMenu";
+export * from "./BoardDescriptionTopContent";
+export * from "./BoardDescriptionSecondaryControls";
+export * from "./BoardDescriptionTopMenu";

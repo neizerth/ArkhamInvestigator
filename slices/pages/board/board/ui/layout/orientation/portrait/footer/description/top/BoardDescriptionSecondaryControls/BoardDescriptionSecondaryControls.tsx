@@ -10,11 +10,13 @@ import {
 	ScenarioDoom,
 	ScenarioResources,
 } from "../../../../../../../shared";
-import * as C from "./SecondaryControls.components";
+import * as C from "./BoardDescriptionSecondaryControls.components";
 
-export type SecondaryControlsProps = ViewProps;
+export type BoardDescriptionSecondaryControlsProps = ViewProps;
 
-export const SecondaryControls = (props: SecondaryControlsProps) => {
+export const BoardDescriptionSecondaryControls = (
+	props: BoardDescriptionSecondaryControlsProps,
+) => {
 	const showDoom = useAppSelector(selectShowDoom);
 	const showResources = useAppSelector(selectShowScenarioResources);
 	const showClues = useAppSelector(selectShowScenarioClues);

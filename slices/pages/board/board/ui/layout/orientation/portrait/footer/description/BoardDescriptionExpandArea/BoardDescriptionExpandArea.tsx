@@ -6,12 +6,12 @@ import { useAppDispatch } from "@shared/lib";
 import { useCallback } from "react";
 import type { ViewProps } from "react-native";
 import { Gesture, GestureDetector } from "react-native-gesture-handler";
-import * as C from "./FooterDescriptionExpandArea.components";
+import * as C from "./BoardDescriptionExpandArea.components";
 
-export type FooterDescriptionExpandAreaProps = ViewProps;
+export type BoardDescriptionExpandAreaProps = ViewProps;
 
-export const FooterDescriptionExpandArea = (
-	props: FooterDescriptionExpandAreaProps,
+export const BoardDescriptionExpandArea = (
+	props: BoardDescriptionExpandAreaProps,
 ) => {
 	const dispatch = useAppDispatch();
 
