@@ -50,6 +50,7 @@ module.exports = {
         },
       ],
       "expo-asset",
+      ["react-native-edge-to-edge"],
     ],
     experiments: {
       typedRoutes: true,
