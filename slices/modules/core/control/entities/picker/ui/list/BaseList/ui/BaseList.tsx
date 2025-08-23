@@ -7,10 +7,10 @@ import { isObject, useAppSelector } from "@shared/lib";
 import { memo, useCallback, useMemo } from "react";
 import type { ListRenderItemInfo } from "react-native";
 import { getDataOffsets, getValueIndex } from "../../../../lib";
+import useBaseListHooks from "../lib";
+import type { BaseListItemValue, BaseListProps } from "../model/common";
 import * as C from "./BaseList.components";
-import type { BaseListItemValue, BaseListProps } from "./BaseList.types";
 import { defaultRenderItemContainer } from "./defaultRenderItemContainer";
-import useBaseListHooks from "./hooks";
 
 export function BaseList<T>(baseProps: BaseListProps<T>) {
 	const props = useBaseListHooks(baseProps);

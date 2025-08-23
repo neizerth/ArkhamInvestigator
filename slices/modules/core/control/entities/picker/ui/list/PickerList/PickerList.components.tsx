@@ -1,6 +1,6 @@
 import { View } from "react-native";
 import styled from "styled-components/native";
-import { type BaseList, BaseListMemo } from "../base/BaseList";
+import { type BaseList, BaseListMemo } from "../BaseList";
 
 export const Container: typeof View = styled(View)`
   overflow: hidden;

@@ -1,7 +1,7 @@
 import type { PickerScrollEvent } from "@modules/core/control/entities/picker/model";
 import { useCallback, useRef } from "react";
 import type { GestureResponderEvent } from "react-native";
-import type { BaseListProps } from "../../BaseList.types";
+import type { BaseListProps } from "../../model";
 
 export function useUserActivation<T>(props: BaseListProps<T>) {
 	const {
