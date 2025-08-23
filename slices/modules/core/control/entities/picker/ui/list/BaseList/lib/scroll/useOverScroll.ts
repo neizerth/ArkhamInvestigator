@@ -1,8 +1,8 @@
 import { useCallback, useRef } from "react";
 import type { GestureResponderEvent } from "react-native";
-import { OVERSCROLL_TRESHOLD } from "../../../../../../config";
-import { getValueIndex } from "../../../../../../lib";
-import type { BaseListProps } from "../../BaseList.types";
+import { OVERSCROLL_TRESHOLD } from "../../../../../config";
+import { getValueIndex } from "../../../../../lib";
+import type { BaseListProps } from "../../model";
 
 export function useOverScroll<T>(props: BaseListProps<T>) {
 	const {

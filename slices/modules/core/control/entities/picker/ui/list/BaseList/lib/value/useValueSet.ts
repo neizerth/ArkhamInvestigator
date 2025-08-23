@@ -2,9 +2,9 @@ import { runLater } from "@shared/lib";
 import { always } from "ramda";
 import { useCallback, useEffect, useRef } from "react";
 import type { FlatList, GestureResponderEvent } from "react-native";
-import { getValueIndex } from "../../../../../../lib";
-import type { PickerScrollEvent } from "../../../../../../model";
-import type { BaseListProps } from "../../BaseList.types";
+import { getValueIndex } from "../../../../../lib";
+import type { PickerScrollEvent } from "../../../../../model";
+import type { BaseListProps } from "../../model";
 
 const getInactiveState = always(false);
 

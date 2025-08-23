@@ -1,7 +1,7 @@
 import { useCallback, useRef } from "react";
 import type { GestureResponderEvent } from "react-native";
-import type { PickerScrollEvent } from "../../../../../model";
-import type { BaseListProps } from "../BaseList.types";
+import type { PickerScrollEvent } from "../../../../model";
+import type { BaseListProps } from "../model";
 
 export function usePressEvents<T>(props: BaseListProps<T>) {
 	const {

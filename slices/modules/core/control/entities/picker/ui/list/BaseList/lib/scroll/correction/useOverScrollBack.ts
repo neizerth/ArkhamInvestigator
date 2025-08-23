@@ -3,10 +3,10 @@ import type {
 	PickerScrollEvent,
 	PickerStartReachedEvent,
 } from "@modules/core/control/entities/picker/model";
-import type { PickerScrollDirection } from "@modules/core/control/entities/picker/model/common";
+import type { PickerScrollDirection } from "@modules/core/control/entities/picker/model";
 import { useScrollToIndex } from "@shared/lib";
 import { useCallback, useRef } from "react";
-import type { BaseListProps } from "../../../BaseList.types";
+import type { BaseListProps } from "../../../model";
 
 export function useOverScrollBack<T>(props: BaseListProps<T>) {
 	const {

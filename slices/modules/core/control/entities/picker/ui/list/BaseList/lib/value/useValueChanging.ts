@@ -1,9 +1,9 @@
 import { getValueIndex } from "@modules/core/control/entities/picker/lib";
 import type { PickerScrollEvent } from "@modules/core/control/entities/picker/model";
-import type { PickerScrollDirection } from "@modules/core/control/entities/picker/model/common";
+import type { PickerScrollDirection } from "@modules/core/control/entities/picker/model";
 import { range } from "ramda";
 import { useCallback, useRef } from "react";
-import type { BaseListProps } from "../../BaseList.types";
+import type { BaseListProps } from "../../model";
 
 export function useValueChanging<T>(props: BaseListProps<T>) {
 	const {
