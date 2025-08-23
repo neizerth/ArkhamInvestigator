@@ -2,10 +2,10 @@ import {
 	selectPickerDecelerationType,
 	selectPickerIntervalMomentum,
 } from "@modules/board/base/shared/lib";
+import { REMOVE_CLIPPED_SUBVIEWS } from "@shared/config";
 import { isObject, useAppSelector } from "@shared/lib";
 import { memo, useCallback, useMemo } from "react";
 import type { ListRenderItemInfo } from "react-native";
-import { REMOVE_CLIPPED_SUBVIEWS } from "../../../../../../../shared/config/device";
 import { getDataOffsets, getValueIndex } from "../../../../lib";
 import * as C from "./BaseList.components";
 import type { BaseListItemValue, BaseListProps } from "./BaseList.types";

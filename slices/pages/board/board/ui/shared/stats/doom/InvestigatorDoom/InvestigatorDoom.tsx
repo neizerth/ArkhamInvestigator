@@ -3,9 +3,9 @@ import {
 	selectCurrentActualPropValue,
 	setCurrentActualPropValue,
 } from "@modules/board/base/shared/lib";
+import type { PickerChangeEvent } from "@modules/core/control/entities/picker/model";
 import { useAppDispatch, useAppSelector } from "@shared/lib";
 import type { DoomProps } from "@shared/ui";
-import type { PickerChangeEvent } from "@widgets/control/picker";
 import { range } from "ramda";
 import { useCallback } from "react";
 import * as C from "./InvestigatorDoom.components";

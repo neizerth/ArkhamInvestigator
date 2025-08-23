@@ -3,9 +3,9 @@ import {
 	increaseBoardActualPropValue,
 	setBoardActualPropValue,
 } from "@modules/board/base/shared/lib";
+import type { PickerChangeEvent } from "@modules/core/control/entities/picker/model";
 import { useAppDispatch } from "@shared/lib";
 import type { InvestigatorBoardNumericStat } from "@shared/model";
-import type { PickerChangeEvent } from "@widgets/control/picker";
 import { useCallback } from "react";
 
 export const useValueControl = (boardId: number) => {

@@ -4,14 +4,14 @@ import {
 	setSkillCheckDifficulty,
 	toggleSkillCheckDifficultyType,
 } from "@modules/board/skill-check/shared/lib";
+import type {
+	PickerChangeEvent,
+	PickerListRenderItem,
+} from "@modules/core/control/entities/picker/model";
 import { useAppDispatch, useAppSelector } from "@shared/lib";
 import { range } from "ramda";
 import { useCallback } from "react";
 import type { ViewProps } from "react-native";
-import type {
-	PickerChangeEvent,
-	PickerListRenderItem,
-} from "../../../../../../../../../../widgets/control/picker";
 import * as C from "./DifficultyControl.components";
 
 export type DifficultyControlProps = ViewProps;

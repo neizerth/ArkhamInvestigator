@@ -1,7 +1,7 @@
+import { Picker as BasePicker } from "@modules/core/control/entities/picker/ui";
 import { color, gameAssets } from "@shared/config";
 import { Action, IconNumber } from "@shared/ui";
 import styled from "styled-components/native";
-import { Picker as BasePicker } from "../../../../control/picker";
 import { VALUE_HEIGHT } from "../../config";
 
 export const Container: typeof Action = styled(Action)`

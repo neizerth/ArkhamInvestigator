@@ -1,9 +1,9 @@
-import { signedNumber, useAppDispatch, useAppSelector } from "@shared/lib";
 import type {
 	PickerChangeEvent,
 	PickerListRenderItem,
 	PickerProps,
-} from "@widgets/control/picker";
+} from "@modules/core/control/entities/picker/model";
+import { signedNumber, useAppDispatch, useAppSelector } from "@shared/lib";
 import { useCallback } from "react";
 
 import type { PropsWithBoardId } from "@modules/board/base/shared/model";

@@ -1,3 +1,4 @@
+import { PickerMemo as BasePicker } from "@modules/core/control/entities/picker/ui";
 import { color } from "@shared/config";
 import {
 	Row as BaseRow,
@@ -5,7 +6,6 @@ import {
 	IconNumber,
 	SkillIcon,
 } from "@shared/ui";
-import { PickerMemo as BasePicker } from "@widgets/control/picker";
 import { Pressable, View } from "react-native";
 import styled from "styled-components/native";
 

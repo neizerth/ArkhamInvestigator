@@ -4,12 +4,12 @@ import {
 	selectInvestigatorBoards,
 	setCurrentInvestigatorIndex,
 } from "@modules/board/base/shared/lib";
-import { routes } from "@shared/config";
-import { useAppDispatch, useAppSelector } from "@shared/lib";
 import type {
 	PickerChangeEvent,
 	PickerItemInfo,
-} from "@widgets/control/picker";
+} from "@modules/core/control/entities/picker/model";
+import { routes } from "@shared/config";
+import { useAppDispatch, useAppSelector } from "@shared/lib";
 import { prop } from "ramda";
 import { useCallback, useMemo, useState } from "react";
 import type { ViewProps } from "react-native";

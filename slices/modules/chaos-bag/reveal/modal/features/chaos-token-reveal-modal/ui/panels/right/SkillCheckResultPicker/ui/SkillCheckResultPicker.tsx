@@ -1,9 +1,9 @@
 import { setCustomChaosBagRevealResult } from "@modules/chaos-bag/reveal/base/shared/lib";
-import { useAppDispatch } from "@shared/lib";
 import type {
 	PickerChangeEvent,
 	PickerListRenderItem,
-} from "@widgets/control/picker";
+} from "@modules/core/control/entities/picker/model";
+import { useAppDispatch } from "@shared/lib";
 import { useCallback } from "react";
 import type { ViewProps } from "react-native";
 import { useSkillCheckPickerData } from "../lib";

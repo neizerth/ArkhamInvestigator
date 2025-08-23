@@ -1,5 +1,5 @@
+import { Picker } from "@modules/core/control/entities/picker/ui";
 import { Value } from "@shared/ui";
-import { Picker } from "@widgets/control/picker";
 import styled from "styled-components/native";
 
 export const ValuePicker: typeof Picker = styled(Picker).attrs({

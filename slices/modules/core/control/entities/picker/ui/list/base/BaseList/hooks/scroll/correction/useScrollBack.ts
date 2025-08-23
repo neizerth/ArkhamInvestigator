@@ -1,9 +1,9 @@
-import { useScrollToIndex } from "@shared/lib";
 import type {
 	PickerEndReachedEvent,
 	PickerScrollEvent,
 	PickerStartReachedEvent,
-} from "@widgets/control/picker/model";
+} from "@modules/core/control/entities/picker/model";
+import { useScrollToIndex } from "@shared/lib";
 import { useCallback, useRef } from "react";
 import type { GestureResponderEvent } from "react-native";
 import type { BaseListProps } from "../../../BaseList.types";

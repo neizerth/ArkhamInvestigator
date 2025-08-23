@@ -3,8 +3,8 @@ import {
 	AutoSuccessThin as Success,
 } from "@modules/chaos-bag/base/shared/ui";
 import { ResultValue } from "@modules/chaos-bag/result/shared/ui";
+import { Picker } from "@modules/core/control/entities/picker/ui";
 import { Row } from "@shared/ui";
-import { Picker } from "@widgets/control/picker";
 import { View } from "react-native";
 import styled from "styled-components/native";
 

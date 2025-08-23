@@ -3,7 +3,7 @@ import {
 	AutoFail as Fail,
 	AutoSuccessThin as Success,
 } from "@modules/chaos-bag/base/shared/ui";
-import { Picker } from "@widgets/control/picker";
+import { Picker } from "@modules/core/control/entities/picker/ui";
 import styled from "styled-components/native";
 
 export const Control: typeof Picker = styled(Picker)`

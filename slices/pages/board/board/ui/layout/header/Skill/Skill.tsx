@@ -7,6 +7,10 @@ import {
 } from "@modules/board/base/shared/lib";
 import { startSkillCheck } from "@modules/board/skill-check/shared/lib";
 import { startChaosBagReveal } from "@modules/chaos-bag/reveal/base/entities/lib/store/features/startReveal/startChaosBagReveal";
+import type {
+	PickerChangeEvent,
+	PickerItemInfo,
+} from "@modules/core/control/entities/picker/model";
 import {
 	selectShowAdditionalInformation,
 	signedNumber,
@@ -15,10 +19,6 @@ import {
 	usePageLoader,
 } from "@shared/lib";
 import type { InvestigatorSkillType } from "@shared/model";
-import type {
-	PickerChangeEvent,
-	PickerItemInfo,
-} from "@widgets/control/picker";
 import { range } from "ramda";
 import { useCallback, useState } from "react";
 import type { ViewProps } from "react-native";
