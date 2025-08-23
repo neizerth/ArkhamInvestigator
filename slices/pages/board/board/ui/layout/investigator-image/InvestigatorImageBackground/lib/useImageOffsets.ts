@@ -2,7 +2,7 @@ import { selectDescriptionHeight } from "@modules/board/base/entities/descriptio
 import { selectCurrentBoardProp } from "@modules/board/base/shared/lib";
 import { useAppSelector } from "@shared/lib";
 import { useEffect, useState } from "react";
-import { DEFAULT_PORTRAIT_DESCRIPTION_HEIGHT } from "../../../../../../config";
+import { DEFAULT_PORTRAIT_DESCRIPTION_HEIGHT } from "../../../../../config";
 
 export const useImageOffsets = () => {
 	const image = useAppSelector(selectCurrentBoardProp("image"));

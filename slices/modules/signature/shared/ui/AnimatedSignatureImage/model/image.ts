@@ -1,6 +1,6 @@
 import type { ViewProps } from "react-native";
-import type { SignatureImageProps } from "../../SignatureImage";
+import type { StaticSignatureImageProps } from "../../StaticSignatureImage";
 
-export type AnimatedSignatureImageProps = SignatureImageProps & {
-	contentContainerStyle: ViewProps["style"];
+export type AnimatedSignatureImageProps = StaticSignatureImageProps & {
+	contentContainerStyle?: ViewProps["style"];
 };

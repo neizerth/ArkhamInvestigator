@@ -1,8 +1,8 @@
 import { Dimensions, View } from "react-native";
 import styled from "styled-components/native";
 import { FactionBackground as BaseFactionBackground } from "../../../shared/background/FactionBackground";
+import { InvestigatorImageBackground as InvestigatorBackground } from "../InvestigatorImageBackground";
 import { DamageOverlay, HorrorOverlay } from "../effects";
-import { InvestigatorImageBackground as InvestigatorBackground } from "../investigator-image-background/InvestigatorImageBackground";
 
 const screen = Dimensions.get("screen");
 
