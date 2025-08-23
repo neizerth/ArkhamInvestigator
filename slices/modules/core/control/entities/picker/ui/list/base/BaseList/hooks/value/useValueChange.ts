@@ -1,5 +1,5 @@
-import { getValueIndex } from "@widgets/control/picker/lib";
-import type { PickerChangeEvent } from "@widgets/control/picker/model";
+import { getValueIndex } from "@modules/core/control/entities/picker/lib";
+import type { PickerChangeEvent } from "@modules/core/control/entities/picker/model";
 import { useCallback, useRef } from "react";
 import type { BaseListProps } from "../../BaseList.types";
 

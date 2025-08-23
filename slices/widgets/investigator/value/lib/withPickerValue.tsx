@@ -1,7 +1,8 @@
+import type { PickerProps } from "@modules/core/control/entities/picker/model";
+import { Picker } from "@modules/core/control/entities/picker/ui";
 import type { ValueProps } from "@shared/ui";
 import { type FC, type PropsWithChildren, useMemo } from "react";
 import type { ListRenderItem, ViewProps } from "react-native";
-import { Picker, type PickerProps } from "../../../control/picker";
 
 type WithPickerValueOptions = {
 	Value: FC<ValueProps>;

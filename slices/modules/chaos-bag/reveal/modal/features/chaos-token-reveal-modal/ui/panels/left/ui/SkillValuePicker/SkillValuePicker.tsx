@@ -1,8 +1,8 @@
-import { useAppDispatch, useAppSelector } from "@shared/lib";
 import type {
 	PickerChangeEvent,
 	PickerListRenderItem,
-} from "@widgets/control/picker";
+} from "@modules/core/control/entities/picker/model";
+import { useAppDispatch, useAppSelector } from "@shared/lib";
 import { range } from "ramda";
 import { useCallback, useMemo } from "react";
 import type { ViewProps } from "react-native";

@@ -4,9 +4,9 @@ import {
 	selectCurrentInitialPropValue,
 	setBoardPart,
 } from "@modules/board/base/shared/lib";
+import type { PickerChangeEvent } from "@modules/core/control/entities/picker/model";
 import { useAppDispatch, useAppSelector } from "@shared/lib";
 import type { InvestigatorBoardNumericStat } from "@shared/model";
-import type { PickerChangeEvent } from "@widgets/control/picker";
 import { range } from "ramda";
 import { useCallback, useMemo } from "react";
 import type { ViewStyle } from "react-native";

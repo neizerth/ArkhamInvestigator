@@ -1,7 +1,7 @@
 import { selectShowUpkeepResources } from "@modules/board/base/shared/lib";
+import type { PickerChangeEvent } from "@modules/core/control/entities/picker/model";
 import { useAppSelector } from "@shared/lib";
 import type { ImageBackgroundProps } from "@shared/ui";
-import type { PickerChangeEvent } from "@widgets/control/picker";
 import { range } from "ramda";
 import { useCallback } from "react";
 import * as C from "./Resources.components";

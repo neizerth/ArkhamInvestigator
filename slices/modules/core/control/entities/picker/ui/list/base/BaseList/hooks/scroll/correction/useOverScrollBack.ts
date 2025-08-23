@@ -1,10 +1,10 @@
-import { useScrollToIndex } from "@shared/lib";
 import type {
 	PickerEndReachedEvent,
 	PickerScrollEvent,
 	PickerStartReachedEvent,
-} from "@widgets/control/picker/model";
-import type { PickerScrollDirection } from "@widgets/control/picker/model/common";
+} from "@modules/core/control/entities/picker/model";
+import type { PickerScrollDirection } from "@modules/core/control/entities/picker/model/common";
+import { useScrollToIndex } from "@shared/lib";
 import { useCallback, useRef } from "react";
 import type { BaseListProps } from "../../../BaseList.types";
 

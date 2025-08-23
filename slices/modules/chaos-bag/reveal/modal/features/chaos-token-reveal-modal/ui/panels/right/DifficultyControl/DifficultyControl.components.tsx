@@ -1,9 +1,9 @@
+import { Picker } from "@modules/core/control/entities/picker/ui";
 import { TouchableOpacity } from "@modules/core/touch/shared/ui";
 import { color, size } from "@shared/config";
 import { UnscaledText, Value } from "@shared/ui";
 import { View } from "react-native";
 import styled from "styled-components/native";
-import { Picker } from "../../../../../../../../../../widgets/control/picker";
 
 export const Container: typeof View = styled(View)`
   position: relative;
