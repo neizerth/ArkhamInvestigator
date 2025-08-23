@@ -1,8 +1,4 @@
-import {
-	selectBoardProp,
-	selectDescriptionTransition,
-	selectShowDescription,
-} from "@modules/board/base/shared/lib";
+import { selectBoardProp } from "@modules/board/base/shared/lib";
 import { useAppDispatch, useAppSelector, useLayoutSize } from "@shared/lib";
 import { useEffect } from "react";
 import { Dimensions } from "react-native";
@@ -14,21 +10,16 @@ export const useDescriptionLayout = () => {
 	const dispatch = useAppDispatch();
 
 	const [size, onLayout] = useLayoutSize();
-
-	const showDescription = useAppSelector(selectShowDescription);
 	const defaultValue = useAppSelector(
 		selectBoardProp({
 			boardId: "current",
 			prop: "gameTextHeight",
 		}),
 	);
-	const inTransition = useAppSelector(selectDescriptionTransition);
 	const value = Math.round(size?.height ?? 0);
 
-	const disabled = showDescription || inTransition;
-
 	useEffect(() => {
-		if (disabled || defaultValue === value || value === 0) {
+		if (defaultValue) {
 			return;
 		}
 		dispatch(
@@ -38,7 +29,7 @@ export const useDescriptionLayout = () => {
 				view: screen,
 			}),
 		);
-	}, [dispatch, disabled, value, defaultValue]);
+	}, [dispatch, value, defaultValue]);
 
 	return onLayout;
 };
