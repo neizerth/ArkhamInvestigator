@@ -19,7 +19,7 @@ export const InvestigatorImage = ({
 
 	return (
 		<C.AnimatedContainer style={[contentContainerStyle, style]}>
-			<C.Background {...props} source={source} />
+			<C.Background {...props} source={source} key={code} />
 		</C.AnimatedContainer>
 	);
 };

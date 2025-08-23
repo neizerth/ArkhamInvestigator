@@ -30,6 +30,9 @@ export type BoardState = {
 	showUpkeepResources: boolean;
 	syncScenarioClues: boolean;
 
+	showDescription: boolean;
+	descriptionTransition: boolean;
+
 	doom: number;
 	clues: number;
 	resources: number;
@@ -57,6 +60,10 @@ const initialState: BoardState = {
 	allowNegativeHealthAndSanity: false,
 	showUpkeepResources: false,
 	syncScenarioClues: false,
+
+	showDescription: false,
+	descriptionTransition: false,
+
 	doom: 0,
 	clues: 0,
 	resources: 0,
@@ -78,6 +85,7 @@ export const board = createSlice({
 export const {
 	setCurrentInvestigatorIndex,
 	setInvestigatorBoards,
+
 	setEndTurnStrict,
 	setShowDamageAndHorrorEffects,
 	setPickerDecelerationType,
@@ -115,11 +123,16 @@ export const {
 	// board history reducers
 	clearBoardHistory,
 	clearCurrentBoardHistory,
+
+	// description
+	setShowDescription,
+	setDescriptionTransition,
 } = board.actions;
 
 export const {
 	selectCurrentInvestigatorIndex,
 	selectInvestigatorBoards,
+
 	selectEndTurnStrict,
 	selectShowDamageAndHorrorEffects,
 	selectPickerDecelerationType,
@@ -143,6 +156,9 @@ export const {
 	selectAllowNegativeHealthAndSanity,
 	selectShowUpkeepResources,
 	selectSyncScenarioClues,
+
+	selectShowDescription,
+	selectDescriptionTransition,
 } = board.selectors;
 
 export default board.reducer;

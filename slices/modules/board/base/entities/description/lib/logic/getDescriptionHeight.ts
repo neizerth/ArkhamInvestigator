@@ -3,20 +3,18 @@ import {
 	isNavbarVisible,
 	navBarHeight,
 } from "@shared/config";
-
-import { useAppSelector } from "@shared/lib";
-
-import {
-	selectAlwaysShowGameText,
-	selectGameTextHeight,
-} from "@modules/board/base/shared/lib";
 import { DEFAULT_PORTRAIT_DESCRIPTION_HEIGHT } from "../../config";
 
-export const useDescriptionHeight = () => {
-	const show = useAppSelector(selectAlwaysShowGameText);
-	const gameTextHeight = useAppSelector(selectGameTextHeight);
+type Options = {
+	showGameText: boolean;
+	gameTextHeight: number;
+};
 
-	if (!CAN_ALWAYS_SHOW_GAME_TEXT || !show) {
+export const getDescriptionHeight = ({
+	showGameText,
+	gameTextHeight,
+}: Options) => {
+	if (!CAN_ALWAYS_SHOW_GAME_TEXT || !showGameText) {
 		return DEFAULT_PORTRAIT_DESCRIPTION_HEIGHT;
 	}
 

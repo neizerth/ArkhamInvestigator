@@ -1,10 +1,8 @@
 import {
-	delay,
 	selectShowDescription,
 	setShowDescription,
-	useAppDispatch,
-	useAppSelector,
-} from "@shared/lib";
+} from "@modules/board/base/shared/lib";
+import { delay, useAppDispatch, useAppSelector } from "@shared/lib";
 import { useCallback, useEffect, useState } from "react";
 import type { ViewProps } from "react-native";
 import * as C from "./FooterTopContent.components";

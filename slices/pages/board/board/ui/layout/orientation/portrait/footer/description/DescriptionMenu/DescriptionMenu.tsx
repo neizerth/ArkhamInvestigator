@@ -1,12 +1,8 @@
+import { setShowDescription } from "@modules/board/base/shared/lib";
 import { goToPage } from "@modules/core/router/shared/lib";
 import { changeSignatureDetails } from "@modules/signature/entities/lib/store/features/changeSignatureDetails/changeSignatureDetails";
 import { routes } from "@shared/config";
-import {
-	delay,
-	setReplaceInvestigator,
-	setShowDescription,
-	useAppDispatch,
-} from "@shared/lib";
+import { delay, setReplaceInvestigator, useAppDispatch } from "@shared/lib";
 import { useCallback } from "react";
 import type { ViewProps } from "react-native-svg/lib/typescript/fabric/utils";
 import * as C from "./DescriptionMenu.components";

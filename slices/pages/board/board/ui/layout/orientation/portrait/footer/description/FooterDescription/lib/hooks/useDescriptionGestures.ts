@@ -1,7 +1,8 @@
 import { useLeaveBoard } from "@modules/board/base/features/leave-board";
+import { setShowDescription } from "@modules/board/base/shared/lib";
 import { useSwipe } from "@modules/core/touch/shared/lib";
 import { routes } from "@shared/config";
-import { setShowDescription, useAppDispatch } from "@shared/lib";
+import { useAppDispatch } from "@shared/lib";
 import { useCallback } from "react";
 import { Gesture } from "react-native-gesture-handler";
 

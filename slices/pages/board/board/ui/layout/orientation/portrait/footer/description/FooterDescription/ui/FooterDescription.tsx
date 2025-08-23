@@ -1,10 +1,10 @@
-import { selectCurrentBoardProp } from "@modules/board/base/shared/lib";
-import { selectCurrentFaction } from "@modules/mechanics/board/base/entities/lib";
+import { useDescriptionLayout } from "@modules/board/base/entities/description/lib";
 import {
+	selectCurrentBoardProp,
 	selectShowDescription,
-	useAppSelector,
-	useFadeAnimation,
-} from "@shared/lib";
+} from "@modules/board/base/shared/lib";
+import { selectCurrentFaction } from "@modules/mechanics/board/base/entities/lib";
+import { useAppSelector, useFadeAnimation } from "@shared/lib";
 import { Dimensions, type ViewProps } from "react-native";
 import { GestureDetector } from "react-native-gesture-handler";
 import { TOP_CONTENT_OFFSET } from "../../../../../../../../config";
@@ -22,6 +22,7 @@ const vw = (screen.width * 6) / 100;
 export type FooterDescriptionProps = ViewProps;
 export const FooterDescription = ({ ...props }: FooterDescriptionProps) => {
 	const gameText = useGameText();
+	const onLayout = useDescriptionLayout();
 
 	const showDescription = useAppSelector(selectShowDescription);
 
@@ -30,8 +31,10 @@ export const FooterDescription = ({ ...props }: FooterDescriptionProps) => {
 
 	useDescriptionBackButton();
 
+	const showText = showDescription || gameText.show;
+
 	const descriptionStyle = useFadeAnimation({
-		show: showDescription || gameText.show,
+		show: showText,
 	});
 
 	const containerStyle = useContainerAnimation({
@@ -57,10 +60,7 @@ export const FooterDescription = ({ ...props }: FooterDescriptionProps) => {
 								{showTraits && (
 									<C.Traits unit={vw} investigator={investigator} />
 								)}
-								<C.Description
-									style={descriptionStyle}
-									onLayout={gameText.onLayout}
-								>
+								<C.Description style={descriptionStyle} onLayout={onLayout}>
 									<C.Text investigator={investigator} unit={textUnit} />
 									{showFlavor && (
 										<C.Flavor unit={vw} investigator={investigator} />
