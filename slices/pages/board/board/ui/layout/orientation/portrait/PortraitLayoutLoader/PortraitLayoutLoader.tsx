@@ -1,16 +1,16 @@
 import { BoardDescriptionLoader } from "@modules/board/base/features/init-board-description";
-import { selectInvestigatorBoards } from "@modules/board/base/shared/lib";
+import { selectBoardIds } from "@modules/board/base/shared/lib";
 import { useAppSelector } from "@shared/lib";
 import { DESCRIPTION_TEXT_UNIT_SIZE } from "../../../../../config";
 
 export const PortraitLayoutLoader = () => {
-	const boards = useAppSelector(selectInvestigatorBoards);
+	const boards = useAppSelector(selectBoardIds);
 	return (
 		<>
-			{boards.map((board) => (
+			{boards.map((boardId) => (
 				<BoardDescriptionLoader
-					key={board.id}
-					boardId={board.id}
+					key={boardId}
+					boardId={boardId}
 					unit={DESCRIPTION_TEXT_UNIT_SIZE}
 				/>
 			))}
