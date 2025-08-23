@@ -1,6 +1,6 @@
-import type { BoxLayout } from "@shared/model";
+import type { Box, BoxLayout } from "@shared/model";
 
 export type InvestigatorBoardLayout = {
 	imageLayout?: BoxLayout;
-	gameTextHeight: number;
+	gameTextSize: Box | null;
 };

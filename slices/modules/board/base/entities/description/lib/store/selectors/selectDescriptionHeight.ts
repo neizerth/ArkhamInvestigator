@@ -14,14 +14,14 @@ export const selectDescriptionHeight = (boardId: BoardId) =>
 			selectAlwaysShowGameText,
 			selectBoardProp({
 				boardId,
-				prop: "gameTextHeight",
+				prop: "gameTextSize",
 			}),
 			selectCurrentFaction,
 		],
-		(showGameText, gameTextHeight, faction) => {
+		(showGameText, gameTextSize, faction) => {
 			return getDescriptionHeight({
 				showGameText,
-				gameTextHeight,
+				gameTextSize,
 				faction,
 			});
 		},
