@@ -23,5 +23,6 @@ export const useCurrentBackground = () => {
 	return {
 		code: image.id,
 		layout,
+		type: "full" as const,
 	};
 };
