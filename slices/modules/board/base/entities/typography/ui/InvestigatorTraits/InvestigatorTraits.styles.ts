@@ -2,7 +2,7 @@ import { ArnoPro, STXinwei } from "@assets/fonts";
 import { SanCn } from "@assets/fonts";
 import { getKeyConfig } from "@shared/lib";
 import type { TextStyle } from "react-native";
-import { boardText } from "../../../../config";
+import { boardText } from "../../config";
 
 type GetInvestigatorTraitsStyleOptions = {
 	language: string;
