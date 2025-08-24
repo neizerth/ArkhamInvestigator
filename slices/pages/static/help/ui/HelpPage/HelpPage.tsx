@@ -1,7 +1,7 @@
 import { InvesigatorCode } from "@modules/mechanics/investigator/entities/config";
 import { selectInvestigatorByCode } from "@modules/signature/shared/lib";
 import { useAppSelector } from "@shared/lib";
-import { Bold, Break, List, Paragraph, Text, Title } from "@shared/ui";
+import { Bold, Paragraph, Text, Title } from "@shared/ui";
 import { ContentPage } from "@widgets/content/content-page";
 import { useTranslation } from "react-i18next";
 import { View } from "react-native";
@@ -224,29 +224,32 @@ export const HelpPage = () => {
 				{" - "}
 				{t`board.help.special.additionalAction`}
 			</Text>
-			<List>
-				<List.Item>
-					<Bold>{LolaHayes?.name}</Bold> <C.Icon icon="neutral" />
-					<View>
-						<C.IconText value={t`board.help.special.lola`} />
-					</View>
-					<Break />
-				</List.Item>
-				<List.Item>
-					<Bold>{DanielaReyes?.name}</Bold> <C.Icon icon="guardian" />
-					<View>
-						<C.IconText value={t`board.help.special.daniela`} />
-					</View>
-					<Break />
-				</List.Item>
-				<List.Item>
-					<Bold>{KymaniJones?.name}</Bold> <C.Icon icon="rogue" />
-					<View>
-						<C.IconText value={t`board.help.special.kymani`} />
-					</View>
-					<Break />
-				</List.Item>
-			</List>
+
+			<View>
+				<C.ListTitle>
+					<C.Icon icon="neutral" />
+					<Bold>{LolaHayes?.name}</Bold>
+				</C.ListTitle>
+				<View>
+					<C.IconText value={t`board.help.special.lola`} />
+				</View>
+			</View>
+			<View>
+				<C.ListTitle>
+					<C.Icon icon="guardian" />
+					<Bold>{DanielaReyes?.name}</Bold>
+				</C.ListTitle>
+				<View>
+					<C.IconText value={t`board.help.special.daniela`} />
+				</View>
+			</View>
+			<View>
+				<C.ListTitle>
+					<C.Icon icon="rogue" />
+					<Bold>{KymaniJones?.name}</Bold>
+				</C.ListTitle>
+				<C.IconText value={t`board.help.special.kymani`} />
+			</View>
 		</ContentPage>
 	);
 };
