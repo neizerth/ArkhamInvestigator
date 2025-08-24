@@ -6,6 +6,7 @@ import { TheFeastOfHemlockValeInvestigatorAbilitySaga as TheFeastOfHemlockValeSa
 import { ThePathToCarcosaInvestigatorAbilitySaga as ThePathToCarcosaSaga } from "./ptc/sagas";
 import { TheCircleUndoneInvestigatorAbilitySaga as TheCircleUndoneSaga } from "./tcu/sagas";
 import { TheDrownedCityInvestigatorAbilitySaga as TheDrownedCitySaga } from "./tdc/sagas";
+import { TheDreamEatersInvestigatorAbilitySaga as TheDreamEatersSaga } from "./tde/sagas";
 import { TheForgottenAgeInvestigatorAbilitySaga as TheForgottenAgeSaga } from "./tfa/sagas";
 import { TheInnsmouthConspiracyInvestigatorAbilitySaga as TheInnsmouthConspiracySaga } from "./tic/sagas";
 import { TheScarletKeysInvestigatorAbilitySaga as TheScarletKeysSaga } from "./tsk/sagas";
@@ -17,6 +18,7 @@ export function* campaignsInvestigatorAbilitySaga() {
 	yield fork(TheForgottenAgeSaga);
 	yield fork(TheCircleUndoneSaga);
 
+	yield fork(TheDreamEatersSaga);
 	yield fork(TheInnsmouthConspiracySaga);
 
 	yield fork(EdgeOfTheEarthSaga);

@@ -1,1 +1,5 @@
-export * from "./ZoeySamaras";
+import { ZoeySamarasAbilityChecker } from "./ZoeySamaras";
+
+export const TheDunwichLegacyAbilityChecker = {
+	...ZoeySamarasAbilityChecker,
+};

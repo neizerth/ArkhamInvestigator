@@ -117,7 +117,7 @@
 	"wild.give": "{{name}} добавляет карте {{dativeName}} дополнительный [wild] до конца проверки",
 	"wild.give.self": "{{name}} добавляет своей карте дополнительный [wild] до конца проверки",
 
-	"actions.get_one": "{{name}} получает 1 действие",
+	"actions.get_one": "{{name}} получает {{count}} действие",
 	"actions.get_few": "{{name}} получает {{count}} действия",
 	"actions.get_many": "{{name}} получает {{count}} действий",
 
@@ -184,6 +184,10 @@
 
 	"ability.lily.elderSign.confirm.text": "Переверните 1 [[сломленную]] «Дисциплину» [[несломленной]] стороной вверх.",
 	"ability.lily.discipline.flip.unbroken": "{{name}} переворачивает [[сломленную]] {{discipline}} «Дисциплину» [[несломленной]] стороной вверх.",
+
+	"ability.tony.place-bounty": "{{name}} кладёт 1 награду на «Награды за голову»",
+
+	"resources.notEnough": "Недостаточно ресурсов. Необходимо&nbsp;{{count}}, доступно&nbsp;{{available}}",
 
 	"action.heal": "{{fromName}} лечит {{dativeName}} {{value}}",
 	"action.heal.self": "{{name}} лечит {{value}}",

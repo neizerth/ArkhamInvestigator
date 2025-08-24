@@ -27,6 +27,6 @@ function* worker({ payload }: ReturnType<typeof checkBoardAbilityUseFailed>) {
 	);
 }
 
-export function* ZoeySamarasParallelFastAbilityCheckFailedSaga() {
+export function* ParallelZoeySamarasFastAbilityCheckFailedSaga() {
 	yield takeEvery(filterAction, worker);
 }

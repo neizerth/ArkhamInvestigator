@@ -20,7 +20,12 @@ export const Ability = ({ ability, ...props }: AbilityProps) => {
 	const dispatch = useAppDispatch();
 	const { id } = ability;
 
-	const canUse = useAppSelector(selectCanUseBoardAbility(id));
+	const canUse = useAppSelector(
+		selectCanUseBoardAbility({
+			abilityId: id,
+			boardId: "current",
+		}),
+	);
 	const isUsed = useAppSelector(selectIsCurrentAbilityUsed(id));
 	const icon = getAbilityIcon(ability);
 	const onPress = useAbility(ability);

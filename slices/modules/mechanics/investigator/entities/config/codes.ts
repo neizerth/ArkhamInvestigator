@@ -43,4 +43,9 @@ export const InvesigatorCode = {
 		parallel: "90078",
 	},
 	StellaClark: "60501",
+	TonyMorgan: "06003",
+	SkidsOToole: {
+		base: "01003",
+		parallel: "90008",
+	},
 };

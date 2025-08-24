@@ -1,1 +1,5 @@
-export * from "./campaigns";
+import { CampaignAbilityChecker } from "./campaigns";
+
+export const InvestigatorAbilityChecker = {
+	...CampaignAbilityChecker,
+};
