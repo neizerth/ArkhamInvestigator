@@ -183,6 +183,9 @@
 	"ability.lily.elderSign.confirm.text": "flip a [[Broken]] Discipline you control to its [[Unbroken]] side.",
 	"ability.lily.discipline.flip.unbroken": "{{name}} flips [[Broken]] Discipline {{discipline}} to its [[Unbroken]] side.",
 
+	"ability.tony.place-bounty": "{{name}} places 1 bounty on Bounty Contracts",
+	"resources.notEnough": "Not enough resources. Required&nbsp;{{count}}, available&nbsp;{{available}}",
+
 	"action.heal": "{{fromName}} heals {{dativeName}} {{value}}",
 	"action.heal.self": "{{name}} heals {{value}}",
 

@@ -1,6 +1,6 @@
 export const AbilityCode = {
 	ShatteredSelf: "shattered-self-cards",
-	SisterMary: "add-2-bless",
+	SisterMary: "mary-add-bless",
 	GeorgeBarnaby: "george-cards",
 	DianaStanley: "diana-cards",
 	LilyChen: {
@@ -40,6 +40,11 @@ export const AbilityCode = {
 
 	StellaClark: {
 		elderSign: "autofail-to-heal-horror-and-damage",
+	},
+	SkidsOToole: {
+		base: {
+			fast: "two-resources-for-action",
+		},
 	},
 };
 

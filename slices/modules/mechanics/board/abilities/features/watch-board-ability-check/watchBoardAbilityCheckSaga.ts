@@ -7,9 +7,7 @@ import { put, select, takeEvery } from "redux-saga/effects";
 import { selectCanUseBoardAbility } from "../base/lib";
 
 function* worker({ payload }: ReturnType<typeof checkBoardAbilityUse>) {
-	const { abilityId } = payload;
-
-	const selector = selectCanUseBoardAbility(abilityId);
+	const selector = selectCanUseBoardAbility(payload);
 
 	const isValid: ReturnType<typeof selector> = yield select(selector);
 
