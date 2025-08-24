@@ -1,6 +1,6 @@
-import { Pressable } from "@modules/core/touch/shared/ui";
+import { View } from "react-native";
 import styled from "styled-components/native";
 
-export const Container: typeof Pressable = styled(Pressable)`
+export const Container: typeof View = styled(View)`
   
 `;

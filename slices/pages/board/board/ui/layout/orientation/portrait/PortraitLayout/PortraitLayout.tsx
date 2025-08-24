@@ -13,7 +13,7 @@ export const PortraitLayout = (props: PortraitLayoutProps) => {
 			<C.SkillChecks />
 			<C.Main>
 				<C.LeftSidebar />
-				<C.Area />
+				<C.Area swipe />
 				<C.RightSidebar />
 			</C.Main>
 			<C.Footer />

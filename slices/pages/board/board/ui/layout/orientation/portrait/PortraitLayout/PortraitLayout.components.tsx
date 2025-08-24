@@ -35,7 +35,7 @@ export const Main: typeof Row = styled(Row)`
   flex: 1;
 `;
 
-export const Area: typeof View = styled(AdditionalInfoArea)`
+export const Area: typeof AdditionalInfoArea = styled(AdditionalInfoArea)`
   position: relative;
   flex: 1;
 `;

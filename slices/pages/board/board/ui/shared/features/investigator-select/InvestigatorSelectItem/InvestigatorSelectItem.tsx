@@ -4,13 +4,12 @@ import {
 	selectNonUniqueId,
 } from "@modules/board/base/shared/lib";
 import type { BoardId } from "@modules/board/base/shared/model";
+import type { TouchableOpacityProps } from "@modules/core/touch/shared/ui";
 import { selectBoardIsInactive } from "@modules/mechanics/board/base/entities/lib";
 import { useAppSelector } from "@shared/lib";
-import type { Faction } from "@shared/model";
-import type { ViewProps } from "react-native";
 import * as C from "./InvestigatorSelectItem.components";
 
-export type InvestigatorSelectItemProps = ViewProps & {
+export type InvestigatorSelectItemProps = TouchableOpacityProps & {
 	boardId: BoardId;
 };
 
@@ -35,16 +34,12 @@ export const InvestigatorSelectItem = ({
 
 	const id = useAppSelector(selectNonUniqueId(boardId));
 
-	if (!image || !investigator) {
-		return null;
-	}
-
-	const faction = investigator.faction_code as Faction;
+	const faction = investigator.faction_code;
 	const showId = !unique;
 
 	return (
 		<C.Container {...props} faction={faction}>
-			<C.Image code={image.id} version={image.version} active={!inactive} />
+			<C.Image code={image.id} type="square" grayscale={inactive} animated />
 			{showId && (
 				<C.Overlay>
 					<C.Id value={id} />
