@@ -4,6 +4,7 @@ import { isRevealedTokenActive } from "@modules/chaos-bag/result/shared/lib";
 import { chaosBagRevealEnd } from "@modules/chaos-bag/reveal/base/entities/lib";
 import type { ConfirmModalAction } from "@modules/core/modal/shared/actions/confirm/model";
 import { openConfirm } from "@modules/core/modal/shared/confirm/lib";
+import { InvesigatorCode } from "@modules/mechanics/investigator/entities/config";
 import { put, select, takeEvery } from "redux-saga/effects";
 import { modalId } from "../../config";
 import { activateDiscipline } from "../activateDiscipline";
@@ -29,6 +30,12 @@ function* worker({ payload }: ReturnType<typeof chaosBagRevealEnd>) {
 
 	const boardSelector = selectBoardById(skillCheckBoardId);
 	const board: ReturnType<typeof boardSelector> = yield select(boardSelector);
+
+	const { code } = board.investigator;
+
+	if (code !== InvesigatorCode.LilyChen) {
+		return;
+	}
 
 	const actions: ConfirmModalAction[] =
 		yield getModalActions(skillCheckBoardId);
