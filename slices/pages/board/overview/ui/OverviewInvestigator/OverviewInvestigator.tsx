@@ -32,9 +32,8 @@ export const OverviewInvestigator = ({
 }: OverviewInvestigatorProps) => {
 	const dispatch = useAppDispatch();
 	const control = useValueControl(boardId);
-	const { value, baseValue, initialValue, investigator } = useAppSelector(
-		selectBoardById(boardId),
-	);
+	const { value, baseValue, initialValue, investigator, image } =
+		useAppSelector(selectBoardById(boardId));
 	const showWounds = useAppSelector(selectShowDamageAndHorror);
 
 	const faction = useAppSelector(selectBoardFaction(boardId));
@@ -109,7 +108,7 @@ export const OverviewInvestigator = ({
 						size={110}
 						faction={faction}
 						code={investigator.code}
-						imageId={investigator.image.id}
+						imageId={image.id}
 						onPress={onSelect}
 						selected={selected}
 						grayscale={value.actions === 0}
