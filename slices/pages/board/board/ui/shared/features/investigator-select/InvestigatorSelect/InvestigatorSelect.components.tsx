@@ -9,7 +9,6 @@ import { InvestigatorSelectItem } from "../InvestigatorSelectItem";
 
 export const Container: typeof View = styled(View)`
   width: 60px;
-  height: 88px;
   position: relative;
   z-index: 2;
 `;
@@ -17,7 +16,6 @@ export const Container: typeof View = styled(View)`
 export const Value: typeof InvestigatorSelectItem = styled(
 	InvestigatorSelectItem,
 )`
-  
 `;
 
 export const Content: typeof View = styled(View)`
@@ -38,23 +36,18 @@ export const Picker: typeof BasePicker = styled(BasePicker).attrs({
   `;
 
 export const Arrow: typeof TouchableOpacity = styled(TouchableOpacity)`
-  position: absolute;
+  position: relative;
   z-index: 10;
-  left: 0;
-  right: 0;
 	align-items: center;
-  height: 38px;
+  justify-content: center;
+  height: 32px;
   /* background-color: red; */
 `;
 export const Up: typeof Arrow = styled(Arrow)`
-  justify-content: flex-start;
-  top: -5px;
 `;
 
 export const Down: typeof Arrow = styled(Arrow)`
-  bottom: -28px;
 
-	justify-content: flex-end;
 `;
 
 export const ArrowIcon: FC<DefinedIconProps> = styled(Icon)`

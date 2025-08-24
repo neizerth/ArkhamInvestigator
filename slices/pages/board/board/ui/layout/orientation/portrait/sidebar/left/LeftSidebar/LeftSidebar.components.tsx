@@ -10,7 +10,6 @@ type ContainerProps = ViewProps & {
 };
 
 export const Container: FC<ContainerProps> = styled(View)`
-  gap: 15px;
   justify-content: flex-end;
   align-items: flex-start;
   min-width: ${assetsSize.main}px;

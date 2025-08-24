@@ -1,25 +1,23 @@
-import type { PressableProps } from "@modules/core/touch/shared/ui";
-import { setShowAdditionalInformation, useAppDispatch } from "@shared/lib";
-import { useCallback } from "react";
+import type { ViewProps } from "react-native";
+import { GestureDetector } from "react-native-gesture-handler";
 import * as C from "./AdditionalInfoArea.components";
+import { useBoardGestures } from "./lib";
 
-export type AdditionalInfoAreaProps = PressableProps;
+export type AdditionalInfoAreaProps = ViewProps & {
+	swipe?: boolean;
+};
 
-export const AdditionalInfoArea = (props: AdditionalInfoAreaProps) => {
-	const dispatch = useAppDispatch();
-
-	const handlePress = useCallback(
-		(value: boolean) => () => {
-			dispatch(setShowAdditionalInformation(value));
-		},
-		[dispatch],
-	);
+export const AdditionalInfoArea = ({
+	swipe = false,
+	...props
+}: AdditionalInfoAreaProps) => {
+	const gesture = useBoardGestures({
+		swipe,
+	});
 
 	return (
-		<C.Container
-			{...props}
-			onPressIn={handlePress(true)}
-			onPressOut={handlePress(false)}
-		/>
+		<GestureDetector gesture={gesture}>
+			<C.Container {...props} />
+		</GestureDetector>
 	);
 };

@@ -124,6 +124,9 @@ export const {
 	// description
 	setShowDescription,
 	setDescriptionTransition,
+
+	setNextBoardIndex,
+	setPrevBoardIndex,
 } = board.actions;
 
 export const {

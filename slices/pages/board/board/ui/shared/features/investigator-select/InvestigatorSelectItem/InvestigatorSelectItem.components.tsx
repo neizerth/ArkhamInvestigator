@@ -2,18 +2,22 @@ import { color, factionColor, font } from "@shared/config";
 import type { PropsWithFaction } from "@shared/model";
 import { IconNumber } from "@shared/ui";
 import type { FC } from "react";
-import { View, type ViewProps } from "react-native";
+import { View } from "react-native";
 import styled, { css } from "styled-components/native";
 
-import { InvestigatorSelectItemImage } from "../InvestigatorSelectItemImage";
+import {
+	TouchableOpacity,
+	type TouchableOpacityProps,
+} from "@modules/core/touch/shared/ui";
+import { SignatureImage } from "@modules/signature/shared/ui";
 
 const size = 60;
 const borderSize = 2;
 const imageSize = size - borderSize * 2;
 
-type ContainerProps = ViewProps & PropsWithFaction;
+type ContainerProps = TouchableOpacityProps & PropsWithFaction;
 
-export const Container: FC<ContainerProps> = styled(View)`
+export const Container: FC<ContainerProps> = styled(TouchableOpacity)`
   position: relative;
   width: ${size}px;
   height: ${size}px;
@@ -46,9 +50,7 @@ export const Id: typeof IconNumber = styled(IconNumber)`
   font-size: ${font.size.large}px;
 `;
 
-export const Image: typeof InvestigatorSelectItemImage = styled(
-	InvestigatorSelectItemImage,
-)`
+export const Image: typeof SignatureImage = styled(SignatureImage)`
   border-radius: ${imageSize}px;
   width: ${imageSize}px;
   height: ${imageSize}px;
