@@ -1,8 +1,8 @@
-import { appInfoUpdated } from "@modules/core/app/shared/lib";
+import { appUpdatesChecked } from "@modules/core/app/entities/checkAppUpdates";
+import type { appInfoUpdated } from "@modules/core/app/shared/lib";
 import { put, select, takeEvery } from "redux-saga/effects";
 import { detectLanguage } from "../../entities/language/detectLanguage";
 import { selectLanguage } from "../../shared/lib";
-
 function* worker({ payload }: ReturnType<typeof appInfoUpdated>) {
 	const availableLanguages = payload.languages;
 	const language: ReturnType<typeof selectLanguage> =
@@ -20,5 +20,5 @@ function* worker({ payload }: ReturnType<typeof appInfoUpdated>) {
 }
 
 export function* detectDefaultLanguageSaga() {
-	yield takeEvery(appInfoUpdated.match, worker);
+	yield takeEvery(appUpdatesChecked.match, worker);
 }
