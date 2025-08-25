@@ -7,6 +7,7 @@ import { deviceReducer } from "@modules/core/device/shared/lib";
 import { hapticReducer } from "@modules/core/haptic/shared/lib";
 import { i18nReducer } from "@modules/core/i18n/shared/lib";
 import { modalReducer } from "@modules/core/modal/shared/base/lib";
+import { routerReducer } from "@modules/core/router/shared/lib";
 import { soundReducer } from "@modules/core/sound/shared/lib";
 import { rulesReducer } from "@modules/mechanics/rules/base/shared/lib";
 import { roundTimingReducer } from "@modules/mechanics/rules/round-timing/shared/lib";
@@ -30,4 +31,5 @@ export default {
 	...roundTimingReducer,
 	...signatureReducer,
 	...downloadQueueReducer,
+	...routerReducer,
 };

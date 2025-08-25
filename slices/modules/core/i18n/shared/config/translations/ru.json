@@ -204,6 +204,8 @@
 	"plural.accusative.damage_few": "{{count}} раны",
 	"plural.accusative.damage_many": "{{count}} ран",
 
+	"navigation.animation": "Анимация экранов",
+
 	"Defeated": "Поражение",
 	"Change": "Сменить",
 

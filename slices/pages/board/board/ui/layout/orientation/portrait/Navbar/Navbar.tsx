@@ -10,6 +10,7 @@ export const Navbar = (props: NavbarProps) => {
 
 	const style = useFadeAnimation({
 		show: !showDescription,
+		duration: 150,
 	});
 
 	return <C.Container {...props} style={[props.style, style]} />;

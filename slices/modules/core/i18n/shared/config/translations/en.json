@@ -199,6 +199,8 @@
 	"disk.notEnoughSpace.title": "Not enough free space",
 	"disk.notEnoughSpace.text": "The application requires {{required}} of free space",
 
+	"navigation.animation": "Navigation animation",
+
 	"Defeated": "Defeated",
 	"Change": "Change",
 

@@ -9,6 +9,10 @@ import {
 } from "@modules/core/haptic/shared/lib";
 import { loadLanguage, selectLanguage } from "@modules/core/i18n/shared/lib";
 import { sendNotification } from "@modules/core/notifications/shared/lib";
+import {
+	selectEnableNavigationAnimation,
+	setEnableNavigationAnimation,
+} from "@modules/core/router/shared/lib";
 import { CAN_ALWAYS_SHOW_GAME_TEXT } from "@shared/config";
 import * as S from "@shared/lib";
 import { useCallback } from "react";
@@ -60,6 +64,13 @@ export const SettingsPage = () => {
 							label="Keep awake"
 							selector={selectKeepAwake}
 							actionCreator={setKeepAwake}
+						/>
+					</C.Row>
+					<C.Row>
+						<C.Checkbox
+							label="navigation.animation"
+							selector={selectEnableNavigationAnimation}
+							actionCreator={setEnableNavigationAnimation}
 						/>
 					</C.Row>
 					<C.Sound />
