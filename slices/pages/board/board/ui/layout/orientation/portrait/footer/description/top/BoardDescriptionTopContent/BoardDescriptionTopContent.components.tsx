@@ -13,7 +13,7 @@ export const Container: typeof View = styled(View)`
 export const TopMenu: typeof BoardDescriptionTopMenu = styled(
 	BoardDescriptionTopMenu,
 )`
-
+  
 `;
 
 export const ExpandArea: typeof Pressable = styled(Pressable)`
