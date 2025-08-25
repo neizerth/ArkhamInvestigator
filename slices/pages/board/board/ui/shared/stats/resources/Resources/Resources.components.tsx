@@ -42,7 +42,7 @@ export const UpkeepResources: FC<DefinedBaseStatPickerProps> = styled(
 		position: "absolute",
 		zIndex: 2,
 		right: -10,
-		top: 0,
+		top: -10,
 	},
 	gap: 5,
 })`

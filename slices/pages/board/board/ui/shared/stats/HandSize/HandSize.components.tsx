@@ -41,7 +41,7 @@ export const BaseHandSize: FC<DefinedBaseStatPickerProps> = styled(
 		position: "absolute",
 		zIndex: 4,
 		right: -10,
-		top: -10,
+		top: -15,
 	},
 	gap: 5,
 })`
