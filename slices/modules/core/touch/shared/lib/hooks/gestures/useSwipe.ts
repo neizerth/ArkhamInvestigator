@@ -17,6 +17,7 @@ type Callback = GestureStateChangeEvent<FlingGestureHandlerEventPayload>;
 type Options = {
 	direction: SwipeDirection;
 	onSwipe?: AbstractTouchCallback<Callback>;
+	touchActionType?: string;
 };
 
 const swipeDirectionMapping: Record<SwipeDirection, Directions> = {
@@ -26,9 +27,10 @@ const swipeDirectionMapping: Record<SwipeDirection, Directions> = {
 	down: Directions.DOWN,
 };
 
-export const useSwipe = ({ onSwipe, ...options }: Options) => {
+export const useSwipe = ({ onSwipe, touchActionType, ...options }: Options) => {
 	const touchType = `swipe-${options.direction}` as SwipeGestureType;
 	const onStart = useTouchCallback({
+		touchActionType,
 		callback: onSwipe,
 		touchType,
 	});

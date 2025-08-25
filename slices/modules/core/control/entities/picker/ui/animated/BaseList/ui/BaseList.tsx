@@ -10,7 +10,6 @@ import { getDataOffsets, getValueIndex } from "../../../../lib";
 import useBaseListHooks from "../lib";
 import type { BaseListItemValue, BaseListProps } from "../model/common";
 import * as C from "./BaseList.components";
-import { defaultRenderItemContainer } from "./defaultRenderItemContainer";
 
 export function BaseList<T>(baseProps: BaseListProps<T>) {
 	const props = useBaseListHooks(baseProps);
@@ -19,7 +18,7 @@ export function BaseList<T>(baseProps: BaseListProps<T>) {
 		data = [],
 		value,
 		renderItem,
-		renderItemContainer = defaultRenderItemContainer,
+		renderItemContainer,
 		itemContainerStyle,
 	} = props;
 	const index = getValueIndex(baseProps);

@@ -5,7 +5,6 @@ import type {
 } from "@modules/core/control/entities/picker/model";
 import { useScrollToIndex } from "@shared/lib";
 import { useCallback, useRef } from "react";
-import type { GestureResponderEvent } from "react-native";
 import type { BaseListProps } from "../../../model";
 
 export function useScrollBack<T>(props: BaseListProps<T>) {
@@ -62,13 +61,10 @@ export function useScrollBack<T>(props: BaseListProps<T>) {
 		[onEndReachedProp, scrollToEnd],
 	);
 
-	const onPressIn = useCallback(
-		(e: GestureResponderEvent) => {
-			touching.current = true;
-			onPressInProp?.(e);
-		},
-		[onPressInProp],
-	);
+	const onPressIn = useCallback(() => {
+		touching.current = true;
+		onPressInProp?.();
+	}, [onPressInProp]);
 
 	const onScrollBeginDrag = useCallback(
 		(e: PickerScrollEvent) => {
