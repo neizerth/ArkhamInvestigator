@@ -17,6 +17,7 @@ import v15 from "./2025-05-26T07-14-set-default-unlimited-chaos-tokens";
 import v16 from "./2025-06-01T17-10-init-round-reference";
 import v17 from "./2025-09-14T19-00-refactor-signatures";
 import v18 from "./2025-09-17T22-16-clear-boards";
+import v19 from "./2025-56-25T06-56-28-init-picker-animation";
 
 export const persistConfigMigrations = {
 	0: v0,
@@ -38,4 +39,5 @@ export const persistConfigMigrations = {
 	16: v16,
 	17: v17,
 	18: v18,
+	19: v19,
 };

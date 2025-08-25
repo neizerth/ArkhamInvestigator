@@ -55,5 +55,5 @@ export const Picker: typeof StatPicker = styled(StatPicker).attrs({
 	},
 	itemHeight: assetsSize.resource,
 })`
-  
-  `;
+	position: absolute
+`;

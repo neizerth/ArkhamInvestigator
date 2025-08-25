@@ -26,8 +26,8 @@ export const Picker: typeof StatPicker = styled(StatPicker).attrs({
 	},
 	itemHeight: assetsSize.main,
 })`
-  
-  `;
+  position: absolute;
+`;
 
 type LockProps = IconButtonProps & {
 	enabled?: boolean;

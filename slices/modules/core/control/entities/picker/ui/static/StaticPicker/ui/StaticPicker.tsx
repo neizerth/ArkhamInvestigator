@@ -17,15 +17,15 @@ const emptySeparators = {
 	updateProps: empty,
 };
 
-// export const StaticPicker = ({}: StaticPickerProps) => {
 export function StaticPicker<T>(props: StaticPickerProps<T>) {
 	const {
 		renderItem,
 		renderItemContainer,
 		data,
 		itemContainerStyle,
-		itemHeight,
-		style,
+		itemHeight = 0,
+		onPressIn,
+		onPressOut,
 	} = props;
 
 	const index = getValueIndex(props);
@@ -37,6 +37,7 @@ export function StaticPicker<T>(props: StaticPickerProps<T>) {
 		item,
 		itemHeight,
 		separators: emptySeparators,
+		currentValue: item,
 		renderItem,
 	};
 
@@ -45,7 +46,12 @@ export function StaticPicker<T>(props: StaticPickerProps<T>) {
 	const gesture = Gesture.Exclusive(...swipeGestures, ...pressGestures);
 
 	return (
-		<C.Container style={style}>
+		<C.Container
+			style={props.style}
+			onPressIn={onPressIn}
+			onPressOut={onPressOut}
+			activeOpacity={0.7}
+		>
 			<GestureDetector gesture={gesture}>
 				{renderItemContainer(containerProps)}
 			</GestureDetector>

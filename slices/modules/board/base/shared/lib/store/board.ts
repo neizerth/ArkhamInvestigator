@@ -14,6 +14,8 @@ export type BoardState = {
 	showDamageAndHorrorEffects: boolean;
 	pickerDecelerationType: PickerDecelerationType;
 	pickerIntervalMomentum: boolean;
+	pickerAnimation: boolean;
+
 	trackXP: boolean;
 	saveTrauma: boolean;
 	trackHandSize: boolean;
@@ -45,6 +47,7 @@ const initialState: BoardState = {
 	showDamageAndHorrorEffects: false,
 	pickerDecelerationType: false,
 	pickerIntervalMomentum: false,
+	pickerAnimation: true,
 	trackXP: true,
 	saveTrauma: true,
 	trackHandSize: false,
@@ -88,6 +91,7 @@ export const {
 	setShowDamageAndHorrorEffects,
 	setPickerDecelerationType,
 	setPickerIntervalMomentum,
+	setPickerAnimation,
 	setShowDamageAndHorror,
 	setSaveTrauma,
 	setTrackXP,
@@ -136,6 +140,7 @@ export const {
 	selectEndTurnStrict,
 	selectShowDamageAndHorrorEffects,
 	selectPickerDecelerationType,
+	selectPickerAnimation,
 	selectPickerIntervalMomentum,
 	selectShowDamageAndHorror,
 	selectSaveTrauma,

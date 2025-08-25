@@ -109,7 +109,6 @@ export type PickerRenderProps<T> = {
 
 export type PickerAnimationProps = {
 	animated?: boolean;
-	displayType?: "static" | "animated";
 };
 
 export type PickerProps<T> = ListProps<T> &
