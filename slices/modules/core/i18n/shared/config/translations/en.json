@@ -31,7 +31,7 @@
 
 	"board.help.press.skills": "Opens skill calculator",
 
-	"board.help.hold.freeArea": "Tap and hold anywhere on the screen to see the taken damage and horror. You can also view the difference between base and actiual skill values. Swipe left to the previous investigator’s board, swipe right to the next one.",
+	"board.help.hold.freeArea": "Tap and hold anywhere on the screen to see the taken damage and horror. You can also view the difference between base and actiual skill values. Swipe left to the next investigator’s board, swipe right to the previous one.",
 
 	"board.help.longPress.main": "Shows/hides modifier counter. You can change base value (e.g. permanent +1 health, -2 sanity)",
 	"board.help.longPress.secondary": "Resets value to 0",

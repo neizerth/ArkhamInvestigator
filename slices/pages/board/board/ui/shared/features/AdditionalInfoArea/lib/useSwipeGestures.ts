@@ -10,11 +10,11 @@ export const useSwipeGestures = () => {
 	const dispatch = useAppDispatch();
 
 	const onSwipeLeft = useCallback(() => {
-		dispatch(setPrevBoardIndex());
+		dispatch(setNextBoardIndex());
 	}, [dispatch]);
 
 	const onSwipeRight = useCallback(() => {
-		dispatch(setNextBoardIndex());
+		dispatch(setPrevBoardIndex());
 	}, [dispatch]);
 
 	const swipeLeft = useSwipe({
