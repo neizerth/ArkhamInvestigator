@@ -1,6 +1,6 @@
 import { AppLayout } from "@modules/core/app/app/ui";
 import { asTransparentModal } from "@modules/core/router/shared/lib/config";
-import { Stack } from "expo-router";
+import { Stack } from "@modules/core/router/shared/ui";
 import type { PropsWithChildren } from "react";
 import { screenOptions } from "./RootLayout.config";
 
