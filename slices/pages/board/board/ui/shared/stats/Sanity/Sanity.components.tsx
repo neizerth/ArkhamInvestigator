@@ -64,7 +64,7 @@ export const BaseSanity: FC<DefinedBaseStatPickerProps> = styled(
 		position: "absolute",
 		zIndex: 4,
 		right: 0,
-		top: 0,
+		top: -10,
 	},
 	gap: 5,
 })`

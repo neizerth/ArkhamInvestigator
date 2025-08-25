@@ -48,8 +48,8 @@ export const BaseActions: FC<DefinedBaseStatPickerProps> = styled(
 	contentContainerStyle: {
 		position: "absolute",
 		zIndex: 1,
-		right: -15,
-		top: 0,
+		right: -20,
+		top: -10,
 	},
 	gap: 5,
 })`
