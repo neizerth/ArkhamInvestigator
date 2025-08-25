@@ -3,11 +3,12 @@ import {
 	setNextBoardIndex,
 	setPrevBoardIndex,
 } from "@modules/board/base/shared/lib";
-import { routes } from "@shared/config";
 import { useAppDispatch } from "@shared/lib";
 import { useCallback } from "react";
 import type { ViewProps } from "react-native";
+import { GestureDetector } from "react-native-gesture-handler";
 import * as C from "./InvestigatorSelect.components";
+import { useGestures } from "./useGestures";
 
 export type InvestigatorSelectProps = ViewProps;
 
@@ -23,19 +24,19 @@ export const InvestigatorSelect = ({ ...props }: InvestigatorSelectProps) => {
 		dispatch(setPrevBoardIndex());
 	}, [dispatch]);
 
+	const gesture = useGestures();
+
 	return (
 		<C.Container {...props}>
-			<C.Up onPress={next}>
+			<C.Up onPress={prev}>
 				<C.IconContainer>
 					<C.UpIcon />
 				</C.IconContainer>
 			</C.Up>
-			<C.Value
-				boardId="current"
-				onPress={next}
-				onLongPress={goToPage(routes.overview)}
-			/>
-			<C.Down onPress={prev}>
+			<GestureDetector gesture={gesture}>
+				<C.Value boardId="current" />
+			</GestureDetector>
+			<C.Down onPress={next}>
 				<C.IconContainer>
 					<C.DownIcon />
 				</C.IconContainer>
