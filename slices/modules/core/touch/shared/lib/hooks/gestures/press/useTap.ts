@@ -16,7 +16,7 @@ type Options = {
 export const useTap = ({ gestureActionType, onTap }: Options) => {
 	const onStart = useTouchCallback({
 		touchActionType: gestureActionType,
-		touchType: "longPress",
+		touchType: "press",
 		callback: onTap,
 	});
 

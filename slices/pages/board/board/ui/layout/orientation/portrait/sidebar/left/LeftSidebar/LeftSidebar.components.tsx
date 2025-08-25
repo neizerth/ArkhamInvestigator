@@ -2,6 +2,7 @@ import type { FC } from "react";
 import { View, type ViewProps } from "react-native";
 import styled, { css } from "styled-components/native";
 import { assetsSize } from "../../../../../../../config";
+import { InvestigatorSelect } from "../../../../../../shared";
 import { SidebarIconButton } from "../../SidebarIconButton";
 import { ChaosBagButton } from "../button";
 
@@ -56,4 +57,10 @@ export const Button: typeof SidebarIconButton = styled(SidebarIconButton)`
 
 export const ChaosBag: typeof ChaosBagButton = styled(ChaosBagButton)`
   
+`;
+
+export const BoardSelect: typeof InvestigatorSelect = styled(
+	InvestigatorSelect,
+)`
+  margin-bottom: -30px;
 `;

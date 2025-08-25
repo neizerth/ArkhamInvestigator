@@ -12,7 +12,6 @@ import { selectChaosBagEnabled } from "@modules/chaos-bag/base/shared/lib";
 import { useAppDispatch, useAppSelector, useDispatchAction } from "@shared/lib";
 import { useCallback } from "react";
 import { type ViewProps, useWindowDimensions } from "react-native";
-import { InvestigatorSelect } from "../../../../../../shared";
 import { Sidebar } from "../../Sidebar";
 import * as C from "./LeftSidebar.components";
 
@@ -61,7 +60,7 @@ export const LeftSidebar = ({ ...props }: LeftSidebarProps) => {
 	const compactHistory =
 		!single &&
 		chaosBagEnabled &&
-		((showText && window.height < 800) || window.height <= 640);
+		((showText && window.height < 750) || window.height <= 640);
 
 	return (
 		<Sidebar {...props}>
@@ -90,7 +89,7 @@ export const LeftSidebar = ({ ...props }: LeftSidebarProps) => {
 				</C.Buttons>
 				{!single && (
 					<C.Group>
-						<InvestigatorSelect />
+						<C.BoardSelect />
 					</C.Group>
 				)}
 			</C.Container>
