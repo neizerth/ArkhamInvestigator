@@ -45,4 +45,4 @@ app-example
 ArkhamIcons.ttf
 ArkhamIcons.json
 
-!android/app/src/main/res/raw/*.pem
+!android/**/*.pem
