@@ -53,7 +53,7 @@ export const BaseActions: FC<DefinedBaseStatPickerProps> = styled(
 	},
 	gap: 5,
 })`
-    
+	height: 50px;
 `;
 
 export const DiffValue: typeof Value = styled(Value)`
@@ -67,6 +67,6 @@ export const Picker: typeof StatPicker = styled(StatPicker).attrs({
 	},
 	itemHeight: assetsSize.action + 5,
 })`
-    position: absolute;
-    z-index: 2;
-  `;
+	position: absolute;
+	z-index: 2;
+`;

@@ -21,5 +21,5 @@ export const Picker: typeof StatPicker = styled(StatPicker).attrs({
 	},
 	stroke: false,
 })`
-  
-  `;
+  position: absolute;
+`;

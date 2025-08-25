@@ -1,3 +1,5 @@
+import { selectPickerAnimation } from "@modules/board/base/shared/lib";
+import { useAppSelector } from "@shared/lib";
 import { memo } from "react";
 import type { PickerProps } from "../../model";
 import * as C from "./Picker.components";
@@ -9,17 +11,19 @@ export function Picker<T>({
 	gap = 0,
 	listStyle,
 	renderItemContainer = defaultRenderItemContainer,
-	// displayType = "animated",
-	displayType = "static",
 	...props
 }: PickerProps<T>) {
-	const Component = displayType === "animated" ? C.List : C.Static;
+	const animated = useAppSelector(selectPickerAnimation);
+
+	const Component = animated ? C.List : C.Static;
+
 	return (
 		<C.Container style={style}>
 			<Component
 				{...props}
 				style={listStyle}
 				itemHeight={itemHeight + gap}
+				gap={gap}
 				renderItemContainer={renderItemContainer}
 			/>
 		</C.Container>
