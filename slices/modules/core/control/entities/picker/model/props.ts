@@ -1,17 +1,14 @@
 import type { HapticPatternType } from "@modules/core/haptic/shared/model";
-import type { MaybePromise } from "@shared/model";
+import type { MaybePromise, PickPartial } from "@shared/model";
 import type { ReactElement } from "react";
 import type {
 	GestureResponderEvent,
 	ListRenderItem,
-	StyleProp,
+	ViewProps,
 	ViewStyle,
 } from "react-native";
 import type { ListRenderItemInfo } from "react-native";
-import type {
-	AnimatedStyle,
-	FlatListPropsWithLayout,
-} from "react-native-reanimated";
+import type { FlatListPropsWithLayout } from "react-native-reanimated";
 import type { PickerChangeEvent } from "./events";
 
 export type PickerRenderProp<T> = (
@@ -31,8 +28,10 @@ export type PickerContainerInfo<T> = PickerItemInfo<T> & {
 
 type ListProps<T> = Omit<
 	FlatListPropsWithLayout<T>,
-	"data" | "renderItem" | "contentContainerStyle"
->;
+	"data" | "renderItem" | "contentContainerStyle" | "style"
+> & {
+	style?: ViewProps["style"];
+};
 
 export type PickerBaseListProps<T> = ListProps<T> &
 	PickerDataProps<T> & {
@@ -49,7 +48,7 @@ export type PickerScrollProps = {
 };
 
 export type PickerBasePressProps = {
-	onPressIn?: (e: GestureResponderEvent) => void;
+	onPressIn?: () => void;
 	onPressOut?: () => void;
 	onPressChange?: (value: boolean) => void;
 };
@@ -95,7 +94,7 @@ export type PickerGestureProps = {
 
 export type PickerStyleProps = {
 	itemContainerStyle?: ViewStyle;
-	listStyle?: StyleProp<AnimatedStyle<ViewStyle>>;
+	listStyle?: ViewProps["style"];
 };
 
 export type PickerItemStyleProps = {
@@ -104,12 +103,13 @@ export type PickerItemStyleProps = {
 };
 
 export type PickerRenderProps<T> = {
-	renderItemContainer?: PickerRenderProp<T>;
+	renderItemContainer: PickerRenderProp<T>;
 	renderItem: PickerListRenderItem<T>;
 };
 
 export type PickerAnimationProps = {
 	animated?: boolean;
+	displayType?: "static" | "animated";
 };
 
 export type PickerProps<T> = ListProps<T> &
@@ -119,7 +119,7 @@ export type PickerProps<T> = ListProps<T> &
 	PickerBasePressProps &
 	PickerGestureProps &
 	PickerActivationProps &
-	PickerRenderProps<T> &
+	PickPartial<PickerRenderProps<T>, "renderItemContainer"> &
 	PickerPressProps &
 	PickerHapticScrollProps &
 	PickerDataProps<T>;

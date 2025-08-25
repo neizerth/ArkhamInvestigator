@@ -21,7 +21,7 @@ export function usePressEvents<T>(props: BaseListProps<T>) {
 			if (typeof onTouchStartProp === "function") {
 				onTouchStartProp(e);
 			}
-			onPressIn?.(e);
+			onPressIn?.();
 			onPressChange?.(true);
 		},
 		[onTouchStartProp, onPressIn, onPressChange],
