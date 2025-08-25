@@ -1,4 +1,9 @@
-import { type TurboModule, TurboModuleRegistry } from "react-native";
+import { always } from "ramda";
+import {
+	NativeModules,
+	type TurboModule,
+	TurboModuleRegistry,
+} from "react-native";
 import {
 	HapticFeedbackTypes,
 	type HapticOptions,
@@ -15,7 +20,22 @@ type HapticType = keyof typeof HapticFeedbackTypes;
 const HapticFeedback =
 	TurboModuleRegistry.getEnforcing<Spec>("RNHapticFeedback");
 
-const Haptics = {
+type HapticsSupportModule = {
+	isEffectsSupported: () => Promise<boolean>;
+};
+
+const HapticsSupport: HapticsSupportModule = NativeModules.HapticsSupport;
+
+export const Haptics = {
+	isEffectsSupported() {
+		if (typeof HapticsSupport.isEffectsSupported !== "function") {
+			return Promise.resolve(false);
+		}
+
+		const onError = always(false);
+
+		return HapticsSupport.isEffectsSupported().catch(onError);
+	},
 	trigger(
 		type: HapticType = HapticFeedbackTypes.selection,
 		options: HapticOptions = {},

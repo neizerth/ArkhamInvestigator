@@ -7,7 +7,10 @@ export * from "react-native-haptic-feedback";
 
 type HapticType = keyof typeof HapticFeedbackTypes;
 
-const Haptics = {
+export const Haptics = {
+	async isEffectsSupported() {
+		return false;
+	},
 	trigger(
 		type: HapticType = HapticFeedbackTypes.selection,
 		options: HapticOptions = {},
