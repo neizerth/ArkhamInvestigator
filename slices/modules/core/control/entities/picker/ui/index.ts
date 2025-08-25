@@ -1,2 +1,2 @@
 export * from "./Picker";
-export * from "./list";
+export * from "./animated";
