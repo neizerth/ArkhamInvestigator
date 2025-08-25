@@ -50,7 +50,7 @@ export function StaticPicker<T>(props: StaticPickerProps<T>) {
 			style={props.style}
 			onPressIn={onPressIn}
 			onPressOut={onPressOut}
-			activeOpacity={0.7}
+			activeOpacity={0.5}
 		>
 			<GestureDetector gesture={gesture}>
 				{renderItemContainer(containerProps)}
