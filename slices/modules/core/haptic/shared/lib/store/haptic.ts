@@ -4,10 +4,12 @@ import type { HapticMode } from "../../model";
 
 export type HapticState = {
 	hapticMode?: HapticMode;
+	hapticEffectsSupported: boolean | null;
 };
 
 const initialState: HapticState = {
 	hapticMode: "default",
+	hapticEffectsSupported: null,
 };
 
 export const haptic = createSlice({
@@ -15,8 +17,9 @@ export const haptic = createSlice({
 	...createSliceState(initialState),
 });
 
-export const { setHapticMode } = haptic.actions;
+export const { setHapticMode, setHapticEffectsSupported } = haptic.actions;
 
-export const { selectHapticMode } = haptic.selectors;
+export const { selectHapticMode, selectHapticEffectsSupported } =
+	haptic.selectors;
 
 export default haptic.reducer;

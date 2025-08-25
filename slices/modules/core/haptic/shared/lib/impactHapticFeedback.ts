@@ -1,5 +1,5 @@
 import type { HapticPatternType } from "../model";
-import Haptics from "./Haptics";
+import { Haptics } from "./Haptics";
 import { vibrate } from "./vibrate";
 
 const defaultHapticOptions = {
