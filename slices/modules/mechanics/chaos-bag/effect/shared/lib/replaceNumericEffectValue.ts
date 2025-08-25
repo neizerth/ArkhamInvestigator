@@ -10,7 +10,7 @@ const MAX_INDEX = 20;
 
 export const replaceNumericEffectValue = ({ text, value }: Options) => {
 	const effectValue = getEffectTokenValue(value);
-	return text.replace(/([-—−+]?\d+)/, (source) => {
+	return text.replace(/([-—−+]\d+)/, (source) => {
 		const index = text.indexOf(source);
 
 		if (index > MAX_INDEX) {
