@@ -45,8 +45,8 @@ export const BaseHandSize: FC<DefinedBaseStatPickerProps> = styled(
 	},
 	gap: 5,
 })`
-    
-  `;
+  height: 50px;
+`;
 
 export const Picker: typeof StatPicker = styled(StatPicker).attrs({
 	valueStyle: {

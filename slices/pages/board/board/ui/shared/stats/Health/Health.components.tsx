@@ -64,8 +64,8 @@ export const BaseHealth: FC<DefinedBaseStatPickerProps> = styled(
 	},
 	gap: 5,
 })`
-    
-  `;
+   height: 50px; 
+`;
 
 export const Additional: typeof Value = styled(Value)`
 
