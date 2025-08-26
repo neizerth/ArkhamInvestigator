@@ -6,3 +6,4 @@ export * from "./selectNextBoard";
 export * from "./selectPrevBoard";
 export * from "./selectMultipleBoardsById";
 export * from "./selectMultipleBoardsById";
+export * from "./selectBoardByIndex";
