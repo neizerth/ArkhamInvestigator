@@ -1,5 +1,7 @@
 import type { BoardId } from "@modules/board/base/shared/model";
 
+import { selectModifyChaosTokens } from "@modules/chaos-bag/base/shared/lib";
+import type { ChaosTokenValues } from "@modules/chaos-bag/base/shared/model";
 import {
 	defaultChaosTokenValues,
 	defaultNumericChaosTokenValue,
@@ -19,6 +21,7 @@ export const selectChaosBagTokenValues = (boardId: BoardId) =>
 			selectChaosTokenValueInternal,
 			selectBoardTokenValues(boardId),
 			selectBoardChaosTokenValueModifications(boardId),
+			selectModifyChaosTokens,
 		],
 		(
 			referenceCardValues,
@@ -26,7 +29,11 @@ export const selectChaosBagTokenValues = (boardId: BoardId) =>
 			values,
 			customizedValues,
 			signatureModifications,
-		) => {
+			modify,
+		): ChaosTokenValues => {
+			if (!modify) {
+				return {};
+			}
 			const tokenValues = {
 				...defaultNumericChaosTokenValue,
 				...defaultChaosTokenValues,
