@@ -38,22 +38,28 @@ export const Resources = ({
 	);
 
 	const onSwipeRight = useCallback(() => {
+		if (!showUpkeepResources) {
+			return false;
+		}
 		dispatch(
 			increaseBoardBasePropValue({
 				boardId: "current",
 				prop: "upkeepResourcesIncrease",
 			}),
 		);
-	}, [dispatch]);
+	}, [dispatch, showUpkeepResources]);
 
 	const onSwipeLeft = useCallback(() => {
+		if (!showUpkeepResources) {
+			return false;
+		}
 		dispatch(
 			decreaseBoardBasePropValue({
 				boardId: "current",
 				prop: "upkeepResourcesIncrease",
 			}),
 		);
-	}, [dispatch]);
+	}, [dispatch, showUpkeepResources]);
 
 	return (
 		<C.Container {...props}>
