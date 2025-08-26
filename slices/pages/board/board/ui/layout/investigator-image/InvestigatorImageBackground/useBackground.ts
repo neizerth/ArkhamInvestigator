@@ -1,6 +1,6 @@
 import { selectBoardProp } from "@modules/board/base/shared/lib";
 import type { BoardId } from "@modules/board/base/shared/model";
-import { selectTurnEnd } from "@modules/mechanics/round/entities/lib";
+import { selectBoardIsInactive } from "@modules/mechanics/board/base/entities/lib";
 import { useAppSelector } from "@shared/lib";
 
 export const useBackground = (boardId: BoardId) => {
@@ -18,7 +18,7 @@ export const useBackground = (boardId: BoardId) => {
 		}),
 	);
 
-	const turnEnd = useAppSelector(selectTurnEnd(boardId));
+	const inactive = useAppSelector(selectBoardIsInactive(boardId));
 
 	if (!layout) {
 		return;
@@ -27,6 +27,6 @@ export const useBackground = (boardId: BoardId) => {
 	return {
 		code: image.id,
 		layout,
-		grayscale: turnEnd,
+		grayscale: inactive,
 	};
 };
