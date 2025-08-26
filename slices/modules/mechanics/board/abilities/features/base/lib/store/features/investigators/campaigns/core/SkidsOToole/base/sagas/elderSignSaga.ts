@@ -15,7 +15,7 @@ const filterAction = (action: unknown) => {
 
 	const { allRevealedTokens, failed } = action.payload;
 
-	if (failed) {
+	if (failed !== false) {
 		return false;
 	}
 

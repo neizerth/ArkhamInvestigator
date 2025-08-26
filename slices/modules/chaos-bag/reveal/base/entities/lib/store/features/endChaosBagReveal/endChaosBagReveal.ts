@@ -11,7 +11,7 @@ export const endChaosBagReveal = createAction<EndChaosBagRevealPayload>(
 
 export type ChaosBagRevealEndPayload = EndChaosBagRevealPayload &
 	Omit<ChaosBagRevealState, "failed"> & {
-		failed: boolean;
+		failed: boolean | null;
 	};
 
 export const chaosBagRevealEnd = createAction<ChaosBagRevealEndPayload>(

@@ -1,3 +1,4 @@
+import { selectModifyChaosTokens } from "@modules/chaos-bag/base/shared/lib";
 import {
 	selectAllRevealedTokens,
 	selectChaosBagSkillValue,
@@ -6,9 +7,9 @@ import { createSelector } from "@reduxjs/toolkit";
 import { getSkillCheckResult } from "../../../../shared/lib/logic";
 
 export const selectSkillCheckResult = createSelector(
-	[selectChaosBagSkillValue, selectAllRevealedTokens],
-	(skillValue, tokens): number | null => {
-		if (typeof skillValue !== "number") {
+	[selectChaosBagSkillValue, selectAllRevealedTokens, selectModifyChaosTokens],
+	(skillValue, tokens, modify): number | null => {
+		if (!modify || typeof skillValue !== "number") {
 			return null;
 		}
 

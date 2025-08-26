@@ -13,7 +13,7 @@ export type ChaosBagHistoryItemData = {
 	skillCheckExpression?: SkillCheckItem[];
 	difficulty?: number | null;
 	difficultyType?: SkillCheckDifficultyType | null;
-	failed: boolean;
+	failed: boolean | null;
 	result?: number | null;
 	succeedBy?: number | null;
 	tokens: RevealedChaosBagToken[];

@@ -6,7 +6,7 @@ import { getSkillCheckDifficultyCharacter } from "@modules/board/skill-check/sha
 import type { ChaosBagHistoryItem } from "@modules/chaos-bag/base/shared/model";
 import { goBack } from "@modules/core/router/shared/lib";
 import { isNotEmpty, useAppDispatch, useAppSelector } from "@shared/lib";
-import { isNumber } from "mathjs";
+import { isBoolean } from "ramda-adjunct";
 import { useCallback } from "react";
 import type { ViewProps } from "react-native";
 import * as C from "./ChaosBagRevalItemSkillCheck.components";
@@ -61,7 +61,7 @@ export const ChaosBagRevalItemSkillCheck = ({
 			)}
 			{isNotEmpty(result) && isNotEmpty(succeedBy) && (
 				<C.Result>
-					{isNumber(result) && (
+					{isBoolean(failed) && (
 						<C.ResultValue value={succeedBy} fail={failed} scale={false} />
 					)}
 				</C.Result>

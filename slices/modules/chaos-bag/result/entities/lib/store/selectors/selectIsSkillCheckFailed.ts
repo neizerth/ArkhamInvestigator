@@ -17,12 +17,15 @@ export const selectIsSkillCheckFailed = createSelector(
 		selectSkillCheckDifficulty,
 		selectSkillCheckDifficultyType,
 	],
-	(skillCheckValue, tokens, currentDifficulty, currentDifficultyType) => {
+	(skillValue, tokens, currentDifficulty, currentDifficultyType) => {
 		const difficulty = currentDifficulty ?? 0;
 		const difficultyType = getDefaulSkillCheckDifficultyType(
 			currentDifficultyType,
 		);
-		const skillValue = skillCheckValue ?? 0;
+
+		if (skillValue === null) {
+			return null;
+		}
 
 		return isSkillCheckFailed({
 			tokens,
