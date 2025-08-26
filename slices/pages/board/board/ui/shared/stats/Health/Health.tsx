@@ -27,6 +27,8 @@ export const Health = ({ contentContainerStyle, ...props }: HealthProps) => {
 	const {
 		onPress,
 		onLongPress,
+		onSwipeLeft,
+		onSwipeRight,
 		onChange,
 		onWoundsChange,
 		initialValue,
@@ -70,6 +72,8 @@ export const Health = ({ contentContainerStyle, ...props }: HealthProps) => {
 					data={data}
 					onValueChanged={onValueChange}
 					onLongPress={onLongPress}
+					onSwipeLeft={onSwipeLeft}
+					onSwipeRight={onSwipeRight}
 					onPress={onPress}
 					style={pickerStyle}
 				/>

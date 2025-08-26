@@ -100,9 +100,46 @@ export const useStat = ({
 		);
 	}, [dispatch, statType, minValue, value]);
 
+	const onSwipeLeft = useCallback(() => {
+		if (value <= minValue) {
+			return;
+		}
+		dispatch(
+			setBoardPart({
+				boardId: "current",
+				data: {
+					value: {
+						[statType]: value - 1,
+					},
+					baseValue: {
+						[statType]: baseValue - 1,
+					},
+				},
+			}),
+		);
+	}, [dispatch, statType, baseValue, value, minValue]);
+
+	const onSwipeRight = useCallback(() => {
+		dispatch(
+			setBoardPart({
+				boardId: "current",
+				data: {
+					value: {
+						[statType]: value + 1,
+					},
+					baseValue: {
+						[statType]: baseValue + 1,
+					},
+				},
+			}),
+		);
+	}, [dispatch, statType, baseValue, value]);
+
 	return {
 		onPress,
 		onLongPress,
+		onSwipeLeft,
+		onSwipeRight,
 		onChange,
 		onWoundsChange,
 		initialValue,

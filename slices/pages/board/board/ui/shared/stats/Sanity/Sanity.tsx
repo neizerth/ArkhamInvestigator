@@ -25,6 +25,8 @@ export const Sanity = ({ ...props }: SanityProps) => {
 		onLongPress,
 		onChange,
 		onWoundsChange,
+		onSwipeLeft,
+		onSwipeRight,
 		initialValue,
 		baseValue,
 		value,
@@ -69,6 +71,8 @@ export const Sanity = ({ ...props }: SanityProps) => {
 					onValueChanged={onValueChange}
 					onLongPress={onLongPress}
 					onPress={onPress}
+					onSwipeLeft={onSwipeLeft}
+					onSwipeRight={onSwipeRight}
 					style={pickerStyle}
 				/>
 				{showInitialValue && (
