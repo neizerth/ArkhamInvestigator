@@ -1,6 +1,7 @@
 import { color, gameAssets } from "@shared/config";
 import * as UI from "@shared/ui";
 import styled from "styled-components/native";
+import { assetsSize } from "../../../../../config";
 import { withStat } from "../../../../../lib";
 import { StatPickerMemo as StatPicker } from "../../common/StatPicker";
 
@@ -20,6 +21,7 @@ export const Picker: typeof StatPicker = styled(StatPicker).attrs({
 		color: color.black,
 	},
 	stroke: false,
+	itemHeight: assetsSize.main,
 })`
   position: absolute;
 `;

@@ -39,9 +39,9 @@ export const BaseHandSize: FC<DefinedBaseStatPickerProps> = styled(
 	itemHeight: assetsSize.main,
 	contentContainerStyle: {
 		position: "absolute",
-		zIndex: 4,
+		zIndex: 2,
 		right: -10,
-		top: -15,
+		top: -5,
 	},
 	gap: 5,
 })`
