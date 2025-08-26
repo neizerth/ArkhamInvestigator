@@ -7,7 +7,6 @@ import { propEq } from "ramda";
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { useColumnsCount } from "../../lib";
-import { InvestigatorList as List } from "../investigator-list/InvestigatorList";
 import * as C from "./InvestigatorSelect.components";
 
 export const InvestigatorSelect = () => {
@@ -49,7 +48,7 @@ export const InvestigatorSelect = () => {
 		<C.Container>
 			<C.FactionSelect value={factionFilter} />
 			<C.Content>
-				<List sections={sections} onChange={onChange} />
+				<C.List sections={sections} onChange={onChange} />
 			</C.Content>
 			<C.Footer />
 		</C.Container>

@@ -4,12 +4,17 @@ import styled from "styled-components/native";
 import { FactionSelect as BaseFactionSelect } from "../FactionSelect";
 import { InvestigatorSelectFooter } from "../InvestigatorSelectFooter";
 
+import { InvestigatorList } from "../investigator-list/InvestigatorList";
+
 export const Container: typeof View = styled(View)`
   flex: 1;
 `;
 
 export const Content: typeof View = styled(View)`
   flex: 1;
+`;
+
+export const List: typeof InvestigatorList = styled(InvestigatorList)`
 `;
 
 export const FactionSelect: typeof BaseFactionSelect = styled(
