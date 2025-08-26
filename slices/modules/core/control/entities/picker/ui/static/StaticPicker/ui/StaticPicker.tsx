@@ -45,9 +45,16 @@ export function StaticPicker<T>(props: StaticPickerProps<T>) {
 	const pressGestures = usePressGestures(props);
 	const gesture = Gesture.Exclusive(...swipeGestures, ...pressGestures);
 
+	const style = [
+		props.style,
+		{
+			height: itemHeight,
+		},
+	];
+
 	return (
 		<C.Container
-			style={props.style}
+			style={style}
 			onPressIn={onPressIn}
 			onPressOut={onPressOut}
 			activeOpacity={0.5}

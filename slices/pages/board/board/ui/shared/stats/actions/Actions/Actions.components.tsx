@@ -49,11 +49,10 @@ export const BaseActions: FC<DefinedBaseStatPickerProps> = styled(
 		position: "absolute",
 		zIndex: 1,
 		right: -20,
-		top: -10,
+		top: -0,
 	},
 	gap: 5,
 })`
-	height: 50px;
 `;
 
 export const DiffValue: typeof Value = styled(Value)`
