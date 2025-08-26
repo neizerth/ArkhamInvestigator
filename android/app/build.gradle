@@ -86,13 +86,13 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdk rootProject.ext.compileSdkVersion
 
-    namespace 'com.arkhaminvestigator.dev'
+    namespace 'com.arkhaminvestigator'
     defaultConfig {
-        applicationId 'com.arkhaminvestigator.dev'
+        applicationId 'com.arkhaminvestigator'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 347
-        versionName "2.0.0-beta.2"
+        versionCode 350
+        versionName "2.0.0-beta.5"
     }
     signingConfigs {
         debug {
