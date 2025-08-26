@@ -17,16 +17,20 @@ export const Container: FC<ViewProps> = styled(View)`
 `;
 
 type BackgroundProps = InvestigatorImageBackgroundProps & {
-	selected: boolean;
+	hidden?: boolean;
 };
 
 export const Background: FC<BackgroundProps> = styled(
 	InvestigatorImageBackground,
 )`
-  opacity: 0;
-  ${({ selected }: BackgroundProps) =>
-		selected &&
+  z-index: 2;
+  ${({ hidden }: BackgroundProps) =>
+		hidden &&
 		css`
-    opacity: 1;
+    opacity: 0;
   `}
+`;
+
+export const PrevBackground: typeof Background = styled(Background)`
+  z-index: 1;
 `;
