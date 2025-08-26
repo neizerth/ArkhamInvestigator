@@ -92,6 +92,24 @@ export const HelpPage = () => {
 			</Text>
 			<Paragraph>{t`board.help.longPress.investigatorSelect`}</Paragraph>
 
+			<Title>{t`Swipe gestures`}</Title>
+
+			<Text>
+				<C.Icon icon="health" />, <C.Icon icon="sanity" />,{" "}
+				<C.Icon icon="action" />, <C.Icon icon="card-outline" />,{" "}
+				<C.Icon icon="resource" />
+				{" - "}
+				{t`board.help.swipeLeft.main`}
+			</Text>
+
+			<Text>
+				<C.Icon icon="health" />, <C.Icon icon="sanity" />,{" "}
+				<C.Icon icon="action" />, <C.Icon icon="card-outline" />,{" "}
+				<C.Icon icon="resource" />
+				{" - "}
+				{t`board.help.swipeRight.main`}
+			</Text>
+
 			<Title>{t`board.help.details`}</Title>
 
 			<Paragraph>{t`board.help.details.toggle`}</Paragraph>
