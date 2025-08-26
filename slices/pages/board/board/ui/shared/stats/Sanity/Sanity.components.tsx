@@ -64,11 +64,10 @@ export const BaseSanity: FC<DefinedBaseStatPickerProps> = styled(
 		position: "absolute",
 		zIndex: 4,
 		right: 0,
-		top: -10,
+		top: -0,
 	},
 	gap: 5,
 })`
-	height: 50px;
 `;
 
 export const Picker: typeof StatPicker = styled(StatPicker).attrs({
