@@ -36,7 +36,7 @@ export const makeAction =
 			dispatch(
 				resetBoardAbilities({
 					boardId,
-					limitTypes: ["turn"],
+					limitTypes: ["action"],
 					history: historyGroup,
 				}),
 			);
