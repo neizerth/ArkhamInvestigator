@@ -1,6 +1,10 @@
-import { selectShowUpkeepResources } from "@modules/board/base/shared/lib";
+import {
+	decreaseBoardBasePropValue,
+	increaseBoardBasePropValue,
+	selectShowUpkeepResources,
+} from "@modules/board/base/shared/lib";
 import type { PickerChangeEvent } from "@modules/core/control/entities/picker/model";
-import { useAppSelector } from "@shared/lib";
+import { useAppDispatch, useAppSelector } from "@shared/lib";
 import type { ImageBackgroundProps } from "@shared/ui";
 import { range } from "ramda";
 import { useCallback } from "react";
@@ -23,6 +27,8 @@ export const Resources = ({
 	value,
 	...props
 }: ResourcesProps) => {
+	const dispatch = useAppDispatch();
+
 	const showUpkeepResources = useAppSelector(selectShowUpkeepResources);
 	const onChange = useCallback(
 		({ value }: PickerChangeEvent) => {
@@ -30,6 +36,24 @@ export const Resources = ({
 		},
 		[onChangeProp],
 	);
+
+	const onSwipeRight = useCallback(() => {
+		dispatch(
+			increaseBoardBasePropValue({
+				boardId: "current",
+				prop: "upkeepResourcesIncrease",
+			}),
+		);
+	}, [dispatch]);
+
+	const onSwipeLeft = useCallback(() => {
+		dispatch(
+			decreaseBoardBasePropValue({
+				boardId: "current",
+				prop: "upkeepResourcesIncrease",
+			}),
+		);
+	}, [dispatch]);
 
 	return (
 		<C.Container {...props}>
@@ -43,6 +67,8 @@ export const Resources = ({
 					onValueChanged={onChange}
 					onLongPress={onLongPress}
 					onPress={onPress}
+					onSwipeLeft={onSwipeLeft}
+					onSwipeRight={onSwipeRight}
 				/>
 			</C.Content>
 		</C.Container>

@@ -17,5 +17,17 @@ export function useSwipeGestures<T>(props: StaticPickerProps<T>) {
 		onSwipe: prev,
 	});
 
-	return [swipeUp, swipeDown];
+	const swipeLeft = useSwipe({
+		touchActionType: "picker",
+		direction: "left",
+		onSwipe: props.onSwipeLeft,
+	});
+
+	const swipeRight = useSwipe({
+		touchActionType: "picker",
+		direction: "right",
+		onSwipe: props.onSwipeRight,
+	});
+
+	return [swipeUp, swipeDown, swipeLeft, swipeRight];
 }

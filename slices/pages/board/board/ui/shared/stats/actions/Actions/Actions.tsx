@@ -15,7 +15,15 @@ export const Actions = ({ ...props }: ActionsProps) => {
 	const dispatch = useAppDispatch();
 	const haveAbilities = useAppSelector(selectHasBoardAbilities("current"));
 
-	const { value, baseValue, initialValue, onChange, onLongPress } = useStat({
+	const {
+		value,
+		baseValue,
+		initialValue,
+		onChange,
+		onLongPress,
+		onSwipeLeft,
+		onSwipeRight,
+	} = useStat({
 		statType: "actions",
 	});
 
@@ -36,6 +44,8 @@ export const Actions = ({ ...props }: ActionsProps) => {
 						onValueChanged={onChange}
 						onPress={onPress}
 						onLongPress={onLongPress}
+						onSwipeLeft={onSwipeLeft}
+						onSwipeRight={onSwipeRight}
 					/>
 				</C.Content>
 			</C.Background>

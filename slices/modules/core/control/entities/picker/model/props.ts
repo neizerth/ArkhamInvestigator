@@ -90,6 +90,8 @@ export type PickerPressProps = {
 export type PickerGestureProps = {
 	onSwipeRight?: () => void | false;
 	onSwipeLeft?: () => void | false;
+	onSwipeUp?: () => void | false;
+	onSwipeDown?: () => void | false;
 };
 
 export type PickerStyleProps = {

@@ -14,10 +14,18 @@ export const HandSize = ({
 	contentContainerStyle,
 	...props
 }: HandSizeProps) => {
-	const { onPress, onLongPress, onChange, initialValue, baseValue, value } =
-		useStat({
-			statType: "handSize",
-		});
+	const {
+		onPress,
+		onLongPress,
+		onChange,
+		onSwipeLeft,
+		onSwipeRight,
+		initialValue,
+		baseValue,
+		value,
+	} = useStat({
+		statType: "handSize",
+	});
 
 	const maxValue = baseValue + 1;
 
@@ -39,6 +47,8 @@ export const HandSize = ({
 					onValueChanged={onChange}
 					onLongPress={onLongPress}
 					onPress={onPress}
+					onSwipeLeft={onSwipeLeft}
+					onSwipeRight={onSwipeRight}
 				/>
 			</C.Content>
 		</C.Container>
