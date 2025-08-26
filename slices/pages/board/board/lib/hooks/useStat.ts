@@ -100,7 +100,7 @@ export const useStat = ({
 		);
 	}, [dispatch, statType, minValue, value]);
 
-	const onSwipeLeft = useCallback(() => {
+	const onSwipeRight = useCallback(() => {
 		if (value <= minValue) {
 			return;
 		}
@@ -119,7 +119,7 @@ export const useStat = ({
 		);
 	}, [dispatch, statType, baseValue, value, minValue]);
 
-	const onSwipeRight = useCallback(() => {
+	const onSwipeLeft = useCallback(() => {
 		dispatch(
 			setBoardPart({
 				boardId: "current",
