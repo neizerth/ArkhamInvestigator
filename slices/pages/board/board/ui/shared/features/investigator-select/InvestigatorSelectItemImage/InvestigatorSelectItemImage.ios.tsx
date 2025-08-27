@@ -1,4 +1,4 @@
-import { getSignatureImageUrl } from "@modules/signature/shared/api";
+import { getSignatureImageUrl } from "@modules/signature/base/shared/api";
 import { Image } from "expo-image";
 import { useMemo } from "react";
 import * as C from "./InvestigatorSelectItemImage.components";

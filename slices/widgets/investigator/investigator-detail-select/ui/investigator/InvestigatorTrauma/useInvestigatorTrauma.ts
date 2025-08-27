@@ -1,7 +1,7 @@
 import {
 	selectInvestigatorSettingsProp,
 	setInvestigatorSettingsProp,
-} from "@modules/signature/shared/lib";
+} from "@modules/signature/base/shared/lib";
 import { useAppDispatch, useAppSelector } from "@shared/lib";
 import { useCallback } from "react";
 

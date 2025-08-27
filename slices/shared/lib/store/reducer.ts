@@ -11,7 +11,7 @@ import { routerReducer } from "@modules/core/router/shared/lib";
 import { soundReducer } from "@modules/core/sound/shared/lib";
 import { rulesReducer } from "@modules/mechanics/rules/base/shared/lib";
 import { roundTimingReducer } from "@modules/mechanics/rules/round-timing/shared/lib";
-import { signatureReducer } from "@modules/signature/shared/lib";
+import { signatureReducer } from "@modules/signature/base/shared/lib";
 import { storiesReducer } from "@modules/stories/shared/lib";
 import * as reducer from "./features/reducer";
 

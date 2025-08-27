@@ -6,7 +6,7 @@ import {
 } from "@modules/board/abilities/shared/lib";
 import { selectCurrentBoardProp } from "@modules/board/base/shared/lib";
 import type { PickerChangeEvent } from "@modules/core/control/entities/picker/model";
-import { selectInvestigatorCounterEnabled } from "@modules/signature/shared/lib";
+import { selectInvestigatorCounterEnabled } from "@modules/signature/base/shared/lib";
 import { useAppDispatch, useAppSelector } from "@shared/lib";
 import type { InvestigatorAbility } from "arkham-investigator-data";
 import { range } from "ramda";
