@@ -1,6 +1,6 @@
 import { setShowDescription } from "@modules/board/base/shared/lib";
 import { goToPage } from "@modules/core/router/shared/lib";
-import { changeSignatureDetails } from "@modules/signature/entities/lib/store/features/changeSignatureDetails/changeSignatureDetails";
+import { changeSignatureDetails } from "@modules/signature/base/entities/lib/store/features/changeSignatureDetails/changeSignatureDetails";
 import { routes } from "@shared/config";
 import { delay, setReplaceInvestigator, useAppDispatch } from "@shared/lib";
 import { useCallback } from "react";

@@ -3,7 +3,7 @@ import { selectCurrentLanguage } from "@modules/core/i18n/shared/lib";
 import {
 	selectMediaUpdateTime,
 	selectMediaVersion,
-} from "@modules/signature/shared/lib";
+} from "@modules/signature/base/shared/lib";
 import { seconds } from "@shared/lib";
 import type { ReturnAwaited } from "@shared/model";
 import { put, retry, select, takeEvery } from "redux-saga/effects";

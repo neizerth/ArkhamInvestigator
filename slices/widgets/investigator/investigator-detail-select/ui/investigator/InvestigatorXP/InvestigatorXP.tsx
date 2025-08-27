@@ -1,7 +1,7 @@
 import {
 	selectInvestigatorXPByCode,
 	setInvestigatorSettingsProp,
-} from "@modules/signature/shared/lib";
+} from "@modules/signature/base/shared/lib";
 import {
 	selectCurrentSignatureGroup,
 	useAppDispatch,

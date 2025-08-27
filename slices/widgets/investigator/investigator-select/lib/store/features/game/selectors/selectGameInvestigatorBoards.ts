@@ -1,5 +1,5 @@
 import { createInvestigatorBoard } from "@modules/mechanics/board/base/entities/lib";
-import { selectInvestigatorSettings } from "@modules/signature/shared/lib";
+import { selectInvestigatorSettings } from "@modules/signature/base/shared/lib";
 import { createSelector } from "@reduxjs/toolkit";
 import { selectSelectedInvestigators } from "@shared/lib";
 

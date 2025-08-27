@@ -1,4 +1,4 @@
-import { selectMediaVersion } from "@modules/signature/shared/lib";
+import { selectMediaVersion } from "@modules/signature/base/shared/lib";
 import {
 	DEVICE_FONT_SCALE,
 	DPR,

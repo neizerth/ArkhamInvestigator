@@ -1,4 +1,4 @@
-import { selectSignatureGroups } from "@modules/signature/shared/lib";
+import { selectSignatureGroups } from "@modules/signature/base/shared/lib";
 import { changeSelectedInvestigator, selectFactionFilter } from "@shared/lib";
 import { useAppDispatch, useAppSelector } from "@shared/lib/hooks";
 import { splitIntoGroups } from "@shared/lib/util";

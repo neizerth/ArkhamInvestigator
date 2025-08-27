@@ -1,5 +1,5 @@
 import { selectTrackXP } from "@modules/board/base/shared/lib";
-import { getSignatureImageUrl } from "@modules/signature/shared/api";
+import { getSignatureImageUrl } from "@modules/signature/base/shared/api";
 import {
 	getBoardStats,
 	selectCurrentSkinId,

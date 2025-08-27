@@ -1,4 +1,4 @@
-import { getSignatureImageLayout } from "@modules/signature/shared/lib/common/getSignatureImageLayout";
+import { getSignatureImageLayout } from "@modules/signature/base/shared/lib/common/getSignatureImageLayout";
 import { put, select, takeEvery } from "redux-saga/effects";
 import {
 	gameTextHeightUpdated,

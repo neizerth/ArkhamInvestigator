@@ -1,5 +1,5 @@
 import { InvesigatorCode } from "@modules/mechanics/investigator/entities/config";
-import { selectInvestigatorByCode } from "@modules/signature/shared/lib";
+import { selectInvestigatorByCode } from "@modules/signature/base/shared/lib";
 import { useAppSelector } from "@shared/lib";
 import { Bold, Paragraph, Text, Title } from "@shared/ui";
 import { ContentPage } from "@widgets/content/content-page";

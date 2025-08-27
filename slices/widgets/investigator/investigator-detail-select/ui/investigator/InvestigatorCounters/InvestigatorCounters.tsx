@@ -1,7 +1,7 @@
 import {
 	selectInvestigatorCounters,
 	toggleInvestigatorCounter,
-} from "@modules/signature/shared/lib";
+} from "@modules/signature/base/shared/lib";
 import { useAppDispatch, useAppSelector } from "@shared/lib";
 import type { InvestigatorAbility } from "arkham-investigator-data";
 import memoize from "fast-memoize";

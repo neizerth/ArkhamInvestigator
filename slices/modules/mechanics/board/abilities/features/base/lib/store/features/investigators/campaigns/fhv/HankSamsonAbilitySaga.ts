@@ -4,7 +4,7 @@ import { createConfirmModalAction } from "@modules/core/modal/shared/actions/con
 
 import { openConfirm } from "@modules/core/modal/shared/confirm/lib";
 import { InvesigatorCode } from "@modules/mechanics/investigator/entities/config";
-import { changeSignatureModalActionId } from "@modules/signature/shared/config";
+import { changeSignatureModalActionId } from "@modules/signature/base/shared/config";
 import { put, takeEvery } from "redux-saga/effects";
 
 const filterAction = (action: unknown) => {

@@ -8,7 +8,7 @@ import type {
 	InvestigatorBoardValues,
 } from "@modules/board/base/shared/model";
 import { goBack } from "@modules/core/router/shared/lib";
-import { selectInvestigatorSettingsByCode } from "@modules/signature/shared/lib";
+import { selectInvestigatorSettingsByCode } from "@modules/signature/base/shared/lib";
 import {
 	getBoardStats,
 	mergeBoardStats,

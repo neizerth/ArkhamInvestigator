@@ -3,7 +3,7 @@ import { setAvailableLanguages } from "@modules/core/i18n/shared/lib";
 import {
 	setMediaUpdateTime,
 	setMediaVersion,
-} from "@modules/signature/shared/lib";
+} from "@modules/signature/base/shared/lib";
 import moment from "moment";
 import { put, takeEvery } from "redux-saga/effects";
 import { updateAppInfo } from "./updateAppInfo";
