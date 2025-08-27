@@ -1,22 +1,23 @@
 import type { BoxLayout } from "@shared/model";
-import type { FC } from "react";
-import styled, { css } from "styled-components/native";
-import { SignatureImage, type SignatureImageProps } from "../signature-image";
+import { useMemo } from "react";
+import type { SignatureImageProps } from "../signature-image";
+import * as C from "./SignatureBackground.components";
 
 export type SignatureBackgroundProps = SignatureImageProps & {
 	layout: BoxLayout;
 };
 
-export const SignatureBackground: FC<SignatureBackgroundProps> = styled(
-	SignatureImage,
-).attrs({
-	animated: true,
-})`
-  position: absolute;
-  ${({ layout }: SignatureBackgroundProps) => css`
-    left: ${-layout.left}px;
-    top: ${-layout.top}px;
-    width: ${layout.width}px;
-    height: ${layout.height}px;
- `}
-`;
+export const SignatureBackground = ({
+	layout,
+	...props
+}: SignatureBackgroundProps) => {
+	const style = useMemo(() => {
+		return {
+			top: -layout.top,
+			left: -layout.left,
+			width: layout.width,
+			height: layout.height,
+		};
+	}, [layout]);
+	return <C.Background {...props} style={[props.style, style]} animated />;
+};
