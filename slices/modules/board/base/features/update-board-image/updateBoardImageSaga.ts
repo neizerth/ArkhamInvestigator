@@ -23,15 +23,6 @@ function* worker({ payload }: ReturnType<typeof gameTextHeightUpdated>) {
 		offsetBottom,
 	});
 
-	// const colorUri: ReturnAwaited<typeof optimizeLayoutImage> = yield call(
-	// 	optimizeLayoutImage,
-	// 	{
-	// 		image,
-	// 		view,
-	// 		layout,
-	// 	},
-	// );
-
 	yield put(
 		setBoardProp({
 			boardId,
