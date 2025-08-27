@@ -3,7 +3,7 @@ import { View } from "react-native";
 import type { ViewProps } from "react-native";
 import styled from "styled-components/native";
 
-import { SignatureBackground } from "@modules/signature/shared/ui";
+import { SignatureBackground } from "@modules/signature/entities/ui";
 import Animated from "react-native-reanimated";
 
 export const Background: typeof SignatureBackground = styled(

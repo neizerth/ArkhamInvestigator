@@ -9,7 +9,7 @@ import {
 	TouchableOpacity,
 	type TouchableOpacityProps,
 } from "@modules/core/touch/shared/ui";
-import { SignatureImage } from "@modules/signature/shared/ui";
+import { SignatureImage } from "@modules/signature/entities/ui";
 
 const size = 60;
 const borderSize = 2;
