@@ -17,7 +17,14 @@ export const InvestigatorImageBackground = ({
 		return;
 	}
 
-	return <C.Background {...props} {...background} type="full" />;
+	return (
+		<C.Background
+			{...props}
+			{...background}
+			type="full"
+			key={background.code}
+		/>
+	);
 };
 
 export const InvestigatorImageBackgroundMemo = memo(
