@@ -3,7 +3,7 @@ import type { ImageProps, ViewProps } from "react-native";
 import {
 	type GetSignatureImageUrlOptions,
 	getSignatureImageUrl,
-} from "../../../api";
+} from "../../../../shared/api";
 
 import * as C from "./StaticSignatureImage.components";
 

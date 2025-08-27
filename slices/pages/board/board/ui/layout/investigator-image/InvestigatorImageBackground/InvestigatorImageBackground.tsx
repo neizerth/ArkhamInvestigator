@@ -1,5 +1,5 @@
 import type { PropsWithBoardId } from "@modules/board/base/shared/model";
-import type { SignatureBackgroundProps } from "@modules/signature/shared/ui";
+import type { SignatureBackgroundProps } from "@modules/signature/entities/ui";
 import { memo } from "react";
 import * as C from "./InvestigatorImageBackground.components";
 import { useBackground } from "./useBackground";
