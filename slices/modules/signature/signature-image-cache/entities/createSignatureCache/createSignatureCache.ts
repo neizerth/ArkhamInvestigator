@@ -1,17 +1,14 @@
 import type { InvestigatorBoardImage } from "@modules/board/base/shared/model";
-import type {
-	SignatureImageLayout,
-	SignatureImageType,
-} from "@modules/signature/base/shared/model";
+import type { SignatureImageType } from "@modules/signature/base/shared/model";
 import { createAction } from "@reduxjs/toolkit";
-import type { Box } from "arkham-investigator-data";
+import type { Box, RectPosition } from "@shared/model";
 
 export type CreateSignatureCachePayload = {
 	image: InvestigatorBoardImage;
 	view: Box;
+	offset: RectPosition;
 	type: SignatureImageType;
 	grayscale?: boolean;
-	layout: SignatureImageLayout;
 	overwrite?: boolean;
 };
 

@@ -1,7 +1,7 @@
 import { Dimensions, View } from "react-native";
+import { Image } from "react-native";
 import styled from "styled-components/native";
 import { FactionBackground as BaseFactionBackground } from "../../../shared/background/FactionBackground";
-import { InvestigatorBackgroundProvider } from "../InvestigatorBackgroundProvider";
 import { DamageOverlay, HorrorOverlay } from "../effects";
 
 const screen = Dimensions.get("screen");
@@ -26,9 +26,7 @@ export const FactionBackground: typeof BaseFactionBackground = styled(
   bottom: 0px;
 `;
 
-export const BackgroundImageProvider: typeof InvestigatorBackgroundProvider = styled(
-	InvestigatorBackgroundProvider,
-)`
+export const Background: typeof Image = styled(Image)`
   position: absolute;
   z-index: 2;
   left: 0;

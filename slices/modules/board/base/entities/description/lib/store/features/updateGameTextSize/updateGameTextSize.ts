@@ -11,6 +11,6 @@ export const updateGameTextSize = createAction<UpdateGameSizeHeightPayload>(
 	"board/updateGameTextSize",
 );
 
-export const gameTextHeightUpdated = createAction<UpdateGameSizeHeightPayload>(
+export const gameTextSizeUpdated = createAction<UpdateGameSizeHeightPayload>(
 	"board/gameTextSizeUpdated",
 );

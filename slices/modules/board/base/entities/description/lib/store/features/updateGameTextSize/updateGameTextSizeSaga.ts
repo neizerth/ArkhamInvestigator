@@ -1,10 +1,7 @@
 import { setBoardProp } from "@modules/board/base/shared/lib";
 import { put, select, takeEvery } from "redux-saga/effects";
 import { selectGameTextHeight } from "../../selectors";
-import {
-	gameTextHeightUpdated,
-	updateGameTextSize,
-} from "./updateGameTextSize";
+import { gameTextSizeUpdated, updateGameTextSize } from "./updateGameTextSize";
 
 function* worker({ payload }: ReturnType<typeof updateGameTextSize>) {
 	const { boardId, value } = payload;
@@ -25,7 +22,7 @@ function* worker({ payload }: ReturnType<typeof updateGameTextSize>) {
 		}),
 	);
 
-	yield put(gameTextHeightUpdated(payload));
+	yield put(gameTextSizeUpdated(payload));
 }
 
 export function* updateGameTextHeightSaga() {

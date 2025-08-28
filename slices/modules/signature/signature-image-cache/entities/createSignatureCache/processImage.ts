@@ -1,17 +1,22 @@
-import { getSignatureImageUrl } from "@modules/signature/base/shared/api";
+import type { InvestigatorBoardImage } from "@modules/board/base/shared/model";
+import type { SignatureImageLayout } from "@modules/signature/base/shared/model";
+import type { Box } from "@shared/model";
 import { ImageManipulator, SaveFormat } from "expo-image-manipulator";
 import { PixelRatio } from "react-native";
-import type { CreateSignatureCachePayload } from "./createSignatureCache";
 
 const dpr = PixelRatio.get();
 
-export const processImage = async (payload: CreateSignatureCachePayload) => {
-	const { layout, image, view } = payload;
+type Options = {
+	image: InvestigatorBoardImage;
+	view: Box;
+	layout: SignatureImageLayout;
+	source: string;
+};
+
+export const processImage = async (payload: Options) => {
+	const { view, layout, source } = payload;
+
 	const { crop } = layout;
-	const source = getSignatureImageUrl({
-		...payload,
-		code: image.id,
-	});
 
 	const ctx = ImageManipulator.manipulate(source);
 
@@ -27,7 +32,9 @@ export const processImage = async (payload: CreateSignatureCachePayload) => {
 	});
 
 	const img = await ctx.renderAsync();
-	return img.saveAsync({
+	const response = await img.saveAsync({
 		format: SaveFormat.WEBP,
 	});
+
+	return response;
 };

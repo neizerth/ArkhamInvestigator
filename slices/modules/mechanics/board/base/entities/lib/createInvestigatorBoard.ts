@@ -78,7 +78,6 @@ export const createInvestigatorBoard = (
 		historyIndex: -1,
 		usedAbilities: [],
 		abilityValues,
-		gameTextSize: null,
 	};
 
 	const modificationCallback = investigatorBoardModifications[code];

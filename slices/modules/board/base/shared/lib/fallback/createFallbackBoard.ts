@@ -17,6 +17,5 @@ export const createFallbackBoard = (): InvestigatorBoard => {
 		value: createFallbackBoardValues(),
 		history: [],
 		checkHistory: [],
-		gameTextSize: null,
 	};
 };
