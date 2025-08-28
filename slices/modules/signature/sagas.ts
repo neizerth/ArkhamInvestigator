@@ -1,8 +1,8 @@
 import { spawn } from "redux-saga/effects";
-import { signatureEntitiesSaga } from "./base/entities/sagas";
-import { signatureFeaturesSaga } from "./base/features/sagas";
+import { signatureBaseSaga } from "./base/sagas";
+import { signatureImageCacheSaga } from "./signature-image-cache/sagas";
 
 export function* signatureSaga() {
-	yield spawn(signatureEntitiesSaga);
-	yield spawn(signatureFeaturesSaga);
+	yield spawn(signatureBaseSaga);
+	yield spawn(signatureImageCacheSaga);
 }

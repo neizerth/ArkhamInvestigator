@@ -1,83 +1,84 @@
-import {
-	getCoverScaleAt,
-	scaleBox,
-	scaleBoxLayout,
-	scaleBoxPosition,
-} from "@shared/lib/util";
-import { getBoxCenter, getBoxLayoutCenter } from "@shared/lib/util/size/box";
 import type { InvestigatorImage } from "@shared/model";
 import type { Box } from "@shared/model/ui";
 import { faceSize } from "../../config";
 
-type GetImageLayout = {
+type Options = {
 	view: Box;
 	image: InvestigatorImage;
 	offsetBottom: number;
 };
 
-export const getSignatureImageLayout = (options: GetImageLayout) => {
-	const { image, view, offsetBottom } = options;
+export function getSignatureImageLayout({
+	view,
+	image,
+	offsetBottom,
+}: Options) {
+	const wV = view.width;
+	const hV = view.height;
+	const rV = wV / hV; // screen aspect ratio
 
-	const { face } = image;
+	const wI = image.width;
+	const hI = image.height;
 
-	const vh = view.height / 100;
-	const faceScale = {
-		min: (faceSize.min * vh) / face.height,
-		max: (faceSize.max * vh) / face.height,
-	};
-
-	const ratio = image.width / image.height;
-	const offsetLeft = (ratio * offsetBottom) / 2;
-
-	const imageCenter = getBoxCenter(image);
-	const faceCenter = getBoxLayoutCenter(face);
-
-	const offset = {
-		top: faceCenter.top - imageCenter.top + offsetBottom * 2,
-		left: faceCenter.left - imageCenter.left + offsetLeft,
-	};
-
-	const faceImage = {
-		width: image.width + offset.left,
-		height: image.height + offset.top,
-	};
-
-	const minScale = getCoverScaleAt({
-		position: faceCenter,
-		view,
-		box: faceImage,
-	});
-
-	const scale = Math.max(minScale, faceScale.min);
-
-	const scaledImage = scaleBox(image, scale);
-
-	const scaledImageCenter = getBoxCenter(scaledImage);
-
-	const viewCenter = getBoxCenter(view);
-	const scaledOffset = scaleBoxPosition(offset, scale);
-
-	const top = scaledImageCenter.top - viewCenter.top + scaledOffset.top;
-	const left = scaledImageCenter.left - viewCenter.left + scaledOffset.left;
-	const center = {
-		top,
-		left: Math.max(left, 0),
-	};
-
-	let result = {
-		...scaledImage,
-		...center,
-	};
-
-	if (result.width - result.left < view.width) {
-		const scale = view.width / (result.width - result.left);
-		result = scaleBoxLayout(result, scale);
+	// --- 1. Base crop with screen aspect ratio ---
+	let cropW: number;
+	let cropH: number;
+	if (wI / hI >= rV) {
+		// image is wider than screen → fit by height
+		cropH = hI;
+		cropW = rV * cropH;
+	} else {
+		// image is taller than screen → fit by width
+		cropW = wI;
+		cropH = cropW / rV;
 	}
 
-	if (result.height - result.top < view.height) {
-		const scale = view.height / (result.height - result.top);
-		result = scaleBoxLayout(result, scale);
+	// --- 2. Face center in image coordinates ---
+	const face = image.face;
+	const cxI = face.left + face.width / 2;
+	const cyI = face.top + face.height / 2;
+
+	// --- 3. Desired face position inside the crop ---
+	const u = 0.5; // normalized X (horizontal center)
+	const v = (hV - offsetBottom) / (2 * hV); // normalized Y (slightly above center if offsetBottom > 0)
+
+	// --- 4. Initial scale and face size on screen ---
+	let scale = hV / cropH;
+
+	const faceHeightScreen = face.height * scale;
+	let faceHeightPercent = (faceHeightScreen / hV) * 100;
+
+	// --- 5. Enforce face size constraints (min/max percent of screen height) ---
+	const minPercent = faceSize.min;
+	const maxPercent = faceSize.max;
+
+	if (faceHeightPercent < minPercent) {
+		// face is too small → zoom in (smaller crop)
+		scale = ((minPercent / 100) * hV) / face.height;
+		cropH = hV / scale;
+		cropW = rV * cropH;
+		faceHeightPercent = minPercent;
+	} else if (faceHeightPercent > maxPercent) {
+		// face is too large → zoom out (larger crop)
+		scale = ((maxPercent / 100) * hV) / face.height;
+		cropH = hV / scale;
+		cropW = rV * cropH;
+		faceHeightPercent = maxPercent;
 	}
 
-	return result;
-};
+	// --- 6. Position crop so that face center aligns with (u,v) inside the crop ---
+	let cropLeft = cxI - u * cropW;
+	let cropTop = cyI - v * cropH;
+
+	// Clamp crop within image boundaries
+	if (cropLeft < 0) cropLeft = 0;
+	if (cropTop < 0) cropTop = 0;
+	if (cropLeft + cropW > wI) cropLeft = wI - cropW;
+	if (cropTop + cropH > hI) cropTop = hI - cropH;
+
+	return {
+		crop: { left: cropLeft, top: cropTop, width: cropW, height: cropH },
+		scale,
+		faceHeightPercent,
+	};
+}

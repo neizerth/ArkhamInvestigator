@@ -12,6 +12,7 @@ import { soundReducer } from "@modules/core/sound/shared/lib";
 import { rulesReducer } from "@modules/mechanics/rules/base/shared/lib";
 import { roundTimingReducer } from "@modules/mechanics/rules/round-timing/shared/lib";
 import { signatureReducer } from "@modules/signature/base/shared/lib";
+import { signatureImageCacheReducer } from "@modules/signature/signature-image-cache/shared/lib";
 import { storiesReducer } from "@modules/stories/shared/lib";
 import * as reducer from "./features/reducer";
 
@@ -31,5 +32,6 @@ export default {
 	...roundTimingReducer,
 	...signatureReducer,
 	...downloadQueueReducer,
+	...signatureImageCacheReducer,
 	...routerReducer,
 };
