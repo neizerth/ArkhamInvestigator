@@ -1,5 +1,9 @@
 import { getSignatureImageLayout } from "@modules/signature/base/shared/lib/common/getSignatureImageLayout";
-import { put, select, takeEvery } from "redux-saga/effects";
+import {
+	createSignatureCacheGroup,
+	signatureCacheGroupCreated,
+} from "@modules/signature/signature-image-cache/entities/createSignatureCacheGroup";
+import { put, select, take, takeEvery } from "redux-saga/effects";
 import {
 	gameTextHeightUpdated,
 	selectDescriptionBottomOffset,
@@ -24,10 +28,21 @@ function* worker({ payload }: ReturnType<typeof gameTextHeightUpdated>) {
 	});
 
 	yield put(
+		createSignatureCacheGroup({
+			image,
+			type: "full",
+			view,
+			layout,
+		}),
+	);
+
+	yield take(signatureCacheGroupCreated.match);
+
+	yield put(
 		setBoardProp({
 			boardId,
 			prop: "imageLayout",
-			value: layout,
+			value: layout.crop,
 		}),
 	);
 }

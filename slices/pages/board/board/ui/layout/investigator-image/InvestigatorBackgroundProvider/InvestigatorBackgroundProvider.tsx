@@ -11,7 +11,7 @@ export const InvestigatorBackgroundProvider = (
 
 	return (
 		<C.Container {...props}>
-			<C.Background boardId={boardId} />
+			<C.Background boardId={boardId} cached />
 		</C.Container>
 	);
 };

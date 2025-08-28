@@ -1,28 +1,25 @@
-import { pick } from "ramda";
 import type { ImageProps, ViewProps } from "react-native";
-import {
-	type GetSignatureImageUrlOptions,
-	getSignatureImageUrl,
-} from "../../../../shared/api";
+import type { GetSignatureImageUrlOptions } from "../../../../shared/api";
 
+import { RawSignatureImage } from "@modules/signature/base/shared/ui";
+import { CachedSignatureImage } from "@modules/signature/signature-image-cache/shared/ui";
 import * as C from "./StaticSignatureImage.components";
 
-export type StaticSignatureImageProps = Omit<ImageProps, "source"> &
-	GetSignatureImageUrlOptions & {
-		contentContainerStyle?: ViewProps["style"];
-	};
+export type StaticSignatureImageProps = Omit<ImageProps, "source"> & {
+	contentContainerStyle?: ViewProps["style"];
+	uri?: string;
+	cached?: boolean;
+} & GetSignatureImageUrlOptions;
 
 export const StaticSignatureImage = ({
 	contentContainerStyle,
+	cached,
 	...props
 }: StaticSignatureImageProps) => {
-	const sourceProps = pick(["code", "type", "grayscale", "pathType"], props);
-	const source = {
-		uri: getSignatureImageUrl(sourceProps),
-	};
+	const Component = cached ? CachedSignatureImage : RawSignatureImage;
 	return (
 		<C.Container style={contentContainerStyle}>
-			<C.Image {...props} source={source} />
+			<Component {...props} />
 		</C.Container>
 	);
 };

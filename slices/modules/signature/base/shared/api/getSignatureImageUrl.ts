@@ -1,9 +1,10 @@
 import { ASSET_URL, HAVE_AVIF_SUPPORT } from "@shared/config";
 import { documentDirectory } from "expo-file-system";
+import type { SignatureImageType } from "../model";
 
 export type GetSignatureImageUrlOptions = {
 	code: string;
-	type: "full" | "square";
+	type: SignatureImageType;
 	grayscale?: boolean;
 	pathType?: "storage" | "absolute" | "relative";
 };
