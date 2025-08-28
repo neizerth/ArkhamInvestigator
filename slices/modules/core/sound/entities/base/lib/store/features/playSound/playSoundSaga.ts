@@ -1,13 +1,13 @@
+import { SOUND_VOLUME_MODIFIER } from "@modules/core/sound/shared/config";
 import {
-	addSoundQueueItem,
-	selectIdleSFXWorkers,
 	selectSoundEnabled,
+	selectSoundVolume,
 } from "@modules/core/sound/shared/lib";
-import { put, select, takeEvery } from "redux-saga/effects";
-import { v4 } from "uuid";
-import { playSound } from "./playSound";
+import { playSoundById } from "@modules/core/sound/shared/lib";
+import { call, put, select, takeEvery } from "redux-saga/effects";
+import { playSound, soundPlayEnd } from "./playSound";
 
-function* worker(action: ReturnType<typeof playSound>) {
+function* worker({ payload }: ReturnType<typeof playSound>) {
 	const enabled: ReturnType<typeof selectSoundEnabled> =
 		yield select(selectSoundEnabled);
 
@@ -15,25 +15,17 @@ function* worker(action: ReturnType<typeof playSound>) {
 		return;
 	}
 
-	const soundId = action.payload;
+	const soundVolume: ReturnType<typeof selectSoundVolume> =
+		yield select(selectSoundVolume);
 
-	const workers: ReturnType<typeof selectIdleSFXWorkers> =
-		yield select(selectIdleSFXWorkers);
+	const volume = soundVolume * SOUND_VOLUME_MODIFIER;
 
-	if (workers.length === 0) {
-		return;
-	}
+	yield call(playSoundById, {
+		soundId: payload,
+		volume,
+	});
 
-	const [worker] = workers;
-
-	yield put(
-		addSoundQueueItem({
-			id: v4(),
-			workerId: worker.id,
-			status: "idle",
-			soundId,
-		}),
-	);
+	yield put(soundPlayEnd(payload));
 }
 
 export function* playSoundSaga() {
