@@ -1,3 +1,5 @@
+import { getSignatureImageUrl } from "@modules/signature/base/shared/api";
+import { getSignatureImageLayout } from "@modules/signature/base/shared/lib";
 import type { ReturnAwaited } from "@shared/model";
 import * as FileSystem from "expo-file-system";
 import { call, put, select, takeEvery } from "redux-saga/effects";
@@ -11,7 +13,7 @@ import { createSignatureCache } from "./createSignatureCache";
 import { processImage } from "./processImage";
 
 function* worker({ payload }: ReturnType<typeof createSignatureCache>) {
-	const { image, type, grayscale = false, overwrite } = payload;
+	const { image, type, grayscale = false, overwrite, view, offset } = payload;
 	const code = image.id;
 
 	const cacheSelector = selectSignatureCacheByCode({
@@ -22,12 +24,28 @@ function* worker({ payload }: ReturnType<typeof createSignatureCache>) {
 	const cache: ReturnType<typeof cacheSelector> = yield select(cacheSelector);
 
 	if (cache && !overwrite) {
-		return;
+		// return;
 	}
 
-	const result: ReturnAwaited<typeof processImage> = yield call(
+	const source = getSignatureImageUrl({
+		...payload,
+		code,
+	});
+
+	const layout = getSignatureImageLayout({
+		view,
+		image,
+		offset,
+	});
+
+	const response: ReturnAwaited<typeof processImage> = yield call(
 		processImage,
-		payload,
+		{
+			source,
+			image,
+			view,
+			layout,
+		},
 	);
 
 	if (!cache) {
@@ -35,9 +53,12 @@ function* worker({ payload }: ReturnType<typeof createSignatureCache>) {
 			addSignatureCache({
 				id: v4(),
 				code,
-				uri: result.uri,
 				type,
 				grayscale,
+				src: source,
+				uri: response.uri,
+				crop: layout.crop,
+				offset,
 			}),
 		);
 		return;
@@ -57,7 +78,9 @@ function* worker({ payload }: ReturnType<typeof createSignatureCache>) {
 		updateSignatureCache({
 			id: cache.id,
 			changes: {
-				uri: result.uri,
+				uri: response.uri,
+				crop: layout.crop,
+				offset,
 			},
 		}),
 	);

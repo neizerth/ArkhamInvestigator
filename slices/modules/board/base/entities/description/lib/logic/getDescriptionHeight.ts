@@ -9,7 +9,7 @@ import { DEFAULT_PORTRAIT_DESCRIPTION_HEIGHT } from "../../config";
 
 type Options = {
 	showGameText: boolean;
-	gameTextSize: Box | null;
+	gameTextSize?: Box | null;
 	faction: Faction;
 };
 

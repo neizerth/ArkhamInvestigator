@@ -1,4 +1,4 @@
-import type { InvestigatorSignature } from "arkham-investigator-data";
+import type { Box, InvestigatorSignature } from "arkham-investigator-data";
 
 import type {
 	InvestigatorAbilityValues,
@@ -10,7 +10,6 @@ import type {
 } from "@modules/board/history/shared/model";
 import type { SkillCheckHistoryItem } from "@modules/board/skill-check/shared/model";
 import type { Faction, InvestigatorNumericStat } from "@shared/model";
-import type { InvestigatorBoardLayout } from "./layout";
 
 export type BoardId = number | "current";
 
@@ -20,7 +19,7 @@ export type InvestigatorBoardImage = InvestigatorSignature["image"];
 
 export type InvestigatorBoardValues = Record<InvestigatorNumericStat, number>;
 
-export type InvestigatorBoard = InvestigatorBoardLayout & {
+export type InvestigatorBoard = {
 	id: number;
 	index: number;
 	signatureGroupId: string;
@@ -39,6 +38,9 @@ export type InvestigatorBoard = InvestigatorBoardLayout & {
 	usedAbilities?: InvestigatorBoardUsedAbility[];
 	initialUsedAbilities?: InvestigatorBoardUsedAbility[];
 	showPinnedSkillChecks?: boolean;
+
+	cachedImage?: string;
+	gameTextSize?: Box | null;
 };
 
 export type InvesigatorBoardPartial = Omit<
