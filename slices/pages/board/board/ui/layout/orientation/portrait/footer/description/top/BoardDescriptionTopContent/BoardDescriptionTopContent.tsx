@@ -2,8 +2,8 @@ import {
 	selectShowDescription,
 	setShowDescription,
 } from "@modules/board/base/shared/lib";
-import { delay, useAppDispatch, useAppSelector } from "@shared/lib";
-import { useCallback, useEffect, useState } from "react";
+import { useAppDispatch, useAppSelector } from "@shared/lib";
+import { useCallback, useEffect, useRef, useState } from "react";
 import type { ViewProps } from "react-native";
 import * as C from "./BoardDescriptionTopContent.components";
 
@@ -14,12 +14,16 @@ export const BoardDescriptionTopContent = (
 ) => {
 	const dispatch = useAppDispatch();
 	const defaultShow = useAppSelector(selectShowDescription);
+	const showTimer = useRef<NodeJS.Timeout>(null);
 
 	const [show, setShow] = useState(false);
 
 	useEffect(() => {
+		if (showTimer.current) {
+			clearTimeout(showTimer.current);
+		}
 		if (defaultShow) {
-			delay(350).then(() => setShow(true));
+			showTimer.current = setTimeout(() => setShow(true), 350);
 			return;
 		}
 		setShow(false);

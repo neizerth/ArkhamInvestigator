@@ -1,7 +1,9 @@
-import { selectDescriptionHeight } from "@modules/board/base/entities/description/lib";
 import {
 	descriptionHidden,
 	descriptionShown,
+	selectDescriptionHeight,
+} from "@modules/board/base/entities/description/lib";
+import {
 	selectShowDescription,
 	setDescriptionTransition,
 } from "@modules/board/base/shared/lib";
