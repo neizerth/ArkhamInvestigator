@@ -9,7 +9,10 @@ import {
 	selectSignatureCacheByCode,
 	updateSignatureCache,
 } from "../../shared/lib";
-import { createSignatureCache } from "./createSignatureCache";
+import {
+	createSignatureCache,
+	signatureCacheCreated,
+} from "./createSignatureCache";
 import { processImage } from "./processImage";
 
 function* worker({ payload }: ReturnType<typeof createSignatureCache>) {
@@ -24,7 +27,13 @@ function* worker({ payload }: ReturnType<typeof createSignatureCache>) {
 	const cache: ReturnType<typeof cacheSelector> = yield select(cacheSelector);
 
 	if (cache && !overwrite) {
-		// return;
+		yield put(
+			signatureCacheCreated({
+				...payload,
+				uri: cache.uri,
+			}),
+		);
+		return;
 	}
 
 	const source = getSignatureImageUrl({
@@ -38,27 +47,43 @@ function* worker({ payload }: ReturnType<typeof createSignatureCache>) {
 		offset,
 	});
 
+	const params = {
+		source,
+		image,
+		view,
+		layout,
+	};
+
 	const response: ReturnAwaited<typeof processImage> = yield call(
 		processImage,
-		{
-			source,
-			image,
-			view,
-			layout,
-		},
+		params,
 	);
+
+	const { crop } = layout;
+
+	const changes = {
+		image,
+		src: source,
+		uri: response.uri,
+		offset,
+	};
 
 	if (!cache) {
 		yield put(
 			addSignatureCache({
+				...changes,
 				id: v4(),
 				code,
 				type,
 				grayscale,
-				src: source,
+				crop,
+			}),
+		);
+
+		yield put(
+			signatureCacheCreated({
+				...payload,
 				uri: response.uri,
-				crop: layout.crop,
-				offset,
 			}),
 		);
 		return;
@@ -77,11 +102,14 @@ function* worker({ payload }: ReturnType<typeof createSignatureCache>) {
 	yield put(
 		updateSignatureCache({
 			id: cache.id,
-			changes: {
-				uri: response.uri,
-				crop: layout.crop,
-				offset,
-			},
+			changes,
+		}),
+	);
+
+	yield put(
+		signatureCacheCreated({
+			...payload,
+			uri: response.uri,
 		}),
 	);
 }

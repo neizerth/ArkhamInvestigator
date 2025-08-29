@@ -1,4 +1,4 @@
-import { AnimatedSignatureImage } from "../AnimatedSignatureImage";
+import { AnimatedSignatureImage } from "../../../../shared/ui/AnimatedSignatureImage";
 import {
 	StaticSignatureImage,
 	type StaticSignatureImageProps,

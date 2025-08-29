@@ -1,3 +1,4 @@
+import { BoardLoader } from "@modules/board/base/features/load-board/ui";
 import { useLayoutSize, useScreenOrientation } from "@shared/lib";
 import { useWindowDimensions } from "react-native";
 import { LayoutContext } from "../../config";
@@ -19,10 +20,12 @@ export const BoardPage = () => {
 
 	return (
 		<LayoutContext.Provider value={contextValue}>
-			<C.Container onLayout={onLayout}>
-				<C.Background />
-				{orientation.type === "portrait" && <C.PortraitLayout />}
-			</C.Container>
+			<BoardLoader>
+				<C.Container onLayout={onLayout}>
+					<C.Background />
+					{orientation.type === "portrait" && <C.PortraitLayout />}
+				</C.Container>
+			</BoardLoader>
 		</LayoutContext.Provider>
 	);
 };

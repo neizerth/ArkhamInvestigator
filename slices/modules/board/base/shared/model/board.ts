@@ -21,6 +21,7 @@ export type InvestigatorBoardValues = Record<InvestigatorNumericStat, number>;
 
 export type InvestigatorBoard = {
 	id: number;
+	loaded?: boolean;
 	index: number;
 	signatureGroupId: string;
 	skinId?: string;
@@ -39,7 +40,10 @@ export type InvestigatorBoard = {
 	initialUsedAbilities?: InvestigatorBoardUsedAbility[];
 	showPinnedSkillChecks?: boolean;
 
-	cachedImage?: string;
+	background?: {
+		color: string;
+		grayscale: string;
+	};
 	gameTextSize?: Box | null;
 };
 
