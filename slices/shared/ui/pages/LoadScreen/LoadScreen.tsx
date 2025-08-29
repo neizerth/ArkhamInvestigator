@@ -1,3 +1,4 @@
+import { memo } from "react";
 import type { ViewProps } from "react-native";
 import { LogoMemo as Logo } from "../../content";
 import { Progress } from "../../control";
@@ -20,3 +21,5 @@ export const LoadScreen = ({
 		</C.Container>
 	);
 };
+
+export const LoadScreenMemo = memo(LoadScreen);
