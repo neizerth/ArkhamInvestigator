@@ -4,6 +4,7 @@ import {
 	selectBoardById,
 	setBoard,
 } from "@modules/board/base/shared/lib";
+import type { InvestigatorBoard } from "@modules/board/base/shared/model";
 import { put, select, takeEvery } from "redux-saga/effects";
 import { createInvestigatorBoard } from "../../../createInvestigatorBoard";
 import { resetBoard } from "./resetBoard";
@@ -26,11 +27,16 @@ function* worker({ payload }: ReturnType<typeof resetBoard>) {
 		mentalTrauma = 0,
 	}: ReturnType<typeof settingsSelector> = yield select(settingsSelector);
 
-	const data = createInvestigatorBoard({
+	const boardData = createInvestigatorBoard({
 		...board,
 		physicalTrauma,
 		mentalTrauma,
 	});
+
+	const data: InvestigatorBoard = {
+		...board,
+		...boardData,
+	};
 
 	yield put(
 		setBoard({
