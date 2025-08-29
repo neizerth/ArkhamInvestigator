@@ -16,7 +16,7 @@ import {
 import { processImage } from "./processImage";
 
 function* worker({ payload }: ReturnType<typeof createSignatureCache>) {
-	const { image, type, grayscale = false, overwrite, view, offset } = payload;
+	const { image, type, grayscale = false, view, offset } = payload;
 	const code = image.id;
 
 	const cacheSelector = selectSignatureCacheByCode({
@@ -25,16 +25,6 @@ function* worker({ payload }: ReturnType<typeof createSignatureCache>) {
 	});
 
 	const cache: ReturnType<typeof cacheSelector> = yield select(cacheSelector);
-
-	if (cache && !overwrite) {
-		yield put(
-			signatureCacheCreated({
-				...payload,
-				uri: cache.uri,
-			}),
-		);
-		return;
-	}
 
 	const source = getSignatureImageUrl({
 		...payload,
@@ -66,6 +56,7 @@ function* worker({ payload }: ReturnType<typeof createSignatureCache>) {
 		src: source,
 		uri: response.uri,
 		offset,
+		crop,
 	};
 
 	if (!cache) {
@@ -76,7 +67,6 @@ function* worker({ payload }: ReturnType<typeof createSignatureCache>) {
 				code,
 				type,
 				grayscale,
-				crop,
 			}),
 		);
 
