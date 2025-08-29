@@ -1,5 +1,6 @@
 import { getSignatureImageLayout } from "@modules/signature/base/shared/lib";
-import type { Box } from "@shared/model";
+import type { Box, ReturnAwaited } from "@shared/model";
+import * as FileSystem from "expo-file-system";
 import { equals, map, pick } from "ramda";
 import type { SignatureImageCacheItem } from "../../model";
 
@@ -33,10 +34,18 @@ const imagesEquals = (aI?: Image, bI?: Image) => {
 	return equalRounded(a, b);
 };
 
-export const validateImageCache = ({ cache, data }: Options) => {
+export const validateImageCache = async ({ cache, data }: Options) => {
 	if (!cache) {
 		return false;
 	}
+
+	const { exists }: ReturnAwaited<typeof FileSystem.getInfoAsync> =
+		await FileSystem.getInfoAsync(cache.uri);
+
+	if (!exists) {
+		return false;
+	}
+
 	const { crop } = getSignatureImageLayout(data);
 
 	if (!equalRounded(cache.offset, data.offset)) {

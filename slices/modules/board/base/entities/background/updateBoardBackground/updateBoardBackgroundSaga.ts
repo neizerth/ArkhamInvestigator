@@ -7,7 +7,8 @@ import {
 	selectSignatureCacheGroupByCode,
 	validateImageCache,
 } from "@modules/signature/signature-image-cache/shared/lib";
-import { put, select, take, takeEvery } from "redux-saga/effects";
+import type { ReturnAwaited } from "@shared/model";
+import { call, put, select, take, takeEvery } from "redux-saga/effects";
 import {
 	boardBackgroundUpdated,
 	updateBoardBackground,
@@ -24,12 +25,13 @@ function* worker({ payload }: ReturnType<typeof updateBoardBackground>) {
 
 	const cache: ReturnType<typeof cacheSelector> = yield select(cacheSelector);
 
-	const valid =
-		!!cache &&
-		validateImageCache({
-			cache: cache.color,
+	const valid: ReturnAwaited<typeof validateImageCache> = yield call(
+		validateImageCache,
+		{
+			cache: cache?.color,
 			data: payload,
-		});
+		},
+	);
 
 	if (cache && valid) {
 		yield put(
