@@ -1,4 +1,4 @@
-import { LoadScreen } from "@shared/ui";
+import { LoadScreenMemo as LoadScreen } from "@shared/ui";
 import styled from "styled-components/native";
 
 export const Loader: typeof LoadScreen = styled(LoadScreen)`

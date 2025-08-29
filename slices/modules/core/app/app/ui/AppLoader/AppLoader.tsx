@@ -1,4 +1,4 @@
-import { LoadScreen } from "@shared/ui";
+import { LoadScreenMemo as LoadScreen } from "@shared/ui";
 import type { ViewProps } from "react-native";
 import { useAppLoaderProgress } from "./useAppLoaderProgress";
 
