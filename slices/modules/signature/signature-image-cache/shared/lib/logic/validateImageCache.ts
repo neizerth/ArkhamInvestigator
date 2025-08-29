@@ -17,6 +17,8 @@ const round = map(Math.round);
 const equalRounded = <T extends Record<string, number>>(a?: T, b?: T) =>
 	a && b && equals(round(a), round(b));
 
+const sizeProps = ["width", "height"] as const;
+
 const imagesEquals = (aI?: Image, bI?: Image) => {
 	if (!aI || !bI) {
 		return false;
@@ -25,8 +27,8 @@ const imagesEquals = (aI?: Image, bI?: Image) => {
 		return false;
 	}
 
-	const a = pick(["width", "height"], aI);
-	const b = pick(["width", "height"], bI);
+	const a = pick(sizeProps, aI);
+	const b = pick(sizeProps, bI);
 
 	return equalRounded(a, b);
 };
