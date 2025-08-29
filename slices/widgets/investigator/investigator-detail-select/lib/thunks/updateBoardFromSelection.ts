@@ -60,6 +60,10 @@ export const updateBoardFromSelection =
 
 		const updatedBoard: InvestigatorBoard = {
 			...board,
+			loaded: false,
+			background: null,
+			gameTextSize: null,
+
 			investigator,
 			image: selection.image,
 			signatureGroupId: selection.signatureGroupId,

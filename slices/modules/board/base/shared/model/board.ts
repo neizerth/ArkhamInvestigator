@@ -19,6 +19,11 @@ export type InvestigatorBoardImage = InvestigatorSignature["image"];
 
 export type InvestigatorBoardValues = Record<InvestigatorNumericStat, number>;
 
+export type InvestigatorBoardBackground = {
+	color: string;
+	grayscale: string;
+};
+
 export type InvestigatorBoard = {
 	id: number;
 	loaded?: boolean;
@@ -40,10 +45,7 @@ export type InvestigatorBoard = {
 	initialUsedAbilities?: InvestigatorBoardUsedAbility[];
 	showPinnedSkillChecks?: boolean;
 
-	background?: {
-		color: string;
-		grayscale: string;
-	};
+	background?: InvestigatorBoardBackground | null;
 	gameTextSize?: Box | null;
 };
 

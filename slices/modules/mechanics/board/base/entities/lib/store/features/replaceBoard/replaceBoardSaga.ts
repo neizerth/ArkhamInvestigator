@@ -3,6 +3,7 @@ import {
 	selectBoardById,
 	setBoard,
 } from "@modules/board/base/shared/lib";
+import type { InvestigatorBoard } from "@modules/board/base/shared/model";
 import { put, select, takeEvery } from "redux-saga/effects";
 import { mergeInvestigatorBoards } from "../../../mergeInvestigatorBoards";
 import { replaceBoard } from "./replaceBoard";
@@ -19,13 +20,20 @@ function* worker({ payload }: ReturnType<typeof replaceBoard>) {
 		return;
 	}
 
-	const data = mergeInvestigatorBoards({
+	const boardData = mergeInvestigatorBoards({
 		sourceBoard,
 		targetBoard: board,
 		keepActions: false,
 		keepClues: false,
 		keepResources: false,
 	});
+
+	const data: InvestigatorBoard = {
+		...boardData,
+		loaded: false,
+		background: null,
+		gameTextSize: null,
+	};
 
 	yield put(
 		setBoard({
