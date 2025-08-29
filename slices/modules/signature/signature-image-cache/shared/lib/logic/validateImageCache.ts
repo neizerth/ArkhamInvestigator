@@ -38,7 +38,6 @@ export const validateImageCache = ({ cache, data }: Options) => {
 	const { crop } = getSignatureImageLayout(data);
 
 	if (!equalRounded(cache.offset, data.offset)) {
-		console.log("offset changes", cache.offset, data.offset);
 		return false;
 	}
 
