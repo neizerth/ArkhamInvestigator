@@ -2,6 +2,7 @@ import {
 	selectBoardProp,
 	selectShowDamageAndHorrorEffects,
 } from "@modules/board/base/shared/lib";
+import { selectBoardIsInactive } from "@modules/mechanics/board/base/entities/lib";
 import { useAppSelector } from "@shared/lib";
 import type { ViewProps } from "react-native";
 import * as C from "./InvestigatorBackground.components";
@@ -12,24 +13,25 @@ export const InvestigatorBackground = ({
 	...props
 }: InvestigatorBackgroundProps) => {
 	const showEffects = useAppSelector(selectShowDamageAndHorrorEffects);
-	const uri = useAppSelector(
+	const background = useAppSelector(
 		selectBoardProp({
 			boardId: "current",
-			prop: "cachedImage",
+			prop: "background",
 		}),
 	);
-
-	// const source = useMemo(() => {
-	// 	return {
-	// 		uri,
-	// 	};
-	// }, [uri]);
+	const active = useAppSelector(selectBoardIsInactive("current"));
 
 	return (
 		<C.Container {...props}>
 			<C.Content>
 				<C.FactionBackground />
-				{uri && <C.Background src={uri} />}
+				{background && (
+					<C.Background
+						source={{ uri: background.color }}
+						grayscaleSource={{ uri: background.grayscale }}
+						grayscale={active}
+					/>
+				)}
 				{showEffects && (
 					<>
 						<C.Damage />

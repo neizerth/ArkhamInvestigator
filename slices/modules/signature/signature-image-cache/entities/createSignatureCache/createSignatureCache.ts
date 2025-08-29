@@ -21,5 +21,5 @@ export type SignatureCacheCreatedPayload = CreateSignatureCachePayload & {
 };
 
 export const signatureCacheCreated = createAction<SignatureCacheCreatedPayload>(
-	"signatureImageCache/create",
+	"signatureImageCache/created",
 );

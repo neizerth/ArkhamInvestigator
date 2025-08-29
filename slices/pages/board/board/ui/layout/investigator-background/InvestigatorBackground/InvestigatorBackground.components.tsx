@@ -1,5 +1,5 @@
+import { AnimatedGrayscaleImage } from "@shared/ui";
 import { Dimensions, View } from "react-native";
-import { Image } from "react-native";
 import styled from "styled-components/native";
 import { FactionBackground as BaseFactionBackground } from "../../../shared/background/FactionBackground";
 import { DamageOverlay, HorrorOverlay } from "../effects";
@@ -26,7 +26,9 @@ export const FactionBackground: typeof BaseFactionBackground = styled(
   bottom: 0px;
 `;
 
-export const Background: typeof Image = styled(Image)`
+export const Background: typeof AnimatedGrayscaleImage = styled(
+	AnimatedGrayscaleImage,
+)`
   position: absolute;
   z-index: 2;
   left: 0;

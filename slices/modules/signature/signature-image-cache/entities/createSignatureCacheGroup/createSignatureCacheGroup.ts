@@ -4,5 +4,12 @@ import type { CreateSignatureCachePayload } from "../createSignatureCache/create
 export const createSignatureCacheGroup =
 	createAction<CreateSignatureCachePayload>("signatureImagecache/createGroup");
 
+export type SignatureCacheGroupCreated = CreateSignatureCachePayload & {
+	background: {
+		color: string;
+		grayscale: string;
+	};
+};
+
 export const signatureCacheGroupCreated =
-	createAction<CreateSignatureCachePayload>("signatureImagecache/groupCreated");
+	createAction<SignatureCacheGroupCreated>("signatureImagecache/groupCreated");
