@@ -37,7 +37,7 @@ export const Resources = ({
 		[onChangeProp],
 	);
 
-	const onSwipeRight = useCallback(() => {
+	const onSwipeLeft = useCallback(() => {
 		if (!showUpkeepResources) {
 			return false;
 		}
@@ -49,7 +49,7 @@ export const Resources = ({
 		);
 	}, [dispatch, showUpkeepResources]);
 
-	const onSwipeLeft = useCallback(() => {
+	const onSwipeRight = useCallback(() => {
 		if (!showUpkeepResources) {
 			return false;
 		}
