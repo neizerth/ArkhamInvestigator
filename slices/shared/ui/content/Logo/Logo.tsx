@@ -1,3 +1,4 @@
+import { memo } from "react";
 import type { ImageProps, ViewProps } from "react-native";
 import * as C from "./Logo.components";
 import { useLoaderStyle } from "./useLoaderStyle";
@@ -22,3 +23,5 @@ export const Logo = ({
 		</C.Container>
 	);
 };
+
+export const LogoMemo = memo(Logo);

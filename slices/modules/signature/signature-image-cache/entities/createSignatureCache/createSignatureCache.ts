@@ -9,7 +9,6 @@ export type CreateSignatureCachePayload = {
 	offset: RectPosition;
 	type: SignatureImageType;
 	grayscale?: boolean;
-	overwrite?: boolean;
 };
 
 export const createSignatureCache = createAction<CreateSignatureCachePayload>(

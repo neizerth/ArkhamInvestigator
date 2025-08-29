@@ -1,5 +1,5 @@
 import type { ViewProps } from "react-native";
-import { Logo } from "../../content";
+import { LogoMemo as Logo } from "../../content";
 import { Progress } from "../../control";
 import * as C from "./LoadScreen.components";
 

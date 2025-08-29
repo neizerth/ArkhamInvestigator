@@ -8,7 +8,7 @@ import {
 export const useLoaderStyle = (defaultSize: number) => {
 	const size = useSharedValue(defaultSize);
 	const toSize = defaultSize * 0.9;
-	size.value = withRepeat(withSpring(toSize), 10);
+	size.value = withRepeat(withSpring(toSize));
 
 	return useAnimatedStyle(() => ({
 		width: size.value,
