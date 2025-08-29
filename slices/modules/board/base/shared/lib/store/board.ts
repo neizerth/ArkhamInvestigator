@@ -131,6 +131,8 @@ export const {
 
 	setNextBoardIndex,
 	setPrevBoardIndex,
+
+	unloadAllBoards,
 } = board.actions;
 
 export const {
