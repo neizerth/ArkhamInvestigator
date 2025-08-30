@@ -32,10 +32,11 @@
     "build:apk": "npm run eas:apk -- --local",
     "build:android": "npm run eas:android -- --local",
     "setup:font": "tsx ./cli/update-icon-font.ts",
-    "setup": "npm run setup",
+    "setup": "npm run setup:font",
     "version:increment": "tsx ./cli/increment-version.ts",
     "gradle:clean": "cd android && ./gradlew clean",
-    "expo:clear": "expo start -c"
+    "expo:clear": "expo start -c",
+    "pod:install": "cd ios && pod install"
   },
   "jest": {
     "preset": "jest-expo"
@@ -117,7 +118,8 @@
     "rn-statusbar-height": "^2.1.1",
     "semver": "^7.7.1",
     "styled-components": "^6.1.15",
-    "uuid": "^11.0.5"
+    "uuid": "^11.0.5",
+    "expo-build-properties": "~0.14.8"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",

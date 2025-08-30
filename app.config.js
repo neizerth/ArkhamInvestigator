@@ -50,7 +50,15 @@ module.exports = {
         },
       ],
       "expo-asset",
-      ["react-native-edge-to-edge"],
+      "react-native-edge-to-edge",
+      [
+        "expo-build-properties",
+        {
+          "ios": {
+            "deploymentTarget": "15.5"
+          }
+        }
+      ]
     ],
     experiments: {
       typedRoutes: true,
