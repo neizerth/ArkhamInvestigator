@@ -6,17 +6,23 @@ import * as C from "./LoadScreen.components";
 
 export type LoadScreenProps = ViewProps & {
 	progress: number;
+	showProgress?: boolean;
+	showNumericProgress?: boolean;
 };
 
 export const LoadScreen = ({
 	progress,
 	children,
+	showProgress = true,
+	showNumericProgress = true,
 	...props
 }: LoadScreenProps) => {
+	const showNumeric = showProgress && showNumericProgress;
 	return (
 		<C.Container {...props}>
 			<Logo />
-			<Progress value={progress} />
+			{showProgress && <Progress value={progress} />}
+			{showNumeric && <C.NumericProgress>{progress}%</C.NumericProgress>}
 			{children}
 		</C.Container>
 	);
