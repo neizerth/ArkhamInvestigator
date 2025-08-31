@@ -45,7 +45,9 @@ export const Clues = ({
 
 	return (
 		<C.Container {...props}>
-			<C.Lock icon={lockIcon} enabled={syncEnabled} onPress={toggleSync} />
+			<C.Lock onPress={toggleSync}>
+				<C.LockIcon enabled={syncEnabled} icon={lockIcon} />
+			</C.Lock>
 			<C.Picker
 				value={value}
 				data={data}
