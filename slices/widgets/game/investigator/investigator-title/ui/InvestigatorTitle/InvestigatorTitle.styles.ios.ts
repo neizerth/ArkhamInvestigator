@@ -87,6 +87,9 @@ export const getTitleStyle = (options: GetTitleStyleOptions) => {
 			unique: {
 				fontSize: 23 * vh,
 			},
+			subtitle: {
+				paddingTop: "1.9%",
+			},
 		},
 		seeker: {
 			title: {
@@ -272,8 +275,8 @@ export const getTitleStyle = (options: GetTitleStyleOptions) => {
 		height: "57.5%",
 	};
 	const subtitle: ViewStyle = {
-		height: "25%",
-		paddingTop: "1.8%",
+		height: "30%",
+		paddingTop: "2.3%",
 	};
 	const titleText: TextStyle = {
 		color: textColor,
