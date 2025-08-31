@@ -1,5 +1,5 @@
+import { TouchableOpacity } from "@modules/core/touch/shared/ui";
 import { color, gameAssets } from "@shared/config";
-import { IconButton, type IconButtonProps } from "@shared/ui";
 import * as UI from "@shared/ui";
 import { Value as BaseValue } from "@shared/ui";
 import type { FC } from "react";
@@ -29,29 +29,55 @@ export const Picker: typeof StatPicker = styled(StatPicker).attrs({
   position: absolute;
 `;
 
-type LockProps = IconButtonProps & {
+// export const Lock: FC<LockProps> = styled(IconButton).attrs(
+// 	({ enabled }: LockProps) => ({
+// 		iconStyle: {
+// 			color: enabled ? "rgba(86, 122, 45, 0.8)" : "rgba(255, 255, 255, 0.4)",
+// 			fontSize: 24,
+// 		},
+// 	}),
+// )`
+// 	color:rgb(86, 122, 45);
+//   position: absolute;
+//   z-index: 2;
+//   right: -25px;
+//   top: -52px;
+// 	width: 50px;
+// 	align-items: flex-start;
+// 	filter: drop-shadow(0px 0px 5px 0 rgba(0, 0, 0, 0.3));
+// 	${({ enabled }: LockProps) =>
+// 		enabled &&
+// 		css`
+// 		filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.3));
+// 	`}
+// `;
+
+export const Lock: typeof TouchableOpacity = styled(TouchableOpacity)`
+  position: absolute;
+  z-index: 2;
+  right: -20px;
+  top: -50px;
+	width: 50px;
+	height: 50px;
+	padding-right: 5px;
+	align-items: center;
+	justify-content: center;
+`;
+
+type LockIconProps = UI.IconProps & {
 	enabled?: boolean;
 };
 
-export const Lock: FC<LockProps> = styled(IconButton).attrs(
-	({ enabled }: LockProps) => ({
-		iconStyle: {
-			color: enabled ? "rgba(86, 122, 45, 0.8)" : "rgba(255, 255, 255, 0.4)",
-			fontSize: 24,
-		},
-	}),
-)`
-	color:rgb(86, 122, 45);
-  position: absolute;
-  z-index: 2;
-  right: -25px;
-  top: -52px;
-	width: 50px;
-	align-items: flex-start;
-	filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.3));
-	${({ enabled }: LockProps) =>
+export const LockIcon: FC<LockIconProps> = styled(UI.Icon)`
+	color: rgba(255, 255, 255, 0.4);
+	text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.9);
+	font-size: 24px;
+	line-height: 24px;
+	height: 24px;
+	width: 24px;
+	${({ enabled }: LockIconProps) =>
 		enabled &&
 		css`
-		filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.3));
-	`}
+			color: rgb(86, 122, 45);
+		`}
 `;
