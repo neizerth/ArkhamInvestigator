@@ -38,12 +38,15 @@ export const useContainerAnimation = ({
 	const showDescription = useAppSelector(selectShowDescription);
 	const window = useWindowDimensions();
 
-	const systemHeight = screen.height - window.height - statusBarHeight;
+	const systemHeight = Math.max(
+		screen.height - window.height - statusBarHeight,
+		0,
+	);
 
 	const maxValue = useMemo(() => {
 		const height = screen.width / descriptionSize.ratio;
-		return window.height - height - offsetTop + statusBarHeight;
-	}, [offsetTop, window.height]);
+		return window.height - height - offsetTop + systemHeight;
+	}, [offsetTop, window.height, systemHeight]);
 
 	const [zIndex, setZIndex] = useState(-1);
 
