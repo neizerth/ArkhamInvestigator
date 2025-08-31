@@ -9,5 +9,11 @@ export const useBoardLoadProgress = () => {
 
 	const loaded = useAppSelector(selectLoadedBoardsCount);
 
-	return Math.round((loaded * 100) / total);
+	const progress = Math.round((loaded * 100) / total);
+
+	return {
+		total,
+		loaded,
+		progress,
+	};
 };
