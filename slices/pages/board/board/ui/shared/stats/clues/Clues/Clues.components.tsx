@@ -55,8 +55,8 @@ export const Picker: typeof StatPicker = styled(StatPicker).attrs({
 export const Lock: typeof TouchableOpacity = styled(TouchableOpacity)`
   position: absolute;
   z-index: 2;
-  right: -20px;
-  top: -50px;
+  right: -28px;
+  top: -45px;
 	width: 50px;
 	height: 50px;
 	padding-right: 5px;
@@ -66,15 +66,21 @@ export const Lock: typeof TouchableOpacity = styled(TouchableOpacity)`
 
 type LockIconProps = UI.IconProps & {
 	enabled?: boolean;
+	light?: boolean;
 };
 
 export const LockIcon: FC<LockIconProps> = styled(UI.Icon)`
-	color: rgba(255, 255, 255, 0.4);
-	text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.9);
+
+	color: rgba(255, 255, 255, 0.3);
 	font-size: 24px;
 	line-height: 24px;
-	height: 24px;
-	width: 24px;
+	height: 30px;
+	width: 30px;
+	${({ light }: LockIconProps) =>
+		light &&
+		css`
+			color: rgba(0, 0, 0, 0.3);
+		`}
 	${({ enabled }: LockIconProps) =>
 		enabled &&
 		css`
