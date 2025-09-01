@@ -1,8 +1,6 @@
-import { unloadAllBoards } from "@modules/board/base/shared/lib";
 import { usePage } from "@modules/core/router/shared/lib";
 import { routes } from "@shared/config";
 import { useAppDispatch, usePageLoader } from "@shared/lib";
-import { useCallback } from "react";
 
 export const useResumeGame = () => {
 	const dispatch = useAppDispatch();
@@ -11,8 +9,5 @@ export const useResumeGame = () => {
 
 	const [onResume] = usePageLoader(resume);
 
-	return useCallback(() => {
-		dispatch(unloadAllBoards());
-		onResume();
-	}, [dispatch, onResume]);
+	return onResume;
 };
