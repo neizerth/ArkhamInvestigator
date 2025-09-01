@@ -62,6 +62,9 @@ export const AboutPage = (props: AboutPageProps) => {
 					<Bold>@kamalisk & ArkhamDB crew</Bold>: Structured game data
 				</List.Item>
 				<List.Item>
+					<Bold>@Egoorka_k</Bold>: Lead Tester
+				</List.Item>
+				<List.Item>
 					<Bold>@coldtoes</Bold>: Artwork repository
 				</List.Item>
 				<List.Item>
