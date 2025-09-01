@@ -2,10 +2,9 @@ import { selectCurrentActualPropValue } from "@modules/board/base/shared/lib";
 import { setInvestigatorClues } from "@modules/mechanics/board/base/features/clues/set-clues";
 import { useAppDispatch, useAppSelector } from "@shared/lib";
 import { useCallback } from "react";
-import type { ViewProps } from "react-native";
-import { Clues } from "../Clues";
+import { Clues, type CluesProps } from "../Clues";
 
-export type InvestigatorCluesProps = ViewProps;
+export type InvestigatorCluesProps = CluesProps;
 
 export const InvestigatorClues = (props: InvestigatorCluesProps) => {
 	const dispatch = useAppDispatch();

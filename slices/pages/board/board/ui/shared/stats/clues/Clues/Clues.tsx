@@ -17,6 +17,7 @@ export type CluesProps = ImageBackgroundProps & {
 	onLongPress?: () => void;
 	onPress?: () => void;
 	data?: number[];
+	light?: boolean;
 };
 
 export const Clues = ({
@@ -25,6 +26,7 @@ export const Clues = ({
 	onPress,
 	value,
 	data = cluesData,
+	light = false,
 	...props
 }: CluesProps) => {
 	const dispatch = useAppDispatch();
@@ -46,7 +48,7 @@ export const Clues = ({
 	return (
 		<C.Container {...props}>
 			<C.Lock onPress={toggleSync}>
-				<C.LockIcon enabled={syncEnabled} icon={lockIcon} />
+				<C.LockIcon enabled={syncEnabled} icon={lockIcon} light={light} />
 			</C.Lock>
 			<C.Picker
 				value={value}
