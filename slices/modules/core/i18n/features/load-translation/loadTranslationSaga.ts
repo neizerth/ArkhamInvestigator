@@ -11,8 +11,9 @@ import { StoreTranslation, loadLanguage, setLanguage } from "../../shared/lib";
 
 function* worker({ payload }: ReturnType<typeof loadLanguage>) {
 	const language = payload ?? DEFAULT_LANGUAGE;
+	const pathLanguage = language === DEFAULT_LANGUAGE ? "core" : language;
 
-	const path = `${language}.json?v=${BUILD_VERSION}`;
+	const path = `${pathLanguage}.json?v=${BUILD_VERSION}`;
 
 	const maxTries = 5;
 	const delayMs = seconds(1);
