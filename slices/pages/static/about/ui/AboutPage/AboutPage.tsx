@@ -97,7 +97,9 @@ export const AboutPage = (props: AboutPageProps) => {
 				@Egoorka_k, @Evgesha727, @AxilFirst, @User211587, @mkrsa, @Aahz7,
 				@ivanmazov82, @mr_zoombee, @sliapy, @vyacheslav_darmin, @CrazyMind667,
 				@LexAndrVas, @Anton_Sabaton, @ezhikhin, @Mpmapuo, @alexander_violator,
-				@ka777ban, @Amarum, @l_leona_l, @litt_n, @Vladimir_NC, @w1ne_kun
+				@ka777ban, @Amarum, @l_leona_l, @litt_n, @Vladimir_NC, @w1ne_kun,
+				@Sitx_1, @Qaedmon, @Dmitry_Korablin, @bezmyateznost, @avblrpa,
+				@Lefebvre1121
 			</Paragraph>
 			<Title>Special Thanks</Title>
 			<List>
