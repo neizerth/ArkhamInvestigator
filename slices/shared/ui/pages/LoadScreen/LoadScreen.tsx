@@ -17,12 +17,17 @@ export const LoadScreen = ({
 	showNumericProgress = true,
 	...props
 }: LoadScreenProps) => {
-	const showNumeric = showProgress && showNumericProgress;
 	return (
 		<C.Container {...props}>
 			<Logo />
-			{showProgress && <Progress value={progress} />}
-			{showNumeric && <C.NumericProgress>{progress}%</C.NumericProgress>}
+			{showProgress && (
+				<>
+					<Progress value={progress} />
+					{showNumericProgress && (
+						<C.NumericProgress>{progress}%</C.NumericProgress>
+					)}
+				</>
+			)}
 			{children}
 		</C.Container>
 	);
