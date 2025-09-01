@@ -1,5 +1,5 @@
 import { setShowDescription } from "@modules/board/base/shared/lib";
-import { SystemBars } from "react-native-edge-to-edge";
+import { setStatusBarStyle } from "@modules/core/device/entities/status-bar";
 import { put, takeEvery } from "redux-saga/effects";
 import { setBoardSystemBar } from "../setBoardSystemBar";
 
@@ -9,7 +9,7 @@ function* worker({ payload }: ReturnType<typeof setShowDescription>) {
 		return;
 	}
 
-	SystemBars.setStyle("light");
+	yield put(setStatusBarStyle("light"));
 }
 
 export function* watchDescriptionShowSaga() {
