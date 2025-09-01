@@ -1,3 +1,4 @@
+import { translations } from "@assets/i18n/core";
 import { translationAPI } from "@shared/api";
 import { BUILD_VERSION } from "@shared/config/app";
 import { seconds } from "@shared/lib";
@@ -6,7 +7,7 @@ import type { AxiosResponse } from "axios";
 import { pick } from "ramda";
 import { put, retry, takeLatest } from "redux-saga/effects";
 import { setTranslation } from "../../entities/translation/setTranslation";
-import { DEFAULT_LANGUAGE, translations } from "../../shared/config";
+import { DEFAULT_LANGUAGE } from "../../shared/config";
 import { StoreTranslation, loadLanguage, setLanguage } from "../../shared/lib";
 
 function* worker({ payload }: ReturnType<typeof loadLanguage>) {

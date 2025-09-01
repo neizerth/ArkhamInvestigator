@@ -1,7 +1,5 @@
-import {
-	DEFAULT_LANGUAGE,
-	translations,
-} from "@modules/core/i18n/shared/config";
+import { translations } from "@assets/i18n/core";
+import { DEFAULT_LANGUAGE } from "@modules/core/i18n/shared/config";
 import { StoreTranslation } from "@modules/core/i18n/shared/lib";
 
 export const getTranslation = async (language: string) => {

@@ -1,6 +1,6 @@
+import { translations } from "@assets/i18n/core";
 import { createInstance } from "i18next";
 import { initReactI18next } from "react-i18next";
-import { translations } from "./translations";
 
 export const DEFAULT_LANGUAGE = "en";
 
