@@ -2,6 +2,7 @@ import { spawn } from "redux-saga/effects";
 import { leaveBoardSaga } from "./leave-board/leaveBoardSaga";
 import { loadBoardSaga } from "./load-board/sagas";
 import { setBoardSystemBarSaga } from "./set-board-system-bar/sagas";
+import { unloadBoardsOnInitSaga } from "./unload-boards-on-init/unloadBoardsOnInitSaga";
 import { updateBackgroundOnDescriptionUpdateSaga } from "./update-background-on-description-update/updateBoardBackgroundSaga";
 
 export function* boardBaseFeaturesSaga() {
@@ -9,4 +10,5 @@ export function* boardBaseFeaturesSaga() {
 	yield spawn(updateBackgroundOnDescriptionUpdateSaga);
 	yield spawn(setBoardSystemBarSaga);
 	yield spawn(loadBoardSaga);
+	yield spawn(unloadBoardsOnInitSaga);
 }
