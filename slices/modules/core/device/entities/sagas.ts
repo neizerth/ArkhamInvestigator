@@ -4,6 +4,7 @@ import { setKeepAwakeSaga } from "./keep-awake/setKeepAwake/setKeepAwakeSaga";
 import { setNavigationBarStyleSaga } from "./navigation-bar/setNavigationBarStyle/setNavigationBarStyleSaga";
 import { lockScreenOrientationSaga } from "./screen-orientation/lockScreenOrientation/lockScreenOrientationSaga";
 import { hideSplashScreenSaga } from "./splash-screen/hideSplashScreen/hideSplashScreenSaga";
+import { setStatusBarStyleSaga } from "./status-bar/setStatusBarStyle/setStatusBarStyleSaga";
 
 export function* deviceEntitiesSaga() {
 	yield spawn(setKeepAwakeSaga);
@@ -11,4 +12,5 @@ export function* deviceEntitiesSaga() {
 	yield spawn(hideSplashScreenSaga);
 	yield spawn(setBackgroundColorSaga);
 	yield spawn(setNavigationBarStyleSaga);
+	yield spawn(setStatusBarStyleSaga);
 }

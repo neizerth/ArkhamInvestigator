@@ -1,7 +1,8 @@
 import { selectBoardById } from "@modules/board/base/shared/lib";
+import { setStatusBarStyle } from "@modules/core/device/entities/status-bar";
 import type { Defined } from "@shared/model";
-import { SystemBars, type SystemBarsProps } from "react-native-edge-to-edge";
-import { select, takeEvery } from "redux-saga/effects";
+import type { SystemBarsProps } from "react-native-edge-to-edge";
+import { put, select, takeEvery } from "redux-saga/effects";
 import { setBoardSystemBar } from "../setBoardSystemBar";
 
 type SystemBarStyle = Defined<SystemBarsProps["style"]>;
@@ -13,7 +14,7 @@ function* worker({ payload }: ReturnType<typeof setBoardSystemBar>) {
 	const { light = false } = board.image;
 	const style: SystemBarStyle = light ? "dark" : "light";
 
-	SystemBars.setStyle(style);
+	yield put(setStatusBarStyle(style));
 }
 
 export function* changeBoardSystemBarSaga() {
