@@ -62,13 +62,16 @@ function* worker({ payload }: ReturnType<typeof updateBoardBackground>) {
 
 	const { background } = action.payload;
 
-	yield put(
-		setBoardProp({
-			boardId,
-			prop: "background",
-			value: background,
-		}),
-	);
+	if (background.color && background.grayscale) {
+		yield put(
+			setBoardProp({
+				boardId,
+				prop: "background",
+				value: background,
+			}),
+		);
+	}
+
 	yield put(boardBackgroundUpdated(payload));
 }
 
