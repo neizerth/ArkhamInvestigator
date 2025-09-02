@@ -74,16 +74,17 @@ export const AboutPage = (props: AboutPageProps) => {
 			<Title>{t`Credits`}</Title>
 			<List>
 				<List.Item>
-					<Bold>Card icons</Bold>: Fantasy Flight Games
+					<Bold>{t`Card icons`}</Bold>: Fantasy Flight Games
 				</List.Item>
 				<List.Item>
-					<Bold>ArkhamCards icons</Bold>: Eugene Sarnetsky
+					<Bold>{t`ArkhamCards icons`}</Bold>:{" "}
+					{t`about.credits.arkhamCards.icons`}
 				</List.Item>
 				<List.Item>
-					<Bold>Button Vector Art</Bold>: vecteezy.com
+					<Bold>{t`Button Vector Art`}</Bold>: vecteezy.com
 				</List.Item>
 				<List.Item>
-					<Bold>Some backgrounds</Bold>: pngtree.com
+					<Bold>{t`Some backgrounds`}</Bold>: pngtree.com
 				</List.Item>
 			</List>
 			<Title>{t`Testing/Ideas`}</Title>
