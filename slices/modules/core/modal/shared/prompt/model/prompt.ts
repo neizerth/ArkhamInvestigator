@@ -1,4 +1,8 @@
-import type { InputModeOptions, KeyboardType } from "react-native";
+import type {
+	InputModeOptions,
+	KeyboardType,
+	TextInputProps,
+} from "react-native";
 import type { BaseModalData } from "../../base/model";
 
 export type PromptModalData<Action> = BaseModalData<Action> & {
@@ -6,5 +10,6 @@ export type PromptModalData<Action> = BaseModalData<Action> & {
 	placeholder?: string;
 	inputMode?: InputModeOptions;
 	keyboardType?: KeyboardType;
+	inputProps?: TextInputProps;
 	text?: string;
 };
