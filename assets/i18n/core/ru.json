@@ -1,4 +1,17 @@
 {
+  "about.app": "Все права на представленную в этом приложении информацию о карточной игре «Ужас Аркхэма» — как текстовую, так и графическую — принадлежат компании <FFG>Fantasy Flight Games</FFG>. Создатель этого приложения не аффилирован и никоим образом не поддерживается Fantasy Flight Games.",
+  "about.credits": "Это приложение создано <Author>Владимиром Языковым</Author> и участниками сообщества в поддержку игры Arkham Horror: The Card Game. Исходный код проекта доступен на <Repo>GitHub</Repo>. Обратную связь и сообщения об ошибках можно оставить через <Issues>задачи на GitHub</Issues> или в <Telegram>ветке «Мастерская»</Telegram> Telegram-канала российского сообщества «Ужас Аркхэма»",
+  "about.artwork": "Все художественные материалы и иллюстрации являются интеллектуальной собственностью их авторов. Все изображения и графика Arkham Horror: The Card Game™ защищены авторским правом компании Fantasy Flight Games.",
+
+  "about.credits.beth": "Спасибо моей супруге Лизе за её понимание и поддержку. Благодаря ей я самый счастливый человек на Земле.",
+
+  "about.hallOfFame.zzorba": "Arkham Cards API, проект Icomoon, переводы Arkham Cards",
+  "about.hallOfFame.arkhamdb": "Данные карт",
+  "about.hallOfFame.coldtoes": "Репозиторий иллюстраций",
+  "about.hallOfFame.helios_sunrise": "Графика из игры",
+  "about.hallOfFame.hauke": "AI-увеличенные изображения сыщиков",
+  "about.hallOfFame.felice": "Сканы карт сыщиков",
+
   "app.outdated.title": "Приложение устарело",
   "app.outdated.text": "Не так, как древние, но пора бы обновиться",
 
@@ -308,5 +321,19 @@
   "Fill": "Заполнить",
   "Fill Chaos Bag": "Заполнить мешок",
   "Get action": "Получить действие",
-  "-2 [bless] and -2 [curse]": "-2 [bless] и -2 [curse]"
+  "-2 [bless] and -2 [curse]": "-2 [bless] и -2 [curse]",
+  "Hall of Fame": "Зал славы",
+  "Lead Tester": "Ведущий тестировщик",
+  "ArkhamDB crew": "Команда ArkhamDB",
+  "Credits": "Авторы",
+  "Card icons": "Иконки на картах",
+  "ArkhamCards icons": "Иконки ArkhamCards",
+  "Button Vector Art": "Кнопки",
+  "Some backgrounds": "Часть фоновых изображений",
+  "Testing/Ideas": "Тестирование/Идеи",
+
+  "Special Thanks": "Особая благодарность",
+  "Application Info": "О приложении",
+  "Build Version": "Версия",
+  "Device Info": "Об устройстве"
 }
