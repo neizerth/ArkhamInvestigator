@@ -1,17 +1,25 @@
 import { useLeaveBoard } from "@modules/board/base/features/leave-board";
-import { setShowDescription } from "@modules/board/base/shared/lib";
+import {
+	selectDescriptionTransition,
+	setShowDescription,
+} from "@modules/board/base/shared/lib";
 import { useSwipe } from "@modules/core/touch/shared/lib";
 import { routes } from "@shared/config";
-import { useAppDispatch } from "@shared/lib";
+import { useAppDispatch, useAppSelector } from "@shared/lib";
 import { useCallback } from "react";
 import { Gesture } from "react-native-gesture-handler";
 
 export const useDescriptionGestures = () => {
 	const dispatch = useAppDispatch();
+	const transition = useAppSelector(selectDescriptionTransition);
 
 	const hide = useCallback(() => {
+		if (transition) {
+			return;
+		}
 		dispatch(setShowDescription(false));
-	}, [dispatch]);
+	}, [dispatch, transition]);
+
 	const goTo = useLeaveBoard();
 
 	const swipeDown = useSwipe({
