@@ -5,7 +5,7 @@ import Svg, {
 	type PathProps as BasePathProps,
 } from "react-native-svg";
 
-export type ChaosTokenRevealProgressProps = Omit<
+export type RadialProgressProps = Omit<
 	SvgProps,
 	"width" | "height" | "viewBox"
 > & {
@@ -27,11 +27,11 @@ const Segment = ({ visible = true, ...props }: PathProps) => {
 
 const Path = memo(Segment);
 
-export const ChaosTokenRevealProgress = ({
+export const RadialProgress = ({
 	size = 1024,
 	value = 0,
 	...props
-}: ChaosTokenRevealProgressProps) => {
+}: RadialProgressProps) => {
 	const segmentsCount = 120;
 	const segmentIndex = Math.round((value * segmentsCount) / 100) + 1;
 
@@ -532,3 +532,5 @@ export const ChaosTokenRevealProgress = ({
 		</Svg>
 	);
 };
+
+export const RadialProgressMemo = memo(RadialProgress);

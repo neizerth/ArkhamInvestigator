@@ -1,6 +1,6 @@
 import { View } from "react-native";
 import styled from "styled-components/native";
-import { color } from "../../../config";
+import { color } from "../../../../config";
 export const Container: typeof View = styled(View)`
   width: 200px;
   height: 1px;
