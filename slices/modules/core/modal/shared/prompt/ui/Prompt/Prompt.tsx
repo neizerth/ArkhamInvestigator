@@ -27,6 +27,8 @@ export function Prompt<A extends BaseModalAction, D extends PromptModalData<A>>(
 
 	const text = data.text && t(data.text);
 
+	const { inputProps = {} } = data;
+
 	const onChange: TextChangeHandler = useCallback(
 		(event) => {
 			const { text } = event.nativeEvent;
@@ -39,6 +41,7 @@ export function Prompt<A extends BaseModalAction, D extends PromptModalData<A>>(
 		<C.Container {...props}>
 			{text && <C.Text value={text} />}
 			<C.Input
+				{...inputProps}
 				placeholder={placeholder}
 				defaultValue={defaultValue}
 				onChange={onChange}

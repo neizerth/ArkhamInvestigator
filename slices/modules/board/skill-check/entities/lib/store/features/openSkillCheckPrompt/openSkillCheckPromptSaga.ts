@@ -1,8 +1,10 @@
 import { selectSkillCheckHistoryItem } from "@modules/board/skill-check/shared/lib";
-import { openBoardModal } from "@modules/core/modal/entities/base/lib";
 
+import { selectBoardById } from "@modules/board/base/shared/lib";
 import { createCancelModalAction } from "@modules/core/modal/shared/actions/cancel/lib";
 import { createConfirmModalAction } from "@modules/core/modal/shared/actions/confirm/lib";
+import { openPrompt } from "@modules/core/modal/shared/prompt/lib";
+import { getBoardFaction } from "@modules/mechanics/board/base/entities/lib";
 import { put, select, takeEvery } from "redux-saga/effects";
 import { skillCheckItemChangeModalActionId } from "../../../../config";
 import { openSkillCheckPrompt } from "./openSkillCheckPrompt";
@@ -21,17 +23,24 @@ function* worker({ payload }: ReturnType<typeof openSkillCheckPrompt>) {
 		return;
 	}
 
+	const boardSelector = selectBoardById(boardId);
+	const board: ReturnType<typeof boardSelector> = yield select(boardSelector);
+
+	const faction = getBoardFaction(board);
+
 	const defaultValue = item.title;
 
 	yield put(
-		openBoardModal({
+		openPrompt({
 			id,
-			boardId,
-			type: "prompt",
 			data: {
 				title: "New Name",
 				defaultValue,
 				placeholder: "New Name",
+				faction,
+				inputProps: {
+					maxLength: 16,
+				},
 				actions: [
 					createCancelModalAction(),
 					createConfirmModalAction({
