@@ -57,6 +57,7 @@ export const Resources = ({
 			decreaseBoardBasePropValue({
 				boardId: "current",
 				prop: "upkeepResourcesIncrease",
+				min: 0,
 			}),
 		);
 	}, [dispatch, showUpkeepResources]);

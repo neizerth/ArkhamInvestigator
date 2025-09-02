@@ -1,4 +1,4 @@
-import { LoadScreenMemo as LoadScreen } from "@shared/ui";
+import { LoadScreenMemo as LoadScreen, Text } from "@shared/ui";
 import styled from "styled-components/native";
 
 export const Loader: typeof LoadScreen = styled(LoadScreen)`
@@ -9,4 +9,8 @@ export const Loader: typeof LoadScreen = styled(LoadScreen)`
   bottom: 0;
   z-index: 10;
   background-color: black;
+`;
+
+export const LoadingText: typeof Text = styled(Text)`
+  
 `;
