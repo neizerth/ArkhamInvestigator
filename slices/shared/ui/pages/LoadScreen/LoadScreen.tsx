@@ -14,7 +14,7 @@ export const LoadScreen = ({
 	progress,
 	children,
 	showProgress = true,
-	showNumericProgress = true,
+	showNumericProgress = false,
 	...props
 }: LoadScreenProps) => {
 	return (
