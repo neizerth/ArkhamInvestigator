@@ -27,6 +27,8 @@ export type InvestigatorBoardBackground = {
 export type InvestigatorBoard = {
 	id: number;
 	loaded?: boolean;
+	loadProgress?: number;
+
 	index: number;
 	signatureGroupId: string;
 	skinId?: string;

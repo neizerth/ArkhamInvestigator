@@ -31,6 +31,7 @@ function* worker({ payload }: ReturnType<typeof replaceBoard>) {
 	const data: InvestigatorBoard = {
 		...boardData,
 		loaded: false,
+		loadProgress: 0,
 		background: null,
 		gameTextSize: null,
 	};

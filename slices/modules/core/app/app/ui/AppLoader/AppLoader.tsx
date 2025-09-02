@@ -1,11 +1,17 @@
+import { selectExternalImagesReady } from "@modules/core/assets/base/shared/lib";
+import { useAppSelector } from "@shared/lib";
 import { LoadScreenMemo as LoadScreen } from "@shared/ui";
-import type { ViewProps } from "react-native";
 import { useAppLoaderProgress } from "./useAppLoaderProgress";
 
-export type AppLoaderProps = ViewProps;
-
-export const AppLoader = (props: AppLoaderProps) => {
+export const AppLoader = () => {
 	const progress = useAppLoaderProgress();
 
-	return <LoadScreen progress={progress} />;
+	const externalImagesReady = useAppSelector(selectExternalImagesReady);
+
+	return (
+		<LoadScreen
+			progress={progress}
+			showNumericProgress={!externalImagesReady}
+		/>
+	);
 };
