@@ -12,5 +12,5 @@ export const Loader: typeof LoadScreen = styled(LoadScreen)`
 `;
 
 export const LoadingText: typeof Text = styled(Text)`
-  
+  text-align: center;
 `;

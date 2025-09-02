@@ -1,3 +1,4 @@
+import { sendNotification } from "@modules/core/notifications/shared/lib";
 import { getSignatureImageUrl } from "@modules/signature/base/shared/api";
 import { getSignatureImageLayout } from "@modules/signature/base/shared/lib";
 import type { ReturnAwaited } from "@shared/model";
@@ -44,29 +45,54 @@ function* worker({ payload }: ReturnType<typeof createSignatureCache>) {
 		layout,
 	};
 
-	const response: ReturnAwaited<typeof processImage> = yield call(
-		processImage,
-		params,
-	);
+	try {
+		const response: ReturnAwaited<typeof processImage> = yield call(
+			processImage,
+			params,
+		);
 
-	const { crop } = layout;
+		const { crop } = layout;
 
-	const changes = {
-		image,
-		src: source,
-		uri: response.uri,
-		offset,
-		crop,
-	};
+		const changes = {
+			image,
+			src: source,
+			uri: response.uri,
+			offset,
+			crop,
+		};
 
-	if (!cache) {
+		if (!cache) {
+			yield put(
+				addSignatureCache({
+					...changes,
+					id: v4(),
+					code,
+					type,
+					grayscale,
+				}),
+			);
+
+			yield put(
+				signatureCacheCreated({
+					...payload,
+					uri: response.uri,
+				}),
+			);
+			return;
+		}
+		const { exists }: ReturnAwaited<typeof FileSystem.getInfoAsync> =
+			yield call(FileSystem.getInfoAsync, cache.uri);
+
+		if (exists) {
+			console.log(`deleting ${cache.uri}`);
+
+			yield call(FileSystem.deleteAsync, cache.uri);
+		}
+
 		yield put(
-			addSignatureCache({
-				...changes,
-				id: v4(),
-				code,
-				type,
-				grayscale,
+			updateSignatureCache({
+				id: cache.id,
+				changes,
 			}),
 		);
 
@@ -76,32 +102,23 @@ function* worker({ payload }: ReturnType<typeof createSignatureCache>) {
 				uri: response.uri,
 			}),
 		);
-		return;
+	} catch (e) {
+		if (e instanceof Error) {
+			yield put(
+				sendNotification({
+					type: "error",
+					message: e.message,
+				}),
+			);
+		}
+
+		yield put(
+			signatureCacheCreated({
+				...payload,
+				uri: "",
+			}),
+		);
 	}
-	const { exists }: ReturnAwaited<typeof FileSystem.getInfoAsync> = yield call(
-		FileSystem.getInfoAsync,
-		cache.uri,
-	);
-
-	if (exists) {
-		console.log(`deleting ${cache.uri}`);
-
-		yield call(FileSystem.deleteAsync, cache.uri);
-	}
-
-	yield put(
-		updateSignatureCache({
-			id: cache.id,
-			changes,
-		}),
-	);
-
-	yield put(
-		signatureCacheCreated({
-			...payload,
-			uri: response.uri,
-		}),
-	);
 }
 
 export function* createSignatureCacheSaga() {
