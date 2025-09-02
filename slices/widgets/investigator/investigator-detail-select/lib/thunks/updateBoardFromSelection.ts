@@ -60,6 +60,7 @@ export const updateBoardFromSelection =
 
 		const updatedBoard: InvestigatorBoard = {
 			...board,
+			loadProgress: 0,
 			loaded: false,
 			background: null,
 			gameTextSize: null,

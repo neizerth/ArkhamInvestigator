@@ -1,6 +1,9 @@
 import { boardBackgroundUpdated } from "@modules/board/base/entities/background/updateBoardBackground";
-import { selectBoardById, setBoardProp } from "@modules/board/base/shared/lib";
-import { delay, put, select, takeEvery } from "redux-saga/effects";
+import {
+	selectBoardById,
+	setBoardProgress,
+} from "@modules/board/base/shared/lib";
+import { put, select, takeEvery } from "redux-saga/effects";
 
 function* worker({ payload }: ReturnType<typeof boardBackgroundUpdated>) {
 	const { boardId } = payload;
@@ -11,13 +14,10 @@ function* worker({ payload }: ReturnType<typeof boardBackgroundUpdated>) {
 		return;
 	}
 
-	yield delay(1000);
-
 	yield put(
-		setBoardProp({
-			boardId: board.id,
-			prop: "loaded",
-			value: true,
+		setBoardProgress({
+			boardId,
+			progress: 100,
 		}),
 	);
 }

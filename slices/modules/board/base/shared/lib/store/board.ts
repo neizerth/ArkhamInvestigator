@@ -133,6 +133,7 @@ export const {
 	setPrevBoardIndex,
 
 	unloadAllBoards,
+	setBoardProgress,
 } = board.actions;
 
 export const {

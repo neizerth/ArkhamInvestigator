@@ -5,7 +5,6 @@ import {
 import { put, takeEvery } from "redux-saga/effects";
 
 function* worker() {
-	console.log("unloading!");
 	yield put(unloadAllBoards());
 }
 
