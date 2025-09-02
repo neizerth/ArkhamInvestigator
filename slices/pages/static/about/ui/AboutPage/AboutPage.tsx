@@ -1,11 +1,5 @@
 import { selectMediaVersion } from "@modules/signature/base/shared/lib";
-import {
-	DEVICE_FONT_SCALE,
-	DPR,
-	nbsp,
-	space,
-	wordJoiner,
-} from "@shared/config";
+import { DEVICE_FONT_SCALE, DPR } from "@shared/config";
 import { BUILD_ID, BUILD_VERSION } from "@shared/config/app";
 import { useAppSelector } from "@shared/lib";
 import { A, Bold, List, Paragraph, Title } from "@shared/ui";
@@ -13,77 +7,77 @@ import {
 	ContentPage,
 	type ContentPageProps,
 } from "@widgets/content/content-page";
+import { Trans, useTranslation } from "react-i18next";
 
 export type AboutPageProps = Omit<ContentPageProps, "title">;
 
 export const AboutPage = (props: AboutPageProps) => {
+	const { t } = useTranslation();
 	const mediaVersion = useAppSelector(selectMediaVersion);
 
 	return (
 		<ContentPage {...props} title="About">
 			<Paragraph>
-				The information presented in this app about
-				{space}
-				<A href="https://www.fantasyflightgames.com/en/products/arkham-horror-the-card-game/">
-					Arkham Horror: The Card Game{wordJoiner}™
-				</A>
-				, both textual and graphical, is{nbsp}©{nbsp}Fantasy Flight Games. This
-				app is a fan project and is not produced, endorsed, or supported by, or
-				affiliated with Fantasy Flight Games.
+				<Trans
+					i18nKey="about.app"
+					components={{
+						FFG: (
+							<A href="https://www.fantasyflightgames.com/en/products/arkham-horror-the-card-game/" />
+						),
+					}}
+				/>
 			</Paragraph>
 			<Paragraph>
-				This application was created by{" "}
-				<A href="https://github.com/neizerth">Vladimir Yazykov</A> and
-				contributors to support the Arkham Horror: The Card Game community. The
-				source code of this project is available at{" "}
-				<A href="https://github.com/neizerth/ArkhamInvestigator">Github</A>.
-				Feedback and bug reports are welcome via{" "}
-				<A href="https://github.com/neizerth/ArkhamInvestigator/issues">
-					Github issues
-				</A>{" "}
-				or{" "}
-				<A href="https://discord.com/channels/225349059689447425/1351550310887460926">
-					the dedicated channel
-				</A>{" "}
-				on the Mythos Busters Discord server.
+				<Trans
+					i18nKey="about.credits"
+					components={{
+						Author: <A href="https://github.com/neizerth" />,
+						Repo: <A href="https://github.com/neizerth/ArkhamInvestigator" />,
+						Issues: (
+							<A href="https://github.com/neizerth/ArkhamInvestigator/issues" />
+						),
+						Discord: (
+							<A href="https://discord.com/channels/225349059689447425/1351550310887460926" />
+						),
+						Telegram: (
+							<A href="https://discord.com/channels/225349059689447425/1351550310887460926" />
+						),
+					}}
+				/>
 			</Paragraph>
-			<Paragraph>
-				All artwork and illustrations are the intellectual property of their
-				respective creators. All Arkham Horror: The Card Game™ images and
-				graphics are copyrighted by Fantasy Flight Games.
-			</Paragraph>
-			<Title>Hall of Fame</Title>
+			<Paragraph>{t`about.artwork`}</Paragraph>
+			<Title>{t`Hall of Fame`}</Title>
 			<List>
 				<List.Item>
-					<Bold>@zzorba</Bold>: Arkham Cards API, Icomoon project, re-used
-					Arkham Cards translations
+					<Bold>@zzorba</Bold>: {t`about.hallOfFame.zzorba`}
 				</List.Item>
 				<List.Item>
-					<Bold>@kamalisk & ArkhamDB crew</Bold>: Structured game data
+					<Bold>@kamalisk & {t`ArkhamDB crew`}</Bold>:{" "}
+					{t`about.hallOfFame.arkhamdb`}
 				</List.Item>
 				<List.Item>
-					<Bold>@Egoorka_k</Bold>: Lead Tester
+					<Bold>@Egoorka_k</Bold>: {t`Lead Tester`}
 				</List.Item>
 				<List.Item>
-					<Bold>@coldtoes</Bold>: Artwork repository
+					<Bold>@coldtoes</Bold>: {t`about.hallOfFame.coldtoes`}
 				</List.Item>
 				<List.Item>
-					<Bold>@helios_sunrise</Bold>: Layered investigator arts
+					<Bold>@helios_sunrise</Bold>: {t`about.hallOfFame.helios_sunrise`}
 				</List.Item>
 				<List.Item>
-					<Bold>@hauke</Bold>: some AI-uncropped investigator images
+					<Bold>@hauke</Bold>: {t`about.hallOfFame.hauke`}
 				</List.Item>
 				<List.Item>
-					<Bold>@felice</Bold>: investigator card scans
+					<Bold>@felice</Bold>: {t`about.hallOfFame.felice`}
 				</List.Item>
 			</List>
-			<Title>Credits</Title>
+			<Title>{t`Credits`}</Title>
 			<List>
 				<List.Item>
 					<Bold>Card icons</Bold>: Fantasy Flight Games
 				</List.Item>
 				<List.Item>
-					<Bold>Re-used ArkhamCards icons</Bold>: Eugene Sarnetsky
+					<Bold>ArkhamCards icons</Bold>: Eugene Sarnetsky
 				</List.Item>
 				<List.Item>
 					<Bold>Button Vector Art</Bold>: vecteezy.com
@@ -92,7 +86,7 @@ export const AboutPage = (props: AboutPageProps) => {
 					<Bold>Some backgrounds</Bold>: pngtree.com
 				</List.Item>
 			</List>
-			<Title>Testing/Ideas</Title>
+			<Title>{t`Testing/Ideas`}</Title>
 			<Paragraph>
 				@Egoorka_k, @Evgesha727, @AxilFirst, @User211587, @mkrsa, @Aahz7,
 				@ivanmazov82, @mr_zoombee, @sliapy, @vyacheslav_darmin, @CrazyMind667,
@@ -101,14 +95,11 @@ export const AboutPage = (props: AboutPageProps) => {
 				@Sitx_1, @Qaedmon, @Dmitry_Korablin, @bezmyateznost, @avblrpa,
 				@Lefebvre1121
 			</Paragraph>
-			<Title>Special Thanks</Title>
+			<Title>{t`Special Thanks`}</Title>
 			<List>
-				<List.Item>
-					Thanks to my wife Elisabeth for her understanding and support. I'm the
-					happiest man on the Earth. Because of her
-				</List.Item>
+				<List.Item>{t`about.credits.beth`}</List.Item>
 			</List>
-			<Title>Application Info</Title>
+			<Title>{t`Application Info`}</Title>
 			<List>
 				<List.Item>
 					<Bold>Build Version</Bold>: {BUILD_VERSION}
@@ -120,7 +111,7 @@ export const AboutPage = (props: AboutPageProps) => {
 					<Bold>Media Version</Bold>: {mediaVersion}
 				</List.Item>
 			</List>
-			<Title>Device Info</Title>
+			<Title>{t`Device Info`}</Title>
 			<List>
 				<List.Item>
 					<Bold>DPR</Bold>: {DPR}
