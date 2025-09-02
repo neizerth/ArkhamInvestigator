@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo } from "react";
+import { useEffect, useRef } from "react";
 import {
 	useAnimatedStyle,
 	useSharedValue,
@@ -33,26 +33,45 @@ export const useBooleanAnimation = <T extends DefaultStyle = DefaultStyle>({
 	onStart,
 }: UseBooleanAnimationOptions<T>) => {
 	const sharedValue = useSharedValue(minValue);
+	const isActiveRef = useRef(false);
 
-	const delayMs = useMemo(() => {
-		return (enabled ? delayIn : delayOut) || delayProp || 0;
-	}, [enabled, delayProp, delayIn, delayOut]);
-
-	const trigger = useCallback(
-		async (value: number, delayMs = 0) => {
-			await delay(delayMs);
-			onStart?.();
-			sharedValue.value = value;
-			await delay(duration);
-			onComplete?.();
-		},
-		[sharedValue, duration, onComplete, onStart],
-	);
+	const delayMs = (enabled ? delayIn : delayOut) || delayProp || 0;
 
 	useEffect(() => {
 		const value = enabled ? maxValue : minValue;
-		trigger(value, delayMs);
-	}, [enabled, maxValue, minValue, delayMs, trigger]);
+
+		const trigger = async () => {
+			isActiveRef.current = true;
+
+			await delay(delayMs);
+			if (!isActiveRef.current) return;
+
+			onStart?.();
+			sharedValue.value = value;
+
+			await delay(duration);
+			if (!isActiveRef.current) return;
+
+			onComplete?.();
+		};
+
+		trigger();
+	}, [
+		enabled,
+		maxValue,
+		minValue,
+		delayMs,
+		duration,
+		onStart,
+		onComplete,
+		sharedValue,
+	]);
+
+	useEffect(() => {
+		return () => {
+			isActiveRef.current = false;
+		};
+	}, []);
 
 	return useAnimatedStyle(() => {
 		const value = withTiming(sharedValue.value, {
