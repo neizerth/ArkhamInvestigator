@@ -38,29 +38,24 @@ export function getSignatureImageLayout({
 	const pMin = faceSize.min / 100;
 	const pMax = faceSize.max / 100;
 
-	const cropH_min_face = face.height / pMax; // smallest crop height allowed
-	const cropH_max_face = face.height / pMin; // largest crop height allowed
+	const cropHMinFace = face.height / pMax; // smallest crop height allowed
+	const cropHMaxFace = face.height / pMin; // largest crop height allowed
 
 	// Image bounds: crop must fit inside the original image while keeping aspect ratio
-	const image_bound = Math.min(hI, wI / rV);
+	const imageBound = Math.min(hI, wI / rV);
 
 	// Placement bounds: how large crop can be while keeping face at (u,v)
-	const bound_top = cyI / v;
-	const bound_bottom = (hI - cyI) / (1 - v);
-	const bound_left = cxI / (u * rV);
-	const bound_right = (wI - cxI) / ((1 - u) * rV);
-	const placement_bound = Math.min(
-		bound_top,
-		bound_bottom,
-		bound_left,
-		bound_right,
-	);
+	const boundTop = cyI / v;
+	const boundBottom = (hI - cyI) / (1 - v);
+	const boundLeft = cxI / (u * rV);
+	const boundRight = (hI - cxI) / ((1 - u) * rV);
+	const placementBound = Math.min(boundTop, boundBottom, boundLeft, boundRight);
 
 	// Final crop height based on constraints
-	const upperExact = Math.min(cropH_max_face, image_bound, placement_bound);
-	const needClampPlacement = upperExact < cropH_min_face;
+	const upperExact = Math.min(cropHMaxFace, imageBound, placementBound);
+	const needClampPlacement = upperExact < cropHMinFace;
 
-	const cropH = needClampPlacement ? cropH_min_face : upperExact;
+	const cropH = needClampPlacement ? cropHMinFace : upperExact;
 	const cropW = rV * cropH;
 
 	// Initial crop position so that face center lands at (u, v)
@@ -73,24 +68,47 @@ export function getSignatureImageLayout({
 	cropLeft = clamp(cropLeft, 0, Math.max(0, wI - cropW));
 	cropTop = clamp(cropTop, 0, Math.max(0, hI - cropH));
 
+	// Ensure all crop values are integers and within image bounds
+	const ensureIntegerBounds = (value: number, maxValue: number) => {
+		const clamped = Math.max(0, Math.min(Math.floor(value), maxValue));
+		return Math.max(0, clamped);
+	};
+
+	// Round crop dimensions to integers and ensure they fit within image
+	const cropWInt = Math.floor(cropW);
+	const cropHInt = Math.floor(cropH);
+
+	// Ensure crop dimensions don't exceed image size
+	const finalCropWidth = Math.min(cropWInt, wI);
+	const finalCropHeight = Math.min(cropHInt, hI);
+
+	// Ensure crop position is integer and within bounds
+	const finalCropLeft = ensureIntegerBounds(cropLeft, wI - finalCropWidth);
+	const finalCropTop = ensureIntegerBounds(cropTop, hI - finalCropHeight);
+
 	// Debug: aspect ratio should always match
-	const actualRatio = cropW / cropH;
-	if (Math.abs(actualRatio - rV) > 1e-6) {
+	const actualRatio = finalCropWidth / finalCropHeight;
+	if (Math.abs(actualRatio - rV) > 1e-4) {
 		console.warn(`Aspect ratio mismatch: expected ${rV}, got ${actualRatio}`);
 	}
 
 	// Scale factor to map crop to the view
-	const scale = hV / cropH;
+	const scale = hV / finalCropHeight;
 
 	// Actual face size in % of the view height
 	const faceHeightPercent = ((face.height * scale) / hV) * 100;
 
 	// Achieved normalized position of the face center
-	const achievedU = (cxI - cropLeft) / cropW;
-	const achievedV = (cyI - cropTop) / cropH;
+	const achievedU = (cxI - finalCropLeft) / finalCropWidth;
+	const achievedV = (cyI - finalCropTop) / finalCropHeight;
 
 	return {
-		crop: { left: cropLeft, top: cropTop, width: cropW, height: cropH },
+		crop: {
+			left: finalCropLeft,
+			top: finalCropTop,
+			width: finalCropWidth,
+			height: finalCropHeight,
+		},
 		scale,
 		faceHeightPercent,
 		exactPlacement: !needClampPlacement,
