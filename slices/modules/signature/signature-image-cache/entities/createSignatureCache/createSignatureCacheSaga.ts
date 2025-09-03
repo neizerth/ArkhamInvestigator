@@ -107,7 +107,7 @@ function* worker({ payload }: ReturnType<typeof createSignatureCache>) {
 			yield put(
 				sendNotification({
 					type: "error",
-					message: e.message,
+					message: `${e.message}\ncrop:\n${JSON.stringify(layout.crop)}`,
 				}),
 			);
 		}
