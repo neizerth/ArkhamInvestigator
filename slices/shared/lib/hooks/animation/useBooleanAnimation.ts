@@ -1,5 +1,7 @@
 import { useEffect, useRef } from "react";
 import {
+	cancelAnimation,
+	runOnJS,
 	useAnimatedStyle,
 	useSharedValue,
 	withTiming,
@@ -33,29 +35,84 @@ export const useBooleanAnimation = <T extends DefaultStyle = DefaultStyle>({
 	onStart,
 }: UseBooleanAnimationOptions<T>) => {
 	const sharedValue = useSharedValue(minValue);
-	const isActiveRef = useRef(false);
 
-	const delayMs = (enabled ? delayIn : delayOut) || delayProp || 0;
+	// JS-side bookkeeping
+	const isMountedRef = useRef(true);
+	const runIdRef = useRef(0);
+
+	// Worklet-safe mirrors (readable on UI thread)
+	const runIdSV = useSharedValue(0);
+	const mountedSV = useSharedValue(1);
+
+	// Readable delay resolution
+	let delayMs = 0;
+	if (enabled) {
+		delayMs = delayIn ?? delayProp ?? 0;
+	} else {
+		delayMs = delayOut ?? delayProp ?? 0;
+	}
 
 	useEffect(() => {
-		const value = enabled ? maxValue : minValue;
+		isMountedRef.current = true;
+		mountedSV.value = 1;
 
-		const trigger = async () => {
-			isActiveRef.current = true;
+		return () => {
+			isMountedRef.current = false;
+			mountedSV.value = 0;
+			cancelAnimation(sharedValue);
+			runIdRef.current += 1;
+			runIdSV.value = runIdRef.current;
+		};
+	}, [mountedSV, sharedValue, runIdSV]);
 
-			await delay(delayMs);
-			if (!isActiveRef.current) return;
+	useEffect(() => {
+		const thisRunId = runIdRef.current + 1;
+		runIdRef.current = thisRunId;
+		runIdSV.value = thisRunId;
 
-			onStart?.();
-			sharedValue.value = value;
+		const target = enabled ? maxValue : minValue;
 
-			await delay(duration);
-			if (!isActiveRef.current) return;
-
-			onComplete?.();
+		const stillValidJS = () => {
+			return isMountedRef.current && runIdRef.current === thisRunId;
 		};
 
-		trigger();
+		const start = async () => {
+			if (delayMs > 0) {
+				await delay(delayMs);
+				if (!stillValidJS()) {
+					return;
+				}
+			}
+
+			if (onStart && stillValidJS()) {
+				onStart();
+			}
+
+			cancelAnimation(sharedValue);
+
+			sharedValue.value = withTiming(target, { duration }, (finished) => {
+				"worklet";
+				if (!finished) {
+					return;
+				}
+				if (mountedSV.value !== 1) {
+					return;
+				}
+				if (runIdSV.value !== thisRunId) {
+					return;
+				}
+				if (onComplete) {
+					runOnJS(onComplete)();
+				}
+			});
+		};
+
+		start();
+
+		return () => {
+			runIdRef.current += 1;
+			runIdSV.value = runIdRef.current;
+		};
 	}, [
 		enabled,
 		maxValue,
@@ -64,20 +121,12 @@ export const useBooleanAnimation = <T extends DefaultStyle = DefaultStyle>({
 		duration,
 		onStart,
 		onComplete,
+		mountedSV,
+		runIdSV,
 		sharedValue,
 	]);
 
-	useEffect(() => {
-		return () => {
-			isActiveRef.current = false;
-		};
-	}, []);
-
 	return useAnimatedStyle(() => {
-		const value = withTiming(sharedValue.value, {
-			duration,
-		});
-
-		return styleResolver(value);
-	}, [duration, styleResolver]);
+		return styleResolver(sharedValue.value);
+	}, [styleResolver]);
 };
