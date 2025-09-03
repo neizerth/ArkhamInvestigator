@@ -131,6 +131,11 @@ export const getTitleStyle = (options: GetTitleStyleOptions) => {
 				gap: parallel ? "9%" : "7%",
 			},
 		},
+		seeker: {
+			title: {
+				paddingTop: "2%",
+			},
+		},
 	});
 
 	const getLocaleStyle = getKeyConfig<Partial<ReturnStyle>>({
