@@ -78,7 +78,7 @@ export const Text: typeof GameText = styled(GameText).attrs({
 	componentStyles: {
 		icon: {
 			lineHeight: 14,
-			marginTop: -14,
+			marginTop: -16,
 		},
 	},
 })`
