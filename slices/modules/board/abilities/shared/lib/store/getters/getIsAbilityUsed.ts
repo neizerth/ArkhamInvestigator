@@ -19,17 +19,20 @@ export const getIsAbilityUsed = ({
 		return false;
 	}
 
-	if (!ability?.perInvestigator || !usedAbility.boardIds) {
+	const boardIds = usedAbility.boardIds || [];
+
+	if (!ability?.perInvestigator || boardIds.length === 0) {
 		return true;
 	}
 
 	if (typeof targetBoardId === "number") {
-		return usedAbility.boardIds.includes(targetBoardId);
+		return boardIds.includes(targetBoardId);
 	}
 
 	const { personalUse } = ability;
 
 	const maxUses = personalUse ? boardsCount : boardsCount - 1;
-	const usesCount = usedAbility.boardIds.length;
+	const usesCount = boardIds.length;
+
 	return usesCount >= maxUses;
 };

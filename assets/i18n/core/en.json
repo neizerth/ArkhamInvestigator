@@ -200,6 +200,10 @@
   "ability.lily.discipline.flip.unbroken": "{{name}} flips [[Broken]] Discipline {{discipline}} to its [[Unbroken]] side.",
 
   "ability.tony.place-bounty": "{{name}} places 1 bounty on Bounty Contracts",
+  "ability.alice.modal.subtitle": "Use base [intellect]?",
+  "ability.alice.activation": "{{name}} uses base [intellect] {{fromName}}",
+  "ability.alice.activation.self": "{{name}} uses base [intellect] of her own card",
+
   "resources.notEnough": "Not enough resources. Required&nbsp;{{count}}, available&nbsp;{{available}}",
 
   "action.heal": "{{fromName}} heals {{dativeName}} {{value}}",

@@ -46,6 +46,7 @@ export const AbilityCode = {
 			fast: "two-resources-for-action",
 		},
 	},
+	AliceLiddell: "use-base-intellect",
 };
 
 export const LilyChenAbilityCodes = Object.values(AbilityCode.LilyChen);

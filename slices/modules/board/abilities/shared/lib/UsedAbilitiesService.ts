@@ -20,11 +20,11 @@ export const UsedAbilitiesService = {
 			return data;
 		}
 
-		const boardIds = reject(equals(boardId), abilityUseData?.boardIds || []);
-
-		if (boardIds.length === 0) {
-			return data;
+		if (!abilityUseData?.boardIds) {
+			return;
 		}
+
+		const boardIds = reject(equals(boardId), abilityUseData.boardIds);
 
 		const item: InvestigatorBoardUsedAbility = {
 			id: ability.id,

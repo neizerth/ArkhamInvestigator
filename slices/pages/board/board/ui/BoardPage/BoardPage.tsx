@@ -1,4 +1,4 @@
-import { BoardLoader } from "@modules/board/base/features/load-board/ui";
+import { BoardLoaderMemo as BoardLoader } from "@modules/board/base/features/load-board/ui";
 import { useLayoutSize, useScreenOrientation } from "@shared/lib";
 import { useWindowDimensions } from "react-native";
 import { LayoutContext } from "../../config";
