@@ -15,6 +15,7 @@ export const declenseSignatureName = (
 	options: DeclenseSignatureNameOptions,
 ) => {
 	const { signature, resultCase, language } = options;
+
 	if (resultCase === "dative" && signature.dative_name) {
 		return signature.dative_name;
 	}
@@ -33,7 +34,13 @@ const petrovichGenderMapping: Record<Gender, PetrovichGender> = {
 export const declenseRU = (options: DeclenseSignatureNameOptions) => {
 	const { signature } = options;
 	const { name } = options.signature;
-	const [first, last] = name.split(" ");
+	const entries = name.split(" ");
+
+	if (entries.length > 2) {
+		return name;
+	}
+
+	const [first, last] = entries;
 
 	const gender = petrovichGenderMapping[signature.gender];
 

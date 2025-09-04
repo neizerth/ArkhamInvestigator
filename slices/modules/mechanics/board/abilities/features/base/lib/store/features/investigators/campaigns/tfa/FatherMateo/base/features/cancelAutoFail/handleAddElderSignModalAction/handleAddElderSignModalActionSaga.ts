@@ -3,7 +3,6 @@ import { selectBoardCode } from "@modules/board/base/shared/lib";
 import { chaosTokensRevealed } from "@modules/chaos-bag/reveal/base/entities/lib";
 import { addRevealedTokens } from "@modules/chaos-bag/reveal/base/shared/lib";
 import type { RevealedChaosBagToken } from "@modules/chaos-bag/reveal/base/shared/model";
-import { openChaosTokenRevealModal } from "@modules/chaos-bag/reveal/modal/entities/lib";
 import { selectChaosBagTokenValues } from "@modules/chaos-bag/value/entities/lib";
 import type { ConfirmModalAction } from "@modules/core/modal/shared/actions/confirm/model";
 import {
@@ -64,8 +63,6 @@ function* worker({ payload }: Action) {
 			tokens,
 		}),
 	);
-
-	yield put(openChaosTokenRevealModal());
 
 	yield put(
 		setBoardAbilityUse({

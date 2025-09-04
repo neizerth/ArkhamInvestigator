@@ -1,5 +1,5 @@
 import { BoardDescriptionLoadProvider } from "@modules/board/base/features/init-board-description";
-import type { PropsWithChildren } from "react";
+import { type PropsWithChildren, memo } from "react";
 import * as C from "./BoardLoader.components";
 import { useBoardLoadProgress } from "./useBoardLoadProgress";
 import { useLoaderText } from "./useLoaderText";
@@ -10,9 +10,11 @@ export const BoardLoader = ({ children }: PropsWithChildren) => {
 	const showProgress = total > 1;
 	const text = useLoaderText();
 
+	const showLoader = !!total && !loaded;
+
 	return (
 		<>
-			{!loaded && (
+			{showLoader && (
 				<C.Loader
 					progress={progress}
 					showProgress={showProgress}
@@ -26,3 +28,5 @@ export const BoardLoader = ({ children }: PropsWithChildren) => {
 		</>
 	);
 };
+
+export const BoardLoaderMemo = memo(BoardLoader);

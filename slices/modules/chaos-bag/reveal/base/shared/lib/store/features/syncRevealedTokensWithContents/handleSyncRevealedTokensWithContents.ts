@@ -27,7 +27,7 @@ export const handleSyncRevealedTokensWithContents: ChaosBagRevealHandler<
 			value,
 		};
 
-		if (!chaosBagToken) {
+		if (!chaosBagToken && !token.virtual) {
 			return null;
 		}
 

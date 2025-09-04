@@ -5,9 +5,11 @@ import {
 import { selectBoardById } from "@modules/board/base/shared/lib";
 import { sendInvestigatorNotification } from "@modules/board/notifications/entities/lib";
 import { put, select, takeEvery } from "redux-saga/effects";
-import { addWild } from "./addWild";
+import { changeSkillValueToBaseIntellect } from "../changeSkillValueToBaseIntellect";
 
-function* worker({ payload }: ReturnType<typeof addWild>) {
+function* worker({
+	payload,
+}: ReturnType<typeof changeSkillValueToBaseIntellect>) {
 	const { targetBoardId, abilityId, boardId } = payload;
 
 	const abiliySelector = selectBoardAbilityById({
@@ -37,7 +39,9 @@ function* worker({ payload }: ReturnType<typeof addWild>) {
 
 	const self = targetBoardId === board.id;
 
-	const message = self ? "wild.give.self" : "wild.give";
+	const message = self
+		? "ability.alice.activation.self"
+		: "ability.alice.activation";
 
 	yield put(
 		sendInvestigatorNotification({
@@ -52,6 +56,6 @@ function* worker({ payload }: ReturnType<typeof addWild>) {
 	);
 }
 
-export function* addWildSaga() {
-	yield takeEvery(addWild.match, worker);
+export function* AliceLiddelSetIntellectSaga() {
+	yield takeEvery(changeSkillValueToBaseIntellect.match, worker);
 }

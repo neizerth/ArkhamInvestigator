@@ -30,6 +30,7 @@ export const InvesigatorCode = {
 		parallel: "90081",
 	},
 	HenryBigby: "zdh_00012",
+	BeastWithin: "zdh_00013",
 	WendyAdams: {
 		base: "01005",
 		parallel: "90037",
@@ -47,5 +48,9 @@ export const InvesigatorCode = {
 	SkidsOToole: {
 		base: "01003",
 		parallel: "90008",
+	},
+	AliceLiddell: {
+		neutral: "zaw_02228",
+		seeker: "zaw_00304",
 	},
 };

@@ -203,6 +203,9 @@
   "ability.lily.discipline.flip.unbroken": "{{name}} переворачивает [[сломленную]] {{discipline}} «Дисциплину» [[несломленной]] стороной вверх.",
 
   "ability.tony.place-bounty": "{{name}} кладёт 1 награду на «Награды за голову»",
+  "ability.alice.modal.subtitle": "Использовать базовый [intellect]?",
+  "ability.alice.activation": "{{name}} использует в проверке базовое значение [intellect] {{fromDativeName}}",
+  "ability.alice.activation.self": "{{name}} использует в проверке базовое значение [intellect] своей карты",
 
   "resources.notEnough": "Недостаточно ресурсов. Необходимо&nbsp;{{count}}, доступно&nbsp;{{available}}",
 

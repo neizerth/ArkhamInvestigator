@@ -1,12 +1,11 @@
 import {
-	selectBoardId,
 	selectBoardUsedAbilities,
 	setBoardProp,
 } from "@modules/board/base/shared/lib";
-import type { BoardId } from "@modules/board/base/shared/model";
 import { put, select, takeEvery } from "redux-saga/effects";
 import { UsedAbilitiesService } from "../../../../UsedAbilitiesService";
 import { selectBoardAbilityById } from "../../../selectors";
+import { selectTargetBoardId } from "./selectTargetBoardId";
 import { boardAbilityUseSet, setBoardAbilityUse } from "./setBoardAbilityUse";
 
 const filterAction = (action: unknown) => {
@@ -17,18 +16,9 @@ const filterAction = (action: unknown) => {
 	return action.payload.canUse === false;
 };
 
-function* selectTargetBoardId(boardId?: BoardId) {
-	if (!boardId) {
-		return;
-	}
-
-	const selectId = selectBoardId(boardId);
-	const targetBoardId: ReturnType<typeof selectId> = yield select(selectId);
-
-	return targetBoardId;
-}
-
 function* worker({ payload }: ReturnType<typeof setBoardAbilityUse>) {
+	const { abilityTargetBoardId } = payload;
+
 	const selectAbility = selectBoardAbilityById(payload);
 	const selectUsedAbilities = selectBoardUsedAbilities(payload.boardId);
 
@@ -36,9 +26,13 @@ function* worker({ payload }: ReturnType<typeof setBoardAbilityUse>) {
 	const usedAbilities: ReturnType<typeof selectUsedAbilities> =
 		yield select(selectUsedAbilities);
 
-	const boardId: number | undefined = yield selectTargetBoardId(
-		payload.abilityTargetBoardId,
-	);
+	let boardId: number | undefined;
+
+	if (abilityTargetBoardId) {
+		const boardIdSelector = selectTargetBoardId(abilityTargetBoardId);
+
+		boardId = yield select(boardIdSelector);
+	}
 
 	if (!ability || ability.toggle === false) {
 		return;
@@ -49,6 +43,10 @@ function* worker({ payload }: ReturnType<typeof setBoardAbilityUse>) {
 		usedAbilities,
 		ability,
 	});
+
+	if (!value) {
+		return;
+	}
 
 	yield put(
 		setBoardProp({

@@ -88,7 +88,7 @@ export function getSignatureImageLayout({
 
 	// Debug: aspect ratio should always match
 	const actualRatio = finalCropWidth / finalCropHeight;
-	if (Math.abs(actualRatio - rV) > 1e-4) {
+	if (Math.abs(actualRatio - rV) > 1e-3) {
 		console.warn(`Aspect ratio mismatch: expected ${rV}, got ${actualRatio}`);
 	}
 
