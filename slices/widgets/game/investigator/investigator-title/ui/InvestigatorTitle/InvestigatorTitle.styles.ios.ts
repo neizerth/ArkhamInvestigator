@@ -258,7 +258,7 @@ export const getTitleStyle = (options: GetTitleStyleOptions) => {
 		},
 		seeker: {
 			subtitle: {
-				paddingTop: "0.7%",
+				paddingTop: "2%",
 			},
 		},
 	});
