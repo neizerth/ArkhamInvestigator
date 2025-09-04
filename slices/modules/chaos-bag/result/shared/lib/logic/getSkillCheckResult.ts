@@ -22,5 +22,7 @@ export const getSkillCheckResult = (options: Options): number => {
 		return value + total;
 	}, 0);
 
-	return sum + skillValue;
+	const total = sum + skillValue;
+
+	return total;
 };

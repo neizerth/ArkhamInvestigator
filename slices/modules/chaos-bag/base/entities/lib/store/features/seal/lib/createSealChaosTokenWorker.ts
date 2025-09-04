@@ -1,7 +1,10 @@
-import { selectChaosBagTokenById } from "@modules/chaos-bag/base/shared/lib";
+import {
+	chaosBagUpdated,
+	selectChaosBagTokenById,
+} from "@modules/chaos-bag/base/shared/lib";
 import type { ActionCreatorWithPayload, PayloadAction } from "@reduxjs/toolkit";
-import { put, select } from "redux-saga/effects";
-import { updateChaosToken } from "../../update";
+import { put, select, take } from "redux-saga/effects";
+import { chaosTokenUpdated, updateChaosToken } from "../../update";
 import type { SealChaosTokenPayload } from "../sealChaosToken";
 
 type SealAction = PayloadAction<SealChaosTokenPayload>;
@@ -34,5 +37,9 @@ export const createSealChaosTokenWorker = ({ sealed, succesAction }: Options) =>
 
 		yield put(updateChaosToken(updatePayload));
 
+		yield take(chaosTokenUpdated.match);
+
 		yield put(succesAction(payload));
+
+		yield put(chaosBagUpdated(payload));
 	};
