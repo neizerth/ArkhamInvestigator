@@ -28,12 +28,8 @@ export const selectSkillCheckData = createSelector(
 		failed,
 		autoFailedBy,
 		autoSucceedBy,
-		isAutoSuccess,
-		isAutoFail,
 	): SkillCheckPickerItem[] => {
 		const result = currentResult ?? 0;
-
-		const showValue = !isAutoFail && !isAutoSuccess;
 
 		const rawData = compact([
 			failed && {

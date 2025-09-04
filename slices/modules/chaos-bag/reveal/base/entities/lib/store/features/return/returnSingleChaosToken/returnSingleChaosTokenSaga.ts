@@ -1,5 +1,5 @@
-import { selectRevealedTokensCount } from "@modules/chaos-bag/reveal/base/shared/lib";
-import { put, select, take, takeLatest } from "redux-saga/effects";
+import { chaosBagUpdated } from "@modules/chaos-bag/base/shared/lib";
+import { put, take, takeLatest } from "redux-saga/effects";
 import { createReturnFilterAction } from "../../../util";
 import {
 	type chaosTokenReturned,
@@ -12,9 +12,6 @@ import {
 
 function* worker({ payload }: ReturnType<typeof returnSingleChaosToken>) {
 	const { id } = payload;
-	const count: ReturnType<typeof selectRevealedTokensCount> = yield select(
-		selectRevealedTokensCount,
-	);
 
 	yield put(returnChaosToken(payload));
 
@@ -23,6 +20,8 @@ function* worker({ payload }: ReturnType<typeof returnSingleChaosToken>) {
 		yield take(filterAction);
 
 	yield put(singleChaosTokenReturned(returnedAction.payload));
+
+	yield put(chaosBagUpdated(payload));
 }
 
 export function* returnSingleChaosTokenSaga() {

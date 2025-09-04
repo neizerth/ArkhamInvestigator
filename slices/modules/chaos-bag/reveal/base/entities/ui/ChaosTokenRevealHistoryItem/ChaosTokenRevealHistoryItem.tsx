@@ -6,7 +6,7 @@ import type { ViewProps } from "react-native";
 import { GestureDetector } from "react-native-gesture-handler";
 import { setCurrentRevealedTokenId } from "../../../shared/lib";
 import type { RevealedChaosBagToken } from "../../../shared/model";
-import { returnChaosToken } from "../../lib";
+import { returnSingleChaosToken } from "../../lib";
 import * as C from "./ChaosTokenRevealHistoryItem.components";
 
 export type ChaosTokenRevealHistoryItemProps = ViewProps & {
@@ -46,8 +46,9 @@ export const ChaosTokenRevealHistoryItem = ({
 	const onTokenPress = useCallback(() => {
 		if (selected) {
 			dispatch(
-				returnChaosToken({
+				returnSingleChaosToken({
 					id,
+					boardId: "current",
 				}),
 			);
 			return;

@@ -1,63 +1,25 @@
-import { useAppDispatch, useAppSelector } from "@shared/lib";
-import { useCallback, useMemo } from "react";
+import { useAppSelector } from "@shared/lib";
 import type { ViewProps } from "react-native";
-import { Gesture, GestureDetector } from "react-native-gesture-handler";
+import { GestureDetector } from "react-native-gesture-handler";
 
 import { selectModifyChaosTokens } from "@modules/chaos-bag/base/shared/lib";
-
-import { toggleChaosTokenSeal } from "@modules/chaos-bag/base/entities/lib";
-import { returnSingleChaosToken } from "@modules/chaos-bag/reveal/base/entities/lib";
 import type { RevealedChaosBagToken } from "@modules/chaos-bag/reveal/base/shared/model";
-import { useLongPress, useTap } from "@modules/core/touch/shared/lib";
-import { selectCurrentRevealedToken } from "../../../../../lib";
 import * as C from "./CenterPanel.components";
+import { useGestures } from "./useGestures";
 
-export type CenterPanelProps = ViewProps;
+export type CenterPanelProps = ViewProps & {
+	token: RevealedChaosBagToken;
+};
 
-export const CenterPanel = ({ style, ...props }: CenterPanelProps) => {
-	const dispatch = useAppDispatch();
-	const token = useAppSelector(
-		selectCurrentRevealedToken,
-	) as RevealedChaosBagToken;
-
-	const { type, id } = token;
+export const CenterPanel = ({ style, token, ...props }: CenterPanelProps) => {
+	const { type } = token;
 
 	const showTokenValue = useAppSelector(selectModifyChaosTokens);
 
-	const onTap = useCallback(() => {
-		dispatch(
-			returnSingleChaosToken({
-				boardId: "current",
-				id: token.id,
-			}),
-		);
-	}, [dispatch, token]);
-
-	const onLongPress = useCallback(() => {
-		dispatch(
-			toggleChaosTokenSeal({
-				boardId: "current",
-				id,
-			}),
-		);
-	}, [dispatch, id]);
-
-	const tap = useTap({
-		onTap,
-	});
-
-	const longPress = useLongPress({
-		onLongPress,
-	});
-
-	const gestures = useMemo(() => {
-		return [tap, longPress];
-	}, [tap, longPress]);
-
-	const getsture = Gesture.Exclusive(...gestures);
+	const gesture = useGestures(token);
 
 	return (
-		<GestureDetector gesture={getsture}>
+		<GestureDetector gesture={gesture}>
 			<C.Container style={style}>
 				<C.CurrentToken {...token} {...props} />
 				{showTokenValue && (

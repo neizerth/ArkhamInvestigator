@@ -7,7 +7,7 @@ import type {
 	RevealedChaosBagToken,
 } from "@modules/chaos-bag/reveal/base/shared/model";
 import { whereId } from "@shared/lib/util";
-import { isNotNil } from "ramda";
+import { isNotNil, pick } from "ramda";
 
 export type HandleSyncRevealedTokensWithContentsPayload = {
 	contents: ChaosBagToken[];
@@ -27,12 +27,15 @@ export const handleSyncRevealedTokensWithContents: ChaosBagRevealHandler<
 			value,
 		};
 
-		if (!chaosBagToken && !token.virtual) {
+		if (!chaosBagToken) {
 			return null;
 		}
 
+		const statusData = pick(["sealed"], chaosBagToken);
+
 		return {
 			...updatedValue,
+			...statusData,
 			value,
 		};
 	};

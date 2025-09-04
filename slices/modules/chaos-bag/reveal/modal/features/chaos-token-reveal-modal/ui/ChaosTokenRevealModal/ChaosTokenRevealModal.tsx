@@ -1,11 +1,15 @@
 import type { ViewProps } from "react-native";
 
+import { useAppSelector } from "@shared/lib";
+import { selectCurrentRevealedToken } from "../../lib";
 import { ChaosTokenRevealModalProvider as ContextProvider } from "../ChaosTokenRevealModalProvider";
 import * as C from "./ChaosTokenRevealModal.components";
 
 export type ChaosTokenRevealModalProps = ViewProps;
 
 export const ChaosTokenRevealModal = (props: ChaosTokenRevealModalProps) => {
+	const token = useAppSelector(selectCurrentRevealedToken);
+
 	return (
 		<C.Container {...props}>
 			<ContextProvider>
@@ -16,7 +20,7 @@ export const ChaosTokenRevealModal = (props: ChaosTokenRevealModalProps) => {
 					<C.LeftView />
 					<C.RightView />
 
-					<C.CenterView />
+					{token && <C.CenterView token={token} />}
 
 					<C.BottomView />
 
