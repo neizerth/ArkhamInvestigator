@@ -44,12 +44,16 @@ export const setValueFromHistoryIndex =
 			: {
 					usedAbilities: cleanBoard.initialUsedAbilities,
 				};
-		const data: InvestigatorBoard = {
-			...board,
-			...boardProps,
-			...values,
-			historyIndex,
-		};
+
+		const data: InvestigatorBoard =
+			historyIndex === -1
+				? cleanBoard
+				: {
+						...board,
+						...boardProps,
+						...values,
+						historyIndex,
+					};
 
 		dispatch(
 			setBoardPart({
