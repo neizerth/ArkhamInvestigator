@@ -1,4 +1,4 @@
-import { Arkhamic, Conkordia, STXinwei, SanCn } from "@assets/fonts";
+import { Arkhamic, Conkordia, FZLiBian, SanCn } from "@assets/fonts";
 import { withLocale } from "@modules/core/i18n/shared/lib";
 import { color } from "@shared/config";
 import { View } from "react-native";
@@ -34,10 +34,10 @@ export const Title = withLocale({
 			fontFamily: SanCn.bold,
 		},
 		zh: {
-			fontFamily: STXinwei.regular,
+			fontFamily: FZLiBian.regular,
 		},
 		"zh-cn": {
-			fontFamily: STXinwei.regular,
+			fontFamily: FZLiBian.regular,
 		},
 	},
 });

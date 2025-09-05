@@ -1,4 +1,4 @@
-import { ArnoPro, STKaiti, Yoon } from "@assets/fonts";
+import { ArnoPro, FangSong, Yoon } from "@assets/fonts";
 import { getKeyConfig } from "@shared/lib";
 import { boardText } from "../../config";
 
@@ -15,11 +15,11 @@ export const getInvestigatorFlavorStyles = ({
 
 	const zhComponentStyles = {
 		text: {
-			fontFamily: STKaiti.italic,
+			fontFamily: FangSong.italic,
 			fontSize: fontSize * 0.9,
 		},
 		u: {
-			fontFamily: STKaiti.regular,
+			fontFamily: FangSong.regular,
 		},
 	};
 

@@ -1,5 +1,5 @@
 import { SanCn, TeutonicRU, ViaodaLibre } from "@assets/fonts";
-import { Arkhamic, STXingkai } from "@assets/fonts";
+import { Arkhamic, FZLiBian } from "@assets/fonts";
 
 import { withLocale } from "@modules/core/i18n/shared/lib";
 import { color, font } from "@shared/config";
@@ -9,7 +9,7 @@ import type { TextProps as BaseTextProps } from "react-native";
 import styled, { css } from "styled-components/native";
 
 const zhText = {
-	fontFamily: STXingkai.regular,
+	fontFamily: FZLiBian.regular,
 };
 
 export const BaseText = withLocale({

@@ -1,4 +1,4 @@
-import { ArnoPro, STXinwei, SanCn } from "@assets/fonts";
+import { ArnoPro, FZLiBian, SanCn } from "@assets/fonts";
 import { scenarioReferenceImage } from "@assets/images/game/reference";
 import { withLocale } from "@modules/core/i18n/shared/lib";
 import { ReferenceTitle } from "@modules/mechanics/rules/base/shared/ui";
@@ -52,10 +52,10 @@ export const DifficultyText = withLocale({
 			fontFamily: SanCn.bold,
 		},
 		zh: {
-			fontFamily: STXinwei.regular,
+			fontFamily: FZLiBian.regular,
 		},
 		"zh-cn": {
-			fontFamily: STXinwei.regular,
+			fontFamily: FZLiBian.regular,
 		},
 	},
 });

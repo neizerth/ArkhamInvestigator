@@ -1,20 +1,20 @@
-import { ArnoPro, STKaiti, STXinwei, SanCn, Yoon } from "@assets/fonts";
+import { ArnoPro, FangSong, SanCn, SourceHanSansCN, Yoon } from "@assets/fonts";
 import type { TimingPhaseStepType } from "@modules/mechanics/rules/round-timing/shared/model";
 import { getKeyConfig } from "@shared/lib";
 import type { ComponentStyleMap } from "@shared/ui";
 
 const zhComponentStyles: ComponentStyleMap = {
 	i: {
-		fontFamily: STKaiti.italic,
+		fontFamily: FangSong.italic,
 	},
 	b: {
-		fontFamily: STXinwei.regular,
+		fontFamily: SourceHanSansCN.bold,
 	},
 	keyword: {
-		fontFamily: STXinwei.regular,
+		fontFamily: SourceHanSansCN.bold,
 	},
 	text: {
-		fontFamily: STKaiti.regular,
+		fontFamily: FangSong.regular,
 	},
 };
 

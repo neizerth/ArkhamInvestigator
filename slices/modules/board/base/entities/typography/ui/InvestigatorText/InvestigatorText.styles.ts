@@ -1,4 +1,4 @@
-import { ArnoPro, STKaiti, STXinwei } from "@assets/fonts";
+import { ArnoPro, FangSong, SourceHanSansCN } from "@assets/fonts";
 import { SanCn } from "@assets/fonts";
 import { Yoon } from "@assets/fonts";
 import { type KeyConfig, getKeyConfig } from "@shared/lib";
@@ -8,16 +8,16 @@ import { boardText } from "../../config";
 
 const zhComponentStyles: ComponentStyleMap = {
 	i: {
-		fontFamily: STKaiti.italic,
+		fontFamily: FangSong.italic,
 	},
 	b: {
-		fontFamily: STXinwei.regular,
+		fontFamily: SourceHanSansCN.bold,
 	},
 	keyword: {
-		fontFamily: STXinwei.regular,
+		fontFamily: SourceHanSansCN.bold,
 	},
 	text: {
-		fontFamily: STKaiti.regular,
+		fontFamily: FangSong.regular,
 	},
 };
 

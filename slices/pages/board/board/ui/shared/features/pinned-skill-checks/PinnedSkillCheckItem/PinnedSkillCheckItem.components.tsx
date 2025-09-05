@@ -1,4 +1,4 @@
-import { ArnoPro, STXinwei, SanCn, Yoon } from "@assets/fonts";
+import { ArnoPro, SanCn, SourceHanSansCN, Yoon } from "@assets/fonts";
 import { withLocale } from "@modules/core/i18n/shared/lib";
 import { TouchableOpacity } from "@modules/core/touch/shared/ui";
 import { color, font, size } from "@shared/config";
@@ -18,7 +18,7 @@ export const ItemContent: typeof Row = styled(Row)`
 `;
 
 const zhTitleTextConfig = {
-	fontFamily: STXinwei.regular,
+	fontFamily: SourceHanSansCN.bold,
 };
 
 const titleTextStyle = {
@@ -40,7 +40,7 @@ export const Title = withLocale({
 });
 
 const zhTextConfig = {
-	fontFamily: STXinwei.regular,
+	fontFamily: SourceHanSansCN.bold,
 };
 
 const textStyle = {
