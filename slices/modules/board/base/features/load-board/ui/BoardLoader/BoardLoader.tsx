@@ -9,8 +9,7 @@ export const BoardLoader = ({ children }: PropsWithChildren) => {
 	const loaded = progress === 100;
 	const showProgress = total > 1;
 	const text = useLoaderText();
-
-	const showLoader = !!total && !loaded;
+	const showLoader = total > 0 && !loaded;
 
 	return (
 		<>
