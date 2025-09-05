@@ -57,13 +57,15 @@ export const Sanity = ({ ...props }: SanityProps) => {
 
 	const onValueChange = showHorror ? onWoundsChange : onChange;
 
+	const showInitial = showInitialValue || showAdditionalInfo;
+
 	return (
 		<C.Container {...props}>
 			{showBaseDiff && <C.BaseSanity />}
 
 			<C.Background>
 				{showAdditionalInfo && (
-					<C.Additional value={showHorror ? initialValue : `-${wounds}`} />
+					<C.Additional value={showHorror ? baseValue : `-${wounds}`} />
 				)}
 				<C.Picker
 					value={currentValue}
@@ -75,7 +77,7 @@ export const Sanity = ({ ...props }: SanityProps) => {
 					onSwipeRight={onSwipeRight}
 					style={pickerStyle}
 				/>
-				{showInitialValue && (
+				{showInitial && (
 					<C.Initial>
 						<C.InitialSeparator />
 						<C.InitialValue value={initialValue} />
