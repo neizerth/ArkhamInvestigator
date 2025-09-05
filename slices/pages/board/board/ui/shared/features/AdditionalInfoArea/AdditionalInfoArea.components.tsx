@@ -1,6 +1,6 @@
-import { View } from "react-native";
+import { Pressable } from "react-native";
 import styled from "styled-components/native";
 
-export const Container: typeof View = styled(View)`
+export const Container: typeof Pressable = styled(Pressable)`
   
 `;

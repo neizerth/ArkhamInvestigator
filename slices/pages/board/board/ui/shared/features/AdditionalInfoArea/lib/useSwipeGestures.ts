@@ -5,8 +5,11 @@ import {
 import { useSwipe } from "@modules/core/touch/shared/lib";
 import { useAppDispatch } from "@shared/lib";
 import { useCallback, useMemo } from "react";
+import type { FlingGesture } from "react-native-gesture-handler";
 
-export const useSwipeGestures = () => {
+const emptyGestures: FlingGesture[] = [];
+
+export const useSwipeGestures = (enabled: boolean) => {
 	const dispatch = useAppDispatch();
 
 	const onSwipeLeft = useCallback(() => {
@@ -27,7 +30,9 @@ export const useSwipeGestures = () => {
 		onSwipe: onSwipeRight,
 	});
 
-	return useMemo(() => {
+	const gestures = useMemo(() => {
 		return [swipeLeft, swipeRight];
 	}, [swipeLeft, swipeRight]);
+
+	return enabled ? gestures : emptyGestures;
 };

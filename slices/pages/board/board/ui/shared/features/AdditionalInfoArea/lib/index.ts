@@ -1,1 +1,2 @@
-export * from "./useBoardGestures";
+export * from "./usePressGestures";
+export * from "./useSwipeGestures";
