@@ -1,8 +1,7 @@
-import { Arkhamic, STXinwei } from "@assets/fonts";
+import { Arkhamic, FZLiBian } from "@assets/fonts";
 import { ArnoPro } from "@assets/fonts";
 import { Conkordia } from "@assets/fonts";
 import { SanCn } from "@assets/fonts";
-import { STXingkai } from "@assets/fonts";
 import { color, font } from "@shared/config";
 import { getKeyConfig } from "@shared/lib";
 import type { PropsWithFaction } from "@shared/model";
@@ -184,11 +183,11 @@ export const getTitleStyle = (options: GetTitleStyleOptions) => {
 				paddingTop: "1.5%",
 			},
 			titleText: {
-				fontFamily: STXinwei.regular,
+				fontFamily: FZLiBian.regular,
 				fontSize: 38 * vh,
 			},
 			subtitleText: {
-				fontFamily: STXingkai.regular,
+				fontFamily: FZLiBian.regular,
 				fontSize: 18 * vh,
 			},
 			unique: {

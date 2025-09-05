@@ -26,7 +26,7 @@ export const getScenarioReferenceStyle = ({ language, name }: Options) => {
 			bottom: u(-1.8),
 		},
 		zh: {
-			bottom: u(-2),
+			bottom: u(-1),
 		},
 		"zh-cn": {
 			bottom: u(-2),
@@ -79,11 +79,11 @@ export const getScenarioReferenceStyle = ({ language, name }: Options) => {
 		},
 		zh: {
 			top: 0,
-			gap: u(2),
+			gap: u(1),
 		},
 		"zh-cn": {
 			top: 0,
-			gap: u(2),
+			gap: u(1),
 		},
 	})(language);
 

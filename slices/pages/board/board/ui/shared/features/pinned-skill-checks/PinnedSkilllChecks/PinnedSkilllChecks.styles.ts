@@ -1,4 +1,4 @@
-import { ArnoPro, STKaiti, STXinwei, SanCn, Yoon } from "@assets/fonts";
+import { ArnoPro, FangSong, SanCn, SourceHanSansCN, Yoon } from "@assets/fonts";
 import { color, font } from "@shared/config";
 import { getKeyConfig } from "@shared/lib";
 import type { ExpressionDisplayProps } from "@widgets/game/skill-check";
@@ -7,7 +7,7 @@ export const getExpressionDisplayStyle = (
 	language?: string,
 ): Partial<ExpressionDisplayProps> => {
 	const zhConfig = {
-		fontFamily: STKaiti.regular,
+		fontFamily: FangSong.regular,
 	};
 
 	const getTextStyle = getKeyConfig({
@@ -26,7 +26,7 @@ export const getExpressionDisplayStyle = (
 	});
 
 	const zhValueConfig = {
-		fontFamily: STXinwei.regular,
+		fontFamily: SourceHanSansCN.bold,
 	};
 
 	const getValueStyle = getKeyConfig({

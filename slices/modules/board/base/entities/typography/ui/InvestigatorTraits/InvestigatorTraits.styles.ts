@@ -1,4 +1,4 @@
-import { ArnoPro, STXinwei } from "@assets/fonts";
+import { ArnoPro, FZShuTi } from "@assets/fonts";
 import { SanCn } from "@assets/fonts";
 import { getKeyConfig } from "@shared/lib";
 import type { TextStyle } from "react-native";
@@ -14,7 +14,7 @@ export const getInvestigatorTraitsStyle = ({
 }: GetInvestigatorTraitsStyleOptions) => {
 	const fontSize = unit * boardText.ratio.traits;
 	const zhStyle: TextStyle = {
-		fontFamily: STXinwei.regular,
+		fontFamily: FZShuTi.regular,
 		fontSize: unit * boardText.ratio.text,
 		paddingBottom: 8,
 	};

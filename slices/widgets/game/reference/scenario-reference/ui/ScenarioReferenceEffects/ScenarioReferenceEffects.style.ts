@@ -1,4 +1,4 @@
-import { ArnoPro, STKaiti, STXinwei, SanCn, Yoon } from "@assets/fonts";
+import { ArnoPro, FangSong, SanCn, SourceHanSansCN, Yoon } from "@assets/fonts";
 import { type KeyConfig, getKeyConfig } from "@shared/lib/util";
 import type { ComponentStyleMap } from "@shared/ui";
 import type { TextStyle } from "react-native";
@@ -6,16 +6,16 @@ import { refUnit as u } from "../../lib";
 
 const zhComponentStyles: ComponentStyleMap = {
 	i: {
-		fontFamily: STKaiti.italic,
+		fontFamily: FangSong.italic,
 	},
 	b: {
-		fontFamily: STXinwei.regular,
+		fontFamily: SourceHanSansCN.bold,
 	},
 	keyword: {
-		fontFamily: STXinwei.regular,
+		fontFamily: SourceHanSansCN.bold,
 	},
 	text: {
-		fontFamily: STKaiti.regular,
+		fontFamily: FangSong.regular,
 	},
 };
 

@@ -1,4 +1,4 @@
-import { Arkhamic, Conkordia, STXinwei, SanCn } from "@assets/fonts";
+import { Arkhamic, Conkordia, FZLiBian, SanCn } from "@assets/fonts";
 import { withLocale } from "@modules/core/i18n/shared/lib";
 import { TouchableOpacity } from "@modules/core/touch/shared/ui";
 import { color } from "@shared/config";
@@ -48,10 +48,10 @@ export const Title = withLocale({
 			paddingTop: 3,
 		},
 		zh: {
-			fontFamily: STXinwei.regular,
+			fontFamily: FZLiBian.regular,
 		},
 		"zh-cn": {
-			fontFamily: STXinwei.regular,
+			fontFamily: FZLiBian.regular,
 		},
 	},
 });

@@ -1,8 +1,4 @@
-import { Arkhamic, STXinwei } from "@assets/fonts";
-import { ArnoPro } from "@assets/fonts";
-import { Conkordia } from "@assets/fonts";
-import { SanCn } from "@assets/fonts";
-import { STXingkai } from "@assets/fonts";
+import { Arkhamic, ArnoPro, Conkordia, FZLiBian, SanCn } from "@assets/fonts";
 import { color, font } from "@shared/config";
 import { getKeyConfig } from "@shared/lib";
 import type { PropsWithFaction } from "@shared/model";
@@ -33,13 +29,17 @@ export const getTitleStyle = (options: GetTitleStyleOptions) => {
 	const vh = height / 100;
 	const textColor = parallel ? color.white : color.text;
 
-	const zhConfig = {
+	const zhConfig: Partial<ReturnStyle> = {
+		background: {
+			gap: "11%",
+		},
 		titleText: {
-			fontFamily: STXinwei.regular,
+			paddingTop: "1%",
+			fontFamily: FZLiBian.regular,
 			fontSize: 38 * vh,
 		},
 		subtitleText: {
-			fontFamily: STXingkai.regular,
+			fontFamily: FZLiBian.regular,
 			fontSize: 18 * vh,
 		},
 	};

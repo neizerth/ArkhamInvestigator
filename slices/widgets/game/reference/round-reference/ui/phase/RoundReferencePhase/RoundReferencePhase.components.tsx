@@ -2,8 +2,8 @@ import {
 	Arkhamic,
 	ArnoPro,
 	Conkordia,
-	STKaiti,
-	STXinwei,
+	FZLiBian,
+	FangSong,
 	SanCn,
 	Yoon,
 } from "@assets/fonts";
@@ -119,7 +119,7 @@ export const Background: FC<BackgroundProps> = styled(RoundReferenceBackground)`
 `;
 
 const zhTitleConfig = {
-	fontFamily: STXinwei.regular,
+	fontFamily: FZLiBian.regular,
 	transform: [
 		{
 			translateY: -phaseTitleFontSize * 0.2,
@@ -159,10 +159,10 @@ export const Hint = withLocale({
 			fontFamily: Yoon.D330.italic,
 		},
 		zh: {
-			fontFamily: STKaiti.italic,
+			fontFamily: FangSong.italic,
 		},
 		"zh-cn": {
-			fontFamily: STKaiti.italic,
+			fontFamily: FangSong.italic,
 		},
 	},
 });

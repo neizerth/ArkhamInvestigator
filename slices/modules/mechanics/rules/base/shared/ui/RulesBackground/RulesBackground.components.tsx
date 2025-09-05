@@ -1,4 +1,4 @@
-import { Arkhamic, Conkordia, STXinwei, SanCn } from "@assets/fonts";
+import { Arkhamic, Conkordia, FZLiBian, SanCn } from "@assets/fonts";
 import { roundReferenceAssets } from "@assets/images/game/reference/round";
 import { withLocale } from "@modules/core/i18n/shared/lib";
 import { ImageBackground } from "@shared/ui";
@@ -47,10 +47,10 @@ export const TitleText = withLocale({
 			fontFamily: SanCn.bold,
 		},
 		zh: {
-			fontFamily: STXinwei.regular,
+			fontFamily: FZLiBian.regular,
 		},
 		"zh-cn": {
-			fontFamily: STXinwei.regular,
+			fontFamily: FZLiBian.regular,
 		},
 	},
 });
