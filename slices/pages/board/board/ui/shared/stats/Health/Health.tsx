@@ -60,12 +60,14 @@ export const Health = ({ contentContainerStyle, ...props }: HealthProps) => {
 
 	const onValueChange = showDamage ? onWoundsChange : onChange;
 
+	const showInitial = showInitialValue || showAdditionalInfo;
+
 	return (
 		<C.Container {...props}>
 			{showBaseDiff && <C.BaseHealth />}
 			<C.Content style={contentContainerStyle}>
 				{showAdditionalInfo && (
-					<C.Additional value={showDamage ? initialValue : `-${wounds}`} />
+					<C.Additional value={showDamage ? baseValue : `-${wounds}`} />
 				)}
 				<C.Picker
 					value={currentValue}
@@ -77,7 +79,7 @@ export const Health = ({ contentContainerStyle, ...props }: HealthProps) => {
 					onPress={onPress}
 					style={pickerStyle}
 				/>
-				{showInitialValue && (
+				{showInitial && (
 					<C.Initial>
 						<C.InitialSeparator />
 						<C.InitialValue value={initialValue} />

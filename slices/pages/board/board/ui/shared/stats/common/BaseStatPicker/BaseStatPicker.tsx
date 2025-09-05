@@ -5,7 +5,11 @@ import {
 	setBoardPart,
 } from "@modules/board/base/shared/lib";
 import type { PickerChangeEvent } from "@modules/core/control/entities/picker/model";
-import { useAppDispatch, useAppSelector } from "@shared/lib";
+import {
+	selectShowAdditionalInformation,
+	useAppDispatch,
+	useAppSelector,
+} from "@shared/lib";
 import type { InvestigatorBoardNumericStat } from "@shared/model";
 import { range } from "ramda";
 import { useCallback, useMemo } from "react";
@@ -23,6 +27,8 @@ export type BaseStatPickerProps = DefinedBaseStatPickerProps & {
 	statType: InvestigatorBoardNumericStat;
 };
 
+const baseSizes = [0.7, 0.54];
+
 export const BaseStatPicker = ({
 	statType,
 	contentContainerStyle,
@@ -33,6 +39,7 @@ export const BaseStatPicker = ({
 	const value = useAppSelector(selectCurrentActualPropValue(statType));
 	const baseValue = useAppSelector(selectCurrentBasePropValue(statType));
 	const initialValue = useAppSelector(selectCurrentInitialPropValue(statType));
+	const showAdditionalInfo = useAppSelector(selectShowAdditionalInformation);
 
 	const pickerData = useMemo(() => {
 		if (defaultData) {
@@ -94,10 +101,24 @@ export const BaseStatPicker = ({
 		}
 	}, [diff, setDiff]);
 
+	const pickerStyle = useMemo(() => {
+		return [props.style, { opacity: Number(!showAdditionalInfo) }];
+	}, [props.style, showAdditionalInfo]);
+
 	return (
 		<C.Container style={contentContainerStyle}>
+			{showAdditionalInfo && (
+				<C.Base>
+					<C.BaseValue
+						value={baseValue}
+						style={props.valueStyle}
+						sizes={baseSizes}
+					/>
+				</C.Base>
+			)}
 			<C.Picker
 				{...props}
+				style={pickerStyle}
 				value={diff}
 				data={pickerData}
 				onValueChanged={onChange}
