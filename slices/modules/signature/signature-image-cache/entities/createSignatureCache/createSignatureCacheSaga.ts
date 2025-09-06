@@ -104,10 +104,35 @@ function* worker({ payload }: ReturnType<typeof createSignatureCache>) {
 		);
 	} catch (e) {
 		if (e instanceof Error) {
+			console.error("Signature cache creation failed:", {
+				error: e.message,
+				source,
+				code,
+				type,
+				grayscale,
+				crop: layout.crop,
+				view,
+			});
+
 			yield put(
 				sendNotification({
 					type: "error",
-					message: `${e.message}\ncrop:\n${JSON.stringify(layout.crop)}`,
+					message: `Failed to create signature cache for ${code}: ${e.message}`,
+				}),
+			);
+		} else {
+			console.error("Signature cache creation failed with unknown error:", {
+				error: e,
+				source,
+				code,
+				type,
+				grayscale,
+			});
+
+			yield put(
+				sendNotification({
+					type: "error",
+					message: `Failed to create signature cache for ${code}: Unknown error`,
 				}),
 			);
 		}

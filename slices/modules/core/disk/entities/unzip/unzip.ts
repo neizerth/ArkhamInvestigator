@@ -14,3 +14,9 @@ export type UnzipCompletePayload = UnzipPayload & {
 
 export const unzipComplete =
 	createAction<UnzipCompletePayload>("disk/unzipComplete");
+
+export type UnzipErrorPayload = UnzipPayload & {
+	error: string;
+};
+
+export const unzipError = createAction<UnzipErrorPayload>("disk/unzipError");
