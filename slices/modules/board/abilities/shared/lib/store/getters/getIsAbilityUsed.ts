@@ -34,7 +34,5 @@ export const getIsAbilityUsed = ({
 	const maxUses = personalUse ? boardsCount : boardsCount - 1;
 	const usesCount = boardIds.length;
 
-	// console.log({ usesCount, maxUses });
-
 	return usesCount >= maxUses;
 };

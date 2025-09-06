@@ -16,6 +16,7 @@ function* worker() {
 		yield put(
 			returnChaosToken({
 				id,
+				type: "return",
 			}),
 		);
 
