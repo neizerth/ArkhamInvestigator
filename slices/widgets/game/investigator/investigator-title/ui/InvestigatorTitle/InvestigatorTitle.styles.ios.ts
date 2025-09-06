@@ -98,7 +98,7 @@ export const getTitleStyle = (options: GetTitleStyleOptions) => {
 				marginTop: "1%",
 			},
 			background: {
-				gap: "8%",
+				gap: "2%",
 			},
 		},
 		rogue: {

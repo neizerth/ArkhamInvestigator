@@ -18,7 +18,7 @@ export const Content: typeof BaseContainer = styled(BaseContainer)`
 
 export const Container: typeof View = styled(View)`
   position: relative;
-	padding-top: ${size.gap.xxl}px;
+	padding-top: ${size.gap.xl}px;
 `;
 
 export const Value: typeof BaseValue = styled(BaseValue)`
@@ -60,7 +60,7 @@ export const BaseHealth: FC<DefinedBaseStatPickerProps> = styled(
 		position: "absolute",
 		zIndex: 4,
 		right: -25,
-		top: -0,
+		top: -10,
 	},
 	gap: 5,
 })`

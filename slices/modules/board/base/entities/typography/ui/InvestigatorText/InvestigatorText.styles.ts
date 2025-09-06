@@ -3,8 +3,10 @@ import { SanCn } from "@assets/fonts";
 import { Yoon } from "@assets/fonts";
 import { type KeyConfig, getKeyConfig } from "@shared/lib";
 import type { ComponentStyleMap } from "@shared/ui";
-import type { TextStyle } from "react-native";
+import { Platform, type TextStyle } from "react-native";
 import { boardText } from "../../config";
+
+const ios = Platform.OS === "ios";
 
 const zhComponentStyles: ComponentStyleMap = {
 	i: {
@@ -82,7 +84,7 @@ export const getInvestigatorTextStyle = ({
 				marginTop: -20,
 			},
 			icon_bullet: {
-				lineHeight: fontSize * 0.7,
+				lineHeight: fontSize * (ios ? 1 : 0.7),
 			},
 			break: {
 				height: fontSize * 2.7,

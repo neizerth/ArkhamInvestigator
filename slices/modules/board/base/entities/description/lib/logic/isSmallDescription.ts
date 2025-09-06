@@ -15,11 +15,14 @@ export const isSmallDescription = ({
 	language,
 }: Options) => {
 	const show = alwaysShowText && CAN_ALWAYS_SHOW_GAME_TEXT;
+	const breaksCount = text.split("\n").length;
 	const isLargeText = text.length > 350;
+	const manyBreaks = breaksCount > 4;
 
 	return (
-		show &&
-		boardsCount > 1 &&
-		(isLargeText || EASTERN_LANGUAGES.includes(language))
+		(show &&
+			boardsCount > 1 &&
+			(isLargeText || EASTERN_LANGUAGES.includes(language))) ||
+		manyBreaks
 	);
 };

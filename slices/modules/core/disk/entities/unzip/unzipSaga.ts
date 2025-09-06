@@ -21,7 +21,6 @@ function* worker({ payload }: ReturnType<typeof unzip>) {
 
 		const { exists } = fileInfo;
 
-		console.log(fileInfo);
 		if (!exists) {
 			console.log("file not exists");
 			return;
