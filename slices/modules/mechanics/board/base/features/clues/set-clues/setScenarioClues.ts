@@ -1,7 +1,7 @@
 import type { AppThunk } from "@shared/model";
 
 import {
-	increaseBoardActualPropValue,
+	decreaseBoardActualPropValue,
 	selectBoardActualPropValue,
 	selectClues,
 	selectSyncScenarioClues,
@@ -44,7 +44,7 @@ export const setScenarioClues =
 		const cluesSpent = investigatorClues - updatedClues;
 
 		dispatch(
-			increaseBoardActualPropValue({
+			decreaseBoardActualPropValue({
 				boardId,
 				prop: "clues",
 				value: cluesSpent,
