@@ -2,15 +2,19 @@ import { whereId } from "@shared/lib/util";
 import { last, reject } from "ramda";
 import type { ChaosBagRevealHandler } from "../../../../model";
 
-export const handleRemoveRevealedTokenId: ChaosBagRevealHandler<string> = (
-	state,
-	id,
-) => {
+export type HandleRemoveRevealedTokenIdPayload = {
+	id: string;
+	type: "remove" | "return";
+};
+
+export const handleRemoveRevealedTokenId: ChaosBagRevealHandler<
+	HandleRemoveRevealedTokenIdPayload
+> = (state, { id, type }) => {
 	const tokens = reject(whereId(id), state.revealedTokens);
 	state.revealedTokens = tokens;
 
 	state.allRevealedTokens = state.allRevealedTokens.map((token) => {
-		if (token.id === id) {
+		if (token.id === id && type === "remove") {
 			return {
 				...token,
 				removed: true,

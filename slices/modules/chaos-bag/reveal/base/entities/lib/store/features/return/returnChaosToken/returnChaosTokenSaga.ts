@@ -8,7 +8,7 @@ import { canRemoveChaosToken } from "../../../../logic";
 import { chaosTokenReturned, returnChaosToken } from "./returnChaosToken";
 
 function* worker({ payload }: ReturnType<typeof returnChaosToken>) {
-	const { id } = payload;
+	const { id, type } = payload;
 
 	const tokenSelector = selectRevealedTokenById(id);
 	const token: ReturnType<typeof tokenSelector> = yield select(tokenSelector);
@@ -17,7 +17,7 @@ function* worker({ payload }: ReturnType<typeof returnChaosToken>) {
 		return;
 	}
 
-	yield put(removeRevealedTokenId(id));
+	yield put(removeRevealedTokenId(payload));
 
 	if (canRemoveChaosToken(token)) {
 		yield put(
@@ -29,7 +29,7 @@ function* worker({ payload }: ReturnType<typeof returnChaosToken>) {
 	}
 
 	if (token.virtual) {
-		yield put(removeRevealedTokenId(id));
+		yield put(removeRevealedTokenId(payload));
 	}
 
 	yield put(

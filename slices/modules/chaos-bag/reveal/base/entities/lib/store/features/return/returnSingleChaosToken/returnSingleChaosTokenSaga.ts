@@ -13,7 +13,12 @@ import {
 function* worker({ payload }: ReturnType<typeof returnSingleChaosToken>) {
 	const { id } = payload;
 
-	yield put(returnChaosToken(payload));
+	yield put(
+		returnChaosToken({
+			id,
+			type: "remove",
+		}),
+	);
 
 	const filterAction = createReturnFilterAction(id);
 	const returnedAction: ReturnType<typeof chaosTokenReturned> =

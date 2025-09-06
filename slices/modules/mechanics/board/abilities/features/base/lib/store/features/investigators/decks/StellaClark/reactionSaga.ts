@@ -18,6 +18,11 @@ const filterAction = (action: unknown) => {
 
 	const { failed, skillCheckBoardId } = action.payload;
 
+	console.log({
+		failed,
+		skillCheckBoardId,
+	});
+
 	return failed === true && Boolean(skillCheckBoardId);
 };
 
@@ -25,6 +30,7 @@ function* worker({ payload }: ReturnType<typeof chaosBagRevealEnd>) {
 	const { skillCheckBoardId } = payload;
 
 	if (!skillCheckBoardId) {
+		console.log("no skillCheckBoardId");
 		return;
 	}
 
@@ -44,6 +50,7 @@ function* worker({ payload }: ReturnType<typeof chaosBagRevealEnd>) {
 		yield select(isUsedSelector);
 
 	if (isUsed) {
+		console.log("isUsed");
 		return;
 	}
 

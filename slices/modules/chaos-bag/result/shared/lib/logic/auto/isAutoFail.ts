@@ -9,7 +9,7 @@ type Options = {
 export const isAutoFail = ({ tokens }: Options) => {
 	const containsAutoFail = tokens
 		.filter(isRevealedTokenActive)
-		.some(({ value }) => value === "fail");
+		.some(({ value, type }) => value === "fail" || type === "autoFail");
 
 	if (containsAutoFail) {
 		return true;
