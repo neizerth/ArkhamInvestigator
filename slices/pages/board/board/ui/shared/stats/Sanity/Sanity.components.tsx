@@ -17,7 +17,7 @@ export const Background: typeof BaseContainer = styled(BaseContainer)`
 `;
 
 export const Container: typeof View = styled(View)`
-	padding-top: ${size.gap.xxl}px;
+	padding-top: ${size.gap.xl}px;
 	position: relative;
 `;
 
@@ -64,7 +64,7 @@ export const BaseSanity: FC<DefinedBaseStatPickerProps> = styled(
 		position: "absolute",
 		zIndex: 4,
 		right: 0,
-		top: -0,
+		top: -10,
 	},
 	gap: 5,
 })`

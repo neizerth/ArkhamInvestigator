@@ -3,7 +3,7 @@ import {
 	factionDescriptionRelativeOffsets,
 	factionDescriptionSize,
 } from "@modules/faction/shared/ui";
-import { CAN_ALWAYS_SHOW_GAME_TEXT } from "@shared/config";
+import { CAN_ALWAYS_SHOW_GAME_TEXT, size } from "@shared/config";
 import type { Box } from "@shared/model";
 import { DEFAULT_PORTRAIT_DESCRIPTION_HEIGHT } from "../../config";
 
@@ -30,11 +30,9 @@ export const getDescriptionHeight = ({
 
 	const imageHeight = width / factionDescriptionSize.ratio;
 
-	const offsetTop = Math.round(
-		(imageHeight * (offsets.paddingTop + offsets.paddingBottom)) / 100,
-	);
+	const offsetTop = Math.round((imageHeight * offsets.paddingTop) / 100);
 
-	const gap = offsetTop;
+	const gap = offsetTop + size.gap.default;
 
 	const fullHeight = gameTextHeight + gap;
 
