@@ -8,8 +8,9 @@ export const BoardLoader = ({ children }: PropsWithChildren) => {
 	const { progress, total } = useBoardLoadProgress();
 	const loaded = progress === 100;
 	const showProgress = total > 1;
-	const text = useLoaderText();
 	const showLoader = total > 0 && !loaded;
+
+	const text = useLoaderText(showLoader);
 
 	return (
 		<>
