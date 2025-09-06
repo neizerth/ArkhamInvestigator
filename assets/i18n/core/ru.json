@@ -131,7 +131,7 @@
   "investigator.getResources_few": "{{name}} получает {{count}} ресурса",
   "investigator.getResources_many": "{{name}} получает {{count}} ресурсов",
 
-  "wild.give": "{{fromName}} добавляет карте {{dativeName}} дополнительный [wild] до конца проверки",
+  "wild.give": "{{fromName}} добавляет {{dativeName}} дополнительный [wild] до конца проверки",
   "wild.give.self": "{{name}} добавляет своей карте дополнительный [wild] до конца проверки",
 
   "actions.get_one": "{{name}} получает {{count}} действие",
@@ -208,11 +208,14 @@
   "ability.alice.activation.self": "{{name}} использует в проверке базовое значение [intellect] своей карты",
 
   "ability.diana.reaction": "{{name}} получает карту [addcard] и ресурс [resource]",
+  "ability.reynauld.reaction": "{{name}} берёт 1 карту [addcard] {{value}}",
+  "ability.reynauld.reaction.self": "{{name}} берёт 1 карту [addcard] {{value}}",
 
   "resources.notEnough": "Недостаточно ресурсов. Необходимо&nbsp;{{count}}, доступно&nbsp;{{available}}",
 
   "action.heal": "{{fromName}} лечит {{dativeName}} {{value}}",
   "action.heal.self": "{{name}} лечит {{value}}",
+  "action.heal.word": "лечит",
 
   "disk.notEnoughSpace.title": "Недосаточно свободного места",
   "disk.notEnoughSpace.text": "Для работы приложения нужно {{required}} свободного места",

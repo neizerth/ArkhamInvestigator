@@ -73,7 +73,6 @@ function* worker({ payload }: ReturnType<typeof giveAction>) {
 			sourceBoardId: boardId,
 			message: "actions.give",
 			data: {
-				fromName: board.investigator.name,
 				count: 1,
 			},
 		}),

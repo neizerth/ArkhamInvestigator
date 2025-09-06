@@ -1,6 +1,7 @@
 import {
 	selectBoardId,
 	selectBoardUsedAbilities,
+	selectBoardsCount,
 	setBoardProp,
 } from "@modules/board/base/shared/lib";
 import { put, select, takeEvery } from "redux-saga/effects";
@@ -20,14 +21,17 @@ function* worker({ payload }: ReturnType<typeof setBoardAbilityUse>) {
 	const ability: ReturnType<typeof selectAbility> = yield select(selectAbility);
 	const usedAbilities: ReturnType<typeof selectUsedAbilities> =
 		yield select(selectUsedAbilities);
-	const boardId: ReturnType<typeof selectId> = yield select(selectId);
+	const targetBoardId: ReturnType<typeof selectId> = yield select(selectId);
+	const boardsCount: ReturnType<typeof selectBoardsCount> =
+		yield select(selectBoardsCount);
 
 	if (!ability) {
 		return;
 	}
 
 	const value = UsedAbilitiesService.resetAbilityUse({
-		boardId,
+		boardsCount,
+		targetBoardId,
 		usedAbilities,
 		ability,
 		active,

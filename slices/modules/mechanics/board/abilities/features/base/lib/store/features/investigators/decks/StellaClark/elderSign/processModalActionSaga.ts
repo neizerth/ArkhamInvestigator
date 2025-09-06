@@ -95,7 +95,6 @@ function* worker({ payload }: ReturnType<typeof modalConfirmed>) {
 			boardId,
 			message: "action.heal.self",
 			data: {
-				fromName: board.investigator.name,
 				value,
 			},
 		}),
