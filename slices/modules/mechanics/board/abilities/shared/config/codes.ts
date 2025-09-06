@@ -50,6 +50,7 @@ export const AbilityCode = {
 		},
 	},
 	AliceLiddell: "use-base-intellect",
+	ReynauldDeChatillon: "reynauld-reaction",
 };
 
 export const LilyChenAbilityCodes = Object.values(AbilityCode.LilyChen);

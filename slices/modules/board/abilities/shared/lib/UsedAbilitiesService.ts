@@ -5,18 +5,20 @@ import type { InvestigatorBoardUsedAbility } from "../model";
 
 type UseOptions = {
 	boardId?: number;
+	targetBoardId?: number;
 	ability: InvestigatorAbility;
 	usedAbilities?: InvestigatorBoardUsedAbility[];
+	boardsCount: number;
 	active?: boolean;
 };
 
 export const UsedAbilitiesService = {
-	resetAbilityUse({ boardId, ability, usedAbilities = [] }: UseOptions) {
+	resetAbilityUse({ targetBoardId, ability, usedAbilities = [] }: UseOptions) {
 		const abilityUseData = usedAbilities.find(whereId(ability.id));
 
 		const data = reject(whereId(ability.id), usedAbilities);
 
-		if (!ability.perInvestigator || boardId) {
+		if (!ability.perInvestigator || targetBoardId) {
 			return data;
 		}
 
@@ -24,7 +26,7 @@ export const UsedAbilitiesService = {
 			return;
 		}
 
-		const boardIds = reject(equals(boardId), abilityUseData.boardIds);
+		const boardIds = reject(equals(targetBoardId), abilityUseData.boardIds);
 
 		const item: InvestigatorBoardUsedAbility = {
 			id: ability.id,
@@ -34,10 +36,23 @@ export const UsedAbilitiesService = {
 
 		return [...data, item];
 	},
-	setAbilityUsed({ ability, boardId, active, usedAbilities = [] }: UseOptions) {
-		if (ability.perInvestigator && boardId === undefined) {
+	setAbilityUsed(options: UseOptions) {
+		const {
+			ability,
+			active,
+			usedAbilities = [],
+			boardsCount,
+			boardId,
+		} = options;
+
+		if (
+			ability.perInvestigator &&
+			options.targetBoardId === undefined &&
+			boardsCount > 1
+		) {
 			return usedAbilities;
 		}
+
 		const { id } = ability;
 
 		const index = usedAbilities.findIndex(whereId(id));
@@ -46,14 +61,23 @@ export const UsedAbilitiesService = {
 			return [...usedAbilities, { id }];
 		}
 
-		if (!boardId) {
+		if (!options.targetBoardId && boardsCount > 1) {
+			return;
+		}
+
+		const targetBoardId =
+			boardsCount === 1
+				? (options.targetBoardId ?? boardId)
+				: options.targetBoardId;
+
+		if (!targetBoardId) {
 			return;
 		}
 
 		if (index === -1) {
 			const item: InvestigatorBoardUsedAbility = {
 				id,
-				boardIds: [boardId],
+				boardIds: [targetBoardId],
 				active,
 			};
 
@@ -66,7 +90,7 @@ export const UsedAbilitiesService = {
 
 		const item: InvestigatorBoardUsedAbility = {
 			id,
-			boardIds: [...boardIds, boardId].filter(isNotNil),
+			boardIds: [...boardIds, targetBoardId].filter(isNotNil),
 			active,
 		};
 

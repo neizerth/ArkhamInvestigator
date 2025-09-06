@@ -205,10 +205,14 @@
   "ability.alice.activation.self": "{{name}} uses base [intellect] of her own card",
   "ability.diana.reaction": "{{name}} gets [addcard] and [resource]",
 
+  "ability.reynauld.reaction": "{{name}} takes 1 card [addcard] {{value}}",
+  "ability.reynauld.reaction.self": "{{name}} takes 1 card [addcard] {{value}}",
+
   "resources.notEnough": "Not enough resources. Required&nbsp;{{count}}, available&nbsp;{{available}}",
 
   "action.heal": "{{fromName}} heals {{dativeName}} {{value}}",
   "action.heal.self": "{{name}} heals {{value}}",
+  "action.heal.word": "heals",
 
   "preposition.and": "and",
   "plural.accusative.horror_one": "{{count}} horror",

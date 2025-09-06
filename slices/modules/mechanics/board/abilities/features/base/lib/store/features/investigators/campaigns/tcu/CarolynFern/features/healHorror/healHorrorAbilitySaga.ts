@@ -43,9 +43,6 @@ function* worker({ payload }: ReturnType<typeof healHorror>) {
 			boardId: targetBoardId,
 			sourceBoardId,
 			message,
-			data: {
-				fromName: board.investigator.name,
-			},
 		}),
 	);
 }

@@ -23,12 +23,18 @@ function* worker({ payload }: ReturnType<typeof sendInvestigatorNotification>) {
 	}
 
 	let fromDativeName: string | undefined;
+	let fromName: string | undefined;
 
 	if (sourceBoardId) {
 		const fromDativeSelector = selectDeclensedSignatureName({
 			boardId: sourceBoardId,
 			resultCase: "dative",
 		});
+		const fromNameSelector = selectBoardById(sourceBoardId);
+		const fromBoard: ReturnType<typeof fromNameSelector> =
+			yield select(fromNameSelector);
+
+		fromName = fromBoard.investigator.name;
 		fromDativeName = yield select(fromDativeSelector);
 	}
 
@@ -50,6 +56,7 @@ function* worker({ payload }: ReturnType<typeof sendInvestigatorNotification>) {
 	const data = {
 		...payloadData,
 		fromDativeName,
+		fromName,
 		dativeName,
 		name,
 	};

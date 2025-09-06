@@ -1,5 +1,7 @@
 import {
+	selectBoardId,
 	selectBoardUsedAbilities,
+	selectBoardsCount,
 	setBoardProp,
 } from "@modules/board/base/shared/lib";
 import { put, select, takeEvery } from "redux-saga/effects";
@@ -26,12 +28,17 @@ function* worker({ payload }: ReturnType<typeof setBoardAbilityUse>) {
 	const usedAbilities: ReturnType<typeof selectUsedAbilities> =
 		yield select(selectUsedAbilities);
 
-	let boardId: number | undefined;
+	const boardSelector = selectBoardId(payload.boardId);
+	const boardId: ReturnType<typeof boardSelector> = yield select(boardSelector);
+	const boardsCount: ReturnType<typeof selectBoardsCount> =
+		yield select(selectBoardsCount);
+
+	let targetBoardId: number | undefined;
 
 	if (abilityTargetBoardId) {
 		const boardIdSelector = selectTargetBoardId(abilityTargetBoardId);
 
-		boardId = yield select(boardIdSelector);
+		targetBoardId = yield select(boardIdSelector);
 	}
 
 	if (!ability || ability.toggle === false) {
@@ -39,9 +46,11 @@ function* worker({ payload }: ReturnType<typeof setBoardAbilityUse>) {
 	}
 
 	const value = UsedAbilitiesService.setAbilityUsed({
-		boardId,
+		targetBoardId,
 		usedAbilities,
 		ability,
+		boardId,
+		boardsCount,
 	});
 
 	if (!value) {

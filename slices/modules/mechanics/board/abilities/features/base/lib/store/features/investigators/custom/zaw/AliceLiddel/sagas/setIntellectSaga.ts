@@ -49,7 +49,6 @@ function* worker({
 			...(self ? {} : { sourceBoardId: boardId }),
 			message,
 			data: {
-				fromName: board.investigator.name,
 				count: 1,
 			},
 		}),
