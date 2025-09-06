@@ -27,11 +27,11 @@ export const handleSyncRevealedTokensWithContents: ChaosBagRevealHandler<
 			value,
 		};
 
-		if (!chaosBagToken) {
+		if (!chaosBagToken && !token.virtual) {
 			return null;
 		}
 
-		const statusData = pick(["sealed"], chaosBagToken);
+		const statusData = chaosBagToken ? pick(["sealed"], chaosBagToken) : {};
 
 		return {
 			...updatedValue,
