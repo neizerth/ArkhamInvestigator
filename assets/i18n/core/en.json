@@ -145,8 +145,8 @@
   "chaosToken.frost.second.effect": "Resolve the test as an automatic failure",
   "chaosToken.autoFail.effect": "Automatic failure",
 
-  "wild.give": "{{name}} gives {{dativeName}}'s card an extra [wild] until the end of the test",
-  "wild.give.self": "{{name}} gives their own card an extra [wild] until the end of the test",
+  "wild.give": "{{fromName}} gives {{name}} an extra [wild] until the end of the test",
+  "wild.give.self": "{{name}} gives an extra [wild] until the end of the test",
 
   "chaosToken.canceled": "This token has been canceled or ignored\n<old>{{effect}}</old>",
   "chaosToken.canceled.effect": "The token's effect has been canceled\n<old>{{effect}}</old>",
