@@ -7,7 +7,7 @@ import {
 import { AbilityCode } from "@modules/mechanics/board/abilities/shared/config";
 import { put, select, takeEvery } from "redux-saga/effects";
 
-const filterAction = createAbilityValueFilter(AbilityCode.DianaStanley);
+const filterAction = createAbilityValueFilter(AbilityCode.DianaStanley.counter);
 
 function* worker({ payload }: ReturnType<typeof boardAbilityValueSet>) {
 	const { boardId, value, prevValue, historyItem } = payload;
@@ -33,6 +33,6 @@ function* worker({ payload }: ReturnType<typeof boardAbilityValueSet>) {
 	);
 }
 
-export function* DianaStanleyAbilitySaga() {
+export function* DianaStanleyAbilityCounterSaga() {
 	yield takeEvery(filterAction, worker);
 }

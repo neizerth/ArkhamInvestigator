@@ -9,7 +9,7 @@ export const backgrounds: Record<string, ImageRequireSource> = {
 	[AbilityCode.TonyMorgan]: abilitiyBackgrounds.bountyContracts,
 	[AbilityCode.Subject5U21]: abilitiyBackgrounds.ravenous,
 
-	[AbilityCode.DianaStanley]: handSizeImage,
+	[AbilityCode.DianaStanley.counter]: handSizeImage,
 	[AbilityCode.GloriaGoldberg]: handSizeImage,
 	[AbilityCode.GeorgeBarnaby]: handSizeImage,
 	[AbilityCode.ShatteredSelf]: handSizeImage,

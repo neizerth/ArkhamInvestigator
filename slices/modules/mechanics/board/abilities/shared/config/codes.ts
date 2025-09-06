@@ -2,7 +2,10 @@ export const AbilityCode = {
 	ShatteredSelf: "shattered-self-cards",
 	SisterMary: "mary-add-bless",
 	GeorgeBarnaby: "george-cards",
-	DianaStanley: "diana-cards",
+	DianaStanley: {
+		counter: "diana-cards",
+		reaction: "diana-reaction",
+	},
 	LilyChen: {
 		willpower: "alignment-of-spirit",
 		intellect: "quiescence-of-thought",
