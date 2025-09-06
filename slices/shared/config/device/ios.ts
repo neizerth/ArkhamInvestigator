@@ -18,7 +18,7 @@ export const createAppleCompare =
 				return false;
 			}
 
-			return compare(version, modelVersion);
+			return compare(modelVersion, version);
 		};
 	};
 
