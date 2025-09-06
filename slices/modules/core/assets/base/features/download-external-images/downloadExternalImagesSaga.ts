@@ -45,11 +45,13 @@ function* worker({ payload }: ReturnType<typeof appUpdatesChecked>) {
 	const asset = payload.assets.find(propEq(externalImagesFilename, "filename"));
 
 	if (!asset) {
+		console.log("asset not found");
 		return;
 	}
 
 	const { size } = asset;
 
+	console.log("downloading asset", externalImagesUrl);
 	yield put(
 		downloadAsset({
 			size,
@@ -60,6 +62,8 @@ function* worker({ payload }: ReturnType<typeof appUpdatesChecked>) {
 	);
 
 	yield take(downloadComplete);
+
+	console.log("download complete", externalImagesUrl);
 	yield put(setExternalImagesLoaded(true));
 
 	yield put(

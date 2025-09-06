@@ -2,7 +2,7 @@ import { Alegreya } from "@assets/fonts";
 import { color, font, size } from "@shared/config";
 import { GameText } from "@shared/ui";
 import { Column, Row, UnscaledText } from "@shared/ui";
-import { Image as BaseImage } from "react-native";
+import { Image as BaseImage } from "expo-image";
 import { View } from "react-native";
 import styled from "styled-components/native";
 import { InvestigatorSkillsPreview } from "../../../../investigator-skills-preview";
