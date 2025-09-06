@@ -4,12 +4,17 @@ import { useCallback, useEffect, useRef, useState } from "react";
 type Options<T> = {
 	data: T[];
 	duration?: number;
+	enabled?: boolean;
 };
 
 const createRandomIndex = (length: number) => () =>
 	Math.round(random(0, length));
 
-export const useRandom = <T>({ data, duration }: Options<T>) => {
+export const useRandom = <T>({
+	data,
+	duration,
+	enabled = true,
+}: Options<T>) => {
 	const interval = useRef<NodeJS.Timeout>(null);
 	const { length } = data;
 	const getIndex = useCallback(() => {
@@ -29,6 +34,10 @@ export const useRandom = <T>({ data, duration }: Options<T>) => {
 			clearInterval(interval.current);
 		}
 
+		if (!enabled) {
+			return;
+		}
+
 		interval.current = setInterval(() => {
 			setIndex(getIndex());
 		}, duration);
@@ -38,7 +47,7 @@ export const useRandom = <T>({ data, duration }: Options<T>) => {
 				clearInterval(interval.current);
 			}
 		};
-	}, [getIndex, duration]);
+	}, [getIndex, duration, enabled]);
 
 	const value = data[index];
 

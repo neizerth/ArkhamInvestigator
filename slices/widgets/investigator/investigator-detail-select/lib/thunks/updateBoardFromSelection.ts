@@ -1,20 +1,12 @@
 import {
 	isBoardExists,
 	selectCurrentBoard,
-	setBoardPart,
+	setBoard,
 } from "@modules/board/base/shared/lib";
-import type {
-	InvestigatorBoard,
-	InvestigatorBoardValues,
-} from "@modules/board/base/shared/model";
 import { goBack } from "@modules/core/router/shared/lib";
+import { createInvestigatorBoard } from "@modules/mechanics/board/base/entities/lib";
 import { selectInvestigatorSettingsByCode } from "@modules/signature/base/shared/lib";
-import {
-	getBoardStats,
-	mergeBoardStats,
-	selectReplaceInvestigator,
-	setReplaceInvestigator,
-} from "@shared/lib";
+import { selectReplaceInvestigator, setReplaceInvestigator } from "@shared/lib";
 import type { AppThunk, SelectedInvestigator } from "@shared/model";
 
 export const updateBoardFromSelection =
@@ -33,57 +25,24 @@ export const updateBoardFromSelection =
 			selectInvestigatorSettingsByCode(signatureGroupId)(state);
 
 		const investigator = selection.signature;
-		const stats = getBoardStats(investigator);
 
-		const initialValue: InvestigatorBoardValues = {
-			...board.initialValue,
-			...stats,
-		};
-
-		const baseValue = {
-			...initialValue,
-		};
-
-		const merged = mergeBoardStats(board, baseValue);
-
-		const initStats = replace
-			? {}
-			: {
-					health: Math.max(0, stats.health - physicalTrauma),
-					sanity: Math.max(0, stats.sanity - mentalTrauma),
-				};
-
-		const value = {
-			...merged,
-			...initStats,
-		};
-
-		const updatedBoard: InvestigatorBoard = {
-			...board,
-			loadProgress: 0,
-			loaded: false,
-			background: null,
-			gameTextSize: null,
-
+		const updatedBoard = createInvestigatorBoard({
+			id: board.id,
+			index: board.index,
 			investigator,
-			image: selection.image,
 			signatureGroupId: selection.signatureGroupId,
+			image: selection.image,
 			skinId: selection.skin?.id,
 
-			initialValue,
-			baseValue,
-			value,
-
-			history: [],
-			historyIndex: -1,
-			checkHistory: [],
-			usedAbilities: [],
-		};
+			physicalTrauma,
+			mentalTrauma,
+		});
 
 		dispatch(
-			setBoardPart({
+			setBoard({
 				boardId: board.id,
 				data: updatedBoard,
+				history: false,
 			}),
 		);
 

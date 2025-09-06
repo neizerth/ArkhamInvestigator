@@ -37,11 +37,10 @@ export const createInvestigatorBoard = (
 		skinId,
 	} = options;
 
-	const { additionalAction, code } = investigator;
+	const { code } = investigator;
 
 	const initialValue = {
 		...getSignatureStats(investigator),
-		additionalAction: Boolean(additionalAction),
 		resources: START_GAME_RESOURCES_COUNT,
 		actions: NEW_TURN_ACTIONS_COUNT,
 		handSize: DEFAULT_HAND_SIZE,
@@ -78,6 +77,11 @@ export const createInvestigatorBoard = (
 		historyIndex: -1,
 		usedAbilities: [],
 		abilityValues,
+		background: null,
+		gameTextSize: null,
+		loadProgress: 0,
+		loaded: false,
+		initialUsedAbilities: [],
 	};
 
 	const modificationCallback = investigatorBoardModifications[code];
