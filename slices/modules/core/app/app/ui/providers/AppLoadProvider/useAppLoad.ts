@@ -22,7 +22,5 @@ export const useAppLoad = () => {
 		}
 	}, [loaded]);
 
-	// В режиме разработки возвращаем true сразу после первого запуска
-	// чтобы избежать постоянного показа лоадера при hot reload
-	return appLoaded || loaded || (__DEV__ && started);
+	return appLoaded || loaded || started;
 };

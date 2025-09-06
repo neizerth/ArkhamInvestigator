@@ -207,6 +207,8 @@
   "ability.alice.activation": "{{name}} использует в проверке базовое значение [intellect] {{fromDativeName}}",
   "ability.alice.activation.self": "{{name}} использует в проверке базовое значение [intellect] своей карты",
 
+  "ability.diana.reaction": "{{name}} получает карту [addcard] и ресурс [resource]",
+
   "resources.notEnough": "Недостаточно ресурсов. Необходимо&nbsp;{{count}}, доступно&nbsp;{{available}}",
 
   "action.heal": "{{fromName}} лечит {{dativeName}} {{value}}",
