@@ -203,6 +203,7 @@
   "ability.alice.modal.subtitle": "Use base [intellect]?",
   "ability.alice.activation": "{{name}} uses base [intellect] {{fromName}}",
   "ability.alice.activation.self": "{{name}} uses base [intellect] of her own card",
+  "ability.diana.reaction": "{{name}} gets [addcard] and [resource]",
 
   "resources.notEnough": "Not enough resources. Required&nbsp;{{count}}, available&nbsp;{{available}}",
 
