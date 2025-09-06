@@ -6,7 +6,6 @@ import {
 import { FactionDescription } from "@modules/faction/shared/ui";
 import { size } from "@shared/config";
 import { View } from "react-native";
-import { ScrollView } from "react-native-gesture-handler";
 import Animated from "react-native-reanimated";
 import styled from "styled-components/native";
 import { TOP_CONTENT_OFFSET } from "../../../../../../../../config";
@@ -43,7 +42,7 @@ export const TopContent: typeof BoardDescriptionTopContent = styled(
 
 `;
 
-export const TextContent: typeof ScrollView = styled(ScrollView)`
+export const TextContent: typeof View = styled(View)`
   flex: 1;
 `;
 
