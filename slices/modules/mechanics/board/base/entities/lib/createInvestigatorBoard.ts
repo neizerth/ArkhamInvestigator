@@ -77,10 +77,6 @@ export const createInvestigatorBoard = (
 		historyIndex: -1,
 		usedAbilities: [],
 		abilityValues,
-		background: null,
-		gameTextSize: null,
-		loadProgress: 0,
-		loaded: false,
 		initialUsedAbilities: [],
 	};
 
