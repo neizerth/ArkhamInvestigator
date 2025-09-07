@@ -1,13 +1,22 @@
 import { Platform } from "react-native";
 import { gte } from "semver";
 
+const normalizeVersion = (version: string): string => {
+	const parts = version.split(".");
+	if (parts.length === 2) {
+		return `${parts[0]}.${parts[1]}.0`;
+	}
+	return version;
+};
+
 export const iOSVersion = {
 	gte: (version: string) => {
 		if (Platform.OS !== "ios") {
 			return false;
 		}
 
-		const currentVersion = Platform.Version;
-		return gte(currentVersion, version);
+		const currentVersion = normalizeVersion(Platform.Version);
+		const normalizedTargetVersion = normalizeVersion(version);
+		return gte(currentVersion, normalizedTargetVersion);
 	},
 };
