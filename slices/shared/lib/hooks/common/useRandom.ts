@@ -38,6 +38,8 @@ export const useRandom = <T>({
 			return;
 		}
 
+		setIndex(getIndex());
+
 		interval.current = setInterval(() => {
 			setIndex(getIndex());
 		}, duration);
