@@ -1,29 +1,13 @@
-import * as Device from "expo-device";
-import { gt } from "ramda";
 import { Platform } from "react-native";
+import { gte } from "semver";
 
-export const createAppleCompare =
-	(prefix: string) => (compare: (a: number, b: number) => boolean) => {
-		return (version: number) => {
-			const { modelId } = Device;
-			if (Platform.OS !== "ios") {
-				return false;
-			}
-			if (typeof modelId !== "string") {
-				return;
-			}
-			const modelVersion = +modelId.replace(prefix, "").replace(",", ".");
+export const iOSVersion = {
+	gte: (version: string) => {
+		if (Platform.OS !== "ios") {
+			return false;
+		}
 
-			if (Number.isNaN(modelVersion)) {
-				return false;
-			}
-
-			return compare(modelVersion, version);
-		};
-	};
-
-const iPhone = createAppleCompare("iPhone");
-
-export const iPhoneVersion = {
-	gt: iPhone(gt),
+		const currentVersion = Platform.Version;
+		return gte(currentVersion, version);
+	},
 };

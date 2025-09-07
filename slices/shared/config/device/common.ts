@@ -10,7 +10,7 @@ import type {
 	DeviceBreakpoints,
 	DeviceType,
 } from "../../model";
-import { iPhoneVersion } from "./ios";
+import { iOSVersion } from "./ios";
 
 const isAndroid = Platform.OS === "android";
 
@@ -20,7 +20,8 @@ export const isNavbarVisible = navBarHeight > 0;
 export const IS_WEB = Platform.OS === "web";
 
 export const HAVE_AVIF_SUPPORT =
-	iPhoneVersion.gt(13) || (Platform.OS === "android" && Platform.Version >= 12);
+	iOSVersion.gte("16.0") ||
+	(Platform.OS === "android" && Platform.Version >= 12);
 
 export const breakpoints: DeviceBreakpoints = {
 	default: {
