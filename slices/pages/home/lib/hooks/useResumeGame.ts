@@ -1,13 +1,14 @@
+import { selectBoardsCount } from "@modules/board/base/shared/lib";
 import { usePage } from "@modules/core/router/shared/lib";
 import { routes } from "@shared/config";
-import { useAppDispatch, usePageLoader } from "@shared/lib";
+import { useAppSelector, usePageLoader } from "@shared/lib";
 
 export const useResumeGame = () => {
-	const dispatch = useAppDispatch();
+	const boardsCount = useAppSelector(selectBoardsCount);
 	const goToPage = usePage();
 	const resume = goToPage(routes.board);
 
 	const [onResume] = usePageLoader(resume);
 
-	return onResume;
+	return boardsCount > 0 && onResume;
 };
