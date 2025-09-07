@@ -22,5 +22,5 @@ export const useAppLoad = () => {
 		}
 	}, [loaded]);
 
-	return appLoaded || loaded || started;
+	return appLoaded || loaded;
 };
