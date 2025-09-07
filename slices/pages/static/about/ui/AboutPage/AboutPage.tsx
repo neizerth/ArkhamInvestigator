@@ -98,7 +98,7 @@ export const AboutPage = (props: AboutPageProps) => {
 			</Paragraph>
 			<Title>{t`Sponsors`}</Title>
 			<Paragraph>
-				@Rick_Freydin, @kolorono
+				@kolorono, @Rick_Freydin
 				<Break />
 				<A href="https://www.patreon.com/arkhamdivider">Patreon:</A>
 				<Break />
