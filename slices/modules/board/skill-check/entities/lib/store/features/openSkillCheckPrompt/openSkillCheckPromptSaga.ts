@@ -39,7 +39,7 @@ function* worker({ payload }: ReturnType<typeof openSkillCheckPrompt>) {
 				placeholder: "New Name",
 				faction,
 				inputProps: {
-					maxLength: 16,
+					maxLength: 20,
 				},
 				actions: [
 					createCancelModalAction(),
