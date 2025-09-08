@@ -21,10 +21,6 @@ Here’s a quick reference for all locales supported by the app:
 - **zh-cn** — 中文（Simplified, China Mainland） → *(no plural, use base key without suffix)*  
 - **zh** — 中文（Traditional, generic） → *(no plural, use base key without suffix)*  
 
-Отлично 🙌 Давай вынесем `_zero` в отдельный раздел, чтобы переводчикам было проще заметить. Вот так:
-
----
-
 ## Optional `_zero` form
 
 By default, i18next decides which suffix to use for **0** based on the language rules  
