@@ -139,5 +139,5 @@ No suffix is needed — use a single base key.
 
 ### Quick tip
 
-👉 Always match the suffixes exactly as required for your language.
-👉 Use the [Plural suffix checker](https://jsfiddle.net/6bpxsgd4) to confirm both **which suffixes exist** and **which numbers map to them**.
+- Always match the suffixes exactly as required for your language.
+- Use the [Plural suffix checker](https://jsfiddle.net/6bpxsgd4) to confirm both **which suffixes exist** and **which numbers map to them**.

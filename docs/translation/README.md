@@ -111,6 +111,6 @@ export const loadingTranslations: Record<string, string[]> = {
 Some languages use different word forms depending on the number (pluralization).  
 The app relies on [i18next plural rules](https://www.i18next.com/translation-function/plurals).  
 
-👉 Please make sure you provide **all plural forms** required for your language.  
-👉 Detailed instructions and examples for every supported locale can be found here:  
+- Please make sure you provide **all plural forms** required for your language.  
+- Detailed instructions and examples for every supported locale can be found here:  
 [Plural guide](./plurals.md)
