@@ -46,12 +46,18 @@ function* worker({
 						title: "ability.mateo.base.elderSign.cardAndResource",
 						icon: "addcard",
 						primary: false,
+						data: {
+							boardId,
+						},
 					}),
 					createConfirmModalAction({
 						id: makeAdditionalActionModalActionId,
 						title: "ability.mateo.base.elderSign.action",
 						icon: "action",
 						primary: false,
+						data: {
+							boardId,
+						},
 					}),
 				],
 			},

@@ -1,18 +1,16 @@
 import { increaseBoardActualPropValue } from "@modules/board/base/shared/lib";
 import { sendInvestigatorNotification } from "@modules/board/notifications/entities/lib";
-import {
-	createModalActionFilter,
-	type modalActionProcessed,
-} from "@modules/core/modal/shared/base/lib";
+import { createModalActionFilter } from "@modules/core/modal/shared/base/lib";
 import { put, takeEvery } from "redux-saga/effects";
 import { makeAdditionalActionModalActionId } from "../../../config";
+import type { FatherMateoModalAciton } from "../../../model";
 
 const filterAction = createModalActionFilter({
 	ids: [makeAdditionalActionModalActionId],
 });
 
-function* worker({ payload }: ReturnType<typeof modalActionProcessed>) {
-	const { boardId } = payload;
+function* worker({ payload }: FatherMateoModalAciton) {
+	const { boardId } = payload.modalAction.data;
 
 	yield put(
 		increaseBoardActualPropValue({

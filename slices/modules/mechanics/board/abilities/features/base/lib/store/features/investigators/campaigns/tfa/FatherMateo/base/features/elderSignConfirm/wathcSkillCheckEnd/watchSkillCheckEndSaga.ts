@@ -17,9 +17,10 @@ const filterAction = (action: unknown) => {
 };
 
 function* worker({ payload }: ReturnType<typeof chaosBagRevealEnd>) {
-	const { boardId, skillCheckBoardId } = payload;
+	const { boardId } = payload;
 
 	if (!boardId) {
+		console.log("no boardId", boardId);
 		return;
 	}
 
@@ -28,11 +29,8 @@ function* worker({ payload }: ReturnType<typeof chaosBagRevealEnd>) {
 		yield select(boardSelector);
 
 	if (!mateoBoard.id) {
+		console.log("no mateoBoard.id", mateoBoard.id);
 		return;
-	}
-
-	if (skillCheckBoardId !== mateoBoard.id) {
-		return false;
 	}
 
 	yield put(
