@@ -160,6 +160,8 @@
   "chaosBag.addToken_few": "{{name}} добавляет в мешок {{count}} {{token}}",
   "chaosBag.addToken_many": "{{name}} добавляет в мешок {{count}} {{token}}",
 
+  "chaosBag.addTokens": "{{name}} добавляет в мешок жетоны {{tokens}}",
+
   "chaosBag.removeToken": "{{name}} удаляет из мешка {{count}} {{token}}",
 
   "chaosBag.cantAddToken": "Нельзя добавить больше {{limit}} {{character}}",
@@ -220,6 +222,8 @@
   "disk.notEnoughSpace.title": "Недосаточно свободного места",
   "disk.notEnoughSpace.text": "Для работы приложения нужно {{required}} свободного места",
 
+  "list.separator.two": " и ",
+  "list.separator.multiple": ", ",
   "preposition.and": "и",
   "plural.accusative.horror_one": "{{count}} ужас",
   "plural.accusative.horror_few": "{{count}} ужаса",
