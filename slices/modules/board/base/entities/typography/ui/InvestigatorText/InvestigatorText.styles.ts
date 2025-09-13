@@ -1,4 +1,4 @@
-import { ArnoPro, FangSong, SourceHanSansCN } from "@assets/fonts";
+import { ArnoPro, FZShuTi, FangSong, SourceHanSansCN } from "@assets/fonts";
 import { SanCn } from "@assets/fonts";
 import { Yoon } from "@assets/fonts";
 import { type KeyConfig, getKeyConfig } from "@shared/lib";
@@ -16,7 +16,7 @@ const zhComponentStyles: ComponentStyleMap = {
 		fontFamily: SourceHanSansCN.bold,
 	},
 	keyword: {
-		fontFamily: SourceHanSansCN.bold,
+		fontFamily: FZShuTi.regular,
 	},
 	text: {
 		fontFamily: FangSong.regular,
@@ -74,6 +74,9 @@ export const getInvestigatorTextStyle = ({
 			letterSpacing: 2,
 			fontSize: iconFontSize * 0.84,
 		},
+		colonIcon: {
+			top: 2,
+		},
 	};
 	const getComponents = getKeyConfig({
 		default: {
@@ -81,7 +84,7 @@ export const getInvestigatorTextStyle = ({
 			icon: {
 				fontSize: iconFontSize,
 				lineHeight: iconFontSize * 1.2,
-				marginTop: -20,
+				top: -1,
 			},
 			icon_bullet: {
 				lineHeight: fontSize * (ios ? 1 : 0.7),
