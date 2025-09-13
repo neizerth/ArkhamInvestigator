@@ -14,7 +14,7 @@
   "about.credits.arkhamCards.icons": "Eugene Sarnetsky",
 
   "board.help.pins.press": "在麵闆界麵點擊一個計算項以取消固定",
-  "board.help.pins.longPress": "在麵闆界麵長按一個計算項，可爲本次計算揭示一個混沌標記",
+  "board.help.pins.longPress": "在麵闆界麵長按一個計算項，可爲本次計算揭示一個混亂標記",
   "board.help.pins.toggle": "默認情況下，如果你有固定的計算項，可以點擊麵闆頁上的對應區塊來顯示/隱藏它。你也可以在設置頁麵找到此功能的高級模式",
 
   "board.help.calculator.history.actions": "在計算項上向左滑動以查看額外菜單",
@@ -48,7 +48,7 @@
 
   "board.help.hold.freeArea": "在屏幕任意位置點擊並長按，可查看已受到的傷害和恐懼。你也可以查看基礎技能值和當前技能值的差異。向左滑動切換到下一位調查員的麵闆，向右滑動切換到上一位。",
 
-  "board.help.longPress.main": "顯示/隱藏修正值計數器。你可以更改基礎值（例如永久+1生命，-2理智）",
+  "board.help.longPress.main": "顯示/隱藏修正值計數器。你可以更改基礎值（例如永久+1生命，-2神智）",
   "board.help.longPress.secondary": "將數值重置爲0",
 
   "board.help.longPress.redo": "將變更曆史設定爲最後一次變更",
@@ -62,18 +62,18 @@
   "board.help.special.daniela": "如果有敵人攻擊你，點擊[claws]。這將改變成功檢定時的[elder_sign]效果值。",
   "board.help.special.kymani": "如果你的地點有已橫置的敵人，點擊[exhaust]。這將改變成功檢定時的[elder_sign]效果值。",
 
-  "board.help.chaosBag": "點擊並長按一個技能值來揭示一個混沌標記",
-  "board.help.chaosBag.returnAll": "將所有已揭示的標記放回混沌袋",
-  "board.help.chaosBag.return": "[token_symbol_fill] - 將所有已揭示的標記放回混沌袋（[bless]和[curse]除外）",
-  "board.help.chaosBag.token.press": "點擊一個已揭示的標記，將其放回混沌袋（如果是[bless]或[curse]則移除）",
+  "board.help.chaosBag": "點擊並長按一個技能值來揭示一個混亂標記",
+  "board.help.chaosBag.returnAll": "將所有已揭示的標記放回混亂袋",
+  "board.help.chaosBag.return": "[token_symbol_fill] - 將所有已揭示的標記放回混亂袋（[bless]和[curse]除外）",
+  "board.help.chaosBag.token.press": "點擊一個已揭示的標記，將其放回混亂袋（如果是[bless]或[curse]則移除）",
   "board.help.chaosBag.token.longPress": "長按一個已揭示的標記來封印它",
   "board.help.chaosBag.oneMore": "點擊以揭示下一個標記",
-  "board.help.chaosBag.swipe": "向下滑動查看混沌袋曆史，向右滑動抽取一個標記，向上滑動查看冒險參考卡",
-  "board.help.chaosBag.reference": "打開混沌標記參考",
+  "board.help.chaosBag.swipe": "向下滑動查看混亂袋曆史，向右滑動抽取一個標記，向上滑動查看冒險參考卡",
+  "board.help.chaosBag.reference": "打開混亂標記參考",
   "board.help.chaosBag.cancelToken": "[blocked] – 切換標記取消模式。默認關閉。再次點擊以取消/忽略一個標記：它被抽出但不應用其修正值，且其效果被標記爲已取消。再次點擊([effect])則僅取消標記的文本效果",
 
-  "board.help.press.chaosBag": "查看混沌袋",
-  "board.help.longPress.chaosBag": "揭示一個混沌標記",
+  "board.help.press.chaosBag": "查看混亂袋",
+  "board.help.longPress.chaosBag": "揭示一個混亂標記",
 
   "settings.sound": "聲音（Beta）",
   "settings.sound.hint": "選擇器聲音",
@@ -95,7 +95,7 @@
   "newGame.start.title": "開始新遊戲？",
   "newGame.start.text": "此操作將刪除你上一局遊戲的數據",
 
-  "board.help.swipe.chaosBag": "向右滑動以揭示一個混沌標記。向下滑動打開揭示曆史頁麵。向上滑動打開冒險參考卡",
+  "board.help.swipe.chaosBag": "向右滑動以揭示一個混亂標記。向下滑動打開揭示曆史頁麵。向上滑動打開冒險參考卡",
   "board.help.press.clue": "數值加1",
 
   "board.help.pins.swipe": "在固定的計算項上向下滑動，可跳轉到你創建該計算項的頁麵",
@@ -138,8 +138,8 @@
   "Modify scenario tokens": "修改冒險標記",
   "Show skill test result": "顯示技能檢定結果",
 
-  "chaosToken.curse.effect": "{{value}}。揭示另一個標記。將此標記返回標記池，而非放回混沌袋。",
-  "chaosToken.bless.effect": "{{value}}。揭示另一個標記。將此標記返回標記池，而非放回混沌袋",
+  "chaosToken.curse.effect": "{{value}}。揭示另一個標記。將此標記返回標記池，而非放回混亂袋。",
+  "chaosToken.bless.effect": "{{value}}。揭示另一個標記。將此標記返回標記池，而非放回混亂袋",
   "chaosToken.frost.first.effect": "{{value}}。揭示另一個標記",
   "chaosToken.frost.second.effect": "將此檢定視爲自動失敗",
   "chaosToken.autoFail.effect": "自動失敗",
@@ -162,11 +162,11 @@
   "chaosToken.remove.confirm.return": "返回",
   "chaosToken.effect": "{{token}} 效果",
 
-  "chaosBag.addToken_one": "{{name}} 將 {{count}} 個 {{token}} 標記加入混沌袋",
-  "chaosBag.addToken_other": "{{name}} 將 {{count}} 個 {{token}} 標記加入混沌袋",
+  "chaosBag.addToken_one": "{{name}} 將 {{count}} 個 {{token}} 標記加入混亂袋",
+  "chaosBag.addToken_other": "{{name}} 將 {{count}} 個 {{token}} 標記加入混亂袋",
 
-  "chaosBag.removeToken_one": "{{name}} 從混沌袋中移除 {{count}} 個 {{token}} 標記",
-  "chaosBag.removeToken_other": "{{name}} 從混沌袋中移除 {{count}} 個 {{token}} 標記",
+  "chaosBag.removeToken_one": "{{name}} 從混亂袋中移除 {{count}} 個 {{token}} 標記",
+  "chaosBag.removeToken_other": "{{name}} 從混亂袋中移除 {{count}} 個 {{token}} 標記",
 
   "chaosBag.cantAddToken": "你不能添加超過 {{limit}} 個 {{character}}",
   "chaosBag.cantRemoveToken": "你不能移除 {{count}} 個 {{character}}。可用：{{available}}",
@@ -230,9 +230,9 @@
 
   "Picker animation": "選擇器動畫",
 
-  "Show initial Health/Sanity": "顯示初始生命/理智",
+  "Show initial Health/Sanity": "顯示初始生命/神智",
 
-  "Chaos bag loading animation": "混沌袋加載動畫",
+  "Chaos bag loading animation": "混亂袋加載動畫",
 
   "Show calculation changes": "顯示計算變更",
 
@@ -274,8 +274,8 @@
   "Hold to seal": "長按以封印",
   "Hold": "長按",
 
-  "Health/Sanity": "生命/理智",
-  "Show health/sanity": "顯示生命/理智",
+  "Health/Sanity": "生命/神智",
+  "Show health/sanity": "顯示生命/神智",
   "Show damage/horror": "顯示傷害/恐懼",
 
   "Spoiler Alert": "劇透警告",
@@ -297,8 +297,8 @@
   "Select a campaign": "選擇一個劇本",
   "Back Text": "背麵文本",
 
-  "Negative health/sanity": "負生命/理智",
-  "Unlimited chaos tokens": "無限混沌標記",
+  "Negative health/sanity": "負生命/神智",
+  "Unlimited chaos tokens": "無限混亂標記",
   "Custom Content": "自定義內容",
   "Upkeep resources": "補給階段資源",
 
@@ -309,7 +309,7 @@
 
   "Modify tokens": "修改標記",
   "Fill": "填充",
-  "Fill Chaos Bag": "填充混沌袋",
+  "Fill Chaos Bag": "填充混亂袋",
   "Get action": "獲得行動",
   "-2 [bless] and -2 [curse]": "-2 [bless] 和 -2 [curse]",
   "Hall of Fame": "名人堂",
