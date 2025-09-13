@@ -55,4 +55,5 @@ export const InvesigatorCode = {
 	},
 	SisterMary: "07001",
 	KohakuNarukami: "10012",
+	VincentLee: "09004",
 };
