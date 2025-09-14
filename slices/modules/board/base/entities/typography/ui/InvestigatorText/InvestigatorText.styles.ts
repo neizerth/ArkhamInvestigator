@@ -74,6 +74,10 @@ export const getInvestigatorTextStyle = ({
 			letterSpacing: 2,
 			fontSize: iconFontSize * 0.84,
 		},
+		icon_bullet: {
+			fontSize: iconFontSize,
+			top: -5,
+		},
 		colonIcon: {
 			top: 2,
 		},
@@ -88,6 +92,7 @@ export const getInvestigatorTextStyle = ({
 			},
 			icon_bullet: {
 				lineHeight: fontSize * (ios ? 1 : 0.7),
+				top: -7,
 			},
 			break: {
 				height: fontSize * 2.7,

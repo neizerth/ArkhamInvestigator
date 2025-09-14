@@ -12,6 +12,8 @@ export const prepareText = (text: string) => {
 				.join("\n");
 
 	const content = typo
+		// change - mark to bullet icon
+		.replace(/(?<=^|\n)\s?[-−](?=\s)/g, "[bullet]")
 		// markdown bold
 		.replace(/\[\[([^\]]+)\]\]/g, "<keyword>$1</keyword>")
 		// colon after icon symbol
