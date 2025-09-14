@@ -1,4 +1,7 @@
-import { selectInvestigatorBoards } from "@modules/board/base/shared/lib";
+import {
+	selectBoardById,
+	selectInvestigatorBoards,
+} from "@modules/board/base/shared/lib";
 import { chaosToken } from "@modules/chaos-bag/base/shared/config";
 import { whereReferencePartTokenEq } from "@modules/chaos-bag/effect/entities/lib";
 import {
@@ -11,7 +14,6 @@ import { createCancelModalAction } from "@modules/core/modal/shared/actions/canc
 import { createConfirmModalAction } from "@modules/core/modal/shared/actions/confirm/lib";
 import type { BaseModalAction } from "@modules/core/modal/shared/base/model";
 import { InvesigatorCode } from "@modules/mechanics/investigator/entities/config";
-import { whereId } from "@shared/lib";
 import { prop } from "ramda";
 import { put, select, takeEvery } from "redux-saga/effects";
 import { healModalActionId, modalId } from "../../config";
@@ -23,6 +25,7 @@ const filterRevealedTokens = createRevealedTokenFilterAction({
 
 function* worker({ payload }: ReturnType<typeof chaosTokensRevealed>) {
 	const { boardId } = payload;
+
 	const boards: ReturnType<typeof selectInvestigatorBoards> = yield select(
 		selectInvestigatorBoards,
 	);
@@ -32,7 +35,9 @@ function* worker({ payload }: ReturnType<typeof chaosTokensRevealed>) {
 	});
 
 	const boardIds = selectedBoards.map(prop("id"));
-	const board = boards.find(whereId(boardId));
+
+	const boardSelector = selectBoardById(boardId);
+	const board: ReturnType<typeof boardSelector> = yield select(boardSelector);
 
 	if (!board || boardIds.length === 0) {
 		return;
@@ -66,7 +71,7 @@ function* worker({ payload }: ReturnType<typeof chaosTokensRevealed>) {
 		openBoardSelectModal({
 			id,
 			data: {
-				faction: "guardian",
+				faction: "seeker",
 				title,
 				subtitle,
 				boardIds,

@@ -20,6 +20,6 @@ export const createRevealedTokenFilterAction = ({ code, tokens }: Options) => {
 
 		const revealedTypes = payload.tokens.map(prop("type"));
 
-		return tokens.every((type) => revealedTypes.includes(type));
+		return tokens.some((type) => revealedTypes.includes(type));
 	};
 };
