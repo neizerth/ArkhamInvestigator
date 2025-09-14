@@ -1,4 +1,11 @@
-import { ArnoPro, FangSong, SanCn, SourceHanSansCN, Yoon } from "@assets/fonts";
+import {
+	ArnoPro,
+	FZShuTi,
+	FangSong,
+	SanCn,
+	SourceHanSansCN,
+	Yoon,
+} from "@assets/fonts";
 import { type KeyConfig, getKeyConfig } from "@shared/lib/util";
 import type { ComponentStyleMap } from "@shared/ui";
 import type { TextStyle } from "react-native";
@@ -12,7 +19,7 @@ const zhComponentStyles: ComponentStyleMap = {
 		fontFamily: SourceHanSansCN.bold,
 	},
 	keyword: {
-		fontFamily: SourceHanSansCN.bold,
+		fontFamily: FZShuTi.regular,
 	},
 	text: {
 		fontFamily: FangSong.regular,
