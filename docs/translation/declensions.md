@@ -17,6 +17,11 @@ Other supported locales (English, German, Spanish, French, Italian, Korean, Port
 
 ---
 
+⚠️ Note: If your language does not require declensions, simply use the base form for all keys.
+The application will still call keys like `plural.accusative.*`, but you can safely point them all to the same string.
+
+---
+
 ## Example: *Horror* in Polish (locale: `pl`)
 
 ```json
