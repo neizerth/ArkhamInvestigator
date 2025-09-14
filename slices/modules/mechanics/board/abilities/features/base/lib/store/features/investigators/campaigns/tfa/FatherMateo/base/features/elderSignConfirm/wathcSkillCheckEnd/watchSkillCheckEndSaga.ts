@@ -1,4 +1,4 @@
-import { selectBoardByCode } from "@modules/board/base/shared/lib";
+import { selectBoardById } from "@modules/board/base/shared/lib";
 import { chaosBagRevealEnd } from "@modules/chaos-bag/reveal/base/entities/lib";
 import { InvesigatorCode } from "@modules/mechanics/investigator/entities/config";
 import { put, select, takeEvery } from "redux-saga/effects";
@@ -24,18 +24,16 @@ function* worker({ payload }: ReturnType<typeof chaosBagRevealEnd>) {
 		return;
 	}
 
-	const boardSelector = selectBoardByCode(code);
-	const mateoBoard: ReturnType<typeof boardSelector> =
-		yield select(boardSelector);
+	const boardSelector = selectBoardById(boardId);
+	const board: ReturnType<typeof boardSelector> = yield select(boardSelector);
 
-	if (!mateoBoard.id) {
-		console.log("no mateoBoard.id", mateoBoard.id);
+	if (board.investigator.code !== InvesigatorCode.FatherMateo.base) {
 		return;
 	}
 
 	yield put(
 		openFatherMateoElderSignConfirm({
-			boardId: mateoBoard.id,
+			boardId,
 		}),
 	);
 }
