@@ -24,7 +24,7 @@ export const CenterPanel = ({ style, token, ...props }: CenterPanelProps) => {
 				<C.CurrentToken {...token} {...props} />
 				{showTokenValue && (
 					<C.ControlContainer>
-						<C.Control type={type} />
+						<C.Control type={type} value={token.value} />
 					</C.ControlContainer>
 				)}
 

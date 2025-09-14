@@ -10,10 +10,7 @@ import type { PropsWithBoardId } from "@modules/board/base/shared/model";
 import type { ChaosTokenType } from "@modules/chaos-bag/base/shared/model";
 import type { ChaosTokenValueProps } from "@modules/chaos-bag/base/shared/ui";
 import { setChaosTokenValue } from "@modules/chaos-bag/value/entities/lib";
-import {
-	selectChaosTokenRangeByType as selectTokenRange,
-	selectChaosTokenValueByType as selectTokenValue,
-} from "@modules/chaos-bag/value/entities/lib";
+import { selectChaosTokenRangeByType as selectTokenRange } from "@modules/chaos-bag/value/entities/lib";
 import { isChaosTokenModified } from "@modules/chaos-bag/value/shared/lib";
 import type { ChaosTokenValue } from "@modules/chaos-bag/value/shared/model";
 import * as C from "./ChaosTokenValuePicker.components";
@@ -28,6 +25,7 @@ export type ChaosTokenValuePickerProps = Omit<
 		autoFailStyle?: ChaosTokenValueProps["style"];
 		type: ChaosTokenType;
 		sealed?: boolean;
+		value?: ChaosTokenValue;
 	};
 
 const sealedSizes = [1, 1, 0.7];
@@ -40,17 +38,11 @@ export const ChaosTokenValuePicker = ({
 	autoFailStyle = valueStyle,
 	boardId = "current",
 	sealed,
+	value,
 	...props
 }: ChaosTokenValuePickerProps) => {
 	const dispatch = useAppDispatch();
 	const valueSizes = sealed ? sealedSizes : unsealedSizes;
-
-	const value = useAppSelector(
-		selectTokenValue({
-			type,
-			boardId,
-		}),
-	);
 
 	const data = useAppSelector(
 		selectTokenRange({
