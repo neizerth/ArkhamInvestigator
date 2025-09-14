@@ -1,5 +1,5 @@
 import { nbsp, shortNbsp } from "../../../../../config";
-import { haveChineseGlyphs, haveKoreanGlyphs } from "../glyphs";
+import { haveWesternGlyphs } from "../glyphs";
 
 export const withTypography = (text: string) => {
 	const base = text
@@ -15,9 +15,7 @@ export const withTypography = (text: string) => {
 		// dot after ) or >
 		.replace(/([\)\>])\./g, `$1${shortNbsp}.`);
 
-	const haveWesternGlyphs = haveChineseGlyphs(text) || haveKoreanGlyphs(text);
-
-	if (haveWesternGlyphs) {
+	if (haveWesternGlyphs(text)) {
 		return base;
 	}
 	const extra = base

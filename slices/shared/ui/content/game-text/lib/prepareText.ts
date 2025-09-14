@@ -1,12 +1,15 @@
 import { nobr, splitTagFormatting, withTypography } from "./format";
+import { haveWesternGlyphs } from "./glyphs";
 
 // const nbsp = 'N';
 export const prepareText = (text: string) => {
-	const typo = withTypography(text)
-		.split("\n")
-		.map(splitTagFormatting)
-		.map(nobr)
-		.join("\n");
+	const typo = haveWesternGlyphs(text)
+		? text
+		: withTypography(text)
+				.split("\n")
+				.map(splitTagFormatting)
+				.map(nobr)
+				.join("\n");
 
 	const content = typo
 		// markdown bold

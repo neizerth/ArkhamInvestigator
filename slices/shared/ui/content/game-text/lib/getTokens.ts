@@ -39,7 +39,9 @@ export const getChineseTokens = (text: string) => {
 		.slice(0, -3)
 		// keep punctuation
 		.replace(/(?![?.,;!¡¿。、·一])(.)/g, `$1${breakId}`)
-		.split(breakId);
+		.split(breakId)
+		.filter(identity);
+
 	return [
 		...tokens,
 		// keep last 3 characters as they are
