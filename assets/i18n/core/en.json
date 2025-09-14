@@ -189,8 +189,8 @@
   "ability.mateo.base.elderSign.cardAndResource": "Card and [resource]",
   "ability.mateo.base.elderSign.action": "Action",
 
-  "ability.carolyn.modal.heal": "Heal horror",
-  "ability.vincent.modal.heal": "Heal damage",
+  "ability.carolyn.modal.heal": "Heal",
+  "ability.vincent.modal.heal": "Heal",
 
   "ability.preston.modal.text": "Spend 2 [resource] to automatically succeed the test?",
   "ability.rex.base.modal.text": "Fail the test to draw 3 cards?",

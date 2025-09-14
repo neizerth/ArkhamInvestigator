@@ -193,7 +193,7 @@
   "ability.mateo.base.elderSign.cardAndResource": "Карта и [resource]",
   "ability.mateo.base.elderSign.action": "Действие",
 
-  "ability.carolyn.modal.heal": "Вылечить ужас",
+  "ability.carolyn.modal.heal": "Вылечить",
 
   "ability.preston.modal.text": "Потратить 2 [resource], чтобы автоматически пройти эту проверку?",
   "ability.rex.base.modal.text": "Провалить проверку чтобы взять 3 карты?",
@@ -212,7 +212,7 @@
   "ability.diana.reaction": "{{name}} получает карту [addcard] и ресурс [resource]",
   "ability.reynauld.reaction": "{{name}} берёт 1 карту [addcard] {{value}}",
   "ability.reynauld.reaction.self": "{{name}} берёт 1 карту [addcard] {{value}}",
-  "ability.vincent.modal.heal": "Вылечить рану",
+  "ability.vincent.modal.heal": "Вылечить",
 
   "resources.notEnough": "Недостаточно ресурсов. Необходимо&nbsp;{{count}}, доступно&nbsp;{{available}}",
 
