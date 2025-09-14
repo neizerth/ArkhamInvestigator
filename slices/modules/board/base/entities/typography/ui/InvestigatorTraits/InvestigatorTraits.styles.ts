@@ -16,7 +16,6 @@ export const getInvestigatorTraitsStyle = ({
 	const zhStyle: TextStyle = {
 		fontFamily: FZShuTi.regular,
 		fontSize: unit * boardText.ratio.text,
-		paddingBottom: 8,
 	};
 	const getStyle = getKeyConfig<TextStyle>({
 		default: {

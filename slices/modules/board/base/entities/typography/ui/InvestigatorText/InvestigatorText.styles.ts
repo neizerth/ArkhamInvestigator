@@ -1,4 +1,4 @@
-import { ArnoPro, FZShuTi, FangSong, SourceHanSansCN } from "@assets/fonts";
+import { ArnoPro, FZShuTi, FangSong } from "@assets/fonts";
 import { SanCn } from "@assets/fonts";
 import { Yoon } from "@assets/fonts";
 import { type KeyConfig, getKeyConfig } from "@shared/lib";
@@ -13,7 +13,7 @@ const zhComponentStyles: ComponentStyleMap = {
 		fontFamily: FangSong.italic,
 	},
 	b: {
-		fontFamily: SourceHanSansCN.bold,
+		fontFamily: FZShuTi.regular,
 	},
 	keyword: {
 		fontFamily: FZShuTi.regular,
