@@ -52,6 +52,9 @@
 * **Parallel Agnes Baker** – heals 1 damage
 * **Jim Culver** (regular and parallel) – in the chaos bag window, displays reminder text for Skull tokens if scenario reference is selected
 * **Tony Morgan** – +1 to Bounty counter
+* **Vincent Lee** — a popup prompts you to choose an investigator to heal 1 damage.
+* **Sister Mary** — after a successful skill test, she adds 1 \[bless] token to the chaos bag.
+* **Kohaku Narukami** — adds both \[curse] and \[bless] tokens to the chaos bag.
 
 ## Elder Sign Values
 
