@@ -33,6 +33,9 @@
   "picker.deceleration.instant": "立即",
   "picker.deceleration.custom": "自定義",
 
+  "Scenario reference": "冒險參考卡",
+  "Translated content": "已翻譯內容",
+
   "board.reset.text": "此操作將把該調查員的數據重置到遊戲開始時的狀態",
   "board.help.scroll": "你可以通過觸摸滑動組件來更改任何調查員的數值",
 
@@ -75,8 +78,8 @@
   "board.help.press.chaosBag": "查看混亂袋",
   "board.help.longPress.chaosBag": "揭示一個混亂標記",
 
-  "settings.sound": "聲音（Beta）",
-  "settings.sound.hint": "選擇器聲音",
+  "settings.sound": "音效（Beta）",
+  "settings.sound.hint": "選擇器音效",
   "settings.syncScenarioClues.hint": "當線索被添加到冒險中時，會自動從調查員身上扣除",
 
   "board.help.syncScenarioClue": "開啟/關閉 線索同步功能：當線索被添加到冒險中時，會自動從調查員身上扣除",
@@ -165,6 +168,8 @@
   "chaosBag.addToken_one": "{{name}} 將 {{count}} 個 {{token}} 標記加入混亂袋",
   "chaosBag.addToken_other": "{{name}} 將 {{count}} 個 {{token}} 標記加入混亂袋",
 
+  "chaosBag.addTokens": "{{name}} 將 {{tokens}} 加入混亂袋",
+
   "chaosBag.removeToken_one": "{{name}} 從混亂袋中移除 {{count}} 個 {{token}} 標記",
   "chaosBag.removeToken_other": "{{name}} 從混亂袋中移除 {{count}} 個 {{token}} 標記",
 
@@ -186,14 +191,15 @@
   "ability.mateo.base.elderSign.cardAndResource": "卡牌和 [resource]",
   "ability.mateo.base.elderSign.action": "行動",
 
-  "ability.carolyn.modal.heal": "治療",
+  "ability.carolyn.modal.heal": "治愈",
+  "ability.vincent.modal.heal": "治愈傷害",
 
   "ability.preston.modal.text": "花費2個 [resource] 自動成功此檢定？",
-  "ability.rex.base.modal.text": "使此檢定失敗，以抓3張牌？",
+  "ability.rex.base.modal.text": "使此檢定失敗，以抽取3張牌？",
 
-  "ability.stella.modal.text": "使此檢定失敗，以治療1點傷害和1點恐懼？",
+  "ability.stella.modal.text": "使此檢定失敗，以治愈1點傷害和1點恐懼？",
 
-  "ability.agnes.parallel.modal.text": "治療1點傷害？",
+  "ability.agnes.parallel.modal.text": "治愈1點傷害？",
 
   "ability.lily.elderSign.confirm.text": "將你控製的一張 [[破碎]] 戒律翻麵至其 [[完整]] 的一麵。",
   "ability.lily.discipline.flip.unbroken": "{{name}} 將 [[破碎]] 的戒律“{{discipline}}”翻麵至其 [[完整]] 的一麵。",
@@ -209,10 +215,12 @@
 
   "resources.notEnough": "資源不足。需要&nbsp;{{count}}，可用&nbsp;{{available}}",
 
-  "action.heal": "{{fromName}} 治療了 {{dativeName}} {{value}}",
-  "action.heal.self": "{{name}} 治療了自己 {{value}}",
-  "action.heal.word": "治療",
+  "action.heal": "{{fromName}} 治愈了 {{dativeName}} {{value}}",
+  "action.heal.self": "{{name}} 治愈了自己 {{value}}",
+  "action.heal.word": "治愈",
 
+  "list.separator.two": " 和 ",
+  "list.separator.multiple": "、",
   "preposition.and": "和",
   "plural.accusative.horror_one": "{{count}} 點恐懼",
   "plural.accusative.horror_other": "{{count}} 點恐懼",
@@ -231,10 +239,14 @@
   "Picker animation": "選擇器動畫",
 
   "Show initial Health/Sanity": "顯示初始生命/神智",
+  "Initial values": "顯示初始值",
+  "Negative values": "允許負數值",
+
+  "Hand Size": "手牌上限",
 
   "Chaos bag loading animation": "混亂袋加載動畫",
 
-  "Show calculation changes": "顯示計算變更",
+  "Show calculation changes": "顯示計算曆史",
 
   "Skill modfiers": "技能修正",
 
@@ -284,7 +296,7 @@
   "No main & additional actions": "無基礎和額外行動",
   "No main actions": "無基礎行動",
 
-  "Damage/Horror visual effects": "傷害/恐懼視覺效果",
+  "Damage/Horror visual effects": "傷害/恐懼特效",
 
   "Scroll Deceleration": "滑動阻尼",
   "Inertial Scrolling": "滑動慣性",
@@ -323,5 +335,7 @@
   "Special Thanks": "特別感謝",
   "Application Info": "應用信息",
   "Device Info": "設備信息",
-  "Sponsors": "讚助商"
+  "Sponsors": "讚助商",
+  "Korean": "韓語",
+  "Chinese": "中文"
 }
