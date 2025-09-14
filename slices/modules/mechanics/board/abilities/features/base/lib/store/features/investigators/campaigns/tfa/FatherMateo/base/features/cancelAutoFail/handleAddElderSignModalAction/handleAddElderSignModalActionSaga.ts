@@ -32,6 +32,7 @@ type Action = PayloadAction<Payload>;
 function* worker({ payload }: Action) {
 	const { boardId, modalAction } = payload;
 	const { sourceBoardId } = modalAction.data;
+
 	const valuesSelector = selectChaosBagTokenValues(boardId);
 	const values: ReturnType<typeof valuesSelector> =
 		yield select(valuesSelector);

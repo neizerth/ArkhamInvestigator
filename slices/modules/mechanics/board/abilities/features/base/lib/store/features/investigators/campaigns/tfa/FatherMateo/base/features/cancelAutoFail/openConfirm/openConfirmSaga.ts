@@ -10,7 +10,7 @@ import {
 import { openFatherMateoConfirm } from "./openConfirm";
 
 function* worker({ payload }: ReturnType<typeof openFatherMateoConfirm>) {
-	const { sourceBoardId, boardId } = payload;
+	const { sourceBoardId } = payload;
 
 	const boardSelector = selectBoardById(sourceBoardId);
 	const board: ReturnType<typeof boardSelector> = yield select(boardSelector);
