@@ -54,11 +54,19 @@ module.exports = {
       [
         "expo-build-properties",
         {
-          "ios": {
-            "deploymentTarget": "15.5"
-          }
-        }
-      ]
+          ios: {
+            deploymentTarget: "15.5",
+          },
+          android: {
+            compileSdkVersion: 35,
+            targetSdkVersion: 35,
+            buildToolsVersion: "35.0.0",
+            ndkVersion: "27.0.12077973",
+            enableProguardInReleaseBuilds: false,
+            enableShrinkResourcesInReleaseBuilds: false,
+          },
+        },
+      ],
     ],
     experiments: {
       typedRoutes: true,

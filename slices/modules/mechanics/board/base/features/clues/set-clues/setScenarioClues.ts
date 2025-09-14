@@ -51,6 +51,10 @@ export const setScenarioClues =
 			}),
 		);
 
+		if (cluesSpent <= 0) {
+			return;
+		}
+
 		dispatch(
 			spendClues({
 				boardId,

@@ -43,6 +43,6 @@ function* worker({ payload }: ReturnType<typeof changeBoardHistoryAbilityUse>) {
 	);
 }
 
-export function* SisterMaryAbilitySaga() {
+export function* SisterMaryReactionSaga() {
 	yield takeEvery(filterAction, worker);
 }

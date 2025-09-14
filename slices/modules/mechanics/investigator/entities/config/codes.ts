@@ -53,4 +53,7 @@ export const InvesigatorCode = {
 		neutral: "zaw_02228",
 		seeker: "zaw_00304",
 	},
+	SisterMary: "07001",
+	KohakuNarukami: "10012",
+	VincentLee: "09004",
 };

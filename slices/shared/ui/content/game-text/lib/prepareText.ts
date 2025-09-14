@@ -11,6 +11,11 @@ export const prepareText = (text: string) => {
 	const content = typo
 		// markdown bold
 		.replace(/\[\[([^\]]+)\]\]/g, "<keyword>$1</keyword>")
+		// colon after icon symbol
+		.replace(
+			/(?<!\[)\[([^\]]+)\](?!\])(：)/g,
+			'<icon icon="$1" zhColon />$2', // zh-colon-group
+		)
 		// icons
 		.replace(/\[([^\]\[]+)\]/g, '<icon icon="$1"/>');
 

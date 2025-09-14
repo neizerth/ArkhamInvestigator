@@ -20,7 +20,8 @@ export const getLibrary = ({
 	cloneElement(...args) {
 		return <Fragment />;
 	},
-	createElement(type, createElementProps, ...children) {
+	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+	createElement(type, createElementProps: any, ...children) {
 		const componentStyle = componentStyles?.[type];
 		const tokenStyle = componentStyles?.[`${type}Token`];
 
@@ -92,13 +93,20 @@ export const getLibrary = ({
 			const iconStyle = componentStyles?.[`icon_${icon}`];
 			const iconTokenStyle = componentStyles?.[`iconToken_${icon}`];
 
+			// console.log("icon", Object.keys(mergedProps));
+			const zhc = typeof createElementProps?.zhColon !== "undefined";
+
 			return (
 				<Fragment key={v4()}>
 					<C.Token style={[tokenStyle, iconTokenStyle]}>
 						<Icon
 							{...mergedProps}
 							icon={value}
-							style={[mergedStyles, iconStyle]}
+							style={[
+								mergedStyles,
+								iconStyle,
+								zhc && componentStyles?.colonIcon,
+							]}
 							scaleType={false}
 						/>
 					</C.Token>
@@ -110,8 +118,12 @@ export const getLibrary = ({
 		const content = getNodeContents({
 			children,
 			props: mergedProps,
-			style: mergedStyles,
+			style: mergedStyles.flat(),
 		});
+
+		if (type === "zcg") {
+			console.log("zcg", mergedStyles);
+		}
 
 		return (
 			<C.Word key={v4()} style={componentStyles?.word}>

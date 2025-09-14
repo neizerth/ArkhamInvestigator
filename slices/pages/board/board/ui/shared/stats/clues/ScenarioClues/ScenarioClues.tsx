@@ -9,31 +9,23 @@ import {
 import { setScenarioClues } from "@modules/mechanics/board/base/features/clues/set-clues";
 import { useAppDispatch, useAppSelector } from "@shared/lib";
 import { range } from "ramda";
-import { useCallback, useMemo } from "react";
+import { useCallback } from "react";
 import type { CluesProps } from "../Clues";
 import * as C from "./ScenarioClues.components";
 
 export type ScenarioCluesProps = CluesProps;
 
-export const ScenarioClues = ({
-	data: dataProp,
-	...props
-}: ScenarioCluesProps) => {
+const maxValue = 100;
+
+const defaultData = range(0, maxValue + 1);
+
+export const ScenarioClues = ({ data, ...props }: ScenarioCluesProps) => {
 	const dispatch = useAppDispatch();
 	const syncEnabled = useAppSelector(selectSyncScenarioClues);
 	const investigatorClues = useAppSelector(
 		selectCurrentActualPropValue("clues"),
 	);
 	const value = useAppSelector(selectClues);
-
-	const maxValue = value + investigatorClues;
-
-	const data = useMemo(() => {
-		if (!syncEnabled) {
-			return dataProp;
-		}
-		return range(0, maxValue + 1);
-	}, [dataProp, syncEnabled, maxValue]);
 
 	const onChange = useCallback(
 		(value = 0) => {

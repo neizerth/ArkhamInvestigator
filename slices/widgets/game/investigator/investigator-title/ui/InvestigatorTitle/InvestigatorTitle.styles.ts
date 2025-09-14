@@ -31,7 +31,7 @@ export const getTitleStyle = (options: GetTitleStyleOptions) => {
 
 	const zhConfig: Partial<ReturnStyle> = {
 		background: {
-			gap: "11%",
+			gap: "6%",
 		},
 		titleText: {
 			paddingTop: "1%",
@@ -40,7 +40,7 @@ export const getTitleStyle = (options: GetTitleStyleOptions) => {
 		},
 		subtitleText: {
 			fontFamily: FZLiBian.regular,
-			fontSize: 18 * vh,
+			fontSize: 28 * vh,
 		},
 	};
 

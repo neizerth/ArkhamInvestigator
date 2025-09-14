@@ -3,8 +3,6 @@
 This project uses **[i18next](https://www.i18next.com/)** with **React Native** for internationalization.  
 We welcome contributions to add or improve translations!
 
----
-
 ## Supported languages
 
 Currently, the app supports the following locales:
@@ -37,28 +35,10 @@ If your language is missing, feel free to add it.
 
 3. Commit your changes using a proper prefix:
 
-   - `feat: add <locale> translation` (for new translations)  
-   - `fix: update <locale> translation` (for improvements/fixes)
+   - `feat: added <locale> translation` (for new translations). For example: `feat: added ko translation`
+   - `fix: updated <locale> translation` (for improvements/fixes). For example: `feat: updated ko translation`
 
 4. Open a Pull Request.
-
----
-
-## ArkhamDB syntax support
-
-Many texts in the app support the **formatting syntax used by ArkhamDB card texts**.  
-If the English translation contains this syntax, you can (and should) use it in your translation as well.
-
-### Examples
-
-- `[resource]` → displays an icon with ID **resource**  
-- `[[Discipline]]` → formats a keyword (usually **bold italic**)  
-- `<b>Bold</b>` → bold text  
-- `\n` → line break  
-
-Additional syntax:
-
-- `<old>Old Value</old>` → marks an old value (usually displayed semi-transparent)
 
 ---
 
@@ -104,13 +84,18 @@ export const loadingTranslations: Record<string, string[]> = {
 
 ```
 
+## 📚 Additional Documentation
+
+* 📄 [**special.md**](./special.md)
+  Special keys for joining values (e.g., *and*, list separators).
+
+* 📄 [**plurals.md**](./plurals.md)
+  Rules for pluralization (`one`, `few`, `many`) in supported locales.
+
+* 📄 [**declensions.md**](./declensions.md)
+  Grammatical declensions (currently accusative forms, e.g., Polish, Russian).
+
+* 📄 [**syntax.md**](./syntax.md)
+  Text formatting: ArkhamDB-style icons, keywords, traits, HTML, line breaks.
+
 ---
-
-## Plurals
-
-Some languages use different word forms depending on the number (pluralization).  
-The app relies on [i18next plural rules](https://www.i18next.com/translation-function/plurals).  
-
-- Please make sure you provide **all plural forms** required for your language.  
-- Detailed instructions and examples for every supported locale can be found here:  
-[Plural guide](./plurals.md)

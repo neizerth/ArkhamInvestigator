@@ -160,6 +160,8 @@
   "chaosBag.addToken_few": "{{name}} добавляет в мешок {{count}} {{token}}",
   "chaosBag.addToken_many": "{{name}} добавляет в мешок {{count}} {{token}}",
 
+  "chaosBag.addTokens": "{{name}} добавляет в мешок жетоны {{tokens}}",
+
   "chaosBag.removeToken": "{{name}} удаляет из мешка {{count}} {{token}}",
 
   "chaosBag.cantAddToken": "Нельзя добавить больше {{limit}} {{character}}",
@@ -191,7 +193,7 @@
   "ability.mateo.base.elderSign.cardAndResource": "Карта и [resource]",
   "ability.mateo.base.elderSign.action": "Действие",
 
-  "ability.carolyn.modal.heal": "Вылечить",
+  "ability.carolyn.modal.heal": "Вылечить ужас",
 
   "ability.preston.modal.text": "Потратить 2 [resource], чтобы автоматически пройти эту проверку?",
   "ability.rex.base.modal.text": "Провалить проверку чтобы взять 3 карты?",
@@ -210,6 +212,7 @@
   "ability.diana.reaction": "{{name}} получает карту [addcard] и ресурс [resource]",
   "ability.reynauld.reaction": "{{name}} берёт 1 карту [addcard] {{value}}",
   "ability.reynauld.reaction.self": "{{name}} берёт 1 карту [addcard] {{value}}",
+  "ability.vincent.modal.heal": "Вылечить рану",
 
   "resources.notEnough": "Недостаточно ресурсов. Необходимо&nbsp;{{count}}, доступно&nbsp;{{available}}",
 
@@ -220,6 +223,8 @@
   "disk.notEnoughSpace.title": "Недосаточно свободного места",
   "disk.notEnoughSpace.text": "Для работы приложения нужно {{required}} свободного места",
 
+  "list.separator.two": " и ",
+  "list.separator.multiple": ", ",
   "preposition.and": "и",
   "plural.accusative.horror_one": "{{count}} ужас",
   "plural.accusative.horror_few": "{{count}} ужаса",
@@ -346,5 +351,7 @@
   "Application Info": "О приложении",
   "Build Version": "Версия",
   "Device Info": "Об устройстве",
-  "Sponsors": "Спонсоры"
+  "Sponsors": "Спонсоры",
+  "Korean": "Корейский",
+  "Chinese": "Китайский"
 }

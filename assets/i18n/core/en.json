@@ -166,6 +166,8 @@
   "chaosBag.addToken_one": "{{name}} adds {{count}} {{token}} token to the chaos bag",
   "chaosBag.addToken_other": "{{name}} adds {{count}} {{token}} tokens to the chaos bag",
 
+  "chaosBag.addTokens": "{{name}} adds {{tokens}} tokens to the chaos bag",
+
   "chaosBag.removeToken_one": "{{name}} removes {{count}} {{token}} token from the chaos bag",
   "chaosBag.removeToken_other": "{{name}} removes {{count}} {{token}} tokens from the chaos bag",
 
@@ -187,7 +189,8 @@
   "ability.mateo.base.elderSign.cardAndResource": "Card and [resource]",
   "ability.mateo.base.elderSign.action": "Action",
 
-  "ability.carolyn.modal.heal": "Heal",
+  "ability.carolyn.modal.heal": "Heal horror",
+  "ability.vincent.modal.heal": "Heal damage",
 
   "ability.preston.modal.text": "Spend 2 [resource] to automatically succeed the test?",
   "ability.rex.base.modal.text": "Fail the test to draw 3 cards?",
@@ -214,6 +217,8 @@
   "action.heal.self": "{{name}} heals {{value}}",
   "action.heal.word": "heals",
 
+  "list.separator.two": " and ",
+  "list.separator.multiple": ", ",
   "preposition.and": "and",
   "plural.accusative.horror_one": "{{count}} horror",
   "plural.accusative.horror_other": "{{count}} horror",
@@ -324,5 +329,7 @@
   "Special Thanks": "Special Thanks",
   "Application Info": "Application Info",
   "Device Info": "Device Info",
-  "Sponsors": "Sponsors"
+  "Sponsors": "Sponsors",
+  "Korean": "Korean",
+  "Chinese": "Chinese"
 }

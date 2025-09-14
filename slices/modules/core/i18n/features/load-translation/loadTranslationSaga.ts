@@ -8,7 +8,12 @@ import { pick } from "ramda";
 import { put, retry, takeLatest } from "redux-saga/effects";
 import { setTranslation } from "../../entities/translation/setTranslation";
 import { DEFAULT_LANGUAGE } from "../../shared/config";
-import { StoreTranslation, loadLanguage, setLanguage } from "../../shared/lib";
+import {
+	StoreTranslation,
+	loadLanguage,
+	mergeTranslations,
+	setLanguage,
+} from "../../shared/lib";
 
 function* worker({ payload }: ReturnType<typeof loadLanguage>) {
 	const language = payload ?? DEFAULT_LANGUAGE;
@@ -45,10 +50,7 @@ function* worker({ payload }: ReturnType<typeof loadLanguage>) {
 
 	StoreTranslation.save(language, storeTranslation);
 
-	const translation = {
-		...storeTranslation,
-		...localTranslation,
-	};
+	const translation = mergeTranslations(storeTranslation, localTranslation);
 
 	yield put(
 		setTranslation({
