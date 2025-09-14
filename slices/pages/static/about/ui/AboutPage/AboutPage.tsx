@@ -87,6 +87,15 @@ export const AboutPage = (props: AboutPageProps) => {
 					<Bold>{t`Some backgrounds`}</Bold>: pngtree.com
 				</List.Item>
 			</List>
+			<Title>{t`Translation`}</Title>
+			<List>
+				<List.Item>
+					<Bold>@deronos</Bold>: {t`Korean`}
+				</List.Item>
+				<List.Item>
+					<Bold>@xziying</Bold>: {t`Chinese`}
+				</List.Item>
+			</List>
 			<Title>{t`Testing/Ideas`}</Title>
 			<Paragraph>
 				@Egoorka_k, @Evgesha727, @AxilFirst, @Rick_Freydin, @User211587, @mkrsa,
@@ -102,8 +111,8 @@ export const AboutPage = (props: AboutPageProps) => {
 				<Break />
 				<A href="https://www.patreon.com/arkhamdivider">Patreon:</A>
 				<Break />
-				@RecedingSamson, The 1 Player Podcast, Andy Lindberg, Nathan Wurschmidt,
-				Pink_hawk
+				@RecedingSamson, @Pink_hawk, The 1 Player Podcast, Andy Lindberg, Nathan
+				Wurschmidt
 			</Paragraph>
 			<Title>{t`Special Thanks`}</Title>
 			<List>
