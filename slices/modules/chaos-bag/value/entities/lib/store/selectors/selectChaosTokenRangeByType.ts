@@ -2,6 +2,7 @@ import type { BoardId } from "@modules/board/base/shared/model";
 import type { ChaosTokenType } from "@modules/chaos-bag/base/shared/model";
 import { selectBoardChaosTokenValueModifications } from "@modules/mechanics/chaos-bag/value/entities/lib";
 
+import type { ChaosTokenValue } from "@modules/chaos-bag/value/shared/model";
 import { selectReferenceCardTokens } from "@modules/stories/shared/lib";
 import { createSelector } from "@reduxjs/toolkit";
 import { rangeStep } from "@shared/lib";
@@ -17,9 +18,16 @@ const defaultData = range(MIN_VALUE, MAX_VALUE + 1);
 type Options = {
 	type: ChaosTokenType;
 	boardId: BoardId;
+	value?: ChaosTokenValue;
 };
 
-export const selectChaosTokenRangeByType = ({ type, boardId }: Options) =>
+const specialValues: ChaosTokenValue[] = ["fail", "success"];
+
+export const selectChaosTokenRangeByType = ({
+	type,
+	boardId,
+	value,
+}: Options) =>
 	createSelector(
 		[
 			selectReferenceCardTokens,
@@ -41,7 +49,7 @@ export const selectChaosTokenRangeByType = ({ type, boardId }: Options) =>
 			}
 
 			if (!item) {
-				return defaultData;
+				return value && specialValues.includes(value) ? [value] : defaultData;
 			}
 
 			if (item.type === "value") {
@@ -56,6 +64,10 @@ export const selectChaosTokenRangeByType = ({ type, boardId }: Options) =>
 
 			if (item.type === "select" && item.values) {
 				return getSelectRange(item);
+			}
+
+			if (value && specialValues.includes(value)) {
+				return [value];
 			}
 
 			return defaultData;

@@ -34,6 +34,7 @@ function* worker({ payload }: ReturnType<typeof openFatherMateoConfirm>) {
 						data: {
 							sourceBoardId,
 						},
+						close: false,
 					}),
 				],
 			},

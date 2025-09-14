@@ -48,6 +48,7 @@ export const ChaosTokenValuePicker = ({
 		selectTokenRange({
 			type,
 			boardId,
+			value,
 		}),
 	);
 

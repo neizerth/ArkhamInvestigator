@@ -24,6 +24,7 @@ const filterRevealedTokens = createRevealedTokenFilterAction({
 });
 
 function* worker({ payload }: ReturnType<typeof chaosTokensRevealed>) {
+	console.log("carolyn worker", payload);
 	const { boardId } = payload;
 	const boards: ReturnType<typeof selectInvestigatorBoards> = yield select(
 		selectInvestigatorBoards,
@@ -38,7 +39,7 @@ function* worker({ payload }: ReturnType<typeof chaosTokensRevealed>) {
 	const boardSelector = selectBoardById(boardId);
 	const board: ReturnType<typeof boardSelector> = yield select(boardSelector);
 
-	if (!board || boardIds.length === 0) {
+	if (boardIds.length === 0) {
 		return;
 	}
 
