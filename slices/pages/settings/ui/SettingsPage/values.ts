@@ -71,8 +71,8 @@ const languageLabels: Record<string, string> = {
 	pt: "Português",
 	ru: "Русский",
 	vi: "Tiếng Việt",
-	zh: "Traditional Chinese (中文)",
-	"zh-cn": "Simplified Chinese (简体中文)",
+	zh: "繁體中文",
+	"zh-cn": "简体中文",
 };
 
 export const languageValues: SelectItem<string>[] = Object.entries(
