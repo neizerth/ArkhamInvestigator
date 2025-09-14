@@ -25,7 +25,7 @@ You can find a list of icon IDs at [the icons page](https://neizerth.github.io/A
 
 ### Line breaks and spacing
 - `\n` → line break (converted to paragraph tags automatically)
-- `&nbsp` → non-breaking space (preserves spacing)
+- `&nbsp;` → non-breaking space (preserves spacing). **Note**: not all the keys support this feature
 
 ## Examples
 
