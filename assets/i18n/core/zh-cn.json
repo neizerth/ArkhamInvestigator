@@ -1,3 +1,341 @@
 {
-	"New Game": "新游戏"
+  "about.app": "本应用中展示的关于<FFG>诡镇奇谈：卡牌版™</FFG>的信息，无论是文字还是图片，其版权均归©Fantasy Flight Games所有。本应用是一个粉丝项目，并非由Fantasy Flight Games制作、认可、支持或与其有关联。",
+  "about.credits": "本应用由<Author>Vladimir Yazykov</Author>及其贡献者们创建，旨在为诡镇奇谈：卡牌版社区提供支持。本项目源代码可在<Repo>Github</Repo>上获取。欢迎通过<Issues>Github issues</Issues>或Mythos Busters Discord服务器上的<Discord>专用频道</Discord>提交反馈和错误报告。",
+  "about.artwork": "所有艺术作品和插图均为其各自创作者的知识产权。所有诡镇奇谈：卡牌版™的图像和图形版权均归Fantasy Flight Games所有。",
+  "about.credits.beth": "感谢我的妻子Elisabeth的理解与支持。因为她，我是世界上最幸福的人。",
+
+  "about.hallOfFame,zzorba": "Arkham Cards API、Icomoon项目、复用的Arkham Cards翻译",
+  "about.hallOfFame.arkhamdb": "结构化游戏数据",
+  "about.hallOfFame.coldtoes": "艺术作品库",
+  "about.hallOfFame.helios_sunrise": "分层调查员美术",
+  "about.hallOfFame.hauke": "一些AI扩展裁剪的调查员图片",
+  "about.hallOfFame.felice": "调查员卡牌扫描件",
+
+  "about.credits.arkhamCards.icons": "Eugene Sarnetsky",
+
+  "board.help.pins.press": "在面板界面点击一个计算项以取消固定",
+  "board.help.pins.longPress": "在面板界面长按一个计算项，可为本次计算揭示一个混乱标记",
+  "board.help.pins.toggle": "默认情况下，如果你有固定的计算项，可以点击面板页上的对应区块来显示/隐藏它。你也可以在设置页面找到此功能的高级模式",
+
+  "board.help.calculator.history.actions": "在计算项上向左滑动以查看额外菜单",
+  "board.help.calculator.history.remove": "移除计算项",
+  "board.help.calculator.history.setName": "命名计算项",
+  "board.help.calculator.history.pin": "将计算项固定在列表顶部和面板界面",
+
+  "board.help.calculator.result": "计算结果的最小值不能低于0",
+  "board.help.calculator.history": "点击“计算”按钮将数值添加到计算历史中。如果你在面板上更新了相应的参数，该数值将自动更新。",
+  "app.outdated.title": "版本已过期",
+  "app.outdated.text": "需要更新",
+  "modal.spoiler.message": "此部分包含剧本剧透。要继续吗？",
+
+  "picker.deceleration.fast": "快速",
+  "picker.deceleration.normal": "普通",
+  "picker.deceleration.instant": "立即",
+  "picker.deceleration.custom": "自定义",
+
+  "Scenario reference": "冒险参考卡",
+  "Translated content": "已翻译内容",
+
+  "board.reset.text": "此操作将把该调查员的数据重置到游戏开始时的状态",
+  "board.help.scroll": "你可以通过触摸滑动组件来更改任何调查员的数值",
+
+  "board.help.swipeLeft.main": "向左滑动使基础值减1。",
+  "board.help.swipeRight.main": "向右滑动使基础值加1。",
+  "board.help.press.main": "数值减1",
+  "board.help.press.action": "数值减1。如果数值为0，则将计数器重置为其基础值",
+
+  "board.help.press.undo": "撤销上一步操作",
+  "board.help.press.redo": "重做上一步操作",
+
+  "board.help.press.skills": "打开技能计算器",
+
+  "board.help.hold.freeArea": "在屏幕任意位置点击并长按，可查看已受到的伤害和恐惧。你也可以查看基础技能值和当前技能值的差异。向左滑动切换到下一位调查员的面板，向右滑动切换到上一位。",
+
+  "board.help.longPress.main": "显示/隐藏修正值计数器。你可以更改基础值（例如永久+1生命，-2神智）",
+  "board.help.longPress.secondary": "将数值重置为0",
+
+  "board.help.longPress.redo": "将变更历史设定为最后一次变更",
+  "board.help.longPress.undo": "将变更历史设定为第一次变更",
+
+  "board.help.calculator.toggleKeyboard": "显示/隐藏键盘",
+  "board.help.calculator.clearHistory": "清除技能检定历史",
+
+  "board.help.special.additionalAction": "一些调查员有额外行动。点击此图标来标记行动已完成",
+  "board.help.special.lola": "点击姓名来更改洛拉·海耶斯当前的身份（派系）",
+  "board.help.special.daniela": "如果有敌人攻击你，点击[claws]。这将改变成功检定时的[elder_sign]效果值。",
+  "board.help.special.kymani": "如果你的地点有已横置的敌人，点击[exhaust]。这将改变成功检定时的[elder_sign]效果值。",
+
+  "board.help.chaosBag": "点击并长按一个技能值来揭示一个混乱标记",
+  "board.help.chaosBag.returnAll": "将所有已揭示的标记放回混乱袋",
+  "board.help.chaosBag.return": "[token_symbol_fill] - 将所有已揭示的标记放回混乱袋（[bless]和[curse]除外）",
+  "board.help.chaosBag.token.press": "点击一个已揭示的标记，将其放回混乱袋（如果是[bless]或[curse]则移除）",
+  "board.help.chaosBag.token.longPress": "长按一个已揭示的标记来封印它",
+  "board.help.chaosBag.oneMore": "点击以揭示下一个标记",
+  "board.help.chaosBag.swipe": "向下滑动查看混乱袋历史，向右滑动抽取一个标记，向上滑动查看冒险参考卡",
+  "board.help.chaosBag.reference": "打开混乱标记参考",
+  "board.help.chaosBag.cancelToken": "[blocked] – 切换标记取消模式。默认关闭。再次点击以取消/忽略一个标记：它被抽出但不应用其修正值，且其效果被标记为已取消。再次点击([effect])则仅取消标记的文本效果",
+
+  "board.help.press.chaosBag": "查看混乱袋",
+  "board.help.longPress.chaosBag": "揭示一个混乱标记",
+
+  "settings.sound": "音效（Beta）",
+  "settings.sound.hint": "选择器音效",
+  "settings.syncScenarioClues.hint": "当线索被添加到冒险中时，会自动从调查员身上扣除",
+
+  "board.help.syncScenarioClue": "开启/关闭 线索同步功能：当线索被添加到冒险中时，会自动从调查员身上扣除",
+
+  "tapOnPin.default": "点击计算项以取消固定",
+  "tapOnPin.advanced": "点击计算项以关闭整个区块。向右滑动以取消固定",
+
+  "modal.skillCheck.clear": "清除历史记录？",
+  "modal.skillCheck.clear.text": "此操作将永久删除技能检定历史。",
+
+  "board.help.calculator.difficulty": "输入一个数字长按它来设置技能检定难度。点击屏幕顶部的技能检定图标可清除难度",
+  "board.help.calculator.buttons": "在数字0-9上向上滑动会开始一次技能检定，并将该数字加入检定中。向下滑动则从检定中减去该数字。\n长按“计算”按钮以保存计算并立即使用结果值进行技能检定。长按一个按钮来设置技能检定难度",
+
+  "board.help.calculator.expression": "在当前公式上向左或向右滑动，可删除计算中的最后一个字符",
+
+  "newGame.start.title": "开始新游戏？",
+  "newGame.start.text": "此操作将删除你上一局游戏的数据",
+
+  "board.help.swipe.chaosBag": "向右滑动以揭示一个混乱标记。向下滑动打开揭示历史页面。向上滑动打开冒险参考卡",
+  "board.help.press.clue": "数值加1",
+
+  "board.help.pins.swipe": "在固定的计算项上向下滑动，可跳转到你创建该计算项的页面",
+  "board.help.longPress.investigatorSelect": "如果你使用2个或更多调查员进行游戏，长按小图像可查看所有调查员的状态",
+
+  "investigator.getResources_one": "{{name}} 获得了 {{count}} 个资源",
+  "investigator.getResources_other": "{{name}} 获得了 {{count}} 个资源",
+
+  "clues.spent_one": "{{name}} 花费了 {{count}} 个线索",
+  "clues.spent_other": "{{name}} 花费了 {{count}} 个线索",
+
+  "clues.scenario.add_one": "{{name}} 将 {{count}} 个线索放置在冒险上",
+  "clues.scenario.add_other": "{{name}} 将 {{count}} 个线索放置在冒险上",
+
+  "clues.remains_zero": "没有线索了",
+  "clues.remains_one": "还剩 {{count}} 个线索",
+  "clues.remains_other": "还剩 {{count}} 个线索",
+
+  "actions.get_one": "{{name}} 获得 1 次行动",
+  "actions.get_other": "{{name}} 获得 {{count}} 次行动",
+
+  "actions.give_one": "{{name}} 从 {{fromName}} 处获得了 1 次行动 [action]",
+  "actions.give_other": "{{name}} 从 {{fromName}} 处获得了 {{count}} 次行动 [action]",
+
+  "upkeep.investigator.actionsReset": "{{name}}：行动重置",
+
+  "mythos.doom": "在当前议程上放置1个毁灭标记。毁灭标记总数：{{doom}}",
+
+  "timing.step.name": "步骤 {{name}}",
+
+  "board.help.details": "详情",
+  "board.help.details.toggle": "点击屏幕底部的调查员文本框或向上滑动来打开此部分。点击冒险记录器上方的空白区域、点击右下角的向下箭头或向下滑动来关闭它。",
+  "board.help.details.trackers": "此部分包含冒险记录器：线索、毁灭标记和资源。你可以在设置中启用特定的记录器。",
+  "board.help.details.goHome": "返回主屏幕",
+  "board.help.details.info": "帮助部分（你当前正在查看）",
+  "board.help.details.roundReference": "可交互阶段流程参考。你可以在调查员文本框（屏幕底部区块）上向右滑动来访问此部分。",
+  "board.help.details.settings": "应用设置",
+  "board.help.details.clearBoard": "将调查员数据重置到游戏开始时的状态",
+
+  "Modify scenario tokens": "修改冒险标记",
+  "Show skill test result": "显示技能检定结果",
+
+  "chaosToken.curse.effect": "{{value}}。揭示另一个标记。将此标记返回标记池，而非放回混乱袋。",
+  "chaosToken.bless.effect": "{{value}}。揭示另一个标记。将此标记返回标记池，而非放回混乱袋",
+  "chaosToken.frost.first.effect": "{{value}}。揭示另一个标记",
+  "chaosToken.frost.second.effect": "将此检定视为自动失败",
+  "chaosToken.autoFail.effect": "自动失败",
+
+  "wild.give": "{{fromName}} 给予 {{name}} 一个额外的 [wild]，持续到检定结束",
+  "wild.give.self": "{{name}} 给予自己一个额外的 [wild]，持续到检定结束",
+
+  "chaosToken.canceled": "此标记已被取消或忽略\n<old>{{effect}}</old>",
+  "chaosToken.canceled.effect": "此标记的效果已被取消\n<old>{{effect}}</old>",
+
+  "chaosToken.remove.confirm.title_one": "技能检定中的标记",
+  "chaosToken.remove.confirm.title_other": "技能检定中的标记",
+
+  "chaosToken.remove.confirm.subtitle_one": "移除标记？",
+  "chaosToken.remove.confirm.subtitle_other": "移除标记？",
+
+  "chaosToken.remove.confirm.text_one": "标记 {{token}} 正在技能检定中。移除它可能会改变结果或取消该技能检定。",
+  "chaosToken.remove.confirm.text_other": "{{count}} 个 {{token}} 标记正在技能检定中。移除它们可能会改变结果或取消该技能检定。",
+
+  "chaosToken.remove.confirm.return": "返回",
+  "chaosToken.effect": "{{token}} 效果",
+
+  "chaosBag.addToken_one": "{{name}} 将 {{count}} 个 {{token}} 标记加入混乱袋",
+  "chaosBag.addToken_other": "{{name}} 将 {{count}} 个 {{token}} 标记加入混乱袋",
+
+  "chaosBag.addTokens": "{{name}} 将 {{tokens}} 加入混乱袋",
+
+  "chaosBag.removeToken_one": "{{name}} 从混乱袋中移除 {{count}} 个 {{token}} 标记",
+  "chaosBag.removeToken_other": "{{name}} 从混乱袋中移除 {{count}} 个 {{token}} 标记",
+
+  "chaosBag.cantAddToken": "你不能添加超过 {{limit}} 个 {{character}}",
+  "chaosBag.cantRemoveToken": "你不能移除 {{count}} 个 {{character}}。可用：{{available}}",
+
+  "board.help.syncScenarioClues": "开启/关闭 冒险与调查员之间的线索同步功能：当线索被添加到冒险中时，会自动从调查员身上扣除",
+
+  "defeat.modal.text": "选择其他调查员",
+
+  "reveal.startNewConfirm.title": "继续技能检定？",
+  "reveal.startNewConfirm.text": "你有一个未完成的检定{{skillCheck}}。要继续吗？",
+  "reveal.startNewConfirm.startNew": "开始新的",
+
+  "ability.mateo.base.confirm.title": "添加 [elder_sign]？",
+  "ability.mateo.base.confirm.text": "这会向本次检定中临时添加一个 [elder_sign] 标记",
+  "ability.mateo.base.confirm.submit": "添加 [elder_sign]",
+
+  "ability.mateo.base.elderSign.cardAndResource": "卡牌和 [resource]",
+  "ability.mateo.base.elderSign.action": "行动",
+
+  "ability.carolyn.modal.heal": "治愈",
+  "ability.vincent.modal.heal": "治愈伤害",
+
+  "ability.preston.modal.text": "花费2个 [resource] 自动成功此检定？",
+  "ability.rex.base.modal.text": "使此检定失败，以抽取3张牌？",
+
+  "ability.stella.modal.text": "使此检定失败，以治愈1点伤害和1点恐惧？",
+
+  "ability.agnes.parallel.modal.text": "治愈1点伤害？",
+
+  "ability.lily.elderSign.confirm.text": "将你控制的一张 [[破碎]] 戒律翻面至其 [[完整]] 的一面。",
+  "ability.lily.discipline.flip.unbroken": "{{name}} 将 [[破碎]] 的戒律“{{discipline}}”翻面至其 [[完整]] 的一面。",
+
+  "ability.tony.place-bounty": "{{name}} 在“悬赏契约”上放置1个赏金",
+  "ability.alice.modal.subtitle": "使用基础 [intellect]？",
+  "ability.alice.activation": "{{name}} 使用了 {{fromName}} 的基础 [intellect]",
+  "ability.alice.activation.self": "{{name}} 使用了自己卡牌的基础 [intellect]",
+  "ability.diana.reaction": "{{name}} 获得 [addcard] 和 [resource]",
+
+  "ability.reynauld.reaction": "{{name}} 抽取1张卡牌 [addcard] {{value}}",
+  "ability.reynauld.reaction.self": "{{name}} 抽取1张卡牌 [addcard] {{value}}",
+
+  "resources.notEnough": "资源不足。需要&nbsp;{{count}}，可用&nbsp;{{available}}",
+
+  "action.heal": "{{fromName}} 治愈了 {{dativeName}} {{value}}",
+  "action.heal.self": "{{name}} 治愈了自己 {{value}}",
+  "action.heal.word": "治愈",
+
+  "list.separator.two": " 和 ",
+  "list.separator.multiple": "、",
+  "preposition.and": "和",
+  "plural.accusative.horror_one": "{{count}} 点恐惧",
+  "plural.accusative.horror_other": "{{count}} 点恐惧",
+
+  "plural.accusative.damage_one": "{{count}} 点伤害",
+  "plural.accusative.damage_other": "{{count}} 点伤害",
+
+  "disk.notEnoughSpace.title": "可用空间不足",
+  "disk.notEnoughSpace.text": "应用程序需要 {{required}} 的可用空间",
+
+  "navigation.animation": "导航动画",
+
+  "Defeated": "已溃败",
+  "Change": "更改",
+
+  "Picker animation": "选择器动画",
+
+  "Show initial Health/Sanity": "显示初始生命/神智",
+  "Initial values": "显示初始值",
+  "Negative values": "允许负数值",
+
+  "Hand Size": "手牌上限",
+
+  "Chaos bag loading animation": "混乱袋加载动画",
+
+  "Show calculation changes": "显示计算历史",
+
+  "Skill modfiers": "技能修正",
+
+  "Give action": "给予行动",
+  "Not selected": "未选择",
+  "Add wild": "添加万用",
+  "Keep awake": "保持屏幕常亮",
+  "Track Hand Size": "记录手牌上限",
+  "Doom": "毁灭标记",
+  "General": "通用",
+  "Sound Effects": "音效",
+  "Volume": "音量",
+  "Make a choice": "做出选择",
+
+  "New Game": "新游戏",
+  "Versions": "版本",
+  "Skins": "主题",
+  "About": "关于",
+  "Help": "帮助",
+
+  "Scroll": "滑动",
+  "Short Press": "轻点",
+  "Long Press": "长按",
+  "Calculator": "计算器",
+  "Equals": "计算",
+  "XP": "经验",
+  "Track experience points": "记录经验值",
+  "Save trauma": "保存创伤",
+
+  "Loading fonts": "正在加载字体",
+  "Loading assets {{count}}/{{total}}": "正在加载资源 {{count}}/{{total}}",
+  "Haptic": "触感反馈",
+  "Reset Board?": "重置面板？",
+  "System (if available)": "系统（若可用）",
+  "Investigator Special Actions": "调查员特殊行动",
+  "Press and hold": "状态",
+  "Hold to seal": "长按以封印",
+  "Hold": "长按",
+
+  "Health/Sanity": "生命/神智",
+  "Show health/sanity": "显示生命/神智",
+  "Show damage/horror": "显示伤害/恐惧",
+
+  "Spoiler Alert": "剧透警告",
+  "Turn end": "回合结束",
+
+  "No main & additional actions": "无基础和额外行动",
+  "No main actions": "无基础行动",
+
+  "Damage/Horror visual effects": "伤害/恐惧特效",
+
+  "Scroll Deceleration": "滑动阻尼",
+  "Inertial Scrolling": "滑动惯性",
+
+  "Behavior": "行为",
+  "Show Game Text": "显示游戏文本",
+  "Pinned calculations": "固定的计算",
+  "Game settings": "游戏设置",
+
+  "Select a campaign": "选择一个剧本",
+  "Back Text": "背面文本",
+
+  "Negative health/sanity": "负生命/神智",
+  "Unlimited chaos tokens": "无限混乱标记",
+  "Custom Content": "自定义内容",
+  "Upkeep resources": "补给阶段资源",
+
+  "Player Window": "玩家窗口",
+  "Rules Reference": "规则参考",
+
+  "Sync with investigator clues": "与调查员线索同步",
+
+  "Modify tokens": "修改标记",
+  "Fill": "填充",
+  "Fill Chaos Bag": "填充混乱袋",
+  "Get action": "获得行动",
+  "-2 [bless] and -2 [curse]": "-2 [bless] 和 -2 [curse]",
+  "Hall of Fame": "名人堂",
+  "Lead Tester": "首席测试员",
+  "Credits": "制作人员",
+  "Card icons": "卡牌图标",
+  "ArkhamCards icons": "ArkhamCards 图标",
+  "Button Vector Art": "按钮矢量图",
+  "Some backgrounds": "部分背景",
+  "Testing/Ideas": "测试/想法",
+  "Special Thanks": "特别感谢",
+  "Application Info": "应用信息",
+  "Device Info": "设备信息",
+  "Sponsors": "赞助商",
+  "Korean": "韩语",
+  "Chinese": "中文"
 }
