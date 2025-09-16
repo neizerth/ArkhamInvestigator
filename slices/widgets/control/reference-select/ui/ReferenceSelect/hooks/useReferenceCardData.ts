@@ -1,6 +1,10 @@
 import { selectReferenceCard } from "@modules/stories/shared/lib";
-import { stripTags, useAppSelector } from "@shared/lib";
+import { capitalize, stripTags, useAppSelector } from "@shared/lib";
 import { useMemo } from "react";
+
+const formatLabel = (label: string) => {
+	return capitalize(stripTags(label));
+};
 
 export const useReferenceCardData = () => {
 	const referenceCard = useAppSelector(selectReferenceCard);
@@ -12,11 +16,11 @@ export const useReferenceCardData = () => {
 
 		return [
 			{
-				label: stripTags(referenceCard.difficulty),
+				label: formatLabel(referenceCard.difficulty),
 				value: false,
 			},
 			{
-				label: stripTags(referenceCard.back_difficulty),
+				label: formatLabel(referenceCard.back_difficulty),
 				value: true,
 			},
 		];
