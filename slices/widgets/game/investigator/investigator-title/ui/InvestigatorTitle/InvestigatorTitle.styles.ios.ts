@@ -1,5 +1,4 @@
-import { Arkhamic, FZLiBian } from "@assets/fonts";
-import { ArnoPro } from "@assets/fonts";
+import { Alegreya, Arkhamic, CrimsonPro, FZLiBian } from "@assets/fonts";
 import { Conkordia } from "@assets/fonts";
 import { SanCn } from "@assets/fonts";
 import { color, font } from "@shared/config";
@@ -40,7 +39,7 @@ export const getTitleStyle = (options: GetTitleStyleOptions) => {
 				fontSize: 45 * vh,
 			},
 			subtitleText: {
-				fontFamily: ArnoPro.bold,
+				fontFamily: CrimsonPro.bold,
 				fontSize: 22 * vh,
 			},
 			id: {
@@ -82,6 +81,9 @@ export const getTitleStyle = (options: GetTitleStyleOptions) => {
 			titleText: {
 				fontFamily: Conkordia.regular,
 				fontSize: 43 * vh,
+			},
+			subtitleText: {
+				fontFamily: Alegreya.bold,
 			},
 			unique: {
 				fontSize: 23 * vh,

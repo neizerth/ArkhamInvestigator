@@ -1,4 +1,4 @@
-import { ArnoPro, FZLiBian, SanCn } from "@assets/fonts";
+import { Alegreya, CrimsonPro, FZLiBian, SanCn } from "@assets/fonts";
 import { scenarioReferenceImage } from "@assets/images/game/reference";
 import { withLocale } from "@modules/core/i18n/shared/lib";
 import { ReferenceTitle } from "@modules/mechanics/rules/base/shared/ui";
@@ -45,11 +45,14 @@ export const Difficulty: typeof View = styled(View)`
 export const DifficultyText = withLocale({
 	style: {
 		default: {
-			fontFamily: ArnoPro.bold,
+			fontFamily: CrimsonPro.bold,
 			fontSize: unit(3.3),
 		},
 		ko: {
 			fontFamily: SanCn.bold,
+		},
+		ru: {
+			fontFamily: Alegreya.bold,
 		},
 		zh: {
 			fontFamily: FZLiBian.regular,

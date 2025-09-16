@@ -1,5 +1,6 @@
 import {
-	ArnoPro,
+	Alegreya,
+	CrimsonPro,
 	FZShuTi,
 	FangSong,
 	SanCn,
@@ -29,16 +30,30 @@ const zhComponentStyles: ComponentStyleMap = {
 export const localeComponentStyles: KeyConfig<ComponentStyleMap> = {
 	default: {
 		i: {
-			fontFamily: ArnoPro.italic,
+			fontFamily: CrimsonPro.italic,
 		},
 		b: {
-			fontFamily: ArnoPro.bold,
+			fontFamily: CrimsonPro.bold,
 		},
 		keyword: {
-			fontFamily: ArnoPro.boldItalic,
+			fontFamily: CrimsonPro.boldItalic,
 		},
 		text: {
-			fontFamily: ArnoPro.regular,
+			fontFamily: CrimsonPro.regular,
+		},
+	},
+	ru: {
+		i: {
+			fontFamily: Alegreya.italic,
+		},
+		b: {
+			fontFamily: Alegreya.bold,
+		},
+		keyword: {
+			fontFamily: Alegreya.boldItalic,
+		},
+		text: {
+			fontFamily: Alegreya.regular,
 		},
 	},
 	ko: {

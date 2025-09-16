@@ -1,4 +1,10 @@
-import { ArnoPro, SanCn, SourceHanSansCN, Yoon } from "@assets/fonts";
+import {
+	Alegreya,
+	CrimsonPro,
+	SanCn,
+	SourceHanSansCN,
+	Yoon,
+} from "@assets/fonts";
 import { withLocale } from "@modules/core/i18n/shared/lib";
 import { TouchableOpacity } from "@modules/core/touch/shared/ui";
 import { color, font, size } from "@shared/config";
@@ -24,8 +30,11 @@ const zhTitleTextConfig = {
 const titleTextStyle = {
 	default: {
 		color: color.text,
-		fontFamily: ArnoPro.bold,
+		fontFamily: CrimsonPro.bold,
 		fontSize: font.size.default,
+	},
+	ru: {
+		fontFamily: Alegreya.bold,
 	},
 	ko: {
 		fontFamily: SanCn.bold,
@@ -46,8 +55,11 @@ const zhTextConfig = {
 const textStyle = {
 	default: {
 		color: color.text,
-		fontFamily: ArnoPro.regular,
+		fontFamily: CrimsonPro.regular,
 		fontSize: font.size.default,
+	},
+	ru: {
+		fontFamily: Alegreya.regular,
 	},
 	ko: {
 		fontFamily: Yoon.D330.regular,

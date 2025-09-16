@@ -1,4 +1,11 @@
-import { Arkhamic, ArnoPro, Conkordia, FZLiBian, SanCn } from "@assets/fonts";
+import {
+	Alegreya,
+	Arkhamic,
+	Conkordia,
+	CrimsonPro,
+	FZLiBian,
+	SanCn,
+} from "@assets/fonts";
 import { color, font } from "@shared/config";
 import { getKeyConfig } from "@shared/lib";
 import type { PropsWithFaction } from "@shared/model";
@@ -51,7 +58,7 @@ export const getTitleStyle = (options: GetTitleStyleOptions) => {
 				fontSize: 45 * vh,
 			},
 			subtitleText: {
-				fontFamily: ArnoPro.bold,
+				fontFamily: CrimsonPro.bold,
 				fontSize: 22 * vh,
 			},
 			id: {
@@ -63,12 +70,15 @@ export const getTitleStyle = (options: GetTitleStyleOptions) => {
 		},
 		guardian: {
 			background: {
-				gap: parallel ? "10%" : "8%",
+				gap: parallel ? "8%" : "6%",
 			},
 		},
 		rogue: {
 			title: {
 				paddingTop: "1%",
+			},
+			background: {
+				gap: "5%",
 			},
 		},
 		seeker: {
@@ -78,7 +88,7 @@ export const getTitleStyle = (options: GetTitleStyleOptions) => {
 		},
 		mystic: {
 			background: {
-				gap: "6%",
+				gap: "4%",
 			},
 		},
 	});
@@ -113,7 +123,7 @@ export const getTitleStyle = (options: GetTitleStyleOptions) => {
 	const getRUStyle = getKeyConfig<Partial<ReturnStyle>>({
 		default: {
 			background: {
-				gap: "7%",
+				gap: "4%",
 			},
 			title: {
 				paddingTop: "1%",
@@ -122,18 +132,24 @@ export const getTitleStyle = (options: GetTitleStyleOptions) => {
 				fontFamily: Conkordia.regular,
 				fontSize: 43 * vh,
 			},
+			subtitleText: {
+				fontFamily: Alegreya.bold,
+			},
 			unique: {
 				fontSize: 23 * vh,
 			},
 		},
 		guardian: {
 			background: {
-				gap: parallel ? "9%" : "7%",
+				gap: parallel ? "8%" : "4%",
 			},
 		},
 		seeker: {
 			title: {
 				paddingTop: "2%",
+			},
+			background: {
+				gap: "5%",
 			},
 		},
 	});
@@ -164,7 +180,7 @@ export const getTitleStyle = (options: GetTitleStyleOptions) => {
 	const localeStyle = getLocaleStyle(language);
 
 	const background: ViewStyle = {
-		gap: "8%",
+		gap: "6%",
 	};
 	const container: ViewStyle = {
 		height,
@@ -175,7 +191,7 @@ export const getTitleStyle = (options: GetTitleStyleOptions) => {
 		height: "57.5%",
 	};
 	const subtitle: ViewStyle = {
-		height: "25%",
+		height: "30%",
 		paddingTop: "0.3%",
 	};
 	const titleText: TextStyle = {

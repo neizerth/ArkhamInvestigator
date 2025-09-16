@@ -1,7 +1,8 @@
 import {
+	Alegreya,
 	Arkhamic,
-	ArnoPro,
 	Conkordia,
+	CrimsonPro,
 	FZLiBian,
 	FangSong,
 	SanCn,
@@ -149,11 +150,14 @@ export const BaseTitle = withLocale({
 export const Hint = withLocale({
 	style: {
 		default: {
-			fontFamily: ArnoPro.italic,
+			fontFamily: CrimsonPro.italic,
 			fontSize: phaseContentFontSize,
 			color: color.rulesText,
 			paddingHorizontal: 13,
 			paddingBottom: 2,
+		},
+		ru: {
+			fontFamily: Alegreya.italic,
 		},
 		ko: {
 			fontFamily: Yoon.D330.italic,

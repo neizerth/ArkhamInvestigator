@@ -1,4 +1,4 @@
-import { ArnoPro, FZShuTi } from "@assets/fonts";
+import { Alegreya, CrimsonPro, FZShuTi } from "@assets/fonts";
 import { SanCn } from "@assets/fonts";
 import { getKeyConfig } from "@shared/lib";
 import type { TextStyle } from "react-native";
@@ -19,8 +19,11 @@ export const getInvestigatorTraitsStyle = ({
 	};
 	const getStyle = getKeyConfig<TextStyle>({
 		default: {
-			fontFamily: ArnoPro.bold,
+			fontFamily: CrimsonPro.bold,
 			fontSize,
+		},
+		ru: {
+			fontFamily: Alegreya.bold,
 		},
 		ko: {
 			paddingBottom: 5,

@@ -1,4 +1,11 @@
-import { ArnoPro, FangSong, SanCn, SourceHanSansCN, Yoon } from "@assets/fonts";
+import {
+	Alegreya,
+	CrimsonPro,
+	FangSong,
+	SanCn,
+	SourceHanSansCN,
+	Yoon,
+} from "@assets/fonts";
 import type { TimingPhaseStepType } from "@modules/mechanics/rules/round-timing/shared/model";
 import { getKeyConfig } from "@shared/lib";
 import type { ComponentStyleMap } from "@shared/ui";
@@ -27,19 +34,33 @@ export const getStepTextComponents = ({ language, type }: Options) => {
 	return getKeyConfig({
 		default: {
 			i: {
-				fontFamily: ArnoPro.italic,
+				fontFamily: CrimsonPro.italic,
 			},
 			b: {
-				fontFamily: ArnoPro.bold,
+				fontFamily: CrimsonPro.bold,
 			},
 			keyword: {
-				fontFamily: ArnoPro.boldItalic,
+				fontFamily: CrimsonPro.boldItalic,
 			},
 			text: {
-				fontFamily: ArnoPro.regular,
+				fontFamily: CrimsonPro.regular,
 			},
 			paragraph: {
 				justifyContent: type === "end" ? "center" : "flex-start",
+			},
+		},
+		ru: {
+			i: {
+				fontFamily: Alegreya.italic,
+			},
+			b: {
+				fontFamily: Alegreya.bold,
+			},
+			keyword: {
+				fontFamily: Alegreya.boldItalic,
+			},
+			text: {
+				fontFamily: Alegreya.regular,
 			},
 		},
 		ko: {

@@ -1,4 +1,11 @@
-import { ArnoPro, FangSong, SanCn, SourceHanSansCN, Yoon } from "@assets/fonts";
+import {
+	Alegreya,
+	CrimsonPro,
+	FangSong,
+	SanCn,
+	SourceHanSansCN,
+	Yoon,
+} from "@assets/fonts";
 import { color, font } from "@shared/config";
 import { getKeyConfig } from "@shared/lib";
 import type { ExpressionDisplayProps } from "@widgets/game/skill-check";
@@ -15,7 +22,10 @@ export const getExpressionDisplayStyle = (
 			color: color.text,
 			fontSize: font.size.default,
 			lineHeight: 20,
-			fontFamily: ArnoPro.regular,
+			fontFamily: CrimsonPro.regular,
+		},
+		ru: {
+			fontFamily: Alegreya.regular,
 		},
 		ko: {
 			fontFamily: Yoon.D330.regular,
@@ -31,7 +41,10 @@ export const getExpressionDisplayStyle = (
 
 	const getValueStyle = getKeyConfig({
 		default: {
-			fontFamily: ArnoPro.bold,
+			fontFamily: CrimsonPro.bold,
+		},
+		ru: {
+			fontFamily: Alegreya.bold,
 		},
 		ko: {
 			fontFamily: SanCn.bold,

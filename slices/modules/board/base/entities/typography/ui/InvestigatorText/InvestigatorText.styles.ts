@@ -1,6 +1,7 @@
-import { ArnoPro, FZShuTi, FangSong } from "@assets/fonts";
+import { Alegreya, CrimsonPro, FZShuTi, FangSong } from "@assets/fonts";
 import { SanCn } from "@assets/fonts";
 import { Yoon } from "@assets/fonts";
+import { color } from "@shared/config";
 import { type KeyConfig, getKeyConfig } from "@shared/lib";
 import type { ComponentStyleMap } from "@shared/ui";
 import { Platform, type TextStyle } from "react-native";
@@ -26,16 +27,30 @@ const zhComponentStyles: ComponentStyleMap = {
 export const localeComponentStyles: KeyConfig<ComponentStyleMap> = {
 	default: {
 		i: {
-			fontFamily: ArnoPro.italic,
+			fontFamily: CrimsonPro.italic,
 		},
 		b: {
-			fontFamily: ArnoPro.bold,
+			fontFamily: CrimsonPro.bold,
 		},
 		keyword: {
-			fontFamily: ArnoPro.boldItalic,
+			fontFamily: CrimsonPro.boldItalic,
 		},
 		text: {
-			fontFamily: ArnoPro.regular,
+			fontFamily: CrimsonPro.regular,
+		},
+	},
+	ru: {
+		i: {
+			fontFamily: Alegreya.italic,
+		},
+		b: {
+			fontFamily: Alegreya.bold,
+		},
+		keyword: {
+			fontFamily: Alegreya.boldItalic,
+		},
+		text: {
+			fontFamily: Alegreya.regular,
 		},
 	},
 	ko: {
@@ -83,6 +98,7 @@ export const getInvestigatorTextStyle = ({
 		},
 	};
 	const getComponents = getKeyConfig({
+		...localeComponentStyles,
 		default: {
 			...localeComponentStyles.default,
 			icon: {
@@ -97,6 +113,7 @@ export const getInvestigatorTextStyle = ({
 			break: {
 				height: fontSize * 2.7,
 			},
+			color: color.text,
 		},
 		ko: {
 			...localeComponentStyles.ko,

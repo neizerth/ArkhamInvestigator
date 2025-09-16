@@ -1,4 +1,4 @@
-import { ArnoPro, FangSong, Yoon } from "@assets/fonts";
+import { Alegreya, CrimsonPro, FangSong, Yoon } from "@assets/fonts";
 import { getKeyConfig } from "@shared/lib";
 import { boardText } from "../../config";
 
@@ -29,16 +29,27 @@ export const getInvestigatorFlavorStyles = ({
 				justifyContent: "center",
 			},
 			text: {
-				fontFamily: ArnoPro.italic,
+				fontFamily: CrimsonPro.italic,
 				fontSize,
 				lineHeight: fontSize * 1.15,
 				textAlign: "center",
 			},
 			b: {
-				fontFamily: ArnoPro.boldItalic,
+				fontFamily: CrimsonPro.boldItalic,
 			},
 			u: {
-				fontFamily: ArnoPro.regular,
+				fontFamily: CrimsonPro.regular,
+			},
+		},
+		ru: {
+			text: {
+				fontFamily: Alegreya.italic,
+			},
+			b: {
+				fontFamily: Alegreya.boldItalic,
+			},
+			u: {
+				fontFamily: Alegreya.regular,
 			},
 		},
 		ko: {

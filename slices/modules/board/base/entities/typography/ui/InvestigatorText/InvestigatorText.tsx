@@ -1,6 +1,5 @@
-import type { ComponentStyleMap } from "@shared/ui";
+import { type ComponentStyleMap, GameText } from "@shared/ui";
 import { mergeDeepRight } from "ramda";
-import * as C from "./InvestigatorText.components";
 import { getInvestigatorTextStyle } from "./InvestigatorText.styles";
 import type { InvestigatorTextProps } from "./InvestigatorText.types";
 
@@ -20,7 +19,7 @@ export const InvestigatorText = (props: InvestigatorTextProps) => {
 	) as ComponentStyleMap;
 
 	return (
-		<C.Text
+		<GameText
 			{...props}
 			value={text}
 			componentStyles={componentStyles}
