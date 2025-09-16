@@ -91,6 +91,7 @@ export const getScenarioEffectsStyle = ({ language, small }: Options) => {
 		},
 	};
 	const getComponents = getKeyConfig({
+		...localeComponentStyles,
 		default: {
 			...localeComponentStyles.default,
 			icon: {
