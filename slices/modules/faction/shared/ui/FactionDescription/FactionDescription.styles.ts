@@ -20,37 +20,37 @@ const offsetY = Platform.OS === "ios" ? 4 : 0;
 
 export const factionDescriptionRelativeOffsets: Record<Faction, Offsets> = {
 	neutral: {
-		paddingTop: 10,
+		paddingTop: 7,
 		paddingLeft: 10,
 		paddingRight: 15,
 		paddingBottom: offsetY + 2,
 	},
 	mystic: {
-		paddingTop: 9,
+		paddingTop: 7,
 		paddingLeft: 12,
 		paddingRight: 12,
 		paddingBottom: offsetY + 4,
 	},
 	rogue: {
-		paddingTop: 8,
+		paddingTop: 6,
 		paddingLeft: 6,
 		paddingRight: 6,
 		paddingBottom: offsetY + 2,
 	},
 	survivor: {
-		paddingTop: 10,
+		paddingTop: 6,
 		paddingLeft: 7,
 		paddingRight: 7,
 		paddingBottom: offsetY + 2,
 	},
 	seeker: {
-		paddingTop: 8,
+		paddingTop: 7,
 		paddingLeft: 9,
 		paddingRight: 7,
 		paddingBottom: offsetY + 2,
 	},
 	guardian: {
-		paddingTop: 10,
+		paddingTop: 9,
 		paddingLeft: 10,
 		paddingRight: 11,
 		paddingBottom: offsetY + 2,
