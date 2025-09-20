@@ -124,10 +124,10 @@ export const getInvestigatorTextStyle = ({
 		ru: {
 			...localeComponentStyles.ru,
 			icon: {
-				lineHeight: iconFontSize * 0.9,
+				lineHeight: iconFontSize,
 			},
 			icon_bullet: {
-				top: -5,
+				top: -4,
 			},
 		},
 		zh: zhComponentStyles,
