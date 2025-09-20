@@ -1,8 +1,8 @@
 import {
-	Alegreya,
 	Arkhamic,
 	Conkordia,
 	CrimsonPro,
+	EBGaramond,
 	FZLiBian,
 	SanCn,
 } from "@assets/fonts";
@@ -123,25 +123,26 @@ export const getTitleStyle = (options: GetTitleStyleOptions) => {
 	const getRUStyle = getKeyConfig<Partial<ReturnStyle>>({
 		default: {
 			background: {
-				gap: "4%",
+				gap: "3%",
 			},
 			title: {
-				paddingTop: "1%",
+				paddingTop: "1.5%",
 			},
 			titleText: {
 				fontFamily: Conkordia.regular,
 				fontSize: 43 * vh,
 			},
 			subtitleText: {
-				fontFamily: Alegreya.bold,
+				fontFamily: EBGaramond.bold,
 			},
 			unique: {
 				fontSize: 23 * vh,
+				marginTop: 0,
 			},
 		},
 		guardian: {
 			background: {
-				gap: parallel ? "8%" : "4%",
+				gap: parallel ? "7%" : "3%",
 			},
 		},
 		seeker: {
@@ -149,7 +150,7 @@ export const getTitleStyle = (options: GetTitleStyleOptions) => {
 				paddingTop: "2%",
 			},
 			background: {
-				gap: "5%",
+				gap: "4%",
 			},
 		},
 	});

@@ -1,4 +1,4 @@
-import { Alegreya, CrimsonPro, FangSong, Yoon } from "@assets/fonts";
+import { CrimsonPro, EBGaramond, FangSong, Yoon } from "@assets/fonts";
 import { getKeyConfig } from "@shared/lib";
 import { boardText } from "../../config";
 
@@ -43,13 +43,13 @@ export const getInvestigatorFlavorStyles = ({
 		},
 		ru: {
 			text: {
-				fontFamily: Alegreya.italic,
+				fontFamily: EBGaramond.italic,
 			},
 			b: {
-				fontFamily: Alegreya.boldItalic,
+				fontFamily: EBGaramond.boldItalic,
 			},
 			u: {
-				fontFamily: Alegreya.regular,
+				fontFamily: EBGaramond.regular,
 			},
 		},
 		ko: {

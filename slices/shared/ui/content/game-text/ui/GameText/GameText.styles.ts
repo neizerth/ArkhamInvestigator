@@ -23,6 +23,9 @@ export const defaultComponentStyles: ComponentStyleMap = {
 		lineHeight: 16,
 		marginTop: -18,
 	},
+	icon_bullet: {
+		top: -1,
+	},
 	iconToken: {},
 	paragraph: {},
 	word: {

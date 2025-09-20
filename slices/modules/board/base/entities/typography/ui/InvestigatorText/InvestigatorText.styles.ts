@@ -1,4 +1,4 @@
-import { Alegreya, CrimsonPro, FZShuTi, FangSong } from "@assets/fonts";
+import { CrimsonPro, EBGaramond, FZShuTi, FangSong } from "@assets/fonts";
 import { SanCn } from "@assets/fonts";
 import { Yoon } from "@assets/fonts";
 import { color } from "@shared/config";
@@ -41,16 +41,16 @@ export const localeComponentStyles: KeyConfig<ComponentStyleMap> = {
 	},
 	ru: {
 		i: {
-			fontFamily: Alegreya.italic,
+			fontFamily: EBGaramond.italic,
 		},
 		b: {
-			fontFamily: Alegreya.bold,
+			fontFamily: EBGaramond.bold,
 		},
 		keyword: {
-			fontFamily: Alegreya.boldItalic,
+			fontFamily: EBGaramond.boldItalic,
 		},
 		text: {
-			fontFamily: Alegreya.regular,
+			fontFamily: EBGaramond.regular,
 		},
 	},
 	ko: {
@@ -103,12 +103,11 @@ export const getInvestigatorTextStyle = ({
 			...localeComponentStyles.default,
 			icon: {
 				fontSize: iconFontSize,
-				lineHeight: iconFontSize * 1.2,
-				top: -1,
+				lineHeight: iconFontSize * 1.3,
 			},
 			icon_bullet: {
 				lineHeight: fontSize * (ios ? 1 : 0.7),
-				top: -7,
+				top: -3,
 			},
 			break: {
 				height: fontSize * 2.7,
@@ -120,6 +119,15 @@ export const getInvestigatorTextStyle = ({
 			icon: {
 				fontSize: iconFontSize * 0.85,
 				letterSpacing: 2,
+			},
+		},
+		ru: {
+			...localeComponentStyles.ru,
+			icon: {
+				lineHeight: iconFontSize * 0.9,
+			},
+			icon_bullet: {
+				top: -5,
 			},
 		},
 		zh: zhComponentStyles,

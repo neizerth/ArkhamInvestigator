@@ -1,11 +1,11 @@
-import { Alegreya, Arkhamic, CrimsonPro, FZLiBian } from "@assets/fonts";
+import { Arkhamic, CrimsonPro, EBGaramond, FZLiBian } from "@assets/fonts";
 import { Conkordia } from "@assets/fonts";
 import { SanCn } from "@assets/fonts";
 import { color, font } from "@shared/config";
 import { getKeyConfig } from "@shared/lib";
 import type { PropsWithFaction } from "@shared/model";
 import { mergeDeepRight } from "ramda";
-import { Platform, type TextStyle, type ViewStyle } from "react-native";
+import type { TextStyle, ViewStyle } from "react-native";
 
 type GetTitleStyleOptions = PropsWithFaction & {
 	height: number;
@@ -22,10 +22,6 @@ type ReturnStyle = {
 	unique: TextStyle;
 	id: TextStyle;
 };
-
-const ios = Platform.OS === "ios";
-
-const titlePaddingOffset = ios ? 0.5 : 0;
 
 export const getTitleStyle = (options: GetTitleStyleOptions) => {
 	const { height, language, faction, parallel } = options;
@@ -83,7 +79,7 @@ export const getTitleStyle = (options: GetTitleStyleOptions) => {
 				fontSize: 43 * vh,
 			},
 			subtitleText: {
-				fontFamily: Alegreya.bold,
+				fontFamily: EBGaramond.bold,
 			},
 			unique: {
 				fontSize: 23 * vh,

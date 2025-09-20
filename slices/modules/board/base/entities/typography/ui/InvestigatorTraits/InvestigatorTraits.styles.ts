@@ -1,4 +1,4 @@
-import { Alegreya, CrimsonPro, FZShuTi } from "@assets/fonts";
+import { CrimsonPro, EBGaramond, FZShuTi } from "@assets/fonts";
 import { SanCn } from "@assets/fonts";
 import { getKeyConfig } from "@shared/lib";
 import type { TextStyle } from "react-native";
@@ -23,7 +23,7 @@ export const getInvestigatorTraitsStyle = ({
 			fontSize,
 		},
 		ru: {
-			fontFamily: Alegreya.bold,
+			fontFamily: EBGaramond.bold,
 		},
 		ko: {
 			paddingBottom: 5,

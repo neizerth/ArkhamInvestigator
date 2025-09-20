@@ -1,4 +1,4 @@
-import { Alegreya, CrimsonPro, FZLiBian, SanCn } from "@assets/fonts";
+import { CrimsonPro, EBGaramond, FZLiBian, SanCn } from "@assets/fonts";
 import { scenarioReferenceImage } from "@assets/images/game/reference";
 import { withLocale } from "@modules/core/i18n/shared/lib";
 import { ReferenceTitle } from "@modules/mechanics/rules/base/shared/ui";
@@ -52,7 +52,7 @@ export const DifficultyText = withLocale({
 			fontFamily: SanCn.bold,
 		},
 		ru: {
-			fontFamily: Alegreya.bold,
+			fontFamily: EBGaramond.bold,
 		},
 		zh: {
 			fontFamily: FZLiBian.regular,

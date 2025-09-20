@@ -3,7 +3,6 @@ import { getSignatureImageUrl } from "@modules/signature/base/shared/api";
 import {
 	getBoardStats,
 	selectCurrentSkinId,
-	selectReplaceInvestigator,
 	useAppSelector,
 } from "@shared/lib";
 import { selectCurrentSignature } from "../../../lib";
@@ -12,7 +11,6 @@ export const InvestigatorDescription = () => {
 	const signature = useAppSelector(selectCurrentSignature);
 	const skinId = useAppSelector(selectCurrentSkinId);
 	const trackXP = useAppSelector(selectTrackXP);
-	const replaceInvestigator = useAppSelector(selectReplaceInvestigator);
 
 	if (!signature) {
 		return;

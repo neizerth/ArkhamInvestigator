@@ -1,6 +1,6 @@
 import {
-	Alegreya,
 	CrimsonPro,
+	EBGaramond,
 	SanCn,
 	SourceHanSansCN,
 	Yoon,
@@ -34,7 +34,7 @@ const titleTextStyle = {
 		fontSize: font.size.default,
 	},
 	ru: {
-		fontFamily: Alegreya.bold,
+		fontFamily: EBGaramond.bold,
 	},
 	ko: {
 		fontFamily: SanCn.bold,
@@ -59,7 +59,7 @@ const textStyle = {
 		fontSize: font.size.default,
 	},
 	ru: {
-		fontFamily: Alegreya.regular,
+		fontFamily: EBGaramond.regular,
 	},
 	ko: {
 		fontFamily: Yoon.D330.regular,

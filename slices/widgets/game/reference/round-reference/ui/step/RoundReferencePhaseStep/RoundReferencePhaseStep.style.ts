@@ -1,6 +1,6 @@
 import {
-	Alegreya,
 	CrimsonPro,
+	EBGaramond,
 	FangSong,
 	SanCn,
 	SourceHanSansCN,
@@ -51,16 +51,16 @@ export const getStepTextComponents = ({ language, type }: Options) => {
 		},
 		ru: {
 			i: {
-				fontFamily: Alegreya.italic,
+				fontFamily: EBGaramond.italic,
 			},
 			b: {
-				fontFamily: Alegreya.bold,
+				fontFamily: EBGaramond.bold,
 			},
 			keyword: {
-				fontFamily: Alegreya.boldItalic,
+				fontFamily: EBGaramond.boldItalic,
 			},
 			text: {
-				fontFamily: Alegreya.regular,
+				fontFamily: EBGaramond.regular,
 			},
 		},
 		ko: {

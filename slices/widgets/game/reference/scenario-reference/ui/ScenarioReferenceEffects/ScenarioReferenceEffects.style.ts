@@ -1,6 +1,6 @@
 import {
-	Alegreya,
 	CrimsonPro,
+	EBGaramond,
 	FZShuTi,
 	FangSong,
 	SanCn,
@@ -44,16 +44,16 @@ export const localeComponentStyles: KeyConfig<ComponentStyleMap> = {
 	},
 	ru: {
 		i: {
-			fontFamily: Alegreya.italic,
+			fontFamily: EBGaramond.italic,
 		},
 		b: {
-			fontFamily: Alegreya.bold,
+			fontFamily: EBGaramond.bold,
 		},
 		keyword: {
-			fontFamily: Alegreya.boldItalic,
+			fontFamily: EBGaramond.boldItalic,
 		},
 		text: {
-			fontFamily: Alegreya.regular,
+			fontFamily: EBGaramond.regular,
 		},
 	},
 	ko: {

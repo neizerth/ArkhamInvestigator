@@ -1,8 +1,8 @@
 import {
-	Alegreya,
 	Arkhamic,
 	Conkordia,
 	CrimsonPro,
+	EBGaramond,
 	FZLiBian,
 	FangSong,
 	SanCn,
@@ -157,7 +157,7 @@ export const Hint = withLocale({
 			paddingBottom: 2,
 		},
 		ru: {
-			fontFamily: Alegreya.italic,
+			fontFamily: EBGaramond.italic,
 		},
 		ko: {
 			fontFamily: Yoon.D330.italic,

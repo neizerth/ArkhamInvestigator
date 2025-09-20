@@ -1,6 +1,6 @@
 import {
-	Alegreya,
 	CrimsonPro,
+	EBGaramond,
 	FangSong,
 	SanCn,
 	SourceHanSansCN,
@@ -25,7 +25,7 @@ export const getExpressionDisplayStyle = (
 			fontFamily: CrimsonPro.regular,
 		},
 		ru: {
-			fontFamily: Alegreya.regular,
+			fontFamily: EBGaramond.regular,
 		},
 		ko: {
 			fontFamily: Yoon.D330.regular,
@@ -44,7 +44,7 @@ export const getExpressionDisplayStyle = (
 			fontFamily: CrimsonPro.bold,
 		},
 		ru: {
-			fontFamily: Alegreya.bold,
+			fontFamily: EBGaramond.bold,
 		},
 		ko: {
 			fontFamily: SanCn.bold,
