@@ -56,12 +56,25 @@ export const getTitleStyle = (options: GetTitleStyleOptions) => {
 				gap: "10%",
 			},
 		},
+		rogue: {
+			background: {
+				gap: "0.5%",
+			},
+			title: {
+				paddingTop: "2.3%",
+			},
+		},
 		mystic: {
 			title: {
 				paddingTop: "2%",
 			},
 			background: {
-				gap: "2%",
+				gap: 0,
+			},
+		},
+		survivor: {
+			background: {
+				gap: 0,
 			},
 		},
 	});
@@ -69,10 +82,11 @@ export const getTitleStyle = (options: GetTitleStyleOptions) => {
 	const getRUStyle = getKeyConfig<Partial<ReturnStyle>>({
 		default: {
 			background: {
-				gap: "4%",
+				gap: 0,
 			},
 			title: {
 				paddingTop: "1%",
+				height: "57.5%",
 			},
 			titleText: {
 				fontFamily: Conkordia.regular,
@@ -85,24 +99,22 @@ export const getTitleStyle = (options: GetTitleStyleOptions) => {
 				fontSize: 23 * vh,
 			},
 			subtitle: {
-				paddingTop: "1.9%",
+				paddingTop: "1.3%",
 			},
 		},
 		seeker: {
 			title: {
 				paddingTop: "1.5%",
+				height: "55%",
 			},
 			unique: {
 				marginTop: "1%",
 			},
-			background: {
-				gap: "2%",
+			subtitle: {
+				paddingTop: "0%",
 			},
 		},
 		rogue: {
-			background: {
-				gap: "3%",
-			},
 			title: {
 				paddingTop: "1.5%",
 			},
@@ -111,13 +123,13 @@ export const getTitleStyle = (options: GetTitleStyleOptions) => {
 			},
 		},
 		mystic: {
-			background: {
-				gap: "2%",
+			title: {
+				height: "56%",
 			},
 		},
 		neutral: {
 			background: {
-				gap: "10%",
+				gap: "5%",
 			},
 		},
 	});
@@ -125,7 +137,7 @@ export const getTitleStyle = (options: GetTitleStyleOptions) => {
 	const getKOStyle = getKeyConfig<Partial<ReturnStyle>>({
 		default: {
 			background: {
-				gap: "6%",
+				gap: "5%",
 			},
 			title: {
 				paddingTop: "2%",
@@ -143,8 +155,8 @@ export const getTitleStyle = (options: GetTitleStyleOptions) => {
 			},
 		},
 		seeker: {
-			background: {
-				gap: "8%",
+			title: {
+				paddingTop: "2.5%",
 			},
 		},
 		rogue: {
@@ -175,7 +187,7 @@ export const getTitleStyle = (options: GetTitleStyleOptions) => {
 	const getZHStyle = getKeyConfig<Partial<ReturnStyle>>({
 		default: {
 			background: {
-				gap: "6%",
+				gap: "1%",
 			},
 			title: {
 				paddingTop: "1.5%",
@@ -196,9 +208,6 @@ export const getTitleStyle = (options: GetTitleStyleOptions) => {
 			unique: {
 				marginTop: "1.5%",
 			},
-			background: {
-				gap: "3%",
-			},
 		},
 		seeker: {
 			title: {
@@ -207,7 +216,7 @@ export const getTitleStyle = (options: GetTitleStyleOptions) => {
 		},
 		rogue: {
 			background: {
-				gap: "3%",
+				gap: 0,
 			},
 		},
 		mystic: {
@@ -215,7 +224,7 @@ export const getTitleStyle = (options: GetTitleStyleOptions) => {
 				paddingTop: "1%",
 			},
 			background: {
-				gap: "1%",
+				gap: 0,
 			},
 		},
 		survivor: {
@@ -223,15 +232,15 @@ export const getTitleStyle = (options: GetTitleStyleOptions) => {
 				paddingTop: "1%",
 			},
 			background: {
-				gap: "2%",
+				gap: 0,
 			},
 		},
 		neutral: {
 			title: {
-				paddingTop: "0.5%",
+				paddingTop: "1.5%",
 			},
 			background: {
-				gap: "8.5%",
+				gap: "9%",
 			},
 		},
 	});
@@ -269,10 +278,10 @@ export const getTitleStyle = (options: GetTitleStyleOptions) => {
 	const title: ViewStyle = {
 		gap: 2 * vh * font.scale,
 		paddingTop: "0.5%",
-		height: "57.5%",
+		height: "54%",
 	};
 	const subtitle: ViewStyle = {
-		height: "30%",
+		height: "35%",
 		paddingTop: "2.3%",
 	};
 	const titleText: TextStyle = {
