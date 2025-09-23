@@ -56,6 +56,9 @@ export const AboutPage = (props: AboutPageProps) => {
 					{t`about.hallOfFame.arkhamdb`}
 				</List.Item>
 				<List.Item>
+					<Bold>{t`Eugene Sarnetsky`}</Bold>: {t`about.hallOfFame.sarnetsky`}
+				</List.Item>
+				<List.Item>
 					<Bold>@Egoorka_k</Bold>: {t`Lead Tester`}
 				</List.Item>
 				<List.Item>
@@ -75,10 +78,6 @@ export const AboutPage = (props: AboutPageProps) => {
 			<List>
 				<List.Item>
 					<Bold>{t`Card icons`}</Bold>: Fantasy Flight Games
-				</List.Item>
-				<List.Item>
-					<Bold>{t`ArkhamCards icons`}</Bold>:{" "}
-					{t`about.credits.arkhamCards.icons`}
 				</List.Item>
 				<List.Item>
 					<Bold>{t`Button Vector Art`}</Bold>: vecteezy.com
