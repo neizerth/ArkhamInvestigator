@@ -18,12 +18,12 @@ export const getBoardValueFromHistory = (options: Options) => {
 		value: getBoardValuePropFromHistory({
 			historyItems,
 			type: "value",
-			initialValue: board.initialValue,
+			initialValue: board.value,
 		}),
 		baseValue: getBoardValuePropFromHistory({
 			historyItems,
 			type: "baseValue",
-			initialValue: board.initialValue,
+			initialValue: board.baseValue,
 		}),
 		initialValue: getBoardValuePropFromHistory({
 			historyItems,
