@@ -21,10 +21,12 @@ export const Evaluation = ({ ...props }: EvaluationProps) => {
 
 	const expressionData = data;
 
+	const showHistory = isLargeLayout || historyShown;
+
 	return (
 		<C.Container {...props}>
 			<C.Content>
-				{isLargeLayout && <C.History size={Number.POSITIVE_INFINITY} />}
+				{showHistory && <C.History size={Number.POSITIVE_INFINITY} />}
 
 				{!historyShown && (
 					<C.Current>
