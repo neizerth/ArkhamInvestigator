@@ -1,4 +1,4 @@
-package com.arkhaminvestigator
+package com.arkhaminvestigator.dev
 import expo.modules.splashscreen.SplashScreenManager
 
 import android.os.Build

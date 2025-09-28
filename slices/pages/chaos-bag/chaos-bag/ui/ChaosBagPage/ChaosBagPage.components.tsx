@@ -41,5 +41,15 @@ export const ReferenceButton: typeof TopButton = styled(TopButton)`
 
 export const SetupButton: typeof TopButton = styled(TopButton)`
 	background-color: ${color.dark20};
-	padding: 5px 10px;
+	padding: ${size.gap.small}px ${size.gap.default}px;
+`;
+
+export const ClearButton: typeof TopButton = styled(TopButton)`
+	background-color: ${color.dark20};
+	padding: ${size.gap.small}px ${size.gap.default}px;
+`;
+
+export const Actions: typeof Row = styled(Row)`
+	gap: ${size.gap.default}px;
+	align-items: stretch;
 `;
