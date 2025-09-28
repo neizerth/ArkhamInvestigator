@@ -37,18 +37,20 @@ export const getExpressionDisplayStyles = (
 	const statStyle = {
 		fontSize: statFontSize[type],
 		lineHeight: statFontSize[type],
+		// marginTop: 4,
 	};
 	return {
 		statStyle,
 		textStyle: {
 			...textStyle[type],
 			fontFamily: Copasetic.regular,
-			lineHeight: textStyle[type].fontSize * 1.1,
+			lineHeight: textStyle[type].fontSize,
 		},
 		expressionStyle: {
 			justifyContent: "flex-end",
 			alignItems: "center",
 			gap: 3,
+			height: 38,
 		},
 		signStyle: {
 			marginLeft: -4,
