@@ -48,7 +48,7 @@ export const {
 	removeAllChaosTokensByTypeInternal,
 	removeChaosTokenInternal,
 	updateChaosTokenInternal,
-	clearChaosBag,
+	clearChaosBagInternal,
 } = chaosBag.actions;
 
 export const {

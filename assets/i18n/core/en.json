@@ -146,6 +146,9 @@
   "chaosToken.frost.second.effect": "Resolve the test as an automatic failure",
   "chaosToken.autoFail.effect": "Automatic failure",
 
+  "chaosBag.clear.title": "Clear chaos bag?",
+  "chaosBag.clear.text": "This action will remove all tokens from the chaos bag",
+
   "wild.give": "{{fromName}} gives {{name}} an extra [wild] until the end of the test",
   "wild.give.self": "{{name}} gives an extra [wild] until the end of the test",
 

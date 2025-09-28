@@ -1,7 +1,5 @@
-import {
-	clearChaosBag,
-	selectChaosTokenCount,
-} from "@modules/chaos-bag/base/shared/lib";
+import { clearChaosBag } from "@modules/chaos-bag/base/entities/lib";
+import { selectChaosTokenCount } from "@modules/chaos-bag/base/shared/lib";
 import { usePage } from "@modules/core/router/shared/lib";
 import { selectReferenceCard, selectStory } from "@modules/stories/shared/lib";
 import { routes } from "@shared/config";
