@@ -61,7 +61,6 @@ export const getExpressionDisplayStyle = (
 		},
 		statStyle: {
 			fontSize: font.size.small,
-			lineHeight: font.size.small,
 		},
 		textStyle,
 		valueStyle,
