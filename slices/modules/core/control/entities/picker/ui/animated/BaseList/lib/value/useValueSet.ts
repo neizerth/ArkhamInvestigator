@@ -36,9 +36,10 @@ export function useValueSet<T>(props: BaseListProps<T>) {
 
 		const delta = Math.abs(offset.current - indexOffset);
 
-		const minDelta = 2;
+		const minDelta = 1;
 
 		if (delta < minDelta) {
+			// console.log("delta < minDelta", delta, minDelta);
 			return;
 		}
 

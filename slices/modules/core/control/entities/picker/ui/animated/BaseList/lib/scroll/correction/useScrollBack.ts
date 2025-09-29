@@ -1,3 +1,4 @@
+import { getValueIndex } from "@modules/core/control/entities/picker/lib";
 import type {
 	PickerEndReachedEvent,
 	PickerScrollEvent,
@@ -15,6 +16,7 @@ export function useScrollBack<T>(props: BaseListProps<T>) {
 		onPressOut: onPressOutProp,
 		onScroll: onScrollProp,
 		onScrollBeginDrag: onScrollBeginDragProp,
+		onDeactivated: onDeactivatedProp,
 		itemHeight,
 		ref,
 		data,
@@ -24,6 +26,7 @@ export function useScrollBack<T>(props: BaseListProps<T>) {
 	const lastOffset = itemHeight * lastIndex;
 	const offset = useRef(0);
 	const touching = useRef(false);
+	const index = getValueIndex(props);
 
 	const scrollToStart = useScrollToIndex({
 		ref,
@@ -97,6 +100,25 @@ export function useScrollBack<T>(props: BaseListProps<T>) {
 		[onScrollProp],
 	);
 
+	const onDeactivated = useCallback(() => {
+		onDeactivatedProp?.();
+
+		touching.current = false;
+		const currentOffset = offset.current;
+		const currentIndex = Math.round(currentOffset / itemHeight);
+		const itemOffset = itemHeight * currentIndex;
+
+		const delta = Math.abs(currentOffset - itemOffset);
+
+		if (delta < 2 || delta > 5) {
+			return;
+		}
+		ref?.current?.scrollToIndex({
+			index: currentIndex,
+			animated: false,
+		});
+	}, [onDeactivatedProp, itemHeight, ref]);
+
 	return {
 		...props,
 		onEndReached,
@@ -105,5 +127,6 @@ export function useScrollBack<T>(props: BaseListProps<T>) {
 		onPressOut,
 		onScroll,
 		onScrollBeginDrag,
+		onDeactivated,
 	};
 }
