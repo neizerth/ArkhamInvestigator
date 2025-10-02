@@ -5,6 +5,7 @@ import {
 } from "@modules/faction/shared/ui";
 import { CAN_ALWAYS_SHOW_GAME_TEXT, size } from "@shared/config";
 import type { Box } from "@shared/model";
+import { Platform } from "react-native";
 import { DEFAULT_PORTRAIT_DESCRIPTION_HEIGHT } from "../../config";
 
 type Options = {
@@ -12,6 +13,8 @@ type Options = {
 	gameTextSize?: Box | null;
 	faction: Faction;
 };
+
+const ios = Platform.OS === "ios";
 
 export const getDescriptionHeight = ({
 	showGameText,
@@ -32,7 +35,9 @@ export const getDescriptionHeight = ({
 
 	const offsetTop = Math.round((imageHeight * offsets.paddingTop) / 100);
 
-	const gap = offsetTop + size.gap.default;
+	const platformGap = ios ? 15 : 0;
+
+	const gap = offsetTop + size.gap.default + platformGap;
 
 	const fullHeight = gameTextHeight + gap;
 

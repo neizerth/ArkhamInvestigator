@@ -1,4 +1,5 @@
 import type { ChaosTokenValue } from "@modules/chaos-bag/value/shared/model";
+import { replaceCharacter } from "../config";
 import { getEffectTokenValue } from "./getEffectTokenValue";
 
 type Options = {
@@ -20,6 +21,6 @@ export const replaceNumericEffectValue = ({ text, value }: Options) => {
 		if (!Number.isNaN(sourceValue) && sourceValue === effectValue) {
 			return source;
 		}
-		return `${effectValue} ↩ ${source}`;
+		return `${effectValue} ${replaceCharacter} ${source}`;
 	});
 };
