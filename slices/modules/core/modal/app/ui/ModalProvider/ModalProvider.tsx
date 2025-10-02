@@ -1,4 +1,5 @@
 import type { PropsWithChildren } from "react";
+import { FullWindowOverlay } from "react-native-screens";
 import * as C from "./ModalProvider.components";
 
 import { useModalBackButton } from "../../../shared/base/lib";
@@ -10,8 +11,10 @@ export const ModalProvider = ({ children }: PropsWithChildren) => {
 	return (
 		<>
 			{children}
-			<C.Modal />
-			<CustomModals />
+			<FullWindowOverlay>
+				<C.Modal />
+				<CustomModals />
+			</FullWindowOverlay>
 		</>
 	);
 };
