@@ -9,6 +9,6 @@ export const getEffectTokenValue = (value: ChaosTokenValue) => {
 			return "[check]";
 		}
 		default:
-			return value;
+			return value > 0 ? `+${value}` : value;
 	}
 };
