@@ -2,7 +2,6 @@ import {
 	type changeBoardHistoryAbilityUse,
 	createAbilityUseFilter,
 	selectBoardAbilityValue,
-	setBoardAbilityValue,
 } from "@modules/board/abilities/shared/lib";
 import { increaseBoardActualPropValue } from "@modules/board/base/shared/lib";
 import { sendInvestigatorNotification } from "@modules/board/notifications/entities/lib";
@@ -30,14 +29,6 @@ function* worker({ payload }: ReturnType<typeof changeBoardHistoryAbilityUse>) {
 	if (dianaCardsCount > 4) {
 		return;
 	}
-
-	yield put(
-		setBoardAbilityValue({
-			boardId,
-			abilityId: AbilityCode.DianaStanley.counter,
-			value: dianaCardsCount + 1,
-		}),
-	);
 
 	yield put(
 		increaseBoardActualPropValue({

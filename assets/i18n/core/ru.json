@@ -86,6 +86,9 @@
 
   "chaosToken.remove.confirm.return": "К проверке",
 
+  "chaosBag.clear.title": "Очистить мешок хаоса?",
+  "chaosBag.clear.text": "Это действие удалит все жетоны из мешка хаоса",
+
   "Modify tokens": "Изменять значения жетонов",
 
   "board.help.press.chaosBag": "Показывает содержимое мешка хаоса.",

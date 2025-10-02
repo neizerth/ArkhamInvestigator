@@ -66,7 +66,7 @@ export const ChaosBagFillPage = () => {
 	const title = story ? story.name : "Fill Chaos Bag";
 
 	return (
-		<C.Container title={title}>
+		<C.Container title={title} onClose={back}>
 			<C.Content>
 				<C.Select
 					data={data}
