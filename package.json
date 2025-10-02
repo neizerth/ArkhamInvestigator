@@ -1,7 +1,7 @@
 {
   "name": "arkham-investigator",
   "main": "expo-router/entry",
-  "version": "2.0.7",
+  "version": "2.0.8",
   "scripts": {
     "start": "expo start",
     "reset-project": "node ./scripts/reset-project.js",
@@ -9,6 +9,7 @@
     "a:p": "npm run prebuild:android",
     "a:pd": "npm run prebuild:android:dev",
     "i": "npm run ios",
+    "i:d": "npm run ios:device",
     "android": "expo run:android",
     "ios": "expo run:ios",
     "ios:device": "expo run:ios --device",
@@ -30,7 +31,9 @@
     "eas:android": "npm run version:increment && npm run prebuild:android && eas build -p android",
     "eas:apk": "npm run eas:android -- --profile apk",
     "build:apk": "npm run eas:apk -- --local",
-    "build:android": "npm run eas:android -- --local",
+    "build:android": "npm run npm run eas:android -- --local",
+    "build:ios": "npm run prebuild:ios && eas build -p ios --local",
+    "submit:ios": "eas submit -p ios",
     "setup:font": "tsx ./cli/update-icon-font.ts",
     "setup": "npm run setup:font",
     "version:increment": "tsx ./cli/increment-version.ts",
