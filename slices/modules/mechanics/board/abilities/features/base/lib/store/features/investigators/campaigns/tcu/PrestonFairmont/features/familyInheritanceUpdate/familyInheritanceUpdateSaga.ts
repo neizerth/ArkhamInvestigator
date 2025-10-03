@@ -11,7 +11,6 @@ import { put, select, takeEvery } from "redux-saga/effects";
 const abilityId = AbilityCode.PrestonFairmont.familyInheritance;
 
 function* worker({ payload }: ReturnType<typeof newTurnStarted>) {
-	console.log("Family Inheritance Update");
 	const { boardId } = payload;
 	const boardSelector = selectBoardById(boardId);
 	const board: ReturnType<typeof boardSelector> = yield select(boardSelector);
@@ -29,10 +28,6 @@ function* worker({ payload }: ReturnType<typeof newTurnStarted>) {
 
 	const currentValue: ReturnType<typeof valueSelector> =
 		yield select(valueSelector);
-
-	console.log({
-		currentValue,
-	});
 
 	yield put(
 		setBoardAbilityValue({

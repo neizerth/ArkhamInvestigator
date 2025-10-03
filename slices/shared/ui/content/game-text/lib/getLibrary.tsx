@@ -121,10 +121,6 @@ export const getLibrary = ({
 			style: mergedStyles.flat(),
 		});
 
-		if (type === "zcg") {
-			console.log("zcg", mergedStyles);
-		}
-
 		return (
 			<C.Word key={v4()} style={componentStyles?.word}>
 				{content}

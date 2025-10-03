@@ -39,7 +39,6 @@ export function useValueSet<T>(props: BaseListProps<T>) {
 		const minDelta = 1;
 
 		if (delta < minDelta) {
-			// console.log("delta < minDelta", delta, minDelta);
 			return;
 		}
 
