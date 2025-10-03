@@ -1,11 +1,4 @@
-import {
-	CrimsonPro,
-	EBGaramond,
-	FangSong,
-	SanCn,
-	SourceHanSansCN,
-	Yoon,
-} from "@assets/fonts";
+import { CrimsonPro, EBGaramond, FangSong, Yoon } from "@assets/fonts";
 import { color, font } from "@shared/config";
 import { getKeyConfig } from "@shared/lib";
 import type { ExpressionDisplayProps } from "@widgets/game/skill-check";
@@ -35,26 +28,7 @@ export const getExpressionDisplayStyle = (
 		"zh-cn": zhConfig,
 	});
 
-	const zhValueConfig = {
-		fontFamily: SourceHanSansCN.bold,
-	};
-
-	const getValueStyle = getKeyConfig({
-		default: {
-			fontFamily: CrimsonPro.bold,
-		},
-		ru: {
-			fontFamily: EBGaramond.bold,
-		},
-		ko: {
-			fontFamily: SanCn.bold,
-		},
-		zh: zhValueConfig,
-		"zh-cn": zhValueConfig,
-	});
-
 	const textStyle = getTextStyle(language);
-	const valueStyle = getValueStyle(language);
 	return {
 		expressionStyle: {
 			gap: 2,
@@ -63,6 +37,5 @@ export const getExpressionDisplayStyle = (
 			fontSize: font.size.small,
 		},
 		textStyle,
-		valueStyle,
 	};
 };

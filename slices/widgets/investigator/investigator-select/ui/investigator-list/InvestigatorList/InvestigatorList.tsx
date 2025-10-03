@@ -2,9 +2,16 @@ import { REMOVE_CLIPPED_SUBVIEWS } from "@shared/config";
 import type { Defined } from "@shared/model";
 import type { InvestigatorSignatureGroup } from "arkham-investigator-data";
 import { useCallback } from "react";
-import type { ListRenderItemInfo, SectionListProps } from "react-native";
+import {
+	type ListRenderItemInfo,
+	Platform,
+	type SectionListProps,
+} from "react-native";
 import { useImageSize } from "../../../lib";
 import * as C from "./InvestigatorList.components";
+
+const ios = Platform.OS === "ios";
+const removeClippedSubviews = REMOVE_CLIPPED_SUBVIEWS && !ios;
 
 type OmitProps = "key" | "numColumns" | "renderItem" | "keyExtractor";
 
@@ -87,7 +94,7 @@ export const InvestigatorList = ({
 			renderItem={renderItem}
 			getItemLayout={getItemLayout}
 			renderSectionHeader={renderSectionHeader}
-			removeClippedSubviews={REMOVE_CLIPPED_SUBVIEWS}
+			removeClippedSubviews={removeClippedSubviews}
 		/>
 	);
 };

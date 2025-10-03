@@ -44,9 +44,14 @@ export const SetupButton: typeof TopButton = styled(TopButton)`
 	padding: ${size.gap.small}px ${size.gap.default}px;
 `;
 
-export const ClearButton: typeof TopButton = styled(TopButton)`
+export const ClearButton: typeof TopButton = styled(TopButton).attrs({
+	iconStyle: {
+		textAlign: "center",
+	},
+})`
 	background-color: ${color.dark20};
 	padding: ${size.gap.small}px ${size.gap.default}px;
+	justify-content: center;
 `;
 
 export const Actions: typeof Row = styled(Row)`

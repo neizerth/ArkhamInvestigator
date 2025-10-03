@@ -20,7 +20,6 @@ function* worker({ payload }: ReturnType<typeof chaosBagRevealEnd>) {
 	const { boardId } = payload;
 
 	if (!boardId) {
-		console.log("no boardId", boardId);
 		return;
 	}
 

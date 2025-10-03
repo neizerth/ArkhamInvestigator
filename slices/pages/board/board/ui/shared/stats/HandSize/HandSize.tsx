@@ -42,6 +42,7 @@ export const HandSize = ({
 			{showBaseDiff && <C.BaseHandSize />}
 			<C.Content style={contentContainerStyle}>
 				<C.Picker
+					key={data.length}
 					value={value}
 					data={data}
 					onValueChanged={onChange}

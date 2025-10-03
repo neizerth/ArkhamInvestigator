@@ -16,7 +16,6 @@ export const mergeTranslations = (t1: Translation, t2: Translation) => {
 			const skip = pluralKey && sourcePluralKeys.includes(pluralKey.base);
 
 			if (skip) {
-				// console.log("skip key", key);
 				return acc;
 			}
 

@@ -2,6 +2,7 @@ import { spawn } from "redux-saga/effects";
 import { boardAbilitiesMechanicsFeatures } from "./board/abilities/features/sagas";
 import { boardEntityMechanicsSaga } from "./board/base/entities/lib/store/sagas";
 import { boardFeatureMechanicsSaga } from "./board/base/features/sagas";
+import { phaseSaga } from "./phase/entities/sagas";
 import { rulesSaga } from "./rules/sagas";
 
 export function* mechanicsSaga() {
@@ -12,4 +13,5 @@ export function* mechanicsSaga() {
 	yield spawn(boardFeatureMechanicsSaga);
 
 	yield spawn(rulesSaga);
+	yield spawn(phaseSaga);
 }
