@@ -7,7 +7,7 @@ import {
 import type { BoardId } from "@modules/board/base/shared/model";
 import { createBoardHistoryGroup } from "@modules/board/history/shared/lib";
 import type { AppThunk } from "@shared/model";
-import { startNewTurn } from "../common/startNewTurn";
+import { startNewTurn } from "../../features";
 import { giveUpkeepResourceToBoard } from "../upkeep";
 
 export const makeAction =
@@ -42,6 +42,6 @@ export const makeAction =
 			);
 			return;
 		}
-		dispatch(startNewTurn(boardId));
+		dispatch(startNewTurn({ boardId }));
 		dispatch(giveUpkeepResourceToBoard(boardId));
 	};
