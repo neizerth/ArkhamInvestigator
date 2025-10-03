@@ -20,6 +20,7 @@ module.exports = {
       bundleIdentifier: packageId,
       infoPlist: {
         UIBackgroundModes: ["audio"],
+        ITSAppUsesNonExemptEncryption: false,
       },
     },
     android: {
