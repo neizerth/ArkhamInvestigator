@@ -77,8 +77,8 @@ export const TargetImage: FC<ImageWithFactionProps> = styled(Image)`
 export const Text: typeof GameText = styled(GameText).attrs({
 	componentStyles: {
 		icon: {
-			lineHeight: 14,
-			marginTop: -16,
+			top: -2,
+			lineHeight: 16,
 		},
 	},
 })`

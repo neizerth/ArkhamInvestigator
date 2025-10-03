@@ -1,8 +1,10 @@
 import { FactionCardMemo as FactionCard } from "@modules/faction/shared/ui/faction-card";
-import { size } from "@shared/config";
+import { size, statusBarHeight } from "@shared/config";
 import { Outside as BaseOutside } from "@shared/ui";
 import { View } from "react-native";
 import styled from "styled-components/native";
+
+const paddingBlock = Math.max(size.gap.xxl, statusBarHeight);
 
 export const Outside = styled(BaseOutside)`
   z-index: 1;
@@ -22,7 +24,7 @@ export const Content: typeof View = styled(View)`
   justify-content: center;
   width: 100%;
   max-width: 500px;
-  padding: ${size.gap.xxl}px ${size.gap.default}px;
+  padding: ${paddingBlock}px ${size.gap.default}px;
 `;
 
 export const Sections: typeof View = styled(View).attrs({
