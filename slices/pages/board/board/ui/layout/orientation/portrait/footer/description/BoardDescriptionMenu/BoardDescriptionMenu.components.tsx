@@ -11,7 +11,7 @@ export const Container: typeof Row = styled(Row)`
 
 export const Button: typeof IconButton = styled(IconButton).attrs({
 	iconStyle: {
-		color: color.dark10,
+		color: color.dark30,
 		fontSize: 30,
 	},
 })`
