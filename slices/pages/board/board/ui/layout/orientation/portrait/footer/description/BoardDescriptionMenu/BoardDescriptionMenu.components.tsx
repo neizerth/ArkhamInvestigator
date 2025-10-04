@@ -26,7 +26,7 @@ export const Hide: FC<DefinedIconButtonProps> = styled(Button).attrs({
 	icon: "right-arrow",
 	iconStyle: {
 		color: color.dark20,
-		fontSize: 36,
+		fontSize: 30,
 	},
 })`
     transform: rotate(90deg);
