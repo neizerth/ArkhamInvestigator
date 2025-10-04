@@ -20,6 +20,7 @@ export type BoardState = {
 	saveTrauma: boolean;
 	trackHandSize: boolean;
 	showDoom: boolean;
+	showClues: boolean;
 	showScenarioClues: boolean;
 	showScenarioResources: boolean;
 	showInvestigatorDoom: boolean;
@@ -52,6 +53,7 @@ const initialState: BoardState = {
 	saveTrauma: true,
 	trackHandSize: false,
 	showDoom: true,
+	showClues: true,
 	showScenarioClues: true,
 	showScenarioResources: false,
 	showInvestigatorDoom: false,
@@ -100,6 +102,7 @@ export const {
 	setResources,
 	setTrackHandSize,
 	setShowDoom,
+	setShowClues,
 	setShowScenarioClues,
 	setShowScenarioResources,
 	setShowInvestigatorDoom,
@@ -150,6 +153,7 @@ export const {
 	selectTrackXP,
 	selectDoom,
 	selectClues,
+	selectShowClues,
 	selectResources,
 	selectTrackHandSize,
 	selectShowDoom,

@@ -1,5 +1,6 @@
 import {
 	selectBoardProp,
+	selectShowClues,
 	selectShowInvestigatorDoom,
 	selectTrackHandSize,
 } from "@modules/board/base/shared/lib";
@@ -17,6 +18,7 @@ export type RightSidebarProps = ViewProps;
 export const RightSidebar = ({ ...props }: RightSidebarProps) => {
 	const showHandSize = useAppSelector(selectTrackHandSize);
 	const showDoom = useAppSelector(selectShowInvestigatorDoom);
+	const showClues = useAppSelector(selectShowClues);
 	const { light } = useAppSelector(
 		selectBoardProp({
 			boardId: "current",
@@ -38,7 +40,7 @@ export const RightSidebar = ({ ...props }: RightSidebarProps) => {
 					{showHandSize && <HandSize />}
 				</C.SideGroup>
 				<C.MainGroup {...sideProps} inline={inline}>
-					<C.Clues light={light} />
+					{showClues && <C.Clues light={light} />}
 					<C.Resources />
 					{showDoom && xs && <C.Doom />}
 				</C.MainGroup>
