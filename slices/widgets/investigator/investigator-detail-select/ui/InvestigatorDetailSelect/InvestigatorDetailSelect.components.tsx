@@ -21,10 +21,10 @@ export const Content: typeof View = styled(View)`
   flex: 1;
   position: relative;
   z-index: 2;
-  justify-content: center;
+  justify-content: flex-end;
   width: 100%;
   max-width: 500px;
-  padding: ${paddingBlock}px ${size.gap.default}px;
+  padding: ${paddingBlock}px ${size.gap.default}px 50px;
 `;
 
 export const Sections: typeof View = styled(View).attrs({
