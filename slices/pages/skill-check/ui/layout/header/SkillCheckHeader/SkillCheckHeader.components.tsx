@@ -2,7 +2,12 @@ import { Copasetic } from "@assets/fonts";
 import { IconButton } from "@shared/ui";
 
 import { TouchableOpacity } from "@modules/core/touch/shared/ui";
-import { color, size, statusBarHeight } from "@shared/config";
+import {
+	IOS_WITH_GESTURE_CONTROL,
+	color,
+	size,
+	statusBarHeight,
+} from "@shared/config";
 import { Row as BaseRow, Icon, UnscaledText } from "@shared/ui";
 import type { FC } from "react";
 import { View, type ViewProps } from "react-native";
@@ -10,8 +15,10 @@ import styled, { css } from "styled-components/native";
 import { skillCheckColor } from "../../../../config";
 import TopRule from "./images/rule-top.svg";
 
+const gap = IOS_WITH_GESTURE_CONTROL ? size.gap.default : 0;
+
 export const Container: typeof View = styled(View)`
-  padding: ${statusBarHeight}px ${size.gap.default}px 0;
+  padding: ${statusBarHeight + gap}px ${size.gap.default}px 0;
 `;
 
 type ContentProps = ViewProps & {
