@@ -3,7 +3,11 @@ import {
 	factionDescriptionRelativeOffsets,
 	factionDescriptionSize,
 } from "@modules/faction/shared/ui";
-import { CAN_ALWAYS_SHOW_GAME_TEXT, size } from "@shared/config";
+import {
+	CAN_ALWAYS_SHOW_GAME_TEXT,
+	IOS_WITH_GESTURE_CONTROL,
+	size,
+} from "@shared/config";
 import type { Box } from "@shared/model";
 import { Platform } from "react-native";
 import { DEFAULT_PORTRAIT_DESCRIPTION_HEIGHT } from "../../config";
@@ -35,7 +39,7 @@ export const getDescriptionHeight = ({
 
 	const offsetTop = Math.round((imageHeight * offsets.paddingTop) / 100);
 
-	const platformGap = ios ? 15 : 0;
+	const platformGap = IOS_WITH_GESTURE_CONTROL ? 15 : 0;
 
 	const gap = offsetTop + size.gap.default + platformGap;
 
