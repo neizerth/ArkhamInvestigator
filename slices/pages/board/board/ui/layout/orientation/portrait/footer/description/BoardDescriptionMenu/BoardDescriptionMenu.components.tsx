@@ -11,7 +11,7 @@ export const Container: typeof Row = styled(Row)`
 
 export const Button: typeof IconButton = styled(IconButton).attrs({
 	iconStyle: {
-		color: color.dark10,
+		color: color.dark30,
 		fontSize: 30,
 	},
 })`
@@ -26,7 +26,7 @@ export const Hide: FC<DefinedIconButtonProps> = styled(Button).attrs({
 	icon: "right-arrow",
 	iconStyle: {
 		color: color.dark20,
-		fontSize: 36,
+		fontSize: 30,
 	},
 })`
     transform: rotate(90deg);
