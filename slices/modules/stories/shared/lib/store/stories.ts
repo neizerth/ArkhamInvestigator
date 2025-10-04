@@ -10,6 +10,7 @@ export type StoriesState = {
 	storyTypeFilter: string;
 	referenceCardCode: string | null;
 	showReferenceBackText: boolean;
+	storyDifficultyId: string | null;
 };
 
 const initialState: StoriesState = {
@@ -20,6 +21,7 @@ const initialState: StoriesState = {
 	storyTypeFilter: "campaign",
 	referenceCardCode: null,
 	showReferenceBackText: false,
+	storyDifficultyId: null,
 };
 
 export const stories = createSlice({
@@ -35,6 +37,7 @@ export const {
 	setStoryTypeFilter,
 	setReferenceCardCode,
 	setShowReferenceBackText,
+	setStoryDifficultyId,
 } = stories.actions;
 export const {
 	selectStories,
@@ -44,6 +47,7 @@ export const {
 	selectStoryTypeFilter,
 	selectReferenceCardCode,
 	selectShowReferenceBackText,
+	selectStoryDifficultyId,
 } = stories.selectors;
 
 export default stories.reducer;

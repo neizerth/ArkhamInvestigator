@@ -1,13 +1,14 @@
+import {
+	ScenarioDifficultySelect,
+	ScenarioDifficultyTokens,
+} from "@modules/stories/entities/ui";
 import { color, font, size } from "@shared/config";
-import { Button } from "@shared/ui";
+import { Checkbox as BaseCheckbox, Button, Row } from "@shared/ui";
 import { GameText } from "@shared/ui";
-import { Select as BaseSelect } from "@shared/ui";
 import { Dimensions, View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import styled from "styled-components/native";
-import { StoreTabs } from "../../../../navigation/store-tabs";
 import { StoreCheckbox } from "../../../store-checkbox";
-import { StoreSelect as BaseStoreSelect } from "../../../store-select";
 import { ReferenceCardSelect } from "../ReferenceCardSelect";
 import { ReferenceStorySelect } from "../ReferenceStorySelect";
 
@@ -42,17 +43,14 @@ export const Checkbox: typeof StoreCheckbox = styled(StoreCheckbox)`
   justify-content: flex-end;
 `;
 
-export const SelectGroup: typeof View = styled(View)`
-  
+export const Check: typeof BaseCheckbox = styled(BaseCheckbox)`
+  flex: 1;
+  justify-content: flex-end;
 `;
 
-export const Tabs: typeof StoreTabs = styled(StoreTabs)`
-  
-`;
-
-export const Select: typeof BaseSelect = styled(BaseSelect)`
-  background-color: ${color.dark30};
-  border: 1px solid ${color.dark20};
+export const DifficultyTokens: typeof ScenarioDifficultyTokens = styled(
+	ScenarioDifficultyTokens,
+)`
 `;
 
 export const StorySelect: typeof ReferenceStorySelect = styled(
@@ -65,11 +63,9 @@ export const CardSelect: typeof ReferenceCardSelect = styled(
 )`
 `;
 
-export const StoreSelect: typeof BaseStoreSelect = styled(BaseStoreSelect)`
-  background-color: ${color.dark30};
-  border: 1px solid ${color.dark20};
-  border-top-left-radius: 0px;
-  border-top-right-radius: 0px;
+export const DifficultySelect: typeof ScenarioDifficultySelect = styled(
+	ScenarioDifficultySelect,
+)`
 `;
 
 export const ReferenceText: typeof GameText = styled(GameText)`
@@ -83,7 +79,7 @@ export const ReferencePreview: typeof View = styled(View)`
   border-radius: ${size.borderRadius.default}px;
 `;
 
-export const Actions: typeof View = styled(View)`
+export const Actions: typeof Row = styled(Row)`
   padding: 0 ${size.gap.small}px;
 `;
 
@@ -95,5 +91,6 @@ export const Close: typeof Button = styled(Button).attrs({
 		color: color.text,
 	},
 })`
+  flex: 1;
   background-color: ${color.light10};
 `;

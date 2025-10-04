@@ -1,20 +1,20 @@
 import { DEFAULT_LANGUAGE } from "@modules/core/i18n/shared/config";
 import { selectCurrentLanguage } from "@modules/core/i18n/shared/lib";
+import { fillChaosBagDifficulty } from "@modules/stories/entities/lib";
 import {
 	selectReferenceCard,
 	selectReferenceCardText,
 	selectShowFanMadeStories,
-	selectShowReferenceBackText,
 	selectShowTranslatedOnlyStories,
+	selectStoryDifficulty,
 	setShowFanMadeStories,
-	setShowReferenceBackText,
 	setShowTranslatedOnlyStories,
 } from "@modules/stories/shared/lib";
-import { useAppSelector } from "@shared/lib";
+import { useAppDispatch, useAppSelector, useBoolean } from "@shared/lib";
+import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import type { ViewProps } from "react-native";
 import * as C from "./ReferenceSelect.components";
-import { useReferenceCardData } from "./hooks";
 
 export type ReferenceSelectProps = ViewProps & {
 	onClose?: () => void;
@@ -23,15 +23,26 @@ export const ReferenceSelect = ({
 	onClose,
 	...props
 }: ReferenceSelectProps) => {
+	const dispatch = useAppDispatch();
 	const language = useAppSelector(selectCurrentLanguage);
 	const referenceCard = useAppSelector(selectReferenceCard);
 	const referenceCardText = useAppSelector(selectReferenceCardText);
 
-	const referenceTexts = useReferenceCardData();
+	const [fillChaosBag, setFillChaosBag] = useBoolean(false);
+
+	const difficulty = useAppSelector(selectStoryDifficulty);
 
 	const { t } = useTranslation();
 
 	const isDefaultLanguage = language === DEFAULT_LANGUAGE;
+
+	const close = useCallback(() => {
+		if (fillChaosBag && difficulty) {
+			const difficultyId = difficulty.id;
+			dispatch(fillChaosBagDifficulty({ difficultyId }));
+		}
+		onClose?.();
+	}, [dispatch, fillChaosBag, onClose, difficulty]);
 
 	return (
 		<C.Container {...props}>
@@ -54,13 +65,16 @@ export const ReferenceSelect = ({
 					<C.ScrollArea>
 						<C.StorySelect />
 						<C.CardSelect />
-						{referenceCard && (
-							<C.StoreSelect
-								label={t`Difficulty`}
-								data={referenceTexts}
-								actionCreator={setShowReferenceBackText}
-								selector={selectShowReferenceBackText}
-							/>
+						{referenceCard && <C.DifficultySelect />}
+						{difficulty && (
+							<>
+								<C.DifficultyTokens />
+								<C.Check
+									label={t`Fill Chaos Bag`}
+									checked={fillChaosBag}
+									onPress={setFillChaosBag.toggle}
+								/>
+							</>
 						)}
 
 						{referenceCardText && (
@@ -73,7 +87,7 @@ export const ReferenceSelect = ({
 			</C.Body>
 			{onClose && (
 				<C.Actions>
-					<C.Close text={t`Continue`} icon="check" onPress={onClose} />
+					<C.Close text={t`Continue`} icon="check" onPress={close} />
 				</C.Actions>
 			)}
 		</C.Container>
