@@ -83,6 +83,7 @@ export function BaseList<T>(baseProps: BaseListProps<T>) {
 			keyExtractor={keyExtractor}
 			snapToOffsets={snapToOffsets}
 			showsVerticalScrollIndicator={false}
+			scrollsToTop={false}
 			removeClippedSubviews={REMOVE_CLIPPED_SUBVIEWS}
 		/>
 	);
