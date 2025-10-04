@@ -21,10 +21,10 @@ export const defaultComponentStyles: ComponentStyleMap = {
 	icon: {
 		fontSize: 14,
 		lineHeight: 16,
-		top: -2,
+		top: -1,
 	},
 	icon_bullet: {
-		top: -4,
+		top: -6,
 	},
 	iconToken: {},
 	paragraph: {},
