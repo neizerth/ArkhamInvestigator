@@ -19,6 +19,7 @@ type Options = {
 };
 
 const ios = Platform.OS === "ios";
+const platformGap = IOS_WITH_GESTURE_CONTROL ? size.gap.medium : 0;
 
 export const getDescriptionHeight = ({
 	showGameText,
@@ -38,8 +39,6 @@ export const getDescriptionHeight = ({
 	const imageHeight = width / factionDescriptionSize.ratio;
 
 	const offsetTop = Math.round((imageHeight * offsets.paddingTop) / 100);
-
-	const platformGap = IOS_WITH_GESTURE_CONTROL ? 15 : 0;
 
 	const gap = offsetTop + size.gap.default + platformGap;
 
