@@ -1,5 +1,6 @@
 import { clearImageCache } from "@modules/core/app/entities/clearImageCache";
 import { restartApp } from "@modules/core/app/entities/restartApp";
+import { reloadAssets } from "@modules/core/app/features/reload-assets";
 import { useAppDispatch } from "@shared/lib";
 import { useTranslation } from "react-i18next";
 import type { ViewProps } from "react-native";
@@ -19,6 +20,10 @@ export const AppDiagnostics = (props: AppDiagnosticsProps) => {
 		dispatch(restartApp());
 	};
 
+	const reloadData = () => {
+		dispatch(reloadAssets());
+	};
+
 	return (
 		<C.Container {...props}>
 			<C.Section title={t`Diagnostics`}>
@@ -27,6 +32,13 @@ export const AppDiagnostics = (props: AppDiagnosticsProps) => {
 						text={t`Clear image cache`}
 						icon="image"
 						onPress={clearCache}
+					/>
+				</C.Row>
+				<C.Row>
+					<C.Button
+						text={t`Reload downloaded assets`}
+						icon="download"
+						onPress={reloadData}
 					/>
 				</C.Row>
 				<C.Row>
