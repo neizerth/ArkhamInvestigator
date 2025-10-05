@@ -1,27 +1,19 @@
-import { useAppDispatch } from "@shared/lib";
-import type { Faction, FactionFilterType } from "@shared/model";
+import { factionFilterTypes } from "@modules/faction/shared/config";
+import type { FactionFilterType } from "@shared/model";
 import { useCallback } from "react";
 import type { ViewProps } from "react-native";
-import { FACTION_SELECT_VALUES } from "../../config";
-import { openSpoilerWarning } from "../../lib";
 import * as C from "./FactionSelect.components";
-
-export type FactionSelectValue = Faction | "spoiler";
 
 export type FactionSelectProps = ViewProps & {
 	onChange?: (value: FactionFilterType) => void;
 	value?: FactionFilterType;
 };
 
-const values: FactionFilterType[] = [...FACTION_SELECT_VALUES, "spoiler"];
-
 export const FactionSelect = ({
 	value,
 	onChange,
 	...props
 }: FactionSelectProps) => {
-	const dispatch = useAppDispatch();
-
 	const onPress = useCallback(
 		(item: FactionFilterType) => () => {
 			if (!onChange) {
@@ -30,19 +22,15 @@ export const FactionSelect = ({
 			if (item === value) {
 				return false;
 			}
-			if (item === "spoiler") {
-				dispatch(openSpoilerWarning());
-				return;
-			}
 			onChange(item);
 		},
-		[value, onChange, dispatch],
+		[value, onChange],
 	);
 
 	return (
 		<C.Container {...props}>
 			<C.Content>
-				{values.map((item, index) => (
+				{factionFilterTypes.map((item, index) => (
 					<C.Button
 						key={item}
 						value={item}

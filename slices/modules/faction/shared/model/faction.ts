@@ -13,3 +13,5 @@ export type Faction =
 	| "guardian";
 
 export type FactionImages = Record<Faction, ImageRequireSource>;
+
+export type FactionFilterType = Faction | "spoiler";

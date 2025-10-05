@@ -6,8 +6,10 @@ import type { InvestigatorSignatureGroup } from "arkham-investigator-data";
 import { propEq } from "ramda";
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
+import { GestureDetector } from "react-native-gesture-handler";
 import { useColumnsCount } from "../../lib";
 import * as C from "./InvestigatorSelect.components";
+import { useFactionSwipes } from "./useFactionSwipes";
 
 export const InvestigatorSelect = () => {
 	const dispatch = useAppDispatch();
@@ -15,6 +17,8 @@ export const InvestigatorSelect = () => {
 	const data = useAppSelector(selectSignatureGroups);
 	const { t } = useTranslation();
 	const columns = useColumnsCount();
+
+	const gesture = useFactionSwipes();
 
 	const onChange = useCallback(
 		(item: InvestigatorSignatureGroup) =>
@@ -45,12 +49,14 @@ export const InvestigatorSelect = () => {
 	];
 
 	return (
-		<C.Container>
-			<C.FactionSelect value={factionFilter} />
-			<C.Content>
-				<C.List sections={sections} onChange={onChange} />
-			</C.Content>
-			<C.Footer />
-		</C.Container>
+		<GestureDetector gesture={gesture}>
+			<C.Container>
+				<C.FactionSelect value={factionFilter} />
+				<C.Content>
+					<C.List sections={sections} onChange={onChange} />
+				</C.Content>
+				<C.Footer />
+			</C.Container>
+		</GestureDetector>
 	);
 };
