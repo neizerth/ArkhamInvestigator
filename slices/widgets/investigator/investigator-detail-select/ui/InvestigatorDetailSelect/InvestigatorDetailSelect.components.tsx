@@ -21,7 +21,7 @@ export const Content: typeof View = styled(View)`
   flex: 1;
   position: relative;
   z-index: 2;
-  justify-content: flex-end;
+  justify-content: flex-start;
   width: 100%;
   max-width: 500px;
   padding: ${paddingBlock}px ${size.gap.default}px 50px;
