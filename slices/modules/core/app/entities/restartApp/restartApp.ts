@@ -1,3 +1,3 @@
 import { createAction } from "@reduxjs/toolkit";
 
-export const restartApp = createAction("app/restart");
+export const restartApp = createAction<void>("app/restart");
