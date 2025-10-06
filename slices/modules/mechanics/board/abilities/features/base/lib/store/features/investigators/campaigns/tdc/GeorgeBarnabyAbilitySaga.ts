@@ -23,6 +23,7 @@ function* worker({ payload }: ReturnType<typeof boardAbilityValueSet>) {
 
 	const diff = value - prevValue;
 
+	const initialHandSize = board.initialValue.handSize + diff;
 	const baseHandSize = board.baseValue.handSize + diff;
 	const handSize = board.value.handSize + diff;
 
@@ -37,7 +38,7 @@ function* worker({ payload }: ReturnType<typeof boardAbilityValueSet>) {
 					handSize: baseHandSize,
 				},
 				initialValue: {
-					handSize: baseHandSize,
+					handSize: initialHandSize,
 				},
 			},
 			history: {
