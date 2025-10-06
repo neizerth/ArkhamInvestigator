@@ -29,11 +29,13 @@ function* worker({ payload }: ReturnType<typeof newTurnStarted>) {
 	const currentValue: ReturnType<typeof valueSelector> =
 		yield select(valueSelector);
 
+	const value = Math.max(currentValue, 4);
+
 	yield put(
 		setBoardAbilityValue({
 			boardId,
 			abilityId,
-			value: currentValue + 4,
+			value,
 		}),
 	);
 }
