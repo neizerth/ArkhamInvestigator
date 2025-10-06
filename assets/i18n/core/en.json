@@ -63,6 +63,7 @@
   "board.help.special.lola": "Tap on the name to change Lola's current role (faction)",
   "board.help.special.daniela": "Tap [claws] if an enemy attacked you. This will change the value of [elder_sign] for a successful test.",
   "board.help.special.kymani": "Tap [exhaust] if there is an exhausted enemy at your location. This will change the value of [elder_sign] for a successful test.",
+  "board.help.special.preston": "Hold down on the family inheritance counter to transfer its value to the resources counter",
 
   "board.help.chaosBag": "Tap and hold on a skill value to reveal a chaos token",
   "board.help.chaosBag.returnAll": "Return all revealed tokens to the chaos bag",

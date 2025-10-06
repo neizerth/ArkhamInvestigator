@@ -1,5 +1,5 @@
 import { InvesigatorCode } from "@modules/mechanics/investigator/entities/config";
-import { selectInvestigatorByCode } from "@modules/signature/base/shared/lib";
+import { selectInvestigatorByCode as selectByCode } from "@modules/signature/base/shared/lib";
 import { useAppSelector } from "@shared/lib";
 import { Bold, Paragraph, Text, Title } from "@shared/ui";
 import { ContentPage } from "@widgets/content/content-page";
@@ -9,14 +9,13 @@ import * as C from "./HelpPage.components";
 
 export const HelpPage = () => {
 	const { t } = useTranslation();
-	const LolaHayes = useAppSelector(
-		selectInvestigatorByCode(InvesigatorCode.LolaHayes),
-	);
+	const LolaHayes = useAppSelector(selectByCode(InvesigatorCode.LolaHayes));
 	const DanielaReyes = useAppSelector(
-		selectInvestigatorByCode(InvesigatorCode.DanielaReyes),
+		selectByCode(InvesigatorCode.DanielaReyes),
 	);
-	const KymaniJones = useAppSelector(
-		selectInvestigatorByCode(InvesigatorCode.KymaniJones),
+	const KymaniJones = useAppSelector(selectByCode(InvesigatorCode.KymaniJones));
+	const PrestonFairmont = useAppSelector(
+		selectByCode(InvesigatorCode.PrestonFairmont),
 	);
 	return (
 		<ContentPage title="Help">
@@ -267,6 +266,14 @@ export const HelpPage = () => {
 					<Bold>{KymaniJones?.name}</Bold>
 				</C.ListTitle>
 				<C.IconText value={t`board.help.special.kymani`} />
+			</View>
+
+			<View>
+				<C.ListTitle>
+					<C.Icon icon="rogue" />
+					<Bold>{PrestonFairmont?.name}</Bold>
+				</C.ListTitle>
+				<C.IconText value={t`board.help.special.preston`} />
 			</View>
 		</ContentPage>
 	);
