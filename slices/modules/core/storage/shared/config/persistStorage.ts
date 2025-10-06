@@ -4,5 +4,5 @@ export const persistStorageConfig = {
 	key: "root",
 	keyPrefix: "",
 	storage: AsyncStorage,
-	version: 20,
+	version: 21,
 };

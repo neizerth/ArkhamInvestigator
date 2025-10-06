@@ -2,6 +2,7 @@ import {
 	selectBoardProp,
 	selectShowClues,
 	selectShowInvestigatorDoom,
+	selectShowResources,
 	selectTrackHandSize,
 } from "@modules/board/base/shared/lib";
 import { useAppSelector } from "@shared/lib";
@@ -19,6 +20,14 @@ export const RightSidebar = ({ ...props }: RightSidebarProps) => {
 	const showHandSize = useAppSelector(selectTrackHandSize);
 	const showDoom = useAppSelector(selectShowInvestigatorDoom);
 	const showClues = useAppSelector(selectShowClues);
+	const showResources = useAppSelector(selectShowResources);
+
+	const showSideDoom = showDoom && !xs;
+	const showMainDoom = showDoom && xs;
+
+	const showMainGroup = showClues || showResources || showMainDoom;
+	const showSideGroup = showSideDoom || showHandSize;
+
 	const { light } = useAppSelector(
 		selectBoardProp({
 			boardId: "current",
@@ -28,22 +37,26 @@ export const RightSidebar = ({ ...props }: RightSidebarProps) => {
 
 	const inline = showDoom || showHandSize;
 
-	const sideProps = {
+	const groupProps = {
 		compact: showHandSize,
 	};
 
 	return (
 		<Sidebar {...props}>
-			<C.Container {...sideProps}>
-				<C.SideGroup {...sideProps} inline={inline}>
-					{showDoom && !xs && <C.Doom inline={showHandSize} />}
-					{showHandSize && <HandSize />}
-				</C.SideGroup>
-				<C.MainGroup {...sideProps} inline={inline}>
-					{showClues && <C.Clues light={light} />}
-					<C.Resources />
-					{showDoom && xs && <C.Doom />}
-				</C.MainGroup>
+			<C.Container {...groupProps}>
+				{showSideGroup && (
+					<C.SideGroup {...groupProps} inline={inline}>
+						{showSideDoom && <C.Doom inline={showHandSize} />}
+						{showHandSize && <HandSize />}
+					</C.SideGroup>
+				)}
+				{showMainGroup && (
+					<C.MainGroup {...groupProps} inline={inline}>
+						{showClues && <C.Clues light={light} />}
+						{showResources && <C.Resources />}
+						{showMainDoom && <C.Doom />}
+					</C.MainGroup>
+				)}
 			</C.Container>
 		</Sidebar>
 	);

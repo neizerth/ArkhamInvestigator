@@ -175,6 +175,20 @@ export const SettingsPage = () => {
 				<C.Section title={t`Investigator`}>
 					<C.Row>
 						<C.Checkbox
+							label="Clues"
+							selector={B.selectShowClues}
+							actionCreator={B.setShowClues}
+						/>
+					</C.Row>
+					<C.Row>
+						<C.Checkbox
+							label="Resources"
+							selector={B.selectShowResources}
+							actionCreator={B.setShowResources}
+						/>
+					</C.Row>
+					<C.Row>
+						<C.Checkbox
 							label="Hand Size"
 							selector={B.selectTrackHandSize}
 							actionCreator={B.setTrackHandSize}
