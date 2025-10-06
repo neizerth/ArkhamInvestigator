@@ -56,6 +56,9 @@ export const BoardDescription = ({ ...props }: BoardDescriptionProps) => {
 	const showFlavor = investigator.flavor && (!show || showDescription);
 	const unit = showDescription ? vw : textUnit;
 
+	const showTraits = !show || showDescription;
+	const compactTraits = !show && !showDescription;
+
 	return (
 		<C.Container {...props} style={[props.style, containerStyle]}>
 			<C.Content>
@@ -65,11 +68,13 @@ export const BoardDescription = ({ ...props }: BoardDescriptionProps) => {
 					<C.Background faction={faction} width={screen.width}>
 						<C.DescriptionContent>
 							<C.TextContent>
-								<C.Traits
-									unit={vw}
-									investigator={investigator}
-									compact={showDescription}
-								/>
+								{showTraits && (
+									<C.Traits
+										unit={vw}
+										investigator={investigator}
+										compact={compactTraits}
+									/>
+								)}
 								<C.Description style={descriptionStyle}>
 									<C.Text investigator={investigator} unit={unit} />
 									{showFlavor && (
