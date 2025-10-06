@@ -9,5 +9,5 @@ export const statusBarHeight = (() => {
 		return StatusBar.currentHeight || DEFAULT_STATUS_BAR_HEIGHT;
 	}
 
-	return Math.max(getHeight(), DEFAULT_STATUS_BAR_HEIGHT);
+	return getHeight();
 })();

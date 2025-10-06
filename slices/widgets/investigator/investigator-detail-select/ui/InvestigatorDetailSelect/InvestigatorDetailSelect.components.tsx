@@ -24,7 +24,7 @@ export const Content: typeof View = styled(View)`
   justify-content: flex-start;
   width: 100%;
   max-width: 500px;
-  padding: ${paddingBlock}px ${size.gap.default}px 50px;
+  padding: ${statusBarHeight + size.gap.default}px ${size.gap.default}px 50px;
 `;
 
 export const Sections: typeof View = styled(View).attrs({
