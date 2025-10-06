@@ -25,7 +25,7 @@ export const ChangeInvestigator: typeof Button = styled(Button)`
 export const Hide: FC<DefinedIconButtonProps> = styled(Button).attrs({
 	icon: "right-arrow",
 	iconStyle: {
-		color: color.dark20,
+		color: color.dark30,
 		fontSize: 30,
 	},
 })`
