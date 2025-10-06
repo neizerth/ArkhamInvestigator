@@ -1,7 +1,5 @@
 import { setBoardAbilityUse } from "@modules/board/abilities/shared/lib";
-import { increaseBoardActualPropValue } from "@modules/board/base/shared/lib";
-import { sendInvestigatorNotification } from "@modules/board/notifications/entities/lib";
-import { removeMultipleChaosTokensByType as removeTokens } from "@modules/chaos-bag/base/entities/lib";
+import { addSingleChaosToken } from "@modules/chaos-bag/base/entities/lib";
 import {
 	createModalActionFilter,
 	type modalActionProcessed,
@@ -11,7 +9,7 @@ import { put, takeEvery } from "redux-saga/effects";
 import { ActionId } from "../actions";
 
 const filterAction = createModalActionFilter({
-	ids: [ActionId.removeTokens],
+	ids: [ActionId.addBless],
 });
 
 function* worker({ payload }: ReturnType<typeof modalActionProcessed>) {
@@ -27,35 +25,14 @@ function* worker({ payload }: ReturnType<typeof modalActionProcessed>) {
 	);
 
 	yield put(
-		removeTokens({
+		addSingleChaosToken({
 			boardId,
 			type: "bless",
-			count: 2,
-		}),
-	);
-	yield put(
-		removeTokens({
-			boardId,
-			type: "curse",
-			count: 2,
-		}),
-	);
-
-	yield put(
-		increaseBoardActualPropValue({
-			boardId,
-			prop: "actions",
-		}),
-	);
-
-	yield put(
-		sendInvestigatorNotification({
-			boardId,
-			message: "ability.kohaku.removeTokens",
+			source: "effect",
 		}),
 	);
 }
 
-export function* handleRemoveTokensSaga() {
+export function* handleAddBlessSaga() {
 	yield takeEvery(filterAction, worker);
 }

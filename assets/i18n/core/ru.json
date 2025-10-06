@@ -159,10 +159,10 @@
   "clues.remains_few": "Осталось {{count}} улики",
   "clues.remains_many": "Осталось {{count}} улик",
 
-  "chaosBag.addToken": "{{name}} добавляет в мешок {{count}} {{token}}",
-  "chaosBag.addToken_one": "{{name}} добавляет в мешок 1 {{token}}",
-  "chaosBag.addToken_few": "{{name}} добавляет в мешок {{count}} {{token}}",
-  "chaosBag.addToken_many": "{{name}} добавляет в мешок {{count}} {{token}}",
+  "chaosBag.addToken": "{{name}} добавляет {{count}} {{token}} в мешок хаоса",
+  "chaosBag.addToken_one": "{{name}} добавляет 1 {{token}} в мешок хаоса",
+  "chaosBag.addToken_few": "{{name}} добавляет {{count}} {{token}} в мешок хаоса",
+  "chaosBag.addToken_many": "{{name}} добавляет {{count}} {{token}} в мешок хаоса",
 
   "chaosBag.addTokens": "{{name}} добавляет в мешок жетоны {{tokens}}",
 
@@ -217,6 +217,8 @@
   "ability.reynauld.reaction": "{{name}} берёт 1 карту [addcard] {{value}}",
   "ability.reynauld.reaction.self": "{{name}} берёт 1 карту [addcard] {{value}}",
   "ability.vincent.modal.heal": "Вылечить",
+
+  "ability.kohaku.removeTokens": "{{name}} удаляет 2 [bless] и 2 [curse]",
 
   "resources.notEnough": "Недостаточно ресурсов. Необходимо&nbsp;{{count}}, доступно&nbsp;{{available}}",
 

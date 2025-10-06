@@ -215,6 +215,8 @@
   "ability.reynauld.reaction": "{{name}} takes 1 card [addcard] {{value}}",
   "ability.reynauld.reaction.self": "{{name}} takes 1 card [addcard] {{value}}",
 
+  "ability.kohaku.removeTokens": "{{name}} removes 2 [bless] and 2 [curse] tokens",
+
   "resources.notEnough": "Not enough resources. Required&nbsp;{{count}}, available&nbsp;{{available}}",
 
   "action.heal": "{{fromName}} heals {{dativeName}} {{value}}",

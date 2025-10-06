@@ -64,6 +64,7 @@ export const specialAbilitityCodes = [
 	AbilityCode.PrestonFairmont.elderSign,
 	AbilityCode.RexMurphy.base,
 	AbilityCode.StellaClark.elderSign,
+	AbilityCode.KohakuNarukami,
 	...LilyChenAbilityCodes,
 ];
 

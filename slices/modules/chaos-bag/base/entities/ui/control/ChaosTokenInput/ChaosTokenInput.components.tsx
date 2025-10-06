@@ -32,7 +32,6 @@ export const Control: typeof NumericControl = styled(NumericControl).attrs({
 	textStyle: {
 		// color: color.text,
 		color: color.light10,
-		paddingTop: 6,
 	},
 	minTextStyle: {
 		color: color.dark10,
