@@ -79,3 +79,7 @@ export const checkAbilityCodes = [
 	AbilityCode.KymaniJones,
 	...LilyChenAbilityCodes,
 ];
+
+export const specialCounterAbilityCodes = [
+	AbilityCode.PrestonFairmont.familyInheritance,
+];

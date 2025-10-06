@@ -1,4 +1,5 @@
 import { fork } from "redux-saga/effects";
+import { PrestonFairmontFamilyInheritanceReset } from "./familyInheritanceReset/familyInheritanceReset";
 import { PrestonFairmontFamilyInheritanceUpdateSaga } from "./familyInheritanceUpdate/familyInheritanceUpdateSaga";
 import { PrestonFairmontOpenModalSaga } from "./openModal/openModalSaga";
 import { PrestonFairmontConfirmModalSaga } from "./processAction/confirmModalSaga";
@@ -9,4 +10,5 @@ export function* PrestonFairmontAbilitySaga() {
 	yield fork(PrestonFairmontConfirmModalSaga);
 	yield fork(PrestonFairmontReturnToTestSaga);
 	yield fork(PrestonFairmontFamilyInheritanceUpdateSaga);
+	yield fork(PrestonFairmontFamilyInheritanceReset);
 }

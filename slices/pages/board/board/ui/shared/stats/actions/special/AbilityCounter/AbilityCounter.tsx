@@ -1,6 +1,7 @@
 import type { ViewProps } from "react-native";
 
 import {
+	processBoardCounterSpecialAction,
 	selectCurrentAbilityValue,
 	setBoardAbilityValue,
 } from "@modules/board/abilities/shared/lib";
@@ -84,10 +85,14 @@ export const AbilityCounter = ({
 
 	const onPress = direction === "increase" ? increase : decrease;
 
-	const reset = useCallback(() => {
-		const value = defaultValue || 0;
-		setValue(value);
-	}, [defaultValue, setValue]);
+	const special = useCallback(() => {
+		dispatch(
+			processBoardCounterSpecialAction({
+				boardId: "current",
+				abilityId: id,
+			}),
+		);
+	}, [id, dispatch]);
 
 	if (!enabled) {
 		return;
@@ -101,7 +106,7 @@ export const AbilityCounter = ({
 				data={data}
 				onValueChanged={onChange}
 				onPress={onPress}
-				onLongPress={reset}
+				onLongPress={special}
 			/>
 		</C.Container>
 	);

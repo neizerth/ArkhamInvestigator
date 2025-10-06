@@ -54,8 +54,6 @@ export const BoardDescription = ({ ...props }: BoardDescriptionProps) => {
 	const gesture = useDescriptionGestures();
 
 	const showFlavor = investigator.flavor && (!show || showDescription);
-	const showTraits = !show || showDescription;
-
 	const unit = showDescription ? vw : textUnit;
 
 	return (
@@ -67,9 +65,11 @@ export const BoardDescription = ({ ...props }: BoardDescriptionProps) => {
 					<C.Background faction={faction} width={screen.width}>
 						<C.DescriptionContent>
 							<C.TextContent>
-								{showTraits && (
-									<C.Traits unit={vw} investigator={investigator} />
-								)}
+								<C.Traits
+									unit={vw}
+									investigator={investigator}
+									compact={showDescription}
+								/>
 								<C.Description style={descriptionStyle}>
 									<C.Text investigator={investigator} unit={unit} />
 									{showFlavor && (
