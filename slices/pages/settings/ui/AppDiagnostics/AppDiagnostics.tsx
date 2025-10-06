@@ -1,6 +1,7 @@
 import { clearImageCache } from "@modules/core/app/entities/clearImageCache";
 import { restartApp } from "@modules/core/app/entities/restartApp";
-import { reloadAssets } from "@modules/core/app/features/reload-assets";
+import { reloadExternalAssets } from "@modules/core/assets/base/shared/lib";
+import { clearDownloadQueue } from "@modules/core/assets/download-queue/shared/lib";
 import { useAppDispatch } from "@shared/lib";
 import { useTranslation } from "react-i18next";
 import type { ViewProps } from "react-native";
@@ -21,7 +22,13 @@ export const AppDiagnostics = (props: AppDiagnosticsProps) => {
 	};
 
 	const reloadData = () => {
-		dispatch(reloadAssets());
+		dispatch(reloadExternalAssets());
+		restart();
+	};
+
+	const clearDownloads = () => {
+		dispatch(clearDownloadQueue());
+		restart();
 	};
 
 	return (
@@ -39,6 +46,13 @@ export const AppDiagnostics = (props: AppDiagnosticsProps) => {
 						text={t`Reload downloaded assets`}
 						icon="download"
 						onPress={reloadData}
+					/>
+				</C.Row>
+				<C.Row>
+					<C.Button
+						text={t`Clear download queue`}
+						icon="drawer2"
+						onPress={clearDownloads}
 					/>
 				</C.Row>
 				<C.Row>

@@ -360,5 +360,6 @@
   "Korean": "Корейский",
   "Chinese": "Китайский",
   "Restart App": "Перезапустить приложение",
-  "Reload downloaded assets": "Повторно загрузить данные"
+  "Reload downloaded assets": "Повторно загрузить данные",
+  "Clear download queue": "Очистить очередь загрузок"
 }

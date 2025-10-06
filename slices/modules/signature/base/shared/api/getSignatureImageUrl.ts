@@ -20,7 +20,7 @@ export const getSignatureImageUrl = ({
 	const path = `images/${format}/${type}${colorType}/${code}.${format}`;
 
 	if (pathType === "absolute") {
-		return `${ASSET_URL}${path}`;
+		return `${ASSET_URL}/${path}`;
 	}
 	if (pathType === "storage") {
 		return `${documentDirectory}${path}`;
