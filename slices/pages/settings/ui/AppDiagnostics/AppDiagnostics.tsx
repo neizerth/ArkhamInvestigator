@@ -43,16 +43,16 @@ export const AppDiagnostics = (props: AppDiagnosticsProps) => {
 				</C.Row>
 				<C.Row>
 					<C.Button
-						text={t`Reload downloaded assets`}
-						icon="download"
-						onPress={reloadData}
+						text={t`Clear download queue`}
+						icon="drawer2"
+						onPress={clearDownloads}
 					/>
 				</C.Row>
 				<C.Row>
 					<C.Button
-						text={t`Clear download queue`}
-						icon="drawer2"
-						onPress={clearDownloads}
+						text={t`Reload downloaded assets`}
+						icon="download"
+						onPress={reloadData}
 					/>
 				</C.Row>
 				<C.Row>
