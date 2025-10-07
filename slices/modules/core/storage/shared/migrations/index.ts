@@ -20,6 +20,7 @@ import v18 from "./2025-09-17T22-16-clear-boards";
 import v19 from "./2025-09-25T06-56-28-init-picker-animation";
 import v20 from "./2025-11-04T02-11-30-set-show-clues-default-value";
 import v21 from "./2025-38-06T01-38-39-set-show-resources-default-value";
+import v22 from "./2025-42-07T03-42-56-move-picker-slice-values";
 
 export const persistConfigMigrations = {
 	0: v0,
@@ -44,4 +45,5 @@ export const persistConfigMigrations = {
 	19: v19,
 	20: v20,
 	21: v21,
+	22: v22,
 };

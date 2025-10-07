@@ -1,7 +1,7 @@
 import {
 	selectPickerDecelerationType,
 	selectPickerIntervalMomentum,
-} from "@modules/board/base/shared/lib";
+} from "@modules/core/control/entities/picker/lib";
 import { REMOVE_CLIPPED_SUBVIEWS } from "@shared/config";
 import { isObject, useAppSelector } from "@shared/lib";
 import { memo, useCallback, useMemo } from "react";

@@ -1,4 +1,4 @@
-import { selectPickerAnimation } from "@modules/board/base/shared/lib";
+import { selectPickerAnimation } from "@modules/core/control/entities/picker/lib";
 import { useAppSelector } from "@shared/lib";
 import { memo } from "react";
 import type { PickerProps } from "../../model";

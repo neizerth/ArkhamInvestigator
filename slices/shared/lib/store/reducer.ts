@@ -3,6 +3,7 @@ import { chaosBagReducer } from "@modules/chaos-bag/base/shared/lib";
 import { assetsDownloaderReducer } from "@modules/core/assets/asset-downloader/shared/lib";
 import { assetsReducer } from "@modules/core/assets/base/shared/lib";
 import { downloadQueueReducer } from "@modules/core/assets/download-queue/shared/lib";
+import { controlReducer } from "@modules/core/control/reducer";
 import { deviceReducer } from "@modules/core/device/shared/lib";
 import { hapticReducer } from "@modules/core/haptic/shared/lib";
 import { i18nReducer } from "@modules/core/i18n/shared/lib";
@@ -34,4 +35,5 @@ export default {
 	...downloadQueueReducer,
 	...signatureImageCacheReducer,
 	...routerReducer,
+	...controlReducer,
 };

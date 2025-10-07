@@ -1,15 +1,17 @@
 import {
+	selectBoardPickerSize,
 	selectPickerAnimation,
 	selectPickerDecelerationType,
 	selectPickerIntervalMomentum,
+	setBoardPickerSize,
 	setPickerAnimation,
 	setPickerDecelerationType,
 	setPickerIntervalMomentum,
-} from "@modules/board/base/shared/lib";
+} from "@modules/core/control/entities/picker/lib";
 import { useAppSelector } from "@shared/lib";
 import type { ViewProps } from "react-native";
 import * as C from "./PickerSettings.components";
-import { decelerationValues } from "./values";
+import { boardPickerSizeValues, decelerationValues } from "./values";
 
 export type PickerSettingsProps = ViewProps;
 
@@ -39,6 +41,14 @@ export const PickerSettings = (props: PickerSettingsProps) => {
 							selector={selectPickerDecelerationType}
 							actionCreator={setPickerDecelerationType}
 							data={decelerationValues}
+						/>
+					</C.Row>
+					<C.Row>
+						<C.Select
+							label="Board Picker Size"
+							selector={selectBoardPickerSize}
+							actionCreator={setBoardPickerSize}
+							data={boardPickerSizeValues}
 						/>
 					</C.Row>
 				</>

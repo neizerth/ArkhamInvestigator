@@ -1,7 +1,6 @@
 import type { InvestigatorBoard } from "@modules/board/base/shared/model/board";
 import * as boardHistoryReducers from "@modules/board/history/shared/lib/store/reducers";
 import { createSlice } from "@reduxjs/toolkit";
-import type { PickerDecelerationType } from "@shared/model";
 import { createSliceState } from "redux-toolkit-helpers";
 import * as baseReducers from "./features/reducers";
 
@@ -12,9 +11,6 @@ export type BoardState = {
 	endTurnStrict: boolean;
 	showDamageAndHorror: boolean;
 	showDamageAndHorrorEffects: boolean;
-	pickerDecelerationType: PickerDecelerationType;
-	pickerIntervalMomentum: boolean;
-	pickerAnimation: boolean;
 
 	trackXP: boolean;
 	saveTrauma: boolean;
@@ -47,9 +43,6 @@ const initialState: BoardState = {
 	investigatorBoards: [],
 	showDamageAndHorror: false,
 	showDamageAndHorrorEffects: false,
-	pickerDecelerationType: false,
-	pickerIntervalMomentum: false,
-	pickerAnimation: true,
 	trackXP: true,
 	saveTrauma: true,
 	trackHandSize: false,
@@ -93,9 +86,6 @@ export const {
 
 	setEndTurnStrict,
 	setShowDamageAndHorrorEffects,
-	setPickerDecelerationType,
-	setPickerIntervalMomentum,
-	setPickerAnimation,
 	setShowDamageAndHorror,
 	setSaveTrauma,
 	setTrackXP,
@@ -148,9 +138,6 @@ export const {
 
 	selectEndTurnStrict,
 	selectShowDamageAndHorrorEffects,
-	selectPickerDecelerationType,
-	selectPickerAnimation,
-	selectPickerIntervalMomentum,
 	selectShowDamageAndHorror,
 	selectSaveTrauma,
 	selectTrackXP,
