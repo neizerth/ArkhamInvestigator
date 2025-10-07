@@ -1,7 +1,9 @@
 import { clearImageCache } from "@modules/core/app/entities/clearImageCache";
 import { restartApp } from "@modules/core/app/entities/restartApp";
+import { externalImagesDiskPath } from "@modules/core/assets/base/shared/config";
 import { reloadExternalAssets } from "@modules/core/assets/base/shared/lib";
 import { clearDownloadQueue } from "@modules/core/assets/download-queue/shared/lib";
+import { removeDirectory } from "@modules/core/disk/entities/removeDirectory";
 import { useAppDispatch } from "@shared/lib";
 import { useTranslation } from "react-i18next";
 import type { ViewProps } from "react-native";
@@ -22,6 +24,7 @@ export const AppDiagnostics = (props: AppDiagnosticsProps) => {
 	};
 
 	const reloadData = () => {
+		dispatch(removeDirectory({ directory: externalImagesDiskPath }));
 		dispatch(reloadExternalAssets());
 		restart();
 	};
