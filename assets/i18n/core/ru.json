@@ -50,6 +50,7 @@
   "board.help.special.lola": "Нажмите на блок с именем, чтобы сменить текущую роль (класс).",
   "board.help.special.daniela": "Нажмите на [claws], если враг вас атаковал. Это поменяет значение [elder_sign] для успеншого прохождения проверки.",
   "board.help.special.kymani": "Нажмите на [exhaust], если в вашей локации есть повёрнутый враг. Это поменяет значение [elder_sign] для успеншого прохождения проверки.",
+  "board.help.special.preston": "Удерживайте нажатие на счетчике фамильного наследства, чтобы переложить его значение на счётчик ресурсов",
 
   "board.help.calculator.result": "Минимальный результат – 0. Деление округляет результат в меньшую сторону.",
   "board.help.calculator.history": "Нажмите на кнопку «Считать», чтобы добавить расчёт в историю. Это значение будет меняться автоматически, если изменятся параметры вашего сыщика. Удерживайте кнопку «Считать», чтобы сохранить расчёт и немедленно запустить проверку, используя полученное значение.",
@@ -159,10 +160,10 @@
   "clues.remains_few": "Осталось {{count}} улики",
   "clues.remains_many": "Осталось {{count}} улик",
 
-  "chaosBag.addToken": "{{name}} добавляет в мешок {{count}} {{token}}",
-  "chaosBag.addToken_one": "{{name}} добавляет в мешок 1 {{token}}",
-  "chaosBag.addToken_few": "{{name}} добавляет в мешок {{count}} {{token}}",
-  "chaosBag.addToken_many": "{{name}} добавляет в мешок {{count}} {{token}}",
+  "chaosBag.addToken": "{{name}} добавляет {{count}} {{token}} в мешок хаоса",
+  "chaosBag.addToken_one": "{{name}} добавляет 1 {{token}} в мешок хаоса",
+  "chaosBag.addToken_few": "{{name}} добавляет {{count}} {{token}} в мешок хаоса",
+  "chaosBag.addToken_many": "{{name}} добавляет {{count}} {{token}} в мешок хаоса",
 
   "chaosBag.addTokens": "{{name}} добавляет в мешок жетоны {{tokens}}",
 
@@ -217,6 +218,8 @@
   "ability.reynauld.reaction": "{{name}} берёт 1 карту [addcard] {{value}}",
   "ability.reynauld.reaction.self": "{{name}} берёт 1 карту [addcard] {{value}}",
   "ability.vincent.modal.heal": "Вылечить",
+
+  "ability.kohaku.removeTokens": "{{name}} удаляет 2 [bless] и 2 [curse]",
 
   "resources.notEnough": "Недостаточно ресурсов. Необходимо&nbsp;{{count}}, доступно&nbsp;{{available}}",
 
@@ -358,5 +361,8 @@
   "Translation": "Перевод",
   "Sponsors": "Спонсоры",
   "Korean": "Корейский",
-  "Chinese": "Китайский"
+  "Chinese": "Китайский",
+  "Restart App": "Перезапустить приложение",
+  "Reload downloaded assets": "Повторно загрузить данные",
+  "Clear download queue": "Очистить очередь загрузок"
 }

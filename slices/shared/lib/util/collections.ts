@@ -26,6 +26,17 @@ export const splitIntoGroups = <T>(
 	return groups;
 };
 
+export const getListNext = <T>(data: T[], index: number) => {
+	const nextIndex = Math.min(data.length - 1, index + 1);
+
+	return data[nextIndex];
+};
+
+export const getListPrev = <T>(data: T[], index: number) => {
+	const prevIndex = Math.max(0, index - 1);
+	return data[prevIndex];
+};
+
 export const getLoopNext = <T>(data: T[], index: number) => {
 	const nextIndex = (index + 1) % data.length;
 

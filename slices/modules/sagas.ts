@@ -15,6 +15,7 @@ import { soundSaga } from "./core/sound/sagas";
 import { factionSaga } from "./faction/sagas";
 import { mechanicsSaga } from "./mechanics/sagas";
 import { signatureSaga } from "./signature/sagas";
+import { storiesSaga } from "./stories/sagas";
 
 export function* modulesSaga() {
 	yield spawn(hapticSaga);
@@ -31,6 +32,7 @@ export function* modulesSaga() {
 	yield spawn(i18nSaga);
 	yield spawn(assetsSaga);
 	yield spawn(signatureSaga);
+	yield spawn(storiesSaga);
 	yield spawn(diskSaga);
 	yield spawn(networkSaga);
 	yield spawn(routerSaga);

@@ -1,4 +1,3 @@
-import { useLeaveBoard } from "@modules/board/base/features/leave-board";
 import {
 	setNextBoardIndex,
 	setPrevBoardIndex,
@@ -14,7 +13,6 @@ export type InvestigatorSelectProps = ViewProps;
 
 export const InvestigatorSelect = ({ ...props }: InvestigatorSelectProps) => {
 	const dispatch = useAppDispatch();
-	const goToPage = useLeaveBoard();
 
 	const next = useCallback(() => {
 		dispatch(setNextBoardIndex());

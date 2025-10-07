@@ -1,8 +1,9 @@
+import { setFactionFilter } from "@modules/faction/entities/faction-filter/set-faction-filter";
 import {
 	FactionSelect as Select,
 	type FactionSelectProps as SelectProps,
 } from "@modules/faction/shared/ui/faction-select";
-import { setFactionFilter, useAppDispatch } from "@shared/lib";
+import { useAppDispatch } from "@shared/lib";
 import type { FactionFilterType } from "@shared/model";
 import { useCallback } from "react";
 

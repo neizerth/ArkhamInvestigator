@@ -8,15 +8,13 @@ import {
 	setHapticMode,
 } from "@modules/core/haptic/shared/lib";
 import { loadLanguage, selectLanguage } from "@modules/core/i18n/shared/lib";
-import { sendNotification } from "@modules/core/notifications/shared/lib";
 import {
 	selectEnableNavigationAnimation,
 	setEnableNavigationAnimation,
 } from "@modules/core/router/shared/lib";
 import { CAN_ALWAYS_SHOW_GAME_TEXT } from "@shared/config";
-import * as S from "@shared/lib";
-import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
+import { AppDiagnostics } from "../AppDiagnostics";
 import * as C from "./SettingsPage.components";
 import {
 	hapticValues,
@@ -28,16 +26,6 @@ import {
 
 export const SettingsPage = () => {
 	const { t } = useTranslation();
-	const dispatch = S.useAppDispatch();
-
-	const clearImageCache = useCallback(() => {
-		dispatch(S.clearImageCache());
-		dispatch(
-			sendNotification({
-				message: "Image cache cleared",
-			}),
-		);
-	}, [dispatch]);
 
 	return (
 		<C.Page title="Settings">
@@ -187,6 +175,20 @@ export const SettingsPage = () => {
 				<C.Section title={t`Investigator`}>
 					<C.Row>
 						<C.Checkbox
+							label="Clues"
+							selector={B.selectShowClues}
+							actionCreator={B.setShowClues}
+						/>
+					</C.Row>
+					<C.Row>
+						<C.Checkbox
+							label="Resources"
+							selector={B.selectShowResources}
+							actionCreator={B.setShowResources}
+						/>
+					</C.Row>
+					<C.Row>
+						<C.Checkbox
 							label="Hand Size"
 							selector={B.selectTrackHandSize}
 							actionCreator={B.setTrackHandSize}
@@ -256,15 +258,7 @@ export const SettingsPage = () => {
 					</C.Row>
 				</C.Section>
 
-				<C.Section title={t`Diagnostics`}>
-					<C.Row>
-						<C.Button
-							text={t`Clear image cache`}
-							icon="image"
-							onPress={clearImageCache}
-						/>
-					</C.Row>
-				</C.Section>
+				<AppDiagnostics />
 			</C.Content>
 		</C.Page>
 	);

@@ -8,7 +8,7 @@ export const getSignatureAbilityValues = ({
 
 	for (const ability of abilities) {
 		if (ability.type === "counter") {
-			data[ability.id] = ability.min || 0;
+			data[ability.id] = ability.min || ability.defaultValue || 0;
 		}
 	}
 

@@ -64,6 +64,7 @@ export const specialAbilitityCodes = [
 	AbilityCode.PrestonFairmont.elderSign,
 	AbilityCode.RexMurphy.base,
 	AbilityCode.StellaClark.elderSign,
+	AbilityCode.KohakuNarukami,
 	...LilyChenAbilityCodes,
 ];
 
@@ -77,4 +78,8 @@ export const checkAbilityCodes = [
 	AbilityCode.DanielaReyes,
 	AbilityCode.KymaniJones,
 	...LilyChenAbilityCodes,
+];
+
+export const specialCounterAbilityCodes = [
+	AbilityCode.PrestonFairmont.familyInheritance,
 ];

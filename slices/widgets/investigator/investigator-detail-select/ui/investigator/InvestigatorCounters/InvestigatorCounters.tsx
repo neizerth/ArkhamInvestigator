@@ -1,3 +1,4 @@
+import { defaultSignatureCounterEnabled } from "@modules/signature/base/shared/config";
 import {
 	selectInvestigatorCounters,
 	toggleInvestigatorCounter,
@@ -47,7 +48,9 @@ export const InvestigatorCounters = (props: InvestigatorCountersProps) => {
 							key={ability.id}
 							label={t(ability.name)}
 							onPress={onAbilityPress(ability)}
-							checked={counterEnabled[ability.id]}
+							checked={
+								counterEnabled[ability.id] ?? defaultSignatureCounterEnabled
+							}
 						/>
 					),
 			)}

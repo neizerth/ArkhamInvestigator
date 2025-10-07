@@ -5,6 +5,7 @@ import type { ToggleBoardAbilityUsePayload } from "../toggleBoardAbilityUse/togg
 export type SetBoardAbilityUsePayload = ToggleBoardAbilityUsePayload & {
 	canUse: boolean;
 	active?: boolean;
+	force?: boolean;
 };
 
 export const setBoardAbilityUse = createAction<SetBoardAbilityUsePayload>(

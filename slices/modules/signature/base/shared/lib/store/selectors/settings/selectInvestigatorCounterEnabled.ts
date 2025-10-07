@@ -1,3 +1,4 @@
+import { defaultSignatureCounterEnabled } from "@modules/signature/base/shared/config";
 import { createSelector } from "@reduxjs/toolkit";
 import { selectInvestigatorSettingsProp } from "./selectInvestigatorSettingsProp";
 
@@ -16,5 +17,5 @@ export const selectInvestigatorCounterEnabled = ({
 				prop: "counters",
 			}),
 		],
-		(counters) => counters?.[abilityId] ?? false,
+		(counters) => counters?.[abilityId] ?? defaultSignatureCounterEnabled,
 	);

@@ -41,7 +41,8 @@ function* worker({ payload }: ReturnType<typeof setBoardAbilityUse>) {
 		targetBoardId = yield select(boardIdSelector);
 	}
 
-	if (!ability || ability.toggle === false) {
+	if (!ability || (!payload.force && ability.toggle === false)) {
+		console.log("skip", ability, payload);
 		return;
 	}
 

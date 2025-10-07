@@ -22,7 +22,7 @@ export const Overlay: typeof BaseOverlay = styled(BaseOverlay)`
 
 export const Container: typeof View = styled(View)`
   position: relative;
-  padding-top: ${statusBarHeight}px;
+  padding-top: ${statusBarHeight + size.gap.small}px;
 `;
 
 export const Header: typeof View = styled(BoardHeader)`

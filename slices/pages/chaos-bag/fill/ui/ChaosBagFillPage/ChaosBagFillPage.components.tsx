@@ -1,8 +1,10 @@
 import { ChaosToken } from "@modules/chaos-bag/base/shared/ui";
 import { ContextModal } from "@modules/core/modal/shared/base/ui";
+import { ScenarioDifficultySelect } from "@modules/stories/entities/ui";
 import { color, size } from "@shared/config";
 import { Button } from "@shared/ui";
-import { Select as BaseSelect, Row } from "@shared/ui";
+import { Row } from "@shared/ui";
+import { DifficultyTokens } from "@widgets/control/reference-select/ui/ReferenceSelect/ReferenceSelect.components";
 import { View } from "react-native";
 import styled from "styled-components/native";
 
@@ -17,18 +19,16 @@ export const Container: typeof ContextModal = styled(ContextModal).attrs({
   justify-content: flex-start;
 `;
 
-export const Select: typeof BaseSelect = styled(BaseSelect)`
-  border: 1px solid ${color.dark10};
+export const Select: typeof ScenarioDifficultySelect = styled(
+	ScenarioDifficultySelect,
+)`
 `;
 
 export const Content: typeof View = styled(View)`
   gap: ${size.gap.default}px
 `;
 
-export const Preview: typeof Row = styled(Row)`
-  gap: ${size.gap.default}px;
-  padding: ${size.gap.default}px ${size.gap.small}px;
-  flex-wrap: wrap;
+export const Preview: typeof DifficultyTokens = styled(DifficultyTokens)`
 `;
 
 export const Token: typeof ChaosToken = styled(ChaosToken)`

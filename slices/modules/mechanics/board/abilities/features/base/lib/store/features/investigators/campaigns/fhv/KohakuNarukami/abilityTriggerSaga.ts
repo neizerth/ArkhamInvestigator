@@ -1,4 +1,4 @@
-import { createAbilityUseFilter } from "@modules/board/abilities/shared/lib";
+import { setBoardAbilityUse } from "@modules/board/abilities/shared/lib";
 import { CustomModalId } from "@modules/core/modal/entities/base/config";
 import type {
 	BaseModalAction,
@@ -11,12 +11,34 @@ import { put, takeEvery } from "redux-saga/effects";
 import { ModalAction } from "./actions";
 import { type SelectDataReturnType, selectData } from "./selectData";
 
-const filterAction = createAbilityUseFilter({
-	id: AbilityCode.KohakuNarukami,
-	isUsed: false,
-});
+// const filterAction = createAbilityUseFilter({
+// 	id: AbilityCode.KohakuNarukami,
+// 	isUsed: false,
+// });
+const filterAction = (action: unknown) => {
+	if (!setBoardAbilityUse.match(action)) {
+		return false;
+	}
 
-function* worker() {
+	const { abilityId, force } = action.payload;
+
+	return abilityId === AbilityCode.KohakuNarukami && !force;
+};
+
+function* worker({ payload }: ReturnType<typeof setBoardAbilityUse>) {
+	const { canUse } = payload;
+
+	if (canUse) {
+		yield put(
+			setBoardAbilityUse({
+				...payload,
+				canUse: true,
+				force: true,
+			}),
+		);
+		return;
+	}
+
 	const { canRemove2Tokens, canAddBless, canAddCurse }: SelectDataReturnType =
 		yield selectData();
 

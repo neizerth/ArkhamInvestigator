@@ -53,6 +53,7 @@ export const {
 	setExternalImagesLoaded,
 	setExternalImagesReady,
 	setExternalAssetsDownloadedAt,
+	reloadExternalAssets,
 } = assets.actions;
 
 export const {

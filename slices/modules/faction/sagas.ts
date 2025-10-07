@@ -1,6 +1,6 @@
 import { spawn } from "redux-saga/effects";
-import { factionSharedSaga } from "./shared/sagas";
+import { factionEntitiesSaga } from "./entities/sagas";
 
 export function* factionSaga() {
-	yield spawn(factionSharedSaga);
+	yield spawn(factionEntitiesSaga);
 }

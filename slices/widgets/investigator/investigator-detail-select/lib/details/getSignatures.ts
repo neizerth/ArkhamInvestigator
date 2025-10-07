@@ -5,16 +5,18 @@ import { getOptionName } from "./getOptionName";
 
 export const getSignatures = (group: InvestigatorSignatureGroup) => {
 	const { code, faction_code } = group;
-	return group.signatures.map((signature): InvestigatorDetailItem => {
-		const name = getOptionName(signature);
+	return group.signatures
+		.filter(({ type }) => type !== "book")
+		.map((signature): InvestigatorDetailItem => {
+			const name = getOptionName(signature);
 
-		return {
-			...pick(["id", "image", "code", "type", "icon"], signature),
-			name,
-			faction: faction_code,
-			code,
-			imageId: signature.image.id,
-			value: signature.id,
-		};
-	});
+			return {
+				...pick(["id", "image", "code", "type", "icon"], signature),
+				name,
+				faction: faction_code,
+				code,
+				imageId: signature.image.id,
+				value: signature.id,
+			};
+		});
 };
