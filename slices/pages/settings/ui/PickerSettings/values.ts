@@ -1,6 +1,6 @@
 import type {
-	BoardPickerSize,
 	PickerDecelerationType,
+	PickerSize,
 } from "@modules/core/control/entities/picker/model";
 import type { SelectItem } from "@shared/ui";
 
@@ -19,7 +19,7 @@ export const decelerationValues: SelectItem<PickerDecelerationType>[] = [
 	},
 ];
 
-export const boardPickerSizeValues: SelectItem<BoardPickerSize>[] = [
+export const boardPickerSizeValues: SelectItem<PickerSize>[] = [
 	{
 		label: "picker.boardSize.small",
 		value: "small",

@@ -1,19 +1,19 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { createSliceState } from "redux-toolkit-helpers";
-import type { BoardPickerSize, PickerDecelerationType } from "../../model";
+import type { PickerDecelerationType, PickerSize } from "../../model";
 
 export type PickerState = {
 	pickerDecelerationType: PickerDecelerationType;
 	pickerIntervalMomentum: boolean;
 	pickerAnimation: boolean;
-	boardPickerSize: BoardPickerSize;
+	pickerSize: PickerSize;
 };
 
 const initialState: PickerState = {
 	pickerDecelerationType: false,
 	pickerIntervalMomentum: false,
 	pickerAnimation: true,
-	boardPickerSize: "large",
+	pickerSize: "large",
 };
 
 const state = createSliceState(initialState);
@@ -27,14 +27,14 @@ export const {
 	setPickerDecelerationType,
 	setPickerIntervalMomentum,
 	setPickerAnimation,
-	setBoardPickerSize,
+	setPickerSize,
 } = picker.actions;
 
 export const {
 	selectPickerDecelerationType,
 	selectPickerIntervalMomentum,
 	selectPickerAnimation,
-	selectBoardPickerSize,
+	selectPickerSize,
 } = picker.selectors;
 
 export default picker.reducer;

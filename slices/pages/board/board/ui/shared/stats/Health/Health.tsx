@@ -16,8 +16,6 @@ type HealthProps = BaseHealthProps & {
 	contentContainerStyle?: BaseHealthProps["style"];
 };
 
-const damageData = range(0, 20);
-
 export const Health = ({ contentContainerStyle, ...props }: HealthProps) => {
 	const showAdditionalInfo = useAppSelector(selectShowAdditionalInformation);
 	const showDamage = useAppSelector(selectShowDamageAndHorror);
