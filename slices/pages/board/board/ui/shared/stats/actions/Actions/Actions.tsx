@@ -6,6 +6,7 @@ import { range } from "ramda";
 import { useCallback } from "react";
 import { useStat } from "../../../../../lib";
 import * as C from "./Actions.components";
+import { useActionsStyle } from "./useActionsStyle";
 
 export type ActionsProps = ImageBackgroundProps;
 
@@ -14,6 +15,7 @@ const actionsData = range(0, 100);
 export const Actions = ({ ...props }: ActionsProps) => {
 	const dispatch = useAppDispatch();
 	const haveAbilities = useAppSelector(selectHasBoardAbilities("current"));
+	const style = useActionsStyle();
 
 	const {
 		value,
@@ -49,7 +51,7 @@ export const Actions = ({ ...props }: ActionsProps) => {
 					/>
 				</C.Content>
 			</C.Background>
-			{haveAbilities && <C.Special />}
+			{haveAbilities && <C.Special style={style.special} />}
 		</C.Container>
 	);
 };
