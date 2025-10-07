@@ -110,8 +110,8 @@ export const AboutPage = (props: AboutPageProps) => {
 				<Break />
 				<A href="https://www.patreon.com/arkhamdivider">Patreon:</A>
 				<Break />
-				@RecedingSamson, @Pink_hawk, The 1 Player Podcast, Andy Lindberg, Nathan
-				Wurschmidt
+				@RecedingSamson, @Pink_hawk, @felice, The 1 Player Podcast, Andy
+				Lindberg, Nathan Wurschmidt
 			</Paragraph>
 			<Title>{t`Special Thanks`}</Title>
 			<List>
