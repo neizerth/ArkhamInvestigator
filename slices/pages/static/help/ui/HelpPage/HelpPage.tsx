@@ -17,6 +17,9 @@ export const HelpPage = () => {
 	const PrestonFairmont = useAppSelector(
 		selectByCode(InvesigatorCode.PrestonFairmont),
 	);
+	const WendyAdams = useAppSelector(
+		selectByCode(InvesigatorCode.WendyAdams.base),
+	);
 	return (
 		<ContentPage title="Help">
 			<Title>{t`Scroll`}</Title>
@@ -274,6 +277,13 @@ export const HelpPage = () => {
 					<Bold>{PrestonFairmont?.name}</Bold>
 				</C.ListTitle>
 				<C.IconText value={t`board.help.special.preston`} />
+			</View>
+			<View>
+				<C.ListTitle>
+					<C.Icon icon="survivor" />
+					<Bold>{WendyAdams?.name}</Bold>
+				</C.ListTitle>
+				<C.IconText value={t`board.help.special.wendy`} />
 			</View>
 		</ContentPage>
 	);
