@@ -36,7 +36,7 @@
 	"picker.deceleration.custom": "Custom",
 
 	"picker.boardSize.small": "Small",
-	"picker.boardSize.medium": "Medium",
+	"picker.boardSize.medium": "Default",
 	"picker.boardSize.large": "Large",
 
 	"board.reset.text": "This action will reset the data to the beginning of the game for this investigator",

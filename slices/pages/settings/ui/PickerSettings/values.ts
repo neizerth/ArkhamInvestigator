@@ -28,8 +28,4 @@ export const boardPickerSizeValues: SelectItem<PickerSize>[] = [
 		label: "picker.boardSize.medium",
 		value: "medium",
 	},
-	{
-		label: "picker.boardSize.large",
-		value: "large",
-	},
 ];

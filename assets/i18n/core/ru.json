@@ -24,7 +24,7 @@
 	"picker.deceleration.custom": "Настроить",
 
 	"picker.boardSize.small": "Маленький",
-	"picker.boardSize.medium": "Средний",
+	"picker.boardSize.medium": "По умолчанию",
 	"picker.boardSize.large": "Большой",
 
 	"board.help.scroll": "Прокрутите любой параметр сыщика до нужного значения.",

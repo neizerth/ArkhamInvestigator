@@ -13,7 +13,7 @@ const initialState: PickerState = {
 	pickerDecelerationType: false,
 	pickerIntervalMomentum: false,
 	pickerAnimation: true,
-	pickerSize: "large",
+	pickerSize: "medium",
 };
 
 const state = createSliceState(initialState);
