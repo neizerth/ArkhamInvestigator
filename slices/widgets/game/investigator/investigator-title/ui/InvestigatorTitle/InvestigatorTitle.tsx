@@ -1,9 +1,11 @@
 import { titleImages } from "@assets/images/game/title";
+import { useSwipe } from "@modules/core/touch/shared/lib";
 import { formatGameText, getActiveOpacity, getFactionImage } from "@shared/lib";
 import type { PropsWithFaction } from "@shared/model";
 import type { ImageBackgroundProps } from "@shared/ui";
-import { memo } from "react";
+import { memo, useMemo } from "react";
 import type { ViewStyle } from "react-native";
+import { Gesture, GestureDetector } from "react-native-gesture-handler";
 import * as C from "./InvestigatorTitle.components";
 import { getTitleStyle } from "./InvestigatorTitle.styles";
 
@@ -64,6 +66,23 @@ export const InvestigatorTitle = (props: InvestigatorTitleProps) => {
 
 	const isLargeName = name.length > 15;
 
+	const swipeLeft = useSwipe({
+		direction: "left",
+		onSwipe: onNextPress,
+	});
+
+	const swipeRight = useSwipe({
+		direction: "right",
+		onSwipe: onPrevPress,
+	});
+
+	const gestures = useMemo(
+		() => [swipeLeft, swipeRight],
+		[swipeLeft, swipeRight],
+	);
+
+	const gesture = Gesture.Exclusive(...gestures);
+
 	return (
 		<C.Container style={[contentContainerStyle]}>
 			<C.Background
@@ -84,17 +103,19 @@ export const InvestigatorTitle = (props: InvestigatorTitleProps) => {
 							</C.Left>
 						)}
 
-						<C.TitleContent
-							style={style.titleContent}
-							activeOpacity={titleOpacity}
-							onPress={onTitlePress}
-						>
-							{unique && <C.Unique style={style.unique} />}
+						<GestureDetector gesture={gesture}>
+							<C.TitleContent
+								style={style.titleContent}
+								activeOpacity={titleOpacity}
+								onPress={onTitlePress}
+							>
+								{unique && <C.Unique style={style.unique} />}
 
-							<C.TitleText style={style.titleText}>{name}</C.TitleText>
+								<C.TitleText style={style.titleText}>{name}</C.TitleText>
 
-							{showId && <C.Id style={style.id}> ({entityId})</C.Id>}
-						</C.TitleContent>
+								{showId && <C.Id style={style.id}> ({entityId})</C.Id>}
+							</C.TitleContent>
+						</GestureDetector>
 
 						{showArrows && (
 							<C.Right

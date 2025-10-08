@@ -67,6 +67,8 @@ type ArrowProps = DefinedIconProps & {
 export const Arrow: FC<ArrowProps> = styled(Icon).attrs({
 	icon: "left-arrow",
 })`
+  font-size: 16px;
+  line-height: 16px;
   ${({ parallel }: ArrowProps) => css`
     color: ${parallel ? color.white : color.dark20};
   `}
@@ -90,9 +92,8 @@ export const Left: FC<LeftProps> = styled(TouchableOpacity)`
   align-items: center;
   background: transparent;
   z-index: 4;
-  height: 100%;
   width: 48px;
-  padding: 0 3px 0 5px;
+  padding: 5px 3px 5px 5px;
   ${({ compact }: LeftProps) => css`
     align-items: ${compact ? "flex-end" : "center"};
   `}
@@ -119,6 +120,6 @@ export const TitleContent: typeof TouchableOpacity = styled(TouchableOpacity)`
   justify-content: center;
   align-items: center;
   position: relative;
-  height: 100%;
   z-index: 3;
+  height: 100%;
 `;
