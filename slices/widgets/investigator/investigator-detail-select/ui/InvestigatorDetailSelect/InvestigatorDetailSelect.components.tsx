@@ -21,7 +21,7 @@ export const Content: typeof View = styled(View)`
   flex: 1;
   position: relative;
   z-index: 2;
-  justify-content: flex-start;
+  justify-content: center;
   width: 100%;
   max-width: 500px;
   padding: ${statusBarHeight + size.gap.default}px ${size.gap.default}px 50px;
