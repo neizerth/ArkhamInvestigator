@@ -85,7 +85,9 @@ export const getTitleStyle = (options: GetTitleStyleOptions) => {
 			title: {
 				paddingTop: "1%",
 			},
-			arrow: {},
+			arrow: {
+				paddingTop: "3%",
+			},
 		},
 		mystic: {
 			background: {

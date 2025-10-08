@@ -60,7 +60,7 @@ export const Menu: typeof BoardDescriptionMenu = styled(BoardDescriptionMenu)`
 `;
 
 export const Traits: typeof InvestigatorTraits = styled(InvestigatorTraits)`
-  margin-top: 7px;
+  margin-top: 5px;
   margin-bottom: ${size.gap.small}px;
 `;
 
