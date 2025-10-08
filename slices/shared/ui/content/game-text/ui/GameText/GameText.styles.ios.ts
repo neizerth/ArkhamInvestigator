@@ -21,7 +21,7 @@ export const defaultComponentStyles: ComponentStyleMap = {
 	icon: {
 		fontSize: 14,
 		lineHeight: 16,
-		top: -1,
+		top: -3,
 	},
 	icon_bullet: {
 		top: -6,

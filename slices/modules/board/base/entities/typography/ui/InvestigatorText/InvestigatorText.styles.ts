@@ -104,6 +104,7 @@ export const getInvestigatorTextStyle = ({
 			icon: {
 				fontSize: iconFontSize,
 				lineHeight: iconFontSize * 1.3,
+				top: ios ? -2 : 0,
 			},
 			icon_bullet: {
 				lineHeight: fontSize * (ios ? 1 : 0.7),
