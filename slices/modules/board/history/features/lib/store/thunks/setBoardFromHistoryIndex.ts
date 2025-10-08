@@ -47,7 +47,10 @@ export const setValueFromHistoryIndex =
 
 		const data: InvestigatorBoard =
 			historyIndex === -1
-				? cleanBoard
+				? {
+						...cleanBoard,
+						history,
+					}
 				: {
 						...board,
 						...boardProps,
