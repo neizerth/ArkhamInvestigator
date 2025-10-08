@@ -1,16 +1,15 @@
 import { useCallback } from "react";
 import { Linking, type TextProps } from "react-native";
 import styled from "styled-components/native";
+import { color } from "../../../config";
 import { useBoolean, useFadeAnimation } from "../../../lib";
 import { Text } from "./Text";
 
 const LinkText: typeof Text = styled(Text)`
-  text-decoration: underline;
+  text-decoration-line: underline;
+	text-decoration-style: solid;
+	text-decoration-color: ${color.light10};
 `;
-
-const style = {
-	textDecoration: "underline",
-};
 
 export type AProps = TextProps & {
 	href: string;
