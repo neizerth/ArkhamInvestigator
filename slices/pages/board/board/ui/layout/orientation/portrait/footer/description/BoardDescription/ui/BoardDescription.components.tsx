@@ -70,7 +70,7 @@ export const Traits: FC<InvestigatorTraitsProps & TraitsProps> = styled(
 	InvestigatorTraits,
 )<TraitsProps>`
   ${({ compact }: TraitsProps) =>
-		!compact &&
+		compact &&
 		css`
     margin-top: 7px;
   `}
