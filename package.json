@@ -31,7 +31,7 @@
 		"eas:apk": "npm run eas:android -- --profile apk",
 		"build:apk": "npm run eas:apk -- --local",
 		"build:android": "npm run eas:android -- --local",
-		"build:ios": "npm run prebuild:ios && eas build -p ios --local && npm run rename:ios",
+		"build:ios": "npm run prebuild:ios && eas build -p ios --local",
 		"postbuild:ios": "tsx ./cli/rename-build.ts .ipa",
 		"postbuild:android": "tsx ./cli/rename-build.ts .aab",
 		"postbuild:apk": "tsx ./cli/rename-build.ts .apk",
