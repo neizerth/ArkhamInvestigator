@@ -7,7 +7,7 @@ const Line = styled(View)`
 	height: 1px;
 	border-bottom-style: solid;
 	border-bottom-width: 1px;
-	border-bottom-color: ${color.light10};
+	border-bottom-color: ${color.dark10};
 `;
 
 const Container = styled(View)`
