@@ -4,13 +4,15 @@ import { size } from "../../../config";
 import { color } from "../../../config";
 
 const Line = styled(View)`
-  width: 100%;
-  background-color: ${color.light10};
-  margin: ${size.gap.default}px 0;
+	height: 1px;
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+	border-bottom-color: ${color.light10};
 `;
 
 const Container = styled(View)`
-  margin: ${size.gap.default}px 0;
+	width: 100%;
+  padding: ${size.gap.default}px 0;
 `;
 
 export type RuleProps = ViewProps & {
