@@ -35,7 +35,7 @@
 		"postbuild:ios": "tsx ./cli/rename-build.ts .ipa",
 		"postbuild:android": "tsx ./cli/rename-build.ts .aab",
 		"postbuild:apk": "tsx ./cli/rename-build.ts .apk",
-		"submit:ios": "eas submit -p ios",
+		"submit:ios": "sh ./cli/submit-ios.sh",
 		"setup:font": "tsx ./cli/update-icon-font.ts",
 		"setup": "npm run setup:font",
 		"version:increment": "tsx ./cli/increment-version.ts",
