@@ -44,13 +44,13 @@ export const factionDescriptionRelativeOffsets: Record<Faction, Offsets> = {
 		paddingBottom: offsetY + 2,
 	},
 	seeker: {
-		paddingTop: 7,
+		paddingTop: 6,
 		paddingLeft: 9,
 		paddingRight: 7,
 		paddingBottom: offsetY + 2,
 	},
 	guardian: {
-		paddingTop: 9,
+		paddingTop: 7,
 		paddingLeft: 10,
 		paddingRight: 11,
 		paddingBottom: offsetY + 2,

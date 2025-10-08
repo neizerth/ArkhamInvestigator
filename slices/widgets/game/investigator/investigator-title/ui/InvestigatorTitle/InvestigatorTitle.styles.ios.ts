@@ -58,7 +58,7 @@ export const getTitleStyle = (options: GetTitleStyleOptions) => {
 				paddingTop: "3%",
 			},
 			arrow: {
-				paddingTop: "2%",
+				paddingTop: "4%",
 			},
 		},
 		neutral: {

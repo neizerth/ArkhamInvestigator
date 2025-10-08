@@ -3,13 +3,10 @@ import {
 	InvestigatorText,
 	InvestigatorTraits,
 } from "@modules/board/base/entities/typography/ui";
-import type { InvestigatorTraitsProps } from "@modules/board/base/entities/typography/ui/InvestigatorTraits/InvestigatorTraits.types";
 import { FactionDescription } from "@modules/faction/shared/ui";
 import { size } from "@shared/config";
-import type { FC } from "react";
 import { View } from "react-native";
 import Animated from "react-native-reanimated";
-import { css } from "styled-components";
 import styled from "styled-components/native";
 import { TOP_CONTENT_OFFSET } from "../../../../../../../../config";
 import { BoardDescriptionExpandArea } from "../../BoardDescriptionExpandArea";
@@ -62,18 +59,8 @@ export const Menu: typeof BoardDescriptionMenu = styled(BoardDescriptionMenu)`
 
 `;
 
-type TraitsProps = {
-	compact: boolean;
-};
-
-export const Traits: FC<InvestigatorTraitsProps & TraitsProps> = styled(
-	InvestigatorTraits,
-)<TraitsProps>`
-  ${({ compact }: TraitsProps) =>
-		compact &&
-		css`
-    margin-top: 7px;
-  `}
+export const Traits: typeof InvestigatorTraits = styled(InvestigatorTraits)`
+  margin-top: 7px;
   margin-bottom: ${size.gap.small}px;
 `;
 

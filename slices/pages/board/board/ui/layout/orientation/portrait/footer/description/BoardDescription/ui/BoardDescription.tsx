@@ -57,7 +57,6 @@ export const BoardDescription = ({ ...props }: BoardDescriptionProps) => {
 	const unit = showDescription ? vw : textUnit;
 
 	const showTraits = !show || showDescription;
-	const compactTraits = !show && !showDescription;
 
 	return (
 		<C.Container {...props} style={[props.style, containerStyle]}>
@@ -69,11 +68,7 @@ export const BoardDescription = ({ ...props }: BoardDescriptionProps) => {
 						<C.DescriptionContent>
 							<C.TextContent>
 								{showTraits && (
-									<C.Traits
-										unit={vw}
-										investigator={investigator}
-										compact={compactTraits}
-									/>
+									<C.Traits unit={vw} investigator={investigator} />
 								)}
 								<C.Description style={descriptionStyle}>
 									<C.Text investigator={investigator} unit={unit} />
