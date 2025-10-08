@@ -1,7 +1,4 @@
-import {
-	selectBoardAbilityValue,
-	setBoardAbilityValue,
-} from "@modules/board/abilities/shared/lib";
+import { setBoardAbilityValue } from "@modules/board/abilities/shared/lib";
 import { selectBoardById } from "@modules/board/base/shared/lib";
 import { AbilityCode } from "@modules/mechanics/board/abilities/shared/config";
 import { InvesigatorCode } from "@modules/mechanics/investigator/entities/config";
@@ -21,21 +18,11 @@ function* worker({ payload }: ReturnType<typeof newTurnStarted>) {
 		return;
 	}
 
-	const valueSelector = selectBoardAbilityValue({
-		boardId,
-		abilityId,
-	});
-
-	const currentValue: ReturnType<typeof valueSelector> =
-		yield select(valueSelector);
-
-	const value = Math.max(currentValue, 4);
-
 	yield put(
 		setBoardAbilityValue({
 			boardId,
 			abilityId,
-			value,
+			value: 4,
 		}),
 	);
 }
