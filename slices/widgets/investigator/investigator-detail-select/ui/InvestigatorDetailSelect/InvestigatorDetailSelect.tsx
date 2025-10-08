@@ -96,7 +96,7 @@ export const InvestigatorDetailSelect = () => {
 						},
 					]}
 				>
-					<Delay delayMs={0} fallback={<C.Loader />}>
+					<Delay fallback={<C.Loader />}>
 						<C.Sections>
 							<InvestigatorDescription />
 							{signatures.length > 1 && (
