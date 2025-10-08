@@ -5,6 +5,7 @@ import {
 	selectShowResources,
 	selectTrackHandSize,
 } from "@modules/board/base/shared/lib";
+import { selectPickerSize } from "@modules/core/control/entities/picker/lib";
 import { useAppSelector } from "@shared/lib";
 import { Dimensions, type ViewProps } from "react-native";
 import { HandSize } from "../../../../../shared";
@@ -21,6 +22,7 @@ export const RightSidebar = ({ ...props }: RightSidebarProps) => {
 	const showDoom = useAppSelector(selectShowInvestigatorDoom);
 	const showClues = useAppSelector(selectShowClues);
 	const showResources = useAppSelector(selectShowResources);
+	const pickerSize = useAppSelector(selectPickerSize);
 
 	const showSideDoom = showDoom && !xs;
 	const showMainDoom = showDoom && xs;
@@ -36,9 +38,10 @@ export const RightSidebar = ({ ...props }: RightSidebarProps) => {
 	);
 
 	const inline = showDoom || showHandSize;
+	const compact = pickerSize === "small" || showHandSize;
 
 	const groupProps = {
-		compact: showHandSize,
+		compact,
 	};
 
 	return (
