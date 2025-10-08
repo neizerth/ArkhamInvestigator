@@ -2,7 +2,7 @@ import { selectMediaVersion } from "@modules/signature/base/shared/lib";
 import { DEVICE_FONT_SCALE, DPR } from "@shared/config";
 import { BUILD_ID, BUILD_VERSION } from "@shared/config/app";
 import { useAppSelector } from "@shared/lib";
-import { A, Bold, Break, List, Paragraph, Title } from "@shared/ui";
+import { A, Bold, Break, List, Paragraph, Rule, Title } from "@shared/ui";
 import {
 	ContentPage,
 	type ContentPageProps,
@@ -102,16 +102,17 @@ export const AboutPage = (props: AboutPageProps) => {
 				@CrazyMind667, @LexAndrVas, @Anton_Sabaton, @ezhikhin, @Mpmapuo,
 				@alexander_violator, @ka777ban, @Amarum, @l_leona_l, @litt_n,
 				@Vladimir_NC, @w1ne_kun, @Sitx_1, @Qaedmon, @Dmitry_Korablin,
-				@bezmyateznost, @avblrpa, @Lefebvre1121
+				@bezmyateznost, @avblrpa, @Lefebvre1121, @galen_ice
 			</Paragraph>
 			<Title>{t`Sponsors`}</Title>
 			<Paragraph>
-				@kolorono, @Rick_Freydin
-				<Break />
 				<A href="https://www.patreon.com/arkhamdivider">Patreon:</A>
 				<Break />
 				@RecedingSamson, @Pink_hawk, @felice, The 1 Player Podcast, Andy
 				Lindberg, Nathan Wurschmidt
+				<Break />
+				<Rule />
+				@kolorono, @Rick_Freydin
 			</Paragraph>
 			<Title>{t`Special Thanks`}</Title>
 			<List>
