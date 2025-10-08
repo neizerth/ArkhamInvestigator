@@ -10,7 +10,7 @@ import { color, font } from "@shared/config";
 import { getKeyConfig } from "@shared/lib";
 import type { PropsWithFaction } from "@shared/model";
 import { mergeDeepRight } from "ramda";
-import { Platform, type TextStyle, type ViewStyle } from "react-native";
+import type { TextStyle, ViewStyle } from "react-native";
 
 type GetTitleStyleOptions = PropsWithFaction & {
 	height: number;
@@ -23,13 +23,13 @@ type ReturnStyle = {
 	background: ViewStyle;
 	title: ViewStyle;
 	titleText: TextStyle;
+	titleContent: ViewStyle;
+	arrow: ViewStyle;
 	subtitle: ViewStyle;
 	subtitleText: TextStyle;
 	unique: TextStyle;
 	id: TextStyle;
 };
-
-const ios = Platform.OS === "ios";
 
 export const getTitleStyle = (options: GetTitleStyleOptions) => {
 	const { height, language, faction, parallel } = options;
@@ -84,6 +84,9 @@ export const getTitleStyle = (options: GetTitleStyleOptions) => {
 		seeker: {
 			title: {
 				paddingTop: "1%",
+			},
+			arrow: {
+				paddingTop: "2%",
 			},
 		},
 		mystic: {
@@ -187,13 +190,15 @@ export const getTitleStyle = (options: GetTitleStyleOptions) => {
 		height,
 	};
 	const title: ViewStyle = {
-		gap: 2 * vh * font.scale,
 		paddingTop: "0.5%",
 		height: "57.5%",
 	};
 	const subtitle: ViewStyle = {
 		height: "30%",
 		paddingTop: "0.3%",
+	};
+	const titleContent: ViewStyle = {
+		gap: 2 * vh * font.scale,
 	};
 	const titleText: TextStyle = {
 		color: textColor,
@@ -215,6 +220,7 @@ export const getTitleStyle = (options: GetTitleStyleOptions) => {
 		container,
 		background,
 		title,
+		titleContent,
 		titleText,
 		subtitle,
 		subtitleText,

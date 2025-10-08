@@ -17,8 +17,10 @@ type ReturnStyle = {
 	background: ViewStyle;
 	title: ViewStyle;
 	titleText: TextStyle;
+	titleContent: ViewStyle;
 	subtitle: ViewStyle;
 	subtitleText: TextStyle;
+	arrow: ViewStyle;
 	unique: TextStyle;
 	id: TextStyle;
 };
@@ -54,6 +56,9 @@ export const getTitleStyle = (options: GetTitleStyleOptions) => {
 		seeker: {
 			title: {
 				paddingTop: "3%",
+			},
+			arrow: {
+				paddingTop: "2%",
 			},
 		},
 		neutral: {
@@ -110,7 +115,7 @@ export const getTitleStyle = (options: GetTitleStyleOptions) => {
 		seeker: {
 			title: {
 				paddingTop: "1.5%",
-				height: "55%",
+				height: "53%",
 			},
 			unique: {
 				marginTop: "1%",
@@ -281,9 +286,11 @@ export const getTitleStyle = (options: GetTitleStyleOptions) => {
 		gap: "8%",
 	};
 	const title: ViewStyle = {
-		gap: 2 * vh * font.scale,
 		paddingTop: "0.5%",
 		height: "54%",
+	};
+	const titleContent: ViewStyle = {
+		gap: 2 * vh * font.scale,
 	};
 	const subtitle: ViewStyle = {
 		height: "35%",
@@ -308,6 +315,7 @@ export const getTitleStyle = (options: GetTitleStyleOptions) => {
 	const base = {
 		background,
 		title,
+		titleContent,
 		titleText,
 		subtitle,
 		subtitleText,

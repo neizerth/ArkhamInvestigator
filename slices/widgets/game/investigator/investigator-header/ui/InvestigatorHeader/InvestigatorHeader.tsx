@@ -1,10 +1,7 @@
 import { memo } from "react";
 import type { ViewProps } from "react-native";
 import type { InvestigatorBaseSkillsProps } from "../../../investigator-skills";
-import type {
-	InvestigatoTitleBaseProps,
-	InvestigatorTitleProps,
-} from "../../../investigator-title";
+import type { InvestigatoTitleBaseProps } from "../../../investigator-title";
 import {
 	getHeaderStyle,
 	getSkillsSize,
@@ -21,14 +18,12 @@ export type InvestigatorHeaderProps = ViewProps &
 		direction: "row" | "column";
 		gap: number;
 		pressableTitle?: boolean;
-		onTitlePress?: InvestigatorTitleProps["onPress"];
 	};
 
 export const InvestigatorHeader = ({
 	onLayout,
 	style,
 	pressableTitle,
-	onTitlePress,
 	...props
 }: InvestigatorHeaderProps) => {
 	const headerStyle = getHeaderStyle(props);
@@ -39,12 +34,7 @@ export const InvestigatorHeader = ({
 
 	return (
 		<C.Container {...props} onLayout={onLayout} style={[style, headerStyle]}>
-			<C.Title
-				{...props}
-				{...titleSize}
-				pressable={pressableTitle}
-				onPress={onTitlePress}
-			/>
+			<C.Title {...props} {...titleSize} pressable={pressableTitle} />
 			<C.Skills {...props} {...skillsSize} style={skillsStyle} />
 		</C.Container>
 	);

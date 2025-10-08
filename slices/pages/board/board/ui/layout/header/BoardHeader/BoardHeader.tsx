@@ -2,10 +2,13 @@ import {
 	selectCurrentIsParallel,
 	selectCurrentIsUnique,
 } from "@modules/board/base/entities/base/lib";
+import { useLeaveBoard } from "@modules/board/base/features/leave-board";
 import {
 	selectBoardsCount,
 	selectCurrentBoardProp,
 	selectNonUniqueId,
+	setNextBoardIndex,
+	setPrevBoardIndex,
 } from "@modules/board/base/shared/lib";
 import { CustomModalId } from "@modules/core/modal/entities/base/config";
 import { openModal } from "@modules/core/modal/shared/base/lib";
@@ -13,6 +16,7 @@ import {
 	selectCanChangeFaction,
 	selectCurrentFaction,
 } from "@modules/mechanics/board/base/entities/lib";
+import { routes } from "@shared/config";
 import { useAppDispatch, useAppSelector } from "@shared/lib";
 import { InvestigatorHeaderMemo as InvestigatorHeader } from "@widgets/game/investigator";
 import type { RenderInvestigatorSkillItem } from "@widgets/game/investigator";
@@ -27,6 +31,7 @@ export const BoardHeader = (props: BoardHeaderProps) => {
 	const dispatch = useAppDispatch();
 	const { layout } = useContext(LayoutContext);
 	const boardsCount = useAppSelector(selectBoardsCount);
+	const goToPage = useLeaveBoard();
 	const single = boardsCount === 1;
 
 	const investigator = useAppSelector(selectCurrentBoardProp("investigator"));
@@ -36,7 +41,15 @@ export const BoardHeader = (props: BoardHeaderProps) => {
 	const faction = useAppSelector(selectCurrentFaction);
 	const pressableTitle = useAppSelector(selectCanChangeFaction("current"));
 
-	const onTitlePress = useCallback(() => {
+	const next = useCallback(() => {
+		dispatch(setNextBoardIndex());
+	}, [dispatch]);
+
+	const prev = useCallback(() => {
+		dispatch(setPrevBoardIndex());
+	}, [dispatch]);
+
+	const onPress = useCallback(() => {
 		if (!pressableTitle) {
 			return false;
 		}
@@ -60,14 +73,18 @@ export const BoardHeader = (props: BoardHeaderProps) => {
 	const titleProps = {
 		entityId: boardId,
 		parallel: isParallel,
-		pressableTitle,
-		onTitlePress,
+		onNextPress: next,
+		onPrevPress: prev,
+		pressableTitle: !single,
+		onTitlePress: goToPage(routes.overview),
+		onPress,
 		name,
 		subname,
 		faction,
 		language: locale,
 		single,
 		unique,
+		showArrows: !single,
 	};
 
 	const skillProps = {

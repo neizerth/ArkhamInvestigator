@@ -1,5 +1,5 @@
 import type { Faction } from "@shared/model";
-import { color } from "./color";
+import { color } from "./common";
 
 export type FactionColor = {
 	darkColor: string;
