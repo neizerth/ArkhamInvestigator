@@ -26,5 +26,5 @@ export const useAppLoaderProgress = () => {
 	const externalProgress =
 		external.progress === 0 && imagesReady ? 100 : external.progress;
 
-	return round(0.2 * local.progress) + round(0.8 * externalProgress);
+	return round(0.2 * local.progress + 0.8 * externalProgress);
 };
