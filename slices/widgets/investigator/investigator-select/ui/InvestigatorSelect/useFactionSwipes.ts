@@ -31,12 +31,12 @@ export const useFactionSwipes = () => {
 
 	const left = useSwipe({
 		direction: "left",
-		onSwipe: prev,
+		onSwipe: next,
 	});
 
 	const right = useSwipe({
 		direction: "right",
-		onSwipe: next,
+		onSwipe: prev,
 	});
 
 	return useMemo(() => {
