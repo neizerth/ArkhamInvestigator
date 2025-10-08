@@ -8,6 +8,7 @@ import {
 	setCurrentSkinId,
 } from "@shared/lib/store";
 import type { InvestigatorDetailItem } from "@shared/model";
+import { Delay } from "@shared/ui";
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { InvestigatorSelectSectionMemo as DataSection } from "../../../investigator-select-section";
@@ -95,29 +96,31 @@ export const InvestigatorDetailSelect = () => {
 						},
 					]}
 				>
-					<C.Sections>
-						<InvestigatorDescription />
-						{signatures.length > 1 && (
-							<DataSection
-								title={t`Versions`}
-								data={signatures}
-								selectedId={signatureId}
-								onChange={onChangeSignature}
-								size={CARD_SIZE}
-							/>
-						)}
-						{skins.length > 1 && (
-							<DataSection
-								title={t`Skins`}
-								data={skins}
-								onChange={onChangeSkin}
-								selectedId={skinId}
-								showIcon={false}
-								size={CARD_SIZE}
-								showNone
-							/>
-						)}
-					</C.Sections>
+					<Delay>
+						<C.Sections>
+							<InvestigatorDescription />
+							{signatures.length > 1 && (
+								<DataSection
+									title={t`Versions`}
+									data={signatures}
+									selectedId={signatureId}
+									onChange={onChangeSignature}
+									size={CARD_SIZE}
+								/>
+							)}
+							{skins.length > 1 && (
+								<DataSection
+									title={t`Skins`}
+									data={skins}
+									onChange={onChangeSkin}
+									selectedId={skinId}
+									showIcon={false}
+									size={CARD_SIZE}
+									showNone
+								/>
+							)}
+						</C.Sections>
+					</Delay>
 				</C.Card>
 			</C.Content>
 		</C.Container>

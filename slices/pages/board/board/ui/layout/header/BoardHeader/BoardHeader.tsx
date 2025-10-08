@@ -60,6 +60,13 @@ export const BoardHeader = (props: BoardHeaderProps) => {
 		);
 	}, [dispatch, pressableTitle]);
 
+	const onTitlePress = useCallback(() => {
+		if (single) {
+			return false;
+		}
+		goToPage(routes.overview)();
+	}, [goToPage, single]);
+
 	const renderSkill = useCallback((props: RenderInvestigatorSkillItem) => {
 		return <C.Skill {...props} />;
 	}, []);
@@ -76,7 +83,7 @@ export const BoardHeader = (props: BoardHeaderProps) => {
 		onNextPress: next,
 		onPrevPress: prev,
 		pressableTitle: !single,
-		onTitlePress: goToPage(routes.overview),
+		onTitlePress,
 		onPress,
 		name,
 		subname,
