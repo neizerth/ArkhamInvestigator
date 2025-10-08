@@ -3,7 +3,7 @@ import {
 	setShowDescription,
 } from "@modules/board/base/shared/lib";
 import { goToPage } from "@modules/core/router/shared/lib";
-import { useSwipe } from "@modules/core/touch/shared/lib";
+import { useSwipe, useTap } from "@modules/core/touch/shared/lib";
 import { routes } from "@shared/config";
 import { useAppDispatch, useAppSelector } from "@shared/lib";
 import { useCallback } from "react";
@@ -40,7 +40,9 @@ export const BoardDescriptionExpandArea = (
 		onSwipe: openReference,
 	});
 
-	const press = Gesture.Tap().runOnJS(true).onStart(show);
+	const press = useTap({
+		onTap: show,
+	});
 
 	const gesture = Gesture.Exclusive(swipeUp, swipeRight, press);
 	return (
