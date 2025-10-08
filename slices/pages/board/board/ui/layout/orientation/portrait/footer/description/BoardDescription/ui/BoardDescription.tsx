@@ -5,7 +5,10 @@ import {
 	selectShowDescription,
 } from "@modules/board/base/shared/lib";
 import { selectCurrentFaction } from "@modules/mechanics/board/base/entities/lib";
-import { CAN_ALWAYS_SHOW_GAME_TEXT } from "@shared/config";
+import {
+	CAN_ALWAYS_SHOW_GAME_TEXT,
+	IOS_WITH_GESTURE_CONTROL,
+} from "@shared/config";
 import { useAppSelector, useFadeAnimation } from "@shared/lib";
 import { Dimensions, type ViewProps } from "react-native";
 import { GestureDetector } from "react-native-gesture-handler";
@@ -57,6 +60,7 @@ export const BoardDescription = ({ ...props }: BoardDescriptionProps) => {
 	const unit = showDescription ? vw : textUnit;
 
 	const showTraits = !show || showDescription;
+	const compactTraits = !show && !showDescription && IOS_WITH_GESTURE_CONTROL;
 
 	return (
 		<C.Container {...props} style={[props.style, containerStyle]}>
@@ -68,7 +72,11 @@ export const BoardDescription = ({ ...props }: BoardDescriptionProps) => {
 						<C.DescriptionContent>
 							<C.TextContent>
 								{showTraits && (
-									<C.Traits unit={vw} investigator={investigator} />
+									<C.Traits
+										unit={vw}
+										investigator={investigator}
+										compact={compactTraits}
+									/>
 								)}
 								<C.Description style={descriptionStyle}>
 									<C.Text investigator={investigator} unit={unit} />
