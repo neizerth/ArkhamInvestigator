@@ -1,3 +1,4 @@
+import { checkAppUpdates } from "@modules/core/app/entities/checkAppUpdates";
 import { clearImageCache } from "@modules/core/app/entities/clearImageCache";
 import { restartApp } from "@modules/core/app/entities/restartApp";
 import { externalImagesDiskPath } from "@modules/core/assets/base/shared/config";
@@ -34,9 +35,20 @@ export const AppDiagnostics = (props: AppDiagnosticsProps) => {
 		restart();
 	};
 
+	const checkUpdates = () => {
+		dispatch(checkAppUpdates());
+	};
+
 	return (
 		<C.Container {...props}>
 			<C.Section title={t`Diagnostics`}>
+				<C.Row>
+					<C.Button
+						text={t`Check Updates`}
+						icon="cloud-download"
+						onPress={checkUpdates}
+					/>
+				</C.Row>
 				<C.Row>
 					<C.Button
 						text={t`Clear image cache`}

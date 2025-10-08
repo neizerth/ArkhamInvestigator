@@ -8,6 +8,7 @@ import { put, retry, takeEvery } from "redux-saga/effects";
 import { getAppData } from "./getAppData";
 
 function* worker({ payload }: ReturnType<typeof updateAppData>) {
+	console.log("updating app data", payload);
 	const { language } = payload;
 
 	const maxTries = 3;

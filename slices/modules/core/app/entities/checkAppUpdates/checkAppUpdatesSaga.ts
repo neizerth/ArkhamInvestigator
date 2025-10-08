@@ -46,6 +46,7 @@ function* worker() {
 		});
 
 		if (needUpdate) {
+			console.log("updating app info");
 			yield put(updateAppInfo(data));
 			yield put(
 				updateAppData({

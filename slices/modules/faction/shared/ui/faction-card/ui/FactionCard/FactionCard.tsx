@@ -1,6 +1,6 @@
 import { useLayoutSize } from "@shared/lib";
 import type { PropsWithFaction } from "@shared/model/ui";
-import { Fragment, memo } from "react";
+import { Fragment, memo, useEffect, useState } from "react";
 import { type ViewProps, useWindowDimensions } from "react-native";
 import * as C from "./FactionCard.components";
 
@@ -38,16 +38,24 @@ export const FactionCard = ({
 
 	const [containerSize, onContainerLayout] = useLayoutSize();
 
-	const maxHeight = size.height + MAX_HEIGHT_AREA;
+	const [maxHeight, setMaxHeight] = useState(size.height + MAX_HEIGHT_AREA);
 
-	const style = size
+	useEffect(() => {
+		const height = size.height + MAX_HEIGHT_AREA;
+		if (height >= maxHeight) {
+			return;
+		}
+		setMaxHeight(size.height + MAX_HEIGHT_AREA);
+	}, [size.height, maxHeight]);
+
+	const style = containerSize
 		? {
 				maxHeight,
 			}
 		: {};
 
 	const containerStyle = {
-		opacity: size && containerSize ? 1 : 0,
+		opacity: containerSize ? 1 : 0,
 	};
 
 	return (

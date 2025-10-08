@@ -371,5 +371,6 @@
 	"Chinese": "Китайский",
 	"Restart App": "Перезапустить приложение",
 	"Reload downloaded assets": "Повторно загрузить данные",
-	"Clear download queue": "Очистить очередь загрузок"
+	"Clear download queue": "Очистить очередь загрузок",
+	"Check Updates": "Проверить обновления"
 }
