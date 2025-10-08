@@ -19,7 +19,10 @@ export const useLayoutSize = <T extends Box | undefined>(defaultSize?: T) => {
 			if (dX < threshold && dY < threshold) {
 				return;
 			}
-			setSize(layout);
+			setSize({
+				width: Math.round(layout.width),
+				height: Math.round(layout.height),
+			});
 		},
 		[size],
 	);
