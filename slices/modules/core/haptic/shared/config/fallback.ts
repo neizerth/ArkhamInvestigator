@@ -45,3 +45,8 @@ export const DEFAULT_ANDROID_PATTERN: HapticFeedbackType = "clockTick";
 export const fallbackWebPatterns: FallbackPattern<VibratePattern> = {
 	effectTick: TICK_PATTERN,
 };
+
+export const fallbackAndroid7Patterns: FallbackPattern<VibratePattern> = {
+	clockTick: 20,
+	selection: 20,
+};
