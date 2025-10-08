@@ -49,8 +49,8 @@ export const changeSelectedInvestigator: ActionCreator<AppThunk> =
 			return;
 		}
 
-		dispatch(goToPage(routes.selectInvestigatorDetails));
 		dispatch(setCurrentSignatureGroup(group));
+		dispatch(goToPage(routes.selectInvestigatorDetails));
 	};
 
 export const removeSelectedInvestigator: ActionCreator<AppThunk> =
