@@ -86,7 +86,7 @@ export const getTitleStyle = (options: GetTitleStyleOptions) => {
 				paddingTop: "1%",
 			},
 			arrow: {
-				paddingTop: "3%",
+				paddingTop: "4%",
 			},
 		},
 		mystic: {
@@ -145,12 +145,12 @@ export const getTitleStyle = (options: GetTitleStyleOptions) => {
 		},
 		guardian: {
 			background: {
-				gap: parallel ? "7%" : "3%",
+				gap: parallel ? "7%" : "4%",
 			},
 		},
 		seeker: {
 			title: {
-				paddingTop: "2%",
+				paddingTop: "1%",
 			},
 			background: {
 				gap: "4%",
