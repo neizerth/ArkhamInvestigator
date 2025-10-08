@@ -8,6 +8,7 @@ import { InvestigatorListSeparator } from "../InvestigatorListSeparator";
 export const Container: typeof SectionList = styled(SectionList).attrs({
 	contentContainerStyle: {
 		gap: size.gap.default,
+		paddingBottom: 65,
 	},
 })`
 `;
