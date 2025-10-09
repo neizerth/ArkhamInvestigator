@@ -1,3 +1,4 @@
+import { size } from "@shared/config";
 import { LoadScreenMemo as LoadScreen, Text } from "@shared/ui";
 import styled from "styled-components/native";
 
@@ -13,4 +14,5 @@ export const Loader: typeof LoadScreen = styled(LoadScreen)`
 
 export const LoadingText: typeof Text = styled(Text)`
   text-align: center;
+  padding: ${size.gap.default}px;
 `;
