@@ -1,6 +1,7 @@
 import { ContextModal } from "@modules/core/modal/shared/base/ui";
 import { color, size } from "@shared/config";
 import { View } from "react-native";
+import { ActivityIndicator } from "react-native";
 import styled from "styled-components/native";
 import { OverviewInvestigator } from "../OverviewInvestigator";
 
@@ -32,4 +33,15 @@ export const Separator: typeof View = styled(View)`
 
 export const Item: typeof View = styled(View)`
   gap: ${size.gap.default}px;
+`;
+
+export const Loader: typeof ActivityIndicator = styled(ActivityIndicator).attrs(
+	{
+		color: color.dark10,
+	},
+)`
+	padding: ${size.gap.default}px 0;
+  justify-content: center;
+  min-height: 300px;
+  flex: 1;
 `;
