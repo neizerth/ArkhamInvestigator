@@ -13,6 +13,7 @@ import { getAppStatusData } from "./getAppStatusData";
 import { isOutdatedAppVersion, isUpdateNeeded } from "./lib";
 
 function* worker() {
+	console.log("checking app updates");
 	try {
 		const maxTries = 3;
 		const { data }: ReturnAwaited<typeof getAppStatusData> = yield retry(
@@ -21,6 +22,7 @@ function* worker() {
 			getAppStatusData,
 		);
 
+		console.log("version", data.version);
 		const { minClientVersion } = data;
 
 		const outdated = isOutdatedAppVersion(minClientVersion);
@@ -56,6 +58,7 @@ function* worker() {
 		}
 		yield put(appUpdatesChecked(data));
 	} catch (e) {
+		console.error("error checking app updates", e);
 		return;
 	}
 }
