@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <network-security-config>
-    <base-config cleartextTrafficPermitted="true">
+    <!-- This is the old configuration that allowed cleartext traffic (Android 7 LetsEncrypt support) -->
+    <!-- <base-config cleartextTrafficPermitted="true">
         <trust-anchors>
             <certificates src="@raw/isrgrootx1" />
             <certificates src="@raw/isrgrootx2" />
+            <certificates src="system" />
+        </trust-anchors>
+    </base-config> -->
+    <base-config cleartextTrafficPermitted="false">
+        <trust-anchors>
             <certificates src="system" />
         </trust-anchors>
     </base-config>
