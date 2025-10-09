@@ -1,5 +1,7 @@
 import { ContextModal } from "@modules/core/modal/shared/base/ui";
 import { color, size } from "@shared/config";
+import { Row } from "@shared/ui";
+import { ArrowButton } from "@shared/ui/control/button/ArrowButton";
 import { View } from "react-native";
 import { ActivityIndicator } from "react-native";
 import styled from "styled-components/native";
@@ -40,8 +42,15 @@ export const Loader: typeof ActivityIndicator = styled(ActivityIndicator).attrs(
 		color: color.dark10,
 	},
 )`
+  height: 432px;
 	padding: ${size.gap.default}px 0;
   justify-content: center;
-  min-height: 300px;
+`;
+
+export const Button: typeof ArrowButton = styled(ArrowButton)`
   flex: 1;
+`;
+
+export const Actions: typeof Row = styled(Row)`
+  gap: ${size.gap.default}px;
 `;

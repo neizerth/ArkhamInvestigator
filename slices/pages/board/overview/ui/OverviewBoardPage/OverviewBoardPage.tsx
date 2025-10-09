@@ -6,6 +6,7 @@ import {
 import { useGoBack } from "@modules/core/router/shared/lib";
 import { delay, useAppDispatch, useAppSelector } from "@shared/lib";
 import { Delay } from "@shared/ui";
+import { dec, inc } from "ramda";
 import { Fragment, useCallback, useState } from "react";
 import { Dimensions } from "react-native";
 import * as C from "./OverviewBoardPage.components";
@@ -13,6 +14,8 @@ import * as C from "./OverviewBoardPage.components";
 const window = Dimensions.get("window");
 
 const smallScreen = window.height <= 700;
+
+const maxSize = smallScreen ? 3 : 4;
 
 export const OverviewBoardPage = () => {
 	const dispatch = useAppDispatch();
@@ -32,25 +35,48 @@ export const OverviewBoardPage = () => {
 		[dispatch, back],
 	);
 
-	const data =
-		smallScreen && ids.length > 3 ? ids.slice(offset, offset + 3) : ids;
+	const size = ids.length;
+	const isStart = offset === 0;
+	const isEnd = offset === size - maxSize;
+
+	const next = useCallback(() => {
+		if (isEnd) {
+			return false;
+		}
+		setOffset(inc);
+	}, [isEnd]);
+
+	const prev = useCallback(() => {
+		if (isStart) {
+			return false;
+		}
+		setOffset(dec);
+	}, [isStart]);
+
+	const data = size > maxSize ? ids.slice(offset, offset + maxSize) : ids;
 
 	return (
 		<C.Container title="Investigators" onClose={back}>
-			<Delay>
-				<C.Content>
-					{ids.map((id, index) => (
+			<C.Content>
+				<Delay fallback={<C.Loader />} delayMs={0} key={offset}>
+					{data.map((id, index) => (
 						<Fragment key={id}>
 							<C.Board
 								boardId={id}
 								selected={currentIndex === index}
 								onSelect={onSelect(index)}
 							/>
-							{index !== ids.length - 1 && <C.Separator />}
+							{index !== data.length - 1 && <C.Separator />}
 						</Fragment>
 					))}
-				</C.Content>
-			</Delay>
+				</Delay>
+				{size > maxSize && (
+					<C.Actions>
+						<C.Button disabled={isStart} direction="left" onPress={prev} />
+						<C.Button disabled={isEnd} direction="right" onPress={next} />
+					</C.Actions>
+				)}
+			</C.Content>
 		</C.Container>
 	);
 };
