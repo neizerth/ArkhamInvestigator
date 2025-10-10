@@ -11,7 +11,7 @@ export const ParallelZoeySamarasTokenValues: InvestigatorTokenValueModification 
 				(token) =>
 					token.type === "bless" &&
 					!token.sealed &&
-					revealedIds.includes(token.id),
+					!revealedIds.includes(token.id),
 			);
 
 			return {
