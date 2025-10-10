@@ -14,10 +14,16 @@ export const Container: typeof TouchableOpacity = styled(TouchableOpacity)`
   background-color: ${color.dark30};
 `;
 
+// @TODO check on android
+
 export const Text: typeof GameText = styled(GameText).attrs({
 	componentStyles: {
 		paragraph: {
 			flexWrap: "nowrap",
+		},
+		icon: {
+			top: -6,
+			fontSize: font.size.small,
 		},
 	},
 })`
