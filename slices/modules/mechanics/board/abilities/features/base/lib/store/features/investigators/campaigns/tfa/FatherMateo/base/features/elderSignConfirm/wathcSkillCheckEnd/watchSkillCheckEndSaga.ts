@@ -2,7 +2,6 @@ import { selectBoardById } from "@modules/board/base/shared/lib";
 import { chaosBagRevealEnd } from "@modules/chaos-bag/reveal/base/entities/lib";
 import { InvesigatorCode } from "@modules/mechanics/investigator/entities/config";
 import { put, select, takeEvery } from "redux-saga/effects";
-import { elderSignTokenId } from "../../../config";
 import { openFatherMateoElderSignConfirm } from "../openElderSignConfirm";
 
 const code = InvesigatorCode.FatherMateo.base;
@@ -13,7 +12,7 @@ const filterAction = (action: unknown) => {
 	}
 
 	const { allRevealedTokens } = action.payload;
-	return allRevealedTokens.some((token) => token.id === elderSignTokenId);
+	return allRevealedTokens.some((token) => token.type === "elderSign");
 };
 
 function* worker({ payload }: ReturnType<typeof chaosBagRevealEnd>) {
