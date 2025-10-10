@@ -3,7 +3,6 @@ import {
 	type GetSignatureImageUrlOptions,
 	getSignatureImageUrl as getUrl,
 } from "@modules/signature/base/shared/api";
-import { Platform } from "react-native";
 import { v4 } from "uuid";
 
 type CreateSingleItemOptions = Omit<GetSignatureImageUrlOptions, "remote">;
@@ -42,7 +41,7 @@ const createSingleItemTypes = (options: CreateSingleItemTypesOptions) => {
 	];
 };
 
-const needGrayscale = Platform.OS === "ios";
+const needGrayscale = false;
 
 export const createDownloadQueueItems = (code: string): DownloadQueueItem[] => {
 	const baseImages = createSingleItemTypes({
