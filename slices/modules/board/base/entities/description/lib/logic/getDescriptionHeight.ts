@@ -9,7 +9,6 @@ import {
 	size,
 } from "@shared/config";
 import type { Box } from "@shared/model";
-import { Platform } from "react-native";
 import { DEFAULT_PORTRAIT_DESCRIPTION_HEIGHT } from "../../config";
 
 type Options = {
@@ -18,7 +17,6 @@ type Options = {
 	faction: Faction;
 };
 
-const ios = Platform.OS === "ios";
 const platformGap = IOS_WITH_GESTURE_CONTROL ? size.gap.medium : 0;
 
 export const getDescriptionHeight = ({
