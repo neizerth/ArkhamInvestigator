@@ -1,7 +1,10 @@
 import {
+	selectAllowNegativeHealthAndSanity,
 	selectBoardById,
 	selectShowDamageAndHorror,
+	setBoardActualPropValue,
 } from "@modules/board/base/shared/lib";
+import type { PickerChangeEvent } from "@modules/core/control/entities/picker/model";
 import {
 	selectBoardDamage,
 	selectBoardFaction,
@@ -40,18 +43,24 @@ export const OverviewInvestigator = ({
 	const damage = useAppSelector(selectBoardDamage(boardId));
 	const horror = useAppSelector(selectBoardHorror(boardId));
 
-	const maxHealth = baseValue?.health;
-	const maxSanity = baseValue?.sanity;
+	const allowNegativeValues = useAppSelector(
+		selectAllowNegativeHealthAndSanity,
+	);
+
+	const maxHealth = baseValue.health;
+	const maxSanity = baseValue.sanity;
+
+	const minValue = allowNegativeValues ? -20 : 0;
 
 	const healthData = useMemo(() => {
-		return showWounds ? woundsData : range(-20, maxHealth + 1);
-	}, [maxHealth, showWounds]);
+		return showWounds ? woundsData : range(minValue, maxHealth + 1);
+	}, [maxHealth, showWounds, minValue]);
 
 	const minHealth = healthData[0];
 
 	const sanityData = useMemo(() => {
-		return showWounds ? woundsData : range(-20, maxSanity + 1);
-	}, [maxSanity, showWounds]);
+		return showWounds ? woundsData : range(minValue, maxSanity + 1);
+	}, [maxSanity, showWounds, minValue]);
 
 	const onActionsPress = useCallback(() => {
 		dispatch(makeAction(boardId));
@@ -59,9 +68,21 @@ export const OverviewInvestigator = ({
 
 	const minSanity = sanityData[0];
 
-	if (!faction) {
-		return;
-	}
+	const setWounds = useCallback(
+		(stat: "health" | "sanity") =>
+			({ value = 0 }: PickerChangeEvent) => {
+				const base = baseValue[stat];
+				dispatch(
+					setBoardActualPropValue({
+						boardId,
+
+						prop: stat,
+						value: base - value,
+					}),
+				);
+			},
+		[dispatch, boardId, baseValue],
+	);
 
 	const withPicker = (type: InvestigatorBoardNumericStat) => ({
 		type: "picker" as const,
@@ -82,6 +103,9 @@ export const OverviewInvestigator = ({
 							value={showWounds ? damage : value.health}
 							data={healthData}
 							onPress={control.decrease("health", minHealth)}
+							onValueChanged={
+								showWounds ? setWounds("health") : control.onChange("health")
+							}
 						/>
 						<C.Sanity
 							{...withPicker("sanity")}
@@ -89,6 +113,9 @@ export const OverviewInvestigator = ({
 							value={showWounds ? horror : value.sanity}
 							data={sanityData}
 							onPress={control.decrease("sanity", minSanity)}
+							onValueChanged={
+								showWounds ? setWounds("sanity") : control.onChange("sanity")
+							}
 						/>
 						<C.Clues
 							{...withPicker("clues")}
