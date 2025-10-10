@@ -32,8 +32,8 @@ function* worker({ payload }: ReturnType<typeof modalConfirmed>) {
 
 	const historyGroupId = v4();
 
-	const healDamage = damage > 1;
-	const healHorror = horror > 1;
+	const healDamage = damage > 0;
+	const healHorror = horror > 0;
 
 	yield put(
 		setBoardAbilityUse({
