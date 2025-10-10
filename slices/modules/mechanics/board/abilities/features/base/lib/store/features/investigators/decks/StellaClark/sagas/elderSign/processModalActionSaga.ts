@@ -16,7 +16,8 @@ import {
 } from "@modules/mechanics/board/base/entities/lib";
 import { put, select, takeEvery } from "redux-saga/effects";
 import { v4 } from "uuid";
-import { modalId } from "../config";
+import { modalId } from "../../config";
+import { fail } from "../fail";
 
 const filterAction = createConfirmModalFilter({
 	modalId,
@@ -34,6 +35,8 @@ function* worker({ payload }: ReturnType<typeof modalConfirmed>) {
 
 	const healDamage = damage > 0;
 	const healHorror = horror > 0;
+
+	yield put(fail({ boardId }));
 
 	yield put(
 		setBoardAbilityUse({

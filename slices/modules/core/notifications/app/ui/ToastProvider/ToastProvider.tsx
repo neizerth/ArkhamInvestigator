@@ -1,15 +1,20 @@
 import { size, statusBarHeight } from "@shared/config";
-import type { PropsWithChildren } from "react";
+import { Fragment, type PropsWithChildren } from "react";
+import { Platform } from "react-native";
+import { FullWindowOverlay } from "react-native-screens";
 import Toast from "react-native-toast-message";
 import { toastConfig } from "../../config";
 
 const topOffset = Math.max(size.gap.xxl, statusBarHeight);
+const Content = Platform.OS === "ios" ? FullWindowOverlay : Fragment;
 
 export const ToastProvider = ({ children }: PropsWithChildren) => {
 	return (
 		<>
 			{children}
-			<Toast config={toastConfig} topOffset={topOffset} />
+			<Content>
+				<Toast config={toastConfig} topOffset={topOffset} />
+			</Content>
 		</>
 	);
 };

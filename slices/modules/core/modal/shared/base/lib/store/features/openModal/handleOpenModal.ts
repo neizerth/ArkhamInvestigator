@@ -5,6 +5,7 @@ export type HandleOpenModalPayload<Data = unknown> = {
 	data?: Data;
 	type?: ModalType;
 	value?: unknown;
+	fullWindowOverlay?: boolean;
 	closeFromBackButton?: boolean;
 };
 
@@ -16,5 +17,6 @@ export function handleOpenModal(
 	state.data = payload.data || null;
 	state.type = payload.type || "custom";
 	state.value = payload.value || null;
+	state.fullWindowOverlay = payload.fullWindowOverlay ?? true;
 	state.closeFromBackButton = payload.closeFromBackButton || true;
 }

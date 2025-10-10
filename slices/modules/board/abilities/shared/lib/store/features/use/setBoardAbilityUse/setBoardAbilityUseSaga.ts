@@ -19,6 +19,7 @@ const filterAction = (action: unknown) => {
 };
 
 function* worker({ payload }: ReturnType<typeof setBoardAbilityUse>) {
+	console.log("setBoardAbilityUseSaga", payload);
 	const { abilityTargetBoardId } = payload;
 
 	const selectAbility = selectBoardAbilityById(payload);
@@ -54,7 +55,13 @@ function* worker({ payload }: ReturnType<typeof setBoardAbilityUse>) {
 		boardsCount,
 	});
 
+	console.log("usedAbilities", {
+		usedAbilities,
+		value,
+	});
+
 	if (!value) {
+		console.log("no ability value", value);
 		return;
 	}
 

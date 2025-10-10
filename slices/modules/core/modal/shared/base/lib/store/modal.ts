@@ -9,6 +9,7 @@ export type ModalState = {
 	type: ModalType | null;
 	data: unknown | null;
 	value: unknown | null;
+	fullWindowOverlay: boolean;
 	closeFromBackButton: boolean | null;
 };
 const initialState: ModalState = {
@@ -16,6 +17,7 @@ const initialState: ModalState = {
 	type: null,
 	data: null,
 	value: null,
+	fullWindowOverlay: true,
 	closeFromBackButton: true,
 };
 
@@ -38,6 +40,7 @@ export const {
 	closeModalInternal,
 	setValue: setModalValue,
 	setCloseFromBackButton,
+	setFullWindowOverlay,
 } = modal.actions;
 
 export const {
@@ -46,6 +49,7 @@ export const {
 	selectModalId,
 	selectValue: selectModalValue,
 	selectCloseFromBackButton: selectCloseModalFromBackButton,
+	selectFullWindowOverlay,
 } = modal.selectors;
 
 export default modal.reducer;

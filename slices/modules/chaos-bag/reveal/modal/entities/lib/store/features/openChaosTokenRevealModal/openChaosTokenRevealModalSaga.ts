@@ -8,6 +8,7 @@ function* worker() {
 		openModal({
 			id: CustomModalId.chaosTokenReveal,
 			closeFromBackButton: false,
+			fullWindowOverlay: false,
 		}),
 	);
 }

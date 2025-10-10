@@ -1,12 +1,23 @@
-import { Fragment, type PropsWithChildren } from "react";
+import type { PropsWithChildren } from "react";
 import { FullWindowOverlay } from "react-native-screens";
 import * as C from "./ModalProvider.components";
 
+import { useAppSelector } from "@shared/lib";
 import { Platform } from "react-native";
-import { useModalBackButton } from "../../../shared/base/lib";
+import {
+	selectFullWindowOverlay,
+	useModalBackButton,
+} from "../../../shared/base/lib";
 import { CustomModals } from "../CustomModals";
 
-const Content = Platform.OS === "ios" ? FullWindowOverlay : Fragment;
+const ModalContent = ({ children }: PropsWithChildren) => {
+	const overlay = useAppSelector(selectFullWindowOverlay);
+	if (Platform.OS !== "ios" || !overlay) {
+		return children;
+	}
+
+	return <FullWindowOverlay>{children}</FullWindowOverlay>;
+};
 
 export const ModalProvider = ({ children }: PropsWithChildren) => {
 	useModalBackButton();
@@ -14,10 +25,10 @@ export const ModalProvider = ({ children }: PropsWithChildren) => {
 	return (
 		<>
 			{children}
-			<Content>
+			<ModalContent>
 				<C.Modal />
 				<CustomModals />
-			</Content>
+			</ModalContent>
 		</>
 	);
 };
