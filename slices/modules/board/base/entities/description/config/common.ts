@@ -1,12 +1,15 @@
 import { navBarHeight } from "@shared/config";
-import { Dimensions } from "react-native";
+import { Dimensions, Platform } from "react-native";
 
+const ios = Platform.OS === "ios";
 const screen = Dimensions.get("screen");
 
 const largeScreen = screen.height > 640;
 
 export const DEFAULT_PORTRAIT_DESCRIPTION_HEIGHT = largeScreen
-	? 70
+	? ios
+		? 80
+		: 70
 	: navBarHeight > 0
 		? 80
 		: 60;

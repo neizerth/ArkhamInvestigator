@@ -1,3 +1,8 @@
+import {
+	createGrayscaleImage,
+	grayscaleImageCreated,
+} from "@modules/core/image/entities/createGrayscaleImage";
+import { getSignatureImageUrl } from "@modules/signature/base/shared/api";
 import { Platform } from "react-native";
 import { put, take, takeEvery } from "redux-saga/effects";
 import {
@@ -23,18 +28,22 @@ function* worker({ payload }: ReturnType<typeof createSignatureCacheGroup>) {
 	let grayscale = color;
 
 	if (processGrayscale) {
+		const { type } = payload;
+		const path = getSignatureImageUrl({
+			type,
+			code: payload.image.id,
+			grayscale: true,
+		});
+
 		yield put(
-			createSignatureCache({
-				...payload,
-				grayscale: true,
+			createGrayscaleImage({
+				path,
+				source: color,
 			}),
 		);
+		yield take(grayscaleImageCreated.match);
 
-		const action: ReturnType<typeof signatureCacheCreated> = yield take(
-			signatureCacheCreated.match,
-		);
-
-		grayscale = action.payload.uri;
+		grayscale = path;
 	}
 
 	yield put(
