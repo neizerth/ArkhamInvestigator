@@ -1,3 +1,4 @@
+import { getActiveOpacity } from "@shared/lib";
 import { useTranslation } from "react-i18next";
 import { useResumeGame, useStartGame } from "../../lib";
 import { Button } from "../Button";
@@ -7,10 +8,15 @@ export const HomePage = () => {
 	const onResume = useResumeGame();
 	const onStart = useStartGame();
 
+	const startOpacity = getActiveOpacity(!onResume);
+
 	return (
 		<C.Container>
 			<C.Menu />
-			<Button onPress={onStart}>{t`New Game`}</Button>
+			<Button
+				onPress={onStart}
+				activeOpacity={startOpacity}
+			>{t`New Game`}</Button>
 			{onResume && (
 				<C.ResumeButton onPress={onResume}>{t`Continue`}</C.ResumeButton>
 			)}
