@@ -20,15 +20,9 @@ RCT_EXPORT_METHOD(toGrayscale:(NSString *)base64 callback:(RCTResponseSenderBloc
         // Remove all whitespace and newline characters
         base64String = [[base64String componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] componentsJoinedByString:@""];
         
-        NSLog(@"Base64 string length: %lu", (unsigned long)[base64String length]);
-        NSLog(@"First 100 chars: %@", [base64String substringToIndex:MIN(100, [base64String length])]);
-        
         // Decode base64 string to image data
         NSData *originalImageData = [[NSData alloc] initWithBase64EncodedString:base64String options:NSDataBase64DecodingIgnoreUnknownCharacters];
         UIImage *originalImage = [UIImage imageWithData:originalImageData];
-        
-        NSLog(@"Decoded image data length: %lu", (unsigned long)[originalImageData length]);
-        NSLog(@"Received image: %@", originalImage);
         
         if (!originalImage) {
             callback(@[@""]);
@@ -40,7 +34,6 @@ RCT_EXPORT_METHOD(toGrayscale:(NSString *)base64 callback:(RCTResponseSenderBloc
         callback(@[base64Grayscale]);
     }
     @catch(NSException* exception) {
-        NSLog(@"Exception: %@", exception);
         callback(@[@""]);
     }
 }
