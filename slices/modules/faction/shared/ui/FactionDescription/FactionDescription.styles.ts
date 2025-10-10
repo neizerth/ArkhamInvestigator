@@ -50,7 +50,7 @@ export const factionDescriptionRelativeOffsets: Record<Faction, Offsets> = {
 		paddingBottom: offsetY + 2,
 	},
 	guardian: {
-		paddingTop: 8,
+		paddingTop: 8.5,
 		paddingLeft: 10,
 		paddingRight: 11,
 		paddingBottom: offsetY + 2,
