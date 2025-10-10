@@ -14,7 +14,9 @@ function* worker({ payload }: ReturnType<typeof addBoardHistoryItem>) {
 		id,
 	};
 
-	const { history, historyIndex, investigator } = board;
+	const { historyIndex, investigator } = board;
+
+	const history = board.history.slice(0, historyIndex + 1);
 
 	const historyData = [...history, item];
 
