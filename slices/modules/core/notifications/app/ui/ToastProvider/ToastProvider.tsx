@@ -5,7 +5,7 @@ import { FullWindowOverlay } from "react-native-screens";
 import Toast from "react-native-toast-message";
 import { toastConfig } from "../../config";
 
-const topOffset = Math.max(size.gap.xxl, statusBarHeight);
+const topOffset = statusBarHeight + size.gap.default;
 const Content = Platform.OS === "ios" ? FullWindowOverlay : Fragment;
 
 export const ToastProvider = ({ children }: PropsWithChildren) => {
