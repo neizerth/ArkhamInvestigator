@@ -5,7 +5,7 @@ import {
 import { increaseBoardActualPropValue } from "@modules/board/base/shared/lib";
 import { sendInvestigatorNotification } from "@modules/board/notifications/entities/lib";
 import { put, select, takeEvery } from "redux-saga/effects";
-import { fail } from "./fail";
+import { fail, failProcessed } from "./fail";
 
 const abilityId = "reaction";
 
@@ -21,6 +21,7 @@ function* worker({ payload }: ReturnType<typeof fail>) {
 		yield select(isUsedSelector);
 
 	if (isUsed) {
+		yield put(failProcessed(payload));
 		return;
 	}
 
@@ -48,6 +49,8 @@ function* worker({ payload }: ReturnType<typeof fail>) {
 			},
 		}),
 	);
+
+	yield put(failProcessed(payload));
 }
 
 export function* StellaClarkFailSaga() {

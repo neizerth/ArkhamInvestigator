@@ -4,6 +4,7 @@ import {
 	selectBoardById,
 } from "@modules/board/base/shared/lib";
 import { sendInvestigatorNotification } from "@modules/board/notifications/entities/lib";
+import { selectModifyChaosTokens } from "@modules/chaos-bag/base/shared/lib";
 import { i18next } from "@modules/core/i18n/shared/config";
 import {
 	createConfirmModalFilter,
@@ -14,10 +15,10 @@ import {
 	getBoardDamage,
 	getBoardHorror,
 } from "@modules/mechanics/board/base/entities/lib";
-import { put, select, takeEvery } from "redux-saga/effects";
+import { put, select, take, takeEvery } from "redux-saga/effects";
 import { v4 } from "uuid";
 import { modalId } from "../../config";
-import { fail } from "../fail";
+import { fail, failProcessed } from "../fail";
 
 const filterAction = createConfirmModalFilter({
 	modalId,
@@ -36,7 +37,15 @@ function* worker({ payload }: ReturnType<typeof modalConfirmed>) {
 	const healDamage = damage > 0;
 	const healHorror = horror > 0;
 
-	yield put(fail({ boardId }));
+	const modifyTokens: ReturnType<typeof selectModifyChaosTokens> = yield select(
+		selectModifyChaosTokens,
+	);
+
+	if (!modifyTokens) {
+		yield put(fail({ boardId }));
+
+		yield take(failProcessed.match);
+	}
 
 	yield put(
 		setBoardAbilityUse({
