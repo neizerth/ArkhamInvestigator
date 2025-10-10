@@ -1,6 +1,7 @@
 import { selectPickerScale } from "@modules/core/control/entities/picker/lib";
 import { useAppSelector } from "@shared/lib";
 import type { FC } from "react";
+import type { ViewProps } from "react-native";
 import { assetsSize } from "../../config";
 
 export type WithStatOptions = {
@@ -8,7 +9,10 @@ export type WithStatOptions = {
 	ratio: number;
 };
 
-export function withStat<T>(Component: FC<T>, options: WithStatOptions) {
+export function withStat<T extends ViewProps>(
+	Component: FC<T>,
+	options: WithStatOptions,
+) {
 	const { ratio } = options;
 	const defaultHeight = options.height ?? assetsSize.main;
 
@@ -29,7 +33,13 @@ export function withStat<T>(Component: FC<T>, options: WithStatOptions) {
 			justifyContent: "center",
 		};
 
-		return <Component {...props} imageStyle={imageStyle} style={style} />;
+		return (
+			<Component
+				{...props}
+				imageStyle={imageStyle}
+				style={[style, props.style]}
+			/>
+		);
 	};
 
 	const displayName = ExtendedComponent.displayName || ExtendedComponent.name;
