@@ -36,7 +36,11 @@ export const AppDiagnostics = (props: AppDiagnosticsProps) => {
 	};
 
 	const checkUpdates = () => {
-		dispatch(checkAppUpdates());
+		dispatch(
+			checkAppUpdates({
+				notify: true,
+			}),
+		);
 	};
 
 	return (
@@ -44,7 +48,7 @@ export const AppDiagnostics = (props: AppDiagnosticsProps) => {
 			<C.Section title={t`Diagnostics`}>
 				<C.Row>
 					<C.Button
-						text={t`Check Updates`}
+						text={t`Check Data Updates`}
 						icon="cloud-download"
 						onPress={checkUpdates}
 					/>

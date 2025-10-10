@@ -4,7 +4,11 @@ import { put, takeEvery } from "redux-saga/effects";
 import { checkAppUpdates } from "../../entities/checkAppUpdates";
 
 function* worker() {
-	yield put(checkAppUpdates());
+	yield put(
+		checkAppUpdates({
+			notify: false,
+		}),
+	);
 }
 
 export function* checkInitialAppUpdatesSaga() {
