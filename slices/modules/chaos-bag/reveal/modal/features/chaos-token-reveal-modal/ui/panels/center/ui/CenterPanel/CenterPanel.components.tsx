@@ -45,6 +45,8 @@ export const ControlContainer: typeof View = styled(View)`
   overflow: hidden;
 `;
 
+// @TODO check Android
+
 export const Control: typeof ChaosTokenValuePicker = styled(
 	ChaosTokenValuePicker,
 ).attrs({
@@ -54,11 +56,11 @@ export const Control: typeof ChaosTokenValuePicker = styled(
 	},
 	autoFailStyle: {
 		fontSize: 90,
-		lineHeight: 90,
+		// lineHeight: 90,
 	},
 	autoSuccessStyle: {
 		fontSize: 180,
-		lineHeight: 160,
+		// lineHeight: 160,
 		top: -10,
 	},
 })`
