@@ -34,8 +34,8 @@ export const LayeredIcon = ({
 				contentContainerStyle,
 			]}
 		>
-			{layers.map(({ fontSize, color, lineHeight, ...layer }, index) => (
-				<C.Layer key={layer.icon} background={index === layers.length - 1}>
+			{layers.map(({ fontSize, color, lineHeight, ...layer }) => (
+				<C.Layer key={layer.icon}>
 					<C.LayerIcon
 						{...props}
 						style={[

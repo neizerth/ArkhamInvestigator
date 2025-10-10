@@ -1,5 +1,4 @@
-import type { FC } from "react";
-import { View, type ViewProps } from "react-native";
+import { View } from "react-native";
 import styled from "styled-components/native";
 import { Icon } from "../Icon";
 
@@ -10,11 +9,7 @@ export const Container: typeof View = styled(View)`
   align-items: center;
 `;
 
-type LayerProps = ViewProps & {
-	background?: boolean;
-};
-
-export const Layer: FC<LayerProps> = styled(View)`
+export const Layer: typeof View = styled(View)`
   display: flex;
   justify-content: center;
   align-items: center;
