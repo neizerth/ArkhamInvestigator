@@ -70,7 +70,7 @@ export const specialAbilitityCodes = [
 
 export const hiddenAbilityCodes = [
 	AbilityCode.PrestonFairmont.elderSign,
-	// AbilityCode.RexMurphy.base,
+	AbilityCode.RexMurphy.base,
 	AbilityCode.StellaClark.elderSign,
 ];
 
