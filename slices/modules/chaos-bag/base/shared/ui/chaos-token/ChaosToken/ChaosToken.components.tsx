@@ -1,6 +1,6 @@
 import { Icon, type IconProps } from "@shared/ui";
 import type { FC } from "react";
-import { View, type ViewProps } from "react-native";
+import { Platform, View, type ViewProps } from "react-native";
 import styled, { css } from "styled-components/native";
 import { chaosToken } from "../../../config";
 import {
@@ -61,12 +61,14 @@ export const Part: FC<PartProps> = styled(Icon)`
 
 type SelectionProps = ViewProps & PropsWithSize;
 
+const ios = Platform.OS === "ios";
+
 export const Selection: FC<SelectionProps> = styled(View)`
   ${partStyle};
   z-index: 2;
   border: 2px solid ${chaosToken.color.selected};
   ${({ size }: SelectionProps) => css`
     border-radius: ${size}px;
-    filter: drop-shadow(0px 0px 5px ${chaosToken.color.selected})
   `}
+  ${!ios && `filter: drop-shadow(0px 0px 5px ${chaosToken.color.selected})`}
 `;
