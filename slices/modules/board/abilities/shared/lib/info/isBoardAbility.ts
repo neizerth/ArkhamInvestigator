@@ -12,15 +12,7 @@ type Options = {
 	investigatorsCount: number;
 };
 
-export const isBoardAbility = ({ ability, investigatorsCount }: Options) => {
-	if (
-		ability.perInvestigator &&
-		investigatorsCount < 2 &&
-		!ability.personalUse
-	) {
-		return false;
-	}
-
+export const isBoardAbility = ({ ability }: Options) => {
 	if (specialAbilitityCodes.includes(ability.id)) {
 		return true;
 	}

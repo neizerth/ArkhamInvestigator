@@ -29,8 +29,13 @@ function* worker(action: ReturnType<typeof setBoardAbilityUse>) {
 	if (!modalData) {
 		return;
 	}
+	const boardsCount = modalData.boardIds.length;
 
-	if (modalData.boardIds.length === 1) {
+	if (boardsCount === 0) {
+		return;
+	}
+
+	if (boardsCount === 1) {
 		yield put(
 			giveAction({
 				...action.payload,
