@@ -5,12 +5,9 @@ import {
 	selectBoardById,
 	setBoardPart,
 } from "@modules/board/base/shared/lib";
-import type {
-	InvestigatorBoard,
-	PropsWithBoardId,
-} from "@modules/board/base/shared/model";
+import type { PropsWithBoardId } from "@modules/board/base/shared/model";
+import { getBoardFromHistory } from "@modules/board/history/shared/lib";
 import { selectCleanInvestigatorBoard } from "@modules/mechanics/board/base/entities/lib";
-import { getBoardValueFromHistory } from "../../getBoardValueFromHistory";
 
 type Options = PropsWithBoardId & {
 	historyIndex: number;
@@ -29,29 +26,12 @@ export const setValueFromHistoryIndex =
 
 		const { history } = board;
 
-		const historyItems =
-			historyIndex === -1 ? [] : history.slice(0, historyIndex + 1);
-		const lastItem = history[historyIndex];
-
-		const values = getBoardValueFromHistory({
-			board: cleanBoard,
-			historyItems,
+		const data = getBoardFromHistory({
+			cleanBoard,
+			board,
+			history,
+			historyIndex,
 		});
-
-		const data: InvestigatorBoard =
-			historyIndex === -1
-				? {
-						...cleanBoard,
-						history,
-					}
-				: {
-						...board,
-						...values,
-						usedAbilities:
-							lastItem?.usedAbilities ?? cleanBoard.initialUsedAbilities,
-						currentRole: lastItem?.currentRole,
-						historyIndex,
-					};
 
 		dispatch(
 			setBoardPart({

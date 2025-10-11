@@ -4,7 +4,7 @@ import type {
 	InvestigatorBoardValues,
 } from "@modules/board/base/shared/model";
 import { prop } from "ramda";
-import type { InvestigatorBoardHistoryItem } from "../../shared/model";
+import type { InvestigatorBoardHistoryItem } from "../../model";
 
 export type GetBoardValuePropFromHistoryProp =
 	| InvestigatorBoardValueProp

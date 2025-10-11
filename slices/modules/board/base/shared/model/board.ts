@@ -42,7 +42,7 @@ export type InvestigatorBoard = {
 	history: InvestigatorBoardHistoryItem[];
 	historyIndex: number;
 	checkHistory: SkillCheckHistoryItem[];
-	currentRole?: Faction;
+	faction?: Faction;
 	usedAbilities?: InvestigatorBoardUsedAbility[];
 	initialUsedAbilities?: InvestigatorBoardUsedAbility[];
 	showPinnedSkillChecks?: boolean;

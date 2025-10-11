@@ -36,7 +36,7 @@ export const FactionSelectModal = (props: FactionSelectModalProps) => {
 			dispatch(
 				setBoardProp({
 					boardId: "current",
-					prop: "currentRole",
+					prop: "faction",
 					value: faction,
 				}),
 			);

@@ -1,6 +1,7 @@
 import { setBoardPart } from "@modules/board/base/shared/lib";
 import { put, takeEvery } from "redux-saga/effects";
 import { v4 } from "uuid";
+import { isHistoryItemEmpty } from "../../../../features";
 import {
 	addBoardHistoryItem,
 	boardHistoryItemAdded,
@@ -9,17 +10,25 @@ import {
 function* worker({ payload }: ReturnType<typeof addBoardHistoryItem>) {
 	const { boardId, data, id = v4(), board } = payload;
 
-	const { usedAbilities } = board;
-
-	const item = {
-		usedAbilities,
-		...data,
-		id,
-	};
+	console.log("handle add board history item");
 
 	const { historyIndex, investigator } = board;
 
 	const history = board.history.slice(0, historyIndex + 1);
+
+	const isEmpty = isHistoryItemEmpty({
+		board,
+		data,
+	});
+
+	if (isEmpty) {
+		return;
+	}
+
+	const item = {
+		...data,
+		id,
+	};
 
 	const historyData = [...history, item];
 

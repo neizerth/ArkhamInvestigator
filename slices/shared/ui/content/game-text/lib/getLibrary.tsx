@@ -93,7 +93,6 @@ export const getLibrary = ({
 			const iconStyle = componentStyles?.[`icon_${icon}`];
 			const iconTokenStyle = componentStyles?.[`iconToken_${icon}`];
 
-			// console.log("icon", Object.keys(mergedProps));
 			const zhc = typeof createElementProps?.zhColon !== "undefined";
 
 			return (

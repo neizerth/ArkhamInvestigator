@@ -1,5 +1,5 @@
 import type { InvestigatorBoard } from "@modules/board/base/shared/model";
-import type { InvestigatorBoardHistoryItem } from "../../shared/model";
+import type { InvestigatorBoardHistoryItem } from "../../model";
 import { getBoardValuePropFromHistory } from "./getBoardValuePropFromHistory";
 
 type Options = {
