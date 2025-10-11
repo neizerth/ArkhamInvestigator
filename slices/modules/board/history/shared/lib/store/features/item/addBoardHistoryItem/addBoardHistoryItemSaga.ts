@@ -9,7 +9,10 @@ import {
 function* worker({ payload }: ReturnType<typeof addBoardHistoryItem>) {
 	const { boardId, data, id = v4(), board } = payload;
 
+	const { usedAbilities } = board;
+
 	const item = {
+		usedAbilities,
 		...data,
 		id,
 	};

@@ -21,8 +21,12 @@ function* worker({ payload }: ReturnType<typeof updateBoardHistoryItem>) {
 	if (index === -1) {
 		return;
 	}
+	const { usedAbilities } = board;
 
-	const item = mergeDeepRight(board.history[index], data);
+	const item = mergeDeepRight(board.history[index], {
+		usedAbilities,
+		...data,
+	});
 
 	const history = board.history.with(index, item);
 

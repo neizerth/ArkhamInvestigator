@@ -23,8 +23,11 @@ function* worker({ payload }: ReturnType<typeof replaceBoardHistoryItem>) {
 		return;
 	}
 
+	const { usedAbilities } = board;
+
 	const item = {
 		id: v4(),
+		usedAbilities,
 		...data,
 	};
 
