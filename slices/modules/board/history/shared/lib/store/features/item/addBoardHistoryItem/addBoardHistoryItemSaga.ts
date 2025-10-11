@@ -10,8 +10,6 @@ import {
 function* worker({ payload }: ReturnType<typeof addBoardHistoryItem>) {
 	const { boardId, data, id = v4(), board } = payload;
 
-	console.log("handle add board history item");
-
 	const { historyIndex, investigator } = board;
 
 	const history = board.history.slice(0, historyIndex + 1);

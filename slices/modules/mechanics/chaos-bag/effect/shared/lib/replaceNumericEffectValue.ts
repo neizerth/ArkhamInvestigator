@@ -9,6 +9,9 @@ type Options = {
 
 const MAX_INDEX = 20;
 
+const formatEffectValue = (value: string) =>
+	+value.replace(/[-—−]/, "-").replace("+", "");
+
 export const replaceNumericEffectValue = ({ text, value }: Options) => {
 	const effectValue = getEffectTokenValue(value);
 	return text.replace(/([-—−+]\d+)/, (source) => {
@@ -17,8 +20,9 @@ export const replaceNumericEffectValue = ({ text, value }: Options) => {
 		if (index > MAX_INDEX) {
 			return source;
 		}
-		const sourceValue = +source.replace(/[-—−]/, "-").replace("+", "");
-		if (!Number.isNaN(sourceValue) && sourceValue === effectValue) {
+		const sourceValue = formatEffectValue(source);
+		const formattedEffectValue = formatEffectValue(effectValue.toString());
+		if (!Number.isNaN(sourceValue) && sourceValue === formattedEffectValue) {
 			return source;
 		}
 		return `${effectValue} ${replaceCharacter} ${source}`;

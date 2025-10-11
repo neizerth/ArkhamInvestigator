@@ -38,7 +38,7 @@ export const ChaosTokenValuePicker = ({
 	autoFailStyle = valueStyle,
 	boardId = "current",
 	sealed,
-	value,
+	value = 0,
 	...props
 }: ChaosTokenValuePickerProps) => {
 	const dispatch = useAppDispatch();
