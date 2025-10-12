@@ -1,5 +1,1 @@
-import { PrestonFairmontTokenValues } from "./PrestonFairmontTokenValues";
-
-export const TheCircleUndoneTokenValues = {
-	...PrestonFairmontTokenValues,
-};
+export const TheCircleUndoneTokenValues = {};

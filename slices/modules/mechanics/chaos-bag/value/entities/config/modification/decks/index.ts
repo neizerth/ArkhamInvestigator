@@ -1,3 +1,1 @@
-export const InvestigatorDecksTokenValues = {
-	// ...StellaClarkTokenValues,
-};
+export const InvestigatorDecksTokenValues = {};

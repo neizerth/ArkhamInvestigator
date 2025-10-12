@@ -1,5 +1,6 @@
 import { setBoardAbilityUse } from "@modules/board/abilities/shared/lib";
 import { decreaseBoardActualPropValue } from "@modules/board/base/shared/lib";
+import { setRevealedTokenValue } from "@modules/chaos-bag/reveal/base/shared/lib";
 import {
 	createConfirmModalFilter,
 	type modalConfirmed,
@@ -14,6 +15,15 @@ const filterAction = createConfirmModalFilter({
 
 function* worker({ payload }: ReturnType<typeof modalConfirmed>) {
 	const { boardId } = payload;
+
+	yield put(
+		setRevealedTokenValue({
+			type: "elderSign",
+			value: "success",
+			changeType: "last",
+			modify: true,
+		}),
+	);
 
 	yield put(
 		setBoardAbilityUse({
