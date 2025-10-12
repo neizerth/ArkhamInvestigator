@@ -9,6 +9,7 @@ import {
 	selectBoardDamage,
 	selectBoardFaction,
 	selectBoardHorror,
+	selectBoardIsInactive,
 } from "@modules/mechanics/board/base/entities/lib";
 import { makeAction } from "@modules/mechanics/phase/entities/lib";
 import { useAppDispatch, useAppSelector } from "@shared/lib";
@@ -24,9 +25,7 @@ export type OverviewInvestigatorProps = ViewProps & {
 	selected?: boolean;
 	onSelect?: () => void;
 };
-
-const woundsData = range(0, 20);
-
+// @TODO: refactor
 export const OverviewInvestigator = ({
 	boardId,
 	selected = false,
@@ -42,6 +41,7 @@ export const OverviewInvestigator = ({
 	const faction = useAppSelector(selectBoardFaction(boardId));
 	const damage = useAppSelector(selectBoardDamage(boardId));
 	const horror = useAppSelector(selectBoardHorror(boardId));
+	const inactive = useAppSelector(selectBoardIsInactive(boardId));
 
 	const allowNegativeValues = useAppSelector(
 		selectAllowNegativeHealthAndSanity,
@@ -53,14 +53,18 @@ export const OverviewInvestigator = ({
 	const minValue = allowNegativeValues ? -20 : 0;
 
 	const healthData = useMemo(() => {
-		return showWounds ? woundsData : range(minValue, maxHealth + 1);
-	}, [maxHealth, showWounds, minValue]);
+		return showWounds
+			? range(0, allowNegativeValues ? 20 : maxHealth + 1)
+			: range(minValue, maxHealth + 1);
+	}, [maxHealth, showWounds, minValue, allowNegativeValues]);
 
 	const minHealth = healthData[0];
 
 	const sanityData = useMemo(() => {
-		return showWounds ? woundsData : range(minValue, maxSanity + 1);
-	}, [maxSanity, showWounds, minValue]);
+		return showWounds
+			? range(0, allowNegativeValues ? 20 : maxSanity + 1)
+			: range(minValue, maxSanity + 1);
+	}, [maxSanity, showWounds, minValue, allowNegativeValues]);
 
 	const onActionsPress = useCallback(() => {
 		dispatch(makeAction(boardId));
@@ -72,6 +76,8 @@ export const OverviewInvestigator = ({
 		(stat: "health" | "sanity") =>
 			({ value = 0 }: PickerChangeEvent) => {
 				const base = baseValue[stat];
+				console.log("base", base);
+				console.log("value", value);
 				dispatch(
 					setBoardActualPropValue({
 						boardId,
@@ -138,7 +144,7 @@ export const OverviewInvestigator = ({
 						imageId={image.id}
 						onPress={onSelect}
 						selected={selected}
-						grayscale={value.actions === 0}
+						grayscale={inactive}
 					/>
 				</C.Secondary>
 			</C.Content>

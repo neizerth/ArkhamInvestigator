@@ -4,7 +4,7 @@ import {
 	setCurrentInvestigatorIndex,
 } from "@modules/board/base/shared/lib";
 import { useGoBack } from "@modules/core/router/shared/lib";
-import { delay, useAppDispatch, useAppSelector } from "@shared/lib";
+import { useAppDispatch, useAppSelector } from "@shared/lib";
 import { Delay } from "@shared/ui";
 import { dec, inc } from "ramda";
 import { Fragment, useCallback, useState } from "react";
@@ -27,10 +27,8 @@ export const OverviewBoardPage = () => {
 
 	const onSelect = useCallback(
 		(index: number) => () => {
+			dispatch(setCurrentInvestigatorIndex(index));
 			back();
-			delay(100).then(() => {
-				dispatch(setCurrentInvestigatorIndex(index));
-			});
 		},
 		[dispatch, back],
 	);
