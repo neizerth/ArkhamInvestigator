@@ -4,25 +4,28 @@ import {
 } from "@modules/board/abilities/shared/lib";
 import { increaseBoardActualPropValue } from "@modules/board/base/shared/lib";
 import { sendInvestigatorNotification } from "@modules/board/notifications/entities/lib";
+import { AbilityCode } from "@modules/mechanics/board/abilities/shared/config";
 import { put, select, takeEvery } from "redux-saga/effects";
 import { fail, failProcessed } from "./fail";
 
-const abilityId = "reaction";
+const abilityId = AbilityCode.StellaClark.reaction;
 
 function* worker({ payload }: ReturnType<typeof fail>) {
-	const { boardId } = payload;
+	const { boardId, checkLimit = true } = payload;
 
-	const isUsedSelector = selectIsBoardAbilityUsed({
-		boardId,
-		abilityId,
-	});
+	if (checkLimit) {
+		const isUsedSelector = selectIsBoardAbilityUsed({
+			boardId,
+			abilityId,
+		});
 
-	const isUsed: ReturnType<typeof isUsedSelector> =
-		yield select(isUsedSelector);
+		const isUsed: ReturnType<typeof isUsedSelector> =
+			yield select(isUsedSelector);
 
-	if (isUsed) {
-		yield put(failProcessed(payload));
-		return;
+		if (isUsed) {
+			yield put(failProcessed(payload));
+			return;
+		}
 	}
 
 	yield put(

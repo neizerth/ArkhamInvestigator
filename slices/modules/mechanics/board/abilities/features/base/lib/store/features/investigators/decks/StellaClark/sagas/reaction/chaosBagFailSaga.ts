@@ -31,6 +31,6 @@ function* worker({ payload }: ReturnType<typeof chaosBagRevealEnd>) {
 	yield put(fail({ boardId: skillCheckBoardId }));
 }
 
-export function* StellaClarkReactionSaga() {
+export function* StellaClarkChaosBagFailSaga() {
 	yield takeEvery(filterAction, worker);
 }

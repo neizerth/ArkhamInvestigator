@@ -42,6 +42,7 @@ export const AbilityCode = {
 	},
 
 	StellaClark: {
+		reaction: "stella-fail-test-reaction",
 		elderSign: "autofail-to-heal-horror-and-damage",
 	},
 	SkidsOToole: {

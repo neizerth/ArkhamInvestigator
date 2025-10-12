@@ -1,8 +1,12 @@
 import type { PropsWithBoardId } from "@modules/board/base/shared/model";
 import { createAction } from "@reduxjs/toolkit";
 
-export const fail = createAction<PropsWithBoardId>("StellaClark/fail");
+type FailPayload = PropsWithBoardId & {
+	checkLimit?: boolean;
+};
 
-export const failProcessed = createAction<PropsWithBoardId>(
+export const fail = createAction<FailPayload>("StellaClark/fail");
+
+export const failProcessed = createAction<FailPayload>(
 	"StellaClark/failProcessed",
 );
