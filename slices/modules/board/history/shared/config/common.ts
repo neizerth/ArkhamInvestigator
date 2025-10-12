@@ -6,6 +6,7 @@ export const supportedInvestigatorBoardHistoryProps: BoardKey[] = [
 	"value",
 	"usedAbilities",
 	"abilityValues",
+	"faction",
 ];
 
 export const boardHistoryPrefix = "boardHistory";

@@ -1,7 +1,8 @@
 import type { InvestigatorBoard } from "@modules/board/base/shared/model";
+import { pick } from "ramda";
 import type { InvestigatorBoardHistoryItem } from "../../model";
 import { getBoardValueFromHistory } from "./getBoardValueFromHistory";
-import { getHistoryUsedAbilities } from "./getHistoryUsedAbilities";
+import { getHistoryItemProp } from "./getHistoryItemProp";
 
 type Options = {
 	cleanBoard: InvestigatorBoard;
@@ -14,17 +15,25 @@ export const getBoardFromHistory = (options: Options): InvestigatorBoard => {
 	const { board, history, historyIndex, cleanBoard } = options;
 
 	if (historyIndex === -1) {
+		const props = pick(["loadProgress", "loaded", "background"], board);
 		return {
 			...cleanBoard,
+			...props,
 			history,
 		};
 	}
 
-	const lastItem = history[historyIndex];
-	const faction = lastItem?.faction;
-	const usedAbilities = getHistoryUsedAbilities({
+	const usedAbilities = getHistoryItemProp({
 		history,
-		initialUsedAbilities: cleanBoard.initialUsedAbilities,
+		defaultValue: cleanBoard.initialUsedAbilities ?? [],
+		prop: "usedAbilities",
+		historyIndex,
+	});
+
+	const faction = getHistoryItemProp({
+		history,
+		defaultValue: board.investigator.faction_code,
+		prop: "faction",
 		historyIndex,
 	});
 

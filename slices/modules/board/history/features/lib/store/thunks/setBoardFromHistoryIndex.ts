@@ -3,7 +3,7 @@ import type { AppThunk } from "@shared/model";
 import {
 	isBoardExists,
 	selectBoardById,
-	setBoardPart,
+	setBoard,
 } from "@modules/board/base/shared/lib";
 import type { PropsWithBoardId } from "@modules/board/base/shared/model";
 import { getBoardFromHistory } from "@modules/board/history/shared/lib";
@@ -34,7 +34,7 @@ export const setValueFromHistoryIndex =
 		});
 
 		dispatch(
-			setBoardPart({
+			setBoard({
 				boardId,
 				data,
 				history: false,
