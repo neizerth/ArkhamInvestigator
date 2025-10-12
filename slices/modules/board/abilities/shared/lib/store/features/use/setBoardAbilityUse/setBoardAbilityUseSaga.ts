@@ -6,7 +6,10 @@ import {
 } from "@modules/board/base/shared/lib";
 import { put, select, takeEvery } from "redux-saga/effects";
 import { UsedAbilitiesService } from "../../../../UsedAbilitiesService";
-import { selectBoardAbilityById } from "../../../selectors";
+import {
+	selectBoardAbilityById,
+	selectIsBoardAbilityUsed,
+} from "../../../selectors";
 import { selectTargetBoardId } from "./selectTargetBoardId";
 import { boardAbilityUseSet, setBoardAbilityUse } from "./setBoardAbilityUse";
 
@@ -20,6 +23,14 @@ const filterAction = (action: unknown) => {
 
 function* worker({ payload }: ReturnType<typeof setBoardAbilityUse>) {
 	const { abilityTargetBoardId } = payload;
+
+	const isUsedSelector = selectIsBoardAbilityUsed(payload);
+	const isUsed: ReturnType<typeof isUsedSelector> =
+		yield select(isUsedSelector);
+
+	if (isUsed) {
+		return;
+	}
 
 	const selectAbility = selectBoardAbilityById(payload);
 	const selectUsedAbilities = selectBoardUsedAbilities(payload.boardId);

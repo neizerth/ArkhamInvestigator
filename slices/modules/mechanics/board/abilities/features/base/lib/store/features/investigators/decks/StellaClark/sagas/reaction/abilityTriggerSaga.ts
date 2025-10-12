@@ -14,7 +14,7 @@ const filterAction = createAbilityUseFilter({
 function* worker({ payload }: ReturnType<typeof changeBoardHistoryAbilityUse>) {
 	const { boardId } = payload;
 
-	yield put(fail({ boardId, checkLimit: false }));
+	yield put(fail({ boardId }));
 }
 
 export function* StellaClarkAbilityTriggerSaga() {

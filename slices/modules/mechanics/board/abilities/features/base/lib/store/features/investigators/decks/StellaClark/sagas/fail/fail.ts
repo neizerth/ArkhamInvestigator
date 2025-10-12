@@ -1,9 +1,7 @@
 import type { PropsWithBoardId } from "@modules/board/base/shared/model";
 import { createAction } from "@reduxjs/toolkit";
 
-type FailPayload = PropsWithBoardId & {
-	checkLimit?: boolean;
-};
+type FailPayload = PropsWithBoardId;
 
 export const fail = createAction<FailPayload>("StellaClark/fail");
 

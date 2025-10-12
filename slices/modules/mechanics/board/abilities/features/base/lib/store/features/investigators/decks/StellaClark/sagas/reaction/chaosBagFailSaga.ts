@@ -1,8 +1,9 @@
+import { setBoardAbilityUse } from "@modules/board/abilities/shared/lib";
 import { selectBoardById } from "@modules/board/base/shared/lib";
 import { chaosBagRevealEnd } from "@modules/chaos-bag/reveal/base/entities/lib";
+import { AbilityCode } from "@modules/mechanics/board/abilities/shared/config";
 import { InvesigatorCode } from "@modules/mechanics/investigator/entities/config";
 import { put, select, takeEvery } from "redux-saga/effects";
-import { fail } from "../fail";
 
 const filterAction = (action: unknown) => {
 	if (!chaosBagRevealEnd.match(action)) {
@@ -28,7 +29,13 @@ function* worker({ payload }: ReturnType<typeof chaosBagRevealEnd>) {
 		return;
 	}
 
-	yield put(fail({ boardId: skillCheckBoardId }));
+	yield put(
+		setBoardAbilityUse({
+			boardId: board.id,
+			abilityId: AbilityCode.StellaClark.reaction,
+			canUse: false,
+		}),
+	);
 }
 
 export function* StellaClarkChaosBagFailSaga() {
