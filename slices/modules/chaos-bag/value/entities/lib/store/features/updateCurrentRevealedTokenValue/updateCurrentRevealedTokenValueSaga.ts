@@ -1,20 +1,18 @@
 import { updateRevealedToken } from "@modules/chaos-bag/reveal/base/entities/lib";
-import { selectLastRevealedToken } from "@modules/chaos-bag/reveal/base/shared/lib";
+import { selectRevealedTokenById } from "@modules/chaos-bag/reveal/base/shared/lib";
 import { put, select, takeEvery } from "redux-saga/effects";
 import { updateCurrentRevealedTokenValue } from "./updateCurrentRevealedTokenValue";
 
 function* worker({
 	payload,
 }: ReturnType<typeof updateCurrentRevealedTokenValue>) {
-	const token: ReturnType<typeof selectLastRevealedToken> = yield select(
-		selectLastRevealedToken,
-	);
+	const { id } = payload;
+	const tokenSelector = selectRevealedTokenById(id);
+	const token: ReturnType<typeof tokenSelector> = yield select(tokenSelector);
 
 	if (!token) {
 		return;
 	}
-
-	const { id } = token;
 	const { value } = payload;
 
 	yield put(

@@ -3,6 +3,7 @@ import type { ChaosTokenValue } from "@modules/chaos-bag/value/shared/model";
 import { createAction } from "@reduxjs/toolkit";
 
 export type UpdateCurrentRevealedTokenValue = {
+	id: string;
 	value: ChaosTokenValue;
 };
 

@@ -5,6 +5,7 @@ import type { ChaosTokenValue } from "@modules/chaos-bag/value/shared/model";
 import { createAction } from "@reduxjs/toolkit";
 
 export type SetChaosTokenValuePayload = PropsWithBoardId & {
+	id?: string;
 	type: ChaosTokenType;
 	value: ChaosTokenValue;
 };

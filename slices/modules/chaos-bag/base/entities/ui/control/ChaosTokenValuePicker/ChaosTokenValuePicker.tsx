@@ -20,6 +20,7 @@ export type ChaosTokenValuePickerProps = Omit<
 	"renderItem" | "data"
 > &
 	Partial<PropsWithBoardId> & {
+		tokenId?: string;
 		valueStyle?: ChaosTokenValueProps["style"];
 		autoSuccessStyle?: ChaosTokenValueProps["style"];
 		autoFailStyle?: ChaosTokenValueProps["style"];
@@ -32,6 +33,7 @@ const sealedSizes = [1, 1, 0.7];
 const unsealedSizes = [0.9, 0.9, 0.65];
 
 export const ChaosTokenValuePicker = ({
+	tokenId,
 	type,
 	valueStyle,
 	autoSuccessStyle = valueStyle,
@@ -59,10 +61,11 @@ export const ChaosTokenValuePicker = ({
 					boardId,
 					type,
 					value,
+					id: tokenId,
 				}),
 			);
 		},
-		[dispatch, type, boardId],
+		[dispatch, type, boardId, tokenId],
 	);
 
 	const isModified = isChaosTokenModified({

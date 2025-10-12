@@ -7,6 +7,7 @@ export type RevealedChaosBagToken = ChaosBagToken & {
 	revealId: string;
 	value?: ChaosTokenValue;
 	canceled?: RevealedChaosBagTokenCancelType;
+	modified?: boolean;
 	removed?: boolean;
 	virtual?: boolean;
 };

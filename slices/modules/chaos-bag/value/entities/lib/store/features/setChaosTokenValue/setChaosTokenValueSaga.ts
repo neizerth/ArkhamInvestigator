@@ -7,7 +7,7 @@ import { updateCurrentRevealedTokenValue } from "../updateCurrentRevealedTokenVa
 import { setChaosTokenValue } from "./setChaosTokenValue";
 
 function* worker({ payload }: ReturnType<typeof setChaosTokenValue>) {
-	const { boardId, type, value } = payload;
+	const { boardId, type, value, id } = payload;
 
 	const tokenSelector = selectBoardChaosTokenTypes(boardId);
 	const types: ReturnType<typeof tokenSelector> = yield select(tokenSelector);
@@ -15,11 +15,14 @@ function* worker({ payload }: ReturnType<typeof setChaosTokenValue>) {
 	const isNumericToken = chaosToken.types.numeric.includes(type);
 
 	if (isNumericToken) {
-		yield put(
-			updateCurrentRevealedTokenValue({
-				value,
-			}),
-		);
+		if (id) {
+			yield put(
+				updateCurrentRevealedTokenValue({
+					id,
+					value,
+				}),
+			);
+		}
 		return;
 	}
 

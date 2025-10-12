@@ -17,14 +17,13 @@ export const CenterPanel = ({ style, token, ...props }: CenterPanelProps) => {
 	const showTokenValue = useAppSelector(selectModifyChaosTokens);
 
 	const gesture = useGestures(token);
-
 	return (
 		<GestureDetector gesture={gesture}>
 			<C.Container style={style}>
 				<C.CurrentToken {...token} {...props} />
 				{showTokenValue && (
 					<C.ControlContainer>
-						<C.Control type={type} value={token.value} />
+						<C.Control type={type} value={token.value} tokenId={token.id} />
 					</C.ControlContainer>
 				)}
 

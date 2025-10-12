@@ -18,6 +18,9 @@ export const handleSyncRevealedTokensWithContents: ChaosBagRevealHandler<
 	HandleSyncRevealedTokensWithContentsPayload
 > = (state, { contents, values }) => {
 	const update = (token: RevealedChaosBagToken) => {
+		if (token.modified) {
+			return token;
+		}
 		const chaosBagToken = contents.find(whereId(token.id));
 
 		const value = values[token.type] || token.value;

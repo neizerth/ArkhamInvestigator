@@ -3,7 +3,7 @@ import { ChaosTokenPreview } from "@modules/chaos-bag/base/shared/ui";
 import { color, font } from "@shared/config";
 import { Text } from "@shared/ui";
 import type { FC } from "react";
-import { Platform, type TextProps, View, type ViewProps } from "react-native";
+import { type TextProps, View, type ViewProps } from "react-native";
 import styled, { css } from "styled-components/native";
 
 type PropsWithSelection = {
@@ -31,6 +31,7 @@ export const Position: FC<PositionProps> = styled(View)`
   background-color: ${color.light10};
   justify-content: center;
   align-items: center;
+  padding: 1px;
 
   ${({ selected }: PositionProps) =>
 		selected &&
@@ -53,14 +54,10 @@ type PositionTextProps = TextProps & {
 	size: number;
 };
 
-const ios = Platform.OS === "ios";
-
 export const PositionText: FC<PositionTextProps> = styled(Text)`
   ${({ size }: PositionTextProps) => css`
     font-size: ${positionFontSize[size]}px;
     line-height: ${positionLineHeight[size]}px;
   `}
-  position: absolute;
-  top: ${ios ? 0 : -1}px;
   color: ${color.text};
 `;
