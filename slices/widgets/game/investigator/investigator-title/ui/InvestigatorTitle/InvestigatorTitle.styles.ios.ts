@@ -115,13 +115,14 @@ export const getTitleStyle = (options: GetTitleStyleOptions) => {
 		seeker: {
 			title: {
 				paddingTop: "1.5%",
-				height: "53%",
+				height: "52%",
 			},
 			unique: {
 				marginTop: "1%",
 			},
 			subtitle: {
 				paddingTop: "0%",
+				height: "38%",
 			},
 		},
 		rogue: {
