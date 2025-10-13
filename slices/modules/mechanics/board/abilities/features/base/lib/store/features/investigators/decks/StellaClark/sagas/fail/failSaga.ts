@@ -4,12 +4,19 @@ import { put, takeEvery } from "redux-saga/effects";
 import { fail, failProcessed } from "./fail";
 
 function* worker({ payload }: ReturnType<typeof fail>) {
-	const { boardId } = payload;
+	const { boardId, historyId } = payload;
+
+	const historyGroup = {
+		type: "group",
+		id: historyId,
+	} as const;
 
 	yield put(
 		increaseBoardActualPropValue({
 			boardId,
 			prop: "actions",
+			value: 1,
+			history: historyGroup,
 		}),
 	);
 

@@ -12,9 +12,9 @@ const filterAction = createAbilityUseFilter({
 });
 
 function* worker({ payload }: ReturnType<typeof changeBoardHistoryAbilityUse>) {
-	const { boardId } = payload;
+	const { boardId, item } = payload;
 
-	yield put(fail({ boardId }));
+	yield put(fail({ boardId, historyId: item.id }));
 }
 
 export function* StellaClarkAbilityTriggerSaga() {
