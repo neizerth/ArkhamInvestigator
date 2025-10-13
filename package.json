@@ -68,7 +68,7 @@
 		"expo-file-system": "~18.1.11",
 		"expo-font": "~13.3.1",
 		"expo-haptics": "~14.1.4",
-		"expo-image": "~2.4.0",
+		"expo-image": "~2.4.1",
 		"expo-image-manipulator": "~13.1.7",
 		"expo-keep-awake": "~14.1.4",
 		"expo-linking": "~7.1.7",
@@ -153,5 +153,20 @@
 	"private": true,
 	"commitlint": {
 		"extends": ["@commitlint/config-conventional"]
+	},
+	"expo": {
+		"doctor": {
+			"reactNativeDirectoryCheck": {
+				"listUnknownPackages": false,
+				"exclude": [
+					"react-native-restart",
+					"react-native-zip-archive",
+					"redux-persist"
+				]
+			},
+			"checkGlobalPackageManagerConfig": {
+				"disabled": true
+			}
+		}
 	}
 }

@@ -1,24 +1,24 @@
 {
-  "cli": {
-    "version": ">= 15.0.15",
-    "appVersionSource": "local"
-  },
-  "build": {
-    "development": {
-      "developmentClient": true,
-      "distribution": "internal"
-    },
-    "preview": {
-      "distribution": "internal"
-    },
-    "production": {},
-    "apk": {
-      "android": {
-        "buildType": "apk"
-      }
-    }
-  },
-  "submit": {
-    "production": {}
-  }
+	"cli": {
+		"version": ">= 15.0.15",
+		"appVersionSource": "local"
+	},
+	"build": {
+		"development": {
+			"developmentClient": true,
+			"distribution": "internal"
+		},
+		"preview": {
+			"distribution": "internal"
+		},
+		"production": {},
+		"apk": {
+			"android": {
+				"buildType": "apk"
+			}
+		}
+	},
+	"submit": {
+		"production": {}
+	}
 }
