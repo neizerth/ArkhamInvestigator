@@ -20,6 +20,19 @@ function* worker({ payload }: ReturnType<typeof createGrayscaleImage>) {
 		const grayscaleContents: ReturnAwaited<typeof getBase64Grayscale> =
 			yield call(getBase64Grayscale, contents);
 
+		const directory = path.substring(0, path.lastIndexOf("/"));
+
+		const dirInfo: ReturnAwaited<typeof FileSystem.getInfoAsync> = yield call(
+			FileSystem.getInfoAsync,
+			directory,
+		);
+
+		if (!dirInfo.exists) {
+			yield call(FileSystem.makeDirectoryAsync, directory, {
+				intermediates: true,
+			});
+		}
+
 		yield call(FileSystem.writeAsStringAsync, path, grayscaleContents, {
 			encoding: FileSystem.EncodingType.Base64,
 		});
