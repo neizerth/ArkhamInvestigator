@@ -105,7 +105,9 @@ export const HelpPage = () => {
 			</Text>
 
 			<Text>
-				<C.Icon icon="health" />, <C.Icon icon="action" />
+				<C.Icon icon="health" />, <C.Icon icon="sanity" />,{" "}
+				<C.Icon icon="action" />, <C.Icon icon="card-outline" />,{" "}
+				<C.Icon icon="resource" />
 				{" - "}
 				{t`board.help.swipeRight.main`}
 			</Text>
