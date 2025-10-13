@@ -112,6 +112,8 @@ export const HelpPage = () => {
 				{t`board.help.swipeRight.main`}
 			</Text>
 
+			<Paragraph>{t`board.help.swipe`}</Paragraph>
+
 			<Title>{t`board.help.details`}</Title>
 
 			<Paragraph>{t`board.help.details.toggle`}</Paragraph>
