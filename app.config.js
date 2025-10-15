@@ -19,7 +19,6 @@ module.exports = {
       supportsTablet: false,
       bundleIdentifier: packageId,
       infoPlist: {
-        UIBackgroundModes: ["audio"],
         ITSAppUsesNonExemptEncryption: false,
       },
     },
@@ -38,7 +37,13 @@ module.exports = {
       favicon: "./assets/images/favicon.png",
     },
     plugins: [
-      "expo-audio",
+      [
+        "expo-audio",
+        {
+          "microphonePermission": false,
+          "backgroundAudio": false,
+        },
+      ],
       "expo-router",
       "expo-web-browser",
       [
