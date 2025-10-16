@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arkham Investigator - Support & Contact</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: #171e26;
+            color: #FFFBF2;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        h1 {
+            color: #D7D3C6;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        h2 {
+            color: #E6E1D3;
+            font-size: 1.8em;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #475259;
+            padding-bottom: 10px;
+        }
+
+        .intro {
+            background-color: #24303C;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            color: #F5F0E1;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .contact-card {
+            background-color: #24303C;
+            padding: 20px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .contact-card:hover {
+            background-color: #475259;
+            border-color: #D7D3C6;
+            transform: translateY(-2px);
+        }
+
+        .contact-card a {
+            color: #FFFBF2;
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .contact-title {
+            font-size: 1.2em;
+            font-weight: 600;
+            color: #E6E1D3;
+        }
+
+        .contact-url {
+            font-size: 0.9em;
+            color: #D7D3C6;
+            word-break: break-all;
+            text-align: center;
+        }
+
+        .icon {
+            width: 48px;
+            height: 48px;
+            background-color: #24303C;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        .faq {
+            background-color: #24303C;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 30px;
+        }
+
+        .faq-item {
+            margin-bottom: 20px;
+        }
+
+        .faq-question {
+            font-weight: 600;
+            color: #E6E1D3;
+            margin-bottom: 8px;
+        }
+
+        .faq-answer {
+            color: #D7D3C6;
+            padding-left: 20px;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 60px;
+            padding-top: 20px;
+            border-top: 2px solid #475259;
+            color: #B0B4B1;
+        }
+
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 2em;
+            }
+            
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Arkham Investigator</h1>
+        <h2>Support & Contact</h2>
+        
+        <div class="intro">
+            <p>Welcome to Arkham Investigator support page. We're here to help you with any questions, issues, or feedback you may have about the app.</p>
+        </div>
+
+        <h2>Contact Us</h2>
+        <p>Choose your preferred way to reach us:</p>
+
+        <div class="contact-grid">
+            <div class="contact-card">
+                <a href="mailto:neizerth@gmail.com">
+                    <div class="icon">📧</div>
+                    <div class="contact-title">E-mail</div>
+                    <div class="contact-url">neizerth@gmail.com</div>
+                </a>
+            </div>
+
+            <div class="contact-card">
+                <a href="https://github.com/neizerth/ArkhamInvestigator/issues" target="_blank" rel="noopener noreferrer">
+                    <div class="icon">🐙</div>
+                    <div class="contact-title">GitHub Issues</div>
+                    <div class="contact-url">Report bugs & request features</div>
+                </a>
+            </div>
+
+            <div class="contact-card">
+                <a href="https://discord.com/channels/225349059689447425/1351550310887460926" target="_blank" rel="noopener noreferrer">
+                    <div class="icon">💬</div>
+                    <div class="contact-title">Discord</div>
+                    <div class="contact-url">Join our community</div>
+                </a>
+            </div>
+
+            <div class="contact-card">
+                <a href="https://t.me/neizerth" target="_blank" rel="noopener noreferrer">
+                    <div class="icon">✈️</div>
+                    <div class="contact-title">Telegram</div>
+                    <div class="contact-url">Direct message</div>
+                </a>
+            </div>
+
+            <div class="contact-card">
+                <a href="https://boardgamegeek.com/thread/3516636/arkham-investigator-a-digital-investigator-board" target="_blank" rel="noopener noreferrer">
+                    <div class="icon">🎲</div>
+                    <div class="contact-title">BoardGameGeek</div>
+                    <div class="contact-url">Community discussion</div>
+                </a>
+            </div>
+        </div>
+
+        <div class="faq">
+            <h2>Frequently Asked Questions</h2>
+            
+            <div class="faq-item">
+                <div class="faq-question">Q: How do I report a bug?</div>
+                <div class="faq-answer">A: The best way to report bugs is through our GitHub Issues page. Please include details about your device, app version, and steps to reproduce the issue.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">Q: How can I request a new feature?</div>
+                <div class="faq-answer">A: Feature requests are welcome on GitHub Issues or through our Discord community. We love hearing your ideas!</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">Q: Where can I get help with using the app?</div>
+                <div class="faq-answer">A: Join our Discord server or BoardGameGeek thread where the community and developers can help answer your questions.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">Q: How do I contact the developer directly?</div>
+                <div class="faq-answer">A: You can reach the developer via email at neizerth@gmail.com or through Telegram.</div>
+            </div>
+        </div>
+
+        <footer>
+            <p>Arkham Investigator - A Digital Investigator Board for Arkham Horror: The Card Game</p>
+            <p style="margin-top: 10px; font-size: 0.9em;">This is an unofficial, fan-made companion app for tabletop players. It is not affiliated with or endorsed by Fantasy Flight Games or any other rights holder. All artwork and text are used for reference and educational purposes only. No copyrighted materials are sold, redistributed, or modified for commercial gain.</p>
+        </footer>
+    </div>
+</body>
+</html>
+
