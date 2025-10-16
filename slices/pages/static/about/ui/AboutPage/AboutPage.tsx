@@ -2,7 +2,16 @@ import { selectMediaVersion } from "@modules/signature/base/shared/lib";
 import { DEVICE_FONT_SCALE, DPR } from "@shared/config";
 import { BUILD_ID, BUILD_VERSION } from "@shared/config/app";
 import { useAppSelector } from "@shared/lib";
-import { A, Bold, Break, List, Paragraph, Rule, Title } from "@shared/ui";
+import {
+	A,
+	Bold,
+	Break,
+	List,
+	Paragraph,
+	PlatformFragment,
+	Rule,
+	Title,
+} from "@shared/ui";
 import {
 	ContentPage,
 	type ContentPageProps,
@@ -27,6 +36,7 @@ export const AboutPage = (props: AboutPageProps) => {
 					}}
 				/>
 			</Paragraph>
+			<Paragraph>{t`about.disclaimer`}</Paragraph>
 			<Paragraph>
 				<Trans
 					i18nKey="about.credits"
@@ -106,8 +116,10 @@ export const AboutPage = (props: AboutPageProps) => {
 			</Paragraph>
 			<Title>{t`Sponsors`}</Title>
 			<Paragraph>
-				<A href="https://www.patreon.com/arkhamdivider">Patreon:</A>
-				<Break />
+				<PlatformFragment except="ios">
+					<A href="https://www.patreon.com/arkhamdivider">Patreon:</A>
+					<Break />
+				</PlatformFragment>
 				@RecedingSamson, @Pink_hawk, @felice, The 1 Player Podcast, Andy
 				Lindberg, Nathan Wurschmidt
 				<Break />

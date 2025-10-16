@@ -2,6 +2,7 @@
 	"about.app": "The information presented in this app about <FFG>Arkham Horror: The Card Game™</FFG>, both textual and graphical, is ©Fantasy Flight Games. This app is a fan project and is not produced, endorsed, or supported by, or affiliated with Fantasy Flight Games.",
 	"about.credits": "This application was created by <Author>Vladimir Yazykov</Author> and contributors to support the Arkham Horror: The Card Game community. The source code of this project is available at <Repo>Github</Repo>. Feedback and bug reports are welcome via <Issues>Github issues</Issues> or <Discord>the dedicated channel</Discord> on the Mythos Busters Discord server.",
 	"about.artwork": "All artwork and illustrations are the intellectual property of their respective creators. All Arkham Horror: The Card Game™ images and graphics are copyrighted by Fantasy Flight Games.",
+	"about.disclaimer": "This is an unofficial, fan-made companion app for tabletop players. It is not affiliated with or endorsed by Fantasy Flight Games or any other rights holder. All artwork and text are used for reference and educational purposes only. No copyrighted materials are sold, redistributed, or modified for commercial gain.",
 	"about.credits.beth": "Thanks to my wife Elisabeth for her understanding and support. I'm the happiest man on the Earth. Because of her",
 
 	"about.hallOfFame,zzorba": "Arkham Cards API, Icomoon project, re-used Arkham Cards translations",

@@ -14,6 +14,7 @@ export const Cthulhu: typeof Image = styled(Image).attrs({
     width: 200px;
     height: 200px;
     margin: 0 auto;
+    padding-left: ${size.gap.large}px;
   `;
 
 export { Button };

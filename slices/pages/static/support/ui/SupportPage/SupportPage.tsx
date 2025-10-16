@@ -1,4 +1,4 @@
-import { Title } from "@shared/ui";
+import { PlatformFragment, Title } from "@shared/ui";
 import {
 	ContentPage,
 	type ContentPageProps,
@@ -20,11 +20,13 @@ export const SupportPage = (props: SupportPageProps) => {
 				))}
 			</C.List>
 			<C.Cthulhu />
-			<C.List>
-				{donateLinks.map((item) => (
-					<C.Button key={item.id} {...item} />
-				))}
-			</C.List>
+			<PlatformFragment except="ios">
+				<C.List>
+					{donateLinks.map((item) => (
+						<C.Button key={item.id} {...item} />
+					))}
+				</C.List>
+			</PlatformFragment>
 		</ContentPage>
 	);
 };

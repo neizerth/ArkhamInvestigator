@@ -1,4 +1,5 @@
 export * from "./Outside";
+export * from "./PlatformFragment";
 export * from "./UnscaledText";
 export * from "./FullHeightView";
 export * from "./ScreenView";
