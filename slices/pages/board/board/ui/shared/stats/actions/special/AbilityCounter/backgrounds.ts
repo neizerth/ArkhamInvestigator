@@ -1,5 +1,5 @@
+import { abilitiyBackgrounds } from "@assets/images/game/abilities";
 import { handSizeImage } from "@assets/images/game/stats";
-import { abilitiyBackgrounds } from "@assets/images/game/stats/abilities";
 import { AbilityCode } from "@modules/mechanics/board/abilities/shared/config";
 import type { ImageRequireSource } from "react-native";
 
