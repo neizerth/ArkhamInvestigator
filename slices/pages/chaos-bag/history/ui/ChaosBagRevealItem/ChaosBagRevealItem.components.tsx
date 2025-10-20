@@ -1,11 +1,11 @@
 import { ChaosBagRevealedToken } from "@modules/chaos-bag/reveal/base/entities/ui/ChaosBagRevealedToken";
+import {
+	SignaturePreview,
+	type SignaturePreviewProps,
+} from "@modules/signature/base/entities/ui";
 import { color, factionColor, font, size } from "@shared/config";
 import { Row, Text } from "@shared/ui";
 import { SkillCheckExpressionDisplay } from "@widgets/game/skill-check";
-import {
-	InvestigatorPreview,
-	type InvestigatorPreviewProps,
-} from "@widgets/investigator";
 import { View } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import styled, { css } from "styled-components/native";
@@ -23,10 +23,10 @@ export const SkillCheck: typeof ChaosBagRevalItemSkillCheck = styled(
   margin-right: ${size.gap.large}px;
 `;
 
-export const Image: typeof InvestigatorPreview = styled(InvestigatorPreview)`
+export const Image: typeof SignaturePreview = styled(SignaturePreview)`
   border-radius: 24px;
   border: 1px solid;
-  ${({ faction }: InvestigatorPreviewProps) => css`
+  ${({ faction }: SignaturePreviewProps) => css`
     border-color: ${factionColor[faction].border};
   `}
 `;

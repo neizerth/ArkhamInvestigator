@@ -11,13 +11,13 @@ import {
 	Icon as BaseIcon,
 	Button,
 	type ButtonProps,
-	FactionFontIcon,
-	FactionSVGPattern,
 	GameText,
 	type IconProps,
 	Row,
 } from "@shared/ui";
 import styled, { css } from "styled-components/native";
+import { FactionFontIcon } from "../../../FactionFontIcon";
+import { FactionSVGPattern } from "../../../FactionSVGPattern";
 export type ElementWithFaction<T> = FC<T & PropsWithFaction>;
 export type ViewWithFaction = ElementWithFaction<ViewProps>;
 export type TextWithFaction = ElementWithFaction<TextProps>;

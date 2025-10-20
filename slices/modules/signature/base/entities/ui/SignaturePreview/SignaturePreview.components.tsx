@@ -11,7 +11,7 @@ import { color, factionColor, size } from "@shared/config";
 import type { PropsWithFaction } from "@shared/model/ui";
 import { Icon, UnscaledText } from "@shared/ui";
 import Color from "color";
-import { Image, type ImageProps } from "expo-image";
+import { SignatureImage, type SignatureImageProps } from "../signature-image";
 
 const getSelectionColor = (faction: Faction) => {
 	const color = factionColor[faction].darkColor;
@@ -42,23 +42,17 @@ export const DisabledOverlay: typeof View = styled(View)`
   background-color: rgba(255, 255, 255, 0.3);
 `;
 
-type PictureProps = ImageProps & {
+type PictureProps = SignatureImageProps & {
 	size: number;
-	grayscale?: boolean;
 };
 
-export const Picture: FC<PictureProps> = styled(Image).attrs({
+export const Picture: FC<PictureProps> = styled(SignatureImage).attrs({
 	contentFit: "cover",
 })`
     ${({ size }: PictureProps) => css`
       aspect-ratio: 1;
       width: ${size}px;
       height: ${size}px;
-    `}
-    ${({ grayscale }: PictureProps) =>
-			grayscale &&
-			css`
-      filter: grayscale(1);
     `}
   `;
 

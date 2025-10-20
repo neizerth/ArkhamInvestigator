@@ -1,7 +1,7 @@
 import { Alegreya } from "@assets/fonts";
+import { SignaturePreview } from "@modules/signature/base/entities/ui";
 import { font, size } from "@shared/config";
 import { Row, TextView } from "@shared/ui";
-import { InvestigatorPreview } from "@widgets/investigator";
 import { InvestigatorSkillsPreview } from "@widgets/investigator/investigator-skills-preview";
 import {
 	ActionsValue,
@@ -21,7 +21,7 @@ export const Content: typeof Row = styled(Row)`
   gap: ${size.gap.default}px;
 `;
 
-export const Image: typeof InvestigatorPreview = styled(InvestigatorPreview)`
+export const Image: typeof SignaturePreview = styled(SignaturePreview)`
   border-radius: ${size.borderRadius.default}px;
 `;
 

@@ -1,14 +1,13 @@
 import { TouchableOpacity } from "@modules/core/touch/shared/ui";
 import { color, factionColor } from "@shared/config";
 import type { PropsWithFaction } from "@shared/model";
-import {
-	Icon as BaseIcon,
-	type IconProps as BaseIconProps,
-	FactionFontIcon,
-	type FactionFontIconProps,
-} from "@shared/ui";
+import { Icon as BaseIcon, type IconProps as BaseIconProps } from "@shared/ui";
 import type { FC } from "react";
 import styled, { css } from "styled-components/native";
+import {
+	FactionFontIcon,
+	type FactionFontIconProps,
+} from "../../../FactionFontIcon";
 import type { FactionSelectButtonProps } from "./FactionSelectButton";
 
 type ButtonProps = FactionSelectButtonProps;

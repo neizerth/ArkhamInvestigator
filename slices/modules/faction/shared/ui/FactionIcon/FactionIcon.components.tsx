@@ -1,8 +1,9 @@
-import { FactionIconImage as BaseFactionImage, Icon } from "@shared/ui";
+import { Icon } from "@shared/ui";
 import styled from "styled-components/native";
+import { FactionIconImage } from "../FactionIconImage";
 
 export { View as Container } from "react-native";
-export const FactionImage: typeof BaseFactionImage = styled(BaseFactionImage)`
+export const FactionImage: typeof FactionIconImage = styled(FactionIconImage)`
   width: 30px;
   height: 30px;
 `;

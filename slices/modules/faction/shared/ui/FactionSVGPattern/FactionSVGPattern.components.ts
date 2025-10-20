@@ -1,7 +1,7 @@
+import { SvgPatternImage } from "@shared/ui";
 import type { FC } from "react";
 import { View } from "react-native";
 import styled, { css } from "styled-components/native";
-import { SvgPatternImage } from "../../../image/SvgPatternImage";
 import type { FactionSVGPatternProps } from "./FactionSVGPattern";
 
 export const Container: FC<FactionSVGPatternProps> = styled(View)`

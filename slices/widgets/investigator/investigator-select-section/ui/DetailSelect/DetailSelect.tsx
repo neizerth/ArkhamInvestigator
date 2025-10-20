@@ -1,6 +1,6 @@
+import { SignaturePreviewMemo as SignaturePreview } from "@modules/signature/base/entities/ui";
 import type { InvestigatorDetailItem as Item } from "@shared/model";
 import { memo, useCallback } from "react";
-import { InvestigatorPreviewMemo as InvestigatorPreview } from "../../../investigator-preview";
 import { UnselectedDetail } from "../UnselectedDetail";
 import * as C from "./DetailSelect.components";
 
@@ -41,7 +41,7 @@ export const DetailSelect = ({
 				)}
 
 				{data.map((item, index) => (
-					<InvestigatorPreview
+					<SignaturePreview
 						key={item.id}
 						imageId={item.imageId}
 						code={item.code}

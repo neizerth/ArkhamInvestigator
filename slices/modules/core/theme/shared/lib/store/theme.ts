@@ -5,10 +5,12 @@ import type { Theme } from "../../model";
 
 export type ThemeState = {
 	theme: Theme;
+	artworkUrl: string | null;
 };
 
 const initialState: ThemeState = {
 	theme: defaultTheme,
+	artworkUrl: null,
 };
 
 const state = createSliceState(initialState);
@@ -18,8 +20,8 @@ export const theme = createSlice({
 	...state,
 });
 
-export const { setTheme } = theme.actions;
+export const { setTheme, setArtworkUrl } = theme.actions;
 
-export const { selectTheme } = theme.selectors;
+export const { selectTheme, selectArtworkUrl } = theme.selectors;
 
 export default theme.reducer;

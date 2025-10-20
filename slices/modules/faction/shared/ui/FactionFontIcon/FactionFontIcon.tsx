@@ -1,5 +1,5 @@
 import type { PropsWithFaction } from "@shared/model";
-import { Icon, type IconProps } from "../Icon/Icon";
+import { Icon, type IconProps } from "@shared/ui";
 
 export type FactionFontIconProps = Omit<IconProps, "icon"> & PropsWithFaction;
 export const FactionFontIcon = ({

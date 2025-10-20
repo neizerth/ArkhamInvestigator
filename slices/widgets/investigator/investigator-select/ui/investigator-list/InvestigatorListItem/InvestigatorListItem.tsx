@@ -1,18 +1,18 @@
 import {
+	SignaturePreviewMemo as SignaturePreview,
+	type SignaturePreviewProps,
+} from "@modules/signature/base/entities/ui";
+import {
 	selectReplaceCode,
 	selectSelectedInvestigatorByCode,
 	useAppSelector,
 } from "@shared/lib";
 import {
-	InvestigatorPreviewMemo as InvestigatorPreview,
-	type InvestigatorPreviewProps,
-} from "../../../../investigator-preview";
-import {
 	selectInvestigatorSelectedCount,
 	selectIsInvestigatorDisabled,
 } from "../../../lib";
 
-export type InvestigatorListItemProps = InvestigatorPreviewProps;
+export type InvestigatorListItemProps = SignaturePreviewProps;
 
 export const InvestigatorListItem = (props: InvestigatorListItemProps) => {
 	const replaceCode = useAppSelector(selectReplaceCode);
@@ -27,7 +27,7 @@ export const InvestigatorListItem = (props: InvestigatorListItemProps) => {
 	const isSelected = count > 0 || replaceCode === code;
 
 	return (
-		<InvestigatorPreview
+		<SignaturePreview
 			{...props}
 			imageId={imageId}
 			selected={isSelected}

@@ -1,16 +1,11 @@
-import { getSignatureImageUrl } from "@modules/signature/base/shared/api";
+import type { TouchableOpacityProps } from "@modules/core/touch/shared/ui";
+import { FactionIcon } from "@modules/faction/shared/ui";
 import type { PropsWithFaction } from "@shared/model";
 import { memo, useCallback } from "react";
-import {
-	type GestureResponderEvent,
-	Platform,
-	type TouchableOpacityProps,
-	type ViewProps,
-} from "react-native";
-import { InvestigatorPreviewFactionIcon as FactionIcon } from "../InvestigatorPreviewFactionIcon";
-import * as C from "./InvestigatorPreview.components";
+import type { GestureResponderEvent, ViewProps } from "react-native";
+import * as C from "./SignaturePreview.components";
 
-export type InvestigatorPreviewProps = TouchableOpacityProps &
+export type SignaturePreviewProps = TouchableOpacityProps &
 	PropsWithFaction & {
 		imageId?: string;
 		imageVersion?: number;
@@ -25,9 +20,7 @@ export type InvestigatorPreviewProps = TouchableOpacityProps &
 		grayscale?: boolean;
 	};
 
-const ios = Platform.OS === "ios";
-
-export const InvestigatorPreview = ({
+export const SignaturePreview = ({
 	showIcon = true,
 	showOptionsInfo = true,
 	faction,
@@ -37,17 +30,10 @@ export const InvestigatorPreview = ({
 	disabled,
 	size,
 	selectionStyle,
+	grayscale,
 	...props
-}: InvestigatorPreviewProps) => {
+}: SignaturePreviewProps) => {
 	const imageId = props.imageId || props.code;
-	const grayscaleImage = props.grayscale && ios;
-	const grayscaleFilter = props.grayscale && !ios;
-	const uri = getSignatureImageUrl({
-		code: imageId,
-		type: "square",
-		grayscale: grayscaleImage,
-	});
-	const source = { uri };
 
 	const onPress = useCallback(
 		(event: GestureResponderEvent) => {
@@ -70,7 +56,12 @@ export const InvestigatorPreview = ({
 			onPress={onPress}
 			style={[props.style, containerStyle]}
 		>
-			<C.Picture source={source} size={size} grayscale={grayscaleFilter} />
+			<C.Picture
+				code={imageId}
+				type="square"
+				size={size}
+				grayscale={grayscale}
+			/>
 			{showIcon && (
 				<C.Info>
 					{icon ? (
@@ -91,4 +82,4 @@ export const InvestigatorPreview = ({
 	);
 };
 
-export const InvestigatorPreviewMemo = memo(InvestigatorPreview);
+export const SignaturePreviewMemo = memo(SignaturePreview);

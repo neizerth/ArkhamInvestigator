@@ -1,6 +1,7 @@
 import { TouchableOpacity } from "@modules/core/touch/shared/ui";
+import { FactionIconImage } from "@modules/faction/shared/ui";
 import { color } from "@shared/config";
-import { FactionIconImage, Icon } from "@shared/ui";
+import { Icon } from "@shared/ui";
 import { View } from "react-native";
 import styled from "styled-components/native";
 
