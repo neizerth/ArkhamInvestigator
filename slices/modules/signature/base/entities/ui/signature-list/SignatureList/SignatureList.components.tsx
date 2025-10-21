@@ -1,4 +1,4 @@
-import { font, size } from "@shared/config";
+import { color, font, size } from "@shared/config";
 import { Row, Text } from "@shared/ui";
 import { SectionList } from "react-native";
 import styled from "styled-components/native";
@@ -21,4 +21,12 @@ export const Title: typeof Text = styled(Text)`
 
 export const Item: typeof SignatureListItem = styled(SignatureListItem)`
   flex: 1;
+`;
+
+export const SectionHeader: typeof Text = styled(Text)`
+  text-align: center;
+  background-color: ${color.dark20};
+  padding: ${size.gap.small}px ${size.gap.default}px;
+  font-size: ${font.size.default}px;
+  margin-bottom: ${size.gap.default}px;
 `;

@@ -70,6 +70,19 @@ export const SignatureList = ({
 		[toggleSelected, selected, disabled, selectedCount],
 	);
 
+	const renderSectionHeader: RenderSectionHeaderProp = useCallback(
+		({ section }) => {
+			const { title, data } = section;
+
+			if (!title || data.length === 0) {
+				return null;
+			}
+
+			return <C.SectionHeader>{title}</C.SectionHeader>;
+		},
+		[],
+	);
+
 	return (
 		<C.Container
 			{...props}
@@ -78,8 +91,7 @@ export const SignatureList = ({
 				props.contentContainerStyle,
 			]}
 			renderItem={renderItem}
-			// getItemLayout={getItemLayout}
-			// renderSectionHeader={renderSectionHeader}
+			renderSectionHeader={renderSectionHeader}
 			removeClippedSubviews={removeClippedSubviews}
 		/>
 	);
