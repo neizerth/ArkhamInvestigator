@@ -5,7 +5,6 @@ import { useCallback } from "react";
 import type { ListRenderItemInfo, SectionListProps } from "react-native";
 import { Platform } from "react-native";
 import * as C from "./SignatureList.components";
-import { defaultContentContainerStyle } from "./SignatureList.styles";
 
 const ios = Platform.OS === "ios";
 const removeClippedSubviews = REMOVE_CLIPPED_SUBVIEWS && !ios;
@@ -86,10 +85,6 @@ export const SignatureList = ({
 	return (
 		<C.Container
 			{...props}
-			contentContainerStyle={[
-				defaultContentContainerStyle,
-				props.contentContainerStyle,
-			]}
 			renderItem={renderItem}
 			renderSectionHeader={renderSectionHeader}
 			removeClippedSubviews={removeClippedSubviews}

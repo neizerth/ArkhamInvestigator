@@ -1,9 +1,12 @@
 import { Alegreya } from "@assets/fonts";
-import { TouchableOpacity } from "@modules/core/touch/shared/ui";
+import {
+	TouchableOpacity,
+	type TouchableOpacityProps,
+} from "@modules/core/touch/shared/ui";
 import type { PropsWithFaction } from "@modules/faction/shared/model";
 import { FactionFontIcon } from "@modules/faction/shared/ui";
 import { color, factionColor, font, size } from "@shared/config";
-import { Icon, Row, Text } from "@shared/ui";
+import { Icon, IconNumber, type IconProps, Row, Text } from "@shared/ui";
 import type { FC } from "react";
 import { View } from "react-native";
 import type { TextProps } from "react-native";
@@ -12,8 +15,15 @@ import styled, { css } from "styled-components/native";
 export const Container: typeof TouchableOpacity = styled(TouchableOpacity)`
 	flex-direction: row;
 	gap: ${size.gap.medium}px;
-	padding: 0 ${size.gap.default}px;
+	padding: ${size.gap.default}px ${size.gap.default}px ${size.gap.small}px;
 	align-items: center;
+	border-bottom-width: 1px;
+	border-bottom-color: ${color.dark20};
+	${({ disabled }: TouchableOpacityProps) =>
+		disabled &&
+		css`
+		opacity: 0.5;
+	`}
 `;
 
 export const FactionIcon: typeof FactionFontIcon = styled(
@@ -26,6 +36,7 @@ export const FactionIcon: typeof FactionFontIcon = styled(
 
 export const Main: typeof View = styled(View)`
 	gap: ${size.gap.small}px;
+	flex: 1;
 `;
 
 export const Header: typeof Row = styled(Row)`
@@ -51,4 +62,31 @@ export const Subtitle: typeof Text = styled(Text)`
 export const PackIcon: typeof Icon = styled(Icon)`
 	font-size: 14px;
 	color: ${color.light10};
+`;
+
+type CheckProps = IconProps & PropsWithFaction;
+
+export const Check: FC<CheckProps> = styled(Icon)`
+	font-size: 24px;
+	${({ faction }: CheckProps) => css`
+		color: ${factionColor[faction].darkColor};
+	`}
+`;
+
+export const Selection: typeof View = styled(View)`
+
+`;
+
+export const SelectedCount: typeof IconNumber = styled(IconNumber)`
+	font-size: 18px;
+	color: ${color.light10};
+`;
+
+export const MultipleSelection: typeof View = styled(View)`
+	width: 30px;
+	height: 30px;
+	border-radius: 15px;
+	align-items: center;
+	justify-content: center;
+	background-color: ${color.dark20};
 `;

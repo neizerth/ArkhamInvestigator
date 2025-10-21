@@ -27,6 +27,17 @@ export const SignatureListItem = ({
 				</C.Header>
 				<C.Subtitle>{signature.subname}</C.Subtitle>
 			</C.Main>
+			{selected && (
+				<C.Selection>
+					{selectedCount > 1 ? (
+						<C.MultipleSelection>
+							<C.SelectedCount value={selectedCount} />
+						</C.MultipleSelection>
+					) : (
+						<C.Check faction={faction} icon="checklist" />
+					)}
+				</C.Selection>
+			)}
 		</C.Container>
 	);
 };

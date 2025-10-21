@@ -1,8 +1,8 @@
 import type { TouchableOpacityProps } from "@modules/core/touch/shared/ui";
 import { FactionIcon } from "@modules/faction/shared/ui";
 import type { PropsWithFaction } from "@shared/model";
-import { memo, useCallback } from "react";
-import type { GestureResponderEvent, ViewProps } from "react-native";
+import { memo } from "react";
+import type { ViewProps } from "react-native";
 import * as C from "./SignaturePreview.components";
 
 export type SignaturePreviewProps = TouchableOpacityProps &
@@ -34,27 +34,13 @@ export const SignaturePreview = ({
 }: SignaturePreviewProps) => {
 	const imageId = props.imageId || props.code;
 
-	const onPress = useCallback(
-		(event: GestureResponderEvent) => {
-			if (disabled) {
-				return;
-			}
-			props.onPress?.(event);
-		},
-		[props.onPress, disabled],
-	);
-
 	const containerStyle = {
 		width: size,
 		height: size,
 	};
 
 	return (
-		<C.Container
-			{...props}
-			onPress={onPress}
-			style={[props.style, containerStyle]}
-		>
+		<C.Container {...props} style={[props.style, containerStyle]}>
 			<C.Picture
 				code={imageId}
 				type="square"
