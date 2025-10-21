@@ -2,11 +2,14 @@ import { font, size } from "@shared/config";
 import { Row, TentacleUnderline, Text } from "@shared/ui";
 import { SectionList } from "react-native";
 import styled from "styled-components/native";
+import { getPaddingBottom } from "./SignaturePreviewList.styles";
+
+const paddingBottom = getPaddingBottom();
 
 export const Container: typeof SectionList = styled(SectionList).attrs({
 	contentContainerStyle: {
 		gap: size.gap.default,
-		paddingBottom: 65,
+		paddingBottom,
 	},
 })`
 `;
