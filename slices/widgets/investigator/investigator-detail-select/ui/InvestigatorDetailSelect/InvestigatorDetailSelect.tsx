@@ -1,3 +1,6 @@
+import { selectArtworksEnabled } from "@modules/core/theme/shared/lib";
+import { SignatureDetailSelectMemo as DataSection } from "@modules/signature/base/features/base/ui";
+import type { SignatureDetailItem as Item } from "@modules/signature/base/shared/model";
 import { formatGameText, useAppDispatch, useAppSelector } from "@shared/lib";
 import {
 	selectCurrentSignatureGroup,
@@ -7,10 +10,8 @@ import {
 	setCurrentSignatureId,
 	setCurrentSkinId,
 } from "@shared/lib/store";
-import type { InvestigatorDetailItem } from "@shared/model";
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
-import { InvestigatorSelectSectionMemo as DataSection } from "../../../investigator-select-section";
 import { CARD_SIZE } from "../../config";
 import {
 	cancelSelection,
@@ -22,7 +23,7 @@ import {
 import { InvestigatorDescription } from "../investigator";
 import * as C from "./InvestigatorDetailSelect.components";
 
-type DetailItem = InvestigatorDetailItem | null;
+type DetailItem = Item | null;
 export const InvestigatorDetailSelect = () => {
 	const dispatch = useAppDispatch();
 	const { t } = useTranslation();
@@ -30,6 +31,7 @@ export const InvestigatorDetailSelect = () => {
 	const skinId = useAppSelector(selectCurrentSkinId);
 	const currentSignatureId = useAppSelector(selectCurrentSignatureId);
 	const replaceInvestigator = useAppSelector(selectReplaceInvestigator);
+	const artworksEnabled = useAppSelector(selectArtworksEnabled);
 
 	const onChangeSkin = useCallback(
 		(item: DetailItem) => {
@@ -106,7 +108,7 @@ export const InvestigatorDetailSelect = () => {
 								size={CARD_SIZE}
 							/>
 						)}
-						{skins.length > 1 && (
+						{artworksEnabled && skins.length > 1 && (
 							<DataSection
 								title={t`Skins`}
 								data={skins}

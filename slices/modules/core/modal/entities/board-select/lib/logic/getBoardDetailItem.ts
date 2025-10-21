@@ -1,9 +1,9 @@
 import type { InvestigatorBoard } from "@modules/board/base/shared/model";
-import type { InvestigatorDetailItem } from "@shared/model";
+import type { SignatureDetailItem } from "@modules/signature/base/shared/model";
 
 export const getBoardDetailItem = (
 	board: InvestigatorBoard,
-): InvestigatorDetailItem<number> => {
+): SignatureDetailItem<number> => {
 	const { investigator, signatureGroupId, image } = board;
 	return {
 		id: signatureGroupId,

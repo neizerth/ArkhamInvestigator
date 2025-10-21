@@ -7,3 +7,4 @@ export * from "./Checkbox";
 export * from "./list";
 export * from "./NumericControl";
 export * from "./button";
+export * from "./Radio";

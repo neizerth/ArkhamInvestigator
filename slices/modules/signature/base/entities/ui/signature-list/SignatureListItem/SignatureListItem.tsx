@@ -19,25 +19,28 @@ export const SignatureListItem = ({
 	const faction = signature.faction_code;
 	return (
 		<C.Container {...props}>
-			<C.FactionIcon faction={signature.faction_code} />
-			<C.Main>
-				<C.Header>
-					<C.Title faction={faction}>{signature.name}</C.Title>
-					<C.PackIcon icon={signature.pack.icon} />
-				</C.Header>
-				<C.Subtitle>{signature.subname}</C.Subtitle>
-			</C.Main>
-			{selected && (
-				<C.Selection>
-					{selectedCount > 1 ? (
-						<C.MultipleSelection>
-							<C.SelectedCount value={selectedCount} />
-						</C.MultipleSelection>
-					) : (
-						<C.Check faction={faction} icon="checklist" />
-					)}
-				</C.Selection>
-			)}
+			<C.Content>
+				<C.FactionIcon faction={signature.faction_code} />
+
+				<C.Main>
+					<C.Header>
+						<C.Title faction={faction}>{signature.name}</C.Title>
+						<C.PackIcon icon={signature.pack.icon} />
+					</C.Header>
+					<C.Subtitle>{signature.subname}</C.Subtitle>
+				</C.Main>
+				{selected && (
+					<C.Selection>
+						{selectedCount > 1 ? (
+							<C.MultipleSelection>
+								<C.SelectedCount value={selectedCount} />
+							</C.MultipleSelection>
+						) : (
+							<C.Check faction={faction} icon="checklist" />
+						)}
+					</C.Selection>
+				)}
+			</C.Content>
 		</C.Container>
 	);
 };

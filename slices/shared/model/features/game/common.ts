@@ -60,17 +60,4 @@ export type InvestigatorDetails = {
 	isOfficial: boolean;
 };
 
-export type InvestigatorDetailItem<T = unknown> = {
-	id: string;
-	code: string;
-	imageId: string;
-	image: InvestigatorSignature["image"];
-	faction: Faction;
-	type: InvestigatorSignature["type"] | "skin";
-	icon?: string;
-	name: string;
-	value: string | null;
-	data?: T;
-};
-
 export type FactionFilterType = Faction | "spoiler";

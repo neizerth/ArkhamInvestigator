@@ -1,4 +1,4 @@
-import { selectArtworkUrl } from "@modules/core/theme/shared/lib";
+import { selectArtworksEnabled } from "@modules/core/theme/shared/lib";
 import { selectSignatureGroups } from "@modules/signature/base/shared/lib";
 import {
 	changeSelectedInvestigator,
@@ -23,7 +23,7 @@ export const InvestigatorSelect = () => {
 	const dispatch = useAppDispatch();
 	const factionFilterValue = useAppSelector(selectFactionFilter);
 	const data = useAppSelector(selectSignatureGroups);
-	const artworkUrl = useAppSelector(selectArtworkUrl);
+	const artworksEnabled = useAppSelector(selectArtworksEnabled);
 	const { t } = useTranslation();
 
 	const gesture = useFactionSwipes();
@@ -31,7 +31,7 @@ export const InvestigatorSelect = () => {
 	const image = useImageSize();
 	const { size } = image;
 
-	const columns = artworkUrl ? image.columns : 1;
+	const columns = artworksEnabled ? image.columns : 1;
 
 	const onChange = useCallback(
 		(item: InvestigatorSignatureGroup) =>

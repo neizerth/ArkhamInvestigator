@@ -1,10 +1,9 @@
 import { SignaturePreviewMemo as SignaturePreview } from "@modules/signature/base/entities/ui";
-import type { InvestigatorDetailItem as Item } from "@shared/model";
+import type { SignatureDetailItem as Item } from "@modules/signature/base/shared/model";
 import { memo, useCallback } from "react";
-import { UnselectedDetail } from "../UnselectedDetail";
-import * as C from "./DetailSelect.components";
+import * as C from "./SignaturePreviewSelect.components";
 
-export type DetailSelectProps = {
+export type SignaturePreviewSelectProps = {
 	data: Item[];
 	disabled?: string[];
 	size: number;
@@ -14,7 +13,7 @@ export type DetailSelectProps = {
 	showIcon?: boolean;
 };
 
-export const DetailSelect = ({
+export const SignaturePreviewSelect = ({
 	data,
 	disabled = [],
 	onChange,
@@ -22,22 +21,26 @@ export const DetailSelect = ({
 	selectedId = null,
 	showNone,
 	showIcon = true,
-}: DetailSelectProps) => {
+}: SignaturePreviewSelectProps) => {
 	const setValue = useCallback(
 		(item: Item | null, index?: number) => () => onChange(item, index),
 		[onChange],
 	);
 	const isItemSelected = (item: Item) => item.id === selectedId;
 	const isDisabled = (item: Item) => disabled.includes(item.id);
+	const isEmptySelected = selectedId === null;
 
 	return (
 		<C.Container>
 			<C.List horizontal>
 				{showNone && (
-					<UnselectedDetail
-						selected={selectedId === null}
+					<C.Empty
+						selected={isEmptySelected}
 						onPress={setValue(null)}
-					/>
+						size={size}
+					>
+						<C.EmptyIcon icon="blocked" />
+					</C.Empty>
 				)}
 
 				{data.map((item, index) => (
@@ -59,4 +62,4 @@ export const DetailSelect = ({
 	);
 };
 
-export const DetailSelectMemo = memo(DetailSelect);
+export const SignaturePreviewSelectMemo = memo(SignaturePreviewSelect);

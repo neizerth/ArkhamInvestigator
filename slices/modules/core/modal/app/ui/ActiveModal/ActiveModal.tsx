@@ -1,5 +1,4 @@
 import { isBoardSelectModalData } from "@modules/core/modal/entities/board-select/lib";
-import { BoardSelectModal } from "@modules/core/modal/entities/board-select/ui";
 import {
 	selectModalData,
 	selectModalId,
@@ -10,6 +9,7 @@ import { isConfirmModalData } from "@modules/core/modal/shared/confirm/lib";
 import { Confirm } from "@modules/core/modal/shared/confirm/ui";
 import { isPromptModalData } from "@modules/core/modal/shared/prompt/lib";
 import { Prompt } from "@modules/core/modal/shared/prompt/ui";
+import { BoardSelectModal } from "@modules/core/modal/widgets/ui";
 import { useAppSelector } from "@shared/lib";
 import type { ViewProps } from "react-native";
 

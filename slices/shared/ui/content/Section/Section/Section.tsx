@@ -1,5 +1,5 @@
 import type { TextProps, ViewProps } from "react-native";
-import { color } from "../../../config";
+import { color } from "../../../../config";
 import * as C from "./Section.components";
 
 export type SectionProps = ViewProps & {

@@ -15,6 +15,7 @@ export const Label: typeof Text = styled(Text)`
 `;
 
 export const Control: typeof Icon = styled(Icon)`
+  position: relative;
   color: ${color.dark10};
   font-size: 24px;
   line-height: 24px;

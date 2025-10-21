@@ -1,5 +1,6 @@
 import { Alegreya } from "@assets/fonts";
 import { TouchableOpacity } from "@modules/core/touch/shared/ui";
+import { FactionFontIcon } from "@modules/faction/shared/ui";
 import { color, font, size } from "@shared/config";
 import { Icon as BaseIcon, Row, UnscaledText } from "@shared/ui";
 import { Image } from "expo-image";
@@ -44,4 +45,10 @@ export const Icon: typeof BaseIcon = styled(BaseIcon).attrs({
 	icon: "right-arrow",
 })`
     font-size: ${font.size.default}px
+  `;
+
+export const Faction: typeof FactionFontIcon = styled(FactionFontIcon)`
+    font-size: ${font.size.default}px;
+    width: 24px;
+    text-align: center;
   `;

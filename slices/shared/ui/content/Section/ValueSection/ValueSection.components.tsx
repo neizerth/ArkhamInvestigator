@@ -1,8 +1,9 @@
 import { Alegreya } from "@assets/fonts";
-import { color, font, size } from "@shared/config";
-import { Row, Text } from "@shared/ui";
 import { View } from "react-native";
 import styled from "styled-components/native";
+import { color, font, size } from "../../../../config";
+import { Row } from "../../../grid";
+import { Text } from "../../typography";
 
 export const Container: typeof View = styled(View)`
 

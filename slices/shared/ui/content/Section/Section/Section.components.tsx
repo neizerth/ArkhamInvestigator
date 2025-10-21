@@ -1,10 +1,10 @@
 import type { FC } from "react";
 import { View, type ViewProps } from "react-native";
 import styled, { css } from "styled-components/native";
-import { size } from "../../../config";
-import { Icon } from "../../game";
-import { Row, type RowProps } from "../../grid";
-import { Text } from "../typography";
+import { size } from "../../../../config";
+import { Icon } from "../../../game";
+import { Row, type RowProps } from "../../../grid";
+import { Text } from "../../typography";
 
 type PropsWithColor = {
 	color: string;

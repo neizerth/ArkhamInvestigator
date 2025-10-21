@@ -13,17 +13,23 @@ import type { TextProps } from "react-native";
 import styled, { css } from "styled-components/native";
 
 export const Container: typeof TouchableOpacity = styled(TouchableOpacity)`
-	flex-direction: row;
-	gap: ${size.gap.medium}px;
-	padding: ${size.gap.default}px ${size.gap.default}px ${size.gap.small}px;
 	align-items: center;
-	border-bottom-width: 1px;
-	border-bottom-color: ${color.dark20};
+
+	padding: 0 ${size.gap.small}px;
 	${({ disabled }: TouchableOpacityProps) =>
 		disabled &&
 		css`
 		opacity: 0.5;
 	`}
+`;
+
+export const Content: typeof Row = styled(Row)`
+	flex: 1;
+	padding: ${size.gap.small}px;
+	gap: ${size.gap.medium}px;
+	align-items: center;
+	border-bottom-width: 1px;
+	border-bottom-color: ${color.dark20};
 `;
 
 export const FactionIcon: typeof FactionFontIcon = styled(
@@ -35,6 +41,7 @@ export const FactionIcon: typeof FactionFontIcon = styled(
 `;
 
 export const Main: typeof View = styled(View)`
+	padding-top: ${size.gap.small}px;
 	gap: ${size.gap.small}px;
 	flex: 1;
 `;

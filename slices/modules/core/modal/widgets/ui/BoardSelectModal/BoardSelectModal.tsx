@@ -2,18 +2,18 @@ import { selectInvestigatorBoards } from "@modules/board/base/shared/lib";
 import { setModalValue } from "@modules/core/modal/shared/base/lib";
 import type { BaseModalAction } from "@modules/core/modal/shared/base/model";
 import type { FactionModalProps } from "@modules/core/modal/shared/base/ui";
+import type { SignatureDetailItem } from "@modules/signature/base/shared/model";
 import {
 	propIncludes,
 	useAppDispatch,
 	useAppSelector,
 	whereId,
 } from "@shared/lib";
-import type { InvestigatorDetailItem } from "@shared/model";
 import { prop } from "ramda";
 import { useCallback, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { getBoardDetailItem } from "../../lib";
-import type { BoardSelectModalData } from "../../model";
+import { getBoardDetailItem } from "../../../entities/board-select/lib";
+import type { BoardSelectModalData } from "../../../entities/board-select/model";
 import * as C from "./BoardSelectModal.components";
 
 export type BoardSelectModalProps<
@@ -50,7 +50,7 @@ export function BoardSelectModal<
 	}, [boards, disabledBoardIds]);
 
 	const onChange = useCallback(
-		(item: InvestigatorDetailItem | null) => {
+		(item: SignatureDetailItem | null) => {
 			if (!item) {
 				return;
 			}
