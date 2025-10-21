@@ -1,9 +1,9 @@
+import { usePageLoader } from "@modules/core/router/shared/lib";
 import { getSignatureImageUrl } from "@modules/signature/base/shared/api";
 import {
 	selectSelectedInvestigators,
 	useAppDispatch,
 	useAppSelector,
-	usePageLoader,
 } from "@shared/lib";
 import type { SelectedInvestigator } from "@shared/model";
 import { useCallback } from "react";

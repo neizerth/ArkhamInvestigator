@@ -1,7 +1,7 @@
 import { selectBoardsCount } from "@modules/board/base/shared/lib";
-import { usePage } from "@modules/core/router/shared/lib";
+import { usePage, usePageLoader } from "@modules/core/router/shared/lib";
 import { routes } from "@shared/config";
-import { useAppSelector, usePageLoader } from "@shared/lib";
+import { useAppSelector } from "@shared/lib";
 
 export const useResumeGame = () => {
 	const boardsCount = useAppSelector(selectBoardsCount);

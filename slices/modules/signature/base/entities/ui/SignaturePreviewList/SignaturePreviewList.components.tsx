@@ -1,9 +1,7 @@
-import { size } from "@shared/config";
-import { Row } from "@shared/ui";
+import { font, size } from "@shared/config";
+import { Row, TentacleUnderline, Text } from "@shared/ui";
 import { SectionList } from "react-native";
 import styled from "styled-components/native";
-import { InvestigatorListItem } from "../InvestigatorListItem";
-import { InvestigatorListSeparator } from "../InvestigatorListSeparator";
 
 export const Container: typeof SectionList = styled(SectionList).attrs({
 	contentContainerStyle: {
@@ -19,12 +17,12 @@ export const ItemRow: typeof Row = styled(Row)`
   gap: ${size.gap.default}px;
 `;
 
-export const Item: typeof InvestigatorListItem = styled(InvestigatorListItem)`
-  
+export const Title: typeof Text = styled(Text)`
+  text-align: center;
+  font-size: ${font.size.medium}px;
+  margin-bottom: ${size.gap.default}px;
 `;
 
-export const Separator: typeof InvestigatorListSeparator = styled(
-	InvestigatorListSeparator,
-)`
+export const Underline: typeof TentacleUnderline = styled(TentacleUnderline)`
   margin-top: -10px;
 `;

@@ -11,12 +11,12 @@ import type {
 	PickerChangeEvent,
 	PickerItemInfo,
 } from "@modules/core/control/entities/picker/model";
+import { usePageLoader } from "@modules/core/router/shared/lib";
 import {
 	selectShowAdditionalInformation,
 	signedNumber,
 	useAppDispatch,
 	useAppSelector,
-	usePageLoader,
 } from "@shared/lib";
 import type { InvestigatorSkillType } from "@shared/model";
 import { range } from "ramda";

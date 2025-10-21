@@ -5,3 +5,4 @@ export * from "./Section";
 export * from "./game-text";
 export * from "./Dot";
 export * from "./Logo";
+export * from "./decorative";

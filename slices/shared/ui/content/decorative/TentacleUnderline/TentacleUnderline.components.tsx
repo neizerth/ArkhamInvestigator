@@ -1,11 +1,8 @@
-import { Alegreya } from "@assets/fonts";
-import { color, font, size } from "@shared/config";
-import { Row, UnscaledText } from "@shared/ui";
-import { Platform, View } from "react-native";
+import { View } from "react-native";
 import styled from "styled-components/native";
+import { color } from "../../../../config";
+import { Row } from "../../../grid";
 import { Aside, Line } from "./images";
-
-const ios = Platform.OS === "ios";
 
 const asideSize = {
 	width: 78,
@@ -34,17 +31,13 @@ export const Container: typeof Row = styled(Row)`
   align-items: center;
 `;
 
-export const Text: typeof UnscaledText = styled(UnscaledText)`
-  font-family: ${Alegreya.medium};
-  text-align: center;
-  font-size: ${font.size.medium}px;
-  color: ${color.light10};
-  margin-bottom: ${size.gap.default}px;
+export const Group: typeof View = styled(View)`
+  flex-shrink: 0;
+  position: relative;
 `;
 
 export const Content: typeof View = styled(View)`
-  flex-shrink: 0;
-  position: relative;
+  display: inline-flex;
 `;
 
 const asideOffset = {
@@ -68,7 +61,7 @@ export const Rule: typeof Line = styled(Line).attrs({
   
 `;
 
-export const SeparatorAside: typeof Aside = styled(Aside).attrs({
+export const Decoration: typeof Aside = styled(Aside).attrs({
 	width: asideWidth,
 	height: asideHeight,
 	fill: color.light10,
@@ -77,11 +70,11 @@ export const SeparatorAside: typeof Aside = styled(Aside).attrs({
   bottom: ${asideOffset.y}px;
 `;
 
-export const SeparatorBefore: typeof SeparatorAside = styled(SeparatorAside)`
+export const Left: typeof Decoration = styled(Decoration)`
   left: ${asideOffset.x}px;
 `;
 
-export const SeparatorAfter: typeof SeparatorAside = styled(SeparatorAside)`
+export const Right: typeof Decoration = styled(Decoration)`
   transform: scale(-1, 1);
   right: ${asideOffset.x}px;
 `;

@@ -4,7 +4,7 @@ import styled from "styled-components/native";
 import { FactionSelect as BaseFactionSelect } from "../FactionSelect";
 import { InvestigatorSelectFooter } from "../InvestigatorSelectFooter";
 
-import { InvestigatorList } from "../investigator-list/InvestigatorList";
+import { SignaturePreviewList } from "@modules/signature/base/entities/ui";
 
 export const Container: typeof View = styled(View)`
   flex: 1;
@@ -14,7 +14,7 @@ export const Content: typeof View = styled(View)`
   flex: 1;
 `;
 
-export const List: typeof InvestigatorList = styled(InvestigatorList)`
+export const List: typeof SignaturePreviewList = styled(SignaturePreviewList)`
 `;
 
 export const FactionSelect: typeof BaseFactionSelect = styled(
