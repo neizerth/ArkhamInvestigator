@@ -1,10 +1,12 @@
 import { Alegreya } from "@assets/fonts";
+import { FactionFontIcon } from "@modules/faction/shared/ui";
 import { color, font, size } from "@shared/config";
 import { GameText } from "@shared/ui";
 import { Column, Row, UnscaledText } from "@shared/ui";
 import { Image as BaseImage } from "expo-image";
 import { View } from "react-native";
 import styled from "styled-components/native";
+import { css } from "styled-components/native";
 import { InvestigatorSkillsPreview } from "../../../../investigator-skills-preview";
 import { InvestigatorCounters } from "../InvestigatorCounters";
 import { InvestigatorStats } from "../InvestigatorStats";
@@ -35,11 +37,15 @@ export const Skills: typeof InvestigatorSkillsPreview = styled(
 
 export { View as Section };
 
-export const Image: typeof BaseImage = styled(BaseImage)`
+const imageStyle = css`
   max-width: 110px;
   height: 110px;
   flex: 1;
   border-radius: ${size.borderRadius.default}px;
+`;
+
+export const Image: typeof BaseImage = styled(BaseImage)`
+  ${imageStyle}
 `;
 
 export const ImageContainer: typeof Row = styled(Row)`
@@ -91,4 +97,17 @@ export const Counters: typeof InvestigatorCounters = styled(
 	InvestigatorCounters,
 )`
   flex: 1;
+`;
+
+export const FactionView: typeof View = styled(View)`
+  ${imageStyle}
+  justify-content: center;
+  align-items: center;
+  border-width: 1px;
+  border-color: ${color.dark10};
+`;
+
+export const Faction: typeof FactionFontIcon = styled(FactionFontIcon)`
+  font-size: 50px;
+  color: ${color.dark10};
 `;

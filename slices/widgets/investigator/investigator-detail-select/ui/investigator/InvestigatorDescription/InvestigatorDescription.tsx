@@ -1,4 +1,5 @@
 import { selectTrackXP } from "@modules/board/base/shared/lib";
+import { selectArtworksEnabled } from "@modules/core/theme/shared/lib";
 import { getSignatureImageUrl } from "@modules/signature/base/shared/api";
 import {
 	getBoardStats,
@@ -11,6 +12,7 @@ export const InvestigatorDescription = () => {
 	const signature = useAppSelector(selectCurrentSignature);
 	const skinId = useAppSelector(selectCurrentSkinId);
 	const trackXP = useAppSelector(selectTrackXP);
+	const artworksEnabled = useAppSelector(selectArtworksEnabled);
 
 	if (!signature) {
 		return;
@@ -28,6 +30,7 @@ export const InvestigatorDescription = () => {
 	const traits = signature.traits;
 
 	const stats = getBoardStats(signature);
+	const faction = signature.faction_code;
 
 	return (
 		<C.Container>
@@ -37,9 +40,15 @@ export const InvestigatorDescription = () => {
 					<C.Skills {...stats} />
 					<C.Stats {...stats} />
 				</C.Details>
-				<C.ImageContainer>
-					<C.Image source={source} />
-				</C.ImageContainer>
+				{artworksEnabled ? (
+					<C.ImageContainer>
+						<C.Image source={source} />
+					</C.ImageContainer>
+				) : (
+					<C.FactionView>
+						<C.Faction faction={faction} />
+					</C.FactionView>
+				)}
 			</C.MainInfo>
 			<C.InvestigatorTextContainer>
 				<C.InvestigatorText value={text} />
