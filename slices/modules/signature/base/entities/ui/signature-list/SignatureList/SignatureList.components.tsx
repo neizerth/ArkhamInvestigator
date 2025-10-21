@@ -1,17 +1,10 @@
 import { font, size } from "@shared/config";
-import { Row, TentacleUnderline, Text } from "@shared/ui";
+import { Row, Text } from "@shared/ui";
 import { SectionList } from "react-native";
 import styled from "styled-components/native";
-import { getPaddingBottom } from "./SignaturePreviewList.styles";
+import { SignatureListItem } from "../SignatureListItem";
 
-const paddingBottom = getPaddingBottom();
-
-export const Container: typeof SectionList = styled(SectionList).attrs({
-	contentContainerStyle: {
-		gap: size.gap.default,
-		paddingBottom,
-	},
-})`
+export const Container: typeof SectionList = styled(SectionList)`
 `;
 
 export const ItemRow: typeof Row = styled(Row)`
@@ -26,6 +19,6 @@ export const Title: typeof Text = styled(Text)`
   margin-bottom: ${size.gap.default}px;
 `;
 
-export const Underline: typeof TentacleUnderline = styled(TentacleUnderline)`
-  margin-top: -10px;
+export const Item: typeof SignatureListItem = styled(SignatureListItem)`
+  flex: 1;
 `;

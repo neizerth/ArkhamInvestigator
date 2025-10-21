@@ -1,3 +1,4 @@
+import { selectArtworkUrl } from "@modules/core/theme/shared/lib";
 import { selectSignatureGroups } from "@modules/signature/base/shared/lib";
 import {
 	changeSelectedInvestigator,
@@ -5,6 +6,7 @@ import {
 	selectFactionFilter,
 	selectSelectedInvestigatorCodes,
 	selectSelectedInvestigatorCount,
+	selectSelectedInvestigatorImages,
 } from "@shared/lib";
 import { useAppDispatch, useAppSelector } from "@shared/lib/hooks";
 import { splitIntoGroups } from "@shared/lib/util";
@@ -21,11 +23,15 @@ export const InvestigatorSelect = () => {
 	const dispatch = useAppDispatch();
 	const factionFilterValue = useAppSelector(selectFactionFilter);
 	const data = useAppSelector(selectSignatureGroups);
+	const artworkUrl = useAppSelector(selectArtworkUrl);
 	const { t } = useTranslation();
 
 	const gesture = useFactionSwipes();
 
-	const { columns, size } = useImageSize();
+	const image = useImageSize();
+	const { size } = image;
+
+	const columns = artworkUrl ? image.columns : 1;
 
 	const onChange = useCallback(
 		(item: InvestigatorSignatureGroup) =>
@@ -36,7 +42,7 @@ export const InvestigatorSelect = () => {
 	const disabled = useAppSelector(selectDisabledInvestigatorCodes);
 	const selected = useAppSelector(selectSelectedInvestigatorCodes);
 	const selectedCount = useAppSelector(selectSelectedInvestigatorCount);
-
+	const selectedImages = useAppSelector(selectSelectedInvestigatorImages);
 	const factionFilter = factionFilterValue || "guardian";
 
 	const filtered = data.filter(({ spoiler, faction_code }) => {
@@ -71,6 +77,7 @@ export const InvestigatorSelect = () => {
 						disabled={disabled}
 						selected={selected}
 						selectedCount={selectedCount}
+						selectedImages={selectedImages}
 					/>
 				</C.Content>
 				<C.Footer />

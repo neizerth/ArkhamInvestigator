@@ -2,13 +2,10 @@ import { REMOVE_CLIPPED_SUBVIEWS } from "@shared/config";
 import type { Defined } from "@shared/model";
 import type { InvestigatorSignatureGroup } from "arkham-investigator-data";
 import { useCallback } from "react";
-import {
-	type ListRenderItemInfo,
-	Platform,
-	type SectionListProps,
-} from "react-native";
-import { SignaturePreview } from "../SignaturePreview/SignaturePreview";
-import * as C from "./SignaturePreviewList.components";
+import type { ListRenderItemInfo, SectionListProps } from "react-native";
+import { Platform } from "react-native";
+import * as C from "./SignatureList.components";
+import { defaultContentContainerStyle } from "./SignatureList.styles";
 
 const ios = Platform.OS === "ios";
 const removeClippedSubviews = REMOVE_CLIPPED_SUBVIEWS && !ios;
@@ -17,15 +14,15 @@ type OmitProps = "key" | "numColumns" | "renderItem" | "keyExtractor";
 
 type Group = InvestigatorSignatureGroup[];
 
-type SignaturePreviewListSection = {
+export type SignaturePreviewListSection = {
 	title?: string;
 };
 
-type RenderSectionHeaderProp = Defined<
-	SignaturePreviewListProps["renderSectionHeader"]
+export type RenderSectionHeaderProp = Defined<
+	SignatureListProps["renderSectionHeader"]
 >;
 
-export type SignaturePreviewListProps = Omit<
+export type SignatureListProps = Omit<
 	SectionListProps<Group, SignaturePreviewListSection>,
 	OmitProps
 > & {
@@ -33,17 +30,18 @@ export type SignaturePreviewListProps = Omit<
 	selected: string[];
 	disabled: string[];
 	selectedCount: Record<string, number>;
+	selectedImages: Record<string, string>;
 	size: number;
 };
 
-export const SignaturePreviewList = ({
+export const SignatureList = ({
 	onChange,
 	size,
 	selected,
 	disabled,
 	selectedCount,
 	...props
-}: SignaturePreviewListProps) => {
+}: SignatureListProps) => {
 	const toggleSelected = useCallback(
 		(item: InvestigatorSignatureGroup) => () => onChange(item),
 		[onChange],
@@ -55,16 +53,11 @@ export const SignaturePreviewList = ({
 				<C.ItemRow>
 					{item.map((group) => {
 						const [signature] = group.signatures;
-						const { image } = signature;
 						return (
-							<SignaturePreview
+							<C.Item
 								key={group.id}
 								onPress={toggleSelected(group)}
-								faction={signature.faction_code}
-								code={signature.code}
-								imageVersion={image.version}
-								imageId={image.id}
-								size={size}
+								signature={signature}
 								selected={selected.includes(signature.code)}
 								disabled={disabled.includes(signature.code)}
 								selectedCount={selectedCount[signature.code]}
@@ -74,41 +67,19 @@ export const SignaturePreviewList = ({
 				</C.ItemRow>
 			);
 		},
-		[size, toggleSelected, selected, disabled, selectedCount],
-	);
-
-	const getItemLayout = useCallback(
-		(_: unknown, index: number) => ({
-			length: size,
-			offset: size * index,
-			index: index,
-		}),
-		[size],
-	);
-
-	const renderSectionHeader: RenderSectionHeaderProp = useCallback(
-		({ section }) => {
-			const { title, data } = section;
-
-			if (!title || data.length === 0) {
-				return null;
-			}
-
-			return (
-				<C.Underline>
-					<C.Title>{title}</C.Title>
-				</C.Underline>
-			);
-		},
-		[],
+		[toggleSelected, selected, disabled, selectedCount],
 	);
 
 	return (
 		<C.Container
 			{...props}
+			contentContainerStyle={[
+				defaultContentContainerStyle,
+				props.contentContainerStyle,
+			]}
 			renderItem={renderItem}
-			getItemLayout={getItemLayout}
-			renderSectionHeader={renderSectionHeader}
+			// getItemLayout={getItemLayout}
+			// renderSectionHeader={renderSectionHeader}
 			removeClippedSubviews={removeClippedSubviews}
 		/>
 	);

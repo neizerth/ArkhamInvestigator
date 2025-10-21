@@ -1,4 +1,4 @@
 export * from "./SignatureBackground";
 export * from "./signature-image";
 export * from "./SignaturePreview";
-export * from "./SignaturePreviewList";
+export * from "./signature-list";

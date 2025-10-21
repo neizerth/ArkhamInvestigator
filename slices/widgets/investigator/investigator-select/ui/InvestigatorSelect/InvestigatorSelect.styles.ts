@@ -16,3 +16,10 @@ export const getFooterStyle = () => {
     right: ${size.gap.small}px;
   `;
 };
+
+export const getListPaddingBottom = () => {
+	if (Platform.OS !== "ios" || !IOS_WITH_GESTURE_CONTROL) {
+		return 65;
+	}
+	return 70;
+};

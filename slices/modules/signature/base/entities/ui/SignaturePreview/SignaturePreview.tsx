@@ -8,7 +8,6 @@ import * as C from "./SignaturePreview.components";
 export type SignaturePreviewProps = TouchableOpacityProps &
 	PropsWithFaction & {
 		imageId?: string;
-		imageVersion?: number;
 		selected?: boolean;
 		selectedCount?: number;
 		code: string;
