@@ -51,7 +51,7 @@ export const SupportIcon: FC<DefinedIconProps> = styled(Icon).attrs({
   `;
 
 export const Hint: typeof Text = styled(Text)`
-  padding-inline: ${size.gap.default}px;
+  padding-inline: ${size.gap.large}px;
   font-family: ${Alegreya.italic};
   color: ${color.gray10};
 `;

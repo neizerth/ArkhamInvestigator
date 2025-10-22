@@ -1,4 +1,5 @@
 import type { TouchableOpacityProps } from "@modules/core/touch/shared/ui";
+import { space2Nbsp } from "@shared/lib/util/string";
 import type { InvestigatorSignature } from "arkham-investigator-data";
 import * as C from "./SignatureListItem.components";
 
@@ -17,6 +18,7 @@ export const SignatureListItem = ({
 	...props
 }: SignatureListItemProps) => {
 	const faction = signature.faction_code;
+	const title = space2Nbsp(signature.name);
 	return (
 		<C.Container {...props}>
 			<C.Content>
@@ -24,7 +26,7 @@ export const SignatureListItem = ({
 
 				<C.Main>
 					<C.Header>
-						<C.Title faction={faction}>{signature.name}</C.Title>
+						<C.Title faction={faction}>{title}</C.Title>
 						<C.PackIcon icon={signature.pack.icon} />
 					</C.Header>
 					<C.Subtitle>{signature.subname}</C.Subtitle>

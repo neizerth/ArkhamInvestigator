@@ -73,6 +73,7 @@ module.exports = {
           },
         },
       ],
+      "react-native-navigation-mode"
     ],
     experiments: {
       typedRoutes: true,

@@ -8,9 +8,11 @@ import { FactionFontIcon } from "@modules/faction/shared/ui";
 import { color, factionColor, font, size } from "@shared/config";
 import { Icon, IconNumber, type IconProps, Row, Text } from "@shared/ui";
 import type { FC } from "react";
-import { View } from "react-native";
+import { Platform, View } from "react-native";
 import type { TextProps } from "react-native";
 import styled, { css } from "styled-components/native";
+
+const ios = Platform.OS === "ios";
 
 export const Container: typeof TouchableOpacity = styled(TouchableOpacity)`
 	align-items: center;
@@ -42,7 +44,7 @@ export const FactionIcon: typeof FactionFontIcon = styled(
 
 export const Main: typeof View = styled(View)`
 	padding-top: ${size.gap.small}px;
-	gap: ${size.gap.small}px;
+	gap: ${ios ? size.gap.small : 0}px;
 	flex: 1;
 `;
 

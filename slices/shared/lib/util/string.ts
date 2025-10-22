@@ -26,3 +26,7 @@ const urlRegex =
 export const isUrl = (text: string) => {
 	return urlRegex.test(text);
 };
+
+export const space2Nbsp = (text: string) => {
+	return text.replace(/(\s+)/g, "\u00A0");
+};
