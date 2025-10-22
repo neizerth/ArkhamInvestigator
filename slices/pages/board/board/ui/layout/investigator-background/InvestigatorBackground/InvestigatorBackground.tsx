@@ -2,6 +2,7 @@ import {
 	selectBoardProp,
 	selectShowDamageAndHorrorEffects,
 } from "@modules/board/base/shared/lib";
+import { selectArtworksEnabled } from "@modules/core/theme/shared/lib";
 import { selectBoardIsInactive } from "@modules/mechanics/board/base/entities/lib";
 import { useAppSelector } from "@shared/lib";
 import type { ViewProps } from "react-native";
@@ -13,6 +14,7 @@ export const InvestigatorBackground = ({
 	...props
 }: InvestigatorBackgroundProps) => {
 	const showEffects = useAppSelector(selectShowDamageAndHorrorEffects);
+	const artworksEnabled = useAppSelector(selectArtworksEnabled);
 	const background = useAppSelector(
 		selectBoardProp({
 			boardId: "current",
@@ -25,7 +27,7 @@ export const InvestigatorBackground = ({
 		<C.Container {...props}>
 			<C.Content>
 				<C.FactionBackground />
-				{background && (
+				{artworksEnabled && background && (
 					<C.Background
 						source={{ uri: background.color }}
 						grayscaleSource={{ uri: background.grayscale }}

@@ -1,4 +1,5 @@
 import { Alegreya } from "@assets/fonts";
+import { FactionView } from "@modules/faction/shared/ui";
 import { SignaturePreview } from "@modules/signature/base/entities/ui";
 import { font, size } from "@shared/config";
 import { Row, TextView } from "@shared/ui";
@@ -10,7 +11,7 @@ import {
 	ResourcesValue,
 	SanityValue,
 } from "@widgets/investigator/value";
-import { View } from "react-native";
+import { TouchableOpacity, View } from "react-native";
 import styled from "styled-components/native";
 
 export const Container: typeof View = styled(View)`
@@ -68,4 +69,18 @@ export const Actions: typeof ActionsValue = styled(ActionsValue)`
 export const Stats: typeof Row = styled(Row)`
   gap: ${size.gap.small}px;
   justify-content: center;
+`;
+
+export const FactionPlaceholder: typeof TouchableOpacity = styled(
+	TouchableOpacity,
+)`
+  width: 110px;
+`;
+
+export const Faction: typeof FactionView = styled(FactionView).attrs({
+	contentContainerStyle: {
+		flex: 1,
+	},
+})`
+  font-size: 50px;
 `;

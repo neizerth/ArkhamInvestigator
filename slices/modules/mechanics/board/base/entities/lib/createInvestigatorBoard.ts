@@ -1,7 +1,6 @@
 import type { InvestigatorBoard } from "@modules/board/base/shared/model";
 import { getSignatureAbilityValues } from "@modules/mechanics/investigator/entities/lib";
-import type { InvestigatorImage } from "@shared/model";
-import type { InvestigatorSignature } from "arkham-investigator-data";
+import type { PartiallyRequired } from "@shared/model";
 import { mergeDeepRight } from "ramda";
 import {
 	DEFAULT_HAND_SIZE,
@@ -12,30 +11,20 @@ import {
 } from "../config";
 import { getSignatureStats } from "./getSignatureStats";
 
-type Options = {
-	id: number;
-	index: number;
+type Options = PartiallyRequired<
+	InvestigatorBoard,
+	"id" | "index" | "signatureGroupId" | "image" | "skinId" | "investigator"
+> & {
 	physicalTrauma?: number;
 	mentalTrauma?: number;
-	investigator: InvestigatorSignature;
-	signatureGroupId: string;
-	image: InvestigatorImage;
-	skinId?: string;
 };
 
-export const createInvestigatorBoard = (
-	options: Options,
-): InvestigatorBoard => {
-	const {
-		id,
-		index,
-		physicalTrauma = 0,
-		mentalTrauma = 0,
-		investigator,
-		signatureGroupId,
-		image,
-		skinId,
-	} = options;
+export const createInvestigatorBoard = ({
+	physicalTrauma = 0,
+	mentalTrauma = 0,
+	...options
+}: Options): InvestigatorBoard => {
+	const { investigator } = options;
 
 	const { code } = investigator;
 
@@ -63,12 +52,7 @@ export const createInvestigatorBoard = (
 	const abilityValues = getSignatureAbilityValues(investigator);
 
 	const defaultBoard: InvestigatorBoard = {
-		id,
-		index,
-		signatureGroupId,
-		skinId,
-		investigator,
-		image,
+		...options,
 		initialValue,
 		baseValue,
 		value,

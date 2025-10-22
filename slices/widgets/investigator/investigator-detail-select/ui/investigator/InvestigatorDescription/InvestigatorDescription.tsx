@@ -1,18 +1,26 @@
 import { selectTrackXP } from "@modules/board/base/shared/lib";
+import { openThemeModal } from "@modules/core/theme/entities/openThemeModal";
 import { selectArtworksEnabled } from "@modules/core/theme/shared/lib";
 import { getSignatureImageUrl } from "@modules/signature/base/shared/api";
 import {
 	getBoardStats,
 	selectCurrentSkinId,
+	useAppDispatch,
 	useAppSelector,
 } from "@shared/lib";
+import { useCallback } from "react";
 import { selectCurrentSignature } from "../../../lib";
 import * as C from "./InvestigatorDescription.components";
 export const InvestigatorDescription = () => {
+	const dispatch = useAppDispatch();
 	const signature = useAppSelector(selectCurrentSignature);
 	const skinId = useAppSelector(selectCurrentSkinId);
 	const trackXP = useAppSelector(selectTrackXP);
 	const artworksEnabled = useAppSelector(selectArtworksEnabled);
+
+	const handleOpenThemeModal = useCallback(() => {
+		dispatch(openThemeModal());
+	}, [dispatch]);
 
 	if (!signature) {
 		return;
@@ -45,9 +53,9 @@ export const InvestigatorDescription = () => {
 						<C.Image source={source} />
 					</C.ImageContainer>
 				) : (
-					<C.FactionView>
+					<C.FactionPlaceholder onPress={handleOpenThemeModal}>
 						<C.Faction faction={faction} />
-					</C.FactionView>
+					</C.FactionPlaceholder>
 				)}
 			</C.MainInfo>
 			<C.InvestigatorTextContainer>

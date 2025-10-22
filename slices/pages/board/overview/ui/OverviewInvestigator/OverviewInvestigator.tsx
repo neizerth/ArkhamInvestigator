@@ -5,6 +5,7 @@ import {
 	setBoardActualPropValue,
 } from "@modules/board/base/shared/lib";
 import type { PickerChangeEvent } from "@modules/core/control/entities/picker/model";
+import { selectArtworksEnabled } from "@modules/core/theme/shared/lib";
 import {
 	selectBoardDamage,
 	selectBoardFaction,
@@ -42,6 +43,7 @@ export const OverviewInvestigator = ({
 	const damage = useAppSelector(selectBoardDamage(boardId));
 	const horror = useAppSelector(selectBoardHorror(boardId));
 	const inactive = useAppSelector(selectBoardIsInactive(boardId));
+	const artworksEnabled = useAppSelector(selectArtworksEnabled);
 
 	const allowNegativeValues = useAppSelector(
 		selectAllowNegativeHealthAndSanity,
@@ -137,15 +139,21 @@ export const OverviewInvestigator = ({
 					</C.Stats>
 				</C.Primary>
 				<C.Secondary>
-					<C.Image
-						size={110}
-						faction={faction}
-						code={investigator.code}
-						imageId={image.id}
-						onPress={onSelect}
-						selected={selected}
-						grayscale={inactive}
-					/>
+					{artworksEnabled ? (
+						<C.Image
+							size={110}
+							faction={faction}
+							code={investigator.code}
+							imageId={image.id}
+							onPress={onSelect}
+							selected={selected}
+							grayscale={inactive}
+						/>
+					) : (
+						<C.FactionPlaceholder onPress={onSelect}>
+							<C.Faction faction={faction} colored selected={selected} />
+						</C.FactionPlaceholder>
+					)}
 				</C.Secondary>
 			</C.Content>
 		</C.Container>

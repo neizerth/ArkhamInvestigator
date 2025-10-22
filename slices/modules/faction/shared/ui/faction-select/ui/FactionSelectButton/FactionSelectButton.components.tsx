@@ -18,7 +18,7 @@ export const Button: FC<ButtonProps> = styled(TouchableOpacity)`
   ${({ selected, value }: ButtonProps) =>
 		selected &&
 		css`
-    background-color: ${value === "spoiler" ? color.status.warn : color.dark20};
+    background-color: ${value === "spoiler" ? color.status.error.light : color.dark20};
   `}
   ${({ first, selected }: ButtonProps) =>
 		selected &&

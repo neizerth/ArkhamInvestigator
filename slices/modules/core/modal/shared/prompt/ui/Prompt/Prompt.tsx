@@ -39,14 +39,16 @@ export function Prompt<A extends BaseModalAction, D extends PromptModalData<A>>(
 
 	return (
 		<C.Container {...props}>
-			{text && <C.Text value={text} />}
-			<C.Input
-				{...inputProps}
-				placeholder={placeholder}
-				defaultValue={defaultValue}
-				onChange={onChange}
-				autoFocus
-			/>
+			<C.Content>
+				{text && <C.Text value={text} />}
+				<C.Input
+					{...inputProps}
+					placeholder={placeholder}
+					defaultValue={defaultValue}
+					onChange={onChange}
+					autoFocus
+				/>
+			</C.Content>
 		</C.Container>
 	);
 }

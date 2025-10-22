@@ -6,3 +6,4 @@ export * from "./FactionIcon";
 export * from "./FactionIconImage";
 export * from "./FactionSVGPattern";
 export * from "./FactionFontIcon";
+export * from "./FactionView";
