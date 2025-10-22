@@ -1,4 +1,5 @@
 {
+	"app.disclaimer": "Arkham Horror: The Card Game™ и все связанные материалы © Fantasy Flight Games (FFG). Это приложение не является продуктом, одобренным или связанным с FFG.",
 	"modal.theme.title": "Установить тему",
 	"modal.theme.text": "Введите URL-адрес темы",
 	"modal.theme.placeholder": "https://example.com/theme.json",
