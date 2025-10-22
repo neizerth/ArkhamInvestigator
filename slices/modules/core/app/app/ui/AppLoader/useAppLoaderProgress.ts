@@ -1,6 +1,7 @@
 import { useAssetDownloadProgress } from "@modules/core/assets/asset-downloader/shared/lib/hooks";
 import { selectExternalImagesReady } from "@modules/core/assets/base/shared/lib";
 import { useAssetImageProgress } from "@modules/core/assets/base/shared/lib/hooks";
+import { selectArtworksEnabled } from "@modules/core/theme/shared/lib";
 import { useAppSelector } from "@shared/lib";
 import { useEffect, useState } from "react";
 
@@ -13,6 +14,7 @@ export const useAppLoaderProgress = () => {
 	const external = useAssetDownloadProgress();
 
 	const externalImagesReady = useAppSelector(selectExternalImagesReady);
+	const artworksEnabled = useAppSelector(selectArtworksEnabled);
 	const [imagesReady, setImagesReady] = useState(externalImagesReady);
 	const [progress, setProgress] = useState(0);
 
@@ -22,6 +24,10 @@ export const useAppLoaderProgress = () => {
 			setProgress(getProgress(local.progress, external.progress));
 		}
 	}, [external.progress, imagesReady, local.progress]);
+
+	if (!artworksEnabled) {
+		return local.progress;
+	}
 
 	if (!imagesReady) {
 		return getProgress(local.progress, external.progress);

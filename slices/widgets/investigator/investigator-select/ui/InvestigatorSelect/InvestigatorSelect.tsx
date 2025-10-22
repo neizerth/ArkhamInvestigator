@@ -65,12 +65,14 @@ export const InvestigatorSelect = () => {
 		},
 	];
 
+	const List = artworksEnabled ? C.PreviewList : C.List;
+
 	return (
 		<GestureDetector gesture={gesture}>
 			<C.Container>
 				<C.FactionSelect value={factionFilter} />
 				<C.Content>
-					<C.List
+					<List
 						sections={sections}
 						onChange={onChange}
 						size={size}

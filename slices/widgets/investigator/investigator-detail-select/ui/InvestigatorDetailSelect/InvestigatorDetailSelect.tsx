@@ -107,6 +107,7 @@ export const InvestigatorDetailSelect = () => {
 								selectedId={signatureId}
 								onChange={onChangeSignature}
 								size={CARD_SIZE}
+								preview={artworksEnabled}
 							/>
 						)}
 						{artworksEnabled && skins.length > 1 && (
@@ -117,6 +118,7 @@ export const InvestigatorDetailSelect = () => {
 								selectedId={skinId}
 								showIcon={false}
 								size={CARD_SIZE}
+								preview={artworksEnabled}
 								showNone
 							/>
 						)}

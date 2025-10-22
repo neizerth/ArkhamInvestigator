@@ -1,4 +1,4 @@
-import { healthImage } from "@assets/images/game/stats";
+import { healthImage } from "@assets/images/theme";
 import {
 	type WithBackgroundComponentProps,
 	withImageBackground,

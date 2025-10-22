@@ -1,3 +1,4 @@
+import { selectArtworksEnabled } from "@modules/core/theme/shared/lib";
 import { put, select, takeEvery } from "redux-saga/effects";
 import {
 	selectAssetImagesLoaded,
@@ -20,7 +21,13 @@ function* worker() {
 	const externalImagesReady: ReturnType<typeof selectFontsLoaded> =
 		yield select(selectExternalImagesReady);
 
-	const done = fontsLoaded && assetImagesLoaded && externalImagesReady;
+	const artworksEnabled: ReturnType<typeof selectArtworksEnabled> =
+		yield select(selectArtworksEnabled);
+
+	const done =
+		fontsLoaded &&
+		assetImagesLoaded &&
+		(externalImagesReady || !artworksEnabled);
 
 	if (!done) {
 		return;

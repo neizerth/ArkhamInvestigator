@@ -1,4 +1,4 @@
-import { actionImage } from "@assets/images/game/stats";
+import { actionImage } from "@assets/images/theme";
 import {
 	type WithBackgroundComponentProps,
 	withImageBackground,

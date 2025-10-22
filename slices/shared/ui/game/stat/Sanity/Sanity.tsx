@@ -1,4 +1,4 @@
-import { sanityImage } from "@assets/images/game/stats";
+import { sanityImage } from "@assets/images/theme";
 import type { ImageBackgroundProps } from "react-native";
 import { withImageBackground } from "../../../../lib/hoc";
 

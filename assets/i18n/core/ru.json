@@ -4,6 +4,12 @@
 	"modal.theme.placeholder": "https://example.com/theme.json",
 	"modal.theme.error.invalidUrl": "Неверный адрес",
 
+	"modal.artwork.title": "Добавить иллюстрации",
+	"modal.artwork.text": "Введите URL-адрес иллюстраций",
+	"modal.artwork.placeholder": "https://example.com/",
+	"modal.artwork.error.invalidUrl": "Неверный адрес",
+	"modal.artwork.action": "Добавить и перезагрузить",
+
 	"theme.installHint": "Запретные знания лучше всего открываются тем, кто знает, где искать",
 
 	"about.app": "Все права на представленную в этом приложении информацию о карточной игре «Ужас Аркхэма» — как текстовую, так и графическую — принадлежат компании <FFG>Fantasy Flight Games</FFG>. Создатель этого приложения не аффилирован и никоим образом не поддерживается Fantasy Flight Games.",

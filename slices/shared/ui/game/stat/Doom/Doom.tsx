@@ -1,4 +1,4 @@
-import { doomImage } from "@assets/images/game/stats";
+import { doomImage } from "@assets/images/theme";
 import {
 	type WithBackgroundComponentProps,
 	withImageBackground,

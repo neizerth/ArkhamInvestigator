@@ -1,7 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { ASSET_URL } from "@shared/config";
+import { Platform } from "react-native";
 import { createSliceState } from "redux-toolkit-helpers";
 import { defaultTheme } from "../../config/theme";
 import type { Theme } from "../../model";
+
+const artworkUrl = Platform.OS === "ios" ? null : `${ASSET_URL}/images/`;
 
 export type ThemeState = {
 	theme: Theme;
@@ -10,7 +14,7 @@ export type ThemeState = {
 
 const initialState: ThemeState = {
 	theme: defaultTheme,
-	artworkUrl: null,
+	artworkUrl,
 };
 
 const state = createSliceState(initialState);

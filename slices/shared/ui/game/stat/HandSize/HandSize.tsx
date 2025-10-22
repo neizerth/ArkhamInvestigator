@@ -1,4 +1,4 @@
-import { handSizeImage } from "@assets/images/game/stats";
+import { handSizeImage } from "@assets/images/theme";
 import {
 	type WithBackgroundComponentProps,
 	withImageBackground,

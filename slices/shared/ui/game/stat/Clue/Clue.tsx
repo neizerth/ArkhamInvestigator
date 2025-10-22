@@ -1,4 +1,4 @@
-import { clueImage } from "@assets/images/game/stats";
+import { clueImage } from "@assets/images/theme";
 import {
 	type WithBackgroundComponentProps,
 	withImageBackground,

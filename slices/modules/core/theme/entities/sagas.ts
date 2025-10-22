@@ -1,8 +1,8 @@
 import { spawn } from "redux-saga/effects";
+import { openArtworkModalSaga } from "./openArtworkModal/sagas";
 import { openThemeModalSaga } from "./openThemeModal/sagas";
-import { validateThemeUrlSaga } from "./openThemeModal/sagas/validateThemeUrlSaga";
 
 export function* themeEntitiesSaga() {
 	yield spawn(openThemeModalSaga);
-	yield spawn(validateThemeUrlSaga);
+	yield spawn(openArtworkModalSaga);
 }

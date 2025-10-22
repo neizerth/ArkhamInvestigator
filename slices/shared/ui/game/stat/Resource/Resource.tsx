@@ -1,4 +1,4 @@
-import { resourceImage } from "@assets/images/game/stats";
+import { resourceImage } from "@assets/images/theme";
 import {
 	type WithBackgroundComponentProps,
 	withImageBackground,

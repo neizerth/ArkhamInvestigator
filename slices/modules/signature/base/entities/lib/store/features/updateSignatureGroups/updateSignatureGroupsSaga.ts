@@ -1,5 +1,6 @@
 import { selectExternalImagesReady } from "@modules/core/assets/base/shared/lib";
 import { addManyDownloadQueueItems } from "@modules/core/assets/download-queue/shared/lib";
+import { selectArtworkUrl } from "@modules/core/theme/shared/lib";
 import {
 	selectSignatureGroups,
 	setSignatureGroups,
@@ -10,6 +11,11 @@ import { compareSignatureGroups } from "./lib/compareSignatureGroups";
 import { updateSignatureGroups } from "./updateSignatureGroups";
 
 function* worker({ payload }: ReturnType<typeof updateSignatureGroups>) {
+	yield put(setSignatureGroups(payload));
+
+	const baseUrl: ReturnType<typeof selectArtworkUrl> =
+		yield select(selectArtworkUrl);
+
 	const ready: ReturnType<typeof selectExternalImagesReady> = yield select(
 		selectExternalImagesReady,
 	);
@@ -20,9 +26,14 @@ function* worker({ payload }: ReturnType<typeof updateSignatureGroups>) {
 	const groups = defaultGroups ?? [];
 
 	const imageIds = compareSignatureGroups(groups, payload);
-	// const imageIds = ["zgoo_00001"];
 
-	const downloadItems = imageIds.flatMap(createDownloadQueueItems);
+	if (!baseUrl) {
+		return;
+	}
+
+	const downloadItems = imageIds.flatMap((code) =>
+		createDownloadQueueItems({ code, baseUrl }),
+	);
 
 	const download = groups.length > 0 && ready && downloadItems.length > 0;
 
@@ -30,7 +41,6 @@ function* worker({ payload }: ReturnType<typeof updateSignatureGroups>) {
 		console.log("image id queue", imageIds);
 		yield put(addManyDownloadQueueItems(downloadItems));
 	}
-	yield put(setSignatureGroups(payload));
 }
 
 export function* updateSignatureGroupsSaga() {

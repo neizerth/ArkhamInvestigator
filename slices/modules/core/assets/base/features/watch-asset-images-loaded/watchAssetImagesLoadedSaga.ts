@@ -11,14 +11,14 @@ function* worker(action: ReturnType<typeof setAssetImagesLoadedCount>) {
 	const total: ReturnType<typeof selectAssetImagesCount> = yield select(
 		selectAssetImagesCount,
 	);
-	const done = index === total - 1;
+	const done = index === total;
 
 	if (done) {
 		yield put(setAssetImagesLoaded(true));
 		return;
 	}
 
-	yield put(preloadAssetImage(index + 1));
+	yield put(preloadAssetImage(index));
 }
 
 export function* watchAssetImagesLoadedSaga() {

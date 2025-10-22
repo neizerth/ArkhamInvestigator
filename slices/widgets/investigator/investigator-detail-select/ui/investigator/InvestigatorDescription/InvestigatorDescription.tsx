@@ -1,5 +1,5 @@
 import { selectTrackXP } from "@modules/board/base/shared/lib";
-import { openThemeModal } from "@modules/core/theme/entities/openThemeModal";
+import { openArtworkModal } from "@modules/core/theme/entities/openArtworkModal";
 import { selectArtworksEnabled } from "@modules/core/theme/shared/lib";
 import { getSignatureImageUrl } from "@modules/signature/base/shared/api";
 import {
@@ -18,8 +18,8 @@ export const InvestigatorDescription = () => {
 	const trackXP = useAppSelector(selectTrackXP);
 	const artworksEnabled = useAppSelector(selectArtworksEnabled);
 
-	const handleOpenThemeModal = useCallback(() => {
-		dispatch(openThemeModal());
+	const handleOpenArtworkModal = useCallback(() => {
+		dispatch(openArtworkModal());
 	}, [dispatch]);
 
 	if (!signature) {
@@ -53,7 +53,7 @@ export const InvestigatorDescription = () => {
 						<C.Image source={source} />
 					</C.ImageContainer>
 				) : (
-					<C.FactionPlaceholder onPress={handleOpenThemeModal}>
+					<C.FactionPlaceholder onPress={handleOpenArtworkModal}>
 						<C.Faction faction={faction} />
 					</C.FactionPlaceholder>
 				)}

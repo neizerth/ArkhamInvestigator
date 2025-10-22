@@ -4,6 +4,12 @@
 	"modal.theme.placeholder": "https://example.com/theme.json",
 	"modal.theme.error.invalidUrl": "Invalid URL",
 
+	"modal.artwork.title": "Add Artworks",
+	"modal.artwork.text": "Enter a artworks URLs. The app doesn’t host or provide any third-party content",
+	"modal.artwork.placeholder": "https://example.com/",
+	"modal.artwork.error.invalidUrl": "Invalid URL",
+	"modal.artwork.action": "Add and restart",
+
 	"theme.installHint": "I seek forbidden knowledge... among those who know where to look",
 
 	"about.app": "The information presented in this app about <FFG>Arkham Horror: The Card Game™</FFG>, both textual and graphical, is ©Fantasy Flight Games. This app is a fan project and is not produced, endorsed, or supported by, or affiliated with Fantasy Flight Games.",

@@ -1,5 +1,5 @@
 import { usePage } from "@modules/core/router/shared/lib";
-import { openThemeModal } from "@modules/core/theme/entities/openThemeModal";
+import { openArtworkModal } from "@modules/core/theme/entities/openArtworkModal";
 import { selectArtworksEnabled } from "@modules/core/theme/shared/lib";
 import { routes } from "@shared/config";
 import { useAppDispatch, useAppSelector } from "@shared/lib";
@@ -18,7 +18,7 @@ export const HomeMenu = (props: HomeMenuProps) => {
 	const artworksEnabled = useAppSelector(selectArtworksEnabled);
 
 	const handleOpenThemeModal = useCallback(() => {
-		dispatch(openThemeModal());
+		dispatch(openArtworkModal());
 	}, [dispatch]);
 	return (
 		<C.Container {...props}>
@@ -37,9 +37,11 @@ export const HomeMenu = (props: HomeMenuProps) => {
 					</C.Button>
 				</C.Left>
 				<C.Right>
-					<C.Button onPress={handleOpenThemeModal}>
-						<C.ThemeIcon icon="paint-format" />
-					</C.Button>
+					{!artworksEnabled && (
+						<C.Button onPress={handleOpenThemeModal}>
+							<C.ThemeIcon icon="images" />
+						</C.Button>
+					)}
 					<C.Button onPress={goTo(routes.settings)}>
 						<C.Icon icon="wrench" />
 					</C.Button>
