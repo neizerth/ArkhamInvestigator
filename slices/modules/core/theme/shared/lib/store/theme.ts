@@ -5,7 +5,7 @@ import { createSliceState } from "redux-toolkit-helpers";
 import { defaultTheme } from "../../config/theme";
 import type { Theme } from "../../model";
 
-const artworkUrl = Platform.OS === "ios" ? null : `${ASSET_URL}/images/`;
+const artworkUrl = Platform.OS === "ios" ? null : ASSET_URL;
 
 export type ThemeState = {
 	theme: Theme;
