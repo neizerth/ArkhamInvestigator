@@ -8,6 +8,7 @@ export type ModalState = {
 	modalId: string | null;
 	type: ModalType | null;
 	data: unknown | null;
+	error: string | null;
 	value: unknown | null;
 	fullWindowOverlay: boolean;
 	closeFromBackButton: boolean | null;
@@ -16,6 +17,7 @@ const initialState: ModalState = {
 	modalId: null,
 	type: null,
 	data: null,
+	error: null,
 	value: null,
 	fullWindowOverlay: true,
 	closeFromBackButton: true,
@@ -39,6 +41,7 @@ export const {
 	openModal,
 	closeModalInternal,
 	setValue: setModalValue,
+	setError: setModalError,
 	setCloseFromBackButton,
 	setFullWindowOverlay,
 } = modal.actions;
@@ -48,6 +51,7 @@ export const {
 	selectData: selectModalData,
 	selectModalId,
 	selectValue: selectModalValue,
+	selectError: selectModalError,
 	selectCloseFromBackButton: selectCloseModalFromBackButton,
 	selectFullWindowOverlay,
 } = modal.selectors;

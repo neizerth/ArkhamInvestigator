@@ -32,7 +32,7 @@ export const FactionCard = ({
 	actions,
 	onClose,
 	onTouchCancel,
-	resizeable = false,
+	resizeable = true,
 	...props
 }: FactionCardProps) => {
 	const window = useWindowDimensions();

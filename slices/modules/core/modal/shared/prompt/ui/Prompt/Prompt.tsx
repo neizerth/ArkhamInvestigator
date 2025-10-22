@@ -14,18 +14,21 @@ type TextChangeHandler = Defined<TextInputProps["onChange"]>;
 export type PromptProps<
 	A extends BaseModalAction,
 	D extends PromptModalData<A>,
-> = FactionModalProps<A, D>;
+> = FactionModalProps<A, D> & {
+	error: string | null;
+};
 
 export function Prompt<A extends BaseModalAction, D extends PromptModalData<A>>(
 	props: PromptProps<A, D>,
 ) {
 	const dispatch = useAppDispatch();
 	const { t } = useTranslation();
-	const { data } = props;
-	const defaultValue = data.defaultValue && t(data.defaultValue);
+	const { data, error } = props;
+	const defaultValue = data.defaultValue ? t(data.defaultValue) : "";
 	const placeholder = data.placeholder && t(data.placeholder);
 
 	const text = data.text && t(data.text);
+	const errorMessage = error && t(error);
 
 	const { inputProps = {} } = data;
 
@@ -48,6 +51,7 @@ export function Prompt<A extends BaseModalAction, D extends PromptModalData<A>>(
 					onChange={onChange}
 					autoFocus
 				/>
+				{errorMessage && <C.ErrorMessage value={errorMessage} />}
 			</C.Content>
 		</C.Container>
 	);

@@ -13,12 +13,16 @@ function* worker() {
 				title: "modal.theme.title",
 				text: "modal.theme.text",
 				placeholder: "modal.theme.placeholder",
+				inputProps: {
+					keyboardType: "url",
+				},
 				actions: [
 					createCancelModalAction(),
 					createConfirmModalAction({
 						id: installThemeModalActionId,
 						title: "Install",
 						icon: "download",
+						close: false,
 					}),
 				],
 			},

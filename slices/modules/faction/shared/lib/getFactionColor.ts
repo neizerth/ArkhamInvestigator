@@ -1,4 +1,4 @@
-import { factionColor } from "@shared/config";
+import { color, factionColor } from "@shared/config";
 import type { PropsWithFaction } from "@shared/model";
 import Color from "color";
 
@@ -21,7 +21,7 @@ export const getColor = ({
 	faction,
 	colored,
 	light = false,
-	defaultColor,
+	defaultColor = color.dark10,
 }: Options) => {
 	if (!colored) {
 		return defaultColor;

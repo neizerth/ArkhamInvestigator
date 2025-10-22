@@ -2,6 +2,7 @@
 	"modal.theme.title": "Установить тему",
 	"modal.theme.text": "Введите URL-адрес темы",
 	"modal.theme.placeholder": "https://example.com/theme.json",
+	"modal.theme.error.invalidUrl": "Неверный адрес",
 
 	"theme.installHint": "Запретные знания лучше всего открываются тем, кто знает, где искать",
 

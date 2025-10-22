@@ -2,6 +2,7 @@
 	"modal.theme.title": "Install Theme",
 	"modal.theme.text": "Enter a theme URL. The app doesn’t host or provide any third-party content",
 	"modal.theme.placeholder": "https://example.com/theme.json",
+	"modal.theme.error.invalidUrl": "Invalid URL",
 
 	"theme.installHint": "I seek forbidden knowledge... among those who know where to look",
 

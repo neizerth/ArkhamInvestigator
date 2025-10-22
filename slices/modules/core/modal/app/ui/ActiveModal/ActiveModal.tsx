@@ -1,6 +1,7 @@
 import { isBoardSelectModalData } from "@modules/core/modal/entities/board-select/lib";
 import {
 	selectModalData,
+	selectModalError,
 	selectModalId,
 	selectModalType,
 	selectModalValue,
@@ -19,6 +20,7 @@ export const ActiveModal = (props: ActiveModalProps) => {
 	const data = useAppSelector(selectModalData);
 	const type = useAppSelector(selectModalType);
 	const value = useAppSelector(selectModalValue);
+	const error = useAppSelector(selectModalError);
 
 	if (!id || !data || !type) {
 		return null;
@@ -29,7 +31,7 @@ export const ActiveModal = (props: ActiveModalProps) => {
 	}
 
 	if (isPromptModalData(data, type)) {
-		return <Prompt data={data} />;
+		return <Prompt data={data} error={error} />;
 	}
 
 	if (isBoardSelectModalData(data, type)) {

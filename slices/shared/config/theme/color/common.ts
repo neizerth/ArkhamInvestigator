@@ -66,7 +66,8 @@ export const color = {
 		success: "#314629",
 		error: {
 			dark: "#552D2D",
-			light: "#C50707",
+			light10: "#C50707",
+			light20: "#FF0000",
 		},
 		warn: {
 			dark: "#B45309",

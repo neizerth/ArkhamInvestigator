@@ -81,7 +81,7 @@ function* worker({ payload }: ReturnType<typeof checkAppUpdates>) {
 		yield put(appUpdatesChecked(data));
 	} catch (e) {
 		console.error("error checking app updates", e);
-		if (e instanceof Error) {
+		if (e instanceof Error && notify) {
 			yield put(
 				sendNotification({
 					type: "error",

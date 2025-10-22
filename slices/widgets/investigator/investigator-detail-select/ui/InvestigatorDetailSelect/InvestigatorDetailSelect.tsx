@@ -80,6 +80,7 @@ export const InvestigatorDetailSelect = () => {
 					faction={faction_code}
 					title={formattedName}
 					subtitle={formattedSubname}
+					resizeable={false}
 					onClose={cancel}
 					actions={[
 						{
