@@ -20,6 +20,9 @@ export const HomePage = () => {
 			{onResume && (
 				<C.ResumeButton onPress={onResume}>{t`Continue`}</C.ResumeButton>
 			)}
+			<C.Disclaimer>
+				<C.DisclaimerText>{t`app.disclaimer`}</C.DisclaimerText>
+			</C.Disclaimer>
 		</C.Container>
 	);
 };
