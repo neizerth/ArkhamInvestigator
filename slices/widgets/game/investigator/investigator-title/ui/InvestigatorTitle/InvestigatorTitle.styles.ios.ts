@@ -57,9 +57,6 @@ export const getTitleStyle = (options: GetTitleStyleOptions) => {
 			title: {
 				paddingTop: "3%",
 			},
-			arrow: {
-				paddingTop: "4%",
-			},
 		},
 		neutral: {
 			background: {
@@ -118,11 +115,14 @@ export const getTitleStyle = (options: GetTitleStyleOptions) => {
 				height: "52%",
 			},
 			unique: {
-				marginTop: "1%",
+				marginTop: "4%",
 			},
 			subtitle: {
 				paddingTop: "0%",
 				height: "38%",
+			},
+			arrow: {
+				transform: [{ translateY: 2 }],
 			},
 		},
 		rogue: {
