@@ -15,16 +15,18 @@ export const BoardLoader = ({ children }: PropsWithChildren) => {
 	return (
 		<>
 			{showLoader && (
-				<C.Loader
-					progress={progress}
-					showProgress={showProgress}
-					showNumericProgress
-				>
-					<C.LoadingText>{text}</C.LoadingText>
-				</C.Loader>
+				<>
+					<C.Loader
+						progress={progress}
+						showProgress={showProgress}
+						showNumericProgress
+					>
+						<C.LoadingText>{text}</C.LoadingText>
+					</C.Loader>
+					<BoardDescriptionLoadProvider />
+				</>
 			)}
 			{children}
-			<BoardDescriptionLoadProvider />
 		</>
 	);
 };

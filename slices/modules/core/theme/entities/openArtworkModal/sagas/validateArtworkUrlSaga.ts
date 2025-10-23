@@ -10,7 +10,7 @@ import { getArtworkImagesArchiveUrl } from "@modules/core/theme/shared/lib/logic
 import { isUrl } from "@shared/lib";
 import type { ReturnAwaited } from "@shared/model";
 import mime from "mime";
-import { call, put, takeEvery } from "redux-saga/effects";
+import { call, delay, put, takeEvery } from "redux-saga/effects";
 import { setArtworkModalActionId } from "../config";
 
 const filterAction = createPromptModalActionFilter({
@@ -19,7 +19,8 @@ const filterAction = createPromptModalActionFilter({
 
 function* worker({ payload }: ReturnType<typeof promptConfirmed>) {
 	const { value } = payload;
-	const url = value.trim();
+	const url = value.trim().replace(/\/$/, "");
+
 	if (!isUrl(url)) {
 		yield put(setModalError("modal.artwork.error.invalidUrl"));
 		return;
@@ -46,6 +47,8 @@ function* worker({ payload }: ReturnType<typeof promptConfirmed>) {
 	}
 
 	yield put(setArtworkUrl(url));
+	yield delay(100);
+
 	yield put(restartApp());
 }
 
