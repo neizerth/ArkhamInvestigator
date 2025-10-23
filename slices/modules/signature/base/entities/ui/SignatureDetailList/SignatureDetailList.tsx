@@ -1,4 +1,5 @@
 import type { SignatureDetailItem as Item } from "@modules/signature/base/shared/model";
+import { useTranslation } from "react-i18next";
 import type { ViewProps } from "react-native-svg/lib/typescript/fabric/utils";
 import * as C from "./SignatureDetailList.components";
 
@@ -18,6 +19,8 @@ export const SignatureDetailList = ({
 	onChange,
 	...props
 }: SignatureDetailListProps) => {
+	const { t } = useTranslation();
+
 	return (
 		<C.Container {...props}>
 			{data.map((item) => (
@@ -30,13 +33,8 @@ export const SignatureDetailList = ({
 						/>
 					</C.IconContainer>
 					<C.Title faction={item.faction} selected={selectedId === item.id}>
-						{item.name}
+						{t(item.name)}
 					</C.Title>
-					{/* <C.Control
-						label={item.name}
-						checked={item.id === selectedId}
-						align="left"
-					/> */}
 				</C.Item>
 			))}
 		</C.Container>
