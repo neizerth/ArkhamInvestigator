@@ -14,6 +14,8 @@ const seekerParallel = require("./seeker_parallel.png");
 const survivorParallel = require("./survivor_parallel.png");
 const neutralParallel = require("./neutral_parallel.png");
 
+export const defaultTitleImage = require("./default.png");
+
 const defaultImages: FactionImages = {
 	guardian,
 	mystic,

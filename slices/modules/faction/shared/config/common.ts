@@ -1,6 +1,6 @@
 import type { Faction, FactionFilterType } from "../model";
 
-export const FACTION_SELECT_VALUES: Faction[] = [
+export const FACTION_VALUES: Faction[] = [
 	"guardian",
 	"seeker",
 	"rogue",
@@ -10,6 +10,6 @@ export const FACTION_SELECT_VALUES: Faction[] = [
 ];
 
 export const factionFilterTypes: FactionFilterType[] = [
-	...FACTION_SELECT_VALUES,
+	...FACTION_VALUES,
 	"spoiler",
 ];

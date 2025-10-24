@@ -1,5 +1,11 @@
-import { factionFilterTypes } from "@modules/faction/shared/config";
-import type { FactionFilterType } from "@shared/model";
+import { selectArtworksEnabled } from "@modules/core/theme/shared/lib";
+import {
+	FACTION_VALUES,
+	factionFilterTypes,
+} from "@modules/faction/shared/config";
+import { useAppSelector } from "@shared/lib";
+import type { Faction, FactionFilterType } from "@shared/model";
+import { equals, reject } from "ramda";
 import { useCallback } from "react";
 import type { ViewProps } from "react-native";
 import * as C from "./FactionSelect.components";
@@ -9,11 +15,16 @@ export type FactionSelectProps = ViewProps & {
 	value?: FactionFilterType;
 };
 
+const defautlFilters = reject(equals("neutral" as Faction), FACTION_VALUES);
+
 export const FactionSelect = ({
 	value,
 	onChange,
 	...props
 }: FactionSelectProps) => {
+	const artworksEnabled = useAppSelector(selectArtworksEnabled);
+	const data = artworksEnabled ? factionFilterTypes : defautlFilters;
+
 	const onPress = useCallback(
 		(item: FactionFilterType) => () => {
 			if (!onChange) {
@@ -30,14 +41,14 @@ export const FactionSelect = ({
 	return (
 		<C.Container {...props}>
 			<C.Content>
-				{factionFilterTypes.map((item, index) => (
+				{data.map((item, index) => (
 					<C.Button
 						key={item}
 						value={item}
 						selected={value === item}
 						onPress={onPress(item)}
 						first={index === 0}
-						last={index === item.length - 1}
+						last={index === data.length - 1}
 					/>
 				))}
 			</C.Content>

@@ -7,6 +7,8 @@ export const seeker = require("./seeker.jpg");
 export const survivor = require("./survivor.jpg");
 export const neutral = require("./neutral.jpg");
 
+export const defaultFactionBackgroundImage = require("./default.jpg");
+
 export const factionBackgroundImages: FactionImages = {
 	guardian,
 	mystic,

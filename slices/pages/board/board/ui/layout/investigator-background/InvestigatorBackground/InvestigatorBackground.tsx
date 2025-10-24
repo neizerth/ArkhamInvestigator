@@ -26,7 +26,7 @@ export const InvestigatorBackground = ({
 	return (
 		<C.Container {...props}>
 			<C.Content>
-				<C.FactionBackground />
+				<C.FactionBackground enabled={artworksEnabled} />
 				{artworksEnabled && background && (
 					<C.Background
 						source={{ uri: background.color }}

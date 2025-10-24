@@ -15,3 +15,5 @@ export type Faction =
 export type FactionImages = Record<Faction, ImageRequireSource>;
 
 export type FactionFilterType = Faction | "spoiler";
+
+export type FactionIconType = "default" | "alt";

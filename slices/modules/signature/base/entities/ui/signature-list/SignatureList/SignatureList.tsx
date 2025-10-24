@@ -30,6 +30,7 @@ export type SignatureListProps = Omit<
 	disabled: string[];
 	selectedCount: Record<string, number>;
 	selectedImages: Record<string, string>;
+	showIcons?: boolean;
 	size: number;
 };
 
@@ -39,6 +40,7 @@ export const SignatureList = ({
 	selected,
 	disabled,
 	selectedCount,
+	showIcons = false,
 	...props
 }: SignatureListProps) => {
 	const toggleSelected = useCallback(
@@ -60,13 +62,14 @@ export const SignatureList = ({
 								selected={selected.includes(signature.code)}
 								disabled={disabled.includes(signature.code)}
 								selectedCount={selectedCount[signature.code]}
+								showIcons={showIcons}
 							/>
 						);
 					})}
 				</C.ItemRow>
 			);
 		},
-		[toggleSelected, selected, disabled, selectedCount],
+		[toggleSelected, selected, disabled, selectedCount, showIcons],
 	);
 
 	const renderSectionHeader: RenderSectionHeaderProp = useCallback(

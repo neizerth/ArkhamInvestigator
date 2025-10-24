@@ -6,7 +6,7 @@
 	"modal.theme.error.invalidUrl": "Неверный адрес",
 
 	"modal.artwork.title": "Добавить иллюстрации",
-	"modal.artwork.text": "Введите URL-адрес иллюстраций",
+	"modal.artwork.text": "Некоторые функции могут использовать иллюстрации. Введите URL-адрес",
 	"modal.artwork.placeholder": "https://example.com/",
 	"modal.artwork.error.invalidUrl": "Неверный адрес",
 	"modal.artwork.action": "Добавить и перезагрузить",

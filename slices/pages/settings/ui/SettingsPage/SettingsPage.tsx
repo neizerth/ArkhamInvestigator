@@ -1,5 +1,6 @@
 import * as B from "@modules/board/base/shared/lib";
 import * as SC from "@modules/board/skill-check/shared/lib";
+import { selectChaosBagEnabled } from "@modules/chaos-bag/base/entities/lib";
 import * as chaosBag from "@modules/chaos-bag/base/shared/lib";
 import { setKeepAwake } from "@modules/core/device/entities/keep-awake";
 import { selectKeepAwake } from "@modules/core/device/shared/lib";
@@ -13,6 +14,7 @@ import {
 	setEnableNavigationAnimation,
 } from "@modules/core/router/shared/lib";
 import { CAN_ALWAYS_SHOW_GAME_TEXT } from "@shared/config";
+import { useAppSelector } from "@shared/lib";
 import { useTranslation } from "react-i18next";
 import { AppDiagnostics } from "../AppDiagnostics";
 import * as C from "./SettingsPage.components";
@@ -26,6 +28,7 @@ import {
 
 export const SettingsPage = () => {
 	const { t } = useTranslation();
+	const chaosBagEnabled = useAppSelector(selectChaosBagEnabled);
 
 	return (
 		<C.Page title="Settings">
@@ -110,36 +113,38 @@ export const SettingsPage = () => {
 						/>
 					</C.Row>
 				</C.Section>
-				<C.Section title={t`Chaos bag`}>
-					<C.Row>
-						<C.Checkbox
-							label="Chaos bag"
-							selector={chaosBag.selectChaosBagEnabled}
-							actionCreator={chaosBag.setChaosBagEnabled}
-						/>
-					</C.Row>
-					<C.Row>
-						<C.Checkbox
-							label="Chaos bag loading animation"
-							selector={chaosBag.selectChaosBagLoadingAnimation}
-							actionCreator={chaosBag.setChaosBagLoadingAnimation}
-						/>
-					</C.Row>
-					<C.Row>
-						<C.Checkbox
-							label="Unlimited chaos tokens"
-							selector={chaosBag.selectUnlimitedChaosTokens}
-							actionCreator={chaosBag.setUnlimitedChaosTokens}
-						/>
-					</C.Row>
-					<C.Row>
-						<C.Checkbox
-							label="Modify tokens"
-							selector={chaosBag.selectModifyChaosTokens}
-							actionCreator={chaosBag.setModifyChaosTokens}
-						/>
-					</C.Row>
-				</C.Section>
+				{chaosBagEnabled && (
+					<C.Section title={t`Chaos bag`}>
+						<C.Row>
+							<C.Checkbox
+								label="Chaos bag"
+								selector={chaosBag.selectChaosBagEnabledInternal}
+								actionCreator={chaosBag.setChaosBagEnabled}
+							/>
+						</C.Row>
+						<C.Row>
+							<C.Checkbox
+								label="Chaos bag loading animation"
+								selector={chaosBag.selectChaosBagLoadingAnimation}
+								actionCreator={chaosBag.setChaosBagLoadingAnimation}
+							/>
+						</C.Row>
+						<C.Row>
+							<C.Checkbox
+								label="Unlimited chaos tokens"
+								selector={chaosBag.selectUnlimitedChaosTokens}
+								actionCreator={chaosBag.setUnlimitedChaosTokens}
+							/>
+						</C.Row>
+						<C.Row>
+							<C.Checkbox
+								label="Modify tokens"
+								selector={chaosBag.selectModifyChaosTokens}
+								actionCreator={chaosBag.setModifyChaosTokens}
+							/>
+						</C.Row>
+					</C.Section>
+				)}
 				<C.Section title={`${t`Health`}/${t`Sanity`}`}>
 					<C.Row>
 						<C.Select

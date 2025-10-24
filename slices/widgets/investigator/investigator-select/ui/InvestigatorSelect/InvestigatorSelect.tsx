@@ -1,5 +1,4 @@
 import { selectArtworksEnabled } from "@modules/core/theme/shared/lib";
-import { selectSignatureGroups } from "@modules/signature/base/shared/lib";
 import {
 	changeSelectedInvestigator,
 	selectDisabledInvestigatorCodes,
@@ -9,68 +8,53 @@ import {
 	selectSelectedInvestigatorImages,
 } from "@shared/lib";
 import { useAppDispatch, useAppSelector } from "@shared/lib/hooks";
-import { splitIntoGroups } from "@shared/lib/util";
 import type { InvestigatorSignatureGroup } from "arkham-investigator-data";
-import { propEq } from "ramda";
 import { useCallback } from "react";
-import { useTranslation } from "react-i18next";
 import { GestureDetector } from "react-native-gesture-handler";
 import * as C from "./InvestigatorSelect.components";
+import { useData } from "./useData";
 import { useFactionSwipes } from "./useFactionSwipes";
 import { useImageSize } from "./useImageSize";
 
 export const InvestigatorSelect = () => {
 	const dispatch = useAppDispatch();
 	const factionFilterValue = useAppSelector(selectFactionFilter);
-	const data = useAppSelector(selectSignatureGroups);
 	const artworksEnabled = useAppSelector(selectArtworksEnabled);
-	const { t } = useTranslation();
 
 	const gesture = useFactionSwipes();
 
 	const image = useImageSize();
-	const { size } = image;
-
-	const columns = artworksEnabled ? image.columns : 1;
+	const { size, columns } = image;
 
 	const onChange = useCallback(
-		(item: InvestigatorSignatureGroup) =>
-			dispatch(changeSelectedInvestigator(item)),
-		[dispatch],
+		(group: InvestigatorSignatureGroup) =>
+			dispatch(
+				changeSelectedInvestigator({
+					group,
+					details: artworksEnabled,
+				}),
+			),
+		[dispatch, artworksEnabled],
 	);
 
 	const disabled = useAppSelector(selectDisabledInvestigatorCodes);
 	const selected = useAppSelector(selectSelectedInvestigatorCodes);
 	const selectedCount = useAppSelector(selectSelectedInvestigatorCount);
 	const selectedImages = useAppSelector(selectSelectedInvestigatorImages);
-	const factionFilter = factionFilterValue || "guardian";
+	const faction = factionFilterValue || "guardian";
 
-	const filtered = data.filter(({ spoiler, faction_code }) => {
-		if (factionFilter === "spoiler") {
-			return spoiler === true;
-		}
-		return faction_code === factionFilter && !spoiler;
+	const sections = useData({
+		faction,
+		artworksEnabled,
+		columns,
 	});
-
-	const official = filtered.filter(propEq(true, "official"));
-	const fanMade = filtered.filter(propEq(false, "official"));
-
-	const sections = [
-		{
-			data: splitIntoGroups(official, columns),
-		},
-		{
-			title: t`Fan-made Investigators`,
-			data: splitIntoGroups(fanMade, columns),
-		},
-	];
 
 	const List = artworksEnabled ? C.PreviewList : C.List;
 
 	return (
 		<GestureDetector gesture={gesture}>
 			<C.Container>
-				<C.FactionSelect value={factionFilter} />
+				<C.FactionSelect value={faction} />
 				<C.Content>
 					<List
 						sections={sections}

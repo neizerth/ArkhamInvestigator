@@ -1,5 +1,7 @@
+import { selectArtworksEnabled } from "@modules/core/theme/shared/lib";
 import parse from "html-react-parser";
 import type { TextProps, ViewStyle } from "react-native";
+import { useAppSelector } from "../../../../../lib";
 import { getLibrary } from "../../lib";
 import { prepareText } from "../../lib/prepareText";
 import type { ComponentStyleMap } from "../../model";
@@ -10,6 +12,7 @@ export type GameTextProps = TextProps & {
 	value: string;
 	componentStyles?: ComponentStyleMap;
 	contentContainerStyle?: ViewStyle;
+	replaceBulletIcon?: boolean;
 };
 
 export { defaultComponentStyles as defaultGameTextComponentStyles };
@@ -20,7 +23,12 @@ export const GameText = ({
 	contentContainerStyle,
 	...props
 }: GameTextProps) => {
-	const text = prepareText(value);
+	const artworksEnabled = useAppSelector(selectArtworksEnabled);
+	const text = prepareText({
+		...props,
+		text: value,
+		replaceIcons: artworksEnabled,
+	});
 
 	const library = getLibrary({
 		componentStyles: {

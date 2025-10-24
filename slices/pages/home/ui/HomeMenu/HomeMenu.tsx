@@ -28,9 +28,11 @@ export const HomeMenu = (props: HomeMenuProps) => {
 						<C.Icon icon="name" />
 					</C.Button>
 
-					<C.Button onPress={goTo(routes.boardHelp)}>
-						<C.Icon icon="info" />
-					</C.Button>
+					{artworksEnabled && (
+						<C.Button onPress={goTo(routes.boardHelp)}>
+							<C.Icon icon="info" />
+						</C.Button>
+					)}
 
 					<C.Button onPress={goTo(routes.support)}>
 						<C.Icon icon="heart" />

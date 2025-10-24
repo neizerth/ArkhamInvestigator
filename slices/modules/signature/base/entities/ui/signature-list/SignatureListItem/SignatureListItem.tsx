@@ -8,6 +8,7 @@ export type SignatureListItemProps = TouchableOpacityProps & {
 	selected: boolean;
 	disabled: boolean;
 	selectedCount: number;
+	showIcons: boolean;
 };
 
 export const SignatureListItem = ({
@@ -15,6 +16,7 @@ export const SignatureListItem = ({
 	selected,
 	disabled,
 	selectedCount,
+	showIcons = false,
 	...props
 }: SignatureListItemProps) => {
 	const faction = signature.faction_code;
@@ -22,12 +24,11 @@ export const SignatureListItem = ({
 	return (
 		<C.Container {...props}>
 			<C.Content>
-				<C.FactionIcon faction={signature.faction_code} />
-
+				{showIcons && <C.FactionIcon faction={signature.faction_code} />}
 				<C.Main>
 					<C.Header>
 						<C.Title faction={faction}>{title}</C.Title>
-						<C.PackIcon icon={signature.pack.icon} />
+						{showIcons && <C.PackIcon icon={signature.pack.icon} />}
 					</C.Header>
 					<C.Subtitle>{signature.subname}</C.Subtitle>
 				</C.Main>

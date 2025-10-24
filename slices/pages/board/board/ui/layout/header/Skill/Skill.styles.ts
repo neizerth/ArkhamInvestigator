@@ -44,6 +44,7 @@ type GetSkillValueStyleOptions = {
 	value: number | string;
 	baseValue: number;
 	signed: boolean;
+	showIcon?: boolean;
 };
 
 export const getSkillValueStyle = ({
@@ -52,6 +53,7 @@ export const getSkillValueStyle = ({
 	isParallel,
 	signed,
 	width,
+	showIcon,
 }: GetSkillValueStyleOptions) => {
 	const vw = rnd(width / 10);
 	const digitsCount = value.toString().length ?? 0;
@@ -78,12 +80,21 @@ export const getSkillValueStyle = ({
 		color: textColor,
 	};
 
+	const iconContainerStyle: ViewStyle = showIcon
+		? {
+				paddingRight: rnd(1.1 * width),
+				justifyContent: "flex-end",
+			}
+		: {
+				paddingRight: rnd(0.2 * width),
+				justifyContent: "center",
+			};
+
 	const container: ViewStyle = {
-		paddingRight: rnd(1.1 * width),
+		...iconContainerStyle,
 		paddingBottom: rnd(2.3 * vw),
 		flex: 1,
 		alignItems: "flex-end",
-		justifyContent: "flex-end",
 	};
 
 	const diffSize: Record<number, number> = {
@@ -97,9 +108,10 @@ export const getSkillValueStyle = ({
 		fontSize: diffFontSize,
 		color: color.skill[type].light,
 	};
+	const diffContainerRight = showIcon ? rnd(-vw * 1.5) : rnd(vw);
 	const diffContainer: ViewStyle = {
 		top: rnd((5.7 * vw - diffFontSize) / 2),
-		right: rnd(-vw * 1.5),
+		right: diffContainerRight,
 	};
 	return {
 		text: valueText,

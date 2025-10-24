@@ -1,6 +1,12 @@
-import { titleImages } from "@assets/images/game/title";
+import { defaultTitleImage, titleImages } from "@assets/images/game/title";
+import { selectArtworksEnabled } from "@modules/core/theme/shared/lib";
 import { useSwipe } from "@modules/core/touch/shared/lib";
-import { formatGameText, getActiveOpacity, getFactionImage } from "@shared/lib";
+import {
+	formatGameText,
+	getActiveOpacity,
+	getFactionImage,
+	useAppSelector,
+} from "@shared/lib";
 import type { PropsWithFaction } from "@shared/model";
 import type { ImageBackgroundProps } from "@shared/ui";
 import { memo, useMemo } from "react";
@@ -50,14 +56,18 @@ export const InvestigatorTitle = (props: InvestigatorTitleProps) => {
 		single,
 	} = props;
 
+	const artworksEnabled = useAppSelector(selectArtworksEnabled);
+
 	const name = formatGameText(props.name);
 	const subname = formatGameText(props.subname);
 
-	const source = getFactionImage({
+	const factionImage = getFactionImage({
 		images: titleImages,
 		parallel,
 		faction,
 	});
+
+	const source = artworksEnabled ? factionImage : defaultTitleImage;
 
 	const style = getTitleStyle(props);
 	const titleOpacity = getActiveOpacity(pressable);
@@ -109,7 +119,7 @@ export const InvestigatorTitle = (props: InvestigatorTitleProps) => {
 								activeOpacity={titleOpacity}
 								onPress={onTitlePress}
 							>
-								{unique && <C.Unique style={style.unique} />}
+								{unique && artworksEnabled && <C.Unique style={style.unique} />}
 
 								<C.TitleText style={style.titleText}>{name}</C.TitleText>
 

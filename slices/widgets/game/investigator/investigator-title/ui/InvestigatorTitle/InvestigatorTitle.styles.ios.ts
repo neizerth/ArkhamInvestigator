@@ -56,6 +56,22 @@ export const getTitleStyle = (options: GetTitleStyleOptions) => {
 		seeker: {
 			title: {
 				paddingTop: "3%",
+				height: "57%",
+			},
+			subtitle: {
+				top: "-2%",
+				height: "40%",
+			},
+			background: {
+				gap: 0,
+			},
+		},
+		guardian: {
+			background: {
+				gap: 0,
+			},
+			subtitle: {
+				height: "40%",
 			},
 		},
 		neutral: {

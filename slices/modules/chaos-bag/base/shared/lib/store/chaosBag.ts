@@ -56,7 +56,7 @@ export const {
 	selectContents: selectChaosBagContents,
 
 	selectLoadingAnimation: selectChaosBagLoadingAnimation,
-	selectEnabled: selectChaosBagEnabled,
+	selectEnabled: selectChaosBagEnabledInternal,
 	selectUnlimitedChaosTokens,
 	selectModifyChaosTokens,
 } = chaosBag.selectors;

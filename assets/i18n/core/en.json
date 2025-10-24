@@ -6,7 +6,7 @@
 	"modal.theme.error.invalidUrl": "Invalid URL",
 
 	"modal.artwork.title": "Add Artworks",
-	"modal.artwork.text": "Enter a artworks URLs. The app doesn’t host or provide any third-party content",
+	"modal.artwork.text": "Some features may use artworks. The app doesn’t host or provide any third-party content. Enter an URL.",
 	"modal.artwork.placeholder": "https://example.com/",
 	"modal.artwork.error.invalidUrl": "Invalid URL",
 	"modal.artwork.action": "Add and restart",

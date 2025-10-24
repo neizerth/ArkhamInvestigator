@@ -1,5 +1,6 @@
-import { skillsImages } from "@assets/images/game/skills";
-import { getFactionImage } from "@shared/lib";
+import { defaultSkillImage, skillsImages } from "@assets/images/game/skills";
+import { selectArtworksEnabled } from "@modules/core/theme/shared/lib";
+import { getFactionImage, useAppSelector } from "@shared/lib";
 import type { InvestigatorSkillType, PropsWithFaction } from "@shared/model";
 import type React from "react";
 import { useCallback } from "react";
@@ -34,11 +35,14 @@ export const InvestigatorSkills = ({
 	renderSkill: renderSkillProp,
 	...props
 }: InvestigatorSkillsProps) => {
-	const source = getFactionImage({
+	const artworksEnabled = useAppSelector(selectArtworksEnabled);
+	const factionImage = getFactionImage({
 		images: skillsImages,
 		parallel,
 		faction,
 	});
+
+	const source = artworksEnabled ? factionImage : defaultSkillImage;
 
 	const skillsStyle = getSkillsStyle(width);
 

@@ -12,6 +12,8 @@ import type {
 	PickerItemInfo,
 } from "@modules/core/control/entities/picker/model";
 import { usePageLoader } from "@modules/core/router/shared/lib";
+import { openArtworkModal } from "@modules/core/theme/entities/openArtworkModal";
+import { selectArtworksEnabled } from "@modules/core/theme/shared/lib";
 import {
 	selectShowAdditionalInformation,
 	signedNumber,
@@ -41,6 +43,8 @@ export const Skill = ({ width, height, type, ...props }: SkillProps) => {
 
 	const showInfo = useAppSelector(selectShowAdditionalInformation);
 	const showModifiers = useAppSelector(selectAlwaysShowSkillModifiers);
+	const artworksEnabled = useAppSelector(selectArtworksEnabled);
+
 	const [touching, setTouching] = useState(false);
 
 	const style = getSkillStyle(width);
@@ -50,6 +54,9 @@ export const Skill = ({ width, height, type, ...props }: SkillProps) => {
 	}, []);
 
 	const onLongPress = useCallback(() => {
+		if (!artworksEnabled) {
+			return;
+		}
 		dispatch(
 			startChaosBagReveal({
 				boardId: "current",
@@ -58,15 +65,19 @@ export const Skill = ({ width, height, type, ...props }: SkillProps) => {
 			}),
 		);
 		setTouching(false);
-	}, [dispatch, type, value]);
+	}, [dispatch, type, value, artworksEnabled]);
 
 	const onPressOut = useCallback(() => {
 		setTouching(false);
 	}, []);
 
 	const onOpen = useCallback(() => {
+		if (!artworksEnabled) {
+			dispatch(openArtworkModal());
+			return;
+		}
 		dispatch(startSkillCheck(type));
-	}, [dispatch, type]);
+	}, [dispatch, type, artworksEnabled]);
 
 	const [openModal] = usePageLoader(onOpen);
 
@@ -98,6 +109,7 @@ export const Skill = ({ width, height, type, ...props }: SkillProps) => {
 				value,
 				signed: showInfo,
 				baseValue: baseValue,
+				showIcon: artworksEnabled,
 			});
 
 			return (
@@ -120,7 +132,16 @@ export const Skill = ({ width, height, type, ...props }: SkillProps) => {
 				</C.ValueContainer>
 			);
 		},
-		[width, baseValue, isParallel, type, touching, showInfo, showModifiers],
+		[
+			width,
+			baseValue,
+			isParallel,
+			type,
+			touching,
+			showInfo,
+			showModifiers,
+			artworksEnabled,
+		],
 	);
 
 	const itemHeight = height;
@@ -141,13 +162,15 @@ export const Skill = ({ width, height, type, ...props }: SkillProps) => {
 						onLongPress={onLongPress}
 					/>
 				</C.ValueContainer>
-				<C.IconContainer>
-					<C.Icon
-						skillType={type}
-						style={style.icon}
-						contentContainerStyle={style.iconContainer}
-					/>
-				</C.IconContainer>
+				{artworksEnabled && (
+					<C.IconContainer>
+						<C.Icon
+							skillType={type}
+							style={style.icon}
+							contentContainerStyle={style.iconContainer}
+						/>
+					</C.IconContainer>
+				)}
 			</C.Row>
 			{touching && <C.Background style={style.background} />}
 		</C.Container>

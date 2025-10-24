@@ -1,4 +1,5 @@
 import { selectHasBoardAbilities } from "@modules/board/abilities/shared/lib";
+import { selectArtworksEnabled } from "@modules/core/theme/shared/lib";
 import { makeAction } from "@modules/mechanics/phase/entities/lib";
 import { useAppDispatch, useAppSelector } from "@shared/lib";
 import type { ImageBackgroundProps } from "@shared/ui";
@@ -15,6 +16,7 @@ const actionsData = range(0, 100);
 export const Actions = ({ ...props }: ActionsProps) => {
 	const dispatch = useAppDispatch();
 	const haveAbilities = useAppSelector(selectHasBoardAbilities("current"));
+	const artworksEnabled = useAppSelector(selectArtworksEnabled);
 	const style = useActionsStyle();
 
 	const {
@@ -51,7 +53,7 @@ export const Actions = ({ ...props }: ActionsProps) => {
 					/>
 				</C.Content>
 			</C.Background>
-			{haveAbilities && <C.Special style={style.special} />}
+			{artworksEnabled && haveAbilities && <C.Special style={style.special} />}
 		</C.Container>
 	);
 };

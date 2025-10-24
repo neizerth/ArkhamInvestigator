@@ -31,6 +31,11 @@ export const InvestigatorFlavor = ({
 	) as ComponentStyleMap;
 
 	return (
-		<GameText {...props} componentStyles={componentStyles} value={flavor} />
+		<GameText
+			{...props}
+			componentStyles={componentStyles}
+			value={flavor}
+			replaceBulletIcon={false}
+		/>
 	);
 };
