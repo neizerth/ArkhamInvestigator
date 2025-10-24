@@ -14,6 +14,9 @@ export const getFactionIcon = (options: GetFactionIconProps) => {
 };
 
 export const getAltFactionIcon = ({ faction }: GetFactionIconProps) => {
+	if (faction === "neutral") {
+		return "";
+	}
 	return `class_${faction}`;
 };
 
