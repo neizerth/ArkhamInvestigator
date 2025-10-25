@@ -1,3 +1,4 @@
+import { selectArtworksEnabled } from "@modules/core/theme/shared/lib";
 import { selectMediaVersion } from "@modules/signature/base/shared/lib";
 import { DEVICE_FONT_SCALE, DPR } from "@shared/config";
 import { BUILD_ID, BUILD_VERSION } from "@shared/config/app";
@@ -23,38 +24,45 @@ export type AboutPageProps = Omit<ContentPageProps, "title">;
 export const AboutPage = (props: AboutPageProps) => {
 	const { t } = useTranslation();
 	const mediaVersion = useAppSelector(selectMediaVersion);
+	const artworksEnabled = useAppSelector(selectArtworksEnabled);
 
 	return (
 		<ContentPage {...props} title="About">
-			<Paragraph>
-				<Trans
-					i18nKey="about.app"
-					components={{
-						FFG: (
-							<A href="https://www.fantasyflightgames.com/en/products/arkham-horror-the-card-game/" />
-						),
-					}}
-				/>
-			</Paragraph>
-			<Paragraph>{t`about.disclaimer`}</Paragraph>
-			<Paragraph>
-				<Trans
-					i18nKey="about.credits"
-					components={{
-						Author: <A href="https://github.com/neizerth" />,
-						Repo: <A href="https://github.com/neizerth/ArkhamInvestigator" />,
-						Issues: (
-							<A href="https://github.com/neizerth/ArkhamInvestigator/issues" />
-						),
-						Discord: (
-							<A href="https://discord.com/channels/225349059689447425/1351550310887460926" />
-						),
-						Telegram: (
-							<A href="https://discord.com/channels/225349059689447425/1351550310887460926" />
-						),
-					}}
-				/>
-			</Paragraph>
+			{artworksEnabled && (
+				<>
+					<Paragraph>
+						<Trans
+							i18nKey="about.app"
+							components={{
+								FFG: (
+									<A href="https://www.fantasyflightgames.com/en/products/arkham-horror-the-card-game/" />
+								),
+							}}
+						/>
+					</Paragraph>
+					<Paragraph>{t`about.disclaimer`}</Paragraph>
+					<Paragraph>
+						<Trans
+							i18nKey="about.credits"
+							components={{
+								Author: <A href="https://github.com/neizerth" />,
+								Repo: (
+									<A href="https://github.com/neizerth/ArkhamInvestigator" />
+								),
+								Issues: (
+									<A href="https://github.com/neizerth/ArkhamInvestigator/issues" />
+								),
+								Discord: (
+									<A href="https://discord.com/channels/225349059689447425/1351550310887460926" />
+								),
+								Telegram: (
+									<A href="https://discord.com/channels/225349059689447425/1351550310887460926" />
+								),
+							}}
+						/>
+					</Paragraph>
+				</>
+			)}
 			<Paragraph>{t`about.artwork`}</Paragraph>
 			<Title>{t`Hall of Fame`}</Title>
 			<List>
@@ -86,9 +94,11 @@ export const AboutPage = (props: AboutPageProps) => {
 			</List>
 			<Title>{t`Credits`}</Title>
 			<List>
-				<List.Item>
-					<Bold>{t`Card icons`}</Bold>: Fantasy Flight Games
-				</List.Item>
+				{artworksEnabled && (
+					<List.Item>
+						<Bold>{t`Card icons`}</Bold>: Fantasy Flight Games
+					</List.Item>
+				)}
 				<List.Item>
 					<Bold>{t`Button Vector Art`}</Bold>: vecteezy.com
 				</List.Item>

@@ -1,10 +1,12 @@
-import { getActiveOpacity } from "@shared/lib";
+import { selectArtworksEnabled } from "@modules/core/theme/shared/lib";
+import { getActiveOpacity, useAppSelector } from "@shared/lib";
 import { useTranslation } from "react-i18next";
 import { useResumeGame, useStartGame } from "../../lib";
 import { Button } from "../Button";
 import * as C from "./HomePage.components";
 export const HomePage = () => {
 	const { t } = useTranslation();
+	const artworksEnabled = useAppSelector(selectArtworksEnabled);
 	const onResume = useResumeGame();
 	const onStart = useStartGame();
 
@@ -20,9 +22,11 @@ export const HomePage = () => {
 			{onResume && (
 				<C.ResumeButton onPress={onResume}>{t`Continue`}</C.ResumeButton>
 			)}
-			<C.Disclaimer>
-				<C.DisclaimerText>{t`app.disclaimer`}</C.DisclaimerText>
-			</C.Disclaimer>
+			{artworksEnabled && (
+				<C.Disclaimer>
+					<C.DisclaimerText>{t`app.disclaimer`}</C.DisclaimerText>
+				</C.Disclaimer>
+			)}
 		</C.Container>
 	);
 };

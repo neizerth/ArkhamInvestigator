@@ -1,4 +1,4 @@
-import theme from "./ffg";
-export * from "./ffg";
+import theme from "./basic";
+export * from "./basic";
 
 export default theme;
