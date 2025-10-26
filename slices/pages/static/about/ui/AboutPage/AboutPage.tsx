@@ -61,9 +61,10 @@ export const AboutPage = (props: AboutPageProps) => {
 							}}
 						/>
 					</Paragraph>
+
+					<Paragraph>{t`about.artwork`}</Paragraph>
 				</>
 			)}
-			<Paragraph>{t`about.artwork`}</Paragraph>
 			<Title>{t`Hall of Fame`}</Title>
 			<List>
 				<List.Item>
