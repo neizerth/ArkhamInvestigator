@@ -77,6 +77,7 @@ function* worker({ payload }: ReturnType<typeof appUpdatesChecked>) {
 
 		yield put(
 			sendNotification({
+				type: "error",
 				message: "error.downloadFailed",
 				data: {
 					error: errorMessage,
