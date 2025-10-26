@@ -7,11 +7,7 @@ import {
 	setAssetSize,
 } from "../../shared/lib";
 import { type DownloadChannelData, downloadChannel } from "./downloadChannel";
-import {
-	assetDownloadComplete,
-	assetDownloadError,
-	processAssetDownload,
-} from "./processAssetDownload";
+import { assetDownloadEnd, processAssetDownload } from "./processAssetDownload";
 
 type Channel = ReturnType<typeof downloadChannel>;
 
@@ -30,8 +26,9 @@ function* worker({ payload }: ReturnType<typeof processAssetDownload>) {
 			if (item.type === "result") {
 				if (item.value) {
 					yield put(
-						assetDownloadComplete({
+						assetDownloadEnd({
 							...payload,
+							status: "success",
 							uri: item.value.uri,
 						}),
 					);
@@ -53,8 +50,9 @@ function* worker({ payload }: ReturnType<typeof processAssetDownload>) {
 		}
 	} catch (error) {
 		yield put(
-			assetDownloadError({
+			assetDownloadEnd({
 				...payload,
+				status: "error",
 				error,
 			}),
 		);

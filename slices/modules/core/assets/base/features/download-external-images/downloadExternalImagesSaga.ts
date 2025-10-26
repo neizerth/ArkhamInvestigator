@@ -1,9 +1,11 @@
 import { appUpdatesChecked } from "@modules/core/app/entities/checkAppUpdates";
 import { downloadAsset } from "@modules/core/assets/asset-downloader/entities/downloadAsset/downloadAsset";
-import { assetDownloadComplete } from "@modules/core/assets/asset-downloader/entities/processAssetDownload/processAssetDownload";
+import { assetDownloadEnd } from "@modules/core/assets/asset-downloader/entities/processAssetDownload/processAssetDownload";
 import { unzip, unzipComplete } from "@modules/core/disk/entities/unzip/unzip";
+import { sendNotification } from "@modules/core/notifications/shared/lib";
 import { selectArtworkArchiveUrl } from "@modules/core/theme/shared/lib";
 import { propEq } from "ramda";
+import { isError } from "ramda-adjunct";
 import { put, select, take, takeEvery } from "redux-saga/effects";
 import {
 	externalImagesArchiveDiskPath,
@@ -19,7 +21,7 @@ import {
 } from "../../shared/lib";
 
 const downloadComplete = (action: unknown) => {
-	if (!assetDownloadComplete.match(action)) {
+	if (!assetDownloadEnd.match(action)) {
 		return false;
 	}
 
@@ -66,7 +68,23 @@ function* worker({ payload }: ReturnType<typeof appUpdatesChecked>) {
 		}),
 	);
 
-	yield take(downloadComplete);
+	const resultAction: ReturnType<typeof assetDownloadEnd> =
+		yield take(downloadComplete);
+
+	if (resultAction.payload.status !== "success") {
+		const { error } = resultAction.payload;
+		const errorMessage = isError(error) ? error.message : String(error);
+
+		yield put(
+			sendNotification({
+				message: "error.downloadFailed",
+				data: {
+					error: errorMessage,
+				},
+			}),
+		);
+		return;
+	}
 
 	console.log("download complete", archiveUrl);
 	yield put(setExternalImagesLoaded(true));
