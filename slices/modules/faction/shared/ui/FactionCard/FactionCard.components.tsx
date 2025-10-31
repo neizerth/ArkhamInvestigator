@@ -109,6 +109,7 @@ export const OKBackground: typeof Background = styled(Background).attrs({
 export const Icon: typeof ThemeFactionFontIcon = styled(ThemeFactionFontIcon)`
   font-size: 32px;
   line-height: 32px;
+  width: 32px;
   color: ${textColor};
 `;
 
@@ -118,6 +119,7 @@ export const CloseIcon: FC<CloseIconProps> = styled(BaseIcon).attrs({
 	icon: "close",
 })`
   font-size: 20px;
+  width: 20px;
   color: ${textColor};
 `;
 
