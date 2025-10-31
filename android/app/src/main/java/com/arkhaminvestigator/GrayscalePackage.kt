@@ -1,4 +1,4 @@
-package com.arkhaminvestigator.dev
+package com.arkhaminvestigator
 
 import com.facebook.react.ReactPackage
 import com.facebook.react.bridge.NativeModule

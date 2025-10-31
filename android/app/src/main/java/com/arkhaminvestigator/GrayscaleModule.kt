@@ -1,4 +1,4 @@
-package com.arkhaminvestigator.dev
+package com.arkhaminvestigator
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
