@@ -1,3 +1,4 @@
+import { SanityStatBackground } from "@modules/core/theme/shared/ui";
 import { color, gameAssets, size } from "@shared/config";
 import * as UI from "@shared/ui";
 import type { FC } from "react";
@@ -8,7 +9,7 @@ import { withStat } from "../../../../lib";
 import { BaseStatPicker, type DefinedBaseStatPickerProps } from "../common";
 import { StatPickerMemo as StatPicker } from "../common/StatPicker";
 
-export const BaseContainer = withStat(UI.Sanity, {
+export const BaseContainer = withStat(SanityStatBackground, {
 	ratio: gameAssets.sanity.ratio,
 });
 

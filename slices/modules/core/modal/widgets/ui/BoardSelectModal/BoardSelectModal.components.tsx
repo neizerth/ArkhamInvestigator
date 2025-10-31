@@ -1,7 +1,7 @@
 import { FactionModal } from "@modules/core/modal/shared/base/ui";
+import { GameText } from "@modules/core/theme/shared/ui";
 import { SignatureDetailSelect } from "@modules/signature/base/features/base/ui";
 import { color, font } from "@shared/config";
-import { GameText } from "@shared/ui";
 import styled from "styled-components/native";
 
 export const Container = styled(FactionModal)`

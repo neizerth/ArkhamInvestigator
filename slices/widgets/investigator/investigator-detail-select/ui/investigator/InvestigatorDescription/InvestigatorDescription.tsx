@@ -1,5 +1,5 @@
 import { selectTrackXP } from "@modules/board/base/shared/lib";
-import { openArtworkModal } from "@modules/core/theme/entities/openArtworkModal";
+import { openArtworkModal } from "@modules/core/theme/entities/lib/store/features/openArtworkModal";
 import { selectArtworksEnabled } from "@modules/core/theme/shared/lib";
 import { getSignatureImageUrl } from "@modules/signature/base/shared/api";
 import {

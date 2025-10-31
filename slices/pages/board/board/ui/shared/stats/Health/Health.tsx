@@ -3,17 +3,17 @@ import {
 	selectShowDamageAndHorror,
 	selectShowInitialHealthAndSanity,
 } from "@modules/board/base/shared/lib";
+import type { HealthStatBackground } from "@modules/core/theme/shared/ui";
 import { selectShowAdditionalInformation, useAppSelector } from "@shared/lib";
-import type { HealthProps as BaseHealthProps } from "@shared/ui";
 import { range } from "ramda";
-import { useMemo } from "react";
+import { type ComponentProps, useMemo } from "react";
 import type { ViewStyle } from "react-native";
 import { useStat } from "../../../../lib/hooks/useStat";
 import * as C from "./Health.components";
 
-type HealthProps = BaseHealthProps & {
+type HealthProps = ComponentProps<typeof HealthStatBackground> & {
 	style?: ViewStyle;
-	contentContainerStyle?: BaseHealthProps["style"];
+	contentContainerStyle?: HealthProps["style"];
 };
 
 export const Health = ({ contentContainerStyle, ...props }: HealthProps) => {

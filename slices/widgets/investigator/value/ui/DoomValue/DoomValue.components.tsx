@@ -1,10 +1,11 @@
 import { Picker as BasePicker } from "@modules/core/control/entities/picker/ui";
+import { DoomStatBackground } from "@modules/core/theme/shared/ui";
 import { gameAssets } from "@shared/config";
-import { Doom, IconNumber } from "@shared/ui";
+import { IconNumber } from "@shared/ui";
 import styled from "styled-components/native";
 import { VALUE_HEIGHT } from "../../config";
 
-export const Container: typeof Doom = styled(Doom)`
+export const Container: typeof DoomStatBackground = styled(DoomStatBackground)`
   width: ${VALUE_HEIGHT * gameAssets.doom.ratio}px;
   height: ${VALUE_HEIGHT}px;
 `;

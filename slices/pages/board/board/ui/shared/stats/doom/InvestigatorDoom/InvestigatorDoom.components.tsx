@@ -1,11 +1,11 @@
+import { DoomStatBackground } from "@modules/core/theme/shared/ui";
 import { color, gameAssets } from "@shared/config";
-import * as UI from "@shared/ui";
 import styled from "styled-components/native";
 import { assetsSize } from "../../../../../config";
 import { withStat } from "../../../../../lib";
 import { StatPickerMemo as StatPicker } from "../../common/StatPicker";
 
-export const BaseContainer = withStat(UI.Doom, {
+export const BaseContainer = withStat(DoomStatBackground, {
 	ratio: gameAssets.doom.ratio,
 });
 

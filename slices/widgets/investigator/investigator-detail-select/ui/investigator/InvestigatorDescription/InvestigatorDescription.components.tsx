@@ -1,8 +1,8 @@
 import { Alegreya } from "@assets/fonts";
+import { GameText } from "@modules/core/theme/shared/ui";
 import { TouchableOpacity } from "@modules/core/touch/shared/ui";
 import { FactionView } from "@modules/faction/shared/ui";
 import { color, font, size } from "@shared/config";
-import { GameText } from "@shared/ui";
 import { Column, Row, UnscaledText } from "@shared/ui";
 import { Image as BaseImage } from "expo-image";
 import { View } from "react-native";

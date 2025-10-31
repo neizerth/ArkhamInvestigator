@@ -4,15 +4,15 @@ import {
 	setCurrentActualPropValue,
 } from "@modules/board/base/shared/lib";
 import type { PickerChangeEvent } from "@modules/core/control/entities/picker/model";
+import type { DoomStatBackground } from "@modules/core/theme/shared/ui";
 import { useAppDispatch, useAppSelector } from "@shared/lib";
-import type { DoomProps } from "@shared/ui";
 import { range } from "ramda";
-import { useCallback } from "react";
+import { type ComponentProps, useCallback } from "react";
 import * as C from "./InvestigatorDoom.components";
 
 const doomData = range(0, 101);
 
-export type { DoomProps as InvestigatorDoomProps };
+type DoomProps = ComponentProps<typeof DoomStatBackground>;
 
 export const InvestigatorDoom = (props: DoomProps) => {
 	const dispatch = useAppDispatch();

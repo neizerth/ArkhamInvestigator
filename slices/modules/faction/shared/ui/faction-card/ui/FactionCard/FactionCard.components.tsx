@@ -4,6 +4,7 @@ import { ScrollView, View } from "react-native";
 import type { TextProps, ViewProps } from "react-native";
 
 import { Alegreya } from "@assets/fonts";
+import { GameText } from "@modules/core/theme/shared/ui";
 import { TouchableOpacity } from "@modules/core/touch/shared/ui";
 import type { Faction } from "@shared/model";
 import type { PropsWithFaction } from "@shared/model/ui";
@@ -11,7 +12,6 @@ import {
 	Icon as BaseIcon,
 	Button,
 	type ButtonProps,
-	GameText,
 	type IconProps,
 	Row,
 } from "@shared/ui";

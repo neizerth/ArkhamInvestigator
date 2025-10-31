@@ -1,5 +1,5 @@
+import { GameText } from "@modules/core/theme/shared/ui";
 import { color, font } from "@shared/config";
-import { GameText } from "@shared/ui";
 import styled from "styled-components/native";
 import { FactionModal } from "../../../base/ui";
 

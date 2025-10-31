@@ -1,5 +1,5 @@
+import { HealthStatBackground } from "@modules/core/theme/shared/ui";
 import { color, gameAssets, size } from "@shared/config";
-import * as UI from "@shared/ui";
 import { Value as BaseValue } from "@shared/ui";
 import type { FC } from "react";
 import { View } from "react-native";
@@ -9,7 +9,7 @@ import { withStat } from "../../../../lib";
 import { BaseStatPicker, type DefinedBaseStatPickerProps } from "../common";
 import { StatPickerMemo as StatPicker } from "../common/StatPicker";
 
-export const BaseContainer = withStat(UI.Health, {
+export const BaseContainer = withStat(HealthStatBackground, {
 	ratio: gameAssets.health.ratio,
 });
 

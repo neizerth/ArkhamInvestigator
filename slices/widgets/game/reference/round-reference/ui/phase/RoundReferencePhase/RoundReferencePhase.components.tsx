@@ -11,9 +11,9 @@ import {
 import { IconButton } from "@shared/ui";
 
 import { withLocale } from "@modules/core/i18n/shared/lib";
+import { GameText } from "@modules/core/theme/shared/ui";
 import { TouchableOpacity } from "@modules/core/touch/shared/ui";
 import { color, size } from "@shared/config";
-import { GameText } from "@shared/ui";
 import { Icon, type IconProps, Row, type UnscaledTextProps } from "@shared/ui";
 import type { FC } from "react";
 import { View, type ViewProps } from "react-native";

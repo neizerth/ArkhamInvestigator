@@ -12,7 +12,7 @@ import type {
 	PickerItemInfo,
 } from "@modules/core/control/entities/picker/model";
 import { usePageLoader } from "@modules/core/router/shared/lib";
-import { openArtworkModal } from "@modules/core/theme/entities/openArtworkModal";
+import { openArtworkModal } from "@modules/core/theme/entities/lib/store/features/openArtworkModal";
 import { selectArtworksEnabled } from "@modules/core/theme/shared/lib";
 import {
 	selectShowAdditionalInformation,

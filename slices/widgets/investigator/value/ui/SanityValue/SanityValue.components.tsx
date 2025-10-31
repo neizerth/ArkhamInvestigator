@@ -1,10 +1,13 @@
+import { SanityStatBackground } from "@modules/core/theme/shared/ui";
 import { color, gameAssets } from "@shared/config";
-import { IconNumber, Sanity } from "@shared/ui";
+import { IconNumber } from "@shared/ui";
 import { View } from "react-native";
 import styled from "styled-components/native";
 import { VALUE_HEIGHT } from "../../config";
 
-export const Container: typeof Sanity = styled(Sanity)`
+export const Container: typeof SanityStatBackground = styled(
+	SanityStatBackground,
+)`
   width: ${VALUE_HEIGHT * gameAssets.sanity.ratio}px;
   height: ${VALUE_HEIGHT}px;
 `;

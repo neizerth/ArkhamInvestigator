@@ -1,6 +1,6 @@
 import { Alegreya } from "@assets/fonts";
+import { GameText } from "@modules/core/theme/shared/ui";
 import { color, font, size } from "@shared/config";
-import { GameText } from "@shared/ui";
 import { Input as TextInput } from "@shared/ui";
 import { View } from "react-native";
 import styled from "styled-components/native";

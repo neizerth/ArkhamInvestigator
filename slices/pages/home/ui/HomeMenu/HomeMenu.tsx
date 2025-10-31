@@ -1,5 +1,5 @@
 import { usePage } from "@modules/core/router/shared/lib";
-import { openArtworkModal } from "@modules/core/theme/entities/openArtworkModal";
+import { openArtworkModal } from "@modules/core/theme/entities/lib/store/features/openArtworkModal";
 import { selectArtworksEnabled } from "@modules/core/theme/shared/lib";
 import { routes } from "@shared/config";
 import { useAppDispatch, useAppSelector } from "@shared/lib";

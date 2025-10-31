@@ -1,5 +1,6 @@
+import { ActionStatBackground } from "@modules/core/theme/shared/ui";
 import { color, gameAssets, size } from "@shared/config";
-import { Action, Value } from "@shared/ui";
+import { Value } from "@shared/ui";
 import type { FC } from "react";
 import { View } from "react-native";
 import styled from "styled-components/native";
@@ -9,7 +10,7 @@ import { BaseStatPicker, type DefinedBaseStatPickerProps } from "../../common";
 import { StatPickerMemo as StatPicker } from "../../common/StatPicker";
 import { SpecialActions } from "../special/SpecialActions";
 
-const BaseBackground = withStat(Action, {
+const BaseBackground = withStat(ActionStatBackground, {
 	height: assetsSize.action,
 	ratio: gameAssets.action.ratio,
 });
