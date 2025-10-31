@@ -1,23 +1,15 @@
-import {
-	defaultFactionBackgroundImage,
-	factionBackgroundImages,
-} from "@assets/images/game/faction/background";
+import { factionBackgroundImages } from "@assets/images/game/faction/background";
 import { Image, type ImageProps } from "react-native";
 import type { PropsWithFaction } from "../../model";
 
-export type FactionBackgroundProps = ImageProps &
-	PropsWithFaction & {
-		enabled?: boolean;
-	};
+export type FactionBackgroundProps = ImageProps & PropsWithFaction;
 
 export const FactionBackground = ({
 	faction,
-	enabled = true,
+	source,
 	...props
 }: FactionBackgroundProps) => {
 	const background = factionBackgroundImages[faction];
 
-	const source = enabled ? background : defaultFactionBackgroundImage;
-
-	return <Image {...props} source={source} />;
+	return <Image {...props} source={source ?? background} />;
 };

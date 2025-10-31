@@ -1,4 +1,6 @@
-import { PlatformFragment, Title } from "@shared/ui";
+import { selectArtworksEnabled } from "@modules/core/theme/shared/lib";
+import { useAppSelector } from "@shared/lib";
+import { Title } from "@shared/ui";
 import {
 	ContentPage,
 	type ContentPageProps,
@@ -10,6 +12,7 @@ import { contactLinks, donateLinks } from "./links";
 export type SupportPageProps = Omit<ContentPageProps, "title">;
 export const SupportPage = (props: SupportPageProps) => {
 	const { t } = useTranslation();
+	const artworksEnabled = useAppSelector(selectArtworksEnabled);
 
 	return (
 		<ContentPage {...props} title="Support">
@@ -20,13 +23,13 @@ export const SupportPage = (props: SupportPageProps) => {
 				))}
 			</C.List>
 			<C.Cthulhu />
-			<PlatformFragment except="ios">
+			{artworksEnabled && (
 				<C.List>
 					{donateLinks.map((item) => (
 						<C.Button key={item.id} {...item} />
 					))}
 				</C.List>
-			</PlatformFragment>
+			)}
 		</ContentPage>
 	);
 };

@@ -21,7 +21,9 @@ export const BoardLoader = ({ children }: PropsWithChildren) => {
 						showProgress={showProgress}
 						showNumericProgress
 					>
-						<C.LoadingText>{text}</C.LoadingText>
+						<C.Content>
+							<C.LoadingText>{text}</C.LoadingText>
+						</C.Content>
 					</C.Loader>
 					<BoardDescriptionLoadProvider />
 				</>

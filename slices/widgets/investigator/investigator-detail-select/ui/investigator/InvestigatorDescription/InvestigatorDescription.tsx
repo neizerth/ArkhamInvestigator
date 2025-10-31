@@ -1,6 +1,4 @@
 import { selectTrackXP } from "@modules/board/base/shared/lib";
-import { openArtworkModal } from "@modules/core/theme/entities/lib/store/features/openArtworkModal";
-import { selectArtworksEnabled } from "@modules/core/theme/shared/lib";
 import { getSignatureImageUrl } from "@modules/signature/base/shared/api";
 import {
 	getBoardStats,
@@ -8,7 +6,6 @@ import {
 	useAppDispatch,
 	useAppSelector,
 } from "@shared/lib";
-import { useCallback } from "react";
 import { selectCurrentSignature } from "../../../lib";
 import * as C from "./InvestigatorDescription.components";
 export const InvestigatorDescription = () => {
@@ -16,11 +13,6 @@ export const InvestigatorDescription = () => {
 	const signature = useAppSelector(selectCurrentSignature);
 	const skinId = useAppSelector(selectCurrentSkinId);
 	const trackXP = useAppSelector(selectTrackXP);
-	const artworksEnabled = useAppSelector(selectArtworksEnabled);
-
-	const handleOpenArtworkModal = useCallback(() => {
-		dispatch(openArtworkModal());
-	}, [dispatch]);
 
 	if (!signature) {
 		return;
@@ -38,7 +30,6 @@ export const InvestigatorDescription = () => {
 	const traits = signature.traits;
 
 	const stats = getBoardStats(signature);
-	const faction = signature.faction_code;
 
 	return (
 		<C.Container>
@@ -48,15 +39,9 @@ export const InvestigatorDescription = () => {
 					<C.Skills {...stats} />
 					<C.Stats {...stats} />
 				</C.Details>
-				{artworksEnabled ? (
-					<C.ImageContainer>
-						<C.Image source={source} />
-					</C.ImageContainer>
-				) : (
-					<C.FactionPlaceholder onPress={handleOpenArtworkModal}>
-						<C.Faction faction={faction} />
-					</C.FactionPlaceholder>
-				)}
+				<C.ImageContainer>
+					<C.Image source={source} />
+				</C.ImageContainer>
 			</C.MainInfo>
 			<C.InvestigatorTextContainer>
 				<C.InvestigatorText value={text} />

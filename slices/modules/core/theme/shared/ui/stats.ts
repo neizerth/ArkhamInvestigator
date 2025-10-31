@@ -1,7 +1,7 @@
 import * as basic from "@assets/images/theme/basic";
 import * as ffg from "@assets/images/theme/ffg";
 
-import { withThemeBackground } from "./withThemeBackground";
+import { withThemeBackground } from "./hoc";
 
 export const ActionStatBackground = withThemeBackground({
 	source: basic.actionImage,

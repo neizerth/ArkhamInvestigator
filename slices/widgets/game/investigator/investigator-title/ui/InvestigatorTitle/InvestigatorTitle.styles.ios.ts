@@ -90,6 +90,7 @@ export const getTitleStyle = (options: GetTitleStyleOptions) => {
 		mystic: {
 			title: {
 				paddingTop: "2%",
+				height: "53%",
 			},
 			background: {
 				gap: 0,

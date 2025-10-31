@@ -1,18 +1,10 @@
+import { CopyText } from "@modules/core/clipboard/entities/ui";
 import { selectArtworksEnabled } from "@modules/core/theme/shared/lib";
 import { selectMediaVersion } from "@modules/signature/base/shared/lib";
-import { DEVICE_FONT_SCALE, DPR } from "@shared/config";
+import { ASSET_URL, DEVICE_FONT_SCALE, DPR } from "@shared/config";
 import { BUILD_ID, BUILD_VERSION } from "@shared/config/app";
-import { useAppSelector } from "@shared/lib";
-import {
-	A,
-	Bold,
-	Break,
-	List,
-	Paragraph,
-	PlatformFragment,
-	Rule,
-	Title,
-} from "@shared/ui";
+import { stringToHash, useAppSelector } from "@shared/lib";
+import { A, Bold, Break, List, Paragraph, Rule, Text, Title } from "@shared/ui";
 import {
 	ContentPage,
 	type ContentPageProps,
@@ -25,6 +17,8 @@ export const AboutPage = (props: AboutPageProps) => {
 	const { t } = useTranslation();
 	const mediaVersion = useAppSelector(selectMediaVersion);
 	const artworksEnabled = useAppSelector(selectArtworksEnabled);
+
+	const assetUrl = stringToHash(ASSET_URL);
 
 	return (
 		<ContentPage {...props} title="About">
@@ -126,17 +120,17 @@ export const AboutPage = (props: AboutPageProps) => {
 				@bezmyateznost, @avblrpa, @Lefebvre1121, @galen_ice
 			</Paragraph>
 			<Title>{t`Sponsors`}</Title>
-			<Paragraph>
-				<PlatformFragment except="ios">
-					<A href="https://www.patreon.com/arkhamdivider">Patreon:</A>
-					<Break />
-				</PlatformFragment>
+
+			{artworksEnabled && (
+				<A href="https://www.patreon.com/arkhamdivider">Patreon:</A>
+			)}
+			<Text>
 				@RecedingSamson, @Pink_hawk, @felice, The 1 Player Podcast, Andy
 				Lindberg, Nathan Wurschmidt
 				<Break />
 				<Rule />
 				@kolorono, @Rick_Freydin
-			</Paragraph>
+			</Text>
 			<Title>{t`Special Thanks`}</Title>
 			<List>
 				<List.Item>{t`about.credits.beth`}</List.Item>
@@ -151,6 +145,11 @@ export const AboutPage = (props: AboutPageProps) => {
 				</List.Item>
 				<List.Item>
 					<Bold>Media Version</Bold>: {mediaVersion}
+				</List.Item>
+				<List.Item>
+					<CopyText copyText={ASSET_URL}>
+						<Bold>Data URL hash</Bold>: 0x{assetUrl}
+					</CopyText>
 				</List.Item>
 			</List>
 			<Title>{t`Device Info`}</Title>

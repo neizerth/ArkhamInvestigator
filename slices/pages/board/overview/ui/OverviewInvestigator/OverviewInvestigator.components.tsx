@@ -1,6 +1,6 @@
 import { Alegreya } from "@assets/fonts";
+import { ThemeSignaturePreview } from "@modules/core/theme/features/ui";
 import { FactionView } from "@modules/faction/entities/ui";
-import { SignaturePreview } from "@modules/signature/base/entities/ui";
 import { font, size } from "@shared/config";
 import { Row, TextView } from "@shared/ui";
 import { InvestigatorSkillsPreview } from "@widgets/investigator/investigator-skills-preview";
@@ -22,7 +22,9 @@ export const Content: typeof Row = styled(Row)`
   gap: ${size.gap.default}px;
 `;
 
-export const Image: typeof SignaturePreview = styled(SignaturePreview)`
+export const Image: typeof ThemeSignaturePreview = styled(
+	ThemeSignaturePreview,
+)`
   border-radius: ${size.borderRadius.default}px;
 `;
 

@@ -1,7 +1,5 @@
 import { Alegreya } from "@assets/fonts";
 import { GameText } from "@modules/core/theme/shared/ui";
-import { TouchableOpacity } from "@modules/core/touch/shared/ui";
-import { FactionView } from "@modules/faction/entities/ui";
 import { color, font, size } from "@shared/config";
 import { Column, Row, UnscaledText } from "@shared/ui";
 import { Image as BaseImage } from "expo-image";
@@ -98,19 +96,4 @@ export const Counters: typeof InvestigatorCounters = styled(
 	InvestigatorCounters,
 )`
   flex: 1;
-`;
-
-export const FactionPlaceholder: typeof TouchableOpacity = styled(
-	TouchableOpacity,
-)`
-  ${imageStyle}
-`;
-
-export const Faction: typeof FactionView = styled(FactionView).attrs({
-	contentContainerStyle: {
-		flex: 1,
-	},
-})`
-  font-size: 50px;
-  color: ${color.dark10};
 `;

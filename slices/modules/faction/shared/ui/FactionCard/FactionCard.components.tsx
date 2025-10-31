@@ -5,7 +5,7 @@ import type { TextProps, ViewProps } from "react-native";
 
 import { Alegreya } from "@assets/fonts";
 import { GameText } from "@modules/core/theme/shared/ui/GameText";
-import { ThemeFactionFontIcon } from "@modules/core/theme/shared/ui/ThemeFactionFontIcon";
+import { ThemeFactionFontIcon } from "@modules/core/theme/shared/ui/faction/ThemeFactionFontIcon";
 import { TouchableOpacity } from "@modules/core/touch/shared/ui";
 import type { Faction } from "@shared/model";
 import type { PropsWithFaction } from "@shared/model/ui";

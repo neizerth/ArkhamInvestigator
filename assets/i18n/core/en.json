@@ -266,6 +266,8 @@
 	"update.updated": "The application has been updated to version {{version}}",
 	"update.failed": "The application update failed: {{error}}",
 
+	"clipboard.successCopy": "Text copied to clipboard",
+
 	"Defeated": "Defeated",
 	"Change": "Change",
 

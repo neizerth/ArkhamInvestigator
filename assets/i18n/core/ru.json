@@ -270,6 +270,8 @@
 
 	"navigation.animation": "Анимация экранов",
 
+	"clipboard.successCopy": "Текст успешно скопирован",
+
 	"Defeated": "Поражение",
 	"Change": "Сменить",
 
@@ -396,5 +398,6 @@
 	"Clear download queue": "Очистить очередь загрузок",
 	"Check Data Updates": "Проверить обновления данных",
 
-	"Install": "Установить"
+	"Install": "Установить",
+	"Remove artworks url": "Убрать URL иллюстраций"
 }

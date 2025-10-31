@@ -1,4 +1,5 @@
 import { Arkhamic } from "@assets/fonts";
+import { ThemeFactionTitleBackground } from "@modules/core/theme/shared/ui";
 import {
 	Pressable,
 	TouchableOpacity,
@@ -9,7 +10,6 @@ import { withIcon } from "@shared/lib/hoc";
 import {
 	type DefinedIconProps,
 	Icon,
-	ImageBackground,
 	type ImageBackgroundProps,
 	Row,
 	UnscaledText,
@@ -18,7 +18,9 @@ import type { FC } from "react";
 import { type ImageProps, View } from "react-native";
 import styled, { css } from "styled-components/native";
 
-export const Background: FC<ImageBackgroundProps> = styled(ImageBackground)`
+export const Background: FC<ImageBackgroundProps> = styled(
+	ThemeFactionTitleBackground,
+)`
   ${({ width, height }: ImageProps) => css`
     width: ${width}px;
     height: ${height}px;

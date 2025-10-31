@@ -4,3 +4,4 @@ export * from "./FactionDescription";
 export * from "./icons";
 export * from "./FactionSVGPattern";
 export * from "./FactionCard";
+export * from "./FactionTitleBackground";

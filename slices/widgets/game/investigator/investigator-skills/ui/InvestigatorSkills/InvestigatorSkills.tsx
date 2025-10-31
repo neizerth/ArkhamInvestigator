@@ -1,6 +1,7 @@
 import { defaultSkillImage, skillsImages } from "@assets/images/game/skills";
 import { selectArtworksEnabled } from "@modules/core/theme/shared/lib";
-import { getFactionImage, useAppSelector } from "@shared/lib";
+import { getFactionImage } from "@modules/faction/shared/lib";
+import { useAppSelector } from "@shared/lib";
 import type { InvestigatorSkillType, PropsWithFaction } from "@shared/model";
 import type React from "react";
 import { useCallback } from "react";

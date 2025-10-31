@@ -1,4 +1,3 @@
-import { selectArtworksEnabled } from "@modules/core/theme/shared/lib";
 import type { FactionBackgroundProps as BackgroundProps } from "@modules/faction/shared/ui";
 import { selectCurrentFaction } from "@modules/mechanics/board/base/entities/lib";
 import { useAppSelector } from "@shared/lib";
@@ -8,9 +7,6 @@ export type FactionBackgroundProps = Omit<BackgroundProps, "faction">;
 
 export const FactionBackground = (props: FactionBackgroundProps) => {
 	const faction = useAppSelector(selectCurrentFaction);
-	const artworksEnabled = useAppSelector(selectArtworksEnabled);
 
-	return (
-		<C.Background {...props} faction={faction} enabled={artworksEnabled} />
-	);
+	return <C.Background {...props} faction={faction} />;
 };
