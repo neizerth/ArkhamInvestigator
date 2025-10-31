@@ -5,12 +5,9 @@ import { externalImagesDiskPath } from "@modules/core/assets/base/shared/config"
 import { reloadExternalAssets } from "@modules/core/assets/base/shared/lib";
 import { clearDownloadQueue } from "@modules/core/assets/download-queue/shared/lib";
 import { removeDirectory } from "@modules/core/disk/entities/removeDirectory";
-import {
-	selectArtworksEnabled,
-	setArtworkUrl,
-} from "@modules/core/theme/shared/lib";
+import { setArtworkUrl } from "@modules/core/theme/shared/lib";
 import { ArtworksFragment } from "@modules/core/theme/shared/ui";
-import { useAppDispatch, useAppSelector } from "@shared/lib";
+import { useAppDispatch } from "@shared/lib";
 import { useTranslation } from "react-i18next";
 import type { ViewProps } from "react-native";
 import * as C from "./AppDiagnostics.components";
@@ -21,7 +18,6 @@ export const AppDiagnostics = (props: AppDiagnosticsProps) => {
 	const { t } = useTranslation();
 
 	const dispatch = useAppDispatch();
-	const artworksEnabled = useAppSelector(selectArtworksEnabled);
 
 	const clearCache = () => {
 		dispatch(clearImageCache());

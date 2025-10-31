@@ -1,15 +1,9 @@
 import { setShowDescription } from "@modules/board/base/shared/lib";
 import { goToPage } from "@modules/core/router/shared/lib";
-import { selectArtworksEnabled } from "@modules/core/theme/shared/lib";
 import { ArtworksFragment } from "@modules/core/theme/shared/ui";
 import { changeSignatureDetails } from "@modules/signature/base/entities/lib/store/features/changeSignatureDetails/changeSignatureDetails";
 import { routes } from "@shared/config";
-import {
-	delay,
-	setReplaceInvestigator,
-	useAppDispatch,
-	useAppSelector,
-} from "@shared/lib";
+import { delay, setReplaceInvestigator, useAppDispatch } from "@shared/lib";
 import { useCallback } from "react";
 import type { ViewProps } from "react-native-svg/lib/typescript/fabric/utils";
 import * as C from "./BoardDescriptionMenu.components";
@@ -18,8 +12,6 @@ export type BoardDescriptionMenuProps = ViewProps;
 
 export const BoardDescriptionMenu = (props: BoardDescriptionMenuProps) => {
 	const dispatch = useAppDispatch();
-
-	const artworksEnabled = useAppSelector(selectArtworksEnabled);
 
 	const hide = useCallback(async () => {
 		dispatch(setShowDescription(false));

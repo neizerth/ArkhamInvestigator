@@ -1,6 +1,4 @@
-import { selectArtworksEnabled } from "@modules/core/theme/shared/lib";
 import { ArtworksFragment } from "@modules/core/theme/shared/ui";
-import { useAppSelector } from "@shared/lib";
 import { Title } from "@shared/ui";
 import {
 	ContentPage,
@@ -13,7 +11,6 @@ import { contactLinks, donateLinks } from "./links";
 export type SupportPageProps = Omit<ContentPageProps, "title">;
 export const SupportPage = (props: SupportPageProps) => {
 	const { t } = useTranslation();
-	const artworksEnabled = useAppSelector(selectArtworksEnabled);
 
 	return (
 		<ContentPage {...props} title="Support">

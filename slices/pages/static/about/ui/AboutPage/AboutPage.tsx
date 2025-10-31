@@ -1,5 +1,4 @@
 import { CopyText } from "@modules/core/clipboard/entities/ui";
-import { selectArtworksEnabled } from "@modules/core/theme/shared/lib";
 import { ArtworksFragment } from "@modules/core/theme/shared/ui";
 import { selectMediaVersion } from "@modules/signature/base/shared/lib";
 import { ASSET_URL, DEVICE_FONT_SCALE, DPR } from "@shared/config";
@@ -17,7 +16,6 @@ export type AboutPageProps = Omit<ContentPageProps, "title">;
 export const AboutPage = (props: AboutPageProps) => {
 	const { t } = useTranslation();
 	const mediaVersion = useAppSelector(selectMediaVersion);
-	const artworksEnabled = useAppSelector(selectArtworksEnabled);
 
 	const assetUrl = stringToHash(ASSET_URL);
 
