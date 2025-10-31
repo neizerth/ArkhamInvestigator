@@ -1,9 +1,9 @@
+import { ThemeFactionFontIcon } from "@modules/core/theme/shared/ui";
+import { getFactionColor } from "@modules/faction/shared/lib";
 import { color, size } from "@shared/config";
 import type { PropsWithFaction } from "@shared/model";
 import { View, type ViewProps } from "react-native";
 import styled, { css } from "styled-components/native";
-import { getFactionColor } from "../../lib";
-import { FactionFontIcon } from "../FactionFontIcon";
 
 export type ContainerProps = ViewProps &
 	PropsWithFaction & {
@@ -31,5 +31,5 @@ export const Container: typeof View = styled(View)`
   `}
 `;
 
-export const Icon: typeof FactionFontIcon = styled(FactionFontIcon)`
+export const Icon: typeof ThemeFactionFontIcon = styled(ThemeFactionFontIcon)`
 `;

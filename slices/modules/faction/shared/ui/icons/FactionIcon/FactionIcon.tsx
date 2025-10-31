@@ -1,5 +1,5 @@
 import type { ViewProps } from "react-native";
-import type { PropsWithFaction } from "../../model";
+import type { PropsWithFaction } from "../../../model";
 import { Container, FactionImage, NeutralIcon } from "./FactionIcon.components";
 
 export type FactionIconProps = PropsWithFaction & {

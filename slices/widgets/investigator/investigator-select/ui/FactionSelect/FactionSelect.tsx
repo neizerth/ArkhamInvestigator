@@ -1,4 +1,4 @@
-import { setFactionFilter } from "@modules/faction/entities/faction-filter/set-faction-filter";
+import { setFactionFilter } from "@modules/faction/entities/lib/store/features/set-faction-filter";
 import {
 	FactionSelect as Select,
 	type FactionSelectProps as SelectProps,

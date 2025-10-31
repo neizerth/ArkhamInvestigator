@@ -1,6 +1,6 @@
 import { Alegreya } from "@assets/fonts";
+import { ThemeFactionFontIcon } from "@modules/core/theme/shared/ui";
 import { TouchableOpacity } from "@modules/core/touch/shared/ui";
-import { FactionFontIcon } from "@modules/faction/shared/ui";
 import { color, font, size } from "@shared/config";
 import { Icon as BaseIcon, Row, UnscaledText } from "@shared/ui";
 import { Image } from "expo-image";
@@ -47,7 +47,9 @@ export const Icon: typeof BaseIcon = styled(BaseIcon).attrs({
     font-size: ${font.size.default}px
   `;
 
-export const Faction: typeof FactionFontIcon = styled(FactionFontIcon)`
+export const Faction: typeof ThemeFactionFontIcon = styled(
+	ThemeFactionFontIcon,
+)`
     font-size: ${font.size.default}px;
     width: 24px;
     text-align: center;

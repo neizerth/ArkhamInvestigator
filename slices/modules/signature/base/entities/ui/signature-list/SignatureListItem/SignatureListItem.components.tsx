@@ -1,10 +1,10 @@
 import { Alegreya } from "@assets/fonts";
+import { ThemeFactionFontIcon } from "@modules/core/theme/shared/ui";
 import {
 	TouchableOpacity,
 	type TouchableOpacityProps,
 } from "@modules/core/touch/shared/ui";
 import type { PropsWithFaction } from "@modules/faction/shared/model";
-import { FactionFontIcon } from "@modules/faction/shared/ui";
 import { color, factionColor, font, size } from "@shared/config";
 import { Icon, IconNumber, type IconProps, Row, Text } from "@shared/ui";
 import type { FC } from "react";
@@ -34,8 +34,8 @@ export const Content: typeof Row = styled(Row)`
 	border-bottom-color: ${color.dark20};
 `;
 
-export const FactionIcon: typeof FactionFontIcon = styled(
-	FactionFontIcon,
+export const FactionIcon: typeof ThemeFactionFontIcon = styled(
+	ThemeFactionFontIcon,
 ).attrs({
 	colored: true,
 })`

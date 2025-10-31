@@ -2,13 +2,16 @@ import { color, factionColor } from "@shared/config";
 import type { PropsWithFaction } from "@shared/model";
 import Color from "color";
 
-type Options = PropsWithFaction & {
+export type GetFactionColorProps = PropsWithFaction & {
 	colored?: boolean;
 	light?: boolean;
 	defaultColor?: string;
 	alpha?: number;
 };
-export const getFactionColor = ({ alpha = 1, ...options }: Options) => {
+export const getFactionColor = ({
+	alpha = 1,
+	...options
+}: GetFactionColorProps) => {
 	const color = getColor(options);
 	if (!color) {
 		return;
@@ -22,7 +25,7 @@ export const getColor = ({
 	colored,
 	light = false,
 	defaultColor = color.dark10,
-}: Options) => {
+}: GetFactionColorProps) => {
 	if (!colored) {
 		return defaultColor;
 	}

@@ -1,9 +1,9 @@
+import { setModalValue } from "@modules/core/modal/shared/base/lib";
 import { useAppDispatch } from "@shared/lib";
 import type { Defined } from "@shared/model";
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import type { TextInputProps } from "react-native";
-import { setModalValue } from "../../../base/lib";
 import type { BaseModalAction } from "../../../base/model";
 import type { FactionModalProps } from "../../../base/ui";
 import type { PromptModalData } from "../../model";

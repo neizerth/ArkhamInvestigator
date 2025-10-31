@@ -24,7 +24,7 @@ export const SignatureListItem = ({
 	return (
 		<C.Container {...props}>
 			<C.Content>
-				{showIcons && <C.FactionIcon faction={signature.faction_code} />}
+				<C.FactionIcon faction={signature.faction_code} />
 				<C.Main>
 					<C.Header>
 						<C.Title faction={faction}>{title}</C.Title>

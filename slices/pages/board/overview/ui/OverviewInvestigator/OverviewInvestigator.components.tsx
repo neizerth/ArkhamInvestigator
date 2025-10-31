@@ -1,5 +1,5 @@
 import { Alegreya } from "@assets/fonts";
-import { FactionView } from "@modules/faction/shared/ui";
+import { FactionView } from "@modules/faction/entities/ui";
 import { SignaturePreview } from "@modules/signature/base/entities/ui";
 import { font, size } from "@shared/config";
 import { Row, TextView } from "@shared/ui";

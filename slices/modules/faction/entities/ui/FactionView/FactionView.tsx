@@ -1,9 +1,9 @@
+import type { ThemeFactionFontIconProps } from "@modules/core/theme/shared/ui";
 import { pick } from "ramda";
 import type { ViewProps } from "react-native";
-import type { FactionFontIconProps } from "../FactionFontIcon";
 import * as C from "./FactionView.components";
 
-export type FactionViewProps = FactionFontIconProps & {
+export type FactionViewProps = ThemeFactionFontIconProps & {
 	contentContainerStyle?: ViewProps["style"];
 	selected?: boolean;
 };

@@ -4,7 +4,8 @@ import { ScrollView, View } from "react-native";
 import type { TextProps, ViewProps } from "react-native";
 
 import { Alegreya } from "@assets/fonts";
-import { GameText } from "@modules/core/theme/shared/ui";
+import { GameText } from "@modules/core/theme/shared/ui/GameText";
+import { ThemeFactionFontIcon } from "@modules/core/theme/shared/ui/ThemeFactionFontIcon";
 import { TouchableOpacity } from "@modules/core/touch/shared/ui";
 import type { Faction } from "@shared/model";
 import type { PropsWithFaction } from "@shared/model/ui";
@@ -16,8 +17,7 @@ import {
 	Row,
 } from "@shared/ui";
 import styled, { css } from "styled-components/native";
-import { FactionFontIcon } from "../../../FactionFontIcon";
-import { FactionSVGPattern } from "../../../FactionSVGPattern";
+import { FactionSVGPattern } from "../FactionSVGPattern";
 export type ElementWithFaction<T> = FC<T & PropsWithFaction>;
 export type ViewWithFaction = ElementWithFaction<ViewProps>;
 export type TextWithFaction = ElementWithFaction<TextProps>;
@@ -106,7 +106,7 @@ export const OKBackground: typeof Background = styled(Background).attrs({
   position: absolute;
 `;
 
-export const Icon: typeof FactionFontIcon = styled(FactionFontIcon)`
+export const Icon: typeof ThemeFactionFontIcon = styled(ThemeFactionFontIcon)`
   font-size: 32px;
   line-height: 32px;
   color: ${textColor};
