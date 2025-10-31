@@ -47,3 +47,4 @@ ArkhamIcons.ttf
 ArkhamIcons.json
 
 !android/**/*.pem
+/credentials.json
