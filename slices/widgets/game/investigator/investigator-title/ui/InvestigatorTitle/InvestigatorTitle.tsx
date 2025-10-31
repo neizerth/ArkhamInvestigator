@@ -1,6 +1,6 @@
-import { selectArtworksEnabled } from "@modules/core/theme/shared/lib";
+import { ArtworksFragment } from "@modules/core/theme/shared/ui";
 import { useSwipe } from "@modules/core/touch/shared/lib";
-import { formatGameText, getActiveOpacity, useAppSelector } from "@shared/lib";
+import { formatGameText, getActiveOpacity } from "@shared/lib";
 import type { PropsWithFaction } from "@shared/model";
 import type { ImageBackgroundProps } from "@shared/ui";
 import { memo, useMemo } from "react";
@@ -49,8 +49,6 @@ export const InvestigatorTitle = (props: InvestigatorTitleProps) => {
 		entityId,
 		single,
 	} = props;
-
-	const artworksEnabled = useAppSelector(selectArtworksEnabled);
 
 	const name = formatGameText(props.name);
 	const subname = formatGameText(props.subname);
@@ -101,7 +99,11 @@ export const InvestigatorTitle = (props: InvestigatorTitleProps) => {
 								activeOpacity={titleOpacity}
 								onPress={onTitlePress}
 							>
-								{unique && artworksEnabled && <C.Unique style={style.unique} />}
+								{unique && (
+									<ArtworksFragment>
+										<C.Unique style={style.unique} />
+									</ArtworksFragment>
+								)}
 
 								<C.TitleText style={style.titleText}>{name}</C.TitleText>
 

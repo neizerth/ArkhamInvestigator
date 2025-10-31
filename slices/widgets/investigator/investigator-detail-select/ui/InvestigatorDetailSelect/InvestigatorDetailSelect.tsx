@@ -19,7 +19,6 @@ import {
 	getSkins,
 	setSelection,
 } from "../../lib";
-// import { DataSectionMemo as DataSection } from "../data";
 import { InvestigatorDescription } from "../investigator";
 import * as C from "./InvestigatorDetailSelect.components";
 
@@ -118,7 +117,7 @@ export const InvestigatorDetailSelect = () => {
 								selectedId={skinId}
 								showIcon={false}
 								size={CARD_SIZE}
-								preview={artworksEnabled}
+								preview
 								showNone
 							/>
 						)}

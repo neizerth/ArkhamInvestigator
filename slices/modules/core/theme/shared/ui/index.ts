@@ -1,4 +1,4 @@
 export * from "./GameText";
 export * from "./stats";
 export * from "./faction";
-export * from "./ArtworksView";
+export * from "./ArtworksFragment";

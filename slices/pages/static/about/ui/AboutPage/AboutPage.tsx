@@ -1,5 +1,6 @@
 import { CopyText } from "@modules/core/clipboard/entities/ui";
 import { selectArtworksEnabled } from "@modules/core/theme/shared/lib";
+import { ArtworksFragment } from "@modules/core/theme/shared/ui";
 import { selectMediaVersion } from "@modules/signature/base/shared/lib";
 import { ASSET_URL, DEVICE_FONT_SCALE, DPR } from "@shared/config";
 import { BUILD_ID, BUILD_VERSION } from "@shared/config/app";
@@ -22,43 +23,39 @@ export const AboutPage = (props: AboutPageProps) => {
 
 	return (
 		<ContentPage {...props} title="About">
-			{artworksEnabled && (
-				<>
-					<Paragraph>
-						<Trans
-							i18nKey="about.app"
-							components={{
-								FFG: (
-									<A href="https://www.fantasyflightgames.com/en/products/arkham-horror-the-card-game/" />
-								),
-							}}
-						/>
-					</Paragraph>
-					<Paragraph>{t`about.disclaimer`}</Paragraph>
-					<Paragraph>
-						<Trans
-							i18nKey="about.credits"
-							components={{
-								Author: <A href="https://github.com/neizerth" />,
-								Repo: (
-									<A href="https://github.com/neizerth/ArkhamInvestigator" />
-								),
-								Issues: (
-									<A href="https://github.com/neizerth/ArkhamInvestigator/issues" />
-								),
-								Discord: (
-									<A href="https://discord.com/channels/225349059689447425/1351550310887460926" />
-								),
-								Telegram: (
-									<A href="https://discord.com/channels/225349059689447425/1351550310887460926" />
-								),
-							}}
-						/>
-					</Paragraph>
+			<ArtworksFragment>
+				<Paragraph>
+					<Trans
+						i18nKey="about.app"
+						components={{
+							FFG: (
+								<A href="https://www.fantasyflightgames.com/en/products/arkham-horror-the-card-game/" />
+							),
+						}}
+					/>
+				</Paragraph>
+				<Paragraph>{t`about.disclaimer`}</Paragraph>
+				<Paragraph>
+					<Trans
+						i18nKey="about.credits"
+						components={{
+							Author: <A href="https://github.com/neizerth" />,
+							Repo: <A href="https://github.com/neizerth/ArkhamInvestigator" />,
+							Issues: (
+								<A href="https://github.com/neizerth/ArkhamInvestigator/issues" />
+							),
+							Discord: (
+								<A href="https://discord.com/channels/225349059689447425/1351550310887460926" />
+							),
+							Telegram: (
+								<A href="https://discord.com/channels/225349059689447425/1351550310887460926" />
+							),
+						}}
+					/>
+				</Paragraph>
 
-					<Paragraph>{t`about.artwork`}</Paragraph>
-				</>
-			)}
+				<Paragraph>{t`about.artwork`}</Paragraph>
+			</ArtworksFragment>
 			<Title>{t`Hall of Fame`}</Title>
 			<List>
 				<List.Item>
@@ -89,11 +86,11 @@ export const AboutPage = (props: AboutPageProps) => {
 			</List>
 			<Title>{t`Credits`}</Title>
 			<List>
-				{artworksEnabled && (
+				<ArtworksFragment>
 					<List.Item>
 						<Bold>{t`Card icons`}</Bold>: Fantasy Flight Games
 					</List.Item>
-				)}
+				</ArtworksFragment>
 				<List.Item>
 					<Bold>{t`Button Vector Art`}</Bold>: vecteezy.com
 				</List.Item>
@@ -121,9 +118,9 @@ export const AboutPage = (props: AboutPageProps) => {
 			</Paragraph>
 			<Title>{t`Sponsors`}</Title>
 
-			{artworksEnabled && (
+			<ArtworksFragment>
 				<A href="https://www.patreon.com/arkhamdivider">Patreon:</A>
-			)}
+			</ArtworksFragment>
 			<Text>
 				@RecedingSamson, @Pink_hawk, @felice, The 1 Player Podcast, Andy
 				Lindberg, Nathan Wurschmidt

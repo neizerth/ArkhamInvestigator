@@ -1,8 +1,8 @@
 import { usePage } from "@modules/core/router/shared/lib";
 import { openArtworkModal } from "@modules/core/theme/entities/lib/store/features/openArtworkModal";
-import { selectArtworksEnabled } from "@modules/core/theme/shared/lib";
+import { ArtworksFragment } from "@modules/core/theme/shared/ui";
 import { routes } from "@shared/config";
-import { useAppDispatch, useAppSelector } from "@shared/lib";
+import { useAppDispatch } from "@shared/lib";
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import type { ViewProps } from "react-native";
@@ -15,8 +15,6 @@ export const HomeMenu = (props: HomeMenuProps) => {
 	const { t } = useTranslation();
 	const dispatch = useAppDispatch();
 
-	const artworksEnabled = useAppSelector(selectArtworksEnabled);
-
 	const handleOpenThemeModal = useCallback(() => {
 		dispatch(openArtworkModal());
 	}, [dispatch]);
@@ -28,32 +26,32 @@ export const HomeMenu = (props: HomeMenuProps) => {
 						<C.Icon icon="name" />
 					</C.Button>
 
-					{artworksEnabled && (
+					<ArtworksFragment>
 						<C.Button onPress={goTo(routes.boardHelp)}>
 							<C.Icon icon="info" />
 						</C.Button>
-					)}
+					</ArtworksFragment>
 
 					<C.Button onPress={goTo(routes.support)}>
 						<C.Icon icon="heart" />
 					</C.Button>
 				</C.Left>
 				<C.Right>
-					{!artworksEnabled && (
+					<ArtworksFragment disabled>
 						<C.Button onPress={handleOpenThemeModal}>
 							<C.ThemeIcon icon="images" />
 						</C.Button>
-					)}
+					</ArtworksFragment>
 					<C.Button onPress={goTo(routes.settings)}>
 						<C.Icon icon="wrench" />
 					</C.Button>
 				</C.Right>
 			</C.ContentRow>
-			{!artworksEnabled && (
+			<ArtworksFragment disabled>
 				<C.ContentRow>
 					<C.Hint>{t("theme.installHint")}</C.Hint>
 				</C.ContentRow>
-			)}
+			</ArtworksFragment>
 		</C.Container>
 	);
 };

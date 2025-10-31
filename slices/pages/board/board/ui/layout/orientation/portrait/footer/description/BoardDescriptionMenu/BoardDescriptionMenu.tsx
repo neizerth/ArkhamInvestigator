@@ -1,6 +1,7 @@
 import { setShowDescription } from "@modules/board/base/shared/lib";
 import { goToPage } from "@modules/core/router/shared/lib";
 import { selectArtworksEnabled } from "@modules/core/theme/shared/lib";
+import { ArtworksFragment } from "@modules/core/theme/shared/ui";
 import { changeSignatureDetails } from "@modules/signature/base/entities/lib/store/features/changeSignatureDetails/changeSignatureDetails";
 import { routes } from "@shared/config";
 import {
@@ -47,9 +48,9 @@ export const BoardDescriptionMenu = (props: BoardDescriptionMenuProps) => {
 				icon="change-investigator"
 				onPress={onChangeInvestigator}
 			/>
-			{artworksEnabled && (
+			<ArtworksFragment>
 				<C.Button icon="investigator" onPress={onDetailsChange} />
-			)}
+			</ArtworksFragment>
 			<C.Hide onPress={hide} />
 		</C.Container>
 	);

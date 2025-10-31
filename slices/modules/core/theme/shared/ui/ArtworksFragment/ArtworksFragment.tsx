@@ -2,11 +2,14 @@ import { useAppSelector } from "@shared/lib";
 import type { PropsWithChildren } from "react";
 import { selectArtworksEnabled } from "../../lib";
 
-export type ArtworksViewProps = PropsWithChildren & {
+export type ArtworksFragmentProps = PropsWithChildren & {
 	disabled?: boolean;
 };
 
-export const ArtworksView = ({ disabled, children }: ArtworksViewProps) => {
+export const ArtworksFragment = ({
+	disabled,
+	children,
+}: ArtworksFragmentProps) => {
 	const artworksEnabled = useAppSelector(selectArtworksEnabled);
 
 	if (!artworksEnabled && !disabled) {

@@ -14,6 +14,7 @@ import type {
 import { usePageLoader } from "@modules/core/router/shared/lib";
 import { openArtworkModal } from "@modules/core/theme/entities/lib/store/features/openArtworkModal";
 import { selectArtworksEnabled } from "@modules/core/theme/shared/lib";
+import { ArtworksFragment } from "@modules/core/theme/shared/ui";
 import {
 	selectShowAdditionalInformation,
 	signedNumber,
@@ -162,7 +163,7 @@ export const Skill = ({ width, height, type, ...props }: SkillProps) => {
 						onLongPress={onLongPress}
 					/>
 				</C.ValueContainer>
-				{artworksEnabled && (
+				<ArtworksFragment>
 					<C.IconContainer>
 						<C.Icon
 							skillType={type}
@@ -170,7 +171,7 @@ export const Skill = ({ width, height, type, ...props }: SkillProps) => {
 							contentContainerStyle={style.iconContainer}
 						/>
 					</C.IconContainer>
-				)}
+				</ArtworksFragment>
 			</C.Row>
 			{touching && <C.Background style={style.background} />}
 		</C.Container>

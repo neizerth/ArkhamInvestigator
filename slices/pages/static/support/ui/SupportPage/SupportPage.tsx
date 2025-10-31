@@ -1,4 +1,5 @@
 import { selectArtworksEnabled } from "@modules/core/theme/shared/lib";
+import { ArtworksFragment } from "@modules/core/theme/shared/ui";
 import { useAppSelector } from "@shared/lib";
 import { Title } from "@shared/ui";
 import {
@@ -23,13 +24,13 @@ export const SupportPage = (props: SupportPageProps) => {
 				))}
 			</C.List>
 			<C.Cthulhu />
-			{artworksEnabled && (
+			<ArtworksFragment>
 				<C.List>
 					{donateLinks.map((item) => (
 						<C.Button key={item.id} {...item} />
 					))}
 				</C.List>
-			)}
+			</ArtworksFragment>
 		</ContentPage>
 	);
 };
