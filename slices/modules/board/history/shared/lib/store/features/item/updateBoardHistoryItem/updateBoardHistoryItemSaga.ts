@@ -3,7 +3,7 @@ import {
 	selectBoardById,
 	setBoardPart,
 } from "@modules/board/base/shared/lib";
-import { mergeDeepRight, propEq } from "ramda";
+import { mergeDeepRight, omit, propEq } from "ramda";
 import { put, select, takeEvery } from "redux-saga/effects";
 import { updateBoardHistoryItem } from "./updateBoardHistoryItem";
 
@@ -19,19 +19,22 @@ function* worker({ payload }: ReturnType<typeof updateBoardHistoryItem>) {
 	const index = board.history.findIndex(propEq(id, "id"));
 
 	if (index === -1) {
+		console.log("item not found", id);
 		return;
 	}
 
-	const item = mergeDeepRight(board.history[index], {
-		...data,
-	});
+	const historyItem = board.history[index];
+
+	const item = mergeDeepRight(historyItem, data);
 
 	const history = board.history.with(index, item);
+	const update = omit(["id"], item);
 
 	yield put(
 		setBoardPart({
 			boardId,
 			data: {
+				...update,
 				history,
 			},
 			history: false,
