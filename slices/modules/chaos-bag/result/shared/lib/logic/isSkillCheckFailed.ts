@@ -22,6 +22,10 @@ export const isSkillCheckFailed = (options: Options) => {
 
 	const { difficulty, difficultyType } = options;
 
+	if (difficulty === 0 && difficultyType === "gte") {
+		return false;
+	}
+
 	const result = getSkillCheckResult(options);
 
 	const passed =

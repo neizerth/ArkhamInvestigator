@@ -6,7 +6,7 @@ type Options = {
 	difficultyType: SkillCheckDifficultyType;
 };
 
-export const getSkillCheckResultSucceedBy = ({
+export const getSkillCheckResultSucceedByDiff = ({
 	result,
 	difficulty,
 	difficultyType,
@@ -15,6 +15,16 @@ export const getSkillCheckResultSucceedBy = ({
 
 	if (difficultyType === "gt") {
 		return diff - 1;
+	}
+	return diff;
+};
+
+export const getSkillCheckResultSucceedBy = (options: Options) => {
+	const { difficulty, difficultyType } = options;
+	const diff = getSkillCheckResultSucceedByDiff(options);
+
+	if (difficulty === 0 && difficultyType === "gte") {
+		return Math.max(diff, 0);
 	}
 	return diff;
 };
