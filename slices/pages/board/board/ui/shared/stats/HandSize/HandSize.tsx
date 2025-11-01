@@ -1,13 +1,12 @@
-import type { HealthProps as BaseHealthProps } from "@shared/ui";
+import type { HandSizeStatBackground } from "@modules/core/theme/shared/ui";
 import { range } from "ramda";
-import { useMemo } from "react";
+import { type ComponentProps, useMemo } from "react";
 import type { ViewStyle } from "react-native";
 import { useStat } from "../../../../lib/hooks/useStat";
 import * as C from "./HandSize.components";
-
-type HandSizeProps = BaseHealthProps & {
+type HandSizeProps = ComponentProps<typeof HandSizeStatBackground> & {
 	style?: ViewStyle;
-	contentContainerStyle?: BaseHealthProps["style"];
+	contentContainerStyle?: HandSizeProps["style"];
 };
 
 export const HandSize = ({

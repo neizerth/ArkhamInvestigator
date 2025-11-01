@@ -1,5 +1,5 @@
 import { useSwipe } from "@modules/core/touch/shared/lib";
-import { setFactionFilter } from "@modules/faction/entities/faction-filter/set-faction-filter";
+import { setFactionFilter } from "@modules/faction/entities/lib/store/features/set-faction-filter";
 import { factionFilterTypes } from "@modules/faction/shared/config";
 import {
 	getLoopNext,

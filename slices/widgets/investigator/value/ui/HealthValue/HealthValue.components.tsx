@@ -1,10 +1,13 @@
+import { HealthStatBackground } from "@modules/core/theme/shared/ui";
 import { color, gameAssets } from "@shared/config";
-import { Health, IconNumber, type IconNumberProps } from "@shared/ui";
+import { IconNumber, type IconNumberProps } from "@shared/ui";
 import { View } from "react-native";
 import styled, { css } from "styled-components/native";
 import { VALUE_HEIGHT } from "../../config";
 
-export const Container: typeof Health = styled(Health)`
+export const Container: typeof HealthStatBackground = styled(
+	HealthStatBackground,
+)`
 	position: relative;
   width: ${VALUE_HEIGHT * gameAssets.health.ratio}px;
   height: ${VALUE_HEIGHT}px;

@@ -43,9 +43,13 @@ const createSingleItemTypes = (options: CreateSingleItemTypesOptions) => {
 
 const needGrayscale = false;
 
-export const createDownloadQueueItems = (code: string): DownloadQueueItem[] => {
+export const createDownloadQueueItems = ({
+	code,
+	baseUrl,
+}: { code: string; baseUrl: string }): DownloadQueueItem[] => {
 	const baseImages = createSingleItemTypes({
 		code,
+		baseUrl,
 	});
 
 	if (!needGrayscale) {
@@ -55,6 +59,7 @@ export const createDownloadQueueItems = (code: string): DownloadQueueItem[] => {
 	const grayscaleImages = createSingleItemTypes({
 		code,
 		grayscale: true,
+		baseUrl,
 	});
 
 	return [...baseImages, ...grayscaleImages];

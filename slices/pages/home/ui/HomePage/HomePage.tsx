@@ -1,3 +1,4 @@
+import { ArtworksFragment } from "@modules/core/theme/shared/ui";
 import { getActiveOpacity } from "@shared/lib";
 import { useTranslation } from "react-i18next";
 import { useResumeGame, useStartGame } from "../../lib";
@@ -20,13 +21,11 @@ export const HomePage = () => {
 			{onResume && (
 				<C.ResumeButton onPress={onResume}>{t`Continue`}</C.ResumeButton>
 			)}
-			<C.Disclaimer>
-				<C.DisclaimerText>
-					Arkham Horror: The Card Game™ and all related content © Fantasy Flight
-					Games (FFG). This app is not produced, endorsed by or affiliated with
-					FFG.
-				</C.DisclaimerText>
-			</C.Disclaimer>
+			<ArtworksFragment>
+				<C.Disclaimer>
+					<C.DisclaimerText>{t`app.disclaimer`}</C.DisclaimerText>
+				</C.Disclaimer>
+			</ArtworksFragment>
 		</C.Container>
 	);
 };

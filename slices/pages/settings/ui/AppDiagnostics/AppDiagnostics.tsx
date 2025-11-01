@@ -5,6 +5,8 @@ import { externalImagesDiskPath } from "@modules/core/assets/base/shared/config"
 import { reloadExternalAssets } from "@modules/core/assets/base/shared/lib";
 import { clearDownloadQueue } from "@modules/core/assets/download-queue/shared/lib";
 import { removeDirectory } from "@modules/core/disk/entities/removeDirectory";
+import { setArtworkUrl } from "@modules/core/theme/shared/lib";
+import { ArtworksFragment } from "@modules/core/theme/shared/ui";
 import { useAppDispatch } from "@shared/lib";
 import { useTranslation } from "react-i18next";
 import type { ViewProps } from "react-native";
@@ -43,6 +45,10 @@ export const AppDiagnostics = (props: AppDiagnosticsProps) => {
 		);
 	};
 
+	const unsetArtworkUrl = () => {
+		dispatch(setArtworkUrl(null));
+	};
+
 	return (
 		<C.Container {...props}>
 			<C.Section title={t`Diagnostics`}>
@@ -67,13 +73,22 @@ export const AppDiagnostics = (props: AppDiagnosticsProps) => {
 						onPress={clearDownloads}
 					/>
 				</C.Row>
-				<C.Row>
-					<C.Button
-						text={t`Reload downloaded assets`}
-						icon="download"
-						onPress={reloadData}
-					/>
-				</C.Row>
+				<ArtworksFragment>
+					<C.Row>
+						<C.Button
+							text={t`Reload downloaded assets`}
+							icon="download"
+							onPress={reloadData}
+						/>
+					</C.Row>
+					<C.Row>
+						<C.Button
+							text={t`Remove artworks url`}
+							icon="link"
+							onPress={unsetArtworkUrl}
+						/>
+					</C.Row>
+				</ArtworksFragment>
 				<C.Row>
 					<C.Button text={t`Restart App`} icon="switch" onPress={restart} />
 				</C.Row>

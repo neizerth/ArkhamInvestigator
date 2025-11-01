@@ -4,7 +4,7 @@ import { openPrompt } from "./openPrompt";
 
 function* worker({ payload }: ReturnType<typeof openPrompt>) {
 	const { data } = payload;
-	const value = data?.defaultValue;
+	const value = data?.defaultValue ?? "";
 	yield put(
 		openModal({
 			...payload,

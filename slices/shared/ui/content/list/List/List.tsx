@@ -2,6 +2,7 @@ import { Children } from "react";
 import type { ViewProps, ViewStyle } from "react-native";
 import { v4 } from "uuid";
 import * as C from "./List.components";
+import { isValidListItem } from "./isValidListItem";
 
 export type ListProps = ViewProps & {
 	renderMarker?: (index: number) => React.ReactElement;
@@ -20,9 +21,10 @@ export const List = ({
 	renderMarker = defaultRenderMarker,
 	...props
 }: ListProps) => {
+	const items = Children.toArray(children).filter(isValidListItem);
 	return (
 		<C.Container {...props}>
-			{Children.map(children, (child, index) => (
+			{items.map((child, index) => (
 				<C.ListItem key={v4()} style={itemContainerStyle}>
 					<C.ListItemContent>
 						{renderMarker(index)}

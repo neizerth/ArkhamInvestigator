@@ -156,6 +156,11 @@ export const getTitleStyle = (options: GetTitleStyleOptions) => {
 				gap: "4%",
 			},
 		},
+		mystic: {
+			title: {
+				paddingTop: 0,
+			},
+		},
 	});
 
 	const getLocaleStyle = getKeyConfig<Partial<ReturnStyle>>({

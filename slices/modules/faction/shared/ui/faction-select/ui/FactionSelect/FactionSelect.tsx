@@ -1,4 +1,3 @@
-import { factionFilterTypes } from "@modules/faction/shared/config";
 import type { FactionFilterType } from "@shared/model";
 import { useCallback } from "react";
 import type { ViewProps } from "react-native";
@@ -7,11 +6,13 @@ import * as C from "./FactionSelect.components";
 export type FactionSelectProps = ViewProps & {
 	onChange?: (value: FactionFilterType) => void;
 	value?: FactionFilterType;
+	filters: FactionFilterType[];
 };
 
 export const FactionSelect = ({
 	value,
 	onChange,
+	filters,
 	...props
 }: FactionSelectProps) => {
 	const onPress = useCallback(
@@ -30,14 +31,14 @@ export const FactionSelect = ({
 	return (
 		<C.Container {...props}>
 			<C.Content>
-				{factionFilterTypes.map((item, index) => (
+				{filters.map((item, index) => (
 					<C.Button
 						key={item}
 						value={item}
 						selected={value === item}
 						onPress={onPress(item)}
 						first={index === 0}
-						last={index === item.length - 1}
+						last={index === filters.length - 1}
 					/>
 				))}
 			</C.Content>

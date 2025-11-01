@@ -1,5 +1,6 @@
 import { setShowDescription } from "@modules/board/base/shared/lib";
 import { goToPage } from "@modules/core/router/shared/lib";
+import { ArtworksFragment } from "@modules/core/theme/shared/ui";
 import { changeSignatureDetails } from "@modules/signature/base/entities/lib/store/features/changeSignatureDetails/changeSignatureDetails";
 import { routes } from "@shared/config";
 import { delay, setReplaceInvestigator, useAppDispatch } from "@shared/lib";
@@ -39,7 +40,9 @@ export const BoardDescriptionMenu = (props: BoardDescriptionMenuProps) => {
 				icon="change-investigator"
 				onPress={onChangeInvestigator}
 			/>
-			<C.Button icon="investigator" onPress={onDetailsChange} />
+			<ArtworksFragment>
+				<C.Button icon="investigator" onPress={onDetailsChange} />
+			</ArtworksFragment>
 			<C.Hide onPress={hide} />
 		</C.Container>
 	);

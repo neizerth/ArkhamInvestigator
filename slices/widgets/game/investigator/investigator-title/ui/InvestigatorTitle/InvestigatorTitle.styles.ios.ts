@@ -56,9 +56,22 @@ export const getTitleStyle = (options: GetTitleStyleOptions) => {
 		seeker: {
 			title: {
 				paddingTop: "3%",
+				height: "57%",
 			},
-			arrow: {
-				paddingTop: "4%",
+			subtitle: {
+				top: "-2%",
+				height: "40%",
+			},
+			background: {
+				gap: 0,
+			},
+		},
+		guardian: {
+			background: {
+				gap: 0,
+			},
+			subtitle: {
+				height: "40%",
 			},
 		},
 		neutral: {
@@ -77,6 +90,7 @@ export const getTitleStyle = (options: GetTitleStyleOptions) => {
 		mystic: {
 			title: {
 				paddingTop: "2%",
+				height: "53%",
 			},
 			background: {
 				gap: 0,
@@ -118,11 +132,14 @@ export const getTitleStyle = (options: GetTitleStyleOptions) => {
 				height: "52%",
 			},
 			unique: {
-				marginTop: "1%",
+				marginTop: "4%",
 			},
 			subtitle: {
 				paddingTop: "0%",
 				height: "38%",
+			},
+			arrow: {
+				transform: [{ translateY: 2 }],
 			},
 		},
 		rogue: {

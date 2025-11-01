@@ -1,4 +1,3 @@
-import { descriptionImages } from "@assets/images/game/description";
 import { getBoxByRatio } from "@shared/lib/util/size/box";
 import type { PropsWithFaction } from "@shared/model";
 import type { ImageBackgroundProps } from "@shared/ui";
@@ -29,10 +28,8 @@ export const FactionDescription = ({
 		return null;
 	}
 
-	const source = descriptionImages[faction];
-
 	return (
-		<C.Background {...props} source={source} box={imageBox}>
+		<C.Background {...props} box={imageBox} faction={faction}>
 			<C.Content box={imageBox} faction={faction}>
 				{children}
 			</C.Content>

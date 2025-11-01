@@ -1,5 +1,5 @@
+import { GameText } from "@modules/core/theme/shared/ui";
 import { color } from "@shared/config";
-import { GameText } from "@shared/ui";
 import { Row } from "@shared/ui";
 import { View } from "react-native";
 import styled from "styled-components";

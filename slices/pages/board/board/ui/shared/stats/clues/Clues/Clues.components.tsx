@@ -1,3 +1,4 @@
+import { ClueStatBackground } from "@modules/core/theme/shared/ui";
 import { TouchableOpacity } from "@modules/core/touch/shared/ui";
 import { color, gameAssets } from "@shared/config";
 import * as UI from "@shared/ui";
@@ -8,7 +9,7 @@ import { assetsSize } from "../../../../../config";
 import { withStat } from "../../../../../lib";
 import { StatPickerMemo as StatPicker } from "../../common/StatPicker";
 
-export const BaseContainer = withStat(UI.Clue, {
+export const BaseContainer = withStat(ClueStatBackground, {
 	ratio: gameAssets.clue.ratio,
 });
 

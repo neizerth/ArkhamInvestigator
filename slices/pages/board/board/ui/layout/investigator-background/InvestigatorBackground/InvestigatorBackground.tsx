@@ -2,6 +2,7 @@ import {
 	selectBoardProp,
 	selectShowDamageAndHorrorEffects,
 } from "@modules/board/base/shared/lib";
+import { ArtworksFragment } from "@modules/core/theme/shared/ui";
 import { selectBoardIsInactive } from "@modules/mechanics/board/base/entities/lib";
 import { useAppSelector } from "@shared/lib";
 import type { ViewProps } from "react-native";
@@ -26,11 +27,13 @@ export const InvestigatorBackground = ({
 			<C.Content>
 				<C.FactionBackground />
 				{background && (
-					<C.Background
-						source={{ uri: background.color }}
-						grayscaleSource={{ uri: background.grayscale }}
-						grayscale={active}
-					/>
+					<ArtworksFragment>
+						<C.Background
+							source={{ uri: background.color }}
+							grayscaleSource={{ uri: background.grayscale }}
+							grayscale={active}
+						/>
+					</ArtworksFragment>
 				)}
 				{showEffects && (
 					<>

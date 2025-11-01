@@ -1,10 +1,10 @@
+import { GameText } from "@modules/core/theme/shared/ui";
 import {
 	ScenarioDifficultySelect,
 	ScenarioDifficultyTokens,
 } from "@modules/stories/entities/ui";
 import { color, font, size } from "@shared/config";
 import { Checkbox as BaseCheckbox, Button, Row } from "@shared/ui";
-import { GameText } from "@shared/ui";
 import { Dimensions, View } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import styled from "styled-components/native";

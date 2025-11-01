@@ -1,9 +1,6 @@
+import { GameText, type GameTextProps } from "@modules/core/theme/shared/ui";
 import type { PropsWithUnit } from "@shared/model";
-import {
-	type ComponentStyleMap,
-	GameText,
-	type GameTextProps,
-} from "@shared/ui";
+import type { ComponentStyleMap } from "@shared/ui";
 import type { InvestigatorSignature } from "arkham-investigator-data";
 import { mergeDeepRight } from "ramda";
 import { getInvestigatorFlavorStyles } from "./InvestigatorFlavor.styles";
@@ -31,6 +28,11 @@ export const InvestigatorFlavor = ({
 	) as ComponentStyleMap;
 
 	return (
-		<GameText {...props} componentStyles={componentStyles} value={flavor} />
+		<GameText
+			{...props}
+			componentStyles={componentStyles}
+			value={flavor}
+			replaceBulletIcon={false}
+		/>
 	);
 };

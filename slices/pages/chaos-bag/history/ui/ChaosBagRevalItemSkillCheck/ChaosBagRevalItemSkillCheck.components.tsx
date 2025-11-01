@@ -3,12 +3,10 @@ import {
 	AutoSuccessThin as Success,
 } from "@modules/chaos-bag/base/shared/ui";
 import { ResultValue as BaseResultValue } from "@modules/chaos-bag/result/shared/ui";
+import { SignaturePreview } from "@modules/signature/base/entities/ui";
+import type { SignaturePreviewProps } from "@modules/signature/base/entities/ui";
 import { color, factionColor } from "@shared/config";
 import { IconNumber, Row, StatIcon, Text } from "@shared/ui";
-import {
-	InvestigatorPreview,
-	type InvestigatorPreviewProps,
-} from "@widgets/investigator";
 import { View } from "react-native";
 import styled, { css } from "styled-components/native";
 
@@ -20,10 +18,10 @@ export const Container: typeof RelativeView = styled(RelativeView)`
   position: relative;
 `;
 
-export const Image: typeof InvestigatorPreview = styled(InvestigatorPreview)`
+export const Image: typeof SignaturePreview = styled(SignaturePreview)`
   border-radius: 24px;
   border: 1px solid;
-  ${({ faction }: InvestigatorPreviewProps) => css`
+  ${({ faction }: SignaturePreviewProps) => css`
     border-color: ${factionColor[faction].border};
   `}
 `;

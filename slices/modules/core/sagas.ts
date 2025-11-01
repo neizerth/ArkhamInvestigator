@@ -11,6 +11,7 @@ import { networkSaga } from "./network/sagas";
 import { notificationsSaga } from "./notifications/sagas";
 import { routerSaga } from "./router/sagas";
 import { soundSaga } from "./sound/sagas";
+import { themeSaga } from "./theme/sagas";
 
 export function* coreModulesSaga() {
 	yield spawn(hapticSaga);
@@ -20,6 +21,7 @@ export function* coreModulesSaga() {
 	yield spawn(notificationsSaga);
 	yield spawn(modalSaga);
 	yield spawn(imageSaga);
+	yield spawn(themeSaga);
 
 	yield spawn(i18nSaga);
 	yield spawn(assetsSaga);

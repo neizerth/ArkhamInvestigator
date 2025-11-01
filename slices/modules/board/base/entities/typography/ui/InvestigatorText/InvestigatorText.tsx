@@ -1,4 +1,5 @@
-import { type ComponentStyleMap, GameText } from "@shared/ui";
+import { GameText } from "@modules/core/theme/shared/ui";
+import type { ComponentStyleMap } from "@shared/ui";
 import { mergeDeepRight } from "ramda";
 import { getInvestigatorTextStyle } from "./InvestigatorText.styles";
 import type { InvestigatorTextProps } from "./InvestigatorText.types";

@@ -12,11 +12,11 @@ export type WithStatOptions = {
 export function withStat<T extends ViewProps>(
 	Component: FC<T>,
 	options: WithStatOptions,
-) {
+): FC<T> {
 	const { ratio } = options;
 	const defaultHeight = options.height ?? assetsSize.main;
 
-	const ExtendedComponent: typeof Component = (props) => {
+	const ExtendedComponent: FC<T> = (props) => {
 		const scale = useAppSelector(selectPickerScale);
 		const height = defaultHeight * scale;
 

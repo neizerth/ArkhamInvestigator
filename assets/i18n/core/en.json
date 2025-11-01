@@ -1,4 +1,19 @@
 {
+	"error.downloadFailed": "Failed to download content. Please, try again later or change network connection. Details: {{error}}",
+	"app.disclaimer": "Arkham Horror: The Card Game™ and all related content © Fantasy Flight Games (FFG). This app is not produced, endorsed by or affiliated with FFG.",
+	"modal.theme.title": "Install Theme",
+	"modal.theme.text": "Enter a theme URL. The app doesn’t host or provide any third-party content",
+	"modal.theme.placeholder": "https://example.com/theme.json",
+	"modal.theme.error.invalidUrl": "Invalid URL",
+
+	"modal.artwork.title": "Add Artworks",
+	"modal.artwork.text": "Some features may use artworks. The app doesn’t host or provide any third-party content. Enter an URL.",
+	"modal.artwork.placeholder": "https://example.com/",
+	"modal.artwork.error.invalidUrl": "Invalid URL",
+	"modal.artwork.action": "Add and restart",
+
+	"theme.installHint": "I seek forbidden knowledge... among those who know where to look",
+
 	"about.app": "The information presented in this app about <FFG>Arkham Horror: The Card Game™</FFG>, both textual and graphical, is ©Fantasy Flight Games. This app is a fan project and is not produced, endorsed, or supported by, or affiliated with Fantasy Flight Games.",
 	"about.credits": "This application was created by <Author>Vladimir Yazykov</Author> and contributors to support the Arkham Horror: The Card Game community. The source code of this project is available at <Repo>Github</Repo>. Feedback and bug reports are welcome via <Issues>Github issues</Issues> or <Discord>the dedicated channel</Discord> on the Mythos Busters Discord server.",
 	"about.artwork": "All artwork and illustrations are the intellectual property of their respective creators. All Arkham Horror: The Card Game™ images and graphics are copyrighted by Fantasy Flight Games.",
@@ -251,6 +266,8 @@
 	"update.updated": "The application has been updated to version {{version}}",
 	"update.failed": "The application update failed: {{error}}",
 
+	"clipboard.successCopy": "Text copied to clipboard",
+
 	"Defeated": "Defeated",
 	"Change": "Change",
 
@@ -366,5 +383,7 @@
 	"Restart App": "Restart App",
 	"Reload downloaded assets": "Reload downloaded assets",
 	"Clear download queue": "Clear download queue",
-	"Check Data Updates": "Check Data Updates"
+	"Check Data Updates": "Check Data Updates",
+
+	"Install": "Install"
 }

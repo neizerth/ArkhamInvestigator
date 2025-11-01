@@ -10,7 +10,7 @@ import {
 	IOS_WITH_GESTURE_CONTROL,
 } from "@shared/config";
 import { useAppSelector, useFadeAnimation } from "@shared/lib";
-import { Dimensions, type ViewProps } from "react-native";
+import { Dimensions, View, type ViewProps } from "react-native";
 import { GestureDetector } from "react-native-gesture-handler";
 import {
 	TOP_CONTENT_OFFSET,
@@ -68,26 +68,28 @@ export const BoardDescription = ({ ...props }: BoardDescriptionProps) => {
 				{!showDescription && <C.ExpandArea />}
 				<C.TopContent />
 				<GestureDetector gesture={gesture}>
-					<C.Background faction={faction} width={screen.width}>
-						<C.DescriptionContent>
-							<C.TextContent>
-								{showTraits && (
-									<C.Traits
-										unit={vw}
-										investigator={investigator}
-										compact={compactTraits}
-									/>
-								)}
-								<C.Description style={descriptionStyle}>
-									<C.Text investigator={investigator} unit={unit} />
-									{showFlavor && (
-										<C.Flavor unit={vw} investigator={investigator} />
+					<View collapsable={false}>
+						<C.Background faction={faction} width={screen.width}>
+							<C.DescriptionContent>
+								<C.TextContent>
+									{showTraits && (
+										<C.Traits
+											unit={vw}
+											investigator={investigator}
+											compact={compactTraits}
+										/>
 									)}
-								</C.Description>
-							</C.TextContent>
-							<C.Menu />
-						</C.DescriptionContent>
-					</C.Background>
+									<C.Description style={descriptionStyle}>
+										<C.Text investigator={investigator} unit={unit} />
+										{showFlavor && (
+											<C.Flavor unit={vw} investigator={investigator} />
+										)}
+									</C.Description>
+								</C.TextContent>
+								<C.Menu />
+							</C.DescriptionContent>
+						</C.Background>
+					</View>
 				</GestureDetector>
 			</C.Content>
 		</C.Container>

@@ -1,7 +1,8 @@
 import { Alegreya } from "@assets/fonts";
+import { ThemeSignaturePreview } from "@modules/core/theme/features/ui";
+import { FactionView } from "@modules/faction/entities/ui";
 import { font, size } from "@shared/config";
 import { Row, TextView } from "@shared/ui";
-import { InvestigatorPreview } from "@widgets/investigator";
 import { InvestigatorSkillsPreview } from "@widgets/investigator/investigator-skills-preview";
 import {
 	ActionsValue,
@@ -10,7 +11,7 @@ import {
 	ResourcesValue,
 	SanityValue,
 } from "@widgets/investigator/value";
-import { View } from "react-native";
+import { TouchableOpacity, View } from "react-native";
 import styled from "styled-components/native";
 
 export const Container: typeof View = styled(View)`
@@ -21,7 +22,9 @@ export const Content: typeof Row = styled(Row)`
   gap: ${size.gap.default}px;
 `;
 
-export const Image: typeof InvestigatorPreview = styled(InvestigatorPreview)`
+export const Image: typeof ThemeSignaturePreview = styled(
+	ThemeSignaturePreview,
+)`
   border-radius: ${size.borderRadius.default}px;
 `;
 
@@ -68,4 +71,18 @@ export const Actions: typeof ActionsValue = styled(ActionsValue)`
 export const Stats: typeof Row = styled(Row)`
   gap: ${size.gap.small}px;
   justify-content: center;
+`;
+
+export const FactionPlaceholder: typeof TouchableOpacity = styled(
+	TouchableOpacity,
+)`
+  width: 110px;
+`;
+
+export const Faction: typeof FactionView = styled(FactionView).attrs({
+	contentContainerStyle: {
+		flex: 1,
+	},
+})`
+  font-size: 50px;
 `;

@@ -15,13 +15,14 @@ export type FactionModalProps<
 	D extends BaseModalData<A>,
 > = ViewProps & {
 	data: D;
+	resizeable?: boolean;
 	onClose?: () => void;
 };
 
 export function FactionModal<
 	A extends BaseModalAction,
 	D extends BaseModalData<A>,
->({ data, children, onClose, ...props }: FactionModalProps<A, D>) {
+>({ data, children, onClose, resizeable, ...props }: FactionModalProps<A, D>) {
 	const dispatch = useAppDispatch();
 	const translate = useI18NText();
 
@@ -51,6 +52,7 @@ export function FactionModal<
 					subtitle={subtitle}
 					onClose={close}
 					actions={cardActions}
+					resizeable={resizeable}
 				>
 					{children}
 				</C.Card>

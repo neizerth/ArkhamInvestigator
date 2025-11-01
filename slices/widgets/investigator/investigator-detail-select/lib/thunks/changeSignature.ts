@@ -1,11 +1,12 @@
+import type { SignatureDetailItem as Item } from "@modules/signature/base/shared/model";
 import {
 	selectCurrentSignatureGroup,
 	setInvestigatorSignature,
 } from "@shared/lib";
-import type { AppThunk, InvestigatorDetailItem } from "@shared/model";
+import type { AppThunk } from "@shared/model";
 
 export const changeSignature =
-	(item: InvestigatorDetailItem | null): AppThunk =>
+	(item: Item | null): AppThunk =>
 	(dispatch, getState) => {
 		const state = getState();
 		const group = selectCurrentSignatureGroup(state);

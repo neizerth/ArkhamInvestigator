@@ -1,10 +1,16 @@
+import { Alegreya } from "@assets/fonts";
 import { TouchableOpacity } from "@modules/core/touch/shared/ui";
-import { color } from "@shared/config";
-import { Icon as BaseIcon, type DefinedIconProps, Row } from "@shared/ui";
+import { color, size } from "@shared/config";
+import { Icon as BaseIcon, type DefinedIconProps, Row, Text } from "@shared/ui";
 import type { FC } from "react";
+import { View } from "react-native";
 import styled from "styled-components/native";
 
-export const Container: typeof Row = styled(Row)`
+export const Container: typeof View = styled(View)`
+
+`;
+
+export const ContentRow: typeof Row = styled(Row)`
   justify-content: space-between;
   align-items: center;
 `;
@@ -27,7 +33,11 @@ export const Button: typeof TouchableOpacity = styled(TouchableOpacity)`
 export const Icon: typeof BaseIcon = styled(BaseIcon)`
   font-size: 26px;
   line-height: 26px;
-  color: ${color.light10};
+  color: ${color.gray10};
+`;
+
+export const ThemeIcon: typeof Icon = styled(Icon)`
+  color:rgb(198, 180, 147);
 `;
 
 export const InfoIcon: FC<DefinedIconProps> = styled(Icon).attrs({
@@ -39,3 +49,9 @@ export const SupportIcon: FC<DefinedIconProps> = styled(Icon).attrs({
 	icon: "heart",
 })`
   `;
+
+export const Hint: typeof Text = styled(Text)`
+  padding-inline: ${size.gap.large}px;
+  font-family: ${Alegreya.italic};
+  color: ${color.gray10};
+`;

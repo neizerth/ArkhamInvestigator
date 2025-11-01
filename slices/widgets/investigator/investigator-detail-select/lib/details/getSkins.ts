@@ -1,4 +1,4 @@
-import type { InvestigatorDetailItem } from "@shared/model";
+import type { SignatureDetailItem as Item } from "@modules/signature/base/shared/model";
 import type { InvestigatorSignatureGroup } from "arkham-investigator-data";
 import { isNotNil, pick, prop, uniqBy } from "ramda";
 import { getOptionName } from "./getOptionName";
@@ -7,7 +7,7 @@ export const getSkins = (group: InvestigatorSignatureGroup) => {
 	const { code, faction_code } = group;
 
 	const skins = group.signatures
-		.map((item): InvestigatorDetailItem | undefined => {
+		.map((item): Item | undefined => {
 			if (!item.image.id) {
 				return;
 			}
@@ -24,7 +24,7 @@ export const getSkins = (group: InvestigatorSignatureGroup) => {
 
 	const uniqueSkins = uniqBy(prop("imageId"), skins);
 
-	const additionalSkins = group.skins.map((skin): InvestigatorDetailItem => {
+	const additionalSkins = group.skins.map((skin): Item => {
 		const imageId = skin.image.id || skin.id;
 		const image = {
 			...skin.image,

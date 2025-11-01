@@ -1,11 +1,10 @@
-import type { FC } from "react";
+import type { ComponentProps, FC } from "react";
 import { Dimensions, View, type ViewProps } from "react-native";
 import styled, { css } from "styled-components/native";
 import { assetsSize } from "../../../../../../config";
 import {
 	InvestigatorClues,
 	InvestigatorDoom,
-	type InvestigatorDoomProps,
 	InvestigatorResources,
 } from "../../../../../shared";
 
@@ -74,9 +73,10 @@ export const Resources: typeof InvestigatorResources = styled(
   
 `;
 
-type DoomProps = InvestigatorDoomProps & {
+type DoomProps = ComponentProps<typeof InvestigatorDoom> & {
 	inline?: boolean;
 };
+
 export const Doom: FC<DoomProps> = styled(InvestigatorDoom)`
 	${({ inline }: DoomProps) =>
 		inline &&

@@ -19,3 +19,21 @@ export const getBreaksCount = (text: string) => text.split("\n").length;
 
 export const stripTags = (html: string) =>
 	html.replace(/<\/?("[^"]*"|'[^']*'|[^>])*(>|$)/g, "");
+
+const urlRegex =
+	/^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&\/=]*)$/;
+
+export const isUrl = (text: string) => {
+	return urlRegex.test(text);
+};
+
+export const space2Nbsp = (text: string) => {
+	return text.replace(/(\s+)/g, "\u00A0");
+};
+
+export const stringToHash = (text: string, base = 16) => {
+	return [...text]
+		.map((char) => char.charCodeAt(0))
+		.reduce((acc, char) => acc + char, 0)
+		.toString(base);
+};

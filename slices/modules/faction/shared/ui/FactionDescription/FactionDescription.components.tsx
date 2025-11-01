@@ -1,14 +1,17 @@
+import { ThemeFactionDescriptionBackground } from "@modules/core/theme/shared/ui/faction/ThemeFactionDescriptionBackground";
 import type { PropsWithBox, PropsWithFaction } from "@shared/model";
-import { ImageBackground, type ImageBackgroundProps } from "@shared/ui";
 import type { FC } from "react";
 import { View } from "react-native";
 import type { ViewProps } from "react-native";
 import styled, { css } from "styled-components/native";
+import type { FactionBackgroundProps } from "../FactionBackground";
 import { getFactionDescriptionStyle } from "./FactionDescription.styles";
 
-export type BackgroundProps = ImageBackgroundProps & PropsWithBox;
+export type BackgroundProps = FactionBackgroundProps & PropsWithBox;
 
-export const Background: FC<BackgroundProps> = styled(ImageBackground)`
+export const Background: FC<BackgroundProps> = styled(
+	ThemeFactionDescriptionBackground,
+)`
   
   ${({ box }: BackgroundProps) => {
 		return css`

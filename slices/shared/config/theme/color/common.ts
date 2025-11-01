@@ -64,9 +64,15 @@ export const color = {
 
 	status: {
 		success: "#314629",
-		error: "#552D2D",
-		warn: "#C50707",
-		warnText: "#FB4135",
+		error: {
+			dark: "#552D2D",
+			light10: "#C50707",
+			light20: "#FF0000",
+		},
+		warn: {
+			dark: "#B45309",
+			light: "#FBBF24",
+		},
 		info: "#1E3A5F",
 	},
 	token: {

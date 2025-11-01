@@ -1,4 +1,4 @@
-import { selectChaosBagEnabled } from "@modules/chaos-bag/base/shared/lib";
+import { selectChaosBagEnabled } from "@modules/chaos-bag/base/entities/lib";
 import { useGoBack, usePage } from "@modules/core/router/shared/lib";
 import { routes } from "@shared/config";
 import { useAppSelector } from "@shared/lib";

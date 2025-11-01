@@ -19,4 +19,5 @@ export function handleOpenModal(
 	state.value = payload.value || null;
 	state.fullWindowOverlay = payload.fullWindowOverlay ?? true;
 	state.closeFromBackButton = payload.closeFromBackButton || true;
+	state.error = null;
 }

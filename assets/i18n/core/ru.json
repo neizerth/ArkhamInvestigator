@@ -1,4 +1,19 @@
 {
+	"error.downloadFailed": "Не удалось загрузить контент. Попробуйте позже или измените подключение к сети. Подробности: {{error}}",
+	"app.disclaimer": "Arkham Horror: The Card Game™ и все связанные материалы © Fantasy Flight Games (FFG). Это приложение не является продуктом, одобренным или связанным с FFG.",
+	"modal.theme.title": "Установить тему",
+	"modal.theme.text": "Введите URL-адрес темы",
+	"modal.theme.placeholder": "https://example.com/theme.json",
+	"modal.theme.error.invalidUrl": "Неверный адрес",
+
+	"modal.artwork.title": "Добавить иллюстрации",
+	"modal.artwork.text": "Некоторые функции могут использовать иллюстрации. Введите URL-адрес",
+	"modal.artwork.placeholder": "https://example.com/",
+	"modal.artwork.error.invalidUrl": "Неверный адрес",
+	"modal.artwork.action": "Добавить и перезагрузить",
+
+	"theme.installHint": "Запретные знания лучше всего открываются тем, кто знает, где искать",
+
 	"about.app": "Все права на представленную в этом приложении информацию о карточной игре «Ужас Аркхэма» — как текстовую, так и графическую — принадлежат компании <FFG>Fantasy Flight Games</FFG>. Создатель этого приложения не аффилирован и никоим образом не поддерживается Fantasy Flight Games.",
 	"about.credits": "Это приложение создано <Author>Владимиром Языковым</Author> и участниками сообщества в поддержку игры Arkham Horror: The Card Game. Исходный код проекта доступен на <Repo>GitHub</Repo>. Обратную связь и сообщения об ошибках можно оставить через <Issues>задачи на GitHub</Issues> или в <Telegram>ветке «Мастерская»</Telegram> Telegram-канала российского сообщества «Ужас Аркхэма»",
 	"about.artwork": "Все художественные материалы и иллюстрации являются интеллектуальной собственностью их авторов. Все изображения и графика Arkham Horror: The Card Game™ защищены авторским правом компании Fantasy Flight Games.",
@@ -255,6 +270,8 @@
 
 	"navigation.animation": "Анимация экранов",
 
+	"clipboard.successCopy": "Текст успешно скопирован",
+
 	"Defeated": "Поражение",
 	"Change": "Сменить",
 
@@ -379,5 +396,8 @@
 	"Restart App": "Перезапустить приложение",
 	"Reload downloaded assets": "Повторно загрузить данные",
 	"Clear download queue": "Очистить очередь загрузок",
-	"Check Data Updates": "Проверить обновления данных"
+	"Check Data Updates": "Проверить обновления данных",
+
+	"Install": "Установить",
+	"Remove artworks url": "Убрать URL иллюстраций"
 }

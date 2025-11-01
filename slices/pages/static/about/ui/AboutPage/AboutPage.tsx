@@ -1,17 +1,10 @@
+import { CopyText } from "@modules/core/clipboard/entities/ui";
+import { ArtworksFragment } from "@modules/core/theme/shared/ui";
 import { selectMediaVersion } from "@modules/signature/base/shared/lib";
-import { DEVICE_FONT_SCALE, DPR } from "@shared/config";
+import { ASSET_URL, DEVICE_FONT_SCALE, DPR } from "@shared/config";
 import { BUILD_ID, BUILD_VERSION } from "@shared/config/app";
-import { useAppSelector } from "@shared/lib";
-import {
-	A,
-	Bold,
-	Break,
-	List,
-	Paragraph,
-	PlatformFragment,
-	Rule,
-	Title,
-} from "@shared/ui";
+import { stringToHash, useAppSelector } from "@shared/lib";
+import { A, Bold, Break, List, Paragraph, Rule, Text, Title } from "@shared/ui";
 import {
 	ContentPage,
 	type ContentPageProps,
@@ -24,38 +17,43 @@ export const AboutPage = (props: AboutPageProps) => {
 	const { t } = useTranslation();
 	const mediaVersion = useAppSelector(selectMediaVersion);
 
+	const assetUrl = stringToHash(ASSET_URL);
+
 	return (
 		<ContentPage {...props} title="About">
-			<Paragraph>
-				<Trans
-					i18nKey="about.app"
-					components={{
-						FFG: (
-							<A href="https://www.fantasyflightgames.com/en/products/arkham-horror-the-card-game/" />
-						),
-					}}
-				/>
-			</Paragraph>
-			<Paragraph>{t`about.disclaimer`}</Paragraph>
-			<Paragraph>
-				<Trans
-					i18nKey="about.credits"
-					components={{
-						Author: <A href="https://github.com/neizerth" />,
-						Repo: <A href="https://github.com/neizerth/ArkhamInvestigator" />,
-						Issues: (
-							<A href="https://github.com/neizerth/ArkhamInvestigator/issues" />
-						),
-						Discord: (
-							<A href="https://discord.com/channels/225349059689447425/1351550310887460926" />
-						),
-						Telegram: (
-							<A href="https://discord.com/channels/225349059689447425/1351550310887460926" />
-						),
-					}}
-				/>
-			</Paragraph>
-			<Paragraph>{t`about.artwork`}</Paragraph>
+			<ArtworksFragment>
+				<Paragraph>
+					<Trans
+						i18nKey="about.app"
+						components={{
+							FFG: (
+								<A href="https://www.fantasyflightgames.com/en/products/arkham-horror-the-card-game/" />
+							),
+						}}
+					/>
+				</Paragraph>
+				<Paragraph>{t`about.disclaimer`}</Paragraph>
+				<Paragraph>
+					<Trans
+						i18nKey="about.credits"
+						components={{
+							Author: <A href="https://github.com/neizerth" />,
+							Repo: <A href="https://github.com/neizerth/ArkhamInvestigator" />,
+							Issues: (
+								<A href="https://github.com/neizerth/ArkhamInvestigator/issues" />
+							),
+							Discord: (
+								<A href="https://discord.com/channels/225349059689447425/1351550310887460926" />
+							),
+							Telegram: (
+								<A href="https://discord.com/channels/225349059689447425/1351550310887460926" />
+							),
+						}}
+					/>
+				</Paragraph>
+
+				<Paragraph>{t`about.artwork`}</Paragraph>
+			</ArtworksFragment>
 			<Title>{t`Hall of Fame`}</Title>
 			<List>
 				<List.Item>
@@ -86,9 +84,11 @@ export const AboutPage = (props: AboutPageProps) => {
 			</List>
 			<Title>{t`Credits`}</Title>
 			<List>
-				<List.Item>
-					<Bold>{t`Card icons`}</Bold>: Fantasy Flight Games
-				</List.Item>
+				<ArtworksFragment>
+					<List.Item>
+						<Bold>{t`Card icons`}</Bold>: Fantasy Flight Games
+					</List.Item>
+				</ArtworksFragment>
 				<List.Item>
 					<Bold>{t`Button Vector Art`}</Bold>: vecteezy.com
 				</List.Item>
@@ -115,17 +115,17 @@ export const AboutPage = (props: AboutPageProps) => {
 				@bezmyateznost, @avblrpa, @Lefebvre1121, @galen_ice
 			</Paragraph>
 			<Title>{t`Sponsors`}</Title>
-			<Paragraph>
-				<PlatformFragment except="ios">
-					<A href="https://www.patreon.com/arkhamdivider">Patreon:</A>
-					<Break />
-				</PlatformFragment>
+
+			<ArtworksFragment>
+				<A href="https://www.patreon.com/arkhamdivider">Patreon:</A>
+			</ArtworksFragment>
+			<Text>
 				@RecedingSamson, @Pink_hawk, @felice, The 1 Player Podcast, Andy
 				Lindberg, Nathan Wurschmidt
 				<Break />
 				<Rule />
 				@kolorono, @Rick_Freydin
-			</Paragraph>
+			</Text>
 			<Title>{t`Special Thanks`}</Title>
 			<List>
 				<List.Item>{t`about.credits.beth`}</List.Item>
@@ -140,6 +140,11 @@ export const AboutPage = (props: AboutPageProps) => {
 				</List.Item>
 				<List.Item>
 					<Bold>Media Version</Bold>: {mediaVersion}
+				</List.Item>
+				<List.Item>
+					<CopyText copyText={ASSET_URL}>
+						<Bold>Data URL hash</Bold>: 0x{assetUrl}
+					</CopyText>
 				</List.Item>
 			</List>
 			<Title>{t`Device Info`}</Title>

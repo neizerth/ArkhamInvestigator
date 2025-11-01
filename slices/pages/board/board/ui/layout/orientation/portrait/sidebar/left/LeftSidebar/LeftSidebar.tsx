@@ -7,7 +7,7 @@ import {
 	setValueFromHistoryIndex,
 	undo,
 } from "@modules/board/history/features/lib";
-import { selectChaosBagEnabled } from "@modules/chaos-bag/base/shared/lib";
+import { selectChaosBagEnabled } from "@modules/chaos-bag/base/entities/lib";
 import { useAppDispatch, useAppSelector, useDispatchAction } from "@shared/lib";
 import { useCallback } from "react";
 import type { ViewProps } from "react-native";

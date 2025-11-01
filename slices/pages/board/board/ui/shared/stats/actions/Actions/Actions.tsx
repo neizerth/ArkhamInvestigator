@@ -1,4 +1,5 @@
 import { selectHasBoardAbilities } from "@modules/board/abilities/shared/lib";
+import { ArtworksFragment } from "@modules/core/theme/shared/ui";
 import { makeAction } from "@modules/mechanics/phase/entities/lib";
 import { useAppDispatch, useAppSelector } from "@shared/lib";
 import type { ImageBackgroundProps } from "@shared/ui";
@@ -51,7 +52,11 @@ export const Actions = ({ ...props }: ActionsProps) => {
 					/>
 				</C.Content>
 			</C.Background>
-			{haveAbilities && <C.Special style={style.special} />}
+			{haveAbilities && (
+				<ArtworksFragment>
+					<C.Special style={style.special} />
+				</ArtworksFragment>
+			)}
 		</C.Container>
 	);
 };

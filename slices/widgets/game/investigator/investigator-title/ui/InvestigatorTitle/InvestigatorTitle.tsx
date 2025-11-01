@@ -1,6 +1,6 @@
-import { titleImages } from "@assets/images/game/title";
+import { ArtworksFragment } from "@modules/core/theme/shared/ui";
 import { useSwipe } from "@modules/core/touch/shared/lib";
-import { formatGameText, getActiveOpacity, getFactionImage } from "@shared/lib";
+import { formatGameText, getActiveOpacity } from "@shared/lib";
 import type { PropsWithFaction } from "@shared/model";
 import type { ImageBackgroundProps } from "@shared/ui";
 import { memo, useMemo } from "react";
@@ -53,12 +53,6 @@ export const InvestigatorTitle = (props: InvestigatorTitleProps) => {
 	const name = formatGameText(props.name);
 	const subname = formatGameText(props.subname);
 
-	const source = getFactionImage({
-		images: titleImages,
-		parallel,
-		faction,
-	});
-
 	const style = getTitleStyle(props);
 	const titleOpacity = getActiveOpacity(pressable);
 
@@ -85,11 +79,7 @@ export const InvestigatorTitle = (props: InvestigatorTitleProps) => {
 
 	return (
 		<C.Container style={[contentContainerStyle]}>
-			<C.Background
-				{...props}
-				source={source}
-				style={[props.style, style.background]}
-			>
+			<C.Background {...props} style={[props.style, style.background]}>
 				<C.Activation onPress={onPress} />
 				<C.Title style={style.title}>
 					<C.TitleContainer>
@@ -109,7 +99,11 @@ export const InvestigatorTitle = (props: InvestigatorTitleProps) => {
 								activeOpacity={titleOpacity}
 								onPress={onTitlePress}
 							>
-								{unique && <C.Unique style={style.unique} />}
+								{unique && (
+									<ArtworksFragment>
+										<C.Unique style={style.unique} />
+									</ArtworksFragment>
+								)}
 
 								<C.TitleText style={style.titleText}>{name}</C.TitleText>
 

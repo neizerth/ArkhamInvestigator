@@ -5,7 +5,7 @@ import { selectSelectedInvestigators } from "@shared/lib";
 
 export const selectGameInvestigatorBoards = createSelector(
 	[selectSelectedInvestigators, selectInvestigatorSettings],
-	(selectedInvestigators, settings = {}) => {
+	(selectedInvestigators, settings) => {
 		return selectedInvestigators.map((selection, index) => {
 			const investigatorSettings = settings?.[selection.code] || {};
 

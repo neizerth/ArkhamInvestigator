@@ -1,11 +1,11 @@
 import { openNewGameWarning } from "@modules/core/modal/entities/base/lib";
+import { usePageLoader } from "@modules/core/router/shared/lib";
 import {
 	selectHasPreviousGame,
 	startNewGame,
 	useAppDispatch,
 	useAppSelector,
 	useDispatchAction,
-	usePageLoader,
 } from "@shared/lib";
 import { useCallback } from "react";
 
