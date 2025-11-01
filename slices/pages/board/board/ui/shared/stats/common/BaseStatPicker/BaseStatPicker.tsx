@@ -45,7 +45,7 @@ export const BaseStatPicker = ({
 		if (defaultData) {
 			return defaultData;
 		}
-		return range(-initialValue, 10);
+		return range(-initialValue, 19);
 	}, [defaultData, initialValue]);
 
 	const diff = baseValue - initialValue;
