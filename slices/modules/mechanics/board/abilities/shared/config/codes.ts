@@ -52,6 +52,7 @@ export const AbilityCode = {
 	},
 	AliceLiddell: "use-base-intellect",
 	ReynauldDeChatillon: "reynauld-reaction",
+	RolandBanks: "clue-after-enemy-defeat",
 };
 
 export const LilyChenAbilityCodes = Object.values(AbilityCode.LilyChen);

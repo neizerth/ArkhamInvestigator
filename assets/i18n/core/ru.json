@@ -170,6 +170,10 @@
 	"actions.give_few": "{{fromName}} даёт {{count}} действия [action] {{dativeName}}",
 	"actions.give_many": "{{fromName}} даёт {{count}} действий [action] {{dativeName}}",
 
+	"clues.get_one": "{{name}} получает {{count}} улику",
+	"clues.get_few": "{{name}} получает {{count}} улики",
+	"clues.get_many": "{{name}} получает {{count}} улик",
+
 	"clues.spent_one": "{{name}} тратит {{count}} улику",
 	"clues.spent_few": "{{name}} тратит {{count}} улики",
 	"clues.spent_many": "{{name}} тратит {{count}} улик",

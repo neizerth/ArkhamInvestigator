@@ -131,6 +131,9 @@
 	"investigator.getResources_one": "{{name}} has got {{count}} resource",
 	"investigator.getResources_other": "{{name}} has got {{count}} resources",
 
+	"clues.get_one": "{{name}} gets {{count}} clue",
+	"clues.get_many": "{{name}} gets {{count}} clues",
+
 	"clues.spent_one": "{{name}} has spent {{count}} clue",
 	"clues.spent_other": "{{name}} has spent {{count}} clues",
 
