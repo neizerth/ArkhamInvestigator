@@ -16,13 +16,15 @@ export type InvestigatorBoardHistoryItemData = Pick<
 	value?: Partial<InvestigatorBoardValues>;
 };
 
+export type ChangeHistoryItem =
+	| {
+			type: ChangeHistoryType;
+			id: string;
+	  }
+	| false;
+
 export type ChangeHistoryPayload = {
-	history?:
-		| {
-				type: "update" | "replace" | "group";
-				id: string;
-		  }
-		| false;
+	history?: ChangeHistoryItem;
 };
 
 export type ChangeHistoryType = "group" | "update" | "replace";
