@@ -40,7 +40,9 @@ export const AbilityCode = {
 	RexMurphy: {
 		base: "auto-fail-for-3-cards",
 	},
-
+	DaisyWalker: {
+		parallel: "daisy-books",
+	},
 	StellaClark: {
 		reaction: "stella-fail-test-reaction",
 		elderSign: "autofail-to-heal-horror-and-damage",

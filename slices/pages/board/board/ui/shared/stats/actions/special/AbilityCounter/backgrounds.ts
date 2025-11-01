@@ -13,4 +13,5 @@ export const backgrounds: Record<string, ImageRequireSource> = {
 	[AbilityCode.GloriaGoldberg]: handSizeImage,
 	[AbilityCode.GeorgeBarnaby]: handSizeImage,
 	[AbilityCode.ShatteredSelf]: handSizeImage,
+	[AbilityCode.DaisyWalker.parallel]: abilitiyBackgrounds.books,
 };
