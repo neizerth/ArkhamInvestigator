@@ -3,7 +3,6 @@ import {
 	createAbilityValueFilter,
 } from "@modules/board/abilities/shared/lib";
 import { selectBoardById, setBoardPart } from "@modules/board/base/shared/lib";
-import { createBoardHistoryGroup } from "@modules/board/history/shared/lib";
 import { AbilityCode } from "@modules/mechanics/board/abilities/shared/config";
 import { put, select, takeEvery } from "redux-saga/effects";
 
@@ -21,21 +20,23 @@ function* worker({ payload }: ReturnType<typeof boardAbilityValueSet>) {
 		return;
 	}
 
-	const group = createBoardHistoryGroup();
+	const baseWillpower = board.baseValue.willpower + diff;
+	const willpower = board.value.willpower + diff;
 
-	const willpower = board.baseValue.willpower + diff;
-	const sanity = board.baseValue.sanity + diff;
+	const baseSanity = board.baseValue.sanity + diff;
+	const sanity = board.value.sanity + diff;
 
 	yield put(
 		setBoardPart({
 			boardId,
 			data: {
 				baseValue: {
-					sanity,
-					willpower,
+					sanity: baseSanity,
+					willpower: baseWillpower,
 				},
 				value: {
 					willpower,
+					sanity,
 				},
 			},
 		}),
