@@ -222,6 +222,7 @@
 	"ability.mateo.base.elderSign.action": "Action",
 
 	"ability.carolyn.modal.heal": "Heal",
+	"ability.carolyn.reaction.text": "Select healed card's controller",
 	"ability.vincent.modal.heal": "Heal",
 
 	"ability.preston.modal.text": "Spend 2 [resource] to automatically succeed the test?",

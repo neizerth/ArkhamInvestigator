@@ -70,6 +70,7 @@ export function BoardSelectModal<
 				selectedId={selectedId}
 				disabled={disabled}
 				onChange={onChange}
+				preview
 			/>
 		</C.Container>
 	);

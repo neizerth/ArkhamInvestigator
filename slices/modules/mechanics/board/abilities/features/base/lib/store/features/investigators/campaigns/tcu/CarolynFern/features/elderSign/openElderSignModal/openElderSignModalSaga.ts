@@ -16,7 +16,7 @@ import type { BaseModalAction } from "@modules/core/modal/shared/base/model";
 import { InvesigatorCode } from "@modules/mechanics/investigator/entities/config";
 import { prop } from "ramda";
 import { put, select, takeEvery } from "redux-saga/effects";
-import { healModalActionId, modalId } from "../../config";
+import { healModalActionId, modalId } from "../config";
 
 const filterRevealedTokens = createRevealedTokenFilterAction({
 	code: InvesigatorCode.CarolynFern,

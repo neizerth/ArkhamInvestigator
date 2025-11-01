@@ -53,6 +53,7 @@ export const AbilityCode = {
 	AliceLiddell: "use-base-intellect",
 	ReynauldDeChatillon: "reynauld-reaction",
 	RolandBanks: "clue-after-enemy-defeat",
+	CarolynFern: "get-resource-after-heal",
 };
 
 export const LilyChenAbilityCodes = Object.values(AbilityCode.LilyChen);
@@ -67,6 +68,7 @@ export const specialAbilitityCodes = [
 	AbilityCode.RexMurphy.base,
 	AbilityCode.StellaClark.elderSign,
 	AbilityCode.KohakuNarukami,
+	AbilityCode.CarolynFern,
 	...LilyChenAbilityCodes,
 ];
 

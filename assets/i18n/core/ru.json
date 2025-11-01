@@ -226,6 +226,7 @@
 	"ability.mateo.base.elderSign.action": "Действие",
 
 	"ability.carolyn.modal.heal": "Вылечить",
+	"ability.carolyn.reaction.text": "Выберите игрока, под чьим контролем находится вылеченная карта",
 
 	"ability.preston.modal.text": "Потратить 2 [resource], чтобы автоматически пройти эту проверку?",
 	"ability.rex.base.modal.text": "Провалить проверку чтобы взять 3 карты?",
