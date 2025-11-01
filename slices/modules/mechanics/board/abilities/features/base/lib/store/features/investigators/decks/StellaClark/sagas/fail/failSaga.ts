@@ -7,7 +7,7 @@ function* worker({ payload }: ReturnType<typeof fail>) {
 	const { boardId, historyId } = payload;
 
 	const historyGroup = {
-		type: "group",
+		type: "update",
 		id: historyId,
 	} as const;
 
