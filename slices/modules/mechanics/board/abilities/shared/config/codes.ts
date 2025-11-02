@@ -38,7 +38,10 @@ export const AbilityCode = {
 	DanielaReyes: "been-attacked",
 	KymaniJones: "exhausted-enemy",
 	RexMurphy: {
-		base: "auto-fail-for-3-cards",
+		base: {
+			elderSign: "auto-fail-for-3-cards",
+			reaction: "get-clues-after-succeed-investigation",
+		},
 	},
 	DaisyWalker: {
 		parallel: "daisy-books",
@@ -71,6 +74,7 @@ export const specialAbilitityCodes = [
 	AbilityCode.StellaClark.elderSign,
 	AbilityCode.KohakuNarukami,
 	AbilityCode.CarolynFern,
+	AbilityCode.RexMurphy.base.reaction,
 	...LilyChenAbilityCodes,
 ];
 

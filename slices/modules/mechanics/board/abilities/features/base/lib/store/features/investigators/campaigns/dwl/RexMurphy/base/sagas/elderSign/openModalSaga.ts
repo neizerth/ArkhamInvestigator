@@ -9,7 +9,7 @@ import { createConfirmModalAction } from "@modules/core/modal/shared/actions/con
 import { openConfirm } from "@modules/core/modal/shared/confirm/lib";
 import { InvesigatorCode } from "@modules/mechanics/investigator/entities/config";
 import { put, select, takeEvery } from "redux-saga/effects";
-import { modalActionId, modalId } from "../config";
+import { modalActionId, modalId } from "./config";
 
 const filterAction = createRevealedTokenFilterAction({
 	code: InvesigatorCode.RexMurphy.base,

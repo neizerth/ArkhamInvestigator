@@ -6,7 +6,7 @@ import {
 } from "@modules/core/modal/shared/actions/confirm/lib";
 import { AbilityCode } from "@modules/mechanics/board/abilities/shared/config";
 import { put, takeEvery } from "redux-saga/effects";
-import { modalActionId, modalId } from "../config";
+import { modalActionId, modalId } from "./config";
 
 const filterAction = createConfirmModalFilter({
 	modalId,
@@ -28,7 +28,7 @@ function* worker({ payload }: ReturnType<typeof modalConfirmed>) {
 	yield put(
 		setBoardAbilityUse({
 			boardId,
-			abilityId: AbilityCode.RexMurphy.base,
+			abilityId: AbilityCode.RexMurphy.base.elderSign,
 			canUse: false,
 		}),
 	);
