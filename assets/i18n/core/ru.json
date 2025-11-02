@@ -178,6 +178,10 @@
 	"clues.spent_few": "{{name}} тратит {{count}} улики",
 	"clues.spent_many": "{{name}} тратит {{count}} улик",
 
+	"resources.spent_one": "{{name}} тратит {{count}} ресурс",
+	"resources.spent_few": "{{name}} тратит {{count}} ресурса",
+	"resources.spent_many": "{{name}} тратит {{count}} ресурсов",
+
 	"clues.scenario.add_one": "{{name}} добавляет на сценарий {{count}} улику",
 	"clues.scenario.add_few": "{{name}} добавляет на сценарий {{count}} улики",
 	"clues.scenario.add_many": "{{name}} добавляет на сценарий {{count}} улик",

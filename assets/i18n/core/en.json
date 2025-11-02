@@ -134,6 +134,9 @@
 	"clues.get_one": "{{name}} gets {{count}} clue",
 	"clues.get_many": "{{name}} gets {{count}} clues",
 
+	"resources.spent_one": "{{name}} has spent {{count}} resource",
+	"resources.spent_other": "{{name}} has spent {{count}} resources",
+
 	"clues.spent_one": "{{name}} has spent {{count}} clue",
 	"clues.spent_other": "{{name}} has spent {{count}} clues",
 
