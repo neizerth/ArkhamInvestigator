@@ -60,6 +60,7 @@ export const AbilityCode = {
 	RolandBanks: "clue-after-enemy-defeat",
 	CarolynFern: "get-resource-after-heal",
 	LuciusGalloway: "get-clue-after-evade",
+	AudreyBourassa: "get-2-clues-after-relic-play",
 };
 
 export const LilyChenAbilityCodes = Object.values(AbilityCode.LilyChen);
