@@ -59,6 +59,7 @@ export const AbilityCode = {
 	ReynauldDeChatillon: "reynauld-reaction",
 	RolandBanks: "clue-after-enemy-defeat",
 	CarolynFern: "get-resource-after-heal",
+	LuciusGalloway: "get-clue-after-evade",
 };
 
 export const LilyChenAbilityCodes = Object.values(AbilityCode.LilyChen);
