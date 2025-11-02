@@ -1,4 +1,7 @@
-import { setBoardAbilityUse } from "@modules/board/abilities/shared/lib";
+import {
+	createAbilitySetFilter,
+	type setBoardAbilityUse,
+} from "@modules/board/abilities/shared/lib";
 import {
 	increaseBoardActualPropValue,
 	selectBoardIds,
@@ -11,12 +14,9 @@ import { AbilityCode } from "@modules/mechanics/board/abilities/shared/config";
 import { put, select, takeEvery } from "redux-saga/effects";
 import { actionId, modalId } from "../config";
 
-const filterAction = (action: unknown) => {
-	if (!setBoardAbilityUse.match(action)) {
-		return false;
-	}
-	return action.payload.abilityId === AbilityCode.CarolynFern;
-};
+const filterAction = createAbilitySetFilter({
+	abilityId: AbilityCode.CarolynFern,
+});
 
 function* worker({ payload }: ReturnType<typeof setBoardAbilityUse>) {
 	const { boardId } = payload;

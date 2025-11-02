@@ -7,13 +7,11 @@ type Payload = ActionCreatorPayload<typeof setBoardAbilityUse>;
 type Options = {
 	abilityId: string;
 	canUse?: boolean;
-	force?: boolean;
 };
 
 export const createAbilitySetFilter = ({
 	abilityId,
 	canUse = false,
-	force = false,
 }: Options) => {
 	return (action: unknown): action is PayloadAction<Payload> => {
 		if (!setBoardAbilityUse.match(action)) {
@@ -23,10 +21,6 @@ export const createAbilitySetFilter = ({
 		const { payload } = action;
 
 		if (payload.abilityId !== abilityId) {
-			return false;
-		}
-
-		if (force && !payload.force) {
 			return false;
 		}
 
