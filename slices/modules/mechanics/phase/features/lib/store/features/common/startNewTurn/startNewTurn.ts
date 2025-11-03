@@ -4,6 +4,11 @@ import { createAction } from "@reduxjs/toolkit";
 export const startNewTurn =
 	createAction<PropsWithBoardId>("phase/startNewTurn");
 
-export const newTurnStarted = createAction<PropsWithBoardId>(
+type NewTurnStartedPayload = PropsWithBoardId & {
+	turnId: string;
+	oldTurnId: string;
+};
+
+export const newTurnStarted = createAction<NewTurnStartedPayload>(
 	"phase/newTurnStarted",
 );

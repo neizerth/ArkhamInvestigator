@@ -8,9 +8,11 @@ import {
 	isBoardExists,
 	selectBoardById,
 	setBoardActualPropValue,
+	setBoardProp,
 } from "@modules/board/base/shared/lib";
 import { createBoardHistoryGroup } from "@modules/board/history/shared/lib";
 import { put, select, takeEvery } from "redux-saga/effects";
+import { v4 } from "uuid";
 import { newTurnStarted, startNewTurn } from "./startNewTurn";
 
 function* worker({ payload }: ReturnType<typeof startNewTurn>) {
@@ -25,17 +27,27 @@ function* worker({ payload }: ReturnType<typeof startNewTurn>) {
 		return;
 	}
 
-	const { baseValue } = board;
+	const { baseValue, turnId } = board;
 	const additionalAction: ReturnType<typeof selectAdditionalAction> =
 		yield select(selectAdditionalAction);
 
-	const historyGroup = createBoardHistoryGroup();
+	const history = createBoardHistoryGroup();
+	const newTurnId = v4();
+
+	yield put(
+		setBoardProp({
+			boardId,
+			prop: "turnId",
+			value: newTurnId,
+			history,
+		}),
+	);
 
 	yield put(
 		resetBoardAbilities({
 			boardId,
 			limitTypes: TURN_ABILITY_LIMITS,
-			history: historyGroup,
+			history,
 		}),
 	);
 
@@ -45,7 +57,7 @@ function* worker({ payload }: ReturnType<typeof startNewTurn>) {
 				boardId,
 				prop: "actions",
 				value: baseValue.actions,
-				history: historyGroup,
+				history,
 			}),
 		);
 
@@ -53,7 +65,7 @@ function* worker({ payload }: ReturnType<typeof startNewTurn>) {
 			setAdditionalActionUse({
 				canUse: true,
 				boardId,
-				history: historyGroup,
+				history,
 			}),
 		);
 	} else {
@@ -62,12 +74,18 @@ function* worker({ payload }: ReturnType<typeof startNewTurn>) {
 				boardId,
 				prop: "actions",
 				value: baseValue.actions,
-				history: historyGroup,
+				history,
 			}),
 		);
 	}
 
-	yield put(newTurnStarted(payload));
+	yield put(
+		newTurnStarted({
+			...payload,
+			oldTurnId: turnId,
+			turnId: newTurnId,
+		}),
+	);
 }
 
 export function* startNewTurnSaga() {

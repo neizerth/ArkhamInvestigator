@@ -7,6 +7,7 @@ export const createFallbackBoard = (): InvestigatorBoard => {
 
 	return {
 		id: 0,
+		turnId: "fallback",
 		index: -1,
 		signatureGroupId: "fallback",
 		investigator,

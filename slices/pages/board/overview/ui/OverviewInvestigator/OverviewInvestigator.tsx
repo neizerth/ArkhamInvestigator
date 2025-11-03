@@ -67,7 +67,7 @@ export const OverviewInvestigator = ({
 	}, [maxSanity, showWounds, minValue, allowNegativeValues]);
 
 	const onActionsPress = useCallback(() => {
-		dispatch(makeAction(boardId));
+		dispatch(makeAction({ boardId }));
 	}, [dispatch, boardId]);
 
 	const minSanity = sanityData[0];

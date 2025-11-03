@@ -4,6 +4,7 @@ const idMapping: Record<string, TimingPhaseStepSpecialType> = {
 	"1.2": "mythos-doom",
 	"4.2": "reset-actions",
 	"4.4": "upkeep-resource",
+	"4.6": "turn-end",
 };
 
 export const getPhaseStepSpecialType = (text: string) => {

@@ -258,6 +258,8 @@
 	"ability.luke.gateBox_one": "{{name}} puts {{count}} charge on the Gate Box",
 	"ability.luke.gateBox_many": "{{name}} puts {{count} charge on the Gate Box",
 
+	"ability.agatha.reaction": "{{name}} may play [[Spell]] or [[Insight]] event from her discard pile and remove it from the game",
+
 	"resources.notEnough": "Not enough resources. Required&nbsp;{{count}}, available&nbsp;{{available}}",
 
 	"action.heal": "{{fromName}} heals {{dativeName}} {{value}}",

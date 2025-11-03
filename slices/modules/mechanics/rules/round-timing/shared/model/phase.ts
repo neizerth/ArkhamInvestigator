@@ -25,4 +25,5 @@ export type TimingPhaseStep = {
 export type TimingPhaseStepSpecialType =
 	| "mythos-doom"
 	| "upkeep-resource"
-	| "reset-actions";
+	| "reset-actions"
+	| "turn-end";

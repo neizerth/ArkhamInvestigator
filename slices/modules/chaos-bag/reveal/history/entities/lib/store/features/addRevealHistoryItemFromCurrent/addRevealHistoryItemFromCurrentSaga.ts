@@ -24,6 +24,7 @@ const filterAction = (action: unknown) => {
 
 function* worker({ payload }: ReturnType<typeof chaosBagRevealEnd>) {
 	const {
+		turnId,
 		allRevealedTokens: tokens,
 		skillCheckTitle: title,
 		skillValue: skillCheckValue,
@@ -46,6 +47,7 @@ function* worker({ payload }: ReturnType<typeof chaosBagRevealEnd>) {
 
 	const data: ChaosBagHistoryItem = {
 		boardId,
+		turnId,
 		id: v4(),
 		tokens,
 		title,

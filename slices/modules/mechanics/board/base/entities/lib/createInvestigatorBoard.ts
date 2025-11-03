@@ -2,6 +2,7 @@ import type { InvestigatorBoard } from "@modules/board/base/shared/model";
 import { getSignatureAbilityValues } from "@modules/mechanics/investigator/entities/lib";
 import type { PartiallyRequired } from "@shared/model";
 import { mergeDeepRight } from "ramda";
+import { v4 } from "uuid";
 import {
 	DEFAULT_HAND_SIZE,
 	DEFAULT_UPKEEP_RESOURCES_INCREASE,
@@ -51,8 +52,11 @@ export const createInvestigatorBoard = ({
 
 	const abilityValues = getSignatureAbilityValues(investigator);
 
+	const turnId = v4();
+
 	const defaultBoard: InvestigatorBoard = {
 		...options,
+		turnId,
 		initialValue,
 		baseValue,
 		value,

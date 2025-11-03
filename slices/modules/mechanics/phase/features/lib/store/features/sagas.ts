@@ -1,6 +1,8 @@
 import { spawn } from "redux-saga/effects";
-import { startNewTurnSaga } from "./common/startNewTurn/startNewTurnSaga";
+import { commonPhaseSaga } from "./common/sagas";
+import { phaseEffectsSaga } from "./effects/sagas";
 
 export function* phaseSaga() {
-	yield spawn(startNewTurnSaga);
+	yield spawn(commonPhaseSaga);
+	yield spawn(phaseEffectsSaga);
 }

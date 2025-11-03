@@ -10,6 +10,7 @@ import * as reducers from "./reducers";
 export type ChaosBagRevealState = {
 	revealedTokens: RevealedChaosBagToken[];
 	allRevealedTokens: RevealedChaosBagToken[];
+	turnId: string | null;
 	skillCheckType: InvestigatorBoardNumericStat | null;
 	skillCheckTitle: string | null;
 	skillValue: number | null;
@@ -23,6 +24,7 @@ export type ChaosBagRevealState = {
 };
 
 const initialState: ChaosBagRevealState = {
+	turnId: null,
 	revealedTokens: [],
 	allRevealedTokens: [],
 	skillCheckExpression: [],

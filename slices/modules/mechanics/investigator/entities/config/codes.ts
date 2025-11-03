@@ -57,4 +57,8 @@ export const InvesigatorCode = {
 	KohakuNarukami: "10012",
 	VincentLee: "09004",
 	LukeRobinson: "06004",
+	AgathaCrane: {
+		seeker: "11007",
+		mystic: "11008",
+	},
 };

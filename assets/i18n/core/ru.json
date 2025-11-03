@@ -259,6 +259,8 @@
 	"ability.luke.gateBox_few": "{{name}} кладёт {{count} заряда на Шкатулку Врат",
 	"ability.luke.gateBox_many": "{{name}} кладёт {{count} зарядов на Шкатулку Врат",
 
+	"ability.agatha.reaction": "{{name}} может разыграть событие [[заклинание]] или [[интуицию]] из своего сброса и удалить его из игры",
+
 	"resources.notEnough": "Недостаточно ресурсов. Необходимо&nbsp;{{count}}, доступно&nbsp;{{available}}",
 
 	"action.heal": "{{fromName}} лечит {{dativeName}} {{value}}",

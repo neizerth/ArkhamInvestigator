@@ -8,11 +8,13 @@ export type HandleStartChaosBagRevealInternalPayload = {
 	value?: number;
 	title?: string;
 	expression?: SkillCheckItem[];
+	turnId?: string;
 };
 
 export const handleStartChaosBagRevealInternal: ChaosBagRevealHandler<
 	HandleStartChaosBagRevealInternalPayload
 > = (state, payload) => {
+	state.turnId = payload.turnId ?? null;
 	state.revealedTokens = [];
 	state.allRevealedTokens = [];
 	state.skillCheckBoardId = payload.boardId ?? null;

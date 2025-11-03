@@ -77,6 +77,7 @@ export const AbilityCode = {
 	ValentinoRivas: "pay-to-reduce-difficulty",
 	PennyWhite: "get-clue-effect-revealing",
 	LukeRobinson: "gate-box",
+	AgathaCrane: "play-event-from-discard-pile-after-turn-ends",
 };
 
 export const LilyChenAbilityCodes = Object.values(AbilityCode.LilyChen);
@@ -93,6 +94,7 @@ export const specialAbilitityCodes = [
 	AbilityCode.KohakuNarukami,
 	AbilityCode.CarolynFern,
 	AbilityCode.RexMurphy.base.reaction,
+	AbilityCode.AgathaCrane,
 	...LilyChenAbilityCodes,
 ];
 

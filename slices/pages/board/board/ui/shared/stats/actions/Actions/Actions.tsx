@@ -31,7 +31,11 @@ export const Actions = ({ ...props }: ActionsProps) => {
 	});
 
 	const onPress = useCallback(() => {
-		dispatch(makeAction());
+		dispatch(
+			makeAction({
+				boardId: "current",
+			}),
+		);
 	}, [dispatch]);
 
 	const showDiff = baseValue !== initialValue;

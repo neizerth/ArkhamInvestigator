@@ -1,4 +1,4 @@
-import { resetUpkeepAllInvestigatorActions } from "@modules/mechanics/phase/features/lib/store/effects/upkeep";
+import { resetUpkeepAllInvestigatorActions } from "@modules/mechanics/phase/features/lib/store/features/effects/upkeep";
 import { useAppDispatch } from "@shared/lib";
 import { useCallback } from "react";
 import type { ViewProps } from "react-native";
