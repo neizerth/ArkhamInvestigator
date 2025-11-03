@@ -1,7 +1,7 @@
 import {
 	giveUpkeepResourcesToAllBoards,
 	resetUpkeepAllInvestigatorActions,
-} from "@modules/mechanics/phase/entities/lib";
+} from "@modules/mechanics/phase/features/lib";
 import type { TimingPhase } from "@modules/mechanics/rules/round-timing/shared/model";
 import { useAppDispatch } from "@shared/lib";
 import { useCallback } from "react";

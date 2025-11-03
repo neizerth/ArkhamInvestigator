@@ -2,7 +2,7 @@ import {
 	giveUpkeepResourcesToAllBoards,
 	placeDoomOnAgenda,
 	resetUpkeepAllInvestigatorActions,
-} from "@modules/mechanics/phase/entities/lib";
+} from "@modules/mechanics/phase/features/lib";
 import { put, takeEvery } from "redux-saga/effects";
 import { processTimingWizardStep } from "./processTimingWizardStep";
 

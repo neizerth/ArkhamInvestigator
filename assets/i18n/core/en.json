@@ -128,8 +128,8 @@
 	"board.help.pins.swipe": "Swipe down on a pinned calculation to go to a page where you've created this calculation",
 	"board.help.longPress.investigatorSelect": "If you are playing with 2+ investigators, hold down on the mini image to view all investigators' stats",
 
-	"investigator.getResources_one": "{{name}} has got {{count}} resource",
-	"investigator.getResources_other": "{{name}} has got {{count}} resources",
+	"resources.get_one": "{{name}} has got {{count}} resource",
+	"resources.get_other": "{{name}} has got {{count}} resources",
 
 	"clues.get_one": "{{name}} gets {{count}} clue",
 	"clues.get_many": "{{name}} gets {{count}} clues",

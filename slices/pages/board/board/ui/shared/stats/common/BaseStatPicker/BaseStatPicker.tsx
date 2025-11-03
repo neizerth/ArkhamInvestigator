@@ -47,7 +47,8 @@ export const BaseStatPicker = ({
 			return defaultData;
 		}
 		const maxValue = Math.max(diff + 1, 9);
-		return range(-initialValue, maxValue);
+		const minValue = Math.min(-initialValue, diff);
+		return range(minValue, maxValue);
 	}, [defaultData, initialValue, diff]);
 
 	const dispatch = useAppDispatch();

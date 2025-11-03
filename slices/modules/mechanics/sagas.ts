@@ -2,7 +2,7 @@ import { spawn } from "redux-saga/effects";
 import { boardAbilitiesMechanicsSaga } from "./board/abilities/sagas";
 import { boardEntityMechanicsSaga } from "./board/base/entities/lib/store/sagas";
 import { boardFeatureMechanicsSaga } from "./board/base/features/sagas";
-import { phaseSaga } from "./phase/entities/sagas";
+import { phaseSaga } from "./phase/features/sagas";
 import { rulesSaga } from "./rules/sagas";
 
 export function* mechanicsSaga() {

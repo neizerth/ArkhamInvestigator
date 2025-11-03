@@ -1,5 +1,4 @@
-import { increaseBoardActualPropValue } from "@modules/board/base/shared/lib";
-import { sendInvestigatorNotification } from "@modules/board/notifications/entities/lib";
+import { getResources } from "@modules/board/base/entities/base/lib";
 import {
 	type boardSelectModalConfirmed,
 	createConfirmBoardSelectModalFilter,
@@ -14,22 +13,7 @@ const filterAction = createConfirmBoardSelectModalFilter({
 function* worker({ payload }: ReturnType<typeof boardSelectModalConfirmed>) {
 	const boardId = payload.value;
 
-	yield put(
-		increaseBoardActualPropValue({
-			boardId,
-			prop: "resources",
-		}),
-	);
-
-	yield put(
-		sendInvestigatorNotification({
-			boardId,
-			message: "investigator.getResources",
-			data: {
-				count: 1,
-			},
-		}),
-	);
+	yield put(getResources({ boardId }));
 }
 
 export function* CarolynFernGiveResourceSaga() {

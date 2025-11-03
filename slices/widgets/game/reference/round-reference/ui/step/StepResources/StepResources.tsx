@@ -1,4 +1,4 @@
-import { giveUpkeepResourcesToAllBoards } from "@modules/mechanics/phase/entities/lib";
+import { giveUpkeepResourcesToAllBoards } from "@modules/mechanics/phase/features/lib";
 import { useAppDispatch } from "@shared/lib";
 import { useCallback } from "react";
 import type { ViewProps } from "react-native";

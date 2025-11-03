@@ -11,7 +11,7 @@ import {
 	selectBoardHorror,
 	selectBoardIsInactive,
 } from "@modules/mechanics/board/base/entities/lib";
-import { makeAction } from "@modules/mechanics/phase/entities/lib";
+import { makeAction } from "@modules/mechanics/phase/features/lib";
 import { useAppDispatch, useAppSelector } from "@shared/lib";
 import type { InvestigatorBoardNumericStat } from "@shared/model";
 import { range } from "ramda";

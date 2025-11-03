@@ -1,2 +1,1 @@
-export * from "./getClues";
 export * from "./getResources";

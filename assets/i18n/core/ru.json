@@ -155,9 +155,9 @@
 
 	"upkeep.investigator.actionsReset": "{{name}}: действия обновлены",
 
-	"investigator.getResources_one": "{{name}} получает {{count}} ресурс",
-	"investigator.getResources_few": "{{name}} получает {{count}} ресурса",
-	"investigator.getResources_many": "{{name}} получает {{count}} ресурсов",
+	"resources.get_one": "{{name}} получает {{count}} ресурс",
+	"resources.get_few": "{{name}} получает {{count}} ресурса",
+	"resources.get_many": "{{name}} получает {{count}} ресурсов",
 
 	"wild.give": "{{fromName}} добавляет {{dativeName}} дополнительный [wild] до конца проверки",
 	"wild.give.self": "{{name}} добавляет своей карте дополнительный [wild] до конца проверки",
