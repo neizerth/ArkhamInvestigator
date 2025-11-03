@@ -255,6 +255,9 @@
 	"ability.richard.discoverClue": "Clue",
 	"ability.richard.modal.text": "Choose an effect:\n[card-outline] Draw 1 card\n[resource] Gain 1 resource\n[clue] Discover 1 clue at your location\n[health] Deal 1 damage to an enemy at your location",
 
+	"ability.luke.gateBox_one": "{{name}} puts {{count}} charge on the Gate Box",
+	"ability.luke.gateBox_many": "{{name}} puts {{count} charge on the Gate Box",
+
 	"resources.notEnough": "Not enough resources. Required&nbsp;{{count}}, available&nbsp;{{available}}",
 
 	"action.heal": "{{fromName}} heals {{dativeName}} {{value}}",

@@ -255,6 +255,10 @@
 
 	"ability.richard.modal.text": "Выберите эффект:\n[card-outline] Взять 1 карту\n[resource] Получить 1 ресурс\n[clue] Найти 1 улику в вашей локации\n[health] Нанести 1 рану врагу в вашей локации",
 
+	"ability.luke.gateBox_one": "{{name}} кладёт {{count}} заряд на Шкатулку Врат",
+	"ability.luke.gateBox_few": "{{name}} кладёт {{count} заряда на Шкатулку Врат",
+	"ability.luke.gateBox_many": "{{name}} кладёт {{count} зарядов на Шкатулку Врат",
+
 	"resources.notEnough": "Недостаточно ресурсов. Необходимо&nbsp;{{count}}, доступно&nbsp;{{available}}",
 
 	"action.heal": "{{fromName}} лечит {{dativeName}} {{value}}",
