@@ -253,6 +253,8 @@
 
 	"ability.kohaku.removeTokens": "{{name}} удаляет 2 [bless] и 2 [curse]",
 
+	"ability.richard.modal.text": "Выберите эффект:\n[card-outline] Взять 1 карту\n[resource] Получить 1 ресурс\n[clue] Найти 1 улику в вашей локации\n[health] Нанести 1 рану врагу в вашей локации",
+
 	"resources.notEnough": "Недостаточно ресурсов. Необходимо&nbsp;{{count}}, доступно&nbsp;{{available}}",
 
 	"action.heal": "{{fromName}} лечит {{dativeName}} {{value}}",
@@ -409,5 +411,6 @@
 
 	"Install": "Установить",
 	"Remove artworks url": "Убрать URL иллюстраций",
-	"Books counter": "Счётчик книг"
+	"Books counter": "Счётчик книг",
+	"Choose an effect": "Выберите эффект"
 }

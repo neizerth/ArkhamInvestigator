@@ -64,6 +64,15 @@ export const AbilityCode = {
 	TrishScarborough: "get-clue-in-enemy-location",
 	EdmundMoore: "two-resources-for-exaust",
 	LuciaDeveraux: "gain-resource-after-healing-card-use",
+	RichardCarlisle: {
+		reaction: "two-points-spell-succeeded",
+		effects: {
+			card: "two-points-spell-succeeded-card",
+			resource: "two-points-spell-succeeded-resource",
+			clue: "two-points-spell-succeeded-clue",
+			damage: "two-points-spell-succeeded-damage",
+		},
+	},
 };
 
 export const LilyChenAbilityCodes = Object.values(AbilityCode.LilyChen);

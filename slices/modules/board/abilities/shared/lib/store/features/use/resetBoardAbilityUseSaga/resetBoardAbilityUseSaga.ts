@@ -26,6 +26,7 @@ function* worker({ payload }: ReturnType<typeof setBoardAbilityUse>) {
 		yield select(selectBoardsCount);
 
 	if (!ability) {
+		console.log("reset ability not found", payload);
 		return;
 	}
 

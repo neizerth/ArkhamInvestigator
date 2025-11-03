@@ -249,6 +249,12 @@
 
 	"ability.kohaku.removeTokens": "{{name}} removes 2 [bless] and 2 [curse] tokens",
 
+	"ability.richard.drawCard": "Card",
+	"ability.richard.gainResource": "",
+	"ability.richard.dealDamage": "Damage",
+	"ability.richard.discoverClue": "Clue",
+	"ability.richard.modal.text": "Choose an effect:\n[card-outline] Draw 1 card\n[resource] Gain 1 resource\n[clue] Discover 1 clue at your location\n[health] Deal 1 damage to an enemy at your location",
+
 	"resources.notEnough": "Not enough resources. Required&nbsp;{{count}}, available&nbsp;{{available}}",
 
 	"action.heal": "{{fromName}} heals {{dativeName}} {{value}}",
@@ -393,5 +399,6 @@
 	"Check Data Updates": "Check Data Updates",
 
 	"Install": "Install",
-	"Books counter": "Books counter"
+	"Books counter": "Books counter",
+	"Choose an effect": "Choose an effect"
 }

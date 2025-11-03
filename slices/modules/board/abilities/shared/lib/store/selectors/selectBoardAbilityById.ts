@@ -1,7 +1,7 @@
 import type { BoardId } from "@modules/board/base/shared/model";
 import { createSelector } from "@reduxjs/toolkit";
 import { whereId } from "@shared/lib/util";
-import { selectBoardAbilities } from "./selectBoardAbilities";
+import { selectInvestigatorAbilities } from "./selectInvestigatorAbilities";
 
 export type SelectAbilityByIdOptions = {
 	boardId: BoardId;
@@ -12,6 +12,6 @@ export const selectBoardAbilityById = ({
 	boardId,
 	abilityId,
 }: SelectAbilityByIdOptions) =>
-	createSelector([selectBoardAbilities(boardId)], (abilities) => {
+	createSelector([selectInvestigatorAbilities(boardId)], (abilities) => {
 		return abilities.find(whereId(abilityId));
 	});

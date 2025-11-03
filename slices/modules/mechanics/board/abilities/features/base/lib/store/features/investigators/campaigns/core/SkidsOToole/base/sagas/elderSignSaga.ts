@@ -39,7 +39,7 @@ function* worker({ payload }: ReturnType<typeof chaosBagRevealEnd>) {
 	yield put(
 		getResources({
 			boardId: skillCheckBoardId,
-			count: 2,
+			value: 2,
 		}),
 	);
 }

@@ -22,7 +22,7 @@ export const giveUpkeepResourceToBoard =
 		dispatch(
 			getResources({
 				boardId,
-				count: upkeepResourcesIncrease,
+				value: upkeepResourcesIncrease,
 			}),
 		);
 	};

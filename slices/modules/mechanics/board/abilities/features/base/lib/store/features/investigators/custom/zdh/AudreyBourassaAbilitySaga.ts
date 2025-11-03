@@ -12,7 +12,7 @@ const filterAction = createAbilityUseFilter({
 function* worker({ payload }: ReturnType<typeof setBoardAbilityUse>) {
 	const { boardId } = payload;
 
-	yield put(getResources({ boardId, count: 2 }));
+	yield put(getResources({ boardId, value: 2 }));
 }
 
 export function* AudreyBourassaAbilitySaga() {

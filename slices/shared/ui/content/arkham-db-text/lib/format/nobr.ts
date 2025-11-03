@@ -5,9 +5,33 @@ export const nobr = (text: string) => {
 	let result = "";
 	let token = "";
 	let open = false;
+	let insideBrackets = false;
 
 	for (let i = 0; i < text.length; i++) {
 		const char = text[i];
+
+		// Track if we're inside square brackets [...]
+		if (char === "[" && !insideBrackets) {
+			insideBrackets = true;
+			if (open) {
+				open = false;
+				result += `<nobr>${token}</nobr>`;
+				token = "";
+			}
+			result += char;
+			continue;
+		}
+		if (char === "]" && insideBrackets) {
+			insideBrackets = false;
+			result += char;
+			continue;
+		}
+
+		// If inside brackets, just append the character
+		if (insideBrackets) {
+			result += char;
+			continue;
+		}
 
 		if ((char === " " || char === "-") && !open) {
 			result += `${token}${char}`;

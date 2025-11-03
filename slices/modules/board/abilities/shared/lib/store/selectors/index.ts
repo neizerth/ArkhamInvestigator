@@ -5,3 +5,4 @@ export * from "./selectBoardAbilities";
 export * from "./selectBoardAbilityValue";
 export * from "./additional-action";
 export * from "./selectBoardAbilityUseInfo";
+export * from "./selectInvestigatorAbilities";

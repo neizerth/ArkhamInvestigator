@@ -1,9 +1,5 @@
-import type { PropsWithBoardId } from "@modules/board/base/shared/model";
 import { createAction } from "@reduxjs/toolkit";
-
-export type GetResourcesPayload = PropsWithBoardId & {
-	count?: number;
-};
+import type { PropIncreasePayload } from "../../../../model";
 
 export const getResources =
-	createAction<GetResourcesPayload>("board/getResources");
+	createAction<PropIncreasePayload>("board/getResources");
