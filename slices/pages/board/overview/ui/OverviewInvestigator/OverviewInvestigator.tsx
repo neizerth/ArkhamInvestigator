@@ -76,8 +76,6 @@ export const OverviewInvestigator = ({
 		(stat: "health" | "sanity") =>
 			({ value = 0 }: PickerChangeEvent) => {
 				const base = baseValue[stat];
-				console.log("base", base);
-				console.log("value", value);
 				dispatch(
 					setBoardActualPropValue({
 						boardId,
