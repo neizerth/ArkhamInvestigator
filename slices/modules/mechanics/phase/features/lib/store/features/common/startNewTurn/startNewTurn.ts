@@ -6,7 +6,7 @@ export const startNewTurn =
 
 type NewTurnStartedPayload = PropsWithBoardId & {
 	turnId: string;
-	oldTurnId: string;
+	oldTurnId?: string | null;
 };
 
 export const newTurnStarted = createAction<NewTurnStartedPayload>(

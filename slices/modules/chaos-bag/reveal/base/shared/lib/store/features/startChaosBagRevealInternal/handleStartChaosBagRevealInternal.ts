@@ -8,7 +8,7 @@ export type HandleStartChaosBagRevealInternalPayload = {
 	value?: number;
 	title?: string;
 	expression?: SkillCheckItem[];
-	turnId?: string;
+	turnId?: string | null;
 };
 
 export const handleStartChaosBagRevealInternal: ChaosBagRevealHandler<

@@ -6,7 +6,7 @@ type Key = keyof InvestigatorBoardHistoryItem;
 type Options<T extends Key> = {
 	history: InvestigatorBoardHistoryItem[];
 	prop: T;
-	defaultValue: Defined<InvestigatorBoardHistoryItem[T]>;
+	defaultValue?: Defined<InvestigatorBoardHistoryItem[T]>;
 	historyIndex: number;
 };
 

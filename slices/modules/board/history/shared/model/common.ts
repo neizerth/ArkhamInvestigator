@@ -9,7 +9,7 @@ export type InvestigatorBoardHistoryItem = InvestigatorBoardHistoryItemData & {
 
 export type InvestigatorBoardHistoryItemData = Pick<
 	InvestigatorBoard,
-	"usedAbilities" | "faction" | "abilityValues"
+	"usedAbilities" | "faction" | "abilityValues" | "turnId"
 > & {
 	initialValue?: Partial<InvestigatorBoardValues>;
 	baseValue?: Partial<InvestigatorBoardValues>;

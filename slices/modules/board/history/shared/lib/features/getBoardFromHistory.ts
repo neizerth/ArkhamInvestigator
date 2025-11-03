@@ -37,6 +37,13 @@ export const getBoardFromHistory = (options: Options): InvestigatorBoard => {
 		historyIndex,
 	});
 
+	const turnId = getHistoryItemProp({
+		history,
+		defaultValue: board.turnId,
+		prop: "turnId",
+		historyIndex,
+	});
+
 	const historyItems = history.slice(0, historyIndex + 1);
 
 	const values = getBoardValueFromHistory({
@@ -47,6 +54,7 @@ export const getBoardFromHistory = (options: Options): InvestigatorBoard => {
 	const item = {
 		...board,
 		...values,
+		turnId,
 		usedAbilities,
 		faction,
 		historyIndex,
