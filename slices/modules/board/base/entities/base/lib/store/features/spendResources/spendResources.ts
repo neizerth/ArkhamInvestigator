@@ -1,5 +1,6 @@
 import { createAction } from "@reduxjs/toolkit";
 import type { BoardActualPropChangePayload } from "../../../../model";
 
-export const getResources =
-	createAction<BoardActualPropChangePayload>("board/getResources");
+export const spendResources = createAction<BoardActualPropChangePayload>(
+	"board/spendResources",
+);

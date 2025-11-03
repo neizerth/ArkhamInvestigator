@@ -73,6 +73,9 @@ export const AbilityCode = {
 			damage: "two-points-spell-succeeded-damage",
 		},
 	},
+	GavriellaMizrah: "get-clue-after-enemy-attack",
+	ValentinoRivas: "pay-to-reduce-difficulty",
+	PennyWhite: "get-clue-effect-revealing",
 };
 
 export const LilyChenAbilityCodes = Object.values(AbilityCode.LilyChen);

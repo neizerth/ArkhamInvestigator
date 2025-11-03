@@ -1,17 +1,17 @@
-import { increaseBoardActualPropValue } from "@modules/board/base/shared/lib";
+import { decreaseBoardActualPropValue } from "@modules/board/base/shared/lib";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import type { InvestigatorNumericStat } from "@shared/model";
 import { put } from "redux-saga/effects";
 import type { BoardActualPropChangePayload } from "../../../model";
 
-export const createActualValueIncreaseWorker = <
+export const createActualValueDecreaseWorker = <
 	P extends BoardActualPropChangePayload,
 >(
 	prop: InvestigatorNumericStat,
 ) => {
-	return function* increaseActualValueWorker({ payload }: PayloadAction<P>) {
+	return function* decreaseActualValueWorker({ payload }: PayloadAction<P>) {
 		yield put(
-			increaseBoardActualPropValue({
+			decreaseBoardActualPropValue({
 				...payload,
 				prop,
 			}),

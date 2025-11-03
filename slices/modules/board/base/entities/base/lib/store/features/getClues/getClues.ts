@@ -1,4 +1,5 @@
 import { createAction } from "@reduxjs/toolkit";
-import type { PropIncreasePayload } from "../../../../model";
+import type { BoardActualPropChangePayload } from "../../../../model";
 
-export const getClues = createAction<PropIncreasePayload>("board/getClues");
+export const getClues =
+	createAction<BoardActualPropChangePayload>("board/getClues");

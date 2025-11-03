@@ -1,6 +1,6 @@
 import type { IncreaseBoardValuePropPayload } from "@modules/board/base/shared/lib";
 
-export type PropIncreasePayload = Omit<
+export type BoardActualPropChangePayload = Omit<
 	IncreaseBoardValuePropPayload,
 	"type" | "prop"
 >;

@@ -1,6 +1,6 @@
 import { setBoardAbilityUse } from "@modules/board/abilities/shared/lib";
 import { getClues, getResources } from "@modules/board/base/entities/base/lib";
-import type { PropIncreasePayload } from "@modules/board/base/entities/base/model";
+import type { BoardActualPropChangePayload } from "@modules/board/base/entities/base/model";
 import { selectBoardUsedAbilities } from "@modules/board/base/shared/lib";
 import { createBoardHistoryGroup } from "@modules/board/history/shared/lib";
 import {
@@ -33,7 +33,7 @@ function* worker({ payload }: ReturnType<typeof modalConfirmed>) {
 		}),
 	);
 
-	const increasePayload: PropIncreasePayload = {
+	const increasePayload: BoardActualPropChangePayload = {
 		boardId,
 		history,
 	};

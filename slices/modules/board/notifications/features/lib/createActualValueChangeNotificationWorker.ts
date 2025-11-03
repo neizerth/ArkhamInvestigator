@@ -1,14 +1,14 @@
-import type { PropIncreasePayload } from "@modules/board/base/entities/base/model";
+import type { BoardActualPropChangePayload } from "@modules/board/base/entities/base/model";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { put } from "redux-saga/effects";
 import { sendInvestigatorNotification } from "../../entities/lib";
 
-export const createActualValueIncreaseNotificationWorker = <
-	P extends PropIncreasePayload,
+export const createActualValueChangeNotificationWorker = <
+	P extends BoardActualPropChangePayload,
 >(
 	message: string,
 ) => {
-	return function* increaseActualValueNotificationWorker({
+	return function* changeActualValueNotificationWorker({
 		payload,
 	}: PayloadAction<P>) {
 		const { boardId, value = 1 } = payload;
