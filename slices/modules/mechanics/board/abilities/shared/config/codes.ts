@@ -76,6 +76,7 @@ export const AbilityCode = {
 	GavriellaMizrah: "get-clue-after-enemy-attack",
 	ValentinoRivas: "pay-to-reduce-difficulty",
 	PennyWhite: "get-clue-effect-revealing",
+	LukeRobinson: "gate-box",
 };
 
 export const LilyChenAbilityCodes = Object.values(AbilityCode.LilyChen);

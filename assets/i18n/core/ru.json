@@ -373,7 +373,7 @@
 	"Family Inheritance": "Семейное наследство",
 
 	"Ravenous Tracker": "Ravenous Tracker",
-	"Cards beneath George": "Cards beneath George",
+	"Cards beneath George": "Карты под сыщиком",
 	"Cards beneath Diana": "Карты под сыщиком",
 	"Cards beneath Gloria": "Карты под сыщиком",
 	"Cards in your hand": "Карты в руке",
@@ -412,5 +412,6 @@
 	"Install": "Установить",
 	"Remove artworks url": "Убрать URL иллюстраций",
 	"Books counter": "Счётчик книг",
-	"Choose an effect": "Выберите эффект"
+	"Choose an effect": "Выберите эффект",
+	"Gate Box": "Шкатулка врат"
 }
