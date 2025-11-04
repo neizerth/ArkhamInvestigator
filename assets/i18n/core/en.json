@@ -131,6 +131,9 @@
 	"resources.get_one": "{{name}} has got {{count}} resource",
 	"resources.get_other": "{{name}} has got {{count}} resources",
 
+	"card.get_one": "{{name}} gets {{count}} card",
+	"card.get_many": "{{name}} gets {{count}} cards",
+
 	"clues.get_one": "{{name}} gets {{count}} clue",
 	"clues.get_many": "{{name}} gets {{count}} clues",
 

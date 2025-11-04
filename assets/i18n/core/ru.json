@@ -170,6 +170,10 @@
 	"actions.give_few": "{{fromName}} даёт {{count}} действия [action] {{dativeName}}",
 	"actions.give_many": "{{fromName}} даёт {{count}} действий [action] {{dativeName}}",
 
+	"card.get_one": "{{name}} получает {{count}} карту",
+	"card.get_few": "{{name}} получает {{count}} карты",
+	"card.get_many": "{{name}} получает {{count}} карт",
+
 	"clues.get_one": "{{name}} получает {{count}} улику",
 	"clues.get_few": "{{name}} получает {{count}} улики",
 	"clues.get_many": "{{name}} получает {{count}} улик",
@@ -255,6 +259,7 @@
 	"ability.kohaku.removeTokens": "{{name}} удаляет 2 [bless] и 2 [curse]",
 
 	"ability.richard.modal.text": "Выберите эффект:\n[card-outline] Взять 1 карту\n[resource] Получить 1 ресурс\n[clue] Найти 1 улику в вашей локации\n[health] Нанести 1 рану врагу в вашей локации",
+	"ability.richard.action.damage": "{{name}} наносит {{value}} раны врагу в вашей локации",
 
 	"ability.luke.gateBox_one": "{{name}} кладёт {{count}} заряд на Шкатулку Врат",
 	"ability.luke.gateBox_few": "{{name}} кладёт {{count} заряда на Шкатулку Врат",

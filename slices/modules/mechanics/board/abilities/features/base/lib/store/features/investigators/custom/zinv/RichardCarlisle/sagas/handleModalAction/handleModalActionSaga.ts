@@ -3,6 +3,7 @@ import { getClues, getResources } from "@modules/board/base/entities/base/lib";
 import type { BoardActualPropChangePayload } from "@modules/board/base/entities/base/model";
 import { selectBoardUsedAbilities } from "@modules/board/base/shared/lib";
 import { createBoardHistoryGroup } from "@modules/board/history/shared/lib";
+import { sendInvestigatorNotification } from "@modules/board/notifications/entities/lib";
 import {
 	createConfirmModalFilter,
 	type modalConfirmed,
@@ -44,6 +45,25 @@ function* worker({ payload }: ReturnType<typeof modalConfirmed>) {
 			break;
 		case effects.resource:
 			yield put(getResources(increasePayload));
+			break;
+		case effects.damage:
+			yield put(
+				sendInvestigatorNotification({
+					boardId,
+					message: "ability.richard.damage",
+				}),
+			);
+			break;
+		case effects.card:
+			yield put(
+				sendInvestigatorNotification({
+					boardId,
+					message: "card.get",
+					data: {
+						count: 1,
+					},
+				}),
+			);
 			break;
 	}
 
