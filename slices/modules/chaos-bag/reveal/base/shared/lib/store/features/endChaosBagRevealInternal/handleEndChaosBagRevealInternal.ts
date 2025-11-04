@@ -13,4 +13,5 @@ export const handleEndChaosBagRevealInternal: ChaosBagRevealHandler = (
 	state.succeedBy = null;
 	state.result = null;
 	state.turnId = null;
+	state.abilityId = null;
 };

@@ -1,13 +1,12 @@
 import { BlessCurseControl } from "@modules/chaos-bag/base/entities/ui";
-import { ChaosTokenPreviewMemo as ChaosToken } from "@modules/chaos-bag/base/shared/ui";
 import { ContextModal } from "@modules/core/modal/shared/base/ui";
-import { TouchableOpacity } from "@modules/core/touch/shared/ui";
 import { color, font, size } from "@shared/config";
 import { Button } from "@shared/ui";
 import { Row, Text, TextView } from "@shared/ui";
 import { Dimensions, View } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import styled from "styled-components/native";
+import { ChaosBagPreviewToken } from "../ChaosBagPreviewToken";
 
 const screen = Dimensions.get("screen");
 
@@ -47,16 +46,12 @@ export const List: typeof FlatList = styled(FlatList).attrs({
   max-height: ${maxHeight}px;
 `;
 
+export const Token: typeof ChaosBagPreviewToken = styled(ChaosBagPreviewToken)`
+  
+`;
+
 export const TokenRow: typeof Row = styled(Row)`
   justify-items: center;
-`;
-
-export const Token: typeof ChaosToken = styled(ChaosToken)`
-  
-`;
-
-export const TokenButton: typeof TouchableOpacity = styled(TouchableOpacity)`
-  
 `;
 
 export const Title: typeof Text = styled(Text)`

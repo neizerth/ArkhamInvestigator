@@ -1,2 +1,4 @@
 export * from "./selectRevealHistorySize";
-export * from "./selectRevealedHystoryTokensByTurn";
+export * from "./selectRevealedHistoryTokensByTurn";
+export * from "./selectLastRevealHistory";
+export * from "./selectRevealHistoryByBoardId";

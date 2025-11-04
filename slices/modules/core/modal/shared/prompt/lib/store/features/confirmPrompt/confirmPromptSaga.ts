@@ -25,7 +25,7 @@ function* worker({ payload }: Action) {
 	const value: ReturnType<typeof selectModalValue> =
 		yield select(selectModalValue);
 
-	if (typeof value !== "string") {
+	if (typeof value !== "string" || !value) {
 		return;
 	}
 

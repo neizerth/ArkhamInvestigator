@@ -78,8 +78,6 @@ function* worker({ payload }: ReturnType<typeof setBoardAbilityUse>) {
 		}),
 	);
 
-	console.log("set ability use", payload.abilityId, ability, value);
-
 	yield put(boardAbilityUseSet(payload));
 }
 

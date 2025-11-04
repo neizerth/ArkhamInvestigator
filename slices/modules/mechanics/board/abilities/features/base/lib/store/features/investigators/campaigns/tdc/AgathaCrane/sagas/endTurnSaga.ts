@@ -1,7 +1,7 @@
 import { setBoardAbilityUse } from "@modules/board/abilities/shared/lib";
 import { selectBoardById } from "@modules/board/base/shared/lib";
 import type { RevealedChaosBagToken } from "@modules/chaos-bag/reveal/base/shared/model";
-import { selectRevealedHystoryTokensByTurn } from "@modules/chaos-bag/reveal/history/shared/lib";
+import { selectRevealedHistoryTokensByTurn } from "@modules/chaos-bag/reveal/history/shared/lib";
 import { AbilityCode } from "@modules/mechanics/board/abilities/shared/config";
 import { InvesigatorCode } from "@modules/mechanics/investigator/entities/config";
 import { startNewTurn, turnEnd } from "@modules/mechanics/phase/features/lib";
@@ -17,26 +17,26 @@ function* worker({ payload }: ReturnType<typeof turnEnd>) {
 	const { turnId } = board;
 
 	if (!turnId) {
-		console.log("no turn id");
 		return;
 	}
 
 	if (!codes.includes(board.investigator.code)) {
-		console.log("not agatha");
 		return;
 	}
 
-	const revealedTokensSelector = selectRevealedHystoryTokensByTurn(turnId);
+	const revealedTokensSelector = selectRevealedHistoryTokensByTurn(turnId);
 	const revealedTokens: ReturnType<typeof revealedTokensSelector> =
 		yield select(revealedTokensSelector);
 
 	if (revealedTokens.length === 0) {
-		console.log("no revealed tokens");
 		return;
 	}
 
 	const getCount = (filter: (token: RevealedChaosBagToken) => boolean) => {
-		return revealedTokens.filter(filter).length;
+		const data = revealedTokens
+			.filter(filter)
+			.filter((token) => !token.removed);
+		return data.length;
 	};
 
 	const canceledTokens = getCount((token) => Boolean(token.canceled));

@@ -5,7 +5,7 @@ import { useGoBack } from "@modules/core/router/shared/lib";
 import { REMOVE_CLIPPED_SUBVIEWS } from "@shared/config";
 import { useAppDispatch } from "@shared/lib";
 import { Delay } from "@shared/ui";
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 import type { ListRenderItemInfo, ViewProps } from "react-native";
 import * as C from "./ChaosBagPreview.components";
@@ -18,6 +18,24 @@ export const ChaosBagPreview = (props: ChaosBagPreviewProps) => {
 	const { t } = useTranslation();
 	const data = useData();
 	const isEmpty = data.regular.length === 0 && data.sealed.length === 0;
+
+	const [selectedToken, setSelectedToken] = useState<ChaosBagToken | null>(
+		null,
+	);
+
+	const selectedId = selectedToken?.id;
+
+	const selectToken = useCallback(
+		(token: ChaosBagToken) => {
+			if (selectedId === token.id) {
+				setSelectedToken(null);
+				return;
+			}
+
+			setSelectedToken(token);
+		},
+		[selectedId],
+	);
 
 	const toggleSeal = useCallback(
 		(id: string) => () => {
@@ -41,21 +59,22 @@ export const ChaosBagPreview = (props: ChaosBagPreviewProps) => {
 	const renderTokenRow = useCallback(
 		(info: ListRenderItemInfo<ChaosBagToken[]>) => {
 			const tokens = info.item;
+
 			return (
 				<C.TokenRow>
 					{tokens.map((token) => (
-						<C.TokenButton
+						<C.Token
 							key={token.id}
+							token={token}
+							onPress={() => selectToken(token)}
 							onLongPress={toggleSeal(token.id)}
-							activeOpacity={1}
-						>
-							<C.Token {...token} />
-						</C.TokenButton>
+							selected={selectedId === token.id}
+						/>
 					))}
 				</C.TokenRow>
 			);
 		},
-		[toggleSeal],
+		[toggleSeal, selectedId, selectToken],
 	);
 
 	const actions = useModalActions();

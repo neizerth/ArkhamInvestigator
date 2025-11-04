@@ -5,6 +5,7 @@ import { size } from "@shared/config";
 import { memo } from "react";
 import type { ViewProps } from "react-native";
 import { chaosToken } from "../../../config";
+import type { ChaosBagTokenSealData } from "../../../model";
 import type { ChaosTokenConfig } from "../../chaos-token";
 import * as C from "./ChaosTokenPreview.components";
 import {
@@ -17,6 +18,8 @@ import {
 export type ChaosTokenPreviewProps = ViewProps &
 	ChaosTokenConfig & {
 		sealed?: boolean;
+		sealData?: ChaosBagTokenSealData | null;
+		sealedCount?: number;
 		removed?: boolean;
 		canceled?: RevealedChaosBagTokenCancelType;
 		sealOffset?: number;
@@ -33,6 +36,8 @@ const defaultPadding = size.gap.small;
 export const ChaosTokenPreview = ({
 	type,
 	sealed,
+	sealedCount = 0,
+	sealData,
 	sealOffset = 2,
 	tokenPadding = defaultPadding,
 	selected = false,
@@ -77,6 +82,12 @@ export const ChaosTokenPreview = ({
 			{sealed && (
 				<C.Sealed width="100%" height="100%" style={style.background} />
 			)}
+			{sealedCount > 0 && (
+				<C.SealedCount>
+					<C.SealedCountText>{sealedCount}</C.SealedCountText>
+				</C.SealedCount>
+			)}
+			{sealData?.title && <C.SealedTitle>{sealData.title}</C.SealedTitle>}
 			<C.Content style={style.content}>
 				{modified && typeof defaultValue === "number" && (
 					<C.Modification

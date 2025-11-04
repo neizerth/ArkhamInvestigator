@@ -34,7 +34,10 @@ export const AbilityCode = {
 	FatherMateo: {
 		base: "mateo-auto-fail-reveal",
 	},
-	WendyAdams: "wendys-amulet",
+	WendyAdams: {
+		base: "wendys-amulet",
+		parallel: "seal-token-after-evade-enemy",
+	},
 	DanielaReyes: "been-attacked",
 	KymaniJones: "exhausted-enemy",
 	RexMurphy: {
@@ -95,6 +98,7 @@ export const specialAbilitityCodes = [
 	AbilityCode.CarolynFern,
 	AbilityCode.RexMurphy.base.reaction,
 	AbilityCode.AgathaCrane,
+	AbilityCode.WendyAdams.parallel,
 	...LilyChenAbilityCodes,
 ];
 

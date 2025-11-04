@@ -6,5 +6,6 @@ const validPathnames: Href[] = [
 	routes.skillCheck,
 	routes.chaosBag,
 ];
+
 export const canDisplayChaosTokenRevealModal = (path: Href | string) =>
 	validPathnames.includes(path as Href);

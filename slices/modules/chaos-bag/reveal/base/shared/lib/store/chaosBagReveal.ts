@@ -8,6 +8,7 @@ import type { RevealedChaosBagToken } from "../../model";
 import * as reducers from "./reducers";
 
 export type ChaosBagRevealState = {
+	abilityId: string | null;
 	revealedTokens: RevealedChaosBagToken[];
 	allRevealedTokens: RevealedChaosBagToken[];
 	turnId: string | null;
@@ -24,6 +25,7 @@ export type ChaosBagRevealState = {
 };
 
 const initialState: ChaosBagRevealState = {
+	abilityId: null,
 	turnId: null,
 	revealedTokens: [],
 	allRevealedTokens: [],

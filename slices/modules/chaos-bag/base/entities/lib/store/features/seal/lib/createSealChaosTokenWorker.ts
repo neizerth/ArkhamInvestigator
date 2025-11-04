@@ -27,6 +27,7 @@ export const createSealChaosTokenWorker = ({ sealed, succesAction }: Options) =>
 
 		const data = {
 			...token,
+			...(!sealed ? { sealData: null } : {}),
 			sealed,
 		};
 

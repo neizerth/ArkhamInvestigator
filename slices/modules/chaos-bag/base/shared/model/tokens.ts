@@ -43,7 +43,23 @@ export type ChaosTokenCount = Partial<Record<ChaosTokenType, number>>;
 export type ChaosBagTokenData = {
 	type: ChaosTokenType;
 	sealed?: boolean;
+	sealData?: ChaosBagTokenSealData | null;
 };
+
+export type ChaosBagTokenSealData = {
+	title?: string;
+	icon?: string;
+	onUnseal?: "resolve" | "remove";
+} & (
+	| {
+			type: "investigator";
+			boardId: number;
+	  }
+	| {
+			type: "enemy";
+			code?: string;
+	  }
+);
 
 export type ChaosBagToken = ChaosBagTokenData & {
 	id: string;

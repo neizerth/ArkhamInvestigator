@@ -1,3 +1,4 @@
+import type { I18NText } from "@modules/core/i18n/shared/model";
 import type {
 	InputModeOptions,
 	KeyboardType,
@@ -11,5 +12,5 @@ export type PromptModalData<Action> = BaseModalData<Action> & {
 	inputMode?: InputModeOptions;
 	keyboardType?: KeyboardType;
 	inputProps?: TextInputProps;
-	text?: string;
+	text?: I18NText;
 };

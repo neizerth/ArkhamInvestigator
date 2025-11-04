@@ -1,27 +1,39 @@
 import type { SkillCheckItem } from "@modules/board/skill-check/shared/model";
 import type { InvestigatorBoardNumericStat } from "@shared/model";
-import type { ChaosBagRevealHandler } from "../../../../model";
+import { last } from "ramda";
+import type {
+	ChaosBagRevealHandler,
+	RevealedChaosBagToken,
+} from "../../../../model";
 
 export type HandleStartChaosBagRevealInternalPayload = {
 	boardId?: number;
 	type?: InvestigatorBoardNumericStat;
+	abilityId?: string;
 	value?: number;
 	title?: string;
 	expression?: SkillCheckItem[];
 	turnId?: string | null;
+	tokens?: RevealedChaosBagToken[];
 };
 
 export const handleStartChaosBagRevealInternal: ChaosBagRevealHandler<
 	HandleStartChaosBagRevealInternalPayload
 > = (state, payload) => {
+	const { tokens = [] } = payload;
+	const lastToken = last(tokens);
+	const lastTokenId = lastToken?.id;
+
+	state.abilityId = payload.abilityId ?? null;
 	state.turnId = payload.turnId ?? null;
-	state.revealedTokens = [];
-	state.allRevealedTokens = [];
+	state.revealedTokens = tokens;
+	state.allRevealedTokens = tokens;
+	state.currentRevealedTokenId = lastTokenId ?? null;
 	state.skillCheckBoardId = payload.boardId ?? null;
 	state.skillCheckType = payload.type ?? null;
 	state.skillValue = payload.value ?? null;
 	state.skillCheckTitle = payload.title ?? null;
-	state.skillCheckExpression = payload.expression || [];
+	state.skillCheckExpression = payload.expression ?? [];
 	state.result = null;
 	state.succeedBy = null;
 	state.failed = null;

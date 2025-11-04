@@ -1,13 +1,13 @@
 import {
-	ChaosTokenMemo as ChaosToken,
 	ChaosTokenCounter,
+	ChaosTokenPreview,
 } from "@modules/chaos-bag/base/shared/ui";
 import { TouchableOpacity } from "@modules/core/touch/shared/ui";
 import { color, size } from "@shared/config";
 import { NumericControl, Row } from "@shared/ui";
 import styled from "styled-components/native";
 
-export const Token: typeof ChaosToken = styled(ChaosToken)`
+export const Token: typeof ChaosTokenPreview = styled(ChaosTokenPreview)`
   
 `;
 
@@ -17,6 +17,7 @@ export const TokenButton: typeof TouchableOpacity = styled(TouchableOpacity)`
 
 export const Content: typeof Row = styled(Row)`
 	gap: ${size.gap.small}px;
+	align-items: center;
 `;
 
 export const Value: typeof ChaosTokenCounter = styled(ChaosTokenCounter)`

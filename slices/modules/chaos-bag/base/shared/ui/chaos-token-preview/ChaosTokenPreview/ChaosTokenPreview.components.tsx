@@ -1,5 +1,6 @@
-import { color } from "@shared/config";
-import { Icon, type IconProps, Value, type ValueProps } from "@shared/ui";
+import { Alegreya } from "@assets/fonts";
+import { color, font } from "@shared/config";
+import { Icon, type IconProps, Text, Value, type ValueProps } from "@shared/ui";
 import type { FC } from "react";
 import { View, type ViewProps } from "react-native";
 import styled, { css } from "styled-components/native";
@@ -153,4 +154,43 @@ export const Highlight: FC<HighlightProps> = styled(Value).attrs({
   ${({ size }: HighlightProps) => css`
     font-size: ${size * 0.43}px;
   `}
+`;
+
+export const SealedCount: typeof View = styled(View)`
+  position: absolute;
+	z-index: 2;
+  top: -3px;
+  right: -3px;
+	width: 18px;
+	height: 18px;
+	border-radius: 50%;
+  background-color: #c12422;
+  justify-content: center;
+  align-items: center;
+	padding: 1px;
+`;
+
+export const SealedCountText: typeof Text = styled(Text)`
+	font-family: ${Alegreya.regular};
+  color: ${color.light10};
+  font-size: ${font.size.default}px;
+	line-height: ${font.size.default}px;
+	text-align: center;
+`;
+
+export const SealedTitle: typeof Text = styled(Text).attrs({
+	numberOfLines: 1,
+})`
+  position: absolute;
+  z-index: 3;
+  bottom: -5px;
+  padding: 0 3px;
+	font-family: ${Alegreya.regular};
+  background-color: #c12422;
+  color: ${color.light10};
+  font-size: 12px;
+	line-height: ${font.size.default}px;
+  border-radius: 20px;
+  white-space: nowrap;
+	text-align: center;
 `;

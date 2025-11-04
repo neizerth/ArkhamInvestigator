@@ -5,6 +5,8 @@ import { revealChaosTokens } from "../../revealChaosTokens";
 import { startNewChaosBagReveal } from "./startNewChaosBagReveal";
 
 function* worker({ payload }: ReturnType<typeof startNewChaosBagReveal>) {
+	const { tokens = [] } = payload;
+	const initialTokensCount = tokens.length;
 	const boardSelector = selectBoardById(payload.boardId);
 	const board: ReturnType<typeof boardSelector> = yield select(boardSelector);
 
@@ -18,6 +20,10 @@ function* worker({ payload }: ReturnType<typeof startNewChaosBagReveal>) {
 			turnId,
 		}),
 	);
+
+	if (initialTokensCount > 0) {
+		return;
+	}
 
 	yield put(
 		revealChaosTokens({

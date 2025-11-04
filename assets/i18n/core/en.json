@@ -209,6 +209,8 @@
 	"chaosBag.cantAddToken": "You can't add more than {{limit}} {{character}}",
 	"chaosBag.cantRemoveToken": "You can't remove {{count}} {{character}}. Available: {{available}}",
 
+	"chaosBag.sealToken": "{{name}} seals the {{token}} token",
+
 	"board.help.syncScenarioClues": "Enables/disables synchronization of scenario and investigator clues: clues added to the scenario will be removed from the investigator",
 
 	"defeat.modal.text": "Choose other investigator",
@@ -259,6 +261,10 @@
 	"ability.luke.gateBox_many": "{{name}} puts {{count} charge on the Gate Box",
 
 	"ability.agatha.reaction": "{{name}} may play [[Spell]] or [[Insight]] event from her discard pile and remove it from the game",
+	"ability.wendy.parallel.action.chaosBag": "{{token}} in [chaos-bag-thin]",
+	"ability.wendy.parallel.action.history": "{{token}} [undo] [chaos-bag-thin]",
+	"ability.wendy.parallel.title": "Seal token",
+	"ability.wendy.parallel.text": "Select the token to seal\nExplanation:\n[bless] in [chaos-bag-thin] - chaos bag token\n[bless] [undo] [chaos-bag-thin] - revealed token from the last test",
 
 	"resources.notEnough": "Not enough resources. Required&nbsp;{{count}}, available&nbsp;{{available}}",
 

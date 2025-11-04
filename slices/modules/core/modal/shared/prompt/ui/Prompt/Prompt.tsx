@@ -1,3 +1,4 @@
+import { useI18NText } from "@modules/core/i18n/shared/lib";
 import { setModalValue } from "@modules/core/modal/shared/base/lib";
 import { useAppDispatch } from "@shared/lib";
 import type { Defined } from "@shared/model";
@@ -23,11 +24,12 @@ export function Prompt<A extends BaseModalAction, D extends PromptModalData<A>>(
 ) {
 	const dispatch = useAppDispatch();
 	const { t } = useTranslation();
+	const tText = useI18NText();
 	const { data, error } = props;
 	const defaultValue = data.defaultValue ? t(data.defaultValue) : "";
 	const placeholder = data.placeholder && t(data.placeholder);
 
-	const text = data.text && t(data.text);
+	const text = data.text && tText(data.text);
 	const errorMessage = error && t(error);
 
 	const { inputProps = {} } = data;

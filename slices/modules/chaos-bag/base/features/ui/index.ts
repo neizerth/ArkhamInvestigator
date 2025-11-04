@@ -1,1 +1,1 @@
-export * from "./ChaosBagPreview";
+export * from "./chaos-bag-preview";

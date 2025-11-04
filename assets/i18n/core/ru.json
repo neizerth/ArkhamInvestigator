@@ -203,6 +203,7 @@
 	"chaosBag.cantAddToken": "Нельзя добавить больше {{limit}} {{character}}",
 	"chaosBag.cantRemoveToken": "Нельзя удалить {{count}} {{character}}, в мешке {{available}} {{character}}",
 
+	"chaosBag.sealToken": "{{name}} запечатывает жетон {{token}}",
 	"mythos.doom": "Добавлена 1 Безысходность. Итого: {{doom}}",
 	"timing.step.name": "Шаг {{name}}",
 
@@ -260,6 +261,12 @@
 	"ability.luke.gateBox_many": "{{name}} кладёт {{count} зарядов на Шкатулку Врат",
 
 	"ability.agatha.reaction": "{{name}} может разыграть событие [[заклинание]] или [[интуицию]] из своего сброса и удалить его из игры",
+
+	"ability.wendy.parallel.action.chaosBag": "{{token}} в [chaos-bag-thin]",
+	"ability.wendy.parallel.action.history": "{{token}} [undo] [chaos-bag-thin]",
+	"ability.wendy.parallel.text": "Выберите, какой жетон запечатать\n<b>Пример:</b>\n[bless] в [chaos-bag-thin] - жетон из мешка хаоса\n[bless] [undo] [chaos-bag-thin] - вытянутый жетон последней проверки\nДля напоминания, укажите название врага, где жетон будет запечатан (до 7 символов):",
+	"ability.wendy.parallel.placeholder": "Имя врага",
+	"ability.wendy.parallel.title": "Запечатать жетон",
 
 	"resources.notEnough": "Недостаточно ресурсов. Необходимо&nbsp;{{count}}, доступно&nbsp;{{available}}",
 
