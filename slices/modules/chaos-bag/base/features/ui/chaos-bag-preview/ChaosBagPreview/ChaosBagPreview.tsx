@@ -1,10 +1,12 @@
 import { toggleChaosTokenSeal } from "@modules/chaos-bag/base/entities/lib";
 import type { ChaosBagToken } from "@modules/chaos-bag/base/shared/model";
 import { startChaosBagReveal } from "@modules/chaos-bag/reveal/base/entities/lib";
+import { selectRevealedTokens } from "@modules/chaos-bag/reveal/base/shared/lib";
 import { useGoBack } from "@modules/core/router/shared/lib";
 import { REMOVE_CLIPPED_SUBVIEWS } from "@shared/config";
-import { useAppDispatch } from "@shared/lib";
+import { useAppDispatch, useAppSelector } from "@shared/lib";
 import { Delay } from "@shared/ui";
+import { prop } from "ramda";
 import { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 import type { ListRenderItemInfo, ViewProps } from "react-native";
@@ -16,6 +18,10 @@ export type ChaosBagPreviewProps = ViewProps;
 export const ChaosBagPreview = (props: ChaosBagPreviewProps) => {
 	const dispatch = useAppDispatch();
 	const { t } = useTranslation();
+
+	const revealed = useAppSelector(selectRevealedTokens);
+	const revealedIds = revealed.map(prop("id"));
+
 	const data = useData();
 	const isEmpty = data.regular.length === 0 && data.sealed.length === 0;
 
@@ -24,6 +30,13 @@ export const ChaosBagPreview = (props: ChaosBagPreviewProps) => {
 	);
 
 	const selectedId = selectedToken?.id;
+
+	const isDisabled = useCallback(
+		(id: string) => {
+			return revealedIds.includes(id);
+		},
+		[revealedIds],
+	);
 
 	const selectToken = useCallback(
 		(token: ChaosBagToken) => {
@@ -69,12 +82,13 @@ export const ChaosBagPreview = (props: ChaosBagPreviewProps) => {
 							onPress={() => selectToken(token)}
 							onLongPress={toggleSeal(token.id)}
 							selected={selectedId === token.id}
+							disabled={isDisabled(token.id)}
 						/>
 					))}
 				</C.TokenRow>
 			);
 		},
-		[toggleSeal, selectedId, selectToken],
+		[toggleSeal, selectedId, selectToken, isDisabled],
 	);
 
 	const actions = useModalActions();

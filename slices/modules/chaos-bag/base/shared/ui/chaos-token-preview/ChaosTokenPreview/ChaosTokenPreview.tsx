@@ -29,6 +29,7 @@ export type ChaosTokenPreviewProps = ViewProps &
 		defaultValue?: number;
 		showValue?: boolean;
 		showOverlay?: boolean;
+		disabled?: boolean;
 	};
 
 const defaultPadding = size.gap.small;

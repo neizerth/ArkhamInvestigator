@@ -14,7 +14,14 @@ type PropsWithSize = {
 	size: number;
 };
 
-export const Container: typeof View = styled(View)`
+type ContainerProps = ViewProps & {
+	disabled?: boolean;
+};
+
+export const Container: FC<ContainerProps> = styled(View)`
+  ${({ disabled }: ContainerProps) => css`
+    opacity: ${disabled ? 0.5 : 1};
+  `}
   position: relative;
 
   align-items: center;

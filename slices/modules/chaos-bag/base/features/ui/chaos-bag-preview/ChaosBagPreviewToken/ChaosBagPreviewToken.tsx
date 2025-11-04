@@ -18,6 +18,7 @@ export type ChaosBagPreviewTokenProps = TouchableOpacityProps & {
 export const ChaosBagPreviewToken = ({
 	token,
 	selected,
+	disabled,
 	...props
 }: ChaosBagPreviewTokenProps) => {
 	const dispatch = useAppDispatch();
@@ -77,7 +78,7 @@ export const ChaosBagPreviewToken = ({
 						/>
 					</C.MenuContainer>
 				)}
-				<C.Token {...token} selected={selected} />
+				<C.Token {...token} selected={selected} disabled={disabled} />
 			</C.Container>
 		</GestureDetector>
 	);
