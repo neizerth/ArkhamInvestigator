@@ -1,7 +1,15 @@
 import { selectBoardById } from "@modules/board/base/shared/lib";
 import { unsealChaosToken } from "@modules/chaos-bag/base/entities/lib";
-import { selectChaosBagTokenById } from "@modules/chaos-bag/base/shared/lib";
+import {
+	chaosBagUpdated,
+	selectChaosBagTokenById,
+} from "@modules/chaos-bag/base/shared/lib";
+import {
+	addRevealedTokens,
+	selectRevealedTokensCount,
+} from "@modules/chaos-bag/reveal/base/shared/lib";
 import type { RevealedChaosBagToken } from "@modules/chaos-bag/reveal/base/shared/model";
+import { openChaosTokenRevealModal } from "@modules/chaos-bag/reveal/modal/entities/lib";
 import { put, select, takeEvery } from "redux-saga/effects";
 import { v4 } from "uuid";
 import { startChaosBagReveal } from "../startReveal";
@@ -16,28 +24,39 @@ function* worker({ payload }: ReturnType<typeof resolveChaosToken>) {
 	}
 	if (token.sealed) {
 		yield put(unsealChaosToken(payload));
+		yield put(chaosBagUpdated({ boardId }));
 	}
+
+	const count: ReturnType<typeof selectRevealedTokensCount> = yield select(
+		selectRevealedTokensCount,
+	);
 
 	const boardSelector = selectBoardById(boardId);
 	const board: ReturnType<typeof boardSelector> = yield select(boardSelector);
 	const { turnId } = board;
 
-	const tokens: RevealedChaosBagToken[] = [
-		{
-			...token,
-			sealData: null,
-			sealed: false,
-			revealId: v4(),
-		},
-	];
+	const revealedToken: RevealedChaosBagToken = {
+		...token,
+		sealData: null,
+		sealed: false,
+		revealId: v4(),
+	};
 
-	yield put(
-		startChaosBagReveal({
-			...payload,
-			tokens,
-			turnId,
-		}),
-	);
+	const tokens = [revealedToken];
+
+	if (count === 0) {
+		yield put(
+			startChaosBagReveal({
+				...payload,
+				tokens,
+				turnId,
+			}),
+		);
+		return;
+	}
+	yield put(addRevealedTokens({ tokens }));
+
+	yield put(openChaosTokenRevealModal());
 }
 
 export function* resolveChaosTokenSaga() {
