@@ -1,4 +1,3 @@
-// TODO
 import { setBoardAbilityUse } from "@modules/board/abilities/shared/lib";
 import { openBoardSelectModal } from "@modules/core/modal/entities/board-select/lib";
 import { createCancelModalAction } from "@modules/core/modal/shared/actions/cancel/lib";

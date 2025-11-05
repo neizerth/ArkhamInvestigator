@@ -269,6 +269,7 @@
 	"ability.wendy.parallel.title": "Seal token",
 	"ability.wendy.parallel.text": "Select the token to seal\nExplanation:\n[bless] in [chaos-bag-thin] - chaos bag token\n[bless] [undo] [chaos-bag-thin] - revealed token from the last test\nFor reminder, specify the initials of the enemy where the token will be sealed (up to 7 characters, e.g. «Ghoul»):",
 	"ability.wendy.parallel.placeholder": "Enemy",
+	"ability.wendy.parallel.reaction.fail": "No tokens to seal",
 
 	"resources.notEnough": "Not enough resources. Required&nbsp;{{count}}, available&nbsp;{{available}}",
 

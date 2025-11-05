@@ -272,6 +272,7 @@
 	"ability.wendy.parallel.text": "Выберите, какой жетон запечатать\n<b>Пример:</b>\n[bless] в [chaos-bag-thin] - жетон из мешка хаоса\n[bless] [undo] [chaos-bag-thin] - вытянутый жетон последней проверки\nДля напоминания, укажите инициалы карты врага, где жетон будет запечатан (до 7 символов, например «Упырь»):",
 	"ability.wendy.parallel.placeholder": "Враг",
 	"ability.wendy.parallel.title": "Запечатать жетон",
+	"ability.wendy.parallel.reaction.fail": "Нет подходящих жетонов для печати",
 
 	"resources.notEnough": "Недостаточно ресурсов. Необходимо&nbsp;{{count}}, доступно&nbsp;{{available}}",
 
