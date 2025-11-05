@@ -9,6 +9,7 @@ import {
 } from "@modules/chaos-bag/reveal/base/shared/lib";
 import type { RevealedChaosBagToken } from "@modules/chaos-bag/reveal/base/shared/model";
 import { openChaosTokenRevealModal } from "@modules/chaos-bag/reveal/modal/entities/lib";
+import { selectChaosBagTokenValues } from "@modules/chaos-bag/value/entities/lib";
 import { put, select, takeEvery } from "redux-saga/effects";
 import { v4 } from "uuid";
 import { startChaosBagReveal } from "../startReveal";
@@ -18,9 +19,17 @@ function* worker({ payload }: ReturnType<typeof resolveChaosToken>) {
 	const { id, boardId } = payload;
 	const tokenSelector = selectChaosBagTokenById(id);
 	const token: ReturnType<typeof tokenSelector> = yield select(tokenSelector);
+
 	if (!token) {
 		return;
 	}
+
+	const valuesSelector = selectChaosBagTokenValues(boardId);
+
+	const values: ReturnType<typeof valuesSelector> =
+		yield select(valuesSelector);
+	const value = values[token.type];
+
 	if (token.sealed) {
 		yield put(unsealChaosToken(payload));
 		yield put(chaosBagUpdated({ boardId }));
@@ -35,6 +44,7 @@ function* worker({ payload }: ReturnType<typeof resolveChaosToken>) {
 		sealData: null,
 		sealed: false,
 		revealId: v4(),
+		value,
 	};
 
 	const tokens = [revealedToken];

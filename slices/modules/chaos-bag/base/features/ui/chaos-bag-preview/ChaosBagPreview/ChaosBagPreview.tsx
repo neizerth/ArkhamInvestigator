@@ -1,5 +1,4 @@
 import { toggleChaosTokenSeal } from "@modules/chaos-bag/base/entities/lib";
-import type { ChaosBagToken } from "@modules/chaos-bag/base/shared/model";
 import { startChaosBagReveal } from "@modules/chaos-bag/reveal/base/entities/lib";
 import { selectRevealedTokens } from "@modules/chaos-bag/reveal/base/shared/lib";
 import { useGoBack } from "@modules/core/router/shared/lib";
@@ -11,7 +10,7 @@ import { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 import type { ListRenderItemInfo, ViewProps } from "react-native";
 import * as C from "./ChaosBagPreview.components";
-import { useData, useModalActions } from "./hooks";
+import { type DisabledChaosToken, useData, useModalActions } from "./hooks";
 
 export type ChaosBagPreviewProps = ViewProps;
 
@@ -25,22 +24,15 @@ export const ChaosBagPreview = (props: ChaosBagPreviewProps) => {
 	const data = useData();
 	const isEmpty = data.regular.length === 0 && data.sealed.length === 0;
 
-	const [selectedToken, setSelectedToken] = useState<ChaosBagToken | null>(
+	const [selectedToken, setSelectedToken] = useState<DisabledChaosToken | null>(
 		null,
 	);
 
 	const selectedId = selectedToken?.id;
 
-	const isDisabled = useCallback(
-		(id: string) => {
-			return revealedIds.includes(id);
-		},
-		[revealedIds],
-	);
-
 	const selectToken = useCallback(
-		(token: ChaosBagToken) => {
-			if (isDisabled(token.id)) {
+		(token: DisabledChaosToken) => {
+			if (token.disabled) {
 				return false;
 			}
 
@@ -51,7 +43,7 @@ export const ChaosBagPreview = (props: ChaosBagPreviewProps) => {
 
 			setSelectedToken(token);
 		},
-		[selectedId, isDisabled],
+		[selectedId],
 	);
 
 	const toggleSeal = useCallback(
@@ -74,7 +66,7 @@ export const ChaosBagPreview = (props: ChaosBagPreviewProps) => {
 	}, [dispatch, back]);
 
 	const renderTokenRow = useCallback(
-		(info: ListRenderItemInfo<ChaosBagToken[]>) => {
+		(info: ListRenderItemInfo<DisabledChaosToken[]>) => {
 			const tokens = info.item;
 
 			return (
@@ -86,13 +78,13 @@ export const ChaosBagPreview = (props: ChaosBagPreviewProps) => {
 							onPress={() => selectToken(token)}
 							onLongPress={toggleSeal(token.id)}
 							selected={selectedId === token.id}
-							disabled={isDisabled(token.id)}
+							disabled={token.disabled}
 						/>
 					))}
 				</C.TokenRow>
 			);
 		},
-		[toggleSeal, selectedId, selectToken, isDisabled],
+		[toggleSeal, selectedId, selectToken],
 	);
 
 	const actions = useModalActions();
