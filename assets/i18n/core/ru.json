@@ -278,9 +278,10 @@
 	"ability.skids.parallel.text": "Выберите, сколько ресурсов потратить",
 	"ability.skids.parallel.action": "{{count}}&nbsp;&nbsp;[resource]",
 
-	"ability.fatherMateo.parallel.fastFail": "Нет доступных жетонов [bless] для печати",
-	"ability.fatherMateo.parallel.sealBless": "{{name}} запечатывает [bless] на {{targetName}}",
-	"ability.fatherMateo.parallel.sealBless.self": "{{name}} запечатывает [bless] на себе",
+	"ability.mateo.parallel.modal.title": "Запечатать [bless]",
+	"ability.mateo.parallel.fastFail": "Нет доступных жетонов [bless] для печати",
+	"ability.mateo.parallel.sealBless": "{{fromName}} запечатывает [bless] на {{name}}",
+	"ability.mateo.parallel.sealBless.self": "{{name}} запечатывает [bless] на себе",
 
 	"resources.notEnough": "Недостаточно ресурсов. Необходимо&nbsp;{{count}}, доступно&nbsp;{{available}}",
 

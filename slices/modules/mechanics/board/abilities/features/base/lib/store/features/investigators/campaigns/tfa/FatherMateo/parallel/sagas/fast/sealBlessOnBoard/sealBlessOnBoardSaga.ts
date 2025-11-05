@@ -30,6 +30,11 @@ function* worker({ payload }: ReturnType<typeof sealBlessOnBoard>) {
 					type: "investigator",
 					boardId: targetBoardId,
 				},
+				revealPriority: 1,
+				afterReveal: {
+					type: "return",
+					count: 1,
+				},
 			},
 		}),
 	);
@@ -54,7 +59,7 @@ function* worker({ payload }: ReturnType<typeof sealBlessOnBoard>) {
 		yield put(
 			sendInvestigatorNotification({
 				boardId,
-				message: "ability.fatherMateo.parallel.sealBless.self",
+				message: "ability.mateo.parallel.sealBless.self",
 			}),
 		);
 		return;
@@ -64,7 +69,7 @@ function* worker({ payload }: ReturnType<typeof sealBlessOnBoard>) {
 		sendInvestigatorNotification({
 			sourceBoardId,
 			boardId: targetBoardId,
-			message: "ability.fatherMateo.parallel.sealBless",
+			message: "ability.mateo.parallel.sealBless",
 		}),
 	);
 }

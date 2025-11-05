@@ -1,3 +1,4 @@
+import { selectBoardId } from "@modules/board/base/shared/lib";
 import type { PropsWithBoardId } from "@modules/board/base/shared/model";
 import { selectChaosBagContents } from "@modules/chaos-bag/base/shared/lib";
 import { selectRevealedTokenIds } from "@modules/chaos-bag/reveal/base/shared/lib";
@@ -18,13 +19,20 @@ export const selectRandomUnrevealedChaosTokens = ({
 			selectRevealedTokenIds,
 			selectChaosBagContents,
 			selectChaosBagTokenValues(boardId),
+			selectBoardId(boardId),
 		],
-		(revealedIds, contents, values) => {
-			return getRandomChaosTokens({
+		(revealedIds, contents, values, boardId) => {
+			const tokens = getRandomChaosTokens({
 				revealedIds,
 				contents,
 				count,
 				values,
+				boardId,
 			});
+
+			return {
+				tokens,
+				contents,
+			};
 		},
 	);

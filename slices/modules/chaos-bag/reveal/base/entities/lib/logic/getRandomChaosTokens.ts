@@ -1,6 +1,8 @@
-import type { ChaosTokenValues } from "@modules/chaos-bag/base/shared/model";
+import type {
+	ChaosBagToken,
+	ChaosTokenValues,
+} from "@modules/chaos-bag/base/shared/model";
 import { shuffle } from "fast-shuffle";
-import { isNotNil } from "ramda";
 import { v4 } from "uuid";
 import type { RevealedChaosBagToken } from "../../../shared/model";
 import {
@@ -9,6 +11,7 @@ import {
 } from "./getUnrevealedChaosTokens";
 
 export type GetRandomChaosTokensOptions = GetUnrevealedChaosTokensOptions & {
+	boardId: number;
 	count: number;
 	values: ChaosTokenValues;
 };
@@ -16,23 +19,51 @@ export type GetRandomChaosTokensOptions = GetUnrevealedChaosTokensOptions & {
 export const getRandomChaosTokens = (
 	options: GetRandomChaosTokensOptions,
 ): RevealedChaosBagToken[] => {
-	const { count, values } = options;
+	const { count, values, contents, boardId } = options;
+
+	const mapToken = createTokenReveal(values);
 
 	const nonRevealed = getUnrevealedChaosTokens(options);
 	const unsealed = nonRevealed.filter(({ sealed }) => !sealed);
 
-	const source = shuffle(unsealed);
-	const tokens = source.slice(0, count);
+	const primaryTokens = contents.filter(({ revealPriority, sealData }) => {
+		if (!revealPriority) {
+			return false;
+		}
 
-	return tokens
-		.map((token) => {
-			const value = values[token.type];
+		if (sealData?.type === "investigator" && sealData.boardId !== boardId) {
+			return false;
+		}
 
-			return {
-				...token,
-				revealId: v4(),
-				value,
-			};
-		})
-		.filter(isNotNil);
+		return true;
+	});
+
+	const primary = primaryTokens.slice(0, count);
+
+	const restCount = count - primary.length;
+
+	if (restCount === 0) {
+		return primary.map(mapToken);
+	}
+
+	const rest = unsealed.slice(restCount);
+
+	const source = shuffle(rest);
+	const randomTokens = source.slice(0, restCount);
+
+	return [...primary, ...randomTokens].map(mapToken);
 };
+
+const createTokenReveal =
+	(values: ChaosTokenValues) =>
+	(token: ChaosBagToken): RevealedChaosBagToken => {
+		const value = values[token.type];
+
+		return {
+			...token,
+			revealId: v4(),
+			value,
+			sealed: false,
+			sealData: null,
+		};
+	};

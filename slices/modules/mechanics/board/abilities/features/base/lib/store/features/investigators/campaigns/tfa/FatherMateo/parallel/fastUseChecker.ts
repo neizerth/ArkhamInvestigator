@@ -7,7 +7,7 @@ import type {
 import { AbilityCode } from "@modules/mechanics/board/abilities/shared/config";
 import { createSelector } from "@reduxjs/toolkit";
 
-export const selecCanUseParallelFatherMateoAbility: AbilityCheckerCallback =
+export const selecCanUseParallelFatherMateoFastAbility: AbilityCheckerCallback =
 	() =>
 		createSelector(
 			[selectChaosBagContents, selectBoardsCount],
@@ -23,11 +23,6 @@ export const selecCanUseParallelFatherMateoAbility: AbilityCheckerCallback =
 						sealData.boardId,
 				);
 
-				console.log({
-					sealedBoards,
-					boardsCount,
-				});
-
 				if (sealedBoards.length === boardsCount) {
 					return false;
 				}
@@ -37,5 +32,5 @@ export const selecCanUseParallelFatherMateoAbility: AbilityCheckerCallback =
 		);
 
 export const ParallelFatherMateoAbilityChecker: AbilityChecker = {
-	[AbilityCode.FatherMateo.parallel]: selecCanUseParallelFatherMateoAbility,
+	[AbilityCode.FatherMateo.parallel]: selecCanUseParallelFatherMateoFastAbility,
 };

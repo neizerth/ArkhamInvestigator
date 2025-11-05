@@ -1,7 +1,7 @@
 import { removeSingleChaosToken } from "@modules/chaos-bag/base/entities/lib";
 import { isChaosTokenTypeRemovable } from "@modules/chaos-bag/base/shared/lib";
 import type { ChaosBagToken } from "@modules/chaos-bag/base/shared/model";
-import { resolveChaosToken } from "@modules/chaos-bag/reveal/base/entities/lib";
+import { revealChaosTokenById } from "@modules/chaos-bag/reveal/base/entities/lib";
 import { useGoBack } from "@modules/core/router/shared/lib";
 import { useSwipe } from "@modules/core/touch/shared/lib";
 import type { TouchableOpacityProps } from "@modules/core/touch/shared/ui";
@@ -28,10 +28,10 @@ export const ChaosBagPreviewToken = ({
 
 	const removable = isChaosTokenTypeRemovable(token.type);
 
-	const resolve = useCallback(() => {
+	const reveal = useCallback(() => {
 		back();
 		dispatch(
-			resolveChaosToken({
+			revealChaosTokenById({
 				boardId: "current",
 				id,
 			}),
@@ -52,7 +52,7 @@ export const ChaosBagPreviewToken = ({
 
 	const swipeRight = useSwipe({
 		direction: "right",
-		onSwipe: resolve,
+		onSwipe: reveal,
 	});
 
 	const swipeLeft = useSwipe({
@@ -72,7 +72,7 @@ export const ChaosBagPreviewToken = ({
 						<C.TokenMenu
 							token={token}
 							onClose={onPress}
-							onResolve={resolve}
+							onReveal={reveal}
 							onRemove={remove}
 							removable={removable}
 						/>

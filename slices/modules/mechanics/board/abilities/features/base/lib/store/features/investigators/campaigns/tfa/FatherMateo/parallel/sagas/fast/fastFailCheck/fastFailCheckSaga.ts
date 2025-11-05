@@ -17,7 +17,7 @@ function* worker({ payload }: ReturnType<typeof checkBoardAbilityUseFailed>) {
 	yield put(
 		sendInvestigatorNotification({
 			boardId,
-			message: "ability.fatherMateo.parallel.fastFail",
+			message: "ability.mateo.parallel.fastFail",
 			type: "error",
 		}),
 	);

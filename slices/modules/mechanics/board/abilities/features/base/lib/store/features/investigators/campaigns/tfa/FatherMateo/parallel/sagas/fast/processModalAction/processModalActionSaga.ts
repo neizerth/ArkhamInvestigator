@@ -3,7 +3,7 @@ import {
 	createConfirmBoardSelectModalFilter,
 } from "@modules/core/modal/entities/board-select/lib";
 import { put, takeEvery } from "redux-saga/effects";
-import { modalId } from "../../../config";
+import { modalId } from "../config";
 import { sealBlessOnBoard } from "../sealBlessOnBoard";
 
 const filterAction = createConfirmBoardSelectModalFilter({

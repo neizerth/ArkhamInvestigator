@@ -7,6 +7,7 @@ import { chaosToken } from "@modules/chaos-bag/base/shared/config";
 import { selectChaosBagTokenById } from "@modules/chaos-bag/base/shared/lib";
 import type {
 	ChaosBagToken,
+	ChaosBagTokenData,
 	ChaosBagTokenSealData,
 } from "@modules/chaos-bag/base/shared/model";
 import type { ConfirmModalAction } from "@modules/core/modal/shared/actions/confirm/model";
@@ -58,9 +59,13 @@ function* worker({ payload }: Action) {
 		title: value,
 	};
 
-	const tokenPayload = {
+	const tokenPayload: Partial<ChaosBagTokenData> = {
 		sealed: true,
 		sealData,
+		afterReveal: {
+			type: "return",
+			count: 1,
+		},
 	};
 
 	const tokenSelector = selectChaosBagTokenById(token.id);

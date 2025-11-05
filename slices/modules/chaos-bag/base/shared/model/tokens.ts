@@ -42,14 +42,18 @@ export type ChaosTokenCount = Partial<Record<ChaosTokenType, number>>;
 
 export type ChaosBagTokenData = {
 	type: ChaosTokenType;
+	revealPriority?: number;
 	sealed?: boolean;
 	sealData?: ChaosBagTokenSealData | null;
+	afterReveal?: {
+		type: "return";
+		count: number;
+	};
 };
 
 export type ChaosBagTokenSealData = {
 	title?: string;
 	icon?: string;
-	onUnseal?: "resolve" | "remove";
 } & (
 	| {
 			type: "investigator";
