@@ -280,7 +280,7 @@
 
 	"ability.mateo.parallel.modal.title": "Запечатать [bless]",
 	"ability.mateo.parallel.fastFail": "Нет доступных жетонов [bless] для печати",
-	"ability.mateo.parallel.sealBless": "{{fromName}} запечатывает [bless] на {{name}}",
+	"ability.mateo.parallel.sealBless": "{{fromName}} запечатывает [bless] на {{prepositionalName}}",
 	"ability.mateo.parallel.sealBless.self": "{{name}} запечатывает [bless] на себе",
 
 	"resources.notEnough": "Недостаточно ресурсов. Необходимо&nbsp;{{count}}, доступно&nbsp;{{available}}",

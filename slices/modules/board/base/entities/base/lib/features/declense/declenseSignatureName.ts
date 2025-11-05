@@ -19,6 +19,9 @@ export const declenseSignatureName = (
 	if (resultCase === "dative" && signature.dative_name) {
 		return signature.dative_name;
 	}
+	if (resultCase === "prepositional" && signature.prepositional_name) {
+		return signature.prepositional_name;
+	}
 	if (language === "ru") {
 		return declenseRU(options);
 	}
