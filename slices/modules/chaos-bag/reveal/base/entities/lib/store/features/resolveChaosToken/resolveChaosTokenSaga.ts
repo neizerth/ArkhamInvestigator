@@ -1,4 +1,3 @@
-import { selectBoardById } from "@modules/board/base/shared/lib";
 import { unsealChaosToken } from "@modules/chaos-bag/base/entities/lib";
 import {
 	chaosBagUpdated,
@@ -31,10 +30,6 @@ function* worker({ payload }: ReturnType<typeof resolveChaosToken>) {
 		selectRevealedTokensCount,
 	);
 
-	const boardSelector = selectBoardById(boardId);
-	const board: ReturnType<typeof boardSelector> = yield select(boardSelector);
-	const { turnId } = board;
-
 	const revealedToken: RevealedChaosBagToken = {
 		...token,
 		sealData: null,
@@ -49,7 +44,6 @@ function* worker({ payload }: ReturnType<typeof resolveChaosToken>) {
 			startChaosBagReveal({
 				...payload,
 				tokens,
-				turnId,
 			}),
 		);
 		return;
