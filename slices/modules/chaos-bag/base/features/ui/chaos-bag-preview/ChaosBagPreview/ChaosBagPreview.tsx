@@ -40,6 +40,10 @@ export const ChaosBagPreview = (props: ChaosBagPreviewProps) => {
 
 	const selectToken = useCallback(
 		(token: ChaosBagToken) => {
+			if (isDisabled(token.id)) {
+				return false;
+			}
+
 			if (selectedId === token.id) {
 				setSelectedToken(null);
 				return;
@@ -47,7 +51,7 @@ export const ChaosBagPreview = (props: ChaosBagPreviewProps) => {
 
 			setSelectedToken(token);
 		},
-		[selectedId],
+		[selectedId, isDisabled],
 	);
 
 	const toggleSeal = useCallback(

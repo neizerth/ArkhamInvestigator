@@ -274,6 +274,10 @@
 	"ability.wendy.parallel.title": "Запечатать жетон",
 	"ability.wendy.parallel.reaction.fail": "Нет подходящих жетонов для печати",
 
+	"ability.skids.parallel.title": "Потратить ресурсы",
+	"ability.skids.parallel.text": "Выберите, сколько ресурсов потратить",
+	"ability.skids.parallel.action": "{{count}}&nbsp;&nbsp;[resource]",
+
 	"resources.notEnough": "Недостаточно ресурсов. Необходимо&nbsp;{{count}}, доступно&nbsp;{{available}}",
 
 	"action.heal": "{{fromName}} лечит {{dativeName}} {{value}}",

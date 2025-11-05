@@ -57,6 +57,7 @@ export const AbilityCode = {
 		base: {
 			fast: "two-resources-for-action",
 		},
+		parallel: "skids-resources-casino",
 	},
 	AliceLiddell: "use-base-intellect",
 	ReynauldDeChatillon: "reynauld-reaction",

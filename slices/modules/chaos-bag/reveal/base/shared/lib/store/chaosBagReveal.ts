@@ -8,7 +8,6 @@ import type { RevealedChaosBagToken } from "../../model";
 import * as reducers from "./reducers";
 
 export type ChaosBagRevealState = {
-	abilityId: string | null;
 	revealedTokens: RevealedChaosBagToken[];
 	allRevealedTokens: RevealedChaosBagToken[];
 	turnId: string | null;
@@ -22,10 +21,10 @@ export type ChaosBagRevealState = {
 	result: number | null;
 	succeedBy: number | null;
 	failed: boolean | null;
+	skillCheckData: unknown;
 };
 
 const initialState: ChaosBagRevealState = {
-	abilityId: null,
 	turnId: null,
 	revealedTokens: [],
 	allRevealedTokens: [],
@@ -38,6 +37,7 @@ const initialState: ChaosBagRevealState = {
 	result: null,
 	succeedBy: null,
 	failed: null,
+	skillCheckData: null,
 };
 
 const state = createSliceState(initialState);
@@ -66,6 +66,7 @@ export const {
 	setFailed: setChaosBagSkillCheckFailed,
 	setRevealedTokens,
 	setAllRevealedTokens,
+	setSkillCheckData: setChaosBagSkillCheckData,
 
 	addRevealedTokens,
 	removeRevealedTokenId,
@@ -91,6 +92,7 @@ export const {
 	selectSucceedBy: selectChaosBagSucceedBy,
 	selectFailed: selectChaosBagSkillCheckFailed,
 	selectChaosBagReveal,
+	selectSkillCheckData: selectChaosBagSkillCheckData,
 } = chaosBagReveal.selectors;
 
 export default chaosBagReveal.reducer;

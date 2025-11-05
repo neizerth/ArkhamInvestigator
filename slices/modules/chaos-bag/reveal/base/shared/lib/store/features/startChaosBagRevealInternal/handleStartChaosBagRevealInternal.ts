@@ -9,12 +9,12 @@ import type {
 export type HandleStartChaosBagRevealInternalPayload = {
 	boardId?: number;
 	type?: InvestigatorBoardNumericStat;
-	abilityId?: string;
 	value?: number;
 	title?: string;
 	expression?: SkillCheckItem[];
 	turnId?: string | null;
 	tokens?: RevealedChaosBagToken[];
+	data?: unknown;
 };
 
 export const handleStartChaosBagRevealInternal: ChaosBagRevealHandler<
@@ -24,7 +24,6 @@ export const handleStartChaosBagRevealInternal: ChaosBagRevealHandler<
 	const lastToken = last(tokens);
 	const lastTokenId = lastToken?.id;
 
-	state.abilityId = payload.abilityId ?? null;
 	state.turnId = payload.turnId ?? null;
 	state.revealedTokens = tokens;
 	state.allRevealedTokens = tokens;
@@ -37,4 +36,5 @@ export const handleStartChaosBagRevealInternal: ChaosBagRevealHandler<
 	state.result = null;
 	state.succeedBy = null;
 	state.failed = null;
+	state.skillCheckData = payload.data ?? null;
 };

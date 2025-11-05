@@ -13,6 +13,10 @@ export const createActualValueChangeNotificationWorker = <
 	}: PayloadAction<P>) {
 		const { boardId, value = 1 } = payload;
 
+		if (value === 0) {
+			return;
+		}
+
 		yield put(
 			sendInvestigatorNotification({
 				boardId,
