@@ -116,7 +116,7 @@ export const ChaosBagPreview = (props: ChaosBagPreviewProps) => {
 						</C.Sealed>
 					)}
 				</Delay>
-				<C.BlessCurse />
+				<C.BlessCurse incrementLongPressEnabled />
 				{!isEmpty && (
 					<C.RevealButton
 						onPress={reveal}

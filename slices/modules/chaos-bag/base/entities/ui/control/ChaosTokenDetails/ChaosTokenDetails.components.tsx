@@ -12,6 +12,7 @@ export const Container: typeof View = styled(View)`
 
 export const Content: typeof Row = styled(Row)`
   padding: 0px ${size.gap.small}px;
+  align-items: center;
 `;
 
 export const Preview: typeof Row = styled(Row)`
@@ -19,6 +20,7 @@ export const Preview: typeof Row = styled(Row)`
   gap: ${size.gap.small}px;
   flex: 1;
   justify-content: flex-end;
+  align-items: center;
 `;
 
 export const Input: typeof ChaosTokenInput = styled(ChaosTokenInput)`

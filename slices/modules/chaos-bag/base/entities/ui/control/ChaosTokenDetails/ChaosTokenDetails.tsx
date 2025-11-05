@@ -17,6 +17,7 @@ export type ChaosTokenDetailsProps = ViewProps & {
 	type: ChaosTokenType;
 	preview?: boolean;
 	inputStyle?: ViewProps["style"];
+	incrementLongPressEnabled?: boolean;
 };
 
 const MAX_PREVIEW_COUNT = 4;
@@ -25,6 +26,7 @@ export const ChaosTokenDetails = ({
 	type,
 	inputStyle,
 	preview,
+	incrementLongPressEnabled = true,
 	...props
 }: ChaosTokenDetailsProps) => {
 	const dispatch = useAppDispatch();
@@ -70,8 +72,10 @@ export const ChaosTokenDetails = ({
 		);
 	}, [dispatch, canAdd, type]);
 
+	const canIncrementLongPress = incrementLongPressEnabled && canAdd;
+
 	const onIncrementLongPress = useCallback(() => {
-		if (!canAdd) {
+		if (!canIncrementLongPress) {
 			return false;
 		}
 		dispatch(
@@ -81,7 +85,7 @@ export const ChaosTokenDetails = ({
 				sealed: true,
 			}),
 		);
-	}, [dispatch, type, canAdd]);
+	}, [dispatch, type, canIncrementLongPress]);
 
 	const previewTokens = count > MAX_PREVIEW_COUNT;
 
