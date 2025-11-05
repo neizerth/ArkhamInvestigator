@@ -23,8 +23,13 @@ function* worker({ payload }: ReturnType<typeof setBoardAbilityUse>) {
 	const board: ReturnType<typeof boardSelector> = yield select(boardSelector);
 	const { resources } = board.value;
 
-	if (resources < 1) {
-		yield put(startResourcesTest({ boardId }));
+	if (resources < 2) {
+		yield put(
+			startResourcesTest({
+				boardId,
+				count: resources,
+			}),
+		);
 		return;
 	}
 

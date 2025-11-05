@@ -1,4 +1,7 @@
+import { setBoardAbilityUse } from "@modules/board/abilities/shared/lib";
+import { spendResources } from "@modules/board/base/entities/base/lib";
 import { selectBoardById } from "@modules/board/base/shared/lib";
+import { createBoardHistoryGroup } from "@modules/board/history/shared/lib";
 import { setSkillCheckDifficulty } from "@modules/board/skill-check/shared/lib";
 import { startChaosBagReveal } from "@modules/chaos-bag/reveal/base/entities/lib";
 import { AbilityCode } from "@modules/mechanics/board/abilities/shared/config";
@@ -12,6 +15,18 @@ function* worker({ payload }: ReturnType<typeof startResourcesTest>) {
 	const board: ReturnType<typeof boardSelector> = yield select(boardSelector);
 
 	const { turnId } = board;
+
+	const history = createBoardHistoryGroup();
+
+	yield put(
+		setBoardAbilityUse({
+			boardId,
+			abilityId: AbilityCode.SkidsOToole.parallel,
+			canUse: false,
+			force: true,
+			history,
+		}),
+	);
 
 	yield put(setSkillCheckDifficulty(count));
 
@@ -28,12 +43,13 @@ function* worker({ payload }: ReturnType<typeof startResourcesTest>) {
 		}),
 	);
 
-	// yield put(
-	// 	spendResources({
-	// 		boardId,
-	// 		value: count,
-	// 	}),
-	// );
+	yield put(
+		spendResources({
+			boardId,
+			value: count,
+			history,
+		}),
+	);
 }
 
 export function* ParallelSkidsOTooleStartResourcesTestSaga() {
