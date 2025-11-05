@@ -1,6 +1,6 @@
-import { spawn } from "redux-saga/effects";
-import { BaseFatherMateoAbilitySaga } from "./base/features/sagas";
+import type { AbilityChecker } from "@modules/mechanics/board/abilities/entities/model";
+import { ParallelFatherMateoAbilityChecker } from "./parallel/fastUseChecker";
 
-export function* FatherMateoAbilitySaga() {
-	yield spawn(BaseFatherMateoAbilitySaga);
-}
+export const FatherMateoAbilityChecker: AbilityChecker = {
+	...ParallelFatherMateoAbilityChecker,
+};

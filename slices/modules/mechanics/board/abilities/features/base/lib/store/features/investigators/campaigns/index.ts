@@ -1,9 +1,11 @@
 import { CoreAbilityChecker } from "./core";
 import { TheDunwichLegacyAbilityChecker } from "./dwl";
 import { TheCircleUndoneAbilityChecker } from "./tcu";
+import { TheForgottenAgeAbilityChecker } from "./tfa";
 
 export const CampaignAbilityChecker = {
-	...TheDunwichLegacyAbilityChecker,
 	...CoreAbilityChecker,
+	...TheDunwichLegacyAbilityChecker,
 	...TheCircleUndoneAbilityChecker,
+	...TheForgottenAgeAbilityChecker,
 };

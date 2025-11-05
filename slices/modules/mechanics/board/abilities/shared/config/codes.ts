@@ -33,6 +33,7 @@ export const AbilityCode = {
 	},
 	FatherMateo: {
 		base: "mateo-auto-fail-reveal",
+		parallel: "seal-bless-on-investigator",
 	},
 	WendyAdams: {
 		base: "wendys-amulet",
@@ -82,6 +83,7 @@ export const AbilityCode = {
 	PennyWhite: "get-clue-effect-revealing",
 	LukeRobinson: "gate-box",
 	AgathaCrane: "play-event-from-discard-pile-after-turn-ends",
+	JacquelineFine: "choose-between-3-tokens",
 };
 
 export const LilyChenAbilityCodes = Object.values(AbilityCode.LilyChen);

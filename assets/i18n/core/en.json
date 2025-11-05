@@ -271,6 +271,10 @@
 	"ability.wendy.parallel.placeholder": "Enemy",
 	"ability.wendy.parallel.reaction.fail": "No tokens to seal",
 
+	"ability.fatherMateo.parallel.fastFail": "No available [bless] tokens to seal",
+	"ability.fatherMateo.parallel.sealBless": "{{name}} seals [bless] on {{targetName}}",
+	"ability.fatherMateo.parallel.sealBless.self": "{{name}} seals [bless] on himself",
+
 	"resources.notEnough": "Not enough resources. Required&nbsp;{{count}}, available&nbsp;{{available}}",
 
 	"action.heal": "{{fromName}} heals {{dativeName}} {{value}}",

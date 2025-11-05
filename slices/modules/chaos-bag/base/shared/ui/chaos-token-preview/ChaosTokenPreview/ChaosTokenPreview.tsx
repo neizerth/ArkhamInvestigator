@@ -79,7 +79,7 @@ export const ChaosTokenPreview = ({
 		});
 
 	return (
-		<C.Container {...props} style={style.container}>
+		<C.Container {...props} style={[props.style, style.container]}>
 			{sealed && (
 				<C.Sealed width="100%" height="100%" style={style.background} />
 			)}
@@ -89,6 +89,11 @@ export const ChaosTokenPreview = ({
 				</C.SealedCount>
 			)}
 			{sealData?.title && <C.SealedTitle>{sealData.title}</C.SealedTitle>}
+			{sealData?.type === "investigator" && (
+				<C.SealedPreview>
+					<C.BoardPreview boardId={sealData.boardId} type="square" />
+				</C.SealedPreview>
+			)}
 			<C.Content style={style.content}>
 				{modified && typeof defaultValue === "number" && (
 					<C.Modification

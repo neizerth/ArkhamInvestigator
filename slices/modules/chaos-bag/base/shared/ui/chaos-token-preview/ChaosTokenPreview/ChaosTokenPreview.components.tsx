@@ -1,4 +1,5 @@
 import { Alegreya } from "@assets/fonts";
+import { BoardSignatureImage } from "@modules/board/base/features/base/ui";
 import { color, font } from "@shared/config";
 import { Icon, type IconProps, Text, Value, type ValueProps } from "@shared/ui";
 import type { FC } from "react";
@@ -200,4 +201,20 @@ export const SealedTitle: typeof Text = styled(Text).attrs({
   border-radius: 20px;
   white-space: nowrap;
 	text-align: center;
+`;
+
+export const SealedPreview: typeof View = styled(View)`
+  position: absolute;
+  z-index: 5;
+  right: -5px;
+  bottom: -5px;
+`;
+
+export const BoardPreview: typeof BoardSignatureImage = styled(
+	BoardSignatureImage,
+)`
+  width: 30px;
+  height: 30px;
+  border-radius: 20px;
+  border: 2px solid #c12422;
 `;
