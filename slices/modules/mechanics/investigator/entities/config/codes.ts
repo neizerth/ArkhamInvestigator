@@ -62,4 +62,5 @@ export const InvesigatorCode = {
 		mystic: "11008",
 	},
 	YukiYagami: "zgoo_00001",
+	LuciaDeveraux: "zoc_31010",
 };

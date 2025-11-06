@@ -284,8 +284,17 @@
 	"ability.mateo.parallel.fastFail": "Нет доступных жетонов [bless] для печати",
 	"ability.mateo.parallel.sealBless": "{{fromName}} запечатывает [bless] на {{prepositionalName}}",
 	"ability.mateo.parallel.sealBless.self": "{{name}} запечатывает [bless] на себе",
+	"ability.lucia.elderSign.title": "Вылечить рану/ужас",
 
 	"resources.notEnough": "Недостаточно ресурсов. Необходимо&nbsp;{{count}}, доступно&nbsp;{{available}}",
+
+	"heal.damage_one": "Вылечить {{count}} [health]",
+	"heal.damage_few": "Вылечить {{count}} [health]",
+	"heal.damage_many": "Вылечить {{count}} [health]",
+
+	"heal.horror_one": "Вылечить {{count}} [sanity]",
+	"heal.horror_few": "Вылечить {{count}} [sanity]",
+	"heal.horror_many": "Вылечить {{count}} [sanity]",
 
 	"action.heal": "{{fromName}} лечит {{dativeName}} {{value}}",
 	"action.heal.self": "{{name}} лечит {{value}}",
@@ -373,6 +382,7 @@
 	"Press and hold": "Нажмите и удерживайте",
 	"Hold to seal": "Удерживайте, чтобы запечатать",
 	"Hold": "Удерживайте",
+	"Heal": "Вылечить",
 
 	"Health/Sanity": "Здоровье/Рассудок",
 	"Show health/sanity": "Показать здоровье/рассудок",

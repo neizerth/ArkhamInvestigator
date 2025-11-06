@@ -274,8 +274,16 @@
 	"ability.fatherMateo.parallel.fastFail": "No available [bless] tokens to seal",
 	"ability.fatherMateo.parallel.sealBless": "{{name}} seals [bless] on {{targetName}}",
 	"ability.fatherMateo.parallel.sealBless.self": "{{name}} seals [bless] on himself",
+	"ability.lucia.elderSign.title": "Heal damage/horror",
 
 	"resources.notEnough": "Not enough resources. Required&nbsp;{{count}}, available&nbsp;{{available}}",
+
+	"heal.damage_one": "Heal {{count}} [health]",
+	"heal.damage_few": "Heal {{count}} [health]",
+	"heal.damage_many": "Heal {{count}} [health]",
+	"heal.horror_one": "Heal {{count}} [sanity]",
+	"heal.horror_few": "Heal {{count}} [sanity]",
+	"heal.horror_many": "Heal {{count}} [sanity]",
 
 	"action.heal": "{{fromName}} heals {{dativeName}} {{value}}",
 	"action.heal.self": "{{name}} heals {{value}}",
@@ -350,6 +358,7 @@
 	"Press and hold": "Press and hold",
 	"Hold to seal": "Hold to seal",
 	"Hold": "Hold",
+	"Heal": "Heal",
 
 	"Health/Sanity": "Health/Sanity",
 	"Show health/sanity": "Show health/sanity",

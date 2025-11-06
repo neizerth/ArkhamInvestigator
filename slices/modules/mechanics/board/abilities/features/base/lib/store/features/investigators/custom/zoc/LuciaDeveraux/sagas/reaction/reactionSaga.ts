@@ -17,6 +17,6 @@ function* worker({ payload }: ReturnType<typeof changeBoardHistoryAbilityUse>) {
 	yield put(getResources({ boardId }));
 }
 
-export function* LuciaDeverauxAbilitySaga() {
+export function* LuciaDeverauxReactionSaga() {
 	yield takeEvery(filterAction, worker);
 }

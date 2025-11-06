@@ -8,4 +8,5 @@ export type BaseModalData<Action> = {
 	subtitle?: I18NText;
 	faction?: Faction;
 	actions: Action[];
+	data?: unknown;
 };
