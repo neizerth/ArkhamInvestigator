@@ -8,11 +8,10 @@ import {
 	addRevealedTokens,
 	selectRevealedTokensCount,
 } from "@modules/chaos-bag/reveal/base/shared/lib";
-import type { RevealedChaosBagToken } from "@modules/chaos-bag/reveal/base/shared/model";
 import { openChaosTokenRevealModal } from "@modules/chaos-bag/reveal/modal/entities/lib";
 import { selectChaosBagTokenValues } from "@modules/chaos-bag/value/entities/lib";
 import { put, select, takeEvery } from "redux-saga/effects";
-import { v4 } from "uuid";
+import { createRevealedToken } from "../../../logic";
 import { chaosTokensRevealed } from "../revealChaosTokens";
 import { startChaosBagReveal } from "../startReveal";
 import { revealChaosTokenById } from "./revealChaosTokenById";
@@ -45,13 +44,10 @@ function* worker({ payload }: ReturnType<typeof revealChaosTokenById>) {
 		selectRevealedTokensCount,
 	);
 
-	const revealedToken: RevealedChaosBagToken = {
+	const revealedToken = createRevealedToken({
 		...token,
-		sealData: null,
-		sealed: false,
-		revealId: v4(),
 		value,
-	};
+	});
 
 	const tokens = [revealedToken];
 

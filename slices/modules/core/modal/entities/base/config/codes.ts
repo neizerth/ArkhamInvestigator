@@ -9,4 +9,5 @@ export const CustomModalId = {
 	factionSelect: "faction-select",
 	chaosTokenReveal: "chaos-token-reveal",
 	LuciaDeveraux: "lucia-deveraux-elder-sign",
+	ParallelWendyAdams: "parallel-wendy-adams-elder-sign",
 };

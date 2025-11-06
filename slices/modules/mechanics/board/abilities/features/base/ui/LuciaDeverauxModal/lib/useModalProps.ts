@@ -43,7 +43,8 @@ export const useModalProps = (selectedBoardId?: number): Props | null => {
 							title: {
 								i18nKey: "heal.damage",
 								data: {
-									count: 1,
+									value: 1,
+									total: board.damage,
 								},
 							},
 							icon: "",
@@ -61,7 +62,8 @@ export const useModalProps = (selectedBoardId?: number): Props | null => {
 							title: {
 								i18nKey: "heal.horror",
 								data: {
-									count: 1,
+									value: 1,
+									total: board.horror,
 								},
 							},
 							icon: "",

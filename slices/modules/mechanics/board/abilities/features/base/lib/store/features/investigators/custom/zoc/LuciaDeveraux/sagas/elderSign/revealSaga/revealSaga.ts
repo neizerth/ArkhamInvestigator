@@ -23,7 +23,7 @@ const filterAction = (action: unknown) => {
 		(token) => token.type === "elderSign",
 	);
 
-	return haveElderSign && failed === false;
+	return haveElderSign && !failed;
 };
 
 function* worker({ payload }: ReturnType<typeof chaosBagRevealEnd>) {

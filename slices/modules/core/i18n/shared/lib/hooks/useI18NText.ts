@@ -6,7 +6,10 @@ export const useI18NText = () => {
 	const { t } = useTranslation();
 
 	return useCallback(
-		(item: I18NText) => {
+		(item?: I18NText) => {
+			if (!item) {
+				return "";
+			}
 			if (typeof item === "string") {
 				return t(item);
 			}

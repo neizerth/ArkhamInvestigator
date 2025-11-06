@@ -1,4 +1,4 @@
-export * from "./selectChaosTokenCount";
+export * from "./selectChaosTokenCountByType";
 export * from "./contents";
 export * from "./selectCurrentToken";
 export * from "./logic";

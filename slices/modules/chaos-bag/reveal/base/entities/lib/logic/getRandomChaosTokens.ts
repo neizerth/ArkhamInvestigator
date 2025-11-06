@@ -3,8 +3,8 @@ import type {
 	ChaosTokenValues,
 } from "@modules/chaos-bag/base/shared/model";
 import { shuffle } from "fast-shuffle";
-import { v4 } from "uuid";
 import type { RevealedChaosBagToken } from "../../../shared/model";
+import { createRevealedToken } from "./createRevealedToken";
 import {
 	type GetUnrevealedChaosTokensOptions,
 	getUnrevealedChaosTokens,
@@ -61,11 +61,8 @@ const createTokenReveal =
 	(token: ChaosBagToken): RevealedChaosBagToken => {
 		const value = values[token.type];
 
-		return {
+		return createRevealedToken({
 			...token,
-			revealId: v4(),
 			value,
-			sealed: false,
-			sealData: null,
-		};
+		});
 	};

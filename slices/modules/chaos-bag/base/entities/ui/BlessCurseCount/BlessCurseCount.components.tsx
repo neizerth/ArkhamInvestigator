@@ -1,3 +1,4 @@
+import { TouchableOpacity } from "@modules/core/touch/shared/ui";
 import { color, size } from "@shared/config";
 import { Row } from "@shared/ui";
 import { View } from "react-native";
@@ -19,4 +20,7 @@ export const Separator: typeof View = styled(View)`
   background-color: ${color.dark10};
   margin-left: ${size.gap.large}px;
   margin-right: ${size.gap.default}px;
+`;
+
+export const Touchable: typeof TouchableOpacity = styled(TouchableOpacity)`
 `;

@@ -275,6 +275,11 @@
 	"ability.wendy.parallel.placeholder": "Враг",
 	"ability.wendy.parallel.title": "Запечатать жетон",
 	"ability.wendy.parallel.reaction.fail": "Нет подходящих жетонов для печати",
+	"ability.wendy.parallel.elderSign.selected.title": "Выбранные жетоны",
+	"ability.wendy.parallel.elderSign.selected.text": "Нажмите на выбранный жетон, чтобы удалить",
+	"ability.wendy.parallel.elderSign.title": "Разыграть жетоны",
+	"ability.wendy.parallel.elderSign.text": "Выберите до 2 [bless] и/или [curse] и разыграйте, игнорируя их эффекты.\nНажмите на жетон для выбора",
+	"ability.wendy.parallel.elderSign.confirm.title": "Разыграть",
 
 	"ability.skids.parallel.title": "Потратить ресурсы",
 	"ability.skids.parallel.text": "Выберите, сколько ресурсов потратить",
@@ -291,13 +296,9 @@
 
 	"resources.notEnough": "Недостаточно ресурсов. Необходимо&nbsp;{{count}}, доступно&nbsp;{{available}}",
 
-	"heal.damage_one": "Вылечить {{count}} [health]",
-	"heal.damage_few": "Вылечить {{count}} [health]",
-	"heal.damage_many": "Вылечить {{count}} [health]",
+	"heal.damage": "Вылечить {{value}}/{{total}} [health]",
 
-	"heal.horror_one": "Вылечить {{count}} [sanity]",
-	"heal.horror_few": "Вылечить {{count}} [sanity]",
-	"heal.horror_many": "Вылечить {{count}} [sanity]",
+	"heal.horror": "Вылечить {{value}}/{{total}} [sanity]",
 
 	"action.heal": "{{fromName}} лечит {{dativeName}} {{value}}",
 	"action.heal.self": "{{name}} лечит {{value}}",
