@@ -102,21 +102,15 @@ export const ToggleIcon: FC<ToggleIconProps> = styled(Icon)`
 	`}
 `;
 
-type BackgroundProps = RoundReferenceBackgroundProps & PropsWithOpen;
+type BackgroundProps = RoundReferenceBackgroundProps;
 
 export const Background: FC<BackgroundProps> = styled(RoundReferenceBackground)`
-	top: 0;
-	bottom: -5%;
-	left: 0;
-	right: 0;
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
 	opacity: 0.6;
 	position: absolute;
-	${({ open }: BackgroundProps) =>
-		open &&
-		css`
-		top: -3%;
-		bottom: -3%;
-	`}
 `;
 
 const zhTitleConfig = {
