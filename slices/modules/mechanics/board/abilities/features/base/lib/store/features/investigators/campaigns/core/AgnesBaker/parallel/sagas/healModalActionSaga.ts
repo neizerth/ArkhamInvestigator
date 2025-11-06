@@ -1,9 +1,5 @@
-import {
-	increaseBoardActualPropValue,
-	selectBoardById,
-} from "@modules/board/base/shared/lib";
-import { sendInvestigatorNotification } from "@modules/board/notifications/entities/lib";
-import { i18next } from "@modules/core/i18n/shared/config";
+import { healDamage } from "@modules/board/base/entities/base/lib";
+import { selectBoardById } from "@modules/board/base/shared/lib";
 import {
 	createConfirmModalFilter,
 	type modalConfirmed,
@@ -28,23 +24,8 @@ function* worker({ payload }: ReturnType<typeof modalConfirmed>) {
 	}
 
 	yield put(
-		increaseBoardActualPropValue({
+		healDamage({
 			boardId,
-			prop: "health",
-		}),
-	);
-
-	const value = i18next.t("plural.accusative.damage", {
-		count: 1,
-	});
-
-	yield put(
-		sendInvestigatorNotification({
-			boardId,
-			message: "action.heal.self",
-			data: {
-				value,
-			},
 		}),
 	);
 }

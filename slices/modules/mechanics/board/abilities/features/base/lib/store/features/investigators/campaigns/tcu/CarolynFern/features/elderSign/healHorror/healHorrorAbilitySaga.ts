@@ -1,13 +1,9 @@
-import {
-	increaseBoardActualPropValue,
-	selectBoardById,
-} from "@modules/board/base/shared/lib";
-import { sendInvestigatorNotification } from "@modules/board/notifications/entities/lib";
-import { i18next } from "@modules/core/i18n/shared/config";
+import { healHorror } from "@modules/board/base/entities/base/lib";
+import { selectBoardById } from "@modules/board/base/shared/lib";
 import { put, select, takeEvery } from "redux-saga/effects";
-import { healHorror } from "./healHorror";
+import { healHorror as CarolynFernHealHorror } from "./healHorror";
 
-function* worker({ payload }: ReturnType<typeof healHorror>) {
+function* worker({ payload }: ReturnType<typeof CarolynFernHealHorror>) {
 	const { targetBoardId, boardId } = payload;
 
 	const boardSelector = selectBoardById(targetBoardId);
@@ -18,35 +14,14 @@ function* worker({ payload }: ReturnType<typeof healHorror>) {
 	}
 
 	yield put(
-		increaseBoardActualPropValue({
+		healHorror({
 			boardId: targetBoardId,
-			prop: "sanity",
-		}),
-	);
-
-	const healSelf = targetBoardId === boardId;
-
-	const i18nKey = healSelf ? "action.heal.self" : "action.heal";
-
-	const value = i18next.t("plural.accusative.horror", {
-		count: 1,
-	});
-
-	const message = i18next.t(i18nKey, {
-		value,
-	});
-
-	const sourceBoardId = healSelf ? null : boardId;
-
-	yield put(
-		sendInvestigatorNotification({
-			boardId: targetBoardId,
-			sourceBoardId,
-			message,
+			sourceBoardId: boardId,
+			value: 1,
 		}),
 	);
 }
 
 export function* CarolynFernHealHorrorAbilitySaga() {
-	yield takeEvery(healHorror.match, worker);
+	yield takeEvery(CarolynFernHealHorror.match, worker);
 }
