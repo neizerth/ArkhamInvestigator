@@ -7,12 +7,11 @@ import { createConfirmModalAction } from "@modules/core/modal/shared/actions/con
 import { isNotNil } from "ramda";
 import { put, select, takeEvery } from "redux-saga/effects";
 import { modalActionId } from "../config";
-import { modalId } from "../config";
 import { sealBlessOnBoard } from "../sealBlessOnBoard";
 import { triggerFastAbility } from "./triggerFastAbility";
 
 function* worker({ payload }: ReturnType<typeof triggerFastAbility>) {
-	const { boardId } = payload;
+	const { boardId, modalId } = payload;
 
 	const boardSelector = selectBoardById(boardId);
 	const board: ReturnType<typeof boardSelector> = yield select(boardSelector);

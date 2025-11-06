@@ -1,6 +1,7 @@
 import { setBoardAbilityUse } from "@modules/board/abilities/shared/lib";
 import { AbilityCode } from "@modules/mechanics/board/abilities/shared/config";
 import { put, takeEvery } from "redux-saga/effects";
+import { modalId } from "../config";
 import { triggerFastAbility } from "../triggerFastAbility";
 
 const filterAction = (action: unknown) => {
@@ -18,7 +19,12 @@ const filterAction = (action: unknown) => {
 };
 
 function* worker({ payload }: ReturnType<typeof setBoardAbilityUse>) {
-	yield put(triggerFastAbility(payload));
+	yield put(
+		triggerFastAbility({
+			...payload,
+			modalId,
+		}),
+	);
 }
 
 export function* ParallelFatherMateoOpenModalSaga() {

@@ -3,12 +3,19 @@ import {
 	createConfirmBoardSelectModalFilter,
 } from "@modules/core/modal/entities/board-select/lib";
 import { put, takeEvery } from "redux-saga/effects";
-import { modalId } from "../config";
+import { elderSignModalId, modalId } from "../config";
 import { sealBlessOnBoard } from "../sealBlessOnBoard";
 
-const filterAction = createConfirmBoardSelectModalFilter({
+const filterBlessAction = createConfirmBoardSelectModalFilter({
 	modalId,
 });
+
+const filterElderSignAction = createConfirmBoardSelectModalFilter({
+	modalId: elderSignModalId,
+});
+
+const filterAction = (action: unknown) =>
+	filterBlessAction(action) || filterElderSignAction(action);
 
 function* worker({ payload }: ReturnType<typeof boardSelectModalConfirmed>) {
 	const { boardId, value } = payload;
@@ -23,4 +30,5 @@ function* worker({ payload }: ReturnType<typeof boardSelectModalConfirmed>) {
 
 export function* ParallelFatherMateoProcessModalActionSaga() {
 	yield takeEvery(filterAction, worker);
+	yield takeEvery(filterElderSignAction, worker);
 }
