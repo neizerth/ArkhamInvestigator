@@ -20,6 +20,6 @@ function* worker({ payload }: ReturnType<typeof changeBoardHistoryAbilityUse>) {
 	);
 }
 
-export function* GavriellaMizrahAbilitySaga() {
+export function* GavriellaMizrahReactionSaga() {
 	yield takeEvery(filterAction, worker);
 }

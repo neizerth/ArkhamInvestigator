@@ -286,6 +286,9 @@
 	"ability.mateo.parallel.sealBless.self": "{{name}} запечатывает [bless] на себе",
 	"ability.lucia.elderSign.title": "Вылечить рану/ужас",
 
+	"ability.jerome.elderSign.title": "Найти улику",
+	"ability.jerome.elderSign.text": "Подтвердите, если в вашей локации есть улика",
+
 	"resources.notEnough": "Недостаточно ресурсов. Необходимо&nbsp;{{count}}, доступно&nbsp;{{available}}",
 
 	"heal.damage_one": "Вылечить {{count}} [health]",

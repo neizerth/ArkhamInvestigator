@@ -276,6 +276,9 @@
 	"ability.fatherMateo.parallel.sealBless.self": "{{name}} seals [bless] on himself",
 	"ability.lucia.elderSign.title": "Heal damage/horror",
 
+	"ability.jerome.elderSign.title": "Find a clue",
+	"ability.jerome.elderSign.text": "Confirm if there is a clue in your location",
+
 	"resources.notEnough": "Not enough resources. Required&nbsp;{{count}}, available&nbsp;{{available}}",
 
 	"heal.damage_one": "Heal {{count}} [health]",

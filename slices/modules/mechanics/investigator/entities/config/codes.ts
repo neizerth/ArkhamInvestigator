@@ -63,4 +63,7 @@ export const InvesigatorCode = {
 	},
 	YukiYagami: "zgoo_00001",
 	LuciaDeveraux: "zoc_31010",
+	ValentinoRivas: "05048",
+	GavriellaMizrah: "05046",
+	JeromeDavids: "05047",
 };
