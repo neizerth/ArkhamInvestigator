@@ -61,4 +61,5 @@ export const InvesigatorCode = {
 		seeker: "11007",
 		mystic: "11008",
 	},
+	YukiYagami: "zgoo_00001",
 };

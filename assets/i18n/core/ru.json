@@ -202,7 +202,9 @@
 
 	"chaosBag.addTokens": "{{name}} добавляет в мешок жетоны {{tokens}}",
 
-	"chaosBag.removeToken": "{{name}} удаляет из мешка {{count}} {{token}}",
+	"chaosBag.removeToken_one": "{{name}} удаляет из мешка {{count}} {{token}}",
+	"chaosBag.removeToken_few": "{{name}} удаляет из мешка {{count}} {{token}}",
+	"chaosBag.removeToken_many": "{{name}} удаляет из мешка {{count}} {{token}}",
 
 	"chaosBag.cantAddToken": "Нельзя добавить больше {{limit}} {{character}}",
 	"chaosBag.cantRemoveToken": "Нельзя удалить {{count}} {{character}}, в мешке {{available}} {{character}}",

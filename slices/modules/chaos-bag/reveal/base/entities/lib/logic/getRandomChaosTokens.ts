@@ -46,7 +46,9 @@ export const getRandomChaosTokens = (
 		return primary.map(mapToken);
 	}
 
-	const rest = unsealed.slice(restCount);
+	const rest = unsealed.filter(
+		({ id }) => !primary.some((token) => token.id === id),
+	);
 
 	const source = shuffle(rest);
 	const randomTokens = source.slice(0, restCount);
