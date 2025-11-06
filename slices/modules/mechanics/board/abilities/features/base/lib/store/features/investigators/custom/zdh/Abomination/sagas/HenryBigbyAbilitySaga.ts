@@ -1,0 +1,25 @@
+import {
+	type chaosTokensRevealed,
+	createRevealedTokenFilterAction,
+} from "@modules/chaos-bag/reveal/base/entities/lib";
+import { InvesigatorCode } from "@modules/mechanics/investigator/entities/config";
+import { put, takeEvery } from "redux-saga/effects";
+import { swapCard } from "./swapCard";
+const filterAction = createRevealedTokenFilterAction({
+	code: InvesigatorCode.HenryBigby,
+	tokens: ["autoFail"],
+});
+
+function* worker({ payload }: ReturnType<typeof chaosTokensRevealed>) {
+	const { boardId } = payload;
+
+	yield put(
+		swapCard({
+			boardId,
+			code: InvesigatorCode.BeastWithin,
+		}),
+	);
+}
+export function* HenryBigbyAbilitySaga() {
+	yield takeEvery(filterAction, worker);
+}

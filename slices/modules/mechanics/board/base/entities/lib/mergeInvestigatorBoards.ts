@@ -4,22 +4,33 @@ import type {
 } from "@modules/board/base/shared/model";
 import type { InvestigatorNumericStat } from "@shared/model";
 import { mergeDeepRight } from "ramda";
+import { getBoardDamage, getBoardHorror } from "./logic";
 
-type Options = {
+export type MergeInvestigatorBoardsOptions = {
 	sourceBoard: InvestigatorBoard;
 	targetBoard: InvestigatorBoard;
-	keepResources: boolean;
-	keepClues: boolean;
-	keepActions: boolean;
+	keepResources?: boolean;
+	keepClues?: boolean;
+	keepActions?: boolean;
+	keepDamage?: boolean;
+	keepHorror?: boolean;
+	keepHandSize?: boolean;
+	keepDoom?: boolean;
+	keepUpkeepResourcesIncrease?: boolean;
 };
 
 export const mergeInvestigatorBoards = ({
 	sourceBoard,
 	targetBoard,
-	keepClues,
-	keepResources,
-	keepActions,
-}: Options) => {
+	keepClues = false,
+	keepResources = false,
+	keepActions = false,
+	keepDamage = false,
+	keepHorror = false,
+	keepHandSize = false,
+	keepDoom = false,
+	keepUpkeepResourcesIncrease = false,
+}: MergeInvestigatorBoardsOptions) => {
 	const getValue = <K extends InvestigatorNumericStat>(
 		prop: K,
 		keep: boolean,
@@ -27,11 +38,25 @@ export const mergeInvestigatorBoards = ({
 		return keep ? sourceBoard.value[prop] : targetBoard.value[prop];
 	};
 
+	const damage = getBoardDamage(sourceBoard);
+	const horror = getBoardHorror(sourceBoard);
+
+	const health = targetBoard.value.health - (keepDamage ? damage : 0);
+	const sanity = targetBoard.value.sanity - (keepHorror ? horror : 0);
+
 	const modification: InvesigatorBoardPartial = {
 		value: {
 			clues: getValue("clues", keepClues),
 			resources: getValue("resources", keepResources),
 			actions: getValue("actions", keepActions),
+			handSize: getValue("handSize", keepHandSize),
+			doom: getValue("doom", keepDoom),
+			upkeepResourcesIncrease: getValue(
+				"upkeepResourcesIncrease",
+				keepUpkeepResourcesIncrease,
+			),
+			health,
+			sanity,
 		},
 	};
 
