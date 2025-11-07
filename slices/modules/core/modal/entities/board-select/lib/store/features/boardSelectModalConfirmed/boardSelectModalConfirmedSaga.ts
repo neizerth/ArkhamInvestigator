@@ -26,8 +26,12 @@ const filterAction = (action: unknown) => {
 };
 
 function* worker({ payload }: Action) {
-	const value: ReturnType<typeof selectModalValue> =
+	const selectedValue: ReturnType<typeof selectModalValue> =
 		yield select(selectModalValue);
+
+	const [defaultValue] = payload.modalData.boardIds;
+
+	const value = selectedValue ?? defaultValue;
 
 	if (!value || typeof value !== "number") {
 		return;

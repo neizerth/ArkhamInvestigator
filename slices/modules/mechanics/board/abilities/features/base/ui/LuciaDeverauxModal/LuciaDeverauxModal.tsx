@@ -9,9 +9,15 @@ export const LuciaDeverauxModal = () => {
 	const [id, setId] = useState<number | undefined>();
 	const props = useModalProps(id);
 
-	const onChange = useCallback((item: SignatureDetailItem<number>) => {
-		setId(item.data);
-	}, []);
+	const onChange = useCallback(
+		(item: SignatureDetailItem<number>) => {
+			if (!props) {
+				return;
+			}
+			setId(item.data);
+		},
+		[props],
+	);
 
 	if (!props) {
 		return null;

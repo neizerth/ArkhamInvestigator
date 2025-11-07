@@ -276,6 +276,10 @@
 	"ability.fatherMateo.parallel.fastFail": "No available [bless] tokens to seal",
 	"ability.fatherMateo.parallel.sealBless": "{{name}} seals [bless] on {{targetName}}",
 	"ability.fatherMateo.parallel.sealBless.self": "{{name}} seals [bless] on himself",
+
+	"ability.fatherMateo.parallel.reaction.text": "Draw sealed [bless] from the chaos bag instead of a random token?",
+	"ability.fatherMateo.parallel.reaction.title": "Draw sealed [bless]",
+
 	"ability.lucia.elderSign.title": "Heal damage/horror",
 
 	"ability.jerome.elderSign.title": "Find a clue",

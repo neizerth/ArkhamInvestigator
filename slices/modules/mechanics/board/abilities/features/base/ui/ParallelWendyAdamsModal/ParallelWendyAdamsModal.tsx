@@ -2,6 +2,7 @@ import { BlessCurseCount } from "@modules/chaos-bag/base/entities/ui/BlessCurseC
 import { CustomModalId } from "@modules/core/modal/entities/base/config";
 import {
 	selectModalData,
+	selectModalShown,
 	setModalValue,
 } from "@modules/core/modal/shared/base/lib";
 import type {
@@ -15,8 +16,11 @@ import { useTranslation } from "react-i18next";
 import * as C from "./ParallelWendyAdamsModal.components";
 import { useData } from "./useData";
 
+const modalId = CustomModalId.ParallelWendyAdams;
 export const ParallelWendyAdamsModal = () => {
 	const dispatch = useAppDispatch();
+	const shown = useAppSelector(selectModalShown(modalId));
+
 	const data = useAppSelector(
 		selectModalData,
 	) as BaseModalData<BaseModalAction> | null;
@@ -26,15 +30,18 @@ export const ParallelWendyAdamsModal = () => {
 	const { count, bless, curse } = useData();
 
 	useEffect(() => {
+		if (!shown) {
+			return;
+		}
 		dispatch(setModalValue(count));
-	}, [count, dispatch]);
+	}, [count, dispatch, shown]);
 
 	if (!data) {
 		return;
 	}
 
 	return (
-		<C.Modal id={CustomModalId.ParallelWendyAdams}>
+		<C.Modal id={modalId}>
 			<C.Confirm data={data}>
 				<C.Content>
 					<C.Text value={t`ability.wendy.parallel.elderSign.text`} />

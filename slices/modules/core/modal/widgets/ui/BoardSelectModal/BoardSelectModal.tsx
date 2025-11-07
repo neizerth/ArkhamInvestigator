@@ -26,7 +26,11 @@ export function BoardSelectModal<
 	const { boardIds, disabledBoardIds = [] } = data;
 	const text = data.text && t(data.text);
 
-	const [selectedId, setSelectedId] = useState<number | undefined>(value);
+	const defaultValue = value ?? boardIds[0];
+
+	const [selectedId, setSelectedId] = useState<number | undefined>(
+		defaultValue,
+	);
 
 	const onChange = useCallback(
 		(item: SignatureDetailItem<number> | null) => {

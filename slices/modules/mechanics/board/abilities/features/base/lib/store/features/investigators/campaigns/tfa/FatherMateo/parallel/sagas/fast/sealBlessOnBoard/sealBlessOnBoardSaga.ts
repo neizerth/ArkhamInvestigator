@@ -2,15 +2,15 @@ import { setBoardAbilityUse } from "@modules/board/abilities/shared/lib";
 import { selectBoardId } from "@modules/board/base/shared/lib";
 import { sendInvestigatorNotification } from "@modules/board/notifications/entities/lib";
 import { updateChaosToken } from "@modules/chaos-bag/base/entities/lib";
-import { selectChaosBagContents } from "@modules/chaos-bag/base/shared/lib";
+import { selectAvailableTokens } from "@modules/chaos-bag/reveal/base/shared/lib";
 import { AbilityCode } from "@modules/mechanics/board/abilities/shared/config";
 import { put, select, takeEvery } from "redux-saga/effects";
 import { sealBlessOnBoard } from "./sealBlessOnBoard";
 
 function* worker({ payload }: ReturnType<typeof sealBlessOnBoard>) {
 	const { boardId, targetBoardId } = payload;
-	const contents: ReturnType<typeof selectChaosBagContents> = yield select(
-		selectChaosBagContents,
+	const contents: ReturnType<typeof selectAvailableTokens> = yield select(
+		selectAvailableTokens,
 	);
 
 	const bless = contents.find(

@@ -289,6 +289,10 @@
 	"ability.mateo.parallel.fastFail": "Нет доступных жетонов [bless] для печати",
 	"ability.mateo.parallel.sealBless": "{{fromName}} запечатывает [bless] на {{prepositionalName}}",
 	"ability.mateo.parallel.sealBless.self": "{{name}} запечатывает [bless] на себе",
+
+	"ability.mateo.parallel.reaction.title": "Вытянуть запечатанный [bless]",
+	"ability.mateo.parallel.reaction.text": "Вытянуть запечатанный [bless] вместо случайного жетона?",
+
 	"ability.lucia.elderSign.title": "Вылечить рану/ужас",
 
 	"ability.jerome.elderSign.title": "Найти улику",
