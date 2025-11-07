@@ -50,7 +50,10 @@ function* worker({ payload }: ReturnType<typeof modalConfirmed>) {
 			yield put(
 				sendInvestigatorNotification({
 					boardId,
-					message: "ability.richard.damage",
+					message: "ability.richard.action.damage",
+					data: {
+						count: 1,
+					},
 				}),
 			);
 			break;
