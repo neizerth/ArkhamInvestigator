@@ -54,6 +54,7 @@ export const RoundReferencePhase = ({
 						onToggle={toggle}
 						before={<C.PlayIcon icon="play2" onPress={play} />}
 						after={<C.Actions phase={phase} active={open} />}
+						open={open}
 					>
 						{phase.title}
 					</C.Header>
