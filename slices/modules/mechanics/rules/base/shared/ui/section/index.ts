@@ -1,2 +1,2 @@
 export * from "./ReferenceSectionBackground";
-export * from "./ReferenceBackground";
+export * from "./ReferenceSectionHeader";

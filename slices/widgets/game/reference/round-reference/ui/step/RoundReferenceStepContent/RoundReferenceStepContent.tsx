@@ -2,17 +2,17 @@ import { selectCurrentLanguage } from "@modules/core/i18n/shared/lib";
 import type { TimingPhaseStep } from "@modules/mechanics/rules/round-timing/shared/model";
 import { useAppSelector } from "@shared/lib";
 import type { ViewProps } from "react-native";
-import * as C from "./RoundReferencePhaseStep.components";
-import { getStepTextComponents } from "./RoundReferencePhaseStep.style";
+import * as C from "./RoundReferenceStepContent.components";
+import { getStepTextComponents } from "./RoundReferenceStepContent.style";
 
-export type RoundReferencePhaseStepProps = ViewProps & {
+export type RoundReferenceStepContentProps = ViewProps & {
 	step: TimingPhaseStep;
 };
 
-export const RoundReferencePhaseStep = ({
+export const RoundReferenceStepContent = ({
 	step,
 	...props
-}: RoundReferencePhaseStepProps) => {
+}: RoundReferenceStepContentProps) => {
 	const { index, phaseId } = step;
 
 	const language = useAppSelector(selectCurrentLanguage);

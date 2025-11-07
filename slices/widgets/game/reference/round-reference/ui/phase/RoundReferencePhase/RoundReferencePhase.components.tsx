@@ -1,31 +1,23 @@
-import {
-	Arkhamic,
-	Conkordia,
-	CrimsonPro,
-	EBGaramond,
-	FZLiBian,
-	FangSong,
-	SanCn,
-	Yoon,
-} from "@assets/fonts";
+import { CrimsonPro, EBGaramond, FangSong, Yoon } from "@assets/fonts";
 import { IconButton } from "@shared/ui";
 
 import { withLocale } from "@modules/core/i18n/shared/lib";
-import { GameText } from "@modules/core/theme/shared/ui";
-import { TouchableOpacity } from "@modules/core/touch/shared/ui";
 import { color, size } from "@shared/config";
-import { Icon, type IconProps, Row, type UnscaledTextProps } from "@shared/ui";
+import { Icon, type IconProps } from "@shared/ui";
 import type { FC } from "react";
 import { Platform, View, type ViewProps } from "react-native";
 import styled, { css } from "styled-components/native";
-import { phaseContentFontSize, phaseTitleFontSize } from "../../../config";
+import { phaseContentFontSize } from "../../../config";
 
 import {
 	ReferenceSectionBackground,
 	type ReferenceSectionBackgroundProps,
+	ReferenceSectionHeader,
 } from "@modules/mechanics/rules/base/shared/ui";
-import { RoundReferencePhaseStep } from "../../step";
+import { RoundReferenceStep } from "../../step";
 import { RoundPhaseActions } from "../RoundPhaseActions";
+
+const ios = Platform.OS === "ios";
 
 type ContainerProps = ViewProps & {
 	open?: boolean;
@@ -62,27 +54,10 @@ export const Content: FC<ContentProps> = styled(View)`
 	`}
 `;
 
-export const Header: typeof Row = styled(Row)`
-	position: relative;
-	align-items: center;
-	padding-left: 10px;
-	gap: 10px;
-`;
+export const Header: typeof ReferenceSectionHeader = styled(
+	ReferenceSectionHeader,
+)`
 
-const ios = Platform.OS === "ios";
-
-export const Toggle: typeof TouchableOpacity = styled(TouchableOpacity)`
-	padding: 10px 15px 15px 0px;
-	flex-direction: row;
-	justify-content: space-between;
-	align-items: center;
-	flex: 1;
-	${
-		ios &&
-		css`
-		transform: translateY(5px);	
-	`
-	}
 `;
 
 export const PlayIcon: typeof IconButton = styled(IconButton).attrs({
@@ -132,36 +107,13 @@ export const Background: FC<BackgroundProps> = styled(
 export const PhaseBackground: typeof Background = styled(Background).attrs({
 	height: 52,
 })`
-	
+	top: 0px;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+	opacity: 0.6;
+	position: absolute;
 `;
-
-const zhTitleConfig = {
-	fontFamily: FZLiBian.regular,
-	transform: [
-		{
-			translateY: -phaseTitleFontSize * 0.2,
-		},
-	],
-};
-
-export const BaseTitle = withLocale({
-	style: {
-		default: {
-			fontFamily: Arkhamic.regular,
-			fontSize: phaseTitleFontSize,
-			color: color.rulesText,
-		},
-		ru: {
-			fontFamily: Conkordia.regular,
-		},
-		ko: {
-			fontFamily: SanCn.bold,
-			paddingTop: 3,
-		},
-		zh: zhTitleConfig,
-		"zh-cn": zhTitleConfig,
-	},
-});
 
 export const Hint = withLocale({
 	style: {
@@ -187,22 +139,6 @@ export const Hint = withLocale({
 	},
 });
 
-type TitleProps = UnscaledTextProps & PropsWithOpen;
-
-export const Title: FC<TitleProps> = styled(BaseTitle)`
-	${({ open }: TitleProps) =>
-		open &&
-		css`
-		color: ${color.title};
-	`}
-	${
-		ios &&
-		css`
-		transform: translateY(-1px);
-	`
-	}
-`;
-
 export const Details: typeof View = styled(View)`
 	gap: ${size.gap.small}px;
 `;
@@ -211,30 +147,7 @@ export const Steps: typeof View = styled(View)`
 	gap: ${size.gap.default}px;
 `;
 
-export const Step: typeof View = styled(View)`
-	position: relative;
-`;
-
-export const StepButton: typeof TouchableOpacity = styled(TouchableOpacity)`
-	position: relative;
-	z-index: 2;
-`;
-
-export const StepContent: typeof RoundReferencePhaseStep = styled(
-	RoundReferencePhaseStep,
-)`
-
-`;
-
-export const StepBackground: typeof Background = styled(Background).attrs({
-	offsetX: "2.5%",
-	rectWidth: "95%",
-})`
-	opacity: 0.35;
-`;
-
-export const StepText: typeof GameText = styled(GameText)`
-	
+export const Step: typeof RoundReferenceStep = styled(RoundReferenceStep)`
 `;
 
 export const Actions: typeof RoundPhaseActions = styled(RoundPhaseActions)`

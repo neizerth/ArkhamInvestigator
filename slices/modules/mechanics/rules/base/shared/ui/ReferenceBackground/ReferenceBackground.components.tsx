@@ -4,7 +4,7 @@ import { withLocale } from "@modules/core/i18n/shared/lib";
 import { ImageBackground } from "@shared/ui";
 import { View } from "react-native";
 import styled from "styled-components/native";
-import { currentRoundReferenceSize } from "../../../config";
+import { currentRoundReferenceSize } from "../../config";
 
 export const Container: typeof ImageBackground = styled(ImageBackground).attrs({
 	source: roundReferenceAssets.background,

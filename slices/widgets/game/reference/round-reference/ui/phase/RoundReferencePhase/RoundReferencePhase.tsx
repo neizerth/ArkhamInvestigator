@@ -35,7 +35,7 @@ export const RoundReferencePhase = ({
 	}, [dispatch, phase.id]);
 
 	const playStep = useCallback(
-		(stepIndex: number) => () => {
+		(stepIndex: number) => {
 			dispatch(
 				startTimingWizard({
 					phaseId: phase.id,
@@ -50,31 +50,19 @@ export const RoundReferencePhase = ({
 		<C.Container {...props} open={open}>
 			<C.Wrapper>
 				<C.Content open={open}>
-					<C.Header>
-						<C.PlayIcon icon="play2" onPress={play} />
-						<C.Toggle onPress={toggle}>
-							<C.Title open={open}>{phase.title}</C.Title>
-							<C.ToggleIcon icon="right-arrow" open={open} />
-						</C.Toggle>
-						<C.Actions phase={phase} active={open} />
+					<C.Header
+						onToggle={toggle}
+						before={<C.PlayIcon icon="play2" onPress={play} />}
+						after={<C.Actions phase={phase} active={open} />}
+					>
+						{phase.title}
 					</C.Header>
 					{open && (
 						<C.Details>
 							{phase.hint && <C.Hint>{phase.hint}</C.Hint>}
 							<C.Steps>
 								{steps.map((step) => (
-									<C.Step key={step.id}>
-										{step.type === "end" ? (
-											<C.StepContent step={step} />
-										) : (
-											<C.StepButton onPress={playStep(step.index)}>
-												<C.StepContent step={step} />
-											</C.StepButton>
-										)}
-										{step.color && (
-											<C.StepBackground backgroundColor={step.color} />
-										)}
-									</C.Step>
+									<C.Step key={step.id} step={step} onPress={playStep} />
 								))}
 							</C.Steps>
 						</C.Details>

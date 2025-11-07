@@ -1,2 +1,3 @@
 export * from "./ReferenceTitle";
-export * from "./background";
+export * from "./ReferenceBackground";
+export * from "./section";
