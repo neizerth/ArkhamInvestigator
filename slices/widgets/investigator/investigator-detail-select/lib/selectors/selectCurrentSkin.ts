@@ -6,12 +6,16 @@ import { getSkins } from "../details";
 export const selectCurrentSkin = createSelector(
 	[selectCurrentSignatureGroup, selectCurrentSkinId],
 	(group, skinId) => {
-		if (!group || !skinId) {
+		if (!group) {
 			return null;
 		}
 
 		const skins = getSkins(group);
 
-		return skins.find(whereId(skinId)) || null;
+		if (!skinId) {
+			return skins[0];
+		}
+
+		return skins.find(whereId(skinId)) || skins[0] || null;
 	},
 );
