@@ -1,7 +1,4 @@
-import {
-	createAbilitySetFilter,
-	type setBoardAbilityUse,
-} from "@modules/board/abilities/shared/lib";
+import { setBoardAbilityUse } from "@modules/board/abilities/shared/lib";
 import { selectBoardById } from "@modules/board/base/shared/lib";
 import { createConfirmModalAction } from "@modules/core/modal/shared/actions/confirm/lib";
 import { openConfirm } from "@modules/core/modal/shared/confirm/lib";
@@ -11,10 +8,18 @@ import { put, select, takeEvery } from "redux-saga/effects";
 import { modalId } from "../../config";
 import { startResourcesTest } from "../startResourcesTest";
 
-const filterAction = createAbilitySetFilter({
-	abilityId: AbilityCode.SkidsOToole.parallel,
-	canUse: false,
-});
+const filterAction = (action: unknown) => {
+	if (!setBoardAbilityUse.match(action)) {
+		return false;
+	}
+
+	const { payload } = action;
+	return (
+		payload.abilityId === AbilityCode.SkidsOToole.parallel &&
+		payload.canUse === false &&
+		!payload.force
+	);
+};
 
 function* worker({ payload }: ReturnType<typeof setBoardAbilityUse>) {
 	const { boardId } = payload;
