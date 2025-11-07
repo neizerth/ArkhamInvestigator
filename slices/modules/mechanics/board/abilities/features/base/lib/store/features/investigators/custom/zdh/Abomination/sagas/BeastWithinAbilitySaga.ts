@@ -8,7 +8,7 @@ import { swapCard } from "./swapCard";
 
 const filterAction = createRevealedTokenFilterAction({
 	code: InvesigatorCode.BeastWithin,
-	tokens: ["autoFail"],
+	tokens: ["autoFail", "elderSign"],
 });
 
 function* worker({ payload }: ReturnType<typeof chaosTokensRevealed>) {

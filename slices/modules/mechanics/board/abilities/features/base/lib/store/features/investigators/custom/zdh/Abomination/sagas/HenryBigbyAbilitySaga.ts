@@ -7,7 +7,7 @@ import { put, takeEvery } from "redux-saga/effects";
 import { swapCard } from "./swapCard";
 const filterAction = createRevealedTokenFilterAction({
 	code: InvesigatorCode.HenryBigby,
-	tokens: ["autoFail"],
+	tokens: ["autoFail", "elderSign"],
 });
 
 function* worker({ payload }: ReturnType<typeof chaosTokensRevealed>) {
