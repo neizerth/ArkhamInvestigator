@@ -16,13 +16,14 @@ import { TouchableOpacity } from "@modules/core/touch/shared/ui";
 import { color, size } from "@shared/config";
 import { Icon, type IconProps, Row, type UnscaledTextProps } from "@shared/ui";
 import type { FC } from "react";
-import { View, type ViewProps } from "react-native";
+import { Platform, View, type ViewProps } from "react-native";
 import styled, { css } from "styled-components/native";
 import { phaseContentFontSize, phaseTitleFontSize } from "../../../config";
+
 import {
-	RoundReferenceBackground,
-	type RoundReferenceBackgroundProps,
-} from "../../RoundReferenceBackground";
+	ReferenceSectionBackground,
+	type ReferenceSectionBackgroundProps,
+} from "@modules/mechanics/rules/base/shared/ui";
 import { RoundReferencePhaseStep } from "../../step";
 import { RoundPhaseActions } from "../RoundPhaseActions";
 
@@ -68,12 +69,20 @@ export const Header: typeof Row = styled(Row)`
 	gap: 10px;
 `;
 
+const ios = Platform.OS === "ios";
+
 export const Toggle: typeof TouchableOpacity = styled(TouchableOpacity)`
 	padding: 10px 15px 15px 0px;
 	flex-direction: row;
 	justify-content: space-between;
 	align-items: center;
 	flex: 1;
+	${
+		ios &&
+		css`
+		transform: translateY(5px);	
+	`
+	}
 `;
 
 export const PlayIcon: typeof IconButton = styled(IconButton).attrs({
@@ -84,7 +93,6 @@ export const PlayIcon: typeof IconButton = styled(IconButton).attrs({
 	},
 })`
 	padding: 5px;
-	padding-bottom: 9px;
 `;
 
 export const NoPlay: typeof View = styled(View)`
@@ -100,17 +108,31 @@ export const ToggleIcon: FC<ToggleIconProps> = styled(Icon)`
 	${({ open }: ToggleIconProps) => css`
 		transform: rotate(${open ? "90deg" : "0deg"});
 	`}
+	${
+		ios &&
+		css`
+		transform: translateY(-2px);
+	`
+	}
 `;
 
-type BackgroundProps = RoundReferenceBackgroundProps;
+type BackgroundProps = ReferenceSectionBackgroundProps & PropsWithOpen;
 
-export const Background: FC<BackgroundProps> = styled(RoundReferenceBackground)`
+export const Background: FC<BackgroundProps> = styled(
+	ReferenceSectionBackground,
+)`
 	top: 0px;
 	bottom: 0px;
 	left: 0px;
 	right: 0px;
 	opacity: 0.6;
 	position: absolute;
+`;
+
+export const PhaseBackground: typeof Background = styled(Background).attrs({
+	height: 52,
+})`
+	
 `;
 
 const zhTitleConfig = {

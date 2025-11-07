@@ -1,6 +1,6 @@
 import {
+	ReferenceBackground,
 	ReferenceTitle,
-	RulesBackground,
 } from "@modules/mechanics/rules/base/shared/ui";
 import { color, font, size } from "@shared/config";
 import { View } from "react-native";
@@ -8,7 +8,9 @@ import { FlatList } from "react-native-gesture-handler";
 import styled from "styled-components/native";
 import { RoundPhaseHeader, RoundReferencePhase } from "../phase";
 
-export const Container: typeof RulesBackground = styled(RulesBackground)`
+export const Container: typeof ReferenceBackground = styled(
+	ReferenceBackground,
+)`
 `;
 
 export const Content: typeof View = styled(View)`

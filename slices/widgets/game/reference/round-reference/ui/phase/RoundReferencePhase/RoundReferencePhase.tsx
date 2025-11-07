@@ -80,7 +80,7 @@ export const RoundReferencePhase = ({
 						</C.Details>
 					)}
 				</C.Content>
-				<C.Background backgroundColor={backgroundColor} />
+				<C.PhaseBackground backgroundColor={backgroundColor} open={open} />
 			</C.Wrapper>
 		</C.Container>
 	);

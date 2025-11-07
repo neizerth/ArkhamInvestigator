@@ -1,12 +1,12 @@
 import { Arkhamic, Conkordia, FZLiBian, SanCn } from "@assets/fonts";
 import { withLocale } from "@modules/core/i18n/shared/lib";
 import { TouchableOpacity } from "@modules/core/touch/shared/ui";
+import { ReferenceSectionBackground } from "@modules/mechanics/rules/base/shared/ui";
 import { color } from "@shared/config";
 import { Row } from "@shared/ui";
 import { View } from "react-native";
 import styled from "styled-components/native";
 import { phaseTitleFontSize } from "../../../config";
-import { RoundReferenceBackground } from "../../RoundReferenceBackground";
 
 export const Container: typeof TouchableOpacity = styled(TouchableOpacity)`
 `;
@@ -23,8 +23,8 @@ export const Wrapper: typeof Row = styled(Row)`
 	padding: 10px 25px 15px;
 `;
 
-export const Background: typeof RoundReferenceBackground = styled(
-	RoundReferenceBackground,
+export const Background: typeof ReferenceSectionBackground = styled(
+	ReferenceSectionBackground,
 )`
   position: absolute;
 	left: 0;

@@ -1,2 +1,2 @@
 export * from "./ReferenceTitle";
-export * from "./RulesBackground";
+export * from "./background";
