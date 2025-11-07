@@ -195,6 +195,12 @@ export const Title: FC<TitleProps> = styled(BaseTitle)`
 		css`
 		color: ${color.title};
 	`}
+	${
+		ios &&
+		css`
+		transform: translateY(-1px);
+	`
+	}
 `;
 
 export const Details: typeof View = styled(View)`
