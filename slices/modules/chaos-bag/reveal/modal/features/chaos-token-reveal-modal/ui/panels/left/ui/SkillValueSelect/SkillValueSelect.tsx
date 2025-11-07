@@ -1,10 +1,6 @@
-import { selectBoardProp } from "@modules/board/base/shared/lib";
-import {
-	setChaosBagSkillCheckType,
-	setChaosBagSkillValue,
-} from "@modules/chaos-bag/reveal/base/shared/lib";
+import { setRevealSkillValueFromType } from "@modules/chaos-bag/reveal/base/entities/lib";
 import type { TouchableOpacityProps } from "@modules/core/touch/shared/ui";
-import { useAppDispatch, useAppSelector } from "@shared/lib";
+import { useAppDispatch } from "@shared/lib";
 import type { InvestigatorBoardNumericStat } from "@shared/model";
 import { useCallback, useState } from "react";
 import * as C from "./SkillValueSelect.components";
@@ -22,12 +18,6 @@ export const SkillValueSelect = (props: SkillValueSelectProps) => {
 	const [open, setOpen] = useState(false);
 
 	const dispatch = useAppDispatch();
-	const value = useAppSelector(
-		selectBoardProp({
-			boardId: "current",
-			prop: "value",
-		}),
-	);
 
 	const onPress = useCallback(() => {
 		setOpen(!open);
@@ -35,11 +25,14 @@ export const SkillValueSelect = (props: SkillValueSelectProps) => {
 
 	const onSkillPress = useCallback(
 		(type: InvestigatorBoardNumericStat) => {
-			const skillValue = value[type];
-			dispatch(setChaosBagSkillValue(skillValue));
-			dispatch(setChaosBagSkillCheckType(type));
+			dispatch(
+				setRevealSkillValueFromType({
+					boardId: "current",
+					type,
+				}),
+			);
 		},
-		[dispatch, value],
+		[dispatch],
 	);
 
 	return (
