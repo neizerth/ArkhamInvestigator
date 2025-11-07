@@ -281,6 +281,9 @@
 	"ability.jerome.elderSign.title": "Find a clue",
 	"ability.jerome.elderSign.text": "Confirm if there is a clue in your location",
 
+	"ability.yuki.modal.title": "Remove [curse]",
+	"ability.yuki.modal.text": "Remove 1 [curse] from the chaos bag?",
+
 	"resources.notEnough": "Not enough resources. Required&nbsp;{{count}}, available&nbsp;{{available}}",
 
 	"heal.damage_one": "Heal {{count}} [health]",

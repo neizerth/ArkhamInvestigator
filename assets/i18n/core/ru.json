@@ -294,6 +294,9 @@
 	"ability.jerome.elderSign.title": "Найти улику",
 	"ability.jerome.elderSign.text": "Подтвердите, если в вашей локации есть улика",
 
+	"ability.yuki.modal.title": "Удалить [curse]",
+	"ability.yuki.modal.text": "Удалить 1 [curse] из мешка хаоса?",
+
 	"resources.notEnough": "Недостаточно ресурсов. Необходимо&nbsp;{{count}}, доступно&nbsp;{{available}}",
 
 	"heal.damage": "Вылечить {{value}}/{{total}} [health]",
