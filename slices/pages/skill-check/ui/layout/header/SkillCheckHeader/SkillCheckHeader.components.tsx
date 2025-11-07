@@ -10,10 +10,12 @@ import {
 } from "@shared/config";
 import { Row as BaseRow, Icon, UnscaledText } from "@shared/ui";
 import type { FC } from "react";
-import { View, type ViewProps } from "react-native";
+import { Platform, View, type ViewProps } from "react-native";
 import styled, { css } from "styled-components/native";
 import { skillCheckColor } from "../../../../config";
 import TopRule from "./images/rule-top.svg";
+
+const ios = Platform.OS === "ios";
 
 const gap = IOS_WITH_GESTURE_CONTROL ? size.gap.default : 0;
 
@@ -70,7 +72,7 @@ export const Stat: typeof Icon = styled(Icon)`
 export const Difficulty: typeof UnscaledText = styled(UnscaledText)`
   position: absolute;
   left: 43px;
-  top: 15px;
+  top: ${ios ? "0px" : "15px"};
   width: 50px;
   font-size: 20px;
   color: ${skillCheckColor.checkIcon};
