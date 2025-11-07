@@ -6,7 +6,7 @@ import {
 import { createBoardHistoryGroup } from "@modules/board/history/shared/lib";
 import { put, select, takeEvery } from "redux-saga/effects";
 import { giveUpkeepResourceToBoard } from "../../..";
-import { startNewTurn } from "../../../common";
+import { startNewTurn, turnEnd } from "../../../common";
 import { makeAction } from "./makeAction";
 
 function* worker({ payload }: ReturnType<typeof makeAction>) {
@@ -36,6 +36,7 @@ function* worker({ payload }: ReturnType<typeof makeAction>) {
 		);
 		return;
 	}
+	yield put(turnEnd({ boardId }));
 	yield put(startNewTurn({ boardId }));
 	yield put(giveUpkeepResourceToBoard({ boardId }));
 }

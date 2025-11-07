@@ -4,7 +4,7 @@ import type { RevealedChaosBagToken } from "@modules/chaos-bag/reveal/base/share
 import { selectRevealedHistoryTokensByTurn } from "@modules/chaos-bag/reveal/history/shared/lib";
 import { AbilityCode } from "@modules/mechanics/board/abilities/shared/config";
 import { InvesigatorCode } from "@modules/mechanics/investigator/entities/config";
-import { startNewTurn, turnEnd } from "@modules/mechanics/phase/features/lib";
+import { turnEnd } from "@modules/mechanics/phase/features/lib";
 import { seconds } from "@shared/lib";
 import { delay, put, select, takeEvery } from "redux-saga/effects";
 
@@ -59,6 +59,4 @@ function* worker({ payload }: ReturnType<typeof turnEnd>) {
 
 export function* AgathaCraneEndTurnAbilitySaga() {
 	yield takeEvery(turnEnd.match, worker);
-	// this is not right, we should use turnEnd instead. but for backward compatibility, we need to keep this.
-	yield takeEvery(startNewTurn.match, worker);
 }
