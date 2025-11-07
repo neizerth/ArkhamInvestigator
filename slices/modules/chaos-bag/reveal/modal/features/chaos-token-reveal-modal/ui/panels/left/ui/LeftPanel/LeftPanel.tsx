@@ -23,10 +23,12 @@ export const LeftPanel = ({ ...props }: LeftPanelProps) => {
 			<C.Content>
 				{typeof skillValue === "number" ? <C.SkillPicker /> : <C.Placeholder />}
 
-				{skillType && (
+				{skillType ? (
 					<C.SkillType>
 						<C.SkillTypeIcon statType={skillType} />
 					</C.SkillType>
+				) : (
+					<C.SetType />
 				)}
 
 				<C.ReferenceButton onPress={openReference}>

@@ -3,6 +3,7 @@ import { Icon, StatIcon } from "@shared/ui";
 import { TouchableOpacity, View } from "react-native";
 import styled from "styled-components/native";
 import { SkillValuePicker } from "../SkillValuePicker";
+import { SkillValueSelect } from "../SkillValueSelect";
 
 export const Container: typeof View = styled(View)`
 `;
@@ -54,4 +55,10 @@ export const ReferenceButton: typeof TouchableOpacity = styled(
 export const ReferenceIcon: typeof Icon = styled(Icon)`
   color: ${color.gray20};
   font-size: 14px;
+`;
+
+export const SetType: typeof SkillValueSelect = styled(SkillValueSelect)`
+  position: absolute;
+  top: 0px;
+  right: -15px;
 `;
