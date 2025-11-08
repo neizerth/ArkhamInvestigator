@@ -31,7 +31,7 @@ export const Toggle: FC<ToggleProps> = styled(TouchableOpacity)`
   ${({ open }: ToggleProps) =>
 		open &&
 		css`
-      border: 1px solid ${color.gray10};
+      border: 1px solid ${color.gray30};
     `}
 `;
 
@@ -45,7 +45,8 @@ export const ToggleIcon: FC<ToggleIconProps> = styled(Icon)`
   ${({ open }: ToggleIconProps) =>
 		open &&
 		css`
-      color: ${color.dark10};
+      color: ${color.dark20};
+      transform: rotate(45deg);
     `}
 `;
 

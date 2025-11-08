@@ -1,6 +1,7 @@
 import { openReferenceCard } from "@entities/reference-card";
 import { usePage } from "@modules/core/router/shared/lib";
 import { selectTimingRules } from "@modules/mechanics/rules/round-timing/shared/lib";
+import { selectSkillTestReferenceTitle } from "@modules/mechanics/rules/skill-test-timing/shared/lib";
 import { routes } from "@shared/config";
 import { useAppDispatch, useAppSelector, useBoolean } from "@shared/lib";
 import { useCallback } from "react";
@@ -14,6 +15,7 @@ export const RevealMenu = (props: RevealMenuProps) => {
 	const [open, setOpen] = useBoolean(false);
 	const dispatch = useAppDispatch();
 	const timingRules = useAppSelector(selectTimingRules);
+	const skillTestTitle = useAppSelector(selectSkillTestReferenceTitle);
 	const { t } = useTranslation();
 
 	const goTo = usePage();
@@ -22,10 +24,12 @@ export const RevealMenu = (props: RevealMenuProps) => {
 		dispatch(openReferenceCard());
 	}, [dispatch]);
 
+	const icon = open ? "plus" : "menu";
+
 	return (
 		<C.Container {...props}>
 			<C.Toggle onPress={setOpen.toggle} open={open}>
-				<C.ToggleIcon icon="menu" open={open} />
+				<C.ToggleIcon icon={icon} open={open} />
 			</C.Toggle>
 			{open && (
 				<C.Menu>
@@ -36,6 +40,10 @@ export const RevealMenu = (props: RevealMenuProps) => {
 					<C.MenuItem onPress={goTo(routes.roundReference)}>
 						<C.MenuLabel>{timingRules?.title}</C.MenuLabel>
 						<C.MenuIcon icon="stopwatch" />
+					</C.MenuItem>
+					<C.MenuItem onPress={goTo(routes.skillTestReference)}>
+						<C.MenuLabel>{skillTestTitle}</C.MenuLabel>
+						<C.MenuIcon icon="wild" />
 					</C.MenuItem>
 					<C.MenuItem onPress={goTo(routes.boardHelp)}>
 						<C.MenuLabel>{t`Help`}</C.MenuLabel>

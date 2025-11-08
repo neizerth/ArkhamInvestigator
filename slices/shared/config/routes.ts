@@ -16,6 +16,7 @@ export const routes = {
 	replaceInvestigator: r("/board/replace-investigator"),
 	overview: r("/(modal)/board/overview"),
 	roundReference: r("/(modal)/board/round-reference"),
+	skillTestReference: r("/(modal)/board/skill-test-reference"),
 
 	chaosBag: r("/chaos-bag"),
 	chaosBagPreview: r("/(modal)/chaos-bag/preview"),
