@@ -32,5 +32,10 @@ export const useDescriptionGestures = () => {
 		onSwipe: goTo(routes.roundReference),
 	});
 
-	return Gesture.Exclusive(swipeDown, swipeRight);
+	const swipeLeft = useSwipe({
+		direction: "left",
+		onSwipe: goTo(routes.skillTestReference),
+	});
+
+	return Gesture.Exclusive(swipeDown, swipeRight, swipeLeft);
 };

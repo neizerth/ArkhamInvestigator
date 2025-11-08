@@ -23,7 +23,9 @@ export const ReferenceSectionHeader = ({
 			{before}
 			<C.Toggle onPress={onToggle}>
 				<C.Title open={open} {...props} />
-				<C.ToggleIcon icon="right-arrow" open={open} />
+				<C.ToggleIconContainer open={open}>
+					<C.ToggleIcon icon="right-arrow" />
+				</C.ToggleIconContainer>
 			</C.Toggle>
 			{after}
 		</C.Container>

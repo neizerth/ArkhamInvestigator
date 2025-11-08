@@ -79,7 +79,7 @@ type MenuItemProps = TouchableOpacityProps & {
 };
 
 export const MenuItem: FC<MenuItemProps> = styled(TouchableOpacity)`
-  padding-left: 50px;
+  padding-left: 15px;
   padding-right: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -99,5 +99,6 @@ export const MenuItem: FC<MenuItemProps> = styled(TouchableOpacity)`
 		first &&
 		css`
     padding-bottom: 15px;
+    padding-left: 50px;
   `}
 `;

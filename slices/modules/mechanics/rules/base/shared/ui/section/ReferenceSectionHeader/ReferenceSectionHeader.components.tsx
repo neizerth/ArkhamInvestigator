@@ -2,9 +2,9 @@ import { Arkhamic, Conkordia, FZLiBian, SanCn } from "@assets/fonts";
 import { withLocale } from "@modules/core/i18n/shared/lib";
 import { TouchableOpacity } from "@modules/core/touch/shared/ui";
 import { color } from "@shared/config";
-import { Icon, type IconProps, Row, type UnscaledTextProps } from "@shared/ui";
+import { Icon, Row, type UnscaledTextProps } from "@shared/ui";
 import type { FC } from "react";
-import { Platform } from "react-native";
+import { Platform, View, type ViewProps } from "react-native";
 import styled, { css } from "styled-components/native";
 import { phaseTitleFontSize } from "../../../config";
 
@@ -35,21 +35,25 @@ export const Toggle: typeof TouchableOpacity = styled(TouchableOpacity)`
 	}
 `;
 
-type ToggleIconProps = IconProps & PropsWithOpen;
-
-export const ToggleIcon: FC<ToggleIconProps> = styled(Icon)`
+export const ToggleIcon: typeof Icon = styled(Icon)`
 	font-size: 10px;
 	line-height: 10px;
 	color: ${color.title};
-	${({ open }: ToggleIconProps) => css`
-		transform: rotate(${open ? "90deg" : "0deg"});
-	`}
 	${
 		ios &&
 		css`
 		transform: translateY(-2px);
 	`
 	}
+`;
+
+type ToggleIconContainerProps = ViewProps & PropsWithOpen;
+
+export const ToggleIconContainer: FC<ToggleIconContainerProps> = styled(View)`
+	position: relative;
+	${({ open }: ToggleIconContainerProps) => css`
+		transform: rotate(${open ? "90deg" : "0deg"});
+	`}
 `;
 
 const zhTitleConfig = {
