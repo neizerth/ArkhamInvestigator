@@ -1,5 +1,5 @@
+import { DoomValue } from "@modules/board/base/entities/base/ui/value";
 import { TouchableOpacity } from "@modules/core/touch/shared/ui";
-import { DoomValue } from "@widgets/investigator/value";
 import styled from "styled-components/native";
 // import { DoomValue } from "../../../../../../investigator/value";
 

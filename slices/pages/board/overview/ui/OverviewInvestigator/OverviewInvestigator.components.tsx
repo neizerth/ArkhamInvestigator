@@ -1,16 +1,16 @@
 import { Alegreya } from "@assets/fonts";
-import { ThemeSignaturePreview } from "@modules/core/theme/features/ui";
-import { FactionView } from "@modules/faction/entities/ui";
-import { font, size } from "@shared/config";
-import { Row, TextView } from "@shared/ui";
-import { InvestigatorSkillsPreview } from "@widgets/investigator/investigator-skills-preview";
 import {
 	ActionsValue,
 	CluesValue,
 	HealthValue,
 	ResourcesValue,
 	SanityValue,
-} from "@widgets/investigator/value";
+} from "@modules/board/base/entities/base/ui/value";
+import { ThemeSignaturePreview } from "@modules/core/theme/features/ui";
+import { FactionView } from "@modules/faction/entities/ui";
+import { font, size } from "@shared/config";
+import { Row, TextView } from "@shared/ui";
+import { InvestigatorSkillsPreview } from "@widgets/investigator/investigator-skills-preview";
 import { TouchableOpacity, View } from "react-native";
 import styled from "styled-components/native";
 

@@ -1,7 +1,7 @@
+import { HealthValue, SanityValue } from "@modules/board/base/entities/base/ui";
 import { size } from "@shared/config";
 import { Row } from "@shared/ui";
 import styled from "styled-components/native";
-import { HealthValue, SanityValue } from "../../../../value";
 
 export const Container: typeof Row = styled(Row)`
   gap: ${size.gap.small}px;
