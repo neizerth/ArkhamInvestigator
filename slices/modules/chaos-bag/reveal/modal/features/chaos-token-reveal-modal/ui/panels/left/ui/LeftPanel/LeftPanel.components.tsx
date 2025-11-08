@@ -59,6 +59,7 @@ export const ReferenceIcon: typeof Icon = styled(Icon)`
 
 export const SetType: typeof SkillValueSelect = styled(SkillValueSelect)`
   position: absolute;
+  z-index: 1;
   top: 0px;
-  right: -15px;
+  right: -25px;
 `;

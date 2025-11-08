@@ -37,7 +37,7 @@ export const SkillValueSelect = (props: SkillValueSelectProps) => {
 
 	return (
 		<C.Container {...props}>
-			<C.Skill icon="wild" onPress={onPress} />
+			<C.Toggle icon="wild" onPress={onPress} />
 			{open && (
 				<C.Menu>
 					{skillTypes.map((type) => (

@@ -1,6 +1,7 @@
 import { TouchableOpacity } from "@modules/core/touch/shared/ui";
+import { DoomValue } from "@widgets/investigator/value";
 import styled from "styled-components/native";
-import { DoomValue } from "../../../../../../investigator/value";
+// import { DoomValue } from "../../../../../../investigator/value";
 
 export const Container: typeof TouchableOpacity = styled(TouchableOpacity)`
 

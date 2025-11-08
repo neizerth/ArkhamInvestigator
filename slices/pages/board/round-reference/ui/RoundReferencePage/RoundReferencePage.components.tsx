@@ -1,8 +1,8 @@
 import { IconButton } from "@shared/ui";
 
+import { RoundReference } from "@modules/mechanics/rules/round-timing/widgets/round-reference";
 import { color, size } from "@shared/config";
 import { Row } from "@shared/ui";
-import { RoundReference } from "@widgets/game/reference";
 import { View } from "react-native";
 import styled from "styled-components/native";
 

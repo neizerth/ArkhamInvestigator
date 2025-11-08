@@ -3,10 +3,10 @@ import { withLocale } from "@modules/core/i18n/shared/lib";
 import { TouchableOpacity } from "@modules/core/touch/shared/ui";
 import { color } from "@shared/config";
 import { Icon, type IconProps, Row, type UnscaledTextProps } from "@shared/ui";
-import { phaseTitleFontSize } from "@widgets/game/reference/round-reference/config";
 import type { FC } from "react";
 import { Platform } from "react-native";
 import styled, { css } from "styled-components/native";
+import { phaseTitleFontSize } from "../../../config";
 
 const ios = Platform.OS === "ios";
 

@@ -9,23 +9,34 @@ export const Container: typeof View = styled(View)`
   align-items: center;
 `;
 
+const iconStyle = {
+	fontSize: 30,
+	lineHeight: 30,
+	width: 30,
+};
+
 export const Skill: typeof Button = styled(Button).attrs({
-	iconStyle: {
-		fontSize: 30,
-		lineHeight: 30,
-		width: 30,
-	},
+	iconStyle,
 })`
   color: ${color.light10};
   background-color: transparent;
-  justify-content: center;
+`;
+
+export const Toggle: typeof Skill = styled(Skill).attrs({
+	iconStyle: {
+		...iconStyle,
+		textAlign: "center",
+		width: 40,
+	},
+})`
+  padding: 15px;
 `;
 
 export const Menu: typeof Row = styled(Row)`
   position: absolute;
   z-index: 20;
-  left: -15px;
-  top: 50px;
+  left: -5px;
+  top: 60px;
   background-color: ${color.black};
   border-radius: 45px;
   padding: 10px;
