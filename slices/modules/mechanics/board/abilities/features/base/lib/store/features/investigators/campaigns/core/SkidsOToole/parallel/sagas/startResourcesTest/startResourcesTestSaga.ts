@@ -35,7 +35,6 @@ function* worker({ payload }: ReturnType<typeof startResourcesTest>) {
 			boardId,
 			turnId,
 			value: 3,
-			type: "resources",
 			data: {
 				abilityId: AbilityCode.SkidsOToole.parallel,
 				resourcesCount: count,
