@@ -1,8 +1,8 @@
 import { setRevealSkillValueFromType } from "@modules/chaos-bag/reveal/base/entities/lib";
 import type { TouchableOpacityProps } from "@modules/core/touch/shared/ui";
-import { useAppDispatch } from "@shared/lib";
+import { useAppDispatch, useBoolean } from "@shared/lib";
 import type { InvestigatorBoardNumericStat } from "@shared/model";
-import { useCallback, useState } from "react";
+import { useCallback } from "react";
 import * as C from "./SkillValueSelect.components";
 
 export type SkillValueSelectProps = TouchableOpacityProps;
@@ -15,13 +15,9 @@ const skillTypes: InvestigatorBoardNumericStat[] = [
 ];
 
 export const SkillValueSelect = (props: SkillValueSelectProps) => {
-	const [open, setOpen] = useState(false);
+	const [open, setOpen] = useBoolean(false);
 
 	const dispatch = useAppDispatch();
-
-	const onPress = useCallback(() => {
-		setOpen(!open);
-	}, [open]);
 
 	const onSkillPress = useCallback(
 		(type: InvestigatorBoardNumericStat) => {
@@ -37,7 +33,7 @@ export const SkillValueSelect = (props: SkillValueSelectProps) => {
 
 	return (
 		<C.Container {...props}>
-			<C.Toggle icon="wild" onPress={onPress} />
+			<C.Toggle icon="wild" onPress={setOpen.toggle} />
 			{open && (
 				<C.Menu>
 					{skillTypes.map((type) => (

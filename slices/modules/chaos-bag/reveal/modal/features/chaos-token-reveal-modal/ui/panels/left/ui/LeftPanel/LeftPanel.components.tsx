@@ -1,7 +1,8 @@
 import { color } from "@shared/config";
 import { Icon, StatIcon } from "@shared/ui";
-import { TouchableOpacity, View } from "react-native";
+import { View } from "react-native";
 import styled from "styled-components/native";
+import { RevealMenu } from "../RevealMenu";
 import { SkillValuePicker } from "../SkillValuePicker";
 import { SkillValueSelect } from "../SkillValueSelect";
 
@@ -41,15 +42,9 @@ export const SkillType: typeof View = styled(View)`
   right: -30px;
 `;
 
-export const ReferenceButton: typeof TouchableOpacity = styled(
-	TouchableOpacity,
-)`
-  border: 1px solid ${color.dark10};
-  justify-content: center;
-  align-items: center;
-  width: 40px;
-  height: 40px;
-  border-radius: 40px;
+export const Menu: typeof RevealMenu = styled(RevealMenu)`
+  position: relative;
+  left: -40px;
 `;
 
 export const ReferenceIcon: typeof Icon = styled(Icon)`

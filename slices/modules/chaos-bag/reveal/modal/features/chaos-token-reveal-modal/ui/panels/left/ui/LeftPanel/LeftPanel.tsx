@@ -1,23 +1,17 @@
-import { openReferenceCard } from "@entities/reference-card";
 import {
 	selectChaosBagSkillCheckType,
 	selectChaosBagSkillValue,
 } from "@modules/chaos-bag/reveal/base/shared/lib";
-import { useAppDispatch, useAppSelector } from "@shared/lib";
-import { useCallback } from "react";
+import { useAppSelector } from "@shared/lib";
 import type { ViewProps } from "react-native";
 import * as C from "./LeftPanel.components";
 
 export type LeftPanelProps = ViewProps;
 
 export const LeftPanel = ({ ...props }: LeftPanelProps) => {
-	const dispatch = useAppDispatch();
 	const skillValue = useAppSelector(selectChaosBagSkillValue);
 	const skillType = useAppSelector(selectChaosBagSkillCheckType);
 
-	const openReference = useCallback(() => {
-		dispatch(openReferenceCard());
-	}, [dispatch]);
 	return (
 		<C.Container {...props}>
 			<C.Content>
@@ -31,9 +25,7 @@ export const LeftPanel = ({ ...props }: LeftPanelProps) => {
 					<C.SetType />
 				)}
 
-				<C.ReferenceButton onPress={openReference}>
-					<C.ReferenceIcon icon="list2" />
-				</C.ReferenceButton>
+				<C.Menu />
 			</C.Content>
 		</C.Container>
 	);
