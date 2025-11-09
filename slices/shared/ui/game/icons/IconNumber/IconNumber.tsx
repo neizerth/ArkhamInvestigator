@@ -12,7 +12,7 @@ export const IconNumber = (props: IconNumberProps) => {
 	const Component = stroke ? StrokedIconNumber : UnstrokedIconNumber;
 
 	const styleSheet = StyleSheet.flatten(props.style);
-	const defaultFontSize = styleSheet.fontSize || font.size.default;
+	const defaultFontSize = styleSheet?.fontSize || font.size.default;
 
 	const fontSize = defaultFontSize;
 	const style = {
