@@ -117,10 +117,17 @@ const frostParts: Parts = [
 	{ type: "highlight", icon: "token_frost_highlight", color: "#FFFBF2" },
 ];
 
+const moonParts: Parts = [
+	{ type: "fill", icon: "token_number_fill", color: "#3D3A63" },
+	{ type: "overlay", icon: "token_moon_overlay", color: "#E6E1D3" },
+	{ type: "highlight", icon: "token_moon_fill", color: "#FFFBF2" },
+];
+
 const specialParts = {
 	autoFail: autoFailParts,
 	elderSign: elderSignParts,
 	frost: frostParts,
+	moon: moonParts,
 };
 
 export const getChaosTokenParts = (options: Options) => {
@@ -144,7 +151,6 @@ export const getChaosTokenParts = (options: Options) => {
 		case "cultist":
 		case "tablet":
 		case "elderThing":
-		case "moon":
 			return baseSymbolicParts(type);
 		case "bless":
 		case "curse":

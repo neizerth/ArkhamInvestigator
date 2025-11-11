@@ -44,6 +44,8 @@ export type FrostTokenType = "frost";
 
 export type BlessCurseChaosTokenType = "bless" | "curse";
 
+export type MoonChaosTokenType = "moon";
+
 export type ChaosTokenCount = Partial<Record<ChaosTokenType, number>>;
 
 export type ChaosBagTokenData = {
