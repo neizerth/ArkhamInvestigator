@@ -1,3 +1,4 @@
+import { revealChaosTokens } from "@modules/chaos-bag/reveal/base/entities/lib";
 import { selectChaosBagSkillCheckBoardId } from "@modules/chaos-bag/reveal/base/shared/lib";
 import { openChaosTokenRevealModal } from "@modules/chaos-bag/reveal/modal/entities/lib";
 import { modalClosed } from "@modules/core/modal/shared/base/lib";
@@ -21,13 +22,13 @@ function* worker({ payload }: ReturnType<typeof modalClosed>) {
 		return;
 	}
 
-	// yield put(
-	// 	revealChaosTokens({
-	// 		boardId,
-	// 		count: 1,
-	// 		force: true,
-	// 	}),
-	// );
+	yield put(
+		revealChaosTokens({
+			boardId,
+			count: 1,
+			force: true,
+		}),
+	);
 
 	yield put(openChaosTokenRevealModal());
 }
