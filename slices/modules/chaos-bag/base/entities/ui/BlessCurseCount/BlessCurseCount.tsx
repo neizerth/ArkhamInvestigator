@@ -1,4 +1,3 @@
-import { getActiveOpacity } from "@shared/lib";
 import type { ViewProps } from "react-native";
 import * as C from "./BlessCurseCount.components";
 
@@ -21,15 +20,12 @@ export const BlessCurseCount = ({
 	const blessEnabled = Boolean(onBlessPress);
 	const curseEnabled = Boolean(onCursePress);
 
-	const blessOpacity = getActiveOpacity(blessEnabled);
-	const curseOpacity = getActiveOpacity(curseEnabled);
-
 	return (
 		<C.Container {...props}>
 			<C.Touchable
 				onPress={onBlessPress}
 				onLongPress={onBlessLongPress}
-				activeOpacity={blessOpacity}
+				enabled={blessEnabled}
 			>
 				<C.Token type="bless" available={available} />
 			</C.Touchable>
@@ -37,7 +33,7 @@ export const BlessCurseCount = ({
 			<C.Touchable
 				onPress={onCursePress}
 				onLongPress={onCurseLongPress}
-				activeOpacity={curseOpacity}
+				enabled={curseEnabled}
 			>
 				<C.Token type="curse" available={available} />
 			</C.Touchable>

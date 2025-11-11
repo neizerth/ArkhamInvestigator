@@ -68,6 +68,7 @@ export const Menu: typeof View = styled(View)`
   position: absolute;
   top: -5px;
   left: -5px;
+  width: 270px;
   background-color: ${color.light10};
   border-radius: 20px;
   border: 1px solid ${color.dark10};
@@ -85,7 +86,6 @@ export const MenuItem: FC<MenuItemProps> = styled(TouchableOpacity)`
   padding-bottom: 10px;
   gap: 10px;
   flex-direction: row;
-  flex-wrap: nowrap;
   align-items: center;
   justify-content: flex-end;
   ${({ last }: MenuItemProps) =>

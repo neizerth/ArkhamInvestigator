@@ -13,25 +13,24 @@ export const nobr = (text: string) => {
 		// Track if we're inside square brackets [...] or [[...]]
 		if (char === "[") {
 			bracketDepth++;
-			if (open) {
-				open = false;
-				result += `<nobr>${token}</nobr>`;
+			if (!open && token) {
+				result += token;
 				token = "";
 			}
-			result += char;
+			token += char;
 			continue;
 		}
 		if (char === "]") {
 			if (bracketDepth > 0) {
 				bracketDepth--;
 			}
-			result += char;
+			token += char;
 			continue;
 		}
 
 		// If inside brackets, just append the character
 		if (bracketDepth > 0) {
-			result += char;
+			token += char;
 			continue;
 		}
 
@@ -81,5 +80,7 @@ export const nobr = (text: string) => {
 	}
 	result += open ? `<nobr>${token}</nobr>` : token;
 
-	return result.replace(/(<\/nobr>) /g, " $1");
+	const finalResult = result.replace(/(<\/nobr>) /g, " $1");
+
+	return finalResult;
 };

@@ -13,8 +13,9 @@ import {
 	ReferenceSectionBackground,
 	type ReferenceSectionBackgroundProps,
 	ReferenceSectionHeader,
+	ReferenceSectionStep,
 } from "@modules/mechanics/rules/base/shared/ui";
-import { RoundReferenceStep } from "../../step";
+import { RoundReferenceStepContent } from "../../step";
 import { RoundPhaseActions } from "../RoundPhaseActions";
 
 const ios = Platform.OS === "ios";
@@ -147,7 +148,12 @@ export const Steps: typeof View = styled(View)`
 	gap: ${size.gap.default}px;
 `;
 
-export const Step: typeof RoundReferenceStep = styled(RoundReferenceStep)`
+export const Step: typeof ReferenceSectionStep = styled(ReferenceSectionStep)`
+`;
+
+export const StepContent: typeof RoundReferenceStepContent = styled(
+	RoundReferenceStepContent,
+)`
 `;
 
 export const Actions: typeof RoundPhaseActions = styled(RoundPhaseActions)`

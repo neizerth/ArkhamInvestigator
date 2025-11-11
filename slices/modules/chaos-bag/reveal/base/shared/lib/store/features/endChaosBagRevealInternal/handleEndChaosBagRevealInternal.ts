@@ -14,4 +14,5 @@ export const handleEndChaosBagRevealInternal: ChaosBagRevealHandler = (
 	state.result = null;
 	state.turnId = null;
 	state.skillCheckData = null;
+	state.skillCheckModifier = 0;
 };

@@ -50,10 +50,9 @@ export const RoundReference = (props: RoundReferenceProps) => {
 				<Delay>
 					<C.Body>
 						{showActivePhase && (
-							<C.ActivePhase
-								phase={activePhase}
-								onPress={scrollToIndex(activePhase.position - 1)}
-							/>
+							<C.ActivePhase onPress={scrollToIndex(activePhase.position - 1)}>
+								{activePhase.title}
+							</C.ActivePhase>
 						)}
 						<C.Phases
 							showsVerticalScrollIndicator={false}

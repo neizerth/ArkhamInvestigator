@@ -3,15 +3,21 @@ import {
 	selectSkillCheckResult,
 	selectSkillCheckSucceedBy,
 } from "@modules/chaos-bag/result/entities/lib";
-import { selectChaosBagRevealResult } from "@modules/chaos-bag/reveal/base/shared/lib";
+import {
+	selectChaosBagRevealResult,
+	selectChaosBagSkillCheckFailed,
+} from "@modules/chaos-bag/reveal/base/shared/lib";
 import { useAppSelector } from "@shared/lib";
 import { selectSkillCheckData } from "./selectSkillCheckPickerData";
 
 export const useSkillCheckPickerData = () => {
 	const currentResult = useAppSelector(selectSkillCheckResult);
 	const storeValue = useAppSelector(selectChaosBagRevealResult);
-	const failed = useAppSelector(selectIsSkillCheckFailed);
+	const isFailed = useAppSelector(selectIsSkillCheckFailed);
+	const isFixedFailed = useAppSelector(selectChaosBagSkillCheckFailed);
 	const succeedBy = useAppSelector(selectSkillCheckSucceedBy);
+
+	const failed = isFixedFailed ?? isFailed;
 
 	const result = currentResult ?? 0;
 

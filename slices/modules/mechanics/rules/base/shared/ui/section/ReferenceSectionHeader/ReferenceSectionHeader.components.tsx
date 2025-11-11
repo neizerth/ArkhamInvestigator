@@ -6,7 +6,7 @@ import { Icon, Row, type UnscaledTextProps } from "@shared/ui";
 import type { FC } from "react";
 import { Platform, View, type ViewProps } from "react-native";
 import styled, { css } from "styled-components/native";
-import { phaseTitleFontSize } from "../../../config";
+import { sectionTitleFontSize } from "../../../config";
 
 const ios = Platform.OS === "ios";
 
@@ -60,7 +60,7 @@ const zhTitleConfig = {
 	fontFamily: FZLiBian.regular,
 	transform: [
 		{
-			translateY: -phaseTitleFontSize * 0.2,
+			translateY: -sectionTitleFontSize * 0.2,
 		},
 	],
 };
@@ -69,7 +69,7 @@ export const BaseTitle = withLocale({
 	style: {
 		default: {
 			fontFamily: Arkhamic.regular,
-			fontSize: phaseTitleFontSize,
+			fontSize: sectionTitleFontSize,
 			color: color.rulesText,
 		},
 		ru: {

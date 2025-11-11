@@ -9,6 +9,7 @@ export type ChaosBagRevealedTokenProps = ViewProps & {
 	position: number;
 	showPosition?: boolean;
 	selected?: boolean;
+	showValue?: boolean;
 };
 
 export const ChaosBagRevealedToken = ({
@@ -21,7 +22,8 @@ export const ChaosBagRevealedToken = ({
 	const { type } = token;
 	const size = position?.toString().length ?? 0;
 	const defaultValue = getDefaultChaosTokenValue(type);
-	const showValue = chaosToken.types.symbolic.all.includes(type);
+	const showValue =
+		props.showValue ?? chaosToken.types.symbolic.all.includes(type);
 
 	return (
 		<C.Container {...props}>

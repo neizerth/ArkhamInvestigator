@@ -18,7 +18,6 @@ function* worker({ payload }: ReturnType<typeof openTimingWizardModal>) {
 	const { step, phase, faction } = data;
 
 	const phaseId = phase.id;
-	const { text } = step;
 	const { title } = phase;
 
 	yield put(
@@ -26,7 +25,7 @@ function* worker({ payload }: ReturnType<typeof openTimingWizardModal>) {
 			id: "rules-timing-wizard",
 			data: {
 				title,
-				text,
+				text: step.title,
 				faction,
 				actions: [
 					getPhaseStepModalAction({

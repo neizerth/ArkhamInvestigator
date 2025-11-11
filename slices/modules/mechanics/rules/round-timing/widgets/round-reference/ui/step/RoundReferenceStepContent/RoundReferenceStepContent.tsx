@@ -13,8 +13,6 @@ export const RoundReferenceStepContent = ({
 	step,
 	...props
 }: RoundReferenceStepContentProps) => {
-	const { index, phaseId } = step;
-
 	const language = useAppSelector(selectCurrentLanguage);
 	const componentStyles = getStepTextComponents({
 		language,
@@ -24,7 +22,7 @@ export const RoundReferenceStepContent = ({
 	return (
 		<C.Container {...props}>
 			<C.Text
-				value={step.text}
+				value={step.title}
 				end={step.type === "end"}
 				componentStyles={componentStyles}
 			/>

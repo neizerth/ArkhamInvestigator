@@ -8,7 +8,6 @@ import type {
 import { getPhaseText } from "./getPhaseText";
 import {
 	formatPhaseStepText,
-	getPhaseStepColor,
 	getPhaseStepId,
 	getPhaseStepName,
 	getPhaseStepSpecialType,
@@ -89,8 +88,8 @@ export const getRoundPhases = (item?: RulesItem) => {
 			type,
 			specialType,
 			linkedIndex,
-			text: formatPhaseStepText({ text, type }),
-			color: getPhaseStepColor(type),
+			title: formatPhaseStepText({ text, type }),
+			color,
 		};
 
 		currentPhase.steps.push(step);

@@ -8,23 +8,51 @@ export const getSkillTestSteps = (item: RulesItemStep): SkillTestStep[] => {
 		return [];
 	}
 	return table
-		.map((tableEntry): SkillTestStep | undefined => {
-			const { text, color } = tableEntry.row[0];
+		.slice(1)
+		.map((tableEntry, index): SkillTestStep | undefined => {
+			const cell = tableEntry.row[0];
+			if (!cell) {
+				return;
+			}
+			const { text, color } = cell;
 			const rule = rules.find((item) => item.title === text);
 			if (!rule) {
-				return;
+				return {
+					id: `window-${index}`,
+					type: "player-window",
+					index,
+					color,
+					text: cell.text,
+					title: cell.text,
+					name: cell.text,
+					description: cell.text,
+				};
 			}
+			const base = {
+				...rule,
+				type: "step",
+				color,
+			} as const;
 			const indexRe = /^([^.\s]+)\.?\s+(.*)$/;
 			const match = text.match(indexRe);
+
 			if (!match) {
-				return;
+				return {
+					...base,
+					name: rule.title,
+					description: rule.title,
+					index,
+					color,
+				};
 			}
-			const index = match[1];
+
+			const name = match[1];
 			const description = match[2];
 
 			return {
-				...rule,
-				text: description,
+				...base,
+				name,
+				description,
 				index,
 				color,
 			};

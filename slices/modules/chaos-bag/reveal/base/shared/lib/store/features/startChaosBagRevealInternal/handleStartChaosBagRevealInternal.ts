@@ -37,4 +37,5 @@ export const handleStartChaosBagRevealInternal: ChaosBagRevealHandler<
 	state.succeedBy = null;
 	state.failed = null;
 	state.skillCheckData = payload.data ?? null;
+	state.skillCheckModifier = 0;
 };

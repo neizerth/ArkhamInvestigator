@@ -1,6 +1,5 @@
 import { GameText, type GameTextProps } from "@modules/core/theme/shared/ui";
 import { size } from "@shared/config";
-import { Row } from "@shared/ui";
 import type { FC } from "react";
 import { View } from "react-native";
 import styled from "styled-components";
@@ -13,7 +12,6 @@ import { StepResources } from "../StepResources";
 export const Container: typeof View = styled(View)`
 	flex-direction: row;
   justify-content: space-between;
-  padding: 7px 12px;
   gap: ${size.gap.default}px;
   align-items: center;
 	z-index: 2;
@@ -32,10 +30,6 @@ export const Text: FC<TextProps> = styled(GameText).attrs(
 	}),
 )`
 	font-size: ${phaseContentFontSize}px;
-`;
-
-export const End: typeof Row = styled(Row)`
-	justify-content: center;
 `;
 
 const controlStyle = css`

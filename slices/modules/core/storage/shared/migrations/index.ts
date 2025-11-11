@@ -23,6 +23,7 @@ import v21 from "./2025-10-06T01-38-39-set-show-resources-default-value";
 import v22 from "./2025-10-07T03-42-56-move-picker-slice-values";
 import v23 from "./2025-10-31T09-56-56-set-android-assets-url";
 import v24 from "./2025-11-04T08-21-08-add-sealed-contents";
+import v25 from "./2025-11-10T10-25-18-set-default-skill-check-modifier";
 
 export const persistConfigMigrations = {
 	0: v0,
@@ -50,4 +51,5 @@ export const persistConfigMigrations = {
 	22: v22,
 	23: v23,
 	24: v24,
+	25: v25,
 };

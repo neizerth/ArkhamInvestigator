@@ -51,10 +51,11 @@ export const RoundReferencePhase = ({
 			<C.Wrapper>
 				<C.Content open={open}>
 					<C.Header
-						onToggle={toggle}
+						onPress={toggle}
 						before={<C.PlayIcon icon="play2" onPress={play} />}
 						after={<C.Actions phase={phase} active={open} />}
 						open={open}
+						showToggle
 					>
 						{phase.title}
 					</C.Header>
@@ -63,7 +64,9 @@ export const RoundReferencePhase = ({
 							{phase.hint && <C.Hint>{phase.hint}</C.Hint>}
 							<C.Steps>
 								{steps.map((step) => (
-									<C.Step key={step.id} step={step} onPress={playStep} />
+									<C.Step key={step.id} {...step} onPress={playStep}>
+										<C.StepContent step={step} />
+									</C.Step>
 								))}
 							</C.Steps>
 						</C.Details>

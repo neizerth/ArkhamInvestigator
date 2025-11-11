@@ -1,7 +1,7 @@
 import type { SkillCheckItem } from "@modules/board/skill-check/shared/model";
 import { createSlice } from "@reduxjs/toolkit";
 import type { InvestigatorBoardNumericStat } from "@shared/model";
-import { identity } from "ramda";
+import { identity, omit } from "ramda";
 import { createSliceState } from "redux-toolkit-helpers";
 import { chaosBagRevealPrefix } from "../../config";
 import type { RevealedChaosBagToken } from "../../model";
@@ -21,6 +21,7 @@ export type ChaosBagRevealState = {
 	result: number | null;
 	succeedBy: number | null;
 	failed: boolean | null;
+	skillCheckModifier: number;
 	skillCheckData: unknown;
 };
 
@@ -38,6 +39,7 @@ const initialState: ChaosBagRevealState = {
 	succeedBy: null,
 	failed: null,
 	skillCheckData: null,
+	skillCheckModifier: 0,
 };
 
 const state = createSliceState(initialState);
@@ -46,8 +48,9 @@ export const chaosBagReveal = createSlice({
 	name: chaosBagRevealPrefix,
 	...state,
 	reducers: {
-		...state.reducers,
+		...omit(["setSkillCheckModifier"], state.reducers),
 		...reducers,
+		setSkillCheckModifierInternal: state.reducers.setSkillCheckModifier,
 	},
 	selectors: {
 		...state.selectors,
@@ -77,6 +80,7 @@ export const {
 	updateRevealedTokenInternal,
 	syncRevealedValuesWithContents,
 	setCustomChaosBagRevealResult,
+	setSkillCheckModifierInternal,
 } = chaosBagReveal.actions;
 
 export const {
@@ -93,6 +97,7 @@ export const {
 	selectFailed: selectChaosBagSkillCheckFailed,
 	selectChaosBagReveal,
 	selectSkillCheckData: selectChaosBagSkillCheckData,
+	selectSkillCheckModifier,
 } = chaosBagReveal.selectors;
 
 export default chaosBagReveal.reducer;

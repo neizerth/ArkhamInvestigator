@@ -19,6 +19,7 @@ export type NumericControlProps = ViewProps & {
 	incrementTextStyle?: TextProps["style"];
 	minTextStyle?: TextProps["style"];
 	maxTextStyle?: TextProps["style"];
+	disabledTextStyle?: TextProps["style"];
 
 	value?: number;
 	min?: number;
@@ -42,6 +43,7 @@ export const NumericControl = ({
 	decrementTextStyle,
 	incrementStyle,
 	incrementTextStyle,
+	disabledTextStyle,
 	children,
 	min = Number.NEGATIVE_INFINITY,
 	max = Number.POSITIVE_INFINITY,
@@ -62,6 +64,7 @@ export const NumericControl = ({
 					defaultButtonTextStyle,
 					textStyle,
 					incrementTextStyle,
+					disableDecrement && disabledTextStyle,
 					disableDecrement && minTextStyle,
 				]}
 			/>
@@ -75,6 +78,7 @@ export const NumericControl = ({
 					defaultButtonTextStyle,
 					textStyle,
 					decrementTextStyle,
+					disableIncrement && disabledTextStyle,
 					disableIncrement && maxTextStyle,
 				]}
 			/>

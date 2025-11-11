@@ -6,6 +6,7 @@ import { color, font, size } from "@shared/config";
 import { View } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import styled from "styled-components/native";
+import { SkillTestReferenceStep } from "../step";
 
 export const Container: typeof ReferenceBackground = styled(
 	ReferenceBackground,
@@ -31,6 +32,15 @@ export const TitleContent: typeof ReferenceTitle = styled(ReferenceTitle)`
   color: ${color.title};
 `;
 
-export const Phases: typeof FlatList = styled(FlatList)`
+export const Step: typeof SkillTestReferenceStep = styled(
+	SkillTestReferenceStep,
+)`
+`;
+
+export const Steps: typeof FlatList = styled(FlatList).attrs({
+	contentContainerStyle: {
+		gap: size.gap.default,
+	},
+})`
   flex: 1;
 `;
