@@ -3,7 +3,7 @@ import { selectChaosBagSkillCheckBoardId } from "@modules/chaos-bag/reveal/base/
 import { openChaosTokenRevealModal } from "@modules/chaos-bag/reveal/modal/entities/lib";
 import { modalClosed } from "@modules/core/modal/shared/base/lib";
 import { put, select, takeEvery } from "redux-saga/effects";
-import { modalId } from "../config";
+import { modalActionId, modalId } from "../config";
 
 const filterAction = (action: unknown) => {
 	if (!modalClosed.match(action)) {
@@ -11,10 +11,12 @@ const filterAction = (action: unknown) => {
 	}
 
 	const { payload } = action;
-	return payload.modalId === modalId;
+	return (
+		payload.modalId === modalId && payload.modalAction?.id !== modalActionId
+	);
 };
 
-function* worker({ payload }: ReturnType<typeof modalClosed>) {
+function* worker() {
 	const boardId: ReturnType<typeof selectChaosBagSkillCheckBoardId> =
 		yield select(selectChaosBagSkillCheckBoardId);
 
