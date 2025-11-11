@@ -10,5 +10,5 @@ export const selectMaxChaosTokenCount = (type: ChaosTokenType) =>
 			return MAX_UNLIMITED_TOKEN_COUNT;
 		}
 
-		return chaosTokenCount[type];
+		return chaosTokenCount[type] ?? 0;
 	});

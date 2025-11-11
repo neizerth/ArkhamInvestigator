@@ -1,6 +1,6 @@
 import type { ChaosTokenType } from "../../model";
 
-export const chaosTokenCount: Record<ChaosTokenType, number> = {
+export const chaosTokenCount: Partial<Record<ChaosTokenType, number>> = {
 	"+1": 3,
 	"0": 4,
 	"-1": 5,
@@ -21,4 +21,5 @@ export const chaosTokenCount: Record<ChaosTokenType, number> = {
 	elderSign: 1,
 	bless: 10,
 	curse: 10,
+	moon: 12,
 };

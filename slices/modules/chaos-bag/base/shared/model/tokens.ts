@@ -1,11 +1,17 @@
 import type { ChaosTokenValue } from "@modules/chaos-bag/value/shared/model";
 
-export type ChaosTokenType = BaseChaosTokenType | SpecialChaosTokenType;
+export type ChaosTokenType =
+	| BaseChaosTokenType
+	| SpecialChaosTokenType
+	| CustomChaosTokenType
+	| "custom";
 
 export type BaseChaosTokenType =
 	| NumericChaosTokenType
 	| BaseSymbolicChaosTokenType
 	| SpecialSymbolicChaosTokenType;
+
+export type CustomChaosTokenType = "moon";
 
 export type NumericChaosTokenType =
 	| "+1"
@@ -41,7 +47,6 @@ export type BlessCurseChaosTokenType = "bless" | "curse";
 export type ChaosTokenCount = Partial<Record<ChaosTokenType, number>>;
 
 export type ChaosBagTokenData = {
-	type: ChaosTokenType;
 	revealPriority?: number;
 	sealed?: boolean;
 	sealData?: ChaosBagTokenSealData | null;
@@ -49,7 +54,14 @@ export type ChaosBagTokenData = {
 		type: "return";
 		count: number;
 	};
-};
+} & (
+	| {
+			type: ChaosTokenType;
+	  }
+	| {
+			type: "custom";
+	  }
+);
 
 export type ChaosBagTokenSealData = {
 	title?: string;

@@ -69,9 +69,12 @@ const symbolFillColor = {
 	elderSign: "#4477A1",
 	bless: "#9D702A",
 	curse: "#3A2342",
+	moon: "#394852",
 };
 
-const baseSymbolicParts = (type: BaseSymbolicChaosTokenType): Parts => {
+const baseSymbolicParts = (
+	type: BaseSymbolicChaosTokenType | "moon",
+): Parts => {
 	const icon = snakeCase(type);
 	const fillPrefix = type === "skull" ? "symbol" : icon;
 	const fillColor = symbolFillColor[type];
@@ -121,8 +124,10 @@ const specialParts = {
 };
 
 export const getChaosTokenParts = (options: Options) => {
-	const { type, modified } = options;
+	const { type } = options;
 	switch (type) {
+		case "custom":
+			return [];
 		case "+1":
 			return plusOneParts(options);
 		case "0":
@@ -139,6 +144,7 @@ export const getChaosTokenParts = (options: Options) => {
 		case "cultist":
 		case "tablet":
 		case "elderThing":
+		case "moon":
 			return baseSymbolicParts(type);
 		case "bless":
 		case "curse":

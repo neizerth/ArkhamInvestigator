@@ -4,11 +4,13 @@ import type {
 	ChaosBagChangeSource,
 	ChaosBagToken,
 	ChaosBagTokenData,
+	ChaosTokenType,
 } from "@modules/chaos-bag/base/shared/model";
 import { createAction } from "@reduxjs/toolkit";
 
 export type AddChaosTokenPayload = Partial<PropsWithBoardId> &
-	ChaosBagTokenData & {
+	Omit<ChaosBagTokenData, "type"> & {
+		type: ChaosTokenType;
 		source?: ChaosBagChangeSource;
 	};
 
