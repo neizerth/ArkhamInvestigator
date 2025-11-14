@@ -1,4 +1,7 @@
-import { selectBoardCode } from "@modules/board/base/shared/lib";
+import {
+	selectBoardById,
+	selectBoardCode,
+} from "@modules/board/base/shared/lib";
 import { sealChaosToken } from "@modules/chaos-bag/base/entities/lib";
 import { chaosBagUpdated } from "@modules/chaos-bag/base/shared/lib";
 import { addRevealedTokens } from "@modules/chaos-bag/reveal/base/shared/lib";
@@ -25,6 +28,9 @@ function* worker({ payload }: ReturnType<typeof revealChaosTokens>) {
 	if (!validation.canReveal) {
 		return;
 	}
+
+	const boardSelector = selectBoardById(boardId);
+	const board: ReturnType<typeof boardSelector> = yield select(boardSelector);
 
 	const canInterruptReveal: ReturnType<typeof selectCanInterruptReveal> =
 		yield select(selectCanInterruptReveal);
@@ -63,7 +69,10 @@ function* worker({ payload }: ReturnType<typeof revealChaosTokens>) {
 		yield put(
 			sealChaosToken({
 				id: token.id,
-				boardId,
+				sealData: {
+					type: "investigator",
+					boardId: board.id,
+				},
 			}),
 		);
 	}

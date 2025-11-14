@@ -3,9 +3,10 @@ import { ContextModal } from "@modules/core/modal/shared/base/ui";
 import { color, font, size } from "@shared/config";
 import { Button } from "@shared/ui";
 import { Row, Text, TextView } from "@shared/ui";
-import { Dimensions, View } from "react-native";
+import type { FC } from "react";
+import { Dimensions, View, type ViewProps } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
-import styled from "styled-components/native";
+import styled, { css } from "styled-components/native";
 import { ChaosBagPreviewToken } from "../ChaosBagPreviewToken";
 
 const screen = Dimensions.get("screen");
@@ -28,8 +29,16 @@ export const BlessCurse: typeof BlessCurseControl = styled(BlessCurseControl)`
   padding-top: ${size.gap.small}px;
 `;
 
-export const Sealed: typeof View = styled(View)`
-	padding-top: ${size.gap.small}px;
+type SealedProps = ViewProps & {
+	only?: boolean;
+};
+
+export const Sealed: FC<SealedProps> = styled(View)`
+  ${({ only }: SealedProps) =>
+		!only &&
+		css`
+    padding-top: ${size.gap.small}px;
+  `}
 `;
 
 const maxHeight = Math.min(screen.height - 490, 250);

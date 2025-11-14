@@ -111,8 +111,8 @@ export const ChaosBagPreview = (props: ChaosBagPreviewProps) => {
 					)}
 
 					{data.sealed.length > 0 && (
-						<C.Sealed>
-							<C.Title>{t`Sealed Tokens`}</C.Title>
+						<C.Sealed only={data.regular.length === 0}>
+							<C.Hint>{t`Sealed Tokens`}</C.Hint>
 							<C.List
 								data={data.sealed}
 								renderItem={renderTokenRow}

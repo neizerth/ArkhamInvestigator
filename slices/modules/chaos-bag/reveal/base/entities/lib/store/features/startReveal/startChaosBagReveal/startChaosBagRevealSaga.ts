@@ -1,18 +1,17 @@
-import { selectIsChaosBagEmpty } from "@modules/chaos-bag/base/shared/lib";
 import { selectRevealedTokensCount } from "@modules/chaos-bag/reveal/base/shared/lib";
 import { goToPage } from "@modules/core/router/shared/lib";
 import { routes } from "@shared/config";
 import { put, select, takeEvery } from "redux-saga/effects";
+import { selectUnrevealedChaosTokens } from "../../../selectors";
 import { openChaosBagRevealConfirm } from "../openChaosBagRevealConfirm";
 import { startNewChaosBagReveal } from "../startNewChaosBagReveal/startNewChaosBagReveal";
 import { startChaosBagReveal } from "./startChaosBagReveal";
 
 function* worker({ payload }: ReturnType<typeof startChaosBagReveal>) {
-	const isEmpty: ReturnType<typeof selectIsChaosBagEmpty> = yield select(
-		selectIsChaosBagEmpty,
-	);
+	const unrevealedTokens: ReturnType<typeof selectUnrevealedChaosTokens> =
+		yield select(selectUnrevealedChaosTokens);
 
-	if (isEmpty) {
+	if (unrevealedTokens.length === 0) {
 		yield put(goToPage(routes.chaosBagPreview));
 		return;
 	}

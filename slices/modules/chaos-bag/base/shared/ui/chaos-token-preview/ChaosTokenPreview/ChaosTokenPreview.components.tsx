@@ -167,8 +167,8 @@ export const Highlight: FC<HighlightProps> = styled(Value).attrs({
 export const SealedCount: typeof View = styled(View)`
   position: absolute;
 	z-index: 2;
-  top: -3px;
-  right: -3px;
+  bottom: -3px;
+  left: -3px;
 	width: 18px;
 	height: 18px;
 	border-radius: 50%;

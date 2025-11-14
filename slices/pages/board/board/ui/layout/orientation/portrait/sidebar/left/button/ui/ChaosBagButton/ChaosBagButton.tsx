@@ -7,6 +7,10 @@ import { useChaosBagButtonGestures, useSealedTokenGroups } from "./lib";
 
 export type ChaosBagButtonProps = ViewProps;
 
+const getCount = (count: number) => {
+	return count > 1 ? count : 0;
+};
+
 export const ChaosBagButton = (props: ChaosBagButtonProps) => {
 	const gestureConfig = useChaosBagButtonGestures();
 	const revealedCount = useAppSelector(selectRevealedTokensCount);
@@ -22,7 +26,13 @@ export const ChaosBagButton = (props: ChaosBagButtonProps) => {
 			{sealedTokenGroups.length > 0 && (
 				<C.SealedTokenGroups>
 					{sealedTokenGroups.map((group) => (
-						<C.Token key={group.type} type={group.type} size={28} sealed />
+						<C.Token
+							key={group.type}
+							type={group.type}
+							size={28}
+							sealedCount={getCount(group.count)}
+							sealed
+						/>
 					))}
 				</C.SealedTokenGroups>
 			)}
