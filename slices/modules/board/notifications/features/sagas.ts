@@ -4,6 +4,8 @@ import { sendGetResourcesNotification } from "./send-get-resources-notification/
 import { sendHealDamageNotificationSaga } from "./send-heal-damage-notification/sendHealHorrorNotificationSaga";
 import { sendHealHorrorNotificationSaga } from "./send-heal-horror-notification/sendHealHorrorNotificationSaga";
 import { sendSpendResourcesNotificationSaga } from "./send-spend-resources-notification/sendSpendResourcesNotificationSaga";
+import { sendTakeDamageNotificationSaga } from "./send-take-damage-notification/sendTakeDamageNotification";
+import { sendTakeHorrorNotificationSaga } from "./send-take-horror-notification/sendTakeHorrorNotification";
 
 export function* boardNotificationFeaturesSaga() {
 	yield fork(sendGetCluesNotification);
@@ -11,4 +13,6 @@ export function* boardNotificationFeaturesSaga() {
 	yield fork(sendSpendResourcesNotificationSaga);
 	yield fork(sendHealDamageNotificationSaga);
 	yield fork(sendHealHorrorNotificationSaga);
+	yield fork(sendTakeDamageNotificationSaga);
+	yield fork(sendTakeHorrorNotificationSaga);
 }

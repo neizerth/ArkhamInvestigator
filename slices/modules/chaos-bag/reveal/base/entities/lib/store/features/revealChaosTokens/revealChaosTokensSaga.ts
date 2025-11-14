@@ -1,5 +1,5 @@
 import { selectBoardCode } from "@modules/board/base/shared/lib";
-import { unsealChaosToken } from "@modules/chaos-bag/base/entities/lib";
+import { sealChaosToken } from "@modules/chaos-bag/base/entities/lib";
 import { chaosBagUpdated } from "@modules/chaos-bag/base/shared/lib";
 import { addRevealedTokens } from "@modules/chaos-bag/reveal/base/shared/lib";
 import { whereId } from "@shared/lib";
@@ -56,14 +56,14 @@ function* worker({ payload }: ReturnType<typeof revealChaosTokens>) {
 	for (const revealedToken of tokens) {
 		const token = contents.find(whereId(revealedToken.id));
 
-		if (!token?.sealed) {
+		if (token?.type !== "moon") {
 			continue;
 		}
 
 		yield put(
-			unsealChaosToken({
-				boardId,
+			sealChaosToken({
 				id: token.id,
+				boardId,
 			}),
 		);
 	}

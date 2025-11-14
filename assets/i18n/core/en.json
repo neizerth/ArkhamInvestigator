@@ -156,6 +156,12 @@
 	"actions.give_one": "{{name}} has got action [action] from {{fromName}}",
 	"actions.give_other": "{{name}} has got {{count}} actions [action] from {{fromName}}",
 
+	"damage.take_one": "{{name}} takes {{count}} damage",
+	"damage.take_many": "{{name}} takes {{count}} damage",
+
+	"horror.take_one": "{{name}} takes {{count}} horror",
+	"horror.take_many": "{{name}} takes {{count}} horror",
+
 	"upkeep.investigator.actionsReset": "{{name}}: Actions reset",
 
 	"mythos.doom": "Placed 1 doom on the current agenda. Total doom: {{doom}}",
@@ -213,6 +219,11 @@
 	"chaosBag.cantRemoveToken": "You can't remove {{count}} {{character}}. Available: {{available}}",
 
 	"chaosBag.sealToken": "{{name}} seals the {{token}} token",
+
+	"chaosBag.unseal.moon.title": "Unseal the [moon] token?",
+	"chaosBag.unseal.moon.text": "To unseal the token, you need to add 1 damage [health] or 1 horror [sanity]",
+	"chaosBag.unseal.moon.damage.text": "+1 damage",
+	"chaosBag.unseal.moon.horror.text": "+1 horror",
 
 	"board.help.syncScenarioClues": "Enables/disables synchronization of scenario and investigator clues: clues added to the scenario will be removed from the investigator",
 

@@ -159,6 +159,14 @@
 	"resources.get_few": "{{name}} получает {{count}} ресурса",
 	"resources.get_many": "{{name}} получает {{count}} ресурсов",
 
+	"damage.take_one": "{{name}} получает {{count}} урон",
+	"damage.take_few": "{{name}} получает {{count}} урона",
+	"damage.take_many": "{{name}} получает {{count}} урона",
+
+	"horror.take_one": "{{name}} получает {{count}} ужас",
+	"horror.take_few": "{{name}} получает {{count}} ужаса",
+	"horror.take_many": "{{name}} получает {{count}} ужаса",
+
 	"wild.give": "{{fromName}} добавляет {{dativeName}} дополнительный [wild] до конца проверки",
 	"wild.give.self": "{{name}} добавляет своей карте дополнительный [wild] до конца проверки",
 
@@ -210,6 +218,10 @@
 	"chaosBag.cantRemoveToken": "Нельзя удалить {{count}} {{character}}, в мешке {{available}} {{character}}",
 
 	"chaosBag.sealToken": "{{name}} запечатывает жетон {{token}}",
+	"chaosBag.unseal.moon.title": "Снять печать с [moon]?",
+	"chaosBag.unseal.moon.text": "Для снятия печати, необходимо добавить сыщику 1 урон [health] или 1 ужас [sanity]",
+	"chaosBag.unseal.moon.damage.text": "+1 урон",
+	"chaosBag.unseal.moon.horror.text": "+1 ужас",
 	"mythos.doom": "Добавлена 1 Безысходность. Итого: {{doom}}",
 	"timing.step.name": "Шаг {{name}}",
 

@@ -48,7 +48,12 @@ export const ChaosBagPreview = (props: ChaosBagPreviewProps) => {
 
 	const toggleSeal = useCallback(
 		(id: string) => () => {
-			dispatch(toggleChaosTokenSeal({ id }));
+			dispatch(
+				toggleChaosTokenSeal({
+					id,
+					boardId: "current",
+				}),
+			);
 		},
 		[dispatch],
 	);
