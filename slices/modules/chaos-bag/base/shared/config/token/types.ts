@@ -55,6 +55,8 @@ export const curseChaosTokenType: ChaosTokenType = "curse";
 
 export const frostChaosTokenType: ChaosTokenType = "frost";
 
+export const moonChaosTokenType: ChaosTokenType = "moon";
+
 export const removableChaosTokenTypes: ChaosTokenType[] = [
 	blessChaosTokenType,
 	curseChaosTokenType,

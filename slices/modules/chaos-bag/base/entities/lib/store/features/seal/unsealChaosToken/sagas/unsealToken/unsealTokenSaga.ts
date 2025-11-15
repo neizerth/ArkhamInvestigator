@@ -7,6 +7,10 @@ import { unsealToken } from "./unsealToken";
 
 function* worker({ payload }: ReturnType<typeof unsealToken>) {
 	const { token, boardId } = payload;
+	if (!token) {
+		console.error("Token not found");
+		return;
+	}
 	const data: ChaosBagTokenData = {
 		...token,
 		sealData: null,

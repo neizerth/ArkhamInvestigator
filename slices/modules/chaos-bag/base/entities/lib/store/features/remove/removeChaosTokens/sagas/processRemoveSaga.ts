@@ -7,10 +7,10 @@ import {
 } from "../../features";
 import {
 	chaosTokensRemoved,
-	procesChaosTokenRemove,
+	processChaosTokenRemove,
 } from "../removeChaosTokens";
 
-function* worker({ payload }: ReturnType<typeof procesChaosTokenRemove>) {
+function* worker({ payload }: ReturnType<typeof processChaosTokenRemove>) {
 	switch (payload.removeType) {
 		case "all": {
 			yield put(removeAllChaosTokensByType(payload));
@@ -32,6 +32,6 @@ function* worker({ payload }: ReturnType<typeof procesChaosTokenRemove>) {
 	yield put(chaosTokensRemoved(payload));
 }
 
-export function* procesChaosTokenRemoveSaga() {
-	yield takeEvery(procesChaosTokenRemove.match, worker);
+export function* processChaosTokenRemoveSaga() {
+	yield takeEvery(processChaosTokenRemove.match, worker);
 }

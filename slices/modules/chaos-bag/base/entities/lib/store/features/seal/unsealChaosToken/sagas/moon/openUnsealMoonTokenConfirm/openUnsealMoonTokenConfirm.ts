@@ -3,6 +3,7 @@ import { createAction } from "@reduxjs/toolkit";
 
 type OpenUnsealMoonTokenConfirmPayload = PropsWithBoardId & {
 	id: string;
+	returnToRevealModal?: boolean;
 };
 
 export const openUnsealMoonTokenConfirm =

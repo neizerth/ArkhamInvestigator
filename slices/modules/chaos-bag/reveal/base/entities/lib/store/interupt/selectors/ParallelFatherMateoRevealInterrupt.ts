@@ -24,8 +24,10 @@ export const ParallelFatherMateoRevealInterrupt = createSelector(
 		}
 
 		const haveSealedToken = contents.some(
-			({ sealData }) =>
-				sealData?.type === "investigator" && sealData.boardId === boardId,
+			({ sealData, type }) =>
+				type === "bless" &&
+				sealData?.type === "investigator" &&
+				sealData.boardId === boardId,
 		);
 
 		if (!haveSealedToken) {

@@ -1,11 +1,6 @@
-import {
-	selectBoardById,
-	selectBoardCode,
-} from "@modules/board/base/shared/lib";
-import { sealChaosToken } from "@modules/chaos-bag/base/entities/lib";
+import { selectBoardCode } from "@modules/board/base/shared/lib";
 import { chaosBagUpdated } from "@modules/chaos-bag/base/shared/lib";
 import { addRevealedTokens } from "@modules/chaos-bag/reveal/base/shared/lib";
-import { whereId } from "@shared/lib";
 import { put, select, takeEvery } from "redux-saga/effects";
 import { selectCanInterruptReveal } from "../../interupt";
 import {
@@ -29,9 +24,6 @@ function* worker({ payload }: ReturnType<typeof revealChaosTokens>) {
 		return;
 	}
 
-	const boardSelector = selectBoardById(boardId);
-	const board: ReturnType<typeof boardSelector> = yield select(boardSelector);
-
 	const canInterruptReveal: ReturnType<typeof selectCanInterruptReveal> =
 		yield select(selectCanInterruptReveal);
 
@@ -53,29 +45,11 @@ function* worker({ payload }: ReturnType<typeof revealChaosTokens>) {
 		count,
 	});
 
-	const { tokens, contents }: ReturnType<typeof revealSelector> =
+	const { tokens }: ReturnType<typeof revealSelector> =
 		yield select(revealSelector);
 
 	const codeSelector = selectBoardCode(boardId);
 	const code: ReturnType<typeof codeSelector> = yield select(codeSelector);
-
-	for (const revealedToken of tokens) {
-		const token = contents.find(whereId(revealedToken.id));
-
-		if (token?.type !== "moon") {
-			continue;
-		}
-
-		yield put(
-			sealChaosToken({
-				id: token.id,
-				sealData: {
-					type: "investigator",
-					boardId: board.id,
-				},
-			}),
-		);
-	}
 
 	yield put(
 		addRevealedTokens({

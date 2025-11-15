@@ -4,4 +4,5 @@ export const getDefaultKnownChaosBagEffects: ChaosBagEffectsCallback = () => ({
 	autoFail: "chaosToken.autoFail.effect",
 	bless: "chaosToken.bless.effect",
 	curse: "chaosToken.curse.effect",
+	moon: "chaosToken.moon.effect",
 });

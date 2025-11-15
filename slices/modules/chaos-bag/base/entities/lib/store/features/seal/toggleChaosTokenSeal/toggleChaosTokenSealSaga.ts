@@ -5,7 +5,7 @@ import { unsealChaosToken } from "../unsealChaosToken";
 import { toggleChaosTokenSeal } from "./toggleChaosTokenSeal";
 
 function* worker({ payload }: ReturnType<typeof toggleChaosTokenSeal>) {
-	const { id } = payload;
+	const { id, returnToRevealModal } = payload;
 	const tokenSelector = selectChaosBagTokenById(id);
 
 	const token: ReturnType<typeof tokenSelector> = yield select(tokenSelector);
@@ -16,9 +16,17 @@ function* worker({ payload }: ReturnType<typeof toggleChaosTokenSeal>) {
 
 	const { sealed } = token;
 
-	const action = sealed ? unsealChaosToken : sealChaosToken;
+	if (sealed) {
+		yield put(
+			unsealChaosToken({
+				...payload,
+				returnToRevealModal,
+			}),
+		);
+		return;
+	}
 
-	yield put(action(payload));
+	yield put(sealChaosToken(payload));
 }
 
 export function* toggleChaosTokenSealSaga() {

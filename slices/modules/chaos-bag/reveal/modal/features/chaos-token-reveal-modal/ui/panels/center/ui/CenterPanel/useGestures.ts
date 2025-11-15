@@ -31,8 +31,9 @@ export const useGestures = (token: RevealedChaosBagToken) => {
 
 		dispatch(
 			toggleChaosTokenSeal({
-				boardId: "current",
 				id,
+				boardId: "current",
+				returnToRevealModal: true,
 			}),
 		);
 	}, [dispatch, id]);

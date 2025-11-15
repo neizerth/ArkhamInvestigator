@@ -1,9 +1,6 @@
 import { selectBoardById } from "@modules/board/base/shared/lib";
 import { unsealChaosToken } from "@modules/chaos-bag/base/entities/lib";
-import {
-	chaosBagUpdated,
-	selectChaosBagTokenById,
-} from "@modules/chaos-bag/base/shared/lib";
+import { selectChaosBagTokenById } from "@modules/chaos-bag/base/shared/lib";
 import {
 	addRevealedTokens,
 	selectRevealedTokensCount,
@@ -35,11 +32,6 @@ function* worker({ payload }: ReturnType<typeof revealChaosTokenById>) {
 		yield select(valuesSelector);
 	const value = values[token.type];
 
-	if (token.sealed) {
-		yield put(unsealChaosToken(payload));
-		yield put(chaosBagUpdated({ boardId }));
-	}
-
 	const count: ReturnType<typeof selectRevealedTokensCount> = yield select(
 		selectRevealedTokensCount,
 	);
@@ -70,8 +62,18 @@ function* worker({ payload }: ReturnType<typeof revealChaosTokenById>) {
 			boardId,
 			code,
 			tokens,
+			manual: true,
 		}),
 	);
+
+	if (token.sealed) {
+		yield put(
+			unsealChaosToken({
+				...payload,
+				returnToRevealModal: true,
+			}),
+		);
+	}
 }
 
 export function* revealChaosTokenByIdSaga() {

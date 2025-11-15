@@ -4,6 +4,7 @@ import { createAction } from "@reduxjs/toolkit";
 
 export type UnsealChaosTokenPayload = PropsWithBoardId & {
 	id: string;
+	returnToRevealModal?: boolean;
 };
 
 export const unsealChaosToken = createAction<UnsealChaosTokenPayload>(

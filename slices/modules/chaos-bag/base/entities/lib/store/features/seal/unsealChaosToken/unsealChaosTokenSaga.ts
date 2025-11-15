@@ -17,8 +17,7 @@ function* worker({ payload }: ReturnType<typeof unsealChaosToken>) {
 		return;
 	}
 
-	const data: ChaosBagTokenData = {
-		...token,
+	const data: Partial<ChaosBagTokenData> = {
 		sealData: null,
 		sealed: false,
 	};

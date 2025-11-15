@@ -181,7 +181,8 @@
 	"Show skill test result": "Show skill test result",
 
 	"chaosToken.curse.effect": "{{value}}. Reveal another token. Instead of returning this token to the chaos bag, return it to the token pool.",
-	"chaosToken.bless.effect": "{{value}}. Reveal another token. Instead of returning this token to the chaos bag, return it to the token pool",
+	"chaosToken.bless.effect": "{{value}}. Reveal another token. Instead of returning this token to the chaos bag, return it to the token pool.",
+	"chaosToken.moon.effect": "Seal this token on your investigator card and reveal another token.",
 	"chaosToken.frost.first.effect": "{{value}}. Reveal another token",
 	"chaosToken.frost.second.effect": "Resolve the test as an automatic failure",
 	"chaosToken.autoFail.effect": "Automatic failure",
@@ -201,8 +202,8 @@
 	"chaosToken.remove.confirm.subtitle_one": "Remove token?",
 	"chaosToken.remove.confirm.subtitle_other": "Remove tokens?",
 
-	"chaosToken.remove.confirm.text_one": "Token {{token}} is in the skill test. Removing it may change the result or cancel the skill test.",
-	"chaosToken.remove.confirm.text_other": "{{count}} tokens {{token}} are in the skill test. Removing them may change the result or cancel the skill test.",
+	"chaosToken.remove.confirm.text_one": "Token {{token}} is in the skill test or sealed. Removing it may change the result or cancel the skill test.",
+	"chaosToken.remove.confirm.text_other": "{{count}} tokens {{token}} are in the skill test or sealed. Removing them may change the result or cancel the skill test.",
 
 	"chaosToken.remove.confirm.return": "Return",
 	"chaosToken.effect": "{{token}} effect",
@@ -224,6 +225,7 @@
 	"chaosBag.unseal.moon.text": "To unseal the token, you need to add 1 damage [health] or 1 horror [sanity]",
 	"chaosBag.unseal.moon.damage.text": "+1 damage",
 	"chaosBag.unseal.moon.horror.text": "+1 horror",
+	"chaosBag.unseal.moon.notAllowed": "You don't have enough health or sanity to unseal the [moon] token",
 
 	"board.help.syncScenarioClues": "Enables/disables synchronization of scenario and investigator clues: clues added to the scenario will be removed from the investigator",
 

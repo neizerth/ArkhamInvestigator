@@ -6,7 +6,7 @@ import {
 } from "../../../../selectors";
 import {
 	openRemoveChaosTokenConfirm,
-	procesChaosTokenRemove,
+	processChaosTokenRemove,
 	removeChaosTokens,
 } from "../../removeChaosTokens";
 import { cantRemoveChaosTokens } from "../cantRemoveChaosTokens";
@@ -57,7 +57,7 @@ function* worker(action: Action) {
 		return;
 	}
 
-	yield put(procesChaosTokenRemove(payload));
+	yield put(processChaosTokenRemove(payload));
 }
 
 function* getRemoveCount(payload: Payload) {

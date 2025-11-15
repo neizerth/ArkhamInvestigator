@@ -1,12 +1,12 @@
 import type { PropsWithBoardId } from "@modules/board/base/shared/model";
-import { chaosBagPrefix } from "@modules/chaos-bag/base/shared/config";
 import type { ChaosBagToken } from "@modules/chaos-bag/base/shared/model";
 import { createAction } from "@reduxjs/toolkit";
 
-type UnsealTokenPayload = PropsWithBoardId & {
+type HandleUnsealMoonTokenPayload = PropsWithBoardId & {
 	token: ChaosBagToken;
+	returnToRevealModal?: boolean;
 };
 
-export const unsealToken = createAction<UnsealTokenPayload>(
-	`${chaosBagPrefix}/unsealTokenInternal`,
+export const handleUnsealMoonToken = createAction<HandleUnsealMoonTokenPayload>(
+	"unsealChaosToken/handleUnsealMoonToken",
 );

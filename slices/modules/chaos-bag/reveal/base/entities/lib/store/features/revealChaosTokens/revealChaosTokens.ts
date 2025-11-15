@@ -24,6 +24,7 @@ export const revealChaosTokensInterrupted =
 export type ChaosTokensRevealedPayload = PropsWithBoardId & {
 	code: string;
 	tokens: RevealedChaosBagToken[];
+	manual?: boolean;
 };
 
 export const chaosTokensRevealed = createAction<ChaosTokensRevealedPayload>(
