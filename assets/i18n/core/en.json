@@ -182,7 +182,7 @@
 
 	"chaosToken.curse.effect": "{{value}}. Reveal another token. Instead of returning this token to the chaos bag, return it to the token pool.",
 	"chaosToken.bless.effect": "{{value}}. Reveal another token. Instead of returning this token to the chaos bag, return it to the token pool.",
-	"chaosToken.moon.effect": "Seal this token on your investigator card and reveal another token.",
+	"chaosToken.moon.effect": "{{value}}. Seal this token on your investigator card and reveal another token.",
 	"chaosToken.frost.first.effect": "{{value}}. Reveal another token",
 	"chaosToken.frost.second.effect": "Resolve the test as an automatic failure",
 	"chaosToken.autoFail.effect": "Automatic failure",
