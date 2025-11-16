@@ -19,7 +19,7 @@ export const Content: typeof View = styled(View)`
 `;
 
 export const Menu: typeof Row = styled(Row)`
-  justify-content: flex-end;
+  justify-content: space-between;
 `;
 
 export const Button: typeof IconButton = styled(IconButton).attrs({

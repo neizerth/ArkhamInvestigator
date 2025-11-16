@@ -1,7 +1,7 @@
-import type { Href } from "expo-router";
+import type { Route } from "expo-router";
 import { identity } from "ramda";
 
-const r = identity<Href>;
+const r = identity<Route>;
 
 export const routes = {
 	home: r("/"),

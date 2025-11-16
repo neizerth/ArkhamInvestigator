@@ -21,7 +21,11 @@ export const RevealMenu = (props: RevealMenuProps) => {
 	const goTo = usePage();
 
 	const gotoReference = useCallback(() => {
-		dispatch(openReferenceCard());
+		dispatch(
+			openReferenceCard({
+				returnToRevealModal: "yes",
+			}),
+		);
 	}, [dispatch]);
 
 	const icon = open ? "plus" : "menu";
@@ -37,11 +41,25 @@ export const RevealMenu = (props: RevealMenuProps) => {
 						<C.MenuLabel>{t`Scenario Card`}</C.MenuLabel>
 						<C.MenuIcon icon="list2" />
 					</C.MenuItem>
-					<C.MenuItem onPress={goTo(routes.roundReference)}>
+					<C.MenuItem
+						onPress={goTo({
+							pathname: routes.roundReference,
+							params: {
+								returnToRevealModal: "yes",
+							},
+						})}
+					>
 						<C.MenuLabel>{timingRules?.title}</C.MenuLabel>
 						<C.MenuIcon icon="stopwatch" />
 					</C.MenuItem>
-					<C.MenuItem onPress={goTo(routes.skillTestReference)}>
+					<C.MenuItem
+						onPress={goTo({
+							pathname: routes.skillTestReference,
+							params: {
+								returnToRevealModal: "yes",
+							},
+						})}
+					>
 						<C.MenuLabel>{skillTestTitle}</C.MenuLabel>
 						<C.MenuIcon icon="wild" />
 					</C.MenuItem>

@@ -1,4 +1,4 @@
-import { router } from "expo-router";
+import { type Href, router } from "expo-router";
 import { takeEvery } from "redux-saga/effects";
 import { goToPage } from "./goToPage";
 
@@ -15,6 +15,10 @@ function worker({ payload }: ReturnType<typeof goToPage>) {
 		action.call(router, payload.href);
 		return;
 	}
+
+	const href = payload as Href;
+
+	router.navigate(href);
 }
 
 export function* goToPageSaga() {

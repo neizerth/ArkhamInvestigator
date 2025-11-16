@@ -3,7 +3,7 @@ import { selectRevealHistorySize } from "@modules/chaos-bag/reveal/history/share
 import { goBack, goToPage } from "@modules/core/router/shared/lib";
 import { routes } from "@shared/config";
 import { delay, useAppDispatch, useAppSelector } from "@shared/lib";
-import type { Href } from "expo-router";
+import type { Route } from "expo-router";
 import { useCallback, useMemo } from "react";
 
 export const useModalActions = () => {
@@ -13,7 +13,7 @@ export const useModalActions = () => {
 	const showHistory = historySize > 0;
 
 	const goTo = useCallback(
-		(href: Href) => async () => {
+		(href: Route) => async () => {
 			dispatch(goBack());
 			await delay(300);
 			dispatch(goToPage(href));
