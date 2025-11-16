@@ -1,5 +1,5 @@
 import type { FactionFilterType } from "@modules/faction/shared/model";
-import { selectSignatureGroups } from "@modules/signature/base/shared/lib";
+import { selectAvailableSignatureGroups } from "@modules/signature/base/shared/lib";
 import { splitIntoGroups, useAppSelector } from "@shared/lib";
 import { propEq } from "ramda";
 import { useMemo } from "react";
@@ -15,7 +15,7 @@ export const useData = (options: Options) => {
 	const { faction, artworksEnabled } = options;
 	const columns = artworksEnabled ? options.columns : 1;
 
-	const signatureGroups = useAppSelector(selectSignatureGroups);
+	const signatureGroups = useAppSelector(selectAvailableSignatureGroups);
 	const { t } = useTranslation();
 
 	const filtered = signatureGroups.filter(({ spoiler, faction_code }) => {
