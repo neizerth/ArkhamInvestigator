@@ -54,7 +54,7 @@ export const createInvestigatorBoard = ({
 
 	const turnId = v4();
 
-	const loaded = investigator.has_full_image ?? false;
+	const loaded = !investigator.has_full_image;
 
 	const defaultBoard: InvestigatorBoard = {
 		...options,

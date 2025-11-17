@@ -136,6 +136,7 @@
 		"@biomejs/biome": "1.9.4",
 		"@commitlint/cli": "^19.8.0",
 		"@commitlint/config-conventional": "^19.8.0",
+		"@jest/test-sequencer": "^30.2.0",
 		"@react-native-community/cli": "^20.0.2",
 		"@types/color": "^4.2.0",
 		"@types/fast-shuffle": "^4.5.3",
@@ -157,7 +158,9 @@
 	},
 	"private": true,
 	"commitlint": {
-		"extends": ["@commitlint/config-conventional"]
+		"extends": [
+			"@commitlint/config-conventional"
+		]
 	},
 	"expo": {
 		"doctor": {

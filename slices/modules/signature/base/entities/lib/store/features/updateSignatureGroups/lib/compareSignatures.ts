@@ -2,7 +2,7 @@ import type {
 	InvestigatorSignatureGroup as Group,
 	InvestigatorSignature,
 } from "arkham-investigator-data";
-import { indexBy, prop } from "ramda";
+import { indexBy, prop, uniq } from "ramda";
 
 export const compareSignatures = (group1: Group[], group2: Group[]) => {
 	const signatures1 = group1.flatMap(prop("signatures"));
@@ -10,6 +10,7 @@ export const compareSignatures = (group1: Group[], group2: Group[]) => {
 
 	const indexMap = indexBy<InvestigatorSignature>(prop("code"));
 	const oldMap = indexMap(signatures1);
+	const oldGroupMap = indexBy(prop("id"), group1);
 
 	const changed = signatures2.filter(({ code, image }) => {
 		const old = oldMap[code];
@@ -21,7 +22,11 @@ export const compareSignatures = (group1: Group[], group2: Group[]) => {
 		return old.image.version !== image.version;
 	});
 
-	const oldGroupMap = indexBy(prop("id"), group1);
+	const newWithinExistingGroups = group2
+		.filter(({ id }) => Boolean(oldGroupMap[id]))
+		.flatMap(({ signatures }) =>
+			signatures.filter(({ code }) => !oldMap[code]),
+		);
 
 	const added = group2
 		.filter(({ id }) => {
@@ -31,6 +36,8 @@ export const compareSignatures = (group1: Group[], group2: Group[]) => {
 		})
 		.flatMap(prop("signatures"));
 
-	const data = [...changed, ...added];
-	return data.map(({ image }) => image.id);
+	const data = [...changed, ...newWithinExistingGroups, ...added];
+	const imageIds = uniq(data.map(({ image }) => image.id));
+
+	return imageIds;
 };
