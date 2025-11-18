@@ -22,7 +22,6 @@ export const Button: typeof TouchableOpacity = styled(TouchableOpacity)`
   position: relative;
   justify-content: center;
   align-items: center;
-  padding-top: 5px;
   padding-bottom: 5px;
   padding-left: 5px;
 `;
