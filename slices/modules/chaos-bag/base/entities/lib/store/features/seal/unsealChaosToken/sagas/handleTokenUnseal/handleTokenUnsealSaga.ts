@@ -22,6 +22,7 @@ function* worker({ payload }: ReturnType<typeof unsealChaosToken>) {
 				token,
 			}),
 		);
+		return;
 	}
 
 	yield put(
