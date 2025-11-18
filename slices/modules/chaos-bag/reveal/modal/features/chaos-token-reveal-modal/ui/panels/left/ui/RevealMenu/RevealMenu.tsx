@@ -38,7 +38,7 @@ export const RevealMenu = (props: RevealMenuProps) => {
 			{open && (
 				<C.Menu>
 					<C.MenuItem onPress={gotoReference} first>
-						<C.MenuLabel>{t`Scenario Card`}</C.MenuLabel>
+						<C.MenuLabel>{t`Scenario Reference`}</C.MenuLabel>
 						<C.MenuIcon icon="list2" />
 					</C.MenuItem>
 					<C.MenuItem
