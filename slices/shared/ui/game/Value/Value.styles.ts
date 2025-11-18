@@ -4,7 +4,7 @@ export const valueStyle = {
 	color: color.white,
 };
 
-export const defaultValueFontSizes: number[] = [1, 0.7, 0.54];
+export const defaultValueFontSizes: number[] = [1, 0.7, 0.54, 0.45];
 
 type GetValueFontStyleOptions = {
 	sizes?: number[];

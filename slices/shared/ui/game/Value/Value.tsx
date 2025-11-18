@@ -21,7 +21,7 @@ export const Value = ({
 	...props
 }: ValueProps) => {
 	const { value } = props;
-	const { color, fontSize } = StyleSheet.flatten(props.style);
+	const { color, fontSize } = StyleSheet.flatten(props.style) ?? {};
 
 	const fontStyle =
 		scale &&
