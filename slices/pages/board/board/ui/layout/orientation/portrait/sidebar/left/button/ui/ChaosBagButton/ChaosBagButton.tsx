@@ -19,7 +19,8 @@ export const ChaosBagButton = (props: ChaosBagButtonProps) => {
 	return (
 		<C.Container>
 			<GestureDetector gesture={gestureConfig}>
-				<C.Button {...props} icon="chaos-bag-thin">
+				<C.Button {...props}>
+					<C.Background />
 					{showPreviousReveal && <C.LastReveal />}
 				</C.Button>
 			</GestureDetector>
