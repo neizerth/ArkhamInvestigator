@@ -21,7 +21,7 @@ const initialState: ChaosBagState = {
 	loadingAnimation: false,
 
 	unlimitedChaosTokens: false,
-	modifyChaosTokens: false,
+	modifyChaosTokens: true,
 };
 
 const state = createSliceState(initialState);
