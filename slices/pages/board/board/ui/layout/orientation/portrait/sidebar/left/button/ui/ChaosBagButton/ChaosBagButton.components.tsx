@@ -23,7 +23,7 @@ export const Button: typeof TouchableOpacity = styled(TouchableOpacity)`
   justify-content: center;
   align-items: center;
   padding-bottom: 5px;
-  padding-left: 5px;
+  padding-left: 7px;
 `;
 
 export const Background: typeof Image = styled(Image).attrs({
