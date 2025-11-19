@@ -316,6 +316,8 @@
 	"ability.yuki.modal.title": "Удалить [curse]",
 	"ability.yuki.modal.text": "Удалить 1 [curse] из мешка хаоса?",
 
+	"ability.kate.darkMatter.fluxStabilizer.charge": "{{name}} кладёт 1 заряд на Потоковый стабилизатор",
+
 	"resources.notEnough": "Недостаточно ресурсов. Необходимо&nbsp;{{count}}, доступно&nbsp;{{available}}",
 
 	"heal.damage": "Вылечить {{value}}/{{total}} [health]",

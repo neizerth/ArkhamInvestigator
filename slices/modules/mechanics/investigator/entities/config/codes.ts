@@ -66,4 +66,7 @@ export const InvesigatorCode = {
 	ValentinoRivas: "05048",
 	GavriellaMizrah: "05046",
 	JeromeDavids: "05047",
+	KateWinthrop: {
+		darkMatter: "zdms_00001",
+	},
 };

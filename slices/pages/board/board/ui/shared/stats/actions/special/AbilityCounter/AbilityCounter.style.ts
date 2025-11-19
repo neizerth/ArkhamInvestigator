@@ -5,6 +5,7 @@ const abilityColors: Record<string, string | undefined> = {
 	[AbilityCode.Subject5U21]: "#3f693f",
 	[AbilityCode.DaisyWalker.parallel]: "#6d5a3a",
 	[AbilityCode.LukeRobinson]: "#975f49",
+	[AbilityCode.KateWinthrop.darkMatter.fluxStabilizer]: "#60564d",
 };
 export const getValueStyle = (abilityId: string) => {
 	const color = abilityColors[abilityId];

@@ -23,7 +23,11 @@ export const AbilityCode = {
 	CarsonSinclair: "give-action",
 	MinhThiPhan: "add-2wild",
 	KohakuNarukami: "bless-curse",
-
+	KateWinthrop: {
+		darkMatter: {
+			fluxStabilizer: "zdms-flux-stabilizer",
+		},
+	},
 	ZoeySamaras: {
 		parallel: {
 			fast: "remove-3-bless",
