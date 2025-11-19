@@ -301,6 +301,8 @@
 	"ability.yuki.modal.title": "Remove [curse]",
 	"ability.yuki.modal.text": "Remove 1 [curse] from the chaos bag?",
 
+	"ability.kate.darkMatter.fluxStabilizer.charge": "{{name}} places 1 charge on the Flux Stabilizer",
+
 	"resources.notEnough": "Not enough resources. Required&nbsp;{{count}}, available&nbsp;{{available}}",
 
 	"heal.damage_one": "Heal {{count}} [health]",
@@ -458,5 +460,6 @@
 	"Gate Box": "Gate Box",
 	"Chaos Bag": "Chaos Bag",
 	"Difficulty picker": "Difficulty picker",
-	"Odds": "Odds"
+	"Odds": "Odds",
+	"Scenario Reference": "Scenario Reference"
 }

@@ -15,4 +15,6 @@ export const backgrounds: Record<string, ImageRequireSource> = {
 	[AbilityCode.ShatteredSelf]: handSizeImage,
 	[AbilityCode.DaisyWalker.parallel]: abilitiyBackgrounds.books,
 	[AbilityCode.LukeRobinson]: abilitiyBackgrounds.gateBox,
+	[AbilityCode.KateWinthrop.darkMatter.fluxStabilizer]:
+		abilitiyBackgrounds.fluxStabilizer,
 };
