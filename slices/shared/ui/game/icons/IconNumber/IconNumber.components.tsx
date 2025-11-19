@@ -18,7 +18,9 @@ export const StrokeContainer: typeof View = styled(View)`
   position: relative;
 `;
 
-export const Fill: typeof UnscaledText = styled(UnscaledText)`
+export const Fill: typeof UnscaledText = styled(UnscaledText).attrs({
+	numberOfLines: 1,
+})`
   font-family: ${ArkhamDigits.fill};
   position: absolute;
   left: 0;
