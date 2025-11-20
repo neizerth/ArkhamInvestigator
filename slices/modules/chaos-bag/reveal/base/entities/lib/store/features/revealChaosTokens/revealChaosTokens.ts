@@ -4,8 +4,9 @@ import type { RevealedChaosBagToken } from "@modules/chaos-bag/reveal/base/share
 import { createAction } from "@reduxjs/toolkit";
 
 export type RevealChaosTokensPayload = PropsWithBoardId & {
-	count: number;
+	tokens: RevealedChaosBagToken[];
 	force?: boolean;
+	unseal?: boolean;
 };
 
 export const revealChaosTokens = createAction<RevealChaosTokensPayload>(

@@ -23,8 +23,10 @@ function* worker({ payload }: ReturnType<typeof modalConfirmed>) {
 	);
 
 	const sealedToken = contents.find(
-		({ sealData }) =>
-			sealData?.type === "investigator" && sealData.boardId === board.id,
+		({ type, sealData }) =>
+			type === "bless" &&
+			sealData?.type === "investigator" &&
+			sealData.boardId === board.id,
 	);
 
 	if (!sealedToken) {

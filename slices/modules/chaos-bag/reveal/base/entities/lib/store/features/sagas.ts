@@ -3,6 +3,7 @@ import { endChaosBagRevealSaga } from "./endChaosBagReveal/endChaosBagRevealSaga
 import { chaosBagRevealReturnSaga } from "./return/sagas";
 import { revealChaosTokenByIdSaga } from "./revealChaosTokenById/revealChaosTokenByIdSaga";
 import { revealChaosTokensSaga } from "./revealChaosTokens/revealChaosTokensSaga";
+import { revealRandomChaosTokensSaga } from "./revealRandomChaosTokens/revealRandomChaosTokensSaga";
 import { setRevealSkillValueFromTypeSaga } from "./setRevealSkillValueFromType/setRevealSkillValueFromTypeSaga";
 import { setSkillCheckModifierSaga } from "./setSkillCheckModifier/setSkillCheckModifierSaga";
 import { startRevealSaga } from "./startReveal/sagas";
@@ -12,6 +13,7 @@ export function* chaosBagRevealEntitiesSaga() {
 	yield spawn(chaosBagRevealReturnSaga);
 
 	yield spawn(revealChaosTokensSaga);
+	yield spawn(revealRandomChaosTokensSaga);
 	yield spawn(startRevealSaga);
 	yield spawn(endChaosBagRevealSaga);
 	yield spawn(updateRevealedTokenSaga);

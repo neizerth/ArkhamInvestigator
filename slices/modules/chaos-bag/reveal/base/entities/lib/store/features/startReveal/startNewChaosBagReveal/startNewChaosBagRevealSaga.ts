@@ -1,7 +1,7 @@
 import { selectBoardById } from "@modules/board/base/shared/lib";
 import { startChaosBagRevealInternal } from "@modules/chaos-bag/reveal/base/shared/lib";
 import { put, select, takeEvery } from "redux-saga/effects";
-import { revealChaosTokens } from "../../revealChaosTokens";
+import { revealRandomChaosTokens } from "../../revealRandomChaosTokens";
 import { startNewChaosBagReveal } from "./startNewChaosBagReveal";
 
 function* worker({ payload }: ReturnType<typeof startNewChaosBagReveal>) {
@@ -25,7 +25,7 @@ function* worker({ payload }: ReturnType<typeof startNewChaosBagReveal>) {
 	}
 
 	yield put(
-		revealChaosTokens({
+		revealRandomChaosTokens({
 			boardId,
 			count: 1,
 		}),

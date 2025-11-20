@@ -1,5 +1,5 @@
 import {
-	revealChaosTokens,
+	revealRandomChaosTokens,
 	selectCanRevealChaosTokens,
 } from "@modules/chaos-bag/reveal/base/entities/lib";
 import { ChaosTokenRevealHistory } from "@modules/chaos-bag/reveal/base/entities/ui";
@@ -21,7 +21,7 @@ export const Step3 = () => {
 
 	const revealMore = useCallback(() => {
 		dispatch(
-			revealChaosTokens({
+			revealRandomChaosTokens({
 				boardId: "current",
 				count: 1,
 			}),

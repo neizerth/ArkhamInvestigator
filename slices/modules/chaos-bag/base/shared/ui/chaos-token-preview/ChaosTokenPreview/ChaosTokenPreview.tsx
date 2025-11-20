@@ -1,7 +1,9 @@
+import { selectCurrentBoardId } from "@modules/board/base/shared/lib";
 import type { RevealedChaosBagTokenCancelType } from "@modules/chaos-bag/reveal/base/shared/model";
 import { isChaosTokenModified } from "@modules/chaos-bag/value/shared/lib";
 import type { ChaosTokenValue } from "@modules/chaos-bag/value/shared/model";
 import { size } from "@shared/config";
+import { useAppSelector } from "@shared/lib";
 import { memo } from "react";
 import type { ViewProps } from "react-native";
 import { chaosToken } from "../../../config";
@@ -51,6 +53,7 @@ export const ChaosTokenPreview = ({
 	defaultValue,
 	...props
 }: ChaosTokenPreviewProps) => {
+	const boardId = useAppSelector(selectCurrentBoardId);
 	const { size = chaosToken.size.default } = props;
 	const options = {
 		sealed,
@@ -91,11 +94,16 @@ export const ChaosTokenPreview = ({
 			{!selected && (
 				<>
 					{sealData?.title && <C.SealedTitle>{sealData.title}</C.SealedTitle>}
-					{sealData?.type === "investigator" && (
-						<C.SealedPreview>
-							<C.BoardPreview boardId={sealData.boardId} type="square" />
-						</C.SealedPreview>
-					)}
+					{sealData?.type === "investigator" &&
+						boardId !== sealData.boardId && (
+							<C.SealedPreview>
+								<C.BoardPreview
+									boardId={sealData.boardId}
+									type="square"
+									size={size}
+								/>
+							</C.SealedPreview>
+						)}
 				</>
 			)}
 

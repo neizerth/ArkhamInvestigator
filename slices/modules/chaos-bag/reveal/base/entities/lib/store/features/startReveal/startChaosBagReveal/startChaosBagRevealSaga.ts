@@ -8,10 +8,13 @@ import { startNewChaosBagReveal } from "../startNewChaosBagReveal/startNewChaosB
 import { startChaosBagReveal } from "./startChaosBagReveal";
 
 function* worker({ payload }: ReturnType<typeof startChaosBagReveal>) {
+	const { tokens = [] } = payload;
 	const unrevealedTokens: ReturnType<typeof selectUnrevealedChaosTokens> =
 		yield select(selectUnrevealedChaosTokens);
 
-	if (unrevealedTokens.length === 0) {
+	const canReveal = unrevealedTokens.length > 0 || tokens.length > 0;
+
+	if (!canReveal) {
 		yield put(goToPage(routes.chaosBagPreview));
 		return;
 	}
@@ -24,7 +27,6 @@ function* worker({ payload }: ReturnType<typeof startChaosBagReveal>) {
 		yield put(startNewChaosBagReveal(payload));
 		return;
 	}
-
 	yield put(openChaosBagRevealConfirm(payload));
 }
 
