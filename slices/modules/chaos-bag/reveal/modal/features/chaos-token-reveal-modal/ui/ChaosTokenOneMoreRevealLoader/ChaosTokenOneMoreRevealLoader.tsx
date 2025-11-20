@@ -1,4 +1,4 @@
-import { revealChaosTokens } from "@modules/chaos-bag/reveal/base/entities/lib";
+import { revealRandomChaosTokens } from "@modules/chaos-bag/reveal/base/entities/lib";
 import { selectRevealedTokensCount } from "@modules/chaos-bag/reveal/base/shared/lib";
 import { useAppDispatch, useAppSelector } from "@shared/lib";
 import { useCallback, useContext } from "react";
@@ -35,7 +35,7 @@ const LoaderView = (props: ChaosTokenOneMoreRevealLoaderProps) => {
 		}
 
 		dispatch(
-			revealChaosTokens({
+			revealRandomChaosTokens({
 				boardId: "current",
 				count: 1,
 			}),

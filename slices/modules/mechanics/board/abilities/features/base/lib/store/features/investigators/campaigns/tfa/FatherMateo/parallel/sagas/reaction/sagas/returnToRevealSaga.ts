@@ -1,4 +1,4 @@
-import { revealChaosTokens } from "@modules/chaos-bag/reveal/base/entities/lib";
+import { revealRandomChaosTokens } from "@modules/chaos-bag/reveal/base/entities/lib";
 import { selectChaosBagSkillCheckBoardId } from "@modules/chaos-bag/reveal/base/shared/lib";
 import { openChaosTokenRevealModal } from "@modules/chaos-bag/reveal/modal/entities/lib";
 import { modalClosed } from "@modules/core/modal/shared/base/lib";
@@ -25,7 +25,7 @@ function* worker() {
 	}
 
 	yield put(
-		revealChaosTokens({
+		revealRandomChaosTokens({
 			boardId,
 			count: 1,
 			force: true,

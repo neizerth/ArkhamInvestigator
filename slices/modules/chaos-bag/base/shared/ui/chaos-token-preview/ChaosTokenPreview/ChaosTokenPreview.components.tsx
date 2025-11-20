@@ -1,5 +1,8 @@
 import { Alegreya } from "@assets/fonts";
-import { BoardSignatureImage } from "@modules/board/base/features/base/ui";
+import {
+	BoardSignatureImage,
+	type BoardSignatureImageProps,
+} from "@modules/board/base/features/base/ui";
 import { color, font } from "@shared/config";
 import { Icon, type IconProps, Text, Value, type ValueProps } from "@shared/ui";
 import type { FC } from "react";
@@ -210,11 +213,16 @@ export const SealedPreview: typeof View = styled(View)`
   bottom: -5px;
 `;
 
-export const BoardPreview: typeof BoardSignatureImage = styled(
-	BoardSignatureImage,
-)`
-  width: 30px;
-  height: 30px;
-  border-radius: 20px;
+type BoardPreviewProps = BoardSignatureImageProps & PropsWithSize;
+
+export const BoardPreview: FC<BoardPreviewProps> = styled(BoardSignatureImage)`
+  ${(props: BoardPreviewProps) => {
+		const size = Math.max(30, props.size / 2.5);
+		return css`
+      width: ${size}px;
+      height: ${size}px;
+      border-radius: ${size}px;
+    `;
+	}}
   border: 2px solid #c12422;
 `;

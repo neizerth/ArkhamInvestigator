@@ -7,7 +7,5 @@ export const createRevealedToken = (token: Token): RevealedChaosBagToken => {
 	return {
 		...token,
 		revealId: v4(),
-		sealed: false,
-		sealData: null,
 	};
 };

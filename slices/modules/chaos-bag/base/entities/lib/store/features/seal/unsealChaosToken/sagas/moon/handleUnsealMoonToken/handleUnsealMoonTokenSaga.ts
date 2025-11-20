@@ -32,10 +32,13 @@ function* worker({ payload }: ReturnType<typeof handleUnsealMoonToken>) {
 		return;
 	}
 
+	const sealedBoardId =
+		token.sealData?.type === "investigator" ? token.sealData.boardId : boardId;
+
 	yield put(
 		openUnsealMoonTokenConfirm({
 			id: token.id,
-			boardId,
+			boardId: sealedBoardId,
 			returnToRevealModal,
 		}),
 	);

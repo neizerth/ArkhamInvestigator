@@ -21,5 +21,5 @@ export const chaosTokenCount: Partial<Record<ChaosTokenType, number>> = {
 	elderSign: 1,
 	bless: 10,
 	curse: 10,
-	moon: 12,
+	moon: 6,
 };
