@@ -31,6 +31,8 @@ export const Control: typeof ChaosTokenValuePicker = styled(
 	gap: 24,
 	valueStyle: {
 		fontSize: 30,
+		width: 35,
+		textAlign: "center",
 	},
 	autoFailStyle: {
 		fontSize: 40,

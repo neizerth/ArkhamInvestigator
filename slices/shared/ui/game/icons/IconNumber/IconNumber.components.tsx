@@ -1,9 +1,9 @@
 import { ArkhamDigits } from "@assets/fonts";
-import { Row } from "@shared/ui/grid";
 import type { FC } from "react";
 import { View } from "react-native";
 import styled, { css } from "styled-components/native";
 import { UnscaledText } from "../../../behavior/UnscaledText";
+import { Row } from "../../../grid";
 import { Icon } from "../Icon/Icon";
 import type { CharProps, PropsWithSize } from "./IconNumber.types";
 
@@ -18,7 +18,9 @@ export const StrokeContainer: typeof View = styled(View)`
   position: relative;
 `;
 
-export const Fill: typeof UnscaledText = styled(UnscaledText)`
+export const Fill: typeof UnscaledText = styled(UnscaledText).attrs({
+	numberOfLines: 1,
+})`
   font-family: ${ArkhamDigits.fill};
   position: absolute;
   left: 0;

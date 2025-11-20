@@ -1,8 +1,8 @@
 import { selectReferenceCard } from "@modules/stories/shared/lib";
 import { useAppSelector } from "@shared/lib";
+import { useCallback, useMemo, useState } from "react";
 import type { ViewProps } from "react-native";
 import * as C from "./ScenarioReferenceEffects.components";
-import { getScenarioEffectsStyle } from "./ScenarioReferenceEffects.style";
 import { useTokenReference } from "./useTokenReference";
 
 export type ScenarioReferenceEffectsProps = ViewProps;
@@ -12,30 +12,37 @@ export const ScenarioReferenceEffects = (
 ) => {
 	const card = useAppSelector(selectReferenceCard);
 	const [reference, small] = useTokenReference();
+	const [openId, setOpenId] = useState<string | null>(null);
+
+	const openItem = useCallback(
+		(id: string) => () => {
+			setOpenId((prev) => (prev === id ? null : id));
+		},
+		[],
+	);
 
 	if (!card) {
 		return;
 	}
 
-	const effectProps = getScenarioEffectsStyle({
-		language: card.locale,
-		small,
-	});
+	const data = useMemo(() => {
+		if (openId === null) {
+			return reference;
+		}
+		return reference.filter((item) => item.id === openId);
+	}, [reference, openId]);
 
 	return (
 		<C.Container {...props}>
-			{reference.map((item) => (
-				<C.Item key={item.id}>
-					{item.type === "single" && <C.Token type={item.token} dark />}
-					{item.type === "group" && (
-						<C.TokenGroup>
-							{item.tokens.map((token) => (
-								<C.Token key={token} type={token} dark />
-							))}
-						</C.TokenGroup>
-					)}
-					<C.TokenEffect {...effectProps} value={item.effect} />
-				</C.Item>
+			{data.map((item) => (
+				<C.Item
+					key={item.id}
+					item={item}
+					language={card.locale}
+					small={small}
+					onPress={openItem(item.id)}
+					open={openId === item.id}
+				/>
 			))}
 		</C.Container>
 	);
