@@ -1,7 +1,7 @@
 import { GameText } from "@modules/core/theme/shared/ui";
 import { TouchableOpacity } from "@modules/core/touch/shared/ui";
 import { color } from "@shared/config";
-import { Icon, Row } from "@shared/ui";
+import { Checkbox, Icon, Row } from "@shared/ui";
 import type { FC } from "react";
 import type { ViewProps } from "react-native";
 import { View } from "react-native";
@@ -9,14 +9,14 @@ import styled, { css } from "styled-components";
 import { refPx as upx } from "../../lib";
 import { ScenarioReferenceToken } from "../ScenarioReferenceToken";
 
-export const Container: typeof Row = styled(Row)`
+export const Container: typeof View = styled(View)`
   
 `;
 
 export const Content: typeof Row = styled(Row)`
   gap: ${upx(2)};
   align-items: center;
-  flex: 1;
+  width: 100%;
 `;
 
 export const Token: typeof ScenarioReferenceToken = styled(
@@ -62,4 +62,23 @@ export const Expand: FC<ExpandProps> = styled(View)<ExpandProps>`
 export const ExpandIcon: typeof Icon = styled(Icon)`
   color: ${color.text};
   font-size: 10px;
+`;
+
+export const Options: typeof View = styled(View)`
+  gap: ${upx(1)};
+`;
+
+export const Option: typeof Row = styled(Row)`
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: ${upx(6)};
+`;
+
+export const OptionControl: typeof Checkbox = styled(Checkbox).attrs({
+	contentStyle: {
+		gap: 10,
+	},
+})`
+  height: 40px;
+  color: ${color.text};
 `;

@@ -9,6 +9,7 @@ export type CheckboxProps = TouchableOpacityProps & {
 	uncheckedIcon?: string;
 	contentStyle?: ViewStyle;
 	controlStyle?: TextStyle;
+	labelStyle?: TextStyle;
 	checked?: boolean;
 	label?: string;
 	hint?: string;
@@ -19,6 +20,7 @@ export const Checkbox = ({
 	align = "right",
 	controlStyle,
 	contentStyle,
+	labelStyle,
 	checked,
 	children,
 	label,
@@ -32,10 +34,19 @@ export const Checkbox = ({
 	return (
 		<C.Container {...props}>
 			<C.Content style={contentStyle}>
-				{align === "right" && <C.Label>{label}</C.Label>}
+				{align === "right" && (
+					<>
+						<C.Label style={labelStyle}>{label}</C.Label>
+						{children}
+					</>
+				)}
 				<C.Control icon={icon} style={controlStyle} />
-				{align === "left" && <C.Label>{label}</C.Label>}
-				{children}
+				{align === "left" && (
+					<>
+						<C.Label style={labelStyle}>{label}</C.Label>
+						{children}
+					</>
+				)}
 			</C.Content>
 			{hint && <C.Hint>{hint}</C.Hint>}
 		</C.Container>

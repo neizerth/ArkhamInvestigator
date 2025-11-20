@@ -10,5 +10,4 @@ export const Container: typeof View = styled(View)`
 export const Item: typeof ScenarioReferenceTokenEffect = styled(
 	ScenarioReferenceTokenEffect,
 )`
-  
 `;

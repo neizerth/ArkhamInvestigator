@@ -42,6 +42,8 @@ export const ScenarioReferenceTokenEffect = ({
 		onPress?.();
 	}, [onPress, showExpand]);
 
+	console.log(options);
+
 	return (
 		<C.Container {...props}>
 			<C.Content>
@@ -64,6 +66,17 @@ export const ScenarioReferenceTokenEffect = ({
 					)}
 				</C.Effect>
 			</C.Content>
+			{open && (
+				<C.Options>
+					{options.map((option) => (
+						<C.Option key={option.prompt}>
+							<C.OptionControl>
+								<C.EffectText {...effectProps} value={option.prompt} />
+							</C.OptionControl>
+						</C.Option>
+					))}
+				</C.Options>
+			)}
 		</C.Container>
 	);
 };
