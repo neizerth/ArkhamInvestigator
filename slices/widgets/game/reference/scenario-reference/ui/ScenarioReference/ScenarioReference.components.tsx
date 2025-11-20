@@ -87,4 +87,5 @@ export const Tokens: typeof ScenarioReferenceEffects = styled(
 	ScenarioReferenceEffects,
 )`
 	align-items: center;
+	flex:1;
 `;
