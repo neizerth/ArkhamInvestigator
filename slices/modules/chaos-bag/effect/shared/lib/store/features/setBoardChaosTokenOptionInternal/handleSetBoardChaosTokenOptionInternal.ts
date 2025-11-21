@@ -4,7 +4,7 @@ import type { ChaosBagEffectHandler } from "../../../../model";
 export type SetBoardChaosTokenOptionInternalPayload = {
 	boardId: number;
 	type: ChaosTokenType;
-	optionIndex: number;
+	optionIndex: number | null;
 };
 
 export const handleSetBoardChaosTokenOptionInternal: ChaosBagEffectHandler<

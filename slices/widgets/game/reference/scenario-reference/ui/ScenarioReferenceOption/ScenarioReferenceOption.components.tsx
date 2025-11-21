@@ -13,7 +13,9 @@ export const Control: typeof Checkbox = styled(Checkbox).attrs({
 	contentStyle: {
 		gap: 10,
 	},
+	controlStyle: {
+		color: color.text,
+	},
 })`
   height: 40px;
-  color: ${color.text};
 `;

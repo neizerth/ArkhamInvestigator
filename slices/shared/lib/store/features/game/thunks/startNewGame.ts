@@ -15,6 +15,7 @@ import { goToPage } from "@modules/core/router/shared/lib/store/features/goToPag
 import { clearTraumaSettings } from "@modules/signature/base/shared/lib";
 import type { AppThunk } from "@shared/model";
 import { routes } from "../../../../../config";
+import { newGameStarted } from "../actions/startNewGame";
 import { setReplaceInvestigator, setSelectedInvestigators } from "../game";
 
 export const startNewGame: ActionCreator<AppThunk> =
@@ -43,4 +44,6 @@ export const startNewGame: ActionCreator<AppThunk> =
 		dispatch(setSelectedInvestigators([]));
 		dispatch(setInvestigatorBoards([]));
 		dispatch(goToPage(routes.selectInvestigators));
+
+		dispatch(newGameStarted());
 	};

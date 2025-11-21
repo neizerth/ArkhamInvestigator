@@ -20,11 +20,18 @@ const state = createSliceState(initialState);
 export const chaosBagEffect = createSlice({
 	...state,
 	name: "chaosBagEffect",
-	reducers,
+	reducers: {
+		...state.reducers,
+		...reducers,
+	},
 });
 
-export const { setChaosTokenOptionInternal, setBoardChaosTokenOptionInternal } =
-	chaosBagEffect.actions;
+export const {
+	setBoardChaosTokenOptions,
+	setChaosTokenOptions,
+	setChaosTokenOptionInternal,
+	setBoardChaosTokenOptionInternal,
+} = chaosBagEffect.actions;
 
 export const { selectChaosTokenOptions, selectBoardChaosTokenOptions } =
 	chaosBagEffect.selectors;

@@ -63,8 +63,8 @@ export const ScenarioReferenceTokenEffect = ({
 			</C.Content>
 			{open && (
 				<C.Options>
-					{options.map((option) => (
-						<C.Option key={option.prompt} option={option}>
+					{options.map((option, index) => (
+						<C.Option key={option.prompt} index={index} type={type}>
 							<C.Text
 								language={language}
 								small={small}
