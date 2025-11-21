@@ -1,11 +1,13 @@
-import { getReferencePartTokens } from "@modules/chaos-bag/effect/entities/lib";
-import { selectChaosTokenOptions } from "@modules/chaos-bag/value/entities/lib";
+import {
+	getReferencePartTokens,
+	selectReferenceCardChaosTokenOptions,
+} from "@modules/chaos-bag/effect/entities/lib";
+import { getTokenOptionLabel } from "@modules/chaos-bag/value/entities/lib";
 import { getActiveOpacity, useAppSelector } from "@shared/lib";
 import type { ReferencePart } from "arkham-investigator-data";
 import { useCallback } from "react";
 import type { ViewProps } from "react-native";
 import * as C from "./ScenarioReferenceTokenEffect.components";
-import { getScenarioEffectsStyle } from "./ScenarioReferenceTokenEffect.style";
 
 export type ScenarioReferenceTokenEffectProps = ViewProps & {
 	item: ReferencePart;
@@ -25,13 +27,8 @@ export const ScenarioReferenceTokenEffect = ({
 	...props
 }: ScenarioReferenceTokenEffectProps) => {
 	const [type] = getReferencePartTokens(item);
-	const options = useAppSelector(selectChaosTokenOptions(type));
+	const options = useAppSelector(selectReferenceCardChaosTokenOptions(type));
 	const showExpand = options.length > 0;
-
-	const effectProps = getScenarioEffectsStyle({
-		language,
-		small,
-	});
 
 	const activeOpacity = getActiveOpacity(showExpand);
 
@@ -41,8 +38,6 @@ export const ScenarioReferenceTokenEffect = ({
 		}
 		onPress?.();
 	}, [onPress, showExpand]);
-
-	console.log(options);
 
 	return (
 		<C.Container {...props}>
@@ -57,7 +52,7 @@ export const ScenarioReferenceTokenEffect = ({
 				)}
 				<C.Effect activeOpacity={activeOpacity} onPress={handlePress}>
 					<C.EffectContent>
-						<C.EffectText {...effectProps} value={item.effect} />
+						<C.Text language={language} small={small} value={item.effect} />
 					</C.EffectContent>
 					{showExpand && (
 						<C.Expand open={open}>
@@ -69,10 +64,12 @@ export const ScenarioReferenceTokenEffect = ({
 			{open && (
 				<C.Options>
 					{options.map((option) => (
-						<C.Option key={option.prompt}>
-							<C.OptionControl>
-								<C.EffectText {...effectProps} value={option.prompt} />
-							</C.OptionControl>
+						<C.Option key={option.prompt} option={option}>
+							<C.Text
+								language={language}
+								small={small}
+								value={getTokenOptionLabel(option)}
+							/>
 						</C.Option>
 					))}
 				</C.Options>

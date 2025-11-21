@@ -3,7 +3,7 @@ import type { BoardId } from "@modules/board/base/shared/model";
 import { createSelector } from "@reduxjs/toolkit";
 import { getReferencePartTokens } from "../../logic";
 
-export const selectBoardChaosTokenTypes = (boardId: BoardId) =>
+export const selectBoardTokenTypes = (boardId: BoardId) =>
 	createSelector([selectBoardById(boardId)], (board) => {
 		const parts = board.investigator.tokens_reference;
 

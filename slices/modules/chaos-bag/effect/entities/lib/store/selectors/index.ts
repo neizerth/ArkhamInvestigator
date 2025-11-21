@@ -1,3 +1,4 @@
 export * from "./selectDefaultChaosBagEffects";
-export * from "./selectBoardChaosTokenTypes";
+export * from "./selectBoardTokenTypes";
 export * from "./selectReferenceCardEffects";
+export * from "./selectChaosBagOptions";

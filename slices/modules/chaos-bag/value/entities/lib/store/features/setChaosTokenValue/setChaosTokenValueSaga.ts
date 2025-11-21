@@ -1,5 +1,5 @@
 import { chaosToken } from "@modules/chaos-bag/base/shared/config";
-import { selectBoardChaosTokenTypes } from "@modules/chaos-bag/effect/entities/lib";
+import { selectBoardTokenTypes } from "@modules/chaos-bag/effect/entities/lib";
 import { updateChaosTokenValueInternal } from "@modules/chaos-bag/value/shared/lib";
 import { put, select, takeEvery } from "redux-saga/effects";
 import { updateBoardChaosTokenValue } from "../updateBoardChaosTokenValue";
@@ -9,26 +9,27 @@ import { setChaosTokenValue } from "./setChaosTokenValue";
 function* worker({ payload }: ReturnType<typeof setChaosTokenValue>) {
 	const { boardId, type, value, id } = payload;
 
-	const tokenSelector = selectBoardChaosTokenTypes(boardId);
+	const tokenSelector = selectBoardTokenTypes(boardId);
 	const types: ReturnType<typeof tokenSelector> = yield select(tokenSelector);
 
 	const isNumericToken = chaosToken.types.numeric.includes(type);
 
 	if (isNumericToken) {
-		if (id) {
-			yield put(
-				updateCurrentRevealedTokenValue({
-					id,
-					value,
-				}),
-			);
+		if (!id) {
+			return;
 		}
+		yield put(
+			updateCurrentRevealedTokenValue({
+				id,
+				value,
+			}),
+		);
 		return;
 	}
 
-	const isInvestigatorToken = type !== "custom" && types.includes(type);
+	const isBoardToken = type !== "custom" && types.includes(type);
 
-	if (isInvestigatorToken) {
+	if (isBoardToken) {
 		yield put(updateBoardChaosTokenValue(payload));
 		return;
 	}

@@ -4,7 +4,7 @@ import { selectReferenceCardTokens } from "@modules/stories/shared/lib";
 import { createSelector } from "@reduxjs/toolkit";
 import { propEq } from "ramda";
 
-export const selectChaosTokenOptions = (type: ChaosTokenType) =>
+export const selectReferenceCardChaosTokenOptions = (type: ChaosTokenType) =>
 	createSelector([selectReferenceCardTokens], (data) => {
 		const item = data.find(propEq(type, "token"));
 
