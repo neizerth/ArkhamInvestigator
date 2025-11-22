@@ -1,7 +1,7 @@
 {
 	"name": "arkham-investigator",
 	"main": "expo-router/entry",
-	"version": "2.11.6",
+	"version": "2.11.7",
 	"scripts": {
 		"start": "expo start",
 		"reset-project": "node ./scripts/reset-project.js",
