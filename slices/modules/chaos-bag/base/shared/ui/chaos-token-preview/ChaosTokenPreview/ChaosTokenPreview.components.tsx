@@ -6,13 +6,15 @@ import {
 import { color, font } from "@shared/config";
 import { Icon, type IconProps, Text, Value, type ValueProps } from "@shared/ui";
 import type { FC } from "react";
-import { View, type ViewProps } from "react-native";
+import { Platform, View, type ViewProps } from "react-native";
 import styled, { css } from "styled-components/native";
 import { chaosToken } from "../../../config";
 import { ChaosToken } from "../../chaos-token";
 import { ChaosTokenModification } from "../ChaosTokenModification";
 import { ChaosTokenPreviewValue } from "../ChaosTokenPreviewValue";
 import { SealedImage } from "./images";
+
+const ios = Platform.OS === "ios";
 
 type PropsWithSize = {
 	size: number;
@@ -169,7 +171,7 @@ export const Highlight: FC<HighlightProps> = styled(Value).attrs({
 
 export const SealedCount: typeof View = styled(View)`
   position: absolute;
-	z-index: 2;
+	z-index: 3;
   bottom: -3px;
   right: -3px;
 	width: 18px;
@@ -185,8 +187,9 @@ export const SealedCountText: typeof Text = styled(Text)`
 	font-family: ${Alegreya.regular};
   color: ${color.light10};
   font-size: ${font.size.default}px;
-	line-height: ${font.size.default}px;
+	line-height: ${font.size.default * (ios ? 1 : 0.9)}px;
 	text-align: center;
+  bottom: ${ios ? 0 : 3}px;
 `;
 
 export const SealedTitle: typeof Text = styled(Text).attrs({
