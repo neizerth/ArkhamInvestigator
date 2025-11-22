@@ -28,7 +28,8 @@ export type NumericChaosTokenType =
 export type SymbolicChaosTokenType =
 	| BaseSymbolicChaosTokenType
 	| SpecialSymbolicChaosTokenType
-	| SpecialChaosTokenType;
+	| SpecialChaosTokenType
+	| MoonChaosTokenType;
 
 export type BaseSymbolicChaosTokenType =
 	| "skull"
