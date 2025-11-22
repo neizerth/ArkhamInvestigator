@@ -1,7 +1,10 @@
 import { chaosToken } from "@modules/chaos-bag/base/shared/config";
+import { selectRevealedTokensCount } from "@modules/chaos-bag/reveal/base/shared/lib";
+import { createCancelModalAction } from "@modules/core/modal/shared/actions/cancel/lib";
 import { createConfirmModalAction } from "@modules/core/modal/shared/actions/confirm/lib";
 import { openConfirm } from "@modules/core/modal/shared/confirm/lib";
-import { put, takeEvery } from "redux-saga/effects";
+import { compact } from "ramda-adjunct";
+import { put, select, takeEvery } from "redux-saga/effects";
 import {
 	confirmRemoveModalActionId,
 	modalId,
@@ -19,6 +22,9 @@ function* worker({ payload }: ReturnType<typeof openRemoveChaosTokenConfirm>) {
 		count,
 	};
 
+	const revealedCount: ReturnType<typeof selectRevealedTokensCount> =
+		yield select(selectRevealedTokensCount);
+
 	yield put(
 		openConfirm({
 			id: modalId,
@@ -31,19 +37,21 @@ function* worker({ payload }: ReturnType<typeof openRemoveChaosTokenConfirm>) {
 					i18nKey: "chaosToken.remove.confirm.text",
 					data,
 				},
-				actions: [
-					createConfirmModalAction({
-						id: returnToSkillTestModalActionId,
-						title: "chaosToken.remove.confirm.return",
-						icon: "chaos-bag-thin",
-						primary: false,
-					}),
+				actions: compact([
+					revealedCount > 0
+						? createConfirmModalAction({
+								id: returnToSkillTestModalActionId,
+								title: "chaosToken.remove.confirm.return",
+								icon: "chaos-bag-thin",
+								primary: false,
+							})
+						: createCancelModalAction(),
 					createConfirmModalAction({
 						id: confirmRemoveModalActionId,
 						title: "Remove",
 						data: payload,
 					}),
-				],
+				]),
 			},
 		}),
 	);

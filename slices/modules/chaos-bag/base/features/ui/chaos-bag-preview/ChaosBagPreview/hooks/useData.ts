@@ -22,7 +22,16 @@ const getRows = ({
 		};
 	});
 	const data = sortWith(
-		[ascend(prop("disabled")), ascend(prop("type"))],
+		[
+			ascend(prop("disabled")),
+			ascend(prop("type")),
+			ascend(({ sealData }) => {
+				if (sealData?.type === "investigator") {
+					return sealData.boardId;
+				}
+				return 0;
+			}),
+		],
 		withDisabled,
 	);
 	return splitIntoGroups(data, columns);

@@ -1,4 +1,5 @@
 import { selectBoardById } from "@modules/board/base/shared/lib";
+import { unsealChaosToken } from "@modules/chaos-bag/base/entities/lib";
 import { revealChaosTokenById } from "@modules/chaos-bag/reveal/base/entities/lib";
 import { selectAvailableTokens } from "@modules/chaos-bag/reveal/base/shared/lib";
 import {
@@ -32,6 +33,13 @@ function* worker({ payload }: ReturnType<typeof modalConfirmed>) {
 	if (!sealedToken) {
 		return;
 	}
+
+	yield put(
+		unsealChaosToken({
+			boardId,
+			id: sealedToken.id,
+		}),
+	);
 
 	yield put(
 		revealChaosTokenById({

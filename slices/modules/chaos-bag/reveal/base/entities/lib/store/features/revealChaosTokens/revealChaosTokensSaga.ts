@@ -1,5 +1,5 @@
 import { selectBoardCode } from "@modules/board/base/shared/lib";
-import { unsealChaosToken } from "@modules/chaos-bag/base/entities/lib";
+import { updateChaosToken } from "@modules/chaos-bag/base/entities/lib";
 import { chaosBagUpdated } from "@modules/chaos-bag/base/shared/lib";
 import { addRevealedTokens } from "@modules/chaos-bag/reveal/base/shared/lib";
 import { put, select, takeEvery } from "redux-saga/effects";
@@ -43,6 +43,21 @@ function* worker({ payload }: ReturnType<typeof revealChaosTokens>) {
 	const codeSelector = selectBoardCode(boardId);
 	const code: ReturnType<typeof codeSelector> = yield select(codeSelector);
 
+	if (unseal) {
+		for (const token of tokens) {
+			yield put(
+				updateChaosToken({
+					boardId,
+					id: token.id,
+					data: {
+						sealed: false,
+						sealData: null,
+					},
+				}),
+			);
+		}
+	}
+
 	yield put(
 		addRevealedTokens({
 			tokens,
@@ -57,22 +72,7 @@ function* worker({ payload }: ReturnType<typeof revealChaosTokens>) {
 		}),
 	);
 
-	if (!unseal) {
-		yield put(chaosBagUpdated(payload));
-		return;
-	}
-
-	for (const token of tokens) {
-		if (token.sealed) {
-			yield put(
-				unsealChaosToken({
-					...payload,
-					id: token.id,
-					returnToRevealModal: true,
-				}),
-			);
-		}
-	}
+	yield put(chaosBagUpdated(payload));
 }
 
 export function* revealChaosTokensSaga() {
