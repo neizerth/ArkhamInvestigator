@@ -15,6 +15,7 @@ function* worker({ payload }: ReturnType<typeof revealChaosTokenById>) {
 	const token: ReturnType<typeof tokenSelector> = yield select(tokenSelector);
 
 	if (!token) {
+		console.error("Token not found", id);
 		return;
 	}
 
