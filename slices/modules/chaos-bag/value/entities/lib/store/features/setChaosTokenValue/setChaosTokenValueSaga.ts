@@ -44,6 +44,7 @@ function* worker({ payload }: ReturnType<typeof setChaosTokenValue>) {
 		yield select(boardValueSelector);
 	const hasBoardValue = has(type, boardValue) as boolean;
 
+	// remove board value if last value was board specific
 	if (hasBoardValue) {
 		const boardIdSelector = selectBoardId(payload.boardId);
 		const boardId: ReturnType<typeof boardIdSelector> =

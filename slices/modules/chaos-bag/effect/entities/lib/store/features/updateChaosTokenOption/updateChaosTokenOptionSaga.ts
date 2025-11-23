@@ -51,6 +51,7 @@ function* worker({ payload }: ReturnType<typeof updateChaosTokenOption>) {
 		currentOptionSelector,
 	);
 
+	// remove board option if last option was personal
 	if (currentOption?.personal) {
 		yield put(
 			setBoardChaosTokenOptionInternal({
