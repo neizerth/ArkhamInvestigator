@@ -5,6 +5,7 @@ import {
 } from "@modules/chaos-bag/effect/shared/lib";
 import { put, select, takeEvery } from "redux-saga/effects";
 import { selectReferenceCardChaosTokenOptions } from "../../selectors";
+import { selectCurrentChaosTokenOption } from "../../selectors/selectCurrentChaosTokenOption";
 import {
 	chaosTokenOptionUpdated,
 	updateChaosTokenOption,
@@ -37,14 +38,35 @@ function* worker({ payload }: ReturnType<typeof updateChaosTokenOption>) {
 				optionIndex,
 			}),
 		);
-	} else {
+
+		yield put(chaosTokenOptionUpdated(payload));
+		return;
+	}
+
+	const currentOptionSelector = selectCurrentChaosTokenOption({
+		boardId,
+		type,
+	});
+	const currentOption: ReturnType<typeof currentOptionSelector> = yield select(
+		currentOptionSelector,
+	);
+
+	if (currentOption?.personal) {
 		yield put(
-			setChaosTokenOptionInternal({
+			setBoardChaosTokenOptionInternal({
+				boardId: board.id,
 				type,
-				optionIndex,
+				optionIndex: null,
 			}),
 		);
 	}
+
+	yield put(
+		setChaosTokenOptionInternal({
+			type,
+			optionIndex,
+		}),
+	);
 
 	yield put(chaosTokenOptionUpdated(payload));
 }
