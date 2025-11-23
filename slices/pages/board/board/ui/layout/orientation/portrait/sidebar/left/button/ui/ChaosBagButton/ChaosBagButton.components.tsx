@@ -13,6 +13,7 @@ export const Container: typeof View = styled(View)`
 `;
 
 export const Content: typeof Row = styled(Row)`
+  gap: 10px;
 `;
 
 export const Difficulty: typeof ChaosBagDifficulty = styled(ChaosBagDifficulty)`
@@ -32,8 +33,8 @@ export const LastReveal: typeof ChaosBagButtonLastRevealIcon = styled(
 	ChaosBagButtonLastRevealIcon,
 )`
   position: absolute;
-  right: -15px;
-  top: -10px;
+  right: -10px;
+  top: -5px;
 `;
 
 export const Button: typeof TouchableOpacity = styled(TouchableOpacity)`

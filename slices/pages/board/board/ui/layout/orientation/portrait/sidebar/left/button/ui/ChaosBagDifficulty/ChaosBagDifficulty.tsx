@@ -7,12 +7,14 @@ import {
 	setSkillCheckDifficulty,
 	toggleSkillCheckDifficultyType,
 } from "@modules/board/skill-check/shared/lib";
+import { setCustomChaosBagSkillValue } from "@modules/chaos-bag/base/entities/lib";
 import {
 	selectCustomSkillValue,
 	setCustomSkillValue,
 } from "@modules/chaos-bag/odds/shared/lib";
+import { selectChaosBagSkillValue } from "@modules/chaos-bag/reveal/base/shared/lib";
 import type { PickerChangeEvent } from "@modules/core/control/entities/picker/model";
-import { useAppDispatch, useAppSelector } from "@shared/lib";
+import { useAppDispatch, useAppSelector, useBoolean } from "@shared/lib";
 import { useCallback } from "react";
 import * as C from "./ChaosBagDifficulty.components";
 
@@ -22,21 +24,34 @@ const data = range(0, 100);
 
 export const ChaosBagDifficulty = (props: ChaosBagDifficultyProps) => {
 	const dispatch = useAppDispatch();
-	const customSkillValue = useAppSelector(selectCustomSkillValue) ?? 0;
-	const value = useAppSelector(selectSkillCheckDifficulty) ?? 0;
+	const [showSkillPicker, setShowSkillPicker] = useBoolean(false);
+	const chaosBagSkillValue = useAppSelector(selectChaosBagSkillValue);
+	const customSkillValue = useAppSelector(selectCustomSkillValue);
+
+	const skillValue = chaosBagSkillValue ?? customSkillValue ?? 0;
+	const difficulty = useAppSelector(selectSkillCheckDifficulty) ?? 0;
 	const character = useAppSelector(selectSkillCheckDifficultyCharacter);
 
-	const onSkillChange = useCallback(
+	const value = showSkillPicker ? skillValue : difficulty;
+
+	const onChange = useCallback(
 		({ value = 0 }: PickerChangeEvent<number>) => {
+			if (!showSkillPicker) {
+				dispatch(setSkillCheckDifficulty(value));
+				return;
+			}
+			if (skillValue !== null) {
+				dispatch(
+					setCustomChaosBagSkillValue({
+						boardId: "current",
+						value,
+					}),
+				);
+				return;
+			}
 			dispatch(setCustomSkillValue(value));
 		},
-		[dispatch],
-	);
-	const onDifficultyChange = useCallback(
-		({ value = 0 }: PickerChangeEvent<number>) => {
-			dispatch(setSkillCheckDifficulty(value));
-		},
-		[dispatch],
+		[showSkillPicker, skillValue, dispatch],
 	);
 
 	const onToggle = useCallback(() => {
@@ -45,12 +60,25 @@ export const ChaosBagDifficulty = (props: ChaosBagDifficultyProps) => {
 
 	return (
 		<C.Container {...props}>
-			<C.Character>{character}</C.Character>
+			{showSkillPicker ? (
+				<C.SkillValueView>
+					<C.Character>{character}</C.Character>
+					<C.FixedValue value={difficulty} />
+				</C.SkillValueView>
+			) : (
+				<C.DifficultyView>
+					<C.FixedValue value={skillValue} />
+					<C.Character>{character}</C.Character>
+				</C.DifficultyView>
+			)}
+
 			<C.Picker
 				data={data}
 				value={value}
-				onValueChanged={onDifficultyChange}
+				position={showSkillPicker ? "top" : "bottom"}
+				onValueChanged={onChange}
 				onLongPress={onToggle}
+				onPress={setShowSkillPicker.toggle}
 			/>
 		</C.Container>
 	);
