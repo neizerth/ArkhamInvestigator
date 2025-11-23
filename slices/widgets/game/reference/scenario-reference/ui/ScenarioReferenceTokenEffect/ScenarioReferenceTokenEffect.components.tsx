@@ -1,3 +1,4 @@
+import { ChaosTokenOption } from "@modules/chaos-bag/base/features/ui";
 import { TouchableOpacity } from "@modules/core/touch/shared/ui";
 import { color } from "@shared/config";
 import { Checkbox, Icon, Row } from "@shared/ui";
@@ -7,7 +8,6 @@ import { View } from "react-native";
 import styled, { css } from "styled-components";
 import { refPx as upx } from "../../lib";
 import { ScenarioReferenceEffectText } from "../ScenarioReferenceEffectText";
-import { ScenarioReferenceOption } from "../ScenarioReferenceOption";
 import { ScenarioReferenceToken } from "../ScenarioReferenceToken";
 
 export const Container: typeof View = styled(View)`
@@ -68,12 +68,14 @@ export const ExpandIcon: typeof Icon = styled(Icon)`
 
 export const Options: typeof View = styled(View)`
   gap: ${upx(1)};
+  padding-right: ${upx(4)};
 `;
 
-export const Option: typeof ScenarioReferenceOption = styled(
-	ScenarioReferenceOption,
-)`
-
+export const Option: typeof ChaosTokenOption = styled(ChaosTokenOption).attrs({
+	controlStyle: {
+		color: color.text,
+	},
+})`
 `;
 
 export const OptionControl: typeof Checkbox = styled(Checkbox).attrs({

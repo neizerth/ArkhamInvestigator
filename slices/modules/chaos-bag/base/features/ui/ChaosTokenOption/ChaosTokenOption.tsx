@@ -4,21 +4,24 @@ import {
 	updateChaosTokenOption,
 } from "@modules/chaos-bag/effect/entities/lib";
 import { useAppDispatch, useAppSelector } from "@shared/lib";
+import type { CheckboxProps } from "@shared/ui";
 import { useCallback } from "react";
-import type { ViewProps } from "react-native";
-import * as C from "./ScenarioReferenceOption.components";
+import type { ViewStyle } from "react-native";
+import * as C from "./ChaosTokenOption.components";
 
-export type ScenarioReferenceOptionProps = ViewProps & {
+export type ChaosTokenOptionProps = Omit<CheckboxProps, "checked" | "data"> & {
+	contentContainerStyle?: ViewStyle;
 	type: ChaosTokenType;
 	index: number;
 };
 
-export const ScenarioReferenceOption = ({
+export const ChaosTokenOption = ({
+	contentContainerStyle,
 	children,
 	index,
 	type,
 	...props
-}: ScenarioReferenceOptionProps) => {
+}: ChaosTokenOptionProps) => {
 	const dispatch = useAppDispatch();
 	const selectedIndex = useAppSelector(
 		selectCurrentChaosTokenOptionIndex({
@@ -40,8 +43,8 @@ export const ScenarioReferenceOption = ({
 	}, [dispatch, index, type, checked]);
 
 	return (
-		<C.Container {...props}>
-			<C.Control onPress={onPress} checked={checked}>
+		<C.Container style={contentContainerStyle}>
+			<C.Control onPress={onPress} checked={checked} {...props}>
 				{children}
 			</C.Control>
 		</C.Container>
