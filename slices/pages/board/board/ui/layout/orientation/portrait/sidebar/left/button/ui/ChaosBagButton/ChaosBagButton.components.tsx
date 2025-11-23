@@ -13,7 +13,6 @@ export const Container: typeof View = styled(View)`
 `;
 
 export const Content: typeof Row = styled(Row)`
-  gap: 17px;
 `;
 
 export const Difficulty: typeof ChaosBagDifficulty = styled(ChaosBagDifficulty)`

@@ -7,6 +7,10 @@ import {
 	setSkillCheckDifficulty,
 	toggleSkillCheckDifficultyType,
 } from "@modules/board/skill-check/shared/lib";
+import {
+	selectCustomSkillValue,
+	setCustomSkillValue,
+} from "@modules/chaos-bag/odds/shared/lib";
 import type { PickerChangeEvent } from "@modules/core/control/entities/picker/model";
 import { useAppDispatch, useAppSelector } from "@shared/lib";
 import { useCallback } from "react";
@@ -18,10 +22,17 @@ const data = range(0, 100);
 
 export const ChaosBagDifficulty = (props: ChaosBagDifficultyProps) => {
 	const dispatch = useAppDispatch();
+	const customSkillValue = useAppSelector(selectCustomSkillValue) ?? 0;
 	const value = useAppSelector(selectSkillCheckDifficulty) ?? 0;
 	const character = useAppSelector(selectSkillCheckDifficultyCharacter);
 
-	const onChange = useCallback(
+	const onSkillChange = useCallback(
+		({ value = 0 }: PickerChangeEvent<number>) => {
+			dispatch(setCustomSkillValue(value));
+		},
+		[dispatch],
+	);
+	const onDifficultyChange = useCallback(
 		({ value = 0 }: PickerChangeEvent<number>) => {
 			dispatch(setSkillCheckDifficulty(value));
 		},
@@ -38,7 +49,7 @@ export const ChaosBagDifficulty = (props: ChaosBagDifficultyProps) => {
 			<C.Picker
 				data={data}
 				value={value}
-				onValueChanged={onChange}
+				onValueChanged={onDifficultyChange}
 				onLongPress={onToggle}
 			/>
 		</C.Container>
