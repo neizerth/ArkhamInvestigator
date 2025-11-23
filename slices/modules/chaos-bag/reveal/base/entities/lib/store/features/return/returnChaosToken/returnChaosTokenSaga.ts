@@ -17,6 +17,7 @@ function* worker({ payload }: ReturnType<typeof returnChaosToken>) {
 	const token: ReturnType<typeof tokenSelector> = yield select(tokenSelector);
 
 	if (!token) {
+		console.error("Token not found", id);
 		return;
 	}
 
@@ -24,7 +25,11 @@ function* worker({ payload }: ReturnType<typeof returnChaosToken>) {
 
 	yield put(removeRevealedTokenId(payload));
 
-	if (canRemoveChaosToken(token)) {
+	const canRemove = canRemoveChaosToken(token);
+
+	console.log("canRemove", canRemove);
+
+	if (canRemove) {
 		yield put(
 			removeChaosTokens({
 				removeType: "single",
