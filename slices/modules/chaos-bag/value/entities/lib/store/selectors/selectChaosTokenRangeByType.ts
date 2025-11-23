@@ -3,10 +3,10 @@ import type { ChaosTokenType } from "@modules/chaos-bag/base/shared/model";
 import { selectBoardChaosTokenValueModifications } from "@modules/mechanics/chaos-bag/value/entities/lib";
 
 import type { ChaosTokenValue } from "@modules/chaos-bag/value/shared/model";
-import { selectReferenceCardTokens } from "@modules/stories/shared/lib";
+import { selectReferenceCardTokenByType } from "@modules/stories/shared/lib";
 import { createSelector } from "@reduxjs/toolkit";
 import { rangeStep } from "@shared/lib";
-import { propEq, range } from "ramda";
+import { range } from "ramda";
 import { isUndefined } from "ramda-adjunct";
 import { getSelectRange, getValueRange } from "../../logic";
 
@@ -30,12 +30,11 @@ export const selectChaosTokenRangeByType = ({
 }: Options) =>
 	createSelector(
 		[
-			selectReferenceCardTokens,
+			selectReferenceCardTokenByType(type),
 			selectBoardChaosTokenValueModifications(boardId),
 		],
-		(data, specialTokens) => {
+		(item, specialTokens) => {
 			const specialValue = specialTokens[type];
-			const item = data.find(propEq(type, "token"));
 
 			if (
 				type === "autoFail" &&

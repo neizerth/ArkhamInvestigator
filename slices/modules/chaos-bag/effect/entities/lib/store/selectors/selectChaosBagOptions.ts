@@ -1,13 +1,10 @@
 import type { ChaosTokenType } from "@modules/chaos-bag/base/shared/model";
 
-import { selectReferenceCardTokens } from "@modules/stories/shared/lib";
+import { selectReferenceCardTokenByType } from "@modules/stories/shared/lib";
 import { createSelector } from "@reduxjs/toolkit";
-import { propEq } from "ramda";
 
 export const selectReferenceCardChaosTokenOptions = (type: ChaosTokenType) =>
-	createSelector([selectReferenceCardTokens], (data) => {
-		const item = data.find(propEq(type, "token"));
-
+	createSelector([selectReferenceCardTokenByType(type)], (item) => {
 		switch (item?.type) {
 			case "value":
 			case "select":

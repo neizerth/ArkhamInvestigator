@@ -7,6 +7,7 @@ export type UpdateChaosTokenOptionPayload = PropsWithBoardId & {
 	type: ChaosTokenType;
 	index: number;
 	selected?: boolean;
+	source: "ui" | "effect";
 };
 
 export const updateChaosTokenOption =

@@ -1,1 +1,1 @@
-export * from "./chaosBagRevealModal";
+export * from "./chaosBagValue";

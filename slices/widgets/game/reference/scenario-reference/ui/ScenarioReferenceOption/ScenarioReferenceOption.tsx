@@ -1,6 +1,6 @@
 import type { ChaosTokenType } from "@modules/chaos-bag/base/shared/model";
 import {
-	selectCurrentChaosTokenIndex,
+	selectCurrentChaosTokenOptionIndex,
 	updateChaosTokenOption,
 } from "@modules/chaos-bag/effect/entities/lib";
 import { useAppDispatch, useAppSelector } from "@shared/lib";
@@ -21,7 +21,7 @@ export const ScenarioReferenceOption = ({
 }: ScenarioReferenceOptionProps) => {
 	const dispatch = useAppDispatch();
 	const selectedIndex = useAppSelector(
-		selectCurrentChaosTokenIndex({
+		selectCurrentChaosTokenOptionIndex({
 			boardId: "current",
 			type,
 		}),
@@ -30,10 +30,11 @@ export const ScenarioReferenceOption = ({
 	const onPress = useCallback(() => {
 		dispatch(
 			updateChaosTokenOption({
-				boardId: "current",
 				type,
 				index,
+				boardId: "current",
 				selected: !checked,
+				source: "ui",
 			}),
 		);
 	}, [dispatch, index, type, checked]);

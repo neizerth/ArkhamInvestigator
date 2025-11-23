@@ -7,11 +7,14 @@ import {
 } from "@modules/chaos-bag/effect/shared/lib";
 import { createSelector } from "@reduxjs/toolkit";
 
-type Options = PropsWithBoardId & {
+export type SelectCurrentChaosTokenOptionIndexOptions = PropsWithBoardId & {
 	type: ChaosTokenType;
 };
 
-export const selectCurrentChaosTokenIndex = ({ boardId, type }: Options) =>
+export const selectCurrentChaosTokenOptionIndex = ({
+	boardId,
+	type,
+}: SelectCurrentChaosTokenOptionIndexOptions) =>
 	createSelector(
 		[
 			selectBoardId(boardId),

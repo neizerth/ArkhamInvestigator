@@ -31,6 +31,7 @@ export const {
 	clearChaosTokenValue,
 	updateBoardChaosTokenValueInternal,
 	updateChaosTokenValueInternal,
+	removeBoardChaosTokenValueInternal,
 } = chaosBagRevealModal.actions;
 
 export const {

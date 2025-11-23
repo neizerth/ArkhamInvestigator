@@ -1,1 +1,1 @@
-export { default as chaosBagValue } from "./chaosBagRevealModal";
+export { default as chaosBagValue } from "./chaosBagValue";

@@ -1,13 +1,13 @@
 import type { ReferenceCardTokenSelect } from "arkham-investigator-data";
-import { formatRangeValue } from "./formatRangeValue";
+import { formatChaosTokenValue } from "./formatChaosTokenValue";
 
 export const getSelectRange = ({
 	options = [],
 	config,
 }: ReferenceCardTokenSelect) => {
 	const values = options.map((item) =>
-		formatRangeValue(item.modified_value.modifier),
+		formatChaosTokenValue(item.modified_value.modifier),
 	);
 
-	return [formatRangeValue(config.modifier), ...values];
+	return [formatChaosTokenValue(config.modifier), ...values];
 };
