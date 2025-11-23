@@ -12,6 +12,15 @@ function* worker({ payload }: ReturnType<typeof startChaosBagReveal>) {
 	const unrevealedTokens: ReturnType<typeof selectUnrevealedChaosTokens> =
 		yield select(selectUnrevealedChaosTokens);
 
+	const count: ReturnType<typeof selectRevealedTokensCount> = yield select(
+		selectRevealedTokensCount,
+	);
+
+	if (count > 0) {
+		yield put(openChaosBagRevealConfirm(payload));
+		return;
+	}
+
 	const canReveal = unrevealedTokens.length > 0 || tokens.length > 0;
 
 	if (!canReveal) {
@@ -19,15 +28,7 @@ function* worker({ payload }: ReturnType<typeof startChaosBagReveal>) {
 		return;
 	}
 
-	const count: ReturnType<typeof selectRevealedTokensCount> = yield select(
-		selectRevealedTokensCount,
-	);
-
-	if (count === 0) {
-		yield put(startNewChaosBagReveal(payload));
-		return;
-	}
-	yield put(openChaosBagRevealConfirm(payload));
+	yield put(startNewChaosBagReveal(payload));
 }
 
 export function* startChaosBagRevealSaga() {
