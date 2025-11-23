@@ -1,5 +1,6 @@
 import { selectBoardById } from "@modules/board/base/shared/lib";
 import {
+	removeBoardChaosTokenOptionInternal,
 	setBoardChaosTokenOptionInternal,
 	setChaosTokenOptionInternal,
 } from "@modules/chaos-bag/effect/shared/lib";
@@ -54,10 +55,9 @@ function* worker({ payload }: ReturnType<typeof updateChaosTokenOption>) {
 	// remove board option if last option was personal
 	if (currentOption?.personal) {
 		yield put(
-			setBoardChaosTokenOptionInternal({
+			removeBoardChaosTokenOptionInternal({
 				boardId: board.id,
 				type,
-				optionIndex: null,
 			}),
 		);
 	}

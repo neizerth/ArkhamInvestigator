@@ -58,10 +58,11 @@ export const ChaosTokenValuePicker = ({
 		({ value = 0 }: PickerChangeEvent<ChaosTokenValue>) => {
 			dispatch(
 				setChaosTokenValue({
+					id: tokenId,
 					boardId,
 					type,
 					value,
-					id: tokenId,
+					source: "ui",
 				}),
 			);
 		},

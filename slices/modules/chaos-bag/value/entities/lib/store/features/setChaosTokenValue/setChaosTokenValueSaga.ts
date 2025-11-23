@@ -10,9 +10,14 @@ import { put, select, takeEvery } from "redux-saga/effects";
 import { selectBoardTokenValues } from "../..";
 import { updateBoardChaosTokenValue } from "../updateBoardChaosTokenValue";
 import { updateCurrentRevealedTokenValue } from "../updateCurrentRevealedTokenValue";
-import { setChaosTokenValue } from "./setChaosTokenValue";
+import { chaosTokenValueSet, setChaosTokenValue } from "./setChaosTokenValue";
 
-function* worker({ payload }: ReturnType<typeof setChaosTokenValue>) {
+function* worker(action: ReturnType<typeof setChaosTokenValue>) {
+	yield workerProcess(action);
+	yield put(chaosTokenValueSet(action.payload));
+}
+
+function* workerProcess({ payload }: ReturnType<typeof setChaosTokenValue>) {
 	const { boardId, type, value, id } = payload;
 
 	const isNumericToken = chaosToken.types.numeric.includes(type);

@@ -31,6 +31,7 @@ export const {
 	setChaosTokenOptions,
 	setChaosTokenOptionInternal,
 	setBoardChaosTokenOptionInternal,
+	removeBoardChaosTokenOptionInternal,
 } = chaosBagEffect.actions;
 
 export const { selectChaosTokenOptions, selectBoardChaosTokenOptions } =

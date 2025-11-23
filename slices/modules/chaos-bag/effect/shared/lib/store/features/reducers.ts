@@ -1,2 +1,3 @@
 export { setChaosTokenOptionInternalReducer as setChaosTokenOptionInternal } from "./setChaosTokenOptionInternal/setChaosTokenOptionInternalReducer";
 export { setBoardChaosTokenOptionInternalReducer as setBoardChaosTokenOptionInternal } from "./setBoardChaosTokenOptionInternal/setBoardChaosTokenOptionInternalReducer";
+export { removeBoardChaosTokenOptionInternalReducer as removeBoardChaosTokenOptionInternal } from "./removeBoardChaosTokenOptionInternal/removeBoardChaosTokenOptionInternal";

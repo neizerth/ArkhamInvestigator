@@ -8,8 +8,13 @@ export type SetChaosTokenValuePayload = PropsWithBoardId & {
 	id?: string;
 	type: ChaosTokenType;
 	value: ChaosTokenValue;
+	source?: "ui" | "effect";
 };
 
 export const setChaosTokenValue = createAction<SetChaosTokenValuePayload>(
 	`${chaosTokenValuePrefix}/setValue`,
+);
+
+export const chaosTokenValueSet = createAction<SetChaosTokenValuePayload>(
+	`${chaosTokenValuePrefix}/valueSet`,
 );
