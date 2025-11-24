@@ -1,6 +1,6 @@
 import { Alegreya } from "@assets/fonts";
 import { color } from "@shared/config";
-import { Row, Text, Value } from "@shared/ui";
+import { Icon, Row, Text, Value } from "@shared/ui";
 import type { FC } from "react";
 import styled, { css } from "styled-components/native";
 import { assetsSize } from "../../../../../../../../../config";
@@ -17,6 +17,14 @@ export const Container: typeof Row = styled(Row)`
 export const FixedValue: typeof Value = styled(Value)`
   color: ${color.resource};
   font-size: 21px;
+`;
+
+export const Wild: typeof Icon = styled(Icon)`
+  position: absolute;
+  left: -10px;
+  top: -18px;
+  color: ${color.white};
+  font-size: 20px;
 `;
 
 type PickerProps = StatPickerProps & {

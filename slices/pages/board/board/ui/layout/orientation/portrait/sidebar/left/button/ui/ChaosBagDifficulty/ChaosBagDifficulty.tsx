@@ -12,7 +12,10 @@ import {
 	selectCustomSkillValue,
 	setCustomSkillValue,
 } from "@modules/chaos-bag/odds/shared/lib";
-import { selectChaosBagSkillValue } from "@modules/chaos-bag/reveal/base/shared/lib";
+import {
+	selectChaosBagSkillCheckType,
+	selectChaosBagSkillValue,
+} from "@modules/chaos-bag/reveal/base/shared/lib";
 import type { PickerChangeEvent } from "@modules/core/control/entities/picker/model";
 import { useAppDispatch, useAppSelector, useBoolean } from "@shared/lib";
 import { useCallback } from "react";
@@ -28,11 +31,13 @@ export const ChaosBagDifficulty = (props: ChaosBagDifficultyProps) => {
 	const chaosBagSkillValue = useAppSelector(selectChaosBagSkillValue);
 	const customSkillValue = useAppSelector(selectCustomSkillValue);
 
-	const skillValue = chaosBagSkillValue ?? customSkillValue ?? 0;
 	const difficulty = useAppSelector(selectSkillCheckDifficulty) ?? 0;
 	const character = useAppSelector(selectSkillCheckDifficultyCharacter);
+	const skillType = useAppSelector(selectChaosBagSkillCheckType);
 
+	const skillValue = chaosBagSkillValue ?? customSkillValue ?? 0;
 	const value = showSkillPicker ? skillValue : difficulty;
+	const showWild = !skillType && showSkillPicker;
 
 	const onChange = useCallback(
 		({ value = 0 }: PickerChangeEvent<number>) => {
@@ -71,6 +76,8 @@ export const ChaosBagDifficulty = (props: ChaosBagDifficultyProps) => {
 					<C.Character>{character}</C.Character>
 				</C.DifficultyView>
 			)}
+
+			{showWild && <C.Wild icon="skill_wild" />}
 
 			<C.Picker
 				data={data}
