@@ -37,7 +37,6 @@ export const ChaosBagDifficulty = (props: ChaosBagDifficultyProps) => {
 
 	const skillValue = chaosBagSkillValue ?? customSkillValue ?? 0;
 	const value = showSkillPicker ? skillValue : difficulty;
-	const showWild = !skillType && showSkillPicker;
 
 	const onChange = useCallback(
 		({ value = 0 }: PickerChangeEvent<number>) => {
@@ -76,8 +75,6 @@ export const ChaosBagDifficulty = (props: ChaosBagDifficultyProps) => {
 					<C.Character>{character}</C.Character>
 				</C.DifficultyView>
 			)}
-
-			{showWild && <C.Wild icon="skill_wild" />}
 
 			<C.Picker
 				data={data}
