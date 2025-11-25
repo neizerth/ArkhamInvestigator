@@ -32,7 +32,7 @@ export const Modifier: typeof View = styled(View)`
 export const Strikethrough: typeof View = styled(View)`
   position: absolute;
   z-index: 2;
-  bottom: 15px;
+  bottom: 0px;
   right: 2px;
   width: 100%;
   height: 1px;

@@ -72,6 +72,8 @@ export const ChaosTokenPreview = ({
 
 	const overlay =
 		showOverlay &&
+		showValue &&
+		typeof value !== "undefined" &&
 		showValueOverlay({
 			showValue,
 			type,
