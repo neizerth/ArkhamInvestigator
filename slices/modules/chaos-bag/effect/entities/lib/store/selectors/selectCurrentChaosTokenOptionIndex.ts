@@ -22,7 +22,7 @@ export const selectCurrentChaosTokenOptionIndex = ({
 			selectBoardChaosTokenOptions,
 		],
 		(boardId, chaosTokenOptions, boardChaosTokenOptions) => {
-			const boardIndex = boardChaosTokenOptions?.[type]?.[boardId] ?? null;
+			const boardIndex = boardChaosTokenOptions?.[boardId]?.[type] ?? null;
 			const globalIndex = chaosTokenOptions?.[type] ?? null;
 			const index = boardIndex ?? globalIndex;
 

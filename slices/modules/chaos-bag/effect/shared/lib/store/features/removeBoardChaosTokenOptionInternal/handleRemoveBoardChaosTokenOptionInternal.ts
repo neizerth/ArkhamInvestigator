@@ -10,10 +10,11 @@ export type RemoveBoardChaosTokenOptionInternalPayload = {
 export const handleRemoveBoardChaosTokenOptionInternal: ChaosBagEffectHandler<
 	RemoveBoardChaosTokenOptionInternalPayload
 > = (state, payload) => {
-	const typeData = state.boardChaosTokenOptions?.[payload.type] ?? {};
-	const data = omit([payload.boardId], typeData);
+	const boardData = state.boardChaosTokenOptions?.[payload.boardId] ?? {};
+	const data = omit([payload.type], boardData);
+
 	state.boardChaosTokenOptions = {
 		...state.boardChaosTokenOptions,
-		[payload.type]: data,
+		[payload.boardId]: data,
 	};
 };

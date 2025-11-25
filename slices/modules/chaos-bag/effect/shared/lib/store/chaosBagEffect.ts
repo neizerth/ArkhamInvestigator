@@ -6,7 +6,7 @@ import * as reducers from "./features/reducers";
 export type ChaosBagEffectState = {
 	chaosTokenOptions: Partial<Record<ChaosTokenType, number | null>> | null;
 	boardChaosTokenOptions: Partial<
-		Record<ChaosTokenType, Partial<Record<number, number | null>>>
+		Record<number, Partial<Record<ChaosTokenType, number | null>>>
 	> | null;
 };
 

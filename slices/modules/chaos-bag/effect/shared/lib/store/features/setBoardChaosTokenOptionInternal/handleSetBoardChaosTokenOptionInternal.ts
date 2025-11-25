@@ -10,13 +10,13 @@ export type SetBoardChaosTokenOptionInternalPayload = {
 export const handleSetBoardChaosTokenOptionInternal: ChaosBagEffectHandler<
 	SetBoardChaosTokenOptionInternalPayload
 > = (state, { boardId, type, optionIndex }) => {
-	const boardData = state.boardChaosTokenOptions?.[type] ?? {};
+	const boardData = state.boardChaosTokenOptions?.[boardId] ?? {};
 
 	state.boardChaosTokenOptions = {
 		...state.boardChaosTokenOptions,
-		[type]: {
+		[boardId]: {
 			...boardData,
-			[boardId]: optionIndex,
+			[type]: optionIndex,
 		},
 	};
 };
