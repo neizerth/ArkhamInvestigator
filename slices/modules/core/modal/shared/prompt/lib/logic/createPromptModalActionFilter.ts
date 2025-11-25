@@ -18,8 +18,8 @@ export const createPromptModalActionFilter =
 			return false;
 		}
 
-		if (actionId && payload.modalAction?.id !== actionId) {
-			return false;
+		if (actionId && payload.modalAction?.id === actionId) {
+			return true;
 		}
 
 		return modalId === payload.modalId;
