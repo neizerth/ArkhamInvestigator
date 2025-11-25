@@ -1,8 +1,10 @@
 import { selectBoardId } from "@modules/board/base/shared/lib";
 import { chaosTokenValueSet } from "@modules/chaos-bag/value/entities/lib";
 import { put, select, takeEvery } from "redux-saga/effects";
-import { updateChaosTokenOption } from "../../entities/lib/store/features/updateChaosTokenOption/updateChaosTokenOption";
-import { selectReferenceCardChaosTokenOptions } from "../../entities/lib/store/selectors/selectChaosBagOptions";
+import {
+	selectReferenceCardChaosTokenOptions,
+	updateChaosTokenOption,
+} from "../../entities/lib";
 import { removeBoardChaosTokenOptionInternal } from "../../shared/lib";
 
 const filterAction = (action: unknown) => {

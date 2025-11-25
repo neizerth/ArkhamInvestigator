@@ -1,8 +1,8 @@
 import type { PropsWithBoardId } from "@modules/board/base/shared/model";
 import type { ChaosTokenType } from "@modules/chaos-bag/base/shared/model";
 import { createSelector } from "@reduxjs/toolkit";
+import { selectCurrentChaosTokenOption } from "./options/selectCurrentChaosTokenOption";
 import { selectBoardTokenTypes } from "./selectBoardTokenTypes";
-import { selectCurrentChaosTokenOption } from "./selectCurrentChaosTokenOption";
 
 type Options = PropsWithBoardId & {
 	type: ChaosTokenType;

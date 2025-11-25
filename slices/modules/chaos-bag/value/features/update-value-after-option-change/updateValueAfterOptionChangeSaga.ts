@@ -1,5 +1,5 @@
 import { chaosTokenOptionUpdated } from "@modules/chaos-bag/effect/entities/lib";
-import { selectCurrentChaosTokenOption } from "@modules/chaos-bag/effect/entities/lib/store/selectors/selectCurrentChaosTokenOption";
+import { selectCurrentChaosTokenOption } from "@modules/chaos-bag/effect/entities/lib";
 import { put, select, takeEvery } from "redux-saga/effects";
 import {
 	formatChaosTokenValue,

@@ -5,8 +5,10 @@ import {
 	setChaosTokenOptionInternal,
 } from "@modules/chaos-bag/effect/shared/lib";
 import { put, select, takeEvery } from "redux-saga/effects";
-import { selectReferenceCardChaosTokenOptions } from "../../selectors";
-import { selectCurrentChaosTokenOption } from "../../selectors/selectCurrentChaosTokenOption";
+import {
+	selectCurrentChaosTokenOption,
+	selectReferenceCardChaosTokenOptions,
+} from "../../selectors";
 import {
 	chaosTokenOptionUpdated,
 	updateChaosTokenOption,
