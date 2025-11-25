@@ -41,7 +41,7 @@ export const Step6Description = () => {
 		return null;
 	}
 
-	const isCustomResult = isFailed !== isFixedFailed;
+	const isCustomResult = Boolean(isFailed) !== Boolean(isFixedFailed);
 
 	return (
 		<C.Container>
