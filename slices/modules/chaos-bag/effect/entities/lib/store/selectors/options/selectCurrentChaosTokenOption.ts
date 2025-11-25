@@ -1,10 +1,10 @@
 import { createSelector } from "@reduxjs/toolkit";
 import { isNumber } from "ramda-adjunct";
-import { selectReferenceCardChaosTokenOptions } from "./selectChaosBagOptions";
 import {
 	type SelectCurrentChaosTokenOptionIndexOptions,
 	selectCurrentChaosTokenOptionIndex,
 } from "./selectCurrentChaosTokenOptionIndex";
+import { selectReferenceCardChaosTokenOptions } from "./selectReferenceCardChaosTokenOptions";
 
 export const selectCurrentChaosTokenOption = (
 	options: SelectCurrentChaosTokenOptionIndexOptions,

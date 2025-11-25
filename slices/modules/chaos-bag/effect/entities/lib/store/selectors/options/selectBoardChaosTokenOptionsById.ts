@@ -1,25 +1,19 @@
-import { selectBoardId } from "@modules/board/base/shared/lib";
 import type { BoardId } from "@modules/board/base/shared/model";
-import {
-	selectBoardChaosTokenOptions,
-	selectChaosTokenOptions,
-} from "@modules/chaos-bag/effect/shared/lib";
+import { selectReferenceCardTokens } from "@modules/stories/shared/lib";
 import { createSelector } from "@reduxjs/toolkit";
+import { mapChaosTokenOptions } from "../../../logic";
+import { selectBoardChaosTokenOptionIndexesById } from "./selectBoardChaosTokenOptionIndexesById";
 
 export const selectBoardChaosTokenOptionsById = (boardId: BoardId) =>
 	createSelector(
 		[
-			selectBoardId(boardId),
-			selectChaosTokenOptions,
-			selectBoardChaosTokenOptions,
+			selectBoardChaosTokenOptionIndexesById(boardId),
+			selectReferenceCardTokens,
 		],
-		(boardId, chaosTokenOptions, boardChaosTokenOptions) => {
-			const boardOptions = boardChaosTokenOptions?.[boardId];
-			const data = {
-				...chaosTokenOptions,
-				...boardOptions,
-			};
-
-			return data ?? {};
+		(optionIndexMap, tokens) => {
+			return mapChaosTokenOptions({
+				optionIndexMap,
+				tokens,
+			});
 		},
 	);

@@ -21,6 +21,8 @@ function* worker({ payload }: ReturnType<typeof promptConfirmed>) {
 	const { value } = payload;
 	const url = value.trim().replace(/\/$/, "");
 
+	console.log("url", url);
+
 	if (!isUrl(url)) {
 		yield put(setModalError("modal.artwork.error.invalidUrl"));
 		return;

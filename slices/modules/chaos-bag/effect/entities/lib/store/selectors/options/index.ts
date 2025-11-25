@@ -1,4 +1,4 @@
-export * from "./selectBoardChaosTokenOptionsById";
-export * from "./selectChaosBagOptions";
+export * from "./selectBoardChaosTokenOptionIndexesById";
+export * from "./selectReferenceCardChaosTokenOptions";
 export * from "./selectCurrentChaosTokenOption";
 export * from "./selectCurrentChaosTokenOptionIndex";
