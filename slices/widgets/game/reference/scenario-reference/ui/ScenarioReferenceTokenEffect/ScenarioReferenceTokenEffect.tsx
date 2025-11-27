@@ -21,8 +21,6 @@ export const ScenarioReferenceTokenEffect = ({
 	item,
 	language,
 	onPress,
-
-	small = false,
 	open = false,
 	...props
 }: ScenarioReferenceTokenEffectProps) => {
@@ -38,6 +36,8 @@ export const ScenarioReferenceTokenEffect = ({
 		}
 		onPress?.();
 	}, [onPress, showExpand]);
+
+	const small = open ? false : (props.small ?? false);
 
 	return (
 		<C.Container {...props}>
@@ -64,13 +64,15 @@ export const ScenarioReferenceTokenEffect = ({
 			{open && (
 				<C.Options>
 					{options.map((option, index) => (
-						<C.Option key={option.prompt} index={index} type={type}>
-							<C.Text
-								language={language}
-								small={small}
-								value={getTokenOptionLabel(option)}
-							/>
-						</C.Option>
+						<C.OptionContainer key={option.prompt}>
+							<C.Option index={index} type={type}>
+								<C.OptionText
+									language={language}
+									small={small}
+									value={getTokenOptionLabel(option)}
+								/>
+							</C.Option>
+						</C.OptionContainer>
 					))}
 				</C.Options>
 			)}

@@ -77,11 +77,16 @@ export const localeComponentStyles: KeyConfig<ComponentStyleMap> = {
 type Options = {
 	language: string;
 	small: boolean;
+	align?: "left" | "right";
 };
 
-export const getScenarioEffectsStyle = ({ language, small }: Options) => {
+export const getScenarioEffectsStyle = ({
+	language,
+	small,
+	align = "left",
+}: Options) => {
 	const iconFontSize = u(3.8);
-	const fontSize = u(small ? 3.8 : 4.2);
+	const fontSize = u(small ? 3.5 : 4.2);
 
 	const zhComponentStyles = {
 		...localeComponentStyles.zh,
@@ -100,6 +105,9 @@ export const getScenarioEffectsStyle = ({ language, small }: Options) => {
 			},
 			break: {
 				height: fontSize * 2.7,
+			},
+			paragraph: {
+				justifyContent: align === "right" ? "flex-end" : "flex-start",
 			},
 		},
 		ko: {

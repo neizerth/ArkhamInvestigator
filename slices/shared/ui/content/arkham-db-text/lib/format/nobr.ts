@@ -13,7 +13,15 @@ export const nobr = (text: string) => {
 		// Track if we're inside square brackets [...] or [[...]]
 		if (char === "[") {
 			bracketDepth++;
-			if (!open && token) {
+			// Check if this is a double bracket [[
+			const isDoubleBracket = text[i + 1] === "[";
+			if (isDoubleBracket) {
+				// Add any previous token to result before starting double brackets
+				if (!open && token) {
+					result += token;
+					token = "";
+				}
+			} else if (!open && token) {
 				result += token;
 				token = "";
 			}
@@ -21,10 +29,15 @@ export const nobr = (text: string) => {
 			continue;
 		}
 		if (char === "]") {
+			token += char;
 			if (bracketDepth > 0) {
 				bracketDepth--;
 			}
-			token += char;
+			// If we just closed double brackets ([[...]]), add to result and reset token
+			if (bracketDepth === 0 && token.startsWith("[[")) {
+				result += token;
+				token = "";
+			}
 			continue;
 		}
 

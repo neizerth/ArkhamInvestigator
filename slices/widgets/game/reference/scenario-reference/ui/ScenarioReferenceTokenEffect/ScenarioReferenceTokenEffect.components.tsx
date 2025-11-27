@@ -1,7 +1,7 @@
 import { ChaosTokenOption } from "@modules/chaos-bag/base/features/ui";
 import { TouchableOpacity } from "@modules/core/touch/shared/ui";
 import { color } from "@shared/config";
-import { Checkbox, Icon, Row } from "@shared/ui";
+import { Icon, Row } from "@shared/ui";
 import type { FC } from "react";
 import type { ViewProps } from "react-native";
 import { View } from "react-native";
@@ -69,6 +69,11 @@ export const ExpandIcon: typeof Icon = styled(Icon)`
 export const Options: typeof View = styled(View)`
   gap: ${upx(1)};
   padding-right: ${upx(4)};
+  padding-left: ${upx(10)};
+`;
+
+export const OptionContainer: typeof View = styled(View)`
+  flex: 1;
 `;
 
 export const Option: typeof ChaosTokenOption = styled(ChaosTokenOption).attrs({
@@ -78,11 +83,7 @@ export const Option: typeof ChaosTokenOption = styled(ChaosTokenOption).attrs({
 })`
 `;
 
-export const OptionControl: typeof Checkbox = styled(Checkbox).attrs({
-	contentStyle: {
-		gap: 10,
-	},
+export const OptionText: typeof Text = styled(Text).attrs({
+	align: "right",
 })`
-  height: 40px;
-  color: ${color.text};
 `;

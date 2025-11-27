@@ -1,4 +1,5 @@
 import type { ReferenceCardTokenSelect } from "arkham-investigator-data";
+import { uniq } from "ramda";
 import { formatChaosTokenValue } from "./formatChaosTokenValue";
 
 export const getSelectRange = ({
@@ -9,5 +10,5 @@ export const getSelectRange = ({
 		formatChaosTokenValue(item.modified_value.modifier),
 	);
 
-	return [formatChaosTokenValue(config.modifier), ...values];
+	return uniq([formatChaosTokenValue(config.modifier), ...values]);
 };
