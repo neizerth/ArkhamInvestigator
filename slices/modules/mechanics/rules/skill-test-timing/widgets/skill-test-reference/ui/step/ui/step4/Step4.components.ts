@@ -1,7 +1,7 @@
 import { ChaosBagRevealedToken } from "@modules/chaos-bag/reveal/base/entities/ui";
 import { GameText } from "@modules/core/theme/shared/ui";
 import { color, size } from "@shared/config";
-import { Row } from "@shared/ui";
+import { Icon, Row } from "@shared/ui";
 import type { FC } from "react";
 import { View, type ViewProps } from "react-native";
 import styled from "styled-components/native";
@@ -25,6 +25,16 @@ export const Tr: FC<TrProps> = styled(Row)`
     border-bottom-width: 1px;
     border-bottom-color: ${color.title};
   `}
+`;
+
+export const Option: typeof Row = styled(Row)`
+  align-items: center;
+  gap: ${size.gap.small}px;
+  padding: 5px 0px;
+`;
+
+export const CheckIcon: typeof Icon = styled(Icon)`
+  color: ${color.text};
 `;
 
 export const Vr: typeof View = styled(View)`
@@ -60,5 +70,6 @@ export const Text: typeof GameText = styled(GameText).attrs({
 export const Effect: typeof Td = styled(Td)`
   padding-left: ${size.gap.default}px;
   padding-right: 0px;
+  gap: ${size.gap.small}px;
   flex: 1;
 `;
