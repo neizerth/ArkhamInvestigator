@@ -15,7 +15,6 @@ export const selectBoardChaosOddsTokens = (boardId: BoardId) =>
 			selectChaosBagTokenValues(boardId),
 		],
 		(contents, revealedTokens, revealCount, values) => {
-			console.log(values);
 			return getBoardChaosOddsTokens({
 				contents,
 				revealedTokens,
