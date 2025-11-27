@@ -3,8 +3,11 @@ import type { ChaosTokenValue } from "@modules/chaos-bag/value/shared/model";
 
 export type RevealedChaosBagTokenCancelType = boolean | "effect";
 
-export type RevealedChaosBagToken = ChaosBagToken & {
+export type RevealedChaosBagToken = RevealedChaosBagTokenData & {
 	revealId: string;
+};
+
+export type RevealedChaosBagTokenData = ChaosBagToken & {
 	value?: ChaosTokenValue;
 	canceled?: RevealedChaosBagTokenCancelType;
 	modified?: boolean;

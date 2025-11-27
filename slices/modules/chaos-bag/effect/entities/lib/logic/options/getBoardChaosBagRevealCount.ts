@@ -1,14 +1,13 @@
 import { chaosToken } from "@modules/chaos-bag/base/shared/config";
-import type { ChaosTokenType } from "@modules/chaos-bag/base/shared/model";
 import { defaultChaosTokenRevealCount } from "@modules/chaos-bag/effect/shared/config";
 import { getReferenceCardItemRevealConfig } from "@modules/chaos-bag/effect/shared/lib";
+import type { ChaosTokenRevealCount } from "../../../model";
 import type { mapChaosTokenOptions } from "./mapChaosTokenOptions";
 
 type OptionMap = ReturnType<typeof mapChaosTokenOptions>;
-type ReturnMap = Record<ChaosTokenType, number>;
 
 export const getBoardChaosBagRevealCount = (tokenOptionMap: OptionMap) => {
-	return chaosToken.types.all.reduce<ReturnMap>((acc, type) => {
+	return chaosToken.types.all.reduce<ChaosTokenRevealCount>((acc, type) => {
 		const typeItem = tokenOptionMap[type];
 
 		if (!typeItem) {
@@ -22,5 +21,5 @@ export const getBoardChaosBagRevealCount = (tokenOptionMap: OptionMap) => {
 
 		acc[type] = option?.modified_value.reveal_another ?? defaultCount;
 		return acc;
-	}, {} as ReturnMap);
+	}, {} as ChaosTokenRevealCount);
 };

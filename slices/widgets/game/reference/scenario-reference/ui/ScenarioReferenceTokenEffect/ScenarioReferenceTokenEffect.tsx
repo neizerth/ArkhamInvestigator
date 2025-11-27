@@ -22,6 +22,7 @@ export const ScenarioReferenceTokenEffect = ({
 	language,
 	onPress,
 	open = false,
+	small = false,
 	...props
 }: ScenarioReferenceTokenEffectProps) => {
 	const [type] = getReferencePartTokens(item);
@@ -36,8 +37,6 @@ export const ScenarioReferenceTokenEffect = ({
 		}
 		onPress?.();
 	}, [onPress, showExpand]);
-
-	const small = open ? false : (props.small ?? false);
 
 	return (
 		<C.Container {...props}>

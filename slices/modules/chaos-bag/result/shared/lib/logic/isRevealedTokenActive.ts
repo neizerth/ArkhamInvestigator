@@ -1,9 +1,9 @@
-import type { RevealedChaosBagToken } from "@modules/chaos-bag/reveal/base/shared/model";
+import type { RevealedChaosBagTokenData } from "@modules/chaos-bag/reveal/base/shared/model";
 
 export const isRevealedTokenActive = ({
 	sealed,
 	canceled,
 	removed,
-}: RevealedChaosBagToken) => {
+}: RevealedChaosBagTokenData) => {
 	return !sealed && canceled !== true && !removed;
 };

@@ -86,7 +86,7 @@ export const getScenarioEffectsStyle = ({
 	align = "left",
 }: Options) => {
 	const iconFontSize = u(3.8);
-	const fontSize = u(small ? 3.5 : 4.2);
+	const fontSize = u(small ? 3.8 : 4.2);
 
 	const zhComponentStyles = {
 		...localeComponentStyles.zh,

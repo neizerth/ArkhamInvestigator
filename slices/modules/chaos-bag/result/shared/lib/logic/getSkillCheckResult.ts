@@ -1,10 +1,10 @@
-import type { RevealedChaosBagToken } from "@modules/chaos-bag/reveal/base/shared/model";
+import type { RevealedChaosBagTokenData } from "@modules/chaos-bag/reveal/base/shared/model";
 import { isAutoFail } from "./auto/isAutoFail";
 import { isRevealedTokenActive } from "./isRevealedTokenActive";
 
 type Options = {
 	skillValue: number;
-	tokens: RevealedChaosBagToken[];
+	tokens: RevealedChaosBagTokenData[];
 };
 
 export const getSkillCheckResult = (options: Options): number => {

@@ -1,9 +1,9 @@
-import type { RevealedChaosBagToken } from "@modules/chaos-bag/reveal/base/shared/model";
+import type { RevealedChaosBagTokenData } from "@modules/chaos-bag/reveal/base/shared/model";
 import { propEq } from "ramda";
 import { isRevealedTokenActive } from "../isRevealedTokenActive";
 
 type Options = {
-	tokens: RevealedChaosBagToken[];
+	tokens: RevealedChaosBagTokenData[];
 };
 
 export const isAutoFail = ({ tokens }: Options) => {
