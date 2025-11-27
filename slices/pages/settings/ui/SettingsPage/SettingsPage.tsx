@@ -1,7 +1,5 @@
 import * as B from "@modules/board/base/shared/lib";
 import * as SC from "@modules/board/skill-check/shared/lib";
-import { selectChaosBagEnabled } from "@modules/chaos-bag/base/entities/lib";
-import * as chaosBag from "@modules/chaos-bag/base/shared/lib";
 import { setKeepAwake } from "@modules/core/device/entities/keep-awake";
 import { selectKeepAwake } from "@modules/core/device/shared/lib";
 import {
@@ -13,11 +11,10 @@ import {
 	selectEnableNavigationAnimation,
 	setEnableNavigationAnimation,
 } from "@modules/core/router/shared/lib";
-import { ArtworksFragment } from "@modules/core/theme/shared/ui";
 import { CAN_ALWAYS_SHOW_GAME_TEXT } from "@shared/config";
-import { useAppSelector } from "@shared/lib";
 import { useTranslation } from "react-i18next";
 import { AppDiagnostics } from "../AppDiagnostics";
+import { ChaosBagSettings } from "../ChaosBagSettings";
 import * as C from "./SettingsPage.components";
 import {
 	hapticValues,
@@ -29,7 +26,6 @@ import {
 
 export const SettingsPage = () => {
 	const { t } = useTranslation();
-	const chaosBagEnabled = useAppSelector(selectChaosBagEnabled);
 
 	return (
 		<C.Page title="Settings">
@@ -114,54 +110,7 @@ export const SettingsPage = () => {
 						/>
 					</C.Row>
 				</C.Section>
-				<ArtworksFragment>
-					{chaosBagEnabled && (
-						<C.Section title={t`Chaos bag`}>
-							<C.Row>
-								<C.Checkbox
-									label="Chaos bag"
-									selector={chaosBag.selectChaosBagEnabledInternal}
-									actionCreator={chaosBag.setChaosBagEnabled}
-								/>
-							</C.Row>
-							<C.Row>
-								<C.Checkbox
-									label="Chaos bag loading animation"
-									selector={chaosBag.selectChaosBagLoadingAnimation}
-									actionCreator={chaosBag.setChaosBagLoadingAnimation}
-								/>
-							</C.Row>
-							<C.Row>
-								<C.Checkbox
-									label="Unlimited chaos tokens"
-									selector={chaosBag.selectUnlimitedChaosTokens}
-									actionCreator={chaosBag.setUnlimitedChaosTokens}
-								/>
-							</C.Row>
-							<C.Row>
-								<C.Checkbox
-									label="Modify tokens"
-									selector={chaosBag.selectModifyChaosTokens}
-									actionCreator={chaosBag.setModifyChaosTokens}
-								/>
-							</C.Row>
-							<C.Row>
-								<C.Checkbox
-									label="Difficulty picker"
-									selector={chaosBag.selectShowDifficulty}
-									actionCreator={chaosBag.setShowDifficulty}
-								/>
-							</C.Row>
-							<C.Row>
-								<C.Checkbox
-									label="Odds"
-									selector={chaosBag.selectShowChaosBagOdds}
-									actionCreator={chaosBag.setShowChaosBagOdds}
-								/>
-							</C.Row>
-						</C.Section>
-					)}
-				</ArtworksFragment>
+				<ChaosBagSettings />
 				<C.Section title={`${t`Health`}/${t`Sanity`}`}>
 					<C.Row>
 						<C.Select

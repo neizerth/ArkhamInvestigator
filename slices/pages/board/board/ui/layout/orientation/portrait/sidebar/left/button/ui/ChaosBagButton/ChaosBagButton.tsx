@@ -1,4 +1,7 @@
-import { selectShowChaosBagOdds } from "@modules/chaos-bag/base/shared/lib";
+import {
+	selectShowChaosBagOdds,
+	selectShowDifficulty,
+} from "@modules/chaos-bag/base/shared/lib";
 import { selectRevealedTokensCount } from "@modules/chaos-bag/reveal/base/shared/lib";
 import { useAppSelector } from "@shared/lib";
 import type { ViewProps } from "react-native";
@@ -15,6 +18,7 @@ const getCount = (count: number) => {
 export const ChaosBagButton = (props: ChaosBagButtonProps) => {
 	const gestureConfig = useChaosBagButtonGestures();
 	const revealedCount = useAppSelector(selectRevealedTokensCount);
+	const showDifficulty = useAppSelector(selectShowDifficulty);
 	const showOdds = useAppSelector(selectShowChaosBagOdds);
 	const showPreviousReveal = revealedCount > 0;
 	const sealedTokenGroups = useSealedTokenGroups("current");
@@ -27,7 +31,7 @@ export const ChaosBagButton = (props: ChaosBagButtonProps) => {
 						{showPreviousReveal && <C.LastReveal />}
 					</C.Button>
 				</GestureDetector>
-				<C.Difficulty />
+				{showDifficulty && <C.Difficulty />}
 			</C.Content>
 			{sealedTokenGroups.length > 0 && (
 				<C.SealedTokenGroups>
