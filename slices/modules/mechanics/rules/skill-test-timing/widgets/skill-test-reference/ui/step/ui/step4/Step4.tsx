@@ -39,9 +39,7 @@ export const Step4 = () => {
 			<C.Table>
 				{tokens.map((token, index) => {
 					const { type } = token;
-					const option = options.find(
-						({ item }) => item.token === type,
-					)?.option;
+					const option = options[type]?.option;
 
 					return (
 						<C.Tr key={token.revealId} last={index === tokens.length - 1}>
