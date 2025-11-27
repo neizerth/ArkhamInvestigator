@@ -16,5 +16,5 @@ export const statusBarHeight = (() => {
 		return height;
 	}
 
-	return Math.min(height, 44);
+	return height <= 20 ? 54 : height;
 })();
