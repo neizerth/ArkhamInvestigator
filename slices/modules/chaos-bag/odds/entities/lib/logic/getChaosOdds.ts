@@ -1,5 +1,7 @@
 import type { SkillCheckDifficultyType } from "@modules/board/skill-check/shared/model";
 import { isSkillCheckFailed } from "@modules/chaos-bag/result/shared/lib";
+import { delay } from "@shared/lib/util";
+import memoize from "fast-memoize";
 import type { ChaosBagOddsToken } from "../../model";
 
 export type Options = {
@@ -11,7 +13,7 @@ export type Options = {
 	difficultyType?: SkillCheckDifficultyType;
 };
 
-export const getChaosOdds = (options: Options) => {
+const getChaosOddsImpl = async (options: Options) => {
 	const {
 		available,
 		revealed = [],
@@ -38,8 +40,16 @@ export const getChaosOdds = (options: Options) => {
 	];
 
 	let acc = 0;
+	let iterationCount = 0;
+	const BATCH_SIZE = 1000; // Process 1000 iterations before yielding to event loop
 
 	while (stack.length > 0) {
+		// Add delay periodically to prevent blocking, but not on every iteration
+		iterationCount++;
+		if (iterationCount % BATCH_SIZE === 0) {
+			await delay(0);
+		}
+
 		const frame = stack.pop();
 		if (!frame) continue;
 
@@ -107,3 +117,21 @@ export const getChaosOdds = (options: Options) => {
 	// return in percentage with 2 decimals
 	return Math.round(acc * 100);
 };
+
+// Custom serializer for memoization cache key
+const serializer = (args: unknown[]) => {
+	const [options] = args as [Options];
+	return JSON.stringify({
+		available: options.available,
+		revealed: options.revealed || [],
+		revealCount: options.revealCount ?? 0,
+		skillValue: options.skillValue,
+		difficulty: options.difficulty,
+		difficultyType: options.difficultyType || "gte",
+	});
+};
+
+export const getChaosOdds = memoize(getChaosOddsImpl, {
+	strategy: memoize.strategies.variadic,
+	serializer,
+});

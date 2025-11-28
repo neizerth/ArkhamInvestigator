@@ -1,5 +1,4 @@
-import { selectBoardChaosBagOdds } from "@modules/chaos-bag/odds/entities/lib";
-import { useAppSelector } from "@shared/lib";
+import { useBoardChaosBagOdds } from "@modules/chaos-bag/odds/entities/lib";
 import type { ValueProps } from "@shared/ui";
 import * as C from "./ChaosBagOddsValue.components";
 // import { selectBoardChaosBagRevealCount } from "@modules/chaos-bag/effect/entities/lib";
@@ -7,10 +6,15 @@ import * as C from "./ChaosBagOddsValue.components";
 export type ChaosBagOddsValueProps = Omit<ValueProps, "value">;
 
 export const ChaosBagOddsValue = (props: ChaosBagOddsValueProps) => {
-	const value = useAppSelector(selectBoardChaosBagOdds("current"));
+	const { odds, isLoading } = useBoardChaosBagOdds("current");
 
-	// identity(revealCount);
-	// console.log(revealCount);
-	const displayValue = `${value}%`;
+	console.log("odds", odds);
+	console.log("isLoading", isLoading);
+
+	if (isLoading || odds === null) {
+		return null;
+	}
+
+	const displayValue = `${odds}%`;
 	return <C.Content {...props} value={displayValue} />;
 };

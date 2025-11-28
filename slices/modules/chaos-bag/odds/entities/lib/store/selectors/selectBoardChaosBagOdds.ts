@@ -5,10 +5,10 @@ import {
 } from "@modules/board/skill-check/shared/lib";
 import { selectOddsSkillValue } from "@modules/chaos-bag/odds/shared/lib";
 import { createSelector } from "@reduxjs/toolkit";
-import { getChaosOdds } from "../../logic";
+import type { Options } from "../../logic/getChaosOdds";
 import { selectBoardChaosOddsTokens } from "./selectBoardChaosOddsTokens";
 
-export const selectBoardChaosBagOdds = (boardId: BoardId) =>
+export const selectBoardChaosBagOddsOptions = (boardId: BoardId) =>
 	createSelector(
 		[
 			selectSkillCheckDifficulty,
@@ -16,17 +16,17 @@ export const selectBoardChaosBagOdds = (boardId: BoardId) =>
 			selectBoardChaosOddsTokens(boardId),
 			selectOddsSkillValue,
 		],
-		(difficulty, difficultyType, tokens, skillValue) => {
+		(difficulty, difficultyType, tokens, skillValue): Options => {
 			const available = tokens.filter(({ revealId }) => !revealId);
 			const revealed = tokens.filter(({ revealId }) => revealId);
 
-			return getChaosOdds({
+			return {
 				available,
 				revealed,
 				revealCount: 1,
 				skillValue: skillValue ?? 0,
 				difficulty: difficulty ?? 0,
 				difficultyType: difficultyType ?? "gte",
-			});
+			};
 		},
 	);
