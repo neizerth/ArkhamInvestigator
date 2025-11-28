@@ -9,13 +9,9 @@ import {
 } from "@modules/board/skill-check/shared/lib";
 import { setCustomChaosBagSkillValue } from "@modules/chaos-bag/base/entities/lib";
 import {
-	selectCustomSkillValue,
+	selectOddsSkillValue,
 	setCustomSkillValue,
 } from "@modules/chaos-bag/odds/shared/lib";
-import {
-	selectChaosBagSkillCheckType,
-	selectChaosBagSkillValue,
-} from "@modules/chaos-bag/reveal/base/shared/lib";
 import type { PickerChangeEvent } from "@modules/core/control/entities/picker/model";
 import { useAppDispatch, useAppSelector, useBoolean } from "@shared/lib";
 import { useCallback } from "react";
@@ -28,14 +24,11 @@ const data = range(0, 100);
 export const ChaosBagDifficulty = (props: ChaosBagDifficultyProps) => {
 	const dispatch = useAppDispatch();
 	const [showSkillPicker, setShowSkillPicker] = useBoolean(false);
-	const chaosBagSkillValue = useAppSelector(selectChaosBagSkillValue);
-	const customSkillValue = useAppSelector(selectCustomSkillValue);
+	const skillValue = useAppSelector(selectOddsSkillValue);
 
 	const difficulty = useAppSelector(selectSkillCheckDifficulty) ?? 0;
 	const character = useAppSelector(selectSkillCheckDifficultyCharacter);
-	const skillType = useAppSelector(selectChaosBagSkillCheckType);
 
-	const skillValue = chaosBagSkillValue ?? customSkillValue ?? 0;
 	const value = showSkillPicker ? skillValue : difficulty;
 
 	const onChange = useCallback(

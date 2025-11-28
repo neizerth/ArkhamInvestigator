@@ -19,23 +19,27 @@ export const getBoardChaosOddsTokens = ({
 	revealCount: revealCountMap,
 	values: valuesMap,
 }: Options) => {
-	return contents.map((token): ChaosBagOddsToken => {
-		const revealedToken = revealedTokens.find(({ id }) => id === token.id);
-		const revealCount = revealCountMap[token.type];
-		const value = valuesMap[token.type];
+	const revealed = revealedTokens.filter(({ canceled }) => !canceled);
 
-		if (!revealedToken) {
+	return contents
+		.filter(({ sealed }) => !sealed)
+		.map((token): ChaosBagOddsToken => {
+			const revealedToken = revealed.find(({ id }) => id === token.id);
+			const revealCount = revealCountMap[token.type];
+			const value = valuesMap[token.type];
+
+			if (!revealedToken) {
+				return {
+					...token,
+					revealCount,
+					value,
+				};
+			}
+
 			return {
-				...token,
-				revealCount,
 				value,
+				...revealedToken,
+				revealCount,
 			};
-		}
-
-		return {
-			value,
-			...revealedToken,
-			revealCount,
-		};
-	});
+		});
 };

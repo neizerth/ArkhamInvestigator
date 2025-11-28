@@ -4,7 +4,7 @@ import {
 	selectChaosBagSkillValue,
 } from "@modules/chaos-bag/reveal/base/shared/lib";
 import { createSelector } from "@reduxjs/toolkit";
-import { getSkillCheckResult } from "../../../../shared/lib/logic";
+import { getSkillCheckResultValue } from "../../../../shared/lib/logic";
 
 export const selectSkillCheckResult = createSelector(
 	[selectChaosBagSkillValue, selectAllRevealedTokens, selectModifyChaosTokens],
@@ -13,7 +13,7 @@ export const selectSkillCheckResult = createSelector(
 			return null;
 		}
 
-		return getSkillCheckResult({
+		return getSkillCheckResultValue({
 			skillValue,
 			tokens,
 		});

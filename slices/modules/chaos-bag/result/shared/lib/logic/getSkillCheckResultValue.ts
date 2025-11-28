@@ -7,7 +7,7 @@ type Options = {
 	tokens: RevealedChaosBagTokenData[];
 };
 
-export const getSkillCheckResult = (options: Options): number => {
+export const getSkillCheckResultValue = (options: Options): number => {
 	const { skillValue } = options;
 	const tokens = options.tokens.filter(isRevealedTokenActive);
 

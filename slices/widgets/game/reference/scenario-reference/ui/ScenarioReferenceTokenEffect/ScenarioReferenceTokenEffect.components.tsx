@@ -73,7 +73,7 @@ export const Options: typeof View = styled(View)`
 `;
 
 export const OptionContainer: typeof View = styled(View)`
-  flex: 1;
+
 `;
 
 export const Option: typeof ChaosTokenOption = styled(ChaosTokenOption).attrs({
