@@ -22,6 +22,7 @@ export const getChaosOdds = (options: Options) => {
 	} = options;
 
 	type Frame = {
+		available: ChaosBagOddsToken[];
 		revealed: ChaosBagOddsToken[];
 		revealCount: number;
 		probability: number;
@@ -29,6 +30,7 @@ export const getChaosOdds = (options: Options) => {
 
 	const stack: Frame[] = [
 		{
+			available,
 			revealed,
 			revealCount,
 			probability: 1,
@@ -42,6 +44,7 @@ export const getChaosOdds = (options: Options) => {
 		if (!frame) continue;
 
 		const {
+			available: currentAvailable,
 			revealed: currentRevealed,
 			revealCount: currentRevealCount,
 			probability: currentProbability,
@@ -68,9 +71,7 @@ export const getChaosOdds = (options: Options) => {
 		//
 		// EXPAND NODE
 		//
-		// In Arkham Horror, tokens are returned to the bag after being revealed,
-		// so we use all available tokens for each reveal
-		const tokensCount = available.length;
+		const tokensCount = currentAvailable.length;
 
 		// If no tokens available, skip this frame
 		if (tokensCount === 0) {
@@ -78,20 +79,26 @@ export const getChaosOdds = (options: Options) => {
 		}
 
 		for (let i = 0; i < tokensCount; i++) {
-			const token = available[i];
+			const token = currentAvailable[i];
 			const nextProbability = currentProbability * (1 / tokensCount);
 
 			// IMPORTANT FIX: canceled tokens contribute 0 value and revealCount = 0
 			const extraReveals =
 				!token.canceled && token.revealCount > 0 ? token.revealCount : 0;
 
+			const nextRevealCount = currentRevealCount - 1 + extraReveals;
+
 			const nextRevealed = token.canceled
 				? currentRevealed // canceled → do NOT append to revealed
 				: [...currentRevealed, token];
 
+			// Remove the drawn token from available for the next frame
+			const nextAvailable = currentAvailable.filter((_, index) => index !== i);
+
 			stack.push({
+				available: nextAvailable,
 				revealed: nextRevealed,
-				revealCount: currentRevealCount - 1 + extraReveals,
+				revealCount: nextRevealCount,
 				probability: nextProbability,
 			});
 		}
