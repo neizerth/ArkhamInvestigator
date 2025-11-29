@@ -39,7 +39,7 @@ export const Picker: FC<PickerProps> = styled(StatPicker).attrs({
 	itemHeight: assetsSize.main,
 })`
   position: absolute;
-  z-index: 4;
+  z-index: 2;
   right: 0px;
   top: -9px;
   ${({ position }: PickerProps) =>
@@ -51,6 +51,7 @@ export const Picker: FC<PickerProps> = styled(StatPicker).attrs({
 
 const InfoView: typeof Row = styled(Row)`
   position: absolute;
+  z-index: 2;
   align-items: center;
   justify-content: center;
 `;
