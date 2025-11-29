@@ -114,6 +114,8 @@ const getChaosOddsImpl = async (options: Options) => {
 		}
 	}
 
+	console.log("iterationCount", iterationCount);
+
 	// return in percentage with 2 decimals
 	return Math.round(acc * 100);
 };

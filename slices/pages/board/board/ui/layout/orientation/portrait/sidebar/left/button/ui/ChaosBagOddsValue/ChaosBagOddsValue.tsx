@@ -8,9 +8,6 @@ export type ChaosBagOddsValueProps = Omit<ValueProps, "value">;
 export const ChaosBagOddsValue = (props: ChaosBagOddsValueProps) => {
 	const { odds, isLoading } = useBoardChaosBagOdds("current");
 
-	console.log("odds", odds);
-	console.log("isLoading", isLoading);
-
 	if (isLoading || odds === null) {
 		return null;
 	}
