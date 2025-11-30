@@ -1,5 +1,6 @@
 import { selectBoardId } from "@modules/board/base/shared/lib";
 import { chaosToken } from "@modules/chaos-bag/base/shared/config";
+import { chaosBagUpdated } from "@modules/chaos-bag/base/shared/lib";
 import { selectIsChaosTokenPersonal } from "@modules/chaos-bag/effect/entities/lib";
 import {
 	removeBoardChaosTokenValueInternal,
@@ -13,8 +14,10 @@ import { updateCurrentRevealedTokenValue } from "../updateCurrentRevealedTokenVa
 import { chaosTokenValueSet, setChaosTokenValue } from "./setChaosTokenValue";
 
 function* worker(action: ReturnType<typeof setChaosTokenValue>) {
+	const { payload } = action;
 	yield workerProcess(action);
-	yield put(chaosTokenValueSet(action.payload));
+	yield put(chaosTokenValueSet(payload));
+	yield put(chaosBagUpdated(payload));
 }
 
 function* workerProcess({ payload }: ReturnType<typeof setChaosTokenValue>) {

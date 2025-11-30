@@ -1,4 +1,5 @@
 import { spawn } from "redux-saga/effects";
+import { boardIndexSaga } from "./boardIndex/sagas";
 import { setBoardSaga } from "./setBoard/setBoardSaga";
 import { setBoardPartSaga } from "./setBoardPart/setBoardPartSaga";
 import { setBoardPropSaga } from "./setBoardProp/setBoardPropSaga";
@@ -11,4 +12,5 @@ export function* boardBaseSharedSaga() {
 	yield spawn(setBoardValuePartSaga);
 	yield spawn(setBoardPropValueSaga);
 	yield spawn(setBoardPartSaga);
+	yield spawn(boardIndexSaga);
 }

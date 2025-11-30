@@ -1,6 +1,6 @@
 import { spawn } from "redux-saga/effects";
-import { syncCustomSkillValueSaga } from "./features/sync-custom-skill-value/sagas";
+import { chaosBagOddsFeaturesSaga } from "./features/sagas";
 
 export function* chaosBagOddsSaga() {
-	yield spawn(syncCustomSkillValueSaga);
+	yield spawn(chaosBagOddsFeaturesSaga);
 }

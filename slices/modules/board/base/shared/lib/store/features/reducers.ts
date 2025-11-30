@@ -5,5 +5,4 @@ export { setBoardPropInternalReducer as setBoardPropInternal } from "./setBoardP
 export { setBoardPropValueInternalReducer as setBoardPropValueInternal } from "./setBoardPropValue/setBoardPropValueInternalReducer";
 export { setBoardValuePartInternalReducer as setBoardValuePartInternal } from "./setBoardValuePart/setBoardValuePartInternalReducer";
 
-export * from "./boardIndex/reducers";
 export * from "./loading/reducers";

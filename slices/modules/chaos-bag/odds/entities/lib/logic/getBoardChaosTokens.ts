@@ -25,16 +25,18 @@ export const getBoardChaosOddsTokens = ({
 		.filter(({ sealed }) => !sealed)
 		.map((token): ChaosBagOddsToken => {
 			const revealedToken = revealed.find(({ id }) => id === token.id);
-			const revealCount = revealCountMap[token.type];
+			const defaultRevealCount = revealCountMap[token.type];
 			const value = valuesMap[token.type];
 
 			if (!revealedToken) {
 				return {
 					...token,
-					revealCount,
+					revealCount: defaultRevealCount,
 					value,
 				};
 			}
+
+			const revealCount = revealedToken.canceled ? 0 : defaultRevealCount;
 
 			return {
 				value,

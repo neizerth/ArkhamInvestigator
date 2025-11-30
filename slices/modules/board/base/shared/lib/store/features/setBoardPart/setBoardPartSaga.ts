@@ -1,5 +1,6 @@
 import { put, select, takeEvery } from "redux-saga/effects";
 import { isBoardExists } from "../../../fallback";
+import { boardChanged } from "../../actions";
 import { setBoardPartInternal } from "../../board";
 import { selectBoardById } from "../../selectors";
 import { boardPartChanged, setBoardPart } from "./setBoardPart";
@@ -22,6 +23,7 @@ function* worker({ payload }: ReturnType<typeof setBoardPart>) {
 			board,
 		}),
 	);
+	yield put(boardChanged(payload));
 }
 
 export function* setBoardPartSaga() {

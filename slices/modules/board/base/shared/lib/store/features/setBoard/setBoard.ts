@@ -13,4 +13,4 @@ export const setBoard = createAction<SetBoardPayload>("board/set");
 
 export type BoardChangedPayload = SetBoardPayload & PropsWithBoard;
 
-export const boardChanged = createAction<BoardChangedPayload>("board/changed");
+export const boardSet = createAction<BoardChangedPayload>("board/set");
