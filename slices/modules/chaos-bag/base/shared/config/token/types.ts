@@ -29,6 +29,7 @@ export const specialChaosTokenTypes: ChaosTokenType[] = [
 	"frost",
 	"bless",
 	"curse",
+	"moon",
 ];
 
 export const symbolicChaosTokenTypes = [
@@ -53,6 +54,8 @@ export const blessChaosTokenType: ChaosTokenType = "bless";
 export const curseChaosTokenType: ChaosTokenType = "curse";
 
 export const frostChaosTokenType: ChaosTokenType = "frost";
+
+export const moonChaosTokenType: ChaosTokenType = "moon";
 
 export const removableChaosTokenTypes: ChaosTokenType[] = [
 	blessChaosTokenType,

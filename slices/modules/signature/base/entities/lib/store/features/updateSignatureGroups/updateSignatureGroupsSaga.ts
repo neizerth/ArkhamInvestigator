@@ -11,6 +11,10 @@ import { compareSignatureGroups } from "./lib/compareSignatureGroups";
 import { updateSignatureGroups } from "./updateSignatureGroups";
 
 function* worker({ payload }: ReturnType<typeof updateSignatureGroups>) {
+	const previousGroups: ReturnType<typeof selectSignatureGroups> = yield select(
+		selectSignatureGroups,
+	);
+
 	yield put(setSignatureGroups(payload));
 
 	const baseUrl: ReturnType<typeof selectArtworkUrl> =
@@ -19,11 +23,8 @@ function* worker({ payload }: ReturnType<typeof updateSignatureGroups>) {
 	const ready: ReturnType<typeof selectExternalImagesReady> = yield select(
 		selectExternalImagesReady,
 	);
-	const defaultGroups: ReturnType<typeof selectSignatureGroups> = yield select(
-		selectSignatureGroups,
-	);
 
-	const groups = defaultGroups ?? [];
+	const groups = previousGroups ?? [];
 
 	const imageIds = compareSignatureGroups(groups, payload);
 

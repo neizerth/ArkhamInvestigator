@@ -1,1 +1,1 @@
-export * from "./selectModaShown";
+export * from "./selectModalShown";

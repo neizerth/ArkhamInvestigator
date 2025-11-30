@@ -1,7 +1,12 @@
-import { color } from "@shared/config";
-import { Icon, type IconProps, Value, type ValueProps } from "@shared/ui";
+import { Alegreya } from "@assets/fonts";
+import {
+	BoardSignatureImage,
+	type BoardSignatureImageProps,
+} from "@modules/board/base/features/base/ui";
+import { color, font } from "@shared/config";
+import { Icon, type IconProps, Text, Value, type ValueProps } from "@shared/ui";
 import type { FC } from "react";
-import { View, type ViewProps } from "react-native";
+import { Platform, View, type ViewProps } from "react-native";
 import styled, { css } from "styled-components/native";
 import { chaosToken } from "../../../config";
 import { ChaosToken } from "../../chaos-token";
@@ -9,11 +14,20 @@ import { ChaosTokenModification } from "../ChaosTokenModification";
 import { ChaosTokenPreviewValue } from "../ChaosTokenPreviewValue";
 import { SealedImage } from "./images";
 
+const ios = Platform.OS === "ios";
+
 type PropsWithSize = {
 	size: number;
 };
 
-export const Container: typeof View = styled(View)`
+type ContainerProps = ViewProps & {
+	disabled?: boolean;
+};
+
+export const Container: FC<ContainerProps> = styled(View)`
+  ${({ disabled }: ContainerProps) => css`
+    opacity: ${disabled ? 0.5 : 1};
+  `}
   position: relative;
 
   align-items: center;
@@ -153,4 +167,65 @@ export const Highlight: FC<HighlightProps> = styled(Value).attrs({
   ${({ size }: HighlightProps) => css`
     font-size: ${size * 0.43}px;
   `}
+`;
+
+export const SealedCount: typeof View = styled(View)`
+  position: absolute;
+	z-index: 3;
+  bottom: -3px;
+  right: -3px;
+	width: 18px;
+	height: 18px;
+	border-radius: 50%;
+  background-color: #c12422;
+  justify-content: center;
+  align-items: center;
+	padding: 1px;
+`;
+
+export const SealedCountText: typeof Text = styled(Text)`
+	font-family: ${Alegreya.regular};
+  color: ${color.light10};
+  font-size: ${font.size.default}px;
+	line-height: ${font.size.default * (ios ? 1 : 0.9)}px;
+	text-align: center;
+  bottom: ${ios ? 0 : 3}px;
+`;
+
+export const SealedTitle: typeof Text = styled(Text).attrs({
+	numberOfLines: 1,
+})`
+  position: absolute;
+  z-index: 3;
+  bottom: -5px;
+  padding: 0 3px;
+	font-family: ${Alegreya.regular};
+  background-color: #c12422;
+  color: ${color.light10};
+  font-size: 12px;
+	line-height: ${font.size.default}px;
+  border-radius: 20px;
+  white-space: nowrap;
+	text-align: center;
+`;
+
+export const SealedPreview: typeof View = styled(View)`
+  position: absolute;
+  z-index: 5;
+  right: -5px;
+  bottom: -5px;
+`;
+
+type BoardPreviewProps = BoardSignatureImageProps & PropsWithSize;
+
+export const BoardPreview: FC<BoardPreviewProps> = styled(BoardSignatureImage)`
+  ${(props: BoardPreviewProps) => {
+		const size = Math.max(30, props.size / 2.5);
+		return css`
+      width: ${size}px;
+      height: ${size}px;
+      border-radius: ${size}px;
+    `;
+	}}
+  border: 2px solid #c12422;
 `;

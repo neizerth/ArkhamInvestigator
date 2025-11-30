@@ -1,8 +1,5 @@
-import {
-	increaseBoardActualPropValue,
-	selectBoardById,
-} from "@modules/board/base/shared/lib";
-import { sendInvestigatorNotification } from "@modules/board/notifications/entities/lib";
+import { getResources } from "@modules/board/base/entities/base/lib";
+import { selectBoardById } from "@modules/board/base/shared/lib";
 import { isRevealedTokenActive } from "@modules/chaos-bag/result/shared/lib";
 import { chaosBagRevealEnd } from "@modules/chaos-bag/reveal/base/entities/lib";
 import { InvesigatorCode } from "@modules/mechanics/investigator/entities/config";
@@ -40,20 +37,9 @@ function* worker({ payload }: ReturnType<typeof chaosBagRevealEnd>) {
 	}
 
 	yield put(
-		increaseBoardActualPropValue({
+		getResources({
 			boardId: skillCheckBoardId,
-			prop: "resources",
 			value: 2,
-		}),
-	);
-
-	yield put(
-		sendInvestigatorNotification({
-			boardId: skillCheckBoardId,
-			message: "investigator.getResources",
-			data: {
-				count: 2,
-			},
 		}),
 	);
 }

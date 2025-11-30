@@ -60,6 +60,9 @@ export const InvestigatorDetailSelect = () => {
 	}
 
 	const skins = getSkins(group);
+
+	const selectedSkinId = skinId ?? skins[0]?.id;
+
 	const signatures = getSignatures(group);
 	const signatureId = currentSignatureId || signatures[0].id;
 
@@ -114,11 +117,10 @@ export const InvestigatorDetailSelect = () => {
 								title={t`Skins`}
 								data={skins}
 								onChange={onChangeSkin}
-								selectedId={skinId}
+								selectedId={selectedSkinId}
 								showIcon={false}
 								size={CARD_SIZE}
 								preview
-								showNone
 							/>
 						)}
 					</C.Sections>

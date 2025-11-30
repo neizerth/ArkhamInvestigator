@@ -1,6 +1,6 @@
 import { ArtworksFragment } from "@modules/core/theme/shared/ui";
 import { useSwipe } from "@modules/core/touch/shared/lib";
-import { formatGameText, getActiveOpacity } from "@shared/lib";
+import { formatGameText } from "@shared/lib";
 import type { PropsWithFaction } from "@shared/model";
 import type { ImageBackgroundProps } from "@shared/ui";
 import { memo, useMemo } from "react";
@@ -54,7 +54,6 @@ export const InvestigatorTitle = (props: InvestigatorTitleProps) => {
 	const subname = formatGameText(props.subname);
 
 	const style = getTitleStyle(props);
-	const titleOpacity = getActiveOpacity(pressable);
 
 	const showId = !unique && !single;
 
@@ -96,7 +95,7 @@ export const InvestigatorTitle = (props: InvestigatorTitleProps) => {
 						<GestureDetector gesture={gesture}>
 							<C.TitleContent
 								style={style.titleContent}
-								activeOpacity={titleOpacity}
+								enabled={pressable}
 								onPress={onTitlePress}
 							>
 								{unique && (

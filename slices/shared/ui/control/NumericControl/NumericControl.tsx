@@ -5,7 +5,9 @@ import { defaultButtonTextStyle } from "./NumericControl.styles";
 
 export type NumericControlProps = ViewProps & {
 	onIncrement: () => void;
+	onIncrementLongPress?: () => void;
 	onDecrement: () => void;
+	onDecrementLongPress?: () => void;
 	buttonStyle?: ViewProps["style"];
 	decrementStyle?: ViewProps["style"];
 	incrementStyle?: ViewProps["style"];
@@ -17,6 +19,7 @@ export type NumericControlProps = ViewProps & {
 	incrementTextStyle?: TextProps["style"];
 	minTextStyle?: TextProps["style"];
 	maxTextStyle?: TextProps["style"];
+	disabledTextStyle?: TextProps["style"];
 
 	value?: number;
 	min?: number;
@@ -28,6 +31,8 @@ const disabledCallback = always(false as const);
 export const NumericControl = ({
 	onDecrement,
 	onIncrement,
+	onIncrementLongPress,
+	onDecrementLongPress,
 	buttonStyle,
 	maxStyle,
 	minStyle,
@@ -38,6 +43,7 @@ export const NumericControl = ({
 	decrementTextStyle,
 	incrementStyle,
 	incrementTextStyle,
+	disabledTextStyle,
 	children,
 	min = Number.NEGATIVE_INFINITY,
 	max = Number.POSITIVE_INFINITY,
@@ -51,24 +57,28 @@ export const NumericControl = ({
 		<C.Container {...props}>
 			<C.Button
 				onPress={disableDecrement ? disabledCallback : onDecrement}
+				onLongPress={onDecrementLongPress}
 				text="–"
 				style={[buttonStyle, decrementStyle, disableDecrement && minStyle]}
 				textStyle={[
 					defaultButtonTextStyle,
 					textStyle,
 					incrementTextStyle,
+					disableDecrement && disabledTextStyle,
 					disableDecrement && minTextStyle,
 				]}
 			/>
 			{children}
 			<C.Button
 				onPress={disableIncrement ? disabledCallback : onIncrement}
+				onLongPress={onIncrementLongPress}
 				text="+"
 				style={[buttonStyle, incrementStyle, disableIncrement && maxStyle]}
 				textStyle={[
 					defaultButtonTextStyle,
 					textStyle,
 					decrementTextStyle,
+					disableIncrement && disabledTextStyle,
 					disableIncrement && maxTextStyle,
 				]}
 			/>

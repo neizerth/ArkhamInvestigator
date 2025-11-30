@@ -70,8 +70,8 @@
 
 	"board.help.special.additionalAction": "Некоторые сыщики имеют особые дополнительные действия. Нажмите на эту иконку, чтобы отметить действие как выполненное.",
 	"board.help.special.lola": "Нажмите на блок с именем, чтобы сменить текущую роль (класс).",
-	"board.help.special.daniela": "Нажмите на [claws], если враг вас атаковал. Это поменяет значение [elder_sign] для успеншого прохождения проверки.",
-	"board.help.special.kymani": "Нажмите на [exhaust], если в вашей локации есть повёрнутый враг. Это поменяет значение [elder_sign] для успеншого прохождения проверки.",
+	"board.help.special.daniela": "Нажмите на [claws], если враг вас атаковал. Это поменяет значение [elder_sign] для успешного прохождения проверки.",
+	"board.help.special.kymani": "Нажмите на [exhaust], если в вашей локации есть повёрнутый враг. Это поменяет значение [elder_sign] для успешного прохождения проверки.",
 	"board.help.special.preston": "Удерживайте нажатие на счетчике фамильного наследства, чтобы переложить его значение на счётчик ресурсов.",
 	"board.help.special.wendy": "Нажмите на [accessory], чтобы отметить, что вы выложили амулет Венди. Если амулет в игре, значение жетона [elder_sign] будет считаться автоматическим успехом.",
 
@@ -97,16 +97,16 @@
 	"board.help.chaosBag.reference": "Открыть справку по жетонам.",
 	"board.help.chaosBag.cancelToken": "[blocked] - Переключает режимы отмены жетона. Изначально выключен. Повторное нажатие отменяет/игнорирует жетон: жетон вытянут из мешка, но его модификатор не учитывается в итоговом значении проверки, а эффект помечается как отменённый. Повторное нажатие с [effect] отменяет только эффект жетона (текст).",
 
-	"chaosToken.remove.confirm.title_one": "Жетон участвует в проверке",
-	"chaosToken.remove.confirm.title_few": "Жетоны участвуют в проверке",
-	"chaosToken.remove.confirm.title_many": "Жетоны жетонов участвуют в проверке",
+	"chaosToken.remove.confirm.title_one": "Жетон недоступен",
+	"chaosToken.remove.confirm.title_few": "Жетоны недоступны",
+	"chaosToken.remove.confirm.title_many": "Жетоны недоступны",
 	"chaosToken.remove.confirm.subtitle_one": "Удалить жетон?",
 	"chaosToken.remove.confirm.subtitle_few": "Удалить жетоны?",
 	"chaosToken.remove.confirm.subtitle_many": "Удалить жетоны?",
 
-	"chaosToken.remove.confirm.text_one": "Жетон {{token}} участвует в проверке. Его удаление может изменить результат текущей проверки или отменить её",
-	"chaosToken.remove.confirm.text_few": "{{count}} жетона {{token}} участвуют в проверке. Их удаление может изменить результат текущей проверки или отменить её",
-	"chaosToken.remove.confirm.text_many": "{{count}} жетонов {{token}} участвуют в проверке. Их удаление может изменить результат текущей проверки или отменить её",
+	"chaosToken.remove.confirm.text": "Жетон {{token}} участвует в проверке или запечатан. Его удаление может изменить результат текущей проверки или отменить её",
+	"chaosToken.remove.confirm.text_few": "{{count}} жетона {{token}} участвуют в проверке или запечатаны. Их удаление может изменить результат текущей проверки или отменить её",
+	"chaosToken.remove.confirm.text_many": "{{count}} жетонов {{token}} участвуют в проверке или запечатаны. Их удаление может изменить результат текущей проверки или отменить её",
 
 	"chaosToken.remove.confirm.return": "К проверке",
 
@@ -155,9 +155,17 @@
 
 	"upkeep.investigator.actionsReset": "{{name}}: действия обновлены",
 
-	"investigator.getResources_one": "{{name}} получает {{count}} ресурс",
-	"investigator.getResources_few": "{{name}} получает {{count}} ресурса",
-	"investigator.getResources_many": "{{name}} получает {{count}} ресурсов",
+	"resources.get_one": "{{name}} получает {{count}} ресурс",
+	"resources.get_few": "{{name}} получает {{count}} ресурса",
+	"resources.get_many": "{{name}} получает {{count}} ресурсов",
+
+	"damage.take_one": "{{name}} получает {{count}} рану",
+	"damage.take_few": "{{name}} получает {{count}} раны",
+	"damage.take_many": "{{name}} получает {{count}} ран",
+
+	"horror.take_one": "{{name}} получает {{count}} ужас",
+	"horror.take_few": "{{name}} получает {{count}} ужаса",
+	"horror.take_many": "{{name}} получает {{count}} ужаса",
 
 	"wild.give": "{{fromName}} добавляет {{dativeName}} дополнительный [wild] до конца проверки",
 	"wild.give.self": "{{name}} добавляет своей карте дополнительный [wild] до конца проверки",
@@ -170,9 +178,21 @@
 	"actions.give_few": "{{fromName}} даёт {{count}} действия [action] {{dativeName}}",
 	"actions.give_many": "{{fromName}} даёт {{count}} действий [action] {{dativeName}}",
 
+	"card.get_one": "{{name}} получает {{count}} карту",
+	"card.get_few": "{{name}} получает {{count}} карты",
+	"card.get_many": "{{name}} получает {{count}} карт",
+
+	"clues.get_one": "{{name}} получает {{count}} улику",
+	"clues.get_few": "{{name}} получает {{count}} улики",
+	"clues.get_many": "{{name}} получает {{count}} улик",
+
 	"clues.spent_one": "{{name}} тратит {{count}} улику",
 	"clues.spent_few": "{{name}} тратит {{count}} улики",
 	"clues.spent_many": "{{name}} тратит {{count}} улик",
+
+	"resources.spent_one": "{{name}} тратит {{count}} ресурс",
+	"resources.spent_few": "{{name}} тратит {{count}} ресурса",
+	"resources.spent_many": "{{name}} тратит {{count}} ресурсов",
 
 	"clues.scenario.add_one": "{{name}} добавляет на сценарий {{count}} улику",
 	"clues.scenario.add_few": "{{name}} добавляет на сценарий {{count}} улики",
@@ -190,16 +210,26 @@
 
 	"chaosBag.addTokens": "{{name}} добавляет в мешок жетоны {{tokens}}",
 
-	"chaosBag.removeToken": "{{name}} удаляет из мешка {{count}} {{token}}",
+	"chaosBag.removeToken_one": "{{name}} удаляет из мешка {{count}} {{token}}",
+	"chaosBag.removeToken_few": "{{name}} удаляет из мешка {{count}} {{token}}",
+	"chaosBag.removeToken_many": "{{name}} удаляет из мешка {{count}} {{token}}",
 
 	"chaosBag.cantAddToken": "Нельзя добавить больше {{limit}} {{character}}",
 	"chaosBag.cantRemoveToken": "Нельзя удалить {{count}} {{character}}, в мешке {{available}} {{character}}",
 
+	"chaosBag.sealToken": "{{name}} запечатывает жетон {{token}}",
+	"chaosBag.unseal.moon.title": "Снять печать с [moon]?",
+	"chaosBag.unseal.moon.text": "Для снятия печати, необходимо добавить сыщику 1 рану [health] или 1 ужас [sanity]",
+	"chaosBag.unseal.moon.damage.text": "+1 рана",
+	"chaosBag.unseal.moon.horror.text": "+1 ужас",
+	"chaosBag.unseal.moon.notAllowed": "У сыщика недостаточно здоровья или рассудка, чтобы снять печать с [moon]",
 	"mythos.doom": "Добавлена 1 Безысходность. Итого: {{doom}}",
 	"timing.step.name": "Шаг {{name}}",
 
 	"chaosToken.curse.effect": "{{value}}. Вытяните ещё один жетон. Вместо того чтобы вернуть этот жетон [curse] в мешок хаоса, верните его в резерв жетонов",
 	"chaosToken.bless.effect": "{{value}}. Вытяните ещё один жетон. Вместо того чтобы вернуть этот жетон [bless] в мешок хаоса, верните его в резерв жетонов",
+	"chaosToken.moon.effect": "{{value}}. Запечатайте этот жетон на карте вашего сыщика и вытяните ещё один жетон.",
+
 	"chaosToken.frost.first.effect": "{{value}}. Вытяните ещё один жетон",
 	"chaosToken.frost.second.effect": "Проверка автоматически провалена",
 	"chaosToken.autoFail.effect": "Проверка автоматически провалена",
@@ -222,6 +252,7 @@
 	"ability.mateo.base.elderSign.action": "Действие",
 
 	"ability.carolyn.modal.heal": "Вылечить",
+	"ability.carolyn.reaction.text": "Выберите игрока, под чьим контролем находится вылеченная карта",
 
 	"ability.preston.modal.text": "Потратить 2 [resource], чтобы автоматически пройти эту проверку?",
 	"ability.rex.base.modal.text": "Провалить проверку чтобы взять 3 карты?",
@@ -244,7 +275,54 @@
 
 	"ability.kohaku.removeTokens": "{{name}} удаляет 2 [bless] и 2 [curse]",
 
+	"ability.richard.modal.text": "Выберите эффект:\n[card-outline] Взять 1 карту\n[resource] Получить 1 ресурс\n[clue] Найти 1 улику в вашей локации\n[health] Нанести 1 рану врагу в вашей локации",
+	"ability.richard.action.damage": "{{name}} наносит 1 рану врагу в вашей локации",
+
+	"ability.luke.gateBox_one": "{{name}} кладёт {{count}} заряд на Шкатулку Врат",
+	"ability.luke.gateBox_few": "{{name}} кладёт {{count} заряда на Шкатулку Врат",
+	"ability.luke.gateBox_many": "{{name}} кладёт {{count} зарядов на Шкатулку Врат",
+
+	"ability.agatha.reaction": "{{name}} может разыграть событие [[заклинание]] или [[интуицию]] из своего сброса и удалить его из игры",
+
+	"ability.wendy.parallel.action.chaosBag": "{{token}} в [chaos-bag-thin]",
+	"ability.wendy.parallel.action.history": "{{token}} [undo] [chaos-bag-thin]",
+	"ability.wendy.parallel.text": "Выберите, какой жетон запечатать\n<b>Пример:</b>\n[bless] в [chaos-bag-thin] - жетон из мешка хаоса\n[bless] [undo] [chaos-bag-thin] - вытянутый жетон последней проверки\nДля напоминания, укажите инициалы карты врага, где жетон будет запечатан (до 7 символов, например «Упырь»):",
+	"ability.wendy.parallel.placeholder": "Враг",
+	"ability.wendy.parallel.title": "Запечатать жетон",
+	"ability.wendy.parallel.reaction.fail": "Нет подходящих жетонов для печати",
+	"ability.wendy.parallel.elderSign.selected.title": "Выбранные жетоны",
+	"ability.wendy.parallel.elderSign.selected.text": "Нажмите на выбранный жетон, чтобы удалить",
+	"ability.wendy.parallel.elderSign.title": "Разыграть жетоны",
+	"ability.wendy.parallel.elderSign.text": "Выберите до 2 [bless] и/или [curse] и разыграйте, игнорируя их эффекты.\nНажмите на жетон для выбора",
+	"ability.wendy.parallel.elderSign.confirm.title": "Разыграть",
+
+	"ability.skids.parallel.title": "Потратить ресурсы",
+	"ability.skids.parallel.text": "Выберите, сколько ресурсов потратить",
+	"ability.skids.parallel.action": "{{count}}&nbsp;&nbsp;[resource]",
+
+	"ability.mateo.parallel.modal.title": "Запечатать [bless]",
+	"ability.mateo.parallel.fastFail": "Нет доступных жетонов [bless] для печати",
+	"ability.mateo.parallel.sealBless": "{{fromName}} запечатывает [bless] на {{prepositionalName}}",
+	"ability.mateo.parallel.sealBless.self": "{{name}} запечатывает [bless] на себе",
+
+	"ability.mateo.parallel.reaction.title": "Вытянуть запечатанный [bless]",
+	"ability.mateo.parallel.reaction.text": "Вытянуть запечатанный [bless] вместо случайного жетона?",
+
+	"ability.lucia.elderSign.title": "Вылечить рану/ужас",
+
+	"ability.jerome.elderSign.title": "Найти улику",
+	"ability.jerome.elderSign.text": "Подтвердите, если в вашей локации есть улика",
+
+	"ability.yuki.modal.title": "Удалить [curse]",
+	"ability.yuki.modal.text": "Удалить 1 [curse] из мешка хаоса?",
+
+	"ability.kate.darkMatter.fluxStabilizer.charge": "{{name}} кладёт 1 заряд на Потоковый стабилизатор",
+
 	"resources.notEnough": "Недостаточно ресурсов. Необходимо&nbsp;{{count}}, доступно&nbsp;{{available}}",
+
+	"heal.damage": "Вылечить {{value}}/{{total}} [health]",
+
+	"heal.horror": "Вылечить {{value}}/{{total}} [sanity]",
 
 	"action.heal": "{{fromName}} лечит {{dativeName}} {{value}}",
 	"action.heal.self": "{{name}} лечит {{value}}",
@@ -332,6 +410,7 @@
 	"Press and hold": "Нажмите и удерживайте",
 	"Hold to seal": "Удерживайте, чтобы запечатать",
 	"Hold": "Удерживайте",
+	"Heal": "Вылечить",
 
 	"Health/Sanity": "Здоровье/Рассудок",
 	"Show health/sanity": "Показать здоровье/рассудок",
@@ -362,7 +441,7 @@
 	"Family Inheritance": "Семейное наследство",
 
 	"Ravenous Tracker": "Ravenous Tracker",
-	"Cards beneath George": "Cards beneath George",
+	"Cards beneath George": "Карты под сыщиком",
 	"Cards beneath Diana": "Карты под сыщиком",
 	"Cards beneath Gloria": "Карты под сыщиком",
 	"Cards in your hand": "Карты в руке",
@@ -399,5 +478,10 @@
 	"Check Data Updates": "Проверить обновления данных",
 
 	"Install": "Установить",
-	"Remove artworks url": "Убрать URL иллюстраций"
+	"Remove artworks url": "Убрать URL иллюстраций",
+	"Books counter": "Счётчик книг",
+	"Choose an effect": "Выберите эффект",
+	"Gate Box": "Шкатулка врат",
+	"Chaos bag": "Мешок хаоса",
+	"Scenario Reference": "Памятка сценария"
 }

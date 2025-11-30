@@ -1,41 +1,20 @@
-import { selectDeclensedSignatureName } from "@modules/board/base/entities/base/lib";
 import { selectBoardById } from "@modules/board/base/shared/lib";
 import type { InvestigatorBoard } from "@modules/board/base/shared/model";
 import { sendNotification } from "@modules/core/notifications/shared/lib";
 import { getBoardFaction } from "@modules/mechanics/board/base/entities/lib";
 import { getSignatureImageUrl } from "@modules/signature/base/shared/api";
 import { put, select, takeEvery } from "redux-saga/effects";
+import { type NameData, getData } from "./getData";
 import { sendInvestigatorNotification } from "./sendInvestigatorNotification";
 
-function* worker({ payload }: ReturnType<typeof sendInvestigatorNotification>) {
+function* worker(action: ReturnType<typeof sendInvestigatorNotification>) {
+	const { payload } = action;
 	const { boardId, sourceBoardId } = payload;
 
-	const dativeSelector = selectDeclensedSignatureName({
-		boardId,
-		resultCase: "dative",
-	});
+	const nameData: NameData = yield getData(action);
 
-	const dativeName: ReturnType<typeof dativeSelector> =
-		yield select(dativeSelector);
-
-	if (!dativeName) {
+	if (!nameData.dativeName) {
 		return;
-	}
-
-	let fromDativeName: string | undefined;
-	let fromName: string | undefined;
-
-	if (sourceBoardId) {
-		const fromDativeSelector = selectDeclensedSignatureName({
-			boardId: sourceBoardId,
-			resultCase: "dative",
-		});
-		const fromNameSelector = selectBoardById(sourceBoardId);
-		const fromBoard: ReturnType<typeof fromNameSelector> =
-			yield select(fromNameSelector);
-
-		fromName = fromBoard.investigator.name;
-		fromDativeName = yield select(fromDativeSelector);
 	}
 
 	const selectBoard = selectBoardById(boardId);
@@ -47,7 +26,6 @@ function* worker({ payload }: ReturnType<typeof sendInvestigatorNotification>) {
 		sourceBoard = yield select(selectBoardById(sourceBoardId));
 	}
 
-	const { name } = board.investigator;
 	const payloadData = payload.data || {};
 
 	const faction = getBoardFaction(board);
@@ -55,10 +33,7 @@ function* worker({ payload }: ReturnType<typeof sendInvestigatorNotification>) {
 
 	const data = {
 		...payloadData,
-		fromDativeName,
-		fromName,
-		dativeName,
-		name,
+		...nameData,
 	};
 
 	const targetImage = getSignatureImageUrl({

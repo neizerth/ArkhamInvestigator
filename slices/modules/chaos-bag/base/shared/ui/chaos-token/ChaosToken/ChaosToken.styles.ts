@@ -69,9 +69,12 @@ const symbolFillColor = {
 	elderSign: "#4477A1",
 	bless: "#9D702A",
 	curse: "#3A2342",
+	moon: "#394852",
 };
 
-const baseSymbolicParts = (type: BaseSymbolicChaosTokenType): Parts => {
+const baseSymbolicParts = (
+	type: BaseSymbolicChaosTokenType | "moon",
+): Parts => {
 	const icon = snakeCase(type);
 	const fillPrefix = type === "skull" ? "symbol" : icon;
 	const fillColor = symbolFillColor[type];
@@ -114,15 +117,24 @@ const frostParts: Parts = [
 	{ type: "highlight", icon: "token_frost_highlight", color: "#FFFBF2" },
 ];
 
+const moonParts: Parts = [
+	{ type: "fill", icon: "token_number_fill", color: "#3D3A63" },
+	{ type: "overlay", icon: "token_moon_overlay", color: "#E6E1D3" },
+	{ type: "highlight", icon: "token_moon_fill", color: "#FFFBF2" },
+];
+
 const specialParts = {
 	autoFail: autoFailParts,
 	elderSign: elderSignParts,
 	frost: frostParts,
+	moon: moonParts,
 };
 
 export const getChaosTokenParts = (options: Options) => {
-	const { type, modified } = options;
+	const { type } = options;
 	switch (type) {
+		case "custom":
+			return [];
 		case "+1":
 			return plusOneParts(options);
 		case "0":

@@ -7,7 +7,7 @@ import { useAppDispatch, useAppSelector } from "@shared/lib";
 import { useMemo } from "react";
 
 export function useFactionModalActions<Action extends BaseModalAction>(
-	actions: Action[],
+	actions: Action[] = [],
 ) {
 	const dispatch = useAppDispatch();
 	const translate = useI18NText();

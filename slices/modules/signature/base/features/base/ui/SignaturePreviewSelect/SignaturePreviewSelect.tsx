@@ -3,17 +3,17 @@ import type { SignatureDetailItem as Item } from "@modules/signature/base/shared
 import { memo, useCallback } from "react";
 import * as C from "./SignaturePreviewSelect.components";
 
-export type SignaturePreviewSelectProps = {
-	data: Item[];
+export type SignaturePreviewSelectProps<T> = {
+	data: Item<T>[];
 	disabled?: string[];
 	size: number;
 	selectedId?: string | null;
-	onChange: (item: Item | null, index?: number) => void;
+	onChange: (item: Item<T> | null, index?: number) => void;
 	showNone?: boolean;
 	showIcon?: boolean;
 };
 
-export const SignaturePreviewSelect = ({
+export function SignaturePreviewSelect<T>({
 	data,
 	disabled = [],
 	onChange,
@@ -21,13 +21,13 @@ export const SignaturePreviewSelect = ({
 	selectedId = null,
 	showNone,
 	showIcon = true,
-}: SignaturePreviewSelectProps) => {
+}: SignaturePreviewSelectProps<T>) {
 	const setValue = useCallback(
-		(item: Item | null, index?: number) => () => onChange(item, index),
+		(item: Item<T> | null, index?: number) => () => onChange(item, index),
 		[onChange],
 	);
-	const isItemSelected = (item: Item) => item.id === selectedId;
-	const isDisabled = (item: Item) => disabled.includes(item.id);
+	const isItemSelected = (item: Item<T>) => item.id === selectedId;
+	const isDisabled = (item: Item<T>) => disabled.includes(item.id);
 	const isEmptySelected = selectedId === null;
 
 	return (
@@ -60,6 +60,6 @@ export const SignaturePreviewSelect = ({
 			</C.List>
 		</C.Container>
 	);
-};
+}
 
 export const SignaturePreviewSelectMemo = memo(SignaturePreviewSelect);

@@ -11,10 +11,6 @@ import { put, takeEvery } from "redux-saga/effects";
 import { ModalAction } from "./actions";
 import { type SelectDataReturnType, selectData } from "./selectData";
 
-// const filterAction = createAbilityUseFilter({
-// 	id: AbilityCode.KohakuNarukami,
-// 	isUsed: false,
-// });
 const filterAction = (action: unknown) => {
 	if (!setBoardAbilityUse.match(action)) {
 		return false;

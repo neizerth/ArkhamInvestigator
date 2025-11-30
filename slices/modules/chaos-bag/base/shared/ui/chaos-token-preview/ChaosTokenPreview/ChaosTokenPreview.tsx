@@ -5,6 +5,7 @@ import { size } from "@shared/config";
 import { memo } from "react";
 import type { ViewProps } from "react-native";
 import { chaosToken } from "../../../config";
+import type { ChaosBagTokenSealData } from "../../../model";
 import type { ChaosTokenConfig } from "../../chaos-token";
 import * as C from "./ChaosTokenPreview.components";
 import {
@@ -17,6 +18,8 @@ import {
 export type ChaosTokenPreviewProps = ViewProps &
 	ChaosTokenConfig & {
 		sealed?: boolean;
+		sealData?: ChaosBagTokenSealData | null;
+		sealedCount?: number;
 		removed?: boolean;
 		canceled?: RevealedChaosBagTokenCancelType;
 		sealOffset?: number;
@@ -26,6 +29,7 @@ export type ChaosTokenPreviewProps = ViewProps &
 		defaultValue?: number;
 		showValue?: boolean;
 		showOverlay?: boolean;
+		disabled?: boolean;
 	};
 
 const defaultPadding = size.gap.small;
@@ -33,6 +37,8 @@ const defaultPadding = size.gap.small;
 export const ChaosTokenPreview = ({
 	type,
 	sealed,
+	sealedCount = 0,
+	sealData,
 	sealOffset = 2,
 	tokenPadding = defaultPadding,
 	selected = false,
@@ -66,6 +72,8 @@ export const ChaosTokenPreview = ({
 
 	const overlay =
 		showOverlay &&
+		showValue &&
+		typeof value !== "undefined" &&
 		showValueOverlay({
 			showValue,
 			type,
@@ -73,10 +81,30 @@ export const ChaosTokenPreview = ({
 		});
 
 	return (
-		<C.Container {...props} style={style.container}>
+		<C.Container {...props} style={[props.style, style.container]}>
 			{sealed && (
 				<C.Sealed width="100%" height="100%" style={style.background} />
 			)}
+			{sealedCount > 0 && (
+				<C.SealedCount>
+					<C.SealedCountText>{sealedCount}</C.SealedCountText>
+				</C.SealedCount>
+			)}
+			{!selected && (
+				<>
+					{sealData?.title && <C.SealedTitle>{sealData.title}</C.SealedTitle>}
+					{sealData?.type === "investigator" && (
+						<C.SealedPreview>
+							<C.BoardPreview
+								boardId={sealData.boardId}
+								type="square"
+								size={size}
+							/>
+						</C.SealedPreview>
+					)}
+				</>
+			)}
+
 			<C.Content style={style.content}>
 				{modified && typeof defaultValue === "number" && (
 					<C.Modification

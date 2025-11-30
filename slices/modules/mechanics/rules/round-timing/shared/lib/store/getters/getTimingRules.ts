@@ -1,12 +1,9 @@
+import type { RulesItemData } from "@modules/mechanics/rules/base/shared/model";
 import { whereId } from "@shared/lib";
-import type { Defined, RulesItem } from "@shared/model";
 import { TIMING_RULES_ID } from "../../../config";
 
-type TimingItem = Defined<RulesItem["rules"]>[number];
-type Rules = Defined<TimingItem["rules"]>;
-
 type Options = {
-	rules: Rules;
+	rules: RulesItemData;
 };
 
 export const getTimingRules = ({ rules }: Options) => {

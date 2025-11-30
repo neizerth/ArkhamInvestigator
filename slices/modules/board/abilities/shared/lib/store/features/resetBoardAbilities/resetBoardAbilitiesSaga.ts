@@ -6,11 +6,11 @@ import { idIncludes } from "@shared/lib";
 import { prop, reject } from "ramda";
 import { put, select, takeEvery } from "redux-saga/effects";
 import { getAbilityLimits } from "../../../info";
-import { selectBoardAbilities } from "../../selectors";
+import { selectInvestigatorAbilities } from "../../selectors";
 import { resetBoardAbilities } from "./resetBoardAbilities";
 
 function* worker({ payload }: ReturnType<typeof resetBoardAbilities>) {
-	const { boardId, limitTypes = [] } = payload;
+	const { boardId, limitTypes = [], abilityTypes = [] } = payload;
 
 	const usedAbilitiesSelector = selectBoardUsedAbilities(boardId);
 
@@ -22,17 +22,23 @@ function* worker({ payload }: ReturnType<typeof resetBoardAbilities>) {
 		return;
 	}
 
-	const boardAbilitiesSelector = selectBoardAbilities(boardId);
+	const boardAbilitiesSelector = selectInvestigatorAbilities(boardId);
+
 	const boardAbilities: ReturnType<typeof boardAbilitiesSelector> =
 		yield select(boardAbilitiesSelector);
 
-	const selectAll = limitTypes.length === 0;
+	const selectAll = limitTypes.length === 0 && abilityTypes.length === 0;
 
 	const ids = boardAbilities
 		.filter((ability) => {
 			if (selectAll) {
 				return true;
 			}
+
+			if (abilityTypes.length > 0) {
+				return abilityTypes.includes(ability.type);
+			}
+
 			const limits = getAbilityLimits(ability);
 
 			if (!limits) {

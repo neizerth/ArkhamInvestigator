@@ -8,12 +8,18 @@ import { whereId } from "@shared/lib/util";
 export const selectCurrentSignature = createSelector(
 	[selectCurrentSignatureGroup, selectCurrentSignatureId],
 	(group, signatureId) => {
-		if (!group) {
+		if (!group?.signatures?.length) {
 			return;
 		}
-		if (signatureId) {
-			return group.signatures.find(whereId(signatureId));
+
+		const [defaultSignature] = group.signatures;
+
+		if (!signatureId) {
+			return defaultSignature;
 		}
-		return group.signatures[0];
+
+		const signature = group.signatures.find(whereId(signatureId));
+
+		return signature ?? defaultSignature;
 	},
 );

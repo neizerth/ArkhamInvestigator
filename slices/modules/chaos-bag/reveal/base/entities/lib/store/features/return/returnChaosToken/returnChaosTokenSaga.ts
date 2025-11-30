@@ -1,4 +1,7 @@
-import { removeChaosTokens } from "@modules/chaos-bag/base/entities/lib";
+import {
+	removeChaosTokens,
+	updateChaosToken,
+} from "@modules/chaos-bag/base/entities/lib";
 import {
 	removeRevealedTokenId,
 	selectRevealedTokenById,
@@ -14,12 +17,19 @@ function* worker({ payload }: ReturnType<typeof returnChaosToken>) {
 	const token: ReturnType<typeof tokenSelector> = yield select(tokenSelector);
 
 	if (!token) {
+		console.error("Token not found", id);
 		return;
 	}
 
+	const { afterReveal, virtual } = token;
+
 	yield put(removeRevealedTokenId(payload));
 
-	if (canRemoveChaosToken(token)) {
+	const canRemove = canRemoveChaosToken(token);
+
+	console.log("canRemove", canRemove);
+
+	if (canRemove) {
 		yield put(
 			removeChaosTokens({
 				removeType: "single",
@@ -28,7 +38,21 @@ function* worker({ payload }: ReturnType<typeof returnChaosToken>) {
 		);
 	}
 
-	if (token.virtual) {
+	if (afterReveal?.type === "return" && afterReveal.count > 0) {
+		yield put(
+			updateChaosToken({
+				id,
+				data: {
+					afterReveal: {
+						type: "return",
+						count: afterReveal.count - 1,
+					},
+				},
+			}),
+		);
+	}
+
+	if (virtual) {
 		yield put(removeRevealedTokenId(payload));
 	}
 

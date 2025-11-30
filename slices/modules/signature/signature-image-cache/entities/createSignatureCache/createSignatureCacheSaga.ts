@@ -38,6 +38,10 @@ function* worker({ payload }: ReturnType<typeof createSignatureCache>) {
 		offset,
 	});
 
+	if (!layout) {
+		return;
+	}
+
 	const params = {
 		source,
 		image,

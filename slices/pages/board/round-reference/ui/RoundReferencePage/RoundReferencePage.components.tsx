@@ -1,8 +1,8 @@
 import { IconButton } from "@shared/ui";
 
+import { RoundReference } from "@modules/mechanics/rules/round-timing/widgets/round-reference";
 import { color, size } from "@shared/config";
 import { Row } from "@shared/ui";
-import { RoundReference } from "@widgets/game/reference";
 import { View } from "react-native";
 import styled from "styled-components/native";
 
@@ -19,7 +19,7 @@ export const Content: typeof View = styled(View)`
 `;
 
 export const Menu: typeof Row = styled(Row)`
-  justify-content: flex-end;
+  justify-content: space-between;
 `;
 
 export const Button: typeof IconButton = styled(IconButton).attrs({

@@ -31,9 +31,7 @@ function* worker({ payload }: ReturnType<typeof addSingleChaosToken>) {
 		return;
 	}
 
-	const token = createChaosBagToken({
-		type,
-	});
+	const token = createChaosBagToken(payload);
 
 	yield put(addChaosTokenInternal(token));
 

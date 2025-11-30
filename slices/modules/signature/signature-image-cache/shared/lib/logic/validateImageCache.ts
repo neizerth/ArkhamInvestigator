@@ -46,7 +46,13 @@ export const validateImageCache = async ({ cache, data }: Options) => {
 		return false;
 	}
 
-	const { crop } = getSignatureImageLayout(data);
+	const layout = getSignatureImageLayout(data);
+
+	if (!layout) {
+		return false;
+	}
+
+	const { crop } = layout;
 
 	if (!equalRounded(cache.offset, data.offset)) {
 		return false;

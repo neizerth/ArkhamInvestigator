@@ -18,7 +18,11 @@ export function getSignatureImageLayout({
 
 	const wI = image.width;
 	const hI = image.height;
-	const face = image.face;
+	const { face } = image;
+
+	if (!face || !wI || !hI) {
+		return;
+	}
 
 	const cxI = face.left + face.width / 2;
 	const cyI = face.top + face.height / 2;

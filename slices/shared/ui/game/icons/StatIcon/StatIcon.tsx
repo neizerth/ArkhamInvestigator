@@ -7,6 +7,7 @@ import { StyleSheet, type ViewStyle } from "react-native";
 import { iconMapping } from "../../../../config";
 import { Icon, type IconProps } from "../Icon";
 import { SkillIcon } from "../SkillIcon";
+import { getIconStyle, isSkill } from "./StatIcon.styles";
 
 export type StatIconProps = Omit<IconProps, "icon"> & {
 	statType: InvestigatorBoardNumericStat;
@@ -14,13 +15,11 @@ export type StatIconProps = Omit<IconProps, "icon"> & {
 	contentContainerStyle?: ViewStyle;
 };
 
-const skillTypes = ["willpower", "agility", "combat", "intellect"];
+export const StatIcon = ({ statType, ...props }: StatIconProps) => {
+	const styleSheet = StyleSheet.flatten(props.style);
 
-export const StatIcon = ({ statType, style, ...props }: StatIconProps) => {
-	const isSkill = skillTypes.includes(statType);
-
-	if (isSkill) {
-		const skillStyle = omit(["color"], StyleSheet.flatten(style));
+	if (isSkill(statType)) {
+		const skillStyle = omit(["color"], styleSheet);
 		return (
 			<SkillIcon
 				{...props}
@@ -29,5 +28,10 @@ export const StatIcon = ({ statType, style, ...props }: StatIconProps) => {
 			/>
 		);
 	}
-	return <Icon {...props} icon={iconMapping.stat.classic[statType]} />;
+
+	const icon = iconMapping.stat.classic[statType];
+
+	const iconStyle = getIconStyle({ statType, style: props.style });
+
+	return <Icon {...props} style={[props.style, iconStyle]} icon={icon} />;
 };

@@ -1,27 +1,24 @@
-import { openReferenceCard } from "@entities/reference-card";
 import {
 	selectChaosBagSkillCheckType,
 	selectChaosBagSkillValue,
 } from "@modules/chaos-bag/reveal/base/shared/lib";
-import { useAppDispatch, useAppSelector } from "@shared/lib";
-import { useCallback } from "react";
+import { useAppSelector } from "@shared/lib";
+import { isNumber } from "ramda-adjunct";
 import type { ViewProps } from "react-native";
 import * as C from "./LeftPanel.components";
 
 export type LeftPanelProps = ViewProps;
 
 export const LeftPanel = ({ ...props }: LeftPanelProps) => {
-	const dispatch = useAppDispatch();
 	const skillValue = useAppSelector(selectChaosBagSkillValue);
 	const skillType = useAppSelector(selectChaosBagSkillCheckType);
 
-	const openReference = useCallback(() => {
-		dispatch(openReferenceCard());
-	}, [dispatch]);
+	const showSkillValue = isNumber(skillValue);
+
 	return (
 		<C.Container {...props}>
 			<C.Content>
-				{typeof skillValue === "number" ? <C.SkillPicker /> : <C.Placeholder />}
+				{showSkillValue ? <C.SkillPicker /> : <C.Placeholder />}
 
 				{skillType && (
 					<C.SkillType>
@@ -29,9 +26,9 @@ export const LeftPanel = ({ ...props }: LeftPanelProps) => {
 					</C.SkillType>
 				)}
 
-				<C.ReferenceButton onPress={openReference}>
-					<C.ReferenceIcon icon="list2" />
-				</C.ReferenceButton>
+				{!skillType && !showSkillValue && <C.SetType />}
+
+				<C.Menu />
 			</C.Content>
 		</C.Container>
 	);

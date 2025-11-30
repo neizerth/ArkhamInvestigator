@@ -3,13 +3,11 @@ import { getSignatureImageUrl } from "@modules/signature/base/shared/api";
 import {
 	getBoardStats,
 	selectCurrentSkinId,
-	useAppDispatch,
 	useAppSelector,
 } from "@shared/lib";
 import { selectCurrentSignature } from "../../../lib";
 import * as C from "./InvestigatorDescription.components";
 export const InvestigatorDescription = () => {
-	const dispatch = useAppDispatch();
 	const signature = useAppSelector(selectCurrentSignature);
 	const skinId = useAppSelector(selectCurrentSkinId);
 	const trackXP = useAppSelector(selectTrackXP);

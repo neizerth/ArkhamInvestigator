@@ -4,18 +4,18 @@ import { ValueSection, type ValueSectionProps } from "@shared/ui";
 import { memo } from "react";
 import { useTranslation } from "react-i18next";
 import {
-	SignaturePreviewSelectMemo as SignaturePreviewSelect,
+	SignaturePreviewSelect,
 	type SignaturePreviewSelectProps,
 } from "../SignaturePreviewSelect";
 
-export type SignatureDetailSelectProps = Omit<ValueSectionProps, "value"> &
-	SignaturePreviewSelectProps & {
+export type SignatureDetailSelectProps<T> = Omit<ValueSectionProps, "value"> &
+	SignaturePreviewSelectProps<T> & {
 		preview?: boolean;
 		disabled?: string[];
 		defaultLabel?: string;
 	};
 
-export const SignatureDetailSelect = ({
+export function SignatureDetailSelect<T>({
 	data,
 	title,
 	onChange,
@@ -23,7 +23,7 @@ export const SignatureDetailSelect = ({
 	defaultLabel: defaultLabelProp,
 	preview = false,
 	...props
-}: SignatureDetailSelectProps) => {
+}: SignatureDetailSelectProps<T>) {
 	const { t } = useTranslation();
 	const { length } = data;
 
@@ -49,6 +49,6 @@ export const SignatureDetailSelect = ({
 			/>
 		</ValueSection>
 	);
-};
+}
 
 export const SignatureDetailSelectMemo = memo(SignatureDetailSelect);

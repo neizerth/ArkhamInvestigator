@@ -1,7 +1,7 @@
 import { promptConfirmed } from "../store";
 
 type Options = {
-	actionId: string;
+	actionId?: string;
 	modalId?: string;
 };
 
@@ -14,9 +14,13 @@ export const createPromptModalActionFilter =
 
 		const { payload } = action;
 
-		if (modalId && payload.modalId !== modalId) {
+		if (!modalId && !actionId) {
 			return false;
 		}
 
-		return actionId === payload.modalAction?.id;
+		if (actionId && payload.modalAction?.id === actionId) {
+			return true;
+		}
+
+		return modalId === payload.modalId;
 	};

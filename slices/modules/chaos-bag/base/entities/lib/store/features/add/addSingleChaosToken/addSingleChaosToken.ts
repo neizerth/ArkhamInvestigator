@@ -3,14 +3,16 @@ import { chaosBagPrefix } from "@modules/chaos-bag/base/shared/config";
 import type {
 	ChaosBagChangeSource,
 	ChaosBagToken,
+	ChaosBagTokenData,
 	ChaosTokenType,
 } from "@modules/chaos-bag/base/shared/model";
 import { createAction } from "@reduxjs/toolkit";
 
-export type AddChaosTokenPayload = Partial<PropsWithBoardId> & {
-	type: ChaosTokenType;
-	source?: ChaosBagChangeSource;
-};
+export type AddChaosTokenPayload = Partial<PropsWithBoardId> &
+	Omit<ChaosBagTokenData, "type"> & {
+		type: ChaosTokenType;
+		source?: ChaosBagChangeSource;
+	};
 
 export const addSingleChaosToken = createAction<AddChaosTokenPayload>(
 	`${chaosBagPrefix}/addToken`,

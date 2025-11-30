@@ -1,27 +1,32 @@
 import {
+	endTurnToAllBoards,
 	giveUpkeepResourcesToAllBoards,
 	placeDoomOnAgenda,
 	resetUpkeepAllInvestigatorActions,
-} from "@modules/mechanics/phase/entities/lib";
+} from "@modules/mechanics/phase/features/lib";
+import type { TimingPhaseStepSpecialType } from "@modules/mechanics/rules/round-timing/shared/model";
+import type { Action } from "@reduxjs/toolkit";
 import { put, takeEvery } from "redux-saga/effects";
 import { processTimingWizardStep } from "./processTimingWizardStep";
 
+const actionCreatorMap: Record<TimingPhaseStepSpecialType, () => Action> = {
+	"mythos-doom": placeDoomOnAgenda,
+	"upkeep-resource": giveUpkeepResourcesToAllBoards,
+	"reset-actions": resetUpkeepAllInvestigatorActions,
+	"turn-end": endTurnToAllBoards,
+};
+
 function* worker({ payload }: ReturnType<typeof processTimingWizardStep>) {
-	const { step } = payload;
+	const { specialType } = payload.step;
 
-	if (step.specialType === "mythos-doom") {
-		yield put(placeDoomOnAgenda());
+	if (!specialType) {
 		return;
 	}
 
-	if (step.specialType === "upkeep-resource") {
-		yield put(giveUpkeepResourcesToAllBoards());
-		return;
-	}
+	const actionCreator = actionCreatorMap[specialType];
 
-	if (step.specialType === "reset-actions") {
-		yield put(resetUpkeepAllInvestigatorActions());
-		return;
+	if (actionCreator) {
+		yield put(actionCreator());
 	}
 }
 

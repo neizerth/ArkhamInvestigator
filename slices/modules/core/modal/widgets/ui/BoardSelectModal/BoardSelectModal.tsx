@@ -1,18 +1,10 @@
-import { selectInvestigatorBoards } from "@modules/board/base/shared/lib";
 import { setModalValue } from "@modules/core/modal/shared/base/lib";
 import type { BaseModalAction } from "@modules/core/modal/shared/base/model";
 import type { FactionModalProps } from "@modules/core/modal/shared/base/ui";
 import type { SignatureDetailItem } from "@modules/signature/base/shared/model";
-import {
-	propIncludes,
-	useAppDispatch,
-	useAppSelector,
-	whereId,
-} from "@shared/lib";
-import { prop } from "ramda";
-import { useCallback, useMemo, useState } from "react";
+import { useAppDispatch } from "@shared/lib";
+import { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { getBoardDetailItem } from "../../../entities/board-select/lib";
 import type { BoardSelectModalData } from "../../../entities/board-select/model";
 import * as C from "./BoardSelectModal.components";
 
@@ -21,43 +13,35 @@ export type BoardSelectModalProps<
 	D extends BoardSelectModalData<A>,
 > = FactionModalProps<A, D> & {
 	value?: number;
+	onChange?: (item: SignatureDetailItem<number>) => void;
 };
 
 export function BoardSelectModal<
 	A extends BaseModalAction,
 	D extends BoardSelectModalData<A>,
->(props: BoardSelectModalProps<A, D>) {
+>({ value, onChange: onChangeProp, ...props }: BoardSelectModalProps<A, D>) {
 	const dispatch = useAppDispatch();
 	const { t } = useTranslation();
-	const { data, value } = props;
+	const { data } = props;
 	const { boardIds, disabledBoardIds = [] } = data;
 	const text = data.text && t(data.text);
 
-	const boards = useAppSelector(selectInvestigatorBoards);
+	const defaultValue = value ?? boardIds[0];
 
-	const defaultId = boards.find(whereId(value))?.signatureGroupId;
-
-	const [selectedId, setSelectedId] = useState(defaultId);
-
-	const detailItems = useMemo(() => {
-		return boards.filter(propIncludes("id", boardIds)).map(getBoardDetailItem);
-	}, [boards, boardIds]);
-
-	const disabled = useMemo(() => {
-		return boards
-			.filter(propIncludes("id", disabledBoardIds))
-			.map(prop("signatureGroupId"));
-	}, [boards, disabledBoardIds]);
+	const [selectedId, setSelectedId] = useState<number | undefined>(
+		defaultValue,
+	);
 
 	const onChange = useCallback(
-		(item: SignatureDetailItem | null) => {
+		(item: SignatureDetailItem<number> | null) => {
 			if (!item) {
 				return;
 			}
-			setSelectedId(item.id);
+			onChangeProp?.(item);
+			setSelectedId(item.data);
 			dispatch(setModalValue(item.data));
 		},
-		[dispatch],
+		[dispatch, onChangeProp],
 	);
 
 	return (
@@ -65,11 +49,12 @@ export function BoardSelectModal<
 			{text && <C.Text value={text} />}
 			<C.Select
 				title={t`Investigators`}
-				data={detailItems}
+				data={boardIds}
 				size={75}
-				selectedId={selectedId}
-				disabled={disabled}
+				value={selectedId}
+				disabled={disabledBoardIds}
 				onChange={onChange}
+				preview
 			/>
 		</C.Container>
 	);

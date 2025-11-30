@@ -4,6 +4,7 @@ export const defaultChaosTokenValues = {
 	frost: -1,
 	bless: 2,
 	curse: -2,
+	moon: 0,
 	autoFail: "fail" as const,
 };
 

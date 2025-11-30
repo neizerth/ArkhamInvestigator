@@ -3,22 +3,22 @@ import { useTranslation } from "react-i18next";
 import type { ViewProps } from "react-native-svg/lib/typescript/fabric/utils";
 import * as C from "./SignatureDetailList.components";
 
-export type SignatureDetailListProps = ViewProps & {
-	data: Item[];
+export type SignatureDetailListProps<T> = ViewProps & {
+	data: Item<T>[];
 	disabled?: string[];
 	size: number;
 	selectedId?: string | null;
-	onChange: (item: Item | null, index?: number) => void;
+	onChange: (item: Item<T> | null, index?: number) => void;
 };
 
-export const SignatureDetailList = ({
+export function SignatureDetailList<T>({
 	data,
 	disabled,
 	size,
 	selectedId,
 	onChange,
 	...props
-}: SignatureDetailListProps) => {
+}: SignatureDetailListProps<T>) {
 	const { t } = useTranslation();
 
 	return (
@@ -39,4 +39,4 @@ export const SignatureDetailList = ({
 			))}
 		</C.Container>
 	);
-};
+}

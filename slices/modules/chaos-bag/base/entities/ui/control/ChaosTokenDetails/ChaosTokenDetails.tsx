@@ -9,8 +9,7 @@ import {
 	removeChaosTokens,
 	selectChaosTokenCountByType,
 } from "@modules/chaos-bag/base/entities/lib";
-import { chaosToken } from "@modules/chaos-bag/base/shared/config";
-import { selectUnlimitedChaosTokens } from "@modules/chaos-bag/base/shared/lib";
+import { selectMaxChaosTokenCount } from "@modules/chaos-bag/base/shared/lib";
 import type { ChaosTokenType } from "@modules/chaos-bag/base/shared/model";
 import * as C from "./ChaosTokenDetails.components";
 
@@ -18,6 +17,7 @@ export type ChaosTokenDetailsProps = ViewProps & {
 	type: ChaosTokenType;
 	preview?: boolean;
 	inputStyle?: ViewProps["style"];
+	incrementLongPressEnabled?: boolean;
 };
 
 const MAX_PREVIEW_COUNT = 4;
@@ -26,12 +26,15 @@ export const ChaosTokenDetails = ({
 	type,
 	inputStyle,
 	preview,
+	incrementLongPressEnabled = true,
 	...props
 }: ChaosTokenDetailsProps) => {
 	const dispatch = useAppDispatch();
 	const count = useAppSelector(selectChaosTokenCountByType(type));
-	const isUnlimited = useAppSelector(selectUnlimitedChaosTokens);
-	const max = isUnlimited ? 99 : chaosToken.count[type];
+	const max = useAppSelector(selectMaxChaosTokenCount(type));
+
+	const canAdd = count < max;
+	const canRemove = count > 0;
 
 	const clear = useCallback(() => {
 		dispatch(
@@ -44,7 +47,7 @@ export const ChaosTokenDetails = ({
 	}, [dispatch, type]);
 
 	const onDecrement = useCallback(() => {
-		if (count <= 0) {
+		if (!canRemove) {
 			return false;
 		}
 		dispatch(
@@ -54,9 +57,10 @@ export const ChaosTokenDetails = ({
 				type,
 			}),
 		);
-	}, [dispatch, count, type]);
+	}, [dispatch, canRemove, type]);
+
 	const onIncrement = useCallback(() => {
-		if (count >= max) {
+		if (!canAdd) {
 			return false;
 		}
 
@@ -66,7 +70,22 @@ export const ChaosTokenDetails = ({
 				type,
 			}),
 		);
-	}, [dispatch, max, count, type]);
+	}, [dispatch, canAdd, type]);
+
+	const canIncrementLongPress = incrementLongPressEnabled && canAdd;
+
+	const onIncrementLongPress = useCallback(() => {
+		if (!canIncrementLongPress) {
+			return false;
+		}
+		dispatch(
+			addSingleChaosToken({
+				boardId: "current",
+				type,
+				sealed: true,
+			}),
+		);
+	}, [dispatch, type, canIncrementLongPress]);
 
 	const previewTokens = count > MAX_PREVIEW_COUNT;
 
@@ -95,6 +114,8 @@ export const ChaosTokenDetails = ({
 					max={max}
 					onDecrement={onDecrement}
 					onIncrement={onIncrement}
+					onIncrementLongPress={onIncrementLongPress}
+					onDecrementLongPress={clear}
 					onLongPress={clear}
 					showValue={!preview}
 				/>

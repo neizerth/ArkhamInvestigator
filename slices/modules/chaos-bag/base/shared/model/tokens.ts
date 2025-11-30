@@ -1,11 +1,17 @@
 import type { ChaosTokenValue } from "@modules/chaos-bag/value/shared/model";
 
-export type ChaosTokenType = BaseChaosTokenType | SpecialChaosTokenType;
+export type ChaosTokenType =
+	| BaseChaosTokenType
+	| SpecialChaosTokenType
+	| CustomChaosTokenType
+	| "custom";
 
 export type BaseChaosTokenType =
 	| NumericChaosTokenType
 	| BaseSymbolicChaosTokenType
 	| SpecialSymbolicChaosTokenType;
+
+export type CustomChaosTokenType = "moon";
 
 export type NumericChaosTokenType =
 	| "+1"
@@ -22,7 +28,8 @@ export type NumericChaosTokenType =
 export type SymbolicChaosTokenType =
 	| BaseSymbolicChaosTokenType
 	| SpecialSymbolicChaosTokenType
-	| SpecialChaosTokenType;
+	| SpecialChaosTokenType
+	| MoonChaosTokenType;
 
 export type BaseSymbolicChaosTokenType =
 	| "skull"
@@ -38,12 +45,40 @@ export type FrostTokenType = "frost";
 
 export type BlessCurseChaosTokenType = "bless" | "curse";
 
+export type MoonChaosTokenType = "moon";
+
 export type ChaosTokenCount = Partial<Record<ChaosTokenType, number>>;
 
 export type ChaosBagTokenData = {
-	type: ChaosTokenType;
+	revealPriority?: number;
 	sealed?: boolean;
-};
+	sealData?: ChaosBagTokenSealData | null;
+	afterReveal?: {
+		type: "return";
+		count: number;
+	};
+} & (
+	| {
+			type: ChaosTokenType;
+	  }
+	| {
+			type: "custom";
+	  }
+);
+
+export type ChaosBagTokenSealData = {
+	title?: string;
+	icon?: string;
+} & (
+	| {
+			type: "investigator";
+			boardId: number;
+	  }
+	| {
+			type: "enemy";
+			code?: string;
+	  }
+);
 
 export type ChaosBagToken = ChaosBagTokenData & {
 	id: string;

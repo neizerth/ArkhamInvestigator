@@ -1,5 +1,6 @@
-import { revealChaosTokens } from "@modules/chaos-bag/reveal/base/entities/lib";
-import { useAppDispatch } from "@shared/lib";
+import { revealRandomChaosTokens } from "@modules/chaos-bag/reveal/base/entities/lib";
+import { selectRevealedTokensCount } from "@modules/chaos-bag/reveal/base/shared/lib";
+import { useAppDispatch, useAppSelector } from "@shared/lib";
 import { useCallback, useContext } from "react";
 import type { ViewProps } from "react-native";
 import { ChaosTokenRevealModalContext as Context } from "../../lib";
@@ -22,20 +23,25 @@ export const ChaosTokenOneMoreRevealLoader = (
 const LoaderView = (props: ChaosTokenOneMoreRevealLoaderProps) => {
 	const dispatch = useAppDispatch();
 	const { setOneMoreLoading } = useContext(Context);
+	const revealedCount = useAppSelector(selectRevealedTokensCount);
 
 	const onPress = useCallback(() => {
 		setOneMoreLoading(false);
 	}, [setOneMoreLoading]);
 
 	const onLoad = useCallback(() => {
+		if (revealedCount > 0) {
+			return;
+		}
+
 		dispatch(
-			revealChaosTokens({
+			revealRandomChaosTokens({
 				boardId: "current",
 				count: 1,
 			}),
 		);
 		setOneMoreLoading(false);
-	}, [dispatch, setOneMoreLoading]);
+	}, [dispatch, setOneMoreLoading, revealedCount]);
 
 	return (
 		<C.Container onPress={onPress} {...props}>

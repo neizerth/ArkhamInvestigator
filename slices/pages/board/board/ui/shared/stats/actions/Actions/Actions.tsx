@@ -1,6 +1,6 @@
 import { selectHasBoardAbilities } from "@modules/board/abilities/shared/lib";
 import { ArtworksFragment } from "@modules/core/theme/shared/ui";
-import { makeAction } from "@modules/mechanics/phase/entities/lib";
+import { makeAction } from "@modules/mechanics/phase/features/lib";
 import { useAppDispatch, useAppSelector } from "@shared/lib";
 import type { ImageBackgroundProps } from "@shared/ui";
 import { range } from "ramda";
@@ -31,7 +31,11 @@ export const Actions = ({ ...props }: ActionsProps) => {
 	});
 
 	const onPress = useCallback(() => {
-		dispatch(makeAction());
+		dispatch(
+			makeAction({
+				boardId: "current",
+			}),
+		);
 	}, [dispatch]);
 
 	const showDiff = baseValue !== initialValue;

@@ -21,7 +21,7 @@ export const getChaosTokenCountCanBeAdded = ({
 }: GetChaosTokenCountCanBeAddedOptions) => {
 	const max = unlimitedChaosTokens
 		? MAX_UNLIMITED_TOKEN_COUNT
-		: chaosToken.count[type];
+		: (chaosToken.count[type] ?? 0);
 
 	const currentCount = getChaosTokenCountByType({
 		tokenCount,

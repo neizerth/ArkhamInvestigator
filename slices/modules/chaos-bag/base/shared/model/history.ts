@@ -7,6 +7,7 @@ import type { InvestigatorBoardNumericStat } from "@shared/model";
 
 export type ChaosBagHistoryItemData = {
 	boardId: number;
+	turnId?: string | null;
 	title?: string | null;
 	skillCheckType?: InvestigatorBoardNumericStat | null;
 	skillCheckValue?: number | null;

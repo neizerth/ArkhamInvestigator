@@ -81,8 +81,8 @@
 	"board.help.pins.swipe": "고정된 계산을 아래로 스와이프하여 해당 계산을 만든 페이지로 이동합니다.",
 	"board.help.longPress.investigatorSelect": "2명 이상의 조사자가 함께 플레이하는 경우, 작은 조사자 카드를 길게 누르면 모든 조사자의 능력 값들을 볼 수 있습니다.",
 
-	"upkeep.investigator.getResources_one": "{{name}} 조사자는 자원 {{count}}개를 얻었습니다.",
-	"upkeep.investigator.getResources_other": "{{name}} 조사자는 자원 {{count}}개를 얻었습니다.",
+	"upkeep.resources.get_one": "{{name}} 조사자는 자원 {{count}}개를 얻었습니다.",
+	"upkeep.resources.get_other": "{{name}} 조사자는 자원 {{count}}개를 얻었습니다.",
 
 	"clues.spent_one": "{{name}} 조사자는 단서 {{count}}개를 소비했습니다.",
 	"clues.spent_other": "{{name}} 조사자는 단서 {{count}}개를 소비했습니다.",

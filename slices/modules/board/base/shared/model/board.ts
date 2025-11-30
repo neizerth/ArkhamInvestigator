@@ -32,6 +32,7 @@ export type InvestigatorBoard = {
 	index: number;
 	signatureGroupId: string;
 	skinId?: string;
+	turnId?: string;
 
 	investigator: InvestigatorSignature;
 	image: InvestigatorBoardImage;

@@ -56,4 +56,17 @@ export const InvesigatorCode = {
 	SisterMary: "07001",
 	KohakuNarukami: "10012",
 	VincentLee: "09004",
+	LukeRobinson: "06004",
+	AgathaCrane: {
+		seeker: "11007",
+		mystic: "11008",
+	},
+	YukiYagami: "zgoo_00001",
+	LuciaDeveraux: "zoc_31010",
+	ValentinoRivas: "05048",
+	GavriellaMizrah: "05046",
+	JeromeDavids: "05047",
+	KateWinthrop: {
+		darkMatter: "zdms_00001",
+	},
 };

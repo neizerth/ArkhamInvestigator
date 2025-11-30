@@ -11,9 +11,10 @@ const filterAction = (action: unknown) => {
 	if (!boardHistoryItemAdded.match(action)) {
 		return false;
 	}
-	const { code, item } = action.payload;
+	const { item, board } = action.payload;
+	const { id } = board.investigator;
 
-	if (code !== InvesigatorCode.HankSamson) {
+	if (id !== InvesigatorCode.HankSamson) {
 		return false;
 	}
 

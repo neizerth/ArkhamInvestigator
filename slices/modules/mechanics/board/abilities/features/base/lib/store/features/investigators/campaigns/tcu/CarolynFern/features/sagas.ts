@@ -1,12 +1,8 @@
 import { fork } from "redux-saga/effects";
-import { CarolynFernCancelElderSignModalSaga } from "./cancelElderSignModal/cancelElderSignBoardModalSaga";
-import { CarolynFernHandleHealModalActionSaga } from "./handleHealModalAction/handleHealBoardModalActionSaga";
-import { CarolynFernHealHorrorAbilitySaga } from "./healHorror/healHorrorAbilitySaga";
-import { CarolynFernOpenElderSignModalSaga } from "./openElderSignModal/openElderSignModalSaga";
+import { CarolynFernElderSignAbilitySaga } from "./elderSign/sagas";
+import { CarolynFernReactionAbilitySaga } from "./reaction/sagas";
 
 export function* CarolynFernAbilitySaga() {
-	yield fork(CarolynFernCancelElderSignModalSaga);
-	yield fork(CarolynFernHandleHealModalActionSaga);
-	yield fork(CarolynFernHealHorrorAbilitySaga);
-	yield fork(CarolynFernOpenElderSignModalSaga);
+	yield fork(CarolynFernElderSignAbilitySaga);
+	yield fork(CarolynFernReactionAbilitySaga);
 }

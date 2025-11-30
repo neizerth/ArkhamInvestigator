@@ -7,7 +7,7 @@ import type { PayloadAction } from "@reduxjs/toolkit";
 import { put, takeEvery } from "redux-saga/effects";
 import {
 	type RemoveChaosTokensPayload,
-	procesChaosTokenRemove,
+	processChaosTokenRemove,
 } from "../../removeChaosTokens";
 import { confirmRemoveModalActionId } from "../config";
 
@@ -21,7 +21,7 @@ type Action = PayloadAction<ModalActionProcessedPayload<ModalAction>>;
 function* worker({ payload }: Action) {
 	const { data } = payload.modalAction;
 
-	yield put(procesChaosTokenRemove(data));
+	yield put(processChaosTokenRemove(data));
 }
 
 export function* handleRemoveModalActionSaga() {

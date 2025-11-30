@@ -18,10 +18,12 @@ import v16 from "./2025-06-01T17-10-init-round-reference";
 import v17 from "./2025-09-14T19-00-refactor-signatures";
 import v18 from "./2025-09-17T22-16-clear-boards";
 import v19 from "./2025-09-25T06-56-28-init-picker-animation";
-import v20 from "./2025-11-04T02-11-30-set-show-clues-default-value";
-import v21 from "./2025-38-06T01-38-39-set-show-resources-default-value";
-import v22 from "./2025-42-07T03-42-56-move-picker-slice-values";
-import v23 from "./2025-56-31T09-56-56-set-android-assets-url";
+import v20 from "./2025-10-04T02-11-30-set-show-clues-default-value";
+import v21 from "./2025-10-06T01-38-39-set-show-resources-default-value";
+import v22 from "./2025-10-07T03-42-56-move-picker-slice-values";
+import v23 from "./2025-10-31T09-56-56-set-android-assets-url";
+import v24 from "./2025-11-04T08-21-08-add-sealed-contents";
+import v25 from "./2025-11-10T10-25-18-set-default-skill-check-modifier";
 
 export const persistConfigMigrations = {
 	0: v0,
@@ -48,4 +50,6 @@ export const persistConfigMigrations = {
 	21: v21,
 	22: v22,
 	23: v23,
+	24: v24,
+	25: v25,
 };

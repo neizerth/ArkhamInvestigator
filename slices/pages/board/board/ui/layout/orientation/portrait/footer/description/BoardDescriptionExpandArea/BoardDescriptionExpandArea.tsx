@@ -30,6 +30,10 @@ export const BoardDescriptionExpandArea = (
 		dispatch(goToPage(routes.roundReference));
 	}, [dispatch]);
 
+	const openSkillTestReference = useCallback(() => {
+		dispatch(goToPage(routes.skillTestReference));
+	}, [dispatch]);
+
 	const swipeUp = useSwipe({
 		direction: "up",
 		onSwipe: show,
@@ -40,11 +44,16 @@ export const BoardDescriptionExpandArea = (
 		onSwipe: openReference,
 	});
 
+	const swipeLeft = useSwipe({
+		direction: "left",
+		onSwipe: openSkillTestReference,
+	});
+
 	const press = useTap({
 		onTap: show,
 	});
 
-	const gesture = Gesture.Exclusive(swipeUp, swipeRight, press);
+	const gesture = Gesture.Exclusive(swipeUp, swipeRight, swipeLeft, press);
 	return (
 		<GestureDetector gesture={gesture}>
 			<C.Area {...props} />

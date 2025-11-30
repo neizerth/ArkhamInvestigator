@@ -27,7 +27,5 @@ export const createReturnToChaosTokenRevealModalSaga = ({
 		yield takeEvery(filterAction, worker);
 	}
 
-	watcher.name = name;
-
 	return watcher;
 };

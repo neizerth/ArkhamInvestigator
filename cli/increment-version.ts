@@ -8,4 +8,4 @@ data.versionCode++;
 
 writeFileSync(file, JSON.stringify(data, null, 2));
 
-console.log("new app version:", data.version);
+console.log("new app version:", data.versionCode);

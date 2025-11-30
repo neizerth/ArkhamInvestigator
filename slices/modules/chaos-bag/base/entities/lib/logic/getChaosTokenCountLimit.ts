@@ -11,5 +11,5 @@ type Options = {
 export const getChaosTokenLimit = ({ type, unlimitedChaosTokens }: Options) => {
 	return unlimitedChaosTokens
 		? MAX_UNLIMITED_TOKEN_COUNT
-		: chaosToken.count[type];
+		: (chaosToken.count[type] ?? 0);
 };

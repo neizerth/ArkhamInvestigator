@@ -7,6 +7,7 @@ export type ChaosTokenInputProps = NumericControlProps & {
 	onLongPress?: () => void;
 	onPress?: () => void;
 	showValue?: boolean;
+	sealedCount?: number;
 };
 
 export const ChaosTokenInput = ({
@@ -20,7 +21,9 @@ export const ChaosTokenInput = ({
 		onDecrement,
 		onLongPress = onDecrement,
 		onPress = onIncrement,
+		sealedCount = 0,
 	} = props;
+
 	return (
 		<C.Control {...props}>
 			<C.Content>
@@ -30,7 +33,7 @@ export const ChaosTokenInput = ({
 					onLongPress={onLongPress}
 					activeOpacity={0.8}
 				>
-					<C.Token type={type} />
+					<C.Token type={type} sealedCount={sealedCount} />
 				</C.TokenButton>
 			</C.Content>
 		</C.Control>

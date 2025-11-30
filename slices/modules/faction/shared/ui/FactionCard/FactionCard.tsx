@@ -108,7 +108,7 @@ export const FactionCard = ({
 									>
 										<C.OKBackground
 											faction={faction}
-											width={containerSize?.width || 300}
+											width={containerSize?.width || 500}
 											height={55}
 										/>
 									</C.PrimaryAction>

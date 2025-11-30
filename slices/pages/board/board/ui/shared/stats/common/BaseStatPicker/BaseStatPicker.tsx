@@ -41,14 +41,15 @@ export const BaseStatPicker = ({
 	const initialValue = useAppSelector(selectCurrentInitialPropValue(statType));
 	const showAdditionalInfo = useAppSelector(selectShowAdditionalInformation);
 
+	const diff = baseValue - initialValue;
 	const pickerData = useMemo(() => {
 		if (defaultData) {
 			return defaultData;
 		}
-		return range(-initialValue, 10);
-	}, [defaultData, initialValue]);
-
-	const diff = baseValue - initialValue;
+		const maxValue = Math.max(diff + 1, 9);
+		const minValue = Math.min(-initialValue, diff);
+		return range(minValue, maxValue);
+	}, [defaultData, initialValue, diff]);
 
 	const dispatch = useAppDispatch();
 

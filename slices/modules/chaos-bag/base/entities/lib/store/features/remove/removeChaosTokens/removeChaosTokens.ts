@@ -29,7 +29,7 @@ export const removeChaosTokens = createAction<RemoveChaosTokensPayload>(
 	`${chaosBagPrefix}/removeChaosTokens`,
 );
 
-export const procesChaosTokenRemove = createAction<RemoveChaosTokensPayload>(
+export const processChaosTokenRemove = createAction<RemoveChaosTokensPayload>(
 	`${chaosBagPrefix}/procesChaosTokenRemove`,
 );
 

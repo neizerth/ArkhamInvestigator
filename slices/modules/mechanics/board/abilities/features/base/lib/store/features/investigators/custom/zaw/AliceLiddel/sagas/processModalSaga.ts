@@ -1,19 +1,15 @@
-import { boardSelectModalConfirmed } from "@modules/core/modal/entities/board-select/lib";
+import {
+	type boardSelectModalConfirmed,
+	createConfirmBoardSelectModalFilter,
+} from "@modules/core/modal/entities/board-select/lib";
 import { AbilityCode } from "@modules/mechanics/board/abilities/shared/config";
 import { put, takeEvery } from "redux-saga/effects";
 import { changeSkillValueToBaseIntellect } from "../changeSkillValueToBaseIntellect";
+import { modalId } from "../config";
 
-const abilityId = AbilityCode.AliceLiddell;
-
-const filterAction = (action: unknown) => {
-	if (!boardSelectModalConfirmed.match(action)) {
-		return false;
-	}
-
-	const { payload } = action;
-
-	return payload.modalAction.id === AbilityCode.AliceLiddell;
-};
+const filterAction = createConfirmBoardSelectModalFilter({
+	modalId,
+});
 
 function* worker({ payload }: ReturnType<typeof boardSelectModalConfirmed>) {
 	yield put(

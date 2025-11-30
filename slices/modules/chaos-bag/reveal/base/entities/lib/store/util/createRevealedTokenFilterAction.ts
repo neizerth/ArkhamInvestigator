@@ -3,7 +3,7 @@ import { prop } from "ramda";
 import { chaosTokensRevealed } from "../features";
 
 type Options = {
-	code: string;
+	code?: string;
 	tokens: ChaosTokenType[];
 };
 
@@ -14,7 +14,7 @@ export const createRevealedTokenFilterAction = ({ code, tokens }: Options) => {
 		}
 		const { payload } = action;
 
-		if (code !== payload.code) {
+		if (code && code !== payload.code) {
 			return false;
 		}
 

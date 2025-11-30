@@ -1,7 +1,7 @@
 import type { SkillCheckItem } from "@modules/board/skill-check/shared/model";
 import { createSlice } from "@reduxjs/toolkit";
 import type { InvestigatorBoardNumericStat } from "@shared/model";
-import { identity } from "ramda";
+import { identity, omit } from "ramda";
 import { createSliceState } from "redux-toolkit-helpers";
 import { chaosBagRevealPrefix } from "../../config";
 import type { RevealedChaosBagToken } from "../../model";
@@ -10,6 +10,7 @@ import * as reducers from "./reducers";
 export type ChaosBagRevealState = {
 	revealedTokens: RevealedChaosBagToken[];
 	allRevealedTokens: RevealedChaosBagToken[];
+	turnId: string | null;
 	skillCheckType: InvestigatorBoardNumericStat | null;
 	skillCheckTitle: string | null;
 	skillValue: number | null;
@@ -20,9 +21,12 @@ export type ChaosBagRevealState = {
 	result: number | null;
 	succeedBy: number | null;
 	failed: boolean | null;
+	skillCheckModifier: number;
+	skillCheckData: unknown;
 };
 
 const initialState: ChaosBagRevealState = {
+	turnId: null,
 	revealedTokens: [],
 	allRevealedTokens: [],
 	skillCheckExpression: [],
@@ -34,6 +38,8 @@ const initialState: ChaosBagRevealState = {
 	result: null,
 	succeedBy: null,
 	failed: null,
+	skillCheckData: null,
+	skillCheckModifier: 0,
 };
 
 const state = createSliceState(initialState);
@@ -42,8 +48,9 @@ export const chaosBagReveal = createSlice({
 	name: chaosBagRevealPrefix,
 	...state,
 	reducers: {
-		...state.reducers,
+		...omit(["setSkillCheckModifier"], state.reducers),
 		...reducers,
+		setSkillCheckModifierInternal: state.reducers.setSkillCheckModifier,
 	},
 	selectors: {
 		...state.selectors,
@@ -62,6 +69,7 @@ export const {
 	setFailed: setChaosBagSkillCheckFailed,
 	setRevealedTokens,
 	setAllRevealedTokens,
+	setSkillCheckData: setChaosBagSkillCheckData,
 
 	addRevealedTokens,
 	removeRevealedTokenId,
@@ -72,6 +80,7 @@ export const {
 	updateRevealedTokenInternal,
 	syncRevealedValuesWithContents,
 	setCustomChaosBagRevealResult,
+	setSkillCheckModifierInternal,
 } = chaosBagReveal.actions;
 
 export const {
@@ -87,6 +96,8 @@ export const {
 	selectSucceedBy: selectChaosBagSucceedBy,
 	selectFailed: selectChaosBagSkillCheckFailed,
 	selectChaosBagReveal,
+	selectSkillCheckData: selectChaosBagSkillCheckData,
+	selectSkillCheckModifier,
 } = chaosBagReveal.selectors;
 
 export default chaosBagReveal.reducer;

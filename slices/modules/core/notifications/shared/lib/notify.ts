@@ -7,7 +7,6 @@ export type NotifyOptions = ShowToastOptions & {
 };
 export const notify = (options: NotifyOptions) => {
 	const message = i18next.t(options.message, options.data);
-
 	showToast({
 		...options,
 		message,

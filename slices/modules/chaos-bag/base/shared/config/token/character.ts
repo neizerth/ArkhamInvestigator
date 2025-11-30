@@ -22,6 +22,7 @@ export const symbolicChaosTokenCharacters: Record<
 	bless: "[bless]",
 	curse: "[curse]",
 	frost: "[frost]",
+	moon: "[moon]",
 };
 
 export const chaosTokenCharacters: Record<ChaosTokenType, string> = {

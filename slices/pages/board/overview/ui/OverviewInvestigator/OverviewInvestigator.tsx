@@ -11,7 +11,7 @@ import {
 	selectBoardHorror,
 	selectBoardIsInactive,
 } from "@modules/mechanics/board/base/entities/lib";
-import { makeAction } from "@modules/mechanics/phase/entities/lib";
+import { makeAction } from "@modules/mechanics/phase/features/lib";
 import { useAppDispatch, useAppSelector } from "@shared/lib";
 import type { InvestigatorBoardNumericStat } from "@shared/model";
 import { range } from "ramda";
@@ -67,7 +67,7 @@ export const OverviewInvestigator = ({
 	}, [maxSanity, showWounds, minValue, allowNegativeValues]);
 
 	const onActionsPress = useCallback(() => {
-		dispatch(makeAction(boardId));
+		dispatch(makeAction({ boardId }));
 	}, [dispatch, boardId]);
 
 	const minSanity = sanityData[0];
@@ -76,8 +76,6 @@ export const OverviewInvestigator = ({
 		(stat: "health" | "sanity") =>
 			({ value = 0 }: PickerChangeEvent) => {
 				const base = baseValue[stat];
-				console.log("base", base);
-				console.log("value", value);
 				dispatch(
 					setBoardActualPropValue({
 						boardId,

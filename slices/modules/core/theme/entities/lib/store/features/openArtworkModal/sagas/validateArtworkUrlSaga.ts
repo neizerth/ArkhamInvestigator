@@ -31,8 +31,6 @@ function* worker({ payload }: ReturnType<typeof promptConfirmed>) {
 		archiveUrl,
 	);
 
-	console.log("response", response);
-
 	if (!response) {
 		yield put(setModalError("modal.artwork.error.invalidUrl"));
 		return;

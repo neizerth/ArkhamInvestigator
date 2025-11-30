@@ -1,15 +1,20 @@
 import { selectBoardCode } from "@modules/board/base/shared/lib";
+import { updateChaosToken } from "@modules/chaos-bag/base/entities/lib";
 import { chaosBagUpdated } from "@modules/chaos-bag/base/shared/lib";
 import { addRevealedTokens } from "@modules/chaos-bag/reveal/base/shared/lib";
 import { put, select, takeEvery } from "redux-saga/effects";
+import { selectCanInterruptReveal } from "../../interupt";
+import { selectCanRevealChaosTokens } from "../../selectors";
 import {
-	selectCanRevealChaosTokens,
-	selectRandomUnrevealedChaosTokens,
-} from "../../selectors";
-import { chaosTokensRevealed, revealChaosTokens } from "./revealChaosTokens";
+	chaosTokensRevealed,
+	revealChaosTokens,
+	revealChaosTokensInterrupted,
+} from "./revealChaosTokens";
 
 function* worker({ payload }: ReturnType<typeof revealChaosTokens>) {
-	const { count, boardId } = payload;
+	const { tokens, boardId, force, unseal = true } = payload;
+
+	const count = tokens.length;
 
 	const validateSelector = selectCanRevealChaosTokens(count);
 	const validation: ReturnType<typeof validateSelector> =
@@ -19,16 +24,39 @@ function* worker({ payload }: ReturnType<typeof revealChaosTokens>) {
 		return;
 	}
 
-	const revealSelector = selectRandomUnrevealedChaosTokens({
-		boardId,
-		count,
-	});
+	const canInterruptReveal: ReturnType<typeof selectCanInterruptReveal> =
+		yield select(selectCanInterruptReveal);
 
-	const tokens: ReturnType<typeof revealSelector> =
-		yield select(revealSelector);
+	const canInterrupt = canInterruptReveal !== false && !force;
+
+	if (canInterrupt) {
+		const { codes } = canInterruptReveal;
+		yield put(
+			revealChaosTokensInterrupted({
+				...payload,
+				codes,
+			}),
+		);
+		return;
+	}
 
 	const codeSelector = selectBoardCode(boardId);
 	const code: ReturnType<typeof codeSelector> = yield select(codeSelector);
+
+	if (unseal) {
+		for (const token of tokens) {
+			yield put(
+				updateChaosToken({
+					boardId,
+					id: token.id,
+					data: {
+						sealed: false,
+						sealData: null,
+					},
+				}),
+			);
+		}
+	}
 
 	yield put(
 		addRevealedTokens({

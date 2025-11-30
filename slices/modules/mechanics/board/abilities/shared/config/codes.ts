@@ -23,7 +23,11 @@ export const AbilityCode = {
 	CarsonSinclair: "give-action",
 	MinhThiPhan: "add-2wild",
 	KohakuNarukami: "bless-curse",
-
+	KateWinthrop: {
+		darkMatter: {
+			fluxStabilizer: "zdms-flux-stabilizer",
+		},
+	},
 	ZoeySamaras: {
 		parallel: {
 			fast: "remove-3-bless",
@@ -33,14 +37,23 @@ export const AbilityCode = {
 	},
 	FatherMateo: {
 		base: "mateo-auto-fail-reveal",
+		parallel: "seal-bless-on-investigator",
 	},
-	WendyAdams: "wendys-amulet",
+	WendyAdams: {
+		base: "wendys-amulet",
+		parallel: "seal-token-after-evade-enemy",
+	},
 	DanielaReyes: "been-attacked",
 	KymaniJones: "exhausted-enemy",
 	RexMurphy: {
-		base: "auto-fail-for-3-cards",
+		base: {
+			elderSign: "auto-fail-for-3-cards",
+			reaction: "get-clues-after-succeed-investigation",
+		},
 	},
-
+	DaisyWalker: {
+		parallel: "daisy-books",
+	},
 	StellaClark: {
 		reaction: "stella-fail-test-reaction",
 		elderSign: "autofail-to-heal-horror-and-damage",
@@ -49,9 +62,32 @@ export const AbilityCode = {
 		base: {
 			fast: "two-resources-for-action",
 		},
+		parallel: "skids-resources-casino",
 	},
 	AliceLiddell: "use-base-intellect",
 	ReynauldDeChatillon: "reynauld-reaction",
+	RolandBanks: "clue-after-enemy-defeat",
+	CarolynFern: "get-resource-after-heal",
+	LuciusGalloway: "get-clue-after-evade",
+	AudreyBourassa: "get-2-clues-after-relic-play",
+	TrishScarborough: "get-clue-in-enemy-location",
+	EdmundMoore: "two-resources-for-exaust",
+	LuciaDeveraux: "gain-resource-after-healing-card-use",
+	RichardCarlisle: {
+		reaction: "two-points-spell-succeeded",
+		effects: {
+			card: "two-points-spell-succeeded-card",
+			resource: "two-points-spell-succeeded-resource",
+			clue: "two-points-spell-succeeded-clue",
+			damage: "two-points-spell-succeeded-damage",
+		},
+	},
+	GavriellaMizrah: "get-clue-after-enemy-attack",
+	ValentinoRivas: "pay-to-reduce-difficulty",
+	PennyWhite: "get-clue-effect-revealing",
+	LukeRobinson: "gate-box",
+	AgathaCrane: "play-event-from-discard-pile-after-turn-ends",
+	JacquelineFine: "choose-between-3-tokens",
 };
 
 export const LilyChenAbilityCodes = Object.values(AbilityCode.LilyChen);
@@ -66,6 +102,10 @@ export const specialAbilitityCodes = [
 	AbilityCode.RexMurphy.base,
 	AbilityCode.StellaClark.elderSign,
 	AbilityCode.KohakuNarukami,
+	AbilityCode.CarolynFern,
+	AbilityCode.RexMurphy.base.reaction,
+	AbilityCode.AgathaCrane,
+	AbilityCode.WendyAdams.parallel,
 	...LilyChenAbilityCodes,
 ];
 

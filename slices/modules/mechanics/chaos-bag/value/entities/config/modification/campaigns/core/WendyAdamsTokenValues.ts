@@ -3,7 +3,7 @@ import { createAbilityTokenValues } from "@modules/mechanics/chaos-bag/value/sha
 import type { InvestigatorTokenValueModification } from "@modules/mechanics/chaos-bag/value/shared/model";
 import { InvesigatorCode } from "@modules/mechanics/investigator/entities/config";
 
-const abilityId = AbilityCode.WendyAdams;
+const abilityId = AbilityCode.WendyAdams.base;
 
 export const WendyAdamsTokenValues: InvestigatorTokenValueModification = {
 	[InvesigatorCode.WendyAdams.base]: ({ board, boards }) => {

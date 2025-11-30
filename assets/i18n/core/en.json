@@ -128,8 +128,17 @@
 	"board.help.pins.swipe": "Swipe down on a pinned calculation to go to a page where you've created this calculation",
 	"board.help.longPress.investigatorSelect": "If you are playing with 2+ investigators, hold down on the mini image to view all investigators' stats",
 
-	"investigator.getResources_one": "{{name}} has got {{count}} resource",
-	"investigator.getResources_other": "{{name}} has got {{count}} resources",
+	"resources.get_one": "{{name}} has got {{count}} resource",
+	"resources.get_other": "{{name}} has got {{count}} resources",
+
+	"card.get_one": "{{name}} gets {{count}} card",
+	"card.get_many": "{{name}} gets {{count}} cards",
+
+	"clues.get_one": "{{name}} gets {{count}} clue",
+	"clues.get_many": "{{name}} gets {{count}} clues",
+
+	"resources.spent_one": "{{name}} has spent {{count}} resource",
+	"resources.spent_other": "{{name}} has spent {{count}} resources",
 
 	"clues.spent_one": "{{name}} has spent {{count}} clue",
 	"clues.spent_other": "{{name}} has spent {{count}} clues",
@@ -146,6 +155,12 @@
 
 	"actions.give_one": "{{name}} has got action [action] from {{fromName}}",
 	"actions.give_other": "{{name}} has got {{count}} actions [action] from {{fromName}}",
+
+	"damage.take_one": "{{name}} takes {{count}} damage",
+	"damage.take_many": "{{name}} takes {{count}} damage",
+
+	"horror.take_one": "{{name}} takes {{count}} horror",
+	"horror.take_many": "{{name}} takes {{count}} horror",
 
 	"upkeep.investigator.actionsReset": "{{name}}: Actions reset",
 
@@ -166,7 +181,8 @@
 	"Show skill test result": "Show skill test result",
 
 	"chaosToken.curse.effect": "{{value}}. Reveal another token. Instead of returning this token to the chaos bag, return it to the token pool.",
-	"chaosToken.bless.effect": "{{value}}. Reveal another token. Instead of returning this token to the chaos bag, return it to the token pool",
+	"chaosToken.bless.effect": "{{value}}. Reveal another token. Instead of returning this token to the chaos bag, return it to the token pool.",
+	"chaosToken.moon.effect": "{{value}}. Seal this token on your investigator card and reveal another token.",
 	"chaosToken.frost.first.effect": "{{value}}. Reveal another token",
 	"chaosToken.frost.second.effect": "Resolve the test as an automatic failure",
 	"chaosToken.autoFail.effect": "Automatic failure",
@@ -186,8 +202,8 @@
 	"chaosToken.remove.confirm.subtitle_one": "Remove token?",
 	"chaosToken.remove.confirm.subtitle_other": "Remove tokens?",
 
-	"chaosToken.remove.confirm.text_one": "Token {{token}} is in the skill test. Removing it may change the result or cancel the skill test.",
-	"chaosToken.remove.confirm.text_other": "{{count}} tokens {{token}} are in the skill test. Removing them may change the result or cancel the skill test.",
+	"chaosToken.remove.confirm.text_one": "Token {{token}} is in the skill test or sealed. Removing it may change the result or cancel the skill test.",
+	"chaosToken.remove.confirm.text_other": "{{count}} tokens {{token}} are in the skill test or sealed. Removing them may change the result or cancel the skill test.",
 
 	"chaosToken.remove.confirm.return": "Return",
 	"chaosToken.effect": "{{token}} effect",
@@ -202,6 +218,14 @@
 
 	"chaosBag.cantAddToken": "You can't add more than {{limit}} {{character}}",
 	"chaosBag.cantRemoveToken": "You can't remove {{count}} {{character}}. Available: {{available}}",
+
+	"chaosBag.sealToken": "{{name}} seals the {{token}} token",
+
+	"chaosBag.unseal.moon.title": "Unseal the [moon] token?",
+	"chaosBag.unseal.moon.text": "To unseal the token, you need to add 1 damage [health] or 1 horror [sanity]",
+	"chaosBag.unseal.moon.damage.text": "+1 damage",
+	"chaosBag.unseal.moon.horror.text": "+1 horror",
+	"chaosBag.unseal.moon.notAllowed": "You don't have enough health or sanity to unseal the [moon] token",
 
 	"board.help.syncScenarioClues": "Enables/disables synchronization of scenario and investigator clues: clues added to the scenario will be removed from the investigator",
 
@@ -219,6 +243,7 @@
 	"ability.mateo.base.elderSign.action": "Action",
 
 	"ability.carolyn.modal.heal": "Heal",
+	"ability.carolyn.reaction.text": "Select healed card's controller",
 	"ability.vincent.modal.heal": "Heal",
 
 	"ability.preston.modal.text": "Spend 2 [resource] to automatically succeed the test?",
@@ -242,7 +267,50 @@
 
 	"ability.kohaku.removeTokens": "{{name}} removes 2 [bless] and 2 [curse] tokens",
 
+	"ability.richard.modal.text": "Choose an effect:\n[card-outline] Draw 1 card\n[resource] Gain 1 resource\n[clue] Discover 1 clue at your location\n[health] Deal 1 damage to an enemy at your location",
+	"ability.richard.action.damage": "{{name}} deals 1 damage to an enemy at his location",
+
+	"ability.luke.gateBox_one": "{{name}} puts {{count}} charge on the Gate Box",
+	"ability.luke.gateBox_many": "{{name}} puts {{count} charge on the Gate Box",
+
+	"ability.agatha.reaction": "{{name}} may play [[Spell]] or [[Insight]] event from her discard pile and remove it from the game",
+	"ability.wendy.parallel.action.chaosBag": "{{token}} in [chaos-bag-thin]",
+	"ability.wendy.parallel.action.history": "{{token}} [undo] [chaos-bag-thin]",
+	"ability.wendy.parallel.title": "Seal token",
+	"ability.wendy.parallel.text": "Select the token to seal\nExplanation:\n[bless] in [chaos-bag-thin] - chaos bag token\n[bless] [undo] [chaos-bag-thin] - revealed token from the last test\nFor reminder, specify the initials of the enemy where the token will be sealed (up to 7 characters, e.g. «Ghoul»):",
+	"ability.wendy.parallel.placeholder": "Enemy",
+	"ability.wendy.parallel.reaction.fail": "No tokens to seal",
+	"ability.wendy.parallel.elderSign.title": "Reveal tokens",
+	"ability.wendy.parallel.elderSign.text": "Select up to 2 [bless] and/or [curse] and reveal them, ignoring their effects",
+	"ability.wendy.parallel.elderSign.selected.title": "Selected tokens",
+	"ability.wendy.parallel.elderSign.selected.text": "Tap to remove",
+	"ability.wendy.parallel.elderSign.confirm.title": "Reveal",
+
+	"ability.fatherMateo.parallel.fastFail": "No available [bless] tokens to seal",
+	"ability.fatherMateo.parallel.sealBless": "{{name}} seals [bless] on {{targetName}}",
+	"ability.fatherMateo.parallel.sealBless.self": "{{name}} seals [bless] on himself",
+
+	"ability.fatherMateo.parallel.reaction.text": "Draw sealed [bless] from the chaos bag instead of a random token?",
+	"ability.fatherMateo.parallel.reaction.title": "Draw sealed [bless]",
+
+	"ability.lucia.elderSign.title": "Heal damage/horror",
+
+	"ability.jerome.elderSign.title": "Find a clue",
+	"ability.jerome.elderSign.text": "Confirm if there is a clue in your location",
+
+	"ability.yuki.modal.title": "Remove [curse]",
+	"ability.yuki.modal.text": "Remove 1 [curse] from the chaos bag?",
+
+	"ability.kate.darkMatter.fluxStabilizer.charge": "{{name}} places 1 charge on the Flux Stabilizer",
+
 	"resources.notEnough": "Not enough resources. Required&nbsp;{{count}}, available&nbsp;{{available}}",
+
+	"heal.damage_one": "Heal {{count}} [health]",
+	"heal.damage_few": "Heal {{count}} [health]",
+	"heal.damage_many": "Heal {{count}} [health]",
+	"heal.horror_one": "Heal {{count}} [sanity]",
+	"heal.horror_few": "Heal {{count}} [sanity]",
+	"heal.horror_many": "Heal {{count}} [sanity]",
 
 	"action.heal": "{{fromName}} heals {{dativeName}} {{value}}",
 	"action.heal.self": "{{name}} heals {{value}}",
@@ -317,6 +385,7 @@
 	"Press and hold": "Press and hold",
 	"Hold to seal": "Hold to seal",
 	"Hold": "Hold",
+	"Heal": "Heal",
 
 	"Health/Sanity": "Health/Sanity",
 	"Show health/sanity": "Show health/sanity",
@@ -385,5 +454,10 @@
 	"Clear download queue": "Clear download queue",
 	"Check Data Updates": "Check Data Updates",
 
-	"Install": "Install"
+	"Install": "Install",
+	"Books counter": "Books counter",
+	"Choose an effect": "Choose an effect",
+	"Gate Box": "Gate Box",
+	"Chaos Bag": "Chaos Bag",
+	"Scenario Reference": "Scenario Reference"
 }

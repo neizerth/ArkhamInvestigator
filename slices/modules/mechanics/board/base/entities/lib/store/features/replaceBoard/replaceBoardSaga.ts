@@ -9,7 +9,7 @@ import { mergeInvestigatorBoards } from "../../../mergeInvestigatorBoards";
 import { replaceBoard } from "./replaceBoard";
 
 function* worker({ payload }: ReturnType<typeof replaceBoard>) {
-	const { boardId, board } = payload;
+	const { boardId, board, ...mergeOptions } = payload;
 
 	const boardSelector = selectBoardById(boardId);
 
@@ -23,9 +23,7 @@ function* worker({ payload }: ReturnType<typeof replaceBoard>) {
 	const boardData = mergeInvestigatorBoards({
 		sourceBoard,
 		targetBoard: board,
-		keepActions: false,
-		keepClues: false,
-		keepResources: false,
+		...mergeOptions,
 	});
 
 	const data: InvestigatorBoard = {

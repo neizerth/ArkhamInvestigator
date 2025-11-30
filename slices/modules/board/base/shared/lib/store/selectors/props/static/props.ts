@@ -18,3 +18,9 @@ export const selectBoardCheckHistory = (boardId: BoardId) =>
 		boardId,
 		prop: "checkHistory",
 	});
+
+export const selectBoardTurnId = (boardId: BoardId) =>
+	selectBoardProp({
+		boardId,
+		prop: "turnId",
+	});

@@ -3,7 +3,7 @@ import {
 	InvestigatorText,
 	InvestigatorTraits,
 } from "@modules/board/base/entities/typography/ui";
-import type { InvestigatorTraitsProps } from "@modules/board/base/entities/typography/ui/InvestigatorTraits/InvestigatorTraits.types";
+import type { InvestigatorTraitsProps } from "@modules/board/base/entities/typography/ui";
 import { FactionDescription } from "@modules/faction/shared/ui";
 import { size } from "@shared/config";
 import type { FC } from "react";

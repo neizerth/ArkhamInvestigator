@@ -1,9 +1,9 @@
 import { Alegreya } from "@assets/fonts";
+import { HealthValue, SanityValue } from "@modules/board/base/entities/base/ui";
 import { color, size } from "@shared/config";
 import { NumericControl, Row, Text } from "@shared/ui";
 import { View } from "react-native";
 import styled from "styled-components/native";
-import { HealthValue, SanityValue } from "../../../../value";
 
 export const Container: typeof View = styled(View)`
   /* padding: ; */

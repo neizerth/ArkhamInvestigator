@@ -40,10 +40,12 @@ export const PinnedSkilllChecks = (props: PinnedSkilllChecksProps) => {
 
 	const showToggle = (tapToHide && !show) || !tapToHide;
 
+	const isAreaEnabled = Boolean(tapToHide);
+
 	return (
 		<C.Container {...props}>
 			{show ? (
-				<C.Area activeOpacity={tapToHide ? 0.2 : 1} onPress={onAreaPress}>
+				<C.Area enabled={isAreaEnabled} onPress={onAreaPress}>
 					<C.Content>
 						{show && (
 							<C.List>
