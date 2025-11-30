@@ -98,6 +98,7 @@ export const SignaturePreviewList = ({
 			getItemLayout={getItemLayout}
 			renderSectionHeader={renderSectionHeader}
 			removeClippedSubviews={removeClippedSubviews}
+			stickySectionHeadersEnabled={false}
 		/>
 	);
 };
