@@ -1,28 +1,28 @@
 import {
 	selectAlwaysShowGameText,
 	selectBoardProp,
-	selectBoardsCount,
+	selectShowDescription,
 } from "@modules/board/base/shared/lib";
 import type { BoardId } from "@modules/board/base/shared/model";
 import { selectCurrentLanguage } from "@modules/core/i18n/shared/lib";
 import { createSelector } from "@reduxjs/toolkit";
-import { isSmallDescription } from "../../logic";
+import { getDescriptionScale } from "../../logic";
 
-export const selectShowSmallDescription = (boardId: BoardId) =>
+export const selectDescriptionScale = (boardId: BoardId) =>
 	createSelector(
 		[
+			selectShowDescription,
 			selectAlwaysShowGameText,
-			selectBoardsCount,
 			selectBoardProp({
 				boardId,
 				prop: "investigator",
 			}),
 			selectCurrentLanguage,
 		],
-		(alwaysShowText, boardsCount, { text }, language) => {
-			return isSmallDescription({
+		(descriptionShown, alwaysShowText, { text }, language) => {
+			return getDescriptionScale({
+				descriptionShown,
 				alwaysShowText,
-				boardsCount,
 				text,
 				language,
 			});
