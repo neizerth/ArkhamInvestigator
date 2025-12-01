@@ -28,6 +28,9 @@ export const defaultComponentStyles: ComponentStyleMap = {
 	},
 	iconToken: {},
 	paragraph: {},
+	img: {
+		flex: 1,
+	},
 	word: {
 		alignItems: "flex-end",
 	},

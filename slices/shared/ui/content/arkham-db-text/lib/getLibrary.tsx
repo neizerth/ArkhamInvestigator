@@ -1,8 +1,10 @@
 import type { HTMLReactParserOptions } from "html-react-parser";
 import { omit } from "ramda";
 import { Fragment } from "react";
-import type { TextProps } from "react-native";
+import { StyleSheet, type TextProps } from "react-native";
+import type { TextStyle } from "react-native";
 import { v4 } from "uuid";
+import { font } from "../../../../config";
 import { Icon } from "../../../game";
 import { iconMapping } from "../config";
 import type { ComponentStyleMap } from "../model";
@@ -57,6 +59,25 @@ export const getLibrary = ({
 				>
 					{textContent}
 				</C.Paragraph>
+			);
+		}
+
+		if (type === "img") {
+			const { src, ...rest } = elementProps;
+			const fontSize =
+				StyleSheet.flatten<TextStyle>(mergedStyles).fontSize ??
+				font.size.default;
+
+			const height = fontSize * 1.3;
+			const style = [
+				...mergedStyles,
+				elementProps.style,
+				{
+					height,
+				},
+			];
+			return (
+				<C.Image key={v4()} source={{ uri: src }} {...rest} style={style} />
 			);
 		}
 

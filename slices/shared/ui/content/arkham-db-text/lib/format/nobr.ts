@@ -10,6 +10,60 @@ export const nobr = (text: string) => {
 	for (let i = 0; i < text.length; i++) {
 		const char = text[i];
 
+		// Track if we're inside an HTML tag and skip processing
+		if (char === "<") {
+			// Check if this is a closing tag
+			if (text[i + 1] === "/") {
+				// We're inside a closing tag, find the matching >
+				let j = i;
+				let tagContent = "";
+				while (j < text.length && text[j] !== ">") {
+					tagContent += text[j];
+					j++;
+				}
+				if (j < text.length) {
+					tagContent += text[j];
+					// Close any open nobr before the tag
+					if (open) {
+						open = false;
+						result += `<nobr>${token}</nobr>`;
+						token = "";
+					}
+					// Add the closing tag to result without processing
+					result += tagContent;
+					i = j;
+					continue;
+				}
+			} else {
+				// Opening tag - find the closing >
+				let j = i + 1;
+				let tagContent = char;
+				while (j < text.length) {
+					tagContent += text[j];
+					if (text[j] === ">") {
+						// Self-closing tag like <img /> or regular opening tag
+						// Close any open nobr before the tag
+						if (open) {
+							open = false;
+							result += `<nobr>${token}</nobr>`;
+							token = "";
+						}
+						// Add the tag to result without processing
+						result += tagContent;
+						i = j;
+						break;
+					}
+					j++;
+				}
+				if (j >= text.length) {
+					// Tag not closed, treat as regular text
+					// Fall through to normal processing
+				} else {
+					continue;
+				}
+			}
+		}
+
 		// Track if we're inside square brackets [...] or [[...]]
 		if (char === "[") {
 			bracketDepth++;
