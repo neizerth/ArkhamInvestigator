@@ -11,7 +11,9 @@ export const withTypography = (text: string) => {
 		// nbsp after digit
 		.replace(/(\d+) /g, `$1${nbsp}`)
 		// dot after ) or >
-		.replace(/([\)\>])\./g, `$1${shortNbsp}.`);
+		.replace(/([\)\>])\./g, `$1${shortNbsp}.`)
+		// add closing tag to img tags
+		.replace(/<img([^>]*?)(?<!\/)>/g, "<img$1 />");
 
 	if (haveWesternGlyphs(text)) {
 		return base;
@@ -22,7 +24,14 @@ export const withTypography = (text: string) => {
 		.replaceAll(`${nbsp} `, nbsp)
 		.replaceAll(` ${nbsp}`, nbsp)
 		// quotes
-		.replace(/"([^"]+)"/g, "“$1”");
+		.replace(/"([^"]*)"/g, (match, p1, offset, string) => {
+			// Do not replace quotes if preceded by =
+			const before = string.slice(0, offset);
+			if (/\=\s*$/.test(before)) {
+				return match;
+			}
+			return `“${p1}”`;
+		});
 
 	return extra;
 };

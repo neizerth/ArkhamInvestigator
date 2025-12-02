@@ -54,8 +54,6 @@ export const createInvestigatorBoard = ({
 
 	const turnId = v4();
 
-	const loaded = !investigator.has_full_image;
-
 	const defaultBoard: InvestigatorBoard = {
 		...options,
 		turnId,
@@ -68,7 +66,6 @@ export const createInvestigatorBoard = ({
 		usedAbilities: [],
 		abilityValues,
 		initialUsedAbilities: [],
-		loaded,
 	};
 
 	const modificationCallback = investigatorBoardModifications[code];

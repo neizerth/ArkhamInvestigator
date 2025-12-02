@@ -21,6 +21,13 @@ const getTagContents = (node: DOMNode, prefix = "", postfix = "") => {
 		const tagPrefix = `${prefix}<${tag}>`;
 		const tagPostfix = `</${tag}>${postfix}`;
 
+		if (tag === "img") {
+			const attrs = Object.entries(node.attribs)
+				.map(([key, value]) => `${key}="${value}"`)
+				.join(" ");
+			return `<img ${attrs} />`;
+		}
+
 		return node.children
 			.map((element): string => {
 				const { type } = element;

@@ -1,13 +1,17 @@
 import type { HTMLReactParserOptions } from "html-react-parser";
 import { omit } from "ramda";
 import { Fragment } from "react";
-import type { TextProps } from "react-native";
+import { Platform, StyleSheet, type TextProps } from "react-native";
+import type { TextStyle } from "react-native";
 import { v4 } from "uuid";
+import { font } from "../../../../config";
 import { Icon } from "../../../game";
 import { iconMapping } from "../config";
 import type { ComponentStyleMap } from "../model";
 import * as C from "../ui/ArkhamDBText/ArkhamDBText.components";
 import { getNodeContents } from "./getNodeContents";
+
+const ios = Platform.OS === "ios";
 
 type GetLibraryOptions = {
 	componentStyles?: ComponentStyleMap;
@@ -57,6 +61,25 @@ export const getLibrary = ({
 				>
 					{textContent}
 				</C.Paragraph>
+			);
+		}
+
+		if (type === "img") {
+			const { src, ...rest } = elementProps;
+			const fontSize =
+				StyleSheet.flatten<TextStyle>(mergedStyles).fontSize ??
+				font.size.default;
+
+			const style = [
+				...mergedStyles,
+				elementProps.style,
+				{
+					height: fontSize,
+					minWidth: fontSize,
+				},
+			];
+			return (
+				<C.Image key={v4()} source={{ uri: src }} {...rest} style={style} />
 			);
 		}
 

@@ -57,7 +57,6 @@ export const BoardDescription = ({ ...props }: BoardDescriptionProps) => {
 	const gesture = useDescriptionGestures();
 
 	const showFlavor = investigator.flavor && (!show || showDescription);
-	const unit = showDescription ? vw : textUnit;
 
 	const showTraits = !show || showDescription;
 	const compactTraits = !show && !showDescription && IOS_WITH_GESTURE_CONTROL;
@@ -80,7 +79,7 @@ export const BoardDescription = ({ ...props }: BoardDescriptionProps) => {
 										/>
 									)}
 									<C.Description style={descriptionStyle}>
-										<C.Text investigator={investigator} unit={unit} />
+										<C.Text investigator={investigator} unit={textUnit} />
 										{showFlavor && (
 											<C.Flavor unit={vw} investigator={investigator} />
 										)}

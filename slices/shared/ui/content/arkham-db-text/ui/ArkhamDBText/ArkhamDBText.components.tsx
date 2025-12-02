@@ -1,3 +1,4 @@
+import { Image as BaseImage } from "expo-image";
 import { View } from "react-native";
 import styled from "styled-components/native";
 import { UnscaledText } from "../../../../behavior";
@@ -25,6 +26,13 @@ export const Break: typeof View = styled(View)`
 export const Paragraph: typeof Row = styled(Row)`
   flex-wrap: wrap;
   align-items: flex-end;
+`;
+
+export const Image: typeof BaseImage = styled(BaseImage).attrs({
+	cachePolicy: "disk",
+	contentFit: "contain",
+})`
+  
 `;
 
 export const Container: typeof View = styled(View)`

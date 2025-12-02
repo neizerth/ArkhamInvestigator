@@ -4,16 +4,29 @@ import {
 	gameTextSizeUpdated,
 	selectDescriptionBottomOffset,
 } from "../../entities/description/lib";
-import { selectBoardById } from "../../shared/lib";
+import { selectBoardById, setBoardProgress } from "../../shared/lib";
 
 function* worker({ payload }: ReturnType<typeof gameTextSizeUpdated>) {
 	const { boardId, view } = payload;
-	const offsetSelector = selectDescriptionBottomOffset(boardId);
-	const offsetBottom: ReturnType<typeof offsetSelector> =
-		yield select(offsetSelector);
 
 	const boardSelector = selectBoardById(boardId);
 	const board: ReturnType<typeof boardSelector> = yield select(boardSelector);
+
+	const { investigator } = board;
+
+	if (!investigator.has_full_image) {
+		yield put(
+			setBoardProgress({
+				boardId,
+				progress: 100,
+			}),
+		);
+		return;
+	}
+
+	const offsetSelector = selectDescriptionBottomOffset(boardId);
+	const offsetBottom: ReturnType<typeof offsetSelector> =
+		yield select(offsetSelector);
 
 	const { image, loaded } = board;
 
