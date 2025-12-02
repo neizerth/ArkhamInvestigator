@@ -30,6 +30,7 @@ export const Paragraph: typeof Row = styled(Row)`
 
 export const Image: typeof BaseImage = styled(BaseImage).attrs({
 	cachePolicy: "disk",
+	contentFit: "contain",
 })`
   
 `;
