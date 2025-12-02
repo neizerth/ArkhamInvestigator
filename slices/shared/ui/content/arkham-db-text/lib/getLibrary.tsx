@@ -1,7 +1,7 @@
 import type { HTMLReactParserOptions } from "html-react-parser";
 import { omit } from "ramda";
 import { Fragment } from "react";
-import { StyleSheet, type TextProps } from "react-native";
+import { Platform, StyleSheet, type TextProps } from "react-native";
 import type { TextStyle } from "react-native";
 import { v4 } from "uuid";
 import { font } from "../../../../config";
@@ -10,6 +10,8 @@ import { iconMapping } from "../config";
 import type { ComponentStyleMap } from "../model";
 import * as C from "../ui/ArkhamDBText/ArkhamDBText.components";
 import { getNodeContents } from "./getNodeContents";
+
+const ios = Platform.OS === "ios";
 
 type GetLibraryOptions = {
 	componentStyles?: ComponentStyleMap;
@@ -68,12 +70,12 @@ export const getLibrary = ({
 				StyleSheet.flatten<TextStyle>(mergedStyles).fontSize ??
 				font.size.default;
 
-			const height = fontSize * 1.3;
 			const style = [
 				...mergedStyles,
 				elementProps.style,
 				{
-					height,
+					height: fontSize,
+					minWidth: fontSize,
 				},
 			];
 			return (
