@@ -3,6 +3,7 @@ import type { TextProps, ViewProps } from "react-native";
 import * as C from "./ReferenceSectionStep.components";
 
 import { useBoolean } from "@shared/lib";
+import { isBoolean } from "ramda-adjunct";
 import { useCallback } from "react";
 
 export type ReferenceSectionStepProps = Omit<
@@ -17,6 +18,7 @@ export type ReferenceSectionStepProps = Omit<
 	color?: string;
 	last?: boolean;
 	afterText?: React.ReactNode;
+	showToggle?: boolean;
 	onPress?: (index: number) => void;
 };
 
@@ -39,7 +41,10 @@ export const ReferenceSectionStep = ({
 }: ReferenceSectionStepProps) => {
 	const [open, setOpen] = useBoolean(false);
 	const enabled = Boolean(onPress);
-	const showToggle = Boolean(children);
+
+	const showToggle = isBoolean(props.showToggle)
+		? props.showToggle
+		: Boolean(children);
 
 	const handlePress = useCallback(() => {
 		if (showToggle) {

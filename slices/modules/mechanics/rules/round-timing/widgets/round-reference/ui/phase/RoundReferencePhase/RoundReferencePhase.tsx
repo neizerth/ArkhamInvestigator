@@ -64,7 +64,13 @@ export const RoundReferencePhase = ({
 							{phase.hint && <C.Hint>{phase.hint}</C.Hint>}
 							<C.Steps>
 								{steps.map((step) => (
-									<C.Step key={step.id} {...step} onPress={playStep}>
+									<C.Step
+										key={step.id}
+										{...step}
+										onPress={playStep}
+										showToggle={false}
+										last={step.type === "end"}
+									>
 										<C.StepContent step={step} />
 									</C.Step>
 								))}
