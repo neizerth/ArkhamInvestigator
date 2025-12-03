@@ -68,7 +68,7 @@ export const RoundReferencePhase = ({
 										key={step.id}
 										{...step}
 										onPress={playStep}
-										showToggle={false}
+										showContent={false}
 										last={step.type === "end"}
 									>
 										<C.StepContent step={step} />

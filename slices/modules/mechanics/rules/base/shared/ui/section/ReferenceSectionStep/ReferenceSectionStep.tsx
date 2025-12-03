@@ -18,7 +18,7 @@ export type ReferenceSectionStepProps = Omit<
 	color?: string;
 	last?: boolean;
 	afterText?: React.ReactNode;
-	showToggle?: boolean;
+	showContent?: boolean;
 	onPress?: (index: number) => void;
 };
 
@@ -42,19 +42,19 @@ export const ReferenceSectionStep = ({
 	const [open, setOpen] = useBoolean(false);
 	const enabled = Boolean(onPress);
 
-	const showToggle = isBoolean(props.showToggle)
-		? props.showToggle
+	const showContent = isBoolean(props.showContent)
+		? props.showContent
 		: Boolean(children);
 
 	const handlePress = useCallback(() => {
-		if (showToggle) {
+		if (showContent) {
 			setOpen.toggle();
 		}
 		if (!onPress) {
 			return false;
 		}
 		onPress(index);
-	}, [index, onPress, setOpen.toggle, showToggle]);
+	}, [index, onPress, setOpen.toggle, showContent]);
 
 	const color = props.color ? colorMapping[props.color] : props.color;
 
@@ -64,7 +64,7 @@ export const ReferenceSectionStep = ({
 				<C.Content>
 					<C.Text last={last} value={title} style={textStyle} />
 					{afterText}
-					{showToggle && (
+					{showContent && (
 						<C.Toggle open={open} style={toggleStyle}>
 							<C.ToggleIcon icon="right-arrow" />
 						</C.Toggle>
