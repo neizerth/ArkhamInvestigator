@@ -3,7 +3,6 @@ import { IconButton } from "@shared/ui";
 
 import { withLocale } from "@modules/core/i18n/shared/lib";
 import { color, size } from "@shared/config";
-import { Icon, type IconProps } from "@shared/ui";
 import type { FC } from "react";
 import { Platform, View, type ViewProps } from "react-native";
 import styled, { css } from "styled-components/native";
@@ -58,7 +57,6 @@ export const Content: FC<ContentProps> = styled(View)`
 export const Header: typeof ReferenceSectionHeader = styled(
 	ReferenceSectionHeader,
 )`
-
 `;
 
 export const PlayIcon: typeof IconButton = styled(IconButton).attrs({
@@ -73,23 +71,6 @@ export const PlayIcon: typeof IconButton = styled(IconButton).attrs({
 
 export const NoPlay: typeof View = styled(View)`
 	width: 24px;
-`;
-
-type ToggleIconProps = IconProps & PropsWithOpen;
-
-export const ToggleIcon: FC<ToggleIconProps> = styled(Icon)`
-	font-size: 10px;
-	line-height: 10px;
-	color: ${color.title};
-	${({ open }: ToggleIconProps) => css`
-		transform: rotate(${open ? "90deg" : "0deg"});
-	`}
-	${
-		ios &&
-		css`
-		transform: translateY(-2px);
-	`
-	}
 `;
 
 type BackgroundProps = ReferenceSectionBackgroundProps & PropsWithOpen;

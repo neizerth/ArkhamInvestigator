@@ -27,12 +27,7 @@ export const Toggle: typeof TouchableOpacity = styled(TouchableOpacity)`
 	justify-content: space-between;
 	align-items: center;
 	flex: 1;
-	${
-		ios &&
-		css`
-		transform: translateY(5px);	
-	`
-	}
+	transform: translateY(${ios ? 5 : 2}px);
 `;
 
 export const ToggleIcon: typeof Icon = styled(Icon)`

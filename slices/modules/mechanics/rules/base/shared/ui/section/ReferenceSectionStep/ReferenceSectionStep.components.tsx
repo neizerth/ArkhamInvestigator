@@ -1,7 +1,7 @@
 import { GameText, type GameTextProps } from "@modules/core/theme/shared/ui";
 import { TouchableOpacity } from "@modules/core/touch/shared/ui";
 import { color, size } from "@shared/config";
-import { Icon } from "@shared/ui";
+import { Icon, defaultGameTextComponentStyles } from "@shared/ui";
 import type { FC } from "react";
 import { View } from "react-native";
 import type { ViewProps } from "react-native-svg/lib/typescript/fabric/utils";
@@ -58,8 +58,10 @@ export const Text: FC<TextProps> = styled(GameText).attrs(
 			alignItems: last ? "center" : "flex-start",
 		},
 		componentStyles: {
+			...defaultGameTextComponentStyles,
 			icon: {
-				top: -3,
+				...defaultGameTextComponentStyles.icon,
+				top: 1,
 			},
 		},
 	}),
