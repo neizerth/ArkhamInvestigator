@@ -1,20 +1,22 @@
-import { NativeModules } from "react-native";
+import { GrayscaleModule } from "@expo-modules/grayscale";
 
-const { Grayscale } = NativeModules;
+const errorMessage =
+	"Could not convert to grayscale. Please check if input image format is valid.";
 
-export default function getBase64Grayscale(base64: string): Promise<string> {
-	return new Promise((resolve, reject) => {
-		Grayscale.toGrayscale(base64, (encoded: string) => {
-			if (!encoded) {
-				reject(
-					new Error(
-						"Could not convert to grayscale. Please check if input image format is valid.",
-					),
-				);
-				return;
-			}
-			const output = encoded.replace(/(\r\n|\n|\r)/gm, "");
-			return resolve(output);
-		});
-	});
+export default async function getBase64Grayscale(
+	base64: string,
+): Promise<string> {
+	try {
+		const result = await GrayscaleModule.toGrayscale(base64);
+
+		if (!result.base64) {
+			throw new Error(errorMessage);
+		}
+
+		// Remove line breaks from the output
+		const output = result.base64.replace(/(\r\n|\n|\r)/gm, "");
+		return output;
+	} catch (error) {
+		throw new Error(errorMessage);
+	}
 }

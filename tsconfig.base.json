@@ -4,9 +4,11 @@
 		"strict": true,
 		"esModuleInterop": true,
 		"sourceMap": true,
+		"baseUrl": ".",
 		"paths": {
 			"@assets/*": ["./assets/*"],
-			"@modules/*": ["./modules/*"]
+			"@modules/*": ["./slices/modules/*"],
+			"@expo-modules/*": ["./modules/*"]
 		}
 	},
 	"include": [
@@ -15,6 +17,8 @@
 		".expo/types/**/*.ts",
 		"expo-env.d.ts",
 		"declarations.d.ts",
-		"petrovich.d.ts"
+		"petrovich.d.ts",
+		"modules/**/*.ts",
+		"modules/**/*.tsx"
 	]
 }

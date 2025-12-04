@@ -1,6 +1,7 @@
 {
 	"extends": "./tsconfig.base.json",
 	"compilerOptions": {
+		"baseUrl": ".",
 		"paths": {
 			"@app/*": ["./slices/app/*"],
 			"@shared/*": ["./slices/shared/*"],
@@ -9,7 +10,8 @@
 			"@widgets/*": ["./slices/widgets/*"],
 			"@features/*": ["./slices/features/*"],
 			"@modules/*": ["./slices/modules/*"],
-			"@assets/*": ["./assets/*"]
+			"@assets/*": ["./assets/*"],
+			"@expo-modules/*": ["./modules/*"]
 		}
 	},
 	"include": [
@@ -17,7 +19,6 @@
 		"**/*.tsx",
 		".expo/types/**/*.ts",
 		"expo-env.d.ts",
-		"petrovich.d.ts",
-		"slices/modules/board/base/shared/lib/store/features/board/reducers/value/setBoardValuePropByTypets"
+		"petrovich.d.ts"
 	]
 }

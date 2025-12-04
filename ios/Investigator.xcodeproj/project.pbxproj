@@ -14,7 +14,6 @@
 		C509E96DF6AC4E49948668DE /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 125B4669146E1766421841F6 /* PrivacyInfo.xcprivacy */; };
 		D12FDCF9182F45E32AB71282 /* libPods-Investigator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FDDA9D1768E45184DF47C77 /* libPods-Investigator.a */; };
 		F11748422D0307B40044C1D9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F11748412D0307B40044C1D9 /* AppDelegate.swift */; };
-		F1A1B2C32D1234560044C1D9 /* Grayscale.m in Sources */ = {isa = PBXBuildFile; fileRef = F1A1B2C12D1234560044C1D9 /* Grayscale.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,8 +30,6 @@
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		F11748412D0307B40044C1D9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = Investigator/AppDelegate.swift; sourceTree = "<group>"; };
 		F11748442D0722820044C1D9 /* Investigator-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "Investigator-Bridging-Header.h"; path = "Investigator/Investigator-Bridging-Header.h"; sourceTree = "<group>"; };
-		F1A1B2C12D1234560044C1D9 /* Grayscale.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = Grayscale.m; path = Investigator/Grayscale.m; sourceTree = "<group>"; };
-		F1A1B2C22D1234560044C1D9 /* Grayscale.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Grayscale.h; path = Investigator/Grayscale.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,8 +49,6 @@
 			children = (
 				F11748412D0307B40044C1D9 /* AppDelegate.swift */,
 				F11748442D0722820044C1D9 /* Investigator-Bridging-Header.h */,
-				F1A1B2C22D1234560044C1D9 /* Grayscale.h */,
-				F1A1B2C12D1234560044C1D9 /* Grayscale.m */,
 				BB2F792B24A3F905000567C9 /* Supporting */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
@@ -335,7 +330,6 @@
 			files = (
 				F11748422D0307B40044C1D9 /* AppDelegate.swift in Sources */,
 				85D12C5BAA6BBDF694933156 /* ExpoModulesProvider.swift in Sources */,
-				F1A1B2C32D1234560044C1D9 /* Grayscale.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

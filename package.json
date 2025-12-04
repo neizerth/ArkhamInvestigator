@@ -3,6 +3,7 @@
 	"main": "expo-router/entry",
 	"version": "2.11.18",
 	"scripts": {
+		"postinstall": "node ./scripts/link-expo-modules.js",
 		"start": "expo start",
 		"reset-project": "node ./scripts/reset-project.js",
 		"a": "npm run prebuild:android:dev && npm run android",
