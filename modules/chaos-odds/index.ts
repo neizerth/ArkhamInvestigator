@@ -5,3 +5,7 @@ export * from "./src/ChaosOdds.types";
 
 // Export JSI module (Rust + C++ bindings)
 export { default as ChaosOdds } from "./src/ChaosOddsJSI";
+export type { ChaosTokenInput } from "./src/ChaosOddsJSI";
+
+// Вспомогательная функция для подсчета количества жетонов
+export { countChaosTokens } from "./src/lib";

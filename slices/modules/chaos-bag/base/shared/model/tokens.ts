@@ -1,4 +1,4 @@
-import type { ChaosTokenValue } from "@modules/chaos-bag/value/shared/model";
+import type { ChaosTokenValue } from "slices/modules/chaos-bag/value/shared/model";
 
 export type ChaosTokenType =
 	| BaseChaosTokenType

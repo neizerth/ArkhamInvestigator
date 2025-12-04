@@ -24,10 +24,25 @@ npm test
 ## Usage
 
 ```typescript
-import { ChaosOdds } from 'chaos-odds';
+import { ChaosOdds, countChaosTokens } from 'chaos-odds';
+import type { ChaosTokenInput } from 'chaos-odds';
 
 // Call Rust function via JSI
 const result = ChaosOdds.add(2, 3); // Returns 5
+
+// Count chaos tokens
+const tokens: ChaosTokenInput[] = [
+	{ type: "+1", value: 1, isFail: false, isSuccess: false, revealCount: 2 },
+	{ type: "skull", value: -2, isFail: false, isSuccess: false, revealCount: 3 },
+	{ type: "autoFail", value: 0, isFail: true, isSuccess: false, revealCount: 1 },
+	{ type: "elderSign", value: 0, isFail: false, isSuccess: true, revealCount: 1 },
+];
+
+// Using helper function (recommended)
+const totalCount = countChaosTokens(tokens); // Returns 4 (количество элементов в массиве)
+
+// Or call JSI directly with JSON string
+const totalCountDirect = ChaosOdds.count(JSON.stringify(tokens)); // Returns 4
 ```
 
 ## Setup
