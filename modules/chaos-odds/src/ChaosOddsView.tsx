@@ -1,11 +1,11 @@
-import { requireNativeView } from 'expo';
-import * as React from 'react';
+import { requireNativeView } from "expo";
+import type * as React from "react";
 
-import { ChaosOddsViewProps } from './ChaosOdds.types';
+import type { ChaosOddsViewProps } from "./ChaosOdds.types";
 
 const NativeView: React.ComponentType<ChaosOddsViewProps> =
-  requireNativeView('ChaosOdds');
+	requireNativeView("ChaosOdds");
 
 export default function ChaosOddsView(props: ChaosOddsViewProps) {
-  return <NativeView {...props} />;
+	return <NativeView {...props} />;
 }

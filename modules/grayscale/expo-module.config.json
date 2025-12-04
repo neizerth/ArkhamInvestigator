@@ -1,9 +1,9 @@
 {
-  "platforms": ["apple", "android", "web"],
-  "apple": {
-    "modules": ["GrayscaleModule"]
-  },
-  "android": {
-    "modules": ["expo.modules.grayscale.GrayscaleModule"]
-  }
+	"platforms": ["apple", "android", "web"],
+	"apple": {
+		"modules": ["GrayscaleModule"]
+	},
+	"android": {
+		"modules": ["expo.modules.grayscale.GrayscaleModule"]
+	}
 }

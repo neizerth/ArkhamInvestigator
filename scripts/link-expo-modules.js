@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
-const fs = require("fs");
-const path = require("path");
+const fs = require("node:fs");
+const path = require("node:path");
 
 const projectRoot = path.resolve(__dirname, "..");
 const nodeModulesDir = path.join(projectRoot, "node_modules", "@expo-modules");

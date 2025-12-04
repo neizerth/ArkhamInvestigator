@@ -1,19 +1,19 @@
-import { registerWebModule, NativeModule } from 'expo';
+import { NativeModule, registerWebModule } from "expo";
 
-import { ChangeEventPayload } from './ChaosOdds.types';
+import type { ChangeEventPayload } from "./ChaosOdds.types";
 
 type ChaosOddsModuleEvents = {
-  onChange: (params: ChangeEventPayload) => void;
-}
-
-class ChaosOddsModule extends NativeModule<ChaosOddsModuleEvents> {
-  PI = Math.PI;
-  async setValueAsync(value: string): Promise<void> {
-    this.emit('onChange', { value });
-  }
-  hello() {
-    return 'Hello world! 👋';
-  }
+	onChange: (params: ChangeEventPayload) => void;
 };
 
-export default registerWebModule(ChaosOddsModule, 'ChaosOddsModule');
+class ChaosOddsModule extends NativeModule<ChaosOddsModuleEvents> {
+	PI = Math.PI;
+	async setValueAsync(value: string): Promise<void> {
+		this.emit("onChange", { value });
+	}
+	hello() {
+		return "Hello world! 👋";
+	}
+}
+
+export default registerWebModule(ChaosOddsModule, "ChaosOddsModule");
