@@ -1,0 +1,34 @@
+{
+	"name": "chaos-odds",
+	"version": "1.0.0",
+	"description": "Native module for calculating chaos bag odds using Rust and React Native JSI",
+	"main": "index.ts",
+	"types": "src/ChaosOdds.types.ts",
+	"scripts": {
+		"build": "cd cli && ./build.sh",
+		"build:ios": "cd cli && ./_build.ios.sh",
+		"build:android": "cd cli && ./_build.android.sh",
+		"clean": "cd rust && cargo clean",
+		"test": "cd rust && cargo test"
+	},
+	"keywords": [
+		"react-native",
+		"expo",
+		"rust",
+		"jsi",
+		"native-module",
+		"arkham-horror",
+		"chaos-bag"
+	],
+	"author": "",
+	"license": "MIT",
+	"peerDependencies": {
+		"expo": "*",
+		"react": "*",
+		"react-native": "*"
+	},
+	"devDependencies": {
+		"@types/react": "*",
+		"@types/react-native": "*"
+	}
+}
