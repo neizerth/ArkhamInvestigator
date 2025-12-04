@@ -15,3 +15,14 @@ cargo build --target aarch64-linux-android --release
 cargo build --target armv7-linux-androideabi --release
 cargo build --target x86_64-linux-android --release
 cargo build --target i686-linux-android --release
+
+echo "Copying libraries to jniLibs"
+mkdir -p ../android/app/src/main/jniLibs/arm64-v8a
+mkdir -p ../android/app/src/main/jniLibs/armeabi-v7a
+mkdir -p ../android/app/src/main/jniLibs/x86_64
+mkdir -p ../android/app/src/main/jniLibs/x86
+
+cp target/aarch64-linux-android/release/libchaos_odds.so ../android/app/src/main/jniLibs/arm64-v8a/
+cp target/armv7-linux-androideabi/release/libchaos_odds.so ../android/app/src/main/jniLibs/armeabi-v7a/
+cp target/x86_64-linux-android/release/libchaos_odds.so ../android/app/src/main/jniLibs/x86_64/
+cp target/i686-linux-android/release/libchaos_odds.so ../android/app/src/main/jniLibs/x86/
