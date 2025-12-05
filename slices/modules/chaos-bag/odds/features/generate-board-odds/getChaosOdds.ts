@@ -28,15 +28,17 @@ const mapTokenToOddsToken = (token: ChaosBagOddsToken) => ({
 export const getChaosOdds = async (options: GetChaosOddsOptions) => {
 	const { available, revealed } = options;
 
-	const oddsTokens = available.map(mapTokenToOddsToken);
+	const availableTokens = available.map(mapTokenToOddsToken);
+	const revealedTokens = revealed.map(mapTokenToOddsToken);
 
 	try {
-		const tokensCount = ChaosOdds.count(oddsTokens);
-		console.log("tokensCount", tokensCount);
+		const odds = ChaosOdds.calculate(availableTokens, revealedTokens);
+		console.log("chaos odds result:", odds);
 	} catch (error) {
 		console.warn("ChaosOdds not ready yet, skipping calculation", error);
 		return null;
 	}
+
 	// const variations = getChaosOddsVariations(options);
 
 	// console.log("variations size", variations.length);

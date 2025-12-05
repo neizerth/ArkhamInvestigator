@@ -10,14 +10,19 @@ export interface ChaosOddsInput {
 }
 
 interface ChaosOddsJSI {
-	add(left: number, right: number): number;
-	count(tokens: string): number; // accepts JSON string
-	// calculate will be implemented later
-	// calculate(config: any): any;
+	calculate(available: string, revealed: string): number; // accepts JSON strings
 }
 
 declare global {
-	var ChaosOdds: ChaosOddsJSI;
+	var ChaosOdds: ChaosOddsJSI | undefined;
 }
 
-export default global.ChaosOdds;
+// Export a getter to always access the current global.ChaosOdds value
+// This ensures we get the JSI module after it's installed by native code
+const ChaosOddsJSIModule = {
+	get calculate() {
+		return global.ChaosOdds?.calculate;
+	},
+};
+
+export default ChaosOddsJSIModule as ChaosOddsJSI;
