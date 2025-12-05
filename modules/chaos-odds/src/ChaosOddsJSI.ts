@@ -1,19 +1,17 @@
 // JSI Native Module
 // Functions exposed via C++ JSI bindings
 
-import type { ChaosTokenType } from "slices/modules/chaos-bag/base/shared/model";
-
-export interface ChaosTokenInput {
-	type: ChaosTokenType;
+export interface ChaosOddsInput {
+	token_type: string;
 	value: number;
-	isFail: boolean;
-	isSuccess: boolean;
-	revealCount: number;
+	is_fail: boolean;
+	is_success: boolean;
+	reveal_count: number;
 }
 
 interface ChaosOddsJSI {
 	add(left: number, right: number): number;
-	count(tokens: string): number; // принимает JSON-строку
+	count(tokens: string): number; // accepts JSON string
 	// calculate will be implemented later
 	// calculate(config: any): any;
 }

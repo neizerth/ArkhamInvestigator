@@ -3,7 +3,7 @@
 	"version": "1.0.0",
 	"description": "Native module for calculating chaos bag odds using Rust and React Native JSI",
 	"main": "index.ts",
-	"types": "src/ChaosOdds.types.ts",
+	"types": "index.ts",
 	"scripts": {
 		"build": "cd cli && ./build.sh",
 		"build:ios": "cd cli && ./_build.ios.sh",

@@ -50,7 +50,7 @@ function* worker() {
 	const duration = (endTime - startTime).toFixed(2);
 	console.log(`getChaosOdds took ${duration}ms`);
 
-	console.log("generateBoardOddsSaga");
+	// console.log("generateBoardOddsSaga");
 }
 
 export function* generateBoardOddsSaga() {

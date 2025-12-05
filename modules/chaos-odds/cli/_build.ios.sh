@@ -1,13 +1,18 @@
 #!/bin/bash
 
-cd rust
+SCRIPT_PATH=$(realpath "$0")
+SCRIPT_DIR=$(dirname "$SCRIPT_PATH")
+cd "$SCRIPT_DIR/../rust"
 
 # Build the Rust library for iOS
 echo "Building for iOS"
 
 cargo build --target aarch64-apple-ios --release
 cargo build --target aarch64-apple-ios-sim --release
-cargo build --target x86_64-apple-ios --release
+
+# Remove old xcframework if it exists
+echo "Cleaning old XCFramework"
+rm -rf ../ios/chaos_odds.xcframework
 
 echo "Creating XCFramework"
 xcodebuild -create-xcframework \

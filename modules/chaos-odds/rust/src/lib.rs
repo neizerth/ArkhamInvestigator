@@ -2,11 +2,8 @@ use serde::{Deserialize, Serialize};
 use std::ffi::CStr;
 use std::os::raw::c_char;
 
-// Структура для представления одного жетона хаоса
 #[derive(Debug, Deserialize, Serialize)]
-#[serde(rename_all = "camelCase")]
 pub struct ChaosToken {
-    #[serde(rename = "type")]
     pub token_type: String,
     pub value: i32,
     pub is_fail: bool,

@@ -67,10 +67,6 @@ rustup target add aarch64-linux-android armv7-linux-androideabi x86_64-linux-and
 - `npm run clean` - Clean Rust build artifacts
 - `npm run test` - Run Rust tests
 
-## Documentation
-
-- [RUST_JSI_SETUP.md](./RUST_JSI_SETUP.md) - Complete setup guide
-- [example.ts](./example.ts) - Usage examples
 
 ## Project Structure
 
