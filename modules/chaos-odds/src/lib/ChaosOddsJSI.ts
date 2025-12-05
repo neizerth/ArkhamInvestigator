@@ -20,5 +20,4 @@ declare global {
 	var ChaosOdds: ChaosOddsJSI;
 }
 
-// Export the global ChaosOdds object
 export default global.ChaosOdds;

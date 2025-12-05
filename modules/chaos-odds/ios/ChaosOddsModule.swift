@@ -4,7 +4,8 @@ public class ChaosOddsModule: Module {
   public func definition() -> ModuleDefinition {
     Name("ChaosOdds")
     
-    // Dummy function to keep the module registered
+    // JSI bindings are installed by ChaosOddsJSIModule (Objective-C RCT module)
+    // This module just provides a dummy function to keep the pod registered
     Function("isAvailable") {
       return true
     }

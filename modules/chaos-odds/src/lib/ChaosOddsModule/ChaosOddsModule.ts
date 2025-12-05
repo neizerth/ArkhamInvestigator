@@ -1,6 +1,6 @@
 import { NativeModule, requireNativeModule } from "expo";
 
-import type { ChaosOddsModuleEvents } from "./ChaosOdds.types";
+import type { ChaosOddsModuleEvents } from "../../model";
 
 declare class ChaosOddsModule extends NativeModule<ChaosOddsModuleEvents> {
 	PI: number;

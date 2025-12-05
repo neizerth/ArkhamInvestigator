@@ -1,6 +1,6 @@
 import { NativeModule, registerWebModule } from "expo";
 
-import type { ChangeEventPayload } from "./ChaosOdds.types";
+import type { ChangeEventPayload } from "../../model";
 
 type ChaosOddsModuleEvents = {
 	onChange: (params: ChangeEventPayload) => void;

@@ -30,9 +30,13 @@ export const getChaosOdds = async (options: GetChaosOddsOptions) => {
 
 	const oddsTokens = available.map(mapTokenToOddsToken);
 
-	const tokensCount = ChaosOdds.count(oddsTokens);
-
-	console.log("tokensCount", tokensCount);
+	try {
+		const tokensCount = ChaosOdds.count(oddsTokens);
+		console.log("tokensCount", tokensCount);
+	} catch (error) {
+		console.warn("ChaosOdds not ready yet, skipping calculation", error);
+		return null;
+	}
 	// const variations = getChaosOddsVariations(options);
 
 	// console.log("variations size", variations.length);

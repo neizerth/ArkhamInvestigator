@@ -1,8 +1,12 @@
+import "./src/bootstrap";
+
 // Reexport the native module. On web, it will be resolved to ChaosOddsModule.web.ts
 // and on native platforms to ChaosOddsModule.ts
-export { default } from "./src/ChaosOddsModule";
-export * from "./src/ChaosOdds.types";
+import { ChaosOddsModule } from "./src/lib";
+
+export default ChaosOddsModule;
+export * from "./src/model";
 
 // Export JSI module (Rust + C++ bindings)
-export type { ChaosOddsInput as ChaosTokenInput } from "./src/ChaosOddsJSI";
-export { ChaosOddsService as ChaosOdds } from "./src/ChaosOddsService";
+export type { ChaosOddsInput } from "./src/lib";
+export { ChaosOddsService as ChaosOdds } from "./src/lib";
