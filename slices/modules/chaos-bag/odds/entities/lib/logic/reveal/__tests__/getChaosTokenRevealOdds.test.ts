@@ -214,14 +214,12 @@ describe("getChaosTokenRevealOdds", () => {
 
 		const baseProbability = 3 / 7;
 		const expectedProbability =
-			(1 / 4) *
+			(1 / 3) *
 			(baseProbability +
 				1 -
 				(1 - baseProbability) ** 2 +
 				1 -
-				(1 - baseProbability) ** 3 +
-				1 -
-				(1 - baseProbability) ** 4);
+				(1 - baseProbability) ** 3);
 
 		const result = getChaosTokenRevealOdds({
 			token: tokens[0], // 0

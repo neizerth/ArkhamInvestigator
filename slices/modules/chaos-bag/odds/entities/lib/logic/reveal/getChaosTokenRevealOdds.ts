@@ -28,8 +28,8 @@ export const getChaosTokenRevealOdds = (options: Options) => {
 
 	let probability = 0;
 	const maxRevealCount = special.reduce(
-		(max, { revealCount }) => max + revealCount,
-		0,
+		(max, { revealCount }) => max + revealCount - 1,
+		1,
 	);
 
 	for (let revealCount = 1; revealCount <= maxRevealCount; revealCount++) {
