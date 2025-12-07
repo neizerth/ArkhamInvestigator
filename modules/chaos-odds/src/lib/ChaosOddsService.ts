@@ -5,14 +5,25 @@ export const ChaosOddsService = {
 	calculate(
 		available: ChaosOddsInput[],
 		revealed: ChaosOddsInput[] = [],
-	): number {
-		if (!ChaosOddsJSI.calculate) {
+	): number[][] {
+		if (!ChaosOddsJSI.calculate || !ChaosOddsJSI.freeString) {
 			throw new Error(
 				"ChaosOdds JSI module is not available. Please rebuild the app to include native bindings.",
 			);
 		}
 		const availableJSON = JSON.stringify(available);
 		const revealedJSON = JSON.stringify(revealed);
-		return ChaosOddsJSI.calculate(availableJSON, revealedJSON);
+
+		// Call native function - returns JSON string with 100x100 matrix
+		const resultJSON = ChaosOddsJSI.calculate(availableJSON, revealedJSON);
+
+		try {
+			// Parse JSON to get the matrix
+			const matrix: number[][] = JSON.parse(resultJSON);
+			return matrix;
+		} finally {
+			// IMPORTANT: Always free the memory allocated by Rust
+			ChaosOddsJSI.freeString(resultJSON);
+		}
 	},
 };
