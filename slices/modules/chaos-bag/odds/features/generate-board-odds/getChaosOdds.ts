@@ -26,13 +26,12 @@ const mapTokenToOddsToken = (token: ChaosBagOddsToken) => ({
 });
 
 export const getChaosOdds = async (options: GetChaosOddsOptions) => {
-	const { available, revealed } = options;
+	const { available } = options;
 
 	const availableTokens = available.map(mapTokenToOddsToken);
-	const revealedTokens = revealed.map(mapTokenToOddsToken);
 
 	try {
-		const odds = ChaosOdds.calculate(availableTokens, revealedTokens);
+		const odds = ChaosOdds.calculate(availableTokens);
 		console.log("chaos odds result:", odds);
 	} catch (error) {
 		console.warn("ChaosOdds not ready yet, skipping calculation", error);

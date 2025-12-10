@@ -17,7 +17,7 @@ use std::os::raw::c_char;
 /// # Usage Pattern
 /// ```cpp
 /// // 1. Calculate odds
-/// const char* result = chaos_odds_calculate(available, revealed);
+/// const char* result = chaos_odds_calculate(available);
 ///
 /// // 2. Use the result
 /// if (result != nullptr) {

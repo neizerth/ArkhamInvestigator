@@ -7,3 +7,9 @@ export type ChaosBagOddsToken = PickPartial<
 > & {
 	revealCount: number;
 };
+
+export type ChaosOddsGroup = {
+	groupIndex: string;
+	token: ChaosBagOddsToken;
+	count: number;
+};

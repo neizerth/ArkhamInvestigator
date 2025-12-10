@@ -1,4 +1,4 @@
-import type { ChaosBagOddsToken } from "../../../../model";
+import type { ChaosBagOddsToken } from "../../../model";
 import { getChaosTokenRevealOdds } from "../getChaosTokenRevealOdds";
 
 describe("getChaosTokenRevealOdds", () => {
@@ -26,6 +26,8 @@ describe("getChaosTokenRevealOdds", () => {
 
 		const result = getChaosTokenRevealOdds({
 			token: tokens[0], // -2
+			typeCount: 1,
+			total: 2,
 			tokens,
 		});
 
@@ -57,6 +59,8 @@ describe("getChaosTokenRevealOdds", () => {
 		const result = getChaosTokenRevealOdds({
 			token: tokens[1], // -1
 			tokens,
+			typeCount: 1,
+			total: 3,
 		});
 
 		expect(result).toBe(0.5);
@@ -87,6 +91,8 @@ describe("getChaosTokenRevealOdds", () => {
 		const result = getChaosTokenRevealOdds({
 			token: tokens[2], // bless
 			tokens,
+			typeCount: 1,
+			total: 3,
 		});
 
 		expect(result).toBe(1 / 3);
@@ -137,6 +143,9 @@ describe("getChaosTokenRevealOdds", () => {
 		const result = getChaosTokenRevealOdds({
 			token: tokens[0], // -1
 			tokens,
+			maxRevealCount: 2,
+			typeCount: 1,
+			total: 6,
 		});
 
 		expect(result).toBe(expectedProbability);
@@ -224,8 +233,70 @@ describe("getChaosTokenRevealOdds", () => {
 		const result = getChaosTokenRevealOdds({
 			token: tokens[0], // 0
 			tokens,
+			maxRevealCount: 3,
+			typeCount: 3,
+			total: 11,
 		});
 
 		expect(result).toBeCloseTo(expectedProbability, 10);
+	});
+
+	it("should return correct probability for 2 frost tokens when tokens are 2 x frost (revealCount = 1), 0, 0, -2, -3, bless", () => {
+		const tokens: ChaosBagOddsToken[] = [
+			{
+				id: "1",
+				type: "frost",
+				value: -1,
+				revealCount: 1,
+			},
+			{
+				id: "2",
+				type: "frost",
+				value: -1,
+				revealCount: 1,
+			},
+			{
+				id: "3",
+				type: "0",
+				value: 0,
+				revealCount: 0,
+			},
+			{
+				id: "4",
+				type: "0",
+				value: 0,
+				revealCount: 0,
+			},
+			{
+				id: "5",
+				type: "-2",
+				value: -2,
+				revealCount: 0,
+			},
+			{
+				id: "6",
+				type: "-3",
+				value: -3,
+				revealCount: 0,
+			},
+			{
+				id: "7",
+				type: "bless",
+				value: 2,
+				revealCount: 1,
+			},
+		];
+
+		const expectedProbability = (2 / 6) * (1 / 5);
+
+		const result = getChaosTokenRevealOdds({
+			token: tokens[0], // frost
+			tokens,
+			revealCount: 2,
+			total: 7,
+			typeCount: 1,
+		});
+
+		expect(result).toBe(expectedProbability);
 	});
 });

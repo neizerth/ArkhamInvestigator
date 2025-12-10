@@ -1,19 +1,8 @@
 use rayon::prelude::*;
-use serde::{Deserialize, Serialize};
 use std::ffi::{CStr, CString};
 use std::os::raw::c_char;
 
-mod chaos_bag;
-pub mod memory;
-
-#[derive(Debug, Deserialize, Serialize)]
-pub struct ChaosToken {
-    pub token_type: String,
-    pub value: i8,
-    pub is_fail: bool,
-    pub is_success: bool,
-    pub reveal_count: u8,
-}
+use crate::ChaosToken;
 
 /// Parse JSON string to vector of ChaosToken
 fn parse_tokens(json_ptr: *const c_char) -> Result<Vec<ChaosToken>, String> {
@@ -51,7 +40,6 @@ fn serialize_matrix(matrix: &Vec<Vec<u16>>) -> *mut c_char {
 ///
 /// # Parameters
 /// * `available_ptr` - JSON string with available tokens
-/// * `revealed_ptr` - JSON string with revealed tokens
 ///
 /// # Returns
 /// * Pointer to JSON string with 100x100 matrix of u16 values (0-10000, where 10000 = 100%)
@@ -63,7 +51,7 @@ fn serialize_matrix(matrix: &Vec<Vec<u16>>) -> *mut c_char {
 ///
 /// # Example Usage (C++)
 /// ```cpp
-/// const char* result = chaos_odds_calculate(available_json, revealed_json);
+/// const char* result = chaos_odds_calculate(available_json);
 /// if (result != nullptr) {
 ///     // Parse and use the JSON result
 ///     std::string json_str(result);
@@ -76,7 +64,7 @@ fn serialize_matrix(matrix: &Vec<Vec<u16>>) -> *mut c_char {
 ///
 /// # Example Usage (JavaScript/React Native)
 /// ```javascript
-/// const resultPtr = chaosOddsCalculate(availableJson, revealedJson);
+/// const resultPtr = chaosOddsCalculate(availableJson);
 /// if (resultPtr !== null) {
 ///     const jsonString = /* read from pointer */;
 ///     const matrix = JSON.parse(jsonString);
@@ -86,10 +74,7 @@ fn serialize_matrix(matrix: &Vec<Vec<u16>>) -> *mut c_char {
 /// }
 /// ```
 #[no_mangle]
-pub extern "C" fn chaos_odds_calculate(
-    available_ptr: *const c_char,
-    revealed_ptr: *const c_char,
-) -> *mut c_char {
+pub extern "C" fn chaos_odds_calculate(available_ptr: *const c_char) -> *mut c_char {
     // Parse available tokens
     let available = match parse_tokens(available_ptr) {
         Ok(tokens) => tokens,
@@ -99,36 +84,11 @@ pub extern "C" fn chaos_odds_calculate(
         }
     };
 
-    // Parse revealed tokens
-    let revealed = match parse_tokens(revealed_ptr) {
-        Ok(tokens) => tokens,
-        Err(e) => {
-            eprintln!("Failed to parse revealed tokens: {}", e);
-            return std::ptr::null_mut();
-        }
-    };
-
-    // Check for auto-fail in revealed tokens - early return with all zeros
-    if chaos_bag::is_auto_fail(&revealed) {
-        let odds_matrix: Vec<Vec<u16>> = vec![vec![0; 100]; 100];
-        return serialize_matrix(&odds_matrix);
-    }
-
-    // Check for auto-success in revealed tokens - early return with all 10000
-    if chaos_bag::is_auto_success(&revealed) {
-        let odds_matrix: Vec<Vec<u16>> = vec![vec![10000; 100]; 100];
-        return serialize_matrix(&odds_matrix);
-    }
-
     // Calculate actual odds
-    let mut odds_matrix: Vec<Vec<u16>> = vec![vec![0; 100]; 100];
+    let odds_matrix: Vec<Vec<u16>> = vec![vec![0; 100]; 100];
 
     // TODO: Implement actual odds calculation algorithm
-    println!(
-        "Calculating odds with {} available and {} revealed tokens",
-        available.len(),
-        revealed.len()
-    );
+    println!("Calculating odds with {} available tokens", available.len());
 
     serialize_matrix(&odds_matrix)
 }

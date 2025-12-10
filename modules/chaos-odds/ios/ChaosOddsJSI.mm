@@ -3,7 +3,7 @@
 
 // Rust FFI declarations
 extern "C" {
-    double chaos_odds_calculate(const char* available, const char* revealed);
+    double chaos_odds_calculate(const char* available);
 }
 
 namespace facebook {
@@ -18,7 +18,7 @@ void ChaosOddsJSI::install(jsi::Runtime& runtime) {
     auto calculateFunc = jsi::Function::createFromHostFunction(
         runtime,
         jsi::PropNameID::forAscii(runtime, "calculate"),
-        2,
+        1,
         [](jsi::Runtime& rt,
            const jsi::Value& thisValue,
            const jsi::Value* args,
@@ -38,18 +38,17 @@ jsi::Value ChaosOddsJSI::calculate(
     const jsi::Value* arguments,
     size_t count
 ) {
-    if (count < 2) {
-        throw jsi::JSError(runtime, "calculate() requires 2 arguments (available, revealed)");
+    if (count < 1) {
+        throw jsi::JSError(runtime, "calculate() requires 1 argument (available)");
     }
     
-    if (!arguments[0].isString() || !arguments[1].isString()) {
-        throw jsi::JSError(runtime, "calculate() requires string arguments (JSON arrays)");
+    if (!arguments[0].isString()) {
+        throw jsi::JSError(runtime, "calculate() requires string argument (JSON array)");
     }
     
     std::string available = arguments[0].asString(runtime).utf8(runtime);
-    std::string revealed = arguments[1].asString(runtime).utf8(runtime);
     
-    double result = chaos_odds_calculate(available.c_str(), revealed.c_str());
+    double result = chaos_odds_calculate(available.c_str());
     
     return jsi::Value(result);
 }

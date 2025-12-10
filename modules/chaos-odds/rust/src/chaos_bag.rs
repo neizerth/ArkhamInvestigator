@@ -37,14 +37,17 @@ pub fn get_tokens_value(tokens: &[ChaosToken]) -> i8 {
     if is_auto_fail(tokens) {
         return 0;
     }
-    let value = tokens.iter().map(|token| token.value).sum();
-    value as i8
+    let value: i8 = tokens.iter().map(|token| token.value).sum();
+    value
 }
 
-pub fn gte_difficulty(tokens: &[ChaosToken], skill_value: i8, difficulty: i8) -> bool {
+pub fn sum_gte_difficulty(tokens: &[ChaosToken], skill_value: i8, difficulty: i8) -> u8 {
     if difficulty == 0 {
-        return true;
+        return 1;
     }
     let value = get_tokens_value(tokens) + skill_value;
-    value >= difficulty
+    if value >= difficulty {
+        return 1;
+    }
+    0
 }
