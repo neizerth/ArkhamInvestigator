@@ -1,11 +1,12 @@
-import type { ChaosOddsGroup } from "../../../../model";
+import type { ChaosOddsCache, ChaosOddsGroup } from "../../../../model";
 import { mapRevealOneChaosTokenModifier } from "./mapRevealOneChaosTokenModifier";
 
 type Options = {
 	groups: ChaosOddsGroup[];
-	cache: Record<string, number>;
+	cache: ChaosOddsCache;
 	revealedFrostCount: number;
 	maxRevealCount: number;
+	total: number;
 };
 
 export const mapRevealOneChaosBagModifier = (options: Options) => {

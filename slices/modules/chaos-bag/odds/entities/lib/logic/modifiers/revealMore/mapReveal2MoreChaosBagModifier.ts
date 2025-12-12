@@ -1,15 +1,18 @@
-import type { ChaosOddsGroup } from "@modules/chaos-bag/odds/entities/model";
+import type {
+	ChaosOddsCache,
+	ChaosOddsGroup,
+} from "@modules/chaos-bag/odds/entities/model";
 import { getRegularChaosTokenModifier } from "../getRegularChaosTokenModifier";
 
 type Options = {
 	groups: ChaosOddsGroup[];
-	cache: Record<string, number>;
+	cache: ChaosOddsCache;
 	haveFrost: boolean;
 	revealedFrostCount: number;
 	revealCount: number;
 };
 
-export const setupRevealChaosBagModifier = (options: Options) => {
+export const mapReveal2MoreChaosBagModifier = (options: Options) => {
 	const { revealCount = 1, groups, cache } = options;
 
 	const maxRevealCount = groups.reduce((acc, group) => {
@@ -46,13 +49,13 @@ export const mapChaosBagModifierIteration = ({
 		}
 		const { token, groupIndex } = group;
 		const modifier = getRegularChaosTokenModifier(token);
-		for (const key in cache) {
+		for (let i = 0, length = cache.length; i < length; i++) {
 			// skip frost if it's the first reveal and the group is the same
-			if (checkFrost && index > 1 && key.includes(groupIndex)) {
-				continue;
-			}
-			const cacheKey = groupIndex.concat(key);
-			cache[cacheKey] += modifier;
+			// if (checkFrost && index > 1 && key.includes(groupIndex)) {
+			// continue;
+			// }
+			// const cacheKey = groupIndex.concat(key);
+			// cache[cacheKey] += modifier;
 		}
 	}
 	return cache;

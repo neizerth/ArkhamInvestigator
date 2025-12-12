@@ -3,7 +3,7 @@ import { getChaosOddsGroups } from "../../group/getChaosOddsGroups";
 import { getRegularChaosBagModifier } from "../getRegularChaosBagModifier";
 
 describe("getRegularChaosBagModifier", () => {
-	it("should return 11 keys including 'a' when 11 different tokens are provided", () => {
+	it("should return 11 items when 11 different tokens are provided and include group with index 'a'", () => {
 		const tokens: ChaosBagOddsToken[] = [
 			{ id: "1", type: "-1", value: -1, revealCount: 0 },
 			{ id: "2", type: "-2", value: -2, revealCount: 0 },
@@ -19,14 +19,19 @@ describe("getRegularChaosBagModifier", () => {
 		];
 
 		const groups = getChaosOddsGroups(tokens);
-		const result = getRegularChaosBagModifier(groups);
+		const result = getRegularChaosBagModifier({
+			groups,
+			total: tokens.length,
+		});
 
-		const keys = Object.keys(result);
-		expect(keys).toHaveLength(11);
-		expect(keys).toContain("a");
+		expect(result).toHaveLength(11);
+
+		// Проверяем, что есть группа с индексом 'a' (10 в 36-ричной системе)
+		const groupWithIndexA = groups.find((group) => group.groupIndex === "a");
+		expect(groupWithIndexA).toBeDefined();
 	});
 
-	it("should return 3 keys with matching values when 5 tokens include 3 identical ones", () => {
+	it("should return 3 items with matching modifier values when 5 tokens include 3 identical ones", () => {
 		const tokens: ChaosBagOddsToken[] = [
 			{ id: "1", type: "-2", value: -2, revealCount: 0 },
 			{ id: "2", type: "-2", value: -2, revealCount: 0 },
@@ -36,10 +41,12 @@ describe("getRegularChaosBagModifier", () => {
 		];
 
 		const groups = getChaosOddsGroups(tokens);
-		const result = getRegularChaosBagModifier(groups);
+		const result = getRegularChaosBagModifier({
+			groups,
+			total: tokens.length,
+		});
 
-		const keys = Object.keys(result);
-		expect(keys).toHaveLength(3);
+		expect(result).toHaveLength(3);
 
 		// Находим группы и проверяем значения
 		const groupWithMinusTwo = groups.find(
@@ -56,9 +63,20 @@ describe("getRegularChaosBagModifier", () => {
 		expect(groupWithMinusOne).toBeDefined();
 		expect(groupWithBless).toBeDefined();
 
-		// Проверяем, что значения в кэше совпадают с модификаторами токенов
-		expect(result[groupWithMinusTwo?.groupIndex ?? ""]).toBe(-2);
-		expect(result[groupWithMinusOne?.groupIndex ?? ""]).toBe(-1);
-		expect(result[groupWithBless?.groupIndex ?? ""]).toBe(2);
+		// Находим соответствующие элементы в результате по индексу группы
+		const resultIndexMinusTwo = groups.findIndex(
+			(group) => group === groupWithMinusTwo,
+		);
+		const resultIndexMinusOne = groups.findIndex(
+			(group) => group === groupWithMinusOne,
+		);
+		const resultIndexBless = groups.findIndex(
+			(group) => group === groupWithBless,
+		);
+
+		// Проверяем, что значения модификаторов совпадают
+		expect(result[resultIndexMinusTwo]?.modifier).toBe(-2);
+		expect(result[resultIndexMinusOne]?.modifier).toBe(-1);
+		expect(result[resultIndexBless]?.modifier).toBe(2);
 	});
 });

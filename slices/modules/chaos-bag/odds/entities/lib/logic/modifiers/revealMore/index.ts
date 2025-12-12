@@ -1,2 +1,2 @@
 export * from "./mapRevealOneChaosBagModifier";
-export * from "./setupRevealChaosBagModifier";
+export * from "./mapReveal2MoreChaosBagModifier";

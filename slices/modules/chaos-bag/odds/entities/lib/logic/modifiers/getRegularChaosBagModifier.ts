@@ -1,13 +1,24 @@
-import type { ChaosOddsGroup } from "../../../model";
+import type { ChaosOddsCache, ChaosOddsGroup } from "../../../model";
 import { getRegularChaosTokenModifier } from "./getRegularChaosTokenModifier";
 
-export const getRegularChaosBagModifier = (groups: ChaosOddsGroup[]) => {
-	const cache: Record<string, number> = {};
+type Options = {
+	groups: ChaosOddsGroup[];
+	total: number;
+};
+
+export const getRegularChaosBagModifier = (options: Options) => {
+	const { groups, total } = options;
+	const cache: ChaosOddsCache = [];
 
 	for (const group of groups) {
-		const { groupIndex, token } = group;
+		const { token, count } = group;
+		const probability = count / total;
 		const modifier = getRegularChaosTokenModifier(token);
-		cache[groupIndex] = modifier;
+		cache.push({
+			modifier,
+			probability,
+			count: 1,
+		});
 	}
 
 	return cache;

@@ -1,20 +1,10 @@
 import { ChaosOdds } from "@expo-modules/chaos-odds";
-import { always, range } from "ramda";
 import { isNumber } from "ramda-adjunct";
 import type { ChaosBagOddsToken } from "../../entities/model";
-// import { getChaosOddsVariations } from "../../entities/lib";
 
 export type GetChaosOddsOptions = {
 	available: ChaosBagOddsToken[];
 	revealed: ChaosBagOddsToken[];
-};
-
-const numericRange = range(0, 100);
-
-const mapZero = always(0);
-
-const getSkillValueRange = () => {
-	return numericRange.map(mapZero);
 };
 
 const mapTokenToOddsToken = (token: ChaosBagOddsToken) => ({
