@@ -58,8 +58,8 @@ export const mapRevealOneChaosTokenModifier = ({
 			// 	revealOneTokenCount = 0,
 			// ] = cache[cacheKey];
 
-			const { modifier, probability, count, revealMap = {} } = item;
-			const leftCount = total - count - i - 1;
+			const { modifier, probability, revealMap = {} } = item;
+			const leftCount = total - i - 1;
 
 			const nextModifier = valueModifier + modifier;
 			const revealCount = revealMap[groupIndex] ?? 0;
@@ -69,13 +69,17 @@ export const mapRevealOneChaosTokenModifier = ({
 				[groupIndex]: revealCount + 1,
 			};
 
-			const countArgs: number[] = Object.values(revealMap);
+			const countArgs: number[] = Object.values(revealMap).sort();
 
 			// get combinations count
 			const nextCount = getCombinationsCount(...countArgs);
 
 			const nextProbability =
 				probability * nextCount * (unrevealedCount / leftCount);
+
+			if (isFrost && revealCount > 0) {
+				return cache;
+			}
 
 			cache.push({
 				modifier: nextModifier,
