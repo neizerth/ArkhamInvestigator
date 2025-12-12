@@ -9,7 +9,11 @@ import { seconds } from "@shared/lib";
 import type { ReturnAwaited } from "@shared/model";
 import { put, retry, select, takeEvery } from "redux-saga/effects";
 import { updateAppInfo } from "../updateAppInfo";
-import { appUpdatesChecked, checkAppUpdates } from "./checkAppUpdates";
+import {
+	appUpdatesCheckFailed,
+	appUpdatesChecked,
+	checkAppUpdates,
+} from "./checkAppUpdates";
 import { getAppStatusData } from "./getAppStatusData";
 import { isOutdatedAppVersion, isUpdateNeeded } from "./lib";
 
@@ -81,7 +85,14 @@ function* worker({ payload }: ReturnType<typeof checkAppUpdates>) {
 		yield put(appUpdatesChecked(data));
 	} catch (e) {
 		console.error("error checking app updates", e);
-		if (e instanceof Error && notify) {
+		if (!(e instanceof Error)) {
+			yield put(
+				appUpdatesCheckFailed(new Error("Check app updates: unknown error")),
+			);
+			return;
+		}
+
+		if (notify) {
 			yield put(
 				sendNotification({
 					type: "error",
@@ -92,7 +103,8 @@ function* worker({ payload }: ReturnType<typeof checkAppUpdates>) {
 				}),
 			);
 		}
-		return;
+
+		yield put(appUpdatesCheckFailed(e));
 	}
 }
 export function* checkAppUpdatesSaga() {
