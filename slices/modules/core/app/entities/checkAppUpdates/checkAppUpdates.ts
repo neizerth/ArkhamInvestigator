@@ -9,3 +9,7 @@ export const checkAppUpdates =
 	createAction<CheckAppUpdatesPayload>("app/checkUpdates");
 
 export const appUpdatesChecked = createAction<BuildInfo>("app/updatesChecked");
+
+export const appUpdatesCheckFailed = createAction<Error>(
+	"app/updatesCheckFailed",
+);
