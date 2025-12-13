@@ -148,6 +148,7 @@
 		"@types/react-test-renderer": "^19.0.0",
 		"@types/semver": "^7.7.0",
 		"@types/styled-components-react-native": "^5.2.5",
+		"baseline-browser-mapping": "^2.9.7",
 		"jest": "^29.2.1",
 		"jest-expo": "~53.0.10",
 		"knip": "^5.63.1",
@@ -159,7 +160,9 @@
 	},
 	"private": true,
 	"commitlint": {
-		"extends": ["@commitlint/config-conventional"]
+		"extends": [
+			"@commitlint/config-conventional"
+		]
 	},
 	"expo": {
 		"doctor": {
