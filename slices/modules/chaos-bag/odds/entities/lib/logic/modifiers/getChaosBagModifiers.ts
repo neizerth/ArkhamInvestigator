@@ -1,3 +1,4 @@
+import { pick } from "ramda";
 import type {
 	ChaosBagOddsToken,
 	ChaosOddsCache,
@@ -9,7 +10,6 @@ import { mapRevealChaosBagModifier } from "./revealMore";
 
 type Options = {
 	tokens: ChaosBagOddsToken[];
-	haveFrost: boolean;
 	revealedFrostCount: number;
 };
 
@@ -39,7 +39,7 @@ export const getChaosBagModifiers = (options: Options) => {
 	mapRevealChaosBagModifier(revealOptions);
 	// mapReveal2MoreChaosBagModifier(revealOptions);
 
-	return cache;
+	return cache.map(pick(["modifier", "probability"]));
 
 	// const regularTokens = tokens.filter(() => );
 };

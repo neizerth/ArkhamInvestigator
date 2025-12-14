@@ -11,7 +11,6 @@ describe("getChaosBagModifiers", () => {
 
 		const result = getChaosBagModifiers({
 			tokens,
-			haveFrost: false,
 			revealedFrostCount: 0,
 		});
 
@@ -38,7 +37,6 @@ describe("getChaosBagModifiers", () => {
 
 		const result = getChaosBagModifiers({
 			tokens,
-			haveFrost: false,
 			revealedFrostCount: 0,
 		});
 
@@ -65,7 +63,6 @@ describe("getChaosBagModifiers", () => {
 
 		const result = getChaosBagModifiers({
 			tokens,
-			haveFrost: false,
 			revealedFrostCount: 0,
 		});
 
@@ -91,7 +88,6 @@ describe("getChaosBagModifiers", () => {
 
 		const result = getChaosBagModifiers({
 			tokens,
-			haveFrost: false,
 			revealedFrostCount: 0,
 		});
 
@@ -138,7 +134,6 @@ describe("getChaosBagModifiers", () => {
 
 		const result = getChaosBagModifiers({
 			tokens,
-			haveFrost: false,
 			revealedFrostCount: 0,
 		});
 		// Check that the number of entries is less than 5000
@@ -203,7 +198,6 @@ describe("getChaosBagModifiers", () => {
 
 		const result = getChaosBagModifiers({
 			tokens,
-			haveFrost: true,
 			revealedFrostCount: 0,
 		});
 
