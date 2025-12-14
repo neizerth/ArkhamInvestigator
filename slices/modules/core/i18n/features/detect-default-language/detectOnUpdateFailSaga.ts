@@ -1,12 +1,12 @@
 import { appUpdatesCheckFailed } from "@modules/core/app/entities/checkAppUpdates";
-import { detectLanguage } from "@modules/core/i18n/entities/language/detectLanguage";
-import { selectAvailableLanguages } from "@modules/core/i18n/shared/lib";
+import { selectCurrentLanguage } from "@modules/core/i18n/shared/lib";
 import { put, select, takeEvery } from "redux-saga/effects";
+import { restoreTranslation } from "../../entities/translation/restoreTranslation";
 function* worker() {
-	const availableLanguages: ReturnType<typeof selectAvailableLanguages> =
-		yield select(selectAvailableLanguages);
+	const currentLanguage: ReturnType<typeof selectCurrentLanguage> =
+		yield select(selectCurrentLanguage);
 
-	yield put(detectLanguage({ availableLanguages }));
+	yield put(restoreTranslation(currentLanguage));
 }
 
 export function* detectOnUpdateFailSaga() {

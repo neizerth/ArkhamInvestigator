@@ -7,12 +7,14 @@ import {
 	setHapticMode,
 } from "@modules/core/haptic/shared/lib";
 import { loadLanguage, selectLanguage } from "@modules/core/i18n/shared/lib";
+import { selectOffline } from "@modules/core/network/shared/lib";
 import {
 	selectEnableNavigationAnimation,
 	setEnableNavigationAnimation,
 } from "@modules/core/router/shared/lib";
 import { CAN_ALWAYS_SHOW_GAME_TEXT } from "@shared/config";
 import { useTranslation } from "react-i18next";
+import { useAppSelector } from "slices/shared/lib";
 import { AppDiagnostics } from "../AppDiagnostics";
 import { ChaosBagSettings } from "../ChaosBagSettings";
 import * as C from "./SettingsPage.components";
@@ -26,19 +28,22 @@ import {
 
 export const SettingsPage = () => {
 	const { t } = useTranslation();
+	const isOffline = useAppSelector(selectOffline);
 
 	return (
 		<C.Page title="Settings">
 			<C.Content>
 				<C.Section title={t`General`}>
-					<C.Row>
-						<C.Select
-							label="Language"
-							selector={selectLanguage}
-							actionCreator={loadLanguage}
-							data={languageValues}
-						/>
-					</C.Row>
+					{!isOffline && (
+						<C.Row>
+							<C.Select
+								label="Language"
+								selector={selectLanguage}
+								actionCreator={loadLanguage}
+								data={languageValues}
+							/>
+						</C.Row>
+					)}
 					<C.Row>
 						<C.Select
 							label="Haptic"
