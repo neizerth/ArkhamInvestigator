@@ -6,6 +6,7 @@ import { deviceReducer } from "./device/shared/lib";
 import { hapticReducer } from "./haptic/shared/lib";
 import { i18nReducer } from "./i18n/shared/lib";
 import { modalReducer } from "./modal/shared/base/lib";
+import { networkReducer } from "./network/shared/lib";
 import { routerReducer } from "./router/shared/lib";
 import { soundReducer } from "./sound/shared/lib";
 import { themeReducer } from "./theme/shared/lib";
@@ -22,4 +23,5 @@ export const coreModulesReducer = {
 	...routerReducer,
 	...controlReducer,
 	...themeReducer,
+	...networkReducer,
 };
