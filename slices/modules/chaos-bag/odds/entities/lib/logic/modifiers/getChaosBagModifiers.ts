@@ -11,8 +11,6 @@ type Options = {
 	tokens: ChaosBagOddsToken[];
 	haveFrost: boolean;
 	revealedFrostCount: number;
-	revealCount: number;
-	maxRevealCount: number;
 };
 
 export const getChaosBagModifiers = (options: Options) => {

@@ -17,6 +17,10 @@ export const mapRegularChaosBagModifier = (options: Options) => {
 
 	for (const group of groups) {
 		const { token, count } = group;
+		// Skip tokens with revealCount > 0, they are handled by mapRevealChaosBagModifier
+		if (token.revealCount > 0) {
+			continue;
+		}
 		const probability = count / total;
 		const modifier = getRegularChaosTokenModifier(token);
 		cache.push({

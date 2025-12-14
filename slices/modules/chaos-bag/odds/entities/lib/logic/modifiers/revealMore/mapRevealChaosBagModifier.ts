@@ -35,11 +35,31 @@ export const mapRevealChaosBagModifier = (options: Options) => {
 		return cache;
 	}
 
-	// ---------- Step 1: Build a Map for deduplication ----------
-	const cacheMap = new Map<string, ChaosOddsProcessingCacheItem>();
+	// ---------- Step 1: Build Maps for deduplication ----------
+	const cacheMap = new Map<string, ChaosOddsProcessingCacheItem>(); // For intermediate states
+	const finalCacheMap = new Map<string, ChaosOddsCacheItem>(); // For final states only
+
+	// Initialize finalCacheMap with existing cache entries (from mapRegularChaosBagModifier)
+	// Deduplicate existing entries and clear cache to rebuild it later
 	for (const item of cache) {
-		const key = buildCacheKey(item);
-		cacheMap.set(key, item);
+		const key = buildCacheKey({
+			revealMap: item.revealMap ?? {},
+			availableCount: item.availableCount ?? 0,
+			modifier: item.modifier,
+		});
+		// If duplicate exists, merge probabilities
+		const existing = finalCacheMap.get(key);
+		if (existing) {
+			existing.probability += item.probability;
+		} else {
+			finalCacheMap.set(key, item);
+		}
+	}
+
+	// Clear cache and rebuild it from deduplicated finalCacheMap
+	cache.length = 0;
+	for (const item of finalCacheMap.values()) {
+		cache.push(item);
 	}
 
 	// ---------- Step 2: Initialize reveal-processing states ----------
@@ -99,6 +119,24 @@ export const mapRevealChaosBagModifier = (options: Options) => {
 			if (counts.length > 0) {
 				item.probability *= multinomial(...counts);
 			}
+
+			// Check for duplicate final states before adding to cache
+			const finalKey = buildCacheKey({
+				revealMap: item.revealMap ?? {},
+				availableCount: item.availableCount ?? 0,
+				modifier: item.modifier,
+			});
+
+			const existingFinal = finalCacheMap.get(finalKey);
+			if (existingFinal) {
+				// Merge probabilities for duplicate final states
+				existingFinal.probability += item.probability;
+				// Skip adding duplicate to cache
+				continue;
+			}
+
+			// Add to both cache and finalCacheMap for deduplication
+			finalCacheMap.set(finalKey, item);
 			cache.push(item);
 			continue;
 		}
@@ -109,7 +147,7 @@ export const mapRevealChaosBagModifier = (options: Options) => {
 			if (available === 0) continue;
 
 			const { token } = group;
-			const { value = 0 } = token;
+			const { value = 0, revealCount } = token;
 
 			// Skip auto-fail
 			if (value === "fail") continue;
@@ -130,29 +168,31 @@ export const mapRevealChaosBagModifier = (options: Options) => {
 			};
 
 			// Consume one pending reveal, add new ones if needed
-			const nextPendingReveal = pendingReveal - 1 + (token.revealCount || 0);
+			const nextPendingReveal = pendingReveal - 1 + revealCount;
 
 			const stepProbability = item.probability * (available / availableCount);
+
+			const valueModifier = value === "success" ? AUTO_SUCCESS_VALUE : value;
+			const expectedModifier = item.modifier + valueModifier;
 
 			const key = buildCacheKey({
 				revealMap: nextRevealMap,
 				availableCount: nextAvailableCount,
+				modifier: expectedModifier,
 			});
 
 			const existing = cacheMap.get(key);
 			if (existing) {
+				const { pendingReveal = 0 } = existing;
+
+				// With modifier in the key, existing.modifier should always equal expectedModifier
 				existing.probability += stepProbability;
-				existing.pendingReveal = Math.max(
-					existing.pendingReveal ?? 0,
-					nextPendingReveal,
-				);
+				existing.pendingReveal = Math.max(pendingReveal, nextPendingReveal);
 				continue;
 			}
 
-			const valueModifier = value === "success" ? AUTO_SUCCESS_VALUE : value;
-
 			const newItem: ChaosOddsProcessingCacheItem = {
-				modifier: item.modifier + valueModifier,
+				modifier: expectedModifier,
 				probability: stepProbability,
 				revealMap: nextRevealMap,
 				availableMap: nextAvailableMap,
@@ -173,16 +213,23 @@ export const mapRevealChaosBagModifier = (options: Options) => {
 type CacheKeySource = {
 	revealMap?: ChaosOddsTokenGroupCount;
 	availableCount: number;
+	modifier: number;
 };
 
 /**
- * Canonical key representing a multiset reveal state + remaining bag size.
+ * Canonical key representing a multiset reveal state + remaining bag size + modifier.
+ * The modifier must be included because different paths to the same revealMap/availableCount
+ * can have different modifiers (e.g., tablet→bless→0→0 vs tablet→0→bless→0).
  */
-const buildCacheKey = ({ revealMap = {}, availableCount }: CacheKeySource) => {
+const buildCacheKey = ({
+	revealMap = {},
+	availableCount,
+	modifier,
+}: CacheKeySource) => {
 	const hash = Object.entries(revealMap)
 		.sort(([a], [b]) => a.localeCompare(b))
 		.map(([k, v]) => `${k}:${v}`)
 		.join(",");
 
-	return `${hash}|${availableCount}`;
+	return `${hash}|${availableCount}|${modifier}`;
 };
