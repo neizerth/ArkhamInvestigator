@@ -1,3 +1,4 @@
+import { AUTO_SUCCESS_VALUE } from "@modules/chaos-bag/odds/entities/config";
 import type {
 	ChaosOddsCache,
 	ChaosOddsGroup,
@@ -7,17 +8,14 @@ import { multinomial } from "mathjs";
 
 type Options = {
 	group: ChaosOddsGroup;
-	cache: ChaosOddsCache;
+	cache?: ChaosOddsCache;
 	revealedFrostCount: number;
-	maxRevealCount: number;
-	total: number;
 };
 
 export const mapRevealOneChaosTokenModifier = ({
 	group,
-	cache,
+	cache = [],
 	revealedFrostCount = 0,
-	total,
 }: Options) => {
 	const getCombinationsCount = memoize((...args: number[]) => {
 		return multinomial(args);
@@ -48,8 +46,7 @@ export const mapRevealOneChaosTokenModifier = ({
 
 			const unrevealedCount = maxCount - i;
 
-			const valueModifier =
-				value === "success" ? Number.POSITIVE_INFINITY : value;
+			const valueModifier = value === "success" ? AUTO_SUCCESS_VALUE : value;
 
 			// const [
 			// 	difficulty,
@@ -58,15 +55,31 @@ export const mapRevealOneChaosTokenModifier = ({
 			// 	revealOneTokenCount = 0,
 			// ] = cache[cacheKey];
 
-			const { modifier, probability, revealMap = {} } = item;
-			const leftCount = total - i - 1;
+			const {
+				modifier,
+				probability,
+				revealMap = {},
+				availableMap,
+				availableCount,
+			} = item;
+
+			const nextAvailableCount = availableCount - 1;
 
 			const nextModifier = valueModifier + modifier;
 			const revealCount = revealMap[groupIndex] ?? 0;
 
+			if (isFrost && revealCount > 0) {
+				return cache;
+			}
+
 			const nextRevealMap = {
 				...revealMap,
 				[groupIndex]: revealCount + 1,
+			};
+
+			const nextAvailableMap = {
+				...availableMap,
+				[groupIndex]: availableMap[groupIndex] - 1,
 			};
 
 			const countArgs: number[] = Object.values(revealMap).sort();
@@ -75,17 +88,14 @@ export const mapRevealOneChaosTokenModifier = ({
 			const nextCount = getCombinationsCount(...countArgs);
 
 			const nextProbability =
-				probability * nextCount * (unrevealedCount / leftCount);
-
-			if (isFrost && revealCount > 0) {
-				return cache;
-			}
+				probability * nextCount * (unrevealedCount / nextAvailableCount);
 
 			cache.push({
 				modifier: nextModifier,
 				probability: nextProbability,
-				count: nextCount,
 				revealMap: nextRevealMap,
+				availableMap: nextAvailableMap,
+				availableCount: nextAvailableCount,
 			});
 		}
 	}

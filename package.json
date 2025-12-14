@@ -14,7 +14,8 @@
 		"ios": "expo run:ios",
 		"ios:device": "expo run:ios --device",
 		"web": "expo start --web",
-		"test": "jest --watchAll",
+		"test": "jest",
+		"test:watch": "jest --watchAll",
 		"expo:lint": "expo lint",
 		"circular": "npx madge --circular slices/",
 		"t": "npm run ts:check",
@@ -160,9 +161,7 @@
 	},
 	"private": true,
 	"commitlint": {
-		"extends": [
-			"@commitlint/config-conventional"
-		]
+		"extends": ["@commitlint/config-conventional"]
 	},
 	"expo": {
 		"doctor": {

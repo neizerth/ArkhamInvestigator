@@ -3,10 +3,9 @@ import { mapRevealOneChaosTokenModifier } from "./mapRevealOneChaosTokenModifier
 
 type Options = {
 	groups: ChaosOddsGroup[];
-	cache: ChaosOddsCache;
 	revealedFrostCount: number;
 	maxRevealCount: number;
-	total: number;
+	cache?: ChaosOddsCache;
 };
 
 export const mapRevealOneChaosBagModifier = (options: Options) => {

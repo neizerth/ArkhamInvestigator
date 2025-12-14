@@ -1,6 +1,9 @@
-import type { ChaosBagOddsToken } from "../../../../model";
+import type {
+	ChaosBagOddsToken,
+	ChaosOddsTokenGroupCount,
+} from "../../../../model";
 import { getChaosOddsGroups } from "../../group/getChaosOddsGroups";
-import { getRegularChaosBagModifier } from "../getRegularChaosBagModifier";
+import { mapRegularChaosBagModifier } from "../mapRegularChaosBagModifier";
 
 describe("getRegularChaosBagModifier", () => {
 	it("should return 11 items when 11 different tokens are provided and include group with index 'a'", () => {
@@ -19,9 +22,15 @@ describe("getRegularChaosBagModifier", () => {
 		];
 
 		const groups = getChaosOddsGroups(tokens);
-		const result = getRegularChaosBagModifier({
+		const availableMap = groups.reduce((acc, group) => {
+			acc[group.groupIndex] = group.count;
+			return acc;
+		}, {} as ChaosOddsTokenGroupCount);
+		const result = mapRegularChaosBagModifier({
+			cache: [],
 			groups,
 			total: tokens.length,
+			availableMap,
 		});
 
 		expect(result).toHaveLength(11);
@@ -41,9 +50,15 @@ describe("getRegularChaosBagModifier", () => {
 		];
 
 		const groups = getChaosOddsGroups(tokens);
-		const result = getRegularChaosBagModifier({
+		const availableMap = groups.reduce((acc, group) => {
+			acc[group.groupIndex] = group.count;
+			return acc;
+		}, {} as ChaosOddsTokenGroupCount);
+		const result = mapRegularChaosBagModifier({
+			cache: [],
 			groups,
 			total: tokens.length,
+			availableMap,
 		});
 
 		expect(result).toHaveLength(3);
@@ -78,5 +93,47 @@ describe("getRegularChaosBagModifier", () => {
 		expect(result[resultIndexMinusTwo]?.modifier).toBe(-2);
 		expect(result[resultIndexMinusOne]?.modifier).toBe(-1);
 		expect(result[resultIndexBless]?.modifier).toBe(2);
+	});
+
+	it("should return correct modifier, probability and count for group of three 0 tokens from bag [0,0,0,-2,-2,-4,-5]", () => {
+		const tokens: ChaosBagOddsToken[] = [
+			{ id: "1", type: "0", value: 0, revealCount: 0 },
+			{ id: "2", type: "0", value: 0, revealCount: 0 },
+			{ id: "3", type: "0", value: 0, revealCount: 0 },
+			{ id: "4", type: "-2", value: -2, revealCount: 0 },
+			{ id: "5", type: "-2", value: -2, revealCount: 0 },
+			{ id: "6", type: "-4", value: -4, revealCount: 0 },
+			{ id: "7", type: "-5", value: -5, revealCount: 0 },
+		];
+
+		const groups = getChaosOddsGroups(tokens);
+		const availableMap = groups.reduce((acc, group) => {
+			acc[group.groupIndex] = group.count;
+			return acc;
+		}, {} as ChaosOddsTokenGroupCount);
+		const result = mapRegularChaosBagModifier({
+			cache: [],
+			groups,
+			total: tokens.length,
+			availableMap,
+		});
+
+		// Находим группу с жетонами 0
+		const groupWithZero = groups.find(
+			(group) => group.token.type === "0" && group.token.value === 0,
+		);
+
+		expect(groupWithZero).toBeDefined();
+		expect(groupWithZero?.count).toBe(3);
+
+		// Находим индекс этой группы в массиве groups
+		const groupIndex = groups.findIndex((group) => group === groupWithZero);
+
+		// Проверяем первую запись в результате (должна соответствовать группе с 0)
+		const firstEntry = result[groupIndex];
+
+		expect(firstEntry).toBeDefined();
+		expect(firstEntry?.modifier).toBe(0);
+		expect(firstEntry?.probability).toBe(3 / 7);
 	});
 });

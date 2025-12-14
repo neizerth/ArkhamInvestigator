@@ -14,13 +14,14 @@ export type ChaosOddsGroup = {
 	count: number;
 };
 
-export type ChaosOddsCacheRevealMap = Record<string, number>;
+export type ChaosOddsTokenGroupCount = Record<string, number>;
 
 export type ChaosOddsCacheItem = {
 	modifier: number;
 	probability: number;
-	count: number;
-	revealMap?: ChaosOddsCacheRevealMap;
+	availableMap: ChaosOddsTokenGroupCount;
+	availableCount: number;
+	revealMap?: ChaosOddsTokenGroupCount;
 };
 
 export type ChaosOddsCache = ChaosOddsCacheItem[];
