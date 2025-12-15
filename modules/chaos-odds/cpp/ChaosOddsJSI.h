@@ -1,38 +1,18 @@
 #pragma once
 
 #include <jsi/jsi.h>
-#include <memory>
-#include <string>
+#include "common/jsi_install.h"
 
 namespace facebook {
 namespace jsi {
 namespace chaosodds {
 
+// Wrapper class for backwards compatibility
 class ChaosOddsJSI {
 public:
-    static void install(jsi::Runtime& runtime);
-    
-private:
-    static jsi::Value calculate(
-        jsi::Runtime& runtime,
-        const jsi::Value& thisValue,
-        const jsi::Value* arguments,
-        size_t count
-    );
-    
-    static jsi::Value cancel(
-        jsi::Runtime& runtime,
-        const jsi::Value& thisValue,
-        const jsi::Value* arguments,
-        size_t count
-    );
-    
-    static jsi::Value freeString(
-        jsi::Runtime& runtime,
-        const jsi::Value& thisValue,
-        const jsi::Value* arguments,
-        size_t count
-    );
+    static void install(Runtime& runtime) {
+        chaosodds::install(runtime);
+    }
 };
 
 } // namespace chaosodds

@@ -20,6 +20,10 @@ add_library(
     ${PACKAGE_NAME}
     SHARED
     ../cpp/ChaosOddsJSI.cpp
+    ../cpp/common/memory_manager.cpp
+    ../cpp/common/jsi_helpers.cpp
+    ../cpp/common/jsi_functions.cpp
+    ../cpp/common/jsi_install.cpp
     src/main/cpp/ChaosOddsJNI.cpp
 )
 
@@ -28,6 +32,7 @@ target_include_directories(
     ${PACKAGE_NAME}
     PRIVATE
     ${CPP_DIR}
+    ${CPP_DIR}/common
     "${NODE_MODULES_DIR}/react-native/ReactCommon"
     "${NODE_MODULES_DIR}/react-native/ReactCommon/jsi"
     "${NODE_MODULES_DIR}/react-native/ReactCommon/callinvoker"
