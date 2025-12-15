@@ -10,7 +10,7 @@ export interface ChaosOddsInput {
 }
 
 interface ChaosOddsJSI {
-	calculate(available: string): string; // returns JSON string with 100x100 matrix
+	calculate(available: string, revealed: string): string; // returns JSON string with 100x100 matrix
 	freeString(ptr: string): void; // frees memory allocated by calculate
 }
 

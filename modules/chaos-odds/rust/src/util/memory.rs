@@ -25,14 +25,16 @@ use std::os::raw::c_char;
 ///     // ... process json ...
 ///     
 ///     // 3. ALWAYS free the memory after use
-///     chaos_odds_free_string(result);
+///     memory_free_string(result);
 /// }
 /// ```
 #[no_mangle]
-pub extern "C" fn chaos_odds_free_string(ptr: *mut c_char) {
-    if !ptr.is_null() {
-        unsafe {
-            let _ = CString::from_raw(ptr);
-        }
+pub extern "C" fn memory_free_string(ptr: *mut c_char) {
+    if ptr.is_null() {
+        return;
+    }
+
+    unsafe {
+        let _ = CString::from_raw(ptr);
     }
 }

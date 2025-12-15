@@ -3,7 +3,8 @@
 
 // Rust FFI declarations
 extern "C" {
-    double chaos_odds_calculate(const char* available);
+    const char* chaos_odds_calculate(const char* available, const char* revealed);
+    void memory_free_string(const char* ptr);
 }
 
 namespace facebook {
@@ -39,7 +40,7 @@ jsi::Value ChaosOddsJSI::calculate(
     size_t count
 ) {
     if (count < 1) {
-        throw jsi::JSError(runtime, "calculate() requires 1 argument (available)");
+        throw jsi::JSError(runtime, "calculate() requires at least 1 argument (available)");
     }
     
     if (!arguments[0].isString()) {
@@ -47,10 +48,22 @@ jsi::Value ChaosOddsJSI::calculate(
     }
     
     std::string available = arguments[0].asString(runtime).utf8(runtime);
+    std::string revealed = "[]";
+    if (count >= 2) {
+        if (!arguments[1].isString()) {
+            throw jsi::JSError(runtime, "calculate() second argument must be string (JSON array)");
+        }
+        revealed = arguments[1].asString(runtime).utf8(runtime);
+    }
     
-    double result = chaos_odds_calculate(available.c_str());
+    const char* result_ptr = chaos_odds_calculate(available.c_str(), revealed.c_str());
+    if (result_ptr == nullptr) {
+        return jsi::Value::null();
+    }
+    std::string result_str(result_ptr);
+    memory_free_string(result_ptr);
     
-    return jsi::Value(result);
+    return jsi::Value(jsi::String::createFromUtf8(runtime, result_str));
 }
 
 } // namespace chaosodds

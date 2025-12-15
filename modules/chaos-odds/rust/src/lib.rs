@@ -1,13 +1,16 @@
-mod chaos_bag;
 pub mod config;
-pub mod memory;
-pub mod model;
+pub mod get_chaos_bag_modifiers;
+mod r#impl;
+pub mod types;
+pub mod util;
 
-pub use model::ChaosToken;
+pub use get_chaos_bag_modifiers::get_chaos_bag_modifiers;
+pub use types::ChaosOddsToken;
+pub use util::memory::memory_free_string;
+pub use util::parse::{parse_tokens, parse_tokens_json, serialize_matrix};
 
 // Re-export public functions
 pub use chaos_odds_calculate::chaos_odds_calculate;
-pub use memory::chaos_odds_free_string;
+pub use chaos_odds_calculate::calculate_odds;
 
 mod chaos_odds_calculate;
-
