@@ -67,10 +67,8 @@ pub extern "C" fn chaos_odds_calculate(
 }
 
 pub fn calculate_odds(available: &[ChaosOddsToken], revealed: &[ChaosOddsToken]) -> Vec<Vec<f64>> {
-    let mut odds_matrix: Vec<Vec<f64>> = vec![vec![0.0; 100]; 100];
-
     if is_auto_fail(&revealed) {
-        return odds_matrix;
+        return vec![vec![0.0; 100]; 100];
     }
 
     let revealed_frost_count = revealed
@@ -79,30 +77,32 @@ pub fn calculate_odds(available: &[ChaosOddsToken], revealed: &[ChaosOddsToken])
         .count();
 
     let modifiers = get_chaos_bag_modifiers(&available, revealed_frost_count);
-    let fail_probability: f64 = modifiers
-        .iter()
-        .filter(|m| m.is_fail)
-        .map(|m| m.probability)
-        .sum();
+
+    // Separate fail and non-fail modifiers once to avoid repeated checks
+    let (fail_modifiers, non_fail_modifiers): (Vec<_>, Vec<_>) =
+        modifiers.into_iter().partition(|m| m.is_fail);
+
+    let fail_probability: f64 = fail_modifiers.iter().map(|m| m.probability).sum();
     let zero_difficulty_success = 1.0 - fail_probability;
 
+    // Pre-allocate matrix: first element is zero_difficulty_success, rest are 0.0
+    let mut odds_matrix: Vec<Vec<f64>> = (0..100)
+        .map(|_| {
+            let mut row = vec![0.0; 100];
+            row[0] = zero_difficulty_success;
+            row
+        })
+        .collect();
+
+    // Fill difficulty > 0 in a single pass
     for skill in 0..100 {
-        for difficulty in 0..100 {
-            if difficulty == 0 {
-                odds_matrix[skill][difficulty] = zero_difficulty_success;
-                continue;
-            }
-
+        for difficulty in 1..100 {
             let mut probability = 0.0;
+            let skill_i16 = skill as i16;
+            let difficulty_i16 = difficulty as i16;
 
-            for m in &modifiers {
-                // Skip any draw that results in an auto-fail sentinel
-                if m.is_fail {
-                    continue;
-                }
-
-                let total = skill as i16 + m.modifier;
-                if total >= difficulty as i16 {
+            for m in &non_fail_modifiers {
+                if skill_i16 + m.modifier >= difficulty_i16 {
                     probability += m.probability;
                 }
             }
