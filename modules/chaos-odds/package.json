@@ -9,7 +9,8 @@
 		"build:ios": "cd cli && ./_build.ios.sh",
 		"build:android": "cd cli && ./_build.android.sh",
 		"clean": "cd rust && cargo clean",
-		"test": "cd rust && cargo test"
+		"test": "cd rust && cargo test",
+		"test:release": "cd rust && cargo test --release"
 	},
 	"keywords": [
 		"react-native",

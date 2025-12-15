@@ -1,4 +1,5 @@
 use chaos_odds::{get_chaos_bag_modifiers, ChaosOddsToken};
+use std::time::Instant;
 
 fn token(token_type: &str, value: i8) -> ChaosOddsToken {
     token_with_reveal(token_type, value, 0)
@@ -152,21 +153,22 @@ fn entry_count_under_5000() {
 fn entry_count_under_50000_large_bag() {
     let mut tokens: Vec<ChaosOddsToken> = Vec::new();
 
-    for _ in 0..3 {
+    for _ in 0..10 {
         tokens.push(token_with_reveal("bless", 2, 1));
     }
-    for _ in 0..3 {
+    for _ in 0..10 {
         tokens.push(token_with_reveal("curse", -2, 1));
     }
-    for _ in 0..2 {
+    for _ in 0..8 {
         tokens.push(token_with_reveal("frost", -1, 1));
     }
 
     let regular = [
         ("+1", 1, 2),
-        ("0", 0, 2),
-        ("-1", -1, 2),
-        ("-3", -3, 2),
+        ("0", 0, 4),
+        ("-1", -1, 4),
+        ("-2", -2, 4),
+        ("-3", -3, 4),
         ("-4", -4, 2),
         ("-6", -6, 2),
         ("-8", -8, 2),
@@ -183,5 +185,58 @@ fn entry_count_under_50000_large_bag() {
         result.len() < 50_000,
         "expected < 50_000 entries, got {}",
         result.len()
+    );
+}
+
+#[test]
+fn four_tablet_reveal_count_ten_seconds_performance() {
+    let mut tokens: Vec<ChaosOddsToken> = Vec::new();
+
+    // Add tokens from entry_count_under_50000_large_bag test
+    for _ in 0..10 {
+        tokens.push(token_with_reveal("bless", 2, 1));
+    }
+    for _ in 0..10 {
+        tokens.push(token_with_reveal("curse", -2, 1));
+    }
+    for _ in 0..8 {
+        tokens.push(token_with_reveal("frost", -1, 1));
+    }
+    for _ in 0..6 {
+        tokens.push(token_with_reveal("moon", 0, 1));
+    }
+
+    // 4x tablet tokens with value=0, revealCount=2
+    for _ in 0..1 {
+        tokens.push(token_with_reveal("tablet", 0, 2));
+    }
+
+    let regular = [
+        ("+1", 1, 2),
+        ("0", 0, 4),
+        ("-1", -1, 4),
+        ("-2", -2, 4),
+        ("-3", -3, 4),
+        ("-4", -4, 2),
+        ("-6", -6, 2),
+        ("-8", -8, 2),
+    ];
+    for (typ, val, count) in regular {
+        for _ in 0..count {
+            tokens.push(token(typ, val));
+        }
+    }
+
+    let start = Instant::now();
+    let result = get_chaos_bag_modifiers(&tokens, 0);
+    let duration = start.elapsed();
+
+    println!("entry count: {}", result.len());
+    println!("execution time: {:?}", duration);
+
+    assert!(
+        duration.as_secs_f64() < 10.0,
+        "expected execution time < 10 seconds, got {:?}",
+        duration
     );
 }

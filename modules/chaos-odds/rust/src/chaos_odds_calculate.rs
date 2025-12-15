@@ -78,30 +78,20 @@ pub fn calculate_odds(available: &[ChaosOddsToken], revealed: &[ChaosOddsToken])
 
     let modifiers = get_chaos_bag_modifiers(&available, revealed_frost_count);
 
-    // Separate fail and non-fail modifiers once to avoid repeated checks
-    let (fail_modifiers, non_fail_modifiers): (Vec<_>, Vec<_>) =
-        modifiers.into_iter().partition(|m| m.is_fail);
+    // Pre-allocate matrix: all values start at 0.0
+    let mut odds_matrix: Vec<Vec<f64>> = vec![vec![0.0; 100]; 100];
 
-    let fail_probability: f64 = fail_modifiers.iter().map(|m| m.probability).sum();
-    let zero_difficulty_success = 1.0 - fail_probability;
-
-    // Pre-allocate matrix: first element is zero_difficulty_success, rest are 0.0
-    let mut odds_matrix: Vec<Vec<f64>> = (0..100)
-        .map(|_| {
-            let mut row = vec![0.0; 100];
-            row[0] = zero_difficulty_success;
-            row
-        })
-        .collect();
-
-    // Fill difficulty > 0 in a single pass
+    // Fill matrix for all difficulty levels (including 0)
+    // Note: get_chaos_bag_modifiers already filters out fail tokens,
+    // so all modifiers here are non-fail
     for skill in 0..100 {
-        for difficulty in 1..100 {
+        let skill_i16 = skill as i16;
+
+        for difficulty in 0..100 {
             let mut probability = 0.0;
-            let skill_i16 = skill as i16;
             let difficulty_i16 = difficulty as i16;
 
-            for m in &non_fail_modifiers {
+            for m in &modifiers {
                 if skill_i16 + m.modifier >= difficulty_i16 {
                     probability += m.probability;
                 }

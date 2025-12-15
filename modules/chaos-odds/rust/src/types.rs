@@ -1,5 +1,7 @@
 use serde::{Deserialize, Serialize};
-use std::collections::HashMap;
+use smallvec::SmallVec;
+
+pub type Counts = SmallVec<[u8; 32]>;
 
 #[derive(Clone, Debug, Deserialize, Serialize)]
 pub struct ChaosOddsToken {
@@ -17,25 +19,23 @@ pub struct ChaosOddsToken {
 
 #[derive(Clone, Debug)]
 pub struct ChaosOddsGroup {
-    pub group_index: String,
     pub token: ChaosOddsToken,
     pub count: usize,
+    pub modifier: i8,
 }
 
 #[derive(Clone, Debug)]
 pub struct ChaosOddsCacheItem {
     pub modifier: i16,
     pub probability: f64,
-    pub available_map: HashMap<String, usize>,
+    pub available_map: Counts,
     pub available_count: usize,
-    pub reveal_map: HashMap<String, usize>,
+    pub reveal_map: Counts,
     pub pending_reveal: usize,
-    pub is_fail: bool,
 }
 
 #[derive(Clone, Debug, Serialize)]
 pub struct ChaosBagModifier {
     pub modifier: i16,
     pub probability: f64,
-    pub is_fail: bool,
 }

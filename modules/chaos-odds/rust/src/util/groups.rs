@@ -1,9 +1,9 @@
-use std::collections::HashMap;
+use rustc_hash::FxHashMap;
 
-use crate::types::{ChaosOddsGroup, ChaosOddsToken};
+use crate::types::{ChaosOddsGroup, ChaosOddsToken, Counts};
 
 pub fn build_groups(tokens: &[ChaosOddsToken]) -> Vec<ChaosOddsGroup> {
-    let mut grouped: HashMap<String, ChaosOddsGroup> = HashMap::new();
+    let mut grouped: FxHashMap<String, ChaosOddsGroup> = FxHashMap::default();
 
     for token in tokens.iter().cloned() {
         let key = format!(
@@ -14,25 +14,32 @@ pub fn build_groups(tokens: &[ChaosOddsToken]) -> Vec<ChaosOddsGroup> {
         if let Some(group) = grouped.get_mut(&key) {
             group.count += 1;
         } else {
-            let index = grouped.len();
-            grouped.insert(
-                key,
-                ChaosOddsGroup {
-                    group_index: format!("{:x}", index),
-                    token,
-                    count: 1,
-                },
-            );
+            // Precompute modifier - use saturating cast to fit in i8
+            let modifier = token.as_modifier();
+            let modifier_i8 = modifier.min(127).max(-128) as i8;
+            grouped.insert(key, ChaosOddsGroup {
+                token,
+                count: 1,
+                modifier: modifier_i8,
+            });
         }
     }
 
     grouped.into_iter().map(|(_, group)| group).collect()
 }
 
-pub fn groups_to_available_map(groups: &[ChaosOddsGroup]) -> HashMap<String, usize> {
-    let mut map = HashMap::new();
-    for group in groups {
-        map.insert(group.group_index.clone(), group.count);
+pub fn groups_to_available_map(groups: &[ChaosOddsGroup]) -> Counts {
+    if groups.is_empty() {
+        return Counts::new();
     }
+
+    let mut map = Counts::with_capacity(groups.len());
+    map.resize(groups.len(), 0);
+
+    for (idx, group) in groups.iter().enumerate() {
+        // Use saturating cast to handle counts > 255 safely
+        map[idx] = group.count.min(255) as u8;
+    }
+
     map
 }

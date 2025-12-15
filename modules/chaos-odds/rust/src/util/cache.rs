@@ -1,19 +1,27 @@
-use std::collections::HashMap;
+use std::hash::{Hash, Hasher};
 
-pub fn build_cache_key(
-    reveal_map: &HashMap<String, usize>,
+use crate::types::Counts;
+
+#[derive(Clone, Debug, PartialEq, Eq)]
+pub struct CacheKey {
+    reveal_map: Counts,
     available_count: usize,
     modifier: i16,
-) -> String {
-    let mut entries: Vec<(String, usize)> =
-        reveal_map.iter().map(|(k, v)| (k.clone(), *v)).collect();
-    entries.sort_by(|a, b| a.0.cmp(&b.0));
-
-    let parts: Vec<String> = entries
-        .iter()
-        .map(|(k, v)| format!("{}:{}", k, v))
-        .collect();
-
-    format!("{}|{}|{}", parts.join(","), available_count, modifier)
 }
 
+impl Hash for CacheKey {
+    fn hash<H: Hasher>(&self, state: &mut H) {
+        // Hash the reveal_map efficiently
+        self.reveal_map.hash(state);
+        self.available_count.hash(state);
+        self.modifier.hash(state);
+    }
+}
+
+pub fn build_cache_key(reveal_map: &[u8], available_count: usize, modifier: i16) -> CacheKey {
+    CacheKey {
+        reveal_map: reveal_map.into(),
+        available_count,
+        modifier,
+    }
+}

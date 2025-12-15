@@ -1,9 +1,10 @@
-use std::collections::HashMap;
+use rustc_hash::FxHashMap;
+use smallvec::SmallVec;
 
-use crate::types::{ChaosBagModifier, ChaosOddsCacheItem, ChaosOddsToken};
-use crate::util::cache::build_cache_key;
+use crate::types::{ChaosBagModifier, ChaosOddsCacheItem, ChaosOddsGroup, ChaosOddsToken, Counts};
+use crate::util::cache::{build_cache_key, CacheKey};
 use crate::util::groups::{build_groups, groups_to_available_map};
-use num_integer::multinomial;
+use crate::util::math::multinomial;
 
 /// Main entry point that mirrors the TypeScript `getChaosBagModifiers` logic
 /// without splitting the helpers. Returns only {modifier, probability}.
@@ -21,45 +22,46 @@ pub fn get_chaos_bag_modifiers(
         return Vec::new();
     }
 
-    // Build initial available map (full bag)
-    let mut available_map: HashMap<String, usize> = HashMap::new();
-    for group in &groups {
-        available_map.insert(group.group_index.clone(), group.count);
-    }
+    let group_len = groups.len();
+
+    // Build base available map template (full bag) - reuse for cloning
+    let base_available = groups_to_available_map(&groups);
 
     // ---------- Regular tokens (reveal_count == 0) ----------
     let mut cache: Vec<ChaosOddsCacheItem> = Vec::new();
     let total_f64 = total_tokens as f64;
 
-    for group in &groups {
+    for (group_idx, group) in groups.iter().enumerate() {
         if group.token.reveal_count > 0 {
             continue;
         }
 
         let probability = group.count as f64 / total_f64;
-        let modifier = group.token.as_modifier();
+        let modifier = group.modifier as i16;
 
-        let mut map = available_map.clone();
-        if let Some(entry) = map.get_mut(&group.group_index) {
-            *entry = entry.saturating_sub(1);
+        let mut map = base_available.clone();
+        if map[group_idx] > 0 {
+            map[group_idx] -= 1;
         }
+
+        let mut reveal_map = Counts::with_capacity(group_len);
+        reveal_map.resize(group_len, 0);
 
         cache.push(ChaosOddsCacheItem {
             modifier,
             probability,
             available_map: map,
             available_count: total_tokens.saturating_sub(1),
-            reveal_map: HashMap::new(),
+            reveal_map,
             pending_reveal: 0,
-            is_fail: group.token.is_fail,
         });
     }
 
     // ---------- Reveal tokens (reveal_count > 0) ----------
-    let reveal_groups: Vec<_> = groups
+    let reveal_groups: Vec<(usize, &ChaosOddsGroup)> = groups
         .iter()
-        .filter(|g| g.token.reveal_count > 0)
-        .cloned()
+        .enumerate()
+        .filter(|(_, g)| g.token.reveal_count > 0)
         .collect();
 
     if reveal_groups.is_empty() {
@@ -68,13 +70,12 @@ pub fn get_chaos_bag_modifiers(
             .map(|item| ChaosBagModifier {
                 modifier: item.modifier,
                 probability: item.probability,
-                is_fail: item.is_fail,
             })
             .collect();
     }
 
-    let mut cache_map: HashMap<String, ChaosOddsCacheItem> = HashMap::new();
-    let mut final_cache_map: HashMap<String, ChaosOddsCacheItem> = HashMap::new();
+    let mut cache_map: FxHashMap<CacheKey, ChaosOddsCacheItem> = FxHashMap::default();
+    let mut final_cache_map: FxHashMap<CacheKey, ChaosOddsCacheItem> = FxHashMap::default();
 
     // Seed final_cache_map with existing cache entries (deduplicated)
     for item in cache.drain(..) {
@@ -94,43 +95,63 @@ pub fn get_chaos_bag_modifiers(
     let mut items_to_process: Vec<ChaosOddsCacheItem> = Vec::new();
     let total_count: usize = groups.iter().map(|g| g.count).sum();
 
-    for group in &reveal_groups {
+    for (group_idx, group) in reveal_groups {
         if group.token.is_fail {
             continue;
         }
 
-        let mut map = groups_to_available_map(&groups);
-        if let Some(entry) = map.get_mut(&group.group_index) {
-            *entry = entry.saturating_sub(1);
+        let mut map = base_available.clone();
+        if map[group_idx] > 0 {
+            map[group_idx] -= 1;
         }
 
         let probability = group.count as f64 / total_count as f64;
-        let modifier = group.token.as_modifier();
+        let modifier = group.modifier as i16;
+
+        let mut reveal_map = Counts::with_capacity(group_len);
+        reveal_map.resize(group_len, 0);
 
         items_to_process.push(ChaosOddsCacheItem {
             modifier,
             probability,
             available_map: map,
             available_count: total_count.saturating_sub(1),
-            reveal_map: HashMap::new(),
+            reveal_map,
             pending_reveal: group.token.reveal_count,
-            is_fail: false,
         });
     }
 
-    let mut multinomial_cache: HashMap<Vec<usize>, usize> = HashMap::new();
+    // Profiling counters
+    let mut iterations = 0u64;
+    let mut multinomial_calls = 0u64;
+    let mut hashmap_clones = 0u64;
+    let mut cache_key_builds = 0u64;
 
     while let Some(mut item) = items_to_process.pop() {
+        iterations += 1;
+        if iterations % 100_000 == 0 {
+            eprintln!(
+                "Progress: {} iterations, {} multinomial, {} clones, {} keys",
+                iterations, multinomial_calls, hashmap_clones, cache_key_builds
+            );
+        }
         if item.pending_reveal == 0 {
             // Final state: apply multinomial for permutations of the same reveal multiset
-            let counts = sorted_non_zero_values(&item.reveal_map);
+            // Collect non-zero values directly - multinomial will sort internally
+            let counts: SmallVec<[usize; 32]> = item
+                .reveal_map
+                .iter()
+                .copied()
+                .filter(|&v| v > 0)
+                .map(|v| v as usize)
+                .collect();
             if !counts.is_empty() {
-                let combinations = *multinomial_cache
-                    .entry(counts.clone())
-                    .or_insert_with(|| multinomial(&counts));
+                multinomial_calls += 1;
+                let combinations = multinomial(&counts);
                 item.probability *= combinations as f64;
             }
 
+            cache_key_builds += 1;
             let key = build_cache_key(&item.reveal_map, item.available_count, item.modifier);
             if let Some(existing) = final_cache_map.get_mut(&key) {
                 existing.probability += item.probability;
@@ -146,11 +167,8 @@ pub fn get_chaos_bag_modifiers(
             continue;
         }
 
-        for group in &groups {
-            let available = *item
-                .available_map
-                .get(&group.group_index)
-                .unwrap_or(&0usize);
+        for (group_idx, group) in groups.iter().enumerate() {
+            let available = item.available_map[group_idx] as usize;
 
             if available == 0 {
                 continue;
@@ -158,64 +176,63 @@ pub fn get_chaos_bag_modifiers(
 
             let token = &group.token;
 
-            let is_fail =
-                token.is_fail || (token.token_type == "frost" && revealed_frost_count == 1);
-
-            let mut next_available_map = item.available_map.clone();
-            if let Some(entry) = next_available_map.get_mut(&group.group_index) {
-                *entry = entry.saturating_sub(1);
+            if token.is_fail || (token.token_type == "frost" && revealed_frost_count == 1) {
+                continue;
             }
 
+            // Modify state in-place (backtracking pattern)
+            let old_available = item.available_map[group_idx];
+            let old_reveal = item.reveal_map[group_idx];
+
+            if item.available_map[group_idx] > 0 {
+                item.available_map[group_idx] -= 1;
+            }
+            item.reveal_map[group_idx] = item.reveal_map[group_idx].saturating_add(1);
+
             let next_available_count = item.available_count.saturating_sub(1);
-
-            let mut next_reveal_map = item.reveal_map.clone();
-            let entry = next_reveal_map
-                .entry(group.group_index.clone())
-                .or_insert(0);
-            *entry += 1;
-
             let next_pending_reveal = item.pending_reveal.saturating_sub(1) + token.reveal_count;
-
             let step_probability =
                 item.probability * (available as f64 / item.available_count as f64);
+            let expected_modifier = item.modifier + (group.modifier as i16);
 
-            let expected_modifier = item.modifier + token.as_modifier();
-
-            let key = build_cache_key(&next_reveal_map, next_available_count, expected_modifier);
+            cache_key_builds += 1;
+            let key = build_cache_key(&item.reveal_map, next_available_count, expected_modifier);
 
             if let Some(existing) = cache_map.get_mut(&key) {
                 existing.probability += step_probability;
                 existing.pending_reveal = existing.pending_reveal.max(next_pending_reveal);
-                continue;
+            } else {
+                // Clone only once for the new item
+                hashmap_clones += 1;
+                let new_item = ChaosOddsCacheItem {
+                    modifier: expected_modifier,
+                    probability: step_probability,
+                    available_map: item.available_map.clone(),
+                    available_count: next_available_count,
+                    reveal_map: item.reveal_map.clone(),
+                    pending_reveal: next_pending_reveal,
+                };
+
+                cache_map.insert(key, new_item.clone());
+                items_to_process.push(new_item);
             }
 
-            let new_item = ChaosOddsCacheItem {
-                modifier: expected_modifier,
-                probability: step_probability,
-                available_map: next_available_map,
-                available_count: next_available_count,
-                reveal_map: next_reveal_map,
-                pending_reveal: next_pending_reveal,
-                is_fail,
-            };
-
-            cache_map.insert(key, new_item.clone());
-            items_to_process.push(new_item);
+            // Restore original state (undo/backtrack)
+            item.available_map[group_idx] = old_available;
+            item.reveal_map[group_idx] = old_reveal;
         }
     }
+
+    eprintln!(
+        "Final stats: {} iterations, {} multinomial calls, {} HashMap clones, {} cache key builds, {} final entries",
+        iterations, multinomial_calls, hashmap_clones, cache_key_builds, cache.len()
+    );
 
     cache
         .into_iter()
         .map(|item| ChaosBagModifier {
             modifier: item.modifier,
             probability: item.probability,
-            is_fail: item.is_fail,
         })
         .collect()
-}
-
-fn sorted_non_zero_values(map: &HashMap<String, usize>) -> Vec<usize> {
-    let mut values: Vec<usize> = map.values().copied().filter(|v| *v > 0).collect();
-    values.sort_unstable();
-    values
 }
