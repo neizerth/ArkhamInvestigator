@@ -66,6 +66,12 @@ rustup target add aarch64-linux-android armv7-linux-androideabi x86_64-linux-and
 - `npm run build:android` - Build Android libraries
 - `npm run clean` - Clean Rust build artifacts
 - `npm run test` - Run Rust tests
+- `npm run test:js` - Run JavaScript/TypeScript tests
+- `npm run test:js:watch` - Run JavaScript tests in watch mode
+- `npm run test:js:coverage` - Run JavaScript tests with coverage
+- `npm run test:ios` - Run tests for iOS platform
+- `npm run test:android` - Run tests for Android platform
+- `npm run test:all` - Run all tests (Rust + JavaScript)
 
 
 ## Project Structure

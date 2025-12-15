@@ -79,7 +79,7 @@ pub fn get_chaos_bag_modifiers(
 
     // Seed final_cache_map with existing cache entries (deduplicated)
     for item in cache.drain(..) {
-        let key = build_cache_key(&item.reveal_map, item.available_count, item.modifier);
+        let key = build_cache_key(&item.reveal_map, item.available_count, item.modifier, 0);
         if let Some(existing) = final_cache_map.get_mut(&key) {
             existing.probability += item.probability;
         } else {
@@ -121,24 +121,18 @@ pub fn get_chaos_bag_modifiers(
         });
     }
 
-    // Profiling counters
-    let mut iterations = 0u64;
-    let mut multinomial_calls = 0u64;
-    let mut hashmap_clones = 0u64;
-    let mut cache_key_builds = 0u64;
+    // Profiling counters (currently unused, kept for future profiling/debugging)
+    let mut _multinomial_calls = 0u64;
+    let mut _hashmap_clones = 0u64;
+    let mut _cache_key_builds = 0u64;
+
+    let mut multinomial_cache: FxHashMap<SmallVec<[usize; 32]>, u64> = FxHashMap::default();
 
     while let Some(mut item) = items_to_process.pop() {
-        iterations += 1;
-        if iterations % 100_000 == 0 {
-            eprintln!(
-                "Progress: {} iterations, {} multinomial, {} clones, {} keys",
-                iterations, multinomial_calls, hashmap_clones, cache_key_builds
-            );
-        }
         if item.pending_reveal == 0 {
             // Final state: apply multinomial for permutations of the same reveal multiset
             // Collect non-zero values directly - multinomial will sort internally
-            let counts: SmallVec<[usize; 32]> = item
+            let mut counts: SmallVec<[usize; 32]> = item
                 .reveal_map
                 .iter()
                 .copied()
@@ -146,13 +140,16 @@ pub fn get_chaos_bag_modifiers(
                 .map(|v| v as usize)
                 .collect();
             if !counts.is_empty() {
-                multinomial_calls += 1;
-                let combinations = multinomial(&counts);
+                counts.sort_unstable();
+                _multinomial_calls += 1;
+                let combinations = *multinomial_cache
+                    .entry(counts.clone())
+                    .or_insert_with(|| multinomial(&counts));
                 item.probability *= combinations as f64;
             }
 
-            cache_key_builds += 1;
-            let key = build_cache_key(&item.reveal_map, item.available_count, item.modifier);
+            _cache_key_builds += 1;
+            let key = build_cache_key(&item.reveal_map, item.available_count, item.modifier, 0);
             if let Some(existing) = final_cache_map.get_mut(&key) {
                 existing.probability += item.probability;
                 continue;
@@ -195,15 +192,20 @@ pub fn get_chaos_bag_modifiers(
                 item.probability * (available as f64 / item.available_count as f64);
             let expected_modifier = item.modifier + (group.modifier as i16);
 
-            cache_key_builds += 1;
-            let key = build_cache_key(&item.reveal_map, next_available_count, expected_modifier);
+            _cache_key_builds += 1;
+            let key = build_cache_key(
+                &item.reveal_map,
+                next_available_count,
+                expected_modifier,
+                next_pending_reveal,
+            );
 
             if let Some(existing) = cache_map.get_mut(&key) {
                 existing.probability += step_probability;
                 existing.pending_reveal = existing.pending_reveal.max(next_pending_reveal);
             } else {
                 // Clone only once for the new item
-                hashmap_clones += 1;
+                _hashmap_clones += 1;
                 let new_item = ChaosOddsCacheItem {
                     modifier: expected_modifier,
                     probability: step_probability,
@@ -222,11 +224,6 @@ pub fn get_chaos_bag_modifiers(
             item.reveal_map[group_idx] = old_reveal;
         }
     }
-
-    eprintln!(
-        "Final stats: {} iterations, {} multinomial calls, {} HashMap clones, {} cache key builds, {} final entries",
-        iterations, multinomial_calls, hashmap_clones, cache_key_builds, cache.len()
-    );
 
     cache
         .into_iter()

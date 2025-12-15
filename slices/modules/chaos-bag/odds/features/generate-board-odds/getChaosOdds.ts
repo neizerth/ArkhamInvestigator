@@ -22,7 +22,15 @@ export const getChaosOdds = async (options: GetChaosOddsOptions) => {
 
 	try {
 		const odds = ChaosOdds.calculate(availableTokens);
+
+		// If calculation was cancelled, odds will be null
+		if (odds === null) {
+			console.log("chaos odds calculation was cancelled");
+			return null;
+		}
+
 		console.log("chaos odds result:", odds);
+		return odds;
 	} catch (error) {
 		console.warn("ChaosOdds not ready yet, skipping calculation", error);
 		return null;

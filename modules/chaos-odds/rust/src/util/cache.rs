@@ -7,6 +7,7 @@ pub struct CacheKey {
     reveal_map: Counts,
     available_count: usize,
     modifier: i16,
+    pending_reveal: usize,
 }
 
 impl Hash for CacheKey {
@@ -15,13 +16,20 @@ impl Hash for CacheKey {
         self.reveal_map.hash(state);
         self.available_count.hash(state);
         self.modifier.hash(state);
+        self.pending_reveal.hash(state);
     }
 }
 
-pub fn build_cache_key(reveal_map: &[u8], available_count: usize, modifier: i16) -> CacheKey {
+pub fn build_cache_key(
+    reveal_map: &[u8],
+    available_count: usize,
+    modifier: i16,
+    pending_reveal: usize,
+) -> CacheKey {
     CacheKey {
         reveal_map: reveal_map.into(),
         available_count,
         modifier,
+        pending_reveal,
     }
 }

@@ -1,11 +1,1 @@
-export type OnLoadEventPayload = {
-	url: string;
-};
-
-export type ChaosOddsModuleEvents = {
-	onChange: (params: ChangeEventPayload) => void;
-};
-
-export type ChangeEventPayload = {
-	value: string;
-};
+// Model types for chaos odds module

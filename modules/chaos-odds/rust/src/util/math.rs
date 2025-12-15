@@ -1,50 +1,63 @@
-use rustc_hash::FxHashMap;
-use std::sync::Mutex;
+use dashmap::DashMap;
+use smallvec::SmallVec;
 
-// Global cache for multinomial calculations
+// Cache key uses SmallVec to reduce allocations and keep on stack for small sizes
+type CacheKey = SmallVec<[usize; 16]>;
+
 lazy_static::lazy_static! {
-    static ref MULTINOMIAL_CACHE: Mutex<FxHashMap<Vec<usize>, u64>> = Mutex::new(FxHashMap::default());
+    static ref MULTINOMIAL_CACHE: DashMap<CacheKey, u64> = DashMap::new();
 }
 
-/// Compute multinomial coefficient using logarithms to avoid overflow
+// Precomputed log-factorials for small n to avoid repeated ln calls
+const MAX_PRECOMPUTED: usize = 50;
+lazy_static::lazy_static! {
+    static ref LOG_FACTORIALS: Vec<f64> = {
+        let mut logs = Vec::with_capacity(MAX_PRECOMPUTED + 1);
+        logs.push(0.0);
+        let mut sum = 0.0;
+        for i in 1..=MAX_PRECOMPUTED {
+            sum += (i as f64).ln();
+            logs.push(sum);
+        }
+        logs
+    };
+}
+
+#[inline]
+fn log_factorial(n: usize) -> f64 {
+    if n <= MAX_PRECOMPUTED {
+        LOG_FACTORIALS[n]
+    } else {
+        let mut result = 0.0;
+        for i in 1..=n {
+            result += (i as f64).ln();
+        }
+        result
+    }
+}
+
+/// Compute multinomial coefficient using logarithms to avoid overflow.
 /// multinomial(n; k1, k2, ...) = n! / (k1! * k2! * ...)
-/// Uses memoization to cache results across function calls
 pub fn multinomial(counts: &[usize]) -> u64 {
-    // Create a sorted copy for cache key consistency
-    let mut sorted_counts = counts.to_vec();
+    // Sort counts for cache key consistency
+    let mut sorted_counts: CacheKey = counts.iter().copied().collect();
     sorted_counts.sort_unstable();
-    
-    // Check cache first
-    {
-        let cache = MULTINOMIAL_CACHE.lock().unwrap();
-        if let Some(&cached) = cache.get(&sorted_counts) {
-            return cached;
-        }
+
+    if let Some(cached) = MULTINOMIAL_CACHE.get(&sorted_counts) {
+        return *cached;
     }
-    
-    // Compute multinomial using logarithms to avoid overflow
+
     let total: usize = counts.iter().sum();
-    
-    let mut log_result = 0.0;
-    // Compute log(n!)
-    for i in 1..=total {
-        log_result += (i as f64).ln();
-    }
-    // Subtract log(k1!) + log(k2!) + ...
+
+    let mut log_result = log_factorial(total);
     for &k in counts {
-        for i in 1..=k {
-            log_result -= (i as f64).ln();
-        }
+        log_result -= log_factorial(k);
     }
-    // Convert back from log space and round to nearest u64
+
     let result = (log_result.exp() + 0.5) as u64;
-    
-    // Cache the result
-    {
-        let mut cache = MULTINOMIAL_CACHE.lock().unwrap();
-        cache.insert(sorted_counts, result);
-    }
-    
+
+    MULTINOMIAL_CACHE.insert(sorted_counts, result);
+
     result
 }
 

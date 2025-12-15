@@ -1,9 +1,3 @@
 {
-	"platforms": ["apple", "android", "web"],
-	"apple": {
-		"modules": ["ChaosOddsModule"]
-	},
-	"android": {
-		"modules": ["expo.modules.chaosodds.ChaosOddsModule"]
-	}
+	"platforms": ["apple", "android", "web"]
 }

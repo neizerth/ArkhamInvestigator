@@ -21,11 +21,13 @@ fn zero_difficulty_with_autofail_and_plus_one_is_half() {
 
     let revealed: Vec<ChaosOddsToken> = Vec::new();
 
-    let result = calculate_odds(&available, &revealed);
+    let result =
+        calculate_odds(&available, &revealed).expect("Calculation should not be cancelled");
 
-    assert!(
-        (result[0][0] - 0.5).abs() < 1e-9,
-        "expected 0.5 probability at [0][0], got {}",
+    // Result is now in percentages (0-100), so 0.5 probability = 50%
+    assert_eq!(
+        result[0][0], 50,
+        "expected 50% probability at [0][0], got {}%",
         result[0][0]
     );
 }
