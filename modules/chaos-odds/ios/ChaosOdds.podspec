@@ -11,6 +11,13 @@ Pod::Spec.new do |s|
   }
   s.source         = { git: '' }
   s.static_framework = true
+  
+  # Copy C++ files to ios directory for CocoaPods
+  s.prepare_command = <<-CMD
+    mkdir -p common
+    cp -R ../cpp/common/* common/ 2>/dev/null || true
+    cp ../cpp/ChaosOddsJSI.* . 2>/dev/null || true
+  CMD
 
   s.dependency 'ExpoModulesCore'
   s.dependency 'React-Core'
@@ -19,10 +26,11 @@ Pod::Spec.new do |s|
   s.pod_target_xcconfig = {
     'DEFINES_MODULE' => 'YES',
     'CLANG_CXX_LANGUAGE_STANDARD' => 'c++17',
-    'CLANG_CXX_LIBRARY' => 'libc++'
+    'CLANG_CXX_LIBRARY' => 'libc++',
+    'HEADER_SEARCH_PATHS' => '$(inherited) "${PODS_TARGET_SRCROOT}" "${PODS_TARGET_SRCROOT}/common" "${PODS_TARGET_SRCROOT}/../cpp" "${PODS_TARGET_SRCROOT}/../cpp/common"'
   }
 
-  s.source_files = "**/*.{h,m,mm,swift,cpp}"
+  s.source_files = "**/*.{h,m,mm,swift,cpp}", "common/**/*.{h,cpp}"
   s.public_header_files = "ChaosOddsJSIModule.h"
 
   s.vendored_frameworks = 'chaos_odds.xcframework'

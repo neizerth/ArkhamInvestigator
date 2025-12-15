@@ -1,7 +1,7 @@
 #pragma once
 
 #include <jsi/jsi.h>
-#include "../cpp/common/jsi_install.h"
+#include "common/jsi_install.h"
 
 namespace facebook {
 namespace jsi {
