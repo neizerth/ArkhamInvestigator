@@ -248,7 +248,12 @@ fn four_tablet_reveal_count_ten_seconds_performance() {
         .expect("test timed out: get_chaos_bag_modifiers took too long");
 
     println!("entry count: {}", result.len());
-    println!("execution time: {:?}", duration);
+    let duration_secs = duration.as_secs_f64();
+    println!(
+        "execution time: {:.3}s ({}ms)",
+        duration_secs,
+        duration.as_millis()
+    );
 
     // Performance expectations differ for debug vs release
     #[cfg(debug_assertions)]
@@ -257,9 +262,10 @@ fn four_tablet_reveal_count_ten_seconds_performance() {
     let max_duration = 10.0; // Release: strict requirement
 
     assert!(
-        duration.as_secs_f64() < max_duration,
-        "expected execution time < {} seconds, got {:?}",
+        duration_secs < max_duration,
+        "expected execution time < {} seconds, got {:.3}s ({}ms)",
         max_duration,
-        duration
+        duration_secs,
+        duration.as_millis()
     );
 }
