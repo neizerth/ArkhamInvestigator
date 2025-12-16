@@ -16,8 +16,7 @@ function* worker() {
 
 function takeDebouncedAction(match: (action: unknown) => boolean) {
 	// Increased debounce time to reduce frequency of calculations
-	// 20ms was too aggressive and could cause memory issues with concurrent calculations
-	return debounce(100, match, worker);
+	return debounce(300, match, worker);
 }
 
 export function* watchBoardOddsCalculationSaga() {

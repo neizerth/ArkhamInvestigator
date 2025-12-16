@@ -50,7 +50,7 @@ export const getChaosOdds = async (options: GetChaosOddsOptions) => {
 			return null;
 		}
 
-		console.log("odds at 0,0", odds[0][0]);
+		console.log("odds at 0,0", odds[1][1]);
 		return odds;
 	} catch (error) {
 		// Check if this calculation was superseded by a newer one

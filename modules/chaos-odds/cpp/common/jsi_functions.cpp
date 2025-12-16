@@ -2,110 +2,32 @@
 #include "ffi_declarations.h"
 #include "memory_manager.h"
 #include "jsi_helpers.h"
+
 #include <stdexcept>
 #include <thread>
-#include <mutex>
-#include <queue>
-#include <functional>
 #include <memory>
+
+#include <ReactCommon/CallInvoker.h>
 
 namespace facebook {
 namespace jsi {
 namespace chaosodds {
 namespace functions {
 
-// Thread-safe task queue for scheduling JS callbacks from background threads
 namespace {
-    struct PendingCallback {
-        std::function<void(Runtime&)> callback;
-    };
+    std::shared_ptr<react::CallInvoker> g_jsInvoker;
+}
 
-    std::mutex callback_mutex;
-    std::queue<std::unique_ptr<PendingCallback>> callback_queue;
-    Runtime* g_runtime = nullptr;
-    bool flush_scheduled = false;
+void setCallInvoker(std::shared_ptr<react::CallInvoker> jsInvoker) {
+    g_jsInvoker = std::move(jsInvoker);
+}
 
-    // Schedule a callback to be executed on the JS thread
-    void schedule_callback(Runtime& runtime, std::function<void(Runtime&)> callback) {
-        bool needs_flush = false;
-        {
-            std::lock_guard<std::mutex> lock(callback_mutex);
-            auto task = std::make_unique<PendingCallback>();
-            task->callback = std::move(callback);
-            callback_queue.push(std::move(task));
-            g_runtime = &runtime;
-            
-            // Schedule flush if not already scheduled
-            if (!flush_scheduled) {
-                flush_scheduled = true;
-                needs_flush = true;
-            }
-        }
-        
-        // Schedule callback processing outside of lock
-        if (needs_flush) {
-            schedule_callback_flush(runtime);
-        }
-    }
-
-    // Execute all pending callbacks (should be called from JS thread)
-    void flush_callbacks(Runtime& runtime) {
-        std::queue<std::unique_ptr<PendingCallback>> local_queue;
-        {
-            std::lock_guard<std::mutex> lock(callback_mutex);
-            callback_queue.swap(local_queue);
-            flush_scheduled = false; // Reset flag after processing
-        }
-
-        while (!local_queue.empty()) {
-            auto task = std::move(local_queue.front());
-            local_queue.pop();
-            if (task && task->callback) {
-                try {
-                    task->callback(runtime);
-                } catch (...) {
-                    // Ignore errors in callbacks to prevent crashes
-                }
-            }
-        }
-        
-        // If more callbacks were added while processing, schedule another flush
-        {
-            std::lock_guard<std::mutex> lock(callback_mutex);
-            if (!callback_queue.empty() && !flush_scheduled && g_runtime) {
-                flush_scheduled = true;
-                schedule_callback_flush(*g_runtime);
-            }
-        }
-    }
-
-    // Schedule callback processing using setTimeout (safer than direct calls)
-    void schedule_callback_flush(Runtime& runtime) {
-        try {
-            // Use setTimeout to schedule callback processing on JS thread
-            auto setTimeout = runtime.global().getPropertyAsFunction(runtime, "setTimeout");
-            
-            // Create a one-time processor function
-            auto processor = Function::createFromHostFunction(
-                runtime,
-                PropNameID::forAscii(runtime, "chaosOddsFlushCallbacks"),
-                0,
-                [](Runtime& rt, const Value& /*thisValue*/, const Value* /*args*/, size_t /*count*/) -> Value {
-                    flush_callbacks(rt);
-                    return Value::undefined();
-                }
-            );
-            
-            // Schedule immediate execution (0ms delay)
-            setTimeout.call(runtime, processor, static_cast<double>(0));
-        } catch (...) {
-            // If setTimeout fails, try direct flush (less safe but better than nothing)
-            flush_callbacks(runtime);
-        }
-    }
-} // anonymous namespace
-
-Value calculate(Runtime& runtime, const Value& /*thisValue*/, const Value* arguments, size_t count) {
+Value calculate(
+    Runtime& runtime,
+    const Value& /*thisValue*/,
+    const Value* arguments,
+    size_t count
+) {
     std::string available;
     std::string revealed;
 
@@ -113,84 +35,139 @@ Value calculate(Runtime& runtime, const Value& /*thisValue*/, const Value* argum
         helpers::validate_calculate_args(arguments, count);
         auto extracted = helpers::extract_strings(runtime, arguments, count);
         available = std::move(extracted.first);
-        revealed = std::move(extracted.second);
+        revealed  = std::move(extracted.second);
     } catch (const std::exception& e) {
         throw JSError(runtime, e.what());
     }
 
-    // Return a Promise so JS can await the result
-    auto promiseConstructor = runtime.global().getPropertyAsFunction(runtime, "Promise");
+    auto jsInvoker = g_jsInvoker;
+    if (!jsInvoker) {
+        throw JSError(runtime, "JS CallInvoker is not initialized");
+    }
+
+    auto promiseCtor =
+        runtime.global().getPropertyAsFunction(runtime, "Promise");
+
     auto executor = Function::createFromHostFunction(
         runtime,
         PropNameID::forAscii(runtime, "chaosOddsCalculate"),
         2,
-        [available = std::move(available), revealed = std::move(revealed), &runtime](
-            Runtime& rt, const Value& /*thisValue*/, const Value* args, size_t /*count*/) -> Value {
-            auto resolve = args[0].getObject(rt).getFunction(rt);
-            auto reject = args[1].getObject(rt).getFunction(rt);
+        [available = std::move(available),
+         revealed  = std::move(revealed),
+         jsInvoker](Runtime& rt,
+                    const Value& /*thisValue*/,
+                    const Value* args,
+                    size_t /*count*/) -> Value {
 
-            // Copy strings for thread safety
+            // Capture resolve / reject on JS thread
+            auto resolve = std::make_shared<Function>(
+                args[0].getObject(rt).getFunction(rt)
+            );
+            auto reject = std::make_shared<Function>(
+                args[1].getObject(rt).getFunction(rt)
+            );
+
+            // Capture Runtime* for use inside invokeAsync (guaranteed JS thread)
+            // Safe because invokeAsync guarantees execution on the same Runtime
+            Runtime* runtime_ptr = &rt;
+
+            // Copy POD data for background thread
             std::string availableCopy = available;
-            std::string revealedCopy = revealed;
+            std::string revealedCopy  = revealed;
 
-            // Launch computation in a separate thread to avoid blocking Event Loop
-            std::thread([availableCopy, revealedCopy, resolve, reject, &runtime]() mutable {
-                try {
-                    // Perform computation in background thread
-                    const char* result_ptr = chaos_odds_calculate(availableCopy.c_str(), revealedCopy.c_str());
+            std::thread(
+                [availableCopy,
+                 revealedCopy,
+                 jsInvoker,
+                 resolve,
+                 reject,
+                 runtime_ptr]() {
 
-                    if (result_ptr == nullptr) {
-                        // Schedule resolve callback on JS thread safely
-                        schedule_callback(runtime, [resolve](Runtime& rt) mutable {
-                            resolve.call(rt, Value::null());
-                        });
-                        return;
+                    try {
+                        const char* result_ptr =
+                            chaos_odds_calculate(
+                                availableCopy.c_str(),
+                                revealedCopy.c_str()
+                            );
+
+                        jsInvoker->invokeAsync(
+                            [resolve, result_ptr, runtime_ptr]() {
+                                if (result_ptr == nullptr) {
+                                    resolve->call(*runtime_ptr, Value::null());
+                                    return;
+                                }
+
+                                std::string result_str(result_ptr);
+                                uint64_t id =
+                                    chaosodds::memory::generate_id();
+                                chaosodds::memory::store_pointer(
+                                    id,
+                                    result_ptr
+                                );
+
+                                auto result_obj =
+                                    helpers::create_result_object(
+                                        *runtime_ptr,
+                                        id,
+                                        result_str
+                                    );
+
+                                resolve->call(*runtime_ptr, result_obj);
+                            }
+                        );
+                    } catch (const std::exception& e) {
+                        std::string msg = e.what();
+                        jsInvoker->invokeAsync(
+                            [reject, msg, runtime_ptr]() {
+                                auto error_val = String::createFromUtf8(*runtime_ptr, msg);
+                                reject->call(*runtime_ptr, error_val);
+                            }
+                        );
+                    } catch (...) {
+                        jsInvoker->invokeAsync(
+                            [reject, runtime_ptr]() {
+                                auto error_val = String::createFromUtf8(
+                                    *runtime_ptr,
+                                    "Unknown error during chaos odds calculation"
+                                );
+                                reject->call(*runtime_ptr, error_val);
+                            }
+                        );
                     }
-
-                    std::string result_str(result_ptr);
-                    uint64_t id = chaosodds::memory::generate_id();
-                    chaosodds::memory::store_pointer(id, result_ptr);
-
-                    // Schedule resolve callback on JS thread safely
-                    schedule_callback(runtime, [resolve, result_str, id](Runtime& rt) mutable {
-                        auto result_obj = helpers::create_result_object(rt, id, result_str);
-                        resolve.call(rt, result_obj);
-                    });
-
-                } catch (const std::exception& e) {
-                    // Schedule reject callback on JS thread safely
-                    std::string error_msg = e.what();
-                    schedule_callback(runtime, [reject, error_msg](Runtime& rt) mutable {
-                        reject.call(rt, String::createFromUtf8(rt, error_msg));
-                    });
-                } catch (...) {
-                    // Schedule reject callback on JS thread safely
-                    schedule_callback(runtime, [reject](Runtime& rt) mutable {
-                        reject.call(rt, String::createFromUtf8(rt, "Unknown error during chaos odds calculation"));
-                    });
                 }
-            }).detach(); // Detach thread - it will complete independently
+            ).detach();
 
             return Value::undefined();
         }
     );
 
-    return promiseConstructor.callAsConstructor(runtime, executor);
+    return promiseCtor.callAsConstructor(runtime, executor);
 }
 
-Value cancel(Runtime& runtime, const Value& thisValue, const Value* arguments, size_t count) {
+Value cancel(
+    Runtime&,
+    const Value&,
+    const Value*,
+    size_t
+) {
     chaos_odds_cancel();
     return Value::undefined();
 }
 
-Value freeString(Runtime& runtime, const Value& thisValue, const Value* arguments, size_t count) {
+Value freeString(
+    Runtime& runtime,
+    const Value&,
+    const Value* arguments,
+    size_t count
+) {
     if (count < 1) {
         return Value::undefined();
     }
-    
-    uint64_t id = helpers::parse_id_from_value(runtime, arguments[0]);
+
+    uint64_t id =
+        helpers::parse_id_from_value(runtime, arguments[0]);
     chaosodds::memory::free_pointer_by_id(id);
-    
+
     return Value::undefined();
 }
 
@@ -198,4 +175,3 @@ Value freeString(Runtime& runtime, const Value& thisValue, const Value* argument
 } // namespace chaosodds
 } // namespace jsi
 } // namespace facebook
-

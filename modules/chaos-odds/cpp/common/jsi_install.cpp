@@ -1,11 +1,16 @@
 #include "jsi_install.h"
 #include "jsi_functions.h"
+#include <ReactCommon/CallInvoker.h>
 
 namespace facebook {
 namespace jsi {
 namespace chaosodds {
 
-void install(Runtime& runtime) {
+void install(Runtime& runtime, std::shared_ptr<react::CallInvoker> jsInvoker) {
+    // Set CallInvoker for async operations
+    if (jsInvoker) {
+        functions::setCallInvoker(jsInvoker);
+    }
     auto chaosOdds = Object(runtime);
     
     // Install calculate function
