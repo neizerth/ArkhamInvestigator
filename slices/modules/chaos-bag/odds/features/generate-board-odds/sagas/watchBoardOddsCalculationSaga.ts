@@ -14,21 +14,21 @@ function* worker() {
 	yield put(generateBoardOdds());
 }
 
-function takeDebouncedAction(match: (action: unknown) => boolean) {
+function takeDebouncedMatch(match: (action: unknown) => boolean) {
 	// Increased debounce time to reduce frequency of calculations
 	return debounce(300, match, worker);
 }
 
 export function* watchBoardOddsCalculationSaga() {
 	// on board change
-	yield takeDebouncedAction(setCurrentInvestigatorIndex.match);
+	yield takeDebouncedMatch(setCurrentInvestigatorIndex.match);
 	// on chaos bag updates
-	yield takeDebouncedAction(chaosBagUpdated.match);
+	yield takeDebouncedMatch(chaosBagUpdated.match);
 	// on board updates
-	yield takeDebouncedAction(boardChanged.match);
+	yield takeDebouncedMatch(boardChanged.match);
 
 	// on story code change
-	yield takeDebouncedAction(setStoryCode.match);
+	yield takeDebouncedMatch(setStoryCode.match);
 	// on story difficulty id change
-	yield takeDebouncedAction(setStoryDifficultyId.match);
+	yield takeDebouncedMatch(setStoryDifficultyId.match);
 }
