@@ -1,4 +1,5 @@
 import { ChaosOdds } from "@expo-modules/chaos-odds";
+import { delay } from "@shared/lib";
 import { isNumber } from "ramda-adjunct";
 import type { ChaosBagOddsToken } from "../../entities/model";
 
@@ -15,29 +16,51 @@ const mapTokenToOddsToken = (token: ChaosBagOddsToken) => ({
 	reveal_count: token.revealCount,
 });
 
+// Track calculation ID to ignore results from superseded calculations
+let calculationId = 0;
+
 export const getChaosOdds = async (options: GetChaosOddsOptions) => {
+	console.log("getChaosOdds started");
 	const { available, revealed } = options;
 
 	const availableTokens = available.map(mapTokenToOddsToken);
 	const revealedTokens = revealed.map(mapTokenToOddsToken);
 
-	try {
-		const odds = ChaosOdds.calculate(availableTokens, revealedTokens);
+	// Cancel any ongoing calculation before starting a new one
+	ChaosOdds.cancel();
 
-		// If calculation was cancelled, odds will be null
-		if (odds === null) {
-			console.log("chaos odds calculation was cancelled");
+	// Wait a bit to allow cancellation to propagate and previous calculation to clean up
+	// This prevents race conditions and memory leaks when calculations are cancelled
+	await delay(10);
+
+	// Increment calculation ID to track this specific calculation
+	const currentCalculationId = ++calculationId;
+
+	try {
+		const odds = await ChaosOdds.calculate(availableTokens, revealedTokens);
+
+		// Check if this calculation was superseded by a newer one
+		// If calculationId changed, a new calculation was started, so ignore this result
+		if (currentCalculationId !== calculationId) {
+			console.log("getChaosOdds: Calculation superseded, ignoring result");
 			return null;
 		}
 
-		console.log("chaos odds result:", odds.length);
+		if (!odds) {
+			return null;
+		}
+
+		console.log("odds at 0,0", odds[0][0]);
 		return odds;
 	} catch (error) {
-		console.warn("ChaosOdds not ready yet, skipping calculation", error);
+		// Check if this calculation was superseded by a newer one
+		if (currentCalculationId !== calculationId) {
+			console.log("getChaosOdds: Calculation superseded, ignoring error");
+			return null;
+		}
+
+		// Calculation was cancelled or failed
+		console.error("ChaosOdds calculation error:", error);
 		return null;
 	}
-
-	// const variations = getChaosOddsVariations(options);
-
-	// console.log("variations size", variations.length);
 };

@@ -1,15 +1,10 @@
-import {
-	boardChanged,
-	setCurrentInvestigatorIndex,
-} from "@modules/board/base/shared/lib";
-import {
-	chaosBagUpdated,
-	selectShowChaosBagOdds,
-} from "@modules/chaos-bag/base/shared/lib";
+import { selectShowChaosBagOdds } from "@modules/chaos-bag/base/shared/lib";
 import type { ReturnAwaited } from "@shared/model";
-import { call, select, takeEvery } from "redux-saga/effects";
-import { selectBoardChaosOddsTokens } from "../../entities/lib";
-import { getChaosOdds } from "./getChaosOdds";
+import { call, select, takeLatest } from "redux-saga/effects";
+import { selectBoardChaosOddsTokens } from "../../../entities/lib";
+import { createCacheKey } from "../createCacheKey";
+import { generateBoardOdds } from "../generateBoardOdds";
+import { getChaosOdds } from "../getChaosOdds";
 
 let cacheKey: string | null = null;
 
@@ -27,7 +22,7 @@ function* worker() {
 	const tokens: ReturnType<typeof tokensSelector> =
 		yield select(tokensSelector);
 
-	const currentCacheKey = JSON.stringify(tokens);
+	const currentCacheKey = createCacheKey(tokens);
 
 	if (currentCacheKey === cacheKey) {
 		console.log("tokens are the same, skipping");
@@ -53,11 +48,6 @@ function* worker() {
 	// console.log("generateBoardOddsSaga");
 }
 
-export function* generateBoardOddsSaga() {
-	// on board change
-	yield takeEvery(setCurrentInvestigatorIndex.match, worker);
-	// on chaos bag updates
-	yield takeEvery(chaosBagUpdated.match, worker);
-	// on board updates
-	yield takeEvery(boardChanged.match, worker);
+export function* generateBoardOddsWorkerSaga() {
+	yield takeLatest(generateBoardOdds.match, worker);
 }
