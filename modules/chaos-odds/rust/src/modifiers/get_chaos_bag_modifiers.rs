@@ -77,7 +77,8 @@ pub fn get_chaos_bag_modifiers(
     // Pre-allocate hash maps with estimated capacity to reduce rehashing
     // Use total_tokens as estimate (total_count computed later)
     let estimated_capacity = (total_tokens * 4).min(10000);
-    let mut cache_map: FxHashMap<CacheKey, ChaosOddsCacheItem> =
+    // HashMap stores only probability, not full state - major optimization
+    let mut cache_map: FxHashMap<CacheKey, f64> =
         FxHashMap::with_capacity_and_hasher(estimated_capacity, Default::default());
     let mut final_cache_map: FxHashMap<CacheKey, ChaosOddsCacheItem> =
         FxHashMap::with_capacity_and_hasher(estimated_capacity, Default::default());
@@ -204,13 +205,14 @@ pub fn get_chaos_bag_modifiers(
             use std::collections::hash_map::Entry;
             match cache_map.entry(key) {
                 Entry::Occupied(mut e) => {
-                    e.get_mut().probability += step_probability;
-                    e.get_mut().pending_reveal =
-                        e.get_mut().pending_reveal.max(next_pending_reveal);
+                    // Only update probability in HashMap
+                    *e.get_mut() += step_probability;
                 }
                 Entry::Vacant(e) => {
-                    // Clone only once for the new item - use item.available_map which is already correct
-                    // SmallVec clone is optimized for stack-allocated data (typically < 32 elements)
+                    // Insert only probability in HashMap (not full state)
+                    e.insert(step_probability);
+
+                    // Create new item and push directly to queue - no clone!
                     let new_item = ChaosOddsCacheItem {
                         modifier: expected_modifier,
                         probability: step_probability,
@@ -220,9 +222,8 @@ pub fn get_chaos_bag_modifiers(
                         pending_reveal: next_pending_reveal,
                     };
 
-                    // Insert and clone in one step - avoid double clone
-                    let item_ref = e.insert(new_item);
-                    items_to_process.push(item_ref.clone());
+                    // Push directly without clone - major optimization
+                    items_to_process.push(new_item);
                 }
             }
 
