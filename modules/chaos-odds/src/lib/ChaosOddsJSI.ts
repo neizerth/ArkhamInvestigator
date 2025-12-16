@@ -27,7 +27,10 @@ interface ChaosOddsJSI {
 	 * @param revealed JSON string with revealed tokens (optional, defaults to empty array)
 	 * @returns Object with id and result, or null if calculation was cancelled
 	 */
-	calculate(available: string, revealed: string): CalculateResult | null;
+	calculate(
+		available: string,
+		revealed: string,
+	): Promise<CalculateResult | null>;
 
 	/**
 	 * Free memory allocated by calculate()

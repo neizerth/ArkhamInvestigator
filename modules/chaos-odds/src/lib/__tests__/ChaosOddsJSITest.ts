@@ -34,7 +34,7 @@ describe("ChaosOddsJSI", () => {
 	});
 
 	describe("Function signatures", () => {
-		it("calculate should accept 2 string arguments", () => {
+		it("calculate should accept 2 string arguments", async () => {
 			if (!ChaosOddsJSI?.calculate) {
 				return; // Skip if not available (e.g., on web)
 			}
@@ -50,23 +50,21 @@ describe("ChaosOddsJSI", () => {
 			]);
 
 			// Should not throw with valid arguments
-			expect(() => {
-				const result = ChaosOddsJSI.calculate(testInput, "[]");
-				if (result !== null) {
-					// Result should be an object with id and result
-					expect(result).toHaveProperty("id");
-					expect(result).toHaveProperty("result");
-					expect(typeof result.id).toBe("number");
-					expect(typeof result.result).toBe("string");
-					// Result should be a valid JSON string
-					expect(() => JSON.parse(result.result)).not.toThrow();
-					// Free the memory using ID
-					ChaosOddsJSI.freeString(result.id);
-				}
-			}).not.toThrow();
+			const result = await ChaosOddsJSI.calculate(testInput, "[]");
+			if (result !== null) {
+				// Result should be an object with id and result
+				expect(result).toHaveProperty("id");
+				expect(result).toHaveProperty("result");
+				expect(typeof result.id).toBe("number");
+				expect(typeof result.result).toBe("string");
+				// Result should be a valid JSON string
+				expect(() => JSON.parse(result.result)).not.toThrow();
+				// Free the memory using ID
+				ChaosOddsJSI.freeString(result.id);
+			}
 		});
 
-		it("calculate should return null or CalculateResult object", () => {
+		it("calculate should return null or CalculateResult object", async () => {
 			if (!ChaosOddsJSI?.calculate) {
 				return;
 			}
@@ -81,7 +79,7 @@ describe("ChaosOddsJSI", () => {
 				},
 			]);
 
-			const result = ChaosOddsJSI.calculate(testInput, "[]");
+			const result = await ChaosOddsJSI.calculate(testInput, "[]");
 			expect(
 				result === null ||
 					(typeof result === "object" &&
@@ -132,7 +130,7 @@ describe("ChaosOddsJSI", () => {
 	});
 
 	describe("Memory management", () => {
-		it("should not leak memory on multiple calls", () => {
+		it("should not leak memory on multiple calls", async () => {
 			if (!ChaosOddsJSI?.calculate || !ChaosOddsJSI?.freeString) {
 				return;
 			}
@@ -149,7 +147,7 @@ describe("ChaosOddsJSI", () => {
 
 			// Call multiple times and ensure memory is freed
 			for (let i = 0; i < 10; i++) {
-				const result = ChaosOddsJSI.calculate(testInput, "[]");
+				const result = await ChaosOddsJSI.calculate(testInput, "[]");
 				if (result !== null) {
 					// Verify result structure
 					expect(result).toHaveProperty("id");

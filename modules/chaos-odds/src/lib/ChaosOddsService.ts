@@ -2,10 +2,10 @@ import ChaosOddsJSI from "./ChaosOddsJSI";
 import type { ChaosOddsInput } from "./ChaosOddsJSI";
 
 export const ChaosOddsService = {
-	calculate(
+	async calculate(
 		available: ChaosOddsInput[],
 		revealed: ChaosOddsInput[] = [],
-	): number[][] | null {
+	): Promise<number[][] | null> {
 		if (!ChaosOddsJSI.calculate || !ChaosOddsJSI.freeString) {
 			throw new Error(
 				"ChaosOdds JSI module is not available. Please rebuild the app to include native bindings.",
@@ -15,7 +15,10 @@ export const ChaosOddsService = {
 		const revealedJSON = JSON.stringify(revealed);
 
 		// Call native function - returns object with id and result, or null if cancelled
-		const calculateResult = ChaosOddsJSI.calculate(availableJSON, revealedJSON);
+		const calculateResult = await ChaosOddsJSI.calculate(
+			availableJSON,
+			revealedJSON,
+		);
 
 		// If calculation was cancelled, result will be null
 		if (calculateResult === null) {
