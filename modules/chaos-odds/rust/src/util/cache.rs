@@ -1,14 +1,13 @@
 use std::hash::{Hash, Hasher};
 use smallvec::SmallVec;
 
-/// Pack counts into u64: each count uses 3 bits, supports up to 21 groups
+/// Pack counts into u128 (state2): each count uses 3 bits, supports up to 21 groups
 /// Max count per group is 7 (values 0-7).
-/// For groups > 21, we fall back to storing only the mask (available_mask).
 #[inline(always)]
-pub fn pack_available_counts(counts: &[u8]) -> u64 {
-    let mut packed = 0u64;
+pub fn pack_available_counts(counts: &[u8]) -> u128 {
+    let mut packed = 0u128;
     for (i, &c) in counts.iter().enumerate().take(21) {
-        let count = c.min(7) as u64; // Clamp to max 7
+        let count = c.min(7) as u128; // Clamp to max 7
         packed |= count << (i * 3);
     }
     packed
@@ -24,73 +23,196 @@ pub fn unpack_available_counts(packed: u64, group_len: usize) -> [u8; 32] {
     counts
 }
 
-/// Get count for a specific group from packed u64
+/// Get count for a specific group from packed state2 (u128)
 #[inline(always)]
-pub fn get_available_count(packed: u64, group_idx: usize) -> u8 {
+pub fn get_available_count(state2: u128, group_idx: usize) -> u8 {
     if group_idx >= 21 {
-        // For groups > 21, we can't store the count in u64, return 1 if mask bit is set
-        // This is a limitation, but should be rare in practice
-        return 1; // Assume available if we can't store it
+        return 0; // Out of range
     }
-    ((packed >> (group_idx * 3)) & 0x7) as u8
+    ((state2 >> (group_idx * 3)) & 0x7) as u8
 }
 
-/// Set count for a specific group in packed u64
+/// Set count for a specific group in packed state2 (u128)
 #[inline(always)]
-pub fn set_available_count(packed: u64, group_idx: usize, count: u8) -> u64 {
+pub fn set_available_count(state2: u128, group_idx: usize, count: u8) -> u128 {
     if group_idx >= 21 {
-        return packed; // Can't store for groups > 21
+        return state2; // Can't store for groups > 21
     }
-    let count = count.min(7) as u64; // Clamp to max 7
-    let mask = !(0x7u64 << (group_idx * 3));
-    (packed & mask) | (count << (group_idx * 3))
+    let count = count.min(7) as u128; // Clamp to max 7
+    let mask = !(0x7u128 << (group_idx * 3));
+    (state2 & mask) | (count << (group_idx * 3))
 }
 
-/// Decrement count for a specific group in packed u64
+/// Decrement count for a specific group in packed state2 (u128)
 #[inline(always)]
-pub fn dec_available_count(packed: u64, group_idx: usize) -> u64 {
+pub fn dec_available_count(state2: u128, group_idx: usize) -> u128 {
     if group_idx >= 21 {
-        return packed; // Can't modify for groups > 21
+        return state2; // Can't modify for groups > 21
     }
-    let current = get_available_count(packed, group_idx);
+    let current = get_available_count(state2, group_idx);
     if current > 0 {
-        set_available_count(packed, group_idx, current - 1)
+        set_available_count(state2, group_idx, current - 1)
     } else {
-        packed
+        state2
     }
 }
 
-/// Increment count for a specific group in packed u64
+/// Increment count for a specific group in packed state2 (u128)
 #[inline(always)]
-pub fn inc_available_count(packed: u64, group_idx: usize) -> u64 {
+pub fn inc_available_count(state2: u128, group_idx: usize) -> u128 {
     if group_idx >= 21 {
-        return packed; // Can't modify for groups > 21
+        return state2; // Can't modify for groups > 21
     }
-    let current = get_available_count(packed, group_idx);
+    let current = get_available_count(state2, group_idx);
     if current < 7 {
-        set_available_count(packed, group_idx, current + 1)
+        set_available_count(state2, group_idx, current + 1)
     } else {
-        packed
+        state2
     }
 }
 
-/// Increment reveal count at index (4 bits per counter)
+/// Extract available_mask from state1 (bits 0-31)
 #[inline(always)]
-pub fn inc_reveal(reveal: u128, idx: usize) -> u128 {
-    reveal + (1u128 << (idx * 4))
+pub fn get_available_mask(state1: u128) -> u32 {
+    (state1 & 0xFFFFFFFF) as u32
 }
 
-/// Unpack reveal counts from u128 (for multinomial calculation)
+/// Extract reveal from state1 (bits 32-127)
+#[inline(always)]
+pub fn get_reveal(state1: u128) -> u128 {
+    state1 >> 32
+}
+
+/// Set available_mask in state1 (bits 0-31)
+#[inline(always)]
+pub fn set_available_mask(state1: u128, mask: u32) -> u128 {
+    (state1 & !0xFFFFFFFFu128) | (mask as u128)
+}
+
+/// Set reveal in state1 (bits 32-127)
+#[inline(always)]
+pub fn set_reveal(state1: u128, reveal: u128) -> u128 {
+    (state1 & 0xFFFFFFFF) | (reveal << 32)
+}
+
+/// Increment reveal count at index in state1 (4 bits per counter, starting at bit 32)
+#[inline(always)]
+pub fn inc_reveal(state1: u128, idx: usize) -> u128 {
+    if idx >= 24 {
+        return state1; // Max 24 groups in state1
+    }
+    let reveal = get_reveal(state1);
+    let new_reveal = reveal + (1u128 << (idx * 4));
+    set_reveal(state1, new_reveal)
+}
+
+/// Get reveal count at index from state1
+#[inline(always)]
+pub fn get_reveal_count(state1: u128, idx: usize) -> u8 {
+    if idx >= 24 {
+        return 0;
+    }
+    let reveal = get_reveal(state1);
+    ((reveal >> (idx * 4)) & 0xF) as u8
+}
+
+/// Unpack reveal counts from state1 (for multinomial calculation)
 #[inline]
-pub fn unpack_reveal(reveal: u128, group_len: usize) -> SmallVec<[u8; 32]> {
-    let mut counts = SmallVec::with_capacity(group_len.min(32));
-    for i in 0..group_len.min(32) {
+pub fn unpack_reveal(state1: u128, group_len: usize) -> SmallVec<[u8; 32]> {
+    let reveal = get_reveal(state1);
+    let mut counts = SmallVec::with_capacity(group_len.min(24));
+    for i in 0..group_len.min(24) {
         let count = ((reveal >> (i * 4)) & 0xF) as u8;
         if count > 0 {
             counts.push(count);
         }
     }
     counts
+}
+
+/// Pack sorted reveal counts into u128 for use as cache key
+/// This eliminates the need for SmallVec and sorting in hot loop
+/// Structure: up to 32 counts, each 4 bits (max 15), sorted by value
+#[inline]
+pub fn pack_sorted_counts_for_multinomial(counts: &[u8]) -> u128 {
+    let mut packed = 0u128;
+    let mut sorted_counts = [0u8; 32];
+    let mut len = 0;
+    
+    // Collect non-zero counts
+    for &count in counts {
+        if count > 0 && len < 32 {
+            sorted_counts[len] = count;
+            len += 1;
+        }
+    }
+    
+    // Sort in-place (small array, insertion sort is fine)
+    if len > 1 {
+        for i in 1..len {
+            let key = sorted_counts[i];
+            let mut j = i;
+            while j > 0 && sorted_counts[j - 1] > key {
+                sorted_counts[j] = sorted_counts[j - 1];
+                j -= 1;
+            }
+            sorted_counts[j] = key;
+        }
+    }
+    
+    // Pack sorted counts into u128 (4 bits per count, max 32 counts)
+    for (i, &count) in sorted_counts.iter().take(32).enumerate() {
+        packed |= (count as u128 & 0xF) << (i * 4);
+    }
+    
+    // Also store length in upper bits (bits 128-135, but we only have 128 bits)
+    // Use bits 124-127 for length (4 bits, max 15, but we need up to 32)
+    // Actually, we can use a different approach: store length separately or use a sentinel
+    
+    packed
+}
+
+/// Extract reveal from state1 and pack as sorted multinomial key
+/// This is the fast path that avoids SmallVec allocation and sorting
+#[inline]
+pub fn pack_reveal_as_multinomial_key(state1: u128, group_len: usize) -> u128 {
+    let reveal = get_reveal(state1);
+    let mut counts = [0u8; 32];
+    let mut len = 0;
+    
+    // Extract non-zero counts
+    for i in 0..group_len.min(24) {
+        let count = ((reveal >> (i * 4)) & 0xF) as u8;
+        if count > 0 && len < 32 {
+            counts[len] = count;
+            len += 1;
+        }
+    }
+    
+    if len == 0 {
+        return 0;
+    }
+    
+    // Sort in-place (insertion sort for small arrays)
+    if len > 1 {
+        for i in 1..len {
+            let key = counts[i];
+            let mut j = i;
+            while j > 0 && counts[j - 1] > key {
+                counts[j] = counts[j - 1];
+                j -= 1;
+            }
+            counts[j] = key;
+        }
+    }
+    
+    // Pack sorted counts into u128 (4 bits per count, max 32 counts = 128 bits)
+    let mut packed = 0u128;
+    for (i, &count) in counts.iter().take(32).enumerate() {
+        packed |= (count as u128 & 0xF) << (i * 4);
+    }
+    
+    packed
 }
 
 #[derive(Clone, Debug, PartialEq, Eq)]
@@ -112,13 +234,15 @@ impl Hash for CacheKey {
 }
 
 pub fn build_cache_key(
-    reveal: u128,
+    state1: u128, // Combined state (available_mask + reveal)
+    state2: u128, // Available counts
     available_count: usize,
     modifier: i16,
     pending_reveal: usize,
 ) -> CacheKey {
+    // Combine state1 and state2 for hashing (XOR for fast combination)
     CacheKey {
-        reveal,
+        reveal: state1 ^ (state2 << 1), // Combine both states for hashing
         modifier,
         available: available_count.min(255) as u8,
         pending: pending_reveal.min(255) as u8,

@@ -3,23 +3,29 @@ use smallvec::SmallVec;
 
 use crate::types::{ChaosOddsCacheItem, ChaosOddsGroup, ChaosOddsToken};
 use crate::util::cache::{
-    build_cache_key, dec_available_count, get_available_count, inc_reveal, pack_available_counts,
-    unpack_reveal, CacheKey,
+    build_cache_key, dec_available_count, get_available_count, get_available_mask, inc_reveal,
+    pack_available_counts, pack_reveal_as_multinomial_key, set_available_mask, unpack_reveal,
+    CacheKey,
 };
 use crate::util::groups::{build_groups, groups_to_available_map};
 use crate::util::math::multinomial;
 
-/// Build available_mask from packed available_counts - set bit if count > 0
-/// For groups > 21, we need to use the original base_available array to check counts
+/// Build available_mask from packed state2 - set bit if count > 0
 #[inline(always)]
-fn build_available_mask(available_counts: u64, group_len: usize) -> u32 {
+fn build_available_mask(state2: u128, group_len: usize) -> u32 {
     let mut mask = 0u32;
-    for i in 0..group_len.min(32) {
-        if get_available_count(available_counts, i) > 0 {
+    for i in 0..group_len.min(21) {
+        if get_available_count(state2, i) > 0 {
             mask |= 1u32 << i;
         }
     }
     mask
+}
+
+/// Build state1 from available_mask and reveal
+#[inline(always)]
+fn build_state1(available_mask: u32, reveal: u128) -> u128 {
+    (available_mask as u128) | (reveal << 32)
 }
 
 /// Main entry point that mirrors the TypeScript `getChaosBagModifiers` logic
@@ -45,11 +51,11 @@ pub fn get_chaos_bag_modifiers(
     let base_available_counts_array = {
         let mut arr = [0u8; 32];
         for (i, &count) in base_available.iter().enumerate().take(32) {
-            arr[i] = count.min(7); // Clamp to max 7 for u64 packing (3 bits per group)
+            arr[i] = count.min(7); // Clamp to max 7 for u128 packing (3 bits per group)
         }
         arr
     };
-    let base_available_counts = pack_available_counts(&base_available_counts_array);
+    let base_state2 = pack_available_counts(&base_available_counts_array);
 
     // Pre-compute token type flags to avoid string comparisons in hot loop
     let group_is_frost: Vec<bool> = groups
@@ -69,17 +75,17 @@ pub fn get_chaos_bag_modifiers(
         let probability = group.count as f64 / total_f64;
         let modifier = group.modifier as i16;
 
-        // Build available_mask: decrement count for current group
-        let counts = dec_available_count(base_available_counts, group_idx);
-        let available_mask = build_available_mask(counts, group_len);
+        // Build state2: decrement count for current group
+        let state2 = dec_available_count(base_state2, group_idx);
+        let available_mask = build_available_mask(state2, group_len);
+        let state1 = build_state1(available_mask, 0u128);
 
         cache.push(ChaosOddsCacheItem {
             modifier,
             probability,
-            available_mask,
-            available_counts: counts, // u64 is Copy
             available_count: total_tokens.saturating_sub(1),
-            reveal: 0u128, // No reveals for regular tokens
+            state1, // Combined state: mask + reveal
+            state2, // Available counts
             pending_reveal: 0,
         });
     }
@@ -106,7 +112,13 @@ pub fn get_chaos_bag_modifiers(
 
     // Seed final_cache_map with existing cache entries (deduplicated)
     for item in cache.drain(..) {
-        let key = build_cache_key(item.reveal, item.available_count, item.modifier, 0);
+        let key = build_cache_key(
+            item.state1,
+            item.state2,
+            item.available_count,
+            item.modifier,
+            0,
+        );
         if let Some(existing) = final_cache_map.get_mut(&key) {
             existing.probability += item.probability;
         } else {
@@ -125,9 +137,10 @@ pub fn get_chaos_bag_modifiers(
             continue;
         }
 
-        // Build available_mask: decrement count for current group
-        let counts = dec_available_count(base_available_counts, group_idx);
-        let available_mask = build_available_mask(counts, group_len);
+        // Build state2: decrement count for current group
+        let state2 = dec_available_count(base_state2, group_idx);
+        let available_mask = build_available_mask(state2, group_len);
+        let state1 = build_state1(available_mask, 0u128);
 
         let probability = group.count as f64 / total_count as f64;
         let modifier = group.modifier as i16;
@@ -135,33 +148,80 @@ pub fn get_chaos_bag_modifiers(
         items_to_process.push(ChaosOddsCacheItem {
             modifier,
             probability,
-            available_mask,
-            available_counts: counts, // Copy array (no allocation)
             available_count: total_count.saturating_sub(1),
-            reveal: 0u128, // Start with no reveals
+            state1, // Combined state: mask + reveal
+            state2, // Available counts
             pending_reveal: group.token.reveal_count,
         });
     }
 
-    let mut multinomial_cache: FxHashMap<SmallVec<[usize; 32]>, u64> = FxHashMap::default();
+    // Use u128 as key instead of SmallVec - eliminates sorting and allocation in hot loop
+    let mut multinomial_cache: FxHashMap<u128, u64> = FxHashMap::default();
+
+    // Precompute probability table for all possible (available, available_count) combinations
+    // This eliminates ALL divisions in the hot loop - only multiplications remain
+    // Structure: prob_table[group_idx][available_count][available] = available / available_count
+    const MAX_GROUPS: usize = 32;
+    const MAX_AVAILABLE: usize = 7; // Max tokens per group in state2
+    const MAX_AVAILABLE_COUNT: usize = 100; // Reasonable upper bound for available_count
+
+    // Use Vec of Vecs for flexibility (could be optimized to fixed array if needed)
+    // Structure: prob_table[group_idx][available_count - 1][available] = available / available_count
+    let mut prob_table: Vec<Vec<[f64; MAX_AVAILABLE + 1]>> =
+        Vec::with_capacity(group_len.min(MAX_GROUPS));
+
+    for _group_idx in 0..group_len.min(MAX_GROUPS) {
+        let mut group_probs = Vec::with_capacity(total_count.min(MAX_AVAILABLE_COUNT) + 1);
+
+        // Precompute for all available_count values from 1 to total_count
+        for available_count in 1..=total_count.min(MAX_AVAILABLE_COUNT) {
+            let mut probs = [0f64; MAX_AVAILABLE + 1];
+            let available_count_f64 = available_count as f64;
+
+            // Precompute for all possible available values (0-7)
+            for available in 0..=MAX_AVAILABLE.min(available_count) {
+                probs[available] = available as f64 / available_count_f64;
+            }
+
+            group_probs.push(probs);
+        }
+
+        // Pad with zeros for available_count > total_count (shouldn't happen, but safety)
+        while group_probs.len() <= MAX_AVAILABLE_COUNT {
+            group_probs.push([0f64; MAX_AVAILABLE + 1]);
+        }
+
+        prob_table.push(group_probs);
+    }
+
+    // Pad prob_table to MAX_GROUPS for safe indexing
+    while prob_table.len() < MAX_GROUPS {
+        prob_table.push(vec![[0f64; MAX_AVAILABLE + 1]; MAX_AVAILABLE_COUNT + 1]);
+    }
 
     while let Some(mut item) = items_to_process.pop() {
         if item.pending_reveal == 0 {
             // Final state: apply multinomial for permutations of the same reveal multiset
-            // Unpack reveal counts from u128
-            let reveal_counts = unpack_reveal(item.reveal, group_len);
-            if !reveal_counts.is_empty() {
-                let mut counts: SmallVec<[usize; 32]> =
-                    reveal_counts.iter().map(|&v| v as usize).collect();
-                counts.sort_unstable();
-
-                let combinations = *multinomial_cache
-                    .entry(counts.clone())
-                    .or_insert_with(|| multinomial(&counts));
+            // Pack reveal as sorted u128 key - NO SmallVec allocation, NO sorting in hot loop!
+            let multinomial_key = pack_reveal_as_multinomial_key(item.state1, group_len);
+            if multinomial_key != 0 {
+                let combinations = *multinomial_cache.entry(multinomial_key).or_insert_with(|| {
+                    // Only unpack and compute multinomial on cache miss
+                    let reveal_counts = unpack_reveal(item.state1, group_len);
+                    let counts: SmallVec<[usize; 32]> =
+                        reveal_counts.iter().map(|&v| v as usize).collect();
+                    multinomial(&counts)
+                });
                 item.probability *= combinations as f64;
             }
 
-            let key = build_cache_key(item.reveal, item.available_count, item.modifier, 0);
+            let key = build_cache_key(
+                item.state1,
+                item.state2,
+                item.available_count,
+                item.modifier,
+                0,
+            );
             if let Some(existing) = final_cache_map.get_mut(&key) {
                 existing.probability += item.probability;
                 continue;
@@ -179,8 +239,9 @@ pub fn get_chaos_bag_modifiers(
         }
 
         for (group_idx, group) in groups.iter().enumerate() {
-            // Check if group is available using bitmask - O(1) operation
-            if (item.available_mask & (1u32 << group_idx)) == 0 {
+            // Check if group is available using bitmask from state1 - O(1) operation
+            let available_mask = get_available_mask(item.state1);
+            if (available_mask & (1u32 << group_idx)) == 0 {
                 continue;
             }
 
@@ -191,30 +252,45 @@ pub fn get_chaos_bag_modifiers(
                 continue;
             }
 
-            // Get available count from item's current counts
-            let available = get_available_count(item.available_counts, group_idx) as usize;
+            // Get available count from state2 - pure bit operation, no array access
+            let available = get_available_count(item.state2, group_idx) as usize;
 
             // Modify state in-place (backtracking pattern)
-            let old_available_mask = item.available_mask;
-            let old_available_counts = item.available_counts;
-            let old_reveal = item.reveal;
+            let old_state1 = item.state1;
+            let old_state2 = item.state2;
 
-            // Decrement count: if count becomes 0, clear the bit
-            item.available_counts = dec_available_count(item.available_counts, group_idx);
-            if get_available_count(item.available_counts, group_idx) == 0 {
-                item.available_mask &= !(1u32 << group_idx);
-            }
-            // Increment reveal count using packed u128
-            item.reveal = inc_reveal(item.reveal, group_idx);
+            // Decrement count in state2: if count becomes 0, clear the bit in mask
+            item.state2 = dec_available_count(item.state2, group_idx);
+            let new_mask = if get_available_count(item.state2, group_idx) == 0 {
+                available_mask & !(1u32 << group_idx)
+            } else {
+                available_mask
+            };
+            // Increment reveal count in state1
+            item.state1 = inc_reveal(set_available_mask(item.state1, new_mask), group_idx);
 
             let next_available_count = item.available_count.saturating_sub(1);
             let next_pending_reveal = item.pending_reveal.saturating_sub(1) + token.reveal_count;
-            let step_probability =
-                item.probability * (available as f64 / item.available_count as f64);
+
+            // Fast path: use precomputed probability table - NO DIVISION!
+            // This is the key optimization: all probability calculations are now just lookups
+            let step_probability = if group_idx < MAX_GROUPS
+                && item.available_count > 0
+                && item.available_count <= MAX_AVAILABLE_COUNT
+                && available <= MAX_AVAILABLE
+            {
+                // Lookup precomputed probability - O(1), no division!
+                item.probability * prob_table[group_idx][item.available_count - 1][available]
+            } else {
+                // Fallback for edge cases (should be rare)
+                item.probability * (available as f64 / item.available_count as f64)
+            };
+
             let expected_modifier = item.modifier + (group.modifier as i16);
 
             let key = build_cache_key(
-                item.reveal,
+                item.state1,
+                item.state2,
                 next_available_count,
                 expected_modifier,
                 next_pending_reveal,
@@ -235,10 +311,9 @@ pub fn get_chaos_bag_modifiers(
                     let new_item = ChaosOddsCacheItem {
                         modifier: expected_modifier,
                         probability: step_probability,
-                        available_mask: item.available_mask, // u32 is Copy
-                        available_counts: item.available_counts, // u64 is Copy
                         available_count: next_available_count,
-                        reveal: item.reveal, // u128 is Copy
+                        state1: item.state1, // u128 is Copy
+                        state2: item.state2, // u128 is Copy
                         pending_reveal: next_pending_reveal,
                     };
 
@@ -248,9 +323,8 @@ pub fn get_chaos_bag_modifiers(
             }
 
             // Restore original state (undo/backtrack)
-            item.available_mask = old_available_mask; // u32 is Copy
-            item.available_counts = old_available_counts; // u64 is Copy
-            item.reveal = old_reveal; // u128 is Copy
+            item.state1 = old_state1; // u128 is Copy
+            item.state2 = old_state2; // u128 is Copy
         }
     }
 
