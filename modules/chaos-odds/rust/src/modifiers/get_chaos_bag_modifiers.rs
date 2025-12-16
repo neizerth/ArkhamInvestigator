@@ -101,15 +101,30 @@ pub fn get_chaos_bag_modifiers(
         return cache;
     }
 
-    // Pre-allocate hash maps with estimated capacity to reduce rehashing
-    // Use total_tokens as estimate (total_count computed later)
-    let estimated_capacity = (total_tokens * 4).min(10000);
-    // HashMap stores only probability, not full state - major optimization
-    let mut cache_map: FxHashMap<CacheKey, f64> =
-        FxHashMap::with_capacity_and_hasher(estimated_capacity, Default::default());
+    // Pre-allocate fixed-size array for deduplication - eliminates HashMap overhead
+    // For ≤21 groups, max unique states is typically 2-3M
+    // Use direct indexing via bit combination: state1_hash | state2_hash | pending
+    const MAX_DEDUP_SIZE: usize = 3_000_000; // 3M states max
+    let mut dedup_array: Vec<f64> = vec![0.0; MAX_DEDUP_SIZE];
+    let mut dedup_used: Vec<bool> = vec![false; MAX_DEDUP_SIZE];
+
     // Use index mapping instead of storing full items - eliminates clone()
+    let estimated_capacity = (total_tokens * 4).min(10000);
     let mut final_cache_map: FxHashMap<CacheKey, usize> =
         FxHashMap::with_capacity_and_hasher(estimated_capacity, Default::default());
+
+    /// Compute direct index from state combination
+    /// Uses XOR of state hashes + pending for fast O(1) indexing
+    #[inline(always)]
+    fn compute_dedup_index(state1: u128, state2: u128, pending: usize) -> usize {
+        // Combine states using XOR and bit mixing
+        // Use lower bits of state1 and state2 for better distribution
+        let hash = (state1 as u64)
+            .wrapping_mul(0x9e3779b97f4a7c15) // Mixing constant
+            .wrapping_add((state2 as u64).wrapping_mul(0xbf58476d1ce4e5b9))
+            .wrapping_add(pending as u64);
+        (hash as usize) % MAX_DEDUP_SIZE
+    }
 
     // Seed final_cache_map with existing cache entries (deduplicated)
     // First pass: collect items and build index mapping
@@ -322,35 +337,26 @@ pub fn get_chaos_bag_modifiers(
 
             let expected_modifier = item.modifier + (group.modifier as i16);
 
-            let key = build_cache_key(
-                item.state1,
-                item.state2,
-                next_available_count,
-                expected_modifier,
-                next_pending_reveal,
-            );
+            // Fast deduplication: direct array access - NO HASHING, NO Entry checks!
+            let dedup_idx = compute_dedup_index(item.state1, item.state2, next_pending_reveal);
 
-            // Early deduplication: check before creating new item (optimization)
-            use std::collections::hash_map::Entry;
-            match cache_map.entry(key) {
-                Entry::Occupied(mut e) => {
-                    // Only update probability in HashMap
-                    *e.get_mut() += step_probability;
-                }
-                Entry::Vacant(e) => {
-                    // Insert only probability in HashMap (not full state)
-                    e.insert(step_probability);
+            if dedup_used[dedup_idx] {
+                // State already seen: accumulate probability directly - O(1) access!
+                dedup_array[dedup_idx] += step_probability;
+            } else {
+                // New state: mark as used and store probability
+                dedup_used[dedup_idx] = true;
+                dedup_array[dedup_idx] = step_probability;
 
-                    // Push lightweight state to stack - no struct allocation!
-                    items_to_process.push(DFSState {
-                        state1: item.state1, // u128 is Copy
-                        state2: item.state2, // u128 is Copy
-                        available_count: next_available_count,
-                        modifier: expected_modifier,
-                        pending_reveal: next_pending_reveal,
-                        probability: step_probability,
-                    });
-                }
+                // Push lightweight state to stack - no struct allocation!
+                items_to_process.push(DFSState {
+                    state1: item.state1, // u128 is Copy
+                    state2: item.state2, // u128 is Copy
+                    available_count: next_available_count,
+                    modifier: expected_modifier,
+                    pending_reveal: next_pending_reveal,
+                    probability: step_probability,
+                });
             }
 
             // Restore original state (undo/backtrack)
