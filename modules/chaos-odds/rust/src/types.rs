@@ -29,7 +29,7 @@ pub struct ChaosOddsCacheItem {
     pub probability: f64,
     pub available_map: Counts,
     pub available_count: usize,
-    pub reveal_map: Counts,
+    pub reveal: u128, // Packed reveal counts (4 bits per counter, up to 32 groups)
     pub pending_reveal: usize,
 }
 

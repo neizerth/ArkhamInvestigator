@@ -1,8 +1,8 @@
 use rustc_hash::FxHashMap;
 use smallvec::SmallVec;
 
-use crate::types::{ChaosOddsCacheItem, ChaosOddsGroup, ChaosOddsToken, Counts};
-use crate::util::cache::{build_cache_key, CacheKey};
+use crate::types::{ChaosOddsCacheItem, ChaosOddsGroup, ChaosOddsToken};
+use crate::util::cache::{build_cache_key, inc_reveal, unpack_reveal, CacheKey};
 use crate::util::groups::{build_groups, groups_to_available_map};
 use crate::util::math::multinomial;
 
@@ -50,15 +50,12 @@ pub fn get_chaos_bag_modifiers(
             map[group_idx] -= 1;
         }
 
-        let mut reveal_map = Counts::with_capacity(group_len);
-        reveal_map.resize(group_len, 0);
-
         cache.push(ChaosOddsCacheItem {
             modifier,
             probability,
             available_map: map,
             available_count: total_tokens.saturating_sub(1),
-            reveal_map,
+            reveal: 0u128, // No reveals for regular tokens
             pending_reveal: 0,
         });
     }
@@ -85,7 +82,7 @@ pub fn get_chaos_bag_modifiers(
 
     // Seed final_cache_map with existing cache entries (deduplicated)
     for item in cache.drain(..) {
-        let key = build_cache_key(&item.reveal_map, item.available_count, item.modifier, 0);
+        let key = build_cache_key(item.reveal, item.available_count, item.modifier, 0);
         if let Some(existing) = final_cache_map.get_mut(&key) {
             existing.probability += item.probability;
         } else {
@@ -112,15 +109,12 @@ pub fn get_chaos_bag_modifiers(
         let probability = group.count as f64 / total_count as f64;
         let modifier = group.modifier as i16;
 
-        let mut reveal_map = Counts::with_capacity(group_len);
-        reveal_map.resize(group_len, 0);
-
         items_to_process.push(ChaosOddsCacheItem {
             modifier,
             probability,
             available_map: map,
             available_count: total_count.saturating_sub(1),
-            reveal_map,
+            reveal: 0u128, // Start with no reveals
             pending_reveal: group.token.reveal_count,
         });
     }
@@ -130,15 +124,11 @@ pub fn get_chaos_bag_modifiers(
     while let Some(mut item) = items_to_process.pop() {
         if item.pending_reveal == 0 {
             // Final state: apply multinomial for permutations of the same reveal multiset
-            // Collect non-zero values directly - multinomial will sort internally
-            let mut counts: SmallVec<[usize; 32]> = item
-                .reveal_map
-                .iter()
-                .copied()
-                .filter(|&v| v > 0)
-                .map(|v| v as usize)
-                .collect();
-            if !counts.is_empty() {
+            // Unpack reveal counts from u128
+            let reveal_counts = unpack_reveal(item.reveal, group_len);
+            if !reveal_counts.is_empty() {
+                let mut counts: SmallVec<[usize; 32]> =
+                    reveal_counts.iter().map(|&v| v as usize).collect();
                 counts.sort_unstable();
 
                 let combinations = *multinomial_cache
@@ -147,7 +137,7 @@ pub fn get_chaos_bag_modifiers(
                 item.probability *= combinations as f64;
             }
 
-            let key = build_cache_key(&item.reveal_map, item.available_count, item.modifier, 0);
+            let key = build_cache_key(item.reveal, item.available_count, item.modifier, 0);
             if let Some(existing) = final_cache_map.get_mut(&key) {
                 existing.probability += item.probability;
                 continue;
@@ -181,12 +171,13 @@ pub fn get_chaos_bag_modifiers(
 
             // Modify state in-place (backtracking pattern)
             let old_available = item.available_map[group_idx];
-            let old_reveal = item.reveal_map[group_idx];
+            let old_reveal = item.reveal;
 
             if item.available_map[group_idx] > 0 {
                 item.available_map[group_idx] -= 1;
             }
-            item.reveal_map[group_idx] = item.reveal_map[group_idx].saturating_add(1);
+            // Increment reveal count using packed u128
+            item.reveal = inc_reveal(item.reveal, group_idx);
 
             let next_available_count = item.available_count.saturating_sub(1);
             let next_pending_reveal = item.pending_reveal.saturating_sub(1) + token.reveal_count;
@@ -195,7 +186,7 @@ pub fn get_chaos_bag_modifiers(
             let expected_modifier = item.modifier + (group.modifier as i16);
 
             let key = build_cache_key(
-                &item.reveal_map,
+                item.reveal,
                 next_available_count,
                 expected_modifier,
                 next_pending_reveal,
@@ -218,7 +209,7 @@ pub fn get_chaos_bag_modifiers(
                         probability: step_probability,
                         available_map: item.available_map.clone(),
                         available_count: next_available_count,
-                        reveal_map: item.reveal_map.clone(),
+                        reveal: item.reveal, // u128 is Copy, no clone needed
                         pending_reveal: next_pending_reveal,
                     };
 
@@ -229,7 +220,7 @@ pub fn get_chaos_bag_modifiers(
 
             // Restore original state (undo/backtrack)
             item.available_map[group_idx] = old_available;
-            item.reveal_map[group_idx] = old_reveal;
+            item.reveal = old_reveal; // u128 is Copy
         }
     }
 
