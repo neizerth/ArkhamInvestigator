@@ -5,7 +5,6 @@ pub type Counts = SmallVec<[u8; 32]>;
 
 #[derive(Clone, Debug, Deserialize, Serialize)]
 pub struct ChaosOddsToken {
-    #[serde(rename = "type")]
     pub token_type: String,
     #[serde(default)]
     pub value: i8,
