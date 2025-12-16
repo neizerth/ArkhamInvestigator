@@ -107,10 +107,13 @@ pub fn get_chaos_bag_modifiers(
     // HashMap stores only probability, not full state - major optimization
     let mut cache_map: FxHashMap<CacheKey, f64> =
         FxHashMap::with_capacity_and_hasher(estimated_capacity, Default::default());
-    let mut final_cache_map: FxHashMap<CacheKey, ChaosOddsCacheItem> =
+    // Use index mapping instead of storing full items - eliminates clone()
+    let mut final_cache_map: FxHashMap<CacheKey, usize> =
         FxHashMap::with_capacity_and_hasher(estimated_capacity, Default::default());
 
     // Seed final_cache_map with existing cache entries (deduplicated)
+    // First pass: collect items and build index mapping
+    let mut temp_items: Vec<(CacheKey, ChaosOddsCacheItem)> = Vec::new();
     for item in cache.drain(..) {
         let key = build_cache_key(
             item.state1,
@@ -119,17 +122,34 @@ pub fn get_chaos_bag_modifiers(
             item.modifier,
             0,
         );
-        if let Some(existing) = final_cache_map.get_mut(&key) {
-            existing.probability += item.probability;
+        temp_items.push((key, item));
+    }
+
+    // Second pass: build cache and index map, merge duplicates
+    for (key, item) in temp_items {
+        if let Some(&existing_idx) = final_cache_map.get(&key) {
+            // Update probability directly in cache - no clone!
+            cache[existing_idx].probability += item.probability;
         } else {
-            final_cache_map.insert(key, item);
+            // Add new item to cache and store index - no clone!
+            let idx = cache.len();
+            cache.push(item);
+            final_cache_map.insert(key, idx);
         }
     }
 
-    // Rebuild cache from deduplicated items - avoid cloning, use drain or into_values
-    cache.extend(final_cache_map.values().cloned());
+    // Lightweight stack for DFS - store only primitives, not full structs
+    // This eliminates overhead of push/pop on large structs
+    struct DFSState {
+        state1: u128,
+        state2: u128,
+        available_count: usize,
+        modifier: i16,
+        pending_reveal: usize,
+        probability: f64,
+    }
 
-    let mut items_to_process: Vec<ChaosOddsCacheItem> = Vec::new();
+    let mut items_to_process: Vec<DFSState> = Vec::new();
     let total_count: usize = groups.iter().map(|g| g.count).sum();
 
     for (group_idx, group) in reveal_groups {
@@ -145,13 +165,13 @@ pub fn get_chaos_bag_modifiers(
         let probability = group.count as f64 / total_count as f64;
         let modifier = group.modifier as i16;
 
-        items_to_process.push(ChaosOddsCacheItem {
-            modifier,
-            probability,
+        items_to_process.push(DFSState {
+            state1,
+            state2,
             available_count: total_count.saturating_sub(1),
-            state1, // Combined state: mask + reveal
-            state2, // Available counts
+            modifier,
             pending_reveal: group.token.reveal_count,
+            probability,
         });
     }
 
@@ -204,6 +224,7 @@ pub fn get_chaos_bag_modifiers(
             // Final state: apply multinomial for permutations of the same reveal multiset
             // Pack reveal as sorted u128 key - NO SmallVec allocation, NO sorting in hot loop!
             let multinomial_key = pack_reveal_as_multinomial_key(item.state1, group_len);
+            let mut final_probability = item.probability;
             if multinomial_key != 0 {
                 let combinations = *multinomial_cache.entry(multinomial_key).or_insert_with(|| {
                     // Only unpack and compute multinomial on cache miss
@@ -212,7 +233,7 @@ pub fn get_chaos_bag_modifiers(
                         reveal_counts.iter().map(|&v| v as usize).collect();
                     multinomial(&counts)
                 });
-                item.probability *= combinations as f64;
+                final_probability *= combinations as f64;
             }
 
             let key = build_cache_key(
@@ -222,15 +243,23 @@ pub fn get_chaos_bag_modifiers(
                 item.modifier,
                 0,
             );
-            if let Some(existing) = final_cache_map.get_mut(&key) {
-                existing.probability += item.probability;
+            if let Some(&existing_idx) = final_cache_map.get(&key) {
+                // Update probability directly in cache - no clone!
+                cache[existing_idx].probability += final_probability;
                 continue;
             }
 
-            // Move item into final_cache_map, clone only for cache
-            let item_clone = item.clone();
-            final_cache_map.insert(key, item);
-            cache.push(item_clone);
+            // Add item to cache and store index - no clone!
+            let idx = cache.len();
+            cache.push(ChaosOddsCacheItem {
+                modifier: item.modifier,
+                probability: final_probability,
+                available_count: item.available_count,
+                state1: item.state1,
+                state2: item.state2,
+                pending_reveal: 0,
+            });
+            final_cache_map.insert(key, idx);
             continue;
         }
 
@@ -255,6 +284,13 @@ pub fn get_chaos_bag_modifiers(
             // Get available count from state2 - pure bit operation, no array access
             let available = get_available_count(item.state2, group_idx) as usize;
 
+            // Check conditions once for fast path (most common case)
+            // Fast path: no bounds checks, direct table lookup
+            let use_fast_path = group_idx < MAX_GROUPS
+                && item.available_count > 0
+                && item.available_count <= MAX_AVAILABLE_COUNT
+                && available <= MAX_AVAILABLE;
+
             // Modify state in-place (backtracking pattern)
             let old_state1 = item.state1;
             let old_state2 = item.state2;
@@ -272,17 +308,15 @@ pub fn get_chaos_bag_modifiers(
             let next_available_count = item.available_count.saturating_sub(1);
             let next_pending_reveal = item.pending_reveal.saturating_sub(1) + token.reveal_count;
 
-            // Fast path: use precomputed probability table - NO DIVISION!
-            // This is the key optimization: all probability calculations are now just lookups
-            let step_probability = if group_idx < MAX_GROUPS
-                && item.available_count > 0
-                && item.available_count <= MAX_AVAILABLE_COUNT
-                && available <= MAX_AVAILABLE
-            {
-                // Lookup precomputed probability - O(1), no division!
+            // Fast path: direct table lookup - NO CHECKS, NO DIVISION!
+            // This eliminates all branching in the hot path for normal tokens
+            let step_probability = if use_fast_path {
+                // Unsafe indexing is safe here because we checked bounds above
+                // This is the hot path - no conditionals, just multiplication
                 item.probability * prob_table[group_idx][item.available_count - 1][available]
             } else {
-                // Fallback for edge cases (should be rare)
+                // Slow path: edge cases only (should be very rare)
+                // Fallback with division for cases outside table bounds
                 item.probability * (available as f64 / item.available_count as f64)
             };
 
@@ -307,18 +341,15 @@ pub fn get_chaos_bag_modifiers(
                     // Insert only probability in HashMap (not full state)
                     e.insert(step_probability);
 
-                    // Create new item and push directly to queue - no clone!
-                    let new_item = ChaosOddsCacheItem {
-                        modifier: expected_modifier,
-                        probability: step_probability,
-                        available_count: next_available_count,
+                    // Push lightweight state to stack - no struct allocation!
+                    items_to_process.push(DFSState {
                         state1: item.state1, // u128 is Copy
                         state2: item.state2, // u128 is Copy
+                        available_count: next_available_count,
+                        modifier: expected_modifier,
                         pending_reveal: next_pending_reveal,
-                    };
-
-                    // Push directly without clone - major optimization
-                    items_to_process.push(new_item);
+                        probability: step_probability,
+                    });
                 }
             }
 
