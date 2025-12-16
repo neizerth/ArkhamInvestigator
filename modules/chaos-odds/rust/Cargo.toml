@@ -3,6 +3,12 @@ name = "chaos_odds"
 version = "0.1.0"
 edition = "2021"
 
+[features]
+default = []
+mobile = [] # Feature flag for mobile builds - enables optimizations and limits threads to big cores
+no-parallel = [] # Feature flag to disable parallelism for older devices
+simd = [] # Feature flag for SIMD optimizations (requires nightly Rust with std::simd)
+
 [dependencies]
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
