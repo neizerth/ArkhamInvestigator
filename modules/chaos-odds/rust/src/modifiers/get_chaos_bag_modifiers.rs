@@ -2,16 +2,20 @@ use rustc_hash::FxHashMap;
 use smallvec::SmallVec;
 
 use crate::types::{ChaosOddsCacheItem, ChaosOddsGroup, ChaosOddsToken};
-use crate::util::cache::{build_cache_key, inc_reveal, unpack_reveal, CacheKey};
+use crate::util::cache::{
+    build_cache_key, dec_available_count, get_available_count, inc_reveal, pack_available_counts,
+    unpack_reveal, CacheKey,
+};
 use crate::util::groups::{build_groups, groups_to_available_map};
 use crate::util::math::multinomial;
 
-/// Build available_mask from available_counts - set bit if count > 0
+/// Build available_mask from packed available_counts - set bit if count > 0
+/// For groups > 21, we need to use the original base_available array to check counts
 #[inline(always)]
-fn build_available_mask(available_counts: &[u8], group_len: usize) -> u32 {
+fn build_available_mask(available_counts: u64, group_len: usize) -> u32 {
     let mut mask = 0u32;
     for i in 0..group_len.min(32) {
-        if available_counts[i] > 0 {
+        if get_available_count(available_counts, i) > 0 {
             mask |= 1u32 << i;
         }
     }
@@ -38,10 +42,14 @@ pub fn get_chaos_bag_modifiers(
 
     // Build base available counts - immutable, shared across all items
     let base_available = groups_to_available_map(&groups);
-    let mut base_available_counts = [0u8; 32];
-    for (i, &count) in base_available.iter().enumerate().take(32) {
-        base_available_counts[i] = count;
-    }
+    let base_available_counts_array = {
+        let mut arr = [0u8; 32];
+        for (i, &count) in base_available.iter().enumerate().take(32) {
+            arr[i] = count.min(7); // Clamp to max 7 for u64 packing (3 bits per group)
+        }
+        arr
+    };
+    let base_available_counts = pack_available_counts(&base_available_counts_array);
 
     // Pre-compute token type flags to avoid string comparisons in hot loop
     let group_is_frost: Vec<bool> = groups
@@ -62,17 +70,14 @@ pub fn get_chaos_bag_modifiers(
         let modifier = group.modifier as i16;
 
         // Build available_mask: decrement count for current group
-        let mut counts = base_available_counts;
-        if counts[group_idx] > 0 {
-            counts[group_idx] -= 1;
-        }
-        let available_mask = build_available_mask(&counts, group_len);
+        let counts = dec_available_count(base_available_counts, group_idx);
+        let available_mask = build_available_mask(counts, group_len);
 
         cache.push(ChaosOddsCacheItem {
             modifier,
             probability,
             available_mask,
-            available_counts: counts, // Copy array (no allocation)
+            available_counts: counts, // u64 is Copy
             available_count: total_tokens.saturating_sub(1),
             reveal: 0u128, // No reveals for regular tokens
             pending_reveal: 0,
@@ -121,11 +126,8 @@ pub fn get_chaos_bag_modifiers(
         }
 
         // Build available_mask: decrement count for current group
-        let mut counts = base_available_counts;
-        if counts[group_idx] > 0 {
-            counts[group_idx] -= 1;
-        }
-        let available_mask = build_available_mask(&counts, group_len);
+        let counts = dec_available_count(base_available_counts, group_idx);
+        let available_mask = build_available_mask(counts, group_len);
 
         let probability = group.count as f64 / total_count as f64;
         let modifier = group.modifier as i16;
@@ -190,15 +192,16 @@ pub fn get_chaos_bag_modifiers(
             }
 
             // Get available count from item's current counts
-            let available = item.available_counts[group_idx] as usize;
+            let available = get_available_count(item.available_counts, group_idx) as usize;
 
             // Modify state in-place (backtracking pattern)
             let old_available_mask = item.available_mask;
+            let old_available_counts = item.available_counts;
             let old_reveal = item.reveal;
 
             // Decrement count: if count becomes 0, clear the bit
-            item.available_counts[group_idx] -= 1;
-            if item.available_counts[group_idx] == 0 {
+            item.available_counts = dec_available_count(item.available_counts, group_idx);
+            if get_available_count(item.available_counts, group_idx) == 0 {
                 item.available_mask &= !(1u32 << group_idx);
             }
             // Increment reveal count using packed u128
@@ -233,7 +236,7 @@ pub fn get_chaos_bag_modifiers(
                         modifier: expected_modifier,
                         probability: step_probability,
                         available_mask: item.available_mask, // u32 is Copy
-                        available_counts: item.available_counts, // [u8; 32] is Copy, no allocation
+                        available_counts: item.available_counts, // u64 is Copy
                         available_count: next_available_count,
                         reveal: item.reveal, // u128 is Copy
                         pending_reveal: next_pending_reveal,
@@ -246,7 +249,7 @@ pub fn get_chaos_bag_modifiers(
 
             // Restore original state (undo/backtrack)
             item.available_mask = old_available_mask; // u32 is Copy
-            item.available_counts[group_idx] += 1; // Restore count
+            item.available_counts = old_available_counts; // u64 is Copy
             item.reveal = old_reveal; // u128 is Copy
         }
     }

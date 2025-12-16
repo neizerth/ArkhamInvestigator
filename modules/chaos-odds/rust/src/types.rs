@@ -28,7 +28,7 @@ pub struct ChaosOddsCacheItem {
     pub modifier: i16,
     pub probability: f64,
     pub available_mask: u32, // Bitmask: 1 bit = group is available (up to 32 groups)
-    pub available_counts: [u8; 32], // Current counts (Copy, no allocation)
+    pub available_counts: u64, // Packed counts: 2 bits per group (max 3 tokens per group), up to 32 groups
     pub available_count: usize,
     pub reveal: u128, // Packed reveal counts (4 bits per counter, up to 32 groups)
     pub pending_reveal: usize,
