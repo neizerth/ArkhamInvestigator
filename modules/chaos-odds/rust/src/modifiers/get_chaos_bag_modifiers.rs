@@ -164,6 +164,176 @@ pub fn get_chaos_bag_modifiers(
         probability: f64,
     }
 
+    // Helper functions for fast/slow path - defined inline to access local variables
+    // Fast path: no bounds checks, direct table lookup, no branching
+    #[inline(always)]
+    fn process_item_fast_path(
+        item: &mut DFSState,
+        groups: &[ChaosOddsGroup],
+        group_is_frost: &[bool],
+        prob_table: &[Vec<[f64; MAX_AVAILABLE + 1]>],
+        revealed_frost_count: usize,
+        _group_len: usize,
+        dedup_array: &mut [f64],
+        dedup_used: &mut [bool],
+        items_to_process: &mut Vec<DFSState>,
+    ) {
+        let available_mask = get_available_mask(item.state1);
+
+        // Iterate only over available groups using bit iteration - O(popcount) instead of O(group_len)
+        let mut mask = available_mask;
+        while mask != 0 {
+            let group_idx = mask.trailing_zeros() as usize;
+            mask &= mask - 1; // Clear the lowest set bit
+
+            // Safe: group_idx is guaranteed to be < 32 (mask is u32) and < groups.len()
+            let group = unsafe { groups.get_unchecked(group_idx) };
+            let token = &group.token;
+
+            // Use pre-computed flag instead of string comparison
+            if token.is_fail || (group_is_frost[group_idx] && revealed_frost_count == 1) {
+                continue;
+            }
+
+            // Get available count from state2 - pure bit operation, no array access
+            let available = get_available_count(item.state2, group_idx) as usize;
+
+            // Fast path: assume available <= MAX_AVAILABLE (checked at entry)
+            // No bounds checks needed - direct table lookup!
+            let step_probability =
+                item.probability * prob_table[group_idx][item.available_count - 1][available];
+
+            // Modify state in-place (backtracking pattern)
+            let old_state1 = item.state1;
+            let old_state2 = item.state2;
+
+            // Decrement count in state2: if count becomes 0, clear the bit in mask
+            item.state2 = dec_available_count(item.state2, group_idx);
+            let new_mask = if get_available_count(item.state2, group_idx) == 0 {
+                available_mask & !(1u32 << group_idx)
+            } else {
+                available_mask
+            };
+            // Increment reveal count in state1
+            item.state1 = inc_reveal(set_available_mask(item.state1, new_mask), group_idx);
+
+            let next_available_count = item.available_count.saturating_sub(1);
+            let next_pending_reveal = item.pending_reveal.saturating_sub(1) + token.reveal_count;
+            let expected_modifier = item.modifier + (group.modifier as i16);
+
+            // Fast deduplication: direct array access - NO HASHING, NO Entry checks!
+            let dedup_idx = compute_dedup_index(item.state1, item.state2, next_pending_reveal);
+
+            if dedup_used[dedup_idx] {
+                // State already seen: accumulate probability directly - O(1) access!
+                dedup_array[dedup_idx] += step_probability;
+            } else {
+                // New state: mark as used and store probability
+                dedup_used[dedup_idx] = true;
+                dedup_array[dedup_idx] = step_probability;
+
+                // Push lightweight state to stack - no struct allocation!
+                items_to_process.push(DFSState {
+                    state1: item.state1, // u128 is Copy
+                    state2: item.state2, // u128 is Copy
+                    available_count: next_available_count,
+                    modifier: expected_modifier,
+                    pending_reveal: next_pending_reveal,
+                    probability: step_probability,
+                });
+            }
+
+            // Restore original state (undo/backtrack)
+            item.state1 = old_state1; // u128 is Copy
+            item.state2 = old_state2; // u128 is Copy
+        }
+    }
+
+    // Slow path: with bounds checks and division fallback
+    #[inline]
+    fn process_item_slow_path(
+        item: &mut DFSState,
+        groups: &[ChaosOddsGroup],
+        group_is_frost: &[bool],
+        revealed_frost_count: usize,
+        _group_len: usize,
+        dedup_array: &mut [f64],
+        dedup_used: &mut [bool],
+        items_to_process: &mut Vec<DFSState>,
+    ) {
+        let available_mask = get_available_mask(item.state1);
+
+        // Iterate only over available groups using bit iteration
+        let mut mask = available_mask;
+        while mask != 0 {
+            let group_idx = mask.trailing_zeros() as usize;
+            mask &= mask - 1; // Clear the lowest set bit
+
+            if group_idx >= groups.len() {
+                continue;
+            }
+
+            let group = &groups[group_idx];
+            let token = &group.token;
+
+            // Use pre-computed flag instead of string comparison
+            if token.is_fail || (group_is_frost[group_idx] && revealed_frost_count == 1) {
+                continue;
+            }
+
+            // Get available count from state2 - pure bit operation, no array access
+            let available = get_available_count(item.state2, group_idx) as usize;
+
+            // Slow path: compute probability with division (edge cases)
+            let step_probability =
+                item.probability * (available as f64 / item.available_count as f64);
+
+            // Modify state in-place (backtracking pattern)
+            let old_state1 = item.state1;
+            let old_state2 = item.state2;
+
+            // Decrement count in state2: if count becomes 0, clear the bit in mask
+            item.state2 = dec_available_count(item.state2, group_idx);
+            let new_mask = if get_available_count(item.state2, group_idx) == 0 {
+                available_mask & !(1u32 << group_idx)
+            } else {
+                available_mask
+            };
+            // Increment reveal count in state1
+            item.state1 = inc_reveal(set_available_mask(item.state1, new_mask), group_idx);
+
+            let next_available_count = item.available_count.saturating_sub(1);
+            let next_pending_reveal = item.pending_reveal.saturating_sub(1) + token.reveal_count;
+            let expected_modifier = item.modifier + (group.modifier as i16);
+
+            // Fast deduplication: direct array access - NO HASHING, NO Entry checks!
+            let dedup_idx = compute_dedup_index(item.state1, item.state2, next_pending_reveal);
+
+            if dedup_used[dedup_idx] {
+                // State already seen: accumulate probability directly - O(1) access!
+                dedup_array[dedup_idx] += step_probability;
+            } else {
+                // New state: mark as used and store probability
+                dedup_used[dedup_idx] = true;
+                dedup_array[dedup_idx] = step_probability;
+
+                // Push lightweight state to stack - no struct allocation!
+                items_to_process.push(DFSState {
+                    state1: item.state1, // u128 is Copy
+                    state2: item.state2, // u128 is Copy
+                    available_count: next_available_count,
+                    modifier: expected_modifier,
+                    pending_reveal: next_pending_reveal,
+                    probability: step_probability,
+                });
+            }
+
+            // Restore original state (undo/backtrack)
+            item.state1 = old_state1; // u128 is Copy
+            item.state2 = old_state2; // u128 is Copy
+        }
+    }
+
     let mut items_to_process: Vec<DFSState> = Vec::new();
     let total_count: usize = groups.iter().map(|g| g.count).sum();
 
@@ -189,6 +359,84 @@ pub fn get_chaos_bag_modifiers(
             probability,
         });
     }
+
+    // Precompute multinomial table for small reveal counts (≤ 6) to avoid unpack + SmallVec
+    // For total reveal count ≤ 6, we can precompute all possible combinations
+    const MAX_PRECOMPUTED_REVEAL: usize = 6;
+    let mut precomputed_multinomial: FxHashMap<u128, u64> = FxHashMap::default();
+
+    // Precompute all multinomial values for total ≤ MAX_PRECOMPUTED_REVEAL
+    // This eliminates unpack + SmallVec + sorting for common small cases
+    fn precompute_small_multinomials(
+        max_total: usize,
+        group_len: usize,
+        precomputed: &mut FxHashMap<u128, u64>,
+    ) {
+        // Generate all possible partitions of n into at most group_len parts
+        // Each partition represents a multiset of reveal counts
+        fn generate_partitions(
+            n: usize,
+            max_parts: usize,
+            current: &mut [u8],
+            len: usize,
+            precomputed: &mut FxHashMap<u128, u64>,
+        ) {
+            if n == 0 {
+                // Compute multinomial for this partition
+                let mut sorted = current[..len].to_vec();
+                sorted.sort_unstable();
+
+                // Pack as u128 key (same format as pack_reveal_as_multinomial_key)
+                let mut key = 0u128;
+                for (i, &count) in sorted.iter().enumerate().take(32) {
+                    key |= (count as u128 & 0xF) << (i * 4);
+                }
+
+                // Compute multinomial coefficient
+                let total: usize = sorted.iter().map(|&c| c as usize).sum();
+                let mut log_result = 0.0;
+                for i in 1..=total {
+                    log_result += (i as f64).ln();
+                }
+                for &k in &sorted {
+                    if k > 0 {
+                        for i in 1..=k as usize {
+                            log_result -= (i as f64).ln();
+                        }
+                    }
+                }
+                let result = (log_result.exp() + 0.5) as u64;
+                precomputed.insert(key, result);
+                return;
+            }
+
+            if len >= max_parts {
+                return;
+            }
+
+            let start = if len > 0 {
+                current[len - 1] as usize
+            } else {
+                1
+            };
+            for k in start..=n.min(15) {
+                // Max 15 per count (4 bits)
+                current[len] = k as u8;
+                generate_partitions(n - k, max_parts, current, len + 1, precomputed);
+            }
+        }
+
+        let mut current = [0u8; 32];
+        for total in 1..=max_total {
+            generate_partitions(total, group_len.min(24), &mut current, 0, precomputed);
+        }
+    }
+
+    precompute_small_multinomials(
+        MAX_PRECOMPUTED_REVEAL,
+        group_len,
+        &mut precomputed_multinomial,
+    );
 
     // Use u128 as key instead of SmallVec - eliminates sorting and allocation in hot loop
     let mut multinomial_cache: FxHashMap<u128, u64> = FxHashMap::default();
@@ -241,13 +489,20 @@ pub fn get_chaos_bag_modifiers(
             let multinomial_key = pack_reveal_as_multinomial_key(item.state1, group_len);
             let mut final_probability = item.probability;
             if multinomial_key != 0 {
-                let combinations = *multinomial_cache.entry(multinomial_key).or_insert_with(|| {
-                    // Only unpack and compute multinomial on cache miss
-                    let reveal_counts = unpack_reveal(item.state1, group_len);
-                    let counts: SmallVec<[usize; 32]> =
-                        reveal_counts.iter().map(|&v| v as usize).collect();
-                    multinomial(&counts)
-                });
+                // Fast path: check precomputed table for small reveal counts (≤ 6)
+                let combinations =
+                    if let Some(&precomputed) = precomputed_multinomial.get(&multinomial_key) {
+                        precomputed
+                    } else {
+                        // Slow path: use cache for larger reveal counts
+                        *multinomial_cache.entry(multinomial_key).or_insert_with(|| {
+                            // Only unpack and compute multinomial on cache miss
+                            let reveal_counts = unpack_reveal(item.state1, group_len);
+                            let counts: SmallVec<[usize; 32]> =
+                                reveal_counts.iter().map(|&v| v as usize).collect();
+                            multinomial(&counts)
+                        })
+                    };
                 final_probability *= combinations as f64;
             }
 
@@ -282,86 +537,35 @@ pub fn get_chaos_bag_modifiers(
             continue;
         }
 
-        for (group_idx, group) in groups.iter().enumerate() {
-            // Check if group is available using bitmask from state1 - O(1) operation
-            let available_mask = get_available_mask(item.state1);
-            if (available_mask & (1u32 << group_idx)) == 0 {
-                continue;
-            }
+        // Check once if item qualifies for fast path (most common case)
+        // Fast path: all groups within bounds, no checks needed in hot loop
+        let use_fast_path = item.available_count > 0 && item.available_count <= MAX_AVAILABLE_COUNT;
 
-            let token = &group.token;
-
-            // Use pre-computed flag instead of string comparison
-            if token.is_fail || (group_is_frost[group_idx] && revealed_frost_count == 1) {
-                continue;
-            }
-
-            // Get available count from state2 - pure bit operation, no array access
-            let available = get_available_count(item.state2, group_idx) as usize;
-
-            // Check conditions once for fast path (most common case)
-            // Fast path: no bounds checks, direct table lookup
-            let use_fast_path = group_idx < MAX_GROUPS
-                && item.available_count > 0
-                && item.available_count <= MAX_AVAILABLE_COUNT
-                && available <= MAX_AVAILABLE;
-
-            // Modify state in-place (backtracking pattern)
-            let old_state1 = item.state1;
-            let old_state2 = item.state2;
-
-            // Decrement count in state2: if count becomes 0, clear the bit in mask
-            item.state2 = dec_available_count(item.state2, group_idx);
-            let new_mask = if get_available_count(item.state2, group_idx) == 0 {
-                available_mask & !(1u32 << group_idx)
-            } else {
-                available_mask
-            };
-            // Increment reveal count in state1
-            item.state1 = inc_reveal(set_available_mask(item.state1, new_mask), group_idx);
-
-            let next_available_count = item.available_count.saturating_sub(1);
-            let next_pending_reveal = item.pending_reveal.saturating_sub(1) + token.reveal_count;
-
-            // Fast path: direct table lookup - NO CHECKS, NO DIVISION!
-            // This eliminates all branching in the hot path for normal tokens
-            let step_probability = if use_fast_path {
-                // Unsafe indexing is safe here because we checked bounds above
-                // This is the hot path - no conditionals, just multiplication
-                item.probability * prob_table[group_idx][item.available_count - 1][available]
-            } else {
-                // Slow path: edge cases only (should be very rare)
-                // Fallback with division for cases outside table bounds
-                item.probability * (available as f64 / item.available_count as f64)
-            };
-
-            let expected_modifier = item.modifier + (group.modifier as i16);
-
-            // Fast deduplication: direct array access - NO HASHING, NO Entry checks!
-            let dedup_idx = compute_dedup_index(item.state1, item.state2, next_pending_reveal);
-
-            if dedup_used[dedup_idx] {
-                // State already seen: accumulate probability directly - O(1) access!
-                dedup_array[dedup_idx] += step_probability;
-            } else {
-                // New state: mark as used and store probability
-                dedup_used[dedup_idx] = true;
-                dedup_array[dedup_idx] = step_probability;
-
-                // Push lightweight state to stack - no struct allocation!
-                items_to_process.push(DFSState {
-                    state1: item.state1, // u128 is Copy
-                    state2: item.state2, // u128 is Copy
-                    available_count: next_available_count,
-                    modifier: expected_modifier,
-                    pending_reveal: next_pending_reveal,
-                    probability: step_probability,
-                });
-            }
-
-            // Restore original state (undo/backtrack)
-            item.state1 = old_state1; // u128 is Copy
-            item.state2 = old_state2; // u128 is Copy
+        if use_fast_path {
+            // Fast path: no bounds checks, direct table lookup, no branching
+            process_item_fast_path(
+                &mut item,
+                &groups,
+                &group_is_frost,
+                &prob_table,
+                revealed_frost_count,
+                group_len,
+                &mut dedup_array,
+                &mut dedup_used,
+                &mut items_to_process,
+            );
+        } else {
+            // Slow path: edge cases only (should be very rare)
+            process_item_slow_path(
+                &mut item,
+                &groups,
+                &group_is_frost,
+                revealed_frost_count,
+                group_len,
+                &mut dedup_array,
+                &mut dedup_used,
+                &mut items_to_process,
+            );
         }
     }
 
