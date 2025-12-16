@@ -109,7 +109,10 @@ fn bag3_with_frost_two() {
     let autofail_prob = get_autofail_probability(&result, 0);
     // Note: Current implementation may not correctly handle frost -> frost chains
     // This test documents the current behavior
-    println!("Actual auto-fail probability for bag3 (frost x2): {}%", autofail_prob);
+    println!(
+        "Actual auto-fail probability for bag3 (frost x2): {}%",
+        autofail_prob
+    );
     // For now, just verify the calculation completes without error
     // Note: autofail_prob is u16, so it's always >= 0 and <= 100 by definition
     // This test documents the current behavior (0% for frost x2 case)
@@ -174,4 +177,3 @@ fn bag5_frost_autofail_bless() {
     );
     println!("Actual auto-fail probability for bag5: {}%", autofail_prob);
 }
-
