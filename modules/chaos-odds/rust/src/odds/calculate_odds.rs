@@ -1,4 +1,5 @@
 use crate::get_chaos_bag_modifiers;
+use crate::odds::get_auto_fail_odds;
 use crate::types::ChaosOddsToken;
 use crate::util::cancel::check_cancel;
 use crate::util::chaos_bag::is_auto_fail;
@@ -26,6 +27,9 @@ pub fn calculate_odds(
     }
 
     let modifiers = get_chaos_bag_modifiers(&available, revealed_frost_count);
+    let auto_fail_odds = get_auto_fail_odds(&available, revealed_frost_count);
+
+    let zero_difficulty_odds = 100u16.saturating_sub(auto_fail_odds as u16);
 
     // Pre-allocate matrix: all values start at 0
     let mut odds_matrix: Vec<Vec<u16>> = vec![vec![0; 100]; 100];
@@ -41,7 +45,9 @@ pub fn calculate_odds(
 
         let skill_i16 = skill as i16;
 
-        for difficulty in 0..100 {
+        odds_matrix[skill][0] = zero_difficulty_odds;
+
+        for difficulty in 1..100 {
             // Check for cancellation in inner loop (more frequent checks)
             if check_cancel() {
                 return None;
