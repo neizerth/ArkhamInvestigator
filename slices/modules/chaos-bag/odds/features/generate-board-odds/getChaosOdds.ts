@@ -1,5 +1,6 @@
 import { ChaosOdds } from "@expo-modules/chaos-odds";
 import { delay } from "@shared/lib";
+import { isEmpty } from "ramda";
 import { isNumber } from "ramda-adjunct";
 import type { ChaosBagOddsToken } from "../../entities/model";
 
@@ -22,6 +23,10 @@ let calculationId = 0;
 export const getChaosOdds = async (options: GetChaosOddsOptions) => {
 	console.log("getChaosOdds started");
 	const { available, revealed } = options;
+
+	if (isEmpty(available) && isEmpty(revealed)) {
+		return null;
+	}
 
 	const availableTokens = available.map(mapTokenToOddsToken);
 	const revealedTokens = revealed.map(mapTokenToOddsToken);
@@ -50,7 +55,7 @@ export const getChaosOdds = async (options: GetChaosOddsOptions) => {
 			return null;
 		}
 
-		console.log("odds at 0,0", odds[1][1]);
+		console.log("odds at 1,1", odds[1][1]);
 		return odds;
 	} catch (error) {
 		// Check if this calculation was superseded by a newer one

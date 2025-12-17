@@ -4,16 +4,14 @@ import type { ChaosOddsMap } from "../../model";
 
 export type ChaosOddsState = {
 	customSkillValue: number | null;
-	boardOddsResults: ChaosOddsMap | null;
+	boardOddsMatrix: ChaosOddsMap | null;
 	boardOddsLoading: boolean;
-	oddsCacheKey: string | null;
 };
 
 const initialState: ChaosOddsState = {
 	customSkillValue: null,
-	boardOddsResults: null,
+	boardOddsMatrix: null,
 	boardOddsLoading: false,
-	oddsCacheKey: null,
 };
 
 const state = createSliceState(initialState);
@@ -23,18 +21,13 @@ export const chaosOdds = createSlice({
 	...state,
 });
 
-export const {
-	setCustomSkillValue,
-	setBoardOddsResults,
-	setBoardOddsLoading,
-	setOddsCacheKey,
-} = chaosOdds.actions;
+export const { setCustomSkillValue, setBoardOddsMatrix, setBoardOddsLoading } =
+	chaosOdds.actions;
 
 export const {
 	selectCustomSkillValue,
-	selectBoardOddsResults,
+	selectBoardOddsMatrix,
 	selectBoardOddsLoading,
-	selectOddsCacheKey,
 } = chaosOdds.selectors;
 
 export default chaosOdds.reducer;

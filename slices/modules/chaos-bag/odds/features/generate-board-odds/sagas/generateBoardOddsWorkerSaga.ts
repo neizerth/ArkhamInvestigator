@@ -1,6 +1,8 @@
 import { selectShowChaosBagOdds } from "@modules/chaos-bag/base/shared/lib";
+import { setBoardOddsMatrix } from "@modules/chaos-bag/odds/shared/lib";
 import type { ReturnAwaited } from "@shared/model";
-import { call, select, takeLatest } from "redux-saga/effects";
+import { isNull } from "ramda-adjunct";
+import { call, put, select, takeLatest } from "redux-saga/effects";
 import { selectBoardChaosOddsTokens } from "../../../entities/lib";
 import { createCacheKey } from "../createCacheKey";
 import { generateBoardOdds } from "../generateBoardOdds";
@@ -44,6 +46,12 @@ function* worker() {
 	const endTime = performance.now();
 	const duration = (endTime - startTime).toFixed(2);
 	console.log(`getChaosOdds took ${duration}ms`);
+
+	if (isNull(odds)) {
+		return;
+	}
+
+	yield put(setBoardOddsMatrix(odds));
 
 	// console.log("generateBoardOddsSaga");
 }

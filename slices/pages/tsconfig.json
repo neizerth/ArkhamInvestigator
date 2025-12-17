@@ -1,13 +1,14 @@
 {
 	"extends": "../../tsconfig.base.json",
 	"compilerOptions": {
+		"baseUrl": "../../",
 		"paths": {
-			"@assets/*": ["../../assets/*"],
-			"@shared/*": ["../shared/*"],
-			"@entities/*": ["../entities/*"],
-			"@widgets/*": ["../widgets/*"],
-			"@features/*": ["../features/*"],
-			"@modules/*": ["../modules/*"]
+			"@assets/*": ["assets/*"],
+			"@shared/*": ["slices/shared/*"],
+			"@entities/*": ["slices/entities/*"],
+			"@widgets/*": ["slices/widgets/*"],
+			"@features/*": ["slices/features/*"],
+			"@modules/*": ["slices/modules/*"]
 		}
 	}
 }
