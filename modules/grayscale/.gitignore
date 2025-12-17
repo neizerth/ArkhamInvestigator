@@ -1,0 +1,8 @@
+# Android build artifacts
+android/build/
+android/.cxx/
+android/app/build/
+android/.gradle/
+android/local.properties
+*.so
+
