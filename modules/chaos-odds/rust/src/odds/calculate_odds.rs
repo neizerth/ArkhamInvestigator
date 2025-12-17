@@ -27,6 +27,7 @@ pub fn calculate_odds(
     }
 
     let modifiers = get_chaos_bag_modifiers(&available, revealed_frost_count);
+    let revealed_modifier: i16 = revealed.iter().map(|token| token.value as i16).sum();
     let auto_fail_odds = get_auto_fail_odds(&available, revealed_frost_count);
 
     let zero_difficulty_odds = 100u16.saturating_sub(auto_fail_odds as u16);
@@ -57,7 +58,8 @@ pub fn calculate_odds(
             let difficulty_i16 = difficulty as i16;
 
             for m in &modifiers {
-                if skill_i16 + m.modifier >= difficulty_i16 {
+                let sum = skill_i16 + m.modifier + revealed_modifier;
+                if sum >= difficulty_i16 {
                     probability += m.probability;
                 }
             }

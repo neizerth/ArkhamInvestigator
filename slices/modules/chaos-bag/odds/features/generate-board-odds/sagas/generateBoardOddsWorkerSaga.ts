@@ -27,7 +27,7 @@ function* worker() {
 	const currentCacheKey = createCacheKey(tokens);
 
 	if (currentCacheKey === cacheKey) {
-		console.log("tokens are the same, skipping");
+		console.log("tokens are the same, skip");
 		return;
 	}
 
