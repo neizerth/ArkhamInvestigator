@@ -14,14 +14,16 @@ pub fn build_groups(tokens: &[ChaosOddsToken]) -> Vec<ChaosOddsGroup> {
         if let Some(group) = grouped.get_mut(&key) {
             group.count += 1;
         } else {
-            // Precompute modifier - use saturating cast to fit in i8
+            // Precompute modifier - preserve sentinel values (AUTO_FAIL, AUTO_SUCCESS)
             let modifier = token.as_modifier();
-            let modifier_i8 = modifier.min(127).max(-128) as i8;
-            grouped.insert(key, ChaosOddsGroup {
-                token,
-                count: 1,
-                modifier: modifier_i8,
-            });
+            grouped.insert(
+                key,
+                ChaosOddsGroup {
+                    token,
+                    count: 1,
+                    modifier,
+                },
+            );
         }
     }
 

@@ -683,7 +683,7 @@ fn process_item(
 
         let next_available_count = item.available_count.saturating_sub(1);
         let next_pending_reveal = item.pending_reveal.saturating_sub(1) + token.reveal_count;
-        let expected_modifier = item.modifier + (group.modifier as i16);
+        let expected_modifier = item.modifier + group.modifier;
 
         // Fast deduplication: direct array access - O(1) access, fits in L2 cache
         // Use batch accumulation with SIMD optimization when possible
@@ -756,7 +756,7 @@ pub fn get_chaos_bag_modifiers(
         }
 
         let probability = group.count as f64 * total_f64_reciprocal;
-        let modifier = group.modifier as i16;
+        let modifier = group.modifier;
 
         // Build state2: decrement count for current group
         let state2 = dec_available_count(base_state2, group_idx);
@@ -826,7 +826,7 @@ pub fn get_chaos_bag_modifiers(
         let state1 = build_state1(available_mask, 0u128);
 
         let probability = group.count as f64 * total_count_reciprocal;
-        let modifier = group.modifier as i16;
+        let modifier = group.modifier;
 
         roots.push(DFSState {
             state1,

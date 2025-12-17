@@ -20,7 +20,7 @@ pub struct ChaosOddsToken {
 pub struct ChaosOddsGroup {
     pub token: ChaosOddsToken,
     pub count: usize,
-    pub modifier: i8,
+    pub modifier: i16,
 }
 
 #[derive(Clone, Debug)]
