@@ -1,9 +1,9 @@
-import { NativeModules, Platform } from "react-native";
+import { Platform } from "react-native";
 
-// Ensure the ChaosOddsJSI bridge module loads on native platforms
-// This module installs the JSI bindings into global.ChaosOdds
+// Ensure the ChaosOdds module loads on native platforms
+// The Expo module automatically loads the native library and installs JSI bindings
+// via OnCreate lifecycle hook in ChaosOddsModule.kt
 if (Platform.OS !== "web") {
-	// Reference the module to trigger its initialization
-	// The module's setBridge method will install the JSI bindings
-	const _ = NativeModules.ChaosOddsJSI;
+	// Module is automatically initialized by Expo Modules system
+	// JSI bindings are installed in ChaosOddsModule.onCreate()
 }

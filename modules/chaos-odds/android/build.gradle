@@ -3,6 +3,11 @@ apply plugin: 'com.android.library'
 group = 'expo.modules.chaosodds'
 version = '0.7.6'
 
+// rootProject.projectDir points to android/ directory, so we need to go up one level
+def projectRootDir = rootProject.projectDir.parentFile
+def nodeModulesDir = file("${projectRootDir}/node_modules")
+def reactNativeDir = file("${nodeModulesDir}/react-native")
+
 def expoModulesCorePlugin = new File(project(":expo-modules-core").projectDir.absolutePath, "ExpoModulesCorePlugin.gradle")
 apply from: expoModulesCorePlugin
 applyKotlinExpoModulesCorePlugin()
@@ -40,7 +45,12 @@ android {
     externalNativeBuild {
       cmake {
         cppFlags "-std=c++17 -fexceptions -frtti"
-        arguments "-DANDROID_STL=c++_shared"
+        // Override default linker flags to allow undefined symbols from react-android
+        // This is needed because reactnativejni is in react-android AAR
+        arguments "-DANDROID_STL=c++_shared",
+                  "-DNODE_MODULES_DIR=${nodeModulesDir.absolutePath}",
+                  "-DREACT_NATIVE_DIR=${reactNativeDir.absolutePath}",
+                  "-DANDROID_ALLOW_UNDEFINED_SYMBOLS=TRUE"
       }
     }
     

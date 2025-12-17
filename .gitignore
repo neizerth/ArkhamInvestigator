@@ -48,3 +48,51 @@ ArkhamIcons.json
 
 !android/**/*.pem
 /credentials.json
+
+# Android build files (modules)
+modules/**/android/build/
+modules/**/android/.cxx/
+modules/**/android/.gradle/
+modules/**/android/local.properties
+modules/**/android/*.iml
+modules/**/android/.idea/
+modules/**/android/captures/
+modules/**/android/externalNativeBuild/
+
+# CMake build cache (modules)
+modules/**/.cxx/
+modules/**/build/
+modules/**/CMakeFiles/
+modules/**/CMakeCache.txt
+modules/**/cmake_install.cmake
+modules/**/Makefile
+modules/**/*.ninja
+modules/**/*.ninja.d
+
+# Compiled native libraries (modules only - Rust/C++ outputs)
+modules/**/android/app/src/main/jniLibs/
+modules/**/android/src/main/jniLibs/
+modules/**/rust/target/
+
+# Kotlin/Java build outputs (modules)
+modules/**/android/build/
+modules/**/android/**/kotlin/
+modules/**/android/**/javac/
+modules/**/android/**/intermediates/
+modules/**/android/**/generated/
+modules/**/android/**/tmp/
+modules/**/android/**/outputs/
+modules/**/android/**/*.class
+modules/**/android/**/*.kotlin_module
+modules/**/android/**/classes/
+
+# Main Android project build files
+android/.gradle/
+android/.cxx/
+android/app/.cxx/
+android/app/build/
+android/build/
+android/local.properties
+android/*.iml
+android/.idea/
+android/captures/

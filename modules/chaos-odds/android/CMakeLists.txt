@@ -1,5 +1,5 @@
-cmake_minimum_required(VERSION 3.18.1)
-project(chaosodds)
+cmake_minimum_required(VERSION 3.18)
+project(chaos_odds)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -7,35 +7,39 @@ set(CMAKE_VERBOSE_MAKEFILE ON)
 
 # Paths
 set(PACKAGE_NAME "chaos-odds")
-set(BUILD_DIR ${CMAKE_SOURCE_DIR}/build)
 set(CPP_DIR "${CMAKE_SOURCE_DIR}/../cpp")
 set(RUST_LIB_DIR "${CMAKE_SOURCE_DIR}/../rust/target")
 
-# Set up React Native
-find_package(ReactAndroid REQUIRED CONFIG)
-find_package(fbjni REQUIRED CONFIG)
+# React Native headers path (from node_modules)
+# In Expo Modules, we only need headers, not source code
+if(NODE_MODULES_DIR)
+    set(REACT_COMMON_DIR "${NODE_MODULES_DIR}/react-native/ReactCommon")
+elseif(REACT_NATIVE_DIR)
+    set(REACT_COMMON_DIR "${REACT_NATIVE_DIR}/ReactCommon")
+else()
+    message(FATAL_ERROR "Neither NODE_MODULES_DIR nor REACT_NATIVE_DIR is set")
+endif()
 
 # Add C++ source files
 add_library(
     ${PACKAGE_NAME}
     SHARED
     ../cpp/ChaosOddsJSI.cpp
-    ../cpp/common/memory_manager.cpp
-    ../cpp/common/jsi_helpers.cpp
-    ../cpp/common/jsi_functions.cpp
-    ../cpp/common/jsi_install.cpp
     src/main/cpp/ChaosOddsJNI.cpp
 )
 
 # Include directories
+# For #include <jsi/jsi.h> to work:
+#   - Add ReactCommon/jsi to include path
+#   - Then jsi/jsi.h resolves to ReactCommon/jsi/jsi/jsi.h
+# For #include <ReactCommon/CallInvoker.h> to work:
+#   - Add ReactCommon/callinvoker to include path
 target_include_directories(
     ${PACKAGE_NAME}
     PRIVATE
     ${CPP_DIR}
-    ${CPP_DIR}/common
-    "${NODE_MODULES_DIR}/react-native/ReactCommon"
-    "${NODE_MODULES_DIR}/react-native/ReactCommon/jsi"
-    "${NODE_MODULES_DIR}/react-native/ReactCommon/callinvoker"
+    "${REACT_COMMON_DIR}/jsi"
+    "${REACT_COMMON_DIR}/callinvoker"
 )
 
 # Link Rust static library based on architecture
@@ -47,6 +51,8 @@ elseif(ANDROID_ABI STREQUAL "x86")
     set(RUST_TARGET "i686-linux-android")
 elseif(ANDROID_ABI STREQUAL "x86_64")
     set(RUST_TARGET "x86_64-linux-android")
+else()
+    message(FATAL_ERROR "Unknown Android ABI: ${ANDROID_ABI}")
 endif()
 
 # Add Rust library
@@ -57,14 +63,17 @@ set_target_properties(
     ${RUST_LIB_DIR}/${RUST_TARGET}/release/libchaos_odds.a
 )
 
+# Find system libraries
+find_library(log-lib log)
+find_library(android-lib android)
+
 # Link libraries
+# Note: React Native JSI libraries are linked automatically via react-android AAR
+# We only need to link our Rust library and system libraries
 target_link_libraries(
     ${PACKAGE_NAME}
     chaos_odds_rust
-    ReactAndroid::jsi
-    ReactAndroid::reactnativejni
-    fbjni::fbjni
-    android
-    log
+    ${log-lib}
+    ${android-lib}
 )
 
