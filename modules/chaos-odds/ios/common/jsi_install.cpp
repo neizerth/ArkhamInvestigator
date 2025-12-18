@@ -1,11 +1,11 @@
 #include "jsi_install.h"
 #include "jsi_functions.h"
 #include <ReactCommon/CallInvoker.h>
-#include <android/log.h>
+#include <cstdio>
 
 #define LOG_TAG "ChaosOdds"
-#define LOGI(...) __android_log_print(ANDROID_LOG_INFO, LOG_TAG, __VA_ARGS__)
-#define LOGE(...) __android_log_print(ANDROID_LOG_ERROR, LOG_TAG, __VA_ARGS__)
+#define LOGI(...) do { fprintf(stderr, "[ChaosOdds] "); fprintf(stderr, __VA_ARGS__); fprintf(stderr, "\n"); } while(0)
+#define LOGE(...) do { fprintf(stderr, "[ChaosOdds ERROR] "); fprintf(stderr, __VA_ARGS__); fprintf(stderr, "\n"); } while(0)
 
 namespace facebook {
 namespace jsi {

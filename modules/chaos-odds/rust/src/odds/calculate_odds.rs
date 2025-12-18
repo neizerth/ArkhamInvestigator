@@ -65,7 +65,7 @@ pub fn calculate_odds(
             }
 
             // Convert to percentage (0-100) and round
-            odds_matrix[skill][difficulty] = (probability * 100.0).round() as u16;
+            odds_matrix[skill][difficulty] = (probability * 100.0).round().min(100.0) as u16;
         }
     }
 
