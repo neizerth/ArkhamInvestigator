@@ -1,4 +1,3 @@
-import { selectShowChaosBagOdds } from "@modules/chaos-bag/base/shared/lib";
 import { setBoardOddsMatrix } from "@modules/chaos-bag/odds/shared/lib";
 import type { ReturnAwaited } from "@shared/model";
 import { isNull } from "ramda-adjunct";
@@ -13,14 +12,6 @@ let cacheKey: string | null = null;
 const tokensSelector = selectBoardChaosOddsTokens("current");
 
 function* worker() {
-	const enabled: ReturnType<typeof selectShowChaosBagOdds> = yield select(
-		selectShowChaosBagOdds,
-	);
-
-	if (!enabled) {
-		return;
-	}
-
 	const tokens: ReturnType<typeof tokensSelector> =
 		yield select(tokensSelector);
 

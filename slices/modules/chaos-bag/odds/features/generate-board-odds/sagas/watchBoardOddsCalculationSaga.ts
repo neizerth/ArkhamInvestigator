@@ -2,15 +2,27 @@ import {
 	boardChanged,
 	setCurrentInvestigatorIndex,
 } from "@modules/board/base/shared/lib";
-import { chaosBagUpdated } from "@modules/chaos-bag/base/shared/lib";
+import {
+	chaosBagUpdated,
+	selectShowChaosBagOdds,
+	setShowChaosBagOdds,
+} from "@modules/chaos-bag/base/shared/lib";
 import {
 	setStoryCode,
 	setStoryDifficultyId,
 } from "@modules/stories/shared/lib";
-import { debounce, put } from "redux-saga/effects";
+import { debounce, put, select } from "redux-saga/effects";
 import { generateBoardOdds } from "../generateBoardOdds";
 
 function* worker() {
+	const enabled: ReturnType<typeof selectShowChaosBagOdds> = yield select(
+		selectShowChaosBagOdds,
+	);
+
+	if (!enabled) {
+		return;
+	}
+
 	yield put(generateBoardOdds());
 }
 
@@ -31,4 +43,7 @@ export function* watchBoardOddsCalculationSaga() {
 	yield takeDebouncedMatch(setStoryCode.match);
 	// on story difficulty id change
 	yield takeDebouncedMatch(setStoryDifficultyId.match);
+
+	// on enable chaos odds module
+	yield takeDebouncedMatch(setShowChaosBagOdds.match);
 }
