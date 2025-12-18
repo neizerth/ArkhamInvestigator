@@ -16,29 +16,37 @@
 
 ## What Does This System Do?
 
-### The Problem in Simple Terms
+### The Problem
 
-Imagine you have a bag of tokens (like in a board game). Each token has:
-- **A value** (e.g., +2, -1, 0) — a modifier that affects skill checks
-- **A "reveal" property** — some tokens require drawing additional tokens
+You have a bag of tokens. Each token has:
+- **A value** (+2, -1, 0) — modifier for skill checks
+- **Additional draws (reveal)** — some tokens require drawing more tokens
+
+**What are tokens with additional draws:**
+In the game, some tokens require drawing additional tokens when drawn. For example:
+- Token "bless" with reveal=1 means: drew bless → need to draw 1 more token
+- Token "tablet" with reveal=2 means: drew tablet → need to draw 2 more tokens
+- In the fan scenario Strange Moons from The Dark Matter expansion, there's a token with reveal=2
+
+These tokens are called **tokens with additional draws** (or reveal tokens). Regular tokens have reveal=0 and don't require additional draws.
 
 **Question:** What are all possible final outcomes and their probabilities?
 
-### Example Problem
+### Example
 
-**Bag contains:**
-- 2 tokens "bless" (value +2, reveal=1) — if you draw bless, you must draw 1 more token
-- 1 token "curse" (value -2, reveal=1) — if you draw curse, you must draw 1 more token
-- 3 tokens "0" (value 0, reveal=0) — regular tokens, no requirements
+**Bag:**
+- 2 tokens "bless" (value +2, reveal=1) — token with additional draws, requires drawing 1 more token
+- 1 token "curse" (value -2, reveal=1) — token with additional draws, requires drawing 1 more token
+- 3 tokens "0" (value 0, reveal=0) — regular tokens without additional draws
 
 **What needs to be computed:**
-1. All possible final modifiers (e.g., +2, -2, +4, -4, 0, +2-2=0, etc.)
+1. All possible final modifiers (+2, -2, +4, -4, 0, +2-2=0, etc.)
 2. Probability of each modifier
 3. A 100×100 matrix: for each skill (0-99) and difficulty (0-99) combination — success probability
 
-### Why Is This Needed?
+### Why
 
-In the game, a player wants to know: "If I have skill 5 and the check difficulty is 3, what's my success probability?" The system precomputes this for all possible combinations.
+A player wants to know: "If I have skill 5 and difficulty 3, what's my success probability?" The system precomputes this for all combinations.
 
 ---
 
@@ -56,48 +64,49 @@ In the game, a player wants to know: "If I have skill 5 and the check difficulty
 - Modifier +1 with probability 66.7%
 - Modifier -1 with probability 33.3%
 
-### Example 2: Tokens With Reveal
+### Example 2: Tokens With Additional Draws
 
-**Bag:** 1 token "bless" (reveal=1, value +2) and 2 tokens "0" (reveal=0, value 0)
+**Bag:** 1 token "bless" (reveal=1, +2) and 2 tokens "0" (reveal=0, 0)
 
 **What happens:**
-1. Draw "bless" with probability 1/3
-   - Now need to draw 1 more token (reveal=1)
-   - Remaining in bag: 2 tokens "0"
-   - Draw "0" with probability 2/2 = 1.0
+1. Draw "bless" (probability 1/3)
+   - This is a token with additional draws, need to draw 1 more token
+   - Remaining: 2 tokens "0"
+   - Draw "0" (probability 2/2 = 1.0)
    - **Result:** modifier +2, probability = (1/3) × 1.0 = 1/3
 
-2. Draw "0" with probability 2/3
-   - reveal=0, nothing more needed
+2. Draw "0" (probability 2/3)
+   - reveal=0, this is a regular token, nothing more needed
    - **Result:** modifier 0, probability = 2/3
 
 **Result:**
-- Modifier +2 with probability 33.3%
-- Modifier 0 with probability 66.7%
+- Modifier +2: 33.3%
+- Modifier 0: 66.7%
 
-### Example 3: Reveal Chain (More Complex)
+### Example 3: Chain of Additional Draws
 
 **Bag:**
-- 1 token "tablet" (reveal=2, value 0) — requires drawing 2 tokens
-- 1 token "bless" (reveal=1, value +2) — requires drawing 1 token
-- 1 token "curse" (reveal=1, value -2) — requires drawing 1 token
-- 2 tokens "0" (reveal=0, value 0)
+- 1 token "tablet" (reveal=2, 0) — token with additional draws, requires drawing 2 tokens
+- 1 token "bless" (reveal=1, +2) — token with additional draws, requires drawing 1 token
+- 1 token "curse" (reveal=1, -2) — token with additional draws, requires drawing 1 token
+- 2 tokens "0" (reveal=0, 0) — regular tokens
 
 **Possible paths:**
 
-**Path 1:** Draw tablet (probability 1/5)
-- Need to draw 2 tokens
+**Path 1:** Draw tablet (1/5)
+- This is a token with additional draws (reveal=2), need to draw 2 tokens
 - Remaining: bless, curse, 0, 0
-- Draw bless (probability 1/4), then curse (probability 1/3)
+- Draw bless (1/4) — also a token with additional draws (reveal=1), need to draw 1 more
+- Draw curse (1/3)
 - **Result:** modifier 0+2-2=0, probability = (1/5) × (1/4) × (1/3) = 1/60
 
-**Path 2:** Draw tablet (probability 1/5)
-- Draw bless (probability 1/4), then 0 (probability 1/3)
+**Path 2:** Draw tablet (1/5)
+- Draw bless (1/4), then 0 (1/3)
 - **Result:** modifier 0+2+0=+2, probability = (1/5) × (1/4) × (1/3) = 1/60
 
-...and so on for all possible combinations.
+...and so on for all combinations.
 
-**Problem:** The number of paths grows exponentially! We need a smart algorithm.
+**Problem:** The number of paths grows exponentially. We need a smart algorithm.
 
 ---
 
@@ -119,13 +128,13 @@ A state is a "snapshot" of the situation:
 #### How DFS Works (Step by Step):
 
 **Step 1: Initialization**
-- Create initial states for each token with reveal > 0
+- Create initial states for each token with additional draws (reveal > 0)
 - For example, if there's 1 token "bless" (reveal=1):
-  - State: drew bless, 1 reveal remaining, modifier = +2, probability = 1/total_count
+  - State: drew bless, 1 additional draw remaining, modifier = +2, probability = 1/total_count
 
-**Step 2: Processing States**
+**Step 2: Processing**
 - Take a state from the stack
-- Check: if pending_reveal == 0, this is a final state — save result
+- If pending_reveal == 0 — final state, save result
 - Otherwise: for each available token, create a new state:
   - Decrease count of this token in bag
   - Increase counter of drawn tokens of this type
@@ -135,11 +144,11 @@ A state is a "snapshot" of the situation:
   - Put new state on stack
 
 **Step 3: Deduplication**
-- If we've already processed the same state (same drawn tokens, same pending_reveal), don't create duplicate
-- Instead, accumulate probability in the existing state
+- If we've already processed the same state, don't create duplicate
+- Accumulate probability in the existing state
 
 **Step 4: Finalization**
-- When pending_reveal == 0, apply multinomial coefficient (explained below)
+- When pending_reveal == 0, apply multinomial coefficient
 - Save result in cache
 
 #### DFS Visualization:
@@ -207,25 +216,61 @@ where:
 
 ## How Data is Stored (Bit Packing)
 
-### Problem: Need to Store Lots of Information Compactly
+### Problem
 
-Normally we would use arrays:
+Need to store lots of information compactly. Normally we would use arrays:
 ```rust
 available_counts: [3, 2, 1, 0, ...]  // How many tokens of each type available
-drawn_counts: [1, 0, 2, 0, ...]     // How many tokens of each type drawn
+drawn_counts: [1, 0, 2, 0, ...]       // How many tokens of each type drawn
 ```
 
-But this takes a lot of memory! Instead, we use **bit packing**.
+But this takes a lot of memory. Instead, we use **bit packing**.
 
-### What Is Bit Packing?
+### What Is Bit Packing
 
-Instead of storing numbers in separate memory cells, we "pack" them into one large number using bits.
+Instead of storing numbers in separate memory cells, we "pack" them into one large number.
 
-**Simple Example:**
+**Example:**
 - Want to store 4 numbers from 0 to 3 (each takes 2 bits)
 - Numbers: [2, 1, 3, 0]
 - Packing: `2 | (1 << 2) | (3 << 4) | (0 << 6) = 2 + 4 + 48 + 0 = 54`
 - Unpacking: `(54 >> 0) & 3 = 2`, `(54 >> 2) & 3 = 1`, etc.
+
+### What Are Bit Masks
+
+**Bit mask** — a number where each bit represents some property. If a bit is set (equals 1), the property is active.
+
+**Simple example:**
+- We have 4 token groups: 0, 1, 2, 3
+- Groups 0, 1, and 3 are available (have tokens), group 2 is not
+- Mask: `0b1011` (binary) = 11 (decimal)
+  - Bit 0 = 1 → group 0 is available
+  - Bit 1 = 1 → group 1 is available
+  - Bit 2 = 0 → group 2 is not available
+  - Bit 3 = 1 → group 3 is available
+
+**How to work with masks:**
+
+```rust
+// Set bit (mark group as available)
+mask |= (1 << 2);  // Set bit 2: mask = 0b1011 | 0b0100 = 0b1111
+
+// Clear bit (mark group as unavailable)
+mask &= !(1 << 1);  // Clear bit 1: mask = 0b1111 & 0b1101 = 0b1101
+
+// Check if bit is set
+if (mask & (1 << 0)) != 0 { 
+    // Bit 0 is set, group 0 is available
+}
+
+// Find first set bit (fast CPU operation)
+let group_idx = mask.trailing_zeros();  // For 0b1011 returns 0 (first set bit)
+mask &= mask - 1;  // Clear lowest set bit: 0b1011 → 0b1010
+```
+
+**Why this is useful:**
+- Instead of checking all 32 groups, we only check those where the bit is set
+- Much faster: O(available_groups) instead of O(all_groups)
 
 ### How This Works in Our System:
 
@@ -364,22 +409,24 @@ prob_table[group_idx][available_count - 1][available] = available / available_co
 
 ---
 
-## How Duplicate Calculations are Avoided (Deduplication)
+## Deduplication
 
-### Problem: Same State Can Be Reached by Different Paths
+### Problem
+
+Same state can be reached by different paths.
 
 **Example:**
 - **Path 1:** Draw bless, then curse
 - **Path 2:** Draw curse, then bless
 
-Both paths lead to **the same final state:**
+Both paths lead to the same final state:
 - Drew: 1×bless, 1×curse
 - Modifier: +2-2 = 0
 - But probabilities are different: P₁ and P₂
 
 **Solution:** Accumulate probabilities in one place, don't process state twice.
 
-### How It Works:
+### How It Works
 
 #### Step 1: Create Index from State
 
@@ -391,7 +438,7 @@ index = hash(state1, state2, pending_reveal) % 128000
 
 **How hash works:**
 - Combine state1, state2, and pending_reveal
-- Use XOR and multiplication by "magic" constants for uniform distribution
+- Use XOR and multiplication by constants for uniform distribution
 - Take remainder when divided by 128,000
 
 #### Step 2: Store Probabilities in Array
@@ -406,7 +453,7 @@ dedup_used[index] = true/false (whether this index is used)
 - First time: `dedup_array[42345] = 0.1`, `dedup_used[42345] = true`
 - Second time (same state): `dedup_array[42345] += 0.05` → now 0.15
 
-#### Step 3: Speed Optimizations
+#### Step 3: Optimizations
 
 **Local Cache (L1):**
 - Store 16 most recently used indices in small array on stack (256 bytes)
@@ -415,7 +462,7 @@ dedup_used[index] = true/false (whether this index is used)
 
 **Last Index Cache:**
 - Save last used index and its probability
-- Very common: sequential accesses to the same index
+- Often sequential accesses to the same index
 - If index matches — update immediately, no checks
 
 **Batch Processing:**
@@ -530,11 +577,12 @@ if token.is_fail {
 }
 ```
 
-### 5. SIMD Optimization (Optional)
+### 5. SIMD Optimization
 
-**What Is SIMD?**
+**What Is SIMD:**
 - Single Instruction, Multiple Data
 - Process multiple values simultaneously with one instruction
+- Simpler: CPU can add 2 numbers at once instead of one after another
 
 **Example:**
 ```rust
@@ -557,6 +605,14 @@ array[1] = result[1];
 ## Memory Optimizations
 
 ### 1. Fixed Stack Instead of Dynamic
+
+**What is a stack:**
+A stack is a data structure where elements are added and removed using "last in, first out" (LIFO) principle. Think of a stack of plates: you put on top, you take from top.
+
+In the DFS algorithm, the stack stores states that need to be processed:
+- Put a new state on the stack (push)
+- Take a state from the stack for processing (pop)
+- Process and add new states back to the stack
 
 **Problem:** Dynamic stack (Vec) requires heap allocation, which is slow (100-1000 CPU cycles)
 
@@ -583,6 +639,39 @@ struct FixedStack {
 - Ring buffer for efficient operations
 
 **Limitation:** Maximum 64 states simultaneously (sufficient for most cases)
+
+**What is a ring buffer:**
+- Think of the array as a circle: when we reach the end, we wrap around to the beginning
+- We use two pointers: head (where we read from) and tail (where we write to)
+- When tail reaches the end of the array, it "wraps around" to the beginning
+- This allows efficient use of a fixed array without reallocation
+
+**Ring buffer example:**
+```
+Array of size 4: [_, _, _, _]
+                  ↑
+                head=0, tail=0
+
+Add element: [A, _, _, _]
+              ↑     ↑
+            head=0 tail=1
+
+Add more:    [A, B, _, _]
+              ↑        ↑
+            head=0   tail=2
+
+Pop:         [_, B, _, _]
+                   ↑  ↑
+                head=1 tail=2
+
+Add:         [_, B, C, _]
+                   ↑     ↑
+                head=1  tail=3
+
+Add (wrap!): [D, B, C, _]
+              ↑  ↑
+           tail=0 head=1
+```
 
 ### 2. Packed Bit Arrays
 
@@ -760,4 +849,25 @@ The system uses a combination of smart algorithms and many optimizations for fas
 4. **Parallelization** — using all CPU cores
 5. **Precision** — right balance between speed and computation accuracy
 
-All these optimizations work together to provide fast and accurate calculations even for complex bags with multiple reveal tokens.
+All these optimizations work together to provide fast and accurate calculations even for complex bags with multiple tokens with additional draws.
+
+---
+
+## What Are L1/L2 Cache
+
+**In simple terms:**
+- CPU works very fast, but memory (RAM) is slow
+- Cache is fast memory inside the CPU
+- L1 cache — fastest, but small (32-64 KB)
+- L2 cache — slightly slower, but larger (256 KB - 1 MB)
+- L3 cache — even slower, but even larger (several MB)
+
+**Why:**
+- If data is in cache, CPU gets it instantly
+- If data is not in cache, need to go to main memory (slow)
+- So it's important that frequently used data fits in cache
+
+**In our case:**
+- Stack of 2 KB fits in L1 cache — very fast
+- Probability table of 100 KB fits in L2 cache — fast
+- Large deduplication array (128K elements) doesn't fit in cache — slower
