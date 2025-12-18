@@ -29,7 +29,7 @@ pub struct ChaosOddsCacheItem {
     pub probability: f64,
     pub available_count: usize,
     pub state1: u128, // Combined state: bits 0-31 = available_mask, bits 32-127 = reveal (96 bits for 24 groups)
-    pub state2: u128, // Packed available_counts: 3 bits per group (max 7 tokens), up to 21 groups (63 bits)
+    pub state2: u128, // Packed available_counts: 3 bits per group (max 7 tokens), up to 32 groups (96 bits)
     pub pending_reveal: usize,
 }
 
@@ -37,4 +37,11 @@ pub struct ChaosOddsCacheItem {
 pub struct ChaosBagModifier {
     pub modifier: i16,
     pub probability: f64,
+}
+
+/// Target token type with minimum required count
+#[derive(Clone, Debug, Deserialize, Serialize)]
+pub struct TokenTarget {
+    pub token_type: String,
+    pub count: usize,
 }

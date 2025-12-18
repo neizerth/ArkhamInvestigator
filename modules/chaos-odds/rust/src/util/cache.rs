@@ -1,12 +1,12 @@
 use std::hash::{Hash, Hasher};
 use smallvec::SmallVec;
 
-/// Pack counts into u128 (state2): each count uses 3 bits, supports up to 21 groups
+/// Pack counts into u128 (state2): each count uses 3 bits, supports up to 32 groups
 /// Max count per group is 7 (values 0-7).
 #[inline(always)]
 pub fn pack_available_counts(counts: &[u8]) -> u128 {
     let mut packed = 0u128;
-    for (i, &c) in counts.iter().enumerate().take(21) {
+    for (i, &c) in counts.iter().enumerate().take(32) {
         let count = c.min(7) as u128; // Clamp to max 7
         packed |= count << (i * 3);
     }
@@ -17,7 +17,7 @@ pub fn pack_available_counts(counts: &[u8]) -> u128 {
 #[inline(always)]
 pub fn unpack_available_counts(packed: u64, group_len: usize) -> [u8; 32] {
     let mut counts = [0u8; 32];
-    for i in 0..group_len.min(21) {
+    for i in 0..group_len.min(32) {
         counts[i] = ((packed >> (i * 3)) & 0x7) as u8;
     }
     counts
@@ -26,7 +26,7 @@ pub fn unpack_available_counts(packed: u64, group_len: usize) -> [u8; 32] {
 /// Get count for a specific group from packed state2 (u128)
 #[inline(always)]
 pub fn get_available_count(state2: u128, group_idx: usize) -> u8 {
-    if group_idx >= 21 {
+    if group_idx >= 32 {
         return 0; // Out of range
     }
     ((state2 >> (group_idx * 3)) & 0x7) as u8
@@ -35,8 +35,8 @@ pub fn get_available_count(state2: u128, group_idx: usize) -> u8 {
 /// Set count for a specific group in packed state2 (u128)
 #[inline(always)]
 pub fn set_available_count(state2: u128, group_idx: usize, count: u8) -> u128 {
-    if group_idx >= 21 {
-        return state2; // Can't store for groups > 21
+    if group_idx >= 32 {
+        return state2; // Can't store for groups > 32
     }
     let count = count.min(7) as u128; // Clamp to max 7
     let mask = !(0x7u128 << (group_idx * 3));
@@ -46,8 +46,8 @@ pub fn set_available_count(state2: u128, group_idx: usize, count: u8) -> u128 {
 /// Decrement count for a specific group in packed state2 (u128)
 #[inline(always)]
 pub fn dec_available_count(state2: u128, group_idx: usize) -> u128 {
-    if group_idx >= 21 {
-        return state2; // Can't modify for groups > 21
+    if group_idx >= 32 {
+        return state2; // Can't modify for groups > 32
     }
     let current = get_available_count(state2, group_idx);
     if current > 0 {
@@ -60,8 +60,8 @@ pub fn dec_available_count(state2: u128, group_idx: usize) -> u128 {
 /// Increment count for a specific group in packed state2 (u128)
 #[inline(always)]
 pub fn inc_available_count(state2: u128, group_idx: usize) -> u128 {
-    if group_idx >= 21 {
-        return state2; // Can't modify for groups > 21
+    if group_idx >= 32 {
+        return state2; // Can't modify for groups > 32
     }
     let current = get_available_count(state2, group_idx);
     if current < 7 {

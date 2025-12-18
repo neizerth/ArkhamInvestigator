@@ -1,13 +1,7 @@
 // JSI Native Module
 // Functions exposed via C++ JSI bindings
 
-export interface ChaosOddsInput {
-	token_type: string;
-	value: number;
-	is_fail: boolean;
-	is_success: boolean;
-	reveal_count: number;
-}
+export type { ChaosOddsInput, TokenTarget, FindTokensParams } from "../model";
 
 /**
  * Result object returned by calculate() function
@@ -42,6 +36,19 @@ interface ChaosOddsJSI {
 	 * Cancel ongoing calculation
 	 */
 	cancel(): void;
+
+	/**
+	 * Find token odds (probability that target tokens appear)
+	 * @param targets JSON string with array of TokenTarget
+	 * @param tokens JSON string with array of ChaosOddsToken
+	 * @param params JSON string with FindTokensParams
+	 * @returns Object with id and result (JSON string with number 0-100), or null if calculation was cancelled
+	 */
+	findTokens(
+		targets: string,
+		tokens: string,
+		params: string,
+	): Promise<CalculateResult | null>;
 }
 
 declare global {

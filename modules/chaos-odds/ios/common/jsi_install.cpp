@@ -64,6 +64,19 @@ void install(Runtime& runtime, std::shared_ptr<react::CallInvoker> jsInvoker) {
     chaosOdds.setProperty(runtime, "freeString", freeStringFunc);
     LOGI("✅ [JSI] freeString function installed");
     
+    // Install findTokens function
+    LOGI("🔵 [JSI] Installing findTokens function");
+    auto findTokensFunc = Function::createFromHostFunction(
+        runtime,
+        PropNameID::forAscii(runtime, "findTokens"),
+        3,
+        [](Runtime& rt, const Value& thisValue, const Value* args, size_t count) -> Value {
+            return functions::findTokens(rt, thisValue, args, count);
+        }
+    );
+    chaosOdds.setProperty(runtime, "findTokens", findTokensFunc);
+    LOGI("✅ [JSI] findTokens function installed");
+    
     // Set global property
     LOGI("🔵 [JSI] Setting global.ChaosOdds property");
     runtime.global().setProperty(runtime, "ChaosOdds", chaosOdds);

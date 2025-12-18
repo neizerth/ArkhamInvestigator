@@ -1,6 +1,6 @@
-import { yieldToEventLoop } from "@shared/lib/util/promise";
+import { parseJSON, stringifyJSON } from "@shared/lib/util/promise";
+import type { ChaosOddsInput, FindTokensParams, TokenTarget } from "../model";
 import ChaosOddsJSI from "./ChaosOddsJSI";
-import type { ChaosOddsInput } from "./ChaosOddsJSI";
 
 export const ChaosOddsService = {
 	async calculate(
@@ -18,16 +18,8 @@ export const ChaosOddsService = {
 			);
 		}
 
-		// Serialize JSON asynchronously to avoid blocking UI
-		// Use setImmediate to yield to event loop between serializations
-		await yieldToEventLoop();
-
-		const availableJSON = JSON.stringify(available);
-
-		// Yield to event loop again before second serialization
-		await yieldToEventLoop();
-
-		const revealedJSON = JSON.stringify(revealed);
+		const availableJSON = await stringifyJSON(available);
+		const revealedJSON = await stringifyJSON(revealed);
 
 		// Call native function - returns object with id and result, or null if cancelled
 		const calculateResult = await ChaosOddsJSI.calculate(
@@ -41,11 +33,8 @@ export const ChaosOddsService = {
 		}
 
 		try {
-			// Yield to event loop before parsing large result
-			await yieldToEventLoop();
-
 			// Parse JSON to get the matrix
-			const matrix: number[][] = JSON.parse(calculateResult.result);
+			const matrix = await parseJSON<number[][]>(calculateResult.result);
 			return matrix;
 		} finally {
 			// IMPORTANT: Always free the memory allocated by Rust using the ID
@@ -69,5 +58,54 @@ export const ChaosOddsService = {
 			return;
 		}
 		ChaosOddsJSI.cancel();
+	},
+
+	/**
+	 * Find token odds (probability that target tokens appear)
+	 * @param targets Array of target token types with required counts
+	 * @param tokens Array of available tokens in the chaos bag
+	 * @param params Parameters: reveal_count, revealed_frost_count, use_token_reveal
+	 * @returns Probability as number (0-100), or null if calculation was cancelled
+	 */
+	async findTokens(
+		targets: TokenTarget[],
+		tokens: ChaosOddsInput[],
+		params: FindTokensParams,
+	): Promise<number | null> {
+		if (!ChaosOddsJSI) {
+			throw new Error(
+				"ChaosOdds JSI module is not available. JSI bindings may not be installed. Please check that the native module is properly initialized.",
+			);
+		}
+		if (!ChaosOddsJSI.findTokens || !ChaosOddsJSI.freeString) {
+			throw new Error(
+				"ChaosOdds JSI module is not available. Please rebuild the app to include native bindings.",
+			);
+		}
+
+		const targetsJSON = await stringifyJSON(targets);
+		const tokensJSON = await stringifyJSON(tokens);
+		const paramsJSON = await stringifyJSON(params);
+
+		// Call native function - returns object with id and result, or null if cancelled
+		const calculateResult = await ChaosOddsJSI.findTokens(
+			targetsJSON,
+			tokensJSON,
+			paramsJSON,
+		);
+
+		// If calculation was cancelled, result will be null
+		if (calculateResult === null) {
+			return null;
+		}
+
+		try {
+			// Parse JSON to get the number (0-100)
+			const percentage = await parseJSON<number>(calculateResult.result);
+			return percentage;
+		} finally {
+			// IMPORTANT: Always free the memory allocated by Rust using the ID
+			ChaosOddsJSI.freeString(calculateResult.id);
+		}
 	},
 };

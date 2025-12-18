@@ -21,6 +21,9 @@ Value cancel(Runtime& runtime, const Value& thisValue, const Value* arguments, s
 /// Free memory allocated by calculate
 Value freeString(Runtime& runtime, const Value& thisValue, const Value* arguments, size_t count);
 
+/// Find token odds (probability that target tokens appear)
+Value findTokens(Runtime& runtime, const Value& thisValue, const Value* arguments, size_t count);
+
 } // namespace functions
 } // namespace chaosodds
 } // namespace jsi

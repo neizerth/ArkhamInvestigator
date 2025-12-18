@@ -14,7 +14,7 @@ use crate::util::math::multinomial;
 #[inline(always)]
 fn build_available_mask(state2: u128, group_len: usize) -> u32 {
     let mut mask = 0u32;
-    for i in 0..group_len.min(21) {
+    for i in 0..group_len.min(32) {
         if get_available_count(state2, i) > 0 {
             mask |= 1u32 << i;
         }
@@ -29,8 +29,9 @@ fn build_state1(available_mask: u32, reveal: u128) -> u128 {
 }
 
 // Constants for DFS processing
-// Reduced for mobile: smaller dedup size to fit in L2 cache better
-const MAX_DEDUP_SIZE: usize = 128_000; // 128K states - fits in mobile L2 cache (~512KB-1MB)
+// Optimized for mobile (Android/iOS, including older devices): smaller dedup size to fit in L2 cache
+// L2 cache on mobile: typically 256-512 KB, older devices may have 256 KB or less
+const MAX_DEDUP_SIZE: usize = 32_000; // 32K states → 256 KB (dedup_array) - fits in mobile L2 cache
 const MAX_DEDUP_BITS: usize = (MAX_DEDUP_SIZE + 31) / 32; // Packed bits: ceil(MAX_DEDUP_SIZE / 32)
 #[allow(dead_code)]
 const MAX_GROUPS: usize = 32;
@@ -733,7 +734,7 @@ pub fn get_chaos_bag_modifiers(
     let base_available_counts_array = {
         let mut arr = [0u8; 32];
         for (i, &count) in base_available.iter().enumerate().take(32) {
-            arr[i] = count.min(7); // Clamp to max 7 for u128 packing (3 bits per group)
+            arr[i] = count.min(7); // Clamp to max 7 for u128 packing (3 bits per group, max 32 groups)
         }
         arr
     };

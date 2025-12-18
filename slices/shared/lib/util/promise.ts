@@ -13,6 +13,16 @@ export const loadJSON = async <T>(url: string) => {
 export const delayValue = <T>(ms: number, value: T) =>
 	delay(ms).then(() => value);
 
+export const stringifyJSON = async <T>(value: T) => {
+	await yieldToEventLoop();
+	return JSON.stringify(value);
+};
+
+export const parseJSON = async <T>(json: string) => {
+	await yieldToEventLoop();
+	return JSON.parse(json) as T;
+};
+
 /**
  * Yield to event loop to avoid blocking UI
  * Uses setImmediate if available, otherwise falls back to setTimeout

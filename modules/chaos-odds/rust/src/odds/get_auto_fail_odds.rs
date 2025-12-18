@@ -1,8 +1,9 @@
 use crate::types::ChaosOddsToken;
 
 // Fixed-size stack - completely stack-allocated, zero heap allocation
-// Size: STACK_SIZE * sizeof(DFSState) = 4096 * 24 bytes = ~96KB - fits in L2 cache
-const STACK_SIZE: usize = 4096;
+// Optimized for mobile (Android/iOS, including older devices): reduced size to fit in L2 cache
+// Size: STACK_SIZE * sizeof(DFSState) = 2048 * 24 bytes = ~48KB - fits in L2 cache on mobile devices
+const STACK_SIZE: usize = 2048;
 
 /// Token group metadata - stored once, referenced by index
 /// Only stores needed fields to avoid unnecessary memory usage
@@ -17,7 +18,7 @@ struct TokenGroup {
 /// Optimized DFS state - packed counts in u128, minimal copying
 #[derive(Clone, Copy)]
 struct DFSState {
-    packed_counts: u128, // Packed available counts (3 bits per group, max 21 groups)
+    packed_counts: u128, // Packed available counts (3 bits per group, max 32 groups)
     revealed_frost_count: u8, // How many frost tokens have been revealed
     pending_reveal: u8,  // How many tokens still need to be revealed
     probability: f64,    // Probability of current path
@@ -71,7 +72,7 @@ impl FixedStack {
 /// Inline: Get count for a specific group from packed u128 (3 bits per group)
 #[inline(always)]
 fn get_count_inline(packed: u128, group_idx: usize) -> u8 {
-    if group_idx >= 21 {
+    if group_idx >= 32 {
         return 0;
     }
     ((packed >> (group_idx * 3)) & 0x7) as u8
@@ -80,7 +81,7 @@ fn get_count_inline(packed: u128, group_idx: usize) -> u8 {
 /// Inline: Decrement count for a specific group in packed u128
 #[inline(always)]
 fn dec_count_inline(packed: u128, group_idx: usize) -> u128 {
-    if group_idx >= 21 {
+    if group_idx >= 32 {
         return packed;
     }
     let shift = group_idx * 3;
@@ -97,7 +98,7 @@ fn dec_count_inline(packed: u128, group_idx: usize) -> u128 {
 #[inline(always)]
 fn pack_counts_inline(counts: &[u8], group_len: usize) -> u128 {
     let mut packed = 0u128;
-    for i in 0..group_len.min(21) {
+    for i in 0..group_len.min(32) {
         let count = counts[i].min(7) as u128;
         packed |= count << (i * 3);
     }
@@ -108,7 +109,7 @@ fn pack_counts_inline(counts: &[u8], group_len: usize) -> u128 {
 #[inline(always)]
 fn build_mask_inline(packed: u128, group_len: usize) -> u32 {
     let mut mask = 0u32;
-    for i in 0..group_len.min(21) {
+    for i in 0..group_len.min(32) {
         if get_count_inline(packed, i) > 0 {
             mask |= 1u32 << i;
         }
@@ -305,7 +306,7 @@ pub fn get_auto_fail_odds(tokens: &[ChaosOddsToken], revealed_frost_count: usize
 
     // Group tokens by type - single pass, no HashMap, no string cloning
     // Use linear search with small Vec (typically < 10 groups) - faster than HashMap for small N
-    let mut groups = Vec::<TokenGroup>::with_capacity(21);
+    let mut groups = Vec::<TokenGroup>::with_capacity(32);
     let mut seen_types: Vec<(&str, usize)> = Vec::new(); // (token_type ref, group_index)
 
     for token in tokens {
@@ -314,8 +315,8 @@ pub fn get_auto_fail_odds(tokens: &[ChaosOddsToken], revealed_frost_count: usize
         let group_idx = if let Some(pos) = seen_types.iter().position(|(t, _)| *t == token_type) {
             seen_types[pos].1
         } else {
-            if groups.len() >= 21 {
-                break; // Max 21 groups supported
+            if groups.len() >= 32 {
+                break; // Max 32 groups supported
             }
             let idx = groups.len();
             let is_frost = token_type == "frost";
@@ -338,7 +339,7 @@ pub fn get_auto_fail_odds(tokens: &[ChaosOddsToken], revealed_frost_count: usize
     }
 
     // Pack initial counts into u128 (3 bits per group, max 7 tokens per group)
-    let mut initial_counts = [0u8; 21];
+    let mut initial_counts = [0u8; 32];
     let mut total_tokens: u8 = 0;
     for (i, group) in groups.iter().enumerate() {
         let count = group.count.min(7) as u8; // Clamp to max 7 for packing
