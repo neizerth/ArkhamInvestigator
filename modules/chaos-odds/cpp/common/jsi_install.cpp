@@ -1,19 +1,32 @@
 #include "jsi_install.h"
 #include "jsi_functions.h"
 #include <ReactCommon/CallInvoker.h>
+#include <android/log.h>
+
+#define LOG_TAG "ChaosOdds"
+#define LOGI(...) __android_log_print(ANDROID_LOG_INFO, LOG_TAG, __VA_ARGS__)
+#define LOGE(...) __android_log_print(ANDROID_LOG_ERROR, LOG_TAG, __VA_ARGS__)
 
 namespace facebook {
 namespace jsi {
 namespace chaosodds {
 
 void install(Runtime& runtime, std::shared_ptr<react::CallInvoker> jsInvoker) {
+    LOGI("🔵 [JSI] install() called - starting JSI bindings installation");
+    
     // Set CallInvoker for async operations
     if (jsInvoker) {
+        LOGI("🔵 [JSI] Setting CallInvoker for async operations");
         functions::setCallInvoker(jsInvoker);
+    } else {
+        LOGI("⚠️ [JSI] CallInvoker is null - async operations may not work");
     }
+    
+    LOGI("🔵 [JSI] Creating ChaosOdds object");
     auto chaosOdds = Object(runtime);
     
     // Install calculate function
+    LOGI("🔵 [JSI] Installing calculate function");
     auto calculateFunc = Function::createFromHostFunction(
         runtime,
         PropNameID::forAscii(runtime, "calculate"),
@@ -23,8 +36,10 @@ void install(Runtime& runtime, std::shared_ptr<react::CallInvoker> jsInvoker) {
         }
     );
     chaosOdds.setProperty(runtime, "calculate", calculateFunc);
+    LOGI("✅ [JSI] calculate function installed");
     
     // Install cancel function
+    LOGI("🔵 [JSI] Installing cancel function");
     auto cancelFunc = Function::createFromHostFunction(
         runtime,
         PropNameID::forAscii(runtime, "cancel"),
@@ -34,8 +49,10 @@ void install(Runtime& runtime, std::shared_ptr<react::CallInvoker> jsInvoker) {
         }
     );
     chaosOdds.setProperty(runtime, "cancel", cancelFunc);
+    LOGI("✅ [JSI] cancel function installed");
     
     // Install freeString function
+    LOGI("🔵 [JSI] Installing freeString function");
     auto freeStringFunc = Function::createFromHostFunction(
         runtime,
         PropNameID::forAscii(runtime, "freeString"),
@@ -45,8 +62,33 @@ void install(Runtime& runtime, std::shared_ptr<react::CallInvoker> jsInvoker) {
         }
     );
     chaosOdds.setProperty(runtime, "freeString", freeStringFunc);
+    LOGI("✅ [JSI] freeString function installed");
     
+    // Set global property
+    LOGI("🔵 [JSI] Setting global.ChaosOdds property");
     runtime.global().setProperty(runtime, "ChaosOdds", chaosOdds);
+    LOGI("✅ [JSI] global.ChaosOdds property set successfully");
+    
+    // Verify installation
+    // NOTE: Removed asObject() calls to avoid ABI mismatch issues
+    // In RN 0.79+, asObject() symbols may not be exported from libreactnative.so
+    // Verification is not critical for functionality - just check that property exists
+    try {
+        auto global = runtime.global();
+        auto chaosOddsValue = global.getProperty(runtime, "ChaosOdds");
+        if (chaosOddsValue.isObject()) {
+            LOGI("✅ [JSI] Verification: global.ChaosOdds is an object");
+            // Skip detailed verification to avoid asObject() symbol resolution issues
+        } else {
+            LOGE("❌ [JSI] Verification failed: global.ChaosOdds is not an object");
+        }
+    } catch (const std::exception& e) {
+        LOGE("❌ [JSI] Verification exception: %s", e.what());
+    } catch (...) {
+        LOGE("❌ [JSI] Verification unknown exception");
+    }
+    
+    LOGI("✅ [JSI] install() completed successfully");
 }
 
 } // namespace chaosodds

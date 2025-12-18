@@ -48,4 +48,22 @@ declare global {
 	var ChaosOdds: ChaosOddsJSI | undefined;
 }
 
-export default global.ChaosOdds as ChaosOddsJSI;
+// Export with fallback check
+const getChaosOddsJSI = (): ChaosOddsJSI | undefined => {
+	if (typeof global.ChaosOdds !== "undefined") {
+		return global.ChaosOdds;
+	}
+
+	// Log warning in development
+	if (__DEV__) {
+		console.warn(
+			"ChaosOdds JSI bindings are not available. " +
+				"This usually means the native module failed to install JSI bindings. " +
+				"Check that the native module is properly initialized.",
+		);
+	}
+
+	return undefined;
+};
+
+export default getChaosOddsJSI() as ChaosOddsJSI;

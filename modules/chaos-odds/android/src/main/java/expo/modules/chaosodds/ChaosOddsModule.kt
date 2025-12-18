@@ -6,20 +6,9 @@ import expo.modules.kotlin.modules.ModuleDefinition
 class ChaosOddsModule : Module() {
   override fun definition() = ModuleDefinition {
     Name("ChaosOdds")
-
-    OnCreate {
-      installJSI()
-    }
+    
+    // JSI bindings are installed via ChaosOddsJSIModulePackage
+    // This Expo Module is only for JS API if needed
+    // DO NOT install JSI here - it must be done in JSIModulePackage
   }
-
-  private fun installJSI() {
-    try {
-      System.loadLibrary("chaos-odds")
-      nativeInstall()
-    } catch (e: Throwable) {
-      e.printStackTrace()
-    }
-  }
-
-  private external fun nativeInstall()
 }

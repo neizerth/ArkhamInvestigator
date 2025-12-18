@@ -3,16 +3,15 @@ apply plugin: 'com.android.library'
 group = 'expo.modules.chaosodds'
 version = '0.7.6'
 
-// rootProject.projectDir points to android/ directory, so we need to go up one level
-def projectRootDir = rootProject.projectDir.parentFile
-def nodeModulesDir = file("${projectRootDir}/node_modules")
-def reactNativeDir = file("${nodeModulesDir}/react-native")
-
 def expoModulesCorePlugin = new File(project(":expo-modules-core").projectDir.absolutePath, "ExpoModulesCorePlugin.gradle")
 apply from: expoModulesCorePlugin
 applyKotlinExpoModulesCorePlugin()
 useCoreDependencies()
 useExpoPublishing()
+
+def projectRootDir = rootProject.projectDir.parentFile
+def nodeModulesDir = file("${projectRootDir}/node_modules")
+def reactNativeDir = file("${nodeModulesDir}/react-native")
 
 // If you want to use the managed Android SDK versions from expo-modules-core, set this to true.
 // The Android SDK versions will be bumped from time to time in SDK releases and may introduce breaking changes in your module code.
@@ -37,41 +36,55 @@ if (useManagedAndroidSdkVersions) {
 }
 
 android {
-  namespace "expo.modules.chaosodds"
-  defaultConfig {
-    versionCode 1
-    versionName "0.7.6"
+    namespace "expo.modules.chaosodds"
     
+    buildFeatures {
+        prefab true
+    }
+    
+    defaultConfig {
+        versionCode 1
+        versionName "0.7.6"
+
+        externalNativeBuild {
+            cmake {
+                cppFlags "-std=c++17 -fexceptions -frtti"
+                arguments "-DANDROID_STL=c++_shared",
+                          "-DNODE_MODULES_DIR=${nodeModulesDir.absolutePath}",
+                          "-DREACT_NATIVE_DIR=${reactNativeDir.absolutePath}"
+            }
+        }
+    }
+
     externalNativeBuild {
-      cmake {
-        cppFlags "-std=c++17 -fexceptions -frtti"
-        // Override default linker flags to allow undefined symbols from react-android
-        // This is needed because reactnativejni is in react-android AAR
-        arguments "-DANDROID_STL=c++_shared",
-                  "-DNODE_MODULES_DIR=${nodeModulesDir.absolutePath}",
-                  "-DREACT_NATIVE_DIR=${reactNativeDir.absolutePath}",
-                  "-DANDROID_ALLOW_UNDEFINED_SYMBOLS=TRUE"
-      }
+        cmake {
+            path "CMakeLists.txt"
+        }
+    }
+
+    splits {
+        abi {
+            enable true
+            reset()
+            include "armeabi-v7a", "arm64-v8a", "x86", "x86_64"
+            universalApk true
+        }
+    }
+
+    lintOptions {
+        abortOnError false
     }
     
-    ndk {
-      abiFilters "armeabi-v7a", "arm64-v8a", "x86", "x86_64"
-    }
-  }
-  
-  externalNativeBuild {
-    cmake {
-      path "CMakeLists.txt"
-    }
-  }
-  
-  lintOptions {
-    abortOnError false
-  }
-  
-  sourceSets {
-    main {
-      jniLibs.srcDirs = ['src/main/jniLibs']
-    }
-  }
+    // Gradle automatically packages .so files from externalNativeBuild output
+    // No need for custom jniLibs.srcDirs or copying tasks
 }
+
+dependencies {
+    // React Native dependency for ReactApplicationContext
+    // expo-modules-core dependencies are added automatically by useCoreDependencies()
+    // Use compileOnly to avoid affecting the final APK packaging - React Native is already included by the app
+    compileOnly("com.facebook.react:react-android")
+}
+
+// Gradle automatically packages .so files from externalNativeBuild output
+// No custom copying needed - externalNativeBuild handles this correctly

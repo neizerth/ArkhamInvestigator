@@ -7,6 +7,11 @@ export const ChaosOddsService = {
 		available: ChaosOddsInput[],
 		revealed: ChaosOddsInput[] = [],
 	): Promise<number[][] | null> {
+		if (!ChaosOddsJSI) {
+			throw new Error(
+				"ChaosOdds JSI module is not available. JSI bindings may not be installed. Please check that the native module is properly initialized.",
+			);
+		}
 		if (!ChaosOddsJSI.calculate || !ChaosOddsJSI.freeString) {
 			throw new Error(
 				"ChaosOdds JSI module is not available. Please rebuild the app to include native bindings.",
@@ -53,6 +58,12 @@ export const ChaosOddsService = {
 	 * Call this to request cancellation of a running calculate() operation
 	 */
 	cancel(): void {
+		if (!ChaosOddsJSI) {
+			console.warn(
+				"ChaosOdds JSI module is not available. JSI bindings may not be installed.",
+			);
+			return;
+		}
 		if (!ChaosOddsJSI.cancel) {
 			// If cancel is not available, silently ignore (for backwards compatibility)
 			return;

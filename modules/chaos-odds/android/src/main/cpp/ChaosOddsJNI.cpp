@@ -1,7 +1,9 @@
 #include <jni.h>
 #include <jsi/jsi.h>
 #include "ChaosOddsJSI.h"
+#include <ReactCommon/CallInvokerHolder.h>
 #include <android/log.h>
+#include <fbjni/fbjni.h>
 
 #define LOG_TAG "ChaosOdds"
 #define LOGI(...) __android_log_print(ANDROID_LOG_INFO, LOG_TAG, __VA_ARGS__)
@@ -9,118 +11,65 @@
 
 using namespace facebook;
 
+// JNI function for ChaosOddsJSIModulePackage
+// Package: expo.modules.chaosodds
+// Class: ChaosOddsJSIModulePackage
+// Method: nativeInstall
+// This is called by React Native's ReactPackage system
 extern "C" JNIEXPORT void JNICALL
-Java_expo_modules_chaosodds_ChaosOddsModule_nativeInstall(
+Java_expo_modules_chaosodds_ChaosOddsJSIModulePackage_nativeInstall(
     JNIEnv *env,
-    jobject thiz
+    jobject thiz,
+    jlong runtimePtr,
+    jobject callInvokerHolderImpl
 ) {
-    // Get runtime from ReactApplicationContext via JNI
-    // This approach works with Expo Modules by accessing the runtime through JNI
+    LOGI("🔵 [JNI] nativeInstall called with runtime pointer: %lld", (long long)runtimePtr);
     
-    // Get appContext from Module
-    jclass moduleClass = env->GetObjectClass(thiz);
-    jfieldID appContextField = env->GetFieldID(moduleClass, "appContext", "Lexpo/modules/kotlin/AppContext;");
-    if (!appContextField) {
-        LOGE("Failed to get appContext field");
-        env->DeleteLocalRef(moduleClass);
-        return;
-    }
-    
-    jobject appContext = env->GetObjectField(thiz, appContextField);
-    if (!appContext) {
-        LOGE("Failed to get appContext");
-        env->DeleteLocalRef(moduleClass);
-        return;
-    }
-    
-    // Get reactContext from AppContext
-    jclass appContextClass = env->GetObjectClass(appContext);
-    jfieldID reactContextField = env->GetFieldID(appContextClass, "reactContext", "Lcom/facebook/react/bridge/ReactApplicationContext;");
-    
-    if (!reactContextField) {
-        LOGE("Failed to get reactContext field");
-        env->DeleteLocalRef(appContextClass);
-        env->DeleteLocalRef(appContext);
-        env->DeleteLocalRef(moduleClass);
-        return;
-    }
-    
-    jobject reactContext = env->GetObjectField(appContext, reactContextField);
-    if (!reactContext) {
-        LOGE("Failed to get reactContext - runtime may not be ready yet");
-        env->DeleteLocalRef(appContextClass);
-        env->DeleteLocalRef(appContext);
-        env->DeleteLocalRef(moduleClass);
-        return;
-    }
-    
-    // Get JavaScriptContextHolder
-    jclass reactContextClass = env->GetObjectClass(reactContext);
-    jmethodID getJSContextMethod = env->GetMethodID(reactContextClass, "getJavaScriptContextHolder", "()Lcom/facebook/react/bridge/JavaScriptContextHolder;");
-    
-    if (!getJSContextMethod) {
-        LOGE("Failed to get getJavaScriptContextHolder method");
-        env->DeleteLocalRef(reactContextClass);
-        env->DeleteLocalRef(reactContext);
-        env->DeleteLocalRef(appContextClass);
-        env->DeleteLocalRef(appContext);
-        env->DeleteLocalRef(moduleClass);
-        return;
-    }
-    
-    jobject jsContextHolder = env->CallObjectMethod(reactContext, getJSContextMethod);
-    if (!jsContextHolder) {
-        LOGE("Failed to get JavaScriptContextHolder - runtime may not be ready yet");
-        env->DeleteLocalRef(reactContextClass);
-        env->DeleteLocalRef(reactContext);
-        env->DeleteLocalRef(appContextClass);
-        env->DeleteLocalRef(appContext);
-        env->DeleteLocalRef(moduleClass);
-        return;
-    }
-    
-    // Get runtime pointer
-    jclass jsContextHolderClass = env->GetObjectClass(jsContextHolder);
-    jmethodID getMethod = env->GetMethodID(jsContextHolderClass, "get", "()J");
-    
-    if (!getMethod) {
-        LOGE("Failed to get get method");
-        env->DeleteLocalRef(jsContextHolderClass);
-        env->DeleteLocalRef(jsContextHolder);
-        env->DeleteLocalRef(reactContextClass);
-        env->DeleteLocalRef(reactContext);
-        env->DeleteLocalRef(appContextClass);
-        env->DeleteLocalRef(appContext);
-        env->DeleteLocalRef(moduleClass);
-        return;
-    }
-    
-    jlong runtimePtr = env->CallLongMethod(jsContextHolder, getMethod);
     if (runtimePtr == 0) {
-        LOGE("Runtime pointer is null - runtime may not be ready yet");
-        env->DeleteLocalRef(jsContextHolderClass);
-        env->DeleteLocalRef(jsContextHolder);
-        env->DeleteLocalRef(reactContextClass);
-        env->DeleteLocalRef(reactContext);
-        env->DeleteLocalRef(appContextClass);
-        env->DeleteLocalRef(appContext);
-        env->DeleteLocalRef(moduleClass);
+        LOGE("❌ [JNI] Runtime pointer is null - cannot install JSI bindings");
         return;
     }
     
     // Install JSI bindings
+    // runtimePtr is provided by React Native's JSIModulePackage system
+    // and is guaranteed to be valid at this point
     auto runtime = reinterpret_cast<jsi::Runtime *>(runtimePtr);
-    LOGI("Installing JSI bindings");
-    jsi::chaosodds::ChaosOddsJSI::install(*runtime);
-    LOGI("JSI bindings installed successfully");
+    LOGI("🔵 [JNI] Runtime pointer is valid");
     
-    // Cleanup
-    env->DeleteLocalRef(jsContextHolderClass);
-    env->DeleteLocalRef(jsContextHolder);
-    env->DeleteLocalRef(reactContextClass);
-    env->DeleteLocalRef(reactContext);
-    env->DeleteLocalRef(appContextClass);
-    env->DeleteLocalRef(appContext);
-    env->DeleteLocalRef(moduleClass);
+    // Extract CallInvoker from CallInvokerHolderImpl if provided
+    std::shared_ptr<react::CallInvoker> jsInvoker = nullptr;
+    if (callInvokerHolderImpl != nullptr) {
+        try {
+            // Cast jobject to alias_ref for CallInvokerHolder
+            // Use wrap_alias to convert jobject to alias_ref<jobject>, then use static_ref_cast function
+            auto callInvokerHolderRef = jni::wrap_alias(static_cast<jobject>(callInvokerHolderImpl));
+            auto callInvokerHolder = jni::static_ref_cast<react::CallInvokerHolder::javaobject>(callInvokerHolderRef);
+            jsInvoker = callInvokerHolder->cthis()->getCallInvoker();
+            if (jsInvoker) {
+                LOGI("✅ [JNI] CallInvoker extracted from CallInvokerHolderImpl");
+            } else {
+                LOGE("⚠️ [JNI] CallInvoker is null in CallInvokerHolderImpl");
+            }
+        } catch (const std::exception& e) {
+            LOGE("❌ [JNI] Failed to extract CallInvoker: %s", e.what());
+        } catch (...) {
+            LOGE("❌ [JNI] Unknown exception extracting CallInvoker");
+        }
+    } else {
+        LOGE("⚠️ [JNI] CallInvokerHolderImpl is null - async operations may not work");
+    }
+    
+    LOGI("🔵 [JNI] Calling ChaosOddsJSI::install");
+    try {
+        // Use the direct install function that accepts CallInvoker
+        jsi::chaosodds::install(*runtime, jsInvoker);
+        LOGI("✅ [JNI] ChaosOddsJSI::install completed successfully");
+    } catch (const std::exception& e) {
+        LOGE("❌ [JNI] Exception in ChaosOddsJSI::install: %s", e.what());
+    } catch (...) {
+        LOGE("❌ [JNI] Unknown exception in ChaosOddsJSI::install");
+    }
+    
+    LOGI("✅ [JNI] nativeInstall finished");
 }
 

@@ -28,21 +28,41 @@ Value calculate(
     const Value* arguments,
     size_t count
 ) {
+    // Validate arguments and return rejected Promise on error
     std::string available;
     std::string revealed;
-
+    std::string errorMessage;
+    
     try {
         helpers::validate_calculate_args(arguments, count);
         auto extracted = helpers::extract_strings(runtime, arguments, count);
         available = std::move(extracted.first);
         revealed  = std::move(extracted.second);
     } catch (const std::exception& e) {
-        throw JSError(runtime, e.what());
+        errorMessage = e.what();
     }
 
     auto jsInvoker = g_jsInvoker;
-    if (!jsInvoker) {
-        throw JSError(runtime, "JS CallInvoker is not initialized");
+    if (!jsInvoker && errorMessage.empty()) {
+        errorMessage = "JS CallInvoker is not initialized";
+    }
+    
+    // If there's an error, return rejected Promise
+    if (!errorMessage.empty()) {
+        auto promiseCtor = runtime.global().getPropertyAsFunction(runtime, "Promise");
+        auto errorCtor = runtime.global().getPropertyAsFunction(runtime, "Error");
+        std::string errorMsg = errorMessage;
+        return promiseCtor.callAsConstructor(runtime, Function::createFromHostFunction(
+            runtime,
+            PropNameID::forAscii(runtime, "reject"),
+            2,
+            [errorMsg](Runtime& rt, const Value&, const Value* args, size_t) -> Value {
+                auto error = rt.global().getPropertyAsFunction(rt, "Error")
+                    .callAsConstructor(rt, String::createFromUtf8(rt, errorMsg));
+                args[1].getObject(rt).getFunction(rt).call(rt, error);
+                return Value::undefined();
+            }
+        ));
     }
 
     auto promiseCtor =
@@ -99,8 +119,8 @@ Value calculate(
 
                                 std::string result_str(result_ptr);
                                 uint64_t id =
-                                    chaosodds::memory::generate_id();
-                                chaosodds::memory::store_pointer(
+                                    ::chaosodds::memory::generate_id();
+                                ::chaosodds::memory::store_pointer(
                                     id,
                                     result_ptr
                                 );
@@ -166,7 +186,7 @@ Value freeString(
 
     uint64_t id =
         helpers::parse_id_from_value(runtime, arguments[0]);
-    chaosodds::memory::free_pointer_by_id(id);
+    ::chaosodds::memory::free_pointer_by_id(id);
 
     return Value::undefined();
 }

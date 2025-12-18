@@ -3,21 +3,34 @@ project(chaos_odds)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_VERBOSE_MAKEFILE ON)
+
+# CRITICAL: Library name must use underscore, not hyphen
+# System.loadLibrary() in Kotlin requires underscore format
+set(PACKAGE_NAME "chaos_odds")
+
+# Use standard CMake output directory - Gradle will handle packaging automatically
 
 # Paths
-set(PACKAGE_NAME "chaos-odds")
 set(CPP_DIR "${CMAKE_SOURCE_DIR}/../cpp")
 set(RUST_LIB_DIR "${CMAKE_SOURCE_DIR}/../rust/target")
 
-# React Native headers path (from node_modules)
-# In Expo Modules, we only need headers, not source code
-if(NODE_MODULES_DIR)
-    set(REACT_COMMON_DIR "${NODE_MODULES_DIR}/react-native/ReactCommon")
-elseif(REACT_NATIVE_DIR)
-    set(REACT_COMMON_DIR "${REACT_NATIVE_DIR}/ReactCommon")
+message(STATUS "ANDROID_ABI = ${ANDROID_ABI}")
+
+# Find React Native prefab packages
+# React Native 0.79+ provides prefab packages for proper linking
+find_package(ReactAndroid REQUIRED CONFIG)
+find_package(fbjni REQUIRED CONFIG)
+
+message(STATUS "Found ReactAndroid prefab package (version: ${ReactAndroid_VERSION})")
+message(STATUS "Found fbjni prefab package")
+
+# In React Native 0.76+, the target name changed from reactnativejni to reactnative
+if (ReactAndroid_VERSION_MINOR GREATER_EQUAL 76)
+    set(REACT_NATIVE_TARGET ReactAndroid::reactnative)
+    message(STATUS "Using ReactAndroid::reactnative (RN 0.76+)")
 else()
-    message(FATAL_ERROR "Neither NODE_MODULES_DIR nor REACT_NATIVE_DIR is set")
+    set(REACT_NATIVE_TARGET ReactAndroid::reactnativejni)
+    message(STATUS "Using ReactAndroid::reactnativejni (RN < 0.76)")
 endif()
 
 # Add C++ source files
@@ -25,21 +38,31 @@ add_library(
     ${PACKAGE_NAME}
     SHARED
     ../cpp/ChaosOddsJSI.cpp
+    ../cpp/common/jsi_install.cpp
+    ../cpp/common/jsi_functions.cpp
+    ../cpp/common/jsi_helpers.cpp
+    ../cpp/common/memory_manager.cpp
     src/main/cpp/ChaosOddsJNI.cpp
 )
 
 # Include directories
-# For #include <jsi/jsi.h> to work:
-#   - Add ReactCommon/jsi to include path
-#   - Then jsi/jsi.h resolves to ReactCommon/jsi/jsi/jsi.h
-# For #include <ReactCommon/CallInvoker.h> to work:
-#   - Add ReactCommon/callinvoker to include path
+# Get React Native include directories from prefab target
+if (ReactAndroid_VERSION_MINOR GREATER_EQUAL 76)
+    get_target_property(REACT_NATIVE_INCLUDE_DIRS
+        ReactAndroid::reactnative
+        INTERFACE_INCLUDE_DIRECTORIES)
+else()
+    get_target_property(REACT_NATIVE_INCLUDE_DIRS
+        ReactAndroid::reactnativejni
+        INTERFACE_INCLUDE_DIRECTORIES)
+endif()
+
 target_include_directories(
     ${PACKAGE_NAME}
     PRIVATE
     ${CPP_DIR}
-    "${REACT_COMMON_DIR}/jsi"
-    "${REACT_COMMON_DIR}/callinvoker"
+    ${REACT_NATIVE_INCLUDE_DIRS}/react
+    # React Native headers are provided by prefab packages
 )
 
 # Link Rust static library based on architecture
@@ -56,24 +79,59 @@ else()
 endif()
 
 # Add Rust library
+set(RUST_LIB_PATH "${RUST_LIB_DIR}/${RUST_TARGET}/release/libchaos_odds.a")
+if(NOT EXISTS "${RUST_LIB_PATH}")
+    message(FATAL_ERROR "Rust library not found: ${RUST_LIB_PATH}. Please run: cd modules/chaos-odds && ./cli/_build.android.sh")
+endif()
+
+message(STATUS "Linking Rust library: ${RUST_LIB_PATH}")
 add_library(chaos_odds_rust STATIC IMPORTED)
 set_target_properties(
     chaos_odds_rust
-    PROPERTIES IMPORTED_LOCATION
-    ${RUST_LIB_DIR}/${RUST_TARGET}/release/libchaos_odds.a
+    PROPERTIES 
+    IMPORTED_LOCATION "${RUST_LIB_PATH}"
 )
 
 # Find system libraries
 find_library(log-lib log)
 find_library(android-lib android)
 
-# Link libraries
-# Note: React Native JSI libraries are linked automatically via react-android AAR
-# We only need to link our Rust library and system libraries
+# Link against React Native prefab targets
+# ReactAndroid::jsi provides JSI symbols (jsi::Runtime, jsi::Value, etc.)
+# ReactAndroid::reactnative (0.76+) or ReactAndroid::reactnativejni (<0.76) provides JNI bindings
+# fbjni::fbjni provides JNI utilities
 target_link_libraries(
     ${PACKAGE_NAME}
+    PRIVATE
+    ReactAndroid::jsi
+    ${REACT_NATIVE_TARGET}
+    fbjni::fbjni
     chaos_odds_rust
     ${log-lib}
     ${android-lib}
 )
 
+# Standard compiler flags for C++ shared library
+target_compile_options(
+    ${PACKAGE_NAME}
+    PRIVATE
+    -fPIC
+    -fexceptions
+    -frtti
+    -fvisibility=hidden
+)
+
+# Export only JNI functions, hide everything else
+# This prevents symbol conflicts and ensures we use inline functions from JSI headers
+# Note: JNIEXPORT and JNICALL are already defined in jni.h, we don't need to redefine them
+set_target_properties(
+    ${PACKAGE_NAME}
+    PROPERTIES
+    CXX_VISIBILITY_PRESET hidden
+    VISIBILITY_INLINES_HIDDEN ON
+)
+
+# Diagnostics
+message(STATUS "Using Rust lib: ${RUST_LIB_PATH}")
+message(STATUS "Library name: ${PACKAGE_NAME}")
+message(STATUS "Linking with ReactAndroid prefab targets")

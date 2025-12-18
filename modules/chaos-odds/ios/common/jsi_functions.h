@@ -1,11 +1,16 @@
 #pragma once
 
 #include <jsi/jsi.h>
+#include <ReactCommon/CallInvoker.h>
+#include <memory>
 
 namespace facebook {
 namespace jsi {
 namespace chaosodds {
 namespace functions {
+
+/// Set CallInvoker for async operations (must be called before using calculate)
+void setCallInvoker(std::shared_ptr<react::CallInvoker> jsInvoker);
 
 /// Calculate chaos bag odds
 Value calculate(Runtime& runtime, const Value& thisValue, const Value* arguments, size_t count);

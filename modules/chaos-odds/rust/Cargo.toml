@@ -21,6 +21,8 @@ rayon = "1.8"
 [lib]
 crate-type = [
     "rlib",      # for tests / normal Rust linking
-    "staticlib", # for iOS
-    "cdylib"    # for Android
+    "staticlib" # for iOS and Android (CMake links .a into .so)
 ]
+# NOTE: Do NOT use "cdylib" for Android
+# CMake builds the final .so file and links Rust .a into it
+# Using cdylib would create a separate .so that conflicts with CMake's .so

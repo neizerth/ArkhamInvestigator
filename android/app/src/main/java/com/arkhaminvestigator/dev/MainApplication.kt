@@ -2,6 +2,7 @@ package com.arkhaminvestigator.dev
 
 import android.app.Application
 import android.content.res.Configuration
+import java.io.IOException
 
 import com.facebook.react.PackageList
 import com.facebook.react.ReactApplication
@@ -15,8 +16,7 @@ import com.facebook.soloader.SoLoader
 
 import expo.modules.ApplicationLifecycleDispatcher
 import expo.modules.ReactNativeHostWrapper
-
-import com.mkuczera.RNReactNativeHapticFeedbackPackage;
+import expo.modules.chaosodds.ChaosOddsJSIModulePackage
 
 class MainApplication : Application(), ReactApplication {
 
@@ -24,8 +24,10 @@ class MainApplication : Application(), ReactApplication {
         this,
         object : DefaultReactNativeHost(this) {
           override fun getPackages(): List<ReactPackage> {
-            val packages = PackageList(this).packages
-            // Packages that cannot be autolinked yet can be added manually here, for example:
+            val packages = PackageList(this).packages.toMutableList()
+            // Add ChaosOddsJSIModulePackage to install JSI bindings early
+            // This must be added BEFORE JS code runs
+            packages.add(ChaosOddsJSIModulePackage())
             return packages
           }
 
@@ -42,8 +44,19 @@ class MainApplication : Application(), ReactApplication {
     get() = ReactNativeHostWrapper.createReactHost(applicationContext, reactNativeHost)
 
   override fun onCreate() {
+    // CRITICAL: SoLoader.init must be called BEFORE super.onCreate()
+    // This ensures that the SoLoader mapping is configured before React Native
+    // tries to load native libraries during initialization
+    try {
+      SoLoader.init(this, OpenSourceMergedSoMapping)
+    } catch (e: IOException) {
+      // If SoLoader.init fails, log the error but continue
+      // Some configurations may have already initialized SoLoader
+      android.util.Log.e("MainApplication", "SoLoader.init failed", e)
+    }
+    
     super.onCreate()
-    SoLoader.init(this, OpenSourceMergedSoMapping)
+    
     if (BuildConfig.IS_NEW_ARCHITECTURE_ENABLED) {
       // If you opted-in for the New Architecture, we load the native entry point for this app.
       load()
