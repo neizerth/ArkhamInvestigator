@@ -57,8 +57,8 @@ const Container = ({
 	const activeOpacity = getActiveOpacity(showExpand, 0.7);
 
 	const onPress = useCallback(() => {
-		onPressProp();
 		if (!showExpand) {
+			onPressProp();
 			return false;
 		}
 		setOpen((prev) => !prev);

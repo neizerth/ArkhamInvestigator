@@ -62,7 +62,7 @@ export const Expand: FC<ExpandProps> = styled(View)<ExpandProps>`
 `;
 
 export const ExpandIcon: typeof Icon = styled(Icon)`
-  font-size: 10px;
+  font-size: 11px;
 	color: ${color.light10};
 `;
 
@@ -70,7 +70,7 @@ export const Options: typeof View = styled(View)`
 	gap: ${size.gap.small}px;
 	width: 100%;
 	justify-content: flex-end;
-	padding-right: ${size.gap.large}px;
+	right: -4px;
 `;
 
 export const Option: typeof ChaosTokenOption = styled(ChaosTokenOption).attrs({
