@@ -87,10 +87,6 @@ Value calculate(
                 args[1].getObject(rt).getFunction(rt)
             );
 
-            // Capture Runtime* for use inside invokeAsync (guaranteed JS thread)
-            // Safe because invokeAsync guarantees execution on the same Runtime
-            Runtime* runtime_ptr = &rt;
-
             // Copy POD data for background thread
             std::string availableCopy = available;
             std::string revealedCopy  = revealed;
@@ -100,8 +96,7 @@ Value calculate(
                  revealedCopy,
                  jsInvoker,
                  resolve,
-                 reject,
-                 runtime_ptr]() {
+                 reject]() {
 
                     try {
                         const char* result_ptr =
@@ -111,9 +106,9 @@ Value calculate(
                             );
 
                         jsInvoker->invokeAsync(
-                            [resolve, result_ptr, runtime_ptr]() {
+                            [resolve, result_ptr](Runtime& runtime) {
                                 if (result_ptr == nullptr) {
-                                    resolve->call(*runtime_ptr, Value::null());
+                                    resolve->call(runtime, Value::null());
                                     return;
                                 }
 
@@ -127,30 +122,30 @@ Value calculate(
 
                                 auto result_obj =
                                     helpers::create_result_object(
-                                        *runtime_ptr,
+                                        runtime,
                                         id,
                                         result_str
                                     );
 
-                                resolve->call(*runtime_ptr, result_obj);
+                                resolve->call(runtime, result_obj);
                             }
                         );
                     } catch (const std::exception& e) {
                         std::string msg = e.what();
                         jsInvoker->invokeAsync(
-                            [reject, msg, runtime_ptr]() {
-                                auto error_val = String::createFromUtf8(*runtime_ptr, msg);
-                                reject->call(*runtime_ptr, error_val);
+                            [reject, msg](Runtime& runtime) {
+                                auto error_val = String::createFromUtf8(runtime, msg);
+                                reject->call(runtime, error_val);
                             }
                         );
                     } catch (...) {
                         jsInvoker->invokeAsync(
-                            [reject, runtime_ptr]() {
+                            [reject](Runtime& runtime) {
                                 auto error_val = String::createFromUtf8(
-                                    *runtime_ptr,
+                                    runtime,
                                     "Unknown error during chaos odds calculation"
                                 );
-                                reject->call(*runtime_ptr, error_val);
+                                reject->call(runtime, error_val);
                             }
                         );
                     }
