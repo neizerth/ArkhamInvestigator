@@ -67,6 +67,7 @@ export const ExpandIcon: typeof Icon = styled(Icon)`
 `;
 
 export const Options: typeof View = styled(View)`
+  padding-top: ${upx(2)};
   gap: ${upx(1)};
   padding-right: ${upx(4)};
   padding-left: ${upx(10)};
