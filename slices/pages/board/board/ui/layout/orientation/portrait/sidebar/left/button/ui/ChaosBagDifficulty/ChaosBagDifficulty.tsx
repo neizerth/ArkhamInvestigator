@@ -65,7 +65,7 @@ export const ChaosBagDifficulty = (props: ChaosBagDifficultyProps) => {
 			) : (
 				<C.DifficultyView>
 					<C.FixedValue value={skillValue} />
-					<C.Character>{character}</C.Character>
+					<C.Character last>{character}</C.Character>
 				</C.DifficultyView>
 			)}
 

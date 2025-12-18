@@ -2,6 +2,7 @@ import { Alegreya } from "@assets/fonts";
 import { color } from "@shared/config";
 import { Icon, Row, Text, Value } from "@shared/ui";
 import type { FC } from "react";
+import type { TextProps } from "react-native";
 import styled, { css } from "styled-components/native";
 import { assetsSize } from "../../../../../../../../../config";
 import {
@@ -68,8 +69,17 @@ export const SkillValueView: typeof InfoView = styled(InfoView)`
   gap: 2px;
 `;
 
-export const Character: typeof Text = styled(Text)`
+type CharacterProps = TextProps & {
+	last?: boolean;
+};
+
+export const Character: FC<CharacterProps> = styled(Text)`
   font-family: ${Alegreya.bold};
   font-size: 28px;
   line-height: 28px;
+  ${({ last }: CharacterProps) =>
+		last &&
+		css`
+			top: -2px;
+		`}
 `;
