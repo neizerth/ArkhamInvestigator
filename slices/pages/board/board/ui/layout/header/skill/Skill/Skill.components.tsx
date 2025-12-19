@@ -8,6 +8,7 @@ import {
 } from "@shared/ui";
 import { Pressable, View } from "react-native";
 import styled from "styled-components/native";
+import { SkillOdds } from "../SkillOdds";
 
 export const Container: typeof View = styled(View)`
   position: relative;
@@ -75,4 +76,10 @@ export const IconContainer: typeof View = styled(View)`
   bottom: 0;
   right: 0;
   justify-content: center;
+`;
+
+export const Odds: typeof SkillOdds = styled(SkillOdds)`
+  position: absolute;
+  top: -10px;
+  right: -10px;
 `;

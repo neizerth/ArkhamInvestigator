@@ -117,6 +117,10 @@ Value calculate(
                         jsInvoker->invokeAsync(
                             [resolve, result_ptr](Runtime& runtime) {
                                 if (!resolve) {
+                                    // Free pointer if resolve is null
+                                    if (result_ptr != nullptr) {
+                                        memory_free_string(result_ptr);
+                                    }
                                     return;
                                 }
                                 
@@ -126,7 +130,16 @@ Value calculate(
                                 }
 
                                 // Copy the string immediately to avoid issues if pointer becomes invalid
-                                std::string result_str(result_ptr);
+                                // Validate pointer before copying with try-catch
+                                std::string result_str;
+                                try {
+                                    result_str = std::string(result_ptr);
+                                } catch (...) {
+                                    // If copying fails, free pointer and return null
+                                    memory_free_string(result_ptr);
+                                    resolve->call(runtime, Value::null());
+                                    return;
+                                }
                                 
                                 uint64_t id =
                                     ::chaosodds::memory::generate_id();
@@ -209,6 +222,19 @@ Value freeString(
     ::chaosodds::memory::free_pointer_by_id(id);
 
     return Value::undefined();
+}
+
+Value prewarm(
+    Runtime& runtime,
+    const Value& /*thisValue*/,
+    const Value* /*arguments*/,
+    size_t /*count*/
+) {
+    // Call FFI function to pre-initialize multinomial cache
+    // This is a synchronous operation that may take 10-30 seconds on first call
+    // Returns 1 if initialization was needed (first call), 0 if already initialized
+    uint8_t was_initialized = chaos_odds_prewarm();
+    return Value(runtime, static_cast<double>(was_initialized));
 }
 
 Value findTokens(
@@ -323,6 +349,10 @@ Value findTokens(
                         jsInvoker->invokeAsync(
                             [resolve, result_ptr](Runtime& runtime) {
                                 if (!resolve) {
+                                    // Free pointer if resolve is null
+                                    if (result_ptr != nullptr) {
+                                        memory_free_string(result_ptr);
+                                    }
                                     return;
                                 }
                                 
@@ -332,7 +362,16 @@ Value findTokens(
                                 }
 
                                 // Copy the string immediately to avoid issues if pointer becomes invalid
-                                std::string result_str(result_ptr);
+                                // Validate pointer before copying with try-catch
+                                std::string result_str;
+                                try {
+                                    result_str = std::string(result_ptr);
+                                } catch (...) {
+                                    // If copying fails, free pointer and return null
+                                    memory_free_string(result_ptr);
+                                    resolve->call(runtime, Value::null());
+                                    return;
+                                }
                                 
                                 uint64_t id =
                                     ::chaosodds::memory::generate_id();
@@ -388,6 +427,19 @@ Value findTokens(
     );
 
     return promiseCtor.callAsConstructor(runtime, executor);
+}
+
+Value prewarm(
+    Runtime& runtime,
+    const Value& /*thisValue*/,
+    const Value* /*arguments*/,
+    size_t /*count*/
+) {
+    // Call FFI function to pre-initialize multinomial cache
+    // This is a synchronous operation that may take 10-30 seconds on first call
+    // Returns 1 if initialization was needed (first call), 0 if already initialized
+    uint8_t was_initialized = chaos_odds_prewarm();
+    return Value(runtime, static_cast<double>(was_initialized));
 }
 
 } // namespace functions

@@ -79,12 +79,21 @@ else()
 endif()
 
 # Add Rust library
-set(RUST_LIB_PATH "${RUST_LIB_DIR}/${RUST_TARGET}/release/libchaos_odds.a")
-if(NOT EXISTS "${RUST_LIB_PATH}")
-    message(FATAL_ERROR "Rust library not found: ${RUST_LIB_PATH}. Please run: cd modules/chaos-odds && ./cli/_build.android.sh")
+# Try debug first, fall back to release if debug doesn't exist
+set(RUST_LIB_PATH_DEBUG "${RUST_LIB_DIR}/${RUST_TARGET}/debug/libchaos_odds.a")
+set(RUST_LIB_PATH_RELEASE "${RUST_LIB_DIR}/${RUST_TARGET}/release/libchaos_odds.a")
+
+if(EXISTS "${RUST_LIB_PATH_DEBUG}")
+    set(RUST_LIB_PATH "${RUST_LIB_PATH_DEBUG}")
+    message(STATUS "Using DEBUG Rust library: ${RUST_LIB_PATH}")
+elseif(EXISTS "${RUST_LIB_PATH_RELEASE}")
+    set(RUST_LIB_PATH "${RUST_LIB_PATH_RELEASE}")
+    message(STATUS "Using RELEASE Rust library: ${RUST_LIB_PATH}")
+else()
+    message(FATAL_ERROR "Rust library not found. Tried:\n  ${RUST_LIB_PATH_DEBUG}\n  ${RUST_LIB_PATH_RELEASE}\nPlease run: cd modules/chaos-odds && npm run build:android:dev (for debug) or npm run build:android (for release)")
 endif()
 
-message(STATUS "Linking Rust library: ${RUST_LIB_PATH}")
+# Message already shown above with debug/release info
 add_library(chaos_odds_rust STATIC IMPORTED)
 set_target_properties(
     chaos_odds_rust

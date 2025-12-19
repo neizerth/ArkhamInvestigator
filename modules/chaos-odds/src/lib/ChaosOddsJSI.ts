@@ -1,6 +1,12 @@
 // JSI Native Module
 // Functions exposed via C++ JSI bindings
 
+import {
+	getModuleVersion,
+	initializeModuleVersion,
+	isModuleReloaded,
+} from "./hmrProtection";
+
 export type { ChaosOddsInput, TokenTarget, FindTokensParams } from "../model";
 
 /**
@@ -55,22 +61,65 @@ declare global {
 	var ChaosOdds: ChaosOddsJSI | undefined;
 }
 
-// Export with fallback check
-const getChaosOddsJSI = (): ChaosOddsJSI | undefined => {
-	if (typeof global.ChaosOdds !== "undefined") {
-		return global.ChaosOdds;
+// Initialize module version tracking on load
+initializeModuleVersion();
+
+/**
+ * Creates a HMR-protected wrapper around JSI bindings
+ * Validates module version before each call to prevent crashes from stale references
+ */
+function createProtectedWrapper(
+	jsi: ChaosOddsJSI,
+	moduleVersion: number,
+): ChaosOddsJSI {
+	return {
+		calculate: (available: string, revealed: string) => {
+			if (isModuleReloaded(moduleVersion)) {
+				return Promise.resolve(null);
+			}
+			return jsi.calculate(available, revealed);
+		},
+		freeString: (id: number | string) => {
+			if (isModuleReloaded(moduleVersion)) {
+				return;
+			}
+			jsi.freeString(id);
+		},
+		cancel: () => {
+			if (isModuleReloaded(moduleVersion)) {
+				return;
+			}
+			jsi.cancel();
+		},
+		findTokens: (targets: string, tokens: string, params: string) => {
+			if (isModuleReloaded(moduleVersion)) {
+				return Promise.resolve(null);
+			}
+			return jsi.findTokens(targets, tokens, params);
+		},
+	};
+}
+
+/**
+ * Get ChaosOdds JSI bindings with HMR protection
+ * Returns undefined if bindings are not available
+ */
+function getChaosOddsJSI(): ChaosOddsJSI | undefined {
+	if (typeof global.ChaosOdds === "undefined") {
+		if (__DEV__) {
+			console.warn(
+				"ChaosOdds JSI bindings are not available. " +
+					"This usually means the native module failed to install JSI bindings. " +
+					"Check that the native module is properly initialized.",
+			);
+		}
+		return undefined;
 	}
 
-	// Log warning in development
-	if (__DEV__) {
-		console.warn(
-			"ChaosOdds JSI bindings are not available. " +
-				"This usually means the native module failed to install JSI bindings. " +
-				"Check that the native module is properly initialized.",
-		);
-	}
+	const jsi = global.ChaosOdds;
+	const moduleVersion = getModuleVersion();
 
-	return undefined;
-};
+	return createProtectedWrapper(jsi, moduleVersion);
+}
 
 export default getChaosOddsJSI() as ChaosOddsJSI;

@@ -7,6 +7,7 @@
 #import "common/jsi_install.h"
 #include <dispatch/dispatch.h>
 #include <cstring>
+#include <chrono>
 
 using namespace facebook;
 
@@ -28,6 +29,7 @@ public:
     
     void invokeAsync(CallFunc&& func) noexcept override {
         if (!bridge_ || !bridge_.runtime) {
+            NSLog(@"[ChaosOdds] invokeAsync: bridge or runtime is null, returning");
             return;
         }
         
@@ -35,10 +37,58 @@ public:
         RCTCxxBridge* capturedBridge = bridge_;
         CallFunc capturedFunc = std::move(func);
         
+        auto dispatch_start = std::chrono::steady_clock::now();
+        NSLog(@"[ChaosOdds] invokeAsync: dispatching to main queue");
+        
         dispatch_async(dispatch_get_main_queue(), ^{
-            if (capturedBridge && capturedBridge.runtime) {
+            auto dispatch_callback_start = std::chrono::steady_clock::now();
+            auto dispatch_delay = std::chrono::duration_cast<std::chrono::milliseconds>(dispatch_callback_start - dispatch_start).count();
+            NSLog(@"[ChaosOdds] invokeAsync: main queue callback executed after %lld ms delay", dispatch_delay);
+            
+            // Use C++ try-catch to catch both C++ and Objective-C exceptions
+            try {
+                NSLog(@"[ChaosOdds] invokeAsync: Checking bridge validity...");
+                if (!capturedBridge) {
+                    NSLog(@"[ChaosOdds ERROR] invokeAsync: capturedBridge is null");
+                    return;
+                }
+                
+                NSLog(@"[ChaosOdds] invokeAsync: Checking runtime validity...");
+                if (!capturedBridge.runtime) {
+                    NSLog(@"[ChaosOdds ERROR] invokeAsync: capturedBridge.runtime is null");
+                    return;
+                }
+                
+                NSLog(@"[ChaosOdds] invokeAsync: Casting runtime pointer...");
                 jsi::Runtime* rt = (jsi::Runtime*)capturedBridge.runtime;
-                capturedFunc(*rt);
+                if (!rt) {
+                    NSLog(@"[ChaosOdds ERROR] invokeAsync: rt is null after cast");
+                    return;
+                }
+                
+                NSLog(@"[ChaosOdds] invokeAsync: About to call capturedFunc(*rt)...");
+                // Wrap in try-catch to handle Runtime destruction
+                @try {
+                    try {
+                        NSLog(@"[ChaosOdds] invokeAsync: Calling capturedFunc(*rt) NOW...");
+                        capturedFunc(*rt);
+                        NSLog(@"[ChaosOdds] invokeAsync: capturedFunc(*rt) completed successfully");
+                    } catch (const std::exception& e) {
+                        NSLog(@"[ChaosOdds ERROR] invokeAsync func failed (C++ exception): %s", e.what());
+                    } catch (...) {
+                        NSLog(@"[ChaosOdds ERROR] invokeAsync func failed (C++ unknown exception)");
+                    }
+                } @catch (NSException *exception) {
+                    NSLog(@"[ChaosOdds ERROR] invokeAsync func failed (Objective-C exception): %@", exception);
+                } @catch (...) {
+                    NSLog(@"[ChaosOdds ERROR] invokeAsync func failed (Objective-C unknown exception)");
+                }
+            } catch (const std::exception& e) {
+                // Runtime may have been destroyed (hot reload)
+                NSLog(@"[ChaosOdds ERROR] invokeAsync failed: %s", e.what());
+            } catch (...) {
+                // Runtime may have been destroyed (hot reload)
+                NSLog(@"[ChaosOdds ERROR] invokeAsync failed: unknown error");
             }
         });
     }
@@ -139,8 +189,11 @@ RCT_EXPORT_METHOD(initialize)
 }
 
 - (void)invalidate {
-    NSLog(@"ChaosOddsJSIModule: invalidate called");
-    // Cleanup if needed
+    NSLog(@"ChaosOddsJSIModule: invalidate called - cleaning up JSI bindings");
+    // Cleanup: cancel ongoing operations and clear CallInvoker to prevent use-after-free
+    // This is critical during hot reload when the old Runtime is destroyed
+    jsi::chaosodds::cleanup();
+    _bridge = nil;
 }
 
 @end

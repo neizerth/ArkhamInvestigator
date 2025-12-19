@@ -9,15 +9,16 @@ if (Platform.OS === "ios") {
 	try {
 		const ChaosOddsJSI = NativeModules.ChaosOddsJSI;
 		if (ChaosOddsJSI) {
-			console.log("ChaosOdds: Native module loaded");
 			// Call initialize to ensure the module is fully initialized
 			if (typeof ChaosOddsJSI.initialize === "function") {
 				ChaosOddsJSI.initialize();
 			}
-		} else {
+		} else if (__DEV__) {
 			console.warn("ChaosOdds: Native module not found");
 		}
 	} catch (error) {
-		console.warn("ChaosOdds: Error loading native module", error);
+		if (__DEV__) {
+			console.warn("ChaosOdds: Error loading native module", error);
+		}
 	}
 }

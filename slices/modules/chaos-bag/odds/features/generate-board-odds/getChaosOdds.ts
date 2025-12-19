@@ -1,5 +1,4 @@
 import { ChaosOdds } from "@expo-modules/chaos-odds";
-import { delay } from "@shared/lib";
 import { isEmpty } from "ramda";
 import { isNumber } from "ramda-adjunct";
 import type { ChaosBagOddsToken } from "../../entities/model";
@@ -20,8 +19,9 @@ const mapTokenToOddsToken = (token: ChaosBagOddsToken) => ({
 // Track calculation ID to ignore results from superseded calculations
 let calculationId = 0;
 
-export const getChaosOdds = async (options: GetChaosOddsOptions) => {
-	console.log("getChaosOdds started");
+export const getChaosOdds = async (
+	options: GetChaosOddsOptions,
+): Promise<number[][] | null> => {
 	const { available, revealed } = options;
 
 	if (isEmpty(available) && isEmpty(revealed)) {
@@ -31,13 +31,6 @@ export const getChaosOdds = async (options: GetChaosOddsOptions) => {
 	const availableTokens = available.map(mapTokenToOddsToken);
 	const revealedTokens = revealed.map(mapTokenToOddsToken);
 
-	// Cancel any ongoing calculation before starting a new one
-	ChaosOdds.cancel();
-
-	// Wait a bit to allow cancellation to propagate and previous calculation to clean up
-	// This prevents race conditions and memory leaks when calculations are cancelled
-	await delay(10);
-
 	// Increment calculation ID to track this specific calculation
 	const currentCalculationId = ++calculationId;
 
@@ -45,26 +38,18 @@ export const getChaosOdds = async (options: GetChaosOddsOptions) => {
 		const odds = await ChaosOdds.calculate(availableTokens, revealedTokens);
 
 		// Check if this calculation was superseded by a newer one
-		// If calculationId changed, a new calculation was started, so ignore this result
 		if (currentCalculationId !== calculationId) {
-			console.log("getChaosOdds: Calculation superseded, ignoring result");
 			return null;
 		}
 
-		if (!odds) {
-			return null;
-		}
-
-		return odds;
+		return odds ?? null;
 	} catch (error) {
 		// Check if this calculation was superseded by a newer one
 		if (currentCalculationId !== calculationId) {
-			console.log("getChaosOdds: Calculation superseded, ignoring error");
 			return null;
 		}
 
-		// Calculation was cancelled or failed
-		console.error("ChaosOdds calculation error:", error);
+		console.error("[getChaosOdds] Calculation error:", error);
 		return null;
 	}
 };

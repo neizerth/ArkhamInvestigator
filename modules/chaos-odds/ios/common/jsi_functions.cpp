@@ -6,8 +6,20 @@
 #include <stdexcept>
 #include <thread>
 #include <memory>
+#include <chrono>
+#include <cstdio>
 
 #include <ReactCommon/CallInvoker.h>
+
+// iOS logging - use fprintf(stderr) for all threads
+// fprintf(stderr) is thread-safe and works from any thread
+// Logs will appear in Xcode console via stderr redirection
+
+// Thread-safe logging macros for all threads
+#define LOG_MAIN(...) do { fprintf(stderr, "[ChaosOdds] "); fprintf(stderr, __VA_ARGS__); fprintf(stderr, "\n"); fflush(stderr); } while(0)
+#define LOG_MAIN_ERROR(...) do { fprintf(stderr, "[ChaosOdds ERROR] "); fprintf(stderr, __VA_ARGS__); fprintf(stderr, "\n"); fflush(stderr); } while(0)
+#define LOG_BG(...) do { fprintf(stderr, "[ChaosOdds] "); fprintf(stderr, __VA_ARGS__); fprintf(stderr, "\n"); fflush(stderr); } while(0)
+#define LOG_BG_ERROR(...) do { fprintf(stderr, "[ChaosOdds ERROR] "); fprintf(stderr, __VA_ARGS__); fprintf(stderr, "\n"); fflush(stderr); } while(0)
 
 namespace facebook {
 namespace jsi {
@@ -20,6 +32,13 @@ namespace {
 
 void setCallInvoker(std::shared_ptr<react::CallInvoker> jsInvoker) {
     g_jsInvoker = std::move(jsInvoker);
+}
+
+void clearCallInvoker() {
+    // Cancel any ongoing operations first
+    chaos_odds_cancel();
+    // Clear the CallInvoker to prevent use-after-free during hot reload
+    g_jsInvoker.reset();
 }
 
 Value calculate(
@@ -78,14 +97,22 @@ Value calculate(
                     const Value& /*thisValue*/,
                     const Value* args,
                     size_t /*count*/) -> Value {
+            
+            // Log when executor is called (Promise executor runs synchronously on JS thread)
+            // Use fprintf instead of os_log to avoid thread-safety issues
+            LOG_MAIN("Promise executor called - capturing resolve/reject");
 
-            // Capture resolve / reject on JS thread
-            auto resolve = std::make_shared<Function>(
+            // Capture resolve / reject as Function
+            // We store them as shared_ptr<Function> to safely pass between threads
+            // The Function will be validated before use in invokeAsync callback
+            auto resolveFunc = std::make_shared<Function>(
                 args[0].getObject(rt).getFunction(rt)
             );
-            auto reject = std::make_shared<Function>(
+            auto rejectFunc = std::make_shared<Function>(
                 args[1].getObject(rt).getFunction(rt)
             );
+            
+            LOG_MAIN("resolve/reject captured, starting background thread");
 
             // Copy POD data for background thread
             std::string availableCopy = available;
@@ -95,15 +122,21 @@ Value calculate(
                 [availableCopy,
                  revealedCopy,
                  jsInvoker,
-                 resolve,
-                 reject]() {
-
+                 resolveFunc,
+                 rejectFunc]() {
+                    // Use thread-safe logging for background thread
+                    LOG_BG("Background thread started, calling chaos_odds_calculate");
+                    
                     try {
+                        auto calc_start = std::chrono::steady_clock::now();
                         const char* result_ptr =
                             chaos_odds_calculate(
                                 availableCopy.c_str(),
                                 revealedCopy.c_str()
                             );
+                        auto calc_end = std::chrono::steady_clock::now();
+                        auto calc_duration = std::chrono::duration_cast<std::chrono::milliseconds>(calc_end - calc_start).count();
+                        LOG_BG("chaos_odds_calculate completed in %lld ms", calc_duration);
 
                         if (!jsInvoker) {
                             // If jsInvoker is null, we can't call back - this shouldn't happen
@@ -114,62 +147,194 @@ Value calculate(
                             return;
                         }
 
-                        jsInvoker->invokeAsync(
-                            [resolve, result_ptr](Runtime& runtime) {
-                                if (!resolve) {
-                                    return;
-                                }
-                                
-                                if (result_ptr == nullptr) {
-                                    resolve->call(runtime, Value::null());
-                                    return;
-                                }
-
-                                // Copy the string immediately to avoid issues if pointer becomes invalid
-                                std::string result_str(result_ptr);
-                                
-                                uint64_t id =
-                                    ::chaosodds::memory::generate_id();
-                                ::chaosodds::memory::store_pointer(
-                                    id,
-                                    result_ptr
-                                );
-
-                                auto result_obj =
-                                    helpers::create_result_object(
-                                        runtime,
-                                        id,
-                                        result_str
+                        auto invoke_start = std::chrono::steady_clock::now();
+                        LOG_BG("Preparing to resolve promise - copying result string");
+                        
+                        // Copy the string immediately on background thread to avoid issues
+                        std::string result_str;
+                        if (result_ptr != nullptr) {
+                            try {
+                                result_str = std::string(result_ptr);
+                            } catch (...) {
+                                // If copying fails, free pointer and return null
+                                memory_free_string(result_ptr);
+                                LOG_BG_ERROR("Failed to copy result string");
+                                if (jsInvoker) {
+                                    jsInvoker->invokeAsync(
+                                        [resolveFunc](Runtime& runtime) {
+                                            if (resolveFunc) {
+                                                try {
+                                                    resolveFunc->call(runtime, Value::null());
+                                                } catch (...) {
+                                                    // Runtime may have been destroyed
+                                                }
+                                            }
+                                        }
                                     );
+                                }
+                                return;
+                            }
+                        }
+                        
+                        // Generate ID and store pointer before invoking
+                        uint64_t id = 0;
+                        if (result_ptr != nullptr) {
+                            id = ::chaosodds::memory::generate_id();
+                            ::chaosodds::memory::store_pointer(id, result_ptr);
+                        }
+                        
+                        LOG_BG("Calling jsInvoker->invokeAsync to resolve promise");
+                        
+                        jsInvoker->invokeAsync(
+                            [resolveFunc, result_str, id, invoke_start](Runtime& runtime) {
+                                // This callback runs on main thread, but use fprintf for consistency
+                                LOG_MAIN("=== invokeAsync lambda START ===");
+                                auto invoke_callback_start = std::chrono::steady_clock::now();
+                                auto invoke_delay = std::chrono::duration_cast<std::chrono::milliseconds>(invoke_callback_start - invoke_start).count();
+                                LOG_MAIN("invokeAsync callback executed after %lld ms delay", invoke_delay);
+                                
+                                // Validate resolveFunc before using it
+                                LOG_MAIN("Checking resolveFunc validity...");
+                                if (!resolveFunc) {
+                                    LOG_MAIN_ERROR("resolveFunc is null");
+                                    return;
+                                }
+                                
+                                LOG_MAIN("resolveFunc is valid, proceeding with result object creation");
+                                LOG_MAIN("result_str size: %zu bytes", result_str.size());
+                                
+                                try {
+                                    // Create result object - this may throw if Runtime is invalid
+                                    auto create_obj_start = std::chrono::steady_clock::now();
+                                    LOG_MAIN("About to call create_result_object...");
+                                    LOG_MAIN("Runtime pointer: %p", &runtime);
+                                    
+                                    auto result_obj =
+                                        helpers::create_result_object(
+                                            runtime,
+                                            id,
+                                            result_str
+                                        );
+                                    
+                                    LOG_MAIN("create_result_object returned, checking result...");
+                                    auto create_obj_duration = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - create_obj_start).count();
+                                    LOG_MAIN("create_result_object took %lld ms", create_obj_duration);
 
-                                resolve->call(runtime, result_obj);
+                                    // Check if result object is valid (null indicates Runtime was destroyed)
+                                    if (result_obj.isNull() || result_obj.isUndefined()) {
+                                        LOG_MAIN("result_obj is null/undefined, returning");
+                                        return;
+                                    }
+
+                                    // Call resolve - this may throw if Runtime is invalid
+                                    auto resolve_call_start = std::chrono::steady_clock::now();
+                                    LOG_MAIN("About to call resolveFunc->call() with result_obj");
+                                    
+                                    // Log result object details before calling resolve
+                                    if (result_obj.isObject()) {
+                                        LOG_MAIN("result_obj is valid Object");
+                                    } else {
+                                        LOG_MAIN("result_obj is NOT an Object (isNull=%d, isUndefined=%d)", 
+                                               result_obj.isNull(), result_obj.isUndefined());
+                                    }
+                                    
+                                    LOG_MAIN("Calling resolveFunc->call() NOW - this may crash if Runtime is invalid");
+                                    LOG_MAIN("resolveFunc pointer: %p", resolveFunc.get());
+                                    LOG_MAIN("Runtime pointer before call: %p", &runtime);
+                                    auto before_resolve = std::chrono::steady_clock::now();
+                                    
+                                    // CRITICAL: Wrap resolveFunc->call() in additional try-catch
+                                    // to catch any exceptions that might occur during the call
+                                    try {
+                                        LOG_MAIN("About to execute resolveFunc->call()...");
+                                        fflush(stderr); // Force flush before potentially crashing call
+                                        resolveFunc->call(runtime, result_obj);
+                                        LOG_MAIN("resolveFunc->call() returned successfully");
+                                        fflush(stderr); // Force flush after call
+                                        auto after_resolve = std::chrono::steady_clock::now();
+                                        auto resolve_call_duration = std::chrono::duration_cast<std::chrono::milliseconds>(after_resolve - resolve_call_start).count();
+                                        auto resolve_call_internal_duration = std::chrono::duration_cast<std::chrono::milliseconds>(after_resolve - before_resolve).count();
+                                        LOG_MAIN("resolveFunc->call() completed in %lld ms (internal: %lld ms) - Promise should now be resolved", resolve_call_duration, resolve_call_internal_duration);
+                                    } catch (const std::exception& e) {
+                                        LOG_MAIN_ERROR("resolveFunc->call() threw exception: %s", e.what());
+                                        fflush(stderr);
+                                        // Don't rethrow - just log and return
+                                        return;
+                                    } catch (...) {
+                                        LOG_MAIN_ERROR("resolveFunc->call() threw unknown exception");
+                                        fflush(stderr);
+                                        // Don't rethrow - just log and return
+                                        return;
+                                    }
+                                    
+                                    // Try to force microtask processing by scheduling a callback
+                                    // This might help if Promise resolution is deferred
+                                    LOG_MAIN("resolveFunc->call() finished, Promise resolution should be queued");
+                                    LOG_MAIN("=== invokeAsync lambda END ===");
+                                    
+                                    // Schedule a microtask via JSI to check if event loop processes it
+                                    try {
+                                        auto queueMicrotaskFunc = runtime.global().getPropertyAsFunction(runtime, "queueMicrotask");
+                                        auto microtaskCallback = Function::createFromHostFunction(
+                                            runtime,
+                                            PropNameID::forAscii(runtime, "chaosOddsMicrotask"),
+                                            0,
+                                            [](Runtime& rt, const Value&, const Value*, size_t) -> Value {
+                                                LOG_MAIN("queueMicrotask callback executed - event loop is processing microtasks");
+                                                return Value::undefined();
+                                            }
+                                        );
+                                        queueMicrotaskFunc.call(runtime, microtaskCallback);
+                                        LOG_MAIN("queueMicrotask scheduled - should execute soon if event loop is not blocked");
+                                    } catch (...) {
+                                        LOG_MAIN_ERROR("Failed to schedule queueMicrotask - queueMicrotask may not be available");
+                                    }
+                                } catch (const std::exception& e) {
+                                    // Runtime may have been destroyed (hot reload)
+                                    LOG_MAIN_ERROR("Failed to call resolve: %s", e.what());
+                                } catch (...) {
+                                    // Runtime may have been destroyed (hot reload)
+                                    LOG_MAIN_ERROR("Failed to call resolve: unknown error");
+                                }
                             }
                         );
                     } catch (const std::exception& e) {
+                        // Use thread-safe logging for background thread
                         std::string msg = e.what();
-                        if (jsInvoker) {
+                        LOG_BG_ERROR("Exception in background thread: %s", msg.c_str());
+                        if (jsInvoker && rejectFunc) {
                             jsInvoker->invokeAsync(
-                                [reject, msg](Runtime& runtime) {
-                                    if (!reject) {
-                                        return;
+                                [rejectFunc, msg](Runtime& runtime) {
+                                    try {
+                                        if (!rejectFunc) {
+                                            return;
+                                        }
+                                        auto error_val = String::createFromUtf8(runtime, msg);
+                                        rejectFunc->call(runtime, error_val);
+                                    } catch (...) {
+                                        // Runtime may have been destroyed
                                     }
-                                    auto error_val = String::createFromUtf8(runtime, msg);
-                                    reject->call(runtime, error_val);
                                 }
                             );
                         }
                     } catch (...) {
-                        if (jsInvoker) {
+                        // Use thread-safe logging for background thread
+                        LOG_BG_ERROR("Unknown exception in background thread");
+                        if (jsInvoker && rejectFunc) {
                             jsInvoker->invokeAsync(
-                                [reject](Runtime& runtime) {
-                                    if (!reject) {
-                                        return;
+                                [rejectFunc](Runtime& runtime) {
+                                    try {
+                                        if (!rejectFunc) {
+                                            return;
+                                        }
+                                        auto error_val = String::createFromUtf8(
+                                            runtime,
+                                            "Unknown error during chaos odds calculation"
+                                        );
+                                        rejectFunc->call(runtime, error_val);
+                                    } catch (...) {
+                                        // Runtime may have been destroyed
                                     }
-                                    auto error_val = String::createFromUtf8(
-                                        runtime,
-                                        "Unknown error during chaos odds calculation"
-                                    );
-                                    reject->call(runtime, error_val);
                                 }
                             );
                         }
@@ -200,16 +365,26 @@ Value freeString(
     const Value* arguments,
     size_t count
 ) {
+    auto free_start = std::chrono::steady_clock::now();
+    LOG_MAIN("freeString called");
+    
     if (count < 1) {
+        LOG_MAIN("freeString: no arguments, returning");
         return Value::undefined();
     }
 
     uint64_t id =
         helpers::parse_id_from_value(runtime, arguments[0]);
+    LOG_MAIN("freeString: freeing pointer with id=%llu", id);
+    
     ::chaosodds::memory::free_pointer_by_id(id);
+    
+    auto free_duration = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now() - free_start).count();
+    LOG_MAIN("freeString completed in %lld ms", free_duration);
 
     return Value::undefined();
 }
+
 
 Value findTokens(
     Runtime& runtime,
@@ -323,6 +498,10 @@ Value findTokens(
                         jsInvoker->invokeAsync(
                             [resolve, result_ptr](Runtime& runtime) {
                                 if (!resolve) {
+                                    // Free pointer if resolve is null
+                                    if (result_ptr != nullptr) {
+                                        memory_free_string(result_ptr);
+                                    }
                                     return;
                                 }
                                 
@@ -332,7 +511,16 @@ Value findTokens(
                                 }
 
                                 // Copy the string immediately to avoid issues if pointer becomes invalid
-                                std::string result_str(result_ptr);
+                                // Validate pointer before copying with try-catch
+                                std::string result_str;
+                                try {
+                                    result_str = std::string(result_ptr);
+                                } catch (...) {
+                                    // If copying fails, free pointer and return null
+                                    memory_free_string(result_ptr);
+                                    resolve->call(runtime, Value::null());
+                                    return;
+                                }
                                 
                                 uint64_t id =
                                     ::chaosodds::memory::generate_id();

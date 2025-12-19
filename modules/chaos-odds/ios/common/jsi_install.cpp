@@ -1,7 +1,9 @@
 #include "jsi_install.h"
 #include "jsi_functions.h"
+#include "ffi_declarations.h"
 #include <ReactCommon/CallInvoker.h>
-#include <cstdio>
+#include <cstdio> // For iOS logging
+#include <thread>
 
 #define LOG_TAG "ChaosOdds"
 #define LOGI(...) do { fprintf(stderr, "[ChaosOdds] "); fprintf(stderr, __VA_ARGS__); fprintf(stderr, "\n"); } while(0)
@@ -82,19 +84,19 @@ void install(Runtime& runtime, std::shared_ptr<react::CallInvoker> jsInvoker) {
     runtime.global().setProperty(runtime, "ChaosOdds", chaosOdds);
     LOGI("✅ [JSI] global.ChaosOdds property set successfully");
     
+    // Note: Multinomial cache is now initialized automatically on first call to calculate()
+    // This avoids the need for a separate prewarm function and simplifies the API
+    
     // Verify installation
+    // NOTE: Removed asObject() calls to avoid ABI mismatch issues
+    // In RN 0.79+, asObject() symbols may not be exported from libreactnative.so
+    // Verification is not critical for functionality - just check that property exists
     try {
         auto global = runtime.global();
         auto chaosOddsValue = global.getProperty(runtime, "ChaosOdds");
         if (chaosOddsValue.isObject()) {
             LOGI("✅ [JSI] Verification: global.ChaosOdds is an object");
-            auto chaosOddsObj = chaosOddsValue.asObject(runtime);
-            auto calculateProp = chaosOddsObj.getProperty(runtime, "calculate");
-            if (calculateProp.isObject() && calculateProp.asObject(runtime).isFunction(runtime)) {
-                LOGI("✅ [JSI] Verification: global.ChaosOdds.calculate is a function");
-            } else {
-                LOGE("❌ [JSI] Verification failed: global.ChaosOdds.calculate is not a function");
-            }
+            // Skip detailed verification to avoid asObject() symbol resolution issues
         } else {
             LOGE("❌ [JSI] Verification failed: global.ChaosOdds is not an object");
         }
@@ -105,6 +107,12 @@ void install(Runtime& runtime, std::shared_ptr<react::CallInvoker> jsInvoker) {
     }
     
     LOGI("✅ [JSI] install() completed successfully");
+}
+
+void cleanup() {
+    LOGI("🧹 [JSI] cleanup() called - clearing CallInvoker and canceling operations");
+    functions::clearCallInvoker();
+    LOGI("✅ [JSI] cleanup() completed");
 }
 
 } // namespace chaosodds

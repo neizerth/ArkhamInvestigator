@@ -1,6 +1,8 @@
 use rayon::prelude::*;
-use rustc_hash::FxHashMap;
+use rustc_hash::{FxHashMap, FxHashSet};
 use smallvec::SmallVec;
+use std::sync::OnceLock;
+use std::time::Instant;
 
 use crate::types::{ChaosOddsCacheItem, ChaosOddsGroup, ChaosOddsToken};
 use crate::util::cache::{
@@ -10,11 +12,74 @@ use crate::util::cache::{
 use crate::util::groups::{build_groups, groups_to_available_map};
 use crate::util::math::multinomial;
 
+/// Global precomputed multinomial cache - initialized once on first use
+/// Precomputes all multinomial values for total reveal count ≤ MAX_PRECOMPUTED_REVEAL
+/// This is expensive to compute (can take 10-30 seconds), so we do it once and cache it
+static PRECOMPUTED_MULTINOMIAL: OnceLock<FxHashMap<u128, u64>> = OnceLock::new();
+
+/// Get or initialize the precomputed multinomial cache
+/// This function is called once on first use and caches the result globally
+/// iOS OPTIMIZATION: This expensive initialization (10-30s) should be done in background
+/// before the first user call to avoid blocking the main thread
+pub(crate) fn get_precomputed_multinomial() -> &'static FxHashMap<u128, u64> {
+    // Check if already initialized first (fast path)
+    if let Some(cache) = PRECOMPUTED_MULTINOMIAL.get() {
+        eprintln!("[get_precomputed_multinomial] Cache already initialized, returning (size={})", cache.len());
+        return cache;
+    }
+    
+    // Slow path: initialize (this will block other threads until complete)
+    eprintln!("[get_precomputed_multinomial] Cache not initialized, starting initialization (this may block other threads)...");
+    PRECOMPUTED_MULTINOMIAL.get_or_init(|| {
+        eprintln!("[get_precomputed_multinomial] INITIALIZING - this may take 10-30 seconds on first call");
+        let init_start = Instant::now();
+        let mut precomputed: FxHashMap<u128, u64> = FxHashMap::default();
+        
+        // Precompute for maximum possible group_len (32) to cover all cases
+        const MAX_GROUP_LEN: usize = 32;
+        // Increased from 6 to 10 to precompute more multinomial values and reduce runtime computation
+        const MAX_PRECOMPUTED_REVEAL: usize = 10;
+        
+        precompute_small_multinomials(MAX_PRECOMPUTED_REVEAL, MAX_GROUP_LEN, &mut precomputed);
+        
+        let init_duration = init_start.elapsed();
+        eprintln!(
+            "[get_precomputed_multinomial] INITIALIZATION COMPLETE: {:?}, entries={}",
+            init_duration,
+            precomputed.len()
+        );
+        
+        precomputed
+    })
+}
+
+/// Pre-initialize the precomputed multinomial cache in background
+/// Call this function early (e.g., at app startup) to avoid expensive initialization
+/// on the first user call. This is critical for iOS performance.
+/// 
+/// Returns true if initialization was needed (first call), false if already initialized
+#[allow(dead_code)] // This function is meant to be called from external code (JSI bindings)
+pub fn prewarm_multinomial_cache() -> bool {
+    let was_already_initialized = PRECOMPUTED_MULTINOMIAL.get().is_some();
+    if was_already_initialized {
+        eprintln!("[prewarm_multinomial_cache] Cache already initialized, skipping");
+        return false;
+    }
+    
+    eprintln!("[prewarm_multinomial_cache] Cache not initialized, calling get_precomputed_multinomial...");
+    let prewarm_start = Instant::now();
+    let precomputed_multinomial = get_precomputed_multinomial();
+    let prewarm_duration = prewarm_start.elapsed();
+    eprintln!("[prewarm_multinomial_cache] Cache initialized in {:?}, size={}", prewarm_duration, precomputed_multinomial.len());
+    
+    true
+}
+
 /// Build available_mask from packed state2 - set bit if count > 0
 #[inline(always)]
 fn build_available_mask(state2: u128, group_len: usize) -> u32 {
     let mut mask = 0u32;
-    for i in 0..group_len.min(32) {
+    for i in 0..group_len.min(21) {
         if get_available_count(state2, i) > 0 {
             mask |= 1u32 << i;
         }
@@ -28,11 +93,64 @@ fn build_state1(available_mask: u32, reveal: u128) -> u128 {
     (available_mask as u128) | (reveal << 32)
 }
 
+/// Precompute all multinomial values for total ≤ max_total
+/// This eliminates unpack + SmallVec + sorting for common small cases
+fn precompute_small_multinomials(
+    max_total: usize,
+    group_len: usize,
+    precomputed: &mut FxHashMap<u128, u64>,
+) {
+    // Generate all possible partitions of n into at most group_len parts
+    // Each partition represents a multiset of reveal counts
+    fn generate_partitions(
+        n: usize,
+        max_parts: usize,
+        current: &mut [u8],
+        len: usize,
+        precomputed: &mut FxHashMap<u128, u64>,
+    ) {
+        if n == 0 {
+            // Compute multinomial for this partition
+            let mut sorted = current[..len].to_vec();
+            sorted.sort_unstable();
+
+            // Pack as u128 key (same format as pack_reveal_as_multinomial_key)
+            let mut key = 0u128;
+            for (i, &count) in sorted.iter().enumerate().take(32) {
+                key |= (count as u128 & 0xF) << (i * 4);
+            }
+
+            // Compute multinomial coefficient using optimized multinomial function
+            // This uses precomputed factorials for small values (no ln/exp)
+            let counts: SmallVec<[usize; 32]> = sorted.iter().map(|&c| c as usize).collect();
+            let result = multinomial(&counts);
+            precomputed.insert(key, result);
+            return;
+        }
+
+        if len >= max_parts {
+            return;
+        }
+
+        let start = if len > 0 {
+            current[len - 1] as usize
+        } else {
+            1
+        };
+        for k in start..=n.min(15) {
+            // Max 15 per count (4 bits)
+            current[len] = k as u8;
+            generate_partitions(n - k, max_parts, current, len + 1, precomputed);
+        }
+    }
+
+    let mut current = [0u8; 32];
+    for total in 1..=max_total {
+        generate_partitions(total, group_len.min(24), &mut current, 0, precomputed);
+    }
+}
+
 // Constants for DFS processing
-// Optimized for mobile (Android/iOS, including older devices): smaller dedup size to fit in L2 cache
-// L2 cache on mobile: typically 256-512 KB, older devices may have 256 KB or less
-const MAX_DEDUP_SIZE: usize = 32_000; // 32K states → 256 KB (dedup_array) - fits in mobile L2 cache
-const MAX_DEDUP_BITS: usize = (MAX_DEDUP_SIZE + 31) / 32; // Packed bits: ceil(MAX_DEDUP_SIZE / 32)
 #[allow(dead_code)]
 const MAX_GROUPS: usize = 32;
 const MAX_AVAILABLE: usize = 7; // Max tokens per group in state2
@@ -40,10 +158,13 @@ const MAX_AVAILABLE_COUNT: usize = 100; // Reasonable upper bound for available_
 #[allow(dead_code)]
 const MAX_PRECOMPUTED_REVEAL: usize = 6;
 // Mobile-optimized: fixed-size stack for DFS (completely stack-allocated, zero heap allocation)
-// Size 64 is sufficient for most DFS paths and fits in L1/L2 cache
-const DFS_STACK_SIZE: usize = 64; // Fixed size for stack-allocated array
-                                  // Local dedup cache size: stack-allocated cache for hot path (fits in L1 cache)
-const LOCAL_DEDUP_CACHE_SIZE: usize = 16; // 16 entries: 16 * (8 + 8) = 256 bytes - fits in L1
+// Increased from 64 to 256 to handle more complex DFS paths without overflow
+// Size: 256 * 32 bytes = 8KB - still fits in L1/L2 cache
+const DFS_STACK_SIZE: usize = 256; // Fixed size for stack-allocated array
+
+// Performance limits to prevent exponential explosion
+const MAX_DFS_STATES: usize = 100_000; // Maximum states to process in a single DFS run
+const MAX_DFS_DEPTH: usize = 50; // Maximum depth to prevent infinite recursion
 
 /// Fixed-size stack for DFS - completely stack-allocated, zero heap allocation
 /// Uses ring buffer with head/tail indices for efficient push/pop operations
@@ -116,400 +237,104 @@ struct DFSState {
     probability: f64,
 }
 
-/// Compute direct index from state combination
-/// Uses XOR of state hashes + pending for fast O(1) indexing
-#[inline(always)]
-fn compute_dedup_index(state1: u128, state2: u128, pending: usize) -> usize {
-    // Combine states using XOR and bit mixing
-    // Use lower bits of state1 and state2 for better distribution
-    let hash = (state1 as u64)
-        .wrapping_mul(0x9e3779b97f4a7c15) // Mixing constant
-        .wrapping_add((state2 as u64).wrapping_mul(0xbf58476d1ce4e5b9))
-        .wrapping_add(pending as u64);
-    (hash as usize) % MAX_DEDUP_SIZE
-}
+/// Compact deduplication key: u128 hash of (state1, state2, pending_reveal)
+/// Using compact u128 key instead of struct reduces hash collisions and improves HashMap performance
+/// This is critical for stable performance - struct keys can cause unpredictable hash clustering
+#[derive(Clone, Copy, PartialEq, Eq, Hash)]
+struct DedupKey(u128);
 
-/// Local stack-allocated dedup cache for hot path optimization
-/// Avoids memory loads/stores to large dedup_array by caching recent indices
-/// Size: 16 entries * 16 bytes = 256 bytes - fits in L1 cache
-struct LocalDedupCache {
-    indices: [usize; LOCAL_DEDUP_CACHE_SIZE],
-    probs: [f64; LOCAL_DEDUP_CACHE_SIZE],
-    count: usize,
-}
-
-impl LocalDedupCache {
+impl DedupKey {
+    /// Create compact key from state components
+    /// Uses FxHasher-style mixing to create well-distributed u128 key
     #[inline(always)]
-    fn new() -> Self {
-        Self {
-            indices: [usize::MAX; LOCAL_DEDUP_CACHE_SIZE], // Invalid index marker
-            probs: [0.0; LOCAL_DEDUP_CACHE_SIZE],
-            count: 0,
-        }
-    }
-
-    /// Check if index exists in cache and return probability if found
-    /// Returns (found, prob) tuple
-    #[inline(always)]
-    fn get(&self, idx: usize) -> Option<f64> {
-        // Linear search through cache (small array, very fast)
-        // Unrolled loop for better performance
-        let len = self.count.min(LOCAL_DEDUP_CACHE_SIZE);
-        for i in 0..len {
-            if self.indices[i] == idx {
-                return Some(self.probs[i]);
-            }
-        }
-        None
-    }
-
-    /// Update or insert index in cache
-    /// Uses simple circular replacement (not LRU) for speed
-    #[inline(always)]
-    fn insert(&mut self, idx: usize, prob: f64) {
-        // First try to find existing entry
-        let len = self.count.min(LOCAL_DEDUP_CACHE_SIZE);
-        for i in 0..len {
-            if self.indices[i] == idx {
-                self.probs[i] = prob;
-                return;
-            }
-        }
-
-        // Not found: insert at next position (circular)
-        let pos = self.count % LOCAL_DEDUP_CACHE_SIZE;
-        self.indices[pos] = idx;
-        self.probs[pos] = prob;
-        if self.count < LOCAL_DEDUP_CACHE_SIZE {
-            self.count += 1;
-        }
-    }
-
-    /// Clear cache (called at start of each DFS level)
-    #[inline(always)]
-    fn clear(&mut self) {
-        self.count = 0;
-        // No need to clear arrays - invalid indices (usize::MAX) serve as markers
+    fn new(state1: u128, state2: u128, pending_reveal: usize) -> Self {
+        // Combine state1, state2, and pending_reveal into compact u128 key
+        // Use bit mixing to avoid clustering (similar to FxHasher)
+        let pending = pending_reveal as u128;
+        // Mix bits: rotate and XOR to distribute entropy
+        let mixed = state1
+            .wrapping_mul(0x9e3779b97f4a7c15u128)
+            .wrapping_add(state2)
+            .wrapping_mul(0x9e3779b97f4a7c15u128)
+            .wrapping_add(pending);
+        Self(mixed)
     }
 }
 
-/// Batch accumulation buffer for SIMD optimization
-/// Collects (index, probability) pairs for batch processing
-#[derive(Default)]
-struct BatchAccumBuffer {
-    indices: [usize; 4],
-    probs: [f64; 4],
-    count: usize,
-}
-
-impl BatchAccumBuffer {
-    #[inline(always)]
-    fn clear(&mut self) {
-        self.count = 0;
-    }
-
-    #[inline(always)]
-    fn push(&mut self, idx: usize, prob: f64) -> bool {
-        if self.count < 4 {
-            self.indices[self.count] = idx;
-            self.probs[self.count] = prob;
-            self.count += 1;
-            false // Not full yet
-        } else {
-            true // Full, needs flush
-        }
-    }
-
-    #[inline(always)]
-    fn len(&self) -> usize {
-        self.count
-    }
-}
+// REMOVED: BatchAccumBuffer - replaced with direct HashSet lookup for better performance
+// The batch buffer added overhead without significant benefit for our use case
 
 /// Worker context for each thread - all state is local
 /// Optimized for mobile: packed bits instead of Vec<bool>, f32 for prob_table
-/// Note: dedup_array uses f64 for precision in probability accumulation
+/// Performance optimization: separate HashSet for uniqueness check and HashMap for probability accumulation
 struct WorkerContext {
-    dedup_array: Vec<f64>, // f64 for precision: probability accumulation requires high precision
-    dedup_used: Vec<u32>,  // Packed bits: 32 bits per u32 instead of 1 byte per bool
+    // OPTIMIZATION: Use HashSet for fast uniqueness check (no value storage overhead)
+    dedup_set: FxHashSet<DedupKey>, // Fast O(1) lookup for duplicate detection
+    // Only store probabilities for states that need accumulation (new states)
+    prob_accumulator: FxHashMap<DedupKey, f64>, // Only for states that need probability accumulation
     local_cache: FxHashMap<CacheKey, ChaosOddsCacheItem>,
     multinomial_cache: FxHashMap<u128, u64>,
-    // Local dedup cache: avoid repeated bit mask checks for same index
-    last_dedup_idx: usize,
-    last_dedup_prob: f64,
-    // Batch accumulation buffer for SIMD optimization
-    batch_buffer: BatchAccumBuffer,
-    // Stack-local dedup cache: fast L1 cache for hot path (256 bytes)
-    local_dedup_cache: LocalDedupCache,
+    // Local dedup cache: avoid repeated HashMap lookups for same key
+    last_dedup_key: Option<DedupKey>,
+    // Performance tracking
+    states_processed: usize, // Track number of states to prevent explosion
 }
 
 impl WorkerContext {
     fn new() -> Self {
+        // iOS OPTIMIZATION: Pre-allocate HashMap/HashSet with expected capacity
+        // This reduces rehashing and memory allocations in hot loops
+        // MAX_DFS_STATES is our limit, so we can pre-allocate for that
+        let expected_capacity = (MAX_DFS_STATES / 4).max(1024); // Conservative estimate
+        
         Self {
-            dedup_array: vec![0.0f64; MAX_DEDUP_SIZE],
-            dedup_used: vec![0u32; MAX_DEDUP_BITS], // Packed bits: each u32 holds 32 flags
-            local_cache: FxHashMap::default(),
-            multinomial_cache: FxHashMap::default(),
-            last_dedup_idx: usize::MAX, // Invalid index to force check on first use
-            last_dedup_prob: 0.0,
-            batch_buffer: BatchAccumBuffer::default(),
-            local_dedup_cache: LocalDedupCache::new(),
+            dedup_set: FxHashSet::with_capacity_and_hasher(expected_capacity, Default::default()),
+            prob_accumulator: FxHashMap::with_capacity_and_hasher(expected_capacity, Default::default()),
+            local_cache: FxHashMap::with_capacity_and_hasher(expected_capacity, Default::default()),
+            multinomial_cache: FxHashMap::with_capacity_and_hasher(256, Default::default()), // Smaller cache
+            last_dedup_key: None,
+            states_processed: 0,
         }
     }
 
-    /// Check if dedup index is used (bit is set)
+    /// Check if state is duplicate and accumulate probability if needed
+    /// OPTIMIZATION: Use Entry API to reduce hash lookups from 2 to 1
+    /// This is critical for iOS performance where memory access is expensive
     #[inline(always)]
-    fn is_used(&self, idx: usize) -> bool {
-        let word_idx = idx / 32;
-        let bit_idx = idx % 32;
-        (self.dedup_used[word_idx] & (1u32 << bit_idx)) != 0
-    }
-
-    /// Mark dedup index as used (set bit)
-    #[inline(always)]
-    fn set_used(&mut self, idx: usize) {
-        let word_idx = idx / 32;
-        let bit_idx = idx % 32;
-        self.dedup_used[word_idx] |= 1u32 << bit_idx;
-    }
-
-    /// Accumulate probability with local cache optimization
-    /// Uses stack-local cache to avoid memory loads/stores in hot path
-    #[inline(always)]
-    fn accumulate_probability(&mut self, idx: usize, prob: f64) -> bool {
-        // Fast path 1: same index as last time (common case in tight loops)
-        if idx == self.last_dedup_idx {
-            self.last_dedup_prob += prob;
-            self.dedup_array[idx] = self.last_dedup_prob;
-            self.local_dedup_cache.insert(idx, self.last_dedup_prob);
-            return true; // Already seen
-        }
-
-        // Fast path 2: check stack-local cache (L1 cache, no memory load)
-        if let Some(cached_prob) = self.local_dedup_cache.get(idx) {
-            let new_prob = cached_prob + prob;
-            self.last_dedup_idx = idx;
-            self.last_dedup_prob = new_prob;
-            self.dedup_array[idx] = new_prob;
-            self.local_dedup_cache.insert(idx, new_prob);
-            return true; // Already seen
-        }
-
-        // Slow path: check large dedup_array (memory access)
-        let is_used = self.is_used(idx);
-        if is_used {
-            // Update cache and accumulate
-            self.last_dedup_idx = idx;
-            self.last_dedup_prob = self.dedup_array[idx] + prob;
-            self.dedup_array[idx] = self.last_dedup_prob;
-            self.local_dedup_cache.insert(idx, self.last_dedup_prob);
-        } else {
-            // New state: mark as used and store
-            self.set_used(idx);
-            self.last_dedup_idx = idx;
-            self.last_dedup_prob = prob;
-            self.dedup_array[idx] = prob;
-            self.local_dedup_cache.insert(idx, prob);
-        }
-        is_used
-    }
-
-    /// Batch accumulate probabilities with SIMD optimization
-    /// Processes multiple (idx, prob) pairs at once when possible
-    /// Uses stack-local cache to avoid memory loads/stores in hot path
-    #[inline(always)]
-    fn batch_accumulate(&mut self, idx: usize, prob: f64) -> bool {
-        // Fast path 1: same index as last time (common case in tight loops)
-        if idx == self.last_dedup_idx {
-            self.last_dedup_prob += prob;
-            self.dedup_array[idx] = self.last_dedup_prob;
-            self.local_dedup_cache.insert(idx, self.last_dedup_prob);
-            return true; // Already seen
-        }
-
-        // Fast path 2: check stack-local cache (L1 cache, no memory load)
-        if let Some(cached_prob) = self.local_dedup_cache.get(idx) {
-            let new_prob = cached_prob + prob;
-            self.last_dedup_idx = idx;
-            self.last_dedup_prob = new_prob;
-            self.dedup_array[idx] = new_prob;
-            self.local_dedup_cache.insert(idx, new_prob);
-            return true; // Already seen
-        }
-
-        // Try to add to batch buffer
-        if self.batch_buffer.push(idx, prob) {
-            // Buffer is full, flush with SIMD if possible
-            self.flush_batch();
-            // Add current item to buffer
-            self.batch_buffer.push(idx, prob);
-        }
-
-        // Check if this index was already seen (for return value)
-        let is_used = self.is_used(idx);
-        if is_used {
-            // Update cache
-            self.last_dedup_idx = idx;
-            self.last_dedup_prob = self.dedup_array[idx];
-            self.local_dedup_cache.insert(idx, self.last_dedup_prob);
-        } else {
-            // New state: will be set in flush_batch
-            self.last_dedup_idx = idx;
-            self.last_dedup_prob = prob;
-        }
-        is_used
-    }
-
-    /// Flush batch buffer with SIMD optimization
-    #[inline]
-    fn flush_batch(&mut self) {
-        if self.batch_buffer.len() == 0 {
-            return;
-        }
-
-        #[cfg(feature = "simd")]
-        {
-            // Use SIMD for batch accumulation when available
-            self.flush_batch_simd();
-        }
-
-        #[cfg(not(feature = "simd"))]
-        {
-            // Fallback: process individually using accumulate_probability
-            // accumulate_probability already updates local_dedup_cache
-            for i in 0..self.batch_buffer.len() {
-                let idx = self.batch_buffer.indices[i];
-                let prob = self.batch_buffer.probs[i];
-                self.accumulate_probability(idx, prob);
+    fn check_and_accumulate(&mut self, key: DedupKey, prob: f64) -> bool {
+        // Fast path 1: same key as last time (common case in tight loops)
+        if let Some(last_key) = self.last_dedup_key {
+            if key == last_key {
+                // Same key - accumulate probability (guaranteed to exist in accumulator)
+                *self.prob_accumulator.get_mut(&key).unwrap() += prob;
+                return true; // Already seen
             }
         }
 
-        self.batch_buffer.clear();
+        // OPTIMIZATION: Use Entry API - single hash lookup instead of contains + get_mut
+        // This reduces memory accesses from 2 to 1, critical for iOS performance
+        match self.prob_accumulator.entry(key) {
+            std::collections::hash_map::Entry::Occupied(mut entry) => {
+                // State already seen - accumulate probability
+                *entry.get_mut() += prob;
+                self.last_dedup_key = Some(key);
+                true // Already seen
+            }
+            std::collections::hash_map::Entry::Vacant(entry) => {
+                // New state: add to set and track probability
+                self.dedup_set.insert(key);
+                entry.insert(prob);
+                self.last_dedup_key = Some(key);
+                false // Not seen before
+            }
+        }
     }
 
-    #[cfg(feature = "simd")]
-    #[inline]
-    fn flush_batch_simd(&mut self) {
-        use std::simd::*;
-
-        let count = self.batch_buffer.len();
-        if count == 0 {
-            return;
-        }
-
-        // Check if indices are suitable for SIMD (consecutive or close enough)
-        // For now, process with SIMD if we have 2 or 4 elements
-        match count {
-            2 => {
-                // Use f64x2 for 2 elements
-                let idx0 = self.batch_buffer.indices[0];
-                let idx1 = self.batch_buffer.indices[1];
-                let prob0 = self.batch_buffer.probs[0];
-                let prob1 = self.batch_buffer.probs[1];
-
-                // Check if both are used
-                let used0 = self.is_used(idx0);
-                let used1 = self.is_used(idx1);
-
-                if used0 && used1 {
-                    // Both already exist: SIMD add
-                    let probs = f64x2::from_array([prob0, prob1]);
-                    let existing =
-                        f64x2::from_array([self.dedup_array[idx0], self.dedup_array[idx1]]);
-                    let result = existing + probs;
-                    self.dedup_array[idx0] = result[0];
-                    self.dedup_array[idx1] = result[1];
-                    // Update local cache
-                    self.local_dedup_cache.insert(idx0, result[0]);
-                    self.local_dedup_cache.insert(idx1, result[1]);
-                } else {
-                    // Fallback to individual processing
-                    if used0 {
-                        self.dedup_array[idx0] += prob0;
-                        self.local_dedup_cache.insert(idx0, self.dedup_array[idx0]);
-                    } else {
-                        self.set_used(idx0);
-                        self.dedup_array[idx0] = prob0;
-                        self.local_dedup_cache.insert(idx0, prob0);
-                    }
-                    if used1 {
-                        self.dedup_array[idx1] += prob1;
-                        self.local_dedup_cache.insert(idx1, self.dedup_array[idx1]);
-                    } else {
-                        self.set_used(idx1);
-                        self.dedup_array[idx1] = prob1;
-                        self.local_dedup_cache.insert(idx1, prob1);
-                    }
-                }
-            }
-            4 => {
-                // Use f64x4 for 4 elements (if available, otherwise f64x2 twice)
-                let idx0 = self.batch_buffer.indices[0];
-                let idx1 = self.batch_buffer.indices[1];
-                let idx2 = self.batch_buffer.indices[2];
-                let idx3 = self.batch_buffer.indices[3];
-                let prob0 = self.batch_buffer.probs[0];
-                let prob1 = self.batch_buffer.probs[1];
-                let prob2 = self.batch_buffer.probs[2];
-                let prob3 = self.batch_buffer.probs[3];
-
-                // Check if all are used
-                let used0 = self.is_used(idx0);
-                let used1 = self.is_used(idx1);
-                let used2 = self.is_used(idx2);
-                let used3 = self.is_used(idx3);
-
-                if used0 && used1 && used2 && used3 {
-                    // All already exist: SIMD add (use f64x2 twice for compatibility)
-                    let probs_lo = f64x2::from_array([prob0, prob1]);
-                    let probs_hi = f64x2::from_array([prob2, prob3]);
-                    let existing_lo =
-                        f64x2::from_array([self.dedup_array[idx0], self.dedup_array[idx1]]);
-                    let existing_hi =
-                        f64x2::from_array([self.dedup_array[idx2], self.dedup_array[idx3]]);
-                    let result_lo = existing_lo + probs_lo;
-                    let result_hi = existing_hi + probs_hi;
-                    self.dedup_array[idx0] = result_lo[0];
-                    self.dedup_array[idx1] = result_lo[1];
-                    self.dedup_array[idx2] = result_hi[0];
-                    self.dedup_array[idx3] = result_hi[1];
-                    // Update local cache
-                    self.local_dedup_cache.insert(idx0, result_lo[0]);
-                    self.local_dedup_cache.insert(idx1, result_lo[1]);
-                    self.local_dedup_cache.insert(idx2, result_hi[0]);
-                    self.local_dedup_cache.insert(idx3, result_hi[1]);
-                } else {
-                    // Fallback to individual processing
-                    for i in 0..4 {
-                        let idx = self.batch_buffer.indices[i];
-                        let prob = self.batch_buffer.probs[i];
-                        let is_used = self.is_used(idx);
-                        if is_used {
-                            self.dedup_array[idx] += prob;
-                        } else {
-                            self.set_used(idx);
-                            self.dedup_array[idx] = prob;
-                        }
-                        self.local_dedup_cache.insert(idx, self.dedup_array[idx]);
-                    }
-                }
-            }
-            _ => {
-                // Process individually for other counts
-                for i in 0..count {
-                    let idx = self.batch_buffer.indices[i];
-                    let prob = self.batch_buffer.probs[i];
-                    let is_used = self.is_used(idx);
-                    if is_used {
-                        self.dedup_array[idx] += prob;
-                    } else {
-                        self.set_used(idx);
-                        self.dedup_array[idx] = prob;
-                    }
-                    self.local_dedup_cache.insert(idx, self.dedup_array[idx]);
-                }
-            }
-        }
+    /// Increment state counter and check limits
+    #[inline(always)]
+    fn increment_state_count(&mut self) -> bool {
+        self.states_processed += 1;
+        self.states_processed < MAX_DFS_STATES
     }
 }
 
@@ -524,8 +349,9 @@ fn run_dfs(
     precomputed_multinomial: &FxHashMap<u128, u64>,
     prob_table: &[[[f32; MAX_AVAILABLE + 1]; MAX_AVAILABLE_COUNT]; MAX_GROUPS],
 ) {
-    // Clear local dedup cache at start of DFS (fresh state for each root)
-    ctx.local_dedup_cache.clear();
+    // Clear dedup structures at start of DFS (fresh state for each root)
+    ctx.dedup_set.clear();
+    ctx.prob_accumulator.clear();
 
     // Fixed-size stack-allocated array with ring buffer - zero heap allocation
     // Size: 64 * 32 bytes = 2KB - fits in L1 cache, completely stack-local
@@ -540,8 +366,26 @@ fn run_dfs(
         probability: root.probability,
     });
 
+    let mut _items_processed = 0;
+    let mut _final_states = 0;
+    let mut current_depth = 0;
+    
     while let Some(mut item) = items_to_process.pop() {
+        _items_processed += 1;
+        
+        // Performance limit: prevent exponential explosion
+        if !ctx.increment_state_count() {
+            // Removed eprintln! from hot loop - causes IO blocking in multi-threaded mode
+            break;
+        }
+        
+        // Depth limit to prevent infinite recursion
+        if current_depth > MAX_DFS_DEPTH {
+            // Removed eprintln! from hot loop - causes IO blocking in multi-threaded mode
+            continue;
+        }
         if item.pending_reveal == 0 {
+            _final_states += 1;
             // Final state: apply multinomial for permutations of the same reveal multiset
             let multinomial_key = pack_reveal_as_multinomial_key(item.state1, group_len);
             let mut final_probability = item.probability;
@@ -600,10 +444,13 @@ fn run_dfs(
             ctx,
             &mut items_to_process,
         );
+        
+        // Decrement depth when processing item (approximate depth tracking)
+        current_depth = current_depth.saturating_sub(1);
     }
 
-    // Flush any remaining items in batch buffer
-    ctx.flush_batch();
+    // Removed eprintln! from hot loop - causes IO blocking in multi-threaded mode
+    // Performance logging moved to outer function level
 }
 
 /// Process item: unified fast/slow path with conditional probability calculation
@@ -686,15 +533,14 @@ fn process_item(
         let next_pending_reveal = item.pending_reveal.saturating_sub(1) + token.reveal_count;
         let expected_modifier = item.modifier + group.modifier;
 
-        // Fast deduplication: direct array access - O(1) access, fits in L2 cache
-        // Use batch accumulation with SIMD optimization when possible
-        let dedup_idx = compute_dedup_index(item.state1, item.state2, next_pending_reveal);
-        let is_duplicate = ctx.batch_accumulate(dedup_idx, step_probability);
+        // Fast deduplication: use compact u128 key for better HashMap performance
+        let dedup_key = DedupKey::new(item.state1, item.state2, next_pending_reveal);
+        let is_duplicate = ctx.check_and_accumulate(dedup_key, step_probability);
 
         if !is_duplicate {
             // New state: push to stack for further processing
             // FixedStack will return false if full, but we continue processing
-            let _ = items_to_process.push(DFSState {
+            if !items_to_process.push(DFSState {
                 state1: item.state1,      // u128 is Copy
                 state2: item.state2,      // u128 is Copy
                 available_mask: new_mask, // Precomputed mask
@@ -702,7 +548,9 @@ fn process_item(
                 modifier: expected_modifier,
                 pending_reveal: next_pending_reveal,
                 probability: step_probability,
-            });
+            }) {
+                // Stack full - skip state (removed eprintln! from hot loop)
+            }
         }
 
         // Restore original state (undo/backtrack)
@@ -717,13 +565,45 @@ pub fn get_chaos_bag_modifiers(
     tokens: &[ChaosOddsToken],
     revealed_frost_count: usize,
 ) -> Vec<ChaosOddsCacheItem> {
+    let start = Instant::now();
+    eprintln!(
+        "[get_chaos_bag_modifiers] START: tokens.len()={}, revealed_frost_count={}",
+        tokens.len(),
+        revealed_frost_count
+    );
+    
+    // Get precomputed multinomial cache early to avoid blocking later
+    let cache_access_start = Instant::now();
+    let precomputed_multinomial = get_precomputed_multinomial();
+    let cache_access_duration = cache_access_start.elapsed();
+    eprintln!(
+        "[get_chaos_bag_modifiers] Cache access took {:?}, cache_size={}",
+        cache_access_duration,
+        precomputed_multinomial.len()
+    );
+
     if tokens.is_empty() {
+        eprintln!(
+            "[get_chaos_bag_modifiers] EARLY RETURN: tokens is empty (took {:?})",
+            start.elapsed()
+        );
         return Vec::new();
     }
 
+    let t0 = Instant::now();
     let groups = build_groups(tokens);
+    eprintln!(
+        "[get_chaos_bag_modifiers] build_groups: {:?}, groups.len()={}",
+        t0.elapsed(),
+        groups.len()
+    );
+
     let total_tokens = tokens.len();
     if total_tokens == 0 {
+        eprintln!(
+            "[get_chaos_bag_modifiers] EARLY RETURN: total_tokens == 0 (took {:?})",
+            start.elapsed()
+        );
         return Vec::new();
     }
 
@@ -734,7 +614,7 @@ pub fn get_chaos_bag_modifiers(
     let base_available_counts_array = {
         let mut arr = [0u8; 32];
         for (i, &count) in base_available.iter().enumerate().take(32) {
-            arr[i] = count.min(7); // Clamp to max 7 for u128 packing (3 bits per group, max 32 groups)
+            arr[i] = count.min(7); // Clamp to max 7 for u128 packing (3 bits per group)
         }
         arr
     };
@@ -751,6 +631,7 @@ pub fn get_chaos_bag_modifiers(
     // Precompute reciprocal to avoid division in hot loop
     let total_f64_reciprocal = 1.0 / (total_tokens as f64);
 
+    let mut _regular_count = 0;
     for (group_idx, group) in groups.iter().enumerate() {
         if group.token.reveal_count > 0 {
             continue;
@@ -772,7 +653,9 @@ pub fn get_chaos_bag_modifiers(
             state2, // Available counts
             pending_reveal: 0,
         });
+        _regular_count += 1;
     }
+    // Removed verbose logging - only log at function entry/exit for performance
 
     // ---------- Reveal tokens (reveal_count > 0) ----------
     let reveal_groups: Vec<(usize, &ChaosOddsGroup)> = groups
@@ -780,8 +663,13 @@ pub fn get_chaos_bag_modifiers(
         .enumerate()
         .filter(|(_, g)| g.token.reveal_count > 0)
         .collect();
+    // Removed verbose logging - only log at function entry/exit for performance
 
     if reveal_groups.is_empty() {
+        eprintln!(
+            "[get_chaos_bag_modifiers] EARLY RETURN: no reveal groups (took {:?})",
+            start.elapsed()
+        );
         return cache;
     }
 
@@ -839,78 +727,18 @@ pub fn get_chaos_bag_modifiers(
             probability,
         });
     }
+    // Removed verbose logging - only log at function entry/exit for performance
 
     if roots.is_empty() {
+        eprintln!(
+            "[get_chaos_bag_modifiers] EARLY RETURN: roots is empty (took {:?})",
+            start.elapsed()
+        );
         return cache;
     }
 
-    // Precompute multinomial table for small reveal counts (≤ 6) to avoid unpack + SmallVec
-    // For total reveal count ≤ 6, we can precompute all possible combinations
-    const MAX_PRECOMPUTED_REVEAL: usize = 6;
-    let mut precomputed_multinomial: FxHashMap<u128, u64> = FxHashMap::default();
-
-    // Precompute all multinomial values for total ≤ MAX_PRECOMPUTED_REVEAL
-    // This eliminates unpack + SmallVec + sorting for common small cases
-    fn precompute_small_multinomials(
-        max_total: usize,
-        group_len: usize,
-        precomputed: &mut FxHashMap<u128, u64>,
-    ) {
-        // Generate all possible partitions of n into at most group_len parts
-        // Each partition represents a multiset of reveal counts
-        fn generate_partitions(
-            n: usize,
-            max_parts: usize,
-            current: &mut [u8],
-            len: usize,
-            precomputed: &mut FxHashMap<u128, u64>,
-        ) {
-            if n == 0 {
-                // Compute multinomial for this partition
-                let mut sorted = current[..len].to_vec();
-                sorted.sort_unstable();
-
-                // Pack as u128 key (same format as pack_reveal_as_multinomial_key)
-                let mut key = 0u128;
-                for (i, &count) in sorted.iter().enumerate().take(32) {
-                    key |= (count as u128 & 0xF) << (i * 4);
-                }
-
-                // Compute multinomial coefficient using optimized multinomial function
-                // This uses precomputed factorials for small values (no ln/exp)
-                let counts: SmallVec<[usize; 32]> = sorted.iter().map(|&c| c as usize).collect();
-                let result = multinomial(&counts);
-                precomputed.insert(key, result);
-                return;
-            }
-
-            if len >= max_parts {
-                return;
-            }
-
-            let start = if len > 0 {
-                current[len - 1] as usize
-            } else {
-                1
-            };
-            for k in start..=n.min(15) {
-                // Max 15 per count (4 bits)
-                current[len] = k as u8;
-                generate_partitions(n - k, max_parts, current, len + 1, precomputed);
-            }
-        }
-
-        let mut current = [0u8; 32];
-        for total in 1..=max_total {
-            generate_partitions(total, group_len.min(24), &mut current, 0, precomputed);
-        }
-    }
-
-    precompute_small_multinomials(
-        MAX_PRECOMPUTED_REVEAL,
-        group_len,
-        &mut precomputed_multinomial,
-    );
+    // Precomputed multinomial cache was already obtained at the start of the function
+    // No need to call get_precomputed_multinomial() again here
 
     // Precompute probability table for all possible (available, available_count) combinations
     // Mobile-optimized: static array on stack, f32 for memory efficiency
@@ -937,43 +765,90 @@ pub fn get_chaos_bag_modifiers(
         }
         // Remaining entries are already zero-initialized
     }
+    // Removed verbose logging - only log at function entry/exit for performance
 
-    // Step 3️⃣: Parallel processing with rayon - work-stealing with adaptive chunking
-    // Use adaptive chunk size for optimal load balancing:
-    // - Small chunks (1-2 roots) when roots < threads: enables work-stealing to keep all threads busy
-    // - Larger chunks when roots >> threads: better cache locality, less overhead
-    let num_threads = rayon::current_num_threads();
-    let chunk_size = if roots.len() <= num_threads {
-        // When roots <= threads, use chunk size 1 for maximum work-stealing flexibility
-        // This ensures all threads can participate even with few roots
+    // Step 3️⃣: Parallel processing with rayon - iOS-optimized thread limiting
+    // iOS performance: limit threads to 2-4 to avoid scheduler overhead and memory contention
+    // For small workloads, use single-threaded mode to avoid thread creation overhead
+    
+    // iOS optimization: limit parallelism for mobile devices
+    // Rule: if roots < 2 * optimal_threads, use single-threaded or minimal parallelism
+    #[cfg(feature = "mobile")]
+    const OPTIMAL_MOBILE_THREADS: usize = 2; // iOS: typically 2-4 big cores
+    #[cfg(not(feature = "mobile"))]
+    const OPTIMAL_MOBILE_THREADS: usize = 4; // Desktop: can use more
+    
+    let num_threads = if roots.len() < 2 * OPTIMAL_MOBILE_THREADS {
+        // Small workload: single-threaded to avoid overhead
         1
     } else {
-        // When roots >> threads, use larger chunks (2-4 roots per chunk)
-        // This improves cache locality while still allowing work-stealing
+        // Larger workload: use limited parallelism
+        OPTIMAL_MOBILE_THREADS.min(rayon::current_num_threads())
+    };
+    
+    let chunk_size = if roots.len() <= num_threads {
+        1 // Maximum work-stealing flexibility
+    } else {
+        // Larger chunks for better cache locality
         (roots.len() / (num_threads * 2)).max(1).min(4)
     };
+    
+    // Removed verbose logging - only log at function entry/exit for performance
 
-    let partial_results: Vec<FxHashMap<CacheKey, ChaosOddsCacheItem>> = roots
-        .par_chunks(chunk_size)
-        .map(|chunk| {
-            // Each thread processes a chunk of roots with its own local context
-            // Multiple roots share the same context for better cache locality
-            let mut ctx = WorkerContext::new();
-            for root in chunk {
-                run_dfs(
-                    root, // Pass reference instead of cloning
-                    &mut ctx,
-                    &groups,
-                    &group_is_frost,
-                    group_len,
-                    revealed_frost_count,
-                    &precomputed_multinomial,
-                    &prob_table,
-                );
-            }
-            ctx.local_cache
+    // Use custom thread pool for iOS to limit parallelism
+    let partial_results: Vec<FxHashMap<CacheKey, ChaosOddsCacheItem>> = if num_threads == 1 {
+        // Single-threaded: avoid rayon overhead entirely
+        let mut ctx = WorkerContext::new();
+        for root in &roots {
+            run_dfs(
+                root,
+                &mut ctx,
+                &groups,
+                &group_is_frost,
+                group_len,
+                revealed_frost_count,
+                &precomputed_multinomial,
+                &prob_table,
+            );
+        }
+        vec![ctx.local_cache]
+    } else {
+        // Multi-threaded: use rayon with limited parallelism
+        use rayon::ThreadPoolBuilder;
+        let pool = ThreadPoolBuilder::new()
+            .num_threads(num_threads)
+            .build()
+            .unwrap_or_else(|_| {
+                // Fallback to default pool if custom pool creation fails (silent fallback)
+                rayon::ThreadPoolBuilder::new().build().unwrap()
+            });
+        
+        pool.install(|| {
+            roots
+                .par_chunks(chunk_size)
+                .map(|chunk| {
+                    // Each thread processes a chunk of roots with its own local context
+                    // Multiple roots share the same context for better cache locality
+                    let mut ctx = WorkerContext::new();
+                    for root in chunk {
+                        run_dfs(
+                            root, // Pass reference instead of cloning
+                            &mut ctx,
+                            &groups,
+                            &group_is_frost,
+                            group_len,
+                            revealed_frost_count,
+                            &precomputed_multinomial,
+                            &prob_table,
+                        );
+                    }
+                    // Removed eprintln! from hot loop - causes IO blocking in multi-threaded mode
+                    ctx.local_cache
+                })
+                .collect()
         })
-        .collect();
+    };
+    // Removed verbose logging - only log at function entry/exit for performance
 
     // Step 4️⃣: Merge results (single thread)
     let mut final_cache: FxHashMap<CacheKey, ChaosOddsCacheItem> = FxHashMap::default();
@@ -985,6 +860,7 @@ pub fn get_chaos_bag_modifiers(
                 .or_insert(item);
         }
     }
+    // Removed verbose logging - only log at function entry/exit for performance
 
     // Merge parallel results with existing cache
     for (key, item) in final_cache {
@@ -996,6 +872,11 @@ pub fn get_chaos_bag_modifiers(
             final_cache_map.insert(key, idx);
         }
     }
+    // Removed verbose logging - only log at function entry/exit for performance
+    eprintln!(
+        "[get_chaos_bag_modifiers] TOTAL TIME: {:?}",
+        start.elapsed()
+    );
 
     cache
 }

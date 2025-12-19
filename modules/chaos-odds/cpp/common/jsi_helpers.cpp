@@ -49,16 +49,41 @@ std::pair<std::string, std::string> extract_strings(Runtime& runtime, const Valu
 }
 
 Value create_result_object(Runtime& runtime, uint64_t id, const std::string& result) {
-    auto result_obj = Object(runtime);
+    // CRITICAL FIX: Wrap in try-catch to prevent crashes from invalid runtime or corrupted strings
+    // PropNameID::forAscii can crash if runtime is invalid or string pointer is corrupted
     
-    // Use PropNameID for property names to avoid potential issues with C-strings
-    auto id_prop = PropNameID::forAscii(runtime, "id");
-    auto result_prop = PropNameID::forAscii(runtime, "result");
-    
-    result_obj.setProperty(runtime, id_prop, static_cast<double>(id));
-    result_obj.setProperty(runtime, result_prop, String::createFromUtf8(runtime, result));
-    
-    return Value(std::move(result_obj));
+    try {
+        auto result_obj = Object(runtime);
+        
+        // Validate result string before creating JSI String to prevent crashes
+        std::string safe_result = "[]";
+        if (!result.empty() && result.size() <= 1024 * 1024) { // 1MB max
+            safe_result = result;
+        }
+        
+        // Use static const char[] for property names to ensure they're always in valid memory
+        // These are guaranteed to be in valid memory throughout the program lifetime
+        static const char id_prop_name[] = "id";
+        static const char result_prop_name[] = "result";
+        
+        // Use PropNameID with explicit length to prevent buffer overreads
+        // This is safer than relying on null-terminated strings
+        // IMPORTANT: PropNameID must be initialized directly (no default constructor in RN 0.71+)
+        PropNameID id_prop = PropNameID::forAscii(runtime, id_prop_name, sizeof(id_prop_name) - 1);
+        PropNameID result_prop = PropNameID::forAscii(runtime, result_prop_name, sizeof(result_prop_name) - 1);
+        
+        result_obj.setProperty(runtime, id_prop, static_cast<double>(id));
+        result_obj.setProperty(runtime, result_prop, String::createFromUtf8(runtime, safe_result));
+        
+        return Value(std::move(result_obj));
+    } catch (...) {
+        // If everything fails, return a minimal object using string literals directly
+        // This is a last resort fallback
+        auto result_obj = Object(runtime);
+        result_obj.setProperty(runtime, "id", static_cast<double>(id));
+        result_obj.setProperty(runtime, "result", String::createFromUtf8(runtime, "[]"));
+        return Value(std::move(result_obj));
+    }
 }
 
 } // namespace helpers

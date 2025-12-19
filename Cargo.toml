@@ -4,4 +4,20 @@ members = [
 ]
 resolver = "2"
 
+# Performance-optimized release profile for iOS/Android
+# These settings maximize runtime performance at the cost of compile time
+[profile.release]
+opt-level = 3              # Maximum optimization
+codegen-units = 1          # Better optimization (slower compile)
+lto = false                # DISABLED: LTO removes unused extern "C" FFI symbols (critical for iOS staticlib)
+panic = "abort"            # Smaller binary, faster (no unwinding)
+strip = "symbols"          # Remove debug symbols in release
+incremental = false        # Disable incremental compilation for release (better optimization)
+
+# Debug profile - keep fast compilation
+[profile.dev]
+opt-level = 0
+debug = true
+incremental = true
+
 

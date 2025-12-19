@@ -1,7 +1,9 @@
 #include "jsi_install.h"
 #include "jsi_functions.h"
+#include "ffi_declarations.h"
 #include <ReactCommon/CallInvoker.h>
 #include <android/log.h>
+#include <thread>
 
 #define LOG_TAG "ChaosOdds"
 #define LOGI(...) __android_log_print(ANDROID_LOG_INFO, LOG_TAG, __VA_ARGS__)
@@ -77,10 +79,37 @@ void install(Runtime& runtime, std::shared_ptr<react::CallInvoker> jsInvoker) {
     chaosOdds.setProperty(runtime, "findTokens", findTokensFunc);
     LOGI("✅ [JSI] findTokens function installed");
     
+    // Install prewarm function
+    LOGI("🔵 [JSI] Installing prewarm function");
+    auto prewarmFunc = Function::createFromHostFunction(
+        runtime,
+        PropNameID::forAscii(runtime, "prewarm"),
+        0,
+        [](Runtime& rt, const Value& thisValue, const Value* args, size_t count) -> Value {
+            return functions::prewarm(rt, thisValue, args, count);
+        }
+    );
+    chaosOdds.setProperty(runtime, "prewarm", prewarmFunc);
+    LOGI("✅ [JSI] prewarm function installed");
+    
     // Set global property
     LOGI("🔵 [JSI] Setting global.ChaosOdds property");
     runtime.global().setProperty(runtime, "ChaosOdds", chaosOdds);
     LOGI("✅ [JSI] global.ChaosOdds property set successfully");
+    
+    // Pre-initialize multinomial cache in background thread to avoid blocking
+    // This is critical for iOS performance - avoids 10-30s delay on first calculation
+    LOGI("🔵 [JSI] Starting background prewarm of multinomial cache");
+    std::thread([]() {
+        LOGI("🔵 [JSI] Background thread: calling chaos_odds_prewarm()");
+        uint8_t was_initialized = chaos_odds_prewarm();
+        if (was_initialized) {
+            LOGI("✅ [JSI] Background thread: multinomial cache initialized (took 10-30s)");
+        } else {
+            LOGI("✅ [JSI] Background thread: multinomial cache already initialized");
+        }
+    }).detach();
+    LOGI("✅ [JSI] Background prewarm thread started");
     
     // Verify installation
     // NOTE: Removed asObject() calls to avoid ABI mismatch issues

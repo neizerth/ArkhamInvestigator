@@ -3,6 +3,9 @@ use std::os::raw::c_char;
 use crate::odds::calculate_odds;
 use crate::util::cancel::reset_cancel_flag;
 use crate::util::parse::{parse_tokens, serialize_matrix};
+// Import the function that initializes the multinomial cache
+// This is called lazily on first use to precompute multinomial values
+use crate::modifiers::prewarm_multinomial_cache;
 
 /// Parse JSON string to vector of ChaosOddsToken
 /// Calculate chaos bag odds for all difficulty/skill combinations
@@ -48,6 +51,11 @@ pub extern "C" fn chaos_odds_calculate(
     available_ptr: *const c_char,
     revealed_ptr: *const c_char,
 ) -> *mut c_char {
+    // Initialize multinomial cache on first call (lazy initialization)
+    // This ensures the cache is ready before calculation starts
+    // On first call, this may take 10-30 seconds, but subsequent calls will be fast
+    let _ = prewarm_multinomial_cache();
+
     // Reset cancellation flag before starting calculation
     reset_cancel_flag();
 

@@ -1,17 +1,26 @@
-import { selectCurrentActualPropValue } from "@modules/board/base/shared/lib";
 import { selectChaosOddsBySkill } from "@modules/chaos-bag/odds/shared/lib";
 import { useAppSelector } from "@shared/lib";
-import type { InvestigatorSkillType } from "@shared/model";
+import { isNull } from "ramda-adjunct";
 import type { ViewProps } from "react-native";
+import * as C from "./SkillOdds.components";
 
 export type SkillOddsProps = ViewProps & {
-	type: InvestigatorSkillType;
+	skillValue: number;
 };
 
-export const SkillOdds = ({ type, ...props }: SkillOddsProps) => {
-	const skillValue = useAppSelector(selectCurrentActualPropValue(type));
+export const SkillOdds = ({ skillValue, ...props }: SkillOddsProps) => {
 	const odds = useAppSelector((state) =>
 		selectChaosOddsBySkill(state, skillValue),
 	);
-	return <></>;
+
+	if (isNull(odds)) {
+		return null;
+	}
+	const data = odds[0];
+
+	return (
+		<C.Container {...props}>
+			<C.Content value={`${data}%`} />
+		</C.Container>
+	);
 };

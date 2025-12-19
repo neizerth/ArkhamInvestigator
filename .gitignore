@@ -28,6 +28,8 @@ yarn-error.*
 # macOS
 .DS_Store
 *.pem
+*.SYMDEF
+__.*.SYMDEF
 
 # local env files
 .env*.local

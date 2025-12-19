@@ -6,8 +6,11 @@
 	"types": "index.ts",
 	"scripts": {
 		"build": "./build.sh",
+		"build:dev": "./build.sh --dev",
 		"build:ios": "cd cli && ./_build.ios.sh",
+		"build:ios:dev": "cd cli && ./_build.ios.dev.sh",
 		"build:android": "cd cli && ./_build.android.sh",
+		"build:android:dev": "cd cli && ./_build.android.dev.sh",
 		"clean": "cd rust && cargo clean",
 		"test": "cd rust && cargo test",
 		"test:release": "cd rust && cargo test --release",

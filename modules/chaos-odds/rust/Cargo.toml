@@ -26,3 +26,7 @@ crate-type = [
 # NOTE: Do NOT use "cdylib" for Android
 # CMake builds the final .so file and links Rust .a into it
 # Using cdylib would create a separate .so that conflicts with CMake's .so
+# 
+# NOTE: Release profile settings are defined in the workspace root Cargo.toml
+# This ensures consistent optimization settings across all workspace members
+# IMPORTANT: LTO is disabled in workspace root to prevent dead code elimination of FFI symbols

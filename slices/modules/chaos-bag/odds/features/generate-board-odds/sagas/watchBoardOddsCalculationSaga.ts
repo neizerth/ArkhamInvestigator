@@ -27,14 +27,15 @@ function* worker() {
 }
 
 function takeDebouncedMatch(match: (action: unknown) => boolean) {
-	// Increased debounce time to reduce frequency of calculations
-	return debounce(300, match, worker);
+	// Increased debounce time to reduce frequency of calculations and prevent event loop starvation
+	// 500ms should be enough to batch rapid changes while still feeling responsive
+	return debounce(500, match, worker);
 }
 
 export function* watchBoardOddsCalculationSaga() {
 	// on board change
 	yield takeDebouncedMatch(setCurrentInvestigatorIndex.match);
-	// on chaos bag updates
+	// on chaos bag updates - use longer debounce to handle rapid token removal
 	yield takeDebouncedMatch(chaosBagUpdated.match);
 	// on board updates
 	yield takeDebouncedMatch(boardChanged.match);

@@ -24,6 +24,9 @@ Value freeString(Runtime& runtime, const Value& thisValue, const Value* argument
 /// Find token odds (probability that target tokens appear)
 Value findTokens(Runtime& runtime, const Value& thisValue, const Value* arguments, size_t count);
 
+/// Pre-initialize multinomial cache (call at app startup for better performance)
+Value prewarm(Runtime& runtime, const Value& thisValue, const Value* arguments, size_t count);
+
 } // namespace functions
 } // namespace chaosodds
 } // namespace jsi

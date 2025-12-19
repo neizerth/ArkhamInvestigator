@@ -12,6 +12,9 @@ namespace functions {
 /// Set CallInvoker for async operations (must be called before using calculate)
 void setCallInvoker(std::shared_ptr<react::CallInvoker> jsInvoker);
 
+/// Clear CallInvoker (call this during cleanup/invalidate to prevent use-after-free)
+void clearCallInvoker();
+
 /// Calculate chaos bag odds
 Value calculate(Runtime& runtime, const Value& thisValue, const Value* arguments, size_t count);
 
@@ -23,6 +26,8 @@ Value freeString(Runtime& runtime, const Value& thisValue, const Value* argument
 
 /// Find token odds (probability that target tokens appear)
 Value findTokens(Runtime& runtime, const Value& thisValue, const Value* arguments, size_t count);
+
+/// Pre-initialize multinomial cache (call at app startup for better performance)
 
 } // namespace functions
 } // namespace chaosodds

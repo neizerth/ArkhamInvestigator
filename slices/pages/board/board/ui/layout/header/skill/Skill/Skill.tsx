@@ -7,7 +7,6 @@ import type { ViewProps } from "react-native";
 import * as C from "./Skill.components";
 import { getSkillStyle } from "./Skill.styles";
 import { useSkillGestures, useSkillRenderItem } from "./lib";
-
 export type SkillProps = ViewProps & {
 	width: number;
 	height: number;
@@ -37,6 +36,7 @@ export const Skill = ({ width, height, type, ...props }: SkillProps) => {
 
 	return (
 		<C.Container {...props}>
+			<C.Odds skillValue={value} />
 			<C.Row>
 				<C.ValueContainer style={style.valueContainer}>
 					<C.Picker
