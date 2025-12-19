@@ -50,8 +50,14 @@ std::pair<std::string, std::string> extract_strings(Runtime& runtime, const Valu
 
 Value create_result_object(Runtime& runtime, uint64_t id, const std::string& result) {
     auto result_obj = Object(runtime);
-    result_obj.setProperty(runtime, "id", static_cast<double>(id));
-    result_obj.setProperty(runtime, "result", String::createFromUtf8(runtime, result));
+    
+    // Use PropNameID for property names to avoid potential issues with C-strings
+    auto id_prop = PropNameID::forAscii(runtime, "id");
+    auto result_prop = PropNameID::forAscii(runtime, "result");
+    
+    result_obj.setProperty(runtime, id_prop, static_cast<double>(id));
+    result_obj.setProperty(runtime, result_prop, String::createFromUtf8(runtime, result));
+    
     return Value(std::move(result_obj));
 }
 
