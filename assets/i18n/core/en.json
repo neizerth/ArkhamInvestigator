@@ -20,7 +20,7 @@
 	"about.disclaimer": "This is an unofficial, fan-made companion app for tabletop players. It is not affiliated with or endorsed by Fantasy Flight Games or any other rights holder. All artwork and text are used for reference and educational purposes only. No copyrighted materials are sold, redistributed, or modified for commercial gain.",
 	"about.credits.beth": "Thanks to my wife Elisabeth for her understanding and support. I'm the happiest man on the Earth. Because of her",
 
-	"about.hallOfFame,zzorba": "Arkham Cards API, Icomoon project, re-used Arkham Cards translations",
+	"about.hallOfFame.zzorba": "Arkham Cards API, Icomoon project, re-used Arkham Cards translations",
 	"about.hallOfFame.arkhamdb": "Structured game data",
 	"about.hallOfFame.coldtoes": "Artwork repository",
 	"about.hallOfFame.helios_sunrise": "Layered investigator arts",
@@ -335,6 +335,9 @@
 	"update.failed": "The application update failed: {{error}}",
 
 	"clipboard.successCopy": "Text copied to clipboard",
+	"chaosBag.enabled": "Enabled",
+	"chaosOdds.enabled": "Enabled",
+	"chaosOdds.skillOdds": "Skill odds",
 
 	"Defeated": "Defeated",
 	"Change": "Change",
@@ -460,6 +463,6 @@
 	"Gate Box": "Gate Box",
 	"Chaos Bag": "Chaos Bag",
 	"Difficulty picker": "Difficulty picker",
-	"Odds": "Odds",
+	"Chaos Odds": "Chaos Odds",
 	"Scenario Reference": "Scenario Reference"
 }

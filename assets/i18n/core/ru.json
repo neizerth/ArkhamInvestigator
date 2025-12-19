@@ -350,6 +350,10 @@
 
 	"clipboard.successCopy": "Текст успешно скопирован",
 
+	"chaosBag.enabled": "Используется",
+	"chaosOdds.enabled": "Используются",
+	"chaosOdds.skillOdds": "Вероятности навыков",
+
 	"Defeated": "Поражение",
 	"Change": "Сменить",
 
@@ -484,6 +488,6 @@
 	"Gate Box": "Шкатулка врат",
 	"Chaos bag": "Мешок хаоса",
 	"Difficulty picker": "Сложность проверки",
-	"Odds": "Вероятности",
+	"Chaos Odds": "Вероятности мешка хаоса",
 	"Scenario Reference": "Памятка сценария"
 }
