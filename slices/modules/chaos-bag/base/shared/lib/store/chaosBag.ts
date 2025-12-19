@@ -13,7 +13,6 @@ export type ChaosBagState = {
 	unlimitedChaosTokens: boolean;
 	modifyChaosTokens: boolean;
 	showDifficulty: boolean;
-	showChaosBagOdds: boolean;
 };
 
 const initialState: ChaosBagState = {
@@ -25,7 +24,6 @@ const initialState: ChaosBagState = {
 	unlimitedChaosTokens: false,
 	modifyChaosTokens: true,
 	showDifficulty: false,
-	showChaosBagOdds: false,
 };
 
 const state = createSliceState(initialState);
@@ -47,7 +45,6 @@ export const {
 	setUnlimitedChaosTokens,
 	setModifyChaosTokens,
 	setShowDifficulty,
-	setShowChaosBagOdds,
 
 	// internal reducers
 	addChaosTokenInternal,
@@ -66,7 +63,6 @@ export const {
 	selectUnlimitedChaosTokens,
 	selectModifyChaosTokens,
 	selectShowDifficulty,
-	selectShowChaosBagOdds,
 } = chaosBag.selectors;
 
 export default chaosBag.reducer;

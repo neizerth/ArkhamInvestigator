@@ -11,6 +11,6 @@ export const selectChaosOdds = createSelector(
 		if (!matrix) {
 			return null;
 		}
-		return matrix[difficulty][skillValue];
+		return matrix[skillValue][difficulty];
 	},
 );

@@ -2,11 +2,11 @@ import {
 	boardChanged,
 	setCurrentInvestigatorIndex,
 } from "@modules/board/base/shared/lib";
+import { chaosBagUpdated } from "@modules/chaos-bag/base/shared/lib";
 import {
-	chaosBagUpdated,
 	selectShowChaosBagOdds,
 	setShowChaosBagOdds,
-} from "@modules/chaos-bag/base/shared/lib";
+} from "@modules/chaos-bag/odds/shared/lib";
 import {
 	setStoryCode,
 	setStoryDifficultyId,

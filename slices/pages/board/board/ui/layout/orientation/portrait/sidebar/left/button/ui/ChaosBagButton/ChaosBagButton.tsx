@@ -1,7 +1,5 @@
-import {
-	selectShowChaosBagOdds,
-	selectShowDifficulty,
-} from "@modules/chaos-bag/base/shared/lib";
+import { selectShowDifficulty } from "@modules/chaos-bag/base/shared/lib";
+import { selectShowChaosBagOdds } from "@modules/chaos-bag/odds/shared/lib";
 import { selectRevealedTokensCount } from "@modules/chaos-bag/reveal/base/shared/lib";
 import { useAppSelector } from "@shared/lib";
 import type { ViewProps } from "react-native";
