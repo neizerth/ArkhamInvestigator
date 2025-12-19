@@ -18,7 +18,7 @@ struct FindTokensParams {
 /// Find probability that target token types appear in drawn combination
 ///
 /// # Parameters
-/// * `targets_ptr` - JSON string with array of TokenTarget (token_type, count)
+/// * `targets_ptr` - JSON string with array of TokenTarget (token_type, min_count, max_count)
 /// * `tokens_ptr` - JSON string with array of ChaosOddsToken
 /// * `params_ptr` - JSON string with parameters: {reveal_count, revealed_frost_count, use_token_reveal}
 ///

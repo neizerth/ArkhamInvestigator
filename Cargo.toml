@@ -1,0 +1,7 @@
+[workspace]
+members = [
+    "modules/chaos-odds/rust",
+]
+resolver = "2"
+
+

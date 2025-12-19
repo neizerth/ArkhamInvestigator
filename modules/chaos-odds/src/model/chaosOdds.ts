@@ -10,7 +10,8 @@ export interface ChaosOddsInput {
 
 export interface TokenTarget {
 	token_type: string;
-	count: number;
+	min_count: number;
+	max_count?: number;
 }
 
 export interface FindTokensParams {

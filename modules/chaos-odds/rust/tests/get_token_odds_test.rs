@@ -38,7 +38,8 @@ fn bag_with_three_zero_and_one_minus_one() {
     let result = get_token_odds(
         &[TokenTarget {
             token_type: "-1".to_string(),
-            count: 1,
+            min_count: 1,
+            max_count: None,
         }],
         1,
         &tokens,
@@ -93,11 +94,13 @@ fn bag_with_bless_curse_and_two_zeros() {
         &[
             TokenTarget {
                 token_type: "bless".to_string(),
-                count: 1,
+                min_count: 1,
+                max_count: None,
             },
             TokenTarget {
                 token_type: "curse".to_string(),
-                count: 1,
+                min_count: 1,
+                max_count: None,
             },
         ],
         2,
@@ -158,11 +161,13 @@ fn bag_with_two_bless_curse_and_two_zeros() {
         &[
             TokenTarget {
                 token_type: "bless".to_string(),
-                count: 1,
+                min_count: 1,
+                max_count: None,
             },
             TokenTarget {
                 token_type: "curse".to_string(),
-                count: 1,
+                min_count: 1,
+                max_count: None,
             },
         ],
         1,

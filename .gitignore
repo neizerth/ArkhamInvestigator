@@ -74,6 +74,10 @@ modules/**/android/app/src/main/jniLibs/
 modules/**/android/src/main/jniLibs/
 modules/**/rust/target/
 
+# Rust workspace build outputs (root)
+/target/
+/Cargo.lock
+
 # Kotlin/Java build outputs (modules)
 modules/**/android/build/
 modules/**/android/**/kotlin/

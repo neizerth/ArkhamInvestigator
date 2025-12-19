@@ -1,6 +1,14 @@
 import { parseJSON, stringifyJSON } from "@shared/lib/util/promise";
-import type { ChaosOddsInput, FindTokensParams, TokenTarget } from "../model";
+import type { ChaosOddsInput, TokenTarget } from "../model";
 import ChaosOddsJSI from "./ChaosOddsJSI";
+
+export interface FindTokensOptions {
+	targets: TokenTarget[];
+	tokens: ChaosOddsInput[];
+	reveal_count: number;
+	revealed_frost_count: number;
+	use_token_reveal?: boolean;
+}
 
 export const ChaosOddsService = {
 	async calculate(
@@ -62,16 +70,10 @@ export const ChaosOddsService = {
 
 	/**
 	 * Find token odds (probability that target tokens appear)
-	 * @param targets Array of target token types with required counts
-	 * @param tokens Array of available tokens in the chaos bag
-	 * @param params Parameters: reveal_count, revealed_frost_count, use_token_reveal
+	 * @param options Options object containing targets, tokens, and calculation parameters
 	 * @returns Probability as number (0-100), or null if calculation was cancelled
 	 */
-	async findTokens(
-		targets: TokenTarget[],
-		tokens: ChaosOddsInput[],
-		params: FindTokensParams,
-	): Promise<number | null> {
+	async findTokens(options: FindTokensOptions): Promise<number | null> {
 		if (!ChaosOddsJSI) {
 			throw new Error(
 				"ChaosOdds JSI module is not available. JSI bindings may not be installed. Please check that the native module is properly initialized.",
@@ -83,9 +85,21 @@ export const ChaosOddsService = {
 			);
 		}
 
+		const {
+			targets,
+			tokens,
+			reveal_count,
+			revealed_frost_count,
+			use_token_reveal,
+		} = options;
+
 		const targetsJSON = await stringifyJSON(targets);
 		const tokensJSON = await stringifyJSON(tokens);
-		const paramsJSON = await stringifyJSON(params);
+		const paramsJSON = await stringifyJSON({
+			reveal_count,
+			revealed_frost_count,
+			use_token_reveal,
+		});
 
 		// Call native function - returns object with id and result, or null if cancelled
 		const calculateResult = await ChaosOddsJSI.findTokens(

@@ -39,9 +39,12 @@ pub struct ChaosBagModifier {
     pub probability: f64,
 }
 
-/// Target token type with minimum required count
+/// Target token type with minimum and maximum required count
 #[derive(Clone, Debug, Deserialize, Serialize)]
 pub struct TokenTarget {
     pub token_type: String,
-    pub count: usize,
+    pub min_count: usize,
+    #[serde(default)]
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub max_count: Option<usize>,
 }

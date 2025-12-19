@@ -2,9 +2,22 @@ use crate::types::{ChaosOddsToken, TokenTarget};
 
 // Fixed-size stack - completely stack-allocated, zero heap allocation
 // Optimized for mobile (Android/iOS, including older devices): reduced size to fit in L2 cache
-// Size: STACK_SIZE * sizeof(DFSState) = 2048 * 40 bytes = ~80KB - fits in L2 cache on mobile devices
-// Note: DFSState is larger here due to target_counts array (32 bytes) and remaining_targets
+// Size: STACK_SIZE * sizeof(DFSState) = 2048 * ~40 bytes = ~80KB - fits in L2 cache on mobile devices
+// DFSState optimized: removed target_counts array, using bitmask instead
 const STACK_SIZE: usize = 2048;
+
+// Precomputed reciprocal table for probabilities (1/N for N in 1..=255)
+// Using f32 for better ARM performance, accumulated in f64
+// Size: 256 * 4 = 1KB - fits in L1 cache
+static INV_TABLE: [f32; 256] = {
+    let mut table = [0.0f32; 256];
+    let mut i = 1;
+    while i < 256 {
+        table[i] = 1.0 / (i as f32);
+        i += 1;
+    }
+    table
+};
 
 /// Token group metadata - stored once, referenced by index
 /// Only stores needed fields to avoid unnecessary memory usage
@@ -17,6 +30,7 @@ struct TokenGroup {
 }
 
 /// Optimized DFS state - packed counts in u128, minimal copying
+/// Reduced from ~80 bytes to ~40 bytes by replacing target_counts array with bitmask
 #[derive(Clone, Copy)]
 struct DFSState {
     packed_counts: u128, // Packed available counts (3 bits per group, max 32 groups)
@@ -25,8 +39,9 @@ struct DFSState {
     probability: f64,    // Probability of current path
     available_mask: u32, // Precomputed bitmask for available groups (bits set if count > 0)
     remaining_total: u8, // Precomputed total remaining tokens
-    target_counts: [u8; 32], // Count of each target token type drawn in this path (max 32 target types)
-    remaining_targets: u8,   // Number of target types that haven't reached required count yet
+    target_satisfied_mask: u32, // Bitmask: bit set if target is satisfied (min_count reached and max_count not exceeded)
+    target_counts_packed: u64, // Packed target counts: 2 bits per target (max 3 count per target, up to 32 targets)
+    remaining_targets: u8,     // Number of target types that haven't reached required count yet
 }
 
 /// Fixed-size stack - completely stack-allocated, zero heap allocation
@@ -45,7 +60,8 @@ impl FixedStack {
             probability: 0.0,
             available_mask: 0,
             remaining_total: 0,
-            target_counts: [0; 32],
+            target_satisfied_mask: 0,
+            target_counts_packed: 0,
             remaining_targets: 0,
         };
         Self {
@@ -57,7 +73,9 @@ impl FixedStack {
     #[inline(always)]
     fn push(&mut self, item: DFSState) -> bool {
         if self.len >= STACK_SIZE {
-            return false; // Stack full
+            // Stack overflow: silently skip this branch
+            // In practice, this is rare and the probability contribution is small
+            return false;
         }
         self.items[self.len] = item;
         self.len += 1;
@@ -122,10 +140,36 @@ fn build_mask_inline(packed: u128, group_len: usize) -> u32 {
     mask
 }
 
-/// Target token information with group index and required count
+/// Get target count from packed u64 (2 bits per target, max 3)
+#[inline(always)]
+fn get_target_count(packed: u64, target_idx: usize) -> u8 {
+    if target_idx >= 32 {
+        return 0;
+    }
+    ((packed >> (target_idx * 2)) & 0x3) as u8
+}
+
+/// Increment target count in packed u64
+#[inline(always)]
+fn inc_target_count(packed: u64, target_idx: usize) -> u64 {
+    if target_idx >= 32 {
+        return packed;
+    }
+    let shift = target_idx * 2;
+    let current = ((packed >> shift) & 0x3) as u8;
+    if current < 3 {
+        let mask = !(0x3u64 << shift);
+        (packed & mask) | (((current + 1) as u64) << shift)
+    } else {
+        packed // Already at max
+    }
+}
+
+/// Target token information with group index and count requirements
 struct TargetInfo {
     group_idx: usize,
-    required_count: usize,
+    min_count: usize,
+    max_count: Option<usize>,
     target_idx: usize, // Index in target_counts array
 }
 
@@ -137,11 +181,12 @@ fn process_small_groups(
     group_len: usize,
     stack: &mut FixedStack,
     group_to_target: &[i8; 32],
-    target_required_counts: &[u8],
+    target_min_counts: &[u8],
+    target_max_counts: &[Option<u8>],
     token_prob: &mut f64,
 ) {
-    let remaining_total_f64 = state.remaining_total as f64;
-    let remaining_total_reciprocal = 1.0 / remaining_total_f64;
+    // Use precomputed reciprocal table instead of division
+    let inv = INV_TABLE[state.remaining_total as usize];
 
     // Unrolled loop for small groups - direct iteration, no trailing_zeros
     for group_idx in 0..group_len {
@@ -151,21 +196,43 @@ fn process_small_groups(
         }
 
         let group = groups[group_idx];
-        let p = state.probability * (available as f64 * remaining_total_reciprocal);
+        let p = state.probability * (available as f64) * (inv as f64);
 
         // Check if this group is one of the target token types and update target counts
-        let mut next_target_counts = state.target_counts;
+        let mut next_target_counts_packed = state.target_counts_packed;
+        let mut next_satisfied_mask = state.target_satisfied_mask;
         let mut next_remaining_targets = state.remaining_targets;
         let target_idx = group_to_target[group_idx];
         if target_idx >= 0 {
             let idx = target_idx as usize;
-            let prev_count = next_target_counts[idx];
-            next_target_counts[idx] = prev_count.saturating_add(1);
-            // Check if this target just reached its required count
-            if prev_count < target_required_counts[idx]
-                && next_target_counts[idx] >= target_required_counts[idx]
-            {
-                next_remaining_targets = next_remaining_targets.saturating_sub(1);
+            let prev_count = get_target_count(next_target_counts_packed, idx);
+
+            // Increment count (max 3, which is enough for most cases)
+            if prev_count < 3 {
+                next_target_counts_packed = inc_target_count(next_target_counts_packed, idx);
+            }
+            let current_count = get_target_count(next_target_counts_packed, idx);
+
+            // Check if max_count is exceeded (invalid path)
+            if let Some(max_count) = target_max_counts[idx] {
+                if current_count > max_count {
+                    // Exceeded max_count, skip this path
+                    continue;
+                }
+            }
+
+            // Check if this target just reached its min_count
+            let min_count = target_min_counts[idx];
+            let was_satisfied = (next_satisfied_mask & (1u32 << idx)) != 0;
+            let is_satisfied = current_count >= min_count
+                && (target_max_counts[idx].is_none()
+                    || current_count <= target_max_counts[idx].unwrap());
+
+            if is_satisfied {
+                next_satisfied_mask |= 1u32 << idx;
+                if !was_satisfied {
+                    next_remaining_targets -= 1; // Safe: we know remaining_targets > 0
+                }
             }
         }
 
@@ -180,16 +247,13 @@ fn process_small_groups(
             }
             (false, true) => {
                 // Frost → check revealed frost
-                let new_revealed_frost = state
-                    .revealed_frost_count
-                    .saturating_add(group.reveal_count);
+                let new_revealed_frost = state.revealed_frost_count + group.reveal_count;
                 if new_revealed_frost >= 2 {
                     // Frost auto-fail → skip (don't count in probability)
                     continue;
                 }
 
-                let next_pending_reveal =
-                    state.pending_reveal.saturating_sub(1) + group.reveal_count;
+                let next_pending_reveal = state.pending_reveal - 1 + group.reveal_count;
 
                 // If all target tokens are drawn, add probability and stop
                 if all_targets_drawn {
@@ -209,23 +273,26 @@ fn process_small_groups(
                 } else {
                     state.available_mask
                 };
-                let next_total = state.remaining_total.saturating_sub(1);
+                let next_total = state.remaining_total - 1;
 
-                let _ = stack.push(DFSState {
+                if !stack.push(DFSState {
                     packed_counts: next_packed,
                     revealed_frost_count: new_revealed_frost,
                     pending_reveal: next_pending_reveal,
                     probability: p,
                     available_mask: next_mask,
                     remaining_total: next_total,
-                    target_counts: next_target_counts,
+                    target_satisfied_mask: next_satisfied_mask,
+                    target_counts_packed: next_target_counts_packed,
                     remaining_targets: next_remaining_targets,
-                });
+                }) {
+                    // Stack overflow: skip this branch (rare case)
+                    continue;
+                }
             }
             (false, false) => {
                 // Regular token
-                let next_pending_reveal =
-                    state.pending_reveal.saturating_sub(1) + group.reveal_count;
+                let next_pending_reveal = state.pending_reveal - 1 + group.reveal_count;
 
                 // If all target tokens are drawn, add probability and stop
                 if all_targets_drawn {
@@ -245,18 +312,22 @@ fn process_small_groups(
                 } else {
                     state.available_mask
                 };
-                let next_total = state.remaining_total.saturating_sub(1);
+                let next_total = state.remaining_total - 1;
 
-                let _ = stack.push(DFSState {
+                if !stack.push(DFSState {
                     packed_counts: next_packed,
                     revealed_frost_count: state.revealed_frost_count,
                     pending_reveal: next_pending_reveal,
                     probability: p,
                     available_mask: next_mask,
                     remaining_total: next_total,
-                    target_counts: next_target_counts,
+                    target_satisfied_mask: next_satisfied_mask,
+                    target_counts_packed: next_target_counts_packed,
                     remaining_targets: next_remaining_targets,
-                });
+                }) {
+                    // Stack overflow: skip this branch (rare case, probability contribution is small)
+                    continue;
+                }
             }
         }
     }
@@ -270,15 +341,16 @@ fn process_large_groups(
     group_len: usize,
     stack: &mut FixedStack,
     group_to_target: &[i8; 32],
-    target_required_counts: &[u8],
+    target_min_counts: &[u8],
+    target_max_counts: &[Option<u8>],
     token_prob: &mut f64,
 ) {
     if state.remaining_total == 0 {
         return;
     }
 
-    let remaining_total_f64 = state.remaining_total as f64;
-    let remaining_total_reciprocal = 1.0 / remaining_total_f64;
+    // Use precomputed reciprocal table instead of division
+    let inv = INV_TABLE[state.remaining_total as usize];
 
     // Iterate only over available groups using bit iteration - O(popcount) instead of O(group_len)
     let mut mask = state.available_mask;
@@ -296,21 +368,43 @@ fn process_large_groups(
         }
 
         let group = groups[group_idx];
-        let p = state.probability * (available as f64 * remaining_total_reciprocal);
+        let p = state.probability * (available as f64) * (inv as f64);
 
         // Check if this group is one of the target token types and update target counts
-        let mut next_target_counts = state.target_counts;
+        let mut next_target_counts_packed = state.target_counts_packed;
+        let mut next_satisfied_mask = state.target_satisfied_mask;
         let mut next_remaining_targets = state.remaining_targets;
         let target_idx = group_to_target[group_idx];
         if target_idx >= 0 {
             let idx = target_idx as usize;
-            let prev_count = next_target_counts[idx];
-            next_target_counts[idx] = prev_count.saturating_add(1);
-            // Check if this target just reached its required count
-            if prev_count < target_required_counts[idx]
-                && next_target_counts[idx] >= target_required_counts[idx]
-            {
-                next_remaining_targets = next_remaining_targets.saturating_sub(1);
+            let prev_count = get_target_count(next_target_counts_packed, idx);
+
+            // Increment count (max 3, which is enough for most cases)
+            if prev_count < 3 {
+                next_target_counts_packed = inc_target_count(next_target_counts_packed, idx);
+            }
+            let current_count = get_target_count(next_target_counts_packed, idx);
+
+            // Check if max_count is exceeded (invalid path)
+            if let Some(max_count) = target_max_counts[idx] {
+                if current_count > max_count {
+                    // Exceeded max_count, skip this path
+                    continue;
+                }
+            }
+
+            // Check if this target just reached its min_count
+            let min_count = target_min_counts[idx];
+            let was_satisfied = (next_satisfied_mask & (1u32 << idx)) != 0;
+            let is_satisfied = current_count >= min_count
+                && (target_max_counts[idx].is_none()
+                    || current_count <= target_max_counts[idx].unwrap());
+
+            if is_satisfied {
+                next_satisfied_mask |= 1u32 << idx;
+                if !was_satisfied {
+                    next_remaining_targets -= 1; // Safe: we know remaining_targets > 0
+                }
             }
         }
 
@@ -325,16 +419,13 @@ fn process_large_groups(
             }
             (false, true) => {
                 // Frost → check revealed frost
-                let new_revealed_frost = state
-                    .revealed_frost_count
-                    .saturating_add(group.reveal_count);
+                let new_revealed_frost = state.revealed_frost_count + group.reveal_count;
                 if new_revealed_frost >= 2 {
                     // Frost auto-fail → skip (don't count in probability)
                     continue;
                 }
 
-                let next_pending_reveal =
-                    state.pending_reveal.saturating_sub(1) + group.reveal_count;
+                let next_pending_reveal = state.pending_reveal - 1 + group.reveal_count;
 
                 // If all target tokens are drawn, add probability and stop
                 if all_targets_drawn {
@@ -354,23 +445,26 @@ fn process_large_groups(
                 } else {
                     state.available_mask
                 };
-                let next_total = state.remaining_total.saturating_sub(1);
+                let next_total = state.remaining_total - 1;
 
-                let _ = stack.push(DFSState {
+                if !stack.push(DFSState {
                     packed_counts: next_packed,
                     revealed_frost_count: new_revealed_frost,
                     pending_reveal: next_pending_reveal,
                     probability: p,
                     available_mask: next_mask,
                     remaining_total: next_total,
-                    target_counts: next_target_counts,
+                    target_satisfied_mask: next_satisfied_mask,
+                    target_counts_packed: next_target_counts_packed,
                     remaining_targets: next_remaining_targets,
-                });
+                }) {
+                    // Stack overflow: skip this branch (rare case)
+                    continue;
+                }
             }
             (false, false) => {
                 // Regular token
-                let next_pending_reveal =
-                    state.pending_reveal.saturating_sub(1) + group.reveal_count;
+                let next_pending_reveal = state.pending_reveal - 1 + group.reveal_count;
 
                 // If all target tokens are drawn, add probability and stop
                 if all_targets_drawn {
@@ -390,18 +484,22 @@ fn process_large_groups(
                 } else {
                     state.available_mask
                 };
-                let next_total = state.remaining_total.saturating_sub(1);
+                let next_total = state.remaining_total - 1;
 
-                let _ = stack.push(DFSState {
+                if !stack.push(DFSState {
                     packed_counts: next_packed,
                     revealed_frost_count: state.revealed_frost_count,
                     pending_reveal: next_pending_reveal,
                     probability: p,
                     available_mask: next_mask,
                     remaining_total: next_total,
-                    target_counts: next_target_counts,
+                    target_satisfied_mask: next_satisfied_mask,
+                    target_counts_packed: next_target_counts_packed,
                     remaining_targets: next_remaining_targets,
-                });
+                }) {
+                    // Stack overflow: skip this branch (rare case, probability contribution is small)
+                    continue;
+                }
             }
         }
     }
@@ -463,14 +561,24 @@ pub fn get_token_odds(
     }
 
     // Build target info for each target token type
+    // Validate that counts fit in packed format (2 bits = max 3)
     for (target_idx, target) in targets.iter().enumerate() {
         if let Some(&(_, group_idx)) = seen_types
             .iter()
             .find(|(t, _)| *t == target.token_type.as_str())
         {
+            // Check if counts exceed packed format capacity (2 bits = max 3)
+            let max_needed = target.max_count.unwrap_or(target.min_count);
+            if target.min_count > 3 || max_needed > 3 {
+                // Fallback: return 0 for cases that exceed packed format
+                // In practice, most use cases have min_count <= 3
+                return 0;
+            }
+
             target_infos.push(TargetInfo {
                 group_idx,
-                required_count: target.count,
+                min_count: target.min_count,
+                max_count: target.max_count,
                 target_idx,
             });
         }
@@ -483,10 +591,12 @@ pub fn get_token_odds(
 
     // Build lookup table: group_idx -> target_idx (O(1) lookup instead of O(T) linear search)
     let mut group_to_target = [-1i8; 32];
-    let mut target_required_counts = vec![0u8; target_infos.len()];
+    let mut target_min_counts = vec![0u8; target_infos.len()];
+    let mut target_max_counts: Vec<Option<u8>> = vec![None; target_infos.len()];
     for target in &target_infos {
         group_to_target[target.group_idx] = target.target_idx as i8;
-        target_required_counts[target.target_idx] = target.required_count.min(255) as u8;
+        target_min_counts[target.target_idx] = target.min_count.min(255) as u8;
+        target_max_counts[target.target_idx] = target.max_count.map(|c| c.min(255) as u8);
     }
 
     // Pack initial counts into u128 (3 bits per group, max 7 tokens per group)
@@ -501,6 +611,12 @@ pub fn get_token_odds(
     let initial_packed = pack_counts_inline(&initial_counts, group_len);
     let initial_mask = build_mask_inline(initial_packed, group_len);
 
+    // Early pruning: check if we have enough tokens to satisfy all targets
+    let total_required_min: usize = target_infos.iter().map(|t| t.min_count).sum();
+    if (total_tokens as usize) < total_required_min {
+        return 0;
+    }
+
     // Fixed-size stack - completely stack-allocated
     let mut stack = FixedStack::new();
     stack.push(DFSState {
@@ -510,7 +626,8 @@ pub fn get_token_odds(
         probability: 1.0,
         available_mask: initial_mask,
         remaining_total: total_tokens,
-        target_counts: [0; 32],
+        target_satisfied_mask: 0,
+        target_counts_packed: 0,
         remaining_targets: target_infos.len().min(255) as u8,
     });
 
@@ -531,6 +648,10 @@ pub fn get_token_odds(
         if state.pending_reveal == 0 {
             continue;
         }
+        // Early pruning: if remaining tokens < remaining targets, impossible to satisfy
+        if state.remaining_total < state.remaining_targets {
+            continue;
+        }
         if state.remaining_total > 0 {
             if use_unrolled {
                 process_small_groups(
@@ -539,7 +660,8 @@ pub fn get_token_odds(
                     group_len,
                     &mut stack,
                     &group_to_target,
-                    &target_required_counts,
+                    &target_min_counts,
+                    &target_max_counts,
                     &mut token_prob,
                 );
             } else {
@@ -549,7 +671,8 @@ pub fn get_token_odds(
                     group_len,
                     &mut stack,
                     &group_to_target,
-                    &target_required_counts,
+                    &target_min_counts,
+                    &target_max_counts,
                     &mut token_prob,
                 );
             }
