@@ -105,14 +105,29 @@ Value calculate(
                                 revealedCopy.c_str()
                             );
 
+                        if (!jsInvoker) {
+                            // If jsInvoker is null, we can't call back - this shouldn't happen
+                            // but we need to free the pointer if it was allocated
+                            if (result_ptr != nullptr) {
+                                memory_free_string(result_ptr);
+                            }
+                            return;
+                        }
+
                         jsInvoker->invokeAsync(
                             [resolve, result_ptr](Runtime& runtime) {
+                                if (!resolve) {
+                                    return;
+                                }
+                                
                                 if (result_ptr == nullptr) {
                                     resolve->call(runtime, Value::null());
                                     return;
                                 }
 
+                                // Copy the string immediately to avoid issues if pointer becomes invalid
                                 std::string result_str(result_ptr);
+                                
                                 uint64_t id =
                                     ::chaosodds::memory::generate_id();
                                 ::chaosodds::memory::store_pointer(
@@ -132,22 +147,32 @@ Value calculate(
                         );
                     } catch (const std::exception& e) {
                         std::string msg = e.what();
-                        jsInvoker->invokeAsync(
-                            [reject, msg](Runtime& runtime) {
-                                auto error_val = String::createFromUtf8(runtime, msg);
-                                reject->call(runtime, error_val);
-                            }
-                        );
+                        if (jsInvoker) {
+                            jsInvoker->invokeAsync(
+                                [reject, msg](Runtime& runtime) {
+                                    if (!reject) {
+                                        return;
+                                    }
+                                    auto error_val = String::createFromUtf8(runtime, msg);
+                                    reject->call(runtime, error_val);
+                                }
+                            );
+                        }
                     } catch (...) {
-                        jsInvoker->invokeAsync(
-                            [reject](Runtime& runtime) {
-                                auto error_val = String::createFromUtf8(
-                                    runtime,
-                                    "Unknown error during chaos odds calculation"
-                                );
-                                reject->call(runtime, error_val);
-                            }
-                        );
+                        if (jsInvoker) {
+                            jsInvoker->invokeAsync(
+                                [reject](Runtime& runtime) {
+                                    if (!reject) {
+                                        return;
+                                    }
+                                    auto error_val = String::createFromUtf8(
+                                        runtime,
+                                        "Unknown error during chaos odds calculation"
+                                    );
+                                    reject->call(runtime, error_val);
+                                }
+                            );
+                        }
                     }
                 }
             ).detach();
@@ -286,14 +311,29 @@ Value findTokens(
                                 paramsCopy.c_str()
                             );
 
+                        if (!jsInvoker) {
+                            // If jsInvoker is null, we can't call back - this shouldn't happen
+                            // but we need to free the pointer if it was allocated
+                            if (result_ptr != nullptr) {
+                                memory_free_string(result_ptr);
+                            }
+                            return;
+                        }
+
                         jsInvoker->invokeAsync(
                             [resolve, result_ptr](Runtime& runtime) {
+                                if (!resolve) {
+                                    return;
+                                }
+                                
                                 if (result_ptr == nullptr) {
                                     resolve->call(runtime, Value::null());
                                     return;
                                 }
 
+                                // Copy the string immediately to avoid issues if pointer becomes invalid
                                 std::string result_str(result_ptr);
+                                
                                 uint64_t id =
                                     ::chaosodds::memory::generate_id();
                                 ::chaosodds::memory::store_pointer(
@@ -313,22 +353,32 @@ Value findTokens(
                         );
                     } catch (const std::exception& e) {
                         std::string msg = e.what();
-                        jsInvoker->invokeAsync(
-                            [reject, msg](Runtime& runtime) {
-                                auto error_val = String::createFromUtf8(runtime, msg);
-                                reject->call(runtime, error_val);
-                            }
-                        );
+                        if (jsInvoker) {
+                            jsInvoker->invokeAsync(
+                                [reject, msg](Runtime& runtime) {
+                                    if (!reject) {
+                                        return;
+                                    }
+                                    auto error_val = String::createFromUtf8(runtime, msg);
+                                    reject->call(runtime, error_val);
+                                }
+                            );
+                        }
                     } catch (...) {
-                        jsInvoker->invokeAsync(
-                            [reject](Runtime& runtime) {
-                                auto error_val = String::createFromUtf8(
-                                    runtime,
-                                    "Unknown error during token odds calculation"
-                                );
-                                reject->call(runtime, error_val);
-                            }
-                        );
+                        if (jsInvoker) {
+                            jsInvoker->invokeAsync(
+                                [reject](Runtime& runtime) {
+                                    if (!reject) {
+                                        return;
+                                    }
+                                    auto error_val = String::createFromUtf8(
+                                        runtime,
+                                        "Unknown error during token odds calculation"
+                                    );
+                                    reject->call(runtime, error_val);
+                                }
+                            );
+                        }
                     }
                 }
             ).detach();
