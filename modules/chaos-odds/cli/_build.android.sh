@@ -16,5 +16,7 @@ echo "Building Rust static library for Android"
 
 for target in "${RUST_TARGETS[@]}"; do
     echo "Building Rust lib for $target"
-    RUSTFLAGS="-C relocation-model=pic" cargo build --release --target "$target"
+    # link-dead-code is now in .cargo/config.toml, but we keep it here for explicit control
+    # Enable mobile feature for Android builds to optimize for mobile devices
+    RUSTFLAGS="-C relocation-model=pic -C link-dead-code" cargo build --release --target "$target" --features mobile
 done

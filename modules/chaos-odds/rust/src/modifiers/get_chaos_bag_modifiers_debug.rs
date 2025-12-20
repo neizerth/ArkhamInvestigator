@@ -1,13 +1,9 @@
-// SIMPLIFIED DP ALGORITHM - Single file, maximum simplicity
-//
-// Key principles:
-// 1. ONE algorithm: simple DP by pending_reveal levels
-// 2. Minimal state: [u8; 20] counts + u8 pending + i16 modifier
-// 3. NO u128 in hot loop (ARM-friendly)
-// 4. NO multinomial (states handle permutations automatically)
-// 5. NO recursion, NO distributions, NO DFS, NO BFS hybrids
-//
-// Performance target: < 1 sec on old Android A53
+// DEBUG VERSION - для сравнения с рабочим DFS
+// Копируем текущий DP алгоритм с отладочными логами
+
+use rustc_hash::FxHashMap;
+use std::fs::OpenOptions;
+use std::io::Write;
 
 use crate::types::{ChaosOddsCacheItem, ChaosOddsGroup, ChaosOddsToken};
 use crate::util::cache::{
@@ -15,14 +11,13 @@ use crate::util::cache::{
     pack_available_counts, set_available_count,
 };
 use crate::util::groups::{build_groups, groups_to_available_map};
-use rustc_hash::FxHashMap;
 
 /// Minimal DP state - ARM optimized
 #[derive(Clone, Copy, Hash, PartialEq, Eq)]
 struct DPState {
-    counts: [u8; 20], // Token counts per group (max 20 groups)
-    pending: u8,      // Remaining reveals needed
-    modifier: i16,    // Current modifier
+    counts: [u8; 20],
+    pending: u8,
+    modifier: i16,
 }
 
 impl DPState {
@@ -41,14 +36,34 @@ impl DPState {
     }
 }
 
+fn log_debug(message: &str, data: serde_json::Value) {
+    let log_entry = serde_json::json!({
+        "timestamp": std::time::SystemTime::now().duration_since(std::time::UNIX_EPOCH).unwrap().as_millis(),
+        "location": "get_chaos_bag_modifiers_debug.rs",
+        "message": message,
+        "data": data,
+        "sessionId": "debug-session",
+        "runId": "dp-debug",
+    });
+
+    if let Ok(mut file) = OpenOptions::new()
+        .create(true)
+        .append(true)
+        .open("/Users/vy/Projects/Core/ArkhamInvestigator/.cursor/debug.log")
+    {
+        let _ = writeln!(file, "{}", log_entry);
+    }
+}
+
 /// Simple DP processing - one algorithm, maximum simplicity
-fn process_reveal_tokens_dp(
-    roots: &[(u128, u128, i16, usize, f64)], // (state1, state2, modifier, pending_reveal, probability)
+fn process_reveal_tokens_dp_debug(
+    roots: &[(u128, u128, i16, usize, f64)],
     groups: &[ChaosOddsGroup],
     group_is_frost: &[bool],
     group_len: usize,
     revealed_frost_count: usize,
     cache: &mut FxHashMap<crate::util::cache::CacheKey, ChaosOddsCacheItem>,
+    test_name: &str,
 ) {
     if roots.is_empty() || group_len == 0 {
         return;
@@ -56,15 +71,35 @@ fn process_reveal_tokens_dp(
 
     let effective_group_len = group_len.min(20);
 
-    // Convert roots to DP states (with reveal tracking)
+    log_debug(
+        "DP_START",
+        serde_json::json!({
+            "test_name": test_name,
+            "roots_count": roots.len(),
+            "group_len": group_len,
+        }),
+    );
+
+    // Convert roots to DP states
     let mut current_level: FxHashMap<DPState, (f64, u128)> = FxHashMap::default();
-    for (state1, state2, modifier, pending, prob) in roots {
+    for (idx, (state1, state2, modifier, pending, prob)) in roots.iter().enumerate() {
         let mut counts = [0u8; 20];
         for i in 0..effective_group_len {
             counts[i] = get_available_count(*state2, i);
         }
         let state = DPState::new(counts, (*pending).min(255) as u8, *modifier);
         let reveal = get_reveal(*state1);
+
+        log_debug(
+            "ROOT_STATE",
+            serde_json::json!({
+                "idx": idx,
+                "modifier": *modifier,
+                "pending": *pending,
+                "probability": *prob,
+                "counts": counts[..effective_group_len].to_vec(),
+            }),
+        );
 
         current_level
             .entry(state)
@@ -74,16 +109,44 @@ fn process_reveal_tokens_dp(
 
     // DP by pending_reveal levels
     let mut next_level: FxHashMap<DPState, (f64, u128)> = FxHashMap::default();
+    let mut level_num = 0;
 
     while !current_level.is_empty() {
         next_level.clear();
+        level_num += 1;
+
+        log_debug(
+            "DP_LEVEL_START",
+            serde_json::json!({
+                "level": level_num,
+                "states_count": current_level.len(),
+            }),
+        );
 
         for (state, (prob, reveal)) in current_level.drain() {
+            log_debug(
+                "PROCESS_STATE",
+                serde_json::json!({
+                    "level": level_num,
+                    "modifier": state.modifier,
+                    "pending": state.pending,
+                    "probability": prob,
+                    "total_tokens": state.total(effective_group_len),
+                }),
+            );
+
             // CRITICAL: Hard stop when pending == 0
-            // DP continues processing states with pending > 0 until all reveals are exhausted
-            // Special case for curse→curse is handled when drawing the token (see is_curse_chain_completed)
             if state.pending == 0 {
                 let total = state.total(effective_group_len) as usize;
+
+                log_debug(
+                    "FINALIZE_STATE",
+                    serde_json::json!({
+                        "modifier": state.modifier,
+                        "probability": prob,
+                        "total": total,
+                    }),
+                );
 
                 // Rebuild state2 from counts
                 let mut state2 = 0u128;
@@ -92,7 +155,7 @@ fn process_reveal_tokens_dp(
                     state2 = set_available_count(state2, i, count);
                 }
 
-                // Rebuild state1: available_mask + reveal
+                // Rebuild state1
                 let available_mask = {
                     let mut mask = 0u32;
                     for i in 0..effective_group_len {
@@ -108,6 +171,14 @@ fn process_reveal_tokens_dp(
 
                 if let Some(existing) = cache.get_mut(&key) {
                     existing.probability += prob;
+                    log_debug(
+                        "CACHE_UPDATE",
+                        serde_json::json!({
+                            "modifier": state.modifier,
+                            "added_prob": prob,
+                            "total_prob": existing.probability,
+                        }),
+                    );
                 } else {
                     cache.insert(
                         key,
@@ -120,12 +191,26 @@ fn process_reveal_tokens_dp(
                             pending_reveal: 0,
                         },
                     );
+                    log_debug(
+                        "CACHE_INSERT",
+                        serde_json::json!({
+                            "modifier": state.modifier,
+                            "probability": prob,
+                        }),
+                    );
                 }
                 continue;
             }
 
             let total_left = state.total(effective_group_len);
             if total_left == 0 {
+                log_debug(
+                    "SKIP_EMPTY",
+                    serde_json::json!({
+                        "modifier": state.modifier,
+                        "pending": state.pending,
+                    }),
+                );
                 continue;
             }
 
@@ -151,74 +236,28 @@ fn process_reveal_tokens_dp(
                 // Create next state
                 let mut next_state = state;
                 next_state.counts[i] -= 1;
-                next_state.modifier += group.modifier;
-
-                // CRITICAL: Correctly handle reveal_count for multi-reveal tokens (e.g., tablet with reveal_count=2)
-                // pending decreases by 1 (for the current draw) and increases by reveal_count (for additional reveals)
-                let reveal_add = group.token.reveal_count.min(255) as u8;
                 let old_pending = next_state.pending;
-                let new_pending = next_state
+                next_state.pending = next_state
                     .pending
                     .saturating_sub(1)
-                    .saturating_add(reveal_add);
-                next_state.pending = new_pending;
+                    .saturating_add(group.token.reveal_count.min(255) as u8);
+                next_state.modifier += group.modifier;
 
-                // CRITICAL: Special case for curse→curse chain completion
-                // When we draw a curse reveal token with reveal_count=1 while pending=1,
-                // pending stays at 1 (1-1+1=1), and the curse chain should finalize immediately.
-                // This is specific to curse tokens - other reveal tokens (bless, frost, etc.)
-                // should continue until pending==0.
-                // We detect this by checking if pending stayed the same AND reveal_count == 1
-                // AND the token type is "curse".
-                let pending_stayed_same = new_pending == old_pending;
-                let is_curse_chain_completed = old_pending > 0
-                    && group.token.reveal_count == 1
-                    && pending_stayed_same
-                    && group.token.token_type == "curse";
+                log_debug(
+                    "DRAW_TRANSITION",
+                    serde_json::json!({
+                        "from_modifier": state.modifier,
+                        "from_pending": old_pending,
+                        "to_modifier": next_state.modifier,
+                        "to_pending": next_state.pending,
+                        "group_idx": i,
+                        "group_modifier": group.modifier,
+                        "group_reveal_count": group.token.reveal_count,
+                        "draw_prob": prob * (count as f64 / total_f),
+                    }),
+                );
 
-                if is_curse_chain_completed {
-                    // Finalize immediately: this reveal chain is complete
-                    let final_modifier = next_state.modifier;
-                    let draw_prob = prob * (count as f64 / total_f);
-                    let total = next_state.total(effective_group_len) as usize;
-
-                    let mut state2 = 0u128;
-                    for j in 0..effective_group_len {
-                        let cnt = next_state.counts[j].min(7);
-                        state2 = set_available_count(state2, j, cnt);
-                    }
-
-                    let available_mask = {
-                        let mut mask = 0u32;
-                        for j in 0..effective_group_len {
-                            if next_state.counts[j] > 0 {
-                                mask |= 1u32 << j;
-                            }
-                        }
-                        mask
-                    };
-                    let state1 = (available_mask as u128) | (reveal << 32);
-                    let key = build_cache_key(state1, state2, total, final_modifier, 0);
-
-                    if let Some(existing) = cache.get_mut(&key) {
-                        existing.probability += draw_prob;
-                    } else {
-                        cache.insert(
-                            key,
-                            ChaosOddsCacheItem {
-                                modifier: final_modifier,
-                                probability: draw_prob,
-                                available_count: total,
-                                state1,
-                                state2,
-                                pending_reveal: 0,
-                            },
-                        );
-                    }
-                    continue; // Don't add to next_level
-                }
-
-                // Update reveal: increment reveal count for this group
+                // Update reveal
                 let current_mask = {
                     let mut mask = 0u32;
                     for j in 0..effective_group_len {
@@ -243,18 +282,36 @@ fn process_reveal_tokens_dp(
 
         std::mem::swap(&mut current_level, &mut next_level);
 
-        // Safety limit
         if current_level.len() > 100_000 {
+            log_debug(
+                "SAFETY_LIMIT",
+                serde_json::json!({
+                    "level": level_num,
+                    "states_count": current_level.len(),
+                }),
+            );
             break;
         }
     }
+
+    log_debug(
+        "DP_END",
+        serde_json::json!({
+            "test_name": test_name,
+            "final_level": level_num,
+            "cache_size": cache.len(),
+        }),
+    );
 }
 
-/// Main entry point
-pub fn get_chaos_bag_modifiers(
+/// Debug entry point
+pub fn get_chaos_bag_modifiers_debug(
     tokens: &[ChaosOddsToken],
     revealed_frost_count: usize,
+    test_name: &str,
 ) -> Vec<ChaosOddsCacheItem> {
+    // Simplified version - just call DP with roots
+    // Similar structure to main function but with logging
     if tokens.is_empty() {
         return Vec::new();
     }
@@ -266,8 +323,6 @@ pub fn get_chaos_bag_modifiers(
     }
 
     let group_len = groups.len();
-
-    // Build base available counts
     let base_available = groups_to_available_map(&groups);
     let base_available_counts_array = {
         let mut arr = [0u8; 32];
@@ -277,17 +332,55 @@ pub fn get_chaos_bag_modifiers(
         arr
     };
     let base_state2 = pack_available_counts(&base_available_counts_array);
-
-    // Pre-compute token type flags
     let group_is_frost: Vec<bool> = groups
         .iter()
         .map(|g| g.token.token_type == "frost")
         .collect();
 
-    // Initialize cache (will be populated by DP)
+    // Regular tokens
     let mut cache: Vec<ChaosOddsCacheItem> = Vec::new();
+    let total_f64_reciprocal = 1.0 / (total_tokens as f64);
 
-    // Build cache map for deduplication
+    for (group_idx, group) in groups.iter().enumerate() {
+        if group.token.reveal_count > 0 {
+            continue;
+        }
+
+        let probability = group.count as f64 * total_f64_reciprocal;
+        let modifier = group.modifier;
+        let state2 = dec_available_count(base_state2, group_idx);
+        let available_mask = {
+            let mut mask = 0u32;
+            for i in 0..group_len.min(32) {
+                if get_available_count(state2, i) > 0 {
+                    mask |= 1u32 << i;
+                }
+            }
+            mask
+        };
+        let state1 = (available_mask as u128) | (0u128 << 32);
+
+        cache.push(ChaosOddsCacheItem {
+            modifier,
+            probability,
+            available_count: total_tokens.saturating_sub(1),
+            state1,
+            state2,
+            pending_reveal: 0,
+        });
+    }
+
+    // Reveal tokens
+    let reveal_groups: Vec<(usize, &ChaosOddsGroup)> = groups
+        .iter()
+        .enumerate()
+        .filter(|(_, g)| g.token.reveal_count > 0)
+        .collect();
+
+    if reveal_groups.is_empty() {
+        return cache;
+    }
+
     let mut final_cache_map: FxHashMap<crate::util::cache::CacheKey, usize> = FxHashMap::default();
     let mut temp_items: Vec<(crate::util::cache::CacheKey, ChaosOddsCacheItem)> = Vec::new();
     for item in cache.drain(..) {
@@ -311,13 +404,12 @@ pub fn get_chaos_bag_modifiers(
         }
     }
 
-    // Prepare root states for ALL tokens (not just reveal tokens)
-    // This ensures that regular tokens also create initial states in DP
+    // Prepare root states
     let mut roots: Vec<(u128, u128, i16, usize, f64)> = Vec::new();
     let total_count: usize = groups.iter().map(|g| g.count).sum();
     let total_count_reciprocal = 1.0 / (total_count as f64);
 
-    for (group_idx, group) in groups.iter().enumerate() {
+    for (group_idx, group) in reveal_groups {
         if group.token.is_fail {
             continue;
         }
@@ -350,7 +442,7 @@ pub fn get_chaos_bag_modifiers(
         return cache;
     }
 
-    // Process with simple DP
+    // Process with debug DP
     let cache_items: Vec<ChaosOddsCacheItem> = cache.iter().cloned().collect();
     let mut dp_cache: FxHashMap<crate::util::cache::CacheKey, ChaosOddsCacheItem> = {
         let mut map = FxHashMap::default();
@@ -367,13 +459,14 @@ pub fn get_chaos_bag_modifiers(
         map
     };
 
-    process_reveal_tokens_dp(
+    process_reveal_tokens_dp_debug(
         &roots,
         &groups,
         &group_is_frost,
         group_len,
         revealed_frost_count,
         &mut dp_cache,
+        test_name,
     );
 
     // Merge results

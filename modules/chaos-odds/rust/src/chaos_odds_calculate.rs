@@ -3,9 +3,6 @@ use std::os::raw::c_char;
 use crate::odds::calculate_odds;
 use crate::util::cancel::reset_cancel_flag;
 use crate::util::parse::{parse_tokens, serialize_matrix};
-// Import the function that initializes the multinomial cache
-// This is called lazily on first use to precompute multinomial values
-use crate::modifiers::prewarm_multinomial_cache;
 
 /// Parse JSON string to vector of ChaosOddsToken
 /// Calculate chaos bag odds for all difficulty/skill combinations
@@ -51,26 +48,54 @@ pub extern "C" fn chaos_odds_calculate(
     available_ptr: *const c_char,
     revealed_ptr: *const c_char,
 ) -> *mut c_char {
-    // Initialize multinomial cache on first call (lazy initialization)
-    // This ensures the cache is ready before calculation starts
-    // On first call, this may take 10-30 seconds, but subsequent calls will be fast
-    let _ = prewarm_multinomial_cache();
+    use std::time::Instant;
+
+    let rust_start = Instant::now();
+    eprintln!("⏱️ [Rust] chaos_odds_calculate() called");
 
     // Reset cancellation flag before starting calculation
     reset_cancel_flag();
 
     // Parse available tokens
+    let parse_start = Instant::now();
     let available = parse_tokens(available_ptr);
     let revealed = parse_tokens(revealed_ptr);
+    let parse_duration = parse_start.elapsed();
+    eprintln!("⏱️ [Rust] parse_tokens took {:?}", parse_duration);
 
-    match calculate_odds(&available, &revealed) {
+    let calc_start = Instant::now();
+    eprintln!("⏱️ [Rust] Starting calculate_odds()");
+    let result = match calculate_odds(&available, &revealed) {
         Some(odds_matrix) => {
+            let calc_duration = calc_start.elapsed();
+            eprintln!(
+                "⏱️ [Rust] calculate_odds() completed in {:?}",
+                calc_duration
+            );
+
             // Matrix already contains values 0-100 (percentages)
-            serialize_matrix(&odds_matrix)
+            let serialize_start = Instant::now();
+            let serialized = serialize_matrix(&odds_matrix);
+            let serialize_duration = serialize_start.elapsed();
+            eprintln!("⏱️ [Rust] serialize_matrix took {:?}", serialize_duration);
+            serialized
         }
         None => {
+            let calc_duration = calc_start.elapsed();
+            eprintln!(
+                "⏱️ [Rust] calculate_odds() was cancelled after {:?}",
+                calc_duration
+            );
             // Calculation was cancelled, return null pointer
             std::ptr::null_mut()
         }
-    }
+    };
+
+    let rust_total = rust_start.elapsed();
+    eprintln!(
+        "⏱️ [Rust] chaos_odds_calculate() total time: {:?}",
+        rust_total
+    );
+
+    result
 }

@@ -109,13 +109,18 @@ find_library(android-lib android)
 # ReactAndroid::jsi provides JSI symbols (jsi::Runtime, jsi::Value, etc.)
 # ReactAndroid::reactnative (0.76+) or ReactAndroid::reactnativejni (<0.76) provides JNI bindings
 # fbjni::fbjni provides JNI utilities
+# Force load all object files from the Rust static library to ensure all symbols are included
+# This is necessary because Android linker only loads .o files from static archives if there's
+# an unresolved symbol reference. Similar to iOS -force_load flag.
 target_link_libraries(
     ${PACKAGE_NAME}
     PRIVATE
     ReactAndroid::jsi
     ${REACT_NATIVE_TARGET}
     fbjni::fbjni
+    -Wl,--whole-archive
     chaos_odds_rust
+    -Wl,--no-whole-archive
     ${log-lib}
     ${android-lib}
 )
