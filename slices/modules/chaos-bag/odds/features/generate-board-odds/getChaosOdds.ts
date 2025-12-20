@@ -26,6 +26,15 @@ export const getChaosOdds = async (
 	const js_start = performance.now();
 	const callId = ++calculationId;
 	const activeBefore = activeCalls++;
+
+	// Cancel previous calculations if there are any active
+	if (activeBefore > 0) {
+		console.log(
+			`⏱️ [JS] Call #${callId}: Cancelling ${activeBefore} previous calculation(s)`,
+		);
+		ChaosOdds.cancel();
+	}
+
 	console.log(
 		`⏱️ [JS] getChaosOdds() called #${callId} (active: ${activeBefore + 1})`,
 	);
@@ -53,14 +62,21 @@ export const getChaosOdds = async (
 		);
 		const odds = await ChaosOdds.calculate(availableTokens, revealedTokens);
 		const await_duration = performance.now() - await_start;
+
+		// Check if this calculation was superseded by a newer one BEFORE logging
+		// This prevents logging results from cancelled/superseded calls
+		if (currentCalculationId !== calculationId) {
+			const activeAfter = --activeCalls;
+			console.log(
+				`⏱️ [JS] Call #${callId}: superseded after ${await_duration.toFixed(2)} ms (active: ${activeAfter})`,
+			);
+			return null;
+		}
+
+		// Only log if this call was not superseded
 		console.log(
 			`⏱️ [JS] Call #${callId}: await ChaosOdds.calculate() took ${await_duration.toFixed(2)} ms`,
 		);
-
-		// Check if this calculation was superseded by a newer one
-		if (currentCalculationId !== calculationId) {
-			return null;
-		}
 
 		const js_total = performance.now() - js_start;
 		const activeAfter = --activeCalls;

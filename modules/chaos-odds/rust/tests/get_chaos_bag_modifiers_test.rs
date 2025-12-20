@@ -269,3 +269,42 @@ fn four_tablet_reveal_count_ten_seconds_performance() {
         duration.as_millis()
     );
 }
+
+#[test]
+fn performance_test_curse_bless_tablet_elder_thing() {
+    let mut tokens: Vec<ChaosOddsToken> = Vec::new();
+
+    // 10 curse (-2, reveal=1)
+    for _ in 0..10 {
+        tokens.push(token_with_reveal("curse", -2, 1));
+    }
+
+    // 10 bless (+2, reveal=1)
+    for _ in 0..10 {
+        tokens.push(token_with_reveal("bless", 2, 1));
+    }
+
+    // 4 tablet (0, reveal=2)
+    for _ in 0..4 {
+        tokens.push(token_with_reveal("tablet", 0, 2));
+    }
+
+    // 4 elder_thing (-1, reveal=0)
+    for _ in 0..4 {
+        tokens.push(token_with_reveal("elder_thing", -1, 0));
+    }
+
+    let start = Instant::now();
+    let result = get_chaos_bag_modifiers(&tokens, 0);
+    let duration = start.elapsed();
+
+    let duration_ms = duration.as_millis();
+    println!("entry count: {}", result.len());
+    println!("execution time: {}ms", duration_ms);
+
+    assert!(
+        duration.as_secs_f64() < 1.0,
+        "expected execution time < 1 second, got {}ms",
+        duration_ms
+    );
+}
