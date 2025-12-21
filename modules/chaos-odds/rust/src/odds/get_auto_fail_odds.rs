@@ -5,51 +5,6 @@ use crate::types::ChaosOddsToken;
 // Size: STACK_SIZE * sizeof(DFSState) = 2048 * 24 bytes = ~48KB - fits in L2 cache on mobile devices
 const STACK_SIZE: usize = 2048;
 
-// ============================================================================
-// Approximation Configuration Constants (same as get_chaos_bag_modifiers.rs)
-// ============================================================================
-
-/// Maximum reveal tokens to fully process (Strategy 1: Active reveal limit)
-/// Tokens beyond this are capped at reveal_count=1
-const MAX_FULLY_PROCESSED_REVEAL: usize = 3;
-
-/// Threshold for mass reveal disable (Rule #1)
-/// When reveal_tokens_count >= this, ALL reveal_count are set to 0
-/// At this point, reveal becomes noise, not information
-/// ULTRA-AGGRESSIVE: Same as get_chaos_bag_modifiers.rs (10 instead of 25)
-const MASS_REVEAL_DISABLE_THRESHOLD: usize = 10;
-
-/// Maximum pending reveal (Rule #2: hard ceiling)
-/// If pending exceeds this, state is finalized immediately
-/// ULTRA-AGGRESSIVE: Same as get_chaos_bag_modifiers.rs (1 instead of 3)
-const MAX_PENDING_REVEAL: u8 = 1;
-
-/// Threshold for disabling reveal on bless/curse (Rule #3)
-/// When reveal_tokens_count >= this, bless/curse reveal is disabled
-/// ULTRA-AGGRESSIVE: Same as get_chaos_bag_modifiers.rs (5 instead of 15)
-const BLESS_CURSE_REVEAL_DISABLE_THRESHOLD: usize = 5;
-
-/// Threshold for ultra-aggressive approximation
-/// If reveal_tokens_count > this, all reveal_count > 1 are reduced to 1
-const MANY_REVEAL_TOKENS_THRESHOLD: usize = 12;
-
-/// Threshold for large bag size (ultra-aggressive approximation)
-const LARGE_BAG_THRESHOLD: usize = 30;
-
-/// Threshold for moderate approximation
-const MEDIUM_REVEAL_TOKENS_THRESHOLD: usize = 6;
-
-/// Threshold for medium bag size (moderate approximation)
-const MEDIUM_BAG_THRESHOLD: usize = 10;
-
-/// Threshold for large reveal_count truncation (Strategy 3)
-/// If bag has more tokens than this, all reveal_count > 1 are reduced to 1
-const LARGE_BAG_FOR_REVEAL_TRUNCATION: usize = 15;
-
-/// Maximum reveal depth for DFS (Strategy 3)
-/// Beyond this depth, remaining reveal tokens are averaged instead of fully processed
-const MAX_REVEAL_DEPTH: u8 = 2;
-
 /// Token group metadata - stored once, referenced by index
 /// Only stores needed fields to avoid unnecessary memory usage
 #[derive(Clone, Copy)]
@@ -58,57 +13,6 @@ struct TokenGroup {
     is_fail: bool,
     is_frost: bool,
     reveal_count: u8,
-    is_curse: bool,
-    is_bless: bool,
-}
-
-/// Calculate effective reveal_count with adaptive approximation and limit
-/// Same logic as in get_chaos_bag_modifiers.rs
-#[inline(always)]
-fn effective_reveal_count(
-    reveal_count: u8,
-    remaining_tokens: usize,
-    reveal_tokens_count: usize,
-    max_active_reveal: usize,
-    use_approximation: bool,
-) -> u8 {
-    if !use_approximation || reveal_count == 0 {
-        return reveal_count;
-    }
-
-    // Rule #1: MASS REVEAL DISABLE - If too many reveal tokens, disable ALL reveal
-    // At 25+ reveal tokens, reveal becomes noise, not information
-    if reveal_tokens_count >= MASS_REVEAL_DISABLE_THRESHOLD {
-        return 0; // Completely disable reveal - treat as regular tokens
-    }
-
-    // ULTRA-AGGRESSIVE: For very many reveal tokens (>5), always cap at 1
-    // Same as get_chaos_bag_modifiers.rs
-    if reveal_tokens_count > 5 {
-        return 1;
-    }
-
-    // CRITICAL: If too many reveal tokens, aggressively limit to prevent explosion
-    if reveal_tokens_count > max_active_reveal {
-        return 1;
-    }
-
-    // Strategy 3: Truncate large reveal_count for large bags
-    if remaining_tokens > LARGE_BAG_FOR_REVEAL_TRUNCATION && reveal_count > 1 {
-        return 1;
-    }
-
-    // Adaptive approximation based on both bag size and number of reveal tokens
-    if reveal_tokens_count > MANY_REVEAL_TOKENS_THRESHOLD || remaining_tokens > LARGE_BAG_THRESHOLD
-    {
-        1
-    } else if reveal_tokens_count > MEDIUM_REVEAL_TOKENS_THRESHOLD
-        || remaining_tokens > MEDIUM_BAG_THRESHOLD
-    {
-        reveal_count.min(2)
-    } else {
-        reveal_count
-    }
 }
 
 /// Optimized DFS state - packed counts in u128, minimal copying
@@ -221,8 +125,6 @@ fn process_small_groups(
     group_len: usize,
     stack: &mut FixedStack,
     auto_fail_prob: &mut f64,
-    use_approximation: bool,
-    reveal_tokens_count: usize,
 ) {
     let remaining_total_f64 = state.remaining_total as f64;
     let remaining_total_reciprocal = 1.0 / remaining_total_f64;
@@ -246,46 +148,17 @@ fn process_small_groups(
             }
             (false, true) => {
                 // Frost → check revealed frost
-                // Apply approximation rules for reveal_count
-                let effective_reveal = if use_approximation
-                    && (group.is_curse || group.is_bless)
-                    && reveal_tokens_count >= BLESS_CURSE_REVEAL_DISABLE_THRESHOLD
-                {
-                    // Rule #3: Disable reveal for bless/curse when too many reveal tokens
-                    0
-                } else {
-                    effective_reveal_count(
-                        group.reveal_count,
-                        state.remaining_total as usize,
-                        reveal_tokens_count,
-                        MAX_FULLY_PROCESSED_REVEAL,
-                        use_approximation,
-                    )
-                };
-
                 let new_revealed_frost =
-                    state.revealed_frost_count.saturating_add(effective_reveal);
+                    state.revealed_frost_count.saturating_add(group.reveal_count);
                 if new_revealed_frost >= 2 {
                     *auto_fail_prob += p;
                     continue;
                 }
 
-                // Rule #2: Hard ceiling on pending - if exceeds MAX_PENDING_REVEAL, finalize immediately
-                // ULTRA-AGGRESSIVE: Also cap at MAX_PENDING_REVEAL (don't allow > 1)
-                let mut next_pending_reveal =
-                    state.pending_reveal.saturating_sub(1) + effective_reveal;
-                if use_approximation {
-                    // Hard cap: never allow pending > MAX_PENDING_REVEAL
-                    next_pending_reveal = next_pending_reveal.min(MAX_PENDING_REVEAL);
-                    // If it would exceed, treat as auto-fail
-                    if next_pending_reveal > MAX_PENDING_REVEAL {
-                        *auto_fail_prob += p;
-                        continue;
-                    }
-                }
-
                 // Prepare next state
                 let next_packed = dec_count_inline(state.packed_counts, group_idx);
+                let next_pending_reveal =
+                    state.pending_reveal.saturating_sub(1) + group.reveal_count;
                 let next_mask = if get_count_inline(next_packed, group_idx) == 0 {
                     state.available_mask & !(1u32 << group_idx)
                 } else {
@@ -304,38 +177,9 @@ fn process_small_groups(
             }
             (false, false) => {
                 // Regular token
-                // Apply approximation rules for reveal_count
-                let effective_reveal = if use_approximation
-                    && (group.is_curse || group.is_bless)
-                    && reveal_tokens_count >= BLESS_CURSE_REVEAL_DISABLE_THRESHOLD
-                {
-                    // Rule #3: Disable reveal for bless/curse when too many reveal tokens
-                    0
-                } else {
-                    effective_reveal_count(
-                        group.reveal_count,
-                        state.remaining_total as usize,
-                        reveal_tokens_count,
-                        MAX_FULLY_PROCESSED_REVEAL,
-                        use_approximation,
-                    )
-                };
-
-                // Rule #2: Hard ceiling on pending - if exceeds MAX_PENDING_REVEAL, finalize immediately
-                // ULTRA-AGGRESSIVE: Also cap at MAX_PENDING_REVEAL (don't allow > 1)
-                let mut next_pending_reveal =
-                    state.pending_reveal.saturating_sub(1) + effective_reveal;
-                if use_approximation {
-                    // Hard cap: never allow pending > MAX_PENDING_REVEAL
-                    next_pending_reveal = next_pending_reveal.min(MAX_PENDING_REVEAL);
-                    // If it would exceed, treat as auto-fail
-                    if next_pending_reveal > MAX_PENDING_REVEAL {
-                        *auto_fail_prob += p;
-                        continue;
-                    }
-                }
-
                 let next_packed = dec_count_inline(state.packed_counts, group_idx);
+                let next_pending_reveal =
+                    state.pending_reveal.saturating_sub(1) + group.reveal_count;
                 let next_mask = if get_count_inline(next_packed, group_idx) == 0 {
                     state.available_mask & !(1u32 << group_idx)
                 } else {
@@ -364,8 +208,6 @@ fn process_large_groups(
     group_len: usize,
     stack: &mut FixedStack,
     auto_fail_prob: &mut f64,
-    use_approximation: bool,
-    reveal_tokens_count: usize,
 ) {
     if state.remaining_total == 0 {
         return;
@@ -460,11 +302,9 @@ fn process_large_groups(
 /// # Arguments
 /// * `tokens` - List of tokens in the chaos bag
 /// * `revealed_frost_count` - Number of revealed frost tokens
-/// * `use_approximation` - If true, apply approximation rules to reduce combinatorial explosion
 pub fn get_auto_fail_odds(
     tokens: &[ChaosOddsToken],
     revealed_frost_count: usize,
-    use_approximation: bool,
 ) -> u8 {
     if tokens.is_empty() {
         return 0;
@@ -486,15 +326,11 @@ pub fn get_auto_fail_odds(
             }
             let idx = groups.len();
             let is_frost = token_type == "frost";
-            let is_curse = token_type == "curse";
-            let is_bless = token_type == "bless";
             groups.push(TokenGroup {
                 count: 0,
                 is_fail: token.is_fail,
                 is_frost,
                 reveal_count: token.reveal_count.min(255) as u8,
-                is_curse,
-                is_bless,
             });
             seen_types.push((token_type, idx));
             idx
@@ -520,44 +356,13 @@ pub fn get_auto_fail_odds(
     let initial_packed = pack_counts_inline(&initial_counts, group_len);
     let initial_mask = build_mask_inline(initial_packed, group_len);
 
-    // Count reveal tokens for adaptive approximation
-    let reveal_tokens_count = groups.iter().filter(|g| g.reveal_count > 0).count();
-
-    // ============================================================================
-    // FIX #1: Early exit if mass reveal is disabled - DON'T RUN DFS AT ALL
-    // ============================================================================
-    // If reveal tokens are too many, reveal becomes noise - just return simple auto-fail prob
-    if use_approximation && reveal_tokens_count >= MASS_REVEAL_DISABLE_THRESHOLD {
-        // reveal = шум → просто считаем вероятность auto-fail без DFS
-        // Auto-fail happens if we draw a fail token
-        let fail_count: usize = groups
-            .iter()
-            .filter(|g| g.is_fail)
-            .map(|g| g.count as usize)
-            .sum();
-        let total_count: usize = groups.iter().map(|g| g.count as usize).sum();
-        if total_count == 0 {
-            return 0;
-        }
-        let auto_fail_prob = fail_count as f64 / total_count as f64;
-        return (auto_fail_prob * 100.0).round().min(100.0) as u8;
-    }
-
     // Fixed-size stack - completely stack-allocated
     let mut stack = FixedStack::new();
-
-    // FIX #2: If mass reveal is disabled, set pending_reveal = 0 to prevent DFS
-    let initial_pending =
-        if use_approximation && reveal_tokens_count >= MASS_REVEAL_DISABLE_THRESHOLD {
-            0
-        } else {
-            1 // Start with revealing one token
-        };
 
     stack.push(DFSState {
         packed_counts: initial_packed,
         revealed_frost_count: revealed_frost_count.min(255) as u8,
-        pending_reveal: initial_pending,
+        pending_reveal: 1, // Start with revealing one token
         probability: 1.0,
         available_mask: initial_mask,
         remaining_total: total_tokens,
@@ -578,8 +383,6 @@ pub fn get_auto_fail_odds(
                     group_len,
                     &mut stack,
                     &mut auto_fail_prob,
-                    use_approximation,
-                    reveal_tokens_count,
                 );
             } else {
                 process_large_groups(
@@ -588,8 +391,6 @@ pub fn get_auto_fail_odds(
                     group_len,
                     &mut stack,
                     &mut auto_fail_prob,
-                    use_approximation,
-                    reveal_tokens_count,
                 );
             }
         }

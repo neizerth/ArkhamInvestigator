@@ -24,3 +24,4 @@ xcrun simctl spawn "$SIMULATOR_UDID" log stream \
     --level debug \
     --style compact
 
+

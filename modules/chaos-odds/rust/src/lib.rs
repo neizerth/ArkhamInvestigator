@@ -13,7 +13,7 @@ pub use util::parse::{parse_tokens, parse_tokens_json, serialize_matrix};
 // Re-export public functions
 pub use chaos_odds_calculate::chaos_odds_calculate;
 pub use chaos_odds_find_tokens::chaos_odds_find_tokens;
-pub use odds::calculate_odds;
+pub use odds::{calculate_odds, calculate_odds_item};
 pub use token_odds::get_token_odds;
 pub use util::cancel::chaos_odds_cancel;
 

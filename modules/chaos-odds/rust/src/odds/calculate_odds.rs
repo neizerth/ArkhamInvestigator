@@ -11,7 +11,6 @@ use crate::util::chaos_bag::is_auto_fail;
 pub fn calculate_odds(
     available: &[ChaosOddsToken],
     revealed: &[ChaosOddsToken],
-    use_approximation: bool,
 ) -> Option<Vec<Vec<u16>>> {
     if is_auto_fail(&revealed) {
         return Some(vec![vec![0; 100]; 100]);
@@ -27,9 +26,9 @@ pub fn calculate_odds(
         return None;
     }
 
-    let modifiers = get_chaos_bag_modifiers(&available, revealed_frost_count, use_approximation);
+    let modifiers = get_chaos_bag_modifiers(&available, revealed_frost_count);
     let revealed_modifier: i16 = revealed.iter().map(|token| token.value as i16).sum();
-    let auto_fail_odds = get_auto_fail_odds(&available, revealed_frost_count, use_approximation);
+    let auto_fail_odds = get_auto_fail_odds(&available, revealed_frost_count);
 
     let zero_difficulty_odds = 100u16.saturating_sub(auto_fail_odds as u16);
 

@@ -65,7 +65,7 @@ pub extern "C" fn chaos_odds_calculate(
 
     let calc_start = Instant::now();
     eprintln!("⏱️ [Rust] Starting calculate_odds()");
-    let result = match calculate_odds(&available, &revealed, true) {
+    let result = match calculate_odds(&available, &revealed) {
         Some(odds_matrix) => {
             let calc_duration = calc_start.elapsed();
             eprintln!(
