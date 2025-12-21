@@ -20,7 +20,7 @@ fn regular_tokens_probabilities() {
     // Bag: [+1, -1]
     let tokens = vec![token("1", 1), token("-1", -1)];
 
-    let mut result = get_chaos_bag_modifiers(&tokens, 0);
+    let mut result = get_chaos_bag_modifiers(&tokens, 0, false);
     result.sort_by_key(|item| item.modifier);
 
     assert_eq!(result.len(), 2);
@@ -38,7 +38,7 @@ fn regular_tokens_probabilities() {
 fn three_regular_tokens_equal_probabilities() {
     let tokens = vec![token("-2", -2), token("-4", -4), token("-6", -6)];
 
-    let mut result = get_chaos_bag_modifiers(&tokens, 0);
+    let mut result = get_chaos_bag_modifiers(&tokens, 0, false);
     result.sort_by_key(|item| item.modifier);
 
     assert_eq!(result.len(), 3);
@@ -56,7 +56,7 @@ fn modifier_zero_with_reveal_token() {
         token("0", 0),
     ];
 
-    let result = get_chaos_bag_modifiers(&tokens, 0);
+    let result = get_chaos_bag_modifiers(&tokens, 0, false);
     let total_zero_prob: f64 = result
         .iter()
         .filter(|entry| entry.modifier == 0)
@@ -76,7 +76,7 @@ fn minus_two_probability_with_reveal_token_present() {
         token("-2", -2),
     ];
 
-    let result = get_chaos_bag_modifiers(&tokens, 0);
+    let result = get_chaos_bag_modifiers(&tokens, 0, false);
     let total_minus_two: f64 = result
         .iter()
         .filter(|entry| entry.modifier == -2)
@@ -97,7 +97,7 @@ fn minus_four_probability_two_curse_reveals() {
         token_with_reveal("bless", 2, 1),
     ];
 
-    let result = get_chaos_bag_modifiers(&tokens, 0);
+    let result = get_chaos_bag_modifiers(&tokens, 0, false);
     let total_minus_four: f64 = result
         .iter()
         .filter(|entry| entry.modifier == -4)
@@ -123,7 +123,7 @@ fn unique_modifiers_with_tablet_and_reveals() {
         token("-6", -6),
     ];
 
-    let result = get_chaos_bag_modifiers(&tokens, 0);
+    let result = get_chaos_bag_modifiers(&tokens, 0, false);
     let mut mods: Vec<i16> = result.iter().map(|e| e.modifier).collect();
     mods.sort_unstable();
     mods.dedup();
@@ -145,7 +145,7 @@ fn entry_count_under_5000() {
         tokens.push(token("-4", -4));
     }
 
-    let result = get_chaos_bag_modifiers(&tokens, 0);
+    let result = get_chaos_bag_modifiers(&tokens, 0, false);
     assert!(result.len() < 5000);
 }
 
@@ -179,7 +179,7 @@ fn entry_count_under_50000_large_bag() {
         }
     }
 
-    let result = get_chaos_bag_modifiers(&tokens, 0);
+    let result = get_chaos_bag_modifiers(&tokens, 0, false);
     println!("entry count: {}", result.len());
     assert!(
         result.len() < 50_000,
@@ -231,7 +231,7 @@ fn four_tablet_reveal_count_ten_seconds_performance() {
     let (tx, rx) = std::sync::mpsc::channel();
     std::thread::spawn(move || {
         let start = Instant::now();
-        let result = get_chaos_bag_modifiers(&tokens, 0);
+        let result = get_chaos_bag_modifiers(&tokens, 0, false);
         let duration = start.elapsed();
         let _ = tx.send((result, duration));
     });
@@ -295,7 +295,7 @@ fn performance_test_curse_bless_tablet_elder_thing() {
     }
 
     let start = Instant::now();
-    let result = get_chaos_bag_modifiers(&tokens, 0);
+    let result = get_chaos_bag_modifiers(&tokens, 0, false);
     let duration = start.elapsed();
 
     let duration_ms = duration.as_millis();

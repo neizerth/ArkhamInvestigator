@@ -27,7 +27,7 @@ fn auto_fail_token() -> ChaosOddsToken {
 #[test]
 fn empty_bag_returns_zero() {
     let tokens: Vec<ChaosOddsToken> = Vec::new();
-    let result = get_auto_fail_odds(&tokens, 0);
+    let result = get_auto_fail_odds(&tokens, 0, false);
     assert_eq!(result, 0, "empty bag should return 0%");
 }
 
@@ -36,7 +36,7 @@ fn zero_and_autofail_returns_fifty() {
     // Bag: 0, autoFail
     // Expected auto-fail probability: 50%
     let tokens = vec![token("0", 0), auto_fail_token()];
-    let result = get_auto_fail_odds(&tokens, 0);
+    let result = get_auto_fail_odds(&tokens, 0, false);
     assert_eq!(
         result, 50,
         "expected 50% auto-fail probability for bag [0, autoFail], got {}%",
@@ -54,7 +54,7 @@ fn three_regular_and_one_autofail() {
         token("0", 0),
         auto_fail_token(),
     ];
-    let result = get_auto_fail_odds(&tokens, 0);
+    let result = get_auto_fail_odds(&tokens, 0, false);
     assert_eq!(
         result, 25,
         "expected 25% auto-fail probability for bag [regular x3, autofail x1], got {}%",
@@ -67,7 +67,7 @@ fn only_regular_tokens_returns_zero() {
     // Bag: regular x3
     // Expected auto-fail probability: 0%
     let tokens = vec![token("0", 0), token("0", 0), token("0", 0)];
-    let result = get_auto_fail_odds(&tokens, 0);
+    let result = get_auto_fail_odds(&tokens, 0, false);
     assert_eq!(
         result, 0,
         "expected 0% auto-fail probability for bag [regular x3], got {}%",
@@ -80,7 +80,7 @@ fn only_autofail_returns_hundred() {
     // Bag: autofail x1
     // Expected auto-fail probability: 100%
     let tokens = vec![auto_fail_token()];
-    let result = get_auto_fail_odds(&tokens, 0);
+    let result = get_auto_fail_odds(&tokens, 0, false);
     assert_eq!(
         result, 100,
         "expected 100% auto-fail probability for bag [autofail x1], got {}%",
@@ -100,7 +100,7 @@ fn frost_single_no_autofail() {
         token("0", 0),
         token_with_reveal("frost", 0, 1),
     ];
-    let result = get_auto_fail_odds(&tokens, 0);
+    let result = get_auto_fail_odds(&tokens, 0, false);
     assert_eq!(
         result, 0,
         "expected 0% auto-fail probability for bag [regular x5, frost x1], got {}%",
@@ -121,7 +121,7 @@ fn frost_two_causes_autofail() {
         token_with_reveal("frost", 0, 1),
         token_with_reveal("frost", 0, 1),
     ];
-    let result = get_auto_fail_odds(&tokens, 0);
+    let result = get_auto_fail_odds(&tokens, 0, false);
     // Probability of frost -> frost chain: (2/6) * (1/5) = 2/30 = 1/15 ≈ 6.67%
     // But we need to account for both orders: frost1 -> frost2 and frost2 -> frost1
     // Actually, it's simpler: probability of drawing frost first is 2/6, then drawing another frost is 1/5
@@ -144,7 +144,7 @@ fn frost_with_revealed_frost_one() {
         token("0", 0),
         token_with_reveal("frost", 0, 1),
     ];
-    let result = get_auto_fail_odds(&tokens, 1); // revealed_frost_count = 1
+    let result = get_auto_fail_odds(&tokens, 1, false); // revealed_frost_count = 1
                                                  // If we draw frost, revealed_frost_count becomes 1 + 1 = 2, causing auto-fail
                                                  // Probability: 1/5 = 20%
     assert_eq!(
@@ -165,7 +165,7 @@ fn frost_with_revealed_frost_two() {
         token("0", 0),
         token_with_reveal("frost", 0, 1),
     ];
-    let result = get_auto_fail_odds(&tokens, 2); // revealed_frost_count = 2
+    let result = get_auto_fail_odds(&tokens, 2, false); // revealed_frost_count = 2
                                                  // If we draw frost, revealed_frost_count becomes 2 + 1 = 3, causing auto-fail
                                                  // Probability: 1/5 = 20%
     assert_eq!(
@@ -189,7 +189,7 @@ fn autofail_and_bless_chain() {
         auto_fail_token(),
         token_with_reveal("bless", 2, 1),
     ];
-    let result = get_auto_fail_odds(&tokens, 0);
+    let result = get_auto_fail_odds(&tokens, 0, false);
     // Direct autofail: 1/5 = 20%
     // Bless -> autofail: (1/5) * (1/4) = 5%
     // Total: 25%
@@ -210,7 +210,7 @@ fn frost_reveal_count_two() {
         token("0", 0),
         token_with_reveal("frost", 0, 2),
     ];
-    let result = get_auto_fail_odds(&tokens, 0);
+    let result = get_auto_fail_odds(&tokens, 0, false);
     // Probability: 1/4 = 25%
     assert_eq!(
         result, 25,
@@ -231,7 +231,7 @@ fn complex_mixed_tokens() {
         token_with_reveal("frost", 0, 1),
         token_with_reveal("bless", 2, 1),
     ];
-    let result = get_auto_fail_odds(&tokens, 0);
+    let result = get_auto_fail_odds(&tokens, 0, false);
     // Should be > 0 and reasonable
     assert!(
         result > 0 && result <= 100,
@@ -249,7 +249,7 @@ fn bless_chain_multiple() {
         token_with_reveal("bless", 0, 1),
         token_with_reveal("bless", 0, 1),
     ];
-    let result = get_auto_fail_odds(&tokens, 0);
+    let result = get_auto_fail_odds(&tokens, 0, false);
     assert_eq!(
         result, 0,
         "expected 0% auto-fail for multiple bless tokens without fails"
@@ -265,7 +265,7 @@ fn curse_token_direct_autofail() {
         token("0", 0),
         auto_fail_token(), // curse
     ];
-    let result = get_auto_fail_odds(&tokens, 0);
+    let result = get_auto_fail_odds(&tokens, 0, false);
     assert_eq!(
         result, 25,
         "expected 25% auto-fail probability due to curse/autofail"
@@ -282,7 +282,7 @@ fn frost_and_bless_chain() {
         token_with_reveal("frost", 0, 1),
         token_with_reveal("bless", 0, 1),
     ];
-    let result = get_auto_fail_odds(&tokens, 0);
+    let result = get_auto_fail_odds(&tokens, 0, false);
     // Probability should be small but > 0
     assert!(
         result == 0,
@@ -303,7 +303,7 @@ fn multiple_frosts_and_blesses() {
         token("0", 0),
         token("0", 0),
     ];
-    let result = get_auto_fail_odds(&tokens, 0);
+    let result = get_auto_fail_odds(&tokens, 0, false);
     // Should be > 0 but < 100
     assert!(
         result > 0 && result < 100,
@@ -317,7 +317,7 @@ fn revealed_frost_high() {
     // Bag: frost x1 (reveal_count=1), revealed_frost_count=3
     // Any frost draw triggers auto-fail
     let tokens = vec![token_with_reveal("frost", 0, 1)];
-    let result = get_auto_fail_odds(&tokens, 3);
+    let result = get_auto_fail_odds(&tokens, 3, false);
     assert_eq!(
         result, 100,
         "expected 100% auto-fail when revealed_frost_count >= 2 and frost present"
@@ -334,7 +334,7 @@ fn bless_reveal_autofail_chain() {
         token_with_reveal("bless", 0, 1),
         auto_fail_token(),
     ];
-    let result = get_auto_fail_odds(&tokens, 0);
+    let result = get_auto_fail_odds(&tokens, 0, false);
     // Auto-fail probability should account for both direct and via bless
     assert!(
         result > 0 && result <= 100,

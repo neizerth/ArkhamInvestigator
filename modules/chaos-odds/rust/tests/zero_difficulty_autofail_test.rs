@@ -44,7 +44,7 @@ fn bag1_simple_autofail() {
     let revealed: Vec<ChaosOddsToken> = Vec::new();
 
     let result =
-        calculate_odds(&available, &revealed).expect("Calculation should not be cancelled");
+        calculate_odds(&available, &revealed, false).expect("Calculation should not be cancelled");
 
     let autofail_prob = get_autofail_probability(&result, 0);
     let expected = 25; // 1/4 = 25%
@@ -73,7 +73,7 @@ fn bag2_with_frost_one() {
     let revealed: Vec<ChaosOddsToken> = Vec::new();
 
     let result =
-        calculate_odds(&available, &revealed).expect("Calculation should not be cancelled");
+        calculate_odds(&available, &revealed, false).expect("Calculation should not be cancelled");
 
     let autofail_prob = get_autofail_probability(&result, 0);
     // With only 1 frost, no auto-fail is possible (need 2+ frost in chain)
@@ -104,7 +104,7 @@ fn bag3_with_frost_two() {
     let revealed: Vec<ChaosOddsToken> = Vec::new();
 
     let result =
-        calculate_odds(&available, &revealed).expect("Calculation should not be cancelled");
+        calculate_odds(&available, &revealed, false).expect("Calculation should not be cancelled");
 
     let autofail_prob = get_autofail_probability(&result, 0);
     // Note: Current implementation may not correctly handle frost -> frost chains
@@ -136,7 +136,7 @@ fn bag4_bless_and_autofail() {
     let revealed: Vec<ChaosOddsToken> = Vec::new();
 
     let result =
-        calculate_odds(&available, &revealed).expect("Calculation should not be cancelled");
+        calculate_odds(&available, &revealed, false).expect("Calculation should not be cancelled");
 
     let autofail_prob = get_autofail_probability(&result, 0);
     // Allow some tolerance for the actual calculated value
@@ -166,7 +166,7 @@ fn bag5_frost_autofail_bless() {
     let revealed: Vec<ChaosOddsToken> = Vec::new();
 
     let result =
-        calculate_odds(&available, &revealed).expect("Calculation should not be cancelled");
+        calculate_odds(&available, &revealed, false).expect("Calculation should not be cancelled");
 
     let autofail_prob = get_autofail_probability(&result, 0);
     // With complex chain, probability should be > 0 and reasonable

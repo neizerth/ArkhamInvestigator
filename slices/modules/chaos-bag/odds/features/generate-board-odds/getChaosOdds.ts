@@ -19,24 +19,35 @@ const mapTokenToOddsToken = (token: ChaosBagOddsToken) => ({
 // Track calculation ID to ignore results from superseded calculations
 let calculationId = 0;
 let activeCalls = 0;
+const activeCallIds = new Set<number>();
 
 export const getChaosOdds = async (
 	options: GetChaosOddsOptions,
 ): Promise<number[][] | null> => {
 	const js_start = performance.now();
 	const callId = ++calculationId;
-	const activeBefore = activeCalls++;
+	const activeBefore = activeCalls;
 
-	// Cancel previous calculations if there are any active
+	// Cancel ALL previous calculations if there are any active
 	if (activeBefore > 0) {
 		console.log(
 			`⏱️ [JS] Call #${callId}: Cancelling ${activeBefore} previous calculation(s)`,
 		);
+		// Mark all previous calls as superseded by removing them from activeCallIds
+		// This ensures they will be detected as superseded when they complete
+		activeCallIds.clear();
+		activeCalls = 0; // Reset counter since we're cancelling all
 		ChaosOdds.cancel();
+		// Wait a bit for cancellation to propagate
+		await new Promise((resolve) => setTimeout(resolve, 10));
 	}
 
+	// Increment active calls and track this call ID
+	activeCalls++;
+	activeCallIds.add(callId);
+
 	console.log(
-		`⏱️ [JS] getChaosOdds() called #${callId} (active: ${activeBefore + 1})`,
+		`⏱️ [JS] getChaosOdds() called #${callId} (active: ${activeCalls})`,
 	);
 
 	const { available, revealed } = options;
@@ -51,8 +62,7 @@ export const getChaosOdds = async (
 	const map_duration = performance.now() - map_start;
 	console.log(`⏱️ [JS] mapTokenToOddsToken took ${map_duration.toFixed(2)} ms`);
 
-	// Use the callId that was set at function entry
-	const currentCalculationId = callId;
+	// No need for currentCalculationId - we use activeCallIds Set instead
 
 	try {
 		const await_start = performance.now();
@@ -65,10 +75,10 @@ export const getChaosOdds = async (
 
 		// Check if this calculation was superseded by a newer one BEFORE logging
 		// This prevents logging results from cancelled/superseded calls
-		if (currentCalculationId !== calculationId) {
-			const activeAfter = --activeCalls;
+		if (!activeCallIds.has(callId)) {
+			// This call was cancelled/superseded
 			console.log(
-				`⏱️ [JS] Call #${callId}: superseded after ${await_duration.toFixed(2)} ms (active: ${activeAfter})`,
+				`⏱️ [JS] Call #${callId}: superseded after ${await_duration.toFixed(2)} ms (active: ${activeCalls})`,
 			);
 			return null;
 		}
@@ -79,27 +89,32 @@ export const getChaosOdds = async (
 		);
 
 		const js_total = performance.now() - js_start;
-		const activeAfter = --activeCalls;
 		console.log(
-			`⏱️ [JS] Call #${callId}: getChaosOdds() total time: ${js_total.toFixed(2)} ms (active: ${activeAfter})`,
+			`⏱️ [JS] Call #${callId}: getChaosOdds() total time: ${js_total.toFixed(2)} ms (active: ${activeCalls})`,
 		);
 		return odds ?? null;
 	} catch (error) {
 		// Check if this calculation was superseded by a newer one
-		if (currentCalculationId !== calculationId) {
-			const activeAfter = --activeCalls;
+		if (!activeCallIds.has(callId)) {
+			// This call was cancelled/superseded
 			console.log(
-				`⏱️ [JS] Call #${callId}: superseded, returning null (active: ${activeAfter})`,
+				`⏱️ [JS] Call #${callId}: superseded, returning null (active: ${activeCalls})`,
 			);
 			return null;
 		}
 
 		const js_total = performance.now() - js_start;
-		const activeAfter = --activeCalls;
 		console.error(
-			`⏱️ [JS] Call #${callId}: getChaosOdds() error after ${js_total.toFixed(2)} ms (active: ${activeAfter}):`,
+			`⏱️ [JS] Call #${callId}: getChaosOdds() error after ${js_total.toFixed(2)} ms (active: ${activeCalls}):`,
 			error,
 		);
 		return null;
+	} finally {
+		// Ensure cleanup happens exactly once, even if something goes wrong
+		// This is the ONLY place where we decrement activeCalls and remove from activeCallIds
+		if (activeCallIds.has(callId)) {
+			activeCalls = Math.max(0, activeCalls - 1); // Prevent negative values
+			activeCallIds.delete(callId);
+		}
 	}
 };

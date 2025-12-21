@@ -45,6 +45,7 @@
 		"setup": "npm run setup:font",
 		"version:increment": "tsx ./cli/increment-version.ts",
 		"gradle:clean": "cd android && ./gradlew clean",
+		"gradle:clean-cache": "rm -rf android/app/build android/.gradle",
 		"expo:clear": "expo start -c",
 		"pod:install": "cd ios && pod install"
 	},
