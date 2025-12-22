@@ -97,6 +97,13 @@ public:
                         
                         NSLog(@"[ChaosOdds] invokeAsync: Calling capturedFunc(*rt) NOW...");
                         // Use testRt instead of rt to ensure we're using the validated pointer
+                        // Final runtime validation immediately before call to prevent race condition
+                        try {
+                            testRt->global();
+                        } catch (...) {
+                            NSLog(@"[ChaosOdds ERROR] invokeAsync: Runtime became invalid between validation and call - aborting");
+                            return;
+                        }
                         capturedFunc(*testRt);
                         NSLog(@"[ChaosOdds] invokeAsync: capturedFunc(*rt) completed successfully");
                     } catch (const std::exception& e) {

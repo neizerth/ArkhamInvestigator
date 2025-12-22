@@ -283,6 +283,16 @@ Value calculate(
                                             return;
                                         }
                                         
+                                        // Final runtime validation immediately before call
+                                        // Use a simple operation that will fail if runtime is destroyed
+                                        try {
+                                            runtime.global();
+                                        } catch (...) {
+                                            LOG_MAIN_ERROR("Runtime validation failed immediately before resolveFunc->call() - aborting");
+                                            fflush(stderr);
+                                            return;
+                                        }
+                                        
                                         resolveFunc->call(runtime, result_obj);
                                         LOG_MAIN("resolveFunc->call() returned successfully");
                                         fflush(stderr); // Force flush after call
