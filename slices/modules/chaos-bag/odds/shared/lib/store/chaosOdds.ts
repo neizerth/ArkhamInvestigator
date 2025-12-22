@@ -10,6 +10,7 @@ export type ChaosOddsState = {
 	showChaosBagOdds: boolean;
 	showSkillOdds: boolean;
 	minSkillOddsValue: number;
+	completedChaosOddsPerformanceTests: Record<string, number> | null;
 };
 
 const initialState: ChaosOddsState = {
@@ -19,6 +20,7 @@ const initialState: ChaosOddsState = {
 	showChaosBagOdds: false,
 	showSkillOdds: false,
 	minSkillOddsValue: 0,
+	completedChaosOddsPerformanceTests: null,
 };
 
 const state = createSliceState(initialState);
@@ -34,6 +36,7 @@ export const {
 	setBoardOddsLoading,
 	setShowChaosBagOdds,
 	setShowSkillOdds,
+	setCompletedChaosOddsPerformanceTests,
 } = chaosOdds.actions;
 
 export const {
@@ -42,6 +45,7 @@ export const {
 	selectBoardOddsLoading,
 	selectShowChaosBagOdds,
 	selectShowSkillOdds,
+	selectCompletedChaosOddsPerformanceTests,
 } = chaosOdds.selectors;
 
 export default chaosOdds.reducer;

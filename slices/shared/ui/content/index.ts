@@ -6,3 +6,4 @@ export * from "./arkham-db-text";
 export * from "./Dot";
 export * from "./Logo";
 export * from "./decorative";
+export * from "./Table";

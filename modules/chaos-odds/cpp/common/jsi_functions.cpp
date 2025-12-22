@@ -398,7 +398,6 @@ Value findTokens(
                  jsInvoker,
                  resolve,
                  reject]() {
-
                     try {
                         const char* result_ptr =
                             chaos_odds_find_tokens(

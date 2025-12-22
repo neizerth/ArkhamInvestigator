@@ -9,8 +9,9 @@ cd "$SCRIPT_DIR/../rust"
 # because Cargo doesn't create static libraries in debug mode for cross-compilation targets
 echo "Building for iOS (dev mode - using release builds for static library)"
 
-cargo build --target aarch64-apple-ios --release
-cargo build --target aarch64-apple-ios-sim --release
+# Use link-dead-code to prevent linker from removing unused symbols
+RUSTFLAGS="-C link-dead-code" cargo build --target aarch64-apple-ios --release
+RUSTFLAGS="-C link-dead-code" cargo build --target aarch64-apple-ios-sim --release
 
 # Remove old xcframework if it exists
 echo "Cleaning old XCFramework"

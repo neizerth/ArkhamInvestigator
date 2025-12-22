@@ -1,20 +1,12 @@
 import { ChaosOdds } from "@expo-modules/chaos-odds";
 import { isEmpty } from "ramda";
-import { isNumber } from "ramda-adjunct";
 import type { ChaosBagOddsToken } from "../../entities/model";
+import { mapTokenToChaosOddsTokenInput } from "../../shared/lib";
 
 export type GetChaosOddsOptions = {
 	available: ChaosBagOddsToken[];
 	revealed: ChaosBagOddsToken[];
 };
-
-const mapTokenToOddsToken = (token: ChaosBagOddsToken) => ({
-	token_type: token.type,
-	value: isNumber(token.value) ? token.value : 0,
-	is_fail: token.value === "fail",
-	is_success: token.value === "success",
-	reveal_count: token.revealCount,
-});
 
 // Track calculation ID to ignore results from superseded calculations
 let calculationId = 0;
@@ -57,8 +49,8 @@ export const getChaosOdds = async (
 	}
 
 	const map_start = performance.now();
-	const availableTokens = available.map(mapTokenToOddsToken);
-	const revealedTokens = revealed.map(mapTokenToOddsToken);
+	const availableTokens = available.map(mapTokenToChaosOddsTokenInput);
+	const revealedTokens = revealed.map(mapTokenToChaosOddsTokenInput);
 	const map_duration = performance.now() - map_start;
 	console.log(`⏱️ [JS] mapTokenToOddsToken took ${map_duration.toFixed(2)} ms`);
 

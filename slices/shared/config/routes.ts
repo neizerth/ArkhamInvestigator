@@ -25,6 +25,8 @@ export const routes = {
 	chaosBagReferenceEdit: r("/(modal)/chaos-bag/reference/edit"),
 	chaosBagReferenceView: r("/(modal)/chaos-bag/reference"),
 
+	chaosOddsPerformance: r("/diagnostics/chaos-odds"),
+
 	about: r("/static/about"),
 	support: r("/static/support"),
 };

@@ -79,6 +79,10 @@ modules/**/android/app/src/main/jniLibs/
 modules/**/android/src/main/jniLibs/
 modules/**/rust/target/
 
+# Object files (Rust/C++ compilation artifacts)
+modules/**/*.o
+/*.o
+
 # Rust workspace build outputs (root)
 /target/
 /Cargo.lock

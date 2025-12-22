@@ -1,6 +1,6 @@
 // Model types for chaos odds module
 
-export interface ChaosOddsInput {
+export interface ChaosOddsTokenInput {
 	token_type: string;
 	value: number;
 	is_fail: boolean;
@@ -8,14 +8,8 @@ export interface ChaosOddsInput {
 	reveal_count: number;
 }
 
-export interface TokenTarget {
+export interface ChaosOddsFindTokenTarget {
 	token_type: string;
 	min_count: number;
 	max_count?: number;
-}
-
-export interface FindTokensParams {
-	reveal_count: number;
-	revealed_frost_count: number;
-	use_token_reveal?: boolean;
 }

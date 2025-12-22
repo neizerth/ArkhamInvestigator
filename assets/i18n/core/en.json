@@ -338,6 +338,11 @@
 	"chaosBag.enabled": "Enabled",
 	"chaosOdds.enabled": "Enabled",
 	"chaosOdds.skillOdds": "Skill odds",
+	"chaosOdds.performance.title": "Chaos odds: performance",
+	"chaosOdds.performance.pageTitle": "Chaos odds: performance",
+	"chaosOdds.performance.description": "Goal: completing each test in less than 4 seconds. Evaluation: < 1 sec - excellent, < 2 sec - good, < 4 sec - satisfactory, > 10 sec - bad. Automatic running is disabled if at least one test took more than 10 seconds",
+	"chaosOdds.performance.autoRun": "Auto run",
+	"chaosOdds.performance.clearTests": "Clear tests",
 
 	"Defeated": "Defeated",
 	"Change": "Change",

@@ -7,7 +7,10 @@ import {
 	isModuleReloaded,
 } from "./hmrProtection";
 
-export type { ChaosOddsInput, TokenTarget, FindTokensParams } from "../model";
+export type {
+	ChaosOddsTokenInput as ChaosOddsInput,
+	ChaosOddsFindTokenTarget as TokenTarget,
+} from "../model";
 
 /**
  * Result object returned by calculate() function

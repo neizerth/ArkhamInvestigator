@@ -68,10 +68,36 @@ public:
                 
                 NSLog(@"[ChaosOdds] invokeAsync: About to call capturedFunc(*rt)...");
                 // Wrap in try-catch to handle Runtime destruction
+                // Use @try/@catch for Objective-C exceptions and nested try/catch for C++ exceptions
                 @try {
                     try {
+                        // Double-check runtime is still valid right before calling
+                        if (!capturedBridge || !capturedBridge.runtime) {
+                            NSLog(@"[ChaosOdds ERROR] invokeAsync: bridge or runtime became null before call");
+                            return;
+                        }
+                        
+                        // Get runtime pointer and validate it's accessible
+                        jsi::Runtime* testRt = (jsi::Runtime*)capturedBridge.runtime;
+                        if (!testRt) {
+                            NSLog(@"[ChaosOdds ERROR] invokeAsync: testRt is null");
+                            return;
+                        }
+                        
+                        // Try to validate runtime is actually accessible
+                        // Accessing global() will throw if runtime is invalid/destroyed
+                        try {
+                            auto testGlobal = testRt->global();
+                            (void)testGlobal; // Suppress unused variable warning
+                            NSLog(@"[ChaosOdds] invokeAsync: Runtime validation passed");
+                        } catch (...) {
+                            NSLog(@"[ChaosOdds ERROR] invokeAsync: Runtime validation failed (global() threw exception)");
+                            return;
+                        }
+                        
                         NSLog(@"[ChaosOdds] invokeAsync: Calling capturedFunc(*rt) NOW...");
-                        capturedFunc(*rt);
+                        // Use testRt instead of rt to ensure we're using the validated pointer
+                        capturedFunc(*testRt);
                         NSLog(@"[ChaosOdds] invokeAsync: capturedFunc(*rt) completed successfully");
                     } catch (const std::exception& e) {
                         NSLog(@"[ChaosOdds ERROR] invokeAsync func failed (C++ exception): %s", e.what());
@@ -79,9 +105,7 @@ public:
                         NSLog(@"[ChaosOdds ERROR] invokeAsync func failed (C++ unknown exception)");
                     }
                 } @catch (NSException *exception) {
-                    NSLog(@"[ChaosOdds ERROR] invokeAsync func failed (Objective-C exception): %@", exception);
-                } @catch (...) {
-                    NSLog(@"[ChaosOdds ERROR] invokeAsync func failed (Objective-C unknown exception)");
+                    NSLog(@"[ChaosOdds ERROR] invokeAsync func failed (Objective-C exception): %@, reason: %@", exception.name, exception.reason);
                 }
             } catch (const std::exception& e) {
                 // Runtime may have been destroyed (hot reload)

@@ -5,8 +5,10 @@ import { externalImagesDiskPath } from "@modules/core/assets/base/shared/config"
 import { reloadExternalAssets } from "@modules/core/assets/base/shared/lib";
 import { clearDownloadQueue } from "@modules/core/assets/download-queue/shared/lib";
 import { removeDirectory } from "@modules/core/disk/entities/removeDirectory";
+import { usePage } from "@modules/core/router/shared/lib";
 import { setArtworkUrl } from "@modules/core/theme/shared/lib";
 import { ArtworksFragment } from "@modules/core/theme/shared/ui";
+import { routes } from "@shared/config";
 import { useAppDispatch } from "@shared/lib";
 import { useTranslation } from "react-i18next";
 import type { ViewProps } from "react-native";
@@ -18,6 +20,8 @@ export const AppDiagnostics = (props: AppDiagnosticsProps) => {
 	const { t } = useTranslation();
 
 	const dispatch = useAppDispatch();
+
+	const goTo = usePage();
 
 	const clearCache = () => {
 		dispatch(clearImageCache());
@@ -88,7 +92,15 @@ export const AppDiagnostics = (props: AppDiagnosticsProps) => {
 							onPress={unsetArtworkUrl}
 						/>
 					</C.Row>
+					<C.Row>
+						<C.Button
+							text={t`chaosOdds.performance.title`}
+							icon="meter"
+							onPress={goTo(routes.chaosOddsPerformance)}
+						/>
+					</C.Row>
 				</ArtworksFragment>
+
 				<C.Row>
 					<C.Button text={t`Restart App`} icon="switch" onPress={restart} />
 				</C.Row>

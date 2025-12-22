@@ -203,6 +203,21 @@ Value calculate(
                                 LOG_MAIN("resolveFunc is valid, proceeding with result object creation");
                                 LOG_MAIN("result_str size: %zu bytes", result_str.size());
                                 
+                                // Validate runtime before using it - try to access global object
+                                // This is a safety check - if runtime is destroyed, accessing global() will crash
+                                try {
+                                    LOG_MAIN("Validating runtime by accessing global object...");
+                                    auto globalObj = runtime.global();
+                                    (void)globalObj; // Suppress unused variable warning
+                                    LOG_MAIN("Runtime validation passed (global() accessible)");
+                                } catch (const std::exception& e) {
+                                    LOG_MAIN_ERROR("Runtime validation failed (exception): %s", e.what());
+                                    return;
+                                } catch (...) {
+                                    LOG_MAIN_ERROR("Runtime is invalid or destroyed, aborting callback");
+                                    return;
+                                }
+                                
                                 try {
                                     // Create result object - this may throw if Runtime is invalid
                                     auto create_obj_start = std::chrono::steady_clock::now();
@@ -241,6 +256,18 @@ Value calculate(
                                     LOG_MAIN("Calling resolveFunc->call() NOW - this may crash if Runtime is invalid");
                                     LOG_MAIN("resolveFunc pointer: %p", resolveFunc.get());
                                     LOG_MAIN("Runtime pointer before call: %p", &runtime);
+                                    
+                                    // Double-check Runtime is still valid right before calling resolveFunc
+                                    // Accessing global() will throw/crash if Runtime is destroyed
+                                    try {
+                                        auto test_global = runtime.global();
+                                        (void)test_global; // Suppress unused variable warning
+                                    } catch (...) {
+                                        LOG_MAIN_ERROR("Runtime validation failed immediately before resolveFunc->call() - Runtime may be destroyed");
+                                        fflush(stderr);
+                                        return;
+                                    }
+                                    
                                     auto before_resolve = std::chrono::steady_clock::now();
                                     
                                     // CRITICAL: Wrap resolveFunc->call() in additional try-catch
@@ -248,6 +275,14 @@ Value calculate(
                                     try {
                                         LOG_MAIN("About to execute resolveFunc->call()...");
                                         fflush(stderr); // Force flush before potentially crashing call
+                                        
+                                        // Additional safety check: ensure resolveFunc is not null
+                                        if (!resolveFunc) {
+                                            LOG_MAIN_ERROR("resolveFunc is null right before call()");
+                                            fflush(stderr);
+                                            return;
+                                        }
+                                        
                                         resolveFunc->call(runtime, result_obj);
                                         LOG_MAIN("resolveFunc->call() returned successfully");
                                         fflush(stderr); // Force flush after call
@@ -267,28 +302,13 @@ Value calculate(
                                         return;
                                     }
                                     
-                                    // Try to force microtask processing by scheduling a callback
-                                    // This might help if Promise resolution is deferred
                                     LOG_MAIN("resolveFunc->call() finished, Promise resolution should be queued");
-                                    LOG_MAIN("=== invokeAsync lambda END ===");
                                     
-                                    // Schedule a microtask via JSI to check if event loop processes it
-                                    try {
-                                        auto queueMicrotaskFunc = runtime.global().getPropertyAsFunction(runtime, "queueMicrotask");
-                                        auto microtaskCallback = Function::createFromHostFunction(
-                                            runtime,
-                                            PropNameID::forAscii(runtime, "chaosOddsMicrotask"),
-                                            0,
-                                            [](Runtime& rt, const Value&, const Value*, size_t) -> Value {
-                                                LOG_MAIN("queueMicrotask callback executed - event loop is processing microtasks");
-                                                return Value::undefined();
-                                            }
-                                        );
-                                        queueMicrotaskFunc.call(runtime, microtaskCallback);
-                                        LOG_MAIN("queueMicrotask scheduled - should execute soon if event loop is not blocked");
-                                    } catch (...) {
-                                        LOG_MAIN_ERROR("Failed to schedule queueMicrotask - queueMicrotask may not be available");
-                                    }
+                                    // Note: We cannot use setTimeout or queueMicrotask here to force event loop processing
+                                    // because JSI Functions created via Function::createFromHostFunction have memory lifecycle issues
+                                    // when passed to native JS functions. Promise resolution handlers will be processed
+                                    // when the event loop naturally processes microtasks (typically after UI interactions).
+                                    LOG_MAIN("=== invokeAsync lambda END ===");
                                 } catch (const std::exception& e) {
                                     // Runtime may have been destroyed (hot reload)
                                     LOG_MAIN_ERROR("Failed to call resolve: %s", e.what());
@@ -477,7 +497,6 @@ Value findTokens(
                  jsInvoker,
                  resolve,
                  reject]() {
-
                     try {
                         const char* result_ptr =
                             chaos_odds_find_tokens(

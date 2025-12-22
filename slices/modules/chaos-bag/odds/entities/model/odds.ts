@@ -25,3 +25,20 @@ export type ChaosOddsCacheItem = {
 };
 
 export type ChaosOddsCache = ChaosOddsCacheItem[];
+
+export type ChaosOddsPerformanceTestGroup = {
+	id: string;
+	tokens: ChaosBagOddsToken[];
+};
+
+export type ChaosOddsPerformanceTest = ChaosOddsPerformanceTestGroup &
+	(
+		| {
+				type: "all";
+		  }
+		| {
+				type: "single";
+				difficulty: number;
+				skillValue: number;
+		  }
+	);
