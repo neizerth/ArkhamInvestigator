@@ -2,12 +2,19 @@
 #include "jsi_functions.h"
 #include "ffi_declarations.h"
 #include <ReactCommon/CallInvoker.h>
-#include <cstdio> // For iOS logging
 #include <thread>
+#include <cstdio>
 
+#ifdef __ANDROID__
+#include <android/log.h>
 #define LOG_TAG "ChaosOdds"
-#define LOGI(...) do { fprintf(stderr, "[ChaosOdds] "); fprintf(stderr, __VA_ARGS__); fprintf(stderr, "\n"); } while(0)
-#define LOGE(...) do { fprintf(stderr, "[ChaosOdds ERROR] "); fprintf(stderr, __VA_ARGS__); fprintf(stderr, "\n"); } while(0)
+#define LOGI(...) __android_log_print(ANDROID_LOG_INFO, LOG_TAG, __VA_ARGS__)
+#define LOGE(...) __android_log_print(ANDROID_LOG_ERROR, LOG_TAG, __VA_ARGS__)
+#else
+// iOS logging - use fprintf(stderr) for all threads
+#define LOGI(...) do { fprintf(stderr, "[ChaosOdds] "); fprintf(stderr, __VA_ARGS__); fprintf(stderr, "\n"); fflush(stderr); } while(0)
+#define LOGE(...) do { fprintf(stderr, "[ChaosOdds ERROR] "); fprintf(stderr, __VA_ARGS__); fprintf(stderr, "\n"); fflush(stderr); } while(0)
+#endif
 
 namespace facebook {
 namespace jsi {
@@ -15,6 +22,9 @@ namespace chaosodds {
 
 void install(Runtime& runtime, std::shared_ptr<react::CallInvoker> jsInvoker) {
     LOGI("🔵 [JSI] install() called - starting JSI bindings installation");
+    
+    // Mark runtime as alive - CRITICAL for preventing use-after-free in pollResult
+    functions::markRuntimeAlive();
     
     // Set CallInvoker for async operations
     if (jsInvoker) {
@@ -53,18 +63,8 @@ void install(Runtime& runtime, std::shared_ptr<react::CallInvoker> jsInvoker) {
     chaosOdds.setProperty(runtime, "cancel", cancelFunc);
     LOGI("✅ [JSI] cancel function installed");
     
-    // Install freeString function
-    LOGI("🔵 [JSI] Installing freeString function");
-    auto freeStringFunc = Function::createFromHostFunction(
-        runtime,
-        PropNameID::forAscii(runtime, "freeString"),
-        1,
-        [](Runtime& rt, const Value& thisValue, const Value* args, size_t count) -> Value {
-            return functions::freeString(rt, thisValue, args, count);
-        }
-    );
-    chaosOdds.setProperty(runtime, "freeString", freeStringFunc);
-    LOGI("✅ [JSI] freeString function installed");
+    // Note: freeString removed - strings are now managed automatically by Hermes GC
+    // Result strings are copied to std::string in C++ and Hermes manages the JS string lifetime
     
     // Install findTokens function
     LOGI("🔵 [JSI] Installing findTokens function");
@@ -79,13 +79,52 @@ void install(Runtime& runtime, std::shared_ptr<react::CallInvoker> jsInvoker) {
     chaosOdds.setProperty(runtime, "findTokens", findTokensFunc);
     LOGI("✅ [JSI] findTokens function installed");
     
+    // Install calculateItem function
+    LOGI("🔵 [JSI] Installing calculateItem function");
+    auto calculateItemFunc = Function::createFromHostFunction(
+        runtime,
+        PropNameID::forAscii(runtime, "calculateItem"),
+        4,
+        [](Runtime& rt, const Value& thisValue, const Value* args, size_t count) -> Value {
+            return functions::calculateItem(rt, thisValue, args, count);
+        }
+    );
+    chaosOdds.setProperty(runtime, "calculateItem", calculateItemFunc);
+    LOGI("✅ [JSI] calculateItem function installed");
+    
+    // Install pollResult function
+    LOGI("🔵 [JSI] Installing pollResult function");
+    auto pollResultFunc = Function::createFromHostFunction(
+        runtime,
+        PropNameID::forAscii(runtime, "pollResult"),
+        1,
+        [](Runtime& rt, const Value& thisValue, const Value* args, size_t count) -> Value {
+            return functions::pollResult(rt, thisValue, args, count);
+        }
+    );
+    chaosOdds.setProperty(runtime, "pollResult", pollResultFunc);
+    LOGI("✅ [JSI] pollResult function installed");
+    
+    // Install setKeepAwakeEnabled function (iOS only, no-op on Android)
+    LOGI("🔵 [JSI] Installing setKeepAwakeEnabled function");
+    auto setKeepAwakeFunc = Function::createFromHostFunction(
+        runtime,
+        PropNameID::forAscii(runtime, "setKeepAwakeEnabled"),
+        1,
+        [](Runtime& rt, const Value& thisValue, const Value* args, size_t count) -> Value {
+            return functions::setKeepAwakeEnabled(rt, thisValue, args, count);
+        }
+    );
+    chaosOdds.setProperty(runtime, "setKeepAwakeEnabled", setKeepAwakeFunc);
+    LOGI("✅ [JSI] setKeepAwakeEnabled function installed");
+    
     // Set global property
     LOGI("🔵 [JSI] Setting global.ChaosOdds property");
     runtime.global().setProperty(runtime, "ChaosOdds", chaosOdds);
     LOGI("✅ [JSI] global.ChaosOdds property set successfully");
     
-    // Note: Multinomial cache is now initialized automatically on first call to calculate()
-    // This avoids the need for a separate prewarm function and simplifies the API
+    // Note: Multinomial cache is initialized lazily on first call to chaos_odds_calculate
+    // or get_chaos_bag_modifiers, so no separate prewarm function is needed
     
     // Verify installation
     // NOTE: Removed asObject() calls to avoid ABI mismatch issues
@@ -107,12 +146,6 @@ void install(Runtime& runtime, std::shared_ptr<react::CallInvoker> jsInvoker) {
     }
     
     LOGI("✅ [JSI] install() completed successfully");
-}
-
-void cleanup() {
-    LOGI("🧹 [JSI] cleanup() called - clearing CallInvoker and canceling operations");
-    functions::clearCallInvoker();
-    LOGI("✅ [JSI] cleanup() completed");
 }
 
 } // namespace chaosodds

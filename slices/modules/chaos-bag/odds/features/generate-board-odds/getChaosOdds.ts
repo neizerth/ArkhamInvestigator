@@ -62,7 +62,10 @@ export const getChaosOdds = async (
 		console.log(
 			`⏱️ [JS] Call #${callId}: Calling ChaosOdds.calculate() (${before_await.toFixed(2)} ms since start)`,
 		);
-		const odds = await ChaosOdds.calculate(availableTokens, revealedTokens);
+		const odds = await ChaosOdds.calculate({
+			revealed: revealedTokens,
+			available: availableTokens,
+		});
 		const await_duration = performance.now() - await_start;
 
 		// Check if this calculation was superseded by a newer one BEFORE logging

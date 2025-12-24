@@ -66,7 +66,6 @@ modules/**/android/externalNativeBuild/
 
 # CMake build cache (modules)
 modules/**/.cxx/
-modules/**/build/
 modules/**/CMakeFiles/
 modules/**/CMakeCache.txt
 modules/**/cmake_install.cmake

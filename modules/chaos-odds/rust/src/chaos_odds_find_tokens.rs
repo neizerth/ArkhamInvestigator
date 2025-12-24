@@ -3,7 +3,6 @@ use std::os::raw::c_char;
 
 use crate::token_odds::get_token_odds;
 use crate::types::{ChaosOddsToken, TokenTarget};
-use crate::util::cancel::reset_cancel_flag;
 
 /// Parameters structure for find_tokens function
 #[derive(serde::Deserialize)]
@@ -47,8 +46,9 @@ pub extern "C" fn chaos_odds_find_tokens(
     tokens_ptr: *const c_char,
     params_ptr: *const c_char,
 ) -> *mut c_char {
-    // Reset cancellation flag before starting calculation
-    reset_cancel_flag();
+    // NOTE: reset_cancel_flag() is NOT called here to avoid race conditions.
+    // Reset must be done from C++ code BEFORE calling this function,
+    // AFTER ensuring previous calculations have completed.
 
     // Parse targets
     let targets = if targets_ptr.is_null() {

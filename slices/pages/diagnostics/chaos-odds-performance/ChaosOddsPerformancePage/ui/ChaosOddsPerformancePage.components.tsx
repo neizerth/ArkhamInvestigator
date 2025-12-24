@@ -26,7 +26,8 @@ export const TitleCell: typeof View = styled(View)`
 export const AutoRun: typeof Checkbox = styled(Checkbox)`
 `;
 
-export const Clear: typeof Button = styled(Button)`
+export const Action: typeof Button = styled(Button)`
+  flex: 1;
 `;
 
 export const Run: typeof Button = styled(Button)`

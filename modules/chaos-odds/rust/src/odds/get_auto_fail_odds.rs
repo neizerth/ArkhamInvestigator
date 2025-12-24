@@ -1,4 +1,5 @@
 use crate::types::ChaosOddsToken;
+use crate::util::cancel::check_cancel;
 
 // Fixed-size stack - completely stack-allocated, zero heap allocation
 // Optimized for mobile (Android/iOS, including older devices): reduced size to fit in L2 cache
@@ -117,6 +118,73 @@ fn build_mask_inline(packed: u128, group_len: usize) -> u32 {
     mask
 }
 
+/// Process a single group in DFS - helper to avoid code duplication
+#[inline(always)]
+fn process_single_group(
+    state: &DFSState,
+    group_idx: usize,
+    group: TokenGroup,
+    prob: f64,
+    stack: &mut FixedStack,
+    auto_fail_prob: &mut f64,
+) {
+    match (group.is_fail, group.is_frost) {
+        (true, _) => {
+            // Fail → auto-fail
+            *auto_fail_prob += prob;
+        }
+        (false, true) => {
+            // Frost → check revealed frost
+            let new_revealed_frost = state
+                .revealed_frost_count
+                .saturating_add(group.reveal_count);
+            if new_revealed_frost >= 2 {
+                *auto_fail_prob += prob;
+                return;
+            }
+
+            // Prepare next state
+            let next_packed = dec_count_inline(state.packed_counts, group_idx);
+            let next_pending_reveal = state.pending_reveal.saturating_sub(1) + group.reveal_count;
+            let next_mask = if get_count_inline(next_packed, group_idx) == 0 {
+                state.available_mask & !(1u32 << group_idx)
+            } else {
+                state.available_mask
+            };
+            let next_total = state.remaining_total.saturating_sub(1);
+
+            let _ = stack.push(DFSState {
+                packed_counts: next_packed,
+                revealed_frost_count: new_revealed_frost,
+                pending_reveal: next_pending_reveal,
+                probability: prob,
+                available_mask: next_mask,
+                remaining_total: next_total,
+            });
+        }
+        (false, false) => {
+            // Regular token
+            let next_packed = dec_count_inline(state.packed_counts, group_idx);
+            let next_pending_reveal = state.pending_reveal.saturating_sub(1) + group.reveal_count;
+            let next_mask = if get_count_inline(next_packed, group_idx) == 0 {
+                state.available_mask & !(1u32 << group_idx)
+            } else {
+                state.available_mask
+            };
+            let next_total = state.remaining_total.saturating_sub(1);
+
+            let _ = stack.push(DFSState {
+                packed_counts: next_packed,
+                revealed_frost_count: state.revealed_frost_count,
+                pending_reveal: next_pending_reveal,
+                probability: prob,
+                available_mask: next_mask,
+                remaining_total: next_total,
+            });
+        }
+    }
+}
+
 /// Process DFS for small number of groups (unrolled loop, no bitmask iteration)
 #[inline(always)]
 fn process_small_groups(
@@ -139,64 +207,7 @@ fn process_small_groups(
         let group = groups[group_idx];
         let p = state.probability * (available as f64 * remaining_total_reciprocal);
 
-        // Combined fail/frost check using match-like pattern
-        match (group.is_fail, group.is_frost) {
-            (true, _) => {
-                // Fail → auto-fail
-                *auto_fail_prob += p;
-                continue;
-            }
-            (false, true) => {
-                // Frost → check revealed frost
-                let new_revealed_frost =
-                    state.revealed_frost_count.saturating_add(group.reveal_count);
-                if new_revealed_frost >= 2 {
-                    *auto_fail_prob += p;
-                    continue;
-                }
-
-                // Prepare next state
-                let next_packed = dec_count_inline(state.packed_counts, group_idx);
-                let next_pending_reveal =
-                    state.pending_reveal.saturating_sub(1) + group.reveal_count;
-                let next_mask = if get_count_inline(next_packed, group_idx) == 0 {
-                    state.available_mask & !(1u32 << group_idx)
-                } else {
-                    state.available_mask
-                };
-                let next_total = state.remaining_total.saturating_sub(1);
-
-                let _ = stack.push(DFSState {
-                    packed_counts: next_packed,
-                    revealed_frost_count: new_revealed_frost,
-                    pending_reveal: next_pending_reveal,
-                    probability: p,
-                    available_mask: next_mask,
-                    remaining_total: next_total,
-                });
-            }
-            (false, false) => {
-                // Regular token
-                let next_packed = dec_count_inline(state.packed_counts, group_idx);
-                let next_pending_reveal =
-                    state.pending_reveal.saturating_sub(1) + group.reveal_count;
-                let next_mask = if get_count_inline(next_packed, group_idx) == 0 {
-                    state.available_mask & !(1u32 << group_idx)
-                } else {
-                    state.available_mask
-                };
-                let next_total = state.remaining_total.saturating_sub(1);
-
-                let _ = stack.push(DFSState {
-                    packed_counts: next_packed,
-                    revealed_frost_count: state.revealed_frost_count,
-                    pending_reveal: next_pending_reveal,
-                    probability: p,
-                    available_mask: next_mask,
-                    remaining_total: next_total,
-                });
-            }
-        }
+        process_single_group(&state, group_idx, group, p, stack, auto_fail_prob);
     }
 }
 
@@ -234,65 +245,7 @@ fn process_large_groups(
         let group = groups[group_idx];
         let p = state.probability * (available as f64 * remaining_total_reciprocal);
 
-        // Combined fail/frost check using match-like pattern
-        match (group.is_fail, group.is_frost) {
-            (true, _) => {
-                // Fail → auto-fail
-                *auto_fail_prob += p;
-                continue;
-            }
-            (false, true) => {
-                // Frost → check revealed frost
-                let new_revealed_frost = state
-                    .revealed_frost_count
-                    .saturating_add(group.reveal_count);
-                if new_revealed_frost >= 2 {
-                    *auto_fail_prob += p;
-                    continue;
-                }
-
-                // Prepare next state
-                let next_packed = dec_count_inline(state.packed_counts, group_idx);
-                let next_pending_reveal =
-                    state.pending_reveal.saturating_sub(1) + group.reveal_count;
-                let next_mask = if get_count_inline(next_packed, group_idx) == 0 {
-                    state.available_mask & !(1u32 << group_idx)
-                } else {
-                    state.available_mask
-                };
-                let next_total = state.remaining_total.saturating_sub(1);
-
-                let _ = stack.push(DFSState {
-                    packed_counts: next_packed,
-                    revealed_frost_count: new_revealed_frost,
-                    pending_reveal: next_pending_reveal,
-                    probability: p,
-                    available_mask: next_mask,
-                    remaining_total: next_total,
-                });
-            }
-            (false, false) => {
-                // Regular token
-                let next_packed = dec_count_inline(state.packed_counts, group_idx);
-                let next_pending_reveal =
-                    state.pending_reveal.saturating_sub(1) + group.reveal_count;
-                let next_mask = if get_count_inline(next_packed, group_idx) == 0 {
-                    state.available_mask & !(1u32 << group_idx)
-                } else {
-                    state.available_mask
-                };
-                let next_total = state.remaining_total.saturating_sub(1);
-
-                let _ = stack.push(DFSState {
-                    packed_counts: next_packed,
-                    revealed_frost_count: state.revealed_frost_count,
-                    pending_reveal: next_pending_reveal,
-                    probability: p,
-                    available_mask: next_mask,
-                    remaining_total: next_total,
-                });
-            }
-        }
+        process_single_group(&state, group_idx, group, p, stack, auto_fail_prob);
     }
 }
 
@@ -302,10 +255,7 @@ fn process_large_groups(
 /// # Arguments
 /// * `tokens` - List of tokens in the chaos bag
 /// * `revealed_frost_count` - Number of revealed frost tokens
-pub fn get_auto_fail_odds(
-    tokens: &[ChaosOddsToken],
-    revealed_frost_count: usize,
-) -> u8 {
+pub fn get_auto_fail_odds(tokens: &[ChaosOddsToken], revealed_frost_count: usize) -> u8 {
     if tokens.is_empty() {
         return 0;
     }
@@ -344,6 +294,11 @@ pub fn get_auto_fail_odds(
         return 0;
     }
 
+    // Check for cancellation after grouping (before expensive packing/DFS)
+    if check_cancel() {
+        return 0; // Return 0 on cancellation (conservative default)
+    }
+
     // Pack initial counts into u128 (3 bits per group, max 7 tokens per group)
     let mut initial_counts = [0u8; 32];
     let mut total_tokens: u8 = 0;
@@ -373,25 +328,28 @@ pub fn get_auto_fail_odds(
     // Choose processing strategy based on group count
     let use_unrolled = group_len <= 8;
 
+    // Check for cancellation before expensive DFS calculation
+    if check_cancel() {
+        return 0; // Return 0 on cancellation (conservative default)
+    }
+
     while let Some(state) = stack.pop() {
+        // Check for cancellation in DFS loop (allows responsive cancellation)
+        if check_cancel() {
+            break; // Early exit on cancellation
+        }
+
+        // Early exit optimization: if we've already found 100% auto-fail, no need to continue
+        if auto_fail_prob >= 1.0 {
+            break;
+        }
+
         // If we need to reveal tokens, continue revealing
         if state.pending_reveal > 0 {
             if use_unrolled {
-                process_small_groups(
-                    state,
-                    &groups,
-                    group_len,
-                    &mut stack,
-                    &mut auto_fail_prob,
-                );
+                process_small_groups(state, &groups, group_len, &mut stack, &mut auto_fail_prob);
             } else {
-                process_large_groups(
-                    state,
-                    &groups,
-                    group_len,
-                    &mut stack,
-                    &mut auto_fail_prob,
-                );
+                process_large_groups(state, &groups, group_len, &mut stack, &mut auto_fail_prob);
             }
         }
     }

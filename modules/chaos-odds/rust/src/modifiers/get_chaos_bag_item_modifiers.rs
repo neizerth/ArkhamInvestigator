@@ -79,8 +79,69 @@ struct DFSState {
     reveal: u128,  // Packed reveal counts
 }
 
+/// Add modifier to cache if it satisfies required_modifier condition
+/// Helper function to avoid code duplication
+/// Condition: (skill + modifier + revealed >= difficulty) || (difficulty == 0)
+#[inline]
+fn add_modifier_to_cache_if_satisfies(
+    counts_packed: u128,
+    reveal: u128,
+    modifier: i16,
+    prob: f64,
+    effective_group_len: usize,
+    required_modifier: i16,
+    difficulty: u16,
+    cache: &mut FxHashMap<crate::util::cache::CacheKey, ChaosOddsCacheItem>,
+) {
+    // If difficulty == 0, accept any modifier
+    // Otherwise, check: modifier >= required_modifier (i.e., skill + modifier + revealed >= difficulty)
+    if difficulty != 0 && modifier < required_modifier {
+        return;
+    }
+
+    let total = total_packed(counts_packed, effective_group_len) as usize;
+    let counts = unpack_counts(counts_packed, effective_group_len);
+
+    // Rebuild state2 and available_mask from unpacked counts
+    let state2_rebuilt = {
+        let mut s2 = 0u128;
+        for i in 0..effective_group_len {
+            let count = counts[i].min(7);
+            s2 = set_available_count(s2, i, count);
+        }
+        s2
+    };
+    let available_mask = {
+        let mut mask = 0u32;
+        for i in 0..effective_group_len {
+            if counts[i] > 0 {
+                mask |= 1u32 << i;
+            }
+        }
+        mask
+    };
+    let state1_rebuilt = (available_mask as u128) | (reveal << 32);
+    let key = build_cache_key(state1_rebuilt, state2_rebuilt, total, modifier, 0);
+
+    if let Some(existing) = cache.get_mut(&key) {
+        existing.probability += prob;
+    } else {
+        cache.insert(
+            key,
+            ChaosOddsCacheItem {
+                modifier,
+                probability: prob,
+                available_count: total,
+                state1: state1_rebuilt,
+                state2: state2_rebuilt,
+                pending_reveal: 0,
+            },
+        );
+    }
+}
+
 /// Process reveal tokens using DFS with early filtering
-/// Only adds to cache modifiers that satisfy: skill_value + modifier + revealed_modifier >= difficulty
+/// Only adds to cache modifiers that satisfy: (skill_value + modifier + revealed_modifier >= difficulty) || (difficulty == 0)
 fn process_reveal_tokens_dfs_filtered(
     roots: &[(u128, u128, i16, usize, f64)], // (state1, state2, modifier, pending_reveal, probability)
     groups: &[ChaosOddsGroup],
@@ -88,6 +149,7 @@ fn process_reveal_tokens_dfs_filtered(
     group_len: usize,
     revealed_frost_count: usize,
     required_modifier: i16, // Minimum modifier needed: difficulty - skill_value - revealed_modifier
+    difficulty: u16,
     cache: &mut FxHashMap<crate::util::cache::CacheKey, ChaosOddsCacheItem>,
 ) {
     if roots.is_empty() || group_len == 0 {
@@ -123,47 +185,16 @@ fn process_reveal_tokens_dfs_filtered(
 
         // If pending=0, check if modifier satisfies condition and add to cache
         if pending_u8 == 0 {
-            // Check if this modifier satisfies the condition
-            if *modifier >= required_modifier {
-                let total = total_packed(counts_packed, effective_group_len) as usize;
-                let counts = unpack_counts(counts_packed, effective_group_len);
-
-                let state2_rebuilt = {
-                    let mut s2 = 0u128;
-                    for i in 0..effective_group_len {
-                        let count = counts[i].min(7);
-                        s2 = set_available_count(s2, i, count);
-                    }
-                    s2
-                };
-                let available_mask = {
-                    let mut mask = 0u32;
-                    for i in 0..effective_group_len {
-                        if counts[i] > 0 {
-                            mask |= 1u32 << i;
-                        }
-                    }
-                    mask
-                };
-                let state1_rebuilt = (available_mask as u128) | (reveal << 32);
-                let key = build_cache_key(state1_rebuilt, state2_rebuilt, total, *modifier, 0);
-
-                if let Some(existing) = cache.get_mut(&key) {
-                    existing.probability += *prob;
-                } else {
-                    cache.insert(
-                        key,
-                        ChaosOddsCacheItem {
-                            modifier: *modifier,
-                            probability: *prob,
-                            available_count: total,
-                            state1: state1_rebuilt,
-                            state2: state2_rebuilt,
-                            pending_reveal: 0,
-                        },
-                    );
-                }
-            }
+            add_modifier_to_cache_if_satisfies(
+                counts_packed,
+                reveal,
+                *modifier,
+                *prob,
+                effective_group_len,
+                required_modifier,
+                difficulty,
+                cache,
+            );
         } else {
             stack.push(DFSState {
                 counts: counts_packed,
@@ -203,47 +234,16 @@ fn process_reveal_tokens_dfs_filtered(
 
         // CRITICAL: Hard stop when pending == 0
         if state.pending == 0 {
-            // Check if this modifier satisfies the condition
-            if state.modifier >= required_modifier {
-                let total = total_packed(state.counts, effective_group_len) as usize;
-                let counts = unpack_counts(state.counts, effective_group_len);
-
-                let state2_rebuilt = {
-                    let mut s2 = 0u128;
-                    for i in 0..effective_group_len {
-                        let count = counts[i].min(7);
-                        s2 = set_available_count(s2, i, count);
-                    }
-                    s2
-                };
-                let available_mask = {
-                    let mut mask = 0u32;
-                    for i in 0..effective_group_len {
-                        if counts[i] > 0 {
-                            mask |= 1u32 << i;
-                        }
-                    }
-                    mask
-                };
-                let state1_rebuilt = (available_mask as u128) | (state.reveal << 32);
-                let key = build_cache_key(state1_rebuilt, state2_rebuilt, total, state.modifier, 0);
-
-                if let Some(existing) = cache.get_mut(&key) {
-                    existing.probability += state.prob;
-                } else {
-                    cache.insert(
-                        key,
-                        ChaosOddsCacheItem {
-                            modifier: state.modifier,
-                            probability: state.prob,
-                            available_count: total,
-                            state1: state1_rebuilt,
-                            state2: state2_rebuilt,
-                            pending_reveal: 0,
-                        },
-                    );
-                }
-            }
+            add_modifier_to_cache_if_satisfies(
+                state.counts,
+                state.reveal,
+                state.modifier,
+                state.prob,
+                effective_group_len,
+                required_modifier,
+                difficulty,
+                cache,
+            );
             continue;
         }
 
@@ -301,7 +301,7 @@ fn process_reveal_tokens_dfs_filtered(
 }
 
 /// Optimized function to get modifiers for a specific skill/difficulty combination
-/// Returns only modifiers that satisfy: skill_value + modifier + revealed_modifier >= difficulty
+/// Returns only modifiers that satisfy: (skill_value + modifier + revealed_modifier >= difficulty) || (difficulty == 0)
 ///
 /// # Arguments
 /// * `tokens` - List of tokens in the chaos bag
@@ -395,6 +395,7 @@ pub fn get_chaos_bag_item_modifiers(
         group_len,
         revealed_frost_count,
         required_modifier,
+        difficulty,
         &mut dfs_cache,
     );
 

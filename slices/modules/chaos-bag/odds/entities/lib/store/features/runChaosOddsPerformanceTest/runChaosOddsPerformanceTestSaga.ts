@@ -4,7 +4,7 @@ import {
 	selectCompletedChaosOddsPerformanceTests,
 	setCompletedChaosOddsPerformanceTests,
 } from "@modules/chaos-bag/odds/shared/lib";
-import { call, delay, put, select, takeLatest } from "redux-saga/effects";
+import { call, put, select, takeLatest } from "redux-saga/effects";
 import { runChaosOddsPerformanceTest } from "./runChaosOddsPerformanceTest";
 
 function* worker({ payload }: ReturnType<typeof runChaosOddsPerformanceTest>) {
@@ -54,7 +54,7 @@ function* worker({ payload }: ReturnType<typeof runChaosOddsPerformanceTest>) {
 	// Cancel any previous calculation to clear the cache and ensure clean test conditions
 	// This prevents caching from affecting performance measurements
 	// takeLatest ensures previous saga task is cancelled, but we also need to clear the Promise cache
-	ChaosOdds.cancel();
+	// ChaosOdds.cancel();
 
 	// #region agent log
 	const afterCancelTime = performance.now();
@@ -76,9 +76,6 @@ function* worker({ payload }: ReturnType<typeof runChaosOddsPerformanceTest>) {
 	}).catch(() => {});
 	// #endregion
 
-	// Wait a bit for cancellation to propagate and cache to clear
-	yield delay(100);
-
 	// #region agent log
 	const afterDelayTime = performance.now();
 	fetch("http://127.0.0.1:7242/ingest/4756e9c3-5ffd-47b8-90a7-0998864a23df", {
@@ -99,7 +96,7 @@ function* worker({ payload }: ReturnType<typeof runChaosOddsPerformanceTest>) {
 	}).catch(() => {});
 	// #endregion
 
-	const tokens = payload.tokens.map(mapTokenToChaosOddsTokenInput);
+	const available = payload.tokens.map(mapTokenToChaosOddsTokenInput);
 	const start = performance.now();
 
 	// #region agent log
@@ -135,7 +132,17 @@ function* worker({ payload }: ReturnType<typeof runChaosOddsPerformanceTest>) {
 	}).catch(() => {});
 	// #endregion
 
-	yield call(ChaosOdds.calculate, tokens);
+	if (payload.type === "all") {
+		yield call(ChaosOdds.calculate, {
+			available,
+		});
+	} else {
+		yield call(ChaosOdds.calculateItem, {
+			available,
+			skill_value: payload.skillValue,
+			difficulty: payload.difficulty,
+		});
+	}
 
 	// #region agent log
 	const afterYieldCall = performance.now();

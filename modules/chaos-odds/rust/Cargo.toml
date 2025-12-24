@@ -16,7 +16,8 @@ lazy_static = "1.4"
 smallvec = "1.11"
 rustc-hash = "1.1"
 dashmap = "5.5"
-rayon = "1.8"
+# Removed rayon = "1.8" - not used (no par_iter or parallel operations)
+# Removed num_cpus = "1.16" - not needed without Rayon
 
 [lib]
 crate-type = [

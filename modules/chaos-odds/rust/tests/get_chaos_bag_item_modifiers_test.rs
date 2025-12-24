@@ -1,5 +1,6 @@
 use chaos_odds::{
-    get_chaos_bag_modifiers, modifiers::get_chaos_bag_item_modifiers, ChaosOddsToken,
+    calculate_odds, get_chaos_bag_modifiers, modifiers::get_chaos_bag_item_modifiers,
+    ChaosOddsToken,
 };
 
 fn token(token_type: &str, value: i8) -> ChaosOddsToken {
@@ -739,5 +740,169 @@ fn only_successful_modifiers_in_results() {
             skill,
             difficulty
         );
+    }
+}
+
+#[test]
+fn matches_calculate_odds_matrix_simple_case() {
+    // Test that get_chaos_bag_item_modifiers matches calculate_odds matrix
+    let tokens = vec![token("plusOne", 1), token("minusOne", -1), token("zero", 0)];
+
+    // Calculate full matrix
+    let matrix = calculate_odds(&tokens, &[]).expect("calculate_odds should succeed");
+
+    // Test several skill/difficulty combinations
+    let test_cases = vec![
+        (2, 3, 0), // skill=2, difficulty=3, revealed_modifier=0
+        (5, 4, 0), // skill=5, difficulty=4, revealed_modifier=0
+        (3, 3, 0), // skill=3, difficulty=3, revealed_modifier=0
+    ];
+
+    for (skill, difficulty, revealed_modifier) in test_cases {
+        // Get result from get_chaos_bag_item_modifiers
+        let result = get_chaos_bag_item_modifiers(&tokens, 0, skill, difficulty, revealed_modifier);
+        let total_prob: f64 = result.iter().map(|m| m.probability).sum();
+        let percentage = (total_prob * 100.0).round() as u16;
+
+        // Get corresponding value from matrix
+        let matrix_value = matrix[skill as usize][difficulty as usize];
+
+        assert_eq!(
+            percentage, matrix_value,
+            "mismatch for skill={}, difficulty={}, revealed_modifier={}: get_chaos_bag_item_modifiers returned {}%, matrix[{}][{}] = {}%",
+            skill, difficulty, revealed_modifier, percentage, skill, difficulty, matrix_value
+        );
+    }
+}
+
+#[test]
+fn matches_calculate_odds_matrix_with_revealed() {
+    // Test with revealed tokens
+    let tokens = vec![
+        token("plusTwo", 2),
+        token("plusOne", 1),
+        token("zero", 0),
+        token("minusOne", -1),
+    ];
+
+    let revealed = vec![token("plusOne", 1)]; // revealed_modifier = 1
+    let revealed_modifier: i16 = revealed.iter().map(|t| t.value as i16).sum();
+
+    // Calculate full matrix
+    let matrix = calculate_odds(&tokens, &revealed).expect("calculate_odds should succeed");
+
+    // Test several skill/difficulty combinations
+    let test_cases = vec![
+        (2, 4, revealed_modifier), // skill=2, difficulty=4, revealed_modifier=1
+        (3, 5, revealed_modifier), // skill=3, difficulty=5, revealed_modifier=1
+        (4, 4, revealed_modifier), // skill=4, difficulty=4, revealed_modifier=1
+    ];
+
+    let revealed_frost_count = revealed
+        .iter()
+        .filter(|t| t.token_type == "frost")
+        .count();
+
+    for (skill, difficulty, rev_mod) in test_cases {
+        // Get result from get_chaos_bag_item_modifiers
+        let result = get_chaos_bag_item_modifiers(&tokens, revealed_frost_count, skill, difficulty, rev_mod);
+        let total_prob: f64 = result.iter().map(|m| m.probability).sum();
+        let percentage = (total_prob * 100.0).round() as u16;
+
+        // Get corresponding value from matrix
+        let matrix_value = matrix[skill as usize][difficulty as usize];
+
+        assert_eq!(
+            percentage, matrix_value,
+            "mismatch with revealed tokens for skill={}, difficulty={}, revealed_modifier={}: get_chaos_bag_item_modifiers returned {}%, matrix[{}][{}] = {}%",
+            skill, difficulty, rev_mod, percentage, skill, difficulty, matrix_value
+        );
+    }
+}
+
+#[test]
+fn matches_calculate_odds_matrix_difficulty_zero() {
+    // Test that difficulty=0 case matches matrix
+    // When difficulty=0, any modifier is accepted, so result should be 100% - auto_fail_odds
+    let tokens = vec![
+        token("plusTwo", 2),
+        token("plusOne", 1),
+        token("zero", 0),
+        token("minusOne", -1),
+    ];
+
+    // Calculate full matrix
+    let matrix = calculate_odds(&tokens, &[]).expect("calculate_odds should succeed");
+
+    // Test multiple skill values with difficulty=0
+    // All should return the same value (independent of skill when difficulty=0)
+    for skill in [0, 5, 10, 50, 99] {
+        let result = get_chaos_bag_item_modifiers(&tokens, 0, skill, 0, 0);
+        let total_prob: f64 = result.iter().map(|m| m.probability).sum();
+        let percentage = (total_prob * 100.0).round() as u16;
+
+        // Get corresponding value from matrix
+        let matrix_value = matrix[skill as usize][0];
+
+        assert_eq!(
+            percentage, matrix_value,
+            "mismatch for difficulty=0, skill={}: get_chaos_bag_item_modifiers returned {}%, matrix[{}][0] = {}%",
+            skill, percentage, skill, matrix_value
+        );
+    }
+
+    // Also verify that all skill values give the same result for difficulty=0
+    let first_result = get_chaos_bag_item_modifiers(&tokens, 0, 0, 0, 0);
+    let first_prob: f64 = first_result.iter().map(|m| m.probability).sum();
+    let first_percentage = (first_prob * 100.0).round() as u16;
+
+    for skill in [1, 10, 50, 99] {
+        let result = get_chaos_bag_item_modifiers(&tokens, 0, skill, 0, 0);
+        let total_prob: f64 = result.iter().map(|m| m.probability).sum();
+        let percentage = (total_prob * 100.0).round() as u16;
+
+        assert_eq!(
+            percentage, first_percentage,
+            "difficulty=0 should give same result for all skill values: skill=0 gave {}%, skill={} gave {}%",
+            first_percentage, skill, percentage
+        );
+    }
+}
+
+#[test]
+fn matches_calculate_odds_matrix_multiple_combinations() {
+    // Comprehensive test with multiple skill/difficulty combinations
+    let tokens = vec![
+        token("plusThree", 3),
+        token("plusTwo", 2),
+        token("plusOne", 1),
+        token("zero", 0),
+        token("minusOne", -1),
+        token("minusTwo", -2),
+    ];
+
+    // Calculate full matrix
+    let matrix = calculate_odds(&tokens, &[]).expect("calculate_odds should succeed");
+
+    // Test a grid of skill/difficulty combinations
+    let skill_values = vec![0, 1, 5, 10, 20, 50];
+    let difficulty_values = vec![0, 1, 3, 5, 10, 20, 50];
+
+    for &skill in &skill_values {
+        for &difficulty in &difficulty_values {
+            // Get result from get_chaos_bag_item_modifiers
+            let result = get_chaos_bag_item_modifiers(&tokens, 0, skill, difficulty, 0);
+            let total_prob: f64 = result.iter().map(|m| m.probability).sum();
+            let percentage = (total_prob * 100.0).round() as u16;
+
+            // Get corresponding value from matrix
+            let matrix_value = matrix[skill as usize][difficulty as usize];
+
+            assert_eq!(
+                percentage, matrix_value,
+                "mismatch for skill={}, difficulty={}: get_chaos_bag_item_modifiers returned {}%, matrix[{}][{}] = {}%",
+                skill, difficulty, percentage, skill, difficulty, matrix_value
+            );
+        }
     }
 }

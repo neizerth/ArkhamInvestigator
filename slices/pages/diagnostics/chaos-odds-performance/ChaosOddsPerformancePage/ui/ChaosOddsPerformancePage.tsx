@@ -2,7 +2,7 @@ import {
 	selectCompletedChaosOddsPerformanceTests,
 	setCompletedChaosOddsPerformanceTests,
 } from "@modules/chaos-bag/odds/shared/lib";
-import { useAppDispatch, useAppSelector, useBoolean } from "@shared/lib";
+import { useAppDispatch, useAppSelector } from "@shared/lib";
 import { Text, defaultTableRenderData } from "@shared/ui";
 import { useCallback, useMemo } from "react";
 import { useTranslation } from "react-i18next";
@@ -20,7 +20,6 @@ import {
 export const ChaosOddsPerformancePage = () => {
 	const dispatch = useAppDispatch();
 	const { t } = useTranslation();
-	const [autoRun, setAutoRun] = useBoolean(true);
 	const completedTests = useAppSelector(
 		selectCompletedChaosOddsPerformanceTests,
 	);
@@ -28,13 +27,13 @@ export const ChaosOddsPerformancePage = () => {
 	const run = useRunChaosOddsTest();
 
 	const clear = useCallback(() => {
-		dispatch(setCompletedChaosOddsPerformanceTests({}));
+		dispatch(setCompletedChaosOddsPerformanceTests(null));
 	}, [dispatch]);
 
 	const data = useMemo(() => {
 		const completed = completedTests ?? {};
 
-		return testGroups.map(({ group, tests }, index) => {
+		return testGroups.map(({ group, tests }) => {
 			return [
 				group.id,
 				...tests.map(({ id }) => {
@@ -53,16 +52,14 @@ export const ChaosOddsPerformancePage = () => {
 			];
 		});
 	}, [completedTests, run]);
+
 	return (
 		<C.Page title="chaosOdds.performance.pageTitle">
 			<C.Content>
 				<Text>{t`chaosOdds.performance.description`}</Text>
-
-				<C.AutoRun
-					label={t`chaosOdds.performance.autoRun`}
-					onPress={setAutoRun.toggle}
-					checked={autoRun}
-				/>
+				<C.Actions>
+					<C.Action text={t`Clear`} icon="trash" onPress={clear} />
+				</C.Actions>
 				<C.List
 					data={data}
 					headers={headers}
@@ -71,11 +68,6 @@ export const ChaosOddsPerformancePage = () => {
 					headerStyle={headerStyle}
 					cellStyle={cellStyle}
 					cellTextStyle={cellTextStyle}
-				/>
-				<C.Clear
-					text={t`chaosOdds.performance.clearTests`}
-					icon="trash"
-					onPress={clear}
 				/>
 			</C.Content>
 		</C.Page>

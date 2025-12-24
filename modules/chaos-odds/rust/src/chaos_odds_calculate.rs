@@ -1,7 +1,6 @@
 use std::os::raw::c_char;
 
 use crate::odds::calculate_odds;
-use crate::util::cancel::reset_cancel_flag;
 use crate::util::parse::{parse_tokens, serialize_matrix};
 
 /// Parse JSON string to vector of ChaosOddsToken
@@ -53,8 +52,9 @@ pub extern "C" fn chaos_odds_calculate(
     let rust_start = Instant::now();
     eprintln!("⏱️ [Rust] chaos_odds_calculate() called");
 
-    // Reset cancellation flag before starting calculation
-    reset_cancel_flag();
+    // NOTE: reset_cancel_flag() is NOT called here to avoid race conditions.
+    // Reset must be done from C++ code BEFORE calling this function,
+    // AFTER ensuring previous calculations have completed.
 
     // Parse available tokens
     let parse_start = Instant::now();
@@ -96,6 +96,7 @@ pub extern "C" fn chaos_odds_calculate(
         "⏱️ [Rust] chaos_odds_calculate() total time: {:?}",
         rust_total
     );
+    eprintln!("⏱️ [Rust] chaos_odds_calculate() returning result pointer, function completed");
 
     result
 }

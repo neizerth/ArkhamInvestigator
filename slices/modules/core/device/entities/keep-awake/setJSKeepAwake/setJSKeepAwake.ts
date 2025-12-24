@@ -10,7 +10,9 @@ export function startJSKeepAwake() {
 	if (keepAliveTimer) return;
 
 	keepAliveTimer = setInterval(() => {
-		Promise.resolve().then(() => 0);
+		// Create a no-op promise to keep event loop active
+		// Using .then() with empty callback prevents unnecessary work
+		Promise.resolve().then(() => {});
 	}, 17);
 }
 

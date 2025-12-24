@@ -13,7 +13,18 @@ pub extern "C" fn chaos_odds_cancel() {
 }
 
 /// Reset the cancellation flag
-/// Called automatically at the start of each calculation
+/// Should be called from C++ code BEFORE starting a new calculation,
+/// AFTER ensuring previous calculations have completed.
+/// DO NOT call from Rust FFI functions - this causes race conditions
+/// where new calculations reset cancel flag for old calculations that are still running.
+#[no_mangle]
+pub extern "C" fn chaos_odds_reset_cancel_flag() {
+    CANCEL_FLAG.store(false, Ordering::Relaxed);
+}
+
+/// Internal function - do not use directly
+/// Kept for backwards compatibility but should not be called from FFI
+#[allow(dead_code)]
 pub fn reset_cancel_flag() {
     CANCEL_FLAG.store(false, Ordering::Relaxed);
 }

@@ -12,6 +12,9 @@ set(PACKAGE_NAME "chaos_odds")
 
 # Paths
 set(CPP_DIR "${CMAKE_SOURCE_DIR}/../cpp")
+# Rust library is built in rust/target/ (using --target-dir in build script)
+# CMAKE_SOURCE_DIR = modules/chaos-odds/android
+# Path calculation: android -> chaos-odds -> rust/target (2 levels up, then rust/target)
 set(RUST_LIB_DIR "${CMAKE_SOURCE_DIR}/../rust/target")
 
 message(STATUS "ANDROID_ABI = ${ANDROID_ABI}")
