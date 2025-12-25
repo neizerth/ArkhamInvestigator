@@ -20,16 +20,41 @@ function* worker() {
 		ChaosOdds.cancel();
 		// Wait a bit for cancellation to propagate
 		yield delay(50);
+		// Reset cache key when cancelling to ensure next calculation proceeds
+		// This prevents stale cache key from blocking recalculation after state changes
+		cacheKey = null;
 	}
 
 	const tokens: ReturnType<typeof tokensSelector> =
 		yield select(tokensSelector);
 
+	// Log token details for debugging
+	const tokenSummary = tokens.reduce(
+		(acc, token) => {
+			const key = `${token.type}:${token.value ?? 0}`;
+			acc[key] = (acc[key] || 0) + 1;
+			return acc;
+		},
+		{} as Record<string, number>,
+	);
+
 	const currentCacheKey = createCacheKey(tokens);
+
+	console.log("generateBoardOddsWorkerSaga tokens", {
+		tokenCount: tokens.length,
+		tokenSummary,
+		previousCacheKey: cacheKey ? cacheKey.substring(0, 100) : null,
+		currentCacheKey: currentCacheKey.substring(0, 200),
+		cacheKeysMatch: currentCacheKey === cacheKey,
+	});
 
 	// Skip if same cache key
 	if (currentCacheKey === cacheKey) {
-		console.log("same cache key, skip");
+		console.log("same cache key, skip", {
+			tokenCount: tokens.length,
+			tokenSummary,
+			cacheKey: currentCacheKey.substring(0, 200),
+		});
 		return;
 	}
 
@@ -39,10 +64,8 @@ function* worker() {
 		return;
 	}
 
-	// Update cache key and calculating flag BEFORE starting calculation to prevent duplicate calls
-	// This ensures that if saga is called again with same tokens, it will be skipped
-	// Setting isCalculating = true BEFORE yield call() prevents race conditions
-	cacheKey = currentCacheKey;
+	// Set calculating flag BEFORE starting calculation to prevent race conditions
+	// But DON'T set cacheKey yet - we'll set it only after successful calculation
 	isCalculating = true;
 
 	const revealed = tokens.filter(({ revealId }) => revealId);
@@ -61,6 +84,13 @@ function* worker() {
 		// Check if calculation was cancelled (odds will be null)
 		if (!isNull(odds)) {
 			yield put(setBoardOddsMatrix(odds));
+			// Only update cache key after successful calculation
+			// This ensures cache key reflects the actual state that was calculated
+			cacheKey = currentCacheKey;
+		} else {
+			// If calculation was cancelled, don't update cache key
+			// This allows recalculation with potentially updated tokens
+			console.log("calculation cancelled, not updating cache key");
 		}
 	} finally {
 		// Always reset calculating flag, even if calculation failed or was cancelled
