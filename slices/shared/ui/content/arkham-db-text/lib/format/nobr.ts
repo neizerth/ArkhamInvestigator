@@ -66,16 +66,46 @@ export const nobr = (text: string) => {
 
 		// Track if we're inside square brackets [...] or [[...]]
 		if (char === "[") {
-			bracketDepth++;
 			// Check if this is a double bracket [[
 			const isDoubleBracket = text[i + 1] === "[";
 			if (isDoubleBracket) {
-				// Add any previous token to result before starting double brackets
-				if (!open && token) {
+				// Close any open <nobr> tag before starting double brackets
+				if (open) {
+					open = false;
+					result += `<nobr>${token}</nobr>`;
+					token = "";
+				} else if (token) {
 					result += token;
 					token = "";
 				}
-			} else if (!open && token) {
+
+				// Find the matching ]] and add everything to result without processing
+				let j = i + 2; // Start after [[
+				let doubleBracketContent = "[[";
+				let depth = 1; // We're inside one level of [[
+				while (j < text.length && depth > 0) {
+					if (text[j] === "]" && j + 1 < text.length && text[j + 1] === "]") {
+						depth--;
+						doubleBracketContent += "]]";
+						j += 2;
+						break;
+					}
+					doubleBracketContent += text[j];
+					j++;
+				}
+				// Add the complete [[...]] to result
+				result += doubleBracketContent;
+				i = j - 1; // -1 because loop will increment
+				continue;
+			}
+
+			// Single bracket - handle normally
+			bracketDepth++;
+			if (open) {
+				open = false;
+				result += `<nobr>${token}</nobr>`;
+				token = "";
+			} else if (token) {
 				result += token;
 				token = "";
 			}
@@ -86,11 +116,6 @@ export const nobr = (text: string) => {
 			token += char;
 			if (bracketDepth > 0) {
 				bracketDepth--;
-			}
-			// If we just closed double brackets ([[...]]), add to result and reset token
-			if (bracketDepth === 0 && token.startsWith("[[")) {
-				result += token;
-				token = "";
 			}
 			continue;
 		}
