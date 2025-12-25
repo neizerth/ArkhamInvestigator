@@ -80,4 +80,5 @@ export const Option: typeof ChaosTokenOption = styled(ChaosTokenOption).attrs({
 })`
   font-size: ${font.size.small}px;
   color: ${color.light10};
+	padding-left: 40px;
 `;

@@ -33,14 +33,15 @@ export const selectChaosTokenRangeByType = ({
 			selectReferenceCardTokenByType(type),
 			selectBoardChaosTokenValueModifications(boardId),
 		],
-		(item, specialTokens) => {
+		(item, specialTokens): ChaosTokenValue[] => {
 			const specialValue = specialTokens[type];
 
-			if (
-				type === "autoFail" &&
-				(isUndefined(specialValue) || specialValue === "fail")
-			) {
+			if (type === "autoFail" && isUndefined(specialValue)) {
 				return [];
+			}
+
+			if (specialValue === "fail") {
+				return ["fail"];
 			}
 
 			if (typeof specialValue !== "undefined") {

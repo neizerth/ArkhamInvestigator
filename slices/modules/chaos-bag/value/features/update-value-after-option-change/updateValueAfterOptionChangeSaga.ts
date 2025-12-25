@@ -3,7 +3,7 @@ import { selectCurrentChaosTokenOption } from "@modules/chaos-bag/effect/entitie
 import { put, select, takeEvery } from "redux-saga/effects";
 import {
 	formatChaosTokenValue,
-	selectReferenceChaosChaosTokenValue,
+	selectChaosTokenDefaultValue,
 	setChaosTokenValue,
 } from "../../entities/lib";
 import type { ChaosTokenValue } from "../../shared/model";
@@ -28,7 +28,7 @@ function* worker({ payload }: ReturnType<typeof chaosTokenOptionUpdated>) {
 	if (option) {
 		value = formatChaosTokenValue(option.modified_value.modifier);
 	} else {
-		const valueSelector = selectReferenceChaosChaosTokenValue(type);
+		const valueSelector = selectChaosTokenDefaultValue(type);
 		value = yield select(valueSelector);
 	}
 

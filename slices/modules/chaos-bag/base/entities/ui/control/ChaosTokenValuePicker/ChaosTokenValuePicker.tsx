@@ -9,7 +9,10 @@ import { useCallback } from "react";
 import type { PropsWithBoardId } from "@modules/board/base/shared/model";
 import type { ChaosTokenType } from "@modules/chaos-bag/base/shared/model";
 import type { ChaosTokenValueProps } from "@modules/chaos-bag/base/shared/ui";
-import { setChaosTokenValue } from "@modules/chaos-bag/value/entities/lib";
+import {
+	selectChaosTokenDefaultValue,
+	setChaosTokenValue,
+} from "@modules/chaos-bag/value/entities/lib";
 import { selectChaosTokenRangeByType as selectTokenRange } from "@modules/chaos-bag/value/entities/lib";
 import { isChaosTokenModified } from "@modules/chaos-bag/value/shared/lib";
 import type { ChaosTokenValue } from "@modules/chaos-bag/value/shared/model";
@@ -40,11 +43,15 @@ export const ChaosTokenValuePicker = ({
 	autoFailStyle = valueStyle,
 	boardId = "current",
 	sealed,
-	value = 0,
+	value,
 	...props
 }: ChaosTokenValuePickerProps) => {
 	const dispatch = useAppDispatch();
 	const valueSizes = sealed ? sealedSizes : unsealedSizes;
+
+	const defaultValue = useAppSelector(selectChaosTokenDefaultValue(type));
+
+	const currentValue = value ?? defaultValue;
 
 	const data = useAppSelector(
 		selectTokenRange({
@@ -103,7 +110,7 @@ export const ChaosTokenValuePicker = ({
 			key={data.length}
 			data={data}
 			renderItem={renderItem}
-			value={value}
+			value={currentValue}
 			onValueChanged={setValue}
 		/>
 	);

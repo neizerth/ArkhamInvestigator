@@ -11,5 +11,5 @@ export const Control: typeof Checkbox = styled(Checkbox).attrs({
 		gap: 10,
 	},
 })`
-  height: 40px;
+  min-height: 40px;
 `;

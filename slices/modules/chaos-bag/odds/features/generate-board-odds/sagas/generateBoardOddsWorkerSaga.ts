@@ -14,7 +14,6 @@ let isCalculating = false;
 const tokensSelector = selectBoardChaosOddsTokens("current");
 
 function* worker() {
-	console.log("generateBoardOddsWorkerSaga");
 	// Cancel previous calculation if it's still running
 	if (isCalculating) {
 		ChaosOdds.cancel();
@@ -40,14 +39,6 @@ function* worker() {
 
 	const currentCacheKey = createCacheKey(tokens);
 
-	console.log("generateBoardOddsWorkerSaga tokens", {
-		tokenCount: tokens.length,
-		tokenSummary,
-		previousCacheKey: cacheKey ? cacheKey.substring(0, 100) : null,
-		currentCacheKey: currentCacheKey.substring(0, 200),
-		cacheKeysMatch: currentCacheKey === cacheKey,
-	});
-
 	// Skip if same cache key
 	if (currentCacheKey === cacheKey) {
 		console.log("same cache key, skip", {
@@ -60,7 +51,6 @@ function* worker() {
 
 	// Skip if calculation is already in progress (after cancellation attempt)
 	if (isCalculating) {
-		console.log("calculation already in progress, skip");
 		return;
 	}
 
@@ -72,7 +62,6 @@ function* worker() {
 	const available = tokens.filter(({ revealId }) => !revealId);
 
 	try {
-		console.log("starting getChaosOdds");
 		const start = performance.now();
 		const odds: ReturnAwaited<typeof getChaosOdds> = yield call(getChaosOdds, {
 			available,

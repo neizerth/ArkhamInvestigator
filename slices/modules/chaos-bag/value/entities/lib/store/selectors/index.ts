@@ -5,3 +5,4 @@ export * from "./selectChaosBagTokenValues";
 export * from "./selectChaosTokenValueByType";
 export * from "./selectChaosTokenRangeByType";
 export * from "./selectReferenceChaosChaosTokenValue";
+export * from "./selectChaosTokenDefaultValue";
