@@ -1,1 +1,6 @@
 rust/target
+
+# macOS linker symbol files
+*.SYMDEF
+__.*.SYMDEF
+__.SYMDEF
