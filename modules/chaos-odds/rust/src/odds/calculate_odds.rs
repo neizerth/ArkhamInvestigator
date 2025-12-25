@@ -1,8 +1,7 @@
-use crate::get_chaos_bag_modifiers;
-use crate::odds::get_auto_fail_odds;
 use crate::types::ChaosOddsToken;
 use crate::util::cancel::check_cancel;
 use crate::util::chaos_bag::is_auto_fail;
+use crate::{calculate_odds_item, get_chaos_bag_modifiers};
 
 /// Calculate odds for all difficulty/skill combinations
 /// Returns a 100x100 matrix where each cell [skill][difficulty] contains
@@ -28,9 +27,14 @@ pub fn calculate_odds(
 
     let modifiers = get_chaos_bag_modifiers(&available, revealed_frost_count);
     let revealed_modifier: i16 = revealed.iter().map(|token| token.value as i16).sum();
-    let auto_fail_odds = get_auto_fail_odds(&available, revealed_frost_count);
 
-    let zero_difficulty_odds = 100u16.saturating_sub(auto_fail_odds as u16);
+    let zero_difficulty_odds = calculate_odds_item(available, revealed, 0, 0);
+
+    if zero_difficulty_odds.is_none() {
+        return None;
+    }
+
+    let zero_difficulty_odds = zero_difficulty_odds.unwrap();
 
     // ============================================================================
     // FIX #4: Binning modifiers for 100x100 loop optimization

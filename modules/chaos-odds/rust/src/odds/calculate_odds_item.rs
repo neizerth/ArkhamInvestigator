@@ -1,5 +1,4 @@
 use crate::modifiers::get_chaos_bag_item_modifiers;
-// use crate::odds::get_auto_fail_odds;
 use crate::types::ChaosOddsToken;
 use crate::util::cancel::check_cancel;
 use crate::util::chaos_bag::is_auto_fail;
@@ -38,19 +37,6 @@ pub fn calculate_odds_item(
     if check_cancel() {
         return None;
     }
-
-    // Special case: difficulty 0
-    // Success probability = 100% - auto_fail_odds
-    // if difficulty == 0 {
-    //     let auto_fail_odds = get_auto_fail_odds(&available, revealed_frost_count);
-    //     let success_prob = 100u16.saturating_sub(auto_fail_odds as u16);
-    //     return Some(success_prob);
-    // }
-
-    // Check for cancellation
-    // if check_cancel() {
-    //     return None;
-    // }
 
     let revealed_modifier: i16 = revealed.iter().map(|token| token.value as i16).sum();
 
