@@ -194,7 +194,7 @@ fn process_reveal_tokens_dfs_filtered(
                 required_modifier,
                 difficulty,
                 cache,
-            );
+                    );
         } else {
             stack.push(DFSState {
                 counts: counts_packed,
@@ -243,7 +243,7 @@ fn process_reveal_tokens_dfs_filtered(
                 required_modifier,
                 difficulty,
                 cache,
-            );
+                    );
             continue;
         }
 

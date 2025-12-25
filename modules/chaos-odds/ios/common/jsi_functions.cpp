@@ -220,11 +220,11 @@ Value calculate(
     };
 
     // Call async Rust function - it spawns background thread and returns immediately
-    std::string availableCopy = available;
+            std::string availableCopy = available;
     std::string revealedCopy = revealed;
     
     chaos_odds_calculate_async(
-        availableCopy.c_str(),
+                                availableCopy.c_str(),
         revealedCopy.c_str(),
         task_id,
         callback_wrapper
@@ -379,7 +379,7 @@ Value pollResult(
                     fclose(log14);
                 }
                 // #endregion
-            } catch (...) {
+                    } catch (...) {
                 // Failed to create string - return null
                 LOGE("⏱️ [JSI] pollResult: Failed to create result string, returning null");
                 // #region agent log
@@ -531,20 +531,20 @@ Value findTokens(
     
     LOGI("⏱️ [JSI] findTokens: Starting task #%d (task_id: %u, active: %d)", thread_id, task_id, active_before + 1);
 
-    // Copy data for background thread
-    std::string targetsCopy = targets;
-    std::string tokensCopy = tokens;
-    std::string paramsCopy = params;
+            // Copy data for background thread
+            std::string targetsCopy = targets;
+            std::string tokensCopy = tokens;
+            std::string paramsCopy = params;
 
-    std::thread(
+            std::thread(
         [targetsCopy, tokensCopy, paramsCopy, task_id]() {
             try {
                 const char* result_ptr = chaos_odds_find_tokens(
-                    targetsCopy.c_str(),
-                    tokensCopy.c_str(),
-                    paramsCopy.c_str()
-                );
-                
+                                targetsCopy.c_str(),
+                                tokensCopy.c_str(),
+                                paramsCopy.c_str()
+                            );
+
                 // Store result in task storage (this will be called from C callback)
                 chaos_odds_async_callback_wrapper(task_id, result_ptr);
             } catch (const std::exception& e) {
@@ -661,24 +661,24 @@ Value calculateItem(
                 
                 // Store result in task storage
                 chaos_odds_async_callback_wrapper(task_id, result_ptr);
-            } catch (const std::exception& e) {
+                    } catch (const std::exception& e) {
                 // Store error in task storage
                 std::lock_guard<std::mutex> lock(g_task_storage_mutex);
                 auto it = g_task_storage.find(task_id);
                 if (it != g_task_storage.end()) {
                     it->second.status = TASK_STATUS_FAILED;
                     g_active_threads.fetch_sub(1, std::memory_order_relaxed);
-                }
-            } catch (...) {
+                        }
+                    } catch (...) {
                 std::lock_guard<std::mutex> lock(g_task_storage_mutex);
                 auto it = g_task_storage.find(task_id);
                 if (it != g_task_storage.end()) {
                     it->second.status = TASK_STATUS_FAILED;
                     g_active_threads.fetch_sub(1, std::memory_order_relaxed);
+                        }
+                    }
                 }
-            }
-        }
-    ).detach();
+            ).detach();
 
     return Value(static_cast<double>(task_id));
 }
@@ -694,7 +694,7 @@ Value setKeepAwakeEnabled(
     (void)runtime;
     (void)arguments;
     (void)count;
-    return Value::undefined();
+            return Value::undefined();
 }
 
 } // namespace functions
