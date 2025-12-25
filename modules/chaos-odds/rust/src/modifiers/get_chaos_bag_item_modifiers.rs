@@ -194,7 +194,7 @@ fn process_reveal_tokens_dfs_filtered(
                 required_modifier,
                 difficulty,
                 cache,
-                    );
+            );
         } else {
             stack.push(DFSState {
                 counts: counts_packed,
@@ -243,7 +243,7 @@ fn process_reveal_tokens_dfs_filtered(
                 required_modifier,
                 difficulty,
                 cache,
-                    );
+            );
             continue;
         }
 
@@ -340,10 +340,7 @@ pub fn get_chaos_bag_item_modifiers(
     let base_state2 = pack_available_counts(&base_available_counts_array);
 
     // Pre-compute token type flags
-    let group_is_frost: Vec<bool> = groups
-        .iter()
-        .map(|g| g.token.token_type == "frost")
-        .collect();
+    let group_is_frost: Vec<bool> = groups.iter().map(|g| g.is_frost).collect();
 
     // Calculate required modifier: skill + modifier + revealed >= difficulty
     // => modifier >= difficulty - skill - revealed

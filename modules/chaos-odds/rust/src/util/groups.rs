@@ -6,9 +6,10 @@ pub fn build_groups(tokens: &[ChaosOddsToken]) -> Vec<ChaosOddsGroup> {
     let mut grouped: FxHashMap<String, ChaosOddsGroup> = FxHashMap::default();
 
     for token in tokens.iter().cloned() {
+        let is_frost = token.token_type == "frost";
         let key = format!(
             "{}-{}-{}-{}-{}",
-            token.token_type, token.reveal_count, token.value, token.is_fail, token.is_success,
+            is_frost, token.reveal_count, token.value, token.is_fail, token.is_success,
         );
 
         if let Some(group) = grouped.get_mut(&key) {
@@ -16,10 +17,12 @@ pub fn build_groups(tokens: &[ChaosOddsToken]) -> Vec<ChaosOddsGroup> {
         } else {
             // Precompute modifier - preserve sentinel values (AUTO_FAIL, AUTO_SUCCESS)
             let modifier = token.as_modifier();
+
             grouped.insert(
                 key,
                 ChaosOddsGroup {
                     token,
+                    is_frost,
                     count: 1,
                     modifier,
                 },

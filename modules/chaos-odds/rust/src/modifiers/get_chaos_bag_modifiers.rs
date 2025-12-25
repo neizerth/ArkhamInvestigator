@@ -372,10 +372,7 @@ pub fn get_chaos_bag_modifiers(
     let base_state2 = pack_available_counts(&base_available_counts_array);
 
     // Pre-compute token type flags
-    let group_is_frost: Vec<bool> = groups
-        .iter()
-        .map(|g| g.token.token_type == "frost")
-        .collect();
+    let group_is_frost: Vec<bool> = groups.iter().map(|g| g.is_frost).collect();
 
     // Initialize cache
     let mut cache: Vec<ChaosOddsCacheItem> = Vec::new();
