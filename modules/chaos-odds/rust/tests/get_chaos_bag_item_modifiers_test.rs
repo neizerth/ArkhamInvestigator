@@ -798,14 +798,12 @@ fn matches_calculate_odds_matrix_with_revealed() {
         (4, 4, revealed_modifier), // skill=4, difficulty=4, revealed_modifier=1
     ];
 
-    let revealed_frost_count = revealed
-        .iter()
-        .filter(|t| t.token_type == "frost")
-        .count();
+    let revealed_frost_count = revealed.iter().filter(|t| t.token_type == "frost").count();
 
     for (skill, difficulty, rev_mod) in test_cases {
         // Get result from get_chaos_bag_item_modifiers
-        let result = get_chaos_bag_item_modifiers(&tokens, revealed_frost_count, skill, difficulty, rev_mod);
+        let result =
+            get_chaos_bag_item_modifiers(&tokens, revealed_frost_count, skill, difficulty, rev_mod);
         let total_prob: f64 = result.iter().map(|m| m.probability).sum();
         let percentage = (total_prob * 100.0).round() as u16;
 
@@ -905,4 +903,27 @@ fn matches_calculate_odds_matrix_multiple_combinations() {
             );
         }
     }
+}
+
+#[test]
+fn tablet_with_zero_difficulty_should_be_100_percent() {
+    // Bag: 0, 0, 0, tablet(reveal=2, value=0)
+    // skill=1, difficulty=0
+    // When difficulty=0, any modifier is accepted, so result should be 100%
+    let tokens = vec![
+        token("zero", 0),
+        token("zero", 0),
+        token("zero", 0),
+        token_with_reveal("tablet", 0, 2),
+    ];
+
+    let result = get_chaos_bag_item_modifiers(&tokens, 0, 1, 0, 0);
+    let total_prob: f64 = result.iter().map(|m| m.probability).sum();
+    let percentage = (total_prob * 100.0).round() as u16;
+
+    assert_eq!(
+        percentage, 100,
+        "expected 100% for skill=1, difficulty=0 with tablet, got {}%",
+        percentage
+    );
 }
