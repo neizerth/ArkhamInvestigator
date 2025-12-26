@@ -43,6 +43,7 @@ export const BottomPanel = ({ ...props }: BottomPanelProps) => {
 				{canReveal && (
 					<C.RevealMore onPressOut={loadMore}>
 						<C.RevealMoreIcon icon="token_plus_highlight" />
+						<C.ChaosOddsValue />
 					</C.RevealMore>
 				)}
 				{token && <C.EffectSwitch token={token} />}

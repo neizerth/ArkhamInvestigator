@@ -4,6 +4,7 @@ import { Icon, Row } from "@shared/ui";
 import { View } from "react-native";
 import styled from "styled-components/native";
 import { DescriptionPanel } from "../DescriptionPanel";
+import { RevealMoreChaosOdds } from "../RevealMoreChaosOdds";
 import { TokenEffectSwitch } from "../TokenEffectSwitch";
 
 export const Container: typeof View = styled(View)`
@@ -48,7 +49,6 @@ export const Action: typeof TouchableOpacity = styled(TouchableOpacity)`
   justify-content: center;
   align-items: center;
   position: relative;
-  overflow: hidden;
 `;
 
 export const Return: typeof Action = styled(Action)`
@@ -74,4 +74,12 @@ export const Description: typeof DescriptionPanel = styled(DescriptionPanel)`
 
 export const EffectSwitch: typeof TokenEffectSwitch = styled(TokenEffectSwitch)`
   
+`;
+
+export const ChaosOddsValue: typeof RevealMoreChaosOdds = styled(
+	RevealMoreChaosOdds,
+)`
+  position: absolute;
+  right: -15px;
+  top: 35px;
 `;

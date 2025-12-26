@@ -16,7 +16,6 @@ const activeCallIds = new Set<number>();
 export const getChaosOdds = async (
 	options: GetChaosOddsOptions,
 ): Promise<number[][] | null> => {
-	const js_start = performance.now();
 	const callId = ++calculationId;
 	const activeBefore = activeCalls;
 
@@ -38,30 +37,20 @@ export const getChaosOdds = async (
 	activeCalls++;
 	activeCallIds.add(callId);
 
-	console.log(
-		`⏱️ [JS] getChaosOdds() called #${callId} (active: ${activeCalls})`,
-	);
-
 	const { available, revealed } = options;
 
 	if (isEmpty(available) && isEmpty(revealed)) {
 		return null;
 	}
 
-	const map_start = performance.now();
 	const availableTokens = available.map(mapTokenToChaosOddsTokenInput);
 	const revealedTokens = revealed.map(mapTokenToChaosOddsTokenInput);
-	const map_duration = performance.now() - map_start;
-	console.log(`⏱️ [JS] mapTokenToOddsToken took ${map_duration.toFixed(2)} ms`);
 
 	// No need for currentCalculationId - we use activeCallIds Set instead
 
 	try {
 		const await_start = performance.now();
-		const before_await = performance.now() - js_start;
-		console.log(
-			`⏱️ [JS] Call #${callId}: Calling ChaosOdds.calculate() (${before_await.toFixed(2)} ms since start)`,
-		);
+
 		const odds = await ChaosOdds.calculate({
 			revealed: revealedTokens,
 			available: availableTokens,
@@ -77,32 +66,14 @@ export const getChaosOdds = async (
 			);
 			return null;
 		}
-
-		// Only log if this call was not superseded
-		console.log(
-			`⏱️ [JS] Call #${callId}: await ChaosOdds.calculate() took ${await_duration.toFixed(2)} ms`,
-		);
-
-		const js_total = performance.now() - js_start;
-		console.log(
-			`⏱️ [JS] Call #${callId}: getChaosOdds() total time: ${js_total.toFixed(2)} ms (active: ${activeCalls})`,
-		);
 		return odds ?? null;
 	} catch (error) {
 		// Check if this calculation was superseded by a newer one
 		if (!activeCallIds.has(callId)) {
 			// This call was cancelled/superseded
-			console.log(
-				`⏱️ [JS] Call #${callId}: superseded, returning null (active: ${activeCalls})`,
-			);
 			return null;
 		}
 
-		const js_total = performance.now() - js_start;
-		console.error(
-			`⏱️ [JS] Call #${callId}: getChaosOdds() error after ${js_total.toFixed(2)} ms (active: ${activeCalls}):`,
-			error,
-		);
 		return null;
 	} finally {
 		// Ensure cleanup happens exactly once, even if something goes wrong

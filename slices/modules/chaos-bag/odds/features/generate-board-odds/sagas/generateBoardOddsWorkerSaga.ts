@@ -61,6 +61,11 @@ function* worker() {
 	const revealed = tokens.filter(({ revealId }) => revealId);
 	const available = tokens.filter(({ revealId }) => !revealId);
 
+	if (available.length === 0) {
+		console.log("no available tokens, skip");
+		return;
+	}
+
 	try {
 		const start = performance.now();
 		const odds: ReturnAwaited<typeof getChaosOdds> = yield call(getChaosOdds, {
