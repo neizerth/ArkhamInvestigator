@@ -12,4 +12,5 @@ export type SkillCheckExpressionDisplayProps = ViewProps & {
 	equalsContainerStyle?: ViewProps["style"];
 	signStyle?: TextProps["style"];
 	showDiff?: boolean;
+	odds?: number | false;
 };

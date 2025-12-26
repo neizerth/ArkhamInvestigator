@@ -5,6 +5,7 @@ export const valueStyle = {
 };
 
 export const defaultValueFontSizes: number[] = [1, 0.7, 0.54, 0.45];
+export const minusZeroSize = 0.9;
 
 type GetValueFontStyleOptions = {
 	sizes?: number[];
@@ -30,8 +31,10 @@ export const getFontStyle = ({
 	const digitsCount = strValue.length;
 
 	const index = Math.min(digitsCount - 1, sizes.length - 1);
+	const k = strValue === "-0" ? minusZeroSize : 1;
+	const size = sizes[index] * k;
 
-	const fontSize = defaultFontSize * sizes[index];
+	const fontSize = defaultFontSize * size;
 	const marginLeft = fontSize * getValueOffset(value);
 
 	return {

@@ -11,6 +11,7 @@ import {
 } from "@shared/lib";
 import type { TextViewProps } from "@shared/ui";
 import { last, omit } from "ramda";
+import { isNumber } from "ramda-adjunct";
 import { Fragment, useCallback } from "react";
 import { StyleSheet } from "react-native";
 import type { SkillCheckExpressionDisplayProps } from "./ExpressionDisplay.types";
@@ -30,6 +31,7 @@ export const SkillCheckExpressionDisplay = ({
 	valueStyle,
 	signStyle: signStyleProp,
 	showDiff: showDiffProp,
+	odds,
 	...props
 }: SkillCheckExpressionDisplayProps) => {
 	const showDefaultDiff = useAppSelector(selectShowCalculationDiff);
@@ -121,6 +123,8 @@ export const SkillCheckExpressionDisplay = ({
 						</>
 					))}
 			</C.Expression>
+
+			{isNumber(odds) && <C.Odds>{odds}%</C.Odds>}
 		</C.Container>
 	);
 };
