@@ -41,11 +41,7 @@ function* worker() {
 
 	// Skip if same cache key
 	if (currentCacheKey === cacheKey) {
-		console.log("same cache key, skip", {
-			tokenCount: tokens.length,
-			tokenSummary,
-			cacheKey: currentCacheKey.substring(0, 200),
-		});
+		console.log("same cache key, skip");
 		return;
 	}
 

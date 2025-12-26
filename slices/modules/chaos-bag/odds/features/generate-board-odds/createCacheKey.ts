@@ -1,14 +1,4 @@
-import type { ChaosTokenValue } from "@modules/chaos-bag/value/shared/model";
-import { isNumber } from "ramda-adjunct";
 import type { ChaosBagOddsToken } from "../../entities/model";
-
-const getValueForSort = (value: ChaosTokenValue): number => {
-	if (isNumber(value)) {
-		return value;
-	}
-
-	return value === "fail" ? Number.NEGATIVE_INFINITY : Number.POSITIVE_INFINITY;
-};
 
 /**
  * Creates a stable cache key based on tokens.
