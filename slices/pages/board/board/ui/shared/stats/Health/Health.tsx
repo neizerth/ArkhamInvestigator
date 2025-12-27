@@ -1,10 +1,11 @@
 import {
 	selectAllowNegativeHealthAndSanity,
+	selectShowAdditionalInformation,
 	selectShowDamageAndHorror,
 	selectShowInitialHealthAndSanity,
 } from "@modules/board/base/shared/lib";
 import type { HealthStatBackground } from "@modules/core/theme/shared/ui";
-import { selectShowAdditionalInformation, useAppSelector } from "@shared/lib";
+import { useAppSelector } from "@shared/lib";
 import { range } from "ramda";
 import { type ComponentProps, useMemo } from "react";
 import type { ViewStyle } from "react-native";

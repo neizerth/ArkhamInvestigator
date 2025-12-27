@@ -1,7 +1,7 @@
+import { selectBoardsCount } from "@modules/board/base/shared/lib";
 import { openNewGameWarning } from "@modules/core/modal/entities/base/lib";
 import { usePageLoader } from "@modules/core/router/shared/lib";
 import {
-	selectHasPreviousGame,
 	startNewGame,
 	useAppDispatch,
 	useAppSelector,
@@ -11,7 +11,8 @@ import { useCallback } from "react";
 
 export const useStartGame = () => {
 	const dispatch = useAppDispatch();
-	const hasPreviousGames = useAppSelector(selectHasPreviousGame);
+	const boardsCount = useAppSelector(selectBoardsCount);
+	const hasPreviousGames = boardsCount > 0;
 
 	const start = useDispatchAction(startNewGame);
 

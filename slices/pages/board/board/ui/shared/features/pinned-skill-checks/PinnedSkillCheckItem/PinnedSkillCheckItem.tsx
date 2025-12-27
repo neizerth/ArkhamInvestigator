@@ -1,4 +1,5 @@
 import {
+	selectShowAdditionalInformation,
 	selectTapToHidePins,
 	setBoardProp,
 } from "@modules/board/base/shared/lib";
@@ -14,11 +15,7 @@ import {
 } from "@modules/chaos-bag/odds/shared/lib";
 import { selectCurrentLanguage } from "@modules/core/i18n/shared/lib";
 import { useSwipe } from "@modules/core/touch/shared/lib";
-import {
-	selectShowAdditionalInformation,
-	useAppDispatch,
-	useAppSelector,
-} from "@shared/lib";
+import { useAppDispatch, useAppSelector } from "@shared/lib";
 import { useCallback, useMemo } from "react";
 import type { ViewProps } from "react-native";
 import { Gesture, GestureDetector } from "react-native-gesture-handler";

@@ -4,6 +4,7 @@ import { chaosBagSaga } from "./chaos-bag/sagas";
 import { coreModulesSaga } from "./core/sagas";
 import { factionSaga } from "./faction/sagas";
 import { mechanicsSaga } from "./mechanics/sagas";
+import { selectionSaga } from "./selection/sagas";
 import { signatureSaga } from "./signature/sagas";
 import { storiesSaga } from "./stories/sagas";
 
@@ -17,4 +18,5 @@ export function* modulesSaga() {
 
 	yield spawn(signatureSaga);
 	yield spawn(storiesSaga);
+	yield spawn(selectionSaga);
 }

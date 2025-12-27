@@ -2,13 +2,14 @@ import { selectCurrentIsParallel } from "@modules/board/base/entities/base/lib";
 import {
 	selectAlwaysShowSkillModifiers,
 	selectCurrentBasePropValue,
+	selectShowAdditionalInformation,
 } from "@modules/board/base/shared/lib";
 import type {
 	PickerItemInfo,
 	PickerListRenderItem,
 } from "@modules/core/control/entities/picker/model";
 import { selectArtworksEnabled } from "@modules/core/theme/shared/lib";
-import { selectShowAdditionalInformation, signedNumber } from "@shared/lib";
+import { signedNumber } from "@shared/lib";
 import { useAppSelector } from "@shared/lib";
 import type { InvestigatorSkillType } from "@shared/model";
 import { useCallback } from "react";

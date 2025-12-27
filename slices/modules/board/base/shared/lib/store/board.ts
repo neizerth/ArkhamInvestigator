@@ -11,6 +11,7 @@ export type BoardState = {
 	endTurnStrict: boolean;
 	showDamageAndHorror: boolean;
 	showDamageAndHorrorEffects: boolean;
+	showAdditionalInformation: boolean;
 
 	trackXP: boolean;
 	saveTrauma: boolean;
@@ -38,6 +39,7 @@ export type BoardState = {
 };
 
 const initialState: BoardState = {
+	showAdditionalInformation: false,
 	currentInvestigatorIndex: null,
 	endTurnStrict: true,
 	investigatorBoards: [],
@@ -81,6 +83,7 @@ export const board = createSlice({
 });
 
 export const {
+	setShowAdditionalInformation,
 	setCurrentInvestigatorIndex,
 	setInvestigatorBoards,
 
@@ -130,6 +133,7 @@ export const {
 } = board.actions;
 
 export const {
+	selectShowAdditionalInformation,
 	selectCurrentInvestigatorIndex,
 	selectInvestigatorBoards,
 

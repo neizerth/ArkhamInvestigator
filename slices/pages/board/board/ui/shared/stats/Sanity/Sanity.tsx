@@ -1,9 +1,10 @@
 import {
 	selectAllowNegativeHealthAndSanity,
+	selectShowAdditionalInformation,
 	selectShowDamageAndHorror,
 	selectShowInitialHealthAndSanity,
 } from "@modules/board/base/shared/lib";
-import { selectShowAdditionalInformation, useAppSelector } from "@shared/lib";
+import { useAppSelector } from "@shared/lib";
 import { range } from "ramda";
 import { useMemo } from "react";
 import type { ViewProps } from "react-native";

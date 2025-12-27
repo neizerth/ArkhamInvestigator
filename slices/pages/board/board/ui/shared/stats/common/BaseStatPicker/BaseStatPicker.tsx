@@ -2,14 +2,11 @@ import {
 	selectCurrentActualPropValue,
 	selectCurrentBasePropValue,
 	selectCurrentInitialPropValue,
+	selectShowAdditionalInformation,
 	setBoardPart,
 } from "@modules/board/base/shared/lib";
 import type { PickerChangeEvent } from "@modules/core/control/entities/picker/model";
-import {
-	selectShowAdditionalInformation,
-	useAppDispatch,
-	useAppSelector,
-} from "@shared/lib";
+import { useAppDispatch, useAppSelector } from "@shared/lib";
 import type { InvestigatorBoardNumericStat } from "@shared/model";
 import { range } from "ramda";
 import { useCallback, useMemo } from "react";

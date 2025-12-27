@@ -5,10 +5,11 @@ import { useAppSelector } from "@shared/lib";
 
 export const useResumeGame = () => {
 	const boardsCount = useAppSelector(selectBoardsCount);
+	const hasPreviousGames = boardsCount > 0;
 	const goToPage = usePage();
 	const resume = goToPage(routes.board);
 
 	const [onResume] = usePageLoader(resume);
 
-	return boardsCount > 0 && onResume;
+	return hasPreviousGames && onResume;
 };
