@@ -1,4 +1,4 @@
-import { getSkinId } from "@modules/signature/base/shared/lib";
+import { getSignatureSkinId } from "@modules/signature/base/shared/lib";
 import type {
 	InvestigatorSignatureGroup as Group,
 	InvestigatorSkin,
@@ -9,12 +9,12 @@ export const compareSkins = (group1: Group[], group2: Group[]) => {
 	const skins1 = group1.flatMap(prop("skins"));
 	const skins2 = group2.flatMap(prop("skins"));
 
-	const indexSkins = indexBy<InvestigatorSkin>(getSkinId);
+	const indexSkins = indexBy<InvestigatorSkin>(getSignatureSkinId);
 
 	const oldSkinMap = indexSkins(skins1);
 
 	const changedSkins = skins2.filter((skin) => {
-		const id = getSkinId(skin);
+		const id = getSignatureSkinId(skin);
 
 		const old = oldSkinMap[id];
 
@@ -31,5 +31,5 @@ export const compareSkins = (group1: Group[], group2: Group[]) => {
 		return !old;
 	});
 
-	return [...changedSkins, ...addedSkins].map(getSkinId);
+	return [...changedSkins, ...addedSkins].map(getSignatureSkinId);
 };

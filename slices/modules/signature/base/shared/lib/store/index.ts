@@ -1,3 +1,3 @@
-export * as signatureReducer from "./reducer";
+export * as signatureBaseReducer from "./reducer";
 export * from "./selectors";
 export * from "./signature";

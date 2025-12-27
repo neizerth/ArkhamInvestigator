@@ -3,7 +3,7 @@ import { changeSignatureDetailsSaga } from "./features/changeSignatureDetails/ch
 import { updateBoardSignaturesSaga } from "./features/updateBoardSignatures/updateBoardSignaturesSaga";
 import { updateSignatureGroupsSaga } from "./features/updateSignatureGroups/updateSignatureGroupsSaga";
 
-export function* signatureEntitiesSaga() {
+export function* signatureBaseEntitiesSaga() {
 	yield spawn(updateBoardSignaturesSaga);
 	yield spawn(changeSignatureDetailsSaga);
 	yield spawn(updateSignatureGroupsSaga);
