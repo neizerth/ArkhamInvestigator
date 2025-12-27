@@ -1,7 +1,7 @@
 import type {
 	FactionFilterType,
 	SelectedSignature,
-} from "@modules/signature/selection/shared/model";
+} from "@modules/signature/signature-selection/shared/model";
 import { createSlice } from "@reduxjs/toolkit";
 import type { InvestigatorSignatureGroup } from "arkham-investigator-data";
 import { createSliceState } from "redux-toolkit-helpers";

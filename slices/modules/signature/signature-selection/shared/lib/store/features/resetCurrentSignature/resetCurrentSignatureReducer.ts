@@ -1,4 +1,4 @@
-import type { SignatureSelectionReducer } from "@modules/signature/selection/shared/model";
+import type { SignatureSelectionReducer } from "@modules/signature/signature-selection/shared/model";
 import { handleResetCurrentSignature } from "./handleResetCurrentSignature";
 
 export const resetCurrentSignatureReducer: SignatureSelectionReducer = (

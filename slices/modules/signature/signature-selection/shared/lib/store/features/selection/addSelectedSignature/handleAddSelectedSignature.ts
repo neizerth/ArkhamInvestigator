@@ -1,7 +1,7 @@
 import type {
 	SelectedSignature,
 	SignatureSelectionHandler,
-} from "@modules/signature/selection/shared/model";
+} from "@modules/signature/signature-selection/shared/model";
 
 export type AddSelectedSignaturePayload = SelectedSignature;
 export const handleAddSelectedSignature: SignatureSelectionHandler<
