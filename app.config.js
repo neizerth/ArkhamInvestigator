@@ -12,7 +12,7 @@ module.exports = {
     version: pkg.version,
     orientation: "portrait",
     icon: "./assets/images/icon1024.png",
-    scheme: "arkham-investigator",
+    scheme: "inv",
     userInterfaceStyle: "dark",
     newArchEnabled: true,
     ios: {
