@@ -2,6 +2,8 @@ import { combineReducers, configureStore } from "@reduxjs/toolkit";
 const createSagaMiddleware = require("redux-saga").default;
 import { createMigrate, persistReducer, persistStore } from "redux-persist";
 
+import devToolsEnhancer from "redux-devtools-expo-dev-plugin";
+
 import { persistStorageConfig } from "@modules/core/storage/shared/config";
 import { persistConfigMigrations } from "@modules/core/storage/shared/migrations";
 import reducers from "./reducer";
@@ -25,6 +27,8 @@ export const createStore = () => {
 				immutableCheck: false,
 				serializableCheck: false,
 			}).concat(sagaMiddleware),
+		enhancers: (getDefaultEnhancers) =>
+			getDefaultEnhancers().concat(devToolsEnhancer()),
 	});
 
 	sagaMiddleware.run(rootSaga);

@@ -26,6 +26,7 @@ function* worker() {
 	yield put(resetCurrentSignature());
 
 	if (!signature || !group || !image) {
+		console.log("No signature or group or image");
 		return;
 	}
 

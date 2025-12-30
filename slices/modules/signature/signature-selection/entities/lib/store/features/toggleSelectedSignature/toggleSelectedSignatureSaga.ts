@@ -30,21 +30,25 @@ function* worker({ payload }: ReturnType<typeof toggleSelectedSignature>) {
 	const isMaxPlayers = selected.length === MAX_PLAYERS;
 
 	if (replaceCode === code) {
+		console.log("Replace code is the same as the code");
 		return;
 	}
 
 	if (hasCode && (!group.multiselect || isMaxPlayers)) {
+		console.log("Remove selected signature by code");
 		yield put(removeSelectedSignatureByCode({ code }));
 		return;
 	}
 
 	if (isMaxPlayers) {
+		console.log("Is max players");
 		return;
 	}
 
 	const typedItems = selected.filter(withCode);
 
 	if (typedItems.length > 0 && group.multiselect) {
+		console.log("Add selected signature");
 		const [item] = typedItems;
 		const selection = {
 			...item,
@@ -55,6 +59,7 @@ function* worker({ payload }: ReturnType<typeof toggleSelectedSignature>) {
 	}
 
 	if (!showDetails) {
+		console.log("Add selected signature without details");
 		const [signature] = group.signatures;
 
 		yield put(
