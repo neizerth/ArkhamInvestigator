@@ -1,9 +1,9 @@
 import { selectChaosBagEnabled } from "@modules/chaos-bag/base/entities/lib";
 import { useGoBack, usePage } from "@modules/core/router/shared/lib";
+import { SignatureSelect } from "@modules/signature/signature-selection/widgets/signature-select";
 import { routes } from "@shared/config";
 import { useAppSelector } from "@shared/lib";
 import { Delay } from "@shared/ui";
-import { InvestigatorSelect } from "@widgets/investigator/investigator-select";
 import { TopBar } from "@widgets/navigation";
 import { useTranslation } from "react-i18next";
 import * as C from "./NewGamePage.components";
@@ -27,7 +27,7 @@ export const NewGamePage = () => {
 				)}
 			</TopBar>
 			<Delay fallback={<C.Loader />}>
-				<InvestigatorSelect />
+				<SignatureSelect />
 			</Delay>
 		</C.Page>
 	);

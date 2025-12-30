@@ -12,12 +12,12 @@ import { useAppDispatch, useAppSelector } from "@shared/lib/hooks";
 import type { InvestigatorSignatureGroup } from "arkham-investigator-data";
 import { useCallback } from "react";
 import { GestureDetector } from "react-native-gesture-handler";
-import * as C from "./InvestigatorSelect.components";
+import * as C from "./SignatureSelect.components";
 import { useData } from "./useData";
 import { useFactionSwipes } from "./useFactionSwipes";
 import { useImageSize } from "./useImageSize";
 
-export const InvestigatorSelect = () => {
+export const SignatureSelect = () => {
 	const dispatch = useAppDispatch();
 	const factionFilterValue = useAppSelector(selectFactionFilter);
 	const artworksEnabled = useAppSelector(selectArtworksEnabled);

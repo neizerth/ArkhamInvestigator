@@ -3,13 +3,11 @@ import { useAppSelector } from "@shared/lib";
 import type { ViewProps } from "react-native";
 import { ClearButton } from "../ClearButton";
 import { StartButton } from "../StartButton";
-import { Container } from "./InvestigatorSelectFooter.components";
+import { Container } from "./SignatureSelectFooter.components";
 
-export type InvestigatorSelectFooterProps = ViewProps;
+export type SignatureSelectFooterProps = ViewProps;
 
-export const InvestigatorSelectFooter = (
-	props: InvestigatorSelectFooterProps,
-) => {
+export const SignatureSelectFooter = (props: SignatureSelectFooterProps) => {
 	const signatures = useAppSelector(selectSelectedSignatures);
 	const selectedSignatures = signatures ?? [];
 
