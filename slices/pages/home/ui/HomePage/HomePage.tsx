@@ -13,7 +13,15 @@ export const HomePage = () => {
 	return (
 		<C.Container>
 			<C.Menu />
-			<Button onPress={onStart} enabled={startEnabled}>{t`New Game`}</Button>
+			<Button
+				onPress={onStart}
+				enabled={startEnabled}
+			>{t`Single player`}</Button>
+
+			<Button
+				styleType="rounded"
+				enabled={startEnabled}
+			>{t`Multiplayer`}</Button>
 			{onResume && (
 				<C.ResumeButton onPress={onResume}>{t`Continue`}</C.ResumeButton>
 			)}

@@ -1,6 +1,11 @@
 import type { TouchableOpacityProps } from "@modules/core/touch/shared/ui";
 
-export type PrimaryButtonStyle = "default" | "transparent" | "square";
+export type PrimaryButtonStyle =
+	| "default"
+	| "transparent"
+	| "square"
+	| "secondary"
+	| "rounded";
 
 export type PrimaryButtonSize = "default" | "small";
 

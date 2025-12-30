@@ -13,6 +13,8 @@ const buttonWidth: Record<PrimaryButtonStyle, number> = {
 	default: 250,
 	transparent: 250,
 	square: 180,
+	secondary: 252,
+	rounded: 250,
 };
 
 const buttonHeight = 80;
