@@ -1,4 +1,4 @@
-use chaos_odds::{odds::get_auto_fail_odds, ChaosOddsToken};
+use chaos_odds::{get_auto_fail_odds, ChaosOddsToken};
 
 fn token(token_type: &str, value: i8) -> ChaosOddsToken {
     token_with_reveal(token_type, value, 0)

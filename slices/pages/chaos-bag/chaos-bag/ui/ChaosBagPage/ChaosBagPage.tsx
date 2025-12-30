@@ -3,7 +3,7 @@ import { selectChaosTokenCount } from "@modules/chaos-bag/base/shared/lib";
 import { usePage } from "@modules/core/router/shared/lib";
 import { selectReferenceCard, selectStory } from "@modules/stories/shared/lib";
 import { routes } from "@shared/config";
-import { useAppDispatch, useAppSelector } from "@shared/lib";
+import { truncate, useAppDispatch, useAppSelector } from "@shared/lib";
 import { Delay } from "@shared/ui";
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
@@ -18,7 +18,7 @@ export const ChaosBagPage = () => {
 
 	const goToPage = usePage();
 
-	const label = referenceCard?.name || t`Scenario reference`;
+	const label = referenceCard?.name ?? t`Scenario reference`;
 
 	const difficultyLevels = story?.difficultyLevels || [];
 
@@ -35,7 +35,7 @@ export const ChaosBagPage = () => {
 			<Delay>
 				<C.Reference>
 					<C.ReferenceButton
-						text={label}
+						text={truncate(label, 22)}
 						icon="list2"
 						onPress={goToPage(routes.chaosBagReferenceEdit)}
 					/>

@@ -27,26 +27,11 @@ function* worker() {
 	const tokens: ReturnType<typeof tokensSelector> =
 		yield select(tokensSelector);
 
-	// Log token details for debugging
-	const tokenSummary = tokens.reduce(
-		(acc, token) => {
-			const key = `${token.type}:${token.value ?? 0}`;
-			acc[key] = (acc[key] || 0) + 1;
-			return acc;
-		},
-		{} as Record<string, number>,
-	);
-
 	const currentCacheKey = createCacheKey(tokens);
 
 	// Skip if same cache key
 	if (currentCacheKey === cacheKey) {
 		console.log("same cache key, skip");
-		return;
-	}
-
-	// Skip if calculation is already in progress (after cancellation attempt)
-	if (isCalculating) {
 		return;
 	}
 
@@ -59,6 +44,7 @@ function* worker() {
 
 	if (available.length === 0) {
 		console.log("no available tokens, skip");
+		yield put(setBoardOddsMatrix(null));
 		return;
 	}
 
