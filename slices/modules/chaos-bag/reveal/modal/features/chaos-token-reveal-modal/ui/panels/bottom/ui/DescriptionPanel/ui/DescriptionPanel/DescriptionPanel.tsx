@@ -2,6 +2,7 @@ import {
 	selectReferenceCardChaosTokenOptions,
 	selectReferenceCardEffects,
 } from "@modules/chaos-bag/effect/entities/lib";
+import { getTokenOptionLabel } from "@modules/chaos-bag/value/entities/lib";
 import { getActiveOpacity, useAppSelector } from "@shared/lib";
 import type { Defined } from "@shared/model";
 import { useCallback, useState } from "react";
@@ -78,7 +79,7 @@ const Container = ({
 				<C.Options>
 					{options.map((option, index) => (
 						<C.Option key={option.prompt} type={type} index={index}>
-							<C.Effect value={option.prompt} />
+							<C.Effect value={getTokenOptionLabel(option)} />
 						</C.Option>
 					))}
 				</C.Options>

@@ -86,7 +86,11 @@ fn skill_plus_modifier_greater_than_difficulty() {
     // skill=2, difficulty=3, revealed=0
     // Required modifier: 3 - 2 - 0 = 1
     // Both +2 and +1 satisfy: probability = 2/3 ≈ 66.67%
-    let available = vec![token("plusTwo", 2), token("plusOne", 1), token("minusOne", -1)];
+    let available = vec![
+        token("plusTwo", 2),
+        token("plusOne", 1),
+        token("minusOne", -1),
+    ];
 
     let revealed: Vec<ChaosOddsToken> = Vec::new();
 
@@ -262,7 +266,8 @@ fn matches_calculate_odds_matrix() {
     let revealed: Vec<ChaosOddsToken> = Vec::new();
 
     // Get full matrix
-    let matrix = calculate_odds(&available, &revealed).expect("Calculation should not be cancelled");
+    let matrix =
+        calculate_odds(&available, &revealed).expect("Calculation should not be cancelled");
 
     // Test a few specific skill/difficulty combinations
     for skill in [0, 2, 5, 10] {
@@ -280,3 +285,71 @@ fn matches_calculate_odds_matrix() {
     }
 }
 
+#[test]
+fn single_bless_token_zero_difficulty_zero_skill() {
+    // Bag: bless x1 (value=+2, reveal_count=1)
+    // At difficulty=0, skill=0: required modifier = 0 - 0 - 0 = 0
+    // Bless gives +2, which satisfies the requirement
+    // But bless has reveal_count=1, so it reveals another token
+    // Since bag is empty after drawing bless, this should be handled
+    // Expected: 100% success probability
+    let available = vec![token_with_reveal("bless", 2, 1)];
+
+    let revealed: Vec<ChaosOddsToken> = Vec::new();
+
+    let result = calculate_odds_item(&available, &revealed, 0, 0)
+        .expect("Calculation should not be cancelled");
+
+    assert_eq!(
+        result, 100,
+        "expected 100% probability for single bless token at skill=0, difficulty=0, got {}%",
+        result
+    );
+}
+
+#[test]
+fn two_bless_and_zero_token_zero_difficulty_zero_skill() {
+    // Bag: bless x2 (value=+2, reveal_count=1), 0 x1
+    // At difficulty=0, skill=0: required modifier = 0 - 0 - 0 = 0
+    // Both bless tokens give +2, which satisfies the requirement
+    // Expected: 100% success probability
+    let available = vec![
+        token_with_reveal("bless", 2, 1),
+        token_with_reveal("bless", 2, 1),
+        token("0", 0),
+    ];
+
+    let revealed: Vec<ChaosOddsToken> = Vec::new();
+
+    let result = calculate_odds_item(&available, &revealed, 0, 0)
+        .expect("Calculation should not be cancelled");
+
+    assert_eq!(
+        result, 100,
+        "expected 100% probability for [bless, bless, 0] at skill=0, difficulty=0, got {}%",
+        result
+    );
+}
+
+#[test]
+fn two_bless_difficulty_one() {
+    // Bag: bless x2 (value=+2, reveal_count=1)
+    // At difficulty=1, skill=0: required modifier = 1 - 0 - 0 = 1
+    // Both bless tokens give +2, which satisfies the requirement (2 >= 1)
+    // Expected: 100% success probability
+    let available = vec![
+        token_with_reveal("bless", 2, 1),
+        token_with_reveal("bless", 2, 1),
+    ];
+
+    let revealed: Vec<ChaosOddsToken> = Vec::new();
+
+    let result = calculate_odds_item(&available, &revealed, 0, 1)
+        .expect("Calculation should not be cancelled");
+
+    assert_eq!(
+        result, 100,
+        "expected 100% probability for [bless, bless] at skill=0, difficulty=1, got {}%",
+        result
+    );
+}

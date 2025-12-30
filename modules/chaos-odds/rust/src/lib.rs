@@ -44,7 +44,7 @@ pub use chaos_odds_calculate::chaos_odds_calculate;
 pub use chaos_odds_calculate_async::chaos_odds_calculate_async;
 pub use chaos_odds_calculate_item::chaos_odds_calculate_item;
 pub use chaos_odds_find_tokens::chaos_odds_find_tokens;
-pub use odds::{calculate_odds, calculate_odds_item};
+pub use odds::{calculate_odds, calculate_odds_item, get_auto_fail_odds};
 pub use token_odds::get_token_odds;
 pub use util::cancel::chaos_odds_cancel;
 

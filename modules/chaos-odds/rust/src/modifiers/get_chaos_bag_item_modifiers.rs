@@ -249,6 +249,18 @@ fn process_reveal_tokens_dfs_filtered(
 
         let total_left = total_packed(state.counts, effective_group_len);
         if total_left == 0 {
+            // If bag is empty but pending > 0, check if current modifier satisfies condition
+            // This handles the case where a token with reveal_count is drawn but bag is empty
+            add_modifier_to_cache_if_satisfies(
+                state.counts,
+                state.reveal,
+                state.modifier,
+                state.prob,
+                effective_group_len,
+                required_modifier,
+                difficulty,
+                cache,
+            );
             continue;
         }
 

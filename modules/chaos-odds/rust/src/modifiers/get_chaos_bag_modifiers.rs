@@ -287,6 +287,40 @@ fn process_reveal_tokens_dfs(
 
         let total_left = total_packed(state.counts, effective_group_len);
         if total_left == 0 {
+            // If bag is empty but pending > 0, add current modifier to cache
+            // This handles the case where a token with reveal_count is drawn but bag is empty
+            if state.pending > 0 {
+                let total = total_packed(state.counts, effective_group_len) as usize;
+                let counts = unpack_counts(state.counts, effective_group_len);
+
+                let state2_rebuilt = {
+                    let mut s2 = 0u128;
+                    for i in 0..effective_group_len {
+                        let count = counts[i].min(7);
+                        s2 = set_available_count(s2, i, count);
+                    }
+                    s2
+                };
+
+                let state1_rebuilt = (state.available_mask as u128) | (state.reveal << 32);
+                let key = build_cache_key(state1_rebuilt, state2_rebuilt, total, state.modifier, 0);
+
+                if let Some(existing) = cache.get_mut(&key) {
+                    existing.probability += state.prob;
+                } else {
+                    cache.insert(
+                        key,
+                        ChaosOddsCacheItem {
+                            modifier: state.modifier,
+                            probability: state.prob,
+                            available_count: total,
+                            state1: state1_rebuilt,
+                            state2: state2_rebuilt,
+                            pending_reveal: state.pending as usize,
+                        },
+                    );
+                }
+            }
             continue;
         }
 

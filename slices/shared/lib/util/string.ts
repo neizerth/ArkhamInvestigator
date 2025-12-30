@@ -37,3 +37,7 @@ export const stringToHash = (text: string, base = 16) => {
 		.reduce((acc, char) => acc + char, 0)
 		.toString(base);
 };
+
+export const truncate = (text: string, maxLength: number) => {
+	return text.length > maxLength ? `${text.slice(0, maxLength)}...` : text;
+};
