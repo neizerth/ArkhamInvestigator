@@ -1,4 +1,5 @@
-import { setReplaceInvestigator, useAppDispatch } from "@shared/lib";
+import { setReplaceSignature } from "@modules/signature/signature-selection/shared/lib";
+import { useAppDispatch } from "@shared/lib";
 import { Delay } from "@shared/ui";
 import { InvestigatorSelect } from "@widgets/investigator";
 import { useCallback } from "react";
@@ -8,7 +9,7 @@ export const ReplaceInvestigatorPage = () => {
 	const dispatch = useAppDispatch();
 
 	const onBack = useCallback(() => {
-		dispatch(setReplaceInvestigator(false));
+		dispatch(setReplaceSignature(false));
 	}, [dispatch]);
 
 	return (

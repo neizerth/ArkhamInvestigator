@@ -1,12 +1,13 @@
 import { selectArtworksEnabled } from "@modules/core/theme/shared/lib";
+
+import { toggleSelectedSignature } from "@modules/signature/signature-selection/entities/lib";
 import {
-	changeSelectedInvestigator,
-	selectDisabledInvestigatorCodes,
+	selectDisabledSignatureCodes,
 	selectFactionFilter,
-	selectSelectedInvestigatorCodes,
-	selectSelectedInvestigatorCount,
-	selectSelectedInvestigatorImages,
-} from "@shared/lib";
+	selectSelectedSignatureCodes,
+	selectSelectedSignatureImages,
+	selectSelectedSignaturesCount,
+} from "@modules/signature/signature-selection/shared/lib";
 import { useAppDispatch, useAppSelector } from "@shared/lib/hooks";
 import type { InvestigatorSignatureGroup } from "arkham-investigator-data";
 import { useCallback } from "react";
@@ -29,18 +30,18 @@ export const InvestigatorSelect = () => {
 	const onChange = useCallback(
 		(group: InvestigatorSignatureGroup) =>
 			dispatch(
-				changeSelectedInvestigator({
+				toggleSelectedSignature({
 					group,
-					details: artworksEnabled,
+					showDetails: artworksEnabled,
 				}),
 			),
 		[dispatch, artworksEnabled],
 	);
 
-	const disabled = useAppSelector(selectDisabledInvestigatorCodes);
-	const selected = useAppSelector(selectSelectedInvestigatorCodes);
-	const selectedCount = useAppSelector(selectSelectedInvestigatorCount);
-	const selectedImages = useAppSelector(selectSelectedInvestigatorImages);
+	const disabled = useAppSelector(selectDisabledSignatureCodes);
+	const selected = useAppSelector(selectSelectedSignatureCodes);
+	const selectedCount = useAppSelector(selectSelectedSignaturesCount);
+	const selectedImages = useAppSelector(selectSelectedSignatureImages);
 	const faction = factionFilterValue || "guardian";
 
 	const sections = useData({

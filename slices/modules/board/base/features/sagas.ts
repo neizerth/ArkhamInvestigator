@@ -1,4 +1,5 @@
 import { spawn } from "redux-saga/effects";
+import { clearBoardOnNewGameSaga } from "./clear-board-on-new-game/clearBoardOnNewGameSaga";
 import { leaveBoardSaga } from "./leave-board/leaveBoardSaga";
 import { loadBoardSaga } from "./load-board/sagas";
 import { setBoardSystemBarSaga } from "./set-board-system-bar/sagas";
@@ -11,4 +12,5 @@ export function* boardBaseFeaturesSaga() {
 	yield spawn(setBoardSystemBarSaga);
 	yield spawn(loadBoardSaga);
 	yield spawn(unloadBoardsOnInitSaga);
+	yield spawn(clearBoardOnNewGameSaga);
 }

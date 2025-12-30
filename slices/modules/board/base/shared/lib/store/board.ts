@@ -119,6 +119,7 @@ export const {
 
 	// reducers
 	addInvestigatorBoard,
+	clearBoards,
 
 	// board history reducers
 	clearBoardHistory,

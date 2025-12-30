@@ -1,4 +1,5 @@
-import { selectSelectedInvestigators, useAppSelector } from "@shared/lib";
+import { selectSelectedSignatures } from "@modules/signature/signature-selection/shared/lib";
+import { useAppSelector } from "@shared/lib";
 import type { ViewProps } from "react-native";
 import { ClearButton } from "../ClearButton";
 import { StartButton } from "../StartButton";
@@ -9,9 +10,10 @@ export type InvestigatorSelectFooterProps = ViewProps;
 export const InvestigatorSelectFooter = (
 	props: InvestigatorSelectFooterProps,
 ) => {
-	const investigators = useAppSelector(selectSelectedInvestigators);
+	const signatures = useAppSelector(selectSelectedSignatures);
+	const selectedSignatures = signatures ?? [];
 
-	if (investigators.length === 0) {
+	if (selectedSignatures.length === 0) {
 		return null;
 	}
 	return (

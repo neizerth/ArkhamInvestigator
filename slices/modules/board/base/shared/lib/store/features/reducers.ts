@@ -4,5 +4,6 @@ export { setBoardPartInternalReducer as setBoardPartInternal } from "./setBoardP
 export { setBoardPropInternalReducer as setBoardPropInternal } from "./setBoardProp/setBoardPropInternalReducer";
 export { setBoardPropValueInternalReducer as setBoardPropValueInternal } from "./setBoardPropValue/setBoardPropValueInternalReducer";
 export { setBoardValuePartInternalReducer as setBoardValuePartInternal } from "./setBoardValuePart/setBoardValuePartInternalReducer";
+export { clearBoardsReducer as clearBoards } from "./clearBoards/clearBoardsReducer";
 
 export * from "./loading/reducers";

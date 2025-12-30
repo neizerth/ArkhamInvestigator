@@ -1,11 +1,11 @@
 import { selectArtworksEnabled } from "@modules/core/theme/shared/lib";
-import { setFactionFilter } from "@modules/faction/entities/lib/store/features/set-faction-filter";
 import { factionFilterTypes } from "@modules/faction/shared/config";
 import type { Faction } from "@modules/faction/shared/model";
 import {
 	FactionSelect as Select,
 	type FactionSelectProps as SelectProps,
 } from "@modules/faction/shared/ui/faction-select";
+import { setFactionFilter } from "@modules/signature/signature-selection/entities/lib";
 import { useAppDispatch, useAppSelector } from "@shared/lib";
 import type { FactionFilterType } from "@shared/model";
 import { useCallback } from "react";

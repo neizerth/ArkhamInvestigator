@@ -2,7 +2,7 @@ import type { SignatureHandler } from "@modules/signature/base/shared/model";
 import { omit } from "ramda";
 
 export const handleClearTraumaSettings: SignatureHandler = (state) => {
-	const settings = state.investigatorSettings ?? {};
+	const settings = state.signatureSettings ?? {};
 
 	const data = Object.entries(settings).reduce(
 		(target, entry) => {
@@ -14,5 +14,5 @@ export const handleClearTraumaSettings: SignatureHandler = (state) => {
 		{} as typeof settings,
 	);
 
-	state.investigatorSettings = data;
+	state.signatureSettings = data;
 };

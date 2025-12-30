@@ -1,10 +1,10 @@
 import { useSwipe } from "@modules/core/touch/shared/lib";
-import { setFactionFilter } from "@modules/faction/entities/lib/store/features/set-faction-filter";
 import { factionFilterTypes } from "@modules/faction/shared/config";
+import { setFactionFilter } from "@modules/signature/signature-selection/entities/lib";
+import { selectFactionFilter } from "@modules/signature/signature-selection/shared/lib";
 import {
 	getLoopNext,
 	getLoopPrev,
-	selectFactionFilter,
 	useAppDispatch,
 	useAppSelector,
 } from "@shared/lib";

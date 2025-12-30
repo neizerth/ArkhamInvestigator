@@ -2,8 +2,9 @@ import { setShowDescription } from "@modules/board/base/shared/lib";
 import { goToPage } from "@modules/core/router/shared/lib";
 import { ArtworksFragment } from "@modules/core/theme/shared/ui";
 import { changeSignatureDetails } from "@modules/signature/base/entities/lib/store/features/changeSignatureDetails/changeSignatureDetails";
+import { setReplaceSignature } from "@modules/signature/signature-selection/shared/lib";
 import { routes } from "@shared/config";
-import { delay, setReplaceInvestigator, useAppDispatch } from "@shared/lib";
+import { delay, useAppDispatch } from "@shared/lib";
 import { useCallback } from "react";
 import type { ViewProps } from "react-native-svg/lib/typescript/fabric/utils";
 import * as C from "./BoardDescriptionMenu.components";
@@ -27,7 +28,7 @@ export const BoardDescriptionMenu = (props: BoardDescriptionMenuProps) => {
 
 	const onChangeInvestigator = useCallback(async () => {
 		await hide();
-		dispatch(setReplaceInvestigator(true));
+		dispatch(setReplaceSignature(true));
 
 		await delay(150);
 

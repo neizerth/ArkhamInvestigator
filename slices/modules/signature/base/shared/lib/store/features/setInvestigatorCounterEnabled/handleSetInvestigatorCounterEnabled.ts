@@ -9,9 +9,9 @@ export type SetInvestigatorCounterEnabledPayload = {
 export const handleSetInvestigatorCounterEnabled: SignatureHandler<
 	SetInvestigatorCounterEnabledPayload
 > = (state, { code, abilityId, enabled }) => {
-	state.investigatorSettings ??= {};
-	state.investigatorSettings[code] ??= {};
-	state.investigatorSettings[code].counters ??= {};
+	state.signatureSettings ??= {};
+	state.signatureSettings[code] ??= {};
+	state.signatureSettings[code].counters ??= {};
 
-	state.investigatorSettings[code].counters[abilityId] = enabled;
+	state.signatureSettings[code].counters[abilityId] = enabled;
 };

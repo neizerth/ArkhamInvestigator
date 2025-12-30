@@ -3,7 +3,7 @@ import type { InvestigatorSignatureGroup } from "arkham-investigator-data";
 import { pick } from "ramda";
 import { getSignatureOptionName } from "./getSignatureOptionName";
 
-export const getSignatures = (group: InvestigatorSignatureGroup) => {
+export const getSignatureVariants = (group: InvestigatorSignatureGroup) => {
 	const { code, faction_code } = group;
 	return group.signatures
 		.filter(({ type }) => type !== "book")

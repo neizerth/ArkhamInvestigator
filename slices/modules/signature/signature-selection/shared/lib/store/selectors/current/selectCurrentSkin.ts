@@ -1,7 +1,10 @@
 import { getSignatureSkins } from "@modules/signature/base/shared/lib";
 import { createSelector } from "@reduxjs/toolkit";
-import { selectCurrentSignatureGroup, selectCurrentSkinId } from "@shared/lib";
 import { whereId } from "@shared/lib/util";
+import {
+	selectCurrentSignatureGroup,
+	selectCurrentSkinId,
+} from "../../signatureSelection";
 
 export const selectCurrentSkin = createSelector(
 	[selectCurrentSignatureGroup, selectCurrentSkinId],

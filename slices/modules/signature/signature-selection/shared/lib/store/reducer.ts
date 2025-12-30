@@ -1,1 +1,1 @@
-export { default as signatureSelectionReducer } from "./signatureSelection";
+export { default as signatureSelection } from "./signatureSelection";

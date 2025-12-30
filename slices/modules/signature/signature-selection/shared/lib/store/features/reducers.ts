@@ -4,3 +4,4 @@ export { setSignatureSkinReducer as setSignatureSkin } from "./setSignatureSkin/
 export { setSignatureVariantReducer as setSignatureVariant } from "./setSignatureVariant/setSignatureVariantReducer";
 export { setCurrentSignatureReducer as setCurrentSignature } from "./setCurrentSignature/setCurrentSignatureReducer";
 export { resetCurrentSignatureReducer as resetCurrentSignature } from "./resetCurrentSignature/resetCurrentSignatureReducer";
+export { resetSignatureSelectionReducer as resetSignatureSelection } from "./resetSignatureSelection/resetSignatureSelectionReducer";

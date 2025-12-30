@@ -1,4 +1,4 @@
-export * from "./selectInvestigatorSettingsByCode";
-export * from "./selectInvestigatorSettingsProp";
-export * from "./selectInvestigatorCounterEnabled";
+export * from "./selectSignatureSettingsByCode";
+export * from "./selectSignatureSettingsProp";
+export * from "./selectSignatureCounterEnabled";
 export * from "./props";

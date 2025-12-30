@@ -12,8 +12,8 @@ export type SetInvestigatorSettingsPropPayload<
 export function handleSetInvestigatorSettingsProp<
 	T extends keyof InvestigatorSettings,
 >(state: SignatureState, payload: SetInvestigatorSettingsPropPayload<T>) {
-	state.investigatorSettings ??= {};
+	state.signatureSettings ??= {};
 
-	state.investigatorSettings[payload.code] ??= {};
-	state.investigatorSettings[payload.code][payload.prop] = payload.value;
+	state.signatureSettings[payload.code] ??= {};
+	state.signatureSettings[payload.code][payload.prop] = payload.value;
 }

@@ -53,6 +53,7 @@ export const {
 	addSelectedSignature,
 	removeSelectedSignatureByCode,
 	clearSelectedSignatures,
+	resetSignatureSelection,
 } = signatureSelection.actions;
 
 export const {

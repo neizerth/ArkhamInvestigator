@@ -9,14 +9,14 @@ export type SignatureState = {
 	mediaVersion: string | null;
 	mediaUpdateTime: string | null;
 	signatureGroups: InvestigatorSignatureGroup[];
-	investigatorSettings: Record<string, InvestigatorSettings> | null;
+	signatureSettings: Record<string, InvestigatorSettings> | null;
 };
 
 const initialState: SignatureState = {
 	mediaVersion: null,
 	mediaUpdateTime: null,
 	signatureGroups: [],
-	investigatorSettings: null,
+	signatureSettings: null,
 };
 
 const state = createSliceState(initialState);
@@ -33,7 +33,7 @@ export const signatures = createSlice({
 export const {
 	setMediaVersion,
 	setSignatureGroups,
-	setInvestigatorSettings,
+	setSignatureSettings,
 	setMediaUpdateTime,
 
 	clearTraumaSettings,
@@ -46,7 +46,7 @@ export const {
 export const {
 	selectMediaVersion,
 	selectSignatureGroups,
-	selectInvestigatorSettings,
+	selectSignatureSettings,
 	selectMediaUpdateTime,
 } = signatures.selectors;
 

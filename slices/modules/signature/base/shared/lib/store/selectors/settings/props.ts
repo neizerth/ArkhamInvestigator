@@ -1,7 +1,7 @@
 import type { InvestigatorSettings } from "@modules/signature/base/shared/model";
 import { createSelector } from "@reduxjs/toolkit";
 import type { Defined } from "@shared/model";
-import { selectInvestigatorSettingsByCode } from "./selectInvestigatorSettingsByCode";
+import { selectSignatureSettingsByCode } from "./selectSignatureSettingsByCode";
 
 type Options<T extends keyof InvestigatorSettings> = {
 	prop: T;
@@ -12,7 +12,7 @@ function createPropSelector<T extends keyof InvestigatorSettings>(
 	options: Options<T>,
 ) {
 	return (code: string) =>
-		createSelector([selectInvestigatorSettingsByCode(code)], (settings) => {
+		createSelector([selectSignatureSettingsByCode(code)], (settings) => {
 			return settings?.[options.prop] ?? options.defaultvalue;
 		});
 }
@@ -27,12 +27,12 @@ export const selectPhysicalTraumaByCode = createPropSelector({
 	defaultvalue: 0,
 });
 
-export const selectInvestigatorXPByCode = createPropSelector({
+export const selectSignatureXPByCode = createPropSelector({
 	prop: "xp",
 	defaultvalue: 0,
 });
 
-export const selectInvestigatorCounters = createPropSelector({
+export const selectSignatureCounters = createPropSelector({
 	prop: "counters",
 	defaultvalue: {},
 });

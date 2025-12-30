@@ -2,7 +2,7 @@ import {
 	setBoardChaosTokenOptions,
 	setChaosTokenOptions,
 } from "@modules/chaos-bag/effect/shared/lib";
-import { newGameStarted } from "@shared/lib/store/features/game/actions/startNewGame";
+import { startNewGame } from "@modules/game/entities/startNewGame";
 import { put, takeEvery } from "redux-saga/effects";
 
 function* worker() {
@@ -11,5 +11,5 @@ function* worker() {
 }
 
 export function* resetChaosTokenOptionsOnNewGameSaga() {
-	yield takeEvery(newGameStarted.match, worker);
+	yield takeEvery(startNewGame.match, worker);
 }

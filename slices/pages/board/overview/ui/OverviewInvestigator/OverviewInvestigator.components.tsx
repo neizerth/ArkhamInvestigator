@@ -8,9 +8,9 @@ import {
 } from "@modules/board/base/entities/base/ui/value";
 import { ThemeSignaturePreview } from "@modules/core/theme/features/ui";
 import { FactionView } from "@modules/faction/entities/ui";
+import { SignatureSkills } from "@modules/signature/base/shared/ui";
 import { font, size } from "@shared/config";
 import { Row, TextView } from "@shared/ui";
-import { InvestigatorSkillsPreview } from "@widgets/investigator/investigator-skills-preview";
 import { TouchableOpacity, View } from "react-native";
 import styled from "styled-components/native";
 
@@ -42,9 +42,7 @@ export const Name: typeof TextView = styled(TextView)`
   font-family: ${Alegreya.bold};
 `;
 
-export const Skills: typeof InvestigatorSkillsPreview = styled(
-	InvestigatorSkillsPreview,
-)`
+export const Skills: typeof SignatureSkills = styled(SignatureSkills)`
   
 `;
 

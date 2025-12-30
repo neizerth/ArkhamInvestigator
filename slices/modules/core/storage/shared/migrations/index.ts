@@ -25,6 +25,7 @@ import v23 from "./2025-10-31T09-56-56-set-android-assets-url";
 import v24 from "./2025-11-04T08-21-08-add-sealed-contents";
 import v25 from "./2025-11-10T10-25-18-set-default-skill-check-modifier";
 import v26 from "./2025-12-19T12-01-39-add-default-min-skill-odds-value";
+import v27 from "./2025-12-30T01-56-41-move-investigator-settings";
 
 export const persistConfigMigrations = {
 	0: v0,
@@ -54,4 +55,5 @@ export const persistConfigMigrations = {
 	24: v24,
 	25: v25,
 	26: v26,
+	27: v27,
 };

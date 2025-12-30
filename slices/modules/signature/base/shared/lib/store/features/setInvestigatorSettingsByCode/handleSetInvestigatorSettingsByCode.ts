@@ -11,7 +11,7 @@ export type SetInvestigatorSettingsByCodePayload = {
 export const handleSetInvestigatorSettingsByCode: SignatureHandler<
 	SetInvestigatorSettingsByCodePayload
 > = (state, { code, settings }) => {
-	state.investigatorSettings ??= {};
+	state.signatureSettings ??= {};
 
-	state.investigatorSettings[code] = settings;
+	state.signatureSettings[code] = settings;
 };

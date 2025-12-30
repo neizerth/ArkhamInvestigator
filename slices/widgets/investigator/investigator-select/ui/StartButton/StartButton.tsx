@@ -1,15 +1,12 @@
 import { usePageLoader } from "@modules/core/router/shared/lib";
 import { selectArtworksEnabled } from "@modules/core/theme/shared/lib";
+import { startGame } from "@modules/game/entities/startGame";
 import { getSignatureImageUrl } from "@modules/signature/base/shared/api";
-import {
-	selectSelectedInvestigators,
-	useAppDispatch,
-	useAppSelector,
-} from "@shared/lib";
+import { selectSelectedSignatures } from "@modules/signature/signature-selection/shared/lib";
+import { useAppDispatch, useAppSelector } from "@shared/lib";
 import type { SelectedInvestigator } from "@shared/model";
 import { Fragment, useCallback } from "react";
 import { useTranslation } from "react-i18next";
-import { startGame } from "../../lib";
 import * as C from "./StartButton.components";
 
 const getImageSource = ({ code, image }: SelectedInvestigator) => ({
@@ -23,7 +20,8 @@ export const StartButton = () => {
 	const dispatch = useAppDispatch();
 	const { t } = useTranslation();
 	const artworksEnabled = useAppSelector(selectArtworksEnabled);
-	const investigators = useAppSelector(selectSelectedInvestigators);
+	const selectedSignatures = useAppSelector(selectSelectedSignatures);
+	const signatures = selectedSignatures ?? [];
 
 	const start = useCallback(() => {
 		dispatch(startGame());
@@ -35,7 +33,7 @@ export const StartButton = () => {
 		<C.Container onPress={onStart}>
 			<C.Content>
 				<C.Investigators>
-					{investigators.map((item) => (
+					{signatures.map((item) => (
 						<Fragment key={item.id}>
 							{artworksEnabled ? (
 								<C.InvestigatorImage source={getImageSource(item)} />

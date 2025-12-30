@@ -8,10 +8,10 @@ export type ToggleInvestigatorCounterPayload = {
 export const handleToggleInvestigatorCounter: SignatureHandler<
 	ToggleInvestigatorCounterPayload
 > = (state, { code, abilityId }) => {
-	state.investigatorSettings ??= {};
-	state.investigatorSettings[code] ??= {};
-	state.investigatorSettings[code].counters ??= {};
+	state.signatureSettings ??= {};
+	state.signatureSettings[code] ??= {};
+	state.signatureSettings[code].counters ??= {};
 
-	const enabled = state.investigatorSettings[code].counters[abilityId];
-	state.investigatorSettings[code].counters[abilityId] = !enabled;
+	const enabled = state.signatureSettings[code].counters[abilityId];
+	state.signatureSettings[code].counters[abilityId] = !enabled;
 };

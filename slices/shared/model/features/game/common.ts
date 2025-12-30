@@ -1,8 +1,5 @@
-import type { InvestigatorImage, Story } from "@shared/model";
-import type {
-	Investigator as InvestigatorMedia,
-	InvestigatorSignature,
-} from "arkham-investigator-data";
+import type { InvestigatorImage } from "@shared/model";
+import type { InvestigatorSignature } from "arkham-investigator-data";
 import type { ImageRequireSource } from "react-native";
 
 export type Faction =
@@ -50,14 +47,6 @@ export type SelectedInvestigator = {
 	skin: InvestigatorSignatureSkin | null;
 	image: InvestigatorImage;
 	signatureGroupId: string;
-};
-
-export type InvestigatorDetails = {
-	investigator: InvestigatorSignature;
-	alternate: InvestigatorDetails[];
-	story: Story;
-	media?: InvestigatorMedia;
-	isOfficial: boolean;
 };
 
 export type FactionFilterType = Faction | "spoiler";
