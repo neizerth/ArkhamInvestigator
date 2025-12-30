@@ -3,6 +3,7 @@ import {
 	selectCurrentBoard,
 	setBoard,
 } from "@modules/board/base/shared/lib";
+import type { InvestigatorBoard } from "@modules/board/base/shared/model";
 import { goBack } from "@modules/core/router/shared/lib";
 import { createInvestigatorBoard } from "@modules/mechanics/board/base/entities/lib";
 import { selectSignatureSettingsByCode } from "@modules/signature/base/shared/lib";
@@ -13,6 +14,13 @@ import {
 	selectReplaceSignature,
 	setReplaceSignature,
 } from "../../shared/lib";
+
+const skinChangePayload: Partial<InvestigatorBoard> = {
+	loaded: false,
+	loadProgress: 0,
+	background: null,
+	gameTextSize: null,
+};
 
 function* worker({ payload }: ReturnType<typeof addSelectedSignature>) {
 	const board: ReturnType<typeof selectCurrentBoard> =
@@ -40,7 +48,9 @@ function* worker({ payload }: ReturnType<typeof addSelectedSignature>) {
 
 	const { id, index } = board;
 
-	const updatedBoard = createInvestigatorBoard({
+	const isSameSignature = board.investigator.code === investigator.code;
+
+	let data = createInvestigatorBoard({
 		id,
 		index,
 		investigator,
@@ -51,10 +61,19 @@ function* worker({ payload }: ReturnType<typeof addSelectedSignature>) {
 		mentalTrauma,
 	});
 
+	if (isSameSignature) {
+		data = {
+			...board,
+			...skinChangePayload,
+			image,
+			skinId,
+		};
+	}
+
 	yield put(
 		setBoard({
 			boardId: id,
-			data: updatedBoard,
+			data,
 			history: false,
 		}),
 	);
