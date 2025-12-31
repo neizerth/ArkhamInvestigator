@@ -1,10 +1,14 @@
+import { selectWifiEnabled } from "@modules/core/network/shared/lib";
 import { ArtworksFragment } from "@modules/core/theme/shared/ui";
+import { useAppSelector } from "@shared/lib";
 import { useTranslation } from "react-i18next";
 import { useResumeGame, useStartGame } from "../../lib";
 import { Button } from "../Button";
 import * as C from "./HomePage.components";
+
 export const HomePage = () => {
 	const { t } = useTranslation();
+	const wifiEnabled = useAppSelector(selectWifiEnabled);
 	const onResume = useResumeGame();
 	const onStart = useStartGame();
 
@@ -18,10 +22,12 @@ export const HomePage = () => {
 				enabled={startEnabled}
 			>{t`Single player`}</Button>
 
-			<Button
-				styleType="rounded"
-				enabled={startEnabled}
-			>{t`Multiplayer`}</Button>
+			{wifiEnabled && (
+				<Button
+					styleType="rounded"
+					enabled={startEnabled}
+				>{t`Multiplayer`}</Button>
+			)}
 			{onResume && (
 				<C.ResumeButton onPress={onResume}>{t`Continue`}</C.ResumeButton>
 			)}
