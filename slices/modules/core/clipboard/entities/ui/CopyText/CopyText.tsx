@@ -1,5 +1,4 @@
-import { setClipboardContents } from "@modules/core/clipboard/shared/lib";
-import { sendNotification } from "@modules/core/notifications/shared/lib";
+import { copyText as copy } from "@modules/core/clipboard/entities/lib/store/features/copyText/copyText";
 import { useAppDispatch } from "@shared/lib";
 import { UnscaledText } from "@shared/ui";
 import { useCallback } from "react";
@@ -13,7 +12,7 @@ export type CopyTextProps = TextProps & {
 export const CopyText = ({
 	children,
 	onPress: onPressProp,
-	copyMessage = "clipboard.successCopy",
+	copyMessage,
 	copyText,
 	...props
 }: CopyTextProps) => {
@@ -26,14 +25,7 @@ export const CopyText = ({
 			if (!text) {
 				return;
 			}
-			await setClipboardContents(text);
-
-			dispatch(
-				sendNotification({
-					message: copyMessage,
-					type: "success",
-				}),
-			);
+			dispatch(copy({ text, message: copyMessage }));
 		},
 		[text, onPressProp, copyMessage, dispatch],
 	);

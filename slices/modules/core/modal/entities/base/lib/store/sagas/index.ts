@@ -2,7 +2,6 @@ import { boardSelectModalSaga } from "@modules/core/modal/entities/board-select/
 import { spawn } from "redux-saga/effects";
 import {
 	openClearRevealHistoryWarningSaga,
-	openNewGameWarningSaga,
 	openResetBoardWarningSaga,
 } from "../features";
 
@@ -10,7 +9,6 @@ import {
 export function* modalEntitiesSaga() {
 	yield spawn(openResetBoardWarningSaga);
 	yield spawn(openClearRevealHistoryWarningSaga);
-	yield spawn(openNewGameWarningSaga);
 
 	yield spawn(boardSelectModalSaga);
 }

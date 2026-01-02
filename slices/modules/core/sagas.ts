@@ -1,6 +1,7 @@
 import { spawn } from "redux-saga/effects";
 import { appSaga } from "./app/sagas";
 import { assetsSaga } from "./assets/sagas";
+import { clipboardSaga } from "./clipboard/sagas";
 import { deviceSaga } from "./device/sagas";
 import { diskSaga } from "./disk/sagas";
 import { hapticSaga } from "./haptic/sagas";
@@ -29,4 +30,5 @@ export function* coreModulesSaga() {
 	yield spawn(networkSaga);
 	yield spawn(routerSaga);
 	yield spawn(appSaga);
+	yield spawn(clipboardSaga);
 }

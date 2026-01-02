@@ -1,10 +1,12 @@
 import { takeEvery } from "redux-saga/effects";
+
+import type { GenericFunction } from "@shared/model";
 import { createModalActionFilter } from "./createModalActionFilter";
 
 type Options = {
 	name?: string;
 	actionId: string;
-	worker: () => void;
+	worker: GenericFunction;
 };
 
 export const createCustomModalActionSaga = (options: Options) => {

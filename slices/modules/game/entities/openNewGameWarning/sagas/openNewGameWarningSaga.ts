@@ -9,7 +9,9 @@ import { openModal } from "@modules/core/modal/shared/base/lib";
 import { put, takeEvery } from "redux-saga/effects";
 import { openNewGameWarning } from "../openNewGameWarning";
 
-function* worker() {
+function* worker({ payload }: ReturnType<typeof openNewGameWarning>) {
+	const { type } = payload;
+
 	yield put(
 		openModal({
 			id: ModalId.resetBoard,
@@ -21,6 +23,9 @@ function* worker() {
 					createCancelModalAction(),
 					createConfirmModalAction({
 						id: ModalActionId.startNewGame,
+						data: {
+							type,
+						},
 					}),
 				],
 			},

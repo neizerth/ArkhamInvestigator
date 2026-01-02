@@ -1,4 +1,14 @@
 {
+	"network.no-connection": "Нет подключения к сети",
+	"network.type": "Сеть",
+	"network.type.none": "Нет подключения",
+	"network.type.cellular": "Мобильный",
+	"network.type.other": "Другое",
+	"network.username": "Ваше имя в сети",
+
+	"multiplayer.role.client.title": "Войти в игру",
+	"multiplayer.role.host.title": "Создать игру",
+
 	"error.downloadFailed": "Не удалось загрузить контент. Попробуйте позже или измените подключение к сети. Подробности: {{error}}",
 	"app.disclaimer": "Arkham Horror: The Card Game™ и все связанные материалы © Fantasy Flight Games (FFG). Это приложение не является продуктом, одобренным или связанным с FFG.",
 	"modal.theme.title": "Установить тему",
@@ -350,6 +360,7 @@
 	"navigation.animation": "Анимация экранов",
 
 	"clipboard.successCopy": "Текст успешно скопирован",
+	"clipboard.errorCopy": "Не удалось скопировать текст",
 
 	"chaosBag.enabled": "Используется",
 	"chaosOdds.enabled": "Используются",
@@ -496,5 +507,6 @@
 	"Chaos Odds": "Вероятности мешка хаоса",
 	"Scenario Reference": "Памятка сценария",
 	"Multiplayer": "Мультиплеер",
-	"Single player": "Один игрок"
+	"Single player": "Один игрок",
+	"Code": "Код"
 }

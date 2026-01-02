@@ -39,8 +39,6 @@ export const getChaosOdds = async (
 
 	const { available, revealed } = options;
 
-	console.log("available", available);
-
 	if (isEmpty(available) && isEmpty(revealed)) {
 		return null;
 	}

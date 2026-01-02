@@ -1,12 +1,16 @@
 import { nativeApplicationVersion, nativeBuildVersion } from "expo-application";
+import Constants from "expo-constants";
 import { Platform } from "react-native";
-import pkg from "../../../package.json";
 
-export const APP_VERSION = pkg.version;
+export const APP_VERSION = Constants.expoConfig?.version as string;
+
+export const APP_SCHEME = Constants.expoConfig?.scheme as string;
 
 export const BUILD_VERSION = nativeApplicationVersion;
 
 export const BUILD_ID = nativeBuildVersion;
+
+export const CRYPTO_KEY = process.env.EXPO_PUBLIC_CRYPTO_KEY as string;
 
 export const GOOGLE_PLAY_DOWNLOAD_URL = process.env
 	.EXPO_PUBLIC_GOOGLE_PLAY_URL as string;

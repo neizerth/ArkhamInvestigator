@@ -29,4 +29,6 @@ export const routes = {
 
 	about: r("/static/about"),
 	support: r("/static/support"),
+
+	startMultiplayer: r("/multiplayer"),
 };
