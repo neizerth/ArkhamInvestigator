@@ -94,6 +94,12 @@ interface ChaosOddsJSI {
 	 * @param enabled true to disable idle timer (keep awake), false to enable it
 	 */
 	setKeepAwakeEnabled?(enabled: boolean): void;
+
+	/**
+	 * Get version string from Rust (from Cargo.toml)
+	 * @returns Version string (e.g., "1.0.1")
+	 */
+	version(): string;
 }
 
 declare global {
@@ -398,6 +404,12 @@ function createProtectedWrapper(
 					}
 				}
 			: undefined,
+		version: () => {
+			if (isModuleReloaded(moduleVersion)) {
+				throw new Error("Module was reloaded");
+			}
+			return jsi.version();
+		},
 	};
 }
 

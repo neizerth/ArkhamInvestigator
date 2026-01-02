@@ -118,6 +118,19 @@ void install(Runtime& runtime, std::shared_ptr<react::CallInvoker> jsInvoker) {
     chaosOdds.setProperty(runtime, "setKeepAwakeEnabled", setKeepAwakeFunc);
     LOGI("✅ [JSI] setKeepAwakeEnabled function installed");
     
+    // Install version function
+    LOGI("🔵 [JSI] Installing version function");
+    auto versionFunc = Function::createFromHostFunction(
+        runtime,
+        PropNameID::forAscii(runtime, "version"),
+        0,
+        [](Runtime& rt, const Value& thisValue, const Value* args, size_t count) -> Value {
+            return functions::version(rt, thisValue, args, count);
+        }
+    );
+    chaosOdds.setProperty(runtime, "version", versionFunc);
+    LOGI("✅ [JSI] version function installed");
+    
     // Set global property
     LOGI("🔵 [JSI] Setting global.ChaosOdds property");
     runtime.global().setProperty(runtime, "ChaosOdds", chaosOdds);

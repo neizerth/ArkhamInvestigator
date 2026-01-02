@@ -923,4 +923,22 @@ export const ChaosOddsService = {
 			}
 		}
 	},
+
+	/**
+	 * Get version string from Rust (from Cargo.toml)
+	 * @returns Version string (e.g., "1.0.1")
+	 */
+	version(): string {
+		if (!ChaosOddsJSI) {
+			throw new Error(
+				"ChaosOdds JSI module is not available. JSI bindings may not be installed. Please check that the native module is properly initialized.",
+			);
+		}
+		if (!ChaosOddsJSI.version) {
+			throw new Error(
+				"ChaosOdds JSI module version method is not available. Please rebuild the app to include native bindings.",
+			);
+		}
+		return ChaosOddsJSI.version();
+	},
 };

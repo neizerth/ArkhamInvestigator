@@ -697,6 +697,36 @@ Value setKeepAwakeEnabled(
             return Value::undefined();
 }
 
+Value version(
+    Runtime& runtime,
+    const Value& /*thisValue*/,
+    const Value* /*arguments*/,
+    size_t /*count*/
+) {
+    try {
+        const char* version_ptr = chaos_odds_version();
+        if (version_ptr == nullptr) {
+            LOGE("❌ [JSI] version: Failed to get version from Rust");
+            return Value::undefined();
+        }
+        
+        // Copy the string immediately (Rust owns the memory, we need to free it)
+        std::string version_str(version_ptr);
+        
+        // Free the Rust-allocated string
+        memory_free_string(version_ptr);
+        
+        // Return as JSI string (Hermes will manage the JS string lifetime)
+        return Value(String::createFromUtf8(runtime, version_str));
+    } catch (const std::exception& e) {
+        LOGE("❌ [JSI] version: Exception: %s", e.what());
+        return Value::undefined();
+    } catch (...) {
+        LOGE("❌ [JSI] version: Unknown exception");
+        return Value::undefined();
+    }
+}
+
 } // namespace functions
 } // namespace chaosodds
 } // namespace jsi

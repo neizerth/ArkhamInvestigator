@@ -1,7 +1,7 @@
 {
 	"name": "arkham-investigator",
 	"main": "expo-router/entry",
-	"version": "2.14.1",
+	"version": "2.14.2",
 	"scripts": {
 		"start": "expo start",
 		"reset-project": "node ./scripts/reset-project.js",
@@ -34,6 +34,7 @@
 		"build": "npm run build:android && npm run build:ios",
 		"build:apk": "npm run eas:apk -- --local",
 		"build:android": "npm run eas:android -- --local",
+		"deploy:android": "npm run build:android && npm run submit:android",
 		"build:ios": "npm run prebuild:ios && eas build -p ios --local",
 		"postbuild:ios": "tsx ./cli/rename-build.ts ipa",
 		"postbuild:android": "tsx ./cli/rename-build.ts aab",
@@ -45,7 +46,8 @@
 		"setup": "npm run setup:font",
 		"version:increment": "tsx ./cli/increment-version.ts",
 		"gradle:clean": "cd android && ./gradlew clean",
-		"gradle:clean-cache": "rm -rf android/app/build android/.gradle",
+		"gradle:clean-cache": "rm -rf android/app/build android/.gradle modules/chaos-odds/android/.cxx modules/chaos-odds/android/build/intermediates/cxx",
+		"gradle:clean-modules": "rm -rf modules/*/android/.cxx modules/*/android/build/intermediates/cxx",
 		"expo:clear": "expo start -c",
 		"pod:install": "cd ios && pod install"
 	},

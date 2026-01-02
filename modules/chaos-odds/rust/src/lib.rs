@@ -32,6 +32,7 @@ mod chaos_odds_calculate;
 mod chaos_odds_calculate_async;
 mod chaos_odds_calculate_item;
 mod chaos_odds_find_tokens;
+mod chaos_odds_version;
 pub mod odds;
 
 pub use modifiers::get_chaos_bag_modifiers;
@@ -44,6 +45,7 @@ pub use chaos_odds_calculate::chaos_odds_calculate;
 pub use chaos_odds_calculate_async::chaos_odds_calculate_async;
 pub use chaos_odds_calculate_item::chaos_odds_calculate_item;
 pub use chaos_odds_find_tokens::chaos_odds_find_tokens;
+pub use chaos_odds_version::chaos_odds_version;
 pub use odds::{calculate_odds, calculate_odds_item, get_auto_fail_odds};
 pub use token_odds::get_token_odds;
 pub use util::cancel::chaos_odds_cancel;
@@ -87,3 +89,7 @@ static CHAOS_ODDS_EXPORT_CALCULATE_ASYNC: extern "C" fn(
     u32,
     extern "C" fn(u32, *const std::os::raw::c_char),
 ) = chaos_odds_calculate_async;
+
+#[used]
+#[allow(dead_code)]
+static CHAOS_ODDS_EXPORT_VERSION: extern "C" fn() -> *mut std::os::raw::c_char = chaos_odds_version;

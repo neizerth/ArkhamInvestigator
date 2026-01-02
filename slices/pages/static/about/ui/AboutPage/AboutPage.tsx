@@ -9,6 +9,7 @@ import {
 	ContentPage,
 	type ContentPageProps,
 } from "@widgets/content/content-page";
+import { ChaosOddsService } from "modules/chaos-odds/src/lib/ChaosOddsService";
 import { Trans, useTranslation } from "react-i18next";
 
 export type AboutPageProps = Omit<ContentPageProps, "title">;
@@ -148,6 +149,9 @@ export const AboutPage = (props: AboutPageProps) => {
 					<CopyText copyText={ASSET_URL}>
 						<Bold>Data URL hash</Bold>: 0x{assetUrl}
 					</CopyText>
+				</List.Item>
+				<List.Item>
+					<Bold>Chaos Odds Version</Bold>: {ChaosOddsService.version()}
 				</List.Item>
 			</List>
 			<Title>{t`Device Info`}</Title>

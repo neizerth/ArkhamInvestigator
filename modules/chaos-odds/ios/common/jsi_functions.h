@@ -36,6 +36,9 @@ Value calculateItem(Runtime& runtime, const Value& thisValue, const Value* argum
 /// Set iOS idle timer disabled state (iOS only, no-op on other platforms)
 Value setKeepAwakeEnabled(Runtime& runtime, const Value& thisValue, const Value* arguments, size_t count);
 
+/// Get version string from Rust
+Value version(Runtime& runtime, const Value& thisValue, const Value* arguments, size_t count);
+
 } // namespace functions
 } // namespace chaosodds
 } // namespace jsi

@@ -12,6 +12,7 @@
 		"build:android": "cd cli/build && bash android.sh",
 		"build:android:dev": "cd cli/build && bash android.dev.sh",
 		"clean": "cd rust && cargo clean",
+		"clean:cache": "rm -rf android/.cxx android/build/intermediates/cxx",
 		"test": "cd rust && cargo test --release",
 		"test:dev": "cd rust && cargo test",
 		"test:js": "jest",
