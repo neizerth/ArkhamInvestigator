@@ -1,5 +1,10 @@
-import { type PropsWithChildren, type ReactNode, useEffect } from "react";
-import { useBoolean } from "../../../lib/hooks/common";
+import {
+	type PropsWithChildren,
+	type ReactNode,
+	memo,
+	useEffect,
+	useState,
+} from "react";
 import { delay } from "../../../lib/util/promise";
 import * as C from "./Delay.components";
 
@@ -8,16 +13,16 @@ export type DelayProps = PropsWithChildren & {
 	fallback?: ReactNode;
 };
 
-export const Delay = ({
+const DelayComponent = ({
 	children,
 	delayMs = 100,
 	fallback = <C.Loader />,
 }: DelayProps) => {
-	const [show, setShow] = useBoolean(false);
+	const [show, setShow] = useState(false);
 
 	useEffect(() => {
-		delay(delayMs).then(setShow.on);
-	}, [setShow.on, delayMs]);
+		delay(delayMs).then(() => setShow(true));
+	}, [delayMs]);
 
 	if (!show) {
 		return fallback;
@@ -25,3 +30,5 @@ export const Delay = ({
 
 	return children;
 };
+
+export const Delay = memo(DelayComponent);
