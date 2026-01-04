@@ -3,9 +3,9 @@ import {
 	type ReactNode,
 	memo,
 	useEffect,
+	useRef,
 	useState,
 } from "react";
-import { delay } from "../../../lib/util/promise";
 import * as C from "./Delay.components";
 
 export type DelayProps = PropsWithChildren & {
@@ -19,9 +19,18 @@ const DelayComponent = ({
 	fallback = <C.Loader />,
 }: DelayProps) => {
 	const [show, setShow] = useState(false);
+	const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
 	useEffect(() => {
-		delay(delayMs).then(() => setShow(true));
+		if (timeoutRef.current) {
+			clearTimeout(timeoutRef.current);
+		}
+		timeoutRef.current = setTimeout(() => setShow(true), delayMs);
+		return () => {
+			if (timeoutRef.current) {
+				clearTimeout(timeoutRef.current);
+			}
+		};
 	}, [delayMs]);
 
 	if (!show) {
