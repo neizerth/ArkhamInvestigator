@@ -2,6 +2,7 @@ import type { BoardId } from "@modules/board/base/shared/model";
 import type { ChaosTokenType } from "@modules/chaos-bag/base/shared/model";
 import { selectBoardChaosTokenValueModifications } from "@modules/mechanics/chaos-bag/value/entities/lib";
 
+import { baseSymbolicChaosTokenTypes } from "@modules/chaos-bag/base/shared/config/token/types";
 import type { ChaosTokenValue } from "@modules/chaos-bag/value/shared/model";
 import { selectReferenceCardTokenByType } from "@modules/stories/shared/lib";
 import { createSelector } from "@reduxjs/toolkit";
@@ -14,6 +15,8 @@ const MAX_VALUE = 10;
 const MIN_VALUE = -9;
 
 const defaultData = range(MIN_VALUE, MAX_VALUE + 1);
+
+const scenarioData = range(MIN_VALUE, 1);
 
 type Options = {
 	type: ChaosTokenType;
@@ -49,6 +52,10 @@ export const selectChaosTokenRangeByType = ({
 			}
 
 			if (!item) {
+				if (baseSymbolicChaosTokenTypes.includes(type)) {
+					return scenarioData;
+				}
+
 				return value && specialValues.includes(value) ? [value] : defaultData;
 			}
 
