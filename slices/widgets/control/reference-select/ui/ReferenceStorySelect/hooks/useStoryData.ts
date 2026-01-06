@@ -8,6 +8,7 @@ import {
 } from "@modules/stories/shared/lib";
 import { useAppSelector } from "@shared/lib";
 import type { Story } from "@shared/model";
+import { ascend, descend, prop, sortWith } from "ramda";
 import { useCallback, useMemo } from "react";
 
 export const useStoryData = () => {
@@ -31,7 +32,7 @@ export const useStoryData = () => {
 	);
 
 	const data = useMemo(() => {
-		return stories.map(mapStory).filter((item) => {
+		const data = stories.map(mapStory).filter((item) => {
 			const { value } = item;
 			if (value.code === story?.code) {
 				return true;
@@ -55,6 +56,22 @@ export const useStoryData = () => {
 
 			return true;
 		});
+
+		return sortWith(
+			[
+				descend(prop("translated")),
+				descend((item) => item.value.official),
+				ascend((item) => {
+					const { official, type } = item.value;
+					const pinnedTypes = ["campaign", "side_campaign"];
+					if (official && pinnedTypes.includes(type)) {
+						return 0;
+					}
+					return item.label;
+				}),
+			],
+			data,
+		);
 	}, [stories, story, mapStory, storyType, translated, custom]);
 
 	const item = useMemo(() => {
