@@ -53,7 +53,11 @@ export const getChaosTokenRangeByType = ({
 			return scenarioData;
 		}
 
-		return value && specialValues.includes(value) ? [value] : defaultData;
+		if (value && specialValues.includes(value)) {
+			return [value];
+		}
+
+		return defaultData;
 	}
 
 	if (item.type === "value") {
