@@ -250,6 +250,14 @@ Value pollResult(
     }
     // #endregion
     
+    // CRITICAL: Check runtime lifecycle flag FIRST, before any operations
+    // This prevents use-after-free if runtime was destroyed from background thread
+    // If pollResult is called from background thread (via CallInvoker), runtime may already be dead
+    if (!g_runtime_alive.load(std::memory_order_acquire)) {
+        LOGE("⏱️ [JSI] pollResult: Runtime is not alive (destroyed/invalidated), returning undefined");
+        return Value::undefined();
+    }
+    
     try {
         if (count < 1 || !arguments[0].isNumber()) {
             // #region agent log
@@ -309,11 +317,12 @@ Value pollResult(
             // if pollResult is called twice or React retries, the task should still be available
         }
         
-        // CRITICAL: Check runtime lifecycle flag BEFORE creating any JSI objects
+        // CRITICAL: Check runtime lifecycle flag AGAIN before creating JSI objects
+        // Runtime may have been destroyed between first check and now (race condition)
         // runtime.global() cannot reliably detect destroyed Runtime, so we use atomic flag
         if (!g_runtime_alive.load(std::memory_order_acquire)) {
-            LOGE("⏱️ [JSI] pollResult: Runtime is not alive (destroyed/invalidated), returning null");
-            return Value::null();
+            LOGE("⏱️ [JSI] pollResult: Runtime is not alive (destroyed/invalidated during task copy), returning undefined");
+            return Value::undefined();
         }
         
         // #region agent log
@@ -457,6 +466,10 @@ void markRuntimeDead() {
     std::lock_guard<std::mutex> lock(g_task_storage_mutex);
     g_task_storage.clear();
     LOGI("⏱️ [JSI] Task storage cleared");
+}
+
+bool runtimeAlive() {
+    return g_runtime_alive.load(std::memory_order_acquire);
 }
 
 // freeString removed - no longer needed with memory_id removal
