@@ -28,6 +28,9 @@ class ChaosOddsJSIModulePackage : ReactPackage {
         @Volatile
         private var libraryLoaded = false
         
+        @Volatile
+        private var bindingsInstalled = false
+        
         @Synchronized
         fun ensureLibraryLoaded(context: android.content.Context) {
             if (libraryLoaded) {
@@ -141,6 +144,13 @@ class ChaosOddsJSIModulePackage : ReactPackage {
                 return
             }
             
+            // CRITICAL: Check if bindings are already installed
+            // This prevents multiple installations which can cause SIGSEGV
+            if (bindingsInstalled) {
+                Log.i("ChaosOdds", "⚠️ [Kotlin] JSI bindings already installed, skipping")
+                return
+            }
+            
             // Runtime is ready - install JSI bindings
             Log.i("ChaosOdds", "✅ [Kotlin] Runtime is ready (runtimePtr=$runtimePtr), calling nativeInstall")
             
@@ -157,12 +167,24 @@ class ChaosOddsJSIModulePackage : ReactPackage {
                 Log.w("ChaosOdds", "⚠️ [Kotlin] Failed to get CallInvokerHolder", e)
             }
             
-            try {
-                nativeInstall(runtimePtr, callInvokerHolder)
-                Log.i("ChaosOdds", "✅ [Kotlin] nativeInstall returned successfully")
-            } catch (e: Throwable) {
-                Log.e("ChaosOdds", "❌ [Kotlin] nativeInstall threw exception", e)
-                e.printStackTrace()
+            // CRITICAL: Mark bindings as installing before calling nativeInstall
+            // This prevents concurrent installation attempts
+            synchronized(this) {
+                if (bindingsInstalled) {
+                    Log.i("ChaosOdds", "⚠️ [Kotlin] JSI bindings were installed concurrently, skipping")
+                    return
+                }
+                
+                try {
+                    nativeInstall(runtimePtr, callInvokerHolder)
+                    bindingsInstalled = true
+                    Log.i("ChaosOdds", "✅ [Kotlin] nativeInstall completed successfully, bindings marked as installed")
+                } catch (e: Throwable) {
+                    Log.e("ChaosOdds", "❌ [Kotlin] nativeInstall threw exception", e)
+                    e.printStackTrace()
+                    // Don't mark as installed on failure, so we can retry
+                    throw e
+                }
             }
             Log.i("ChaosOdds", "✅ [Kotlin] JSI bindings installation attempt completed")
             

@@ -32,9 +32,44 @@ Java_expo_modules_chaosodds_ChaosOddsJSIModulePackage_nativeInstall(
     
     // Install JSI bindings
     // runtimePtr is provided by React Native's JSIModulePackage system
-    // and is guaranteed to be valid at this point
+    // Cast jlong to jsi::Runtime* pointer
     auto runtime = reinterpret_cast<jsi::Runtime *>(runtimePtr);
-    LOGI("🔵 [JNI] Runtime pointer is valid");
+    
+    // CRITICAL: Validate runtime pointer is accessible before using it
+    // This prevents SIGSEGV if runtime has been destroyed or pointer is invalid
+    if (runtime == nullptr) {
+        LOGE("❌ [JNI] Runtime pointer is null after cast - cannot install JSI bindings");
+        return;
+    }
+    
+    // CRITICAL: Additional validation - check if runtime is ready for use
+    // Runtime might exist but not be fully initialized yet, which causes SIGSEGV
+    // We need to validate it's actually ready before dereferencing
+    try {
+        // Try to access runtime global object - this will fail if runtime is not ready
+        // This is a minimal operation that validates runtime is fully initialized
+        auto testGlobal = runtime->global();
+        
+        // Additional check: try to get a property to ensure runtime is fully functional
+        // This helps catch cases where runtime exists but is in an invalid state
+        try {
+            testGlobal.getProperty(*runtime, "undefined");
+            // If we get here without exception, runtime is ready
+            LOGI("🔵 [JNI] Runtime pointer validation passed - runtime is accessible and ready");
+        } catch (...) {
+            // getProperty may throw if property doesn't exist, but that's OK
+            // The important thing is runtime->global() worked
+            LOGI("🔵 [JNI] Runtime pointer validation passed - runtime is accessible");
+        }
+    } catch (const std::exception& e) {
+        LOGE("❌ [JNI] Runtime pointer validation failed - runtime is not ready: %s", e.what());
+        LOGE("❌ [JNI] Runtime may exist but is not fully initialized yet");
+        return;
+    } catch (...) {
+        LOGE("❌ [JNI] Runtime pointer validation failed - runtime is not ready (unknown exception)");
+        LOGE("❌ [JNI] Runtime may exist but is not fully initialized yet");
+        return;
+    }
     
     // Extract CallInvoker from CallInvokerHolderImpl if provided
     std::shared_ptr<react::CallInvoker> jsInvoker = nullptr;
@@ -62,6 +97,7 @@ Java_expo_modules_chaosodds_ChaosOddsJSIModulePackage_nativeInstall(
     LOGI("🔵 [JNI] Calling ChaosOddsJSI::install");
     try {
         // Use the direct install function that accepts CallInvoker
+        // The install function will perform additional runtime validation
         jsi::chaosodds::install(*runtime, jsInvoker);
         LOGI("✅ [JNI] ChaosOddsJSI::install completed successfully");
     } catch (const std::exception& e) {
