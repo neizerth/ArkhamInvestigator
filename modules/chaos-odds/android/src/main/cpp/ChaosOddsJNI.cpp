@@ -1,6 +1,7 @@
 #include <jni.h>
 #include <jsi/jsi.h>
 #include "ChaosOddsJSI.h"
+#include "common/jsi_functions.h"
 #include <ReactCommon/CallInvokerHolder.h>
 #include <android/log.h>
 #include <fbjni/fbjni.h>

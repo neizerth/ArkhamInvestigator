@@ -69,23 +69,13 @@ void install(Runtime& runtime, std::shared_ptr<react::CallInvoker> jsInvoker) {
     }
     
     LOGI("🔵 [JSI] Creating ChaosOdds object");
-    Object chaosOdds;
-    try {
-        chaosOdds = Object(runtime);
-        LOGI("🔵 [JSI] ChaosOdds object created successfully");
-    } catch (const std::exception& e) {
-        LOGE("❌ [JSI] Failed to create ChaosOdds object: %s", e.what());
-        return;
-    } catch (...) {
-        LOGE("❌ [JSI] Failed to create ChaosOdds object (unknown exception)");
-        return;
-    }
+    auto chaosOdds = Object(runtime);
+    LOGI("🔵 [JSI] ChaosOdds object created successfully");
     
     // Install calculate function
     LOGI("🔵 [JSI] Installing calculate function");
-    Function calculateFunc;
     try {
-        calculateFunc = Function::createFromHostFunction(
+        auto calculateFunc = Function::createFromHostFunction(
             runtime,
             PropNameID::forAscii(runtime, "calculate"),
             1,
@@ -105,9 +95,8 @@ void install(Runtime& runtime, std::shared_ptr<react::CallInvoker> jsInvoker) {
     
     // Install cancel function
     LOGI("🔵 [JSI] Installing cancel function");
-    Function cancelFunc;
     try {
-        cancelFunc = Function::createFromHostFunction(
+        auto cancelFunc = Function::createFromHostFunction(
             runtime,
             PropNameID::forAscii(runtime, "cancel"),
             0,
@@ -130,9 +119,8 @@ void install(Runtime& runtime, std::shared_ptr<react::CallInvoker> jsInvoker) {
     
     // Install findTokens function
     LOGI("🔵 [JSI] Installing findTokens function");
-    Function findTokensFunc;
     try {
-        findTokensFunc = Function::createFromHostFunction(
+        auto findTokensFunc = Function::createFromHostFunction(
             runtime,
             PropNameID::forAscii(runtime, "findTokens"),
             3,
@@ -152,9 +140,8 @@ void install(Runtime& runtime, std::shared_ptr<react::CallInvoker> jsInvoker) {
     
     // Install calculateItem function
     LOGI("🔵 [JSI] Installing calculateItem function");
-    Function calculateItemFunc;
     try {
-        calculateItemFunc = Function::createFromHostFunction(
+        auto calculateItemFunc = Function::createFromHostFunction(
             runtime,
             PropNameID::forAscii(runtime, "calculateItem"),
             4,
@@ -174,9 +161,8 @@ void install(Runtime& runtime, std::shared_ptr<react::CallInvoker> jsInvoker) {
     
     // Install pollResult function
     LOGI("🔵 [JSI] Installing pollResult function");
-    Function pollResultFunc;
     try {
-        pollResultFunc = Function::createFromHostFunction(
+        auto pollResultFunc = Function::createFromHostFunction(
             runtime,
             PropNameID::forAscii(runtime, "pollResult"),
             1,
@@ -196,9 +182,8 @@ void install(Runtime& runtime, std::shared_ptr<react::CallInvoker> jsInvoker) {
     
     // Install setKeepAwakeEnabled function (iOS only, no-op on Android)
     LOGI("🔵 [JSI] Installing setKeepAwakeEnabled function");
-    Function setKeepAwakeFunc;
     try {
-        setKeepAwakeFunc = Function::createFromHostFunction(
+        auto setKeepAwakeFunc = Function::createFromHostFunction(
             runtime,
             PropNameID::forAscii(runtime, "setKeepAwakeEnabled"),
             1,
@@ -218,9 +203,8 @@ void install(Runtime& runtime, std::shared_ptr<react::CallInvoker> jsInvoker) {
     
     // Install version function
     LOGI("🔵 [JSI] Installing version function");
-    Function versionFunc;
     try {
-        versionFunc = Function::createFromHostFunction(
+        auto versionFunc = Function::createFromHostFunction(
             runtime,
             PropNameID::forAscii(runtime, "version"),
             0,
