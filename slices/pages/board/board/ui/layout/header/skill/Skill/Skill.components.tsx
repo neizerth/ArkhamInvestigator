@@ -80,6 +80,7 @@ export const IconContainer: typeof View = styled(View)`
 
 export const Odds: typeof SkillOdds = styled(SkillOdds)`
   position: absolute;
-  top: -10px;
+  top: -20px;
   right: -10px;
+
 `;
