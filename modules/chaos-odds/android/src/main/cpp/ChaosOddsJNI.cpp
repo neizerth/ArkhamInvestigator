@@ -111,10 +111,11 @@ Java_expo_modules_chaosodds_ChaosOddsJSIModulePackage_nativeInstall(
 
 // JNI function to mark runtime as dead
 // This should be called when ReactApplicationContext is invalidated/destroyed
+// For @JvmStatic functions in companion object, JNI name is without $Companion
 extern "C" JNIEXPORT void JNICALL
 Java_expo_modules_chaosodds_ChaosOddsJSIModulePackage_nativeMarkRuntimeDead(
     JNIEnv *env,
-    jobject thiz
+    jclass clazz
 ) {
     LOGI("🔵 [JNI] nativeMarkRuntimeDead called");
     try {

@@ -64,6 +64,26 @@ class ChaosOddsJSIModulePackage : ReactPackage {
                 // Don't set libraryLoaded = true, so we can retry later
             }
         }
+        
+        // Function to mark runtime as dead when ReactApplicationContext is invalidated
+        // Should be called from a NativeModule's onCatalystInstanceDestroy or similar lifecycle method
+        @JvmStatic
+        @OptIn(FrameworkAPI::class)
+        fun markRuntimeDead() {
+            Log.i("ChaosOdds", "🔵 [Kotlin] markRuntimeDead called")
+            try {
+                // Call JNI function directly - it's a static method
+                nativeMarkRuntimeDead()
+                Log.i("ChaosOdds", "✅ [Kotlin] Runtime marked as dead")
+                bindingsInstalled = false // Reset flag to allow re-installation
+            } catch (e: Throwable) {
+                Log.e("ChaosOdds", "❌ [Kotlin] Failed to mark runtime as dead", e)
+            }
+        }
+        
+        @JvmStatic
+        @OptIn(FrameworkAPI::class)
+        private external fun nativeMarkRuntimeDead()
     }
 
     override fun createNativeModules(reactContext: ReactApplicationContext): List<NativeModule> {
@@ -209,27 +229,5 @@ class ChaosOddsJSIModulePackage : ReactPackage {
 
     @OptIn(FrameworkAPI::class)
     private external fun nativeInstall(runtimePtr: Long, callInvokerHolder: com.facebook.react.turbomodule.core.CallInvokerHolderImpl?)
-    
-    // Function to mark runtime as dead when ReactApplicationContext is invalidated
-    // Should be called from a NativeModule's onCatalystInstanceDestroy or similar lifecycle method
-    @OptIn(FrameworkAPI::class)
-    private external fun nativeMarkRuntimeDead()
-    
-    // Public function to clean up bindings when runtime is destroyed
-    // This should be called from a NativeModule lifecycle method or ReactPackage cleanup
-    companion object {
-        @JvmStatic
-        @OptIn(FrameworkAPI::class)
-        fun markRuntimeDead() {
-            Log.i("ChaosOdds", "🔵 [Kotlin] markRuntimeDead called")
-            try {
-                nativeMarkRuntimeDead()
-                Log.i("ChaosOdds", "✅ [Kotlin] Runtime marked as dead")
-                bindingsInstalled = false // Reset flag to allow re-installation
-            } catch (e: Throwable) {
-                Log.e("ChaosOdds", "❌ [Kotlin] Failed to mark runtime as dead", e)
-            }
-        }
-    }
 }
 
