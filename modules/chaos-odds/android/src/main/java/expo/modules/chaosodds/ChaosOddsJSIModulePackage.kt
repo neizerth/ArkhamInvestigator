@@ -89,10 +89,10 @@ class ChaosOddsJSIModulePackage : ReactPackage {
     override fun createNativeModules(reactContext: ReactApplicationContext): List<NativeModule> {
         Log.i("ChaosOdds", "🔵 [Kotlin] ChaosOddsJSIModulePackage.createNativeModules CALLED")
         
-        // Install JSI bindings when ReactContext is ready
+        // CRITICAL: Install JSI bindings on JS queue thread, not NativeModules queue
+        // JSI runtime is only valid on JS thread - installing on wrong thread causes SIGSEGV
         // This happens early in React Native initialization, before JS code runs
-        // We'll load the library in installJSIBindings when runtime is ready
-        reactContext.runOnNativeModulesQueueThread {
+        reactContext.runOnJSQueueThread {
             installJSIBindings(reactContext)
         }
         

@@ -50,7 +50,7 @@ std::pair<std::string, std::string> extract_strings(Runtime& runtime, const Valu
 
 Value create_result_object(Runtime& runtime, uint64_t id, const std::string& result) {
     // CRITICAL FIX: Wrap in try-catch to prevent crashes from invalid runtime or corrupted strings
-    // PropNameID::forAscii can crash if runtime is invalid or string pointer is corrupted
+    // PropNameID::forUtf8 is used instead of forAscii for better compatibility with RN 0.79+ Hermes
     
     try {
         auto result_obj = Object(runtime);
@@ -66,11 +66,10 @@ Value create_result_object(Runtime& runtime, uint64_t id, const std::string& res
         static const char id_prop_name[] = "id";
         static const char result_prop_name[] = "result";
         
-        // Use PropNameID with explicit length to prevent buffer overreads
-        // This is safer than relying on null-terminated strings
-        // IMPORTANT: PropNameID must be initialized directly (no default constructor in RN 0.71+)
-        PropNameID id_prop = PropNameID::forAscii(runtime, id_prop_name, sizeof(id_prop_name) - 1);
-        PropNameID result_prop = PropNameID::forAscii(runtime, result_prop_name, sizeof(result_prop_name) - 1);
+        // Use PropNameID::forUtf8 instead of forAscii for better compatibility with RN 0.79+ Hermes
+        // This prevents ABI issues that can cause crashes in Hermes
+        PropNameID id_prop = PropNameID::forUtf8(runtime, id_prop_name);
+        PropNameID result_prop = PropNameID::forUtf8(runtime, result_prop_name);
         
         result_obj.setProperty(runtime, id_prop, static_cast<double>(id));
         result_obj.setProperty(runtime, result_prop, String::createFromUtf8(runtime, safe_result));

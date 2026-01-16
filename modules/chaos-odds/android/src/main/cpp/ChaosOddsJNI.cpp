@@ -5,12 +5,17 @@
 #include <ReactCommon/CallInvokerHolder.h>
 #include <android/log.h>
 #include <fbjni/fbjni.h>
+#include <atomic>
 
 #define LOG_TAG "ChaosOdds"
 #define LOGI(...) __android_log_print(ANDROID_LOG_INFO, LOG_TAG, __VA_ARGS__)
 #define LOGE(...) __android_log_print(ANDROID_LOG_ERROR, LOG_TAG, __VA_ARGS__)
 
 using namespace facebook;
+
+// CRITICAL: Guard to prevent double installation
+// This must be static and atomic to prevent race conditions
+static std::atomic<bool> installed{false};
 
 // JNI function for ChaosOddsJSIModulePackage
 // Package: expo.modules.chaosodds
@@ -25,6 +30,13 @@ Java_expo_modules_chaosodds_ChaosOddsJSIModulePackage_nativeInstall(
     jobject callInvokerHolderImpl
 ) {
     LOGI("🔵 [JNI] nativeInstall called with runtime pointer: %lld", (long long)runtimePtr);
+    
+    // CRITICAL: Guard against double installation
+    // If already installed, return immediately to prevent SIGSEGV
+    if (installed.exchange(true)) {
+        LOGI("⚠️ [JNI] JSI bindings already installed, skipping (guard protection)");
+        return;
+    }
     
     if (runtimePtr == 0) {
         LOGE("❌ [JNI] Runtime pointer is null - cannot install JSI bindings");
@@ -103,8 +115,12 @@ Java_expo_modules_chaosodds_ChaosOddsJSIModulePackage_nativeInstall(
         LOGI("✅ [JNI] ChaosOddsJSI::install completed successfully");
     } catch (const std::exception& e) {
         LOGE("❌ [JNI] Exception in ChaosOddsJSI::install: %s", e.what());
+        // Reset flag on failure to allow retry
+        installed.store(false);
     } catch (...) {
         LOGE("❌ [JNI] Unknown exception in ChaosOddsJSI::install");
+        // Reset flag on failure to allow retry
+        installed.store(false);
     }
     
     LOGI("✅ [JNI] nativeInstall finished");
@@ -121,7 +137,9 @@ Java_expo_modules_chaosodds_ChaosOddsJSIModulePackage_nativeMarkRuntimeDead(
     LOGI("🔵 [JNI] nativeMarkRuntimeDead called");
     try {
         jsi::chaosodds::functions::markRuntimeDead();
-        LOGI("✅ [JNI] Runtime marked as dead successfully");
+        // Reset installation flag to allow re-installation on next runtime creation
+        installed.store(false);
+        LOGI("✅ [JNI] Runtime marked as dead successfully, installation flag reset");
     } catch (const std::exception& e) {
         LOGE("❌ [JNI] Exception in markRuntimeDead: %s", e.what());
     } catch (...) {

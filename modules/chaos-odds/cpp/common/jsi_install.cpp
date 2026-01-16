@@ -75,9 +75,22 @@ void install(Runtime& runtime, std::shared_ptr<react::CallInvoker> jsInvoker) {
     // Install calculate function
     LOGI("🔵 [JSI] Installing calculate function");
     try {
+        // CRITICAL: Create PropNameID separately to catch potential Hermes initialization issues
+        // Use forUtf8 instead of forAscii for better compatibility with RN 0.79+ Hermes
+        PropNameID calculateProp;
+        try {
+            calculateProp = PropNameID::forUtf8(runtime, "calculate");
+        } catch (const std::exception& e) {
+            LOGE("❌ [JSI] Failed to create PropNameID for calculate: %s", e.what());
+            return;
+        } catch (...) {
+            LOGE("❌ [JSI] Failed to create PropNameID for calculate (unknown exception)");
+            return;
+        }
+        
         auto calculateFunc = Function::createFromHostFunction(
             runtime,
-            PropNameID::forAscii(runtime, "calculate"),
+            calculateProp,
             1,
             [](Runtime& rt, const Value& thisValue, const Value* args, size_t count) -> Value {
                 return functions::calculate(rt, thisValue, args, count);
@@ -98,7 +111,7 @@ void install(Runtime& runtime, std::shared_ptr<react::CallInvoker> jsInvoker) {
     try {
         auto cancelFunc = Function::createFromHostFunction(
             runtime,
-            PropNameID::forAscii(runtime, "cancel"),
+            PropNameID::forUtf8(runtime, "cancel"),
             0,
             [](Runtime& rt, const Value& thisValue, const Value* args, size_t count) -> Value {
                 return functions::cancel(rt, thisValue, args, count);
@@ -122,7 +135,7 @@ void install(Runtime& runtime, std::shared_ptr<react::CallInvoker> jsInvoker) {
     try {
         auto findTokensFunc = Function::createFromHostFunction(
             runtime,
-            PropNameID::forAscii(runtime, "findTokens"),
+            PropNameID::forUtf8(runtime, "findTokens"),
             3,
             [](Runtime& rt, const Value& thisValue, const Value* args, size_t count) -> Value {
                 return functions::findTokens(rt, thisValue, args, count);
@@ -143,7 +156,7 @@ void install(Runtime& runtime, std::shared_ptr<react::CallInvoker> jsInvoker) {
     try {
         auto calculateItemFunc = Function::createFromHostFunction(
             runtime,
-            PropNameID::forAscii(runtime, "calculateItem"),
+            PropNameID::forUtf8(runtime, "calculateItem"),
             4,
             [](Runtime& rt, const Value& thisValue, const Value* args, size_t count) -> Value {
                 return functions::calculateItem(rt, thisValue, args, count);
@@ -164,7 +177,7 @@ void install(Runtime& runtime, std::shared_ptr<react::CallInvoker> jsInvoker) {
     try {
         auto pollResultFunc = Function::createFromHostFunction(
             runtime,
-            PropNameID::forAscii(runtime, "pollResult"),
+            PropNameID::forUtf8(runtime, "pollResult"),
             1,
             [](Runtime& rt, const Value& thisValue, const Value* args, size_t count) -> Value {
                 return functions::pollResult(rt, thisValue, args, count);
@@ -185,7 +198,7 @@ void install(Runtime& runtime, std::shared_ptr<react::CallInvoker> jsInvoker) {
     try {
         auto setKeepAwakeFunc = Function::createFromHostFunction(
             runtime,
-            PropNameID::forAscii(runtime, "setKeepAwakeEnabled"),
+            PropNameID::forUtf8(runtime, "setKeepAwakeEnabled"),
             1,
             [](Runtime& rt, const Value& thisValue, const Value* args, size_t count) -> Value {
                 return functions::setKeepAwakeEnabled(rt, thisValue, args, count);
@@ -206,7 +219,7 @@ void install(Runtime& runtime, std::shared_ptr<react::CallInvoker> jsInvoker) {
     try {
         auto versionFunc = Function::createFromHostFunction(
             runtime,
-            PropNameID::forAscii(runtime, "version"),
+            PropNameID::forUtf8(runtime, "version"),
             0,
             [](Runtime& rt, const Value& thisValue, const Value* args, size_t count) -> Value {
                 return functions::version(rt, thisValue, args, count);
