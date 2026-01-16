@@ -1,6 +1,6 @@
 import { color, factionColor, font, size } from "@shared/config";
 import type { FC } from "react";
-import { ScrollView, View } from "react-native";
+import { View } from "react-native";
 import type { TextProps, ViewProps } from "react-native";
 
 import { Alegreya } from "@assets/fonts";
@@ -15,6 +15,7 @@ import {
 	type ButtonProps,
 	type IconProps,
 	Row,
+	ScrollView,
 } from "@shared/ui";
 import styled, { css } from "styled-components/native";
 import { FactionSVGPattern } from "../FactionSVGPattern";

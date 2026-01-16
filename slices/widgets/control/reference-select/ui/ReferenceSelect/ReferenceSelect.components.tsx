@@ -5,8 +5,9 @@ import {
 } from "@modules/stories/entities/ui";
 import { color, font, size } from "@shared/config";
 import { Checkbox as BaseCheckbox, Button, Row } from "@shared/ui";
+import { ScrollView } from "@shared/ui";
 import { Dimensions, View } from "react-native";
-import { ScrollView } from "react-native-gesture-handler";
+
 import styled from "styled-components/native";
 import { StoreCheckbox } from "../../../store-checkbox";
 import { ReferenceCardSelect } from "../ReferenceCardSelect";

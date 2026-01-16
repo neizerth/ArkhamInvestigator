@@ -7,3 +7,4 @@ export * from "./Delay";
 export * from "./ErrorBoundary";
 
 export * from "./store";
+export * from "./ScrollView";

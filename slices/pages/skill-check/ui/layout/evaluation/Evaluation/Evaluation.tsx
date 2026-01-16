@@ -26,7 +26,7 @@ export const Evaluation = ({ ...props }: EvaluationProps) => {
 	return (
 		<C.Container {...props}>
 			<C.Content>
-				{showHistory && <C.History size={Number.POSITIVE_INFINITY} />}
+				{showHistory && <C.History unlimited />}
 
 				{!historyShown && (
 					<C.Current>

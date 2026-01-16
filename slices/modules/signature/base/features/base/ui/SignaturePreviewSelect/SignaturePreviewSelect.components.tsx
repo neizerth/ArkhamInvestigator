@@ -4,9 +4,9 @@ import {
 } from "@modules/core/touch/shared/ui";
 import { color, size } from "@shared/config";
 import { Icon } from "@shared/ui";
+import { ScrollView } from "@shared/ui";
 import type { FC } from "react";
 import { View } from "react-native";
-import { ScrollView } from "react-native";
 import styled, { css } from "styled-components/native";
 
 export const Container: typeof View = styled(View)`

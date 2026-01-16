@@ -2,8 +2,9 @@ import { Alegreya } from "@assets/fonts";
 import { TouchableOpacity } from "@modules/core/touch/shared/ui";
 import { color, navBarHeight, size, statusBarHeight } from "@shared/config";
 import { Icon, Row, Text } from "@shared/ui";
+import { ScrollView } from "@shared/ui";
 import { View } from "react-native";
-import { ScrollView } from "react-native-gesture-handler";
+
 import styled, { css } from "styled-components/native";
 
 export const Container: typeof View = styled(View)`

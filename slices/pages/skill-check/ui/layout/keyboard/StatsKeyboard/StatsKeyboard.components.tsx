@@ -1,11 +1,11 @@
 import { color, size } from "@shared/config";
-import { Row } from "@shared/ui";
+import { Row, ScrollView } from "@shared/ui";
 import {
 	IconKeyboardButton,
 	type IconKeyboardButtonProps,
 } from "@widgets/control/keyboard-button";
 import type { FC } from "react";
-import { ScrollView, View } from "react-native";
+import { View } from "react-native";
 import styled from "styled-components/native";
 
 export const Container: typeof ScrollView = styled(ScrollView)`
