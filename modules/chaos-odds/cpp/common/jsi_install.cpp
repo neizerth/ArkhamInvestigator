@@ -75,22 +75,10 @@ void install(Runtime& runtime, std::shared_ptr<react::CallInvoker> jsInvoker) {
     // Install calculate function
     LOGI("🔵 [JSI] Installing calculate function");
     try {
-        // CRITICAL: Create PropNameID separately to catch potential Hermes initialization issues
         // Use forUtf8 instead of forAscii for better compatibility with RN 0.79+ Hermes
-        PropNameID calculateProp;
-        try {
-            calculateProp = PropNameID::forUtf8(runtime, "calculate");
-        } catch (const std::exception& e) {
-            LOGE("❌ [JSI] Failed to create PropNameID for calculate: %s", e.what());
-            return;
-        } catch (...) {
-            LOGE("❌ [JSI] Failed to create PropNameID for calculate (unknown exception)");
-            return;
-        }
-        
         auto calculateFunc = Function::createFromHostFunction(
             runtime,
-            calculateProp,
+            PropNameID::forUtf8(runtime, "calculate"),
             1,
             [](Runtime& rt, const Value& thisValue, const Value* args, size_t count) -> Value {
                 return functions::calculate(rt, thisValue, args, count);
