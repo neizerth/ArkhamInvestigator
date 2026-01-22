@@ -77,10 +77,14 @@ Java_expo_modules_chaosodds_ChaosOddsJSIModulePackage_nativeInstall(
     } catch (const std::exception& e) {
         LOGE("❌ [JNI] Runtime pointer validation failed - runtime is not ready: %s", e.what());
         LOGE("❌ [JNI] Runtime may exist but is not fully initialized yet");
+        // Reset flag on validation failure to allow retry
+        installed.store(false);
         return;
     } catch (...) {
         LOGE("❌ [JNI] Runtime pointer validation failed - runtime is not ready (unknown exception)");
         LOGE("❌ [JNI] Runtime may exist but is not fully initialized yet");
+        // Reset flag on validation failure to allow retry
+        installed.store(false);
         return;
     }
     

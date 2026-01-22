@@ -25,20 +25,31 @@ void install(Runtime& runtime, std::shared_ptr<react::CallInvoker> jsInvoker) {
     
     // CRITICAL: Validate runtime is valid before using it
     // This prevents SIGSEGV if runtime has been destroyed or is invalid
+    // Double-check that runtime is actually functional, not just a pointer
     try {
         auto testGlobal = runtime.global();
-        (void)testGlobal; // Suppress unused variable warning
-        LOGI("🔵 [JSI] Runtime validation passed - runtime is accessible");
+        // Try to access a well-known property to ensure runtime is fully functional
+        // This catches cases where runtime pointer exists but runtime is destroyed
+        try {
+            testGlobal.getProperty(runtime, "Object");
+            LOGI("🔵 [JSI] Runtime validation passed - runtime is accessible and functional");
+        } catch (...) {
+            // Property might not exist, but runtime.global() worked, so it's OK
+            LOGI("🔵 [JSI] Runtime validation passed - runtime is accessible");
+        }
     } catch (const std::exception& e) {
         LOGE("❌ [JSI] Runtime validation failed - runtime is invalid: %s", e.what());
+        LOGE("❌ [JSI] Runtime may have been destroyed - aborting installation");
         return;
     } catch (...) {
         LOGE("❌ [JSI] Runtime validation failed - runtime is invalid (unknown exception)");
+        LOGE("❌ [JSI] Runtime may have been destroyed - aborting installation");
         return;
     }
     
     // CRITICAL: Check if bindings are already installed
     // This prevents SIGSEGV from multiple installations
+    // Also check if runtime is still valid - if getProperty throws, runtime may be destroyed
     try {
         auto global = runtime.global();
         auto chaosOddsValue = global.getProperty(runtime, "ChaosOdds");
@@ -48,13 +59,28 @@ void install(Runtime& runtime, std::shared_ptr<react::CallInvoker> jsInvoker) {
             return;
         }
     } catch (const std::exception& e) {
-        // If getProperty throws, property doesn't exist, which is fine
-        // We'll continue with installation
-        LOGI("🔵 [JSI] ChaosOdds property does not exist yet - proceeding with installation");
+        // If getProperty throws, it could mean:
+        // 1. Property doesn't exist (OK - continue installation)
+        // 2. Runtime is destroyed/invalid (CRITICAL - abort installation)
+        // We'll try to distinguish by checking if we can access global object
+        try {
+            auto testGlobal = runtime.global();
+            (void)testGlobal;
+            LOGI("🔵 [JSI] ChaosOdds property does not exist yet - proceeding with installation");
+        } catch (...) {
+            LOGE("❌ [JSI] Runtime appears to be destroyed (global() failed) - aborting installation");
+            return;
+        }
     } catch (...) {
-        // If getProperty throws unknown exception, continue anyway
-        // Better to try installation than skip it
-        LOGI("🔵 [JSI] Could not check for existing ChaosOdds property - proceeding with installation");
+        // Unknown exception - check if runtime is still valid
+        try {
+            auto testGlobal = runtime.global();
+            (void)testGlobal;
+            LOGI("🔵 [JSI] Could not check for existing ChaosOdds property - proceeding with installation");
+        } catch (...) {
+            LOGE("❌ [JSI] Runtime appears to be destroyed (global() failed) - aborting installation");
+            return;
+        }
     }
     
     // Mark runtime as alive - CRITICAL for preventing use-after-free in pollResult

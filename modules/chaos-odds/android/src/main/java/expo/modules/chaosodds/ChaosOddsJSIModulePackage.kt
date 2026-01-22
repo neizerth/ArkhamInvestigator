@@ -96,9 +96,10 @@ class ChaosOddsJSIModulePackage : ReactPackage {
             installJSIBindings(reactContext)
         }
         
-        // Return empty list - we don't need any NativeModules
-        // JSI bindings are installed directly
-        return emptyList()
+        // CRITICAL: Return a lifecycle-aware NativeModule to track runtime destruction
+        // This ensures markRuntimeDead() is called when ReactApplicationContext is destroyed
+        // This prevents SIGSEGV from using destroyed runtime
+        return listOf(ChaosOddsLifecycleModule(reactContext))
     }
     
     @OptIn(FrameworkAPI::class)
@@ -108,6 +109,18 @@ class ChaosOddsJSIModulePackage : ReactPackage {
         
         try {
             Log.i("ChaosOdds", "🔵 [Kotlin] installJSIBindings attempt #${retryCount + 1}")
+            
+            // CRITICAL: Check if ReactApplicationContext is still valid
+            // If context is destroyed, runtime may be invalid and installation will cause SIGSEGV
+            try {
+                if (!reactContext.hasActiveCatalystInstance()) {
+                    Log.w("ChaosOdds", "⚠️ [Kotlin] ReactApplicationContext has no active CatalystInstance - aborting installation")
+                    return
+                }
+            } catch (e: Throwable) {
+                Log.w("ChaosOdds", "⚠️ [Kotlin] Failed to check CatalystInstance status: ${e.message}")
+                // Continue anyway - hasActiveCatalystInstance may throw in some RN versions
+            }
             
             // CRITICAL: Load library HERE, when runtime is ready
             // This ensures that libreactnativejni.so is fully loaded and initialized
@@ -132,6 +145,17 @@ class ChaosOddsJSIModulePackage : ReactPackage {
                 return
             }
             
+            // CRITICAL: Double-check context validity before accessing JavaScriptContextHolder
+            // Context may have been destroyed between checks
+            try {
+                if (!reactContext.hasActiveCatalystInstance()) {
+                    Log.w("ChaosOdds", "⚠️ [Kotlin] ReactApplicationContext destroyed before accessing JavaScriptContextHolder - aborting")
+                    return
+                }
+            } catch (e: Throwable) {
+                // Ignore - hasActiveCatalystInstance may throw
+            }
+            
             val jsContextHolder: JavaScriptContextHolder? = reactContext.javaScriptContextHolder
             if (jsContextHolder == null) {
                 Log.w("ChaosOdds", "⚠️ [Kotlin] JavaScriptContextHolder is null (attempt #${retryCount + 1})")
@@ -139,7 +163,16 @@ class ChaosOddsJSIModulePackage : ReactPackage {
                     val delay = baseDelayMs * (1 shl retryCount.coerceAtMost(5)) // Exponential backoff, max 3.2s
                     Log.i("ChaosOdds", "⏳ [Kotlin] Retrying in ${delay}ms...")
                     android.os.Handler(android.os.Looper.getMainLooper()).postDelayed({
-                        installJSIBindings(reactContext, retryCount + 1)
+                        // Check context validity before retry
+                        try {
+                            if (reactContext.hasActiveCatalystInstance()) {
+                                installJSIBindings(reactContext, retryCount + 1)
+                            } else {
+                                Log.w("ChaosOdds", "⚠️ [Kotlin] Context destroyed during retry wait - aborting")
+                            }
+                        } catch (e: Throwable) {
+                            Log.w("ChaosOdds", "⚠️ [Kotlin] Context check failed during retry: ${e.message}")
+                        }
                     }, delay)
                 } else {
                     Log.e("ChaosOdds", "❌ [Kotlin] Max retries reached - JavaScriptContextHolder still not available")
@@ -171,17 +204,33 @@ class ChaosOddsJSIModulePackage : ReactPackage {
                 return
             }
             
+            // CRITICAL: Final check - ensure context is still valid before installation
+            // Runtime pointer may be valid but context may have been destroyed
+            try {
+                if (!reactContext.hasActiveCatalystInstance()) {
+                    Log.w("ChaosOdds", "⚠️ [Kotlin] ReactApplicationContext destroyed before nativeInstall - aborting")
+                    return
+                }
+            } catch (e: Throwable) {
+                Log.w("ChaosOdds", "⚠️ [Kotlin] Context check failed before nativeInstall: ${e.message}")
+            }
+            
             // Runtime is ready - install JSI bindings
             Log.i("ChaosOdds", "✅ [Kotlin] Runtime is ready (runtimePtr=$runtimePtr), calling nativeInstall")
             
             // Get CallInvoker for async operations
             var callInvokerHolder: com.facebook.react.turbomodule.core.CallInvokerHolderImpl? = null
             try {
-                callInvokerHolder = reactContext.catalystInstance.jsCallInvokerHolder as? com.facebook.react.turbomodule.core.CallInvokerHolderImpl
-                if (callInvokerHolder != null) {
-                    Log.i("ChaosOdds", "✅ [Kotlin] CallInvokerHolder obtained")
+                // Check context validity before accessing catalystInstance
+                if (reactContext.hasActiveCatalystInstance()) {
+                    callInvokerHolder = reactContext.catalystInstance.jsCallInvokerHolder as? com.facebook.react.turbomodule.core.CallInvokerHolderImpl
+                    if (callInvokerHolder != null) {
+                        Log.i("ChaosOdds", "✅ [Kotlin] CallInvokerHolder obtained")
+                    } else {
+                        Log.w("ChaosOdds", "⚠️ [Kotlin] CallInvokerHolder is null - async operations may not work")
+                    }
                 } else {
-                    Log.w("ChaosOdds", "⚠️ [Kotlin] CallInvokerHolder is null - async operations may not work")
+                    Log.w("ChaosOdds", "⚠️ [Kotlin] Context destroyed before accessing CallInvokerHolder")
                 }
             } catch (e: Throwable) {
                 Log.w("ChaosOdds", "⚠️ [Kotlin] Failed to get CallInvokerHolder", e)
@@ -190,6 +239,16 @@ class ChaosOddsJSIModulePackage : ReactPackage {
             // CRITICAL: Mark bindings as installing before calling nativeInstall
             // This prevents concurrent installation attempts
             synchronized(this) {
+                // Final check inside synchronized block
+                try {
+                    if (!reactContext.hasActiveCatalystInstance()) {
+                        Log.w("ChaosOdds", "⚠️ [Kotlin] Context destroyed in synchronized block - aborting")
+                        return
+                    }
+                } catch (e: Throwable) {
+                    // Ignore
+                }
+                
                 if (bindingsInstalled) {
                     Log.i("ChaosOdds", "⚠️ [Kotlin] JSI bindings were installed concurrently, skipping")
                     return
