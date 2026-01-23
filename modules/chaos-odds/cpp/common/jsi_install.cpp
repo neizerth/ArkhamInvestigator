@@ -23,76 +23,22 @@ namespace chaosodds {
 void install(Runtime& runtime, std::shared_ptr<react::CallInvoker> jsInvoker) {
     LOGI("🔵 [JSI] install() called - starting JSI bindings installation");
     
-    // CRITICAL: Validate runtime is valid before using it
-    // This prevents SIGSEGV if runtime has been destroyed or is invalid
-    // Double-check that runtime is actually functional, not just a pointer
-    try {
-        auto testGlobal = runtime.global();
-        // Try to access a well-known property to ensure runtime is fully functional
-        // This catches cases where runtime pointer exists but runtime is destroyed
-        try {
-            testGlobal.getProperty(runtime, "Object");
-            LOGI("🔵 [JSI] Runtime validation passed - runtime is accessible and functional");
-        } catch (...) {
-            // Property might not exist, but runtime.global() worked, so it's OK
-            LOGI("🔵 [JSI] Runtime validation passed - runtime is accessible");
-        }
-    } catch (const std::exception& e) {
-        LOGE("❌ [JSI] Runtime validation failed - runtime is invalid: %s", e.what());
-        LOGE("❌ [JSI] Runtime may have been destroyed - aborting installation");
-        return;
-    } catch (...) {
-        LOGE("❌ [JSI] Runtime validation failed - runtime is invalid (unknown exception)");
-        LOGE("❌ [JSI] Runtime may have been destroyed - aborting installation");
-        return;
-    }
+    // CRITICAL: NO runtime validation - we trust RN that runtime is valid
+    // Any runtime.global() or getProperty() here = SIGSEGV risk
+    // We install immediately - if runtime is dead, we'll crash, but that's better than false security
     
     // CRITICAL: Check if bindings are already installed
-    // This prevents SIGSEGV from multiple installations
-    // Also check if runtime is still valid - if getProperty throws, runtime may be destroyed
-    try {
-        auto global = runtime.global();
-        auto chaosOddsValue = global.getProperty(runtime, "ChaosOdds");
-        if (chaosOddsValue.isObject()) {
-            LOGI("⚠️ [JSI] ChaosOdds bindings already installed - skipping installation");
-            LOGI("⚠️ [JSI] This prevents multiple installations which can cause SIGSEGV");
-            return;
-        }
-    } catch (const std::exception& e) {
-        // If getProperty throws, it could mean:
-        // 1. Property doesn't exist (OK - continue installation)
-        // 2. Runtime is destroyed/invalid (CRITICAL - abort installation)
-        // We'll try to distinguish by checking if we can access global object
-        try {
-            auto testGlobal = runtime.global();
-            (void)testGlobal;
-            LOGI("🔵 [JSI] ChaosOdds property does not exist yet - proceeding with installation");
-        } catch (...) {
-            LOGE("❌ [JSI] Runtime appears to be destroyed (global() failed) - aborting installation");
-            return;
-        }
-    } catch (...) {
-        // Unknown exception - check if runtime is still valid
-        try {
-            auto testGlobal = runtime.global();
-            (void)testGlobal;
-            LOGI("🔵 [JSI] Could not check for existing ChaosOdds property - proceeding with installation");
-        } catch (...) {
-            LOGE("❌ [JSI] Runtime appears to be destroyed (global() failed) - aborting installation");
-            return;
-        }
+    // BUT: NO try/catch around runtime operations - if runtime is dead, we crash immediately
+    // This is intentional - better to crash early than have false security
+    auto global = runtime.global();
+    auto chaosOddsValue = global.getProperty(runtime, "ChaosOdds");
+    if (chaosOddsValue.isObject()) {
+        LOGI("⚠️ [JSI] ChaosOdds bindings already installed - skipping installation");
+        return;
     }
     
-    // Mark runtime as alive - CRITICAL for preventing use-after-free in pollResult
-    functions::markRuntimeAlive();
-    
-    // Set CallInvoker for async operations
-    if (jsInvoker) {
-        LOGI("🔵 [JSI] Setting CallInvoker for async operations");
-        functions::setCallInvoker(jsInvoker);
-    } else {
-        LOGI("⚠️ [JSI] CallInvoker is null - async operations may not work");
-    }
+    // Synchronous pattern doesn't need CallInvoker
+    (void)jsInvoker; // Suppress unused warning
     
     LOGI("🔵 [JSI] Creating ChaosOdds object");
     auto chaosOdds = Object(runtime);
@@ -100,189 +46,91 @@ void install(Runtime& runtime, std::shared_ptr<react::CallInvoker> jsInvoker) {
     
     // Install calculate function
     LOGI("🔵 [JSI] Installing calculate function");
-    try {
-        // Use forUtf8 instead of forAscii for better compatibility with RN 0.79+ Hermes
-        auto calculateFunc = Function::createFromHostFunction(
-            runtime,
-            PropNameID::forUtf8(runtime, "calculate"),
-            1,
-            [](Runtime& rt, const Value& thisValue, const Value* args, size_t count) -> Value {
-                return functions::calculate(rt, thisValue, args, count);
-            }
-        );
-        chaosOdds.setProperty(runtime, "calculate", calculateFunc);
-        LOGI("✅ [JSI] calculate function installed");
-    } catch (const std::exception& e) {
-        LOGE("❌ [JSI] Failed to install calculate function: %s", e.what());
-        return;
-    } catch (...) {
-        LOGE("❌ [JSI] Failed to install calculate function (unknown exception)");
-        return;
-    }
+    auto calculateFunc = Function::createFromHostFunction(
+        runtime,
+        PropNameID::forUtf8(runtime, "calculate"),
+        1,
+        [](Runtime& rt, const Value& thisValue, const Value* args, size_t count) -> Value {
+            return functions::calculate(rt, thisValue, args, count);
+        }
+    );
+    chaosOdds.setProperty(runtime, "calculate", calculateFunc);
+    LOGI("✅ [JSI] calculate function installed");
     
     // Install cancel function
     LOGI("🔵 [JSI] Installing cancel function");
-    try {
-        auto cancelFunc = Function::createFromHostFunction(
-            runtime,
-            PropNameID::forUtf8(runtime, "cancel"),
-            0,
-            [](Runtime& rt, const Value& thisValue, const Value* args, size_t count) -> Value {
-                return functions::cancel(rt, thisValue, args, count);
-            }
-        );
-        chaosOdds.setProperty(runtime, "cancel", cancelFunc);
-        LOGI("✅ [JSI] cancel function installed");
-    } catch (const std::exception& e) {
-        LOGE("❌ [JSI] Failed to install cancel function: %s", e.what());
-        return;
-    } catch (...) {
-        LOGE("❌ [JSI] Failed to install cancel function (unknown exception)");
-        return;
-    }
-    
-    // Note: freeString removed - strings are now managed automatically by Hermes GC
-    // Result strings are copied to std::string in C++ and Hermes manages the JS string lifetime
+    auto cancelFunc = Function::createFromHostFunction(
+        runtime,
+        PropNameID::forUtf8(runtime, "cancel"),
+        0,
+        [](Runtime& rt, const Value& thisValue, const Value* args, size_t count) -> Value {
+            return functions::cancel(rt, thisValue, args, count);
+        }
+    );
+    chaosOdds.setProperty(runtime, "cancel", cancelFunc);
+    LOGI("✅ [JSI] cancel function installed");
     
     // Install findTokens function
     LOGI("🔵 [JSI] Installing findTokens function");
-    try {
-        auto findTokensFunc = Function::createFromHostFunction(
-            runtime,
-            PropNameID::forUtf8(runtime, "findTokens"),
-            3,
-            [](Runtime& rt, const Value& thisValue, const Value* args, size_t count) -> Value {
-                return functions::findTokens(rt, thisValue, args, count);
-            }
-        );
-        chaosOdds.setProperty(runtime, "findTokens", findTokensFunc);
-        LOGI("✅ [JSI] findTokens function installed");
-    } catch (const std::exception& e) {
-        LOGE("❌ [JSI] Failed to install findTokens function: %s", e.what());
-        return;
-    } catch (...) {
-        LOGE("❌ [JSI] Failed to install findTokens function (unknown exception)");
-        return;
-    }
+    auto findTokensFunc = Function::createFromHostFunction(
+        runtime,
+        PropNameID::forUtf8(runtime, "findTokens"),
+        3,
+        [](Runtime& rt, const Value& thisValue, const Value* args, size_t count) -> Value {
+            return functions::findTokens(rt, thisValue, args, count);
+        }
+    );
+    chaosOdds.setProperty(runtime, "findTokens", findTokensFunc);
+    LOGI("✅ [JSI] findTokens function installed");
     
     // Install calculateItem function
     LOGI("🔵 [JSI] Installing calculateItem function");
-    try {
-        auto calculateItemFunc = Function::createFromHostFunction(
-            runtime,
-            PropNameID::forUtf8(runtime, "calculateItem"),
-            4,
-            [](Runtime& rt, const Value& thisValue, const Value* args, size_t count) -> Value {
-                return functions::calculateItem(rt, thisValue, args, count);
-            }
-        );
-        chaosOdds.setProperty(runtime, "calculateItem", calculateItemFunc);
-        LOGI("✅ [JSI] calculateItem function installed");
-    } catch (const std::exception& e) {
-        LOGE("❌ [JSI] Failed to install calculateItem function: %s", e.what());
-        return;
-    } catch (...) {
-        LOGE("❌ [JSI] Failed to install calculateItem function (unknown exception)");
-        return;
-    }
+    auto calculateItemFunc = Function::createFromHostFunction(
+        runtime,
+        PropNameID::forUtf8(runtime, "calculateItem"),
+        4,
+        [](Runtime& rt, const Value& thisValue, const Value* args, size_t count) -> Value {
+            return functions::calculateItem(rt, thisValue, args, count);
+        }
+    );
+    chaosOdds.setProperty(runtime, "calculateItem", calculateItemFunc);
+    LOGI("✅ [JSI] calculateItem function installed");
     
-    // Install pollResult function
-    LOGI("🔵 [JSI] Installing pollResult function");
-    try {
-        auto pollResultFunc = Function::createFromHostFunction(
-            runtime,
-            PropNameID::forUtf8(runtime, "pollResult"),
-            1,
-            [](Runtime& rt, const Value& thisValue, const Value* args, size_t count) -> Value {
-                return functions::pollResult(rt, thisValue, args, count);
-            }
-        );
-        chaosOdds.setProperty(runtime, "pollResult", pollResultFunc);
-        LOGI("✅ [JSI] pollResult function installed");
-    } catch (const std::exception& e) {
-        LOGE("❌ [JSI] Failed to install pollResult function: %s", e.what());
-        return;
-    } catch (...) {
-        LOGE("❌ [JSI] Failed to install pollResult function (unknown exception)");
-        return;
-    }
+    // pollResult REMOVED - synchronous pattern doesn't need polling
     
     // Install setKeepAwakeEnabled function (iOS only, no-op on Android)
     LOGI("🔵 [JSI] Installing setKeepAwakeEnabled function");
-    try {
-        auto setKeepAwakeFunc = Function::createFromHostFunction(
-            runtime,
-            PropNameID::forUtf8(runtime, "setKeepAwakeEnabled"),
-            1,
-            [](Runtime& rt, const Value& thisValue, const Value* args, size_t count) -> Value {
-                return functions::setKeepAwakeEnabled(rt, thisValue, args, count);
-            }
-        );
-        chaosOdds.setProperty(runtime, "setKeepAwakeEnabled", setKeepAwakeFunc);
-        LOGI("✅ [JSI] setKeepAwakeEnabled function installed");
-    } catch (const std::exception& e) {
-        LOGE("❌ [JSI] Failed to install setKeepAwakeEnabled function: %s", e.what());
-        return;
-    } catch (...) {
-        LOGE("❌ [JSI] Failed to install setKeepAwakeEnabled function (unknown exception)");
-        return;
-    }
+    auto setKeepAwakeFunc = Function::createFromHostFunction(
+        runtime,
+        PropNameID::forUtf8(runtime, "setKeepAwakeEnabled"),
+        1,
+        [](Runtime& rt, const Value& thisValue, const Value* args, size_t count) -> Value {
+            return functions::setKeepAwakeEnabled(rt, thisValue, args, count);
+        }
+    );
+    chaosOdds.setProperty(runtime, "setKeepAwakeEnabled", setKeepAwakeFunc);
+    LOGI("✅ [JSI] setKeepAwakeEnabled function installed");
     
     // Install version function
     LOGI("🔵 [JSI] Installing version function");
-    try {
-        auto versionFunc = Function::createFromHostFunction(
-            runtime,
-            PropNameID::forUtf8(runtime, "version"),
-            0,
-            [](Runtime& rt, const Value& thisValue, const Value* args, size_t count) -> Value {
-                return functions::version(rt, thisValue, args, count);
-            }
-        );
-        chaosOdds.setProperty(runtime, "version", versionFunc);
-        LOGI("✅ [JSI] version function installed");
-    } catch (const std::exception& e) {
-        LOGE("❌ [JSI] Failed to install version function: %s", e.what());
-        return;
-    } catch (...) {
-        LOGE("❌ [JSI] Failed to install version function (unknown exception)");
-        return;
-    }
+    auto versionFunc = Function::createFromHostFunction(
+        runtime,
+        PropNameID::forUtf8(runtime, "version"),
+        0,
+        [](Runtime& rt, const Value& thisValue, const Value* args, size_t count) -> Value {
+            return functions::version(rt, thisValue, args, count);
+        }
+    );
+    chaosOdds.setProperty(runtime, "version", versionFunc);
+    LOGI("✅ [JSI] version function installed");
     
     // Set global property
     LOGI("🔵 [JSI] Setting global.ChaosOdds property");
-    try {
-        runtime.global().setProperty(runtime, "ChaosOdds", chaosOdds);
-        LOGI("✅ [JSI] global.ChaosOdds property set successfully");
-    } catch (const std::exception& e) {
-        LOGE("❌ [JSI] Failed to set global.ChaosOdds property: %s", e.what());
-        return;
-    } catch (...) {
-        LOGE("❌ [JSI] Failed to set global.ChaosOdds property (unknown exception)");
-        return;
-    }
+    runtime.global().setProperty(runtime, "ChaosOdds", chaosOdds);
+    LOGI("✅ [JSI] global.ChaosOdds property set successfully");
     
-    // Note: Multinomial cache is initialized lazily on first call to chaos_odds_calculate
-    // or get_chaos_bag_modifiers, so no separate prewarm function is needed
-    
-    // Verify installation
-    // NOTE: Removed asObject() calls to avoid ABI mismatch issues
-    // In RN 0.79+, asObject() symbols may not be exported from libreactnative.so
-    // Verification is not critical for functionality - just check that property exists
-    try {
-        auto global = runtime.global();
-        auto chaosOddsValue = global.getProperty(runtime, "ChaosOdds");
-        if (chaosOddsValue.isObject()) {
-            LOGI("✅ [JSI] Verification: global.ChaosOdds is an object");
-            // Skip detailed verification to avoid asObject() symbol resolution issues
-        } else {
-            LOGE("❌ [JSI] Verification failed: global.ChaosOdds is not an object");
-        }
-    } catch (const std::exception& e) {
-        LOGE("❌ [JSI] Verification exception: %s", e.what());
-    } catch (...) {
-        LOGE("❌ [JSI] Verification unknown exception");
-    }
+    // Synchronous pattern doesn't need lifecycle tracking
+    // JSI objects are created only during JS → Native calls, never stored
     
     LOGI("✅ [JSI] install() completed successfully");
 }
@@ -290,4 +138,3 @@ void install(Runtime& runtime, std::shared_ptr<react::CallInvoker> jsInvoker) {
 } // namespace chaosodds
 } // namespace jsi
 } // namespace facebook
-

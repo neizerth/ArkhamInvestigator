@@ -8,7 +8,7 @@ import com.facebook.react.common.annotations.FrameworkAPI
 
 /**
  * Lifecycle-aware NativeModule that tracks ReactApplicationContext destruction
- * and calls markRuntimeDead() to prevent SIGSEGV from using destroyed runtime
+ * and resets installation flags for cleanup (synchronous pattern doesn't need lifecycle tracking)
  */
 class ChaosOddsLifecycleModule(reactContext: ReactApplicationContext) : BaseJavaModule() {
     
@@ -23,8 +23,8 @@ class ChaosOddsLifecycleModule(reactContext: ReactApplicationContext) : BaseJava
     @OptIn(FrameworkAPI::class)
     override fun onCatalystInstanceDestroy() {
         Log.i("ChaosOdds", "🔵 [Kotlin] ChaosOddsLifecycleModule.onCatalystInstanceDestroy called")
-        // CRITICAL: Mark runtime as dead when ReactApplicationContext is destroyed
-        // This prevents SIGSEGV from using destroyed runtime in JSI bindings
+        // Reset installation flags when ReactApplicationContext is destroyed
+        // Synchronous pattern doesn't need lifecycle tracking, but we reset flags for cleanup
         ChaosOddsJSIModulePackage.markRuntimeDead()
         super.onCatalystInstanceDestroy()
     }
@@ -32,7 +32,7 @@ class ChaosOddsLifecycleModule(reactContext: ReactApplicationContext) : BaseJava
     @OptIn(FrameworkAPI::class)
     override fun invalidate() {
         Log.i("ChaosOdds", "🔵 [Kotlin] ChaosOddsLifecycleModule.invalidate called")
-        // Also mark runtime as dead on invalidate
+        // Also reset flags on invalidate
         ChaosOddsJSIModulePackage.markRuntimeDead()
         super.invalidate()
     }

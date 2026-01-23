@@ -31,69 +31,37 @@ Java_expo_modules_chaosodds_ChaosOddsJSIModulePackage_nativeInstall(
 ) {
     LOGI("🔵 [JNI] nativeInstall called with runtime pointer: %lld", (long long)runtimePtr);
     
-    // CRITICAL: Guard against double installation
-    // If already installed, return immediately to prevent SIGSEGV
+    // CRITICAL: Check pointer validity - only null check, NO runtime operations
+    if (runtimePtr == 0) {
+        LOGE("❌ [JNI] Runtime pointer is null - cannot install JSI bindings");
+        installed.store(false);
+        return;
+    }
+    
+    // CRITICAL: Guard against double installation - check BEFORE any operations
+    // If already installed, return immediately
+    // We trust RN that runtime is valid when it calls us
     if (installed.exchange(true)) {
         LOGI("⚠️ [JNI] JSI bindings already installed, skipping (guard protection)");
         return;
     }
     
-    if (runtimePtr == 0) {
-        LOGE("❌ [JNI] Runtime pointer is null - cannot install JSI bindings");
-        return;
-    }
-    
-    // Install JSI bindings
-    // runtimePtr is provided by React Native's JSIModulePackage system
     // Cast jlong to jsi::Runtime* pointer
+    // CRITICAL: NO validation of runtime - we trust RN
+    // Any runtime.global() or getProperty() here = SIGSEGV risk
     auto runtime = reinterpret_cast<jsi::Runtime *>(runtimePtr);
     
-    // CRITICAL: Validate runtime pointer is accessible before using it
-    // This prevents SIGSEGV if runtime has been destroyed or pointer is invalid
     if (runtime == nullptr) {
         LOGE("❌ [JNI] Runtime pointer is null after cast - cannot install JSI bindings");
-        return;
-    }
-    
-    // CRITICAL: Additional validation - check if runtime is ready for use
-    // Runtime might exist but not be fully initialized yet, which causes SIGSEGV
-    // We need to validate it's actually ready before dereferencing
-    try {
-        // Try to access runtime global object - this will fail if runtime is not ready
-        // This is a minimal operation that validates runtime is fully initialized
-        auto testGlobal = runtime->global();
-        
-        // Additional check: try to get a property to ensure runtime is fully functional
-        // This helps catch cases where runtime exists but is in an invalid state
-        try {
-            testGlobal.getProperty(*runtime, "undefined");
-            // If we get here without exception, runtime is ready
-            LOGI("🔵 [JNI] Runtime pointer validation passed - runtime is accessible and ready");
-        } catch (...) {
-            // getProperty may throw if property doesn't exist, but that's OK
-            // The important thing is runtime->global() worked
-            LOGI("🔵 [JNI] Runtime pointer validation passed - runtime is accessible");
-        }
-    } catch (const std::exception& e) {
-        LOGE("❌ [JNI] Runtime pointer validation failed - runtime is not ready: %s", e.what());
-        LOGE("❌ [JNI] Runtime may exist but is not fully initialized yet");
-        // Reset flag on validation failure to allow retry
-        installed.store(false);
-        return;
-    } catch (...) {
-        LOGE("❌ [JNI] Runtime pointer validation failed - runtime is not ready (unknown exception)");
-        LOGE("❌ [JNI] Runtime may exist but is not fully initialized yet");
-        // Reset flag on validation failure to allow retry
         installed.store(false);
         return;
     }
     
     // Extract CallInvoker from CallInvokerHolderImpl if provided
+    // CRITICAL: We don't store CallInvoker globally - it's passed to install() but not cached
     std::shared_ptr<react::CallInvoker> jsInvoker = nullptr;
     if (callInvokerHolderImpl != nullptr) {
         try {
-            // Cast jobject to alias_ref for CallInvokerHolder
-            // Use wrap_alias to convert jobject to alias_ref<jobject>, then use static_ref_cast function
             auto callInvokerHolderRef = jni::wrap_alias(static_cast<jobject>(callInvokerHolderImpl));
             auto callInvokerHolder = jni::static_ref_cast<react::CallInvokerHolder::javaobject>(callInvokerHolderRef);
             jsInvoker = callInvokerHolder->cthis()->getCallInvoker();
@@ -111,10 +79,13 @@ Java_expo_modules_chaosodds_ChaosOddsJSIModulePackage_nativeInstall(
         LOGE("⚠️ [JNI] CallInvokerHolderImpl is null - async operations may not work");
     }
     
+    // CRITICAL: Install immediately - NO runtime validation, NO checks
+    // We trust RN that runtime is valid when it calls us
+    // Any runtime.global() or getProperty() before install() = SIGSEGV risk
     LOGI("🔵 [JNI] Calling ChaosOddsJSI::install");
     try {
         // Use the direct install function that accepts CallInvoker
-        // The install function will perform additional runtime validation
+        // install() will do minimal checks and install bindings
         jsi::chaosodds::install(*runtime, jsInvoker);
         LOGI("✅ [JNI] ChaosOddsJSI::install completed successfully");
     } catch (const std::exception& e) {
@@ -130,24 +101,16 @@ Java_expo_modules_chaosodds_ChaosOddsJSIModulePackage_nativeInstall(
     LOGI("✅ [JNI] nativeInstall finished");
 }
 
-// JNI function to mark runtime as dead
-// This should be called when ReactApplicationContext is invalidated/destroyed
-// For @JvmStatic functions in companion object, JNI name is without $Companion
+// JNI function to mark runtime as dead - REMOVED
+// Synchronous pattern doesn't need lifecycle tracking
+// Installation flag is reset automatically on next install() call
 extern "C" JNIEXPORT void JNICALL
 Java_expo_modules_chaosodds_ChaosOddsJSIModulePackage_nativeMarkRuntimeDead(
     JNIEnv *env,
     jclass clazz
 ) {
-    LOGI("🔵 [JNI] nativeMarkRuntimeDead called");
-    try {
-        jsi::chaosodds::functions::markRuntimeDead();
-        // Reset installation flag to allow re-installation on next runtime creation
-        installed.store(false);
-        LOGI("✅ [JNI] Runtime marked as dead successfully, installation flag reset");
-    } catch (const std::exception& e) {
-        LOGE("❌ [JNI] Exception in markRuntimeDead: %s", e.what());
-    } catch (...) {
-        LOGE("❌ [JNI] Unknown exception in markRuntimeDead");
-    }
+    LOGI("🔵 [JNI] nativeMarkRuntimeDead called (no-op in synchronous pattern)");
+    // Reset installation flag to allow re-installation on next runtime creation
+    installed.store(false);
+    LOGI("✅ [JNI] Installation flag reset");
 }
-

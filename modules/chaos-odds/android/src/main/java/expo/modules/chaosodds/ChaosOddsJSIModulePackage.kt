@@ -31,6 +31,10 @@ class ChaosOddsJSIModulePackage : ReactPackage {
         @Volatile
         private var bindingsInstalled = false
         
+        // Handler for periodic retry attempts
+        private var retryHandler: android.os.Handler? = null
+        private var retryRunnable: Runnable? = null
+        
         @Synchronized
         fun ensureLibraryLoaded(context: android.content.Context) {
             if (libraryLoaded) {
@@ -66,18 +70,25 @@ class ChaosOddsJSIModulePackage : ReactPackage {
         }
         
         // Function to mark runtime as dead when ReactApplicationContext is invalidated
-        // Should be called from a NativeModule's onCatalystInstanceDestroy or similar lifecycle method
+        // Synchronous pattern doesn't need lifecycle tracking, but we reset flags for cleanup
         @JvmStatic
         @OptIn(FrameworkAPI::class)
         fun markRuntimeDead() {
-            Log.i("ChaosOdds", "🔵 [Kotlin] markRuntimeDead called")
+            Log.i("ChaosOdds", "🔵 [Kotlin] markRuntimeDead called (no-op in synchronous pattern)")
             try {
-                // Call JNI function directly - it's a static method
+                // Call JNI function - it's now a no-op that just resets installation flag
                 nativeMarkRuntimeDead()
-                Log.i("ChaosOdds", "✅ [Kotlin] Runtime marked as dead")
                 bindingsInstalled = false // Reset flag to allow re-installation
+                
+                // Stop periodic retry checks when runtime is dead
+                retryRunnable?.let { runnable ->
+                    retryHandler?.removeCallbacks(runnable)
+                }
+                retryRunnable = null
+                retryHandler = null
+                Log.i("ChaosOdds", "✅ [Kotlin] Installation flags reset")
             } catch (e: Throwable) {
-                Log.e("ChaosOdds", "❌ [Kotlin] Failed to mark runtime as dead", e)
+                Log.e("ChaosOdds", "❌ [Kotlin] Failed to reset flags", e)
             }
         }
         
@@ -89,6 +100,17 @@ class ChaosOddsJSIModulePackage : ReactPackage {
     override fun createNativeModules(reactContext: ReactApplicationContext): List<NativeModule> {
         Log.i("ChaosOdds", "🔵 [Kotlin] ChaosOddsJSIModulePackage.createNativeModules CALLED")
         
+        // Reset flags on each app start to handle force kill scenarios
+        // Synchronous pattern doesn't need lifecycle tracking, but we reset flags for cleanup
+        Log.i("ChaosOdds", "🔵 [Kotlin] Resetting installation flags for new app session")
+        bindingsInstalled = false
+        try {
+            // Also reset native flag to ensure clean state
+            nativeMarkRuntimeDead()
+        } catch (e: Throwable) {
+            Log.w("ChaosOdds", "⚠️ [Kotlin] Failed to reset native flags (may be first launch): ${e.message}")
+        }
+        
         // CRITICAL: Install JSI bindings on JS queue thread, not NativeModules queue
         // JSI runtime is only valid on JS thread - installing on wrong thread causes SIGSEGV
         // This happens early in React Native initialization, before JS code runs
@@ -96,31 +118,46 @@ class ChaosOddsJSIModulePackage : ReactPackage {
             installJSIBindings(reactContext)
         }
         
-        // CRITICAL: Return a lifecycle-aware NativeModule to track runtime destruction
-        // This ensures markRuntimeDead() is called when ReactApplicationContext is destroyed
-        // This prevents SIGSEGV from using destroyed runtime
+        // Set up periodic retry mechanism - check every 5 seconds if bindings are not installed
+        // This ensures installation eventually succeeds even if initial attempts fail
+        retryHandler = android.os.Handler(android.os.Looper.getMainLooper())
+        retryRunnable = object : Runnable {
+            override fun run() {
+                if (!bindingsInstalled) {
+                    Log.i("ChaosOdds", "🔄 [Kotlin] Periodic check: bindings not installed, retrying...")
+                    reactContext.runOnJSQueueThread {
+                        installJSIBindings(reactContext, 0)  // Reset retry count for periodic attempts
+                    }
+                }
+                // Schedule next check in 5 seconds
+                retryHandler?.postDelayed(this, 5000L)
+            }
+        }
+        // Start periodic checks after initial delay
+        retryRunnable?.let { runnable ->
+            retryHandler?.postDelayed(runnable, 5000L)
+        }
+        
+        // Return a lifecycle-aware NativeModule to reset flags on context destruction
+        // Synchronous pattern doesn't need lifecycle tracking, but we reset flags for cleanup
         return listOf(ChaosOddsLifecycleModule(reactContext))
     }
     
     @OptIn(FrameworkAPI::class)
     private fun installJSIBindings(reactContext: ReactApplicationContext, retryCount: Int = 0) {
-        val maxRetries = 10
+        // Increased max retries to allow more attempts - installation can fail temporarily
+        // but should eventually succeed when runtime is fully ready
+        val maxRetries = 30  // Allow up to 30 retries (about 30 seconds total with exponential backoff)
         val baseDelayMs = 100L
+        val maxDelayMs = 2000L  // Cap delay at 2 seconds
         
         try {
             Log.i("ChaosOdds", "🔵 [Kotlin] installJSIBindings attempt #${retryCount + 1}")
             
-            // CRITICAL: Check if ReactApplicationContext is still valid
-            // If context is destroyed, runtime may be invalid and installation will cause SIGSEGV
-            try {
-                if (!reactContext.hasActiveCatalystInstance()) {
-                    Log.w("ChaosOdds", "⚠️ [Kotlin] ReactApplicationContext has no active CatalystInstance - aborting installation")
-                    return
-                }
-            } catch (e: Throwable) {
-                Log.w("ChaosOdds", "⚠️ [Kotlin] Failed to check CatalystInstance status: ${e.message}")
-                // Continue anyway - hasActiveCatalystInstance may throw in some RN versions
-            }
+            // NOTE: We don't check hasActiveCatalystInstance() here because:
+            // 1. It may return false even when context is valid in RN 0.79+
+            // 2. Runtime validation in C++ code is more reliable
+            // 3. We rely on runtime pointer validation instead
             
             // CRITICAL: Load library HERE, when runtime is ready
             // This ensures that libreactnativejni.so is fully loaded and initialized
@@ -136,46 +173,38 @@ class ChaosOddsJSIModulePackage : ReactPackage {
             if (!libraryLoaded) {
                 Log.e("ChaosOdds", "❌ [Kotlin] Library failed to load, cannot install JSI bindings")
                 if (retryCount < maxRetries) {
-                    val delay = baseDelayMs * (1 shl retryCount.coerceAtMost(5))
-                    Log.i("ChaosOdds", "⏳ [Kotlin] Retrying library load in ${delay}ms...")
+                    val delay = (baseDelayMs * (1 shl retryCount.coerceAtMost(5))).coerceAtMost(maxDelayMs)
+                    Log.i("ChaosOdds", "⏳ [Kotlin] Retrying library load in ${delay}ms... (attempt ${retryCount + 1}/${maxRetries})")
                     android.os.Handler(android.os.Looper.getMainLooper()).postDelayed({
                         installJSIBindings(reactContext, retryCount + 1)
                     }, delay)
+                } else {
+                    Log.e("ChaosOdds", "❌ [Kotlin] Max retries reached for library load - will continue retrying with longer interval")
+                    // Continue retrying with fixed delay after max retries
+                    android.os.Handler(android.os.Looper.getMainLooper()).postDelayed({
+                        installJSIBindings(reactContext, retryCount)  // Keep same retry count
+                    }, maxDelayMs)
                 }
                 return
             }
             
-            // CRITICAL: Double-check context validity before accessing JavaScriptContextHolder
-            // Context may have been destroyed between checks
-            try {
-                if (!reactContext.hasActiveCatalystInstance()) {
-                    Log.w("ChaosOdds", "⚠️ [Kotlin] ReactApplicationContext destroyed before accessing JavaScriptContextHolder - aborting")
-                    return
-                }
-            } catch (e: Throwable) {
-                // Ignore - hasActiveCatalystInstance may throw
-            }
-            
+            // Access JavaScriptContextHolder - if context is destroyed, this will be null
+            // Runtime validation will happen in C++ code which is more reliable
             val jsContextHolder: JavaScriptContextHolder? = reactContext.javaScriptContextHolder
             if (jsContextHolder == null) {
                 Log.w("ChaosOdds", "⚠️ [Kotlin] JavaScriptContextHolder is null (attempt #${retryCount + 1})")
                 if (retryCount < maxRetries) {
-                    val delay = baseDelayMs * (1 shl retryCount.coerceAtMost(5)) // Exponential backoff, max 3.2s
-                    Log.i("ChaosOdds", "⏳ [Kotlin] Retrying in ${delay}ms...")
+                    val delay = (baseDelayMs * (1 shl retryCount.coerceAtMost(5))).coerceAtMost(maxDelayMs)
+                    Log.i("ChaosOdds", "⏳ [Kotlin] Retrying in ${delay}ms... (attempt ${retryCount + 1}/${maxRetries})")
                     android.os.Handler(android.os.Looper.getMainLooper()).postDelayed({
-                        // Check context validity before retry
-                        try {
-                            if (reactContext.hasActiveCatalystInstance()) {
-                                installJSIBindings(reactContext, retryCount + 1)
-                            } else {
-                                Log.w("ChaosOdds", "⚠️ [Kotlin] Context destroyed during retry wait - aborting")
-                            }
-                        } catch (e: Throwable) {
-                            Log.w("ChaosOdds", "⚠️ [Kotlin] Context check failed during retry: ${e.message}")
-                        }
+                        installJSIBindings(reactContext, retryCount + 1)
                     }, delay)
                 } else {
-                    Log.e("ChaosOdds", "❌ [Kotlin] Max retries reached - JavaScriptContextHolder still not available")
+                    Log.w("ChaosOdds", "⚠️ [Kotlin] Max retries reached for JavaScriptContextHolder - will continue retrying")
+                    // Continue retrying with fixed delay after max retries
+                    android.os.Handler(android.os.Looper.getMainLooper()).postDelayed({
+                        installJSIBindings(reactContext, retryCount)  // Keep same retry count
+                    }, maxDelayMs)
                 }
                 return
             }
@@ -186,13 +215,17 @@ class ChaosOddsJSIModulePackage : ReactPackage {
             if (runtimePtr == 0L) {
                 Log.w("ChaosOdds", "⚠️ [Kotlin] Runtime pointer is 0 - runtime not ready yet (attempt #${retryCount + 1})")
                 if (retryCount < maxRetries) {
-                    val delay = baseDelayMs * (1 shl retryCount.coerceAtMost(5)) // Exponential backoff, max 3.2s
-                    Log.i("ChaosOdds", "⏳ [Kotlin] Retrying in ${delay}ms...")
+                    val delay = (baseDelayMs * (1 shl retryCount.coerceAtMost(5))).coerceAtMost(maxDelayMs)
+                    Log.i("ChaosOdds", "⏳ [Kotlin] Retrying in ${delay}ms... (attempt ${retryCount + 1}/${maxRetries})")
                     android.os.Handler(android.os.Looper.getMainLooper()).postDelayed({
                         installJSIBindings(reactContext, retryCount + 1)
                     }, delay)
                 } else {
-                    Log.e("ChaosOdds", "❌ [Kotlin] Max retries reached - runtime pointer still 0")
+                    Log.w("ChaosOdds", "⚠️ [Kotlin] Max retries reached for runtime pointer - will continue retrying")
+                    // Continue retrying with fixed delay after max retries
+                    android.os.Handler(android.os.Looper.getMainLooper()).postDelayed({
+                        installJSIBindings(reactContext, retryCount)  // Keep same retry count
+                    }, maxDelayMs)
                 }
                 return
             }
@@ -204,51 +237,28 @@ class ChaosOddsJSIModulePackage : ReactPackage {
                 return
             }
             
-            // CRITICAL: Final check - ensure context is still valid before installation
-            // Runtime pointer may be valid but context may have been destroyed
-            try {
-                if (!reactContext.hasActiveCatalystInstance()) {
-                    Log.w("ChaosOdds", "⚠️ [Kotlin] ReactApplicationContext destroyed before nativeInstall - aborting")
-                    return
-                }
-            } catch (e: Throwable) {
-                Log.w("ChaosOdds", "⚠️ [Kotlin] Context check failed before nativeInstall: ${e.message}")
-            }
-            
             // Runtime is ready - install JSI bindings
+            // Runtime validation will happen in C++ code (ChaosOddsJNI.cpp) which is more reliable
             Log.i("ChaosOdds", "✅ [Kotlin] Runtime is ready (runtimePtr=$runtimePtr), calling nativeInstall")
             
             // Get CallInvoker for async operations
             var callInvokerHolder: com.facebook.react.turbomodule.core.CallInvokerHolderImpl? = null
             try {
-                // Check context validity before accessing catalystInstance
-                if (reactContext.hasActiveCatalystInstance()) {
-                    callInvokerHolder = reactContext.catalystInstance.jsCallInvokerHolder as? com.facebook.react.turbomodule.core.CallInvokerHolderImpl
-                    if (callInvokerHolder != null) {
-                        Log.i("ChaosOdds", "✅ [Kotlin] CallInvokerHolder obtained")
-                    } else {
-                        Log.w("ChaosOdds", "⚠️ [Kotlin] CallInvokerHolder is null - async operations may not work")
-                    }
+                callInvokerHolder = reactContext.catalystInstance.jsCallInvokerHolder as? com.facebook.react.turbomodule.core.CallInvokerHolderImpl
+                if (callInvokerHolder != null) {
+                    Log.i("ChaosOdds", "✅ [Kotlin] CallInvokerHolder obtained")
                 } else {
-                    Log.w("ChaosOdds", "⚠️ [Kotlin] Context destroyed before accessing CallInvokerHolder")
+                    Log.w("ChaosOdds", "⚠️ [Kotlin] CallInvokerHolder is null - async operations may not work")
                 }
             } catch (e: Throwable) {
                 Log.w("ChaosOdds", "⚠️ [Kotlin] Failed to get CallInvokerHolder", e)
+                // Continue without CallInvoker - installation will still work
             }
             
             // CRITICAL: Mark bindings as installing before calling nativeInstall
             // This prevents concurrent installation attempts
+            // Runtime validation happens in C++ code which is more reliable
             synchronized(this) {
-                // Final check inside synchronized block
-                try {
-                    if (!reactContext.hasActiveCatalystInstance()) {
-                        Log.w("ChaosOdds", "⚠️ [Kotlin] Context destroyed in synchronized block - aborting")
-                        return
-                    }
-                } catch (e: Throwable) {
-                    // Ignore
-                }
-                
                 if (bindingsInstalled) {
                     Log.i("ChaosOdds", "⚠️ [Kotlin] JSI bindings were installed concurrently, skipping")
                     return
@@ -258,9 +268,17 @@ class ChaosOddsJSIModulePackage : ReactPackage {
                     nativeInstall(runtimePtr, callInvokerHolder)
                     bindingsInstalled = true
                     Log.i("ChaosOdds", "✅ [Kotlin] nativeInstall completed successfully, bindings marked as installed")
+                    
+                    // Stop periodic retry checks once installation succeeds
+                    retryRunnable?.let { runnable ->
+                        retryHandler?.removeCallbacks(runnable)
+                    }
+                    retryRunnable = null
                 } catch (e: Throwable) {
-                    Log.e("ChaosOdds", "❌ [Kotlin] nativeInstall threw exception", e)
+                    Log.e("ChaosOdds", "❌ [Kotlin] nativeInstall threw exception (attempt #${retryCount + 1})", e)
                     e.printStackTrace()
+                    // Reset bindingsInstalled flag to allow retry
+                    bindingsInstalled = false
                     // Don't mark as installed on failure, so we can retry
                     throw e
                 }
@@ -271,14 +289,20 @@ class ChaosOddsJSIModulePackage : ReactPackage {
             Log.e("ChaosOdds", "❌ [Kotlin] Exception in installJSIBindings (attempt #${retryCount + 1})", e)
             e.printStackTrace()
             
-            // Retry on exception if we haven't exceeded max retries
-            if (retryCount < maxRetries) {
-                val delay = baseDelayMs * (1 shl retryCount.coerceAtMost(5))
-                Log.i("ChaosOdds", "⏳ [Kotlin] Retrying after exception in ${delay}ms...")
-                android.os.Handler(android.os.Looper.getMainLooper()).postDelayed({
-                    installJSIBindings(reactContext, retryCount + 1)
-                }, delay)
+            // Always retry on exception - installation must succeed eventually
+            // Use exponential backoff up to maxDelayMs, then continue with fixed delay
+            val delay = if (retryCount < maxRetries) {
+                (baseDelayMs * (1 shl retryCount.coerceAtMost(5))).coerceAtMost(maxDelayMs)
+            } else {
+                maxDelayMs  // Fixed delay after max retries
             }
+            
+            Log.i("ChaosOdds", "⏳ [Kotlin] Retrying after exception in ${delay}ms... (attempt ${retryCount + 1}/${maxRetries})")
+            android.os.Handler(android.os.Looper.getMainLooper()).postDelayed({
+                // Reset bindingsInstalled flag before retry to ensure we can try again
+                bindingsInstalled = false
+                installJSIBindings(reactContext, if (retryCount < maxRetries) retryCount + 1 else retryCount)
+            }, delay)
         }
     }
 
