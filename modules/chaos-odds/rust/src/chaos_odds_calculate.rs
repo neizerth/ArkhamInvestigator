@@ -47,56 +47,62 @@ pub extern "C" fn chaos_odds_calculate(
     available_ptr: *const c_char,
     revealed_ptr: *const c_char,
 ) -> *mut c_char {
-    use std::time::Instant;
+    // CRITICAL: Catch panic to prevent UB when called from C++
+    std::panic::catch_unwind(|| {
+        use std::time::Instant;
 
-    let rust_start = Instant::now();
-    eprintln!("⏱️ [Rust] chaos_odds_calculate() called");
+        let rust_start = Instant::now();
+        eprintln!("⏱️ [Rust] chaos_odds_calculate() called");
 
-    // NOTE: reset_cancel_flag() is NOT called here to avoid race conditions.
-    // Reset must be done from C++ code BEFORE calling this function,
-    // AFTER ensuring previous calculations have completed.
+        // NOTE: reset_cancel_flag() is NOT called here to avoid race conditions.
+        // Reset must be done from C++ code BEFORE calling this function,
+        // AFTER ensuring previous calculations have completed.
 
-    // Parse available tokens
-    let parse_start = Instant::now();
-    let available = parse_tokens(available_ptr);
-    let revealed = parse_tokens(revealed_ptr);
-    let parse_duration = parse_start.elapsed();
-    eprintln!("⏱️ [Rust] parse_tokens took {:?}", parse_duration);
+        // Parse available tokens
+        let parse_start = Instant::now();
+        let available = parse_tokens(available_ptr);
+        let revealed = parse_tokens(revealed_ptr);
+        let parse_duration = parse_start.elapsed();
+        eprintln!("⏱️ [Rust] parse_tokens took {:?}", parse_duration);
 
-    let calc_start = Instant::now();
-    eprintln!("⏱️ [Rust] Starting calculate_odds()");
-    let result = match calculate_odds(&available, &revealed) {
-        Some(odds_matrix) => {
-            let calc_duration = calc_start.elapsed();
-            eprintln!(
-                "⏱️ [Rust] calculate_odds() completed in {:?}",
-                calc_duration
-            );
+        let calc_start = Instant::now();
+        eprintln!("⏱️ [Rust] Starting calculate_odds()");
+        let result = match calculate_odds(&available, &revealed) {
+            Some(odds_matrix) => {
+                let calc_duration = calc_start.elapsed();
+                eprintln!(
+                    "⏱️ [Rust] calculate_odds() completed in {:?}",
+                    calc_duration
+                );
 
-            // Matrix already contains values 0-100 (percentages)
-            let serialize_start = Instant::now();
-            let serialized = serialize_matrix(&odds_matrix);
-            let serialize_duration = serialize_start.elapsed();
-            eprintln!("⏱️ [Rust] serialize_matrix took {:?}", serialize_duration);
-            serialized
-        }
-        None => {
-            let calc_duration = calc_start.elapsed();
-            eprintln!(
-                "⏱️ [Rust] calculate_odds() was cancelled after {:?}",
-                calc_duration
-            );
-            // Calculation was cancelled, return null pointer
-            std::ptr::null_mut()
-        }
-    };
+                // Matrix already contains values 0-100 (percentages)
+                let serialize_start = Instant::now();
+                let serialized = serialize_matrix(&odds_matrix);
+                let serialize_duration = serialize_start.elapsed();
+                eprintln!("⏱️ [Rust] serialize_matrix took {:?}", serialize_duration);
+                serialized
+            }
+            None => {
+                let calc_duration = calc_start.elapsed();
+                eprintln!(
+                    "⏱️ [Rust] calculate_odds() was cancelled after {:?}",
+                    calc_duration
+                );
+                // Calculation was cancelled, return null pointer
+                std::ptr::null_mut()
+            }
+        };
 
-    let rust_total = rust_start.elapsed();
-    eprintln!(
-        "⏱️ [Rust] chaos_odds_calculate() total time: {:?}",
-        rust_total
-    );
-    eprintln!("⏱️ [Rust] chaos_odds_calculate() returning result pointer, function completed");
+        let rust_total = rust_start.elapsed();
+        eprintln!(
+            "⏱️ [Rust] chaos_odds_calculate() total time: {:?}",
+            rust_total
+        );
+        eprintln!("⏱️ [Rust] chaos_odds_calculate() returning result pointer, function completed");
 
-    result
+        result
+    }).unwrap_or_else(|_| {
+        eprintln!("⏱️ [Rust] chaos_odds_calculate() panicked - returning null");
+        std::ptr::null_mut()
+    })
 }

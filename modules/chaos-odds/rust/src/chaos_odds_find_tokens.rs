@@ -46,6 +46,8 @@ pub extern "C" fn chaos_odds_find_tokens(
     tokens_ptr: *const c_char,
     params_ptr: *const c_char,
 ) -> *mut c_char {
+    // CRITICAL: Catch panic to prevent UB when called from C++
+    std::panic::catch_unwind(|| {
     // NOTE: reset_cancel_flag() is NOT called here to avoid race conditions.
     // Reset must be done from C++ code BEFORE calling this function,
     // AFTER ensuring previous calculations have completed.
@@ -136,4 +138,8 @@ pub extern "C" fn chaos_odds_find_tokens(
             std::ptr::null_mut()
         }
     }
+    }).unwrap_or_else(|_| {
+        eprintln!("⏱️ [Rust] chaos_odds_find_tokens() panicked - returning null");
+        std::ptr::null_mut()
+    })
 }

@@ -10,9 +10,15 @@ use std::os::raw::c_char;
 /// after use to avoid memory leaks!
 #[no_mangle]
 pub extern "C" fn chaos_odds_version() -> *mut c_char {
-    let version = env!("CARGO_PKG_VERSION");
-    match CString::new(version) {
-        Ok(cstr) => cstr.into_raw(),
-        Err(_) => std::ptr::null_mut(),
-    }
+    // CRITICAL: Catch panic to prevent UB when called from C++
+    std::panic::catch_unwind(|| {
+        let version = env!("CARGO_PKG_VERSION");
+        match CString::new(version) {
+            Ok(cstr) => cstr.into_raw(),
+            Err(_) => std::ptr::null_mut(),
+        }
+    }).unwrap_or_else(|_| {
+        eprintln!("⏱️ [Rust] chaos_odds_version() panicked - returning null");
+        std::ptr::null_mut()
+    })
 }

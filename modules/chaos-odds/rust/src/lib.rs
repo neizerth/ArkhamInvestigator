@@ -42,13 +42,14 @@ pub use util::parse::{parse_tokens, parse_tokens_json, serialize_matrix};
 
 // Re-export public functions (AFTER module declarations)
 pub use chaos_odds_calculate::chaos_odds_calculate;
-pub use chaos_odds_calculate_async::chaos_odds_calculate_async;
 pub use chaos_odds_calculate_item::chaos_odds_calculate_item;
 pub use chaos_odds_find_tokens::chaos_odds_find_tokens;
 pub use chaos_odds_version::chaos_odds_version;
 pub use odds::{calculate_odds, calculate_odds_item, get_auto_fail_odds};
 pub use token_odds::get_token_odds;
-pub use util::cancel::chaos_odds_cancel;
+// TEMPORARILY DISABLED: Async functions may cause crashes
+// pub use chaos_odds_calculate_async::chaos_odds_calculate_async;
+// pub use util::cancel::chaos_odds_cancel;
 
 // Force inclusion of all FFI functions using #[used] static pattern
 // This is the ONLY reliable way to ensure FFI symbols are included in staticlib on iOS
@@ -77,18 +78,7 @@ static CHAOS_ODDS_EXPORT_CALCULATE_ITEM: extern "C" fn(
     u32,
 ) -> *mut std::os::raw::c_char = chaos_odds_calculate_item;
 
-#[used]
-#[allow(dead_code)]
-static CHAOS_ODDS_EXPORT_CANCEL: extern "C" fn() = chaos_odds_cancel;
-
-#[used]
-#[allow(dead_code)]
-static CHAOS_ODDS_EXPORT_CALCULATE_ASYNC: extern "C" fn(
-    *const std::os::raw::c_char,
-    *const std::os::raw::c_char,
-    u32,
-    extern "C" fn(u32, *const std::os::raw::c_char),
-) = chaos_odds_calculate_async;
+// TEMPORARILY DISABLED: Async functions may cause crashes
 
 #[used]
 #[allow(dead_code)]
