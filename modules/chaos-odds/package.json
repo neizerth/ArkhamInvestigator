@@ -11,6 +11,7 @@
 		"build:ios:dev": "cd cli/build && ./ios.dev.sh",
 		"build:android": "cd cli/build && bash android.sh",
 		"build:android:dev": "cd cli/build && bash android.dev.sh",
+		"log:android": "adb logcat | grep ChaosOdds",
 		"clean": "cd rust && cargo clean",
 		"clean:cache": "rm -rf android/.cxx android/build/intermediates/cxx",
 		"test": "cd rust && cargo test --release",

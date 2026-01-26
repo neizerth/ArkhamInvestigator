@@ -23,9 +23,21 @@ message(STATUS "ANDROID_ABI = ${ANDROID_ABI}")
 # React Native 0.79+ provides prefab packages for proper linking
 find_package(ReactAndroid REQUIRED CONFIG)
 find_package(fbjni REQUIRED CONFIG)
+# CRITICAL: hermes-engine is required for RN 0.76+ to avoid SIGSEGV in libhermes.so
+# This provides the actual JSI implementation, not just interfaces
+# Note: In RN 0.79+, hermes-engine may be included in ReactAndroid::reactnative
+# Try to find it, but don't fail if it's not available as a separate prefab
+find_package(hermes-engine QUIET CONFIG)
 
 message(STATUS "Found ReactAndroid prefab package (version: ${ReactAndroid_VERSION})")
 message(STATUS "Found fbjni prefab package")
+if(hermes-engine_FOUND)
+    message(STATUS "Found hermes-engine prefab package")
+    set(HERMES_ENGINE_AVAILABLE TRUE)
+else()
+    message(STATUS "hermes-engine prefab not found - Hermes may be included in ReactAndroid::reactnative")
+    set(HERMES_ENGINE_AVAILABLE FALSE)
+endif()
 
 # In React Native 0.76+, the target name changed from reactnativejni to reactnative
 if (ReactAndroid_VERSION_MINOR GREATER_EQUAL 76)
@@ -110,6 +122,8 @@ find_library(android-lib android)
 
 # Link against React Native prefab targets
 # ReactAndroid::jsi provides JSI symbols (jsi::Runtime, jsi::Value, etc.)
+# hermes-engine::libhermes provides the actual JSI implementation for Hermes (if available as prefab)
+# In RN 0.79+, Hermes may be included in ReactAndroid::reactnative, so we link conditionally
 # ReactAndroid::reactnative (0.76+) or ReactAndroid::reactnativejni (<0.76) provides JNI bindings
 # fbjni::fbjni provides JNI utilities
 # Force load all object files from the Rust static library to ensure all symbols are included
@@ -119,7 +133,7 @@ target_link_libraries(
     ${PACKAGE_NAME}
     PRIVATE
     ReactAndroid::jsi
-    ${REACT_NATIVE_TARGET}
+    ${REACT_NATIVE_TARGET}  # In RN 0.79+, this may already include Hermes
     fbjni::fbjni
     -Wl,--whole-archive
     chaos_odds_rust
@@ -127,6 +141,19 @@ target_link_libraries(
     ${log-lib}
     ${android-lib}
 )
+
+# Link hermes-engine::libhermes if available as a separate prefab package
+# This is critical for RN 0.76+ to avoid SIGSEGV in libhermes.so
+if(HERMES_ENGINE_AVAILABLE)
+    target_link_libraries(
+        ${PACKAGE_NAME}
+        PRIVATE
+        hermes-engine::libhermes
+    )
+    message(STATUS "Linking with hermes-engine::libhermes (separate prefab)")
+else()
+    message(STATUS "Hermes should be included in ReactAndroid::reactnative")
+endif()
 
 # Standard compiler flags for C++ shared library
 target_compile_options(
@@ -152,3 +179,8 @@ set_target_properties(
 message(STATUS "Using Rust lib: ${RUST_LIB_PATH}")
 message(STATUS "Library name: ${PACKAGE_NAME}")
 message(STATUS "Linking with ReactAndroid prefab targets")
+if(HERMES_ENGINE_AVAILABLE)
+    message(STATUS "Linking with hermes-engine::libhermes (separate prefab)")
+else()
+    message(STATUS "Hermes included in ReactAndroid::reactnative")
+endif()

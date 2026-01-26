@@ -257,4 +257,94 @@ export async function calculateItemWithPromise(
 	}
 }
 
-export default getChaosOddsJSI() as ChaosOddsJSI;
+// CRITICAL: Don't call getChaosOddsJSI() at import time!
+// JSI bindings may be installed AFTER this module is imported.
+// Use a function that checks for global.ChaosOdds on every call.
+let cachedJSI: ChaosOddsJSI | undefined = undefined;
+
+function getJSI(): ChaosOddsJSI | undefined {
+	// Always check if global.ChaosOdds exists
+	if (typeof global.ChaosOdds === "undefined") {
+		cachedJSI = undefined;
+		return undefined;
+	}
+
+	// If we have cached JSI, return it
+	if (cachedJSI) {
+		return cachedJSI;
+	}
+
+	// Get fresh JSI wrapper
+	cachedJSI = getChaosOddsJSI();
+	return cachedJSI;
+}
+
+// Create a Proxy that checks for global.ChaosOdds on every access
+// The Proxy allows us to check availability dynamically without calling getChaosOddsJSI() at import time
+const ChaosOddsJSILazy = new Proxy({} as ChaosOddsJSI, {
+	get(_target, prop) {
+		// Special property to check if JSI is available
+		if (prop === "__available" || prop === Symbol.toPrimitive) {
+			return typeof global.ChaosOdds !== "undefined";
+		}
+
+		const jsi = getJSI();
+		if (!jsi) {
+			return undefined;
+		}
+		// Use double cast through unknown to safely access properties
+		const value = (jsi as unknown as Record<string, unknown>)[prop as string];
+		if (typeof value === "function") {
+			return value.bind(jsi);
+		}
+		return value;
+	},
+	has(_target, prop) {
+		const jsi = getJSI();
+		return jsi ? prop in jsi : false;
+	},
+	getOwnPropertyDescriptor(_target, prop) {
+		const jsi = getJSI();
+		if (!jsi) {
+			return undefined;
+		}
+		return Object.getOwnPropertyDescriptor(jsi, prop);
+	},
+	ownKeys(_target) {
+		const jsi = getJSI();
+		if (!jsi) {
+			return [];
+		}
+		return Object.keys(jsi);
+	},
+});
+
+// Make the Proxy falsy when global.ChaosOdds is not available
+// This allows `if (!ChaosOddsJSI)` checks to work correctly
+Object.defineProperty(ChaosOddsJSILazy, Symbol.toPrimitive, {
+	value: (hint: string) => {
+		if (hint === "boolean" || hint === "default") {
+			return typeof global.ChaosOdds !== "undefined";
+		}
+		return null;
+	},
+});
+
+// Add valueOf and toString for boolean coercion
+// Use Object.defineProperty to avoid type errors
+Object.defineProperty(ChaosOddsJSILazy, "valueOf", {
+	value: () => typeof global.ChaosOdds !== "undefined",
+	writable: false,
+	enumerable: false,
+	configurable: false,
+});
+
+Object.defineProperty(ChaosOddsJSILazy, "toString", {
+	value: () =>
+		typeof global.ChaosOdds !== "undefined" ? "[object ChaosOddsJSI]" : "",
+	writable: false,
+	enumerable: false,
+	configurable: false,
+});
+
+export default ChaosOddsJSILazy as ChaosOddsJSI;

@@ -118,14 +118,11 @@ export const ChaosOddsService = {
 			ChaosOddsService.cancel();
 		}
 
-		if (!ChaosOddsJSI) {
+		// Check if JSI is available by checking for the calculate method
+		// The Proxy will return undefined for methods if global.ChaosOdds is not available
+		if (!ChaosOddsJSI || typeof ChaosOddsJSI.calculate !== "function") {
 			throw new Error(
 				"ChaosOdds JSI module is not available. JSI bindings may not be installed. Please check that the native module is properly initialized.",
-			);
-		}
-		if (!ChaosOddsJSI.calculate) {
-			throw new Error(
-				"ChaosOdds JSI module is not available. Please rebuild the app to include native bindings.",
 			);
 		}
 
@@ -308,23 +305,64 @@ export const ChaosOddsService = {
 				}
 
 				// Validate result string before parsing
+				// Check if result exists and is a string
 				if (
-					!calculateResult.result ||
+					!calculateResult ||
+					typeof calculateResult !== "object" ||
+					!calculateResult.result
+				) {
+					console.error("ChaosOdds: Invalid result object:", calculateResult);
+					return null;
+				}
+
+				// Ensure result is a string (may be number or other type from JSI)
+				const resultString = String(calculateResult.result);
+
+				// Validate result string format
+				if (
 					typeof calculateResult.result !== "string" ||
-					calculateResult.result.trim() === "" ||
-					calculateResult.result === "undefined" ||
-					calculateResult.result === "null"
+					resultString.trim() === "" ||
+					resultString === "undefined" ||
+					resultString === "null"
 				) {
 					console.error(
 						"ChaosOdds: Invalid result string:",
-						calculateResult.result,
+						resultString,
+						"(type:",
+						typeof calculateResult.result,
+						")",
+					);
+					return null;
+				}
+
+				// Try to parse as JSON to validate it's valid JSON
+				try {
+					const parsed = JSON.parse(resultString);
+					// Ensure it's an array (expected format for calculate result)
+					if (!Array.isArray(parsed)) {
+						console.error(
+							"ChaosOdds: Result is not a JSON array:",
+							resultString,
+							"(parsed as:",
+							typeof parsed,
+							")",
+						);
+						return null;
+					}
+				} catch (e) {
+					console.error(
+						"ChaosOdds: Result is not valid JSON:",
+						resultString,
+						"(error:",
+						e,
+						")",
 					);
 					return null;
 				}
 
 				// CRITICAL: Copy the string immediately before any async operations
+				// resultString is already validated and converted above
 				const beforeStringCopy = performance.now();
-				const resultString = String(calculateResult.result);
 				const afterStringCopy = performance.now();
 				const resultStringSize = resultString.length;
 
@@ -607,7 +645,7 @@ export const ChaosOddsService = {
 		}).catch(() => {});
 		// #endregion
 
-		if (!ChaosOddsJSI) {
+		if (!ChaosOddsJSI || typeof ChaosOddsJSI.cancel !== "function") {
 			console.warn(
 				"ChaosOdds JSI module is not available. JSI bindings may not be installed.",
 			);
@@ -626,7 +664,7 @@ export const ChaosOddsService = {
 	 * @returns Probability as number (0-100), or null if calculation was cancelled
 	 */
 	async findTokens(options: FindTokensOptions): Promise<number | null> {
-		if (!ChaosOddsJSI) {
+		if (!ChaosOddsJSI || typeof ChaosOddsJSI.findTokens !== "function") {
 			throw new Error(
 				"ChaosOdds JSI module is not available. JSI bindings may not be installed. Please check that the native module is properly initialized.",
 			);
@@ -783,7 +821,7 @@ export const ChaosOddsService = {
 	 * @returns Probability as number (0-100), or null if calculation was cancelled
 	 */
 	async calculateItem(options: CalculateItemOptions): Promise<number | null> {
-		if (!ChaosOddsJSI) {
+		if (!ChaosOddsJSI || typeof ChaosOddsJSI.findTokens !== "function") {
 			throw new Error(
 				"ChaosOdds JSI module is not available. JSI bindings may not be installed. Please check that the native module is properly initialized.",
 			);
@@ -929,7 +967,7 @@ export const ChaosOddsService = {
 	 * @returns Version string (e.g., "1.0.1")
 	 */
 	version(): string {
-		if (!ChaosOddsJSI) {
+		if (!ChaosOddsJSI || typeof ChaosOddsJSI.findTokens !== "function") {
 			throw new Error(
 				"ChaosOdds JSI module is not available. JSI bindings may not be installed. Please check that the native module is properly initialized.",
 			);
