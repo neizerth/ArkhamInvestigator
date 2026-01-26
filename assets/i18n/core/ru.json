@@ -354,6 +354,7 @@
 	"chaosBag.enabled": "Используется",
 	"chaosOdds.enabled": "Используются",
 	"chaosOdds.skillOdds": "Вероятности навыков",
+	"chaosOdds.pinnedCalculationOdds": "Закреплённые расчёты",
 	"chaosOdds.performance.title": "Скорость расчёта вероятностей",
 	"chaosOdds.performance.pageTitle": "Скорость расчёта",
 	"chaosOdds.performance.description": "Цель: выполнение каждого теста за время менее 4 секунд.\nКртиреии оценки: \n< 1 сек - отлично;\n< 2 сек - хорошо;\n< 4 сек - удовлетворительно;\n> 4 сек - плохо.",

@@ -60,6 +60,13 @@ interface ChaosOddsJSI {
 	cancel(): void;
 
 	/**
+	 * Poll result for a task (iOS async pattern)
+	 * @param task_id Task ID returned by calculate()
+	 * @returns Object with {status: number, result: string} or null if not ready
+	 */
+	pollResult?(task_id: number): { status: number; result: string } | null;
+
+	/**
 	 * Set iOS idle timer disabled state (iOS only, no-op on other platforms)
 	 * This prevents the device from going to sleep during long calculations
 	 * @param enabled true to disable idle timer (keep awake), false to enable it
@@ -120,6 +127,18 @@ function createProtectedWrapper(
 			}
 			jsi.cancel();
 		},
+		pollResult: jsi.pollResult
+			? (task_id: number) => {
+					if (isModuleReloaded(moduleVersion)) {
+						throw new Error("Module was reloaded");
+					}
+					const pollFn = jsi.pollResult;
+					if (pollFn) {
+						return pollFn(task_id);
+					}
+					return null;
+				}
+			: undefined,
 		setKeepAwakeEnabled: jsi.setKeepAwakeEnabled
 			? (enabled: boolean) => {
 					if (isModuleReloaded(moduleVersion)) {
@@ -180,8 +199,96 @@ export async function calculateWithPromise(
 	}
 
 	try {
-		// Synchronous call - wrap in Promise.resolve for backwards compatibility
-		const resultString = jsi.calculate(available, revealed);
+		// Call calculate - on Android it returns string directly, on iOS it returns task_id (number)
+		const result = jsi.calculate(available, revealed);
+
+		// Check if result is a number (iOS async pattern - task_id)
+		if (typeof result === "number" && jsi.pollResult) {
+			// iOS async pattern: poll for result
+			return new Promise<CalculateResult | null>((resolve) => {
+				const pollInterval = 50; // Poll every 50ms
+				const maxAttempts = 200; // Max 10 seconds (200 * 50ms)
+				let attempts = 0;
+
+				const poll = () => {
+					attempts++;
+					const pollFn = jsi.pollResult;
+					if (!pollFn) {
+						console.error("ChaosOdds: pollResult is not available");
+						resolve(null);
+						return;
+					}
+					const polledResult = pollFn(result);
+
+					// pollResult returns an object {status: number, result: string} or null
+					if (polledResult !== null && polledResult !== undefined) {
+						// Check if it's an object with result property
+						if (
+							typeof polledResult === "object" &&
+							"result" in polledResult &&
+							typeof (polledResult as { result: unknown }).result === "string"
+						) {
+							// Result is ready - extract the string from the object
+							const resultObj = polledResult as {
+								status: number;
+								result: string;
+							};
+							resolve({
+								result: resultObj.result,
+							});
+						} else if (typeof polledResult === "string") {
+							// Fallback: if it's already a string (shouldn't happen, but handle it)
+							resolve({
+								result: polledResult,
+							});
+						} else if (attempts >= maxAttempts) {
+							// Timeout - result is still not ready
+							console.error(
+								"ChaosOdds: pollResult timeout after",
+								maxAttempts * pollInterval,
+								"ms, last result:",
+								polledResult,
+							);
+							resolve(null);
+						} else {
+							// Continue polling - result is not ready yet (null or object without result)
+							setTimeout(poll, pollInterval);
+						}
+					} else if (attempts >= maxAttempts) {
+						// Timeout
+						console.error(
+							"ChaosOdds: pollResult timeout after",
+							maxAttempts * pollInterval,
+							"ms",
+						);
+						resolve(null);
+					} else {
+						// Continue polling - result is null (not ready yet)
+						setTimeout(poll, pollInterval);
+					}
+				};
+
+				// Start polling
+				setTimeout(poll, pollInterval);
+			});
+		}
+
+		// Android synchronous pattern: result is already a string
+		// CRITICAL: Ensure result is always a string
+		const resultString = typeof result === "string" ? result : String(result);
+
+		// Log if result was not a string to help debug
+		if (typeof result !== "string") {
+			console.warn(
+				"ChaosOdds: calculate() returned non-string type:",
+				typeof result,
+				"value:",
+				result,
+				"converted to:",
+				resultString,
+			);
+		}
+
 		return Promise.resolve({
 			result: resultString,
 		});
@@ -211,7 +318,20 @@ export async function findTokensWithPromise(
 
 	try {
 		// Synchronous call - wrap in Promise.resolve for backwards compatibility
-		const resultString = jsi.findTokens(targets, tokens, params);
+		const result = jsi.findTokens(targets, tokens, params);
+
+		// CRITICAL: Ensure result is always a string
+		const resultString = typeof result === "string" ? result : String(result);
+
+		if (typeof result !== "string") {
+			console.warn(
+				"ChaosOdds: findTokens() returned non-string type:",
+				typeof result,
+				"value:",
+				result,
+			);
+		}
+
 		return Promise.resolve({
 			result: resultString,
 		});
@@ -242,12 +362,25 @@ export async function calculateItemWithPromise(
 
 	try {
 		// Synchronous call - wrap in Promise.resolve for backwards compatibility
-		const resultString = jsi.calculateItem(
+		const result = jsi.calculateItem(
 			available,
 			revealed,
 			skill_value,
 			difficulty,
 		);
+
+		// CRITICAL: Ensure result is always a string
+		const resultString = typeof result === "string" ? result : String(result);
+
+		if (typeof result !== "string") {
+			console.warn(
+				"ChaosOdds: calculateItem() returned non-string type:",
+				typeof result,
+				"value:",
+				result,
+			);
+		}
+
 		return Promise.resolve({
 			result: resultString,
 		});

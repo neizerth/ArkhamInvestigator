@@ -96,7 +96,7 @@ void install(Runtime& runtime, std::shared_ptr<react::CallInvoker> jsInvoker) {
         auto calculateFunc = Function::createFromHostFunction(
             runtime,
             PropNameID::forAscii(runtime, "calculate"),
-            1,
+            2,  // CRITICAL: calculate() takes 2 arguments: available and revealed
             [](Runtime& rt, const Value& thisValue, const Value* args, size_t count) -> Value {
                 return functions::calculate(rt, thisValue, args, count);
             }

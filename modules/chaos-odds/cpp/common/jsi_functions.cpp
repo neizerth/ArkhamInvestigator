@@ -6,6 +6,17 @@
 #include <exception>
 #include <string>
 
+#ifdef __ANDROID__
+#include <android/log.h>
+#define LOG_TAG "ChaosOdds"
+#define LOGI(...) __android_log_print(ANDROID_LOG_INFO, LOG_TAG, __VA_ARGS__)
+#define LOGE(...) __android_log_print(ANDROID_LOG_ERROR, LOG_TAG, __VA_ARGS__)
+#else
+// iOS logging - use fprintf(stderr) for all threads
+#define LOGI(...) do { fprintf(stderr, "[ChaosOdds] "); fprintf(stderr, __VA_ARGS__); fprintf(stderr, "\n"); fflush(stderr); } while(0)
+#define LOGE(...) do { fprintf(stderr, "[ChaosOdds ERROR] "); fprintf(stderr, __VA_ARGS__); fprintf(stderr, "\n"); fflush(stderr); } while(0)
+#endif
+
 namespace facebook {
 namespace jsi {
 namespace chaosodds {
@@ -52,14 +63,25 @@ Value calculate(
         throw JSError(runtime, errorMessage);
     }
 
+    LOGI("🔵 [JSI] Calling chaos_odds_calculate with available: %s, revealed: %s", 
+         available.c_str(), revealed.c_str());
+    
     const char* result_ptr = chaos_odds_calculate(available.c_str(), revealed.c_str());
     if (result_ptr == nullptr) {
+        LOGE("❌ [JSI] chaos_odds_calculate returned null");
         throw JSError(runtime, "chaos_odds_calculate returned null");
     }
 
     std::string result_str(result_ptr);
+    LOGI("🔵 [JSI] chaos_odds_calculate returned string of length: %zu, first 100 chars: %s", 
+         result_str.length(), result_str.substr(0, 100).c_str());
+    
     memory_free_string(result_ptr);
-    return Value(String::createFromUtf8(runtime, result_str));
+    
+    // CRITICAL: Ensure we return a String value, not a number
+    auto result_value = Value(String::createFromUtf8(runtime, result_str));
+    LOGI("✅ [JSI] Returning String value to JS");
+    return result_value;
 }
 
 // pollResult REMOVED - synchronous pattern doesn't need polling

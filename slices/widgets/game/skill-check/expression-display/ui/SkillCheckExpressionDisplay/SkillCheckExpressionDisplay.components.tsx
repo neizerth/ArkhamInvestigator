@@ -29,7 +29,7 @@ export const Wrapper: typeof View = styled(View)`
 
 export const Odds: typeof Text = styled(Text)`
   position: absolute;
-  bottom: 17px;
+  bottom: 19px;
   right: 0px;
   height: ${font.size.default}px;
   width: 35px;

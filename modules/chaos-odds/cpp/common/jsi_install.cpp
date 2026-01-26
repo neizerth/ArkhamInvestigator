@@ -45,7 +45,7 @@ void install(Runtime& runtime, std::shared_ptr<react::CallInvoker> jsInvoker) {
         Function::createFromHostFunction(
             runtime,
             PropNameID::forUtf8(runtime, "calculate"),
-            1,
+            2,  // CRITICAL: calculate() takes 2 arguments: available and revealed
             functions::calculate
         )
     );

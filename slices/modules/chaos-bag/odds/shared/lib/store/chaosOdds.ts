@@ -9,6 +9,7 @@ export type ChaosOddsState = {
 
 	showChaosBagOdds: boolean;
 	showSkillOdds: boolean;
+	showPinnedCalculationOdds: boolean;
 	minSkillOddsValue: number;
 	completedChaosOddsPerformanceTests: Record<string, number> | null;
 };
@@ -19,6 +20,7 @@ const initialState: ChaosOddsState = {
 	boardOddsLoading: false,
 	showChaosBagOdds: false,
 	showSkillOdds: false,
+	showPinnedCalculationOdds: false,
 	minSkillOddsValue: 0,
 	completedChaosOddsPerformanceTests: null,
 };
@@ -37,6 +39,7 @@ export const {
 	setShowChaosBagOdds,
 	setShowSkillOdds,
 	setCompletedChaosOddsPerformanceTests,
+	setShowPinnedCalculationOdds,
 } = chaosOdds.actions;
 
 export const {
@@ -46,6 +49,7 @@ export const {
 	selectShowChaosBagOdds,
 	selectShowSkillOdds,
 	selectCompletedChaosOddsPerformanceTests,
+	selectShowPinnedCalculationOdds,
 } = chaosOdds.selectors;
 
 export default chaosOdds.reducer;
