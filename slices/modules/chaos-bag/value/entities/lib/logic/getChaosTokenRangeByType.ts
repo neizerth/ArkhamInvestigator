@@ -5,14 +5,16 @@ import type {
 } from "@modules/chaos-bag/base/shared/model";
 
 import { baseSymbolicChaosTokenTypes } from "@modules/chaos-bag/base/shared/config/token/types";
+import { defaultChaosTokenValue } from "@modules/chaos-bag/value/shared/config";
 import type { ChaosTokenValue } from "@modules/chaos-bag/value/shared/model";
-import { rangeStep } from "@shared/lib";
 import type { ReferenceCardToken } from "arkham-investigator-data";
 import { range } from "ramda";
 import { isUndefined } from "ramda-adjunct";
 import { getSelectRange, getValueRange } from "./range";
-const MAX_VALUE = 10;
-const MIN_VALUE = -9;
+import { getCounterRange } from "./range/getCounterRange";
+
+const MAX_VALUE = defaultChaosTokenValue.max;
+const MIN_VALUE = defaultChaosTokenValue.min;
 
 const defaultData = range(MIN_VALUE, MAX_VALUE + 1);
 
@@ -65,11 +67,7 @@ export const getChaosTokenRangeByType = ({
 	}
 
 	if (item.type === "counter") {
-		const { max = MAX_VALUE, step } = item;
-
-		const min = item.min ?? Math.ceil(MIN_VALUE / step) * step;
-
-		return rangeStep(min, max + 1, step);
+		return getCounterRange(item);
 	}
 
 	if (item.type === "select" && item.values) {

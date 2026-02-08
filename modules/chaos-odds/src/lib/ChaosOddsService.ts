@@ -50,68 +50,10 @@ export const ChaosOddsService = {
 		// Generate cache key for this calculation
 		const cacheKey = getCacheKey(available, revealed);
 
-		// #region agent log
-		fetch("http://127.0.0.1:7242/ingest/4756e9c3-5ffd-47b8-90a7-0998864a23df", {
-			method: "POST",
-			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify({
-				location: "ChaosOddsService.ts:32",
-				message: "calculate entry",
-				data: {
-					hasInflightPromise: !!inflightPromise,
-					inflightKey,
-					matchesCache: inflightKey === cacheKey,
-				},
-				timestamp: Date.now(),
-				sessionId: "debug-session",
-				runId: "run1",
-				hypothesisId: "B",
-			}),
-		}).catch(() => {});
-		// #endregion
-
 		// If there's an in-flight Promise with the same parameters, return it
 		if (inflightPromise && inflightKey === cacheKey) {
-			// #region agent log
-			fetch(
-				"http://127.0.0.1:7242/ingest/4756e9c3-5ffd-47b8-90a7-0998864a23df",
-				{
-					method: "POST",
-					headers: { "Content-Type": "application/json" },
-					body: JSON.stringify({
-						location: "ChaosOddsService.ts:37",
-						message: "cache hit - returning existing promise",
-						data: { timeSinceStart: performance.now() - calcStartTime },
-						timestamp: Date.now(),
-						sessionId: "debug-session",
-						runId: "run1",
-						hypothesisId: "B",
-					}),
-				},
-			).catch(() => {});
-			// #endregion
 			return inflightPromise;
 		}
-
-		// #region agent log
-		fetch("http://127.0.0.1:7242/ingest/4756e9c3-5ffd-47b8-90a7-0998864a23df", {
-			method: "POST",
-			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify({
-				location: "ChaosOddsService.ts:41",
-				message: "cache miss - creating new calculation",
-				data: {
-					hasInflightPromise: !!inflightPromise,
-					inflightKey,
-					timeSinceStart: performance.now() - calcStartTime,
-				},
-				timestamp: Date.now(),
-				sessionId: "debug-session",
-				runId: "run1",
-				hypothesisId: "B",
-			}),
-		}).catch(() => {});
-		// #endregion
 
 		// Cancel previous calculation if parameters changed
 		if (inflightPromise && inflightKey !== cacheKey) {
@@ -134,165 +76,24 @@ export const ChaosOddsService = {
 		if (ChaosOddsJSI.setKeepAwakeEnabled) {
 			keepAwakeRefCount++;
 			if (keepAwakeRefCount === 1) {
-				// #region agent log
-				fetch(
-					"http://127.0.0.1:7242/ingest/4756e9c3-5ffd-47b8-90a7-0998864a23df",
-					{
-						method: "POST",
-						headers: { "Content-Type": "application/json" },
-						body: JSON.stringify({
-							location: "ChaosOddsService.ts:129",
-							message:
-								"JS: calling setKeepAwakeEnabled(true) - first calculation",
-							data: { refCount: keepAwakeRefCount },
-							timestamp: Date.now(),
-							sessionId: "debug-session",
-							runId: "run1",
-							hypothesisId: "keep-awake-2",
-						}),
-					},
-				).catch(() => {});
-				// #endregion
 				ChaosOddsJSI.setKeepAwakeEnabled(true);
 			} else {
-				// #region agent log
-				fetch(
-					"http://127.0.0.1:7242/ingest/4756e9c3-5ffd-47b8-90a7-0998864a23df",
-					{
-						method: "POST",
-						headers: { "Content-Type": "application/json" },
-						body: JSON.stringify({
-							location: "ChaosOddsService.ts:129",
-							message: "JS: keeping awake enabled - additional calculation",
-							data: { refCount: keepAwakeRefCount },
-							timestamp: Date.now(),
-							sessionId: "debug-session",
-							runId: "run1",
-							hypothesisId: "keep-awake-2",
-						}),
-					},
-				).catch(() => {});
-				// #endregion
 			}
 		}
-
-		// #region agent log
-		const beforeNativeCall = performance.now();
-		fetch("http://127.0.0.1:7242/ingest/4756e9c3-5ffd-47b8-90a7-0998864a23df", {
-			method: "POST",
-			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify({
-				location: "ChaosOddsService.ts:60",
-				message: "before native calculate call",
-				data: { timeSinceStart: beforeNativeCall - calcStartTime },
-				timestamp: Date.now(),
-				sessionId: "debug-session",
-				runId: "run1",
-				hypothesisId: "A",
-			}),
-		}).catch(() => {});
-		// #endregion
 
 		// Call native function - returns task ID, then poll for result (JS-owned Promise - GC-safe)
 		const nativePromise = calculateWithPromise(availableJSON, revealedJSON);
 
-		// #region agent log
-		const afterNativeCall = performance.now();
-		fetch("http://127.0.0.1:7242/ingest/4756e9c3-5ffd-47b8-90a7-0998864a23df", {
-			method: "POST",
-			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify({
-				location: "ChaosOddsService.ts:62",
-				message: "after native calculate call (async)",
-				data: {
-					timeSinceStart: afterNativeCall - calcStartTime,
-					nativeCallDuration: afterNativeCall - beforeNativeCall,
-				},
-				timestamp: Date.now(),
-				sessionId: "debug-session",
-				runId: "run1",
-				hypothesisId: "A",
-			}),
-		}).catch(() => {});
-		// #endregion
-
 		// Create a wrapper Promise that processes the native result and clears in-flight tracking
 		const processedPromise = (async () => {
 			try {
-				// #region agent log
-				const beforeAwaitNative = performance.now();
-				fetch(
-					"http://127.0.0.1:7242/ingest/4756e9c3-5ffd-47b8-90a7-0998864a23df",
-					{
-						method: "POST",
-						headers: { "Content-Type": "application/json" },
-						body: JSON.stringify({
-							location: "ChaosOddsService.ts:65",
-							message: "before await nativePromise",
-							data: { timeSinceStart: beforeAwaitNative - calcStartTime },
-							timestamp: Date.now(),
-							sessionId: "debug-session",
-							runId: "run1",
-							hypothesisId: "A",
-						}),
-					},
-				).catch(() => {});
-				// #endregion
-
 				// Add then handler to track when Promise resolves
 				// Note: Keep-awake will be disabled in finally block to ensure it's always disabled
 				const promiseWithTracking = nativePromise.then((result) => {
-					// #region agent log
-					const promiseResolvedTime = performance.now();
-					fetch(
-						"http://127.0.0.1:7242/ingest/4756e9c3-5ffd-47b8-90a7-0998864a23df",
-						{
-							method: "POST",
-							headers: { "Content-Type": "application/json" },
-							body: JSON.stringify({
-								location: "ChaosOddsService.ts:69-promise-then",
-								message: "Promise.then() callback executed - Promise resolved",
-								data: {
-									timeSinceStart: promiseResolvedTime - calcStartTime,
-									timeSinceBeforeAwait: promiseResolvedTime - beforeAwaitNative,
-									hasResult: !!result,
-								},
-								timestamp: Date.now(),
-								sessionId: "debug-session",
-								runId: "run1",
-								hypothesisId: "A",
-							}),
-						},
-					).catch(() => {});
-					// #endregion
 					return result;
 				});
 
 				const calculateResult = await promiseWithTracking;
-
-				// #region agent log
-				const afterAwaitNative = performance.now();
-				fetch(
-					"http://127.0.0.1:7242/ingest/4756e9c3-5ffd-47b8-90a7-0998864a23df",
-					{
-						method: "POST",
-						headers: { "Content-Type": "application/json" },
-						body: JSON.stringify({
-							location: "ChaosOddsService.ts:69-await-complete",
-							message: "after await nativePromise - Promise resolved",
-							data: {
-								timeSinceStart: afterAwaitNative - calcStartTime,
-								awaitDuration: afterAwaitNative - beforeAwaitNative,
-								hasResult: !!calculateResult,
-							},
-							timestamp: Date.now(),
-							sessionId: "debug-session",
-							runId: "run1",
-							hypothesisId: "A",
-						}),
-					},
-				).catch(() => {});
-				// #endregion
 
 				// Check if this Promise was superseded by a newer one
 				if (inflightKey !== cacheKey) {
@@ -366,60 +167,12 @@ export const ChaosOddsService = {
 				const afterStringCopy = performance.now();
 				const resultStringSize = resultString.length;
 
-				// #region agent log
-				fetch(
-					"http://127.0.0.1:7242/ingest/4756e9c3-5ffd-47b8-90a7-0998864a23df",
-					{
-						method: "POST",
-						headers: { "Content-Type": "application/json" },
-						body: JSON.stringify({
-							location: "ChaosOddsService.ts:before-json-parse",
-							message: "before JSON.parse",
-							data: {
-								resultStringSize,
-								stringCopyDuration: afterStringCopy - beforeStringCopy,
-								timeSinceStart: afterStringCopy - calcStartTime,
-							},
-							timestamp: Date.now(),
-							sessionId: "debug-session",
-							runId: "ui-freeze-debug",
-							hypothesisId: "H2",
-						}),
-					},
-				).catch(() => {});
-				// #endregion
-
 				try {
 					// Parse JSON to get the 100x100 matrix - THIS CAN BLOCK UI IF RESULT IS LARGE
 					const beforeJsonParse = performance.now();
 					const matrix = JSON.parse(resultString) as number[][];
 					const afterJsonParse = performance.now();
 					const jsonParseDuration = afterJsonParse - beforeJsonParse;
-
-					// #region agent log
-					fetch(
-						"http://127.0.0.1:7242/ingest/4756e9c3-5ffd-47b8-90a7-0998864a23df",
-						{
-							method: "POST",
-							headers: { "Content-Type": "application/json" },
-							body: JSON.stringify({
-								location: "ChaosOddsService.ts:after-json-parse",
-								message: "JSON.parse completed",
-								data: {
-									resultStringSize,
-									jsonParseDuration,
-									matrixRows: matrix?.length,
-									matrixCols: matrix?.[0]?.length,
-									timeSinceStart: afterJsonParse - calcStartTime,
-								},
-								timestamp: Date.now(),
-								sessionId: "debug-session",
-								runId: "ui-freeze-debug",
-								hypothesisId: "H2",
-							}),
-						},
-					).catch(() => {});
-					// #endregion
 
 					return matrix;
 				} catch (error) {
@@ -433,96 +186,18 @@ export const ChaosOddsService = {
 					return null;
 				}
 			} finally {
-				// #region agent log
-				const finallyTime = performance.now();
-				fetch(
-					"http://127.0.0.1:7242/ingest/4756e9c3-5ffd-47b8-90a7-0998864a23df",
-					{
-						method: "POST",
-						headers: { "Content-Type": "application/json" },
-						body: JSON.stringify({
-							location: "ChaosOddsService.ts:111",
-							message: "processedPromise finally block",
-							data: {
-								timeSinceStart: finallyTime - calcStartTime,
-								willClearCache: inflightKey === cacheKey,
-							},
-							timestamp: Date.now(),
-							sessionId: "debug-session",
-							runId: "run1",
-							hypothesisId: "B",
-						}),
-					},
-				).catch(() => {});
-				// #endregion
 				// Decrement keep-awake reference count and disable if this was the last active calculation
 				if (ChaosOddsJSI.setKeepAwakeEnabled) {
 					keepAwakeRefCount = Math.max(0, keepAwakeRefCount - 1);
 					if (keepAwakeRefCount === 0) {
-						// #region agent log
-						fetch(
-							"http://127.0.0.1:7242/ingest/4756e9c3-5ffd-47b8-90a7-0998864a23df",
-							{
-								method: "POST",
-								headers: { "Content-Type": "application/json" },
-								body: JSON.stringify({
-									location: "ChaosOddsService.ts:finally",
-									message:
-										"JS: calling setKeepAwakeEnabled(false) - last calculation done",
-									data: { refCount: keepAwakeRefCount },
-									timestamp: Date.now(),
-									sessionId: "debug-session",
-									runId: "run1",
-									hypothesisId: "keep-awake-2",
-								}),
-							},
-						).catch(() => {});
-						// #endregion
 						ChaosOddsJSI.setKeepAwakeEnabled(false);
 					} else {
-						// #region agent log
-						fetch(
-							"http://127.0.0.1:7242/ingest/4756e9c3-5ffd-47b8-90a7-0998864a23df",
-							{
-								method: "POST",
-								headers: { "Content-Type": "application/json" },
-								body: JSON.stringify({
-									location: "ChaosOddsService.ts:finally",
-									message:
-										"JS: keeping awake enabled - other calculations still active",
-									data: { refCount: keepAwakeRefCount },
-									timestamp: Date.now(),
-									sessionId: "debug-session",
-									runId: "run1",
-									hypothesisId: "keep-awake-2",
-								}),
-							},
-						).catch(() => {});
-						// #endregion
 					}
 				}
 				// Clear in-flight Promise tracking when done
 				if (inflightKey === cacheKey) {
 					inflightPromise = null;
 					inflightKey = null;
-					// #region agent log
-					fetch(
-						"http://127.0.0.1:7242/ingest/4756e9c3-5ffd-47b8-90a7-0998864a23df",
-						{
-							method: "POST",
-							headers: { "Content-Type": "application/json" },
-							body: JSON.stringify({
-								location: "ChaosOddsService.ts:114",
-								message: "cache cleared",
-								data: { timeSinceStart: performance.now() - calcStartTime },
-								timestamp: Date.now(),
-								sessionId: "debug-session",
-								runId: "run1",
-								hypothesisId: "B",
-							}),
-						},
-					).catch(() => {});
-					// #endregion
 				}
 			}
 		})();
@@ -533,70 +208,12 @@ export const ChaosOddsService = {
 
 		// Wrap the Promise in a way that forces event loop to process resolution handlers
 		// This helps prevent event loop blockage when Promise resolves but handlers aren't processed
-		// #region agent log
-		const beforeAwaitProcessed = performance.now();
-		fetch("http://127.0.0.1:7242/ingest/4756e9c3-5ffd-47b8-90a7-0998864a23df", {
-			method: "POST",
-			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify({
-				location: "ChaosOddsService.ts:325-before-await-processed",
-				message: "before await processedPromise",
-				data: { timeSinceStart: beforeAwaitProcessed - calcStartTime },
-				timestamp: Date.now(),
-				sessionId: "debug-session",
-				runId: "run1",
-				hypothesisId: "A",
-			}),
-		}).catch(() => {});
-		// #endregion
 
 		const result = await processedPromise;
-
-		// #region agent log
-		const afterAwaitProcessed = performance.now();
-		fetch("http://127.0.0.1:7242/ingest/4756e9c3-5ffd-47b8-90a7-0998864a23df", {
-			method: "POST",
-			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify({
-				location: "ChaosOddsService.ts:325-after-await-processed",
-				message: "after await processedPromise - Promise awaited",
-				data: {
-					timeSinceStart: afterAwaitProcessed - calcStartTime,
-					awaitDuration: afterAwaitProcessed - beforeAwaitProcessed,
-				},
-				timestamp: Date.now(),
-				sessionId: "debug-session",
-				runId: "run1",
-				hypothesisId: "A",
-			}),
-		}).catch(() => {});
-		// #endregion
 
 		// Force event loop to process any pending microtasks by yielding
 		// This ensures Promise resolution handlers are executed even without UI activity
 		await yieldToEventLoop();
-
-		// #region agent log
-		const finalTime = performance.now();
-		fetch("http://127.0.0.1:7242/ingest/4756e9c3-5ffd-47b8-90a7-0998864a23df", {
-			method: "POST",
-			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify({
-				location: "ChaosOddsService.ts:final-return",
-				message: "calculate function returning result - calculation complete",
-				data: {
-					timeSinceStart: finalTime - calcStartTime,
-					totalDuration: finalTime - calcStartTime,
-					hasResult: !!result,
-					resultSize: result ? result.length : 0,
-				},
-				timestamp: Date.now(),
-				sessionId: "debug-session",
-				runId: "cpu-stay-high-debug",
-				hypothesisId: "H4",
-			}),
-		}).catch(() => {});
-		// #endregion
 
 		return result;
 	},
@@ -608,42 +225,9 @@ export const ChaosOddsService = {
 	 * Promises will still resolve, but with null result if calculation was cancelled
 	 */
 	cancel(): void {
-		// #region agent log
-		fetch("http://127.0.0.1:7242/ingest/4756e9c3-5ffd-47b8-90a7-0998864a23df", {
-			method: "POST",
-			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify({
-				location: "ChaosOddsService.ts:131",
-				message: "cancel called",
-				data: {
-					hadInflightPromise: !!inflightPromise,
-					hadInflightKey: !!inflightKey,
-				},
-				timestamp: Date.now(),
-				sessionId: "debug-session",
-				runId: "run1",
-				hypothesisId: "D",
-			}),
-		}).catch(() => {});
-		// #endregion
 		// Clear in-flight Promise tracking
 		inflightPromise = null;
 		inflightKey = null;
-		// #region agent log
-		fetch("http://127.0.0.1:7242/ingest/4756e9c3-5ffd-47b8-90a7-0998864a23df", {
-			method: "POST",
-			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify({
-				location: "ChaosOddsService.ts:134",
-				message: "cancel completed - cache cleared",
-				data: {},
-				timestamp: Date.now(),
-				sessionId: "debug-session",
-				runId: "run1",
-				hypothesisId: "D",
-			}),
-		}).catch(() => {});
-		// #endregion
 
 		if (!ChaosOddsJSI || typeof ChaosOddsJSI.cancel !== "function") {
 			console.warn(
@@ -696,45 +280,8 @@ export const ChaosOddsService = {
 		if (ChaosOddsJSI.setKeepAwakeEnabled) {
 			keepAwakeRefCount++;
 			if (keepAwakeRefCount === 1) {
-				// #region agent log
-				fetch(
-					"http://127.0.0.1:7242/ingest/4756e9c3-5ffd-47b8-90a7-0998864a23df",
-					{
-						method: "POST",
-						headers: { "Content-Type": "application/json" },
-						body: JSON.stringify({
-							location: "ChaosOddsService.ts:129",
-							message:
-								"JS: calling setKeepAwakeEnabled(true) - first calculation",
-							data: { refCount: keepAwakeRefCount },
-							timestamp: Date.now(),
-							sessionId: "debug-session",
-							runId: "run1",
-							hypothesisId: "keep-awake-2",
-						}),
-					},
-				).catch(() => {});
-				// #endregion
 				ChaosOddsJSI.setKeepAwakeEnabled(true);
 			} else {
-				// #region agent log
-				fetch(
-					"http://127.0.0.1:7242/ingest/4756e9c3-5ffd-47b8-90a7-0998864a23df",
-					{
-						method: "POST",
-						headers: { "Content-Type": "application/json" },
-						body: JSON.stringify({
-							location: "ChaosOddsService.ts:129",
-							message: "JS: keeping awake enabled - additional calculation",
-							data: { refCount: keepAwakeRefCount },
-							timestamp: Date.now(),
-							sessionId: "debug-session",
-							runId: "run1",
-							hypothesisId: "keep-awake-2",
-						}),
-					},
-				).catch(() => {});
-				// #endregion
 			}
 		}
 
@@ -770,46 +317,8 @@ export const ChaosOddsService = {
 			if (ChaosOddsJSI.setKeepAwakeEnabled) {
 				keepAwakeRefCount = Math.max(0, keepAwakeRefCount - 1);
 				if (keepAwakeRefCount === 0) {
-					// #region agent log
-					fetch(
-						"http://127.0.0.1:7242/ingest/4756e9c3-5ffd-47b8-90a7-0998864a23df",
-						{
-							method: "POST",
-							headers: { "Content-Type": "application/json" },
-							body: JSON.stringify({
-								location: "ChaosOddsService.ts:finally",
-								message:
-									"JS: calling setKeepAwakeEnabled(false) - last calculation done",
-								data: { refCount: keepAwakeRefCount },
-								timestamp: Date.now(),
-								sessionId: "debug-session",
-								runId: "run1",
-								hypothesisId: "keep-awake-2",
-							}),
-						},
-					).catch(() => {});
-					// #endregion
 					ChaosOddsJSI.setKeepAwakeEnabled(false);
 				} else {
-					// #region agent log
-					fetch(
-						"http://127.0.0.1:7242/ingest/4756e9c3-5ffd-47b8-90a7-0998864a23df",
-						{
-							method: "POST",
-							headers: { "Content-Type": "application/json" },
-							body: JSON.stringify({
-								location: "ChaosOddsService.ts:finally",
-								message:
-									"JS: keeping awake enabled - other calculations still active",
-								data: { refCount: keepAwakeRefCount },
-								timestamp: Date.now(),
-								sessionId: "debug-session",
-								runId: "run1",
-								hypothesisId: "keep-awake-2",
-							}),
-						},
-					).catch(() => {});
-					// #endregion
 				}
 			}
 		}
@@ -842,45 +351,8 @@ export const ChaosOddsService = {
 		if (ChaosOddsJSI.setKeepAwakeEnabled) {
 			keepAwakeRefCount++;
 			if (keepAwakeRefCount === 1) {
-				// #region agent log
-				fetch(
-					"http://127.0.0.1:7242/ingest/4756e9c3-5ffd-47b8-90a7-0998864a23df",
-					{
-						method: "POST",
-						headers: { "Content-Type": "application/json" },
-						body: JSON.stringify({
-							location: "ChaosOddsService.ts:129",
-							message:
-								"JS: calling setKeepAwakeEnabled(true) - first calculation",
-							data: { refCount: keepAwakeRefCount },
-							timestamp: Date.now(),
-							sessionId: "debug-session",
-							runId: "run1",
-							hypothesisId: "keep-awake-2",
-						}),
-					},
-				).catch(() => {});
-				// #endregion
 				ChaosOddsJSI.setKeepAwakeEnabled(true);
 			} else {
-				// #region agent log
-				fetch(
-					"http://127.0.0.1:7242/ingest/4756e9c3-5ffd-47b8-90a7-0998864a23df",
-					{
-						method: "POST",
-						headers: { "Content-Type": "application/json" },
-						body: JSON.stringify({
-							location: "ChaosOddsService.ts:129",
-							message: "JS: keeping awake enabled - additional calculation",
-							data: { refCount: keepAwakeRefCount },
-							timestamp: Date.now(),
-							sessionId: "debug-session",
-							runId: "run1",
-							hypothesisId: "keep-awake-2",
-						}),
-					},
-				).catch(() => {});
-				// #endregion
 			}
 		}
 
@@ -917,46 +389,8 @@ export const ChaosOddsService = {
 			if (ChaosOddsJSI.setKeepAwakeEnabled) {
 				keepAwakeRefCount = Math.max(0, keepAwakeRefCount - 1);
 				if (keepAwakeRefCount === 0) {
-					// #region agent log
-					fetch(
-						"http://127.0.0.1:7242/ingest/4756e9c3-5ffd-47b8-90a7-0998864a23df",
-						{
-							method: "POST",
-							headers: { "Content-Type": "application/json" },
-							body: JSON.stringify({
-								location: "ChaosOddsService.ts:finally",
-								message:
-									"JS: calling setKeepAwakeEnabled(false) - last calculation done",
-								data: { refCount: keepAwakeRefCount },
-								timestamp: Date.now(),
-								sessionId: "debug-session",
-								runId: "run1",
-								hypothesisId: "keep-awake-2",
-							}),
-						},
-					).catch(() => {});
-					// #endregion
 					ChaosOddsJSI.setKeepAwakeEnabled(false);
 				} else {
-					// #region agent log
-					fetch(
-						"http://127.0.0.1:7242/ingest/4756e9c3-5ffd-47b8-90a7-0998864a23df",
-						{
-							method: "POST",
-							headers: { "Content-Type": "application/json" },
-							body: JSON.stringify({
-								location: "ChaosOddsService.ts:finally",
-								message:
-									"JS: keeping awake enabled - other calculations still active",
-								data: { refCount: keepAwakeRefCount },
-								timestamp: Date.now(),
-								sessionId: "debug-session",
-								runId: "run1",
-								hypothesisId: "keep-awake-2",
-							}),
-						},
-					).catch(() => {});
-					// #endregion
 				}
 			}
 		}
