@@ -1,9 +1,11 @@
 import { selectBoardById } from "@modules/board/base/shared/lib";
 import {
+	getReferencePartTokens,
 	removeBoardChaosTokenOptionInternal,
 	setBoardChaosTokenOptionInternal,
 	setChaosTokenOptionInternal,
 } from "@modules/chaos-bag/effect/shared/lib";
+import { selectReferenceCardTokenEffectsByType } from "@modules/stories/shared/lib";
 import { put, select, takeEvery } from "redux-saga/effects";
 import {
 	selectCurrentChaosTokenOption,
@@ -29,20 +31,36 @@ function* worker({ payload }: ReturnType<typeof updateChaosTokenOption>) {
 		return;
 	}
 
+	const referenceTokenSelector = selectReferenceCardTokenEffectsByType(type);
+	const referenceTokenEffect: ReturnType<typeof referenceTokenSelector> =
+		yield select(referenceTokenSelector);
+
+	const tokenTypes = referenceTokenEffect
+		? getReferencePartTokens(referenceTokenEffect)
+		: [type];
+
 	const { personal = false } = option;
 
 	const optionIndex = selected ? index : null;
 
 	if (personal) {
-		yield put(
-			setBoardChaosTokenOptionInternal({
-				boardId: board.id,
-				type,
-				optionIndex,
-			}),
-		);
+		for (const type of tokenTypes) {
+			yield put(
+				setBoardChaosTokenOptionInternal({
+					boardId: board.id,
+					type,
+					optionIndex,
+				}),
+			);
 
-		yield put(chaosTokenOptionUpdated(payload));
+			yield put(
+				chaosTokenOptionUpdated({
+					...payload,
+					type,
+				}),
+			);
+		}
+
 		return;
 	}
 
@@ -54,24 +72,24 @@ function* worker({ payload }: ReturnType<typeof updateChaosTokenOption>) {
 		currentOptionSelector,
 	);
 
-	// remove board option if last option was personal
-	if (currentOption?.personal) {
+	for (const type of tokenTypes) {
+		// remove board option if last option was personal
+
+		if (currentOption?.personal) {
+			yield put(
+				removeBoardChaosTokenOptionInternal({
+					boardId: board.id,
+					type,
+				}),
+			);
+		}
 		yield put(
-			removeBoardChaosTokenOptionInternal({
-				boardId: board.id,
+			setChaosTokenOptionInternal({
 				type,
+				optionIndex,
 			}),
 		);
 	}
-
-	yield put(
-		setChaosTokenOptionInternal({
-			type,
-			optionIndex,
-		}),
-	);
-
-	yield put(chaosTokenOptionUpdated(payload));
 }
 
 export function* updateChaosTokenOptionSaga() {

@@ -1,7 +1,5 @@
-import {
-	getReferencePartTokens,
-	selectReferenceCardChaosTokenOptions,
-} from "@modules/chaos-bag/effect/entities/lib";
+import { selectReferenceCardChaosTokenOptions } from "@modules/chaos-bag/effect/entities/lib";
+import { getReferencePartTokens } from "@modules/chaos-bag/effect/shared/lib";
 import { getTokenOptionLabel } from "@modules/chaos-bag/value/entities/lib";
 import { getActiveOpacity, useAppSelector } from "@shared/lib";
 import type { ReferencePart } from "arkham-investigator-data";
