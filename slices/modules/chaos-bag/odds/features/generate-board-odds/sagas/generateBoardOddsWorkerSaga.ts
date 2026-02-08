@@ -32,7 +32,7 @@ function* worker() {
 	// Skip if same cache key
 	if (currentCacheKey === cacheKey) {
 		console.log("same cache key, skip");
-		return;
+		// return;
 	}
 
 	// Set calculating flag BEFORE starting calculation to prevent race conditions

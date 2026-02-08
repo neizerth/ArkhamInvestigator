@@ -26,25 +26,22 @@ function* worker() {
 	yield put(generateBoardOdds());
 }
 
-function takeDebouncedMatch(match: (action: unknown) => boolean) {
-	// Increased debounce time to reduce frequency of calculations and prevent event loop starvation
-	// 500ms should be enough to batch rapid changes while still feeling responsive
-	return debounce(500, match, worker);
+const actionCreators = [
+	setCurrentInvestigatorIndex,
+	chaosBagUpdated,
+	boardChanged,
+	setStoryCode,
+	setStoryDifficultyId,
+	setShowChaosBagOdds,
+];
+
+/** Matches any action that should trigger board odds recalculation */
+function isOddsTriggerAction(action: unknown): boolean {
+	return actionCreators.some((actionCreator) => actionCreator.match(action));
 }
 
 export function* watchBoardOddsCalculationSaga() {
-	// on board change
-	yield takeDebouncedMatch(setCurrentInvestigatorIndex.match);
-	// on chaos bag updates - use longer debounce to handle rapid token removal
-	yield takeDebouncedMatch(chaosBagUpdated.match);
-	// on board updates
-	yield takeDebouncedMatch(boardChanged.match);
-
-	// on story code change
-	yield takeDebouncedMatch(setStoryCode.match);
-	// on story difficulty id change
-	yield takeDebouncedMatch(setStoryDifficultyId.match);
-
-	// on enable chaos odds module
-	yield takeDebouncedMatch(setShowChaosBagOdds.match);
+	// Single debounce for all triggers: chaosBagUpdated + boardChanged (e.g. on token remove)
+	// fire together; we want one recalculation after 500ms, not two
+	yield debounce(500, isOddsTriggerAction, worker);
 }
