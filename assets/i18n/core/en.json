@@ -358,6 +358,10 @@
 	"chaosOdds.performance.description": "Goal: completing each test in less than 4 seconds. Evaluation: < 1 sec - excellent, < 2 sec - good, < 4 sec - satisfactory, > 10 sec - bad.",
 	"chaosOdds.performance.clearTests": "Clear tests",
 
+	"multiplayer.role.client.title": "Client",
+	"multiplayer.role.host.title": "Host",
+	"multiplayer.code": "Connection code",
+
 	"Defeated": "Defeated",
 	"Change": "Change",
 

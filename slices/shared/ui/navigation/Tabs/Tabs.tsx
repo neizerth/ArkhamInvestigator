@@ -1,8 +1,8 @@
 import type { ViewProps } from "react-native";
 import * as C from "./Tabs.components";
 
-export type TabItem = {
-	id: string;
+export type TabItem<T = string> = {
+	id: T;
 	title: string;
 };
 

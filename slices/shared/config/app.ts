@@ -10,8 +10,6 @@ export const BUILD_VERSION = nativeApplicationVersion;
 
 export const BUILD_ID = nativeBuildVersion;
 
-export const CRYPTO_KEY = process.env.EXPO_PUBLIC_CRYPTO_KEY as string;
-
 export const GOOGLE_PLAY_DOWNLOAD_URL = process.env
 	.EXPO_PUBLIC_GOOGLE_PLAY_URL as string;
 

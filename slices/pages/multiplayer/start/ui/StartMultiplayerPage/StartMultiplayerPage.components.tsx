@@ -3,6 +3,7 @@ import { Icon, Input, Row, Tabs } from "@shared/ui";
 import { ContentPage } from "@widgets/content";
 import { ActivityIndicator, View } from "react-native";
 import styled from "styled-components/native";
+import { NewGameClientView } from "../NewGameClientView";
 import { NewGameHostView } from "../NewGameHostView";
 
 export const Page: typeof ContentPage = styled(ContentPage)`
@@ -25,7 +26,9 @@ export const Player: typeof Row = styled(Row)`
 	gap: ${size.gap.default}px;
 `;
 
-export const Name: typeof Input = styled(Input)`
+export const Name: typeof Input = styled(Input).attrs({
+	autoCapitalize: "none",
+})`
 	flex: 1;
 `;
 
@@ -42,6 +45,9 @@ export const RoleSelect: typeof Tabs = styled(Tabs)`
 `;
 
 export const Host: typeof NewGameHostView = styled(NewGameHostView)`
+`;
+
+export const Client: typeof NewGameClientView = styled(NewGameClientView)`
 `;
 
 export const RoleTabs: typeof View = styled(View)`

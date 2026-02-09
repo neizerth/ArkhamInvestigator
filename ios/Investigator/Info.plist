@@ -47,6 +47,13 @@
       <key>NSAllowsLocalNetworking</key>
       <true/>
     </dict>
+    <key>NSLocalNetworkUsageDescription</key>
+    <string>The app discovers devices on the local network for multiplayer.</string>
+    <key>NSBonjourServices</key>
+    <array>
+      <string>_arkham-investigator._tcp.</string>
+      <string>_arkham-investigator._udp.</string>
+    </array>
     <key>NSUserActivityTypes</key>
     <array>
       <string>$(PRODUCT_BUNDLE_IDENTIFIER).expo.index_route</string>

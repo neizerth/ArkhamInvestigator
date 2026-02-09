@@ -26,6 +26,7 @@ export type InvestigatorBoardBackground = {
 
 export type InvestigatorBoard = {
 	id: number;
+	networkId?: string;
 	loaded?: boolean;
 	loadProgress?: number;
 
