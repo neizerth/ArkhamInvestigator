@@ -10,5 +10,7 @@ export const getCounterRange = (options: ReferenceCardTokenCounter) => {
 
 	const min = options.min ?? Math.ceil(MIN_VALUE / step) * step;
 
-	return rangeStep(step, min, max + 1);
+	// rangeStep(step, from, to): to is exclusive. For step > 0 we need end past last value → max + step; for step < 0 → max + step
+	const end = max + step;
+	return rangeStep(step, min, end);
 };

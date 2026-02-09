@@ -27,15 +27,15 @@ describe("getCounterRange", () => {
 	});
 
 	it("computes min from MIN_VALUE when min is omitted (step 2)", () => {
-		// Math.ceil(-9/2)*2 = -8; rangeStep(step, from, to) has exclusive to, so max 10 is passed as 11 → last value 8
+		// Math.ceil(-9/2)*2 = -8; end = max + step = 12 → [-8..10] by 2
 		expect(getCounterRange(counter({ step: 2 }))).toEqual([
-			-8, -6, -4, -2, 0, 2, 4, 6, 8,
+			-8, -6, -4, -2, 0, 2, 4, 6, 8, 10,
 		]);
 	});
 
 	it("computes min from MIN_VALUE when min is omitted (step 5)", () => {
-		// Math.ceil(-9/5)*5 = -5; to=11 → last value 5
-		expect(getCounterRange(counter({ step: 5 }))).toEqual([-5, 0, 5]);
+		// Math.ceil(-9/5)*5 = -5; end = max + step = 15 → [-5, 0, 5, 10]
+		expect(getCounterRange(counter({ step: 5 }))).toEqual([-5, 0, 5, 10]);
 	});
 
 	it("respects explicit min and max", () => {
@@ -63,14 +63,26 @@ describe("getCounterRange", () => {
 	});
 
 	it("uses step for spacing", () => {
-		// rangeStep(3, 0, 10) → 0, 3, 6 (to is exclusive; 9 is not included)
+		// end = max + step = 12 → 0, 3, 6, 9
 		expect(getCounterRange(counter({ step: 3, min: 0, max: 9 }))).toEqual([
-			0, 3, 6,
+			0, 3, 6, 9,
 		]);
 	});
 
 	it("includes max when step is 1 (default range)", () => {
 		const result = getCounterRange(counter({ step: 1 }));
 		expect(result[result.length - 1]).toBe(10);
+	});
+
+	it("the_crown", () => {
+		const result = getCounterRange(
+			counter({
+				value: -2,
+				step: 2,
+				min: -6,
+				max: -2,
+			}),
+		);
+		expect(result).toEqual([-6, -4, -2]);
 	});
 });
