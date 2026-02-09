@@ -1,9 +1,7 @@
-import { selectStory } from "@modules/stories/shared/lib";
-import { useAppSelector } from "@shared/lib";
+import type { Story } from "@modules/stories/shared/model";
 import { useMemo } from "react";
 
-export const useReferenceCards = () => {
-	const story = useAppSelector(selectStory);
+export const useReferenceCards = (story?: Story | null) => {
 	const cards = story?.referenceCards || [];
 
 	return useMemo(() => {

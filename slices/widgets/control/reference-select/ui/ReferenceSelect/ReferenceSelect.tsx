@@ -1,17 +1,20 @@
 import { DEFAULT_LANGUAGE } from "@modules/core/i18n/shared/config";
 import { selectCurrentLanguage } from "@modules/core/i18n/shared/lib";
-import { fillChaosBagDifficulty } from "@modules/stories/entities/lib";
+import { changeStory } from "@modules/stories/entities/lib";
 import {
+	getReferenceCardText,
+	isReferenceBackDifficultyId,
 	selectReferenceCard,
-	selectReferenceCardText,
 	selectShowFanMadeStories,
 	selectShowTranslatedOnlyStories,
+	selectStory,
 	selectStoryDifficulty,
 	setShowFanMadeStories,
 	setShowTranslatedOnlyStories,
 } from "@modules/stories/shared/lib";
+import type { Story } from "@modules/stories/shared/model";
 import { useAppDispatch, useAppSelector, useBoolean } from "@shared/lib";
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 import type { ViewProps } from "react-native";
 import * as C from "./ReferenceSelect.components";
@@ -25,24 +28,53 @@ export const ReferenceSelect = ({
 }: ReferenceSelectProps) => {
 	const dispatch = useAppDispatch();
 	const language = useAppSelector(selectCurrentLanguage);
-	const referenceCard = useAppSelector(selectReferenceCard);
-	const referenceCardText = useAppSelector(selectReferenceCardText);
+	const defaultReferenceCard = useAppSelector(selectReferenceCard);
+	const defaultStory = useAppSelector(selectStory);
+	const defaultDifficulty = useAppSelector(selectStoryDifficulty);
+
+	const [story, setStory] = useState(defaultStory);
+	const [referenceCard, setReferenceCard] = useState(defaultReferenceCard);
 
 	const [fillChaosBag, setFillChaosBag] = useBoolean(false);
-
-	const difficulty = useAppSelector(selectStoryDifficulty);
+	const [difficulty, setDifficulty] = useState(defaultDifficulty);
 
 	const { t } = useTranslation();
+	const showBack = isReferenceBackDifficultyId(difficulty?.id);
+
+	const referenceCardText = getReferenceCardText({
+		card: referenceCard,
+		showBack,
+	});
 
 	const isDefaultLanguage = language === DEFAULT_LANGUAGE;
 
-	const close = useCallback(() => {
-		if (fillChaosBag && difficulty) {
-			const difficultyId = difficulty.id;
-			dispatch(fillChaosBagDifficulty({ difficultyId }));
-		}
+	const onChangeStory = useCallback((story: Story | null) => {
+		const referenceCard = story?.referenceCards[0];
+		const difficulty = story?.difficultyLevels[0];
+
+		setStory(story);
+		setReferenceCard(referenceCard);
+		setDifficulty(difficulty);
+	}, []);
+
+	const ok = useCallback(() => {
+		dispatch(
+			changeStory({
+				storyCode: story?.code,
+				referenceCardCode: referenceCard?.code,
+				difficultyId: difficulty?.id,
+				fillChaosBag: fillChaosBag,
+			}),
+		);
 		onClose?.();
-	}, [dispatch, fillChaosBag, onClose, difficulty]);
+	}, [
+		dispatch,
+		fillChaosBag,
+		onClose,
+		difficulty,
+		referenceCard?.code,
+		story?.code,
+	]);
 
 	return (
 		<C.Container {...props}>
@@ -63,12 +95,22 @@ export const ReferenceSelect = ({
 						/>
 					</C.Header>
 					<C.ScrollArea>
-						<C.StorySelect />
-						<C.CardSelect />
-						{referenceCard && <C.DifficultySelect />}
+						<C.StorySelect value={story} onChange={onChangeStory} />
+						<C.CardSelect
+							value={referenceCard}
+							onChange={setReferenceCard}
+							story={story}
+						/>
+						{referenceCard && (
+							<C.DifficultySelect
+								story={story}
+								value={difficulty}
+								onChange={setDifficulty}
+							/>
+						)}
 						{difficulty && (
 							<>
-								<C.DifficultyTokens />
+								<C.DifficultyTokens difficulty={difficulty} />
 								<C.Check
 									label={t`Fill Chaos Bag`}
 									checked={fillChaosBag}
@@ -87,7 +129,8 @@ export const ReferenceSelect = ({
 			</C.Body>
 			{onClose && (
 				<C.Actions>
-					<C.Close text={t`Continue`} icon="check" onPress={close} />
+					<C.Cancel text={t`Cancel`} icon="dismiss" onPress={onClose} />
+					<C.Ok text={t`Okay`} icon="check" onPress={ok} />
 				</C.Actions>
 			)}
 		</C.Container>

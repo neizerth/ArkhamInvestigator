@@ -1,12 +1,9 @@
-import { clearChaosTokenValue } from "@modules/chaos-bag/value/shared/lib";
 import {
 	selectStoryTypeFilter,
-	setReferenceCardCode,
-	setStoryCode,
 	setStoryTypeFilter,
 } from "@modules/stories/shared/lib";
+import type { Story } from "@modules/stories/shared/model";
 import { useAppDispatch, useAppSelector } from "@shared/lib";
-import type { Story } from "@shared/model";
 import type { SelectItem } from "@shared/ui";
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
@@ -14,7 +11,10 @@ import type { ViewProps } from "react-native";
 import * as C from "./ReferenceStorySelect.components";
 import { useRenderItem, useStoryData } from "./hooks";
 
-export type ReferenceStorySelectProps = ViewProps;
+export type ReferenceStorySelectProps = ViewProps & {
+	onChange?: (story: Story | null) => void;
+	value?: Story | null;
+};
 
 const tabs = [
 	{
@@ -27,27 +27,30 @@ const tabs = [
 	},
 ];
 
-export const ReferenceStorySelect = (props: ReferenceStorySelectProps) => {
+export const ReferenceStorySelect = ({
+	onChange,
+	value,
+	...props
+}: ReferenceStorySelectProps) => {
 	const dispatch = useAppDispatch();
 	const { t } = useTranslation();
 
 	const storyType = useAppSelector(selectStoryTypeFilter);
 
-	const [data, currentValue] = useStoryData();
+	const data = useStoryData(value);
 
 	const clearStory = useCallback(() => {
-		dispatch(setStoryCode(null));
-		dispatch(setReferenceCardCode(null));
-		dispatch(clearChaosTokenValue());
-	}, [dispatch]);
+		onChange?.(null);
+	}, [onChange]);
 
 	const onStorySelect = useCallback(
 		({ value }: SelectItem<Story>) => {
-			dispatch(setStoryCode(value.code));
-			dispatch(setReferenceCardCode(value.referenceCards[0].code));
-			dispatch(clearChaosTokenValue());
+			onChange?.(value);
+			// dispatch(setStoryCode(value.code));
+			// dispatch(setReferenceCardCode(value.referenceCards[0].code));
+			// dispatch(clearChaosTokenValue());
 		},
-		[dispatch],
+		[onChange],
 	);
 
 	const renderItem = useRenderItem();
@@ -70,7 +73,7 @@ export const ReferenceStorySelect = (props: ReferenceStorySelectProps) => {
 				placeholder={t`Choose an option`}
 				searchPlaceholder={t`Search`}
 				renderItem={renderItem}
-				value={currentValue?.value}
+				value={value}
 				search
 			/>
 		</C.Container>

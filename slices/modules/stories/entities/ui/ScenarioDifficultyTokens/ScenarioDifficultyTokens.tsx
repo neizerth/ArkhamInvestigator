@@ -1,15 +1,16 @@
-import { selectStoryDifficulty } from "@modules/stories/shared/lib";
-import { useAppSelector } from "@shared/lib";
+import type { StoryDifficultyLevel } from "@modules/stories/shared/model";
 import { identity } from "ramda";
 import type { ViewProps } from "react-native";
 import * as C from "./ScenarioDifficultyTokens.components";
 
-export type ScenarioDifficultyTokensProps = ViewProps;
+export type ScenarioDifficultyTokensProps = ViewProps & {
+	difficulty?: StoryDifficultyLevel;
+};
 
-export const ScenarioDifficultyTokens = (
-	props: ScenarioDifficultyTokensProps,
-) => {
-	const difficulty = useAppSelector(selectStoryDifficulty);
+export const ScenarioDifficultyTokens = ({
+	difficulty,
+	...props
+}: ScenarioDifficultyTokensProps) => {
 	const tokens = difficulty?.tokens || [];
 	return (
 		<C.Container {...props}>

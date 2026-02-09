@@ -1,11 +1,5 @@
-import type { StoriesState } from "@modules/stories/shared/lib";
-import type { PersistedState } from "redux-persist";
-
-type State = PersistedState & {
-	stories?: StoriesState;
-};
-
-export default function v13(state?: State) {
+// biome-ignore lint/suspicious/noExplicitAny: migration
+export default function v13(state?: any) {
 	if (!state?.stories) {
 		return;
 	}
