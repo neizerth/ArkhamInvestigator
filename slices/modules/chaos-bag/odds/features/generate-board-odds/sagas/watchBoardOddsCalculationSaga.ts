@@ -42,6 +42,6 @@ function isOddsTriggerAction(action: unknown): boolean {
 
 export function* watchBoardOddsCalculationSaga() {
 	// Single debounce for all triggers: chaosBagUpdated + boardChanged (e.g. on token remove)
-	// fire together; we want one recalculation after 500ms, not two
-	yield debounce(500, isOddsTriggerAction, worker);
+	// fire together; we want one recalculation after 300ms, not two
+	yield debounce(300, isOddsTriggerAction, worker);
 }
