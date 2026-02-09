@@ -13,6 +13,7 @@ export const Container: typeof Row = styled(Row)`
 `;
 
 export const Invite: typeof View = styled(View)`
+  width: 50%;
 `;
 
 export const QRButton: typeof TouchableOpacity = styled(TouchableOpacity)`

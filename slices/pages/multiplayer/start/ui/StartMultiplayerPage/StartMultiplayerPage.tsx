@@ -70,6 +70,7 @@ export const StartMultiplayerPage = () => {
 						</Text>
 					</C.NetworkInfo>
 				</C.Player>
+				<C.Hint>{t`multiplayer.hint`}</C.Hint>
 				<C.RoleTabs>
 					<C.RoleSelect data={roles} value={role} onSelect={setRole} />
 					<C.RoleTabsContent>

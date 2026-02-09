@@ -1,5 +1,5 @@
 import { color, size } from "@shared/config";
-import { Icon, Input, Row, Tabs } from "@shared/ui";
+import { Icon, Input, Row, Tabs, Text } from "@shared/ui";
 import { ContentPage } from "@widgets/content";
 import { ActivityIndicator, View } from "react-native";
 import styled from "styled-components/native";
@@ -8,6 +8,9 @@ import { NewGameHostView } from "../NewGameHostView";
 
 export const Page: typeof ContentPage = styled(ContentPage)`
   background-color: ${color.dark30};
+`;
+
+export const Hint: typeof Text = styled(Text)`
 `;
 
 export const Content: typeof View = styled(View)`

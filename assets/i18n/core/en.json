@@ -361,6 +361,12 @@
 	"multiplayer.role.client.title": "Client",
 	"multiplayer.role.host.title": "Host",
 	"multiplayer.code": "Connection code",
+	"multiplayer.connect": "Connect",
+	"multiplayer.joinGame": "Join a game",
+	"multiplayer.searching": "Searching for games",
+	"multiplayer.hint": "All players must be in the same network. Create a game or join a game using:\n - connection code;\n - QR code;\n - automatic network scanning.",
+	"multiplayer.error.selfInviteCode": "You cannot join your own game as a host",
+	"multiplayer.error.invalidInviteCode": "Invalid connection code",
 
 	"Defeated": "Defeated",
 	"Change": "Change",

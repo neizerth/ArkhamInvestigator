@@ -5,6 +5,7 @@ import { coreModulesSaga } from "./core/sagas";
 import { factionSaga } from "./faction/sagas";
 import { gameSaga } from "./game/sagas";
 import { mechanicsSaga } from "./mechanics/sagas";
+import { multiplayerSaga } from "./multiplayer/sagas";
 import { signatureSaga } from "./signature/sagas";
 import { storiesSaga } from "./stories/sagas";
 
@@ -20,4 +21,5 @@ export function* modulesSaga() {
 	yield spawn(storiesSaga);
 
 	yield spawn(gameSaga);
+	yield spawn(multiplayerSaga);
 }

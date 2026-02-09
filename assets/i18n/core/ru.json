@@ -9,6 +9,12 @@
 	"multiplayer.role.client.title": "Войти в игру",
 	"multiplayer.role.host.title": "Создать игру",
 	"multiplayer.code": "Код подключения",
+	"multiplayer.connect": "Подключиться",
+	"multiplayer.joinGame": "Присоединиться к игре",
+	"multiplayer.searching": "Поиск игр",
+	"multiplayer.hint": "Все игроки должны быть в одной сети. Создайте игру или присоединитесь к игре, используя:\n - код подключения;\n - QR-код;\n - автоматическое сканирование сети.",
+	"multiplayer.error.invalidInviteCode": "Неверный код подключения",
+	"multiplayer.error.selfInviteCode": "Невозможно присоединиться к собственной игре",
 
 	"error.downloadFailed": "Не удалось загрузить контент. Попробуйте позже или измените подключение к сети. Подробности: {{error}}",
 	"app.disclaimer": "Arkham Horror: The Card Game™ и все связанные материалы © Fantasy Flight Games (FFG). Это приложение не является продуктом, одобренным или связанным с FFG.",
