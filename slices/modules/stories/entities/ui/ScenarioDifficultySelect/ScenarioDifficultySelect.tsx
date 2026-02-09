@@ -1,22 +1,26 @@
-import { useAppDispatch, useAppSelector } from "@shared/lib";
+import type {
+	Story,
+	StoryDifficultyLevel,
+} from "@modules/stories/shared/model";
 import type { DropdownItem } from "@shared/ui";
 import { useCallback, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import type { ViewProps } from "react-native";
-import {
-	selectStory,
-	selectStoryDifficulty,
-	setStoryDifficultyId,
-} from "../../../shared/lib";
+import { getStoryDifficultyLevelById } from "../../../shared/lib";
 import * as C from "./ScenarioDifficultySelect.components";
 
-export type ScenarioDifficultySelectProps = ViewProps;
+export type ScenarioDifficultySelectProps = ViewProps & {
+	story?: Story | null;
+	value?: StoryDifficultyLevel;
+	onChange?: (difficulty?: StoryDifficultyLevel) => void;
+};
 
 export const ScenarioDifficultySelect = ({
+	onChange,
+	value,
+	story,
 	...props
 }: ScenarioDifficultySelectProps) => {
-	const dispatch = useAppDispatch();
-	const story = useAppSelector(selectStory);
 	const { t } = useTranslation();
 
 	const levels = story?.difficultyLevels || [];
@@ -30,24 +34,26 @@ export const ScenarioDifficultySelect = ({
 		});
 	}, [levels, t]);
 
-	const difficulty = useAppSelector(selectStoryDifficulty);
-	const item = data.find(({ value }) => value === difficulty?.id);
-
-	const onChange = useCallback(
+	const onDifficultyChange = useCallback(
 		({ value }: DropdownItem<string>) => {
-			dispatch(setStoryDifficultyId(value));
+			const difficulty = getStoryDifficultyLevelById({
+				story,
+				difficultyId: value,
+			});
+			onChange?.(difficulty);
+			// dispatch(setStoryDifficultyId(value));
 		},
-		[dispatch],
+		[onChange, story],
 	);
 
 	return (
 		<C.Container {...props}>
 			<C.Select
 				data={data}
-				onChange={onChange}
+				onChange={onDifficultyChange}
 				label={t`Difficulty`}
 				placeholder={t`Choose an option`}
-				value={item?.value}
+				value={value?.id}
 			/>
 		</C.Container>
 	);

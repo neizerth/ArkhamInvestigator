@@ -5,6 +5,12 @@ SCRIPT_PATH=$(realpath "$0")
 SCRIPT_DIR=$(dirname "$SCRIPT_PATH")
 RUST_DIR="$SCRIPT_DIR/../../rust"
 TARGET_DIR="$RUST_DIR/target"
+MODULE_DIR="$SCRIPT_DIR/../.."
+ANDROID_DIR="$MODULE_DIR/android"
+
+# Clean CMake cache to ensure new Rust library is linked
+echo "Cleaning Android CMake cache..."
+rm -rf "$ANDROID_DIR/.cxx" "$ANDROID_DIR/build/intermediates/cxx"
 
 cd "$RUST_DIR"
 

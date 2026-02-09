@@ -12,6 +12,7 @@ import type { SkillCheckHistoryItem } from "@modules/board/skill-check/shared/mo
 import {
 	selectChaosOddsBySkill,
 	selectShowChaosBagOdds,
+	selectShowPinnedCalculationOdds,
 } from "@modules/chaos-bag/odds/shared/lib";
 import { selectCurrentLanguage } from "@modules/core/i18n/shared/lib";
 import { useSwipe } from "@modules/core/touch/shared/lib";
@@ -37,8 +38,11 @@ export const PinnedSkillCheckItem = ({
 	const tapToHide = useAppSelector(selectTapToHidePins);
 	const showInfo = useAppSelector(selectShowAdditionalInformation);
 	const showChaosBagOdds = useAppSelector(selectShowChaosBagOdds);
+	const showPinnedCalculationOdds = useAppSelector(
+		selectShowPinnedCalculationOdds,
+	);
 
-	const showOdds = showChaosBagOdds && showInfo;
+	const showOdds = showChaosBagOdds && (showInfo || showPinnedCalculationOdds);
 
 	const skillOddsMatrix = useAppSelector((state) =>
 		selectChaosOddsBySkill(state, item.value),

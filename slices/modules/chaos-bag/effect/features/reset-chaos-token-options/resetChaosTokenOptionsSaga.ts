@@ -3,6 +3,7 @@ import {
 	setChaosTokenOptions,
 } from "@modules/chaos-bag/effect/shared/lib";
 import { startNewGame } from "@modules/game/entities/startNewGame";
+import { setStoryCode } from "@modules/stories/shared/lib";
 import { put, takeEvery } from "redux-saga/effects";
 
 function* worker() {
@@ -10,6 +11,7 @@ function* worker() {
 	yield put(setChaosTokenOptions(null));
 }
 
-export function* resetChaosTokenOptionsOnNewGameSaga() {
+export function* resetChaosTokenOptionsSaga() {
 	yield takeEvery(startNewGame.match, worker);
+	yield takeEvery(setStoryCode.match, worker);
 }

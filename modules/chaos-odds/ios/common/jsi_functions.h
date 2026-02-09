@@ -21,6 +21,10 @@ void markRuntimeAlive();
 /// Mark runtime as dead and clear all task storage (call when Runtime is invalidated)
 void markRuntimeDead();
 
+/// Check if runtime is alive (for use in background threads)
+/// Returns true if runtime is alive, false if it's been destroyed/invalidated
+bool runtimeAlive();
+
 /// Calculate chaos bag odds
 Value calculate(Runtime& runtime, const Value& thisValue, const Value* arguments, size_t count);
 
@@ -35,6 +39,9 @@ Value calculateItem(Runtime& runtime, const Value& thisValue, const Value* argum
 
 /// Set iOS idle timer disabled state (iOS only, no-op on other platforms)
 Value setKeepAwakeEnabled(Runtime& runtime, const Value& thisValue, const Value* arguments, size_t count);
+
+/// Get version string from Rust
+Value version(Runtime& runtime, const Value& thisValue, const Value* arguments, size_t count);
 
 } // namespace functions
 } // namespace chaosodds

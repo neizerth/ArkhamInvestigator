@@ -9,17 +9,8 @@ namespace jsi {
 namespace chaosodds {
 namespace functions {
 
-/// Set CallInvoker for async operations (deprecated - no longer used with polling pattern)
+/// Set CallInvoker for async operations (deprecated - synchronous pattern doesn't need it)
 void setCallInvoker(std::shared_ptr<react::CallInvoker> jsInvoker);
-
-/// Poll result for a task
-Value pollResult(Runtime& runtime, const Value& thisValue, const Value* arguments, size_t count);
-
-/// Mark runtime as alive (call when JSI bindings are installed)
-void markRuntimeAlive();
-
-/// Mark runtime as dead and clear all task storage (call when Runtime is invalidated)
-void markRuntimeDead();
 
 /// Calculate chaos bag odds
 Value calculate(Runtime& runtime, const Value& thisValue, const Value* arguments, size_t count);
@@ -35,6 +26,9 @@ Value calculateItem(Runtime& runtime, const Value& thisValue, const Value* argum
 
 /// Set iOS idle timer disabled state (iOS only, no-op on other platforms)
 Value setKeepAwakeEnabled(Runtime& runtime, const Value& thisValue, const Value* arguments, size_t count);
+
+/// Get version string from Rust
+Value version(Runtime& runtime, const Value& thisValue, const Value* arguments, size_t count);
 
 } // namespace functions
 } // namespace chaosodds

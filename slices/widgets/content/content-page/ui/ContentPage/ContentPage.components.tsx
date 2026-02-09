@@ -1,6 +1,7 @@
 import { navBarHeight, size } from "@shared/config";
+import { ScrollView } from "@shared/ui";
 import { View } from "react-native";
-import { ScrollView } from "react-native-gesture-handler";
+
 import styled from "styled-components/native";
 
 export const FullContent: typeof View = styled(View)`

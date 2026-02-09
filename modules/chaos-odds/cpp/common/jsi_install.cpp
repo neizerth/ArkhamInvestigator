@@ -23,127 +23,103 @@ namespace chaosodds {
 void install(Runtime& runtime, std::shared_ptr<react::CallInvoker> jsInvoker) {
     LOGI("🔵 [JSI] install() called - starting JSI bindings installation");
     
-    // Mark runtime as alive - CRITICAL for preventing use-after-free in pollResult
-    functions::markRuntimeAlive();
-    
-    // Set CallInvoker for async operations
-    if (jsInvoker) {
-        LOGI("🔵 [JSI] Setting CallInvoker for async operations");
-        functions::setCallInvoker(jsInvoker);
-    } else {
-        LOGI("⚠️ [JSI] CallInvoker is null - async operations may not work");
+    // 1. Проверка на двойную установку (Hermes не любит переопределение глобалов при инициализации)
+    // Используем безопасную проверку hasProperty вместо getProperty
+    if (runtime.global().hasProperty(runtime, "ChaosOdds")) {
+        LOGI("⚠️ [JSI] ChaosOdds already installed, skipping");
+        return;
     }
+    
+    (void)jsInvoker;
     
     LOGI("🔵 [JSI] Creating ChaosOdds object");
-    auto chaosOdds = Object(runtime);
+    Object chaosOdds(runtime);
+    LOGI("🔵 [JSI] ChaosOdds object created successfully");
     
-    // Install calculate function
+    // Прямая установка: меньше оберток — меньше шансов на крэш vtable
+    // Используем прямое создание без промежуточных лямбд-помощников
     LOGI("🔵 [JSI] Installing calculate function");
-    auto calculateFunc = Function::createFromHostFunction(
+    chaosOdds.setProperty(
         runtime,
-        PropNameID::forAscii(runtime, "calculate"),
-        1,
-        [](Runtime& rt, const Value& thisValue, const Value* args, size_t count) -> Value {
-            return functions::calculate(rt, thisValue, args, count);
-        }
+        PropNameID::forUtf8(runtime, "calculate"),
+        Function::createFromHostFunction(
+            runtime,
+            PropNameID::forUtf8(runtime, "calculate"),
+            2,  // CRITICAL: calculate() takes 2 arguments: available and revealed
+            functions::calculate
+        )
     );
-    chaosOdds.setProperty(runtime, "calculate", calculateFunc);
     LOGI("✅ [JSI] calculate function installed");
     
-    // Install cancel function
     LOGI("🔵 [JSI] Installing cancel function");
-    auto cancelFunc = Function::createFromHostFunction(
+    chaosOdds.setProperty(
         runtime,
-        PropNameID::forAscii(runtime, "cancel"),
-        0,
-        [](Runtime& rt, const Value& thisValue, const Value* args, size_t count) -> Value {
-            return functions::cancel(rt, thisValue, args, count);
-        }
+        PropNameID::forUtf8(runtime, "cancel"),
+        Function::createFromHostFunction(
+            runtime,
+            PropNameID::forUtf8(runtime, "cancel"),
+            0,
+            functions::cancel
+        )
     );
-    chaosOdds.setProperty(runtime, "cancel", cancelFunc);
     LOGI("✅ [JSI] cancel function installed");
     
-    // Note: freeString removed - strings are now managed automatically by Hermes GC
-    // Result strings are copied to std::string in C++ and Hermes manages the JS string lifetime
-    
-    // Install findTokens function
     LOGI("🔵 [JSI] Installing findTokens function");
-    auto findTokensFunc = Function::createFromHostFunction(
+    chaosOdds.setProperty(
         runtime,
-        PropNameID::forAscii(runtime, "findTokens"),
-        3,
-        [](Runtime& rt, const Value& thisValue, const Value* args, size_t count) -> Value {
-            return functions::findTokens(rt, thisValue, args, count);
-        }
+        PropNameID::forUtf8(runtime, "findTokens"),
+        Function::createFromHostFunction(
+            runtime,
+            PropNameID::forUtf8(runtime, "findTokens"),
+            3,
+            functions::findTokens
+        )
     );
-    chaosOdds.setProperty(runtime, "findTokens", findTokensFunc);
     LOGI("✅ [JSI] findTokens function installed");
     
-    // Install calculateItem function
     LOGI("🔵 [JSI] Installing calculateItem function");
-    auto calculateItemFunc = Function::createFromHostFunction(
+    chaosOdds.setProperty(
         runtime,
-        PropNameID::forAscii(runtime, "calculateItem"),
-        4,
-        [](Runtime& rt, const Value& thisValue, const Value* args, size_t count) -> Value {
-            return functions::calculateItem(rt, thisValue, args, count);
-        }
+        PropNameID::forUtf8(runtime, "calculateItem"),
+        Function::createFromHostFunction(
+            runtime,
+            PropNameID::forUtf8(runtime, "calculateItem"),
+            4,
+            functions::calculateItem
+        )
     );
-    chaosOdds.setProperty(runtime, "calculateItem", calculateItemFunc);
     LOGI("✅ [JSI] calculateItem function installed");
     
-    // Install pollResult function
-    LOGI("🔵 [JSI] Installing pollResult function");
-    auto pollResultFunc = Function::createFromHostFunction(
-        runtime,
-        PropNameID::forAscii(runtime, "pollResult"),
-        1,
-        [](Runtime& rt, const Value& thisValue, const Value* args, size_t count) -> Value {
-            return functions::pollResult(rt, thisValue, args, count);
-        }
-    );
-    chaosOdds.setProperty(runtime, "pollResult", pollResultFunc);
-    LOGI("✅ [JSI] pollResult function installed");
-    
-    // Install setKeepAwakeEnabled function (iOS only, no-op on Android)
     LOGI("🔵 [JSI] Installing setKeepAwakeEnabled function");
-    auto setKeepAwakeFunc = Function::createFromHostFunction(
+    chaosOdds.setProperty(
         runtime,
-        PropNameID::forAscii(runtime, "setKeepAwakeEnabled"),
-        1,
-        [](Runtime& rt, const Value& thisValue, const Value* args, size_t count) -> Value {
-            return functions::setKeepAwakeEnabled(rt, thisValue, args, count);
-        }
+        PropNameID::forUtf8(runtime, "setKeepAwakeEnabled"),
+        Function::createFromHostFunction(
+            runtime,
+            PropNameID::forUtf8(runtime, "setKeepAwakeEnabled"),
+            1,
+            functions::setKeepAwakeEnabled
+        )
     );
-    chaosOdds.setProperty(runtime, "setKeepAwakeEnabled", setKeepAwakeFunc);
     LOGI("✅ [JSI] setKeepAwakeEnabled function installed");
     
-    // Set global property
+    LOGI("🔵 [JSI] Installing version function");
+    chaosOdds.setProperty(
+        runtime,
+        PropNameID::forUtf8(runtime, "version"),
+        Function::createFromHostFunction(
+            runtime,
+            PropNameID::forUtf8(runtime, "version"),
+            0,
+            functions::version
+        )
+    );
+    LOGI("✅ [JSI] version function installed");
+    
+    // Установка в global в самом конце - после полного создания объекта
     LOGI("🔵 [JSI] Setting global.ChaosOdds property");
-    runtime.global().setProperty(runtime, "ChaosOdds", chaosOdds);
+    runtime.global().setProperty(runtime, "ChaosOdds", std::move(chaosOdds));
     LOGI("✅ [JSI] global.ChaosOdds property set successfully");
-    
-    // Note: Multinomial cache is initialized lazily on first call to chaos_odds_calculate
-    // or get_chaos_bag_modifiers, so no separate prewarm function is needed
-    
-    // Verify installation
-    // NOTE: Removed asObject() calls to avoid ABI mismatch issues
-    // In RN 0.79+, asObject() symbols may not be exported from libreactnative.so
-    // Verification is not critical for functionality - just check that property exists
-    try {
-        auto global = runtime.global();
-        auto chaosOddsValue = global.getProperty(runtime, "ChaosOdds");
-        if (chaosOddsValue.isObject()) {
-            LOGI("✅ [JSI] Verification: global.ChaosOdds is an object");
-            // Skip detailed verification to avoid asObject() symbol resolution issues
-        } else {
-            LOGE("❌ [JSI] Verification failed: global.ChaosOdds is not an object");
-        }
-    } catch (const std::exception& e) {
-        LOGE("❌ [JSI] Verification exception: %s", e.what());
-    } catch (...) {
-        LOGE("❌ [JSI] Verification unknown exception");
-    }
     
     LOGI("✅ [JSI] install() completed successfully");
 }
@@ -151,4 +127,3 @@ void install(Runtime& runtime, std::shared_ptr<react::CallInvoker> jsInvoker) {
 } // namespace chaosodds
 } // namespace jsi
 } // namespace facebook
-

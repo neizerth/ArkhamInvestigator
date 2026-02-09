@@ -8,4 +8,3 @@ export * from "./promise";
 export * from "./object";
 export * from "./date";
 export * from "./store";
-export * from "./globalState";

@@ -5,8 +5,9 @@ import {
 } from "@modules/stories/entities/ui";
 import { color, font, size } from "@shared/config";
 import { Checkbox as BaseCheckbox, Button, Row } from "@shared/ui";
+import { ScrollView } from "@shared/ui";
 import { Dimensions, View } from "react-native";
-import { ScrollView } from "react-native-gesture-handler";
+
 import styled from "styled-components/native";
 import { StoreCheckbox } from "../../../store-checkbox";
 import { ReferenceCardSelect } from "../ReferenceCardSelect";
@@ -81,9 +82,15 @@ export const ReferencePreview: typeof View = styled(View)`
 
 export const Actions: typeof Row = styled(Row)`
   padding: 0 ${size.gap.small}px;
+  gap: ${size.gap.default}px;
 `;
 
-export const Close: typeof Button = styled(Button).attrs({
+export const Cancel: typeof Button = styled(Button)`
+  background-color: ${color.dark15};
+  flex: 1;
+`;
+
+export const Ok: typeof Button = styled(Button).attrs({
 	textStyle: {
 		color: color.text,
 	},
@@ -91,6 +98,6 @@ export const Close: typeof Button = styled(Button).attrs({
 		color: color.text,
 	},
 })`
-  flex: 1;
   background-color: ${color.light10};
+  flex: 1;
 `;

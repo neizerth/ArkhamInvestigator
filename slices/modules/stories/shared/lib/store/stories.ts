@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import type { Story } from "@shared/model";
 import { createSliceState } from "redux-toolkit-helpers";
+import type { Story } from "../../model";
 
 export type StoriesState = {
 	stories: Story[];

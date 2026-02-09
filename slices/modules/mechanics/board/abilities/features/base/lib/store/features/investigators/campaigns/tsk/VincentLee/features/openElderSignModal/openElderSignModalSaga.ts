@@ -3,7 +3,7 @@ import {
 	selectInvestigatorBoards,
 } from "@modules/board/base/shared/lib";
 import { chaosToken } from "@modules/chaos-bag/base/shared/config";
-import { whereReferencePartTokenEq } from "@modules/chaos-bag/effect/entities/lib";
+import { whereReferencePartTokenEq } from "@modules/chaos-bag/effect/shared/lib";
 import {
 	type chaosTokensRevealed,
 	createRevealedTokenFilterAction,

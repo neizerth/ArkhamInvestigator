@@ -352,6 +352,7 @@
 	"chaosBag.enabled": "Enabled",
 	"chaosOdds.enabled": "Enabled",
 	"chaosOdds.skillOdds": "Skill odds",
+	"chaosOdds.pinnedCalculationOdds": "Pinned calculations",
 	"chaosOdds.performance.title": "Chaos odds: performance",
 	"chaosOdds.performance.pageTitle": "Chaos odds: performance",
 	"chaosOdds.performance.description": "Goal: completing each test in less than 4 seconds. Evaluation: < 1 sec - excellent, < 2 sec - good, < 4 sec - satisfactory, > 10 sec - bad.",

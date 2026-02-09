@@ -27,6 +27,7 @@ export const chaosBagRevealModal = createSlice({
 
 export const {
 	setBoardChaosTokenValue,
+	setChaosTokenValue,
 
 	clearChaosTokenValue,
 	updateBoardChaosTokenValueInternal,

@@ -18,7 +18,7 @@ export const AutoSuccessThin = createChaosTokenIcon({
 });
 
 export const AutoFail = createChaosTokenIcon({
-	foregroundScale: ios ? 1.09 : 1.2,
+	foregroundScale: 1.2,
 	icon: "token_auto_fail_highlight",
 	backgroundIcon: "token_auto_fail_highlight_inverse",
 	foregroundColor: chaosToken.color.types.autoFail,

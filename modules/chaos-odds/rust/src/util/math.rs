@@ -18,9 +18,14 @@ lazy_static::lazy_static! {
         let mut fact = 1u64;
         for i in 1..=MAX_PRECOMPUTED_FACTORIAL {
             // Use checked multiplication to detect overflow (shouldn't happen for i <= 20)
-            fact = fact.checked_mul(i as u64).unwrap_or_else(|| {
-                panic!("Factorial overflow at {}! (should not happen)", i);
-            });
+            fact = match fact.checked_mul(i as u64) {
+                Some(f) => f,
+                None => {
+                    eprintln!("Math error: Factorial overflow at {}! (this should not happen)", i);
+                    // Return 0 as error indicator - will cause calculation to fail gracefully
+                    return vec![];
+                }
+            };
             facts.push(fact);
         }
         facts

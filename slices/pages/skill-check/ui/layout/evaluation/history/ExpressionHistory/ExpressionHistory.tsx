@@ -22,6 +22,7 @@ import * as C from "./ExpressionHistory.components";
 
 export type ExpressionHistoryProps = ViewProps & {
 	size?: number;
+	unlimited?: boolean;
 	contentContainerStyle?: ViewStyle;
 };
 
@@ -31,6 +32,7 @@ type ListItem = SkillCheckHistoryItem & {
 
 export const ExpressionHistory = ({
 	size = 1,
+	unlimited = false,
 	contentContainerStyle,
 	...props
 }: ExpressionHistoryProps) => {
@@ -51,14 +53,21 @@ export const ExpressionHistory = ({
 	}, [history, value]);
 
 	const pinned = useMemo(() => {
-		return data.filter(({ pinned }) => pinned).slice(0, size);
-	}, [size, data]);
+		const allPinned = data.filter(({ pinned }) => pinned);
+		if (unlimited) {
+			return allPinned;
+		}
+		return allPinned.slice(0, size);
+	}, [size, data, unlimited]);
 
-	const regularSize = useMemo(() => {
-		return Math.max(0, size - pinned.length);
-	}, [size, pinned.length]);
-
-	const regular = data.filter(({ pinned }) => !pinned).slice(-regularSize);
+	const regular = useMemo(() => {
+		const allRegular = data.filter(({ pinned }) => !pinned);
+		if (unlimited) {
+			return allRegular;
+		}
+		const regularSize = Math.max(0, size - pinned.length);
+		return allRegular.slice(-regularSize);
+	}, [data, pinned.length, size, unlimited]);
 
 	const ref = useRef<FlatList>(null);
 

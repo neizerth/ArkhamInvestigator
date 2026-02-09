@@ -21,67 +21,38 @@ export interface CalculateResult {
 	result: string;
 }
 
-/**
- * Task result status from pollResult
- * Values match C++ TaskStatus enum: 0=Pending, 1=Completed, 2=Failed, 3=Cancelled
- */
-export type TaskStatus = 0 | 1 | 2 | 3;
-
-// Task status constants (match C++ enum)
-const TASK_STATUS_PENDING = 0;
-const TASK_STATUS_COMPLETED = 1;
-const TASK_STATUS_FAILED = 2;
-const TASK_STATUS_CANCELLED = 3;
-
-/**
- * Result from pollResult - null if pending, object if completed
- * Memory is managed automatically by Hermes GC - no manual freeString() needed
- */
-export interface PollResult {
-	status: TaskStatus;
-	result?: string; // JSON result string (only if status === Completed)
-}
-
 interface ChaosOddsJSI {
 	/**
-	 * Start chaos bag odds calculation (JS-owned Promise pattern - GC-safe)
+	 * Calculate chaos bag odds (synchronous - Hermes-safe)
 	 * @param available JSON string with available tokens
 	 * @param revealed JSON string with revealed tokens (optional, defaults to empty array)
-	 * @returns Task ID (number) - use pollResult() to check completion
+	 * @returns JSON result string directly (synchronous execution)
 	 */
-	calculate(available: string, revealed: string): number;
+	calculate(available: string, revealed: string): string;
 
 	/**
-	 * Start token odds calculation (JS-owned Promise pattern - GC-safe)
+	 * Calculate token odds (synchronous - Hermes-safe)
 	 * @param targets JSON string with array of TokenTarget
 	 * @param tokens JSON string with array of ChaosOddsToken
 	 * @param params JSON string with FindTokensParams
-	 * @returns Task ID (number) - use pollResult() to check completion
+	 * @returns JSON result string directly (synchronous execution)
 	 */
-	findTokens(targets: string, tokens: string, params: string): number;
+	findTokens(targets: string, tokens: string, params: string): string;
 
 	/**
-	 * Start item odds calculation (JS-owned Promise pattern - GC-safe)
+	 * Calculate item odds (synchronous - Hermes-safe)
 	 * @param available JSON string with available tokens
 	 * @param revealed JSON string with revealed tokens
 	 * @param skill_value Skill value (0-100)
 	 * @param difficulty Difficulty value (0-100)
-	 * @returns Task ID (number) - use pollResult() to check completion
+	 * @returns JSON result string directly (synchronous execution)
 	 */
 	calculateItem(
 		available: string,
 		revealed: string,
 		skill_value: number,
 		difficulty: number,
-	): number;
-
-	/**
-	 * Poll result for a task
-	 * @param task_id Task ID returned from calculate/findTokens/calculateItem
-	 * @returns null if task is still pending, or PollResult object if completed/failed/cancelled
-	 * Note: Memory is managed automatically by Hermes GC - no manual cleanup needed
-	 */
-	pollResult(task_id: number): PollResult | null;
+	): string;
 
 	/**
 	 * Cancel ongoing calculation
@@ -89,11 +60,24 @@ interface ChaosOddsJSI {
 	cancel(): void;
 
 	/**
+	 * Poll result for a task (iOS async pattern)
+	 * @param task_id Task ID returned by calculate()
+	 * @returns Object with {status: number, result: string} or null if not ready
+	 */
+	pollResult?(task_id: number): { status: number; result: string } | null;
+
+	/**
 	 * Set iOS idle timer disabled state (iOS only, no-op on other platforms)
 	 * This prevents the device from going to sleep during long calculations
 	 * @param enabled true to disable idle timer (keep awake), false to enable it
 	 */
 	setKeepAwakeEnabled?(enabled: boolean): void;
+
+	/**
+	 * Get version string from Rust (from Cargo.toml)
+	 * @returns Version string (e.g., "1.0.1")
+	 */
+	version(): string;
 }
 
 declare global {
@@ -103,245 +87,7 @@ declare global {
 // Initialize module version tracking on load
 initializeModuleVersion();
 
-/**
- * Poll for task result until completion (JS-owned Promise pattern - GC-safe)
- * Production-ready version with:
- * - No recursion (uses setTimeout to prevent stack overflow)
- * - Timeout protection (cancels after 60 seconds)
- * - HMR protection (checks moduleVersion on each iteration)
- * - GC-safe string copying (immediate copy, freeze result)
- */
-async function pollTaskResult(
-	task_id: number,
-	moduleVersion: number,
-): Promise<CalculateResult | null> {
-	return new Promise<CalculateResult | null>((resolve) => {
-		// Check if module was reloaded before starting
-		if (isModuleReloaded(moduleVersion)) {
-			resolve(null);
-			return;
-		}
-
-		const jsi = global.ChaosOdds;
-		if (!jsi || !jsi.pollResult) {
-			resolve(null);
-			return;
-		}
-
-		// Timeout protection: cancel task after 60 seconds
-		const TIMEOUT_MS = 60000;
-		const pollStartTime = performance.now();
-		let pollCount = 0;
-		let timeoutId: ReturnType<typeof setTimeout> | null = null;
-		let isResolved = false; // Prevent multiple resolutions
-
-		// Timeout handler
-		const handleTimeout = () => {
-			if (isResolved) return;
-			isResolved = true;
-			console.error(
-				`ChaosOdds: Task ${task_id} timed out after ${TIMEOUT_MS}ms (${pollCount} polls)`,
-			);
-			// Cancel the task on timeout
-			if (jsi.cancel) {
-				jsi.cancel();
-			}
-			resolve(null);
-		};
-
-		// Set timeout
-		timeoutId = setTimeout(handleTimeout, TIMEOUT_MS);
-
-		// Polling loop (non-recursive, uses setTimeout)
-		const pollTaskResultLoop = () => {
-			// Prevent execution if already resolved
-			if (isResolved) {
-				return;
-			}
-
-			pollCount++;
-			const pollIterStart = performance.now();
-
-			// #region agent log
-			fetch(
-				"http://127.0.0.1:7242/ingest/4756e9c3-5ffd-47b8-90a7-0998864a23df",
-				{
-					method: "POST",
-					headers: { "Content-Type": "application/json" },
-					body: JSON.stringify({
-						location: "ChaosOddsJSI.ts:pollTaskResultLoop",
-						message: "poll iteration start",
-						data: {
-							task_id,
-							pollCount,
-							timeSincePollStart: pollIterStart - pollStartTime,
-						},
-						timestamp: Date.now(),
-						sessionId: "debug-session",
-						runId: "ui-freeze-debug",
-						hypothesisId: "H1",
-					}),
-				},
-			).catch(() => {});
-			// #endregion
-
-			// Check if module was reloaded (HMR protection)
-			if (isModuleReloaded(moduleVersion)) {
-				if (timeoutId) clearTimeout(timeoutId);
-				if (!isResolved) {
-					isResolved = true;
-					resolve(null);
-				}
-				return;
-			}
-
-			// Verify JSI is still available
-			const currentJsi = global.ChaosOdds;
-			if (!currentJsi || !currentJsi.pollResult) {
-				if (timeoutId) clearTimeout(timeoutId);
-				if (!isResolved) {
-					isResolved = true;
-					resolve(null);
-				}
-				return;
-			}
-
-			// Poll for result
-			const beforePollResult = performance.now();
-			let result: PollResult | null = null;
-			try {
-				result = currentJsi.pollResult(task_id);
-			} catch (error) {
-				// C++ pollResult may throw if Runtime is destroyed
-				console.error("ChaosOdds: pollResult threw error:", error);
-				if (timeoutId) clearTimeout(timeoutId);
-				if (!isResolved) {
-					isResolved = true;
-					resolve(null);
-				}
-				return;
-			}
-			const afterPollResult = performance.now();
-			const pollResultDuration = afterPollResult - beforePollResult;
-
-			// #region agent log
-			fetch(
-				"http://127.0.0.1:7242/ingest/4756e9c3-5ffd-47b8-90a7-0998864a23df",
-				{
-					method: "POST",
-					headers: { "Content-Type": "application/json" },
-					body: JSON.stringify({
-						location: "ChaosOddsJSI.ts:pollResult",
-						message: "pollResult call completed",
-						data: {
-							task_id,
-							pollCount,
-							pollResultDuration,
-							resultIsNull: result === null,
-							resultStatus: result?.status,
-						},
-						timestamp: Date.now(),
-						sessionId: "debug-session",
-						runId: "ui-freeze-debug",
-						hypothesisId: "H1",
-					}),
-				},
-			).catch(() => {});
-			// #endregion
-
-			if (result === null) {
-				// Task is still pending - schedule next poll using setTimeout (non-recursive)
-				// #region agent log
-				fetch(
-					"http://127.0.0.1:7242/ingest/4756e9c3-5ffd-47b8-90a7-0998864a23df",
-					{
-						method: "POST",
-						headers: { "Content-Type": "application/json" },
-						body: JSON.stringify({
-							location: "ChaosOddsJSI.ts:poll-scheduling-next",
-							message: "task pending, scheduling next poll",
-							data: {
-								task_id,
-								pollCount,
-								timeSincePollStart: performance.now() - pollStartTime,
-							},
-							timestamp: Date.now(),
-							sessionId: "debug-session",
-							runId: "ui-freeze-debug",
-							hypothesisId: "H1",
-						}),
-					},
-				).catch(() => {});
-				// #endregion
-				setTimeout(pollTaskResultLoop, 50); // Non-recursive polling
-				return;
-			}
-
-			// Task completed - clear timeout
-			if (timeoutId) {
-				clearTimeout(timeoutId);
-				timeoutId = null;
-			}
-
-			// Prevent multiple resolutions
-			if (isResolved) {
-				return;
-			}
-			isResolved = true;
-
-			const totalPollTime = performance.now() - pollStartTime;
-
-			// #region agent log
-			fetch(
-				"http://127.0.0.1:7242/ingest/4756e9c3-5ffd-47b8-90a7-0998864a23df",
-				{
-					method: "POST",
-					headers: { "Content-Type": "application/json" },
-					body: JSON.stringify({
-						location: "ChaosOddsJSI.ts:task-completed",
-						message: "task completed, resolving promise",
-						data: {
-							task_id,
-							pollCount,
-							totalPollTime,
-							resultStatus: result.status,
-							resultSize: result.result?.length,
-						},
-						timestamp: Date.now(),
-						sessionId: "debug-session",
-						runId: "ui-freeze-debug",
-						hypothesisId: "H1",
-					}),
-				},
-			).catch(() => {});
-			// #endregion
-
-			// Process result with GC-safe copying
-			if (result.status === TASK_STATUS_COMPLETED && result.result) {
-				// CRITICAL: Copy string immediately - result object may become invalid
-				// after this function returns (especially during drainMicrotasks)
-				const resultString = String(result.result);
-				// Freeze result object to prevent mutation (GC-safe)
-				const finalResult = Object.freeze({
-					result: resultString,
-				});
-				resolve(finalResult);
-			} else if (result.status === TASK_STATUS_CANCELLED) {
-				// Cancelled
-				resolve(null);
-			} else {
-				// Failed or unknown status
-				console.error(
-					`ChaosOdds: Task ${task_id} failed with status ${result.status}`,
-				);
-				resolve(null);
-			}
-		};
-
-		// Start polling (non-recursive)
-		setTimeout(pollTaskResultLoop, 0);
-	});
-}
+// pollTaskResult REMOVED - synchronous pattern doesn't need polling
 
 /**
  * Creates a HMR-protected wrapper around JSI bindings
@@ -375,18 +121,24 @@ function createProtectedWrapper(
 			}
 			return jsi.calculateItem(available, revealed, skill_value, difficulty);
 		},
-		pollResult: (task_id: number) => {
-			if (isModuleReloaded(moduleVersion)) {
-				return null;
-			}
-			return jsi.pollResult(task_id);
-		},
 		cancel: () => {
 			if (isModuleReloaded(moduleVersion)) {
 				return;
 			}
 			jsi.cancel();
 		},
+		pollResult: jsi.pollResult
+			? (task_id: number) => {
+					if (isModuleReloaded(moduleVersion)) {
+						throw new Error("Module was reloaded");
+					}
+					const pollFn = jsi.pollResult;
+					if (pollFn) {
+						return pollFn(task_id);
+					}
+					return null;
+				}
+			: undefined,
 		setKeepAwakeEnabled: jsi.setKeepAwakeEnabled
 			? (enabled: boolean) => {
 					if (isModuleReloaded(moduleVersion)) {
@@ -398,6 +150,12 @@ function createProtectedWrapper(
 					}
 				}
 			: undefined,
+		version: () => {
+			if (isModuleReloaded(moduleVersion)) {
+				throw new Error("Module was reloaded");
+			}
+			return jsi.version();
+		},
 	};
 }
 
@@ -424,7 +182,7 @@ function getChaosOddsJSI(): ChaosOddsJSI | undefined {
 }
 
 /**
- * Wrapper that creates JS-owned Promise for calculate (GC-safe)
+ * Wrapper that creates JS-owned Promise for calculate (synchronous execution wrapped in Promise)
  */
 export async function calculateWithPromise(
 	available: string,
@@ -441,8 +199,99 @@ export async function calculateWithPromise(
 	}
 
 	try {
-		const task_id = jsi.calculate(available, revealed);
-		return pollTaskResult(task_id, moduleVersion);
+		// Call calculate - on Android it returns string directly, on iOS it returns task_id (number)
+		const result = jsi.calculate(available, revealed);
+
+		// Check if result is a number (iOS async pattern - task_id)
+		if (typeof result === "number" && jsi.pollResult) {
+			// iOS async pattern: poll for result
+			return new Promise<CalculateResult | null>((resolve) => {
+				const pollInterval = 50; // Poll every 50ms
+				const maxAttempts = 200; // Max 10 seconds (200 * 50ms)
+				let attempts = 0;
+
+				const poll = () => {
+					attempts++;
+					const pollFn = jsi.pollResult;
+					if (!pollFn) {
+						console.error("ChaosOdds: pollResult is not available");
+						resolve(null);
+						return;
+					}
+					const polledResult = pollFn(result);
+
+					// pollResult returns an object {status: number, result: string} or null
+					if (polledResult !== null && polledResult !== undefined) {
+						// Check if it's an object with result property
+						if (
+							typeof polledResult === "object" &&
+							"result" in polledResult &&
+							typeof (polledResult as { result: unknown }).result === "string"
+						) {
+							// Result is ready - extract the string from the object
+							const resultObj = polledResult as {
+								status: number;
+								result: string;
+							};
+							resolve({
+								result: resultObj.result,
+							});
+						} else if (typeof polledResult === "string") {
+							// Fallback: if it's already a string (shouldn't happen, but handle it)
+							resolve({
+								result: polledResult,
+							});
+						} else if (attempts >= maxAttempts) {
+							// Timeout - result is still not ready
+							console.error(
+								"ChaosOdds: pollResult timeout after",
+								maxAttempts * pollInterval,
+								"ms, last result:",
+								polledResult,
+							);
+							resolve(null);
+						} else {
+							// Continue polling - result is not ready yet (null or object without result)
+							setTimeout(poll, pollInterval);
+						}
+					} else if (attempts >= maxAttempts) {
+						// Timeout
+						console.error(
+							"ChaosOdds: pollResult timeout after",
+							maxAttempts * pollInterval,
+							"ms",
+						);
+						resolve(null);
+					} else {
+						// Continue polling - result is null (not ready yet)
+						setTimeout(poll, pollInterval);
+					}
+				};
+
+				// Start polling
+				setTimeout(poll, pollInterval);
+			});
+		}
+
+		// Android synchronous pattern: result is already a string
+		// CRITICAL: Ensure result is always a string
+		const resultString = typeof result === "string" ? result : String(result);
+
+		// Log if result was not a string to help debug
+		if (typeof result !== "string") {
+			console.warn(
+				"ChaosOdds: calculate() returned non-string type:",
+				typeof result,
+				"value:",
+				result,
+				"converted to:",
+				resultString,
+			);
+		}
+
+		return Promise.resolve({
+			result: resultString,
+		});
 	} catch (error) {
 		console.error("ChaosOdds calculate error:", error);
 		return Promise.resolve(null);
@@ -450,7 +299,7 @@ export async function calculateWithPromise(
 }
 
 /**
- * Wrapper that creates JS-owned Promise for findTokens (GC-safe)
+ * Wrapper that creates JS-owned Promise for findTokens (synchronous execution wrapped in Promise)
  */
 export async function findTokensWithPromise(
 	targets: string,
@@ -468,8 +317,24 @@ export async function findTokensWithPromise(
 	}
 
 	try {
-		const task_id = jsi.findTokens(targets, tokens, params);
-		return pollTaskResult(task_id, moduleVersion);
+		// Synchronous call - wrap in Promise.resolve for backwards compatibility
+		const result = jsi.findTokens(targets, tokens, params);
+
+		// CRITICAL: Ensure result is always a string
+		const resultString = typeof result === "string" ? result : String(result);
+
+		if (typeof result !== "string") {
+			console.warn(
+				"ChaosOdds: findTokens() returned non-string type:",
+				typeof result,
+				"value:",
+				result,
+			);
+		}
+
+		return Promise.resolve({
+			result: resultString,
+		});
 	} catch (error) {
 		console.error("ChaosOdds findTokens error:", error);
 		return Promise.resolve(null);
@@ -477,7 +342,7 @@ export async function findTokensWithPromise(
 }
 
 /**
- * Wrapper that creates JS-owned Promise for calculateItem (GC-safe)
+ * Wrapper that creates JS-owned Promise for calculateItem (synchronous execution wrapped in Promise)
  */
 export async function calculateItemWithPromise(
 	available: string,
@@ -496,17 +361,123 @@ export async function calculateItemWithPromise(
 	}
 
 	try {
-		const task_id = jsi.calculateItem(
+		// Synchronous call - wrap in Promise.resolve for backwards compatibility
+		const result = jsi.calculateItem(
 			available,
 			revealed,
 			skill_value,
 			difficulty,
 		);
-		return pollTaskResult(task_id, moduleVersion);
+
+		// CRITICAL: Ensure result is always a string
+		const resultString = typeof result === "string" ? result : String(result);
+
+		if (typeof result !== "string") {
+			console.warn(
+				"ChaosOdds: calculateItem() returned non-string type:",
+				typeof result,
+				"value:",
+				result,
+			);
+		}
+
+		return Promise.resolve({
+			result: resultString,
+		});
 	} catch (error) {
 		console.error("ChaosOdds calculateItem error:", error);
 		return Promise.resolve(null);
 	}
 }
 
-export default getChaosOddsJSI() as ChaosOddsJSI;
+// CRITICAL: Don't call getChaosOddsJSI() at import time!
+// JSI bindings may be installed AFTER this module is imported.
+// Use a function that checks for global.ChaosOdds on every call.
+let cachedJSI: ChaosOddsJSI | undefined = undefined;
+
+function getJSI(): ChaosOddsJSI | undefined {
+	// Always check if global.ChaosOdds exists
+	if (typeof global.ChaosOdds === "undefined") {
+		cachedJSI = undefined;
+		return undefined;
+	}
+
+	// If we have cached JSI, return it
+	if (cachedJSI) {
+		return cachedJSI;
+	}
+
+	// Get fresh JSI wrapper
+	cachedJSI = getChaosOddsJSI();
+	return cachedJSI;
+}
+
+// Create a Proxy that checks for global.ChaosOdds on every access
+// The Proxy allows us to check availability dynamically without calling getChaosOddsJSI() at import time
+const ChaosOddsJSILazy = new Proxy({} as ChaosOddsJSI, {
+	get(_target, prop) {
+		// Special property to check if JSI is available
+		if (prop === "__available" || prop === Symbol.toPrimitive) {
+			return typeof global.ChaosOdds !== "undefined";
+		}
+
+		const jsi = getJSI();
+		if (!jsi) {
+			return undefined;
+		}
+		// Use double cast through unknown to safely access properties
+		const value = (jsi as unknown as Record<string, unknown>)[prop as string];
+		if (typeof value === "function") {
+			return value.bind(jsi);
+		}
+		return value;
+	},
+	has(_target, prop) {
+		const jsi = getJSI();
+		return jsi ? prop in jsi : false;
+	},
+	getOwnPropertyDescriptor(_target, prop) {
+		const jsi = getJSI();
+		if (!jsi) {
+			return undefined;
+		}
+		return Object.getOwnPropertyDescriptor(jsi, prop);
+	},
+	ownKeys(_target) {
+		const jsi = getJSI();
+		if (!jsi) {
+			return [];
+		}
+		return Object.keys(jsi);
+	},
+});
+
+// Make the Proxy falsy when global.ChaosOdds is not available
+// This allows `if (!ChaosOddsJSI)` checks to work correctly
+Object.defineProperty(ChaosOddsJSILazy, Symbol.toPrimitive, {
+	value: (hint: string) => {
+		if (hint === "boolean" || hint === "default") {
+			return typeof global.ChaosOdds !== "undefined";
+		}
+		return null;
+	},
+});
+
+// Add valueOf and toString for boolean coercion
+// Use Object.defineProperty to avoid type errors
+Object.defineProperty(ChaosOddsJSILazy, "valueOf", {
+	value: () => typeof global.ChaosOdds !== "undefined",
+	writable: false,
+	enumerable: false,
+	configurable: false,
+});
+
+Object.defineProperty(ChaosOddsJSILazy, "toString", {
+	value: () =>
+		typeof global.ChaosOdds !== "undefined" ? "[object ChaosOddsJSI]" : "",
+	writable: false,
+	enumerable: false,
+	configurable: false,
+});
+
+export default ChaosOddsJSILazy as ChaosOddsJSI;

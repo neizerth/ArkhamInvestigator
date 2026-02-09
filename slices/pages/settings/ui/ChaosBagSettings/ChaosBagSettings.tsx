@@ -73,6 +73,13 @@ export const ChaosBagSettings = (props: ChaosBagSettingsProps) => {
 							actionCreator={chaosOdds.setShowSkillOdds}
 						/>
 					</C.Row>
+					<C.Row>
+						<C.Checkbox
+							label="chaosOdds.pinnedCalculationOdds"
+							selector={chaosOdds.selectShowPinnedCalculationOdds}
+							actionCreator={chaosOdds.setShowPinnedCalculationOdds}
+						/>
+					</C.Row>
 				</C.Section>
 			)}
 		</ArtworksFragment>

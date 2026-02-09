@@ -23,3 +23,8 @@ export const defaultNumericChaosTokenValue: Record<
 	"-8": -8,
 	"0": 0,
 };
+
+export const defaultChaosTokenValue = {
+	min: -9,
+	max: 10,
+};

@@ -1,6 +1,6 @@
 {
 	"name": "chaos-odds",
-	"version": "1.0.0",
+	"version": "1.0.2",
 	"description": "Native module for calculating chaos bag odds using Rust and React Native JSI",
 	"main": "index.ts",
 	"types": "index.ts",
@@ -11,7 +11,9 @@
 		"build:ios:dev": "cd cli/build && ./ios.dev.sh",
 		"build:android": "cd cli/build && bash android.sh",
 		"build:android:dev": "cd cli/build && bash android.dev.sh",
+		"log:android": "adb logcat | grep ChaosOdds",
 		"clean": "cd rust && cargo clean",
+		"clean:cache": "rm -rf android/.cxx android/build/intermediates/cxx",
 		"test": "cd rust && cargo test --release",
 		"test:dev": "cd rust && cargo test",
 		"test:js": "jest",

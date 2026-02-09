@@ -242,35 +242,21 @@ Value pollResult(
     const Value* arguments,
     size_t count
 ) {
-    // #region agent log
-    FILE* log = fopen("/Users/vy/Projects/Core/ArkhamInvestigator/.cursor/debug.log", "a");
-    if (log) {
-        fprintf(log, "{\"location\":\"jsi_functions.cpp:pollResult:entry\",\"message\":\"pollResult called\",\"data\":{\"count\":%zu},\"timestamp\":%lld}\n", count, (long long)(std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now().time_since_epoch()).count()));
-        fclose(log);
+    
+    // CRITICAL: Check runtime lifecycle flag FIRST, before any operations
+    // This prevents use-after-free if runtime was destroyed from background thread
+    // If pollResult is called from background thread (via CallInvoker), runtime may already be dead
+    if (!g_runtime_alive.load(std::memory_order_acquire)) {
+        LOGE("⏱️ [JSI] pollResult: Runtime is not alive (destroyed/invalidated), returning undefined");
+        return Value::undefined();
     }
-    // #endregion
     
     try {
         if (count < 1 || !arguments[0].isNumber()) {
-            // #region agent log
-            FILE* log2 = fopen("/Users/vy/Projects/Core/ArkhamInvestigator/.cursor/debug.log", "a");
-            if (log2) {
-                fprintf(log2, "{\"location\":\"jsi_functions.cpp:pollResult:invalid-args\",\"message\":\"invalid arguments\",\"data\":{\"count\":%zu},\"timestamp\":%lld}\n", count, (long long)(std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now().time_since_epoch()).count()));
-                fclose(log2);
-            }
-            // #endregion
             return Value::null();
         }
         
         uint32_t task_id = static_cast<uint32_t>(arguments[0].asNumber());
-        
-        // #region agent log
-        FILE* log3 = fopen("/Users/vy/Projects/Core/ArkhamInvestigator/.cursor/debug.log", "a");
-        if (log3) {
-            fprintf(log3, "{\"location\":\"jsi_functions.cpp:pollResult:before-lock\",\"message\":\"before lock, task_id=%u\",\"data\":{\"task_id\":%u},\"timestamp\":%lld}\n", task_id, task_id, (long long)(std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now().time_since_epoch()).count()));
-            fclose(log3);
-        }
-        // #endregion
         
         TaskResult task_copy;
         bool task_found = false;
@@ -279,26 +265,12 @@ Value pollResult(
             std::lock_guard<std::mutex> lock(g_task_storage_mutex);
             auto it = g_task_storage.find(task_id);
             if (it == g_task_storage.end()) {
-                // #region agent log
-                FILE* log4 = fopen("/Users/vy/Projects/Core/ArkhamInvestigator/.cursor/debug.log", "a");
-                if (log4) {
-                    fprintf(log4, "{\"location\":\"jsi_functions.cpp:pollResult:not-found\",\"message\":\"task not found\",\"data\":{\"task_id\":%u},\"timestamp\":%lld}\n", task_id, (long long)(std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now().time_since_epoch()).count()));
-                    fclose(log4);
-                }
-                // #endregion
                 return Value::null();
             }
             
             const auto& task = it->second;
             
             if (task.status == TASK_STATUS_PENDING) {
-                // #region agent log
-                FILE* log5 = fopen("/Users/vy/Projects/Core/ArkhamInvestigator/.cursor/debug.log", "a");
-                if (log5) {
-                    fprintf(log5, "{\"location\":\"jsi_functions.cpp:pollResult:pending\",\"message\":\"task still pending\",\"data\":{\"task_id\":%u},\"timestamp\":%lld}\n", task_id, (long long)(std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now().time_since_epoch()).count()));
-                    fclose(log5);
-                }
-                // #endregion
                 return Value::null();
             }
             
@@ -309,97 +281,35 @@ Value pollResult(
             // if pollResult is called twice or React retries, the task should still be available
         }
         
-        // CRITICAL: Check runtime lifecycle flag BEFORE creating any JSI objects
+        // CRITICAL: Check runtime lifecycle flag AGAIN before creating JSI objects
+        // Runtime may have been destroyed between first check and now (race condition)
         // runtime.global() cannot reliably detect destroyed Runtime, so we use atomic flag
         if (!g_runtime_alive.load(std::memory_order_acquire)) {
-            LOGE("⏱️ [JSI] pollResult: Runtime is not alive (destroyed/invalidated), returning null");
-            return Value::null();
+            LOGE("⏱️ [JSI] pollResult: Runtime is not alive (destroyed/invalidated during task copy), returning undefined");
+            return Value::undefined();
         }
         
-        // #region agent log
-        FILE* log6 = fopen("/Users/vy/Projects/Core/ArkhamInvestigator/.cursor/debug.log", "a");
-        if (log6) {
-            fprintf(log6, "{\"location\":\"jsi_functions.cpp:pollResult:after-lock\",\"message\":\"after lock, task copied\",\"data\":{\"task_id\":%u,\"status\":%d,\"result_str_len\":%zu},\"timestamp\":%lld}\n", task_id, (int)task_copy.status, task_copy.result_str.size(), (long long)(std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now().time_since_epoch()).count()));
-            fclose(log6);
-        }
-        // #endregion
         
-        // #region agent log
-        FILE* log9 = fopen("/Users/vy/Projects/Core/ArkhamInvestigator/.cursor/debug.log", "a");
-        if (log9) {
-            fprintf(log9, "{\"location\":\"jsi_functions.cpp:pollResult:before-object\",\"message\":\"before Object(runtime)\",\"data\":{\"task_id\":%u},\"timestamp\":%lld}\n", task_id, (long long)(std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now().time_since_epoch()).count()));
-            fclose(log9);
-        }
-        // #endregion
         
         auto result_obj = Object(runtime);
         
-        // #region agent log
-        FILE* log10 = fopen("/Users/vy/Projects/Core/ArkhamInvestigator/.cursor/debug.log", "a");
-        if (log10) {
-            fprintf(log10, "{\"location\":\"jsi_functions.cpp:pollResult:after-object\",\"message\":\"after Object(runtime)\",\"data\":{\"task_id\":%u},\"timestamp\":%lld}\n", task_id, (long long)(std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now().time_since_epoch()).count()));
-            fclose(log10);
-        }
-        // #endregion
         
-        // #region agent log
-        FILE* log11 = fopen("/Users/vy/Projects/Core/ArkhamInvestigator/.cursor/debug.log", "a");
-        if (log11) {
-            fprintf(log11, "{\"location\":\"jsi_functions.cpp:pollResult:before-setProperty-status\",\"message\":\"before setProperty status\",\"data\":{\"task_id\":%u,\"status_value\":%d},\"timestamp\":%lld}\n", task_id, (int)task_copy.status, (long long)(std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now().time_since_epoch()).count()));
-            fclose(log11);
-        }
-        // #endregion
         
         result_obj.setProperty(runtime, "status", static_cast<double>(task_copy.status));
         
-        // #region agent log
-        FILE* log12 = fopen("/Users/vy/Projects/Core/ArkhamInvestigator/.cursor/debug.log", "a");
-        if (log12) {
-            fprintf(log12, "{\"location\":\"jsi_functions.cpp:pollResult:after-setProperty-status\",\"message\":\"after setProperty status\",\"data\":{\"task_id\":%u},\"timestamp\":%lld}\n", task_id, (long long)(std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now().time_since_epoch()).count()));
-            fclose(log12);
-        }
-        // #endregion
         
         if (task_copy.status == TASK_STATUS_COMPLETED) {
             // Completed - include result string (no memory_id needed - string is owned by C++ std::string)
             // Create string safely
             try {
-                // #region agent log
-                FILE* log13 = fopen("/Users/vy/Projects/Core/ArkhamInvestigator/.cursor/debug.log", "a");
-                if (log13) {
-                    fprintf(log13, "{\"location\":\"jsi_functions.cpp:pollResult:before-createString\",\"message\":\"before String::createFromUtf8\",\"data\":{\"task_id\":%u,\"result_str_len\":%zu},\"timestamp\":%lld}\n", task_id, task_copy.result_str.size(), (long long)(std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now().time_since_epoch()).count()));
-                    fclose(log13);
-                }
-                // #endregion
                 result_obj.setProperty(runtime, "result", String::createFromUtf8(runtime, task_copy.result_str));
-                // #region agent log
-                FILE* log14 = fopen("/Users/vy/Projects/Core/ArkhamInvestigator/.cursor/debug.log", "a");
-                if (log14) {
-                    fprintf(log14, "{\"location\":\"jsi_functions.cpp:pollResult:after-createString\",\"message\":\"after String::createFromUtf8\",\"data\":{\"task_id\":%u},\"timestamp\":%lld}\n", task_id, (long long)(std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now().time_since_epoch()).count()));
-                    fclose(log14);
-                }
-                // #endregion
                     } catch (...) {
                 // Failed to create string - return null
                 LOGE("⏱️ [JSI] pollResult: Failed to create result string, returning null");
-                // #region agent log
-                FILE* log15 = fopen("/Users/vy/Projects/Core/ArkhamInvestigator/.cursor/debug.log", "a");
-                if (log15) {
-                    fprintf(log15, "{\"location\":\"jsi_functions.cpp:pollResult:createString-failed\",\"message\":\"String::createFromUtf8 failed\",\"data\":{\"task_id\":%u},\"timestamp\":%lld}\n", task_id, (long long)(std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now().time_since_epoch()).count()));
-                    fclose(log15);
-                }
-                // #endregion
                 return Value::null();
             }
         }
         
-        // #region agent log
-        FILE* log16 = fopen("/Users/vy/Projects/Core/ArkhamInvestigator/.cursor/debug.log", "a");
-        if (log16) {
-            fprintf(log16, "{\"location\":\"jsi_functions.cpp:pollResult:return\",\"message\":\"returning result object\",\"data\":{\"task_id\":%u},\"timestamp\":%lld}\n", task_id, (long long)(std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now().time_since_epoch()).count()));
-            fclose(log16);
-        }
-        // #endregion
         
         // Remove task from storage AFTER successful object creation
         // This prevents race conditions if pollResult is called multiple times
@@ -412,23 +322,9 @@ Value pollResult(
         return Value(std::move(result_obj));
     } catch (const std::exception& e) {
         LOGE("⏱️ [JSI] pollResult: Exception: %s", e.what());
-        // #region agent log
-        FILE* log17 = fopen("/Users/vy/Projects/Core/ArkhamInvestigator/.cursor/debug.log", "a");
-        if (log17) {
-            fprintf(log17, "{\"location\":\"jsi_functions.cpp:pollResult:exception\",\"message\":\"exception caught\",\"data\":{\"what\":\"%s\"},\"timestamp\":%lld}\n", e.what(), (long long)(std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now().time_since_epoch()).count()));
-            fclose(log17);
-        }
-        // #endregion
         return Value::null();
     } catch (...) {
         LOGE("⏱️ [JSI] pollResult: Unknown exception");
-        // #region agent log
-        FILE* log18 = fopen("/Users/vy/Projects/Core/ArkhamInvestigator/.cursor/debug.log", "a");
-        if (log18) {
-            fprintf(log18, "{\"location\":\"jsi_functions.cpp:pollResult:unknown-exception\",\"message\":\"unknown exception caught\",\"timestamp\":%lld}\n", (long long)(std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::steady_clock::now().time_since_epoch()).count()));
-            fclose(log18);
-        }
-        // #endregion
         return Value::null();
     }
 }
@@ -457,6 +353,10 @@ void markRuntimeDead() {
     std::lock_guard<std::mutex> lock(g_task_storage_mutex);
     g_task_storage.clear();
     LOGI("⏱️ [JSI] Task storage cleared");
+}
+
+bool runtimeAlive() {
+    return g_runtime_alive.load(std::memory_order_acquire);
 }
 
 // freeString removed - no longer needed with memory_id removal
@@ -695,6 +595,36 @@ Value setKeepAwakeEnabled(
     (void)arguments;
     (void)count;
             return Value::undefined();
+}
+
+Value version(
+    Runtime& runtime,
+    const Value& /*thisValue*/,
+    const Value* /*arguments*/,
+    size_t /*count*/
+) {
+    try {
+        const char* version_ptr = chaos_odds_version();
+        if (version_ptr == nullptr) {
+            LOGE("❌ [JSI] version: Failed to get version from Rust");
+            return Value::undefined();
+        }
+        
+        // Copy the string immediately (Rust owns the memory, we need to free it)
+        std::string version_str(version_ptr);
+        
+        // Free the Rust-allocated string
+        memory_free_string(version_ptr);
+        
+        // Return as JSI string (Hermes will manage the JS string lifetime)
+        return Value(String::createFromUtf8(runtime, version_str));
+    } catch (const std::exception& e) {
+        LOGE("❌ [JSI] version: Exception: %s", e.what());
+        return Value::undefined();
+    } catch (...) {
+        LOGE("❌ [JSI] version: Unknown exception");
+        return Value::undefined();
+    }
 }
 
 } // namespace functions

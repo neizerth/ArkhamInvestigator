@@ -26,6 +26,8 @@ pub extern "C" fn chaos_odds_calculate_item(
     skill_value: u32,
     difficulty: u32,
     ) -> *mut c_char {
+    // CRITICAL: Catch panic to prevent UB when called from C++
+    std::panic::catch_unwind(|| {
     // NOTE: reset_cancel_flag() is NOT called here to avoid race conditions.
     // Reset must be done from C++ code BEFORE calling this function,
     // AFTER ensuring previous calculations have completed.
@@ -63,6 +65,10 @@ pub extern "C" fn chaos_odds_calculate_item(
     };
 
     result
+    }).unwrap_or_else(|_| {
+        eprintln!("⏱️ [Rust] chaos_odds_calculate_item() panicked - returning null");
+        std::ptr::null_mut()
+    })
 }
 
 // Force inclusion using #[used] static - MUST be in same module as the function

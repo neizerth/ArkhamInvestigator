@@ -1,4 +1,5 @@
 import { ChaosOdds } from "@expo-modules/chaos-odds";
+import { delay } from "@shared/lib";
 import { isEmpty } from "ramda";
 import type { ChaosBagOddsToken } from "../../entities/model";
 import { mapTokenToChaosOddsTokenInput } from "../../shared/lib";
@@ -16,6 +17,7 @@ const activeCallIds = new Set<number>();
 export const getChaosOdds = async (
 	options: GetChaosOddsOptions,
 ): Promise<number[][] | null> => {
+	console.log("getChaosOdds called");
 	const callId = ++calculationId;
 	const activeBefore = activeCalls;
 
@@ -30,7 +32,7 @@ export const getChaosOdds = async (
 		activeCalls = 0; // Reset counter since we're cancelling all
 		ChaosOdds.cancel();
 		// Wait a bit for cancellation to propagate
-		await new Promise((resolve) => setTimeout(resolve, 10));
+		await delay(10);
 	}
 
 	// Increment active calls and track this call ID
@@ -40,6 +42,7 @@ export const getChaosOdds = async (
 	const { available, revealed } = options;
 
 	if (isEmpty(available) && isEmpty(revealed)) {
+		console.log("no available or revealed tokens, skip");
 		return null;
 	}
 
@@ -55,14 +58,14 @@ export const getChaosOdds = async (
 			revealed: revealedTokens,
 			available: availableTokens,
 		});
-		const await_duration = performance.now() - await_start;
+		const awaitDuration = performance.now() - await_start;
 
 		// Check if this calculation was superseded by a newer one BEFORE logging
 		// This prevents logging results from cancelled/superseded calls
 		if (!activeCallIds.has(callId)) {
 			// This call was cancelled/superseded
 			console.log(
-				`⏱️ [JS] Call #${callId}: superseded after ${await_duration.toFixed(2)} ms (active: ${activeCalls})`,
+				`⏱️ [JS] Call #${callId}: superseded after ${awaitDuration.toFixed(2)} ms (active: ${activeCalls})`,
 			);
 			return null;
 		}
@@ -70,10 +73,12 @@ export const getChaosOdds = async (
 	} catch (error) {
 		// Check if this calculation was superseded by a newer one
 		if (!activeCallIds.has(callId)) {
+			console.log("not active call id, skip");
 			// This call was cancelled/superseded
 			return null;
 		}
 
+		console.log("error, skip", error);
 		return null;
 	} finally {
 		// Ensure cleanup happens exactly once, even if something goes wrong

@@ -22,5 +22,8 @@ extern "C" {
     // Cancellation
     void chaos_odds_cancel();
     void chaos_odds_reset_cancel_flag(); // Reset cancel flag - call BEFORE new calculation, AFTER previous threads completed
+    
+    // Version info
+    const char* chaos_odds_version(); // Returns version string (must be freed with memory_free_string)
 }
 
