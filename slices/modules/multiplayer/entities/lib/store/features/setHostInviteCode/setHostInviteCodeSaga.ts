@@ -7,7 +7,7 @@ import { setHostInviteCode } from "./setHostInviteCode";
 function* worker({ payload }: ReturnType<typeof setHostInviteCode>) {
 	const myIP: ReturnType<typeof selectIP> = yield select(selectIP);
 	const ip = getHostIPFromInviteCode(payload);
-	if (!ip) {
+	if (!ip || !payload) {
 		yield put(
 			sendNotification({
 				message: "multiplayer.error.invalidInviteCode",

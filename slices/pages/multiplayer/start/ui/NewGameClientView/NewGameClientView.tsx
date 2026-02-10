@@ -26,6 +26,7 @@ export const NewGameClientView = (props: NewGameClientViewProps) => {
 				text={t`multiplayer.connect`}
 				icon="check"
 				onPress={onApplyCode}
+				disabled={!code}
 			/>
 			{services.length > 0 ? (
 				<C.Services>

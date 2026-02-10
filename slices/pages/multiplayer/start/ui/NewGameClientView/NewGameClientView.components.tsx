@@ -1,8 +1,8 @@
 import { TouchableOpacity } from "@modules/core/touch/shared/ui";
 import { color, size } from "@shared/config";
-import { Button, Input, Row, Text } from "@shared/ui";
+import { Button, type ButtonProps, Input, Row, Text } from "@shared/ui";
 import { ActivityIndicator, View } from "react-native";
-import styled from "styled-components/native";
+import styled, { css } from "styled-components/native";
 
 export const Container: typeof View = styled(View)`
   gap: ${size.gap.default}px;
@@ -21,6 +21,12 @@ export const CodeInput: typeof Input = styled(Input).attrs({
 
 export const Action: typeof Button = styled(Button)`
   background-color: ${color.dark20};
+  border: 2px solid ${color.dark20};
+  ${({ disabled }: ButtonProps) =>
+		disabled &&
+		css`
+    background-color: transparent;
+  `}
 `;
 
 export const Services: typeof View = styled(View)`
