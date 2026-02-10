@@ -372,6 +372,8 @@
 	"multiplayer.hint": "All players must be in the same network. Create a game or join a game using:\n - connection code;\n - QR code;\n - link\n - automatic network scanning.",
 	"multiplayer.error.selfInviteCode": "You cannot join your own game as a host",
 	"multiplayer.error.invalidInviteCode": "Invalid connection code",
+	"multiplayer.playersCount": "Players",
+	"multiplayer.code.error": "Failed to connect to the game. Check the code or network settings.",
 
 	"Defeated": "Defeated",
 	"Change": "Change",
@@ -509,5 +511,6 @@
 	"Chaos Odds": "Chaos Odds",
 	"Scenario Reference": "Scenario Reference",
 	"Multiplayer": "Multiplayer",
-	"Single player": "Single player"
+	"Single player": "Single player",
+	"Next": "Next"
 }

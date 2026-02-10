@@ -4,10 +4,10 @@ import { createAction } from "@reduxjs/toolkit";
 export const networkInfoUpdated =
 	createAction<NetInfoState>("network/available");
 
-type ClientInfo = {
-	networkId: string;
+type InitNetworkClientPayload = {
+	nickname: string;
 };
 
-export const initNetworkClient = createAction<ClientInfo>(
+export const initNetworkClient = createAction<InitNetworkClientPayload>(
 	"network/initNetworkClient",
 );

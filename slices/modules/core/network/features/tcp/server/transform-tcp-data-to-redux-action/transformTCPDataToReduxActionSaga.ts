@@ -1,22 +1,28 @@
-import { tcpServerSocketDataReceived } from "@modules/core/network/shared/lib";
-import { isAction } from "@reduxjs/toolkit";
+import {
+	isTCPAction,
+	tcpServerSocketDataReceived,
+} from "@modules/core/network/shared/lib";
 import { put, takeEvery } from "redux-saga/effects";
 
 function* worker({ payload }: ReturnType<typeof tcpServerSocketDataReceived>) {
-	const { data } = payload;
+	const { data, socket } = payload;
 
 	try {
-		const action = JSON.parse(data);
-		if (isAction(action)) {
-			console.log("transforming action", action);
-			yield put({
-				...action,
-				meta: {
-					network: true,
-					source: "tcp",
-				},
-			});
+		const tcpAction = JSON.parse(data);
+		if (!isTCPAction(tcpAction)) {
+			return;
 		}
+
+		const action = {
+			...tcpAction,
+			meta: {
+				...tcpAction.meta,
+				source: "tcp",
+				socket,
+			},
+		};
+
+		yield put(action);
 	} catch (error) {
 		console.error("Error parsing TCP data", error);
 	}

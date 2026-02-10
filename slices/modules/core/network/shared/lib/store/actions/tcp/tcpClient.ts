@@ -9,17 +9,21 @@ type TcpSocketDataReceivedPayload = {
 	data: string;
 };
 export const tcpClientSocketDataReceived =
-	createAction<TcpSocketDataReceivedPayload>("network/socketDataReceived");
+	createAction<TcpSocketDataReceivedPayload>(
+		"network/tcpClientSocketDataReceived",
+	);
 
-export const tcpClientSocketClosed = createAction("network/tcpSocketClosed");
+export const tcpClientSocketClosed = createAction(
+	"network/tcpClientSocketClosed",
+);
 
 export const tcpClientSocketConnected = createAction(
-	"network/tcpSocketConnected",
+	"network/tcpClientSocketConnected",
 );
 
 type TcpSocketErrorPayload = {
 	error: Error;
 };
 export const tcpClientSocketError = createAction<TcpSocketErrorPayload>(
-	"network/tcpSocketError",
+	"network/tcpClientSocketError",
 );

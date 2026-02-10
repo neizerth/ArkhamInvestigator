@@ -15,20 +15,22 @@ type TcpSocketDataReceivedPayload = {
 	data: string;
 };
 export const tcpServerSocketDataReceived =
-	createAction<TcpSocketDataReceivedPayload>("network/socketDataReceived");
+	createAction<TcpSocketDataReceivedPayload>(
+		"network/tcpServerSocketDataReceived",
+	);
 
 type TcpSocketClosedPayload = {
 	socket: TcpSocket.Socket;
 };
 export const tcpServerSocketClosed = createAction<TcpSocketClosedPayload>(
-	"network/tcpSocketClosed",
+	"network/tcpServerSocketClosed",
 );
 
 type TcpSocketConnectedPayload = {
 	socket: TcpSocket.Socket;
 };
 export const tcpServerSocketConnected = createAction<TcpSocketConnectedPayload>(
-	"network/tcpSocketConnected",
+	"network/tcpServerSocketConnected",
 );
 
 type TcpSocketErrorPayload = {
@@ -36,5 +38,5 @@ type TcpSocketErrorPayload = {
 	error: Error;
 };
 export const tcpServerSocketError = createAction<TcpSocketErrorPayload>(
-	"network/tcpSocketError",
+	"network/tcpServerSocketError",
 );

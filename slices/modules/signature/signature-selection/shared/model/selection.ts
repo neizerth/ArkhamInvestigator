@@ -9,7 +9,7 @@ export type SelectedSignatureSkin = {
 
 export type SelectedSignature = {
 	id: string;
-	remote?: boolean;
+	networkId?: string;
 	code: string;
 	signature: InvestigatorSignature;
 	skin: SelectedSignatureSkin | null;

@@ -9,15 +9,17 @@ import { persistConfigMigrations } from "@modules/core/storage/shared/migrations
 import reducers from "./reducer";
 import rootSaga from "./sagas";
 
+const migrate = createMigrate(
+	Object.fromEntries(
+		persistConfigMigrations.map((migrate, version) => [version, migrate]),
+	),
+);
+
 const rootReducer = combineReducers(reducers);
 const reducer = persistReducer(
 	{
 		...persistStorageConfig,
-		migrate: createMigrate(
-			Object.fromEntries(
-				persistConfigMigrations.map((migrate, version) => [version, migrate]),
-			),
-		),
+		migrate,
 	},
 	rootReducer,
 );

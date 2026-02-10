@@ -1,4 +1,5 @@
 import { spawn } from "redux-saga/effects";
+import { clearNetworkOnNewGameSaga } from "./clear-network-on-new-game/clearNetworkOnNewGameSaga";
 import { generateRandomNicknameIfEmptySaga } from "./generate-random-nickname-if-empty/generateRandomNicknameIfEmptySaga";
 import { tcpSagas } from "./tcp/sagas";
 import { watchNetworkUpdateSaga } from "./watch-network-update/watchNetworkUpdateSaga";
@@ -6,5 +7,7 @@ import { watchNetworkUpdateSaga } from "./watch-network-update/watchNetworkUpdat
 export function* networkFeaturesSaga() {
 	yield spawn(watchNetworkUpdateSaga);
 	yield spawn(generateRandomNicknameIfEmptySaga);
+	yield spawn(clearNetworkOnNewGameSaga);
+
 	yield spawn(tcpSagas);
 }

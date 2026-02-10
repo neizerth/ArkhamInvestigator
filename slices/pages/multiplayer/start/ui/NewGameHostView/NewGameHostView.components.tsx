@@ -1,19 +1,42 @@
 import { CrimsonPro } from "@assets/fonts";
 import { TouchableOpacity } from "@modules/core/touch/shared/ui";
 import { color, font, size } from "@shared/config";
-import { Icon, Row, Text } from "@shared/ui";
+import { Button, Icon, Row, Text } from "@shared/ui";
 import { View } from "react-native";
 import QRCode from "react-native-qrcode-svg";
 import styled from "styled-components/native";
 
 export const Container: typeof Row = styled(Row)`
+  gap: ${size.gap.default}px;
   padding: 0 ${size.gap.default}px;
-  align-items: center;
-  justify-content: space-between;
 `;
 
 export const Invite: typeof View = styled(View)`
-  width: 50%;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const Info: typeof View = styled(View)`
+  padding: 27px 0 ${size.gap.default}px 0;
+  gap: ${size.gap.default}px;
+  flex: 1;
+`;
+
+export const Clients: typeof View = styled(View)`
+  min-height: 80px;
+`;
+
+export const ClientsInfo: typeof View = styled(View)`
+  gap: ${size.gap.default}px;
+`;
+
+export const ClientsCountText: typeof Text = styled(Text)`
+  font-size: ${font.size.medium}px;
+  text-align: center;
+`;
+
+export const ClientsCountValue: typeof Text = styled(Text)`
+  font-size: ${font.size.default}px;
 `;
 
 export const QRButton: typeof TouchableOpacity = styled(TouchableOpacity)`
@@ -56,9 +79,18 @@ export const CodeLabel: typeof Text = styled(Text)`
 `;
 
 export const CodeValue: typeof Text = styled(Text)`
-  font-size: 30px;
+  font-size: 26px;
   line-height: 30px;
   color: ${color.light10};
   font-family: ${CrimsonPro.regular};
   text-align: center;
+`;
+
+export const Client: typeof Text = styled(Text)`
+
+`;
+
+export const Next: typeof Button = styled(Button)`
+background-color: ${color.dark20};
+
 `;

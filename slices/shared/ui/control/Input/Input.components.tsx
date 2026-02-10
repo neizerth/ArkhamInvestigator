@@ -9,7 +9,7 @@ import { Text } from "../../content";
 
 export const Container: typeof View = styled(View)`
   position: relative;
-  min-height: 48px;
+  min-height: 50px;
 `;
 
 export const Input: typeof TextInput = styled(TextInput).attrs({

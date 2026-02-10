@@ -1,20 +1,22 @@
+import { sendTCPServerAction } from "@modules/core/network/entities/tcp/client/sendTCPServerAction";
 import {
-	dispatchTCPClientAction,
 	initNetworkClient,
-	selectDeviceNetworkId,
+	selectNickname,
 	tcpClientSocketConnected,
 } from "@modules/core/network/shared/lib";
-import { call, select, takeEvery } from "redux-saga/effects";
+import { put, select, takeEvery } from "redux-saga/effects";
 
 function* worker() {
-	const networkId: ReturnType<typeof selectDeviceNetworkId> = yield select(
-		selectDeviceNetworkId,
-	);
-	console.log("initing network client on connected", networkId);
-	yield call(
-		dispatchTCPClientAction,
-		initNetworkClient({
-			networkId,
+	const nickname: ReturnType<typeof selectNickname> =
+		yield select(selectNickname);
+
+	const action = initNetworkClient({
+		nickname,
+	});
+
+	yield put(
+		sendTCPServerAction({
+			action,
 		}),
 	);
 }

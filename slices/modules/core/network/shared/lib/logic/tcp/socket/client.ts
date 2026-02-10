@@ -1,44 +1,25 @@
 import type { PayloadAction } from "@reduxjs/toolkit";
 import type TcpSocket from "react-native-tcp-socket";
 
-export const tcpSocketMap: Map<string, TcpSocket.Socket> = new Map();
+let tcpHostSocket: TcpSocket.Socket | null = null;
 
-export const clearTCPClientSockets = () => {
-	tcpSocketMap.clear();
+export const setTCPServerSocket = (socket: TcpSocket.Socket) => {
+	tcpHostSocket = socket;
 };
 
-export const setTCPClientSocket = (
-	networkId: string,
-	socket: TcpSocket.Socket,
-) => {
-	tcpSocketMap.set(networkId, socket);
+export const getTCPServerSocket = () => {
+	return tcpHostSocket;
 };
 
-export const getTCPClientSocket = (networkId: string) => {
-	return tcpSocketMap.get(networkId);
+export const clearTCPServerSocket = () => {
+	tcpHostSocket = null;
 };
 
-export const clearTCPClientSocketById = (networkId: string) => {
-	tcpSocketMap.delete(networkId);
-};
-
-export const clearTCPClientSocket = (socket: TcpSocket.Socket) => {
-	tcpSocketMap.forEach((s, networkId) => {
-		if (s === socket) {
-			tcpSocketMap.delete(networkId);
-		}
-	});
-};
-
-export const dispatchTCPServerAction = <T>(
-	networkId: string,
-	data: PayloadAction<T>,
-) => {
-	const socket = getTCPClientSocket(networkId);
-	if (!socket) {
-		console.error("TCPClientSocket not found");
+export const dispatchTCPClientAction = <T>(data: PayloadAction<T>) => {
+	if (!tcpHostSocket) {
+		console.error("TCPServerSocket not found");
 		return;
 	}
 
-	socket.write(JSON.stringify(data));
+	tcpHostSocket.write(JSON.stringify(data));
 };

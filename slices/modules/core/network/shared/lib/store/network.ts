@@ -12,7 +12,7 @@ export type NetworkState = {
 	wifiEnabled: boolean;
 	ip: string | null;
 	ssid: string | null;
-	nickname: string | null;
+	nickname: string;
 	networkRole: NetworkRole | null;
 	hostIp: string | null;
 };
@@ -25,7 +25,7 @@ const initialState: NetworkState = {
 	wifiEnabled: false,
 	ip: null,
 	ssid: null,
-	nickname: null,
+	nickname: "",
 	networkRole: null,
 	hostIp: null,
 };
