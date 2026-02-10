@@ -5,7 +5,7 @@ type State = PersistedState & {
 	board?: BoardState;
 };
 
-export default function v19(state?: State) {
+export default function initPickerAnimation(state?: State) {
 	if (!state?.board) {
 		return;
 	}

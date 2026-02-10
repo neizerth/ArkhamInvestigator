@@ -1,5 +1,5 @@
 // biome-ignore lint/suspicious/noExplicitAny: migration
-export default function v12(state?: any) {
+export default function setDefaultStoryTypeFilter(state?: any) {
 	if (!state?.stories) {
 		return;
 	}

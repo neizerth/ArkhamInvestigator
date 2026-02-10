@@ -1,5 +1,5 @@
 // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-export default function v10(state?: any) {
+export default function setDefaultChaosBagHistory(state?: any) {
 	if (!state?.chaosBag) {
 		return;
 	}

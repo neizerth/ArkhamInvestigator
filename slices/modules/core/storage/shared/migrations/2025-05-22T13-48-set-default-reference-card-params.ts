@@ -1,5 +1,5 @@
 // biome-ignore lint/suspicious/noExplicitAny: migration
-export default function v13(state?: any) {
+export default function setDefaultReferenceCardParams(state?: any) {
 	if (!state?.stories) {
 		return;
 	}

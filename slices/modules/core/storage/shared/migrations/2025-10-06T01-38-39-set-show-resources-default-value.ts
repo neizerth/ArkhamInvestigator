@@ -5,7 +5,7 @@ type State = PersistedState & {
 	board?: BoardState;
 };
 
-export default function v21(state?: State) {
+export default function setShowResourcesDefaultValue(state?: State) {
 	if (!state?.board) {
 		return;
 	}

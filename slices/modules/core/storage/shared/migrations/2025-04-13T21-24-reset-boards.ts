@@ -1,3 +1,3 @@
-import { clearInvestigatorBoards as v6 } from "./actions";
+import { clearInvestigatorBoards } from "./actions";
 
-export default v6;
+export default clearInvestigatorBoards;

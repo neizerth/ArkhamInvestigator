@@ -7,7 +7,7 @@ type State = PersistedState & {
 	board?: BoardState;
 };
 
-export default function v16(state?: State) {
+export default function initRoundReference(state?: State) {
 	if (!state?.rules || !state.board) {
 		return;
 	}

@@ -5,7 +5,7 @@ type State = PersistedState & {
 	board?: BoardState;
 };
 
-export default function v3(state?: State) {
+export default function setShowDamageAndHorror(state?: State) {
 	if (!state?.board) {
 		return;
 	}

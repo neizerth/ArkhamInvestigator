@@ -5,7 +5,7 @@ type State = PersistedState & {
 	haptic?: HapticState;
 };
 
-export default function v1(state?: State) {
+export default function setHapticMode(state?: State) {
 	if (!state?.haptic) {
 		return;
 	}

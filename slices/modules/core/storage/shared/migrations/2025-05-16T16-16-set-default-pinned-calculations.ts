@@ -5,7 +5,7 @@ type State = PersistedState & {
 	board?: BoardState;
 };
 
-export default function v9(state?: State) {
+export default function setDefaultPinnedCalculations(state?: State) {
 	if (!state?.board) {
 		return;
 	}

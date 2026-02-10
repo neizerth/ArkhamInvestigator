@@ -1,3 +1,3 @@
-import { clearImageCache as v7 } from "./actions";
+import { clearImageCache } from "./actions";
 
-export default v7;
+export default clearImageCache;

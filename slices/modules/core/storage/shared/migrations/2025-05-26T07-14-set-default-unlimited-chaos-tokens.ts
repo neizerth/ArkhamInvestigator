@@ -5,7 +5,7 @@ type State = PersistedState & {
 	chaosBag?: ChaosBagState;
 };
 
-export default function v15(state?: State) {
+export default function setDefaultUnlimitedChaosTokens(state?: State) {
 	if (!state?.chaosBag) {
 		return;
 	}

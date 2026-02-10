@@ -5,7 +5,7 @@ type State = PersistedState & {
 	board?: BoardState;
 };
 
-export default function v20(state?: State) {
+export default function setShowCluesDefaultValue(state?: State) {
 	if (!state?.board) {
 		return;
 	}

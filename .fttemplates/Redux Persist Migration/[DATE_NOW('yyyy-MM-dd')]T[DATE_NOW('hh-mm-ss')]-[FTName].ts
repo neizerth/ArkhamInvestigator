@@ -1,8 +1,5 @@
-import type { PersistedState } from "redux-persist";
-
-type State = PersistedState;
-
-export default function v0(state?: State) {
+// biome-ignore lint/suspicious/noExplicitAny: migration
+export default function <FTName | camelcase>(state?: any) {
 	if (!state) {
 		return;
 	}

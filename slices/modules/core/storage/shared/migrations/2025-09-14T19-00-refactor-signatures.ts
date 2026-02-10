@@ -1,5 +1,5 @@
 // biome-ignore lint/suspicious/noExplicitAny: migration
-export default function v17(state?: any) {
+export default function refactorSignatures(state?: any) {
 	if (!state) {
 		return;
 	}

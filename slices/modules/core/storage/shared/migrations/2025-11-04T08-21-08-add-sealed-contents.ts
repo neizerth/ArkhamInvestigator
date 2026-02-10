@@ -5,7 +5,7 @@ type State = PersistedState & {
 	chaosBag?: ChaosBagState;
 };
 
-export default function v24(state?: State) {
+export default function addSealedContents(state?: State) {
 	if (!state?.chaosBag) {
 		return;
 	}

@@ -7,7 +7,7 @@ type State = PersistedState & {
 	};
 };
 
-export default function v27(state?: State) {
+export default function moveInvestigatorSettings(state?: State) {
 	if (!state) {
 		return;
 	}

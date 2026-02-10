@@ -5,7 +5,7 @@ type State = PersistedState & {
 	board?: BoardState;
 };
 
-export default function v5(state?: State) {
+export default function setDefaultDeceleration(state?: State) {
 	if (!state?.board) {
 		return;
 	}

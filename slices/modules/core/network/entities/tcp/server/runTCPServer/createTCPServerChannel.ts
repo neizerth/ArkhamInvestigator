@@ -6,14 +6,14 @@ import {
 	TCP_PORT,
 	TCP_SERVER_NAME,
 	TCP_SERVICE_NAME,
-	tcpSocketMap,
-} from "../../../shared/config";
+} from "../../../../shared/config";
 import {
+	clearTCPClientSockets,
 	tcpServerSocketClosed,
 	tcpServerSocketConnected,
 	tcpServerSocketDataReceived,
 	tcpServerSocketError,
-} from "../../../shared/lib";
+} from "../../../../shared/lib";
 
 export type TCPServerChannelAction =
 	| ReturnType<typeof tcpServerSocketDataReceived>
@@ -25,7 +25,7 @@ export const createTCPServerChannel = (serverName: string | null) => {
 	return eventChannel((emit) => {
 		const zeroconf = new Zeroconf();
 
-		tcpSocketMap.clear();
+		clearTCPClientSockets();
 
 		const server = TcpSocket.createServer((socket) => {
 			socket.on("error", (error) => {

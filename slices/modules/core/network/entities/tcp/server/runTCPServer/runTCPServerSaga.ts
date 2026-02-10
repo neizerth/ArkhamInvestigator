@@ -3,7 +3,7 @@ import {
 	selectNickname,
 	startTCPServer,
 	stopTCPServer,
-} from "../../../shared/lib";
+} from "../../../../shared/lib";
 import {
 	type TCPServerChannelAction,
 	createTCPServerChannel,

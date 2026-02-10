@@ -5,7 +5,7 @@ type State = PersistedState & {
 	board?: BoardState;
 };
 
-export default function v0(state?: State) {
+export default function createHistoryType(state?: State) {
 	if (!state?.board) {
 		return;
 	}

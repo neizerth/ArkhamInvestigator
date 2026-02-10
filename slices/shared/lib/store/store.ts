@@ -13,7 +13,11 @@ const rootReducer = combineReducers(reducers);
 const reducer = persistReducer(
 	{
 		...persistStorageConfig,
-		migrate: createMigrate(persistConfigMigrations),
+		migrate: createMigrate(
+			Object.fromEntries(
+				persistConfigMigrations.map((migrate, version) => [version, migrate]),
+			),
+		),
 	},
 	rootReducer,
 );

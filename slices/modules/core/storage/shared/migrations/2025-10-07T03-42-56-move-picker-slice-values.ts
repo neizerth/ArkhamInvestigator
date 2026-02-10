@@ -8,7 +8,7 @@ type State = PersistedState & {
 	picker?: any;
 };
 
-export default function v22(state?: State) {
+export default function movePickerSliceValues(state?: State) {
 	if (!state?.board || !state?.picker) {
 		return;
 	}

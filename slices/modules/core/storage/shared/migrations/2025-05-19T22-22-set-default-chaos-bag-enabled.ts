@@ -5,7 +5,7 @@ type State = PersistedState & {
 	chaosBag?: ChaosBagState;
 };
 
-export default function v11(state?: State) {
+export default function setDefaultChaosBagEnabled(state?: State) {
 	if (!state?.chaosBag) {
 		return;
 	}

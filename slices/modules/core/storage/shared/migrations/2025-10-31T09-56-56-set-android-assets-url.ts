@@ -9,7 +9,7 @@ type State = PersistedState & {
 	theme?: ThemeState;
 };
 
-export default function v23(state?: State) {
+export default function setAndroidAssetsUrl(state?: State) {
 	if (!state?.theme || ios) {
 		return;
 	}

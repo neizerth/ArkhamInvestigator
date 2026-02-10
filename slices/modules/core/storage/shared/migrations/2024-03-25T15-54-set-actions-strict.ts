@@ -5,7 +5,7 @@ type State = PersistedState & {
 	board?: BoardState;
 };
 
-export default function v2(state?: State) {
+export default function setActionsStrict(state?: State) {
 	if (!state?.board) {
 		return;
 	}

@@ -1,9 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { omit } from "ramda";
 import { createSliceState } from "redux-toolkit-helpers";
+import { v4 } from "uuid";
 import type { NetworkRole, NetworkType } from "../../model";
 
 export type NetworkState = {
+	deviceNetworkId: string;
 	networkType: NetworkType;
 	networkConnected: boolean;
 	offline: boolean;
@@ -16,6 +18,7 @@ export type NetworkState = {
 };
 
 const initialState: NetworkState = {
+	deviceNetworkId: v4(),
 	networkType: "none",
 	networkConnected: false,
 	offline: false,
@@ -54,6 +57,7 @@ export const {
 	setNickname,
 	setNetworkRole,
 	setHostIp,
+	setDeviceNetworkId,
 } = network.actions;
 
 export const {
@@ -66,6 +70,7 @@ export const {
 	selectNickname,
 	selectNetworkRole,
 	selectHostIp,
+	selectDeviceNetworkId,
 } = network.selectors;
 
 export default network.reducer;

@@ -5,7 +5,7 @@ type State = PersistedState & {
 	chaosOdds?: ChaosOddsState;
 };
 
-export default function v26(state?: State) {
+export default function addDefaultMinSkillOddsValue(state?: State) {
 	if (!state) {
 		return;
 	}

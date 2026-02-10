@@ -5,7 +5,7 @@ type State = PersistedState & {
 	chaosBagReveal?: ChaosBagRevealState;
 };
 
-export default function v25(state?: State) {
+export default function setDefaultSkillCheckModifier(state?: State) {
 	if (!state?.chaosBagReveal) {
 		return state;
 	}
