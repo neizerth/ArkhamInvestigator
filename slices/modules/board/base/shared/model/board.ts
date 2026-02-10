@@ -24,9 +24,15 @@ export type InvestigatorBoardBackground = {
 	grayscale: string;
 };
 
+export type InvestigatorBoardNetwork = {
+	id: string;
+	ip: string;
+	nickname: string;
+};
+
 export type InvestigatorBoard = {
 	id: number;
-	networkId?: string;
+	network?: InvestigatorBoardNetwork;
 	loaded?: boolean;
 	loadProgress?: number;
 

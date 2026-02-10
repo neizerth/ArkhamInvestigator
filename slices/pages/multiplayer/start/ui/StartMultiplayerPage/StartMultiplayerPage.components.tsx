@@ -1,3 +1,4 @@
+import { TouchableOpacity } from "@modules/core/touch/shared/ui";
 import { color, size } from "@shared/config";
 import { Icon, Input, Row, Tabs, Text } from "@shared/ui";
 import { ContentPage } from "@widgets/content";
@@ -15,6 +16,7 @@ export const Hint: typeof Text = styled(Text)`
 
 export const Content: typeof View = styled(View)`
 	gap: ${size.gap.default}px;
+	padding: ${size.gap.default}px 0;
 `;
 
 export const Loader: typeof ActivityIndicator = styled(ActivityIndicator).attrs(
@@ -29,19 +31,41 @@ export const Player: typeof Row = styled(Row)`
 	gap: ${size.gap.default}px;
 `;
 
-export const Name: typeof Input = styled(Input).attrs({
+export const Nickname: typeof View = styled(View)`
+  flex: 1;
+	position: relative;
+`;
+
+export const NicknameInput: typeof Input = styled(Input).attrs({
 	autoCapitalize: "none",
 })`
 	flex: 1;
 `;
 
-export const NetworkInfo: typeof Row = styled(Row)`
+export const NetworkInfo: typeof TouchableOpacity = styled(TouchableOpacity)`
+	flex-direction: row;
 	align-items: center;
+`;
+
+export const GenerateIcon: typeof Icon = styled(Icon)`
+	color: ${color.light10};
+`;
+
+export const GenerateRandomNickname: typeof TouchableOpacity = styled(
+	TouchableOpacity,
+)`
+	padding: ${size.gap.default}px ${size.gap.medium}px;
+	position: absolute;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	align-items: center;
+	justify-content: center;
 `;
 
 export const NetworkIcon: typeof Icon = styled(Icon)`
   margin-right: ${size.gap.default}px;
-	color: ${color.light10};
+	color: ${color.light20};
 `;
 
 export const RoleSelect: typeof Tabs = styled(Tabs)`

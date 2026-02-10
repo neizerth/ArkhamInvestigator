@@ -1,5 +1,5 @@
 import { call, cancelled, put, race, take } from "redux-saga/effects";
-import { startTCPClient, stopTCPClient } from "../../shared/lib";
+import { startTCPClient, stopTCPClient } from "../../../shared/lib";
 import {
 	type TCPClientChannelAction,
 	createTCPClientChannel,

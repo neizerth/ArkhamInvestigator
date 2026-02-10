@@ -12,10 +12,8 @@ function* worker({ payload }: ReturnType<typeof deeplinkChanged>) {
 	const { invite } = query;
 
 	if (pathname !== deeplinkRoutes.joinLocalMultiplayer || !invite) {
-		console.log("invalid deeplink", pathname, query);
 		return;
 	}
-	console.log("valid deeplink", pathname, query);
 
 	yield put(setNetworkRole("client"));
 	yield put(goToPage(routes.startMultiplayer));

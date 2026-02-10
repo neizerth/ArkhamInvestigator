@@ -1,19 +1,18 @@
-import { seconds } from "@shared/lib";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import Zeroconf, { type Service } from "react-native-zeroconf";
 import { TCP_SERVICE_NAME } from "../../config";
 
-const defaultIntervalMs = seconds(5);
-
-export const useTCPServices = (intervalMs = defaultIntervalMs) => {
-	const [services, setServices] = useState<Record<string, Service>>({});
+export const useTCPServices = (intervalMs = 1000) => {
+	const [services, setServices] = useState<Service[]>([]);
 
 	useEffect(() => {
 		const zeroconf = new Zeroconf();
 		zeroconf.scan(TCP_SERVICE_NAME);
 
 		const work = () => {
-			setServices(zeroconf.getServices());
+			const services = zeroconf.getServices();
+			const serviceList = Object.values(services);
+			setServices(serviceList);
 		};
 
 		const interval = setInterval(work, intervalMs);
@@ -26,5 +25,5 @@ export const useTCPServices = (intervalMs = defaultIntervalMs) => {
 		};
 	}, [intervalMs]);
 
-	return useMemo(() => Object.values(services), [services]);
+	return services;
 };

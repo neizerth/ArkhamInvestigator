@@ -1,3 +1,4 @@
+import { generateRandomNickname } from "@modules/core/network/entities/generateRandomNickname";
 import {
 	networkRoles,
 	networkTypeIconMapping,
@@ -12,7 +13,12 @@ import {
 	setNickname,
 } from "@modules/core/network/shared/lib";
 import type { NetworkRole } from "@modules/core/network/shared/model";
-import { useAppDispatch, useAppSelector, whereId } from "@shared/lib";
+import {
+	useAppDispatch,
+	useAppSelector,
+	useBoolean,
+	whereId,
+} from "@shared/lib";
 import { type TabItem, Text } from "@shared/ui";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -29,6 +35,8 @@ export const StartMultiplayerPage = () => {
 	const nickname = useAppSelector(selectNickname);
 	const networkRole = useAppSelector(selectNetworkRole);
 	const icon = networkTypeIconMapping[networkType];
+
+	const [showIP, setShowIP] = useBoolean(false);
 
 	const roles = useMemo(
 		() =>
@@ -65,20 +73,32 @@ export const StartMultiplayerPage = () => {
 		[dispatch],
 	);
 
+	const generateNickname = useCallback(() => {
+		dispatch(generateRandomNickname());
+	}, [dispatch]);
+
 	return (
 		<C.Page title={t`Multiplayer`}>
 			<C.Content>
 				<C.Player>
-					<C.Name
-						placeholder={t`network.username`}
-						value={nickname ?? ""}
-						onChangeText={onChangeNickname}
-					/>
-					<C.NetworkInfo>
+					<C.Nickname>
+						<C.NicknameInput
+							placeholder={t`network.username`}
+							fixedPlaceholder
+							value={nickname ?? ""}
+							onChangeText={onChangeNickname}
+						/>
+						<C.GenerateRandomNickname onPress={generateNickname}>
+							<C.GenerateIcon icon="loop2" />
+						</C.GenerateRandomNickname>
+					</C.Nickname>
+					<C.NetworkInfo onPress={setShowIP.toggle}>
 						<C.NetworkIcon icon={icon} />
-						<Text>
-							{ip ?? t`network.no-connection`} {ssid && `(${ssid})`}
-						</Text>
+						{showIP && (
+							<Text>
+								{ip ?? t`network.no-connection`} {ssid && `(${ssid})`}
+							</Text>
+						)}
 					</C.NetworkInfo>
 				</C.Player>
 				<C.Hint>{t`multiplayer.hint`}</C.Hint>

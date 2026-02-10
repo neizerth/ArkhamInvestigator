@@ -47,3 +47,7 @@ export const getLoopPrev = <T>(data: T[], index: number) => {
 	const prevIndex = index === 0 ? data.length - 1 : index - 1;
 	return data[prevIndex];
 };
+
+export const getRandomItem = <T>(data: T[]) => {
+	return data[Math.floor(Math.random() * data.length)];
+};

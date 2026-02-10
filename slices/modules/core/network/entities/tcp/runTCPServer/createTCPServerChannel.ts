@@ -7,21 +7,21 @@ import {
 	TCP_SERVER_NAME,
 	TCP_SERVICE_NAME,
 	tcpSocketMap,
-} from "../../shared/config";
+} from "../../../shared/config";
 import {
 	tcpServerSocketClosed,
 	tcpServerSocketConnected,
 	tcpServerSocketDataReceived,
 	tcpServerSocketError,
-} from "../../shared/lib";
+} from "../../../shared/lib";
 
-export type TCPChannelAction =
+export type TCPServerChannelAction =
 	| ReturnType<typeof tcpServerSocketDataReceived>
 	| ReturnType<typeof tcpServerSocketClosed>
 	| ReturnType<typeof tcpServerSocketConnected>
 	| ReturnType<typeof tcpServerSocketError>;
 
-export const createTCPChannel = (serverName: string | null) => {
+export const createTCPServerChannel = (serverName: string | null) => {
 	return eventChannel((emit) => {
 		const zeroconf = new Zeroconf();
 

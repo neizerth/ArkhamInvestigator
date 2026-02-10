@@ -1,12 +1,12 @@
 import TcpSocket from "react-native-tcp-socket";
 import { eventChannel } from "redux-saga";
-import { TCP_PORT } from "../../shared/config";
+import { TCP_PORT } from "../../../shared/config";
 import {
 	tcpClientSocketClosed,
 	tcpClientSocketConnected,
 	tcpClientSocketDataReceived,
 	tcpClientSocketError,
-} from "../../shared/lib";
+} from "../../../shared/lib";
 
 export type TCPClientChannelAction =
 	| ReturnType<typeof tcpClientSocketDataReceived>

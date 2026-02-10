@@ -1,4 +1,3 @@
-import { TouchableOpacity } from "@modules/core/touch/shared/ui";
 import { color, size } from "@shared/config";
 import { Button, type ButtonProps, Input, Row, Text } from "@shared/ui";
 import { ActivityIndicator, View } from "react-native";
@@ -50,10 +49,8 @@ export const Search: typeof Row = styled(Row)`
 export const SearchTitle: typeof Text = styled(Text)`
 `;
 
-export const Service: typeof TouchableOpacity = styled(TouchableOpacity)`
-  padding: ${size.gap.default}px;
-  border-radius: ${size.borderRadius.default}px;
-  background-color: ${color.dark20};
+export const Service: typeof Button = styled(Button)`
+  background-color: ${color.dark10};
 `;
 
 export const ServiceName: typeof Text = styled(Text)`
