@@ -98,6 +98,7 @@
 		"mime": "^4.1.0",
 		"mime-db": "^1.54.0",
 		"moment": "^2.30.1",
+		"parse-url": "^10.0.3",
 		"petrovich": "^0.2.1",
 		"ramda": "^0.30.1",
 		"ramda-adjunct": "^5.1.0",

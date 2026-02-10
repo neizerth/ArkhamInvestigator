@@ -1,3 +1,3 @@
 export const deeplinkRoutes = {
-	joinLocalMultiplayer: "join/local",
+	joinLocalMultiplayer: "/join/local",
 };

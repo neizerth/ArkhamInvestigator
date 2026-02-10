@@ -39,13 +39,24 @@ export const StartMultiplayerPage = () => {
 		[t],
 	);
 
-	const defaultRole = roles.find(whereId(networkRole)) ?? roles[0];
+	const getRole = useCallback(
+		(role: NetworkRole | null) => {
+			return roles.find(whereId(role)) ?? roles[0];
+		},
+		[roles],
+	);
+
+	const defaultRole = getRole(networkRole);
 
 	const [role, setRole] = useState<TabItem<NetworkRole>>(defaultRole);
 
 	useEffect(() => {
 		dispatch(setNetworkRole(role.id));
 	}, [dispatch, role.id]);
+
+	useEffect(() => {
+		setRole(getRole(networkRole));
+	}, [getRole, networkRole]);
 
 	const onChangeNickname = useCallback(
 		(text: string) => {

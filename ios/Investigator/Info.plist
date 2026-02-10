@@ -27,6 +27,7 @@
       <dict>
         <key>CFBundleURLSchemes</key>
         <array>
+          <string>inv</string>
           <string>arkham-investigator</string>
           <string>com.arkhaminvestigator</string>
         </array>

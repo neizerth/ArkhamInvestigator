@@ -2,6 +2,7 @@ import "react-native-get-random-values";
 import "intl-pluralrules";
 
 import { I18NProvider } from "@modules/core/i18n/app";
+import { DeeplinkProvider } from "@modules/core/link/app/ui";
 import { ModalProvider } from "@modules/core/modal/app/ui";
 import { ToastProvider } from "@modules/core/notifications/app/ui/ToastProvider";
 import { RouterProvider } from "@modules/core/router/app/ui";
@@ -20,7 +21,9 @@ export const AppProvider = ({ children }: PropsWithChildren) => {
 							<I18NProvider>
 								<ErrorProvider>
 									<ToastProvider>
-										<RouterProvider>{children}</RouterProvider>
+										<DeeplinkProvider>
+											<RouterProvider>{children}</RouterProvider>
+										</DeeplinkProvider>
 									</ToastProvider>
 								</ErrorProvider>
 							</I18NProvider>
