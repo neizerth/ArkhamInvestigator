@@ -1,4 +1,5 @@
 import { useTCPServices } from "@modules/core/network/shared/lib";
+import { isHostCodeValid } from "@modules/multiplayer/entities/lib";
 import { setHostInviteCode } from "@modules/multiplayer/entities/lib/store/features/setHostInviteCode";
 import { useAppDispatch } from "@shared/lib";
 import { Title } from "@shared/ui";
@@ -19,6 +20,8 @@ export const NewGameClientView = (props: NewGameClientViewProps) => {
 		dispatch(setHostInviteCode(code));
 	}, [dispatch, code]);
 
+	const isCodeValid = isHostCodeValid(code);
+
 	return (
 		<C.Container {...props}>
 			<C.CodeInput placeholder={t`multiplayer.code`} onChangeText={setCode} />
@@ -26,7 +29,7 @@ export const NewGameClientView = (props: NewGameClientViewProps) => {
 				text={t`multiplayer.connect`}
 				icon="check"
 				onPress={onApplyCode}
-				disabled={!code}
+				disabled={!code || !isCodeValid}
 			/>
 			{services.length > 0 ? (
 				<C.Services>
