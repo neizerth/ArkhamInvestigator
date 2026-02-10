@@ -1,4 +1,3 @@
-import Zeroconf from "react-native-zeroconf";
 import { call, cancelled, put, race, select, take } from "redux-saga/effects";
 import {
 	selectNickname,
@@ -33,17 +32,7 @@ function* worker() {
 	}
 }
 
-export function* stopWorker() {
-	const nickname: ReturnType<typeof selectNickname> =
-		yield select(selectNickname);
-
-	if (!nickname) {
-		return;
-	}
-
-	const zeroconf = new Zeroconf();
-	zeroconf.unpublishService(nickname);
-}
+export function* stopWorker() {}
 
 export function* runTCPServerSaga() {
 	while (true) {

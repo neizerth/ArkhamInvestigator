@@ -2,7 +2,13 @@ import { createAction } from "@reduxjs/toolkit";
 import type TcpSocket from "react-native-tcp-socket";
 
 export const startTCPServer = createAction("network/startTCPServer");
-export const stopTCPServer = createAction("network/stopTCPServer");
+type StopTCPServerPayload = {
+	name: string | null;
+};
+
+export const stopTCPServer = createAction<StopTCPServerPayload>(
+	"network/stopTCPServer",
+);
 
 type TcpSocketDataReceivedPayload = {
 	socket: TcpSocket.Socket;
