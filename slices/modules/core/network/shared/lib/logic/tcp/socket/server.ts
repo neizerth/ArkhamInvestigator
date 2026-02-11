@@ -7,6 +7,10 @@ export const clearTCPClientSockets = () => {
 	tcpSocketMap.clear();
 };
 
+export const getTCPClientSockets = () => {
+	return Array.from(tcpSocketMap.values());
+};
+
 export const setTCPClientSocket = (
 	networkId: string,
 	socket: TcpSocket.Socket,

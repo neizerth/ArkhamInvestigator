@@ -1,3 +1,4 @@
+import "react-native-get-random-values";
 import { createSlice } from "@reduxjs/toolkit";
 import { omit } from "ramda";
 import { createSliceState } from "redux-toolkit-helpers";

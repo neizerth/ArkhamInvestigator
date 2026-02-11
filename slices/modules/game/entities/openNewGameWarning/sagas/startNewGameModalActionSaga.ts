@@ -5,7 +5,7 @@ import {
 	createCustomModalActionSaga,
 } from "@modules/core/modal/shared/base/lib";
 import { startNewGame } from "@modules/game/entities/startNewGame";
-import type { GameType } from "@modules/game/model";
+import type { GameType } from "@modules/game/shared/model";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { put } from "redux-saga/effects";
 

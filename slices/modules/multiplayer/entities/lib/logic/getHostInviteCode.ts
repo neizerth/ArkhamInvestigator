@@ -1,9 +1,14 @@
-export const getHostInviteCode = (ip: string) => {
+import { codeAlphabet } from "../../config";
+
+export const getHostInviteCode = (ip: string): string => {
 	return ip
 		.split(".")
-		.map((x) => {
-			return Number(x).toString(16).padStart(2, "X").replace(/0/g, "X");
+		.map((octet) => {
+			const num = Number(octet);
+			const first = Math.floor(num / 16);
+			const second = num % 16;
+
+			return codeAlphabet[first] + codeAlphabet[second];
 		})
-		.join("")
-		.toUpperCase();
+		.join("");
 };

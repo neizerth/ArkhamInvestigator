@@ -1,4 +1,4 @@
-import type { GameType } from "@modules/game/model";
+import type { GameType } from "@modules/game/shared/model";
 import { createAction } from "@reduxjs/toolkit";
 
 export type StartNewGamePayload = {

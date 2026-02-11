@@ -1,7 +1,8 @@
 import { selectTrackXP } from "@modules/board/base/shared/lib";
+import { getSignatureStats } from "@modules/mechanics/board/base/entities/lib";
 import { getSignatureImageUrl } from "@modules/signature/base/shared/api";
 import { selectCurrentSkinId } from "@modules/signature/signature-selection/shared/lib";
-import { getBoardStats, useAppSelector } from "@shared/lib";
+import { useAppSelector } from "@shared/lib";
 import type { InvestigatorSignature } from "arkham-investigator-data";
 import * as C from "./InvestigatorDescription.components";
 
@@ -26,7 +27,7 @@ export const InvestigatorDescription = ({
 	const text = signature.text;
 	const traits = signature.traits;
 
-	const stats = getBoardStats(signature);
+	const stats = getSignatureStats(signature);
 
 	return (
 		<C.Container>

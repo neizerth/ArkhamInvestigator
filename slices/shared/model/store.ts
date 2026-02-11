@@ -42,3 +42,12 @@ export type StateReducer<S, P> = (
 
 export type ActionCreatorPayload<ActionCreator> =
 	ActionCreator extends PayloadActionCreator<infer P> ? P : never;
+
+export type ReducerPayload<R> = R extends (
+	state: infer _S,
+	action: infer A,
+) => unknown
+	? A extends { payload: infer P }
+		? P
+		: never
+	: never;

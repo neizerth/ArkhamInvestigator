@@ -1,3 +1,4 @@
 export * from "./filterInternetIsReachable";
-export * from "./filterTCPAction";
-export * from "./isTCPAction";
+export * from "./filterTCPIncomeAction";
+export * from "./isTCPIncomeAction";
+export * from "./withIncomeRemoteAction";

@@ -13,7 +13,7 @@ function* worker({ payload }: ReturnType<typeof tcpServerSocketClosed>) {
 	yield call(clearTCPClientSocket, socket);
 
 	if (!networkId) {
-		console.error("Network ID not found");
+		console.log("Network ID not found");
 		return;
 	}
 

@@ -2,7 +2,7 @@ import { selectBoardsCount } from "@modules/board/base/shared/lib";
 import { usePageLoader } from "@modules/core/router/shared/lib";
 import { openNewGameWarning } from "@modules/game/entities/openNewGameWarning";
 import { startNewGame } from "@modules/game/entities/startNewGame";
-import type { GameType } from "@modules/game/model";
+import type { GameType } from "@modules/game/shared/model";
 import { useAppDispatch, useAppSelector } from "@shared/lib";
 import { useCallback } from "react";
 

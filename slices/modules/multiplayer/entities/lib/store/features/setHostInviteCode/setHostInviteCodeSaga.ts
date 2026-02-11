@@ -20,6 +20,8 @@ function* worker({ payload }: ReturnType<typeof setHostInviteCode>) {
 		return;
 	}
 
+	console.log("code ip", ip);
+
 	yield put(setHostIp(ip));
 
 	const { error }: { error?: ReturnType<typeof tcpClientSocketError> } =

@@ -1,8 +1,10 @@
 import { hasProp } from "@shared/lib";
 import { isObject, isString } from "ramda-adjunct";
-import type { TCPAction } from "../../../model";
+import type { TCPIncomeAction } from "../../../model";
 
-export const isTCPAction = (action: unknown): action is TCPAction => {
+export const isTCPIncomeAction = (
+	action: unknown,
+): action is TCPIncomeAction => {
 	if (!isObject(action)) {
 		return false;
 	}

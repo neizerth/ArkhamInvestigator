@@ -1,4 +1,5 @@
 import { selectDeviceNetworkId } from "@modules/core/network/shared/lib";
+import { omit } from "ramda";
 import { select, takeEvery } from "redux-saga/effects";
 import { sendTCPAction } from "./sendTCPAction";
 
@@ -8,9 +9,12 @@ function* worker({ payload }: ReturnType<typeof sendTCPAction>) {
 	);
 	const { socket, action } = payload;
 
+	const meta = omit(["remote"], action.meta);
+
 	const json = JSON.stringify({
 		...action,
 		meta: {
+			...meta,
 			networkId,
 			source: "tcp",
 		},

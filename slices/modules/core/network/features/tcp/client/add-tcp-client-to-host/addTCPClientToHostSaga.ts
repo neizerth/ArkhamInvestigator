@@ -1,6 +1,5 @@
-import { sendTCPServerAction } from "@modules/core/network/entities/tcp/client/sendTCPServerAction";
 import {
-	initNetworkClient,
+	connectNetworkClient,
 	selectNickname,
 	tcpClientSocketConnected,
 } from "@modules/core/network/shared/lib";
@@ -10,17 +9,13 @@ function* worker() {
 	const nickname: ReturnType<typeof selectNickname> =
 		yield select(selectNickname);
 
-	const action = initNetworkClient({
-		nickname,
-	});
-
 	yield put(
-		sendTCPServerAction({
-			action,
+		connectNetworkClient({
+			nickname,
 		}),
 	);
 }
 
-export function* initTCPClientOnConnectedSaga() {
+export function* addTCPClientToHostSaga() {
 	yield takeEvery(tcpClientSocketConnected.match, worker);
 }

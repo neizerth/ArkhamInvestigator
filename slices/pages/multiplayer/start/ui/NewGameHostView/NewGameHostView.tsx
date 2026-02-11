@@ -6,6 +6,7 @@ import {
 	getHostDeeplink,
 	getHostInviteCode,
 } from "@modules/multiplayer/entities/lib";
+import { startMultiplayerGame } from "@modules/multiplayer/entities/lib/store/features/startMultiplayerGame";
 import { useAppDispatch, useAppSelector } from "@shared/lib";
 import { useCallback, useMemo } from "react";
 import { useTranslation } from "react-i18next";
@@ -36,6 +37,10 @@ export const NewGameHostView = ({ ip, ...props }: NewGameHostViewProps) => {
 	const copyCode = useCallback(() => {
 		dispatch(copyText({ text: code }));
 	}, [dispatch, code]);
+
+	const startGame = useCallback(() => {
+		dispatch(startMultiplayerGame());
+	}, [dispatch]);
 
 	const playersCount = clients.length + 1;
 
@@ -70,7 +75,7 @@ export const NewGameHostView = ({ ip, ...props }: NewGameHostViewProps) => {
 				</C.Clients>
 
 				{clients.length > 0 && (
-					<C.Next text={t`Next`} icon="right-arrow" onPress={() => {}} />
+					<C.Next text={t`Next`} icon="right-arrow" onPress={startGame} />
 				)}
 			</C.Info>
 		</C.Container>

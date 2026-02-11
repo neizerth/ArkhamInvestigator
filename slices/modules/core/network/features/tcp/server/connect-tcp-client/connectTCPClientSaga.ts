@@ -1,16 +1,20 @@
 import {
-	filterTCPAction,
+	connectNetworkClient,
+	filterTCPIncomeAction,
 	hasTCPClientSocket,
-	initNetworkClient,
 	setTCPClientSocket,
 } from "@modules/core/network/shared/lib";
 import { addNetworkClient } from "@modules/core/network/shared/lib/store/networkClient";
-import type { TCPReturnType } from "@modules/core/network/shared/model";
+import type { TCPIncomeReturnType } from "@modules/core/network/shared/model";
 import { call, put, takeEvery } from "redux-saga/effects";
 
-const filterAction = filterTCPAction(initNetworkClient.match);
+const filterAction = filterTCPIncomeAction(connectNetworkClient.match);
 
-function* worker({ meta, payload }: TCPReturnType<typeof initNetworkClient>) {
+function* worker({
+	meta,
+	payload,
+}: TCPIncomeReturnType<typeof connectNetworkClient>) {
+	console.log("connectTCPClientSaga", payload);
 	const { nickname } = payload;
 	const { networkId, socket } = meta;
 

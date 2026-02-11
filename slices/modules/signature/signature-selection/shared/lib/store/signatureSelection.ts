@@ -1,3 +1,4 @@
+import { createRemoteReducer } from "@modules/core/network/shared/lib";
 import type {
 	FactionFilterType,
 	SelectedSignature,
@@ -34,6 +35,17 @@ export const signatureSelection = createSlice({
 	reducers: {
 		...state.reducers,
 		...reducers,
+		setSelectedSignatures: createRemoteReducer(
+			state.reducers.setSelectedSignatures,
+			{ notify: "all" },
+		),
+		addSelectedSignature: createRemoteReducer(reducers.addSelectedSignature, {
+			notify: "all",
+		}),
+		removeSelectedSignatureByCode: createRemoteReducer(
+			reducers.removeSelectedSignatureByCode,
+			{ notify: "all" },
+		),
 	},
 });
 

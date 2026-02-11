@@ -1,5 +1,5 @@
 import {
-	isTCPAction,
+	isTCPIncomeAction,
 	tcpServerSocketDataReceived,
 } from "@modules/core/network/shared/lib";
 import { put, takeEvery } from "redux-saga/effects";
@@ -9,7 +9,7 @@ function* worker({ payload }: ReturnType<typeof tcpServerSocketDataReceived>) {
 
 	try {
 		const tcpAction = JSON.parse(data);
-		if (!isTCPAction(tcpAction)) {
+		if (!isTCPIncomeAction(tcpAction)) {
 			return;
 		}
 
@@ -28,6 +28,6 @@ function* worker({ payload }: ReturnType<typeof tcpServerSocketDataReceived>) {
 	}
 }
 
-export function* transformTCPDataToReduxActionSaga() {
+export function* transformServerTCPDataToActionSaga() {
 	yield takeEvery(tcpServerSocketDataReceived.match, worker);
 }
