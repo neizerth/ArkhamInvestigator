@@ -1,4 +1,4 @@
-import { startGame } from "@modules/game/entities/startGame";
+import { startNewGame } from "@modules/game/entities/startNewGame";
 import { put, takeEvery } from "redux-saga/effects";
 import { resetSignatureSelection } from "../../shared/lib";
 
@@ -7,5 +7,5 @@ function* worker() {
 }
 
 export function* resetSignatureSelectionOnGameStartSaga() {
-	yield takeEvery(startGame.match, worker);
+	yield takeEvery(startNewGame.match, worker);
 }
