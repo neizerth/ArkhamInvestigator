@@ -1,8 +1,10 @@
 import { spawn } from "redux-saga/effects";
 import { runTCPClientSaga } from "./runTCPClient/runTCPClientSaga";
-import { sendTCPServerActionSaga } from "./sendTCPServerAction/sendTCPServerActionSaga";
+import { sendNetworkClientInfoSaga } from "./sendNetworkClientInfo/sendNetworkClientInfoSaga";
+import { sendTCPActionToServerSaga } from "./sendTCPActionToServer/sendTCPActionToServerSaga";
 
 export function* clientTcpSagas() {
 	yield spawn(runTCPClientSaga);
-	yield spawn(sendTCPServerActionSaga);
+	yield spawn(sendTCPActionToServerSaga);
+	yield spawn(sendNetworkClientInfoSaga);
 }

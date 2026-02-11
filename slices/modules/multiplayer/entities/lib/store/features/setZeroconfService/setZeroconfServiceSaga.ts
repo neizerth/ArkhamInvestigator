@@ -5,6 +5,7 @@ import { setZeroconfService } from "./setZeroconfService";
 
 function* worker({ payload }: ReturnType<typeof setZeroconfService>) {
 	const [ip] = payload.addresses;
+	console.log("setting host ip from zeroconf service", ip);
 	yield put(setHostIp(ip));
 	yield put(setGameStatus("initial"));
 }

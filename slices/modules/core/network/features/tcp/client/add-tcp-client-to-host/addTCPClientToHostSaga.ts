@@ -1,19 +1,9 @@
-import {
-	connectNetworkClient,
-	selectNickname,
-	tcpClientSocketConnected,
-} from "@modules/core/network/shared/lib";
-import { put, select, takeEvery } from "redux-saga/effects";
+import { sendNetworkClientInfo } from "@modules/core/network/entities/tcp/client/sendNetworkClientInfo";
+import { tcpClientSocketConnected } from "@modules/core/network/shared/lib";
+import { put, takeEvery } from "redux-saga/effects";
 
 function* worker() {
-	const nickname: ReturnType<typeof selectNickname> =
-		yield select(selectNickname);
-
-	yield put(
-		connectNetworkClient({
-			nickname,
-		}),
-	);
+	yield put(sendNetworkClientInfo());
 }
 
 export function* addTCPClientToHostSaga() {

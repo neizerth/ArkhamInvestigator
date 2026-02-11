@@ -8,10 +8,12 @@ import {
 	TCP_SERVICE_NAME,
 } from "../../../../shared/config";
 import {
-	clearTCPClientSockets,
+	clearTCPServerInstance,
 	setHostRunning,
+	setTCPServerInstance,
 	tcpServerClosed,
 	tcpServerError,
+	tcpServerListening,
 	tcpServerSocketClosed,
 	tcpServerSocketConnected,
 	tcpServerSocketDataReceived,
@@ -22,16 +24,20 @@ export type TCPServerChannelAction =
 	| ReturnType<typeof tcpServerSocketDataReceived>
 	| ReturnType<typeof tcpServerSocketClosed>
 	| ReturnType<typeof tcpServerSocketConnected>
-	| ReturnType<typeof tcpServerSocketError>;
+	| ReturnType<typeof tcpServerSocketError>
+	| ReturnType<typeof tcpServerListening>;
+
+// On HMR this module re-runs; close server from previous instance
+clearTCPServerInstance();
 
 export const createTCPServerChannel = (serverName: string | null) => {
 	return eventChannel((emit) => {
+		clearTCPServerInstance();
 		const zeroconf = new Zeroconf();
-
-		clearTCPClientSockets();
 
 		const server = TcpSocket.createServer((socket) => {
 			socket.on("error", (error) => {
+				console.log("tcp server: client socket error", error);
 				emit(
 					tcpServerSocketError({
 						socket,
@@ -40,7 +46,7 @@ export const createTCPServerChannel = (serverName: string | null) => {
 				);
 			});
 			socket.on("connect", () => {
-				console.log("tcp server socket connected");
+				console.log("tcp server: client socket connected");
 				emit(
 					tcpServerSocketConnected({
 						socket,
@@ -48,7 +54,7 @@ export const createTCPServerChannel = (serverName: string | null) => {
 				);
 			});
 			socket.on("close", () => {
-				console.log("tcp server socket closed");
+				console.log("tcp server: client disconnected");
 				emit(
 					tcpServerSocketClosed({
 						socket,
@@ -65,13 +71,18 @@ export const createTCPServerChannel = (serverName: string | null) => {
 			});
 		});
 
+		setTCPServerInstance(server);
+
 		server.listen({
 			port: TCP_PORT,
 			host: TCP_HOST,
-			reuseAddress: true,
 		});
 
 		server
+			.on("listening", () => {
+				console.log("tcp server: listening", server.address());
+				emit(tcpServerListening());
+			})
 			.on("error", (error) => {
 				console.log("tcp server error", error);
 				emit(
@@ -81,7 +92,7 @@ export const createTCPServerChannel = (serverName: string | null) => {
 				);
 			})
 			.on("close", () => {
-				console.log("tcp server closed");
+				console.log("tcp server: stopped (port released)");
 				emit(setHostRunning(false));
 				emit(tcpServerClosed());
 			});
@@ -93,7 +104,7 @@ export const createTCPServerChannel = (serverName: string | null) => {
 		zeroconf.publishService(TCP_SERVICE_NAME, "tcp", "local.", name, TCP_PORT);
 
 		return () => {
-			server.close();
+			clearTCPServerInstance();
 		};
 	});
 };

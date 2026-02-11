@@ -1,7 +1,7 @@
 import type { NetworkOutcomeAction } from "@modules/core/network/shared/model";
 import { createAction } from "@reduxjs/toolkit";
 
-export type SendTCPClientActionPayload = {
+export type SendTCPActionToClientPayload = {
 	action: NetworkOutcomeAction<unknown>;
 } & (
 	| {
@@ -13,6 +13,6 @@ export type SendTCPClientActionPayload = {
 	  }
 );
 
-export const sendTCPClientAction = createAction<SendTCPClientActionPayload>(
-	"network/sendTCPClientAction",
+export const sendTCPActionToClient = createAction<SendTCPActionToClientPayload>(
+	"network/sendTCPActionToClient",
 );

@@ -13,8 +13,8 @@ function* worker({ payload }: ReturnType<typeof setHostIp>) {
 	if (networkRole !== "client" || !payload) {
 		return;
 	}
-	yield put(stopTCPClient());
 
+	yield put(stopTCPClient());
 	yield put(startTCPClient({ host: payload }));
 }
 

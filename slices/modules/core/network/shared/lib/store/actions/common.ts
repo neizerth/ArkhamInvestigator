@@ -15,3 +15,10 @@ export const connectNetworkClient = createAction(
 		notify: "host",
 	}),
 );
+
+export const sendNetworkKeepAlive = createAction(
+	"network/sendKeepAlive",
+	withRemoteMeta({
+		notify: "host",
+	}),
+);

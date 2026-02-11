@@ -50,3 +50,5 @@ export const tcpServerError = createAction<TcpServerErrorPayload>(
 );
 
 export const tcpServerClosed = createAction("network/tcpServerClosed");
+
+export const tcpServerListening = createAction("network/tcpServerListening");

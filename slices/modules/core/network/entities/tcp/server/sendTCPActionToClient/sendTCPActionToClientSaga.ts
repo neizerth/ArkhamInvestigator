@@ -4,9 +4,9 @@ import {
 } from "@modules/core/network/shared/lib";
 import { put, takeEvery } from "redux-saga/effects";
 import { sendTCPAction } from "../../sendTCPAction";
-import { sendTCPClientAction } from "./sendTCPClientAction";
+import { sendTCPActionToClient } from "./sendTCPActionToClient";
 
-function* worker({ payload }: ReturnType<typeof sendTCPClientAction>) {
+function* worker({ payload }: ReturnType<typeof sendTCPActionToClient>) {
 	const { action } = payload;
 	const sockets =
 		payload.type === "single"
@@ -28,6 +28,6 @@ function* worker({ payload }: ReturnType<typeof sendTCPClientAction>) {
 	}
 }
 
-export function* sendTCPClientActionSaga() {
-	yield takeEvery(sendTCPClientAction.match, worker);
+export function* sendTCPActionToClientSaga() {
+	yield takeEvery(sendTCPActionToClient.match, worker);
 }

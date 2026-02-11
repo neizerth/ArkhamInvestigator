@@ -3,7 +3,7 @@ import {
 	selectNetworkRole,
 	startTCPServer,
 } from "@modules/core/network/shared/lib";
-import { selectGameMode } from "@modules/game/shared/lib";
+import { selectGameMode, selectGameStatus } from "@modules/game/shared/lib";
 import { put, select, takeEvery } from "redux-saga/effects";
 
 function* worker() {
@@ -11,7 +11,14 @@ function* worker() {
 		yield select(selectNetworkRole);
 	const gameMode: ReturnType<typeof selectGameMode> =
 		yield select(selectGameMode);
-	if (networkRole !== "host" || gameMode !== "multiplayer") {
+	const gameStatus: ReturnType<typeof selectGameStatus> =
+		yield select(selectGameStatus);
+
+	if (
+		networkRole !== "host" ||
+		gameMode !== "multiplayer" ||
+		gameStatus === "initial"
+	) {
 		return;
 	}
 	yield put(startTCPServer());

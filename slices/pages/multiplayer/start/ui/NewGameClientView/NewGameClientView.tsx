@@ -66,7 +66,7 @@ export const NewGameClientView = (props: NewGameClientViewProps) => {
 					<Text>{t`multiplayer.searching`}</Text>
 				</C.Loading>
 			)}
-			{hostIp && (
+			{services.length > 0 && hostIp && (
 				<C.Loading>
 					<C.Loader />
 					<Text>{t`multiplayer.waitingForHost`}</Text>

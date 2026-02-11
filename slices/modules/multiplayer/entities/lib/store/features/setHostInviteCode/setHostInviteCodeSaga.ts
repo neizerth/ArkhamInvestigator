@@ -36,6 +36,7 @@ function* worker({ payload }: ReturnType<typeof setHostInviteCode>) {
 		return;
 	}
 
+	console.log("error connecting to host", error);
 	yield put(setHostIp(null));
 
 	yield put(

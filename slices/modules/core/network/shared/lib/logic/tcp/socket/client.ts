@@ -1,25 +1,24 @@
-import type { PayloadAction } from "@reduxjs/toolkit";
+import { getGlobalValue, setGlobalValue } from "@shared/lib/util";
 import type TcpSocket from "react-native-tcp-socket";
 
-let tcpHostSocket: TcpSocket.Socket | null = null;
+const GLOBAL_HOST_SOCKET_KEY = "__tcpClientSocket" as const;
 
 export const setTCPServerSocket = (socket: TcpSocket.Socket) => {
-	tcpHostSocket = socket;
+	setGlobalValue(GLOBAL_HOST_SOCKET_KEY, socket);
 };
 
-export const getTCPServerSocket = () => {
-	return tcpHostSocket;
-};
+export const getTCPServerSocket = (): TcpSocket.Socket | null =>
+	getGlobalValue<TcpSocket.Socket>(GLOBAL_HOST_SOCKET_KEY);
 
 export const clearTCPServerSocket = () => {
-	tcpHostSocket = null;
-};
-
-export const dispatchTCPClientAction = <T>(data: PayloadAction<T>) => {
-	if (!tcpHostSocket) {
-		console.error("TCPServerSocket not found");
+	console.log("clearing tcp client socket");
+	const socket = getTCPServerSocket();
+	if (!socket) {
 		return;
 	}
-
-	tcpHostSocket.write(JSON.stringify(data));
+	socket.destroy();
+	setGlobalValue(GLOBAL_HOST_SOCKET_KEY, null);
 };
+
+// On HMR this module re-runs; close host socket from previous instance
+// clearTCPServerSocket();

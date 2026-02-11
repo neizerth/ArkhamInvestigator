@@ -1,11 +1,10 @@
-import { sendTCPClientAction } from "@modules/core/network/entities/tcp/server/sendTCPClientAction";
+import { sendTCPActionToClient } from "@modules/core/network/entities/tcp/server/sendTCPActionToClient";
 import {
+	addNetworkClient,
 	connectNetworkClient,
 	filterTCPIncomeAction,
-	hasTCPClientSocket,
 	setTCPClientSocket,
 } from "@modules/core/network/shared/lib";
-import { addNetworkClient } from "@modules/core/network/shared/lib/store/networkClient";
 import type { TCPIncomeReturnType } from "@modules/core/network/shared/model";
 import { selectGameStatus } from "@modules/game/shared/lib";
 import { startMultiplayerGame } from "@modules/multiplayer/entities/lib/store/features/startMultiplayerGame";
@@ -17,18 +16,10 @@ function* worker({
 	meta,
 	payload,
 }: TCPIncomeReturnType<typeof connectNetworkClient>) {
-	console.log("connectTCPClientSaga", payload);
 	const { nickname } = payload;
 	const { networkId, socket } = meta;
 
-	const exists = hasTCPClientSocket(networkId);
-
 	yield call(setTCPClientSocket, networkId, socket);
-
-	if (exists) {
-		console.error("TCPClientSocket already exists");
-		return;
-	}
 
 	console.log("connecting TCP client", payload);
 
@@ -47,7 +38,7 @@ function* worker({
 	}
 
 	yield put(
-		sendTCPClientAction({
+		sendTCPActionToClient({
 			action: startMultiplayerGame(),
 			type: "single",
 			networkId,

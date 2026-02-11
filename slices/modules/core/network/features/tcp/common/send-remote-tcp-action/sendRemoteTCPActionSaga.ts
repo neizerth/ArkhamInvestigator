@@ -1,5 +1,5 @@
-import { sendTCPServerAction } from "@modules/core/network/entities/tcp/client/sendTCPServerAction";
-import { sendTCPClientAction } from "@modules/core/network/entities/tcp/server/sendTCPClientAction";
+import { sendTCPActionToServer } from "@modules/core/network/entities/tcp/client/sendTCPActionToServer";
+import { sendTCPActionToClient } from "@modules/core/network/entities/tcp/server/sendTCPActionToClient";
 import { selectNetworkRole } from "@modules/core/network/shared/lib";
 import type { NetworkOutcomeAction } from "@modules/core/network/shared/model";
 import { isAction } from "@reduxjs/toolkit";
@@ -32,7 +32,7 @@ function* worker(action: NetworkOutcomeAction<unknown>) {
 		return;
 	}
 
-	const actionCreator = isHost ? sendTCPClientAction : sendTCPServerAction;
+	const actionCreator = isHost ? sendTCPActionToClient : sendTCPActionToServer;
 
 	yield put(
 		actionCreator({

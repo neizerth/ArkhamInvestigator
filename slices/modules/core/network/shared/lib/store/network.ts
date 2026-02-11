@@ -8,6 +8,7 @@ import type { NetworkRole, NetworkType } from "../../model";
 export type NetworkState = {
 	deviceNetworkId: string;
 	hostRunning: boolean;
+	clientRunning: boolean;
 	networkType: NetworkType;
 	networkConnected: boolean;
 	offline: boolean;
@@ -22,6 +23,7 @@ export type NetworkState = {
 const initialState: NetworkState = {
 	deviceNetworkId: v4(),
 	hostRunning: false,
+	clientRunning: false,
 	networkType: "none",
 	networkConnected: false,
 	offline: false,
@@ -62,6 +64,7 @@ export const {
 	setHostIp,
 	setDeviceNetworkId,
 	setHostRunning,
+	setClientRunning,
 } = network.actions;
 
 export const {
@@ -76,6 +79,7 @@ export const {
 	selectHostIp,
 	selectDeviceNetworkId,
 	selectHostRunning,
+	selectClientRunning,
 } = network.selectors;
 
 export default network.reducer;

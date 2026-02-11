@@ -4,7 +4,7 @@ import type { ConnectionOptions } from "react-native-tcp-socket/lib/types/Socket
 import { eventChannel } from "redux-saga";
 import { TCP_PORT } from "../../../../shared/config";
 import {
-	clearTCPServerSocket,
+	setClientRunning,
 	setTCPServerSocket,
 	tcpClientSocketClosed,
 	tcpClientSocketConnected,
@@ -16,11 +16,14 @@ export type TCPClientChannelAction =
 	| ReturnType<typeof tcpClientSocketDataReceived>
 	| ReturnType<typeof tcpClientSocketClosed>
 	| ReturnType<typeof tcpClientSocketConnected>
-	| ReturnType<typeof tcpClientSocketError>;
+	| ReturnType<typeof tcpClientSocketError>
+	| ReturnType<typeof setClientRunning>;
 
 export const createTCPClientChannel = (host: string) => {
 	return eventChannel((emit) => {
-		clearTCPServerSocket();
+		// clearTCPServerSocket();
+
+		console.log("tcp client: event channel created");
 
 		const options: ConnectionOptions = {
 			host,
@@ -29,22 +32,29 @@ export const createTCPClientChannel = (host: string) => {
 		};
 
 		const socket = TcpSocket.createConnection(options, () => {
-			console.log("tcp client socket created");
+			console.log(
+				"tcp client: connecting to",
+				{ host, port: TCP_PORT },
+				"local",
+				socket.address(),
+			);
 		});
 
 		setTCPServerSocket(socket);
 
 		socket.on("connect", () => {
-			console.log("tcp client connected");
+			emit(setClientRunning(true));
+			console.log("tcp client: socket connected");
 			emit(tcpClientSocketConnected());
 		});
 
 		socket.on("error", (error) => {
-			console.log("tcp client error", error);
+			console.log("tcp client: socket error", error);
 			emit(tcpClientSocketError({ error }));
 		});
 		socket.on("close", () => {
-			console.log("tcp client closed");
+			console.log("tcp client: disconnected from host");
+			emit(setClientRunning(false));
 			emit(tcpClientSocketClosed());
 		});
 		socket.on("data", (data) => {
@@ -56,6 +66,8 @@ export const createTCPClientChannel = (host: string) => {
 		});
 
 		return () => {
+			console.log("tcp client: event channel closed");
+			emit(setClientRunning(false));
 			socket.destroy();
 		};
 	});

@@ -1,5 +1,6 @@
 import {
 	isTCPIncomeAction,
+	setTCPClientSocket,
 	tcpServerSocketDataReceived,
 } from "@modules/core/network/shared/lib";
 import { put, takeEvery } from "redux-saga/effects";
@@ -12,6 +13,10 @@ function* worker({ payload }: ReturnType<typeof tcpServerSocketDataReceived>) {
 		if (!isTCPIncomeAction(tcpAction)) {
 			return;
 		}
+
+		const { networkId } = tcpAction.meta;
+
+		setTCPClientSocket(networkId, socket);
 
 		const action = {
 			...tcpAction,

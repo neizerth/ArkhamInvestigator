@@ -9,6 +9,11 @@ function* worker({ payload }: ReturnType<typeof sendTCPAction>) {
 	);
 	const { socket, action } = payload;
 
+	if (socket.destroyed) {
+		console.log("Socket destroyed", payload);
+		return;
+	}
+
 	const meta = omit(["remote"], action.meta);
 
 	const json = JSON.stringify({
@@ -20,7 +25,11 @@ function* worker({ payload }: ReturnType<typeof sendTCPAction>) {
 		},
 	});
 
-	socket.write(json);
+	try {
+		socket.write(json);
+	} catch (error) {
+		console.error("Error sending TCP action", error);
+	}
 }
 
 export function* sendTCPActionSaga() {

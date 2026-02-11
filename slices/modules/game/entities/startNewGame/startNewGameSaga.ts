@@ -1,14 +1,9 @@
-import { selectNetworkRole } from "@modules/core/network/shared/lib";
 import { goToPage } from "@modules/core/router/shared/lib";
-import {
-	selectGameStatus,
-	setGameMode,
-	setGameStatus,
-} from "@modules/game/shared/lib";
+import { setGameMode, setGameStatus } from "@modules/game/shared/lib";
 import type { GameType } from "@modules/game/shared/model";
 import { routes } from "@shared/config";
 import type { Route } from "expo-router";
-import { put, select, takeEvery } from "redux-saga/effects";
+import { put, takeEvery } from "redux-saga/effects";
 import { startNewGame } from "./startNewGame";
 
 const routeMap: Record<GameType, Route> = {
@@ -23,17 +18,6 @@ function* worker({ payload }: ReturnType<typeof startNewGame>) {
 	yield put(setGameMode(type));
 
 	if (type === "single") {
-		yield put(setGameStatus("selecting"));
-		yield put(goToPage(routes.selectInvestigators));
-		return;
-	}
-
-	const gameStatus: ReturnType<typeof selectGameStatus> =
-		yield select(selectGameStatus);
-	const networkRole: ReturnType<typeof selectNetworkRole> =
-		yield select(selectNetworkRole);
-
-	if (networkRole === "client" && gameStatus === "selecting") {
 		yield put(setGameStatus("selecting"));
 		yield put(goToPage(routes.selectInvestigators));
 		return;

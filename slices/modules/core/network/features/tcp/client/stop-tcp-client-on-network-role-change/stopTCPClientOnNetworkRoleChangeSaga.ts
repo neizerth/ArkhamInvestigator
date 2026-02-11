@@ -5,6 +5,7 @@ function* worker({ payload }: ReturnType<typeof setNetworkRole>) {
 	if (payload === "client") {
 		return;
 	}
+	console.log("stopping tcp client");
 	yield put(stopTCPClient());
 }
 

@@ -1,8 +1,8 @@
-import { routeChanged } from "@modules/core/router/shared/lib";
+import { setCurrentRoute } from "@modules/core/router/shared/lib";
 import { setGameStatus } from "@modules/game/shared/lib";
 import { routes } from "@shared/config";
 import { put, takeEvery } from "redux-saga/effects";
-function* worker({ payload }: ReturnType<typeof routeChanged>) {
+function* worker({ payload }: ReturnType<typeof setCurrentRoute>) {
 	if (payload !== routes.startMultiplayer) {
 		return;
 	}
@@ -10,5 +10,5 @@ function* worker({ payload }: ReturnType<typeof routeChanged>) {
 }
 
 export function* initGameStatusOnMultiplayerRouteSaga() {
-	yield takeEvery(routeChanged.match, worker);
+	yield takeEvery(setCurrentRoute.match, worker);
 }
