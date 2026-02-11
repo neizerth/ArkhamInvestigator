@@ -40,6 +40,7 @@ export const createTCPServerChannel = (serverName: string | null) => {
 				);
 			});
 			socket.on("connect", () => {
+				console.log("tcp server socket connected");
 				emit(
 					tcpServerSocketConnected({
 						socket,
@@ -47,6 +48,7 @@ export const createTCPServerChannel = (serverName: string | null) => {
 				);
 			});
 			socket.on("close", () => {
+				console.log("tcp server socket closed");
 				emit(
 					tcpServerSocketClosed({
 						socket,
@@ -66,10 +68,12 @@ export const createTCPServerChannel = (serverName: string | null) => {
 		server.listen({
 			port: TCP_PORT,
 			host: TCP_HOST,
+			reuseAddress: true,
 		});
 
 		server
 			.on("error", (error) => {
+				console.log("tcp server error", error);
 				emit(
 					tcpServerError({
 						error,
@@ -77,6 +81,7 @@ export const createTCPServerChannel = (serverName: string | null) => {
 				);
 			})
 			.on("close", () => {
+				console.log("tcp server closed");
 				emit(setHostRunning(false));
 				emit(tcpServerClosed());
 			});

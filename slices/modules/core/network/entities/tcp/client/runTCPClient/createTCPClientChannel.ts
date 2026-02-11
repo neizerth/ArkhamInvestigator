@@ -44,6 +44,7 @@ export const createTCPClientChannel = (host: string) => {
 			emit(tcpClientSocketError({ error }));
 		});
 		socket.on("close", () => {
+			console.log("tcp client closed");
 			emit(tcpClientSocketClosed());
 		});
 		socket.on("data", (data) => {
