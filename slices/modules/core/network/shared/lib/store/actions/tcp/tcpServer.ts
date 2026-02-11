@@ -40,3 +40,13 @@ type TcpSocketErrorPayload = {
 export const tcpServerSocketError = createAction<TcpSocketErrorPayload>(
 	"network/tcpServerSocketError",
 );
+
+type TcpServerErrorPayload = {
+	error: Error;
+};
+
+export const tcpServerError = createAction<TcpServerErrorPayload>(
+	"network/tcpServerError",
+);
+
+export const tcpServerClosed = createAction("network/tcpServerClosed");

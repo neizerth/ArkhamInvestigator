@@ -1,5 +1,6 @@
-import { put, takeEvery } from "redux-saga/effects";
+import { put, select, takeEvery } from "redux-saga/effects";
 import {
+	selectHostRunning,
 	setHostIp,
 	setNetworkRole,
 	startTCPServer,
@@ -9,6 +10,12 @@ import {
 function* worker({ payload }: ReturnType<typeof setNetworkRole>) {
 	if (payload === "host") {
 		yield put(setHostIp(null));
+
+		const hostRunning: ReturnType<typeof selectHostRunning> =
+			yield select(selectHostRunning);
+		if (hostRunning) {
+			return;
+		}
 		yield put(startTCPServer());
 	} else {
 		yield put(stopTCPServer({ name: null }));

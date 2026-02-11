@@ -9,6 +9,9 @@ import {
 } from "../../../../shared/config";
 import {
 	clearTCPClientSockets,
+	setHostRunning,
+	tcpServerClosed,
+	tcpServerError,
 	tcpServerSocketClosed,
 	tcpServerSocketConnected,
 	tcpServerSocketDataReceived,
@@ -58,10 +61,27 @@ export const createTCPServerChannel = (serverName: string | null) => {
 					}),
 				);
 			});
-		}).listen({
+		});
+
+		server.listen({
 			port: TCP_PORT,
 			host: TCP_HOST,
 		});
+
+		server
+			.on("error", (error) => {
+				emit(
+					tcpServerError({
+						error,
+					}),
+				);
+			})
+			.on("close", () => {
+				emit(setHostRunning(false));
+				emit(tcpServerClosed());
+			});
+
+		emit(setHostRunning(true));
 
 		const name = serverName ?? TCP_SERVER_NAME;
 

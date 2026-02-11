@@ -1,3 +1,4 @@
+import { selectDeviceNetworkId } from "@modules/core/network/shared/lib";
 import {
 	addSelectedSignature,
 	resetCurrentSignature,
@@ -20,6 +21,10 @@ function* worker() {
 		selectCurrentSignature,
 	);
 
+	const networkId: ReturnType<typeof selectDeviceNetworkId> = yield select(
+		selectDeviceNetworkId,
+	);
+
 	const image: ReturnType<typeof selectCurrentImage> =
 		yield select(selectCurrentImage);
 
@@ -38,6 +43,7 @@ function* worker() {
 
 	const selection: SelectedSignature = {
 		id: v4(),
+		networkId,
 		code,
 		signature,
 		skin,

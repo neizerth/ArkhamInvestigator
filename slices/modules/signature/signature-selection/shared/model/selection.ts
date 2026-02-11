@@ -1,4 +1,4 @@
-import type { Faction } from "@shared/model";
+import type { Faction } from "@modules/faction/shared/model";
 import type { InvestigatorImage } from "@shared/model";
 import type { InvestigatorSignature } from "arkham-investigator-data";
 

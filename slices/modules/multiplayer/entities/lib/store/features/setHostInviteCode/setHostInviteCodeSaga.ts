@@ -4,6 +4,7 @@ import {
 	tcpClientSocketError,
 } from "@modules/core/network/shared/lib";
 import { sendNotification } from "@modules/core/notifications/shared/lib";
+import { setGameStatus } from "@modules/game/shared/lib";
 import { put, race, take, takeEvery } from "redux-saga/effects";
 import { getHostIPFromInviteCode } from "../../../logic";
 import { setHostInviteCode } from "./setHostInviteCode";
@@ -23,6 +24,7 @@ function* worker({ payload }: ReturnType<typeof setHostInviteCode>) {
 	console.log("code ip", ip);
 
 	yield put(setHostIp(ip));
+	yield put(setGameStatus("initial"));
 
 	const { error }: { error?: ReturnType<typeof tcpClientSocketError> } =
 		yield race({

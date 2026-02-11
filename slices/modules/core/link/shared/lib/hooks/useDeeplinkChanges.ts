@@ -14,7 +14,6 @@ export const useDeeplinkChanges = () => {
 		const validUrl = linkingUrl && isDeeplink(linkingUrl);
 
 		if (!validUrl) {
-			console.log("invalid deeplink", linkingUrl);
 			return;
 		}
 		const url = parseUrl(linkingUrl);
