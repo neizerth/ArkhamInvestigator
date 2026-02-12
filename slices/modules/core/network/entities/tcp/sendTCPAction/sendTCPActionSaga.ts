@@ -10,7 +10,7 @@ function* worker({ payload }: ReturnType<typeof sendTCPAction>) {
 	const { socket, action } = payload;
 
 	if (socket.destroyed) {
-		console.log("Socket destroyed", payload);
+		console.log("Socket destroyed");
 		return;
 	}
 

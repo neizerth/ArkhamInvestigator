@@ -39,6 +39,6 @@ function* worker() {
 export function* sendNetworkClientKeepAliveSaga() {
 	while (true) {
 		yield call(worker);
-		yield delay(seconds(10));
+		yield delay(seconds(20));
 	}
 }
