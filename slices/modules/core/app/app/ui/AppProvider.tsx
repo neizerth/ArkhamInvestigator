@@ -9,7 +9,12 @@ import { RouterProvider } from "@modules/core/router/app/ui";
 import { DarkTheme, ThemeProvider } from "@react-navigation/native";
 import type { PropsWithChildren } from "react";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
-import { AppLoadProvider, ErrorProvider, StoreProvider } from "./providers";
+import {
+	AppLoadProvider,
+	AppStateProvider,
+	ErrorProvider,
+	StoreProvider,
+} from "./providers";
 
 export const AppProvider = ({ children }: PropsWithChildren) => {
 	return (
@@ -22,7 +27,9 @@ export const AppProvider = ({ children }: PropsWithChildren) => {
 								<ErrorProvider>
 									<ToastProvider>
 										<DeeplinkProvider>
-											<RouterProvider>{children}</RouterProvider>
+											<AppStateProvider>
+												<RouterProvider>{children}</RouterProvider>
+											</AppStateProvider>
 										</DeeplinkProvider>
 									</ToastProvider>
 								</ErrorProvider>

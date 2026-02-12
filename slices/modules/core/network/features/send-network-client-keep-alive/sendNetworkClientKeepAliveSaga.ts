@@ -1,44 +1,21 @@
-import { selectGameStatus } from "@modules/game/shared/lib";
-import { seconds } from "@shared/lib";
-import { call, delay, put, select } from "redux-saga/effects";
-import {
-	selectClientRunning,
-	selectHostIp,
-	selectNetworkRole,
-	sendNetworkKeepAlive,
-	startTCPClient,
-} from "../../shared/lib";
+import { callEvery, seconds } from "@shared/lib";
+import { put, takeEvery } from "redux-saga/effects";
+
+import { appStateChanged } from "@modules/core/app/shared/lib";
+import { checkTCPClientConnection } from "../../entities/tcp/client/checkTCPClientConnection";
+
+const filterAppStateAction = (action: unknown) => {
+	if (!appStateChanged.match(action)) {
+		return false;
+	}
+	return action.payload === "active";
+};
 
 function* worker() {
-	const networkRole: ReturnType<typeof selectNetworkRole> =
-		yield select(selectNetworkRole);
-	if (networkRole !== "client") {
-		return;
-	}
-	const gameStatus: ReturnType<typeof selectGameStatus> =
-		yield select(selectGameStatus);
-	if (gameStatus === "initial") {
-		return;
-	}
-	const running: ReturnType<typeof selectClientRunning> =
-		yield select(selectClientRunning);
-	const hostIp: ReturnType<typeof selectHostIp> = yield select(selectHostIp);
-
-	if (running) {
-		console.log("Sending network keep alive");
-		yield put(sendNetworkKeepAlive());
-	}
-	if (!hostIp) {
-		console.log("No host IP found");
-		return;
-	}
-
-	yield put(startTCPClient({ host: hostIp }));
+	yield put(checkTCPClientConnection());
 }
 
 export function* sendNetworkClientKeepAliveSaga() {
-	while (true) {
-		yield call(worker);
-		yield delay(seconds(20));
-	}
+	yield callEvery(seconds(20), worker);
+	yield takeEvery(filterAppStateAction, worker);
 }
