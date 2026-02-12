@@ -37,7 +37,6 @@ export function* stopWorker() {}
 export function* runTCPServerSaga() {
 	while (true) {
 		yield take(startTCPServer.match);
-		console.log("run TCPServer action received");
 		// race cancels tcpWorker if stopTCPServer is dispatched first
 		const { stop }: { stop?: ReturnType<typeof stopTCPServer> } = yield race({
 			task: call(worker),

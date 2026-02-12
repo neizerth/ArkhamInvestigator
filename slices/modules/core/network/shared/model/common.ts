@@ -17,10 +17,11 @@ export type NetworkClient = {
 	nickname: string;
 };
 
-export type NetworkNotificationType = "host" | "all";
+export type NetworkNotificationType = "reciever" | "all" | "host" | "self";
 
 export type NetworkIncomeActionMeta = {
 	networkId: string;
+	messageId: string;
 	notify: NetworkNotificationType;
 };
 

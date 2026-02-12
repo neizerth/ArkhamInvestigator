@@ -115,6 +115,7 @@
 		"react-native-gradients": "^2.1.1",
 		"react-native-haptic-feedback": "^2.3.3",
 		"react-native-localize": "^3.4.1",
+		"react-native-logs": "^5.5.0",
 		"react-native-mask-input": "^1.2.3",
 		"react-native-navigation-mode": "^1.2.3",
 		"react-native-qrcode-svg": "^6.3.21",

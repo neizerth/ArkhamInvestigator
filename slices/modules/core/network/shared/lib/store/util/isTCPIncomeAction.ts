@@ -1,11 +1,12 @@
+import { isAction } from "@reduxjs/toolkit";
 import { hasProp } from "@shared/lib";
-import { isObject, isString } from "ramda-adjunct";
+import { isString } from "ramda-adjunct";
 import type { TCPIncomeAction } from "../../../model";
 
 export const isTCPIncomeAction = (
 	action: unknown,
 ): action is TCPIncomeAction => {
-	if (!isObject(action)) {
+	if (!isAction(action)) {
 		return false;
 	}
 	if (

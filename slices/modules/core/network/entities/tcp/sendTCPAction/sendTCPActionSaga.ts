@@ -1,16 +1,16 @@
 import { selectDeviceNetworkId } from "@modules/core/network/shared/lib";
 import { omit } from "ramda";
-import { select, takeEvery } from "redux-saga/effects";
-import { sendTCPAction } from "./sendTCPAction";
+import { put, select, takeEvery } from "redux-saga/effects";
+import { sendTCPAction, sendTCPActionFailed } from "./sendTCPAction";
 
 function* worker({ payload }: ReturnType<typeof sendTCPAction>) {
 	const networkId: ReturnType<typeof selectDeviceNetworkId> = yield select(
 		selectDeviceNetworkId,
 	);
-	const { socket, action } = payload;
+	const { socket, action, messageId } = payload;
 
 	if (socket.destroyed) {
-		console.log("Socket destroyed");
+		yield put(sendTCPActionFailed({ ...payload, type: "socket-destroyed" }));
 		return;
 	}
 
@@ -20,6 +20,7 @@ function* worker({ payload }: ReturnType<typeof sendTCPAction>) {
 		...action,
 		meta: {
 			...meta,
+			messageId,
 			networkId,
 			source: "tcp",
 		},
@@ -29,6 +30,23 @@ function* worker({ payload }: ReturnType<typeof sendTCPAction>) {
 		socket.write(json);
 	} catch (error) {
 		console.error("Error sending TCP action", error);
+		if (error instanceof Error) {
+			yield put(
+				sendTCPActionFailed({
+					...payload,
+					type: "error",
+					error: error,
+				}),
+			);
+		} else {
+			yield put(
+				sendTCPActionFailed({
+					...payload,
+					type: "unknown",
+					error: error,
+				}),
+			);
+		}
 	}
 }
 

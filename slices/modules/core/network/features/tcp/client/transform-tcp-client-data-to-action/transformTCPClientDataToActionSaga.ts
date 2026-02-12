@@ -1,6 +1,7 @@
 import {
 	getTCPServerSocket,
 	isTCPIncomeAction,
+	tcpActionReceived,
 	tcpClientSocketDataReceived,
 } from "@modules/core/network/shared/lib";
 import { put, takeEvery } from "redux-saga/effects";
@@ -22,12 +23,25 @@ function* worker({ payload }: ReturnType<typeof tcpClientSocketDataReceived>) {
 			...tcpAction,
 			meta: {
 				...tcpAction.meta,
+				notify: "self",
 				source: "tcp",
 				socket,
 			},
 		};
 
 		yield put(action);
+
+		if (tcpActionReceived.match(action)) {
+			return;
+		}
+
+		const { messageId } = tcpAction.meta;
+
+		yield put(
+			tcpActionReceived({
+				messageId,
+			}),
+		);
 	} catch (error) {
 		console.error("Error parsing TCP data", error);
 	}

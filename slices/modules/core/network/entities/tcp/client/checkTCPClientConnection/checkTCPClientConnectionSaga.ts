@@ -8,6 +8,7 @@ import {
 	startTCPClient,
 } from "@modules/core/network/shared/lib";
 import { selectGameStatus } from "@modules/game/shared/lib";
+import { log } from "@shared/config";
 import { put, select, takeEvery } from "redux-saga/effects";
 import { checkTCPClientConnection } from "./checkTCPClientConnection";
 
@@ -27,13 +28,16 @@ function* worker() {
 	const hostIp: ReturnType<typeof selectHostIp> = yield select(selectHostIp);
 
 	if (running) {
-		console.log(Date.now(), "Sending network keep alive");
+		log.info("Sending network keep alive");
 		yield put(sendNetworkKeepAlive());
-	}
-	if (!hostIp) {
-		console.log("No host IP found");
 		return;
 	}
+	if (!hostIp) {
+		log.error("No host IP found");
+		return;
+	}
+
+	console.log({ running });
 
 	yield put(startTCPClient({ host: hostIp }));
 }

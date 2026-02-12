@@ -46,10 +46,6 @@ export const signatureSelection = createSlice({
 			reducers.removeSelectedSignatureByCode,
 			{ notify: "all" },
 		),
-		resetSignatureSelection: createRemoteReducer(
-			reducers.resetSignatureSelection,
-			{ notify: "all" },
-		),
 		clearSelectedSignatures: createRemoteReducer(
 			reducers.clearSelectedSignatures,
 			{ notify: "all" },
@@ -73,7 +69,6 @@ export const {
 	addSelectedSignature,
 	removeSelectedSignatureByCode,
 	clearSelectedSignatures,
-	resetSignatureSelection,
 } = signatureSelection.actions;
 
 export const {

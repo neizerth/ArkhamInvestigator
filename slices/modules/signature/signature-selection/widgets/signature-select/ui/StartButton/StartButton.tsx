@@ -1,56 +1,51 @@
 import { usePageLoader } from "@modules/core/router/shared/lib";
-import { selectArtworksEnabled } from "@modules/core/theme/shared/lib";
 import { startGame } from "@modules/game/entities/startGame";
-import { getSignatureImageUrl } from "@modules/signature/base/shared/api";
-import { selectSelectedSignatures } from "@modules/signature/signature-selection/shared/lib";
-import { useAppDispatch, useAppSelector } from "@shared/lib";
-import type { SelectedInvestigator } from "@shared/model";
-import { Fragment, useCallback } from "react";
+import { selectIsClientGame } from "@modules/multiplayer/entities/lib";
+import {
+	selectReplaceSignature,
+	selectSelectedSignatures,
+} from "@modules/signature/signature-selection/shared/lib";
+import { getActiveOpacity, useAppDispatch, useAppSelector } from "@shared/lib";
+import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import * as C from "./StartButton.components";
-
-const getImageSource = ({ code, image }: SelectedInvestigator) => ({
-	uri: getSignatureImageUrl({
-		code: image.id || code,
-		type: "square",
-	}),
-});
 
 export const StartButton = () => {
 	const dispatch = useAppDispatch();
 	const { t } = useTranslation();
-	const artworksEnabled = useAppSelector(selectArtworksEnabled);
 	const selectedSignatures = useAppSelector(selectSelectedSignatures);
+	const replaceSignature = useAppSelector(selectReplaceSignature);
+	const isClient = useAppSelector(selectIsClientGame);
 	const signatures = selectedSignatures ?? [];
 
 	const start = useCallback(() => {
+		if (isClient) {
+			return;
+		}
 		dispatch(startGame());
-	}, [dispatch]);
+	}, [dispatch, isClient]);
 
 	const [onStart] = usePageLoader(start);
 
+	const label = replaceSignature ? t`Continue` : t`Start`;
+
+	const activeOpacity = getActiveOpacity(!isClient);
+
 	return (
-		<C.Container onPress={onStart}>
+		<C.Container onPress={onStart} activeOpacity={activeOpacity}>
 			<C.Content>
-				<C.Investigators>
-					{signatures.map((item) => (
-						<Fragment key={item.id}>
-							{artworksEnabled ? (
-								<C.InvestigatorImage source={getImageSource(item)} />
-							) : (
-								<C.Faction
-									faction={item.signature.faction_code}
-									colored
-									light
-								/>
-							)}
-						</Fragment>
-					))}
-				</C.Investigators>
-				<C.TextContainer>
-					<C.Text>{t`Start`}</C.Text>
-				</C.TextContainer>
-				<C.Icon icon="right-arrow" />
+				<C.Investigators signatures={signatures} />
+				{isClient ? (
+					<C.Waiting />
+				) : (
+					<>
+						<C.TextContainer>
+							<C.Text>{label}</C.Text>
+						</C.TextContainer>
+
+						<C.Icon icon="right-arrow" />
+					</>
+				)}
 			</C.Content>
 		</C.Container>
 	);

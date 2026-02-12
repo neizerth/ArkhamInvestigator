@@ -1,3 +1,7 @@
+import {
+	removeAllNetworkClients,
+	setHostIp,
+} from "@modules/core/network/shared/lib";
 import { setCurrentRoute } from "@modules/core/router/shared/lib";
 import { setGameStatus } from "@modules/game/shared/lib";
 import { routes } from "@shared/config";
@@ -6,6 +10,8 @@ function* worker({ payload }: ReturnType<typeof setCurrentRoute>) {
 	if (payload !== routes.startMultiplayer) {
 		return;
 	}
+	yield put(removeAllNetworkClients());
+	yield put(setHostIp(null));
 	yield put(setGameStatus("initial"));
 }
 

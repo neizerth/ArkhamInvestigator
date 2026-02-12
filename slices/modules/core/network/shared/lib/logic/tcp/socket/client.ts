@@ -19,6 +19,3 @@ export const clearTCPServerSocket = () => {
 	socket.destroy();
 	setGlobalValue(GLOBAL_HOST_SOCKET_KEY, null);
 };
-
-// On HMR this module re-runs; close host socket from previous instance
-// clearTCPServerSocket();

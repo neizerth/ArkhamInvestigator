@@ -1,10 +1,11 @@
 import { Alegreya } from "@assets/fonts";
 import { ThemeFactionFontIcon } from "@modules/core/theme/shared/ui";
 import { TouchableOpacity } from "@modules/core/touch/shared/ui";
+import { SelectedSignaturePreview } from "@modules/signature/signature-selection/entities/ui";
 import { color, font, size } from "@shared/config";
 import { Icon as BaseIcon, Row, UnscaledText } from "@shared/ui";
 import { Image } from "expo-image";
-import { View } from "react-native";
+import { ActivityIndicator, View } from "react-native";
 import styled from "styled-components/native";
 
 export const Container: typeof TouchableOpacity = styled(TouchableOpacity)`
@@ -25,9 +26,10 @@ export const InvestigatorImage: typeof Image = styled(Image)`
   border-radius: ${size.borderRadius.default}px;
 `;
 
-export const Investigators: typeof Row = styled(Row)`
-  justify-content: space-between;
-  gap: ${size.gap.small}px;
+export const Investigators: typeof SelectedSignaturePreview = styled(
+	SelectedSignaturePreview,
+)`
+
 `;
 
 export const TextContainer: typeof View = styled(View)`
@@ -41,11 +43,16 @@ export const Text: typeof UnscaledText = styled(UnscaledText)`
   font-family: ${Alegreya.regular};
 `;
 
-export const Icon: typeof BaseIcon = styled(BaseIcon).attrs({
-	icon: "right-arrow",
+export const Icon: typeof BaseIcon = styled(BaseIcon)`
+  font-size: ${font.size.default}px
+`;
+
+export const Waiting: typeof ActivityIndicator = styled(
+	ActivityIndicator,
+).attrs({
+	color: color.black,
 })`
-    font-size: ${font.size.default}px
-  `;
+`;
 
 export const Faction: typeof ThemeFactionFontIcon = styled(
 	ThemeFactionFontIcon,

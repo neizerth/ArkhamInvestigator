@@ -1,3 +1,4 @@
+import { log } from "@shared/config";
 import TcpSocket from "react-native-tcp-socket";
 import Zeroconf from "react-native-zeroconf";
 import { eventChannel } from "redux-saga";
@@ -8,6 +9,7 @@ import {
 	TCP_SERVICE_NAME,
 } from "../../../../shared/config";
 import {
+	clearTCPClientSockets,
 	clearTCPServerInstance,
 	setHostRunning,
 	setTCPServerInstance,
@@ -29,15 +31,17 @@ export type TCPServerChannelAction =
 
 // On HMR this module re-runs; close server from previous instance
 clearTCPServerInstance();
+clearTCPClientSockets();
 
 export const createTCPServerChannel = (serverName: string | null) => {
 	return eventChannel((emit) => {
 		clearTCPServerInstance();
+		clearTCPClientSockets();
 		const zeroconf = new Zeroconf();
 
 		const server = TcpSocket.createServer((socket) => {
 			socket.on("error", (error) => {
-				console.log("tcp server: client socket error", error);
+				log.error("tcp server: client socket error", error);
 				emit(
 					tcpServerSocketError({
 						socket,
@@ -46,7 +50,7 @@ export const createTCPServerChannel = (serverName: string | null) => {
 				);
 			});
 			socket.on("connect", () => {
-				console.log("tcp server: client socket connected");
+				log.info("tcp server: client socket connected");
 				emit(
 					tcpServerSocketConnected({
 						socket,
@@ -54,7 +58,7 @@ export const createTCPServerChannel = (serverName: string | null) => {
 				);
 			});
 			socket.on("close", () => {
-				console.log("tcp server: client disconnected");
+				log.info("tcp server: client disconnected");
 				emit(
 					tcpServerSocketClosed({
 						socket,
@@ -80,11 +84,11 @@ export const createTCPServerChannel = (serverName: string | null) => {
 
 		server
 			.on("listening", () => {
-				console.log("tcp server: listening", server.address());
+				log.info("tcp server: listening", server.address());
 				emit(tcpServerListening());
 			})
 			.on("error", (error) => {
-				console.log("tcp server error", error);
+				log.error("tcp server error", error);
 				emit(
 					tcpServerError({
 						error,
@@ -92,7 +96,7 @@ export const createTCPServerChannel = (serverName: string | null) => {
 				);
 			})
 			.on("close", () => {
-				console.log("tcp server: stopped (port released)");
+				log.warn("tcp server: stopped (port released)");
 				emit(setHostRunning(false));
 				emit(tcpServerClosed());
 			});

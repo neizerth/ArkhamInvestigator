@@ -5,6 +5,7 @@ import {
 	selectMediaUpdateTime,
 	selectMediaVersion,
 } from "@modules/signature/base/shared/lib";
+import { log } from "@shared/config";
 import { seconds } from "@shared/lib";
 import type { ReturnAwaited } from "@shared/model";
 import { put, retry, select, takeEvery } from "redux-saga/effects";
@@ -19,7 +20,7 @@ import { isOutdatedAppVersion, isUpdateNeeded } from "./lib";
 
 function* worker({ payload }: ReturnType<typeof checkAppUpdates>) {
 	const { notify } = payload;
-	console.log("checking app updates");
+	log.info("checking app updates");
 	try {
 		const maxTries = 3;
 		const { data }: ReturnAwaited<typeof getAppStatusData> = yield retry(
@@ -28,7 +29,6 @@ function* worker({ payload }: ReturnType<typeof checkAppUpdates>) {
 			getAppStatusData,
 		);
 
-		console.log("version", data.version);
 		const { minClientVersion } = data;
 
 		const outdated = isOutdatedAppVersion(minClientVersion);

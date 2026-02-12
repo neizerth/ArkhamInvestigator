@@ -1,3 +1,4 @@
+import { seconds } from "@shared/lib";
 import type { NetworkRole, NetworkType } from "../model";
 
 export const networkTypeIconMapping: Record<NetworkType, string> = {
@@ -18,3 +19,8 @@ export const TCP_PORT = 42424;
 export const TCP_HOST = "0.0.0.0";
 export const TCP_SERVICE_NAME = "arkham-investigator";
 export const TCP_SERVER_NAME = "ArkhamHost";
+
+export const TCP_CONFIRMATION_TIMEOUT = seconds(2);
+export const TCP_RETRY_DELAY = seconds(2);
+
+export const TCP_CONFIRMATION_ENABLED = false;

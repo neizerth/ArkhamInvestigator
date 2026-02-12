@@ -1,8 +1,6 @@
-import "react-native-get-random-values";
 import { createSlice } from "@reduxjs/toolkit";
 import { omit } from "ramda";
 import { createSliceState } from "redux-toolkit-helpers";
-import { v4 } from "uuid";
 import type { NetworkRole, NetworkType } from "../../model";
 
 export type NetworkState = {
@@ -21,7 +19,7 @@ export type NetworkState = {
 };
 
 const initialState: NetworkState = {
-	deviceNetworkId: v4(),
+	deviceNetworkId: "00000000-0000-0000-0000-000000000000",
 	hostRunning: false,
 	clientRunning: false,
 	networkType: "none",

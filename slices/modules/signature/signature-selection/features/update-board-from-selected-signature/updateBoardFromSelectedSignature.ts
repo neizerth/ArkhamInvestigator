@@ -10,7 +10,6 @@ import { selectSignatureSettingsByCode } from "@modules/signature/base/shared/li
 import { put, select, takeEvery } from "redux-saga/effects";
 import {
 	addSelectedSignature,
-	resetSignatureSelection,
 	selectReplaceSignature,
 	setReplaceSignature,
 } from "../../shared/lib";
@@ -81,7 +80,6 @@ function* worker({ payload }: ReturnType<typeof addSelectedSignature>) {
 	if (!replace) {
 		return;
 	}
-	yield put(resetSignatureSelection());
 	yield put(setReplaceSignature(false));
 	yield put(goBack());
 
