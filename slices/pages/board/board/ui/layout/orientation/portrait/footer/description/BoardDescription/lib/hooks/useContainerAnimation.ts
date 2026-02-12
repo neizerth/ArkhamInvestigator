@@ -25,7 +25,7 @@ type Options = {
 	onHide?: () => void;
 };
 
-const DELAY_OUT = 300;
+const DURATION = 300;
 
 export const useContainerAnimation = ({
 	offsetTop = 0,
@@ -50,32 +50,27 @@ export const useContainerAnimation = ({
 
 	const [zIndex, setZIndex] = useState(-1);
 
-	const fadeTimeout = useRef<NodeJS.Timeout | null>(null);
+	const showDescriptionRef = useRef(showDescription);
 
 	useEffect(() => {
-		if (fadeTimeout.current) {
-			clearTimeout(fadeTimeout.current);
+		showDescriptionRef.current = showDescription;
+		if (showDescription) {
+			setZIndex(5);
 		}
-		if (!showDescription) {
-			fadeTimeout.current = setTimeout(() => {
-				setZIndex(-1);
-			}, DELAY_OUT);
-			return;
-		}
-		setZIndex(5);
 	}, [showDescription]);
 
 	const onComplete = useCallback(() => {
-		if (showDescription) {
+		if (showDescriptionRef.current) {
 			onShow?.();
 			dispatch(descriptionShown());
 		} else {
+			setZIndex(-1);
 			onHide?.();
 			dispatch(descriptionHidden());
 		}
 
 		dispatch(setDescriptionTransition(false));
-	}, [showDescription, dispatch, onShow, onHide]);
+	}, [dispatch, onShow, onHide]);
 
 	const onStart = useCallback(() => {
 		dispatch(setDescriptionTransition(true));
@@ -89,10 +84,9 @@ export const useContainerAnimation = ({
 
 	const animatedStyle = useBooleanAnimation({
 		enabled: showDescription,
-		duration: 100,
+		duration: DURATION,
 		minValue,
 		maxValue,
-		delayOut: DELAY_OUT,
 		styleResolver(top) {
 			"worklet";
 			return {
