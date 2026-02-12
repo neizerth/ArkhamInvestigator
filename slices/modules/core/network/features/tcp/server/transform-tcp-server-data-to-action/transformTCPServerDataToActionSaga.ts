@@ -16,6 +16,12 @@ function* worker({ payload }: ReturnType<typeof tcpServerSocketDataReceived>) {
 			return;
 		}
 
+		console.log(
+			"server: recieved action",
+			tcpAction.type,
+			tcpAction.meta.messageId,
+		);
+
 		const { networkId } = tcpAction.meta;
 
 		setTCPClientSocket(networkId, socket);
@@ -32,11 +38,18 @@ function* worker({ payload }: ReturnType<typeof tcpServerSocketDataReceived>) {
 
 		yield put(action);
 
+		// Do not send confirmation for tcpActionReceived itself — otherwise loop and deadlock
+		if (tcpActionReceived.match(tcpAction)) {
+			return;
+		}
+
 		const { messageId } = tcpAction.meta;
 
 		yield put(
 			tcpActionReceived({
 				messageId,
+				type: action.type,
+				targetNetworkId: networkId,
 			}),
 		);
 	} catch (error) {
@@ -44,6 +57,6 @@ function* worker({ payload }: ReturnType<typeof tcpServerSocketDataReceived>) {
 	}
 }
 
-export function* transformServerTCPDataToActionSaga() {
+export function* transformTCPServerDataToActionSaga() {
 	yield takeEvery(tcpServerSocketDataReceived.match, worker);
 }

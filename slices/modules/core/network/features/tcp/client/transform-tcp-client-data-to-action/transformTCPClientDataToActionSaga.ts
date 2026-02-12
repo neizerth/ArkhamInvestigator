@@ -13,11 +13,16 @@ function* worker({ payload }: ReturnType<typeof tcpClientSocketDataReceived>) {
 
 	try {
 		const tcpAction = JSON.parse(data);
+
 		if (!isTCPIncomeAction(tcpAction)) {
 			return;
 		}
 
-		// const meta = tcpAction.meta
+		console.log(
+			"client: recieved action",
+			tcpAction.type,
+			tcpAction.meta.messageId,
+		);
 
 		const action = {
 			...tcpAction,
@@ -40,6 +45,7 @@ function* worker({ payload }: ReturnType<typeof tcpClientSocketDataReceived>) {
 		yield put(
 			tcpActionReceived({
 				messageId,
+				type: action.type,
 			}),
 		);
 	} catch (error) {

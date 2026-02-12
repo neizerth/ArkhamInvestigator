@@ -1,3 +1,4 @@
+import { omit } from "ramda";
 import { tcpActionReceived } from "../actions";
 import { isTCPIncomeAction } from "./isTCPIncomeAction";
 
@@ -9,5 +10,17 @@ export const filterTCPMessageRecieved =
 		if (!isTCPIncomeAction(action)) {
 			return false;
 		}
-		return action.payload.messageId === messageId;
+		const isValid = action.payload.messageId === messageId;
+		if (!isValid) {
+			console.log(
+				"INVALID action",
+				{
+					payload: action.payload,
+					meta: omit(["socket"], action.meta),
+				},
+				messageId,
+			);
+			return false;
+		}
+		return isValid;
 	};

@@ -1,8 +1,11 @@
 import { createAction } from "@reduxjs/toolkit";
 import { withRemoteMeta } from "../../../logic";
 
-type TcpActionReceivedPayload = {
+export type TcpActionReceivedPayload = {
 	messageId: string;
+	type: string;
+	/** Маршрутизация подтверждения на сокет отправителя (сервер → клиент). */
+	targetNetworkId?: string;
 };
 
 export const tcpActionReceived = createAction(

@@ -5,6 +5,7 @@ import type { ConnectionOptions } from "react-native-tcp-socket/lib/types/Socket
 import { eventChannel } from "redux-saga";
 import { TCP_PORT } from "../../../../shared/config";
 import {
+	clearTCPServerSocket,
 	setClientRunning,
 	setTCPServerSocket,
 	tcpClientSocketClosed,
@@ -22,7 +23,7 @@ export type TCPClientChannelAction =
 
 export const createTCPClientChannel = (host: string) => {
 	return eventChannel((emit) => {
-		// clearTCPServerSocket();
+		clearTCPServerSocket();
 
 		console.log("tcp client: event channel created");
 
@@ -39,22 +40,22 @@ export const createTCPClientChannel = (host: string) => {
 				"local",
 				socket.address(),
 			);
+			emit(setClientRunning(true));
 		});
 
 		setTCPServerSocket(socket);
 
 		socket.on("connect", () => {
 			log.info("tcp client: socket connected");
-			emit(setClientRunning(true));
 			emit(tcpClientSocketConnected());
 		});
 
 		socket.on("error", (error) => {
-			log.info("tcp client: socket error", error);
+			log.error("tcp client: socket error", error);
 			emit(tcpClientSocketError({ error }));
 		});
 		socket.on("close", () => {
-			log.info("tcp client: disconnected from host");
+			log.warn("tcp client: disconnected from host");
 			emit(setClientRunning(false));
 			emit(tcpClientSocketClosed());
 		});
@@ -67,7 +68,7 @@ export const createTCPClientChannel = (host: string) => {
 		});
 
 		return () => {
-			log.info("tcp client: event channel closed");
+			log.warn("tcp client: event channel closed");
 			emit(setClientRunning(false));
 			socket.destroy();
 		};

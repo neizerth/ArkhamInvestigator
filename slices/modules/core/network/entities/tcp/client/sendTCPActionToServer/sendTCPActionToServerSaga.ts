@@ -1,7 +1,8 @@
 import {
-	TCP_CONFIRMATION_ENABLED,
+	TCP_CONFIRMATION_MAX_RETRIES,
 	TCP_CONFIRMATION_TIMEOUT,
 	TCP_RETRY_DELAY,
+	TCP_SERVER_CONFIRMATION_ENABLED,
 } from "@modules/core/network/shared/config";
 import {
 	getTCPServerSocket,
@@ -12,8 +13,8 @@ import { log } from "@shared/config";
 import type { TakeableChannel } from "redux-saga";
 import {
 	actionChannel,
-	call,
 	delay,
+	fork,
 	put,
 	race,
 	take,
@@ -24,62 +25,77 @@ import { sendTCPActionToServer } from "./sendTCPActionToServer";
 
 type Action = ReturnType<typeof sendTCPActionToServer>;
 
-function* worker(action: Action): Generator {
-	const { payload } = action;
-	const socket = getTCPServerSocket();
+function* worker(actionArg: Action): Generator {
+	const { payload } = actionArg;
 
-	if (!socket) {
-		log.error("TCPServerSocket not found. Skipping action...");
-		return;
-	}
+	for (let attempt = 0; attempt <= TCP_CONFIRMATION_MAX_RETRIES; attempt++) {
+		const socket = getTCPServerSocket();
+		if (!socket) {
+			log.error("TCPServerSocket not found. Skipping action...");
+			return;
+		}
+		if (socket.destroyed) {
+			log.error("TCPServerSocket destroyed. Skipping action...");
+			return;
+		}
 
-	if (socket.destroyed) {
-		log.error("TCPServerSocket destroyed. Skipping action...");
-		return;
-	}
+		const messageId = v4();
 
-	const messageId = v4();
+		log.info("client: sending action", payload.action.type, messageId);
+		yield put(
+			sendTCPAction({
+				...payload,
+				socket,
+				messageId,
+			}),
+		);
 
-	yield put(
-		sendTCPAction({
-			...payload,
-			socket,
+		if (tcpActionReceived.match(payload.action)) {
+			return;
+		}
+
+		if (!TCP_SERVER_CONFIRMATION_ENABLED) {
+			return;
+		}
+
+		const filterAction = filterTCPMessageRecieved(messageId);
+
+		const { timeout }: { timeout?: boolean } = yield race({
+			recievied: take(filterAction),
+			timeout: delay(TCP_CONFIRMATION_TIMEOUT),
+		});
+
+		if (!timeout) {
+			log.info("client: server recieved", messageId);
+			return;
+		}
+
+		log.info(
+			"client: server timed out. Retrying...",
 			messageId,
-		}),
-	);
+			payload.action.type,
+			`(${attempt + 1}/${TCP_CONFIRMATION_MAX_RETRIES + 1})`,
+		);
 
-	if (tcpActionReceived.match(payload.action)) {
-		return;
+		if (attempt === TCP_CONFIRMATION_MAX_RETRIES) {
+			log.info("client: max retries reached, giving up", payload.action.type);
+			return;
+		}
+
+		yield delay(TCP_RETRY_DELAY);
 	}
-
-	if (!TCP_CONFIRMATION_ENABLED) {
-		return;
-	}
-
-	const filterAction = filterTCPMessageRecieved(messageId);
-
-	const { timeout }: { timeout?: boolean } = yield race({
-		recievied: take(filterAction),
-		timeout: delay(TCP_CONFIRMATION_TIMEOUT),
-	});
-
-	if (!timeout) {
-		log.info("client: server recieved", messageId);
-		return;
-	}
-
-	log.info("client: server timed out. Retrying...", payload.action.type);
-
-	yield delay(TCP_RETRY_DELAY);
-	yield call(worker, action);
 }
 
+/**
+ * actionChannel preserves order. Always fork(worker) — never call — so the channel
+ * is never blocked (ACKs can be taken immediately) → no deadlock.
+ */
 export function* sendTCPActionToServerSaga() {
 	const requestChan: TakeableChannel<Action> = yield actionChannel(
 		sendTCPActionToServer.match,
 	);
 	while (true) {
 		const action: Action = yield take(requestChan);
-		yield call(worker, action);
+		yield fork(worker, action);
 	}
 }

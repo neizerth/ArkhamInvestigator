@@ -16,6 +16,7 @@ function* worker({ payload }: ReturnType<typeof sendTCPAction>) {
 
 	const meta = omit(["remote"], action.meta);
 
+	// meta.messageId = envelope (this packet); action.payload is unchanged (e.g. payload.messageId for tcpActionReceived = id we confirm)
 	const json = JSON.stringify({
 		...action,
 		meta: {
