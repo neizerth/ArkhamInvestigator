@@ -27,15 +27,36 @@ type Action = ReturnType<typeof sendTCPActionToServer>;
 
 function* worker(actionArg: Action): Generator {
 	const { payload } = actionArg;
+	const isAck = tcpActionReceived.match(payload.action);
+
+	const socket = getTCPServerSocket();
+	if (!socket) {
+		log.error("TCPServerSocket not found. Skipping action...");
+		return;
+	}
+	if (socket.destroyed) {
+		log.error("TCPServerSocket destroyed. Skipping action...");
+		return;
+	}
+
+	if (isAck) {
+		// ACK: fire-and-forget — send once, never wait; frees the channel for next action
+		const messageId = v4();
+		log.info("client: sending action", payload.action.type, messageId);
+		yield put(
+			sendTCPAction({
+				...payload,
+				socket,
+				messageId,
+			}),
+		);
+		return;
+	}
 
 	for (let attempt = 0; attempt <= TCP_CONFIRMATION_MAX_RETRIES; attempt++) {
-		const socket = getTCPServerSocket();
-		if (!socket) {
-			log.error("TCPServerSocket not found. Skipping action...");
-			return;
-		}
-		if (socket.destroyed) {
-			log.error("TCPServerSocket destroyed. Skipping action...");
+		const s = getTCPServerSocket();
+		if (!s || s.destroyed) {
+			log.error("TCPServerSocket not available. Skipping action...");
 			return;
 		}
 
@@ -45,14 +66,10 @@ function* worker(actionArg: Action): Generator {
 		yield put(
 			sendTCPAction({
 				...payload,
-				socket,
+				socket: s,
 				messageId,
 			}),
 		);
-
-		if (tcpActionReceived.match(payload.action)) {
-			return;
-		}
 
 		if (!TCP_SERVER_CONFIRMATION_ENABLED) {
 			return;

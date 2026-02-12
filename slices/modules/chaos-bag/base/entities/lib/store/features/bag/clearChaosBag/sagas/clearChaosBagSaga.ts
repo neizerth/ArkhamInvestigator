@@ -5,7 +5,7 @@ import { put, takeEvery } from "redux-saga/effects";
 import { clearChaosBag } from "../clearChaosBag";
 import { modalActionId, modalId } from "../config";
 
-function* worker({ payload }: ReturnType<typeof clearChaosBag>) {
+function* worker() {
 	yield put(
 		openConfirm({
 			id: modalId,

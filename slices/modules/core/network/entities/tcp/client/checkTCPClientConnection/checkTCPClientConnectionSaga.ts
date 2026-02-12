@@ -37,8 +37,6 @@ function* worker() {
 		return;
 	}
 
-	console.log({ running });
-
 	yield put(startTCPClient({ host: hostIp }));
 }
 

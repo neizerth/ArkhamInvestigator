@@ -30,8 +30,8 @@ import { sendTCPActionToClient } from "./sendTCPActionToClient";
 type Action = ReturnType<typeof sendTCPActionToClient>;
 
 /**
- * Sends action to a single socket and waits for confirmation (if enabled).
- * Own messageId per socket so we wait for this specific client's ACK.
+ * Sends action to a single socket. For ACK (tcpActionReceived): fire-and-forget, no wait.
+ * For business actions: wait for confirmation with retries.
  */
 function* singleSocketWorker(
 	action: NetworkOutcomeAction<unknown>,
@@ -39,6 +39,21 @@ function* singleSocketWorker(
 ): Generator {
 	if (socket.destroyed) {
 		log.error("TCPClientSocket destroyed");
+		return;
+	}
+
+	const isAck = tcpActionReceived.match(action);
+
+	if (isAck) {
+		// ACK: send once, never wait — so we never block and never consume confirmations from the store
+		const messageId = v4();
+		yield put(
+			sendTCPAction({
+				action,
+				socket,
+				messageId,
+			}),
+		);
 		return;
 	}
 
@@ -52,10 +67,6 @@ function* singleSocketWorker(
 				messageId,
 			}),
 		);
-
-		if (tcpActionReceived.match(action)) {
-			return;
-		}
 
 		if (!TCP_CLIENT_CONFIRMATION_ENABLED) {
 			return;
@@ -97,6 +108,7 @@ function* worker(actionArg: Action): Generator {
 		payload.type === "single"
 			? [getTCPClientSocket(payload.networkId)]
 			: getTCPClientSockets();
+
 	const sockets = socketsRaw.filter(
 		(s): s is TcpSocket.Socket => s !== undefined && !s.destroyed,
 	);
@@ -112,8 +124,8 @@ function* worker(actionArg: Action): Generator {
 
 /**
  * actionChannel preserves processing order. We always fork(worker) — never call —
- * so the channel is never blocked. Otherwise ACKs (tcpActionReceived) would sit in
- * the queue behind a worker waiting for confirmation → deadlock.
+ * so the channel is never blocked. ACKs are fire-and-forget inside the worker,
+ * so they never run take() and never "steal" confirmations meant for business workers.
  */
 export function* sendTCPActionToClientSaga() {
 	const requestChan: TakeableChannel<Action> = yield actionChannel(
@@ -121,7 +133,8 @@ export function* sendTCPActionToClientSaga() {
 	);
 	while (true) {
 		const action: Action = yield take(requestChan);
-		// ACK or not: always fork so the next action (e.g. ACK from peer) can be taken immediately
+		// ACK: fork so it flies out immediately and does not block the channel.
+		// Business: fork too so channel stays unblocked; worker waits for confirmation inside.
 		yield fork(worker, action);
 	}
 }

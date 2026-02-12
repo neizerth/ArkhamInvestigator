@@ -40,13 +40,13 @@ export const createTCPClientChannel = (host: string) => {
 				"local",
 				socket.address(),
 			);
-			emit(setClientRunning(true));
 		});
 
 		setTCPServerSocket(socket);
 
 		socket.on("connect", () => {
 			log.info("tcp client: socket connected");
+			emit(setClientRunning(true));
 			emit(tcpClientSocketConnected());
 		});
 

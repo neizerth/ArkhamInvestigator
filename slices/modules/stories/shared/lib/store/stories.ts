@@ -1,3 +1,4 @@
+import { createRemoteReducer } from "@modules/core/network/shared/lib";
 import { createSlice } from "@reduxjs/toolkit";
 import { createSliceState } from "redux-toolkit-helpers";
 import type { Story } from "../../model";
@@ -24,9 +25,35 @@ const initialState: StoriesState = {
 	storyDifficultyId: null,
 };
 
+const state = createSliceState(initialState);
+
 export const stories = createSlice({
 	name: "stories",
-	...createSliceState(initialState),
+	...state,
+	reducers: {
+		...state.reducers,
+		setStoryCode: createRemoteReducer(state.reducers.setStoryCode, {
+			notify: "all",
+		}),
+		setReferenceCardCode: createRemoteReducer(
+			state.reducers.setReferenceCardCode,
+			{
+				notify: "all",
+			},
+		),
+		setShowReferenceBackText: createRemoteReducer(
+			state.reducers.setShowReferenceBackText,
+			{
+				notify: "all",
+			},
+		),
+		setStoryDifficultyId: createRemoteReducer(
+			state.reducers.setStoryDifficultyId,
+			{
+				notify: "all",
+			},
+		),
+	},
 });
 
 export const {
