@@ -1,5 +1,6 @@
 import type { InvestigatorBoard } from "@modules/board/base/shared/model/board";
 import * as boardHistoryReducers from "@modules/board/history/shared/lib/store/reducers";
+import { createRemoteReducer } from "@modules/core/network/shared/lib";
 import { createSlice } from "@reduxjs/toolkit";
 import { createSliceState } from "redux-toolkit-helpers";
 import * as baseReducers from "./features/reducers";
@@ -79,6 +80,51 @@ export const board = createSlice({
 		...state.reducers,
 		...baseReducers,
 		...boardHistoryReducers,
+		setDoom: createRemoteReducer(state.reducers.setDoom, {
+			notify: "all",
+		}),
+		setClues: createRemoteReducer(state.reducers.setClues, {
+			notify: "all",
+		}),
+		setResources: createRemoteReducer(state.reducers.setResources, {
+			notify: "all",
+		}),
+		setBoardInternal: createRemoteReducer(baseReducers.setBoardInternal, {
+			notify: "all",
+		}),
+		setBoardPartInternal: createRemoteReducer(
+			baseReducers.setBoardPartInternal,
+			{
+				notify: "all",
+			},
+		),
+		setBoardPropInternal: createRemoteReducer(
+			baseReducers.setBoardPropInternal,
+			{
+				notify: "all",
+			},
+		),
+		setBoardPropValueInternal: createRemoteReducer(
+			baseReducers.setBoardPropValueInternal,
+			{
+				notify: "all",
+			},
+		),
+		setBoardValuePartInternal: createRemoteReducer(
+			baseReducers.setBoardValuePartInternal,
+			{
+				notify: "all",
+			},
+		),
+		addInvestigatorBoard: createRemoteReducer(
+			baseReducers.addInvestigatorBoard,
+			{
+				notify: "all",
+			},
+		),
+		clearBoards: createRemoteReducer(baseReducers.clearBoards, {
+			notify: "all",
+		}),
 	},
 });
 

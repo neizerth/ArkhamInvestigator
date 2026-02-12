@@ -16,7 +16,12 @@ function* worker({ payload }: ReturnType<typeof setBoardProp>) {
 		return;
 	}
 
-	yield put(setBoardPropInternal(payload));
+	yield put(
+		setBoardPropInternal({
+			...payload,
+			boardId: board.id,
+		}),
+	);
 
 	const changePayload = {
 		...payload,

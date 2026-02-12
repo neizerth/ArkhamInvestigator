@@ -14,7 +14,12 @@ function* worker({ payload }: ReturnType<typeof setBoard>) {
 		return;
 	}
 
-	yield put(setBoardInternal(payload));
+	yield put(
+		setBoardInternal({
+			...payload,
+			boardId: board.id,
+		}),
+	);
 
 	yield put(
 		boardSet({

@@ -10,7 +10,6 @@ function* worker({ payload }: ReturnType<typeof cantAddMultipleChaosTokens>) {
 
 	yield put(
 		sendNotification({
-			local: true,
 			type: "error",
 			message: "chaosBag.cantAddToken",
 			data: {

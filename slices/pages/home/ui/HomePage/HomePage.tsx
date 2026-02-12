@@ -20,11 +20,13 @@ export const HomePage = () => {
 				enabled={startEnabled}
 			>{t`Single player`}</Button>
 
-			<Button
-				styleType="rounded"
-				enabled={startEnabled}
-				onPress={onMultiplayer}
-			>{t`Multiplayer`}</Button>
+			<ArtworksFragment>
+				<Button
+					styleType="rounded"
+					enabled={startEnabled}
+					onPress={onMultiplayer}
+				>{t`Multiplayer`}</Button>
+			</ArtworksFragment>
 
 			{onResume && (
 				<C.ResumeButton onPress={onResume}>{t`Continue`}</C.ResumeButton>

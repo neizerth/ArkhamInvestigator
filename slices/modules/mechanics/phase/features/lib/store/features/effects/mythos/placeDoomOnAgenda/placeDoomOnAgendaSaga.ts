@@ -11,6 +11,7 @@ function* worker() {
 
 	yield put(
 		sendNotification({
+			remote: true,
 			message: "mythos.doom",
 			data: {
 				doom,

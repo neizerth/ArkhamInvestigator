@@ -23,7 +23,7 @@ export const TCP_SERVER_NAME = "ArkhamHost";
 export const TCP_CONFIRMATION_TIMEOUT = seconds(5);
 export const TCP_RETRY_DELAY = seconds(5);
 /** Max retries per socket before giving up (stops infinite retry cycle). */
-export const TCP_CONFIRMATION_MAX_RETRIES = 30;
+export const TCP_CONFIRMATION_MAX_RETRIES = 5;
 
 export const TCP_SERVER_CONFIRMATION_ENABLED = true;
 export const TCP_CLIENT_CONFIRMATION_ENABLED = true;

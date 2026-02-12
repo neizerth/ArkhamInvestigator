@@ -15,7 +15,12 @@ function* worker({ payload }: ReturnType<typeof setBoardPart>) {
 		return;
 	}
 
-	yield put(setBoardPartInternal(payload));
+	yield put(
+		setBoardPartInternal({
+			...payload,
+			boardId: board.id,
+		}),
+	);
 
 	yield put(
 		boardPartChanged({

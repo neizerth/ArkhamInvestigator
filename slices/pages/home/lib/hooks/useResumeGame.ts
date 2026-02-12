@@ -1,13 +1,16 @@
 import { selectBoardsCount } from "@modules/board/base/shared/lib";
-import { usePage, usePageLoader } from "@modules/core/router/shared/lib";
-import { routes } from "@shared/config";
-import { useAppSelector } from "@shared/lib";
+import { usePageLoader } from "@modules/core/router/shared/lib";
+import { resumeGame } from "@modules/game/entities/resumeGame";
+import { useAppDispatch, useAppSelector } from "@shared/lib";
+import { useCallback } from "react";
 
 export const useResumeGame = () => {
+	const dispatch = useAppDispatch();
 	const boardsCount = useAppSelector(selectBoardsCount);
 	const hasPreviousGames = boardsCount > 0;
-	const goToPage = usePage();
-	const resume = goToPage(routes.board);
+	const resume = useCallback(() => {
+		dispatch(resumeGame());
+	}, [dispatch]);
 
 	const [onResume] = usePageLoader(resume);
 

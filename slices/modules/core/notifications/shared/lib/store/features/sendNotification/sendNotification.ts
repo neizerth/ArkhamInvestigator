@@ -4,7 +4,7 @@ import type { NotifyOptions } from "../../../notify";
 
 export type SendNotificationPayload = NotifyOptions &
 	Partial<PropsWithBoardId> & {
-		local?: boolean;
+		remote?: boolean;
 	};
 
 export const sendNotification =
