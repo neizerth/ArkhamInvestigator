@@ -53,7 +53,7 @@ function* worker(actionArg: Action): Generator {
 		return;
 	}
 
-	for (let attempt = 0; attempt <= TCP_CONFIRMATION_MAX_RETRIES; attempt++) {
+	for (let attempt = 0; attempt < TCP_CONFIRMATION_MAX_RETRIES; attempt++) {
 		const s = getTCPServerSocket();
 		if (!s || s.destroyed) {
 			log.error("TCPServerSocket not available. Skipping action...");

@@ -57,7 +57,7 @@ function* singleSocketWorker(
 		return;
 	}
 
-	for (let attempt = 0; attempt <= TCP_CONFIRMATION_MAX_RETRIES; attempt++) {
+	for (let attempt = 0; attempt < TCP_CONFIRMATION_MAX_RETRIES; attempt++) {
 		const messageId = v4();
 
 		yield put(
