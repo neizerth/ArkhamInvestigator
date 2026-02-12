@@ -11,11 +11,13 @@ export const getTCPServerSocket = (): TcpSocket.Socket | null =>
 	getGlobalValue<TcpSocket.Socket>(GLOBAL_HOST_SOCKET_KEY);
 
 export const clearTCPServerSocket = () => {
-	console.log("clearing tcp client socket");
 	const socket = getTCPServerSocket();
-	if (!socket) {
-		return;
+	if (socket) {
+		console.log("clearing tcp client socket");
+		socket.destroy();
 	}
-	socket.destroy();
 	setGlobalValue(GLOBAL_HOST_SOCKET_KEY, null);
 };
+
+// On HMR this module re-runs; clear stale client socket from previous instance
+clearTCPServerSocket();

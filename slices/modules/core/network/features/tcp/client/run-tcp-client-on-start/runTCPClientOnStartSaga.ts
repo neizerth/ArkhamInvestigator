@@ -3,10 +3,8 @@ import {
 	selectNetworkRole,
 	startTCPClient,
 } from "@modules/core/network/shared/lib";
-import { selectCurrentRoute } from "@modules/core/router/shared/lib";
 import { resumeGame } from "@modules/game/entities/resumeGame";
 import { selectGameStatus } from "@modules/game/shared/lib";
-import { routes } from "@shared/config";
 import { put, select, takeEvery } from "redux-saga/effects";
 
 function* worker() {
@@ -17,11 +15,7 @@ function* worker() {
 	if (gameStatus === "initial" || networkRole !== "client") {
 		return;
 	}
-	const currentRoute: ReturnType<typeof selectCurrentRoute> =
-		yield select(selectCurrentRoute);
-	if (currentRoute === routes.home) {
-		return;
-	}
+
 	const hostIp: ReturnType<typeof selectHostIp> = yield select(selectHostIp);
 	console.log("hostIp", hostIp);
 

@@ -82,11 +82,15 @@ export const setTCPServerInstance = (server: TcpSocket.Server | null) => {
 };
 
 export const clearTCPServerInstance = () => {
-	console.log("clearing tcp server instance");
 	const server = getTCPServerInstance();
 	if (!server) {
-		return false;
+		return;
 	}
+	console.log("clearing tcp server instance");
 	server.close();
 	setTCPServerInstance(null);
 };
+
+// On HMR this module re-runs; clear server and client sockets from previous instance
+clearTCPServerInstance();
+clearTCPClientSockets();

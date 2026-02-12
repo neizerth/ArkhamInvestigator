@@ -109,6 +109,7 @@ export const createTCPServerChannel = (serverName: string | null) => {
 
 		return () => {
 			clearTCPServerInstance();
+			clearTCPClientSockets();
 		};
 	});
 };
