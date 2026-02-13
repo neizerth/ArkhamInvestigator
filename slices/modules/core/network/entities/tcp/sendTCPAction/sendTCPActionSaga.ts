@@ -1,15 +1,18 @@
 import { selectDeviceNetworkId } from "@modules/core/network/shared/lib";
+import { log } from "@shared/config";
 import { omit } from "ramda";
 import { put, select, takeEvery } from "redux-saga/effects";
 import { sendTCPAction, sendTCPActionFailed } from "./sendTCPAction";
 
 function* worker({ payload }: ReturnType<typeof sendTCPAction>) {
+	log.info("Sending TCP action", payload.action.type);
 	const networkId: ReturnType<typeof selectDeviceNetworkId> = yield select(
 		selectDeviceNetworkId,
 	);
 	const { socket, action, messageId } = payload;
 
 	if (socket.destroyed) {
+		log.error("Socket destroyed. Skipping action...");
 		yield put(sendTCPActionFailed({ ...payload, type: "socket-destroyed" }));
 		return;
 	}
@@ -17,7 +20,8 @@ function* worker({ payload }: ReturnType<typeof sendTCPAction>) {
 	const meta = omit(["remote"], action.meta);
 
 	// meta.messageId = envelope (this packet); action.payload is unchanged (e.g. payload.messageId for tcpActionReceived = id we confirm)
-	const json = JSON.stringify({
+
+	const tcpAction = {
 		...action,
 		meta: {
 			...meta,
@@ -25,12 +29,13 @@ function* worker({ payload }: ReturnType<typeof sendTCPAction>) {
 			networkId,
 			source: "tcp",
 		},
-	});
+	};
 
 	try {
-		socket.write(json);
+		const json = JSON.stringify(tcpAction);
+		socket.write(`${json}\n`);
 	} catch (error) {
-		console.error("Error sending TCP action", error);
+		console.error("Error sending TCP action", error, tcpAction);
 		if (error instanceof Error) {
 			yield put(
 				sendTCPActionFailed({

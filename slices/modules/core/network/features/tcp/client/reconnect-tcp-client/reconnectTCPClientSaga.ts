@@ -1,12 +1,9 @@
-import {
-	selectHostIp,
-	startTCPClient,
-	tcpClientSocketClosed,
-} from "@modules/core/network/shared/lib";
+import { restartTCPClient } from "@modules/core/network/entities/tcp/client/restartTCPClient";
+import { tcpClientSocketClosed } from "@modules/core/network/shared/lib";
 import { selectGameMode, selectGameStatus } from "@modules/game/shared/lib";
 import { put, select, takeEvery } from "redux-saga/effects";
 
-function* worker({ payload }: ReturnType<typeof tcpClientSocketClosed>) {
+function* worker() {
 	const gameMode: ReturnType<typeof selectGameMode> =
 		yield select(selectGameMode);
 	if (gameMode !== "multiplayer") {
@@ -14,12 +11,11 @@ function* worker({ payload }: ReturnType<typeof tcpClientSocketClosed>) {
 	}
 	const gameStatus: ReturnType<typeof selectGameStatus> =
 		yield select(selectGameStatus);
-	const hostIp: ReturnType<typeof selectHostIp> = yield select(selectHostIp);
-	if (gameStatus === "initial" || !hostIp) {
+	if (gameStatus === "initial") {
 		return;
 	}
 
-	yield put(startTCPClient({ host: hostIp }));
+	yield put(restartTCPClient());
 }
 
 export function* reconnectTCPClientSaga() {

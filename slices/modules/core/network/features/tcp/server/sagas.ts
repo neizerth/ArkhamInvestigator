@@ -4,6 +4,7 @@ import { disconnectTCPClientSaga } from "./disconnect-tcp-client/disconnectTCPCl
 import { restartTCPServerOnNicknameChangeSaga } from "./restart-tcp-server-on-nickname-change/restartTCPServerOnNicknameChangeSaga";
 import { runTCPServerOnNetworkRoleChangeSaga } from "./run-tcp-server-on-network-role-change/runTCPServerOnNetworkRoleChangeSaga";
 import { runTCPServerOnAppResumeSaga } from "./run-tcp-server-on-resume/runTCPServerOnAppResumeSaga";
+import { stopTCPServerOnHomeSaga } from "./stop-tcp-server-on-home/stopTCPServerOnHomeSaga";
 import { transformTCPServerDataToActionSaga } from "./transform-tcp-server-data-to-action/transformTCPServerDataToActionSaga";
 
 export function* tcpServerSagas() {
@@ -13,4 +14,5 @@ export function* tcpServerSagas() {
 	yield spawn(transformTCPServerDataToActionSaga);
 	yield spawn(connectTCPClientSaga);
 	yield spawn(disconnectTCPClientSaga);
+	yield spawn(stopTCPServerOnHomeSaga);
 }

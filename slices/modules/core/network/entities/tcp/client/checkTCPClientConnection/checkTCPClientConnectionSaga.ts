@@ -1,15 +1,14 @@
 import {
+	getTCPServerSocket,
 	selectClientRunning,
-	selectHostIp,
 	selectNetworkRole,
-} from "@modules/core/network/shared/lib";
-import {
 	sendNetworkKeepAlive,
-	startTCPClient,
 } from "@modules/core/network/shared/lib";
 import { selectGameStatus } from "@modules/game/shared/lib";
+import { selectIsClientPlaying } from "@modules/multiplayer/entities/lib";
 import { log } from "@shared/config";
 import { put, select, takeEvery } from "redux-saga/effects";
+import { restartTCPClient } from "../restartTCPClient";
 import { checkTCPClientConnection } from "./checkTCPClientConnection";
 
 function* worker() {
@@ -25,19 +24,28 @@ function* worker() {
 	}
 	const running: ReturnType<typeof selectClientRunning> =
 		yield select(selectClientRunning);
-	const hostIp: ReturnType<typeof selectHostIp> = yield select(selectHostIp);
 
-	if (running) {
+	const isClientPlaying: ReturnType<typeof selectIsClientPlaying> =
+		yield select(selectIsClientPlaying);
+
+	if (!running) {
+		log.info("Client not running, restarting");
+		yield put(restartTCPClient());
+		return;
+	}
+
+	if (!isClientPlaying) {
 		log.info("Sending network keep alive");
 		yield put(sendNetworkKeepAlive());
 		return;
 	}
-	if (!hostIp) {
-		log.error("No host IP found");
+
+	const socket = getTCPServerSocket();
+	if (!socket || socket.destroyed) {
+		log.info("Client socket dead (e.g. after HMR), reconnecting");
+		yield put(restartTCPClient());
 		return;
 	}
-
-	yield put(startTCPClient({ host: hostIp }));
 }
 
 export function* checkTCPClientConnectionSaga() {

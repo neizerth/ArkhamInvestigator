@@ -71,7 +71,7 @@ export const dispatchTCPServerAction = <T>(
 		return;
 	}
 
-	socket.write(JSON.stringify(data));
+	socket.write(`${JSON.stringify(data)}\n`);
 };
 
 export const getTCPServerInstance = (): TcpSocket.Server | null =>

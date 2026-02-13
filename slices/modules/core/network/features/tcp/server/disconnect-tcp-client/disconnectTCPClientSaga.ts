@@ -12,12 +12,9 @@ function* worker({ payload }: ReturnType<typeof tcpServerSocketClosed>) {
 
 	yield call(clearTCPClientSocket, socket);
 
-	if (!networkId) {
-		console.log("Network ID not found");
-		return;
+	if (networkId) {
+		yield put(removeNetworkClient(networkId));
 	}
-
-	yield put(removeNetworkClient(networkId));
 }
 
 export function* disconnectTCPClientSaga() {

@@ -15,7 +15,7 @@ function* worker() {
 	const selected = selectedSignatures ?? [];
 
 	const boards = selected.map((selection, index) => {
-		const { signature } = selection;
+		const { signature, networkId } = selection;
 		const { code } = signature;
 		const signatureSettings = settings?.[code] || {};
 
@@ -25,6 +25,7 @@ function* worker() {
 			...selection,
 			...signatureSettings,
 			investigator: signature,
+			networkId,
 			id,
 			index,
 		});

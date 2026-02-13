@@ -6,6 +6,7 @@ import {
 } from "@modules/core/network/shared/config";
 import {
 	filterTCPMessageRecieved,
+	stopTCPServer,
 	tcpActionReceived,
 } from "@modules/core/network/shared/lib";
 import type { NetworkOutcomeAction } from "@modules/core/network/shared/model";
@@ -15,6 +16,7 @@ import type { TakeableChannel } from "redux-saga";
 import {
 	actionChannel,
 	all,
+	call,
 	delay,
 	fork,
 	put,
@@ -86,7 +88,7 @@ function* singleSocketWorker(
 			"server: message timed out. Retrying...",
 			messageId,
 			action.type,
-			`(${attempt + 1}/${TCP_CONFIRMATION_MAX_RETRIES + 1})`,
+			`(${attempt + 1}/${TCP_CONFIRMATION_MAX_RETRIES})`,
 		);
 
 		if (attempt === TCP_CONFIRMATION_MAX_RETRIES) {
@@ -114,19 +116,34 @@ function* worker(actionArg: Action): Generator {
 	yield all(tasks);
 }
 
-/**
- * actionChannel preserves processing order. We always fork(worker) — never call —
- * so the channel is never blocked. ACKs are fire-and-forget inside the worker,
- * so they never run take() and never "steal" confirmations meant for business workers.
- */
-export function* sendTCPActionToClientSaga() {
-	const requestChan: TakeableChannel<Action> = yield actionChannel(
-		sendTCPActionToClient.match,
-	);
+type CloseableChannel<T> = TakeableChannel<T> & { close: () => void };
+
+function* processRequests(requestChan: CloseableChannel<Action>): Generator {
 	while (true) {
 		const action: Action = yield take(requestChan);
-		// ACK: fork so it flies out immediately and does not block the channel.
-		// Business: fork too so channel stays unblocked; worker waits for confirmation inside.
+		if (!action) return;
 		yield fork(worker, action);
+	}
+}
+
+function* waitDisconnectAndClose(
+	requestChan: CloseableChannel<Action>,
+): Generator {
+	yield take(stopTCPServer.match);
+	requestChan.close();
+}
+
+/**
+ * actionChannel preserves order. On stopTCPServer, channel is closed to clear queue.
+ */
+export function* sendTCPActionToClientSaga() {
+	while (true) {
+		const requestChan: CloseableChannel<Action> = yield actionChannel(
+			sendTCPActionToClient.match,
+		);
+		yield all([
+			call(processRequests, requestChan),
+			call(waitDisconnectAndClose, requestChan),
+		]);
 	}
 }

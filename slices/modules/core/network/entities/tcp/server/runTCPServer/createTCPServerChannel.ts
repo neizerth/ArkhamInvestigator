@@ -27,7 +27,8 @@ export type TCPServerChannelAction =
 	| ReturnType<typeof tcpServerSocketClosed>
 	| ReturnType<typeof tcpServerSocketConnected>
 	| ReturnType<typeof tcpServerSocketError>
-	| ReturnType<typeof tcpServerListening>;
+	| ReturnType<typeof tcpServerListening>
+	| ReturnType<typeof tcpServerClosed>;
 
 // On HMR this module re-runs; close server from previous instance
 clearTCPServerInstance();

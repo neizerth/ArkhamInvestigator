@@ -1,3 +1,4 @@
+import { selectDeviceNetworkId } from "@modules/core/network/shared/lib";
 import { goToPage } from "@modules/core/router/shared/lib";
 import {
 	addSelectedSignature,
@@ -23,6 +24,10 @@ function* worker({ payload }: ReturnType<typeof toggleSelectedSignature>) {
 
 	const replaceCode: ReturnType<typeof selectReplaceCode> =
 		yield select(selectReplaceCode);
+
+	const networkId: ReturnType<typeof selectDeviceNetworkId> = yield select(
+		selectDeviceNetworkId,
+	);
 
 	const withCode = propEq(code, "code");
 	const hasCode = includesBy(withCode, selected);
@@ -53,6 +58,7 @@ function* worker({ payload }: ReturnType<typeof toggleSelectedSignature>) {
 		const selection = {
 			...item,
 			id: v4(),
+			networkId,
 		};
 		yield put(addSelectedSignature(selection));
 		return;
@@ -70,6 +76,7 @@ function* worker({ payload }: ReturnType<typeof toggleSelectedSignature>) {
 				skin: null,
 				image: signature.image,
 				signatureGroupId: group.id,
+				networkId,
 			}),
 		);
 

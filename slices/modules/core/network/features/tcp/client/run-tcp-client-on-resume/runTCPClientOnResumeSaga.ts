@@ -26,6 +26,6 @@ function* worker() {
 	yield put(startTCPClient({ host: hostIp }));
 }
 
-export function* runTCPClientOnStartSaga() {
+export function* runTCPClientOnResumeSaga() {
 	yield takeEvery(resumeGame.match, worker);
 }

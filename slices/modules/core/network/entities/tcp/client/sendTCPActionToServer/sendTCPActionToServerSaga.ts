@@ -6,6 +6,7 @@ import {
 } from "@modules/core/network/shared/config";
 import {
 	getTCPServerSocket,
+	stopTCPClient,
 	tcpActionReceived,
 } from "@modules/core/network/shared/lib";
 import { filterTCPMessageRecieved } from "@modules/core/network/shared/lib";
@@ -13,6 +14,8 @@ import { log } from "@shared/config";
 import type { TakeableChannel } from "redux-saga";
 import {
 	actionChannel,
+	all,
+	call,
 	delay,
 	fork,
 	put,
@@ -30,12 +33,12 @@ function* worker(actionArg: Action): Generator {
 	const isAck = tcpActionReceived.match(payload.action);
 
 	const socket = getTCPServerSocket();
-	if (!socket) {
-		log.error("TCPServerSocket not found. Skipping action...");
-		return;
-	}
-	if (socket.destroyed) {
-		log.error("TCPServerSocket destroyed. Skipping action...");
+	if (!socket || socket.destroyed) {
+		log.error(
+			socket
+				? "TCPServerSocket destroyed. Skipping action..."
+				: "TCPServerSocket not found. Skipping action...",
+		);
 		return;
 	}
 
@@ -91,7 +94,7 @@ function* worker(actionArg: Action): Generator {
 			"client: server timed out. Retrying...",
 			messageId,
 			payload.action.type,
-			`(${attempt + 1}/${TCP_CONFIRMATION_MAX_RETRIES + 1})`,
+			`(${attempt + 1}/${TCP_CONFIRMATION_MAX_RETRIES})`,
 		);
 
 		if (attempt === TCP_CONFIRMATION_MAX_RETRIES) {
@@ -103,16 +106,42 @@ function* worker(actionArg: Action): Generator {
 	}
 }
 
+type CloseableChannel<T> = TakeableChannel<T> & { close: () => void };
+
+function* processRequests(requestChan: CloseableChannel<Action>): Generator {
+	while (true) {
+		log.info("client: processing request");
+		const action: Action = yield take(requestChan);
+		if (!action) {
+			log.info("client: no action to process");
+			return;
+		}
+		yield fork(worker, action);
+	}
+}
+
+function* waitDisconnectAndClose(
+	requestChan: CloseableChannel<Action>,
+): Generator {
+	log.info("client: waiting for stopTCPClient");
+	yield take(stopTCPClient.match); //
+	log.info("client: disconnecting TCP client");
+	requestChan.close();
+}
+
 /**
- * actionChannel preserves order. Always fork(worker) — never call — so the channel
- * is never blocked (ACKs can be taken immediately) → no deadlock.
+ * actionChannel preserves order. On stopTCPClient, channel is closed to clear queue.
+ * Loop creates a new queue after disconnect so client can send again on reconnect.
  */
 export function* sendTCPActionToServerSaga() {
-	const requestChan: TakeableChannel<Action> = yield actionChannel(
-		sendTCPActionToServer.match,
-	);
 	while (true) {
-		const action: Action = yield take(requestChan);
-		yield fork(worker, action);
+		const requestChan: CloseableChannel<Action> = yield actionChannel(
+			sendTCPActionToServer.match,
+		);
+		yield all([
+			call(processRequests, requestChan),
+			call(waitDisconnectAndClose, requestChan),
+		]);
+		log.info("client: starting new queue");
 	}
 }

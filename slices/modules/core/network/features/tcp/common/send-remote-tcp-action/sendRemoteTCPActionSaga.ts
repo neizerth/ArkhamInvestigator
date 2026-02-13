@@ -3,11 +3,17 @@ import { sendTCPActionToClient } from "@modules/core/network/entities/tcp/server
 import {
 	selectHostIp,
 	selectNetworkRole,
+	sendRemoteAction,
 } from "@modules/core/network/shared/lib";
-import type { NetworkOutcomeAction } from "@modules/core/network/shared/model";
-import { isAction } from "@reduxjs/toolkit";
+import type {
+	NetworkOutcomeAction,
+	NetworkOutcomeActionMeta,
+} from "@modules/core/network/shared/model";
+import { type PayloadAction, isAction } from "@reduxjs/toolkit";
 import { log } from "@shared/config";
 import { hasProp } from "@shared/lib";
+import { omit } from "ramda";
+import type TcpSocket from "react-native-tcp-socket";
 import { put, select, takeEvery } from "redux-saga/effects";
 
 const filterAction = (
@@ -25,10 +31,15 @@ const filterAction = (
 	return Boolean(action.meta.remote);
 };
 
-function* worker(action: NetworkOutcomeAction<unknown>) {
+type Meta = NetworkOutcomeActionMeta & {
+	socket?: TcpSocket.Socket;
+};
+
+function* actionWorker(action: PayloadAction<unknown, string, Meta>) {
 	const { meta } = action;
 
 	if (meta.notify === "self") {
+		log.info("Self action received. Skipping...");
 		return;
 	}
 
@@ -38,6 +49,7 @@ function* worker(action: NetworkOutcomeAction<unknown>) {
 	const hostIp: ReturnType<typeof selectHostIp> = yield select(selectHostIp);
 
 	if (!role) {
+		log.info("No network role found. Skipping...");
 		return;
 	}
 
@@ -54,14 +66,26 @@ function* worker(action: NetworkOutcomeAction<unknown>) {
 	}
 
 	const actionCreator = isHost ? sendTCPActionToClient : sendTCPActionToServer;
+	log.info("Sending action to", action.type);
+
+	const remoteAction = {
+		...action,
+		meta: omit(["socket"], meta),
+	};
 
 	yield put(
 		actionCreator({
-			action,
+			action: remoteAction,
 		}),
 	);
 }
 
+function* remoteActionWorker({ payload }: ReturnType<typeof sendRemoteAction>) {
+	const { action } = payload;
+	yield put(action);
+}
+
 export function* sendRemoteTCPActionSaga() {
-	yield takeEvery(filterAction, worker);
+	yield takeEvery(filterAction, actionWorker);
+	yield takeEvery(sendRemoteAction.match, remoteActionWorker);
 }

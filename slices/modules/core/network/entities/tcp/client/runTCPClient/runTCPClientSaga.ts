@@ -1,5 +1,16 @@
-import { call, cancelled, put, race, take } from "redux-saga/effects";
-import { startTCPClient, stopTCPClient } from "../../../../shared/lib";
+import {
+	call,
+	cancelled,
+	put,
+	race,
+	take,
+	takeLatest,
+} from "redux-saga/effects";
+import {
+	startTCPClient,
+	stopTCPClient,
+	tcpClientSocketClosed,
+} from "../../../../shared/lib";
 import {
 	type TCPClientChannelAction,
 	createTCPClientChannel,
@@ -16,6 +27,9 @@ function* worker({ payload }: ReturnType<typeof startTCPClient>) {
 		while (true) {
 			const action: TCPClientChannelAction = yield take(channel);
 			yield put(action);
+			if (tcpClientSocketClosed.match(action)) {
+				return;
+			}
 		}
 	} finally {
 		const isCancelled: boolean = yield cancelled();
@@ -25,14 +39,15 @@ function* worker({ payload }: ReturnType<typeof startTCPClient>) {
 	}
 }
 
+function* runWorkerWithCancel(
+	action: ReturnType<typeof startTCPClient>,
+): Generator {
+	yield race({
+		task: call(worker, action),
+		cancel: take(stopTCPClient.match),
+	});
+}
+
 export function* runTCPClientSaga() {
-	while (true) {
-		const action: ReturnType<typeof startTCPClient> = yield take(
-			startTCPClient.match,
-		);
-		yield race({
-			task: call(worker, action),
-			cancel: take(stopTCPClient.match),
-		});
-	}
+	yield takeLatest(startTCPClient.match, runWorkerWithCancel);
 }

@@ -1,6 +1,10 @@
-import { createRemoteAction } from "@modules/core/network/shared/lib";
+import {
+	createRemoteAction,
+	isTCPOutcomeAction,
+	sendRemoteAction,
+} from "@modules/core/network/shared/lib";
 import { sendNotification } from "@modules/core/notifications/shared/lib";
-import { takeEvery } from "redux-saga/effects";
+import { put, takeEvery } from "redux-saga/effects";
 
 const filterAction = (
 	action: unknown,
@@ -8,14 +12,23 @@ const filterAction = (
 	if (!sendNotification.match(action)) {
 		return false;
 	}
-	return action.payload.remote === true;
+	if (action.payload.remote !== true) {
+		return false;
+	}
+	// Skip actions received from network — avoid re-broadcast loop
+	return isTCPOutcomeAction(action);
 };
 
 function* worker(action: ReturnType<typeof sendNotification>) {
-	const remoteAction = createRemoteAction(action);
-	// yield put(sendRemoteTCPActionSaga(remoteAction));
-	void remoteAction;
-	yield undefined;
+	const remoteAction = createRemoteAction(action, {
+		notify: "all",
+	});
+
+	yield put(
+		sendRemoteAction({
+			action: remoteAction,
+		}),
+	);
 }
 
 export function* syncRemoteNotificationsSaga() {

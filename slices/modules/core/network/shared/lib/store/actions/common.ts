@@ -1,5 +1,6 @@
 import type { NetInfoState } from "@react-native-community/netinfo";
 import { createAction } from "@reduxjs/toolkit";
+import type { NetworkOutcomeAction } from "../../../model";
 import { withRemoteMeta } from "../../logic";
 
 export const networkInfoUpdated =
@@ -21,4 +22,12 @@ export const sendNetworkKeepAlive = createAction(
 	withRemoteMeta({
 		notify: "host",
 	}),
+);
+
+type SendRemoteActionPayload = {
+	action: NetworkOutcomeAction<unknown>;
+};
+
+export const sendRemoteAction = createAction<SendRemoteActionPayload>(
+	"network/sendRemoteAction",
 );

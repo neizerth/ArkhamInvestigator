@@ -15,7 +15,10 @@ export const useTCPServices = (intervalMs = 1000) => {
 		const work = () => {
 			const services = zeroconf.getServices();
 			const serviceList = Object.values(services).filter(
-				(service) => service.name !== nickname,
+				(service) =>
+					service.addresses &&
+					service.addresses.length > 0 &&
+					service.name !== nickname,
 			);
 			setServices(serviceList);
 		};

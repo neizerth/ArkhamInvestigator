@@ -1,4 +1,6 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import type { Task } from "redux-saga";
+
 const createSagaMiddleware = require("redux-saga").default;
 import { createMigrate, persistReducer, persistStore } from "redux-persist";
 
@@ -24,6 +26,8 @@ const reducer = persistReducer(
 	rootReducer,
 );
 
+let sagaTask: Task | null = null;
+
 export const createStore = () => {
 	const sagaMiddleware = createSagaMiddleware();
 	const store = configureStore({
@@ -37,7 +41,12 @@ export const createStore = () => {
 			getDefaultEnhancers().concat(devToolsEnhancer()),
 	});
 
-	sagaMiddleware.run(rootSaga);
+	if (sagaTask) {
+		console.log("HMR: Stopping old sagas...");
+		sagaTask.cancel();
+	}
+
+	sagaTask = sagaMiddleware.run(rootSaga);
 
 	const storePersistor = persistStore(store);
 

@@ -3,6 +3,7 @@ import {
 	selectNickname,
 	startTCPServer,
 	stopTCPServer,
+	tcpServerClosed,
 } from "../../../../shared/lib";
 import {
 	type TCPServerChannelAction,
@@ -22,6 +23,9 @@ function* worker() {
 		while (true) {
 			const action: TCPServerChannelAction = yield take(channel); // Wait for events from TCP
 			yield put(action); // Forward event to Redux Store
+			if (tcpServerClosed.match(action)) {
+				return;
+			}
 		}
 	} finally {
 		// Runs when the saga is cancelled

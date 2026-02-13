@@ -19,5 +19,12 @@ export const clearTCPServerSocket = () => {
 	setGlobalValue(GLOBAL_HOST_SOCKET_KEY, null);
 };
 
+/** Clears global ref only if it still points to this socket (call after socket.destroy()). */
+export const clearTCPServerSocketIfMatches = (socket: TcpSocket.Socket) => {
+	if (getTCPServerSocket() === socket) {
+		setGlobalValue(GLOBAL_HOST_SOCKET_KEY, null);
+	}
+};
+
 // On HMR this module re-runs; clear stale client socket from previous instance
 clearTCPServerSocket();
