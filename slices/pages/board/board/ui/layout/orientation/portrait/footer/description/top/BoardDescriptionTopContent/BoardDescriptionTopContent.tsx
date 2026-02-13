@@ -2,9 +2,14 @@ import {
 	selectShowDescription,
 	setShowDescription,
 } from "@modules/board/base/shared/lib";
-import { useAppDispatch, useAppSelector } from "@shared/lib";
-import { useCallback, useEffect, useRef, useState } from "react";
+import {
+	useAppDispatch,
+	useAppSelector,
+	useMountedFadeAnimation,
+} from "@shared/lib";
+import { useCallback } from "react";
 import type { ViewProps } from "react-native";
+import Animated from "react-native-reanimated";
 import * as C from "./BoardDescriptionTopContent.components";
 
 export type BoardDescriptionTopContentProps = ViewProps;
@@ -13,21 +18,12 @@ export const BoardDescriptionTopContent = (
 	props: BoardDescriptionTopContentProps,
 ) => {
 	const dispatch = useAppDispatch();
-	const defaultShow = useAppSelector(selectShowDescription);
-	const showTimer = useRef<NodeJS.Timeout>(null);
+	const descriptionShown = useAppSelector(selectShowDescription);
 
-	const [show, setShow] = useState(false);
-
-	useEffect(() => {
-		if (showTimer.current) {
-			clearTimeout(showTimer.current);
-		}
-		if (defaultShow) {
-			showTimer.current = setTimeout(() => setShow(true), 350);
-			return;
-		}
-		setShow(false);
-	}, [defaultShow]);
+	const { mounted, fadeStyle, pointerEvents } = useMountedFadeAnimation({
+		show: descriptionShown,
+		duration: 300,
+	});
 
 	const hideDescription = useCallback(() => {
 		dispatch(setShowDescription(false));
@@ -35,12 +31,12 @@ export const BoardDescriptionTopContent = (
 
 	return (
 		<C.Container {...props} style={[props.style]}>
-			{show && (
-				<>
+			{mounted && (
+				<Animated.View style={fadeStyle} pointerEvents={pointerEvents}>
 					<C.ExpandArea onPress={hideDescription} />
 					<C.Secondary />
 					<C.TopMenu />
-				</>
+				</Animated.View>
 			)}
 		</C.Container>
 	);
