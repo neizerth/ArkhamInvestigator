@@ -8,7 +8,7 @@ import {
 	getTCPServerSocket,
 	tcpActionReceived,
 } from "@modules/core/network/shared/lib";
-import { filterTCPMessageRecieved } from "@modules/core/network/shared/lib/store/util/filterTCPMessageRecieved";
+import { filterTCPMessageRecieved } from "@modules/core/network/shared/lib";
 import { log } from "@shared/config";
 import type { TakeableChannel } from "redux-saga";
 import {

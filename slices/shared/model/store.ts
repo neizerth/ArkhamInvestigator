@@ -51,3 +51,12 @@ export type ReducerPayload<R> = R extends (
 		? P
 		: never
 	: never;
+
+export type ActionWithMeta<
+	T extends string,
+	M = object,
+	P = unknown,
+> = Action<T> & {
+	payload?: P;
+	meta?: M;
+};

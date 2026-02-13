@@ -1,8 +1,8 @@
-import { appStarted } from "@modules/core/app/shared/lib";
 import {
 	selectNetworkRole,
 	startTCPServer,
 } from "@modules/core/network/shared/lib";
+import { resumeGame } from "@modules/game/entities/resumeGame";
 import { selectGameMode, selectGameStatus } from "@modules/game/shared/lib";
 import { put, select, takeEvery } from "redux-saga/effects";
 
@@ -24,6 +24,6 @@ function* worker() {
 	yield put(startTCPServer());
 }
 
-export function* runTCPServerOnAppStartSaga() {
-	yield takeEvery(appStarted.match, worker);
+export function* runTCPServerOnAppResumeSaga() {
+	yield takeEvery(resumeGame.match, worker);
 }

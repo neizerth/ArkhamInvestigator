@@ -6,6 +6,7 @@ export type SendTCPActionToClientPayload = {
 } & (
 	| {
 			type?: "all";
+			except?: string[];
 	  }
 	| {
 			type: "single";

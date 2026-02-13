@@ -1,4 +1,4 @@
-import { tcpActionReceived } from "../actions";
+import { tcpActionReceived } from "../../actions";
 import { isTCPIncomeAction } from "./isTCPIncomeAction";
 
 export const filterTCPMessageRecieved =

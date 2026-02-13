@@ -1,4 +1,7 @@
+import { sendTCPActionToClient } from "@modules/core/network/entities/tcp/server/sendTCPActionToClient/sendTCPActionToClient";
 import {
+	createRemoteAction,
+	createTCPIncomeAction,
 	isTCPIncomeAction,
 	setTCPClientSocket,
 	tcpActionReceived,
@@ -26,15 +29,7 @@ function* worker({ payload }: ReturnType<typeof tcpServerSocketDataReceived>) {
 
 		setTCPClientSocket(networkId, socket);
 
-		const action = {
-			...tcpAction,
-			meta: {
-				...tcpAction.meta,
-				notify: "self",
-				source: "tcp",
-				socket,
-			},
-		};
+		const action = createTCPIncomeAction(tcpAction, socket);
 
 		yield put(action);
 
@@ -52,6 +47,18 @@ function* worker({ payload }: ReturnType<typeof tcpServerSocketDataReceived>) {
 				targetNetworkId: networkId,
 			}),
 		);
+
+		// forward action to all clients except the one that sent it
+		if (tcpAction.meta.notify === "all") {
+			const remoteAction = createRemoteAction(action);
+			yield put(
+				sendTCPActionToClient({
+					action: remoteAction,
+					type: "all",
+					except: [networkId],
+				}),
+			);
+		}
 	} catch (error) {
 		console.error("Error parsing TCP data", error);
 	}

@@ -5,11 +5,9 @@ import {
 	TCP_RETRY_DELAY,
 } from "@modules/core/network/shared/config";
 import {
-	getTCPClientSocket,
-	getTCPClientSockets,
+	filterTCPMessageRecieved,
 	tcpActionReceived,
 } from "@modules/core/network/shared/lib";
-import { filterTCPMessageRecieved } from "@modules/core/network/shared/lib/store/util/filterTCPMessageRecieved";
 import type { NetworkOutcomeAction } from "@modules/core/network/shared/model";
 import { log } from "@shared/config";
 import type TcpSocket from "react-native-tcp-socket";
@@ -25,6 +23,7 @@ import {
 } from "redux-saga/effects";
 import { v4 } from "uuid";
 import { sendTCPAction } from "../../sendTCPAction";
+import { getPayloadClientSockets } from "./lib";
 import { sendTCPActionToClient } from "./sendTCPActionToClient";
 
 type Action = ReturnType<typeof sendTCPActionToClient>;
@@ -104,14 +103,7 @@ function* worker(actionArg: Action): Generator {
 	const { action } = payload;
 
 	// Fresh sockets (handles reconnects / destroyed sockets)
-	const socketsRaw =
-		payload.type === "single"
-			? [getTCPClientSocket(payload.networkId)]
-			: getTCPClientSockets();
-
-	const sockets = socketsRaw.filter(
-		(s): s is TcpSocket.Socket => s !== undefined && !s.destroyed,
-	);
+	const sockets = getPayloadClientSockets(payload);
 
 	log.info("Sending action to clients", action.type, sockets.length);
 

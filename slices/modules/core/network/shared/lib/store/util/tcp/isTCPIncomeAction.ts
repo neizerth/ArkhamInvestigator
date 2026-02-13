@@ -1,7 +1,7 @@
 import { isAction } from "@reduxjs/toolkit";
 import { hasProp } from "@shared/lib";
 import { isString } from "ramda-adjunct";
-import type { TCPIncomeAction } from "../../../model";
+import type { TCPIncomeAction } from "../../../../model";
 
 export const isTCPIncomeAction = (
 	action: unknown,

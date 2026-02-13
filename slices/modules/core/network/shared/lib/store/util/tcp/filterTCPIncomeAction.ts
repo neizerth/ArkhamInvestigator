@@ -1,5 +1,5 @@
 import type { Action } from "@reduxjs/toolkit";
-import type { TCPIncomeActionMeta } from "../../../model";
+import type { TCPIncomeActionMeta } from "../../../../model";
 import { isTCPIncomeAction } from "./isTCPIncomeAction";
 
 export const filterTCPIncomeAction =
