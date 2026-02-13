@@ -1,5 +1,8 @@
 import { useCallback, useEffect, useRef, useState } from "react";
+import type { ViewProps } from "react-native";
 import { useFadeAnimation } from "./useFadeAnimation";
+
+type PointerEvents = ViewProps["pointerEvents"];
 
 interface UseMountedFadeAnimationOptions {
 	show: boolean;
@@ -35,9 +38,11 @@ export const useMountedFadeAnimation = ({
 		onComplete: handleComplete,
 	});
 
+	const pointerEvents: PointerEvents = show ? "auto" : "none";
+
 	return {
 		mounted,
 		fadeStyle,
-		pointerEvents: show ? ("auto" as const) : ("none" as const),
+		pointerEvents,
 	};
 };
