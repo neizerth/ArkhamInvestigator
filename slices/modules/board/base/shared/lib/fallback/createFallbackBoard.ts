@@ -18,5 +18,6 @@ export const createFallbackBoard = (): InvestigatorBoard => {
 		value: createFallbackBoardValues(),
 		history: [],
 		checkHistory: [],
+		updatedAt: 0,
 	};
 };

@@ -1,3 +1,4 @@
+import { log } from "@shared/config";
 import { put, select, takeEvery } from "redux-saga/effects";
 import { isBoardExists } from "../../../fallback";
 import { boardChanged } from "../../actions";
@@ -14,9 +15,21 @@ function* worker({ payload }: ReturnType<typeof setBoard>) {
 		return;
 	}
 
+	if (board.updatedAt > payload.data.updatedAt) {
+		log.info(
+			"board updatedAt is greater than payload data",
+			board.updatedAt,
+			payload.data.updatedAt,
+		);
+		return;
+	}
+
 	yield put(
 		setBoardInternal({
-			...payload,
+			data: {
+				...payload.data,
+				updatedAt: Date.now(),
+			},
 			boardId: board.id,
 		}),
 	);

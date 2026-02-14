@@ -52,6 +52,7 @@ export type InvestigatorBoard = {
 
 	background?: InvestigatorBoardBackground | null;
 	gameTextSize?: Box | null;
+	updatedAt: number;
 };
 
 export type InvesigatorBoardPartial = Omit<

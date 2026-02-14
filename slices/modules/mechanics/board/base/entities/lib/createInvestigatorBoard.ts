@@ -66,6 +66,7 @@ export const createInvestigatorBoard = ({
 		usedAbilities: [],
 		abilityValues,
 		initialUsedAbilities: [],
+		updatedAt: Date.now(),
 	};
 
 	const modificationCallback = investigatorBoardModifications[code];
