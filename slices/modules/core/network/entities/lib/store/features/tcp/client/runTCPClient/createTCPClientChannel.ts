@@ -21,9 +21,6 @@ export type TCPClientChannelAction =
 	| ReturnType<typeof tcpClientSocketError>
 	| ReturnType<typeof setClientRunning>;
 
-// On HMR this module re-runs; clear stale client socket from previous instance
-clearTCPServerSocket();
-
 export const createTCPClientChannel = (host: string) => {
 	return eventChannel((emit) => {
 		clearTCPServerSocket();

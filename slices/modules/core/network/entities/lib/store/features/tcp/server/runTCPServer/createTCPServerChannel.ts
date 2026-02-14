@@ -31,10 +31,6 @@ export type TCPServerChannelAction =
 	| ReturnType<typeof tcpServerListening>
 	| ReturnType<typeof tcpServerClosed>;
 
-// On HMR this module re-runs; close server from previous instance
-clearTCPServerInstance();
-clearTCPClientSockets();
-
 export const createTCPServerChannel = (serverName: string | null) => {
 	return eventChannel((emit) => {
 		clearTCPServerInstance();

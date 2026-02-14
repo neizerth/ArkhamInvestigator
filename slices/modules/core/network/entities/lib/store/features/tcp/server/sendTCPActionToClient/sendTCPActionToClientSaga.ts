@@ -5,7 +5,7 @@ import {
 	TCP_RETRY_DELAY,
 } from "@modules/core/network/shared/config";
 import {
-	filterTCPMessageRecieved,
+	filterTCPMessageReceived,
 	stopTCPServer,
 	tcpActionReceived,
 } from "@modules/core/network/shared/lib";
@@ -73,10 +73,10 @@ function* singleSocketWorker(
 			return;
 		}
 
-		const filterAction = filterTCPMessageRecieved(messageId);
+		const filterAction = filterTCPMessageReceived(messageId);
 
 		const { timeout }: { timeout?: boolean } = yield race({
-			recievied: take(filterAction),
+			received: take(filterAction),
 			timeout: delay(TCP_CONFIRMATION_TIMEOUT),
 		});
 
@@ -91,7 +91,7 @@ function* singleSocketWorker(
 			`(${attempt + 1}/${TCP_CONFIRMATION_MAX_RETRIES})`,
 		);
 
-		if (attempt === TCP_CONFIRMATION_MAX_RETRIES) {
+		if (attempt === TCP_CONFIRMATION_MAX_RETRIES - 1) {
 			log.info("server: max retries reached, giving up", action.type);
 			return;
 		}

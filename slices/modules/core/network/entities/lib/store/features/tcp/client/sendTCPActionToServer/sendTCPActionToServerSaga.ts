@@ -9,7 +9,7 @@ import {
 	stopTCPClient,
 	tcpActionReceived,
 } from "@modules/core/network/shared/lib";
-import { filterTCPMessageRecieved } from "@modules/core/network/shared/lib";
+import { filterTCPMessageReceived } from "@modules/core/network/shared/lib";
 import { log } from "@shared/config";
 import type { TakeableChannel } from "redux-saga";
 import {
@@ -78,15 +78,15 @@ function* worker(actionArg: Action): Generator {
 			return;
 		}
 
-		const filterAction = filterTCPMessageRecieved(messageId);
+		const filterAction = filterTCPMessageReceived(messageId);
 
 		const { timeout }: { timeout?: boolean } = yield race({
-			recievied: take(filterAction),
+			received: take(filterAction),
 			timeout: delay(TCP_CONFIRMATION_TIMEOUT),
 		});
 
 		if (!timeout) {
-			log.info("client: server recieved", messageId);
+			log.info("client: server received", messageId);
 			return;
 		}
 
@@ -97,7 +97,7 @@ function* worker(actionArg: Action): Generator {
 			`(${attempt + 1}/${TCP_CONFIRMATION_MAX_RETRIES})`,
 		);
 
-		if (attempt === TCP_CONFIRMATION_MAX_RETRIES) {
+		if (attempt === TCP_CONFIRMATION_MAX_RETRIES - 1) {
 			log.info("client: max retries reached, giving up", payload.action.type);
 			return;
 		}

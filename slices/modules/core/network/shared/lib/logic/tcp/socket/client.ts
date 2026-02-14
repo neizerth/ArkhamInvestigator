@@ -26,5 +26,8 @@ export const clearTCPServerSocketIfMatches = (socket: TcpSocket.Socket) => {
 	}
 };
 
-// On HMR this module re-runs; clear stale client socket from previous instance
+/**
+ * Single point of HMR cleanup: on module re-run, clear stale client socket
+ * from the previous instance. Channel modules rely on this when they import shared/lib.
+ */
 clearTCPServerSocket();

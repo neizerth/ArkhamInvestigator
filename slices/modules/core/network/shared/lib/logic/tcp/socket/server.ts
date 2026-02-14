@@ -91,6 +91,9 @@ export const clearTCPServerInstance = () => {
 	setTCPServerInstance(null);
 };
 
-// On HMR this module re-runs; clear server and client sockets from previous instance
+/**
+ * Single point of HMR cleanup: on module re-run, clear server and client sockets
+ * from the previous instance. Channel modules rely on this when they import shared/lib.
+ */
 clearTCPServerInstance();
 clearTCPClientSockets();

@@ -14,9 +14,9 @@ function* callSaga() {
 
 export function* watchdogDeadServerSaga() {
 	while (true) {
-		yield take(filterHostRunning(true));
-		const task: Task = yield fork(callSaga);
 		yield take(filterHostRunning(false));
+		const task: Task = yield fork(callSaga);
+		yield take(filterHostRunning(true));
 		yield cancel(task);
 	}
 }
