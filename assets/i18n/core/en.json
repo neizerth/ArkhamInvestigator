@@ -374,6 +374,7 @@
 	"multiplayer.error.invalidInviteCode": "Invalid connection code",
 	"multiplayer.playersCount": "Players",
 	"multiplayer.code.error": "Failed to connect to the game. Check the code or network settings.",
+	"multiplayer.waitingForHost": "Waiting for host to start",
 
 	"Defeated": "Defeated",
 	"Change": "Change",

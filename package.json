@@ -49,7 +49,8 @@
 		"gradle:clean-cache": "rm -rf android/app/build android/.gradle modules/chaos-odds/android/.cxx modules/chaos-odds/android/build/intermediates/cxx",
 		"gradle:clean-modules": "rm -rf modules/*/android/.cxx modules/*/android/build/intermediates/cxx",
 		"expo:clear": "expo start -c",
-		"pod:install": "cd ios && pod install"
+		"pod:install": "cd ios && pod install",
+		"postinstall": "patch-package"
 	},
 	"jest": {
 		"preset": "jest-expo"
@@ -165,6 +166,7 @@
 		"jest-expo": "~53.0.10",
 		"knip": "^5.63.1",
 		"lefthook": "^1.11.3",
+		"patch-package": "^8.0.1",
 		"react-native-svg-transformer": "^1.5.0",
 		"react-test-renderer": "19.0.0",
 		"tsx": "^4.20.3",

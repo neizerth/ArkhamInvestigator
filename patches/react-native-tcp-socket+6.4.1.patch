@@ -1,0 +1,67 @@
+diff --git a/node_modules/react-native-tcp-socket/ios/TcpSockets.m b/node_modules/react-native-tcp-socket/ios/TcpSockets.m
+index 0fe15d2..dda0043 100644
+--- a/node_modules/react-native-tcp-socket/ios/TcpSockets.m
++++ b/node_modules/react-native-tcp-socket/ios/TcpSockets.m
+@@ -219,14 +219,16 @@ - (void)onWrittenData:(TcpSocketClient *)client msgId:(NSNumber *)msgId {
+ 
+ - (void)onConnect:(TcpSocketClient *)client {
+     GCDAsyncSocket *socket = [client getSocket];
++    NSString *localAddr = [socket localHost] ?: @"";
++    NSString *remoteAddr = [socket connectedHost] ?: @"";
+     [self sendEventWithName:@"connect"
+                        body:@{
+-                           @"id" : client.id,
++                           @"id" : client.id ?: @0,
+                            @"connection" : @{
+-                               @"localAddress" : [socket localHost],
++                               @"localAddress" : localAddr,
+                                @"localPort" :
+                                    [NSNumber numberWithInt:[socket localPort]],
+-                               @"remoteAddress" : [socket connectedHost],
++                               @"remoteAddress" : remoteAddr,
+                                @"remotePort" : [NSNumber
+                                    numberWithInt:[socket connectedPort]],
+                                @"remoteFamily" : [socket isIPv4] ? @"IPv4"
+@@ -237,11 +239,12 @@ - (void)onConnect:(TcpSocketClient *)client {
+ 
+ - (void)onListen:(TcpSocketClient *)server {
+     GCDAsyncSocket *socket = [server getSocket];
++    NSString *localAddr = [socket localHost] ?: @"";
+     [self sendEventWithName:@"listening"
+                        body:@{
+-                           @"id" : server.id,
++                           @"id" : server.id ?: @0,
+                            @"connection" : @{
+-                               @"localAddress" : [socket localHost],
++                               @"localAddress" : localAddr,
+                                @"localPort" :
+                                    [NSNumber numberWithInt:[socket localPort]],
+                                @"localFamily" : [socket isIPv4] ? @"IPv4"
+@@ -272,16 +275,23 @@ - (void)onSocketConnection:(TcpSocketClient *)client
+             connectionType:(NSString *)connectionType {
+     GCDAsyncSocket *socket = [client getSocket];
+ 
++    // Guard against nil: NSDictionary literal throws if any value is nil
++    // (e.g. localHost/connectedHost can be nil in Simulator or edge cases)
++    NSString *localAddr = [socket localHost] ?: @"";
++    NSString *remoteAddr = [socket connectedHost] ?: @"";
++    NSNumber *connId = clientID ?: @0;
++    NSNumber *infoId = client.id ?: @0;
++
+     [self sendEventWithName:connectionType
+                        body:@{
+-                           @"id" : clientID,
++                           @"id" : connId,
+                            @"info" : @{
+-                               @"id" : client.id,
++                               @"id" : infoId,
+                                @"connection" : @{
+-                                   @"localAddress" : [socket localHost],
++                                   @"localAddress" : localAddr,
+                                    @"localPort" : [NSNumber
+                                        numberWithInt:[socket localPort]],
+-                                   @"remoteAddress" : [socket connectedHost],
++                                   @"remoteAddress" : remoteAddr,
+                                    @"remotePort" : [NSNumber
+                                        numberWithInt:[socket connectedPort]],
+                                    @"remoteFamily" : [socket isIPv4] ? @"IPv4"

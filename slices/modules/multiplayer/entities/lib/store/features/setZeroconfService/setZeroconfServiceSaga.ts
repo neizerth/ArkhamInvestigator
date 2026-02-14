@@ -1,7 +1,7 @@
-import { selectHostIp, setHostIp } from "@modules/core/network/shared/lib";
+import { setHostIp } from "@modules/core/network/shared/lib";
 import { setGameStatus } from "@modules/game/shared/lib";
 import { log } from "@shared/config";
-import { put, select, takeEvery } from "redux-saga/effects";
+import { put, takeEvery } from "redux-saga/effects";
 import { setZeroconfService } from "./setZeroconfService";
 
 function* worker({ payload }: ReturnType<typeof setZeroconfService>) {
@@ -10,10 +10,11 @@ function* worker({ payload }: ReturnType<typeof setZeroconfService>) {
 		return;
 	}
 	const [ip] = payload.addresses ?? [];
-	const currentHostIp: string | null = yield select(selectHostIp);
-	if (currentHostIp === ip) {
+	if (!ip) {
+		log.info("no ip found in zeroconf service", payload);
 		return;
 	}
+
 	console.log("setting host ip from zeroconf service", ip);
 	yield put(setHostIp(ip));
 	yield put(setGameStatus("initial"));
