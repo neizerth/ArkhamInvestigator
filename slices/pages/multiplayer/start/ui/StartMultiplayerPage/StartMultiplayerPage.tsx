@@ -1,4 +1,4 @@
-import { generateRandomNickname } from "@modules/core/network/entities/generateRandomNickname";
+import { generateRandomNickname } from "@modules/core/network/entities/lib/store/features/generateRandomNickname";
 import {
 	networkRoles,
 	networkTypeIconMapping,

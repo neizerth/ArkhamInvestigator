@@ -4,11 +4,13 @@ import { disconnectTCPClientSaga } from "./disconnect-tcp-client/disconnectTCPCl
 import { restartTCPServerOnNicknameChangeSaga } from "./restart-tcp-server-on-nickname-change/restartTCPServerOnNicknameChangeSaga";
 import { runTCPServerOnNetworkRoleChangeSaga } from "./run-tcp-server-on-network-role-change/runTCPServerOnNetworkRoleChangeSaga";
 import { runTCPServerOnAppResumeSaga } from "./run-tcp-server-on-resume/runTCPServerOnAppResumeSaga";
+import { runTCPServerWatchdogSaga } from "./start-tcp-server-watchdog/sagas";
 import { stopTCPServerOnHomeSaga } from "./stop-tcp-server-on-home/stopTCPServerOnHomeSaga";
 import { transformTCPServerDataToActionSaga } from "./transform-tcp-server-data-to-action/transformTCPServerDataToActionSaga";
 
 export function* tcpServerSagas() {
 	yield spawn(runTCPServerOnNetworkRoleChangeSaga);
+	yield spawn(runTCPServerWatchdogSaga);
 	yield spawn(runTCPServerOnAppResumeSaga);
 	yield spawn(restartTCPServerOnNicknameChangeSaga);
 	yield spawn(transformTCPServerDataToActionSaga);

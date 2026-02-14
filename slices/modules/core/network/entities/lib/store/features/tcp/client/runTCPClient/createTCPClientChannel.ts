@@ -3,7 +3,7 @@ import { seconds } from "@shared/lib";
 import TcpSocket from "react-native-tcp-socket";
 import type { ConnectionOptions } from "react-native-tcp-socket/lib/types/Socket";
 import { eventChannel } from "redux-saga";
-import { TCP_PORT } from "../../../../shared/config";
+import { TCP_PORT } from "../../../../../../../shared/config";
 import {
 	clearTCPServerSocket,
 	setClientRunning,
@@ -12,7 +12,7 @@ import {
 	tcpClientSocketConnected,
 	tcpClientSocketDataReceived,
 	tcpClientSocketError,
-} from "../../../../shared/lib";
+} from "../../../../../../../shared/lib";
 
 export type TCPClientChannelAction =
 	| ReturnType<typeof tcpClientSocketDataReceived>

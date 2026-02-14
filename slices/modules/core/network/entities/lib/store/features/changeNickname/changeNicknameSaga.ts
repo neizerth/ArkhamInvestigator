@@ -1,5 +1,5 @@
 import { put, select, takeEvery } from "redux-saga/effects";
-import { selectNickname, setNickname } from "../../shared/lib";
+import { selectNickname, setNickname } from "../../../../../shared/lib";
 import { changeNickname, nicknameChanged } from "./changeNickname";
 
 function* worker({ payload }: ReturnType<typeof changeNickname>) {

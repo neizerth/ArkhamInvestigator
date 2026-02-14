@@ -1,6 +1,6 @@
 import { selectCurrentLanguage } from "@modules/core/i18n/shared/lib";
 import { put, select, takeEvery } from "redux-saga/effects";
-import { getDefaultNickname } from "../../shared/lib";
+import { getDefaultNickname } from "../../../../../shared/lib";
 import { changeNickname } from "../changeNickname";
 import { generateRandomNickname } from "./generateRandomNickname";
 

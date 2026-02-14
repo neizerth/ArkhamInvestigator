@@ -1,5 +1,5 @@
-import { sendTCPActionToServer } from "@modules/core/network/entities/tcp/client/sendTCPActionToServer";
-import { sendTCPActionToClient } from "@modules/core/network/entities/tcp/server/sendTCPActionToClient";
+import { sendTCPActionToServer } from "@modules/core/network/entities/lib/store/features/tcp/client/sendTCPActionToServer";
+import { sendTCPActionToClient } from "@modules/core/network/entities/lib/store/features/tcp/server/sendTCPActionToClient";
 import {
 	selectHostIp,
 	selectNetworkRole,

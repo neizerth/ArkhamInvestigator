@@ -10,7 +10,7 @@ import {
 	startTCPClient,
 	stopTCPClient,
 	tcpClientSocketClosed,
-} from "../../../../shared/lib";
+} from "../../../../../../../shared/lib";
 import {
 	type TCPClientChannelAction,
 	createTCPClientChannel,

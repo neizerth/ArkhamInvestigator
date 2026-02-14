@@ -3,7 +3,7 @@ import { put, select, takeEvery } from "redux-saga/effects";
 
 import { appStateChanged } from "@modules/core/app/shared/lib";
 import { selectGameMode, selectGameStatus } from "@modules/game/shared/lib";
-import { checkTCPClientConnection } from "../../entities/tcp/client/checkTCPClientConnection";
+import { checkTCPClientConnection } from "../../entities/lib/store/features/tcp/client/checkTCPClientConnection";
 import {
 	selectClientRunning,
 	selectHostRunning,

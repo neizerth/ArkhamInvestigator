@@ -1,4 +1,4 @@
-import { sendTCPActionToClient } from "@modules/core/network/entities/tcp/server/sendTCPActionToClient";
+import { sendTCPActionToClient } from "@modules/core/network/entities/lib/store/features/tcp/server/sendTCPActionToClient";
 import {
 	addNetworkClient,
 	connectNetworkClient,

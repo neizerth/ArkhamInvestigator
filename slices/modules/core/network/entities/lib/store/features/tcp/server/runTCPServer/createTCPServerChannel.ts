@@ -8,7 +8,7 @@ import {
 	TCP_SERVER_NAME,
 	TCP_SERVER_WATCHDOG_PING,
 	TCP_SERVICE_NAME,
-} from "../../../../shared/config";
+} from "../../../../../../../shared/config";
 import {
 	clearTCPClientSockets,
 	clearTCPServerInstance,
@@ -21,7 +21,7 @@ import {
 	tcpServerSocketConnected,
 	tcpServerSocketDataReceived,
 	tcpServerSocketError,
-} from "../../../../shared/lib";
+} from "../../../../../../../shared/lib";
 
 export type TCPServerChannelAction =
 	| ReturnType<typeof tcpServerSocketDataReceived>

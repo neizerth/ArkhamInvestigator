@@ -1,4 +1,4 @@
-import { nicknameChanged } from "@modules/core/network/entities/changeNickname";
+import { nicknameChanged } from "@modules/core/network/entities/lib/store/features/changeNickname";
 import {
 	selectNetworkRole,
 	startTCPServer,

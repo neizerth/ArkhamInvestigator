@@ -4,7 +4,7 @@ import {
 	startTCPServer,
 	stopTCPServer,
 	tcpServerClosed,
-} from "../../../../shared/lib";
+} from "../../../../../../../shared/lib";
 import {
 	type TCPServerChannelAction,
 	createTCPServerChannel,

@@ -20,6 +20,9 @@ export const TCP_HOST = "0.0.0.0";
 export const TCP_SERVICE_NAME = "arkham-investigator";
 export const TCP_SERVER_NAME = "ArkhamHost";
 
+/** Unique string sent by server watchdog to check if server is alive. Must not be valid JSON. */
+export const TCP_SERVER_WATCHDOG_PING = "__TCP_SERVER_WATCHDOG_PING__";
+
 export const TCP_CONFIRMATION_TIMEOUT = seconds(5);
 export const TCP_RETRY_DELAY = seconds(5);
 /** Max retries per socket before giving up (stops infinite retry cycle). */

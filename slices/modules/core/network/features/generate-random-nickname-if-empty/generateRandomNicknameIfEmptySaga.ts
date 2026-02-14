@@ -1,6 +1,6 @@
 import { appStarted } from "@modules/core/app/shared/lib";
 import { put, select, takeEvery } from "redux-saga/effects";
-import { generateRandomNickname } from "../../entities/generateRandomNickname";
+import { generateRandomNickname } from "../../entities/lib/store/features/generateRandomNickname";
 import { selectNickname } from "../../shared/lib";
 function* worker() {
 	const nickname: ReturnType<typeof selectNickname> =
