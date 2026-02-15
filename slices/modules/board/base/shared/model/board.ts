@@ -52,7 +52,8 @@ export type InvestigatorBoard = {
 
 	background?: InvestigatorBoardBackground | null;
 	gameTextSize?: Box | null;
-	updatedAt: number;
+	/** ISO string of the last update time */
+	updatedAt: string;
 };
 
 export type InvesigatorBoardPartial = Omit<

@@ -2,6 +2,7 @@ import {
 	addChaosTokenInternal,
 	chaosBagUpdated,
 	createChaosBagToken,
+	selectChaosBagUpdatedAt,
 } from "@modules/chaos-bag/base/shared/lib";
 import { range } from "ramda";
 import { put, select, takeEvery } from "redux-saga/effects";
@@ -15,7 +16,8 @@ import {
 
 function* worker({ payload }: ReturnType<typeof addMultipleChaosTokens>) {
 	const { type, count } = payload;
-
+	const lastUpdatedAt: ReturnType<typeof selectChaosBagUpdatedAt> =
+		yield select(selectChaosBagUpdatedAt);
 	const canAddTokenSelector = selectCanAddMultipleChaosTokens({
 		type,
 		count,
@@ -42,7 +44,12 @@ function* worker({ payload }: ReturnType<typeof addMultipleChaosTokens>) {
 	const tokens = range(0, count).map(createToken);
 
 	for (const token of tokens) {
-		yield put(addChaosTokenInternal(token));
+		yield put(
+			addChaosTokenInternal({
+				token,
+				lastUpdatedAt,
+			}),
+		);
 		yield put(
 			chaosTokenAdded({
 				...payload,

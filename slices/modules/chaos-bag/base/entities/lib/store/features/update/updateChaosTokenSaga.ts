@@ -1,5 +1,6 @@
 import {
 	selectChaosBagTokenById,
+	selectChaosBagUpdatedAt,
 	updateChaosTokenInternal,
 } from "@modules/chaos-bag/base/shared/lib";
 import { put, select, takeEvery } from "redux-saga/effects";
@@ -15,8 +16,15 @@ function* worker({ payload }: ReturnType<typeof updateChaosToken>) {
 	if (!token) {
 		return;
 	}
+	const lastUpdatedAt: ReturnType<typeof selectChaosBagUpdatedAt> =
+		yield select(selectChaosBagUpdatedAt);
 
-	yield put(updateChaosTokenInternal(payload));
+	yield put(
+		updateChaosTokenInternal({
+			...payload,
+			lastUpdatedAt,
+		}),
+	);
 	yield put(chaosTokenUpdated(payload));
 }
 

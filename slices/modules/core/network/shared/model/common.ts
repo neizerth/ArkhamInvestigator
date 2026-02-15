@@ -23,11 +23,15 @@ export type NetworkIncomeActionMeta = {
 	networkId: string;
 	messageId: string;
 	notify: NetworkNotificationType;
+	/** ISO string of the received time */
+	receivedAt: string;
 };
 
 export type NetworkOutcomeActionMeta = {
 	notify: NetworkNotificationType;
 	remote: true;
+	/** ISO string of the sent time (added at serialization) */
+	sentAt?: string;
 };
 
 export type RemoteActionReturnType<T extends GenericFunction> =

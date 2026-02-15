@@ -18,6 +18,6 @@ export const createFallbackBoard = (): InvestigatorBoard => {
 		value: createFallbackBoardValues(),
 		history: [],
 		checkHistory: [],
-		updatedAt: 0,
+		updatedAt: new Date().toISOString(),
 	};
 };

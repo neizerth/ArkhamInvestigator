@@ -1,8 +1,9 @@
 import {
 	chaosBagUpdated,
 	removeChaosTokenInternal,
+	selectChaosBagUpdatedAt,
 } from "@modules/chaos-bag/base/shared/lib";
-import { put, takeEvery } from "redux-saga/effects";
+import { put, select, takeEvery } from "redux-saga/effects";
 
 import {
 	removeSingleChaosToken,
@@ -12,9 +13,13 @@ import {
 function* worker({ payload }: ReturnType<typeof singleChaosTokenRemoved>) {
 	const { token } = payload;
 
+	const lastUpdatedAt: ReturnType<typeof selectChaosBagUpdatedAt> =
+		yield select(selectChaosBagUpdatedAt);
+
 	yield put(
 		removeChaosTokenInternal({
 			id: token.id,
+			lastUpdatedAt,
 		}),
 	);
 

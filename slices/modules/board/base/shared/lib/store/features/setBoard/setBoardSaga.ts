@@ -1,4 +1,5 @@
 import { log } from "@shared/config";
+import moment from "moment";
 import { put, select, takeEvery } from "redux-saga/effects";
 import { isBoardExists } from "../../../fallback";
 import { boardChanged } from "../../actions";
@@ -15,7 +16,7 @@ function* worker({ payload }: ReturnType<typeof setBoard>) {
 		return;
 	}
 
-	if (board.updatedAt > payload.data.updatedAt) {
+	if (moment(board.updatedAt).isAfter(moment(payload.data.updatedAt))) {
 		log.info(
 			"board updatedAt is greater than payload data",
 			board.updatedAt,
@@ -28,7 +29,7 @@ function* worker({ payload }: ReturnType<typeof setBoard>) {
 		setBoardInternal({
 			data: {
 				...payload.data,
-				updatedAt: Date.now(),
+				updatedAt: new Date().toISOString(),
 			},
 			boardId: board.id,
 		}),

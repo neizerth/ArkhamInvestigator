@@ -3,14 +3,19 @@ import type {
 	ChaosTokenType,
 } from "@modules/chaos-bag/base/shared/model";
 import { ascend, propEq, reject } from "ramda";
+import { validateChaosBagUpdate } from "../../util";
 
 export type HandleRemoveAllChaosTokensByTypePayload = {
 	type: ChaosTokenType;
+	lastUpdatedAt: string;
 };
 
 export const handleRemoveAllChaosTokensByType: ChaosBagHandler<
 	HandleRemoveAllChaosTokensByTypePayload
-> = (state, { type }) => {
+> = (state, { type, lastUpdatedAt }) => {
+	if (!validateChaosBagUpdate(state, lastUpdatedAt)) {
+		return;
+	}
 	const count = state.tokenCount[type];
 
 	if (typeof count !== "number") {
@@ -27,4 +32,5 @@ export const handleRemoveAllChaosTokensByType: ChaosBagHandler<
 
 	state.contents = reject(propEq(type, "type"), state.contents);
 	state.tokenCount[type] = Math.max(0, count - tokens.length);
+	state.chaosBagUpdatedAt = new Date().toISOString();
 };

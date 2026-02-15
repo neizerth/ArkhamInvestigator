@@ -28,6 +28,7 @@ function* worker({ payload }: ReturnType<typeof sendTCPAction>) {
 			messageId,
 			networkId,
 			source: "tcp",
+			sentAt: new Date().toISOString(),
 		},
 	};
 

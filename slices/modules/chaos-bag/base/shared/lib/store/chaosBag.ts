@@ -14,6 +14,7 @@ export type ChaosBagState = {
 	unlimitedChaosTokens: boolean;
 	modifyChaosTokens: boolean;
 	showDifficulty: boolean;
+	chaosBagUpdatedAt: string;
 };
 
 const initialState: ChaosBagState = {
@@ -25,6 +26,7 @@ const initialState: ChaosBagState = {
 	unlimitedChaosTokens: false,
 	modifyChaosTokens: true,
 	showDifficulty: false,
+	chaosBagUpdatedAt: new Date().toISOString(),
 };
 
 const state = createSliceState(initialState);
@@ -38,26 +40,8 @@ export const chaosBag = createSlice({
 		setTokenCount: createRemoteReducer(state.reducers.setTokenCount, {
 			notify: "all",
 		}),
-		setContents: createRemoteReducer(state.reducers.setContents, {
-			notify: "all",
-		}),
-		setLoadingAnimation: createRemoteReducer(
-			state.reducers.setLoadingAnimation,
-			{
-				notify: "all",
-			},
-		),
-		setEnabled: createRemoteReducer(state.reducers.setEnabled, {
-			notify: "all",
-		}),
 		setUnlimitedChaosTokens: createRemoteReducer(
 			state.reducers.setUnlimitedChaosTokens,
-			{
-				notify: "all",
-			},
-		),
-		setModifyChaosTokens: createRemoteReducer(
-			state.reducers.setModifyChaosTokens,
 			{
 				notify: "all",
 			},
@@ -97,9 +81,9 @@ export const chaosBag = createSlice({
 
 export const {
 	setTokenCount: setChaosBagTokenCount,
-	setContents: setChaosBagContents,
 	setLoadingAnimation: setChaosBagLoadingAnimation,
 	setEnabled: setChaosBagEnabled,
+	setChaosBagContents,
 	setUnlimitedChaosTokens,
 	setModifyChaosTokens,
 	setShowDifficulty,
@@ -121,6 +105,7 @@ export const {
 	selectUnlimitedChaosTokens,
 	selectModifyChaosTokens,
 	selectShowDifficulty,
+	selectChaosBagUpdatedAt,
 } = chaosBag.selectors;
 
 export default chaosBag.reducer;

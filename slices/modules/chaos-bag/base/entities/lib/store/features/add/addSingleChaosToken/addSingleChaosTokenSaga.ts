@@ -3,7 +3,10 @@ import {
 	createChaosBagToken,
 } from "@modules/chaos-bag/base/shared/lib";
 import { put, select, takeEvery } from "redux-saga/effects";
-import { addChaosTokenInternal } from "../../../../../../shared/lib/store/chaosBag";
+import {
+	addChaosTokenInternal,
+	selectChaosBagUpdatedAt,
+} from "../../../../../../shared/lib/store/chaosBag";
 
 import { selectCanAddChaosToken } from "../../../selectors";
 import {
@@ -15,7 +18,8 @@ import {
 
 function* worker({ payload }: ReturnType<typeof addSingleChaosToken>) {
 	const { type } = payload;
-
+	const lastUpdatedAt: ReturnType<typeof selectChaosBagUpdatedAt> =
+		yield select(selectChaosBagUpdatedAt);
 	const canAddSelector = selectCanAddChaosToken(type);
 
 	const validation: ReturnType<typeof canAddSelector> =
@@ -33,7 +37,12 @@ function* worker({ payload }: ReturnType<typeof addSingleChaosToken>) {
 
 	const token = createChaosBagToken(payload);
 
-	yield put(addChaosTokenInternal(token));
+	yield put(
+		addChaosTokenInternal({
+			token,
+			lastUpdatedAt,
+		}),
+	);
 
 	yield put(
 		chaosTokenAdded({

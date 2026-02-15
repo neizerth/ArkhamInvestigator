@@ -20,6 +20,7 @@ export function createTCPIncomeAction<T extends string, P = unknown>(
 		notify: "self",
 		source: "tcp",
 		socket,
+		receivedAt: new Date().toISOString(),
 	};
 
 	return {

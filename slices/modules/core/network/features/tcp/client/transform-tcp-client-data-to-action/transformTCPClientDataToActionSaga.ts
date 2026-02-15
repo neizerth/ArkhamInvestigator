@@ -1,4 +1,5 @@
 import {
+	createTCPIncomeAction,
 	getTCPServerSocket,
 	isTCPIncomeAction,
 	tcpActionReceived,
@@ -10,6 +11,9 @@ function* worker({ payload }: ReturnType<typeof tcpClientSocketDataReceived>) {
 	const { data } = payload;
 
 	const socket = getTCPServerSocket();
+	if (!socket) {
+		return;
+	}
 
 	try {
 		const tcpAction = JSON.parse(data);
@@ -24,15 +28,7 @@ function* worker({ payload }: ReturnType<typeof tcpClientSocketDataReceived>) {
 			tcpAction.meta.messageId,
 		);
 
-		const action = {
-			...tcpAction,
-			meta: {
-				...tcpAction.meta,
-				notify: "self",
-				source: "tcp",
-				socket,
-			},
-		};
+		const action = createTCPIncomeAction(tcpAction, socket);
 
 		yield put(action);
 

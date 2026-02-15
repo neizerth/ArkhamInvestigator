@@ -1,9 +1,10 @@
 import { createConfirmModalFilter } from "@modules/core/modal/shared/actions/confirm/lib";
-import { put, takeEvery } from "redux-saga/effects";
+import { put, select, takeEvery } from "redux-saga/effects";
 
 import {
 	chaosBagUpdated,
 	clearChaosBagInternal,
+	selectChaosBagUpdatedAt,
 } from "@modules/chaos-bag/base/shared/lib";
 import { modalActionId, modalId } from "../config";
 
@@ -13,7 +14,13 @@ const filterAction = createConfirmModalFilter({
 });
 
 function* worker() {
-	yield put(clearChaosBagInternal());
+	const lastUpdatedAt: ReturnType<typeof selectChaosBagUpdatedAt> =
+		yield select(selectChaosBagUpdatedAt);
+	yield put(
+		clearChaosBagInternal({
+			lastUpdatedAt,
+		}),
+	);
 	yield put(chaosBagUpdated({}));
 }
 

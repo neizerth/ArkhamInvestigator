@@ -3,3 +3,4 @@ export { removeAllChaosTokensByTypeInternalReducer as removeAllChaosTokensByType
 export { removeChaosTokenInternalReducer as removeChaosTokenInternal } from "./removeChaosTokenInternal/removeChaosTokenInternalReducer";
 export { updateChaosTokenInternalReducer as updateChaosTokenInternal } from "./updateChaosTokenInternal/updateChaosTokenInternalReducer";
 export { clearChaosBagInternalReducer as clearChaosBagInternal } from "./clearChaosBagInternal/clearChaosBagInternalReducer";
+export { setChaosBagContentsReducer as setChaosBagContents } from "./setChaosBagContents/setChaosBagContentsReducer";
