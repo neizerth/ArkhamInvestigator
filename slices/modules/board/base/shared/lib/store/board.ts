@@ -73,56 +73,60 @@ const initialState: BoardState = {
 
 const state = createSliceState(initialState);
 
+const sliceReducers = {
+	...state.reducers,
+	...baseReducers,
+	...boardHistoryReducers,
+};
+
 export const board = createSlice({
 	name: "board",
 	...state,
 	reducers: {
-		...state.reducers,
-		...baseReducers,
-		...boardHistoryReducers,
-		setDoom: createRemoteReducer(state.reducers.setDoom, {
+		...sliceReducers,
+		setDoom: createRemoteReducer(sliceReducers.setDoom, {
 			notify: "all",
 		}),
-		setClues: createRemoteReducer(state.reducers.setClues, {
+		setClues: createRemoteReducer(sliceReducers.setClues, {
 			notify: "all",
 		}),
-		setResources: createRemoteReducer(state.reducers.setResources, {
+		setResources: createRemoteReducer(sliceReducers.setResources, {
 			notify: "all",
 		}),
-		setBoardInternal: createRemoteReducer(baseReducers.setBoardInternal, {
+		setBoardInternal: createRemoteReducer(sliceReducers.setBoardInternal, {
 			notify: "all",
 		}),
 		setBoardPartInternal: createRemoteReducer(
-			baseReducers.setBoardPartInternal,
+			sliceReducers.setBoardPartInternal,
 			{
 				notify: "all",
 			},
 		),
 		setBoardPropInternal: createRemoteReducer(
-			baseReducers.setBoardPropInternal,
+			sliceReducers.setBoardPropInternal,
 			{
 				notify: "all",
 			},
 		),
 		setBoardPropValueInternal: createRemoteReducer(
-			baseReducers.setBoardPropValueInternal,
+			sliceReducers.setBoardPropValueInternal,
 			{
 				notify: "all",
 			},
 		),
 		setBoardValuePartInternal: createRemoteReducer(
-			baseReducers.setBoardValuePartInternal,
+			sliceReducers.setBoardValuePartInternal,
 			{
 				notify: "all",
 			},
 		),
 		addInvestigatorBoard: createRemoteReducer(
-			baseReducers.addInvestigatorBoard,
+			sliceReducers.addInvestigatorBoard,
 			{
 				notify: "all",
 			},
 		),
-		clearBoards: createRemoteReducer(baseReducers.clearBoards, {
+		clearBoards: createRemoteReducer(sliceReducers.clearBoards, {
 			notify: "all",
 		}),
 	},

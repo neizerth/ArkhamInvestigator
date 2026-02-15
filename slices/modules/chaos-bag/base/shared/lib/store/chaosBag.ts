@@ -31,47 +31,51 @@ const initialState: ChaosBagState = {
 
 const state = createSliceState(initialState);
 
+const sliceReducers = {
+	...state.reducers,
+	...baseReducers,
+};
+
 export const chaosBag = createSlice({
 	name: "chaosBag",
 	...state,
 	reducers: {
-		...state.reducers,
-		...baseReducers,
-		setTokenCount: createRemoteReducer(state.reducers.setTokenCount, {
+		...sliceReducers,
+		setTokenCount: createRemoteReducer(sliceReducers.setTokenCount, {
 			notify: "all",
 		}),
 		setUnlimitedChaosTokens: createRemoteReducer(
-			state.reducers.setUnlimitedChaosTokens,
+			sliceReducers.setUnlimitedChaosTokens,
 			{
 				notify: "all",
 			},
 		),
 		addChaosTokenInternal: createRemoteReducer(
-			baseReducers.addChaosTokenInternal,
+			sliceReducers.addChaosTokenInternal,
 			{
 				notify: "all",
 			},
 		),
 		removeAllChaosTokensByTypeInternal: createRemoteReducer(
-			baseReducers.removeAllChaosTokensByTypeInternal,
+			sliceReducers.removeAllChaosTokensByTypeInternal,
 			{
 				notify: "all",
 			},
 		),
 		removeChaosTokenInternal: createRemoteReducer(
-			baseReducers.removeChaosTokenInternal,
+			sliceReducers.removeChaosTokenInternal,
 			{
 				notify: "all",
 			},
 		),
 		updateChaosTokenInternal: createRemoteReducer(
-			baseReducers.updateChaosTokenInternal,
+			sliceReducers.updateChaosTokenInternal,
 			{
 				notify: "all",
 			},
 		),
 		clearChaosBagInternal: createRemoteReducer(
-			baseReducers.clearChaosBagInternal,
+			sliceReducers.clearChaosBagInternal,
 			{
 				notify: "all",
 			},
