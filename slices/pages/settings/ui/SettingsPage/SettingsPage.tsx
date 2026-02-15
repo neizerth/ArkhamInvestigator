@@ -94,7 +94,7 @@ export const SettingsPage = () => {
 					</C.Row>
 					<C.Row>
 						<C.Checkbox
-							label="Skill modfiers"
+							label="Skill modifiers"
 							selector={B.selectAlwaysShowSkillModifiers}
 							actionCreator={B.setAlwaysShowSkillModifiers}
 						/>

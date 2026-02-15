@@ -165,8 +165,8 @@
 	"clues.scenario.add_other": "{{name}} places {{count}} clues on the scenario",
 
 	"clues.remains_zero": "Clues are out",
-	"clues.remains_one": "Remains {{count}} clue",
-	"clues.remains_other": "Remains {{count}} clues",
+	"clues.remains_one": "{{count}} clue remains",
+	"clues.remains_other": "{{count}} clues remain",
 
 	"actions.get_one": "{{name}} gets 1 action",
 	"actions.get_other": "{{name}} gets {{count}} actions",
@@ -388,7 +388,7 @@
 
 	"Show calculation changes": "Show calculation changes",
 
-	"Skill modfiers": "Skill modfiers",
+	"Skill modifiers": "Skill modifiers",
 
 	"Give action": "Give action",
 	"Not selected": "Not selected",
