@@ -19,7 +19,7 @@
 	"modal.theme.error.invalidUrl": "Invalid URL",
 
 	"modal.artwork.title": "Add Artworks",
-	"modal.artwork.text": "Some features may use artworks. The app doesn’t host or provide any third-party content. Enter an URL.",
+	"modal.artwork.text": "Some features may use artworks. The app doesn’t host or provide any third-party content. Enter a URL.",
 	"modal.artwork.placeholder": "https://example.com/",
 	"modal.artwork.error.invalidUrl": "Invalid URL",
 	"modal.artwork.action": "Add and restart",
@@ -30,7 +30,7 @@
 	"about.credits": "This application was created by <Author>Vladimir Yazykov</Author> and contributors to support the Arkham Horror: The Card Game community. The source code of this project is available at <Repo>Github</Repo>. Feedback and bug reports are welcome via <Issues>Github issues</Issues> or <Discord>the dedicated channel</Discord> on the Mythos Busters Discord server.",
 	"about.artwork": "All artwork and illustrations are the intellectual property of their respective creators. All Arkham Horror: The Card Game™ images and graphics are copyrighted by Fantasy Flight Games.",
 	"about.disclaimer": "This is an unofficial, fan-made companion app for tabletop players. It is not affiliated with or endorsed by Fantasy Flight Games or any other rights holder. All artwork and text are used for reference and educational purposes only. No copyrighted materials are sold, redistributed, or modified for commercial gain.",
-	"about.credits.beth": "Thanks to my wife Elisabeth for her understanding and support. I'm the happiest man on the Earth. Because of her",
+	"about.credits.beth": "Thanks to my wife Elisabeth for her understanding and support. I'm the happiest man on Earth because of her",
 
 	"about.hallOfFame.zzorba": "Arkham Cards API, Icomoon project, re-used Arkham Cards translations",
 	"about.hallOfFame.arkhamdb": "Structured game data",
@@ -59,7 +59,7 @@
 	"board.help.calculator.history.pin": "Pin a calculation on the top of the list and on the board screen",
 
 	"board.help.calculator.result": "The minimum calculation value can't be lower than 0",
-	"board.help.calculator.history": "Tap on the Equals button to add value to the calculation history. This value will be automatically updated if you update according params on your board.",
+	"board.help.calculator.history": "Tap on the Equals button to add value to the calculation history. This value will be automatically updated if you update the corresponding params on your board.",
 	"app.outdated.title": "Version is outdated",
 	"app.outdated.text": "Update is required",
 	"modal.spoiler.message": "This section contains campaign spoilers. Do you want to proceed?",
@@ -105,7 +105,7 @@
 	"board.help.special.daniela": "Tap [claws] if an enemy attacked you. This will change the value of [elder_sign] for a successful test.",
 	"board.help.special.kymani": "Tap [exhaust] if there is an exhausted enemy at your location. This will change the value of [elder_sign] for a successful test.",
 	"board.help.special.preston": "Hold down on the family inheritance counter to transfer its value to the resources counter",
-	"board.help.special.wendy": "Tap [accessory] to mark that you have Wendy's amulet in play. If the amulet is in play, the value of the [elder_sign] token will be considered a automatical success.",
+	"board.help.special.wendy": "Tap [accessory] to mark that you have Wendy's amulet in play. If the amulet is in play, the value of the [elder_sign] token will be considered an automatic success.",
 
 	"board.help.chaosBag": "Tap and hold on a skill value to reveal a chaos token",
 	"board.help.chaosBag.returnAll": "Return all revealed tokens to the chaos bag",
@@ -140,7 +140,7 @@
 	"newGame.start.title": "Start a new game?",
 	"newGame.start.text": "This action will delete your last game",
 
-	"board.help.swipe.chaosBag": "Swipe right to reveal a chaos token. Swipe down to open see a reveal history page. Swipe up to open a scenario reference",
+	"board.help.swipe.chaosBag": "Swipe right to reveal a chaos token. Swipe down to open a reveal history page. Swipe up to open a scenario reference",
 	"board.help.press.clue": "Increase value by 1",
 
 	"board.help.pins.swipe": "Swipe down on a pinned calculation to go to a page where you've created this calculation",
@@ -166,12 +166,12 @@
 
 	"clues.remains_zero": "Clues are out",
 	"clues.remains_one": "Remains {{count}} clue",
-	"clues.remains_other": "Reamains {{count}} clues",
+	"clues.remains_other": "Remains {{count}} clues",
 
 	"actions.get_one": "{{name}} gets 1 action",
 	"actions.get_other": "{{name}} gets {{count}} actions",
 
-	"actions.give_one": "{{name}} has got action [action] from {{fromName}}",
+	"actions.give_one": "{{name}} has got an action [action] from {{fromName}}",
 	"actions.give_other": "{{name}} has got {{count}} actions [action] from {{fromName}}",
 
 	"damage.take_one": "{{name}} takes {{count}} damage",
@@ -247,7 +247,7 @@
 
 	"board.help.syncScenarioClues": "Enables/disables synchronization of scenario and investigator clues: clues added to the scenario will be removed from the investigator",
 
-	"defeat.modal.text": "Choose other investigator",
+	"defeat.modal.text": "Choose another investigator",
 
 	"reveal.startNewConfirm.title": "Continue the skill test?",
 	"reveal.startNewConfirm.text": "You have an unfinished test{{skillCheck}}. Do you want to continue it?",
@@ -289,13 +289,13 @@
 	"ability.richard.action.damage": "{{name}} deals 1 damage to an enemy at his location",
 
 	"ability.luke.gateBox_one": "{{name}} puts {{count}} charge on the Gate Box",
-	"ability.luke.gateBox_many": "{{name}} puts {{count} charge on the Gate Box",
+	"ability.luke.gateBox_many": "{{name}} puts {{count}} charge on the Gate Box",
 
-	"ability.agatha.reaction": "{{name}} may play [[Spell]] or [[Insight]] event from her discard pile and remove it from the game",
+	"ability.agatha.reaction": "{{name}} may play a [[Spell]] or [[Insight]] event from her discard pile and remove it from the game",
 	"ability.wendy.parallel.action.chaosBag": "{{token}} in [chaos-bag-thin]",
 	"ability.wendy.parallel.action.history": "{{token}} [undo] [chaos-bag-thin]",
 	"ability.wendy.parallel.title": "Seal token",
-	"ability.wendy.parallel.text": "Select the token to seal\nExplanation:\n[bless] in [chaos-bag-thin] - chaos bag token\n[bless] [undo] [chaos-bag-thin] - revealed token from the last test\nFor reminder, specify the initials of the enemy where the token will be sealed (up to 7 characters, e.g. «Ghoul»):",
+	"ability.wendy.parallel.text": "Select the token to seal\nExplanation:\n[bless] in [chaos-bag-thin] - chaos bag token\n[bless] [undo] [chaos-bag-thin] - revealed token from the last test\nAs a reminder, specify the initials of the enemy where the token will be sealed (up to 7 characters, e.g. «Ghoul»):",
 	"ability.wendy.parallel.placeholder": "Enemy",
 	"ability.wendy.parallel.reaction.fail": "No tokens to seal",
 	"ability.wendy.parallel.elderSign.title": "Reveal tokens",
@@ -472,7 +472,7 @@
 
 	"Modify tokens": "Modify tokens",
 	"Fill": "Fill",
-	"Fill Chaos Bag": "Fill Chaos bag",
+	"Fill Chaos Bag": "Fill Chaos Bag",
 	"Chaos bag": "Chaos bag",
 	"Get action": "Get action",
 	"Give an action": "Give an action",
