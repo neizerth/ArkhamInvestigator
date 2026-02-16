@@ -133,6 +133,9 @@
 
 	"chaosBag.clear.title": "Очистить мешок хаоса?",
 	"chaosBag.clear.text": "Это действие удалит все жетоны из мешка хаоса",
+	"chaosBag.tokensRevealed_one": "{{name}} вытягивает жетон {{tokens}}",
+	"chaosBag.tokensRevealed_few": "{{name}} вытягивает жетоны {{tokens}}",
+	"chaosBag.tokensRevealed_many": "{{name}} вытягивает жетоны {{tokens}}",
 
 	"Modify tokens": "Изменять значения жетонов",
 

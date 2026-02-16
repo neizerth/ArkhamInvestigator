@@ -1,3 +1,4 @@
+import type { ChaosTokenType } from "@modules/chaos-bag/base/shared/model";
 import type { Faction } from "@shared/model";
 import type { BaseToastProps, ToastType } from "react-native-toast-message";
 import * as C from "./Toast.components";
@@ -9,11 +10,13 @@ export type ToastProps = BaseToastProps & {
 		image2?: string;
 		faction?: Faction;
 		faction2?: Faction;
+		token?: ChaosTokenType | null;
 	};
 };
 
 export const Toast = ({ type, text1, ...restProps }: ToastProps) => {
-	const { image1, image2, faction, faction2 } = restProps.props;
+	const { image1, image2, faction, faction2, token } = restProps.props;
+
 	return (
 		<C.Container type={type}>
 			<C.Content>
@@ -22,6 +25,7 @@ export const Toast = ({ type, text1, ...restProps }: ToastProps) => {
 				{image2 && (
 					<C.SourceImage source={{ uri: image2 }} faction={faction2} />
 				)}
+				{token && <C.Token type={token} />}
 			</C.Content>
 		</C.Container>
 	);

@@ -1,6 +1,7 @@
 import type { PropsWithBoardId } from "@modules/board/base/shared/model";
 import { chaosBagRevealPrefix } from "@modules/chaos-bag/reveal/base/shared/config";
 import type { RevealedChaosBagToken } from "@modules/chaos-bag/reveal/base/shared/model";
+import { withRemoteMeta } from "@modules/core/network/shared/lib";
 import { createAction } from "@reduxjs/toolkit";
 
 export type RevealChaosTokensPayload = PropsWithBoardId & {
@@ -28,6 +29,9 @@ export type ChaosTokensRevealedPayload = PropsWithBoardId & {
 	manual?: boolean;
 };
 
-export const chaosTokensRevealed = createAction<ChaosTokensRevealedPayload>(
+export const chaosTokensRevealed = createAction(
 	`${chaosBagRevealPrefix}/chaosTokensRevealed`,
+	withRemoteMeta<ChaosTokensRevealedPayload>({
+		notify: "all",
+	}),
 );

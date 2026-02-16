@@ -3,6 +3,7 @@ import { clearRevealedTokensOnNewGameSaga } from "./clear-revealed-tokens-on-new
 import { endRevealEffectsSaga } from "./end-reveal-effects/endRevealEffectsSaga";
 import { initChaosBagRevealSaga } from "./init-chaos-bag-reveal/initChaosBagRevealSaga";
 import { markReturnedTokenAsRemovedSaga } from "./mark-revealed-token-as-removed/markReturnedTokenAsRemovedSaga";
+import { notifyOnRevealSaga } from "./notify-on-reveal/notifyOnRevealSaga";
 import { removeRevealOnBoardResetSaga } from "./remove-reveal-on-board-reset/removeRevealOnBoardClearSaga";
 import { revealMoonTokenSaga } from "./reveal-moon-token/revealMoonTokenSaga";
 import { syncChaosBagUpdatesSaga } from "./sync-chaos-bag-updates/sagas";
@@ -17,4 +18,5 @@ export function* chaosBagRevealFeaturesSaga() {
 	yield spawn(removeRevealOnBoardResetSaga);
 	yield spawn(revealMoonTokenSaga);
 	yield spawn(clearRevealedTokensOnNewGameSaga);
+	yield spawn(notifyOnRevealSaga);
 }

@@ -1,5 +1,5 @@
 import { setBoardAbilityUse } from "@modules/board/abilities/shared/lib";
-import { selectBoardCode } from "@modules/board/base/shared/lib";
+import { selectBoardById } from "@modules/board/base/shared/lib";
 import {
 	chaosTokensRevealed,
 	createRevealedToken,
@@ -38,8 +38,10 @@ function* worker({ payload }: Action) {
 	const values: ReturnType<typeof valuesSelector> =
 		yield select(valuesSelector);
 
-	const codeSelector = selectBoardCode(boardId);
-	const code: ReturnType<typeof codeSelector> = yield select(codeSelector);
+	const boardSelector = selectBoardById(boardId);
+	const board: ReturnType<typeof boardSelector> = yield select(boardSelector);
+
+	const { code } = board.investigator;
 
 	yield put(openChaosTokenRevealModal());
 
@@ -63,7 +65,7 @@ function* worker({ payload }: Action) {
 	yield put(
 		chaosTokensRevealed({
 			code,
-			boardId,
+			boardId: board.id,
 			tokens,
 		}),
 	);

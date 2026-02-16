@@ -1,4 +1,5 @@
 import { Alegreya } from "@assets/fonts";
+import { ChaosToken } from "@modules/chaos-bag/base/shared/ui";
 import { GameText } from "@modules/core/theme/shared/ui";
 import { color, factionColor, font, size } from "@shared/config";
 import type { PropsWithFaction } from "@shared/model";
@@ -18,6 +19,10 @@ const boarderColor: Record<ToastType, string> = {
 	error: color.skill.combat.dark,
 	info: color.status.info,
 };
+
+export const Token: typeof ChaosToken = styled(ChaosToken)`
+
+`;
 
 export const Container: FC<ContainerProps> = styled(View)`
   max-width: 340px;
