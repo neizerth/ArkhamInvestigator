@@ -1,3 +1,4 @@
+import { withRemoteMeta } from "@modules/core/network/shared/lib";
 import { roundTimingPrefix } from "@modules/mechanics/rules/round-timing/shared/config";
 import type { TimingPhaseId } from "@modules/mechanics/rules/round-timing/shared/model";
 import { createAction } from "@reduxjs/toolkit";
@@ -7,6 +8,9 @@ export type OpenTimingWizardModalPayload = {
 	phaseId: TimingPhaseId;
 };
 
-export const openTimingWizardModal = createAction<OpenTimingWizardModalPayload>(
+export const openTimingWizardModal = createAction(
 	`${roundTimingPrefix}/openModal`,
+	withRemoteMeta<OpenTimingWizardModalPayload>({
+		notify: "all",
+	}),
 );

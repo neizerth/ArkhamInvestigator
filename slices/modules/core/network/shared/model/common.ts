@@ -20,6 +20,7 @@ export type NetworkClient = {
 export type NetworkNotificationType = "reciever" | "all" | "host" | "self";
 
 export type NetworkIncomeActionMeta = {
+	fromRemote: true;
 	networkId: string;
 	messageId: string;
 	notify: NetworkNotificationType;

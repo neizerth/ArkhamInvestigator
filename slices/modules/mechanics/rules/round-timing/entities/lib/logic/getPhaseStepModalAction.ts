@@ -9,6 +9,7 @@ type GetPhaseStepModalActionOptions = {
 	step?: TimingPhaseStep;
 	prevStep?: TimingPhaseStep;
 	nextStep?: TimingPhaseStep;
+	processStep?: boolean;
 };
 
 const actionIcon = {

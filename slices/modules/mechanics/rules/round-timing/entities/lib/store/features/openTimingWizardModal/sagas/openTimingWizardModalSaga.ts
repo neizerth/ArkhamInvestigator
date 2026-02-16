@@ -1,15 +1,17 @@
 import { openConfirm } from "@modules/core/modal/shared/confirm/lib";
-import { put, takeEvery } from "redux-saga/effects";
+import { put, select, takeEvery } from "redux-saga/effects";
 
+import { getPhaseStepModalAction } from "../../../../logic";
 import {
 	type TimingWizardModalSagaData,
-	getTimingWizardModalSagaData as getData,
-	getPhaseStepModalAction,
-} from "../../../../logic";
+	selectTimingWizardModalSagaData,
+} from "../../../selectors";
 import { openTimingWizardModal } from "../openTimingWizardModal";
 
 function* worker({ payload }: ReturnType<typeof openTimingWizardModal>) {
-	const data: TimingWizardModalSagaData = yield getData(payload);
+	const data: TimingWizardModalSagaData | undefined = yield select(
+		selectTimingWizardModalSagaData(payload),
+	);
 
 	if (!data) {
 		return;

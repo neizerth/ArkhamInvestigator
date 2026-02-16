@@ -20,23 +20,23 @@ export const AppProvider = ({ children }: PropsWithChildren) => {
 	return (
 		<GestureHandlerRootView>
 			<StoreProvider>
-				<ModalProvider>
-					<AppLoadProvider>
-						<ThemeProvider value={DarkTheme}>
-							<I18NProvider>
-								<ErrorProvider>
-									<ToastProvider>
+				<ToastProvider>
+					<ModalProvider>
+						<AppLoadProvider>
+							<ThemeProvider value={DarkTheme}>
+								<I18NProvider>
+									<ErrorProvider>
 										<DeeplinkProvider>
 											<AppStateProvider>
 												<RouterProvider>{children}</RouterProvider>
 											</AppStateProvider>
 										</DeeplinkProvider>
-									</ToastProvider>
-								</ErrorProvider>
-							</I18NProvider>
-						</ThemeProvider>
-					</AppLoadProvider>
-				</ModalProvider>
+									</ErrorProvider>
+								</I18NProvider>
+							</ThemeProvider>
+						</AppLoadProvider>
+					</ModalProvider>
+				</ToastProvider>
 			</StoreProvider>
 		</GestureHandlerRootView>
 	);

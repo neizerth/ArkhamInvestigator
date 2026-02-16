@@ -17,6 +17,7 @@ export function createTCPIncomeAction<T extends string, P = unknown>(
 ): TCPIncomeAction<P> {
 	const meta: TCPIncomeActionMeta = {
 		...action.meta,
+		fromRemote: true,
 		notify: "self",
 		source: "tcp",
 		socket,
