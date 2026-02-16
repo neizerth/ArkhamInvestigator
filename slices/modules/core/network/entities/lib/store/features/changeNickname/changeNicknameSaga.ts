@@ -5,10 +5,12 @@ import { changeNickname, nicknameChanged } from "./changeNickname";
 function* worker({ payload }: ReturnType<typeof changeNickname>) {
 	const oldValue: ReturnType<typeof selectNickname> =
 		yield select(selectNickname);
+
+	yield put(setNickname(payload));
+
 	if (!oldValue) {
 		return;
 	}
-	yield put(setNickname(payload));
 
 	yield put(nicknameChanged({ oldValue, value: payload }));
 }
