@@ -1,3 +1,4 @@
+import { createRemoteReducer } from "@modules/core/network/shared/lib";
 import { createSlice } from "@reduxjs/toolkit";
 import { createSliceState } from "redux-toolkit-helpers";
 import type { TimingPhaseId } from "../../model";
@@ -17,12 +18,43 @@ const initialState: RoundTimingState = {
 
 const state = createSliceState(initialState);
 
+const stateReducers = {
+	...state.reducers,
+	...reducers,
+};
+
 export const roundTiming = createSlice({
 	name: "roundTiming",
 	...state,
 	reducers: {
-		...state.reducers,
-		...reducers,
+		...stateReducers,
+		setOpenTimingPhases: createRemoteReducer(
+			stateReducers.setOpenTimingPhases,
+			{
+				notify: "all",
+			},
+		),
+		setTimingWizardStepIndex: createRemoteReducer(
+			stateReducers.setTimingWizardStepIndex,
+			{
+				notify: "all",
+			},
+		),
+		setTimingWizardPhaseId: createRemoteReducer(
+			stateReducers.setTimingWizardPhaseId,
+			{
+				notify: "all",
+			},
+		),
+		openTimingPhase: createRemoteReducer(stateReducers.openTimingPhase, {
+			notify: "all",
+		}),
+		closeTimingPhase: createRemoteReducer(stateReducers.closeTimingPhase, {
+			notify: "all",
+		}),
+		startTimingWizard: createRemoteReducer(stateReducers.startTimingWizard, {
+			notify: "all",
+		}),
 	},
 });
 
