@@ -1,5 +1,5 @@
 {
-	"adjective": [
+	"prefix": [
 		"Eldritch",
 		"Unspeakable",
 		"Squamous",
@@ -28,7 +28,7 @@
 		"Corrupted",
 		"Forgotten"
 	],
-	"noun": [
+	"postfix": [
 		"Investigator",
 		"Cultist",
 		"Deep One",

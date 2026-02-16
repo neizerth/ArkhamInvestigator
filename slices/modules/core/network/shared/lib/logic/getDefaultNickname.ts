@@ -4,7 +4,7 @@ import { getRandomItem } from "@shared/lib/util";
 export const getDefaultNickname = (language: string) => {
 	const translations = nameTranslations[language] ?? nameTranslations.en;
 
-	const adjective = getRandomItem(translations.adjective);
-	const noun = getRandomItem(translations.noun);
-	return `${adjective} ${noun}`;
+	const prefix = getRandomItem(translations.prefix);
+	const postfix = getRandomItem(translations.postfix);
+	return `${prefix} ${postfix}`;
 };
