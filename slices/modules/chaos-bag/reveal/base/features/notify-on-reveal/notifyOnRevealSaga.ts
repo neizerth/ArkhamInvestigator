@@ -9,6 +9,11 @@ function* worker({ payload }: ReturnType<typeof chaosTokensRevealed>) {
 	const currentBoard: ReturnType<typeof selectCurrentBoard> =
 		yield select(selectCurrentBoard);
 
+	console.log({
+		boardId,
+		currentBoardId: currentBoard.id,
+	});
+
 	if (currentBoard.id === boardId) {
 		return;
 	}
@@ -23,6 +28,7 @@ function* worker({ payload }: ReturnType<typeof chaosTokensRevealed>) {
 
 	yield put(
 		sendInvestigatorNotification({
+			remote: false,
 			boardId,
 			message: "chaosBag.tokensRevealed",
 			data: {
