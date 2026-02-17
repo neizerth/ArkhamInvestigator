@@ -71,12 +71,11 @@ export const Info: typeof View = styled(View)`
   right: 0;
   width: 40px;
   height: 40px;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   background-color: rgba(0, 0, 0, 0.4);
   border-radius: 0 ${size.borderRadius.large}px 0 0;
-  padding: 2px 8px;
-  padding-top: 2px;
+  padding: 8px;
 `;
 
 export const SelectedCount: typeof View = styled(View)`
@@ -102,5 +101,5 @@ export const Count: typeof UnscaledText = styled(UnscaledText)`
 export const ExtraIcon: typeof Icon = styled(Icon)`
   font-size: 22px;
   text-align: center;
-  color: ${color.white}
+  color: ${color.white};
 `;
