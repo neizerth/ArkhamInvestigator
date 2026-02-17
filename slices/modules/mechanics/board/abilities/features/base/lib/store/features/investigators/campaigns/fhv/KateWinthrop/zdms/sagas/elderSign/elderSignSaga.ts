@@ -1,25 +1,11 @@
 import { selectBoardById } from "@modules/board/base/shared/lib";
-import { isRevealedTokenActive } from "@modules/chaos-bag/result/shared/lib";
-import { chaosBagRevealEnd } from "@modules/chaos-bag/reveal/base/entities/lib";
+import type { chaosBagRevealEnd } from "@modules/chaos-bag/reveal/base/entities/lib";
+import { filterElderSignSuccess } from "@modules/chaos-bag/reveal/base/entities/lib/store/features/endChaosBagReveal/filterElderSignSuccess";
 import { InvesigatorCode } from "@modules/mechanics/investigator/entities/config";
 import { put, select, takeEvery } from "redux-saga/effects";
 import { chargeFluxStabilizer } from "../chargeFluxStabilizer";
 
-const filterAction = (action: unknown) => {
-	if (!chaosBagRevealEnd.match(action)) {
-		return false;
-	}
-
-	const { failed, skillCheckBoardId, allRevealedTokens } = action.payload;
-
-	const tokens = allRevealedTokens.filter(isRevealedTokenActive);
-
-	return (
-		tokens.some(({ type }) => type === "elderSign") &&
-		failed === false &&
-		Boolean(skillCheckBoardId)
-	);
-};
+const filterAction = filterElderSignSuccess("success");
 
 function* worker({ payload }: ReturnType<typeof chaosBagRevealEnd>) {
 	const { skillCheckBoardId } = payload;
