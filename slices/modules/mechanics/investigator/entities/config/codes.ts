@@ -19,6 +19,7 @@ export const InvesigatorCode = {
 
 	CalvinWright: "04005",
 	HankSamson: "10015",
+	CharlieKane: "09018",
 	JimCulver: {
 		base: "02004",
 		parallel: "90049",

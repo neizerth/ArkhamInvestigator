@@ -30,7 +30,7 @@ export const RightSidebar = ({ ...props }: RightSidebarProps) => {
 	const showMainDoom = showDoom && xs;
 
 	const showMainGroup = showClues || showResources || showMainDoom;
-	const showSideGroup = showSideDoom || showHandSize;
+	const showSideGroup = showSideDoom || showHandSize || showAllySlots;
 
 	const { light } = useAppSelector(
 		selectBoardProp({
@@ -39,7 +39,7 @@ export const RightSidebar = ({ ...props }: RightSidebarProps) => {
 		}),
 	);
 
-	const inline = showDoom || showHandSize;
+	const inline = showDoom || showHandSize || showAllySlots;
 	const compact = pickerSize === "small" || showHandSize;
 
 	const groupProps = {
@@ -51,13 +51,13 @@ export const RightSidebar = ({ ...props }: RightSidebarProps) => {
 			<C.Container {...groupProps}>
 				{showSideGroup && (
 					<C.SideGroup {...groupProps} inline={inline}>
+						{showAllySlots && <C.Allies inline={showHandSize} />}
 						{showSideDoom && <C.Doom inline={showHandSize} />}
 						{showHandSize && <HandSize />}
 					</C.SideGroup>
 				)}
 				{showMainGroup && (
 					<C.MainGroup {...groupProps} inline={inline}>
-						{showAllySlots && <C.Allies />}
 						{showClues && <C.Clues light={light} />}
 						{showResources && <C.Resources />}
 						{showMainDoom && <C.Doom />}

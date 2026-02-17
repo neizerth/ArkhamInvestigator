@@ -86,5 +86,10 @@ export const Doom: FC<DoomProps> = styled(InvestigatorDoom)`
 	`}
 `;
 
-export const Allies: typeof AllyStots = styled(AllyStots)`
+type AlliesProps = ComponentProps<typeof AllyStots> & {
+	inline?: boolean;
+};
+
+export const Allies: FC<AlliesProps> = styled(AllyStots)`
+	margin-top: 30px;
 `;

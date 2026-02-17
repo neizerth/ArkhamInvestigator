@@ -4,6 +4,7 @@ import type { PartiallyRequired } from "@shared/model";
 import { mergeDeepRight } from "ramda";
 import { v4 } from "uuid";
 import {
+	DEFAULT_ALLY_SLOTS,
 	DEFAULT_HAND_SIZE,
 	DEFAULT_UPKEEP_RESOURCES_INCREASE,
 	NEW_TURN_ACTIONS_COUNT,
@@ -34,10 +35,10 @@ export const createInvestigatorBoard = ({
 		resources: START_GAME_RESOURCES_COUNT,
 		actions: NEW_TURN_ACTIONS_COUNT,
 		handSize: DEFAULT_HAND_SIZE,
+		allySlots: DEFAULT_ALLY_SLOTS,
 		upkeepResourcesIncrease: 0,
 		clues: 0,
 		doom: 0,
-		allySlots: 1,
 	};
 
 	const baseValue = {
