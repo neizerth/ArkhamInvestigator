@@ -1,5 +1,7 @@
 import type { Faction } from "@shared/model";
+
 import type { FC } from "react";
+import { Platform } from "react-native";
 
 import { View } from "react-native";
 import type { ViewProps } from "react-native";
@@ -12,6 +14,8 @@ import type { PropsWithFaction } from "@shared/model/ui";
 import { Icon, UnscaledText } from "@shared/ui";
 import Color from "color";
 import { SignatureImage, type SignatureImageProps } from "../signature-image";
+
+const ios = Platform.OS === "ios";
 
 const getSelectionColor = (faction: Faction) => {
 	const color = factionColor[faction].darkColor;
@@ -71,11 +75,16 @@ export const Info: typeof View = styled(View)`
   right: 0;
   width: 40px;
   height: 40px;
-  align-items: center;
   justify-content: center;
   background-color: rgba(0, 0, 0, 0.4);
   border-radius: 0 ${size.borderRadius.large}px 0 0;
-  padding: 8px;
+  padding: 2px 8px;
+  ${
+		ios &&
+		css`
+    padding: 8px;
+  `
+	}
 `;
 
 export const SelectedCount: typeof View = styled(View)`
@@ -102,4 +111,10 @@ export const ExtraIcon: typeof Icon = styled(Icon)`
   font-size: 22px;
   text-align: center;
   color: ${color.white};
+  ${
+		!ios &&
+		css`
+    top: -4px
+  `
+	}
 `;
