@@ -93,6 +93,11 @@ export const AbilityCode = {
 			reaction: "joe-succeed-investigation",
 		},
 	},
+	IsabelleBarnes: {
+		core2026: {
+			fast: "isabelle-takes-horror",
+		},
+	},
 };
 
 export const LilyChenAbilityCodes = Object.values(AbilityCode.LilyChen);

@@ -8,7 +8,10 @@ export const InvesigatorCode = {
 		base: "01004",
 		parallel: "90017",
 	},
-	IsabelleBarnes: "zjc_00027",
+	IsabelleBarnes: {
+		core2026: "12013",
+		JennysChoice: "zjc_00027",
+	},
 	MarkHarrigan: "03001",
 
 	GeorgeBarnaby: "11017",

@@ -2,7 +2,7 @@ import type { InvestigatorTokenValueModification } from "@modules/mechanics/chao
 import { InvesigatorCode } from "@modules/mechanics/investigator/entities/config";
 
 export const IsabelleBarnesTokenValues: InvestigatorTokenValueModification = {
-	[InvesigatorCode.IsabelleBarnes]: ({ board }) => {
+	[InvesigatorCode.IsabelleBarnes.JennysChoice]: ({ board }) => {
 		const { value } = board;
 		return {
 			elderSign: value.resources,
