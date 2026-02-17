@@ -69,4 +69,8 @@ export const InvesigatorCode = {
 	KateWinthrop: {
 		darkMatter: "zdms_00001",
 	},
+	JoeDiamond: {
+		tcu: "05002",
+		core2026: "12004",
+	},
 };

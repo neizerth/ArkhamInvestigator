@@ -63,7 +63,7 @@ export const ChaosBagFillPage = () => {
 	return (
 		<C.Container title={title} onClose={back}>
 			<C.Content>
-				<C.Select />
+				<C.Select story={story} />
 				<C.Preview />
 				<C.Actions>
 					<C.Cancel text={t`Cancel`} icon="dismiss" onPress={back} />
