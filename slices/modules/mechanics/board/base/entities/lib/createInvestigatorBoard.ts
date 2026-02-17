@@ -37,6 +37,7 @@ export const createInvestigatorBoard = ({
 		upkeepResourcesIncrease: 0,
 		clues: 0,
 		doom: 0,
+		allySlots: 1,
 	};
 
 	const baseValue = {

@@ -1,5 +1,6 @@
 import {
 	selectBoardProp,
+	selectShowAllySlots,
 	selectShowClues,
 	selectShowInvestigatorDoom,
 	selectShowResources,
@@ -22,6 +23,7 @@ export const RightSidebar = ({ ...props }: RightSidebarProps) => {
 	const showDoom = useAppSelector(selectShowInvestigatorDoom);
 	const showClues = useAppSelector(selectShowClues);
 	const showResources = useAppSelector(selectShowResources);
+	const showAllySlots = useAppSelector(selectShowAllySlots);
 	const pickerSize = useAppSelector(selectPickerSize);
 
 	const showSideDoom = showDoom && !xs;
@@ -55,6 +57,7 @@ export const RightSidebar = ({ ...props }: RightSidebarProps) => {
 				)}
 				{showMainGroup && (
 					<C.MainGroup {...groupProps} inline={inline}>
+						{showAllySlots && <C.Allies />}
 						{showClues && <C.Clues light={light} />}
 						{showResources && <C.Resources />}
 						{showMainDoom && <C.Doom />}

@@ -1,5 +1,6 @@
 import type { ComponentProps, FC } from "react";
 import { Dimensions, View, type ViewProps } from "react-native";
+import { AllyStots } from "slices/pages/board/board/ui/shared/stats/AllyStots";
 import styled, { css } from "styled-components/native";
 import { assetsSize } from "../../../../../../config";
 import {
@@ -83,4 +84,7 @@ export const Doom: FC<DoomProps> = styled(InvestigatorDoom)`
 		css`
 		margin-top: 30px;
 	`}
+`;
+
+export const Allies: typeof AllyStots = styled(AllyStots)`
 `;

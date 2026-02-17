@@ -5,6 +5,7 @@ export const clueImage = require("./clue.png");
 export const resourceImage = require("./resource.png");
 export const doomImage = require("./doom.png");
 export const handSizeImage = require("./hand-size.png");
+export const allyImage = require("./ally.png");
 
 export default [
 	actionImage,
@@ -14,4 +15,5 @@ export default [
 	resourceImage,
 	doomImage,
 	handSizeImage,
+	allyImage,
 ];

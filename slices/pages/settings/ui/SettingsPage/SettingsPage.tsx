@@ -184,6 +184,13 @@ export const SettingsPage = () => {
 							actionCreator={B.setShowUpkeepResources}
 						/>
 					</C.Row>
+					<C.Row>
+						<C.Checkbox
+							label="Ally slots"
+							selector={B.selectShowAllySlots}
+							actionCreator={B.setShowAllySlots}
+						/>
+					</C.Row>
 					{CAN_ALWAYS_SHOW_GAME_TEXT && (
 						<>
 							<C.Rule />

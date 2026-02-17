@@ -31,6 +31,7 @@ export type InvestigatorGameStatType =
 	| "clues"
 	| "handSize"
 	| "doom"
+	| "allySlots"
 	| "upkeepResourcesIncrease";
 
 export type SkillType = InvestigatorSkillType | "wild";

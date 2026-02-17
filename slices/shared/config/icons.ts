@@ -17,6 +17,7 @@ export const classicStatIcons: Record<InvestigatorBoardNumericStat, string> = {
 	agility: "skill_agility",
 	combat: "skill_combat",
 	intellect: "skill_intellect",
+	allySlots: "ally_inverted",
 };
 
 export const simpleStatIcons: Record<InvestigatorBoardNumericStat, string> = {
@@ -27,6 +28,7 @@ export const simpleStatIcons: Record<InvestigatorBoardNumericStat, string> = {
 	agility: "agility",
 	combat: "combat",
 	intellect: "intellect",
+	allySlots: "ally_inverted",
 };
 
 export const iconMapping = {

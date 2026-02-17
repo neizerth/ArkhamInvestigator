@@ -55,6 +55,7 @@ export const color = {
 	resource: "#452e26",
 	clue: "#486527",
 	handSize: "#6c8083",
+	ally: "#646464",
 	doom: {
 		light: "#ff0a1a",
 		dark: "#c50814",

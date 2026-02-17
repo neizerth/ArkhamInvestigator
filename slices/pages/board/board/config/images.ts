@@ -35,4 +35,5 @@ export const assetsSize = {
 	main: 70,
 	action: 65,
 	resource: 73,
+	ally: 73,
 };

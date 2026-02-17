@@ -32,6 +32,11 @@ export const HandSizeStatBackground = withThemeBackground({
 	fallbackSource: basic.handSizeImage,
 });
 
+export const AllyStatBackground = withThemeBackground({
+	source: ffg.allyImage,
+	fallbackSource: basic.allyImage,
+});
+
 export const ResourceStatBackground = withThemeBackground({
 	source: ffg.resourceImage,
 	fallbackSource: basic.resourceImage,
