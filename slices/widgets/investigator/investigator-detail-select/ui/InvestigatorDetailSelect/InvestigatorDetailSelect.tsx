@@ -43,6 +43,7 @@ export const InvestigatorDetailSelect = () => {
 	const onChangeSignature = useCallback(
 		(item: DetailItem) => {
 			dispatch(setCurrentSignatureId(item?.value || null));
+			dispatch(setCurrentSkinId(item?.imageId ?? null));
 		},
 		[dispatch],
 	);
