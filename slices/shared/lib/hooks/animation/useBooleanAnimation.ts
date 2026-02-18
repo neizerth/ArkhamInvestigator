@@ -40,13 +40,6 @@ export const useBooleanAnimation = <T extends DefaultStyle = DefaultStyle>({
 	const isMountedRef = useRef(true);
 	const runIdRef = useRef(0);
 
-	// Stable refs for callbacks - prevents animation restart on callback change
-	const onCompleteRef = useRef(onComplete);
-	onCompleteRef.current = onComplete;
-
-	const onStartRef = useRef(onStart);
-	onStartRef.current = onStart;
-
 	// Worklet-safe mirrors (readable on UI thread)
 	const runIdSV = useSharedValue(0);
 	const mountedSV = useSharedValue(1);
@@ -91,8 +84,8 @@ export const useBooleanAnimation = <T extends DefaultStyle = DefaultStyle>({
 				}
 			}
 
-			if (onStartRef.current && stillValidJS()) {
-				onStartRef.current();
+			if (onStart && stillValidJS()) {
+				onStart();
 			}
 
 			cancelAnimation(sharedValue);
@@ -108,8 +101,8 @@ export const useBooleanAnimation = <T extends DefaultStyle = DefaultStyle>({
 				if (runIdSV.value !== thisRunId) {
 					return;
 				}
-				if (onCompleteRef.current) {
-					runOnJS(onCompleteRef.current)();
+				if (onComplete) {
+					runOnJS(onComplete)();
 				}
 			});
 		};
@@ -126,6 +119,8 @@ export const useBooleanAnimation = <T extends DefaultStyle = DefaultStyle>({
 		minValue,
 		delayMs,
 		duration,
+		onStart,
+		onComplete,
 		mountedSV,
 		runIdSV,
 		sharedValue,
