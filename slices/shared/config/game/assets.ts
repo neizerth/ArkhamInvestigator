@@ -14,6 +14,9 @@ export const gameAssets = {
 	handSize: {
 		ratio: 267 / 375,
 	},
+	ally: {
+		ratio: 1,
+	},
 	doom: {
 		ratio: 1,
 	},

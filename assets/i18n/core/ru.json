@@ -342,6 +342,8 @@
 
 	"ability.kate.darkMatter.fluxStabilizer.charge": "{{name}} кладёт 1 заряд на Потоковый стабилизатор",
 
+	"ability.joe.core2026.elderSign": "{{name}} берёт 1 карту и получает 1 ресурс",
+	"ability.joe.core2026.reaction": "{{name}} берёт 1 карту",
 	"resources.notEnough": "Недостаточно ресурсов. Необходимо&nbsp;{{count}}, доступно&nbsp;{{available}}",
 
 	"heal.damage": "Вылечить {{value}}/{{total}} [health]",
@@ -523,5 +525,6 @@
 	"Multiplayer": "Мультиплеер",
 	"Single player": "Один игрок",
 	"Code": "Код",
-	"Next": "Далее"
+	"Next": "Далее",
+	"Ally Slots": "Союзники"
 }

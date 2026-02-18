@@ -13,4 +13,5 @@ export const createFallbackBoardValues = (): InvestigatorBoardValues => ({
 	upkeepResourcesIncrease: 0,
 	resources: 0,
 	doom: 0,
+	allySlots: 1,
 });

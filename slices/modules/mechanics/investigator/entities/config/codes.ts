@@ -8,7 +8,10 @@ export const InvesigatorCode = {
 		base: "01004",
 		parallel: "90017",
 	},
-	IsabelleBarnes: "zjc_00027",
+	IsabelleBarnes: {
+		core2026: "12013",
+		JennysChoice: "zjc_00027",
+	},
 	MarkHarrigan: "03001",
 
 	GeorgeBarnaby: "11017",
@@ -16,6 +19,7 @@ export const InvesigatorCode = {
 
 	CalvinWright: "04005",
 	HankSamson: "10015",
+	CharlieKane: "09018",
 	JimCulver: {
 		base: "02004",
 		parallel: "90049",
@@ -68,5 +72,9 @@ export const InvesigatorCode = {
 	JeromeDavids: "05047",
 	KateWinthrop: {
 		darkMatter: "zdms_00001",
+	},
+	JoeDiamond: {
+		tcu: "05002",
+		core2026: "12004",
 	},
 };

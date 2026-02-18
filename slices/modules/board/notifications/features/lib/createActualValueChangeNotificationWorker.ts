@@ -31,7 +31,7 @@ export const createActualValueChangeNotificationWorker = <
 		if (value === 0) {
 			return;
 		}
-		const isSelf = sourceBoardId === boardId;
+		const isSelf = !sourceBoardId || sourceBoardId === boardId;
 		const selfMessage = options.selfMessage ?? options.message;
 		const message = isSelf ? selfMessage : options.message;
 

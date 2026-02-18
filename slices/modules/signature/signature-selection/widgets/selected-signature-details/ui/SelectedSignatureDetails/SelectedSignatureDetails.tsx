@@ -55,8 +55,10 @@ export const SelectedSignatureDetails = ({
 
 	const onChangeSignature = useCallback(
 		(item: DetailItem) => {
-			const value = item?.value ?? null;
-			dispatch(setCurrentSignatureId(value));
+			const id = item?.value ?? null;
+			const skinId = item?.imageId ?? null;
+			dispatch(setCurrentSignatureId(id));
+			dispatch(setCurrentSkinId(skinId));
 		},
 		[dispatch],
 	);

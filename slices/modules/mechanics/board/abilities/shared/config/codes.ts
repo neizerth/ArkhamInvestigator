@@ -88,6 +88,16 @@ export const AbilityCode = {
 	LukeRobinson: "gate-box",
 	AgathaCrane: "play-event-from-discard-pile-after-turn-ends",
 	JacquelineFine: "choose-between-3-tokens",
+	JoeDiamond: {
+		core2026: {
+			reaction: "joe-succeed-investigation",
+		},
+	},
+	IsabelleBarnes: {
+		core2026: {
+			fast: "isabelle-takes-horror",
+		},
+	},
 };
 
 export const LilyChenAbilityCodes = Object.values(AbilityCode.LilyChen);

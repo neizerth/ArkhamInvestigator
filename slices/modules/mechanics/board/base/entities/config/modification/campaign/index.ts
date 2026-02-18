@@ -7,6 +7,7 @@ import { TheCircleUndoneBoardModification } from "./tcu";
 import { TheDrownedCityBoardModification } from "./tdc";
 import { TheDreamEatersBoardModification } from "./tde";
 import { TheForgottenAgeBoardModificaiton } from "./tfa";
+import { TheScarletKeysBoardModification } from "./tsk";
 
 export const CampaignBoardModification: InvestigatorBoardModification = {
 	...CoreBoardModification,
@@ -16,5 +17,6 @@ export const CampaignBoardModification: InvestigatorBoardModification = {
 	...EdgeOfTheEarthBoardModification,
 	...TheDrownedCityBoardModification,
 	...TheDreamEatersBoardModification,
+	...TheScarletKeysBoardModification,
 	...TheFeastOfHemlockValeBoardModification,
 };

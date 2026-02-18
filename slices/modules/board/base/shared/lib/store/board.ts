@@ -23,6 +23,7 @@ export type BoardState = {
 	showScenarioClues: boolean;
 	showScenarioResources: boolean;
 	showInvestigatorDoom: boolean;
+	showAllySlots: boolean;
 	tapToHidePins: boolean;
 	alwaysShowGameText: boolean;
 	showInitialHealthAndSanity: boolean;
@@ -62,6 +63,7 @@ const initialState: BoardState = {
 	allowNegativeHealthAndSanity: false,
 	showUpkeepResources: false,
 	syncScenarioClues: false,
+	showAllySlots: false,
 
 	showDescription: false,
 	descriptionTransition: false,
@@ -159,6 +161,7 @@ export const {
 	setAllowNegativeHealthAndSanity,
 	setShowUpkeepResources,
 	setSyncScenarioClues,
+	setShowAllySlots,
 
 	// internal reducers
 	setBoardInternal,
@@ -210,7 +213,7 @@ export const {
 	selectAllowNegativeHealthAndSanity,
 	selectShowUpkeepResources,
 	selectSyncScenarioClues,
-
+	selectShowAllySlots,
 	selectShowDescription,
 	selectDescriptionTransition,
 } = board.selectors;

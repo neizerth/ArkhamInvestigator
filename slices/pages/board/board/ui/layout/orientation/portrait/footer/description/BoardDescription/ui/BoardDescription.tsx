@@ -48,6 +48,7 @@ export const BoardDescription = ({ ...props }: BoardDescriptionProps) => {
 
 	const descriptionStyle = useFadeAnimation({
 		show: showText,
+		duration: 300,
 	});
 
 	const containerStyle = useContainerAnimation({

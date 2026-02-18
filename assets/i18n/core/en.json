@@ -321,6 +321,8 @@
 
 	"ability.kate.darkMatter.fluxStabilizer.charge": "{{name}} places 1 charge on the Flux Stabilizer",
 
+	"ability.joe.core2026.elderSign": "{{name}} gets 1 card and 1 resource",
+
 	"resources.notEnough": "Not enough resources. Required&nbsp;{{count}}, available&nbsp;{{available}}",
 
 	"heal.damage_one": "Heal {{count}} [health]",
@@ -513,5 +515,6 @@
 	"Scenario Reference": "Scenario Reference",
 	"Multiplayer": "Multiplayer",
 	"Single player": "Single player",
-	"Next": "Next"
+	"Next": "Next",
+	"Ally Slots": "Ally Slots"
 }
