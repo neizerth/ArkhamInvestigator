@@ -9,3 +9,4 @@ export * from "./object";
 export * from "./date";
 export * from "./store";
 export * from "./global";
+export * from "./function";

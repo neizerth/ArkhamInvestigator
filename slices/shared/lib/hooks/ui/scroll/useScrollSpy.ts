@@ -1,6 +1,7 @@
 import { propEq } from "ramda";
 import { useCallback, useState } from "react";
 import type { FlatListProps, ViewToken } from "react-native";
+import { useDebounce } from "../../common";
 
 type ViewableItemsCallback<T> = Exclude<
 	FlatListProps<T>["onViewableItemsChanged"],
@@ -10,7 +11,7 @@ type ViewableItemsCallback<T> = Exclude<
 export function useScrollSpy<T>() {
 	const [token, setToken] = useState<ViewToken<T>>();
 
-	const onChange: ViewableItemsCallback<T> = useCallback(
+	const onChangeCallback: ViewableItemsCallback<T> = useCallback(
 		(info) => {
 			const { viewableItems } = info;
 			const [first] = viewableItems.filter(propEq(true, "isViewable"));
@@ -20,8 +21,10 @@ export function useScrollSpy<T>() {
 			}
 			setToken(first);
 		},
-		[token],
+		[token?.index],
 	);
+
+	const onChange = useDebounce(onChangeCallback, 150);
 
 	return [token?.item, onChange] as [T, typeof onChange];
 }
