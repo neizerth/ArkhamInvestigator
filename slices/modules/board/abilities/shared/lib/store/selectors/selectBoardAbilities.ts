@@ -1,5 +1,5 @@
 import {
-	selectBoardProp,
+	createBoardPropSelectorInput,
 	selectBoardsCount,
 } from "@modules/board/base/shared/lib";
 import type { BoardId } from "@modules/board/base/shared/model";
@@ -11,11 +11,7 @@ export const selectBoardAbilities = (boardId: BoardId) => (state: RootState) =>
 	select(state, boardId);
 
 const select = createSelector(
-	[
-		(state, boardId: BoardId) =>
-			selectBoardProp({ prop: "investigator", boardId })(state),
-		selectBoardsCount,
-	],
+	[createBoardPropSelectorInput("investigator"), selectBoardsCount],
 	(investigator, investigatorsCount) => {
 		if (!investigator) {
 			return [];

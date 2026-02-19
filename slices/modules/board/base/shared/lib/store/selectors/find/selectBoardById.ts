@@ -1,19 +1,26 @@
 import type { BoardId } from "@modules/board/base/shared/model";
 import { createSelector } from "@reduxjs/toolkit";
+import type { RootState } from "@shared/model";
 import {
 	selectCurrentInvestigatorIndex,
 	selectInvestigatorBoards,
 } from "../../board";
 import { getBoardById } from "../../getters/find/getBoardById";
 
-export const selectBoardById = (boardId: BoardId) =>
-	createSelector(
-		[selectInvestigatorBoards, selectCurrentInvestigatorIndex, () => boardId],
-		(investigatorBoards, currentInvestigatorIndex, boardId) => {
-			return getBoardById({
-				investigatorBoards,
-				currentInvestigatorIndex,
-				boardId,
-			});
-		},
-	);
+export const selectBoardById = (boardId: BoardId) => (state: RootState) =>
+	select(state, boardId);
+
+const select = createSelector(
+	[
+		selectInvestigatorBoards,
+		selectCurrentInvestigatorIndex,
+		(_, boardId: BoardId) => boardId,
+	],
+	(investigatorBoards, currentInvestigatorIndex, boardId) => {
+		return getBoardById({
+			investigatorBoards,
+			currentInvestigatorIndex,
+			boardId,
+		});
+	},
+);

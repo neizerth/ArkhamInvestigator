@@ -1,4 +1,4 @@
-import { selectBoardProp } from "@modules/board/base/shared/lib";
+import { createBoardPropSelectorInput } from "@modules/board/base/shared/lib";
 import type { BoardId } from "@modules/board/base/shared/model";
 import { createSelector } from "@reduxjs/toolkit";
 import type { RootState } from "@shared/model";
@@ -16,8 +16,7 @@ export const selectBoardAbilityValue =
 
 const select = createSelector(
 	[
-		(state, boardId: BoardId) =>
-			selectBoardProp({ boardId, prop: "abilityValues" })(state),
+		createBoardPropSelectorInput("abilityValues"),
 		(_, _boardId: BoardId, abilityId: string) => abilityId,
 		(state, boardId: BoardId, abilityId: string) =>
 			selectBoardAbilityById({ boardId, abilityId })(state),

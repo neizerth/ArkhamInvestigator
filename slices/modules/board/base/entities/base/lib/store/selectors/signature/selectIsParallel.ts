@@ -1,14 +1,12 @@
-import { selectBoardProp } from "@modules/board/base/shared/lib";
+import { createBoardPropSelectorInput } from "@modules/board/base/shared/lib";
 import type { BoardId } from "@modules/board/base/shared/model";
 import { createSelector } from "@reduxjs/toolkit";
+import type { RootState } from "@shared/model";
 
-export const selectIsParallel = (boardId: BoardId) =>
-	createSelector(
-		[
-			selectBoardProp({
-				boardId,
-				prop: "investigator",
-			}),
-		],
-		(investigator) => investigator?.type === "parallel",
-	);
+export const selectIsParallel = (boardId: BoardId) => (state: RootState) =>
+	select(state, boardId);
+
+const select = createSelector(
+	[createBoardPropSelectorInput("investigator")],
+	(investigator) => investigator?.type === "parallel",
+);
