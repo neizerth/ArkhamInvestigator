@@ -1,6 +1,7 @@
 import { selectBoardProp } from "@modules/board/base/shared/lib";
 import type { BoardId } from "@modules/board/base/shared/model";
 import { createSelector } from "@reduxjs/toolkit";
+import type { RootState } from "@shared/model";
 import { selectBoardAbilityById } from "./selectBoardAbilityById";
 
 export type SelectAbilityCounterOptions = {
@@ -8,28 +9,29 @@ export type SelectAbilityCounterOptions = {
 	boardId: BoardId;
 };
 
-export const selectBoardAbilityValue = ({
-	boardId,
-	abilityId,
-}: SelectAbilityCounterOptions) =>
-	createSelector(
-		[
-			selectBoardAbilityById({ boardId, abilityId }),
-			selectBoardProp({
-				boardId,
-				prop: "abilityValues",
-			}),
-		],
-		(ability, values) => {
-			if (!ability) {
-				return 0;
-			}
-			const currentValue = values?.[abilityId];
+export const selectBoardAbilityValue =
+	({ boardId, abilityId }: SelectAbilityCounterOptions) =>
+	(state: RootState) =>
+		select(state, boardId, abilityId);
 
-			if (ability.type === "counter") {
-				return currentValue ?? (ability.defaultValue || 0);
-			}
+const select = createSelector(
+	[
+		(state, boardId: BoardId) =>
+			selectBoardProp({ boardId, prop: "abilityValues" })(state),
+		(_, _boardId: BoardId, abilityId: string) => abilityId,
+		(state, boardId: BoardId, abilityId: string) =>
+			selectBoardAbilityById({ boardId, abilityId })(state),
+	],
+	(values, abilityId, ability) => {
+		if (!ability) {
+			return 0;
+		}
+		const currentValue = values?.[abilityId];
 
-			return currentValue || 0;
-		},
-	);
+		if (ability.type === "counter") {
+			return currentValue ?? (ability.defaultValue || 0);
+		}
+
+		return currentValue || 0;
+	},
+);
