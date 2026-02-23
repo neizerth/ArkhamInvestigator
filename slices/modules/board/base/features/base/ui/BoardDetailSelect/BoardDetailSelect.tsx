@@ -4,7 +4,7 @@ import {
 } from "@modules/signature/base/features/base/ui";
 import { useAppSelector } from "@shared/lib";
 import { useMemo } from "react";
-import { selectDetailItems, selectDisabledItems } from "./lib";
+import { selectDetailItems, selectDisabledSignatureGroupIds } from "./lib";
 
 export type BoardDetailSelectProps = Omit<
 	SignatureDetailSelectProps<number>,
@@ -21,9 +21,9 @@ export function BoardDetailSelect({
 	value,
 	...props
 }: BoardDetailSelectProps) {
-	const boardsData = useAppSelector((state) => selectDetailItems(state, data));
-	const disabledData = useAppSelector((state) =>
-		selectDisabledItems(state, disabled),
+	const boardsData = useAppSelector(selectDetailItems(data));
+	const disabledSignatureGroupIds = useAppSelector(
+		selectDisabledSignatureGroupIds(disabled),
 	);
 
 	const selectedId = useMemo(() => {
@@ -36,7 +36,7 @@ export function BoardDetailSelect({
 			{...props}
 			data={boardsData}
 			selectedId={selectedId}
-			disabled={disabledData}
+			disabled={disabledSignatureGroupIds}
 		/>
 	);
 }
