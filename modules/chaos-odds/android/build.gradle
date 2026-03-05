@@ -51,7 +51,8 @@ android {
                 cppFlags "-std=c++17 -fexceptions -frtti"
                 arguments "-DANDROID_STL=c++_shared",
                           "-DNODE_MODULES_DIR=${nodeModulesDir.absolutePath}",
-                          "-DREACT_NATIVE_DIR=${reactNativeDir.absolutePath}"
+                          "-DREACT_NATIVE_DIR=${reactNativeDir.absolutePath}",
+                          "-DANDROID_SUPPORT_FLEXIBLE_PAGE_SIZES=ON"
             }
         }
     }
