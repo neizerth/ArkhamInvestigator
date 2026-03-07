@@ -1,6 +1,6 @@
+import { Image } from "expo-image";
 import { pick } from "ramda";
 import type { ImageProps } from "react-native";
-import { Image } from "react-native";
 import {
 	type GetSignatureImageUrlOptions,
 	getSignatureImageUrl,
