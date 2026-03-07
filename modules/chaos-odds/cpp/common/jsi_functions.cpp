@@ -63,9 +63,14 @@ Value calculate(
         throw JSError(runtime, errorMessage);
     }
 
-    LOGI("🔵 [JSI] Calling chaos_odds_calculate with available: %s, revealed: %s", 
+    // Reset cancel flag before each calculation (same as iOS).
+    // Otherwise, after "remove all tokens" the saga calls cancel() and exits without
+    // calling native; the flag stays true and the next calculation returns null on Android.
+    chaos_odds_reset_cancel_flag();
+
+    LOGI("🔵 [JSI] Calling chaos_odds_calculate with available: %s, revealed: %s",
          available.c_str(), revealed.c_str());
-    
+
     const char* result_ptr = chaos_odds_calculate(available.c_str(), revealed.c_str());
     if (result_ptr == nullptr) {
         LOGE("❌ [JSI] chaos_odds_calculate returned null");
@@ -125,6 +130,8 @@ Value findTokens(
     std::string tokens = arguments[1].asString(runtime).utf8(runtime);
     std::string params = arguments[2].asString(runtime).utf8(runtime);
 
+    chaos_odds_reset_cancel_flag();
+
     const char* result_ptr = chaos_odds_find_tokens(
         targets.c_str(), tokens.c_str(), params.c_str()
     );
@@ -163,6 +170,8 @@ Value calculateItem(
     std::string revealed = arguments[1].asString(runtime).utf8(runtime);
     uint32_t skill_value = static_cast<uint32_t>(arguments[2].asNumber());
     uint32_t difficulty = static_cast<uint32_t>(arguments[3].asNumber());
+
+    chaos_odds_reset_cancel_flag();
 
     const char* result_ptr = chaos_odds_calculate_item(
         available.c_str(), revealed.c_str(), skill_value, difficulty
