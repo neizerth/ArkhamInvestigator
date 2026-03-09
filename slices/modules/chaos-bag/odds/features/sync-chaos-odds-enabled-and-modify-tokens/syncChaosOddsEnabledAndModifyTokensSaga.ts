@@ -1,10 +1,8 @@
-import {
-	setChaosBagEnabled,
-	setModifyChaosTokens,
-} from "@modules/chaos-bag/base/shared/lib";
+import { setModifyChaosTokens } from "@modules/chaos-bag/base/shared/lib";
 import { put, takeEvery } from "redux-saga/effects";
+import { setShowChaosBagOdds } from "../../shared/lib";
 
-function* worker({ payload }: ReturnType<typeof setChaosBagEnabled>) {
+function* worker({ payload }: ReturnType<typeof setShowChaosBagOdds>) {
 	if (!payload) {
 		return;
 	}
@@ -13,5 +11,5 @@ function* worker({ payload }: ReturnType<typeof setChaosBagEnabled>) {
 }
 
 export function* syncChaosOddsEnabledAndModifyTokensSaga() {
-	yield takeEvery(setChaosBagEnabled.match, worker);
+	yield takeEvery(setShowChaosBagOdds.match, worker);
 }
