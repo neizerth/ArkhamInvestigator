@@ -1,6 +1,6 @@
 import { useAppSelector } from "@shared/lib";
+import { Image, type ImageProps } from "expo-image";
 import { omit, pick } from "ramda";
-import { Image, type ImageProps } from "react-native";
 import { selectSignatureCacheByCode } from "../../lib";
 import type { SignatureImageCacheItem } from "../../model";
 

@@ -1,4 +1,5 @@
-import type { ImageProps, ViewProps } from "react-native";
+import type { ImageProps } from "expo-image";
+import type { ViewProps } from "react-native";
 
 export type AnimatedGrayscaleImageProps = ImageProps & {
 	contentContainerStyle?: ViewProps["style"];
