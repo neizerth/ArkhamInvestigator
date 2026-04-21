@@ -2,7 +2,7 @@ import { isRevealedTokenActive } from "@modules/chaos-bag/result/shared/lib";
 import { propEq } from "ramda";
 import { chaosBagRevealEnd } from "./endChaosBagReveal";
 
-export const filterElderSignSuccess =
+export const createElderSignSuccessFilter =
 	(status: "fail" | "success" | "not-success" | "unknown") =>
 	(action: unknown) => {
 		if (!chaosBagRevealEnd.match(action)) {

@@ -245,6 +245,8 @@
 	"reveal.startNewConfirm.text": "У вас осталась проверка{{skillCheck}}. Продолжить её?",
 	"reveal.startNewConfirm.startNew": "Начать новую",
 
+	"ability.marie.chapter2.reaction": "{{name}} получает 2 карты и сбрасывает одну из них",
+
 	"ability.mateo.base.confirm.title": "Добавить [elder_sign]?",
 	"ability.mateo.base.confirm.text": "Это добавит дополнительный жетон [elder_sign] на время проверки",
 	"ability.mateo.base.confirm.submit": "Добавить [elder_sign]",
