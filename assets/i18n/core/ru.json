@@ -246,6 +246,7 @@
 	"reveal.startNewConfirm.startNew": "Начать новую",
 
 	"ability.marie.chapter2.reaction": "{{name}} получает 2 карты и сбрасывает одну из них",
+	"ability.miguel.elderSign": "{{name}} может добавить карту [[Уловки]] или [[Ловушки]] на руку",
 
 	"ability.mateo.base.confirm.title": "Добавить [elder_sign]?",
 	"ability.mateo.base.confirm.text": "Это добавит дополнительный жетон [elder_sign] на время проверки",

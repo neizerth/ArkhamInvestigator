@@ -124,6 +124,7 @@ export const specialAbilitityCodes = [
 	AbilityCode.RexMurphy.base.reaction,
 	AbilityCode.AgathaCrane,
 	AbilityCode.WendyAdams.parallel,
+	AbilityCode.MiguelDeLaCruz,
 	...LilyChenAbilityCodes,
 ];
 
