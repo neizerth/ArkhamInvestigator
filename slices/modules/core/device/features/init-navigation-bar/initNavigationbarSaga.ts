@@ -16,6 +16,8 @@ function* worker() {
 	const navigationMode: ReturnAwaited<typeof getNavigationMode> =
 		yield call(getNavigationMode);
 
+	console.log("navbarHeight", navbarHeight);
+
 	yield put(setNavigationMode(navigationMode));
 	yield put(setNavbarHeight(navbarHeight));
 

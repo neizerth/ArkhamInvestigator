@@ -1,7 +1,7 @@
 {
 	"name": "arkham-investigator",
 	"main": "expo-router/entry",
-	"version": "2.15.0",
+	"version": "2.15.1",
 	"scripts": {
 		"start": "expo start",
 		"reset-project": "node ./scripts/reset-project.js",
@@ -163,9 +163,7 @@
 	},
 	"private": true,
 	"commitlint": {
-		"extends": [
-			"@commitlint/config-conventional"
-		]
+		"extends": ["@commitlint/config-conventional"]
 	},
 	"expo": {
 		"doctor": {

@@ -37,18 +37,22 @@ export const useContainerAnimation = ({
 
 	const descriptionHeight = useAppSelector(selectDescriptionHeight("current"));
 	const showDescription = useAppSelector(selectShowDescription);
-	const window = useWindowDimensions();
 	const navbarHeight = useAppSelector(selectNavbarHeight);
+	const window = useWindowDimensions();
 
+	// In edge-to-edge mode `screen.height` can equal `window.height` even when
+	// the navigation bar is overlaying content (e.g. Android 16 emulator).
+	// Use measured navbar height as the source of truth.
 	const systemHeight = Math.max(
 		screen.height - window.height - statusBarHeight,
+		navbarHeight,
 		0,
 	);
 
 	const maxValue = useMemo(() => {
 		const height = screen.width / descriptionSize.ratio;
-		return window.height - height - offsetTop + systemHeight - navbarHeight;
-	}, [offsetTop, window.height, systemHeight, navbarHeight]);
+		return window.height - height - offsetTop + systemHeight;
+	}, [offsetTop, window.height, systemHeight]);
 
 	const [zIndex, setZIndex] = useState(-1);
 
@@ -82,8 +86,7 @@ export const useContainerAnimation = ({
 		zIndex,
 	};
 
-	const minValue =
-		screen.height - descriptionHeight - offsetTop - systemHeight - navbarHeight;
+	const minValue = screen.height - descriptionHeight - offsetTop - systemHeight;
 
 	const animatedStyle = useBooleanAnimation({
 		enabled: showDescription,
