@@ -19,7 +19,7 @@ import { put, select, takeEvery } from "redux-saga/effects";
 import { healModalActionId, modalId } from "../config";
 
 const filterRevealedTokens = createRevealedTokenFilterAction({
-	code: InvesigatorCode.CarolynFern,
+	code: InvesigatorCode.CarolynFern.base,
 	tokens: ["elderSign"],
 });
 

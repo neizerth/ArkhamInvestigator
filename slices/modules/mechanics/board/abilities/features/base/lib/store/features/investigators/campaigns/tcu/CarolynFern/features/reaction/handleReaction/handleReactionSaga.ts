@@ -12,7 +12,7 @@ import { put, select, takeEvery } from "redux-saga/effects";
 import { actionId, modalId } from "../config";
 
 const filterAction = createAbilitySetFilter({
-	abilityId: AbilityCode.CarolynFern,
+	abilityId: AbilityCode.CarolynFern.base,
 });
 
 function* worker({ payload }: ReturnType<typeof setBoardAbilityUse>) {

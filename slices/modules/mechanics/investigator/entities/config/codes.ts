@@ -1,4 +1,5 @@
 export const InvesigatorCode = {
+	AndrePatel: "60351",
 	LolaHayes: "03006",
 	JennyBarnes: {
 		base: "02003",
@@ -39,7 +40,14 @@ export const InvesigatorCode = {
 		base: "01005",
 		parallel: "90037",
 	},
-	CarolynFern: "05001",
+	MarieLambeau: {
+		chapter2: "60451",
+	},
+	MiguelDeLaCruz: "60551",
+	CarolynFern: {
+		base: "05001",
+		chapter2: "60251",
+	},
 	DanielaReyes: "08001",
 	KymaniJones: "09008",
 	PrestonFairmont: "05003",
