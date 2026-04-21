@@ -105,7 +105,6 @@
 		"react-dom": "19.0.0",
 		"react-i18next": "^15.4.1",
 		"react-native": "0.79.5",
-		"react-native-android-navbar-height": "^0.3.3",
 		"react-native-edge-to-edge": "1.6.0",
 		"react-native-element-dropdown": "^2.12.4",
 		"react-native-error-boundary": "^2.0.0",
@@ -164,7 +163,9 @@
 	},
 	"private": true,
 	"commitlint": {
-		"extends": ["@commitlint/config-conventional"]
+		"extends": [
+			"@commitlint/config-conventional"
+		]
 	},
 	"expo": {
 		"doctor": {

@@ -1,13 +1,9 @@
 import { Alegreya } from "@assets/fonts";
-import {
-	color,
-	font,
-	navBarHeight,
-	size,
-	statusBarHeight,
-} from "@shared/config";
+import { color, font, size, statusBarHeight } from "@shared/config";
 import { UnscaledText } from "@shared/ui";
+import type { FC } from "react";
 import { View } from "react-native";
+import type { ViewProps } from "react-native";
 import styled from "styled-components/native";
 import { Button } from "../Button";
 import { HomeMenu } from "../HomeMenu";
@@ -36,9 +32,13 @@ export const Menu: typeof HomeMenu = styled(HomeMenu)`
   flex: 1;
 `;
 
-export const Disclaimer: typeof View = styled(View)`
+type DisclaimerProps = ViewProps & {
+	navbarHeight: number;
+};
+
+export const Disclaimer: FC<DisclaimerProps> = styled(View)`
   position: absolute;
-  bottom: ${size.gap.large + navBarHeight}px;
+  bottom: ${({ navbarHeight }: DisclaimerProps) => size.gap.large + navbarHeight}px;
   left: ${size.gap.large}px;
   right: ${size.gap.large}px;
 `;

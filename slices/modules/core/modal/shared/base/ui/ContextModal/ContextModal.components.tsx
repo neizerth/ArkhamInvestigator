@@ -1,14 +1,21 @@
 import { Alegreya } from "@assets/fonts";
 import { TouchableOpacity } from "@modules/core/touch/shared/ui";
-import { color, navBarHeight, size, statusBarHeight } from "@shared/config";
+import { color, size, statusBarHeight } from "@shared/config";
 import { Icon, Row, Text } from "@shared/ui";
 import { ScrollView } from "@shared/ui";
-import { View } from "react-native";
+import type { FC } from "react";
+import { View, type ViewProps } from "react-native";
 
 import styled, { css } from "styled-components/native";
 
-export const Container: typeof View = styled(View)`
-  padding: ${statusBarHeight + size.gap.default}px ${size.gap.default}px ${navBarHeight + size.gap.small}px;
+type ContainerProps = ViewProps & {
+	navbarHeight: number;
+};
+
+export const Container: FC<ContainerProps> = styled(View)`
+  padding: ${({ navbarHeight }: ContainerProps) => {
+		return `${statusBarHeight + size.gap.default}px ${size.gap.default}px ${navbarHeight + size.gap.small}px`;
+	}}};
   justify-content: flex-end;
   filter: drop-shadow(0 0 5px rgb(0, 0, 0, 1));
   background-color: ${color.modal.background.light};

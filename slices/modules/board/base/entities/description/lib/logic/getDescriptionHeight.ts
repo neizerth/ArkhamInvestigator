@@ -24,8 +24,9 @@ export const getDescriptionHeight = ({
 	gameTextSize,
 	faction,
 }: Options) => {
+	const defaultHeight = DEFAULT_PORTRAIT_DESCRIPTION_HEIGHT;
 	if (!CAN_ALWAYS_SHOW_GAME_TEXT || !showGameText) {
-		return DEFAULT_PORTRAIT_DESCRIPTION_HEIGHT;
+		return defaultHeight;
 	}
 
 	const gameTextHeight = gameTextSize?.height ?? 0;
@@ -42,5 +43,5 @@ export const getDescriptionHeight = ({
 
 	const fullHeight = gameTextHeight + gap;
 
-	return Math.max(fullHeight, DEFAULT_PORTRAIT_DESCRIPTION_HEIGHT);
+	return Math.max(fullHeight, defaultHeight);
 };

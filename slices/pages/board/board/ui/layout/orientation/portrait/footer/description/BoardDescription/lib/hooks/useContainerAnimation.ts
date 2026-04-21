@@ -7,6 +7,7 @@ import {
 	selectShowDescription,
 	setDescriptionTransition,
 } from "@modules/board/base/shared/lib";
+import { selectNavbarHeight } from "@modules/core/device/shared/lib";
 import { statusBarHeight } from "@shared/config";
 import {
 	useAppDispatch,
@@ -37,6 +38,7 @@ export const useContainerAnimation = ({
 	const descriptionHeight = useAppSelector(selectDescriptionHeight("current"));
 	const showDescription = useAppSelector(selectShowDescription);
 	const window = useWindowDimensions();
+	const navbarHeight = useAppSelector(selectNavbarHeight);
 
 	const systemHeight = Math.max(
 		screen.height - window.height - statusBarHeight,
@@ -45,8 +47,8 @@ export const useContainerAnimation = ({
 
 	const maxValue = useMemo(() => {
 		const height = screen.width / descriptionSize.ratio;
-		return window.height - height - offsetTop + systemHeight;
-	}, [offsetTop, window.height, systemHeight]);
+		return window.height - height - offsetTop + systemHeight - navbarHeight;
+	}, [offsetTop, window.height, systemHeight, navbarHeight]);
 
 	const [zIndex, setZIndex] = useState(-1);
 
@@ -80,7 +82,8 @@ export const useContainerAnimation = ({
 		zIndex,
 	};
 
-	const minValue = screen.height - descriptionHeight - offsetTop - systemHeight;
+	const minValue =
+		screen.height - descriptionHeight - offsetTop - systemHeight - navbarHeight;
 
 	const animatedStyle = useBooleanAnimation({
 		enabled: showDescription,
