@@ -1,6 +1,8 @@
-import { navBarHeight, size, statusBarHeight } from "@shared/config";
+import { size, statusBarHeight } from "@shared/config";
 import { getContainScale } from "@shared/lib";
-import { Dimensions } from "react-native";
+import { Dimensions, Platform } from "react-native";
+
+const ios = Platform.OS === "ios";
 
 const screen = Dimensions.get("screen");
 
@@ -16,9 +18,11 @@ export const roundReferencePhaseSize = {
 	ratio: 628 / 704,
 };
 
+const gap = ios ? 0 : 20;
+
 const view = {
 	width: screen.width - size.gap.default * 2,
-	height: screen.height - navBarHeight - statusBarHeight - size.gap.default * 2,
+	height: screen.height - gap - statusBarHeight - size.gap.default * 2,
 };
 
 const scale = getContainScale({

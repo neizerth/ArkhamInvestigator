@@ -1,5 +1,6 @@
+import { selectNavbarHeight } from "@modules/core/device/shared/lib";
 import { goBack } from "@modules/core/router/shared/lib";
-import { useAppDispatch } from "@shared/lib";
+import { useAppDispatch, useAppSelector } from "@shared/lib";
 import { Page } from "@shared/ui";
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
@@ -19,6 +20,7 @@ export const ContentPage = ({
 }: ContentPageProps) => {
 	const dispatch = useAppDispatch();
 	const { t } = useTranslation();
+	const navbarHeight = useAppSelector(selectNavbarHeight);
 
 	const back = useCallback(() => {
 		dispatch(goBack());
@@ -30,7 +32,9 @@ export const ContentPage = ({
 	return (
 		<Page {...props}>
 			<TopBar title={t(title)} onBack={back} />
-			<Content style={contentStyle}>{children}</Content>
+			<Content style={contentStyle} navbarHeight={navbarHeight}>
+				{children}
+			</Content>
 		</Page>
 	);
 };

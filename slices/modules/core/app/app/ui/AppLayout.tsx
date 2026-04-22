@@ -6,7 +6,7 @@ import { AppProvider } from "./AppProvider";
 export const AppLayout = ({ children }: PropsWithChildren) => {
 	return (
 		<AppProvider>
-			<SystemBars style="light" />
+			<SystemBars style={{ statusBar: "light", navigationBar: "dark" }} />
 
 			{children}
 		</AppProvider>

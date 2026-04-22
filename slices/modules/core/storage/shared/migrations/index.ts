@@ -28,6 +28,7 @@ import addDefaultMinSkillOddsValue from "./2025-12-19T12-01-39-add-default-min-s
 import moveInvestigatorSettings from "./2025-12-30T01-56-41-move-investigator-settings";
 import setDefaultNetworkId from "./2026-02-10T01-49-22-set-default-network-id";
 import setDefaultNickname from "./2026-02-18T06-59-40-set-default-nickname";
+import setDefaultNavbarHeight from "./2026-04-21T01-38-34-set-default-navbar-height";
 
 export const persistConfigMigrations = [
 	createHistoryType,
@@ -59,6 +60,7 @@ export const persistConfigMigrations = [
 	addDefaultMinSkillOddsValue,
 	moveInvestigatorSettings,
 	setDefaultNetworkId,
+	setDefaultNavbarHeight,
 	setDefaultNickname,
 ];
 

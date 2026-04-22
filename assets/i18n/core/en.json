@@ -253,6 +253,9 @@
 	"reveal.startNewConfirm.text": "You have an unfinished test{{skillCheck}}. Do you want to continue it?",
 	"reveal.startNewConfirm.startNew": "Start new",
 
+	"ability.marie.chapter2.reaction": "{{name}} draws 2 cards and discards 1 of them",
+	"ability.miguel.elderSign": "{{name}} may add a [[Trick]] or [[Trap]] card in his discard pile to the hand",
+
 	"ability.mateo.base.confirm.title": "Add [elder_sign]?",
 	"ability.mateo.base.confirm.text": "This will add a temporary [elder_sign] token to the test",
 	"ability.mateo.base.confirm.submit": "Add [elder_sign]",

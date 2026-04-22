@@ -7,6 +7,7 @@ import {
 	selectShowDescription,
 	setDescriptionTransition,
 } from "@modules/board/base/shared/lib";
+import { selectNavbarHeight } from "@modules/core/device/shared/lib";
 import { statusBarHeight } from "@shared/config";
 import {
 	useAppDispatch,
@@ -36,10 +37,15 @@ export const useContainerAnimation = ({
 
 	const descriptionHeight = useAppSelector(selectDescriptionHeight("current"));
 	const showDescription = useAppSelector(selectShowDescription);
+	const navbarHeight = useAppSelector(selectNavbarHeight);
 	const window = useWindowDimensions();
 
+	// In edge-to-edge mode `screen.height` can equal `window.height` even when
+	// the navigation bar is overlaying content (e.g. Android 16 emulator).
+	// Use measured navbar height as the source of truth.
 	const systemHeight = Math.max(
 		screen.height - window.height - statusBarHeight,
+		navbarHeight,
 		0,
 	);
 

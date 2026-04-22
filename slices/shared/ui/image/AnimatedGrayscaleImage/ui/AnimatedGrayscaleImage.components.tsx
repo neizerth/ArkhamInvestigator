@@ -1,4 +1,5 @@
-import { Image as BaseImage, View } from "react-native";
+import { Image as BaseImage } from "expo-image";
+import { View } from "react-native";
 import Animated from "react-native-reanimated";
 import styled, { css } from "styled-components/native";
 

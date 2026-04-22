@@ -12,9 +12,13 @@ export const prepareText = ({
 	replaceBulletIcon = true,
 	replaceIcons = true,
 }: Options) => {
-	const typo = haveWesternGlyphs(text)
-		? text
-		: withTypography(text)
+	// Normalize escaped quotes that can come from JSON/ArkhamDB exports:
+	// \"  \\'  \\\"  etc. -> " or '
+	const normalized = text.replace(/\\+(["'])/g, "$1");
+
+	const typo = haveWesternGlyphs(normalized)
+		? normalized
+		: withTypography(normalized)
 				.split("\n")
 				.map(splitTagFormatting)
 				.map(nobr)

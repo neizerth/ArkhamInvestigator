@@ -21,6 +21,11 @@ export const AbilityCode = {
 	},
 	TonyMorgan: "bounty-contracts",
 	CarsonSinclair: "give-action",
+	MarieLambeau: {
+		chapter2: "draw-cards-after-damage",
+	},
+	MiguelDeLaCruz: "miguel-event-acition",
+	AndrePatel: "get-action-after-succeed",
 	MinhThiPhan: "add-2wild",
 	KohakuNarukami: "bless-curse",
 	KateWinthrop: {
@@ -67,7 +72,10 @@ export const AbilityCode = {
 	AliceLiddell: "use-base-intellect",
 	ReynauldDeChatillon: "reynauld-reaction",
 	RolandBanks: "clue-after-enemy-defeat",
-	CarolynFern: "get-resource-after-heal",
+	CarolynFern: {
+		base: "get-resource-after-heal",
+		chapter2: "get-clue-after-heal-horror",
+	},
 	LuciusGalloway: "get-clue-after-evade",
 	AudreyBourassa: "get-2-clues-after-relic-play",
 	TrishScarborough: "get-clue-in-enemy-location",
@@ -112,10 +120,11 @@ export const specialAbilitityCodes = [
 	AbilityCode.RexMurphy.base,
 	AbilityCode.StellaClark.elderSign,
 	AbilityCode.KohakuNarukami,
-	AbilityCode.CarolynFern,
+	AbilityCode.CarolynFern.base,
 	AbilityCode.RexMurphy.base.reaction,
 	AbilityCode.AgathaCrane,
 	AbilityCode.WendyAdams.parallel,
+	AbilityCode.MiguelDeLaCruz,
 	...LilyChenAbilityCodes,
 ];
 

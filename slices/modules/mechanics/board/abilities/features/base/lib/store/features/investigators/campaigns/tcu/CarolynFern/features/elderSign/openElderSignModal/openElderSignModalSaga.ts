@@ -18,10 +18,19 @@ import { prop } from "ramda";
 import { put, select, takeEvery } from "redux-saga/effects";
 import { healModalActionId, modalId } from "../config";
 
-const filterRevealedTokens = createRevealedTokenFilterAction({
-	code: InvesigatorCode.CarolynFern,
+const chapter1Filter = createRevealedTokenFilterAction({
+	code: InvesigatorCode.CarolynFern.base,
 	tokens: ["elderSign"],
 });
+
+const chapter2Filter = createRevealedTokenFilterAction({
+	code: InvesigatorCode.CarolynFern.chapter2,
+	tokens: ["elderSign"],
+});
+
+const filterRevealedTokens = (action: unknown) => {
+	return chapter1Filter(action) || chapter2Filter(action);
+};
 
 function* worker({ payload }: ReturnType<typeof chaosTokensRevealed>) {
 	const { boardId } = payload;

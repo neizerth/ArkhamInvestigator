@@ -1,10 +1,13 @@
+import { selectNavbarHeight } from "@modules/core/device/shared/lib";
 import { ArtworksFragment } from "@modules/core/theme/shared/ui";
 import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
 import { useResumeGame, useStartGame } from "../../lib";
 import { Button } from "../Button";
 import * as C from "./HomePage.components";
 
 export const HomePage = () => {
+	const navbarHeight = useSelector(selectNavbarHeight);
 	const { t } = useTranslation();
 	const onResume = useResumeGame();
 	const onSinglePlayer = useStartGame("single");
@@ -32,7 +35,7 @@ export const HomePage = () => {
 				<C.ResumeButton onPress={onResume}>{t`Continue`}</C.ResumeButton>
 			)}
 			<ArtworksFragment>
-				<C.Disclaimer>
+				<C.Disclaimer navbarHeight={navbarHeight}>
 					<C.DisclaimerText>{t`app.disclaimer`}</C.DisclaimerText>
 				</C.Disclaimer>
 			</ArtworksFragment>

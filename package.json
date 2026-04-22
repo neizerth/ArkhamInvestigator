@@ -1,7 +1,7 @@
 {
 	"name": "arkham-investigator",
 	"main": "expo-router/entry",
-	"version": "2.15.0",
+	"version": "2.16.0",
 	"scripts": {
 		"start": "expo start",
 		"reset-project": "node ./scripts/reset-project.js",
@@ -107,7 +107,6 @@
 		"react-dom": "19.0.0",
 		"react-i18next": "^15.4.1",
 		"react-native": "0.79.5",
-		"react-native-android-navbar-height": "^0.3.3",
 		"react-native-edge-to-edge": "1.6.0",
 		"react-native-element-dropdown": "^2.12.4",
 		"react-native-error-boundary": "^2.0.0",
