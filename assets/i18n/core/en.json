@@ -380,6 +380,7 @@
 	"multiplayer.playersCount": "Players",
 	"multiplayer.code.error": "Failed to connect to the game. Check the code or network settings.",
 	"multiplayer.waitingForHost": "Waiting for host to start",
+	"multiplayer.self": "You",
 
 	"Defeated": "Defeated",
 	"Change": "Change",

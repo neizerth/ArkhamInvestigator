@@ -66,7 +66,9 @@ export const NewGameHostView = ({ ip, ...props }: NewGameHostViewProps) => {
 					</C.ClientsCountText>
 				</C.ClientsInfo>
 				<C.Clients>
-					<C.Client>1. {nickname}</C.Client>
+					<C.Client>
+						1. {nickname} ({t`multiplayer.self`})
+					</C.Client>
 					{clients.map((client, index) => (
 						<C.Client key={client.id}>
 							{index + 2} {client.nickname}{" "}
