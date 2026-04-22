@@ -1,9 +1,9 @@
 import { selectNavbarHeight } from "@modules/core/device/shared/lib";
 import { statusBarHeight } from "@shared/config";
+import { useAppSelector } from "@shared/lib";
 import { Outside } from "@shared/ui";
 import { useTranslation } from "react-i18next";
 import { type ViewProps, useWindowDimensions } from "react-native";
-import { useSelector } from "react-redux";
 import * as C from "./ContextModal.components";
 
 type ContextModalAction = {
@@ -28,7 +28,7 @@ export const ContextModal = ({
 	closeIcon = "close",
 	...props
 }: ContextModalProps) => {
-	const navbarHeight = useSelector(selectNavbarHeight);
+	const navbarHeight = useAppSelector(selectNavbarHeight);
 	const { height } = useWindowDimensions();
 	const maxHeight = height - statusBarHeight - 60;
 
