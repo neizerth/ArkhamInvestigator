@@ -15,7 +15,7 @@ type ContainerProps = ViewProps & {
 export const Container: FC<ContainerProps> = styled(View)`
   padding: ${({ navbarHeight }: ContainerProps) => {
 		return `${statusBarHeight + size.gap.default}px ${size.gap.default}px ${navbarHeight + size.gap.small}px`;
-	}}};
+	}};
   justify-content: flex-end;
   filter: drop-shadow(0 0 5px rgb(0, 0, 0, 1));
   background-color: ${color.modal.background.light};
