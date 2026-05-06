@@ -1,6 +1,4 @@
 import { appStarted } from "@modules/core/app/shared/lib";
-import { refresh as refreshNetworkInfo } from "@react-native-community/netinfo";
-import { Platform } from "react-native";
 import { call, put, take, takeEvery } from "redux-saga/effects";
 import {
 	type networkInfoUpdated,
@@ -12,18 +10,10 @@ import {
 	setWifiEnabled,
 } from "../../shared/lib";
 import { networkChannel } from "./networkChannel";
-import { requestAndroidFineLocationForWifiInfo } from "./requestAndroidFineLocationForWifiInfo";
 
 type Channel = ReturnType<typeof networkChannel>;
 
 function* worker() {
-	if (Platform.OS === "android") {
-		const granted: boolean = yield call(requestAndroidFineLocationForWifiInfo);
-		if (granted) {
-			yield call(refreshNetworkInfo);
-		}
-	}
-
 	const channel: Channel = yield call(networkChannel);
 	while (true) {
 		const action: ReturnType<typeof networkInfoUpdated> = yield take(channel);
