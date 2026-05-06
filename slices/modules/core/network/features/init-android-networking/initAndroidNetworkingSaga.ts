@@ -1,8 +1,16 @@
-import { appStarted } from "@modules/core/app/shared/lib";
+import { setCurrentRoute } from "@modules/core/router/shared/lib";
 import { refresh as refreshNetworkInfo } from "@react-native-community/netinfo";
+import { routes } from "@shared/config";
 import { Platform } from "react-native";
 import { call, takeEvery } from "redux-saga/effects";
 import { requestFineLocation } from "./requestFineLocation";
+
+const filterAction = (action: unknown) => {
+	if (!setCurrentRoute.match(action)) {
+		return false;
+	}
+	return action.payload === routes.startMultiplayer;
+};
 
 export function* worker() {
 	if (Platform.OS !== "android") {
@@ -16,5 +24,5 @@ export function* worker() {
 }
 
 export function* initAndroidNetworkingSaga() {
-	yield takeEvery(appStarted.match, worker);
+	yield takeEvery(filterAction, worker);
 }
