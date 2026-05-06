@@ -1,5 +1,6 @@
 {
 	"network.no-connection": "Нет подключения к сети",
+	"network.no-local-ip": "Нужен Wi‑Fi для хоста",
 	"network.type": "Сеть",
 	"network.type.none": "Нет подключения",
 	"network.type.cellular": "Мобильный",

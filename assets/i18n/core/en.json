@@ -1,5 +1,6 @@
 {
 	"network.no-connection": "No connection to the network",
+	"network.no-local-ip": "Connected — local IP is not available for this network type (e.g. cellular). Use Wi‑Fi to host.",
 	"network.type": "Network",
 	"network.type.none": "No connection",
 	"network.type.wifi": "Wi-Fi",

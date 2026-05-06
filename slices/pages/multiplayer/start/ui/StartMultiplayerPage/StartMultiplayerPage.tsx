@@ -5,6 +5,7 @@ import {
 } from "@modules/core/network/shared/config";
 import {
 	selectIP,
+	selectNetworkConnected,
 	selectNetworkRole,
 	selectNetworkType,
 	selectNickname,
@@ -31,6 +32,7 @@ export const StartMultiplayerPage = () => {
 	const { t } = useTranslation();
 	const ssid = useAppSelector(selectSSID);
 	const ip = useAppSelector(selectIP);
+	const networkConnected = useAppSelector(selectNetworkConnected);
 	const networkType = useAppSelector(selectNetworkType);
 	const nickname = useAppSelector(selectNickname);
 	const networkRole = useAppSelector(selectNetworkRole);
@@ -96,7 +98,11 @@ export const StartMultiplayerPage = () => {
 						<C.NetworkIcon icon={icon} />
 						{showIP && (
 							<Text>
-								{ip ?? t`network.no-connection`} {ssid && `(${ssid})`}
+								{ip ??
+									(networkConnected
+										? t`network.no-local-ip`
+										: t`network.no-connection`)}{" "}
+								{ssid && `(${ssid})`}
 							</Text>
 						)}
 					</C.NetworkInfo>
