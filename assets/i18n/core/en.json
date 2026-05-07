@@ -383,6 +383,8 @@
 	"multiplayer.waitingForHost": "Waiting for host to start",
 	"multiplayer.self": "You",
 
+	"log.share": "Share game actions log",
+
 	"Defeated": "Defeated",
 	"Change": "Change",
 

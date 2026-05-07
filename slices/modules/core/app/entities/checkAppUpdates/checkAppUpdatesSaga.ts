@@ -1,11 +1,11 @@
 import { appIsOutdated, updateAppData } from "@modules/core/app/shared/lib";
 import { selectCurrentLanguage } from "@modules/core/i18n/shared/lib";
+import { log } from "@modules/core/log/shared/config";
 import { sendNotification } from "@modules/core/notifications/shared/lib";
 import {
 	selectMediaUpdateTime,
 	selectMediaVersion,
 } from "@modules/signature/base/shared/lib";
-import { log } from "@shared/config";
 import { seconds } from "@shared/lib";
 import type { ReturnAwaited } from "@shared/model";
 import { put, retry, select, takeEvery } from "redux-saga/effects";
@@ -63,7 +63,7 @@ function* worker({ payload }: ReturnType<typeof checkAppUpdates>) {
 		}
 
 		if (needUpdate) {
-			console.log("updating app info");
+			log.info("updating app info");
 			yield put(updateAppInfo(data));
 			yield put(
 				updateAppData({

@@ -1,4 +1,5 @@
 import { updateAppData } from "@modules/core/app/shared/lib";
+import { log } from "@modules/core/log/shared/config";
 import { setRules } from "@modules/mechanics/rules/base/shared/lib";
 import { updateSignatureGroups } from "@modules/signature/base/entities/lib";
 import { setStories } from "@modules/stories/shared/lib";
@@ -8,7 +9,7 @@ import { put, retry, takeEvery } from "redux-saga/effects";
 import { getAppData } from "./getAppData";
 
 function* worker({ payload }: ReturnType<typeof updateAppData>) {
-	console.log("updating app data", payload);
+	log.info("updating app data", payload);
 	const { language } = payload;
 
 	const maxTries = 3;

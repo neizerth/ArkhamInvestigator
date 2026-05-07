@@ -1,4 +1,4 @@
-import { log } from "@shared/config";
+import { log } from "@modules/core/log/shared/config";
 import TcpSocket from "react-native-tcp-socket";
 import Zeroconf from "react-native-zeroconf";
 import { eventChannel } from "redux-saga";

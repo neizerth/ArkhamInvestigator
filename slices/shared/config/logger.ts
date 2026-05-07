@@ -1,3 +1,1 @@
-import { logger } from "react-native-logs";
-
-export const log = logger.createLogger();
+export { log } from "@modules/core/log/shared/config";

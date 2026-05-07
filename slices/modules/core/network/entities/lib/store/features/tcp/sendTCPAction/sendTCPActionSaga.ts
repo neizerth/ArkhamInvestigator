@@ -1,5 +1,5 @@
+import { log } from "@modules/core/log/shared/config";
 import { selectDeviceNetworkId } from "@modules/core/network/shared/lib";
-import { log } from "@shared/config";
 import { omit } from "ramda";
 import { put, select, takeEvery } from "redux-saga/effects";
 import { sendTCPAction, sendTCPActionFailed } from "./sendTCPAction";

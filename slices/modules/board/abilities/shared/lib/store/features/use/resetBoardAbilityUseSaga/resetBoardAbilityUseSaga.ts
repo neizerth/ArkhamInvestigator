@@ -4,6 +4,7 @@ import {
 	selectBoardsCount,
 	setBoardProp,
 } from "@modules/board/base/shared/lib";
+import { log } from "@modules/core/log/shared/config";
 import { put, select, takeEvery } from "redux-saga/effects";
 import { UsedAbilitiesService } from "../../../../UsedAbilitiesService";
 import { selectBoardAbilityById } from "../../../selectors";
@@ -26,7 +27,7 @@ function* worker({ payload }: ReturnType<typeof setBoardAbilityUse>) {
 		yield select(selectBoardsCount);
 
 	if (!ability) {
-		console.log("reset ability not found", payload);
+		log.error("reset ability not found", payload);
 		return;
 	}
 

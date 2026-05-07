@@ -1,3 +1,4 @@
+import { log } from "@modules/core/log/shared/config";
 import {
 	TCP_CLIENT_CONFIRMATION_ENABLED,
 	TCP_CONFIRMATION_MAX_RETRIES,
@@ -10,7 +11,6 @@ import {
 	tcpActionReceived,
 } from "@modules/core/network/shared/lib";
 import type { NetworkOutcomeAction } from "@modules/core/network/shared/model";
-import { log } from "@shared/config";
 import type TcpSocket from "react-native-tcp-socket";
 import type { TakeableChannel } from "redux-saga";
 import {

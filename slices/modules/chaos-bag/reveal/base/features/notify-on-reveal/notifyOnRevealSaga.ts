@@ -9,11 +9,6 @@ function* worker({ payload }: ReturnType<typeof chaosTokensRevealed>) {
 	const currentBoard: ReturnType<typeof selectCurrentBoard> =
 		yield select(selectCurrentBoard);
 
-	console.log({
-		boardId,
-		currentBoardId: currentBoard.id,
-	});
-
 	if (currentBoard.id === boardId) {
 		return;
 	}

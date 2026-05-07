@@ -2,6 +2,7 @@ import { appUpdatesChecked } from "@modules/core/app/entities/checkAppUpdates";
 import { downloadAsset } from "@modules/core/assets/asset-downloader/entities/downloadAsset/downloadAsset";
 import { assetDownloadEnd } from "@modules/core/assets/asset-downloader/entities/processAssetDownload/processAssetDownload";
 import { unzip, unzipComplete } from "@modules/core/disk/entities/unzip/unzip";
+import { log } from "@modules/core/log/shared/config";
 import { sendNotification } from "@modules/core/notifications/shared/lib";
 import { selectArtworkArchiveUrl } from "@modules/core/theme/shared/lib";
 import { propEq } from "ramda";
@@ -52,13 +53,13 @@ function* worker({ payload }: ReturnType<typeof appUpdatesChecked>) {
 	const asset = payload.assets.find(propEq(externalImagesFilename, "filename"));
 
 	if (!asset) {
-		console.log("asset not found");
+		log.error("asset not found", externalImagesFilename);
 		return;
 	}
 
 	const { size } = asset;
 
-	console.log("downloading asset", archiveUrl);
+	log.info("downloading asset", archiveUrl);
 	yield put(
 		downloadAsset({
 			size,
@@ -87,7 +88,7 @@ function* worker({ payload }: ReturnType<typeof appUpdatesChecked>) {
 		return;
 	}
 
-	console.log("download complete", archiveUrl);
+	log.info("download complete", archiveUrl);
 	yield put(setExternalImagesLoaded(true));
 
 	yield put(

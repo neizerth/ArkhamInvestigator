@@ -64,8 +64,6 @@ const getNotificationData = <P extends BoardActualPropChangePayload>({
 			count,
 		});
 
-		console.log("options", options);
-
 		return {
 			value,
 		};

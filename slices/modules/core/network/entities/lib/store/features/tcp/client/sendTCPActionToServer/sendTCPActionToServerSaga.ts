@@ -1,3 +1,4 @@
+import { log } from "@modules/core/log/shared/config";
 import {
 	TCP_CONFIRMATION_MAX_RETRIES,
 	TCP_CONFIRMATION_TIMEOUT,
@@ -10,7 +11,6 @@ import {
 	tcpActionReceived,
 } from "@modules/core/network/shared/lib";
 import { filterTCPMessageReceived } from "@modules/core/network/shared/lib";
-import { log } from "@shared/config";
 import type { TakeableChannel } from "redux-saga";
 import {
 	actionChannel,

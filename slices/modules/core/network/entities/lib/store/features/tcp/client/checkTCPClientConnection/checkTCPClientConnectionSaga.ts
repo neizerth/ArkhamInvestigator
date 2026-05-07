@@ -1,3 +1,4 @@
+import { log } from "@modules/core/log/shared/config";
 import {
 	getTCPServerSocket,
 	selectClientRunning,
@@ -6,7 +7,6 @@ import {
 } from "@modules/core/network/shared/lib";
 import { selectGameStatus } from "@modules/game/shared/lib";
 import { selectIsClientPlaying } from "@modules/multiplayer/entities/lib";
-import { log } from "@shared/config";
 import { put, select, takeEvery } from "redux-saga/effects";
 import { restartTCPClient } from "../restartTCPClient";
 import { checkTCPClientConnection } from "./checkTCPClientConnection";

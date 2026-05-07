@@ -1,4 +1,4 @@
-import { log } from "@shared/config";
+import { log } from "@modules/core/log/shared/config";
 import { seconds } from "@shared/lib";
 import TcpSocket from "react-native-tcp-socket";
 import type { ConnectionOptions } from "react-native-tcp-socket/lib/types/Socket";

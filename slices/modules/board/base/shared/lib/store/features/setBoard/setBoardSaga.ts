@@ -1,4 +1,4 @@
-import { log } from "@shared/config";
+import { log } from "@modules/core/log/shared/config";
 import moment from "moment";
 import { put, select, takeEvery } from "redux-saga/effects";
 import { isBoardExists } from "../../../fallback";

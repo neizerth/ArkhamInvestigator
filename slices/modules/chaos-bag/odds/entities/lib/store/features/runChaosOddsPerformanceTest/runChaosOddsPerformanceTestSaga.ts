@@ -188,8 +188,6 @@ function* worker({ payload }: ReturnType<typeof runChaosOddsPerformanceTest>) {
 	}).catch(() => {});
 	// #endregion
 
-	console.log("getChaosOdds duration", end, "ms");
-
 	yield put(
 		setCompletedChaosOddsPerformanceTests({
 			...completedTests,

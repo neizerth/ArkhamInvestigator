@@ -1,3 +1,4 @@
+import { log } from "@modules/core/log/shared/config";
 import { sendTCPActionToClient } from "@modules/core/network/entities/lib/store/features/tcp/server/sendTCPActionToClient";
 import {
 	addNetworkClient,
@@ -8,7 +9,6 @@ import {
 import type { TCPIncomeReturnType } from "@modules/core/network/shared/model";
 import { selectGameStatus } from "@modules/game/shared/lib";
 import { startMultiplayerGame } from "@modules/multiplayer/entities/lib/store/features/startMultiplayerGame";
-import { log } from "@shared/config";
 import { call, put, select, takeEvery } from "redux-saga/effects";
 
 const filterAction = filterTCPIncomeAction(connectNetworkClient.match);

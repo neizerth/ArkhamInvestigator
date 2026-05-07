@@ -1,19 +1,23 @@
 import { color, font, size } from "@shared/config";
 import {
 	Button as BaseButton,
+	Page as BasePage,
 	Row as BaseRow,
 	Section as BaseSection,
+	ScrollView,
+	type ScrollViewProps,
 	TextView,
 } from "@shared/ui";
-import { ContentPage } from "@widgets/content";
 import { StoreCheckbox } from "@widgets/control/store-checkbox";
 import { StoreSelect } from "@widgets/control/store-select";
+import { TopBarButton } from "@widgets/navigation";
+import type { FC } from "react";
 import { View } from "react-native";
 import styled from "styled-components/native";
 import { PickerSettings } from "../PickerSettings";
 import { SoundSettings } from "../SoundSettings";
 
-export const Page: typeof ContentPage = styled(ContentPage).attrs({
+export const Page: typeof BasePage = styled(BasePage).attrs({
 	contentStyle: {
 		paddingLeft: size.gap.default,
 		paddingRight: size.gap.default,
@@ -34,6 +38,16 @@ export const Button: typeof BaseButton = styled(BaseButton).attrs({
 	},
 })`
 	flex: 1;
+`;
+
+export const BarButton: typeof TopBarButton = styled(TopBarButton).attrs({
+	iconStyle: {
+		fontSize: 18,
+		lineHeight: 18,
+		color: color.light10,
+	},
+})`
+  align-items: flex-end;
 `;
 
 export const Container: typeof View = styled(View)`
@@ -90,4 +104,14 @@ export const Picker: typeof PickerSettings = styled(PickerSettings)`
 
 export const Sound: typeof SoundSettings = styled(SoundSettings)`
   flex: 1;
+`;
+
+type ContentProps = ScrollViewProps & {
+	navbarHeight: number;
+};
+
+export const PageContent: FC<ContentProps> = styled(ScrollView)`
+  flex: 1;
+  padding: ${({ navbarHeight }: ContentProps) => `0px ${size.gap.medium}px ${navbarHeight}px ${size.gap.medium}px`};
+  margin-bottom: ${size.gap.default}px;
 `;

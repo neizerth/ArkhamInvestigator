@@ -6,6 +6,7 @@ import {
 	removeRevealedTokenId,
 	selectRevealedTokenById,
 } from "@modules/chaos-bag/reveal/base/shared/lib";
+import { log } from "@modules/core/log/shared/config";
 import { put, select, takeEvery } from "redux-saga/effects";
 import { canRemoveChaosToken } from "../../../../logic";
 import { chaosTokenReturned, returnChaosToken } from "./returnChaosToken";
@@ -17,7 +18,7 @@ function* worker({ payload }: ReturnType<typeof returnChaosToken>) {
 	const token: ReturnType<typeof tokenSelector> = yield select(tokenSelector);
 
 	if (!token) {
-		console.error("Token not found", id);
+		log.error("Token not found", id);
 		return;
 	}
 
@@ -26,8 +27,6 @@ function* worker({ payload }: ReturnType<typeof returnChaosToken>) {
 	yield put(removeRevealedTokenId(payload));
 
 	const canRemove = canRemoveChaosToken(token);
-
-	console.log("canRemove", canRemove);
 
 	if (canRemove) {
 		yield put(

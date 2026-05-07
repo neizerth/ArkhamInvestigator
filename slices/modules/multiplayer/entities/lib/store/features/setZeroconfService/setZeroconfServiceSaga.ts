@@ -1,6 +1,6 @@
+import { log } from "@modules/core/log/shared/config";
 import { setHostIp } from "@modules/core/network/shared/lib";
 import { setGameStatus } from "@modules/game/shared/lib";
-import { log } from "@shared/config";
 import { put, takeEvery } from "redux-saga/effects";
 import { setZeroconfService } from "./setZeroconfService";
 

@@ -1,3 +1,4 @@
+import { log } from "@modules/core/log/shared/config";
 import { sendTCPActionToServer } from "@modules/core/network/entities/lib/store/features/tcp/client/sendTCPActionToServer";
 import { sendTCPActionToClient } from "@modules/core/network/entities/lib/store/features/tcp/server/sendTCPActionToClient";
 import {
@@ -10,7 +11,6 @@ import type {
 	NetworkOutcomeActionMeta,
 } from "@modules/core/network/shared/model";
 import { type PayloadAction, isAction } from "@reduxjs/toolkit";
-import { log } from "@shared/config";
 import { hasProp } from "@shared/lib";
 import { omit } from "ramda";
 import type TcpSocket from "react-native-tcp-socket";

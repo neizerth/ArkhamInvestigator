@@ -22,9 +22,15 @@ const state = createSliceState(initialState);
 export const theme = createSlice({
 	name: "theme",
 	...state,
+	reducers: {
+		...state.reducers,
+		unsetArtworkUrl: (state) => {
+			state.artworkUrl = null;
+		},
+	},
 });
 
-export const { setTheme, setArtworkUrl } = theme.actions;
+export const { setTheme, setArtworkUrl, unsetArtworkUrl } = theme.actions;
 
 export const { selectTheme, selectArtworkUrl } = theme.selectors;
 

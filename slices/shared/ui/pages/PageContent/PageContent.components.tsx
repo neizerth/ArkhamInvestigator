@@ -1,9 +1,9 @@
-import { size } from "@shared/config";
-import { ScrollView } from "@shared/ui";
 import type { FC } from "react";
 import { type ScrollViewProps, View } from "react-native";
 
 import styled from "styled-components/native";
+import { size } from "../../../config";
+import { ScrollView } from "../../behavior";
 
 export const FullContent: typeof View = styled(View)`
   flex: 1;

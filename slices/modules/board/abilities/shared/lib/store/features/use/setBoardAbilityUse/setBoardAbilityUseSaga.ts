@@ -4,6 +4,7 @@ import {
 	selectBoardsCount,
 	setBoardProp,
 } from "@modules/board/base/shared/lib";
+import { log } from "@modules/core/log/shared/config";
 import { put, select, takeEvery } from "redux-saga/effects";
 import { UsedAbilitiesService } from "../../../../UsedAbilitiesService";
 import {
@@ -53,7 +54,7 @@ function* worker({ payload }: ReturnType<typeof setBoardAbilityUse>) {
 	}
 
 	if (!ability || (!payload.force && ability.toggle === false)) {
-		console.log("skip", ability, payload);
+		log.error("skip", ability, payload);
 		return;
 	}
 
@@ -66,7 +67,7 @@ function* worker({ payload }: ReturnType<typeof setBoardAbilityUse>) {
 	});
 
 	if (!value) {
-		console.log("no ability value", value);
+		log.error("no ability value", value);
 		return;
 	}
 

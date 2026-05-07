@@ -31,4 +31,5 @@ export const routes = {
 	support: r("/static/support"),
 
 	startMultiplayer: r("/multiplayer"),
+	diagnostics: r("/diagnostics"),
 };

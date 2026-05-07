@@ -21,6 +21,8 @@
 	"multiplayer.code.error": "Не удалось подключиться к игре. Проверьте код или настройки сети.",
 	"multiplayer.self": "Вы",
 
+	"log.share": "Поделиться журналом действий",
+
 	"error.downloadFailed": "Не удалось загрузить контент. Попробуйте позже или измените подключение к сети. Подробности: {{error}}",
 	"app.disclaimer": "Arkham Horror: The Card Game™ и все связанные материалы © Fantasy Flight Games (FFG). Это приложение не является продуктом, одобренным или связанным с FFG.",
 	"modal.theme.title": "Установить тему",

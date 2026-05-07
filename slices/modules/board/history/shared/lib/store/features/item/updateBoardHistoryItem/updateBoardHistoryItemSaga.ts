@@ -3,6 +3,7 @@ import {
 	selectBoardById,
 	setBoardPart,
 } from "@modules/board/base/shared/lib";
+import { log } from "@modules/core/log/shared/config";
 import { mergeDeepRight, omit, propEq } from "ramda";
 import { put, select, takeEvery } from "redux-saga/effects";
 import { updateBoardHistoryItem } from "./updateBoardHistoryItem";
@@ -19,7 +20,7 @@ function* worker({ payload }: ReturnType<typeof updateBoardHistoryItem>) {
 	const index = board.history.findIndex(propEq(id, "id"));
 
 	if (index === -1) {
-		console.log("item not found", id);
+		log.error("item not found", id);
 		return;
 	}
 

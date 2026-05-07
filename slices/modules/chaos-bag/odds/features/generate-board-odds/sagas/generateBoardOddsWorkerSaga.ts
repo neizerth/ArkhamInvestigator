@@ -31,7 +31,6 @@ function* worker() {
 
 	// Skip if same cache key
 	if (currentCacheKey === cacheKey) {
-		// console.log("same cache key, skip");
 		return;
 	}
 
@@ -43,7 +42,6 @@ function* worker() {
 	const available = tokens.filter(({ revealId }) => !revealId);
 
 	if (available.length === 0) {
-		// console.log("no available tokens, skip");
 		yield put(setBoardOddsMatrix(null));
 		return;
 	}

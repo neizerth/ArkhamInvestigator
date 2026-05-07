@@ -1,3 +1,4 @@
+import { log } from "@modules/core/log/shared/config";
 import moment from "moment";
 import type { ChaosBagState } from "../chaosBag";
 
@@ -9,7 +10,7 @@ export const validateChaosBagUpdate = (
 		moment(state.chaosBagUpdatedAt),
 	);
 	if (!isValid) {
-		console.log(
+		log.error(
 			"chaos bag update is not valid",
 			lastUpdatedAt,
 			state.chaosBagUpdatedAt,

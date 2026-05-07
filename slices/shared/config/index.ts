@@ -7,4 +7,3 @@ export * from "./routes";
 export * from "./animation";
 export * from "./icons";
 export * from "./app";
-export * from "./logger";
