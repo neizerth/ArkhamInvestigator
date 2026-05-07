@@ -22,6 +22,9 @@
 	"multiplayer.self": "Вы",
 
 	"log.share": "Поделиться журналом действий",
+	"file.removed_one": "Удалено {{count}} файл",
+	"file.removed_few": "Удалено {{count}} файла",
+	"file.removed_many": "Удалено {{count}} файлов",
 
 	"error.downloadFailed": "Не удалось загрузить контент. Попробуйте позже или измените подключение к сети. Подробности: {{error}}",
 	"app.disclaimer": "Arkham Horror: The Card Game™ и все связанные материалы © Fantasy Flight Games (FFG). Это приложение не является продуктом, одобренным или связанным с FFG.",

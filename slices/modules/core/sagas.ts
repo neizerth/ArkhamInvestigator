@@ -7,6 +7,7 @@ import { diskSaga } from "./disk/sagas";
 import { hapticSaga } from "./haptic/sagas";
 import { i18nSaga } from "./i18n/sagas";
 import { imageSaga } from "./image/sagas";
+import { logSaga } from "./log/sagas";
 import { modalSaga } from "./modal/sagas";
 import { networkSaga } from "./network/sagas";
 import { notificationsSaga } from "./notifications/sagas";
@@ -31,4 +32,5 @@ export function* coreModulesSaga() {
 	yield spawn(routerSaga);
 	yield spawn(appSaga);
 	yield spawn(clipboardSaga);
+	yield spawn(logSaga);
 }

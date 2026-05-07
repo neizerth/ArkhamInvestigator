@@ -5,6 +5,8 @@ import { externalImagesDiskPath } from "@modules/core/assets/base/shared/config"
 import { reloadExternalAssets } from "@modules/core/assets/base/shared/lib";
 import { clearDownloadQueue } from "@modules/core/assets/download-queue/shared/lib";
 import { removeDirectory } from "@modules/core/disk/entities/removeDirectory";
+import { clearLogs as clearLogsAction } from "@modules/core/log/entities/lib/store/features/clearLogs";
+import { shareLogs as shareLogsAction } from "@modules/core/log/entities/lib/store/features/shareLogs";
 import { usePage } from "@modules/core/router/shared/lib";
 import { unsetArtworkUrl as unsetArtworkUrlAction } from "@modules/core/theme/shared/lib/store/theme";
 import { ArtworksFragment } from "@modules/core/theme/shared/ui";
@@ -50,13 +52,29 @@ export const DiagnosticsPage = () => {
 		dispatch(unsetArtworkUrlAction());
 	};
 
+	const shareLogs = () => {
+		dispatch(shareLogsAction());
+	};
+
+	const clearLogs = () => {
+		dispatch(
+			clearLogsAction({
+				period: "all",
+				notify: true,
+			}),
+		);
+	};
+
 	return (
 		<C.Page title="Diagnostics">
 			<C.Container>
 				<C.Content>
 					<C.Section title={t`Diagnostics`}>
 						<C.Row>
-							<C.Button text={t`log.share`} icon="share" />
+							<C.Button text={t`log.share`} icon="share" onPress={shareLogs} />
+						</C.Row>
+						<C.Row>
+							<C.Button text={t`log.clear`} icon="trash" onPress={clearLogs} />
 						</C.Row>
 						<C.Row>
 							<C.Button

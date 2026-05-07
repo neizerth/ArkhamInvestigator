@@ -384,6 +384,8 @@
 	"multiplayer.self": "You",
 
 	"log.share": "Share game actions log",
+	"file.removed_one": "Removed {{count}} file",
+	"file.removed_few": "Removed {{count}} files",
 
 	"Defeated": "Defeated",
 	"Change": "Change",
