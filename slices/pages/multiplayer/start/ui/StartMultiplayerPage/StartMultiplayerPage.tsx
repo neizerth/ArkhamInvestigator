@@ -61,7 +61,7 @@ export const StartMultiplayerPage = () => {
 	const [role, setRole] = useState<TabItem<NetworkRole>>(defaultRole);
 
 	useEffect(() => {
-		if (networkRole !== role.id) {
+		if (networkRole === role.id) {
 			return;
 		}
 		dispatch(setNetworkRole(role.id));
