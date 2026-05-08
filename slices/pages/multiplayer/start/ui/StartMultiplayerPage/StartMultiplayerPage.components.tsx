@@ -54,6 +54,7 @@ export const GenerateIcon: typeof Icon = styled(Icon)`
 export const GenerateRandomNickname: typeof TouchableOpacity = styled(
 	TouchableOpacity,
 )`
+	background-color: transparent;
 	padding: 0px ${size.gap.medium}px;
 	position: absolute;
 	z-index: 1;
