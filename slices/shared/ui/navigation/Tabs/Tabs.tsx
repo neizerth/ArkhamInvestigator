@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import type { ViewProps } from "react-native";
 import * as C from "./Tabs.components";
 
@@ -11,9 +12,11 @@ export type RenderTabInfo<T extends TabItem> = {
 	index: number;
 	selected: boolean;
 	onSelect?: () => void;
+	translate?: boolean;
 };
 
 export type TabsProps<T extends TabItem> = ViewProps & {
+	translate?: boolean;
 	tabStyle?: ViewProps["style"];
 	renderTab?: (info: RenderTabInfo<T>) => React.ReactNode;
 	data: T[];
@@ -25,10 +28,14 @@ export function defaultRenderTab<T extends TabItem>({
 	item,
 	selected,
 	onSelect,
+	translate,
 }: RenderTabInfo<T>) {
+	const { t } = useTranslation();
+	const title = translate ? t(item.title) : item.title;
+
 	return (
 		<C.Tab key={item.id} selected={selected} onPress={onSelect}>
-			<C.TabTitle selected={selected}>{item.title}</C.TabTitle>
+			<C.TabTitle selected={selected}>{title}</C.TabTitle>
 		</C.Tab>
 	);
 }
@@ -38,6 +45,7 @@ export function Tabs<T extends TabItem>({
 	value,
 	renderTab = defaultRenderTab,
 	onSelect,
+	translate = false,
 }: TabsProps<T>) {
 	return (
 		<C.Container>
@@ -47,6 +55,7 @@ export function Tabs<T extends TabItem>({
 					index,
 					selected: value?.id === item.id,
 					onSelect: () => onSelect?.(item),
+					translate,
 				}),
 			)}
 		</C.Container>

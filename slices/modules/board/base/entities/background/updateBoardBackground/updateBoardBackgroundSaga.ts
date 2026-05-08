@@ -1,4 +1,7 @@
-import { setBoardProp } from "@modules/board/base/shared/lib";
+import {
+	setBoardBackground,
+	setBoardProp,
+} from "@modules/board/base/shared/lib";
 import {
 	createSignatureCacheGroup,
 	signatureCacheGroupCreated,
@@ -64,10 +67,9 @@ function* worker({ payload }: ReturnType<typeof updateBoardBackground>) {
 
 	if (background.color && background.grayscale) {
 		yield put(
-			setBoardProp({
+			setBoardBackground({
 				boardId,
-				prop: "background",
-				value: background,
+				background,
 			}),
 		);
 	}

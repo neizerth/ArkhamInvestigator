@@ -184,6 +184,7 @@ export const {
 
 	unloadAllBoards,
 	setBoardProgress,
+	setBoardBackground,
 } = board.actions;
 
 export const {

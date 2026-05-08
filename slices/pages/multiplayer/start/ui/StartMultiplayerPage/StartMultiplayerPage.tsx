@@ -21,11 +21,18 @@ import {
 	whereId,
 } from "@shared/lib";
 import { type TabItem, Text } from "@shared/ui";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import * as C from "./StartMultiplayerPage.components";
 
-const roles: NetworkRole[] = ["client", "host"];
+const roles = networkRoles.map((role) => ({
+	id: role,
+	title: `multiplayer.role.${role}.title`,
+}));
+
+const getRole = (role: NetworkRole | null) => {
+	return roles.find(whereId(role)) ?? roles[0];
+};
 
 export const StartMultiplayerPage = () => {
 	const dispatch = useAppDispatch();
@@ -40,22 +47,6 @@ export const StartMultiplayerPage = () => {
 
 	const [showIP, setShowIP] = useBoolean(false);
 
-	const roles = useMemo(
-		() =>
-			networkRoles.map((role) => ({
-				id: role,
-				title: t(`multiplayer.role.${role}.title`),
-			})),
-		[t],
-	);
-
-	const getRole = useCallback(
-		(role: NetworkRole | null) => {
-			return roles.find(whereId(role)) ?? roles[0];
-		},
-		[roles],
-	);
-
 	const defaultRole = getRole(networkRole);
 
 	const [role, setRole] = useState<TabItem<NetworkRole>>(defaultRole);
@@ -69,7 +60,7 @@ export const StartMultiplayerPage = () => {
 
 	useEffect(() => {
 		setRole(getRole(networkRole));
-	}, [getRole, networkRole]);
+	}, [networkRole]);
 
 	const onChangeNickname = useCallback(
 		(text: string) => {
@@ -110,7 +101,12 @@ export const StartMultiplayerPage = () => {
 				</C.Player>
 				<C.Hint>{t`multiplayer.hint`}</C.Hint>
 				<C.RoleTabs>
-					<C.RoleSelect data={roles} value={role} onSelect={setRole} />
+					<C.RoleSelect
+						data={roles}
+						value={role}
+						onSelect={setRole}
+						translate
+					/>
 					<C.RoleTabsContent>
 						{role.id === "host" && <C.Host />}
 						{role.id === "client" && <C.Client />}
