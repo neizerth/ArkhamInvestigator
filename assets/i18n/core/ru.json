@@ -6,6 +6,7 @@
 	"network.type.cellular": "Мобильный",
 	"network.type.other": "Другое",
 	"network.username": "Ваше имя в сети",
+	"network.autoDiscover": "Поиск игр в локальной сети",
 
 	"multiplayer.role.client.title": "Войти в игру",
 	"multiplayer.role.host.title": "Создать игру",
@@ -20,10 +21,13 @@
 	"multiplayer.playersCount": "Игроков",
 	"multiplayer.code.error": "Не удалось подключиться к игре. Проверьте код или настройки сети.",
 	"multiplayer.self": "Вы",
+	"multiplayer.locationPermissionRequired": "Нужен доступ к местоположению для поиска игр",
+	"multiplayer.autoDiscoverDisabled": "Автоматический поиск игр отключен",
 
-	"log.share": "Поделиться журналом действий",
-	"file.removed_one": "Удалено {{count}} файл",
-	"file.removed_few": "Удалено {{count}} файла",
+	"log.share": "Поделиться",
+	"log.clear": "Очистить",
+	"file.removed_one": "Удалён {{count}} файл",
+	"file.removed_few": "Удалены {{count}} файла",
 	"file.removed_many": "Удалено {{count}} файлов",
 
 	"error.downloadFailed": "Не удалось загрузить контент. Попробуйте позже или измените подключение к сети. Подробности: {{error}}",
@@ -536,5 +540,7 @@
 	"Single player": "Один игрок",
 	"Code": "Код",
 	"Next": "Далее",
-	"Ally Slots": "Союзники"
+	"Ally Slots": "Союзники",
+	"App Data": "Данные приложения",
+	"Logs": "Журналы действий"
 }

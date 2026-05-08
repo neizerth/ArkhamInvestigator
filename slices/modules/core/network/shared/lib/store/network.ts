@@ -16,6 +16,7 @@ export type NetworkState = {
 	nickname: string;
 	networkRole: NetworkRole | null;
 	hostIp: string | null;
+	networkDiscoveryEnabled: boolean;
 };
 
 const initialState: NetworkState = {
@@ -31,6 +32,7 @@ const initialState: NetworkState = {
 	nickname: "",
 	networkRole: null,
 	hostIp: null,
+	networkDiscoveryEnabled: false,
 };
 
 const state = createSliceState(initialState);
@@ -63,6 +65,7 @@ export const {
 	setDeviceNetworkId,
 	setHostRunning,
 	setClientRunning,
+	setNetworkDiscoveryEnabled,
 } = network.actions;
 
 export const {
@@ -78,6 +81,7 @@ export const {
 	selectDeviceNetworkId,
 	selectHostRunning,
 	selectClientRunning,
+	selectNetworkDiscoveryEnabled,
 } = network.selectors;
 
 export default network.reducer;

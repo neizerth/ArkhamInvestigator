@@ -11,6 +11,7 @@
 	"network.type.vpn": "VPN",
 	"network.type.other": "Other",
 	"network.username": "Your username",
+	"network.autoDiscover": "Search for games in the local network",
 
 	"error.downloadFailed": "Failed to download content. Please, try again later or change network connection. Details: {{error}}",
 	"app.disclaimer": "Arkham Horror: The Card Game™ and all related content © Fantasy Flight Games (FFG). This app is not produced, endorsed by or affiliated with FFG.",
@@ -364,7 +365,7 @@
 	"chaosOdds.enabled": "Enabled",
 	"chaosOdds.skillOdds": "Skill odds",
 	"chaosOdds.pinnedCalculationOdds": "Pinned calculations",
-	"chaosOdds.performance.title": "Chaos odds: performance",
+	"chaosOdds.performance.title": "Chaos odds performance",
 	"chaosOdds.performance.pageTitle": "Chaos odds: performance",
 	"chaosOdds.performance.description": "Goal: completing each test in less than 4 seconds. Evaluation: < 1 sec - excellent, < 2 sec - good, < 4 sec - satisfactory, > 10 sec - bad.",
 	"chaosOdds.performance.clearTests": "Clear tests",
@@ -382,8 +383,11 @@
 	"multiplayer.code.error": "Failed to connect to the game. Check the code or network settings.",
 	"multiplayer.waitingForHost": "Waiting for host to start",
 	"multiplayer.self": "You",
+	"multiplayer.locationPermissionRequired": "Location permission is required to search for games",
+	"multiplayer.autoDiscoverDisabled": "Automatic game search is disabled",
 
-	"log.share": "Share game actions log",
+	"log.share": "Share",
+	"log.clear": "Clear",
 	"file.removed_one": "Removed {{count}} file",
 	"file.removed_few": "Removed {{count}} files",
 
@@ -525,5 +529,7 @@
 	"Multiplayer": "Multiplayer",
 	"Single player": "Single player",
 	"Next": "Next",
-	"Ally Slots": "Ally Slots"
+	"Ally Slots": "Ally Slots",
+	"App Data": "App Data",
+	"Logs": "Logs"
 }

@@ -14,7 +14,7 @@ type ContainerProps = ViewProps & {
 	type: ToastType;
 };
 
-const boarderColor: Record<ToastType, string> = {
+const borderColor: Record<ToastType, string> = {
 	success: color.skill.agility.dark,
 	error: color.skill.combat.dark,
 	info: color.status.info,
@@ -32,9 +32,10 @@ export const Container: FC<ContainerProps> = styled(View)`
   background-color: ${color.dark40};
   border-radius: ${size.borderRadius.default}px;
   padding: ${size.gap.small}px ${size.gap.default}px;
+  border-width: 1px;
   border-left-width: ${size.gap.small}px;
   ${({ type }: ContainerProps) => css`
-    border-left-color: ${boarderColor[type]};
+    border-color: ${borderColor[type]};
   `}
 `;
 

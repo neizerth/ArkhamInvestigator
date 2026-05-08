@@ -32,15 +32,12 @@ function* worker({ payload }: ReturnType<typeof clearLogs>) {
 	const toRemove = files.filter((file) => query(file.modificationTime));
 
 	if (toRemove.length === 0) {
-		log.info("clearLogs: no files to remove", payload);
 		return;
 	}
 
 	for (const { path } of toRemove) {
 		yield call(FileSystem.deleteAsync, path, { idempotent: true });
 	}
-
-	log.info("clearLogs:", payload, `${toRemove.length} file(s)`);
 
 	if (!notify) {
 		return;

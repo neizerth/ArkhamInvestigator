@@ -69,13 +69,7 @@ export const DiagnosticsPage = () => {
 		<C.Page title="Diagnostics">
 			<C.Container>
 				<C.Content>
-					<C.Section title={t`Diagnostics`}>
-						<C.Row>
-							<C.Button text={t`log.share`} icon="share" onPress={shareLogs} />
-						</C.Row>
-						<C.Row>
-							<C.Button text={t`log.clear`} icon="trash" onPress={clearLogs} />
-						</C.Row>
+					<C.Section title={t`App Data`}>
 						<C.Row>
 							<C.Button
 								text={t`Check Data Updates`}
@@ -112,17 +106,27 @@ export const DiagnosticsPage = () => {
 									onPress={unsetArtworkUrl}
 								/>
 							</C.Row>
-							<C.Row>
-								<C.Button
-									text={t`chaosOdds.performance.title`}
-									icon="meter"
-									onPress={goTo(routes.chaosOddsPerformance)}
-								/>
-							</C.Row>
 						</ArtworksFragment>
 
 						<C.Row>
 							<C.Button text={t`Restart App`} icon="switch" onPress={restart} />
+						</C.Row>
+					</C.Section>
+					<C.Section title={t`Logs`}>
+						<C.Row>
+							<C.Button text={t`log.share`} icon="share" onPress={shareLogs} />
+						</C.Row>
+						<C.Row>
+							<C.Button text={t`log.clear`} icon="trash" onPress={clearLogs} />
+						</C.Row>
+					</C.Section>
+					<C.Section title={t`Performance`}>
+						<C.Row>
+							<C.Button
+								text={t`chaosOdds.performance.title`}
+								icon="meter"
+								onPress={goTo(routes.chaosOddsPerformance)}
+							/>
 						</C.Row>
 					</C.Section>
 				</C.Content>

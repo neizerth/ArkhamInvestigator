@@ -56,6 +56,7 @@ export const GenerateRandomNickname: typeof TouchableOpacity = styled(
 )`
 	padding: ${size.gap.default}px ${size.gap.medium}px;
 	position: absolute;
+	z-index: 1;
 	right: 0;
 	top: 0;
 	bottom: 0;

@@ -1,6 +1,7 @@
 import { color, size } from "@shared/config";
-import { Button, type ButtonProps, Input, Row } from "@shared/ui";
-import { ActivityIndicator, View } from "react-native";
+import { Button, type ButtonProps, Input } from "@shared/ui";
+import { StoreCheckbox } from "@widgets/control/store-checkbox";
+import { View } from "react-native";
 import styled, { css } from "styled-components/native";
 
 export const Container: typeof View = styled(View)`
@@ -24,24 +25,6 @@ export const Action: typeof Button = styled(Button)`
   `}
 `;
 
-export const Services: typeof View = styled(View)`
-  gap: ${size.gap.default}px;
-`;
-
-export const Loader: typeof ActivityIndicator = styled(ActivityIndicator).attrs(
-	{
-		color: color.dark10,
-	},
-)`
-`;
-
-export const Loading: typeof Row = styled(Row)`
-  gap: ${size.gap.default}px;
-  align-items: center;
-  justify-content: center;
-  padding: ${size.gap.default}px 0;
-`;
-
-export const Service: typeof Button = styled(Button)`
-  background-color: ${color.dark20};
+export const Checkbox: typeof StoreCheckbox = styled(StoreCheckbox)`
+  flex: 1;
 `;
