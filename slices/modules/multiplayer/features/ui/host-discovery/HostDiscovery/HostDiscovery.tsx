@@ -17,11 +17,7 @@ export type HostDiscoveryProps = ViewProps & {
 	onSelect?: (service: Service) => void;
 };
 
-export const HostDiscovery = ({
-	onSelect,
-	selected,
-	...props
-}: HostDiscoveryProps) => {
+export const HostDiscovery = (props: HostDiscoveryProps) => {
 	const { t } = useTranslation();
 	return (
 		<C.Container {...props}>
