@@ -1,5 +1,5 @@
 import {
-	selectHostIp,
+	selectHostIP,
 	selectNetworkRole,
 	startTCPClient,
 } from "@modules/core/network/shared/lib";
@@ -16,14 +16,14 @@ function* worker() {
 		return;
 	}
 
-	const hostIp: ReturnType<typeof selectHostIp> = yield select(selectHostIp);
-	console.log("hostIp", hostIp);
+	const hostIP: ReturnType<typeof selectHostIP> = yield select(selectHostIP);
+	console.log("hostIP", hostIP);
 
-	if (!hostIp) {
+	if (!hostIP) {
 		console.error("No host IP found");
 		return;
 	}
-	yield put(startTCPClient({ host: hostIp }));
+	yield put(startTCPClient({ host: hostIP }));
 }
 
 export function* runTCPClientOnResumeSaga() {

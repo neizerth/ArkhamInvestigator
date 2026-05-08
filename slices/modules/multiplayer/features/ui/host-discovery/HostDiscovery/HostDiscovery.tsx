@@ -1,6 +1,6 @@
 import { AndroidPermissionFragment } from "@modules/core/device/shared/ui";
 import {
-	selectHostIp,
+	selectHostIP,
 	selectNetworkDiscoveryEnabled,
 	useTCPServices,
 } from "@modules/core/network/shared/lib";
@@ -44,7 +44,7 @@ export const Container = ({
 }: HostDiscoveryProps) => {
 	const { t } = useTranslation();
 	const services = useTCPServices();
-	const hostIp = useAppSelector(selectHostIp);
+	const hostIP = useAppSelector(selectHostIP);
 
 	return (
 		<C.Container {...props}>
@@ -66,7 +66,7 @@ export const Container = ({
 					<Text>{t`multiplayer.searching`}</Text>
 				</C.Loading>
 			)}
-			{services.length > 0 && hostIp && (
+			{services.length > 0 && hostIP && (
 				<C.Loading>
 					<C.Loader />
 					<Text>{t`multiplayer.waitingForHost`}</Text>

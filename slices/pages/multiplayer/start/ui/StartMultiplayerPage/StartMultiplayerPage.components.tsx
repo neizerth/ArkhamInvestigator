@@ -54,12 +54,12 @@ export const GenerateIcon: typeof Icon = styled(Icon)`
 export const GenerateRandomNickname: typeof TouchableOpacity = styled(
 	TouchableOpacity,
 )`
-	padding: ${size.gap.default}px ${size.gap.medium}px;
+	padding: 0px ${size.gap.medium}px;
 	position: absolute;
 	z-index: 1;
-	right: 0;
-	top: 0;
-	bottom: 0;
+	right: -1px;
+	top: -1px;
+	bottom: -1px;
 	align-items: center;
 	justify-content: center;
 `;

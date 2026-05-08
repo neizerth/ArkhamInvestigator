@@ -15,7 +15,7 @@ export type NetworkState = {
 	ssid: string | null;
 	nickname: string;
 	networkRole: NetworkRole | null;
-	hostIp: string | null;
+	hostIP: string | null;
 	networkDiscoveryEnabled: boolean;
 };
 
@@ -31,7 +31,7 @@ const initialState: NetworkState = {
 	ssid: null,
 	nickname: "",
 	networkRole: null,
-	hostIp: null,
+	hostIP: null,
 	networkDiscoveryEnabled: false,
 };
 
@@ -61,7 +61,7 @@ export const {
 	setNetworkType,
 	setNickname,
 	setNetworkRole,
-	setHostIp,
+	setHostIP,
 	setDeviceNetworkId,
 	setHostRunning,
 	setClientRunning,
@@ -77,7 +77,7 @@ export const {
 	selectNetworkType,
 	selectNickname,
 	selectNetworkRole,
-	selectHostIp,
+	selectHostIP,
 	selectDeviceNetworkId,
 	selectHostRunning,
 	selectClientRunning,

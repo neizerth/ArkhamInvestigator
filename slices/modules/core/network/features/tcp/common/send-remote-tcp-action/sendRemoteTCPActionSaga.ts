@@ -2,7 +2,7 @@ import { log } from "@modules/core/log/shared/config";
 import { sendTCPActionToServer } from "@modules/core/network/entities/lib/store/features/tcp/client/sendTCPActionToServer";
 import { sendTCPActionToClient } from "@modules/core/network/entities/lib/store/features/tcp/server/sendTCPActionToClient";
 import {
-	selectHostIp,
+	selectHostIP,
 	selectNetworkRole,
 	sendRemoteAction,
 } from "@modules/core/network/shared/lib";
@@ -35,7 +35,9 @@ type Meta = NetworkOutcomeActionMeta & {
 	socket?: TcpSocket.Socket;
 };
 
-function* actionWorker(action: PayloadAction<unknown, string, Meta>) {
+function* actionWorker(
+	action: PayloadAction<unknown, string, Meta>,
+): Generator {
 	const { meta } = action;
 
 	if (meta.notify === "self") {
@@ -46,7 +48,7 @@ function* actionWorker(action: PayloadAction<unknown, string, Meta>) {
 	const role: ReturnType<typeof selectNetworkRole> =
 		yield select(selectNetworkRole);
 
-	const hostIp: ReturnType<typeof selectHostIp> = yield select(selectHostIp);
+	const hostIp: ReturnType<typeof selectHostIP> = yield select(selectHostIP);
 
 	if (!role) {
 		log.info("No network role found. Skipping...");
@@ -80,7 +82,9 @@ function* actionWorker(action: PayloadAction<unknown, string, Meta>) {
 	);
 }
 
-function* remoteActionWorker({ payload }: ReturnType<typeof sendRemoteAction>) {
+function* remoteActionWorker({
+	payload,
+}: ReturnType<typeof sendRemoteAction>): Generator {
 	const { action } = payload;
 	yield put(action);
 }

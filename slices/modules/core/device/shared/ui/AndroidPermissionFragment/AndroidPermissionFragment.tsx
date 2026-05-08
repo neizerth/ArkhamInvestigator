@@ -1,15 +1,10 @@
 import type { PropsWithChildren } from "react";
-import {
-	type PermissionStatus,
-	type PermissionsAndroid,
-	Platform,
-} from "react-native";
+import { type PermissionStatus, Platform } from "react-native";
 import { useAndroidPermission } from "../../lib/hooks";
-
-type Permission = keyof typeof PermissionsAndroid.PERMISSIONS;
+import type { AndroidPermissionType } from "../../model";
 
 type AndroidPermissionFragmentProps = PropsWithChildren & {
-	permission: Permission;
+	permission: AndroidPermissionType;
 	only?: PermissionStatus;
 	except?: PermissionStatus;
 	fallback?: React.ReactNode;
@@ -29,7 +24,7 @@ export const AndroidPermissionFragment = ({
 	}
 
 	if (!access) {
-		return fallback;
+		return null;
 	}
 
 	if (only && access !== only) {

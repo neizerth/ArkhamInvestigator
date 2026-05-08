@@ -1,5 +1,5 @@
 import { log } from "@modules/core/log/shared/config";
-import { setHostIp } from "@modules/core/network/shared/lib";
+import { setHostIP } from "@modules/core/network/shared/lib";
 import { setGameStatus } from "@modules/game/shared/lib";
 import { put, takeEvery } from "redux-saga/effects";
 import { setZeroconfService } from "./setZeroconfService";
@@ -16,7 +16,7 @@ function* worker({ payload }: ReturnType<typeof setZeroconfService>) {
 	}
 
 	console.log("setting host ip from zeroconf service", ip);
-	yield put(setHostIp(ip));
+	yield put(setHostIP(ip));
 	yield put(setGameStatus("initial"));
 }
 

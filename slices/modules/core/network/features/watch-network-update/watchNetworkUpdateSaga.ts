@@ -1,6 +1,7 @@
 import { appStarted } from "@modules/core/app/shared/lib";
 import { call, put, take, takeEvery } from "redux-saga/effects";
 import {
+	getNetworkInfoState,
 	type networkInfoUpdated,
 	setIP,
 	setNetworkConnected,
@@ -19,30 +20,17 @@ function* worker() {
 		const action: ReturnType<typeof networkInfoUpdated> = yield take(channel);
 		const { payload } = action;
 
-		const { isInternetReachable, isWifiEnabled = false, isConnected } = payload;
+		const { ssid, ip, networkType, networkConnected, wifiEnabled, offline } =
+			getNetworkInfoState(payload);
 
 		// `isInternetReachable` is often `null` until the OS finishes probing; treating
 		// unknown as offline breaks Android (everything looks disconnected).
-		yield put(setOffline(isInternetReachable === false));
-		yield put(setWifiEnabled(isWifiEnabled));
-		yield put(setNetworkConnected(isConnected ?? false));
-		yield put(setNetworkType(payload.type));
-
-		if (payload.type === "wifi") {
-			const ssid = payload.type === "wifi" ? payload.details.ssid : null;
-
-			yield put(setSSID(ssid));
-		} else {
-			yield put(setSSID(null));
-		}
-
-		if (payload.type === "wifi" || payload.type === "ethernet") {
-			const ip = payload.details.ipAddress;
-
-			yield put(setIP(ip));
-		} else {
-			yield put(setIP(null));
-		}
+		yield put(setOffline(offline));
+		yield put(setWifiEnabled(wifiEnabled));
+		yield put(setNetworkConnected(networkConnected));
+		yield put(setNetworkType(networkType));
+		yield put(setSSID(ssid));
+		yield put(setIP(ip));
 	}
 }
 

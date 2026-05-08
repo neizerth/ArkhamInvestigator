@@ -79,6 +79,10 @@ export const StartMultiplayerPage = () => {
 		dispatch(generateRandomNickname());
 	}, [dispatch]);
 
+	const networkConnectionLabel = networkConnected
+		? t`network.no-local-ip`
+		: t`network.no-connection`;
+
 	return (
 		<C.Page title={t`Multiplayer`}>
 			<C.Content>
@@ -90,21 +94,15 @@ export const StartMultiplayerPage = () => {
 							value={nickname ?? ""}
 							onChangeText={onChangeNickname}
 						/>
-						<C.GenerateRandomNickname onPress={generateNickname}>
-							<C.GenerateIcon icon="loop2" />
-						</C.GenerateRandomNickname>
+						{!showIP && (
+							<C.GenerateRandomNickname onPress={generateNickname}>
+								<C.GenerateIcon icon="loop2" />
+							</C.GenerateRandomNickname>
+						)}
 					</C.Nickname>
 					<C.NetworkInfo onPress={setShowIP.toggle}>
 						<C.NetworkIcon icon={icon} />
-						{showIP && (
-							<Text>
-								{ip ??
-									(networkConnected
-										? t`network.no-local-ip`
-										: t`network.no-connection`)}{" "}
-								{ssid && `(${ssid})`}
-							</Text>
-						)}
+						{showIP && <Text>{ip ?? networkConnectionLabel}</Text>}
 					</C.NetworkInfo>
 				</C.Player>
 				<C.Hint>{t`multiplayer.hint`}</C.Hint>

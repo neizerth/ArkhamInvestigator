@@ -1,4 +1,4 @@
-import { selectHostIp, startTCPClient } from "@modules/core/network/shared/lib";
+import { selectHostIP, startTCPClient } from "@modules/core/network/shared/lib";
 import { seconds } from "@shared/lib";
 import { put, select, takeLeading } from "redux-saga/effects";
 import { restartTCPClient } from "./restartTCPClient";
@@ -12,13 +12,13 @@ function* worker() {
 		return;
 	}
 
-	const hostIp: ReturnType<typeof selectHostIp> = yield select(selectHostIp);
-	if (!hostIp) {
+	const hostIP: ReturnType<typeof selectHostIP> = yield select(selectHostIP);
+	if (!hostIP) {
 		return;
 	}
 
 	lastRestartTime = now;
-	yield put(startTCPClient({ host: hostIp }));
+	yield put(startTCPClient({ host: hostIP }));
 }
 
 export function* restartTCPClientSaga() {

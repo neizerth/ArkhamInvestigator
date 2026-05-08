@@ -8,6 +8,7 @@ export const networkInfoUpdated =
 
 type ConnectNetworkClientPayload = {
 	nickname: string;
+	hostIP: string;
 };
 
 export const connectNetworkClient = createAction(

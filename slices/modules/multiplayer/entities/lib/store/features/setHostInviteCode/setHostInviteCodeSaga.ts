@@ -1,5 +1,5 @@
 import {
-	setHostIp,
+	setHostIP,
 	tcpClientSocketConnected,
 	tcpClientSocketError,
 } from "@modules/core/network/shared/lib";
@@ -23,7 +23,7 @@ function* worker({ payload }: ReturnType<typeof setHostInviteCode>) {
 
 	console.log("code ip", ip);
 
-	yield put(setHostIp(ip));
+	yield put(setHostIP(ip));
 	yield put(setGameStatus("initial"));
 
 	const { error }: { error?: ReturnType<typeof tcpClientSocketError> } =
@@ -37,7 +37,7 @@ function* worker({ payload }: ReturnType<typeof setHostInviteCode>) {
 	}
 
 	console.log("error connecting to host", error);
-	yield put(setHostIp(null));
+	yield put(setHostIP(null));
 
 	yield put(
 		sendNotification({

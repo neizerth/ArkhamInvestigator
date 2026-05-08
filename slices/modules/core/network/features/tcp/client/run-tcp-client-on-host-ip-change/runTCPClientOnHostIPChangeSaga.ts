@@ -2,12 +2,12 @@ import { selectGameStatus } from "@modules/game/shared/lib";
 import { put, select, takeEvery } from "redux-saga/effects";
 import {
 	selectNetworkRole,
-	setHostIp,
+	setHostIP,
 	startTCPClient,
 	stopTCPClient,
 } from "../../../../shared/lib";
 
-function* worker({ payload }: ReturnType<typeof setHostIp>) {
+function* worker({ payload }: ReturnType<typeof setHostIP>) {
 	const gameStatus: ReturnType<typeof selectGameStatus> =
 		yield select(selectGameStatus);
 
@@ -27,5 +27,5 @@ function* worker({ payload }: ReturnType<typeof setHostIp>) {
 }
 
 export function* runTCPClientOnHostIPChangeSaga() {
-	yield takeEvery(setHostIp.match, worker);
+	yield takeEvery(setHostIP.match, worker);
 }

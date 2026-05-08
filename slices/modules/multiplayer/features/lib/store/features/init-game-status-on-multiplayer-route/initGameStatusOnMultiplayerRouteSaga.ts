@@ -1,6 +1,6 @@
 import {
 	removeAllNetworkClients,
-	setHostIp,
+	setHostIP,
 } from "@modules/core/network/shared/lib";
 import { setCurrentRoute } from "@modules/core/router/shared/lib";
 import { setGameStatus } from "@modules/game/shared/lib";
@@ -11,7 +11,7 @@ function* worker({ payload }: ReturnType<typeof setCurrentRoute>) {
 		return;
 	}
 	yield put(removeAllNetworkClients());
-	yield put(setHostIp(null));
+	yield put(setHostIP(null));
 	yield put(setGameStatus("initial"));
 }
 

@@ -4,6 +4,8 @@ import {
 	addNetworkClient,
 	connectNetworkClient,
 	filterTCPIncomeAction,
+	selectIP,
+	setIP,
 	setTCPClientSocket,
 } from "@modules/core/network/shared/lib";
 import type { TCPIncomeReturnType } from "@modules/core/network/shared/model";
@@ -17,8 +19,14 @@ function* worker({
 	meta,
 	payload,
 }: TCPIncomeReturnType<typeof connectNetworkClient>) {
-	const { nickname } = payload;
+	const { nickname, hostIP } = payload;
 	const { networkId, socket } = meta;
+
+	const ip: ReturnType<typeof selectIP> = yield select(selectIP);
+
+	if (ip !== hostIP) {
+		yield put(setIP(hostIP));
+	}
 
 	yield call(setTCPClientSocket, networkId, socket);
 
