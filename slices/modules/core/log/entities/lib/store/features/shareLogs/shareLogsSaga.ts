@@ -4,8 +4,8 @@ import { sendNotification } from "@modules/core/notifications/shared/lib";
 import type { ReturnAwaited } from "@shared/model";
 import * as FileSystem from "expo-file-system";
 import { ascend, descend, prop, sortWith } from "ramda";
-import { Share } from "react-native";
 import { call, put, takeEvery } from "redux-saga/effects";
+import { shareLogFile } from "./shareLogFile";
 import { shareLogs } from "./shareLogs";
 
 function* worker() {
@@ -34,9 +34,9 @@ function* worker() {
 	const [latest] = data;
 
 	try {
-		yield call(Share.share, {
-			message: latest.name,
-			url: latest.path,
+		yield call(shareLogFile, {
+			path: latest.path,
+			name: latest.name,
 		});
 	} catch (e) {
 		log.error("shareLogs: share failed", e);
