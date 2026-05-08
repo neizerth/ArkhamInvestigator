@@ -112,7 +112,7 @@ export const StartMultiplayerPage = () => {
 				<C.RoleTabs>
 					<C.RoleSelect data={roles} value={role} onSelect={setRole} />
 					<C.RoleTabsContent>
-						{role.id === "host" && <C.Host ip={ip} />}
+						{role.id === "host" && <C.Host />}
 						{role.id === "client" && <C.Client />}
 					</C.RoleTabsContent>
 				</C.RoleTabs>

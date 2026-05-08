@@ -1,6 +1,6 @@
 import { logoLight } from "@assets/images";
 import { copyText } from "@modules/core/clipboard/entities/lib/store/features/copyText/copyText";
-import { selectNickname } from "@modules/core/network/shared/lib";
+import { selectIP, selectNickname } from "@modules/core/network/shared/lib";
 import { selectAllNetworkClients } from "@modules/core/network/shared/lib/store/networkClient";
 import {
 	getHostDeeplink,
@@ -13,13 +13,12 @@ import { useTranslation } from "react-i18next";
 import { Share, type ViewProps } from "react-native";
 import * as C from "./NewGameHostView.components";
 
-export type NewGameHostViewProps = ViewProps & {
-	ip?: string | null;
-};
+export type NewGameHostViewProps = ViewProps;
 
 export const NewGameHostView = (props: NewGameHostViewProps) => {
 	const { t } = useTranslation();
-	const { ip } = props;
+
+	const ip = useAppSelector(selectIP);
 
 	if (!ip) {
 		return (

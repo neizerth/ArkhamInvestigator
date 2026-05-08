@@ -24,6 +24,7 @@ export const Info: typeof View = styled(View)`
 
 export const Clients: typeof View = styled(View)`
   min-height: 80px;
+  padding-right: ${size.gap.default}px;
 `;
 
 export const ClientsInfo: typeof View = styled(View)`
@@ -87,7 +88,7 @@ export const CodeValue: typeof Text = styled(Text)`
 `;
 
 export const Client: typeof Text = styled(Text)`
-
+  padding-right: ${size.gap.default}px;
 `;
 
 export const HostClient: typeof Row = styled(Row)`

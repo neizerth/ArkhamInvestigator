@@ -53,14 +53,17 @@ export const GenerateIcon: typeof Icon = styled(Icon)`
 
 export const GenerateRandomNickname: typeof TouchableOpacity = styled(
 	TouchableOpacity,
-)`
-	background-color: transparent;
+).attrs({
+	hitSlop: { top: 10, bottom: 10, left: 10, right: 10 },
+	pointerEvents: "box-only",
+})`
 	padding: 0px ${size.gap.medium}px;
 	position: absolute;
 	z-index: 2;
 	right: -1px;
 	top: -5px;
 	bottom: -5px;
+	min-width: 44px;
 	align-items: center;
 	justify-content: center;
 `;
