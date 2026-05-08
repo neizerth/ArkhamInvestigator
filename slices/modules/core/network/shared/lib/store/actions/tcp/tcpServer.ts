@@ -10,6 +10,14 @@ export const stopTCPServer = createAction<StopTCPServerPayload>(
 	"network/stopTCPServer",
 );
 
+type RestartTCPServerPayload = {
+	name: string | null;
+};
+
+export const restartTCPServer = createAction<RestartTCPServerPayload>(
+	"network/restartTCPServer",
+);
+
 type TcpSocketDataReceivedPayload = {
 	socket: TcpSocket.Socket;
 	data: string;
@@ -52,3 +60,7 @@ export const tcpServerError = createAction<TcpServerErrorPayload>(
 export const tcpServerClosed = createAction("network/tcpServerClosed");
 
 export const tcpServerListening = createAction("network/tcpServerListening");
+
+export const startTCPServerSelfDiscovery = createAction(
+	"network/startTCPServerSelfDiscovery",
+);

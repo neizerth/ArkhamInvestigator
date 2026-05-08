@@ -1,3 +1,4 @@
+import { TCP_SERVER_NAME } from "@modules/core/network/shared/config";
 import {
 	selectNickname,
 	stopTCPServer,
@@ -17,11 +18,16 @@ function* worker({ payload }: ReturnType<typeof stopTCPServer>) {
 	const nickname: ReturnType<typeof selectNickname> =
 		yield select(selectNickname);
 
-	if (!nickname) {
-		return;
+	const nicknameTrimmed = nickname?.trim() ?? "";
+	if (nicknameTrimmed) {
+		zeroconf.unpublishService(nicknameTrimmed);
 	}
 
-	zeroconf.unpublishService(nickname);
+	// If server was started before nickname was set (or nickname is empty),
+	// the advertised name falls back to TCP_SERVER_NAME.
+	if (nicknameTrimmed !== TCP_SERVER_NAME) {
+		zeroconf.unpublishService(TCP_SERVER_NAME);
+	}
 }
 
 export function* stopTCPServerSaga() {

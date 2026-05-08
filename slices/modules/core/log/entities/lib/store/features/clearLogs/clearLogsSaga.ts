@@ -32,12 +32,14 @@ function* worker({ payload }: ReturnType<typeof clearLogs>) {
 	const toRemove = files.filter((file) => query(file.modificationTime));
 
 	if (toRemove.length === 0) {
-		yield put(
-			sendNotification({
-				message: "log.noLogs",
-				type: "info",
-			}),
-		);
+		if (notify) {
+			yield put(
+				sendNotification({
+					message: "log.noLogs",
+					type: "info",
+				}),
+			);
+		}
 		return;
 	}
 

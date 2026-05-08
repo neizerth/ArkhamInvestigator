@@ -17,6 +17,7 @@ export type NetworkState = {
 	networkRole: NetworkRole | null;
 	hostIP: string | null;
 	networkDiscoveryEnabled: boolean;
+	hotspotEnabled?: boolean;
 };
 
 const initialState: NetworkState = {
@@ -33,6 +34,7 @@ const initialState: NetworkState = {
 	networkRole: null,
 	hostIP: null,
 	networkDiscoveryEnabled: false,
+	hotspotEnabled: false,
 };
 
 const state = createSliceState(initialState);
@@ -66,6 +68,7 @@ export const {
 	setHostRunning,
 	setClientRunning,
 	setNetworkDiscoveryEnabled,
+	setHotspotEnabled,
 } = network.actions;
 
 export const {
@@ -82,6 +85,7 @@ export const {
 	selectHostRunning,
 	selectClientRunning,
 	selectNetworkDiscoveryEnabled,
+	selectHotspotEnabled,
 } = network.selectors;
 
 export default network.reducer;

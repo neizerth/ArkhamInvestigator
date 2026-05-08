@@ -2,7 +2,7 @@ import { CrimsonPro } from "@assets/fonts";
 import { TouchableOpacity } from "@modules/core/touch/shared/ui";
 import { color, font, size } from "@shared/config";
 import { Button, Icon, Row, Text } from "@shared/ui";
-import { View } from "react-native";
+import { ActivityIndicator, View } from "react-native";
 import QRCode from "react-native-qrcode-svg";
 import styled from "styled-components/native";
 
@@ -93,4 +93,22 @@ export const Client: typeof Text = styled(Text)`
 export const Next: typeof Button = styled(Button)`
 background-color: ${color.dark20};
 
+`;
+
+export const NoHostIP: typeof Text = styled(Text)`
+	padding: ${size.gap.default}px 0px;
+	flex-shrink: 1;
+	min-width: 0;
+`;
+
+export const Loader: typeof ActivityIndicator = styled(ActivityIndicator).attrs(
+	{
+		color: color.dark10,
+	},
+)`
+`;
+
+export const NoIP: typeof Row = styled(Row)`
+	padding: ${size.gap.default}px;
+  gap: ${size.gap.default}px;
 `;

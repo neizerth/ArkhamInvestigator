@@ -1,6 +1,7 @@
 import { put, select, takeEvery } from "redux-saga/effects";
 import {
 	selectHostRunning,
+	selectNetworkRole,
 	setHostIP,
 	setNetworkRole,
 	startTCPServer,
@@ -23,5 +24,17 @@ function* worker({ payload }: ReturnType<typeof setNetworkRole>) {
 }
 
 export function* runTCPServerOnNetworkRoleChangeSaga() {
+	// Cold start / persistence: role can already be "host" without emitting `setNetworkRole`.
+	// Ensure the server starts once in that case.
+	const role: ReturnType<typeof selectNetworkRole> =
+		yield select(selectNetworkRole);
+	if (role === "host") {
+		const hostRunning: ReturnType<typeof selectHostRunning> =
+			yield select(selectHostRunning);
+		if (!hostRunning) {
+			yield put(setHostIP(null));
+			yield put(startTCPServer());
+		}
+	}
 	yield takeEvery(setNetworkRole.match, worker);
 }

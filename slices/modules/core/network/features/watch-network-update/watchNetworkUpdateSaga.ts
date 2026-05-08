@@ -3,6 +3,7 @@ import { call, put, take, takeEvery } from "redux-saga/effects";
 import {
 	getNetworkInfoState,
 	type networkInfoUpdated,
+	setHotspotEnabled,
 	setIP,
 	setNetworkConnected,
 	setNetworkType,
@@ -31,6 +32,7 @@ function* worker() {
 		yield put(setNetworkType(networkType));
 		yield put(setSSID(ssid));
 		yield put(setIP(ip));
+		yield put(setHotspotEnabled(false));
 	}
 }
 

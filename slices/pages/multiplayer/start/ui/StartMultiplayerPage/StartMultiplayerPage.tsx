@@ -4,12 +4,12 @@ import {
 	networkTypeIconMapping,
 } from "@modules/core/network/shared/config";
 import {
+	selectHotspotEnabled,
 	selectIP,
 	selectNetworkConnected,
 	selectNetworkRole,
 	selectNetworkType,
 	selectNickname,
-	selectSSID,
 	setNetworkRole,
 	setNickname,
 } from "@modules/core/network/shared/lib";
@@ -30,13 +30,13 @@ const roles: NetworkRole[] = ["client", "host"];
 export const StartMultiplayerPage = () => {
 	const dispatch = useAppDispatch();
 	const { t } = useTranslation();
-	const ssid = useAppSelector(selectSSID);
 	const ip = useAppSelector(selectIP);
 	const networkConnected = useAppSelector(selectNetworkConnected);
 	const networkType = useAppSelector(selectNetworkType);
 	const nickname = useAppSelector(selectNickname);
 	const networkRole = useAppSelector(selectNetworkRole);
-	const icon = networkTypeIconMapping[networkType];
+	const hotspotEnabled = useAppSelector(selectHotspotEnabled);
+	const icon = hotspotEnabled ? "podcast" : networkTypeIconMapping[networkType];
 
 	const [showIP, setShowIP] = useBoolean(false);
 
@@ -61,8 +61,11 @@ export const StartMultiplayerPage = () => {
 	const [role, setRole] = useState<TabItem<NetworkRole>>(defaultRole);
 
 	useEffect(() => {
+		if (networkRole !== role.id) {
+			return;
+		}
 		dispatch(setNetworkRole(role.id));
-	}, [dispatch, role.id]);
+	}, [dispatch, role.id, networkRole]);
 
 	useEffect(() => {
 		setRole(getRole(networkRole));
@@ -109,7 +112,7 @@ export const StartMultiplayerPage = () => {
 				<C.RoleTabs>
 					<C.RoleSelect data={roles} value={role} onSelect={setRole} />
 					<C.RoleTabsContent>
-						{role.id === "host" && ip && <C.Host ip={ip} />}
+						{role.id === "host" && <C.Host ip={ip} />}
 						{role.id === "client" && <C.Client />}
 					</C.RoleTabsContent>
 				</C.RoleTabs>

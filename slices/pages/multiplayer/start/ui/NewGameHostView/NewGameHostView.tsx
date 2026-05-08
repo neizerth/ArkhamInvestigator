@@ -14,10 +14,26 @@ import { Share, type ViewProps } from "react-native";
 import * as C from "./NewGameHostView.components";
 
 export type NewGameHostViewProps = ViewProps & {
-	ip: string;
+	ip?: string | null;
 };
 
-export const NewGameHostView = ({ ip, ...props }: NewGameHostViewProps) => {
+export const NewGameHostView = (props: NewGameHostViewProps) => {
+	const { t } = useTranslation();
+	const { ip } = props;
+
+	if (!ip) {
+		return (
+			<C.NoIP>
+				<C.Loader />
+				<C.NoHostIP>{t`network.searching-for-ip`}</C.NoHostIP>
+			</C.NoIP>
+		);
+	}
+
+	return <Container {...props} ip={ip} />;
+};
+
+const Container = ({ ip, ...props }: ViewProps & { ip: string }) => {
 	const { t } = useTranslation();
 	const dispatch = useAppDispatch();
 	const url = useMemo(() => getHostDeeplink(ip), [ip]);
