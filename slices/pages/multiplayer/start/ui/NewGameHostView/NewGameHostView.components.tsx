@@ -90,6 +90,19 @@ export const Client: typeof Text = styled(Text)`
 
 `;
 
+export const HostClient: typeof Row = styled(Row)`
+  position: relative;
+  gap: ${size.gap.small}px;
+  align-items: center;
+`;
+
+export const SelfIcon: typeof Icon = styled(Icon)`
+  color: ${color.white};
+  font-size: 15px;
+  line-height: 15px;
+  top: 2px;
+`;
+
 export const Next: typeof Button = styled(Button)`
 background-color: ${color.dark20};
 

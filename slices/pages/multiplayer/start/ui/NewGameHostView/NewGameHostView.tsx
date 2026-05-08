@@ -82,9 +82,10 @@ const Container = ({ ip, ...props }: ViewProps & { ip: string }) => {
 					</C.ClientsCountText>
 				</C.ClientsInfo>
 				<C.Clients>
-					<C.Client>
-						1. {nickname} ({t`multiplayer.self`})
-					</C.Client>
+					<C.HostClient>
+						<C.SelfIcon icon="investigator" />
+						<C.Client>{nickname}</C.Client>
+					</C.HostClient>
 					{clients.map((client, index) => (
 						<C.Client key={client.id}>
 							{index + 2} {client.nickname}{" "}

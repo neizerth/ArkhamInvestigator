@@ -57,10 +57,10 @@ export const GenerateRandomNickname: typeof TouchableOpacity = styled(
 	background-color: transparent;
 	padding: 0px ${size.gap.medium}px;
 	position: absolute;
-	z-index: 1;
+	z-index: 2;
 	right: -1px;
-	top: -1px;
-	bottom: -1px;
+	top: -5px;
+	bottom: -5px;
 	align-items: center;
 	justify-content: center;
 `;
