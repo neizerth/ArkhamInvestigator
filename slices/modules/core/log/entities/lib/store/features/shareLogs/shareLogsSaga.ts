@@ -1,10 +1,11 @@
 import { log } from "@modules/core/log/shared/config";
 import { getLogFiles } from "@modules/core/log/shared/lib";
+import { sendNotification } from "@modules/core/notifications/shared/lib";
 import type { ReturnAwaited } from "@shared/model";
 import * as FileSystem from "expo-file-system";
-import * as Sharing from "expo-sharing";
 import { ascend, descend, prop, sortWith } from "ramda";
-import { call, takeEvery } from "redux-saga/effects";
+import { Share } from "react-native";
+import { call, put, takeEvery } from "redux-saga/effects";
 import { shareLogs } from "./shareLogs";
 
 function* worker() {
@@ -17,6 +18,12 @@ function* worker() {
 
 	if (logFiles.length === 0) {
 		log.info("shareLogs: no log files found");
+		yield put(
+			sendNotification({
+				message: "log.noLogs",
+				type: "error",
+			}),
+		);
 		return;
 	}
 
@@ -26,23 +33,13 @@ function* worker() {
 	);
 	const [latest] = data;
 
-	const cacheDir = FileSystem.cacheDirectory;
-	if (!cacheDir) {
-		log.error("shareLogs: cacheDirectory is not available");
-		return;
-	}
-
-	const sharePath = `${cacheDir}${latest.name}.txt`;
-
 	try {
-		yield call(FileSystem.copyAsync, { from: latest.path, to: sharePath });
-		yield call(Sharing.shareAsync, sharePath, {
-			mimeType: "text/plain",
-			dialogTitle: "Logs",
-			UTI: "public.plain-text",
+		yield call(Share.share, {
+			message: latest.name,
+			url: latest.path,
 		});
-	} finally {
-		yield call(FileSystem.deleteAsync, sharePath, { idempotent: true });
+	} catch (e) {
+		log.error("shareLogs: share failed", e);
 	}
 }
 

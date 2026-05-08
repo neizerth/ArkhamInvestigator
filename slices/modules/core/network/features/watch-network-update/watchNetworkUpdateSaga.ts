@@ -29,22 +29,16 @@ function* worker() {
 		yield put(setNetworkType(payload.type));
 
 		if (payload.type === "wifi") {
-			yield put(
-				setSSID(
-					payload.details && "ssid" in payload.details
-						? (payload.details.ssid ?? null)
-						: null,
-				),
-			);
+			const ssid = payload.type === "wifi" ? payload.details.ssid : null;
+
+			yield put(setSSID(ssid));
 		} else {
 			yield put(setSSID(null));
 		}
 
 		if (payload.type === "wifi" || payload.type === "ethernet") {
-			const ip =
-				payload.details && "ipAddress" in payload.details
-					? (payload.details.ipAddress ?? null)
-					: null;
+			const ip = payload.details.ipAddress;
+
 			yield put(setIP(ip));
 		} else {
 			yield put(setIP(null));

@@ -9,7 +9,8 @@ export const Log = logger.createLogger({
 	transport: [fileAsyncTransport, consoleTransport],
 	transportOptions: {
 		FS: FileSystem,
-		fileName: "logs_{date-today}",
+		fileName: "logs_{date-today}.txt",
+		fileNameDateType: "iso",
 	},
 });
 

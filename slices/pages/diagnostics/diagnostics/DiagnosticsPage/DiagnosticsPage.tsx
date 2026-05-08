@@ -7,16 +7,29 @@ import { clearDownloadQueue } from "@modules/core/assets/download-queue/shared/l
 import { removeDirectory } from "@modules/core/disk/entities/removeDirectory";
 import { clearLogs as clearLogsAction } from "@modules/core/log/entities/lib/store/features/clearLogs";
 import { shareLogs as shareLogsAction } from "@modules/core/log/entities/lib/store/features/shareLogs";
+import {
+	selectIP,
+	selectNetworkConnected,
+	selectNetworkType,
+	selectSSID,
+	selectWifiEnabled,
+} from "@modules/core/network/shared/lib";
 import { usePage } from "@modules/core/router/shared/lib";
 import { unsetArtworkUrl as unsetArtworkUrlAction } from "@modules/core/theme/shared/lib/store/theme";
 import { ArtworksFragment } from "@modules/core/theme/shared/ui";
 import { routes } from "@shared/config";
-import { useAppDispatch } from "@shared/lib";
+import { useAppDispatch, useAppSelector } from "@shared/lib";
+import { Text } from "@shared/ui";
 import { useTranslation } from "react-i18next";
 import * as C from "./DiagnosticsPage.components";
 
 export const DiagnosticsPage = () => {
 	const { t } = useTranslation();
+	const networkType = useAppSelector(selectNetworkType);
+	const networkConnected = useAppSelector(selectNetworkConnected);
+	const wifiEnabled = useAppSelector(selectWifiEnabled);
+	const ssid = useAppSelector(selectSSID);
+	const ip = useAppSelector(selectIP);
 
 	const dispatch = useAppDispatch();
 
@@ -69,6 +82,11 @@ export const DiagnosticsPage = () => {
 		<C.Page title="Diagnostics">
 			<C.Container>
 				<C.Content>
+					<C.Section title={t`General`}>
+						<C.Row>
+							<C.Button text={t`Restart App`} icon="switch" onPress={restart} />
+						</C.Row>
+					</C.Section>
 					<C.Section title={t`App Data`}>
 						<C.Row>
 							<C.Button
@@ -107,9 +125,28 @@ export const DiagnosticsPage = () => {
 								/>
 							</C.Row>
 						</ArtworksFragment>
-
+					</C.Section>
+					<C.Section title={t`Network`}>
 						<C.Row>
-							<C.Button text={t`Restart App`} icon="switch" onPress={restart} />
+							<Text>SSID: {ssid ?? t`No`}</Text>
+						</C.Row>
+						<C.Row>
+							<Text>IP: {ip}</Text>
+						</C.Row>
+						<C.Row>
+							<Text>
+								{t`network.type`}: {networkType}
+							</Text>
+						</C.Row>
+						<C.Row>
+							<Text>
+								{t`network.connected`}: {networkConnected ? t`Yes` : t`No`}
+							</Text>
+						</C.Row>
+						<C.Row>
+							<Text>
+								{t`network.wifiEnabled`}: {wifiEnabled ? t`Yes` : t`No`}
+							</Text>
 						</C.Row>
 					</C.Section>
 					<C.Section title={t`Logs`}>

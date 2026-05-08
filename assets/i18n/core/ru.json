@@ -1,12 +1,14 @@
 {
 	"network.no-connection": "Нет подключения к сети",
 	"network.no-local-ip": "Нужен Wi‑Fi для хоста",
-	"network.type": "Сеть",
+	"network.type": "Тип сети",
 	"network.type.none": "Нет подключения",
 	"network.type.cellular": "Мобильный",
 	"network.type.other": "Другое",
 	"network.username": "Ваше имя в сети",
 	"network.autoDiscover": "Поиск игр в локальной сети",
+	"network.connected": "Подключено",
+	"network.wifiEnabled": "Wi-Fi включен",
 
 	"multiplayer.role.client.title": "Войти в игру",
 	"multiplayer.role.host.title": "Создать игру",
@@ -26,6 +28,7 @@
 
 	"log.share": "Поделиться",
 	"log.clear": "Очистить",
+	"log.noLogs": "Нет доступных журналов",
 	"file.removed_one": "Удалён {{count}} файл",
 	"file.removed_few": "Удалены {{count}} файла",
 	"file.removed_many": "Удалено {{count}} файлов",
@@ -542,5 +545,7 @@
 	"Next": "Далее",
 	"Ally Slots": "Союзники",
 	"App Data": "Данные приложения",
-	"Logs": "Журналы действий"
+	"Logs": "Журналы действий",
+	"Network": "Сеть",
+	"Performance": "Производительность"
 }

@@ -1,7 +1,7 @@
 {
 	"network.no-connection": "No connection to the network",
 	"network.no-local-ip": "Connected — local IP is not available for this network type (e.g. cellular). Use Wi‑Fi to host.",
-	"network.type": "Network",
+	"network.type": "Network type",
 	"network.type.none": "No connection",
 	"network.type.wifi": "Wi-Fi",
 	"network.type.cellular": "Cellular",
@@ -388,6 +388,7 @@
 
 	"log.share": "Share",
 	"log.clear": "Clear",
+	"log.noLogs": "No logs available",
 	"file.removed_one": "Removed {{count}} file",
 	"file.removed_few": "Removed {{count}} files",
 
@@ -531,5 +532,7 @@
 	"Next": "Next",
 	"Ally Slots": "Ally Slots",
 	"App Data": "App Data",
-	"Logs": "Logs"
+	"Logs": "Logs",
+	"Network": "Network",
+	"Performance": "Performance"
 }
