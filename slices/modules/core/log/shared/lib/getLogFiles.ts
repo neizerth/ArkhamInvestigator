@@ -15,7 +15,7 @@ export const getLogFiles = async () => {
 	const data: LogFile[] = [];
 
 	for (const name of logFiles) {
-		const date = name.replace(LOG_PREFIX, "").replace(".log", "");
+		const date = name.replace(LOG_PREFIX, "").replace(".txt", "");
 		const uri = `${dir}${name}`;
 		const info = await FileSystem.getInfoAsync(uri);
 
