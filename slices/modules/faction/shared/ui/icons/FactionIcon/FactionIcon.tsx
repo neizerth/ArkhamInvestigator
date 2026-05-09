@@ -1,6 +1,6 @@
 import type { ViewProps } from "react-native";
 import type { PropsWithFaction } from "../../../model";
-import { Container, FactionImage, NeutralIcon } from "./FactionIcon.components";
+import * as C from "./FactionIcon.components";
 
 export type FactionIconProps = PropsWithFaction & {
 	contentContainerStyle?: ViewProps["style"];
@@ -12,12 +12,12 @@ export const FactionIcon = ({
 	...props
 }: FactionIconProps) => {
 	return (
-		<Container style={contentContainerStyle}>
+		<C.Container style={contentContainerStyle}>
 			{faction === "neutral" ? (
-				<NeutralIcon />
+				<C.NeutralIcon />
 			) : (
-				<FactionImage faction={faction} />
+				<C.FactionImage faction={faction} />
 			)}
-		</Container>
+		</C.Container>
 	);
 };

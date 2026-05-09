@@ -78,7 +78,7 @@ export const Info: typeof View = styled(View)`
   justify-content: center;
   background-color: rgba(0, 0, 0, 0.4);
   border-radius: 0 ${size.borderRadius.large}px 0 0;
-  padding: 2px 8px;
+  padding: 4px 8px;
   ${
 		ios &&
 		css`
