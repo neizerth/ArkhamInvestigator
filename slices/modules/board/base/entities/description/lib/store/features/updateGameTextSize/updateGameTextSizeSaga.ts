@@ -19,6 +19,7 @@ function* worker({ payload }: ReturnType<typeof updateGameTextSize>) {
 			boardId,
 			prop: "gameTextSize",
 			value,
+			remote: false,
 		}),
 	);
 

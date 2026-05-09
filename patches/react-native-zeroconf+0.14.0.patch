@@ -1,0 +1,13 @@
+diff --git a/node_modules/react-native-zeroconf/ios/RNZeroconf/RNNetServiceSerializer.m b/node_modules/react-native-zeroconf/ios/RNZeroconf/RNNetServiceSerializer.m
+index 3d5f5e2..c6a5d76 100644
+--- a/node_modules/react-native-zeroconf/ios/RNZeroconf/RNNetServiceSerializer.m
++++ b/node_modules/react-native-zeroconf/ios/RNZeroconf/RNNetServiceSerializer.m
+@@ -37,7 +37,7 @@
+             @try{
+                 dict[key] = [[NSString alloc]
+                             initWithData:txtRecordDict[key]
+-                            encoding:NSASCIIStringEncoding];
++                            encoding:NSUTF8StringEncoding];
+             }
+             @catch(NSException *exception){
+                 NSLog(@"%@", exception);

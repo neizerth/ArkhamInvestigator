@@ -59,8 +59,13 @@ export const StartMultiplayerPage = () => {
 	}, [dispatch, role.id, networkRole]);
 
 	useEffect(() => {
-		setRole(getRole(networkRole));
-	}, [networkRole]);
+		const value = getRole(networkRole);
+
+		if (value === role) {
+			return;
+		}
+		setRole(value);
+	}, [networkRole, role]);
 
 	const onChangeNickname = useCallback(
 		(text: string) => {

@@ -20,18 +20,19 @@ function* worker() {
 	const nickname: ReturnType<typeof selectNickname> =
 		yield select(selectNickname);
 
-	log.info("tcp server zeroconf: starting");
+	const displayName = nickname?.trim() || TCP_SERVER_NAME;
+
+	log.info("tcp server zeroconf: starting", { networkId, displayName });
 	const zeroconf = new Zeroconf();
-	const name = nickname ?? TCP_SERVER_NAME;
 
 	zeroconf.publishService(
 		TCP_SERVICE_NAME,
 		"tcp",
 		"local.",
-		networkId,
+		displayName,
 		TCP_PORT,
 		{
-			name,
+			networkId,
 		},
 	);
 }

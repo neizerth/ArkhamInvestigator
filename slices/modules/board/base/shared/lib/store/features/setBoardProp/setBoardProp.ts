@@ -10,6 +10,7 @@ export type SetBoardPropPayload<K extends BoardKey> =
 	ChangeBoardEventPayload & {
 		prop: K;
 		value: InvestigatorBoard[K];
+		remote?: boolean;
 	};
 
 const withPropPayload = <K extends BoardKey>(

@@ -99,8 +99,8 @@ export const HostClient: typeof Row = styled(Row)`
 
 export const SelfIcon: typeof Icon = styled(Icon)`
   color: ${color.white};
-  font-size: 12px;
-  line-height: 12px;
+  font-size: 14px;
+  line-height: 14px;
   top: 2px;
 `;
 

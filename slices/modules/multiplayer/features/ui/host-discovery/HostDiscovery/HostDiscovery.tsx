@@ -50,7 +50,7 @@ export const Container = ({
 					{services.map((s) => (
 						<C.Service
 							key={s.name}
-							text={s.txt.name ?? s.name}
+							text={s.name}
 							icon={s.host === selected ? "check" : "investigator"}
 							onPress={() => onSelect?.(s)}
 						/>

@@ -1,13 +1,15 @@
 import { useAppSelector } from "@shared/lib";
+import { ascend, descend, prop, sortWith, uniqBy } from "ramda";
 import { useEffect, useState } from "react";
-import Zeroconf, { type Service } from "react-native-zeroconf";
+import Zeroconf from "react-native-zeroconf";
 import { TCP_SERVICE_NAME } from "../../config";
-import { selectNetworkDiscoveryEnabled, selectNickname } from "../store";
+import type { ZeroconfService } from "../../model";
+import { selectDeviceNetworkId, selectNetworkDiscoveryEnabled } from "../store";
 
 export const useTCPServices = (intervalMs = 1000) => {
-	const nickname = useAppSelector(selectNickname);
 	const networkDiscoveryEnabled = useAppSelector(selectNetworkDiscoveryEnabled);
-	const [services, setServices] = useState<Service[]>([]);
+	const [services, setServices] = useState<ZeroconfService[]>([]);
+	const networkId = useAppSelector(selectDeviceNetworkId);
 
 	useEffect(() => {
 		if (!networkDiscoveryEnabled) {
@@ -18,13 +20,27 @@ export const useTCPServices = (intervalMs = 1000) => {
 
 		const work = () => {
 			const zeroconfServices = zeroconf.getServices();
-			const services = Object.values(zeroconfServices).filter(
-				(service) =>
-					service.addresses &&
-					service.addresses.length > 0 &&
-					Boolean(service.txt.name) &&
-					service.txt.name !== nickname,
+			const serviceList: ZeroconfService[] = Object.values(zeroconfServices)
+				.filter(
+					(service) =>
+						service.addresses &&
+						service.addresses.length > 0 &&
+						Boolean(service.txt.networkId) &&
+						service.txt.networkId !== networkId,
+				)
+				.map((service, index) => ({
+					...service,
+					index,
+					networkId: service.txt.networkId,
+				}));
+
+			const sortedServiceList = sortWith(
+				[ascend(prop("networkId")), descend(prop("index"))],
+				serviceList,
 			);
+
+			const services = uniqBy(prop("networkId"), sortedServiceList);
+
 			setServices(services);
 		};
 
@@ -36,7 +52,7 @@ export const useTCPServices = (intervalMs = 1000) => {
 			zeroconf.stop();
 			clearInterval(interval);
 		};
-	}, [intervalMs, nickname, networkDiscoveryEnabled]);
+	}, [intervalMs, networkDiscoveryEnabled, networkId]);
 
 	return services;
 };

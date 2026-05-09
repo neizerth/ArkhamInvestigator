@@ -9,6 +9,7 @@
 		"a:p": "npm run prebuild:android",
 		"a:pd": "npm run prebuild:android:dev",
 		"i": "npm run ios",
+		"i2": "sh ./cli/run-dual-ios.sh",
 		"i:d": "npm run ios:device",
 		"android": "expo run:android",
 		"ios": "expo run:ios",

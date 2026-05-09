@@ -1,6 +1,5 @@
 import { log } from "@modules/core/log/shared/config";
 import TcpSocket from "react-native-tcp-socket";
-import Zeroconf from "react-native-zeroconf";
 import { eventChannel } from "redux-saga";
 import {
 	TCP_HOST,
@@ -45,7 +44,6 @@ export const createTCPServerChannel = (serverName: string | null) => {
 			setTCPServerInstance(null);
 		}
 		clearTCPClientSockets();
-		const zeroconf = new Zeroconf();
 
 		let server: TcpSocket.Server | null = null;
 
@@ -71,7 +69,7 @@ export const createTCPServerChannel = (serverName: string | null) => {
 					);
 				});
 				socket.on("close", () => {
-					log.info("tcp server: client disconnected");
+					log.info("tcp server: client disconnected", socket.remoteAddress);
 					emit(
 						tcpServerSocketClosed({
 							socket,
@@ -104,6 +102,10 @@ export const createTCPServerChannel = (serverName: string | null) => {
 					bindRetries = 0;
 					log.info("tcp server: listening", server?.address());
 					emit(tcpServerListening());
+					// `eventChannel` drops events emitted during construction (before first `take`)
+					// unless a buffer is provided. Emitting from async callback guarantees delivery.
+					emit(startTCPServerZeroconf());
+					emit(setHostRunning(true));
 				})
 				.on("error", (error) => {
 					const message =
@@ -153,10 +155,6 @@ export const createTCPServerChannel = (serverName: string | null) => {
 						emit(tcpServerClosed());
 					}
 				});
-
-			emit(setHostRunning(true));
-
-			emit(startTCPServerZeroconf());
 		};
 
 		// If we closed a previous server, wait for its close callback before starting.

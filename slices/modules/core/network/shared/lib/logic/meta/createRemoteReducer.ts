@@ -1,12 +1,22 @@
+import { hasProp } from "@shared/lib";
 import type { ReducerPayload } from "@shared/model";
 import type { NetworkOutcomeActionMeta } from "../../../model";
-import { withRemoteMeta } from "./withRemoteMeta";
 
 type Options = Omit<NetworkOutcomeActionMeta, "remote">;
+
+const getRemoteValue = (payload: unknown) => {
+	return hasProp(payload, "remote") ? payload.remote : true;
+};
 
 export const createRemoteReducer = <R>(reducer: R, options: Options) => {
 	return {
 		reducer,
-		prepare: withRemoteMeta<ReducerPayload<R>>(options),
+		prepare: (payload: ReducerPayload<R>) => ({
+			payload,
+			meta: {
+				...options,
+				remote: getRemoteValue(payload),
+			},
+		}),
 	};
 };
