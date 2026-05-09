@@ -17,14 +17,15 @@ export const useTCPServices = (intervalMs = 1000) => {
 		zeroconf.scan(TCP_SERVICE_NAME);
 
 		const work = () => {
-			const services = zeroconf.getServices();
-			const serviceList = Object.values(services).filter(
+			const zeroconfServices = zeroconf.getServices();
+			const services = Object.values(zeroconfServices).filter(
 				(service) =>
 					service.addresses &&
 					service.addresses.length > 0 &&
-					service.name !== nickname,
+					Boolean(service.txt.name) &&
+					service.txt.name !== nickname,
 			);
-			setServices(serviceList);
+			setServices(services);
 		};
 
 		const interval = setInterval(work, intervalMs);

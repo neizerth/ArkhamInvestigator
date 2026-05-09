@@ -13,7 +13,7 @@ function* worker() {
 	if (alive) {
 		return;
 	}
-	yield put(stopTCPServer({ name: null }));
+	yield put(stopTCPServer());
 	yield put(startTCPServer());
 }
 

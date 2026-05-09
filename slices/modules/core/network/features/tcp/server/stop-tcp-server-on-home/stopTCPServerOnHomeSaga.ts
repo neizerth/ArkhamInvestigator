@@ -19,7 +19,7 @@ function* worker() {
 	if (!isHostGmae) {
 		return;
 	}
-	yield put(stopTCPServer({ name: null }));
+	yield put(stopTCPServer());
 }
 
 export function* stopTCPServerOnHomeSaga() {

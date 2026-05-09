@@ -5,9 +5,7 @@ import { eventChannel } from "redux-saga";
 import {
 	TCP_HOST,
 	TCP_PORT,
-	TCP_SERVER_NAME,
 	TCP_SERVER_WATCHDOG_PING,
-	TCP_SERVICE_NAME,
 } from "../../../../../../../shared/config";
 import {
 	clearTCPClientSockets,
@@ -15,6 +13,7 @@ import {
 	getTCPServerInstance,
 	setHostRunning,
 	setTCPServerInstance,
+	startTCPServerZeroconf,
 	tcpServerClosed,
 	tcpServerError,
 	tcpServerListening,
@@ -25,6 +24,7 @@ import {
 } from "../../../../../../../shared/lib";
 
 export type TCPServerChannelAction =
+	| ReturnType<typeof startTCPServerZeroconf>
 	| ReturnType<typeof tcpServerSocketDataReceived>
 	| ReturnType<typeof tcpServerSocketClosed>
 	| ReturnType<typeof tcpServerSocketConnected>
@@ -35,6 +35,8 @@ export type TCPServerChannelAction =
 export const createTCPServerChannel = (serverName: string | null) => {
 	return eventChannel((emit) => {
 		let cancelled = false;
+		/** Closing only to retry bind — must not emit `tcpServerClosed` or the TCP saga exits mid-retry. */
+		let closingForBindRetry = false;
 		let bindRetries = 0;
 		const maxBindRetries = 10;
 
@@ -122,10 +124,11 @@ export const createTCPServerChannel = (serverName: string | null) => {
 							`(${bindRetries}/${maxBindRetries})`,
 							`${delayMs}ms`,
 						);
+						closingForBindRetry = true;
 						try {
 							server?.close();
 						} catch {
-							// ignore
+							closingForBindRetry = false;
 						}
 						setTCPServerInstance(null);
 						setTimeout(() => start(), delayMs);
@@ -141,20 +144,19 @@ export const createTCPServerChannel = (serverName: string | null) => {
 				})
 				.on("close", () => {
 					log.warn("tcp server: stopped (port released)");
-					emit(setHostRunning(false));
-					emit(tcpServerClosed());
+					if (closingForBindRetry) {
+						closingForBindRetry = false;
+						return;
+					}
+					if (!cancelled) {
+						emit(setHostRunning(false));
+						emit(tcpServerClosed());
+					}
 				});
 
 			emit(setHostRunning(true));
 
-			const name = serverName ?? TCP_SERVER_NAME;
-			zeroconf.publishService(
-				TCP_SERVICE_NAME,
-				"tcp",
-				"local.",
-				name,
-				TCP_PORT,
-			);
+			emit(startTCPServerZeroconf());
 		};
 
 		// If we closed a previous server, wait for its close callback before starting.
@@ -170,8 +172,8 @@ export const createTCPServerChannel = (serverName: string | null) => {
 
 		return () => {
 			cancelled = true;
-			clearTCPServerInstance();
 			clearTCPClientSockets();
+			clearTCPServerInstance();
 		};
 	});
 };

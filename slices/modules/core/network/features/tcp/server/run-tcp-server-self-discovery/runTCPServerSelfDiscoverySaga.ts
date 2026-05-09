@@ -161,7 +161,7 @@ function* worker() {
 			restarting = true;
 			lastSeenAt = now;
 
-			yield put(restartTCPServer({ name: null }));
+			yield put(restartTCPServer());
 
 			// Wait for restart to either listen again or fail; prevents overlapping restarts.
 			yield race({

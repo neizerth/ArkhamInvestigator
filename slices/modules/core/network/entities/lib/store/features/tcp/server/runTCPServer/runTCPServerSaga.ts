@@ -1,6 +1,7 @@
 import { call, cancelled, put, race, select, take } from "redux-saga/effects";
 import {
 	selectNickname,
+	setHostRunning,
 	startTCPServer,
 	stopTCPServer,
 	tcpServerClosed,
@@ -28,10 +29,13 @@ function* worker() {
 			}
 		}
 	} finally {
-		// Runs when the saga is cancelled
+		channel.close();
 		const isCancelled: boolean = yield cancelled();
+		// Cancel stops the worker mid-loop; `server.on('close')` then emits after the eventChannel
+		// unsubscribes, so Redux never receives `tcpServerClosed`. Flush explicitly on cancel only.
 		if (isCancelled) {
-			channel.close(); // Close the channel and the server
+			yield put(setHostRunning(false));
+			yield put(tcpServerClosed());
 		}
 	}
 }

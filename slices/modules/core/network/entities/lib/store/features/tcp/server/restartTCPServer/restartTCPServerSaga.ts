@@ -9,16 +9,15 @@ import {
 import { log } from "@shared/config/logger";
 import { delay, put, race, select, take, takeEvery } from "redux-saga/effects";
 
-function* worker({ payload }: ReturnType<typeof restartTCPServer>) {
+function* worker() {
 	const role: ReturnType<typeof selectNetworkRole> =
 		yield select(selectNetworkRole);
 
 	if (role !== "host") {
 		return;
 	}
-	const { name } = payload;
 
-	yield put(stopTCPServer({ name }));
+	yield put(stopTCPServer());
 	log.info("restartTCPServer: stopped tcp server");
 	const { closed }: { closed?: ReturnType<typeof tcpServerClosed> } =
 		yield race({

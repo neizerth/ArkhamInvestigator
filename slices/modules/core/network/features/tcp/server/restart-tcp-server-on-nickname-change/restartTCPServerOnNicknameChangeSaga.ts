@@ -2,14 +2,8 @@ import { nicknameChanged } from "@modules/core/network/entities/lib/store/featur
 import { restartTCPServer } from "@modules/core/network/shared/lib";
 import { put, takeEvery } from "redux-saga/effects";
 
-function* worker({ payload }: ReturnType<typeof nicknameChanged>) {
-	const name = payload.oldValue;
-
-	yield put(
-		restartTCPServer({
-			name,
-		}),
-	);
+function* worker() {
+	yield put(restartTCPServer());
 }
 
 export function* restartTCPServerOnNicknameChangeSaga() {
