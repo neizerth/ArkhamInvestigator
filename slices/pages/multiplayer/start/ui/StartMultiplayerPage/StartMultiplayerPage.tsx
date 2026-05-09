@@ -21,7 +21,7 @@ import {
 	whereId,
 } from "@shared/lib";
 import { type TabItem, Text } from "@shared/ui";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import * as C from "./StartMultiplayerPage.components";
 
@@ -47,25 +47,7 @@ export const StartMultiplayerPage = () => {
 
 	const [showIP, setShowIP] = useBoolean(false);
 
-	const defaultRole = getRole(networkRole);
-
-	const [role, setRole] = useState<TabItem<NetworkRole>>(defaultRole);
-
-	useEffect(() => {
-		if (networkRole === role.id) {
-			return;
-		}
-		dispatch(setNetworkRole(role.id));
-	}, [dispatch, role.id, networkRole]);
-
-	useEffect(() => {
-		const value = getRole(networkRole);
-
-		if (value === role) {
-			return;
-		}
-		setRole(value);
-	}, [networkRole, role]);
+	const role = getRole(networkRole);
 
 	const onChangeNickname = useCallback(
 		(text: string) => {
@@ -77,6 +59,13 @@ export const StartMultiplayerPage = () => {
 	const generateNickname = useCallback(() => {
 		dispatch(generateRandomNickname());
 	}, [dispatch]);
+
+	const onSelectRole = useCallback(
+		(item: TabItem<NetworkRole>) => {
+			dispatch(setNetworkRole(item.id));
+		},
+		[dispatch],
+	);
 
 	const networkConnectionLabel = networkConnected
 		? t`network.no-local-ip`
@@ -109,7 +98,7 @@ export const StartMultiplayerPage = () => {
 					<C.RoleSelect
 						data={roles}
 						value={role}
-						onSelect={setRole}
+						onSelect={onSelectRole}
 						translate
 					/>
 					<C.RoleTabsContent>
