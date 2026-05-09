@@ -93,14 +93,14 @@ export const Client: typeof Text = styled(Text)`
 
 export const HostClient: typeof Row = styled(Row)`
   position: relative;
-  gap: ${size.gap.small}px;
+  gap: 3px;
   align-items: center;
 `;
 
 export const SelfIcon: typeof Icon = styled(Icon)`
   color: ${color.white};
-  font-size: 15px;
-  line-height: 15px;
+  font-size: 12px;
+  line-height: 12px;
   top: 2px;
 `;
 

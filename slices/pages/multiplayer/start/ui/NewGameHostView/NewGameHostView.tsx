@@ -87,7 +87,7 @@ const Container = ({ ip, ...props }: ViewProps & { ip: string }) => {
 					</C.HostClient>
 					{clients.map((client, index) => (
 						<C.Client key={client.id}>
-							{index + 2} {client.nickname}{" "}
+							{index + 2}. {client.nickname}{" "}
 						</C.Client>
 					))}
 				</C.Clients>
