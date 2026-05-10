@@ -9,6 +9,7 @@ import {
 import {
 	clearTCPClientSockets,
 	clearTCPServerInstance,
+	consumeTcpJsonBuffer,
 	getTCPServerInstance,
 	setHostRunning,
 	setTCPServerInstance,
@@ -51,6 +52,7 @@ export const createTCPServerChannel = (serverName: string | null) => {
 			if (cancelled) return;
 
 			server = TcpSocket.createServer((socket) => {
+				let inboundBuffer = "";
 				socket.on("error", (error) => {
 					log.error("tcp server: client socket error", error);
 					emit(
@@ -77,16 +79,20 @@ export const createTCPServerChannel = (serverName: string | null) => {
 					);
 				});
 				socket.on("data", (data) => {
-					const raw = data.toString();
-					if (raw.trim() === TCP_SERVER_WATCHDOG_PING) {
-						return;
-					}
-					emit(
-						tcpServerSocketDataReceived({
-							socket,
-							data: raw,
-						}),
+					inboundBuffer += data.toString();
+					const { messages, remainder } = consumeTcpJsonBuffer(
+						inboundBuffer,
+						TCP_SERVER_WATCHDOG_PING,
 					);
+					inboundBuffer = remainder;
+					for (const jsonLine of messages) {
+						emit(
+							tcpServerSocketDataReceived({
+								socket,
+								data: jsonLine,
+							}),
+						);
+					}
 				});
 			});
 

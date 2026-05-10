@@ -3,10 +3,14 @@ import { seconds } from "@shared/lib";
 import TcpSocket from "react-native-tcp-socket";
 import type { ConnectionOptions } from "react-native-tcp-socket/lib/types/Socket";
 import { eventChannel } from "redux-saga";
-import { TCP_PORT } from "../../../../../../../shared/config";
+import {
+	TCP_PORT,
+	TCP_SERVER_WATCHDOG_PING,
+} from "../../../../../../../shared/config";
 import {
 	clearTCPServerSocket,
 	clearTCPServerSocketIfMatches,
+	consumeTcpJsonBuffer,
 	getTCPServerSocket,
 	setClientRunning,
 	setTCPServerSocket,
@@ -46,6 +50,8 @@ export const createTCPClientChannel = (host: string) => {
 
 		setTCPServerSocket(socket);
 
+		let inboundBuffer = "";
+
 		socket.on("connect", () => {
 			log.info("tcp client: socket connected");
 			emit(setClientRunning(true));
@@ -65,11 +71,19 @@ export const createTCPClientChannel = (host: string) => {
 			emit(tcpClientSocketClosed());
 		});
 		socket.on("data", (data) => {
-			emit(
-				tcpClientSocketDataReceived({
-					data: data.toString(),
-				}),
+			inboundBuffer += data.toString();
+			const { messages, remainder } = consumeTcpJsonBuffer(
+				inboundBuffer,
+				TCP_SERVER_WATCHDOG_PING,
 			);
+			inboundBuffer = remainder;
+			for (const jsonLine of messages) {
+				emit(
+					tcpClientSocketDataReceived({
+						data: jsonLine,
+					}),
+				);
+			}
 		});
 
 		return () => {

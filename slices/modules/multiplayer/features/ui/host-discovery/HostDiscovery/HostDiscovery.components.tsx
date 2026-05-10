@@ -26,5 +26,5 @@ export const Loading: typeof Row = styled(Row)`
   gap: ${size.gap.default}px;
   align-items: center;
   justify-content: center;
-  padding: ${size.gap.default}px 0;
+  padding: ${size.gap.large}px 0px ${size.gap.default}px 0;
 `;
