@@ -10,6 +10,7 @@
 	"network.connected": "Подключено",
 	"network.wifiEnabled": "Wi-Fi включен",
 	"network.searching-for-ip": "Поиск IP... Убедитесь, что Wi-Fi или точка доступа включены",
+	"network.hostUnreachable": "Не удалось подключиться к игре. Устройство не отвечает.",
 
 	"multiplayer.role.client.title": "Войти в игру",
 	"multiplayer.role.host.title": "Создать игру",
