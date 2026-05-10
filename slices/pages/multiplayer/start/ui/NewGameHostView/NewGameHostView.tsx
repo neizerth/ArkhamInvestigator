@@ -63,7 +63,11 @@ const Container = ({ ip, ...props }: ViewProps & { ip: string }) => {
 		<C.Container {...props}>
 			<C.Invite>
 				<C.Code onPress={copyCode}>
-					<C.CodeLabel>{t`Code`}</C.CodeLabel>
+					<C.CodeHeader>
+						<C.CodeLabel>{t`Code`}</C.CodeLabel>
+
+						<C.CodeIcon icon="icomoonfree-copy" />
+					</C.CodeHeader>
 					<C.CodeValue>{codePreview}</C.CodeValue>
 				</C.Code>
 				<C.QRButton onPress={shareDeeplink}>

@@ -72,11 +72,24 @@ export const Code: typeof TouchableOpacity = styled(TouchableOpacity)`
   padding: ${size.gap.default}px 0;
 `;
 
-export const CodeLabel: typeof Text = styled(Text)`
-  font-size: ${font.size.small}px;
+export const CodeHeader: typeof Row = styled(Row)`
+  justify-content: center;
+  align-items: center;
+  gap: ${size.gap.small}px;
+  padding-bottom: ${size.gap.small}px;
+
   border-bottom-width: 1px;
   border-bottom-color: ${color.dark10};
+`;
+
+export const CodeLabel: typeof Text = styled(Text)`
+  font-size: ${font.size.small}px;
   text-align: center;
+`;
+
+export const CodeIcon: typeof Icon = styled(Icon)`
+  color: ${color.light10};
+  font-size: ${font.size.small}px;
 `;
 
 export const CodeValue: typeof Text = styled(Text)`
