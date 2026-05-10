@@ -23,8 +23,8 @@ function* worker({ payload }: ReturnType<typeof setHostInviteCode>) {
 
 	console.log("code ip", ip);
 
-	yield put(setHostIP(ip));
 	yield put(setGameStatus("initial"));
+	yield put(setHostIP(ip));
 
 	const { error }: { error?: ReturnType<typeof tcpClientSocketError> } =
 		yield race({

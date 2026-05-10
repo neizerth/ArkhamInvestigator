@@ -16,8 +16,8 @@ function* worker({ payload }: ReturnType<typeof setZeroconfService>) {
 	}
 
 	console.log("setting host ip from zeroconf service", ip);
-	yield put(setHostIP(ip));
 	yield put(setGameStatus("initial"));
+	yield put(setHostIP(ip));
 }
 
 export function* setZeroconfServiceSaga() {

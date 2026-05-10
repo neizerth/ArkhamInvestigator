@@ -2,7 +2,7 @@ import { createPageVisitFilter } from "@modules/core/router/shared/lib";
 import { routes } from "@shared/config";
 import { put, select, takeEvery } from "redux-saga/effects";
 import {
-	selectHostRunning,
+	getTCPServerInstance,
 	selectNetworkRole,
 	setHostIP,
 	setNetworkRole,
@@ -17,9 +17,7 @@ function* worker() {
 	if (networkRole === "host") {
 		yield put(setHostIP(null));
 
-		const hostRunning: ReturnType<typeof selectHostRunning> =
-			yield select(selectHostRunning);
-		if (hostRunning) {
+		if (getTCPServerInstance()) {
 			return;
 		}
 		yield put(startTCPServer());
