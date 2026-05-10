@@ -1,10 +1,11 @@
 import { CrimsonPro } from "@assets/fonts";
 import { TouchableOpacity } from "@modules/core/touch/shared/ui";
 import { color, font, size } from "@shared/config";
-import { Button, Icon, Row, Text } from "@shared/ui";
+import { Button, Icon, type IconProps, Row, Text } from "@shared/ui";
+import type { FC } from "react";
 import { ActivityIndicator, View } from "react-native";
 import QRCode from "react-native-qrcode-svg";
-import styled from "styled-components/native";
+import styled, { css } from "styled-components/native";
 
 export const Container: typeof Row = styled(Row)`
   gap: ${size.gap.default}px;
@@ -17,7 +18,7 @@ export const Invite: typeof View = styled(View)`
 `;
 
 export const Info: typeof View = styled(View)`
-  padding: 27px 0 ${size.gap.default}px 0;
+  padding: 37px 0px ${size.gap.default}px 0;
   gap: ${size.gap.default}px;
   flex: 1;
 `;
@@ -110,11 +111,20 @@ export const HostClient: typeof Row = styled(Row)`
   align-items: center;
 `;
 
-export const SelfIcon: typeof Icon = styled(Icon)`
+type SelfIconProps = IconProps & {
+	isHostRunning?: boolean;
+};
+
+export const SelfIcon: FC<SelfIconProps> = styled(Icon)`
   color: ${color.white};
+  ${({ isHostRunning }: SelfIconProps) =>
+		isHostRunning &&
+		css`
+    color:rgb(96, 205, 103);
+  `}
   font-size: 14px;
   line-height: 14px;
-  top: 2px;
+  top: 1px;
 `;
 
 export const Next: typeof Button = styled(Button)`

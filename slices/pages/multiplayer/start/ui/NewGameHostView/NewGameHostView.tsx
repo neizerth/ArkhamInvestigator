@@ -1,6 +1,10 @@
 import { logoLight } from "@assets/images";
 import { copyText } from "@modules/core/clipboard/entities/lib/store/features/copyText/copyText";
-import { selectIP, selectNickname } from "@modules/core/network/shared/lib";
+import {
+	selectHostRunning,
+	selectIP,
+	selectNickname,
+} from "@modules/core/network/shared/lib";
 import { selectAllNetworkClients } from "@modules/core/network/shared/lib/store/networkClient";
 import {
 	getHostDeeplink,
@@ -39,6 +43,7 @@ const Container = ({ ip, ...props }: ViewProps & { ip: string }) => {
 	const code = useMemo(() => getHostInviteCode(ip), [ip]);
 	const nickname = useAppSelector(selectNickname);
 	const clients = useAppSelector(selectAllNetworkClients);
+	const hostRunning = useAppSelector(selectHostRunning);
 
 	const codePreview = code.match(/.{1,2}/g)?.join(" ") || "";
 
@@ -86,7 +91,7 @@ const Container = ({ ip, ...props }: ViewProps & { ip: string }) => {
 				</C.ClientsInfo>
 				<C.Clients>
 					<C.HostClient>
-						<C.SelfIcon icon="investigator" />
+						<C.SelfIcon icon="investigator" isHostRunning={hostRunning} />
 						<C.Client>{nickname}</C.Client>
 					</C.HostClient>
 					{clients.map((client, index) => (
