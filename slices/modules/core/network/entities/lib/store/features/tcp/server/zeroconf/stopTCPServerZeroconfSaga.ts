@@ -1,18 +1,18 @@
+import { TCP_SERVER_NAME } from "@modules/core/network/shared/config";
 import {
-	selectDeviceNetworkId,
+	selectNickname,
 	stopTCPServerZeroconf,
+	unpublishZeroconfService,
 } from "@modules/core/network/shared/lib";
-import Zeroconf from "react-native-zeroconf";
 import { select, takeEvery } from "redux-saga/effects";
 
 function* worker() {
-	const networkId: ReturnType<typeof selectDeviceNetworkId> = yield select(
-		selectDeviceNetworkId,
-	);
+	const nickname: ReturnType<typeof selectNickname> =
+		yield select(selectNickname);
 
-	const zeroconf = new Zeroconf();
+	const name = nickname?.trim() || TCP_SERVER_NAME;
 
-	zeroconf.unpublishService(networkId);
+	unpublishZeroconfService(name);
 }
 
 export function* stopTCPServerZeroconfSaga() {

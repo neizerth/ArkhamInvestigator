@@ -1,4 +1,3 @@
-import { appStarted } from "@modules/core/app/shared/lib";
 import { setHostIP, stopTCPClient } from "@modules/core/network/shared/lib";
 import {
 	selectCurrentRoute,
@@ -19,5 +18,4 @@ function* worker() {
 
 export function* stopTCPClientOnHomeSaga() {
 	yield takeEvery(setCurrentRoute.match, worker);
-	yield takeEvery(appStarted.match, worker);
 }

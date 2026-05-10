@@ -1,4 +1,3 @@
-import { appStarted } from "@modules/core/app/shared/lib";
 import { stopTCPServer } from "@modules/core/network/shared/lib";
 import {
 	selectCurrentRoute,
@@ -25,5 +24,4 @@ function* worker() {
 
 export function* stopTCPServerOnHomeSaga() {
 	yield takeEvery(setCurrentRoute.match, worker);
-	yield takeEvery(appStarted.match, worker);
 }
