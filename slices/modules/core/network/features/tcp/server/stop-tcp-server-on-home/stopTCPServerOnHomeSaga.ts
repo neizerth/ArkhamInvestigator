@@ -14,9 +14,10 @@ function* worker() {
 	if (currentRoute !== routes.home) {
 		return;
 	}
-	const isHostGmae: ReturnType<typeof selectIsHostGame> =
+
+	const isHostGame: ReturnType<typeof selectIsHostGame> =
 		yield select(selectIsHostGame);
-	if (!isHostGmae) {
+	if (!isHostGame) {
 		return;
 	}
 	yield put(stopTCPServer());

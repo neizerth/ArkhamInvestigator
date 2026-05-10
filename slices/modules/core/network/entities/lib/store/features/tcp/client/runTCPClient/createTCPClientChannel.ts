@@ -6,6 +6,8 @@ import { eventChannel } from "redux-saga";
 import { TCP_PORT } from "../../../../../../../shared/config";
 import {
 	clearTCPServerSocket,
+	clearTCPServerSocketIfMatches,
+	getTCPServerSocket,
 	setClientRunning,
 	setTCPServerSocket,
 	tcpClientSocketClosed,
@@ -56,6 +58,9 @@ export const createTCPClientChannel = (host: string) => {
 		});
 		socket.on("close", () => {
 			log.warn("tcp client: disconnected from host");
+			if (getTCPServerSocket() !== socket) {
+				return;
+			}
 			emit(setClientRunning(false));
 			emit(tcpClientSocketClosed());
 		});
@@ -69,8 +74,16 @@ export const createTCPClientChannel = (host: string) => {
 
 		return () => {
 			log.warn("tcp client: event channel closed");
-			emit(setClientRunning(false));
-			socket.destroy();
+			const wasActive = getTCPServerSocket() === socket;
+			try {
+				socket.destroy();
+			} catch {
+				// socket may already be destroyed during takeover reconnect
+			}
+			if (wasActive) {
+				clearTCPServerSocketIfMatches(socket);
+				emit(setClientRunning(false));
+			}
 		};
 	});
 };

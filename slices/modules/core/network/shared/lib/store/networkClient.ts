@@ -9,6 +9,7 @@ export const networkClient = createSlice({
 	initialState: networkClientsAdapter.getInitialState(),
 	reducers: {
 		addNetworkClient: networkClientsAdapter.addOne,
+		upsertNetworkClient: networkClientsAdapter.upsertOne,
 		removeNetworkClient: networkClientsAdapter.removeOne,
 		updateNetworkClient: networkClientsAdapter.updateOne,
 		removeAllNetworkClients: networkClientsAdapter.removeAll,
@@ -17,6 +18,7 @@ export const networkClient = createSlice({
 
 export const {
 	addNetworkClient,
+	upsertNetworkClient,
 	removeNetworkClient,
 	updateNetworkClient,
 	removeAllNetworkClients,

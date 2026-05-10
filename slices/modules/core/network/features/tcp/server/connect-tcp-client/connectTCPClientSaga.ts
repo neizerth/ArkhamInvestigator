@@ -1,12 +1,12 @@
 import { log } from "@modules/core/log/shared/config";
 import { sendTCPActionToClient } from "@modules/core/network/entities/lib/store/features/tcp/server/sendTCPActionToClient";
 import {
-	addNetworkClient,
 	connectNetworkClient,
 	filterTCPIncomeAction,
 	selectIP,
 	setIP,
 	setTCPClientSocket,
+	upsertNetworkClient,
 } from "@modules/core/network/shared/lib";
 import type { TCPIncomeReturnType } from "@modules/core/network/shared/model";
 import { selectGameStatus } from "@modules/game/shared/lib";
@@ -33,7 +33,7 @@ function* worker({
 	log.info("connecting TCP client", payload);
 
 	yield put(
-		addNetworkClient({
+		upsertNetworkClient({
 			id: networkId,
 			nickname,
 		}),

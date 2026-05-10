@@ -10,10 +10,10 @@ import { transformTCPClientDataToActionSaga } from "./transform-tcp-client-data-
 
 export function* tcpClientSagas() {
 	yield spawn(runTCPClientOnHostIPChangeSaga);
+	yield spawn(stopTCPClientOnHomeSaga);
 	yield spawn(stopTCPClientOnNetworkRoleChangeSaga);
 	yield spawn(transformTCPClientDataToActionSaga);
 	yield spawn(addTCPClientToHostSaga);
 	yield spawn(reconnectTCPClientSaga);
 	yield spawn(runTCPClientOnResumeSaga);
-	yield spawn(stopTCPClientOnHomeSaga);
 }

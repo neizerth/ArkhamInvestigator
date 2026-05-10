@@ -1,6 +1,10 @@
-import { selectHostIP, startTCPClient } from "@modules/core/network/shared/lib";
+import {
+	selectHostIP,
+	startTCPClient,
+	stopTCPClient,
+} from "@modules/core/network/shared/lib";
 import { seconds } from "@shared/lib";
-import { put, select, takeLeading } from "redux-saga/effects";
+import { delay, put, select, takeLeading } from "redux-saga/effects";
 import { restartTCPClient } from "./restartTCPClient";
 
 const RESTART_THROTTLE_MS = seconds(5);
@@ -18,6 +22,8 @@ function* worker() {
 	}
 
 	lastRestartTime = now;
+	yield put(stopTCPClient());
+	yield delay(100);
 	yield put(startTCPClient({ host: hostIP }));
 }
 

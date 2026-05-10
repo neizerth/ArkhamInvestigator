@@ -12,11 +12,11 @@ export const getTCPServerSocket = (): TcpSocket.Socket | null =>
 
 export const clearTCPServerSocket = () => {
 	const socket = getTCPServerSocket();
+	setGlobalValue(GLOBAL_HOST_SOCKET_KEY, null);
 	if (socket) {
 		console.log("clearing tcp client socket");
 		socket.destroy();
 	}
-	setGlobalValue(GLOBAL_HOST_SOCKET_KEY, null);
 };
 
 /** Clears global ref only if it still points to this socket (call after socket.destroy()). */

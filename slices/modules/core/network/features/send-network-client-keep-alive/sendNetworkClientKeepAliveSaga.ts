@@ -54,7 +54,7 @@ function* deadServerWorker() {
 
 export function* sendNetworkClientKeepAliveSaga() {
 	yield callEvery(seconds(20), worker);
-	yield callEvery(seconds(1), deadHostWorker);
+	yield callEvery(seconds(3), deadHostWorker);
 	yield callEvery(seconds(1), deadServerWorker);
 	yield takeEvery(filterAppStateAction, worker);
 	yield takeEvery(filterAppStateAction, deadServerWorker);

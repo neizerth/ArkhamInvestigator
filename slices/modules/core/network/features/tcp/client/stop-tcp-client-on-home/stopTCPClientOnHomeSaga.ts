@@ -1,10 +1,9 @@
 import { appStarted } from "@modules/core/app/shared/lib";
-import { stopTCPClient } from "@modules/core/network/shared/lib";
+import { setHostIP, stopTCPClient } from "@modules/core/network/shared/lib";
 import {
 	selectCurrentRoute,
 	setCurrentRoute,
 } from "@modules/core/router/shared/lib";
-import { selectIsClientGame } from "@modules/multiplayer/entities/lib";
 import { routes } from "@shared/config";
 import { put, select, takeEvery } from "redux-saga/effects";
 
@@ -14,12 +13,8 @@ function* worker() {
 	if (currentRoute !== routes.home) {
 		return;
 	}
-	const isClient: ReturnType<typeof selectIsClientGame> =
-		yield select(selectIsClientGame);
-	if (!isClient) {
-		return;
-	}
 	yield put(stopTCPClient());
+	yield put(setHostIP(null));
 }
 
 export function* stopTCPClientOnHomeSaga() {
