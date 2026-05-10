@@ -34,13 +34,19 @@ export const NewGameClientView = (props: NewGameClientViewProps) => {
 		[dispatch],
 	);
 
+	const onChangeCode = useCallback((value: string) => {
+		const code = value.toUpperCase().replace(/[^A-Z0-9]/g, "");
+		setCode(code);
+	}, []);
+
 	const isCodeValid = isHostCodeValid(code);
 
 	return (
 		<C.Container {...props}>
 			<C.CodeInput
 				placeholder={t`multiplayer.code`}
-				onChangeText={setCode}
+				onChangeText={onChangeCode}
+				value={code}
 				maxLength={8}
 			/>
 			<C.Action

@@ -6,7 +6,12 @@ import { startMultiplayerGame } from "./startMultiplayerGame";
 
 function* worker() {
 	yield put(setGameStatus("selecting"));
-	yield put(goToPage(routes.selectInvestigators));
+	yield put(
+		goToPage({
+			href: routes.selectInvestigators,
+			replace: true,
+		}),
+	);
 }
 
 export function* startMultiplayerGameSaga() {
