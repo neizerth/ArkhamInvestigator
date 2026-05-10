@@ -1,4 +1,3 @@
-import { logoLight } from "@assets/images";
 import { copyText } from "@modules/core/clipboard/entities/lib/store/features/copyText/copyText";
 import {
 	selectHostRunning,
@@ -76,7 +75,7 @@ const Container = ({ ip, ...props }: ViewProps & { ip: string }) => {
 					<C.CodeValue>{codePreview}</C.CodeValue>
 				</C.Code>
 				<C.QRButton onPress={shareDeeplink}>
-					<C.QR value={url} logo={logoLight} logoSize={62} size={120} />
+					<C.QR value={url} logoSize={62} size={120} />
 				</C.QRButton>
 				<C.Share onPress={shareDeeplink}>
 					<C.ShareIcon icon="share" />
