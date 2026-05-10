@@ -8,6 +8,7 @@ import { runTCPServerSaga } from "./run-tcp-server/runTCPServerSaga";
 import { runTCPServerWatchdogSaga } from "./start-tcp-server-watchdog/sagas";
 import { stopTCPServerOnHomeSaga } from "./stop-tcp-server-on-home/stopTCPServerOnHomeSaga";
 import { transformTCPServerDataToActionSaga } from "./transform-tcp-server-data-to-action/transformTCPServerDataToActionSaga";
+import { unpublishZeroconfOnMultiplayerStartSaga } from "./unpublish-zeroconf-on-multiplayer-start/unpublishZeroconfOnMultiplayerStartSaga";
 
 export function* tcpServerSagas() {
 	yield spawn(runTCPServerSaga);
@@ -19,4 +20,5 @@ export function* tcpServerSagas() {
 	yield spawn(disconnectTCPClientSaga);
 	yield spawn(stopTCPServerOnHomeSaga);
 	yield spawn(runTCPServerSelfDiscoverySaga);
+	yield spawn(unpublishZeroconfOnMultiplayerStartSaga);
 }

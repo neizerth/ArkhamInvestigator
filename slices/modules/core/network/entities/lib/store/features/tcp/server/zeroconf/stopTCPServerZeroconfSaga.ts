@@ -1,18 +1,16 @@
-import { TCP_SERVER_NAME } from "@modules/core/network/shared/config";
 import {
-	selectNickname,
+	selectDeviceNetworkId,
 	stopTCPServerZeroconf,
-	unpublishZeroconfService,
+	unpublishZeroconfServiceByNetworkId,
 } from "@modules/core/network/shared/lib";
 import { select, takeEvery } from "redux-saga/effects";
 
 function* worker() {
-	const nickname: ReturnType<typeof selectNickname> =
-		yield select(selectNickname);
+	const networkId: ReturnType<typeof selectDeviceNetworkId> = yield select(
+		selectDeviceNetworkId,
+	);
 
-	const name = nickname?.trim() || TCP_SERVER_NAME;
-
-	unpublishZeroconfService(name);
+	unpublishZeroconfServiceByNetworkId(networkId);
 }
 
 export function* stopTCPServerZeroconfSaga() {

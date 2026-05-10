@@ -8,8 +8,7 @@ export const publishZeroconfService = ({
 	const zeroconf = new Zeroconf();
 
 	// Scan for existing services
-	zeroconf.scan(TCP_SERVICE_NAME);
-	const services = Object.values(zeroconf.getServices());
+	const services = getZeroconfServices();
 	const existingServices = services.filter(
 		(service) => service.txt.networkId === networkId,
 	);
@@ -23,9 +22,21 @@ export const publishZeroconfService = ({
 	});
 };
 
-export const unpublishZeroconfService = (name: string) => {
+export const unpublishZeroconfServiceByName = (name: string) => {
 	const zeroconf = new Zeroconf();
 	zeroconf.unpublishService(name);
+};
+
+export const unpublishZeroconfServiceByNetworkId = (networkId: string) => {
+	const zeroconf = new Zeroconf();
+	const services = getZeroconfServices();
+	const existingServices = services.filter(
+		(service) => service.txt.networkId === networkId,
+	);
+
+	for (const service of existingServices) {
+		zeroconf.unpublishService(service.name);
+	}
 };
 
 export const getZeroconfServices = () => {

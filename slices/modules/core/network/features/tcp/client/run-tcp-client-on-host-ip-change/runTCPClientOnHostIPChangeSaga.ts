@@ -1,5 +1,5 @@
 import { selectGameStatus } from "@modules/game/shared/lib";
-import { delay, put, select, takeEvery } from "redux-saga/effects";
+import { put, select, takeEvery } from "redux-saga/effects";
 import {
 	selectNetworkRole,
 	setHostIP,
@@ -23,7 +23,6 @@ function* worker({ payload }: ReturnType<typeof setHostIP>) {
 	}
 
 	yield put(stopTCPClient());
-	yield delay(100);
 	yield put(startTCPClient({ host: payload }));
 }
 
