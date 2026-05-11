@@ -46,6 +46,7 @@ export const NewGameClientView = (props: NewGameClientViewProps) => {
 			<C.CodeInput
 				placeholder={t`multiplayer.code`}
 				onChangeText={onChangeCode}
+				keyboardType="ascii-capable"
 				value={code}
 				maxLength={8}
 			/>
