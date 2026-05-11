@@ -19,7 +19,7 @@
     <key>CFBundlePackageType</key>
     <string>$(PRODUCT_BUNDLE_PACKAGE_TYPE)</string>
     <key>CFBundleShortVersionString</key>
-    <string>2.15.2</string>
+    <string>2.16.14</string>
     <key>CFBundleSignature</key>
     <string>????</string>
     <key>CFBundleURLTypes</key>
@@ -28,7 +28,6 @@
         <key>CFBundleURLSchemes</key>
         <array>
           <string>inv</string>
-          <string>arkham-investigator</string>
           <string>com.arkhaminvestigator</string>
         </array>
       </dict>
@@ -48,13 +47,13 @@
       <key>NSAllowsLocalNetworking</key>
       <true/>
     </dict>
-    <key>NSLocalNetworkUsageDescription</key>
-    <string>The app discovers devices on the local network for multiplayer.</string>
     <key>NSBonjourServices</key>
     <array>
       <string>_arkham-investigator._tcp.</string>
       <string>_arkham-investigator._udp.</string>
     </array>
+    <key>NSLocalNetworkUsageDescription</key>
+    <string>The app discovers devices on the local network for multiplayer.</string>
     <key>NSUserActivityTypes</key>
     <array>
       <string>$(PRODUCT_BUNDLE_IDENTIFIER).expo.index_route</string>
