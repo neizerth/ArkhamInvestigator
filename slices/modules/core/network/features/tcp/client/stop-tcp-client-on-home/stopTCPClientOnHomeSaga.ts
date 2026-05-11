@@ -1,4 +1,4 @@
-import { setHostIP, stopTCPClient } from "@modules/core/network/shared/lib";
+import { stopTCPClient } from "@modules/core/network/shared/lib";
 import {
 	selectCurrentRoute,
 	setCurrentRoute,
@@ -13,7 +13,9 @@ function* worker() {
 		return;
 	}
 	yield put(stopTCPClient());
-	yield put(setHostIP(null));
+	/** Do not `setHostIP(null)` — cold start applies `/` route after persist rehydrate and would wipe
+	 * the stored LAN IP before Resume; multiplayer entry flows still reset `hostIP` when needed.
+	 */
 }
 
 export function* stopTCPClientOnHomeSaga() {

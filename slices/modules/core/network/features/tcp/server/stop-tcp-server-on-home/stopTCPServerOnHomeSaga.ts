@@ -1,9 +1,11 @@
-import { stopTCPServer } from "@modules/core/network/shared/lib";
+import {
+	selectNetworkRole,
+	stopTCPServer,
+} from "@modules/core/network/shared/lib";
 import {
 	selectCurrentRoute,
 	setCurrentRoute,
 } from "@modules/core/router/shared/lib";
-import { selectIsHostGame } from "@modules/multiplayer/entities/lib";
 import { routes } from "@shared/config";
 import { put, select, takeEvery } from "redux-saga/effects";
 
@@ -14,9 +16,11 @@ function* worker() {
 		return;
 	}
 
-	const isHostGame: ReturnType<typeof selectIsHostGame> =
-		yield select(selectIsHostGame);
-	if (!isHostGame) {
+	const networkRole: ReturnType<typeof selectNetworkRole> =
+		yield select(selectNetworkRole);
+
+	// LAN server follows `networkRole`. `gameMode` may still be `"single"` if multiplayer was opened without `startNewGame` (deep link, restore, etc.).
+	if (networkRole !== "host") {
 		return;
 	}
 	yield put(stopTCPServer());

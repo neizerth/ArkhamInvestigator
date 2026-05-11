@@ -14,6 +14,7 @@ import {
 	setNickname,
 } from "@modules/core/network/shared/lib";
 import type { NetworkRole } from "@modules/core/network/shared/model";
+import { log } from "@shared/config/logger";
 import {
 	useAppDispatch,
 	useAppSelector,
@@ -62,6 +63,7 @@ export const StartMultiplayerPage = () => {
 
 	const onSelectRole = useCallback(
 		(item: TabItem<NetworkRole>) => {
+			log.info("UI: selecting network role", item.id);
 			dispatch(setNetworkRole(item.id));
 		},
 		[dispatch],

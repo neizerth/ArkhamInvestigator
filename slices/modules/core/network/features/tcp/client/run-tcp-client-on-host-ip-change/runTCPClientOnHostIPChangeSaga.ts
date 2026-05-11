@@ -8,17 +8,22 @@ import {
 } from "../../../../shared/lib";
 
 function* worker({ payload }: ReturnType<typeof setHostIP>) {
+	const networkRole: ReturnType<typeof selectNetworkRole> =
+		yield select(selectNetworkRole);
+
+	if (networkRole !== "client") {
+		return;
+	}
+
+	if (!payload) {
+		yield put(stopTCPClient());
+		return;
+	}
+
 	const gameStatus: ReturnType<typeof selectGameStatus> =
 		yield select(selectGameStatus);
 
 	if (gameStatus !== "initial") {
-		return;
-	}
-
-	const networkRole: ReturnType<typeof selectNetworkRole> =
-		yield select(selectNetworkRole);
-
-	if (networkRole !== "client" || !payload) {
 		return;
 	}
 

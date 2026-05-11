@@ -189,9 +189,10 @@ const onMultiplayerStartPageVisit = createPageVisitFilter(
 	routes.startMultiplayer,
 );
 
+/** One watcher only — two `takeLatest` forks ran two Zeroconf loops and could restart TCP concurrently. */
+const shouldRunSelfDiscovery = (action: unknown) =>
+	filterHostRoleAction(action) || onMultiplayerStartPageVisit(action);
+
 export function* runTCPServerSelfDiscoverySaga() {
-	// If role flips / re-dispatches during runtime (or during HMR glitches),
-	// ensure we keep only one self-discovery loop.
-	yield takeLatest(filterHostRoleAction, worker);
-	yield takeLatest(onMultiplayerStartPageVisit, worker);
+	yield takeLatest(shouldRunSelfDiscovery, worker);
 }

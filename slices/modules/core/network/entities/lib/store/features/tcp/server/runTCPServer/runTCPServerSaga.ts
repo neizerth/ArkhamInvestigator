@@ -5,6 +5,7 @@ import {
 	startTCPServer,
 	stopTCPServer,
 	tcpServerClosed,
+	tcpServerListening,
 } from "../../../../../../../shared/lib";
 import {
 	type TCPServerChannelAction,
@@ -24,7 +25,12 @@ function* worker() {
 		while (true) {
 			const action: TCPServerChannelAction = yield take(channel); // Wait for events from TCP
 			yield put(action); // Forward event to Redux Store
+			if (tcpServerListening.match(action)) {
+				// Keep flags in sync even if the channel is torn down mid-queue (cancel races).
+				yield put(setHostRunning(true));
+			}
 			if (tcpServerClosed.match(action)) {
+				yield put(setHostRunning(false));
 				return;
 			}
 		}

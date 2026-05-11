@@ -11,7 +11,6 @@ import {
 	clearTCPServerInstance,
 	consumeTcpJsonBuffer,
 	getTCPServerInstance,
-	setHostRunning,
 	setTCPServerInstance,
 	startTCPServerZeroconf,
 	tcpServerClosed,
@@ -111,7 +110,6 @@ export const createTCPServerChannel = (serverName: string | null) => {
 					// `eventChannel` drops events emitted during construction (before first `take`)
 					// unless a buffer is provided. Emitting from async callback guarantees delivery.
 					emit(startTCPServerZeroconf());
-					emit(setHostRunning(true));
 				})
 				.on("error", (error) => {
 					const message =
@@ -157,7 +155,6 @@ export const createTCPServerChannel = (serverName: string | null) => {
 						return;
 					}
 					if (!cancelled) {
-						emit(setHostRunning(false));
 						emit(tcpServerClosed());
 					}
 				});
