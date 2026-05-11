@@ -7,7 +7,14 @@ import {
 	tcpServerClosed,
 } from "@modules/core/network/shared/lib";
 import { log } from "@shared/config/logger";
-import { delay, put, race, select, take, takeEvery } from "redux-saga/effects";
+import {
+	delay,
+	put,
+	race,
+	select,
+	take,
+	takeLeading,
+} from "redux-saga/effects";
 
 function* worker() {
 	const role: ReturnType<typeof selectNetworkRole> =
@@ -40,5 +47,5 @@ function* worker() {
 }
 
 export function* restartTCPServerSaga() {
-	yield takeEvery(restartTCPServer.match, worker);
+	yield takeLeading(restartTCPServer.match, worker);
 }

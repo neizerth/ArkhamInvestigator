@@ -3,6 +3,7 @@ import {
 	checkTcpHostReachable,
 	setHostIP,
 } from "@modules/core/network/shared/lib";
+import { sendNotification } from "@modules/core/notifications/shared/lib";
 import { setGameStatus } from "@modules/game/shared/lib";
 import { call, put, takeEvery } from "redux-saga/effects";
 import { setZeroconfService } from "./setZeroconfService";
@@ -28,6 +29,12 @@ function* worker({ payload }: ReturnType<typeof setZeroconfService>) {
 	}
 
 	log.info("no reachable tcp host among zeroconf addresses", payload.addresses);
+	yield put(
+		sendNotification({
+			message: "network.hostUnreachable",
+			type: "error",
+		}),
+	);
 }
 
 export function* setZeroconfServiceSaga() {

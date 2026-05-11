@@ -5,6 +5,7 @@ import { put, select, takeEvery } from "redux-saga/effects";
 import {
 	clearTCPServerInstance,
 	getTCPServerInstance,
+	restartTCPServer,
 	selectHostRunning,
 	selectNetworkRole,
 	setHostIP,
@@ -27,7 +28,12 @@ function* worker() {
 			yield select(selectHostRunning);
 
 		if (instanceExists && hostRunning) {
-			log.info("tcp server already running, skipping start");
+			// Host→client→host does a full stop/start; staying on host used to skip and could
+			// leave Bonjour/native listener state that peers could not reach. Re-bind like a fresh host.
+			log.info(
+				"tcp server already running — scheduling restart for clean listen/zeroconf",
+			);
+			yield put(restartTCPServer());
 			return;
 		}
 
