@@ -13,10 +13,14 @@ const filterAction = filterTCPOutcomeAction(sendInvestigatorNotification.match);
 function* worker(
 	sourceAction: ReturnType<typeof sendInvestigatorNotification>,
 ) {
+	const { payload } = sourceAction;
+
+	if (payload.remote === false) {
+		return;
+	}
+
 	const currentBoard: ReturnType<typeof selectCurrentBoard> =
 		yield select(selectCurrentBoard);
-
-	const { payload } = sourceAction;
 
 	const getId = (id?: BoardId | null) =>
 		id === "current" ? currentBoard.id : id;
