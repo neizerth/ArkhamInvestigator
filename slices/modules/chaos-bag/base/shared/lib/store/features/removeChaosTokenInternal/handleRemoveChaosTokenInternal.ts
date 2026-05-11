@@ -20,7 +20,9 @@ export const handleRemoveChaosTokenInternal: ChaosBagMutationHandler<
 	) {
 		return;
 	}
-	state.remoteUpdateAt = remote ? lastUpdatedAt : state.remoteUpdateAt;
+	if (remote) {
+		state.remoteUpdateAt = lastUpdatedAt;
+	}
 	const token = state.contents.find(whereId(id));
 	if (!token) {
 		return;
