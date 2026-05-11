@@ -1,15 +1,26 @@
-import type { ChaosBagHandler } from "@modules/chaos-bag/base/shared/model";
+import type { ChaosBagMutationHandler } from "@modules/chaos-bag/base/shared/model";
 import { validateChaosBagUpdate } from "../../util";
 
 export type HandleClearChaosBagInternalPayload = {
 	lastUpdatedAt: string;
 };
 
-export const handleClearChaosBagInternal: ChaosBagHandler<
+export const handleClearChaosBagInternal: ChaosBagMutationHandler<
 	HandleClearChaosBagInternalPayload
-> = (state, { lastUpdatedAt }) => {
-	if (!validateChaosBagUpdate(state, lastUpdatedAt)) {
+> = ({ state, remote, lastUpdatedAt }) => {
+	if (
+		!validateChaosBagUpdate({
+			state,
+			lastUpdatedAt,
+			remote,
+		})
+	) {
 		return;
+	}
+	if (remote) {
+		state.remoteUpdateAt = lastUpdatedAt;
+	} else {
+		state.remoteUpdateAt = null;
 	}
 	state.contents = [];
 	state.tokenCount = {};

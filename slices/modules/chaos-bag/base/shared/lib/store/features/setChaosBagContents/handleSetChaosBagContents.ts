@@ -1,5 +1,5 @@
 import type {
-	ChaosBagHandler,
+	ChaosBagMutationHandler,
 	ChaosBagToken,
 	ChaosTokenType,
 } from "@modules/chaos-bag/base/shared/model";
@@ -11,12 +11,22 @@ export type SetChaosBagContentsPayload = {
 	lastUpdatedAt: string;
 };
 
-export const handleSetChaosBagContents: ChaosBagHandler<
+export const handleSetChaosBagContents: ChaosBagMutationHandler<
 	SetChaosBagContentsPayload
-> = (state, payload) => {
-	const { contents, lastUpdatedAt } = payload;
-	if (!validateChaosBagUpdate(state, lastUpdatedAt)) {
+> = ({ state, remote, contents, lastUpdatedAt }) => {
+	if (
+		!validateChaosBagUpdate({
+			state,
+			lastUpdatedAt,
+			remote,
+		})
+	) {
 		return;
+	}
+	if (remote) {
+		state.remoteUpdateAt = lastUpdatedAt;
+	} else {
+		state.remoteUpdateAt = null;
 	}
 	state.contents = contents;
 	state.tokenCount = contents.reduce(

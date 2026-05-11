@@ -1,6 +1,6 @@
+import type { ChaosBagMutationHandler } from "@modules/chaos-bag/base/shared/model";
 import { whereId } from "@shared/lib/util";
 import { reject } from "ramda";
-import type { ChaosBagHandler } from "../../../../model";
 import { validateChaosBagUpdate } from "../../util";
 
 export type HandleRemoveChaosTokenInternalPayload = {
@@ -8,11 +8,20 @@ export type HandleRemoveChaosTokenInternalPayload = {
 	lastUpdatedAt: string;
 };
 
-export const handleRemoveChaosTokenInternal: ChaosBagHandler<
+export const handleRemoveChaosTokenInternal: ChaosBagMutationHandler<
 	HandleRemoveChaosTokenInternalPayload
-> = (state, { id, lastUpdatedAt }) => {
-	if (!validateChaosBagUpdate(state, lastUpdatedAt)) {
+> = ({ state, remote, id, lastUpdatedAt }) => {
+	if (
+		!validateChaosBagUpdate({
+			state,
+			lastUpdatedAt,
+			remote,
+		})
+	) {
 		return;
+	}
+	if (remote) {
+		state.remoteUpdateAt = lastUpdatedAt;
 	}
 	const token = state.contents.find(whereId(id));
 	if (!token) {

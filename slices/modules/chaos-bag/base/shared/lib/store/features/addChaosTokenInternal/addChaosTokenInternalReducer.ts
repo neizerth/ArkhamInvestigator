@@ -1,4 +1,5 @@
 import type { ChaosBagReducer } from "@modules/chaos-bag/base/shared/model";
+import { isChaosBagRemoteAction } from "../../util";
 import {
 	type HandleAddChaosTokenInternalPayload,
 	handleAddChaosTokenInternal,
@@ -6,6 +7,10 @@ import {
 
 export const addChaosTokenInternalReducer: ChaosBagReducer<
 	HandleAddChaosTokenInternalPayload
-> = (state, { payload }) => {
-	handleAddChaosTokenInternal(state, payload);
+> = (state, action) => {
+	handleAddChaosTokenInternal({
+		state,
+		...action.payload,
+		remote: isChaosBagRemoteAction(action),
+	});
 };

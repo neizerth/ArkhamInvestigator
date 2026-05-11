@@ -8,13 +8,14 @@ export type ChaosBagReducer<Payload = void> = StateReducer<
 >;
 export type ChaosBagDraft = Draft<ChaosBagState>;
 
-export type ChaosBagHandlerOptions<Payload> = Payload & {
+export type ChaosBagMutationParams<P extends object = Record<string, never>> = {
 	state: ChaosBagDraft;
-};
+	/** True when applying an action deserialized from TCP. */
+	remote: boolean;
+} & P;
 
-export type ChaosBagHandler<Payload = void> = (
-	state: ChaosBagDraft,
-	payload: Payload,
+export type ChaosBagMutationHandler<P extends object> = (
+	params: ChaosBagMutationParams<P>,
 ) => void;
 
 export type ChaosBagChangeSource = "ui" | "effect";

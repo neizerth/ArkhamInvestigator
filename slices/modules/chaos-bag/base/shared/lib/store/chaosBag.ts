@@ -15,6 +15,8 @@ export type ChaosBagState = {
 	modifyChaosTokens: boolean;
 	showDifficulty: boolean;
 	chaosBagUpdatedAt: string;
+	/** Last remote `lastUpdatedAt` we applied — drops duplicate TCP replays without wall-clock sync. */
+	remoteUpdateAt: string | null;
 };
 
 const initialState: ChaosBagState = {
@@ -27,6 +29,7 @@ const initialState: ChaosBagState = {
 	modifyChaosTokens: true,
 	showDifficulty: false,
 	chaosBagUpdatedAt: new Date().toISOString(),
+	remoteUpdateAt: null,
 };
 
 const state = createSliceState(initialState);

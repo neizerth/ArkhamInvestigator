@@ -1,5 +1,5 @@
 import type {
-	ChaosBagHandler,
+	ChaosBagMutationHandler,
 	ChaosTokenType,
 } from "@modules/chaos-bag/base/shared/model";
 import { ascend, propEq, reject } from "ramda";
@@ -10,11 +10,20 @@ export type HandleRemoveAllChaosTokensByTypePayload = {
 	lastUpdatedAt: string;
 };
 
-export const handleRemoveAllChaosTokensByType: ChaosBagHandler<
+export const handleRemoveAllChaosTokensByType: ChaosBagMutationHandler<
 	HandleRemoveAllChaosTokensByTypePayload
-> = (state, { type, lastUpdatedAt }) => {
-	if (!validateChaosBagUpdate(state, lastUpdatedAt)) {
+> = ({ state, remote, type, lastUpdatedAt }) => {
+	if (
+		!validateChaosBagUpdate({
+			state,
+			lastUpdatedAt,
+			remote,
+		})
+	) {
 		return;
+	}
+	if (remote) {
+		state.remoteUpdateAt = lastUpdatedAt;
 	}
 	const count = state.tokenCount[type];
 
