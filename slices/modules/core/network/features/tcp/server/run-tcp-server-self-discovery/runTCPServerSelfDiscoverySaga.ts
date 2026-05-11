@@ -8,6 +8,8 @@ import {
 	restartTCPServer,
 	selectHotspotEnabled,
 	selectIP,
+	selectNetworkConnected,
+	selectNetworkRole,
 	selectNetworkType,
 	selectNickname,
 	setHotspotEnabled,
@@ -43,6 +45,13 @@ const RESTART_COOLDOWN_MS = 15000;
  * local network. We store that IP in Redux to power UI (QR/invite/diagnostics) and connection flows.
  */
 function* worker() {
+	const networkRole: ReturnType<typeof selectNetworkRole> =
+		yield select(selectNetworkRole);
+
+	if (networkRole !== "host") {
+		return;
+	}
+
 	const networkType: ReturnType<typeof selectNetworkType> =
 		yield select(selectNetworkType);
 
@@ -115,14 +124,19 @@ function* worker() {
 			);
 
 			const ip = self?.addresses?.[0];
-			if (ip) {
+
+			const networConnected: ReturnType<typeof selectNetworkConnected> =
+				yield select(selectNetworkConnected);
+
+			if (ip && !networConnected) {
 				lastSeenAt = Date.now();
 
 				const currentIP: ReturnType<typeof selectIP> = yield select(selectIP);
 				if (currentIP !== ip) {
 					log.info("tcp server self discovery: set ip", ip);
 					yield put(setIP(ip));
-					yield put(setHotspotEnabled(true));
+					const hotspotEnabled = networkType === "none";
+					yield put(setHotspotEnabled(hotspotEnabled));
 				}
 			}
 
