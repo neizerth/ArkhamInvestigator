@@ -27,7 +27,9 @@ export const ContentPage = ({
 	return (
 		<Page {...props}>
 			<TopBar title={t(title)} onBack={back} />
-			<PageContent style={contentStyle}>{children}</PageContent>
+			<PageContent style={contentStyle} full={full}>
+				{children}
+			</PageContent>
 		</Page>
 	);
 };
