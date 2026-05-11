@@ -47,9 +47,6 @@ function* worker() {
 		yield select(selectNetworkType);
 
 	const currentIP: ReturnType<typeof selectIP> = yield select(selectIP);
-	if (currentIP && networkType !== "none") {
-		return;
-	}
 
 	if (networkType === "none" && currentIP) {
 		yield put(setIP(null));
