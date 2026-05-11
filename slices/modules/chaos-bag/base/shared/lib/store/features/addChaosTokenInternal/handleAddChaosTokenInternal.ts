@@ -21,9 +21,7 @@ export const handleAddChaosTokenInternal: ChaosBagMutationHandler<
 	) {
 		return;
 	}
-	if (remote) {
-		state.remoteUpdateAt = lastUpdatedAt;
-	}
+	state.remoteUpdateAt = remote ? lastUpdatedAt : state.remoteUpdateAt;
 	const { type } = token;
 	const count = state.tokenCount[type] ?? 0;
 	state.contents.push(token);

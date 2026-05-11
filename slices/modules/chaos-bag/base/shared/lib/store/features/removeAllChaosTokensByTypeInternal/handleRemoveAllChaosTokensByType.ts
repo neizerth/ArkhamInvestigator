@@ -22,9 +22,7 @@ export const handleRemoveAllChaosTokensByType: ChaosBagMutationHandler<
 	) {
 		return;
 	}
-	if (remote) {
-		state.remoteUpdateAt = lastUpdatedAt;
-	}
+	state.remoteUpdateAt = remote ? lastUpdatedAt : state.remoteUpdateAt;
 	const count = state.tokenCount[type];
 
 	if (typeof count !== "number") {

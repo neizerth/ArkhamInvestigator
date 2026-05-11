@@ -17,11 +17,7 @@ export const handleClearChaosBagInternal: ChaosBagMutationHandler<
 	) {
 		return;
 	}
-	if (remote) {
-		state.remoteUpdateAt = lastUpdatedAt;
-	} else {
-		state.remoteUpdateAt = null;
-	}
+	state.remoteUpdateAt = remote ? lastUpdatedAt : null;
 	state.contents = [];
 	state.tokenCount = {};
 	state.chaosBagUpdatedAt = new Date().toISOString();

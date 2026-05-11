@@ -23,11 +23,7 @@ export const handleSetChaosBagContents: ChaosBagMutationHandler<
 	) {
 		return;
 	}
-	if (remote) {
-		state.remoteUpdateAt = lastUpdatedAt;
-	} else {
-		state.remoteUpdateAt = null;
-	}
+	state.remoteUpdateAt = remote ? lastUpdatedAt : null;
 	state.contents = contents;
 	state.tokenCount = contents.reduce(
 		(acc, token) => {
