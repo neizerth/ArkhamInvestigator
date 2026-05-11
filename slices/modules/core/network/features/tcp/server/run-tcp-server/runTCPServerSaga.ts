@@ -3,7 +3,9 @@ import { routes } from "@shared/config";
 import { log } from "@shared/config/logger";
 import { put, select, takeEvery } from "redux-saga/effects";
 import {
+	clearTCPServerInstance,
 	getTCPServerInstance,
+	selectHostRunning,
 	selectNetworkRole,
 	setHostIP,
 	setNetworkRole,
@@ -20,10 +22,22 @@ function* worker() {
 		log.info("setting host ip to null");
 		yield put(setHostIP(null));
 
-		if (getTCPServerInstance()) {
+		const instanceExists = Boolean(getTCPServerInstance());
+		const hostRunning: ReturnType<typeof selectHostRunning> =
+			yield select(selectHostRunning);
+
+		if (instanceExists && hostRunning) {
 			log.info("tcp server already running, skipping start");
 			return;
 		}
+
+		if (instanceExists && !hostRunning) {
+			log.warn(
+				"tcp server global exists but hostRunning is false — stale after reload/cancel; closing and restarting",
+			);
+			clearTCPServerInstance();
+		}
+
 		yield put(startTCPServer());
 	} else if (networkRole === "client") {
 		yield put(stopTCPServer());

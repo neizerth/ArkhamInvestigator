@@ -1,5 +1,7 @@
 import { call, cancelled, put, race, select, take } from "redux-saga/effects";
 import {
+	clearTCPServerInstance,
+	getTCPServerInstance,
 	selectNickname,
 	setHostRunning,
 	startTCPServer,
@@ -48,10 +50,29 @@ function* worker() {
 
 export function* stopWorker() {}
 
+/** Between TCP sessions we only `take(startTCPServer)`; idle `stopTCPServer` was dropped and native listeners leaked. */
+function* idleStopFlush() {
+	if (getTCPServerInstance()) {
+		clearTCPServerInstance();
+	}
+	yield put(setHostRunning(false));
+}
+
 export function* runTCPServerSaga() {
 	while (true) {
-		yield take(startTCPServer.match);
-		// race cancels tcpWorker if stopTCPServer is dispatched first
+		const idleRaceResult: {
+			start?: ReturnType<typeof startTCPServer>;
+			stopWhileIdle?: ReturnType<typeof stopTCPServer>;
+		} = yield race({
+			start: take(startTCPServer.match),
+			stopWhileIdle: take(stopTCPServer.match),
+		});
+
+		if ("stopWhileIdle" in idleRaceResult && idleRaceResult.stopWhileIdle) {
+			yield call(idleStopFlush);
+			continue;
+		}
+
 		const { stop }: { stop?: ReturnType<typeof stopTCPServer> } = yield race({
 			task: call(worker),
 			stop: take(stopTCPServer.match),

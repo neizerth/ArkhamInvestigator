@@ -9,11 +9,28 @@ import { TCP_PORT } from "../../../config";
 export function checkTcpHostReachable(host: string): Promise<boolean> {
 	return new Promise((resolve) => {
 		let settled = false;
+		const conn = { established: false };
+		const watchdog = {
+			id: undefined as ReturnType<typeof setTimeout> | undefined,
+		};
+
+		const socket = TcpSocket.createConnection(
+			{
+				host,
+				port: TCP_PORT,
+				connectTimeout: seconds(8),
+			},
+			() => {},
+		);
+
 		const finish = (ok: boolean) => {
 			if (settled) {
 				return;
 			}
 			settled = true;
+			if (watchdog.id !== undefined) {
+				clearTimeout(watchdog.id);
+			}
 			try {
 				socket.destroy();
 			} catch {
@@ -22,17 +39,18 @@ export function checkTcpHostReachable(host: string): Promise<boolean> {
 			resolve(ok);
 		};
 
-		const socket = TcpSocket.createConnection(
-			{
-				host,
-				port: TCP_PORT,
-				connectTimeout: seconds(2),
-			},
-			() => {
-				finish(true);
-			},
-		);
+		socket.once("connect", () => {
+			conn.established = true;
+			finish(true);
+		});
+		socket.once("error", () => finish(false));
+		/** RN may emit `close` during teardown; ignore after a successful `connect`. */
+		socket.once("close", () => {
+			if (!conn.established) {
+				finish(false);
+			}
+		});
 
-		socket.on("error", () => finish(false));
+		watchdog.id = setTimeout(() => finish(false), seconds(10));
 	});
 }
