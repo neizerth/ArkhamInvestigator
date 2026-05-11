@@ -5,7 +5,6 @@ import { appStateChanged } from "@modules/core/app/shared/lib";
 import { selectGameMode, selectGameStatus } from "@modules/game/shared/lib";
 import { checkTCPClientConnection } from "../../entities/lib/store/features/tcp/client/checkTCPClientConnection";
 import {
-	selectClientRunning,
 	selectHostRunning,
 	selectNetworkRole,
 	startTCPServer,
@@ -19,15 +18,6 @@ const filterAppStateAction = (action: unknown) => {
 };
 
 function* worker() {
-	yield put(checkTCPClientConnection());
-}
-
-function* deadHostWorker() {
-	const running: ReturnType<typeof selectClientRunning> =
-		yield select(selectClientRunning);
-	if (running) {
-		return;
-	}
 	yield put(checkTCPClientConnection());
 }
 
@@ -53,8 +43,8 @@ function* deadServerWorker() {
 }
 
 export function* sendNetworkClientKeepAliveSaga() {
-	yield callEvery(seconds(20), worker);
-	yield callEvery(seconds(3), deadHostWorker);
+	/** Covers lobby + `playing`: pushes TCP traffic so stale sessions surface without waiting for user input. */
+	yield callEvery(seconds(10), worker);
 	yield callEvery(seconds(1), deadServerWorker);
 	yield takeEvery(filterAppStateAction, worker);
 	yield takeEvery(filterAppStateAction, deadServerWorker);

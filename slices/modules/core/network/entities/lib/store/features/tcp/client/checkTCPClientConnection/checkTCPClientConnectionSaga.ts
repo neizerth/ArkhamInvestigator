@@ -8,7 +8,6 @@ import {
 } from "@modules/core/network/shared/lib";
 import { selectCurrentRoute } from "@modules/core/router/shared/lib";
 import { selectGameStatus } from "@modules/game/shared/lib";
-import { selectIsClientPlaying } from "@modules/multiplayer/entities/lib";
 import { routes } from "@shared/config";
 import { put, select, takeEvery } from "redux-saga/effects";
 import { restartTCPClient } from "../restartTCPClient";
@@ -40,9 +39,6 @@ function* worker() {
 	const running: ReturnType<typeof selectClientRunning> =
 		yield select(selectClientRunning);
 
-	const isClientPlaying: ReturnType<typeof selectIsClientPlaying> =
-		yield select(selectIsClientPlaying);
-
 	if (!running) {
 		const socket = getTCPServerSocket();
 		if (socket && !socket.destroyed) {
@@ -53,18 +49,15 @@ function* worker() {
 		return;
 	}
 
-	if (!isClientPlaying) {
-		log.info("Sending network keep alive");
-		yield put(sendNetworkKeepAlive());
-		return;
-	}
-
 	const socket = getTCPServerSocket();
 	if (!socket || socket.destroyed) {
 		log.info("Client socket dead (e.g. after HMR), reconnecting");
 		yield put(restartTCPClient());
 		return;
 	}
+
+	/** Application-level ping so semi-open sockets fail fast after host restart/resume. */
+	yield put(sendNetworkKeepAlive());
 }
 
 export function* checkTCPClientConnectionSaga() {
