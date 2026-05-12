@@ -1,9 +1,8 @@
 import { createPageVisitFilter } from "@modules/core/router/shared/lib";
 import { routes } from "@shared/config";
 import { log } from "@shared/config/logger";
-import { put, select, takeEvery } from "redux-saga/effects";
+import { put, select, takeEvery, takeLeading } from "redux-saga/effects";
 import {
-	clearTCPServerInstance,
 	getTCPServerInstance,
 	restartTCPServer,
 	selectHostRunning,
@@ -14,7 +13,7 @@ import {
 	stopTCPServer,
 } from "../../../../shared/lib";
 
-function* worker() {
+function* worker(action: unknown) {
 	const networkRole: ReturnType<typeof selectNetworkRole> =
 		yield select(selectNetworkRole);
 	log.info("checking network role", networkRole);
@@ -26,10 +25,24 @@ function* worker() {
 		const instanceExists = Boolean(getTCPServerInstance());
 		const hostRunning: ReturnType<typeof selectHostRunning> =
 			yield select(selectHostRunning);
+		const pageVisit = filterStartMultiplayer(action);
+
+		if (pageVisit) {
+			// Revisiting start-multiplayer while already hosting must not start a second bind:
+			// `getTCPServerInstance()` is set before `listening`, so a duplicate route dispatch
+			// used to hit `clearTCPServerInstance` + `startTCPServer` and race EADDRINUSE.
+			if (instanceExists && hostRunning) {
+				return;
+			}
+			if (instanceExists && !hostRunning) {
+				return;
+			}
+			yield put(startTCPServer());
+			return;
+		}
 
 		if (instanceExists && hostRunning) {
-			// Host→client→host does a full stop/start; staying on host used to skip and could
-			// leave Bonjour/native listener state that peers could not reach. Re-bind like a fresh host.
+			// Host→client→host does a full stop/start; role-driven host entry may need a clean bind.
 			log.info(
 				"tcp server already running — scheduling restart for clean listen/zeroconf",
 			);
@@ -38,10 +51,8 @@ function* worker() {
 		}
 
 		if (instanceExists && !hostRunning) {
-			log.warn(
-				"tcp server global exists but hostRunning is false — stale after reload/cancel; closing and restarting",
-			);
-			clearTCPServerInstance();
+			// Startup in progress (instance set before `tcpServerListening`); do not churn.
+			return;
 		}
 
 		yield put(startTCPServer());
@@ -54,5 +65,5 @@ const filterStartMultiplayer = createPageVisitFilter(routes.startMultiplayer);
 
 export function* runTCPServerSaga() {
 	yield takeEvery(setNetworkRole.match, worker);
-	yield takeEvery(filterStartMultiplayer, worker);
+	yield takeLeading(filterStartMultiplayer, worker);
 }

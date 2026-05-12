@@ -125,22 +125,42 @@ function* worker() {
 
 			const ip = self?.addresses?.[0];
 
-			const networConnected: ReturnType<typeof selectNetworkConnected> =
+			const networkConnected: ReturnType<typeof selectNetworkConnected> =
 				yield select(selectNetworkConnected);
+			const networkTypeLoop: ReturnType<typeof selectNetworkType> =
+				yield select(selectNetworkType);
 
-			if (ip && !networConnected) {
+			if (ip) {
+				// Always refresh the watchdog when our service appears in the scan — otherwise
+				// on normal Wi‑Fi (`networkConnected === true`) we never bumped `lastSeenAt` and
+				// hit the timeout path every 5s, restarting TCP while the port was still bound.
 				lastSeenAt = Date.now();
 
-				const currentIP: ReturnType<typeof selectIP> = yield select(selectIP);
-				if (currentIP !== ip) {
-					log.info("tcp server self discovery: set ip", ip);
-					yield put(setIP(ip));
-					const hotspotEnabled = networkType === "none";
-					yield put(setHotspotEnabled(hotspotEnabled));
+				const useZeroconfIp = !networkConnected || networkTypeLoop === "none";
+
+				if (useZeroconfIp) {
+					const currentIP: ReturnType<typeof selectIP> = yield select(selectIP);
+					if (currentIP !== ip) {
+						log.info("tcp server self discovery: set ip", ip);
+						yield put(setIP(ip));
+						yield put(setHotspotEnabled(networkTypeLoop === "none"));
+					}
 				}
 			}
 
 			if (Date.now() - lastSeenAt < SELF_DISCOVERY_TIMEOUT_MS) {
+				continue;
+			}
+
+			const networkTypeNow: ReturnType<typeof selectNetworkType> =
+				yield select(selectNetworkType);
+			const networkConnectedNow: ReturnType<typeof selectNetworkConnected> =
+				yield select(selectNetworkConnected);
+			const ipFromNetInfo: ReturnType<typeof selectIP> = yield select(selectIP);
+
+			// NetInfo already gives a LAN IP on regular Wi‑Fi; missing self in Zeroconf is not fatal.
+			if (networkConnectedNow && ipFromNetInfo && networkTypeNow !== "none") {
+				lastSeenAt = Date.now();
 				continue;
 			}
 

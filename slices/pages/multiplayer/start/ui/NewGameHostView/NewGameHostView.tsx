@@ -46,12 +46,9 @@ const Container = ({ ip, ...props }: ViewProps & { ip: string }) => {
 
 	const codePreview = code.match(/.{1,2}/g)?.join(" ") || "";
 
-	const shareDeeplink = useCallback(() => {
-		Share.share({
-			title: t`Share`,
-			url,
-		});
-	}, [url, t]);
+	const shareDeeplink = useCallback(async () => {
+		await Share.share({ message: url, url });
+	}, [url]);
 
 	const copyCode = useCallback(() => {
 		dispatch(copyText({ text: code }));
