@@ -7,6 +7,7 @@ function* worker({ payload }: ReturnType<typeof setNavigationBarStyle>) {
 	if (Platform.OS !== "android") {
 		return;
 	}
+	console.log("setting navigation bar style", payload);
 	yield call(setStyle, payload);
 }
 

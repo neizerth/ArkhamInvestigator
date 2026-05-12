@@ -10,13 +10,18 @@ import { setNavbarHeight, setNavigationMode } from "../../shared/lib";
 import type { ReturnAwaited } from "@shared/model";
 
 function* worker() {
-	const navbarHeight: ReturnAwaited<typeof getNavigationBarHeight> = yield call(
-		getNavigationBarHeight,
-	);
+	const defaultNavbarHeight: ReturnAwaited<typeof getNavigationBarHeight> =
+		yield call(getNavigationBarHeight);
 	const navigationMode: ReturnAwaited<typeof getNavigationMode> =
 		yield call(getNavigationMode);
 
 	yield put(setNavigationMode(navigationMode));
+
+	const physicalNavbar =
+		navigationMode.type === "unknown" || !navigationMode.type;
+
+	const navbarHeight = physicalNavbar ? 0 : defaultNavbarHeight;
+
 	yield put(setNavbarHeight(navbarHeight));
 
 	yield put(setNavigationBarStyle("light"));

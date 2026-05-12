@@ -4,6 +4,10 @@ import { restartApp } from "@modules/core/app/entities/restartApp";
 import { externalImagesDiskPath } from "@modules/core/assets/base/shared/config";
 import { reloadExternalAssets } from "@modules/core/assets/base/shared/lib";
 import { clearDownloadQueue } from "@modules/core/assets/download-queue/shared/lib";
+import {
+	selectNavbarHeight,
+	selectNavigationMode,
+} from "@modules/core/device/shared/lib";
 import { removeDirectory } from "@modules/core/disk/entities/removeDirectory";
 import { clearLogs as clearLogsAction } from "@modules/core/log/entities/lib/store/features/clearLogs";
 import { shareLogs as shareLogsAction } from "@modules/core/log/entities/lib/store/features/shareLogs";
@@ -28,6 +32,9 @@ export const DiagnosticsPage = () => {
 	const networkType = useAppSelector(selectNetworkType);
 	const networkConnected = useAppSelector(selectNetworkConnected);
 	const wifiEnabled = useAppSelector(selectWifiEnabled);
+
+	const navbarHeight = useAppSelector(selectNavbarHeight);
+	const navigationMode = useAppSelector(selectNavigationMode);
 	const ssid = useAppSelector(selectSSID);
 	const ip = useAppSelector(selectIP);
 
@@ -83,6 +90,16 @@ export const DiagnosticsPage = () => {
 			<C.Container>
 				<C.Content>
 					<C.Section title={t`General`}>
+						<C.Row>
+							<Text>
+								{t`navigation.mode`}: {navigationMode?.type ?? "unknown"}
+							</Text>
+						</C.Row>
+						<C.Row>
+							<Text>
+								{t`navbar.height`}: {navbarHeight}px
+							</Text>
+						</C.Row>
 						<C.Row>
 							<C.Button text={t`Restart App`} icon="switch" onPress={restart} />
 						</C.Row>

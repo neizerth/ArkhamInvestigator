@@ -11,7 +11,7 @@ export const RootLayout = () => {
 				<Stack.Screen name="(modal)" options={asTransparentModal} />
 			</Stack>
 
-			<StatusBar style="dark" />
+			<StatusBar style="light" />
 		</AppLayout>
 	);
 };
