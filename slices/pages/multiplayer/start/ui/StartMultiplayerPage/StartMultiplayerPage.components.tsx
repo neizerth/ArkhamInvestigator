@@ -57,12 +57,16 @@ export const GenerateRandomNickname: typeof TouchableOpacity = styled(
 	hitSlop: { top: 10, bottom: 10, left: 10, right: 10 },
 	pointerEvents: "box-only",
 })`
+	background-color: ${color.dark30};
+	border-radius: 0px ${size.borderRadius.default}px ${size.borderRadius.default}px 0px;
+	border: 1px solid ${color.dark10};
+	border-left-width: 0px;
 	padding: 0px ${size.gap.medium}px;
 	position: absolute;
 	z-index: 2;
 	right: -1px;
-	top: -5px;
-	bottom: -5px;
+	top: 0px;
+	bottom: 0px;
 	min-width: 44px;
 	align-items: center;
 	justify-content: center;
