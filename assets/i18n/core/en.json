@@ -378,7 +378,7 @@
 	"multiplayer.connect": "Connect",
 	"multiplayer.joinGame": "Join a game",
 	"multiplayer.searching": "Searching for games",
-	"multiplayer.hint": "All players must be in the same network. Create a game or join a game using:\n - connection code;\n - QR code;\n - link\n - automatic network scanning.",
+	"multiplayer.hint": "Attention: this mode is in beta. Please report any errors or problems.\nAll players must be in the same network. Create a game or join a game using:\n - connection code;\n - QR code;\n - link\n - automatic network scanning.",
 	"multiplayer.error.selfInviteCode": "You cannot join your own game as a host",
 	"multiplayer.error.invalidInviteCode": "Invalid connection code",
 	"multiplayer.playersCount": "Players",
