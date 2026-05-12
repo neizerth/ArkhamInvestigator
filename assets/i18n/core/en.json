@@ -14,6 +14,8 @@
 	"network.autoDiscover": "Search for games in the local network",
 	"network.searching-for-ip": "Searching for IP... Make sure Wi-Fi or hotspot is enabled",
 	"network.hostUnreachable": "Failed to connect to the game. The device is not responding.",
+	"network.tcp-send-failed.client": "Could not reach the host. Reconnecting…",
+	"network.tcp-send-failed.host": "Could not send data to a player. They may have left or lost connection.",
 
 	"error.downloadFailed": "Failed to download content. Please, try again later or change network connection. Details: {{error}}",
 	"app.disclaimer": "Arkham Horror: The Card Game™ and all related content © Fantasy Flight Games (FFG). This app is not produced, endorsed by or affiliated with FFG.",

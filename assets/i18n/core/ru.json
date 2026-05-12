@@ -11,6 +11,8 @@
 	"network.wifiEnabled": "Wi-Fi включен",
 	"network.searching-for-ip": "Поиск IP... Убедитесь, что Wi-Fi или точка доступа включены",
 	"network.hostUnreachable": "Не удалось подключиться к игре. Устройство не отвечает.",
+	"network.tcp-send-failed.client": "Не удалось отправить данные хосту. Переподключение…",
+	"network.tcp-send-failed.host": "Не удалось отправить данные игроку. Возможно, он вышел или потерял связь.",
 
 	"multiplayer.role.client.title": "Войти в игру",
 	"multiplayer.role.host.title": "Создать игру",
