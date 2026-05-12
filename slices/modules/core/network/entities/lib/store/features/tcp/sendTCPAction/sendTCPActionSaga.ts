@@ -1,7 +1,10 @@
 import { log } from "@modules/core/log/shared/config";
-import { selectDeviceNetworkId } from "@modules/core/network/shared/lib";
+import {
+	selectDeviceNetworkId,
+	tcpSocketWrite,
+} from "@modules/core/network/shared/lib";
 import { omit } from "ramda";
-import { put, select, takeEvery } from "redux-saga/effects";
+import { call, put, select, takeEvery } from "redux-saga/effects";
 import { sendTCPAction, sendTCPActionFailed } from "./sendTCPAction";
 
 function* worker({ payload }: ReturnType<typeof sendTCPAction>) {
@@ -34,9 +37,9 @@ function* worker({ payload }: ReturnType<typeof sendTCPAction>) {
 
 	try {
 		const json = JSON.stringify(tcpAction);
-		socket.write(`${json}\n`);
+		yield call(tcpSocketWrite, socket, `${json}\n`);
 	} catch (error) {
-		console.error("Error sending TCP action", error, tcpAction);
+		log.error("Error sending TCP action", error, tcpAction);
 		if (error instanceof Error) {
 			yield put(
 				sendTCPActionFailed({
