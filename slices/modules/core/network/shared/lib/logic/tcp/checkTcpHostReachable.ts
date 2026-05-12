@@ -19,7 +19,7 @@ export function checkTcpHostReachable(host: string): Promise<boolean> {
 			{
 				host,
 				port: TCP_PORT,
-				connectTimeout: seconds(8),
+				connectTimeout: seconds(1),
 			},
 			() => {},
 		);

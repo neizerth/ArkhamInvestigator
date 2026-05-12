@@ -22,15 +22,16 @@ function* worker({
 	const { nickname, hostIP } = payload;
 	const { networkId, socket } = meta;
 
+	log.info("connecting TCP client", payload);
+
 	const ip: ReturnType<typeof selectIP> = yield select(selectIP);
 
-	if (ip !== hostIP) {
+	if (!ip) {
+		log.info("setting IP from hostIP", hostIP);
 		yield put(setIP(hostIP));
 	}
 
 	yield call(setTCPClientSocket, networkId, socket);
-
-	log.info("connecting TCP client", payload);
 
 	yield put(
 		upsertNetworkClient({

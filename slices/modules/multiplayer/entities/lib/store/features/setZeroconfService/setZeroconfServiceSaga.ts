@@ -9,12 +9,15 @@ import { call, put, takeEvery } from "redux-saga/effects";
 import { setZeroconfService } from "./setZeroconfService";
 
 function* worker({ payload }: ReturnType<typeof setZeroconfService>) {
+	log.info("setting host ip from zeroconf service", payload);
 	if (!payload.addresses?.length) {
-		log.info("no addresses found in zeroconf service", payload);
+		log.info("no addresses found in zeroconf service");
 		return;
 	}
 
-	for (const ip of payload.addresses) {
+	const addresses = payload.addresses.toReversed();
+
+	for (const ip of addresses) {
 		console.log("checking tcp host reachability", ip);
 		if (!ip) {
 			continue;
