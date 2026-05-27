@@ -30,6 +30,8 @@
 	"multiplayer.locationPermissionRequired": "Нужен доступ к местоположению для поиска игр",
 	"multiplayer.autoDiscoverDisabled": "Автоматический поиск игр отключен",
 
+	"navbar.height": "Высота панели навигации",
+
 	"log.share": "Поделиться",
 	"log.clear": "Очистить",
 	"log.noLogs": "Нет доступных журналов",

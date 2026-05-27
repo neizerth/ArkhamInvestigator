@@ -390,6 +390,8 @@
 	"multiplayer.locationPermissionRequired": "Location permission is required to search for games",
 	"multiplayer.autoDiscoverDisabled": "Automatic game search is disabled",
 
+	"navbar.height": "Navbar height",
+
 	"log.share": "Share",
 	"log.clear": "Clear",
 	"log.noLogs": "No logs available",
