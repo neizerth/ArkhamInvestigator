@@ -2,6 +2,7 @@ import type { NumericChaosTokenType } from "@modules/chaos-bag/base/shared/model
 
 export const defaultChaosTokenValues = {
 	frost: -1,
+	blood: -1,
 	bless: 2,
 	curse: -2,
 	moon: 0,
