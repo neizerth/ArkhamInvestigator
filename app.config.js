@@ -77,9 +77,9 @@ module.exports = {
             deploymentTarget: "15.5",
           },
           android: {
-            compileSdkVersion: 35,
-            targetSdkVersion: 35,
-            buildToolsVersion: "35.0.0",
+            compileSdkVersion: 36,
+            targetSdkVersion: 36,
+            buildToolsVersion: "36.0.0",
             ndkVersion: "27.0.12077973",
             enableProguardInReleaseBuilds: false,
             enableShrinkResourcesInReleaseBuilds: false,
