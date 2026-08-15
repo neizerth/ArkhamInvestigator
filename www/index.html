@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arkham Investigator</title>
+    <link rel="stylesheet" href="./style.css">
+    <script src="./assets/i18n.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Arkham Investigator</h1>
+
+        <section id="join" hidden>
+            <p class="subtitle" data-i18n="joinSubtitle"></p>
+            <div class="card">
+                <div data-i18n="codeLabel"></div>
+                <div class="code" id="join-code"></div>
+                <a class="button" id="join-link" href="#" data-i18n="openInApp"></a>
+                <p class="hint" id="join-hint"></p>
+            </div>
+        </section>
+
+        <section id="landing" hidden>
+            <p class="subtitle" data-i18n="landingSubtitle"></p>
+            <div class="stores">
+                <a href="https://apps.apple.com/us/app/ah-investigator/id6753330970">App Store</a>
+                <a href="https://play.google.com/store/apps/details?id=com.arkhaminvestigator">Google Play</a>
+            </div>
+        </section>
+
+        <footer>
+            <p><a href="./contact.html" data-i18n="support"></a></p>
+        </footer>
+    </div>
+
+    <script>
+        (function () {
+            // Must match JOIN_LINK_PARAM and deeplinkRoutes.joinLocalMultiplayer in the app.
+            var PARAM = 'join';
+            var DEEPLINK = 'inv:///join/local?invite=';
+
+            var params = new URLSearchParams(window.location.search);
+
+            var dict = (function () {
+                var locales = window.I18N || {};
+                // `?lang=` is an override for testing; otherwise follow the browser.
+                var requested = [params.get('lang')].concat(navigator.languages || [navigator.language]);
+
+                for (var i = 0; i < requested.length; i++) {
+                    var tag = (requested[i] || '').toLowerCase();
+                    if (!tag) continue;
+
+                    // Drop the script subtag before the base language, so `zh-Hans-CN` resolves
+                    // to `zh-cn` (simplified) instead of falling back to `zh` (traditional).
+                    var parts = tag.split('-');
+                    var candidates = [tag];
+                    if (parts.length > 2) candidates.push(parts[0] + '-' + parts[parts.length - 1]);
+                    candidates.push(parts[0]);
+
+                    for (var j = 0; j < candidates.length; j++) {
+                        if (locales[candidates[j]]) return locales[candidates[j]];
+                    }
+                }
+                return locales.en || {};
+            })();
+
+            var t = function (key) {
+                var fallback = (window.I18N && window.I18N.en) || {};
+                return dict[key] || fallback[key] || '';
+            };
+
+            document.documentElement.lang = params.get('lang') || navigator.language || 'en';
+
+            var nodes = document.querySelectorAll('[data-i18n]');
+            for (var i = 0; i < nodes.length; i++) {
+                nodes[i].textContent = t(nodes[i].getAttribute('data-i18n'));
+            }
+
+            var code = (params.get(PARAM) || '').trim().toUpperCase();
+
+            // The app encodes an IPv4 address as 8 characters of a fixed alphabet.
+            if (!/^[A-Z0-9]{8}$/.test(code)) {
+                document.getElementById('landing').hidden = false;
+                return;
+            }
+
+            var target = DEEPLINK + encodeURIComponent(code);
+
+            document.getElementById('join-code').textContent = code.replace(/(.{2})(?=.)/g, '$1 ');
+            document.getElementById('join-link').href = target;
+
+            var hint = document.getElementById('join-hint');
+            var parts = t('hint').split('{menu}');
+            hint.appendChild(document.createTextNode(parts[0]));
+            if (parts.length > 1) {
+                var menu = document.createElement('strong');
+                menu.textContent = t('menuPath');
+                hint.appendChild(menu);
+                hint.appendChild(document.createTextNode(parts[1]));
+            }
+
+            document.getElementById('join').hidden = false;
+
+            // Auto-open the app. Safari/Chrome show a confirmation prompt; if the app is not
+            // installed the navigation silently fails and the manual button stays available.
+            window.setTimeout(function () {
+                window.location.href = target;
+            }, 250);
+        })();
+    </script>
+</body>
+</html>

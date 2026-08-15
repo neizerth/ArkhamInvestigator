@@ -14,12 +14,16 @@ export const getHostIPFromInviteCode = (
 	const chunks = cleanCode.match(/.{1,2}/g);
 	if (!chunks || chunks.length !== 4) return undefined;
 
-	return chunks
-		.map((pair) => {
-			const first = charToIndex[pair[0]];
-			const second = charToIndex[pair[1]];
+	const octets: string[] = [];
 
-			return (first * 16 + second).toString();
-		})
-		.join(".");
+	for (const pair of chunks) {
+		const first = charToIndex[pair[0]];
+		const second = charToIndex[pair[1]];
+
+		if (first === undefined || second === undefined) return undefined;
+
+		octets.push((first * 16 + second).toString());
+	}
+
+	return octets.join(".");
 };

@@ -1,10 +1,15 @@
 import { deeplinkRoutes } from "@modules/core/link/shared/config";
 import { deeplinkChanged } from "@modules/core/link/shared/lib";
 import { setNetworkRole } from "@modules/core/network/shared/lib";
-import { goToPage } from "@modules/core/router/shared/lib";
+import {
+	createPageVisitFilter,
+	goToPage,
+} from "@modules/core/router/shared/lib";
 import { setHostInviteCode } from "@modules/multiplayer/entities/lib/store/features/setHostInviteCode";
 import { routes } from "@shared/config";
-import { put, takeEvery } from "redux-saga/effects";
+import { delay, put, race, take, takeEvery } from "redux-saga/effects";
+
+const NAVIGATION_TIMEOUT_MS = 5000;
 
 function* worker({ payload }: ReturnType<typeof deeplinkChanged>) {
 	const { pathname, query } = payload;
@@ -17,6 +22,13 @@ function* worker({ payload }: ReturnType<typeof deeplinkChanged>) {
 
 	yield put(setNetworkRole("client"));
 	yield put(goToPage(routes.startMultiplayer));
+
+	/** Navigation is async: the multiplayer route resets the host IP on arrival, so applying
+	 * the invite code before that lands would immediately wipe the connection we just started. */
+	yield race({
+		visited: take(createPageVisitFilter(routes.startMultiplayer)),
+		timeout: delay(NAVIGATION_TIMEOUT_MS),
+	});
 
 	yield put(setHostInviteCode(invite));
 }

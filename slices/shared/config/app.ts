@@ -16,6 +16,9 @@ export const GOOGLE_PLAY_DOWNLOAD_URL = process.env
 export const APP_STORE_DOWNLOAD_URL = process.env
 	.EXPO_PUBLIC_APP_STORE_URL as string;
 
+/** GitHub Pages site that bridges shareable https links into `inv://` deeplinks. */
+export const SITE_URL = process.env.EXPO_PUBLIC_SITE_URL as string;
+
 export const APP_DOWNLOAD_URL =
 	Platform.OS === "android" ? GOOGLE_PLAY_DOWNLOAD_URL : APP_STORE_DOWNLOAD_URL;
 

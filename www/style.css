@@ -1,0 +1,235 @@
+:root {
+	--background: #171e26;
+	--surface: #24303c;
+	--surface-hover: #475259;
+	--border: #475259;
+	--text: #fffbf2;
+	--text-strong: #e6e1d3;
+	--text-heading: #d7d3c6;
+	--text-muted: #b0b4b1;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+		Ubuntu, Cantarell, sans-serif;
+	background-color: var(--background);
+	color: var(--text);
+	line-height: 1.6;
+	padding: 20px;
+}
+
+.container {
+	max-width: 640px;
+	margin: 0 auto;
+	padding: 40px 20px;
+	text-align: center;
+}
+
+h1 {
+	color: var(--text-heading);
+	font-size: 2.2em;
+	margin-bottom: 10px;
+}
+
+.subtitle {
+	color: var(--text-muted);
+	margin-bottom: 30px;
+}
+
+.card {
+	background-color: var(--surface);
+	padding: 24px 20px;
+	border-radius: 8px;
+	margin-bottom: 20px;
+}
+
+.code {
+	font-size: 2em;
+	letter-spacing: 0.15em;
+	font-weight: 600;
+	color: var(--text-strong);
+	margin: 10px 0 20px;
+}
+
+.button {
+	display: inline-block;
+	background-color: var(--surface-hover);
+	color: var(--text);
+	text-decoration: none;
+	padding: 14px 28px;
+	border-radius: 8px;
+	font-size: 1.1em;
+	font-weight: 600;
+	border: 2px solid var(--text-heading);
+}
+
+.button:hover {
+	background-color: var(--text-heading);
+	color: var(--background);
+}
+
+.hint {
+	color: var(--text-muted);
+	font-size: 0.9em;
+	margin-top: 16px;
+}
+
+.stores {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+	gap: 16px;
+	margin-top: 16px;
+}
+
+.stores a {
+	background-color: var(--surface);
+	color: var(--text);
+	text-decoration: none;
+	padding: 16px;
+	border-radius: 8px;
+	border: 2px solid transparent;
+}
+
+.stores a:hover {
+	border-color: var(--text-heading);
+}
+
+footer {
+	margin-top: 50px;
+	padding-top: 20px;
+	border-top: 2px solid var(--border);
+	color: var(--text-muted);
+	font-size: 0.9em;
+}
+
+footer a {
+	color: var(--text-heading);
+}
+
+[hidden] {
+	display: none !important;
+}
+
+/* Text-heavy pages (contact) — wider column, left-aligned body copy. */
+.container.wide {
+	max-width: 800px;
+	text-align: left;
+}
+
+.container.wide h1,
+.container.wide footer {
+	text-align: center;
+}
+
+h2 {
+	color: var(--text-strong);
+	font-size: 1.8em;
+	margin-top: 40px;
+	margin-bottom: 20px;
+	border-bottom: 2px solid var(--border);
+	padding-bottom: 10px;
+}
+
+.intro {
+	background-color: var(--surface);
+	padding: 20px;
+	border-radius: 8px;
+	margin-bottom: 30px;
+}
+
+.contact-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+	gap: 20px;
+	margin-top: 30px;
+}
+
+.contact-card {
+	background-color: var(--surface);
+	padding: 20px;
+	border-radius: 8px;
+	transition: all 0.3s ease;
+	border: 2px solid transparent;
+}
+
+.contact-card:hover {
+	background-color: var(--surface-hover);
+	border-color: var(--text-heading);
+	transform: translateY(-2px);
+}
+
+.contact-card a {
+	color: var(--text);
+	text-decoration: none;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 10px;
+}
+
+.contact-title {
+	font-size: 1.2em;
+	font-weight: 600;
+	color: var(--text-strong);
+}
+
+.contact-url {
+	font-size: 0.9em;
+	color: var(--text-heading);
+	word-break: break-all;
+	text-align: center;
+}
+
+.icon {
+	width: 48px;
+	height: 48px;
+	background-color: var(--surface);
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 24px;
+}
+
+.faq {
+	background-color: var(--surface);
+	padding: 20px;
+	border-radius: 8px;
+	margin-top: 30px;
+}
+
+.faq-item {
+	margin-bottom: 20px;
+}
+
+.faq-question {
+	font-weight: 600;
+	color: var(--text-strong);
+	margin-bottom: 8px;
+}
+
+.faq-answer {
+	color: var(--text-heading);
+	padding-left: 20px;
+}
+
+@media (max-width: 600px) {
+	h1 {
+		font-size: 1.8em;
+	}
+
+	h2 {
+		font-size: 1.5em;
+	}
+
+	.stores,
+	.contact-grid {
+		grid-template-columns: 1fr;
+	}
+}

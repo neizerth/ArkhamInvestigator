@@ -6,8 +6,8 @@ import {
 } from "@modules/core/network/shared/lib";
 import { selectAllNetworkClients } from "@modules/core/network/shared/lib/store/networkClient";
 import {
-	getHostDeeplink,
 	getHostInviteCode,
+	getHostShareLink,
 } from "@modules/multiplayer/entities/lib";
 import { startMultiplayerGame } from "@modules/multiplayer/entities/lib/store/features/startMultiplayerGame";
 import { useAppDispatch, useAppSelector } from "@shared/lib";
@@ -38,7 +38,7 @@ export const NewGameHostView = (props: NewGameHostViewProps) => {
 const Container = ({ ip, ...props }: ViewProps & { ip: string }) => {
 	const { t } = useTranslation();
 	const dispatch = useAppDispatch();
-	const url = useMemo(() => getHostDeeplink(ip), [ip]);
+	const url = useMemo(() => getHostShareLink(ip), [ip]);
 	const code = useMemo(() => getHostInviteCode(ip), [ip]);
 	const nickname = useAppSelector(selectNickname);
 	const clients = useAppSelector(selectAllNetworkClients);

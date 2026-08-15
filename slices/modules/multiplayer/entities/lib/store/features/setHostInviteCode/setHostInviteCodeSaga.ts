@@ -5,9 +5,11 @@ import {
 } from "@modules/core/network/shared/lib";
 import { sendNotification } from "@modules/core/notifications/shared/lib";
 import { setGameStatus } from "@modules/game/shared/lib";
-import { put, race, take, takeEvery } from "redux-saga/effects";
+import { delay, put, race, take, takeEvery } from "redux-saga/effects";
 import { getHostIPFromInviteCode } from "../../../logic";
 import { setHostInviteCode } from "./setHostInviteCode";
+
+const CONNECT_TIMEOUT_MS = 10000;
 
 function* worker({ payload }: ReturnType<typeof setHostInviteCode>) {
 	const ip = getHostIPFromInviteCode(payload);
@@ -22,20 +24,27 @@ function* worker({ payload }: ReturnType<typeof setHostInviteCode>) {
 	}
 
 	yield put(setGameStatus("initial"));
-	console.log("code ip", ip);
 
-	const { error }: { error?: ReturnType<typeof tcpClientSocketError> } =
-		yield race({
-			task: take(tcpClientSocketConnected),
-			error: take(tcpClientSocketError),
-		});
+	/** `setHostIP` is what actually starts the TCP client — it must be dispatched
+	 * before we wait for the connection result, otherwise the race never settles. */
+	yield put(setHostIP(ip));
 
-	if (!error) {
-		yield put(setHostIP(ip));
+	const {
+		error,
+		timeout,
+	}: {
+		error?: ReturnType<typeof tcpClientSocketError>;
+		timeout?: true;
+	} = yield race({
+		task: take(tcpClientSocketConnected),
+		error: take(tcpClientSocketError),
+		timeout: delay(CONNECT_TIMEOUT_MS, true),
+	});
+
+	if (!error && !timeout) {
 		return;
 	}
 
-	console.log("error connecting to host", error);
 	yield put(setHostIP(null));
 
 	yield put(
@@ -44,7 +53,6 @@ function* worker({ payload }: ReturnType<typeof setHostInviteCode>) {
 			type: "error",
 		}),
 	);
-	return;
 }
 
 export function* setHostInviteCodeSaga() {
