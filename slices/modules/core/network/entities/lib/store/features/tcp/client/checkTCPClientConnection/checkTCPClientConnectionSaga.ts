@@ -1,41 +1,22 @@
 import { log } from "@modules/core/log/shared/config";
 import {
 	getTCPServerSocket,
+	selectClientReconnectAllowed,
 	selectClientRunning,
-	selectHostIP,
-	selectNetworkRole,
 	sendNetworkKeepAlive,
 } from "@modules/core/network/shared/lib";
-import { selectCurrentRoute } from "@modules/core/router/shared/lib";
-import { selectGameStatus } from "@modules/game/shared/lib";
-import { routes } from "@shared/config";
 import { put, select, takeEvery } from "redux-saga/effects";
 import { restartTCPClient } from "../restartTCPClient";
 import { checkTCPClientConnection } from "./checkTCPClientConnection";
 
 function* worker() {
-	const currentRoute: ReturnType<typeof selectCurrentRoute> =
-		yield select(selectCurrentRoute);
-	if (currentRoute === routes.home) {
+	const allowed: ReturnType<typeof selectClientReconnectAllowed> = yield select(
+		selectClientReconnectAllowed,
+	);
+	if (!allowed) {
 		return;
 	}
 
-	const networkRole: ReturnType<typeof selectNetworkRole> =
-		yield select(selectNetworkRole);
-	if (networkRole !== "client") {
-		return;
-	}
-
-	const hostIP: ReturnType<typeof selectHostIP> = yield select(selectHostIP);
-	if (!hostIP) {
-		return;
-	}
-
-	const gameStatus: ReturnType<typeof selectGameStatus> =
-		yield select(selectGameStatus);
-	if (gameStatus === "initial") {
-		return;
-	}
 	const running: ReturnType<typeof selectClientRunning> =
 		yield select(selectClientRunning);
 

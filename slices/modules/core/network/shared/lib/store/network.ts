@@ -20,8 +20,16 @@ export type NetworkState = {
 	hotspotEnabled?: boolean;
 };
 
+/**
+ * Placeholder until `initDeviceNetworkIdSaga` assigns a real uuid on first launch. Kept as a
+ * recognizable constant (rather than an empty string) because installs from before that saga
+ * persisted this exact value and must be re-initialized too.
+ */
+export const UNINITIALIZED_DEVICE_NETWORK_ID =
+	"00000000-0000-0000-0000-000000000000";
+
 const initialState: NetworkState = {
-	deviceNetworkId: "00000000-0000-0000-0000-000000000000",
+	deviceNetworkId: UNINITIALIZED_DEVICE_NETWORK_ID,
 	hostRunning: false,
 	clientRunning: false,
 	networkType: "none",

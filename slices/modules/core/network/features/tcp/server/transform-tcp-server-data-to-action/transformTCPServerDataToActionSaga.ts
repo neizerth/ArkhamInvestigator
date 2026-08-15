@@ -1,5 +1,6 @@
 import { sendTCPActionToClient } from "@modules/core/network/entities/lib/store/features/tcp/server/sendTCPActionToClient/sendTCPActionToClient";
 import {
+	createMessageIdCache,
 	createRemoteAction,
 	createTCPIncomeAction,
 	isTCPIncomeAction,
@@ -8,6 +9,8 @@ import {
 	tcpServerSocketDataReceived,
 } from "@modules/core/network/shared/lib";
 import { put, takeEvery } from "redux-saga/effects";
+
+const appliedMessages = createMessageIdCache();
 
 function* worker({ payload }: ReturnType<typeof tcpServerSocketDataReceived>) {
 	const { data, socket } = payload;
@@ -25,28 +28,41 @@ function* worker({ payload }: ReturnType<typeof tcpServerSocketDataReceived>) {
 			tcpAction.meta.messageId,
 		);
 
-		const { networkId } = tcpAction.meta;
+		const { networkId, messageId } = tcpAction.meta;
 
 		setTCPClientSocket(networkId, socket);
 
 		const action = createTCPIncomeAction(tcpAction, socket);
 
-		yield put(action);
-
 		// Do not send confirmation for tcpActionReceived itself — otherwise loop and deadlock
-		if (tcpActionReceived.match(tcpAction)) {
+		const isAck = tcpActionReceived.match(tcpAction);
+
+		// A retransmission (our ACK was lost): confirm again, but never apply twice.
+		const duplicate = !isAck && appliedMessages.check(messageId);
+
+		if (!duplicate) {
+			yield put(action);
+		}
+
+		if (isAck) {
 			return;
 		}
 
-		const { messageId } = tcpAction.meta;
-
+		// Confirmation goes back to the sender's socket only — `targetNetworkId` rides in the meta,
+		// which is what `sendRemoteTCPActionSaga` routes on.
 		yield put(
-			tcpActionReceived({
-				messageId,
-				type: action.type,
-				targetNetworkId: networkId,
-			}),
+			createRemoteAction(
+				tcpActionReceived({
+					messageId,
+					type: action.type,
+				}),
+				{ targetNetworkId: networkId },
+			),
 		);
+
+		if (duplicate) {
+			return;
+		}
 
 		// forward action to all clients except the one that sent it
 		if (tcpAction.meta.notify === "all") {

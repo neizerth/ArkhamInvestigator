@@ -58,9 +58,11 @@ function* singleSocketWorker(
 		return;
 	}
 
-	for (let attempt = 0; attempt < TCP_CONFIRMATION_MAX_RETRIES; attempt++) {
-		const messageId = v4();
+	// One id per logical message, reused across retries: the receiver deduplicates by it, so a
+	// retransmission after a lost ACK is confirmed without applying the action twice.
+	const messageId = v4();
 
+	for (let attempt = 0; attempt < TCP_CONFIRMATION_MAX_RETRIES; attempt++) {
 		yield put(
 			sendTCPAction({
 				action,

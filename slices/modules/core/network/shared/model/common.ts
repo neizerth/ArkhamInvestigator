@@ -33,6 +33,8 @@ export type NetworkOutcomeActionMeta = {
 	remote: true;
 	/** ISO string of the sent time (added at serialization) */
 	sentAt?: string;
+	/** Host only: deliver to this client's socket instead of broadcasting (see `notify: "reciever"`). */
+	targetNetworkId?: string;
 };
 
 export type RemoteActionReturnType<T extends GenericFunction> =

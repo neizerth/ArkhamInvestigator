@@ -56,14 +56,16 @@ function* worker(actionArg: Action): Generator {
 		return;
 	}
 
+	// One id per logical message, reused across retries: the receiver deduplicates by it, so a
+	// retransmission after a lost ACK is confirmed without applying the action twice.
+	const messageId = v4();
+
 	for (let attempt = 0; attempt < TCP_CONFIRMATION_MAX_RETRIES; attempt++) {
 		const s = getTCPServerSocket();
 		if (!s || s.destroyed) {
 			log.error("TCPServerSocket not available. Skipping action...");
 			return;
 		}
-
-		const messageId = v4();
 
 		log.info("client: sending action", payload.action.type, messageId);
 		yield put(

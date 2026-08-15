@@ -1,4 +1,5 @@
 import {
+	createMessageIdCache,
 	createTCPIncomeAction,
 	getTCPServerSocket,
 	isTCPIncomeAction,
@@ -6,6 +7,8 @@ import {
 	tcpClientSocketDataReceived,
 } from "@modules/core/network/shared/lib";
 import { put, takeEvery } from "redux-saga/effects";
+
+const appliedMessages = createMessageIdCache();
 
 function* worker({ payload }: ReturnType<typeof tcpClientSocketDataReceived>) {
 	const { data } = payload;
@@ -28,15 +31,21 @@ function* worker({ payload }: ReturnType<typeof tcpClientSocketDataReceived>) {
 			tcpAction.meta.messageId,
 		);
 
+		const { messageId } = tcpAction.meta;
 		const action = createTCPIncomeAction(tcpAction, socket);
 
-		yield put(action);
+		const isAck = tcpActionReceived.match(action);
 
-		if (tcpActionReceived.match(action)) {
-			return;
+		// A retransmission (our ACK was lost): confirm again, but never apply twice.
+		const duplicate = !isAck && appliedMessages.check(messageId);
+
+		if (!duplicate) {
+			yield put(action);
 		}
 
-		const { messageId } = tcpAction.meta;
+		if (isAck) {
+			return;
+		}
 
 		yield put(
 			tcpActionReceived({

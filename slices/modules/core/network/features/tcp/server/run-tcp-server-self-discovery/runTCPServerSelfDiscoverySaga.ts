@@ -1,11 +1,12 @@
 import { requestAndroidPermission } from "@modules/core/device/shared/lib/logic";
 import { log } from "@modules/core/log/shared/config";
+import { TCP_SERVER_NAME } from "@modules/core/network/shared/config";
 import {
-	TCP_SERVER_NAME,
-	TCP_SERVICE_NAME,
-} from "@modules/core/network/shared/config";
-import {
+	acquireZeroconfScan,
+	getZeroconfServices,
+	releaseZeroconfScan,
 	restartTCPServer,
+	restartZeroconfScan,
 	selectHotspotEnabled,
 	selectIP,
 	selectNetworkConnected,
@@ -22,7 +23,7 @@ import {
 import { createPageVisitFilter } from "@modules/core/router/shared/lib";
 import { routes } from "@shared/config";
 import type { ReturnAwaited } from "@shared/model";
-import Zeroconf, { type Service } from "react-native-zeroconf";
+import type { Service } from "react-native-zeroconf";
 import {
 	call,
 	delay,
@@ -77,8 +78,7 @@ function* worker() {
 		? [nicknameTrimmed, TCP_SERVER_NAME]
 		: [TCP_SERVER_NAME];
 
-	let zeroconf = new Zeroconf();
-	zeroconf.scan(TCP_SERVICE_NAME);
+	acquireZeroconfScan();
 	let lastSeenAt = Date.now();
 	let restarting = false;
 	let lastRestartAt = 0;
@@ -115,8 +115,7 @@ function* worker() {
 				continue;
 			}
 
-			const services = zeroconf.getServices();
-			const self: Service | undefined = Object.values(services).find(
+			const self: Service | undefined = getZeroconfServices().find(
 				(s) =>
 					expectedNames.includes(s.name) &&
 					s.addresses &&
@@ -175,9 +174,7 @@ function* worker() {
 				yield put(setHotspotEnabled(false));
 			}
 
-			zeroconf.stop();
-			zeroconf = new Zeroconf();
-			zeroconf.scan(TCP_SERVICE_NAME);
+			restartZeroconfScan();
 
 			// Avoid restart loops (hotspot can be disabled and NetInfo won't emit changes).
 			// Also avoid overlapping restarts, which can lead to EADDRINUSE.
@@ -205,7 +202,7 @@ function* worker() {
 			restarting = false;
 		}
 	} finally {
-		zeroconf.stop();
+		releaseZeroconfScan();
 	}
 }
 

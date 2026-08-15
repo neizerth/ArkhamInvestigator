@@ -1,9 +1,12 @@
 import { useAppSelector } from "@shared/lib";
 import { ascend, descend, prop, sortWith, uniqBy } from "ramda";
 import { useEffect, useState } from "react";
-import Zeroconf from "react-native-zeroconf";
-import { TCP_SERVICE_NAME } from "../../config";
 import type { ZeroconfService } from "../../model";
+import {
+	acquireZeroconfScan,
+	getZeroconfServices,
+	releaseZeroconfScan,
+} from "../logic/zeroconf";
 import { selectDeviceNetworkId, selectNetworkDiscoveryEnabled } from "../store";
 
 export const useTCPServices = (intervalMs = 1000) => {
@@ -15,12 +18,10 @@ export const useTCPServices = (intervalMs = 1000) => {
 		if (!networkDiscoveryEnabled) {
 			return;
 		}
-		const zeroconf = new Zeroconf();
-		zeroconf.scan(TCP_SERVICE_NAME);
+		acquireZeroconfScan();
 
 		const work = () => {
-			const zeroconfServices = zeroconf.getServices();
-			const serviceList: ZeroconfService[] = Object.values(zeroconfServices)
+			const serviceList: ZeroconfService[] = getZeroconfServices()
 				.filter(
 					(service) =>
 						service.addresses &&
@@ -49,7 +50,7 @@ export const useTCPServices = (intervalMs = 1000) => {
 		work();
 
 		return () => {
-			zeroconf.stop();
+			releaseZeroconfScan();
 			clearInterval(interval);
 		};
 	}, [intervalMs, networkDiscoveryEnabled, networkId]);

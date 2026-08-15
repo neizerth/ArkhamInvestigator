@@ -4,8 +4,6 @@ import { withRemoteMeta } from "../../../logic";
 export type TcpActionReceivedPayload = {
 	messageId: string;
 	type: string;
-	/** Маршрутизация подтверждения на сокет отправителя (сервер → клиент). */
-	targetNetworkId?: string;
 };
 
 export const tcpActionReceived = createAction(

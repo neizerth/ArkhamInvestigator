@@ -67,7 +67,6 @@ function* actionWorker(
 		return;
 	}
 
-	const actionCreator = isHost ? sendTCPActionToClient : sendTCPActionToServer;
 	log.info("Sending action to", action.type);
 
 	const remoteAction = {
@@ -75,11 +74,25 @@ function* actionWorker(
 		meta: omit(["socket"], meta),
 	};
 
-	yield put(
-		actionCreator({
-			action: remoteAction,
-		}),
-	);
+	if (!isHost) {
+		yield put(sendTCPActionToServer({ action: remoteAction }));
+		return;
+	}
+
+	// Replies (`notify: "reciever"`, e.g. delivery confirmations) belong to one client only —
+	// without the target the payload used to fan out to every connected socket.
+	if (meta.targetNetworkId) {
+		yield put(
+			sendTCPActionToClient({
+				action: remoteAction,
+				type: "single",
+				networkId: meta.targetNetworkId,
+			}),
+		);
+		return;
+	}
+
+	yield put(sendTCPActionToClient({ action: remoteAction }));
 }
 
 function* remoteActionWorker({

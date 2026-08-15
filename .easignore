@@ -44,3 +44,4 @@ app-example
 /tmp
 
 !android/**/*.pem
+audit/
