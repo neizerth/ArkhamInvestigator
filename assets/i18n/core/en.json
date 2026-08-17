@@ -358,6 +358,7 @@
 	"disk.notEnoughSpace.text": "The application requires {{required}} of free space",
 
 	"navigation.animation": "Navigation animation",
+	"navigation.mode": "Navigation",
 
 	"update.notNeeded": "The application is up to date",
 	"update.updated": "The application has been updated to version {{version}}",

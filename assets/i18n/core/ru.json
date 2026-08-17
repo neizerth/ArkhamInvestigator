@@ -396,6 +396,7 @@
 	"update.failed": "Обновление приложения не удалось: {{error}}",
 
 	"navigation.animation": "Анимация экранов",
+	"navigation.mode": "Навигация",
 
 	"clipboard.successCopy": "Текст успешно скопирован",
 	"clipboard.errorCopy": "Не удалось скопировать текст",
