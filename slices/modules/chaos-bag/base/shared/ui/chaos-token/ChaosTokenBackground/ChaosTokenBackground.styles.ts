@@ -39,6 +39,10 @@ const gradients: Partial<Record<ChaosTokenType, ChaosTokenGradient>> = {
 		{ offset: "25%", color: "#362330" },
 		{ offset: "100%", color: "#3B224A" },
 	],
+	blood: [
+		{ offset: "75%", color: "#343433" },
+		{ offset: "100%", color: "#1C1D1C" },
+	],
 };
 
 export const getChaosTokenGradient = (type: ChaosTokenType, dark = false) => {

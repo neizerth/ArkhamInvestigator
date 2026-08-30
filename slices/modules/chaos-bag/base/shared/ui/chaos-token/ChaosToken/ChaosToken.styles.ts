@@ -123,11 +123,18 @@ const moonParts: Parts = [
 	{ type: "highlight", icon: "token_moon_fill", color: "#FFFBF2" },
 ];
 
+const bloodParts: Parts = [
+	{ type: "fill", icon: "token_blood_fill", color: "#C22026" },
+	{ type: "overlay", icon: "token_blood_overlay", color: "#353534" },
+	{ type: "highlight", icon: "token_blood_highlight", color: "#353534" },
+];
+
 const specialParts = {
 	autoFail: autoFailParts,
 	elderSign: elderSignParts,
 	frost: frostParts,
 	moon: moonParts,
+	blood: bloodParts,
 };
 
 export const getChaosTokenParts = (options: Options) => {

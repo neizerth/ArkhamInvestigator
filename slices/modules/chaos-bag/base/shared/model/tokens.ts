@@ -39,13 +39,18 @@ export type BaseSymbolicChaosTokenType =
 
 export type SpecialSymbolicChaosTokenType = "elderSign" | "autoFail";
 
-export type SpecialChaosTokenType = BlessCurseChaosTokenType | FrostTokenType;
+export type SpecialChaosTokenType =
+	| BlessCurseChaosTokenType
+	| FrostTokenType
+	| BloodChaosTokenType;
 
 export type FrostTokenType = "frost";
 
 export type BlessCurseChaosTokenType = "bless" | "curse";
 
 export type MoonChaosTokenType = "moon";
+
+export type BloodChaosTokenType = "blood";
 
 export type ChaosTokenCount = Partial<Record<ChaosTokenType, number>>;
 
