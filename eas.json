@@ -11,14 +11,28 @@
 		"preview": {
 			"distribution": "internal"
 		},
-		"production": {},
-		"apk": {
+		"production": {
+			"env": {
+				"EXPO_PUBLIC_ANDROID_STORE": "google-play"
+			},
+			"ios": {
+				"credentialsSource": "remote"
+			}
+		},
+		"rustore": {
+			"env": {
+				"EXPO_PUBLIC_ANDROID_STORE": "rustore"
+			},
 			"android": {
 				"buildType": "apk"
 			}
 		}
 	},
 	"submit": {
-		"production": {}
+		"production": {
+			"ios": {
+				"ascAppId": "6753330970"
+			}
+		}
 	}
 }

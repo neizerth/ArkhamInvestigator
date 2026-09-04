@@ -22,4 +22,5 @@ export const chaosTokenCount: Partial<Record<ChaosTokenType, number>> = {
 	bless: 10,
 	curse: 10,
 	moon: 6,
+	blood: 12,
 };

@@ -36,6 +36,7 @@ __.*.SYMDEF
 
 # local env files
 .env*.local
+secrets/
 
 # typescript
 *.tsbuildinfo
