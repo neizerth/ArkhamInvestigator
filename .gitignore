@@ -6,6 +6,9 @@ node_modules/
 # Cursor
 .cursor/
 
+# VS Code / Cursor local settings
+.vscode/settings.json
+
 # Expo
 .expo/
 dist/
