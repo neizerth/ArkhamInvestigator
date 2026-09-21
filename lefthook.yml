@@ -7,8 +7,12 @@ pre-commit:
       run: npm run lint
     types:
       files: git diff --name-only @{push}
-      glob: "*.{js,ts, jsx, tsx}"
+      glob: "*.{js,ts,jsx,tsx}"
       run: npm run ts:check
+    # unit + integration tests touched by the commit; e2e runs separately
+    test:
+      glob: "*.{js,ts,jsx,tsx}"
+      run: npm test -- --bail --passWithNoTests --findRelatedTests {staged_files}
 commit-msg:
   parallel: true
   commands:
