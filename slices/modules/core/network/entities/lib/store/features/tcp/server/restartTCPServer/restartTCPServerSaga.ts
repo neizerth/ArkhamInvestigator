@@ -1,3 +1,4 @@
+import { tcpLog } from "@modules/core/log/shared/config";
 import {
 	removeAllNetworkClients,
 	restartTCPServer,
@@ -6,7 +7,6 @@ import {
 	stopTCPServer,
 	tcpServerClosed,
 } from "@modules/core/network/shared/lib";
-import { log } from "@shared/config/logger";
 import {
 	delay,
 	put,
@@ -25,7 +25,7 @@ function* worker() {
 	}
 
 	yield put(stopTCPServer());
-	log.info("restartTCPServer: stopped tcp server");
+	tcpLog.info("restartTCPServer: stopped tcp server");
 	const { closed }: { closed?: ReturnType<typeof tcpServerClosed> } =
 		yield race({
 			closed: take(tcpServerClosed.match),
@@ -35,15 +35,15 @@ function* worker() {
 	// If the port is still held (common during Fast Refresh / network transitions),
 	// starting a new server will fail with EADDRINUSE. Skip restart until we see `tcpServerClosed`.
 	if (!closed) {
-		log.info("restartTCPServer: port still held, skipping restart");
+		tcpLog.info("restartTCPServer: port still held, skipping restart");
 		return;
 	}
 
-	log.info("restartTCPServer: port released, restarting server");
+	tcpLog.info("restartTCPServer: port released, restarting server");
 	yield put(removeAllNetworkClients());
 	yield delay(150);
 	yield put(startTCPServer());
-	log.info("restartTCPServer: started new server");
+	tcpLog.info("restartTCPServer: started new server");
 }
 
 export function* restartTCPServerSaga() {

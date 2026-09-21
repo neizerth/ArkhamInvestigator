@@ -1,4 +1,4 @@
-import { log } from "@modules/core/log/shared/config";
+import { tcpLog } from "@modules/core/log/shared/config";
 import { sendTCPActionToClient } from "@modules/core/network/entities/lib/store/features/tcp/server/sendTCPActionToClient";
 import {
 	connectNetworkClient,
@@ -22,12 +22,12 @@ function* worker({
 	const { nickname, hostIP } = payload;
 	const { networkId, socket } = meta;
 
-	log.info("connecting TCP client", payload);
+	tcpLog.info("connecting TCP client", payload);
 
 	const ip: ReturnType<typeof selectIP> = yield select(selectIP);
 
 	if (!ip) {
-		log.info("setting IP from hostIP", hostIP);
+		tcpLog.info("setting IP from hostIP", hostIP);
 		yield put(setIP(hostIP));
 	}
 

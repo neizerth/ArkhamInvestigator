@@ -1,4 +1,4 @@
-import { log } from "@modules/core/log/shared/config";
+import { tcpLog } from "@modules/core/log/shared/config";
 import { seconds } from "@shared/lib";
 import TcpSocket from "react-native-tcp-socket";
 import { TCP_PORT } from "../../../config";
@@ -46,7 +46,7 @@ export function checkTcpHostReachable(host: string): Promise<boolean> {
 		});
 		socket.once("error", (err: unknown) => {
 			const message = err instanceof Error ? err.message : String(err);
-			log.warn("tcp host reachability failed", {
+			tcpLog.warn("tcp host reachability failed", {
 				host,
 				port: TCP_PORT,
 				message,

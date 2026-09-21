@@ -1,4 +1,4 @@
-import { log } from "@modules/core/log/shared/config";
+import { tcpLog } from "@modules/core/log/shared/config";
 import {
 	getTCPServerSocket,
 	selectClientReconnectAllowed,
@@ -25,14 +25,14 @@ function* worker() {
 		if (socket && !socket.destroyed) {
 			return;
 		}
-		log.info("Client not running, restarting");
+		tcpLog.info("Client not running, restarting");
 		yield put(restartTCPClient());
 		return;
 	}
 
 	const socket = getTCPServerSocket();
 	if (!socket || socket.destroyed) {
-		log.info("Client socket dead (e.g. after HMR), reconnecting");
+		tcpLog.info("Client socket dead (e.g. after HMR), reconnecting");
 		yield put(restartTCPClient());
 		return;
 	}

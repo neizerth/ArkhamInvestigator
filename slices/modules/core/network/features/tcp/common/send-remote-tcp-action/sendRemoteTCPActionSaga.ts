@@ -1,4 +1,4 @@
-import { log } from "@modules/core/log/shared/config";
+import { tcpLog } from "@modules/core/log/shared/config";
 import { sendTCPActionToServer } from "@modules/core/network/entities/lib/store/features/tcp/client/sendTCPActionToServer";
 import { sendTCPActionToClient } from "@modules/core/network/entities/lib/store/features/tcp/server/sendTCPActionToClient";
 import {
@@ -41,7 +41,7 @@ function* actionWorker(
 	const { meta } = action;
 
 	if (meta.notify === "self") {
-		log.info("Self action received. Skipping...");
+		tcpLog.info("Self action received. Skipping...");
 		return;
 	}
 
@@ -51,23 +51,23 @@ function* actionWorker(
 	const hostIp: ReturnType<typeof selectHostIP> = yield select(selectHostIP);
 
 	if (!role) {
-		log.info("No network role found. Skipping...");
+		tcpLog.info("No network role found. Skipping...");
 		return;
 	}
 
 	const isHost = role === "host";
 
 	if (meta.notify === "host" && isHost) {
-		log.info("Host action received. Skipping...");
+		tcpLog.info("Host action received. Skipping...");
 		return;
 	}
 
 	if (!isHost && !hostIp) {
-		log.info("No host IP found. Skipping...");
+		tcpLog.info("No host IP found. Skipping...");
 		return;
 	}
 
-	log.info("Sending action to", action.type);
+	tcpLog.info("Sending action to", action.type);
 
 	const remoteAction = {
 		...action,

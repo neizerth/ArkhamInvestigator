@@ -1,4 +1,4 @@
-import { log } from "@modules/core/log/shared/config";
+import { tcpLog } from "@modules/core/log/shared/config";
 import {
 	checkTcpHostReachable,
 	setHostIP,
@@ -9,29 +9,32 @@ import { call, put, takeEvery } from "redux-saga/effects";
 import { setZeroconfService } from "./setZeroconfService";
 
 function* worker({ payload }: ReturnType<typeof setZeroconfService>) {
-	log.info("setting host ip from zeroconf service", payload);
+	tcpLog.info("setting host ip from zeroconf service", payload);
 	if (!payload.addresses?.length) {
-		log.info("no addresses found in zeroconf service");
+		tcpLog.info("no addresses found in zeroconf service");
 		return;
 	}
 
 	const addresses = payload.addresses.toReversed();
 
 	for (const ip of addresses) {
-		console.log("checking tcp host reachability", ip);
+		tcpLog.info("checking tcp host reachability", ip);
 		if (!ip) {
 			continue;
 		}
 		const reachable: boolean = yield call(checkTcpHostReachable, ip);
 		if (reachable) {
-			log.info("setting host ip from zeroconf service", ip);
+			tcpLog.info("setting host ip from zeroconf service", ip);
 			yield put(setGameStatus("initial"));
 			yield put(setHostIP(ip));
 			return;
 		}
 	}
 
-	log.info("no reachable tcp host among zeroconf addresses", payload.addresses);
+	tcpLog.info(
+		"no reachable tcp host among zeroconf addresses",
+		payload.addresses,
+	);
 	yield put(
 		sendNotification({
 			message: "network.hostUnreachable",

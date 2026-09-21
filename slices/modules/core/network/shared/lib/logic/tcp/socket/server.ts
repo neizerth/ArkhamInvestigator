@@ -1,3 +1,4 @@
+import { log, tcpLog } from "@modules/core/log/shared/config";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { getGlobalValue, setGlobalValue } from "@shared/lib/util";
 import type TcpSocket from "react-native-tcp-socket";
@@ -6,7 +7,7 @@ const GLOBAL_SERVER_KEY = "__tcpServerChannelServer" as const;
 export const tcpSocketMap: Map<string, TcpSocket.Socket> = new Map();
 
 export const clearTCPClientSockets = () => {
-	console.log("clearing tcp client sockets");
+	tcpLog.info("clearing tcp client sockets");
 	for (const socket of tcpSocketMap.values()) {
 		socket.destroy();
 	}
@@ -47,7 +48,7 @@ export const clearTCPClientSocketById = (networkId: string) => {
 	if (!socket) {
 		return;
 	}
-	console.log("clearing tcp client socket by id", networkId);
+	tcpLog.info("clearing tcp client socket by id", networkId);
 	socket.destroy();
 	tcpSocketMap.delete(networkId);
 };
@@ -67,7 +68,7 @@ export const dispatchTCPServerAction = <T>(
 ) => {
 	const socket = getTCPClientSocket(networkId);
 	if (!socket) {
-		console.error("TCPClientSocket not found");
+		log.error("TCPClientSocket not found");
 		return;
 	}
 
@@ -86,7 +87,7 @@ export const clearTCPServerInstance = () => {
 	if (!server) {
 		return;
 	}
-	console.log("clearing tcp server instance");
+	tcpLog.info("clearing tcp server instance");
 	server.close();
 	setTCPServerInstance(null);
 };

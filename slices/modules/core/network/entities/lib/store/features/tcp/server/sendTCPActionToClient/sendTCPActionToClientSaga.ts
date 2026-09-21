@@ -1,4 +1,4 @@
-import { log } from "@modules/core/log/shared/config";
+import { log, tcpLog } from "@modules/core/log/shared/config";
 import {
 	TCP_CLIENT_CONFIRMATION_ENABLED,
 	TCP_CONFIRMATION_MAX_RETRIES,
@@ -86,7 +86,7 @@ function* singleSocketWorker(
 			return;
 		}
 
-		log.info(
+		tcpLog.info(
 			"server: message timed out. Retrying...",
 			messageId,
 			action.type,
@@ -94,7 +94,7 @@ function* singleSocketWorker(
 		);
 
 		if (attempt === TCP_CONFIRMATION_MAX_RETRIES - 1) {
-			log.info("server: max retries reached, giving up", action.type);
+			tcpLog.info("server: max retries reached, giving up", action.type);
 			return;
 		}
 
@@ -109,7 +109,7 @@ function* worker(actionArg: Action): Generator {
 	// Fresh sockets (handles reconnects / destroyed sockets)
 	const sockets = getPayloadClientSockets(payload);
 
-	log.info("Sending action to clients", action.type, sockets.length);
+	tcpLog.info("Sending action to clients", action.type, sockets.length);
 
 	// Per-socket worker with own messageId: wait for every client's ACK (or give up after retries)
 	const tasks = sockets.map((socket) =>

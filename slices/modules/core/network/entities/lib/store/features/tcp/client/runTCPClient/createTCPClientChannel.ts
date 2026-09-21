@@ -1,4 +1,4 @@
-import { log } from "@modules/core/log/shared/config";
+import { log, tcpLog } from "@modules/core/log/shared/config";
 import { seconds } from "@shared/lib";
 import TcpSocket from "react-native-tcp-socket";
 import type { ConnectionOptions } from "react-native-tcp-socket/lib/types/Socket";
@@ -31,7 +31,7 @@ export const createTCPClientChannel = (host: string) => {
 	return eventChannel((emit) => {
 		clearTCPServerSocket();
 
-		console.log("tcp client: event channel created");
+		tcpLog.info("tcp client: event channel created");
 
 		const options: ConnectionOptions = {
 			host,
@@ -40,7 +40,7 @@ export const createTCPClientChannel = (host: string) => {
 		};
 
 		const socket = TcpSocket.createConnection(options, () => {
-			log.info(
+			tcpLog.info(
 				"tcp client: connecting to",
 				{ host, port: TCP_PORT },
 				"local",
@@ -53,7 +53,7 @@ export const createTCPClientChannel = (host: string) => {
 		let inboundBuffer = "";
 
 		socket.on("connect", () => {
-			log.info("tcp client: socket connected");
+			tcpLog.info("tcp client: socket connected");
 			emit(setClientRunning(true));
 			emit(tcpClientSocketConnected());
 		});
@@ -63,7 +63,7 @@ export const createTCPClientChannel = (host: string) => {
 			emit(tcpClientSocketError({ error }));
 		});
 		socket.on("close", () => {
-			log.warn("tcp client: disconnected from host");
+			tcpLog.warn("tcp client: disconnected from host");
 			if (getTCPServerSocket() !== socket) {
 				return;
 			}
@@ -87,7 +87,7 @@ export const createTCPClientChannel = (host: string) => {
 		});
 
 		return () => {
-			log.warn("tcp client: event channel closed");
+			tcpLog.warn("tcp client: event channel closed");
 			const wasActive = getTCPServerSocket() === socket;
 			try {
 				socket.destroy();

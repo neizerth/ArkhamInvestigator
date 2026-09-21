@@ -1,6 +1,6 @@
+import { tcpLog } from "@modules/core/log/shared/config";
 import { createPageVisitFilter } from "@modules/core/router/shared/lib";
 import { routes } from "@shared/config";
-import { log } from "@shared/config/logger";
 import { put, select, takeEvery, takeLeading } from "redux-saga/effects";
 import {
 	getTCPServerInstance,
@@ -16,10 +16,10 @@ import {
 function* worker(action: unknown) {
 	const networkRole: ReturnType<typeof selectNetworkRole> =
 		yield select(selectNetworkRole);
-	log.info("checking network role", networkRole);
+	tcpLog.info("checking network role", networkRole);
 
 	if (networkRole === "host") {
-		log.info("setting host ip to null");
+		tcpLog.info("setting host ip to null");
 		yield put(setHostIP(null));
 
 		const instanceExists = Boolean(getTCPServerInstance());
@@ -43,7 +43,7 @@ function* worker(action: unknown) {
 
 		if (instanceExists && hostRunning) {
 			// Host→client→host does a full stop/start; role-driven host entry may need a clean bind.
-			log.info(
+			tcpLog.info(
 				"tcp server already running — scheduling restart for clean listen/zeroconf",
 			);
 			yield put(restartTCPServer());

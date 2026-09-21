@@ -1,4 +1,4 @@
-import { log } from "@modules/core/log/shared/config";
+import { log, tcpLog } from "@modules/core/log/shared/config";
 import {
 	selectDeviceNetworkId,
 	tcpSocketWrite,
@@ -8,7 +8,7 @@ import { call, put, select, takeEvery } from "redux-saga/effects";
 import { sendTCPAction, sendTCPActionFailed } from "./sendTCPAction";
 
 function* worker({ payload }: ReturnType<typeof sendTCPAction>) {
-	log.info("Sending TCP action", payload.action.type);
+	tcpLog.info("Sending TCP action", payload.action.type);
 	const networkId: ReturnType<typeof selectDeviceNetworkId> = yield select(
 		selectDeviceNetworkId,
 	);

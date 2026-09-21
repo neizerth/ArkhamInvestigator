@@ -1,4 +1,4 @@
-import { log } from "@modules/core/log/shared/config";
+import { tcpLog } from "@modules/core/log/shared/config";
 import { restartTCPClient } from "@modules/core/network/entities/lib/store/features/tcp/client/restartTCPClient";
 import { sendTCPActionFailed } from "@modules/core/network/entities/lib/store/features/tcp/sendTCPAction/sendTCPAction";
 import {
@@ -31,7 +31,7 @@ function* worker({ payload }: ReturnType<typeof sendTCPActionFailed>) {
 		return;
 	}
 
-	log.warn(
+	tcpLog.warn(
 		"TCP send failed (client)",
 		payload.action.type,
 		getSendTCPActionFailedDetail(payload),
@@ -54,7 +54,7 @@ function* worker({ payload }: ReturnType<typeof sendTCPActionFailed>) {
 		return;
 	}
 
-	log.info("Restarting TCP client");
+	tcpLog.info("Restarting TCP client");
 
 	yield put(restartTCPClient());
 

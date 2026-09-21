@@ -1,3 +1,4 @@
+import { tcpLog } from "@modules/core/log/shared/config";
 import { put, takeEvery } from "redux-saga/effects";
 import { setNetworkRole, stopTCPClient } from "../../../../shared/lib";
 
@@ -5,7 +6,7 @@ function* worker({ payload }: ReturnType<typeof setNetworkRole>) {
 	if (payload === "client") {
 		return;
 	}
-	console.log("stopping tcp client");
+	tcpLog.info("stopping tcp client");
 	yield put(stopTCPClient());
 }
 

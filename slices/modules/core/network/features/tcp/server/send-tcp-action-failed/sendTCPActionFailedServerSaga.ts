@@ -1,4 +1,4 @@
-import { log } from "@modules/core/log/shared/config";
+import { tcpLog } from "@modules/core/log/shared/config";
 import { sendTCPActionFailed } from "@modules/core/network/entities/lib/store/features/tcp/sendTCPAction/sendTCPAction";
 import {
 	getSendTCPActionFailedDetail,
@@ -28,7 +28,7 @@ function* worker({ payload }: ReturnType<typeof sendTCPActionFailed>) {
 		return;
 	}
 
-	log.warn(
+	tcpLog.warn(
 		"TCP send failed (host)",
 		payload.action.type,
 		getSendTCPActionFailedDetail(payload),
@@ -36,11 +36,11 @@ function* worker({ payload }: ReturnType<typeof sendTCPActionFailed>) {
 
 	const networkId = getTCPClientSocketNetworkId(payload.socket);
 	if (!networkId) {
-		log.warn("TCP send failed for unknown client socket");
+		tcpLog.warn("TCP send failed for unknown client socket");
 		return;
 	}
 
-	log.info("Destroying TCP client socket");
+	tcpLog.info("Destroying TCP client socket");
 
 	try {
 		payload.socket.destroy();

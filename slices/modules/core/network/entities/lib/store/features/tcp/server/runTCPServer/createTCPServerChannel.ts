@@ -1,4 +1,4 @@
-import { log } from "@modules/core/log/shared/config";
+import { log, tcpLog } from "@modules/core/log/shared/config";
 import TcpSocket from "react-native-tcp-socket";
 import { eventChannel } from "redux-saga";
 import {
@@ -62,7 +62,7 @@ export const createTCPServerChannel = (serverName: string | null) => {
 					);
 				});
 				socket.on("connect", () => {
-					log.info("tcp server: client socket connected");
+					tcpLog.info("tcp server: client socket connected");
 					emit(
 						tcpServerSocketConnected({
 							socket,
@@ -70,7 +70,7 @@ export const createTCPServerChannel = (serverName: string | null) => {
 					);
 				});
 				socket.on("close", () => {
-					log.info("tcp server: client disconnected", socket.remoteAddress);
+					tcpLog.info("tcp server: client disconnected", socket.remoteAddress);
 					emit(
 						tcpServerSocketClosed({
 							socket,
@@ -105,7 +105,7 @@ export const createTCPServerChannel = (serverName: string | null) => {
 			server
 				.on("listening", () => {
 					bindRetries = 0;
-					log.info("tcp server: listening", server?.address());
+					tcpLog.info("tcp server: listening", server?.address());
 					emit(tcpServerListening());
 					// `eventChannel` drops events emitted during construction (before first `take`)
 					// unless a buffer is provided. Emitting from async callback guarantees delivery.
@@ -125,7 +125,7 @@ export const createTCPServerChannel = (serverName: string | null) => {
 					) {
 						bindRetries++;
 						const delayMs = Math.min(2000, 150 * bindRetries);
-						log.warn(
+						tcpLog.warn(
 							"tcp server bind in use, retrying",
 							`(${bindRetries}/${maxBindRetries})`,
 							`${delayMs}ms`,
@@ -149,7 +149,7 @@ export const createTCPServerChannel = (serverName: string | null) => {
 					);
 				})
 				.on("close", () => {
-					log.warn("tcp server: stopped (port released)");
+					tcpLog.warn("tcp server: stopped (port released)");
 					if (closingForBindRetry) {
 						closingForBindRetry = false;
 						return;

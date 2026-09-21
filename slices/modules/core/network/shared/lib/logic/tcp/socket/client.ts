@@ -1,3 +1,4 @@
+import { tcpLog } from "@modules/core/log/shared/config";
 import { getGlobalValue, setGlobalValue } from "@shared/lib/util";
 import type TcpSocket from "react-native-tcp-socket";
 
@@ -14,7 +15,7 @@ export const clearTCPServerSocket = () => {
 	const socket = getTCPServerSocket();
 	setGlobalValue(GLOBAL_HOST_SOCKET_KEY, null);
 	if (socket) {
-		console.log("clearing tcp client socket");
+		tcpLog.info("clearing tcp client socket");
 		socket.destroy();
 	}
 };

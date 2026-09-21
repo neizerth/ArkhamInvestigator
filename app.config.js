@@ -98,6 +98,7 @@ module.exports = {
       eas: {
         projectId: "5adfba1a-a202-4ecb-8450-1079290f35b8",
       },
+      logTcp: process.env.LOG_TCP === "true",
     },
   },
 };

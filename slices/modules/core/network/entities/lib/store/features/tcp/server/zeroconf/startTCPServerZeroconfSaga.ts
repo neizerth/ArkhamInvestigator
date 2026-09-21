@@ -1,3 +1,4 @@
+import { tcpLog } from "@modules/core/log/shared/config";
 import { TCP_SERVER_NAME } from "@modules/core/network/shared/config";
 import {
 	publishZeroconfService,
@@ -5,7 +6,6 @@ import {
 	selectNickname,
 	startTCPServerZeroconf,
 } from "@modules/core/network/shared/lib";
-import { log } from "@shared/config/logger";
 import { select, takeEvery } from "redux-saga/effects";
 
 function* worker() {
@@ -18,7 +18,7 @@ function* worker() {
 
 	const name = nickname?.trim() || TCP_SERVER_NAME;
 
-	log.info("tcp server zeroconf: starting", { networkId, name });
+	tcpLog.info("tcp server zeroconf: starting", { networkId, name });
 
 	publishZeroconfService({ name, networkId });
 }

@@ -1,5 +1,5 @@
 import { requestAndroidPermission } from "@modules/core/device/shared/lib/logic";
-import { log } from "@modules/core/log/shared/config";
+import { tcpLog } from "@modules/core/log/shared/config";
 import { TCP_SERVER_NAME } from "@modules/core/network/shared/config";
 import {
 	acquireZeroconfScan,
@@ -140,7 +140,7 @@ function* worker() {
 				if (useZeroconfIp) {
 					const currentIP: ReturnType<typeof selectIP> = yield select(selectIP);
 					if (currentIP !== ip) {
-						log.info("tcp server self discovery: set ip", ip);
+						tcpLog.info("tcp server self discovery: set ip", ip);
 						yield put(setIP(ip));
 						yield put(setHotspotEnabled(networkTypeLoop === "none"));
 					}
@@ -184,7 +184,7 @@ function* worker() {
 				continue;
 			}
 
-			log.warn("tcp server self discovery: timeout, restarting server");
+			tcpLog.warn("tcp server self discovery: timeout, restarting server");
 			lastRestartAt = now;
 			restarting = true;
 			lastSeenAt = now;

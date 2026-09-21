@@ -1,3 +1,4 @@
+import { log, tcpLog } from "@modules/core/log/shared/config";
 import {
 	selectHostIP,
 	selectNetworkRole,
@@ -17,10 +18,10 @@ function* worker() {
 	}
 
 	const hostIP: ReturnType<typeof selectHostIP> = yield select(selectHostIP);
-	console.log("hostIP", hostIP);
+	tcpLog.info("hostIP", hostIP);
 
 	if (!hostIP) {
-		console.error("No host IP found");
+		log.error("No host IP found");
 		return;
 	}
 	yield put(startTCPClient({ host: hostIP }));

@@ -1,3 +1,4 @@
+import { log, tcpLog } from "@modules/core/log/shared/config";
 import {
 	createMessageIdCache,
 	createTCPIncomeAction,
@@ -25,7 +26,7 @@ function* worker({ payload }: ReturnType<typeof tcpClientSocketDataReceived>) {
 			return;
 		}
 
-		console.log(
+		tcpLog.info(
 			"client: recieved action",
 			tcpAction.type,
 			tcpAction.meta.messageId,
@@ -54,7 +55,7 @@ function* worker({ payload }: ReturnType<typeof tcpClientSocketDataReceived>) {
 			}),
 		);
 	} catch (error) {
-		console.error("Error parsing TCP data", error);
+		log.error("Error parsing TCP data", error);
 	}
 }
 

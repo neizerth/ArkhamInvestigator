@@ -1,4 +1,4 @@
-import { log } from "@modules/core/log/shared/config";
+import { log, tcpLog } from "@modules/core/log/shared/config";
 import {
 	TCP_CONFIRMATION_MAX_RETRIES,
 	TCP_CONFIRMATION_TIMEOUT,
@@ -45,7 +45,7 @@ function* worker(actionArg: Action): Generator {
 	if (isAck) {
 		// ACK: fire-and-forget — send once, never wait; frees the channel for next action
 		const messageId = v4();
-		log.info("client: sending action", payload.action.type, messageId);
+		tcpLog.info("client: sending action", payload.action.type, messageId);
 		yield put(
 			sendTCPAction({
 				...payload,
@@ -67,7 +67,7 @@ function* worker(actionArg: Action): Generator {
 			return;
 		}
 
-		log.info("client: sending action", payload.action.type, messageId);
+		tcpLog.info("client: sending action", payload.action.type, messageId);
 		yield put(
 			sendTCPAction({
 				...payload,
@@ -88,11 +88,11 @@ function* worker(actionArg: Action): Generator {
 		});
 
 		if (!timeout) {
-			log.info("client: server received", messageId);
+			tcpLog.info("client: server received", messageId);
 			return;
 		}
 
-		log.info(
+		tcpLog.info(
 			"client: server timed out. Retrying...",
 			messageId,
 			payload.action.type,
@@ -100,7 +100,10 @@ function* worker(actionArg: Action): Generator {
 		);
 
 		if (attempt === TCP_CONFIRMATION_MAX_RETRIES - 1) {
-			log.info("client: max retries reached, giving up", payload.action.type);
+			tcpLog.info(
+				"client: max retries reached, giving up",
+				payload.action.type,
+			);
 			return;
 		}
 
@@ -112,10 +115,10 @@ type CloseableChannel<T> = TakeableChannel<T> & { close: () => void };
 
 function* processRequests(requestChan: CloseableChannel<Action>): Generator {
 	while (true) {
-		log.info("client: processing request");
+		tcpLog.info("client: processing request");
 		const action: Action = yield take(requestChan);
 		if (!action) {
-			log.info("client: no action to process");
+			tcpLog.info("client: no action to process");
 			return;
 		}
 		yield fork(worker, action);
@@ -125,9 +128,9 @@ function* processRequests(requestChan: CloseableChannel<Action>): Generator {
 function* waitDisconnectAndClose(
 	requestChan: CloseableChannel<Action>,
 ): Generator {
-	log.info("client: waiting for stopTCPClient");
+	tcpLog.info("client: waiting for stopTCPClient");
 	yield take(stopTCPClient.match); //
-	log.info("client: disconnecting TCP client");
+	tcpLog.info("client: disconnecting TCP client");
 	requestChan.close();
 }
 
@@ -144,6 +147,6 @@ export function* sendTCPActionToServerSaga() {
 			call(processRequests, requestChan),
 			call(waitDisconnectAndClose, requestChan),
 		]);
-		log.info("client: starting new queue");
+		tcpLog.info("client: starting new queue");
 	}
 }

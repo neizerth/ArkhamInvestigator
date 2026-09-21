@@ -1,3 +1,4 @@
+import { log, tcpLog } from "@modules/core/log/shared/config";
 import { sendTCPActionToClient } from "@modules/core/network/entities/lib/store/features/tcp/server/sendTCPActionToClient/sendTCPActionToClient";
 import {
 	createMessageIdCache,
@@ -22,7 +23,7 @@ function* worker({ payload }: ReturnType<typeof tcpServerSocketDataReceived>) {
 			return;
 		}
 
-		console.log(
+		tcpLog.info(
 			"server: recieved action",
 			tcpAction.type,
 			tcpAction.meta.messageId,
@@ -76,7 +77,7 @@ function* worker({ payload }: ReturnType<typeof tcpServerSocketDataReceived>) {
 			);
 		}
 	} catch (error) {
-		console.error("Error parsing TCP data", error);
+		log.error("Error parsing TCP data", error);
 	}
 }
 
