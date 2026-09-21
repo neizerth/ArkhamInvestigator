@@ -3,6 +3,7 @@ import type { ImageProps, ViewProps } from "react-native";
 import { LogoMemo as Logo } from "../../content";
 import { Progress } from "../../control";
 import * as C from "./LoadScreen.components";
+import { logoSize } from "./LoadScreen.config";
 
 export type LoadScreenProps = ViewProps & {
 	progress: number;
@@ -21,16 +22,18 @@ export const LoadScreen = ({
 }: LoadScreenProps) => {
 	return (
 		<C.Container {...props}>
-			<Logo onLoad={onLogoLoad} />
-			{showProgress && (
-				<>
-					<Progress value={progress} />
-					{showNumericProgress && (
-						<C.NumericProgress>{progress}%</C.NumericProgress>
-					)}
-				</>
-			)}
-			{children}
+			<Logo size={logoSize} onLoad={onLogoLoad} />
+			<C.Footer>
+				{showProgress && (
+					<>
+						<Progress value={progress} />
+						{showNumericProgress && (
+							<C.NumericProgress>{progress}%</C.NumericProgress>
+						)}
+					</>
+				)}
+				{children}
+			</C.Footer>
 		</C.Container>
 	);
 };

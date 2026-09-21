@@ -26,21 +26,27 @@ export const downloadChannel = ({
 	diskPath,
 	resumeData,
 }: DownloadChannelOptions) => {
-	return eventChannel<DownloadChannelData>((emit) => {
-		const path = FileSystem.documentDirectory + diskPath;
+	const path = FileSystem.documentDirectory + diskPath;
 
-		const downloadResumable = FileSystem.createDownloadResumable(
-			url,
-			path,
-			{},
-			(progress) => {
-				emit({
-					type: "progress",
-					value: progress,
-				});
-			},
-			resumeData,
-		);
+	let emitProgress: FileSystem.FileSystemNetworkTaskProgressCallback<
+		FileSystem.DownloadProgressData
+	> = () => {};
+
+	const downloadResumable = FileSystem.createDownloadResumable(
+		url,
+		path,
+		{},
+		(progress) => emitProgress(progress),
+		resumeData,
+	);
+
+	const channel = eventChannel<DownloadChannelData>((emit) => {
+		emitProgress = (progress) => {
+			emit({
+				type: "progress",
+				value: progress,
+			});
+		};
 
 		downloadResumable
 			.downloadAsync()
@@ -59,8 +65,13 @@ export const downloadChannel = ({
 			});
 
 		return () => {
-			// rejects when the download is already finished
+			// rejects when the download is already finished or paused
 			downloadResumable.pauseAsync().catch(() => {});
 		};
 	});
+
+	/** Stops the download; on iOS the result holds the only data to resume it later. */
+	const pause = () => downloadResumable.pauseAsync();
+
+	return { channel, pause };
 };

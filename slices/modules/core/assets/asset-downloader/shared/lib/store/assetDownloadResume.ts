@@ -2,15 +2,23 @@ import { type PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { createSliceState } from "redux-toolkit-helpers";
 
 /**
- * Persisted on purpose: an interrupted download continues from the partial file
- * after a network error or an app restart.
+ * Persisted on purpose: an interrupted download continues after a network error or an app restart.
  */
 export type AssetDownloadResumeState = {
-	interruptedUrls: string[];
+	/**
+	 * url → data to resume the download with.
+	 * iOS: the blob of the paused task. Android: `null`, the partial file size is used instead.
+	 */
+	interrupted: Record<string, string | null>;
+};
+
+type SetInterruptedPayload = {
+	url: string;
+	resumeData: string | null;
 };
 
 const initialState: AssetDownloadResumeState = {
-	interruptedUrls: [],
+	interrupted: {},
 };
 
 const state = createSliceState(initialState);
@@ -20,22 +28,25 @@ export const assetDownloadResume = createSlice({
 	...state,
 	reducers: {
 		...state.reducers,
-		addInterruptedUrl: (state, { payload }: PayloadAction<string>) => {
-			if (!state.interruptedUrls.includes(payload)) {
-				state.interruptedUrls.push(payload);
-			}
+		setInterrupted: (
+			state,
+			{ payload }: PayloadAction<SetInterruptedPayload>,
+		) => {
+			state.interrupted = {
+				...state.interrupted,
+				[payload.url]: payload.resumeData,
+			};
 		},
-		removeInterruptedUrl: (state, { payload }: PayloadAction<string>) => {
-			state.interruptedUrls = state.interruptedUrls.filter(
-				(url) => url !== payload,
-			);
+		removeInterrupted: (state, { payload }: PayloadAction<string>) => {
+			const { [payload]: _, ...rest } = state.interrupted ?? {};
+			state.interrupted = rest;
 		},
 	},
 });
 
-export const { addInterruptedUrl, removeInterruptedUrl } =
+export const { setInterrupted, removeInterrupted } =
 	assetDownloadResume.actions;
 
-export const { selectInterruptedUrls } = assetDownloadResume.selectors;
+export const { selectInterrupted } = assetDownloadResume.selectors;
 
 export default assetDownloadResume.reducer;

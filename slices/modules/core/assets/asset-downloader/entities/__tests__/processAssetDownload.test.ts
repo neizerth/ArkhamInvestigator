@@ -5,7 +5,7 @@ import {
 	flush,
 } from "../../../../../../shared/lib/test/createSagaTester";
 import assetDownloadResume, {
-	addInterruptedUrl,
+	setInterrupted,
 } from "../../shared/lib/store/assetDownloadResume";
 import assetDownloader from "../../shared/lib/store/assetDownloader";
 import {
@@ -14,21 +14,26 @@ import {
 } from "../processAssetDownload/processAssetDownload";
 import type { processAssetDownloadSaga as ProcessAssetDownloadSaga } from "../processAssetDownload/processAssetDownloadSaga";
 
-type MockChannel = {
+type MockDownload = {
 	options: { url: string; resumeData?: string };
 	emit: (item: unknown) => void;
+	pause: jest.Mock;
 };
 
-const mockChannels: MockChannel[] = [];
+const mockDownloads: MockDownload[] = [];
 
 jest.mock("../processAssetDownload/downloadChannel", () => {
 	const { eventChannel } = jest.requireActual("redux-saga");
 	return {
-		downloadChannel: (options: MockChannel["options"]) =>
-			eventChannel((emit: MockChannel["emit"]) => {
-				mockChannels.push({ options, emit });
+		downloadChannel: (options: MockDownload["options"]) => {
+			const download = { options, pause: jest.fn() } as unknown as MockDownload;
+			const channel = eventChannel((emit: MockDownload["emit"]) => {
+				download.emit = emit;
 				return () => {};
-			}),
+			});
+			mockDownloads.push(download);
+			return { channel, pause: download.pause };
+		},
 	};
 });
 
@@ -39,6 +44,22 @@ const mockFileSystem = {
 };
 
 jest.mock("expo-file-system", () => mockFileSystem);
+jest.mock("@shared/lib", () =>
+	require("@shared/lib/test/mocks").sharedLibMock(),
+);
+jest.mock("@modules/core/device/shared/lib", () =>
+	jest.requireActual("@modules/core/device/shared/lib/store/actions"),
+);
+jest.mock("@modules/core/network/shared/lib", () =>
+	jest.requireActual("@modules/core/network/shared/lib/store/actions/common"),
+);
+
+const { deviceAppStateChanged } = jest.requireActual(
+	"@modules/core/device/shared/lib/store/actions",
+);
+const { internetReachabilityChanged } = jest.requireActual(
+	"@modules/core/network/shared/lib/store/actions/common",
+);
 
 const reducer = combineReducers({ assetDownloader, assetDownloadResume });
 
@@ -47,7 +68,7 @@ const payload = (name: string) => ({
 	diskPath: `${name}.zip`,
 });
 
-// `canResume` is read on module load, so the saga is loaded per platform
+// the resume mode is read on module load, so the saga is loaded per platform
 const loadSaga = (os: "android" | "ios") => {
 	let saga: typeof ProcessAssetDownloadSaga;
 
@@ -62,32 +83,38 @@ const loadSaga = (os: "android" | "ios") => {
 	return saga!;
 };
 
-const setup = (os: "android" | "ios", interruptedUrls: string[] = []) => {
+const setup = (
+	os: "android" | "ios",
+	interrupted: Record<string, string | null> = {},
+) => {
 	const tester = createSagaTester({ reducer });
 
-	for (const url of interruptedUrls) {
-		tester.dispatch(addInterruptedUrl(url));
+	for (const [url, resumeData] of Object.entries(interrupted)) {
+		tester.dispatch(setInterrupted({ url, resumeData }));
 	}
 
 	tester.run(loadSaga(os));
 
-	const interrupted = () =>
-		tester.getState().assetDownloadResume.interruptedUrls;
+	const getInterrupted = () =>
+		tester.getState().assetDownloadResume.interrupted;
 	const ends = () =>
 		tester
 			.ofType(assetDownloadEnd.type)
 			.map((action) => (action as ReturnType<typeof assetDownloadEnd>).payload);
 
-	return { tester, interrupted, ends };
+	return { tester, getInterrupted, ends };
 };
 
-const succeed = (channel: MockChannel, status = 200) => {
-	channel.emit({ type: "result", value: { uri: channel.options.url, status } });
-	channel.emit(END);
+const succeed = (download: MockDownload, status = 200) => {
+	download.emit({
+		type: "result",
+		value: { uri: download.options.url, status },
+	});
+	download.emit(END);
 };
 
 beforeEach(() => {
-	mockChannels.length = 0;
+	mockDownloads.length = 0;
 	jest.clearAllMocks();
 	mockFileSystem.getInfoAsync.mockResolvedValue({ exists: false });
 });
@@ -100,20 +127,31 @@ describe("processAssetDownload", () => {
 		tester.dispatch(processAssetDownload(payload("b")));
 		await flush();
 
-		expect(mockChannels.map(({ options }) => options.url)).toEqual([
+		expect(mockDownloads.map(({ options }) => options.url)).toEqual([
 			payload("a").url,
 		]);
 
-		succeed(mockChannels[0]);
+		succeed(mockDownloads[0]);
 		await flush();
 
-		expect(mockChannels.map(({ options }) => options.url)).toEqual([
+		expect(mockDownloads.map(({ options }) => options.url)).toEqual([
 			payload("a").url,
 			payload("b").url,
 		]);
 		expect(ends()).toEqual([
 			expect.objectContaining({ url: payload("a").url, status: "success" }),
 		]);
+	});
+
+	it("fails a paused download without a result", async () => {
+		const { tester, ends } = setup("android");
+
+		tester.dispatch(processAssetDownload(payload("a")));
+		await flush();
+		mockDownloads[0].emit({ type: "result" });
+		await flush();
+
+		expect(ends()).toEqual([expect.objectContaining({ status: "error" })]);
 	});
 
 	describe("android", () => {
@@ -123,17 +161,17 @@ describe("processAssetDownload", () => {
 				exists: true,
 				size: 123,
 			});
-			const { tester, interrupted } = setup("android", [url]);
+			const { tester, getInterrupted } = setup("android", { [url]: null });
 
 			tester.dispatch(processAssetDownload(payload("a")));
 			await flush();
 
-			expect(mockChannels[0].options.resumeData).toBe("123");
+			expect(mockDownloads[0].options.resumeData).toBe("123");
 
-			succeed(mockChannels[0]);
+			succeed(mockDownloads[0]);
 			await flush();
 
-			expect(interrupted()).toEqual([]);
+			expect(getInterrupted()).toEqual({});
 		});
 
 		it("starts over when the download was not interrupted", async () => {
@@ -146,18 +184,18 @@ describe("processAssetDownload", () => {
 			tester.dispatch(processAssetDownload(payload("a")));
 			await flush();
 
-			expect(mockChannels[0].options.resumeData).toBeUndefined();
+			expect(mockDownloads[0].options.resumeData).toBeUndefined();
 		});
 
 		it("marks the download interrupted on a network error", async () => {
-			const { tester, interrupted, ends } = setup("android");
+			const { tester, getInterrupted, ends } = setup("android");
 
 			tester.dispatch(processAssetDownload(payload("a")));
 			await flush();
-			mockChannels[0].emit({ type: "error", value: new Error("offline") });
+			mockDownloads[0].emit({ type: "error", value: new Error("offline") });
 			await flush();
 
-			expect(interrupted()).toEqual([payload("a").url]);
+			expect(getInterrupted()).toEqual({ [payload("a").url]: null });
 			expect(ends()).toEqual([expect.objectContaining({ status: "error" })]);
 			expect(mockFileSystem.deleteAsync).not.toHaveBeenCalled();
 		});
@@ -168,14 +206,16 @@ describe("processAssetDownload", () => {
 				exists: true,
 				size: 123,
 			});
-			const { tester, interrupted, ends } = setup("android", [url]);
+			const { tester, getInterrupted, ends } = setup("android", {
+				[url]: null,
+			});
 
 			tester.dispatch(processAssetDownload(payload("a")));
 			await flush();
-			succeed(mockChannels[0], 416);
+			succeed(mockDownloads[0], 416);
 			await flush();
 
-			expect(interrupted()).toEqual([]);
+			expect(getInterrupted()).toEqual({});
 			expect(mockFileSystem.deleteAsync).toHaveBeenCalledWith(
 				"file:///docs/a.zip",
 				{ idempotent: true },
@@ -183,48 +223,90 @@ describe("processAssetDownload", () => {
 			expect(ends()).toEqual([expect.objectContaining({ status: "error" })]);
 		});
 
-		it("fails a paused download without a result", async () => {
-			const { tester, ends } = setup("android");
+		it("does not pause: the partial file is enough", async () => {
+			const { tester } = setup("android");
 
 			tester.dispatch(processAssetDownload(payload("a")));
 			await flush();
-			mockChannels[0].emit({ type: "result" });
+			tester.dispatch(deviceAppStateChanged("background"));
 			await flush();
 
-			expect(ends()).toEqual([expect.objectContaining({ status: "error" })]);
+			expect(mockDownloads[0].pause).not.toHaveBeenCalled();
 		});
 	});
 
 	describe("ios", () => {
-		it("never resumes: resumeData is an opaque blob there", async () => {
+		it.each([
+			["the app goes to background", deviceAppStateChanged("background")],
+			["the internet is lost", internetReachabilityChanged(false)],
+		])("pauses and keeps the resume data when %s", async (_, trigger) => {
 			const { url } = payload("a");
-			mockFileSystem.getInfoAsync.mockResolvedValue({
-				exists: true,
-				size: 123,
-			});
-			const { tester, interrupted } = setup("ios", [url]);
+			const { tester, getInterrupted, ends } = setup("ios");
 
 			tester.dispatch(processAssetDownload(payload("a")));
 			await flush();
 
-			expect(mockChannels[0].options.resumeData).toBeUndefined();
-
-			mockChannels[0].emit({ type: "error", value: new Error("offline") });
+			mockDownloads[0].pause.mockResolvedValue({ resumeData: "blob" });
+			tester.dispatch(trigger);
 			await flush();
 
-			// the stale mark is kept as is, nothing new is added
-			expect(interrupted()).toEqual([url]);
+			expect(mockDownloads[0].pause).toHaveBeenCalledTimes(1);
+			expect(getInterrupted()).toEqual({ [url]: "blob" });
+			expect(ends()).toEqual([expect.objectContaining({ status: "error" })]);
 		});
 
-		it("does not mark new downloads interrupted", async () => {
-			const { tester, interrupted } = setup("ios");
+		it("ignores other app state changes", async () => {
+			const { tester } = setup("ios");
 
 			tester.dispatch(processAssetDownload(payload("a")));
 			await flush();
-			mockChannels[0].emit({ type: "error", value: new Error("offline") });
+			tester.dispatch(deviceAppStateChanged("active"));
+			tester.dispatch(internetReachabilityChanged(true));
 			await flush();
 
-			expect(interrupted()).toEqual([]);
+			expect(mockDownloads[0].pause).not.toHaveBeenCalled();
+		});
+
+		it("resumes with the stored blob and clears it on success", async () => {
+			const { url } = payload("a");
+			const { tester, getInterrupted } = setup("ios", { [url]: "blob" });
+
+			tester.dispatch(processAssetDownload(payload("a")));
+			await flush();
+
+			expect(mockDownloads[0].options.resumeData).toBe("blob");
+			expect(mockFileSystem.getInfoAsync).not.toHaveBeenCalled();
+
+			succeed(mockDownloads[0]);
+			await flush();
+
+			expect(getInterrupted()).toEqual({});
+		});
+
+		it("drops a blob that failed to resume", async () => {
+			const { url } = payload("a");
+			const { tester, getInterrupted } = setup("ios", { [url]: "stale" });
+
+			tester.dispatch(processAssetDownload(payload("a")));
+			await flush();
+			mockDownloads[0].emit({
+				type: "error",
+				value: new Error("no temp file"),
+			});
+			await flush();
+
+			expect(getInterrupted()).toEqual({});
+		});
+
+		it("starts over after an error without a pause", async () => {
+			const { tester, getInterrupted } = setup("ios");
+
+			tester.dispatch(processAssetDownload(payload("a")));
+			await flush();
+			mockDownloads[0].emit({ type: "error", value: new Error("offline") });
+			await flush();
+
+			expect(getInterrupted()).toEqual({});
 		});
 	});
 });

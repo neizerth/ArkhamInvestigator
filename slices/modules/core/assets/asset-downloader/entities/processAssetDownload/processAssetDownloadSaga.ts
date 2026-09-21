@@ -1,41 +1,70 @@
+import { deviceAppStateChanged } from "@modules/core/device/shared/lib";
+import { internetReachabilityChanged } from "@modules/core/network/shared/lib";
 import type { ReturnAwaited } from "@shared/model";
 import * as FileSystem from "expo-file-system";
 import { Platform } from "react-native";
 import { END, type Channel as SagaChannel } from "redux-saga";
-import { actionChannel, call, put, select, take } from "redux-saga/effects";
 import {
-	addInterruptedUrl,
+	actionChannel,
+	call,
+	put,
+	race,
+	select,
+	take,
+} from "redux-saga/effects";
+import {
 	clearAssetDownload,
 	initAssetDownload,
-	removeInterruptedUrl,
-	selectInterruptedUrls,
+	removeInterrupted,
+	selectInterrupted,
 	setAssetDownloadedSize,
 	setAssetSize,
+	setInterrupted,
 } from "../../shared/lib";
 import { type DownloadChannelData, downloadChannel } from "./downloadChannel";
 import { assetDownloadEnd, processAssetDownload } from "./processAssetDownload";
 
-type Channel = ReturnType<typeof downloadChannel>;
+type Download = ReturnType<typeof downloadChannel>;
 type ProcessAction = ReturnType<typeof processAssetDownload>;
+type NextEvent = {
+	item?: DownloadChannelData | typeof END;
+	pause?: unknown;
+};
 
-// on Android `resumeData` is the size of the partial file, it is sent as a `Range` header.
-// On iOS it is an opaque blob available only after a pause, so downloads start over there.
-const canResume = Platform.OS === "android";
+/**
+ * How an interrupted download continues:
+ * - Android: `resumeData` is the size of the partial file, it is sent as a `Range` header;
+ * - iOS: `resumeData` is an opaque blob, available only from a pause, so the download
+ *   is paused before the app goes to background or loses the internet.
+ */
+const resumeMode =
+	Platform.OS === "android" ? "file" : Platform.OS === "ios" ? "pause" : null;
 
 class HttpError extends Error {}
+class PauseError extends Error {}
 
 const getFilePath = (diskPath: string) =>
 	FileSystem.documentDirectory + diskPath;
 
+const matchPauseTrigger = (action: unknown) =>
+	(deviceAppStateChanged.match(action) && action.payload === "background") ||
+	(internetReachabilityChanged.match(action) && action.payload === false);
+
 function* getResumeData(url: string, diskPath: string) {
-	if (!canResume) {
+	const interrupted: ReturnType<typeof selectInterrupted> =
+		yield select(selectInterrupted);
+
+	const entry = interrupted?.[url];
+
+	if (entry === undefined) {
 		return;
 	}
 
-	const interruptedUrls: ReturnType<typeof selectInterruptedUrls> =
-		yield select(selectInterruptedUrls);
+	if (resumeMode === "pause") {
+		return entry ?? undefined;
+	}
 
-	if (!interruptedUrls.includes(url)) {
+	if (resumeMode !== "file") {
 		return;
 	}
 
@@ -51,6 +80,20 @@ function* getResumeData(url: string, diskPath: string) {
 	return String(info.size);
 }
 
+function* pauseDownload(url: string, pause: Download["pause"]) {
+	try {
+		const { resumeData }: ReturnAwaited<Download["pause"]> = yield call(pause);
+
+		if (resumeData) {
+			yield put(setInterrupted({ url, resumeData }));
+		}
+	} catch {
+		// the download has already finished or failed: its own result tells what happened
+	}
+
+	throw new PauseError("Download paused");
+}
+
 function* worker({ payload }: ProcessAction) {
 	const { url, diskPath } = payload;
 
@@ -62,14 +105,26 @@ function* worker({ payload }: ProcessAction) {
 		diskPath,
 	);
 
-	const channel: Channel = yield call(downloadChannel, {
+	const { channel, pause }: Download = yield call(downloadChannel, {
 		...payload,
 		resumeData,
 	});
+
+	const next = {
+		item: take(channel),
+		...(resumeMode === "pause" && { pause: take(matchPauseTrigger) }),
+	};
+
 	let first = true;
 	try {
 		while (true) {
-			const item: DownloadChannelData | typeof END = yield take(channel);
+			const event: NextEvent = yield race(next);
+
+			if (event.pause) {
+				yield call(pauseDownload, url, pause);
+			}
+
+			const item = event.item as DownloadChannelData | typeof END;
 
 			if (item.type === END.type) {
 				break;
@@ -86,7 +141,7 @@ function* worker({ payload }: ProcessAction) {
 					throw new HttpError(`HTTP ${result.status}`);
 				}
 
-				yield put(removeInterruptedUrl(url));
+				yield put(removeInterrupted(url));
 				yield put(
 					assetDownloadEnd({
 						...payload,
@@ -112,12 +167,15 @@ function* worker({ payload }: ProcessAction) {
 	} catch (error) {
 		if (error instanceof HttpError) {
 			// the file holds an error body (appended to the partial file on resume): start over next time
-			yield put(removeInterruptedUrl(url));
+			yield put(removeInterrupted(url));
 			yield call(FileSystem.deleteAsync, getFilePath(diskPath), {
 				idempotent: true,
 			});
-		} else if (canResume) {
-			yield put(addInterruptedUrl(url));
+		} else if (resumeMode === "file") {
+			yield put(setInterrupted({ url, resumeData: null }));
+		} else if (resumeMode === "pause" && !(error instanceof PauseError)) {
+			// the stored blob did not work (e.g. the system removed the temp file): start over next time
+			yield put(removeInterrupted(url));
 		}
 
 		yield put(
