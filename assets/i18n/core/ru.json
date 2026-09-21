@@ -73,6 +73,8 @@
 
 	"app.outdated.title": "Приложение устарело",
 	"app.outdated.text": "Не так, как древние, но пора бы обновиться",
+	"app.loader.downloadFailed": "Не удалось загрузить изображения. Проверьте подключение к интернету",
+	"app.loader.retry": "Повторить",
 
 	"picker.deceleration.fast": "Быстрое",
 	"picker.deceleration.normal": "Нормальное",

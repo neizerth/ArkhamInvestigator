@@ -5,12 +5,13 @@ import {
 	setClientRunning,
 	setHostRunning,
 } from "@modules/core/network/shared/lib";
-import { put, takeEvery } from "redux-saga/effects";
+import { takeOnce } from "@shared/lib";
+import { put } from "redux-saga/effects";
 
 /**
  * Clear stale persisted TCP flags only when there is no matching native socket.
  * Blind `false` on every `appStarted` raced with router → server could listen before
- * `useAppLoad`'s effect and we'd wipe `hostRunning` while the port was up.
+ * `appStarted` and we'd wipe `hostRunning` while the port was up.
  */
 function* worker() {
 	if (!getTCPServerInstance()) {
@@ -22,5 +23,5 @@ function* worker() {
 }
 
 export function* resetTcpRuntimeFlagsOnAppStartedSaga() {
-	yield takeEvery(appStarted.match, worker);
+	yield takeOnce(appStarted.match, worker);
 }

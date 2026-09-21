@@ -1,6 +1,7 @@
 import { appStarted } from "@modules/core/app/shared/lib";
+import { takeOnce } from "@shared/lib";
 import type { AppStateStatus } from "react-native";
-import { call, put, take, takeEvery } from "redux-saga/effects";
+import { call, put, take } from "redux-saga/effects";
 import { deviceAppStateChanged } from "../../shared/lib";
 import { createAppStateChannel } from "./createAppStateChannel";
 
@@ -24,5 +25,5 @@ function* worker() {
 }
 
 export function* initDeviceAppStatusChangeSaga() {
-	yield takeEvery(appStarted.match, worker);
+	yield takeOnce(appStarted.match, worker);
 }

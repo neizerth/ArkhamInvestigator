@@ -1,6 +1,7 @@
 import { appStarted } from "@modules/core/app/shared/lib";
 import { color } from "@shared/config";
-import { put, takeEvery } from "redux-saga/effects";
+import { takeOnce } from "@shared/lib";
+import { put } from "redux-saga/effects";
 import { setBackgroundColor } from "../../entities/background-color";
 
 function* worker() {
@@ -8,5 +9,5 @@ function* worker() {
 }
 
 export function* initBackgroundColorSaga() {
-	yield takeEvery(appStarted.match, worker);
+	yield takeOnce(appStarted.match, worker);
 }

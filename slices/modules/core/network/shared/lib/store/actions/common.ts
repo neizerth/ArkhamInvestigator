@@ -6,6 +6,10 @@ import { withRemoteMeta } from "../../logic";
 export const networkInfoUpdated =
 	createAction<NetInfoState>("network/available");
 
+export const internetReachabilityChanged = createAction<boolean>(
+	"network/internetReachabilityChanged",
+);
+
 type ConnectNetworkClientPayload = {
 	nickname: string;
 	hostIP: string;

@@ -24,15 +24,24 @@ function* worker({ payload }: ReturnType<typeof processAssetDownload>) {
 				break;
 			}
 			if (item.type === "result") {
-				if (item.value) {
-					yield put(
-						assetDownloadEnd({
-							...payload,
-							status: "success",
-							uri: item.value.uri,
-						}),
-					);
+				const result = item.value;
+
+				// paused download resolves without a result
+				if (!result) {
+					throw new Error("Download interrupted");
 				}
+				// expo resolves on HTTP errors too, with the error body written to disk
+				if (result.status >= 400) {
+					throw new Error(`HTTP ${result.status}`);
+				}
+
+				yield put(
+					assetDownloadEnd({
+						...payload,
+						status: "success",
+						uri: result.uri,
+					}),
+				);
 
 				break;
 			}
@@ -57,6 +66,7 @@ function* worker({ payload }: ReturnType<typeof processAssetDownload>) {
 			}),
 		);
 	} finally {
+		channel.close();
 		yield put(clearAssetDownload());
 	}
 }

@@ -53,7 +53,8 @@ export const downloadChannel = ({
 			});
 
 		return () => {
-			downloadResumable.pauseAsync();
+			// rejects when the download is already finished
+			downloadResumable.pauseAsync().catch(() => {});
 		};
 	});
 };

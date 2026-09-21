@@ -1,7 +1,9 @@
 import { appStarted } from "@modules/core/app/shared/lib";
-import { call, put, take, takeEvery } from "redux-saga/effects";
+import { takeOnce } from "@shared/lib";
+import { call, put, take } from "redux-saga/effects";
 import {
 	getNetworkInfoState,
+	internetReachabilityChanged,
 	type networkInfoUpdated,
 	setHotspotEnabled,
 	setIP,
@@ -17,9 +19,23 @@ type Channel = ReturnType<typeof networkChannel>;
 
 function* worker() {
 	const channel: Channel = yield call(networkChannel);
+	let internetReachable: boolean | null = null;
+
 	while (true) {
 		const action: ReturnType<typeof networkInfoUpdated> = yield take(channel);
 		const { payload } = action;
+		const { isInternetReachable } = payload;
+
+		// the first known state is not a change: startup code checks the network itself
+		if (typeof isInternetReachable === "boolean") {
+			if (
+				internetReachable !== null &&
+				internetReachable !== isInternetReachable
+			) {
+				yield put(internetReachabilityChanged(isInternetReachable));
+			}
+			internetReachable = isInternetReachable;
+		}
 
 		const { ssid, ip, networkType, networkConnected, wifiEnabled, offline } =
 			getNetworkInfoState(payload);
@@ -37,5 +53,5 @@ function* worker() {
 }
 
 export function* watchNetworkUpdateSaga() {
-	yield takeEvery(appStarted.match, worker);
+	yield takeOnce(appStarted.match, worker);
 }

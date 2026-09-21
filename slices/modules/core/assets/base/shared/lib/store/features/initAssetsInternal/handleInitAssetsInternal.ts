@@ -7,4 +7,5 @@ export const handleInitAssetsInternal: AssetsHandler = (state) => {
 	state.fontsLoaded = false;
 	state.assetImagesLoaded = false;
 	state.assetsLoaded = false;
+	state.externalImagesError = false;
 };

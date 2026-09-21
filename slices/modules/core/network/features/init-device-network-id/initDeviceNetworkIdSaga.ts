@@ -1,6 +1,7 @@
 import { appStarted } from "@modules/core/app/shared/lib";
 import { log } from "@modules/core/log/shared/config";
-import { put, select, takeEvery } from "redux-saga/effects";
+import { takeOnce } from "@shared/lib";
+import { put, select } from "redux-saga/effects";
 import { v4 } from "uuid";
 import {
 	UNINITIALIZED_DEVICE_NETWORK_ID,
@@ -30,5 +31,5 @@ function* worker() {
 }
 
 export function* initDeviceNetworkIdSaga() {
-	yield takeEvery(appStarted.match, worker);
+	yield takeOnce(appStarted.match, worker);
 }

@@ -1,9 +1,10 @@
 import { appStarted } from "@modules/core/app/shared/lib";
+import { takeOnce } from "@shared/lib";
 import {
 	getNavigationBarHeight,
 	getNavigationMode,
 } from "react-native-navigation-mode";
-import { call, put, takeEvery } from "redux-saga/effects";
+import { call, put } from "redux-saga/effects";
 import { setNavigationBarStyle } from "../../entities/navigation-bar";
 import { setNavbarHeight, setNavigationMode } from "../../shared/lib";
 
@@ -28,5 +29,5 @@ function* worker() {
 }
 
 export function* initNavigationbarSaga() {
-	yield takeEvery(appStarted.match, worker);
+	yield takeOnce(appStarted.match, worker);
 }

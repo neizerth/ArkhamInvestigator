@@ -1,5 +1,6 @@
 import { appStarted } from "@modules/core/app/shared/lib";
-import { put, takeEvery } from "redux-saga/effects";
+import { takeOnce } from "@shared/lib";
+import { put } from "redux-saga/effects";
 import { closeModalInternal } from "../../shared/base/lib";
 
 function* worker() {
@@ -7,5 +8,5 @@ function* worker() {
 }
 
 export function* initModalSaga() {
-	yield takeEvery(appStarted.match, worker);
+	yield takeOnce(appStarted.match, worker);
 }

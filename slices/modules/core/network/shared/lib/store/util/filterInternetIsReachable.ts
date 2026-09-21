@@ -1,10 +1,10 @@
-import { networkInfoUpdated } from "../actions";
+import { internetReachabilityChanged } from "../actions";
 
 export const filterInternetIsReachable =
 	(isInternetReachable: boolean) => (action: unknown) => {
-		if (!networkInfoUpdated.match(action)) {
+		if (!internetReachabilityChanged.match(action)) {
 			return false;
 		}
 
-		return action.payload.isInternetReachable === isInternetReachable;
+		return action.payload === isInternetReachable;
 	};

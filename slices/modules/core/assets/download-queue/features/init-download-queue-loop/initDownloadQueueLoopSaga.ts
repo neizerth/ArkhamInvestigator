@@ -1,6 +1,6 @@
-import { initAppUI } from "@modules/core/app/shared/lib";
-import { minutes } from "@shared/lib";
-import { delay, put, takeEvery } from "redux-saga/effects";
+import { appLoaded } from "@modules/core/app/shared/lib";
+import { minutes, takeOnce } from "@shared/lib";
+import { delay, put } from "redux-saga/effects";
 import { checkDownloadQueue } from "../../entitites/checkDownloadQueue/checkDownloadQueue";
 
 function* worker() {
@@ -11,5 +11,5 @@ function* worker() {
 }
 
 export function* initDownloadQueueLoopSaga() {
-	yield takeEvery(initAppUI.match, worker);
+	yield takeOnce(appLoaded.match, worker);
 }

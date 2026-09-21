@@ -68,6 +68,8 @@
 	"board.help.calculator.history": "Tap on the Equals button to add value to the calculation history. This value will be automatically updated if you update the corresponding params on your board.",
 	"app.outdated.title": "Version is outdated",
 	"app.outdated.text": "Update is required",
+	"app.loader.downloadFailed": "Failed to download images. Check your internet connection",
+	"app.loader.retry": "Retry",
 	"modal.spoiler.message": "This section contains campaign spoilers. Do you want to proceed?",
 
 	"picker.deceleration.fast": "Fast",

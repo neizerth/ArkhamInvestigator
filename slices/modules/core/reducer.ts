@@ -1,3 +1,4 @@
+import { appReducer } from "./app/shared/lib";
 import { assetsDownloaderReducer } from "./assets/asset-downloader/shared/lib";
 import { assetsReducer } from "./assets/base/shared/lib";
 import { downloadQueueReducer } from "./assets/download-queue/shared/lib";
@@ -12,6 +13,7 @@ import { soundReducer } from "./sound/shared/lib";
 import { themeReducer } from "./theme/shared/lib";
 
 export const coreModulesReducer = {
+	...appReducer,
 	...deviceReducer,
 	...assetsReducer,
 	...assetsDownloaderReducer,

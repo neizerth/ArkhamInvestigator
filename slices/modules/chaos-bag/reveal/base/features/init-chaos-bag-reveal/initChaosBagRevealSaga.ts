@@ -1,5 +1,6 @@
-import { initAppUI } from "@modules/core/app/shared/lib";
-import { put, takeEvery } from "redux-saga/effects";
+import { appLoaded } from "@modules/core/app/shared/lib";
+import { takeOnce } from "@shared/lib";
+import { put } from "redux-saga/effects";
 import { endChaosBagReveal } from "../../entities/lib";
 
 function* worker() {
@@ -7,5 +8,5 @@ function* worker() {
 }
 
 export function* initChaosBagRevealSaga() {
-	yield takeEvery(initAppUI.match, worker);
+	yield takeOnce(appLoaded.match, worker);
 }

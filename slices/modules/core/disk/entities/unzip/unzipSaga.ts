@@ -22,8 +22,7 @@ function* worker({ payload }: ReturnType<typeof unzip>) {
 		const { exists } = fileInfo;
 
 		if (!exists) {
-			console.log("file not exists");
-			return;
+			throw new Error(`File not exists: ${src}`);
 		}
 
 		const path: ReturnAwaited<typeof unzipFile> = yield call(
@@ -43,15 +42,13 @@ function* worker({ payload }: ReturnType<typeof unzip>) {
 			}),
 		);
 	} catch (e) {
-		if (e instanceof Error) {
-			console.error(e);
-			yield put(
-				unzipError({
-					...payload,
-					error: e.message,
-				}),
-			);
-		}
+		console.error(e);
+		yield put(
+			unzipError({
+				...payload,
+				error: e instanceof Error ? e.message : String(e),
+			}),
+		);
 	}
 }
 
