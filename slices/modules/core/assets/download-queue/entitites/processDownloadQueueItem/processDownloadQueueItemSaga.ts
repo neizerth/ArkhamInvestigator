@@ -1,58 +1,42 @@
 import { downloadAsset } from "@modules/core/assets/asset-downloader/entities/downloadAsset/downloadAsset";
-import {
-	type AssetSuccessfullyDownloadedPayload,
-	assetDownloadEnd,
-} from "@modules/core/assets/asset-downloader/entities/processAssetDownload/processAssetDownload";
-import type { PayloadAction } from "@reduxjs/toolkit";
+import { assetDownloadEnd } from "@modules/core/assets/asset-downloader/entities/processAssetDownload/processAssetDownload";
 import { put, take, takeEvery } from "redux-saga/effects";
-import {
-	addDownloadQueueItem,
-	removeDownloadQueueItemById,
-} from "../../shared/lib";
+import { removeDownloadQueueItemById } from "../../shared/lib";
 import {
 	downloadQueueItemFailed,
 	downloadQueueItemSuccess,
 	processDownloadQueueItem,
 } from "./processDownloadQueueItem";
 
-const filterResultAction =
-	(url: string) =>
-	(
-		action: unknown,
-	): action is PayloadAction<AssetSuccessfullyDownloadedPayload> => {
-		if (assetDownloadEnd.match(action)) {
-			return action.payload.status === "success" && action.payload.url === url;
-		}
-		return false;
-	};
+const filterResultAction = (url: string) => (action: unknown) =>
+	assetDownloadEnd.match(action) && action.payload.url === url;
 
 type ResultAction = ReturnType<typeof assetDownloadEnd>;
 
 function* worker({ payload }: ReturnType<typeof processDownloadQueueItem>) {
-	yield put(removeDownloadQueueItemById(payload.id));
-
 	yield put(downloadAsset(payload));
 
-	const filterAction = filterResultAction(payload.url);
+	const { payload: result }: ResultAction = yield take(
+		filterResultAction(payload.url),
+	);
 
-	const resultAction: ResultAction = yield take(filterAction);
-
-	if (resultAction.payload.status === "success") {
+	if (result.status === "success") {
+		// removed only now: an item survives an app restart in the middle of the download
+		yield put(removeDownloadQueueItemById(payload.id));
 		yield put(
 			downloadQueueItemSuccess({
 				...payload,
-				...resultAction.payload,
+				uri: result.uri,
 			}),
 		);
 		return;
 	}
 
-	yield put(addDownloadQueueItem(payload));
-
+	// the item stays in the queue and is retried on the next queue check
 	yield put(
 		downloadQueueItemFailed({
 			...payload,
-			...resultAction.payload,
+			error: result.error,
 		}),
 	);
 }

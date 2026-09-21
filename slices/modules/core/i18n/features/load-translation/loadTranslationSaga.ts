@@ -1,4 +1,5 @@
 import { translations } from "@assets/i18n/core";
+import { log } from "@modules/core/log/shared/config";
 import { translationAPI } from "@shared/api";
 import { BUILD_VERSION } from "@shared/config/app";
 import { seconds } from "@shared/lib";
@@ -11,6 +12,7 @@ import { DEFAULT_LANGUAGE } from "../../shared/config";
 import {
 	StoreTranslation,
 	loadLanguage,
+	loadLanguageFailed,
 	mergeTranslations,
 	setLanguage,
 } from "../../shared/lib";
@@ -24,12 +26,16 @@ function* worker({ payload }: ReturnType<typeof loadLanguage>) {
 	const maxTries = 5;
 	const delayMs = seconds(1);
 
-	const response: AxiosResponse<GameTranslationData> = yield retry(
-		maxTries,
-		delayMs,
-		translationAPI.get,
-		path,
-	);
+	let response: AxiosResponse<GameTranslationData>;
+
+	try {
+		response = yield retry(maxTries, delayMs, translationAPI.get, path);
+	} catch (error) {
+		// an uncaught error would kill the watcher, so later language changes would never load
+		log.error("failed to load language", language, String(error));
+		yield put(loadLanguageFailed(language));
+		return;
+	}
 
 	const localTranslation = translations?.[language] || {};
 

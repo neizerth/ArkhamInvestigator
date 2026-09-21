@@ -2,10 +2,12 @@ import { createSlice } from "@reduxjs/toolkit";
 import { createSliceState } from "redux-toolkit-helpers";
 
 export type AppState = {
+	appReady: boolean;
 	appLoaded: boolean;
 };
 
 const initialState: AppState = {
+	appReady: false,
 	appLoaded: false,
 };
 
@@ -16,8 +18,8 @@ export const app = createSlice({
 	...state,
 });
 
-export const { setAppLoaded } = app.actions;
+export const { setAppReady, setAppLoaded } = app.actions;
 
-export const { selectAppLoaded } = app.selectors;
+export const { selectAppReady, selectAppLoaded } = app.selectors;
 
 export default app.reducer;

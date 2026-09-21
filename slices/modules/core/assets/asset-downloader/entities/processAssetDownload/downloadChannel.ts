@@ -17,10 +17,15 @@ export type DownloadChannelData =
 			value?: FileSystem.FileSystemDownloadResult;
 	  };
 
+type DownloadChannelOptions = InitAssetDownloadPayload & {
+	resumeData?: string;
+};
+
 export const downloadChannel = ({
 	url,
 	diskPath,
-}: InitAssetDownloadPayload) => {
+	resumeData,
+}: DownloadChannelOptions) => {
 	return eventChannel<DownloadChannelData>((emit) => {
 		const path = FileSystem.documentDirectory + diskPath;
 
@@ -34,6 +39,7 @@ export const downloadChannel = ({
 					value: progress,
 				});
 			},
+			resumeData,
 		);
 
 		downloadResumable

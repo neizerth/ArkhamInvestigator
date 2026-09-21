@@ -1,6 +1,10 @@
 import type { ReturnAwaited } from "@shared/model";
-import { call, put, take, takeEvery } from "redux-saga/effects";
-import { loadLanguage, setLanguage } from "../../../shared/lib";
+import { call, put, race, take, takeEvery } from "redux-saga/effects";
+import {
+	loadLanguage,
+	loadLanguageFailed,
+	setLanguage,
+} from "../../../shared/lib";
 import { setTranslation } from "../setTranslation";
 import { getTranslation } from "./getTranslation";
 import { restoreTranslation, translationRestored } from "./restoreTranslation";
@@ -17,8 +21,15 @@ function* worker({ payload: language }: ReturnType<typeof restoreTranslation>) {
 
 	if (!translation) {
 		yield put(loadLanguage(language));
-		yield take(setLanguage.match);
-		yield put(translationRestored(language));
+
+		const { loaded }: { loaded?: unknown } = yield race({
+			loaded: take(setLanguage.match),
+			failed: take(loadLanguageFailed.match),
+		});
+
+		if (loaded) {
+			yield put(translationRestored(language));
+		}
 		return;
 	}
 

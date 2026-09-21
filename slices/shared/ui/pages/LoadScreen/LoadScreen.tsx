@@ -1,5 +1,5 @@
 import { memo } from "react";
-import type { ViewProps } from "react-native";
+import type { ImageProps, ViewProps } from "react-native";
 import { LogoMemo as Logo } from "../../content";
 import { Progress } from "../../control";
 import * as C from "./LoadScreen.components";
@@ -8,6 +8,7 @@ export type LoadScreenProps = ViewProps & {
 	progress: number;
 	showProgress?: boolean;
 	showNumericProgress?: boolean;
+	onLogoLoad?: ImageProps["onLoad"];
 };
 
 export const LoadScreen = ({
@@ -15,11 +16,12 @@ export const LoadScreen = ({
 	children,
 	showProgress = true,
 	showNumericProgress = false,
+	onLogoLoad,
 	...props
 }: LoadScreenProps) => {
 	return (
 		<C.Container {...props}>
-			<Logo />
+			<Logo onLoad={onLogoLoad} />
 			{showProgress && (
 				<>
 					<Progress value={progress} />
