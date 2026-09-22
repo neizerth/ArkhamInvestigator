@@ -32,6 +32,7 @@ export const Value: typeof UI.Value = styled(UI.Value)`
 export const BaseAllySlots: FC<DefinedBaseStatPickerProps> = styled(
 	BaseStatPicker,
 ).attrs({
+	testID: "ally-slots-base-picker",
 	statType: "allySlots",
 	valueStyle: {
 		color: color.ally,
@@ -49,6 +50,7 @@ export const BaseAllySlots: FC<DefinedBaseStatPickerProps> = styled(
 `;
 
 export const Picker: typeof StatPicker = styled(StatPicker).attrs({
+	testID: "ally-slots-picker",
 	valueStyle: {
 		color: color.ally,
 	},

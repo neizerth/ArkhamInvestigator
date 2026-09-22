@@ -1,0 +1,3 @@
+# Maestro workspace: `npm run e2e` runs every flow below, subflows are included from them
+flows:
+  - "flows/**"

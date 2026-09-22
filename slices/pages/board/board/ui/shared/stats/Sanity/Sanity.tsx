@@ -61,7 +61,7 @@ export const Sanity = ({ ...props }: SanityProps) => {
 	const showInitial = showInitialValue || showAdditionalInfo;
 
 	return (
-		<C.Container {...props}>
+		<C.Container testID="board-sanity" {...props}>
 			{showBaseDiff && <C.BaseSanity />}
 
 			<C.Background>

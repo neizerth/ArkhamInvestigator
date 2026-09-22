@@ -22,6 +22,7 @@ export const Value: typeof BaseValue = styled(BaseValue)`
 `;
 
 export const Picker: typeof StatPicker = styled(StatPicker).attrs({
+	testID: "clues-picker",
 	valueStyle: {
 		color: color.clue,
 	},
@@ -53,7 +54,9 @@ export const Picker: typeof StatPicker = styled(StatPicker).attrs({
 // 	`}
 // `;
 
-export const Lock: typeof TouchableOpacity = styled(TouchableOpacity)`
+export const Lock: typeof TouchableOpacity = styled(TouchableOpacity).attrs({
+	testID: "clues-lock",
+})`
   position: absolute;
   z-index: 2;
   right: -28px;

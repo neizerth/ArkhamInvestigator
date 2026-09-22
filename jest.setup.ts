@@ -26,3 +26,37 @@ jest.mock("@modules/core/log/shared/config", () => {
 	const Log = createLogger();
 	return { LOG_TCP: false, Log, log: Log, tcpLog: createLogger() };
 });
+
+// jest-expo leaves Platform.Version undefined, while shared/config/device parses it on load
+{
+	const { Platform } = require("react-native");
+	if (Platform.Version === undefined) {
+		Object.defineProperty(Platform, "Version", {
+			get: () => (Platform.OS === "ios" ? "18.0" : 35),
+			configurable: true,
+		});
+	}
+}
+
+jest.mock("react-native-haptic-feedback", () => ({
+	__esModule: true,
+	default: { trigger: jest.fn() },
+	trigger: jest.fn(),
+	HapticFeedbackTypes: new Proxy({}, { get: (_, key) => key }),
+}));
+
+jest.mock("expo-audio", () => ({
+	useAudioPlayer: () => ({
+		play: jest.fn(),
+		pause: jest.fn(),
+		seekTo: jest.fn(),
+		volume: 1,
+	}),
+	createAudioPlayer: () => ({
+		play: jest.fn(),
+		pause: jest.fn(),
+		seekTo: jest.fn(),
+		remove: jest.fn(),
+	}),
+	setAudioModeAsync: jest.fn(),
+}));

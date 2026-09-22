@@ -1,0 +1,48 @@
+# Board sanity: tap and long press. Normalizes the value to 0 first, so the flow does not
+# depend on the investigator or on the state left by a previous run.
+# Swipes are covered by unit tests: the app uses RNGH fling gestures, which Maestro's
+# synthetic swipes do not trigger.
+appId: ${APP_ID}
+---
+- runFlow: ../../subflows/open-board.yaml
+
+# long press resets the base value when it differs from the initial one
+- runFlow:
+    when:
+      visible:
+        id: "sanity-base-value"
+    commands:
+      - longPressOn:
+          id: "board-sanity"
+- assertNotVisible:
+    id: "sanity-base-value"
+
+# tap decreases the value and stops at 0 (negative values are off by default)
+- repeat:
+    times: 20
+    commands:
+      - tapOn:
+          id: "board-sanity"
+          waitToSettleTimeoutMs: 100
+- assertVisible:
+    id: "sanity-value"
+    text: "0"
+
+# long press with base == initial: value +1, base +1
+- longPressOn:
+    id: "board-sanity"
+- assertVisible:
+    id: "sanity-value"
+    text: "1"
+- assertVisible:
+    id: "sanity-base-value"
+    text: "\\+1"
+
+# long press with base != initial: base resets to initial, value loses the difference
+- longPressOn:
+    id: "board-sanity"
+- assertVisible:
+    id: "sanity-value"
+    text: "0"
+- assertNotVisible:
+    id: "sanity-base-value"

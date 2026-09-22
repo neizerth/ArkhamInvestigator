@@ -6,15 +6,30 @@ import { View } from "react-native";
 import styled from "styled-components/native";
 import { assetsSize } from "../../../../config";
 import { withStat } from "../../../../lib";
-import { BaseStatPicker, type DefinedBaseStatPickerProps } from "../common";
+import {
+	BaseStatPicker,
+	BoardValue,
+	type BoardValueProps,
+	type DefinedBaseStatPickerProps,
+} from "../common";
 import { StatPickerMemo as StatPicker } from "../common/StatPicker";
 
 export const BaseContainer = withStat(HealthStatBackground, {
 	ratio: gameAssets.health.ratio,
 });
 
-export const Content: typeof BaseContainer = styled(BaseContainer)`
+export const Content: typeof BaseContainer = styled(BaseContainer).attrs({
+	testID: "health-background",
+})`
 `;
+
+export const PickerValue: FC<BoardValueProps> = styled(BoardValue).attrs({
+	testID: "health-value",
+})``;
+
+export const BasePickerValue: FC<BoardValueProps> = styled(BoardValue).attrs({
+	testID: "health-base-value",
+})``;
 
 export const Container: typeof View = styled(View)`
   position: relative;
@@ -25,7 +40,9 @@ export const Value: typeof BaseValue = styled(BaseValue)`
   color: ${color.health};
 `;
 
-export const Initial: typeof View = styled(View)`
+export const Initial: typeof View = styled(View).attrs({
+	testID: "health-initial",
+})`
   position: absolute;
 	right: -10px;
 	bottom: -12px;
@@ -50,6 +67,8 @@ export const InitialValue: typeof Value = styled(Value)`
 export const BaseHealth: FC<DefinedBaseStatPickerProps> = styled(
 	BaseStatPicker,
 ).attrs({
+	testID: "health-base-picker",
+	Component: BasePickerValue,
 	statType: "health",
 	valueStyle: {
 		color: color.health,
@@ -66,11 +85,15 @@ export const BaseHealth: FC<DefinedBaseStatPickerProps> = styled(
 })`
 `;
 
-export const Additional: typeof Value = styled(Value)`
+export const Additional: typeof Value = styled(Value).attrs({
+	testID: "health-additional",
+})`
 
 `;
 
 export const Picker: typeof StatPicker = styled(StatPicker).attrs({
+	testID: "health-picker",
+	Component: PickerValue,
 	valueStyle: {
 		color: color.health,
 	},

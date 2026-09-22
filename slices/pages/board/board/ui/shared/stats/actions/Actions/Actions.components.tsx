@@ -40,6 +40,7 @@ export const Special: typeof SpecialActions = styled(SpecialActions)`
 export const BaseActions: FC<DefinedBaseStatPickerProps> = styled(
 	BaseStatPicker,
 ).attrs({
+	testID: "actions-base-picker",
 	statType: "actions",
 	valueStyle: {
 		color: color.action,
@@ -62,6 +63,7 @@ export const DiffValue: typeof Value = styled(Value)`
 `;
 
 export const Picker: typeof StatPicker = styled(StatPicker).attrs({
+	testID: "actions-picker",
 	valueStyle: {
 		color: color.action,
 	},

@@ -62,7 +62,7 @@ export const Health = ({ contentContainerStyle, ...props }: HealthProps) => {
 	const showInitial = showInitialValue || showAdditionalInfo;
 
 	return (
-		<C.Container {...props}>
+		<C.Container testID="board-health" {...props}>
 			{showBaseDiff && <C.BaseHealth />}
 			<C.Content style={contentContainerStyle}>
 				{showAdditionalInfo && (

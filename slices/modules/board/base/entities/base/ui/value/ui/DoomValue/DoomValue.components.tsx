@@ -5,7 +5,11 @@ import { IconNumber } from "@shared/ui";
 import styled from "styled-components/native";
 import { VALUE_HEIGHT } from "../../config";
 
-export const Container: typeof DoomStatBackground = styled(DoomStatBackground)`
+export const Container: typeof DoomStatBackground = styled(
+	DoomStatBackground,
+).attrs({
+	testID: "doom-background",
+})`
   width: ${VALUE_HEIGHT * gameAssets.doom.ratio}px;
   height: ${VALUE_HEIGHT}px;
 `;

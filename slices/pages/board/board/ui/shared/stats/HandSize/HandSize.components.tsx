@@ -32,6 +32,7 @@ export const Value: typeof UI.Value = styled(UI.Value)`
 export const BaseHandSize: FC<DefinedBaseStatPickerProps> = styled(
 	BaseStatPicker,
 ).attrs({
+	testID: "hand-size-base-picker",
 	statType: "handSize",
 	valueStyle: {
 		color: color.handSize,
@@ -49,6 +50,7 @@ export const BaseHandSize: FC<DefinedBaseStatPickerProps> = styled(
 `;
 
 export const Picker: typeof StatPicker = styled(StatPicker).attrs({
+	testID: "hand-size-picker",
 	valueStyle: {
 		color: color.handSize,
 	},

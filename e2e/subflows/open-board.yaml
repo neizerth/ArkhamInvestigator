@@ -1,0 +1,40 @@
+# Opens the board: resumes the current game or starts a single player one with the first
+# investigator. Expects the English locale.
+appId: ${APP_ID}
+---
+- launchApp:
+    stopApp: true
+- runFlow:
+    when:
+      notVisible:
+        id: "board-health"
+    commands:
+      - extendedWaitUntil:
+          visible: "Single player|Continue"
+          timeout: 60000
+      - runFlow:
+          when:
+            visible: "Continue"
+          commands:
+            - tapOn: "Continue"
+      - runFlow:
+          when:
+            visible: "Single player"
+          commands:
+            - tapOn: "Single player"
+            - extendedWaitUntil:
+                visible: "Choose an Investigator"
+                timeout: 30000
+            # first investigator card of the default faction
+            - tapOn:
+                point: "18%,30%"
+            - runFlow:
+                when:
+                  visible: "Okay"
+                commands:
+                  - tapOn: "Okay"
+            - tapOn: "Start"
+- extendedWaitUntil:
+    visible:
+      id: "board-health"
+    timeout: 30000

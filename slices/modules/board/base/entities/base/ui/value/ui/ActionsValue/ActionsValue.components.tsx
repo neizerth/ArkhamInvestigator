@@ -7,7 +7,9 @@ import { VALUE_HEIGHT } from "../../config";
 
 export const Container: typeof ActionStatBackground = styled(
 	ActionStatBackground,
-)`
+).attrs({
+	testID: "actions-background",
+})`
   width: ${VALUE_HEIGHT * gameAssets.action.ratio}px;
   height: ${VALUE_HEIGHT}px;
 `;

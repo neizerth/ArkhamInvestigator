@@ -104,7 +104,10 @@ export const BaseStatPicker = ({
 	}, [props.style, showAdditionalInfo]);
 
 	return (
-		<C.Container style={contentContainerStyle}>
+		<C.Container
+			testID={`${statType}-base-container`}
+			style={contentContainerStyle}
+		>
 			{showAdditionalInfo && (
 				<C.Base>
 					<C.BaseValue

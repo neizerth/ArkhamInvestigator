@@ -7,7 +7,9 @@ import { VALUE_HEIGHT } from "../../config";
 
 export const Container: typeof SanityStatBackground = styled(
 	SanityStatBackground,
-)`
+).attrs({
+	testID: "sanity-background",
+})`
   width: ${VALUE_HEIGHT * gameAssets.sanity.ratio}px;
   height: ${VALUE_HEIGHT}px;
 `;
@@ -25,7 +27,9 @@ export const Value: typeof IconNumber = styled(IconNumber).attrs({
     color: white;
   `;
 
-export const Initial: typeof View = styled(View)`
+export const Initial: typeof View = styled(View).attrs({
+	testID: "sanity-initial",
+})`
 	position: absolute;
 	right: -4px;
 	bottom: -10px;

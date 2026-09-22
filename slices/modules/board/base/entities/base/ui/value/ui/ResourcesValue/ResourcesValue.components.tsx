@@ -6,7 +6,9 @@ import { VALUE_HEIGHT } from "../../config";
 
 export const Container: typeof ResourceStatBackground = styled(
 	ResourceStatBackground,
-)`
+).attrs({
+	testID: "resources-background",
+})`
   width: ${VALUE_HEIGHT * gameAssets.resource.ratio}px;
   height: ${VALUE_HEIGHT}px;
 `;

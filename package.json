@@ -54,7 +54,8 @@
 		"gradle:clean-modules": "rm -rf modules/*/android/.cxx modules/*/android/build/intermediates/cxx",
 		"expo:clear": "expo start -c",
 		"pod:install": "cd ios && pod install",
-		"postinstall": "patch-package"
+		"postinstall": "patch-package",
+		"e2e": "MAESTRO_CLI_NO_ANALYTICS=1 MAESTRO_CLI_ANALYSIS_NOTIFICATION_DISABLED=true maestro test -e APP_ID=${APP_ID:-com.arkhaminvestigator.dev} e2e"
 	},
 	"jest": {
 		"preset": "jest-expo",
@@ -62,7 +63,11 @@
 		"testPathIgnorePatterns": ["/node_modules/", "/e2e/"],
 		"transformIgnorePatterns": [
 			"node_modules/(?!((jest-)?react-native|@react-native(-community)?)|expo(nent)?|@expo(nent)?/.*|@expo-google-fonts/.*|react-navigation|@react-navigation/.*|react-native-svg|redux-toolkit-helpers|react-redux)"
-		]
+		],
+		"moduleNameMapper": {
+			"^uuid$": "<rootDir>/node_modules/uuid/dist/cjs/index.js",
+			"^slices/(.*)$": "<rootDir>/slices/$1"
+		}
 	},
 	"dependencies": {
 		"@fanchenbao/react-native-scroll-indicator": "^0.4.0",
@@ -160,6 +165,7 @@
 		"@commitlint/config-conventional": "^19.8.0",
 		"@jest/test-sequencer": "^30.2.0",
 		"@react-native-community/cli": "^20.0.2",
+		"@testing-library/react-native": "^14.0.1",
 		"@types/color": "^4.2.0",
 		"@types/fast-shuffle": "^4.5.3",
 		"@types/jest": "^29.5.12",

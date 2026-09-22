@@ -6,16 +6,31 @@ import { View } from "react-native";
 import styled from "styled-components/native";
 import { assetsSize } from "../../../../config";
 import { withStat } from "../../../../lib";
-import { BaseStatPicker, type DefinedBaseStatPickerProps } from "../common";
+import {
+	BaseStatPicker,
+	BoardValue,
+	type BoardValueProps,
+	type DefinedBaseStatPickerProps,
+} from "../common";
 import { StatPickerMemo as StatPicker } from "../common/StatPicker";
 
 export const BaseContainer = withStat(SanityStatBackground, {
 	ratio: gameAssets.sanity.ratio,
 });
 
-export const Background: typeof BaseContainer = styled(BaseContainer)`
+export const Background: typeof BaseContainer = styled(BaseContainer).attrs({
+	testID: "sanity-background",
+})`
 
 `;
+
+export const PickerValue: FC<BoardValueProps> = styled(BoardValue).attrs({
+	testID: "sanity-value",
+})``;
+
+export const BasePickerValue: FC<BoardValueProps> = styled(BoardValue).attrs({
+	testID: "sanity-base-value",
+})``;
 
 export const Container: typeof View = styled(View)`
 	padding-top: ${size.gap.xl}px;
@@ -26,7 +41,9 @@ export const Value: typeof UI.Value = styled(UI.Value)`
   color: ${color.sanity};
 `;
 
-export const Initial: typeof View = styled(View)`
+export const Initial: typeof View = styled(View).attrs({
+	testID: "sanity-initial",
+})`
   position: absolute;
 	right: 8px;
 	bottom: -12px;
@@ -48,13 +65,17 @@ export const InitialValue: typeof Value = styled(Value)`
   font-size: 24px;
 `;
 
-export const Additional: typeof Value = styled(Value)`
+export const Additional: typeof Value = styled(Value).attrs({
+	testID: "sanity-additional",
+})`
   
 `;
 
 export const BaseSanity: FC<DefinedBaseStatPickerProps> = styled(
 	BaseStatPicker,
 ).attrs({
+	testID: "sanity-base-picker",
+	Component: BasePickerValue,
 	statType: "sanity",
 	valueStyle: {
 		color: color.sanity,
@@ -72,6 +93,8 @@ export const BaseSanity: FC<DefinedBaseStatPickerProps> = styled(
 `;
 
 export const Picker: typeof StatPicker = styled(StatPicker).attrs({
+	testID: "sanity-picker",
+	Component: PickerValue,
 	valueStyle: {
 		color: color.sanity,
 	},

@@ -4,7 +4,11 @@ import { IconNumber } from "@shared/ui";
 import styled from "styled-components/native";
 import { VALUE_HEIGHT } from "../../config";
 
-export const Container: typeof ClueStatBackground = styled(ClueStatBackground)`
+export const Container: typeof ClueStatBackground = styled(
+	ClueStatBackground,
+).attrs({
+	testID: "clues-background",
+})`
   width: ${VALUE_HEIGHT * gameAssets.clue.ratio}px;
   height: ${VALUE_HEIGHT}px;
 `;

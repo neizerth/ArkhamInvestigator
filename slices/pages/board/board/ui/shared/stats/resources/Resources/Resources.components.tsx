@@ -33,6 +33,7 @@ export const Value: typeof UI.Value = styled(UI.Value)`
 export const UpkeepResources: FC<DefinedBaseStatPickerProps> = styled(
 	BaseStatPicker,
 ).attrs({
+	testID: "resources-upkeep-picker",
 	statType: "upkeepResourcesIncrease",
 	valueStyle: {
 		color: color.resource,
@@ -50,6 +51,7 @@ export const UpkeepResources: FC<DefinedBaseStatPickerProps> = styled(
 `;
 
 export const Picker: typeof StatPicker = styled(StatPicker).attrs({
+	testID: "resources-picker",
 	valueStyle: {
 		color: color.resource,
 	},
