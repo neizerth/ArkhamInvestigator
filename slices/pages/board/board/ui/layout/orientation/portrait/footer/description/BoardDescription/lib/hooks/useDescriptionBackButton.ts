@@ -2,8 +2,9 @@ import {
 	selectShowDescription,
 	setShowDescription,
 } from "@modules/board/base/shared/lib";
+import { useBackButton } from "@modules/core/device/shared/lib";
 import { useRoute } from "@react-navigation/native";
-import { useAppDispatch, useAppSelector, useBackButton } from "@shared/lib";
+import { useAppDispatch, useAppSelector } from "@shared/lib";
 import { useCallback } from "react";
 
 export const useDescriptionBackButton = () => {

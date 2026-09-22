@@ -1,8 +1,5 @@
-import {
-	useAppDispatch,
-	useAppSelector,
-	useBackButton,
-} from "@shared/lib/hooks";
+import { useBackButton } from "@modules/core/device/shared/lib";
+import { useAppDispatch, useAppSelector } from "@shared/lib/hooks";
 import { useCallback } from "react";
 import { closeModal, selectModalId } from "../store";
 

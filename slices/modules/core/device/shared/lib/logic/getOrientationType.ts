@@ -1,6 +1,5 @@
 import { orientations } from "@shared/config";
 import type { DeviceOrientation } from "@shared/model";
-
 import type * as ScreenOrientation from "expo-screen-orientation";
 
 type OrientationType = DeviceOrientation | "default";

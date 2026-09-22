@@ -1,4 +1,4 @@
-import { useBreakpoint } from "@shared/lib/hooks/device/useBreakpoint";
+import { useBreakpoint } from "@modules/core/device/shared/lib";
 import type { PropsWithSkill } from "@shared/model/ui";
 import type { IconNumberProps } from "@shared/ui";
 import { Container, Icon, Value } from "./SignatureSkillPreview.components";

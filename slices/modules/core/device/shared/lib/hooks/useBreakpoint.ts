@@ -1,3 +1,5 @@
+import { breakpointSizes, breakpoints, deviceTypes } from "@shared/config";
+import { capitalize } from "@shared/lib/util";
 import type {
 	BreakpointSize,
 	DeviceBreakpointType,
@@ -6,8 +8,6 @@ import type {
 } from "@shared/model";
 import { useWindowDimensions } from "react-native";
 import { useMediaQuery } from "react-responsive";
-import { breakpointSizes, breakpoints, deviceTypes } from "../../../config";
-import { capitalize } from "../../util";
 
 export type BreakpointInfo = {
 	deviceType: DeviceType;
@@ -16,6 +16,7 @@ export type BreakpointInfo = {
 	size: number;
 	orientation: DeviceOrientation;
 };
+
 export const useBreakpoint = (): BreakpointInfo => {
 	const { width } = useWindowDimensions();
 	const isPortrait = useMediaQuery({ orientation: "portrait" });

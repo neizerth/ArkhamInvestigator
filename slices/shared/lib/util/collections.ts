@@ -1,5 +1,12 @@
 import { includesBy } from "./criteria";
 
+export const collect = <T>(data: T | T) => {
+	if (!data) {
+		return [];
+	}
+	return Array.isArray(data) ? data : [data];
+};
+
 export const toggleBy = <T>(
 	hasItem: (item: T) => boolean,
 	item: T,

@@ -1,5 +1,6 @@
 import type { PropsWithChildren } from "react";
 import { Platform } from "react-native";
+import { collect } from "slices/shared/lib";
 
 type PlatformType = typeof Platform.OS;
 
@@ -10,15 +11,11 @@ export type PlatformViewProps = PropsWithChildren & {
 
 type Platforms = PlatformType | PlatformType[];
 
-const toPlatforms = (platform: Platforms) => {
-	return Array.isArray(platform) ? platform : [platform];
-};
-
 export const PlatformFragment = (props: PlatformViewProps) => {
 	const { only = [], except = [], children } = props;
 
-	const onlyPlatforms = toPlatforms(only);
-	const exceptPlatforms = toPlatforms(except);
+	const onlyPlatforms = collect(only);
+	const exceptPlatforms = collect(except);
 
 	if (onlyPlatforms.length > 0 && !onlyPlatforms.includes(Platform.OS)) {
 		return null;
