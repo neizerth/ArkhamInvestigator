@@ -1,5 +1,6 @@
 # Board health: tap and long press. Normalizes the value to 0 first, so the flow does not
 # depend on the investigator or on the state left by a previous run.
+# The picker animates to the new value, so every assertion after a gesture waits for it.
 # Swipes are covered by unit tests: the app uses RNGH fling gestures, which Maestro's
 # synthetic swipes do not trigger.
 appId: ${APP_ID}
@@ -14,35 +15,51 @@ appId: ${APP_ID}
     commands:
       - longPressOn:
           id: "board-health"
-- assertNotVisible:
-    id: "health-base-value"
+- extendedWaitUntil:
+    notVisible:
+      id: "health-base-value"
+    timeout: 5000
 
 # tap decreases the value and stops at 0 (negative values are off by default)
 - repeat:
-    times: 20
+    times: 25
+    while:
+      notVisible:
+        id: "health-value"
+        text: "0"
     commands:
       - tapOn:
           id: "board-health"
           waitToSettleTimeoutMs: 100
-- assertVisible:
-    id: "health-value"
-    text: "0"
+- extendedWaitUntil:
+    visible:
+      id: "health-value"
+      text: "0"
+    timeout: 5000
 
 # long press with base == initial: value +1, base +1
 - longPressOn:
     id: "board-health"
-- assertVisible:
-    id: "health-value"
-    text: "1"
-- assertVisible:
-    id: "health-base-value"
-    text: "\\+1"
+- extendedWaitUntil:
+    visible:
+      id: "health-value"
+      text: "1"
+    timeout: 5000
+- extendedWaitUntil:
+    visible:
+      id: "health-base-value"
+      text: "\\+1"
+    timeout: 5000
 
 # long press with base != initial: base resets to initial, value loses the difference
 - longPressOn:
     id: "board-health"
-- assertVisible:
-    id: "health-value"
-    text: "0"
-- assertNotVisible:
-    id: "health-base-value"
+- extendedWaitUntil:
+    visible:
+      id: "health-value"
+      text: "0"
+    timeout: 5000
+- extendedWaitUntil:
+    notVisible:
+      id: "health-base-value"
+    timeout: 5000

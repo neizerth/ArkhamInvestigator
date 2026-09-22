@@ -11,15 +11,22 @@ appId: ${APP_ID}
     commands:
       - extendedWaitUntil:
           visible: "Single player|Continue"
-          timeout: 60000
+          # a dev build cold start can take well over a minute
+          timeout: 180000
+      # a saved game is resumed, otherwise a new one is started below
       - runFlow:
           when:
             visible: "Continue"
           commands:
             - tapOn: "Continue"
+            - extendedWaitUntil:
+                visible:
+                  id: "board-health"
+                timeout: 30000
       - runFlow:
           when:
-            visible: "Single player"
+            notVisible:
+              id: "board-health"
           commands:
             - tapOn: "Single player"
             - extendedWaitUntil:
