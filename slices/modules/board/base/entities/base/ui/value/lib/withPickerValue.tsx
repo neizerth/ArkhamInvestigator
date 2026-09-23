@@ -21,6 +21,11 @@ export type WithPickerValueProps = Omit<
 		data?: number[];
 	};
 
+export type PickerValueProps = WithPickerValueProps & {
+	Value: FC<ValueProps>;
+	defaultData?: number[];
+};
+
 const styles = {
 	gap: 30,
 	contentContainerStyle: {
@@ -31,35 +36,45 @@ const styles = {
 	},
 };
 
+/** the stat number itself: a scrollable picker or a plain value, without any background */
+export const PickerValue = ({
+	Value,
+	defaultData = [],
+	type = "value",
+	children,
+	...props
+}: PickerValueProps) => {
+	const renderItem: ListRenderItem<number> = ({ item }) => {
+		return <Value value={item} />;
+	};
+
+	const data = useMemo(() => {
+		return props.data || defaultData;
+	}, [defaultData, props.data]);
+
+	return (
+		<>
+			{type === "picker" && (
+				<Picker {...styles} {...props} renderItem={renderItem} data={data} />
+			)}
+			{type === "value" && (
+				<Value value={props.value} contentContainerStyle={props.style} />
+			)}
+			{children}
+		</>
+	);
+};
+
 export const withPickerValue = ({
 	Background,
 	Value,
 	data: defaultData = [],
 }: WithPickerValueOptions) => {
-	const renderItem: ListRenderItem<number> = ({ item }) => {
-		return <Value value={item} />;
-	};
-	const Component: FC<WithPickerValueProps> = ({
-		type = "value",
-		children,
-		...props
-	}) => {
-		const data = useMemo(() => {
-			return props.data || defaultData;
-		}, [defaultData, props.data]);
-
-		return (
-			<Background>
-				{type === "picker" && (
-					<Picker {...styles} {...props} renderItem={renderItem} data={data} />
-				)}
-				{type === "value" && (
-					<Value value={props.value} contentContainerStyle={props.style} />
-				)}
-				{children}
-			</Background>
-		);
-	};
+	const Component: FC<WithPickerValueProps> = (props) => (
+		<Background>
+			<PickerValue {...props} Value={Value} defaultData={defaultData} />
+		</Background>
+	);
 
 	const displayName = Component.displayName || Component.name;
 	Component.displayName = `WithPickerValue(${displayName})`;

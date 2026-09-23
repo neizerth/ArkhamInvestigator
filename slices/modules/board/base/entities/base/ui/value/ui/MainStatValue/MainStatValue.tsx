@@ -1,25 +1,14 @@
-import { selectShowInitialHealthAndSanity } from "@modules/board/base/shared/lib";
-import { useAppSelector } from "@shared/lib";
 import type { InvestigatorMainStatType } from "@shared/model";
-import { type WithPickerValueProps, withPickerValue } from "../../lib";
-import { byStat } from "./MainStatValue.components";
+import { PickerValue, type WithPickerValueProps } from "../../lib";
+import { MainStatFigure } from "../MainStatFigure";
+import { valueByStat } from "./MainStatValue.components";
 
 export type MainStatValueProps = WithPickerValueProps & {
 	stat: InvestigatorMainStatType;
 	initialValue?: number;
 };
 
-const controls = {
-	health: withPickerValue({
-		Background: byStat.health.Container,
-		Value: byStat.health.Value,
-	}),
-	sanity: withPickerValue({
-		Background: byStat.sanity.Container,
-		Value: byStat.sanity.Value,
-	}),
-};
-
+/** the compact health and sanity value, used outside the board */
 export const MainStatValue = ({
 	stat,
 	value,
@@ -27,19 +16,18 @@ export const MainStatValue = ({
 	children,
 	...props
 }: MainStatValueProps) => {
-	const showInitial = useAppSelector(selectShowInitialHealthAndSanity);
-	const Control = controls[stat];
-	const C = byStat[stat];
+	const Value = valueByStat[stat];
 
 	return (
-		<Control {...props} value={value}>
+		<MainStatFigure
+			stat={stat}
+			size="small"
+			Value={Value}
+			initialValue={initialValue}
+		>
+			<PickerValue {...props} value={value} Value={Value} />
 			{children}
-			{showInitial && typeof initialValue === "number" && (
-				<C.Initial>
-					<C.InitialValue value={initialValue} />
-				</C.Initial>
-			)}
-		</Control>
+		</MainStatFigure>
 	);
 };
 

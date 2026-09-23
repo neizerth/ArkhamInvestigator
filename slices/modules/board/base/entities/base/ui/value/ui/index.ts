@@ -1,3 +1,4 @@
+export * from "./MainStatFigure";
 export * from "./MainStatValue";
 export * from "./ActionsValue";
 export * from "./CluesValue";

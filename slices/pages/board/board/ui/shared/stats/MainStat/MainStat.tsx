@@ -1,3 +1,4 @@
+import { MainStatFigure } from "@modules/board/base/entities/base/ui/value";
 import {
 	selectAllowNegativeHealthAndSanity,
 	selectShowAdditionalInformation,
@@ -15,6 +16,7 @@ export type MainStatProps = ViewProps & {
 	contentContainerStyle?: ViewStyle;
 };
 
+/** the board health and sanity: the picker, the base value difference and the wounds */
 export const MainStat = ({
 	stat,
 	contentContainerStyle,
@@ -25,6 +27,8 @@ export const MainStat = ({
 	const showAdditionalInfo = useAppSelector(selectShowAdditionalInformation);
 	const showInitialValue = useAppSelector(selectShowInitialHealthAndSanity);
 	const negative = useAppSelector(selectAllowNegativeHealthAndSanity);
+
+	const minValue = negative ? Number.NEGATIVE_INFINITY : 0;
 
 	const {
 		onPress,
@@ -38,7 +42,7 @@ export const MainStat = ({
 		value,
 	} = useStat({
 		statType: stat,
-		minValue: negative ? Number.NEGATIVE_INFINITY : 0,
+		minValue,
 	});
 
 	const picker = useMainStatPicker({ value, baseValue });
@@ -51,12 +55,20 @@ export const MainStat = ({
 
 	const onValueChange = picker.showWounds ? onWoundsChange : onChange;
 
+	// the setting shows it always, the additional information brings it along
 	const showInitial = showInitialValue || showAdditionalInfo;
 
 	return (
 		<C.Container testID={`board-${stat}`} {...props}>
 			{showBaseDiff && <C.Base />}
-			<C.Content style={contentContainerStyle}>
+			<MainStatFigure
+				stat={stat}
+				size="medium"
+				Value={C.Value}
+				initialValue={initialValue}
+				showInitial={showInitial}
+				style={contentContainerStyle}
+			>
 				{showAdditionalInfo && (
 					<C.Additional
 						value={picker.showWounds ? baseValue : `-${picker.wounds}`}
@@ -72,13 +84,7 @@ export const MainStat = ({
 					onPress={onPress}
 					style={pickerStyle}
 				/>
-				{showInitial && (
-					<C.Initial>
-						<C.InitialSeparator />
-						<C.InitialValue value={initialValue} />
-					</C.Initial>
-				)}
-			</C.Content>
+			</MainStatFigure>
 		</C.Container>
 	);
 };

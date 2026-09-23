@@ -1,15 +1,11 @@
-import {
-	HealthStatBackground,
-	SanityStatBackground,
-} from "@modules/core/theme/shared/ui";
-import { color, gameAssets, size } from "@shared/config";
+import { mainStatStyles } from "@modules/board/base/entities/base/ui/value";
+import { size } from "@shared/config";
 import type { InvestigatorMainStatType } from "@shared/model";
 import { Value as BaseValue } from "@shared/ui";
 import type { FC } from "react";
 import { View } from "react-native";
 import styled from "styled-components/native";
 import { assetsSize } from "../../../../config";
-import { withStat } from "../../../../lib";
 import {
 	BaseStatPicker,
 	BoardValue,
@@ -18,41 +14,14 @@ import {
 } from "../common";
 import { StatPickerMemo as StatPicker } from "../common/StatPicker";
 
-type MainStatConfig = {
-	Background: typeof HealthStatBackground;
-	color: string;
-	ratio: number;
-	/** offsets differ because the assets have different shapes */
-	initialRight: number;
-	baseRight: number;
-};
-
-const config: Record<InvestigatorMainStatType, MainStatConfig> = {
-	health: {
-		Background: HealthStatBackground,
-		color: color.health,
-		ratio: gameAssets.health.ratio,
-		initialRight: -10,
-		baseRight: -25,
-	},
-	sanity: {
-		Background: SanityStatBackground,
-		color: color.sanity,
-		ratio: gameAssets.sanity.ratio,
-		initialRight: 8,
-		baseRight: 0,
-	},
+/** the base value difference hangs off the corner the asset leaves free */
+const baseRight: Record<InvestigatorMainStatType, number> = {
+	health: -25,
+	sanity: 0,
 };
 
 const createComponents = (stat: InvestigatorMainStatType) => {
-	const { Background, ratio, initialRight, baseRight } = config[stat];
-	const statColor = config[stat].color;
-
-	const BaseContainer = withStat(Background, { ratio });
-
-	const Content: typeof BaseContainer = styled(BaseContainer).attrs({
-		testID: `${stat}-background`,
-	})``;
+	const statColor = mainStatStyles[stat].color;
 
 	const PickerValue: FC<BoardValueProps> = styled(BoardValue).attrs({
 		testID: `${stat}-value`,
@@ -71,30 +40,6 @@ const createComponents = (stat: InvestigatorMainStatType) => {
 		color: ${statColor};
 	`;
 
-	const Initial: typeof View = styled(View).attrs({
-		testID: `${stat}-initial`,
-	})`
-		position: absolute;
-		right: ${initialRight}px;
-		bottom: -12px;
-	`;
-
-	const InitialSeparator: typeof View = styled(View)`
-		position: absolute;
-		left: -12px;
-		top: 0px;
-		width: 20px;
-		height: 3px;
-		background-color: white;
-		border: 1px solid ${statColor};
-		transform: rotate(-60deg);
-		border-radius: 3px;
-	`;
-
-	const InitialValue: typeof Value = styled(Value)`
-		font-size: 24px;
-	`;
-
 	const Base: FC<DefinedBaseStatPickerProps> = styled(BaseStatPicker).attrs({
 		testID: `${stat}-base-picker`,
 		Component: BasePickerValue,
@@ -107,7 +52,7 @@ const createComponents = (stat: InvestigatorMainStatType) => {
 		contentContainerStyle: {
 			position: "absolute",
 			zIndex: 4,
-			right: baseRight,
+			right: baseRight[stat],
 			top: -10,
 		},
 		gap: 5,
@@ -131,13 +76,10 @@ const createComponents = (stat: InvestigatorMainStatType) => {
 
 	return {
 		Container,
-		Content,
+		Value,
 		Picker,
 		Base,
 		Additional,
-		Initial,
-		InitialSeparator,
-		InitialValue,
 	};
 };
 
