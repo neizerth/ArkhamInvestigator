@@ -39,7 +39,7 @@ export const InvestigatorResources = (props: InvestigatorResourcesProps) => {
 		dispatch(
 			decreaseCurrentActualPropValue({
 				prop: "resources",
-				value: 0,
+				min: 0,
 			}),
 		);
 	}, [dispatch]);

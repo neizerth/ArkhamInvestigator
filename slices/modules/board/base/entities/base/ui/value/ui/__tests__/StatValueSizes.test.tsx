@@ -4,9 +4,8 @@ import { StyleSheet, type ViewStyle } from "react-native";
 import { ActionsValue } from "../ActionsValue";
 import { CluesValue } from "../CluesValue";
 import { DoomValue } from "../DoomValue";
-import { HealthValue } from "../HealthValue";
+import { HealthValue, SanityValue } from "../MainStatValue";
 import { ResourcesValue } from "../ResourcesValue";
-import { SanityValue } from "../SanityValue";
 
 /**
  * Pixel sizes of the compact stat values. Numbers are written out on purpose: they must
@@ -85,7 +84,6 @@ describe("initial value badge", () => {
 		expect(fontSize("7")).toBe(18);
 	});
 
-	// known drift: only the health badge is pushed behind the background
 	it("health is drawn behind the background", async () => {
 		await renderWithStore(
 			<HealthValue value={5} initialValue={7} />,
@@ -95,7 +93,7 @@ describe("initial value badge", () => {
 		expect(style("health-initial").zIndex).toBe(-1);
 	});
 
-	it.failing("sanity is drawn behind the background", async () => {
+	it("sanity is drawn behind the background", async () => {
 		await renderWithStore(
 			<SanityValue value={5} initialValue={7} />,
 			withInitial,

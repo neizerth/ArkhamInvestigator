@@ -5,6 +5,5 @@ export * from "./resources";
 export * from "./doom";
 export * from "./clues";
 
-export * from "./Health";
-export * from "./Sanity";
+export * from "./MainStat";
 export * from "./HandSize";

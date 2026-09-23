@@ -2,8 +2,7 @@ import type { PickerProps } from "@modules/core/control/entities/picker/model";
 import { renderWithStore } from "@shared/lib/test/createTestStore";
 import { screen } from "@testing-library/react-native";
 import { StyleSheet, Text } from "react-native";
-import { HealthValue } from "../HealthValue";
-import { SanityValue } from "../SanityValue";
+import { HealthValue, SanityValue } from "../MainStatValue";
 
 jest.mock("@modules/core/control/entities/picker/ui", () =>
 	require("@modules/core/control/entities/picker/lib/test/pickerMock").pickerUiMock(),
@@ -53,8 +52,7 @@ describe.each([
 		expect(onValueChanged).toHaveBeenCalledWith({ value: 4, index: 3 });
 	});
 
-	// known drift: props.children is overridden by the initial value slot
-	it.failing("renders children over the background", async () => {
+	it("renders children over the background", async () => {
 		await renderWithStore(
 			<Component value={5}>
 				<Text>child</Text>
@@ -103,8 +101,7 @@ describe("two-digit value", () => {
 		expect(getFontSize("12")).toBe(16);
 	});
 
-	// known drift: SanityValue lacks the two-digit rule, fixed by merging the components
-	it.failing("sanity shrinks the font", async () => {
+	it("sanity shrinks the font", async () => {
 		await renderWithStore(<SanityValue value={12} />);
 
 		expect(getFontSize("12")).toBe(16);

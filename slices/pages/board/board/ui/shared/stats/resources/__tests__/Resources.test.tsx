@@ -75,10 +75,7 @@ describe("investigator resources", () => {
 		expect(selectTestBoard(store.getState()).value.resources).toBe(4);
 	});
 
-	// known drift: the scenario twin guards against negatives, this one passes
-	// `value: 0` to decreaseCurrentActualPropValue, where `value` is the decrement,
-	// not the minimum, so it goes below zero
-	it.failing("stops at zero on press", async () => {
+	it("stops at zero on press", async () => {
 		const { store } = await setup(<InvestigatorResources />, {
 			investigator: 0,
 		});

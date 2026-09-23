@@ -10,8 +10,7 @@ import type { RootState } from "@shared/model";
 import { act, screen } from "@testing-library/react-native";
 import { range } from "ramda";
 import { StyleSheet } from "react-native";
-import { Health } from "../Health";
-import { Sanity } from "../Sanity";
+import { Health, Sanity } from "../MainStat";
 
 jest.mock("@modules/core/control/entities/picker/ui", () =>
 	require("@modules/core/control/entities/picker/lib/test/pickerMock").pickerUiMock(),

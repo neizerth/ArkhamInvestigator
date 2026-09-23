@@ -5,8 +5,7 @@ import { renderWithStore } from "@shared/lib/test/createTestStore";
 import type { RootState } from "@shared/model";
 import { screen } from "@testing-library/react-native";
 import { StyleSheet, type ViewStyle } from "react-native";
-import { Health } from "../Health";
-import { Sanity } from "../Sanity";
+import { Health, Sanity } from "../MainStat";
 
 /**
  * Pixel sizes of the board stats. Numbers are written out on purpose: they must survive
