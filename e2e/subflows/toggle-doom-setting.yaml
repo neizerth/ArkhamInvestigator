@@ -1,0 +1,19 @@
+# Flips the "Doom" checkbox in settings and returns to the previous screen.
+appId: ${APP_ID}
+---
+- launchApp:
+    stopApp: true
+- extendedWaitUntil:
+    visible:
+      id: "home-settings"
+    # a dev build cold start can take well over a minute
+    timeout: 180000
+- tapOn:
+    id: "home-settings"
+- scrollUntilVisible:
+    element:
+      text: "Doom"
+    direction: DOWN
+    timeout: 30000
+- tapOn: "Doom"
+- back

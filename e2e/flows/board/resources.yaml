@@ -1,0 +1,23 @@
+# Board investigator resources: long press clears them, tap spends one and stops at zero.
+# The picker animates to the new value, so every assertion after a gesture waits for it.
+appId: ${APP_ID}
+---
+- runFlow: ../../subflows/open-board.yaml
+
+# long press clears the resources, whatever the previous run left
+- longPressOn:
+    id: "resources-picker"
+- extendedWaitUntil:
+    visible:
+      id: "resources-value"
+      text: "0"
+    timeout: 5000
+
+# tapping at zero must not go negative
+- tapOn:
+    id: "resources-picker"
+- extendedWaitUntil:
+    visible:
+      id: "resources-value"
+      text: "0"
+    timeout: 5000

@@ -7,6 +7,7 @@ import type { FC } from "react";
 import styled, { css } from "styled-components/native";
 import { assetsSize } from "../../../../../config";
 import { withStat } from "../../../../../lib";
+import { BoardValue, type BoardValueProps } from "../../common";
 import { StatPickerMemo as StatPicker } from "../../common/StatPicker";
 
 export const BaseContainer = withStat(ClueStatBackground, {
@@ -21,8 +22,13 @@ export const Value: typeof BaseValue = styled(BaseValue)`
   color: ${color.clue};
 `;
 
+export const PickerValue: FC<BoardValueProps> = styled(BoardValue).attrs({
+	testID: "clues-value",
+})``;
+
 export const Picker: typeof StatPicker = styled(StatPicker).attrs({
 	testID: "clues-picker",
+	Component: PickerValue,
 	valueStyle: {
 		color: color.clue,
 	},

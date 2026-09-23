@@ -1,0 +1,43 @@
+# Board investigator doom: hidden behind the "Doom" setting, so the flow turns it on,
+# checks tap and long press, and turns it back off (off is the default).
+# The picker animates to the new value, so every assertion after a gesture waits for it.
+appId: ${APP_ID}
+---
+- runFlow: ../../subflows/open-board.yaml
+- runFlow:
+    when:
+      notVisible:
+        id: "doom-picker"
+    commands:
+      - runFlow: ../../subflows/toggle-doom-setting.yaml
+      - runFlow: ../../subflows/open-board.yaml
+- assertVisible:
+    id: "doom-picker"
+
+# long press clears the doom, whatever the previous run left
+- longPressOn:
+    id: "doom-picker"
+- extendedWaitUntil:
+    visible:
+      id: "doom-value"
+      text: "0"
+    timeout: 5000
+
+- tapOn:
+    id: "doom-picker"
+- extendedWaitUntil:
+    visible:
+      id: "doom-value"
+      text: "1"
+    timeout: 5000
+
+- longPressOn:
+    id: "doom-picker"
+- extendedWaitUntil:
+    visible:
+      id: "doom-value"
+      text: "0"
+    timeout: 5000
+
+# back to the default, so the other flows see the board they expect
+- runFlow: ../../subflows/toggle-doom-setting.yaml

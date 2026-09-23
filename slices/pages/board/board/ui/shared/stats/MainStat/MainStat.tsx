@@ -1,13 +1,11 @@
 import {
 	selectAllowNegativeHealthAndSanity,
 	selectShowAdditionalInformation,
-	selectShowDamageAndHorror,
 	selectShowInitialHealthAndSanity,
+	useMainStatPicker,
 } from "@modules/board/base/shared/lib";
 import { useAppSelector } from "@shared/lib";
 import type { InvestigatorMainStatType } from "@shared/model";
-import { range } from "ramda";
-import { useMemo } from "react";
 import type { ViewProps, ViewStyle } from "react-native";
 import { useStat } from "../../../../lib/hooks/useStat";
 import { byStat } from "./MainStat.components";
@@ -25,7 +23,6 @@ export const MainStat = ({
 	const C = byStat[stat];
 
 	const showAdditionalInfo = useAppSelector(selectShowAdditionalInformation);
-	const showWounds = useAppSelector(selectShowDamageAndHorror);
 	const showInitialValue = useAppSelector(selectShowInitialHealthAndSanity);
 	const negative = useAppSelector(selectAllowNegativeHealthAndSanity);
 
@@ -39,13 +36,12 @@ export const MainStat = ({
 		initialValue,
 		baseValue,
 		value,
-		wounds,
 	} = useStat({
 		statType: stat,
 		minValue: negative ? Number.NEGATIVE_INFINITY : 0,
 	});
 
-	const maxValue = baseValue + 1;
+	const picker = useMainStatPicker({ value, baseValue });
 
 	const showBaseDiff = Boolean(baseValue - initialValue);
 
@@ -53,15 +49,7 @@ export const MainStat = ({
 		opacity: showAdditionalInfo ? 0 : 1,
 	};
 
-	const data = useMemo(() => {
-		const minValue = negative ? -20 : 0;
-		const maxWounds = negative ? 20 : maxValue;
-		return showWounds ? range(0, maxWounds) : range(minValue, maxValue);
-	}, [maxValue, showWounds, negative]);
-
-	const currentValue = showWounds ? wounds : value;
-
-	const onValueChange = showWounds ? onWoundsChange : onChange;
+	const onValueChange = picker.showWounds ? onWoundsChange : onChange;
 
 	const showInitial = showInitialValue || showAdditionalInfo;
 
@@ -70,11 +58,13 @@ export const MainStat = ({
 			{showBaseDiff && <C.Base />}
 			<C.Content style={contentContainerStyle}>
 				{showAdditionalInfo && (
-					<C.Additional value={showWounds ? baseValue : `-${wounds}`} />
+					<C.Additional
+						value={picker.showWounds ? baseValue : `-${picker.wounds}`}
+					/>
 				)}
 				<C.Picker
-					value={currentValue}
-					data={data}
+					value={picker.value}
+					data={picker.data}
 					onValueChanged={onValueChange}
 					onLongPress={onLongPress}
 					onSwipeLeft={onSwipeLeft}

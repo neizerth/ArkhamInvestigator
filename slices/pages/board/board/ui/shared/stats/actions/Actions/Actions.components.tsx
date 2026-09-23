@@ -6,7 +6,12 @@ import { View } from "react-native";
 import styled from "styled-components/native";
 import { assetsSize } from "../../../../../config";
 import { withStat } from "../../../../../lib";
-import { BaseStatPicker, type DefinedBaseStatPickerProps } from "../../common";
+import {
+	BaseStatPicker,
+	BoardValue,
+	type BoardValueProps,
+	type DefinedBaseStatPickerProps,
+} from "../../common";
 import { StatPickerMemo as StatPicker } from "../../common/StatPicker";
 import { SpecialActions } from "../special/SpecialActions";
 
@@ -62,8 +67,13 @@ export const DiffValue: typeof Value = styled(Value)`
   color: ${color.action};
 `;
 
+export const PickerValue: FC<BoardValueProps> = styled(BoardValue).attrs({
+	testID: "actions-value",
+})``;
+
 export const Picker: typeof StatPicker = styled(StatPicker).attrs({
 	testID: "actions-picker",
+	Component: PickerValue,
 	valueStyle: {
 		color: color.action,
 	},

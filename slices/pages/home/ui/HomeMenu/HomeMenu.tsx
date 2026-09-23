@@ -42,7 +42,7 @@ export const HomeMenu = (props: HomeMenuProps) => {
 							<C.ThemeIcon icon="images" />
 						</C.Button>
 					</ArtworksFragment>
-					<C.Button onPress={goTo(routes.settings)}>
+					<C.Button testID="home-settings" onPress={goTo(routes.settings)}>
 						<C.Icon icon="wrench" />
 					</C.Button>
 				</C.Right>

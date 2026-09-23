@@ -1,0 +1,32 @@
+# Board actions: a tap spends one action. It stops at one on purpose — spending the last
+# action ends the turn, which resets the board and is a separate scenario.
+# The picker animates to the new value, so every assertion after a gesture waits for it.
+appId: ${APP_ID}
+---
+- runFlow: ../../subflows/open-board.yaml
+
+# spend actions down to one, whatever the previous run left
+- repeat:
+    times: 25
+    while:
+      notVisible:
+        id: "actions-value"
+        text: "1"
+    commands:
+      - tapOn:
+          id: "actions-picker"
+          waitToSettleTimeoutMs: 100
+- extendedWaitUntil:
+    visible:
+      id: "actions-value"
+      text: "1"
+    timeout: 5000
+
+# long press raises both the value and the base value
+- longPressOn:
+    id: "actions-picker"
+- extendedWaitUntil:
+    visible:
+      id: "actions-value"
+      text: "2"
+    timeout: 5000

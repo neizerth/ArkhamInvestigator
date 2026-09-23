@@ -1,0 +1,38 @@
+# Board investigator clues: long press clears them, tap adds one.
+# The picker animates to the new value, so every assertion after a gesture waits for it.
+appId: ${APP_ID}
+---
+- runFlow: ../../subflows/open-board.yaml
+
+# long press clears the clues, whatever the previous run left
+- longPressOn:
+    id: "clues-picker"
+- extendedWaitUntil:
+    visible:
+      id: "clues-value"
+      text: "0"
+    timeout: 5000
+
+- tapOn:
+    id: "clues-picker"
+- extendedWaitUntil:
+    visible:
+      id: "clues-value"
+      text: "1"
+    timeout: 5000
+
+- tapOn:
+    id: "clues-picker"
+- extendedWaitUntil:
+    visible:
+      id: "clues-value"
+      text: "2"
+    timeout: 5000
+
+- longPressOn:
+    id: "clues-picker"
+- extendedWaitUntil:
+    visible:
+      id: "clues-value"
+      text: "0"
+    timeout: 5000

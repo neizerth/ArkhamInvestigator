@@ -6,7 +6,12 @@ import { View } from "react-native";
 import styled from "styled-components/native";
 import { assetsSize } from "../../../../../config";
 import { withStat } from "../../../../../lib";
-import { BaseStatPicker, type DefinedBaseStatPickerProps } from "../../common";
+import {
+	BaseStatPicker,
+	BoardValue,
+	type BoardValueProps,
+	type DefinedBaseStatPickerProps,
+} from "../../common";
 import { StatPickerMemo as StatPicker } from "../../common/StatPicker";
 
 const BaseContent = withStat(ResourceStatBackground, {
@@ -50,8 +55,13 @@ export const UpkeepResources: FC<DefinedBaseStatPickerProps> = styled(
 })`
 `;
 
+export const PickerValue: FC<BoardValueProps> = styled(BoardValue).attrs({
+	testID: "resources-value",
+})``;
+
 export const Picker: typeof StatPicker = styled(StatPicker).attrs({
 	testID: "resources-picker",
+	Component: PickerValue,
 	valueStyle: {
 		color: color.resource,
 	},
