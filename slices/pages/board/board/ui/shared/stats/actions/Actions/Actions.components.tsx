@@ -42,10 +42,15 @@ export const Special: typeof SpecialActions = styled(SpecialActions)`
   left: 90px;
 `;
 
+export const BasePickerValue: FC<BoardValueProps> = styled(BoardValue).attrs({
+	testID: "actions-base-value",
+})``;
+
 export const BaseActions: FC<DefinedBaseStatPickerProps> = styled(
 	BaseStatPicker,
 ).attrs({
 	testID: "actions-base-picker",
+	Component: BasePickerValue,
 	statType: "actions",
 	valueStyle: {
 		color: color.action,

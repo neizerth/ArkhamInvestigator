@@ -5,6 +5,19 @@ appId: ${APP_ID}
 ---
 - runFlow: ../../subflows/open-board.yaml
 
+# long press resets the base value when a previous run left it raised
+- runFlow:
+    when:
+      visible:
+        id: "actions-base-value"
+    commands:
+      - longPressOn:
+          id: "actions-picker"
+- extendedWaitUntil:
+    notVisible:
+      id: "actions-base-value"
+    timeout: 5000
+
 # spend actions down to one, whatever the previous run left
 - repeat:
     times: 25

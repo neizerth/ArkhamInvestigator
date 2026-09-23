@@ -11,8 +11,8 @@ appId: ${APP_ID}
     commands:
       - extendedWaitUntil:
           visible: "Single player|Continue"
-          # a dev build cold start can take well over a minute
-          timeout: 180000
+          # a dev build cold start is slow, and the first launch also downloads assets
+          timeout: 300000
       # a saved game is resumed, otherwise a new one is started below
       - runFlow:
           when:
