@@ -1,11 +1,13 @@
 import { renderWithStore } from "@shared/lib/test/createTestStore";
 import { screen } from "@testing-library/react-native";
 import { StyleSheet, type ViewStyle } from "react-native";
-import { ActionsValue } from "../ActionsValue";
-import { CluesValue } from "../CluesValue";
-import { DoomValue } from "../DoomValue";
 import { HealthValue, SanityValue } from "../MainStatValue";
-import { ResourcesValue } from "../ResourcesValue";
+import {
+	ActionsValue,
+	CluesValue,
+	DoomValue,
+	ResourcesValue,
+} from "../StatValue";
 
 /**
  * Pixel sizes of the compact stat values. Numbers are written out on purpose: they must

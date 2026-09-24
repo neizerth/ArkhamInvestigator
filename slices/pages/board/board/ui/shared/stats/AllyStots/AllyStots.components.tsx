@@ -1,22 +1,31 @@
-import { AllyStatBackground } from "@modules/core/theme/shared/ui";
-import { color, gameAssets } from "@shared/config";
+import {
+	StatFigure,
+	type StatFigureProps,
+} from "@modules/board/base/entities/base/ui/value";
+import { color } from "@shared/config";
 import * as UI from "@shared/ui";
 import type { FC } from "react";
 import { View } from "react-native";
 import styled from "styled-components/native";
 import { assetsSize } from "../../../../config";
-import { withStat } from "../../../../lib";
 import { BaseStatPicker, type DefinedBaseStatPickerProps } from "../common";
 import { StatPickerMemo as StatPicker } from "../common/StatPicker";
 
-export const BaseContainer = withStat(AllyStatBackground, {
-	height: assetsSize.ally,
-	ratio: gameAssets.ally.ratio,
-});
+const contentStyle = {
+	top: 2,
+};
 
-export const Content: typeof BaseContainer = styled(BaseContainer)`
-	top: 2px;
-`;
+export const Content: FC<Omit<StatFigureProps, "stat" | "size">> = ({
+	style,
+	...props
+}) => (
+	<StatFigure
+		{...props}
+		stat="allySlots"
+		size="medium"
+		style={[contentStyle, style]}
+	/>
+);
 
 export const Container: typeof View = styled(View)`
   position: relative;

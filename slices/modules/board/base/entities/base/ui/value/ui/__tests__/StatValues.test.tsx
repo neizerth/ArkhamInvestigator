@@ -3,10 +3,12 @@ import { renderWithStore } from "@shared/lib/test/createTestStore";
 import { screen } from "@testing-library/react-native";
 import { range } from "ramda";
 import { Text } from "react-native";
-import { ActionsValue } from "../ActionsValue";
-import { CluesValue } from "../CluesValue";
-import { DoomValue } from "../DoomValue";
-import { ResourcesValue } from "../ResourcesValue";
+import {
+	ActionsValue,
+	CluesValue,
+	DoomValue,
+	ResourcesValue,
+} from "../StatValue";
 
 jest.mock("@modules/core/control/entities/picker/ui", () =>
 	require("@modules/core/control/entities/picker/lib/test/pickerMock").pickerUiMock(),

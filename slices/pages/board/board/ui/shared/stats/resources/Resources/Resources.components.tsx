@@ -1,11 +1,13 @@
-import { ResourceStatBackground } from "@modules/core/theme/shared/ui";
-import { color, gameAssets, size } from "@shared/config";
+import {
+	StatFigure,
+	type StatFigureProps,
+} from "@modules/board/base/entities/base/ui/value";
+import { color, size } from "@shared/config";
 import * as UI from "@shared/ui";
 import type { FC } from "react";
 import { View } from "react-native";
 import styled from "styled-components/native";
 import { assetsSize } from "../../../../../config";
-import { withStat } from "../../../../../lib";
 import {
 	BaseStatPicker,
 	BoardValue,
@@ -13,11 +15,6 @@ import {
 	type DefinedBaseStatPickerProps,
 } from "../../common";
 import { StatPickerMemo as StatPicker } from "../../common/StatPicker";
-
-const BaseContent = withStat(ResourceStatBackground, {
-	height: assetsSize.resource,
-	ratio: gameAssets.resource.ratio,
-});
 
 export const Container: typeof View = styled(View)`
 	position: relative;
@@ -27,9 +24,21 @@ export const Container: typeof View = styled(View)`
 	align-items: center;
 `;
 
-export const Content: typeof BaseContent = styled(BaseContent)`
-	position: relative;
-`;
+const contentStyle = {
+	position: "relative" as const,
+};
+
+export const Content: FC<Omit<StatFigureProps, "stat" | "size">> = ({
+	style,
+	...props
+}) => (
+	<StatFigure
+		{...props}
+		stat="resources"
+		size="medium"
+		style={[contentStyle, style]}
+	/>
+);
 
 export const Value: typeof UI.Value = styled(UI.Value)`
   color: ${color.resource};

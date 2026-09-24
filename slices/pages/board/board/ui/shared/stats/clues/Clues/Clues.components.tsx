@@ -1,22 +1,20 @@
-import { ClueStatBackground } from "@modules/core/theme/shared/ui";
+import {
+	StatFigure,
+	type StatFigureProps,
+} from "@modules/board/base/entities/base/ui/value";
 import { TouchableOpacity } from "@modules/core/touch/shared/ui";
-import { color, gameAssets } from "@shared/config";
+import { color } from "@shared/config";
 import * as UI from "@shared/ui";
 import { Value as BaseValue } from "@shared/ui";
 import type { FC } from "react";
 import styled, { css } from "styled-components/native";
 import { assetsSize } from "../../../../../config";
-import { withStat } from "../../../../../lib";
 import { BoardValue, type BoardValueProps } from "../../common";
 import { StatPickerMemo as StatPicker } from "../../common/StatPicker";
 
-export const BaseContainer = withStat(ClueStatBackground, {
-	ratio: gameAssets.clue.ratio,
-});
-
-export const Container: typeof BaseContainer = styled(BaseContainer)`
-  
-`;
+export const Container: FC<Omit<StatFigureProps, "stat" | "size">> = (
+	props,
+) => <StatFigure {...props} stat="clues" size="medium" />;
 
 export const Value: typeof BaseValue = styled(BaseValue)`
   color: ${color.clue};

@@ -1,21 +1,19 @@
-import { HandSizeStatBackground } from "@modules/core/theme/shared/ui";
-import { color, gameAssets, size } from "@shared/config";
+import {
+	StatFigure,
+	type StatFigureProps,
+} from "@modules/board/base/entities/base/ui/value";
+import { color, size } from "@shared/config";
 import * as UI from "@shared/ui";
 import type { FC } from "react";
 import { View } from "react-native";
 import styled from "styled-components/native";
 import { assetsSize } from "../../../../config";
-import { withStat } from "../../../../lib";
 import { BaseStatPicker, type DefinedBaseStatPickerProps } from "../common";
 import { StatPickerMemo as StatPicker } from "../common/StatPicker";
 
-export const BaseContainer = withStat(HandSizeStatBackground, {
-	height: assetsSize.main,
-	ratio: gameAssets.handSize.ratio,
-});
-
-export const Content: typeof BaseContainer = styled(BaseContainer)`
-`;
+export const Content: FC<Omit<StatFigureProps, "stat" | "size">> = (props) => (
+	<StatFigure {...props} stat="handSize" size="medium" />
+);
 
 export const Container: typeof View = styled(View)`
   position: relative;

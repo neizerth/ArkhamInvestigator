@@ -1,11 +1,13 @@
-import { ActionStatBackground } from "@modules/core/theme/shared/ui";
-import { color, gameAssets, size } from "@shared/config";
+import {
+	StatFigure,
+	type StatFigureProps,
+} from "@modules/board/base/entities/base/ui/value";
+import { color, size } from "@shared/config";
 import { Value } from "@shared/ui";
 import type { FC } from "react";
 import { View } from "react-native";
 import styled from "styled-components/native";
 import { assetsSize } from "../../../../../config";
-import { withStat } from "../../../../../lib";
 import {
 	BaseStatPicker,
 	BoardValue,
@@ -15,15 +17,22 @@ import {
 import { StatPickerMemo as StatPicker } from "../../common/StatPicker";
 import { SpecialActions } from "../special/SpecialActions";
 
-const BaseBackground = withStat(ActionStatBackground, {
-	height: assetsSize.action,
-	ratio: gameAssets.action.ratio,
-});
+const backgroundStyle = {
+	alignItems: "stretch" as const,
+	position: "relative" as const,
+};
 
-export const Background: typeof BaseBackground = styled(BaseBackground)`
-  align-items: stretch;
-  position: relative;
-`;
+export const Background: FC<Omit<StatFigureProps, "stat" | "size">> = ({
+	style,
+	...props
+}) => (
+	<StatFigure
+		{...props}
+		stat="actions"
+		size="medium"
+		style={[backgroundStyle, style]}
+	/>
+);
 
 export const Container: typeof View = styled(View)`
   padding-top: ${size.gap.xl}px;

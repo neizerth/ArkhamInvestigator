@@ -1,14 +1,9 @@
-/** small is the compact value, medium is the board stat */
-export type MainStatSize = "small" | "medium";
+import type { StatSize } from "../StatFigure";
+
+/** health and sanity are the only stats with an initial value badge */
+export type MainStatType = "health" | "sanity";
 
 export type MainStatSizeToken = {
-	height: number;
-	/** the board stats follow the picker size setting, the compact ones do not */
-	scaled: boolean;
-	/** the board rounds the scaled width, the compact one keeps the exact ratio */
-	roundWidth: boolean;
-	/** the board centers the picker inside the asset */
-	center: boolean;
 	initialFontSize: number;
 	initialBottom: number;
 	/** the compact badge slides behind the asset, the board one stays on top */
@@ -18,8 +13,6 @@ export type MainStatSizeToken = {
 };
 
 export type MainStatStyle = {
-	color: string;
-	ratio: number;
 	/** the badge hangs off the corner the asset leaves free, which differs per size */
-	initialRight: Record<MainStatSize, number>;
+	initialRight: Record<StatSize, number>;
 };

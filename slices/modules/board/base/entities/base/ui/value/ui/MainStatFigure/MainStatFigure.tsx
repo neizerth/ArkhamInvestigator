@@ -1,23 +1,16 @@
 import { selectShowInitialHealthAndSanity } from "@modules/board/base/shared/lib";
-import { selectPickerScale } from "@modules/core/control/entities/picker/lib";
 import { useAppSelector } from "@shared/lib";
-import type { InvestigatorMainStatType } from "@shared/model";
 import type { ValueProps } from "@shared/ui";
 import type { FC, PropsWithChildren } from "react";
 import type { ViewProps } from "react-native";
-import { backgroundByStat, byStatAndSize } from "./MainStatFigure.components";
-import {
-	getFigureSize,
-	getFigureStyle,
-	mainStatSizes,
-	mainStatStyles,
-} from "./MainStatFigure.styles";
-import type { MainStatSize } from "./MainStatFigure.types";
+import { StatFigure, type StatSize } from "../StatFigure";
+import { byStatAndSize } from "./MainStatFigure.components";
+import { mainStatSizes } from "./MainStatFigure.styles";
+import type { MainStatType } from "./MainStatFigure.types";
 
 export type MainStatFigureProps = PropsWithChildren & {
-	stat: InvestigatorMainStatType;
-	/** small is the compact value, medium is the board stat */
-	size?: MainStatSize;
+	stat: MainStatType;
+	size?: StatSize;
 	/** the number renderer of the calling side: stroked and white, or plain and colored */
 	Value: FC<ValueProps>;
 	initialValue?: number;
@@ -26,11 +19,7 @@ export type MainStatFigureProps = PropsWithChildren & {
 	style?: ViewProps["style"];
 };
 
-/**
- * The health and sanity asset with whatever the caller draws inside it, plus the initial
- * value badge. Only the size token and the number renderer differ between the board and
- * the compact variant.
- */
+/** the health and sanity asset with the initial value badge on its free corner */
 export const MainStatFigure = ({
 	stat,
 	size = "small",
@@ -41,24 +30,13 @@ export const MainStatFigure = ({
 	style,
 }: MainStatFigureProps) => {
 	const C = byStatAndSize[stat][size];
-	const Background = backgroundByStat[stat];
-	const { ratio } = mainStatStyles[stat];
 	const token = mainStatSizes[size];
 
 	const showInitialSetting = useAppSelector(selectShowInitialHealthAndSanity);
-	const pickerScale = useAppSelector(selectPickerScale);
-
 	const withInitial = showInitial ?? showInitialSetting;
 
-	const imageStyle = getFigureSize({ token, ratio, scale: pickerScale });
-	const sizeStyle = getFigureStyle(token, imageStyle);
-
 	return (
-		<Background
-			testID={`${stat}-background`}
-			style={[sizeStyle, style]}
-			imageStyle={imageStyle}
-		>
+		<StatFigure stat={stat} size={size} style={style}>
 			{children}
 			{withInitial && typeof initialValue === "number" && (
 				<C.Initial>
@@ -69,6 +47,6 @@ export const MainStatFigure = ({
 					/>
 				</C.Initial>
 			)}
-		</Background>
+		</StatFigure>
 	);
 };

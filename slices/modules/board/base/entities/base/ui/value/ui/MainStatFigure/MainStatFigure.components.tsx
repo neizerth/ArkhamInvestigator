@@ -1,27 +1,13 @@
-import {
-	HealthStatBackground,
-	SanityStatBackground,
-} from "@modules/core/theme/shared/ui";
-import type { InvestigatorMainStatType } from "@shared/model";
 import { View } from "react-native";
 import styled from "styled-components/native";
+import { type StatSize, statStyles } from "../StatFigure";
 import { mainStatSizes, mainStatStyles } from "./MainStatFigure.styles";
-import type { MainStatSize } from "./MainStatFigure.types";
+import type { MainStatType } from "./MainStatFigure.types";
 
-export const backgroundByStat: Record<
-	InvestigatorMainStatType,
-	typeof HealthStatBackground
-> = {
-	health: HealthStatBackground,
-	sanity: SanityStatBackground,
-};
-
-const createComponents = (
-	stat: InvestigatorMainStatType,
-	size: MainStatSize,
-) => {
-	const { initialRight, color } = mainStatStyles[stat];
+const createComponents = (stat: MainStatType, size: StatSize) => {
+	const { initialRight } = mainStatStyles[stat];
 	const { initialBottom, initialBehind } = mainStatSizes[size];
+	const { color } = statStyles[stat];
 
 	const Initial: typeof View = styled(View).attrs({
 		testID: `${stat}-initial`,

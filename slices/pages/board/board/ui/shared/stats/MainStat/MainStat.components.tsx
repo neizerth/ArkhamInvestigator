@@ -1,4 +1,4 @@
-import { mainStatStyles } from "@modules/board/base/entities/base/ui/value";
+import { statStyles } from "@modules/board/base/entities/base/ui/value";
 import { size } from "@shared/config";
 import type { InvestigatorMainStatType } from "@shared/model";
 import { Value as BaseValue } from "@shared/ui";
@@ -21,7 +21,7 @@ const baseRight: Record<InvestigatorMainStatType, number> = {
 };
 
 const createComponents = (stat: InvestigatorMainStatType) => {
-	const statColor = mainStatStyles[stat].color;
+	const statColor = statStyles[stat].color;
 
 	const PickerValue: FC<BoardValueProps> = styled(BoardValue).attrs({
 		testID: `${stat}-value`,

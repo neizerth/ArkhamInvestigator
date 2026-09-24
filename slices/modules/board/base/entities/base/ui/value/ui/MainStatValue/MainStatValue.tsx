@@ -1,10 +1,9 @@
-import type { InvestigatorMainStatType } from "@shared/model";
 import { PickerValue, type WithPickerValueProps } from "../../lib";
-import { MainStatFigure } from "../MainStatFigure";
-import { valueByStat } from "./MainStatValue.components";
+import { MainStatFigure, type MainStatType } from "../MainStatFigure";
+import { valueByStat } from "../StatFigure";
 
 export type MainStatValueProps = WithPickerValueProps & {
-	stat: InvestigatorMainStatType;
+	stat: MainStatType;
 	initialValue?: number;
 };
 
