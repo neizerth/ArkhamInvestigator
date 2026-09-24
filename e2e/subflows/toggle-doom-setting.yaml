@@ -1,20 +1,27 @@
-# Flips the "Doom" checkbox in settings and returns to the previous screen.
+# Flips the "Doom" checkbox and returns to the board. Settings open straight from the
+# board description panel, so the app keeps running.
 appId: ${APP_ID}
 ---
-# this one needs the home screen, so it does restart the app
-- launchApp:
-    stopApp: true
-- extendedWaitUntil:
-    visible:
-      id: "home-settings"
-    # a dev build cold start can take well over a minute
-    timeout: 180000
+- runFlow: ./open-board.yaml
+- tapOn: "Agency. Detective."
+- waitForAnimationToEnd:
+    timeout: 5000
+# the panel menu has no text: settings are the fourth icon of the row
 - tapOn:
-    id: "home-settings"
+    point: "72%,52%"
+- extendedWaitUntil:
+    visible: "Settings"
+    timeout: 30000
 - scrollUntilVisible:
     element:
       text: "Doom"
     direction: DOWN
     timeout: 30000
 - tapOn: "Doom"
-- back
+# the system back button closes the app, so the screen's own arrow it is
+- tapOn:
+    point: "7%,8%"
+- extendedWaitUntil:
+    visible:
+      id: "board-health"
+    timeout: 30000
