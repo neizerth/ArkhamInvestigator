@@ -4,6 +4,7 @@ import {
 } from "@modules/board/base/shared/lib";
 import type { PickerChangeEvent } from "@modules/core/control/entities/picker/model";
 import { useAppDispatch, useAppSelector } from "@shared/lib";
+import type { StatSourceType } from "@shared/model";
 import type { ImageBackgroundProps } from "@shared/ui";
 import { range } from "ramda";
 import { useCallback } from "react";
@@ -13,7 +14,7 @@ const cluesData = range(0, 101);
 
 export type CluesProps = ImageBackgroundProps & {
 	/** tells the investigator clues apart from the scenario ones */
-	statTestID?: string;
+	type?: StatSourceType;
 	value?: number;
 	onChange?: (value?: number) => void;
 	onLongPress?: () => void;
@@ -23,7 +24,7 @@ export type CluesProps = ImageBackgroundProps & {
 };
 
 export const Clues = ({
-	statTestID = "clues",
+	type = "investigator",
 	onChange: onChangeProp,
 	onLongPress,
 	onPress,
@@ -54,8 +55,8 @@ export const Clues = ({
 				<C.LockIcon enabled={syncEnabled} icon={lockIcon} light={light} />
 			</C.Lock>
 			<C.Picker
-				testID={`${statTestID}-picker`}
-				Component={C.pickerValue(statTestID)}
+				testID={`${type}-clues-picker`}
+				Component={C.pickerValue(type)}
 				value={value}
 				data={data}
 				onValueChanged={onChange}

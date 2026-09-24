@@ -1,7 +1,5 @@
-import { NewsPage } from "@pages/news/ui/NewsPage";
+import { NewsPage } from "@pages/news";
 
 export default function Page() {
-  return (
-    <NewsPage/>
-  )
+	return <NewsPage />;
 }

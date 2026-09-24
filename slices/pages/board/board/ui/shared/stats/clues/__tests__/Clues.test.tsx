@@ -8,8 +8,7 @@ import { renderWithStore } from "@shared/lib/test/createTestStore";
 import type { RootState } from "@shared/model";
 import { act, fireEvent, screen } from "@testing-library/react-native";
 import { range } from "ramda";
-import { InvestigatorClues } from "../InvestigatorClues";
-import { ScenarioClues } from "../ScenarioClues";
+import { InvestigatorClues, ScenarioClues } from "../CluesStat";
 
 jest.mock("@modules/core/control/entities/picker/ui", () =>
 	require("@modules/core/control/entities/picker/lib/test/pickerMock").pickerUiMock(),

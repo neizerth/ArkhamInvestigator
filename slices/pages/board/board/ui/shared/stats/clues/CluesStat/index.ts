@@ -1,2 +1,1 @@
-export * from "./Clues";
 export * from "./CluesStat";

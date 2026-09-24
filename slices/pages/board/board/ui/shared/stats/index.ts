@@ -6,4 +6,4 @@ export * from "./doom";
 export * from "./clues";
 
 export * from "./MainStat";
-export * from "./HandSize";
+export * from "./CapacityStat";

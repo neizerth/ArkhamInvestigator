@@ -8,8 +8,7 @@ import { renderWithStore } from "@shared/lib/test/createTestStore";
 import type { InvestigatorBoardNumericStat } from "@shared/model";
 import { act, screen } from "@testing-library/react-native";
 import { range } from "ramda";
-import { AllyStots } from "../AllyStots";
-import { HandSize } from "../HandSize";
+import { AllyStots, HandSize } from "../CapacityStat";
 
 jest.mock("@modules/core/control/entities/picker/ui", () =>
 	require("@modules/core/control/entities/picker/lib/test/pickerMock").pickerUiMock(),

@@ -7,8 +7,7 @@ import type { PickerProps } from "@modules/core/control/entities/picker/model";
 import { renderWithStore } from "@shared/lib/test/createTestStore";
 import { act, screen } from "@testing-library/react-native";
 import { range } from "ramda";
-import { InvestigatorResources } from "../InvestigatorResources";
-import { ScenarioResources } from "../ScenarioResources";
+import { InvestigatorResources, ScenarioResources } from "../ResourcesStat";
 
 jest.mock("@modules/core/control/entities/picker/ui", () =>
 	require("@modules/core/control/entities/picker/lib/test/pickerMock").pickerUiMock(),
@@ -43,9 +42,11 @@ const setup = (
 		saga: boardBaseSharedSaga,
 	});
 
-const picker = () =>
-	screen.getByTestId("resources-picker").props
+const picker = (type = "investigator") =>
+	screen.getByTestId(`${type}-resources-picker`).props
 		.pickerProps as PickerProps<number>;
+
+const scenarioPicker = () => picker("scenario");
 
 describe("investigator resources", () => {
 	it("renders the investigator value", async () => {
@@ -100,13 +101,13 @@ describe("scenario resources", () => {
 	it("renders the scenario value", async () => {
 		await setup(<ScenarioResources />, { scenario: 7 });
 
-		expect(picker().value).toBe(7);
+		expect(scenarioPicker().value).toBe(7);
 	});
 
 	it("sets the picked value", async () => {
 		const { store } = await setup(<ScenarioResources />, { scenario: 7 });
 
-		await act(() => picker().onValueChanged?.({ value: 3, index: 3 }));
+		await act(() => scenarioPicker().onValueChanged?.({ value: 3, index: 3 }));
 
 		expect(store.getState().board.resources).toBe(3);
 	});
@@ -114,7 +115,7 @@ describe("scenario resources", () => {
 	it("decreases the value on press", async () => {
 		const { store } = await setup(<ScenarioResources />, { scenario: 7 });
 
-		await act(() => picker().onPress?.());
+		await act(() => scenarioPicker().onPress?.());
 
 		expect(store.getState().board.resources).toBe(6);
 	});
@@ -122,7 +123,7 @@ describe("scenario resources", () => {
 	it("stops at zero on press", async () => {
 		const { store } = await setup(<ScenarioResources />, { scenario: 0 });
 
-		await act(() => picker().onPress?.());
+		await act(() => scenarioPicker().onPress?.());
 
 		expect(store.getState().board.resources).toBe(0);
 	});
@@ -130,7 +131,7 @@ describe("scenario resources", () => {
 	it("resets the value on long press", async () => {
 		const { store } = await setup(<ScenarioResources />, { scenario: 7 });
 
-		await act(() => picker().onLongPress?.());
+		await act(() => scenarioPicker().onLongPress?.());
 
 		expect(store.getState().board.resources).toBe(0);
 	});

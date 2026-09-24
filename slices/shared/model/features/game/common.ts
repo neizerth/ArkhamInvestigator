@@ -20,6 +20,9 @@ export type InvestigatorSkillType =
 
 export type InvestigatorMainStatType = "health" | "sanity";
 
+/** doom, clues and resources are tracked twice: on the investigator and on the scenario */
+export type StatSourceType = "investigator" | "scenario";
+
 export type InvestigatorNumericStat =
 	| InvestigatorMainStatType
 	| InvestigatorSkillType

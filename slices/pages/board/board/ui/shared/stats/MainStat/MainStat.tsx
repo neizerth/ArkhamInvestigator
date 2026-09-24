@@ -1,4 +1,4 @@
-import { MainStatFigure } from "@modules/board/base/entities/base/ui/value";
+import { MainStatFigure } from "@modules/board/base/entities/base/ui";
 import {
 	selectAllowNegativeHealthAndSanity,
 	selectShowAdditionalInformation,

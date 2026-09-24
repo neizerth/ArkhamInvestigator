@@ -6,18 +6,18 @@ appId: ${APP_ID}
 
 # long press clears the resources, whatever the previous run left
 - longPressOn:
-    id: "resources-picker"
+    id: "investigator-resources-picker"
 - extendedWaitUntil:
     visible:
-      id: "resources-value"
+      id: "investigator-resources-value"
       text: "0"
     timeout: 5000
 
 # tapping at zero must not go negative
 - tapOn:
-    id: "resources-picker"
+    id: "investigator-resources-picker"
 - extendedWaitUntil:
     visible:
-      id: "resources-value"
+      id: "investigator-resources-value"
       text: "0"
     timeout: 5000

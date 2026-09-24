@@ -3,7 +3,9 @@
 appId: ${APP_ID}
 ---
 - runFlow: ./open-board.yaml
-- tapOn: "Agency. Detective."
+# the traits line is not always rendered, so the panel is opened by its own id
+- tapOn:
+    id: "board-description"
 - waitForAnimationToEnd:
     timeout: 5000
 # the panel menu has no text: settings are the fourth icon of the row

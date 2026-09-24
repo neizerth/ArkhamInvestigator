@@ -7,8 +7,7 @@ import type { PickerProps } from "@modules/core/control/entities/picker/model";
 import { renderWithStore } from "@shared/lib/test/createTestStore";
 import { act, screen } from "@testing-library/react-native";
 import { range } from "ramda";
-import { InvestigatorDoom } from "../InvestigatorDoom";
-import { ScenarioDoom } from "../ScenarioDoom";
+import { InvestigatorDoom, ScenarioDoom } from "../DoomStat";
 
 jest.mock("@modules/core/control/entities/picker/ui", () =>
 	require("@modules/core/control/entities/picker/lib/test/pickerMock").pickerUiMock(),

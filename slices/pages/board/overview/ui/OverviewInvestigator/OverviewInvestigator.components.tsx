@@ -5,7 +5,7 @@ import {
 	HealthValue,
 	ResourcesValue,
 	SanityValue,
-} from "@modules/board/base/entities/base/ui/value";
+} from "@modules/board/base/entities/base/ui";
 import { ThemeSignaturePreview } from "@modules/core/theme/features/ui";
 import { FactionView } from "@modules/faction/entities/ui";
 import { SignatureSkills } from "@modules/signature/base/shared/ui";

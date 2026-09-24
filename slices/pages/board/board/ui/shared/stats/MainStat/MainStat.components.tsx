@@ -1,4 +1,4 @@
-import { statStyles } from "@modules/board/base/entities/base/ui/value";
+import { statStyles } from "@modules/board/base/entities/base/ui";
 import { size } from "@shared/config";
 import type { InvestigatorMainStatType } from "@shared/model";
 import { Value as BaseValue } from "@shared/ui";

@@ -1,7 +1,7 @@
 import {
 	StatFigure,
 	type StatFigureProps,
-} from "@modules/board/base/entities/base/ui/value";
+} from "@modules/board/base/entities/base/ui";
 import { color, size } from "@shared/config";
 import { Value } from "@shared/ui";
 import type { FC } from "react";

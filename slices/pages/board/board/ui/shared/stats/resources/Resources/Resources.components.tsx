@@ -1,8 +1,9 @@
 import {
 	StatFigure,
 	type StatFigureProps,
-} from "@modules/board/base/entities/base/ui/value";
+} from "@modules/board/base/entities/base/ui";
 import { color, size } from "@shared/config";
+import type { StatSourceType } from "@shared/model";
 import * as UI from "@shared/ui";
 import type { FC } from "react";
 import { View } from "react-native";
@@ -64,13 +65,19 @@ export const UpkeepResources: FC<DefinedBaseStatPickerProps> = styled(
 })`
 `;
 
-export const PickerValue: FC<BoardValueProps> = styled(BoardValue).attrs({
-	testID: "resources-value",
-})``;
+const createPickerValue = (type: StatSourceType): FC<BoardValueProps> =>
+	styled(BoardValue).attrs({
+		testID: `${type}-resources-value`,
+	})``;
+
+const pickerValues: Record<StatSourceType, FC<BoardValueProps>> = {
+	investigator: createPickerValue("investigator"),
+	scenario: createPickerValue("scenario"),
+};
+
+export const pickerValue = (type: StatSourceType) => pickerValues[type];
 
 export const Picker: typeof StatPicker = styled(StatPicker).attrs({
-	testID: "resources-picker",
-	Component: PickerValue,
 	valueStyle: {
 		color: color.resource,
 	},

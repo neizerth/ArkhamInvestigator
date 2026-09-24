@@ -1,9 +1,10 @@
 import {
 	StatFigure,
 	type StatFigureProps,
-} from "@modules/board/base/entities/base/ui/value";
+} from "@modules/board/base/entities/base/ui";
 import { TouchableOpacity } from "@modules/core/touch/shared/ui";
 import { color } from "@shared/config";
+import type { StatSourceType } from "@shared/model";
 import * as UI from "@shared/ui";
 import { Value as BaseValue } from "@shared/ui";
 import type { FC } from "react";
@@ -20,18 +21,17 @@ export const Value: typeof BaseValue = styled(BaseValue)`
   color: ${color.clue};
 `;
 
-const pickerValues: Record<string, FC<BoardValueProps>> = {};
+const createPickerValue = (type: StatSourceType): FC<BoardValueProps> =>
+	styled(BoardValue).attrs({
+		testID: `${type}-clues-value`,
+	})``;
 
-/** one styled value per testID prefix, created once and reused */
-export const pickerValue = (statTestID: string): FC<BoardValueProps> => {
-	if (!pickerValues[statTestID]) {
-		pickerValues[statTestID] = styled(BoardValue).attrs({
-			testID: `${statTestID}-value`,
-		})``;
-	}
-
-	return pickerValues[statTestID];
+const pickerValues: Record<StatSourceType, FC<BoardValueProps>> = {
+	investigator: createPickerValue("investigator"),
+	scenario: createPickerValue("scenario"),
 };
+
+export const pickerValue = (type: StatSourceType) => pickerValues[type];
 
 export const Picker: typeof StatPicker = styled(StatPicker).attrs({
 	valueStyle: {
