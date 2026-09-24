@@ -20,13 +20,20 @@ export const Value: typeof BaseValue = styled(BaseValue)`
   color: ${color.clue};
 `;
 
-export const PickerValue: FC<BoardValueProps> = styled(BoardValue).attrs({
-	testID: "clues-value",
-})``;
+const pickerValues: Record<string, FC<BoardValueProps>> = {};
+
+/** one styled value per testID prefix, created once and reused */
+export const pickerValue = (statTestID: string): FC<BoardValueProps> => {
+	if (!pickerValues[statTestID]) {
+		pickerValues[statTestID] = styled(BoardValue).attrs({
+			testID: `${statTestID}-value`,
+		})``;
+	}
+
+	return pickerValues[statTestID];
+};
 
 export const Picker: typeof StatPicker = styled(StatPicker).attrs({
-	testID: "clues-picker",
-	Component: PickerValue,
 	valueStyle: {
 		color: color.clue,
 	},

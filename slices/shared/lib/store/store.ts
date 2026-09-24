@@ -18,7 +18,10 @@ const migrate = createMigrate(
 );
 
 const rootReducer = combineReducers(reducers);
-const reducer = persistReducer(
+
+type RootReducerState = ReturnType<typeof rootReducer>;
+
+const reducer = persistReducer<RootReducerState>(
 	{
 		...persistStorageConfig,
 		migrate,

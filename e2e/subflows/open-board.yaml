@@ -2,8 +2,9 @@
 # investigator. Expects the English locale.
 appId: ${APP_ID}
 ---
+# the app is left running between flows: a cold start costs about a minute
 - launchApp:
-    stopApp: true
+    stopApp: false
 - runFlow:
     when:
       notVisible:
@@ -45,3 +46,16 @@ appId: ${APP_ID}
     visible:
       id: "board-health"
     timeout: 30000
+
+# the description panel covers the stats, and it survives between flows
+- runFlow:
+    when:
+      visible:
+        id: "board-description-open"
+    commands:
+      - tapOn:
+          id: "board-description-hide"
+      - extendedWaitUntil:
+          notVisible:
+            id: "board-description-open"
+          timeout: 10000

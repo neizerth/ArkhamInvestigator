@@ -34,8 +34,11 @@ const setup = (
 		saga: boardBaseSharedSaga,
 	});
 
-const picker = () =>
-	screen.getByTestId("clues-picker").props.pickerProps as PickerProps<number>;
+const picker = (testID = "investigator-clues") =>
+	screen.getByTestId(`${testID}-picker`).props
+		.pickerProps as PickerProps<number>;
+
+const scenarioPicker = () => picker("scenario-clues");
 
 const investigatorClues = (state: RootState) =>
 	selectTestBoard(state).value.clues;
@@ -115,13 +118,13 @@ describe("scenario clues", () => {
 	it("renders the scenario value", async () => {
 		await setup(<ScenarioClues />, { scenario: 6 });
 
-		expect(picker().value).toBe(6);
+		expect(scenarioPicker().value).toBe(6);
 	});
 
 	it("sets the picked value", async () => {
 		const { store } = await setup(<ScenarioClues />, { scenario: 6 });
 
-		await act(() => picker().onValueChanged?.({ value: 2, index: 2 }));
+		await act(() => scenarioPicker().onValueChanged?.({ value: 2, index: 2 }));
 
 		expect(store.getState().board.clues).toBe(2);
 	});
@@ -129,7 +132,7 @@ describe("scenario clues", () => {
 	it("increases the value on press", async () => {
 		const { store } = await setup(<ScenarioClues />, { scenario: 6 });
 
-		await act(() => picker().onPress?.());
+		await act(() => scenarioPicker().onPress?.());
 
 		expect(store.getState().board.clues).toBe(7);
 	});
@@ -137,7 +140,7 @@ describe("scenario clues", () => {
 	it("resets the value on long press", async () => {
 		const { store } = await setup(<ScenarioClues />, { scenario: 6 });
 
-		await act(() => picker().onLongPress?.());
+		await act(() => scenarioPicker().onLongPress?.());
 
 		expect(store.getState().board.clues).toBe(0);
 	});
@@ -150,7 +153,9 @@ describe("scenario clues", () => {
 				sync: true,
 			});
 
-			await act(() => picker().onValueChanged?.({ value: 6, index: 6 }));
+			await act(() =>
+				scenarioPicker().onValueChanged?.({ value: 6, index: 6 }),
+			);
 
 			expect(store.getState().board.clues).toBe(6);
 			expect(investigatorClues(store.getState())).toBe(1);
@@ -163,7 +168,9 @@ describe("scenario clues", () => {
 				sync: true,
 			});
 
-			await act(() => picker().onValueChanged?.({ value: 8, index: 8 }));
+			await act(() =>
+				scenarioPicker().onValueChanged?.({ value: 8, index: 8 }),
+			);
 
 			expect(investigatorClues(store.getState())).toBe(0);
 		});
@@ -174,7 +181,9 @@ describe("scenario clues", () => {
 				scenario: 4,
 			});
 
-			await act(() => picker().onValueChanged?.({ value: 6, index: 6 }));
+			await act(() =>
+				scenarioPicker().onValueChanged?.({ value: 6, index: 6 }),
+			);
 
 			expect(investigatorClues(store.getState())).toBe(3);
 		});

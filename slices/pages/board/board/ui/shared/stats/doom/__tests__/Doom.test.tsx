@@ -26,8 +26,12 @@ const setup = (
 		saga: boardBaseSharedSaga,
 	});
 
-const picker = () =>
-	screen.getByTestId("doom-picker").props.pickerProps as PickerProps<number>;
+const picker = (testID: string) =>
+	screen.getByTestId(`${testID}-picker`).props
+		.pickerProps as PickerProps<number>;
+
+const investigatorPicker = () => picker("investigator-doom");
+const scenarioPicker = () => picker("scenario-doom");
 
 describe("investigator doom", () => {
 	const doom = (state: ReturnType<typeof selectTestBoard>) => state.value.doom;
@@ -35,14 +39,16 @@ describe("investigator doom", () => {
 	it("renders the investigator value", async () => {
 		await setup(<InvestigatorDoom />, { investigator: 2 });
 
-		expect(picker().value).toBe(2);
-		expect(picker().data).toEqual(range(0, 101));
+		expect(investigatorPicker().value).toBe(2);
+		expect(investigatorPicker().data).toEqual(range(0, 101));
 	});
 
 	it("sets the picked value", async () => {
 		const { store } = await setup(<InvestigatorDoom />, { investigator: 2 });
 
-		await act(() => picker().onValueChanged?.({ value: 5, index: 5 }));
+		await act(() =>
+			investigatorPicker().onValueChanged?.({ value: 5, index: 5 }),
+		);
 
 		expect(doom(selectTestBoard(store.getState()))).toBe(5);
 	});
@@ -50,7 +56,7 @@ describe("investigator doom", () => {
 	it("increases the value on press", async () => {
 		const { store } = await setup(<InvestigatorDoom />, { investigator: 2 });
 
-		await act(() => picker().onPress?.());
+		await act(() => investigatorPicker().onPress?.());
 
 		expect(doom(selectTestBoard(store.getState()))).toBe(3);
 	});
@@ -58,7 +64,7 @@ describe("investigator doom", () => {
 	it("resets the value on long press", async () => {
 		const { store } = await setup(<InvestigatorDoom />, { investigator: 2 });
 
-		await act(() => picker().onLongPress?.());
+		await act(() => investigatorPicker().onLongPress?.());
 
 		expect(doom(selectTestBoard(store.getState()))).toBe(0);
 	});
@@ -68,14 +74,14 @@ describe("scenario doom", () => {
 	it("renders the scenario value", async () => {
 		await setup(<ScenarioDoom />, { scenario: 4 });
 
-		expect(picker().value).toBe(4);
-		expect(picker().data).toEqual(range(0, 101));
+		expect(scenarioPicker().value).toBe(4);
+		expect(scenarioPicker().data).toEqual(range(0, 101));
 	});
 
 	it("sets the picked value", async () => {
 		const { store } = await setup(<ScenarioDoom />, { scenario: 4 });
 
-		await act(() => picker().onValueChanged?.({ value: 9, index: 9 }));
+		await act(() => scenarioPicker().onValueChanged?.({ value: 9, index: 9 }));
 
 		expect(store.getState().board.doom).toBe(9);
 	});
@@ -83,7 +89,7 @@ describe("scenario doom", () => {
 	it("increases the value on press", async () => {
 		const { store } = await setup(<ScenarioDoom />, { scenario: 4 });
 
-		await act(() => picker().onPress?.());
+		await act(() => scenarioPicker().onPress?.());
 
 		expect(store.getState().board.doom).toBe(5);
 	});
@@ -91,7 +97,7 @@ describe("scenario doom", () => {
 	it("resets the value on long press", async () => {
 		const { store } = await setup(<ScenarioDoom />, { scenario: 4 });
 
-		await act(() => picker().onLongPress?.());
+		await act(() => scenarioPicker().onLongPress?.());
 
 		expect(store.getState().board.doom).toBe(0);
 	});

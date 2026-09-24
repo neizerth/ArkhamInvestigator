@@ -41,6 +41,7 @@ export const InvestigatorClues = (props: InvestigatorCluesProps) => {
 
 	return (
 		<Clues
+			statTestID="investigator-clues"
 			{...props}
 			onChange={onChange}
 			onLongPress={onLongPress}

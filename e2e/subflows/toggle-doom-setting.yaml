@@ -1,6 +1,7 @@
 # Flips the "Doom" checkbox in settings and returns to the previous screen.
 appId: ${APP_ID}
 ---
+# this one needs the home screen, so it does restart the app
 - launchApp:
     stopApp: true
 - extendedWaitUntil:

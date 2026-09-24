@@ -6,33 +6,33 @@ appId: ${APP_ID}
 
 # long press clears the clues, whatever the previous run left
 - longPressOn:
-    id: "clues-picker"
+    id: "investigator-clues-picker"
 - extendedWaitUntil:
     visible:
-      id: "clues-value"
+      id: "investigator-clues-value"
       text: "0"
     timeout: 5000
 
 - tapOn:
-    id: "clues-picker"
+    id: "investigator-clues-picker"
 - extendedWaitUntil:
     visible:
-      id: "clues-value"
+      id: "investigator-clues-value"
       text: "1"
     timeout: 5000
 
 - tapOn:
-    id: "clues-picker"
+    id: "investigator-clues-picker"
 - extendedWaitUntil:
     visible:
-      id: "clues-value"
+      id: "investigator-clues-value"
       text: "2"
     timeout: 5000
 
 - longPressOn:
-    id: "clues-picker"
+    id: "investigator-clues-picker"
 - extendedWaitUntil:
     visible:
-      id: "clues-value"
+      id: "investigator-clues-value"
       text: "0"
     timeout: 5000

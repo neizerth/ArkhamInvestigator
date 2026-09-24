@@ -14,11 +14,11 @@ export const Container: FC<Omit<StatFigureProps, "stat" | "size">> = (
 ) => <StatFigure {...props} stat="doom" size="medium" />;
 
 export const PickerValue: FC<BoardValueProps> = styled(BoardValue).attrs({
-	testID: "doom-value",
+	testID: "scenario-doom-value",
 })``;
 
 export const Picker: typeof StatPicker = styled(StatPicker).attrs({
-	testID: "doom-picker",
+	testID: "scenario-doom-picker",
 	Component: PickerValue,
 	valueStyle: {
 		color: color.doom.dark,

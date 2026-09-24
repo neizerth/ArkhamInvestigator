@@ -39,49 +39,42 @@ export const statStyles: Record<StatFigureType, StatStyle> = {
 		color: color.health,
 		valueColor: color.white,
 		height: height(boardHeight.main),
-		shrinkTwoDigits: true,
 	},
 	sanity: {
 		ratio: gameAssets.sanity.ratio,
 		color: color.sanity,
 		valueColor: color.white,
 		height: height(boardHeight.main),
-		shrinkTwoDigits: true,
 	},
 	clues: {
 		ratio: gameAssets.clue.ratio,
 		color: color.clue,
 		valueColor: color.white,
 		height: height(boardHeight.main),
-		shrinkTwoDigits: false,
 	},
 	resources: {
 		ratio: gameAssets.resource.ratio,
 		color: color.resource,
 		valueColor: color.white,
 		height: height(boardHeight.resource),
-		shrinkTwoDigits: false,
 	},
 	actions: {
 		ratio: gameAssets.action.ratio,
 		color: color.action,
 		valueColor: color.white,
 		height: height(boardHeight.action),
-		shrinkTwoDigits: false,
 	},
 	handSize: {
 		ratio: gameAssets.handSize.ratio,
 		color: color.handSize,
 		valueColor: color.white,
 		height: height(boardHeight.main),
-		shrinkTwoDigits: false,
 	},
 	allySlots: {
 		ratio: gameAssets.ally.ratio,
 		color: color.ally,
 		valueColor: color.white,
 		height: height(boardHeight.ally),
-		shrinkTwoDigits: false,
 	},
 	doom: {
 		ratio: gameAssets.doom.ratio,
@@ -89,7 +82,6 @@ export const statStyles: Record<StatFigureType, StatStyle> = {
 		color: "#660b11",
 		valueColor: "#e3cfb4",
 		height: height(boardHeight.main),
-		shrinkTwoDigits: false,
 	},
 };
 

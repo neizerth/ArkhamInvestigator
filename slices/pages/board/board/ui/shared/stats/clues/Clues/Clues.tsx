@@ -12,6 +12,8 @@ import * as C from "./Clues.components";
 const cluesData = range(0, 101);
 
 export type CluesProps = ImageBackgroundProps & {
+	/** tells the investigator clues apart from the scenario ones */
+	statTestID?: string;
 	value?: number;
 	onChange?: (value?: number) => void;
 	onLongPress?: () => void;
@@ -21,6 +23,7 @@ export type CluesProps = ImageBackgroundProps & {
 };
 
 export const Clues = ({
+	statTestID = "clues",
 	onChange: onChangeProp,
 	onLongPress,
 	onPress,
@@ -51,6 +54,8 @@ export const Clues = ({
 				<C.LockIcon enabled={syncEnabled} icon={lockIcon} light={light} />
 			</C.Lock>
 			<C.Picker
+				testID={`${statTestID}-picker`}
+				Component={C.pickerValue(statTestID)}
 				value={value}
 				data={data}
 				onValueChanged={onChange}

@@ -104,3 +104,34 @@ describe("initial value badge", () => {
 		expect(style("sanity-initial").zIndex).toBe(-1);
 	});
 });
+
+/**
+ * Digits follow the shared font scale, so a longer value never outgrows its asset:
+ * one digit keeps the base size, two digits take 70% of it, and so on.
+ */
+describe.each([
+	["health", HealthValue],
+	["sanity", SanityValue],
+	["clues", CluesValue],
+	["resources", ResourcesValue],
+	["actions", ActionsValue],
+	["doom", DoomValue],
+] as const)("%s value font", (_stat, Component) => {
+	it("keeps 24px for one digit", async () => {
+		await renderWithStore(<Component value={5} />);
+
+		expect(fontSize("5")).toBe(24);
+	});
+
+	it("shrinks for two digits", async () => {
+		await renderWithStore(<Component value={12} />);
+
+		expect(fontSize("12")).toBeCloseTo(16.8, 5);
+	});
+
+	it("shrinks further for three digits", async () => {
+		await renderWithStore(<Component value={123} />);
+
+		expect(fontSize("123")).toBeCloseTo(12.96, 5);
+	});
+});

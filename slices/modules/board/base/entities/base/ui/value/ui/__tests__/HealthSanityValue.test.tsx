@@ -93,17 +93,3 @@ describe.each([
 		expect(getFontSize("5")).toBe(24);
 	});
 });
-
-describe("two-digit value", () => {
-	it("health shrinks the font", async () => {
-		await renderWithStore(<HealthValue value={12} />);
-
-		expect(getFontSize("12")).toBe(16);
-	});
-
-	it("sanity shrinks the font", async () => {
-		await renderWithStore(<SanityValue value={12} />);
-
-		expect(getFontSize("12")).toBe(16);
-	});
-});

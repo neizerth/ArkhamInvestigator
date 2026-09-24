@@ -63,7 +63,11 @@ export const BoardDescription = ({ ...props }: BoardDescriptionProps) => {
 	const compactTraits = !show && !showDescription && IOS_WITH_GESTURE_CONTROL;
 
 	return (
-		<C.Container {...props} style={[props.style, containerStyle]}>
+		<C.Container
+			testID={showDescription ? "board-description-open" : "board-description"}
+			{...props}
+			style={[props.style, containerStyle]}
+		>
 			<C.Content>
 				{!showDescription && <C.ExpandArea />}
 				<C.TopContent />

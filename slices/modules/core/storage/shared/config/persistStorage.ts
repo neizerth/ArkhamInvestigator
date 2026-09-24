@@ -1,5 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { currentPersistMigrationVersion } from "../migrations";
+import { persistTransforms } from "./transforms";
 
 /** Runtime-only state: it is meaningless after a restart. */
 export const persistBlacklist = [
@@ -15,4 +16,5 @@ export const persistStorageConfig = {
 	storage: AsyncStorage,
 	version: currentPersistMigrationVersion,
 	blacklist: persistBlacklist,
+	transforms: persistTransforms,
 };

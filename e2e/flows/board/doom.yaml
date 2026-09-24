@@ -9,44 +9,49 @@ appId: ${APP_ID}
 - runFlow:
     when:
       notVisible:
-        id: "doom-picker"
+        id: "investigator-doom-picker"
     commands:
       - runFlow: ../../subflows/toggle-doom-setting.yaml
       - runFlow: ../../subflows/open-board.yaml
 - runFlow:
     when:
       notVisible:
-        id: "doom-picker"
+        id: "investigator-doom-picker"
     commands:
       - runFlow: ../../subflows/toggle-doom-setting.yaml
       - runFlow: ../../subflows/open-board.yaml
 - assertVisible:
-    id: "doom-picker"
+    id: "investigator-doom-picker"
 
 # long press clears the doom, whatever the previous run left
 - longPressOn:
-    id: "doom-picker"
+    id: "investigator-doom-picker"
 - extendedWaitUntil:
     visible:
-      id: "doom-value"
+      id: "investigator-doom-value"
       text: "0"
     timeout: 5000
 
 - tapOn:
-    id: "doom-picker"
+    id: "investigator-doom-picker"
 - extendedWaitUntil:
     visible:
-      id: "doom-value"
+      id: "investigator-doom-value"
       text: "1"
     timeout: 5000
 
 - longPressOn:
-    id: "doom-picker"
+    id: "investigator-doom-picker"
 - extendedWaitUntil:
     visible:
-      id: "doom-value"
+      id: "investigator-doom-value"
       text: "0"
     timeout: 5000
 
 # back to the default, so the other flows see the board they expect
 - runFlow: ../../subflows/toggle-doom-setting.yaml
+- runFlow: ../../subflows/open-board.yaml
+- extendedWaitUntil:
+    notVisible:
+      id: "investigator-doom-picker"
+    timeout: 10000

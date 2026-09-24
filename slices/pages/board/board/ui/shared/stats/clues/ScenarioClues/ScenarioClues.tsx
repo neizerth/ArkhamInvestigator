@@ -55,6 +55,7 @@ export const ScenarioClues = ({ data, ...props }: ScenarioCluesProps) => {
 	return (
 		<C.Container>
 			<C.Control
+				statTestID="scenario-clues"
 				{...props}
 				data={data}
 				value={value}

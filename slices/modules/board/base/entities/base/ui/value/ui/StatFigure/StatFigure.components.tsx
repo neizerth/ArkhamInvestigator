@@ -8,8 +8,8 @@ import {
 	ResourceStatBackground,
 	SanityStatBackground,
 } from "@modules/core/theme/shared/ui";
-import { IconNumber, type IconNumberProps } from "@shared/ui";
-import styled, { css } from "styled-components/native";
+import { Value } from "@shared/ui";
+import styled from "styled-components/native";
 import { statStyles } from "./StatFigure.styles";
 import type { StatFigureType } from "./StatFigure.types";
 
@@ -27,27 +27,24 @@ export const backgroundByStat: Record<
 	allySlots: AllyStatBackground,
 };
 
-/** the digits of a compact value: filled with the asset color and outlined */
-const createValue = (stat: StatFigureType): typeof IconNumber => {
-	const { color, valueColor, shrinkTwoDigits } = statStyles[stat];
+/**
+ * The digits of a compact value: white (or the asset tint) with a colored outline. The
+ * font follows the digit count, the same way the board values do.
+ */
+const createValue = (stat: StatFigureType): typeof Value => {
+	const { color, valueColor } = statStyles[stat];
 
-	return styled(IconNumber).attrs({
+	return styled(Value).attrs({
 		stroke: true,
 		contentContainerStyle: {
 			flex: 0,
 		},
-		strokeStyle: {
-			color,
+		textStyle: {
+			color: valueColor,
 		},
 	})`
 		font-size: 24px;
-		${({ value = 0 }: IconNumberProps) =>
-			shrinkTwoDigits &&
-			value.toString().length > 1 &&
-			css`
-			font-size: 16px;
-		`}
-		color: ${valueColor};
+		color: ${color};
 	`;
 };
 

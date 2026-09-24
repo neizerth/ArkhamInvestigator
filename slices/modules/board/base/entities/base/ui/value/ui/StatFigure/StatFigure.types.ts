@@ -29,6 +29,4 @@ export type StatStyle = {
 	/** the digits drawn on top of the asset */
 	valueColor: string;
 	height: Record<StatSize, number>;
-	/** health and sanity shrink two-digit values, the others have the room */
-	shrinkTwoDigits: boolean;
 };

@@ -44,7 +44,7 @@ export const BoardDescriptionMenu = (props: BoardDescriptionMenuProps) => {
 			<ArtworksFragment>
 				<C.Button icon="investigator" onPress={onDetailsChange} />
 			</ArtworksFragment>
-			<C.Hide onPress={hide} />
+			<C.Hide testID="board-description-hide" onPress={hide} />
 		</C.Container>
 	);
 };
