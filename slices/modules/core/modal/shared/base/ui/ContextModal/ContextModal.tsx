@@ -39,7 +39,7 @@ export const ContextModal = ({
 	const { t } = useTranslation();
 
 	return (
-		<C.Container {...props} navbarHeight={navbarHeight}>
+		<C.Container testID="context-modal" {...props} navbarHeight={navbarHeight}>
 			<Outside onPress={onClose} />
 			<C.Header>
 				{actions.length > 0 && (
@@ -53,7 +53,7 @@ export const ContextModal = ({
 				)}
 
 				<C.Title>{t(title)}</C.Title>
-				<C.Close onPress={onClose}>
+				<C.Close testID="context-modal-close" onPress={onClose}>
 					<C.ActionIcon icon={closeIcon} />
 				</C.Close>
 			</C.Header>

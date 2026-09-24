@@ -18,6 +18,7 @@ export const StatValue = ({
 }: StatValueProps) => (
 	<StatFigure stat={stat} size="small">
 		<PickerValue
+			testID={`${stat}-picker`}
 			{...props}
 			value={value}
 			Value={valueByStat[stat]}

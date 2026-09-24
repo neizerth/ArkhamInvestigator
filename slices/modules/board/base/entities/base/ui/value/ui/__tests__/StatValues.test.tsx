@@ -14,27 +14,27 @@ jest.mock("@modules/core/control/entities/picker/ui", () =>
 	require("@modules/core/control/entities/picker/lib/test/pickerMock").pickerUiMock(),
 );
 
-const getPicker = () =>
-	screen.getByTestId("picker").props.pickerProps as PickerProps<number>;
+const getPicker = (stat: string) =>
+	screen.getByTestId(`${stat}-picker`).props.pickerProps as PickerProps<number>;
 
 describe.each([
 	["clues", CluesValue],
 	["resources", ResourcesValue],
 	["actions", ActionsValue],
 	["doom", DoomValue],
-] as const)("%s value", (_stat, Component) => {
+] as const)("%s value", (stat, Component) => {
 	it("renders the value without picker by default", async () => {
 		await renderWithStore(<Component value={7} />);
 
 		expect(screen.getAllByText("7").length).toBeGreaterThan(0);
-		expect(screen.queryByTestId("picker")).not.toBeOnTheScreen();
+		expect(screen.queryByTestId(`${stat}-picker`)).not.toBeOnTheScreen();
 	});
 
 	it("uses the default data in picker mode", async () => {
 		await renderWithStore(<Component type="picker" value={7} />);
 
-		expect(getPicker().data).toEqual(range(0, 101));
-		expect(getPicker().value).toBe(7);
+		expect(getPicker(stat).data).toEqual(range(0, 101));
+		expect(getPicker(stat).value).toBe(7);
 	});
 
 	it("takes the data from props", async () => {
@@ -42,7 +42,7 @@ describe.each([
 			<Component type="picker" value={2} data={[1, 2, 3]} />,
 		);
 
-		expect(getPicker().data).toEqual([1, 2, 3]);
+		expect(getPicker(stat).data).toEqual([1, 2, 3]);
 	});
 
 	it("passes the change handler through", async () => {
@@ -51,7 +51,7 @@ describe.each([
 			<Component type="picker" value={7} onValueChanged={onValueChanged} />,
 		);
 
-		getPicker().onValueChanged?.({ value: 8, index: 8 });
+		getPicker(stat).onValueChanged?.({ value: 8, index: 8 });
 
 		expect(onValueChanged).toHaveBeenCalledWith({ value: 8, index: 8 });
 	});

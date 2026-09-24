@@ -37,7 +37,7 @@ export const BoardDescriptionSecondaryControls = (
 
 	return (
 		<C.Container {...props}>
-			<Outside onPress={close} />
+			<Outside testID="board-controls-outside" onPress={close} />
 			<C.Content>
 				{showDoom && <ScenarioDoom visible />}
 				{showResources && <ScenarioResources visible />}

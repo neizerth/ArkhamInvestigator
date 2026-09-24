@@ -24,7 +24,12 @@ export const MainStatValue = ({
 			Value={Value}
 			initialValue={initialValue}
 		>
-			<PickerValue {...props} value={value} Value={Value} />
+			<PickerValue
+				testID={`${stat}-picker`}
+				{...props}
+				value={value}
+				Value={Value}
+			/>
 			{children}
 		</MainStatFigure>
 	);

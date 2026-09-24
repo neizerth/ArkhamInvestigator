@@ -29,7 +29,7 @@ describe.each([
 		await renderWithStore(<Component value={5} />);
 
 		expect(screen.getAllByText("5").length).toBeGreaterThan(0);
-		expect(screen.queryByTestId("picker")).not.toBeOnTheScreen();
+		expect(screen.queryByTestId(`${stat}-picker`)).not.toBeOnTheScreen();
 	});
 
 	it("passes picker props in picker mode", async () => {
@@ -43,7 +43,7 @@ describe.each([
 			/>,
 		);
 
-		const picker = screen.getByTestId("picker").props
+		const picker = screen.getByTestId(`${stat}-picker`).props
 			.pickerProps as PickerProps<number>;
 		expect(picker.value).toBe(3);
 		expect(picker.data).toEqual([1, 2, 3, 4]);

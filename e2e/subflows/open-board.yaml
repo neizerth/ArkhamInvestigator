@@ -1,5 +1,6 @@
-# Opens the board: resumes the current game or starts a single player one with the first
-# investigator. Expects the English locale.
+# Opens the board and makes sure it is actually reachable: the app is left running
+# between flows, so a screen left on top would swallow every gesture while the board
+# itself is still visible in the accessibility tree. Expects the English locale.
 appId: ${APP_ID}
 ---
 # the app is left running between flows: a cold start costs about a minute
@@ -42,20 +43,43 @@ appId: ${APP_ID}
                 commands:
                   - tapOn: "Okay"
             - tapOn: "Start"
+
+# drops whatever modal a previous flow left on top of the board: every modal screen
+# dims the rest with the same pressable, and pressing it closes the modal
+- repeat:
+    times: 5
+    while:
+      visible:
+        id: "modal-outside"
+    commands:
+      # bare backdrop under the status bar: the center would hit the modal itself
+      - tapOn:
+          point: "5%,9%"
+      - waitForAnimationToEnd:
+          timeout: 5000
 - extendedWaitUntil:
     visible:
       id: "board-health"
     timeout: 30000
+- assertNotVisible:
+    id: "modal-outside"
 
-# the description panel covers the stats, and it survives between flows
+# the description panel is in-page state and its hide button sits under the navigation
+# bar, so only a restart clears it: on rehydration the persist transform closes it
 - runFlow:
     when:
       visible:
         id: "board-description-open"
     commands:
-      - tapOn:
-          id: "board-description-hide"
+      - launchApp:
+          stopApp: true
       - extendedWaitUntil:
-          notVisible:
-            id: "board-description-open"
-          timeout: 10000
+          visible: "Continue"
+          timeout: 300000
+      - tapOn: "Continue"
+      - extendedWaitUntil:
+          visible:
+            id: "board-health"
+          timeout: 60000
+- assertNotVisible:
+    id: "board-description-open"

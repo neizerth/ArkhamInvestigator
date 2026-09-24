@@ -35,6 +35,7 @@ const createValue = (stat: StatFigureType): typeof Value => {
 	const { color, valueColor } = statStyles[stat];
 
 	return styled(Value).attrs({
+		testID: `${stat}-value`,
 		stroke: true,
 		contentContainerStyle: {
 			flex: 0,
