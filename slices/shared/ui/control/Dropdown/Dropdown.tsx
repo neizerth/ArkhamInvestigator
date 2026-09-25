@@ -43,6 +43,14 @@ export function Dropdown<T>({
 		[itemStyle, itemTextStyle],
 	);
 
+	const renderRightIcon = useCallback((visible?: boolean) => {
+		return (
+			<C.RightItem visible={visible}>
+				<C.RightIcon />
+			</C.RightItem>
+		);
+	}, []);
+
 	const onChange = useUICallback({
 		payload: {
 			source: "dropdown",
@@ -63,6 +71,7 @@ export function Dropdown<T>({
 		<C.Container style={contentContainerStyle}>
 			<BaseDropdown
 				renderItem={renderItem}
+				renderRightIcon={renderRightIcon}
 				{...props}
 				style={[styles.dropdown, style]}
 				containerStyle={[styles.container, props.containerStyle]}
