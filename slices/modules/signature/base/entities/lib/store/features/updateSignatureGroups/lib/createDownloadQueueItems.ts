@@ -4,6 +4,7 @@ import {
 	getSignatureImageUrl as getUrl,
 } from "@modules/signature/base/shared/api";
 import { v4 } from "uuid";
+import type { SignatureImageFile } from "./getSignatureImageFiles";
 
 type CreateSingleItemOptions = Omit<GetSignatureImageUrlOptions, "remote">;
 
@@ -26,41 +27,26 @@ const createSingleItem = (
 	};
 };
 
-type CreateSingleItemTypesOptions = Omit<CreateSingleItemOptions, "type">;
-
-const createSingleItemTypes = (options: CreateSingleItemTypesOptions) => {
-	return [
-		createSingleItem({
-			...options,
-			type: "full",
-		}),
-		createSingleItem({
-			...options,
-			type: "square",
-		}),
-	];
-};
-
 const needGrayscale = false;
 
 export const createDownloadQueueItems = ({
-	code,
 	baseUrl,
-}: { code: string; baseUrl: string }): DownloadQueueItem[] => {
-	const baseImages = createSingleItemTypes({
-		code,
+	...file
+}: SignatureImageFile & { baseUrl: string }): DownloadQueueItem[] => {
+	const baseImage = createSingleItem({
+		...file,
 		baseUrl,
 	});
 
 	if (!needGrayscale) {
-		return baseImages;
+		return [baseImage];
 	}
 
-	const grayscaleImages = createSingleItemTypes({
-		code,
+	const grayscaleImage = createSingleItem({
+		...file,
 		grayscale: true,
 		baseUrl,
 	});
 
-	return [...baseImages, ...grayscaleImages];
+	return [baseImage, grayscaleImage];
 };
