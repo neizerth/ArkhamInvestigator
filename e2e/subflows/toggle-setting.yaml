@@ -1,4 +1,4 @@
-# Flips the "Doom" checkbox and returns to the board. Settings open straight from the
+# Flips the ${SETTING} checkbox and returns to the board. Settings open straight from the
 # board description panel, so the app keeps running.
 appId: ${APP_ID}
 ---
@@ -16,10 +16,10 @@ appId: ${APP_ID}
     timeout: 30000
 - scrollUntilVisible:
     element:
-      text: "Doom"
+      text: "${SETTING}"
     direction: DOWN
     timeout: 30000
-- tapOn: "Doom"
+- tapOn: "${SETTING}"
 # the system back button closes the app, so the screen's own arrow it is
 - tapOn:
     point: "7%,8%"

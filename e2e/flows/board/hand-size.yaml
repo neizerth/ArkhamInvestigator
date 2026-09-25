@@ -1,0 +1,92 @@
+# Board hand size: tap and long press. It hides behind a setting, like doom.
+# The picker animates to the new value, so every assertion after a gesture waits for it.
+appId: ${APP_ID}
+---
+- runFlow: ../../subflows/open-board.yaml
+# the checkbox is flipped blindly, so an interrupted run may have left it off:
+# flip once, and once more if hand size still is not there
+- runFlow:
+    when:
+      notVisible:
+        id: "hand-size-picker"
+    commands:
+      - runFlow:
+          file: ../../subflows/toggle-setting.yaml
+          env:
+            SETTING: Hand Size
+- runFlow:
+    when:
+      notVisible:
+        id: "hand-size-picker"
+    commands:
+      - runFlow:
+          file: ../../subflows/toggle-setting.yaml
+          env:
+            SETTING: Hand Size
+- assertVisible:
+    id: "hand-size-picker"
+
+# long press resets the base value when a previous run left it raised
+- runFlow:
+    when:
+      visible:
+        id: "hand-size-base-picker"
+    commands:
+      - longPressOn:
+          id: "hand-size-picker"
+- extendedWaitUntil:
+    notVisible:
+      id: "hand-size-base-picker"
+    timeout: 5000
+
+# tap lowers the value, and hand size may go below zero
+- repeat:
+    times: 25
+    while:
+      notVisible:
+        id: "hand-size-value"
+        text: "0"
+    commands:
+      - tapOn:
+          id: "hand-size-picker"
+          waitToSettleTimeoutMs: 100
+- extendedWaitUntil:
+    visible:
+      id: "hand-size-value"
+      text: "0"
+    timeout: 5000
+
+# long press with base == initial: value +1, base +1
+- longPressOn:
+    id: "hand-size-picker"
+- extendedWaitUntil:
+    visible:
+      id: "hand-size-value"
+      text: "1"
+    timeout: 5000
+- assertVisible:
+    id: "hand-size-base-picker"
+
+# long press with base != initial: base resets to initial, value loses the difference
+- longPressOn:
+    id: "hand-size-picker"
+- extendedWaitUntil:
+    visible:
+      id: "hand-size-value"
+      text: "0"
+    timeout: 5000
+- extendedWaitUntil:
+    notVisible:
+      id: "hand-size-base-picker"
+    timeout: 5000
+
+# back to the default, so the other flows see the board they expect
+- runFlow:
+    file: ../../subflows/toggle-setting.yaml
+    env:
+      SETTING: Hand Size
+- runFlow: ../../subflows/open-board.yaml
+- extendedWaitUntil:
+    notVisible:
+      id: "hand-size-picker"
+    timeout: 10000

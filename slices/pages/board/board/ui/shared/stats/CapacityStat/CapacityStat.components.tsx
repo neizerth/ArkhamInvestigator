@@ -6,7 +6,12 @@ import type { FC } from "react";
 import { View } from "react-native";
 import styled from "styled-components/native";
 import { assetsSize } from "../../../../config";
-import { BaseStatPicker, type DefinedBaseStatPickerProps } from "../common";
+import {
+	BaseStatPicker,
+	BoardValue,
+	type BoardValueProps,
+	type DefinedBaseStatPickerProps,
+} from "../common";
 import { StatPickerMemo as StatPicker } from "../common/StatPicker";
 import {
 	type CapacityStatType,
@@ -45,6 +50,10 @@ const createComponents = (stat: CapacityStatType) => {
 		align-items: center;
 	`;
 
+	const PickerValue: FC<BoardValueProps> = styled(BoardValue).attrs({
+		testID: `${testID}-value`,
+	})``;
+
 	const Base: FC<DefinedBaseStatPickerProps> = styled(BaseStatPicker).attrs({
 		testID: `${testID}-base-picker`,
 		statType: stat,
@@ -64,6 +73,7 @@ const createComponents = (stat: CapacityStatType) => {
 	// the picker keeps the main item height even where the asset is smaller
 	const Picker: typeof StatPicker = styled(StatPicker).attrs({
 		testID: `${testID}-picker`,
+		Component: PickerValue,
 		valueStyle: {
 			color,
 		},
