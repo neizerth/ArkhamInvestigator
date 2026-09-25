@@ -1,0 +1,44 @@
+# Starts a single player game with one investigator: the state every other flow expects.
+appId: ${APP_ID}
+---
+- launchApp:
+    stopApp: true
+- extendedWaitUntil:
+    visible: "Single player|Continue"
+    timeout: 300000
+- tapOn: "Single player"
+# a saved game is replaced only after a confirmation
+- runFlow:
+    when:
+      visible: "Okay"
+    commands:
+      - tapOn: "Okay"
+- extendedWaitUntil:
+    visible: "Choose an Investigator"
+    timeout: 30000
+# the first card of the default faction
+- tapOn:
+    point: "18%,30%"
+- runFlow:
+    when:
+      visible: "Okay"
+    commands:
+      - tapOn: "Okay"
+- tapOn: "Start"
+- extendedWaitUntil:
+    visible:
+      id: "board-health"
+    timeout: 60000
+
+# the pickers keep showing the values of the previous game until a restart, so the next
+# flow would tap a frozen board (see the task about the picker freezing)
+- launchApp:
+    stopApp: true
+- extendedWaitUntil:
+    visible: "Continue"
+    timeout: 300000
+- tapOn: "Continue"
+- extendedWaitUntil:
+    visible:
+      id: "board-health"
+    timeout: 60000

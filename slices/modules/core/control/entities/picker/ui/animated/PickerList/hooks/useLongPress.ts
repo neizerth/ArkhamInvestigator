@@ -5,6 +5,7 @@ export const useLongPress = <T>(props: PickerListProps<T>) => {
 	const {
 		onLongPress: onLongPressProp,
 		onUserDeactivated: onUserDeactivatedProp,
+		onScrollDeactivated: onScrollDeactivatedProp,
 	} = props;
 
 	const [controlEnabled, setControlEnabled] = useState(true);
@@ -18,10 +19,18 @@ export const useLongPress = <T>(props: PickerListProps<T>) => {
 		onUserDeactivatedProp?.();
 	}, [onUserDeactivatedProp]);
 
+	// a long press interrupted by a scroll never reaches onUserDeactivated,
+	// so the end of the scroll releases the lock as well
+	const onScrollDeactivated = useCallback(() => {
+		setControlEnabled(true);
+		onScrollDeactivatedProp?.();
+	}, [onScrollDeactivatedProp]);
+
 	return {
 		...props,
 		onLongPress,
 		onUserDeactivated,
+		onScrollDeactivated,
 		controlEnabled,
 	};
 };

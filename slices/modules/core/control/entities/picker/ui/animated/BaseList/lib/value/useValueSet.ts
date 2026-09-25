@@ -56,9 +56,16 @@ export function useValueSet<T>(props: BaseListProps<T>) {
 		active.current = getInactiveState(controlEnabled);
 	}, [controlEnabled]);
 
+	// runs after every render, not only when the target index changes: a
+	// correction skipped while the list was under user control has to be
+	// retried, otherwise the picker stays frozen on a stale value while the
+	// store keeps changing. scrollToIndex is a no-op when already in place.
 	useEffect(() => {
+		if (scrolling.current) {
+			return;
+		}
 		scrollToIndex();
-	}, [scrollToIndex]);
+	});
 
 	const onContentSizeChange = useCallback(
 		(width: number, height: number) => {
@@ -73,6 +80,9 @@ export function useValueSet<T>(props: BaseListProps<T>) {
 	const onTouchStart = useCallback(
 		(e: GestureResponderEvent) => {
 			active.current = true;
+			// a new touch means the previous scroll is over, even when its
+			// deactivation event never arrived
+			scrolling.current = false;
 			if (typeof onTouchStartProp === "function") {
 				onTouchStartProp(e);
 			}

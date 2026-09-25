@@ -1,5 +1,6 @@
 # The overview: one row per investigator, only reachable with two of them.
-# It starts its own game, so it leaves the board with two investigators behind.
+# It starts its own game and puts a single investigator one back at the end, because the
+# other flows tap the main stats, which a two investigator board does not react to.
 #
 # The flow stops at the layout: the rows update the store but keep showing the old
 # number, so there is nothing stable to assert about their values yet.
@@ -34,3 +35,6 @@ appId: ${APP_ID}
     id: "overview-2-health-picker"
 - assertVisible:
     id: "overview-2-actions-picker"
+
+# back to a single investigator, the way the other flows expect the board
+- runFlow: ../../subflows/start-single-investigator-game.yaml

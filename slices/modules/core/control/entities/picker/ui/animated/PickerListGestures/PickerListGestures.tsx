@@ -1,6 +1,6 @@
 import { useSwipe, useTouchCallback } from "@modules/core/touch/shared/lib";
 import { arrayIf } from "@shared/lib";
-import type { PropsWithChildren } from "react";
+import { type PropsWithChildren, useCallback, useMemo } from "react";
 import { Gesture, GestureDetector } from "react-native-gesture-handler";
 import type {
 	PickerActivationProps,
@@ -74,41 +74,61 @@ export const PickerListGestures = ({
 		onSwipe: onSwipeLeft,
 	});
 
-	const gestures = [
-		arrayIf(
-			pressEnabled,
-			Gesture.Tap()
-				.maxDuration(pressMaxDuration)
-				.runOnJS(true)
-				.onStart(onPress)
-				.onTouchesUp(() => {
-					onUserDeactivated?.();
-					onDeactivated?.();
-				}),
-		),
-		arrayIf(
-			doublePressEnabled,
-			Gesture.Tap()
-				.numberOfTaps(2)
-				.maxDuration(doublePressMaxDuration)
-				.runOnJS(true)
-				.onStart(onDoublePress),
-		),
-		arrayIf(
-			longPressEnabled,
-			Gesture.LongPress()
-				.minDuration(longPressMinDuration)
-				.runOnJS(true)
-				.onStart(onLongPress)
-				.onTouchesUp(() => {
-					onUserDeactivated?.();
-					onDeactivated?.();
-				}),
-		),
-		arrayIf(swipeLeftEnabled, swipeLeft),
-		arrayIf(swipeRightEnabled, swipeRight),
-	].flat();
+	// onFinalize fires when a gesture ends, fails or is cancelled, unlike
+	// onTouchesUp, which is skipped when the native scroll takes the touch
+	// over. A missed deactivation leaves the list locked for good.
+	const deactivate = useCallback(() => {
+		onUserDeactivated?.();
+		onDeactivated?.();
+	}, [onUserDeactivated, onDeactivated]);
 
-	const gestureConfig = Gesture.Exclusive(...gestures);
+	const gestureConfig = useMemo(() => {
+		const gestures = [
+			arrayIf(
+				pressEnabled,
+				Gesture.Tap()
+					.maxDuration(pressMaxDuration)
+					.runOnJS(true)
+					.onStart(onPress)
+					.onFinalize(deactivate),
+			),
+			arrayIf(
+				doublePressEnabled,
+				Gesture.Tap()
+					.numberOfTaps(2)
+					.maxDuration(doublePressMaxDuration)
+					.runOnJS(true)
+					.onStart(onDoublePress),
+			),
+			arrayIf(
+				longPressEnabled,
+				Gesture.LongPress()
+					.minDuration(longPressMinDuration)
+					.runOnJS(true)
+					.onStart(onLongPress)
+					.onFinalize(deactivate),
+			),
+			arrayIf(swipeLeftEnabled, swipeLeft),
+			arrayIf(swipeRightEnabled, swipeRight),
+		].flat();
+
+		return Gesture.Exclusive(...gestures);
+	}, [
+		pressEnabled,
+		pressMaxDuration,
+		onPress,
+		doublePressEnabled,
+		doublePressMaxDuration,
+		onDoublePress,
+		longPressEnabled,
+		longPressMinDuration,
+		onLongPress,
+		swipeLeftEnabled,
+		swipeLeft,
+		swipeRightEnabled,
+		swipeRight,
+		deactivate,
+	]);
+
 	return <GestureDetector gesture={gestureConfig}>{children}</GestureDetector>;
 };
