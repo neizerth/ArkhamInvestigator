@@ -13,7 +13,7 @@ import type { InvestigatorSignatureGroup } from "arkham-investigator-data";
 import { useCallback } from "react";
 import { GestureDetector } from "react-native-gesture-handler";
 import * as C from "./SignatureSelect.components";
-import { useData } from "./useData";
+import { useSignatureSections } from "./lib";
 import { useFactionSwipes } from "./useFactionSwipes";
 import { useImageSize } from "./useImageSize";
 
@@ -44,7 +44,7 @@ export const SignatureSelect = () => {
 	const selectedImages = useAppSelector(selectSelectedSignatureImages);
 	const faction = factionFilterValue || "guardian";
 
-	const sections = useData({
+	const sections = useSignatureSections({
 		faction,
 		artworksEnabled,
 		columns,
