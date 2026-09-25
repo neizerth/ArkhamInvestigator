@@ -45,7 +45,7 @@ const base = {
 };
 
 const setup = (values: Values = {}, settings: Settings = {}) =>
-	renderWithStore(<OverviewInvestigator boardId={1} />, {
+	renderWithStore(<OverviewInvestigator boardId={boardId} />, {
 		patch: (state) => {
 			withCurrentBoard({
 				value: { ...base, ...values },
@@ -57,8 +57,11 @@ const setup = (values: Values = {}, settings: Settings = {}) =>
 		saga,
 	});
 
+const boardId = 1;
+
 const picker = (stat: string) =>
-	screen.getByTestId(`${stat}-picker`).props.pickerProps as PickerProps<number>;
+	screen.getByTestId(`overview-${boardId}-${stat}-picker`).props
+		.pickerProps as PickerProps<number>;
 
 const board = (state: RootState) => selectTestBoard(state);
 

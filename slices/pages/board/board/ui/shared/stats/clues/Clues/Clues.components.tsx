@@ -6,7 +6,6 @@ import { TouchableOpacity } from "@modules/core/touch/shared/ui";
 import { color } from "@shared/config";
 import type { StatSourceType } from "@shared/model";
 import * as UI from "@shared/ui";
-import { Value as BaseValue } from "@shared/ui";
 import type { FC } from "react";
 import styled, { css } from "styled-components/native";
 import { assetsSize } from "../../../../../config";
@@ -16,10 +15,6 @@ import { StatPickerMemo as StatPicker } from "../../common/StatPicker";
 export const Container: FC<Omit<StatFigureProps, "stat" | "size">> = (
 	props,
 ) => <StatFigure {...props} stat="clues" size="medium" />;
-
-export const Value: typeof BaseValue = styled(BaseValue)`
-  color: ${color.clue};
-`;
 
 const createPickerValue = (type: StatSourceType): FC<BoardValueProps> =>
 	styled(BoardValue).attrs({

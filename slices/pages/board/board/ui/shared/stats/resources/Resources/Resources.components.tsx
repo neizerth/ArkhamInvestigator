@@ -4,7 +4,6 @@ import {
 } from "@modules/board/base/entities/base/ui";
 import { color, size } from "@shared/config";
 import type { StatSourceType } from "@shared/model";
-import * as UI from "@shared/ui";
 import type { FC } from "react";
 import { View } from "react-native";
 import styled from "styled-components/native";
@@ -40,10 +39,6 @@ export const Content: FC<Omit<StatFigureProps, "stat" | "size">> = ({
 		style={[contentStyle, style]}
 	/>
 );
-
-export const Value: typeof UI.Value = styled(UI.Value)`
-  color: ${color.resource};
-`;
 
 export const UpkeepResources: FC<DefinedBaseStatPickerProps> = styled(
 	BaseStatPicker,

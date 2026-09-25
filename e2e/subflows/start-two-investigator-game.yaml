@@ -1,0 +1,39 @@
+# Starts a single player game with two investigators, which is what the overview needs.
+# It replaces the saved game, so only the overview flow uses it.
+appId: ${APP_ID}
+---
+- launchApp:
+    stopApp: true
+- extendedWaitUntil:
+    visible: "Single player|Continue"
+    timeout: 300000
+- tapOn: "Single player"
+# a saved game is replaced only after a confirmation
+- runFlow:
+    when:
+      visible: "Okay"
+    commands:
+      - tapOn: "Okay"
+- extendedWaitUntil:
+    visible: "Choose an Investigator"
+    timeout: 30000
+# the first two cards of the default faction
+- tapOn:
+    point: "18%,30%"
+- runFlow:
+    when:
+      visible: "Okay"
+    commands:
+      - tapOn: "Okay"
+- tapOn:
+    point: "50%,30%"
+- runFlow:
+    when:
+      visible: "Okay"
+    commands:
+      - tapOn: "Okay"
+- tapOn: "Start"
+- extendedWaitUntil:
+    visible:
+      id: "board-health"
+    timeout: 60000

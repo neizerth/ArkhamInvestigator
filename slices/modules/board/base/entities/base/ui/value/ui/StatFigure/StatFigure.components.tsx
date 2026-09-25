@@ -34,8 +34,8 @@ export const backgroundByStat: Record<
 const createValue = (stat: StatFigureType): typeof Value => {
 	const { color, valueColor } = statStyles[stat];
 
-	return styled(Value).attrs({
-		testID: `${stat}-value`,
+	return styled(Value).attrs((props: { testID?: string }) => ({
+		testID: props.testID ?? `${stat}-value`,
 		stroke: true,
 		contentContainerStyle: {
 			flex: 0,
@@ -43,7 +43,7 @@ const createValue = (stat: StatFigureType): typeof Value => {
 		textStyle: {
 			color: valueColor,
 		},
-	})`
+	}))`
 		font-size: 24px;
 		color: ${color};
 	`;

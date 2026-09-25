@@ -3,7 +3,6 @@ import {
 	type StatFigureProps,
 } from "@modules/board/base/entities/base/ui";
 import { color, size } from "@shared/config";
-import { Value } from "@shared/ui";
 import type { FC } from "react";
 import { View } from "react-native";
 import styled from "styled-components/native";
@@ -74,11 +73,6 @@ export const BaseActions: FC<DefinedBaseStatPickerProps> = styled(
 	},
 	gap: 5,
 })`
-`;
-
-export const DiffValue: typeof Value = styled(Value)`
-  font-size: 30px;
-  color: ${color.action};
 `;
 
 export const PickerValue: FC<BoardValueProps> = styled(BoardValue).attrs({

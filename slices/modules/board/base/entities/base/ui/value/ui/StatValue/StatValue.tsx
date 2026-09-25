@@ -7,18 +7,22 @@ const defaultData = range(0, 101);
 
 export type StatValueProps = WithPickerValueProps & {
 	stat: StatFigureType;
+	/** prefix of the testIDs, so a screen can tell apart several values of one stat */
+	testID?: string;
 };
 
 /** the compact stat value: the asset with the number or a picker inside it */
 export const StatValue = ({
 	stat,
 	value,
+	testID = stat,
 	children,
 	...props
 }: StatValueProps) => (
 	<StatFigure stat={stat} size="small">
 		<PickerValue
-			testID={`${stat}-picker`}
+			testID={`${testID}-picker`}
+			valueTestID={`${testID}-value`}
 			{...props}
 			value={value}
 			Value={valueByStat[stat]}

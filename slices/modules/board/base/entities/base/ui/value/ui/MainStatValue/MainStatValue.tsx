@@ -5,6 +5,8 @@ import { valueByStat } from "../StatFigure";
 export type MainStatValueProps = WithPickerValueProps & {
 	stat: MainStatType;
 	initialValue?: number;
+	/** prefix of the testIDs, so a screen can tell apart several values of one stat */
+	testID?: string;
 };
 
 /** the compact health and sanity value, used outside the board */
@@ -12,6 +14,7 @@ export const MainStatValue = ({
 	stat,
 	value,
 	initialValue,
+	testID = stat,
 	children,
 	...props
 }: MainStatValueProps) => {
@@ -25,7 +28,8 @@ export const MainStatValue = ({
 			initialValue={initialValue}
 		>
 			<PickerValue
-				testID={`${stat}-picker`}
+				testID={`${testID}-picker`}
+				valueTestID={`${testID}-value`}
 				{...props}
 				value={value}
 				Value={Value}

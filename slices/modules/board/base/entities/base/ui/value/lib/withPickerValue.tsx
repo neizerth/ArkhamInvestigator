@@ -24,6 +24,8 @@ export type WithPickerValueProps = Omit<
 export type PickerValueProps = WithPickerValueProps & {
 	Value: FC<ValueProps>;
 	defaultData?: number[];
+	/** lets a screen tell apart several values of the same stat */
+	valueTestID?: string;
 };
 
 const styles = {
@@ -41,11 +43,12 @@ export const PickerValue = ({
 	Value,
 	defaultData = [],
 	type = "value",
+	valueTestID,
 	children,
 	...props
 }: PickerValueProps) => {
 	const renderItem: ListRenderItem<number> = ({ item }) => {
-		return <Value value={item} />;
+		return <Value value={item} testID={valueTestID} />;
 	};
 
 	const data = useMemo(() => {
@@ -58,7 +61,11 @@ export const PickerValue = ({
 				<Picker {...styles} {...props} renderItem={renderItem} data={data} />
 			)}
 			{type === "value" && (
-				<Value value={props.value} contentContainerStyle={props.style} />
+				<Value
+					value={props.value}
+					testID={valueTestID}
+					contentContainerStyle={props.style}
+				/>
 			)}
 			{children}
 		</>

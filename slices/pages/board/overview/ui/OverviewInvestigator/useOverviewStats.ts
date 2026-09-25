@@ -54,8 +54,10 @@ export const useOverviewStats = (boardId: number) => {
 		dispatch(makeAction({ boardId }));
 	}, [dispatch, boardId]);
 
+	// every row of the overview shows the same stats, so the ids carry the board
 	const withPicker = (stat: InvestigatorBoardNumericStat) => ({
 		type: "picker" as const,
+		testID: `overview-${boardId}-${stat}`,
 		value: value[stat],
 		onValueChanged: control.onChange(stat),
 	});

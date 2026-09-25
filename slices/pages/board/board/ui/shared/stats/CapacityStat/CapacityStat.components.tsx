@@ -2,7 +2,6 @@ import {
 	StatFigure,
 	type StatFigureProps,
 } from "@modules/board/base/entities/base/ui";
-import * as UI from "@shared/ui";
 import type { FC } from "react";
 import { View } from "react-native";
 import styled from "styled-components/native";
@@ -46,10 +45,6 @@ const createComponents = (stat: CapacityStatType) => {
 		align-items: center;
 	`;
 
-	const Value: typeof UI.Value = styled(UI.Value)`
-		color: ${color};
-	`;
-
 	const Base: FC<DefinedBaseStatPickerProps> = styled(BaseStatPicker).attrs({
 		testID: `${testID}-base-picker`,
 		statType: stat,
@@ -78,7 +73,7 @@ const createComponents = (stat: CapacityStatType) => {
 		z-index: 1;
 	`;
 
-	return { Container, Content, Value, Base, Picker };
+	return { Container, Content, Base, Picker };
 };
 
 export const byStat = {
