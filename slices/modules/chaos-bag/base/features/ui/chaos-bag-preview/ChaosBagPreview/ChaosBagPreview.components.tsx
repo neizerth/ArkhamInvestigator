@@ -1,6 +1,5 @@
 import { BlessCurseControl } from "@modules/chaos-bag/base/entities/ui";
 import { ContextModal } from "@modules/core/modal/shared/base/ui";
-import { color, font, size } from "@shared/config";
 import { Button } from "@shared/ui";
 import { Row, Text, TextView } from "@shared/ui";
 import type { FC } from "react";
@@ -11,12 +10,14 @@ import { ChaosBagPreviewToken } from "../ChaosBagPreviewToken";
 
 const screen = Dimensions.get("screen");
 
-export const Container: typeof ContextModal = styled(ContextModal).attrs({
-	contentStyle: {
-		backgroundColor: color.dark30,
-		gap: size.gap.small,
-	},
-})`
+export const Container: typeof ContextModal = styled(ContextModal).attrs(
+	({ theme }) => ({
+		contentStyle: {
+			backgroundColor: theme.color.dark30,
+			gap: theme.size.gap.small,
+		},
+	}),
+)`
   flex: 1;
 `;
 
@@ -26,7 +27,7 @@ export const Content: typeof View = styled(View)`
 `;
 
 export const BlessCurse: typeof BlessCurseControl = styled(BlessCurseControl)`
-  padding-top: ${size.gap.small}px;
+  padding-top: ${({ theme }) => theme.size.gap.small}px;
 `;
 
 type SealedProps = ViewProps & {
@@ -37,7 +38,7 @@ export const Sealed: FC<SealedProps> = styled(View)`
   ${({ only }: SealedProps) =>
 		!only &&
 		css`
-    padding-top: ${size.gap.small}px;
+    padding-top: ${({ theme }) => theme.size.gap.small}px;
   `}
 `;
 
@@ -48,12 +49,13 @@ export const List: typeof FlatList = styled(FlatList).attrs({
 		alignItems: "center",
 	},
 })`
+  ${({ theme: { size, color } }) => css`
   padding-bottom: ${size.gap.default}px;
   border-bottom-width: 1px;
   border-bottom-color: ${color.dark20};
 
   max-height: ${maxHeight}px;
-`;
+`}`;
 
 export const Token: typeof ChaosBagPreviewToken = styled(ChaosBagPreviewToken)`
   
@@ -69,15 +71,18 @@ export const Title: typeof Text = styled(Text)`
 
 export const Hint: typeof TextView = styled(TextView)`
   text-align: center;
-  margin-bottom: ${size.gap.small}px;
+  margin-bottom: ${({ theme }) => theme.size.gap.small}px;
 `;
 
-export const RevealButton: typeof Button = styled(Button).attrs({
-	textStyle: {
-		fontSize: font.size.small,
-	},
-})`
+export const RevealButton: typeof Button = styled(Button).attrs(
+	({ theme }) => ({
+		textStyle: {
+			fontSize: theme.font.size.small,
+		},
+	}),
+)`
+  ${({ theme: { size, color } }) => css`
   margin: ${size.gap.default}px auto 0px;
   border: 0px solid ${color.dark10};
   border-top-width: 1px;
-`;
+`}`;

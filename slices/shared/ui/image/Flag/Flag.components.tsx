@@ -1,7 +1,5 @@
-import { Alegreya } from "@assets/fonts";
-import { color, font } from "@shared/config";
 import { Image as BaseImage, View } from "react-native";
-import styled from "styled-components/native";
+import styled, { css } from "styled-components/native";
 import { UnscaledText } from "../../behavior/UnscaledText";
 import { FLAG_HEIGHT, FLAG_SIZE } from "./Flag.styles";
 
@@ -25,9 +23,12 @@ export const Overlay: typeof View = styled(View)`
 `;
 
 export const Title: typeof UnscaledText = styled(UnscaledText)`
-  font-family: ${Alegreya.regular};
-  font-size: ${font.size.medium}px;
-  color: ${color.light10};
+    ${({ theme: { font, color, fontFamily } }) => css`
+    font-family: ${fontFamily.Alegreya.regular};
+
+    font-size: ${font.size.medium}px;
+    color: ${color.light10};
+  `}
 `;
 
 export const Image: typeof BaseImage = styled(BaseImage).attrs({

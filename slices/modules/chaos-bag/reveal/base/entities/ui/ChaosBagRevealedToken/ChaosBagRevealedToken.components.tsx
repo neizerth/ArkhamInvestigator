@@ -1,6 +1,5 @@
 import { chaosToken } from "@modules/chaos-bag/base/shared/config";
 import { ChaosTokenPreview } from "@modules/chaos-bag/base/shared/ui";
-import { color, font } from "@shared/config";
 import { Text } from "@shared/ui";
 import type { FC } from "react";
 import { Platform, type TextProps, View, type ViewProps } from "react-native";
@@ -30,7 +29,7 @@ export const Position: FC<PositionProps> = styled(View)`
   width: 16px;
   height: 16px;
   border-radius: 16px;
-  background-color: ${color.light10};
+  background-color: ${({ theme }) => theme.color.light10};
   justify-content: center;
   align-items: center;
   padding: ${ios ? 1 : 0}px;
@@ -42,24 +41,14 @@ export const Position: FC<PositionProps> = styled(View)`
   `}
 `;
 
-const positionFontSize: Record<number, number> = {
-	1: font.size.small,
-	2: font.size.xs * 0.9,
-};
-
-const positionLineHeight: Record<number, number> = {
-	1: font.size.small,
-	2: font.size.xs * 1.05,
-};
-
 type PositionTextProps = TextProps & {
 	size: number;
 };
 
-export const PositionText: FC<PositionTextProps> = styled(Text)`
-  ${({ size }: PositionTextProps) => css`
-    font-size: ${positionFontSize[size]}px;
-    line-height: ${positionLineHeight[size]}px;
+export const PositionText = styled(Text)<PositionTextProps>`
+  ${({ size, theme }) => css`
+    font-size: ${size === 1 ? theme.font.size.small : theme.font.size.xs * 0.9}px;
+    line-height: ${size === 1 ? theme.font.size.small : theme.font.size.xs * 1.05}px;
   `}
   ${
 		!ios &&
@@ -68,5 +57,5 @@ export const PositionText: FC<PositionTextProps> = styled(Text)`
     top: -1px;
   `
 	}
-  color: ${color.text};
+  color: ${({ theme }) => theme.color.text};
 `;

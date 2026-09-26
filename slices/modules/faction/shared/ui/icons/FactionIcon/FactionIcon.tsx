@@ -9,7 +9,6 @@ export type FactionIconProps = PropsWithFaction & {
 export const FactionIcon = ({
 	faction,
 	contentContainerStyle,
-	...props
 }: FactionIconProps) => {
 	return (
 		<C.Container style={contentContainerStyle}>

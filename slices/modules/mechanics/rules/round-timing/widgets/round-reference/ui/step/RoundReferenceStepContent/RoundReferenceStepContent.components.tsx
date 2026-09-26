@@ -1,9 +1,7 @@
 import { GameText, type GameTextProps } from "@modules/core/theme/shared/ui";
-import { size } from "@shared/config";
 import type { FC } from "react";
 import { View } from "react-native";
-import styled from "styled-components";
-import { css } from "styled-components/native";
+import styled, { css } from "styled-components/native";
 import { phaseContentFontSize } from "../../../config";
 import { StepActions } from "../StepActions";
 import { StepDoom } from "../StepDoom";
@@ -12,7 +10,7 @@ import { StepResources } from "../StepResources";
 export const Container: typeof View = styled(View)`
 	flex-direction: row;
   justify-content: space-between;
-  gap: ${size.gap.default}px;
+  gap: ${({ theme }) => theme.size.gap.default}px;
   align-items: center;
 	z-index: 2;
 `;

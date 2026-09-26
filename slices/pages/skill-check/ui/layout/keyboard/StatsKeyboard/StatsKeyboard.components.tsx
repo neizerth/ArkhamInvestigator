@@ -1,4 +1,3 @@
-import { color, size } from "@shared/config";
 import { Row, ScrollView } from "@shared/ui";
 import {
 	IconKeyboardButton,
@@ -6,7 +5,7 @@ import {
 } from "@widgets/control/keyboard-button";
 import type { FC } from "react";
 import { View } from "react-native";
-import styled from "styled-components/native";
+import styled, { css } from "styled-components/native";
 
 export const Container: typeof ScrollView = styled(ScrollView)`
 
@@ -27,9 +26,10 @@ export const Button: FC<ButtonProps> = styled(IconKeyboardButton).attrs({
   `;
 
 export const Rule: typeof View = styled(View)`
+  ${({ theme: { color, size } }) => css`
   flex: 1;
   width: 1px;
   height: 20px;
   background-color: ${color.dark20};
   margin: 0 ${size.gap.small}px;
-`;
+`}`;

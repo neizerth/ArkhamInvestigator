@@ -2,7 +2,6 @@ import {
 	StatFigure,
 	type StatFigureProps,
 } from "@modules/board/base/entities/base/ui";
-import { color } from "@shared/config";
 import type { StatSourceType } from "@shared/model";
 import type { FC } from "react";
 import styled from "styled-components/native";
@@ -19,18 +18,18 @@ const createComponents = (type: StatSourceType) => {
 		testID: `${type}-doom-value`,
 	})``;
 
-	const Picker: typeof StatPicker = styled(StatPicker).attrs({
+	const Picker: typeof StatPicker = styled(StatPicker).attrs(({ theme }) => ({
 		testID: `${type}-doom-picker`,
 		Component: PickerValue,
 		valueStyle: {
-			color: color.doom.dark,
+			color: theme.color.doom.dark,
 		},
 		textStyle: {
-			color: color.black,
+			color: theme.color.black,
 		},
 		itemHeight: assetsSize.main,
 		stroke: false,
-	})`
+	}))`
 		${type === "scenario" ? "position: absolute;" : ""}
 	`;
 

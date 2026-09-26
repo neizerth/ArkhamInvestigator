@@ -28,9 +28,6 @@ export const getScenarioReferenceStyle = ({ language, name }: Options) => {
 		zh: {
 			bottom: u(-1),
 		},
-		"zh-cn": {
-			bottom: u(-1),
-		},
 	})(language);
 
 	const scale = getTitleSizeScale(name);
@@ -46,9 +43,6 @@ export const getScenarioReferenceStyle = ({ language, name }: Options) => {
 		zh: {
 			fontSize: u(6),
 		},
-		"zh-cn": {
-			fontSize: u(6),
-		},
 	})(language);
 
 	const content = getKeyConfig<ViewStyle>({
@@ -60,9 +54,6 @@ export const getScenarioReferenceStyle = ({ language, name }: Options) => {
 			gap: u(3),
 		},
 		zh: {
-			top: u(24),
-		},
-		"zh-cn": {
 			top: u(24),
 		},
 	})(language);
@@ -78,9 +69,6 @@ export const getScenarioReferenceStyle = ({ language, name }: Options) => {
 			gap: u(3),
 		},
 		zh: {
-			gap: u(1),
-		},
-		"zh-cn": {
 			gap: u(1),
 		},
 	})(language);

@@ -34,6 +34,7 @@ export const FactionSelect = ({
 				{filters.map((item, index) => (
 					<C.Button
 						key={item}
+						testID={`faction-filter-${item}`}
 						value={item}
 						selected={value === item}
 						onPress={onPress(item)}

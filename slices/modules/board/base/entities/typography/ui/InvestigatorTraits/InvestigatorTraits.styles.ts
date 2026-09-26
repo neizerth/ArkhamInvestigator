@@ -30,7 +30,6 @@ export const getInvestigatorTraitsStyle = ({
 			fontFamily: SanCn.bold,
 		},
 		zh: zhStyle,
-		"zh-cn": zhStyle,
 	});
 
 	return getStyle(language);

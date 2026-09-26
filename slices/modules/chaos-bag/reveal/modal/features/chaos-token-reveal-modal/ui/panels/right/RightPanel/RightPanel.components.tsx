@@ -1,5 +1,4 @@
 import { TouchableOpacity } from "@modules/core/touch/shared/ui";
-import { color, size } from "@shared/config";
 import { IconNumber, type IconNumberProps, Text } from "@shared/ui";
 import { View } from "react-native";
 import styled, { css } from "styled-components/native";
@@ -11,7 +10,7 @@ export const Container: typeof View = styled(View)`
 `;
 
 export const Content: typeof View = styled(View)`
-  padding: ${size.gap.small}px 0;
+  padding: ${({ theme }) => theme.size.gap.small}px 0;
   flex: 1;
   justify-content: space-between;
   align-items: flex-start;
@@ -21,7 +20,7 @@ const ValueSymbol: typeof Text = styled(Text)`
   position: absolute;
   top: -7px;
   left: -10px;
-  color: ${color.white};
+  color: ${({ theme }) => theme.color.white};
   font-size: 25px;
 `;
 
@@ -35,7 +34,7 @@ export const ResultSymbol: typeof ValueSymbol = styled(ValueSymbol)`
 `;
 
 export const Item: typeof View = styled(View)`
-  padding-top: ${size.gap.medium}px;
+  padding-top: ${({ theme }) => theme.size.gap.medium}px;
   justify-content: center;
   align-items: center;
   position: relative;
@@ -52,13 +51,15 @@ export const Button: typeof TouchableOpacity = styled(TouchableOpacity)`
   
 `;
 
-export const Value: typeof IconNumber = styled(IconNumber).attrs({
-	stroke: true,
-	strokeStyle: {
-		color: color.text,
-	},
-})`
-  color: ${color.white};
+export const Value: typeof IconNumber = styled(IconNumber).attrs(
+	({ theme }) => ({
+		stroke: true,
+		strokeStyle: {
+			color: theme.color.text,
+		},
+	}),
+)`
+  color: ${({ theme }) => theme.color.white};
   min-width: 38px;
   ${({ value }: IconNumberProps) => css`
     font-size: ${valueFontSize[value.toString().length] || 25}px;

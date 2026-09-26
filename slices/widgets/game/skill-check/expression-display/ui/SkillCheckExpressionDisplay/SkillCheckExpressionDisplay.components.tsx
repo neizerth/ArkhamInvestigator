@@ -1,7 +1,6 @@
-import { color, font } from "@shared/config";
 import { Icon, Row, TextView } from "@shared/ui";
 import { View } from "react-native";
-import styled from "styled-components/native";
+import styled, { css } from "styled-components/native";
 
 export const Container: typeof View = styled(View)`
   justify-content: center;
@@ -16,11 +15,11 @@ export const Expression: typeof Row = styled(Row)`
 `;
 
 export const OldValue: typeof TextView = styled(TextView)`
-  color: ${color.dark20};
+  color: ${({ theme }) => theme.color.dark20};
 `;
 
 export const Value: typeof TextView = styled(TextView)`
-  color: ${color.text};
+  color: ${({ theme }) => theme.color.text};
 `;
 
 export const Wrapper: typeof View = styled(View)`
@@ -28,6 +27,7 @@ export const Wrapper: typeof View = styled(View)`
 `;
 
 export const Odds: typeof Text = styled(Text)`
+  ${({ theme: { font, color } }) => css`
   position: absolute;
   bottom: 19px;
   right: 0px;
@@ -37,7 +37,7 @@ export const Odds: typeof Text = styled(Text)`
   color: ${color.text};
   font-size: ${font.size.small}px;
   text-align: right;
-`;
+`}`;
 
 export const Greater: typeof TextView = styled(TextView)`
   color: #198754;

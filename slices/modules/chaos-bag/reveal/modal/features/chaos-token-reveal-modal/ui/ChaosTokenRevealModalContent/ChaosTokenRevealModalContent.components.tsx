@@ -1,6 +1,6 @@
 import { ChaosTokenRevealLoader } from "@modules/chaos-bag/reveal/base/entities/ui";
 import { View } from "react-native";
-import styled from "styled-components";
+import styled from "styled-components/native";
 
 export const Loader: typeof ChaosTokenRevealLoader = styled(
 	ChaosTokenRevealLoader,

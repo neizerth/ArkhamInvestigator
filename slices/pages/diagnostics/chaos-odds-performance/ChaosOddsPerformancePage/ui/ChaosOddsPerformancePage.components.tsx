@@ -1,5 +1,4 @@
 import { TouchableOpacity } from "@modules/core/touch/shared/ui";
-import { size } from "@shared/config";
 import { Button, Checkbox, Row, Table } from "@shared/ui";
 import { ContentPage } from "@widgets/content";
 import { View } from "react-native";
@@ -9,14 +8,14 @@ export const Page: typeof ContentPage = styled(ContentPage)`
 `;
 
 export const Content: typeof View = styled(View)`
-  gap: ${size.gap.default}px;
+  gap: ${({ theme }) => theme.size.gap.default}px;
 `;
 
 export const List: typeof Table = styled(Table)`
 `;
 
 export const Actions: typeof Row = styled(Row)`
-  gap: ${size.gap.small}px;
+  gap: ${({ theme }) => theme.size.gap.small}px;
   justify-content: space-between;
 `;
 

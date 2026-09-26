@@ -1,6 +1,5 @@
 import { View } from "react-native";
 import styled from "styled-components/native";
-import { color } from "../../../../config";
 import { Row } from "../../../grid";
 import { Aside, Line } from "./images";
 
@@ -53,19 +52,19 @@ export const RuleContainer: typeof View = styled(View)`
   bottom: ${asideOffset.y}px;
 `;
 
-export const Rule: typeof Line = styled(Line).attrs({
+export const Rule: typeof Line = styled(Line).attrs(({ theme }) => ({
 	width: lineWidth,
 	height: lineHeight,
-	fill: color.light10,
-})`
+	fill: theme.color.light10,
+}))`
   
 `;
 
-export const Decoration: typeof Aside = styled(Aside).attrs({
+export const Decoration: typeof Aside = styled(Aside).attrs(({ theme }) => ({
 	width: asideWidth,
 	height: asideHeight,
-	fill: color.light10,
-})`
+	fill: theme.color.light10,
+}))`
   position: absolute;
   bottom: ${asideOffset.y}px;
 `;

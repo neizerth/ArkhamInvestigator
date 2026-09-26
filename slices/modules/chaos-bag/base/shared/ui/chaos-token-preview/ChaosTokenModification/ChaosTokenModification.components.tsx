@@ -1,8 +1,7 @@
 import { Value, type ValueProps } from "@shared/ui";
 import type { FC } from "react";
 import { View } from "react-native";
-import styled from "styled-components";
-import { css } from "styled-components/native";
+import styled, { css } from "styled-components/native";
 import { getChaosTokenModificationColor } from "./ChaosTokenModification.styles";
 
 export const Container: typeof View = styled(View)`

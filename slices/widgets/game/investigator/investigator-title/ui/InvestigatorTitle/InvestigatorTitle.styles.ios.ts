@@ -280,7 +280,6 @@ export const getTitleStyle = (options: GetTitleStyleOptions) => {
 		ru: getRUStyle(faction),
 		ko: getKOStyle(faction),
 		zh: zhStyle,
-		"zh-cn": zhStyle,
 	});
 
 	const getFactiionStyle = getKeyConfig({

@@ -1,4 +1,3 @@
-import { Copasetic } from "@assets/fonts";
 import { color } from "@shared/config";
 import { UnscaledText, type UnscaledTextProps } from "@shared/ui";
 import type { FC } from "react";
@@ -34,7 +33,7 @@ export type TextProps = UnscaledTextProps &
 
 export const Text: FC<TextProps> = styled(UnscaledText)`
   font-size: 50px;
-  font-family: ${Copasetic.regular};
+  font-family: ${({ theme }) => theme.fontFamily.Copasetic.regular};
   ${({ buttonType = "secondary" }: TextProps) => css`
     ${textStyle[buttonType]}
   `}

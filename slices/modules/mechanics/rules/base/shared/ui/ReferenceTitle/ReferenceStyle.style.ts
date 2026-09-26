@@ -22,9 +22,6 @@ export const getReferenceStyle = ({ fontSize, language }: Options) => {
 		zh: {
 			bottom: u(-25),
 		},
-		"zh-cn": {
-			bottom: u(-25),
-		},
 	})(language);
 
 	return {

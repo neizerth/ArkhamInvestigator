@@ -60,6 +60,7 @@
 	"jest": {
 		"preset": "jest-expo",
 		"setupFiles": ["<rootDir>/jest.setup.ts"],
+		"setupFilesAfterEnv": ["<rootDir>/jest.setupAfterEnv.ts"],
 		"testPathIgnorePatterns": [
 			"/node_modules/",
 			"/e2e/",

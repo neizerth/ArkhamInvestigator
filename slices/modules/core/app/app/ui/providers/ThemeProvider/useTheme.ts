@@ -1,18 +1,9 @@
 import { useScreenOrientation } from "@modules/core/device/shared/lib";
-import { activeOpacity, color, font, size } from "@shared/config";
 import { useMemo } from "react";
-import type { DefaultTheme } from "styled-components";
+import { getAppTheme } from "./getAppTheme";
 
 export const useTheme = () => {
 	const orientation = useScreenOrientation();
 
-	return useMemo((): DefaultTheme => {
-		return {
-			color,
-			font,
-			size,
-			activeOpacity,
-			orientation,
-		};
-	}, [orientation]);
+	return useMemo(() => getAppTheme(orientation), [orientation]);
 };

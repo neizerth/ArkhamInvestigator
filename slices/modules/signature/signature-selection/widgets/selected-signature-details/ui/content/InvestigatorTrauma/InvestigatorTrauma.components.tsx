@@ -1,6 +1,4 @@
-import { Alegreya } from "@assets/fonts";
 import { HealthValue, SanityValue } from "@modules/board/base/entities/base/ui";
-import { size } from "@shared/config";
 import { NumericControl, Row, Text } from "@shared/ui";
 import { View } from "react-native";
 import styled from "styled-components/native";
@@ -10,11 +8,11 @@ export const Container: typeof View = styled(View)`
 `;
 
 export const Title: typeof Text = styled(Text)`
-  font-family: ${Alegreya.medium};
+  font-family: ${({ theme }) => theme.fontFamily.Alegreya.medium};
 `;
 
 export const Controls: typeof Row = styled(Row)`
-  padding-top: ${size.gap.default}px;
+  padding-top: ${({ theme }) => theme.size.gap.default}px;
 `;
 
 export const Control: typeof NumericControl = styled(NumericControl)`

@@ -1,8 +1,6 @@
-import { CrimsonPro, EBGaramond, FZLiBian, SanCn } from "@assets/fonts";
 import { scenarioReferenceImage } from "@assets/images/game/reference";
 import { withLocale } from "@modules/core/i18n/shared/lib";
 import { ReferenceTitle } from "@modules/mechanics/rules/base/shared/ui";
-import { color, size } from "@shared/config";
 import { Icon, ImageBackground } from "@shared/ui";
 import { View } from "react-native";
 import styled from "styled-components/native";
@@ -10,12 +8,14 @@ import { currentScenarioReferenceSize as refSize } from "../../config";
 import { refUnit as unit, refPx as upx } from "../../lib";
 import { ScenarioReferenceEffects } from "../ScenarioReferenceEffects";
 
-export const Container: typeof ImageBackground = styled(ImageBackground).attrs({
-	source: scenarioReferenceImage,
-	imageStyle: {
-		borderRadius: size.borderRadius.large,
-	},
-})`
+export const Container: typeof ImageBackground = styled(ImageBackground).attrs(
+	({ theme }) => ({
+		source: scenarioReferenceImage,
+		imageStyle: {
+			borderRadius: theme.size.borderRadius.large,
+		},
+	}),
+)`
 	position: relative;
   width: ${refSize.width}px;
 	height: ${refSize.height}px;
@@ -43,24 +43,21 @@ export const Difficulty: typeof View = styled(View)`
 `;
 
 export const DifficultyText = withLocale({
-	style: {
+	style: ({ fontFamily }) => ({
 		default: {
-			fontFamily: CrimsonPro.bold,
+			fontFamily: fontFamily.CrimsonPro.bold,
 			fontSize: unit(3.3),
 		},
 		ko: {
-			fontFamily: SanCn.bold,
+			fontFamily: fontFamily.SanCn.bold,
 		},
 		ru: {
-			fontFamily: EBGaramond.bold,
+			fontFamily: fontFamily.EBGaramond.bold,
 		},
 		zh: {
-			fontFamily: FZLiBian.regular,
+			fontFamily: fontFamily.FZLiBian.regular,
 		},
-		"zh-cn": {
-			fontFamily: FZLiBian.regular,
-		},
-	},
+	}),
 });
 
 export const ReferenceIconContainer: typeof View = styled(View)`
@@ -74,7 +71,7 @@ export const ReferenceIconContainer: typeof View = styled(View)`
 `;
 
 export const ReferenceIcon: typeof Icon = styled(Icon)`
-	color: ${color.text};
+	color: ${({ theme }) => theme.color.text};
 	font-size: ${upx(7)};
 	line-height: ${upx(6)};
 `;

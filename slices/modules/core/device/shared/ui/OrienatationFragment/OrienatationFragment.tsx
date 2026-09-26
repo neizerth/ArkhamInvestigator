@@ -1,7 +1,7 @@
 import { useScreenOrientation } from "@modules/core/device/shared/lib";
 import { collect } from "@shared/lib/util/collections";
-import type { DeviceOrientation } from "@shared/model";
 import type { PropsWithChildren } from "react";
+import type { DeviceOrientation } from "../../model";
 
 export type OrienatationFragmentProps = PropsWithChildren & {
 	only?: DeviceOrientation | DeviceOrientation[];

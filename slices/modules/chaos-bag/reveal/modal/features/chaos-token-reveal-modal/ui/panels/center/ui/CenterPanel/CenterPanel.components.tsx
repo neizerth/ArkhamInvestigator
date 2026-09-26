@@ -1,6 +1,5 @@
 import { ChaosTokenValuePicker } from "@modules/chaos-bag/base/entities/ui";
 import { TouchableOpacity } from "@modules/core/touch/shared/ui";
-import { size } from "@shared/config";
 import { Platform, View } from "react-native";
 import styled from "styled-components/native";
 import { ExpressionPanel } from "../ExpressionPanel";
@@ -29,7 +28,7 @@ export const Expression: typeof ExpressionPanel = styled(ExpressionPanel)`
   bottom: 0;
   left: 0;
   right: 0;
-  padding-top: ${size.gap.large}px;
+  padding-top: ${({ theme }) => theme.size.gap.large}px;
 `;
 
 export const ControlContainer: typeof View = styled(View)`

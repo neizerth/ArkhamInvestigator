@@ -34,6 +34,10 @@ appId: ${APP_ID}
             - extendedWaitUntil:
                 visible: "Choose an Investigator"
                 timeout: 30000
+            # the faction filter is remembered between games: the first tab is Guardian,
+            # where Roland Banks lives
+            - tapOn:
+                id: "faction-filter-guardian"
             # Roland Banks, whose stats every flow expects
             - tapOn:
                 id: "signature-01001"

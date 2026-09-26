@@ -1,11 +1,10 @@
 import styled from "styled-components/native";
-import { color, size } from "../../../config";
 import { Row } from "../../grid";
 import { Button as BaseButton } from "../button/Button";
 
 export const Container: typeof Row = styled(Row)`
   align-items: center;
-  gap: ${size.gap.small}px;
+  gap: ${({ theme }) => theme.size.gap.small}px;
 `;
 
 export const Button: typeof BaseButton = styled(BaseButton)`
@@ -14,5 +13,5 @@ export const Button: typeof BaseButton = styled(BaseButton)`
   height: 28px;
   justify-content: center;
   align-items: center;
-  background-color: ${color.dark20};
+  background-color: ${({ theme }) => theme.color.dark20};
 `;

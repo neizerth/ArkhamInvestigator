@@ -1,6 +1,5 @@
 import { Picker } from "@modules/core/control/entities/picker/ui";
 import { TouchableOpacity } from "@modules/core/touch/shared/ui";
-import { color, size } from "@shared/config";
 import { UnscaledText, Value } from "@shared/ui";
 import { View } from "react-native";
 import styled from "styled-components/native";
@@ -20,11 +19,11 @@ export const Control: typeof Picker = styled(Picker).attrs({
   
 `;
 
-export const Difficulty: typeof Value = styled(Value).attrs({
+export const Difficulty: typeof Value = styled(Value).attrs(({ theme }) => ({
 	strokeStyle: {
-		color: color.dark30,
+		color: theme.color.dark30,
 	},
-})`
+}))`
   font-size: 50px;
   width: 60px;
 `;
@@ -34,10 +33,10 @@ export const Compare: typeof TouchableOpacity = styled(TouchableOpacity)`
   z-index: 1;
   top: -25px;
   left: -27px;
-  padding: ${size.gap.default}px;
+  padding: ${({ theme }) => theme.size.gap.default}px;
 `;
 
 export const CompareSymbol: typeof UnscaledText = styled(UnscaledText)`
-  color: ${color.white};
+  color: ${({ theme }) => theme.color.white};
   font-size: 30px;
 `;

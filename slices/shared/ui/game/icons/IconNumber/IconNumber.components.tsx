@@ -1,4 +1,3 @@
-import { ArkhamDigits } from "@assets/fonts";
 import type { FC } from "react";
 import { View } from "react-native";
 import styled, { css } from "styled-components/native";
@@ -21,7 +20,7 @@ export const StrokeContainer: typeof View = styled(View)`
 export const Fill: typeof UnscaledText = styled(UnscaledText).attrs({
 	numberOfLines: 1,
 })`
-  font-family: ${ArkhamDigits.fill};
+  font-family: ${({ theme }) => theme.fontFamily.ArkhamDigits.fill};
   position: absolute;
   left: 0;
   top: 0;
@@ -29,13 +28,13 @@ export const Fill: typeof UnscaledText = styled(UnscaledText).attrs({
 `;
 
 export const Outline: typeof UnscaledText = styled(UnscaledText)`
-  font-family: ${ArkhamDigits.outline};
+  font-family: ${({ theme }) => theme.fontFamily.ArkhamDigits.outline};
   position: relative;
   z-index: 3;
 `;
 
 export const UnstrokedText: typeof UnscaledText = styled(UnscaledText)`
-  font-family: ${ArkhamDigits.fill};
+  font-family: ${({ theme }) => theme.fontFamily.ArkhamDigits.fill};
 `;
 
 export const Char: FC<CharProps> = styled(Icon).attrs({

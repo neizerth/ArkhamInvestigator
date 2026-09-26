@@ -71,7 +71,6 @@ export const localeComponentStyles: KeyConfig<ComponentStyleMap> = {
 		},
 	},
 	zh: zhComponentStyles,
-	"zh-cn": zhComponentStyles,
 };
 
 type Options = {
@@ -118,7 +117,6 @@ export const getScenarioEffectsStyle = ({
 			},
 		},
 		zh: zhComponentStyles,
-		"zh-cn": zhComponentStyles,
 	});
 
 	const style = getKeyConfig<TextStyle>({
@@ -130,9 +128,6 @@ export const getScenarioEffectsStyle = ({
 			lineHeight: fontSize * 1.3,
 		},
 		zh: {
-			lineHeight: fontSize * 1.2,
-		},
-		"zh-cn": {
 			lineHeight: fontSize * 1.2,
 		},
 	})(language);

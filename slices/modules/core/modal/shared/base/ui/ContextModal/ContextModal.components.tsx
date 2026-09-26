@@ -1,6 +1,5 @@
-import { Alegreya } from "@assets/fonts";
 import { TouchableOpacity } from "@modules/core/touch/shared/ui";
-import { color, size, statusBarHeight } from "@shared/config";
+import { statusBarHeight } from "@shared/config";
 import { Icon, Row, Text } from "@shared/ui";
 import { ScrollView } from "@shared/ui";
 import type { FC } from "react";
@@ -13,26 +12,27 @@ type ContainerProps = ViewProps & {
 };
 
 export const Container: FC<ContainerProps> = styled(View)`
-  padding: ${({ navbarHeight }: ContainerProps) => {
-		return `${statusBarHeight + size.gap.default}px ${size.gap.default}px ${navbarHeight + size.gap.small}px`;
-	}};
   justify-content: flex-end;
   filter: drop-shadow(0 0 5px rgb(0, 0, 0, 1));
-  background-color: ${color.modal.background.light};
+  ${({ navbarHeight, theme: { size, color } }) => css`
+    padding: ${statusBarHeight + size.gap.default}px ${size.gap.default}px ${navbarHeight + size.gap.small}px;
+    background-color: ${color.modal.background.light};
+  `}
 `;
 
-const radius = size.borderRadius.default;
 export const Header: typeof View = styled(View)`
   position: relative;
-  background-color: ${color.light30};
-  border-radius: ${radius}px ${radius}px 0 0;
   align-items: center;
-  padding: ${size.gap.small}px;
+  ${({ theme: { color, size } }) => css`
+    background-color: ${color.light30};
+    border-radius: ${size.borderRadius.default}px ${size.borderRadius.default}px 0 0;
+    padding: ${size.gap.small}px;
+  `}
 `;
 
 export const Title: typeof Text = styled(Text)`
-  font-family: ${Alegreya.medium};
-  color: ${color.text};
+  font-family: ${({ theme }) => theme.fontFamily.Alegreya.medium};
+  color: ${({ theme }) => theme.color.text};
 `;
 
 export const Content: typeof ScrollView = styled(ScrollView).attrs({
@@ -43,16 +43,18 @@ export const Content: typeof ScrollView = styled(ScrollView).attrs({
 `;
 
 export const Body: typeof View = styled(View)`
-  background-color: ${color.dark20};
-  border-radius: 0 0 ${radius}px ${radius}px;
-  padding: ${size.gap.default}px;
+  ${({ theme: { color, size } }) => css`
+    background-color: ${color.dark20};
+    border-radius: 0 0 ${size.borderRadius.default}px ${size.borderRadius.default}px;
+    padding: ${size.gap.default}px;
+  `}
 `;
 
 const buttonStyle = css`
   position: absolute;
   top: 0;
   bottom: 0;
-  padding: 0px ${size.gap.default}px;
+  padding: 0px ${({ theme }) => theme.size.gap.default}px;
   justify-content: center;
   align-items: center;
 `;
@@ -76,6 +78,6 @@ export const Actions: typeof Row = styled(Row)`
 `;
 
 export const ActionIcon: typeof Icon = styled(Icon)`
-  color: ${color.dark10};
+  color: ${({ theme }) => theme.color.dark10};
   font-size: 16px;
 `;

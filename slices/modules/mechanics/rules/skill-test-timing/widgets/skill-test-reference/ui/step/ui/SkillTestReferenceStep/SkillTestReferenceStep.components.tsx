@@ -1,6 +1,5 @@
 import { GameText } from "@modules/core/theme/shared/ui";
 import { ReferenceSectionStep } from "@modules/mechanics/rules/base/shared/ui";
-import { color } from "@shared/config";
 import { View } from "react-native";
 import styled from "styled-components/native";
 
@@ -24,5 +23,5 @@ export const StepText: typeof GameText = styled(GameText).attrs({
 		},
 	},
 })`
-	color: ${color.text};
+	color: ${({ theme }) => theme.color.text};
 `;

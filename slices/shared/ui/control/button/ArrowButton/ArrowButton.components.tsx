@@ -1,18 +1,17 @@
 import styled, { css } from "styled-components/native";
-import { color } from "../../../../config";
-import { Button, type ButtonProps } from "../Button";
+import { Button } from "../Button";
 
 export const Container: typeof Button = styled(Button).attrs(
-	({ disabled }: ButtonProps) => ({
+	({ disabled, theme }) => ({
 		iconStyle: {
-			color: disabled ? color.dark10 : color.light10,
+			color: disabled ? theme.color.dark10 : theme.color.light10,
 		},
 	}),
 )`
   justify-content: center;
   align-items: center;
-  ${({ disabled }: ButtonProps) =>
+  ${({ disabled, theme }) =>
 		css`
-      border: 1px solid ${disabled ? color.dark20 : color.dark10};
+      border: 1px solid ${disabled ? theme.color.dark20 : theme.color.dark10};
   `}
 `;

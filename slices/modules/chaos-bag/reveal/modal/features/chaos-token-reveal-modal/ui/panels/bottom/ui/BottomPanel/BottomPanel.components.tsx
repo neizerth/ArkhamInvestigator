@@ -1,5 +1,4 @@
 import { TouchableOpacity } from "@modules/core/touch/shared/ui";
-import { color, size } from "@shared/config";
 import { Icon, Row } from "@shared/ui";
 import { View } from "react-native";
 import styled from "styled-components/native";
@@ -13,7 +12,7 @@ export const Container: typeof View = styled(View)`
 `;
 
 export const Actions: typeof Row = styled(Row)`
-  padding: 0 ${size.gap.default}px;
+  padding: 0 ${({ theme }) => theme.size.gap.default}px;
   justify-content: space-between;
 `;
 
@@ -31,7 +30,7 @@ export const ReturnAllIcon: typeof Icon = styled(ReturnIcon)`
   top: 7px;
   font-size: 25px;
   line-height: 25px;
-  color: ${color.text};
+  color: ${({ theme }) => theme.color.text};
 `;
 
 export const ReturnFillIcon: typeof Icon = styled(Icon)`
@@ -56,7 +55,7 @@ export const Return: typeof Action = styled(Action)`
 `;
 
 export const RevealMore: typeof Action = styled(Action)`
-  border: 1px dashed ${color.light10};
+  border: 1px dashed ${({ theme }) => theme.color.light10};
 
   background-color: rgba(0, 0, 0, 0.2);
 `;
@@ -66,7 +65,7 @@ export const RevealMoreIcon: typeof Icon = styled(Icon)`
   left: -5px;
   font-size: 50px;
   line-height: 50px;
-  color: ${color.light20};
+  color: ${({ theme }) => theme.color.light20};
 `;
 
 export const Description: typeof DescriptionPanel = styled(DescriptionPanel)`

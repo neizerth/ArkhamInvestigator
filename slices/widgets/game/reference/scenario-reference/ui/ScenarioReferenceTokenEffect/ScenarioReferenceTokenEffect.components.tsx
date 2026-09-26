@@ -1,11 +1,10 @@
 import { ChaosTokenOption } from "@modules/chaos-bag/base/features/ui";
 import { TouchableOpacity } from "@modules/core/touch/shared/ui";
-import { color } from "@shared/config";
 import { Icon, Row } from "@shared/ui";
 import type { FC } from "react";
 import type { ViewProps } from "react-native";
 import { View } from "react-native";
-import styled, { css } from "styled-components";
+import styled, { css } from "styled-components/native";
 import { refPx as upx } from "../../lib";
 import { ScenarioReferenceEffectText } from "../ScenarioReferenceEffectText";
 import { ScenarioReferenceToken } from "../ScenarioReferenceToken";
@@ -62,7 +61,7 @@ export const Expand: FC<ExpandProps> = styled(View)<ExpandProps>`
 `;
 
 export const ExpandIcon: typeof Icon = styled(Icon)`
-  color: ${color.text};
+  color: ${({ theme }) => theme.color.text};
   font-size: 10px;
 `;
 
@@ -77,11 +76,13 @@ export const OptionContainer: typeof View = styled(View)`
 
 `;
 
-export const Option: typeof ChaosTokenOption = styled(ChaosTokenOption).attrs({
-	controlStyle: {
-		color: color.text,
-	},
-})`
+export const Option: typeof ChaosTokenOption = styled(ChaosTokenOption).attrs(
+	({ theme }) => ({
+		controlStyle: {
+			color: theme.color.text,
+		},
+	}),
+)`
 `;
 
 export const OptionText: typeof Text = styled(Text).attrs({

@@ -1,7 +1,5 @@
-import { Arkhamic, Conkordia, FZLiBian, SanCn } from "@assets/fonts";
 import { withLocale } from "@modules/core/i18n/shared/lib";
 import { TouchableOpacity } from "@modules/core/touch/shared/ui";
-import { color } from "@shared/config";
 import { Icon, Row, type UnscaledTextProps } from "@shared/ui";
 import type { FC } from "react";
 import { Platform, View, type ViewProps } from "react-native";
@@ -33,7 +31,7 @@ export const Toggle: typeof TouchableOpacity = styled(TouchableOpacity)`
 export const ToggleIcon: typeof Icon = styled(Icon)`
 	font-size: 10px;
 	line-height: 10px;
-	color: ${color.title};
+	color: ${({ theme }) => theme.color.title};
 	${
 		ios &&
 		css`
@@ -51,41 +49,42 @@ export const ToggleIconContainer: FC<ToggleIconContainerProps> = styled(View)`
 	`}
 `;
 
-const zhTitleConfig = {
-	fontFamily: FZLiBian.regular,
-	transform: [
-		{
-			translateY: -sectionTitleFontSize * 0.2,
-		},
-	],
-};
-
 export const BaseTitle = withLocale({
-	style: {
-		default: {
-			fontFamily: Arkhamic.regular,
-			fontSize: sectionTitleFontSize,
-			color: color.rulesText,
-		},
-		ru: {
-			fontFamily: Conkordia.regular,
-		},
-		ko: {
-			fontFamily: SanCn.bold,
-			paddingTop: 3,
-		},
-		zh: zhTitleConfig,
-		"zh-cn": zhTitleConfig,
+	style: ({ fontFamily }) => {
+		const zhTitleConfig = {
+			fontFamily: fontFamily.FZLiBian.regular,
+			transform: [
+				{
+					translateY: -sectionTitleFontSize * 0.2,
+				},
+			],
+		};
+
+		return {
+			default: {
+				fontFamily: fontFamily.Arkhamic.regular,
+				fontSize: sectionTitleFontSize,
+			},
+			ru: {
+				fontFamily: fontFamily.Conkordia.regular,
+			},
+			ko: {
+				fontFamily: fontFamily.SanCn.bold,
+				paddingTop: 3,
+			},
+			zh: zhTitleConfig,
+		};
 	},
 });
 
 type TitleProps = UnscaledTextProps & PropsWithOpen;
 
-export const Title: FC<TitleProps> = styled(BaseTitle)`
-	${({ open }: TitleProps) =>
+export const Title = styled(BaseTitle)<TitleProps>`
+	color: ${({ theme }) => theme.color.rulesText};
+	${({ open, theme }) =>
 		open &&
 		css`
-		color: ${color.title};
+		color: ${theme.color.title};
 	`}
 	${
 		ios &&

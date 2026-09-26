@@ -1,4 +1,3 @@
-import { size } from "@shared/config";
 import { View } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import styled from "styled-components/native";
@@ -8,14 +7,14 @@ export const Container: typeof View = styled(View)`
 	padding-bottom: 5px;
 `;
 
-export const List: typeof FlatList = styled(FlatList).attrs({
+export const List: typeof FlatList = styled(FlatList).attrs(({ theme }) => ({
 	contentContainerStyle: {
-		paddingHorizontal: size.gap.default,
-		gap: size.gap.small,
+		paddingHorizontal: theme.size.gap.default,
+		gap: theme.size.gap.small,
 	},
-})`
+}))`
   border-radius: 32px;
-	padding: ${size.gap.small}px 0;
+	padding: ${({ theme }) => theme.size.gap.small}px 0;
 `;
 
 export const Item: typeof ChaosTokenRevealHistoryItem = styled(

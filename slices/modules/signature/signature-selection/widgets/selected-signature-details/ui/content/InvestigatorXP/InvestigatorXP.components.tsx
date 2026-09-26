@@ -1,5 +1,3 @@
-import { Alegreya } from "@assets/fonts";
-import { size } from "@shared/config";
 import { Icon, NumericControl, Row, Text } from "@shared/ui";
 import { View } from "react-native";
 import styled from "styled-components/native";
@@ -8,20 +6,20 @@ export const Container: typeof View = styled(View)`
 `;
 
 export const Title: typeof Text = styled(Text)`
-  font-family: ${Alegreya.medium};
+  font-family: ${({ theme }) => theme.fontFamily.Alegreya.medium};
   text-align: center;
   padding-bottom: 6px;
 `;
 
 export const Value: typeof Text = styled(Text)`
   top: -4px;
-  font-family: ${Alegreya.medium};
+  font-family: ${({ theme }) => theme.fontFamily.Alegreya.medium};
   font-size: 30px;
   height: 37px;
 `;
 
 export const Controls: typeof Row = styled(Row)`
-  padding-top: ${size.gap.default}px;
+  padding-top: ${({ theme }) => theme.size.gap.default}px;
 `;
 
 export const ControlIcon: typeof Icon = styled(Icon)`

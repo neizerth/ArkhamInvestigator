@@ -2,8 +2,6 @@ import { Image, View } from "react-native";
 import styled from "styled-components/native";
 
 import { horrorImages } from "@assets/images/game/effects/horror";
-import { color } from "@shared/config";
-
 export const Container: typeof View = styled(View)`
   position: relative;
 `;
@@ -36,11 +34,13 @@ export const RR1: typeof HorrorImage = styled(HorrorImage).attrs({
   opacity: 0.1;
 `;
 
-export const Scratches: typeof HorrorImage = styled(HorrorImage).attrs({
-	source: horrorImages.scratches,
-	resizeMode: "cover",
-	tintColor: color.sanity,
-})`
+export const Scratches: typeof HorrorImage = styled(HorrorImage).attrs(
+	({ theme }) => ({
+		source: horrorImages.scratches,
+		resizeMode: "cover",
+		tintColor: theme.color.sanity,
+	}),
+)`
   width: 100%;
   height:100%;
   top: 0;
@@ -49,11 +49,13 @@ export const Scratches: typeof HorrorImage = styled(HorrorImage).attrs({
   opacity: 0.2;
 `;
 
-export const Fog: typeof HorrorImage = styled(HorrorImage).attrs({
-	source: horrorImages.fog,
-	resizeMode: "cover",
-	tintColor: color.sanity,
-})`
+export const Fog: typeof HorrorImage = styled(HorrorImage).attrs(
+	({ theme }) => ({
+		source: horrorImages.fog,
+		resizeMode: "cover",
+		tintColor: theme.color.sanity,
+	}),
+)`
   width: 100%;
   height:100%;
   top: 0;

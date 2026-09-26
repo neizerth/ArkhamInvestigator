@@ -1,11 +1,10 @@
-import { size } from "@shared/config";
 import { StoreCheckbox } from "@widgets/control/store-checkbox";
 import { StoreSelect } from "@widgets/control/store-select";
 import { View } from "react-native";
 import styled from "styled-components/native";
 
 export const Container: typeof View = styled(View)`
-  gap: ${size.gap.default}px;
+  gap: ${({ theme }) => theme.size.gap.default}px;
 `;
 
 export const Row: typeof View = styled(View)`

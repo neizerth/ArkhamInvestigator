@@ -1,4 +1,3 @@
-import { color } from "@shared/config";
 import type { PropsWithSkill } from "@shared/model/ui";
 import type { FC } from "react";
 import { View } from "react-native";
@@ -19,8 +18,8 @@ export const Background: FC<IconProps & PropsWithSkill & PropsWithTheme> =
   left: 0;
   top: 0;
   z-index: 1;
-  ${({ skillType, dark }: PropsWithSkill & PropsWithTheme) => css`
-    color: ${color.skill[skillType][dark ? "dark" : "light"]};
+  ${({ skillType, dark, theme }) => css`
+    color: ${theme.color.skill[skillType][dark ? "dark" : "light"]};
   `}
 `;
 

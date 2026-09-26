@@ -1,8 +1,8 @@
 import { FactionCardMemo as FactionCard } from "@modules/faction/shared/ui";
-import { color, size, statusBarHeight } from "@shared/config";
+import { statusBarHeight } from "@shared/config";
 import { Outside as BaseOutside } from "@shared/ui";
 import { ActivityIndicator, View } from "react-native";
-import styled from "styled-components/native";
+import styled, { css } from "styled-components/native";
 
 export const Outside = styled(BaseOutside)`
   z-index: 1;
@@ -16,6 +16,7 @@ export const Container: typeof View = styled(View)`
 `;
 
 export const Content: typeof View = styled(View)`
+  ${({ theme: { size } }) => css`
   flex: 1;
   position: relative;
   z-index: 2;
@@ -23,10 +24,10 @@ export const Content: typeof View = styled(View)`
   width: 100%;
   max-width: 500px;
   padding: ${statusBarHeight + size.gap.default}px ${size.gap.default}px 50px;
-`;
+`}`;
 
 export const Sections: typeof View = styled(View)`
-    gap: ${size.gap.default}px;
+    gap: ${({ theme }) => theme.size.gap.default}px;
   `;
 
 export const Card: typeof FactionCard = styled(FactionCard)`
@@ -37,11 +38,11 @@ export const Card: typeof FactionCard = styled(FactionCard)`
 `;
 
 export const Loader: typeof ActivityIndicator = styled(ActivityIndicator).attrs(
-	{
-		color: color.dark10,
-	},
+	({ theme }) => ({
+		color: theme.color.dark10,
+	}),
 )`
-	padding: ${size.gap.default}px 0;
+	padding: ${({ theme }) => theme.size.gap.default}px 0;
   flex: 1;
   min-height: 300px;
   align-items: center;

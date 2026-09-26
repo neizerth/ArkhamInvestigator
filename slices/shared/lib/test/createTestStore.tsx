@@ -9,6 +9,11 @@ import { render } from "@testing-library/react-native";
 import type { ReactElement } from "react";
 import { Provider } from "react-redux";
 import type { Saga } from "redux-saga";
+import {
+	type TestProviders,
+	getDefaultTestProviders,
+	setDefaultTestProviders,
+} from "./testProviders";
 
 const createSagaMiddleware = require("redux-saga").default;
 
@@ -17,6 +22,8 @@ export type TestStoreOptions = {
 	patch?: (state: RootState) => void;
 	/** only the sagas the test needs: the root saga starts network, assets, etc. */
 	saga?: Saga;
+	/** UI providers from the layer that owns them. Falls back to withTestProviders. */
+	wrapper?: TestProviders;
 };
 
 /** Real module reducers without persistence: components read state through real selectors */
@@ -56,7 +63,19 @@ export const renderWithStore = async (
 	options?: TestStoreOptions,
 ) => {
 	const store = createTestStore(options);
-	const view = await render(<Provider store={store}>{element}</Provider>);
+	const Providers = options?.wrapper ?? getDefaultTestProviders();
+	const content = Providers ? <Providers>{element}</Providers> : element;
+	const view = await render(<Provider store={store}>{content}</Provider>);
 
 	return { ...view, store };
+};
+
+export const withTestProviders = (Providers: TestProviders) => {
+	setDefaultTestProviders(Providers);
+
+	return (element: ReactElement, options?: TestStoreOptions) =>
+		renderWithStore(element, {
+			...options,
+			wrapper: options?.wrapper ?? Providers,
+		});
 };

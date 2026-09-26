@@ -1,4 +1,3 @@
-import { color } from "@shared/config";
 import type { FC } from "react";
 import { View, type ViewProps } from "react-native";
 import styled, { css } from "styled-components/native";
@@ -13,10 +12,10 @@ export const Container: FC<ContainerProps> = styled(View)`
   align-items: center;
 
 
-  ${({ type }: ContainerProps) =>
+  ${({ type, theme }) =>
 		type !== "transparent" &&
 		css`
-      background-color: ${color.modal.background[type]};
+      background-color: ${theme.color.modal.background[type]};
   `}
 `;
 

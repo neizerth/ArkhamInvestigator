@@ -1,15 +1,13 @@
-import { Alegreya } from "@assets/fonts";
-import { color, font, size, statusBarHeight } from "@shared/config";
+import { statusBarHeight } from "@shared/config";
 import { UnscaledText } from "@shared/ui";
-import type { FC } from "react";
 import { View } from "react-native";
 import type { ViewProps } from "react-native";
-import styled from "styled-components/native";
+import styled, { css } from "styled-components/native";
 import { Button } from "../Button";
 import { HomeMenu } from "../HomeMenu";
 
 export const Container: typeof View = styled(View)`
-  background-color: ${color.black};
+  background-color: ${({ theme }) => theme.color.black};
   flex: 1;
   align-items: center;
   justify-content: center;
@@ -36,15 +34,18 @@ type DisclaimerProps = ViewProps & {
 	navbarHeight: number;
 };
 
-export const Disclaimer: FC<DisclaimerProps> = styled(View)`
-  position: absolute;
-  bottom: ${({ navbarHeight }: DisclaimerProps) => size.gap.large + navbarHeight}px;
-  left: ${size.gap.large}px;
-  right: ${size.gap.large}px;
+export const Disclaimer = styled(View)<DisclaimerProps>`
+  ${({ theme: { size } }) => css`
+    position: absolute;
+    left: ${size.gap.large}px;
+    right: ${size.gap.large}px;
+  `}
+  bottom: ${({ navbarHeight, theme }) => theme.size.gap.large + navbarHeight}px;
 `;
 
 export const DisclaimerText: typeof UnscaledText = styled(UnscaledText)`
+  ${({ theme: { color, font, fontFamily } }) => css`
   color: ${color.dark10};
-  font-family: ${Alegreya.regular};
+  font-family: ${fontFamily.Alegreya.regular};
   font-size: ${font.size.small}px;
-`;
+`}`;

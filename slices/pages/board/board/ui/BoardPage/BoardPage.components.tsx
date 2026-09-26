@@ -1,4 +1,4 @@
-import { color, statusBarHeight } from "@shared/config";
+import { statusBarHeight } from "@shared/config";
 import type { FC } from "react";
 import { View } from "react-native";
 import styled, { css } from "styled-components/native";
@@ -12,7 +12,7 @@ import { InvestigatorBackground } from "../layout/investigator-background/Invest
 export const Container: typeof View = styled(View)`
   flex: 1;
   position: relative;
-  background-color: ${color.dark30};
+  background-color: ${({ theme }) => theme.color.dark30};
 `;
 
 export const Background: typeof InvestigatorBackground = styled(

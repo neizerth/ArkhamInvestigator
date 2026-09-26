@@ -1,5 +1,4 @@
 import { PickerMemo as BasePicker } from "@modules/core/control/entities/picker/ui";
-import { color } from "@shared/config";
 import {
 	Row as BaseRow,
 	Value as BaseValue,
@@ -46,7 +45,7 @@ export const Background: typeof View = styled(View)`
 `;
 
 export const Value: typeof IconNumber = styled(IconNumber)`
-  color: ${color.text};
+  color: ${({ theme }) => theme.color.text};
 `;
 
 export const ValueDiff: typeof View = styled(View)`

@@ -1,7 +1,6 @@
 import { IconButton } from "@shared/ui";
 
 import { RoundReference } from "@modules/mechanics/rules/round-timing/widgets/round-reference";
-import { color, size } from "@shared/config";
 import { Row } from "@shared/ui";
 import { View } from "react-native";
 import styled from "styled-components/native";
@@ -11,24 +10,26 @@ export const Container: typeof View = styled(View)`
   justify-content: center;
   align-items: center;
 
-  background-color: ${color.modal.background.dark};
+  background-color: ${({ theme }) => theme.color.modal.background.dark};
 `;
 
 export const Content: typeof View = styled(View)`
-  gap: ${size.gap.default}px;
+  gap: ${({ theme }) => theme.size.gap.default}px;
 `;
 
 export const Menu: typeof Row = styled(Row)`
   justify-content: space-between;
 `;
 
-export const Button: typeof IconButton = styled(IconButton).attrs({
-	iconStyle: {
-		fontSize: 20,
-		lineHeight: 20,
-		color: color.light10,
-	},
-})`
+export const Button: typeof IconButton = styled(IconButton).attrs(
+	({ theme }) => ({
+		iconStyle: {
+			fontSize: 20,
+			lineHeight: 20,
+			color: theme.color.light10,
+		},
+	}),
+)`
   
 `;
 

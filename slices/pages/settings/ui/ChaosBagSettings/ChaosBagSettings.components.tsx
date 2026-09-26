@@ -1,4 +1,3 @@
-import { size } from "@shared/config";
 import { Row as BaseRow, Section as BaseSection } from "@shared/ui";
 import { StoreCheckbox } from "@widgets/control/store-checkbox";
 import { View } from "react-native";
@@ -7,11 +6,13 @@ import styled from "styled-components/native";
 export const Container: typeof View = styled(View)`
 `;
 
-export const Section: typeof BaseSection = styled(BaseSection).attrs({
-	bodyStyle: {
-		gap: size.gap.default,
-	},
-})`
+export const Section: typeof BaseSection = styled(BaseSection).attrs(
+	({ theme }) => ({
+		bodyStyle: {
+			gap: theme.size.gap.default,
+		},
+	}),
+)`
 `;
 
 export const Row: typeof BaseRow = styled(BaseRow)`

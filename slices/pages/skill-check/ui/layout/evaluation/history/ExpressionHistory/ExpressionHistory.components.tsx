@@ -1,4 +1,3 @@
-import { size } from "@shared/config";
 import { View } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import styled from "styled-components/native";
@@ -8,11 +7,11 @@ export const Container: typeof View = styled(View)`
 	gap: 5px;
 `;
 
-export const List: typeof FlatList = styled(FlatList).attrs({
+export const List: typeof FlatList = styled(FlatList).attrs(({ theme }) => ({
 	contentContainerStyle: {
-		gap: size.gap.small,
+		gap: theme.size.gap.small,
 	},
-})`
+}))`
 	flex: 1;
 `;
 
@@ -20,5 +19,5 @@ export const Item: typeof HistoryItem = styled(HistoryItem)`
 `;
 
 export const Pinned: typeof View = styled(View)`
-	gap: ${size.gap.small}px;
+	gap: ${({ theme }) => theme.size.gap.small}px;
 `;

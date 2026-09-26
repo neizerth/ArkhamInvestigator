@@ -1,4 +1,3 @@
-import { color, font, size } from "@shared/config";
 import {
 	Button as BaseButton,
 	Page as BasePage,
@@ -20,45 +19,51 @@ import { SoundSettings } from "../SoundSettings";
 export const Page: typeof BasePage = styled(BasePage)`
 `;
 
-export const Section: typeof BaseSection = styled(BaseSection).attrs({
-	bodyStyle: {
-		gap: size.gap.default,
-	},
-})`
+export const Section: typeof BaseSection = styled(BaseSection).attrs(
+	({ theme }) => ({
+		bodyStyle: {
+			gap: theme.size.gap.default,
+		},
+	}),
+)`
 `;
 
-export const Button: typeof BaseButton = styled(BaseButton).attrs({
-	textStyle: {
-		fontSize: font.size.default,
-	},
-})`
+export const Button: typeof BaseButton = styled(BaseButton).attrs(
+	({ theme }) => ({
+		textStyle: {
+			fontSize: theme.font.size.default,
+		},
+	}),
+)`
 	flex: 1;
 `;
 
-export const BarButton: typeof TopBarButton = styled(TopBarButton).attrs({
-	iconStyle: {
-		fontSize: 18,
-		lineHeight: 18,
-		color: color.light10,
-	},
-})`
+export const BarButton: typeof TopBarButton = styled(TopBarButton).attrs(
+	({ theme }) => ({
+		iconStyle: {
+			fontSize: 18,
+			lineHeight: 18,
+			color: theme.color.light10,
+		},
+	}),
+)`
   align-items: flex-end;
 `;
 
 export const Container: typeof View = styled(View)`
-  background-color: ${color.dark40};
+  background-color: ${({ theme }) => theme.color.dark40};
   flex: 1;
   align-items: center;
 `;
 
 export const Content: typeof View = styled(View)`
-  gap: ${size.gap.large}px;
+  gap: ${({ theme }) => theme.size.gap.large}px;
 `;
 
 export const Rule: typeof View = styled(View)`
 	flex: 1;
 	height: 1px;
-	background-color: ${color.dark30};
+	background-color: ${({ theme }) => theme.color.dark30};
 `;
 
 export const Row: typeof BaseRow = styled(BaseRow)`
@@ -72,7 +77,7 @@ export const Label: typeof TextView = styled(TextView).attrs({
 		minWidth: 80,
 	},
 })`
-  font-size: ${font.size.default}px;
+  font-size: ${({ theme }) => theme.font.size.default}px;
   text-align: right;
 `;
 
@@ -107,6 +112,6 @@ type ContentProps = ScrollViewProps & {
 
 export const PageContent: FC<ContentProps> = styled(ScrollView)`
   flex: 1;
-  padding: ${({ navbarHeight }: ContentProps) => `0px ${size.gap.medium}px ${navbarHeight}px ${size.gap.medium}px`};
-  margin-bottom: ${size.gap.default}px;
+  padding: ${({ navbarHeight, theme }) => `0px ${theme.size.gap.medium}px ${navbarHeight}px ${theme.size.gap.medium}px`};
+  margin-bottom: ${({ theme }) => theme.size.gap.default}px;
 `;

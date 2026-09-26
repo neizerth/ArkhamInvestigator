@@ -1,4 +1,3 @@
-import { Arkhamic, Conkordia, FZLiBian, SanCn } from "@assets/fonts";
 import { roundReferenceAssets } from "@assets/images/game/reference/round";
 import { withLocale } from "@modules/core/i18n/shared/lib";
 import { ImageBackground } from "@shared/ui";
@@ -29,9 +28,9 @@ export const Title: typeof View = styled(View)`
 const titleFontSize = Math.round((currentRoundReferenceSize.width * 22) / 1000);
 
 export const TitleText = withLocale({
-	style: {
+	style: ({ fontFamily }) => ({
 		default: {
-			fontFamily: Arkhamic.regular,
+			fontFamily: fontFamily.Arkhamic.regular,
 			fontSize: titleFontSize,
 			color: "#221f1f",
 			paddingLeft: titleFontSize * 1.5,
@@ -40,17 +39,14 @@ export const TitleText = withLocale({
 		},
 		ru: {
 			fontSize: titleFontSize,
-			fontFamily: Conkordia.regular,
+			fontFamily: fontFamily.Conkordia.regular,
 			paddingLeft: titleFontSize * 1.2,
 		},
 		ko: {
-			fontFamily: SanCn.bold,
+			fontFamily: fontFamily.SanCn.bold,
 		},
 		zh: {
-			fontFamily: FZLiBian.regular,
+			fontFamily: fontFamily.FZLiBian.regular,
 		},
-		"zh-cn": {
-			fontFamily: FZLiBian.regular,
-		},
-	},
+	}),
 });

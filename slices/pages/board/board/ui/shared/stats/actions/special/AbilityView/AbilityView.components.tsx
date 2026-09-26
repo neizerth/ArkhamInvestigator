@@ -2,7 +2,6 @@ import {
 	TouchableOpacity,
 	type TouchableOpacityProps,
 } from "@modules/core/touch/shared/ui";
-import { color } from "@shared/config";
 import { Icon as BaseIcon, type DefinedIconProps } from "@shared/ui";
 import type { FC } from "react";
 import styled, { css } from "styled-components/native";
@@ -24,19 +23,20 @@ export const Container: FC<ContainerProps> = styled(TouchableOpacity)`
 `;
 
 export const Icon: typeof BaseIcon = styled(BaseIcon)`
+  ${({ theme: { color } }) => css`
   font-size: 30px;
   line-height: 30px;
   color: ${color.white};
   text-shadow: 0 0 5px ${color.black};
   width: 32px;
-`;
+`}`;
 
 export const Cross: FC<DefinedIconProps> = styled(BaseIcon).attrs({
 	icon: "cross_c",
 })`
   font-size: 35px;
   line-height: 35px;
-  color: ${color.health};
+  color: ${({ theme }) => theme.color.health};
   position: absolute;
 `;
 
@@ -51,12 +51,12 @@ export const CheckOutline: FC<DefinedIconProps> = styled(BaseIcon).attrs({
 	icon: "check-outline",
 })`
   ${checkStyle}
-  color: ${color.white};
+  color: ${({ theme }) => theme.color.white};
 `;
 
 export const CheckFill: FC<DefinedIconProps> = styled(BaseIcon).attrs({
 	icon: "check-fill",
 })`
   ${checkStyle}
-  color: ${color.evade};
+  color: ${({ theme }) => theme.color.evade};
 `;

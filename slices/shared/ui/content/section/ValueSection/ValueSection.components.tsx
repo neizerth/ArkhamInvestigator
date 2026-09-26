@@ -1,7 +1,5 @@
-import { Alegreya } from "@assets/fonts";
 import { View } from "react-native";
-import styled from "styled-components/native";
-import { color, font, size } from "../../../../config";
+import styled, { css } from "styled-components/native";
 import { Row } from "../../../grid";
 import { Text } from "../../typography";
 
@@ -14,18 +12,19 @@ export const Header: typeof Row = styled(Row)`
 
   border: 1px solid transparent;
   border-left-width: 0px;
-  border-bottom-color: ${color.dark10};
-
-  margin-bottom: ${size.gap.default}px;
+  ${({ theme: { color, size } }) => css`
+    border-bottom-color: ${color.dark10};
+    margin-bottom: ${size.gap.default}px;
+  `}
 `;
 
 export const Title: typeof Text = styled(Text)`
-  font-family: ${Alegreya.medium};
-  font-size: ${font.size.default}px;
+  font-family: ${({ theme }) => theme.fontFamily.Alegreya.medium};
+  font-size: ${({ theme }) => theme.font.size.default}px;
 
 `;
 
 export const Value: typeof Text = styled(Text)`
-  font-family: ${Alegreya.italic};
-  font-size: ${font.size.default}px;
+  font-family: ${({ theme }) => theme.fontFamily.Alegreya.italic};
+  font-size: ${({ theme }) => theme.font.size.default}px;
 `;

@@ -1,6 +1,5 @@
 import { TouchableOpacity } from "@modules/core/touch/shared/ui";
 import { FactionIconImage } from "@modules/faction/shared/ui";
-import { color } from "@shared/config";
 import { Icon } from "@shared/ui";
 import { View } from "react-native";
 import styled from "styled-components/native";
@@ -21,7 +20,7 @@ export const Neutral: typeof View = styled(View)`
   width: 50px;
 `;
 export const NeutralIcon: typeof Icon = styled(Icon)`
-  color: ${color.light10};
+  color: ${({ theme }) => theme.color.light10};
   padding-bottom: 5px;
   font-size: 40px;
   line-height: 40px;

@@ -1,22 +1,23 @@
 import { TouchableOpacity } from "@modules/core/touch/shared/ui";
 import type { PropsWithFaction } from "@modules/faction/shared/model";
-import { color, factionColor, size } from "@shared/config";
+import { factionColor } from "@shared/config";
 import { Icon, type IconProps, Radio, Text } from "@shared/ui";
 import type { FC } from "react";
 import { type TextProps, View } from "react-native";
 import styled, { css } from "styled-components/native";
 
 export const Container: typeof View = styled(View)`
-  gap: ${size.gap.default}px;
+  gap: ${({ theme }) => theme.size.gap.default}px;
 `;
 
 export const Item: typeof TouchableOpacity = styled(TouchableOpacity)`
+  ${({ theme: { size } }) => css`
   flex-direction: row;
   gap: ${size.gap.default}px;
 
   padding: ${size.gap.small}px;
   align-items: center;
-`;
+`}`;
 
 export const Control: typeof Radio = styled(Radio)`
 
@@ -45,7 +46,7 @@ type PackIconProps = IconProps & ContentProps;
 export const PackIcon: FC<PackIconProps> = styled(Icon)`
   font-size: 24px;
   line-height: 24px;
-  color: ${color.gray20};
+  color: ${({ theme }) => theme.color.gray20};
 
   ${selectedProps};
 `;

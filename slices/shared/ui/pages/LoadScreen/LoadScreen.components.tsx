@@ -1,6 +1,5 @@
 import { View } from "react-native";
-import styled from "styled-components/native";
-import { size } from "../../../config";
+import styled, { css } from "styled-components/native";
 import { Text } from "../../content";
 import { logoSize } from "./LoadScreen.config";
 
@@ -16,9 +15,11 @@ export const Footer: typeof View = styled(View)`
   left: 0;
   right: 0;
   top: 50%;
-  margin-top: ${logoSize / 2 + size.gap.default}px;
   align-items: center;
-  gap: ${size.gap.default}px;
+  ${({ theme: { size } }) => css`
+    margin-top: ${logoSize / 2 + size.gap.default}px;
+    gap: ${size.gap.default}px;
+  `}
 `;
 
 export const NumericProgress: typeof Text = styled(Text)`

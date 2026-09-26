@@ -62,7 +62,6 @@ export const getInvestigatorFlavorStyles = ({
 			},
 		},
 		zh: zhComponentStyles,
-		"zh-cn": zhComponentStyles,
 	});
 
 	return getComponents(language);

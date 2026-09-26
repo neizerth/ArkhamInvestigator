@@ -1,4 +1,3 @@
-import { color } from "@shared/config";
 import { Button, Row } from "@shared/ui";
 import { View } from "react-native";
 import styled from "styled-components/native";
@@ -18,7 +17,7 @@ const iconStyle = {
 export const Skill: typeof Button = styled(Button).attrs({
 	iconStyle,
 })`
-  color: ${color.light10};
+  color: ${({ theme }) => theme.color.light10};
   background-color: transparent;
 `;
 
@@ -37,7 +36,7 @@ export const Menu: typeof Row = styled(Row)`
   z-index: 20;
   left: -5px;
   top: 60px;
-  background-color: ${color.black};
+  background-color: ${({ theme }) => theme.color.black};
   border-radius: 45px;
   padding: 10px;
 `;

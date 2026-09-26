@@ -25,7 +25,6 @@ export const getExpressionDisplayStyle = (
 			fontSize: 16,
 		},
 		zh: zhConfig,
-		"zh-cn": zhConfig,
 	});
 
 	const textStyle = getTextStyle(language);

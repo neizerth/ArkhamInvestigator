@@ -1,5 +1,4 @@
 import { AutoFail, AutoSuccessThin } from "@modules/chaos-bag/base/shared/ui";
-import { color, size } from "@shared/config";
 import type { SkillType } from "@shared/model";
 import { Row, Text } from "@shared/ui";
 import {
@@ -17,12 +16,12 @@ export const Container: typeof View = styled(View)`
 export const Content: typeof Row = styled(Row)`
   align-items: center;
   justify-content: center;
-  gap: ${size.gap.small}px;
+  gap: ${({ theme }) => theme.size.gap.small}px;
 `;
 
 export const Group: typeof Row = styled(Row)`
   position: relative;
-  gap: ${size.gap.small}px;
+  gap: ${({ theme }) => theme.size.gap.small}px;
 `;
 
 export const Modifier: typeof View = styled(View)`
@@ -51,15 +50,17 @@ export const Value: FC<ValueProps> = styled(BaseValue).attrs({
   ${({ skillType }: ValueProps) =>
 		skillType &&
 		css`
-    color: ${color.skill[skillType].light}
+    color: ${({ theme }) => theme.color.skill[skillType].light}
   `}
 `;
 
-export const Difficulty: typeof BaseValue = styled(BaseValue).attrs({
-	textStyle: {
-		color: color.text,
-	},
-})`
+export const Difficulty: typeof BaseValue = styled(BaseValue).attrs(
+	({ theme }) => ({
+		textStyle: {
+			color: theme.color.text,
+		},
+	}),
+)`
   font-size: 22px;
 `;
 
@@ -67,7 +68,7 @@ export const Sign: typeof Text = styled(Text)`
   font-size: 22px;
   line-height: 22px;
   top: 2px;
-  color: ${color.text};
+  color: ${({ theme }) => theme.color.text};
 `;
 
 export const Result: typeof View = styled(View)`

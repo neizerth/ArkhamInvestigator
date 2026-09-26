@@ -1,13 +1,7 @@
-import { Copasetic } from "@assets/fonts";
 import { IconButton } from "@shared/ui";
 
 import { TouchableOpacity } from "@modules/core/touch/shared/ui";
-import {
-	IOS_WITH_GESTURE_CONTROL,
-	color,
-	size,
-	statusBarHeight,
-} from "@shared/config";
+import { IOS_WITH_GESTURE_CONTROL, statusBarHeight } from "@shared/config";
 import { Row as BaseRow, Icon, UnscaledText } from "@shared/ui";
 import type { FC } from "react";
 import { Platform, View, type ViewProps } from "react-native";
@@ -17,10 +11,9 @@ import TopRule from "./images/rule-top.svg";
 
 const ios = Platform.OS === "ios";
 
-const gap = IOS_WITH_GESTURE_CONTROL ? size.gap.default : 0;
-
 export const Container: typeof View = styled(View)`
-  padding: ${statusBarHeight + gap}px ${size.gap.default}px 0;
+  padding: ${({ theme }) =>
+		`${statusBarHeight + (IOS_WITH_GESTURE_CONTROL ? theme.size.gap.default : 0)}px ${theme.size.gap.default}px 0`};
 `;
 
 type ContentProps = ViewProps & {
@@ -76,7 +69,7 @@ export const Difficulty: typeof UnscaledText = styled(UnscaledText)`
   width: 50px;
   font-size: 20px;
   color: ${skillCheckColor.checkIcon};
-  font-family: ${Copasetic.regular};
+  font-family: ${({ theme }) => theme.fontFamily.Copasetic.regular};
 `;
 
 export const Row: typeof BaseRow = styled(BaseRow)`
@@ -89,11 +82,13 @@ export const HistoryActions: typeof BaseRow = styled(BaseRow)`
   align-items: center;
 `;
 
-export const Button: typeof IconButton = styled(IconButton).attrs({
-	iconStyle: {
-		color: color.light15,
-		fontSize: 20,
-	},
-})`
+export const Button: typeof IconButton = styled(IconButton).attrs(
+	({ theme }) => ({
+		iconStyle: {
+			color: theme.color.light15,
+			fontSize: 20,
+		},
+	}),
+)`
     
   `;

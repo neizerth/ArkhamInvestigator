@@ -2,7 +2,6 @@ import type { FC } from "react";
 import { type ScrollViewProps, View } from "react-native";
 
 import styled from "styled-components/native";
-import { size } from "../../../config";
 import { ScrollView } from "../../behavior";
 
 export const FullContent: typeof View = styled(View)`
@@ -15,6 +14,7 @@ type ContentProps = ScrollViewProps & {
 
 export const Content: FC<ContentProps> = styled(ScrollView)`
   flex: 1;
-  padding: ${({ navbarHeight }: ContentProps) => `0px ${size.gap.medium}px ${navbarHeight}px ${size.gap.medium}px`};
-  margin-bottom: ${size.gap.default}px;
+  padding: ${({ navbarHeight, theme }) =>
+		`0px ${theme.size.gap.medium}px ${navbarHeight}px ${theme.size.gap.medium}px`};
+  margin-bottom: ${({ theme }) => theme.size.gap.default}px;
 `;

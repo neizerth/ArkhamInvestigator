@@ -1,6 +1,5 @@
-import { color } from "@shared/config";
 import type { FC } from "react";
-import styled from "styled-components/native";
+import styled, { type DefaultTheme } from "styled-components/native";
 import { skillCheckColor } from "../../../../../../../config";
 import {
 	ExpressionHistoryItemAction as Action,
@@ -12,9 +11,9 @@ type PinnedActionProps = Omit<ActionProps, "icon"> & {
 };
 
 export const Container: FC<PinnedActionProps> = styled(Action).attrs(
-	({ pinned }: PinnedActionProps) => ({
+	({ pinned, theme }: PinnedActionProps & { theme: DefaultTheme }) => ({
 		iconStyle: {
-			color: pinned ? skillCheckColor.checkIcon : color.light10,
+			color: pinned ? skillCheckColor.checkIcon : theme.color.light10,
 		},
 		icon: "pushpin",
 	}),

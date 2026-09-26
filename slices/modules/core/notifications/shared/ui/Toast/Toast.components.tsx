@@ -1,7 +1,6 @@
-import { Alegreya } from "@assets/fonts";
 import { ChaosToken } from "@modules/chaos-bag/base/shared/ui";
 import { GameText } from "@modules/core/theme/shared/ui";
-import { color, factionColor, font, size } from "@shared/config";
+import { factionColor } from "@shared/config";
 import type { PropsWithFaction } from "@shared/model";
 import { Row } from "@shared/ui";
 import { Image, type ImageProps } from "expo-image";
@@ -14,37 +13,42 @@ type ContainerProps = ViewProps & {
 	type: ToastType;
 };
 
-const borderColor: Record<ToastType, string> = {
-	success: color.skill.agility.dark,
-	error: color.skill.combat.dark,
-	info: color.status.info,
-};
-
 export const Token: typeof ChaosToken = styled(ChaosToken)`
 
 `;
 
-export const Container: FC<ContainerProps> = styled(View)`
-  max-width: 340px;
-  min-height: 60px;
-  width: 100%;
-  justify-content: center;
-  background-color: ${color.dark40};
-  border-radius: ${size.borderRadius.default}px;
-  padding: ${size.gap.small}px ${size.gap.default}px;
-  border-width: 1px;
-  border-left-width: ${size.gap.small}px;
-  ${({ type }: ContainerProps) => css`
-    border-color: ${borderColor[type]};
+export const Container = styled(View)<ContainerProps>`
+  ${({ theme: { color, size } }) => css`
+    max-width: 340px;
+    min-height: 60px;
+    width: 100%;
+    justify-content: center;
+    background-color: ${color.dark40};
+    border-radius: ${size.borderRadius.default}px;
+    padding: ${size.gap.small}px ${size.gap.default}px;
+    border-width: 1px;
+    border-left-width: ${size.gap.small}px;
   `}
+  ${({ type, theme }) => {
+		const borderColor: Record<ToastType, string> = {
+			success: theme.color.skill.agility.dark,
+			error: theme.color.skill.combat.dark,
+			info: theme.color.status.info,
+		};
+
+		return css`
+      border-color: ${borderColor[type]};
+    `;
+	}}
 `;
 
 export const Content: typeof Row = styled(Row)`
+  ${({ theme: { size } }) => css`
   flex: 1;
   align-items: center;
   padding: ${size.gap.small}px;
   gap: ${size.gap.default}px;
-`;
+`}`;
 
 export const Body: typeof View = styled(View)`
   flex: 1;
@@ -58,8 +62,8 @@ export const Images: typeof View = styled(View)`
 type ImageWithFactionProps = ImageProps & Partial<PropsWithFaction>;
 
 const factionBorderStyle = css<ImageWithFactionProps>`
-   ${({ faction }: ImageWithFactionProps) => css`
-    border: 1px solid ${faction ? factionColor[faction].border : color.gray20};
+   ${({ faction, theme }) => css`
+    border: 1px solid ${faction ? factionColor[faction].border : theme.color.gray20};
   `}
 `;
 
@@ -88,10 +92,11 @@ export const Text: typeof GameText = styled(GameText).attrs({
 		},
 	},
 })`
+  ${({ theme: { color, font, fontFamily } }) => css`
   color: ${color.light10};
-  font-family: ${Alegreya.regular};
+  font-family: ${fontFamily.Alegreya.regular};
   font-size: ${font.size.small}px;
-`;
+`}`;
 
 export const Text1 = styled(Text)`
   

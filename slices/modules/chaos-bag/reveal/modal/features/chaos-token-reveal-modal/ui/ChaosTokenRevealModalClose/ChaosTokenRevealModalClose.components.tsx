@@ -1,5 +1,4 @@
 import { TouchableOpacity } from "@modules/core/touch/shared/ui";
-import { color } from "@shared/config";
 import { Icon } from "@shared/ui";
 import styled from "styled-components/native";
 
@@ -12,5 +11,5 @@ export const Container: typeof TouchableOpacity = styled(TouchableOpacity)`
 
 export const CloseIcon: typeof Icon = styled(Icon)`
   font-size: 24px;
-  color: ${color.light10};
+  color: ${({ theme }) => theme.color.light10};
 `;

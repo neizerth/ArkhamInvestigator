@@ -1,4 +1,3 @@
-import { Alegreya } from "@assets/fonts";
 import {
 	ActionsValue,
 	CluesValue,
@@ -9,27 +8,26 @@ import {
 import { ThemeSignaturePreview } from "@modules/core/theme/features/ui";
 import { FactionView } from "@modules/faction/entities/ui";
 import { SignatureSkills } from "@modules/signature/base/shared/ui";
-import { font, size } from "@shared/config";
 import { Row, TextView } from "@shared/ui";
 import { TouchableOpacity, View } from "react-native";
 import styled from "styled-components/native";
 
 export const Container: typeof View = styled(View)`
-  padding: ${size.gap.default}px 0;
+  padding: ${({ theme }) => theme.size.gap.default}px 0;
 `;
 
 export const Content: typeof Row = styled(Row)`
-  gap: ${size.gap.default}px;
+  gap: ${({ theme }) => theme.size.gap.default}px;
 `;
 
 export const Image: typeof ThemeSignaturePreview = styled(
 	ThemeSignaturePreview,
 )`
-  border-radius: ${size.borderRadius.default}px;
+  border-radius: ${({ theme }) => theme.size.borderRadius.default}px;
 `;
 
 export const Primary: typeof View = styled(View)`
-  gap: ${size.gap.default}px;
+  gap: ${({ theme }) => theme.size.gap.default}px;
 `;
 
 export const Secondary: typeof Row = styled(Row)`
@@ -38,8 +36,8 @@ export const Secondary: typeof Row = styled(Row)`
 `;
 
 export const Name: typeof TextView = styled(TextView)`
-  font-size: ${font.size.default}px;
-  font-family: ${Alegreya.bold};
+  font-size: ${({ theme }) => theme.font.size.default}px;
+  font-family: ${({ theme }) => theme.fontFamily.Alegreya.bold};
 `;
 
 export const Skills: typeof SignatureSkills = styled(SignatureSkills)`
@@ -67,7 +65,7 @@ export const Actions: typeof ActionsValue = styled(ActionsValue)`
 `;
 
 export const Stats: typeof Row = styled(Row)`
-  gap: ${size.gap.small}px;
+  gap: ${({ theme }) => theme.size.gap.small}px;
   justify-content: center;
 `;
 

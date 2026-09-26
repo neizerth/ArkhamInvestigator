@@ -1,5 +1,3 @@
-import { Alegreya } from "@assets/fonts";
-import { color } from "@shared/config";
 import { Icon, Row, Text, Value } from "@shared/ui";
 import type { FC } from "react";
 import type { TextProps } from "react-native";
@@ -16,7 +14,7 @@ export const Container: typeof Row = styled(Row)`
 `;
 
 export const FixedValue: typeof Value = styled(Value)`
-  color: ${color.resource};
+  color: ${({ theme }) => theme.color.resource};
   font-size: 21px;
 `;
 
@@ -24,7 +22,7 @@ export const Wild: typeof Icon = styled(Icon)`
   position: absolute;
   left: -10px;
   top: -18px;
-  color: ${color.white};
+  color: ${({ theme }) => theme.color.white};
   font-size: 20px;
 `;
 
@@ -32,13 +30,15 @@ type PickerProps = StatPickerProps & {
 	position: "top" | "bottom";
 };
 
-export const Picker: FC<PickerProps> = styled(StatPicker).attrs({
-	valueStyle: {
-		color: color.resource,
-		fontSize: 42,
-	},
-	itemHeight: assetsSize.main,
-})`
+export const Picker: FC<PickerProps> = styled(StatPicker).attrs(
+	({ theme }) => ({
+		valueStyle: {
+			color: theme.color.resource,
+			fontSize: 42,
+		},
+		itemHeight: assetsSize.main,
+	}),
+)`
   position: absolute;
   z-index: 2;
   right: 0px;
@@ -74,7 +74,7 @@ type CharacterProps = TextProps & {
 };
 
 export const Character: FC<CharacterProps> = styled(Text)`
-  font-family: ${Alegreya.bold};
+  font-family: ${({ theme }) => theme.fontFamily.Alegreya.bold};
   font-size: 28px;
   line-height: 28px;
   ${({ last }: CharacterProps) =>

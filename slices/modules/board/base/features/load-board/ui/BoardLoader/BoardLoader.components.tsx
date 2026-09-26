@@ -1,4 +1,3 @@
-import { size } from "@shared/config";
 import { LoadScreenMemo as LoadScreen, Text } from "@shared/ui";
 import { View } from "react-native";
 import styled from "styled-components/native";
@@ -24,5 +23,5 @@ export const LoadingText: typeof Text = styled(Text)`
   left: 0;
   right: 0;
   text-align: center;
-  padding: ${size.gap.default}px;
+  padding: ${({ theme }) => theme.size.gap.default}px;
 `;

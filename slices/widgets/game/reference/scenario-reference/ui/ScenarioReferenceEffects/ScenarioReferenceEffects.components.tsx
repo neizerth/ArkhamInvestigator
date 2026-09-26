@@ -1,5 +1,5 @@
 import { View } from "react-native";
-import styled from "styled-components";
+import styled from "styled-components/native";
 import { refPx as upx } from "../../lib";
 import { ScenarioReferenceTokenEffect } from "../ScenarioReferenceTokenEffect/ScenarioReferenceTokenEffect";
 

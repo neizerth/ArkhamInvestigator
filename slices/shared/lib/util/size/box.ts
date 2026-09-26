@@ -1,10 +1,6 @@
-import type {
-	Box,
-	BoxLayout,
-	BoxRect,
-	DeviceOrientation,
-	RectPosition,
-} from "@shared/model";
+import type { Box, BoxLayout, BoxRect, RectPosition } from "@shared/model";
+
+type DeviceOrientation = "landscape" | "portrait";
 
 export const getOrientation = ({ width, height }: Box): DeviceOrientation =>
 	width > height ? "landscape" : "portrait";

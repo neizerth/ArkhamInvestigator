@@ -1,15 +1,11 @@
-import { Enthalpy298 } from "@assets/fonts";
 import { withLocale } from "@modules/core/i18n/shared/lib";
-import { color, font, size } from "@shared/config";
 import { type DefinedIconProps, Icon, Row } from "@shared/ui";
 import type { FC } from "react";
-import styled from "styled-components/native";
+import styled, { css } from "styled-components/native";
 import { skillCheckColor } from "../../../../../../config";
 import { ExpressionDisplay } from "../../../ExpressionDisplay";
 import { ExpressionHistoryItemRightActionsMemo as ItemRightActions } from "../ExpressionHistoryItemRightActions";
 
-import { ZhenShuai } from "@assets/fonts";
-import { LineSeedKR } from "@assets/fonts/ko/LineSeedKR";
 import { TouchableOpacity } from "@modules/core/touch/shared/ui";
 
 export const Container: typeof Row = styled(Row)`
@@ -31,12 +27,13 @@ export const RightActions: typeof ItemRightActions = styled(ItemRightActions)`
 export const Pin: FC<DefinedIconProps> = styled(Icon).attrs({
 	icon: "pushpin",
 })`
+  ${({ theme: { size } }) => css`
   position: absolute;
   right: ${-size.gap.medium}px;
   top: ${-size.gap.small}px;
   color: ${skillCheckColor.checkIcon};
   font-size: 12px;
-`;
+`}`;
 
 export const Title: typeof TouchableOpacity = styled(TouchableOpacity)`
   flex-direction: row;
@@ -48,29 +45,31 @@ export const Title: typeof TouchableOpacity = styled(TouchableOpacity)`
   align-items: center;
 `;
 
-const zhTextConfig = {
-	fontFamily: ZhenShuai.regular,
-	letterSpacing: 0.5,
-};
-
-export const TitleText = withLocale({
-	style: {
+const TitleTextBase = withLocale({
+	style: ({ fontFamily }) => ({
 		default: {
-			fontFamily: Enthalpy298.regular,
+			fontFamily: fontFamily.Enthalpy298.regular,
 			lineHeight: 25,
-			color: color.light10,
-			fontSize: font.size.small,
-			backgroundColor: color.dark30,
 			paddingVertical: 2,
 			paddingHorizontal: 5,
 			borderRadius: 2,
 			maxWidth: 250,
 		},
 		ko: {
-			fontFamily: LineSeedKR.regular,
+			fontFamily: fontFamily.LineSeedKR.regular,
 			letterSpacing: -0.5,
 		},
-		zh: zhTextConfig,
-		"zh-cn": zhTextConfig,
-	},
+		zh: {
+			fontFamily: fontFamily.ZhenShuai.regular,
+			letterSpacing: 0.5,
+		},
+	}),
 });
+
+export const TitleText = styled(TitleTextBase)`
+	${({ theme: { color, font } }) => css`
+		color: ${color.light10};
+		font-size: ${font.size.small}px;
+		background-color: ${color.dark30};
+	`}
+`;

@@ -3,7 +3,7 @@ import {
 	type ThemeFactionFontIconProps,
 } from "@modules/core/theme/shared/ui";
 import { TouchableOpacity } from "@modules/core/touch/shared/ui";
-import { color, factionColor } from "@shared/config";
+import { factionColor } from "@shared/config";
 import type { PropsWithFaction } from "@shared/model";
 import { Icon as BaseIcon, type IconProps as BaseIconProps } from "@shared/ui";
 import type { FC } from "react";
@@ -18,8 +18,9 @@ export const Button: FC<ButtonProps> = styled(TouchableOpacity)`
   ${({ selected, value }: ButtonProps) =>
 		selected &&
 		css`
+  ${({ theme: { color } }) => css`
     background-color: ${value === "spoiler" ? color.status.error.light10 : color.dark20};
-  `}
+  `}`}
   ${({ first, selected }: ButtonProps) =>
 		selected &&
 		first &&
@@ -43,7 +44,7 @@ type FactionIconProps = ThemeFactionFontIconProps &
 	SelectedProps;
 
 export const FactionIcon: FC<FactionIconProps> = styled(ThemeFactionFontIcon)`
-  color: ${color.light10};
+  color: ${({ theme }) => theme.color.light10};
   font-size: 25px;
   line-height: 46px;
   ${({ faction, selected }: FactionIconProps) =>
@@ -56,7 +57,7 @@ export const FactionIcon: FC<FactionIconProps> = styled(ThemeFactionFontIcon)`
 type IconProps = BaseIconProps & SelectedProps;
 
 export const Icon: FC<IconProps> = styled(BaseIcon)`
-  color: ${color.light10};
+  color: ${({ theme }) => theme.color.light10};
   font-size: 25px;
   line-height: 25px;
 `;

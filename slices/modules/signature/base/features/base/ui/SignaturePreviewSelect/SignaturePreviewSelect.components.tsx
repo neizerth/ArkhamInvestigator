@@ -2,7 +2,6 @@ import {
 	TouchableOpacity,
 	type TouchableOpacityProps,
 } from "@modules/core/touch/shared/ui";
-import { color, size } from "@shared/config";
 import { Icon } from "@shared/ui";
 import { ScrollView } from "@shared/ui";
 import type { FC } from "react";
@@ -13,11 +12,13 @@ export const Container: typeof View = styled(View)`
   
 `;
 
-export const List: typeof ScrollView = styled(ScrollView).attrs({
-	contentContainerStyle: {
-		gap: size.gap.default,
-	},
-})`
+export const List: typeof ScrollView = styled(ScrollView).attrs(
+	({ theme }) => ({
+		contentContainerStyle: {
+			gap: theme.size.gap.default,
+		},
+	}),
+)`
     flex-direction: row;
     flex-wrap: wrap;
   `;
@@ -31,7 +32,7 @@ export const Empty: FC<EmptyProps> = styled(TouchableOpacity)`
   aspect-ratio: 1;
   justify-content: center;
   align-items: center;
-  border: 1px solid ${color.dark15};
+  border: 1px solid ${({ theme }) => theme.color.dark15};
   ${({ selected }: EmptyProps) =>
 		selected &&
 		css`
@@ -45,5 +46,5 @@ export const Empty: FC<EmptyProps> = styled(TouchableOpacity)`
 
 export const EmptyIcon: typeof Icon = styled(Icon)`
   font-size: 32px;
-  color: ${color.dark20};
+  color: ${({ theme }) => theme.color.dark20};
 `;

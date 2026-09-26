@@ -1,10 +1,8 @@
-import { Alegreya } from "@assets/fonts";
 import { TouchableOpacity } from "@modules/core/touch/shared/ui";
-import { color, size } from "@shared/config";
 import { Icon as BaseIcon, type DefinedIconProps, Row, Text } from "@shared/ui";
 import type { FC } from "react";
 import { View } from "react-native";
-import styled from "styled-components/native";
+import styled, { css } from "styled-components/native";
 
 export const Container: typeof View = styled(View)`
 
@@ -33,7 +31,7 @@ export const Button: typeof TouchableOpacity = styled(TouchableOpacity)`
 export const Icon: typeof BaseIcon = styled(BaseIcon)`
   font-size: 26px;
   line-height: 26px;
-  color: ${color.gray10};
+  color: ${({ theme }) => theme.color.gray10};
 `;
 
 export const ThemeIcon: typeof Icon = styled(Icon)`
@@ -51,7 +49,8 @@ export const SupportIcon: FC<DefinedIconProps> = styled(Icon).attrs({
   `;
 
 export const Hint: typeof Text = styled(Text)`
+  ${({ theme: { size, color, fontFamily } }) => css`
   padding-inline: ${size.gap.large}px;
-  font-family: ${Alegreya.italic};
+  font-family: ${fontFamily.Alegreya.italic};
   color: ${color.gray10};
-`;
+`}`;

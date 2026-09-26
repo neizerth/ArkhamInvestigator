@@ -32,7 +32,6 @@ export const getExpressionDisplayStyle = (
 			fontSize: 16,
 		},
 		zh: zhConfig,
-		"zh-cn": zhConfig,
 	});
 
 	const zhValueConfig = {
@@ -50,7 +49,6 @@ export const getExpressionDisplayStyle = (
 			fontFamily: SanCn.bold,
 		},
 		zh: zhValueConfig,
-		"zh-cn": zhValueConfig,
 	});
 
 	const textStyle = getTextStyle(language);

@@ -1,19 +1,12 @@
-import { Copasetic, Enthalpy298, LineSeedKR, ZhenShuai } from "@assets/fonts";
 import { withLocale } from "@modules/core/i18n/shared/lib";
 import { TouchableOpacity } from "@modules/core/touch/shared/ui";
-import { color, font } from "@shared/config";
 import { View } from "react-native";
-import styled from "styled-components/native";
+import styled, { css } from "styled-components/native";
 import { SkillCheckExpressionDisplay } from "../../../../../../../../../../../widgets/game/skill-check";
 
 export const Container: typeof View = styled(View)`
   
 `;
-
-const zhTextConfig = {
-	fontFamily: ZhenShuai.regular,
-	letterSpacing: 0.5,
-};
 
 export const Content: typeof TouchableOpacity = styled(TouchableOpacity)`
   position: absolute;
@@ -26,32 +19,40 @@ export const Content: typeof TouchableOpacity = styled(TouchableOpacity)`
 export const Expression: typeof SkillCheckExpressionDisplay = styled(
 	SkillCheckExpressionDisplay,
 )`
+  ${({ theme: { color } }) => css`
   color: ${color.light10};
   background-color: ${color.dark30};
   padding: 2px 5px;
   border-radius: 2px;
-`;
+`}`;
 
-export const Title = withLocale({
-	style: {
+const TitleText = withLocale({
+	style: ({ fontFamily }) => ({
 		default: {
-			fontFamily: Copasetic.regular,
+			fontFamily: fontFamily.Copasetic.regular,
 			lineHeight: 25,
-			color: color.light10,
-			fontSize: font.size.small,
 			paddingVertical: 2,
 			paddingHorizontal: 5,
-			backgroundColor: color.dark30,
 			textAlign: "center",
 		},
 		ru: {
-			fontFamily: Enthalpy298.regular,
+			fontFamily: fontFamily.Enthalpy298.regular,
 		},
 		ko: {
-			fontFamily: LineSeedKR.regular,
+			fontFamily: fontFamily.LineSeedKR.regular,
 			letterSpacing: -0.5,
 		},
-		zh: zhTextConfig,
-		"zh-cn": zhTextConfig,
-	},
+		zh: {
+			fontFamily: fontFamily.ZhenShuai.regular,
+			letterSpacing: 0.5,
+		},
+	}),
 });
+
+export const Title = styled(TitleText)`
+	${({ theme: { color, font } }) => css`
+		color: ${color.light10};
+		font-size: ${font.size.small}px;
+		background-color: ${color.dark30};
+	`}
+`;

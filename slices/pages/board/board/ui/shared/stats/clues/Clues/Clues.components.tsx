@@ -3,7 +3,6 @@ import {
 	type StatFigureProps,
 } from "@modules/board/base/entities/base/ui";
 import { TouchableOpacity } from "@modules/core/touch/shared/ui";
-import { color } from "@shared/config";
 import type { StatSourceType } from "@shared/model";
 import * as UI from "@shared/ui";
 import type { FC } from "react";
@@ -28,12 +27,14 @@ const pickerValues: Record<StatSourceType, FC<BoardValueProps>> = {
 
 export const pickerValue = (type: StatSourceType) => pickerValues[type];
 
-export const Picker: typeof StatPicker = styled(StatPicker).attrs({
-	valueStyle: {
-		color: color.clue,
-	},
-	itemHeight: assetsSize.main,
-})`
+export const Picker: typeof StatPicker = styled(StatPicker).attrs(
+	({ theme }) => ({
+		valueStyle: {
+			color: theme.color.clue,
+		},
+		itemHeight: assetsSize.main,
+	}),
+)`
   position: absolute;
 `;
 

@@ -5,7 +5,7 @@ import {
 import { ResultValue as BaseResultValue } from "@modules/chaos-bag/result/shared/ui";
 import { SignaturePreview } from "@modules/signature/base/entities/ui";
 import type { SignaturePreviewProps } from "@modules/signature/base/entities/ui";
-import { color, factionColor } from "@shared/config";
+import { factionColor } from "@shared/config";
 import { IconNumber, Row, StatIcon, Text } from "@shared/ui";
 import { View } from "react-native";
 import styled, { css } from "styled-components/native";
@@ -55,13 +55,6 @@ export const Result: typeof Row = styled(Row)`
   align-items: center;
 `;
 
-const valueAttrs = {
-	stroke: true,
-	strokeStyle: {
-		color: color.text,
-	},
-};
-
 export const ResultValue: typeof BaseResultValue = styled(BaseResultValue)`
   font-size: 20px;
 `;
@@ -71,8 +64,15 @@ export const DifficultyType: typeof Text = styled(Text)`
   top: -1px;
 `;
 
-export const Value: typeof IconNumber = styled(IconNumber).attrs(valueAttrs)`
-  color: ${color.white};
+export const Value: typeof IconNumber = styled(IconNumber).attrs(
+	({ theme }) => ({
+		stroke: true,
+		strokeStyle: {
+			color: theme.color.text,
+		},
+	}),
+)`
+  color: ${({ theme }) => theme.color.white};
   font-size: 20px;
 `;
 

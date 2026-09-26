@@ -1,6 +1,5 @@
 import { GameText, type GameTextProps } from "@modules/core/theme/shared/ui";
 import { TouchableOpacity } from "@modules/core/touch/shared/ui";
-import { color, size } from "@shared/config";
 import { Icon, defaultGameTextComponentStyles } from "@shared/ui";
 import type { FC } from "react";
 import { View } from "react-native";
@@ -23,7 +22,7 @@ export const Touchable: typeof TouchableOpacity = styled(TouchableOpacity)`
 export const Content: typeof View = styled(View)`
 	flex-direction: row;
   justify-content: space-between;
-  gap: ${size.gap.default}px;
+  gap: ${({ theme }) => theme.size.gap.default}px;
   align-items: center;
 	z-index: 2;
 `;
@@ -72,7 +71,7 @@ export const Text: FC<TextProps> = styled(GameText).attrs(
 export const ToggleIcon: typeof Icon = styled(Icon)`
 	font-size: 10px;
 	line-height: 10px;
-	color: ${color.title};
+	color: ${({ theme }) => theme.color.title};
 `;
 
 type ToggleProps = ViewProps & {

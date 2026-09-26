@@ -1,6 +1,4 @@
 import { IconButton } from "@shared/ui";
-
-import { color } from "@shared/config";
 import { Row } from "@shared/ui";
 import styled from "styled-components/native";
 
@@ -10,21 +8,23 @@ export const Container: typeof Row = styled(Row)`
 	padding: 0px;
 `;
 
-export const Button: typeof IconButton = styled(IconButton).attrs({
-	iconStyle: {
-		color: color.light10,
-		fontSize: 28,
-		lineHeight: 28,
-	},
-})`
+export const Button: typeof IconButton = styled(IconButton).attrs(
+	({ theme }) => ({
+		iconStyle: {
+			color: theme.color.light10,
+			fontSize: 28,
+			lineHeight: 28,
+		},
+	}),
+)`
 	width: 48px;
 	height: 48px;
 	align-items: center;
 `;
 
-export const GoHome: typeof Button = styled(Button).attrs({
+export const GoHome: typeof Button = styled(Button).attrs(({ theme }) => ({
 	iconStyle: {
-		color: color.light10,
+		color: theme.color.light10,
 		fontSize: 28,
 		lineHeight: 30,
 		transform: [
@@ -33,6 +33,6 @@ export const GoHome: typeof Button = styled(Button).attrs({
 			},
 		],
 	},
-})`
+}))`
 	align-items: flex-start;
 `;

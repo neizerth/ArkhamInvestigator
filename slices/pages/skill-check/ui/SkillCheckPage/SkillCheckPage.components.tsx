@@ -1,12 +1,11 @@
 import { ChaosTokenRevealModal } from "@modules/chaos-bag/reveal/modal/features/chaos-token-reveal-modal/ui";
-import { color } from "@shared/config";
 import { ScreenView } from "@shared/ui";
 import styled from "styled-components/native";
 import { Keyboard as BaseKeyboard, SkillCheckHeader } from "../layout";
 import { EvaluationMemo as Evaluation } from "../layout/evaluation";
 
 export const Container: typeof ScreenView = styled(ScreenView)`
-	background-color: ${color.dark40};
+	background-color: ${({ theme }) => theme.color.dark40};
 	flex: 1;
 	position: relative;
 `;

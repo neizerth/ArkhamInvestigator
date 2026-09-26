@@ -2,13 +2,11 @@ import {
 	TouchableOpacity,
 	type TouchableOpacityProps,
 } from "@modules/core/touch/shared/ui";
-import { color } from "@shared/config";
 import { Icon, Text } from "@shared/ui";
 import type { IconProps } from "@shared/ui";
 import type { FC } from "react";
 import { View } from "react-native";
-import { css } from "styled-components";
-import styled from "styled-components/native";
+import styled, { css } from "styled-components/native";
 
 export const Container: typeof View = styled(View)`
   position: relative;
@@ -27,11 +25,11 @@ export const Toggle: FC<ToggleProps> = styled(TouchableOpacity)`
   width: 40px;
   height: 40px;
   border-radius: 40px;
-  border: 1px solid ${color.dark10};
+  border: 1px solid ${({ theme }) => theme.color.dark10};
   ${({ open }: ToggleProps) =>
 		open &&
 		css`
-      border: 1px solid ${color.gray30};
+      border: 1px solid ${({ theme }) => theme.color.gray30};
     `}
 `;
 
@@ -41,17 +39,17 @@ type ToggleIconProps = IconProps & {
 
 export const ToggleIcon: FC<ToggleIconProps> = styled(Icon)`
   font-size: 14px;
-  color: ${color.gray20};
+  color: ${({ theme }) => theme.color.gray20};
   ${({ open }: ToggleIconProps) =>
 		open &&
 		css`
-      color: ${color.dark20};
+      color: ${({ theme }) => theme.color.dark20};
       transform: rotate(45deg);
     `}
 `;
 
 export const MenuIcon: typeof Icon = styled(Icon)`
-  color: ${color.text};
+  color: ${({ theme }) => theme.color.text};
   font-size: 14px;
   width: 18px;
   text-align: center;
@@ -60,10 +58,11 @@ export const MenuIcon: typeof Icon = styled(Icon)`
 export const MenuLabel: typeof Text = styled(Text).attrs({
 	numberOfLines: 1,
 })`
-  color: ${color.text};
+  color: ${({ theme }) => theme.color.text};
 `;
 
 export const Menu: typeof View = styled(View)`
+  ${({ theme: { color } }) => css`
   z-index: 1;
   position: absolute;
   top: -5px;
@@ -72,7 +71,7 @@ export const Menu: typeof View = styled(View)`
   background-color: ${color.light10};
   border-radius: 20px;
   border: 1px solid ${color.dark10};
-`;
+`}`;
 
 type MenuItemProps = TouchableOpacityProps & {
 	first?: boolean;
@@ -92,7 +91,7 @@ export const MenuItem: FC<MenuItemProps> = styled(TouchableOpacity)`
 		!last &&
 		css`
     border-bottom-width: 1px;
-    border-bottom-color: ${color.gray10};
+    border-bottom-color: ${({ theme }) => theme.color.gray10};
   `}
 
   ${({ first }: MenuItemProps) =>

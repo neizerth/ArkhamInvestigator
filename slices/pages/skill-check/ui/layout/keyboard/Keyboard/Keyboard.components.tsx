@@ -1,7 +1,5 @@
-import { Copasetic, Enthalpy298 } from "@assets/fonts";
 import { withLocale } from "@modules/core/i18n/shared/lib";
 import { TouchableOpacity } from "@modules/core/touch/shared/ui";
-import { color, font, size } from "@shared/config";
 import { Row as BaseRow, UnscaledText } from "@shared/ui";
 import {
 	CustomKeyboardButton,
@@ -18,9 +16,10 @@ import BackspaceImage from "./images/backspace.svg";
 import RuleBottom from "./images/rule.svg";
 
 export const Container: typeof View = styled(View)`
+  ${({ theme: { size } }) => css`
   padding: 0 ${size.gap.default}px;
   padding-bottom: ${size.gap.default}px;  
-`;
+`}`;
 
 type ContentProps = ViewProps & {
 	border?: boolean;
@@ -78,11 +77,13 @@ export const Stats: typeof StatsKeyboard = styled(StatsKeyboard)`
   flex: 3;
 `;
 
-export const Backspace: typeof BackspaceImage = styled(BackspaceImage).attrs({
-	width: 32,
-	height: 32,
-	fill: color.light10,
-})`
+export const Backspace: typeof BackspaceImage = styled(BackspaceImage).attrs(
+	({ theme }) => ({
+		width: 32,
+		height: 32,
+		fill: theme.color.light10,
+	}),
+)`
     position: relative;
     left: -2px;
   `;
@@ -92,25 +93,31 @@ export const Placeholder: typeof View = styled(View)`
 `;
 
 export const EqualsText1: typeof UnscaledText = styled(UnscaledText)`
+  ${({ theme: { color, font, fontFamily } }) => css`
   color: ${color.light10};
-  font-family: ${Copasetic.regular};
+  font-family: ${fontFamily.Copasetic.regular};
   font-size: ${font.size.lead}px;
-`;
+`}`;
 
-export const EqualsText = withLocale({
-	style: {
+const EqualsTextBase = withLocale({
+	style: ({ fontFamily }) => ({
 		default: {
-			fontFamily: Copasetic.regular,
-			color: color.light10,
-			fontSize: font.size.lead,
+			fontFamily: fontFamily.Copasetic.regular,
 		},
 		ru: {
-			fontFamily: Enthalpy298.regular,
+			fontFamily: fontFamily.Enthalpy298.regular,
 			marginTop: -1,
 			letterSpacing: 0.5,
 		},
-	},
+	}),
 });
+
+export const EqualsText = styled(EqualsTextBase)`
+	${({ theme: { color, font } }) => css`
+		color: ${color.light10};
+		font-size: ${font.size.lead}px;
+	`}
+`;
 
 type RuleProps = SvgProps & {
 	historyShown: boolean;

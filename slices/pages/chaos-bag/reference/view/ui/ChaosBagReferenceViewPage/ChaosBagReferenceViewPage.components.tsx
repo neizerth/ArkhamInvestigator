@@ -1,5 +1,4 @@
 import { Pressable } from "@modules/core/touch/shared/ui";
-import { size } from "@shared/config";
 import { ScenarioReference } from "@widgets/game/reference";
 import { View } from "react-native";
 import styled from "styled-components/native";
@@ -16,7 +15,7 @@ export const Container: typeof View = styled(View)`
 export const Content: typeof View = styled(View)`
   justify-content: center;
   align-items: stretch;
-  gap: ${size.gap.default}px;
+  gap: ${({ theme }) => theme.size.gap.default}px;
 `;
 
 export const Reference: typeof ScenarioReference = styled(ScenarioReference)`

@@ -1,5 +1,4 @@
 import { statStyles } from "@modules/board/base/entities/base/ui";
-import { size } from "@shared/config";
 import type { InvestigatorMainStatType } from "@shared/model";
 import { Value as BaseValue } from "@shared/ui";
 import type { FC } from "react";
@@ -33,7 +32,7 @@ const createComponents = (stat: InvestigatorMainStatType) => {
 
 	const Container: typeof View = styled(View)`
 		position: relative;
-		padding-top: ${size.gap.xl}px;
+		padding-top: ${({ theme }) => theme.size.gap.xl}px;
 	`;
 
 	const Value: typeof BaseValue = styled(BaseValue)`

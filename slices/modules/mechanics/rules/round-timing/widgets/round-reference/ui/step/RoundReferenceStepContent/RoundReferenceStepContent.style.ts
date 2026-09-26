@@ -78,6 +78,5 @@ export const getStepTextComponents = ({ language, type }: Options) => {
 			},
 		},
 		zh: zhComponentStyles,
-		"zh-cn": zhComponentStyles,
 	})(language);
 };

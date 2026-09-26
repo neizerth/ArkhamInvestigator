@@ -1,9 +1,7 @@
-import { Alegreya } from "@assets/fonts";
 import {
 	BoardSignatureImage,
 	type BoardSignatureImageProps,
 } from "@modules/board/base/features/base/ui";
-import { color, font } from "@shared/config";
 import { Icon, type IconProps, Text, Value, type ValueProps } from "@shared/ui";
 import type { FC } from "react";
 import { Platform, View, type ViewProps } from "react-native";
@@ -90,7 +88,7 @@ export const RemovedLayer: FC<RemovedLayerProps> = styled(View)`
 type RemoveIconpProps = IconProps & PropsWithSize;
 
 export const RemovedIcon: FC<RemoveIconpProps> = styled(Icon)`
-  color: ${color.text};
+  color: ${({ theme }) => theme.color.text};
   ${({ size }: CancelIconProps) => css`
     font-size: ${size * 0.2}px;
     line-height: ${size * 0.2}px;
@@ -184,22 +182,24 @@ export const SealedCount: typeof View = styled(View)`
 `;
 
 export const SealedCountText: typeof Text = styled(Text)`
-	font-family: ${Alegreya.regular};
+  ${({ theme: { color, font, fontFamily } }) => css`
+	font-family: ${fontFamily.Alegreya.regular};
   color: ${color.light10};
   font-size: ${font.size.default}px;
 	line-height: ${font.size.default * (ios ? 1 : 0.9)}px;
 	text-align: center;
   bottom: ${ios ? 0 : 3}px;
-`;
+`}`;
 
 export const SealedTitle: typeof Text = styled(Text).attrs({
 	numberOfLines: 1,
 })`
+  ${({ theme: { color, font, fontFamily } }) => css`
   position: absolute;
   z-index: 3;
   bottom: -5px;
   padding: 0 3px;
-	font-family: ${Alegreya.regular};
+	font-family: ${fontFamily.Alegreya.regular};
   background-color: #c12422;
   color: ${color.light10};
   font-size: 12px;
@@ -207,7 +207,7 @@ export const SealedTitle: typeof Text = styled(Text).attrs({
   border-radius: 20px;
   white-space: nowrap;
 	text-align: center;
-`;
+`}`;
 
 export const SealedPreview: typeof View = styled(View)`
   position: absolute;

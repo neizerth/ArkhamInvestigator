@@ -1,16 +1,14 @@
+import type * as fontFamily from "@assets/fonts";
+import type { DeviceOrientationInfo } from "@modules/core/device/shared/model";
 import type { activeOpacity, color, font, size } from "@shared/config";
-import type { DeviceOrientation } from "@shared/model";
-import type * as ScreenOrientation from "expo-screen-orientation";
 
 type AppTheme = {
 	color: typeof color;
 	font: typeof font;
+	fontFamily: typeof fontFamily;
 	size: typeof size;
 	activeOpacity: typeof activeOpacity;
-	orientation: {
-		orientation?: ScreenOrientation.Orientation;
-		type?: DeviceOrientation;
-	};
+	orientation: DeviceOrientationInfo;
 };
 
 declare module "styled-components" {

@@ -1,5 +1,4 @@
 import { TouchableOpacity } from "@modules/core/touch/shared/ui";
-import { color } from "@shared/config";
 import { Icon, type IconProps } from "@shared/ui";
 import type { FC } from "react";
 import styled, { css } from "styled-components/native";
@@ -28,7 +27,7 @@ export const SwitchIcon: FC<SwitchIconProps> = styled(Icon)`
 		!active &&
 		css`
     opacity: 0.4;
-    color: ${color.light10};
+    color: ${({ theme }) => theme.color.light10};
   `}
     ${({ byEffect }: SwitchIconProps) =>
 			byEffect &&
@@ -40,7 +39,7 @@ export const SwitchIcon: FC<SwitchIconProps> = styled(Icon)`
 export const EffectIcon: typeof Icon = styled(Icon)`
   position: absolute;
   z-index: 1;
-  color: ${color.light10};
+  color: ${({ theme }) => theme.color.light10};
   font-size: 30px;
   line-height: 40px;
 `;

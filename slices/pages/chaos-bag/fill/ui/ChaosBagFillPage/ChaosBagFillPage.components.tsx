@@ -4,19 +4,20 @@ import {
 	ScenarioDifficultySelect,
 	ScenarioDifficultyTokens,
 } from "@modules/stories/entities/ui";
-import { color, size } from "@shared/config";
 import { Button } from "@shared/ui";
 import { Row } from "@shared/ui";
 import { View } from "react-native";
 import styled from "styled-components/native";
 
-export const Container: typeof ContextModal = styled(ContextModal).attrs({
-	contentStyle: {
-		backgroundColor: color.dark30,
-		paddingRight: size.gap.small,
-		paddingLeft: size.gap.small,
-	},
-})`
+export const Container: typeof ContextModal = styled(ContextModal).attrs(
+	({ theme }) => ({
+		contentStyle: {
+			backgroundColor: theme.color.dark30,
+			paddingRight: theme.size.gap.small,
+			paddingLeft: theme.size.gap.small,
+		},
+	}),
+)`
   flex: 1;
   justify-content: flex-start;
 `;
@@ -27,7 +28,7 @@ export const Select: typeof ScenarioDifficultySelect = styled(
 `;
 
 export const Content: typeof View = styled(View)`
-  gap: ${size.gap.default}px
+  gap: ${({ theme }) => theme.size.gap.default}px
 `;
 
 export const Preview: typeof ScenarioDifficultyTokens = styled(
@@ -40,7 +41,7 @@ export const Token: typeof ChaosToken = styled(ChaosToken)`
 `;
 
 export const Actions: typeof Row = styled(Row)`
-  gap: ${size.gap.default}px
+  gap: ${({ theme }) => theme.size.gap.default}px
 `;
 
 export const Action: typeof Button = styled(Button)`
@@ -48,16 +49,16 @@ export const Action: typeof Button = styled(Button)`
 `;
 
 export const Cancel: typeof Action = styled(Action)`
-  background-color: ${color.dark20};
+  background-color: ${({ theme }) => theme.color.dark20};
 `;
 
-export const Ok: typeof Action = styled(Action).attrs({
+export const Ok: typeof Action = styled(Action).attrs(({ theme }) => ({
 	textStyle: {
-		color: color.text,
+		color: theme.color.text,
 	},
 	iconStyle: {
-		color: color.text,
+		color: theme.color.text,
 	},
-})`
-  background-color: ${color.light10};
+}))`
+  background-color: ${({ theme }) => theme.color.light10};
 `;

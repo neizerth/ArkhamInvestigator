@@ -1,5 +1,4 @@
 import { chaosToken } from "@modules/chaos-bag/base/shared/config";
-import { color } from "@shared/config";
 import { UnscaledText } from "@shared/ui";
 import { View } from "react-native";
 import styled from "styled-components/native";
@@ -28,6 +27,6 @@ export const CompareSymbol: typeof UnscaledText = styled(UnscaledText)`
   position: absolute;
   top: 0px;
   left: -16px;
-  color: ${color.white};
+  color: ${({ theme }) => theme.color.white};
   font-size: 25px;
 `;

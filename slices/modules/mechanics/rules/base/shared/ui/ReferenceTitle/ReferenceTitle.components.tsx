@@ -1,6 +1,4 @@
-import { Arkhamic, Conkordia, FZLiBian, SanCn } from "@assets/fonts";
 import { withLocale } from "@modules/core/i18n/shared/lib";
-import { color } from "@shared/config";
 import { View } from "react-native";
 import styled from "styled-components/native";
 
@@ -18,26 +16,23 @@ export const UnderlineGroup: typeof View = styled(View)`
 export const Underline: typeof View = styled(View)`
   flex: 1;
   height: 1px;
-  background-color: ${color.text};
+  background-color: ${({ theme }) => theme.color.text};
 `;
 
 export const Title = withLocale({
-	style: {
+	style: ({ fontFamily }) => ({
 		default: {
-			fontFamily: Arkhamic.regular,
+			fontFamily: fontFamily.Arkhamic.regular,
 			textAlign: "center",
 		},
 		ru: {
-			fontFamily: Conkordia.regular,
+			fontFamily: fontFamily.Conkordia.regular,
 		},
 		ko: {
-			fontFamily: SanCn.bold,
+			fontFamily: fontFamily.SanCn.bold,
 		},
 		zh: {
-			fontFamily: FZLiBian.regular,
+			fontFamily: fontFamily.FZLiBian.regular,
 		},
-		"zh-cn": {
-			fontFamily: FZLiBian.regular,
-		},
-	},
+	}),
 });

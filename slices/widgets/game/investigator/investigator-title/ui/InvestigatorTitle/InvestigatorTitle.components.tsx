@@ -1,11 +1,9 @@
-import { Arkhamic } from "@assets/fonts";
 import { ThemeFactionTitleBackground } from "@modules/core/theme/shared/ui";
 import {
 	Pressable,
 	TouchableOpacity,
 	type TouchableOpacityProps,
 } from "@modules/core/touch/shared/ui";
-import { color } from "@shared/config";
 import { withIcon } from "@shared/lib/hoc";
 import {
 	type DefinedIconProps,
@@ -35,7 +33,7 @@ export const Title: typeof Row = styled(Row)`
 `;
 
 export const Id: typeof UnscaledText = styled(UnscaledText)`
-  font-family: ${Arkhamic.regular};
+  font-family: ${({ theme }) => theme.fontFamily.Arkhamic.regular};
   padding-top: 1%;
 `;
 
@@ -72,8 +70,9 @@ export const Arrow: FC<ArrowProps> = styled(Icon).attrs({
   font-size: 16px;
   line-height: 16px;
   ${({ parallel }: ArrowProps) => css`
+  ${({ theme: { color } }) => css`
     color: ${parallel ? color.white : color.dark20};
-  `}
+  `}`}
   text-shadow: 0 0 1px rgba(255, 255, 255, 0.2);
 `;
 

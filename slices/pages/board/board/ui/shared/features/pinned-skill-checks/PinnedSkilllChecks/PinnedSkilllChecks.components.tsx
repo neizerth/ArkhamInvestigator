@@ -1,6 +1,5 @@
 import { textureImages } from "@assets/images/game/effects/textures";
 import { TouchableOpacity } from "@modules/core/touch/shared/ui";
-import { color, size } from "@shared/config";
 import { type DefinedIconProps, Icon, Row } from "@shared/ui";
 import { Image } from "expo-image";
 import type { FC } from "react";
@@ -15,7 +14,7 @@ export const Container: typeof View = styled(View)`
 
 export const Area: typeof TouchableOpacity = styled(TouchableOpacity)`
 	position: absolute;
-	padding: ${size.gap.default}px;
+	padding: ${({ theme }) => theme.size.gap.default}px;
 	z-index: 1;
 	right: 0;
 	width: 100%;
@@ -23,7 +22,7 @@ export const Area: typeof TouchableOpacity = styled(TouchableOpacity)`
 
 export const Content: typeof View = styled(View)`
 	padding: 7% 20px 9% 25px;
-	border-radius: ${size.borderRadius.default}px;
+	border-radius: ${({ theme }) => theme.size.borderRadius.default}px;
 	position: relative;
 	z-index: 1;
 	min-height: ${PINNED_CHECKS_MIN_HEIGHT}px;
@@ -64,7 +63,7 @@ export const ToggleContent: typeof View = styled(View)`
 export const ToggleIcon: FC<DefinedIconProps> = styled(Icon).attrs({
 	icon: "dismiss",
 })`
-	color: ${color.dark10};
+	color: ${({ theme }) => theme.color.dark10};
 	font-size: 16px;
 	line-height: 16px;
 	opacity: 0.8;
@@ -97,7 +96,7 @@ export const ShowIconContainer: typeof View = styled(View)`
 export const ShowIcon: FC<DefinedIconProps> = styled(Icon).attrs({
 	icon: "pushpin",
 })`
-	color: ${color.white};
+	color: ${({ theme }) => theme.color.white};
 	opacity: 0.9;
 	font-size: 18px;
 	text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);

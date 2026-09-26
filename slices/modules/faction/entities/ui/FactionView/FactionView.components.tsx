@@ -1,8 +1,6 @@
 import { ThemeFactionFontIcon } from "@modules/core/theme/shared/ui";
 import { getFactionColor } from "@modules/faction/shared/lib";
-import { color, size } from "@shared/config";
 import type { PropsWithFaction } from "@shared/model";
-import type { FC } from "react";
 import { View, type ViewProps } from "react-native";
 import styled, { css } from "styled-components/native";
 
@@ -13,23 +11,25 @@ export type ContainerProps = ViewProps &
 		selected?: boolean;
 	};
 
-export const Container: FC<ContainerProps> = styled(View)`
-  border-radius: ${size.borderRadius.default}px;
-  justify-content: center;
-  align-items: center;
-  border-width: 1px;
-  border-color: ${color.dark10};
-  ${(props: ContainerProps) => css`
+export const Container = styled(View)<ContainerProps>`
+  ${({ theme: { size, color } }) => css`
+    border-radius: ${size.borderRadius.default}px;
+    justify-content: center;
+    align-items: center;
+    border-width: 1px;
+    border-color: ${color.dark10};
+  `}
+  ${(props) => css`
     border-color: ${getFactionColor(props)};
   `}
-  ${({ selected, ...props }: ContainerProps) =>
+  ${({ selected, ...props }) =>
 		selected &&
 		css`
-    background-color: ${getFactionColor({
-			...props,
-			alpha: 0.3,
-		})};
-  `}
+      background-color: ${getFactionColor({
+				...props,
+				alpha: 0.3,
+			})};
+    `}
 `;
 
 export const Icon: typeof ThemeFactionFontIcon = styled(ThemeFactionFontIcon)`

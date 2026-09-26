@@ -1,6 +1,5 @@
 import { getMaxBreakpoint } from "@modules/core/device/shared/lib";
-import { color, size } from "@shared/config";
-import type { DeviceBreakpointType } from "@shared/model/features/device";
+import type { DeviceBreakpointType } from "@modules/core/device/shared/model";
 import type { PropsWithBreakpoint } from "@shared/model/ui";
 import { IconNumber, Row, SkillIcon } from "@shared/ui";
 import type { IconNumberProps, SkillIconProps } from "@shared/ui";
@@ -29,6 +28,7 @@ const fontSize: FontSizeRecord = {
 const getFontSize = getMaxBreakpoint(fontSize);
 
 export const Container: typeof Row = styled(Row)`
+  ${({ theme: { size, color } }) => css`
   justify-content: center;
   align-items: center;
   min-width: 30px;
@@ -37,7 +37,7 @@ export const Container: typeof Row = styled(Row)`
   background-color: ${color.dark20};
   padding: 0px ${size.gap.small}px;
   border-radius: ${size.borderRadius.default}px;
-`;
+`}`;
 
 export const Value: FC<IconNumberProps & PropsWithBreakpoint> = styled(
 	IconNumber,

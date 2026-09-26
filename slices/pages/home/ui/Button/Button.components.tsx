@@ -1,35 +1,26 @@
-import { SanCn, TeutonicRU, ViaodaLibre } from "@assets/fonts";
-import { Arkhamic, FZLiBian } from "@assets/fonts";
-
 import { withLocale } from "@modules/core/i18n/shared/lib";
-import { color, font } from "@shared/config";
 import type { PrimaryButtonSize } from "@shared/ui";
-import type { FC } from "react";
 import type { TextProps as BaseTextProps } from "react-native";
 import styled, { css } from "styled-components/native";
 
-const zhText = {
-	fontFamily: FZLiBian.regular,
-};
-
 export const BaseText = withLocale({
-	style: {
+	style: ({ fontFamily }) => ({
 		default: {
-			fontFamily: Arkhamic.regular,
-			color: color.light10,
+			fontFamily: fontFamily.Arkhamic.regular,
 		},
 		ru: {
-			fontFamily: TeutonicRU.regular,
+			fontFamily: fontFamily.TeutonicRU.regular,
 		},
 		ko: {
-			fontFamily: SanCn.bold,
+			fontFamily: fontFamily.SanCn.bold,
 		},
 		vi: {
-			fontFamily: ViaodaLibre.regular,
+			fontFamily: fontFamily.ViaodaLibre.regular,
 		},
-		zh: zhText,
-		"zh-cn": zhText,
-	},
+		zh: {
+			fontFamily: fontFamily.FZLiBian.regular,
+		},
+	}),
 });
 
 const fontScale: Record<PrimaryButtonSize, number> = {
@@ -41,8 +32,9 @@ type TextProps = BaseTextProps & {
 	size?: PrimaryButtonSize;
 };
 
-export const Text: FC<TextProps> = styled(BaseText)`
-  ${({ size = "default" }: TextProps) => css`
-    font-size: ${font.size.xxl * fontScale[size]}px;
+export const Text = styled(BaseText)<TextProps>`
+  ${({ size = "default", theme }) => css`
+    color: ${theme.color.light10};
+    font-size: ${theme.font.size.xxl * fontScale[size]}px;
   `}
 `;

@@ -1,8 +1,7 @@
 import { ChaosBagRevealedToken } from "@modules/chaos-bag/reveal/base/entities/ui";
-import { color, size } from "@shared/config";
 import { Row, Text } from "@shared/ui";
 import { View } from "react-native";
-import styled from "styled-components/native";
+import styled, { css } from "styled-components/native";
 
 export const Container: typeof View = styled(View)`
   padding-top: 7px;
@@ -27,12 +26,13 @@ export const SignView: typeof View = styled(View)`
 `;
 
 export const Sign: typeof Text = styled(Text)`
-  color: ${color.text};
+  color: ${({ theme }) => theme.color.text};
   font-size: 22px;
 `;
 
 export const Result: typeof Item = styled(Item)`
+  ${({ theme: { size } }) => css`
   gap: ${size.gap.small}px;
   justify-content: flex-end;
   padding-right: ${size.gap.small}px
-`;
+`}`;

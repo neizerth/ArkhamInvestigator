@@ -1,4 +1,3 @@
-import { color } from "@shared/config";
 import { Icon, StatIcon } from "@shared/ui";
 import { Platform, View } from "react-native";
 import styled from "styled-components/native";
@@ -50,7 +49,7 @@ export const Menu: typeof RevealMenu = styled(RevealMenu)`
 `;
 
 export const ReferenceIcon: typeof Icon = styled(Icon)`
-  color: ${color.gray20};
+  color: ${({ theme }) => theme.color.gray20};
   font-size: 14px;
 `;
 

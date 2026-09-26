@@ -1,13 +1,13 @@
 import { breakpointSizes, breakpoints, deviceTypes } from "@shared/config";
 import { capitalize } from "@shared/lib/util";
+import { useWindowDimensions } from "react-native";
+import { useMediaQuery } from "react-responsive";
 import type {
 	BreakpointSize,
 	DeviceBreakpointType,
 	DeviceOrientation,
 	DeviceType,
-} from "@shared/model";
-import { useWindowDimensions } from "react-native";
-import { useMediaQuery } from "react-responsive";
+} from "../../model";
 
 export type BreakpointInfo = {
 	deviceType: DeviceType;

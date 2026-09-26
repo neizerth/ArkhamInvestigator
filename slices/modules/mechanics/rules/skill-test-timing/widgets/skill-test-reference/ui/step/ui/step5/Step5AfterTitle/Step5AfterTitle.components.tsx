@@ -1,4 +1,3 @@
-import { color } from "@shared/config";
 import type { SkillType } from "@shared/model";
 import {
 	Value as BaseValue,
@@ -19,6 +18,6 @@ type ValueProps = BaseValueProps & {
 export const Value: FC<ValueProps> = styled(BaseValue)`
   font-size: 22px;
   ${({ skillType }: ValueProps) => css`
-    color: ${color.skill[skillType].light};
+    color: ${({ theme }) => theme.color.skill[skillType].light};
   `}
 `;

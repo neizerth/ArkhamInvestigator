@@ -1,21 +1,13 @@
-import {
-	CrimsonPro,
-	EBGaramond,
-	SanCn,
-	SourceHanSansCN,
-	Yoon,
-} from "@assets/fonts";
 import { withLocale } from "@modules/core/i18n/shared/lib";
 import { TouchableOpacity } from "@modules/core/touch/shared/ui";
-import { color, font, size } from "@shared/config";
 import { Row, TextView } from "@shared/ui";
 import { SkillCheckExpressionDisplay } from "@widgets/game/skill-check";
-import styled from "styled-components/native";
+import styled, { css } from "styled-components/native";
 
 export const Item: typeof TouchableOpacity = styled(TouchableOpacity)`
   align-items: center;
 	flex-direction: row;
-	padding: ${size.gap.small}px;
+	padding: ${({ theme }) => theme.size.gap.small}px;
 `;
 
 export const ItemContent: typeof Row = styled(Row)`
@@ -23,55 +15,55 @@ export const ItemContent: typeof Row = styled(Row)`
 	gap: 2px;
 `;
 
-const zhTitleTextConfig = {
-	fontFamily: SourceHanSansCN.bold,
-};
-
-const titleTextStyle = {
-	default: {
-		color: color.text,
-		fontFamily: CrimsonPro.bold,
-		fontSize: font.size.default,
-	},
-	ru: {
-		fontFamily: EBGaramond.bold,
-	},
-	ko: {
-		fontFamily: SanCn.bold,
-	},
-	zh: zhTitleTextConfig,
-	"zh-cn": zhTitleTextConfig,
-};
-
-export const Title = withLocale({
+const TitleText = withLocale({
 	Component: TextView,
-	style: titleTextStyle,
+	style: ({ fontFamily }) => ({
+		default: {
+			fontFamily: fontFamily.CrimsonPro.bold,
+		},
+		ru: {
+			fontFamily: fontFamily.EBGaramond.bold,
+		},
+		ko: {
+			fontFamily: fontFamily.SanCn.bold,
+		},
+		zh: {
+			fontFamily: fontFamily.SourceHanSansCN.bold,
+		},
+	}),
 });
 
-const zhTextConfig = {
-	fontFamily: SourceHanSansCN.bold,
-};
+export const Title = styled(TitleText)`
+	${({ theme: { color, font } }) => css`
+		color: ${color.text};
+		font-size: ${font.size.default}px;
+	`}
+`;
 
-const textStyle = {
-	default: {
-		color: color.text,
-		fontFamily: CrimsonPro.regular,
-		fontSize: font.size.default,
-	},
-	ru: {
-		fontFamily: EBGaramond.regular,
-	},
-	ko: {
-		fontFamily: Yoon.D330.regular,
-	},
-	zh: zhTextConfig,
-	"zh-cn": zhTextConfig,
-};
-
-export const Text = withLocale({
+const TextBase = withLocale({
 	Component: TextView,
-	style: textStyle,
+	style: ({ fontFamily }) => ({
+		default: {
+			fontFamily: fontFamily.CrimsonPro.regular,
+		},
+		ru: {
+			fontFamily: fontFamily.EBGaramond.regular,
+		},
+		ko: {
+			fontFamily: fontFamily.Yoon.D330.regular,
+		},
+		zh: {
+			fontFamily: fontFamily.SourceHanSansCN.bold,
+		},
+	}),
 });
+
+export const Text = styled(TextBase)`
+	${({ theme: { color, font } }) => css`
+		color: ${color.text};
+		font-size: ${font.size.default}px;
+	`}
+`;
 
 export const Expression: typeof SkillCheckExpressionDisplay = styled(
 	SkillCheckExpressionDisplay,

@@ -1,8 +1,6 @@
-import { CrimsonPro, EBGaramond, FangSong, Yoon } from "@assets/fonts";
 import { IconButton } from "@shared/ui";
 
 import { withLocale } from "@modules/core/i18n/shared/lib";
-import { color, size } from "@shared/config";
 import type { FC } from "react";
 import { Platform, View, type ViewProps } from "react-native";
 import styled, { css } from "styled-components/native";
@@ -59,13 +57,15 @@ export const Header: typeof ReferenceSectionHeader = styled(
 )`
 `;
 
-export const PlayIcon: typeof IconButton = styled(IconButton).attrs({
-	iconStyle: {
-		fontSize: 14,
-		lineHeight: 14,
-		color: color.title,
-	},
-})`
+export const PlayIcon: typeof IconButton = styled(IconButton).attrs(
+	({ theme }) => ({
+		iconStyle: {
+			fontSize: 14,
+			lineHeight: 14,
+			color: theme.color.title,
+		},
+	}),
+)`
 	padding: 5px;
 `;
 
@@ -97,36 +97,36 @@ export const PhaseBackground: typeof Background = styled(Background).attrs({
 	position: absolute;
 `;
 
-export const Hint = withLocale({
-	style: {
+const HintText = withLocale({
+	style: ({ fontFamily }) => ({
 		default: {
-			fontFamily: CrimsonPro.italic,
+			fontFamily: fontFamily.CrimsonPro.italic,
 			fontSize: phaseContentFontSize,
-			color: color.rulesText,
 			paddingHorizontal: 13,
 			paddingBottom: 2,
 		},
 		ru: {
-			fontFamily: EBGaramond.italic,
+			fontFamily: fontFamily.EBGaramond.italic,
 		},
 		ko: {
-			fontFamily: Yoon.D330.italic,
+			fontFamily: fontFamily.Yoon.D330.italic,
 		},
 		zh: {
-			fontFamily: FangSong.italic,
+			fontFamily: fontFamily.FangSong.italic,
 		},
-		"zh-cn": {
-			fontFamily: FangSong.italic,
-		},
-	},
+	}),
 });
 
+export const Hint = styled(HintText)`
+	color: ${({ theme }) => theme.color.rulesText};
+`;
+
 export const Details: typeof View = styled(View)`
-	gap: ${size.gap.small}px;
+	gap: ${({ theme }) => theme.size.gap.small}px;
 `;
 
 export const Steps: typeof View = styled(View)`
-	gap: ${size.gap.default}px;
+	gap: ${({ theme }) => theme.size.gap.default}px;
 `;
 
 export const Step: typeof ReferenceSectionStep = styled(ReferenceSectionStep)`

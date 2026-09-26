@@ -1,4 +1,3 @@
-import { size } from "@shared/config";
 import { Row as BaseRow } from "@shared/ui";
 import { View } from "react-native";
 import styled from "styled-components/native";
@@ -15,13 +14,13 @@ export const Row: typeof BaseRow = styled(BaseRow)`
 `;
 
 export const Investigator: typeof Row = styled(Row)`
-  gap: ${size.gap.default}px;
+  gap: ${({ theme }) => theme.size.gap.default}px;
 `;
 
 export const Stats: typeof Row = styled(Row)`
-  padding: 0 0 0 ${size.gap.default}px;
+  padding: 0 0 0 ${({ theme }) => theme.size.gap.default}px;
 `;
 
 export const MainStats: typeof Row = styled(Row)`
-  gap: ${size.gap.medium}px;
+  gap: ${({ theme }) => theme.size.gap.medium}px;
 `;

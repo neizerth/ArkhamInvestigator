@@ -7,9 +7,8 @@ import { View } from "react-native";
 import type { ViewProps } from "react-native";
 import styled, { css } from "styled-components/native";
 
-import { ArkhamDigits } from "@assets/fonts";
 import { TouchableOpacity } from "@modules/core/touch/shared/ui";
-import { color, factionColor, size } from "@shared/config";
+import { factionColor } from "@shared/config";
 import type { PropsWithFaction } from "@shared/model/ui";
 import { Icon, UnscaledText } from "@shared/ui";
 import Color from "color";
@@ -77,7 +76,7 @@ export const Info: typeof View = styled(View)`
   height: 40px;
   justify-content: center;
   background-color: rgba(0, 0, 0, 0.4);
-  border-radius: 0 ${size.borderRadius.large}px 0 0;
+  border-radius: 0 ${({ theme }) => theme.size.borderRadius.large}px 0 0;
   padding: 4px 8px;
   ${
 		ios &&
@@ -88,6 +87,7 @@ export const Info: typeof View = styled(View)`
 `;
 
 export const SelectedCount: typeof View = styled(View)`
+  ${({ theme: { color, size } }) => css`
   position: absolute;
   flex-direction: row;
   z-index: 1;
@@ -100,17 +100,17 @@ export const SelectedCount: typeof View = styled(View)`
   background-color: ${color.light10};
   border-radius: ${size.borderRadius.large}px;
   padding: 4px;
-`;
+`}`;
 
 export const Count: typeof UnscaledText = styled(UnscaledText)`
-  font-family: ${ArkhamDigits.fill};
+  font-family: ${({ theme }) => theme.fontFamily.ArkhamDigits.fill};
   font-size: 12px;
 `;
 
 export const ExtraIcon: typeof Icon = styled(Icon)`
   font-size: 22px;
   text-align: center;
-  color: ${color.white};
+  color: ${({ theme }) => theme.color.white};
   ${
 		!ios &&
 		css`

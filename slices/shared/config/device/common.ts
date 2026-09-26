@@ -8,7 +8,7 @@ import type {
 	DeviceBreakpointType,
 	DeviceBreakpoints,
 	DeviceType,
-} from "../../model";
+} from "@modules/core/device/shared/model";
 import { iOSVersion } from "./ios";
 
 const isAndroid = Platform.OS === "android";

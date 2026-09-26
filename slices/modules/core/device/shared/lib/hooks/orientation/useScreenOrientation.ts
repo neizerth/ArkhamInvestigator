@@ -1,8 +1,9 @@
 import * as ScreenOrientation from "expo-screen-orientation";
 import { useEffect, useState } from "react";
+import type { DeviceOrientationInfo } from "../../../model";
 import { getOrientationType } from "../../logic";
 
-export const useScreenOrientation = () => {
+export const useScreenOrientation = (): DeviceOrientationInfo => {
 	const [orientation, setOrientation] =
 		useState<ScreenOrientation.Orientation>();
 

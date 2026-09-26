@@ -1,6 +1,6 @@
 import { breakpointsOrder } from "@shared/config";
-import type { DeviceBreakpointType } from "@shared/model";
 import { ascend, identity, last } from "ramda";
+import type { DeviceBreakpointType } from "../../model";
 
 export const getMaxBreakpoint =
 	<T>(queries: Partial<Record<DeviceBreakpointType, T>>) =>

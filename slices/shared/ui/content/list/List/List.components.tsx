@@ -1,7 +1,6 @@
 import type { FC } from "react";
 import { View, type ViewProps } from "react-native";
-import styled from "styled-components/native";
-import { color, font } from "../../../../config";
+import styled, { css } from "styled-components/native";
 import { type DefinedIconProps, Icon } from "../../../game";
 import { Row } from "../../../grid";
 import { Text } from "../../typography";
@@ -31,6 +30,8 @@ export const Marker: typeof View = styled(View)`
 export const Bullet: FC<DefinedIconProps> = styled(Icon).attrs({
 	icon: "bullet",
 })`
+  ${({ theme: { font, color } }) => css`
     font-size: ${font.size.small * 0.8}px;
-    color: ${color.light10}
-  `;
+    color: ${color.light10};
+  `}
+`;

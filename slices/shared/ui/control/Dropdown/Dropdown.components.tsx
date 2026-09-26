@@ -2,13 +2,12 @@ import type { FC } from "react";
 import { View } from "react-native";
 import type { ViewProps } from "react-native-svg/lib/typescript/fabric/utils";
 import styled, { css } from "styled-components/native";
-import { color, size } from "../../../config";
 import { UnscaledText } from "../../behavior/UnscaledText";
 import { type DefinedIconProps, Icon } from "../../game";
 import { Row } from "../../grid/Row";
 
 export const Item: typeof Row = styled(Row)`
-  padding: ${size.gap.default}px;
+  padding: ${({ theme }) => theme.size.gap.default}px;
   justify-content: space-between;
   align-items: center;
 `;
@@ -35,7 +34,7 @@ export const RightIcon: FC<DefinedIconProps> = styled(Icon).attrs({
 	icon: "right-arrow",
 })`
   font-size: 14px;
-  color: ${color.light10};
+  color: ${({ theme }) => theme.color.light10};
 `;
 
 export const Container: typeof View = styled(View)`

@@ -1,9 +1,8 @@
-import { color, factionColor, font, size } from "@shared/config";
+import { factionColor } from "@shared/config";
 import type { FC } from "react";
 import { View } from "react-native";
 import type { TextProps, ViewProps } from "react-native";
 
-import { Alegreya } from "@assets/fonts";
 import { GameText } from "@modules/core/theme/shared/ui/GameText";
 import { ThemeFactionFontIcon } from "@modules/core/theme/shared/ui/faction/ThemeFactionFontIcon";
 import { TouchableOpacity } from "@modules/core/touch/shared/ui";
@@ -26,9 +25,6 @@ export type TextWithFaction = ElementWithFaction<TextProps>;
 const getBackgroundColor = (faction: Faction) =>
 	factionColor[faction].darkBackground;
 
-const textColor = color.light15;
-const borderRadius = size.borderRadius.default;
-
 export const Background: typeof FactionSVGPattern = styled(FactionSVGPattern)`
   position: absolute;
   z-index: 1;
@@ -41,63 +37,65 @@ export const Background: typeof FactionSVGPattern = styled(FactionSVGPattern)`
 `;
 
 export const Container: typeof View = styled(View)`
-  border-radius: ${borderRadius}px;
+  border-radius: ${({ theme }) => theme.size.borderRadius.default}px;
 `;
 
 export const Header: ViewWithFaction = styled(View)`
-  ${({ faction }: PropsWithFaction) => css`
+  ${({ faction, theme }) => css`
     background-color: ${getBackgroundColor(faction)};
+    border-radius: ${theme.size.borderRadius.default}px ${theme.size.borderRadius.default}px 0px 0px;
+    gap: ${theme.size.gap.medium}px;
   `}
-  border-radius: ${borderRadius}px ${borderRadius}px 0px 0px;
   position: relative;
   overflow: hidden;
   flex-direction: row;
   align-items: center;
-  gap: ${size.gap.medium}px;
   height: 55px;
 `;
 
 export const Body: ViewWithFaction = styled(View)`
   flex: 1;
-  
-  border-radius: 0px 0px ${borderRadius}px ${borderRadius}px;
-  ${({ faction }: PropsWithFaction) => css`
+  ${({ faction, theme }) => css`
     background-color: ${getBackgroundColor(faction)};
+    border-radius: 0px 0px ${theme.size.borderRadius.default}px ${theme.size.borderRadius.default}px;
   `}
   padding: 0 2px 2px 2px;
 `;
 
 export const Content: typeof View = styled(View)`
   flex: 1;
-  
-  border-radius: ${borderRadius}px;
-  background-color: ${color.dark30};
-  padding: ${size.gap.medium}px 0px;
-  gap: ${size.gap.default}px;
+  ${({ theme: { color, size } }) => css`
+    border-radius: ${size.borderRadius.default}px;
+    background-color: ${color.dark30};
+    padding: ${size.gap.medium}px 0px;
+    gap: ${size.gap.default}px;
+  `}
 `;
 
 export const ScrollContainer: typeof ScrollView = styled(ScrollView)`
   flex: 1;
-  padding: 0 ${size.gap.default}px;
+  padding: 0 ${({ theme }) => theme.size.gap.default}px;
 `;
 
 export const Actions: typeof Row = styled(Row)`
-  padding: 0 ${size.gap.default}px;
-  gap: ${size.gap.default}px;
+  ${({ theme: { size } }) => css`
+    padding: 0 ${size.gap.default}px;
+    gap: ${size.gap.default}px;
+  `}
 `;
 
 export const Action: typeof Button = styled(Button)`
-  background-color: ${color.dark15};
+  background-color: ${({ theme }) => theme.color.dark15};
   flex: 1;
 `;
 
 type PrimaryActionProps = ButtonProps & PropsWithFaction;
 
-export const PrimaryAction: FC<PrimaryActionProps> = styled(Button)`
+export const PrimaryAction = styled(Button)<PrimaryActionProps>`
   flex: 1;
   position: relative;
   overflow: hidden;
-  ${({ faction }: PropsWithFaction) => css`
+  ${({ faction }) => css`
     background-color: ${getBackgroundColor(faction)};
   `}
 `;
@@ -112,7 +110,7 @@ export const Icon: typeof ThemeFactionFontIcon = styled(ThemeFactionFontIcon)`
   font-size: 32px;
   line-height: 32px;
   width: 32px;
-  color: ${textColor};
+  color: ${({ theme }) => theme.color.light15};
 `;
 
 export type CloseIconProps = Omit<IconProps, "icon">;
@@ -122,7 +120,7 @@ export const CloseIcon: FC<CloseIconProps> = styled(BaseIcon).attrs({
 })`
   font-size: 20px;
   width: 20px;
-  color: ${textColor};
+  color: ${({ theme }) => theme.color.light15};
 `;
 
 export const Close: typeof TouchableOpacity = styled(TouchableOpacity)`
@@ -138,9 +136,11 @@ export const HeaderContent: typeof View = styled(View)`
   flex-direction: row;
   position: relative;
   z-index: 2;
-  padding: ${size.gap.small}px ${size.gap.medium}px;
-  padding-right: 0;
-  gap: ${size.gap.medium}px;
+  ${({ theme: { size } }) => css`
+    padding: ${size.gap.small}px ${size.gap.medium}px;
+    padding-right: 0;
+    gap: ${size.gap.medium}px;
+  `}
 `;
 
 export { View as ScrollContent };
@@ -148,30 +148,36 @@ export { View as ScrollContent };
 export const HeaderTextContent: typeof View = styled(View)`
   flex: 1;
   width: 100%;
-  padding: ${size.gap.small}px 0;
+  padding: ${({ theme }) => theme.size.gap.small}px 0;
 `;
 
 const HeaderText: typeof GameText = styled(GameText)`
-  font-size: ${font.size.default}px;
-  color: ${textColor};
+  ${({ theme: { color, font } }) => css`
+    font-size: ${font.size.default}px;
+    color: ${color.light15};
+  `}
 `;
 
-export const Title: typeof HeaderText = styled(HeaderText).attrs({
-	componentStyles: {
-		text: {
-			fontFamily: Alegreya.bold,
+export const Title: typeof HeaderText = styled(HeaderText).attrs(
+	({ theme }) => ({
+		componentStyles: {
+			text: {
+				fontFamily: theme.fontFamily.Alegreya.bold,
+			},
 		},
-	},
-})`
-  font-family: ${Alegreya.bold};
+	}),
+)`
+  font-family: ${({ theme }) => theme.fontFamily.Alegreya.bold};
 `;
 
-export const Subtitle: typeof HeaderText = styled(HeaderText).attrs({
-	componentStyles: {
-		text: {
-			fontFamily: Alegreya.italic,
+export const Subtitle: typeof HeaderText = styled(HeaderText).attrs(
+	({ theme }) => ({
+		componentStyles: {
+			text: {
+				fontFamily: theme.fontFamily.Alegreya.italic,
+			},
 		},
-	},
-})`
-  font-family: ${Alegreya.italic};
+	}),
+)`
+  font-family: ${({ theme }) => theme.fontFamily.Alegreya.italic};
 `;

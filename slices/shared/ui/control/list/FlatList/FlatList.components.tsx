@@ -2,7 +2,6 @@ import { View } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import Animated from "react-native-reanimated";
 import styled from "styled-components/native";
-import { size } from "../../../../config";
 import { Row } from "../../../grid";
 
 const scrollBarSize = 3;
@@ -28,5 +27,5 @@ export const ScrollBarIndicator: typeof Animated.View = styled(Animated.View)`
   width: ${scrollBarSize}px;
   height: 30px;
   background-color: rgba(0, 0, 0, 0.3);
-  border-radius: ${size.borderRadius.default}px;
+  border-radius: ${({ theme }) => theme.size.borderRadius.default}px;
 `;

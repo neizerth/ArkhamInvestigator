@@ -5,7 +5,6 @@ import {
 } from "@modules/board/base/entities/typography/ui";
 import type { InvestigatorTraitsProps } from "@modules/board/base/entities/typography/ui";
 import { FactionDescription } from "@modules/faction/shared/ui";
-import { size } from "@shared/config";
 import type { FC } from "react";
 import { View } from "react-native";
 import Animated from "react-native-reanimated";
@@ -71,7 +70,7 @@ export const Traits: FC<TraitsProps> = styled(InvestigatorTraits)`
 		css`
     margin-top: 5px;
   `}
-  margin-bottom: ${size.gap.small}px;
+  margin-bottom: ${({ theme }) => theme.size.gap.small}px;
 `;
 
 export const Flavor: typeof InvestigatorFlavor = styled(

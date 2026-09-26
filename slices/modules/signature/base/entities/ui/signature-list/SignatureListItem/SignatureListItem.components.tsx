@@ -1,11 +1,10 @@
-import { Alegreya } from "@assets/fonts";
 import { ThemeFactionFontIcon } from "@modules/core/theme/shared/ui";
 import {
 	TouchableOpacity,
 	type TouchableOpacityProps,
 } from "@modules/core/touch/shared/ui";
 import type { PropsWithFaction } from "@modules/faction/shared/model";
-import { color, factionColor, font, size } from "@shared/config";
+import { factionColor } from "@shared/config";
 import { Icon, IconNumber, type IconProps, Row, Text } from "@shared/ui";
 import type { FC } from "react";
 import { Platform, View } from "react-native";
@@ -17,7 +16,7 @@ const ios = Platform.OS === "ios";
 export const Container: typeof TouchableOpacity = styled(TouchableOpacity)`
 	align-items: center;
 
-	padding: 0 ${size.gap.small}px;
+	padding: 0 ${({ theme }) => theme.size.gap.small}px;
 	${({ disabled }: TouchableOpacityProps) =>
 		disabled &&
 		css`
@@ -26,13 +25,14 @@ export const Container: typeof TouchableOpacity = styled(TouchableOpacity)`
 `;
 
 export const Content: typeof Row = styled(Row)`
+  ${({ theme: { size, color } }) => css`
 	flex: 1;
 	padding: ${size.gap.small}px;
 	gap: ${size.gap.medium}px;
 	align-items: center;
 	border-bottom-width: 1px;
 	border-bottom-color: ${color.dark20};
-`;
+`}`;
 
 export const FactionIcon: typeof ThemeFactionFontIcon = styled(
 	ThemeFactionFontIcon,
@@ -43,13 +43,14 @@ export const FactionIcon: typeof ThemeFactionFontIcon = styled(
 `;
 
 export const Main: typeof View = styled(View)`
+  ${({ theme: { size } }) => css`
 	padding-top: ${size.gap.small}px;
 	gap: ${ios ? size.gap.small : 0}px;
 	flex: 1;
-`;
+`}`;
 
 export const Header: typeof Row = styled(Row)`
-	gap: ${size.gap.default}px;
+	gap: ${({ theme }) => theme.size.gap.default}px;
 `;
 
 type TitleProps = TextProps & PropsWithFaction;
@@ -58,19 +59,20 @@ export const Title: FC<TitleProps> = styled(Text)`
 	${({ faction }: TitleProps) => css`
 		color: ${factionColor[faction].darkColor};
 	`}
-	font-family: ${Alegreya.bold};
-	line-height: ${font.size.default}px;
+	font-family: ${({ theme }) => theme.fontFamily.Alegreya.bold};
+	line-height: ${({ theme }) => theme.font.size.default}px;
 `;
 
 export const Subtitle: typeof Text = styled(Text)`
-	font-family: ${Alegreya.italic};
+  ${({ theme: { font, fontFamily } }) => css`
+	font-family: ${fontFamily.Alegreya.italic};
 	font-size: ${font.size.small}px;
 	line-height: ${font.size.small}px;
-`;
+`}`;
 
 export const PackIcon: typeof Icon = styled(Icon)`
 	font-size: 14px;
-	color: ${color.light10};
+	color: ${({ theme }) => theme.color.light10};
 `;
 
 type CheckProps = IconProps & PropsWithFaction;
@@ -88,7 +90,7 @@ export const Selection: typeof View = styled(View)`
 
 export const SelectedCount: typeof IconNumber = styled(IconNumber)`
 	font-size: 18px;
-	color: ${color.light10};
+	color: ${({ theme }) => theme.color.light10};
 `;
 
 export const MultipleSelection: typeof View = styled(View)`
@@ -97,5 +99,5 @@ export const MultipleSelection: typeof View = styled(View)`
 	border-radius: 15px;
 	align-items: center;
 	justify-content: center;
-	background-color: ${color.dark20};
+	background-color: ${({ theme }) => theme.color.dark20};
 `;

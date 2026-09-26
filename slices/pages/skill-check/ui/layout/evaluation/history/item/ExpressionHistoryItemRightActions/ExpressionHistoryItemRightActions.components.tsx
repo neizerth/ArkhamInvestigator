@@ -1,4 +1,3 @@
-import { color, size } from "@shared/config";
 import { View } from "react-native";
 import Animated from "react-native-reanimated";
 import styled from "styled-components/native";
@@ -13,13 +12,13 @@ export const Container: typeof Animated.View = styled(Animated.View)`
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  padding-left: ${size.gap.default}px;
+  padding-left: ${({ theme }) => theme.size.gap.default}px;
 `;
 
 export const Separator: typeof View = styled(View)`
   width: 1px;
   height: 30px;
-  background-color: ${color.dark30};
+  background-color: ${({ theme }) => theme.color.dark30};
 `;
 export const Action: typeof ExpressionHistoryItemAction = styled(
 	ExpressionHistoryItemAction,

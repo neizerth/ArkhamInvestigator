@@ -1,4 +1,3 @@
-import { font } from "@shared/config";
 import { Text } from "@shared/ui";
 import { View } from "react-native";
 import styled from "styled-components/native";
@@ -11,6 +10,6 @@ export const Container = styled(View)`
 `;
 
 export const Count = styled(Text)`
-  font-size: ${font.size.medium}px;
+  font-size: ${({ theme }) => theme.font.size.medium}px;
   text-align: right;
 `;

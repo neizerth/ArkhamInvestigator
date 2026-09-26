@@ -1,28 +1,29 @@
-import { color, size } from "@shared/config";
 import {} from "@shared/ui";
 import { Select as BaseSelect, Icon, Row, Text } from "@shared/ui";
-import styled from "styled-components/native";
+import styled, { css } from "styled-components/native";
 
 export const Select: typeof BaseSelect = styled(BaseSelect)`
+  ${({ theme: { color } }) => css`
   background-color: ${color.dark30};
   border: 1px solid ${color.dark20};
-`;
+`}`;
 
 export const FFG: typeof Icon = styled(Icon)`
-  color: ${color.ffg.light};
+  color: ${({ theme }) => theme.color.ffg.light};
 `;
 
 export const EnIcon: typeof Icon = styled(Icon)`
-  color: ${color.gray20};
+  color: ${({ theme }) => theme.color.gray20};
   text-align: center;
 `;
 
 export const Item: typeof Row = styled(Row)`
+  ${({ theme: { size } }) => css`
   padding: ${size.gap.small}px ${size.gap.default}px;
   gap: ${size.gap.small}px;
   align-items: center;
   min-height: 48px;
-`;
+`}`;
 
 export const ItemText: typeof Text = styled(Text)`
   flex: 1;
@@ -30,7 +31,7 @@ export const ItemText: typeof Text = styled(Text)`
 `;
 
 export const ItemIcon: typeof Icon = styled(Icon)`
-  color: ${color.light10};
+  color: ${({ theme }) => theme.color.light10};
   text-align: center;
   width: 24px;
 `;

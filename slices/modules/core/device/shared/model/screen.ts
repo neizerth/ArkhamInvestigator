@@ -8,5 +8,3 @@ export type DeviceBreakpoints = Record<
 	DeviceType,
 	Record<BreakpointSize, number>
 >;
-
-export type DeviceOrientation = "landscape" | "portrait";

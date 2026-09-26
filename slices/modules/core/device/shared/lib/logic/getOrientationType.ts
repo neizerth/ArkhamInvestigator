@@ -1,6 +1,6 @@
 import { orientations } from "@shared/config";
-import type { DeviceOrientation } from "@shared/model";
 import type * as ScreenOrientation from "expo-screen-orientation";
+import type { DeviceOrientation } from "../../model";
 
 type OrientationType = DeviceOrientation;
 

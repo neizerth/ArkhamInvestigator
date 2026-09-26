@@ -68,7 +68,6 @@ export const localeComponentStyles: KeyConfig<ComponentStyleMap> = {
 		},
 	},
 	zh: zhComponentStyles,
-	"zh-cn": zhComponentStyles,
 };
 
 type GetComponentStylesOptions = {
@@ -133,7 +132,6 @@ export const getInvestigatorTextStyle = ({
 			},
 		},
 		zh: zhComponentStyles,
-		"zh-cn": zhComponentStyles,
 	});
 
 	const componentStyles = getComponents(language) as ComponentStyleMap;
