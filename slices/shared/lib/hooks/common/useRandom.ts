@@ -1,3 +1,4 @@
+import type { Interval } from "@shared/model";
 import { random } from "mathjs";
 import { useCallback, useEffect, useRef, useState } from "react";
 
@@ -15,7 +16,7 @@ export const useRandom = <T>({
 	duration,
 	enabled = true,
 }: Options<T>) => {
-	const interval = useRef<number | null>(null);
+	const interval = useRef<Interval | null>(null);
 	const { length } = data;
 	const getIndex = useCallback(() => {
 		return createRandomIndex(length);

@@ -1,3 +1,4 @@
+import type { Timeout } from "@shared/model";
 import { forwardRef, useCallback, useRef, useState } from "react";
 import type {
 	FlatListProps as BaseListProps,
@@ -65,7 +66,7 @@ export const FlatList = forwardRef<BaseList, FlatListProps<any>>(
 			[onContentSizeChangeProp],
 		);
 
-		const opacityTimeout = useRef<number>(null);
+		const opacityTimeout = useRef<Timeout>(null);
 
 		const onScroll: ScrollCallback = useCallback(
 			(e) => {

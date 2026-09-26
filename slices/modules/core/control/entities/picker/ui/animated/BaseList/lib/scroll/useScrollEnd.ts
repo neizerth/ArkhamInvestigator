@@ -1,4 +1,5 @@
 import type { PickerScrollEvent } from "@modules/core/control/entities/picker/model";
+import type { Timeout } from "@shared/model";
 import { useCallback, useRef } from "react";
 import type { BaseListProps } from "../../model";
 
@@ -11,7 +12,7 @@ export function useScrollEnd<T>(props: BaseListProps<T>) {
 		onMomentumScrollEnd: onMomentumScrollEndProp,
 		onScroll: onScrollProp,
 	} = props;
-	const scrollEndTimeout = useRef<number | null>(null);
+	const scrollEndTimeout = useRef<Timeout | null>(null);
 
 	const delayScrollEnd = useCallback(() => {
 		if (!onLastScroll) {

@@ -3,7 +3,6 @@ import {
 	type ReactNode,
 	memo,
 	useEffect,
-	useRef,
 	useState,
 } from "react";
 import * as C from "./Delay.components";
@@ -19,18 +18,10 @@ const DelayComponent = ({
 	fallback = <C.Loader />,
 }: DelayProps) => {
 	const [show, setShow] = useState(false);
-	const timeoutRef = useRef<number | null>(null);
 
 	useEffect(() => {
-		if (timeoutRef.current) {
-			clearTimeout(timeoutRef.current);
-		}
-		timeoutRef.current = setTimeout(() => setShow(true), delayMs);
-		return () => {
-			if (timeoutRef.current) {
-				clearTimeout(timeoutRef.current);
-			}
-		};
+		const timeout = setTimeout(() => setShow(true), delayMs);
+		return () => clearTimeout(timeout);
 	}, [delayMs]);
 
 	if (!show) {

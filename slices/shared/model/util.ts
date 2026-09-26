@@ -36,3 +36,6 @@ export type GenericFunction = (...args: any) => any;
 export type ReturnAwaited<T extends GenericFunction> = Awaited<ReturnType<T>>;
 
 export type MaybePromise<T> = T | Promise<T>;
+
+export type Timeout = ReturnType<typeof setTimeout>;
+export type Interval = ReturnType<typeof setInterval>;

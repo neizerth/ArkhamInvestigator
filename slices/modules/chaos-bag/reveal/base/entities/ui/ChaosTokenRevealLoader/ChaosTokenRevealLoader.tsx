@@ -1,4 +1,5 @@
 import { useFadeAnimation } from "@shared/lib";
+import type { Interval } from "@shared/model";
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { ViewProps } from "react-native";
 import * as C from "./ChaosTokenRevealLoader.components";
@@ -21,7 +22,7 @@ export const ChaosTokenRevealLoader = ({
 	const { frameDuration, valuePerFrame } = getRevealAnimation(duration);
 	const [progress, setProgress] = useState(0);
 
-	const interval = useRef<number>(null);
+	const interval = useRef<Interval>(null);
 
 	const progressStep = useCallback(() => {
 		setProgress((value) => Math.min(Math.round(value + valuePerFrame), 100));

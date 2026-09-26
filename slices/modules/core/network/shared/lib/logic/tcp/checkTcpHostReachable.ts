@@ -1,5 +1,6 @@
 import { tcpLog } from "@modules/core/log/shared/config";
 import { seconds } from "@shared/lib";
+import type { Timeout } from "@shared/model";
 import TcpSocket from "react-native-tcp-socket";
 import { TCP_PORT } from "../../../config";
 
@@ -12,7 +13,7 @@ export function checkTcpHostReachable(host: string): Promise<boolean> {
 		let settled = false;
 		const conn = { established: false };
 		const watchdog = {
-			id: undefined as ReturnType<typeof setTimeout> | undefined,
+			id: undefined as Timeout | undefined,
 		};
 
 		const socket = TcpSocket.createConnection(
