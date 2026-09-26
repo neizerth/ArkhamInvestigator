@@ -17,16 +17,16 @@ appId: ${APP_ID}
 - extendedWaitUntil:
     visible: "Choose an Investigator"
     timeout: 30000
-# the first two cards of the default faction
+# Roland Banks and Daisy Walker, the first two investigators of the first chapter
 - tapOn:
-    point: "18%,30%"
+    id: "signature-01001"
 - runFlow:
     when:
       visible: "Okay"
     commands:
       - tapOn: "Okay"
 - tapOn:
-    point: "50%,30%"
+    id: "signature-02001"
 - runFlow:
     when:
       visible: "Okay"

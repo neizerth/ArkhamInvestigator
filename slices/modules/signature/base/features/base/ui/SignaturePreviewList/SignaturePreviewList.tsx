@@ -46,6 +46,7 @@ export const SignaturePreviewList = ({
 						return (
 							<SignaturePreview
 								key={group.id}
+								testID={`signature-${signature.code}`}
 								onPress={toggleSelected(group)}
 								faction={signature.faction_code}
 								code={signature.code}

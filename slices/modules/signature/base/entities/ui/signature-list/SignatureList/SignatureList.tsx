@@ -60,6 +60,7 @@ export const SignatureList = ({
 						return (
 							<C.Item
 								key={group.id}
+								testID={`signature-${signature.code}`}
 								onPress={toggleSelected(group)}
 								signature={signature}
 								selected={selected.includes(signature.code)}

@@ -55,7 +55,7 @@
 		"expo:clear": "expo start -c",
 		"pod:install": "cd ios && pod install",
 		"postinstall": "patch-package",
-		"e2e": "MAESTRO_CLI_NO_ANALYTICS=1 MAESTRO_CLI_ANALYSIS_NOTIFICATION_DISABLED=true maestro test -e APP_ID=${APP_ID:-com.arkhaminvestigator.dev} e2e"
+		"e2e": "MAESTRO_CLI_NO_ANALYTICS=1 MAESTRO_CLI_ANALYSIS_NOTIFICATION_DISABLED=true maestro --platform android ${E2E_DEVICE:+--device $E2E_DEVICE} test -e APP_ID=${APP_ID:-com.arkhaminvestigator.dev} e2e"
 	},
 	"jest": {
 		"preset": "jest-expo",

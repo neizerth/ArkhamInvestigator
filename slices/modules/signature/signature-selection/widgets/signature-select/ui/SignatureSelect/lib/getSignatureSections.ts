@@ -1,4 +1,3 @@
-import { excludeSignatureGroupsByChapter as excludeByChapter } from "@modules/signature/base/shared/lib";
 import { splitIntoGroups } from "@shared/lib/util/collections";
 import type { FactionFilterType } from "@shared/model";
 import type { InvestigatorSignatureGroup } from "arkham-investigator-data";
@@ -40,15 +39,9 @@ export const getSignatureSections = ({
 
 	const official = filtered.filter(propEq(true, "official"));
 
-	const chapter1 = excludeByChapter({
-		signatureGroups: official,
-		chapter: 1,
-	});
+	const chapter1 = filtered.filter(({ chapter }) => chapter === 1);
 
-	const chapter2 = excludeByChapter({
-		signatureGroups: official,
-		chapter: 2,
-	});
+	const chapter2 = official.filter(({ chapter }) => chapter === 2);
 
 	const showChapter1Title = chapter2.length > 0;
 

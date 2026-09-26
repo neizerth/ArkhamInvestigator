@@ -38,7 +38,7 @@ function* worker() {
 	const skin: ReturnType<typeof selectCurrentSkin> =
 		yield select(selectCurrentSkin);
 
-	const code = signature.linked_code ?? signature.code;
+	const code = group.code;
 	const signatureGroupId = group.id;
 
 	const selection: SelectedSignature = {

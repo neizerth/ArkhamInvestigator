@@ -34,9 +34,9 @@ appId: ${APP_ID}
             - extendedWaitUntil:
                 visible: "Choose an Investigator"
                 timeout: 30000
-            # first investigator card of the default faction
+            # Roland Banks, whose stats every flow expects
             - tapOn:
-                point: "18%,30%"
+                id: "signature-01001"
             - runFlow:
                 when:
                   visible: "Okay"
