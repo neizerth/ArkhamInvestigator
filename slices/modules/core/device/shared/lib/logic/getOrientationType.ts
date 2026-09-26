@@ -2,13 +2,13 @@ import { orientations } from "@shared/config";
 import type { DeviceOrientation } from "@shared/model";
 import type * as ScreenOrientation from "expo-screen-orientation";
 
-type OrientationType = DeviceOrientation | "default";
+type OrientationType = DeviceOrientation;
 
 export const getOrientationType = (
 	orientation?: ScreenOrientation.Orientation,
-): OrientationType => {
+): OrientationType | undefined => {
 	if (!orientation) {
-		return "default";
+		return;
 	}
 	if (orientations.landscape.includes(orientation)) {
 		return "landscape";
@@ -16,5 +16,5 @@ export const getOrientationType = (
 	if (orientations.portrait.includes(orientation)) {
 		return "portrait";
 	}
-	return "default";
+	return;
 };

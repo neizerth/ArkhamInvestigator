@@ -15,7 +15,7 @@ export const OrienatationFragment = (props: OrienatationFragmentProps) => {
 	const onlyOrientations = collect(only);
 	const exceptOrientations = collect(except);
 
-	if (type === "default") {
+	if (!type) {
 		return children;
 	}
 

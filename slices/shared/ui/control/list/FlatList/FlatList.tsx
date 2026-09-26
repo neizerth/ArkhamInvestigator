@@ -65,7 +65,7 @@ export const FlatList = forwardRef<BaseList, FlatListProps<any>>(
 			[onContentSizeChangeProp],
 		);
 
-		const opacityTimeout = useRef<NodeJS.Timeout>(null);
+		const opacityTimeout = useRef<number>(null);
 
 		const onScroll: ScrollCallback = useCallback(
 			(e) => {

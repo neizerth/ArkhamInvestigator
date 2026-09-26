@@ -21,7 +21,7 @@ export const ChaosTokenRevealLoader = ({
 	const { frameDuration, valuePerFrame } = getRevealAnimation(duration);
 	const [progress, setProgress] = useState(0);
 
-	const interval = useRef<NodeJS.Timeout>(null);
+	const interval = useRef<number>(null);
 
 	const progressStep = useCallback(() => {
 		setProgress((value) => Math.min(Math.round(value + valuePerFrame), 100));

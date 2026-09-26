@@ -16,8 +16,7 @@
 		"**/*.tsx",
 		".expo/types/**/*.ts",
 		"expo-env.d.ts",
-		"declarations.d.ts",
-		"petrovich.d.ts",
+		"declarations/**/*.d.ts",
 		"modules/**/*.ts",
 		"modules/**/*.tsx"
 	]

@@ -6,7 +6,10 @@ import { DeeplinkProvider } from "@modules/core/link/app/ui";
 import { ModalProvider } from "@modules/core/modal/app/ui";
 import { ToastProvider } from "@modules/core/notifications/app/ui/ToastProvider";
 import { RouterProvider } from "@modules/core/router/app/ui";
-import { DarkTheme, ThemeProvider } from "@react-navigation/native";
+import {
+	DarkTheme,
+	ThemeProvider as RNThemeProvider,
+} from "@react-navigation/native";
 import type { PropsWithChildren } from "react";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import {
@@ -14,30 +17,33 @@ import {
 	AppStateProvider,
 	ErrorProvider,
 	StoreProvider,
+	ThemeProvider,
 } from "./providers";
 
 export const AppProvider = ({ children }: PropsWithChildren) => {
 	return (
 		<GestureHandlerRootView>
-			<StoreProvider>
-				<ToastProvider>
-					<ModalProvider>
-						<AppLoadProvider>
-							<ThemeProvider value={DarkTheme}>
-								<I18NProvider>
-									<ErrorProvider>
-										<DeeplinkProvider>
-											<AppStateProvider>
-												<RouterProvider>{children}</RouterProvider>
-											</AppStateProvider>
-										</DeeplinkProvider>
-									</ErrorProvider>
-								</I18NProvider>
-							</ThemeProvider>
-						</AppLoadProvider>
-					</ModalProvider>
-				</ToastProvider>
-			</StoreProvider>
+			<ThemeProvider>
+				<StoreProvider>
+					<ToastProvider>
+						<ModalProvider>
+							<AppLoadProvider>
+								<RNThemeProvider value={DarkTheme}>
+									<I18NProvider>
+										<ErrorProvider>
+											<DeeplinkProvider>
+												<AppStateProvider>
+													<RouterProvider>{children}</RouterProvider>
+												</AppStateProvider>
+											</DeeplinkProvider>
+										</ErrorProvider>
+									</I18NProvider>
+								</RNThemeProvider>
+							</AppLoadProvider>
+						</ModalProvider>
+					</ToastProvider>
+				</StoreProvider>
+			</ThemeProvider>
 		</GestureHandlerRootView>
 	);
 };

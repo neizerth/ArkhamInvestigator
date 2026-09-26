@@ -1,6 +1,6 @@
 import { Platform } from "react-native";
 
-let keepAliveTimer: NodeJS.Timeout | null = null;
+let keepAliveTimer: number | null = null;
 
 export function startJSKeepAwake() {
 	if (Platform.OS !== "ios") {

@@ -11,7 +11,7 @@ export function useScrollEnd<T>(props: BaseListProps<T>) {
 		onMomentumScrollEnd: onMomentumScrollEndProp,
 		onScroll: onScrollProp,
 	} = props;
-	const scrollEndTimeout = useRef<NodeJS.Timeout | null>(null);
+	const scrollEndTimeout = useRef<number | null>(null);
 
 	const delayScrollEnd = useCallback(() => {
 		if (!onLastScroll) {

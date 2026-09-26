@@ -15,7 +15,7 @@ export const useRandom = <T>({
 	duration,
 	enabled = true,
 }: Options<T>) => {
-	const interval = useRef<NodeJS.Timeout>(null);
+	const interval = useRef<number | null>(null);
 	const { length } = data;
 	const getIndex = useCallback(() => {
 		return createRandomIndex(length);

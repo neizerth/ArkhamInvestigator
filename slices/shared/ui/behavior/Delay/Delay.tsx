@@ -19,7 +19,7 @@ const DelayComponent = ({
 	fallback = <C.Loader />,
 }: DelayProps) => {
 	const [show, setShow] = useState(false);
-	const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+	const timeoutRef = useRef<number | null>(null);
 
 	useEffect(() => {
 		if (timeoutRef.current) {

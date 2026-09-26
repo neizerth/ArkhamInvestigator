@@ -19,6 +19,6 @@
 		"**/*.tsx",
 		".expo/types/**/*.ts",
 		"expo-env.d.ts",
-		"petrovich.d.ts"
+		"declarations/**/*.d.ts"
 	]
 }
