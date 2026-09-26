@@ -1,3 +1,7 @@
+# Cursor/VS Code Git UI can't render ANSI spinners — keep hook output plain.
+no_tty: true
+colors: false
+
 pre-commit:
   parallel: true
   commands:

@@ -1,7 +1,5 @@
-import type {
-	InvestigatorSignature,
-	InvestigatorSignatureGroup,
-} from "arkham-investigator-data";
+import type { InvestigatorSignatureGroup } from "arkham-investigator-data";
+import { withSignatureGroupChapter } from "./withSignatureGroupChapter";
 
 type Options = {
 	signatureGroups: InvestigatorSignatureGroup[];
@@ -13,23 +11,11 @@ export const excludeSignatureGroupsByChapter = ({
 	chapter,
 }: Options) => {
 	const hasGroupChapter = (group: InvestigatorSignatureGroup) => {
-		return group.signatures.some(hasChapter);
-	};
-	const hasChapter = (signature: InvestigatorSignature) => {
-		return signature.chapter === chapter;
+		return group.signatures.some((signature) => signature.chapter === chapter);
 	};
 
 	return signatureGroups
 		.filter(hasGroupChapter)
-		.map((signatureGroup) => {
-			const signatures = signatureGroup.signatures.filter(hasChapter);
-			const [firstSignature] = signatures;
-
-			return {
-				...signatureGroup,
-				id: firstSignature.id,
-				signatures,
-			};
-		})
+		.map(withSignatureGroupChapter(chapter))
 		.filter(({ signatures }) => signatures.length > 0);
 };
