@@ -2,6 +2,7 @@ import { REMOVE_CLIPPED_SUBVIEWS } from "@shared/config";
 import type { Defined } from "@shared/model";
 import type { InvestigatorSignatureGroup } from "arkham-investigator-data";
 import { useCallback } from "react";
+import { useTranslation } from "react-i18next";
 import type { ListRenderItemInfo, SectionListProps } from "react-native";
 import { Platform } from "react-native";
 import * as C from "./SignatureList.components";
@@ -43,6 +44,8 @@ export const SignatureList = ({
 	showIcons = false,
 	...props
 }: SignatureListProps) => {
+	const { t } = useTranslation();
+
 	const toggleSelected = useCallback(
 		(item: InvestigatorSignatureGroup) => () => onChange(item),
 		[onChange],
@@ -80,9 +83,9 @@ export const SignatureList = ({
 				return null;
 			}
 
-			return <C.SectionHeader>{title}</C.SectionHeader>;
+			return <C.SectionHeader>{t(title)}</C.SectionHeader>;
 		},
-		[],
+		[t],
 	);
 
 	return (

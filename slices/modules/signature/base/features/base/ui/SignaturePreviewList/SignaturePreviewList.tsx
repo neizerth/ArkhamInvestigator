@@ -3,6 +3,7 @@ import { REMOVE_CLIPPED_SUBVIEWS } from "@shared/config";
 import type { Defined } from "@shared/model";
 import type { InvestigatorSignatureGroup } from "arkham-investigator-data";
 import { useCallback } from "react";
+import { useTranslation } from "react-i18next";
 import { type ListRenderItemInfo, Platform } from "react-native";
 import { SignaturePreview } from "../../../../entities/ui/SignaturePreview/SignaturePreview";
 import * as C from "./SignaturePreviewList.components";
@@ -28,6 +29,7 @@ export const SignaturePreviewList = ({
 	selectedImages,
 	...props
 }: SignaturePreviewListProps) => {
+	const { t } = useTranslation();
 	const toggleSelected = useCallback(
 		(item: InvestigatorSignatureGroup) => () => onChange(item),
 		[onChange],
@@ -80,11 +82,11 @@ export const SignaturePreviewList = ({
 
 			return (
 				<C.Underline>
-					<C.Title>{title}</C.Title>
+					<C.Title>{t(title)}</C.Title>
 				</C.Underline>
 			);
 		},
-		[],
+		[t],
 	);
 
 	return (
