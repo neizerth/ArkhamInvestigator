@@ -1,3 +1,4 @@
+import type { PickerProps } from "@modules/core/control/entities/picker/model";
 import { renderWithStore } from "@shared/lib/test/createTestStore";
 import { screen } from "@testing-library/react-native";
 import { StyleSheet, type ViewStyle } from "react-native";
@@ -133,5 +134,28 @@ describe.each([
 		await renderWithStore(<Component value={123} />);
 
 		expect(fontSize("123")).toBeCloseTo(12.96, 5);
+	});
+});
+
+/**
+ * The picker item is the asset itself. Left to the picker default it would be 24, and the
+ * list would no longer line up with the background it scrolls inside.
+ */
+describe.each([
+	["health", HealthValue],
+	["sanity", SanityValue],
+	["clues", CluesValue],
+	["resources", ResourcesValue],
+	["actions", ActionsValue],
+	["doom", DoomValue],
+] as const)("%s picker", (stat, Component) => {
+	const picker = () =>
+		screen.getByTestId(`${stat}-picker`).props
+			.pickerProps as PickerProps<number>;
+
+	it("scrolls items as high as the background", async () => {
+		await renderWithStore(<Component type="picker" value={5} />);
+
+		expect(picker().itemHeight).toBe(style(`${stat}-background`).height);
 	});
 });

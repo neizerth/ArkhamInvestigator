@@ -26,6 +26,13 @@ export function useScrollBack<T>(props: BaseListProps<T>) {
 	const lastOffset = itemHeight * lastIndex;
 	const offset = useRef(0);
 	const touching = useRef(false);
+	/**
+	 * the list also reports an edge when it merely comes close to one, and it reports the
+	 * start while it still sits at offset 0 on mount — snapping back then would drag the
+	 * picker off the value it was told to show, so only a list the user has touched is
+	 * pulled back to an edge
+	 */
+	const touched = useRef(false);
 	const index = getValueIndex(props);
 
 	const scrollToStart = useScrollToIndex({
@@ -43,7 +50,7 @@ export function useScrollBack<T>(props: BaseListProps<T>) {
 			if (typeof onStartReachedProp === "function") {
 				onStartReachedProp(e);
 			}
-			if (touching.current) {
+			if (touching.current || !touched.current) {
 				return;
 			}
 			scrollToStart();
@@ -56,7 +63,7 @@ export function useScrollBack<T>(props: BaseListProps<T>) {
 			if (typeof onEndReachedProp === "function") {
 				onEndReachedProp(e);
 			}
-			if (touching.current) {
+			if (touching.current || !touched.current) {
 				return;
 			}
 			scrollToEnd();
@@ -66,11 +73,13 @@ export function useScrollBack<T>(props: BaseListProps<T>) {
 
 	const onPressIn = useCallback(() => {
 		touching.current = true;
+		touched.current = true;
 		onPressInProp?.();
 	}, [onPressInProp]);
 
 	const onScrollBeginDrag = useCallback(
 		(e: PickerScrollEvent) => {
+			touched.current = true;
 			offset.current = e.nativeEvent.contentOffset.y;
 			if (typeof onScrollBeginDragProp === "function") {
 				onScrollBeginDragProp(e);

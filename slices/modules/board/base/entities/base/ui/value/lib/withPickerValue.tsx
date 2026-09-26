@@ -3,6 +3,7 @@ import { Picker } from "@modules/core/control/entities/picker/ui";
 import type { ValueProps } from "@shared/ui";
 import { type FC, type PropsWithChildren, useMemo } from "react";
 import type { ListRenderItem, ViewProps } from "react-native";
+import { VALUE_HEIGHT } from "../config";
 
 type WithPickerValueOptions = {
 	Value: FC<ValueProps>;
@@ -29,6 +30,9 @@ export type PickerValueProps = WithPickerValueProps & {
 };
 
 const styles = {
+	// the picker item is the figure itself, the way the board sizes its own pickers:
+	// without it the list falls back to 24 and no longer lines up with the asset
+	itemHeight: VALUE_HEIGHT,
 	gap: 30,
 	contentContainerStyle: {
 		justifyContent: "center",
