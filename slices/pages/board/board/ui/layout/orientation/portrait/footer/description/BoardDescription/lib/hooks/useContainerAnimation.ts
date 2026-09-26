@@ -51,7 +51,7 @@ export const useContainerAnimation = ({
 
 	const maxValue = useMemo(() => {
 		const height = screen.width / descriptionSize.ratio;
-		return window.height - height - offsetTop + systemHeight;
+		return window.height - height - offsetTop - systemHeight;
 	}, [offsetTop, window.height, systemHeight]);
 
 	const [zIndex, setZIndex] = useState(-1);
