@@ -3,7 +3,7 @@ import { Arkhamic, FZLiBian } from "@assets/fonts";
 
 import { withLocale } from "@modules/core/i18n/shared/lib";
 import { color, font } from "@shared/config";
-import type { PrimaryButtonProps, PrimaryButtonSize } from "@shared/ui";
+import type { PrimaryButtonSize } from "@shared/ui";
 import type { FC } from "react";
 import type { TextProps as BaseTextProps } from "react-native";
 import styled, { css } from "styled-components/native";
@@ -42,7 +42,7 @@ type TextProps = BaseTextProps & {
 };
 
 export const Text: FC<TextProps> = styled(BaseText)`
-  ${({ size = "default" }: PrimaryButtonProps) => css`
+  ${({ size = "default" }: TextProps) => css`
     font-size: ${font.size.xxl * fontScale[size]}px;
   `}
 `;

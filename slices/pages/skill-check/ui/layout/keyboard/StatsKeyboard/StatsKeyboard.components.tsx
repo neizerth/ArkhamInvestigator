@@ -21,7 +21,6 @@ type ButtonProps = Omit<IconKeyboardButtonProps, "size">;
 
 export const Button: FC<ButtonProps> = styled(IconKeyboardButton).attrs({
 	size: "small",
-	type: "icon",
 })`
     align-items: center;
     width: 37px;

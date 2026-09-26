@@ -1,5 +1,4 @@
-import { ImageBackground, Row } from "@shared/ui";
-import type { ImageProps } from "react-native";
+import { ImageBackground, type ImageBackgroundProps, Row } from "@shared/ui";
 import { View } from "react-native";
 import styled, { css } from "styled-components/native";
 
@@ -8,7 +7,7 @@ export const Container: typeof View = styled(View)`
 `;
 
 export const Background: typeof ImageBackground = styled(ImageBackground)`
-  ${({ width, height }: ImageProps) => css`
+  ${({ width, height }: ImageBackgroundProps) => css`
     width: ${width}px;
     height: ${height}px;
   `}

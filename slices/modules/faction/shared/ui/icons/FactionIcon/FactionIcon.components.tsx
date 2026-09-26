@@ -1,4 +1,5 @@
-import { Icon } from "@shared/ui";
+import { type DefinedIconProps, Icon } from "@shared/ui";
+import type { FC } from "react";
 import styled from "styled-components/native";
 import { FactionIconImage } from "../FactionIconImage";
 
@@ -8,7 +9,7 @@ export const FactionImage: typeof FactionIconImage = styled(FactionIconImage)`
   height: 30px;
 `;
 
-export const NeutralIcon = styled(Icon).attrs({
+export const NeutralIcon: FC<DefinedIconProps> = styled(Icon).attrs({
 	icon: "neutral",
 })`
   font-size: 24px;

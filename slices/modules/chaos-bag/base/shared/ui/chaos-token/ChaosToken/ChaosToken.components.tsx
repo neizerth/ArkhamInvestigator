@@ -38,7 +38,7 @@ export const Background: FC<BackgroundProps> = styled(ChaosTokenBackground)`
   ${partStyle};
   z-index: 1;
   overflow: hidden;
-  ${({ size }: PartProps) => css`
+  ${({ size }: BackgroundProps) => css`
     border-radius: ${size}px;
   `}
 `;

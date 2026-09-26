@@ -6,7 +6,7 @@ import {
 	IconNumber,
 	SkillIcon,
 } from "@shared/ui";
-import { Pressable, View } from "react-native";
+import { Pressable, View, type ViewStyle } from "react-native";
 import styled from "styled-components/native";
 import { SkillOdds } from "../SkillOdds";
 
@@ -58,7 +58,9 @@ export const Diff: typeof BaseValue = styled(BaseValue)`
 
 `;
 
-export const Picker: typeof BasePicker = styled(BasePicker).attrs({
+export const Picker: typeof BasePicker = styled(BasePicker).attrs<{
+	contentContainerStyle: ViewStyle;
+}>({
 	contentContainerStyle: {
 		justifyContent: "center",
 	},

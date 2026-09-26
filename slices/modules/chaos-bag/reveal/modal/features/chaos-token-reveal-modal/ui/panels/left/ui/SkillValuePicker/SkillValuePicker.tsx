@@ -1,5 +1,6 @@
 import type {
 	PickerChangeEvent,
+	PickerItemStyleProps,
 	PickerListRenderItem,
 } from "@modules/core/control/entities/picker/model";
 import { useAppDispatch, useAppSelector } from "@shared/lib";
@@ -16,7 +17,7 @@ import { color } from "@shared/config";
 import type { InvestigatorBoardNumericStat } from "@shared/model";
 import * as C from "./SkillValuePicker.components";
 
-export type SkillValuePickerProps = ViewProps;
+export type SkillValuePickerProps = ViewProps & PickerItemStyleProps;
 
 const colors: Partial<
 	Record<

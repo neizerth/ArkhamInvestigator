@@ -15,13 +15,13 @@ import {
 	UnscaledText,
 } from "@shared/ui";
 import type { FC } from "react";
-import { type ImageProps, View } from "react-native";
+import { View } from "react-native";
 import styled, { css } from "styled-components/native";
 
 export const Background: FC<ImageBackgroundProps> = styled(
 	ThemeFactionTitleBackground,
 )`
-  ${({ width, height }: ImageProps) => css`
+  ${({ width, height }: ImageBackgroundProps) => css`
     width: ${width}px;
     height: ${height}px;
   `}

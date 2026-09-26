@@ -8,12 +8,7 @@ export const ValuePicker: typeof Picker = styled(Picker).attrs({
   
 `;
 
-export const SkillValueItem: typeof Value = styled(Value).attrs({
-	containerStyle: {
-		justifyContent: "flex-end",
-		background: "red",
-	},
-})`
+export const SkillValueItem: typeof Value = styled(Value)`
   font-size: 50px;
   width: 60px;
   text-align: right;

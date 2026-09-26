@@ -1,12 +1,9 @@
 import { ActivityIndicator } from "react-native";
 import styled from "styled-components/native";
-import { color, size } from "../../../config";
 
-export const Loader: typeof ActivityIndicator = styled(ActivityIndicator).attrs(
-	{
-		color: color.dark10,
-	},
-)`
-	padding: ${size.gap.default}px 0;
+export const Loader = styled(ActivityIndicator).attrs(({ theme }) => ({
+	color: theme.color.dark10,
+}))`
+	padding: ${({ theme }) => theme.size.gap.default}px 0;
   flex: 1;
 `;

@@ -78,7 +78,7 @@ export const RemovedLayer: FC<RemovedLayerProps> = styled(View)`
   align-items: center;
   
 
-  ${({ size }: CancelIconProps) => css`
+  ${({ size }: RemovedLayerProps) => css`
     width: ${size * 0.3}px;
     height: ${size * 0.3}px;
     border-radius: ${size * 0.3}px;

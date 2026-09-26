@@ -25,11 +25,7 @@ export const Content: typeof View = styled(View)`
   padding: ${statusBarHeight + size.gap.default}px ${size.gap.default}px 50px;
 `;
 
-export const Sections: typeof View = styled(View).attrs({
-	contentContainerStyle: {
-		gap: `${size.gap.default}px`,
-	},
-})`
+export const Sections: typeof View = styled(View)`
     gap: ${size.gap.default}px;
   `;
 

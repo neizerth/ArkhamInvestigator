@@ -1,6 +1,6 @@
 import { Alegreya } from "@assets/fonts";
 import { HealthValue, SanityValue } from "@modules/board/base/entities/base/ui";
-import { color, size } from "@shared/config";
+import { size } from "@shared/config";
 import { NumericControl, Row, Text } from "@shared/ui";
 import { View } from "react-native";
 import styled from "styled-components/native";
@@ -22,14 +22,10 @@ export const Control: typeof NumericControl = styled(NumericControl)`
   justify-content: center;
 `;
 
-export const SanityControl: typeof Control = styled(Control).attrs({
-	color: color.sanity,
-})`
+export const SanityControl: typeof Control = styled(Control)`
 `;
 
-export const HealthControl: typeof Control = styled(Control).attrs({
-	color: color.health,
-})`
+export const HealthControl: typeof Control = styled(Control)`
 `;
 
 export const Health: typeof HealthValue = styled(HealthValue)`

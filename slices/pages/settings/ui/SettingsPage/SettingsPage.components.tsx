@@ -17,12 +17,7 @@ import styled from "styled-components/native";
 import { PickerSettings } from "../PickerSettings";
 import { SoundSettings } from "../SoundSettings";
 
-export const Page: typeof BasePage = styled(BasePage).attrs({
-	contentStyle: {
-		paddingLeft: size.gap.default,
-		paddingRight: size.gap.default,
-	},
-})`
+export const Page: typeof BasePage = styled(BasePage)`
 `;
 
 export const Section: typeof BaseSection = styled(BaseSection).attrs({
