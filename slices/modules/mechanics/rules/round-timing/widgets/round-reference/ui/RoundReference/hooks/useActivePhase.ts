@@ -1,5 +1,5 @@
 import type { TimingPhase } from "@modules/mechanics/rules/round-timing/shared/model";
-import { useCallback, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import type { FlatListProps } from "react-native";
 
 type List = FlatListProps<TimingPhase>;
@@ -9,20 +9,19 @@ const minOffset = 70;
 
 export const useActivePhase = () => {
 	const [showPhase, setShowPhase] = useState(false);
+	const shownRef = useRef(false);
 
-	const onScroll: ScrollCallback = useCallback(
-		(e) => {
-			const { y } = e.nativeEvent.contentOffset;
+	const onScroll: ScrollCallback = useCallback((e) => {
+		const { y } = e.nativeEvent.contentOffset;
 
-			const show = y > minOffset;
+		const show = y > minOffset;
 
-			if (showPhase === show) {
-				return;
-			}
-			setShowPhase(show);
-		},
-		[showPhase],
-	);
+		if (shownRef.current === show) {
+			return;
+		}
+		shownRef.current = show;
+		setShowPhase(show);
+	}, []);
 
 	return [showPhase, onScroll] as [boolean, typeof onScroll];
 };

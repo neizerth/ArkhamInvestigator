@@ -19,7 +19,8 @@ export const usePhaseList = () => {
 	const { isPhaseOpen } = useTimingPhase();
 
 	const [canShowActivePhase, onScroll] = useActivePhase();
-	const [activePhase, onViewableItemsChanged] = useScrollSpy<TimingPhase>();
+	const [activePhase, onViewableItemsChanged, viewabilityConfig] =
+		useScrollSpy<TimingPhase>();
 
 	const showActivePhase =
 		activePhase && isPhaseOpen(activePhase.position) && canShowActivePhase;
@@ -42,5 +43,6 @@ export const usePhaseList = () => {
 		showActivePhase,
 		onScroll,
 		onViewableItemsChanged,
+		viewabilityConfig,
 	};
 };
