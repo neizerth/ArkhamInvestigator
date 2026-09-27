@@ -3,14 +3,15 @@
 appId: ${APP_ID}
 ---
 - runFlow: ./open-board.yaml
-# the traits line is not always rendered, so the panel is opened by its own id
+# the panel is opened by its own id; the tap goes to the notebook at the bottom of it,
+# because the middle of the panel is empty space above the notebook
 - tapOn:
     id: "board-description"
+    point: "50%,78%"
 - waitForAnimationToEnd:
     timeout: 5000
-# the panel menu has no text: settings are the fourth icon of the row
 - tapOn:
-    point: "72%,52%"
+    id: "board-description-settings"
 - extendedWaitUntil:
     visible: "Settings"
     timeout: 30000

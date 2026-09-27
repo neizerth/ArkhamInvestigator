@@ -36,7 +36,11 @@ export const BoardDescriptionTopMenu = ({
 				<C.Button icon="info" onPress={goToPage(routes.boardHelp)} />
 				<C.Button icon="stopwatch" onPress={goToPage(routes.roundReference)} />
 			</ArtworksFragment>
-			<C.Button icon="wrench" onPress={goToPage(routes.settings)} />
+			<C.Button
+				testID="board-description-settings"
+				icon="wrench"
+				onPress={goToPage(routes.settings)}
+			/>
 			<C.Button icon="repeat" onPress={showClearModal} />
 		</C.Container>
 	);
