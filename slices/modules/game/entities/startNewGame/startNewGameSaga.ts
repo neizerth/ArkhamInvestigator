@@ -2,11 +2,11 @@ import { goToPage } from "@modules/core/router/shared/lib";
 import { setGameMode, setGameStatus } from "@modules/game/shared/lib";
 import type { GameType } from "@modules/game/shared/model";
 import { routes } from "@shared/config";
-import type { Route } from "expo-router";
+import type { RoutePath } from "expo-router";
 import { put, takeEvery } from "redux-saga/effects";
 import { startNewGame } from "./startNewGame";
 
-const routeMap: Record<GameType, Route> = {
+const routeMap: Record<GameType, RoutePath> = {
 	single: routes.selectInvestigators,
 	multiplayer: routes.startMultiplayer,
 };

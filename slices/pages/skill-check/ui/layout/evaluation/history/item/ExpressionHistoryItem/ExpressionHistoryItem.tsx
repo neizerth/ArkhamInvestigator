@@ -7,6 +7,7 @@ import type { ExpressionDisplayProps } from "../../../ExpressionDisplay";
 import { selectSkillCheckHistoryItem as selectItem } from "@modules/board/skill-check/shared/lib";
 import { delay, useAppSelector } from "@shared/lib";
 import { memo, useCallback, useRef } from "react";
+import type { StyleProp, ViewStyle } from "react-native";
 import { type SharedValue, useAnimatedStyle } from "react-native-reanimated";
 import * as C from "./ExpressionHistoryItem.components";
 
@@ -50,7 +51,11 @@ export const ExpressionHistoryItem = ({
 				};
 			});
 			return (
-				<C.RightActions itemId={itemId} style={style} onRenameStart={close} />
+				<C.RightActions
+					itemId={itemId}
+					style={style as StyleProp<ViewStyle>}
+					onRenameStart={close}
+				/>
 			);
 		},
 		[itemId, close],

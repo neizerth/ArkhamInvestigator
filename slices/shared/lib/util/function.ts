@@ -1,7 +1,7 @@
 import type { GenericFunction } from "@shared/model";
 
 export const debounce = <T extends GenericFunction>(func: T, wait: number) => {
-	let timeout: number;
+	let timeout: ReturnType<typeof setTimeout>;
 	return (...args: Parameters<T>) => {
 		clearTimeout(timeout);
 		timeout = setTimeout(() => func(...args), wait);
@@ -9,7 +9,7 @@ export const debounce = <T extends GenericFunction>(func: T, wait: number) => {
 };
 
 export const throttle = <T extends GenericFunction>(func: T, wait: number) => {
-	let timeout: number;
+	let timeout: ReturnType<typeof setTimeout>;
 	let lastArgs: Parameters<T>;
 	return (...args: Parameters<T>) => {
 		lastArgs = args;

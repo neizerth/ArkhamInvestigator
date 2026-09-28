@@ -3,8 +3,9 @@
 	"compilerOptions": {
 		"strict": true,
 		"esModuleInterop": true,
-		"sourceMap": true,
+		"ignoreDeprecations": "6.0",
 		"baseUrl": ".",
+		"sourceMap": true,
 		"paths": {
 			"@assets/*": ["./assets/*"],
 			"@modules/*": ["./slices/modules/*"],

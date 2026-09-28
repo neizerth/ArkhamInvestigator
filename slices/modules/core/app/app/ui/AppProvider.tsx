@@ -9,7 +9,7 @@ import { RouterProvider } from "@modules/core/router/app/ui";
 import {
 	DarkTheme,
 	ThemeProvider as RNThemeProvider,
-} from "@react-navigation/native";
+} from "expo-router/react-navigation";
 import type { PropsWithChildren } from "react";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import {

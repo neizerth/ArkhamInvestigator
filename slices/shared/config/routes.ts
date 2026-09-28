@@ -1,7 +1,7 @@
-import type { Route } from "expo-router";
+import type { RoutePath } from "expo-router";
 import { identity } from "ramda";
 
-const r = identity<Route>;
+const r = identity<RoutePath>;
 
 export const routes = {
 	home: r("/"),

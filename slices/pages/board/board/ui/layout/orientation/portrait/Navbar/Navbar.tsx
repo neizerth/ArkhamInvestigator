@@ -4,7 +4,7 @@ import {
 	selectNavigationMode,
 } from "@modules/core/device/shared/lib";
 import { useAppSelector, useFadeAnimation } from "@shared/lib";
-import type { ViewProps } from "react-native";
+import type { StyleProp, ViewProps, ViewStyle } from "react-native";
 import * as C from "./Navbar.components";
 
 export type NavbarProps = ViewProps;
@@ -28,7 +28,7 @@ export const Navbar = (props: NavbarProps) => {
 		<C.Container
 			{...props}
 			navbarHeight={navbarHeight}
-			style={[props.style, style]}
+			style={[props.style, style] as StyleProp<ViewStyle>}
 		/>
 	);
 };
