@@ -2,7 +2,7 @@ import { sendNotification } from "@modules/core/notifications/shared/lib";
 import { getSignatureImageUrl } from "@modules/signature/base/shared/api";
 import { getSignatureImageLayout } from "@modules/signature/base/shared/lib";
 import type { ReturnAwaited } from "@shared/model";
-import * as FileSystem from "expo-file-system";
+import * as FileSystem from "expo-file-system/legacy";
 import { call, put, select, takeEvery } from "redux-saga/effects";
 import { v4 } from "uuid";
 import {

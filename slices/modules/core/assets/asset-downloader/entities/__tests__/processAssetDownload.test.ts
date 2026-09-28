@@ -43,7 +43,7 @@ const mockFileSystem = {
 	deleteAsync: jest.fn(),
 };
 
-jest.mock("expo-file-system", () => mockFileSystem);
+jest.mock("expo-file-system/legacy", () => mockFileSystem);
 jest.mock("@shared/lib", () =>
 	require("@shared/lib/test/mocks").sharedLibMock(),
 );

@@ -1,5 +1,5 @@
 import { getSignatureImageUrl } from "@modules/signature/base/shared/api";
-import * as FileSystem from "expo-file-system";
+import * as FileSystem from "expo-file-system/legacy";
 import type { SignatureImageFile } from "./getSignatureImageFiles";
 
 const exists = async (file: SignatureImageFile) => {

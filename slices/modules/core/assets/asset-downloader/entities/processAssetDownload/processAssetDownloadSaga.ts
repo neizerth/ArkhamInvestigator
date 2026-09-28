@@ -1,7 +1,7 @@
 import { deviceAppStateChanged } from "@modules/core/device/shared/lib";
 import { internetReachabilityChanged } from "@modules/core/network/shared/lib";
 import type { ReturnAwaited } from "@shared/model";
-import * as FileSystem from "expo-file-system";
+import * as FileSystem from "expo-file-system/legacy";
 import { Platform } from "react-native";
 import { END, type Channel as SagaChannel } from "redux-saga";
 import {

@@ -1,4 +1,4 @@
-import * as FileSystem from "expo-file-system";
+import * as FileSystem from "expo-file-system/legacy";
 import type { LogFile } from "../model/log";
 
 const LOG_PREFIX = "logs_";

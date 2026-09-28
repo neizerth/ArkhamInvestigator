@@ -1,5 +1,5 @@
 import type { ReturnAwaited } from "@shared/model";
-import * as FileSystem from "expo-file-system";
+import * as FileSystem from "expo-file-system/legacy";
 import { call } from "ramda";
 import { takeEvery } from "redux-saga/effects";
 import { removeDirectory } from "./removeDirectory";
