@@ -1,23 +1,19 @@
 import * as fontFamily from "@assets/fonts";
 import type { DeviceOrientationInfo } from "@modules/core/device/shared/model";
 import { activeOpacity, color, font, size } from "@shared/config";
+import type { AppTheme } from "@shared/model";
+import { Platform } from "react-native";
 
-type AppTheme = {
-	color: typeof color;
-	font: typeof font;
-	fontFamily: typeof fontFamily;
-	size: typeof size;
-	activeOpacity: typeof activeOpacity;
+type Options = {
 	orientation: DeviceOrientationInfo;
 };
 
-export const getAppTheme = (
-	orientation: DeviceOrientationInfo = {},
-): AppTheme => ({
+export const getAppTheme = (options: Options): AppTheme => ({
 	color,
 	font,
 	fontFamily,
 	size,
 	activeOpacity,
-	orientation,
+	os: Platform.OS,
+	...options,
 });

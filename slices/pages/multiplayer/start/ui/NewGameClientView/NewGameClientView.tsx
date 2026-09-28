@@ -44,6 +44,7 @@ export const NewGameClientView = (props: NewGameClientViewProps) => {
 	return (
 		<C.Container {...props}>
 			<C.CodeInput
+				testID="multiplayer-client-code-input"
 				placeholder={t`multiplayer.code`}
 				onChangeText={onChangeCode}
 				keyboardType="ascii-capable"
@@ -51,12 +52,14 @@ export const NewGameClientView = (props: NewGameClientViewProps) => {
 				maxLength={8}
 			/>
 			<C.Action
+				testID="multiplayer-client-connect"
 				text={t`multiplayer.connect`}
 				icon="right-arrow"
 				onPress={onApplyCode}
 				disabled={!code || !isCodeValid}
 			/>
 			<C.Checkbox
+				testID="multiplayer-client-auto-discover"
 				label={t`network.autoDiscover`}
 				selector={selectNetworkDiscoveryEnabled}
 				actionCreator={setNetworkDiscoveryEnabled}

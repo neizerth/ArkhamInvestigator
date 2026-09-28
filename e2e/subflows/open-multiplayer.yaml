@@ -1,0 +1,50 @@
+# From the home screen, opens Multiplayer and sets a nickname. Single-device: does not select a
+# role (host/client), that's each flow's own job. Waits out the app's own cold-start loader first
+# (needed because a caller may have just done `launchApp: permissions: ...`, which cold-restarts
+# the app rather than resuming a warm one) — on iOS the Multiplayer button additionally needs
+# set-artwork-url.yaml run first, see its own header comment.
+#
+# CONFIRMED WORKING 2026-09-28 as part of the two-device-host.yaml live run (see
+# [[multiplayer-e2e-handoff]]) — the "Start a new game?" confirm dialog below is real and was hit
+# live on a device with an existing single-player save.
+appId: ${APP_ID}
+---
+- extendedWaitUntil:
+    visible: "Single player|Continue"
+    timeout: 300000
+
+- tapOn:
+    id: "home-multiplayer"
+
+# Entering multiplayer from a device with an existing save prompts to confirm overwriting it. The
+# dialog takes a beat to render, so `when: visible` (checked once, immediately) can race it — wait
+# for it explicitly first, tolerating it never showing up (fresh device, no save).
+# Two emulators running concurrently on one Mac contend hard for CPU (see
+# [[multiplayer-e2e-handoff]]) — this dialog's render delay was observed anywhere from ~1s to over
+# 8s under that load, so this timeout is generous on purpose, not a tight race budget.
+#
+# REAL FLAKE FOUND+FIXED 2026-09-28 (first genuinely automated `maestro test` run of this flow):
+# under two-emulator contention the dialog rendered AFTER this wait's original 20s deadline had
+# already elapsed (~20-25s observed), so the optional wait gave up, the immediate `when: visible`
+# check right after also missed it (not yet rendered), and the flow then hard-failed on
+# multiplayer-nickname-input never appearing (it was hidden behind the still-unhandled dialog).
+# Bumped both this wait and the nickname-input wait below to comfortably clear that window.
+- extendedWaitUntil:
+    visible: "Start a new game?"
+    timeout: 60000
+    optional: true
+- runFlow:
+    when:
+      visible: "Start a new game?"
+    commands:
+      - tapOn: "Okay"
+
+- extendedWaitUntil:
+    visible:
+      id: "multiplayer-nickname-input"
+    timeout: 45000
+- tapOn:
+    id: "multiplayer-nickname-input"
+- eraseText
+- inputText: "E2E Tester"
+- hideKeyboard

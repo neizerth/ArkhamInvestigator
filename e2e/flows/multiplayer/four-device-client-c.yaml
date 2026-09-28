@@ -1,0 +1,53 @@
+# Fourth device for the 4-device variant: run this alongside three-device-host.yaml,
+# three-device-client-a.yaml, and three-device-client-b.yaml (host must additionally be told to
+# expect 3 clients — swap its "3" text assertion for "4" when running this combination) as a fourth
+# separate `maestro test` process. Just another concurrently-connected, never-disconnecting client
+# — the 3-device suite already covers the disconnect/reconnect and broadcast-except-one shapes;
+# this file's only job is proving N=4 roster/broadcast still works (no hardcoded client-count limit
+# anywhere in the roster/broadcast code — see getPayloadClientSockets' unit tests), not adding new
+# scenario coverage.
+#
+# WRITTEN, NOT LIVE-VERIFIED — see three-device-host.yaml's header (16GB RAM ceiling hit with two
+# emulators already; four was never attempted live this session).
+appId: ${APP_ID}
+---
+- runFlow: ../../subflows/open-multiplayer.yaml
+- tapOn:
+    id: "tab-client"
+- extendedWaitUntil:
+    visible:
+      id: "multiplayer-client-code-input"
+    timeout: 15000
+- tapOn:
+    id: "multiplayer-client-code-input"
+- inputText: "DVDDDGDG"
+- hideKeyboard
+- assertVisible:
+    id: "multiplayer-client-connect"
+    enabled: true
+- tapOn:
+    id: "multiplayer-client-connect"
+
+- extendedWaitUntil:
+    visible:
+      id: "signature-04001"
+    timeout: 60000
+- tapOn:
+    id: "signature-04001"
+- extendedWaitUntil:
+    visible:
+      text: "Okay"
+    timeout: 10000
+- tapOn: "Okay"
+
+- extendedWaitUntil:
+    visible:
+      id: "board-health"
+    timeout: 60000
+
+- tapOn:
+    id: "board-investigator-next"
+- extendedWaitUntil:
+    notVisible:
+      id: "health-base-value"
+    timeout: 15000

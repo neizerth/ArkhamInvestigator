@@ -1,0 +1,42 @@
+# iOS ONLY, and only needed once per fresh install/persisted-state reset. `theme.artworkUrl`
+# defaults to null on iOS (never set by the Android-only migration
+# `2025-10-31T09-56-56-set-android-assets-url.ts`, kept that way deliberately for FFG IP reasons —
+# see [[multiplayer-e2e-handoff]]). While it's null, `selectArtworksEnabled` is false and the
+# Multiplayer button on the home screen (`<ArtworksFragment>`, no `disabled`) does not render at
+# all — every multiplayer flow needs this run first on a bare iOS install.
+#
+# UNVERIFIED as of 2026-09-27: written against the source (`openArtworkModalSaga.ts`,
+# `validateArtworkUrlSaga.ts`, `HomeMenu.tsx`) but never run — both Android (no second AVD) and iOS
+# (Maestro's driver reports zero accessibility nodes on this app, root cause unconfirmed, possibly
+# New Architecture/Fabric — see memory) are blocked for actually executing ANY Maestro flow right
+# now, this one included. Run this once the platform blocker clears, before any other multiplayer
+# iOS flow. The URL below is the app's own real, already-reachable production artwork archive
+# (same one Android defaults to via EXPO_PUBLIC_ASSET_URL) — `validateArtworkUrlSaga` really fetches
+# and content-type-checks it, so a fake/placeholder URL will not pass.
+#
+# Confirming the URL and restart both actually complete needs a live run: the modal's own
+# `testUrl` fetch has no visible timeout handling on this screen, and `restartApp()` costs another
+# ~60s cold start on top of the normal one this flow already waits through twice.
+appId: ${APP_ID}
+---
+- runFlow:
+    when:
+      visible:
+        id: "home-open-artwork-modal"
+    commands:
+      - tapOn:
+          id: "home-open-artwork-modal"
+      - tapOn:
+          id: "prompt-modal-input"
+      - inputText: "https://neizerth.github.io/ArkhamInvestigatorData"
+      - tapOn:
+          id: "modal-action-set-artwork"
+      # validateArtworkUrlSaga fetches+content-type-checks the archive before accepting it, then
+      # restarts the app — this waits out both.
+      - extendedWaitUntil:
+          visible: "Continue"
+          timeout: 300000
+      - extendedWaitUntil:
+          visible:
+            id: "home-multiplayer"
+          timeout: 30000

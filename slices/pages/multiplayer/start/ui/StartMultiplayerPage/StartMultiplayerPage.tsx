@@ -79,6 +79,7 @@ export const StartMultiplayerPage = () => {
 				<C.Player>
 					<C.Nickname>
 						<C.NicknameInput
+							testID="multiplayer-nickname-input"
 							placeholder={t`network.username`}
 							fixedPlaceholder
 							value={nickname ?? ""}

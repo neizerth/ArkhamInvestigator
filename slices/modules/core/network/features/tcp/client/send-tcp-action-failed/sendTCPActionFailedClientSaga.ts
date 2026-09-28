@@ -4,11 +4,10 @@ import { sendTCPActionFailed } from "@modules/core/network/entities/lib/store/fe
 import {
 	getSendTCPActionFailedDetail,
 	getTCPServerSocket,
-	selectHostIP,
+	selectClientReconnectAllowed,
 	selectNetworkRole,
 } from "@modules/core/network/shared/lib";
 import { sendNotification } from "@modules/core/notifications/shared/lib";
-import { selectGameStatus } from "@modules/game/shared/lib";
 import { seconds } from "@shared/lib";
 import { put, select, takeEvery } from "redux-saga/effects";
 
@@ -42,15 +41,14 @@ function* worker({ payload }: ReturnType<typeof sendTCPActionFailed>) {
 		return;
 	}
 
-	const hostIP: ReturnType<typeof selectHostIP> = yield select(selectHostIP);
-	if (!hostIP) {
-		return;
-	}
-
-	const gameStatus: ReturnType<typeof selectGameStatus> =
-		yield select(selectGameStatus);
-
-	if (gameStatus === "initial") {
+	// Same reconnect-eligibility rule as a dropped socket (selectClientReconnectAllowed): a send
+	// that fails while still in the lobby (gameStatus "initial" on the startMultiplayer route) must
+	// retry too, not give up — a failed send there is not meaningfully different from a dropped
+	// socket there. Previously this checked gameStatus === "initial" on its own and always gave up,
+	// which was the opposite of the dropped-socket behavior for the identical lobby state.
+	const reconnectAllowed: ReturnType<typeof selectClientReconnectAllowed> =
+		yield select(selectClientReconnectAllowed);
+	if (!reconnectAllowed) {
 		return;
 	}
 

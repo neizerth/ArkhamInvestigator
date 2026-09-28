@@ -1,0 +1,62 @@
+# Client B of the 3-device suite — the "stays connected the whole time" client, used to verify
+# broadcast/roster correctness stays intact while client-a disconnects/reconnects (see
+# three-device-client-a.yaml). Run alongside three-device-host.yaml and three-device-client-a.yaml
+# as separate `maestro test` processes.
+#
+# WRITTEN, NOT LIVE-VERIFIED (see three-device-host.yaml's header for why).
+appId: ${APP_ID}
+---
+- runFlow: ../../subflows/open-multiplayer.yaml
+- tapOn:
+    id: "tab-client"
+- extendedWaitUntil:
+    visible:
+      id: "multiplayer-client-code-input"
+    timeout: 15000
+- tapOn:
+    id: "multiplayer-client-code-input"
+- inputText: "DVDDDGDG"
+- hideKeyboard
+- assertVisible:
+    id: "multiplayer-client-connect"
+    enabled: true
+- tapOn:
+    id: "multiplayer-client-connect"
+
+- extendedWaitUntil:
+    visible:
+      id: "signature-03001"
+    timeout: 60000
+- tapOn:
+    id: "signature-03001"
+- extendedWaitUntil:
+    visible:
+      text: "Okay"
+    timeout: 10000
+- tapOn: "Okay"
+
+- extendedWaitUntil:
+    visible:
+      id: "board-health"
+    timeout: 60000
+
+# First broadcast check (host's first health tap, see three-device-host.yaml).
+- tapOn:
+    id: "board-investigator-next"
+- extendedWaitUntil:
+    notVisible:
+      id: "health-base-value"
+    timeout: 15000
+
+# Second broadcast check: made by the host WHILE client-a is disconnected (see
+# three-device-host.yaml + three-device-client-a.yaml) — this must still land here promptly. This
+# is the actual point of the 3-device suite: one dead client must not block or delay delivery to a
+# still-live one (targeted `except`-based delivery in getPayloadClientSockets, not a naive
+# broadcast-and-wait-for-all-acks that could stall on the dead socket). Asserting the screen is
+# still alive and responsive here (rather than a second numeric diff, which would need a finer
+# testID than health-base-value's simple visible/not-visible toggle) is the honest bar this file can
+# check without more granular stat testIDs.
+- extendedWaitUntil:
+    visible:
+      id: "board-health"
+    timeout: 30000

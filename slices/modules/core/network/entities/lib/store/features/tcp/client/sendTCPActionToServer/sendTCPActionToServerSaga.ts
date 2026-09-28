@@ -113,39 +113,70 @@ function* worker(actionArg: Action): Generator {
 
 type CloseableChannel<T> = TakeableChannel<T> & { close: () => void };
 
-function* processRequests(requestChan: CloseableChannel<Action>): Generator {
+const isAckRequest = (action: unknown): action is Action =>
+	sendTCPActionToServer.match(action) &&
+	tcpActionReceived.match(action.payload.action);
+
+const isBusinessRequest = (action: unknown): action is Action =>
+	sendTCPActionToServer.match(action) &&
+	!tcpActionReceived.match(action.payload.action);
+
+/** ACKs fork immediately: fire-and-forget, must never wait behind a business action's retries. */
+function* processAcks(ackChan: CloseableChannel<Action>): Generator {
 	while (true) {
-		tcpLog.info("client: processing request");
-		const action: Action = yield take(requestChan);
-		if (!action) {
-			tcpLog.info("client: no action to process");
-			return;
-		}
+		const action: Action = yield take(ackChan);
+		if (!action) return;
 		yield fork(worker, action);
 	}
 }
 
+/**
+ * Business actions are `call`ed (awaited), not forked, on their OWN channel: this genuinely
+ * serializes them one at a time, including their retries, so a later action can no longer overtake
+ * an earlier one still mid-retry — same C3 fix (audit/multiplayer.md) applied 2026-09-27 to the
+ * server's mirror of this saga (sendTCPActionToClientSaga), missed here until now: this client-side
+ * saga had the identical `fork`-per-action bug for the client-to-host direction.
+ */
+function* processBusinessRequests(
+	businessChan: CloseableChannel<Action>,
+): Generator {
+	while (true) {
+		tcpLog.info("client: processing request");
+		const action: Action = yield take(businessChan);
+		if (!action) {
+			tcpLog.info("client: no action to process");
+			return;
+		}
+		yield call(worker, action);
+	}
+}
+
 function* waitDisconnectAndClose(
-	requestChan: CloseableChannel<Action>,
+	channels: CloseableChannel<Action>[],
 ): Generator {
 	tcpLog.info("client: waiting for stopTCPClient");
-	yield take(stopTCPClient.match); //
+	yield take(stopTCPClient.match);
 	tcpLog.info("client: disconnecting TCP client");
-	requestChan.close();
+	for (const channel of channels) {
+		channel.close();
+	}
 }
 
 /**
- * actionChannel preserves order. On stopTCPClient, channel is closed to clear queue.
- * Loop creates a new queue after disconnect so client can send again on reconnect.
+ * Two independent channels off the same `sendTCPActionToServer` action, split by whether the inner
+ * action is an ACK: the business channel serializes strictly (see `processBusinessRequests`) while
+ * the ACK channel never blocks on it. On stopTCPClient, both channels are closed to clear their
+ * queues. Loop creates fresh channels after disconnect so the client can send again on reconnect.
  */
 export function* sendTCPActionToServerSaga() {
 	while (true) {
-		const requestChan: CloseableChannel<Action> = yield actionChannel(
-			sendTCPActionToServer.match,
-		);
+		const ackChan: CloseableChannel<Action> = yield actionChannel(isAckRequest);
+		const businessChan: CloseableChannel<Action> =
+			yield actionChannel(isBusinessRequest);
 		yield all([
-			call(processRequests, requestChan),
-			call(waitDisconnectAndClose, requestChan),
+			call(processAcks, ackChan),
+			call(processBusinessRequests, businessChan),
+			call(waitDisconnectAndClose, [ackChan, businessChan]),
 		]);
 		tcpLog.info("client: starting new queue");
 	}

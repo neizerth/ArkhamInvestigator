@@ -25,7 +25,7 @@ export const NewGameHostView = (props: NewGameHostViewProps) => {
 
 	if (!ip) {
 		return (
-			<C.NoIP>
+			<C.NoIP testID="multiplayer-host-searching-ip">
 				<C.Loader />
 				<C.NoHostIP>{t`network.searching-for-ip`}</C.NoHostIP>
 			</C.NoIP>
@@ -63,13 +63,15 @@ const Container = ({ ip, ...props }: ViewProps & { ip: string }) => {
 	return (
 		<C.Container {...props}>
 			<C.Invite>
-				<C.Code onPress={copyCode}>
+				<C.Code testID="multiplayer-host-code" onPress={copyCode}>
 					<C.CodeHeader>
 						<C.CodeLabel>{t`Code`}</C.CodeLabel>
 
 						<C.CodeIcon icon="icomoonfree-copy" />
 					</C.CodeHeader>
-					<C.CodeValue>{codePreview}</C.CodeValue>
+					<C.CodeValue testID="multiplayer-host-code-value">
+						{codePreview}
+					</C.CodeValue>
 				</C.Code>
 				<C.QRButton onPress={shareDeeplink}>
 					<C.QR value={url} logoSize={62} size={120} />
@@ -81,24 +83,32 @@ const Container = ({ ip, ...props }: ViewProps & { ip: string }) => {
 			</C.Invite>
 			<C.Info>
 				<C.ClientsInfo>
-					<C.ClientsCountText>
+					<C.ClientsCountText testID="multiplayer-host-players-count">
 						{t`multiplayer.playersCount`}: {playersCount}
 					</C.ClientsCountText>
 				</C.ClientsInfo>
 				<C.Clients>
-					<C.HostClient>
+					<C.HostClient testID="multiplayer-host-self">
 						<C.SelfIcon icon="investigator" isHostRunning={hostRunning} />
 						<C.Client>{nickname}</C.Client>
 					</C.HostClient>
 					{clients.map((client, index) => (
-						<C.Client key={client.id}>
+						<C.Client
+							key={client.id}
+							testID={`multiplayer-host-client-${client.id}`}
+						>
 							{index + 2}. {client.nickname}{" "}
 						</C.Client>
 					))}
 				</C.Clients>
 
 				{clients.length > 0 && (
-					<C.Next text={t`Next`} icon="right-arrow" onPress={startGame} />
+					<C.Next
+						testID="multiplayer-host-start-game"
+						text={t`Next`}
+						icon="right-arrow"
+						onPress={startGame}
+					/>
 				)}
 			</C.Info>
 		</C.Container>

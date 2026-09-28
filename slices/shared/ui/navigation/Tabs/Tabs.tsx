@@ -34,7 +34,12 @@ export function defaultRenderTab<T extends TabItem>({
 	const title = translate ? t(item.title) : item.title;
 
 	return (
-		<C.Tab key={item.id} selected={selected} onPress={onSelect}>
+		<C.Tab
+			key={item.id}
+			testID={`tab-${item.id}`}
+			selected={selected}
+			onPress={onSelect}
+		>
 			<C.TabTitle selected={selected}>{title}</C.TabTitle>
 		</C.Tab>
 	);

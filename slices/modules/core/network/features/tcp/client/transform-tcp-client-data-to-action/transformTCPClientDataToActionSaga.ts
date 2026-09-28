@@ -48,6 +48,12 @@ function* worker({ payload }: ReturnType<typeof tcpClientSocketDataReceived>) {
 			return;
 		}
 
+		// Looks like a plain local dispatch, but `tcpActionReceived`'s own action creator already
+		// applies `withRemoteMeta` (see tcpCommon.ts) which stamps `meta.remote = true` — that's what
+		// `sendRemoteTCPActionSaga` needs to actually forward this onto the wire via
+		// `sendTCPActionToServer`. No `createRemoteAction()` wrapper needed here (unlike the host
+		// side's reply in transformTCPServerDataToActionSaga, which also needs `targetNetworkId` to
+		// route to one specific client out of possibly several — the client only ever has one peer).
 		yield put(
 			tcpActionReceived({
 				messageId,

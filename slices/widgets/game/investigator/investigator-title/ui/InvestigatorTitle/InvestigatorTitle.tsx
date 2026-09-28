@@ -84,6 +84,7 @@ export const InvestigatorTitle = (props: InvestigatorTitleProps) => {
 					<C.TitleContainer>
 						{showArrows && (
 							<C.Left
+								testID="board-investigator-prev"
 								onPress={onPrevPress}
 								style={style.arrow}
 								compact={isLargeName}
@@ -112,6 +113,7 @@ export const InvestigatorTitle = (props: InvestigatorTitleProps) => {
 
 						{showArrows && (
 							<C.Right
+								testID="board-investigator-next"
 								onPress={onNextPress}
 								style={style.arrow}
 								compact={isLargeName}

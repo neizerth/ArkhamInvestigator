@@ -3,6 +3,7 @@ import { sendTCPActionToClient } from "@modules/core/network/entities/lib/store/
 import {
 	connectNetworkClient,
 	filterTCPIncomeAction,
+	isPrivateIPv4,
 	selectIP,
 	setIP,
 	setTCPClientSocket,
@@ -26,7 +27,12 @@ function* worker({
 
 	const ip: ReturnType<typeof selectIP> = yield select(selectIP);
 
-	if (!ip) {
+	// S5 (audit/multiplayer.md): a connecting client's self-reported hostIP is untrusted input —
+	// it is the address the client happened to reach us on, not something we can verify. Only fall
+	// back to it when we truly have no IP of our own (the hotspot case, where NetInfo has none),
+	// and only when it looks like a plausible LAN address; a malformed or non-private value would
+	// otherwise poison the invite code/QR the host shows to every other player.
+	if (!ip && hostIP && isPrivateIPv4(hostIP)) {
 		tcpLog.info("setting IP from hostIP", hostIP);
 		yield put(setIP(hostIP));
 	}

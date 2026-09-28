@@ -1,0 +1,73 @@
+# Device B / client side of the two-device suite. Run alongside two-device-host.yaml as a SEPARATE
+# `maestro test` process pinned to its own device.
+#
+# CONFIRMED WORKING END-TO-END 2026-09-28 (manually, via raw adb taps — this YAML encodes that same
+# proven sequence but has not itself been run through `maestro test` yet; see
+# [[multiplayer-e2e-handoff]] for the full manual-run writeup).
+#
+# The invite-code hand-off problem the previous draft of this file worried about is SOLVED: this
+# code is NOT read off the host's screen at all. It's the deterministic encoding of `10.0.2.2` (the
+# NAT alias every emulator has for the host machine), computed once with the app's own
+# `getHostInviteCode` logic (codeAlphabet = "DFGJLQNRSUVWYZ47") — see [[multiplayer-e2e-handoff]] for
+# the one-liner. This ONLY works when two-device-host.yaml's device has already run
+# `adb emu redir add tcp:42424:42424` (see that file's header) — without the redir, this code
+# connects to nothing and Connect silently does nothing (confirmed: no error toast, no log, no
+# visible feedback of any kind when the bridge or the role isn't right — verify the redir and the
+# tab tap below independently if this ever seems to hang).
+appId: ${APP_ID}
+---
+- runFlow: ../../subflows/open-multiplayer.yaml
+
+# Tapping this tab is what actually dispatches setNetworkRole("client") — the tab can appear
+# already selected by default (role defaults to roles[0] purely for local rendering) WITHOUT the
+# store's networkRole actually being "client" yet. Skipping this tap because the tab "looked
+# selected" was the exact dead end hit during the manual run: Connect appeared enabled and tappable,
+# tapped fine, and silently did nothing forever, because runTCPClientOnHostIPChangeSaga's role gate
+# never opened. Always tap it explicitly.
+- tapOn:
+    id: "tab-client"
+- extendedWaitUntil:
+    visible:
+      id: "multiplayer-client-code-input"
+    timeout: 15000
+- tapOn:
+    id: "multiplayer-client-code-input"
+- inputText: "DVDDDGDG"
+- hideKeyboard
+- assertVisible:
+    id: "multiplayer-client-connect"
+    enabled: true
+- tapOn:
+    id: "multiplayer-client-connect"
+
+# Confirmed live: connection establishes within ~1s of this tap once the bridge+role preconditions
+# above are actually met, so 30s here is a generous budget, not a tight one.
+- extendedWaitUntil:
+    visible:
+      id: "board-health"
+    timeout: 60000
+
+# The client lands on ITS OWN investigator's board by default (confirmed: this app renders each
+# device's own investigator first), not the host's — checking a health CHANGE made by the host
+# (two-device-host.yaml) requires switching to view the HOST's investigator first. Swipe gestures
+# don't respond to synthetic input on this screen (see [[e2e-maestro-decision]]), so use the header
+# arrow instead (`board-investigator-next`/`-prev` testID, added to InvestigatorTitle.tsx this
+# session specifically to make this check automatable — UNVERIFIED itself, added after the live
+# manual run already confirmed sync by tapping the un-tagged arrow directly).
+- tapOn:
+    id: "board-investigator-next"
+- extendedWaitUntil:
+    notVisible:
+      id: "health-base-value"
+    timeout: 15000
+
+# disconnect/reconnect check (M3-adjacent, see multiplayer-disconnect-reconnect-coverage saga
+# tests for the logic-level coverage of this same path): force-quit and relaunch, then expect the
+# client to land back in the game rather than a broken/blank state. UNVERIFIED — not exercised
+# during the live manual run (which ended after confirming stat sync, not reconnect).
+- launchApp:
+    stopApp: true
+- extendedWaitUntil:
+    visible:
+      id: "board-health"
+    timeout: 60000

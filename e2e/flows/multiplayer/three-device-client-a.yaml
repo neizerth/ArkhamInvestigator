@@ -1,0 +1,66 @@
+# Client A of the 3-device suite — the one that disconnects/reconnects mid-game to exercise the
+# host's "keep serving everyone else while one client is down" path. Run alongside
+# three-device-host.yaml and three-device-client-b.yaml as separate `maestro test` processes.
+#
+# WRITTEN, NOT LIVE-VERIFIED (see three-device-host.yaml's header — 16GB RAM ceiling hit with just
+# two emulators this session). Same invite code as every other client (DVDDDGDG / 10.0.2.2) — any
+# emulator's 10.0.2.2 reaches the SAME Mac-localhost port redir the host set up once.
+appId: ${APP_ID}
+---
+- runFlow: ../../subflows/open-multiplayer.yaml
+- tapOn:
+    id: "tab-client"
+- extendedWaitUntil:
+    visible:
+      id: "multiplayer-client-code-input"
+    timeout: 15000
+- tapOn:
+    id: "multiplayer-client-code-input"
+- inputText: "DVDDDGDG"
+- hideKeyboard
+- assertVisible:
+    id: "multiplayer-client-connect"
+    enabled: true
+- tapOn:
+    id: "multiplayer-client-connect"
+
+- extendedWaitUntil:
+    visible:
+      id: "signature-02001"
+    timeout: 60000
+- tapOn:
+    id: "signature-02001"
+- extendedWaitUntil:
+    visible:
+      text: "Okay"
+    timeout: 10000
+- tapOn: "Okay"
+
+- extendedWaitUntil:
+    visible:
+      id: "board-health"
+    timeout: 60000
+
+# See host's health tap — first broadcast check, should reach this client too.
+- tapOn:
+    id: "board-investigator-next"
+- extendedWaitUntil:
+    notVisible:
+      id: "health-base-value"
+    timeout: 15000
+
+# Disconnect: force-quit while the host and client-b keep playing (see three-device-host.yaml's
+# second health tap, made while this client is down — that update must land on client-b regardless
+# of this client's dead socket). UNVERIFIED live — logic-level coverage for the reconnect/gameStatus
+# path exists in [[multiplayer-disconnect-reconnect-coverage]], but not exercised as a real 3-device
+# scenario before this file.
+- launchApp:
+    stopApp: true
+
+# Reconnect: relaunching should reconnect automatically and land back in the running game rather
+# than a broken/blank state — same guarantee two-device-client.yaml's own reconnect step checks,
+# now with a second client (client-b) also live on the host at the same time.
+- extendedWaitUntil:
+    visible:
+      id: "board-health"
+    timeout: 60000

@@ -5,5 +5,5 @@ import { getAppTheme } from "./getAppTheme";
 export const useTheme = () => {
 	const orientation = useScreenOrientation();
 
-	return useMemo(() => getAppTheme(orientation), [orientation]);
+	return useMemo(() => getAppTheme({ orientation }), [orientation]);
 };

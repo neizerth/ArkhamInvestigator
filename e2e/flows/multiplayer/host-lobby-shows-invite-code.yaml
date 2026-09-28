@@ -1,0 +1,29 @@
+# Single-device: opens Multiplayer, selects the Host role, and checks the lobby renders a usable
+# invite code with exactly one player (self) before anyone has joined. Regression-shaped for C1
+# (audit/multiplayer.md): if deviceNetworkId collided across installs, a fresh host would already
+# show a phantom second player here even with nobody connected — this flow would catch that even
+# without a second device.
+#
+# UNVERIFIED: never run, both platforms currently blocked for ANY Maestro flow on this app — see
+# [[multiplayer-e2e-handoff]]. iOS additionally needs subflows/set-artwork-url.yaml run once first.
+appId: ${APP_ID}
+---
+- runFlow: ../../subflows/open-multiplayer.yaml
+- tapOn:
+    id: "tab-host"
+- extendedWaitUntil:
+    visible:
+      id: "multiplayer-host-code-value"
+    timeout: 15000
+# the code is 4 encoded octet-pairs separated by spaces once rendered, e.g. "DF GJ LQ NR" —
+# never empty, never the placeholder state
+- assertVisible:
+    id: "multiplayer-host-code-value"
+- assertVisible:
+    id: "multiplayer-host-self"
+- assertVisible:
+    id: "multiplayer-host-players-count"
+# "Next" only renders once a client has joined (clients.length > 0 in NewGameHostView.tsx) —
+# must NOT be visible yet with zero clients connected
+- assertNotVisible:
+    id: "multiplayer-host-start-game"

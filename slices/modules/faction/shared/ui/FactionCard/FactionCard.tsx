@@ -100,6 +100,7 @@ export const FactionCard = ({
 							<Fragment key={action.id}>
 								{action.primary ? (
 									<C.PrimaryAction
+										testID={`modal-action-${action.id}`}
 										text={action.title}
 										faction={faction}
 										icon={action.icon}
@@ -114,6 +115,7 @@ export const FactionCard = ({
 									</C.PrimaryAction>
 								) : (
 									<C.Action
+										testID={`modal-action-${action.id}`}
 										text={action.title}
 										icon={action.icon}
 										onPress={action.onPress}

@@ -120,32 +120,63 @@ function* worker(actionArg: Action): Generator {
 
 type CloseableChannel<T> = TakeableChannel<T> & { close: () => void };
 
-function* processRequests(requestChan: CloseableChannel<Action>): Generator {
+const isAckRequest = (action: unknown): action is Action =>
+	sendTCPActionToClient.match(action) &&
+	tcpActionReceived.match(action.payload.action);
+
+const isBusinessRequest = (action: unknown): action is Action =>
+	sendTCPActionToClient.match(action) &&
+	!tcpActionReceived.match(action.payload.action);
+
+/** ACKs fork immediately: fire-and-forget, must never wait behind a business action's retries. */
+function* processAcks(ackChan: CloseableChannel<Action>): Generator {
 	while (true) {
-		const action: Action = yield take(requestChan);
+		const action: Action = yield take(ackChan);
 		if (!action) return;
 		yield fork(worker, action);
 	}
 }
 
+/**
+ * Business actions are `call`ed (awaited), not forked, on their OWN channel: this genuinely
+ * serializes them one at a time, including their retries, so a later action can no longer overtake
+ * an earlier one still mid-retry (audit/multiplayer.md C3, fixed 2026-09-27 — forking let
+ * independent per-action retry loops race freely on the wire).
+ */
+function* processBusinessRequests(
+	businessChan: CloseableChannel<Action>,
+): Generator {
+	while (true) {
+		const action: Action = yield take(businessChan);
+		if (!action) return;
+		yield call(worker, action);
+	}
+}
+
 function* waitDisconnectAndClose(
-	requestChan: CloseableChannel<Action>,
+	channels: CloseableChannel<Action>[],
 ): Generator {
 	yield take(stopTCPServer.match);
-	requestChan.close();
+	for (const channel of channels) {
+		channel.close();
+	}
 }
 
 /**
- * actionChannel preserves order. On stopTCPServer, channel is closed to clear queue.
+ * Two independent channels off the same `sendTCPActionToClient` action, split by whether the
+ * inner action is an ACK: the business channel serializes strictly (see `processBusinessRequests`)
+ * while the ACK channel never blocks on it, so a stuck retry can't delay confirming an unrelated
+ * message. On stopTCPServer, both channels are closed to clear their queues.
  */
 export function* sendTCPActionToClientSaga() {
 	while (true) {
-		const requestChan: CloseableChannel<Action> = yield actionChannel(
-			sendTCPActionToClient.match,
-		);
+		const ackChan: CloseableChannel<Action> = yield actionChannel(isAckRequest);
+		const businessChan: CloseableChannel<Action> =
+			yield actionChannel(isBusinessRequest);
 		yield all([
-			call(processRequests, requestChan),
-			call(waitDisconnectAndClose, requestChan),
+			call(processAcks, ackChan),
+			call(processBusinessRequests, businessChan),
+			call(waitDisconnectAndClose, [ackChan, businessChan]),
 		]);
 	}
 }

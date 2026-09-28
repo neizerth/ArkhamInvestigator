@@ -1,0 +1,90 @@
+# Device A / host side of the two-device suite. Run alongside two-device-client.yaml as a SEPARATE
+# `maestro test` process pinned to its own device (see e2e-maestro-decision.md: `--device <serial>`,
+# never let two devices be ambiguous to Maestro).
+#
+# CONFIRMED WORKING END-TO-END 2026-09-28 (manually, via raw adb taps — this YAML encodes that same
+# proven sequence but has not itself been run through `maestro test` yet, see
+# [[multiplayer-e2e-handoff]] for the full manual-run writeup and every pitfall found along the way;
+# treat this file as "should work, not yet regression-tested as YAML").
+#
+# Prerequisites this flow assumes are already set up OUTSIDE Maestro (one-time host machine setup,
+# not per-run):
+#   1. This device is booted as a SEPARATE AVD from the client device (see [[multiplayer-e2e-handoff]]
+#      for how to clone a second AVD by hand, no avdmanager needed).
+#   2. `adb -s <this-device-serial> emu redir add tcp:42424:42424` has been run once (42424 is
+#      TCP_PORT from shared/config/common.ts) — this exposes THIS emulator's TCP server on the Mac's
+#      own localhost:42424, which the OTHER emulator reaches via 10.0.2.2. Without this redir, the
+#      client's connection attempt in two-device-client.yaml will silently never establish (no error
+#      surfaces anywhere in the app — verified this the hard way).
+#   3. Both devices have the debug APK installed fresh and `adb reverse tcp:8081 tcp:8081` run so
+#      they pick up the current Metro bundle (needed for these testIDs to exist at all).
+appId: ${APP_ID}
+---
+# Grant the location permission Maestro's way, up front — selecting the Host role below triggers a
+# REAL OS "Allow Investigator to access this device's location?" dialog on Android (same
+# ACCESS_FINE_LOCATION gate as the Zeroconf discovery UI, but it turns out choosing Host ALSO
+# triggers it). Left ungranted, multiplayer-host-code-value never appears and nothing explains why.
+- launchApp:
+    permissions:
+      location: allow
+
+- runFlow: ../../subflows/open-multiplayer.yaml
+- tapOn:
+    id: "tab-host"
+- extendedWaitUntil:
+    visible:
+      id: "multiplayer-host-code-value"
+    timeout: 15000
+- assertVisible:
+    id: "multiplayer-host-self"
+# exactly one player (self) before any client has connected — C1 regression shape, see
+# host-lobby-shows-invite-code.yaml for the single-device version of this same check
+- assertNotVisible:
+    id: "multiplayer-host-client-.*"
+
+# waits for the client-side flow to join (see two-device-client.yaml, which connects via the
+# 10.0.2.2 invite code documented in [[multiplayer-e2e-handoff]] — NOT the code this screen shows,
+# which encodes this emulator's own useless-to-others 10.0.2.x address). Confirmed live: the roster
+# updates within about a second of the client's Connect tap once the bridge and role are right, so
+# 30s here is a generous, not a tight, budget.
+- extendedWaitUntil:
+    visible:
+      id: "multiplayer-host-players-count"
+    timeout: 30000
+- assertVisible:
+    id: "multiplayer-host-start-game"
+
+# Investigator selection: confirmed working with any tile, using signature-01001 (Roland Banks) for
+# a deterministic pick. The confirm modal's primary action carries testID `modal-action-<action.id>`
+# (added this session to FactionCard.tsx) — the artwork/theme modal's own action id is unrelated;
+# this one is the generic "confirm this pick" action every investigator's modal uses.
+- tapOn:
+    id: "signature-01001"
+- extendedWaitUntil:
+    visible:
+      text: "Okay"
+    timeout: 10000
+- tapOn: "Okay"
+
+# Start only appears (and is only tappable) on the HOST once the client has also picked an
+# investigator — the client side has no Start button, just a spinner, confirmed live.
+- extendedWaitUntil:
+    visible: "Start"
+    timeout: 15000
+- tapOn: "Start"
+- extendedWaitUntil:
+    visible:
+      id: "board-health"
+    timeout: 60000
+
+# A stat change on the host's board should reach the client (see two-device-client.yaml, which
+# asserts the corresponding value on its own screen after switching to view this investigator) —
+# exercises the real TCP send/receive saga pipeline (sendTCPActionToClientSaga ->
+# transformTCPClientDataToActionSaga), not just UI. Confirmed live: a single tap decrements by 1
+# (9 -> 8) and syncs to the client's view of this same investigator within a couple seconds.
+- tapOn:
+    id: "board-health"
+- extendedWaitUntil:
+    notVisible:
+      id: "health-base-value"
+    timeout: 10000

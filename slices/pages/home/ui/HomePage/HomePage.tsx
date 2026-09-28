@@ -19,12 +19,14 @@ export const HomePage = () => {
 		<C.Container>
 			<C.Menu />
 			<Button
+				testID="home-single-player"
 				onPress={onSinglePlayer}
 				enabled={startEnabled}
 			>{t`Single player`}</Button>
 
 			<ArtworksFragment>
 				<Button
+					testID="home-multiplayer"
 					styleType="rounded"
 					enabled={startEnabled}
 					onPress={onMultiplayer}

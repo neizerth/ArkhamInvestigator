@@ -47,6 +47,7 @@ export function Prompt<A extends BaseModalAction, D extends PromptModalData<A>>(
 			<C.Content>
 				{text && <C.Text value={text} />}
 				<C.Input
+					testID="prompt-modal-input"
 					{...inputProps}
 					placeholder={placeholder}
 					defaultValue={defaultValue}

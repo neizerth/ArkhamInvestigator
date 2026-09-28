@@ -1,0 +1,37 @@
+# Single-device: opens Multiplayer, selects the Client role, and checks the real code-format
+# validation UI (isHostCodeValid.ts) — the Connect button must stay disabled for a malformed code
+# and enable only once 8 valid-alphabet characters are entered. Regression-shaped for the invite
+# code alphabet bugs already covered at unit level (inviteCode.test.ts, L2 in audit/multiplayer.md:
+# a stray 17th alphabet character used to decode to NaN and pass a length-only check) — this is the
+# UI-level companion check that the disabled state genuinely reflects that validation.
+#
+# UNVERIFIED: never run, see [[multiplayer-e2e-handoff]] for why (both platforms currently blocked
+# for any Maestro flow on this app).
+appId: ${APP_ID}
+---
+- runFlow: ../../subflows/open-multiplayer.yaml
+- tapOn:
+    id: "tab-client"
+- extendedWaitUntil:
+    visible:
+      id: "multiplayer-client-code-input"
+    timeout: 15000
+# too short: stays disabled
+- tapOn:
+    id: "multiplayer-client-code-input"
+- inputText: "DFG"
+- assertVisible:
+    id: "multiplayer-client-connect"
+    enabled: false
+# 8 chars but outside the alphabet (codeAlphabet has no digit 9, see code.ts) -> still disabled
+- eraseText
+- inputText: "99999999"
+- assertVisible:
+    id: "multiplayer-client-connect"
+    enabled: false
+# a real 8-char code built from the actual alphabet -> enabled
+- eraseText
+- inputText: "DFGJLQNR"
+- assertVisible:
+    id: "multiplayer-client-connect"
+    enabled: true

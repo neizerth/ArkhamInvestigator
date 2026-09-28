@@ -1,0 +1,29 @@
+# Single-device: toggles the Zeroconf auto-discovery checkbox on the Client screen and checks the
+# HostDiscovery section actually reacts (shows the "searching" state once enabled). Does not require
+# a real host to be on the network — only that the discovery UI itself turns on/off correctly.
+# Covers the M1/M2 audit findings (Zeroconf scan/getServices race, per-call `new Zeroconf()`
+# instances) only indirectly: those were fixed at the shared-singleton-module level and are already
+# covered by reading the source in [[multiplayer-e2e-handoff]] — this flow is purely a UI smoke
+# check that flipping the toggle drives real state, not a substitute for a real two-device
+# discovery run (still blocked, see that file).
+#
+# UNVERIFIED: never run, see [[multiplayer-e2e-handoff]]. On Android this section is additionally
+# gated by `AndroidPermissionFragment permission="ACCESS_FINE_LOCATION"` (HostDiscovery.tsx) — if
+# that permission isn't already granted on the test device/emulator, this flow will see the
+# permission-required fallback text instead of "Searching for games" and needs a permission-grant
+# step added first (not attempted here).
+appId: ${APP_ID}
+---
+- runFlow: ../../subflows/open-multiplayer.yaml
+- tapOn:
+    id: "tab-client"
+- extendedWaitUntil:
+    visible:
+      id: "multiplayer-client-auto-discover"
+    timeout: 15000
+- assertNotVisible: "Searching for games"
+- tapOn:
+    id: "multiplayer-client-auto-discover"
+- extendedWaitUntil:
+    visible: "Searching for games"
+    timeout: 10000

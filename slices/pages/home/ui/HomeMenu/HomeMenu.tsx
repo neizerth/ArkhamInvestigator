@@ -38,7 +38,10 @@ export const HomeMenu = (props: HomeMenuProps) => {
 				</C.Left>
 				<C.Right>
 					<ArtworksFragment disabled>
-						<C.Button onPress={handleOpenThemeModal}>
+						<C.Button
+							testID="home-open-artwork-modal"
+							onPress={handleOpenThemeModal}
+						>
 							<C.ThemeIcon icon="images" />
 						</C.Button>
 					</ArtworksFragment>

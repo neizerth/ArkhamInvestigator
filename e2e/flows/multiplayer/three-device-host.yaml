@@ -1,0 +1,98 @@
+# Host side of the 3-device suite. Run alongside three-device-client-a.yaml and
+# three-device-client-b.yaml as THREE SEPARATE `maestro test` processes, each pinned to its own
+# device (--device <serial>).
+#
+# WRITTEN, NOT LIVE-VERIFIED: this Mac has 16GB RAM and two Android emulators already sit at the
+# practical ceiling (see [[multiplayer-e2e-handoff]] — RAM dropped to double digits of MB free with
+# just two, even after closing every other heavy app). A third/fourth emulator was not attempted
+# live this session for that reason. This flow is written by extending the CONFIRMED WORKING
+# two-device-host.yaml recipe (same testIDs, same role-tap discipline, same location-permission
+# gate) to assert on TWO clients in the roster instead of one. Treat it as "should work" until an
+# environment with more headroom (a real device swapped in for one of the three, or more RAM) can
+# actually run it.
+appId: ${APP_ID}
+---
+- launchApp:
+    permissions:
+      location: allow
+
+- runFlow: ../../subflows/open-multiplayer.yaml
+- tapOn:
+    id: "tab-host"
+- extendedWaitUntil:
+    visible:
+      id: "multiplayer-host-code-value"
+    timeout: 15000
+- assertVisible:
+    id: "multiplayer-host-self"
+- assertNotVisible:
+    id: "multiplayer-host-client-.*"
+
+# Both clients connect concurrently (see three-device-client-a/b.yaml, both using the same
+# DVDDDGDG/10.0.2.2 invite code — every emulator's 10.0.2.2 aliases this same Mac, so N clients all
+# reach the one host-side port redir with no per-client code computation needed). Broadcast/roster
+# code has no hardcoded client-count limit (see getPayloadClientSockets' unit tests — it filters
+# over however many sockets exist), so this is exercising real N>1 capacity, not a special case.
+- extendedWaitUntil:
+    visible:
+      id: "multiplayer-host-players-count"
+    timeout: 30000
+- assertVisible:
+    text: ".*: 3"
+- extendedWaitUntil:
+    visible:
+      id: "multiplayer-host-start-game"
+    timeout: 30000
+
+- tapOn:
+    id: "signature-01001"
+- extendedWaitUntil:
+    visible:
+      text: "Okay"
+    timeout: 10000
+- tapOn: "Okay"
+
+# Start only becomes available once EVERY client has picked (see two-device-host.yaml) — with two
+# clients this means waiting for both three-device-client-a.yaml and -b.yaml to finish their picks.
+- extendedWaitUntil:
+    visible: "Start"
+    timeout: 30000
+- tapOn: "Start"
+- extendedWaitUntil:
+    visible:
+      id: "board-health"
+    timeout: 60000
+
+# Broadcast-to-all check: a stat change here should reach BOTH clients (see their own files, which
+# each assert the corresponding value after switching to view this investigator). This exercises
+# the `except`-less broadcast branch of getPayloadClientSockets/sendTCPActionToClientSaga for real,
+# not just the two-socket unit test shape.
+- tapOn:
+    id: "board-health"
+- extendedWaitUntil:
+    notVisible:
+      id: "health-base-value"
+    timeout: 10000
+
+# Give client-a time to force-quit/reconnect (see three-device-client-a.yaml's disconnect step) —
+# the host and client-b should keep working uninterrupted while client-a is down. A second stat
+# change here, made WHILE client-a is disconnected, should still land on client-b (targeted-except
+# delivery: client-a's dead socket must not block or slow delivery to the still-live client-b).
+- extendedWaitUntil:
+    visible:
+      id: "board-health"
+    timeout: 20000
+- tapOn:
+    id: "board-health"
+- extendedWaitUntil:
+    notVisible:
+      id: "health-base-value"
+    timeout: 10000
+
+# Once client-a reconnects it should reappear in the roster (still exactly 2 clients, not 3 — same
+# networkId reused, not a duplicate entry; see the reconnect saga coverage in
+# [[multiplayer-disconnect-reconnect-coverage]] for the logic-level guarantee this checks live).
+- extendedWaitUntil:
+    visible:
+      text: ".*: 3"
+    timeout: 30000

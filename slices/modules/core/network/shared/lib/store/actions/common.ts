@@ -12,7 +12,7 @@ export const internetReachabilityChanged = createAction<boolean>(
 
 type ConnectNetworkClientPayload = {
 	nickname: string;
-	hostIP: string;
+	hostIP: string | null;
 };
 
 export const connectNetworkClient = createAction(
