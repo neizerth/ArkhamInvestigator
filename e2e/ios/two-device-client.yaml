@@ -5,7 +5,7 @@ appId: ${APP_ID}
 ---
 - launchApp:
     permissions:
-      location: allow
+      location: inuse
 - extendedWaitUntil:
     visible: "Single player|Continue"
     timeout: 300000

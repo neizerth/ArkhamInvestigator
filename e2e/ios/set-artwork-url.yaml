@@ -1,0 +1,9 @@
+# iOS: sets the artwork URL once per fresh install (the Multiplayer button does not render without
+# it); a thin wrapper so that the subflow can run as a flow of its own.
+appId: ${APP_ID}
+---
+- launchApp
+- extendedWaitUntil:
+    visible: "Single player|Continue"
+    timeout: 300000
+- runFlow: ../subflows/set-artwork-url.yaml

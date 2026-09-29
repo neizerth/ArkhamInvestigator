@@ -34,7 +34,7 @@ appId: ${APP_ID}
       # validateArtworkUrlSaga fetches+content-type-checks the archive before accepting it, then
       # restarts the app — this waits out both.
       - extendedWaitUntil:
-          visible: "Continue"
+          visible: "Single player|Continue"
           timeout: 300000
       - extendedWaitUntil:
           visible:
