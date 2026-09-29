@@ -29,6 +29,8 @@ appId: ${APP_ID}
       - tapOn:
           id: "prompt-modal-input"
       - inputText: "https://neizerth.github.io/ArkhamInvestigatorData"
+      # the keyboard covers the confirm button on iOS
+      - hideKeyboard
       - tapOn:
           id: "modal-action-set-artwork"
       # validateArtworkUrlSaga fetches+content-type-checks the archive before accepting it, then

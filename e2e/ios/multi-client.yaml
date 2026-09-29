@@ -1,6 +1,6 @@
-# iOS Simulator, device B / client of the two-device suite. Run as a SEPARATE `maestro test`
-# process pinned to its own simulator, next to two-device-host.yaml on another one.
-# See that file for the prerequisites and the handshake.
+# iOS Simulator client of the 3/4-device suite: `-e NICKNAME="E2E Client A" -e SIGNATURE=signature-02001`
+# (B: signature-03001, C: signature-04001). `-e LAST=true` only for the client that answers the
+# host with the final health change (the host waits for 7). See multi-host.yaml.
 appId: ${APP_ID}
 ---
 - launchApp:
@@ -30,16 +30,14 @@ appId: ${APP_ID}
 - tapOn:
     id: "multiplayer-nickname-input"
 - eraseText
-- inputText: "E2E Client"
+- inputText: ${NICKNAME}
 - hideKeyboard
-
 - tapOn:
     id: "tab-client"
 - extendedWaitUntil:
     visible:
       id: "multiplayer-client-auto-discover"
     timeout: 15000
-# discovery may already be on (the setting is remembered): switch it on only when it is off
 # the setting is remembered between runs: the checkbox label ends with a glyph, U+F64B when it is on
 - runFlow:
     when:
@@ -56,24 +54,38 @@ appId: ${APP_ID}
 - tapOn:
     id: "multiplayer-discovered-host-E2E Host"
 
-# the host starts the game: the client gets the board
+# the host pressed Next: pick this client's investigator
+- extendedWaitUntil:
+    visible:
+      id: ${SIGNATURE}
+    timeout: 600000
+- tapOn:
+    id: ${SIGNATURE}
+- extendedWaitUntil:
+    visible: ".*Okay"
+    timeout: 10000
+- tapOn: ".*Okay"
+
 - extendedWaitUntil:
     visible:
       id: "board-health"
-    timeout: 300000
-
-# host -> client: 9 -> 8
+    timeout: 600000
+# host -> client: 9 -> 8 (the board shows the host's investigator first)
 - extendedWaitUntil:
     visible:
       id: "health-value"
       text: "8"
-    timeout: 60000
+    timeout: 120000
 
-# client -> host: 8 -> 7
-- tapOn:
-    id: "board-health"
-- extendedWaitUntil:
-    visible:
-      id: "health-value"
-      text: "7"
-    timeout: 10000
+# the last client answers the host: 8 -> 7
+- runFlow:
+    when:
+      true: ${LAST == 'true'}
+    commands:
+      - tapOn:
+          id: "board-health"
+      - extendedWaitUntil:
+          visible:
+            id: "health-value"
+            text: "7"
+          timeout: 10000
