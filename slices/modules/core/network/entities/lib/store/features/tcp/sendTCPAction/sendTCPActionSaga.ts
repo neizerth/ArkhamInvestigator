@@ -20,7 +20,10 @@ function* worker({ payload }: ReturnType<typeof sendTCPAction>) {
 		return;
 	}
 
-	const meta = omit(["remote"], action.meta);
+	// `socket` is the sender's TcpSocket that `createTCPIncomeAction` attaches to a received action:
+	// a host forwarding that action to the other clients must not serialize it (cyclic structure).
+	const incomeMeta = action.meta as typeof action.meta & { socket?: unknown };
+	const meta = omit(["remote", "socket"], incomeMeta);
 
 	// meta.messageId = envelope (this packet); action.payload is unchanged (e.g. payload.messageId for tcpActionReceived = id we confirm)
 
