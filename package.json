@@ -67,7 +67,7 @@
 			"/.claude/worktrees/"
 		],
 		"transformIgnorePatterns": [
-			"node_modules/(?!((jest-)?react-native|@react-native(-community)?)|expo(nent)?|@expo(nent)?/.*|@expo-google-fonts/.*|react-navigation|@react-navigation/.*|react-native-svg|redux-toolkit-helpers|react-redux)"
+			"node_modules/(?!((jest-)?react-native|@react-native(-community)?)|expo(nent)?|@expo(nent)?/.*|@expo-google-fonts/.*|react-navigation|@react-navigation/.*|react-native-svg|redux-toolkit-helpers|react-redux|mime/)"
 		],
 		"moduleNameMapper": {
 			"^uuid$": "<rootDir>/node_modules/uuid/dist/cjs/index.js",
