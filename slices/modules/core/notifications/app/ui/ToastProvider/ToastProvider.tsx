@@ -17,8 +17,8 @@ export const ToastProvider = ({ children }: PropsWithChildren) => {
 	const id = Platform.OS === "ios" ? (dynamicId ?? defaultId) : defaultId;
 	// The overlay is a separate native layer above the window: it is only needed to show toasts
 	// above an open modal. Mounted permanently it hides the app from iOS accessibility clients.
-	const Content =
-		Platform.OS === "ios" && dynamicId && !E2E ? FullWindowOverlay : Fragment;
+	const showFullWindowOverlay = Platform.OS === "ios" && dynamicId && !E2E;
+	const Content = showFullWindowOverlay ? FullWindowOverlay : Fragment;
 
 	return (
 		<>

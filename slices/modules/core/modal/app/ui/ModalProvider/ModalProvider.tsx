@@ -19,10 +19,10 @@ const ModalContent = ({ children }: PropsWithChildren) => {
 	// The overlay is a separate native layer above the whole window. Mounted permanently it hides
 	// the app from iOS accessibility clients (VoiceOver, XCUITest/Maestro see an empty tree), so it
 	// exists only while a modal is open.
-	if (Platform.OS !== "ios" || !overlay || !id || E2E) {
+	const bypass = Platform.OS !== "ios" || !overlay || !id || E2E;
+	if (bypass) {
 		return children;
 	}
-
 	return <FullWindowOverlay>{children}</FullWindowOverlay>;
 };
 
