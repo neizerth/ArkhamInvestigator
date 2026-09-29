@@ -223,10 +223,8 @@ RCT_EXPORT_METHOD(initialize)
 - (void)invalidate {
     NSLog(@"ChaosOddsJSIModule: invalidate called - cleaning up JSI bindings");
     
-    // CRITICAL: Mark runtime as dead and clear task storage to prevent use-after-free
-    // This ensures pollResult will return null if called after Runtime destruction
-    facebook::jsi::chaosodds::functions::markRuntimeDead();
-    
+    // The synchronous pattern keeps no task storage, so there is no runtime state to mark dead
+    // (cpp/common has no markRuntimeDead; the Android module makes the same call a no-op).
     _bridge = nil;
 }
 

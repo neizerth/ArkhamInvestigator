@@ -1,0 +1,79 @@
+# iOS Simulator, device B / client of the two-device suite. Run as a SEPARATE `maestro test`
+# process pinned to its own simulator, next to two-device-host.yaml on another one.
+# See that file for the prerequisites and the handshake.
+appId: ${APP_ID}
+---
+- launchApp:
+    permissions:
+      location: inuse
+- extendedWaitUntil:
+    visible: "Single player|Continue"
+    timeout: 300000
+- tapOn:
+    id: "home-multiplayer"
+- extendedWaitUntil:
+    visible:
+      id: "modal-action-start-new-game"
+    timeout: 60000
+    optional: true
+- runFlow:
+    when:
+      visible:
+        id: "modal-action-start-new-game"
+    commands:
+      - tapOn:
+          id: "modal-action-start-new-game"
+- extendedWaitUntil:
+    visible:
+      id: "multiplayer-nickname-input"
+    timeout: 45000
+- tapOn:
+    id: "multiplayer-nickname-input"
+- eraseText
+- inputText: "E2E Client"
+- hideKeyboard
+
+- tapOn:
+    id: "tab-client"
+- extendedWaitUntil:
+    visible:
+      id: "multiplayer-client-auto-discover"
+    timeout: 15000
+# discovery may already be on (the setting is remembered): switch it on only when it is off
+# the setting is remembered between runs: the checkbox label ends with a glyph, U+F64B when it is on
+- runFlow:
+    when:
+      notVisible:
+        id: "multiplayer-client-auto-discover"
+        text: ".*\uf64b"
+    commands:
+      - tapOn:
+          id: "multiplayer-client-auto-discover"
+- extendedWaitUntil:
+    visible:
+      id: "multiplayer-discovered-host-E2E Host"
+    timeout: 300000
+- tapOn:
+    id: "multiplayer-discovered-host-E2E Host"
+
+# the host starts the game: the client gets the board
+- extendedWaitUntil:
+    visible:
+      id: "board-health"
+    timeout: 300000
+
+# host -> client: 9 -> 8
+- extendedWaitUntil:
+    visible:
+      id: "health-value"
+      text: "8"
+    timeout: 60000
+
+# client -> host: 8 -> 7
+- tapOn:
+    id: "board-health"
+- extendedWaitUntil:
+    visible:
+      id: "health-value"
+      text: "7"
+    timeout: 10000

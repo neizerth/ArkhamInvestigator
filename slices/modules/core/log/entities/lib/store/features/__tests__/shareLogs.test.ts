@@ -4,7 +4,7 @@ import { shareLogFile } from "../shareLogs/shareLogFile";
 import { shareLogs } from "../shareLogs/shareLogs";
 import { shareLogsSaga } from "../shareLogs/shareLogsSaga";
 
-jest.mock("expo-file-system", () =>
+jest.mock("expo-file-system/legacy", () =>
 	require("@shared/lib/test/mocks").fileSystemMock(),
 );
 jest.mock("@modules/core/log/shared/lib", () => ({ getLogFiles: jest.fn() }));

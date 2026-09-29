@@ -4,7 +4,7 @@ import type {
 	InvestigatorSignatureGroup,
 	InvestigatorSkin,
 } from "arkham-investigator-data";
-import * as FileSystem from "expo-file-system";
+import * as FileSystem from "expo-file-system/legacy";
 import {
 	createSagaTester,
 	flush,
@@ -28,7 +28,7 @@ jest.mock("@shared/lib", () =>
 	require("@shared/lib/test/mocks").sharedLibMock(),
 );
 jest.mock("@shared/config", () => ({ HAVE_AVIF_SUPPORT: true }));
-jest.mock("expo-file-system", () => ({
+jest.mock("expo-file-system/legacy", () => ({
 	documentDirectory: "file:///docs/",
 	getInfoAsync: jest.fn(async (uri: string) => ({
 		exists: mockState.onDisk.has(uri.replace("file:///docs/", "")),

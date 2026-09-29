@@ -1,8 +1,8 @@
 import { getSignatureImageLayout } from "@modules/signature/base/shared/lib";
-import * as FileSystem from "expo-file-system";
+import * as FileSystem from "expo-file-system/legacy";
 import { validateImageCache } from "../validateImageCache";
 
-jest.mock("expo-file-system", () =>
+jest.mock("expo-file-system/legacy", () =>
 	require("@shared/lib/test/mocks").fileSystemMock(),
 );
 jest.mock("@modules/signature/base/shared/lib", () => ({

@@ -36,9 +36,9 @@ appId: ${APP_ID}
     id: "signature-04001"
 - extendedWaitUntil:
     visible:
-      text: "Okay"
+      text: ".*Okay"
     timeout: 10000
-- tapOn: "Okay"
+- tapOn: ".*Okay"
 
 - extendedWaitUntil:
     visible:

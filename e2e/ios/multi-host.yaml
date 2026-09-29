@@ -1,0 +1,92 @@
+# iOS Simulator host of the 3/4-device suite (`-e PLAYERS=3` or `-e PLAYERS=4`, host included).
+# Run as a SEPARATE `maestro test` process per simulator, together with PLAYERS-1 processes of
+# multi-client.yaml (each with its own NICKNAME and SIGNATURE). Simulators share the Mac's network,
+# so the clients find this host through Zeroconf discovery. Prerequisites: see two-device-host.yaml.
+appId: ${APP_ID}
+---
+- launchApp:
+    permissions:
+      location: inuse
+- extendedWaitUntil:
+    visible: "Single player|Continue"
+    timeout: 300000
+- tapOn:
+    id: "home-multiplayer"
+- extendedWaitUntil:
+    visible:
+      id: "modal-action-start-new-game"
+    timeout: 60000
+    optional: true
+- runFlow:
+    when:
+      visible:
+        id: "modal-action-start-new-game"
+    commands:
+      - tapOn:
+          id: "modal-action-start-new-game"
+- extendedWaitUntil:
+    visible:
+      id: "multiplayer-nickname-input"
+    timeout: 45000
+- tapOn:
+    id: "multiplayer-nickname-input"
+- eraseText
+- inputText: "E2E Host"
+- hideKeyboard
+- tapOn:
+    id: "tab-host"
+- extendedWaitUntil:
+    visible:
+      id: "multiplayer-host-code-value"
+    timeout: 30000
+
+# every client joined: "Players: N"
+- extendedWaitUntil:
+    visible:
+      id: "multiplayer-host-players-count"
+      text: ".*${PLAYERS}"
+    timeout: 600000
+- extendedWaitUntil:
+    visible:
+      id: "multiplayer-host-start-game"
+    timeout: 30000
+- tapOn:
+    id: "multiplayer-host-start-game"
+
+# the host picks Roland Banks, the clients pick their own investigators
+- extendedWaitUntil:
+    visible:
+      id: "signature-01001"
+    timeout: 60000
+- tapOn:
+    id: "signature-01001"
+- extendedWaitUntil:
+    visible: ".*Okay"
+    timeout: 10000
+- tapOn: ".*Okay"
+- extendedWaitUntil:
+    visible: "Start.*"
+    timeout: 300000
+- tapOn: "Start.*"
+- extendedWaitUntil:
+    visible:
+      id: "board-health"
+    timeout: 60000
+
+# the host changes its own investigator: a long press raises health and base by one, the base value
+# shows the difference (a plain tap changes only the current value)
+- assertNotVisible:
+    id: "health-base-value"
+- longPressOn:
+    id: "board-health"
+- extendedWaitUntil:
+    visible:
+      id: "health-base-value"
+      text: "\\+1"
+    timeout: 10000
+# the clients check that they received it (they look at Roland's board), then the host is done:
+# keep the app alive while they do
+- extendedWaitUntil:
+    visible: "never-visible-pause"
+    timeout: 60000
+    optional: true

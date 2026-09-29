@@ -7,7 +7,7 @@ import type { ViewProps } from "react-native";
 import * as C from "./ReferenceCardSelect.components";
 import { useReferenceCards, useRenderItem } from "./hooks";
 
-export type ReferenceCardSelectProps = ViewProps & {
+export type ReferenceCardSelectProps = Omit<ViewProps, "onBlur" | "onFocus"> & {
 	value?: ReferenceCard | null;
 	story?: Story | null;
 	onChange?: (story: ReferenceCard) => void;

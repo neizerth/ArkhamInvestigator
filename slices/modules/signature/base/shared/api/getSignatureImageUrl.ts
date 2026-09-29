@@ -1,5 +1,5 @@
 import { ASSET_URL, HAVE_AVIF_SUPPORT } from "@shared/config";
-import { documentDirectory } from "expo-file-system";
+import { documentDirectory } from "expo-file-system/legacy";
 import type { SignatureImageType } from "../model";
 
 export type GetSignatureImageUrlOptions = {

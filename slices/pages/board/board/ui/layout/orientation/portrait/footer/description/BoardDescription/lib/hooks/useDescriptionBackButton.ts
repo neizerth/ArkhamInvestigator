@@ -3,8 +3,8 @@ import {
 	setShowDescription,
 } from "@modules/board/base/shared/lib";
 import { useBackButton } from "@modules/core/device/shared/lib";
-import { useRoute } from "@react-navigation/native";
 import { useAppDispatch, useAppSelector } from "@shared/lib";
+import { useRoute } from "expo-router/react-navigation";
 import { useCallback } from "react";
 
 export const useDescriptionBackButton = () => {

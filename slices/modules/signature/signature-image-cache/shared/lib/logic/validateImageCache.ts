@@ -1,6 +1,6 @@
 import { getSignatureImageLayout } from "@modules/signature/base/shared/lib";
 import type { Box, ReturnAwaited } from "@shared/model";
-import * as FileSystem from "expo-file-system";
+import * as FileSystem from "expo-file-system/legacy";
 import { equals, map, pick } from "ramda";
 import type { SignatureImageCacheItem } from "../../model";
 

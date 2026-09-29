@@ -15,12 +15,17 @@ appId: ${APP_ID}
 - extendedWaitUntil:
     visible: "Settings"
     timeout: 30000
+# Checkbox rows have the accessibility label "<label>, <icon glyph>" on iOS, so the label is matched by
+# its prefix. Slow swipes and partial visibility: with the default speed the iOS scroll view's inertia carries the
+# list past the row between two checks, so it is never fully visible in any snapshot.
 - scrollUntilVisible:
     element:
-      text: "${SETTING}"
+      text: "${SETTING}.*"
     direction: DOWN
-    timeout: 30000
-- tapOn: "${SETTING}"
+    speed: 15
+    visibilityPercentage: 60
+    timeout: 60000
+- tapOn: "${SETTING}.*"
 # the system back button closes the app, so the screen's own arrow it is
 - tapOn:
     point: "7%,8%"

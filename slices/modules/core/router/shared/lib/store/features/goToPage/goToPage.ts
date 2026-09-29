@@ -1,10 +1,10 @@
 import { createAction } from "@reduxjs/toolkit";
-import type { Href, Route, UnknownInputParams } from "expo-router";
+import type { Href, RoutePath, UnknownInputParams } from "expo-router";
 
 export type GoToPagePayload =
-	| Route
+	| RoutePath
 	| {
-			pathname: Route;
+			pathname: RoutePath;
 			params?: UnknownInputParams;
 	  }
 	| {

@@ -1,9 +1,9 @@
-import * as FileSystem from "expo-file-system";
+import * as FileSystem from "expo-file-system/legacy";
 import * as Sharing from "expo-sharing";
 import { Share } from "react-native";
 import { shareLogFile } from "../shareLogs/shareLogFile";
 
-jest.mock("expo-file-system", () =>
+jest.mock("expo-file-system/legacy", () =>
 	require("@shared/lib/test/mocks").fileSystemMock(),
 );
 jest.mock("expo-sharing", () => ({

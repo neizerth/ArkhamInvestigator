@@ -1,6 +1,6 @@
 import { notEnoughSpace } from "@modules/core/disk/entities/notEnoughSpace";
 import type { ReturnAwaited } from "@shared/model";
-import * as FileSystem from "expo-file-system";
+import * as FileSystem from "expo-file-system/legacy";
 import { call, put, takeEvery } from "redux-saga/effects";
 import {
 	assetDownloadEnd,

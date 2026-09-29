@@ -17,7 +17,7 @@ export const ThemeSignaturePreview = (props: ThemeSignaturePreviewProps) => {
 	}
 
 	const placeholderProps = pick(["size", "onPress", "style"], props);
-	const factionProps = omit(["style"], props);
+	const factionProps = omit(["style", "pressRetentionOffset"], props);
 
 	return (
 		<C.Placeholder {...placeholderProps}>

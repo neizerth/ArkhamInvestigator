@@ -9,8 +9,8 @@ export const sharedLibMock = () => ({
 
 /**
  * `expo-file-system` (legacy async API) with every call stubbed.
- * Usage: `jest.mock("expo-file-system", () => require("@shared/lib/test/mocks").fileSystemMock());`
- * then `import * as FileSystem from "expo-file-system"` in the test to program the stubs.
+ * Usage: `jest.mock("expo-file-system/legacy", () => require("@shared/lib/test/mocks").fileSystemMock());`
+ * then `import * as FileSystem from "expo-file-system/legacy"` in the test to program the stubs.
  * The module path in `jest.mock` is the only thing an SDK bump changes (`expo-file-system/legacy`).
  */
 export const fileSystemMock = () => ({

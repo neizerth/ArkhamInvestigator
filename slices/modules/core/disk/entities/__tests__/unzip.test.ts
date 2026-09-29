@@ -1,10 +1,10 @@
 import { createSagaTester, flush } from "@shared/lib/test/createSagaTester";
-import * as FileSystem from "expo-file-system";
+import * as FileSystem from "expo-file-system/legacy";
 import { unzip as unzipFile } from "react-native-zip-archive";
 import { unzip, unzipComplete, unzipError } from "../unzip/unzip";
 import { unzipSaga } from "../unzip/unzipSaga";
 
-jest.mock("expo-file-system", () =>
+jest.mock("expo-file-system/legacy", () =>
 	require("@shared/lib/test/mocks").fileSystemMock(),
 );
 jest.mock("react-native-zip-archive", () => ({ unzip: jest.fn() }));

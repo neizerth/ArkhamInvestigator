@@ -1,0 +1,93 @@
+# iOS Simulator client of the 3/4-device suite: `-e NICKNAME="E2E Client A" -e SIGNATURE=signature-02001`
+appId: ${APP_ID}
+---
+- launchApp:
+    permissions:
+      location: inuse
+- extendedWaitUntil:
+    visible: "Single player|Continue"
+    timeout: 300000
+- tapOn:
+    id: "home-multiplayer"
+- extendedWaitUntil:
+    visible:
+      id: "modal-action-start-new-game"
+    timeout: 60000
+    optional: true
+- runFlow:
+    when:
+      visible:
+        id: "modal-action-start-new-game"
+    commands:
+      - tapOn:
+          id: "modal-action-start-new-game"
+- extendedWaitUntil:
+    visible:
+      id: "multiplayer-nickname-input"
+    timeout: 45000
+- tapOn:
+    id: "multiplayer-nickname-input"
+- eraseText
+- inputText: ${NICKNAME}
+- hideKeyboard
+- tapOn:
+    id: "tab-client"
+- extendedWaitUntil:
+    visible:
+      id: "multiplayer-client-auto-discover"
+    timeout: 15000
+# the setting is remembered between runs: the checkbox label ends with a glyph, U+F64B when it is on
+- runFlow:
+    when:
+      notVisible:
+        id: "multiplayer-client-auto-discover"
+        text: ".*\uf64b"
+    commands:
+      - tapOn:
+          id: "multiplayer-client-auto-discover"
+- extendedWaitUntil:
+    visible:
+      id: "multiplayer-discovered-host-E2E Host"
+    timeout: 300000
+- tapOn:
+    id: "multiplayer-discovered-host-E2E Host"
+
+# the host pressed Next: pick this client's investigator
+- extendedWaitUntil:
+    visible:
+      id: ${SIGNATURE}
+    timeout: 600000
+- tapOn:
+    id: ${SIGNATURE}
+- extendedWaitUntil:
+    visible: ".*Okay"
+    timeout: 10000
+- tapOn: ".*Okay"
+
+- extendedWaitUntil:
+    visible:
+      id: "board-health"
+    timeout: 600000
+# every investigator of the game reached this client: the title has arrows (a client that missed the
+# other players' selections used to be left with a single board or the "fallback" investigator)
+- assertVisible:
+    id: "board-investigator-next"
+- assertNotVisible: ".*fallback.*"
+# the host's investigator is one of the boards, with the health the host has changed
+- repeat:
+    times: 4
+    while:
+      notVisible: ".*Roland Banks.*"
+    commands:
+      - tapOn:
+          id: "board-investigator-next"
+      - waitForAnimationToEnd:
+          timeout: 3000
+- extendedWaitUntil:
+    visible: ".*Roland Banks.*"
+    timeout: 5000
+- extendedWaitUntil:
+    visible:
+      id: "health-base-value"
+      text: "\\+1"
+    timeout: 120000

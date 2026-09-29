@@ -1,6 +1,6 @@
 import { getFileBase64Contents } from "@modules/core/disk/shared/lib";
 import type { ReturnAwaited } from "@shared/model";
-import * as FileSystem from "expo-file-system";
+import * as FileSystem from "expo-file-system/legacy";
 import { call, put, takeEvery } from "redux-saga/effects";
 import { getBase64Grayscale } from "../../shared/lib";
 import {

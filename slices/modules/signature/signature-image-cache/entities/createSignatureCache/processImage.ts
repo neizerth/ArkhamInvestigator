@@ -1,7 +1,7 @@
 import type { InvestigatorBoardImage } from "@modules/board/base/shared/model";
 import type { SignatureImageLayout } from "@modules/signature/base/shared/model";
 import type { Box } from "@shared/model";
-import * as FileSystem from "expo-file-system";
+import * as FileSystem from "expo-file-system/legacy";
 import { ImageManipulator, SaveFormat } from "expo-image-manipulator";
 import { PixelRatio } from "react-native";
 

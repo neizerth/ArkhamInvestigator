@@ -12,7 +12,7 @@ import {
 
 const mockGetFreeDiskStorageAsync = jest.fn();
 
-jest.mock("expo-file-system", () => ({
+jest.mock("expo-file-system/legacy", () => ({
 	getFreeDiskStorageAsync: () => mockGetFreeDiskStorageAsync(),
 }));
 

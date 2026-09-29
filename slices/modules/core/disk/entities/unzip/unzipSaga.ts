@@ -1,5 +1,5 @@
 import type { ReturnAwaited } from "@shared/model";
-import * as FileSystem from "expo-file-system";
+import * as FileSystem from "expo-file-system/legacy";
 import { unzip as unzipFile } from "react-native-zip-archive";
 import { call, put, takeEvery } from "redux-saga/effects";
 import { unzip, unzipComplete, unzipError } from "./unzip";

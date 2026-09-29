@@ -1,11 +1,11 @@
 import { getLogFiles } from "@modules/core/log/shared/lib";
 import { createSagaTester, flush } from "@shared/lib/test/createSagaTester";
-import * as FileSystem from "expo-file-system";
+import * as FileSystem from "expo-file-system/legacy";
 import moment from "moment";
 import { clearLogs } from "../clearLogs/clearLogs";
 import { clearLogsSaga } from "../clearLogs/clearLogsSaga";
 
-jest.mock("expo-file-system", () =>
+jest.mock("expo-file-system/legacy", () =>
 	require("@shared/lib/test/mocks").fileSystemMock(),
 );
 jest.mock("@modules/core/log/shared/lib", () => ({ getLogFiles: jest.fn() }));

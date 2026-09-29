@@ -1,5 +1,10 @@
 import { useCallback } from "react";
-import { Linking, type TextProps } from "react-native";
+import {
+	Linking,
+	type StyleProp,
+	type TextProps,
+	type TextStyle,
+} from "react-native";
 import styled from "styled-components/native";
 import { color } from "../../../config";
 import { useBoolean, useFadeAnimation } from "../../../lib";
@@ -27,7 +32,7 @@ export const A = ({ href, children, ...props }: AProps) => {
 			onPress={onPress}
 			onPressIn={setActive.on}
 			onPressOut={setActive.off}
-			style={[animatedStyle, props.style]}
+			style={[animatedStyle, props.style] as StyleProp<TextStyle>}
 		>
 			{children}
 		</LinkText>

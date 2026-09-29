@@ -29,12 +29,14 @@ appId: ${APP_ID}
       - tapOn:
           id: "prompt-modal-input"
       - inputText: "https://neizerth.github.io/ArkhamInvestigatorData"
+      # the keyboard covers the confirm button on iOS
+      - hideKeyboard
       - tapOn:
           id: "modal-action-set-artwork"
       # validateArtworkUrlSaga fetches+content-type-checks the archive before accepting it, then
       # restarts the app — this waits out both.
       - extendedWaitUntil:
-          visible: "Continue"
+          visible: "Single player|Continue"
           timeout: 300000
       - extendedWaitUntil:
           visible:

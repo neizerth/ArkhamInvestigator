@@ -1,8 +1,8 @@
-import * as FileSystem from "expo-file-system";
+import * as FileSystem from "expo-file-system/legacy";
 import { ImageManipulator } from "expo-image-manipulator";
 import { processImage } from "../createSignatureCache/processImage";
 
-jest.mock("expo-file-system", () =>
+jest.mock("expo-file-system/legacy", () =>
 	require("@shared/lib/test/mocks").fileSystemMock(),
 );
 jest.mock("expo-image-manipulator", () => ({

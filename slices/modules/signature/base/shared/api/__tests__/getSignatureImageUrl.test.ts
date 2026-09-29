@@ -1,6 +1,6 @@
 import { getSignatureImageUrl } from "../getSignatureImageUrl";
 
-jest.mock("expo-file-system", () =>
+jest.mock("expo-file-system/legacy", () =>
 	require("@shared/lib/test/mocks").fileSystemMock(),
 );
 jest.mock("@shared/config", () => ({

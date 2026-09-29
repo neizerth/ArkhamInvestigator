@@ -32,7 +32,7 @@ appId: ${APP_ID}
           commands:
             - tapOn: "Single player"
             - extendedWaitUntil:
-                visible: "Choose an Investigator"
+                visible: ".*Choose an Investigator.*"
                 timeout: 30000
             # the faction filter is remembered between games: the first tab is Guardian,
             # where Roland Banks lives
@@ -41,12 +41,16 @@ appId: ${APP_ID}
             # Roland Banks, whose stats every flow expects
             - tapOn:
                 id: "signature-01001"
+            - extendedWaitUntil:
+                visible: ".*Okay"
+                timeout: 10000
+                optional: true
             - runFlow:
                 when:
-                  visible: "Okay"
+                  visible: ".*Okay"
                 commands:
-                  - tapOn: "Okay"
-            - tapOn: "Start"
+                  - tapOn: ".*Okay"
+            - tapOn: "Start.*"
 
 # drops whatever modal a previous flow left on top of the board: every modal screen
 # dims the rest with the same pressable, and pressing it closes the modal
