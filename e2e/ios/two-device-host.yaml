@@ -1,0 +1,100 @@
+# iOS Simulator, device A / host of the two-device suite. Run as a SEPARATE `maestro test` process
+# pinned to its own simulator (`--device <udid>`), next to two-device-client.yaml on another one.
+#
+# Two iOS Simulators on one Mac share the host's network namespace, so the client finds this host
+# through Zeroconf auto-discovery: no invite code, no port redirects (the Android two-emulator
+# flows need both, see flows/multiplayer/two-device-*.yaml).
+#
+# Prerequisites: the app is installed on both simulators, the artwork URL is set (on iOS the
+# Multiplayer button does not render without it, see subflows/set-artwork-url.yaml), the simulator
+# language is English, Metro serves the current bundle.
+#
+# Handshake with the client flow: nickname "E2E Host" is what the client taps in the discovered
+# list; the host changes health first (9 -> 8), the client checks it and changes it back (7).
+appId: ${APP_ID}
+---
+- launchApp:
+    permissions:
+      location: allow
+- extendedWaitUntil:
+    visible: "Single player|Continue"
+    timeout: 300000
+- tapOn:
+    id: "home-multiplayer"
+- extendedWaitUntil:
+    visible:
+      id: "modal-action-start-new-game"
+    timeout: 60000
+    optional: true
+- runFlow:
+    when:
+      visible:
+        id: "modal-action-start-new-game"
+    commands:
+      - tapOn:
+          id: "modal-action-start-new-game"
+- extendedWaitUntil:
+    visible:
+      id: "multiplayer-nickname-input"
+    timeout: 45000
+- tapOn:
+    id: "multiplayer-nickname-input"
+- eraseText
+- inputText: "E2E Host"
+- hideKeyboard
+
+- tapOn:
+    id: "tab-host"
+- extendedWaitUntil:
+    visible:
+      id: "multiplayer-host-code-value"
+    timeout: 30000
+- assertVisible:
+    id: "multiplayer-host-self"
+
+# the client joins through discovery: wait for the second player
+- extendedWaitUntil:
+    visible:
+      id: "multiplayer-host-start-game"
+    timeout: 300000
+- tapOn:
+    id: "multiplayer-host-start-game"
+
+# investigator selection is synchronized to the client
+- extendedWaitUntil:
+    visible:
+      id: "signature-01001"
+    timeout: 60000
+- tapOn:
+    id: "signature-01001"
+- extendedWaitUntil:
+    visible: ".*Okay"
+    timeout: 10000
+- tapOn: ".*Okay"
+- extendedWaitUntil:
+    visible: "Start.*"
+    timeout: 15000
+- tapOn: "Start.*"
+- extendedWaitUntil:
+    visible:
+      id: "board-health"
+    timeout: 60000
+
+# host -> client: health 9 -> 8
+- assertVisible:
+    id: "health-value"
+    text: "9"
+- tapOn:
+    id: "board-health"
+- extendedWaitUntil:
+    visible:
+      id: "health-value"
+      text: "8"
+    timeout: 10000
+
+# client -> host: the client taps health, 8 -> 7
+- extendedWaitUntil:
+    visible:
+      id: "health-value"
+      text: "7"
+    timeout: 180000

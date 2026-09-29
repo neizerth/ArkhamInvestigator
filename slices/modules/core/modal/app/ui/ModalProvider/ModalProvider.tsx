@@ -2,6 +2,7 @@ import type { PropsWithChildren } from "react";
 import { FullWindowOverlay } from "react-native-screens";
 import * as C from "./ModalProvider.components";
 
+import { E2E } from "@shared/config";
 import { useAppSelector } from "@shared/lib";
 import { Platform } from "react-native";
 import {
@@ -18,7 +19,7 @@ const ModalContent = ({ children }: PropsWithChildren) => {
 	// The overlay is a separate native layer above the whole window. Mounted permanently it hides
 	// the app from iOS accessibility clients (VoiceOver, XCUITest/Maestro see an empty tree), so it
 	// exists only while a modal is open.
-	if (Platform.OS !== "ios" || !overlay || !id) {
+	if (Platform.OS !== "ios" || !overlay || !id || E2E) {
 		return children;
 	}
 

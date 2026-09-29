@@ -1,5 +1,5 @@
 import { selectModalId } from "@modules/core/modal/shared/base/lib";
-import { size, statusBarHeight } from "@shared/config";
+import { E2E, size, statusBarHeight } from "@shared/config";
 import { useAppSelector } from "@shared/lib";
 import { Fragment, type PropsWithChildren } from "react";
 import { Platform } from "react-native";
@@ -18,7 +18,7 @@ export const ToastProvider = ({ children }: PropsWithChildren) => {
 	// The overlay is a separate native layer above the window: it is only needed to show toasts
 	// above an open modal. Mounted permanently it hides the app from iOS accessibility clients.
 	const Content =
-		Platform.OS === "ios" && dynamicId ? FullWindowOverlay : Fragment;
+		Platform.OS === "ios" && dynamicId && !E2E ? FullWindowOverlay : Fragment;
 
 	return (
 		<>

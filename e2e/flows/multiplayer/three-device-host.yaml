@@ -48,16 +48,16 @@ appId: ${APP_ID}
     id: "signature-01001"
 - extendedWaitUntil:
     visible:
-      text: "Okay"
+      text: ".*Okay"
     timeout: 10000
-- tapOn: "Okay"
+- tapOn: ".*Okay"
 
 # Start only becomes available once EVERY client has picked (see two-device-host.yaml) — with two
 # clients this means waiting for both three-device-client-a.yaml and -b.yaml to finish their picks.
 - extendedWaitUntil:
-    visible: "Start"
+    visible: "Start.*"
     timeout: 30000
-- tapOn: "Start"
+- tapOn: "Start.*"
 - extendedWaitUntil:
     visible:
       id: "board-health"

@@ -13,8 +13,8 @@ appId: ${APP_ID}
     commands:
       - runFlow: ../../subflows/start-two-investigator-game.yaml
       # the header title opens the overview once a second investigator is there
-      - tapOn:
-          point: "50%,7%"
+      # the investigator title opens the overview; a fixed point misses it under the iOS status bar
+      - tapOn: ".*Roland Banks.*"
       - waitForAnimationToEnd:
           timeout: 5000
 

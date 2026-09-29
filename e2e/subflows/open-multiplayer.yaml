@@ -5,7 +5,7 @@
 # set-artwork-url.yaml run first, see its own header comment.
 #
 # CONFIRMED WORKING 2026-09-28 as part of the two-device-host.yaml live run (see
-# [[multiplayer-e2e-handoff]]) — the "Start a new game?" confirm dialog below is real and was hit
+# [[multiplayer-e2e-handoff]]) — the ".*Start a new game.*" confirm dialog below is real and was hit
 # live on a device with an existing single-player save.
 appId: ${APP_ID}
 ---
@@ -30,14 +30,17 @@ appId: ${APP_ID}
 # multiplayer-nickname-input never appearing (it was hidden behind the still-unhandled dialog).
 # Bumped both this wait and the nickname-input wait below to comfortably clear that window.
 - extendedWaitUntil:
-    visible: "Start a new game?"
+    visible:
+      id: "modal-action-start-new-game"
     timeout: 60000
     optional: true
 - runFlow:
     when:
-      visible: "Start a new game?"
+      visible:
+        id: "modal-action-start-new-game"
     commands:
-      - tapOn: "Okay"
+      - tapOn:
+          id: "modal-action-start-new-game"
 
 - extendedWaitUntil:
     visible:

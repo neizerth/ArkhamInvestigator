@@ -7,25 +7,37 @@ appId: ${APP_ID}
     visible: "Single player|Continue"
     timeout: 300000
 - tapOn: "Single player"
-# a saved game is replaced only after a confirmation
+# a saved game is replaced only after a confirmation; the dialog takes a beat to render (on iOS
+# longer than the immediate `when: visible` check below), so wait for it, tolerating a fresh install
+- extendedWaitUntil:
+    visible:
+      id: "modal-action-start-new-game"
+    timeout: 20000
+    optional: true
 - runFlow:
     when:
-      visible: "Okay"
+      visible:
+        id: "modal-action-start-new-game"
     commands:
-      - tapOn: "Okay"
+      - tapOn:
+          id: "modal-action-start-new-game"
 - extendedWaitUntil:
-    visible: "Choose an Investigator"
+    visible: ".*Choose an Investigator.*"
     timeout: 30000
 # Roland Banks, whose stats every flow expects; the list is grouped into chapters and has
 # a couple of promoted investigators on top, so a coordinate would drift with the layout
 - tapOn:
     id: "signature-01001"
+- extendedWaitUntil:
+    visible: ".*Okay"
+    timeout: 10000
+    optional: true
 - runFlow:
     when:
-      visible: "Okay"
+      visible: ".*Okay"
     commands:
-      - tapOn: "Okay"
-- tapOn: "Start"
+      - tapOn: ".*Okay"
+- tapOn: "Start.*"
 - extendedWaitUntil:
     visible:
       id: "board-health"

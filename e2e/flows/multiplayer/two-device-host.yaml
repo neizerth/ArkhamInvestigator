@@ -62,16 +62,16 @@ appId: ${APP_ID}
     id: "signature-01001"
 - extendedWaitUntil:
     visible:
-      text: "Okay"
+      text: ".*Okay"
     timeout: 10000
-- tapOn: "Okay"
+- tapOn: ".*Okay"
 
 # Start only appears (and is only tappable) on the HOST once the client has also picked an
 # investigator — the client side has no Start button, just a spinner, confirmed live.
 - extendedWaitUntil:
-    visible: "Start"
+    visible: "Start.*"
     timeout: 15000
-- tapOn: "Start"
+- tapOn: "Start.*"
 - extendedWaitUntil:
     visible:
       id: "board-health"
