@@ -9,6 +9,7 @@ import {
 import { game, setGameMode, setGameStatus } from "@modules/game/shared/lib";
 import { combineReducers } from "@reduxjs/toolkit";
 import { createSagaTester } from "@shared/lib/test/createSagaTester";
+import { stateAfter } from "@shared/lib/test/stateAfter";
 import { sendNetworkClientKeepAliveSaga } from "../sendNetworkClientKeepAliveSaga";
 
 jest.mock("@shared/lib", () => ({
@@ -59,11 +60,13 @@ describe("sendNetworkClientKeepAliveSaga", () => {
 	});
 
 	it("also runs deadServerWorker's 1s poll, restarting a dead host server (regression for the fork bug)", async () => {
-		let state = reducer(undefined, { type: "@@init" });
-		state = reducer(state, setNetworkRole("host"));
-		state = reducer(state, setHostRunning(false));
-		state = reducer(state, setGameMode("multiplayer" as never));
-		state = reducer(state, setGameStatus("playing"));
+		const state = stateAfter(
+			reducer,
+			setNetworkRole("host"),
+			setHostRunning(false),
+			setGameMode("multiplayer" as never),
+			setGameStatus("playing"),
+		);
 		const tester = createSagaTester({ reducer, state });
 		const task = tester.run(sendNetworkClientKeepAliveSaga);
 
@@ -90,11 +93,13 @@ describe("sendNetworkClientKeepAliveSaga", () => {
 	});
 
 	it("restarting a dead host server on the deadServerWorker's poll does not stop the 10s connection ping", async () => {
-		let state = reducer(undefined, { type: "@@init" });
-		state = reducer(state, setNetworkRole("host"));
-		state = reducer(state, setHostRunning(false));
-		state = reducer(state, setGameMode("multiplayer" as never));
-		state = reducer(state, setGameStatus("playing"));
+		const state = stateAfter(
+			reducer,
+			setNetworkRole("host"),
+			setHostRunning(false),
+			setGameMode("multiplayer" as never),
+			setGameStatus("playing"),
+		);
 		const tester = createSagaTester({ reducer, state });
 		const task = tester.run(sendNetworkClientKeepAliveSaga);
 

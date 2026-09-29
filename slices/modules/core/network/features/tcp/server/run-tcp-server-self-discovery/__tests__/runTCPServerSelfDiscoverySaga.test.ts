@@ -9,14 +9,8 @@ import {
 import { router } from "@modules/core/router/shared/lib";
 import { combineReducers } from "@reduxjs/toolkit";
 import { createSagaTester } from "@shared/lib/test/createSagaTester";
+import { stateAfter } from "@shared/lib/test/stateAfter";
 import { runTCPServerSelfDiscoverySaga } from "../runTCPServerSelfDiscoverySaga";
-
-jest.mock("@shared/lib", () =>
-	require("@shared/lib/test/mocks").sharedLibMock(),
-);
-jest.mock("@modules/core/log/shared/config", () => ({
-	tcpLog: { info: jest.fn(), warn: jest.fn(), error: jest.fn() },
-}));
 
 const mockRequestAndroidPermission = jest.fn();
 jest.mock("@modules/core/device/shared/lib/logic", () => ({
@@ -58,10 +52,12 @@ afterEach(() => {
 });
 
 const buildState = (overrides: Record<string, unknown> = {}) => {
-	let state = reducer(undefined, { type: "@@init" });
-	state = reducer(state, setNickname("Roland"));
-	state = reducer(state, setNetworkConnected(true));
-	state = reducer(state, setNetworkType("wifi" as never));
+	let state = stateAfter(
+		reducer,
+		setNickname("Roland"),
+		setNetworkConnected(true),
+		setNetworkType("wifi" as never),
+	);
 	for (const [key, value] of Object.entries(overrides)) {
 		if (key === "networkConnected")
 			state = reducer(state, setNetworkConnected(value as boolean));

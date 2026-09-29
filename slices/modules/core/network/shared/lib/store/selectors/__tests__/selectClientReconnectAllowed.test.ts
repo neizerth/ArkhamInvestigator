@@ -7,6 +7,7 @@ import { router, setCurrentRoute } from "@modules/core/router/shared/lib";
 import { game, setGameStatus } from "@modules/game/shared/lib";
 import { combineReducers } from "@reduxjs/toolkit";
 import { routes } from "@shared/config";
+import { stateAfter } from "@shared/lib/test/stateAfter";
 import { selectClientReconnectAllowed } from "../selectClientReconnectAllowed";
 
 const reducer = combineReducers({
@@ -28,11 +29,13 @@ const buildState = ({
 	gameStatus = "started",
 	route = routes.board,
 }: Setup = {}) => {
-	let state = reducer(undefined, { type: "@@init" });
-	state = reducer(state, setNetworkRole(role));
-	state = reducer(state, setHostIP(hostIP));
-	state = reducer(state, setGameStatus(gameStatus as never));
-	state = reducer(state, setCurrentRoute(route as never));
+	const state = stateAfter(
+		reducer,
+		setNetworkRole(role),
+		setHostIP(hostIP),
+		setGameStatus(gameStatus as never),
+		setCurrentRoute(route as never),
+	);
 	return state;
 };
 

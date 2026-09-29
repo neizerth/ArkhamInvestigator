@@ -9,15 +9,8 @@ import {
 } from "@modules/core/network/shared/lib";
 import { combineReducers } from "@reduxjs/toolkit";
 import { createSagaTester } from "@shared/lib/test/createSagaTester";
+import { stateAfter } from "@shared/lib/test/stateAfter";
 import { transformTCPClientDataToActionSaga } from "../transformTCPClientDataToActionSaga";
-
-jest.mock("@shared/lib", () =>
-	require("@shared/lib/test/mocks").sharedLibMock(),
-);
-jest.mock("@modules/core/log/shared/config", () => ({
-	log: { info: jest.fn(), warn: jest.fn(), error: jest.fn() },
-	tcpLog: { info: jest.fn(), warn: jest.fn(), error: jest.fn() },
-}));
 
 const socket = { destroyed: false, id: "server-socket" };
 jest.mock("@modules/core/network/shared/lib", () => {
@@ -68,9 +61,11 @@ afterEach(() => {
  */
 describe("client receive-and-ack pipeline (transformTCPClientDataToActionSaga integration)", () => {
 	it("applies the host's action locally AND sends a real ACK back over the wire", async () => {
-		let state = reducer(undefined, { type: "@@init" });
-		state = reducer(state, setNetworkRole("client"));
-		state = reducer(state, setHostIP("192.168.1.10"));
+		const state = stateAfter(
+			reducer,
+			setNetworkRole("client"),
+			setHostIP("192.168.1.10"),
+		);
 
 		const tester = createSagaTester({ reducer, state });
 		tester.run(transformTCPClientDataToActionSaga);
@@ -99,9 +94,11 @@ describe("client receive-and-ack pipeline (transformTCPClientDataToActionSaga in
 	});
 
 	it("still ACKs a retransmitted duplicate without applying the action twice", async () => {
-		let state = reducer(undefined, { type: "@@init" });
-		state = reducer(state, setNetworkRole("client"));
-		state = reducer(state, setHostIP("192.168.1.10"));
+		const state = stateAfter(
+			reducer,
+			setNetworkRole("client"),
+			setHostIP("192.168.1.10"),
+		);
 
 		const tester = createSagaTester({ reducer, state });
 		tester.run(transformTCPClientDataToActionSaga);

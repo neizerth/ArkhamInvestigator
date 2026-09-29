@@ -1,5 +1,5 @@
 import { combineReducers } from "@reduxjs/toolkit";
-import { createSagaTester } from "../../../../../shared/lib/test/createSagaTester";
+import { createSagaTester } from "@shared/lib/test/createSagaTester";
 import {
 	restoreTranslation,
 	translationRestored,
@@ -8,9 +8,6 @@ import { setLanguage } from "../../shared/lib";
 import i18n from "../../shared/lib/store/i18n";
 import { initI18N } from "../init-i18n/initI18N";
 
-jest.mock("@shared/lib", () =>
-	require("@shared/lib/test/mocks").sharedLibMock(),
-);
 jest.mock("@modules/core/i18n/shared/lib/common/StoreTranslation", () => ({
 	StoreTranslation: { load: jest.fn(), save: jest.fn() },
 }));

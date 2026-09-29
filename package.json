@@ -57,28 +57,6 @@
 		"postinstall": "patch-package",
 		"e2e": "MAESTRO_CLI_NO_ANALYTICS=1 MAESTRO_CLI_ANALYSIS_NOTIFICATION_DISABLED=true maestro --platform android ${E2E_DEVICE:+--device $E2E_DEVICE} test -e APP_ID=${APP_ID:-com.arkhaminvestigator.dev} e2e"
 	},
-	"jest": {
-		"preset": "jest-expo",
-		"resolver": "react-native-worklets/jest/resolver",
-		"setupFiles": [
-			"<rootDir>/jest.setup.ts"
-		],
-		"setupFilesAfterEnv": [
-			"<rootDir>/jest.setupAfterEnv.ts"
-		],
-		"testPathIgnorePatterns": [
-			"/node_modules/",
-			"/e2e/",
-			"/.claude/worktrees/"
-		],
-		"transformIgnorePatterns": [
-			"node_modules/(?!((jest-)?react-native|@react-native(-community)?)|expo(nent)?|@expo(nent)?/.*|@expo-google-fonts/.*|react-native-svg|redux-toolkit-helpers|react-redux|mime/|standard-navigation)"
-		],
-		"moduleNameMapper": {
-			"^uuid$": "<rootDir>/node_modules/uuid/dist/cjs/index.js",
-			"^slices/(.*)$": "<rootDir>/slices/$1"
-		}
-	},
 	"dependencies": {
 		"@fanchenbao/react-native-scroll-indicator": "^0.4.0",
 		"@react-native-async-storage/async-storage": "2.2.0",

@@ -7,11 +7,8 @@ import { resumeGame } from "@modules/game/entities/resumeGame";
 import { game, setGameMode, setGameStatus } from "@modules/game/shared/lib";
 import { combineReducers } from "@reduxjs/toolkit";
 import { createSagaTester } from "@shared/lib/test/createSagaTester";
+import { stateAfter } from "@shared/lib/test/stateAfter";
 import { runTCPServerOnAppResumeSaga } from "../runTCPServerOnAppResumeSaga";
-
-jest.mock("@shared/lib", () =>
-	require("@shared/lib/test/mocks").sharedLibMock(),
-);
 
 const reducer = combineReducers({
 	network: network.reducer,
@@ -20,10 +17,12 @@ const reducer = combineReducers({
 
 describe("runTCPServerOnAppResumeSaga", () => {
 	it("restarts the TCP server on resume for a host mid-multiplayer-game", () => {
-		let state = reducer(undefined, { type: "@@init" });
-		state = reducer(state, setNetworkRole("host"));
-		state = reducer(state, setGameMode("multiplayer" as never));
-		state = reducer(state, setGameStatus("playing"));
+		const state = stateAfter(
+			reducer,
+			setNetworkRole("host"),
+			setGameMode("multiplayer" as never),
+			setGameStatus("playing"),
+		);
 		const tester = createSagaTester({ reducer, state });
 		tester.run(runTCPServerOnAppResumeSaga);
 
@@ -33,10 +32,12 @@ describe("runTCPServerOnAppResumeSaga", () => {
 	});
 
 	it("does nothing for a client role", () => {
-		let state = reducer(undefined, { type: "@@init" });
-		state = reducer(state, setNetworkRole("client"));
-		state = reducer(state, setGameMode("multiplayer" as never));
-		state = reducer(state, setGameStatus("playing"));
+		const state = stateAfter(
+			reducer,
+			setNetworkRole("client"),
+			setGameMode("multiplayer" as never),
+			setGameStatus("playing"),
+		);
 		const tester = createSagaTester({ reducer, state });
 		tester.run(runTCPServerOnAppResumeSaga);
 
@@ -46,10 +47,12 @@ describe("runTCPServerOnAppResumeSaga", () => {
 	});
 
 	it("does nothing for a single-player game mode", () => {
-		let state = reducer(undefined, { type: "@@init" });
-		state = reducer(state, setNetworkRole("host"));
-		state = reducer(state, setGameMode("single" as never));
-		state = reducer(state, setGameStatus("playing"));
+		const state = stateAfter(
+			reducer,
+			setNetworkRole("host"),
+			setGameMode("single" as never),
+			setGameStatus("playing"),
+		);
 		const tester = createSagaTester({ reducer, state });
 		tester.run(runTCPServerOnAppResumeSaga);
 
@@ -59,10 +62,12 @@ describe("runTCPServerOnAppResumeSaga", () => {
 	});
 
 	it("does nothing when gameStatus is 'initial'", () => {
-		let state = reducer(undefined, { type: "@@init" });
-		state = reducer(state, setNetworkRole("host"));
-		state = reducer(state, setGameMode("multiplayer" as never));
-		state = reducer(state, setGameStatus("initial"));
+		const state = stateAfter(
+			reducer,
+			setNetworkRole("host"),
+			setGameMode("multiplayer" as never),
+			setGameStatus("initial"),
+		);
 		const tester = createSagaTester({ reducer, state });
 		tester.run(runTCPServerOnAppResumeSaga);
 

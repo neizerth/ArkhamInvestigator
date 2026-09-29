@@ -7,11 +7,8 @@ import { router, setCurrentRoute } from "@modules/core/router/shared/lib";
 import { combineReducers } from "@reduxjs/toolkit";
 import { routes } from "@shared/config";
 import { createSagaTester } from "@shared/lib/test/createSagaTester";
+import { stateAfter } from "@shared/lib/test/stateAfter";
 import { stopTCPServerOnHomeSaga } from "../stopTCPServerOnHomeSaga";
-
-jest.mock("@shared/lib", () =>
-	require("@shared/lib/test/mocks").sharedLibMock(),
-);
 
 const reducer = combineReducers({
 	network: network.reducer,
@@ -20,8 +17,7 @@ const reducer = combineReducers({
 
 describe("stopTCPServerOnHomeSaga", () => {
 	it("stops the TCP server on navigating to home when it's the host", () => {
-		let state = reducer(undefined, { type: "@@init" });
-		state = reducer(state, setNetworkRole("host"));
+		const state = stateAfter(reducer, setNetworkRole("host"));
 		const tester = createSagaTester({ reducer, state });
 		tester.run(stopTCPServerOnHomeSaga);
 
@@ -31,8 +27,7 @@ describe("stopTCPServerOnHomeSaga", () => {
 	});
 
 	it("does nothing on home for a client role", () => {
-		let state = reducer(undefined, { type: "@@init" });
-		state = reducer(state, setNetworkRole("client"));
+		const state = stateAfter(reducer, setNetworkRole("client"));
 		const tester = createSagaTester({ reducer, state });
 		tester.run(stopTCPServerOnHomeSaga);
 
@@ -42,8 +37,7 @@ describe("stopTCPServerOnHomeSaga", () => {
 	});
 
 	it("does nothing for any other route even as host", () => {
-		let state = reducer(undefined, { type: "@@init" });
-		state = reducer(state, setNetworkRole("host"));
+		const state = stateAfter(reducer, setNetworkRole("host"));
 		const tester = createSagaTester({ reducer, state });
 		tester.run(stopTCPServerOnHomeSaga);
 

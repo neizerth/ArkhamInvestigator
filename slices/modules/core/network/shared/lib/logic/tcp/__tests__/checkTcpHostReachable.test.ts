@@ -1,11 +1,6 @@
 import { EventEmitter } from "node:events";
 import { checkTcpHostReachable } from "../checkTcpHostReachable";
 
-jest.mock("@modules/core/log/shared/config", () => ({
-	tcpLog: { info: jest.fn(), warn: jest.fn(), error: jest.fn() },
-	log: { error: jest.fn(), warn: jest.fn(), info: jest.fn() },
-}));
-
 class FakeSocket extends EventEmitter {
 	destroy = jest.fn();
 }

@@ -6,11 +6,8 @@ import {
 } from "@modules/core/network/shared/lib";
 import { combineReducers } from "@reduxjs/toolkit";
 import { createSagaTester } from "@shared/lib/test/createSagaTester";
+import { stateAfter } from "@shared/lib/test/stateAfter";
 import { resetTcpRuntimeFlagsOnAppStartedSaga } from "../resetTcpRuntimeFlagsOnAppStartedSaga";
-
-jest.mock("@shared/lib", () =>
-	require("@shared/lib/test/mocks").sharedLibMock(),
-);
 
 const mockGetTCPServerInstance = jest.fn();
 const mockGetTCPClientSockets = jest.fn();
@@ -32,9 +29,11 @@ beforeEach(() => {
 
 describe("resetTcpRuntimeFlagsOnAppStartedSaga", () => {
 	it("clears hostRunning/clientRunning when there is no matching native socket", () => {
-		let state = reducer(undefined, { type: "@@init" });
-		state = reducer(state, setHostRunning(true));
-		state = reducer(state, setClientRunning(true));
+		const state = stateAfter(
+			reducer,
+			setHostRunning(true),
+			setClientRunning(true),
+		);
 		const tester = createSagaTester({ reducer, state });
 		tester.run(resetTcpRuntimeFlagsOnAppStartedSaga);
 
@@ -53,8 +52,7 @@ describe("resetTcpRuntimeFlagsOnAppStartedSaga", () => {
 
 	it("leaves hostRunning alone when a real TCP server instance already exists", () => {
 		mockGetTCPServerInstance.mockReturnValue({ listening: true });
-		let state = reducer(undefined, { type: "@@init" });
-		state = reducer(state, setHostRunning(true));
+		const state = stateAfter(reducer, setHostRunning(true));
 		const tester = createSagaTester({ reducer, state });
 		tester.run(resetTcpRuntimeFlagsOnAppStartedSaga);
 
@@ -65,8 +63,7 @@ describe("resetTcpRuntimeFlagsOnAppStartedSaga", () => {
 
 	it("leaves clientRunning alone when there is a live client socket", () => {
 		mockGetTCPClientSockets.mockReturnValue([{ destroyed: false }]);
-		let state = reducer(undefined, { type: "@@init" });
-		state = reducer(state, setClientRunning(true));
+		const state = stateAfter(reducer, setClientRunning(true));
 		const tester = createSagaTester({ reducer, state });
 		tester.run(resetTcpRuntimeFlagsOnAppStartedSaga);
 

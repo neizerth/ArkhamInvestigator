@@ -1,10 +1,7 @@
 import { downloadAsset } from "@modules/core/assets/asset-downloader/entities/downloadAsset/downloadAsset";
 import { assetDownloadEnd } from "@modules/core/assets/asset-downloader/entities/processAssetDownload/processAssetDownload";
 import { combineReducers } from "@reduxjs/toolkit";
-import {
-	createSagaTester,
-	flush,
-} from "../../../../../../shared/lib/test/createSagaTester";
+import { createSagaTester, flush } from "@shared/lib/test/createSagaTester";
 import downloadQueue, {
 	addManyDownloadQueueItems,
 	selectDownloadQueue,

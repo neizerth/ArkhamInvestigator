@@ -9,6 +9,7 @@ import {
 } from "@modules/core/network/shared/lib";
 import { combineReducers } from "@reduxjs/toolkit";
 import { createSagaTester } from "@shared/lib/test/createSagaTester";
+import { stateAfter } from "@shared/lib/test/stateAfter";
 import { sendRemoteTCPActionSaga } from "../sendRemoteTCPActionSaga";
 
 const reducer = combineReducers({ network: network.reducer });
@@ -34,9 +35,11 @@ describe("sendRemoteTCPActionSaga", () => {
 	});
 
 	it("skips a notify:'self' action entirely", () => {
-		let state = reducer(undefined, { type: "@@init" });
-		state = reducer(state, setNetworkRole("client"));
-		state = reducer(state, setHostIP("192.168.1.10"));
+		const state = stateAfter(
+			reducer,
+			setNetworkRole("client"),
+			setHostIP("192.168.1.10"),
+		);
 		const tester = createSagaTester({ reducer, state });
 		tester.run(sendRemoteTCPActionSaga);
 
@@ -56,8 +59,7 @@ describe("sendRemoteTCPActionSaga", () => {
 	});
 
 	it("skips a notify:'host' action when we ARE the host (avoids self-notify)", () => {
-		let state = reducer(undefined, { type: "@@init" });
-		state = reducer(state, setNetworkRole("host"));
+		const state = stateAfter(reducer, setNetworkRole("host"));
 		const tester = createSagaTester({ reducer, state });
 		tester.run(sendRemoteTCPActionSaga);
 
@@ -67,8 +69,7 @@ describe("sendRemoteTCPActionSaga", () => {
 	});
 
 	it("skips sending as a client with no hostIP", () => {
-		let state = reducer(undefined, { type: "@@init" });
-		state = reducer(state, setNetworkRole("client"));
+		const state = stateAfter(reducer, setNetworkRole("client"));
 		const tester = createSagaTester({ reducer, state });
 		tester.run(sendRemoteTCPActionSaga);
 
@@ -78,9 +79,11 @@ describe("sendRemoteTCPActionSaga", () => {
 	});
 
 	it("routes to sendTCPActionToServer for a client with a hostIP, stripping the socket from meta", () => {
-		let state = reducer(undefined, { type: "@@init" });
-		state = reducer(state, setNetworkRole("client"));
-		state = reducer(state, setHostIP("192.168.1.10"));
+		const state = stateAfter(
+			reducer,
+			setNetworkRole("client"),
+			setHostIP("192.168.1.10"),
+		);
 		const tester = createSagaTester({ reducer, state });
 		tester.run(sendRemoteTCPActionSaga);
 
@@ -97,8 +100,7 @@ describe("sendRemoteTCPActionSaga", () => {
 	});
 
 	it("routes to sendTCPActionToClient as a single-target send when targetNetworkId is set (host replying to one client)", () => {
-		let state = reducer(undefined, { type: "@@init" });
-		state = reducer(state, setNetworkRole("host"));
+		const state = stateAfter(reducer, setNetworkRole("host"));
 		const tester = createSagaTester({ reducer, state });
 		tester.run(sendRemoteTCPActionSaga);
 
@@ -115,8 +117,7 @@ describe("sendRemoteTCPActionSaga", () => {
 	});
 
 	it("routes to sendTCPActionToClient as a broadcast when there is no targetNetworkId (host)", () => {
-		let state = reducer(undefined, { type: "@@init" });
-		state = reducer(state, setNetworkRole("host"));
+		const state = stateAfter(reducer, setNetworkRole("host"));
 		const tester = createSagaTester({ reducer, state });
 		tester.run(sendRemoteTCPActionSaga);
 

@@ -1,8 +1,5 @@
 import { notEnoughSpace } from "@modules/core/disk/entities/notEnoughSpace";
-import {
-	createSagaTester,
-	flush,
-} from "../../../../../../shared/lib/test/createSagaTester";
+import { createSagaTester, flush } from "@shared/lib/test/createSagaTester";
 import { downloadAsset } from "../downloadAsset/downloadAsset";
 import { downloadAssetSaga } from "../downloadAsset/downloadAssetSaga";
 import {

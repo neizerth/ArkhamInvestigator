@@ -21,15 +21,9 @@ import { disconnectTCPClientSaga } from "../server/disconnect-tcp-client/disconn
  * on both Android and iOS.
  */
 
-jest.mock("@shared/lib", () =>
-	require("@shared/lib/test/mocks").sharedLibMock(),
-);
-jest.mock("@modules/core/log/shared/config", () => ({
-	log: { info: jest.fn(), warn: jest.fn(), error: jest.fn() },
-	tcpLog: { info: jest.fn(), warn: jest.fn(), error: jest.fn() },
-}));
-
+import { sendTCPAction } from "@modules/core/network/entities/lib/store/features/tcp/sendTCPAction/sendTCPAction";
 import { sendTCPActionToClient } from "@modules/core/network/entities/lib/store/features/tcp/server/sendTCPActionToClient";
+import { sendTCPActionToClientSaga } from "@modules/core/network/entities/lib/store/features/tcp/server/sendTCPActionToClient/sendTCPActionToClientSaga";
 import {
 	connectNetworkClient,
 	network,
@@ -45,8 +39,6 @@ import {
 	tcpSocketMap,
 } from "@modules/core/network/shared/lib/logic/tcp/socket/server";
 import { game, setGameStatus } from "@modules/game/shared/lib";
-import { sendTCPAction } from "../../../entities/lib/store/features/tcp/sendTCPAction/sendTCPAction";
-import { sendTCPActionToClientSaga } from "../../../entities/lib/store/features/tcp/server/sendTCPActionToClient/sendTCPActionToClientSaga";
 
 const reducer = combineReducers({
 	network: network.reducer,

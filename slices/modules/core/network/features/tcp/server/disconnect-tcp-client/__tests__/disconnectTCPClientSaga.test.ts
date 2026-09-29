@@ -8,10 +8,6 @@ import { combineReducers } from "@reduxjs/toolkit";
 import { createSagaTester } from "@shared/lib/test/createSagaTester";
 import { disconnectTCPClientSaga } from "../disconnectTCPClientSaga";
 
-jest.mock("@shared/lib", () =>
-	require("@shared/lib/test/mocks").sharedLibMock(),
-);
-
 const reducer = combineReducers({ networkClient: networkClient.reducer });
 
 const fakeSocket = { destroy: jest.fn() } as never;

@@ -1,9 +1,9 @@
+import { deviceAppStateChanged } from "@modules/core/device/shared/lib/store/actions";
+import { internetReachabilityChanged } from "@modules/core/network/shared/lib/store/actions/common";
 import { combineReducers } from "@reduxjs/toolkit";
+import { createSagaTester, flush } from "@shared/lib/test/createSagaTester";
+import { Platform } from "react-native";
 import { END } from "redux-saga";
-import {
-	createSagaTester,
-	flush,
-} from "../../../../../../shared/lib/test/createSagaTester";
 import assetDownloadResume, {
 	setInterrupted,
 } from "../../shared/lib/store/assetDownloadResume";
@@ -44,21 +44,11 @@ const mockFileSystem = {
 };
 
 jest.mock("expo-file-system/legacy", () => mockFileSystem);
-jest.mock("@shared/lib", () =>
-	require("@shared/lib/test/mocks").sharedLibMock(),
-);
 jest.mock("@modules/core/device/shared/lib", () =>
 	jest.requireActual("@modules/core/device/shared/lib/store/actions"),
 );
 jest.mock("@modules/core/network/shared/lib", () =>
 	jest.requireActual("@modules/core/network/shared/lib/store/actions/common"),
-);
-
-const { deviceAppStateChanged } = jest.requireActual(
-	"@modules/core/device/shared/lib/store/actions",
-);
-const { internetReachabilityChanged } = jest.requireActual(
-	"@modules/core/network/shared/lib/store/actions/common",
 );
 
 const reducer = combineReducers({ assetDownloader, assetDownloadResume });
@@ -73,7 +63,6 @@ const loadSaga = (os: "android" | "ios") => {
 	let saga: typeof ProcessAssetDownloadSaga;
 
 	jest.isolateModules(() => {
-		const { Platform } = jest.requireActual("react-native");
 		Platform.OS = os;
 		saga =
 			require("../processAssetDownload/processAssetDownloadSaga").processAssetDownloadSaga;

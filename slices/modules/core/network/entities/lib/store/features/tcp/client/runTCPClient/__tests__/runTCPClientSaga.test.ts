@@ -1,11 +1,12 @@
+import {
+	startTCPClient,
+	stopTCPClient,
+	tcpClientSocketClosed,
+	tcpClientSocketConnected,
+} from "@modules/core/network/shared/lib";
 import { createSagaTester } from "@shared/lib/test/createSagaTester";
 import { eventChannel } from "redux-saga";
 import { runTCPClientSaga } from "../runTCPClientSaga";
-
-jest.mock("@modules/core/log/shared/config", () => ({
-	tcpLog: { info: jest.fn(), warn: jest.fn(), error: jest.fn() },
-	log: { error: jest.fn(), warn: jest.fn(), info: jest.fn() },
-}));
 
 let emitFromChannel: ((action: unknown) => void) | null = null;
 let closeSpy: jest.Mock;
@@ -14,13 +15,6 @@ jest.mock("../createTCPClientChannel", () => ({
 	createTCPClientChannel: (...args: unknown[]) =>
 		mockCreateTCPClientChannel(...args),
 }));
-
-const {
-	startTCPClient,
-	stopTCPClient,
-	tcpClientSocketClosed,
-	tcpClientSocketConnected,
-} = jest.requireActual("@modules/core/network/shared/lib");
 
 const makeControllableChannel = () => {
 	closeSpy = jest.fn();

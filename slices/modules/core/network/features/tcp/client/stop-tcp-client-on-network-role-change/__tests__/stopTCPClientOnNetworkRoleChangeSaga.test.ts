@@ -5,10 +5,6 @@ import {
 import { createSagaTester } from "@shared/lib/test/createSagaTester";
 import { stopTCPClientOnNetworkRoleChangeSaga } from "../stopTCPClientOnNetworkRoleChangeSaga";
 
-jest.mock("@modules/core/log/shared/config", () => ({
-	tcpLog: { info: jest.fn(), warn: jest.fn(), error: jest.fn() },
-}));
-
 describe("stopTCPClientOnNetworkRoleChangeSaga", () => {
 	it("stops the TCP client when switching to host", () => {
 		const tester = createSagaTester();

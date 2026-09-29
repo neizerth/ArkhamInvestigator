@@ -12,10 +12,6 @@ import { routes } from "@shared/config";
 import { createSagaTester } from "@shared/lib/test/createSagaTester";
 import { reconnectTCPClientSaga } from "../reconnectTCPClientSaga";
 
-jest.mock("@shared/lib", () =>
-	require("@shared/lib/test/mocks").sharedLibMock(),
-);
-
 const reducer = combineReducers({
 	network: network.reducer,
 	game: game.reducer,

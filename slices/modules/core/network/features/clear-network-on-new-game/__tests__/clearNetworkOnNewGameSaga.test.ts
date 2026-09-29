@@ -13,6 +13,7 @@ import {
 import { startNewGame } from "@modules/game/entities/startNewGame";
 import { combineReducers } from "@reduxjs/toolkit";
 import { createSagaTester } from "@shared/lib/test/createSagaTester";
+import { stateAfter } from "@shared/lib/test/stateAfter";
 import { clearNetworkOnNewGameSaga } from "../clearNetworkOnNewGameSaga";
 
 const reducer = combineReducers({
@@ -22,11 +23,13 @@ const reducer = combineReducers({
 
 describe("clearNetworkOnNewGameSaga", () => {
 	it("resets running flags, hostIP, and the client roster on every startNewGame", () => {
-		let state = reducer(undefined, { type: "@@init" });
-		state = reducer(state, setHostRunning(true));
-		state = reducer(state, setClientRunning(true));
-		state = reducer(state, setHostIP("192.168.1.10"));
-		state = reducer(state, upsertNetworkClient({ id: "c1", nickname: "A" }));
+		const state = stateAfter(
+			reducer,
+			setHostRunning(true),
+			setClientRunning(true),
+			setHostIP("192.168.1.10"),
+			upsertNetworkClient({ id: "c1", nickname: "A" }),
+		);
 
 		const tester = createSagaTester({ reducer, state });
 		tester.run(clearNetworkOnNewGameSaga);
@@ -44,8 +47,7 @@ describe("clearNetworkOnNewGameSaga", () => {
 	});
 
 	it("resets again for a subsequent startNewGame (e.g. single -> multiplayer)", () => {
-		let state = reducer(undefined, { type: "@@init" });
-		state = reducer(state, setHostIP("192.168.1.10"));
+		const state = stateAfter(reducer, setHostIP("192.168.1.10"));
 		const tester = createSagaTester({ reducer, state });
 		tester.run(clearNetworkOnNewGameSaga);
 

@@ -10,6 +10,7 @@ import {
 } from "@modules/stories/shared/lib";
 import { combineReducers } from "@reduxjs/toolkit";
 import { createSagaTester } from "@shared/lib/test/createSagaTester";
+import { stateAfter } from "@shared/lib/test/stateAfter";
 import { prepareMultiplayerOnStartSaga } from "../prepareMultiplayerOnStartSaga";
 
 const reducer = combineReducers({
@@ -19,8 +20,7 @@ const reducer = combineReducers({
 
 describe("prepareMultiplayerOnStartSaga", () => {
 	it("clears the chaos bag, disables unlimited tokens, and clears the story code when starting a multiplayer game", () => {
-		let state = reducer(undefined, { type: "@@init" });
-		state = reducer(state, setStoryCode("core" as never));
+		const state = stateAfter(reducer, setStoryCode("core" as never));
 		const tester = createSagaTester({ reducer, state });
 		tester.run(prepareMultiplayerOnStartSaga);
 

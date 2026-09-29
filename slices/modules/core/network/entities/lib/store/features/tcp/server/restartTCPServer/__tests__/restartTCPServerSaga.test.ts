@@ -11,13 +11,6 @@ import { combineReducers } from "@reduxjs/toolkit";
 import { createSagaTester } from "@shared/lib/test/createSagaTester";
 import { restartTCPServerSaga } from "../restartTCPServerSaga";
 
-jest.mock("@shared/lib", () =>
-	require("@shared/lib/test/mocks").sharedLibMock(),
-);
-jest.mock("@modules/core/log/shared/config", () => ({
-	tcpLog: { info: jest.fn(), warn: jest.fn(), error: jest.fn() },
-}));
-
 const reducer = combineReducers({ network: network.reducer });
 
 beforeEach(() => {

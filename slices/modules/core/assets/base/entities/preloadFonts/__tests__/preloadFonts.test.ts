@@ -6,10 +6,6 @@ jest.mock("@shared/lib", () => ({
 	...require("@shared/lib/test/mocks").sharedLibMock(),
 	seconds: (n: number) => n * 1000,
 }));
-jest.mock("@modules/core/log/shared/config", () => ({
-	log: { info: jest.fn(), warn: jest.fn(), error: jest.fn() },
-}));
-
 const mockPreloadFontMap = jest.fn();
 jest.mock("../preloadFontMap", () => ({
 	preloadFontMap: () => mockPreloadFontMap(),

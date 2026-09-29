@@ -1,4 +1,4 @@
-import { codeAlphabet } from "../../../config";
+import { codeAlphabet } from "@modules/multiplayer/entities/config";
 import { getHostIPFromInviteCode } from "../getHostIPFromInviteCode";
 import { getHostInviteCode } from "../getHostInviteCode";
 import { isHostCodeValid } from "../isHostCodeValid";

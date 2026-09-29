@@ -7,9 +7,6 @@ import { routes } from "@shared/config";
 import { createSagaTester } from "@shared/lib/test/createSagaTester";
 import { joinLocalGameSaga } from "../joinLocalGameSaga";
 
-jest.mock("@shared/lib", () =>
-	require("@shared/lib/test/mocks").sharedLibMock(),
-);
 jest.mock("@modules/core/router/shared/lib", () => {
 	const actual = jest.requireActual("@modules/core/router/shared/lib");
 	return {

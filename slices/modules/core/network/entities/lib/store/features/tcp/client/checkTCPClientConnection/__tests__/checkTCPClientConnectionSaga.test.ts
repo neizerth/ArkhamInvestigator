@@ -11,15 +11,9 @@ import { game, setGameStatus } from "@modules/game/shared/lib";
 import { combineReducers } from "@reduxjs/toolkit";
 import { routes } from "@shared/config";
 import { createSagaTester } from "@shared/lib/test/createSagaTester";
+import { stateAfter } from "@shared/lib/test/stateAfter";
 import { checkTCPClientConnection } from "../checkTCPClientConnection";
 import { checkTCPClientConnectionSaga } from "../checkTCPClientConnectionSaga";
-
-jest.mock("@shared/lib", () =>
-	require("@shared/lib/test/mocks").sharedLibMock(),
-);
-jest.mock("@modules/core/log/shared/config", () => ({
-	tcpLog: { info: jest.fn(), warn: jest.fn(), error: jest.fn() },
-}));
 
 const socket = { destroyed: false };
 const mockGetTCPServerSocket = jest.fn();
@@ -38,11 +32,13 @@ const reducer = combineReducers({
 });
 
 const buildAllowedState = () => {
-	let state = reducer(undefined, { type: "@@init" });
-	state = reducer(state, setNetworkRole("client"));
-	state = reducer(state, setHostIP("192.168.1.10"));
-	state = reducer(state, setGameStatus("playing"));
-	state = reducer(state, setCurrentRoute(routes.board));
+	const state = stateAfter(
+		reducer,
+		setNetworkRole("client"),
+		setHostIP("192.168.1.10"),
+		setGameStatus("playing"),
+		setCurrentRoute(routes.board),
+	);
 	return state;
 };
 

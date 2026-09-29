@@ -6,6 +6,7 @@ import {
 } from "@modules/core/network/shared/lib";
 import { combineReducers } from "@reduxjs/toolkit";
 import { createSagaTester } from "@shared/lib/test/createSagaTester";
+import { stateAfter } from "@shared/lib/test/stateAfter";
 import { sendNetworkClientInfo } from "../sendNetworkClientInfo";
 import { sendNetworkClientInfoSaga } from "../sendNetworkClientInfoSaga";
 
@@ -13,9 +14,11 @@ const reducer = combineReducers({ network: network.reducer });
 
 describe("sendNetworkClientInfoSaga", () => {
 	it("sends the client's nickname and hostIP to connect", () => {
-		let state = reducer(undefined, { type: "@@init" });
-		state = reducer(state, setNickname("Roland"));
-		state = reducer(state, setHostIP("192.168.1.10"));
+		const state = stateAfter(
+			reducer,
+			setNickname("Roland"),
+			setHostIP("192.168.1.10"),
+		);
 		const tester = createSagaTester({ reducer, state });
 		tester.run(sendNetworkClientInfoSaga);
 
@@ -32,8 +35,7 @@ describe("sendNetworkClientInfoSaga", () => {
 	});
 
 	it("does nothing when hostIP is unset", () => {
-		let state = reducer(undefined, { type: "@@init" });
-		state = reducer(state, setNickname("Roland"));
+		const state = stateAfter(reducer, setNickname("Roland"));
 		const tester = createSagaTester({ reducer, state });
 		tester.run(sendNetworkClientInfoSaga);
 

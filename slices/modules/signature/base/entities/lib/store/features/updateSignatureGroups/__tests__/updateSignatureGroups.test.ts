@@ -1,18 +1,15 @@
+import downloadQueue, {
+	addManyDownloadQueueItems,
+	selectDownloadQueue,
+} from "@modules/core/assets/download-queue/shared/lib/store/downloadQueue";
 import { combineReducers } from "@reduxjs/toolkit";
+import { createSagaTester, flush } from "@shared/lib/test/createSagaTester";
 import type {
 	InvestigatorSignature,
 	InvestigatorSignatureGroup,
 	InvestigatorSkin,
 } from "arkham-investigator-data";
 import * as FileSystem from "expo-file-system/legacy";
-import {
-	createSagaTester,
-	flush,
-} from "../../../../../../../../../shared/lib/test/createSagaTester";
-import downloadQueue, {
-	addManyDownloadQueueItems,
-	selectDownloadQueue,
-} from "../../../../../../../../core/assets/download-queue/shared/lib/store/downloadQueue";
 import { updateSignatureGroups } from "../updateSignatureGroups";
 import { updateSignatureGroupsSaga } from "../updateSignatureGroupsSaga";
 
@@ -24,9 +21,6 @@ const mockState = {
 	onDisk: new Set<string>(),
 };
 
-jest.mock("@shared/lib", () =>
-	require("@shared/lib/test/mocks").sharedLibMock(),
-);
 jest.mock("@shared/config", () => ({ HAVE_AVIF_SUPPORT: true }));
 jest.mock("expo-file-system/legacy", () => ({
 	documentDirectory: "file:///docs/",

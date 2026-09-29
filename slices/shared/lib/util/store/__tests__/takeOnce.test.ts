@@ -1,6 +1,6 @@
 import { createAction } from "@reduxjs/toolkit";
+import { createSagaTester, flush } from "@shared/lib/test/createSagaTester";
 import { put } from "redux-saga/effects";
-import { createSagaTester, flush } from "../../../test/createSagaTester";
 import { takeOnce } from "../takeOnce";
 
 const started = createAction("test/started");

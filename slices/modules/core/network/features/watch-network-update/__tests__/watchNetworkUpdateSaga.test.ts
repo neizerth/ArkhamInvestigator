@@ -1,12 +1,12 @@
 import { appStarted } from "@modules/core/app/shared/lib";
 import { network } from "@modules/core/network/shared/lib";
-import { combineReducers } from "@reduxjs/toolkit";
-import { createSagaTester } from "@shared/lib/test/createSagaTester";
-import { eventChannel } from "redux-saga";
 import {
 	internetReachabilityChanged,
 	networkInfoUpdated,
-} from "../../../shared/lib";
+} from "@modules/core/network/shared/lib";
+import { combineReducers } from "@reduxjs/toolkit";
+import { createSagaTester } from "@shared/lib/test/createSagaTester";
+import { eventChannel } from "redux-saga";
 import { watchNetworkUpdateSaga } from "../watchNetworkUpdateSaga";
 
 let emitFromChannel: ((action: unknown) => void) | null = null;

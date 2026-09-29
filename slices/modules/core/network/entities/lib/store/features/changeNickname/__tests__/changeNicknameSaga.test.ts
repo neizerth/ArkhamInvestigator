@@ -5,6 +5,7 @@ import {
 } from "@modules/core/network/shared/lib";
 import { combineReducers } from "@reduxjs/toolkit";
 import { createSagaTester } from "@shared/lib/test/createSagaTester";
+import { stateAfter } from "@shared/lib/test/stateAfter";
 import { changeNickname, nicknameChanged } from "../changeNickname";
 import { changeNicknameSaga } from "../changeNicknameSaga";
 
@@ -12,8 +13,7 @@ const reducer = combineReducers({ network: network.reducer });
 
 describe("changeNicknameSaga", () => {
 	it("sets the new nickname and announces the change when one was already set", () => {
-		let state = reducer(undefined, { type: "@@init" });
-		state = reducer(state, setNickname("Roland"));
+		const state = stateAfter(reducer, setNickname("Roland"));
 		const tester = createSagaTester({ reducer, state });
 		tester.run(changeNicknameSaga);
 

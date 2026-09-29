@@ -1,7 +1,7 @@
+import { networkInfoUpdated } from "@modules/core/network/shared/lib";
 import { addEventListener } from "@react-native-community/netinfo";
 import { runSaga, stdChannel } from "redux-saga";
 import { take } from "redux-saga/effects";
-import { networkInfoUpdated } from "../../../shared/lib";
 import { networkChannel } from "../networkChannel";
 
 const mockAddEventListener = addEventListener as jest.Mock;

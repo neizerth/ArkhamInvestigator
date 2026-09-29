@@ -1,179 +1,114 @@
-import type * as TCPClientSocket from "@modules/core/network/shared/lib/logic/tcp/socket/server";
+import { sendTCPActionFailed } from "@modules/core/network/entities/lib/store/features/tcp/sendTCPAction/sendTCPAction";
+import { setTCPClientSocket } from "@modules/core/network/shared/lib/logic/tcp/socket/server";
+import {
+	network,
+	setNetworkRole,
+} from "@modules/core/network/shared/lib/store/network";
+import { sendNotification } from "@modules/core/notifications/shared/lib/store/features/sendNotification/sendNotification";
 import { combineReducers } from "@reduxjs/toolkit";
 import { createSagaTester } from "@shared/lib/test/createSagaTester";
-import type * as SendTCPActionFailedServerSaga from "../sendTCPActionFailedServerSaga";
-
-jest.mock("@shared/lib", () =>
-	require("@shared/lib/test/mocks").sharedLibMock(),
-);
-jest.mock("@modules/core/log/shared/config", () => ({
-	tcpLog: { info: jest.fn(), warn: jest.fn(), error: jest.fn() },
-}));
-// Same reasoning as the client-side test: keep the mocked barrel to just what the saga needs so
-// it stays safe under `jest.isolateModules`.
-jest.mock("@modules/core/network/shared/lib", () => ({
-	...jest.requireActual("@modules/core/network/shared/lib/store/network"),
-	...jest.requireActual(
-		"@modules/core/network/shared/lib/logic/tcp/socket/server",
-	),
-	getSendTCPActionFailedDetail: () => ({}),
-}));
-
-const { network, setNetworkRole } = jest.requireActual(
-	"@modules/core/network/shared/lib/store/network",
-);
-const { sendTCPActionFailed } = jest.requireActual(
-	"@modules/core/network/entities/lib/store/features/tcp/sendTCPAction/sendTCPAction",
-);
-const { sendNotification } = jest.requireActual(
-	"@modules/core/notifications/shared/lib/store/features/sendNotification/sendNotification",
-);
+import { useFreshFakeClock } from "@shared/lib/test/useFreshFakeClock";
+import { sendTCPActionFailedServerSaga } from "../sendTCPActionFailedServerSaga";
 
 const reducer = combineReducers({ network: network.reducer });
 
-/**
- * Loads the saga fresh (module-level notify throttle isolation, see restartTCPClientSaga.test.ts)
- * AND grabs `setTCPClientSocket` from the SAME isolated registry: the mocked
- * `@modules/core/network/shared/lib` barrel re-runs its factory (and its
- * `jest.requireActual(".../socket/server")` call) inside every `isolateModules` block, so a
- * `setTCPClientSocket` obtained outside the block would write to a different `tcpSocketMap`
- * instance than the one the freshly-loaded saga reads from.
- */
-const loadSaga = () => {
-	let sagaMod: typeof SendTCPActionFailedServerSaga | undefined;
-	let socketMod: typeof TCPClientSocket | undefined;
-	jest.isolateModules(() => {
-		sagaMod = require("../sendTCPActionFailedServerSaga");
-		socketMod = require("@modules/core/network/shared/lib/logic/tcp/socket/server");
-	});
-	if (!sagaMod || !socketMod) {
-		throw new Error("TCP server saga was not loaded");
-	}
+const createSocket = (destroy = jest.fn()) => ({ destroy });
+
+/** Registers `socket` as connected client `networkId`, so the saga can resolve it. */
+const connect = (networkId: string, socket: ReturnType<typeof createSocket>) =>
+	setTCPClientSocket(networkId, socket as never);
+
+const setup = (role: "host" | "client" = "host") => {
+	const state = reducer(
+		reducer(undefined, { type: "@@init" }),
+		setNetworkRole(role),
+	);
+	const tester = createSagaTester({ reducer, state });
+	tester.run(sendTCPActionFailedServerSaga);
+
 	return {
-		saga: sagaMod.sendTCPActionFailedServerSaga,
-		setTCPClientSocket: socketMod.setTCPClientSocket,
+		tester,
+		fail: async (socket: ReturnType<typeof createSocket>) => {
+			tester.dispatch(
+				sendTCPActionFailed({
+					socket: socket as never,
+					action: { type: "some/action" } as never,
+					messageId: "m1",
+					type: "socket-destroyed",
+				}),
+			);
+			await jest.advanceTimersByTimeAsync(0);
+		},
+		toasts: () => tester.ofType(sendNotification.type).length,
 	};
 };
 
-const buildFailedAction = (socket: unknown) =>
-	sendTCPActionFailed({
-		socket,
-		action: { type: "some/action" },
-		messageId: "m1",
-		type: "socket-destroyed",
-	});
-
-beforeEach(() => {
-	jest.useFakeTimers();
-});
-
-afterEach(() => {
-	jest.useRealTimers();
-});
+// the saga throttles toasts with module-level state
+useFreshFakeClock();
 
 describe("sendTCPActionFailedServerSaga", () => {
 	it("no-ops for a client role", async () => {
-		const { saga } = loadSaga();
-		const state = reducer(
-			reducer(undefined, { type: "@@init" }),
-			setNetworkRole("client"),
-		);
-		const tester = createSagaTester({ reducer, state });
-		tester.run(saga);
+		const { fail, toasts } = setup("client");
+		const socket = createSocket();
 
-		const socket = { destroy: jest.fn() };
-		tester.dispatch(buildFailedAction(socket));
-		await jest.advanceTimersByTimeAsync(0);
+		await fail(socket);
 
 		expect(socket.destroy).not.toHaveBeenCalled();
-		expect(tester.ofType(sendNotification.type)).toHaveLength(0);
+		expect(toasts()).toBe(0);
 	});
 
 	it("destroys the socket and toasts when the networkId resolves", async () => {
-		const { saga, setTCPClientSocket } = loadSaga();
-		const socket = { destroy: jest.fn() };
-		setTCPClientSocket("client-1", socket as never);
+		const { fail, toasts } = setup();
+		const socket = createSocket();
+		connect("client-1", socket);
 
-		const state = reducer(
-			reducer(undefined, { type: "@@init" }),
-			setNetworkRole("host"),
-		);
-		const tester = createSagaTester({ reducer, state });
-		tester.run(saga);
-
-		tester.dispatch(buildFailedAction(socket));
-		await jest.advanceTimersByTimeAsync(0);
+		await fail(socket);
 
 		expect(socket.destroy).toHaveBeenCalledTimes(1);
-		expect(tester.ofType(sendNotification.type)).toHaveLength(1);
+		expect(toasts()).toBe(1);
 	});
 
-	it("no-ops (no further action dispatched) when the socket's networkId cannot be resolved", async () => {
-		const { saga } = loadSaga();
-		const state = reducer(
-			reducer(undefined, { type: "@@init" }),
-			setNetworkRole("host"),
-		);
-		const tester = createSagaTester({ reducer, state });
-		tester.run(saga);
+	it("no-ops when the socket's networkId cannot be resolved", async () => {
+		const { fail, tester } = setup();
+		const unresolved = createSocket();
 
-		const unresolvedSocket = { destroy: jest.fn() };
-		tester.dispatch(buildFailedAction(unresolvedSocket));
-		await jest.advanceTimersByTimeAsync(0);
+		await fail(unresolved);
 
-		expect(unresolvedSocket.destroy).not.toHaveBeenCalled();
+		expect(unresolved.destroy).not.toHaveBeenCalled();
 		expect(tester.actions).toHaveLength(1); // only the dispatched sendTCPActionFailed itself
 	});
 
 	it("swallows a destroy() that throws and still proceeds to the notification", async () => {
-		const { saga, setTCPClientSocket } = loadSaga();
-		const throwingSocket = {
-			destroy: jest.fn(() => {
+		const { fail, toasts } = setup();
+		const throwing = createSocket(
+			jest.fn(() => {
 				throw new Error("already torn down");
 			}),
-		};
-		setTCPClientSocket("client-2", throwingSocket as never);
-
-		const state = reducer(
-			reducer(undefined, { type: "@@init" }),
-			setNetworkRole("host"),
 		);
-		const tester = createSagaTester({ reducer, state });
-		tester.run(saga);
+		connect("client-2", throwing);
 
-		tester.dispatch(buildFailedAction(throwingSocket));
-		await jest.advanceTimersByTimeAsync(0);
+		await fail(throwing);
 
-		expect(throwingSocket.destroy).toHaveBeenCalledTimes(1);
-		expect(tester.ofType(sendNotification.type)).toHaveLength(1);
+		expect(throwing.destroy).toHaveBeenCalledTimes(1);
+		expect(toasts()).toBe(1);
 	});
 
 	it("throttles the toast to one per 8s", async () => {
-		const { saga, setTCPClientSocket } = loadSaga();
-		const socketA = { destroy: jest.fn() };
-		const socketB = { destroy: jest.fn() };
-		setTCPClientSocket("client-a", socketA as never);
-		setTCPClientSocket("client-b", socketB as never);
+		const { fail, toasts } = setup();
+		const socketA = createSocket();
+		const socketB = createSocket();
+		connect("client-a", socketA);
+		connect("client-b", socketB);
 
-		const state = reducer(
-			reducer(undefined, { type: "@@init" }),
-			setNetworkRole("host"),
-		);
-		const tester = createSagaTester({ reducer, state });
-		tester.run(saga);
+		await fail(socketA);
+		expect(toasts()).toBe(1);
 
-		tester.dispatch(buildFailedAction(socketA));
-		await jest.advanceTimersByTimeAsync(0);
-		expect(tester.ofType(sendNotification.type)).toHaveLength(1);
-
-		tester.dispatch(buildFailedAction(socketB));
-		await jest.advanceTimersByTimeAsync(0);
-		expect(tester.ofType(sendNotification.type)).toHaveLength(1); // still throttled
+		await fail(socketB);
+		expect(toasts()).toBe(1); // still throttled
 
 		await jest.advanceTimersByTimeAsync(8_000);
 
-		tester.dispatch(buildFailedAction(socketA));
-		await jest.advanceTimersByTimeAsync(0);
-		expect(tester.ofType(sendNotification.type)).toHaveLength(2);
+		await fail(socketA);
+		expect(toasts()).toBe(2);
 	});
 });

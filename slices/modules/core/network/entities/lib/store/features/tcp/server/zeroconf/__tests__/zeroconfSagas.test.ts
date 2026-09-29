@@ -8,14 +8,10 @@ import {
 } from "@modules/core/network/shared/lib";
 import { combineReducers } from "@reduxjs/toolkit";
 import { createSagaTester } from "@shared/lib/test/createSagaTester";
+import { stateAfter } from "@shared/lib/test/stateAfter";
 import { restartTCPServerZeroconfSaga } from "../restartTCPServerZeroconfSaga";
 import { startTCPServerZeroconfSaga } from "../startTCPServerZeroconfSaga";
 import { stopTCPServerZeroconfSaga } from "../stopTCPServerZeroconfSaga";
-
-jest.mock("@modules/core/log/shared/config", () => ({
-	tcpLog: { info: jest.fn(), warn: jest.fn(), error: jest.fn() },
-	log: { error: jest.fn(), warn: jest.fn(), info: jest.fn() },
-}));
 
 const mockPublishZeroconfService = jest.fn();
 const mockUnpublishZeroconfServiceByNetworkId = jest.fn();
@@ -39,9 +35,11 @@ beforeEach(() => {
 
 describe("startTCPServerZeroconfSaga", () => {
 	it("publishes the zeroconf service using nickname and device network id", async () => {
-		let state = reducer(undefined, { type: "@@init" });
-		state = reducer(state, setNickname("Roland"));
-		state = reducer(state, setDeviceNetworkId("net-1"));
+		const state = stateAfter(
+			reducer,
+			setNickname("Roland"),
+			setDeviceNetworkId("net-1"),
+		);
 		const tester = createSagaTester({ reducer, state });
 		tester.run(startTCPServerZeroconfSaga);
 
@@ -55,9 +53,11 @@ describe("startTCPServerZeroconfSaga", () => {
 	});
 
 	it("falls back to the default server name when nickname is blank", async () => {
-		let state = reducer(undefined, { type: "@@init" });
-		state = reducer(state, setNickname("   "));
-		state = reducer(state, setDeviceNetworkId("net-2"));
+		const state = stateAfter(
+			reducer,
+			setNickname("   "),
+			setDeviceNetworkId("net-2"),
+		);
 		const tester = createSagaTester({ reducer, state });
 		tester.run(startTCPServerZeroconfSaga);
 
@@ -73,8 +73,7 @@ describe("startTCPServerZeroconfSaga", () => {
 
 describe("stopTCPServerZeroconfSaga", () => {
 	it("unpublishes the zeroconf service for the current device network id", async () => {
-		let state = reducer(undefined, { type: "@@init" });
-		state = reducer(state, setDeviceNetworkId("net-3"));
+		const state = stateAfter(reducer, setDeviceNetworkId("net-3"));
 		const tester = createSagaTester({ reducer, state });
 		tester.run(stopTCPServerZeroconfSaga);
 

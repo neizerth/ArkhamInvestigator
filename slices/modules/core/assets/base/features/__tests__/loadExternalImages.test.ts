@@ -10,9 +10,10 @@ import {
 	unzipComplete,
 	unzipError,
 } from "@modules/core/disk/entities/unzip/unzip";
+import { internetReachabilityChanged } from "@modules/core/network/shared/lib/store/actions/common";
 import { combineReducers } from "@reduxjs/toolkit";
+import { createSagaTester } from "@shared/lib/test/createSagaTester";
 import type { BuildInfo } from "arkham-investigator-data";
-import { createSagaTester } from "../../../../../../shared/lib/test/createSagaTester";
 import { retryExternalImagesDownload } from "../../shared/lib/store/actions";
 import assets, { setExternalImagesLoaded } from "../../shared/lib/store/assets";
 import { loadExternalImages } from "../download-external-images/loadExternalImages";
@@ -20,9 +21,6 @@ import { loadExternalImages } from "../download-external-images/loadExternalImag
 const DEFAULT_URL = "https://default.example.com";
 const mockArchiveUrl = { value: `${DEFAULT_URL}/images/avif.color.zip` };
 
-jest.mock("@shared/lib", () =>
-	require("@shared/lib/test/mocks").sharedLibMock(),
-);
 jest.mock("../../shared/config", () => ({
 	externalImagesArchiveDiskPath: "images.zip",
 	externalImagesDiskPath: "images",
@@ -35,10 +33,6 @@ jest.mock("@modules/core/network/shared/lib", () =>
 	jest.requireActual(
 		"@modules/core/network/shared/lib/store/util/filterInternetIsReachable",
 	),
-);
-
-const { internetReachabilityChanged } = jest.requireActual(
-	"@modules/core/network/shared/lib/store/actions/common",
 );
 
 const reducer = combineReducers({ assets });

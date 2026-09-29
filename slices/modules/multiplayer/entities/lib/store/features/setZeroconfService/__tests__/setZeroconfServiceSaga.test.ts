@@ -18,10 +18,6 @@ jest.mock("@modules/core/network/shared/lib", () => {
 		checkTcpHostReachable: (ip: string) => mockCheckTcpHostReachable(ip),
 	};
 });
-jest.mock("@modules/core/log/shared/config", () => ({
-	tcpLog: { info: jest.fn(), warn: jest.fn(), error: jest.fn() },
-}));
-
 const reducer = combineReducers({
 	network: network.reducer,
 	game: game.reducer,

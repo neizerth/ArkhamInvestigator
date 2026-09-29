@@ -1,6 +1,6 @@
+import { tcpActionReceived } from "@modules/core/network/shared/lib/store/actions";
 import type { NetworkIncomeActionMeta } from "@modules/core/network/shared/model";
 import { createAction } from "@reduxjs/toolkit";
-import { tcpActionReceived } from "../../../actions";
 import { createTCPIncomeAction } from "../createTCPIncomeAction";
 import { filterTCPIncomeAction } from "../filterTCPIncomeAction";
 import { filterTCPMessageReceived } from "../filterTCPMessageReceived";

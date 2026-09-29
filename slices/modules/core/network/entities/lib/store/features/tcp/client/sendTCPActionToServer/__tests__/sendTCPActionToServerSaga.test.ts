@@ -1,6 +1,6 @@
+import { sendTCPAction } from "@modules/core/network/entities/lib/store/features/tcp/sendTCPAction";
 import type { NetworkOutcomeAction } from "@modules/core/network/shared/model";
 import { createSagaTester } from "@shared/lib/test/createSagaTester";
-import { sendTCPAction } from "../../../sendTCPAction";
 
 const remoteAction = (type: string): NetworkOutcomeAction<unknown> => ({
 	type,

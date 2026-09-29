@@ -7,11 +7,8 @@ import { startGame } from "@modules/game/entities/startGame";
 import { game, setGameMode } from "@modules/game/shared/lib";
 import { combineReducers } from "@reduxjs/toolkit";
 import { createSagaTester } from "@shared/lib/test/createSagaTester";
+import { stateAfter } from "@shared/lib/test/stateAfter";
 import { unpublishZeroconfOnMultiplayerStartSaga } from "../unpublishZeroconfOnMultiplayerStartSaga";
-
-jest.mock("@shared/lib", () =>
-	require("@shared/lib/test/mocks").sharedLibMock(),
-);
 
 const reducer = combineReducers({
 	network: network.reducer,
@@ -20,9 +17,11 @@ const reducer = combineReducers({
 
 describe("unpublishZeroconfOnMultiplayerStartSaga", () => {
 	it("unpublishes Zeroconf when the host starts a multiplayer game", () => {
-		let state = reducer(undefined, { type: "@@init" });
-		state = reducer(state, setGameMode("multiplayer" as never));
-		state = reducer(state, setNetworkRole("host"));
+		const state = stateAfter(
+			reducer,
+			setGameMode("multiplayer" as never),
+			setNetworkRole("host"),
+		);
 		const tester = createSagaTester({ reducer, state });
 		tester.run(unpublishZeroconfOnMultiplayerStartSaga);
 
@@ -32,9 +31,11 @@ describe("unpublishZeroconfOnMultiplayerStartSaga", () => {
 	});
 
 	it("does nothing for a client role", () => {
-		let state = reducer(undefined, { type: "@@init" });
-		state = reducer(state, setGameMode("multiplayer" as never));
-		state = reducer(state, setNetworkRole("client"));
+		const state = stateAfter(
+			reducer,
+			setGameMode("multiplayer" as never),
+			setNetworkRole("client"),
+		);
 		const tester = createSagaTester({ reducer, state });
 		tester.run(unpublishZeroconfOnMultiplayerStartSaga);
 
@@ -44,9 +45,11 @@ describe("unpublishZeroconfOnMultiplayerStartSaga", () => {
 	});
 
 	it("does nothing for a single-player game", () => {
-		let state = reducer(undefined, { type: "@@init" });
-		state = reducer(state, setGameMode("single" as never));
-		state = reducer(state, setNetworkRole("host"));
+		const state = stateAfter(
+			reducer,
+			setGameMode("single" as never),
+			setNetworkRole("host"),
+		);
 		const tester = createSagaTester({ reducer, state });
 		tester.run(unpublishZeroconfOnMultiplayerStartSaga);
 

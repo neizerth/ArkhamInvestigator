@@ -5,10 +5,6 @@ import { routes } from "@shared/config";
 import { createSagaTester } from "@shared/lib/test/createSagaTester";
 import { stopTCPClientOnHomeSaga } from "../stopTCPClientOnHomeSaga";
 
-jest.mock("@shared/lib", () =>
-	require("@shared/lib/test/mocks").sharedLibMock(),
-);
-
 const reducer = combineReducers({ router: router.reducer });
 
 describe("stopTCPClientOnHomeSaga", () => {

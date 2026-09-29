@@ -11,11 +11,6 @@ jest.mock("@modules/core/network/shared/lib", () => {
 		setTCPClientSocket: (...args: unknown[]) => mockSetTCPClientSocket(...args),
 	};
 });
-jest.mock("@modules/core/log/shared/config", () => ({
-	log: { info: jest.fn(), warn: jest.fn(), error: jest.fn() },
-	tcpLog: { info: jest.fn(), warn: jest.fn(), error: jest.fn() },
-}));
-
 const socket = { id: "client-socket" };
 
 const buildData = (overrides: Partial<Record<string, unknown>> = {}) =>

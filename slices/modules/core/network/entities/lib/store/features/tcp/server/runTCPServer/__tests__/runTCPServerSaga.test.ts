@@ -1,13 +1,9 @@
 import { network, setNickname } from "@modules/core/network/shared/lib";
 import { combineReducers } from "@reduxjs/toolkit";
 import { createSagaTester } from "@shared/lib/test/createSagaTester";
+import { stateAfter } from "@shared/lib/test/stateAfter";
 import { eventChannel } from "redux-saga";
 import { runTCPServerSaga } from "../runTCPServerSaga";
-
-jest.mock("@modules/core/log/shared/config", () => ({
-	tcpLog: { info: jest.fn(), warn: jest.fn(), error: jest.fn() },
-	log: { error: jest.fn(), warn: jest.fn(), info: jest.fn() },
-}));
 
 let emitFromChannel: ((action: unknown) => void) | null = null;
 let closeSpy: jest.Mock;
@@ -58,8 +54,7 @@ beforeEach(() => {
 });
 
 const buildState = () => {
-	let state = reducer(undefined, { type: "@@init" });
-	state = reducer(state, setNickname("Roland"));
+	const state = stateAfter(reducer, setNickname("Roland"));
 	return state;
 };
 

@@ -15,11 +15,6 @@ import { runSaga, stdChannel } from "redux-saga";
 import { take } from "redux-saga/effects";
 import { createTCPServerChannel } from "../createTCPServerChannel";
 
-jest.mock("@modules/core/log/shared/config", () => ({
-	tcpLog: { info: jest.fn(), warn: jest.fn(), error: jest.fn() },
-	log: { error: jest.fn(), warn: jest.fn(), info: jest.fn() },
-}));
-
 class FakeServer extends EventEmitter {
 	onConnection?: (socket: FakeClientSocket) => void;
 	listen = jest.fn();

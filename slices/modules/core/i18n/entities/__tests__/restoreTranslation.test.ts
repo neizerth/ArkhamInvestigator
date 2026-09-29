@@ -1,7 +1,4 @@
-import {
-	createSagaTester,
-	flush,
-} from "../../../../../shared/lib/test/createSagaTester";
+import { createSagaTester, flush } from "@shared/lib/test/createSagaTester";
 import {
 	loadLanguage,
 	loadLanguageFailed,
@@ -16,9 +13,6 @@ import { setTranslation } from "../translation/setTranslation";
 
 const mockLoad = jest.fn();
 
-jest.mock("@shared/lib", () =>
-	require("@shared/lib/test/mocks").sharedLibMock(),
-);
 jest.mock("../../shared/lib", () => ({
 	...jest.requireActual("../../shared/lib/store"),
 	...jest.requireActual("../../shared/lib/common"),

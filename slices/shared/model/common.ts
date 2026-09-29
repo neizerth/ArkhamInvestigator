@@ -15,4 +15,5 @@ export type AppTheme = {
 	activeOpacity: number;
 	orientation: DeviceOrientationInfo;
 	os: typeof Platform.OS;
+	artworksEnabled: boolean;
 };

@@ -6,6 +6,7 @@ import { Platform } from "react-native";
 
 type Options = {
 	orientation: DeviceOrientationInfo;
+	artworksEnabled: boolean;
 };
 
 export const getAppTheme = (options: Options): AppTheme => ({

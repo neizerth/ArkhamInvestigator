@@ -15,11 +15,8 @@ import {
 import { combineReducers } from "@reduxjs/toolkit";
 import { routes } from "@shared/config";
 import { createSagaTester } from "@shared/lib/test/createSagaTester";
+import { stateAfter } from "@shared/lib/test/stateAfter";
 import { initGameStatusOnMultiplayerRouteSaga } from "../initGameStatusOnMultiplayerRouteSaga";
-
-jest.mock("@shared/lib", () =>
-	require("@shared/lib/test/mocks").sharedLibMock(),
-);
 
 const reducer = combineReducers({
 	network: network.reducer,
@@ -30,10 +27,12 @@ const reducer = combineReducers({
 
 describe("initGameStatusOnMultiplayerRouteSaga", () => {
 	it("resets clients, hostIP, and gameStatus on entering the multiplayer screen", () => {
-		let state = reducer(undefined, { type: "@@init" });
-		state = reducer(state, setHostIP("192.168.1.10"));
-		state = reducer(state, upsertNetworkClient({ id: "c1", nickname: "A" }));
-		state = reducer(state, setGameStatus("playing"));
+		const state = stateAfter(
+			reducer,
+			setHostIP("192.168.1.10"),
+			upsertNetworkClient({ id: "c1", nickname: "A" }),
+			setGameStatus("playing"),
+		);
 
 		const tester = createSagaTester({ reducer, state });
 		tester.run(initGameStatusOnMultiplayerRouteSaga);
@@ -50,9 +49,11 @@ describe("initGameStatusOnMultiplayerRouteSaga", () => {
 	});
 
 	it("does nothing for any other route", () => {
-		let state = reducer(undefined, { type: "@@init" });
-		state = reducer(state, setHostIP("192.168.1.10"));
-		state = reducer(state, setGameStatus("playing"));
+		const state = stateAfter(
+			reducer,
+			setHostIP("192.168.1.10"),
+			setGameStatus("playing"),
+		);
 
 		const tester = createSagaTester({ reducer, state });
 		tester.run(initGameStatusOnMultiplayerRouteSaga);
