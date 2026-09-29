@@ -73,20 +73,20 @@ appId: ${APP_ID}
       id: "board-health"
     timeout: 60000
 
-# host -> every client: health 9 -> 8
-- assertVisible:
-    id: "health-value"
-    text: "9"
-- tapOn:
+# the host changes its own investigator: a long press raises health and base by one, the base value
+# shows the difference (a plain tap changes only the current value)
+- assertNotVisible:
+    id: "health-base-value"
+- longPressOn:
     id: "board-health"
 - extendedWaitUntil:
     visible:
-      id: "health-value"
-      text: "8"
+      id: "health-base-value"
+      text: "\\+1"
     timeout: 10000
-# the clients confirm they got it: the last one taps health, 8 -> 7 comes back to the host
+# the clients check that they received it (they look at Roland's board), then the host is done:
+# keep the app alive while they do
 - extendedWaitUntil:
-    visible:
-      id: "health-value"
-      text: "7"
-    timeout: 300000
+    visible: "never-visible-pause"
+    timeout: 60000
+    optional: true

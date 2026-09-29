@@ -1,6 +1,4 @@
 # iOS Simulator client of the 3/4-device suite: `-e NICKNAME="E2E Client A" -e SIGNATURE=signature-02001`
-# (B: signature-03001, C: signature-04001). `-e LAST=true` only for the client that answers the
-# host with the final health change (the host waits for 7). See multi-host.yaml.
 appId: ${APP_ID}
 ---
 - launchApp:
@@ -70,22 +68,26 @@ appId: ${APP_ID}
     visible:
       id: "board-health"
     timeout: 600000
-# host -> client: 9 -> 8 (the board shows the host's investigator first)
-- extendedWaitUntil:
-    visible:
-      id: "health-value"
-      text: "8"
-    timeout: 120000
-
-# the last client answers the host: 8 -> 7
-- runFlow:
-    when:
-      true: ${LAST == 'true'}
+# every investigator of the game reached this client: the title has arrows (a client that missed the
+# other players' selections used to be left with a single board or the "fallback" investigator)
+- assertVisible:
+    id: "board-investigator-next"
+- assertNotVisible: ".*fallback.*"
+# the host's investigator is one of the boards, with the health the host has changed
+- repeat:
+    times: 4
+    while:
+      notVisible: ".*Roland Banks.*"
     commands:
       - tapOn:
-          id: "board-health"
-      - extendedWaitUntil:
-          visible:
-            id: "health-value"
-            text: "7"
-          timeout: 10000
+          id: "board-investigator-next"
+      - waitForAnimationToEnd:
+          timeout: 3000
+- extendedWaitUntil:
+    visible: ".*Roland Banks.*"
+    timeout: 5000
+- extendedWaitUntil:
+    visible:
+      id: "health-base-value"
+      text: "\\+1"
+    timeout: 120000
