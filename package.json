@@ -60,8 +60,12 @@
 	"jest": {
 		"preset": "jest-expo",
 		"resolver": "react-native-worklets/jest/resolver",
-		"setupFiles": ["<rootDir>/jest.setup.ts"],
-		"setupFilesAfterEnv": ["<rootDir>/jest.setupAfterEnv.ts"],
+		"setupFiles": [
+			"<rootDir>/jest.setup.ts"
+		],
+		"setupFilesAfterEnv": [
+			"<rootDir>/jest.setupAfterEnv.ts"
+		],
 		"testPathIgnorePatterns": [
 			"/node_modules/",
 			"/e2e/",
@@ -168,7 +172,6 @@
 		"@biomejs/biome": "1.9.4",
 		"@commitlint/cli": "^19.8.0",
 		"@commitlint/config-conventional": "^19.8.0",
-		"@expo/config-plugins": "~57.0.9",
 		"@jest/test-sequencer": "^30.2.0",
 		"@react-native-community/cli": "^20.0.2",
 		"@react-native/jest-preset": "^0.86.3",
@@ -196,7 +199,9 @@
 	},
 	"private": true,
 	"commitlint": {
-		"extends": ["@commitlint/config-conventional"]
+		"extends": [
+			"@commitlint/config-conventional"
+		]
 	},
 	"expo": {
 		"doctor": {

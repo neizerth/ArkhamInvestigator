@@ -22,10 +22,6 @@ module.exports = {
         ITSAppUsesNonExemptEncryption: false,
       },
     },
-    androidNavigationBar: {
-      visible: "sticky-immersive",
-      backgroundColor: "#00000000"
-    },
     android: {
       adaptiveIcon: {
         foregroundImage: "./assets/images/icon.png",
@@ -33,7 +29,6 @@ module.exports = {
       },
       package: packageId,
       versionCode,
-      edgeToEdgeEnabled: true,
     },
     web: {
       bundler: "metro",
@@ -61,13 +56,12 @@ module.exports = {
       ],
       "expo-asset",
       [
-        "react-native-edge-to-edge",
+        "expo-navigation-bar",
         {
-          android: {
-            // Prevent Android from applying a contrasting (often light) scrim behind
-            // the 3-button navigation bar in edge-to-edge mode.
-            enforceNavigationBarContrast: false,
-          },
+          // Prevent Android from applying a contrasting (often light) scrim behind
+          // the 3-button navigation bar in edge-to-edge mode.
+          enforceContrast: false,
+          hidden: true,
         },
       ],
       [
