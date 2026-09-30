@@ -1,4 +1,4 @@
-const paperTexture = require("./paper.png");
+const paperTexture = require("./paper.webp");
 
 export const textureImages = {
 	paperTexture,

@@ -1,5 +1,5 @@
-const background = require("./background.jpg");
-const phaseBackground = require("./phase-background.png");
+const background = require("./background.webp");
+const phaseBackground = require("./phase-background.webp");
 const stepBackground = require("./step-background.png");
 
 export const roundReferenceAssets = {

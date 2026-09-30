@@ -1,9 +1,9 @@
-export const familyInheritance = require("./family-inheritance.png");
-export const bountyContracts = require("./bounty-contracts.png");
-export const ravenous = require("./ravenous.png");
-export const books = require("./books.png");
-export const gateBox = require("./gate-box.png");
-export const fluxStabilizer = require("./flux-stabilizer.png");
+export const familyInheritance = require("./family-inheritance.webp");
+export const bountyContracts = require("./bounty-contracts.webp");
+export const ravenous = require("./ravenous.webp");
+export const books = require("./books.webp");
+export const gateBox = require("./gate-box.webp");
+export const fluxStabilizer = require("./flux-stabilizer.webp");
 
 export const abilitiyBackgrounds = {
 	familyInheritance,

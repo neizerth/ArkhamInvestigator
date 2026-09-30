@@ -23,8 +23,8 @@ import {
 export const AppProvider = ({ children }: PropsWithChildren) => {
 	return (
 		<GestureHandlerRootView>
-			<ThemeProvider>
-				<StoreProvider>
+			<StoreProvider>
+				<ThemeProvider>
 					<ToastProvider>
 						<ModalProvider>
 							<AppLoadProvider>
@@ -42,8 +42,8 @@ export const AppProvider = ({ children }: PropsWithChildren) => {
 							</AppLoadProvider>
 						</ModalProvider>
 					</ToastProvider>
-				</StoreProvider>
-			</ThemeProvider>
+				</ThemeProvider>
+			</StoreProvider>
 		</GestureHandlerRootView>
 	);
 };

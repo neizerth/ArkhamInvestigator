@@ -1,10 +1,10 @@
-const writing = require("./writing.png");
-const rorschach = require("./rr1.png");
-const scratches = require("./scratches.png");
-const fog = require("./fog.png");
-const area = require("./area.png");
-const eye = require("./eye.jpg");
-const almostInsane = require("./almost-insane.jpg");
+const writing = require("./writing.webp");
+const rorschach = require("./rr1.webp");
+const scratches = require("./scratches.webp");
+const fog = require("./fog.webp");
+const area = require("./area.webp");
+const eye = require("./eye.webp");
+const almostInsane = require("./almost-insane.webp");
 
 export const horrorImages = {
 	writing,
