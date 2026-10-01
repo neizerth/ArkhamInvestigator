@@ -37,6 +37,7 @@ export const HomePage = () => {
 				<C.ResumeButton onPress={onResume}>{t`Continue`}</C.ResumeButton>
 			)}
 			<ArtworksFragment>
+				<C.Background />
 				<C.Disclaimer navbarHeight={navbarHeight}>
 					<C.DisclaimerText>{t`app.disclaimer`}</C.DisclaimerText>
 				</C.Disclaimer>
