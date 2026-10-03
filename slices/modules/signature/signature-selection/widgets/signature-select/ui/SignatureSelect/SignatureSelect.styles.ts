@@ -1,9 +1,9 @@
 import { IOS_WITH_GESTURE_CONTROL, size } from "@shared/config";
-import { Platform } from "react-native";
+import type { AppTheme } from "@shared/model";
 import { css } from "styled-components/native";
 
-export const getFooterStyle = () => {
-	if (Platform.OS !== "ios" || !IOS_WITH_GESTURE_CONTROL) {
+export const getFooterStyle = (platform: AppTheme["platform"]) => {
+	if (!platform.ios || !IOS_WITH_GESTURE_CONTROL) {
 		return css`
       bottom: ${size.gap.default}px;
       left: 0;
@@ -17,8 +17,8 @@ export const getFooterStyle = () => {
   `;
 };
 
-export const getListPaddingBottom = () => {
-	if (Platform.OS !== "ios" || !IOS_WITH_GESTURE_CONTROL) {
+export const getListPaddingBottom = (platform: AppTheme["platform"]) => {
+	if (!platform.ios || !IOS_WITH_GESTURE_CONTROL) {
 		return 65;
 	}
 	return 70;

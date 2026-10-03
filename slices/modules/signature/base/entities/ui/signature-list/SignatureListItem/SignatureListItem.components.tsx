@@ -7,11 +7,9 @@ import type { PropsWithFaction } from "@modules/faction/shared/model";
 import { factionColor } from "@shared/config";
 import { Icon, IconNumber, type IconProps, Row, Text } from "@shared/ui";
 import type { FC } from "react";
-import { Platform, View } from "react-native";
+import { View } from "react-native";
 import type { TextProps } from "react-native";
 import styled, { css } from "styled-components/native";
-
-const ios = Platform.OS === "ios";
 
 export const Container: typeof TouchableOpacity = styled(TouchableOpacity)`
 	align-items: center;
@@ -43,9 +41,9 @@ export const FactionIcon: typeof ThemeFactionFontIcon = styled(
 `;
 
 export const Main: typeof View = styled(View)`
-  ${({ theme: { size } }) => css`
+  ${({ theme: { size, platform } }) => css`
 	padding-top: ${size.gap.small}px;
-	gap: ${ios ? size.gap.small : 0}px;
+	gap: ${platform.ios ? size.gap.small : 0}px;
 	flex: 1;
 `}`;
 

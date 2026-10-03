@@ -1,13 +1,11 @@
 import { useId } from "react";
-import { Platform } from "react-native";
 import Svg, {
 	FeGaussianBlur,
 	Filter,
 	Rect,
 	type SvgProps,
 } from "react-native-svg";
-
-const ios = Platform.OS === "ios";
+import { useTheme } from "styled-components/native";
 
 export type ReferenceSectionBackgroundProps = SvgProps & {
 	backgroundColor: string;
@@ -26,14 +24,16 @@ export const ReferenceSectionBackground = ({
 	rectWidth = "94%",
 	height = "100%",
 	width = "100%",
-	deviation = ios ? 4 : 25,
+	deviation,
 	...props
 }: ReferenceSectionBackgroundProps) => {
+	const { platform } = useTheme();
+	const blurDeviation = deviation ?? (platform.ios ? 4 : 25);
 	const id = useId();
 	return (
 		<Svg {...props} height={height} width={width}>
 			<Filter id={id}>
-				<FeGaussianBlur stdDeviation={deviation} in="SourceGraphic" />
+				<FeGaussianBlur stdDeviation={blurDeviation} in="SourceGraphic" />
 			</Filter>
 
 			<Rect

@@ -1,11 +1,9 @@
 import { Icon, StatIcon } from "@shared/ui";
-import { Platform, View } from "react-native";
+import { View } from "react-native";
 import styled from "styled-components/native";
 import { RevealMenu } from "../RevealMenu";
 import { SkillValuePicker } from "../SkillValuePicker";
 import { SkillValueSelect } from "../SkillValueSelect";
-
-const ios = Platform.OS === "ios";
 
 export const Container: typeof View = styled(View)`
 `;
@@ -39,7 +37,7 @@ export const SkillTypeIcon: typeof StatIcon = styled(StatIcon)`
 
 export const SkillType: typeof View = styled(View)`
   position: absolute;
-  top: ${ios ? "-13px" : "-5px"};
+  top: ${({ theme }) => (theme.platform.ios ? "-13px" : "-5px")};
   right: -30px;
 `;
 

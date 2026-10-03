@@ -7,7 +7,7 @@ import styled from "styled-components/native";
 type ContainerProps = PropsWithFaction & ViewProps;
 
 export const Container: FC<ContainerProps> = styled(View)`
-  ${({ faction }: ContainerProps) => getFactionDescriptionStyle(faction)}
+  ${({ faction }) => getFactionDescriptionStyle(faction)}
   position: absolute;
   z-index: -10;
   opacity: 0;

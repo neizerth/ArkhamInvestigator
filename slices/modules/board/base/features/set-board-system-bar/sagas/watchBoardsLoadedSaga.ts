@@ -6,7 +6,7 @@ import { setStatusBarStyle } from "@modules/core/device/entities/status-bar";
 import { put, select, takeEvery } from "redux-saga/effects";
 import { setBoardSystemBar } from "../setBoardSystemBar";
 
-function* worker({ payload }: ReturnType<typeof setBoardProgress>) {
+function* worker() {
 	const loadProgress: ReturnType<typeof selectBoardsLoadProgress> =
 		yield select(selectBoardsLoadProgress);
 

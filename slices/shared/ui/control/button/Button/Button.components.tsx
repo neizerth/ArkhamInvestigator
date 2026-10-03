@@ -1,5 +1,4 @@
 import { TouchableOpacity } from "@modules/core/touch/shared/ui";
-import { Platform } from "react-native";
 import styled, { css } from "styled-components/native";
 import { ArkhamDBText } from "../../../content";
 import { Icon as BaseIcon } from "../../../game";
@@ -15,8 +14,6 @@ export const Container: typeof TouchableOpacity = styled(TouchableOpacity)`
   `}
 `;
 
-const ios = Platform.OS === "ios";
-
 export const Text: typeof ArkhamDBText = styled(ArkhamDBText).attrs(
 	({ theme }) => ({
 		componentStyles: {
@@ -24,7 +21,7 @@ export const Text: typeof ArkhamDBText = styled(ArkhamDBText).attrs(
 				flexWrap: "nowrap",
 			},
 			icon: {
-				top: ios ? -6 : 0,
+				top: theme.platform.ios ? -6 : 0,
 				fontSize: theme.font.size.small,
 			},
 		},

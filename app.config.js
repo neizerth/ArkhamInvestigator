@@ -10,10 +10,10 @@ module.exports = {
     name,
     slug: "arkham-investigator",
     version: pkg.version,
-    orientation: "portrait",
     icon: "./assets/images/icon1024.png",
     scheme: "inv",
     userInterfaceStyle: "dark",
+    orientation: "default",
     newArchEnabled: true,
     ios: {
       supportsTablet: false,

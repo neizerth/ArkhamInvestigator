@@ -1,6 +1,6 @@
 import { goBack } from "@modules/core/router/shared/lib";
 import { useAppDispatch } from "@shared/lib";
-import { Page, PageContent } from "@shared/ui";
+import { Page, SafeContent } from "@shared/ui";
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { TopBar } from "../../../../navigation/top-bar";
@@ -27,9 +27,9 @@ export const ContentPage = ({
 	return (
 		<Page {...props}>
 			<TopBar title={t(title)} onBack={back} />
-			<PageContent style={contentStyle} full={full}>
+			<SafeContent style={contentStyle} full={full}>
 				{children}
-			</PageContent>
+			</SafeContent>
 		</Page>
 	);
 };

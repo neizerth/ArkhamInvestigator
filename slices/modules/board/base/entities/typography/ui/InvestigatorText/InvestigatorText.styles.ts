@@ -4,10 +4,8 @@ import { Yoon } from "@assets/fonts";
 import { color } from "@shared/config";
 import { type KeyConfig, getKeyConfig } from "@shared/lib";
 import type { ComponentStyleMap } from "@shared/ui";
-import { Platform, type TextStyle } from "react-native";
+import type { TextStyle } from "react-native";
 import { boardText } from "../../config";
-
-const ios = Platform.OS === "ios";
 
 const zhComponentStyles: ComponentStyleMap = {
 	i: {
@@ -73,11 +71,13 @@ export const localeComponentStyles: KeyConfig<ComponentStyleMap> = {
 type GetComponentStylesOptions = {
 	language: string;
 	unit: number;
+	ios: boolean;
 };
 
 export const getInvestigatorTextStyle = ({
 	language,
 	unit,
+	ios,
 }: GetComponentStylesOptions) => {
 	const iconFontSize = unit * boardText.ratio.icon;
 	const fontSize = unit * boardText.ratio.text;

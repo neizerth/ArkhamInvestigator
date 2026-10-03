@@ -30,6 +30,7 @@ import setDefaultNetworkId from "./2026-02-10T01-49-22-set-default-network-id";
 import setDefaultNickname from "./2026-02-18T06-59-40-set-default-nickname";
 import setDefaultNavbarHeight from "./2026-04-21T01-38-34-set-default-navbar-height";
 import removeRuntimeState from "./2026-09-21T19-14-32-remove-runtime-state";
+import setDefaultSafeAreaInsets from "./2026-10-03T00-38-00-set-default-safe-area-insets";
 
 export const persistConfigMigrations = [
 	createHistoryType,
@@ -64,6 +65,7 @@ export const persistConfigMigrations = [
 	setDefaultNavbarHeight,
 	setDefaultNickname,
 	removeRuntimeState,
+	setDefaultSafeAreaInsets,
 ];
 
 export const currentPersistMigrationVersion = persistConfigMigrations.length;

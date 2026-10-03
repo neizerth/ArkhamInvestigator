@@ -16,44 +16,42 @@ type Offsets = {
 	paddingRight: number;
 };
 
-const offsetY = Platform.OS === "ios" ? 4 : 0;
-
 export const factionDescriptionRelativeOffsets: Record<Faction, Offsets> = {
 	neutral: {
 		paddingTop: 7,
 		paddingLeft: 10,
 		paddingRight: 15,
-		paddingBottom: offsetY + 2,
+		paddingBottom: 2,
 	},
 	mystic: {
 		paddingTop: 7,
 		paddingLeft: 12,
 		paddingRight: 12,
-		paddingBottom: offsetY + 4,
+		paddingBottom: 4,
 	},
 	rogue: {
 		paddingTop: 6.5,
 		paddingLeft: 6,
 		paddingRight: 6,
-		paddingBottom: offsetY + 2,
+		paddingBottom: 2,
 	},
 	survivor: {
 		paddingTop: 6,
 		paddingLeft: 7,
 		paddingRight: 7,
-		paddingBottom: offsetY + 2,
+		paddingBottom: 2,
 	},
 	seeker: {
 		paddingTop: 7,
 		paddingLeft: 9,
 		paddingRight: 7,
-		paddingBottom: offsetY + 2,
+		paddingBottom: 2,
 	},
 	guardian: {
 		paddingTop: 8.5,
 		paddingLeft: 10,
 		paddingRight: 11,
-		paddingBottom: offsetY + 2,
+		paddingBottom: 2,
 	},
 };
 
@@ -71,5 +69,10 @@ const toRuleSet = ({
 
 export const getFactionDescriptionStyle = (faction: Faction) => {
 	const offsets = factionDescriptionRelativeOffsets[faction];
-	return toRuleSet(offsets);
+	const offsetY = Platform.OS === "ios" ? 4 : 0;
+
+	return toRuleSet({
+		...offsets,
+		paddingBottom: offsets.paddingBottom + offsetY,
+	});
 };

@@ -1,7 +1,5 @@
-import { statusBarHeight } from "@shared/config";
 import { ImageBackground, UnscaledText } from "@shared/ui";
 import { View } from "react-native";
-import type { ViewProps } from "react-native";
 import styled, { css } from "styled-components/native";
 import { Button } from "../Button";
 import { HomeMenu } from "../HomeMenu";
@@ -24,23 +22,21 @@ export const ResumeButton: typeof Button = styled(Button).attrs({
 export const Menu: typeof HomeMenu = styled(HomeMenu)`
   position: absolute;
   z-index: 1;
-  top: ${statusBarHeight}px;
-  left: 0;
-  right: 0;
   flex: 1;
+  ${({ theme: { safeAreaInsets } }) => css`
+    top: ${safeAreaInsets.top}px;
+    left: ${safeAreaInsets.left}px;
+    right: ${safeAreaInsets.right}px;
+  `}
 `;
 
-type DisclaimerProps = ViewProps & {
-	navbarHeight: number;
-};
-
-export const Disclaimer = styled(View)<DisclaimerProps>`
-  ${({ theme: { size } }) => css`
+export const Disclaimer: typeof View = styled(View)`
+  ${({ theme: { size, safeAreaInsets } }) => css`
     position: absolute;
-    left: ${size.gap.large}px;
-    right: ${size.gap.large}px;
+    left: ${safeAreaInsets.left + size.gap.large}px;
+    right: ${safeAreaInsets.right + size.gap.large}px;
+    bottom: ${safeAreaInsets.bottom + size.gap.large}px;
   `}
-  bottom: ${({ navbarHeight, theme }) => theme.size.gap.large + navbarHeight}px;
 `;
 
 export const DisclaimerText: typeof UnscaledText = styled(UnscaledText)`

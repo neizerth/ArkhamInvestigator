@@ -1,6 +1,6 @@
 import { BoardLoaderMemo as BoardLoader } from "@modules/board/base/features/load-board/ui";
-import { useScreenOrientation } from "@modules/core/device/shared/lib";
-import { useLayoutSize } from "@shared/lib";
+import { selectScreenOrientationType } from "@modules/core/device/shared/lib";
+import { useAppSelector, useLayoutSize } from "@shared/lib";
 import { useWindowDimensions } from "react-native";
 import { LayoutContext } from "../../config";
 import { getHeaderLayout } from "../../lib";
@@ -8,7 +8,7 @@ import * as C from "./BoardPage.components";
 
 export const BoardPage = () => {
 	const window = useWindowDimensions();
-	const orientation = useScreenOrientation();
+	const orientationType = useAppSelector(selectScreenOrientationType);
 
 	const [view, onLayout] = useLayoutSize(window);
 
@@ -24,7 +24,7 @@ export const BoardPage = () => {
 			<BoardLoader>
 				<C.Container onLayout={onLayout}>
 					<C.Background />
-					{orientation.type === "portrait" && <C.PortraitLayout />}
+					{orientationType === "portrait" && <C.PortraitLayout />}
 				</C.Container>
 			</BoardLoader>
 		</LayoutContext.Provider>

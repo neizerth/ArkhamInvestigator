@@ -1,12 +1,10 @@
 import { ContextModal } from "@modules/core/modal/shared/base/ui";
 import { Row } from "@shared/ui";
 import { ArrowButton } from "@shared/ui/control/button/ArrowButton";
-import { Platform, View } from "react-native";
+import { View } from "react-native";
 import { ActivityIndicator } from "react-native";
 import styled, { css } from "styled-components/native";
 import { OverviewInvestigator } from "../OverviewInvestigator";
-
-const ios = Platform.OS === "ios";
 
 export const Container: typeof ContextModal = styled(ContextModal).attrs(
 	({ theme }) => ({
@@ -16,7 +14,7 @@ export const Container: typeof ContextModal = styled(ContextModal).attrs(
 	}),
 )`
   flex: 1;
-  ${ios && "justify-content: flex-start;"}
+  ${({ theme }) => theme.platform.ios && "justify-content: flex-start;"}
 `;
 
 export const Content: typeof View = styled(View)`

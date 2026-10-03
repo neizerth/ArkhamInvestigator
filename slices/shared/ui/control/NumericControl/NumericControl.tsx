@@ -1,7 +1,8 @@
 import { always } from "ramda";
 import type { TextProps, ViewProps } from "react-native";
+import { useTheme } from "styled-components/native";
 import * as C from "./NumericControl.components";
-import { defaultButtonTextStyle } from "./NumericControl.styles";
+import { getDefaultButtonTextStyle } from "./NumericControl.styles";
 
 export type NumericControlProps = ViewProps & {
 	onIncrement: () => void;
@@ -50,6 +51,8 @@ export const NumericControl = ({
 	value,
 	...props
 }: NumericControlProps) => {
+	const { platform } = useTheme();
+	const defaultButtonTextStyle = getDefaultButtonTextStyle(platform.ios);
 	const disableDecrement = typeof value === "number" && value <= min;
 	const disableIncrement = typeof value === "number" && value >= max;
 

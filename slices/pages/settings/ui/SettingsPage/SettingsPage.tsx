@@ -15,7 +15,7 @@ import {
 	usePage,
 } from "@modules/core/router/shared/lib";
 import { CAN_ALWAYS_SHOW_GAME_TEXT, routes } from "@shared/config";
-import { PageContent } from "@shared/ui";
+import { SafeContent } from "@shared/ui";
 import { TopBar } from "@widgets/navigation";
 import { useTranslation } from "react-i18next";
 import { useAppSelector } from "slices/shared/lib";
@@ -40,7 +40,7 @@ export const SettingsPage = () => {
 			<TopBar title={t`Settings`} onBack={back}>
 				<C.BarButton icon="meter" onPress={goTo(routes.diagnostics)} />
 			</TopBar>
-			<PageContent>
+			<SafeContent>
 				<C.Content>
 					<C.Section title={t`General`}>
 						{!isOffline && (
@@ -250,7 +250,7 @@ export const SettingsPage = () => {
 						</C.Row>
 					</C.Section>
 				</C.Content>
-			</PageContent>
+			</SafeContent>
 		</C.Page>
 	);
 };

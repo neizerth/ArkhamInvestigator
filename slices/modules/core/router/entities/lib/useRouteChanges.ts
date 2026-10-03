@@ -2,7 +2,7 @@ import { useAppDispatch } from "@shared/lib";
 import type { Href } from "expo-router";
 import { usePathname } from "expo-router";
 import { useEffect } from "react";
-import { setCurrentRoute } from "../store";
+import { setCurrentRoute } from "../../shared/lib";
 
 export const useRouteChanges = () => {
 	const dispatch = useAppDispatch();

@@ -11,24 +11,26 @@ export const Container: typeof View = styled(View)`
   flex: 1;
 `;
 
-const paddingBottom = getListPaddingBottom();
-
 export const Content: typeof View = styled(View)`
   flex: 1;
 `;
 
-const attrs = {
-	contentContainerStyle: {
-		paddingBottom,
-	},
-};
-
 export const PreviewList: typeof SignaturePreviewList = styled(
 	SignaturePreviewList,
-).attrs(attrs)`
+).attrs(({ theme }) => ({
+	contentContainerStyle: {
+		paddingBottom: getListPaddingBottom(theme.platform),
+	},
+}))`
 `;
 
-export const List: typeof SignatureList = styled(SignatureList).attrs(attrs)`
+export const List: typeof SignatureList = styled(SignatureList).attrs(
+	({ theme }) => ({
+		contentContainerStyle: {
+			paddingBottom: getListPaddingBottom(theme.platform),
+		},
+	}),
+)`
 `;
 
 export const FactionSelect: typeof BaseFactionSelect = styled(
@@ -42,5 +44,5 @@ export const Footer: typeof SignatureSelectFooter = styled(
 )`
   position: absolute;
   z-index: 1;
-  ${getFooterStyle()};
+  ${({ theme }) => getFooterStyle(theme.platform)}
 `;

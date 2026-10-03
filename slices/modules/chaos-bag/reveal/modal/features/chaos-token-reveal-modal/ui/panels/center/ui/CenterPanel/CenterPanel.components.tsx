@@ -1,6 +1,6 @@
 import { ChaosTokenValuePicker } from "@modules/chaos-bag/base/entities/ui";
 import { TouchableOpacity } from "@modules/core/touch/shared/ui";
-import { Platform, View } from "react-native";
+import { View } from "react-native";
 import styled from "styled-components/native";
 import { ExpressionPanel } from "../ExpressionPanel";
 import { ModalChaosToken } from "../ModalChaosToken";
@@ -44,30 +44,29 @@ export const ControlContainer: typeof View = styled(View)`
   overflow: hidden;
 `;
 
-const ios = Platform.OS === "ios";
-
-const iosLineHeight = (lineHeight: number) => {
-	return ios ? {} : { lineHeight };
-};
-
 export const Control: typeof ChaosTokenValuePicker = styled(
 	ChaosTokenValuePicker,
-).attrs({
-	gap: 110,
-	valueStyle: {
-		fontSize: 60,
-		width: 70,
-		textAlign: "center",
-	},
-	autoFailStyle: {
-		fontSize: 90,
-		...iosLineHeight(90),
-	},
-	autoSuccessStyle: {
-		fontSize: 180,
-		...iosLineHeight(160),
-		top: -10,
-	},
+).attrs(({ theme }) => {
+	const lineHeight = (value: number) =>
+		theme.platform.ios ? {} : { lineHeight: value };
+
+	return {
+		gap: 110,
+		valueStyle: {
+			fontSize: 60,
+			width: 70,
+			textAlign: "center" as const,
+		},
+		autoFailStyle: {
+			fontSize: 90,
+			...lineHeight(90),
+		},
+		autoSuccessStyle: {
+			fontSize: 180,
+			...lineHeight(160),
+			top: -10,
+		},
+	};
 })`
   
 `;

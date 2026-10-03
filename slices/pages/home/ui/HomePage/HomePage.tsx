@@ -1,13 +1,10 @@
-import { selectNavbarHeight } from "@modules/core/device/shared/lib";
 import { ArtworksFragment } from "@modules/core/theme/shared/ui";
-import { useAppSelector } from "@shared/lib";
 import { useTranslation } from "react-i18next";
 import { useResumeGame, useStartGame } from "../../lib";
 import { Button } from "../Button";
 import * as C from "./HomePage.components";
 
 export const HomePage = () => {
-	const navbarHeight = useAppSelector(selectNavbarHeight);
 	const { t } = useTranslation();
 	const onResume = useResumeGame();
 	const onSinglePlayer = useStartGame("single");
@@ -38,7 +35,7 @@ export const HomePage = () => {
 			)}
 			<ArtworksFragment>
 				<C.Background />
-				<C.Disclaimer navbarHeight={navbarHeight}>
+				<C.Disclaimer>
 					<C.DisclaimerText>{t`app.disclaimer`}</C.DisclaimerText>
 				</C.Disclaimer>
 			</ArtworksFragment>

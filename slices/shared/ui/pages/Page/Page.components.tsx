@@ -1,14 +1,8 @@
-import type { FC } from "react";
 import { View } from "react-native";
-import type { ViewProps } from "react-native";
 import styled from "styled-components/native";
 
-type ContainerProps = ViewProps & {
-	navbarHeight: number;
-};
-
-export const Container: FC<ContainerProps> = styled(View)`
+export const Container: typeof View = styled(View)`
   background-color: ${({ theme }) => theme.color.dark40};
-  padding-bottom: ${({ navbarHeight }: ContainerProps) => navbarHeight}px;
+  padding-bottom: ${({ theme }) => theme.navbarHeight}px;
   flex: 1;
 `;

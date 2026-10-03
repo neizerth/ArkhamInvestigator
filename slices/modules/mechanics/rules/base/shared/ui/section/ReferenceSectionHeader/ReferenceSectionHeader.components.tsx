@@ -2,11 +2,9 @@ import { withLocale } from "@modules/core/i18n/shared/lib";
 import { TouchableOpacity } from "@modules/core/touch/shared/ui";
 import { Icon, Row, type UnscaledTextProps } from "@shared/ui";
 import type { FC } from "react";
-import { Platform, View, type ViewProps } from "react-native";
+import { View, type ViewProps } from "react-native";
 import styled, { css } from "styled-components/native";
 import { sectionTitleFontSize } from "../../../config";
-
-const ios = Platform.OS === "ios";
 
 type PropsWithOpen = {
 	open?: boolean;
@@ -25,19 +23,18 @@ export const Toggle: typeof TouchableOpacity = styled(TouchableOpacity)`
 	justify-content: space-between;
 	align-items: center;
 	flex: 1;
-	transform: translateY(${ios ? 5 : 2}px);
+	transform: translateY(${({ theme }) => (theme.platform.ios ? 5 : 2)}px);
 `;
 
 export const ToggleIcon: typeof Icon = styled(Icon)`
 	font-size: 10px;
 	line-height: 10px;
 	color: ${({ theme }) => theme.color.title};
-	${
-		ios &&
+	${({ theme }) =>
+		theme.platform.ios &&
 		css`
 		transform: translateY(-2px);
-	`
-	}
+	`}
 `;
 
 type ToggleIconContainerProps = ViewProps & PropsWithOpen;
@@ -86,10 +83,9 @@ export const Title = styled(BaseTitle)<TitleProps>`
 		css`
 		color: ${theme.color.title};
 	`}
-	${
-		ios &&
+	${({ theme }) =>
+		theme.platform.ios &&
 		css`
 		transform: translateY(-1px);
-	`
-	}
+	`}
 `;

@@ -1,5 +1,6 @@
 import { appStarted } from "@modules/core/app/shared/lib";
 import { takeOnce } from "@shared/lib";
+import type { ReturnAwaited } from "@shared/model";
 import { Platform } from "react-native";
 import {
 	getNavigationBarHeight,
@@ -11,9 +12,8 @@ import {
 	deviceAppStateChanged,
 	setNavbarHeight,
 	setNavigationMode,
+	setScreenOrientation,
 } from "../../shared/lib";
-
-import type { ReturnAwaited } from "@shared/model";
 
 /**
  * Since API 30 the native module measures the real `navigationBars` window
@@ -74,5 +74,6 @@ function* appStateWorker({
 
 export function* initNavigationbarSaga() {
 	yield takeOnce(appStarted.match, worker);
+	yield takeEvery(setScreenOrientation.match, syncNavigationBar);
 	yield takeEvery(deviceAppStateChanged.match, appStateWorker);
 }

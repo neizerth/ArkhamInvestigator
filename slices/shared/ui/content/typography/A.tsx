@@ -1,13 +1,8 @@
 import { useCallback } from "react";
-import {
-	Linking,
-	type StyleProp,
-	type TextProps,
-	type TextStyle,
-} from "react-native";
+import { Linking, type TextProps } from "react-native";
 import styled from "styled-components/native";
 import { color } from "../../../config";
-import { useBoolean, useFadeAnimation } from "../../../lib";
+import { useBoolean } from "../../../lib";
 import { Text } from "./Text";
 
 const LinkText: typeof Text = styled(Text)`
@@ -22,7 +17,6 @@ export type AProps = TextProps & {
 
 export const A = ({ href, children, ...props }: AProps) => {
 	const [active, setActive] = useBoolean(false);
-	const animatedStyle = useFadeAnimation({ show: active });
 	const onPress = useCallback(() => {
 		Linking.openURL(href);
 	}, [href]);
@@ -32,7 +26,7 @@ export const A = ({ href, children, ...props }: AProps) => {
 			onPress={onPress}
 			onPressIn={setActive.on}
 			onPressOut={setActive.off}
-			style={[animatedStyle, props.style] as StyleProp<TextStyle>}
+			style={[{ opacity: active ? 0.6 : 1 }, props.style]}
 		>
 			{children}
 		</LinkText>

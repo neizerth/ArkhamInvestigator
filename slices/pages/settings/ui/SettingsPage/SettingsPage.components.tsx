@@ -4,13 +4,11 @@ import {
 	Row as BaseRow,
 	Section as BaseSection,
 	ScrollView,
-	type ScrollViewProps,
 	TextView,
 } from "@shared/ui";
 import { StoreCheckbox } from "@widgets/control/store-checkbox";
 import { StoreSelect } from "@widgets/control/store-select";
 import { TopBarButton } from "@widgets/navigation";
-import type { FC } from "react";
 import { View } from "react-native";
 import styled from "styled-components/native";
 import { PickerSettings } from "../PickerSettings";
@@ -106,12 +104,9 @@ export const Sound: typeof SoundSettings = styled(SoundSettings)`
   flex: 1;
 `;
 
-type ContentProps = ScrollViewProps & {
-	navbarHeight: number;
-};
-
-export const PageContent: FC<ContentProps> = styled(ScrollView)`
+export const PageContent: typeof ScrollView = styled(ScrollView)`
   flex: 1;
-  padding: ${({ navbarHeight, theme }) => `0px ${theme.size.gap.medium}px ${navbarHeight}px ${theme.size.gap.medium}px`};
+  padding: ${({ theme }) =>
+		`0px ${theme.size.gap.medium}px ${theme.navbarHeight}px ${theme.size.gap.medium}px`};
   margin-bottom: ${({ theme }) => theme.size.gap.default}px;
 `;

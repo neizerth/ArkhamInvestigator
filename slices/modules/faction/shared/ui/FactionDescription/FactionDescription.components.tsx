@@ -25,7 +25,7 @@ type ContentProps = ViewProps & PropsWithBox & PropsWithFaction;
 
 export const Content: FC<ContentProps> = styled(View)`
   padding-top: 10%;
-  ${({ box, faction }: ContentProps) => {
+  ${({ box, faction }) => {
 		return css`
       width: ${box.width}px;
       height: ${box.height}px;
