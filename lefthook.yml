@@ -3,18 +3,17 @@ no_tty: true
 colors: false
 
 pre-commit:
-  # sequential: format rewrites files, lint and types must see the result
+  # sequential: check --write rewrites files, types must see the result
   parallel: false
   commands:
-    format:
+    check:
+      priority: 1
       glob: "*.{js,ts,jsx,tsx}"
-      run: npm run format
+      run: npx @biomejs/biome check --write --no-errors-on-unmatched {staged_files}
       stage_fixed: true
-    lint:
-      glob: "*.{js,ts,jsx,tsx}"
-      run: npm run lint
     types:
-      glob: "*.{js,ts,jsx,tsx}"
+      priority: 2
+      glob: "*.{ts,tsx}"
       run: npm run ts:check
 commit-msg:
   parallel: true
