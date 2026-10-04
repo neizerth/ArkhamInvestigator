@@ -1,7 +1,7 @@
 import { createModalActionFilter } from "@modules/core/modal/shared/base/lib";
+import { setFactionFilter } from "@modules/signature/signature-selection/shared/lib";
 import { put, takeEvery } from "redux-saga/effects";
 import { modalActionId } from "../config";
-import { setFactionFilter } from "../setFactionFilter";
 
 const filterAction = createModalActionFilter({
 	ids: [modalActionId],
