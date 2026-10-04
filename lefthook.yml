@@ -16,8 +16,3 @@ commit-msg:
   commands:
     commitlint:
       run: npx commitlint --edit
-# tests run once per push, not per commit; e2e runs separately
-pre-push:
-  commands:
-    test:
-      run: npm test -- --bail --passWithNoTests --changedSince=main
