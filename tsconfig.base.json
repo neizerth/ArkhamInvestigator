@@ -4,7 +4,6 @@
 		"strict": true,
 		"esModuleInterop": true,
 		"ignoreDeprecations": "6.0",
-		"baseUrl": ".",
 		"sourceMap": true,
 		"paths": {
 			"@assets/*": ["./assets/*"],

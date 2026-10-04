@@ -1,7 +1,7 @@
 import { isObject } from "ramda-adjunct";
 import type { ReactNode } from "react";
 import type { ListRenderItem, ViewStyle } from "react-native";
-import { REMOVE_CLIPPED_SUBVIEWS } from "slices/shared/config";
+import { REMOVE_CLIPPED_SUBVIEWS } from "../../../config";
 import * as C from "./Table.components";
 import type {
 	TableCellRendererOptions,

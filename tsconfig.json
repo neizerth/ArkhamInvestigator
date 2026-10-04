@@ -1,7 +1,6 @@
 {
 	"extends": "./tsconfig.base.json",
 	"compilerOptions": {
-		"baseUrl": ".",
 		"paths": {
 			"@app/*": ["./slices/app/*"],
 			"@shared/*": ["./slices/shared/*"],

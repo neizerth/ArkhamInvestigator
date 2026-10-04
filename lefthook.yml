@@ -3,8 +3,13 @@ no_tty: true
 colors: false
 
 pre-commit:
-  parallel: true
+  # sequential: format rewrites files, lint and types must see the result
+  parallel: false
   commands:
+    format:
+      glob: "*.{js,ts,jsx,tsx}"
+      run: npm run format
+      stage_fixed: true
     lint:
       glob: "*.{js,ts,jsx,tsx}"
       run: npm run lint

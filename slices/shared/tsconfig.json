@@ -1,11 +1,10 @@
 {
 	"extends": "../../tsconfig.base.json",
 	"compilerOptions": {
-		"baseUrl": "../../",
 		"paths": {
-			"@assets/*": ["assets/*"],
-			"@modules/*": ["slices/modules/*"],
-			"@shared/model": ["slices/shared/model"]
+			"@assets/*": ["../../assets/*"],
+			"@modules/*": ["../../slices/modules/*"],
+			"@shared/model": ["../../slices/shared/model"]
 		}
 	}
 }

@@ -1,3 +1,4 @@
+import { ChaosOddsService } from "@expo-modules/chaos-odds/src/lib/ChaosOddsService";
 import { CopyText } from "@modules/core/clipboard/entities/ui";
 import { ArtworksFragment } from "@modules/core/theme/shared/ui";
 import { selectMediaVersion } from "@modules/signature/base/shared/lib";
@@ -9,7 +10,6 @@ import {
 	ContentPage,
 	type ContentPageProps,
 } from "@widgets/content/content-page";
-import { ChaosOddsService } from "modules/chaos-odds/src/lib/ChaosOddsService";
 import { Trans, useTranslation } from "react-i18next";
 
 export type AboutPageProps = Omit<ContentPageProps, "title">;

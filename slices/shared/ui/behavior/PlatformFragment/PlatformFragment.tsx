@@ -1,6 +1,6 @@
 import type { PropsWithChildren } from "react";
 import { Platform } from "react-native";
-import { collect } from "slices/shared/lib";
+import { collect } from "../../../lib";
 
 type PlatformType = typeof Platform.OS;
 

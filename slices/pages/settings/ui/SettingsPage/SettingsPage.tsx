@@ -15,10 +15,10 @@ import {
 	usePage,
 } from "@modules/core/router/shared/lib";
 import { CAN_ALWAYS_SHOW_GAME_TEXT, routes } from "@shared/config";
+import { useAppSelector } from "@shared/lib";
 import { SafeContent } from "@shared/ui";
 import { TopBar } from "@widgets/navigation";
 import { useTranslation } from "react-i18next";
-import { useAppSelector } from "slices/shared/lib";
 import { ChaosBagSettings } from "../ChaosBagSettings";
 import * as C from "./SettingsPage.components";
 import {

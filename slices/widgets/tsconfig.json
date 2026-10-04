@@ -1,13 +1,12 @@
 {
 	"extends": "../../tsconfig.base.json",
 	"compilerOptions": {
-		"baseUrl": "../../",
 		"paths": {
-			"@assets/*": ["assets/*"],
-			"@shared/*": ["slices/shared/*"],
-			"@entities/*": ["slices/entities/*"],
-			"@modules/*": ["slices/modules/*"],
-			"@features/*": ["slices/features/*"]
+			"@assets/*": ["../../assets/*"],
+			"@shared/*": ["../../slices/shared/*"],
+			"@entities/*": ["../../slices/entities/*"],
+			"@modules/*": ["../../slices/modules/*"],
+			"@features/*": ["../../slices/features/*"]
 		}
 	}
 }
