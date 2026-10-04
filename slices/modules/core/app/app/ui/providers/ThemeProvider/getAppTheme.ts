@@ -1,16 +1,22 @@
 import * as fontFamily from "@assets/fonts";
-import type { DeviceOrientationInfo } from "@modules/core/device/shared/model";
-import { activeOpacity, color, font, size } from "@shared/config";
+import {
+	IOS_WITH_GESTURE_CONTROL,
+	activeOpacity,
+	color,
+	font,
+	size,
+} from "@shared/config";
 import type { AppTheme } from "@shared/model";
 import { Platform } from "react-native";
-import type { EdgeInsets } from "react-native-safe-area-context";
 
-type Options = {
-	orientation: DeviceOrientationInfo;
-	artworksEnabled: boolean;
-	navbarHeight: number;
-	safeAreaInsets: EdgeInsets;
-};
+type Options = Pick<
+	AppTheme,
+	| "orientation"
+	| "artworksEnabled"
+	| "navbarHeight"
+	| "statusBarHeight"
+	| "safeAreaInsets"
+>;
 
 const os = Platform.OS;
 const ios = os === "ios";
@@ -26,6 +32,7 @@ export const getAppTheme = (options: Options): AppTheme => ({
 		os,
 		ios,
 		android,
+		iosGestureControl: IOS_WITH_GESTURE_CONTROL,
 	},
 	...options,
 });

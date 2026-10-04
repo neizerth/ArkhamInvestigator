@@ -1,4 +1,3 @@
-import { statusBarHeight } from "@shared/config";
 import type { FC } from "react";
 import { View } from "react-native";
 import styled, { css } from "styled-components/native";
@@ -36,7 +35,7 @@ export const Header: FC<HeaderProps> = styled(BoardHeader)`
   z-index: 3;
   left: 0;
   right: 0;
-  top: ${statusBarHeight}px;
+  top: ${({ theme }) => theme.statusBarHeight}px;
   ${({ descriptionShown }: HeaderProps) => css`
     z-index: ${descriptionShown ? 2 : 3};
   `}

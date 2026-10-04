@@ -5,6 +5,8 @@ import * as C from "./FactionSelect.components";
 
 export type FactionSelectProps = ViewProps & {
 	onChange?: (value: FactionFilterType) => void;
+	vertical?: boolean;
+	size: number;
 	value?: FactionFilterType;
 	filters: FactionFilterType[];
 };
@@ -13,6 +15,8 @@ export const FactionSelect = ({
 	value,
 	onChange,
 	filters,
+	vertical = false,
+	size,
 	...props
 }: FactionSelectProps) => {
 	const onPress = useCallback(
@@ -28,9 +32,14 @@ export const FactionSelect = ({
 		[value, onChange],
 	);
 
+	const contentProps = {
+		vertical,
+		size,
+	};
+
 	return (
-		<C.Container {...props}>
-			<C.Content>
+		<C.Container {...props} {...contentProps}>
+			<C.Content {...contentProps}>
 				{filters.map((item, index) => (
 					<C.Button
 						key={item}
@@ -40,6 +49,7 @@ export const FactionSelect = ({
 						onPress={onPress(item)}
 						first={index === 0}
 						last={index === filters.length - 1}
+						{...contentProps}
 					/>
 				))}
 			</C.Content>

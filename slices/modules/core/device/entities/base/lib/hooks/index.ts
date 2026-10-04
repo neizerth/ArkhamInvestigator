@@ -1,2 +1,2 @@
-export * from "./useScreenOrientation";
 export * from "./useSafeAreaInsets";
+export * from "./useLandscapeOrientation";

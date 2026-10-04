@@ -1,9 +1,11 @@
-import { IOS_WITH_GESTURE_CONTROL, size } from "@shared/config";
 import type { AppTheme } from "@shared/model";
 import { css } from "styled-components/native";
 
-export const getFooterStyle = (platform: AppTheme["platform"]) => {
-	if (!platform.ios || !IOS_WITH_GESTURE_CONTROL) {
+export const getFooterStyle = ({
+	platform: { ios, iosGestureControl },
+	size,
+}: AppTheme) => {
+	if (!ios || !iosGestureControl) {
 		return css`
       bottom: ${size.gap.default}px;
       left: 0;
@@ -17,8 +19,10 @@ export const getFooterStyle = (platform: AppTheme["platform"]) => {
   `;
 };
 
-export const getListPaddingBottom = (platform: AppTheme["platform"]) => {
-	if (!platform.ios || !IOS_WITH_GESTURE_CONTROL) {
+export const getListPaddingBottom = ({
+	platform: { ios, iosGestureControl },
+}: AppTheme) => {
+	if (!ios || !iosGestureControl) {
 		return 65;
 	}
 	return 70;

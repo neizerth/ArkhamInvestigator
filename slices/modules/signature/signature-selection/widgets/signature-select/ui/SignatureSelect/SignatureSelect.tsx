@@ -1,5 +1,6 @@
 import { selectArtworksEnabled } from "@modules/core/theme/shared/lib";
 
+import { selectScreenOrientationType } from "@modules/core/device/shared/lib";
 import { toggleSelectedSignature } from "@modules/signature/signature-selection/entities/lib";
 import {
 	selectDisabledSignatureCodes,
@@ -12,6 +13,7 @@ import { useAppDispatch, useAppSelector } from "@shared/lib/hooks";
 import type { InvestigatorSignatureGroup } from "arkham-investigator-data";
 import { useCallback } from "react";
 import { GestureDetector } from "react-native-gesture-handler";
+import { FACTION_SELECT_ITEM_SIZE } from "../../config";
 import * as C from "./SignatureSelect.components";
 import { useSignatureSections } from "./lib";
 import { useFactionSwipes } from "./useFactionSwipes";
@@ -21,6 +23,7 @@ export const SignatureSelect = () => {
 	const dispatch = useAppDispatch();
 	const factionFilterValue = useAppSelector(selectFactionFilter);
 	const artworksEnabled = useAppSelector(selectArtworksEnabled);
+	const orientationType = useAppSelector(selectScreenOrientationType);
 
 	const gesture = useFactionSwipes();
 
@@ -52,21 +55,38 @@ export const SignatureSelect = () => {
 
 	const List = artworksEnabled ? C.PreviewList : C.List;
 
+	const content = [
+		<C.FactionSelect
+			key={`faction-select-${orientationType}`}
+			size={FACTION_SELECT_ITEM_SIZE}
+			value={faction}
+		/>,
+		<C.Content key={`content-${orientationType}`}>
+			<List
+				sections={sections}
+				onChange={onChange}
+				size={size}
+				disabled={disabled}
+				selected={selected}
+				selectedCount={selectedCount}
+				selectedImages={selectedImages}
+			/>
+		</C.Content>,
+	].sort((a, b) => {
+		const aKey = a.key ?? "";
+		const bKey = b.key ?? "";
+
+		if (orientationType === "landscape") {
+			return aKey.localeCompare(bKey);
+		}
+
+		return bKey.localeCompare(aKey);
+	});
+
 	return (
 		<GestureDetector gesture={gesture}>
 			<C.Container>
-				<C.FactionSelect value={faction} />
-				<C.Content>
-					<List
-						sections={sections}
-						onChange={onChange}
-						size={size}
-						disabled={disabled}
-						selected={selected}
-						selectedCount={selectedCount}
-						selectedImages={selectedImages}
-					/>
-				</C.Content>
+				{content}
 				<C.Footer />
 			</C.Container>
 		</GestureDetector>

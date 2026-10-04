@@ -1,4 +1,5 @@
 import type { SignatureDetailItem as Item } from "@modules/signature/base/shared/model";
+import { memo } from "react";
 import { useTranslation } from "react-i18next";
 import type { ViewProps } from "react-native-svg/lib/typescript/fabric/utils";
 import * as C from "./SignatureDetailList.components";
@@ -40,3 +41,7 @@ export function SignatureDetailList<T>({
 		</C.Container>
 	);
 }
+
+export const SignatureDetailListMemo = memo(
+	SignatureDetailList,
+) as typeof SignatureDetailList;

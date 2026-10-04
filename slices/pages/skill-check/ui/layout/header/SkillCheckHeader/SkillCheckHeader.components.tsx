@@ -1,7 +1,6 @@
 import { IconButton } from "@shared/ui";
 
 import { TouchableOpacity } from "@modules/core/touch/shared/ui";
-import { IOS_WITH_GESTURE_CONTROL, statusBarHeight } from "@shared/config";
 import { Row as BaseRow, Icon, UnscaledText } from "@shared/ui";
 import type { FC } from "react";
 import { View, type ViewProps } from "react-native";
@@ -11,7 +10,7 @@ import TopRule from "./images/rule-top.svg";
 
 export const Container: typeof View = styled(View)`
   padding: ${({ theme }) =>
-		`${statusBarHeight + (IOS_WITH_GESTURE_CONTROL ? theme.size.gap.default : 0)}px ${theme.size.gap.default}px 0`};
+		`${theme.statusBarHeight + (theme.platform.iosGestureControl ? theme.size.gap.default : 0)}px ${theme.size.gap.default}px 0`};
 `;
 
 type ContentProps = ViewProps & {

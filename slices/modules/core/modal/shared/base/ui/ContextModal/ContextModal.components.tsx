@@ -1,5 +1,4 @@
 import { TouchableOpacity } from "@modules/core/touch/shared/ui";
-import { statusBarHeight } from "@shared/config";
 import { Icon, Row, Text } from "@shared/ui";
 import { ScrollView } from "@shared/ui";
 import { View } from "react-native";
@@ -9,7 +8,7 @@ import styled, { css } from "styled-components/native";
 export const Container: typeof View = styled(View)`
   justify-content: flex-end;
   filter: drop-shadow(0 0 5px rgb(0, 0, 0, 1));
-  ${({ theme: { size, color, navbarHeight } }) => css`
+  ${({ theme: { size, color, navbarHeight, statusBarHeight } }) => css`
     padding: ${statusBarHeight + size.gap.default}px ${size.gap.default}px ${navbarHeight + size.gap.small}px;
     background-color: ${color.modal.background.light};
   `}

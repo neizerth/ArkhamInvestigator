@@ -1,10 +1,10 @@
-import { SignatureDetailList } from "@modules/signature/base/entities/ui";
+import { SignatureDetailListMemo as SignatureDetailList } from "@modules/signature/base/entities/ui";
 import { whereId } from "@shared/lib/util";
 import { ValueSection, type ValueSectionProps } from "@shared/ui";
 import { memo } from "react";
 import { useTranslation } from "react-i18next";
 import {
-	SignaturePreviewSelect,
+	SignaturePreviewSelectMemo as SignaturePreviewSelect,
 	type SignaturePreviewSelectProps,
 } from "../SignaturePreviewSelect";
 
@@ -32,7 +32,6 @@ export function SignatureDetailSelect<T>({
 	const defaultLabel = defaultLabelProp || t`Default`;
 	const sectionTitle = `${title} (${length})`;
 	const selectedValue = (selected && t(selected.name)) || defaultLabel;
-
 	const Component = preview ? SignaturePreviewSelect : SignatureDetailList;
 
 	return (

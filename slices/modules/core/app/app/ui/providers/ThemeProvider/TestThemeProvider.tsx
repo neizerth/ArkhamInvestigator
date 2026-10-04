@@ -6,9 +6,12 @@ const theme = getAppTheme({
 	orientation: {
 		orientation: null,
 		type: null,
+		portrait: false,
+		landscape: false,
 	},
 	artworksEnabled: false,
 	navbarHeight: 0,
+	statusBarHeight: 0,
 	safeAreaInsets: {
 		top: 0,
 		right: 0,

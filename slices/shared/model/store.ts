@@ -6,6 +6,7 @@ import type {
 	PayloadActionCreator,
 	ThunkAction,
 } from "@reduxjs/toolkit";
+import type { TakeableChannel } from "redux-saga";
 import type { createStore } from "../lib/store/store";
 
 export type AppThunk<
@@ -60,3 +61,5 @@ export type ActionWithMeta<
 	payload?: P;
 	meta?: M;
 };
+
+export type ChannelMessage<T> = T extends TakeableChannel<infer M> ? M : never;

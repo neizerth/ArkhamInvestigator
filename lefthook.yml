@@ -11,12 +11,13 @@ pre-commit:
     types:
       glob: "*.{js,ts,jsx,tsx}"
       run: npm run ts:check
-    # unit + integration tests touched by the commit; e2e runs separately
-    test:
-      glob: "*.{js,ts,jsx,tsx}"
-      run: npm test -- --bail --passWithNoTests --findRelatedTests {staged_files}
 commit-msg:
   parallel: true
   commands:
     commitlint:
       run: npx commitlint --edit
+# tests run once per push, not per commit; e2e runs separately
+pre-push:
+  commands:
+    test:
+      run: npm test -- --bail --passWithNoTests --changedSince=main

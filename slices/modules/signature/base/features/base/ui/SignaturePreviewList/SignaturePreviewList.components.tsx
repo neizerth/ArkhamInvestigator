@@ -6,7 +6,9 @@ export const Container: typeof SectionList = styled(SectionList)`
 `;
 
 export const ItemRow: typeof Row = styled(Row)`
-  justify-content: center;
+  ${({ theme: { orientation } }) => css`
+    justify-content: ${orientation.landscape ? "flex-start" : "center"};
+  `}
   flex-wrap: wrap;
   gap: ${({ theme }) => theme.size.gap.default}px;
 `;

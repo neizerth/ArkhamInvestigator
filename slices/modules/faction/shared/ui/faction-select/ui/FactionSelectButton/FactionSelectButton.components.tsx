@@ -10,7 +10,12 @@ import type { FC } from "react";
 import styled, { css } from "styled-components/native";
 import type { FactionSelectButtonProps } from "./FactionSelectButton";
 
-type ButtonProps = FactionSelectButtonProps;
+type ButtonProps = FactionSelectButtonProps & {
+	size: number;
+	vertical: boolean;
+};
+
+const iconSize = (size: number) => 2 + size / 2;
 
 export const Button: FC<ButtonProps> = styled(TouchableOpacity)`
   justify-content: center;
@@ -21,17 +26,17 @@ export const Button: FC<ButtonProps> = styled(TouchableOpacity)`
   ${({ theme: { color } }) => css`
     background-color: ${value === "spoiler" ? color.status.error.light10 : color.dark20};
   `}`}
-  ${({ first, selected }: ButtonProps) =>
+  ${({ first, selected, vertical, size }: ButtonProps) =>
 		selected &&
 		first &&
 		css`
-    border-radius: 48px 0 0 48px;
+    border-radius: ${vertical ? `${size}px ${size}px 0 0` : `${size}px 0 0 ${size}px`};
   `}
-  ${({ last, selected }: ButtonProps) =>
+  ${({ last, selected, vertical, size }: ButtonProps) =>
 		selected &&
 		last &&
 		css`
-    border-radius: 0 48px 48px 0;
+    border-radius: ${vertical ? `0 0 ${size}px ${size}px` : `0 ${size}px ${size}px 0`};
   `}
 `;
 
@@ -41,12 +46,16 @@ type SelectedProps = {
 
 type FactionIconProps = ThemeFactionFontIconProps &
 	PropsWithFaction &
-	SelectedProps;
+	SelectedProps & {
+		size: number;
+	};
 
 export const FactionIcon: FC<FactionIconProps> = styled(ThemeFactionFontIcon)`
-  color: ${({ theme }) => theme.color.light10};
-  font-size: 25px;
-  line-height: 46px;
+  ${({ size, theme }) => css`
+    color: ${theme.color.light10};
+    line-height: ${size}px;
+    font-size: ${iconSize(size)}px;
+  `}
   ${({ faction, selected }: FactionIconProps) =>
 		selected &&
 		css`
@@ -54,10 +63,15 @@ export const FactionIcon: FC<FactionIconProps> = styled(ThemeFactionFontIcon)`
   `}
 `;
 
-type IconProps = BaseIconProps & SelectedProps;
+type IconProps = BaseIconProps &
+	SelectedProps & {
+		size: number;
+	};
 
 export const Icon: FC<IconProps> = styled(BaseIcon)`
-  color: ${({ theme }) => theme.color.light10};
-  font-size: 25px;
-  line-height: 25px;
+  ${({ size, theme }) => css`
+    color: ${theme.color.light10};
+    font-size: ${iconSize(size)}px;
+    line-height: ${iconSize(size)}px;
+  `}
 `;

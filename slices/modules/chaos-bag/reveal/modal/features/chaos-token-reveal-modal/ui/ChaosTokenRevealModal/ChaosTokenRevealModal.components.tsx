@@ -1,4 +1,3 @@
-import { statusBarHeight } from "@shared/config";
 import type { View } from "react-native";
 import styled from "styled-components/native";
 import { ChaosTokenOneMoreRevealLoader } from "../ChaosTokenOneMoreRevealLoader";
@@ -71,6 +70,6 @@ export const Close: typeof ChaosTokenRevealModalClose = styled(
 	ChaosTokenRevealModalClose,
 )`
   position: absolute;
-  top: ${statusBarHeight}px;
+  top: ${({ theme }) => theme.statusBarHeight}px;
   right: 0;
 `;

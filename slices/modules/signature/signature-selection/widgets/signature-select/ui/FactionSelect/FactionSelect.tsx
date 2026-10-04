@@ -1,3 +1,4 @@
+import { useLandscapeOrientation } from "@modules/core/device/entities/base/lib";
 import { selectArtworksEnabled } from "@modules/core/theme/shared/lib";
 import { factionFilterTypes } from "@modules/faction/shared/config";
 import type { Faction } from "@modules/faction/shared/model";
@@ -10,7 +11,9 @@ import { useAppDispatch, useAppSelector } from "@shared/lib";
 import type { FactionFilterType } from "@shared/model";
 import { useCallback } from "react";
 
-export type FactionSelectProps = Omit<SelectProps, "filters">;
+export type FactionSelectProps = Omit<SelectProps, "filters"> & {
+	size: number;
+};
 
 const defautlFilters: Faction[] = [
 	"guardian",
@@ -20,10 +23,15 @@ const defautlFilters: Faction[] = [
 	"survivor",
 ];
 
-export const FactionSelect = ({ value, ...props }: FactionSelectProps) => {
+export const FactionSelect = ({
+	value,
+	size,
+	...props
+}: FactionSelectProps) => {
 	const dispatch = useAppDispatch();
 
 	const artworksEnabled = useAppSelector(selectArtworksEnabled);
+	const landscapeOrientation = useLandscapeOrientation();
 	const filters = artworksEnabled ? factionFilterTypes : defautlFilters;
 	const onChange = useCallback(
 		(value: FactionFilterType) => {
@@ -33,6 +41,13 @@ export const FactionSelect = ({ value, ...props }: FactionSelectProps) => {
 	);
 
 	return (
-		<Select {...props} onChange={onChange} value={value} filters={filters} />
+		<Select
+			{...props}
+			onChange={onChange}
+			value={value}
+			filters={filters}
+			vertical={landscapeOrientation}
+			size={size}
+		/>
 	);
 };

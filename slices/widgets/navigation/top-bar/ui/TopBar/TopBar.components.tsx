@@ -7,7 +7,7 @@ export const Container: typeof View = styled(View)`
   ${({ theme: { size, safeAreaInsets } }) => css`
   flex-direction: row;
   align-items: center;
-  padding: ${safeAreaInsets.top}px ${safeAreaInsets.left + size.gap.default}px ${safeAreaInsets.bottom + size.gap.small}px;
+  padding: ${safeAreaInsets.top}px ${safeAreaInsets.left + size.gap.default}px ${size.gap.small}px;
   gap: ${size.gap.default}px;
 `}`;
 

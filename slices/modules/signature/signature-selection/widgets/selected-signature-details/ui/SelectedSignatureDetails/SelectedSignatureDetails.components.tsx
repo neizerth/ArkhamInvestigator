@@ -1,5 +1,4 @@
 import { FactionCardMemo as FactionCard } from "@modules/faction/shared/ui";
-import { statusBarHeight } from "@shared/config";
 import { Outside as BaseOutside } from "@shared/ui";
 import { ActivityIndicator, View } from "react-native";
 import styled, { css } from "styled-components/native";
@@ -16,7 +15,7 @@ export const Container: typeof View = styled(View)`
 `;
 
 export const Content: typeof View = styled(View)`
-  ${({ theme: { size } }) => css`
+  ${({ theme: { size, statusBarHeight } }) => css`
   flex: 1;
   position: relative;
   z-index: 2;

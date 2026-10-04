@@ -8,19 +8,30 @@ export type HasId<T = string> = {
 	id: T;
 };
 
+export type AppThemePlatform = {
+	os: typeof Platform.OS;
+	ios: boolean;
+	android: boolean;
+	iosGestureControl: boolean;
+};
+
 export type AppTheme = {
 	color: typeof color;
 	font: typeof font;
 	fontFamily: typeof fontFamily;
 	size: typeof size;
 	activeOpacity: number;
-	orientation: DeviceOrientationInfo;
-	platform: {
-		os: typeof Platform.OS;
-		ios: boolean;
-		android: boolean;
+	orientation: DeviceOrientationInfo & {
+		portrait: boolean;
+		landscape: boolean;
 	};
+	platform: AppThemePlatform;
 	artworksEnabled: boolean;
 	navbarHeight: number;
+	statusBarHeight: number;
 	safeAreaInsets: EdgeInsets;
+};
+
+export type AppThemeProps = {
+	theme: AppTheme;
 };

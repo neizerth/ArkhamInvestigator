@@ -25,9 +25,10 @@ export const Item: typeof SignatureListItem = styled(SignatureListItem)`
 
 export const SectionHeader: typeof Text = styled(Text)`
   ${({ theme: { color, size, font } }) => css`
-  text-align: center;
-  background-color: ${color.dark20};
-  padding: ${size.gap.small}px ${size.gap.default}px;
-  font-size: ${font.size.default}px;
-  margin-bottom: ${size.gap.default}px;
-`}`;
+    text-align: center;
+    background-color: ${color.dark20};
+    padding: ${size.gap.small}px ${size.gap.default}px;
+    font-size: ${font.size.default}px;
+    margin-bottom: ${size.gap.default}px;
+  `}
+`;

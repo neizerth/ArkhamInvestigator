@@ -1,5 +1,5 @@
 import { View } from "react-native";
-import styled from "styled-components/native";
+import styled, { css } from "styled-components/native";
 import { FactionSelect as BaseFactionSelect } from "../FactionSelect";
 import { SignatureSelectFooter } from "../SignatureSelectFooter";
 
@@ -9,6 +9,10 @@ import { getFooterStyle, getListPaddingBottom } from "./SignatureSelect.styles";
 
 export const Container: typeof View = styled(View)`
   flex: 1;
+	${({ theme: { safeAreaInsets, orientation } }) => css`
+		padding: 0px ${safeAreaInsets.left}px;
+		flex-direction: ${orientation.landscape ? "row" : "column"};
+	`}
 `;
 
 export const Content: typeof View = styled(View)`
@@ -19,7 +23,7 @@ export const PreviewList: typeof SignaturePreviewList = styled(
 	SignaturePreviewList,
 ).attrs(({ theme }) => ({
 	contentContainerStyle: {
-		paddingBottom: getListPaddingBottom(theme.platform),
+		paddingBottom: getListPaddingBottom(theme),
 	},
 }))`
 `;
@@ -27,7 +31,7 @@ export const PreviewList: typeof SignaturePreviewList = styled(
 export const List: typeof SignatureList = styled(SignatureList).attrs(
 	({ theme }) => ({
 		contentContainerStyle: {
-			paddingBottom: getListPaddingBottom(theme.platform),
+			paddingBottom: getListPaddingBottom(theme),
 		},
 	}),
 )`
@@ -36,7 +40,13 @@ export const List: typeof SignatureList = styled(SignatureList).attrs(
 export const FactionSelect: typeof BaseFactionSelect = styled(
 	BaseFactionSelect,
 )`
-  margin: -5px auto 0px auto;
+	margin: 0px auto 0px auto;
+	${({ theme: { orientation } }) =>
+		orientation.landscape &&
+		css`
+		margin: 5px -5px 0px 0px;
+		top: -10px;
+	`}
 `;
 
 export const Footer: typeof SignatureSelectFooter = styled(
@@ -44,5 +54,5 @@ export const Footer: typeof SignatureSelectFooter = styled(
 )`
   position: absolute;
   z-index: 1;
-  ${({ theme }) => getFooterStyle(theme.platform)}
+  ${({ theme }) => getFooterStyle(theme)}
 `;

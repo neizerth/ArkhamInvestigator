@@ -1,16 +1,36 @@
-import { Row } from "@shared/ui";
-import styled from "styled-components/native";
+import type { FC } from "react";
+import {
+	View as BaseView,
+	type ViewProps as BaseViewProps,
+} from "react-native";
+import styled, { css } from "styled-components/native";
 import { FactionSelectButton } from "../FactionSelectButton";
 
-export const Container: typeof Row = styled(Row)`
-  padding: 0px ${({ theme }) => theme.size.gap.default}px;
-  height: 48px;
+type ViewProps = BaseViewProps & {
+	vertical: boolean;
+	size: number;
+};
+
+const View: FC<ViewProps> = styled(BaseView)`
+  ${({ vertical }) => css`
+    flex-direction: ${vertical ? "column" : "row"};
+  `}
 `;
 
-export const Content: typeof Row = styled(Row)`
+export const Container: FC<ViewProps> = styled(View)`
+  ${({ theme: { size } }) => css`
+    padding: 0px ${size.gap.default}px;
+  `}
+`;
+
+export const Content: FC<ViewProps> = styled(View)`
+  ${({ theme: { color }, vertical, size }) => css`
+    border: 1px solid ${color.dark10};
+
+    ${vertical ? "width" : "height"}: ${size}px;
+    border-radius: ${size}px;
+  `}
   flex: 1;
-  border-radius: 48px;
-  border: 1px solid ${({ theme }) => theme.color.dark10};
 `;
 
 export const Button: typeof FactionSelectButton = styled(FactionSelectButton)`

@@ -5,6 +5,8 @@ import * as C from "./FactionSelectButton.components";
 
 export type FactionSelectButtonProps = TouchableOpacityProps & {
 	value: Faction | "spoiler";
+	size: number;
+	vertical: boolean;
 	selected?: boolean;
 	first?: boolean;
 	last?: boolean;
@@ -12,14 +14,14 @@ export type FactionSelectButtonProps = TouchableOpacityProps & {
 };
 
 export const FactionSelectButton = ({ ...props }: FactionSelectButtonProps) => {
-	const { selected, value } = props;
+	const { selected, value, size } = props;
 
 	return (
 		<C.Button {...props}>
 			{value === "spoiler" ? (
-				<C.Icon icon="auto_fail" selected={selected} />
+				<C.Icon icon="auto_fail" selected={selected} size={size} />
 			) : (
-				<C.FactionIcon faction={value} selected={selected} />
+				<C.FactionIcon faction={value} selected={selected} size={size} />
 			)}
 		</C.Button>
 	);

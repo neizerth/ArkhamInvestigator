@@ -1,4 +1,3 @@
-import { statusBarHeight } from "@shared/config";
 import { Row } from "@shared/ui";
 import { View } from "react-native";
 import styled from "styled-components/native";
@@ -22,7 +21,7 @@ export const Overlay: typeof BaseOverlay = styled(BaseOverlay)`
 
 export const Container: typeof View = styled(View)`
   position: relative;
-  padding-top: ${({ theme }) => statusBarHeight + theme.size.gap.small}px;
+  padding-top: ${({ theme }) => theme.statusBarHeight + theme.size.gap.small}px;
 `;
 
 export const Header: typeof View = styled(BoardHeader)`

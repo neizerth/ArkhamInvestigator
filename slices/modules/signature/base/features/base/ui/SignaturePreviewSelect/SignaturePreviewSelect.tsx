@@ -62,4 +62,6 @@ export function SignaturePreviewSelect<T>({
 	);
 }
 
-export const SignaturePreviewSelectMemo = memo(SignaturePreviewSelect);
+export const SignaturePreviewSelectMemo = memo(
+	SignaturePreviewSelect,
+) as typeof SignaturePreviewSelect;

@@ -5,6 +5,7 @@ import {
 	selectScreenOrientationType,
 } from "@modules/core/device/shared/lib";
 import { selectArtworksEnabled } from "@modules/core/theme/shared/lib";
+import { statusBarHeight } from "@shared/config";
 import { useAppSelector } from "@shared/lib";
 import { useMemo } from "react";
 import { getAppTheme } from "./getAppTheme";
@@ -22,9 +23,12 @@ export const useTheme = () => {
 				orientation: {
 					type: orientationType,
 					orientation,
+					portrait: orientationType === "portrait",
+					landscape: orientationType === "landscape",
 				},
 				artworksEnabled,
 				navbarHeight,
+				statusBarHeight,
 				safeAreaInsets,
 			}),
 		[

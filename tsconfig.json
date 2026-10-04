@@ -15,10 +15,25 @@
 		}
 	},
 	"include": [
-		"**/*.ts",
-		"**/*.tsx",
+		"*.ts",
+		"slices/**/*.ts",
+		"slices/**/*.tsx",
+		"app/**/*.ts",
+		"app/**/*.tsx",
+		"modules/**/*.ts",
+		"modules/**/*.tsx",
+		"assets/**/*.ts",
+		"cli/**/*.ts",
 		".expo/types/**/*.ts",
 		"expo-env.d.ts",
 		"declarations/**/*.d.ts"
+	],
+	"exclude": [
+		"**/node_modules",
+		".claude",
+		"android",
+		"ios",
+		"target",
+		"e2e"
 	]
 }
