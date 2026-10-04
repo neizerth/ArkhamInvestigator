@@ -7,9 +7,16 @@ export const FullContent: typeof View = styled(View)`
   flex: 1;
 `;
 
-export const Content: typeof ScrollView = styled(ScrollView)`
+export const Content: typeof ScrollView = styled(ScrollView).attrs(
+	({ theme: { size, navbarHeight, safeAreaInsets } }) => ({
+		contentContainerStyle: {
+			paddingTop: 0,
+			paddingRight: size.gap.medium + safeAreaInsets.right,
+			paddingBottom: navbarHeight,
+			paddingLeft: size.gap.medium + safeAreaInsets.left,
+		},
+	}),
+)`
   flex: 1;
-  padding: ${({ theme: { size, navbarHeight, safeAreaInsets } }) =>
-		`0px ${size.gap.medium + safeAreaInsets.right}px ${navbarHeight}px ${size.gap.medium + safeAreaInsets.left}px`};
   margin-bottom: ${({ theme }) => theme.size.gap.default}px;
 `;
