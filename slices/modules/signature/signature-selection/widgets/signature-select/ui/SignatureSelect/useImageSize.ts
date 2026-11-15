@@ -16,7 +16,10 @@ export const useImageSize = () => {
 	const horizontalInsets = insets.left + insets.right;
 
 	const width = isLandscape
-		? window.width - FACTION_SELECT_ITEM_SIZE - horizontalInsets
+		? window.width -
+			FACTION_SELECT_ITEM_SIZE -
+			horizontalInsets -
+			size.gap.small
 		: window.width;
 
 	return getGridItemSize({

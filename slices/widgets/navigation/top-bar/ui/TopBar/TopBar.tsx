@@ -1,12 +1,19 @@
-import type { ViewProps } from "react-native";
+import type { StyleProp, TextStyle, ViewProps } from "react-native";
 import * as C from "./TopBar.components";
 
 export type TopBarProps = ViewProps & {
 	onBack?: () => void;
 	title?: string;
+	titleStyle?: StyleProp<TextStyle>;
 };
 
-export const TopBar = ({ onBack, title, children, ...props }: TopBarProps) => {
+export const TopBar = ({
+	onBack,
+	title,
+	titleStyle,
+	children,
+	...props
+}: TopBarProps) => {
 	return (
 		<C.Container {...props}>
 			{onBack ? (
@@ -14,7 +21,7 @@ export const TopBar = ({ onBack, title, children, ...props }: TopBarProps) => {
 			) : (
 				<C.Placeholder />
 			)}
-			{title && <C.Title>{title}</C.Title>}
+			{title && <C.Title style={titleStyle}>{title}</C.Title>}
 			{children ? children : <C.Placeholder />}
 		</C.Container>
 	);

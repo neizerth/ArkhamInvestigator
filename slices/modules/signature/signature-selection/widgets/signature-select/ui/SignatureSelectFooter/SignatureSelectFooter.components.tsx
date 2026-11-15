@@ -12,13 +12,13 @@ type ContainerProps = ViewProps & {
 const getPadding = (theme: AppTheme) => {
 	const { size, safeAreaInsets, orientation } = theme;
 
-	const left = orientation.landscape ? safeAreaInsets.left : size.gap.default;
+	const left = orientation.landscape
+		? safeAreaInsets.left + size.gap.default * 2 + FACTION_SELECT_ITEM_SIZE
+		: size.gap.default;
 
-	const rightOrientationPadding = orientation.landscape
-		? FACTION_SELECT_ITEM_SIZE + size.gap.default
-		: 0;
-	const right =
-		size.gap.default + safeAreaInsets.right + rightOrientationPadding;
+	const right = orientation.landscape
+		? size.gap.small + safeAreaInsets.right
+		: size.gap.default + safeAreaInsets.right;
 
 	const bottom = 0;
 	const top = size.gap.default;

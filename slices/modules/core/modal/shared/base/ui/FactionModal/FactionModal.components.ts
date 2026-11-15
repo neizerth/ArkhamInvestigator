@@ -1,5 +1,5 @@
 import { FactionCardMemo } from "@modules/faction/shared/ui";
-import { size } from "@shared/config";
+import type { AppTheme } from "@shared/model";
 import { Outside as BaseOutside, Input as TextInput } from "@shared/ui";
 import { KeyboardAvoidingView, View } from "react-native";
 import styled from "styled-components/native";
@@ -22,6 +22,14 @@ export const Container: typeof KeyboardAvoidingView = styled(
   background: rgba(0, 0, 0, 0.5);
 `;
 
+const getContentPadding = (theme: AppTheme) => {
+	const { size, orientation, safeAreaInsets } = theme;
+	if (orientation.landscape) {
+		return `${safeAreaInsets.top}px ${safeAreaInsets.right}px ${safeAreaInsets.bottom}px ${safeAreaInsets.left}px`;
+	}
+	return `${size.gap.xxl}px ${size.gap.default}px`;
+};
+
 export const Content: typeof View = styled(View)`
   flex: 1;
   justify-content: center;
@@ -29,7 +37,7 @@ export const Content: typeof View = styled(View)`
   max-width: 500px;
   position: relative;
   z-index: 2;
-  padding: ${size.gap.xxl}px ${size.gap.default}px;
+  padding: ${({ theme }) => getContentPadding(theme)};
 `;
 
 export const CardContent: typeof View = styled(View)`

@@ -1,11 +1,27 @@
 import { ChaosTokenList } from "@modules/chaos-bag/base/entities/ui";
-import { Button } from "@shared/ui";
+import { Button, Page } from "@shared/ui";
 import { Row, Text } from "@shared/ui";
 import { ContentPage } from "@widgets/content";
+import { TopBar } from "@widgets/navigation";
 import styled, { css } from "styled-components/native";
 
+const withBackground = css`
+	background-color: ${({ theme }) => theme.color.dark30};
+`;
 export const Container: typeof ContentPage = styled(ContentPage)`
-  background-color: ${({ theme }) => theme.color.dark30};
+  ${withBackground}
+`;
+export const LandscapeContainer: typeof Page = styled(Page)`
+	${withBackground}
+`;
+
+export const LandscapeBar: typeof TopBar = styled(TopBar).attrs({
+	titleStyle: {
+		textAlign: "left",
+		flex: 0,
+	},
+})`
+	justify-content: space-between;
 `;
 
 export const Bag: typeof ChaosTokenList = styled(ChaosTokenList)`
@@ -37,26 +53,4 @@ const TopButton: typeof Button = styled(Button).attrs(({ theme }) => ({
 export const ReferenceButton: typeof TopButton = styled(TopButton)`
 	flex: 1;
 	padding: 0;
-`;
-
-export const SetupButton: typeof TopButton = styled(TopButton)`
-  ${({ theme: { color, size } }) => css`
-	background-color: ${color.dark20};
-	padding: ${size.gap.small}px ${size.gap.default}px;
-`}`;
-
-export const ClearButton: typeof TopButton = styled(TopButton).attrs({
-	iconStyle: {
-		textAlign: "center",
-	},
-})`
-  ${({ theme: { color, size } }) => css`
-	background-color: ${color.dark20};
-	padding: ${size.gap.small}px ${size.gap.default}px;
-	justify-content: center;
-`}`;
-
-export const Actions: typeof Row = styled(Row)`
-	gap: ${({ theme }) => theme.size.gap.default}px;
-	align-items: stretch;
 `;

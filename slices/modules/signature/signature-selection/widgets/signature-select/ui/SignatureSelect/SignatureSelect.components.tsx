@@ -9,9 +9,10 @@ import { getFooterStyle, getListPaddingBottom } from "./SignatureSelect.styles";
 
 export const Container: typeof View = styled(View)`
   flex: 1;
-	${({ theme: { safeAreaInsets, orientation } }) => css`
+	${({ theme: { safeAreaInsets, orientation, size } }) => css`
 		padding: 0px ${safeAreaInsets.left}px;
 		flex-direction: ${orientation.landscape ? "row" : "column"};
+		gap: ${orientation.landscape ? size.gap.small : 0}px;
 	`}
 `;
 
